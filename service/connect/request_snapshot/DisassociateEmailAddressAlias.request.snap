@@ -1,0 +1,5 @@
+POST /email-addresses/__InstanceId__/__EmailAddressId__/disassociate-alias
+
+Content-Type: application/json
+
+{"AliasConfiguration":{"EmailAddressId":"__EmailAddressId__"},"ClientToken":"__ClientToken__"}

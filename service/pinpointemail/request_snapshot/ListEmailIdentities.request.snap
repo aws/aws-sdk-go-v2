@@ -1,0 +1,3 @@
+GET /v1/email/identities?NextToken=__NextToken__&PageSize=1
+
+

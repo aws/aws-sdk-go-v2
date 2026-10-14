@@ -21,6 +21,7 @@ func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func deserializeItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Item) error {
+	*v = make([]types.Item, 0)
 	var vv types.Item
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Item{}

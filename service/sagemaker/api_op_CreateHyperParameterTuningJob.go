@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a hyperparameter tuning job. A hyperparameter tuning job finds the best
@@ -143,6 +142,40 @@ type CreateHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHyperParameterTuningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHyperParameterTuningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Autotune != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_Autotune)
+		v.Autotune.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HyperParameterTuningJobConfig != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_HyperParameterTuningJobConfig)
+		v.HyperParameterTuningJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HyperParameterTuningJobName != nil {
+		s.WriteString(schemas.CreateHyperParameterTuningJobRequest_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
+	}
+	serializeTagList(s, schemas.CreateHyperParameterTuningJobRequest_Tags, v.Tags)
+	if v.TrainingJobDefinition != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinition)
+		v.TrainingJobDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHyperParameterTrainingJobDefinitions(s, schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	if v.WarmStartConfig != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_WarmStartConfig)
+		v.WarmStartConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateHyperParameterTuningJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a
@@ -157,77 +190,48 @@ type CreateHyperParameterTuningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHyperParameterTuningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHyperParameterTuningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHyperParameterTuningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HyperParameterTuningJobArn != nil {
+		s.WriteString(schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn, *v.HyperParameterTuningJobArn)
+	}
+}
+func (v *CreateHyperParameterTuningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHyperParameterTuningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn:
+			v.HyperParameterTuningJobArn = new(string)
+			return d.ReadString(schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn, v.HyperParameterTuningJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHyperParameterTuningJob, schemas.CreateHyperParameterTuningJobRequest, schemas.CreateHyperParameterTuningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHyperParameterTuningJob, schemas.CreateHyperParameterTuningJobRequest, schemas.CreateHyperParameterTuningJobResponse), output: &CreateHyperParameterTuningJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHyperParameterTuningJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateHyperParameterTuningJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHyperParameterTuningJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -242,22 +246,8 @@ func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateHyperParameterTuningJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateHyperParameterTuningJob",
-	}
 }

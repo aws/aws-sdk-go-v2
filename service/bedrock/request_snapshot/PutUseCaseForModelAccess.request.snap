@@ -1,0 +1,5 @@
+POST /use-case-for-model-access
+
+Content-Type: application/json
+
+{"formData":"YmxvYg=="}

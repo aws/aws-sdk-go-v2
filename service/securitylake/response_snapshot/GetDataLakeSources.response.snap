@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataLakeArn":"__DataLakeArn__","dataLakeSources":[{"account":"__Account__","eventClasses":["__Member__","__Member__"],"sourceName":"__SourceName__","sourceStatuses":[{"resource":"__Resource__","status":"COLLECTING"},{"resource":"__Resource__","status":"COLLECTING"}]},{"account":"__Account__","eventClasses":["__Member__","__Member__"],"sourceName":"__SourceName__","sourceStatuses":[{"resource":"__Resource__","status":"COLLECTING"},{"resource":"__Resource__","status":"COLLECTING"}]}],"nextToken":"__NextToken__"}

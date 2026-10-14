@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"templateArn":"__TemplateArn__","templateId":"__TemplateId__"}

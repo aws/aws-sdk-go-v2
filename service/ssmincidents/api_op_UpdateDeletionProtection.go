@@ -5,11 +5,7 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update deletion protection to either allow or deny deletion of the final Region
@@ -48,40 +44,6 @@ type UpdateDeletionProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDeletionProtectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDeletionProtectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDeletionProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateDeletionProtectionInput_arn, *v.Arn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateDeletionProtectionInput_clientToken, *v.ClientToken)
-	}
-	if v.DeletionProtected != nil {
-		s.WriteBool(schemas.UpdateDeletionProtectionInput_deletionProtected, *v.DeletionProtected)
-	}
-}
-func (v *UpdateDeletionProtectionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDeletionProtectionInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDeletionProtectionInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateDeletionProtectionInput_arn, v.Arn)
-		case schemas.UpdateDeletionProtectionInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateDeletionProtectionInput_clientToken, v.ClientToken)
-		case schemas.UpdateDeletionProtectionInput_deletionProtected:
-			v.DeletionProtected = new(bool)
-			return d.ReadBool(schemas.UpdateDeletionProtectionInput_deletionProtected, v.DeletionProtected)
-		}
-		return nil
-	})
-}
-
 type UpdateDeletionProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,78 +51,23 @@ type UpdateDeletionProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDeletionProtectionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDeletionProtectionOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDeletionProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateDeletionProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDeletionProtectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeletionProtection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeletionProtection, schemas.UpdateDeletionProtectionInput, schemas.UpdateDeletionProtectionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDeletionProtection{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeletionProtection, schemas.UpdateDeletionProtectionInput, schemas.UpdateDeletionProtectionOutput), output: &UpdateDeletionProtectionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDeletionProtection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -170,12 +77,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpUpdateDeletionProtectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDeletionProtection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +89,6 @@ func (c *Client) addOperationUpdateDeletionProtectionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +128,4 @@ func (m *idempotencyToken_initializeOpUpdateDeletionProtection) HandleInitialize
 }
 func addIdempotencyToken_opUpdateDeletionProtectionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateDeletionProtection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateDeletionProtection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDeletionProtection",
-	}
 }

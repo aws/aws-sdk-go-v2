@@ -5,8 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -87,6 +88,32 @@ type DiscoverInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthStatus != "" {
+		s.WriteString(schemas.DiscoverInstancesRequest_HealthStatus, string(v.HealthStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DiscoverInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_NamespaceName, *v.NamespaceName)
+	}
+	serializeAttributes(s, schemas.DiscoverInstancesRequest_OptionalParameters, v.OptionalParameters)
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	serializeAttributes(s, schemas.DiscoverInstancesRequest_QueryParameters, v.QueryParameters)
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_ServiceName, *v.ServiceName)
+	}
+}
+
 type DiscoverInstancesOutput struct {
 
 	// A complex type that contains one HttpInstanceSummary for each registered
@@ -104,65 +131,45 @@ type DiscoverInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpInstanceSummaryList(s, schemas.DiscoverInstancesResponse_Instances, v.Instances)
+	if v.InstancesRevision != nil {
+		s.WriteInt64(schemas.DiscoverInstancesResponse_InstancesRevision, *v.InstancesRevision)
+	}
+}
+func (v *DiscoverInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoverInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoverInstancesResponse_Instances:
+			return deserializeHttpInstanceSummaryList(d, schemas.DiscoverInstancesResponse_Instances, &v.Instances)
+		case schemas.DiscoverInstancesResponse_InstancesRevision:
+			v.InstancesRevision = new(int64)
+			return d.ReadInt64(schemas.DiscoverInstancesResponse_InstancesRevision, v.InstancesRevision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.DiscoverInstancesRequest, schemas.DiscoverInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.DiscoverInstancesRequest, schemas.DiscoverInstancesResponse), output: &DiscoverInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDiscoverInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DiscoverInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -172,12 +179,6 @@ func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpDiscoverInstancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDiscoverInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +191,6 @@ func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +224,4 @@ func (m *endpointPrefix_opDiscoverInstancesMiddleware) HandleFinalize(ctx contex
 }
 func addEndpointPrefix_opDiscoverInstancesMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDiscoverInstancesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDiscoverInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DiscoverInstances",
-	}
 }

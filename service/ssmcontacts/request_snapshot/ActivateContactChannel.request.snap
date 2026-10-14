@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.ActivateContactChannel
+
+{"ActivationCode":"__ActivationCode__","ContactChannelId":"__ContactChannelId__"}

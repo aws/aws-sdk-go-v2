@@ -4,12 +4,11 @@ package neptunegraph
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Import data into existing Neptune Analytics graph from Amazon Simple Storage
@@ -73,6 +72,36 @@ type StartImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlankNodeHandling != "" {
+		s.WriteString(schemas.StartImportTaskInput_blankNodeHandling, string(v.BlankNodeHandling))
+	}
+	if v.FailOnError != nil {
+		s.WriteBool(schemas.StartImportTaskInput_failOnError, *v.FailOnError)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.StartImportTaskInput_format, string(v.Format))
+	}
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.StartImportTaskInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	serializeImportOptions(s, schemas.StartImportTaskInput_importOptions, v.ImportOptions)
+	if v.ParquetType != "" {
+		s.WriteString(schemas.StartImportTaskInput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartImportTaskInput_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.StartImportTaskInput_source, *v.Source)
+	}
+}
 func (in *StartImportTaskInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -122,77 +151,99 @@ type StartImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.StartImportTaskOutput_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.StartImportTaskOutput_graphId, *v.GraphId)
+	}
+	serializeImportOptions(s, schemas.StartImportTaskOutput_importOptions, v.ImportOptions)
+	if v.ParquetType != "" {
+		s.WriteString(schemas.StartImportTaskOutput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartImportTaskOutput_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.StartImportTaskOutput_source, *v.Source)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartImportTaskOutput_status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartImportTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *StartImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportTaskOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.StartImportTaskOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.Format(ev)
+			return nil
+		case schemas.StartImportTaskOutput_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.StartImportTaskOutput_graphId, v.GraphId)
+		case schemas.StartImportTaskOutput_importOptions:
+			return deserializeImportOptions(d, schemas.StartImportTaskOutput_importOptions, &v.ImportOptions)
+		case schemas.StartImportTaskOutput_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.StartImportTaskOutput_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = types.ParquetType(ev)
+			return nil
+		case schemas.StartImportTaskOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StartImportTaskOutput_roleArn, v.RoleArn)
+		case schemas.StartImportTaskOutput_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.StartImportTaskOutput_source, v.Source)
+		case schemas.StartImportTaskOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartImportTaskOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ImportTaskStatus(ev)
+			return nil
+		case schemas.StartImportTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartImportTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskInput, schemas.StartImportTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskInput, schemas.StartImportTaskOutput), output: &StartImportTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImportTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartImportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartImportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +258,8 @@ func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartImportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartImportTask",
-	}
 }

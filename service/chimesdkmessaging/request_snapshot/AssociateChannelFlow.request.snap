@@ -1,0 +1,6 @@
+PUT /channels/__ChannelArn__/channel-flow
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"ChannelFlowArn":"__ChannelFlowArn__"}

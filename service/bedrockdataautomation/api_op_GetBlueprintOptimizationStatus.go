@@ -4,13 +4,8 @@ package bedrockdataautomation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // API used to get blueprint optimization status.
@@ -40,18 +35,6 @@ type GetBlueprintOptimizationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBlueprintOptimizationStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBlueprintOptimizationStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBlueprintOptimizationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InvocationArn != nil {
-		s.WriteString(schemas.GetBlueprintOptimizationStatusRequest_invocationArn, *v.InvocationArn)
-	}
-}
-
 // Response of GetBlueprintOptimizationStatus API.
 type GetBlueprintOptimizationStatusOutput struct {
 
@@ -73,98 +56,29 @@ type GetBlueprintOptimizationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBlueprintOptimizationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBlueprintOptimizationStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBlueprintOptimizationStatusResponse_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_errorMessage, v.ErrorMessage)
-		case schemas.GetBlueprintOptimizationStatusResponse_errorType:
-			v.ErrorType = new(string)
-			return d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_errorType, v.ErrorType)
-		case schemas.GetBlueprintOptimizationStatusResponse_outputConfiguration:
-			v.OutputConfiguration = &types.BlueprintOptimizationOutputConfiguration{}
-			return v.OutputConfiguration.Deserialize(d)
-		case schemas.GetBlueprintOptimizationStatusResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetBlueprintOptimizationStatusResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.BlueprintOptimizationJobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBlueprintOptimizationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlueprintOptimizationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprintOptimizationStatus, schemas.GetBlueprintOptimizationStatusRequest, schemas.GetBlueprintOptimizationStatusResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBlueprintOptimizationStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprintOptimizationStatus, schemas.GetBlueprintOptimizationStatusRequest, schemas.GetBlueprintOptimizationStatusResponse), output: &GetBlueprintOptimizationStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBlueprintOptimizationStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBlueprintOptimizationStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlueprintOptimizationStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +93,8 @@ func (c *Client) addOperationGetBlueprintOptimizationStatusMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBlueprintOptimizationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBlueprintOptimizationStatus",
-	}
 }

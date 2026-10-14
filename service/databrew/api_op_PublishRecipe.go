@@ -4,12 +4,7 @@ package databrew
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Publishes a new version of a DataBrew recipe.
@@ -41,21 +36,6 @@ type PublishRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishRecipeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishRecipeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.PublishRecipeRequest_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PublishRecipeRequest_Name, *v.Name)
-	}
-}
-
 type PublishRecipeOutput struct {
 
 	// The name of the recipe that you published.
@@ -69,85 +49,29 @@ type PublishRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishRecipeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PublishRecipeResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PublishRecipeResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishRecipe{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishRecipe, schemas.PublishRecipeRequest, schemas.PublishRecipeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishRecipe{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishRecipe, schemas.PublishRecipeRequest, schemas.PublishRecipeResponse), output: &PublishRecipeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishRecipe"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPublishRecipeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishRecipe(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +86,8 @@ func (c *Client) addOperationPublishRecipeMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPublishRecipe(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PublishRecipe",
-	}
 }

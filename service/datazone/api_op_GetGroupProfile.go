@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a group profile in Amazon DataZone.
@@ -44,21 +39,6 @@ type GetGroupProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGroupProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGroupProfileInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGroupProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetGroupProfileInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.GroupIdentifier != nil {
-		s.WriteString(schemas.GetGroupProfileInput_groupIdentifier, *v.GroupIdentifier)
-	}
-}
-
 type GetGroupProfileOutput struct {
 
 	// The identifier of the Amazon DataZone domain in which the group profile exists.
@@ -87,104 +67,29 @@ type GetGroupProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGroupProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGroupProfileOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGroupProfileOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetGroupProfileOutput_domainId, v.DomainId)
-		case schemas.GetGroupProfileOutput_groupName:
-			v.GroupName = new(string)
-			return d.ReadString(schemas.GetGroupProfileOutput_groupName, v.GroupName)
-		case schemas.GetGroupProfileOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetGroupProfileOutput_id, v.Id)
-		case schemas.GetGroupProfileOutput_rolePrincipalArn:
-			v.RolePrincipalArn = new(string)
-			return d.ReadString(schemas.GetGroupProfileOutput_rolePrincipalArn, v.RolePrincipalArn)
-		case schemas.GetGroupProfileOutput_rolePrincipalId:
-			v.RolePrincipalId = new(string)
-			return d.ReadString(schemas.GetGroupProfileOutput_rolePrincipalId, v.RolePrincipalId)
-		case schemas.GetGroupProfileOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetGroupProfileOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.GroupProfileStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGroupProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupProfile, schemas.GetGroupProfileInput, schemas.GetGroupProfileOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupProfile, schemas.GetGroupProfileInput, schemas.GetGroupProfileOutput), output: &GetGroupProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGroupProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGroupProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +104,8 @@ func (c *Client) addOperationGetGroupProfileMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGroupProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGroupProfile",
-	}
 }

@@ -5,20 +5,24 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT SiteWise Monitor feature will no longer be open to new customers
+// starting November 7, 2025. If you would like to use the IoT SiteWise Monitor
+// feature, sign up prior to that date. Existing customers can continue to use the
+// service as normal. For more information, see [IoT SiteWise Monitor availability change].
+//
 // Creates an access policy that grants the specified identity (IAM Identity
 // Center user, IAM Identity Center group, or IAM user) access to the specified IoT
 // SiteWise Monitor portal or project resource.
 //
 // Support for access policies that use an SSO Group as the identity is not
 // supported at this time.
+//
+// [IoT SiteWise Monitor availability change]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html
 func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPolicyInput, optFns ...func(*Options)) (*CreateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateAccessPolicyInput{}
@@ -68,32 +72,6 @@ type CreateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAccessPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPolicyIdentity != nil {
-		s.WriteStruct(schemas.CreateAccessPolicyRequest_accessPolicyIdentity)
-		v.AccessPolicyIdentity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AccessPolicyPermission != "" {
-		s.WriteString(schemas.CreateAccessPolicyRequest_accessPolicyPermission, string(v.AccessPolicyPermission))
-	}
-	if v.AccessPolicyResource != nil {
-		s.WriteStruct(schemas.CreateAccessPolicyRequest_accessPolicyResource)
-		v.AccessPolicyResource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAccessPolicyRequest_clientToken, *v.ClientToken)
-	}
-	serializeTagMap(s, schemas.CreateAccessPolicyRequest_tags, v.Tags)
-}
-
 type CreateAccessPolicyOutput struct {
 
 	// The [ARN] of the access policy, which has the following format.
@@ -116,76 +94,23 @@ type CreateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAccessPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAccessPolicyResponse_accessPolicyArn:
-			v.AccessPolicyArn = new(string)
-			return d.ReadString(schemas.CreateAccessPolicyResponse_accessPolicyArn, v.AccessPolicyArn)
-		case schemas.CreateAccessPolicyResponse_accessPolicyId:
-			v.AccessPolicyId = new(string)
-			return d.ReadString(schemas.CreateAccessPolicyResponse_accessPolicyId, v.AccessPolicyId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessPolicy{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse), output: &CreateAccessPolicyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccessPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -200,12 +125,6 @@ func (c *Client) addOperationCreateAccessPolicyMiddlewares(stack *middleware.Sta
 	if err = addOpCreateAccessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -216,12 +135,6 @@ func (c *Client) addOperationCreateAccessPolicyMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -288,12 +201,4 @@ func (m *idempotencyToken_initializeOpCreateAccessPolicy) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateAccessPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAccessPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAccessPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccessPolicy",
-	}
 }

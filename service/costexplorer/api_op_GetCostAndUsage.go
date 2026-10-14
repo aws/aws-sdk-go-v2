@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves cost and usage metrics for your account. You can specify which cost
@@ -89,14 +88,27 @@ type GetCostAndUsageInput struct {
 	//
 	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
 	//
-	// Valid values for MatchOptions for CostCategories and Tags are EQUALS , ABSENT ,
-	// and CASE_SENSITIVE . Default values are EQUALS and CASE_SENSITIVE .
+	// Valid values for MatchOptions for CostCategories , Tags , and ProductAttributes
+	// are EQUALS , ABSENT , and CASE_SENSITIVE . Default values are EQUALS and
+	// CASE_SENSITIVE .
+	//
+	// You can filter by product attributes with or without grouping by them. If you
+	// filter or group by product attributes, the results include only the costs of
+	// supported services, and a SERVICE filter is optional. For more information, see [ProductAttributeValues]
+	// .
+	//
+	// If you include a SERVICE filter, it must apply to the whole request: combine it
+	// with other filters by using And , and include it in every branch of an Or . A
+	// SERVICE filter inside Not doesn't meet this requirement, and the request fails
+	// with a ValidationException .
 	//
 	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// You can group Amazon Web Services costs using up to two different groups,
-	// either dimensions, tag keys, cost categories, or any two group by types.
+	// either dimensions, tag keys, cost categories, product attributes, or any two
+	// group by types.
 	//
 	// Valid values for the DIMENSION type are AZ , INSTANCE_TYPE , LEGAL_ENTITY_NAME ,
 	// INVOICING_ENTITY , LINKED_ACCOUNT , OPERATION , PLATFORM , PURCHASE_TYPE ,
@@ -104,6 +116,20 @@ type GetCostAndUsageInput struct {
 	//
 	// When you group by the TAG type and include a valid tag key, you get all tag
 	// values, including empty strings.
+	//
+	// To group by the PRODUCT_ATTRIBUTE type, set Key to a product attribute key,
+	// such as model . For the keys of each supported service, see [ProductAttributeValues]. The results
+	// include only the costs of supported services, and if you have no such costs, the
+	// response contains no groups.
+	//
+	// In the response, each group key has the format key$value , for example,
+	// model$Claude Sonnet 5 . Costs that have no value for the key are in the group
+	// key$ , for example, model$ . Remove the key$ prefix before you use a value in a
+	// ProductAttributes filter. Keys are case-sensitive: if you group by a key that
+	// doesn't exist, such as Model , all of your costs of supported services are in
+	// the group Model$ .
+	//
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	GroupBy []types.GroupDefinition
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -112,6 +138,36 @@ type GetCostAndUsageInput struct {
 	NextPageToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCostAndUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostAndUsageRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostAndUsageRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetCostAndUsageRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageRequest_GroupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.GetCostAndUsageRequest_Metrics, v.Metrics)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type GetCostAndUsageOutput struct {
@@ -138,77 +194,57 @@ type GetCostAndUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageResponse_DimensionValueAttributes, v.DimensionValueAttributes)
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageResponse_GroupDefinitions, v.GroupDefinitions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeResultsByTime(s, schemas.GetCostAndUsageResponse_ResultsByTime, v.ResultsByTime)
+}
+func (v *GetCostAndUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostAndUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostAndUsageResponse_DimensionValueAttributes:
+			return deserializeDimensionValuesWithAttributesList(d, schemas.GetCostAndUsageResponse_DimensionValueAttributes, &v.DimensionValueAttributes)
+		case schemas.GetCostAndUsageResponse_GroupDefinitions:
+			return deserializeGroupDefinitions(d, schemas.GetCostAndUsageResponse_GroupDefinitions, &v.GroupDefinitions)
+		case schemas.GetCostAndUsageResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostAndUsageResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostAndUsageResponse_ResultsByTime:
+			return deserializeResultsByTime(d, schemas.GetCostAndUsageResponse_ResultsByTime, &v.ResultsByTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsage, schemas.GetCostAndUsageRequest, schemas.GetCostAndUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsage, schemas.GetCostAndUsageRequest, schemas.GetCostAndUsageResponse), output: &GetCostAndUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostAndUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCostAndUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCostAndUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostAndUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,22 +259,8 @@ func (c *Client) addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCostAndUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCostAndUsage",
-	}
 }

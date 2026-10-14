@@ -183,7 +183,7 @@ var AwsQuery = smithy.NewServiceSchema(_AwsQuery, "2020-01-08")
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.query",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ComplexError_TopLevel *smithy.Schema
 
 var ComplexError_Nested *smithy.Schema
@@ -205,8 +205,9 @@ var ComplexNestedErrorData_Foo *smithy.Schema
 var CustomCodeError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.query",
 	Name:      "CustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.AWSQueryError{ErrorCode: "Customized",
-	StatusCode: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.AWSQueryError{ErrorCode: "Customized",
+		StatusCode: 402})
 var CustomCodeError_Message *smithy.Schema
 
 var _FlattenedXmlMapWithXmlNameOutputMap = smithy.NewSchema(smithy.ShapeID{
@@ -228,7 +229,7 @@ var _FlattenedXmlMapWithXmlNamespaceOutputMap_value *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.query",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGreeting_Message *smithy.Schema
 
 var _ListWithMemberNamespace = smithy.NewSchema(smithy.ShapeID{
@@ -801,11 +802,11 @@ func init() {
 
 	_FlattenedXmlMapWithXmlNameOutputMap_value = _FlattenedXmlMapWithXmlNameOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-key.example.com"},
-		&smithytraits.XMLName{Name: "K"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"},
+		&smithytraits.XMLNamespace{URI: "https://the-key.example.com"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-value.example.com"},
-		&smithytraits.XMLName{Name: "V"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"},
+		&smithytraits.XMLNamespace{URI: "https://the-value.example.com"})
 
 	InvalidGreeting_Message = InvalidGreeting.AddMember("Message", smithyprelude.String)
 

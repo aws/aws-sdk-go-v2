@@ -1,0 +1,5 @@
+POST /registries/__RegistryId__/discoverable-records-list
+
+Content-Type: application/json
+
+{"filters":[{"name":"recordType","values":["__Member__","__Member__"]},{"name":"recordType","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

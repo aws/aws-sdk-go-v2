@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationTag":{"key0":"__Value__"},"arn":"__Arn__","associatedResourceCount":1,"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","integrations":{"applicationTagResourceGroup":{"arn":"__Arn__","errorMessage":"__ErrorMessage__","state":"CREATING"},"resourceGroup":{"arn":"__Arn__","errorMessage":"__ErrorMessage__","state":"CREATING"}},"lastUpdateTime":"2000-01-01T00:00:00Z","name":"__Name__","tags":{"key0":"__Value__"}}

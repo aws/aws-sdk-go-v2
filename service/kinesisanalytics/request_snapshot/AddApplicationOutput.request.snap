@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.AddApplicationOutput
+
+{"ApplicationName":"__ApplicationName__","CurrentApplicationVersionId":1,"Output":{"DestinationSchema":{"RecordFormatType":"JSON"},"KinesisFirehoseOutput":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"KinesisStreamsOutput":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"LambdaOutput":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"Name":"__Name__"}}

@@ -4,13 +4,8 @@ package migrationhubstrategy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of the specified server.
@@ -43,36 +38,6 @@ type UpdateServerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateServerConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateServerConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateServerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServerId != nil {
-		s.WriteString(schemas.UpdateServerConfigRequest_serverId, *v.ServerId)
-	}
-	if v.StrategyOption != nil {
-		s.WriteStruct(schemas.UpdateServerConfigRequest_strategyOption)
-		v.StrategyOption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateServerConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateServerConfigRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateServerConfigRequest_serverId:
-			v.ServerId = new(string)
-			return d.ReadString(schemas.UpdateServerConfigRequest_serverId, v.ServerId)
-		case schemas.UpdateServerConfigRequest_strategyOption:
-			v.StrategyOption = &types.StrategyOption{}
-			return v.StrategyOption.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateServerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,90 +45,29 @@ type UpdateServerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateServerConfigOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateServerConfigResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateServerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateServerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateServerConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServerConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServerConfig, schemas.UpdateServerConfigRequest, schemas.UpdateServerConfigResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServerConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServerConfig, schemas.UpdateServerConfigRequest, schemas.UpdateServerConfigResponse), output: &UpdateServerConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServerConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServerConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServerConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +82,8 @@ func (c *Client) addOperationUpdateServerConfigMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServerConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServerConfig",
-	}
 }

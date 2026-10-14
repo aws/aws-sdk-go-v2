@@ -1,0 +1,3 @@
+GET /v1/templates/__TemplateName__/sms?version=__Version__
+
+

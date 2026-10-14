@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/ListIngressPoints
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢hPageSizeiNextTokenm__NextToken__

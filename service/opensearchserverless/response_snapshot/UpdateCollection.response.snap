@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateCollection
+
+{"updateCollectionDetail":{"arn":"__Arn__","createdDate":1,"deletionProtection":"ENABLED","description":"__Description__","id":"__Id__","lastModifiedDate":1,"name":"__Name__","status":"CREATING","type":"SEARCH","vectorOptions":{"ServerlessVectorAcceleration":"ENABLED"}}}

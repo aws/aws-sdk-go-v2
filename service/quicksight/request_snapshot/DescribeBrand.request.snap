@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/brands/__BrandId__?versionId=__VersionId__
+
+

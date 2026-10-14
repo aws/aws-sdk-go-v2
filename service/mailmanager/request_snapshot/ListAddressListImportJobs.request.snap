@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/ListAddressListImportJobs
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£hPageSizemAddressListIdq__AddressListId__iNextTokenm__NextToken__

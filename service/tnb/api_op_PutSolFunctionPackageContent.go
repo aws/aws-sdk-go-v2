@@ -4,13 +4,8 @@ package tnb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Uploads the contents of a function package.
@@ -52,24 +47,6 @@ type PutSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSolFunctionPackageContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutSolFunctionPackageContentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutSolFunctionPackageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContentType != "" {
-		s.WriteString(schemas.PutSolFunctionPackageContentInput_contentType, string(v.ContentType))
-	}
-	if v.File != nil {
-		s.WriteBlob(schemas.PutSolFunctionPackageContentInput_file, v.File)
-	}
-	if v.VnfPkgId != nil {
-		s.WriteString(schemas.PutSolFunctionPackageContentInput_vnfPkgId, *v.VnfPkgId)
-	}
-}
-
 type PutSolFunctionPackageContentOutput struct {
 
 	// Function package ID.
@@ -108,100 +85,29 @@ type PutSolFunctionPackageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSolFunctionPackageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutSolFunctionPackageContentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutSolFunctionPackageContentOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_id, v.Id)
-		case schemas.PutSolFunctionPackageContentOutput_metadata:
-			v.Metadata = &types.PutSolFunctionPackageContentMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.PutSolFunctionPackageContentOutput_vnfProductName:
-			v.VnfProductName = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfProductName, v.VnfProductName)
-		case schemas.PutSolFunctionPackageContentOutput_vnfProvider:
-			v.VnfProvider = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfProvider, v.VnfProvider)
-		case schemas.PutSolFunctionPackageContentOutput_vnfdId:
-			v.VnfdId = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfdId, v.VnfdId)
-		case schemas.PutSolFunctionPackageContentOutput_vnfdVersion:
-			v.VnfdVersion = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfdVersion, v.VnfdVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutSolFunctionPackageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSolFunctionPackageContent, schemas.PutSolFunctionPackageContentInput, schemas.PutSolFunctionPackageContentOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSolFunctionPackageContent, schemas.PutSolFunctionPackageContentInput, schemas.PutSolFunctionPackageContentOutput), output: &PutSolFunctionPackageContentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSolFunctionPackageContent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutSolFunctionPackageContentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSolFunctionPackageContent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +122,8 @@ func (c *Client) addOperationPutSolFunctionPackageContentMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutSolFunctionPackageContent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutSolFunctionPackageContent",
-	}
 }

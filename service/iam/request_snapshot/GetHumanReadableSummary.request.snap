@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetHumanReadableSummary&EntityArn=__EntityArn__&Locale=__Locale__&Version=2010-05-08

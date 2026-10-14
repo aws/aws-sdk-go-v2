@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Accounts.member.1=__Member__&Accounts.member.2=__Member__&Action=DeleteStackInstances&CallAs=SELF&DeploymentTargets.AccountFilterType=NONE&DeploymentTargets.Accounts.member.1=__Member__&DeploymentTargets.Accounts.member.2=__Member__&DeploymentTargets.AccountsUrl=__AccountsUrl__&DeploymentTargets.OrganizationalUnitIds.member.1=__Member__&DeploymentTargets.OrganizationalUnitIds.member.2=__Member__&OperationId=__OperationId__&OperationPreferences.ConcurrencyMode=STRICT_FAILURE_TOLERANCE&OperationPreferences.FailureToleranceCount=1&OperationPreferences.FailureTolerancePercentage=1&OperationPreferences.MaxConcurrentCount=1&OperationPreferences.MaxConcurrentPercentage=1&OperationPreferences.RegionConcurrencyType=SEQUENTIAL&OperationPreferences.RegionOrder.member.1=__Member__&OperationPreferences.RegionOrder.member.2=__Member__&Regions.member.1=__Member__&Regions.member.2=__Member__&RetainStacks=true&StackSetName=__StackSetName__&Version=2010-05-15

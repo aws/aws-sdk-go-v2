@@ -1,0 +1,3 @@
+DELETE /tracking/v0/trackers/__TrackerName__/consumers/__ConsumerArn__
+
+

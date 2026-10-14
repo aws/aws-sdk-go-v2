@@ -4,13 +4,8 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches the specified object to the specified index.
@@ -50,28 +45,6 @@ type AttachToIndexInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachToIndexInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttachToIndexRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttachToIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.AttachToIndexRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.IndexReference != nil {
-		s.WriteStruct(schemas.AttachToIndexRequest_IndexReference)
-		v.IndexReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TargetReference != nil {
-		s.WriteStruct(schemas.AttachToIndexRequest_TargetReference)
-		v.TargetReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AttachToIndexOutput struct {
 
 	// The ObjectIdentifier of the object that was attached to the index.
@@ -83,85 +56,29 @@ type AttachToIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachToIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachToIndexResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachToIndexResponse_AttachedObjectIdentifier:
-			v.AttachedObjectIdentifier = new(string)
-			return d.ReadString(schemas.AttachToIndexResponse_AttachedObjectIdentifier, v.AttachedObjectIdentifier)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAttachToIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachToIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachToIndex, schemas.AttachToIndexRequest, schemas.AttachToIndexResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAttachToIndex{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachToIndex, schemas.AttachToIndexRequest, schemas.AttachToIndexResponse), output: &AttachToIndexOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachToIndex"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAttachToIndexValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachToIndex(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +93,8 @@ func (c *Client) addOperationAttachToIndexMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAttachToIndex(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AttachToIndex",
-	}
 }

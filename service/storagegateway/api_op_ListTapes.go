@@ -5,10 +5,10 @@ package storagegateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists virtual tapes in your virtual tape library (VTL) and your virtual tape
@@ -60,6 +60,22 @@ type ListTapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTapesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTapesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTapesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTapesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTapesInput_Marker, *v.Marker)
+	}
+	serializeTapeARNs(s, schemas.ListTapesInput_TapeARNs, v.TapeARNs)
+}
+
 // A JSON object containing the following fields:
 //
 // # ListTapesOutput$Marker
@@ -83,74 +99,48 @@ type ListTapesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTapesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTapesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTapesOutput_Marker, *v.Marker)
+	}
+	serializeTapeInfos(s, schemas.ListTapesOutput_TapeInfos, v.TapeInfos)
+}
+func (v *ListTapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTapesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTapesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListTapesOutput_Marker, v.Marker)
+		case schemas.ListTapesOutput_TapeInfos:
+			return deserializeTapeInfos(d, schemas.ListTapesOutput_TapeInfos, &v.TapeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTapes, schemas.ListTapesInput, schemas.ListTapesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTapes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTapes, schemas.ListTapesInput, schemas.ListTapesOutput), output: &ListTapesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTapes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTapes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTapes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +153,6 @@ func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +252,3 @@ type ListTapesAPIClient interface {
 }
 
 var _ ListTapesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTapes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTapes",
-	}
-}

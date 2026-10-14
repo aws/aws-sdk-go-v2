@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.UntagResource
+
+{"ResourceARN":"__ResourceARN__","TagKeys":["__Member__","__Member__"]}

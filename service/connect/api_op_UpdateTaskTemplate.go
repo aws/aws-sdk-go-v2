@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,11 +44,18 @@ type UpdateTaskTemplateInput struct {
 	// This member is required.
 	TaskTemplateId *string
 
-	// Constraints that are applicable to the fields listed.
+	// Constraints that are applicable to the fields listed. Although this parameter
+	// is marked as optional in the API model, the service requires it when calling
+	// CreateTaskTemplate or UpdateTaskTemplate . The RequiredFields array must
+	// contain at least one element, and the field of type NAME must be included in
+	// RequiredFields .
 	Constraints *types.TaskTemplateConstraints
 
 	// The identifier of the flow that runs by default when a task is created by
 	// referencing this template.
+	//
+	// Although this parameter is marked as optional, the request must contain either
+	// a ContactFlowId or a field of type QUICK_CONNECT .
 	ContactFlowId *string
 
 	// The default values for fields when a task is created by referencing this
@@ -60,6 +66,9 @@ type UpdateTaskTemplateInput struct {
 	Description *string
 
 	// Fields that are part of the template.
+	//
+	// The request must contain exactly one field of type NAME . This field must also
+	// be listed in the RequiredFields array within the Constraints parameter.
 	Fields []types.TaskTemplateField
 
 	// The name of the task template.
@@ -72,9 +81,53 @@ type UpdateTaskTemplateInput struct {
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
 	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
 	// then a task that refers to this template cannot be created.
+	//
+	// Although this parameter is marked as optional, the service requires it when
+	// calling UpdateTaskTemplate .
 	Status types.TaskTemplateStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateTaskTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateRequest_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Defaults != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateRequest_Defaults)
+		v.Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_Description, *v.Description)
+	}
+	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateRequest_Fields, v.Fields)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_Name, *v.Name)
+	}
+	if v.SelfAssignFlowId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_SelfAssignFlowId, *v.SelfAssignFlowId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_Status, string(v.Status))
+	}
+	if v.TaskTemplateId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateRequest_TaskTemplateId, *v.TaskTemplateId)
+	}
 }
 
 type UpdateTaskTemplateOutput struct {
@@ -82,7 +135,11 @@ type UpdateTaskTemplateOutput struct {
 	// The Amazon Resource Name (ARN) for the task template resource.
 	Arn *string
 
-	// Constraints that are applicable to the fields listed.
+	// Constraints that are applicable to the fields listed. Although this parameter
+	// is marked as optional in the API model, the service requires it when calling
+	// CreateTaskTemplate or UpdateTaskTemplate . The RequiredFields array must
+	// contain at least one element, and the field of type NAME must be included in
+	// RequiredFields .
 	Constraints *types.TaskTemplateConstraints
 
 	// The identifier of the flow that runs by default when a task is created by
@@ -132,77 +189,125 @@ type UpdateTaskTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_Arn, *v.Arn)
+	}
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateResponse_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.UpdateTaskTemplateResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.Defaults != nil {
+		s.WriteStruct(schemas.UpdateTaskTemplateResponse_Defaults)
+		v.Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_Description, *v.Description)
+	}
+	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateResponse_Fields, v.Fields)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_Id, *v.Id)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateTaskTemplateResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_Name, *v.Name)
+	}
+	if v.SelfAssignFlowId != nil {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_SelfAssignFlowId, *v.SelfAssignFlowId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTaskTemplateResponse_Status, string(v.Status))
+	}
+}
+func (v *UpdateTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTaskTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTaskTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_Arn, v.Arn)
+		case schemas.UpdateTaskTemplateResponse_Constraints:
+			v.Constraints = &types.TaskTemplateConstraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.UpdateTaskTemplateResponse_ContactFlowId:
+			v.ContactFlowId = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_ContactFlowId, v.ContactFlowId)
+		case schemas.UpdateTaskTemplateResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTaskTemplateResponse_CreatedTime, v.CreatedTime)
+		case schemas.UpdateTaskTemplateResponse_Defaults:
+			v.Defaults = &types.TaskTemplateDefaults{}
+			return v.Defaults.Deserialize(d)
+		case schemas.UpdateTaskTemplateResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_Description, v.Description)
+		case schemas.UpdateTaskTemplateResponse_Fields:
+			return deserializeTaskTemplateFields(d, schemas.UpdateTaskTemplateResponse_Fields, &v.Fields)
+		case schemas.UpdateTaskTemplateResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_Id, v.Id)
+		case schemas.UpdateTaskTemplateResponse_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_InstanceId, v.InstanceId)
+		case schemas.UpdateTaskTemplateResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTaskTemplateResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateTaskTemplateResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_Name, v.Name)
+		case schemas.UpdateTaskTemplateResponse_SelfAssignFlowId:
+			v.SelfAssignFlowId = new(string)
+			return d.ReadString(schemas.UpdateTaskTemplateResponse_SelfAssignFlowId, v.SelfAssignFlowId)
+		case schemas.UpdateTaskTemplateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTaskTemplateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskTemplateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTaskTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskTemplate, schemas.UpdateTaskTemplateRequest, schemas.UpdateTaskTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTaskTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskTemplate, schemas.UpdateTaskTemplateRequest, schemas.UpdateTaskTemplateResponse), output: &UpdateTaskTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTaskTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTaskTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTaskTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTaskTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,22 +322,8 @@ func (c *Client) addOperationUpdateTaskTemplateMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTaskTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTaskTemplate",
-	}
 }

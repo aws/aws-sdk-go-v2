@@ -5,10 +5,10 @@ package organizations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the Amazon Web Services services for which the specified account is a
@@ -52,6 +52,24 @@ type ListDelegatedServicesForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegatedServicesForAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegatedServicesForAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegatedServicesForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListDelegatedServicesForAccountRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDelegatedServicesForAccountRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDelegatedServicesForAccountRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDelegatedServicesForAccountOutput struct {
 
 	// The services for which the account is a delegated administrator.
@@ -69,77 +87,51 @@ type ListDelegatedServicesForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegatedServicesForAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegatedServicesForAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegatedServicesForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDelegatedServices(s, schemas.ListDelegatedServicesForAccountResponse_DelegatedServices, v.DelegatedServices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDelegatedServicesForAccountResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDelegatedServicesForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDelegatedServicesForAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDelegatedServicesForAccountResponse_DelegatedServices:
+			return deserializeDelegatedServices(d, schemas.ListDelegatedServicesForAccountResponse_DelegatedServices, &v.DelegatedServices)
+		case schemas.ListDelegatedServicesForAccountResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDelegatedServicesForAccountResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDelegatedServicesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegatedServicesForAccount, schemas.ListDelegatedServicesForAccountRequest, schemas.ListDelegatedServicesForAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDelegatedServicesForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegatedServicesForAccount, schemas.ListDelegatedServicesForAccountRequest, schemas.ListDelegatedServicesForAccountResponse), output: &ListDelegatedServicesForAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDelegatedServicesForAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDelegatedServicesForAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDelegatedServicesForAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDelegatedServicesForAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +144,6 @@ func (c *Client) addOperationListDelegatedServicesForAccountMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +249,3 @@ type ListDelegatedServicesForAccountAPIClient interface {
 }
 
 var _ ListDelegatedServicesForAccountAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDelegatedServicesForAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDelegatedServicesForAccount",
-	}
-}

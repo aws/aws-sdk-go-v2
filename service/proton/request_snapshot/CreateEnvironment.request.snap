@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateEnvironment
+
+{"codebuildRoleArn":"__CodebuildRoleArn__","componentRoleArn":"__ComponentRoleArn__","description":"__Description__","environmentAccountConnectionId":"__EnvironmentAccountConnectionId__","name":"__Name__","protonServiceRoleArn":"__ProtonServiceRoleArn__","provisioningRepository":{"branch":"__Branch__","name":"__Name__","provider":"GITHUB"},"spec":"__Spec__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__","templateName":"__TemplateName__"}

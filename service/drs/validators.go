@@ -30,6 +30,26 @@ func (m *validateOpAssociateSourceNetworkStack) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelRecoveryPlanExecution struct {
+}
+
+func (*validateOpCancelRecoveryPlanExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelRecoveryPlanExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelRecoveryPlanExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelRecoveryPlanExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateExtendedSourceServer struct {
 }
 
@@ -45,6 +65,46 @@ func (m *validateOpCreateExtendedSourceServer) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateExtendedSourceServerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRecoveryPlan struct {
+}
+
+func (*validateOpCreateRecoveryPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRecoveryPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRecoveryPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRecoveryPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRecoveryPlanStep struct {
+}
+
+func (*validateOpCreateRecoveryPlanStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRecoveryPlanStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRecoveryPlanStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRecoveryPlanStepInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +225,66 @@ func (m *validateOpDeleteRecoveryInstance) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRecoveryInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRecoveryPlanExecution struct {
+}
+
+func (*validateOpDeleteRecoveryPlanExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecoveryPlanExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecoveryPlanExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecoveryPlanExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRecoveryPlan struct {
+}
+
+func (*validateOpDeleteRecoveryPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecoveryPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecoveryPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecoveryPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRecoveryPlanStep struct {
+}
+
+func (*validateOpDeleteRecoveryPlanStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecoveryPlanStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecoveryPlanStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecoveryPlanStepInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +490,86 @@ func (m *validateOpGetLaunchConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRecoveryPlanExecution struct {
+}
+
+func (*validateOpGetRecoveryPlanExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecoveryPlanExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecoveryPlanExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecoveryPlanExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecoveryPlanExecutionStep struct {
+}
+
+func (*validateOpGetRecoveryPlanExecutionStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecoveryPlanExecutionStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecoveryPlanExecutionStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecoveryPlanExecutionStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecoveryPlan struct {
+}
+
+func (*validateOpGetRecoveryPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecoveryPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecoveryPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecoveryPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecoveryPlanStep struct {
+}
+
+func (*validateOpGetRecoveryPlanStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecoveryPlanStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecoveryPlanStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecoveryPlanStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetReplicationConfiguration struct {
 }
 
@@ -430,6 +630,46 @@ func (m *validateOpListLaunchActions) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRecoveryPlanExecutionSteps struct {
+}
+
+func (*validateOpListRecoveryPlanExecutionSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecoveryPlanExecutionSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecoveryPlanExecutionStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecoveryPlanExecutionStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRecoveryPlanSteps struct {
+}
+
+func (*validateOpListRecoveryPlanSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecoveryPlanSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecoveryPlanStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecoveryPlanStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -470,6 +710,26 @@ func (m *validateOpPutLaunchAction) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReorderRecoveryPlanSteps struct {
+}
+
+func (*validateOpReorderRecoveryPlanSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReorderRecoveryPlanSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReorderRecoveryPlanStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReorderRecoveryPlanStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRetryDataReplication struct {
 }
 
@@ -485,6 +745,26 @@ func (m *validateOpRetryDataReplication) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRetryDataReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRetryRecoveryPlanExecutionStep struct {
+}
+
+func (*validateOpRetryRecoveryPlanExecutionStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRetryRecoveryPlanExecutionStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RetryRecoveryPlanExecutionStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRetryRecoveryPlanExecutionStepInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -545,6 +825,26 @@ func (m *validateOpStartRecovery) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRecoveryPlanExecution struct {
+}
+
+func (*validateOpStartRecoveryPlanExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRecoveryPlanExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRecoveryPlanExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRecoveryPlanExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +1090,66 @@ func (m *validateOpUpdateLaunchConfigurationTemplate) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRecoveryPlanExecutionStep struct {
+}
+
+func (*validateOpUpdateRecoveryPlanExecutionStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecoveryPlanExecutionStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecoveryPlanExecutionStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecoveryPlanExecutionStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRecoveryPlan struct {
+}
+
+func (*validateOpUpdateRecoveryPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecoveryPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecoveryPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecoveryPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRecoveryPlanStep struct {
+}
+
+func (*validateOpUpdateRecoveryPlanStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecoveryPlanStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecoveryPlanStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecoveryPlanStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateReplicationConfiguration struct {
 }
 
@@ -834,8 +1194,20 @@ func addOpAssociateSourceNetworkStackValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpAssociateSourceNetworkStack{}, middleware.After)
 }
 
+func addOpCancelRecoveryPlanExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelRecoveryPlanExecution{}, middleware.After)
+}
+
 func addOpCreateExtendedSourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExtendedSourceServer{}, middleware.After)
+}
+
+func addOpCreateRecoveryPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRecoveryPlan{}, middleware.After)
+}
+
+func addOpCreateRecoveryPlanStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRecoveryPlanStep{}, middleware.After)
 }
 
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -860,6 +1232,18 @@ func addOpDeleteLaunchConfigurationTemplateValidationMiddleware(stack *middlewar
 
 func addOpDeleteRecoveryInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecoveryInstance{}, middleware.After)
+}
+
+func addOpDeleteRecoveryPlanExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecoveryPlanExecution{}, middleware.After)
+}
+
+func addOpDeleteRecoveryPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecoveryPlan{}, middleware.After)
+}
+
+func addOpDeleteRecoveryPlanStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecoveryPlanStep{}, middleware.After)
 }
 
 func addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -902,6 +1286,22 @@ func addOpGetLaunchConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetLaunchConfiguration{}, middleware.After)
 }
 
+func addOpGetRecoveryPlanExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecoveryPlanExecution{}, middleware.After)
+}
+
+func addOpGetRecoveryPlanExecutionStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecoveryPlanExecutionStep{}, middleware.After)
+}
+
+func addOpGetRecoveryPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecoveryPlan{}, middleware.After)
+}
+
+func addOpGetRecoveryPlanStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecoveryPlanStep{}, middleware.After)
+}
+
 func addOpGetReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReplicationConfiguration{}, middleware.After)
 }
@@ -914,6 +1314,14 @@ func addOpListLaunchActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLaunchActions{}, middleware.After)
 }
 
+func addOpListRecoveryPlanExecutionStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecoveryPlanExecutionSteps{}, middleware.After)
+}
+
+func addOpListRecoveryPlanStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecoveryPlanSteps{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -922,8 +1330,16 @@ func addOpPutLaunchActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLaunchAction{}, middleware.After)
 }
 
+func addOpReorderRecoveryPlanStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReorderRecoveryPlanSteps{}, middleware.After)
+}
+
 func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetryDataReplication{}, middleware.After)
+}
+
+func addOpRetryRecoveryPlanExecutionStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRetryRecoveryPlanExecutionStep{}, middleware.After)
 }
 
 func addOpReverseReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -936,6 +1352,10 @@ func addOpStartFailbackLaunchValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartRecoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRecovery{}, middleware.After)
+}
+
+func addOpStartRecoveryPlanExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRecoveryPlanExecution{}, middleware.After)
 }
 
 func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -986,6 +1406,18 @@ func addOpUpdateLaunchConfigurationTemplateValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpUpdateLaunchConfigurationTemplate{}, middleware.After)
 }
 
+func addOpUpdateRecoveryPlanExecutionStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecoveryPlanExecutionStep{}, middleware.After)
+}
+
+func addOpUpdateRecoveryPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecoveryPlan{}, middleware.After)
+}
+
+func addOpUpdateRecoveryPlanStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecoveryPlanStep{}, middleware.After)
+}
+
 func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateReplicationConfiguration{}, middleware.After)
 }
@@ -1024,6 +1456,116 @@ func validatePITPolicyRule(v *types.PITPolicyRule) error {
 	}
 	if v.RetentionDuration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionDuration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecoveryPlanExecutionSourceServer(v *types.RecoveryPlanExecutionSourceServer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPlanExecutionSourceServer"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if v.RecoverySnapshotID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoverySnapshotID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecoveryPlanExecutionSourceServerList(v []types.RecoveryPlanExecutionSourceServer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPlanExecutionSourceServerList"}
+	for i := range v {
+		if err := validateRecoveryPlanExecutionSourceServer(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecoveryPlanServer(v *types.RecoveryPlanServer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPlanServer"}
+	if v.ServerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecoveryPlanServers(v []types.RecoveryPlanServer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPlanServers"}
+	for i := range v {
+		if err := validateRecoveryPlanServer(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecoveryPlanStepConfiguration(v types.RecoveryPlanStepConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPlanStepConfiguration"}
+	switch uv := v.(type) {
+	case *types.RecoveryPlanStepConfigurationMemberServerStepConfiguration:
+		if err := validateServerStepConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[serverStepConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RecoveryPlanStepConfigurationMemberWaitStepConfiguration:
+		if err := validateWaitStepConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[waitStepConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerStepConfiguration(v *types.ServerStepConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerStepConfiguration"}
+	if v.Servers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Servers"))
+	} else if v.Servers != nil {
+		if err := validateRecoveryPlanServers(v.Servers); err != nil {
+			invalidParams.AddNested("Servers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1096,6 +1638,21 @@ func validateStartSourceNetworkRecoveryRequestNetworkEntry(v *types.StartSourceN
 	}
 }
 
+func validateWaitStepConfiguration(v *types.WaitStepConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WaitStepConfiguration"}
+	if v.WaitDurationMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitDurationMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateSourceNetworkStackInput(v *AssociateSourceNetworkStackInput) error {
 	if v == nil {
 		return nil
@@ -1114,6 +1671,21 @@ func validateOpAssociateSourceNetworkStackInput(v *AssociateSourceNetworkStackIn
 	}
 }
 
+func validateOpCancelRecoveryPlanExecutionInput(v *CancelRecoveryPlanExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelRecoveryPlanExecutionInput"}
+	if v.RecoveryPlanExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExtendedSourceServerInput(v *CreateExtendedSourceServerInput) error {
 	if v == nil {
 		return nil
@@ -1121,6 +1693,46 @@ func validateOpCreateExtendedSourceServerInput(v *CreateExtendedSourceServerInpu
 	invalidParams := smithy.InvalidParamsError{Context: "CreateExtendedSourceServerInput"}
 	if v.SourceServerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRecoveryPlanInput(v *CreateRecoveryPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRecoveryPlanInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRecoveryPlanStepInput(v *CreateRecoveryPlanStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRecoveryPlanStepInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if v.StepName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepName"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateRecoveryPlanStepConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1236,6 +1848,51 @@ func validateOpDeleteRecoveryInstanceInput(v *DeleteRecoveryInstanceInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecoveryInstanceInput"}
 	if v.RecoveryInstanceID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryInstanceID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRecoveryPlanExecutionInput(v *DeleteRecoveryPlanExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecoveryPlanExecutionInput"}
+	if v.RecoveryPlanExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRecoveryPlanInput(v *DeleteRecoveryPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecoveryPlanInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRecoveryPlanStepInput(v *DeleteRecoveryPlanStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecoveryPlanStepInput"}
+	if v.RecoveryPlanStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanStepArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1394,6 +2051,66 @@ func validateOpGetLaunchConfigurationInput(v *GetLaunchConfigurationInput) error
 	}
 }
 
+func validateOpGetRecoveryPlanExecutionInput(v *GetRecoveryPlanExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPlanExecutionInput"}
+	if v.RecoveryPlanExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecoveryPlanExecutionStepInput(v *GetRecoveryPlanExecutionStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPlanExecutionStepInput"}
+	if v.RecoveryPlanExecutionStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionStepArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecoveryPlanInput(v *GetRecoveryPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPlanInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecoveryPlanStepInput(v *GetRecoveryPlanStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecoveryPlanStepInput"}
+	if v.RecoveryPlanStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanStepArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetReplicationConfigurationInput(v *GetReplicationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1431,6 +2148,36 @@ func validateOpListLaunchActionsInput(v *ListLaunchActionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListLaunchActionsInput"}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRecoveryPlanExecutionStepsInput(v *ListRecoveryPlanExecutionStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecoveryPlanExecutionStepsInput"}
+	if v.RecoveryPlanExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRecoveryPlanStepsInput(v *ListRecoveryPlanStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecoveryPlanStepsInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1496,6 +2243,24 @@ func validateOpPutLaunchActionInput(v *PutLaunchActionInput) error {
 	}
 }
 
+func validateOpReorderRecoveryPlanStepsInput(v *ReorderRecoveryPlanStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReorderRecoveryPlanStepsInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if v.OrderedStepArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrderedStepArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRetryDataReplicationInput(v *RetryDataReplicationInput) error {
 	if v == nil {
 		return nil
@@ -1503,6 +2268,21 @@ func validateOpRetryDataReplicationInput(v *RetryDataReplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RetryDataReplicationInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRetryRecoveryPlanExecutionStepInput(v *RetryRecoveryPlanExecutionStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryRecoveryPlanExecutionStepInput"}
+	if v.RecoveryPlanExecutionStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionStepArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1550,6 +2330,29 @@ func validateOpStartRecoveryInput(v *StartRecoveryInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServers"))
 	} else if v.SourceServers != nil {
 		if err := validateStartRecoveryRequestSourceServers(v.SourceServers); err != nil {
+			invalidParams.AddNested("SourceServers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRecoveryPlanExecutionInput(v *StartRecoveryPlanExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecoveryPlanExecutionInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if v.SourceServers != nil {
+		if err := validateRecoveryPlanExecutionSourceServerList(v.SourceServers); err != nil {
 			invalidParams.AddNested("SourceServers", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1742,6 +2545,61 @@ func validateOpUpdateLaunchConfigurationTemplateInput(v *UpdateLaunchConfigurati
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLaunchConfigurationTemplateInput"}
 	if v.LaunchConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecoveryPlanExecutionStepInput(v *UpdateRecoveryPlanExecutionStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecoveryPlanExecutionStepInput"}
+	if v.RecoveryPlanExecutionStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanExecutionStepArn"))
+	}
+	if v.Servers != nil {
+		if err := validateRecoveryPlanServers(v.Servers); err != nil {
+			invalidParams.AddNested("Servers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecoveryPlanInput(v *UpdateRecoveryPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecoveryPlanInput"}
+	if v.RecoveryPlanArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecoveryPlanStepInput(v *UpdateRecoveryPlanStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecoveryPlanStepInput"}
+	if v.RecoveryPlanStepArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPlanStepArn"))
+	}
+	if v.Configuration != nil {
+		if err := validateRecoveryPlanStepConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

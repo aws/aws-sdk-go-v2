@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a new task definition from the supplied family and
@@ -313,6 +312,63 @@ type RegisterTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerDefinitions(s, schemas.RegisterTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	if v.Cpu != nil {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_cpu, *v.Cpu)
+	}
+	if v.EnableFaultInjection != nil {
+		s.WriteBool(schemas.RegisterTaskDefinitionRequest_enableFaultInjection, *v.EnableFaultInjection)
+	}
+	if v.EphemeralStorage != nil {
+		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_ephemeralStorage)
+		v.EphemeralStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_family, *v.Family)
+	}
+	serializeInferenceAccelerators(s, schemas.RegisterTaskDefinitionRequest_inferenceAccelerators, v.InferenceAccelerators)
+	if v.IpcMode != "" {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_ipcMode, string(v.IpcMode))
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_memory, *v.Memory)
+	}
+	if v.NetworkMode != "" {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_networkMode, string(v.NetworkMode))
+	}
+	if v.PidMode != "" {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_pidMode, string(v.PidMode))
+	}
+	serializeTaskDefinitionPlacementConstraints(s, schemas.RegisterTaskDefinitionRequest_placementConstraints, v.PlacementConstraints)
+	if v.ProxyConfiguration != nil {
+		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_proxyConfiguration)
+		v.ProxyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCompatibilityList(s, schemas.RegisterTaskDefinitionRequest_requiresCompatibilities, v.RequiresCompatibilities)
+	if v.RuntimePlatform != nil {
+		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_runtimePlatform)
+		v.RuntimePlatform.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.RegisterTaskDefinitionRequest_tags, v.Tags)
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.RegisterTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
+	}
+	serializeVolumeList(s, schemas.RegisterTaskDefinitionRequest_volumes, v.Volumes)
+}
+
 type RegisterTaskDefinitionOutput struct {
 
 	// The list of tags associated with the task definition.
@@ -327,77 +383,53 @@ type RegisterTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.RegisterTaskDefinitionResponse_tags, v.Tags)
+	if v.TaskDefinition != nil {
+		s.WriteStruct(schemas.RegisterTaskDefinitionResponse_taskDefinition)
+		v.TaskDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterTaskDefinitionResponse_tags:
+			return deserializeTags(d, schemas.RegisterTaskDefinitionResponse_tags, &v.Tags)
+		case schemas.RegisterTaskDefinitionResponse_taskDefinition:
+			v.TaskDefinition = &types.TaskDefinition{}
+			return v.TaskDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTaskDefinition, schemas.RegisterTaskDefinitionRequest, schemas.RegisterTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTaskDefinition, schemas.RegisterTaskDefinitionRequest, schemas.RegisterTaskDefinitionResponse), output: &RegisterTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterTaskDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterTaskDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterTaskDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTaskDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -412,22 +444,8 @@ func (c *Client) addOperationRegisterTaskDefinitionMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterTaskDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterTaskDefinition",
-	}
 }

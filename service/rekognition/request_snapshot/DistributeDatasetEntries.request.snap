@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DistributeDatasetEntries
+
+{"Datasets":[{"Arn":"__Arn__"},{"Arn":"__Arn__"}]}

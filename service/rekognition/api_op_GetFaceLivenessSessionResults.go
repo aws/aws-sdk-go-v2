@@ -4,11 +4,8 @@ package rekognition
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the results of a specific Face Liveness session. It requires the
@@ -20,6 +17,11 @@ import (
 // The number of audit images returned by GetFaceLivenessSessionResults is defined
 // by the AuditImagesLimit paramater when calling CreateFaceLivenessSession .
 // Reference images are always returned when possible.
+//
+// For a session that has completed, the response can also include a Feedback list
+// describing conditions that were detected in the selfie-video, such as low
+// lighting or an obstructed face, and Metadata about the client that streamed the
+// session.
 func (c *Client) GetFaceLivenessSessionResults(ctx context.Context, params *GetFaceLivenessSessionResultsInput, optFns ...func(*Options)) (*GetFaceLivenessSessionResultsOutput, error) {
 	if params == nil {
 		params = &GetFaceLivenessSessionResultsInput{}
@@ -75,6 +77,15 @@ type GetFaceLivenessSessionResultsOutput struct {
 	// represented as a float value between 0 to 100.
 	Confidence *float32
 
+	// A list of conditions that were detected in the Face Liveness video and that
+	// contributed to the returned Confidence score. Each item contains a code and a
+	// human-readable message. Feedback is returned only for sessions with a Status of
+	// SUCCEEDED , and the list is empty when no such conditions were detected.
+	Feedback []types.FeedbackItem
+
+	// Metadata about the client that streamed the video for the Face Liveness session.
+	Metadata *types.SessionMetadata
+
 	// A high-quality image from the Face Liveness video that can be used for face
 	// comparison or search. It includes a bounding box of the face and the
 	// Base64-encoded bytes that return an image. If the CreateFaceLivenessSession
@@ -90,9 +101,6 @@ type GetFaceLivenessSessionResultsOutput struct {
 }
 
 func (c *Client) addOperationGetFaceLivenessSessionResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFaceLivenessSessionResults{}, middleware.After)
 	if err != nil {
 		return err
@@ -101,65 +109,20 @@ func (c *Client) addOperationGetFaceLivenessSessionResultsMiddlewares(stack *mid
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFaceLivenessSessionResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFaceLivenessSessionResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFaceLivenessSessionResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +137,8 @@ func (c *Client) addOperationGetFaceLivenessSessionResultsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFaceLivenessSessionResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFaceLivenessSessionResults",
-	}
 }

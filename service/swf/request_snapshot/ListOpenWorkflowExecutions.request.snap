@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.ListOpenWorkflowExecutions
+
+{"domain":"__Domain__","executionFilter":{"workflowId":"__WorkflowId__"},"maximumPageSize":1,"nextPageToken":"__NextPageToken__","reverseOrder":true,"startTimeFilter":{"latestDate":946684800,"oldestDate":946684800},"tagFilter":{"tag":"__Tag__"},"typeFilter":{"name":"__Name__","version":"__Version__"}}

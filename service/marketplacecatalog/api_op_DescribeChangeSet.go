@@ -4,11 +4,10 @@ package marketplacecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about a given change set.
@@ -41,6 +40,21 @@ type DescribeChangeSetInput struct {
 	ChangeSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.DescribeChangeSetRequest_Catalog, *v.Catalog)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetRequest_ChangeSetId, *v.ChangeSetId)
+	}
 }
 
 type DescribeChangeSetOutput struct {
@@ -91,77 +105,111 @@ type DescribeChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeSetDescription(s, schemas.DescribeChangeSetResponse_ChangeSet, v.ChangeSet)
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.EndTime != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_EndTime, *v.EndTime)
+	}
+	if v.FailureCode != "" {
+		s.WriteString(schemas.DescribeChangeSetResponse_FailureCode, string(v.FailureCode))
+	}
+	if v.FailureDescription != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_FailureDescription, *v.FailureDescription)
+	}
+	if v.Intent != "" {
+		s.WriteString(schemas.DescribeChangeSetResponse_Intent, string(v.Intent))
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.DescribeChangeSetResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeChangeSetResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChangeSetResponse_ChangeSet:
+			return deserializeChangeSetDescription(d, schemas.DescribeChangeSetResponse_ChangeSet, &v.ChangeSet)
+		case schemas.DescribeChangeSetResponse_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_ChangeSetArn, v.ChangeSetArn)
+		case schemas.DescribeChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		case schemas.DescribeChangeSetResponse_ChangeSetName:
+			v.ChangeSetName = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_ChangeSetName, v.ChangeSetName)
+		case schemas.DescribeChangeSetResponse_EndTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_EndTime, v.EndTime)
+		case schemas.DescribeChangeSetResponse_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetResponse_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = types.FailureCode(ev)
+			return nil
+		case schemas.DescribeChangeSetResponse_FailureDescription:
+			v.FailureDescription = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_FailureDescription, v.FailureDescription)
+		case schemas.DescribeChangeSetResponse_Intent:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetResponse_Intent, &ev); err != nil {
+				return err
+			}
+			v.Intent = types.Intent(ev)
+			return nil
+		case schemas.DescribeChangeSetResponse_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.DescribeChangeSetResponse_StartTime, v.StartTime)
+		case schemas.DescribeChangeSetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChangeSetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChangeStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSet, schemas.DescribeChangeSetRequest, schemas.DescribeChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChangeSet, schemas.DescribeChangeSetRequest, schemas.DescribeChangeSetResponse), output: &DescribeChangeSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChangeSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChangeSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeChangeSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChangeSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +224,8 @@ func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeChangeSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeChangeSet",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListEntityPersonas
+
+{"NextToken":"__NextToken__","SummaryItems":[{"CreatedAt":946684800,"EntityId":"__EntityId__","Persona":"OWNER","UpdatedAt":946684800},{"CreatedAt":946684800,"EntityId":"__EntityId__","Persona":"OWNER","UpdatedAt":946684800}]}

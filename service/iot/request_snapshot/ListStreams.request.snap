@@ -1,0 +1,3 @@
+GET /streams?isAscendingOrder=true&maxResults=1&nextToken=__NextToken__
+
+

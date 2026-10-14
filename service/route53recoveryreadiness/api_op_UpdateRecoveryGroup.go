@@ -4,12 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a recovery group.
@@ -45,19 +40,6 @@ type UpdateRecoveryGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRecoveryGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRecoveryGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRecoveryGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.UpdateRecoveryGroupRequest_Cells, v.Cells)
-	if v.RecoveryGroupName != nil {
-		s.WriteString(schemas.UpdateRecoveryGroupRequest_RecoveryGroupName, *v.RecoveryGroupName)
-	}
-}
-
 type UpdateRecoveryGroupOutput struct {
 
 	// A list of a cell's Amazon Resource Names (ARNs).
@@ -78,92 +60,29 @@ type UpdateRecoveryGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRecoveryGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRecoveryGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRecoveryGroupResponse_Cells:
-			return deserialize__listOf__string(d, schemas.UpdateRecoveryGroupResponse_Cells, &v.Cells)
-		case schemas.UpdateRecoveryGroupResponse_RecoveryGroupArn:
-			v.RecoveryGroupArn = new(string)
-			return d.ReadString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupArn, v.RecoveryGroupArn)
-		case schemas.UpdateRecoveryGroupResponse_RecoveryGroupName:
-			v.RecoveryGroupName = new(string)
-			return d.ReadString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupName, v.RecoveryGroupName)
-		case schemas.UpdateRecoveryGroupResponse_Tags:
-			return deserializeTags(d, schemas.UpdateRecoveryGroupResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRecoveryGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryGroup, schemas.UpdateRecoveryGroupRequest, schemas.UpdateRecoveryGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryGroup, schemas.UpdateRecoveryGroupRequest, schemas.UpdateRecoveryGroupResponse), output: &UpdateRecoveryGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRecoveryGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRecoveryGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecoveryGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +97,8 @@ func (c *Client) addOperationUpdateRecoveryGroupMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRecoveryGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRecoveryGroup",
-	}
 }

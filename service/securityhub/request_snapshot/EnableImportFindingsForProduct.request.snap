@@ -1,0 +1,5 @@
+POST /productSubscriptions
+
+Content-Type: application/json
+
+{"ProductArn":"__ProductArn__"}

@@ -5,12 +5,8 @@ package networkflowmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // In Network Flow Monitor, you specify a scope for the service to generate
@@ -69,20 +65,6 @@ type CreateScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScopeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateScopeInput_clientToken, *v.ClientToken)
-	}
-	serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
-	serializeTargetResourceList(s, schemas.CreateScopeInput_targets, v.Targets)
-}
-
 type CreateScopeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scope.
@@ -116,85 +98,23 @@ type CreateScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScopeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScopeOutput_scopeArn:
-			v.ScopeArn = new(string)
-			return d.ReadString(schemas.CreateScopeOutput_scopeArn, v.ScopeArn)
-		case schemas.CreateScopeOutput_scopeId:
-			v.ScopeId = new(string)
-			return d.ReadString(schemas.CreateScopeOutput_scopeId, v.ScopeId)
-		case schemas.CreateScopeOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateScopeOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ScopeStatus(ev)
-			return nil
-		case schemas.CreateScopeOutput_tags:
-			return deserializeTagMap(d, schemas.CreateScopeOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScope, schemas.CreateScopeInput, schemas.CreateScopeOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScope{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScope, schemas.CreateScopeInput, schemas.CreateScopeOutput), output: &CreateScopeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScope"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -204,12 +124,6 @@ func (c *Client) addOperationCreateScopeMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateScopeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScope(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,12 +136,6 @@ func (c *Client) addOperationCreateScopeMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,12 +175,4 @@ func (m *idempotencyToken_initializeOpCreateScope) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateScopeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateScope{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateScope(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScope",
-	}
 }

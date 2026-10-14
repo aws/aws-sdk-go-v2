@@ -4,13 +4,10 @@ package chimesdkmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a specified number of users and bots to a channel.
@@ -99,6 +96,20 @@ type BatchCreateChannelMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateChannelMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateChannelMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateChannelMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchChannelMemberships != nil {
+		s.WriteStruct(schemas.BatchCreateChannelMembershipResponse_BatchChannelMemberships)
+		v.BatchChannelMemberships.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBatchCreateChannelMembershipErrors(s, schemas.BatchCreateChannelMembershipResponse_Errors, v.Errors)
+}
 func (v *BatchCreateChannelMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateChannelMembershipResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -112,74 +123,26 @@ func (v *BatchCreateChannelMembershipOutput) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 func (c *Client) addOperationBatchCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateChannelMembership, schemas.BatchCreateChannelMembershipRequest, schemas.BatchCreateChannelMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateChannelMembership, schemas.BatchCreateChannelMembershipRequest, schemas.BatchCreateChannelMembershipResponse), output: &BatchCreateChannelMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateChannelMembership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchCreateChannelMembershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateChannelMembership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +157,8 @@ func (c *Client) addOperationBatchCreateChannelMembershipMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchCreateChannelMembership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateChannelMembership",
-	}
 }

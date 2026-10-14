@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LexBots":[{"LexBot":{"LexRegion":"__LexRegion__","Name":"__Name__"},"LexV2Bot":{"AliasArn":"__AliasArn__"}},{"LexBot":{"LexRegion":"__LexRegion__","Name":"__Name__"},"LexV2Bot":{"AliasArn":"__AliasArn__"}}],"NextToken":"__NextToken__"}

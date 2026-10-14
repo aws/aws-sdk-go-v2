@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a new resource policy statement to a bot or bot alias. If a resource
@@ -92,6 +91,30 @@ type CreateResourcePolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourcePolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourcePolicyStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourcePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateResourcePolicyStatementRequest_action, v.Action)
+	serializeConditionMap(s, schemas.CreateResourcePolicyStatementRequest_condition, v.Condition)
+	if v.Effect != "" {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_effect, string(v.Effect))
+	}
+	if v.ExpectedRevisionId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_expectedRevisionId, *v.ExpectedRevisionId)
+	}
+	serializePrincipalList(s, schemas.CreateResourcePolicyStatementRequest_principal, v.Principal)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_statementId, *v.StatementId)
+	}
+}
+
 type CreateResourcePolicyStatementOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
@@ -109,77 +132,54 @@ type CreateResourcePolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourcePolicyStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourcePolicyStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourcePolicyStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *CreateResourcePolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourcePolicyStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourcePolicyStatementResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateResourcePolicyStatementResponse_resourceArn, v.ResourceArn)
+		case schemas.CreateResourcePolicyStatementResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.CreateResourcePolicyStatementResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourcePolicyStatement, schemas.CreateResourcePolicyStatementRequest, schemas.CreateResourcePolicyStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourcePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourcePolicyStatement, schemas.CreateResourcePolicyStatementRequest, schemas.CreateResourcePolicyStatementResponse), output: &CreateResourcePolicyStatementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourcePolicyStatement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResourcePolicyStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateResourcePolicyStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourcePolicyStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +194,8 @@ func (c *Client) addOperationCreateResourcePolicyStatementMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateResourcePolicyStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResourcePolicyStatement",
-	}
 }

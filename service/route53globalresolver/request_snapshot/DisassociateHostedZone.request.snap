@@ -1,0 +1,3 @@
+DELETE /hosted-zone-associations/hosted-zone/__HostedZoneId__/resource-arn/__ResourceArn__
+
+

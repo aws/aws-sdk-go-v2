@@ -4,13 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates the OAuth registration flow with a third-party provider. Returns a
@@ -32,24 +27,26 @@ func (c *Client) InitiateProviderRegistration(ctx context.Context, params *Initi
 
 type InitiateProviderRegistrationInput struct {
 
-	// The provider to initiate registration with. Currently, only GITHUB is supported.
+	// The provider to initiate registration with.
 	//
 	// This member is required.
 	Provider types.Provider
 
+	// The client ID of the OAuth application registered on your self-managed provider
+	// instance.
+	ClientId *string
+
+	// The client secret of the OAuth application registered on your self-managed
+	// provider instance.
+	ClientSecret *string
+
+	// The name of the organization to connect.
+	OrganizationName *string
+
+	// The HTTPS URL of a self-managed provider instance. Omit for SaaS providers.
+	TargetUrl *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *InitiateProviderRegistrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InitiateProviderRegistrationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InitiateProviderRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Provider != "" {
-		s.WriteString(schemas.InitiateProviderRegistrationInput_provider, string(v.Provider))
-	}
 }
 
 type InitiateProviderRegistrationOutput struct {
@@ -70,88 +67,29 @@ type InitiateProviderRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InitiateProviderRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InitiateProviderRegistrationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InitiateProviderRegistrationOutput_csrfState:
-			v.CsrfState = new(string)
-			return d.ReadString(schemas.InitiateProviderRegistrationOutput_csrfState, v.CsrfState)
-		case schemas.InitiateProviderRegistrationOutput_redirectTo:
-			v.RedirectTo = new(string)
-			return d.ReadString(schemas.InitiateProviderRegistrationOutput_redirectTo, v.RedirectTo)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationInitiateProviderRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateProviderRegistration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateProviderRegistration, schemas.InitiateProviderRegistrationInput, schemas.InitiateProviderRegistrationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitiateProviderRegistration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateProviderRegistration, schemas.InitiateProviderRegistrationInput, schemas.InitiateProviderRegistrationOutput), output: &InitiateProviderRegistrationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InitiateProviderRegistration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInitiateProviderRegistrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateProviderRegistration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +104,8 @@ func (c *Client) addOperationInitiateProviderRegistrationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInitiateProviderRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InitiateProviderRegistration",
-	}
 }

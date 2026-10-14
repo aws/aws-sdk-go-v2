@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/time-series-data-points
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","forms":[{"content":"__Content__","formName":"__FormName__","timestamp":946684800,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","timestamp":946684800,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]}

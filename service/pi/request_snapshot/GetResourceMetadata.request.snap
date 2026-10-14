@@ -1,0 +1,7 @@
+POST /service/PerformanceInsightsv20180227/operation/GetResourceMetadata
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jIdentifiern__Identifier__kServiceTypecRDSÿ

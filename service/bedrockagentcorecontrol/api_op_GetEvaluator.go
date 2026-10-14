@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,21 +45,6 @@ type GetEvaluatorInput struct {
 	IncludedData types.IncludedData
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetEvaluatorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEvaluatorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EvaluatorId != nil {
-		s.WriteString(schemas.GetEvaluatorRequest_evaluatorId, *v.EvaluatorId)
-	}
-	if v.IncludedData != "" {
-		s.WriteString(schemas.GetEvaluatorRequest_includedData, string(v.IncludedData))
-	}
 }
 
 type GetEvaluatorOutput struct {
@@ -114,6 +94,21 @@ type GetEvaluatorOutput struct {
 	//  The description of the evaluator.
 	Description *string
 
+	//  The kind of evaluator resource. Valid values:
+	//
+	//   - Builtin – An Amazon Web Services-managed global evaluator.
+	//
+	//   - ThirdParty – An Amazon Web Services-managed global evaluator from a
+	//   third-party provider.
+	//
+	//   - Custom – A customer-created evaluator.
+	//
+	//   - CustomCode – A customer-created code-based evaluator.
+	//
+	//   - CustomDerived – A customer-created evaluator derived from an existing base
+	//   evaluator.
+	EvaluatorType types.EvaluatorType
+
 	//  The Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt
 	// the evaluator's sensitive data. This field is only present for evaluators
 	// encrypted with a customer managed key.
@@ -123,128 +118,39 @@ type GetEvaluatorOutput struct {
 	// active online evaluation configurations.
 	LockedForModification *bool
 
+	//  The source of the evaluator's logic: Amazon Web Services, a third-party
+	// library, or you.
+	Provider types.Provider
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *GetEvaluatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEvaluatorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEvaluatorResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEvaluatorResponse_createdAt, v.CreatedAt)
-		case schemas.GetEvaluatorResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetEvaluatorResponse_description, v.Description)
-		case schemas.GetEvaluatorResponse_evaluatorArn:
-			v.EvaluatorArn = new(string)
-			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorArn, v.EvaluatorArn)
-		case schemas.GetEvaluatorResponse_evaluatorConfig:
-			return deserializeEvaluatorConfig(d, schemas.GetEvaluatorResponse_evaluatorConfig, &v.EvaluatorConfig)
-		case schemas.GetEvaluatorResponse_evaluatorId:
-			v.EvaluatorId = new(string)
-			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorId, v.EvaluatorId)
-		case schemas.GetEvaluatorResponse_evaluatorName:
-			v.EvaluatorName = new(string)
-			return d.ReadString(schemas.GetEvaluatorResponse_evaluatorName, v.EvaluatorName)
-		case schemas.GetEvaluatorResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetEvaluatorResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.GetEvaluatorResponse_level:
-			var ev string
-			if err := d.ReadString(schemas.GetEvaluatorResponse_level, &ev); err != nil {
-				return err
-			}
-			v.Level = types.EvaluatorLevel(ev)
-			return nil
-		case schemas.GetEvaluatorResponse_lockedForModification:
-			v.LockedForModification = new(bool)
-			return d.ReadBool(schemas.GetEvaluatorResponse_lockedForModification, v.LockedForModification)
-		case schemas.GetEvaluatorResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetEvaluatorResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EvaluatorStatus(ev)
-			return nil
-		case schemas.GetEvaluatorResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEvaluatorResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvaluator{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluator, schemas.GetEvaluatorRequest, schemas.GetEvaluatorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvaluator{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluator, schemas.GetEvaluatorRequest, schemas.GetEvaluatorResponse), output: &GetEvaluatorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEvaluator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEvaluatorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvaluator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -259,22 +165,8 @@ func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEvaluator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEvaluator",
-	}
 }

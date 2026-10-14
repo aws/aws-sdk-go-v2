@@ -4,13 +4,8 @@ package finspace
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type GetKxEnvironmentInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxEnvironmentRequest_environmentId, *v.EnvironmentId)
-	}
 }
 
 type GetKxEnvironmentOutput struct {
@@ -116,146 +99,32 @@ type GetKxEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxEnvironmentResponse_availabilityZoneIds:
-			return deserializeAvailabilityZoneIds(d, schemas.GetKxEnvironmentResponse_availabilityZoneIds, &v.AvailabilityZoneIds)
-		case schemas.GetKxEnvironmentResponse_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_awsAccountId, v.AwsAccountId)
-		case schemas.GetKxEnvironmentResponse_certificateAuthorityArn:
-			v.CertificateAuthorityArn = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_certificateAuthorityArn, v.CertificateAuthorityArn)
-		case schemas.GetKxEnvironmentResponse_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxEnvironmentResponse_creationTimestamp, v.CreationTimestamp)
-		case schemas.GetKxEnvironmentResponse_customDNSConfiguration:
-			return deserializeCustomDNSConfiguration(d, schemas.GetKxEnvironmentResponse_customDNSConfiguration, &v.CustomDNSConfiguration)
-		case schemas.GetKxEnvironmentResponse_dedicatedServiceAccountId:
-			v.DedicatedServiceAccountId = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_dedicatedServiceAccountId, v.DedicatedServiceAccountId)
-		case schemas.GetKxEnvironmentResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_description, v.Description)
-		case schemas.GetKxEnvironmentResponse_dnsStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetKxEnvironmentResponse_dnsStatus, &ev); err != nil {
-				return err
-			}
-			v.DnsStatus = types.DnsStatus(ev)
-			return nil
-		case schemas.GetKxEnvironmentResponse_environmentArn:
-			v.EnvironmentArn = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_environmentArn, v.EnvironmentArn)
-		case schemas.GetKxEnvironmentResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxEnvironmentResponse_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_errorMessage, v.ErrorMessage)
-		case schemas.GetKxEnvironmentResponse_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_kmsKeyId, v.KmsKeyId)
-		case schemas.GetKxEnvironmentResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetKxEnvironmentResponse_name, v.Name)
-		case schemas.GetKxEnvironmentResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxEnvironmentResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EnvironmentStatus(ev)
-			return nil
-		case schemas.GetKxEnvironmentResponse_tgwStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetKxEnvironmentResponse_tgwStatus, &ev); err != nil {
-				return err
-			}
-			v.TgwStatus = types.TgwStatus(ev)
-			return nil
-		case schemas.GetKxEnvironmentResponse_transitGatewayConfiguration:
-			v.TransitGatewayConfiguration = &types.TransitGatewayConfiguration{}
-			return v.TransitGatewayConfiguration.Deserialize(d)
-		case schemas.GetKxEnvironmentResponse_updateTimestamp:
-			v.UpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxEnvironmentResponse_updateTimestamp, v.UpdateTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxEnvironment, schemas.GetKxEnvironmentRequest, schemas.GetKxEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxEnvironment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxEnvironment, schemas.GetKxEnvironmentRequest, schemas.GetKxEnvironmentResponse), output: &GetKxEnvironmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKxEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKxEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,22 +139,8 @@ func (c *Client) addOperationGetKxEnvironmentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKxEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKxEnvironment",
-	}
 }

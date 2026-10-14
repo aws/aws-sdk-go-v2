@@ -1,0 +1,5 @@
+PATCH /v1/clusters/__ClusterArn__/security
+
+Content-Type: application/json
+
+{"clientAuthentication":{"sasl":{"iam":{"enabled":true},"scram":{"enabled":true}},"tls":{"certificateAuthorityArnList":["__Member__","__Member__"],"enabled":true},"unauthenticated":{"enabled":true}},"currentVersion":"__CurrentVersion__","encryptionInfo":{"encryptionAtRest":{"dataVolumeKMSKeyId":"__DataVolumeKMSKeyId__"},"encryptionInTransit":{"clientBroker":"TLS","inCluster":true}}}

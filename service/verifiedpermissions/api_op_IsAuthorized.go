@@ -4,13 +4,8 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Makes an authorization decision about a service request described in the
@@ -79,35 +74,6 @@ type IsAuthorizedInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsAuthorizedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsAuthorizedInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsAuthorizedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteStruct(schemas.IsAuthorizedInput_action)
-		v.Action.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeContextDefinition(s, schemas.IsAuthorizedInput_context, v.Context)
-	serializeEntitiesDefinition(s, schemas.IsAuthorizedInput_entities, v.Entities)
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.IsAuthorizedInput_policyStoreId, *v.PolicyStoreId)
-	}
-	if v.Principal != nil {
-		s.WriteStruct(schemas.IsAuthorizedInput_principal)
-		v.Principal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.IsAuthorizedInput_resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type IsAuthorizedOutput struct {
 
 	// An authorization decision that indicates if the authorization request should be
@@ -139,93 +105,29 @@ type IsAuthorizedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsAuthorizedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsAuthorizedOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsAuthorizedOutput_decision:
-			var ev string
-			if err := d.ReadString(schemas.IsAuthorizedOutput_decision, &ev); err != nil {
-				return err
-			}
-			v.Decision = types.Decision(ev)
-			return nil
-		case schemas.IsAuthorizedOutput_determiningPolicies:
-			return deserializeDeterminingPolicyList(d, schemas.IsAuthorizedOutput_determiningPolicies, &v.DeterminingPolicies)
-		case schemas.IsAuthorizedOutput_errors:
-			return deserializeEvaluationErrorList(d, schemas.IsAuthorizedOutput_errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationIsAuthorizedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpIsAuthorized{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorized, schemas.IsAuthorizedInput, schemas.IsAuthorizedOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpIsAuthorized{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsAuthorized, schemas.IsAuthorizedInput, schemas.IsAuthorizedOutput), output: &IsAuthorizedOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "IsAuthorized"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpIsAuthorizedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opIsAuthorized(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,22 +142,8 @@ func (c *Client) addOperationIsAuthorizedMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opIsAuthorized(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "IsAuthorized",
-	}
 }

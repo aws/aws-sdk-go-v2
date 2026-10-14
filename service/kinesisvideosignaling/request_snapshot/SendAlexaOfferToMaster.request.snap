@@ -1,0 +1,5 @@
+POST /v1/send-alexa-offer-to-master
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","MessagePayload":"__MessagePayload__","SenderClientId":"__SenderClientId__"}

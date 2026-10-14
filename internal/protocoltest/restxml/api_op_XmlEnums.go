@@ -4,13 +4,10 @@ package restxml
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example serializes enums as top level properties, in lists, sets, and maps.
@@ -85,6 +82,26 @@ type XmlEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEnumsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FooEnum1 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum1, string(v.FooEnum1))
+	}
+	if v.FooEnum2 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum2, string(v.FooEnum2))
+	}
+	if v.FooEnum3 != "" {
+		s.WriteString(schemas.XmlEnumsResponse_fooEnum3, string(v.FooEnum3))
+	}
+	serializeFooEnumList(s, schemas.XmlEnumsResponse_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.XmlEnumsResponse_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.XmlEnumsResponse_fooEnumSet, v.FooEnumSet)
+}
 func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEnumsResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -120,71 +137,23 @@ func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.XmlEnumsRequest, schemas.XmlEnumsResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.XmlEnumsRequest, schemas.XmlEnumsResponse), output: &XmlEnumsOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEnums"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlEnums(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +168,8 @@ func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opXmlEnums(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "XmlEnums",
-	}
 }

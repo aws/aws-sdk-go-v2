@@ -4,11 +4,10 @@ package codestarconnections
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the sync configuration for your connection and a specified external Git
@@ -63,6 +62,39 @@ type UpdateSyncConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSyncConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSyncConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSyncConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_Branch, *v.Branch)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_ConfigFile, *v.ConfigFile)
+	}
+	if v.PublishDeploymentStatus != "" {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_PublishDeploymentStatus, string(v.PublishDeploymentStatus))
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_ResourceName, *v.ResourceName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_RoleArn, *v.RoleArn)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_SyncType, string(v.SyncType))
+	}
+	if v.TriggerResourceUpdateOn != "" {
+		s.WriteString(schemas.UpdateSyncConfigurationInput_TriggerResourceUpdateOn, string(v.TriggerResourceUpdateOn))
+	}
+}
+
 type UpdateSyncConfigurationOutput struct {
 
 	// The information returned for the sync configuration to be updated.
@@ -76,77 +108,50 @@ type UpdateSyncConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSyncConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSyncConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSyncConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSyncConfigurationOutput_SyncConfiguration)
+		v.SyncConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSyncConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSyncConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSyncConfigurationOutput_SyncConfiguration:
+			v.SyncConfiguration = &types.SyncConfiguration{}
+			return v.SyncConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSyncConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSyncConfiguration, schemas.UpdateSyncConfigurationInput, schemas.UpdateSyncConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSyncConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSyncConfiguration, schemas.UpdateSyncConfigurationInput, schemas.UpdateSyncConfigurationOutput), output: &UpdateSyncConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSyncConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSyncConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSyncConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSyncConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +166,8 @@ func (c *Client) addOperationUpdateSyncConfigurationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSyncConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSyncConfiguration",
-	}
 }

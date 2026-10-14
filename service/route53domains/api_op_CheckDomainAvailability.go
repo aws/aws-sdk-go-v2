@@ -4,11 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation checks the availability of one domain name. Note that if the
@@ -62,6 +61,21 @@ type CheckDomainAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainAvailabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CheckDomainAvailabilityRequest_DomainName, *v.DomainName)
+	}
+	if v.IdnLangCode != nil {
+		s.WriteString(schemas.CheckDomainAvailabilityRequest_IdnLangCode, *v.IdnLangCode)
+	}
+}
+
 // The CheckDomainAvailability response includes the following elements.
 type CheckDomainAvailabilityOutput struct {
 
@@ -97,83 +111,74 @@ type CheckDomainAvailabilityOutput struct {
 	// UNAVAILABLE_RESTRICTED The domain name is forbidden.
 	Availability types.DomainAvailability
 
+	// The price to register the domain name, in the currency that Currency specifies.
+	// If the domain has registry premium pricing, this price is different from the
+	// standard rate for the TLD that ListPrices returns. Use PriceType to determine
+	// which rate applies.
+	//
+	// This element is returned only when Availability is AVAILABLE .
+	Price *types.PriceWithCurrency
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainAvailabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainAvailabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Availability != "" {
+		s.WriteString(schemas.CheckDomainAvailabilityResponse_Availability, string(v.Availability))
+	}
+	if v.Price != nil {
+		s.WriteStruct(schemas.CheckDomainAvailabilityResponse_Price)
+		v.Price.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CheckDomainAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckDomainAvailabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckDomainAvailabilityResponse_Availability:
+			var ev string
+			if err := d.ReadString(schemas.CheckDomainAvailabilityResponse_Availability, &ev); err != nil {
+				return err
+			}
+			v.Availability = types.DomainAvailability(ev)
+			return nil
+		case schemas.CheckDomainAvailabilityResponse_Price:
+			v.Price = &types.PriceWithCurrency{}
+			return v.Price.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityRequest, schemas.CheckDomainAvailabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckDomainAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityRequest, schemas.CheckDomainAvailabilityResponse), output: &CheckDomainAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckDomainAvailability{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CheckDomainAvailability"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCheckDomainAvailabilityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckDomainAvailability(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +193,8 @@ func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCheckDomainAvailability(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CheckDomainAvailability",
-	}
 }

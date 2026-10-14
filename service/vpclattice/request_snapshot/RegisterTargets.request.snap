@@ -1,0 +1,5 @@
+POST /targetgroups/__TargetGroupIdentifier__/registertargets
+
+Content-Type: application/json
+
+{"targets":[{"id":"__Id__","port":1},{"id":"__Id__","port":1}]}

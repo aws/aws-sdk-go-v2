@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateTotalCount":1,"NextToken":"__NextToken__","SecurityProfiles":[{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","OrganizationResourceId":"__OrganizationResourceId__","SecurityProfileName":"__SecurityProfileName__","Tags":{"key0":"__Value__"}},{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","OrganizationResourceId":"__OrganizationResourceId__","SecurityProfileName":"__SecurityProfileName__","Tags":{"key0":"__Value__"}}]}

@@ -1,0 +1,5 @@
+GET /__Key__?annotation=&annotation-prefix=__AnnotationPrefix__&continuation-token=__ContinuationToken__&max-annotation-results=1&versionId=__VersionId__&x-id=ListObjectAnnotations
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+

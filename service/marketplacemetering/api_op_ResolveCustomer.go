@@ -4,10 +4,10 @@ package marketplacemetering
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // ResolveCustomer is called by a SaaS application during the registration
@@ -15,6 +15,11 @@ import (
 // buyer submits a registration token through their browser. The registration token
 // is resolved through this API to obtain a CustomerIdentifier along with the
 // CustomerAWSAccountId , ProductCode , and LicenseArn .
+//
+// For new SaaS product integrations, the CustomerIdentifier field is not
+// populated in the ResolveCustomer API response. New integrations must use
+// CustomerAWSAccountId and LicenseArn to identify customers. Existing
+// integrations continue to work unchanged.
 //
 // To successfully resolve the token, the API must be called from the account that
 // was used to publish the SaaS application. For an example of using
@@ -52,14 +57,29 @@ type ResolveCustomerInput struct {
 	// resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId ,
 	// ProductCode , and LicenseArn .
 	//
+	// For new SaaS product integrations, the CustomerIdentifier field is not
+	// populated. Use CustomerAWSAccountId and LicenseArn for customer identification.
+	//
 	// This member is required.
 	RegistrationToken *string
 
 	noSmithyDocumentSerde
 }
 
+func (v *ResolveCustomerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolveCustomerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolveCustomerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationToken != nil {
+		s.WriteString(schemas.ResolveCustomerRequest_RegistrationToken, *v.RegistrationToken)
+	}
+}
+
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// along with the CustomerAWSAccountId , ProductCode , and LicenseArn .
+// along with the CustomerAWSAccountId , ProductCode , LicenseArn , and Metadata .
 type ResolveCustomerOutput struct {
 
 	// The CustomerAWSAccountId provides the Amazon Web Services account ID associated
@@ -69,6 +89,9 @@ type ResolveCustomerOutput struct {
 
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application.
+	//
+	// For new SaaS product integrations, this field is not populated. Use
+	// CustomerAWSAccountId and LicenseArn to identify customers instead.
 	CustomerIdentifier *string
 
 	// The LicenseArn is a unique identifier for a specific granted license. These are
@@ -78,6 +101,10 @@ type ResolveCustomerOutput struct {
 	// Once you receive the CustomerAWSAccountId and LicenseArn in the response, store
 	// that for future purposes/API calls/integrations.
 	LicenseArn *string
+
+	// The metadata associated with the resolved customer, including the AgreementId
+	// of the Amazon Web Services Marketplace agreement the customer accepted.
+	Metadata *types.Metadata
 
 	// The product code is returned to confirm that the buyer is registering for your
 	// product. Subsequent BatchMeterUsage calls should be made using this product
@@ -90,77 +117,74 @@ type ResolveCustomerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolveCustomerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolveCustomerResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolveCustomerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerAWSAccountId != nil {
+		s.WriteString(schemas.ResolveCustomerResult_CustomerAWSAccountId, *v.CustomerAWSAccountId)
+	}
+	if v.CustomerIdentifier != nil {
+		s.WriteString(schemas.ResolveCustomerResult_CustomerIdentifier, *v.CustomerIdentifier)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.ResolveCustomerResult_LicenseArn, *v.LicenseArn)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ResolveCustomerResult_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.ResolveCustomerResult_ProductCode, *v.ProductCode)
+	}
+}
+func (v *ResolveCustomerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolveCustomerResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolveCustomerResult_CustomerAWSAccountId:
+			v.CustomerAWSAccountId = new(string)
+			return d.ReadString(schemas.ResolveCustomerResult_CustomerAWSAccountId, v.CustomerAWSAccountId)
+		case schemas.ResolveCustomerResult_CustomerIdentifier:
+			v.CustomerIdentifier = new(string)
+			return d.ReadString(schemas.ResolveCustomerResult_CustomerIdentifier, v.CustomerIdentifier)
+		case schemas.ResolveCustomerResult_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.ResolveCustomerResult_LicenseArn, v.LicenseArn)
+		case schemas.ResolveCustomerResult_Metadata:
+			v.Metadata = &types.Metadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ResolveCustomerResult_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.ResolveCustomerResult_ProductCode, v.ProductCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveCustomer, schemas.ResolveCustomerRequest, schemas.ResolveCustomerResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveCustomer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveCustomer, schemas.ResolveCustomerRequest, schemas.ResolveCustomerResult), output: &ResolveCustomerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResolveCustomer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResolveCustomer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpResolveCustomerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResolveCustomer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +199,8 @@ func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResolveCustomer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResolveCustomer",
-	}
 }

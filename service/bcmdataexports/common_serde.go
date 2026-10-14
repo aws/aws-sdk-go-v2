@@ -121,6 +121,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Column) error {
+	*v = make([]types.Column, 0)
 	var vv types.Column
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Column{}
@@ -134,6 +135,7 @@ func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExecutionReference) error {
+	*v = make([]types.ExecutionReference, 0)
 	var vv types.ExecutionReference
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExecutionReference{}
@@ -147,6 +149,7 @@ func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportReference) error {
+	*v = make([]types.ExportReference, 0)
 	var vv types.ExportReference
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExportReference{}
@@ -160,6 +163,7 @@ func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -173,6 +177,7 @@ func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -186,6 +191,7 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceTag) error {
+	*v = make([]types.ResourceTag, 0)
 	var vv types.ResourceTag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceTag{}
@@ -199,6 +205,7 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Table) error {
+	*v = make([]types.Table, 0)
 	var vv types.Table
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Table{}
@@ -212,6 +219,7 @@ func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TablePropertyDescription) error {
+	*v = make([]types.TablePropertyDescription, 0)
 	var vv types.TablePropertyDescription
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TablePropertyDescription{}
@@ -225,6 +233,7 @@ func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}
@@ -265,6 +274,14 @@ func deserializeTableConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTableProperties(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -279,6 +296,13 @@ func deserializeTableProperties(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

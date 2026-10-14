@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,21 @@ type DescribeMailboxExportJobInput struct {
 	OrganizationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMailboxExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMailboxExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMailboxExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobRequest_JobId, *v.JobId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobRequest_OrganizationId, *v.OrganizationId)
+	}
 }
 
 type DescribeMailboxExportJobOutput struct {
@@ -89,77 +103,117 @@ type DescribeMailboxExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMailboxExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMailboxExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMailboxExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_Description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeMailboxExportJobResponse_EndTime, *v.EndTime)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_EntityId, *v.EntityId)
+	}
+	if v.ErrorInfo != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_ErrorInfo, *v.ErrorInfo)
+	}
+	if v.EstimatedProgress != 0 {
+		s.WriteInt32(schemas.DescribeMailboxExportJobResponse_EstimatedProgress, v.EstimatedProgress)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Path != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_S3Path, *v.S3Path)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_S3Prefix, *v.S3Prefix)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeMailboxExportJobResponse_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeMailboxExportJobResponse_State, string(v.State))
+	}
+}
+func (v *DescribeMailboxExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMailboxExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMailboxExportJobResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_Description, v.Description)
+		case schemas.DescribeMailboxExportJobResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMailboxExportJobResponse_EndTime, v.EndTime)
+		case schemas.DescribeMailboxExportJobResponse_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_EntityId, v.EntityId)
+		case schemas.DescribeMailboxExportJobResponse_ErrorInfo:
+			v.ErrorInfo = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_ErrorInfo, v.ErrorInfo)
+		case schemas.DescribeMailboxExportJobResponse_EstimatedProgress:
+			return d.ReadInt32(schemas.DescribeMailboxExportJobResponse_EstimatedProgress, &v.EstimatedProgress)
+		case schemas.DescribeMailboxExportJobResponse_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_KmsKeyArn, v.KmsKeyArn)
+		case schemas.DescribeMailboxExportJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeMailboxExportJobResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_S3BucketName, v.S3BucketName)
+		case schemas.DescribeMailboxExportJobResponse_S3Path:
+			v.S3Path = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_S3Path, v.S3Path)
+		case schemas.DescribeMailboxExportJobResponse_S3Prefix:
+			v.S3Prefix = new(string)
+			return d.ReadString(schemas.DescribeMailboxExportJobResponse_S3Prefix, v.S3Prefix)
+		case schemas.DescribeMailboxExportJobResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMailboxExportJobResponse_StartTime, v.StartTime)
+		case schemas.DescribeMailboxExportJobResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMailboxExportJobResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.MailboxExportJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMailboxExportJob, schemas.DescribeMailboxExportJobRequest, schemas.DescribeMailboxExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMailboxExportJob, schemas.DescribeMailboxExportJobRequest, schemas.DescribeMailboxExportJobResponse), output: &DescribeMailboxExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMailboxExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMailboxExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeMailboxExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMailboxExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +228,8 @@ func (c *Client) addOperationDescribeMailboxExportJobMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeMailboxExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMailboxExportJob",
-	}
 }

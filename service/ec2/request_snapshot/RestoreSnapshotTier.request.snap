@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RestoreSnapshotTier&DryRun=true&PermanentRestore=true&SnapshotId=__SnapshotId__&TemporaryRestoreDays=1&Version=2016-11-15

@@ -1,0 +1,5 @@
+POST /identities/CreateConsentPortal
+
+Content-Type: application/json
+
+{"description":"__Description__","executionRoleArn":"__ExecutionRoleArn__","idpConfig":{"audience":"__Audience__","credentialProviderArn":"__CredentialProviderArn__","scopes":["__Member__","__Member__"]},"name":"__Name__","sources":[{"identifier":"__Identifier__","type":"agentcore-gateway"},{"identifier":"__Identifier__","type":"agentcore-gateway"}],"tags":{"key0":"__Value__"}}

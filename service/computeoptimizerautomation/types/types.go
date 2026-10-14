@@ -720,7 +720,8 @@ func (v *Criteria) Deserialize(d smithy.ShapeDeserializer) error {
 // with comparison operators.
 type DoubleCriteriaCondition struct {
 
-	// The comparison operator to use, such as equals, greater than, less than, etc.
+	// The comparison operator used to evaluate the attribute against the specified
+	// values.
 	Comparison ComparisonOperator
 
 	// The list of double values to compare against using the specified comparison
@@ -972,7 +973,8 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 // operators.
 type IntegerCriteriaCondition struct {
 
-	// The comparison operator to use, such as equals, greater than, less than, etc.
+	// The comparison operator used to evaluate the attribute against the specified
+	// values.
 	Comparison ComparisonOperator
 
 	// The list of integer values to compare against using the specified comparison
@@ -1630,8 +1632,8 @@ func (v *ResourceDetailsMemberEbsVolume) Deserialize(d smithy.ShapeDeserializer)
 // comparison operators and values.
 type ResourceTagsCriteriaCondition struct {
 
-	// The comparison operator used to evaluate the tag criteria, such as equals, not
-	// equals, or contains.
+	// The comparison operator used to evaluate the attribute against the specified
+	// values.
 	Comparison ComparisonOperator
 
 	// The tag key to use for comparison when filtering resources.
@@ -1795,8 +1797,8 @@ func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
 // operators and target values.
 type StringCriteriaCondition struct {
 
-	// The comparison operator used to evaluate the string criteria, such as equals,
-	// not equals, or contains.
+	// The comparison operator used to evaluate the attribute against the specified
+	// values.
 	Comparison ComparisonOperator
 
 	// List of string values to compare against when applying the criteria condition.

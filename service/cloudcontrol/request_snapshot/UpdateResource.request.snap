@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CloudApiService.UpdateResource
+
+{"ClientToken":"__ClientToken__","Identifier":"__Identifier__","PatchDocument":"__PatchDocument__","RoleArn":"__RoleArn__","TypeName":"__TypeName__","TypeVersionId":"__TypeVersionId__"}

@@ -1,0 +1,5 @@
+POST /support-permits
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","permit":{"actions":{"allActions":{}},"conditions":[{"allowAfter":946684800},{"allowAfter":946684800}],"resources":{"allResourcesInRegion":{}}},"signingKeyInfo":{"kmsKey":"__SigningKeyInfoMemberKmsKey__"},"supportCaseDisplayId":"__SupportCaseDisplayId__","tags":{"key0":"__Value__"}}

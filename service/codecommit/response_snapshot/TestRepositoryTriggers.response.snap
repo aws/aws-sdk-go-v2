@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.TestRepositoryTriggers
+
+{"failedExecutions":[{"failureMessage":"__FailureMessage__","trigger":"__Trigger__"},{"failureMessage":"__FailureMessage__","trigger":"__Trigger__"}],"successfulExecutions":["__Member__","__Member__"]}

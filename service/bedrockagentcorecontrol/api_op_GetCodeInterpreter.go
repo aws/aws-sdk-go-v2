@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type GetCodeInterpreterInput struct {
 	CodeInterpreterId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCodeInterpreterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeInterpreterId != nil {
-		s.WriteString(schemas.GetCodeInterpreterRequest_codeInterpreterId, *v.CodeInterpreterId)
-	}
 }
 
 type GetCodeInterpreterOutput struct {
@@ -102,124 +85,39 @@ type GetCodeInterpreterOutput struct {
 	// The reason for failure if the code interpreter is in a failed state.
 	FailureReason *string
 
+	// The file system configurations mounted into the code interpreter. Each entry
+	// describes an access point and its mount path.
+	FilesystemConfigurations []types.ToolsFileSystemConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *GetCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCodeInterpreterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCodeInterpreterResponse_certificates:
-			return deserializeCertificates(d, schemas.GetCodeInterpreterResponse_certificates, &v.Certificates)
-		case schemas.GetCodeInterpreterResponse_codeInterpreterArn:
-			v.CodeInterpreterArn = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_codeInterpreterArn, v.CodeInterpreterArn)
-		case schemas.GetCodeInterpreterResponse_codeInterpreterId:
-			v.CodeInterpreterId = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_codeInterpreterId, v.CodeInterpreterId)
-		case schemas.GetCodeInterpreterResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCodeInterpreterResponse_createdAt, v.CreatedAt)
-		case schemas.GetCodeInterpreterResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_description, v.Description)
-		case schemas.GetCodeInterpreterResponse_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.GetCodeInterpreterResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_failureReason, v.FailureReason)
-		case schemas.GetCodeInterpreterResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCodeInterpreterResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetCodeInterpreterResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetCodeInterpreterResponse_name, v.Name)
-		case schemas.GetCodeInterpreterResponse_networkConfiguration:
-			v.NetworkConfiguration = &types.CodeInterpreterNetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.GetCodeInterpreterResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetCodeInterpreterResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CodeInterpreterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCodeInterpreterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreter, schemas.GetCodeInterpreterRequest, schemas.GetCodeInterpreterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreter, schemas.GetCodeInterpreterRequest, schemas.GetCodeInterpreterResponse), output: &GetCodeInterpreterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCodeInterpreter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCodeInterpreterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCodeInterpreter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +132,8 @@ func (c *Client) addOperationGetCodeInterpreterMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCodeInterpreter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCodeInterpreter",
-	}
 }

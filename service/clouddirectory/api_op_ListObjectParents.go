@@ -5,12 +5,8 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists parent objects that are associated with a given object in pagination
@@ -62,35 +58,6 @@ type ListObjectParentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectParentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListObjectParentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListObjectParentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsistencyLevel != "" {
-		s.WriteString(schemas.ListObjectParentsRequest_ConsistencyLevel, string(v.ConsistencyLevel))
-	}
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.ListObjectParentsRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.IncludeAllLinksToEachParent != false {
-		s.WriteBool(schemas.ListObjectParentsRequest_IncludeAllLinksToEachParent, v.IncludeAllLinksToEachParent)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListObjectParentsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListObjectParentsRequest_NextToken, *v.NextToken)
-	}
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.ListObjectParentsRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListObjectParentsOutput struct {
 
 	// The pagination token.
@@ -109,89 +76,29 @@ type ListObjectParentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectParentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListObjectParentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListObjectParentsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListObjectParentsResponse_NextToken, v.NextToken)
-		case schemas.ListObjectParentsResponse_ParentLinks:
-			return deserializeObjectIdentifierAndLinkNameList(d, schemas.ListObjectParentsResponse_ParentLinks, &v.ParentLinks)
-		case schemas.ListObjectParentsResponse_Parents:
-			return deserializeObjectIdentifierToLinkNameMap(d, schemas.ListObjectParentsResponse_Parents, &v.Parents)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListObjectParentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectParents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectParents, schemas.ListObjectParentsRequest, schemas.ListObjectParentsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectParents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectParents, schemas.ListObjectParentsRequest, schemas.ListObjectParentsResponse), output: &ListObjectParentsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectParents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListObjectParentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectParents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +111,6 @@ func (c *Client) addOperationListObjectParentsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -311,11 +212,3 @@ type ListObjectParentsAPIClient interface {
 }
 
 var _ ListObjectParentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListObjectParents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListObjectParents",
-	}
-}

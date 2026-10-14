@@ -5,9 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all of the dedicated IP pools that exist in your Amazon Web Services
@@ -43,6 +43,21 @@ type ListDedicatedIpPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDedicatedIpPoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDedicatedIpPoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDedicatedIpPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDedicatedIpPoolsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListDedicatedIpPoolsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 
@@ -61,74 +76,48 @@ type ListDedicatedIpPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDedicatedIpPoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDedicatedIpPoolsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDedicatedIpPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfDedicatedIpPools(s, schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools, v.DedicatedIpPools)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDedicatedIpPoolsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDedicatedIpPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDedicatedIpPoolsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools:
+			return deserializeListOfDedicatedIpPools(d, schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools, &v.DedicatedIpPools)
+		case schemas.ListDedicatedIpPoolsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDedicatedIpPoolsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDedicatedIpPools, schemas.ListDedicatedIpPoolsRequest, schemas.ListDedicatedIpPoolsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDedicatedIpPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDedicatedIpPools, schemas.ListDedicatedIpPoolsRequest, schemas.ListDedicatedIpPoolsResponse), output: &ListDedicatedIpPoolsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDedicatedIpPools{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDedicatedIpPools"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDedicatedIpPools(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +130,6 @@ func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +234,3 @@ type ListDedicatedIpPoolsAPIClient interface {
 }
 
 var _ ListDedicatedIpPoolsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDedicatedIpPools(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDedicatedIpPools",
-	}
-}

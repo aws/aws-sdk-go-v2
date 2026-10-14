@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/PutMaintenanceStartTime
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥jGatewayArnn__GatewayArn__iHourOfDaylMinuteOfHouriDayOfWeekjDayOfMonth

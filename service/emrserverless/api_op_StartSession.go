@@ -5,12 +5,8 @@ package emrserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and starts a new session on the specified application. The application
@@ -69,36 +65,6 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.StartSessionRequest_applicationId, *v.ApplicationId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartSessionRequest_clientToken, *v.ClientToken)
-	}
-	if v.ConfigurationOverrides != nil {
-		s.WriteStruct(schemas.StartSessionRequest_configurationOverrides)
-		v.ConfigurationOverrides.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.StartSessionRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.IdleTimeoutMinutes != nil {
-		s.WriteInt64(schemas.StartSessionRequest_idleTimeoutMinutes, *v.IdleTimeoutMinutes)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartSessionRequest_name, *v.Name)
-	}
-	serializeTagMap(s, schemas.StartSessionRequest_tags, v.Tags)
-}
-
 type StartSessionOutput struct {
 
 	// The output contains the application ID on which the session was started.
@@ -122,79 +88,23 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartSessionResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.StartSessionResponse_applicationId, v.ApplicationId)
-		case schemas.StartSessionResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.StartSessionResponse_arn, v.Arn)
-		case schemas.StartSessionResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.StartSessionResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSession{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse), output: &StartSessionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -204,12 +114,6 @@ func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpStartSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,12 +126,6 @@ func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,12 +165,4 @@ func (m *idempotencyToken_initializeOpStartSession) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opStartSessionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartSession{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSession",
-	}
 }

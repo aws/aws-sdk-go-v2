@@ -1,0 +1,6 @@
+POST /browsers/__BrowserIdentifier__/sessions/invoke
+
+Content-Type: application/json
+X-Amzn-Browser-Session-Id: __SessionId__
+
+{"action":{"mouseClick":{"button":"LEFT","clickCount":1,"x":1,"y":1}}}

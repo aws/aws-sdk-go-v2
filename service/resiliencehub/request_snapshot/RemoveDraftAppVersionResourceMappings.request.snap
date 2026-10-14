@@ -1,0 +1,5 @@
+POST /remove-draft-app-version-resource-mappings
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appRegistryAppNames":["__Member__","__Member__"],"eksSourceNames":["__Member__","__Member__"],"logicalStackNames":["__Member__","__Member__"],"resourceGroupNames":["__Member__","__Member__"],"resourceNames":["__Member__","__Member__"],"terraformSourceNames":["__Member__","__Member__"]}

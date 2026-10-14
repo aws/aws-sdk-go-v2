@@ -5,10 +5,7 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,23 +44,6 @@ type StartQueryPlanningInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartQueryPlanningInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartQueryPlanningRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartQueryPlanningInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryPlanningContext != nil {
-		s.WriteStruct(schemas.StartQueryPlanningRequest_QueryPlanningContext)
-		v.QueryPlanningContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.StartQueryPlanningRequest_QueryString, *v.QueryString)
-	}
-}
-
 // A structure for the output.
 type StartQueryPlanningOutput struct {
 
@@ -80,73 +60,23 @@ type StartQueryPlanningOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartQueryPlanningOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartQueryPlanningResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartQueryPlanningResponse_QueryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.StartQueryPlanningResponse_QueryId, v.QueryId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartQueryPlanningMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQueryPlanning{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryPlanning, schemas.StartQueryPlanningRequest, schemas.StartQueryPlanningResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQueryPlanning{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryPlanning, schemas.StartQueryPlanningRequest, schemas.StartQueryPlanningResponse), output: &StartQueryPlanningOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartQueryPlanning"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -156,12 +86,6 @@ func (c *Client) addOperationStartQueryPlanningMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStartQueryPlanningValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartQueryPlanning(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +98,6 @@ func (c *Client) addOperationStartQueryPlanningMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -213,12 +131,4 @@ func (m *endpointPrefix_opStartQueryPlanningMiddleware) HandleFinalize(ctx conte
 }
 func addEndpointPrefix_opStartQueryPlanningMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opStartQueryPlanningMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opStartQueryPlanning(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartQueryPlanning",
-	}
 }

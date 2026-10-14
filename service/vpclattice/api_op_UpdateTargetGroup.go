@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified target group.
@@ -42,6 +41,36 @@ type UpdateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTargetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthCheck != nil {
+		s.WriteStruct(schemas.UpdateTargetGroupRequest_healthCheck)
+		v.HealthCheck.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateTargetGroupRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+}
+func (v *UpdateTargetGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTargetGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTargetGroupRequest_healthCheck:
+			v.HealthCheck = &types.HealthCheckConfig{}
+			return v.HealthCheck.Deserialize(d)
+		case schemas.UpdateTargetGroupRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.UpdateTargetGroupRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
@@ -68,77 +97,88 @@ type UpdateTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTargetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateTargetGroupResponse_arn, *v.Arn)
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.UpdateTargetGroupResponse_config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateTargetGroupResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTargetGroupResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTargetGroupResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateTargetGroupResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTargetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTargetGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateTargetGroupResponse_arn, v.Arn)
+		case schemas.UpdateTargetGroupResponse_config:
+			v.Config = &types.TargetGroupConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.UpdateTargetGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateTargetGroupResponse_id, v.Id)
+		case schemas.UpdateTargetGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateTargetGroupResponse_name, v.Name)
+		case schemas.UpdateTargetGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTargetGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetGroupStatus(ev)
+			return nil
+		case schemas.UpdateTargetGroupResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTargetGroupResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TargetGroupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTargetGroup, schemas.UpdateTargetGroupRequest, schemas.UpdateTargetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTargetGroup, schemas.UpdateTargetGroupRequest, schemas.UpdateTargetGroupResponse), output: &UpdateTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTargetGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTargetGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTargetGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTargetGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +193,8 @@ func (c *Client) addOperationUpdateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTargetGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTargetGroup",
-	}
 }

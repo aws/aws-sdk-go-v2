@@ -1,0 +1,5 @@
+POST /list-servers
+
+Content-Type: application/json
+
+{"filterValue":"__FilterValue__","groupIdFilter":[{"name":"ExternalId","value":"__Value__"},{"name":"ExternalId","value":"__Value__"}],"maxResults":1,"nextToken":"__NextToken__","serverCriteria":"NOT_DEFINED","sort":"ASC"}

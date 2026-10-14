@@ -4,13 +4,8 @@ package macie2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetResourceProfileInput struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetResourceProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourceProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.GetResourceProfileRequest_resourceArn, *v.ResourceArn)
-	}
 }
 
 type GetResourceProfileOutput struct {
@@ -83,94 +66,29 @@ type GetResourceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourceProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourceProfileResponse_profileUpdatedAt:
-			v.ProfileUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetResourceProfileResponse_profileUpdatedAt, v.ProfileUpdatedAt)
-		case schemas.GetResourceProfileResponse_sensitivityScore:
-			v.SensitivityScore = new(int32)
-			return d.ReadInt32(schemas.GetResourceProfileResponse_sensitivityScore, v.SensitivityScore)
-		case schemas.GetResourceProfileResponse_sensitivityScoreOverridden:
-			v.SensitivityScoreOverridden = new(bool)
-			return d.ReadBool(schemas.GetResourceProfileResponse_sensitivityScoreOverridden, v.SensitivityScoreOverridden)
-		case schemas.GetResourceProfileResponse_statistics:
-			v.Statistics = &types.ResourceStatistics{}
-			return v.Statistics.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceProfile, schemas.GetResourceProfileRequest, schemas.GetResourceProfileResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceProfile, schemas.GetResourceProfileRequest, schemas.GetResourceProfileResponse), output: &GetResourceProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +103,8 @@ func (c *Client) addOperationGetResourceProfileMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourceProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceProfile",
-	}
 }

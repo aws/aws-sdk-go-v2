@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Edits an Audit Manager assessment.
@@ -55,6 +54,35 @@ type UpdateAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentDescription != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentDescription, *v.AssessmentDescription)
+	}
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.UpdateAssessmentRequest_assessmentName, *v.AssessmentName)
+	}
+	if v.AssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.UpdateAssessmentRequest_assessmentReportsDestination)
+		v.AssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRoles(s, schemas.UpdateAssessmentRequest_roles, v.Roles)
+	if v.Scope != nil {
+		s.WriteStruct(schemas.UpdateAssessmentRequest_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAssessmentOutput struct {
 
 	//  The response object for the UpdateAssessment API. This is the name of the
@@ -67,77 +95,50 @@ type UpdateAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.UpdateAssessmentResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentResponse_assessment:
+			v.Assessment = &types.Assessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessment, schemas.UpdateAssessmentRequest, schemas.UpdateAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessment, schemas.UpdateAssessmentRequest, schemas.UpdateAssessmentResponse), output: &UpdateAssessmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssessment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAssessment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAssessmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssessment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +153,8 @@ func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAssessment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAssessment",
-	}
 }

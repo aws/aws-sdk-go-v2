@@ -5,10 +5,10 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of router network interfaces in AWS Elemental MediaConnect.
@@ -41,6 +41,22 @@ type ListRouterNetworkInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRouterNetworkInterfacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRouterNetworkInterfacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRouterNetworkInterfacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterNetworkInterfaceFilterList(s, schemas.ListRouterNetworkInterfacesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRouterNetworkInterfacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRouterNetworkInterfacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRouterNetworkInterfacesOutput struct {
 
 	// The summary information for the retrieved router network interfaces.
@@ -57,74 +73,48 @@ type ListRouterNetworkInterfacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRouterNetworkInterfacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRouterNetworkInterfacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRouterNetworkInterfacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRouterNetworkInterfacesResponse_NextToken, *v.NextToken)
+	}
+	serializeListedRouterNetworkInterfaceList(s, schemas.ListRouterNetworkInterfacesResponse_RouterNetworkInterfaces, v.RouterNetworkInterfaces)
+}
+func (v *ListRouterNetworkInterfacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRouterNetworkInterfacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRouterNetworkInterfacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRouterNetworkInterfacesResponse_NextToken, v.NextToken)
+		case schemas.ListRouterNetworkInterfacesResponse_RouterNetworkInterfaces:
+			return deserializeListedRouterNetworkInterfaceList(d, schemas.ListRouterNetworkInterfacesResponse_RouterNetworkInterfaces, &v.RouterNetworkInterfaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRouterNetworkInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouterNetworkInterfaces, schemas.ListRouterNetworkInterfacesRequest, schemas.ListRouterNetworkInterfacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRouterNetworkInterfaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouterNetworkInterfaces, schemas.ListRouterNetworkInterfacesRequest, schemas.ListRouterNetworkInterfacesResponse), output: &ListRouterNetworkInterfacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRouterNetworkInterfaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRouterNetworkInterfaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRouterNetworkInterfaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,12 +127,6 @@ func (c *Client) addOperationListRouterNetworkInterfacesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +230,3 @@ type ListRouterNetworkInterfacesAPIClient interface {
 }
 
 var _ ListRouterNetworkInterfacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRouterNetworkInterfaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRouterNetworkInterfaces",
-	}
-}

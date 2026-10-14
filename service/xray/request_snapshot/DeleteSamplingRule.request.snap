@@ -1,0 +1,5 @@
+POST /DeleteSamplingRule
+
+Content-Type: application/json
+
+{"RuleARN":"__RuleARN__","RuleName":"__RuleName__"}

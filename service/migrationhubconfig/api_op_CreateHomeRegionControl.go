@@ -4,13 +4,10 @@ package migrationhubconfig
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API sets up the home region for the calling account only.
@@ -81,6 +78,19 @@ type CreateHomeRegionControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHomeRegionControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHomeRegionControlResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHomeRegionControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HomeRegionControl != nil {
+		s.WriteStruct(schemas.CreateHomeRegionControlResult_HomeRegionControl)
+		v.HomeRegionControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *CreateHomeRegionControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateHomeRegionControlResult, func(s *smithy.Schema) error {
 		switch s {
@@ -92,74 +102,26 @@ func (v *CreateHomeRegionControlOutput) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 func (c *Client) addOperationCreateHomeRegionControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHomeRegionControl, schemas.CreateHomeRegionControlRequest, schemas.CreateHomeRegionControlResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHomeRegionControl, schemas.CreateHomeRegionControlRequest, schemas.CreateHomeRegionControlResult), output: &CreateHomeRegionControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHomeRegionControl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateHomeRegionControlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHomeRegionControl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +136,8 @@ func (c *Client) addOperationCreateHomeRegionControlMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateHomeRegionControl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateHomeRegionControl",
-	}
 }

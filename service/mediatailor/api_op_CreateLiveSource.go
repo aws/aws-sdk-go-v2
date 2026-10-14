@@ -4,11 +4,10 @@ package mediatailor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -55,6 +54,40 @@ type CreateLiveSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLiveSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLiveSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLiveSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.LiveSourceName != nil {
+		s.WriteString(schemas.CreateLiveSourceRequest_LiveSourceName, *v.LiveSourceName)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.CreateLiveSourceRequest_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.CreateLiveSourceRequest_Tags, v.Tags)
+}
+func (v *CreateLiveSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLiveSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLiveSourceRequest_HttpPackageConfigurations:
+			return deserializeHttpPackageConfigurations(d, schemas.CreateLiveSourceRequest_HttpPackageConfigurations, &v.HttpPackageConfigurations)
+		case schemas.CreateLiveSourceRequest_LiveSourceName:
+			v.LiveSourceName = new(string)
+			return d.ReadString(schemas.CreateLiveSourceRequest_LiveSourceName, v.LiveSourceName)
+		case schemas.CreateLiveSourceRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.CreateLiveSourceRequest_SourceLocationName, v.SourceLocationName)
+		case schemas.CreateLiveSourceRequest_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateLiveSourceRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateLiveSourceOutput struct {
 
 	// The ARN to assign to the live source.
@@ -88,77 +121,78 @@ type CreateLiveSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLiveSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLiveSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLiveSourceResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateLiveSourceResponse_CreationTime, *v.CreationTime)
+	}
+	serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateLiveSourceResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LiveSourceName != nil {
+		s.WriteString(schemas.CreateLiveSourceResponse_LiveSourceName, *v.LiveSourceName)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.CreateLiveSourceResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.CreateLiveSourceResponse_Tags, v.Tags)
+}
+func (v *CreateLiveSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLiveSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLiveSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLiveSourceResponse_Arn, v.Arn)
+		case schemas.CreateLiveSourceResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateLiveSourceResponse_CreationTime, v.CreationTime)
+		case schemas.CreateLiveSourceResponse_HttpPackageConfigurations:
+			return deserializeHttpPackageConfigurations(d, schemas.CreateLiveSourceResponse_HttpPackageConfigurations, &v.HttpPackageConfigurations)
+		case schemas.CreateLiveSourceResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateLiveSourceResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CreateLiveSourceResponse_LiveSourceName:
+			v.LiveSourceName = new(string)
+			return d.ReadString(schemas.CreateLiveSourceResponse_LiveSourceName, v.LiveSourceName)
+		case schemas.CreateLiveSourceResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.CreateLiveSourceResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.CreateLiveSourceResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateLiveSourceResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLiveSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLiveSource, schemas.CreateLiveSourceRequest, schemas.CreateLiveSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLiveSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLiveSource, schemas.CreateLiveSourceRequest, schemas.CreateLiveSourceResponse), output: &CreateLiveSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLiveSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLiveSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLiveSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLiveSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +207,8 @@ func (c *Client) addOperationCreateLiveSourceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLiveSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLiveSource",
-	}
 }

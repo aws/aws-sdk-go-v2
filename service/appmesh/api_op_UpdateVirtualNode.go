@@ -5,10 +5,10 @@ package appmesh
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing virtual node in a specified service mesh.
@@ -58,6 +58,54 @@ type UpdateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateVirtualNodeInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *UpdateVirtualNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualNodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualNodeInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_clientToken, v.ClientToken)
+		case schemas.UpdateVirtualNodeInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_meshName, v.MeshName)
+		case schemas.UpdateVirtualNodeInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_meshOwner, v.MeshOwner)
+		case schemas.UpdateVirtualNodeInput_spec:
+			v.Spec = &types.VirtualNodeSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.UpdateVirtualNodeInput_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 type UpdateVirtualNodeOutput struct {
 
 	// A full description of the virtual node that was updated.
@@ -71,65 +119,44 @@ type UpdateVirtualNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNode != nil {
+		s.WriteStruct(schemas.UpdateVirtualNodeOutput_virtualNode)
+		v.VirtualNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVirtualNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualNodeOutput_virtualNode:
+			v.VirtualNode = &types.VirtualNodeData{}
+			return v.VirtualNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualNode, schemas.UpdateVirtualNodeInput, schemas.UpdateVirtualNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualNode, schemas.UpdateVirtualNodeInput, schemas.UpdateVirtualNodeOutput), output: &UpdateVirtualNodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVirtualNode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVirtualNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -139,12 +166,6 @@ func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpUpdateVirtualNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVirtualNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +178,6 @@ func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -202,12 +217,4 @@ func (m *idempotencyToken_initializeOpUpdateVirtualNode) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opUpdateVirtualNodeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateVirtualNode{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateVirtualNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateVirtualNode",
-	}
 }

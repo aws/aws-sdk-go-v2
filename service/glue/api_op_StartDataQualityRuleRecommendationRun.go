@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a recommendation run that is used to generate rules when you don't know
@@ -40,10 +39,17 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	// This member is required.
 	DataSource *types.DataSource
 
-	// An IAM role supplied to encrypt the results of the run.
+	// The IAM role that Glue assumes to access resources for the run.
+	//
+	// For more information, see [Configure IAM permissions for Glue Data Quality].
+	//
+	// [Configure IAM permissions for Glue Data Quality]: https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html
 	//
 	// This member is required.
 	Role *string
+
+	// Additional run options you can specify for a recommendation run.
+	AdditionalRunOptions *types.DataQualityRuleRecommendationRunAdditionalRunOptions
 
 	// Used for idempotency and is recommended to be set to a random ID (such as a
 	// UUID) to avoid creating or starting multiple instances of the same resource.
@@ -59,12 +65,57 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
+	// The mode that Glue Data Quality uses to recommend rules.
+	//
+	// The default is BASIC .
+	RecommendationMode types.RecommendationMode
+
 	// The timeout for a run in minutes. This is the maximum time that a run can
 	// consume resources before it is terminated and enters TIMEOUT status. The
 	// default is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartDataQualityRuleRecommendationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRuleRecommendationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRunOptions != nil {
+		s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest_AdditionalRunOptions)
+		v.AdditionalRunOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CreatedRulesetName != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_CreatedRulesetName, *v.CreatedRulesetName)
+	}
+	if v.DataQualitySecurityConfiguration != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_DataQualitySecurityConfiguration, *v.DataQualitySecurityConfiguration)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.StartDataQualityRuleRecommendationRunRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.RecommendationMode != "" {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_RecommendationMode, string(v.RecommendationMode))
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_Role, *v.Role)
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.StartDataQualityRuleRecommendationRunRequest_Timeout, *v.Timeout)
+	}
 }
 
 type StartDataQualityRuleRecommendationRunOutput struct {
@@ -78,77 +129,48 @@ type StartDataQualityRuleRecommendationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRuleRecommendationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRuleRecommendationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StartDataQualityRuleRecommendationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataQualityRuleRecommendationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataQualityRuleRecommendationRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartDataQualityRuleRecommendationRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataQualityRuleRecommendationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRuleRecommendationRun, schemas.StartDataQualityRuleRecommendationRunRequest, schemas.StartDataQualityRuleRecommendationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataQualityRuleRecommendationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRuleRecommendationRun, schemas.StartDataQualityRuleRecommendationRunRequest, schemas.StartDataQualityRuleRecommendationRunResponse), output: &StartDataQualityRuleRecommendationRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataQualityRuleRecommendationRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDataQualityRuleRecommendationRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDataQualityRuleRecommendationRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataQualityRuleRecommendationRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +185,8 @@ func (c *Client) addOperationStartDataQualityRuleRecommendationRunMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDataQualityRuleRecommendationRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDataQualityRuleRecommendationRun",
-	}
 }

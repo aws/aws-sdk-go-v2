@@ -1,0 +1,5 @@
+POST /actions
+
+Content-Type: application/json
+
+{"actions":[{"actionId":"__ActionId__","properties":"__Properties__"},{"actionId":"__ActionId__","properties":"__Properties__"}],"datasetArn":"__DatasetArn__"}

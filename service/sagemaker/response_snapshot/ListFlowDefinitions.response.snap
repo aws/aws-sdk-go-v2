@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListFlowDefinitions
+
+{"FlowDefinitionSummaries":[{"CreationTime":946684800,"FailureReason":"__FailureReason__","FlowDefinitionArn":"__FlowDefinitionArn__","FlowDefinitionName":"__FlowDefinitionName__","FlowDefinitionStatus":"Initializing"},{"CreationTime":946684800,"FailureReason":"__FailureReason__","FlowDefinitionArn":"__FlowDefinitionArn__","FlowDefinitionName":"__FlowDefinitionName__","FlowDefinitionStatus":"Initializing"}],"NextToken":"__NextToken__"}

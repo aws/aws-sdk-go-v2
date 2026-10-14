@@ -1,0 +1,5 @@
+GET /?delimiter=__Delimiter__&encoding-type=url&key-marker=__KeyMarker__&max-uploads=1&prefix=__Prefix__&upload-id-marker=__UploadIdMarker__&uploads=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+

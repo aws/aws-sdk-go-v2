@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,6 +22,31 @@ type ActivitiesResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivitiesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivitiesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfActivityResponse(s, schemas.ActivitiesResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ActivitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ActivitiesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivitiesResponse_Item:
+			return deserializeListOfActivityResponse(d, schemas.ActivitiesResponse_Item, &v.Item)
+		case schemas.ActivitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ActivitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration and other settings for an activity in a journey.
@@ -73,6 +100,108 @@ type Activity struct {
 	Wait *WaitActivity
 
 	noSmithyDocumentSerde
+}
+
+func (v *Activity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Activity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Activity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CUSTOM != nil {
+		s.WriteStruct(schemas.Activity_CUSTOM)
+		v.CUSTOM.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConditionalSplit != nil {
+		s.WriteStruct(schemas.Activity_ConditionalSplit)
+		v.ConditionalSplit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactCenter != nil {
+		s.WriteStruct(schemas.Activity_ContactCenter)
+		v.ContactCenter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Activity_Description, *v.Description)
+	}
+	if v.EMAIL != nil {
+		s.WriteStruct(schemas.Activity_EMAIL)
+		v.EMAIL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Holdout != nil {
+		s.WriteStruct(schemas.Activity_Holdout)
+		v.Holdout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiCondition != nil {
+		s.WriteStruct(schemas.Activity_MultiCondition)
+		v.MultiCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PUSH != nil {
+		s.WriteStruct(schemas.Activity_PUSH)
+		v.PUSH.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RandomSplit != nil {
+		s.WriteStruct(schemas.Activity_RandomSplit)
+		v.RandomSplit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMS != nil {
+		s.WriteStruct(schemas.Activity_SMS)
+		v.SMS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Wait != nil {
+		s.WriteStruct(schemas.Activity_Wait)
+		v.Wait.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Activity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Activity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Activity_CUSTOM:
+			v.CUSTOM = &CustomMessageActivity{}
+			return v.CUSTOM.Deserialize(d)
+		case schemas.Activity_ConditionalSplit:
+			v.ConditionalSplit = &ConditionalSplitActivity{}
+			return v.ConditionalSplit.Deserialize(d)
+		case schemas.Activity_ContactCenter:
+			v.ContactCenter = &ContactCenterActivity{}
+			return v.ContactCenter.Deserialize(d)
+		case schemas.Activity_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Activity_Description, v.Description)
+		case schemas.Activity_EMAIL:
+			v.EMAIL = &EmailMessageActivity{}
+			return v.EMAIL.Deserialize(d)
+		case schemas.Activity_Holdout:
+			v.Holdout = &HoldoutActivity{}
+			return v.Holdout.Deserialize(d)
+		case schemas.Activity_MultiCondition:
+			v.MultiCondition = &MultiConditionalSplitActivity{}
+			return v.MultiCondition.Deserialize(d)
+		case schemas.Activity_PUSH:
+			v.PUSH = &PushMessageActivity{}
+			return v.PUSH.Deserialize(d)
+		case schemas.Activity_RandomSplit:
+			v.RandomSplit = &RandomSplitActivity{}
+			return v.RandomSplit.Deserialize(d)
+		case schemas.Activity_SMS:
+			v.SMS = &SMSMessageActivity{}
+			return v.SMS.Deserialize(d)
+		case schemas.Activity_Wait:
+			v.Wait = &WaitActivity{}
+			return v.Wait.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides information about an activity that was performed by a campaign.
@@ -139,6 +268,103 @@ type ActivityResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ActivityResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignId != nil {
+		s.WriteString(schemas.ActivityResponse_CampaignId, *v.CampaignId)
+	}
+	if v.End != nil {
+		s.WriteString(schemas.ActivityResponse_End, *v.End)
+	}
+	serializeMapOf__string(s, schemas.ActivityResponse_ExecutionMetrics, v.ExecutionMetrics)
+	if v.Id != nil {
+		s.WriteString(schemas.ActivityResponse_Id, *v.Id)
+	}
+	if v.Result != nil {
+		s.WriteString(schemas.ActivityResponse_Result, *v.Result)
+	}
+	if v.ScheduledStart != nil {
+		s.WriteString(schemas.ActivityResponse_ScheduledStart, *v.ScheduledStart)
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.ActivityResponse_Start, *v.Start)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ActivityResponse_State, *v.State)
+	}
+	if v.SuccessfulEndpointCount != nil {
+		s.WriteInt32(schemas.ActivityResponse_SuccessfulEndpointCount, *v.SuccessfulEndpointCount)
+	}
+	if v.TimezonesCompletedCount != nil {
+		s.WriteInt32(schemas.ActivityResponse_TimezonesCompletedCount, *v.TimezonesCompletedCount)
+	}
+	if v.TimezonesTotalCount != nil {
+		s.WriteInt32(schemas.ActivityResponse_TimezonesTotalCount, *v.TimezonesTotalCount)
+	}
+	if v.TotalEndpointCount != nil {
+		s.WriteInt32(schemas.ActivityResponse_TotalEndpointCount, *v.TotalEndpointCount)
+	}
+	if v.TreatmentId != nil {
+		s.WriteString(schemas.ActivityResponse_TreatmentId, *v.TreatmentId)
+	}
+}
+func (v *ActivityResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ActivityResponse_ApplicationId, v.ApplicationId)
+		case schemas.ActivityResponse_CampaignId:
+			v.CampaignId = new(string)
+			return d.ReadString(schemas.ActivityResponse_CampaignId, v.CampaignId)
+		case schemas.ActivityResponse_End:
+			v.End = new(string)
+			return d.ReadString(schemas.ActivityResponse_End, v.End)
+		case schemas.ActivityResponse_ExecutionMetrics:
+			return deserializeMapOf__string(d, schemas.ActivityResponse_ExecutionMetrics, &v.ExecutionMetrics)
+		case schemas.ActivityResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ActivityResponse_Id, v.Id)
+		case schemas.ActivityResponse_Result:
+			v.Result = new(string)
+			return d.ReadString(schemas.ActivityResponse_Result, v.Result)
+		case schemas.ActivityResponse_ScheduledStart:
+			v.ScheduledStart = new(string)
+			return d.ReadString(schemas.ActivityResponse_ScheduledStart, v.ScheduledStart)
+		case schemas.ActivityResponse_Start:
+			v.Start = new(string)
+			return d.ReadString(schemas.ActivityResponse_Start, v.Start)
+		case schemas.ActivityResponse_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ActivityResponse_State, v.State)
+		case schemas.ActivityResponse_SuccessfulEndpointCount:
+			v.SuccessfulEndpointCount = new(int32)
+			return d.ReadInt32(schemas.ActivityResponse_SuccessfulEndpointCount, v.SuccessfulEndpointCount)
+		case schemas.ActivityResponse_TimezonesCompletedCount:
+			v.TimezonesCompletedCount = new(int32)
+			return d.ReadInt32(schemas.ActivityResponse_TimezonesCompletedCount, v.TimezonesCompletedCount)
+		case schemas.ActivityResponse_TimezonesTotalCount:
+			v.TimezonesTotalCount = new(int32)
+			return d.ReadInt32(schemas.ActivityResponse_TimezonesTotalCount, v.TimezonesTotalCount)
+		case schemas.ActivityResponse_TotalEndpointCount:
+			v.TotalEndpointCount = new(int32)
+			return d.ReadInt32(schemas.ActivityResponse_TotalEndpointCount, v.TotalEndpointCount)
+		case schemas.ActivityResponse_TreatmentId:
+			v.TreatmentId = new(string)
+			return d.ReadString(schemas.ActivityResponse_TreatmentId, v.TreatmentId)
+		}
+		return nil
+	})
+}
+
 // Specifies address-based configuration settings for a message that's sent
 // directly to an endpoint.
 type AddressConfiguration struct {
@@ -174,6 +400,56 @@ type AddressConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddressConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BodyOverride != nil {
+		s.WriteString(schemas.AddressConfiguration_BodyOverride, *v.BodyOverride)
+	}
+	if v.ChannelType != "" {
+		s.WriteString(schemas.AddressConfiguration_ChannelType, string(v.ChannelType))
+	}
+	serializeMapOf__string(s, schemas.AddressConfiguration_Context, v.Context)
+	if v.RawContent != nil {
+		s.WriteString(schemas.AddressConfiguration_RawContent, *v.RawContent)
+	}
+	serializeMapOfListOf__string(s, schemas.AddressConfiguration_Substitutions, v.Substitutions)
+	if v.TitleOverride != nil {
+		s.WriteString(schemas.AddressConfiguration_TitleOverride, *v.TitleOverride)
+	}
+}
+func (v *AddressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressConfiguration_BodyOverride:
+			v.BodyOverride = new(string)
+			return d.ReadString(schemas.AddressConfiguration_BodyOverride, v.BodyOverride)
+		case schemas.AddressConfiguration_ChannelType:
+			var ev string
+			if err := d.ReadString(schemas.AddressConfiguration_ChannelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.AddressConfiguration_Context:
+			return deserializeMapOf__string(d, schemas.AddressConfiguration_Context, &v.Context)
+		case schemas.AddressConfiguration_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.AddressConfiguration_RawContent, v.RawContent)
+		case schemas.AddressConfiguration_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.AddressConfiguration_Substitutions, &v.Substitutions)
+		case schemas.AddressConfiguration_TitleOverride:
+			v.TitleOverride = new(string)
+			return d.ReadString(schemas.AddressConfiguration_TitleOverride, v.TitleOverride)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the ADM (Amazon Device Messaging) channel
 // for an application.
 type ADMChannelRequest struct {
@@ -192,6 +468,40 @@ type ADMChannelRequest struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ADMChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ADMChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ADMChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ADMChannelRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.ADMChannelRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ADMChannelRequest_Enabled, *v.Enabled)
+	}
+}
+func (v *ADMChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ADMChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ADMChannelRequest_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ADMChannelRequest_ClientId, v.ClientId)
+		case schemas.ADMChannelRequest_ClientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.ADMChannelRequest_ClientSecret, v.ClientSecret)
+		case schemas.ADMChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ADMChannelRequest_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the ADM (Amazon Device
@@ -233,6 +543,82 @@ type ADMChannelResponse struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ADMChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ADMChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ADMChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ADMChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ADMChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ADMChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.ADMChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ADMChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.ADMChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.ADMChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.ADMChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.ADMChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.ADMChannelResponse_Version, *v.Version)
+	}
+}
+func (v *ADMChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ADMChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ADMChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.ADMChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_CreationDate, v.CreationDate)
+		case schemas.ADMChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ADMChannelResponse_Enabled, v.Enabled)
+		case schemas.ADMChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.ADMChannelResponse_HasCredential, v.HasCredential)
+		case schemas.ADMChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_Id, v.Id)
+		case schemas.ADMChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.ADMChannelResponse_IsArchived, v.IsArchived)
+		case schemas.ADMChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.ADMChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.ADMChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.ADMChannelResponse_Platform, v.Platform)
+		case schemas.ADMChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.ADMChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -318,6 +704,116 @@ type ADMMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ADMMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ADMMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ADMMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ADMMessage_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.ADMMessage_Body, *v.Body)
+	}
+	if v.ConsolidationKey != nil {
+		s.WriteString(schemas.ADMMessage_ConsolidationKey, *v.ConsolidationKey)
+	}
+	serializeMapOf__string(s, schemas.ADMMessage_Data, v.Data)
+	if v.ExpiresAfter != nil {
+		s.WriteString(schemas.ADMMessage_ExpiresAfter, *v.ExpiresAfter)
+	}
+	if v.IconReference != nil {
+		s.WriteString(schemas.ADMMessage_IconReference, *v.IconReference)
+	}
+	if v.ImageIconUrl != nil {
+		s.WriteString(schemas.ADMMessage_ImageIconUrl, *v.ImageIconUrl)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.ADMMessage_ImageUrl, *v.ImageUrl)
+	}
+	if v.MD5 != nil {
+		s.WriteString(schemas.ADMMessage_MD5, *v.MD5)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.ADMMessage_RawContent, *v.RawContent)
+	}
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.ADMMessage_SilentPush, *v.SilentPush)
+	}
+	if v.SmallImageIconUrl != nil {
+		s.WriteString(schemas.ADMMessage_SmallImageIconUrl, *v.SmallImageIconUrl)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.ADMMessage_Sound, *v.Sound)
+	}
+	serializeMapOfListOf__string(s, schemas.ADMMessage_Substitutions, v.Substitutions)
+	if v.Title != nil {
+		s.WriteString(schemas.ADMMessage_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.ADMMessage_Url, *v.Url)
+	}
+}
+func (v *ADMMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ADMMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ADMMessage_Action:
+			var ev string
+			if err := d.ReadString(schemas.ADMMessage_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.ADMMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.ADMMessage_Body, v.Body)
+		case schemas.ADMMessage_ConsolidationKey:
+			v.ConsolidationKey = new(string)
+			return d.ReadString(schemas.ADMMessage_ConsolidationKey, v.ConsolidationKey)
+		case schemas.ADMMessage_Data:
+			return deserializeMapOf__string(d, schemas.ADMMessage_Data, &v.Data)
+		case schemas.ADMMessage_ExpiresAfter:
+			v.ExpiresAfter = new(string)
+			return d.ReadString(schemas.ADMMessage_ExpiresAfter, v.ExpiresAfter)
+		case schemas.ADMMessage_IconReference:
+			v.IconReference = new(string)
+			return d.ReadString(schemas.ADMMessage_IconReference, v.IconReference)
+		case schemas.ADMMessage_ImageIconUrl:
+			v.ImageIconUrl = new(string)
+			return d.ReadString(schemas.ADMMessage_ImageIconUrl, v.ImageIconUrl)
+		case schemas.ADMMessage_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.ADMMessage_ImageUrl, v.ImageUrl)
+		case schemas.ADMMessage_MD5:
+			v.MD5 = new(string)
+			return d.ReadString(schemas.ADMMessage_MD5, v.MD5)
+		case schemas.ADMMessage_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.ADMMessage_RawContent, v.RawContent)
+		case schemas.ADMMessage_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.ADMMessage_SilentPush, v.SilentPush)
+		case schemas.ADMMessage_SmallImageIconUrl:
+			v.SmallImageIconUrl = new(string)
+			return d.ReadString(schemas.ADMMessage_SmallImageIconUrl, v.SmallImageIconUrl)
+		case schemas.ADMMessage_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.ADMMessage_Sound, v.Sound)
+		case schemas.ADMMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.ADMMessage_Substitutions, &v.Substitutions)
+		case schemas.ADMMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ADMMessage_Title, v.Title)
+		case schemas.ADMMessage_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.ADMMessage_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies channel-specific content and settings for a message template that can
 // be used in push notifications that are sent through the ADM (Amazon Device
 // Messaging), Baidu (Baidu Cloud Push), or GCM (Firebase Cloud Messaging, formerly
@@ -376,6 +872,80 @@ type AndroidPushNotificationTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AndroidPushNotificationTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AndroidPushNotificationTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AndroidPushNotificationTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_Body, *v.Body)
+	}
+	if v.ImageIconUrl != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_ImageIconUrl, *v.ImageIconUrl)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_ImageUrl, *v.ImageUrl)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_RawContent, *v.RawContent)
+	}
+	if v.SmallImageIconUrl != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_SmallImageIconUrl, *v.SmallImageIconUrl)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_Sound, *v.Sound)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.AndroidPushNotificationTemplate_Url, *v.Url)
+	}
+}
+func (v *AndroidPushNotificationTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AndroidPushNotificationTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AndroidPushNotificationTemplate_Action:
+			var ev string
+			if err := d.ReadString(schemas.AndroidPushNotificationTemplate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.AndroidPushNotificationTemplate_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_Body, v.Body)
+		case schemas.AndroidPushNotificationTemplate_ImageIconUrl:
+			v.ImageIconUrl = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_ImageIconUrl, v.ImageIconUrl)
+		case schemas.AndroidPushNotificationTemplate_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_ImageUrl, v.ImageUrl)
+		case schemas.AndroidPushNotificationTemplate_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_RawContent, v.RawContent)
+		case schemas.AndroidPushNotificationTemplate_SmallImageIconUrl:
+			v.SmallImageIconUrl = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_SmallImageIconUrl, v.SmallImageIconUrl)
+		case schemas.AndroidPushNotificationTemplate_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_Sound, v.Sound)
+		case schemas.AndroidPushNotificationTemplate_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_Title, v.Title)
+		case schemas.AndroidPushNotificationTemplate_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.AndroidPushNotificationTemplate_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // channel for an application.
 type APNSChannelRequest struct {
@@ -411,6 +981,70 @@ type APNSChannelRequest struct {
 	TokenKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *APNSChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.APNSChannelRequest_BundleId, *v.BundleId)
+	}
+	if v.Certificate != nil {
+		s.WriteString(schemas.APNSChannelRequest_Certificate, *v.Certificate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSChannelRequest_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.APNSChannelRequest_PrivateKey, *v.PrivateKey)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.APNSChannelRequest_TeamId, *v.TeamId)
+	}
+	if v.TokenKey != nil {
+		s.WriteString(schemas.APNSChannelRequest_TokenKey, *v.TokenKey)
+	}
+	if v.TokenKeyId != nil {
+		s.WriteString(schemas.APNSChannelRequest_TokenKeyId, *v.TokenKeyId)
+	}
+}
+func (v *APNSChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSChannelRequest_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_BundleId, v.BundleId)
+		case schemas.APNSChannelRequest_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_Certificate, v.Certificate)
+		case schemas.APNSChannelRequest_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSChannelRequest_Enabled, v.Enabled)
+		case schemas.APNSChannelRequest_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_PrivateKey, v.PrivateKey)
+		case schemas.APNSChannelRequest_TeamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_TeamId, v.TeamId)
+		case schemas.APNSChannelRequest_TokenKey:
+			v.TokenKey = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_TokenKey, v.TokenKey)
+		case schemas.APNSChannelRequest_TokenKeyId:
+			v.TokenKeyId = new(string)
+			return d.ReadString(schemas.APNSChannelRequest_TokenKeyId, v.TokenKeyId)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -461,6 +1095,94 @@ type APNSChannelResponse struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *APNSChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.APNSChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.APNSChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSChannelResponse_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.APNSChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.HasTokenKey != nil {
+		s.WriteBool(schemas.APNSChannelResponse_HasTokenKey, *v.HasTokenKey)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.APNSChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.APNSChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.APNSChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.APNSChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.APNSChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.APNSChannelResponse_Version, *v.Version)
+	}
+}
+func (v *APNSChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.APNSChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_CreationDate, v.CreationDate)
+		case schemas.APNSChannelResponse_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSChannelResponse_Enabled, v.Enabled)
+		case schemas.APNSChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.APNSChannelResponse_HasCredential, v.HasCredential)
+		case schemas.APNSChannelResponse_HasTokenKey:
+			v.HasTokenKey = new(bool)
+			return d.ReadBool(schemas.APNSChannelResponse_HasTokenKey, v.HasTokenKey)
+		case schemas.APNSChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_Id, v.Id)
+		case schemas.APNSChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.APNSChannelResponse_IsArchived, v.IsArchived)
+		case schemas.APNSChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.APNSChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.APNSChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.APNSChannelResponse_Platform, v.Platform)
+		case schemas.APNSChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.APNSChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -638,6 +1360,128 @@ type APNSMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APNSMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSPushType != nil {
+		s.WriteString(schemas.APNSMessage_APNSPushType, *v.APNSPushType)
+	}
+	if v.Action != "" {
+		s.WriteString(schemas.APNSMessage_Action, string(v.Action))
+	}
+	if v.Badge != nil {
+		s.WriteInt32(schemas.APNSMessage_Badge, *v.Badge)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.APNSMessage_Body, *v.Body)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.APNSMessage_Category, *v.Category)
+	}
+	if v.CollapseId != nil {
+		s.WriteString(schemas.APNSMessage_CollapseId, *v.CollapseId)
+	}
+	serializeMapOf__string(s, schemas.APNSMessage_Data, v.Data)
+	if v.MediaUrl != nil {
+		s.WriteString(schemas.APNSMessage_MediaUrl, *v.MediaUrl)
+	}
+	if v.PreferredAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSMessage_PreferredAuthenticationMethod, *v.PreferredAuthenticationMethod)
+	}
+	if v.Priority != nil {
+		s.WriteString(schemas.APNSMessage_Priority, *v.Priority)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.APNSMessage_RawContent, *v.RawContent)
+	}
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.APNSMessage_SilentPush, *v.SilentPush)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.APNSMessage_Sound, *v.Sound)
+	}
+	serializeMapOfListOf__string(s, schemas.APNSMessage_Substitutions, v.Substitutions)
+	if v.ThreadId != nil {
+		s.WriteString(schemas.APNSMessage_ThreadId, *v.ThreadId)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.APNSMessage_TimeToLive, *v.TimeToLive)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.APNSMessage_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.APNSMessage_Url, *v.Url)
+	}
+}
+func (v *APNSMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSMessage_APNSPushType:
+			v.APNSPushType = new(string)
+			return d.ReadString(schemas.APNSMessage_APNSPushType, v.APNSPushType)
+		case schemas.APNSMessage_Action:
+			var ev string
+			if err := d.ReadString(schemas.APNSMessage_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.APNSMessage_Badge:
+			v.Badge = new(int32)
+			return d.ReadInt32(schemas.APNSMessage_Badge, v.Badge)
+		case schemas.APNSMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.APNSMessage_Body, v.Body)
+		case schemas.APNSMessage_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.APNSMessage_Category, v.Category)
+		case schemas.APNSMessage_CollapseId:
+			v.CollapseId = new(string)
+			return d.ReadString(schemas.APNSMessage_CollapseId, v.CollapseId)
+		case schemas.APNSMessage_Data:
+			return deserializeMapOf__string(d, schemas.APNSMessage_Data, &v.Data)
+		case schemas.APNSMessage_MediaUrl:
+			v.MediaUrl = new(string)
+			return d.ReadString(schemas.APNSMessage_MediaUrl, v.MediaUrl)
+		case schemas.APNSMessage_PreferredAuthenticationMethod:
+			v.PreferredAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSMessage_PreferredAuthenticationMethod, v.PreferredAuthenticationMethod)
+		case schemas.APNSMessage_Priority:
+			v.Priority = new(string)
+			return d.ReadString(schemas.APNSMessage_Priority, v.Priority)
+		case schemas.APNSMessage_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.APNSMessage_RawContent, v.RawContent)
+		case schemas.APNSMessage_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.APNSMessage_SilentPush, v.SilentPush)
+		case schemas.APNSMessage_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.APNSMessage_Sound, v.Sound)
+		case schemas.APNSMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.APNSMessage_Substitutions, &v.Substitutions)
+		case schemas.APNSMessage_ThreadId:
+			v.ThreadId = new(string)
+			return d.ReadString(schemas.APNSMessage_ThreadId, v.ThreadId)
+		case schemas.APNSMessage_TimeToLive:
+			v.TimeToLive = new(int32)
+			return d.ReadInt32(schemas.APNSMessage_TimeToLive, v.TimeToLive)
+		case schemas.APNSMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.APNSMessage_Title, v.Title)
+		case schemas.APNSMessage_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.APNSMessage_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies channel-specific content and settings for a message template that can
 // be used in push notifications that are sent through the APNs (Apple Push
 // Notification service) channel.
@@ -688,6 +1532,68 @@ type APNSPushNotificationTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APNSPushNotificationTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSPushNotificationTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSPushNotificationTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.APNSPushNotificationTemplate_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_Body, *v.Body)
+	}
+	if v.MediaUrl != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_MediaUrl, *v.MediaUrl)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_RawContent, *v.RawContent)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_Sound, *v.Sound)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.APNSPushNotificationTemplate_Url, *v.Url)
+	}
+}
+func (v *APNSPushNotificationTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSPushNotificationTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSPushNotificationTemplate_Action:
+			var ev string
+			if err := d.ReadString(schemas.APNSPushNotificationTemplate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.APNSPushNotificationTemplate_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_Body, v.Body)
+		case schemas.APNSPushNotificationTemplate_MediaUrl:
+			v.MediaUrl = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_MediaUrl, v.MediaUrl)
+		case schemas.APNSPushNotificationTemplate_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_RawContent, v.RawContent)
+		case schemas.APNSPushNotificationTemplate_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_Sound, v.Sound)
+		case schemas.APNSPushNotificationTemplate_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_Title, v.Title)
+		case schemas.APNSPushNotificationTemplate_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.APNSPushNotificationTemplate_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // sandbox channel for an application.
 type APNSSandboxChannelRequest struct {
@@ -724,6 +1630,70 @@ type APNSSandboxChannelRequest struct {
 	TokenKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *APNSSandboxChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSSandboxChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSSandboxChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_BundleId, *v.BundleId)
+	}
+	if v.Certificate != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_Certificate, *v.Certificate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSSandboxChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_PrivateKey, *v.PrivateKey)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_TeamId, *v.TeamId)
+	}
+	if v.TokenKey != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_TokenKey, *v.TokenKey)
+	}
+	if v.TokenKeyId != nil {
+		s.WriteString(schemas.APNSSandboxChannelRequest_TokenKeyId, *v.TokenKeyId)
+	}
+}
+func (v *APNSSandboxChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSSandboxChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSSandboxChannelRequest_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_BundleId, v.BundleId)
+		case schemas.APNSSandboxChannelRequest_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_Certificate, v.Certificate)
+		case schemas.APNSSandboxChannelRequest_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSSandboxChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSSandboxChannelRequest_Enabled, v.Enabled)
+		case schemas.APNSSandboxChannelRequest_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_PrivateKey, v.PrivateKey)
+		case schemas.APNSSandboxChannelRequest_TeamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_TeamId, v.TeamId)
+		case schemas.APNSSandboxChannelRequest_TokenKey:
+			v.TokenKey = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_TokenKey, v.TokenKey)
+		case schemas.APNSSandboxChannelRequest_TokenKeyId:
+			v.TokenKeyId = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelRequest_TokenKeyId, v.TokenKeyId)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -777,6 +1747,94 @@ type APNSSandboxChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APNSSandboxChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSSandboxChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSSandboxChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSSandboxChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.APNSSandboxChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.HasTokenKey != nil {
+		s.WriteBool(schemas.APNSSandboxChannelResponse_HasTokenKey, *v.HasTokenKey)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.APNSSandboxChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.APNSSandboxChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.APNSSandboxChannelResponse_Version, *v.Version)
+	}
+}
+func (v *APNSSandboxChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSSandboxChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSSandboxChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.APNSSandboxChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_CreationDate, v.CreationDate)
+		case schemas.APNSSandboxChannelResponse_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSSandboxChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSSandboxChannelResponse_Enabled, v.Enabled)
+		case schemas.APNSSandboxChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.APNSSandboxChannelResponse_HasCredential, v.HasCredential)
+		case schemas.APNSSandboxChannelResponse_HasTokenKey:
+			v.HasTokenKey = new(bool)
+			return d.ReadBool(schemas.APNSSandboxChannelResponse_HasTokenKey, v.HasTokenKey)
+		case schemas.APNSSandboxChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_Id, v.Id)
+		case schemas.APNSSandboxChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.APNSSandboxChannelResponse_IsArchived, v.IsArchived)
+		case schemas.APNSSandboxChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.APNSSandboxChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.APNSSandboxChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.APNSSandboxChannelResponse_Platform, v.Platform)
+		case schemas.APNSSandboxChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.APNSSandboxChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // VoIP channel for an application.
 type APNSVoipChannelRequest struct {
@@ -812,6 +1870,70 @@ type APNSVoipChannelRequest struct {
 	TokenKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *APNSVoipChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSVoipChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSVoipChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_BundleId, *v.BundleId)
+	}
+	if v.Certificate != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_Certificate, *v.Certificate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSVoipChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_PrivateKey, *v.PrivateKey)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_TeamId, *v.TeamId)
+	}
+	if v.TokenKey != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_TokenKey, *v.TokenKey)
+	}
+	if v.TokenKeyId != nil {
+		s.WriteString(schemas.APNSVoipChannelRequest_TokenKeyId, *v.TokenKeyId)
+	}
+}
+func (v *APNSVoipChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSVoipChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSVoipChannelRequest_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_BundleId, v.BundleId)
+		case schemas.APNSVoipChannelRequest_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_Certificate, v.Certificate)
+		case schemas.APNSVoipChannelRequest_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSVoipChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSVoipChannelRequest_Enabled, v.Enabled)
+		case schemas.APNSVoipChannelRequest_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_PrivateKey, v.PrivateKey)
+		case schemas.APNSVoipChannelRequest_TeamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_TeamId, v.TeamId)
+		case schemas.APNSVoipChannelRequest_TokenKey:
+			v.TokenKey = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_TokenKey, v.TokenKey)
+		case schemas.APNSVoipChannelRequest_TokenKeyId:
+			v.TokenKeyId = new(string)
+			return d.ReadString(schemas.APNSVoipChannelRequest_TokenKeyId, v.TokenKeyId)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -864,6 +1986,94 @@ type APNSVoipChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APNSVoipChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSVoipChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSVoipChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSVoipChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.APNSVoipChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.HasTokenKey != nil {
+		s.WriteBool(schemas.APNSVoipChannelResponse_HasTokenKey, *v.HasTokenKey)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.APNSVoipChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.APNSVoipChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.APNSVoipChannelResponse_Version, *v.Version)
+	}
+}
+func (v *APNSVoipChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSVoipChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSVoipChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.APNSVoipChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_CreationDate, v.CreationDate)
+		case schemas.APNSVoipChannelResponse_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSVoipChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSVoipChannelResponse_Enabled, v.Enabled)
+		case schemas.APNSVoipChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.APNSVoipChannelResponse_HasCredential, v.HasCredential)
+		case schemas.APNSVoipChannelResponse_HasTokenKey:
+			v.HasTokenKey = new(bool)
+			return d.ReadBool(schemas.APNSVoipChannelResponse_HasTokenKey, v.HasTokenKey)
+		case schemas.APNSVoipChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_Id, v.Id)
+		case schemas.APNSVoipChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.APNSVoipChannelResponse_IsArchived, v.IsArchived)
+		case schemas.APNSVoipChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.APNSVoipChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.APNSVoipChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.APNSVoipChannelResponse_Platform, v.Platform)
+		case schemas.APNSVoipChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.APNSVoipChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // VoIP sandbox channel for an application.
 type APNSVoipSandboxChannelRequest struct {
@@ -901,6 +2111,70 @@ type APNSVoipSandboxChannelRequest struct {
 	TokenKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *APNSVoipSandboxChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSVoipSandboxChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSVoipSandboxChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_BundleId, *v.BundleId)
+	}
+	if v.Certificate != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_Certificate, *v.Certificate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSVoipSandboxChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_PrivateKey, *v.PrivateKey)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_TeamId, *v.TeamId)
+	}
+	if v.TokenKey != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_TokenKey, *v.TokenKey)
+	}
+	if v.TokenKeyId != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelRequest_TokenKeyId, *v.TokenKeyId)
+	}
+}
+func (v *APNSVoipSandboxChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSVoipSandboxChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSVoipSandboxChannelRequest_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_BundleId, v.BundleId)
+		case schemas.APNSVoipSandboxChannelRequest_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_Certificate, v.Certificate)
+		case schemas.APNSVoipSandboxChannelRequest_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSVoipSandboxChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSVoipSandboxChannelRequest_Enabled, v.Enabled)
+		case schemas.APNSVoipSandboxChannelRequest_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_PrivateKey, v.PrivateKey)
+		case schemas.APNSVoipSandboxChannelRequest_TeamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_TeamId, v.TeamId)
+		case schemas.APNSVoipSandboxChannelRequest_TokenKey:
+			v.TokenKey = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_TokenKey, v.TokenKey)
+		case schemas.APNSVoipSandboxChannelRequest_TokenKeyId:
+			v.TokenKeyId = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelRequest_TokenKeyId, v.TokenKeyId)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -954,6 +2228,94 @@ type APNSVoipSandboxChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APNSVoipSandboxChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APNSVoipSandboxChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APNSVoipSandboxChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.APNSVoipSandboxChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.APNSVoipSandboxChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.HasTokenKey != nil {
+		s.WriteBool(schemas.APNSVoipSandboxChannelResponse_HasTokenKey, *v.HasTokenKey)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.APNSVoipSandboxChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.APNSVoipSandboxChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.APNSVoipSandboxChannelResponse_Version, *v.Version)
+	}
+}
+func (v *APNSVoipSandboxChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APNSVoipSandboxChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APNSVoipSandboxChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.APNSVoipSandboxChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_CreationDate, v.CreationDate)
+		case schemas.APNSVoipSandboxChannelResponse_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.APNSVoipSandboxChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.APNSVoipSandboxChannelResponse_Enabled, v.Enabled)
+		case schemas.APNSVoipSandboxChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.APNSVoipSandboxChannelResponse_HasCredential, v.HasCredential)
+		case schemas.APNSVoipSandboxChannelResponse_HasTokenKey:
+			v.HasTokenKey = new(bool)
+			return d.ReadBool(schemas.APNSVoipSandboxChannelResponse_HasTokenKey, v.HasTokenKey)
+		case schemas.APNSVoipSandboxChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_Id, v.Id)
+		case schemas.APNSVoipSandboxChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.APNSVoipSandboxChannelResponse_IsArchived, v.IsArchived)
+		case schemas.APNSVoipSandboxChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.APNSVoipSandboxChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.APNSVoipSandboxChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.APNSVoipSandboxChannelResponse_Platform, v.Platform)
+		case schemas.APNSVoipSandboxChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.APNSVoipSandboxChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application, and provides information about that query.
 type ApplicationDateRangeKpiResponse struct {
@@ -999,6 +2361,60 @@ type ApplicationDateRangeKpiResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationDateRangeKpiResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationDateRangeKpiResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationDateRangeKpiResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ApplicationDateRangeKpiResponse_EndTime, *v.EndTime)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.ApplicationDateRangeKpiResponse_KpiName, *v.KpiName)
+	}
+	if v.KpiResult != nil {
+		s.WriteStruct(schemas.ApplicationDateRangeKpiResponse_KpiResult)
+		v.KpiResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ApplicationDateRangeKpiResponse_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ApplicationDateRangeKpiResponse_StartTime, *v.StartTime)
+	}
+}
+func (v *ApplicationDateRangeKpiResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationDateRangeKpiResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationDateRangeKpiResponse_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationDateRangeKpiResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDateRangeKpiResponse_EndTime, v.EndTime)
+		case schemas.ApplicationDateRangeKpiResponse_KpiName:
+			v.KpiName = new(string)
+			return d.ReadString(schemas.ApplicationDateRangeKpiResponse_KpiName, v.KpiName)
+		case schemas.ApplicationDateRangeKpiResponse_KpiResult:
+			v.KpiResult = &BaseKpiResult{}
+			return v.KpiResult.Deserialize(d)
+		case schemas.ApplicationDateRangeKpiResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ApplicationDateRangeKpiResponse_NextToken, v.NextToken)
+		case schemas.ApplicationDateRangeKpiResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDateRangeKpiResponse_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Provides information about an application.
 type ApplicationResponse struct {
 
@@ -1030,6 +2446,49 @@ type ApplicationResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ApplicationResponse_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ApplicationResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApplicationResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApplicationResponse_Name, *v.Name)
+	}
+	serializeMapOf__string(s, schemas.ApplicationResponse_tags, v.Tags)
+}
+func (v *ApplicationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ApplicationResponse_Arn, v.Arn)
+		case schemas.ApplicationResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ApplicationResponse_CreationDate, v.CreationDate)
+		case schemas.ApplicationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApplicationResponse_Id, v.Id)
+		case schemas.ApplicationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApplicationResponse_Name, v.Name)
+		case schemas.ApplicationResponse_tags:
+			return deserializeMapOf__string(d, schemas.ApplicationResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The default sending limits for journeys in the application. To override these
 // limits and define custom limits for a specific journey, use the Journey
 // resource.
@@ -1049,6 +2508,42 @@ type ApplicationSettingsJourneyLimits struct {
 	TotalCap *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSettingsJourneyLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSettingsJourneyLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSettingsJourneyLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyCap != nil {
+		s.WriteInt32(schemas.ApplicationSettingsJourneyLimits_DailyCap, *v.DailyCap)
+	}
+	if v.TimeframeCap != nil {
+		s.WriteStruct(schemas.ApplicationSettingsJourneyLimits_TimeframeCap)
+		v.TimeframeCap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalCap != nil {
+		s.WriteInt32(schemas.ApplicationSettingsJourneyLimits_TotalCap, *v.TotalCap)
+	}
+}
+func (v *ApplicationSettingsJourneyLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSettingsJourneyLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSettingsJourneyLimits_DailyCap:
+			v.DailyCap = new(int32)
+			return d.ReadInt32(schemas.ApplicationSettingsJourneyLimits_DailyCap, v.DailyCap)
+		case schemas.ApplicationSettingsJourneyLimits_TimeframeCap:
+			v.TimeframeCap = &JourneyTimeframeCap{}
+			return v.TimeframeCap.Deserialize(d)
+		case schemas.ApplicationSettingsJourneyLimits_TotalCap:
+			v.TotalCap = new(int32)
+			return d.ReadInt32(schemas.ApplicationSettingsJourneyLimits_TotalCap, v.TotalCap)
+		}
+		return nil
+	})
 }
 
 // Provides information about an application, including the default settings for
@@ -1100,6 +2595,66 @@ type ApplicationSettingsResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSettingsResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSettingsResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSettingsResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationSettingsResource_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignHook != nil {
+		s.WriteStruct(schemas.ApplicationSettingsResource_CampaignHook)
+		v.CampaignHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JourneyLimits != nil {
+		s.WriteStruct(schemas.ApplicationSettingsResource_JourneyLimits)
+		v.JourneyLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.ApplicationSettingsResource_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.ApplicationSettingsResource_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.ApplicationSettingsResource_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationSettingsResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSettingsResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSettingsResource_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationSettingsResource_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationSettingsResource_CampaignHook:
+			v.CampaignHook = &CampaignHook{}
+			return v.CampaignHook.Deserialize(d)
+		case schemas.ApplicationSettingsResource_JourneyLimits:
+			v.JourneyLimits = &ApplicationSettingsJourneyLimits{}
+			return v.JourneyLimits.Deserialize(d)
+		case schemas.ApplicationSettingsResource_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.ApplicationSettingsResource_LastModifiedDate, v.LastModifiedDate)
+		case schemas.ApplicationSettingsResource_Limits:
+			v.Limits = &CampaignLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.ApplicationSettingsResource_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides information about all of your applications.
 type ApplicationsResponse struct {
 
@@ -1111,6 +2666,31 @@ type ApplicationsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfApplicationResponse(s, schemas.ApplicationsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ApplicationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ApplicationsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationsResponse_Item:
+			return deserializeListOfApplicationResponse(d, schemas.ApplicationsResponse_Item, &v.Item)
+		case schemas.ApplicationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ApplicationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Specifies attribute-based criteria for including or excluding endpoints from a
@@ -1145,6 +2725,35 @@ type AttributeDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeType != "" {
+		s.WriteString(schemas.AttributeDimension_AttributeType, string(v.AttributeType))
+	}
+	serializeListOf__string(s, schemas.AttributeDimension_Values, v.Values)
+}
+func (v *AttributeDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeDimension_AttributeType:
+			var ev string
+			if err := d.ReadString(schemas.AttributeDimension_AttributeType, &ev); err != nil {
+				return err
+			}
+			v.AttributeType = AttributeType(ev)
+			return nil
+		case schemas.AttributeDimension_Values:
+			return deserializeListOf__string(d, schemas.AttributeDimension_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Provides information about the type and the names of attributes that were
 // removed from all the endpoints that are associated with an application.
 type AttributesResource struct {
@@ -1174,6 +2783,37 @@ type AttributesResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributesResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributesResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributesResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.AttributesResource_ApplicationId, *v.ApplicationId)
+	}
+	if v.AttributeType != nil {
+		s.WriteString(schemas.AttributesResource_AttributeType, *v.AttributeType)
+	}
+	serializeListOf__string(s, schemas.AttributesResource_Attributes, v.Attributes)
+}
+func (v *AttributesResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributesResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributesResource_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.AttributesResource_ApplicationId, v.ApplicationId)
+		case schemas.AttributesResource_AttributeType:
+			v.AttributeType = new(string)
+			return d.ReadString(schemas.AttributesResource_AttributeType, v.AttributeType)
+		case schemas.AttributesResource_Attributes:
+			return deserializeListOf__string(d, schemas.AttributesResource_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for
 // an application.
 type BaiduChannelRequest struct {
@@ -1194,6 +2834,40 @@ type BaiduChannelRequest struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaiduChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaiduChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaiduChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.BaiduChannelRequest_ApiKey, *v.ApiKey)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.BaiduChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.BaiduChannelRequest_SecretKey, *v.SecretKey)
+	}
+}
+func (v *BaiduChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaiduChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaiduChannelRequest_ApiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.BaiduChannelRequest_ApiKey, v.ApiKey)
+		case schemas.BaiduChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.BaiduChannelRequest_Enabled, v.Enabled)
+		case schemas.BaiduChannelRequest_SecretKey:
+			v.SecretKey = new(string)
+			return d.ReadString(schemas.BaiduChannelRequest_SecretKey, v.SecretKey)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the Baidu (Baidu Cloud
@@ -1241,6 +2915,88 @@ type BaiduChannelResponse struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaiduChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaiduChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaiduChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.BaiduChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.BaiduChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Credential != nil {
+		s.WriteString(schemas.BaiduChannelResponse_Credential, *v.Credential)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.BaiduChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.BaiduChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.BaiduChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.BaiduChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.BaiduChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.BaiduChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.BaiduChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.BaiduChannelResponse_Version, *v.Version)
+	}
+}
+func (v *BaiduChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaiduChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaiduChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.BaiduChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_CreationDate, v.CreationDate)
+		case schemas.BaiduChannelResponse_Credential:
+			v.Credential = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_Credential, v.Credential)
+		case schemas.BaiduChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.BaiduChannelResponse_Enabled, v.Enabled)
+		case schemas.BaiduChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.BaiduChannelResponse_HasCredential, v.HasCredential)
+		case schemas.BaiduChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_Id, v.Id)
+		case schemas.BaiduChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.BaiduChannelResponse_IsArchived, v.IsArchived)
+		case schemas.BaiduChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.BaiduChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.BaiduChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.BaiduChannelResponse_Platform, v.Platform)
+		case schemas.BaiduChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.BaiduChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -1317,6 +3073,104 @@ type BaiduMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BaiduMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaiduMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaiduMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.BaiduMessage_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.BaiduMessage_Body, *v.Body)
+	}
+	serializeMapOf__string(s, schemas.BaiduMessage_Data, v.Data)
+	if v.IconReference != nil {
+		s.WriteString(schemas.BaiduMessage_IconReference, *v.IconReference)
+	}
+	if v.ImageIconUrl != nil {
+		s.WriteString(schemas.BaiduMessage_ImageIconUrl, *v.ImageIconUrl)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.BaiduMessage_ImageUrl, *v.ImageUrl)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.BaiduMessage_RawContent, *v.RawContent)
+	}
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.BaiduMessage_SilentPush, *v.SilentPush)
+	}
+	if v.SmallImageIconUrl != nil {
+		s.WriteString(schemas.BaiduMessage_SmallImageIconUrl, *v.SmallImageIconUrl)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.BaiduMessage_Sound, *v.Sound)
+	}
+	serializeMapOfListOf__string(s, schemas.BaiduMessage_Substitutions, v.Substitutions)
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.BaiduMessage_TimeToLive, *v.TimeToLive)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.BaiduMessage_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.BaiduMessage_Url, *v.Url)
+	}
+}
+func (v *BaiduMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaiduMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaiduMessage_Action:
+			var ev string
+			if err := d.ReadString(schemas.BaiduMessage_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.BaiduMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.BaiduMessage_Body, v.Body)
+		case schemas.BaiduMessage_Data:
+			return deserializeMapOf__string(d, schemas.BaiduMessage_Data, &v.Data)
+		case schemas.BaiduMessage_IconReference:
+			v.IconReference = new(string)
+			return d.ReadString(schemas.BaiduMessage_IconReference, v.IconReference)
+		case schemas.BaiduMessage_ImageIconUrl:
+			v.ImageIconUrl = new(string)
+			return d.ReadString(schemas.BaiduMessage_ImageIconUrl, v.ImageIconUrl)
+		case schemas.BaiduMessage_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.BaiduMessage_ImageUrl, v.ImageUrl)
+		case schemas.BaiduMessage_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.BaiduMessage_RawContent, v.RawContent)
+		case schemas.BaiduMessage_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.BaiduMessage_SilentPush, v.SilentPush)
+		case schemas.BaiduMessage_SmallImageIconUrl:
+			v.SmallImageIconUrl = new(string)
+			return d.ReadString(schemas.BaiduMessage_SmallImageIconUrl, v.SmallImageIconUrl)
+		case schemas.BaiduMessage_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.BaiduMessage_Sound, v.Sound)
+		case schemas.BaiduMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.BaiduMessage_Substitutions, &v.Substitutions)
+		case schemas.BaiduMessage_TimeToLive:
+			v.TimeToLive = new(int32)
+			return d.ReadInt32(schemas.BaiduMessage_TimeToLive, v.TimeToLive)
+		case schemas.BaiduMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.BaiduMessage_Title, v.Title)
+		case schemas.BaiduMessage_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.BaiduMessage_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application, campaign, or journey.
 type BaseKpiResult struct {
@@ -1330,6 +3184,25 @@ type BaseKpiResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BaseKpiResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaseKpiResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaseKpiResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfResultRow(s, schemas.BaseKpiResult_Rows, v.Rows)
+}
+func (v *BaseKpiResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaseKpiResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaseKpiResult_Rows:
+			return deserializeListOfResultRow(d, schemas.BaseKpiResult_Rows, &v.Rows)
+		}
+		return nil
+	})
+}
+
 // Specifies the contents of a message that's sent through a custom channel to
 // recipients of a campaign.
 type CampaignCustomMessage struct {
@@ -1339,6 +3212,28 @@ type CampaignCustomMessage struct {
 	Data *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CampaignCustomMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignCustomMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignCustomMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteString(schemas.CampaignCustomMessage_Data, *v.Data)
+	}
+}
+func (v *CampaignCustomMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignCustomMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignCustomMessage_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.CampaignCustomMessage_Data, v.Data)
+		}
+		return nil
+	})
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
@@ -1391,6 +3286,66 @@ type CampaignDateRangeKpiResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignDateRangeKpiResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignDateRangeKpiResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CampaignDateRangeKpiResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignId != nil {
+		s.WriteString(schemas.CampaignDateRangeKpiResponse_CampaignId, *v.CampaignId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CampaignDateRangeKpiResponse_EndTime, *v.EndTime)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.CampaignDateRangeKpiResponse_KpiName, *v.KpiName)
+	}
+	if v.KpiResult != nil {
+		s.WriteStruct(schemas.CampaignDateRangeKpiResponse_KpiResult)
+		v.KpiResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.CampaignDateRangeKpiResponse_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CampaignDateRangeKpiResponse_StartTime, *v.StartTime)
+	}
+}
+func (v *CampaignDateRangeKpiResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignDateRangeKpiResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CampaignDateRangeKpiResponse_ApplicationId, v.ApplicationId)
+		case schemas.CampaignDateRangeKpiResponse_CampaignId:
+			v.CampaignId = new(string)
+			return d.ReadString(schemas.CampaignDateRangeKpiResponse_CampaignId, v.CampaignId)
+		case schemas.CampaignDateRangeKpiResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CampaignDateRangeKpiResponse_EndTime, v.EndTime)
+		case schemas.CampaignDateRangeKpiResponse_KpiName:
+			v.KpiName = new(string)
+			return d.ReadString(schemas.CampaignDateRangeKpiResponse_KpiName, v.KpiName)
+		case schemas.CampaignDateRangeKpiResponse_KpiResult:
+			v.KpiResult = &BaseKpiResult{}
+			return v.KpiResult.Deserialize(d)
+		case schemas.CampaignDateRangeKpiResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.CampaignDateRangeKpiResponse_NextToken, v.NextToken)
+		case schemas.CampaignDateRangeKpiResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CampaignDateRangeKpiResponse_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the content and "From" address for an email message that's sent to
 // recipients of a campaign.
 type CampaignEmailMessage struct {
@@ -1418,6 +3373,49 @@ type CampaignEmailMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignEmailMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignEmailMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignEmailMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.CampaignEmailMessage_Body, *v.Body)
+	}
+	if v.FromAddress != nil {
+		s.WriteString(schemas.CampaignEmailMessage_FromAddress, *v.FromAddress)
+	}
+	serializeListOfMessageHeader(s, schemas.CampaignEmailMessage_Headers, v.Headers)
+	if v.HtmlBody != nil {
+		s.WriteString(schemas.CampaignEmailMessage_HtmlBody, *v.HtmlBody)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CampaignEmailMessage_Title, *v.Title)
+	}
+}
+func (v *CampaignEmailMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignEmailMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignEmailMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.CampaignEmailMessage_Body, v.Body)
+		case schemas.CampaignEmailMessage_FromAddress:
+			v.FromAddress = new(string)
+			return d.ReadString(schemas.CampaignEmailMessage_FromAddress, v.FromAddress)
+		case schemas.CampaignEmailMessage_Headers:
+			return deserializeListOfMessageHeader(d, schemas.CampaignEmailMessage_Headers, &v.Headers)
+		case schemas.CampaignEmailMessage_HtmlBody:
+			v.HtmlBody = new(string)
+			return d.ReadString(schemas.CampaignEmailMessage_HtmlBody, v.HtmlBody)
+		case schemas.CampaignEmailMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CampaignEmailMessage_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for events that cause a campaign to be sent.
 type CampaignEventFilter struct {
 
@@ -1434,6 +3432,40 @@ type CampaignEventFilter struct {
 	FilterType FilterType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CampaignEventFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignEventFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignEventFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.CampaignEventFilter_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterType != "" {
+		s.WriteString(schemas.CampaignEventFilter_FilterType, string(v.FilterType))
+	}
+}
+func (v *CampaignEventFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignEventFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignEventFilter_Dimensions:
+			v.Dimensions = &EventDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.CampaignEventFilter_FilterType:
+			var ev string
+			if err := d.ReadString(schemas.CampaignEventFilter_FilterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = FilterType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies settings for invoking an AWS Lambda function that customizes a
@@ -1463,6 +3495,44 @@ type CampaignHook struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignHook) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignHook)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignHook) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaFunctionName != nil {
+		s.WriteString(schemas.CampaignHook_LambdaFunctionName, *v.LambdaFunctionName)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CampaignHook_Mode, string(v.Mode))
+	}
+	if v.WebUrl != nil {
+		s.WriteString(schemas.CampaignHook_WebUrl, *v.WebUrl)
+	}
+}
+func (v *CampaignHook) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignHook, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignHook_LambdaFunctionName:
+			v.LambdaFunctionName = new(string)
+			return d.ReadString(schemas.CampaignHook_LambdaFunctionName, v.LambdaFunctionName)
+		case schemas.CampaignHook_Mode:
+			var ev string
+			if err := d.ReadString(schemas.CampaignHook_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = Mode(ev)
+			return nil
+		case schemas.CampaignHook_WebUrl:
+			v.WebUrl = new(string)
+			return d.ReadString(schemas.CampaignHook_WebUrl, v.WebUrl)
+		}
+		return nil
+	})
+}
+
 // In-app message configuration.
 type CampaignInAppMessage struct {
 
@@ -1479,6 +3549,44 @@ type CampaignInAppMessage struct {
 	Layout Layout
 
 	noSmithyDocumentSerde
+}
+
+func (v *CampaignInAppMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignInAppMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignInAppMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.CampaignInAppMessage_Body, *v.Body)
+	}
+	serializeListOfInAppMessageContent(s, schemas.CampaignInAppMessage_Content, v.Content)
+	serializeMapOf__string(s, schemas.CampaignInAppMessage_CustomConfig, v.CustomConfig)
+	if v.Layout != "" {
+		s.WriteString(schemas.CampaignInAppMessage_Layout, string(v.Layout))
+	}
+}
+func (v *CampaignInAppMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignInAppMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignInAppMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.CampaignInAppMessage_Body, v.Body)
+		case schemas.CampaignInAppMessage_Content:
+			return deserializeListOfInAppMessageContent(d, schemas.CampaignInAppMessage_Content, &v.Content)
+		case schemas.CampaignInAppMessage_CustomConfig:
+			return deserializeMapOf__string(d, schemas.CampaignInAppMessage_CustomConfig, &v.CustomConfig)
+		case schemas.CampaignInAppMessage_Layout:
+			var ev string
+			if err := d.ReadString(schemas.CampaignInAppMessage_Layout, &ev); err != nil {
+				return err
+			}
+			v.Layout = Layout(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // For a campaign, specifies limits on the messages that the campaign can send.
@@ -1513,6 +3621,52 @@ type CampaignLimits struct {
 	Total *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CampaignLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Daily != nil {
+		s.WriteInt32(schemas.CampaignLimits_Daily, *v.Daily)
+	}
+	if v.MaximumDuration != nil {
+		s.WriteInt32(schemas.CampaignLimits_MaximumDuration, *v.MaximumDuration)
+	}
+	if v.MessagesPerSecond != nil {
+		s.WriteInt32(schemas.CampaignLimits_MessagesPerSecond, *v.MessagesPerSecond)
+	}
+	if v.Session != nil {
+		s.WriteInt32(schemas.CampaignLimits_Session, *v.Session)
+	}
+	if v.Total != nil {
+		s.WriteInt32(schemas.CampaignLimits_Total, *v.Total)
+	}
+}
+func (v *CampaignLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignLimits_Daily:
+			v.Daily = new(int32)
+			return d.ReadInt32(schemas.CampaignLimits_Daily, v.Daily)
+		case schemas.CampaignLimits_MaximumDuration:
+			v.MaximumDuration = new(int32)
+			return d.ReadInt32(schemas.CampaignLimits_MaximumDuration, v.MaximumDuration)
+		case schemas.CampaignLimits_MessagesPerSecond:
+			v.MessagesPerSecond = new(int32)
+			return d.ReadInt32(schemas.CampaignLimits_MessagesPerSecond, v.MessagesPerSecond)
+		case schemas.CampaignLimits_Session:
+			v.Session = new(int32)
+			return d.ReadInt32(schemas.CampaignLimits_Session, v.Session)
+		case schemas.CampaignLimits_Total:
+			v.Total = new(int32)
+			return d.ReadInt32(schemas.CampaignLimits_Total, v.Total)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status, configuration, and other settings for a
@@ -1624,6 +3778,182 @@ type CampaignResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTreatmentResource(s, schemas.CampaignResponse_AdditionalTreatments, v.AdditionalTreatments)
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CampaignResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CampaignResponse_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.CampaignResponse_CreationDate, *v.CreationDate)
+	}
+	if v.CustomDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.CampaignResponse_CustomDeliveryConfiguration)
+		v.CustomDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultState != nil {
+		s.WriteStruct(schemas.CampaignResponse_DefaultState)
+		v.DefaultState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CampaignResponse_Description, *v.Description)
+	}
+	if v.HoldoutPercent != nil {
+		s.WriteInt32(schemas.CampaignResponse_HoldoutPercent, *v.HoldoutPercent)
+	}
+	if v.Hook != nil {
+		s.WriteStruct(schemas.CampaignResponse_Hook)
+		v.Hook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CampaignResponse_Id, *v.Id)
+	}
+	if v.IsPaused != nil {
+		s.WriteBool(schemas.CampaignResponse_IsPaused, *v.IsPaused)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.CampaignResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.CampaignResponse_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.CampaignResponse_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CampaignResponse_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CampaignResponse_Priority, *v.Priority)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CampaignResponse_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.CampaignResponse_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentVersion != nil {
+		s.WriteInt32(schemas.CampaignResponse_SegmentVersion, *v.SegmentVersion)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.CampaignResponse_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.CampaignResponse_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TreatmentDescription != nil {
+		s.WriteString(schemas.CampaignResponse_TreatmentDescription, *v.TreatmentDescription)
+	}
+	if v.TreatmentName != nil {
+		s.WriteString(schemas.CampaignResponse_TreatmentName, *v.TreatmentName)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.CampaignResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.CampaignResponse_tags, v.Tags)
+}
+func (v *CampaignResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignResponse_AdditionalTreatments:
+			return deserializeListOfTreatmentResource(d, schemas.CampaignResponse_AdditionalTreatments, &v.AdditionalTreatments)
+		case schemas.CampaignResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CampaignResponse_ApplicationId, v.ApplicationId)
+		case schemas.CampaignResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CampaignResponse_Arn, v.Arn)
+		case schemas.CampaignResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.CampaignResponse_CreationDate, v.CreationDate)
+		case schemas.CampaignResponse_CustomDeliveryConfiguration:
+			v.CustomDeliveryConfiguration = &CustomDeliveryConfiguration{}
+			return v.CustomDeliveryConfiguration.Deserialize(d)
+		case schemas.CampaignResponse_DefaultState:
+			v.DefaultState = &CampaignState{}
+			return v.DefaultState.Deserialize(d)
+		case schemas.CampaignResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CampaignResponse_Description, v.Description)
+		case schemas.CampaignResponse_HoldoutPercent:
+			v.HoldoutPercent = new(int32)
+			return d.ReadInt32(schemas.CampaignResponse_HoldoutPercent, v.HoldoutPercent)
+		case schemas.CampaignResponse_Hook:
+			v.Hook = &CampaignHook{}
+			return v.Hook.Deserialize(d)
+		case schemas.CampaignResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CampaignResponse_Id, v.Id)
+		case schemas.CampaignResponse_IsPaused:
+			v.IsPaused = new(bool)
+			return d.ReadBool(schemas.CampaignResponse_IsPaused, v.IsPaused)
+		case schemas.CampaignResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.CampaignResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.CampaignResponse_Limits:
+			v.Limits = &CampaignLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.CampaignResponse_MessageConfiguration:
+			v.MessageConfiguration = &MessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.CampaignResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CampaignResponse_Name, v.Name)
+		case schemas.CampaignResponse_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.CampaignResponse_Priority, v.Priority)
+		case schemas.CampaignResponse_Schedule:
+			v.Schedule = &Schedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.CampaignResponse_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.CampaignResponse_SegmentId, v.SegmentId)
+		case schemas.CampaignResponse_SegmentVersion:
+			v.SegmentVersion = new(int32)
+			return d.ReadInt32(schemas.CampaignResponse_SegmentVersion, v.SegmentVersion)
+		case schemas.CampaignResponse_State:
+			v.State = &CampaignState{}
+			return v.State.Deserialize(d)
+		case schemas.CampaignResponse_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.CampaignResponse_TreatmentDescription:
+			v.TreatmentDescription = new(string)
+			return d.ReadString(schemas.CampaignResponse_TreatmentDescription, v.TreatmentDescription)
+		case schemas.CampaignResponse_TreatmentName:
+			v.TreatmentName = new(string)
+			return d.ReadString(schemas.CampaignResponse_TreatmentName, v.TreatmentName)
+		case schemas.CampaignResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.CampaignResponse_Version, v.Version)
+		case schemas.CampaignResponse_tags:
+			return deserializeMapOf__string(d, schemas.CampaignResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the content and settings for an SMS message that's sent to recipients
 // of a campaign.
 type CampaignSmsMessage struct {
@@ -1657,6 +3987,62 @@ type CampaignSmsMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignSmsMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignSmsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignSmsMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.CampaignSmsMessage_Body, *v.Body)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.CampaignSmsMessage_EntityId, *v.EntityId)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.CampaignSmsMessage_MessageType, string(v.MessageType))
+	}
+	if v.OriginationNumber != nil {
+		s.WriteString(schemas.CampaignSmsMessage_OriginationNumber, *v.OriginationNumber)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.CampaignSmsMessage_SenderId, *v.SenderId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CampaignSmsMessage_TemplateId, *v.TemplateId)
+	}
+}
+func (v *CampaignSmsMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignSmsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignSmsMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.CampaignSmsMessage_Body, v.Body)
+		case schemas.CampaignSmsMessage_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.CampaignSmsMessage_EntityId, v.EntityId)
+		case schemas.CampaignSmsMessage_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.CampaignSmsMessage_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = MessageType(ev)
+			return nil
+		case schemas.CampaignSmsMessage_OriginationNumber:
+			v.OriginationNumber = new(string)
+			return d.ReadString(schemas.CampaignSmsMessage_OriginationNumber, v.OriginationNumber)
+		case schemas.CampaignSmsMessage_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.CampaignSmsMessage_SenderId, v.SenderId)
+		case schemas.CampaignSmsMessage_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.CampaignSmsMessage_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 // Provides information about the configuration and other settings for all the
 // campaigns that are associated with an application.
 type CampaignsResponse struct {
@@ -1674,6 +4060,31 @@ type CampaignsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CampaignsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfCampaignResponse(s, schemas.CampaignsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.CampaignsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *CampaignsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignsResponse_Item:
+			return deserializeListOfCampaignResponse(d, schemas.CampaignsResponse_Item, &v.Item)
+		case schemas.CampaignsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.CampaignsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // Provides information about the status of a campaign.
 type CampaignState struct {
 
@@ -1687,6 +4098,32 @@ type CampaignState struct {
 	CampaignStatus CampaignStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CampaignState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CampaignState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CampaignState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignStatus != "" {
+		s.WriteString(schemas.CampaignState_CampaignStatus, string(v.CampaignStatus))
+	}
+}
+func (v *CampaignState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CampaignState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CampaignState_CampaignStatus:
+			var ev string
+			if err := d.ReadString(schemas.CampaignState_CampaignStatus, &ev); err != nil {
+				return err
+			}
+			v.CampaignStatus = CampaignStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information about the general settings and status of a channel for an
@@ -1724,6 +4161,76 @@ type ChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.ChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.ChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.ChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.ChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.ChannelResponse_Version, *v.Version)
+	}
+}
+func (v *ChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.ChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ChannelResponse_CreationDate, v.CreationDate)
+		case schemas.ChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ChannelResponse_Enabled, v.Enabled)
+		case schemas.ChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.ChannelResponse_HasCredential, v.HasCredential)
+		case schemas.ChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ChannelResponse_Id, v.Id)
+		case schemas.ChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.ChannelResponse_IsArchived, v.IsArchived)
+		case schemas.ChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.ChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.ChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.ChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.ChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.ChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Provides information about the general settings and status of all channels for
 // an application, including channels that aren't enabled for the application.
 type ChannelsResponse struct {
@@ -1735,6 +4242,25 @@ type ChannelsResponse struct {
 	Channels map[string]ChannelResponse
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfChannelResponse(s, schemas.ChannelsResponse_Channels, v.Channels)
+}
+func (v *ChannelsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelsResponse_Channels:
+			return deserializeMapOfChannelResponse(d, schemas.ChannelsResponse_Channels, &v.Channels)
+		}
+		return nil
+	})
 }
 
 // The time when a journey will not send messages. QuietTime should be configured
@@ -1759,6 +4285,37 @@ type ClosedDays struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClosedDays) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClosedDays)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClosedDays) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfClosedDaysRules(s, schemas.ClosedDays_CUSTOM, v.CUSTOM)
+	serializeListOfClosedDaysRules(s, schemas.ClosedDays_EMAIL, v.EMAIL)
+	serializeListOfClosedDaysRules(s, schemas.ClosedDays_PUSH, v.PUSH)
+	serializeListOfClosedDaysRules(s, schemas.ClosedDays_SMS, v.SMS)
+	serializeListOfClosedDaysRules(s, schemas.ClosedDays_VOICE, v.VOICE)
+}
+func (v *ClosedDays) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClosedDays, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClosedDays_CUSTOM:
+			return deserializeListOfClosedDaysRules(d, schemas.ClosedDays_CUSTOM, &v.CUSTOM)
+		case schemas.ClosedDays_EMAIL:
+			return deserializeListOfClosedDaysRules(d, schemas.ClosedDays_EMAIL, &v.EMAIL)
+		case schemas.ClosedDays_PUSH:
+			return deserializeListOfClosedDaysRules(d, schemas.ClosedDays_PUSH, &v.PUSH)
+		case schemas.ClosedDays_SMS:
+			return deserializeListOfClosedDaysRules(d, schemas.ClosedDays_SMS, &v.SMS)
+		case schemas.ClosedDays_VOICE:
+			return deserializeListOfClosedDaysRules(d, schemas.ClosedDays_VOICE, &v.VOICE)
+		}
+		return nil
+	})
+}
+
 // Specifies the rule settings for when messages can't be sent.
 type ClosedDaysRule struct {
 
@@ -1774,6 +4331,40 @@ type ClosedDaysRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClosedDaysRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClosedDaysRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClosedDaysRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDateTime != nil {
+		s.WriteString(schemas.ClosedDaysRule_EndDateTime, *v.EndDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClosedDaysRule_Name, *v.Name)
+	}
+	if v.StartDateTime != nil {
+		s.WriteString(schemas.ClosedDaysRule_StartDateTime, *v.StartDateTime)
+	}
+}
+func (v *ClosedDaysRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClosedDaysRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClosedDaysRule_EndDateTime:
+			v.EndDateTime = new(string)
+			return d.ReadString(schemas.ClosedDaysRule_EndDateTime, v.EndDateTime)
+		case schemas.ClosedDaysRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClosedDaysRule_Name, v.Name)
+		case schemas.ClosedDaysRule_StartDateTime:
+			v.StartDateTime = new(string)
+			return d.ReadString(schemas.ClosedDaysRule_StartDateTime, v.StartDateTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the conditions to evaluate for an activity in a journey, and how to
 // evaluate those conditions.
 type Condition struct {
@@ -1787,6 +4378,35 @@ type Condition struct {
 	Operator Operator
 
 	noSmithyDocumentSerde
+}
+
+func (v *Condition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSimpleCondition(s, schemas.Condition_Conditions, v.Conditions)
+	if v.Operator != "" {
+		s.WriteString(schemas.Condition_Operator, string(v.Operator))
+	}
+}
+func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Condition_Conditions:
+			return deserializeListOfSimpleCondition(d, schemas.Condition_Conditions, &v.Conditions)
+		case schemas.Condition_Operator:
+			var ev string
+			if err := d.ReadString(schemas.Condition_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = Operator(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a yes/no split activity in a journey. This type of
@@ -1819,12 +4439,78 @@ type ConditionalSplitActivity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConditionalSplitActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalSplitActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalSplitActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteStruct(schemas.ConditionalSplitActivity_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationWaitTime != nil {
+		s.WriteStruct(schemas.ConditionalSplitActivity_EvaluationWaitTime)
+		v.EvaluationWaitTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FalseActivity != nil {
+		s.WriteString(schemas.ConditionalSplitActivity_FalseActivity, *v.FalseActivity)
+	}
+	if v.TrueActivity != nil {
+		s.WriteString(schemas.ConditionalSplitActivity_TrueActivity, *v.TrueActivity)
+	}
+}
+func (v *ConditionalSplitActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalSplitActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalSplitActivity_Condition:
+			v.Condition = &Condition{}
+			return v.Condition.Deserialize(d)
+		case schemas.ConditionalSplitActivity_EvaluationWaitTime:
+			v.EvaluationWaitTime = &WaitTime{}
+			return v.EvaluationWaitTime.Deserialize(d)
+		case schemas.ConditionalSplitActivity_FalseActivity:
+			v.FalseActivity = new(string)
+			return d.ReadString(schemas.ConditionalSplitActivity_FalseActivity, v.FalseActivity)
+		case schemas.ConditionalSplitActivity_TrueActivity:
+			v.TrueActivity = new(string)
+			return d.ReadString(schemas.ConditionalSplitActivity_TrueActivity, v.TrueActivity)
+		}
+		return nil
+	})
+}
+
 type ContactCenterActivity struct {
 
 	// The unique identifier for the next activity to perform after the this activity.
 	NextActivity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContactCenterActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactCenterActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactCenterActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextActivity != nil {
+		s.WriteString(schemas.ContactCenterActivity_NextActivity, *v.NextActivity)
+	}
+}
+func (v *ContactCenterActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactCenterActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactCenterActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.ContactCenterActivity_NextActivity, v.NextActivity)
+		}
+		return nil
+	})
 }
 
 // Specifies the display name of an application and the tags to associate with the
@@ -1843,6 +4529,31 @@ type CreateApplicationRequest struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateApplicationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
+	}
+	serializeMapOf__string(s, schemas.CreateApplicationRequest_tags, v.Tags)
+}
+func (v *CreateApplicationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_Name, v.Name)
+		case schemas.CreateApplicationRequest_tags:
+			return deserializeMapOf__string(d, schemas.CreateApplicationRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Specifies Amazon Pinpoint configuration settings for retrieving and processing
@@ -1945,6 +4656,73 @@ type CreateRecommenderConfigurationShape struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderConfigurationShape) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderConfigurationShape)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderConfigurationShape) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__string(s, schemas.CreateRecommenderConfigurationShape_Attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_Name, *v.Name)
+	}
+	if v.RecommendationProviderIdType != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderIdType, *v.RecommendationProviderIdType)
+	}
+	if v.RecommendationProviderRoleArn != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderRoleArn, *v.RecommendationProviderRoleArn)
+	}
+	if v.RecommendationProviderUri != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderUri, *v.RecommendationProviderUri)
+	}
+	if v.RecommendationTransformerUri != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_RecommendationTransformerUri, *v.RecommendationTransformerUri)
+	}
+	if v.RecommendationsDisplayName != nil {
+		s.WriteString(schemas.CreateRecommenderConfigurationShape_RecommendationsDisplayName, *v.RecommendationsDisplayName)
+	}
+	if v.RecommendationsPerMessage != nil {
+		s.WriteInt32(schemas.CreateRecommenderConfigurationShape_RecommendationsPerMessage, *v.RecommendationsPerMessage)
+	}
+}
+func (v *CreateRecommenderConfigurationShape) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommenderConfigurationShape, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommenderConfigurationShape_Attributes:
+			return deserializeMapOf__string(d, schemas.CreateRecommenderConfigurationShape_Attributes, &v.Attributes)
+		case schemas.CreateRecommenderConfigurationShape_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_Description, v.Description)
+		case schemas.CreateRecommenderConfigurationShape_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_Name, v.Name)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationProviderIdType:
+			v.RecommendationProviderIdType = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderIdType, v.RecommendationProviderIdType)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationProviderRoleArn:
+			v.RecommendationProviderRoleArn = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderRoleArn, v.RecommendationProviderRoleArn)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationProviderUri:
+			v.RecommendationProviderUri = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_RecommendationProviderUri, v.RecommendationProviderUri)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationTransformerUri:
+			v.RecommendationTransformerUri = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_RecommendationTransformerUri, v.RecommendationTransformerUri)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationsDisplayName:
+			v.RecommendationsDisplayName = new(string)
+			return d.ReadString(schemas.CreateRecommenderConfigurationShape_RecommendationsDisplayName, v.RecommendationsDisplayName)
+		case schemas.CreateRecommenderConfigurationShape_RecommendationsPerMessage:
+			v.RecommendationsPerMessage = new(int32)
+			return d.ReadInt32(schemas.CreateRecommenderConfigurationShape_RecommendationsPerMessage, v.RecommendationsPerMessage)
+		}
+		return nil
+	})
+}
+
 // Provides information about a request to create a message template.
 type CreateTemplateMessageBody struct {
 
@@ -1959,6 +4737,40 @@ type CreateTemplateMessageBody struct {
 	RequestID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateTemplateMessageBody) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateMessageBody)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateMessageBody) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateTemplateMessageBody_Arn, *v.Arn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CreateTemplateMessageBody_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.CreateTemplateMessageBody_RequestID, *v.RequestID)
+	}
+}
+func (v *CreateTemplateMessageBody) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTemplateMessageBody, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTemplateMessageBody_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateTemplateMessageBody_Arn, v.Arn)
+		case schemas.CreateTemplateMessageBody_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateTemplateMessageBody_Message, v.Message)
+		case schemas.CreateTemplateMessageBody_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.CreateTemplateMessageBody_RequestID, v.RequestID)
+		}
+		return nil
+	})
 }
 
 // Specifies the delivery configuration settings for sending a campaign or
@@ -1985,6 +4797,31 @@ type CustomDeliveryConfiguration struct {
 	EndpointTypes []EndpointTypesElement
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomDeliveryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomDeliveryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomDeliveryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryUri != nil {
+		s.WriteString(schemas.CustomDeliveryConfiguration_DeliveryUri, *v.DeliveryUri)
+	}
+	serializeListOf__EndpointTypesElement(s, schemas.CustomDeliveryConfiguration_EndpointTypes, v.EndpointTypes)
+}
+func (v *CustomDeliveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomDeliveryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomDeliveryConfiguration_DeliveryUri:
+			v.DeliveryUri = new(string)
+			return d.ReadString(schemas.CustomDeliveryConfiguration_DeliveryUri, v.DeliveryUri)
+		case schemas.CustomDeliveryConfiguration_EndpointTypes:
+			return deserializeListOf__EndpointTypesElement(d, schemas.CustomDeliveryConfiguration_EndpointTypes, &v.EndpointTypes)
+		}
+		return nil
+	})
 }
 
 // The settings for a custom message activity. This type of activity calls an AWS
@@ -2032,6 +4869,57 @@ type CustomMessageActivity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomMessageActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomMessageActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomMessageActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryUri != nil {
+		s.WriteString(schemas.CustomMessageActivity_DeliveryUri, *v.DeliveryUri)
+	}
+	serializeListOf__EndpointTypesElement(s, schemas.CustomMessageActivity_EndpointTypes, v.EndpointTypes)
+	if v.MessageConfig != nil {
+		s.WriteStruct(schemas.CustomMessageActivity_MessageConfig)
+		v.MessageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextActivity != nil {
+		s.WriteString(schemas.CustomMessageActivity_NextActivity, *v.NextActivity)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CustomMessageActivity_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.CustomMessageActivity_TemplateVersion, *v.TemplateVersion)
+	}
+}
+func (v *CustomMessageActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomMessageActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomMessageActivity_DeliveryUri:
+			v.DeliveryUri = new(string)
+			return d.ReadString(schemas.CustomMessageActivity_DeliveryUri, v.DeliveryUri)
+		case schemas.CustomMessageActivity_EndpointTypes:
+			return deserializeListOf__EndpointTypesElement(d, schemas.CustomMessageActivity_EndpointTypes, &v.EndpointTypes)
+		case schemas.CustomMessageActivity_MessageConfig:
+			v.MessageConfig = &JourneyCustomMessage{}
+			return v.MessageConfig.Deserialize(d)
+		case schemas.CustomMessageActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.CustomMessageActivity_NextActivity, v.NextActivity)
+		case schemas.CustomMessageActivity_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.CustomMessageActivity_TemplateName, v.TemplateName)
+		case schemas.CustomMessageActivity_TemplateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.CustomMessageActivity_TemplateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
+}
+
 // Default button configuration.
 type DefaultButtonConfiguration struct {
 
@@ -2060,6 +4948,62 @@ type DefaultButtonConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultButtonConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultButtonConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultButtonConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackgroundColor != nil {
+		s.WriteString(schemas.DefaultButtonConfiguration_BackgroundColor, *v.BackgroundColor)
+	}
+	if v.BorderRadius != nil {
+		s.WriteInt32(schemas.DefaultButtonConfiguration_BorderRadius, *v.BorderRadius)
+	}
+	if v.ButtonAction != "" {
+		s.WriteString(schemas.DefaultButtonConfiguration_ButtonAction, string(v.ButtonAction))
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.DefaultButtonConfiguration_Link, *v.Link)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DefaultButtonConfiguration_Text, *v.Text)
+	}
+	if v.TextColor != nil {
+		s.WriteString(schemas.DefaultButtonConfiguration_TextColor, *v.TextColor)
+	}
+}
+func (v *DefaultButtonConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultButtonConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultButtonConfiguration_BackgroundColor:
+			v.BackgroundColor = new(string)
+			return d.ReadString(schemas.DefaultButtonConfiguration_BackgroundColor, v.BackgroundColor)
+		case schemas.DefaultButtonConfiguration_BorderRadius:
+			v.BorderRadius = new(int32)
+			return d.ReadInt32(schemas.DefaultButtonConfiguration_BorderRadius, v.BorderRadius)
+		case schemas.DefaultButtonConfiguration_ButtonAction:
+			var ev string
+			if err := d.ReadString(schemas.DefaultButtonConfiguration_ButtonAction, &ev); err != nil {
+				return err
+			}
+			v.ButtonAction = ButtonAction(ev)
+			return nil
+		case schemas.DefaultButtonConfiguration_Link:
+			v.Link = new(string)
+			return d.ReadString(schemas.DefaultButtonConfiguration_Link, v.Link)
+		case schemas.DefaultButtonConfiguration_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.DefaultButtonConfiguration_Text, v.Text)
+		case schemas.DefaultButtonConfiguration_TextColor:
+			v.TextColor = new(string)
+			return d.ReadString(schemas.DefaultButtonConfiguration_TextColor, v.TextColor)
+		}
+		return nil
+	})
+}
+
 // Specifies the default message for all channels.
 type DefaultMessage struct {
 
@@ -2071,6 +5015,31 @@ type DefaultMessage struct {
 	Substitutions map[string][]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DefaultMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.DefaultMessage_Body, *v.Body)
+	}
+	serializeMapOfListOf__string(s, schemas.DefaultMessage_Substitutions, v.Substitutions)
+}
+func (v *DefaultMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.DefaultMessage_Body, v.Body)
+		case schemas.DefaultMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.DefaultMessage_Substitutions, &v.Substitutions)
+		}
+		return nil
+	})
 }
 
 // Specifies the default settings and content for a push notification that's sent
@@ -2120,6 +5089,62 @@ type DefaultPushNotificationMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultPushNotificationMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultPushNotificationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultPushNotificationMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DefaultPushNotificationMessage_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.DefaultPushNotificationMessage_Body, *v.Body)
+	}
+	serializeMapOf__string(s, schemas.DefaultPushNotificationMessage_Data, v.Data)
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.DefaultPushNotificationMessage_SilentPush, *v.SilentPush)
+	}
+	serializeMapOfListOf__string(s, schemas.DefaultPushNotificationMessage_Substitutions, v.Substitutions)
+	if v.Title != nil {
+		s.WriteString(schemas.DefaultPushNotificationMessage_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DefaultPushNotificationMessage_Url, *v.Url)
+	}
+}
+func (v *DefaultPushNotificationMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultPushNotificationMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultPushNotificationMessage_Action:
+			var ev string
+			if err := d.ReadString(schemas.DefaultPushNotificationMessage_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.DefaultPushNotificationMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationMessage_Body, v.Body)
+		case schemas.DefaultPushNotificationMessage_Data:
+			return deserializeMapOf__string(d, schemas.DefaultPushNotificationMessage_Data, &v.Data)
+		case schemas.DefaultPushNotificationMessage_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.DefaultPushNotificationMessage_SilentPush, v.SilentPush)
+		case schemas.DefaultPushNotificationMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.DefaultPushNotificationMessage_Substitutions, &v.Substitutions)
+		case schemas.DefaultPushNotificationMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationMessage_Title, v.Title)
+		case schemas.DefaultPushNotificationMessage_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationMessage_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies the default settings and content for a message template that can be
 // used in messages that are sent through a push notification channel.
 type DefaultPushNotificationTemplate struct {
@@ -2163,6 +5188,56 @@ type DefaultPushNotificationTemplate struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DefaultPushNotificationTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultPushNotificationTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultPushNotificationTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DefaultPushNotificationTemplate_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.DefaultPushNotificationTemplate_Body, *v.Body)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.DefaultPushNotificationTemplate_Sound, *v.Sound)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.DefaultPushNotificationTemplate_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DefaultPushNotificationTemplate_Url, *v.Url)
+	}
+}
+func (v *DefaultPushNotificationTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultPushNotificationTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultPushNotificationTemplate_Action:
+			var ev string
+			if err := d.ReadString(schemas.DefaultPushNotificationTemplate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.DefaultPushNotificationTemplate_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationTemplate_Body, v.Body)
+		case schemas.DefaultPushNotificationTemplate_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationTemplate_Sound, v.Sound)
+		case schemas.DefaultPushNotificationTemplate_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationTemplate_Title, v.Title)
+		case schemas.DefaultPushNotificationTemplate_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DefaultPushNotificationTemplate_Url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings and content for the default message and any default
@@ -2211,6 +5286,94 @@ type DirectMessageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectMessageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectMessageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectMessageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_ADMMessage)
+		v.ADMMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.APNSMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_APNSMessage)
+		v.APNSMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BaiduMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_BaiduMessage)
+		v.BaiduMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_DefaultMessage)
+		v.DefaultMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultPushNotificationMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_DefaultPushNotificationMessage)
+		v.DefaultPushNotificationMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GCMMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_GCMMessage)
+		v.GCMMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_SMSMessage)
+		v.SMSMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceMessage != nil {
+		s.WriteStruct(schemas.DirectMessageConfiguration_VoiceMessage)
+		v.VoiceMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DirectMessageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectMessageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectMessageConfiguration_ADMMessage:
+			v.ADMMessage = &ADMMessage{}
+			return v.ADMMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_APNSMessage:
+			v.APNSMessage = &APNSMessage{}
+			return v.APNSMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_BaiduMessage:
+			v.BaiduMessage = &BaiduMessage{}
+			return v.BaiduMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_DefaultMessage:
+			v.DefaultMessage = &DefaultMessage{}
+			return v.DefaultMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_DefaultPushNotificationMessage:
+			v.DefaultPushNotificationMessage = &DefaultPushNotificationMessage{}
+			return v.DefaultPushNotificationMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_EmailMessage:
+			v.EmailMessage = &EmailMessage{}
+			return v.EmailMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_GCMMessage:
+			v.GCMMessage = &GCMMessage{}
+			return v.GCMMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_SMSMessage:
+			v.SMSMessage = &SMSMessage{}
+			return v.SMSMessage.Deserialize(d)
+		case schemas.DirectMessageConfiguration_VoiceMessage:
+			v.VoiceMessage = &VoiceMessage{}
+			return v.VoiceMessage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the email channel for an application.
 type EmailChannelRequest struct {
 
@@ -2244,6 +5407,58 @@ type EmailChannelRequest struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmailChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSet != nil {
+		s.WriteString(schemas.EmailChannelRequest_ConfigurationSet, *v.ConfigurationSet)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.EmailChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.FromAddress != nil {
+		s.WriteString(schemas.EmailChannelRequest_FromAddress, *v.FromAddress)
+	}
+	if v.Identity != nil {
+		s.WriteString(schemas.EmailChannelRequest_Identity, *v.Identity)
+	}
+	if v.OrchestrationSendingRoleArn != nil {
+		s.WriteString(schemas.EmailChannelRequest_OrchestrationSendingRoleArn, *v.OrchestrationSendingRoleArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.EmailChannelRequest_RoleArn, *v.RoleArn)
+	}
+}
+func (v *EmailChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailChannelRequest_ConfigurationSet:
+			v.ConfigurationSet = new(string)
+			return d.ReadString(schemas.EmailChannelRequest_ConfigurationSet, v.ConfigurationSet)
+		case schemas.EmailChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.EmailChannelRequest_Enabled, v.Enabled)
+		case schemas.EmailChannelRequest_FromAddress:
+			v.FromAddress = new(string)
+			return d.ReadString(schemas.EmailChannelRequest_FromAddress, v.FromAddress)
+		case schemas.EmailChannelRequest_Identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.EmailChannelRequest_Identity, v.Identity)
+		case schemas.EmailChannelRequest_OrchestrationSendingRoleArn:
+			v.OrchestrationSendingRoleArn = new(string)
+			return d.ReadString(schemas.EmailChannelRequest_OrchestrationSendingRoleArn, v.OrchestrationSendingRoleArn)
+		case schemas.EmailChannelRequest_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.EmailChannelRequest_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the email channel for an
@@ -2311,6 +5526,118 @@ type EmailChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.EmailChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationSet != nil {
+		s.WriteString(schemas.EmailChannelResponse_ConfigurationSet, *v.ConfigurationSet)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.EmailChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.EmailChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.FromAddress != nil {
+		s.WriteString(schemas.EmailChannelResponse_FromAddress, *v.FromAddress)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.EmailChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EmailChannelResponse_Id, *v.Id)
+	}
+	if v.Identity != nil {
+		s.WriteString(schemas.EmailChannelResponse_Identity, *v.Identity)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.EmailChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.EmailChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.EmailChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.MessagesPerSecond != nil {
+		s.WriteInt32(schemas.EmailChannelResponse_MessagesPerSecond, *v.MessagesPerSecond)
+	}
+	if v.OrchestrationSendingRoleArn != nil {
+		s.WriteString(schemas.EmailChannelResponse_OrchestrationSendingRoleArn, *v.OrchestrationSendingRoleArn)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.EmailChannelResponse_Platform, *v.Platform)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.EmailChannelResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.EmailChannelResponse_Version, *v.Version)
+	}
+}
+func (v *EmailChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.EmailChannelResponse_ConfigurationSet:
+			v.ConfigurationSet = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_ConfigurationSet, v.ConfigurationSet)
+		case schemas.EmailChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_CreationDate, v.CreationDate)
+		case schemas.EmailChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.EmailChannelResponse_Enabled, v.Enabled)
+		case schemas.EmailChannelResponse_FromAddress:
+			v.FromAddress = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_FromAddress, v.FromAddress)
+		case schemas.EmailChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.EmailChannelResponse_HasCredential, v.HasCredential)
+		case schemas.EmailChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_Id, v.Id)
+		case schemas.EmailChannelResponse_Identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_Identity, v.Identity)
+		case schemas.EmailChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.EmailChannelResponse_IsArchived, v.IsArchived)
+		case schemas.EmailChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.EmailChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.EmailChannelResponse_MessagesPerSecond:
+			v.MessagesPerSecond = new(int32)
+			return d.ReadInt32(schemas.EmailChannelResponse_MessagesPerSecond, v.MessagesPerSecond)
+		case schemas.EmailChannelResponse_OrchestrationSendingRoleArn:
+			v.OrchestrationSendingRoleArn = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_OrchestrationSendingRoleArn, v.OrchestrationSendingRoleArn)
+		case schemas.EmailChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_Platform, v.Platform)
+		case schemas.EmailChannelResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.EmailChannelResponse_RoleArn, v.RoleArn)
+		case schemas.EmailChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.EmailChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the default settings and content for a one-time email message that's
 // sent directly to an endpoint.
 type EmailMessage struct {
@@ -2343,6 +5670,62 @@ type EmailMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.EmailMessage_Body, *v.Body)
+	}
+	if v.FeedbackForwardingAddress != nil {
+		s.WriteString(schemas.EmailMessage_FeedbackForwardingAddress, *v.FeedbackForwardingAddress)
+	}
+	if v.FromAddress != nil {
+		s.WriteString(schemas.EmailMessage_FromAddress, *v.FromAddress)
+	}
+	if v.RawEmail != nil {
+		s.WriteStruct(schemas.EmailMessage_RawEmail)
+		v.RawEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOf__string(s, schemas.EmailMessage_ReplyToAddresses, v.ReplyToAddresses)
+	if v.SimpleEmail != nil {
+		s.WriteStruct(schemas.EmailMessage_SimpleEmail)
+		v.SimpleEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfListOf__string(s, schemas.EmailMessage_Substitutions, v.Substitutions)
+}
+func (v *EmailMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.EmailMessage_Body, v.Body)
+		case schemas.EmailMessage_FeedbackForwardingAddress:
+			v.FeedbackForwardingAddress = new(string)
+			return d.ReadString(schemas.EmailMessage_FeedbackForwardingAddress, v.FeedbackForwardingAddress)
+		case schemas.EmailMessage_FromAddress:
+			v.FromAddress = new(string)
+			return d.ReadString(schemas.EmailMessage_FromAddress, v.FromAddress)
+		case schemas.EmailMessage_RawEmail:
+			v.RawEmail = &RawEmail{}
+			return v.RawEmail.Deserialize(d)
+		case schemas.EmailMessage_ReplyToAddresses:
+			return deserializeListOf__string(d, schemas.EmailMessage_ReplyToAddresses, &v.ReplyToAddresses)
+		case schemas.EmailMessage_SimpleEmail:
+			v.SimpleEmail = &SimpleEmail{}
+			return v.SimpleEmail.Deserialize(d)
+		case schemas.EmailMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.EmailMessage_Substitutions, &v.Substitutions)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for an email activity in a journey. This type of
 // activity sends an email message to participants.
 type EmailMessageActivity struct {
@@ -2371,6 +5754,48 @@ type EmailMessageActivity struct {
 	TemplateVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmailMessageActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailMessageActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailMessageActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageConfig != nil {
+		s.WriteStruct(schemas.EmailMessageActivity_MessageConfig)
+		v.MessageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextActivity != nil {
+		s.WriteString(schemas.EmailMessageActivity_NextActivity, *v.NextActivity)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.EmailMessageActivity_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.EmailMessageActivity_TemplateVersion, *v.TemplateVersion)
+	}
+}
+func (v *EmailMessageActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailMessageActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailMessageActivity_MessageConfig:
+			v.MessageConfig = &JourneyEmailMessage{}
+			return v.MessageConfig.Deserialize(d)
+		case schemas.EmailMessageActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.EmailMessageActivity_NextActivity, v.NextActivity)
+		case schemas.EmailMessageActivity_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.EmailMessageActivity_TemplateName, v.TemplateName)
+		case schemas.EmailMessageActivity_TemplateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.EmailMessageActivity_TemplateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -2429,6 +5854,64 @@ type EmailTemplateRequest struct {
 	TextPart *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmailTemplateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailTemplateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.EmailTemplateRequest_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	serializeListOfMessageHeader(s, schemas.EmailTemplateRequest_Headers, v.Headers)
+	if v.HtmlPart != nil {
+		s.WriteString(schemas.EmailTemplateRequest_HtmlPart, *v.HtmlPart)
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.EmailTemplateRequest_RecommenderId, *v.RecommenderId)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.EmailTemplateRequest_Subject, *v.Subject)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.EmailTemplateRequest_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TextPart != nil {
+		s.WriteString(schemas.EmailTemplateRequest_TextPart, *v.TextPart)
+	}
+	serializeMapOf__string(s, schemas.EmailTemplateRequest_tags, v.Tags)
+}
+func (v *EmailTemplateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailTemplateRequest_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.EmailTemplateRequest_Headers:
+			return deserializeListOfMessageHeader(d, schemas.EmailTemplateRequest_Headers, &v.Headers)
+		case schemas.EmailTemplateRequest_HtmlPart:
+			v.HtmlPart = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_HtmlPart, v.HtmlPart)
+		case schemas.EmailTemplateRequest_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_RecommenderId, v.RecommenderId)
+		case schemas.EmailTemplateRequest_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_Subject, v.Subject)
+		case schemas.EmailTemplateRequest_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_TemplateDescription, v.TemplateDescription)
+		case schemas.EmailTemplateRequest_TextPart:
+			v.TextPart = new(string)
+			return d.ReadString(schemas.EmailTemplateRequest_TextPart, v.TextPart)
+		case schemas.EmailTemplateRequest_tags:
+			return deserializeMapOf__string(d, schemas.EmailTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Provides information about the content and settings for a message template that
@@ -2500,6 +5983,104 @@ type EmailTemplateResponse struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmailTemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EmailTemplateResponse_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.EmailTemplateResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.EmailTemplateResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	serializeListOfMessageHeader(s, schemas.EmailTemplateResponse_Headers, v.Headers)
+	if v.HtmlPart != nil {
+		s.WriteString(schemas.EmailTemplateResponse_HtmlPart, *v.HtmlPart)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.EmailTemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.EmailTemplateResponse_RecommenderId, *v.RecommenderId)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.EmailTemplateResponse_Subject, *v.Subject)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.EmailTemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.EmailTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.EmailTemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.TextPart != nil {
+		s.WriteString(schemas.EmailTemplateResponse_TextPart, *v.TextPart)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.EmailTemplateResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.EmailTemplateResponse_tags, v.Tags)
+}
+func (v *EmailTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_Arn, v.Arn)
+		case schemas.EmailTemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_CreationDate, v.CreationDate)
+		case schemas.EmailTemplateResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.EmailTemplateResponse_Headers:
+			return deserializeListOfMessageHeader(d, schemas.EmailTemplateResponse_Headers, &v.Headers)
+		case schemas.EmailTemplateResponse_HtmlPart:
+			v.HtmlPart = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_HtmlPart, v.HtmlPart)
+		case schemas.EmailTemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.EmailTemplateResponse_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_RecommenderId, v.RecommenderId)
+		case schemas.EmailTemplateResponse_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_Subject, v.Subject)
+		case schemas.EmailTemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.EmailTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.EmailTemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.EmailTemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.EmailTemplateResponse_TextPart:
+			v.TextPart = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_TextPart, v.TextPart)
+		case schemas.EmailTemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.EmailTemplateResponse_Version, v.Version)
+		case schemas.EmailTemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.EmailTemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Specifies an endpoint to create or update and the settings and attributes to
@@ -2574,6 +6155,98 @@ type EndpointBatchItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointBatchItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointBatchItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointBatchItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EndpointBatchItem_Address, *v.Address)
+	}
+	serializeMapOfListOf__string(s, schemas.EndpointBatchItem_Attributes, v.Attributes)
+	if v.ChannelType != "" {
+		s.WriteString(schemas.EndpointBatchItem_ChannelType, string(v.ChannelType))
+	}
+	if v.Demographic != nil {
+		s.WriteStruct(schemas.EndpointBatchItem_Demographic)
+		v.Demographic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.EndpointBatchItem_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.EndpointBatchItem_EndpointStatus, *v.EndpointStatus)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EndpointBatchItem_Id, *v.Id)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.EndpointBatchItem_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__double(s, schemas.EndpointBatchItem_Metrics, v.Metrics)
+	if v.OptOut != nil {
+		s.WriteString(schemas.EndpointBatchItem_OptOut, *v.OptOut)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.EndpointBatchItem_RequestId, *v.RequestId)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.EndpointBatchItem_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EndpointBatchItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointBatchItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointBatchItem_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_Address, v.Address)
+		case schemas.EndpointBatchItem_Attributes:
+			return deserializeMapOfListOf__string(d, schemas.EndpointBatchItem_Attributes, &v.Attributes)
+		case schemas.EndpointBatchItem_ChannelType:
+			var ev string
+			if err := d.ReadString(schemas.EndpointBatchItem_ChannelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.EndpointBatchItem_Demographic:
+			v.Demographic = &EndpointDemographic{}
+			return v.Demographic.Deserialize(d)
+		case schemas.EndpointBatchItem_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_EffectiveDate, v.EffectiveDate)
+		case schemas.EndpointBatchItem_EndpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_EndpointStatus, v.EndpointStatus)
+		case schemas.EndpointBatchItem_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_Id, v.Id)
+		case schemas.EndpointBatchItem_Location:
+			v.Location = &EndpointLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.EndpointBatchItem_Metrics:
+			return deserializeMapOf__double(d, schemas.EndpointBatchItem_Metrics, &v.Metrics)
+		case schemas.EndpointBatchItem_OptOut:
+			v.OptOut = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_OptOut, v.OptOut)
+		case schemas.EndpointBatchItem_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.EndpointBatchItem_RequestId, v.RequestId)
+		case schemas.EndpointBatchItem_User:
+			v.User = &EndpointUser{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a batch of endpoints to create or update and the settings and
 // attributes to set or change for each endpoint.
 type EndpointBatchRequest struct {
@@ -2586,6 +6259,25 @@ type EndpointBatchRequest struct {
 	Item []EndpointBatchItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointBatchRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointBatchRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEndpointBatchItem(s, schemas.EndpointBatchRequest_Item, v.Item)
+}
+func (v *EndpointBatchRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointBatchRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointBatchRequest_Item:
+			return deserializeListOfEndpointBatchItem(d, schemas.EndpointBatchRequest_Item, &v.Item)
+		}
+		return nil
+	})
 }
 
 // Specifies demographic information about an endpoint, such as the applicable
@@ -2621,6 +6313,70 @@ type EndpointDemographic struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointDemographic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointDemographic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointDemographic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppVersion != nil {
+		s.WriteString(schemas.EndpointDemographic_AppVersion, *v.AppVersion)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.EndpointDemographic_Locale, *v.Locale)
+	}
+	if v.Make != nil {
+		s.WriteString(schemas.EndpointDemographic_Make, *v.Make)
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.EndpointDemographic_Model, *v.Model)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.EndpointDemographic_ModelVersion, *v.ModelVersion)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.EndpointDemographic_Platform, *v.Platform)
+	}
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.EndpointDemographic_PlatformVersion, *v.PlatformVersion)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.EndpointDemographic_Timezone, *v.Timezone)
+	}
+}
+func (v *EndpointDemographic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointDemographic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointDemographic_AppVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.EndpointDemographic_AppVersion, v.AppVersion)
+		case schemas.EndpointDemographic_Locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.EndpointDemographic_Locale, v.Locale)
+		case schemas.EndpointDemographic_Make:
+			v.Make = new(string)
+			return d.ReadString(schemas.EndpointDemographic_Make, v.Make)
+		case schemas.EndpointDemographic_Model:
+			v.Model = new(string)
+			return d.ReadString(schemas.EndpointDemographic_Model, v.Model)
+		case schemas.EndpointDemographic_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.EndpointDemographic_ModelVersion, v.ModelVersion)
+		case schemas.EndpointDemographic_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.EndpointDemographic_Platform, v.Platform)
+		case schemas.EndpointDemographic_PlatformVersion:
+			v.PlatformVersion = new(string)
+			return d.ReadString(schemas.EndpointDemographic_PlatformVersion, v.PlatformVersion)
+		case schemas.EndpointDemographic_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.EndpointDemographic_Timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
 // Provides the status code and message that result from processing data for an
 // endpoint.
 type EndpointItemResponse struct {
@@ -2634,6 +6390,34 @@ type EndpointItemResponse struct {
 	StatusCode *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointItemResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointItemResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointItemResponse_Message, *v.Message)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.EndpointItemResponse_StatusCode, *v.StatusCode)
+	}
+}
+func (v *EndpointItemResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointItemResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointItemResponse_Message, v.Message)
+		case schemas.EndpointItemResponse_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.EndpointItemResponse_StatusCode, v.StatusCode)
+		}
+		return nil
+	})
 }
 
 // Specifies geographic information about an endpoint.
@@ -2660,6 +6444,58 @@ type EndpointLocation struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.EndpointLocation_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.EndpointLocation_Country, *v.Country)
+	}
+	if v.Latitude != nil {
+		s.WriteFloat64(schemas.EndpointLocation_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteFloat64(schemas.EndpointLocation_Longitude, *v.Longitude)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.EndpointLocation_PostalCode, *v.PostalCode)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.EndpointLocation_Region, *v.Region)
+	}
+}
+func (v *EndpointLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointLocation_City:
+			v.City = new(string)
+			return d.ReadString(schemas.EndpointLocation_City, v.City)
+		case schemas.EndpointLocation_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.EndpointLocation_Country, v.Country)
+		case schemas.EndpointLocation_Latitude:
+			v.Latitude = new(float64)
+			return d.ReadFloat64(schemas.EndpointLocation_Latitude, v.Latitude)
+		case schemas.EndpointLocation_Longitude:
+			v.Longitude = new(float64)
+			return d.ReadFloat64(schemas.EndpointLocation_Longitude, v.Longitude)
+		case schemas.EndpointLocation_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.EndpointLocation_PostalCode, v.PostalCode)
+		case schemas.EndpointLocation_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.EndpointLocation_Region, v.Region)
+		}
+		return nil
+	})
 }
 
 // Provides information about the delivery status and results of sending a message
@@ -2711,6 +6547,62 @@ type EndpointMessageResult struct {
 	UpdatedToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointMessageResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointMessageResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EndpointMessageResult_Address, *v.Address)
+	}
+	if v.DeliveryStatus != "" {
+		s.WriteString(schemas.EndpointMessageResult_DeliveryStatus, string(v.DeliveryStatus))
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.EndpointMessageResult_MessageId, *v.MessageId)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.EndpointMessageResult_StatusCode, *v.StatusCode)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.EndpointMessageResult_StatusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedToken != nil {
+		s.WriteString(schemas.EndpointMessageResult_UpdatedToken, *v.UpdatedToken)
+	}
+}
+func (v *EndpointMessageResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointMessageResult_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EndpointMessageResult_Address, v.Address)
+		case schemas.EndpointMessageResult_DeliveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.EndpointMessageResult_DeliveryStatus, &ev); err != nil {
+				return err
+			}
+			v.DeliveryStatus = DeliveryStatus(ev)
+			return nil
+		case schemas.EndpointMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.EndpointMessageResult_MessageId, v.MessageId)
+		case schemas.EndpointMessageResult_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.EndpointMessageResult_StatusCode, v.StatusCode)
+		case schemas.EndpointMessageResult_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.EndpointMessageResult_StatusMessage, v.StatusMessage)
+		case schemas.EndpointMessageResult_UpdatedToken:
+			v.UpdatedToken = new(string)
+			return d.ReadString(schemas.EndpointMessageResult_UpdatedToken, v.UpdatedToken)
+		}
+		return nil
+	})
 }
 
 // Specifies the channel type and other settings for an endpoint.
@@ -2779,6 +6671,92 @@ type EndpointRequest struct {
 	User *EndpointUser
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EndpointRequest_Address, *v.Address)
+	}
+	serializeMapOfListOf__string(s, schemas.EndpointRequest_Attributes, v.Attributes)
+	if v.ChannelType != "" {
+		s.WriteString(schemas.EndpointRequest_ChannelType, string(v.ChannelType))
+	}
+	if v.Demographic != nil {
+		s.WriteStruct(schemas.EndpointRequest_Demographic)
+		v.Demographic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.EndpointRequest_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.EndpointRequest_EndpointStatus, *v.EndpointStatus)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.EndpointRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__double(s, schemas.EndpointRequest_Metrics, v.Metrics)
+	if v.OptOut != nil {
+		s.WriteString(schemas.EndpointRequest_OptOut, *v.OptOut)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.EndpointRequest_RequestId, *v.RequestId)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.EndpointRequest_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EndpointRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointRequest_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EndpointRequest_Address, v.Address)
+		case schemas.EndpointRequest_Attributes:
+			return deserializeMapOfListOf__string(d, schemas.EndpointRequest_Attributes, &v.Attributes)
+		case schemas.EndpointRequest_ChannelType:
+			var ev string
+			if err := d.ReadString(schemas.EndpointRequest_ChannelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.EndpointRequest_Demographic:
+			v.Demographic = &EndpointDemographic{}
+			return v.Demographic.Deserialize(d)
+		case schemas.EndpointRequest_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.EndpointRequest_EffectiveDate, v.EffectiveDate)
+		case schemas.EndpointRequest_EndpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.EndpointRequest_EndpointStatus, v.EndpointStatus)
+		case schemas.EndpointRequest_Location:
+			v.Location = &EndpointLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.EndpointRequest_Metrics:
+			return deserializeMapOf__double(d, schemas.EndpointRequest_Metrics, &v.Metrics)
+		case schemas.EndpointRequest_OptOut:
+			v.OptOut = new(string)
+			return d.ReadString(schemas.EndpointRequest_OptOut, v.OptOut)
+		case schemas.EndpointRequest_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.EndpointRequest_RequestId, v.RequestId)
+		case schemas.EndpointRequest_User:
+			v.User = &EndpointUser{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides information about the channel type and other settings for an endpoint.
@@ -2861,6 +6839,116 @@ type EndpointResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EndpointResponse_Address, *v.Address)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.EndpointResponse_ApplicationId, *v.ApplicationId)
+	}
+	serializeMapOfListOf__string(s, schemas.EndpointResponse_Attributes, v.Attributes)
+	if v.ChannelType != "" {
+		s.WriteString(schemas.EndpointResponse_ChannelType, string(v.ChannelType))
+	}
+	if v.CohortId != nil {
+		s.WriteString(schemas.EndpointResponse_CohortId, *v.CohortId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.EndpointResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Demographic != nil {
+		s.WriteStruct(schemas.EndpointResponse_Demographic)
+		v.Demographic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.EndpointResponse_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.EndpointResponse_EndpointStatus, *v.EndpointStatus)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EndpointResponse_Id, *v.Id)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.EndpointResponse_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__double(s, schemas.EndpointResponse_Metrics, v.Metrics)
+	if v.OptOut != nil {
+		s.WriteString(schemas.EndpointResponse_OptOut, *v.OptOut)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.EndpointResponse_RequestId, *v.RequestId)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.EndpointResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EndpointResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointResponse_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EndpointResponse_Address, v.Address)
+		case schemas.EndpointResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.EndpointResponse_ApplicationId, v.ApplicationId)
+		case schemas.EndpointResponse_Attributes:
+			return deserializeMapOfListOf__string(d, schemas.EndpointResponse_Attributes, &v.Attributes)
+		case schemas.EndpointResponse_ChannelType:
+			var ev string
+			if err := d.ReadString(schemas.EndpointResponse_ChannelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.EndpointResponse_CohortId:
+			v.CohortId = new(string)
+			return d.ReadString(schemas.EndpointResponse_CohortId, v.CohortId)
+		case schemas.EndpointResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.EndpointResponse_CreationDate, v.CreationDate)
+		case schemas.EndpointResponse_Demographic:
+			v.Demographic = &EndpointDemographic{}
+			return v.Demographic.Deserialize(d)
+		case schemas.EndpointResponse_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.EndpointResponse_EffectiveDate, v.EffectiveDate)
+		case schemas.EndpointResponse_EndpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.EndpointResponse_EndpointStatus, v.EndpointStatus)
+		case schemas.EndpointResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EndpointResponse_Id, v.Id)
+		case schemas.EndpointResponse_Location:
+			v.Location = &EndpointLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.EndpointResponse_Metrics:
+			return deserializeMapOf__double(d, schemas.EndpointResponse_Metrics, &v.Metrics)
+		case schemas.EndpointResponse_OptOut:
+			v.OptOut = new(string)
+			return d.ReadString(schemas.EndpointResponse_OptOut, v.OptOut)
+		case schemas.EndpointResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.EndpointResponse_RequestId, v.RequestId)
+		case schemas.EndpointResponse_User:
+			v.User = &EndpointUser{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the content, including message variables and attributes, to use in a
 // message that's sent directly to an endpoint.
 type EndpointSendConfiguration struct {
@@ -2893,6 +6981,46 @@ type EndpointSendConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointSendConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointSendConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointSendConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BodyOverride != nil {
+		s.WriteString(schemas.EndpointSendConfiguration_BodyOverride, *v.BodyOverride)
+	}
+	serializeMapOf__string(s, schemas.EndpointSendConfiguration_Context, v.Context)
+	if v.RawContent != nil {
+		s.WriteString(schemas.EndpointSendConfiguration_RawContent, *v.RawContent)
+	}
+	serializeMapOfListOf__string(s, schemas.EndpointSendConfiguration_Substitutions, v.Substitutions)
+	if v.TitleOverride != nil {
+		s.WriteString(schemas.EndpointSendConfiguration_TitleOverride, *v.TitleOverride)
+	}
+}
+func (v *EndpointSendConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointSendConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointSendConfiguration_BodyOverride:
+			v.BodyOverride = new(string)
+			return d.ReadString(schemas.EndpointSendConfiguration_BodyOverride, v.BodyOverride)
+		case schemas.EndpointSendConfiguration_Context:
+			return deserializeMapOf__string(d, schemas.EndpointSendConfiguration_Context, &v.Context)
+		case schemas.EndpointSendConfiguration_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.EndpointSendConfiguration_RawContent, v.RawContent)
+		case schemas.EndpointSendConfiguration_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.EndpointSendConfiguration_Substitutions, &v.Substitutions)
+		case schemas.EndpointSendConfiguration_TitleOverride:
+			v.TitleOverride = new(string)
+			return d.ReadString(schemas.EndpointSendConfiguration_TitleOverride, v.TitleOverride)
+		}
+		return nil
+	})
+}
+
 // Provides information about all the endpoints that are associated with a user ID.
 type EndpointsResponse struct {
 
@@ -2902,6 +7030,25 @@ type EndpointsResponse struct {
 	Item []EndpointResponse
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEndpointResponse(s, schemas.EndpointsResponse_Item, v.Item)
+}
+func (v *EndpointsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointsResponse_Item:
+			return deserializeListOfEndpointResponse(d, schemas.EndpointsResponse_Item, &v.Item)
+		}
+		return nil
+	})
 }
 
 // Specifies data for one or more attributes that describe the user who's
@@ -2925,6 +7072,31 @@ type EndpointUser struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointUser) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfListOf__string(s, schemas.EndpointUser_UserAttributes, v.UserAttributes)
+	if v.UserId != nil {
+		s.WriteString(schemas.EndpointUser_UserId, *v.UserId)
+	}
+}
+func (v *EndpointUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointUser_UserAttributes:
+			return deserializeMapOfListOf__string(d, schemas.EndpointUser_UserAttributes, &v.UserAttributes)
+		case schemas.EndpointUser_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.EndpointUser_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // Specifies information about an event that reports data to Amazon Pinpoint.
@@ -2967,6 +7139,78 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppPackageName != nil {
+		s.WriteString(schemas.Event_AppPackageName, *v.AppPackageName)
+	}
+	if v.AppTitle != nil {
+		s.WriteString(schemas.Event_AppTitle, *v.AppTitle)
+	}
+	if v.AppVersionCode != nil {
+		s.WriteString(schemas.Event_AppVersionCode, *v.AppVersionCode)
+	}
+	serializeMapOf__string(s, schemas.Event_Attributes, v.Attributes)
+	if v.ClientSdkVersion != nil {
+		s.WriteString(schemas.Event_ClientSdkVersion, *v.ClientSdkVersion)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.Event_EventType, *v.EventType)
+	}
+	serializeMapOf__double(s, schemas.Event_Metrics, v.Metrics)
+	if v.SdkName != nil {
+		s.WriteString(schemas.Event_SdkName, *v.SdkName)
+	}
+	if v.Session != nil {
+		s.WriteStruct(schemas.Event_Session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteString(schemas.Event_Timestamp, *v.Timestamp)
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_AppPackageName:
+			v.AppPackageName = new(string)
+			return d.ReadString(schemas.Event_AppPackageName, v.AppPackageName)
+		case schemas.Event_AppTitle:
+			v.AppTitle = new(string)
+			return d.ReadString(schemas.Event_AppTitle, v.AppTitle)
+		case schemas.Event_AppVersionCode:
+			v.AppVersionCode = new(string)
+			return d.ReadString(schemas.Event_AppVersionCode, v.AppVersionCode)
+		case schemas.Event_Attributes:
+			return deserializeMapOf__string(d, schemas.Event_Attributes, &v.Attributes)
+		case schemas.Event_ClientSdkVersion:
+			v.ClientSdkVersion = new(string)
+			return d.ReadString(schemas.Event_ClientSdkVersion, v.ClientSdkVersion)
+		case schemas.Event_EventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.Event_EventType, v.EventType)
+		case schemas.Event_Metrics:
+			return deserializeMapOf__double(d, schemas.Event_Metrics, &v.Metrics)
+		case schemas.Event_SdkName:
+			v.SdkName = new(string)
+			return d.ReadString(schemas.Event_SdkName, v.SdkName)
+		case schemas.Event_Session:
+			v.Session = &Session{}
+			return v.Session.Deserialize(d)
+		case schemas.Event_Timestamp:
+			v.Timestamp = new(string)
+			return d.ReadString(schemas.Event_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Specifies the conditions to evaluate for an event that applies to an activity
 // in a journey.
 type EventCondition struct {
@@ -2979,6 +7223,36 @@ type EventCondition struct {
 	MessageActivity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.EventCondition_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageActivity != nil {
+		s.WriteString(schemas.EventCondition_MessageActivity, *v.MessageActivity)
+	}
+}
+func (v *EventCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventCondition_Dimensions:
+			v.Dimensions = &EventDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.EventCondition_MessageActivity:
+			v.MessageActivity = new(string)
+			return d.ReadString(schemas.EventCondition_MessageActivity, v.MessageActivity)
+		}
+		return nil
+	})
 }
 
 // Specifies the dimensions for an event filter that determines when a campaign is
@@ -3006,6 +7280,36 @@ type EventDimensions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventDimensions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDimensions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDimensions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfAttributeDimension(s, schemas.EventDimensions_Attributes, v.Attributes)
+	if v.EventType != nil {
+		s.WriteStruct(schemas.EventDimensions_EventType)
+		v.EventType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfMetricDimension(s, schemas.EventDimensions_Metrics, v.Metrics)
+}
+func (v *EventDimensions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDimensions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDimensions_Attributes:
+			return deserializeMapOfAttributeDimension(d, schemas.EventDimensions_Attributes, &v.Attributes)
+		case schemas.EventDimensions_EventType:
+			v.EventType = &SetDimension{}
+			return v.EventType.Deserialize(d)
+		case schemas.EventDimensions_Metrics:
+			return deserializeMapOfMetricDimension(d, schemas.EventDimensions_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for an event that causes a campaign to be sent or a
 // journey activity to be performed.
 type EventFilter struct {
@@ -3027,6 +7331,40 @@ type EventFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.EventFilter_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterType != "" {
+		s.WriteString(schemas.EventFilter_FilterType, string(v.FilterType))
+	}
+}
+func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventFilter_Dimensions:
+			v.Dimensions = &EventDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.EventFilter_FilterType:
+			var ev string
+			if err := d.ReadString(schemas.EventFilter_FilterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = FilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides the status code and message that result from processing an event.
 type EventItemResponse struct {
 
@@ -3040,6 +7378,34 @@ type EventItemResponse struct {
 	StatusCode *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventItemResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventItemResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EventItemResponse_Message, *v.Message)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.EventItemResponse_StatusCode, *v.StatusCode)
+	}
+}
+func (v *EventItemResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventItemResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EventItemResponse_Message, v.Message)
+		case schemas.EventItemResponse_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.EventItemResponse_StatusCode, v.StatusCode)
+		}
+		return nil
+	})
 }
 
 // Specifies a batch of endpoints and events to process.
@@ -3058,6 +7424,33 @@ type EventsBatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventsBatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsBatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsBatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.EventsBatch_Endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfEvent(s, schemas.EventsBatch_Events, v.Events)
+}
+func (v *EventsBatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsBatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsBatch_Endpoint:
+			v.Endpoint = &PublicEndpoint{}
+			return v.Endpoint.Deserialize(d)
+		case schemas.EventsBatch_Events:
+			return deserializeMapOfEvent(d, schemas.EventsBatch_Events, &v.Events)
+		}
+		return nil
+	})
+}
+
 // Specifies a batch of events to process.
 type EventsRequest struct {
 
@@ -3068,6 +7461,25 @@ type EventsRequest struct {
 	BatchItem map[string]EventsBatch
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfEventsBatch(s, schemas.EventsRequest_BatchItem, v.BatchItem)
+}
+func (v *EventsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsRequest_BatchItem:
+			return deserializeMapOfEventsBatch(d, schemas.EventsRequest_BatchItem, &v.BatchItem)
+		}
+		return nil
+	})
 }
 
 // Provides information about endpoints and the events that they're associated
@@ -3084,6 +7496,25 @@ type EventsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfItemResponse(s, schemas.EventsResponse_Results, v.Results)
+}
+func (v *EventsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsResponse_Results:
+			return deserializeMapOfItemResponse(d, schemas.EventsResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for an event that causes a journey activity to start.
 type EventStartCondition struct {
 
@@ -3094,6 +7525,36 @@ type EventStartCondition struct {
 	SegmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventStartCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventStartCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventStartCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventFilter != nil {
+		s.WriteStruct(schemas.EventStartCondition_EventFilter)
+		v.EventFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.EventStartCondition_SegmentId, *v.SegmentId)
+	}
+}
+func (v *EventStartCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventStartCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventStartCondition_EventFilter:
+			v.EventFilter = &EventFilter{}
+			return v.EventFilter.Deserialize(d)
+		case schemas.EventStartCondition_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.EventStartCondition_SegmentId, v.SegmentId)
+		}
+		return nil
+	})
 }
 
 // Specifies settings for publishing event data to an Amazon Kinesis data stream
@@ -3138,6 +7599,58 @@ type EventStream struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventStream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventStream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventStream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.EventStream_ApplicationId, *v.ApplicationId)
+	}
+	if v.DestinationStreamArn != nil {
+		s.WriteString(schemas.EventStream_DestinationStreamArn, *v.DestinationStreamArn)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.EventStream_ExternalId, *v.ExternalId)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.EventStream_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.EventStream_LastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.EventStream_RoleArn, *v.RoleArn)
+	}
+}
+func (v *EventStream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventStream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventStream_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.EventStream_ApplicationId, v.ApplicationId)
+		case schemas.EventStream_DestinationStreamArn:
+			v.DestinationStreamArn = new(string)
+			return d.ReadString(schemas.EventStream_DestinationStreamArn, v.DestinationStreamArn)
+		case schemas.EventStream_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.EventStream_ExternalId, v.ExternalId)
+		case schemas.EventStream_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.EventStream_LastModifiedDate, v.LastModifiedDate)
+		case schemas.EventStream_LastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.EventStream_LastUpdatedBy, v.LastUpdatedBy)
+		case schemas.EventStream_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.EventStream_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a job that exports endpoint definitions to an Amazon
 // Simple Storage Service (Amazon S3) bucket.
 type ExportJobRequest struct {
@@ -3166,6 +7679,46 @@ type ExportJobRequest struct {
 	SegmentVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportJobRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportJobRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExportJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3UrlPrefix != nil {
+		s.WriteString(schemas.ExportJobRequest_S3UrlPrefix, *v.S3UrlPrefix)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.ExportJobRequest_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentVersion != nil {
+		s.WriteInt32(schemas.ExportJobRequest_SegmentVersion, *v.SegmentVersion)
+	}
+}
+func (v *ExportJobRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportJobRequest_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExportJobRequest_RoleArn, v.RoleArn)
+		case schemas.ExportJobRequest_S3UrlPrefix:
+			v.S3UrlPrefix = new(string)
+			return d.ReadString(schemas.ExportJobRequest_S3UrlPrefix, v.S3UrlPrefix)
+		case schemas.ExportJobRequest_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.ExportJobRequest_SegmentId, v.SegmentId)
+		case schemas.ExportJobRequest_SegmentVersion:
+			v.SegmentVersion = new(int32)
+			return d.ReadInt32(schemas.ExportJobRequest_SegmentVersion, v.SegmentVersion)
+		}
+		return nil
+	})
 }
 
 // Provides information about the resource settings for a job that exports
@@ -3198,6 +7751,46 @@ type ExportJobResource struct {
 	SegmentVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportJobResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportJobResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportJobResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExportJobResource_RoleArn, *v.RoleArn)
+	}
+	if v.S3UrlPrefix != nil {
+		s.WriteString(schemas.ExportJobResource_S3UrlPrefix, *v.S3UrlPrefix)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.ExportJobResource_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentVersion != nil {
+		s.WriteInt32(schemas.ExportJobResource_SegmentVersion, *v.SegmentVersion)
+	}
+}
+func (v *ExportJobResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportJobResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportJobResource_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExportJobResource_RoleArn, v.RoleArn)
+		case schemas.ExportJobResource_S3UrlPrefix:
+			v.S3UrlPrefix = new(string)
+			return d.ReadString(schemas.ExportJobResource_S3UrlPrefix, v.S3UrlPrefix)
+		case schemas.ExportJobResource_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.ExportJobResource_SegmentId, v.SegmentId)
+		case schemas.ExportJobResource_SegmentVersion:
+			v.SegmentVersion = new(int32)
+			return d.ReadInt32(schemas.ExportJobResource_SegmentVersion, v.SegmentVersion)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of a job that exports
@@ -3268,6 +7861,103 @@ type ExportJobResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportJobResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportJobResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ExportJobResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CompletedPieces != nil {
+		s.WriteInt32(schemas.ExportJobResponse_CompletedPieces, *v.CompletedPieces)
+	}
+	if v.CompletionDate != nil {
+		s.WriteString(schemas.ExportJobResponse_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ExportJobResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.ExportJobResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedPieces != nil {
+		s.WriteInt32(schemas.ExportJobResponse_FailedPieces, *v.FailedPieces)
+	}
+	serializeListOf__string(s, schemas.ExportJobResponse_Failures, v.Failures)
+	if v.Id != nil {
+		s.WriteString(schemas.ExportJobResponse_Id, *v.Id)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ExportJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.TotalFailures != nil {
+		s.WriteInt32(schemas.ExportJobResponse_TotalFailures, *v.TotalFailures)
+	}
+	if v.TotalPieces != nil {
+		s.WriteInt32(schemas.ExportJobResponse_TotalPieces, *v.TotalPieces)
+	}
+	if v.TotalProcessed != nil {
+		s.WriteInt32(schemas.ExportJobResponse_TotalProcessed, *v.TotalProcessed)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ExportJobResponse_Type, *v.Type)
+	}
+}
+func (v *ExportJobResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportJobResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ExportJobResponse_ApplicationId, v.ApplicationId)
+		case schemas.ExportJobResponse_CompletedPieces:
+			v.CompletedPieces = new(int32)
+			return d.ReadInt32(schemas.ExportJobResponse_CompletedPieces, v.CompletedPieces)
+		case schemas.ExportJobResponse_CompletionDate:
+			v.CompletionDate = new(string)
+			return d.ReadString(schemas.ExportJobResponse_CompletionDate, v.CompletionDate)
+		case schemas.ExportJobResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ExportJobResponse_CreationDate, v.CreationDate)
+		case schemas.ExportJobResponse_Definition:
+			v.Definition = &ExportJobResource{}
+			return v.Definition.Deserialize(d)
+		case schemas.ExportJobResponse_FailedPieces:
+			v.FailedPieces = new(int32)
+			return d.ReadInt32(schemas.ExportJobResponse_FailedPieces, v.FailedPieces)
+		case schemas.ExportJobResponse_Failures:
+			return deserializeListOf__string(d, schemas.ExportJobResponse_Failures, &v.Failures)
+		case schemas.ExportJobResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExportJobResponse_Id, v.Id)
+		case schemas.ExportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ExportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ExportJobResponse_TotalFailures:
+			v.TotalFailures = new(int32)
+			return d.ReadInt32(schemas.ExportJobResponse_TotalFailures, v.TotalFailures)
+		case schemas.ExportJobResponse_TotalPieces:
+			v.TotalPieces = new(int32)
+			return d.ReadInt32(schemas.ExportJobResponse_TotalPieces, v.TotalPieces)
+		case schemas.ExportJobResponse_TotalProcessed:
+			v.TotalProcessed = new(int32)
+			return d.ReadInt32(schemas.ExportJobResponse_TotalProcessed, v.TotalProcessed)
+		case schemas.ExportJobResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ExportJobResponse_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Provides information about all the export jobs that are associated with an
 // application or segment. An export job is a job that exports endpoint definitions
 // to a file.
@@ -3284,6 +7974,31 @@ type ExportJobsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportJobsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportJobsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfExportJobResponse(s, schemas.ExportJobsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExportJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ExportJobsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportJobsResponse_Item:
+			return deserializeListOfExportJobResponse(d, schemas.ExportJobsResponse_Item, &v.Item)
+		case schemas.ExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Specifies the status and settings of the GCM channel for an application. This
@@ -3309,6 +8024,46 @@ type GCMChannelRequest struct {
 	ServiceJson *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GCMChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GCMChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GCMChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.GCMChannelRequest_ApiKey, *v.ApiKey)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.GCMChannelRequest_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.GCMChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.ServiceJson != nil {
+		s.WriteString(schemas.GCMChannelRequest_ServiceJson, *v.ServiceJson)
+	}
+}
+func (v *GCMChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GCMChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GCMChannelRequest_ApiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.GCMChannelRequest_ApiKey, v.ApiKey)
+		case schemas.GCMChannelRequest_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.GCMChannelRequest_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.GCMChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.GCMChannelRequest_Enabled, v.Enabled)
+		case schemas.GCMChannelRequest_ServiceJson:
+			v.ServiceJson = new(string)
+			return d.ReadString(schemas.GCMChannelRequest_ServiceJson, v.ServiceJson)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the GCM channel for an
@@ -3364,6 +8119,100 @@ type GCMChannelResponse struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GCMChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GCMChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GCMChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GCMChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.GCMChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Credential != nil {
+		s.WriteString(schemas.GCMChannelResponse_Credential, *v.Credential)
+	}
+	if v.DefaultAuthenticationMethod != nil {
+		s.WriteString(schemas.GCMChannelResponse_DefaultAuthenticationMethod, *v.DefaultAuthenticationMethod)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.GCMChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.GCMChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.HasFcmServiceCredentials != nil {
+		s.WriteBool(schemas.GCMChannelResponse_HasFcmServiceCredentials, *v.HasFcmServiceCredentials)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GCMChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.GCMChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.GCMChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.GCMChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.GCMChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.GCMChannelResponse_Version, *v.Version)
+	}
+}
+func (v *GCMChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GCMChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GCMChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.GCMChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_CreationDate, v.CreationDate)
+		case schemas.GCMChannelResponse_Credential:
+			v.Credential = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_Credential, v.Credential)
+		case schemas.GCMChannelResponse_DefaultAuthenticationMethod:
+			v.DefaultAuthenticationMethod = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_DefaultAuthenticationMethod, v.DefaultAuthenticationMethod)
+		case schemas.GCMChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.GCMChannelResponse_Enabled, v.Enabled)
+		case schemas.GCMChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.GCMChannelResponse_HasCredential, v.HasCredential)
+		case schemas.GCMChannelResponse_HasFcmServiceCredentials:
+			v.HasFcmServiceCredentials = new(bool)
+			return d.ReadBool(schemas.GCMChannelResponse_HasFcmServiceCredentials, v.HasFcmServiceCredentials)
+		case schemas.GCMChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_Id, v.Id)
+		case schemas.GCMChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.GCMChannelResponse_IsArchived, v.IsArchived)
+		case schemas.GCMChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.GCMChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.GCMChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.GCMChannelResponse_Platform, v.Platform)
+		case schemas.GCMChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.GCMChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -3478,6 +8327,128 @@ type GCMMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GCMMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GCMMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GCMMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GCMMessage_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.GCMMessage_Body, *v.Body)
+	}
+	if v.CollapseKey != nil {
+		s.WriteString(schemas.GCMMessage_CollapseKey, *v.CollapseKey)
+	}
+	serializeMapOf__string(s, schemas.GCMMessage_Data, v.Data)
+	if v.IconReference != nil {
+		s.WriteString(schemas.GCMMessage_IconReference, *v.IconReference)
+	}
+	if v.ImageIconUrl != nil {
+		s.WriteString(schemas.GCMMessage_ImageIconUrl, *v.ImageIconUrl)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.GCMMessage_ImageUrl, *v.ImageUrl)
+	}
+	if v.PreferredAuthenticationMethod != nil {
+		s.WriteString(schemas.GCMMessage_PreferredAuthenticationMethod, *v.PreferredAuthenticationMethod)
+	}
+	if v.Priority != nil {
+		s.WriteString(schemas.GCMMessage_Priority, *v.Priority)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.GCMMessage_RawContent, *v.RawContent)
+	}
+	if v.RestrictedPackageName != nil {
+		s.WriteString(schemas.GCMMessage_RestrictedPackageName, *v.RestrictedPackageName)
+	}
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.GCMMessage_SilentPush, *v.SilentPush)
+	}
+	if v.SmallImageIconUrl != nil {
+		s.WriteString(schemas.GCMMessage_SmallImageIconUrl, *v.SmallImageIconUrl)
+	}
+	if v.Sound != nil {
+		s.WriteString(schemas.GCMMessage_Sound, *v.Sound)
+	}
+	serializeMapOfListOf__string(s, schemas.GCMMessage_Substitutions, v.Substitutions)
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.GCMMessage_TimeToLive, *v.TimeToLive)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GCMMessage_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GCMMessage_Url, *v.Url)
+	}
+}
+func (v *GCMMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GCMMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GCMMessage_Action:
+			var ev string
+			if err := d.ReadString(schemas.GCMMessage_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.GCMMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.GCMMessage_Body, v.Body)
+		case schemas.GCMMessage_CollapseKey:
+			v.CollapseKey = new(string)
+			return d.ReadString(schemas.GCMMessage_CollapseKey, v.CollapseKey)
+		case schemas.GCMMessage_Data:
+			return deserializeMapOf__string(d, schemas.GCMMessage_Data, &v.Data)
+		case schemas.GCMMessage_IconReference:
+			v.IconReference = new(string)
+			return d.ReadString(schemas.GCMMessage_IconReference, v.IconReference)
+		case schemas.GCMMessage_ImageIconUrl:
+			v.ImageIconUrl = new(string)
+			return d.ReadString(schemas.GCMMessage_ImageIconUrl, v.ImageIconUrl)
+		case schemas.GCMMessage_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.GCMMessage_ImageUrl, v.ImageUrl)
+		case schemas.GCMMessage_PreferredAuthenticationMethod:
+			v.PreferredAuthenticationMethod = new(string)
+			return d.ReadString(schemas.GCMMessage_PreferredAuthenticationMethod, v.PreferredAuthenticationMethod)
+		case schemas.GCMMessage_Priority:
+			v.Priority = new(string)
+			return d.ReadString(schemas.GCMMessage_Priority, v.Priority)
+		case schemas.GCMMessage_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.GCMMessage_RawContent, v.RawContent)
+		case schemas.GCMMessage_RestrictedPackageName:
+			v.RestrictedPackageName = new(string)
+			return d.ReadString(schemas.GCMMessage_RestrictedPackageName, v.RestrictedPackageName)
+		case schemas.GCMMessage_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.GCMMessage_SilentPush, v.SilentPush)
+		case schemas.GCMMessage_SmallImageIconUrl:
+			v.SmallImageIconUrl = new(string)
+			return d.ReadString(schemas.GCMMessage_SmallImageIconUrl, v.SmallImageIconUrl)
+		case schemas.GCMMessage_Sound:
+			v.Sound = new(string)
+			return d.ReadString(schemas.GCMMessage_Sound, v.Sound)
+		case schemas.GCMMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.GCMMessage_Substitutions, &v.Substitutions)
+		case schemas.GCMMessage_TimeToLive:
+			v.TimeToLive = new(int32)
+			return d.ReadInt32(schemas.GCMMessage_TimeToLive, v.TimeToLive)
+		case schemas.GCMMessage_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GCMMessage_Title, v.Title)
+		case schemas.GCMMessage_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GCMMessage_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Specifies the GPS coordinates of a location.
 type GPSCoordinates struct {
 
@@ -3494,6 +8465,34 @@ type GPSCoordinates struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GPSCoordinates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GPSCoordinates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GPSCoordinates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Latitude != nil {
+		s.WriteFloat64(schemas.GPSCoordinates_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteFloat64(schemas.GPSCoordinates_Longitude, *v.Longitude)
+	}
+}
+func (v *GPSCoordinates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GPSCoordinates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GPSCoordinates_Latitude:
+			v.Latitude = new(float64)
+			return d.ReadFloat64(schemas.GPSCoordinates_Latitude, v.Latitude)
+		case schemas.GPSCoordinates_Longitude:
+			v.Longitude = new(float64)
+			return d.ReadFloat64(schemas.GPSCoordinates_Longitude, v.Longitude)
+		}
+		return nil
+	})
+}
+
 // Specifies GPS-based criteria for including or excluding endpoints from a
 // segment.
 type GPSPointDimension struct {
@@ -3507,6 +8506,36 @@ type GPSPointDimension struct {
 	RangeInKilometers *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *GPSPointDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GPSPointDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GPSPointDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Coordinates != nil {
+		s.WriteStruct(schemas.GPSPointDimension_Coordinates)
+		v.Coordinates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RangeInKilometers != nil {
+		s.WriteFloat64(schemas.GPSPointDimension_RangeInKilometers, *v.RangeInKilometers)
+	}
+}
+func (v *GPSPointDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GPSPointDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GPSPointDimension_Coordinates:
+			v.Coordinates = &GPSCoordinates{}
+			return v.Coordinates.Deserialize(d)
+		case schemas.GPSPointDimension_RangeInKilometers:
+			v.RangeInKilometers = new(float64)
+			return d.ReadFloat64(schemas.GPSPointDimension_RangeInKilometers, v.RangeInKilometers)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a holdout activity in a journey. This type of
@@ -3528,6 +8557,34 @@ type HoldoutActivity struct {
 	NextActivity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HoldoutActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HoldoutActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HoldoutActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextActivity != nil {
+		s.WriteString(schemas.HoldoutActivity_NextActivity, *v.NextActivity)
+	}
+	if v.Percentage != nil {
+		s.WriteInt32(schemas.HoldoutActivity_Percentage, *v.Percentage)
+	}
+}
+func (v *HoldoutActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HoldoutActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HoldoutActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.HoldoutActivity_NextActivity, v.NextActivity)
+		case schemas.HoldoutActivity_Percentage:
+			v.Percentage = new(int32)
+			return d.ReadInt32(schemas.HoldoutActivity_Percentage, v.Percentage)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a job that imports endpoint definitions from an
@@ -3587,6 +8644,74 @@ type ImportJobRequest struct {
 	SegmentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportJobRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportJobRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefineSegment != nil {
+		s.WriteBool(schemas.ImportJobRequest_DefineSegment, *v.DefineSegment)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.ImportJobRequest_ExternalId, *v.ExternalId)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ImportJobRequest_Format, string(v.Format))
+	}
+	if v.RegisterEndpoints != nil {
+		s.WriteBool(schemas.ImportJobRequest_RegisterEndpoints, *v.RegisterEndpoints)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.ImportJobRequest_S3Url, *v.S3Url)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.ImportJobRequest_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.ImportJobRequest_SegmentName, *v.SegmentName)
+	}
+}
+func (v *ImportJobRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportJobRequest_DefineSegment:
+			v.DefineSegment = new(bool)
+			return d.ReadBool(schemas.ImportJobRequest_DefineSegment, v.DefineSegment)
+		case schemas.ImportJobRequest_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.ImportJobRequest_ExternalId, v.ExternalId)
+		case schemas.ImportJobRequest_Format:
+			var ev string
+			if err := d.ReadString(schemas.ImportJobRequest_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = Format(ev)
+			return nil
+		case schemas.ImportJobRequest_RegisterEndpoints:
+			v.RegisterEndpoints = new(bool)
+			return d.ReadBool(schemas.ImportJobRequest_RegisterEndpoints, v.RegisterEndpoints)
+		case schemas.ImportJobRequest_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ImportJobRequest_RoleArn, v.RoleArn)
+		case schemas.ImportJobRequest_S3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.ImportJobRequest_S3Url, v.S3Url)
+		case schemas.ImportJobRequest_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.ImportJobRequest_SegmentId, v.SegmentId)
+		case schemas.ImportJobRequest_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.ImportJobRequest_SegmentName, v.SegmentName)
+		}
+		return nil
+	})
 }
 
 // Provides information about the resource settings for a job that imports
@@ -3650,6 +8775,74 @@ type ImportJobResource struct {
 	SegmentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportJobResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportJobResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportJobResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefineSegment != nil {
+		s.WriteBool(schemas.ImportJobResource_DefineSegment, *v.DefineSegment)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.ImportJobResource_ExternalId, *v.ExternalId)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ImportJobResource_Format, string(v.Format))
+	}
+	if v.RegisterEndpoints != nil {
+		s.WriteBool(schemas.ImportJobResource_RegisterEndpoints, *v.RegisterEndpoints)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportJobResource_RoleArn, *v.RoleArn)
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.ImportJobResource_S3Url, *v.S3Url)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.ImportJobResource_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.ImportJobResource_SegmentName, *v.SegmentName)
+	}
+}
+func (v *ImportJobResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportJobResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportJobResource_DefineSegment:
+			v.DefineSegment = new(bool)
+			return d.ReadBool(schemas.ImportJobResource_DefineSegment, v.DefineSegment)
+		case schemas.ImportJobResource_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.ImportJobResource_ExternalId, v.ExternalId)
+		case schemas.ImportJobResource_Format:
+			var ev string
+			if err := d.ReadString(schemas.ImportJobResource_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = Format(ev)
+			return nil
+		case schemas.ImportJobResource_RegisterEndpoints:
+			v.RegisterEndpoints = new(bool)
+			return d.ReadBool(schemas.ImportJobResource_RegisterEndpoints, v.RegisterEndpoints)
+		case schemas.ImportJobResource_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ImportJobResource_RoleArn, v.RoleArn)
+		case schemas.ImportJobResource_S3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.ImportJobResource_S3Url, v.S3Url)
+		case schemas.ImportJobResource_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.ImportJobResource_SegmentId, v.SegmentId)
+		case schemas.ImportJobResource_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.ImportJobResource_SegmentName, v.SegmentName)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of a job that imports
@@ -3720,6 +8913,103 @@ type ImportJobResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportJobResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportJobResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ImportJobResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CompletedPieces != nil {
+		s.WriteInt32(schemas.ImportJobResponse_CompletedPieces, *v.CompletedPieces)
+	}
+	if v.CompletionDate != nil {
+		s.WriteString(schemas.ImportJobResponse_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ImportJobResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.ImportJobResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedPieces != nil {
+		s.WriteInt32(schemas.ImportJobResponse_FailedPieces, *v.FailedPieces)
+	}
+	serializeListOf__string(s, schemas.ImportJobResponse_Failures, v.Failures)
+	if v.Id != nil {
+		s.WriteString(schemas.ImportJobResponse_Id, *v.Id)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ImportJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.TotalFailures != nil {
+		s.WriteInt32(schemas.ImportJobResponse_TotalFailures, *v.TotalFailures)
+	}
+	if v.TotalPieces != nil {
+		s.WriteInt32(schemas.ImportJobResponse_TotalPieces, *v.TotalPieces)
+	}
+	if v.TotalProcessed != nil {
+		s.WriteInt32(schemas.ImportJobResponse_TotalProcessed, *v.TotalProcessed)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ImportJobResponse_Type, *v.Type)
+	}
+}
+func (v *ImportJobResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportJobResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ImportJobResponse_ApplicationId, v.ApplicationId)
+		case schemas.ImportJobResponse_CompletedPieces:
+			v.CompletedPieces = new(int32)
+			return d.ReadInt32(schemas.ImportJobResponse_CompletedPieces, v.CompletedPieces)
+		case schemas.ImportJobResponse_CompletionDate:
+			v.CompletionDate = new(string)
+			return d.ReadString(schemas.ImportJobResponse_CompletionDate, v.CompletionDate)
+		case schemas.ImportJobResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ImportJobResponse_CreationDate, v.CreationDate)
+		case schemas.ImportJobResponse_Definition:
+			v.Definition = &ImportJobResource{}
+			return v.Definition.Deserialize(d)
+		case schemas.ImportJobResponse_FailedPieces:
+			v.FailedPieces = new(int32)
+			return d.ReadInt32(schemas.ImportJobResponse_FailedPieces, v.FailedPieces)
+		case schemas.ImportJobResponse_Failures:
+			return deserializeListOf__string(d, schemas.ImportJobResponse_Failures, &v.Failures)
+		case schemas.ImportJobResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ImportJobResponse_Id, v.Id)
+		case schemas.ImportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ImportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ImportJobResponse_TotalFailures:
+			v.TotalFailures = new(int32)
+			return d.ReadInt32(schemas.ImportJobResponse_TotalFailures, v.TotalFailures)
+		case schemas.ImportJobResponse_TotalPieces:
+			v.TotalPieces = new(int32)
+			return d.ReadInt32(schemas.ImportJobResponse_TotalPieces, v.TotalPieces)
+		case schemas.ImportJobResponse_TotalProcessed:
+			v.TotalProcessed = new(int32)
+			return d.ReadInt32(schemas.ImportJobResponse_TotalProcessed, v.TotalProcessed)
+		case schemas.ImportJobResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ImportJobResponse_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Provides information about the status and settings of all the import jobs that
 // are associated with an application or segment. An import job is a job that
 // imports endpoint definitions from one or more files.
@@ -3736,6 +9026,31 @@ type ImportJobsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportJobsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportJobsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfImportJobResponse(s, schemas.ImportJobsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ImportJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ImportJobsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportJobsResponse_Item:
+			return deserializeListOfImportJobResponse(d, schemas.ImportJobsResponse_Item, &v.Item)
+		case schemas.ImportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ImportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Schedule of the campaign.
@@ -3755,6 +9070,44 @@ type InAppCampaignSchedule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppCampaignSchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppCampaignSchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppCampaignSchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.InAppCampaignSchedule_EndDate, *v.EndDate)
+	}
+	if v.EventFilter != nil {
+		s.WriteStruct(schemas.InAppCampaignSchedule_EventFilter)
+		v.EventFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.InAppCampaignSchedule_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InAppCampaignSchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppCampaignSchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppCampaignSchedule_EndDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.InAppCampaignSchedule_EndDate, v.EndDate)
+		case schemas.InAppCampaignSchedule_EventFilter:
+			v.EventFilter = &CampaignEventFilter{}
+			return v.EventFilter.Deserialize(d)
+		case schemas.InAppCampaignSchedule_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides all fields required for building an in-app message.
 type InAppMessage struct {
 
@@ -3768,6 +9121,38 @@ type InAppMessage struct {
 	Layout Layout
 
 	noSmithyDocumentSerde
+}
+
+func (v *InAppMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfInAppMessageContent(s, schemas.InAppMessage_Content, v.Content)
+	serializeMapOf__string(s, schemas.InAppMessage_CustomConfig, v.CustomConfig)
+	if v.Layout != "" {
+		s.WriteString(schemas.InAppMessage_Layout, string(v.Layout))
+	}
+}
+func (v *InAppMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessage_Content:
+			return deserializeListOfInAppMessageContent(d, schemas.InAppMessage_Content, &v.Content)
+		case schemas.InAppMessage_CustomConfig:
+			return deserializeMapOf__string(d, schemas.InAppMessage_CustomConfig, &v.CustomConfig)
+		case schemas.InAppMessage_Layout:
+			var ev string
+			if err := d.ReadString(schemas.InAppMessage_Layout, &ev); err != nil {
+				return err
+			}
+			v.Layout = Layout(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Text config for Message Body.
@@ -3791,6 +9176,44 @@ type InAppMessageBodyConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppMessageBodyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessageBodyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessageBodyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alignment != "" {
+		s.WriteString(schemas.InAppMessageBodyConfig_Alignment, string(v.Alignment))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.InAppMessageBodyConfig_Body, *v.Body)
+	}
+	if v.TextColor != nil {
+		s.WriteString(schemas.InAppMessageBodyConfig_TextColor, *v.TextColor)
+	}
+}
+func (v *InAppMessageBodyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessageBodyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessageBodyConfig_Alignment:
+			var ev string
+			if err := d.ReadString(schemas.InAppMessageBodyConfig_Alignment, &ev); err != nil {
+				return err
+			}
+			v.Alignment = Alignment(ev)
+			return nil
+		case schemas.InAppMessageBodyConfig_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.InAppMessageBodyConfig_Body, v.Body)
+		case schemas.InAppMessageBodyConfig_TextColor:
+			v.TextColor = new(string)
+			return d.ReadString(schemas.InAppMessageBodyConfig_TextColor, v.TextColor)
+		}
+		return nil
+	})
+}
+
 // Button Config for an in-app message.
 type InAppMessageButton struct {
 
@@ -3807,6 +9230,54 @@ type InAppMessageButton struct {
 	Web *OverrideButtonConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *InAppMessageButton) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessageButton)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessageButton) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Android != nil {
+		s.WriteStruct(schemas.InAppMessageButton_Android)
+		v.Android.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultConfig != nil {
+		s.WriteStruct(schemas.InAppMessageButton_DefaultConfig)
+		v.DefaultConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IOS != nil {
+		s.WriteStruct(schemas.InAppMessageButton_IOS)
+		v.IOS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Web != nil {
+		s.WriteStruct(schemas.InAppMessageButton_Web)
+		v.Web.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InAppMessageButton) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessageButton, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessageButton_Android:
+			v.Android = &OverrideButtonConfiguration{}
+			return v.Android.Deserialize(d)
+		case schemas.InAppMessageButton_DefaultConfig:
+			v.DefaultConfig = &DefaultButtonConfiguration{}
+			return v.DefaultConfig.Deserialize(d)
+		case schemas.InAppMessageButton_IOS:
+			v.IOS = &OverrideButtonConfiguration{}
+			return v.IOS.Deserialize(d)
+		case schemas.InAppMessageButton_Web:
+			v.Web = &OverrideButtonConfiguration{}
+			return v.Web.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Targeted in-app message campaign.
@@ -3842,6 +9313,74 @@ type InAppMessageCampaign struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppMessageCampaign) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessageCampaign)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessageCampaign) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignId != nil {
+		s.WriteString(schemas.InAppMessageCampaign_CampaignId, *v.CampaignId)
+	}
+	if v.DailyCap != nil {
+		s.WriteInt32(schemas.InAppMessageCampaign_DailyCap, *v.DailyCap)
+	}
+	if v.InAppMessage != nil {
+		s.WriteStruct(schemas.InAppMessageCampaign_InAppMessage)
+		v.InAppMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.InAppMessageCampaign_Priority, *v.Priority)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.InAppMessageCampaign_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionCap != nil {
+		s.WriteInt32(schemas.InAppMessageCampaign_SessionCap, *v.SessionCap)
+	}
+	if v.TotalCap != nil {
+		s.WriteInt32(schemas.InAppMessageCampaign_TotalCap, *v.TotalCap)
+	}
+	if v.TreatmentId != nil {
+		s.WriteString(schemas.InAppMessageCampaign_TreatmentId, *v.TreatmentId)
+	}
+}
+func (v *InAppMessageCampaign) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessageCampaign, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessageCampaign_CampaignId:
+			v.CampaignId = new(string)
+			return d.ReadString(schemas.InAppMessageCampaign_CampaignId, v.CampaignId)
+		case schemas.InAppMessageCampaign_DailyCap:
+			v.DailyCap = new(int32)
+			return d.ReadInt32(schemas.InAppMessageCampaign_DailyCap, v.DailyCap)
+		case schemas.InAppMessageCampaign_InAppMessage:
+			v.InAppMessage = &InAppMessage{}
+			return v.InAppMessage.Deserialize(d)
+		case schemas.InAppMessageCampaign_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.InAppMessageCampaign_Priority, v.Priority)
+		case schemas.InAppMessageCampaign_Schedule:
+			v.Schedule = &InAppCampaignSchedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.InAppMessageCampaign_SessionCap:
+			v.SessionCap = new(int32)
+			return d.ReadInt32(schemas.InAppMessageCampaign_SessionCap, v.SessionCap)
+		case schemas.InAppMessageCampaign_TotalCap:
+			v.TotalCap = new(int32)
+			return d.ReadInt32(schemas.InAppMessageCampaign_TotalCap, v.TotalCap)
+		case schemas.InAppMessageCampaign_TreatmentId:
+			v.TreatmentId = new(string)
+			return d.ReadString(schemas.InAppMessageCampaign_TreatmentId, v.TreatmentId)
+		}
+		return nil
+	})
+}
+
 // The configuration for the message content.
 type InAppMessageContent struct {
 
@@ -3866,6 +9405,66 @@ type InAppMessageContent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppMessageContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessageContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessageContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackgroundColor != nil {
+		s.WriteString(schemas.InAppMessageContent_BackgroundColor, *v.BackgroundColor)
+	}
+	if v.BodyConfig != nil {
+		s.WriteStruct(schemas.InAppMessageContent_BodyConfig)
+		v.BodyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HeaderConfig != nil {
+		s.WriteStruct(schemas.InAppMessageContent_HeaderConfig)
+		v.HeaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.InAppMessageContent_ImageUrl, *v.ImageUrl)
+	}
+	if v.PrimaryBtn != nil {
+		s.WriteStruct(schemas.InAppMessageContent_PrimaryBtn)
+		v.PrimaryBtn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecondaryBtn != nil {
+		s.WriteStruct(schemas.InAppMessageContent_SecondaryBtn)
+		v.SecondaryBtn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InAppMessageContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessageContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessageContent_BackgroundColor:
+			v.BackgroundColor = new(string)
+			return d.ReadString(schemas.InAppMessageContent_BackgroundColor, v.BackgroundColor)
+		case schemas.InAppMessageContent_BodyConfig:
+			v.BodyConfig = &InAppMessageBodyConfig{}
+			return v.BodyConfig.Deserialize(d)
+		case schemas.InAppMessageContent_HeaderConfig:
+			v.HeaderConfig = &InAppMessageHeaderConfig{}
+			return v.HeaderConfig.Deserialize(d)
+		case schemas.InAppMessageContent_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.InAppMessageContent_ImageUrl, v.ImageUrl)
+		case schemas.InAppMessageContent_PrimaryBtn:
+			v.PrimaryBtn = &InAppMessageButton{}
+			return v.PrimaryBtn.Deserialize(d)
+		case schemas.InAppMessageContent_SecondaryBtn:
+			v.SecondaryBtn = &InAppMessageButton{}
+			return v.SecondaryBtn.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Text config for Message Header.
 type InAppMessageHeaderConfig struct {
 
@@ -3887,6 +9486,44 @@ type InAppMessageHeaderConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppMessageHeaderConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessageHeaderConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessageHeaderConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alignment != "" {
+		s.WriteString(schemas.InAppMessageHeaderConfig_Alignment, string(v.Alignment))
+	}
+	if v.Header != nil {
+		s.WriteString(schemas.InAppMessageHeaderConfig_Header, *v.Header)
+	}
+	if v.TextColor != nil {
+		s.WriteString(schemas.InAppMessageHeaderConfig_TextColor, *v.TextColor)
+	}
+}
+func (v *InAppMessageHeaderConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessageHeaderConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessageHeaderConfig_Alignment:
+			var ev string
+			if err := d.ReadString(schemas.InAppMessageHeaderConfig_Alignment, &ev); err != nil {
+				return err
+			}
+			v.Alignment = Alignment(ev)
+			return nil
+		case schemas.InAppMessageHeaderConfig_Header:
+			v.Header = new(string)
+			return d.ReadString(schemas.InAppMessageHeaderConfig_Header, v.Header)
+		case schemas.InAppMessageHeaderConfig_TextColor:
+			v.TextColor = new(string)
+			return d.ReadString(schemas.InAppMessageHeaderConfig_TextColor, v.TextColor)
+		}
+		return nil
+	})
+}
+
 // Get in-app messages response object.
 type InAppMessagesResponse struct {
 
@@ -3894,6 +9531,25 @@ type InAppMessagesResponse struct {
 	InAppMessageCampaigns []InAppMessageCampaign
 
 	noSmithyDocumentSerde
+}
+
+func (v *InAppMessagesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppMessagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppMessagesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfInAppMessageCampaign(s, schemas.InAppMessagesResponse_InAppMessageCampaigns, v.InAppMessageCampaigns)
+}
+func (v *InAppMessagesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppMessagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppMessagesResponse_InAppMessageCampaigns:
+			return deserializeListOfInAppMessageCampaign(d, schemas.InAppMessagesResponse_InAppMessageCampaigns, &v.InAppMessageCampaigns)
+		}
+		return nil
+	})
 }
 
 // InApp Template Request.
@@ -3926,6 +9582,47 @@ type InAppTemplateRequest struct {
 	TemplateDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InAppTemplateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppTemplateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfInAppMessageContent(s, schemas.InAppTemplateRequest_Content, v.Content)
+	serializeMapOf__string(s, schemas.InAppTemplateRequest_CustomConfig, v.CustomConfig)
+	if v.Layout != "" {
+		s.WriteString(schemas.InAppTemplateRequest_Layout, string(v.Layout))
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.InAppTemplateRequest_TemplateDescription, *v.TemplateDescription)
+	}
+	serializeMapOf__string(s, schemas.InAppTemplateRequest_tags, v.Tags)
+}
+func (v *InAppTemplateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppTemplateRequest_Content:
+			return deserializeListOfInAppMessageContent(d, schemas.InAppTemplateRequest_Content, &v.Content)
+		case schemas.InAppTemplateRequest_CustomConfig:
+			return deserializeMapOf__string(d, schemas.InAppTemplateRequest_CustomConfig, &v.CustomConfig)
+		case schemas.InAppTemplateRequest_Layout:
+			var ev string
+			if err := d.ReadString(schemas.InAppTemplateRequest_Layout, &ev); err != nil {
+				return err
+			}
+			v.Layout = Layout(ev)
+			return nil
+		case schemas.InAppTemplateRequest_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.InAppTemplateRequest_TemplateDescription, v.TemplateDescription)
+		case schemas.InAppTemplateRequest_tags:
+			return deserializeMapOf__string(d, schemas.InAppTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // In-App Template Response.
@@ -3978,6 +9675,87 @@ type InAppTemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InAppTemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InAppTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InAppTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InAppTemplateResponse_Arn, *v.Arn)
+	}
+	serializeListOfInAppMessageContent(s, schemas.InAppTemplateResponse_Content, v.Content)
+	if v.CreationDate != nil {
+		s.WriteString(schemas.InAppTemplateResponse_CreationDate, *v.CreationDate)
+	}
+	serializeMapOf__string(s, schemas.InAppTemplateResponse_CustomConfig, v.CustomConfig)
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.InAppTemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Layout != "" {
+		s.WriteString(schemas.InAppTemplateResponse_Layout, string(v.Layout))
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.InAppTemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.InAppTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.InAppTemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.InAppTemplateResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.InAppTemplateResponse_tags, v.Tags)
+}
+func (v *InAppTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InAppTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InAppTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_Arn, v.Arn)
+		case schemas.InAppTemplateResponse_Content:
+			return deserializeListOfInAppMessageContent(d, schemas.InAppTemplateResponse_Content, &v.Content)
+		case schemas.InAppTemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_CreationDate, v.CreationDate)
+		case schemas.InAppTemplateResponse_CustomConfig:
+			return deserializeMapOf__string(d, schemas.InAppTemplateResponse_CustomConfig, &v.CustomConfig)
+		case schemas.InAppTemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.InAppTemplateResponse_Layout:
+			var ev string
+			if err := d.ReadString(schemas.InAppTemplateResponse_Layout, &ev); err != nil {
+				return err
+			}
+			v.Layout = Layout(ev)
+			return nil
+		case schemas.InAppTemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.InAppTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.InAppTemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.InAppTemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.InAppTemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.InAppTemplateResponse_Version, v.Version)
+		case schemas.InAppTemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.InAppTemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Provides information about the results of a request to create or update an
 // endpoint that's associated with an event.
 type ItemResponse struct {
@@ -3993,6 +9771,33 @@ type ItemResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ItemResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ItemResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointItemResponse != nil {
+		s.WriteStruct(schemas.ItemResponse_EndpointItemResponse)
+		v.EndpointItemResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfEventItemResponse(s, schemas.ItemResponse_EventsItemResponse, v.EventsItemResponse)
+}
+func (v *ItemResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ItemResponse_EndpointItemResponse:
+			v.EndpointItemResponse = &EndpointItemResponse{}
+			return v.EndpointItemResponse.Deserialize(d)
+		case schemas.ItemResponse_EventsItemResponse:
+			return deserializeMapOfEventItemResponse(d, schemas.ItemResponse_EventsItemResponse, &v.EventsItemResponse)
+		}
+		return nil
+	})
+}
+
 // The channel-specific configurations for the journey.
 type JourneyChannelSettings struct {
 
@@ -4006,6 +9811,34 @@ type JourneyChannelSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyChannelSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyChannelSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyChannelSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectCampaignArn != nil {
+		s.WriteString(schemas.JourneyChannelSettings_ConnectCampaignArn, *v.ConnectCampaignArn)
+	}
+	if v.ConnectCampaignExecutionRoleArn != nil {
+		s.WriteString(schemas.JourneyChannelSettings_ConnectCampaignExecutionRoleArn, *v.ConnectCampaignExecutionRoleArn)
+	}
+}
+func (v *JourneyChannelSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyChannelSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyChannelSettings_ConnectCampaignArn:
+			v.ConnectCampaignArn = new(string)
+			return d.ReadString(schemas.JourneyChannelSettings_ConnectCampaignArn, v.ConnectCampaignArn)
+		case schemas.JourneyChannelSettings_ConnectCampaignExecutionRoleArn:
+			v.ConnectCampaignExecutionRoleArn = new(string)
+			return d.ReadString(schemas.JourneyChannelSettings_ConnectCampaignExecutionRoleArn, v.ConnectCampaignExecutionRoleArn)
+		}
+		return nil
+	})
+}
+
 // Specifies the message content for a custom channel message that's sent to
 // participants in a journey.
 type JourneyCustomMessage struct {
@@ -4014,6 +9847,28 @@ type JourneyCustomMessage struct {
 	Data *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyCustomMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyCustomMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyCustomMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteString(schemas.JourneyCustomMessage_Data, *v.Data)
+	}
+}
+func (v *JourneyCustomMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyCustomMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyCustomMessage_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.JourneyCustomMessage_Data, v.Data)
+		}
+		return nil
+	})
 }
 
 // Provides the results of a query that retrieved the data for a standard
@@ -4067,6 +9922,66 @@ type JourneyDateRangeKpiResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyDateRangeKpiResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyDateRangeKpiResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyDateRangeKpiResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.JourneyDateRangeKpiResponse_EndTime, *v.EndTime)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.JourneyDateRangeKpiResponse_JourneyId, *v.JourneyId)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.JourneyDateRangeKpiResponse_KpiName, *v.KpiName)
+	}
+	if v.KpiResult != nil {
+		s.WriteStruct(schemas.JourneyDateRangeKpiResponse_KpiResult)
+		v.KpiResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.JourneyDateRangeKpiResponse_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.JourneyDateRangeKpiResponse_StartTime, *v.StartTime)
+	}
+}
+func (v *JourneyDateRangeKpiResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyDateRangeKpiResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyDateRangeKpiResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyDateRangeKpiResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.JourneyDateRangeKpiResponse_EndTime, v.EndTime)
+		case schemas.JourneyDateRangeKpiResponse_JourneyId:
+			v.JourneyId = new(string)
+			return d.ReadString(schemas.JourneyDateRangeKpiResponse_JourneyId, v.JourneyId)
+		case schemas.JourneyDateRangeKpiResponse_KpiName:
+			v.KpiName = new(string)
+			return d.ReadString(schemas.JourneyDateRangeKpiResponse_KpiName, v.KpiName)
+		case schemas.JourneyDateRangeKpiResponse_KpiResult:
+			v.KpiResult = &BaseKpiResult{}
+			return v.KpiResult.Deserialize(d)
+		case schemas.JourneyDateRangeKpiResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.JourneyDateRangeKpiResponse_NextToken, v.NextToken)
+		case schemas.JourneyDateRangeKpiResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.JourneyDateRangeKpiResponse_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the "From" address for an email message that's sent to participants
 // in a journey.
 type JourneyEmailMessage struct {
@@ -4076,6 +9991,28 @@ type JourneyEmailMessage struct {
 	FromAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyEmailMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyEmailMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyEmailMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromAddress != nil {
+		s.WriteString(schemas.JourneyEmailMessage_FromAddress, *v.FromAddress)
+	}
+}
+func (v *JourneyEmailMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyEmailMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyEmailMessage_FromAddress:
+			v.FromAddress = new(string)
+			return d.ReadString(schemas.JourneyEmailMessage_FromAddress, v.FromAddress)
+		}
+		return nil
+	})
 }
 
 // Provides the results of a query that retrieved the data for a standard
@@ -4141,6 +10078,55 @@ type JourneyExecutionActivityMetricsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyExecutionActivityMetricsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyExecutionActivityMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyExecutionActivityMetricsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityType != nil {
+		s.WriteString(schemas.JourneyExecutionActivityMetricsResponse_ActivityType, *v.ActivityType)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyExecutionActivityMetricsResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyActivityId != nil {
+		s.WriteString(schemas.JourneyExecutionActivityMetricsResponse_JourneyActivityId, *v.JourneyActivityId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.JourneyExecutionActivityMetricsResponse_JourneyId, *v.JourneyId)
+	}
+	if v.LastEvaluatedTime != nil {
+		s.WriteString(schemas.JourneyExecutionActivityMetricsResponse_LastEvaluatedTime, *v.LastEvaluatedTime)
+	}
+	serializeMapOf__string(s, schemas.JourneyExecutionActivityMetricsResponse_Metrics, v.Metrics)
+}
+func (v *JourneyExecutionActivityMetricsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyExecutionActivityMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyExecutionActivityMetricsResponse_ActivityType:
+			v.ActivityType = new(string)
+			return d.ReadString(schemas.JourneyExecutionActivityMetricsResponse_ActivityType, v.ActivityType)
+		case schemas.JourneyExecutionActivityMetricsResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyExecutionActivityMetricsResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyExecutionActivityMetricsResponse_JourneyActivityId:
+			v.JourneyActivityId = new(string)
+			return d.ReadString(schemas.JourneyExecutionActivityMetricsResponse_JourneyActivityId, v.JourneyActivityId)
+		case schemas.JourneyExecutionActivityMetricsResponse_JourneyId:
+			v.JourneyId = new(string)
+			return d.ReadString(schemas.JourneyExecutionActivityMetricsResponse_JourneyId, v.JourneyId)
+		case schemas.JourneyExecutionActivityMetricsResponse_LastEvaluatedTime:
+			v.LastEvaluatedTime = new(string)
+			return d.ReadString(schemas.JourneyExecutionActivityMetricsResponse_LastEvaluatedTime, v.LastEvaluatedTime)
+		case schemas.JourneyExecutionActivityMetricsResponse_Metrics:
+			return deserializeMapOf__string(d, schemas.JourneyExecutionActivityMetricsResponse_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard
 // execution metric that applies to a journey, and provides information about that
 // query.
@@ -4171,6 +10157,43 @@ type JourneyExecutionMetricsResponse struct {
 	Metrics map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyExecutionMetricsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyExecutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyExecutionMetricsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyExecutionMetricsResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.JourneyExecutionMetricsResponse_JourneyId, *v.JourneyId)
+	}
+	if v.LastEvaluatedTime != nil {
+		s.WriteString(schemas.JourneyExecutionMetricsResponse_LastEvaluatedTime, *v.LastEvaluatedTime)
+	}
+	serializeMapOf__string(s, schemas.JourneyExecutionMetricsResponse_Metrics, v.Metrics)
+}
+func (v *JourneyExecutionMetricsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyExecutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyExecutionMetricsResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyExecutionMetricsResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyExecutionMetricsResponse_JourneyId:
+			v.JourneyId = new(string)
+			return d.ReadString(schemas.JourneyExecutionMetricsResponse_JourneyId, v.JourneyId)
+		case schemas.JourneyExecutionMetricsResponse_LastEvaluatedTime:
+			v.LastEvaluatedTime = new(string)
+			return d.ReadString(schemas.JourneyExecutionMetricsResponse_LastEvaluatedTime, v.LastEvaluatedTime)
+		case schemas.JourneyExecutionMetricsResponse_Metrics:
+			return deserializeMapOf__string(d, schemas.JourneyExecutionMetricsResponse_Metrics, &v.Metrics)
+		}
+		return nil
+	})
 }
 
 // Specifies limits on the messages that a journey can send and the number of
@@ -4204,6 +10227,60 @@ type JourneyLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyCap != nil {
+		s.WriteInt32(schemas.JourneyLimits_DailyCap, *v.DailyCap)
+	}
+	if v.EndpointReentryCap != nil {
+		s.WriteInt32(schemas.JourneyLimits_EndpointReentryCap, *v.EndpointReentryCap)
+	}
+	if v.EndpointReentryInterval != nil {
+		s.WriteString(schemas.JourneyLimits_EndpointReentryInterval, *v.EndpointReentryInterval)
+	}
+	if v.MessagesPerSecond != nil {
+		s.WriteInt32(schemas.JourneyLimits_MessagesPerSecond, *v.MessagesPerSecond)
+	}
+	if v.TimeframeCap != nil {
+		s.WriteStruct(schemas.JourneyLimits_TimeframeCap)
+		v.TimeframeCap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalCap != nil {
+		s.WriteInt32(schemas.JourneyLimits_TotalCap, *v.TotalCap)
+	}
+}
+func (v *JourneyLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyLimits_DailyCap:
+			v.DailyCap = new(int32)
+			return d.ReadInt32(schemas.JourneyLimits_DailyCap, v.DailyCap)
+		case schemas.JourneyLimits_EndpointReentryCap:
+			v.EndpointReentryCap = new(int32)
+			return d.ReadInt32(schemas.JourneyLimits_EndpointReentryCap, v.EndpointReentryCap)
+		case schemas.JourneyLimits_EndpointReentryInterval:
+			v.EndpointReentryInterval = new(string)
+			return d.ReadString(schemas.JourneyLimits_EndpointReentryInterval, v.EndpointReentryInterval)
+		case schemas.JourneyLimits_MessagesPerSecond:
+			v.MessagesPerSecond = new(int32)
+			return d.ReadInt32(schemas.JourneyLimits_MessagesPerSecond, v.MessagesPerSecond)
+		case schemas.JourneyLimits_TimeframeCap:
+			v.TimeframeCap = &JourneyTimeframeCap{}
+			return v.TimeframeCap.Deserialize(d)
+		case schemas.JourneyLimits_TotalCap:
+			v.TotalCap = new(int32)
+			return d.ReadInt32(schemas.JourneyLimits_TotalCap, v.TotalCap)
+		}
+		return nil
+	})
+}
+
 // Specifies the message configuration for a push notification that's sent to
 // participants in a journey.
 type JourneyPushMessage struct {
@@ -4220,6 +10297,28 @@ type JourneyPushMessage struct {
 	TimeToLive *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyPushMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyPushMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyPushMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeToLive != nil {
+		s.WriteString(schemas.JourneyPushMessage_TimeToLive, *v.TimeToLive)
+	}
+}
+func (v *JourneyPushMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyPushMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyPushMessage_TimeToLive:
+			v.TimeToLive = new(string)
+			return d.ReadString(schemas.JourneyPushMessage_TimeToLive, v.TimeToLive)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status, configuration, and other settings for a
@@ -4361,6 +10460,163 @@ type JourneyResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfActivity(s, schemas.JourneyResponse_Activities, v.Activities)
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.ClosedDays != nil {
+		s.WriteStruct(schemas.JourneyResponse_ClosedDays)
+		v.ClosedDays.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.JourneyResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.JourneyResponse_Id, *v.Id)
+	}
+	if v.JourneyChannelSettings != nil {
+		s.WriteStruct(schemas.JourneyResponse_JourneyChannelSettings)
+		v.JourneyChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.JourneyResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.JourneyResponse_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalTime != nil {
+		s.WriteBool(schemas.JourneyResponse_LocalTime, *v.LocalTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.JourneyResponse_Name, *v.Name)
+	}
+	if v.OpenHours != nil {
+		s.WriteStruct(schemas.JourneyResponse_OpenHours)
+		v.OpenHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.JourneyResponse_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshFrequency != nil {
+		s.WriteString(schemas.JourneyResponse_RefreshFrequency, *v.RefreshFrequency)
+	}
+	if v.RefreshOnSegmentUpdate != nil {
+		s.WriteBool(schemas.JourneyResponse_RefreshOnSegmentUpdate, *v.RefreshOnSegmentUpdate)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.JourneyResponse_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SendingSchedule != nil {
+		s.WriteBool(schemas.JourneyResponse_SendingSchedule, *v.SendingSchedule)
+	}
+	if v.StartActivity != nil {
+		s.WriteString(schemas.JourneyResponse_StartActivity, *v.StartActivity)
+	}
+	if v.StartCondition != nil {
+		s.WriteStruct(schemas.JourneyResponse_StartCondition)
+		v.StartCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.JourneyResponse_State, string(v.State))
+	}
+	serializeListOf__TimezoneEstimationMethodsElement(s, schemas.JourneyResponse_TimezoneEstimationMethods, v.TimezoneEstimationMethods)
+	if v.WaitForQuietTime != nil {
+		s.WriteBool(schemas.JourneyResponse_WaitForQuietTime, *v.WaitForQuietTime)
+	}
+	serializeMapOf__string(s, schemas.JourneyResponse_tags, v.Tags)
+}
+func (v *JourneyResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyResponse_Activities:
+			return deserializeMapOfActivity(d, schemas.JourneyResponse_Activities, &v.Activities)
+		case schemas.JourneyResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyResponse_ClosedDays:
+			v.ClosedDays = &ClosedDays{}
+			return v.ClosedDays.Deserialize(d)
+		case schemas.JourneyResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.JourneyResponse_CreationDate, v.CreationDate)
+		case schemas.JourneyResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.JourneyResponse_Id, v.Id)
+		case schemas.JourneyResponse_JourneyChannelSettings:
+			v.JourneyChannelSettings = &JourneyChannelSettings{}
+			return v.JourneyChannelSettings.Deserialize(d)
+		case schemas.JourneyResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.JourneyResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.JourneyResponse_Limits:
+			v.Limits = &JourneyLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.JourneyResponse_LocalTime:
+			v.LocalTime = new(bool)
+			return d.ReadBool(schemas.JourneyResponse_LocalTime, v.LocalTime)
+		case schemas.JourneyResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.JourneyResponse_Name, v.Name)
+		case schemas.JourneyResponse_OpenHours:
+			v.OpenHours = &OpenHours{}
+			return v.OpenHours.Deserialize(d)
+		case schemas.JourneyResponse_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		case schemas.JourneyResponse_RefreshFrequency:
+			v.RefreshFrequency = new(string)
+			return d.ReadString(schemas.JourneyResponse_RefreshFrequency, v.RefreshFrequency)
+		case schemas.JourneyResponse_RefreshOnSegmentUpdate:
+			v.RefreshOnSegmentUpdate = new(bool)
+			return d.ReadBool(schemas.JourneyResponse_RefreshOnSegmentUpdate, v.RefreshOnSegmentUpdate)
+		case schemas.JourneyResponse_Schedule:
+			v.Schedule = &JourneySchedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.JourneyResponse_SendingSchedule:
+			v.SendingSchedule = new(bool)
+			return d.ReadBool(schemas.JourneyResponse_SendingSchedule, v.SendingSchedule)
+		case schemas.JourneyResponse_StartActivity:
+			v.StartActivity = new(string)
+			return d.ReadString(schemas.JourneyResponse_StartActivity, v.StartActivity)
+		case schemas.JourneyResponse_StartCondition:
+			v.StartCondition = &StartCondition{}
+			return v.StartCondition.Deserialize(d)
+		case schemas.JourneyResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.JourneyResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		case schemas.JourneyResponse_TimezoneEstimationMethods:
+			return deserializeListOf__TimezoneEstimationMethodsElement(d, schemas.JourneyResponse_TimezoneEstimationMethods, &v.TimezoneEstimationMethods)
+		case schemas.JourneyResponse_WaitForQuietTime:
+			v.WaitForQuietTime = new(bool)
+			return d.ReadBool(schemas.JourneyResponse_WaitForQuietTime, v.WaitForQuietTime)
+		case schemas.JourneyResponse_tags:
+			return deserializeMapOf__string(d, schemas.JourneyResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard
 // execution metric that applies to a journey activity for a particular journey
 // run, and provides information about that query.
@@ -4430,6 +10686,61 @@ type JourneyRunExecutionActivityMetricsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyRunExecutionActivityMetricsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyRunExecutionActivityMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyRunExecutionActivityMetricsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityType != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_ActivityType, *v.ActivityType)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyActivityId != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_JourneyActivityId, *v.JourneyActivityId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_JourneyId, *v.JourneyId)
+	}
+	if v.LastEvaluatedTime != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_LastEvaluatedTime, *v.LastEvaluatedTime)
+	}
+	serializeMapOf__string(s, schemas.JourneyRunExecutionActivityMetricsResponse_Metrics, v.Metrics)
+	if v.RunId != nil {
+		s.WriteString(schemas.JourneyRunExecutionActivityMetricsResponse_RunId, *v.RunId)
+	}
+}
+func (v *JourneyRunExecutionActivityMetricsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyRunExecutionActivityMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyRunExecutionActivityMetricsResponse_ActivityType:
+			v.ActivityType = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_ActivityType, v.ActivityType)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_JourneyActivityId:
+			v.JourneyActivityId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_JourneyActivityId, v.JourneyActivityId)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_JourneyId:
+			v.JourneyId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_JourneyId, v.JourneyId)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_LastEvaluatedTime:
+			v.LastEvaluatedTime = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_LastEvaluatedTime, v.LastEvaluatedTime)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_Metrics:
+			return deserializeMapOf__string(d, schemas.JourneyRunExecutionActivityMetricsResponse_Metrics, &v.Metrics)
+		case schemas.JourneyRunExecutionActivityMetricsResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionActivityMetricsResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard
 // execution metric that applies to a journey run, and provides information about
 // that query.
@@ -4468,6 +10779,49 @@ type JourneyRunExecutionMetricsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyRunExecutionMetricsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyRunExecutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyRunExecutionMetricsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.JourneyRunExecutionMetricsResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.JourneyRunExecutionMetricsResponse_JourneyId, *v.JourneyId)
+	}
+	if v.LastEvaluatedTime != nil {
+		s.WriteString(schemas.JourneyRunExecutionMetricsResponse_LastEvaluatedTime, *v.LastEvaluatedTime)
+	}
+	serializeMapOf__string(s, schemas.JourneyRunExecutionMetricsResponse_Metrics, v.Metrics)
+	if v.RunId != nil {
+		s.WriteString(schemas.JourneyRunExecutionMetricsResponse_RunId, *v.RunId)
+	}
+}
+func (v *JourneyRunExecutionMetricsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyRunExecutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyRunExecutionMetricsResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionMetricsResponse_ApplicationId, v.ApplicationId)
+		case schemas.JourneyRunExecutionMetricsResponse_JourneyId:
+			v.JourneyId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionMetricsResponse_JourneyId, v.JourneyId)
+		case schemas.JourneyRunExecutionMetricsResponse_LastEvaluatedTime:
+			v.LastEvaluatedTime = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionMetricsResponse_LastEvaluatedTime, v.LastEvaluatedTime)
+		case schemas.JourneyRunExecutionMetricsResponse_Metrics:
+			return deserializeMapOf__string(d, schemas.JourneyRunExecutionMetricsResponse_Metrics, &v.Metrics)
+		case schemas.JourneyRunExecutionMetricsResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.JourneyRunExecutionMetricsResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
+
 // Provides information from a specified run of a journey.
 type JourneyRunResponse struct {
 
@@ -4494,6 +10848,50 @@ type JourneyRunResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyRunResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyRunResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteString(schemas.JourneyRunResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteString(schemas.JourneyRunResponse_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.JourneyRunResponse_RunId, *v.RunId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.JourneyRunResponse_Status, string(v.Status))
+	}
+}
+func (v *JourneyRunResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyRunResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.JourneyRunResponse_CreationTime, v.CreationTime)
+		case schemas.JourneyRunResponse_LastUpdateTime:
+			v.LastUpdateTime = new(string)
+			return d.ReadString(schemas.JourneyRunResponse_LastUpdateTime, v.LastUpdateTime)
+		case schemas.JourneyRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.JourneyRunResponse_RunId, v.RunId)
+		case schemas.JourneyRunResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.JourneyRunResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = JourneyRunStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information from all runs of a journey.
 type JourneyRunsResponse struct {
 
@@ -4507,6 +10905,31 @@ type JourneyRunsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyRunsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyRunsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfJourneyRunResponse(s, schemas.JourneyRunsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.JourneyRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *JourneyRunsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyRunsResponse_Item:
+			return deserializeListOfJourneyRunResponse(d, schemas.JourneyRunsResponse_Item, &v.Item)
+		case schemas.JourneyRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.JourneyRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Specifies the schedule settings for a journey.
@@ -4527,6 +10950,40 @@ type JourneySchedule struct {
 	Timezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneySchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneySchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneySchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.JourneySchedule_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.JourneySchedule_StartTime, *v.StartTime)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.JourneySchedule_Timezone, *v.Timezone)
+	}
+}
+func (v *JourneySchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneySchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneySchedule_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.JourneySchedule_EndTime, v.EndTime)
+		case schemas.JourneySchedule_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.JourneySchedule_StartTime, v.StartTime)
+		case schemas.JourneySchedule_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.JourneySchedule_Timezone, v.Timezone)
+		}
+		return nil
+	})
 }
 
 // Specifies the sender ID and message type for an SMS message that's sent to
@@ -4562,6 +11019,56 @@ type JourneySMSMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneySMSMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneySMSMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneySMSMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.JourneySMSMessage_EntityId, *v.EntityId)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.JourneySMSMessage_MessageType, string(v.MessageType))
+	}
+	if v.OriginationNumber != nil {
+		s.WriteString(schemas.JourneySMSMessage_OriginationNumber, *v.OriginationNumber)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.JourneySMSMessage_SenderId, *v.SenderId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.JourneySMSMessage_TemplateId, *v.TemplateId)
+	}
+}
+func (v *JourneySMSMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneySMSMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneySMSMessage_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.JourneySMSMessage_EntityId, v.EntityId)
+		case schemas.JourneySMSMessage_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.JourneySMSMessage_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = MessageType(ev)
+			return nil
+		case schemas.JourneySMSMessage_OriginationNumber:
+			v.OriginationNumber = new(string)
+			return d.ReadString(schemas.JourneySMSMessage_OriginationNumber, v.OriginationNumber)
+		case schemas.JourneySMSMessage_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.JourneySMSMessage_SenderId, v.SenderId)
+		case schemas.JourneySMSMessage_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.JourneySMSMessage_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 // Provides information about the status, configuration, and other settings for
 // all the journeys that are associated with an application.
 type JourneysResponse struct {
@@ -4577,6 +11084,31 @@ type JourneysResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneysResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneysResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfJourneyResponse(s, schemas.JourneysResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.JourneysResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *JourneysResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneysResponse_Item:
+			return deserializeListOfJourneyResponse(d, schemas.JourneysResponse_Item, &v.Item)
+		case schemas.JourneysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.JourneysResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Changes the status of a journey.
@@ -4606,6 +11138,32 @@ type JourneyStateRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JourneyStateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyStateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.JourneyStateRequest_State, string(v.State))
+	}
+}
+func (v *JourneyStateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyStateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyStateRequest_State:
+			var ev string
+			if err := d.ReadString(schemas.JourneyStateRequest_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The number of messages that can be sent to an endpoint during the specified
 // timeframe for all journeys.
 type JourneyTimeframeCap struct {
@@ -4620,6 +11178,34 @@ type JourneyTimeframeCap struct {
 	Days *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *JourneyTimeframeCap) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JourneyTimeframeCap)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JourneyTimeframeCap) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cap != nil {
+		s.WriteInt32(schemas.JourneyTimeframeCap_Cap, *v.Cap)
+	}
+	if v.Days != nil {
+		s.WriteInt32(schemas.JourneyTimeframeCap_Days, *v.Days)
+	}
+}
+func (v *JourneyTimeframeCap) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JourneyTimeframeCap, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JourneyTimeframeCap_Cap:
+			v.Cap = new(int32)
+			return d.ReadInt32(schemas.JourneyTimeframeCap_Cap, v.Cap)
+		case schemas.JourneyTimeframeCap_Days:
+			v.Days = new(int32)
+			return d.ReadInt32(schemas.JourneyTimeframeCap_Days, v.Days)
+		}
+		return nil
+	})
 }
 
 // Provides information about all the recommender model configurations that are
@@ -4637,6 +11223,31 @@ type ListRecommenderConfigurationsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListRecommenderConfigurationsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommenderConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommenderConfigurationsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfRecommenderConfigurationResponse(s, schemas.ListRecommenderConfigurationsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommenderConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRecommenderConfigurationsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommenderConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommenderConfigurationsResponse_Item:
+			return deserializeListOfRecommenderConfigurationResponse(d, schemas.ListRecommenderConfigurationsResponse_Item, &v.Item)
+		case schemas.ListRecommenderConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommenderConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Specifies the content and settings for a push notification that's sent to
@@ -4707,6 +11318,98 @@ type Message struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Message) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Message)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.Message_Action, string(v.Action))
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.Message_Body, *v.Body)
+	}
+	if v.ImageIconUrl != nil {
+		s.WriteString(schemas.Message_ImageIconUrl, *v.ImageIconUrl)
+	}
+	if v.ImageSmallIconUrl != nil {
+		s.WriteString(schemas.Message_ImageSmallIconUrl, *v.ImageSmallIconUrl)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.Message_ImageUrl, *v.ImageUrl)
+	}
+	if v.JsonBody != nil {
+		s.WriteString(schemas.Message_JsonBody, *v.JsonBody)
+	}
+	if v.MediaUrl != nil {
+		s.WriteString(schemas.Message_MediaUrl, *v.MediaUrl)
+	}
+	if v.RawContent != nil {
+		s.WriteString(schemas.Message_RawContent, *v.RawContent)
+	}
+	if v.SilentPush != nil {
+		s.WriteBool(schemas.Message_SilentPush, *v.SilentPush)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.Message_TimeToLive, *v.TimeToLive)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Message_Title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.Message_Url, *v.Url)
+	}
+}
+func (v *Message) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Message, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Message_Action:
+			var ev string
+			if err := d.ReadString(schemas.Message_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.Message_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.Message_Body, v.Body)
+		case schemas.Message_ImageIconUrl:
+			v.ImageIconUrl = new(string)
+			return d.ReadString(schemas.Message_ImageIconUrl, v.ImageIconUrl)
+		case schemas.Message_ImageSmallIconUrl:
+			v.ImageSmallIconUrl = new(string)
+			return d.ReadString(schemas.Message_ImageSmallIconUrl, v.ImageSmallIconUrl)
+		case schemas.Message_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.Message_ImageUrl, v.ImageUrl)
+		case schemas.Message_JsonBody:
+			v.JsonBody = new(string)
+			return d.ReadString(schemas.Message_JsonBody, v.JsonBody)
+		case schemas.Message_MediaUrl:
+			v.MediaUrl = new(string)
+			return d.ReadString(schemas.Message_MediaUrl, v.MediaUrl)
+		case schemas.Message_RawContent:
+			v.RawContent = new(string)
+			return d.ReadString(schemas.Message_RawContent, v.RawContent)
+		case schemas.Message_SilentPush:
+			v.SilentPush = new(bool)
+			return d.ReadBool(schemas.Message_SilentPush, v.SilentPush)
+		case schemas.Message_TimeToLive:
+			v.TimeToLive = new(int32)
+			return d.ReadInt32(schemas.Message_TimeToLive, v.TimeToLive)
+		case schemas.Message_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Message_Title, v.Title)
+		case schemas.Message_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Message_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Provides information about an API request or response.
 type MessageBody struct {
 
@@ -4717,6 +11420,34 @@ type MessageBody struct {
 	RequestID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MessageBody) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageBody)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageBody) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MessageBody_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.MessageBody_RequestID, *v.RequestID)
+	}
+}
+func (v *MessageBody) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageBody, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageBody_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MessageBody_Message, v.Message)
+		case schemas.MessageBody_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.MessageBody_RequestID, v.RequestID)
+		}
+		return nil
+	})
 }
 
 // Specifies the message configuration settings for a campaign.
@@ -4763,6 +11494,94 @@ type MessageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_ADMMessage)
+		v.ADMMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.APNSMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_APNSMessage)
+		v.APNSMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BaiduMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_BaiduMessage)
+		v.BaiduMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_CustomMessage)
+		v.CustomMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_DefaultMessage)
+		v.DefaultMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GCMMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_GCMMessage)
+		v.GCMMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InAppMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_InAppMessage)
+		v.InAppMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSMessage != nil {
+		s.WriteStruct(schemas.MessageConfiguration_SMSMessage)
+		v.SMSMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MessageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageConfiguration_ADMMessage:
+			v.ADMMessage = &Message{}
+			return v.ADMMessage.Deserialize(d)
+		case schemas.MessageConfiguration_APNSMessage:
+			v.APNSMessage = &Message{}
+			return v.APNSMessage.Deserialize(d)
+		case schemas.MessageConfiguration_BaiduMessage:
+			v.BaiduMessage = &Message{}
+			return v.BaiduMessage.Deserialize(d)
+		case schemas.MessageConfiguration_CustomMessage:
+			v.CustomMessage = &CampaignCustomMessage{}
+			return v.CustomMessage.Deserialize(d)
+		case schemas.MessageConfiguration_DefaultMessage:
+			v.DefaultMessage = &Message{}
+			return v.DefaultMessage.Deserialize(d)
+		case schemas.MessageConfiguration_EmailMessage:
+			v.EmailMessage = &CampaignEmailMessage{}
+			return v.EmailMessage.Deserialize(d)
+		case schemas.MessageConfiguration_GCMMessage:
+			v.GCMMessage = &Message{}
+			return v.GCMMessage.Deserialize(d)
+		case schemas.MessageConfiguration_InAppMessage:
+			v.InAppMessage = &CampaignInAppMessage{}
+			return v.InAppMessage.Deserialize(d)
+		case schemas.MessageConfiguration_SMSMessage:
+			v.SMSMessage = &CampaignSmsMessage{}
+			return v.SMSMessage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the name and value pair of an email header to add to your email. You
 // can have up to 15 MessageHeaders. A header can contain information such as the
 // sender, receiver, route, or timestamp.
@@ -4779,6 +11598,34 @@ type MessageHeader struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MessageHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MessageHeader_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MessageHeader_Value, *v.Value)
+	}
+}
+func (v *MessageHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MessageHeader_Name, v.Name)
+		case schemas.MessageHeader_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MessageHeader_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration and other settings for a message.
@@ -4820,6 +11667,53 @@ type MessageRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfAddressConfiguration(s, schemas.MessageRequest_Addresses, v.Addresses)
+	serializeMapOf__string(s, schemas.MessageRequest_Context, v.Context)
+	serializeMapOfEndpointSendConfiguration(s, schemas.MessageRequest_Endpoints, v.Endpoints)
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.MessageRequest_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.MessageRequest_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.MessageRequest_TraceId, *v.TraceId)
+	}
+}
+func (v *MessageRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageRequest_Addresses:
+			return deserializeMapOfAddressConfiguration(d, schemas.MessageRequest_Addresses, &v.Addresses)
+		case schemas.MessageRequest_Context:
+			return deserializeMapOf__string(d, schemas.MessageRequest_Context, &v.Context)
+		case schemas.MessageRequest_Endpoints:
+			return deserializeMapOfEndpointSendConfiguration(d, schemas.MessageRequest_Endpoints, &v.Endpoints)
+		case schemas.MessageRequest_MessageConfiguration:
+			v.MessageConfiguration = &DirectMessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.MessageRequest_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.MessageRequest_TraceId:
+			v.TraceId = new(string)
+			return d.ReadString(schemas.MessageRequest_TraceId, v.TraceId)
+		}
+		return nil
+	})
+}
+
 // Provides information about the results of a request to send a message to an
 // endpoint address.
 type MessageResponse struct {
@@ -4842,6 +11736,40 @@ type MessageResponse struct {
 	Result map[string]MessageResult
 
 	noSmithyDocumentSerde
+}
+
+func (v *MessageResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.MessageResponse_ApplicationId, *v.ApplicationId)
+	}
+	serializeMapOfEndpointMessageResult(s, schemas.MessageResponse_EndpointResult, v.EndpointResult)
+	if v.RequestId != nil {
+		s.WriteString(schemas.MessageResponse_RequestId, *v.RequestId)
+	}
+	serializeMapOfMessageResult(s, schemas.MessageResponse_Result, v.Result)
+}
+func (v *MessageResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.MessageResponse_ApplicationId, v.ApplicationId)
+		case schemas.MessageResponse_EndpointResult:
+			return deserializeMapOfEndpointMessageResult(d, schemas.MessageResponse_EndpointResult, &v.EndpointResult)
+		case schemas.MessageResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.MessageResponse_RequestId, v.RequestId)
+		case schemas.MessageResponse_Result:
+			return deserializeMapOfMessageResult(d, schemas.MessageResponse_Result, &v.Result)
+		}
+		return nil
+	})
 }
 
 // Provides information about the results of sending a message directly to an
@@ -4892,6 +11820,56 @@ type MessageResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStatus != "" {
+		s.WriteString(schemas.MessageResult_DeliveryStatus, string(v.DeliveryStatus))
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.MessageResult_MessageId, *v.MessageId)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.MessageResult_StatusCode, *v.StatusCode)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MessageResult_StatusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedToken != nil {
+		s.WriteString(schemas.MessageResult_UpdatedToken, *v.UpdatedToken)
+	}
+}
+func (v *MessageResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageResult_DeliveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.MessageResult_DeliveryStatus, &ev); err != nil {
+				return err
+			}
+			v.DeliveryStatus = DeliveryStatus(ev)
+			return nil
+		case schemas.MessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.MessageResult_MessageId, v.MessageId)
+		case schemas.MessageResult_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.MessageResult_StatusCode, v.StatusCode)
+		case schemas.MessageResult_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MessageResult_StatusMessage, v.StatusMessage)
+		case schemas.MessageResult_UpdatedToken:
+			v.UpdatedToken = new(string)
+			return d.ReadString(schemas.MessageResult_UpdatedToken, v.UpdatedToken)
+		}
+		return nil
+	})
+}
+
 // Specifies metric-based criteria for including or excluding endpoints from a
 // segment. These criteria derive from custom metrics that you define for
 // endpoints.
@@ -4911,6 +11889,34 @@ type MetricDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != nil {
+		s.WriteString(schemas.MetricDimension_ComparisonOperator, *v.ComparisonOperator)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.MetricDimension_Value, *v.Value)
+	}
+}
+func (v *MetricDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDimension_ComparisonOperator:
+			v.ComparisonOperator = new(string)
+			return d.ReadString(schemas.MetricDimension_ComparisonOperator, v.ComparisonOperator)
+		case schemas.MetricDimension_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.MetricDimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Specifies a condition to evaluate for an activity path in a journey.
 type MultiConditionalBranch struct {
 
@@ -4922,6 +11928,36 @@ type MultiConditionalBranch struct {
 	NextActivity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiConditionalBranch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiConditionalBranch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiConditionalBranch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteStruct(schemas.MultiConditionalBranch_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextActivity != nil {
+		s.WriteString(schemas.MultiConditionalBranch_NextActivity, *v.NextActivity)
+	}
+}
+func (v *MultiConditionalBranch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiConditionalBranch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiConditionalBranch_Condition:
+			v.Condition = &SimpleCondition{}
+			return v.Condition.Deserialize(d)
+		case schemas.MultiConditionalBranch_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.MultiConditionalBranch_NextActivity, v.NextActivity)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a multivariate split activity in a journey. This
@@ -4951,6 +11987,39 @@ type MultiConditionalSplitActivity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MultiConditionalSplitActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiConditionalSplitActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiConditionalSplitActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfMultiConditionalBranch(s, schemas.MultiConditionalSplitActivity_Branches, v.Branches)
+	if v.DefaultActivity != nil {
+		s.WriteString(schemas.MultiConditionalSplitActivity_DefaultActivity, *v.DefaultActivity)
+	}
+	if v.EvaluationWaitTime != nil {
+		s.WriteStruct(schemas.MultiConditionalSplitActivity_EvaluationWaitTime)
+		v.EvaluationWaitTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MultiConditionalSplitActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiConditionalSplitActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiConditionalSplitActivity_Branches:
+			return deserializeListOfMultiConditionalBranch(d, schemas.MultiConditionalSplitActivity_Branches, &v.Branches)
+		case schemas.MultiConditionalSplitActivity_DefaultActivity:
+			v.DefaultActivity = new(string)
+			return d.ReadString(schemas.MultiConditionalSplitActivity_DefaultActivity, v.DefaultActivity)
+		case schemas.MultiConditionalSplitActivity_EvaluationWaitTime:
+			v.EvaluationWaitTime = &WaitTime{}
+			return v.EvaluationWaitTime.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a phone number to validate and retrieve information about.
 type NumberValidateRequest struct {
 
@@ -4964,6 +12033,34 @@ type NumberValidateRequest struct {
 	PhoneNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NumberValidateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberValidateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberValidateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.NumberValidateRequest_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.NumberValidateRequest_PhoneNumber, *v.PhoneNumber)
+	}
+}
+func (v *NumberValidateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberValidateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberValidateRequest_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.NumberValidateRequest_IsoCountryCode, v.IsoCountryCode)
+		case schemas.NumberValidateRequest_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.NumberValidateRequest_PhoneNumber, v.PhoneNumber)
+		}
+		return nil
+	})
 }
 
 // Provides information about a phone number.
@@ -5025,6 +12122,106 @@ type NumberValidateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NumberValidateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberValidateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberValidateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Carrier != nil {
+		s.WriteString(schemas.NumberValidateResponse_Carrier, *v.Carrier)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.NumberValidateResponse_City, *v.City)
+	}
+	if v.CleansedPhoneNumberE164 != nil {
+		s.WriteString(schemas.NumberValidateResponse_CleansedPhoneNumberE164, *v.CleansedPhoneNumberE164)
+	}
+	if v.CleansedPhoneNumberNational != nil {
+		s.WriteString(schemas.NumberValidateResponse_CleansedPhoneNumberNational, *v.CleansedPhoneNumberNational)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.NumberValidateResponse_Country, *v.Country)
+	}
+	if v.CountryCodeIso2 != nil {
+		s.WriteString(schemas.NumberValidateResponse_CountryCodeIso2, *v.CountryCodeIso2)
+	}
+	if v.CountryCodeNumeric != nil {
+		s.WriteString(schemas.NumberValidateResponse_CountryCodeNumeric, *v.CountryCodeNumeric)
+	}
+	if v.County != nil {
+		s.WriteString(schemas.NumberValidateResponse_County, *v.County)
+	}
+	if v.OriginalCountryCodeIso2 != nil {
+		s.WriteString(schemas.NumberValidateResponse_OriginalCountryCodeIso2, *v.OriginalCountryCodeIso2)
+	}
+	if v.OriginalPhoneNumber != nil {
+		s.WriteString(schemas.NumberValidateResponse_OriginalPhoneNumber, *v.OriginalPhoneNumber)
+	}
+	if v.PhoneType != nil {
+		s.WriteString(schemas.NumberValidateResponse_PhoneType, *v.PhoneType)
+	}
+	if v.PhoneTypeCode != nil {
+		s.WriteInt32(schemas.NumberValidateResponse_PhoneTypeCode, *v.PhoneTypeCode)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.NumberValidateResponse_Timezone, *v.Timezone)
+	}
+	if v.ZipCode != nil {
+		s.WriteString(schemas.NumberValidateResponse_ZipCode, *v.ZipCode)
+	}
+}
+func (v *NumberValidateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberValidateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberValidateResponse_Carrier:
+			v.Carrier = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_Carrier, v.Carrier)
+		case schemas.NumberValidateResponse_City:
+			v.City = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_City, v.City)
+		case schemas.NumberValidateResponse_CleansedPhoneNumberE164:
+			v.CleansedPhoneNumberE164 = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_CleansedPhoneNumberE164, v.CleansedPhoneNumberE164)
+		case schemas.NumberValidateResponse_CleansedPhoneNumberNational:
+			v.CleansedPhoneNumberNational = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_CleansedPhoneNumberNational, v.CleansedPhoneNumberNational)
+		case schemas.NumberValidateResponse_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_Country, v.Country)
+		case schemas.NumberValidateResponse_CountryCodeIso2:
+			v.CountryCodeIso2 = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_CountryCodeIso2, v.CountryCodeIso2)
+		case schemas.NumberValidateResponse_CountryCodeNumeric:
+			v.CountryCodeNumeric = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_CountryCodeNumeric, v.CountryCodeNumeric)
+		case schemas.NumberValidateResponse_County:
+			v.County = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_County, v.County)
+		case schemas.NumberValidateResponse_OriginalCountryCodeIso2:
+			v.OriginalCountryCodeIso2 = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_OriginalCountryCodeIso2, v.OriginalCountryCodeIso2)
+		case schemas.NumberValidateResponse_OriginalPhoneNumber:
+			v.OriginalPhoneNumber = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_OriginalPhoneNumber, v.OriginalPhoneNumber)
+		case schemas.NumberValidateResponse_PhoneType:
+			v.PhoneType = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_PhoneType, v.PhoneType)
+		case schemas.NumberValidateResponse_PhoneTypeCode:
+			v.PhoneTypeCode = new(int32)
+			return d.ReadInt32(schemas.NumberValidateResponse_PhoneTypeCode, v.PhoneTypeCode)
+		case schemas.NumberValidateResponse_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_Timezone, v.Timezone)
+		case schemas.NumberValidateResponse_ZipCode:
+			v.ZipCode = new(string)
+			return d.ReadString(schemas.NumberValidateResponse_ZipCode, v.ZipCode)
+		}
+		return nil
+	})
+}
+
 // Specifies the times when message are allowed to be sent to endpoints.
 type OpenHours struct {
 
@@ -5046,6 +12243,37 @@ type OpenHours struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenHours)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenHours) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfListOfOpenHoursRules(s, schemas.OpenHours_CUSTOM, v.CUSTOM)
+	serializeMapOfListOfOpenHoursRules(s, schemas.OpenHours_EMAIL, v.EMAIL)
+	serializeMapOfListOfOpenHoursRules(s, schemas.OpenHours_PUSH, v.PUSH)
+	serializeMapOfListOfOpenHoursRules(s, schemas.OpenHours_SMS, v.SMS)
+	serializeMapOfListOfOpenHoursRules(s, schemas.OpenHours_VOICE, v.VOICE)
+}
+func (v *OpenHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenHours, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenHours_CUSTOM:
+			return deserializeMapOfListOfOpenHoursRules(d, schemas.OpenHours_CUSTOM, &v.CUSTOM)
+		case schemas.OpenHours_EMAIL:
+			return deserializeMapOfListOfOpenHoursRules(d, schemas.OpenHours_EMAIL, &v.EMAIL)
+		case schemas.OpenHours_PUSH:
+			return deserializeMapOfListOfOpenHoursRules(d, schemas.OpenHours_PUSH, &v.PUSH)
+		case schemas.OpenHours_SMS:
+			return deserializeMapOfListOfOpenHoursRules(d, schemas.OpenHours_SMS, &v.SMS)
+		case schemas.OpenHours_VOICE:
+			return deserializeMapOfListOfOpenHoursRules(d, schemas.OpenHours_VOICE, &v.VOICE)
+		}
+		return nil
+	})
+}
+
 // Specifies the start and end time for OpenHours.
 type OpenHoursRule struct {
 
@@ -5060,6 +12288,34 @@ type OpenHoursRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenHoursRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenHoursRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenHoursRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteString(schemas.OpenHoursRule_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.OpenHoursRule_StartTime, *v.StartTime)
+	}
+}
+func (v *OpenHoursRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenHoursRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenHoursRule_EndTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.OpenHoursRule_EndTime, v.EndTime)
+		case schemas.OpenHoursRule_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.OpenHoursRule_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Override button configuration.
 type OverrideButtonConfiguration struct {
 
@@ -5072,6 +12328,38 @@ type OverrideButtonConfiguration struct {
 	Link *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OverrideButtonConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OverrideButtonConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverrideButtonConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ButtonAction != "" {
+		s.WriteString(schemas.OverrideButtonConfiguration_ButtonAction, string(v.ButtonAction))
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.OverrideButtonConfiguration_Link, *v.Link)
+	}
+}
+func (v *OverrideButtonConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OverrideButtonConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OverrideButtonConfiguration_ButtonAction:
+			var ev string
+			if err := d.ReadString(schemas.OverrideButtonConfiguration_ButtonAction, &ev); err != nil {
+				return err
+			}
+			v.ButtonAction = ButtonAction(ev)
+			return nil
+		case schemas.OverrideButtonConfiguration_Link:
+			v.Link = new(string)
+			return d.ReadString(schemas.OverrideButtonConfiguration_Link, v.Link)
+		}
+		return nil
+	})
 }
 
 // Specifies the properties and attributes of an endpoint that's associated with
@@ -5132,6 +12420,92 @@ type PublicEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublicEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.PublicEndpoint_Address, *v.Address)
+	}
+	serializeMapOfListOf__string(s, schemas.PublicEndpoint_Attributes, v.Attributes)
+	if v.ChannelType != "" {
+		s.WriteString(schemas.PublicEndpoint_ChannelType, string(v.ChannelType))
+	}
+	if v.Demographic != nil {
+		s.WriteStruct(schemas.PublicEndpoint_Demographic)
+		v.Demographic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.PublicEndpoint_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.PublicEndpoint_EndpointStatus, *v.EndpointStatus)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.PublicEndpoint_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__double(s, schemas.PublicEndpoint_Metrics, v.Metrics)
+	if v.OptOut != nil {
+		s.WriteString(schemas.PublicEndpoint_OptOut, *v.OptOut)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PublicEndpoint_RequestId, *v.RequestId)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.PublicEndpoint_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicEndpoint_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.PublicEndpoint_Address, v.Address)
+		case schemas.PublicEndpoint_Attributes:
+			return deserializeMapOfListOf__string(d, schemas.PublicEndpoint_Attributes, &v.Attributes)
+		case schemas.PublicEndpoint_ChannelType:
+			var ev string
+			if err := d.ReadString(schemas.PublicEndpoint_ChannelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.PublicEndpoint_Demographic:
+			v.Demographic = &EndpointDemographic{}
+			return v.Demographic.Deserialize(d)
+		case schemas.PublicEndpoint_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.PublicEndpoint_EffectiveDate, v.EffectiveDate)
+		case schemas.PublicEndpoint_EndpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.PublicEndpoint_EndpointStatus, v.EndpointStatus)
+		case schemas.PublicEndpoint_Location:
+			v.Location = &EndpointLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.PublicEndpoint_Metrics:
+			return deserializeMapOf__double(d, schemas.PublicEndpoint_Metrics, &v.Metrics)
+		case schemas.PublicEndpoint_OptOut:
+			v.OptOut = new(string)
+			return d.ReadString(schemas.PublicEndpoint_OptOut, v.OptOut)
+		case schemas.PublicEndpoint_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PublicEndpoint_RequestId, v.RequestId)
+		case schemas.PublicEndpoint_User:
+			v.User = &EndpointUser{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a push notification activity in a journey. This type
 // of activity sends a push notification to participants.
 type PushMessageActivity struct {
@@ -5160,6 +12534,48 @@ type PushMessageActivity struct {
 	TemplateVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PushMessageActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PushMessageActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushMessageActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageConfig != nil {
+		s.WriteStruct(schemas.PushMessageActivity_MessageConfig)
+		v.MessageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextActivity != nil {
+		s.WriteString(schemas.PushMessageActivity_NextActivity, *v.NextActivity)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.PushMessageActivity_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.PushMessageActivity_TemplateVersion, *v.TemplateVersion)
+	}
+}
+func (v *PushMessageActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PushMessageActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PushMessageActivity_MessageConfig:
+			v.MessageConfig = &JourneyPushMessage{}
+			return v.MessageConfig.Deserialize(d)
+		case schemas.PushMessageActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.PushMessageActivity_NextActivity, v.NextActivity)
+		case schemas.PushMessageActivity_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.PushMessageActivity_TemplateName, v.TemplateName)
+		case schemas.PushMessageActivity_TemplateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.PushMessageActivity_TemplateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -5221,6 +12637,83 @@ type PushNotificationTemplateRequest struct {
 	TemplateDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PushNotificationTemplateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PushNotificationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushNotificationTemplateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADM != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateRequest_ADM)
+		v.ADM.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.APNS != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateRequest_APNS)
+		v.APNS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Baidu != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateRequest_Baidu)
+		v.Baidu.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Default != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateRequest_Default)
+		v.Default.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.PushNotificationTemplateRequest_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.GCM != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateRequest_GCM)
+		v.GCM.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.PushNotificationTemplateRequest_RecommenderId, *v.RecommenderId)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.PushNotificationTemplateRequest_TemplateDescription, *v.TemplateDescription)
+	}
+	serializeMapOf__string(s, schemas.PushNotificationTemplateRequest_tags, v.Tags)
+}
+func (v *PushNotificationTemplateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PushNotificationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PushNotificationTemplateRequest_ADM:
+			v.ADM = &AndroidPushNotificationTemplate{}
+			return v.ADM.Deserialize(d)
+		case schemas.PushNotificationTemplateRequest_APNS:
+			v.APNS = &APNSPushNotificationTemplate{}
+			return v.APNS.Deserialize(d)
+		case schemas.PushNotificationTemplateRequest_Baidu:
+			v.Baidu = &AndroidPushNotificationTemplate{}
+			return v.Baidu.Deserialize(d)
+		case schemas.PushNotificationTemplateRequest_Default:
+			v.Default = &DefaultPushNotificationTemplate{}
+			return v.Default.Deserialize(d)
+		case schemas.PushNotificationTemplateRequest_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateRequest_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.PushNotificationTemplateRequest_GCM:
+			v.GCM = &AndroidPushNotificationTemplate{}
+			return v.GCM.Deserialize(d)
+		case schemas.PushNotificationTemplateRequest_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateRequest_RecommenderId, v.RecommenderId)
+		case schemas.PushNotificationTemplateRequest_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateRequest_TemplateDescription, v.TemplateDescription)
+		case schemas.PushNotificationTemplateRequest_tags:
+			return deserializeMapOf__string(d, schemas.PushNotificationTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Provides information about the content and settings for a message template that
@@ -5301,6 +12794,123 @@ type PushNotificationTemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PushNotificationTemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PushNotificationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushNotificationTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADM != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateResponse_ADM)
+		v.ADM.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.APNS != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateResponse_APNS)
+		v.APNS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_Arn, *v.Arn)
+	}
+	if v.Baidu != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateResponse_Baidu)
+		v.Baidu.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Default != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateResponse_Default)
+		v.Default.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.GCM != nil {
+		s.WriteStruct(schemas.PushNotificationTemplateResponse_GCM)
+		v.GCM.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_RecommenderId, *v.RecommenderId)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.PushNotificationTemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PushNotificationTemplateResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.PushNotificationTemplateResponse_tags, v.Tags)
+}
+func (v *PushNotificationTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PushNotificationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PushNotificationTemplateResponse_ADM:
+			v.ADM = &AndroidPushNotificationTemplate{}
+			return v.ADM.Deserialize(d)
+		case schemas.PushNotificationTemplateResponse_APNS:
+			v.APNS = &APNSPushNotificationTemplate{}
+			return v.APNS.Deserialize(d)
+		case schemas.PushNotificationTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_Arn, v.Arn)
+		case schemas.PushNotificationTemplateResponse_Baidu:
+			v.Baidu = &AndroidPushNotificationTemplate{}
+			return v.Baidu.Deserialize(d)
+		case schemas.PushNotificationTemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_CreationDate, v.CreationDate)
+		case schemas.PushNotificationTemplateResponse_Default:
+			v.Default = &DefaultPushNotificationTemplate{}
+			return v.Default.Deserialize(d)
+		case schemas.PushNotificationTemplateResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.PushNotificationTemplateResponse_GCM:
+			v.GCM = &AndroidPushNotificationTemplate{}
+			return v.GCM.Deserialize(d)
+		case schemas.PushNotificationTemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.PushNotificationTemplateResponse_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_RecommenderId, v.RecommenderId)
+		case schemas.PushNotificationTemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.PushNotificationTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.PushNotificationTemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.PushNotificationTemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.PushNotificationTemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PushNotificationTemplateResponse_Version, v.Version)
+		case schemas.PushNotificationTemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.PushNotificationTemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the start and end times that define a time range when messages aren't
 // sent to endpoints.
 type QuietTime struct {
@@ -5320,6 +12930,34 @@ type QuietTime struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuietTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuietTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuietTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteString(schemas.QuietTime_End, *v.End)
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.QuietTime_Start, *v.Start)
+	}
+}
+func (v *QuietTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuietTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuietTime_End:
+			v.End = new(string)
+			return d.ReadString(schemas.QuietTime_End, v.End)
+		case schemas.QuietTime_Start:
+			v.Start = new(string)
+			return d.ReadString(schemas.QuietTime_Start, v.Start)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a random split activity in a journey. This type of
 // activity randomly sends specified percentages of participants down one of as
 // many as five paths in a journey, based on conditions that you specify.
@@ -5330,6 +12968,25 @@ type RandomSplitActivity struct {
 	Branches []RandomSplitEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *RandomSplitActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RandomSplitActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RandomSplitActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfRandomSplitEntry(s, schemas.RandomSplitActivity_Branches, v.Branches)
+}
+func (v *RandomSplitActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RandomSplitActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RandomSplitActivity_Branches:
+			return deserializeListOfRandomSplitEntry(d, schemas.RandomSplitActivity_Branches, &v.Branches)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a path in a random split activity in a journey.
@@ -5350,6 +13007,34 @@ type RandomSplitEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RandomSplitEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RandomSplitEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RandomSplitEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextActivity != nil {
+		s.WriteString(schemas.RandomSplitEntry_NextActivity, *v.NextActivity)
+	}
+	if v.Percentage != nil {
+		s.WriteInt32(schemas.RandomSplitEntry_Percentage, *v.Percentage)
+	}
+}
+func (v *RandomSplitEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RandomSplitEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RandomSplitEntry_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.RandomSplitEntry_NextActivity, v.NextActivity)
+		case schemas.RandomSplitEntry_Percentage:
+			v.Percentage = new(int32)
+			return d.ReadInt32(schemas.RandomSplitEntry_Percentage, v.Percentage)
+		}
+		return nil
+	})
+}
+
 // Specifies the contents of an email message, represented as a raw MIME message.
 type RawEmail struct {
 
@@ -5358,6 +13043,27 @@ type RawEmail struct {
 	Data []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *RawEmail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RawEmail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RawEmail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.RawEmail_Data, v.Data)
+	}
+}
+func (v *RawEmail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RawEmail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RawEmail_Data:
+			return d.ReadBlob(schemas.RawEmail_Data, &v.Data)
+		}
+		return nil
+	})
 }
 
 // Specifies criteria for including or excluding endpoints from a segment based on
@@ -5378,6 +13084,42 @@ type RecencyDimension struct {
 	RecencyType RecencyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecencyDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecencyDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecencyDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != "" {
+		s.WriteString(schemas.RecencyDimension_Duration, string(v.Duration))
+	}
+	if v.RecencyType != "" {
+		s.WriteString(schemas.RecencyDimension_RecencyType, string(v.RecencyType))
+	}
+}
+func (v *RecencyDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecencyDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecencyDimension_Duration:
+			var ev string
+			if err := d.ReadString(schemas.RecencyDimension_Duration, &ev); err != nil {
+				return err
+			}
+			v.Duration = Duration(ev)
+			return nil
+		case schemas.RecencyDimension_RecencyType:
+			var ev string
+			if err := d.ReadString(schemas.RecencyDimension_RecencyType, &ev); err != nil {
+				return err
+			}
+			v.RecencyType = RecencyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information about Amazon Pinpoint configuration settings for
@@ -5473,6 +13215,91 @@ type RecommenderConfigurationResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommenderConfigurationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommenderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommenderConfigurationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__string(s, schemas.RecommenderConfigurationResponse_Attributes, v.Attributes)
+	if v.CreationDate != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_Id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_Name, *v.Name)
+	}
+	if v.RecommendationProviderIdType != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_RecommendationProviderIdType, *v.RecommendationProviderIdType)
+	}
+	if v.RecommendationProviderRoleArn != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_RecommendationProviderRoleArn, *v.RecommendationProviderRoleArn)
+	}
+	if v.RecommendationProviderUri != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_RecommendationProviderUri, *v.RecommendationProviderUri)
+	}
+	if v.RecommendationTransformerUri != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_RecommendationTransformerUri, *v.RecommendationTransformerUri)
+	}
+	if v.RecommendationsDisplayName != nil {
+		s.WriteString(schemas.RecommenderConfigurationResponse_RecommendationsDisplayName, *v.RecommendationsDisplayName)
+	}
+	if v.RecommendationsPerMessage != nil {
+		s.WriteInt32(schemas.RecommenderConfigurationResponse_RecommendationsPerMessage, *v.RecommendationsPerMessage)
+	}
+}
+func (v *RecommenderConfigurationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommenderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommenderConfigurationResponse_Attributes:
+			return deserializeMapOf__string(d, schemas.RecommenderConfigurationResponse_Attributes, &v.Attributes)
+		case schemas.RecommenderConfigurationResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_CreationDate, v.CreationDate)
+		case schemas.RecommenderConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_Description, v.Description)
+		case schemas.RecommenderConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_Id, v.Id)
+		case schemas.RecommenderConfigurationResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.RecommenderConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_Name, v.Name)
+		case schemas.RecommenderConfigurationResponse_RecommendationProviderIdType:
+			v.RecommendationProviderIdType = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_RecommendationProviderIdType, v.RecommendationProviderIdType)
+		case schemas.RecommenderConfigurationResponse_RecommendationProviderRoleArn:
+			v.RecommendationProviderRoleArn = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_RecommendationProviderRoleArn, v.RecommendationProviderRoleArn)
+		case schemas.RecommenderConfigurationResponse_RecommendationProviderUri:
+			v.RecommendationProviderUri = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_RecommendationProviderUri, v.RecommendationProviderUri)
+		case schemas.RecommenderConfigurationResponse_RecommendationTransformerUri:
+			v.RecommendationTransformerUri = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_RecommendationTransformerUri, v.RecommendationTransformerUri)
+		case schemas.RecommenderConfigurationResponse_RecommendationsDisplayName:
+			v.RecommendationsDisplayName = new(string)
+			return d.ReadString(schemas.RecommenderConfigurationResponse_RecommendationsDisplayName, v.RecommendationsDisplayName)
+		case schemas.RecommenderConfigurationResponse_RecommendationsPerMessage:
+			v.RecommendationsPerMessage = new(int32)
+			return d.ReadInt32(schemas.RecommenderConfigurationResponse_RecommendationsPerMessage, v.RecommendationsPerMessage)
+		}
+		return nil
+	})
+}
+
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application, campaign, or journey.
 type ResultRow struct {
@@ -5491,6 +13318,28 @@ type ResultRow struct {
 	Values []ResultRowValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResultRow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultRow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultRow) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfResultRowValue(s, schemas.ResultRow_GroupedBys, v.GroupedBys)
+	serializeListOfResultRowValue(s, schemas.ResultRow_Values, v.Values)
+}
+func (v *ResultRow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultRow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultRow_GroupedBys:
+			return deserializeListOfResultRowValue(d, schemas.ResultRow_GroupedBys, &v.GroupedBys)
+		case schemas.ResultRow_Values:
+			return deserializeListOfResultRowValue(d, schemas.ResultRow_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Provides a single value and metadata about that value as part of an array of
@@ -5516,6 +13365,40 @@ type ResultRowValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResultRowValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultRowValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultRowValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResultRowValue_Key, *v.Key)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResultRowValue_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResultRowValue_Value, *v.Value)
+	}
+}
+func (v *ResultRowValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultRowValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultRowValue_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResultRowValue_Key, v.Key)
+		case schemas.ResultRowValue_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResultRowValue_Type, v.Type)
+		case schemas.ResultRowValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResultRowValue_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies the schedule settings for a campaign.
@@ -5572,6 +13455,72 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Schedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Schedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteString(schemas.Schedule_EndTime, *v.EndTime)
+	}
+	if v.EventFilter != nil {
+		s.WriteStruct(schemas.Schedule_EventFilter)
+		v.EventFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.Schedule_Frequency, string(v.Frequency))
+	}
+	if v.IsLocalTime != nil {
+		s.WriteBool(schemas.Schedule_IsLocalTime, *v.IsLocalTime)
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.Schedule_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.Schedule_StartTime, *v.StartTime)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.Schedule_Timezone, *v.Timezone)
+	}
+}
+func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Schedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Schedule_EndTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.Schedule_EndTime, v.EndTime)
+		case schemas.Schedule_EventFilter:
+			v.EventFilter = &CampaignEventFilter{}
+			return v.EventFilter.Deserialize(d)
+		case schemas.Schedule_Frequency:
+			var ev string
+			if err := d.ReadString(schemas.Schedule_Frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = Frequency(ev)
+			return nil
+		case schemas.Schedule_IsLocalTime:
+			v.IsLocalTime = new(bool)
+			return d.ReadBool(schemas.Schedule_IsLocalTime, v.IsLocalTime)
+		case schemas.Schedule_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		case schemas.Schedule_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.Schedule_StartTime, v.StartTime)
+		case schemas.Schedule_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.Schedule_Timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
 // Specifies dimension settings for including or excluding endpoints from a
 // segment based on how recently an endpoint was active.
 type SegmentBehaviors struct {
@@ -5580,6 +13529,30 @@ type SegmentBehaviors struct {
 	Recency *RecencyDimension
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentBehaviors) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentBehaviors)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentBehaviors) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recency != nil {
+		s.WriteStruct(schemas.SegmentBehaviors_Recency)
+		v.Recency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SegmentBehaviors) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentBehaviors, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentBehaviors_Recency:
+			v.Recency = &RecencyDimension{}
+			return v.Recency.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies a segment to associate with an activity in a journey.
@@ -5591,6 +13564,28 @@ type SegmentCondition struct {
 	SegmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SegmentId != nil {
+		s.WriteString(schemas.SegmentCondition_SegmentId, *v.SegmentId)
+	}
+}
+func (v *SegmentCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentCondition_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.SegmentCondition_SegmentId, v.SegmentId)
+		}
+		return nil
+	})
 }
 
 // Specifies demographic-based dimension settings for including or excluding
@@ -5619,6 +13614,70 @@ type SegmentDemographics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SegmentDemographics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentDemographics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentDemographics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppVersion != nil {
+		s.WriteStruct(schemas.SegmentDemographics_AppVersion)
+		v.AppVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Channel != nil {
+		s.WriteStruct(schemas.SegmentDemographics_Channel)
+		v.Channel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceType != nil {
+		s.WriteStruct(schemas.SegmentDemographics_DeviceType)
+		v.DeviceType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Make != nil {
+		s.WriteStruct(schemas.SegmentDemographics_Make)
+		v.Make.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Model != nil {
+		s.WriteStruct(schemas.SegmentDemographics_Model)
+		v.Model.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Platform != nil {
+		s.WriteStruct(schemas.SegmentDemographics_Platform)
+		v.Platform.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SegmentDemographics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentDemographics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentDemographics_AppVersion:
+			v.AppVersion = &SetDimension{}
+			return v.AppVersion.Deserialize(d)
+		case schemas.SegmentDemographics_Channel:
+			v.Channel = &SetDimension{}
+			return v.Channel.Deserialize(d)
+		case schemas.SegmentDemographics_DeviceType:
+			v.DeviceType = &SetDimension{}
+			return v.DeviceType.Deserialize(d)
+		case schemas.SegmentDemographics_Make:
+			v.Make = &SetDimension{}
+			return v.Make.Deserialize(d)
+		case schemas.SegmentDemographics_Model:
+			v.Model = &SetDimension{}
+			return v.Model.Deserialize(d)
+		case schemas.SegmentDemographics_Platform:
+			v.Platform = &SetDimension{}
+			return v.Platform.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the dimension settings for a segment.
 type SegmentDimensions struct {
 
@@ -5642,6 +13701,55 @@ type SegmentDimensions struct {
 	UserAttributes map[string]AttributeDimension
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentDimensions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentDimensions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentDimensions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfAttributeDimension(s, schemas.SegmentDimensions_Attributes, v.Attributes)
+	if v.Behavior != nil {
+		s.WriteStruct(schemas.SegmentDimensions_Behavior)
+		v.Behavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Demographic != nil {
+		s.WriteStruct(schemas.SegmentDimensions_Demographic)
+		v.Demographic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.SegmentDimensions_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfMetricDimension(s, schemas.SegmentDimensions_Metrics, v.Metrics)
+	serializeMapOfAttributeDimension(s, schemas.SegmentDimensions_UserAttributes, v.UserAttributes)
+}
+func (v *SegmentDimensions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentDimensions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentDimensions_Attributes:
+			return deserializeMapOfAttributeDimension(d, schemas.SegmentDimensions_Attributes, &v.Attributes)
+		case schemas.SegmentDimensions_Behavior:
+			v.Behavior = &SegmentBehaviors{}
+			return v.Behavior.Deserialize(d)
+		case schemas.SegmentDimensions_Demographic:
+			v.Demographic = &SegmentDemographics{}
+			return v.Demographic.Deserialize(d)
+		case schemas.SegmentDimensions_Location:
+			v.Location = &SegmentLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.SegmentDimensions_Metrics:
+			return deserializeMapOfMetricDimension(d, schemas.SegmentDimensions_Metrics, &v.Metrics)
+		case schemas.SegmentDimensions_UserAttributes:
+			return deserializeMapOfAttributeDimension(d, schemas.SegmentDimensions_UserAttributes, &v.UserAttributes)
+		}
+		return nil
+	})
 }
 
 // Specifies the base segments and dimensions for a segment, and the relationships
@@ -5675,6 +13783,48 @@ type SegmentGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SegmentGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSegmentDimensions(s, schemas.SegmentGroup_Dimensions, v.Dimensions)
+	serializeListOfSegmentReference(s, schemas.SegmentGroup_SourceSegments, v.SourceSegments)
+	if v.SourceType != "" {
+		s.WriteString(schemas.SegmentGroup_SourceType, string(v.SourceType))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SegmentGroup_Type, string(v.Type))
+	}
+}
+func (v *SegmentGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentGroup_Dimensions:
+			return deserializeListOfSegmentDimensions(d, schemas.SegmentGroup_Dimensions, &v.Dimensions)
+		case schemas.SegmentGroup_SourceSegments:
+			return deserializeListOfSegmentReference(d, schemas.SegmentGroup_SourceSegments, &v.SourceSegments)
+		case schemas.SegmentGroup_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.SegmentGroup_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		case schemas.SegmentGroup_Type:
+			var ev string
+			if err := d.ReadString(schemas.SegmentGroup_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the settings that define the relationships between segment groups for
 // a segment.
 type SegmentGroupList struct {
@@ -5689,6 +13839,35 @@ type SegmentGroupList struct {
 	Include Include
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentGroupList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentGroupList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentGroupList) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSegmentGroup(s, schemas.SegmentGroupList_Groups, v.Groups)
+	if v.Include != "" {
+		s.WriteString(schemas.SegmentGroupList_Include, string(v.Include))
+	}
+}
+func (v *SegmentGroupList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentGroupList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentGroupList_Groups:
+			return deserializeListOfSegmentGroup(d, schemas.SegmentGroupList_Groups, &v.Groups)
+		case schemas.SegmentGroupList_Include:
+			var ev string
+			if err := d.ReadString(schemas.SegmentGroupList_Include, &ev); err != nil {
+				return err
+			}
+			v.Include = Include(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information about the import job that created a segment. An import job
@@ -5737,6 +13916,59 @@ type SegmentImportResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SegmentImportResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentImportResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentImportResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__integer(s, schemas.SegmentImportResource_ChannelCounts, v.ChannelCounts)
+	if v.ExternalId != nil {
+		s.WriteString(schemas.SegmentImportResource_ExternalId, *v.ExternalId)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.SegmentImportResource_Format, string(v.Format))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.SegmentImportResource_RoleArn, *v.RoleArn)
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.SegmentImportResource_S3Url, *v.S3Url)
+	}
+	if v.Size != nil {
+		s.WriteInt32(schemas.SegmentImportResource_Size, *v.Size)
+	}
+}
+func (v *SegmentImportResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentImportResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentImportResource_ChannelCounts:
+			return deserializeMapOf__integer(d, schemas.SegmentImportResource_ChannelCounts, &v.ChannelCounts)
+		case schemas.SegmentImportResource_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.SegmentImportResource_ExternalId, v.ExternalId)
+		case schemas.SegmentImportResource_Format:
+			var ev string
+			if err := d.ReadString(schemas.SegmentImportResource_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = Format(ev)
+			return nil
+		case schemas.SegmentImportResource_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.SegmentImportResource_RoleArn, v.RoleArn)
+		case schemas.SegmentImportResource_S3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.SegmentImportResource_S3Url, v.S3Url)
+		case schemas.SegmentImportResource_Size:
+			v.Size = new(int32)
+			return d.ReadInt32(schemas.SegmentImportResource_Size, v.Size)
+		}
+		return nil
+	})
+}
+
 // Specifies geographical dimension settings for a segment.
 type SegmentLocation struct {
 
@@ -5747,6 +13979,38 @@ type SegmentLocation struct {
 	GPSPoint *GPSPointDimension
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Country != nil {
+		s.WriteStruct(schemas.SegmentLocation_Country)
+		v.Country.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GPSPoint != nil {
+		s.WriteStruct(schemas.SegmentLocation_GPSPoint)
+		v.GPSPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SegmentLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentLocation_Country:
+			v.Country = &SetDimension{}
+			return v.Country.Deserialize(d)
+		case schemas.SegmentLocation_GPSPoint:
+			v.GPSPoint = &GPSPointDimension{}
+			return v.GPSPoint.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the segment identifier and version of a segment.
@@ -5761,6 +14025,34 @@ type SegmentReference struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SegmentReference_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.SegmentReference_Version, *v.Version)
+	}
+}
+func (v *SegmentReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentReference_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SegmentReference_Id, v.Id)
+		case schemas.SegmentReference_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.SegmentReference_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Provides information about the configuration, dimension, and other settings for
@@ -5828,6 +14120,101 @@ type SegmentResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SegmentResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.SegmentResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SegmentResponse_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.SegmentResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.SegmentResponse_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SegmentResponse_Id, *v.Id)
+	}
+	if v.ImportDefinition != nil {
+		s.WriteStruct(schemas.SegmentResponse_ImportDefinition)
+		v.ImportDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.SegmentResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SegmentResponse_Name, *v.Name)
+	}
+	if v.SegmentGroups != nil {
+		s.WriteStruct(schemas.SegmentResponse_SegmentGroups)
+		v.SegmentGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentType != "" {
+		s.WriteString(schemas.SegmentResponse_SegmentType, string(v.SegmentType))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.SegmentResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.SegmentResponse_tags, v.Tags)
+}
+func (v *SegmentResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.SegmentResponse_ApplicationId, v.ApplicationId)
+		case schemas.SegmentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SegmentResponse_Arn, v.Arn)
+		case schemas.SegmentResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.SegmentResponse_CreationDate, v.CreationDate)
+		case schemas.SegmentResponse_Dimensions:
+			v.Dimensions = &SegmentDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.SegmentResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SegmentResponse_Id, v.Id)
+		case schemas.SegmentResponse_ImportDefinition:
+			v.ImportDefinition = &SegmentImportResource{}
+			return v.ImportDefinition.Deserialize(d)
+		case schemas.SegmentResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.SegmentResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.SegmentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SegmentResponse_Name, v.Name)
+		case schemas.SegmentResponse_SegmentGroups:
+			v.SegmentGroups = &SegmentGroupList{}
+			return v.SegmentGroups.Deserialize(d)
+		case schemas.SegmentResponse_SegmentType:
+			var ev string
+			if err := d.ReadString(schemas.SegmentResponse_SegmentType, &ev); err != nil {
+				return err
+			}
+			v.SegmentType = SegmentType(ev)
+			return nil
+		case schemas.SegmentResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.SegmentResponse_Version, v.Version)
+		case schemas.SegmentResponse_tags:
+			return deserializeMapOf__string(d, schemas.SegmentResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Provides information about all the segments that are associated with an
 // application.
 type SegmentsResponse struct {
@@ -5844,6 +14231,31 @@ type SegmentsResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SegmentsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSegmentResponse(s, schemas.SegmentsResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SegmentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SegmentsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentsResponse_Item:
+			return deserializeListOfSegmentResponse(d, schemas.SegmentsResponse_Item, &v.Item)
+		case schemas.SegmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SegmentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Send OTP message request parameters.
@@ -5897,6 +14309,88 @@ type SendOTPMessageRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendOTPMessageRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendOTPMessageRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendOTPMessageRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedAttempts != nil {
+		s.WriteInt32(schemas.SendOTPMessageRequestParameters_AllowedAttempts, *v.AllowedAttempts)
+	}
+	if v.BrandName != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_BrandName, *v.BrandName)
+	}
+	if v.Channel != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_Channel, *v.Channel)
+	}
+	if v.CodeLength != nil {
+		s.WriteInt32(schemas.SendOTPMessageRequestParameters_CodeLength, *v.CodeLength)
+	}
+	if v.DestinationIdentity != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_DestinationIdentity, *v.DestinationIdentity)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_EntityId, *v.EntityId)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_Language, *v.Language)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_ReferenceId, *v.ReferenceId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.SendOTPMessageRequestParameters_TemplateId, *v.TemplateId)
+	}
+	if v.ValidityPeriod != nil {
+		s.WriteInt32(schemas.SendOTPMessageRequestParameters_ValidityPeriod, *v.ValidityPeriod)
+	}
+}
+func (v *SendOTPMessageRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendOTPMessageRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendOTPMessageRequestParameters_AllowedAttempts:
+			v.AllowedAttempts = new(int32)
+			return d.ReadInt32(schemas.SendOTPMessageRequestParameters_AllowedAttempts, v.AllowedAttempts)
+		case schemas.SendOTPMessageRequestParameters_BrandName:
+			v.BrandName = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_BrandName, v.BrandName)
+		case schemas.SendOTPMessageRequestParameters_Channel:
+			v.Channel = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_Channel, v.Channel)
+		case schemas.SendOTPMessageRequestParameters_CodeLength:
+			v.CodeLength = new(int32)
+			return d.ReadInt32(schemas.SendOTPMessageRequestParameters_CodeLength, v.CodeLength)
+		case schemas.SendOTPMessageRequestParameters_DestinationIdentity:
+			v.DestinationIdentity = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_DestinationIdentity, v.DestinationIdentity)
+		case schemas.SendOTPMessageRequestParameters_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_EntityId, v.EntityId)
+		case schemas.SendOTPMessageRequestParameters_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_Language, v.Language)
+		case schemas.SendOTPMessageRequestParameters_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_OriginationIdentity, v.OriginationIdentity)
+		case schemas.SendOTPMessageRequestParameters_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_ReferenceId, v.ReferenceId)
+		case schemas.SendOTPMessageRequestParameters_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.SendOTPMessageRequestParameters_TemplateId, v.TemplateId)
+		case schemas.SendOTPMessageRequestParameters_ValidityPeriod:
+			v.ValidityPeriod = new(int32)
+			return d.ReadInt32(schemas.SendOTPMessageRequestParameters_ValidityPeriod, v.ValidityPeriod)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration and other settings for a message to send to all the
 // endpoints that are associated with a list of users.
 type SendUsersMessageRequest struct {
@@ -5932,6 +14426,50 @@ type SendUsersMessageRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendUsersMessageRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessageRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__string(s, schemas.SendUsersMessageRequest_Context, v.Context)
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.SendUsersMessageRequest_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.SendUsersMessageRequest_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.SendUsersMessageRequest_TraceId, *v.TraceId)
+	}
+	serializeMapOfEndpointSendConfiguration(s, schemas.SendUsersMessageRequest_Users, v.Users)
+}
+func (v *SendUsersMessageRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendUsersMessageRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendUsersMessageRequest_Context:
+			return deserializeMapOf__string(d, schemas.SendUsersMessageRequest_Context, &v.Context)
+		case schemas.SendUsersMessageRequest_MessageConfiguration:
+			v.MessageConfiguration = &DirectMessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.SendUsersMessageRequest_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.SendUsersMessageRequest_TraceId:
+			v.TraceId = new(string)
+			return d.ReadString(schemas.SendUsersMessageRequest_TraceId, v.TraceId)
+		case schemas.SendUsersMessageRequest_Users:
+			return deserializeMapOfEndpointSendConfiguration(d, schemas.SendUsersMessageRequest_Users, &v.Users)
+		}
+		return nil
+	})
+}
+
 // Provides information about which users and endpoints a message was sent to.
 type SendUsersMessageResponse struct {
 
@@ -5950,6 +14488,37 @@ type SendUsersMessageResponse struct {
 	Result map[string]map[string]EndpointMessageResult
 
 	noSmithyDocumentSerde
+}
+
+func (v *SendUsersMessageResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessageResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.SendUsersMessageResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SendUsersMessageResponse_RequestId, *v.RequestId)
+	}
+	serializeMapOfMapOfEndpointMessageResult(s, schemas.SendUsersMessageResponse_Result, v.Result)
+}
+func (v *SendUsersMessageResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendUsersMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendUsersMessageResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.SendUsersMessageResponse_ApplicationId, v.ApplicationId)
+		case schemas.SendUsersMessageResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SendUsersMessageResponse_RequestId, v.RequestId)
+		case schemas.SendUsersMessageResponse_Result:
+			return deserializeMapOfMapOfEndpointMessageResult(d, schemas.SendUsersMessageResponse_Result, &v.Result)
+		}
+		return nil
+	})
 }
 
 // Provides information about a session.
@@ -5974,6 +14543,46 @@ type Session struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Session) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Session)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Session) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.Session_Duration, *v.Duration)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Session_Id, *v.Id)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteString(schemas.Session_StartTimestamp, *v.StartTimestamp)
+	}
+	if v.StopTimestamp != nil {
+		s.WriteString(schemas.Session_StopTimestamp, *v.StopTimestamp)
+	}
+}
+func (v *Session) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Session, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Session_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.Session_Duration, v.Duration)
+		case schemas.Session_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Session_Id, v.Id)
+		case schemas.Session_StartTimestamp:
+			v.StartTimestamp = new(string)
+			return d.ReadString(schemas.Session_StartTimestamp, v.StartTimestamp)
+		case schemas.Session_StopTimestamp:
+			v.StopTimestamp = new(string)
+			return d.ReadString(schemas.Session_StopTimestamp, v.StopTimestamp)
+		}
+		return nil
+	})
+}
+
 // Specifies the dimension type and values for a segment dimension.
 type SetDimension struct {
 
@@ -5992,6 +14601,35 @@ type SetDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionType != "" {
+		s.WriteString(schemas.SetDimension_DimensionType, string(v.DimensionType))
+	}
+	serializeListOf__string(s, schemas.SetDimension_Values, v.Values)
+}
+func (v *SetDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDimension_DimensionType:
+			var ev string
+			if err := d.ReadString(schemas.SetDimension_DimensionType, &ev); err != nil {
+				return err
+			}
+			v.DimensionType = DimensionType(ev)
+			return nil
+		case schemas.SetDimension_Values:
+			return deserializeListOf__string(d, schemas.SetDimension_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies a condition to evaluate for an activity in a journey.
 type SimpleCondition struct {
 
@@ -6005,6 +14643,46 @@ type SimpleCondition struct {
 	SegmentDimensions *SegmentDimensions
 
 	noSmithyDocumentSerde
+}
+
+func (v *SimpleCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventCondition != nil {
+		s.WriteStruct(schemas.SimpleCondition_EventCondition)
+		v.EventCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentCondition != nil {
+		s.WriteStruct(schemas.SimpleCondition_SegmentCondition)
+		v.SegmentCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentDimensions != nil {
+		s.WriteStruct(schemas.SimpleCondition_SegmentDimensions)
+		v.SegmentDimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SimpleCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleCondition_EventCondition:
+			v.EventCondition = &EventCondition{}
+			return v.EventCondition.Deserialize(d)
+		case schemas.SimpleCondition_SegmentCondition:
+			v.SegmentCondition = &SegmentCondition{}
+			return v.SegmentCondition.Deserialize(d)
+		case schemas.SimpleCondition_SegmentDimensions:
+			v.SegmentDimensions = &SegmentDimensions{}
+			return v.SegmentDimensions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the contents of an email message, composed of a subject, a text part,
@@ -6030,6 +14708,49 @@ type SimpleEmail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleEmail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleEmail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleEmail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfMessageHeader(s, schemas.SimpleEmail_Headers, v.Headers)
+	if v.HtmlPart != nil {
+		s.WriteStruct(schemas.SimpleEmail_HtmlPart)
+		v.HtmlPart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subject != nil {
+		s.WriteStruct(schemas.SimpleEmail_Subject)
+		v.Subject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextPart != nil {
+		s.WriteStruct(schemas.SimpleEmail_TextPart)
+		v.TextPart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SimpleEmail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleEmail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleEmail_Headers:
+			return deserializeListOfMessageHeader(d, schemas.SimpleEmail_Headers, &v.Headers)
+		case schemas.SimpleEmail_HtmlPart:
+			v.HtmlPart = &SimpleEmailPart{}
+			return v.HtmlPart.Deserialize(d)
+		case schemas.SimpleEmail_Subject:
+			v.Subject = &SimpleEmailPart{}
+			return v.Subject.Deserialize(d)
+		case schemas.SimpleEmail_TextPart:
+			v.TextPart = &SimpleEmailPart{}
+			return v.TextPart.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the subject or body of an email message, represented as textual email
 // data and the applicable character set.
 type SimpleEmailPart struct {
@@ -6041,6 +14762,34 @@ type SimpleEmailPart struct {
 	Data *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SimpleEmailPart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleEmailPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleEmailPart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Charset != nil {
+		s.WriteString(schemas.SimpleEmailPart_Charset, *v.Charset)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.SimpleEmailPart_Data, *v.Data)
+	}
+}
+func (v *SimpleEmailPart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleEmailPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleEmailPart_Charset:
+			v.Charset = new(string)
+			return d.ReadString(schemas.SimpleEmailPart_Charset, v.Charset)
+		case schemas.SimpleEmailPart_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.SimpleEmailPart_Data, v.Data)
+		}
+		return nil
+	})
 }
 
 // Specifies the status and settings of the SMS channel for an application.
@@ -6058,6 +14807,40 @@ type SMSChannelRequest struct {
 	ShortCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SMSChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SMSChannelRequest_Enabled, *v.Enabled)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.SMSChannelRequest_SenderId, *v.SenderId)
+	}
+	if v.ShortCode != nil {
+		s.WriteString(schemas.SMSChannelRequest_ShortCode, *v.ShortCode)
+	}
+}
+func (v *SMSChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SMSChannelRequest_Enabled, v.Enabled)
+		case schemas.SMSChannelRequest_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.SMSChannelRequest_SenderId, v.SenderId)
+		case schemas.SMSChannelRequest_ShortCode:
+			v.ShortCode = new(string)
+			return d.ReadString(schemas.SMSChannelRequest_ShortCode, v.ShortCode)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the SMS channel for an
@@ -6116,6 +14899,106 @@ type SMSChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMSChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.SMSChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.SMSChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SMSChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.SMSChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SMSChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.SMSChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.SMSChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.SMSChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.SMSChannelResponse_Platform, *v.Platform)
+	}
+	if v.PromotionalMessagesPerSecond != nil {
+		s.WriteInt32(schemas.SMSChannelResponse_PromotionalMessagesPerSecond, *v.PromotionalMessagesPerSecond)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.SMSChannelResponse_SenderId, *v.SenderId)
+	}
+	if v.ShortCode != nil {
+		s.WriteString(schemas.SMSChannelResponse_ShortCode, *v.ShortCode)
+	}
+	if v.TransactionalMessagesPerSecond != nil {
+		s.WriteInt32(schemas.SMSChannelResponse_TransactionalMessagesPerSecond, *v.TransactionalMessagesPerSecond)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.SMSChannelResponse_Version, *v.Version)
+	}
+}
+func (v *SMSChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.SMSChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_CreationDate, v.CreationDate)
+		case schemas.SMSChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SMSChannelResponse_Enabled, v.Enabled)
+		case schemas.SMSChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.SMSChannelResponse_HasCredential, v.HasCredential)
+		case schemas.SMSChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_Id, v.Id)
+		case schemas.SMSChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.SMSChannelResponse_IsArchived, v.IsArchived)
+		case schemas.SMSChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.SMSChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.SMSChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_Platform, v.Platform)
+		case schemas.SMSChannelResponse_PromotionalMessagesPerSecond:
+			v.PromotionalMessagesPerSecond = new(int32)
+			return d.ReadInt32(schemas.SMSChannelResponse_PromotionalMessagesPerSecond, v.PromotionalMessagesPerSecond)
+		case schemas.SMSChannelResponse_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_SenderId, v.SenderId)
+		case schemas.SMSChannelResponse_ShortCode:
+			v.ShortCode = new(string)
+			return d.ReadString(schemas.SMSChannelResponse_ShortCode, v.ShortCode)
+		case schemas.SMSChannelResponse_TransactionalMessagesPerSecond:
+			v.TransactionalMessagesPerSecond = new(int32)
+			return d.ReadInt32(schemas.SMSChannelResponse_TransactionalMessagesPerSecond, v.TransactionalMessagesPerSecond)
+		case schemas.SMSChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.SMSChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the default settings for a one-time SMS message that's sent directly
 // to an endpoint.
 type SMSMessage struct {
@@ -6160,6 +15043,77 @@ type SMSMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMSMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.SMSMessage_Body, *v.Body)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.SMSMessage_EntityId, *v.EntityId)
+	}
+	if v.Keyword != nil {
+		s.WriteString(schemas.SMSMessage_Keyword, *v.Keyword)
+	}
+	if v.MediaUrl != nil {
+		s.WriteString(schemas.SMSMessage_MediaUrl, *v.MediaUrl)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.SMSMessage_MessageType, string(v.MessageType))
+	}
+	if v.OriginationNumber != nil {
+		s.WriteString(schemas.SMSMessage_OriginationNumber, *v.OriginationNumber)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.SMSMessage_SenderId, *v.SenderId)
+	}
+	serializeMapOfListOf__string(s, schemas.SMSMessage_Substitutions, v.Substitutions)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.SMSMessage_TemplateId, *v.TemplateId)
+	}
+}
+func (v *SMSMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.SMSMessage_Body, v.Body)
+		case schemas.SMSMessage_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.SMSMessage_EntityId, v.EntityId)
+		case schemas.SMSMessage_Keyword:
+			v.Keyword = new(string)
+			return d.ReadString(schemas.SMSMessage_Keyword, v.Keyword)
+		case schemas.SMSMessage_MediaUrl:
+			v.MediaUrl = new(string)
+			return d.ReadString(schemas.SMSMessage_MediaUrl, v.MediaUrl)
+		case schemas.SMSMessage_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.SMSMessage_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = MessageType(ev)
+			return nil
+		case schemas.SMSMessage_OriginationNumber:
+			v.OriginationNumber = new(string)
+			return d.ReadString(schemas.SMSMessage_OriginationNumber, v.OriginationNumber)
+		case schemas.SMSMessage_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.SMSMessage_SenderId, v.SenderId)
+		case schemas.SMSMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.SMSMessage_Substitutions, &v.Substitutions)
+		case schemas.SMSMessage_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.SMSMessage_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for an SMS activity in a journey. This type of activity
 // sends a text message to participants.
 type SMSMessageActivity struct {
@@ -6188,6 +15142,48 @@ type SMSMessageActivity struct {
 	TemplateVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SMSMessageActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSMessageActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSMessageActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageConfig != nil {
+		s.WriteStruct(schemas.SMSMessageActivity_MessageConfig)
+		v.MessageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextActivity != nil {
+		s.WriteString(schemas.SMSMessageActivity_NextActivity, *v.NextActivity)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.SMSMessageActivity_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.SMSMessageActivity_TemplateVersion, *v.TemplateVersion)
+	}
+}
+func (v *SMSMessageActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSMessageActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSMessageActivity_MessageConfig:
+			v.MessageConfig = &JourneySMSMessage{}
+			return v.MessageConfig.Deserialize(d)
+		case schemas.SMSMessageActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.SMSMessageActivity_NextActivity, v.NextActivity)
+		case schemas.SMSMessageActivity_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.SMSMessageActivity_TemplateName, v.TemplateName)
+		case schemas.SMSMessageActivity_TemplateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.SMSMessageActivity_TemplateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -6228,6 +15224,49 @@ type SMSTemplateRequest struct {
 	TemplateDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SMSTemplateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSTemplateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.SMSTemplateRequest_Body, *v.Body)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.SMSTemplateRequest_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.SMSTemplateRequest_RecommenderId, *v.RecommenderId)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.SMSTemplateRequest_TemplateDescription, *v.TemplateDescription)
+	}
+	serializeMapOf__string(s, schemas.SMSTemplateRequest_tags, v.Tags)
+}
+func (v *SMSTemplateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSTemplateRequest_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.SMSTemplateRequest_Body, v.Body)
+		case schemas.SMSTemplateRequest_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.SMSTemplateRequest_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.SMSTemplateRequest_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.SMSTemplateRequest_RecommenderId, v.RecommenderId)
+		case schemas.SMSTemplateRequest_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.SMSTemplateRequest_TemplateDescription, v.TemplateDescription)
+		case schemas.SMSTemplateRequest_tags:
+			return deserializeMapOf__string(d, schemas.SMSTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Provides information about the content and settings for a message template that
@@ -6288,6 +15327,89 @@ type SMSTemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMSTemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SMSTemplateResponse_Arn, *v.Arn)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.SMSTemplateResponse_Body, *v.Body)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.SMSTemplateResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.SMSTemplateResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.SMSTemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.SMSTemplateResponse_RecommenderId, *v.RecommenderId)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.SMSTemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.SMSTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.SMSTemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.SMSTemplateResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.SMSTemplateResponse_tags, v.Tags)
+}
+func (v *SMSTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_Arn, v.Arn)
+		case schemas.SMSTemplateResponse_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_Body, v.Body)
+		case schemas.SMSTemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_CreationDate, v.CreationDate)
+		case schemas.SMSTemplateResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.SMSTemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.SMSTemplateResponse_RecommenderId:
+			v.RecommenderId = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_RecommenderId, v.RecommenderId)
+		case schemas.SMSTemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.SMSTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.SMSTemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.SMSTemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.SMSTemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.SMSTemplateResponse_Version, v.Version)
+		case schemas.SMSTemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.SMSTemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the conditions for the first activity in a journey. This activity and
 // its conditions determine which users are participants in a journey.
 type StartCondition struct {
@@ -6303,6 +15425,44 @@ type StartCondition struct {
 	SegmentStartCondition *SegmentCondition
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StartCondition_Description, *v.Description)
+	}
+	if v.EventStartCondition != nil {
+		s.WriteStruct(schemas.StartCondition_EventStartCondition)
+		v.EventStartCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentStartCondition != nil {
+		s.WriteStruct(schemas.StartCondition_SegmentStartCondition)
+		v.SegmentStartCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCondition_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartCondition_Description, v.Description)
+		case schemas.StartCondition_EventStartCondition:
+			v.EventStartCondition = &EventStartCondition{}
+			return v.EventStartCondition.Deserialize(d)
+		case schemas.StartCondition_SegmentStartCondition:
+			v.SegmentStartCondition = &SegmentCondition{}
+			return v.SegmentStartCondition.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the tags (keys and values) for an application, campaign, message
@@ -6321,6 +15481,25 @@ type TagsModel struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagsModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagsModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagsModel) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__string(s, schemas.TagsModel_tags, v.Tags)
+}
+func (v *TagsModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagsModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagsModel_tags:
+			return deserializeMapOf__string(d, schemas.TagsModel_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Specifies the name and version of the message template to use for the message.
@@ -6344,6 +15523,34 @@ type Template struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Template) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Template)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Template) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Template_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Template_Version, *v.Version)
+	}
+}
+func (v *Template) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Template, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Template_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Template_Name, v.Name)
+		case schemas.Template_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Template_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies which version of a message template to use as the active version of
 // the template.
 type TemplateActiveVersionRequest struct {
@@ -6357,6 +15564,28 @@ type TemplateActiveVersionRequest struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateActiveVersionRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateActiveVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateActiveVersionRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != nil {
+		s.WriteString(schemas.TemplateActiveVersionRequest_Version, *v.Version)
+	}
+}
+func (v *TemplateActiveVersionRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateActiveVersionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateActiveVersionRequest_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.TemplateActiveVersionRequest_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies the message template to use for the message, for each type of channel.
@@ -6382,6 +15611,62 @@ type TemplateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailTemplate != nil {
+		s.WriteStruct(schemas.TemplateConfiguration_EmailTemplate)
+		v.EmailTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InAppTemplate != nil {
+		s.WriteStruct(schemas.TemplateConfiguration_InAppTemplate)
+		v.InAppTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PushTemplate != nil {
+		s.WriteStruct(schemas.TemplateConfiguration_PushTemplate)
+		v.PushTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSTemplate != nil {
+		s.WriteStruct(schemas.TemplateConfiguration_SMSTemplate)
+		v.SMSTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceTemplate != nil {
+		s.WriteStruct(schemas.TemplateConfiguration_VoiceTemplate)
+		v.VoiceTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TemplateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateConfiguration_EmailTemplate:
+			v.EmailTemplate = &Template{}
+			return v.EmailTemplate.Deserialize(d)
+		case schemas.TemplateConfiguration_InAppTemplate:
+			v.InAppTemplate = &Template{}
+			return v.InAppTemplate.Deserialize(d)
+		case schemas.TemplateConfiguration_PushTemplate:
+			v.PushTemplate = &Template{}
+			return v.PushTemplate.Deserialize(d)
+		case schemas.TemplateConfiguration_SMSTemplate:
+			v.SMSTemplate = &Template{}
+			return v.SMSTemplate.Deserialize(d)
+		case schemas.TemplateConfiguration_VoiceTemplate:
+			v.VoiceTemplate = &Template{}
+			return v.VoiceTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides information about a request to create a message template.
 type TemplateCreateMessageBody struct {
 
@@ -6396,6 +15681,40 @@ type TemplateCreateMessageBody struct {
 	RequestID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateCreateMessageBody) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateCreateMessageBody)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateCreateMessageBody) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TemplateCreateMessageBody_Arn, *v.Arn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TemplateCreateMessageBody_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.TemplateCreateMessageBody_RequestID, *v.RequestID)
+	}
+}
+func (v *TemplateCreateMessageBody) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateCreateMessageBody, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateCreateMessageBody_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TemplateCreateMessageBody_Arn, v.Arn)
+		case schemas.TemplateCreateMessageBody_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TemplateCreateMessageBody_Message, v.Message)
+		case schemas.TemplateCreateMessageBody_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.TemplateCreateMessageBody_RequestID, v.RequestID)
+		}
+		return nil
+	})
 }
 
 // Provides information about a message template that's associated with your
@@ -6459,6 +15778,77 @@ type TemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TemplateResponse_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.TemplateResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.TemplateResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.TemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.TemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.TemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.TemplateResponse_Version, *v.Version)
+	}
+	serializeMapOf__string(s, schemas.TemplateResponse_tags, v.Tags)
+}
+func (v *TemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TemplateResponse_Arn, v.Arn)
+		case schemas.TemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.TemplateResponse_CreationDate, v.CreationDate)
+		case schemas.TemplateResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.TemplateResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.TemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.TemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.TemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.TemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.TemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.TemplateResponse_TemplateName, v.TemplateName)
+		case schemas.TemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.TemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.TemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.TemplateResponse_Version, v.Version)
+		case schemas.TemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.TemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Provides information about all the message templates that are associated with
 // your Amazon Pinpoint account.
 type TemplatesResponse struct {
@@ -6475,6 +15865,31 @@ type TemplatesResponse struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplatesResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplatesResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTemplateResponse(s, schemas.TemplatesResponse_Item, v.Item)
+	if v.NextToken != nil {
+		s.WriteString(schemas.TemplatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *TemplatesResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplatesResponse_Item:
+			return deserializeListOfTemplateResponse(d, schemas.TemplatesResponse_Item, &v.Item)
+		case schemas.TemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.TemplatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 // Provides information about a specific version of a message template.
@@ -6520,6 +15935,64 @@ type TemplateVersionResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateVersionResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateVersionResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteString(schemas.TemplateVersionResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.TemplateVersionResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.TemplateVersionResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.TemplateVersionResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.TemplateVersionResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != nil {
+		s.WriteString(schemas.TemplateVersionResponse_TemplateType, *v.TemplateType)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.TemplateVersionResponse_Version, *v.Version)
+	}
+}
+func (v *TemplateVersionResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateVersionResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_CreationDate, v.CreationDate)
+		case schemas.TemplateVersionResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.TemplateVersionResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.TemplateVersionResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.TemplateVersionResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_TemplateName, v.TemplateName)
+		case schemas.TemplateVersionResponse_TemplateType:
+			v.TemplateType = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_TemplateType, v.TemplateType)
+		case schemas.TemplateVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.TemplateVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Provides information about all the versions of a specific message template.
 type TemplateVersionsResponse struct {
 
@@ -6541,6 +16014,43 @@ type TemplateVersionsResponse struct {
 	RequestID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateVersionsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateVersionsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTemplateVersionResponse(s, schemas.TemplateVersionsResponse_Item, v.Item)
+	if v.Message != nil {
+		s.WriteString(schemas.TemplateVersionsResponse_Message, *v.Message)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.TemplateVersionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.TemplateVersionsResponse_RequestID, *v.RequestID)
+	}
+}
+func (v *TemplateVersionsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateVersionsResponse_Item:
+			return deserializeListOfTemplateVersionResponse(d, schemas.TemplateVersionsResponse_Item, &v.Item)
+		case schemas.TemplateVersionsResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TemplateVersionsResponse_Message, v.Message)
+		case schemas.TemplateVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.TemplateVersionsResponse_NextToken, v.NextToken)
+		case schemas.TemplateVersionsResponse_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.TemplateVersionsResponse_RequestID, v.RequestID)
+		}
+		return nil
+	})
 }
 
 // Specifies the settings for a campaign treatment. A treatment is a variation of
@@ -6584,6 +16094,86 @@ type TreatmentResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TreatmentResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TreatmentResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TreatmentResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.TreatmentResource_CustomDeliveryConfiguration)
+		v.CustomDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TreatmentResource_Id, *v.Id)
+	}
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.TreatmentResource_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.TreatmentResource_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SizePercent != nil {
+		s.WriteInt32(schemas.TreatmentResource_SizePercent, *v.SizePercent)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.TreatmentResource_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.TreatmentResource_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TreatmentDescription != nil {
+		s.WriteString(schemas.TreatmentResource_TreatmentDescription, *v.TreatmentDescription)
+	}
+	if v.TreatmentName != nil {
+		s.WriteString(schemas.TreatmentResource_TreatmentName, *v.TreatmentName)
+	}
+}
+func (v *TreatmentResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TreatmentResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TreatmentResource_CustomDeliveryConfiguration:
+			v.CustomDeliveryConfiguration = &CustomDeliveryConfiguration{}
+			return v.CustomDeliveryConfiguration.Deserialize(d)
+		case schemas.TreatmentResource_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TreatmentResource_Id, v.Id)
+		case schemas.TreatmentResource_MessageConfiguration:
+			v.MessageConfiguration = &MessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.TreatmentResource_Schedule:
+			v.Schedule = &Schedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.TreatmentResource_SizePercent:
+			v.SizePercent = new(int32)
+			return d.ReadInt32(schemas.TreatmentResource_SizePercent, v.SizePercent)
+		case schemas.TreatmentResource_State:
+			v.State = &CampaignState{}
+			return v.State.Deserialize(d)
+		case schemas.TreatmentResource_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.TreatmentResource_TreatmentDescription:
+			v.TreatmentDescription = new(string)
+			return d.ReadString(schemas.TreatmentResource_TreatmentDescription, v.TreatmentDescription)
+		case schemas.TreatmentResource_TreatmentName:
+			v.TreatmentName = new(string)
+			return d.ReadString(schemas.TreatmentResource_TreatmentName, v.TreatmentName)
+		}
+		return nil
+	})
+}
+
 // Specifies one or more attributes to remove from all the endpoints that are
 // associated with an application.
 type UpdateAttributesRequest struct {
@@ -6595,6 +16185,25 @@ type UpdateAttributesRequest struct {
 	Blacklist []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAttributesRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttributesRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOf__string(s, schemas.UpdateAttributesRequest_Blacklist, v.Blacklist)
+}
+func (v *UpdateAttributesRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAttributesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAttributesRequest_Blacklist:
+			return deserializeListOf__string(d, schemas.UpdateAttributesRequest_Blacklist, &v.Blacklist)
+		}
+		return nil
+	})
 }
 
 // Specifies Amazon Pinpoint configuration settings for retrieving and processing
@@ -6697,6 +16306,73 @@ type UpdateRecommenderConfigurationShape struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommenderConfigurationShape) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommenderConfigurationShape)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommenderConfigurationShape) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOf__string(s, schemas.UpdateRecommenderConfigurationShape_Attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_Name, *v.Name)
+	}
+	if v.RecommendationProviderIdType != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderIdType, *v.RecommendationProviderIdType)
+	}
+	if v.RecommendationProviderRoleArn != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderRoleArn, *v.RecommendationProviderRoleArn)
+	}
+	if v.RecommendationProviderUri != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderUri, *v.RecommendationProviderUri)
+	}
+	if v.RecommendationTransformerUri != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_RecommendationTransformerUri, *v.RecommendationTransformerUri)
+	}
+	if v.RecommendationsDisplayName != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationShape_RecommendationsDisplayName, *v.RecommendationsDisplayName)
+	}
+	if v.RecommendationsPerMessage != nil {
+		s.WriteInt32(schemas.UpdateRecommenderConfigurationShape_RecommendationsPerMessage, *v.RecommendationsPerMessage)
+	}
+}
+func (v *UpdateRecommenderConfigurationShape) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecommenderConfigurationShape, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecommenderConfigurationShape_Attributes:
+			return deserializeMapOf__string(d, schemas.UpdateRecommenderConfigurationShape_Attributes, &v.Attributes)
+		case schemas.UpdateRecommenderConfigurationShape_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_Description, v.Description)
+		case schemas.UpdateRecommenderConfigurationShape_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_Name, v.Name)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationProviderIdType:
+			v.RecommendationProviderIdType = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderIdType, v.RecommendationProviderIdType)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationProviderRoleArn:
+			v.RecommendationProviderRoleArn = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderRoleArn, v.RecommendationProviderRoleArn)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationProviderUri:
+			v.RecommendationProviderUri = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_RecommendationProviderUri, v.RecommendationProviderUri)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationTransformerUri:
+			v.RecommendationTransformerUri = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_RecommendationTransformerUri, v.RecommendationTransformerUri)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationsDisplayName:
+			v.RecommendationsDisplayName = new(string)
+			return d.ReadString(schemas.UpdateRecommenderConfigurationShape_RecommendationsDisplayName, v.RecommendationsDisplayName)
+		case schemas.UpdateRecommenderConfigurationShape_RecommendationsPerMessage:
+			v.RecommendationsPerMessage = new(int32)
+			return d.ReadInt32(schemas.UpdateRecommenderConfigurationShape_RecommendationsPerMessage, v.RecommendationsPerMessage)
+		}
+		return nil
+	})
+}
+
 // Verify OTP Message Response.
 type VerificationResponse struct {
 
@@ -6704,6 +16380,28 @@ type VerificationResponse struct {
 	Valid *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *VerificationResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerificationResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Valid != nil {
+		s.WriteBool(schemas.VerificationResponse_Valid, *v.Valid)
+	}
+}
+func (v *VerificationResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerificationResponse_Valid:
+			v.Valid = new(bool)
+			return d.ReadBool(schemas.VerificationResponse_Valid, v.Valid)
+		}
+		return nil
+	})
 }
 
 // Verify OTP message request.
@@ -6727,6 +16425,40 @@ type VerifyOTPMessageRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyOTPMessageRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyOTPMessageRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyOTPMessageRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationIdentity != nil {
+		s.WriteString(schemas.VerifyOTPMessageRequestParameters_DestinationIdentity, *v.DestinationIdentity)
+	}
+	if v.Otp != nil {
+		s.WriteString(schemas.VerifyOTPMessageRequestParameters_Otp, *v.Otp)
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.VerifyOTPMessageRequestParameters_ReferenceId, *v.ReferenceId)
+	}
+}
+func (v *VerifyOTPMessageRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyOTPMessageRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyOTPMessageRequestParameters_DestinationIdentity:
+			v.DestinationIdentity = new(string)
+			return d.ReadString(schemas.VerifyOTPMessageRequestParameters_DestinationIdentity, v.DestinationIdentity)
+		case schemas.VerifyOTPMessageRequestParameters_Otp:
+			v.Otp = new(string)
+			return d.ReadString(schemas.VerifyOTPMessageRequestParameters_Otp, v.Otp)
+		case schemas.VerifyOTPMessageRequestParameters_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.VerifyOTPMessageRequestParameters_ReferenceId, v.ReferenceId)
+		}
+		return nil
+	})
+}
+
 // Specifies the status and settings of the voice channel for an application.
 type VoiceChannelRequest struct {
 
@@ -6734,6 +16466,28 @@ type VoiceChannelRequest struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceChannelRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceChannelRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.VoiceChannelRequest_Enabled, *v.Enabled)
+	}
+}
+func (v *VoiceChannelRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceChannelRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.VoiceChannelRequest_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Provides information about the status and settings of the voice channel for an
@@ -6777,6 +16531,82 @@ type VoiceChannelResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoiceChannelResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceChannelResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.VoiceChannelResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.VoiceChannelResponse_CreationDate, *v.CreationDate)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.VoiceChannelResponse_Enabled, *v.Enabled)
+	}
+	if v.HasCredential != nil {
+		s.WriteBool(schemas.VoiceChannelResponse_HasCredential, *v.HasCredential)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VoiceChannelResponse_Id, *v.Id)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.VoiceChannelResponse_IsArchived, *v.IsArchived)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.VoiceChannelResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.VoiceChannelResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.VoiceChannelResponse_Platform, *v.Platform)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.VoiceChannelResponse_Version, *v.Version)
+	}
+}
+func (v *VoiceChannelResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceChannelResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_ApplicationId, v.ApplicationId)
+		case schemas.VoiceChannelResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_CreationDate, v.CreationDate)
+		case schemas.VoiceChannelResponse_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.VoiceChannelResponse_Enabled, v.Enabled)
+		case schemas.VoiceChannelResponse_HasCredential:
+			v.HasCredential = new(bool)
+			return d.ReadBool(schemas.VoiceChannelResponse_HasCredential, v.HasCredential)
+		case schemas.VoiceChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_Id, v.Id)
+		case schemas.VoiceChannelResponse_IsArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.VoiceChannelResponse_IsArchived, v.IsArchived)
+		case schemas.VoiceChannelResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.VoiceChannelResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.VoiceChannelResponse_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.VoiceChannelResponse_Platform, v.Platform)
+		case schemas.VoiceChannelResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.VoiceChannelResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a one-time voice message that's sent directly to an
 // endpoint through the voice channel.
 type VoiceMessage struct {
@@ -6807,6 +16637,49 @@ type VoiceMessage struct {
 	VoiceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.VoiceMessage_Body, *v.Body)
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.VoiceMessage_LanguageCode, *v.LanguageCode)
+	}
+	if v.OriginationNumber != nil {
+		s.WriteString(schemas.VoiceMessage_OriginationNumber, *v.OriginationNumber)
+	}
+	serializeMapOfListOf__string(s, schemas.VoiceMessage_Substitutions, v.Substitutions)
+	if v.VoiceId != nil {
+		s.WriteString(schemas.VoiceMessage_VoiceId, *v.VoiceId)
+	}
+}
+func (v *VoiceMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.VoiceMessage_Body, v.Body)
+		case schemas.VoiceMessage_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.VoiceMessage_LanguageCode, v.LanguageCode)
+		case schemas.VoiceMessage_OriginationNumber:
+			v.OriginationNumber = new(string)
+			return d.ReadString(schemas.VoiceMessage_OriginationNumber, v.OriginationNumber)
+		case schemas.VoiceMessage_Substitutions:
+			return deserializeMapOfListOf__string(d, schemas.VoiceMessage_Substitutions, &v.Substitutions)
+		case schemas.VoiceMessage_VoiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.VoiceMessage_VoiceId, v.VoiceId)
+		}
+		return nil
+	})
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -6855,6 +16728,55 @@ type VoiceTemplateRequest struct {
 	VoiceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceTemplateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceTemplateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.VoiceTemplateRequest_Body, *v.Body)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.VoiceTemplateRequest_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.VoiceTemplateRequest_LanguageCode, *v.LanguageCode)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.VoiceTemplateRequest_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.VoiceId != nil {
+		s.WriteString(schemas.VoiceTemplateRequest_VoiceId, *v.VoiceId)
+	}
+	serializeMapOf__string(s, schemas.VoiceTemplateRequest_tags, v.Tags)
+}
+func (v *VoiceTemplateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceTemplateRequest_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.VoiceTemplateRequest_Body, v.Body)
+		case schemas.VoiceTemplateRequest_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.VoiceTemplateRequest_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.VoiceTemplateRequest_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.VoiceTemplateRequest_LanguageCode, v.LanguageCode)
+		case schemas.VoiceTemplateRequest_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.VoiceTemplateRequest_TemplateDescription, v.TemplateDescription)
+		case schemas.VoiceTemplateRequest_VoiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.VoiceTemplateRequest_VoiceId, v.VoiceId)
+		case schemas.VoiceTemplateRequest_tags:
+			return deserializeMapOf__string(d, schemas.VoiceTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Provides information about the content and settings for a message template that
@@ -6924,6 +16846,95 @@ type VoiceTemplateResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoiceTemplateResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_Arn, *v.Arn)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_Body, *v.Body)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultSubstitutions != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_DefaultSubstitutions, *v.DefaultSubstitutions)
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_LanguageCode, *v.LanguageCode)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_TemplateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.VoiceTemplateResponse_TemplateType, string(v.TemplateType))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_Version, *v.Version)
+	}
+	if v.VoiceId != nil {
+		s.WriteString(schemas.VoiceTemplateResponse_VoiceId, *v.VoiceId)
+	}
+	serializeMapOf__string(s, schemas.VoiceTemplateResponse_tags, v.Tags)
+}
+func (v *VoiceTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_Arn, v.Arn)
+		case schemas.VoiceTemplateResponse_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_Body, v.Body)
+		case schemas.VoiceTemplateResponse_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_CreationDate, v.CreationDate)
+		case schemas.VoiceTemplateResponse_DefaultSubstitutions:
+			v.DefaultSubstitutions = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_DefaultSubstitutions, v.DefaultSubstitutions)
+		case schemas.VoiceTemplateResponse_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_LanguageCode, v.LanguageCode)
+		case schemas.VoiceTemplateResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_LastModifiedDate, v.LastModifiedDate)
+		case schemas.VoiceTemplateResponse_TemplateDescription:
+			v.TemplateDescription = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_TemplateDescription, v.TemplateDescription)
+		case schemas.VoiceTemplateResponse_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_TemplateName, v.TemplateName)
+		case schemas.VoiceTemplateResponse_TemplateType:
+			var ev string
+			if err := d.ReadString(schemas.VoiceTemplateResponse_TemplateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = TemplateType(ev)
+			return nil
+		case schemas.VoiceTemplateResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_Version, v.Version)
+		case schemas.VoiceTemplateResponse_VoiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.VoiceTemplateResponse_VoiceId, v.VoiceId)
+		case schemas.VoiceTemplateResponse_tags:
+			return deserializeMapOf__string(d, schemas.VoiceTemplateResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a wait activity in a journey. This type of activity
 // waits for a certain amount of time or until a specific date and time before
 // moving participants to the next activity in a journey.
@@ -6938,6 +16949,36 @@ type WaitActivity struct {
 	WaitTime *WaitTime
 
 	noSmithyDocumentSerde
+}
+
+func (v *WaitActivity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WaitActivity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WaitActivity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextActivity != nil {
+		s.WriteString(schemas.WaitActivity_NextActivity, *v.NextActivity)
+	}
+	if v.WaitTime != nil {
+		s.WriteStruct(schemas.WaitActivity_WaitTime)
+		v.WaitTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WaitActivity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WaitActivity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WaitActivity_NextActivity:
+			v.NextActivity = new(string)
+			return d.ReadString(schemas.WaitActivity_NextActivity, v.NextActivity)
+		case schemas.WaitActivity_WaitTime:
+			v.WaitTime = &WaitTime{}
+			return v.WaitTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies a duration or a date and time that indicates when Amazon Pinpoint
@@ -6956,6 +16997,34 @@ type WaitTime struct {
 	WaitUntil *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WaitTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WaitTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WaitTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WaitFor != nil {
+		s.WriteString(schemas.WaitTime_WaitFor, *v.WaitFor)
+	}
+	if v.WaitUntil != nil {
+		s.WriteString(schemas.WaitTime_WaitUntil, *v.WaitUntil)
+	}
+}
+func (v *WaitTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WaitTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WaitTime_WaitFor:
+			v.WaitFor = new(string)
+			return d.ReadString(schemas.WaitTime_WaitFor, v.WaitFor)
+		case schemas.WaitTime_WaitUntil:
+			v.WaitUntil = new(string)
+			return d.ReadString(schemas.WaitTime_WaitUntil, v.WaitUntil)
+		}
+		return nil
+	})
 }
 
 // Specifies the default settings for an application.
@@ -7008,6 +17077,66 @@ type WriteApplicationSettingsRequest struct {
 	QuietTime *QuietTime
 
 	noSmithyDocumentSerde
+}
+
+func (v *WriteApplicationSettingsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteApplicationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteApplicationSettingsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignHook != nil {
+		s.WriteStruct(schemas.WriteApplicationSettingsRequest_CampaignHook)
+		v.CampaignHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchMetricsEnabled != nil {
+		s.WriteBool(schemas.WriteApplicationSettingsRequest_CloudWatchMetricsEnabled, *v.CloudWatchMetricsEnabled)
+	}
+	if v.EventTaggingEnabled != nil {
+		s.WriteBool(schemas.WriteApplicationSettingsRequest_EventTaggingEnabled, *v.EventTaggingEnabled)
+	}
+	if v.JourneyLimits != nil {
+		s.WriteStruct(schemas.WriteApplicationSettingsRequest_JourneyLimits)
+		v.JourneyLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.WriteApplicationSettingsRequest_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.WriteApplicationSettingsRequest_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WriteApplicationSettingsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteApplicationSettingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteApplicationSettingsRequest_CampaignHook:
+			v.CampaignHook = &CampaignHook{}
+			return v.CampaignHook.Deserialize(d)
+		case schemas.WriteApplicationSettingsRequest_CloudWatchMetricsEnabled:
+			v.CloudWatchMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.WriteApplicationSettingsRequest_CloudWatchMetricsEnabled, v.CloudWatchMetricsEnabled)
+		case schemas.WriteApplicationSettingsRequest_EventTaggingEnabled:
+			v.EventTaggingEnabled = new(bool)
+			return d.ReadBool(schemas.WriteApplicationSettingsRequest_EventTaggingEnabled, v.EventTaggingEnabled)
+		case schemas.WriteApplicationSettingsRequest_JourneyLimits:
+			v.JourneyLimits = &ApplicationSettingsJourneyLimits{}
+			return v.JourneyLimits.Deserialize(d)
+		case schemas.WriteApplicationSettingsRequest_Limits:
+			v.Limits = &CampaignLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.WriteApplicationSettingsRequest_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration and other settings for a campaign.
@@ -7088,6 +17217,130 @@ type WriteCampaignRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WriteCampaignRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteCampaignRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfWriteTreatmentResource(s, schemas.WriteCampaignRequest_AdditionalTreatments, v.AdditionalTreatments)
+	if v.CustomDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_CustomDeliveryConfiguration)
+		v.CustomDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WriteCampaignRequest_Description, *v.Description)
+	}
+	if v.HoldoutPercent != nil {
+		s.WriteInt32(schemas.WriteCampaignRequest_HoldoutPercent, *v.HoldoutPercent)
+	}
+	if v.Hook != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_Hook)
+		v.Hook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsPaused != nil {
+		s.WriteBool(schemas.WriteCampaignRequest_IsPaused, *v.IsPaused)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WriteCampaignRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.WriteCampaignRequest_Priority, *v.Priority)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.WriteCampaignRequest_SegmentId, *v.SegmentId)
+	}
+	if v.SegmentVersion != nil {
+		s.WriteInt32(schemas.WriteCampaignRequest_SegmentVersion, *v.SegmentVersion)
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.WriteCampaignRequest_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TreatmentDescription != nil {
+		s.WriteString(schemas.WriteCampaignRequest_TreatmentDescription, *v.TreatmentDescription)
+	}
+	if v.TreatmentName != nil {
+		s.WriteString(schemas.WriteCampaignRequest_TreatmentName, *v.TreatmentName)
+	}
+	serializeMapOf__string(s, schemas.WriteCampaignRequest_tags, v.Tags)
+}
+func (v *WriteCampaignRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteCampaignRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteCampaignRequest_AdditionalTreatments:
+			return deserializeListOfWriteTreatmentResource(d, schemas.WriteCampaignRequest_AdditionalTreatments, &v.AdditionalTreatments)
+		case schemas.WriteCampaignRequest_CustomDeliveryConfiguration:
+			v.CustomDeliveryConfiguration = &CustomDeliveryConfiguration{}
+			return v.CustomDeliveryConfiguration.Deserialize(d)
+		case schemas.WriteCampaignRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WriteCampaignRequest_Description, v.Description)
+		case schemas.WriteCampaignRequest_HoldoutPercent:
+			v.HoldoutPercent = new(int32)
+			return d.ReadInt32(schemas.WriteCampaignRequest_HoldoutPercent, v.HoldoutPercent)
+		case schemas.WriteCampaignRequest_Hook:
+			v.Hook = &CampaignHook{}
+			return v.Hook.Deserialize(d)
+		case schemas.WriteCampaignRequest_IsPaused:
+			v.IsPaused = new(bool)
+			return d.ReadBool(schemas.WriteCampaignRequest_IsPaused, v.IsPaused)
+		case schemas.WriteCampaignRequest_Limits:
+			v.Limits = &CampaignLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.WriteCampaignRequest_MessageConfiguration:
+			v.MessageConfiguration = &MessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.WriteCampaignRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WriteCampaignRequest_Name, v.Name)
+		case schemas.WriteCampaignRequest_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.WriteCampaignRequest_Priority, v.Priority)
+		case schemas.WriteCampaignRequest_Schedule:
+			v.Schedule = &Schedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.WriteCampaignRequest_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.WriteCampaignRequest_SegmentId, v.SegmentId)
+		case schemas.WriteCampaignRequest_SegmentVersion:
+			v.SegmentVersion = new(int32)
+			return d.ReadInt32(schemas.WriteCampaignRequest_SegmentVersion, v.SegmentVersion)
+		case schemas.WriteCampaignRequest_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.WriteCampaignRequest_TreatmentDescription:
+			v.TreatmentDescription = new(string)
+			return d.ReadString(schemas.WriteCampaignRequest_TreatmentDescription, v.TreatmentDescription)
+		case schemas.WriteCampaignRequest_TreatmentName:
+			v.TreatmentName = new(string)
+			return d.ReadString(schemas.WriteCampaignRequest_TreatmentName, v.TreatmentName)
+		case schemas.WriteCampaignRequest_tags:
+			return deserializeMapOf__string(d, schemas.WriteCampaignRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the Amazon Resource Name (ARN) of an event stream to publish events
 // to and the AWS Identity and Access Management (IAM) role to use when publishing
 // those events.
@@ -7112,6 +17365,34 @@ type WriteEventStream struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WriteEventStream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteEventStream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteEventStream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationStreamArn != nil {
+		s.WriteString(schemas.WriteEventStream_DestinationStreamArn, *v.DestinationStreamArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.WriteEventStream_RoleArn, *v.RoleArn)
+	}
+}
+func (v *WriteEventStream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteEventStream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteEventStream_DestinationStreamArn:
+			v.DestinationStreamArn = new(string)
+			return d.ReadString(schemas.WriteEventStream_DestinationStreamArn, v.DestinationStreamArn)
+		case schemas.WriteEventStream_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.WriteEventStream_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration and other settings for a journey.
@@ -7234,6 +17515,148 @@ type WriteJourneyRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WriteJourneyRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteJourneyRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfActivity(s, schemas.WriteJourneyRequest_Activities, v.Activities)
+	if v.ClosedDays != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_ClosedDays)
+		v.ClosedDays.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.WriteJourneyRequest_CreationDate, *v.CreationDate)
+	}
+	if v.JourneyChannelSettings != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_JourneyChannelSettings)
+		v.JourneyChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.WriteJourneyRequest_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Limits != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_Limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalTime != nil {
+		s.WriteBool(schemas.WriteJourneyRequest_LocalTime, *v.LocalTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WriteJourneyRequest_Name, *v.Name)
+	}
+	if v.OpenHours != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_OpenHours)
+		v.OpenHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuietTime != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_QuietTime)
+		v.QuietTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshFrequency != nil {
+		s.WriteString(schemas.WriteJourneyRequest_RefreshFrequency, *v.RefreshFrequency)
+	}
+	if v.RefreshOnSegmentUpdate != nil {
+		s.WriteBool(schemas.WriteJourneyRequest_RefreshOnSegmentUpdate, *v.RefreshOnSegmentUpdate)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SendingSchedule != nil {
+		s.WriteBool(schemas.WriteJourneyRequest_SendingSchedule, *v.SendingSchedule)
+	}
+	if v.StartActivity != nil {
+		s.WriteString(schemas.WriteJourneyRequest_StartActivity, *v.StartActivity)
+	}
+	if v.StartCondition != nil {
+		s.WriteStruct(schemas.WriteJourneyRequest_StartCondition)
+		v.StartCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WriteJourneyRequest_State, string(v.State))
+	}
+	serializeListOf__TimezoneEstimationMethodsElement(s, schemas.WriteJourneyRequest_TimezoneEstimationMethods, v.TimezoneEstimationMethods)
+	if v.WaitForQuietTime != nil {
+		s.WriteBool(schemas.WriteJourneyRequest_WaitForQuietTime, *v.WaitForQuietTime)
+	}
+}
+func (v *WriteJourneyRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteJourneyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteJourneyRequest_Activities:
+			return deserializeMapOfActivity(d, schemas.WriteJourneyRequest_Activities, &v.Activities)
+		case schemas.WriteJourneyRequest_ClosedDays:
+			v.ClosedDays = &ClosedDays{}
+			return v.ClosedDays.Deserialize(d)
+		case schemas.WriteJourneyRequest_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.WriteJourneyRequest_CreationDate, v.CreationDate)
+		case schemas.WriteJourneyRequest_JourneyChannelSettings:
+			v.JourneyChannelSettings = &JourneyChannelSettings{}
+			return v.JourneyChannelSettings.Deserialize(d)
+		case schemas.WriteJourneyRequest_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.WriteJourneyRequest_LastModifiedDate, v.LastModifiedDate)
+		case schemas.WriteJourneyRequest_Limits:
+			v.Limits = &JourneyLimits{}
+			return v.Limits.Deserialize(d)
+		case schemas.WriteJourneyRequest_LocalTime:
+			v.LocalTime = new(bool)
+			return d.ReadBool(schemas.WriteJourneyRequest_LocalTime, v.LocalTime)
+		case schemas.WriteJourneyRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WriteJourneyRequest_Name, v.Name)
+		case schemas.WriteJourneyRequest_OpenHours:
+			v.OpenHours = &OpenHours{}
+			return v.OpenHours.Deserialize(d)
+		case schemas.WriteJourneyRequest_QuietTime:
+			v.QuietTime = &QuietTime{}
+			return v.QuietTime.Deserialize(d)
+		case schemas.WriteJourneyRequest_RefreshFrequency:
+			v.RefreshFrequency = new(string)
+			return d.ReadString(schemas.WriteJourneyRequest_RefreshFrequency, v.RefreshFrequency)
+		case schemas.WriteJourneyRequest_RefreshOnSegmentUpdate:
+			v.RefreshOnSegmentUpdate = new(bool)
+			return d.ReadBool(schemas.WriteJourneyRequest_RefreshOnSegmentUpdate, v.RefreshOnSegmentUpdate)
+		case schemas.WriteJourneyRequest_Schedule:
+			v.Schedule = &JourneySchedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.WriteJourneyRequest_SendingSchedule:
+			v.SendingSchedule = new(bool)
+			return d.ReadBool(schemas.WriteJourneyRequest_SendingSchedule, v.SendingSchedule)
+		case schemas.WriteJourneyRequest_StartActivity:
+			v.StartActivity = new(string)
+			return d.ReadString(schemas.WriteJourneyRequest_StartActivity, v.StartActivity)
+		case schemas.WriteJourneyRequest_StartCondition:
+			v.StartCondition = &StartCondition{}
+			return v.StartCondition.Deserialize(d)
+		case schemas.WriteJourneyRequest_State:
+			var ev string
+			if err := d.ReadString(schemas.WriteJourneyRequest_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		case schemas.WriteJourneyRequest_TimezoneEstimationMethods:
+			return deserializeListOf__TimezoneEstimationMethodsElement(d, schemas.WriteJourneyRequest_TimezoneEstimationMethods, &v.TimezoneEstimationMethods)
+		case schemas.WriteJourneyRequest_WaitForQuietTime:
+			v.WaitForQuietTime = new(bool)
+			return d.ReadBool(schemas.WriteJourneyRequest_WaitForQuietTime, v.WaitForQuietTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration, dimension, and other settings for a segment. A
 // WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
 // object, but not both.
@@ -7266,6 +17689,47 @@ type WriteSegmentRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WriteSegmentRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteSegmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteSegmentRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.WriteSegmentRequest_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WriteSegmentRequest_Name, *v.Name)
+	}
+	if v.SegmentGroups != nil {
+		s.WriteStruct(schemas.WriteSegmentRequest_SegmentGroups)
+		v.SegmentGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__string(s, schemas.WriteSegmentRequest_tags, v.Tags)
+}
+func (v *WriteSegmentRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteSegmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteSegmentRequest_Dimensions:
+			v.Dimensions = &SegmentDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.WriteSegmentRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WriteSegmentRequest_Name, v.Name)
+		case schemas.WriteSegmentRequest_SegmentGroups:
+			v.SegmentGroups = &SegmentGroupList{}
+			return v.SegmentGroups.Deserialize(d)
+		case schemas.WriteSegmentRequest_tags:
+			return deserializeMapOf__string(d, schemas.WriteSegmentRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the settings for a campaign treatment. A treatment is a variation of
 // a campaign that's used for A/B testing of a campaign.
 type WriteTreatmentResource struct {
@@ -7296,6 +17760,72 @@ type WriteTreatmentResource struct {
 	TreatmentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WriteTreatmentResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteTreatmentResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteTreatmentResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.WriteTreatmentResource_CustomDeliveryConfiguration)
+		v.CustomDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageConfiguration != nil {
+		s.WriteStruct(schemas.WriteTreatmentResource_MessageConfiguration)
+		v.MessageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.WriteTreatmentResource_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SizePercent != nil {
+		s.WriteInt32(schemas.WriteTreatmentResource_SizePercent, *v.SizePercent)
+	}
+	if v.TemplateConfiguration != nil {
+		s.WriteStruct(schemas.WriteTreatmentResource_TemplateConfiguration)
+		v.TemplateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TreatmentDescription != nil {
+		s.WriteString(schemas.WriteTreatmentResource_TreatmentDescription, *v.TreatmentDescription)
+	}
+	if v.TreatmentName != nil {
+		s.WriteString(schemas.WriteTreatmentResource_TreatmentName, *v.TreatmentName)
+	}
+}
+func (v *WriteTreatmentResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteTreatmentResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteTreatmentResource_CustomDeliveryConfiguration:
+			v.CustomDeliveryConfiguration = &CustomDeliveryConfiguration{}
+			return v.CustomDeliveryConfiguration.Deserialize(d)
+		case schemas.WriteTreatmentResource_MessageConfiguration:
+			v.MessageConfiguration = &MessageConfiguration{}
+			return v.MessageConfiguration.Deserialize(d)
+		case schemas.WriteTreatmentResource_Schedule:
+			v.Schedule = &Schedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.WriteTreatmentResource_SizePercent:
+			v.SizePercent = new(int32)
+			return d.ReadInt32(schemas.WriteTreatmentResource_SizePercent, v.SizePercent)
+		case schemas.WriteTreatmentResource_TemplateConfiguration:
+			v.TemplateConfiguration = &TemplateConfiguration{}
+			return v.TemplateConfiguration.Deserialize(d)
+		case schemas.WriteTreatmentResource_TreatmentDescription:
+			v.TreatmentDescription = new(string)
+			return d.ReadString(schemas.WriteTreatmentResource_TreatmentDescription, v.TreatmentDescription)
+		case schemas.WriteTreatmentResource_TreatmentName:
+			v.TreatmentName = new(string)
+			return d.ReadString(schemas.WriteTreatmentResource_TreatmentName, v.TreatmentName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

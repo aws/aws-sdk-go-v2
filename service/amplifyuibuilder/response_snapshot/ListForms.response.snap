@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"entities":[{"appId":"__AppId__","dataType":{"dataSourceType":"DataStore","dataTypeName":"__DataTypeName__"},"environmentName":"__EnvironmentName__","formActionType":"create","id":"__Id__","name":"__Name__"},{"appId":"__AppId__","dataType":{"dataSourceType":"DataStore","dataTypeName":"__DataTypeName__"},"environmentName":"__EnvironmentName__","formActionType":"create","id":"__Id__","name":"__Name__"}],"nextToken":"__NextToken__"}

@@ -4,10 +4,9 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -63,6 +62,25 @@ type InvokeAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAsyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAsyncRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAsyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.InvokeAsyncRequest_FunctionName, *v.FunctionName)
+	}
+}
+func (v *InvokeAsyncInput) GetPayloadStream() io.Reader { return v.InvokeArgs }
+
+var _ smithy.StreamingInput = (*InvokeAsyncInput)(nil)
+
+func (v *InvokeAsyncInput) SetPayloadStream(r io.ReadCloser) { v.InvokeArgs = r }
+
+var _ smithy.StreamingOutput = (*InvokeAsyncInput)(nil)
+
 // A success response ( 202 Accepted ) indicates that the request is queued for
 // invocation.
 type InvokeAsyncOutput struct {
@@ -76,77 +94,47 @@ type InvokeAsyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAsyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAsyncResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAsyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != 0 {
+		s.WriteInt32(schemas.InvokeAsyncResponse_Status, v.Status)
+	}
+}
+func (v *InvokeAsyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAsyncResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAsyncResponse_Status:
+			return d.ReadInt32(schemas.InvokeAsyncResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAsync, schemas.InvokeAsyncRequest, schemas.InvokeAsyncResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAsync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAsync, schemas.InvokeAsyncRequest, schemas.InvokeAsyncResponse), output: &InvokeAsyncOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAsync{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAsync"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeAsyncValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAsync(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +149,8 @@ func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeAsync(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeAsync",
-	}
 }

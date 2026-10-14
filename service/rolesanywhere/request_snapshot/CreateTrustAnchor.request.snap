@@ -1,0 +1,5 @@
+POST /trustanchors
+
+Content-Type: application/json
+
+{"enabled":true,"name":"__Name__","notificationSettings":[{"channel":"ALL","enabled":true,"event":"CA_CERTIFICATE_EXPIRY","threshold":1},{"channel":"ALL","enabled":true,"event":"CA_CERTIFICATE_EXPIRY","threshold":1}],"source":{"sourceData":{"x509CertificateData":"__SourceDataMemberX509CertificateData__"},"sourceType":"AWS_ACM_PCA"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

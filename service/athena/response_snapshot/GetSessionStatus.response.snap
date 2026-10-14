@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.GetSessionStatus
+
+{"SessionId":"__SessionId__","Status":{"EndDateTime":946684800,"IdleSinceDateTime":946684800,"LastModifiedDateTime":946684800,"StartDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__"}}

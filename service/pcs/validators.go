@@ -564,6 +564,86 @@ func validateCustomLaunchTemplate(v *types.CustomLaunchTemplate) error {
 	}
 }
 
+func validateNodeLifecycleActionsRequest(v *types.NodeLifecycleActionsRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeLifecycleActionsRequest"}
+	if v.Stages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
+	} else if v.Stages != nil {
+		if err := validateNodeLifecycleStages(v.Stages); err != nil {
+			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeLifecycleScript(v *types.NodeLifecycleScript) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeLifecycleScript"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ScriptSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScriptSource"))
+	} else if v.ScriptSource != nil {
+		if err := validateScriptSource(v.ScriptSource); err != nil {
+			invalidParams.AddNested("ScriptSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeLifecycleScriptList(v []types.NodeLifecycleScript) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeLifecycleScriptList"}
+	for i := range v {
+		if err := validateNodeLifecycleScript(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeLifecycleStages(v *types.NodeLifecycleStages) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeLifecycleStages"}
+	if v.NodeBootstrapped != nil {
+		if err := validateNodeLifecycleScriptList(v.NodeBootstrapped); err != nil {
+			invalidParams.AddNested("NodeBootstrapped", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NodeReady != nil {
+		if err := validateNodeLifecycleScriptList(v.NodeReady); err != nil {
+			invalidParams.AddNested("NodeReady", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateQueueSlurmConfigurationRequest(v *types.QueueSlurmConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -603,6 +683,21 @@ func validateSchedulerRequest(v *types.SchedulerRequest) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScriptSource(v *types.ScriptSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScriptSource"}
+	if v.ScriptLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScriptLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,6 +835,25 @@ func validateUpdateComputeNodeGroupSlurmConfigurationRequest(v *types.UpdateComp
 	}
 }
 
+func validateUpdateNodeLifecycleActionsRequest(v *types.UpdateNodeLifecycleActionsRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodeLifecycleActionsRequest"}
+	if v.Stages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
+	} else if v.Stages != nil {
+		if err := validateNodeLifecycleStages(v.Stages); err != nil {
+			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateQueueSlurmConfigurationRequest(v *types.UpdateQueueSlurmConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -749,6 +863,21 @@ func validateUpdateQueueSlurmConfigurationRequest(v *types.UpdateQueueSlurmConfi
 		if err := validateSlurmCustomSettings(v.SlurmCustomSettings); err != nil {
 			invalidParams.AddNested("SlurmCustomSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateSchedulerRequest(v *types.UpdateSchedulerRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchedulerRequest"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -827,6 +956,11 @@ func validateOpCreateComputeNodeGroupInput(v *CreateComputeNodeGroupInput) error
 	if v.SlurmConfiguration != nil {
 		if err := validateComputeNodeGroupSlurmConfigurationRequest(v.SlurmConfiguration); err != nil {
 			invalidParams.AddNested("SlurmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NodeLifecycleActions != nil {
+		if err := validateNodeLifecycleActionsRequest(v.NodeLifecycleActions); err != nil {
+			invalidParams.AddNested("NodeLifecycleActions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1073,6 +1207,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 			invalidParams.AddNested("SlurmConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Scheduler != nil {
+		if err := validateUpdateSchedulerRequest(v.Scheduler); err != nil {
+			invalidParams.AddNested("Scheduler", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1104,6 +1243,11 @@ func validateOpUpdateComputeNodeGroupInput(v *UpdateComputeNodeGroupInput) error
 	if v.SlurmConfiguration != nil {
 		if err := validateUpdateComputeNodeGroupSlurmConfigurationRequest(v.SlurmConfiguration); err != nil {
 			invalidParams.AddNested("SlurmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NodeLifecycleActions != nil {
+		if err := validateUpdateNodeLifecycleActionsRequest(v.NodeLifecycleActions); err != nil {
+			invalidParams.AddNested("NodeLifecycleActions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

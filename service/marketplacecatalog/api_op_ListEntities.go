@@ -5,10 +5,10 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides the list of entities of a given type.
@@ -75,6 +75,38 @@ type ListEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEntitiesRequest_Catalog, *v.Catalog)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.ListEntitiesRequest_EntityType, *v.EntityType)
+	}
+	serializeEntityTypeFilters(s, schemas.ListEntitiesRequest_EntityTypeFilters, v.EntityTypeFilters)
+	serializeEntityTypeSort(s, schemas.ListEntitiesRequest_EntityTypeSort, v.EntityTypeSort)
+	serializeFilterList(s, schemas.ListEntitiesRequest_FilterList, v.FilterList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnershipType != "" {
+		s.WriteString(schemas.ListEntitiesRequest_OwnershipType, string(v.OwnershipType))
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListEntitiesRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListEntitiesOutput struct {
 
 	// Array of EntitySummary objects.
@@ -89,77 +121,51 @@ type ListEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitySummaryList(s, schemas.ListEntitiesResponse_EntitySummaryList, v.EntitySummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitiesResponse_EntitySummaryList:
+			return deserializeEntitySummaryList(d, schemas.ListEntitiesResponse_EntitySummaryList, &v.EntitySummaryList)
+		case schemas.ListEntitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntities, schemas.ListEntitiesRequest, schemas.ListEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntities, schemas.ListEntitiesRequest, schemas.ListEntitiesResponse), output: &ListEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +178,6 @@ func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +278,3 @@ type ListEntitiesAPIClient interface {
 }
 
 var _ ListEntitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEntities",
-	}
-}

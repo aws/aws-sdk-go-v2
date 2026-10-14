@@ -4,13 +4,8 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,21 +52,6 @@ type GetPolicyStoreInput struct {
 	Tags bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPolicyStoreInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPolicyStoreInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPolicyStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.GetPolicyStoreInput_policyStoreId, *v.PolicyStoreId)
-	}
-	if v.Tags != false {
-		s.WriteBool(schemas.GetPolicyStoreInput_tags, v.Tags)
-	}
 }
 
 type GetPolicyStoreOutput struct {
@@ -129,118 +109,29 @@ type GetPolicyStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPolicyStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPolicyStoreOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPolicyStoreOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetPolicyStoreOutput_arn, v.Arn)
-		case schemas.GetPolicyStoreOutput_cedarVersion:
-			var ev string
-			if err := d.ReadString(schemas.GetPolicyStoreOutput_cedarVersion, &ev); err != nil {
-				return err
-			}
-			v.CedarVersion = types.CedarVersion(ev)
-			return nil
-		case schemas.GetPolicyStoreOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetPolicyStoreOutput_createdDate, v.CreatedDate)
-		case schemas.GetPolicyStoreOutput_deletionProtection:
-			var ev string
-			if err := d.ReadString(schemas.GetPolicyStoreOutput_deletionProtection, &ev); err != nil {
-				return err
-			}
-			v.DeletionProtection = types.DeletionProtection(ev)
-			return nil
-		case schemas.GetPolicyStoreOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetPolicyStoreOutput_description, v.Description)
-		case schemas.GetPolicyStoreOutput_encryptionState:
-			return deserializeEncryptionState(d, schemas.GetPolicyStoreOutput_encryptionState, &v.EncryptionState)
-		case schemas.GetPolicyStoreOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetPolicyStoreOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetPolicyStoreOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.GetPolicyStoreOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.GetPolicyStoreOutput_tags:
-			return deserializeTagMap(d, schemas.GetPolicyStoreOutput_tags, &v.Tags)
-		case schemas.GetPolicyStoreOutput_validationSettings:
-			v.ValidationSettings = &types.ValidationSettings{}
-			return v.ValidationSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPolicyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicyStore{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStore, schemas.GetPolicyStoreInput, schemas.GetPolicyStoreOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicyStore{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStore, schemas.GetPolicyStoreInput, schemas.GetPolicyStoreOutput), output: &GetPolicyStoreOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyStore"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPolicyStoreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyStore(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +146,8 @@ func (c *Client) addOperationGetPolicyStoreMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPolicyStore(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPolicyStore",
-	}
 }

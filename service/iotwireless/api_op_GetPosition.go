@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the position information for a given resource.
@@ -51,21 +46,6 @@ type GetPositionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPositionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPositionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.GetPositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.GetPositionRequest_ResourceType, string(v.ResourceType))
-	}
-}
-
 type GetPositionOutput struct {
 
 	// The accuracy of the estimated position in meters. An empty value indicates that
@@ -95,107 +75,29 @@ type GetPositionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPositionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPositionResponse_Accuracy:
-			v.Accuracy = &types.Accuracy{}
-			return v.Accuracy.Deserialize(d)
-		case schemas.GetPositionResponse_Position:
-			return deserializePositionCoordinate(d, schemas.GetPositionResponse_Position, &v.Position)
-		case schemas.GetPositionResponse_SolverProvider:
-			var ev string
-			if err := d.ReadString(schemas.GetPositionResponse_SolverProvider, &ev); err != nil {
-				return err
-			}
-			v.SolverProvider = types.PositionSolverProvider(ev)
-			return nil
-		case schemas.GetPositionResponse_SolverType:
-			var ev string
-			if err := d.ReadString(schemas.GetPositionResponse_SolverType, &ev); err != nil {
-				return err
-			}
-			v.SolverType = types.PositionSolverType(ev)
-			return nil
-		case schemas.GetPositionResponse_SolverVersion:
-			v.SolverVersion = new(string)
-			return d.ReadString(schemas.GetPositionResponse_SolverVersion, v.SolverVersion)
-		case schemas.GetPositionResponse_Timestamp:
-			v.Timestamp = new(string)
-			return d.ReadString(schemas.GetPositionResponse_Timestamp, v.Timestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPosition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPosition, schemas.GetPositionRequest, schemas.GetPositionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPosition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPosition, schemas.GetPositionRequest, schemas.GetPositionResponse), output: &GetPositionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPosition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPositionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPosition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +112,8 @@ func (c *Client) addOperationGetPositionMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPosition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPosition",
-	}
 }

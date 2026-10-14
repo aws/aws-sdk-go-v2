@@ -4,12 +4,9 @@ package mediastoredata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"time"
 )
@@ -127,6 +124,33 @@ type GetObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheControl != nil {
+		s.WriteString(schemas.GetObjectResponse_CacheControl, *v.CacheControl)
+	}
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.GetObjectResponse_ContentLength, *v.ContentLength)
+	}
+	if v.ContentRange != nil {
+		s.WriteString(schemas.GetObjectResponse_ContentRange, *v.ContentRange)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetObjectResponse_ContentType, *v.ContentType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.GetObjectResponse_ETag, *v.ETag)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetObjectResponse_LastModified, *v.LastModified)
+	}
+	s.WriteInt32(schemas.GetObjectResponse_StatusCode, v.StatusCode)
+}
 func (v *GetObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetObjectResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -163,71 +187,26 @@ func (v *GetObjectOutput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
 var _ smithy.StreamingOutput = (*GetObjectOutput)(nil)
 
 func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObject, schemas.GetObjectRequest, schemas.GetObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObject, schemas.GetObjectRequest, schemas.GetObjectResponse), output: &GetObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetObject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetObjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetObject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -242,22 +221,8 @@ func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetObject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetObject",
-	}
 }

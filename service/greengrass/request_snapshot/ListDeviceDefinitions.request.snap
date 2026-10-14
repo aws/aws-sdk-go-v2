@@ -1,0 +1,3 @@
+GET /greengrass/definition/devices?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

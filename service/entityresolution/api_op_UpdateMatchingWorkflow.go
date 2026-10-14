@@ -4,20 +4,15 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing matching workflow. The workflow must already exist for this
 // operation to succeed.
 //
-// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-// processing is not supported.
+// For workflows where resolutionType is PROVIDER , incremental processing is not
+// supported.
 func (c *Client) UpdateMatchingWorkflow(ctx context.Context, params *UpdateMatchingWorkflowInput, optFns ...func(*Options)) (*UpdateMatchingWorkflowOutput, error) {
 	if params == nil {
 		params = &UpdateMatchingWorkflowInput{}
@@ -69,41 +64,11 @@ type UpdateMatchingWorkflowInput struct {
 	// Optional. An object that defines the incremental run type. This object contains
 	// only the incrementalRunType field, which appears as "Automatic" in the console.
 	//
-	// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-	// processing is not supported.
+	// For workflows where resolutionType is PROVIDER , incremental processing is not
+	// supported.
 	IncrementalRunConfig *types.IncrementalRunConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateMatchingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMatchingWorkflowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateMatchingWorkflowInput_description, *v.Description)
-	}
-	if v.IncrementalRunConfig != nil {
-		s.WriteStruct(schemas.UpdateMatchingWorkflowInput_incrementalRunConfig)
-		v.IncrementalRunConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
-	if v.ResolutionTechniques != nil {
-		s.WriteStruct(schemas.UpdateMatchingWorkflowInput_resolutionTechniques)
-		v.ResolutionTechniques.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateMatchingWorkflowInput_roleArn, *v.RoleArn)
-	}
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.UpdateMatchingWorkflowInput_workflowName, *v.WorkflowName)
-	}
 }
 
 type UpdateMatchingWorkflowOutput struct {
@@ -149,101 +114,29 @@ type UpdateMatchingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMatchingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMatchingWorkflowOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMatchingWorkflowOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_description, v.Description)
-		case schemas.UpdateMatchingWorkflowOutput_incrementalRunConfig:
-			v.IncrementalRunConfig = &types.IncrementalRunConfig{}
-			return v.IncrementalRunConfig.Deserialize(d)
-		case schemas.UpdateMatchingWorkflowOutput_inputSourceConfig:
-			return deserializeInputSourceConfig(d, schemas.UpdateMatchingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.UpdateMatchingWorkflowOutput_outputSourceConfig:
-			return deserializeOutputSourceConfig(d, schemas.UpdateMatchingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.UpdateMatchingWorkflowOutput_resolutionTechniques:
-			v.ResolutionTechniques = &types.ResolutionTechniques{}
-			return v.ResolutionTechniques.Deserialize(d)
-		case schemas.UpdateMatchingWorkflowOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_roleArn, v.RoleArn)
-		case schemas.UpdateMatchingWorkflowOutput_workflowName:
-			v.WorkflowName = new(string)
-			return d.ReadString(schemas.UpdateMatchingWorkflowOutput_workflowName, v.WorkflowName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchingWorkflow, schemas.UpdateMatchingWorkflowInput, schemas.UpdateMatchingWorkflowOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchingWorkflow, schemas.UpdateMatchingWorkflowInput, schemas.UpdateMatchingWorkflowOutput), output: &UpdateMatchingWorkflowOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMatchingWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMatchingWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMatchingWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -258,22 +151,8 @@ func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMatchingWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMatchingWorkflow",
-	}
 }

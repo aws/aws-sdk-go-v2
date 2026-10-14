@@ -4,13 +4,8 @@ package geoplaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Suggest provides intelligent predictions or recommendations based on the user's
@@ -86,7 +81,7 @@ type SuggestInput struct {
 	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
 	// my, pt, th, tl, vi, zh
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
@@ -109,44 +104,11 @@ type SuggestInput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
+	// Indicates the mode of mobility used by the end user. This is used to improve
+	// the relevance of search results. Valid values are Car , Scooter , and Truck .
+	TravelMode types.SuggestTravelMode
+
 	noSmithyDocumentSerde
-}
-
-func (v *SuggestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuggestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuggestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuggestAdditionalFeatureList(s, schemas.SuggestRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.SuggestRequest_BiasPosition, v.BiasPosition)
-	if v.Filter != nil {
-		s.WriteStruct(schemas.SuggestRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IntendedUse != "" {
-		s.WriteString(schemas.SuggestRequest_IntendedUse, string(v.IntendedUse))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.SuggestRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.SuggestRequest_Language, *v.Language)
-	}
-	if v.MaxQueryRefinements != nil {
-		s.WriteInt32(schemas.SuggestRequest_MaxQueryRefinements, *v.MaxQueryRefinements)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SuggestRequest_MaxResults, *v.MaxResults)
-	}
-	if v.PoliticalView != nil {
-		s.WriteString(schemas.SuggestRequest_PoliticalView, *v.PoliticalView)
-	}
-	if v.QueryText != nil {
-		s.WriteString(schemas.SuggestRequest_QueryText, *v.QueryText)
-	}
 }
 
 type SuggestOutput struct {
@@ -175,89 +137,29 @@ type SuggestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuggestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuggestResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuggestResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.SuggestResponse_PricingBucket, v.PricingBucket)
-		case schemas.SuggestResponse_QueryRefinements:
-			return deserializeQueryRefinementList(d, schemas.SuggestResponse_QueryRefinements, &v.QueryRefinements)
-		case schemas.SuggestResponse_ResultItems:
-			return deserializeSuggestResultItemList(d, schemas.SuggestResponse_ResultItems, &v.ResultItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuggest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSuggest{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse), output: &SuggestOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Suggest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSuggestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSuggest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -272,22 +174,8 @@ func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSuggest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Suggest",
-	}
 }

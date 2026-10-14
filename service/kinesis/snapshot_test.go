@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddTagsToStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStream(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 	_, err := svc.DecreaseStreamRetentionPeriod(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DecreaseStreamRetentionPeriod")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -139,6 +163,18 @@ func TestCheckSnapshot_DescribeAccountSettings(t *testing.T) {
 	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -259,6 +295,18 @@ func TestCheckSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 	_, err := svc.IncreaseStreamRetentionPeriod(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "IncreaseStreamRetentionPeriod")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -482,6 +530,18 @@ func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
@@ -518,6 +578,18 @@ func TestCheckSnapshot_UpdateStreamMode(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStreamRecordDistributionStrategy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateStreamWarmThroughput(context.Background(), nil, func(o *Options) {
@@ -534,6 +606,18 @@ func TestUpdateSnapshot_AddTagsToStream(t *testing.T) {
 	_, err := svc.AddTagsToStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddTagsToStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +642,18 @@ func TestUpdateSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 	_, err := svc.DecreaseStreamRetentionPeriod(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DecreaseStreamRetentionPeriod")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -606,6 +702,18 @@ func TestUpdateSnapshot_DescribeAccountSettings(t *testing.T) {
 	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -726,6 +834,18 @@ func TestUpdateSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 	_, err := svc.IncreaseStreamRetentionPeriod(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "IncreaseStreamRetentionPeriod")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -949,6 +1069,18 @@ func TestUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
@@ -978,6 +1110,18 @@ func TestUpdateSnapshot_UpdateStreamMode(t *testing.T) {
 	_, err := svc.UpdateStreamMode(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStreamMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStreamRecordDistributionStrategy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStreamRecordDistributionStrategy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStreamRecordDistributionStrategy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

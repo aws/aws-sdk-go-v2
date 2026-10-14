@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.ListEnvironmentHosts
+
+{"environmentHosts":[{"createdAt":946684800,"dedicatedHostId":"__DedicatedHostId__","ec2InstanceId":"__Ec2InstanceId__","hostName":"__HostName__","hostState":"CREATING","instanceType":"i4i.metal","ipAddress":"__IpAddress__","keyName":"__KeyName__","modifiedAt":946684800,"networkInterfaces":[{"networkInterfaceId":"__NetworkInterfaceId__"},{"networkInterfaceId":"__NetworkInterfaceId__"}],"placementGroupId":"__PlacementGroupId__","stateDetails":"__StateDetails__"},{"createdAt":946684800,"dedicatedHostId":"__DedicatedHostId__","ec2InstanceId":"__Ec2InstanceId__","hostName":"__HostName__","hostState":"CREATING","instanceType":"i4i.metal","ipAddress":"__IpAddress__","keyName":"__KeyName__","modifiedAt":946684800,"networkInterfaces":[{"networkInterfaceId":"__NetworkInterfaceId__"},{"networkInterfaceId":"__NetworkInterfaceId__"}],"placementGroupId":"__PlacementGroupId__","stateDetails":"__StateDetails__"}],"nextToken":"__NextToken__"}

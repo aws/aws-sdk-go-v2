@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -36,6 +37,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Error occurred because of a conflict while performing an operation.
 type ConflictException struct {
@@ -62,6 +84,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal server error occurred. For troubleshooting this error, see [InternalFailure] in the
 // Amazon Bedrock User Guide
@@ -91,6 +134,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed due to an error while processing the model.
 type ModelErrorException struct {
@@ -120,6 +184,39 @@ func (e *ModelErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ModelErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ModelErrorException_message, *v.Message)
+	}
+	if v.OriginalStatusCode != nil {
+		s.WriteInt32(schemas.ModelErrorException_originalStatusCode, *v.OriginalStatusCode)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ModelErrorException_resourceName, *v.ResourceName)
+	}
+}
+func (v *ModelErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModelErrorException_message, v.Message)
+		case schemas.ModelErrorException_originalStatusCode:
+			v.OriginalStatusCode = new(int32)
+			return d.ReadInt32(schemas.ModelErrorException_originalStatusCode, v.OriginalStatusCode)
+		case schemas.ModelErrorException_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ModelErrorException_resourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The model specified in the request is not ready to serve inference requests.
 // The AWS SDK will automatically retry the operation up to 5 times. For
@@ -151,6 +248,27 @@ func (e *ModelNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ModelNotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelNotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelNotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ModelNotReadyException_message, *v.Message)
+	}
+}
+func (v *ModelNotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelNotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelNotReadyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModelNotReadyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error occurred while streaming the response. Retry your request.
 type ModelStreamErrorException struct {
@@ -180,6 +298,39 @@ func (e *ModelStreamErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelStreamErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ModelStreamErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelStreamErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelStreamErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ModelStreamErrorException_message, *v.Message)
+	}
+	if v.OriginalMessage != nil {
+		s.WriteString(schemas.ModelStreamErrorException_originalMessage, *v.OriginalMessage)
+	}
+	if v.OriginalStatusCode != nil {
+		s.WriteInt32(schemas.ModelStreamErrorException_originalStatusCode, *v.OriginalStatusCode)
+	}
+}
+func (v *ModelStreamErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelStreamErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelStreamErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModelStreamErrorException_message, v.Message)
+		case schemas.ModelStreamErrorException_originalMessage:
+			v.OriginalMessage = new(string)
+			return d.ReadString(schemas.ModelStreamErrorException_originalMessage, v.OriginalMessage)
+		case schemas.ModelStreamErrorException_originalStatusCode:
+			v.OriginalStatusCode = new(int32)
+			return d.ReadInt32(schemas.ModelStreamErrorException_originalStatusCode, v.OriginalStatusCode)
+		}
+		return nil
+	})
+}
 
 // The request took too long to process. Processing time exceeded the model
 // timeout length.
@@ -207,6 +358,27 @@ func (e *ModelTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ModelTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ModelTimeoutException_message, *v.Message)
+	}
+}
+func (v *ModelTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelTimeoutException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModelTimeoutException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource ARN was not found. For troubleshooting this error, see [ResourceNotFound]
 // in the Amazon Bedrock User Guide
@@ -236,6 +408,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request exceeds the service quota for your account. You can view your
 // quotas at [Viewing service quotas]. You can resubmit your request later.
@@ -265,6 +458,27 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service isn't currently available. For troubleshooting this error, see [ServiceUnavailable] in
 // the Amazon Bedrock User Guide
@@ -294,6 +508,27 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request was denied due to exceeding the account quotas for Amazon Bedrock.
 // For troubleshooting this error, see [ThrottlingException]in the Amazon Bedrock User Guide
@@ -323,6 +558,27 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input fails to satisfy the constraints specified by Amazon Bedrock. For
 // troubleshooting this error, see [ValidationError]in the Amazon Bedrock User Guide
@@ -352,3 +608,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		}
+		return nil
+	})
+}

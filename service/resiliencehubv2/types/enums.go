@@ -2,6 +2,27 @@
 
 package types
 
+type AccountTargeting string
+
+// Enum values for AccountTargeting
+const (
+	// Test run targets resources in the same account only.
+	AccountTargetingSingleAccount AccountTargeting = "SINGLE_ACCOUNT"
+	// Test run targets resources across multiple accounts.
+	AccountTargetingMultiAccount AccountTargeting = "MULTI_ACCOUNT"
+)
+
+// Values returns all known values for AccountTargeting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountTargeting) Values() []AccountTargeting {
+	return []AccountTargeting{
+		"SINGLE_ACCOUNT",
+		"MULTI_ACCOUNT",
+	}
+}
+
 type AchievabilityStatus string
 
 // Enum values for AchievabilityStatus
@@ -37,6 +58,27 @@ func (ActorType) Values() []ActorType {
 	return []ActorType{
 		"USER",
 		"SYSTEM",
+	}
+}
+
+type AlarmState string
+
+// Enum values for AlarmState
+const (
+	AlarmStateOk               AlarmState = "OK"
+	AlarmStateAlarm            AlarmState = "ALARM"
+	AlarmStateInsufficientData AlarmState = "INSUFFICIENT_DATA"
+)
+
+// Values returns all known values for AlarmState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AlarmState) Values() []AlarmState {
+	return []AlarmState{
+		"OK",
+		"ALARM",
+		"INSUFFICIENT_DATA",
 	}
 }
 
@@ -84,6 +126,23 @@ func (AssessmentErrorCode) Values() []AssessmentErrorCode {
 	}
 }
 
+type AssessmentSortField string
+
+// Enum values for AssessmentSortField
+const (
+	AssessmentSortFieldStartedAt AssessmentSortField = "STARTED_AT"
+)
+
+// Values returns all known values for AssessmentSortField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentSortField) Values() []AssessmentSortField {
+	return []AssessmentSortField{
+		"STARTED_AT",
+	}
+}
+
 type AssessmentStatus string
 
 // Enum values for AssessmentStatus
@@ -113,9 +172,15 @@ type AssessmentStep string
 
 // Enum values for AssessmentStep
 const (
-	AssessmentStepTopologyEnhancement       AssessmentStep = "TOPOLOGY_ENHANCEMENT"
-	AssessmentStepServiceFunctionGeneration AssessmentStep = "SERVICE_FUNCTION_GENERATION"
-	AssessmentStepResilienceAssessment      AssessmentStep = "RESILIENCE_ASSESSMENT"
+	AssessmentStepTopologyGeneration               AssessmentStep = "TOPOLOGY_GENERATION"
+	AssessmentStepInputValidation                  AssessmentStep = "INPUT_VALIDATION"
+	AssessmentStepDesignAnalysis                   AssessmentStep = "DESIGN_ANALYSIS"
+	AssessmentStepTopologyEnhancement              AssessmentStep = "TOPOLOGY_ENHANCEMENT"
+	AssessmentStepServiceFunctionGeneration        AssessmentStep = "SERVICE_FUNCTION_GENERATION"
+	AssessmentStepPolicyValidation                 AssessmentStep = "POLICY_VALIDATION"
+	AssessmentStepResilienceAssessment             AssessmentStep = "RESILIENCE_ASSESSMENT"
+	AssessmentStepFailureModeFindingsConsolidation AssessmentStep = "FAILURE_MODE_FINDINGS_CONSOLIDATION"
+	AssessmentStepFailureModeFindingsEnrichment    AssessmentStep = "FAILURE_MODE_FINDINGS_ENRICHMENT"
 )
 
 // Values returns all known values for AssessmentStep. Note that this can be
@@ -124,9 +189,15 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentStep) Values() []AssessmentStep {
 	return []AssessmentStep{
+		"TOPOLOGY_GENERATION",
+		"INPUT_VALIDATION",
+		"DESIGN_ANALYSIS",
 		"TOPOLOGY_ENHANCEMENT",
 		"SERVICE_FUNCTION_GENERATION",
+		"POLICY_VALIDATION",
 		"RESILIENCE_ASSESSMENT",
+		"FAILURE_MODE_FINDINGS_CONSOLIDATION",
+		"FAILURE_MODE_FINDINGS_ENRICHMENT",
 	}
 }
 
@@ -205,6 +276,162 @@ func (DependencyDiscoveryStatus) Values() []DependencyDiscoveryStatus {
 		"ENABLED",
 		"INITIALIZING",
 		"DISABLED",
+	}
+}
+
+type DependencyInsightsErrorCode string
+
+// Enum values for DependencyInsightsErrorCode
+const (
+	DependencyInsightsErrorCodeInsufficientData    DependencyInsightsErrorCode = "INSUFFICIENT_DATA"
+	DependencyInsightsErrorCodeLlmGenerationFailed DependencyInsightsErrorCode = "LLM_GENERATION_FAILED"
+	DependencyInsightsErrorCodeInternalError       DependencyInsightsErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for DependencyInsightsErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsErrorCode) Values() []DependencyInsightsErrorCode {
+	return []DependencyInsightsErrorCode{
+		"INSUFFICIENT_DATA",
+		"LLM_GENERATION_FAILED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type DependencyInsightsStatus string
+
+// Enum values for DependencyInsightsStatus
+const (
+	DependencyInsightsStatusInProgress DependencyInsightsStatus = "IN_PROGRESS"
+	DependencyInsightsStatusCompleted  DependencyInsightsStatus = "COMPLETED"
+	DependencyInsightsStatusFailed     DependencyInsightsStatus = "FAILED"
+)
+
+// Values returns all known values for DependencyInsightsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsStatus) Values() []DependencyInsightsStatus {
+	return []DependencyInsightsStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type DevOpsAgentConfidence string
+
+// Enum values for DevOpsAgentConfidence
+const (
+	DevOpsAgentConfidenceHigh   DevOpsAgentConfidence = "HIGH"
+	DevOpsAgentConfidenceMedium DevOpsAgentConfidence = "MEDIUM"
+	DevOpsAgentConfidenceLow    DevOpsAgentConfidence = "LOW"
+)
+
+// Values returns all known values for DevOpsAgentConfidence. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentConfidence) Values() []DevOpsAgentConfidence {
+	return []DevOpsAgentConfidence{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type DevOpsAgentConnectionStatus string
+
+// Enum values for DevOpsAgentConnectionStatus
+const (
+	DevOpsAgentConnectionStatusConnecting   DevOpsAgentConnectionStatus = "CONNECTING"
+	DevOpsAgentConnectionStatusConnected    DevOpsAgentConnectionStatus = "CONNECTED"
+	DevOpsAgentConnectionStatusDisconnected DevOpsAgentConnectionStatus = "DISCONNECTED"
+	DevOpsAgentConnectionStatusFailed       DevOpsAgentConnectionStatus = "FAILED"
+)
+
+// Values returns all known values for DevOpsAgentConnectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentConnectionStatus) Values() []DevOpsAgentConnectionStatus {
+	return []DevOpsAgentConnectionStatus{
+		"CONNECTING",
+		"CONNECTED",
+		"DISCONNECTED",
+		"FAILED",
+	}
+}
+
+type DevOpsAgentInvestigationStatus string
+
+// Enum values for DevOpsAgentInvestigationStatus
+const (
+	DevOpsAgentInvestigationStatusPending    DevOpsAgentInvestigationStatus = "PENDING"
+	DevOpsAgentInvestigationStatusInProgress DevOpsAgentInvestigationStatus = "IN_PROGRESS"
+	DevOpsAgentInvestigationStatusCompleted  DevOpsAgentInvestigationStatus = "COMPLETED"
+	DevOpsAgentInvestigationStatusFailed     DevOpsAgentInvestigationStatus = "FAILED"
+	DevOpsAgentInvestigationStatusTimedOut   DevOpsAgentInvestigationStatus = "TIMED_OUT"
+	DevOpsAgentInvestigationStatusCanceled   DevOpsAgentInvestigationStatus = "CANCELED"
+)
+
+// Values returns all known values for DevOpsAgentInvestigationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentInvestigationStatus) Values() []DevOpsAgentInvestigationStatus {
+	return []DevOpsAgentInvestigationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"TIMED_OUT",
+		"CANCELED",
+	}
+}
+
+type DevOpsAgentVerdict string
+
+// Enum values for DevOpsAgentVerdict
+const (
+	DevOpsAgentVerdictPass DevOpsAgentVerdict = "PASS"
+	DevOpsAgentVerdictFail DevOpsAgentVerdict = "FAIL"
+)
+
+// Values returns all known values for DevOpsAgentVerdict. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DevOpsAgentVerdict) Values() []DevOpsAgentVerdict {
+	return []DevOpsAgentVerdict{
+		"PASS",
+		"FAIL",
+	}
+}
+
+type EksLabelSelectorOperator string
+
+// Enum values for EksLabelSelectorOperator
+const (
+	EksLabelSelectorOperatorIn           EksLabelSelectorOperator = "IN"
+	EksLabelSelectorOperatorNotIn        EksLabelSelectorOperator = "NOT_IN"
+	EksLabelSelectorOperatorExists       EksLabelSelectorOperator = "EXISTS"
+	EksLabelSelectorOperatorDoesNotExist EksLabelSelectorOperator = "DOES_NOT_EXIST"
+)
+
+// Values returns all known values for EksLabelSelectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksLabelSelectorOperator) Values() []EksLabelSelectorOperator {
+	return []EksLabelSelectorOperator{
+		"IN",
+		"NOT_IN",
+		"EXISTS",
+		"DOES_NOT_EXIST",
 	}
 }
 
@@ -302,6 +529,31 @@ func (InputSourceType) Values() []InputSourceType {
 	}
 }
 
+type InsightsCategory string
+
+// Enum values for InsightsCategory
+const (
+	InsightsCategoryCrossRegion   InsightsCategory = "CROSS_REGION"
+	InsightsCategoryNewDependency InsightsCategory = "NEW_DEPENDENCY"
+	InsightsCategoryThirdParty    InsightsCategory = "THIRD_PARTY"
+	InsightsCategoryUnevenUsage   InsightsCategory = "UNEVEN_USAGE"
+	InsightsCategoryAwsService    InsightsCategory = "AWS_SERVICE"
+)
+
+// Values returns all known values for InsightsCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsCategory) Values() []InsightsCategory {
+	return []InsightsCategory{
+		"CROSS_REGION",
+		"NEW_DEPENDENCY",
+		"THIRD_PARTY",
+		"UNEVEN_USAGE",
+		"AWS_SERVICE",
+	}
+}
+
 type MultiAzDisasterRecoveryApproach string
 
 // Enum values for MultiAzDisasterRecoveryApproach
@@ -354,6 +606,27 @@ func (MultiRegionDisasterRecoveryApproach) Values() []MultiRegionDisasterRecover
 	}
 }
 
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeString     ParameterType = "STRING"
+	ParameterTypeStringList ParameterType = "STRING_LIST"
+	ParameterTypeInteger    ParameterType = "INTEGER"
+)
+
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"STRING",
+		"STRING_LIST",
+		"INTEGER",
+	}
+}
+
 type PolicyComponent string
 
 // Enum values for PolicyComponent
@@ -374,6 +647,50 @@ func (PolicyComponent) Values() []PolicyComponent {
 		"MULTI_AZ_DISASTER_RECOVERY",
 		"MULTI_REGION_DISASTER_RECOVERY",
 		"DATA_RECOVERY",
+	}
+}
+
+type PolicyDisassociationReason string
+
+// Enum values for PolicyDisassociationReason
+const (
+	PolicyDisassociationReasonReplacedByUpdate PolicyDisassociationReason = "REPLACED_BY_UPDATE"
+	PolicyDisassociationReasonSharingRevoked   PolicyDisassociationReason = "SHARING_REVOKED"
+	PolicyDisassociationReasonPolicyDeleted    PolicyDisassociationReason = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyDisassociationReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyDisassociationReason) Values() []PolicyDisassociationReason {
+	return []PolicyDisassociationReason{
+		"REPLACED_BY_UPDATE",
+		"SHARING_REVOKED",
+		"POLICY_DELETED",
+	}
+}
+
+type PolicyEventType string
+
+// Enum values for PolicyEventType
+const (
+	PolicyEventTypePolicyAttachedToService   PolicyEventType = "POLICY_ATTACHED_TO_SERVICE"
+	PolicyEventTypePolicyDetachedFromService PolicyEventType = "POLICY_DETACHED_FROM_SERVICE"
+	PolicyEventTypePolicySharingRevoked      PolicyEventType = "POLICY_SHARING_REVOKED"
+	PolicyEventTypePolicyDeleted             PolicyEventType = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEventType) Values() []PolicyEventType {
+	return []PolicyEventType{
+		"POLICY_ATTACHED_TO_SERVICE",
+		"POLICY_DETACHED_FROM_SERVICE",
+		"POLICY_SHARING_REVOKED",
+		"POLICY_DELETED",
 	}
 }
 
@@ -462,6 +779,7 @@ type ReportType string
 // Enum values for ReportType
 const (
 	ReportTypeFailureMode ReportType = "FAILURE_MODE"
+	ReportTypeTesting     ReportType = "TESTING"
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
@@ -471,6 +789,7 @@ const (
 func (ReportType) Values() []ReportType {
 	return []ReportType{
 		"FAILURE_MODE",
+		"TESTING",
 	}
 }
 
@@ -619,6 +938,44 @@ func (ServiceFunctionSource) Values() []ServiceFunctionSource {
 	}
 }
 
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
+type StopConditionSource string
+
+// Enum values for StopConditionSource
+const (
+	StopConditionSourceAwsCloudwatchAlarm StopConditionSource = "aws:cloudwatch:alarm"
+	StopConditionSourceNone               StopConditionSource = "none"
+)
+
+// Values returns all known values for StopConditionSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StopConditionSource) Values() []StopConditionSource {
+	return []StopConditionSource{
+		"aws:cloudwatch:alarm",
+		"none",
+	}
+}
+
 type SystemEventType string
 
 // Enum values for SystemEventType
@@ -649,6 +1006,149 @@ func (SystemEventType) Values() []SystemEventType {
 		"SYSTEM_SERVICE_DISASSOCIATED",
 		"SYSTEM_POLICY_ASSOCIATED",
 		"SYSTEM_POLICY_DISASSOCIATED",
+	}
+}
+
+type TestRunDependencySource string
+
+// Enum values for TestRunDependencySource
+const (
+	TestRunDependencySourceDiscovered TestRunDependencySource = "DISCOVERED"
+	TestRunDependencySourceManual     TestRunDependencySource = "MANUAL"
+)
+
+// Values returns all known values for TestRunDependencySource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunDependencySource) Values() []TestRunDependencySource {
+	return []TestRunDependencySource{
+		"DISCOVERED",
+		"MANUAL",
+	}
+}
+
+type TestRunSourceEventErrorCode string
+
+// Enum values for TestRunSourceEventErrorCode
+const (
+	TestRunSourceEventErrorCodeAccessDenied  TestRunSourceEventErrorCode = "ACCESS_DENIED"
+	TestRunSourceEventErrorCodeInternalError TestRunSourceEventErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for TestRunSourceEventErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventErrorCode) Values() []TestRunSourceEventErrorCode {
+	return []TestRunSourceEventErrorCode{
+		"ACCESS_DENIED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type TestRunSourceEventType string
+
+// Enum values for TestRunSourceEventType
+const (
+	TestRunSourceEventTypeAlarm TestRunSourceEventType = "ALARM"
+)
+
+// Values returns all known values for TestRunSourceEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventType) Values() []TestRunSourceEventType {
+	return []TestRunSourceEventType{
+		"ALARM",
+	}
+}
+
+type TestRunSourceType string
+
+// Enum values for TestRunSourceType
+const (
+	TestRunSourceTypeSuccessCriteria TestRunSourceType = "SUCCESS_CRITERIA"
+	TestRunSourceTypeObservability   TestRunSourceType = "OBSERVABILITY"
+)
+
+// Values returns all known values for TestRunSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceType) Values() []TestRunSourceType {
+	return []TestRunSourceType{
+		"SUCCESS_CRITERIA",
+		"OBSERVABILITY",
+	}
+}
+
+type TestRunStatus string
+
+// Enum values for TestRunStatus
+const (
+	TestRunStatusInitializing TestRunStatus = "INITIALIZING"
+	TestRunStatusRunning      TestRunStatus = "RUNNING"
+	TestRunStatusStopping     TestRunStatus = "STOPPING"
+	TestRunStatusPassed       TestRunStatus = "PASSED"
+	TestRunStatusFailed       TestRunStatus = "FAILED"
+	TestRunStatusStopped      TestRunStatus = "STOPPED"
+	TestRunStatusError        TestRunStatus = "ERROR"
+)
+
+// Values returns all known values for TestRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunStatus) Values() []TestRunStatus {
+	return []TestRunStatus{
+		"INITIALIZING",
+		"RUNNING",
+		"STOPPING",
+		"PASSED",
+		"FAILED",
+		"STOPPED",
+		"ERROR",
+	}
+}
+
+type TestSourceOutcome string
+
+// Enum values for TestSourceOutcome
+const (
+	TestSourceOutcomePassed TestSourceOutcome = "PASSED"
+	TestSourceOutcomeFailed TestSourceOutcome = "FAILED"
+	TestSourceOutcomeError  TestSourceOutcome = "ERROR"
+)
+
+// Values returns all known values for TestSourceOutcome. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestSourceOutcome) Values() []TestSourceOutcome {
+	return []TestSourceOutcome{
+		"PASSED",
+		"FAILED",
+		"ERROR",
+	}
+}
+
+type TestSourceType string
+
+// Enum values for TestSourceType
+const (
+	TestSourceTypeSuccessCriteria TestSourceType = "SUCCESS_CRITERIA"
+	TestSourceTypeObservability   TestSourceType = "OBSERVABILITY"
+)
+
+// Values returns all known values for TestSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestSourceType) Values() []TestSourceType {
+	return []TestSourceType{
+		"SUCCESS_CRITERIA",
+		"OBSERVABILITY",
 	}
 }
 

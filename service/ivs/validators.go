@@ -854,6 +854,21 @@ func validateDestinationConfiguration(v *types.DestinationConfiguration) error {
 	}
 }
 
+func validatePostRollConfiguration(v *types.PostRollConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostRollConfiguration"}
+	if v.DurationSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
 	if v == nil {
 		return nil
@@ -925,6 +940,11 @@ func validateOpCreateAdConfigurationInput(v *CreateAdConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAdConfigurationInput"}
 	if v.MediaTailorPlaybackConfigurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaTailorPlaybackConfigurations"))
+	}
+	if v.PostRollConfiguration != nil {
+		if err := validatePostRollConfiguration(v.PostRollConfiguration); err != nil {
+			invalidParams.AddNested("PostRollConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1349,6 +1369,11 @@ func validateOpUpdateAdConfigurationInput(v *UpdateAdConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAdConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.PostRollConfiguration != nil {
+		if err := validatePostRollConfiguration(v.PostRollConfiguration); err != nil {
+			invalidParams.AddNested("PostRollConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/rooms
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__"}

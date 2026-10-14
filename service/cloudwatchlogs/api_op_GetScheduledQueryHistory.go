@@ -5,10 +5,10 @@ package cloudwatchlogs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the execution history of a scheduled query within a specified time
@@ -58,6 +58,31 @@ type GetScheduledQueryHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduledQueryHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScheduledQueryHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScheduledQueryHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteInt64(schemas.GetScheduledQueryHistoryRequest_endTime, *v.EndTime)
+	}
+	serializeExecutionStatusList(s, schemas.GetScheduledQueryHistoryRequest_executionStatuses, v.ExecutionStatuses)
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetScheduledQueryHistoryRequest_identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetScheduledQueryHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetScheduledQueryHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteInt64(schemas.GetScheduledQueryHistoryRequest_startTime, *v.StartTime)
+	}
+}
+
 type GetScheduledQueryHistoryOutput struct {
 
 	// The name of the scheduled query.
@@ -78,77 +103,63 @@ type GetScheduledQueryHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduledQueryHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScheduledQueryHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScheduledQueryHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetScheduledQueryHistoryResponse_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetScheduledQueryHistoryResponse_nextToken, *v.NextToken)
+	}
+	if v.ScheduledQueryArn != nil {
+		s.WriteString(schemas.GetScheduledQueryHistoryResponse_scheduledQueryArn, *v.ScheduledQueryArn)
+	}
+	serializeTriggerHistoryRecordList(s, schemas.GetScheduledQueryHistoryResponse_triggerHistory, v.TriggerHistory)
+}
+func (v *GetScheduledQueryHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScheduledQueryHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScheduledQueryHistoryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetScheduledQueryHistoryResponse_name, v.Name)
+		case schemas.GetScheduledQueryHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetScheduledQueryHistoryResponse_nextToken, v.NextToken)
+		case schemas.GetScheduledQueryHistoryResponse_scheduledQueryArn:
+			v.ScheduledQueryArn = new(string)
+			return d.ReadString(schemas.GetScheduledQueryHistoryResponse_scheduledQueryArn, v.ScheduledQueryArn)
+		case schemas.GetScheduledQueryHistoryResponse_triggerHistory:
+			return deserializeTriggerHistoryRecordList(d, schemas.GetScheduledQueryHistoryResponse_triggerHistory, &v.TriggerHistory)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetScheduledQueryHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduledQueryHistory, schemas.GetScheduledQueryHistoryRequest, schemas.GetScheduledQueryHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetScheduledQueryHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduledQueryHistory, schemas.GetScheduledQueryHistoryRequest, schemas.GetScheduledQueryHistoryResponse), output: &GetScheduledQueryHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetScheduledQueryHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetScheduledQueryHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetScheduledQueryHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetScheduledQueryHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +172,6 @@ func (c *Client) addOperationGetScheduledQueryHistoryMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +274,3 @@ type GetScheduledQueryHistoryAPIClient interface {
 }
 
 var _ GetScheduledQueryHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetScheduledQueryHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetScheduledQueryHistory",
-	}
-}

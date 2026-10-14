@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action returns metadata about active and previous legal holds.
@@ -41,6 +41,21 @@ type ListLegalHoldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLegalHoldsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLegalHoldsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLegalHoldsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLegalHoldsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLegalHoldsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListLegalHoldsOutput struct {
 
 	// This is an array of returned legal holds, both active and previous.
@@ -58,74 +73,48 @@ type ListLegalHoldsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLegalHoldsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLegalHoldsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLegalHoldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLegalHoldsList(s, schemas.ListLegalHoldsOutput_LegalHolds, v.LegalHolds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLegalHoldsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLegalHoldsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLegalHoldsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLegalHoldsOutput_LegalHolds:
+			return deserializeLegalHoldsList(d, schemas.ListLegalHoldsOutput_LegalHolds, &v.LegalHolds)
+		case schemas.ListLegalHoldsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLegalHoldsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLegalHoldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLegalHolds, schemas.ListLegalHoldsInput, schemas.ListLegalHoldsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLegalHolds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLegalHolds, schemas.ListLegalHoldsInput, schemas.ListLegalHoldsOutput), output: &ListLegalHoldsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLegalHolds{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLegalHolds"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLegalHolds(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +127,6 @@ func (c *Client) addOperationListLegalHoldsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -244,11 +227,3 @@ type ListLegalHoldsAPIClient interface {
 }
 
 var _ ListLegalHoldsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLegalHolds(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLegalHolds",
-	}
-}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.ListDiscoveredResources
+
+{"includeDeletedResources":true,"limit":1,"nextToken":"__NextToken__","resourceIds":["__Member__","__Member__"],"resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway"}

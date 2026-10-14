@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type DescribeLocationEfsInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationEfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationEfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationEfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 // DescribeLocationEfsResponse
@@ -85,77 +96,90 @@ type DescribeLocationEfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationEfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationEfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationEfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_AccessPointArn, *v.AccessPointArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationEfsResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Ec2Config != nil {
+		s.WriteStruct(schemas.DescribeLocationEfsResponse_Ec2Config)
+		v.Ec2Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemAccessRoleArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn, *v.FileSystemAccessRoleArn)
+	}
+	if v.InTransitEncryption != "" {
+		s.WriteString(schemas.DescribeLocationEfsResponse_InTransitEncryption, string(v.InTransitEncryption))
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_LocationUri, *v.LocationUri)
+	}
+}
+func (v *DescribeLocationEfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationEfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationEfsResponse_AccessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_AccessPointArn, v.AccessPointArn)
+		case schemas.DescribeLocationEfsResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationEfsResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationEfsResponse_Ec2Config:
+			v.Ec2Config = &types.Ec2Config{}
+			return v.Ec2Config.Deserialize(d)
+		case schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn:
+			v.FileSystemAccessRoleArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn, v.FileSystemAccessRoleArn)
+		case schemas.DescribeLocationEfsResponse_InTransitEncryption:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLocationEfsResponse_InTransitEncryption, &ev); err != nil {
+				return err
+			}
+			v.InTransitEncryption = types.EfsInTransitEncryption(ev)
+			return nil
+		case schemas.DescribeLocationEfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationEfsResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_LocationUri, v.LocationUri)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationEfs, schemas.DescribeLocationEfsRequest, schemas.DescribeLocationEfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationEfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationEfs, schemas.DescribeLocationEfsRequest, schemas.DescribeLocationEfsResponse), output: &DescribeLocationEfsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationEfs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLocationEfs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLocationEfsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationEfs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +194,8 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLocationEfs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLocationEfs",
-	}
 }

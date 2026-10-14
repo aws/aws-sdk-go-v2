@@ -5,12 +5,8 @@ package wickr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a paginated list of devices associated with a specific user in a
@@ -63,33 +59,6 @@ type ListDevicesForUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevicesForUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDevicesForUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDevicesForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDevicesForUserRequest_maxResults, *v.MaxResults)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.ListDevicesForUserRequest_networkId, *v.NetworkId)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDevicesForUserRequest_nextToken, *v.NextToken)
-	}
-	if v.SortDirection != "" {
-		s.WriteString(schemas.ListDevicesForUserRequest_sortDirection, string(v.SortDirection))
-	}
-	if v.SortFields != nil {
-		s.WriteString(schemas.ListDevicesForUserRequest_sortFields, *v.SortFields)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.ListDevicesForUserRequest_userId, *v.UserId)
-	}
-}
-
 type ListDevicesForUserOutput struct {
 
 	// A list of device objects associated with the user within the current page.
@@ -107,87 +76,29 @@ type ListDevicesForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevicesForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDevicesForUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDevicesForUserResponse_devices:
-			return deserializeDevices(d, schemas.ListDevicesForUserResponse_devices, &v.Devices)
-		case schemas.ListDevicesForUserResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDevicesForUserResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDevicesForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevicesForUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForUser, schemas.ListDevicesForUserRequest, schemas.ListDevicesForUserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevicesForUser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForUser, schemas.ListDevicesForUserRequest, schemas.ListDevicesForUserResponse), output: &ListDevicesForUserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevicesForUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDevicesForUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevicesForUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +111,6 @@ func (c *Client) addOperationListDevicesForUserMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -308,11 +213,3 @@ type ListDevicesForUserAPIClient interface {
 }
 
 var _ ListDevicesForUserAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDevicesForUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDevicesForUser",
-	}
-}

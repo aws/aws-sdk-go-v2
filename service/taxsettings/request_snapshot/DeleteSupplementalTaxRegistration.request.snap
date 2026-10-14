@@ -1,0 +1,5 @@
+POST /DeleteSupplementalTaxRegistration
+
+Content-Type: application/json
+
+{"authorityId":"__AuthorityId__"}

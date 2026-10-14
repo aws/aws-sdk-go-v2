@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/insight-details
+
+Content-Type: application/json
+
+{"Entity":{"Type":"Account","Value":"__Value__"},"InsightId":"__InsightId__","ShowHtmlContent":true}

@@ -4,10 +4,9 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2
@@ -42,13 +41,26 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 type GetGameSessionLogUrlInput struct {
 
 	// An identifier for the game session that is unique across all regions to get
-	// logs for. The value is always a full ARN in the following format:
-	// arn:aws:gamelift:::gamesession// .
+	// logs for. The value is always a full ARN in the following format: For Home
+	// Region game session - arn:aws:gamelift:::gamesession// . For Remote Location
+	// game session - arn:aws:gamelift:::gamesession/// .
 	//
 	// This member is required.
 	GameSessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGameSessionLogUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGameSessionLogUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGameSessionLogUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetGameSessionLogUrlInput_GameSessionId, *v.GameSessionId)
+	}
 }
 
 type GetGameSessionLogUrlOutput struct {
@@ -65,65 +77,42 @@ type GetGameSessionLogUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGameSessionLogUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGameSessionLogUrlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGameSessionLogUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetGameSessionLogUrlOutput_PreSignedUrl, *v.PreSignedUrl)
+	}
+}
+func (v *GetGameSessionLogUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGameSessionLogUrlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGameSessionLogUrlOutput_PreSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.GetGameSessionLogUrlOutput_PreSignedUrl, v.PreSignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGameSessionLogUrl, schemas.GetGameSessionLogUrlInput, schemas.GetGameSessionLogUrlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetGameSessionLogUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGameSessionLogUrl, schemas.GetGameSessionLogUrlInput, schemas.GetGameSessionLogUrlOutput), output: &GetGameSessionLogUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetGameSessionLogUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGameSessionLogUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -133,12 +122,6 @@ func (c *Client) addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpGetGameSessionLogUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGameSessionLogUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +136,8 @@ func (c *Client) addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGameSessionLogUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGameSessionLogUrl",
-	}
 }

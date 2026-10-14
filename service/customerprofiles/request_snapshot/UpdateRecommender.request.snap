@@ -1,0 +1,5 @@
+PATCH /domains/__DomainName__/recommenders/__RecommenderName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","RecommenderConfig":{"DiversityConfig":{"DiversityColumns":[{"CapType":"PERCENTAGE","Name":"__Name__","Target":"__Target__"},{"CapType":"PERCENTAGE","Name":"__Name__","Target":"__Target__"}]},"EventsConfig":{"EventParametersList":[{"EventType":"__EventType__","EventValueThreshold":1,"EventWeight":1},{"EventType":"__EventType__","EventValueThreshold":1,"EventWeight":1}]},"ExcludedColumns":{"key0":["__Member__","__Member__"]},"IncludedColumns":{"key0":["__Member__","__Member__"]},"InferenceConfig":{"MinProvisionedTPS":1},"TrainingFrequency":1},"RecommenderVersionName":"__RecommenderVersionName__"}

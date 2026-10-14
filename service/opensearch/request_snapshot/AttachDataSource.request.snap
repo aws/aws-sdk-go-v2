@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/application/__Id__/attachDataSource
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","dataSourceArn":"__DataSourceArn__","workspaceConfiguration":{"name":"__Name__","workspaceType":"__WorkspaceType__"},"workspaceId":"__WorkspaceId__"}

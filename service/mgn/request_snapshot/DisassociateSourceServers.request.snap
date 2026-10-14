@@ -1,0 +1,5 @@
+POST /DisassociateSourceServers
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","applicationID":"__ApplicationID__","sourceServerIDs":["__Member__","__Member__"]}

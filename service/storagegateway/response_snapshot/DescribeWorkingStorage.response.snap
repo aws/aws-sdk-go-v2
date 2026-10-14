@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.DescribeWorkingStorage
+
+{"DiskIds":["__Member__","__Member__"],"GatewayARN":"__GatewayARN__","WorkingStorageAllocatedInBytes":1,"WorkingStorageUsedInBytes":1}

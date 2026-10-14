@@ -1,0 +1,5 @@
+PUT /app-instances/__AppInstanceArn__
+
+Content-Type: application/json
+
+{"Metadata":"__Metadata__","Name":"__Name__"}

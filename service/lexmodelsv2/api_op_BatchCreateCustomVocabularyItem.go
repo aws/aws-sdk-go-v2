@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a batch of custom vocabulary items for a given bot locale's custom
@@ -57,6 +56,25 @@ type BatchCreateCustomVocabularyItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateCustomVocabularyItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateCustomVocabularyItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateCustomVocabularyItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemRequest_botVersion, *v.BotVersion)
+	}
+	serializeCreateCustomVocabularyItemsList(s, schemas.BatchCreateCustomVocabularyItemRequest_customVocabularyItemList, v.CustomVocabularyItemList)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemRequest_localeId, *v.LocaleId)
+	}
+}
+
 type BatchCreateCustomVocabularyItemOutput struct {
 
 	// The identifier of the bot associated with this custom vocabulary.
@@ -85,77 +103,66 @@ type BatchCreateCustomVocabularyItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateCustomVocabularyItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateCustomVocabularyItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateCustomVocabularyItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemResponse_botVersion, *v.BotVersion)
+	}
+	serializeFailedCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_errors, v.Errors)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.BatchCreateCustomVocabularyItemResponse_localeId, *v.LocaleId)
+	}
+	serializeCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_resources, v.Resources)
+}
+func (v *BatchCreateCustomVocabularyItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateCustomVocabularyItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateCustomVocabularyItemResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.BatchCreateCustomVocabularyItemResponse_botId, v.BotId)
+		case schemas.BatchCreateCustomVocabularyItemResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.BatchCreateCustomVocabularyItemResponse_botVersion, v.BotVersion)
+		case schemas.BatchCreateCustomVocabularyItemResponse_errors:
+			return deserializeFailedCustomVocabularyItems(d, schemas.BatchCreateCustomVocabularyItemResponse_errors, &v.Errors)
+		case schemas.BatchCreateCustomVocabularyItemResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.BatchCreateCustomVocabularyItemResponse_localeId, v.LocaleId)
+		case schemas.BatchCreateCustomVocabularyItemResponse_resources:
+			return deserializeCustomVocabularyItems(d, schemas.BatchCreateCustomVocabularyItemResponse_resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateCustomVocabularyItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateCustomVocabularyItem, schemas.BatchCreateCustomVocabularyItemRequest, schemas.BatchCreateCustomVocabularyItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateCustomVocabularyItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateCustomVocabularyItem, schemas.BatchCreateCustomVocabularyItemRequest, schemas.BatchCreateCustomVocabularyItemResponse), output: &BatchCreateCustomVocabularyItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateCustomVocabularyItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateCustomVocabularyItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchCreateCustomVocabularyItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateCustomVocabularyItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +177,8 @@ func (c *Client) addOperationBatchCreateCustomVocabularyItemMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchCreateCustomVocabularyItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateCustomVocabularyItem",
-	}
 }

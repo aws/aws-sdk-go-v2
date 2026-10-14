@@ -1,0 +1,5 @@
+POST /AssumeDecoratedRoleWithSAML
+
+Content-Type: application/json
+
+{"DurationSeconds":1,"PrincipalArn":"__PrincipalArn__","RoleArn":"__RoleArn__","SAMLAssertion":"__SAMLAssertion__"}

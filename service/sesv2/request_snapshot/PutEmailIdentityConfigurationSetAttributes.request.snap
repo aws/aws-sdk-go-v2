@@ -1,0 +1,5 @@
+PUT /v2/email/identities/__EmailIdentity__/configuration-set
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__"}

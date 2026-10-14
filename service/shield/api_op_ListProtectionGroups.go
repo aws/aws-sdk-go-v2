@@ -5,10 +5,10 @@ package shield
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves ProtectionGroup objects for the account. You can retrieve all protection groups or
@@ -68,6 +68,26 @@ type ListProtectionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InclusionFilters != nil {
+		s.WriteStruct(schemas.ListProtectionGroupsRequest_InclusionFilters)
+		v.InclusionFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectionGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectionGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectionGroupsOutput struct {
 
 	//
@@ -96,74 +116,48 @@ type ListProtectionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectionGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeProtectionGroups(s, schemas.ListProtectionGroupsResponse_ProtectionGroups, v.ProtectionGroups)
+}
+func (v *ListProtectionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectionGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectionGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListProtectionGroupsResponse_ProtectionGroups:
+			return deserializeProtectionGroups(d, schemas.ListProtectionGroupsResponse_ProtectionGroups, &v.ProtectionGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.ListProtectionGroupsRequest, schemas.ListProtectionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProtectionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.ListProtectionGroupsRequest, schemas.ListProtectionGroupsResponse), output: &ListProtectionGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProtectionGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProtectionGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProtectionGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +170,6 @@ func (c *Client) addOperationListProtectionGroupsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +277,3 @@ type ListProtectionGroupsAPIClient interface {
 }
 
 var _ ListProtectionGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProtectionGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProtectionGroups",
-	}
-}

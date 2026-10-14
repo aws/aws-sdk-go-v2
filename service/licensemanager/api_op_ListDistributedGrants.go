@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the grants distributed for the specified license.
@@ -54,6 +53,23 @@ type ListDistributedGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributedGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributedGrantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributedGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListDistributedGrantsRequest_Filters, v.Filters)
+	serializeArnList(s, schemas.ListDistributedGrantsRequest_GrantArns, v.GrantArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDistributedGrantsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributedGrantsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDistributedGrantsOutput struct {
 
 	// Distributed grant details.
@@ -68,74 +84,48 @@ type ListDistributedGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributedGrantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributedGrantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributedGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantList(s, schemas.ListDistributedGrantsResponse_Grants, v.Grants)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributedGrantsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDistributedGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDistributedGrantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDistributedGrantsResponse_Grants:
+			return deserializeGrantList(d, schemas.ListDistributedGrantsResponse_Grants, &v.Grants)
+		case schemas.ListDistributedGrantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDistributedGrantsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDistributedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributedGrants, schemas.ListDistributedGrantsRequest, schemas.ListDistributedGrantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDistributedGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributedGrants, schemas.ListDistributedGrantsRequest, schemas.ListDistributedGrantsResponse), output: &ListDistributedGrantsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDistributedGrants{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDistributedGrants"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributedGrants(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +140,8 @@ func (c *Client) addOperationListDistributedGrantsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListDistributedGrants(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDistributedGrants",
-	}
 }

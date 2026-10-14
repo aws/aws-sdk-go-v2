@@ -4,11 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation allows you to perform batch reads or writes on data stored in
@@ -68,6 +67,19 @@ type BatchExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.BatchExecuteStatementInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	serializePartiQLBatchRequest(s, schemas.BatchExecuteStatementInput_Statements, v.Statements)
+}
+
 type BatchExecuteStatementOutput struct {
 
 	// The capacity units consumed by the entire operation. The values of the list are
@@ -84,65 +96,42 @@ type BatchExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExecuteStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.BatchExecuteStatementOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializePartiQLBatchResponse(s, schemas.BatchExecuteStatementOutput_Responses, v.Responses)
+}
+func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExecuteStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExecuteStatementOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.BatchExecuteStatementOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.BatchExecuteStatementOutput_Responses:
+			return deserializePartiQLBatchResponse(d, schemas.BatchExecuteStatementOutput_Responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput), output: &BatchExecuteStatementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchExecuteStatement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchExecuteStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -152,12 +141,6 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpBatchExecuteStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchExecuteStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +161,8 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchExecuteStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchExecuteStatement",
-	}
 }

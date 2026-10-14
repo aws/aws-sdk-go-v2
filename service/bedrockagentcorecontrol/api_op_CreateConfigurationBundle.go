@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,43 +61,15 @@ type CreateConfigurationBundleInput struct {
 	// The description for the configuration bundle.
 	Description *string
 
+	// Optional KMS key ARN for encrypting component configurations.
+	KmsKeyArn *string
+
 	// A map of tag keys and values to assign to the configuration bundle. Tags enable
 	// you to categorize your resources in different ways, for example, by purpose,
 	// owner, or environment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateConfigurationBundleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateConfigurationBundleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BranchName != nil {
-		s.WriteString(schemas.CreateConfigurationBundleRequest_branchName, *v.BranchName)
-	}
-	if v.BundleName != nil {
-		s.WriteString(schemas.CreateConfigurationBundleRequest_bundleName, *v.BundleName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateConfigurationBundleRequest_clientToken, *v.ClientToken)
-	}
-	if v.CommitMessage != nil {
-		s.WriteString(schemas.CreateConfigurationBundleRequest_commitMessage, *v.CommitMessage)
-	}
-	serializeComponentConfigurationMap(s, schemas.CreateConfigurationBundleRequest_components, v.Components)
-	if v.CreatedBy != nil {
-		s.WriteStruct(schemas.CreateConfigurationBundleRequest_createdBy)
-		v.CreatedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateConfigurationBundleRequest_description, *v.Description)
-	}
-	serializeTagsMap(s, schemas.CreateConfigurationBundleRequest_tags, v.Tags)
 }
 
 type CreateConfigurationBundleOutput struct {
@@ -132,82 +100,23 @@ type CreateConfigurationBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConfigurationBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateConfigurationBundleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateConfigurationBundleResponse_bundleArn:
-			v.BundleArn = new(string)
-			return d.ReadString(schemas.CreateConfigurationBundleResponse_bundleArn, v.BundleArn)
-		case schemas.CreateConfigurationBundleResponse_bundleId:
-			v.BundleId = new(string)
-			return d.ReadString(schemas.CreateConfigurationBundleResponse_bundleId, v.BundleId)
-		case schemas.CreateConfigurationBundleResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateConfigurationBundleResponse_createdAt, v.CreatedAt)
-		case schemas.CreateConfigurationBundleResponse_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.CreateConfigurationBundleResponse_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateConfigurationBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationBundle{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationBundle, schemas.CreateConfigurationBundleRequest, schemas.CreateConfigurationBundleResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfigurationBundle{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationBundle, schemas.CreateConfigurationBundleRequest, schemas.CreateConfigurationBundleResponse), output: &CreateConfigurationBundleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfigurationBundle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -217,12 +126,6 @@ func (c *Client) addOperationCreateConfigurationBundleMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCreateConfigurationBundleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfigurationBundle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -235,12 +138,6 @@ func (c *Client) addOperationCreateConfigurationBundleMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,12 +177,4 @@ func (m *idempotencyToken_initializeOpCreateConfigurationBundle) HandleInitializ
 }
 func addIdempotencyToken_opCreateConfigurationBundleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateConfigurationBundle{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateConfigurationBundle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConfigurationBundle",
-	}
 }

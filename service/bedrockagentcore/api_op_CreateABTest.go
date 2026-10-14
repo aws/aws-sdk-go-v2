@@ -5,12 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -80,41 +76,10 @@ type CreateABTestInput struct {
 	// test.
 	GatewayFilter *types.GatewayFilter
 
+	// A map of tag keys and values to associate with the A/B test.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
-}
-
-func (v *CreateABTestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateABTestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateABTestRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateABTestRequest_description, *v.Description)
-	}
-	if v.EnableOnCreate != nil {
-		s.WriteBool(schemas.CreateABTestRequest_enableOnCreate, *v.EnableOnCreate)
-	}
-	serializeABTestEvaluationConfig(s, schemas.CreateABTestRequest_evaluationConfig, v.EvaluationConfig)
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.CreateABTestRequest_gatewayArn, *v.GatewayArn)
-	}
-	if v.GatewayFilter != nil {
-		s.WriteStruct(schemas.CreateABTestRequest_gatewayFilter)
-		v.GatewayFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateABTestRequest_name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateABTestRequest_roleArn, *v.RoleArn)
-	}
-	serializeVariantList(s, schemas.CreateABTestRequest_variants, v.Variants)
 }
 
 type CreateABTestOutput struct {
@@ -153,96 +118,23 @@ type CreateABTestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateABTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateABTestResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateABTestResponse_abTestArn:
-			v.AbTestArn = new(string)
-			return d.ReadString(schemas.CreateABTestResponse_abTestArn, v.AbTestArn)
-		case schemas.CreateABTestResponse_abTestId:
-			v.AbTestId = new(string)
-			return d.ReadString(schemas.CreateABTestResponse_abTestId, v.AbTestId)
-		case schemas.CreateABTestResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateABTestResponse_createdAt, v.CreatedAt)
-		case schemas.CreateABTestResponse_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateABTestResponse_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = types.ABTestExecutionStatus(ev)
-			return nil
-		case schemas.CreateABTestResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateABTestResponse_name, v.Name)
-		case schemas.CreateABTestResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateABTestResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ABTestStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateABTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateABTest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateABTest, schemas.CreateABTestRequest, schemas.CreateABTestResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateABTest{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateABTest, schemas.CreateABTestRequest, schemas.CreateABTestResponse), output: &CreateABTestOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateABTest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -252,12 +144,6 @@ func (c *Client) addOperationCreateABTestMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCreateABTestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateABTest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,12 +156,6 @@ func (c *Client) addOperationCreateABTestMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -315,12 +195,4 @@ func (m *idempotencyToken_initializeOpCreateABTest) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreateABTestMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateABTest{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateABTest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateABTest",
-	}
 }

@@ -5,12 +5,8 @@ package directoryservicedata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new group.
@@ -74,31 +70,6 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateGroupRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.CreateGroupRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.GroupScope != "" {
-		s.WriteString(schemas.CreateGroupRequest_GroupScope, string(v.GroupScope))
-	}
-	if v.GroupType != "" {
-		s.WriteString(schemas.CreateGroupRequest_GroupType, string(v.GroupType))
-	}
-	serializeAttributes(s, schemas.CreateGroupRequest_OtherAttributes, v.OtherAttributes)
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.CreateGroupRequest_SAMAccountName, *v.SAMAccountName)
-	}
-}
-
 type CreateGroupOutput struct {
 
 	//  The identifier (ID) of the directory that's associated with the group.
@@ -116,79 +87,23 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupResult_DirectoryId:
-			v.DirectoryId = new(string)
-			return d.ReadString(schemas.CreateGroupResult_DirectoryId, v.DirectoryId)
-		case schemas.CreateGroupResult_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.CreateGroupResult_SAMAccountName, v.SAMAccountName)
-		case schemas.CreateGroupResult_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.CreateGroupResult_SID, v.SID)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResult), output: &CreateGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -198,12 +113,6 @@ func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +125,6 @@ func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +164,4 @@ func (m *idempotencyToken_initializeOpCreateGroup) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGroup",
-	}
 }

@@ -4,13 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,18 +35,6 @@ type VerifyTargetDomainInput struct {
 	TargetDomainId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VerifyTargetDomainInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerifyTargetDomainInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VerifyTargetDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TargetDomainId != nil {
-		s.WriteString(schemas.VerifyTargetDomainInput_targetDomainId, *v.TargetDomainId)
-	}
 }
 
 // Output for verifying ownership for a registered target domain in an agent space.
@@ -84,107 +67,29 @@ type VerifyTargetDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VerifyTargetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerifyTargetDomainOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerifyTargetDomainOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.VerifyTargetDomainOutput_createdAt, v.CreatedAt)
-		case schemas.VerifyTargetDomainOutput_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.VerifyTargetDomainOutput_domainName, v.DomainName)
-		case schemas.VerifyTargetDomainOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.VerifyTargetDomainOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TargetDomainStatus(ev)
-			return nil
-		case schemas.VerifyTargetDomainOutput_targetDomainId:
-			v.TargetDomainId = new(string)
-			return d.ReadString(schemas.VerifyTargetDomainOutput_targetDomainId, v.TargetDomainId)
-		case schemas.VerifyTargetDomainOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.VerifyTargetDomainOutput_updatedAt, v.UpdatedAt)
-		case schemas.VerifyTargetDomainOutput_verificationStatusReason:
-			v.VerificationStatusReason = new(string)
-			return d.ReadString(schemas.VerifyTargetDomainOutput_verificationStatusReason, v.VerificationStatusReason)
-		case schemas.VerifyTargetDomainOutput_verifiedAt:
-			v.VerifiedAt = new(time.Time)
-			return d.ReadTime(schemas.VerifyTargetDomainOutput_verifiedAt, v.VerifiedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationVerifyTargetDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyTargetDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTargetDomain, schemas.VerifyTargetDomainInput, schemas.VerifyTargetDomainOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyTargetDomain{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTargetDomain, schemas.VerifyTargetDomainInput, schemas.VerifyTargetDomainOutput), output: &VerifyTargetDomainOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyTargetDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVerifyTargetDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyTargetDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +104,8 @@ func (c *Client) addOperationVerifyTargetDomainMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVerifyTargetDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VerifyTargetDomain",
-	}
 }

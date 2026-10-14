@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -33,40 +31,6 @@ type AuditEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AuditEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuditEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuditEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventData != nil {
-		s.WriteString(schemas.AuditEvent_eventData, *v.EventData)
-	}
-	if v.EventDataChecksum != nil {
-		s.WriteString(schemas.AuditEvent_eventDataChecksum, *v.EventDataChecksum)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.AuditEvent_id, *v.Id)
-	}
-}
-func (v *AuditEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuditEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuditEvent_eventData:
-			v.EventData = new(string)
-			return d.ReadString(schemas.AuditEvent_eventData, v.EventData)
-		case schemas.AuditEvent_eventDataChecksum:
-			v.EventDataChecksum = new(string)
-			return d.ReadString(schemas.AuditEvent_eventDataChecksum, v.EventDataChecksum)
-		case schemas.AuditEvent_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AuditEvent_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // A response that includes successful and failed event results.
 type AuditEventResultEntry struct {
 
@@ -81,34 +45,6 @@ type AuditEventResultEntry struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuditEventResultEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuditEventResultEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuditEventResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventID != nil {
-		s.WriteString(schemas.AuditEventResultEntry_eventID, *v.EventID)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.AuditEventResultEntry_id, *v.Id)
-	}
-}
-func (v *AuditEventResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuditEventResultEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuditEventResultEntry_eventID:
-			v.EventID = new(string)
-			return d.ReadString(schemas.AuditEventResultEntry_eventID, v.EventID)
-		case schemas.AuditEventResultEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AuditEventResultEntry_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Includes the error code and error message for events that could not be ingested
@@ -136,40 +72,6 @@ type ResultErrorEntry struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResultErrorEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResultErrorEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResultErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.ResultErrorEntry_errorCode, *v.ErrorCode)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.ResultErrorEntry_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ResultErrorEntry_id, *v.Id)
-	}
-}
-func (v *ResultErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResultErrorEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResultErrorEntry_errorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.ResultErrorEntry_errorCode, v.ErrorCode)
-		case schemas.ResultErrorEntry_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.ResultErrorEntry_errorMessage, v.ErrorMessage)
-		case schemas.ResultErrorEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ResultErrorEntry_id, v.Id)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

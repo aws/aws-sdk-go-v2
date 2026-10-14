@@ -1,0 +1,3 @@
+DELETE /auth/sessions/__InstanceId__/__SessionId__
+
+

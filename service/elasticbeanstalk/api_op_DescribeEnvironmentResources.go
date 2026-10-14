@@ -4,14 +4,11 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns AWS resources for this environment.
+// Returns Amazon Web Services resources for this environment.
 func (c *Client) DescribeEnvironmentResources(ctx context.Context, params *DescribeEnvironmentResourcesInput, optFns ...func(*Options)) (*DescribeEnvironmentResourcesOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentResourcesInput{}
@@ -30,18 +27,17 @@ func (c *Client) DescribeEnvironmentResources(ctx context.Context, params *Descr
 // Request to describe the resources in an environment.
 type DescribeEnvironmentResourcesInput struct {
 
-	// The ID of the environment to retrieve AWS resource usage data.
+	// The ID of the environment to retrieve Amazon Web Services resource usage data.
 	//
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
-	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// do not specify either, Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
-	// The name of the environment to retrieve AWS resource usage data.
+	// The name of the environment to retrieve Amazon Web Services resource usage data.
 	//
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
-	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
+	// not specify either, Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -60,9 +56,6 @@ type DescribeEnvironmentResourcesOutput struct {
 }
 
 func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentResources{}, middleware.After)
 	if err != nil {
 		return err
@@ -71,62 +64,17 @@ func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *midd
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEnvironmentResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +89,8 @@ func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEnvironmentResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEnvironmentResources",
-	}
 }

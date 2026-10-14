@@ -1,0 +1,5 @@
+PUT /workloads/__WorkloadId__/profiles/__ProfileArn__/upgrade
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","MilestoneName":"__MilestoneName__"}

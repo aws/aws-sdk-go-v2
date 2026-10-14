@@ -4,13 +4,10 @@ package computeoptimizerautomation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -105,6 +102,61 @@ type GetAutomationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_accountId, *v.AccountId)
+	}
+	if v.CompletedTimestamp != nil {
+		s.WriteTime(schemas.GetAutomationEventResponse_completedTimestamp, *v.CompletedTimestamp)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAutomationEventResponse_createdTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.GetAutomationEventResponse_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDescription != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventDescription, *v.EventDescription)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_eventStatus, string(v.EventStatus))
+	}
+	if v.EventStatusReason != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventStatusReason, *v.EventStatusReason)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_eventType, string(v.EventType))
+	}
+	if v.RecommendedActionId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_recommendedActionId, *v.RecommendedActionId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_region, *v.Region)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceType, string(v.ResourceType))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_ruleId, *v.RuleId)
+	}
+}
 func (v *GetAutomationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAutomationEventResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -170,62 +222,20 @@ func (v *GetAutomationEventOutput) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 func (c *Client) addOperationGetAutomationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationEvent, schemas.GetAutomationEventRequest, schemas.GetAutomationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationEvent, schemas.GetAutomationEventRequest, schemas.GetAutomationEventResponse), output: &GetAutomationEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAutomationEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -235,12 +245,6 @@ func (c *Client) addOperationGetAutomationEventMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpGetAutomationEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAutomationEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +259,8 @@ func (c *Client) addOperationGetAutomationEventMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAutomationEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAutomationEvent",
-	}
 }

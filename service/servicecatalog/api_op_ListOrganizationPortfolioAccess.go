@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the organization nodes that have access to the specified portfolio. This
@@ -70,30 +66,6 @@ type ListOrganizationPortfolioAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationPortfolioAccessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOrganizationPortfolioAccessInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOrganizationPortfolioAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ListOrganizationPortfolioAccessInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.OrganizationNodeType != "" {
-		s.WriteString(schemas.ListOrganizationPortfolioAccessInput_OrganizationNodeType, string(v.OrganizationNodeType))
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListOrganizationPortfolioAccessInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListOrganizationPortfolioAccessInput_PageToken, *v.PageToken)
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.ListOrganizationPortfolioAccessInput_PortfolioId, *v.PortfolioId)
-	}
-}
-
 type ListOrganizationPortfolioAccessOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -109,87 +81,29 @@ type ListOrganizationPortfolioAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationPortfolioAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOrganizationPortfolioAccessOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOrganizationPortfolioAccessOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.ListOrganizationPortfolioAccessOutput_NextPageToken, v.NextPageToken)
-		case schemas.ListOrganizationPortfolioAccessOutput_OrganizationNodes:
-			return deserializeOrganizationNodes(d, schemas.ListOrganizationPortfolioAccessOutput_OrganizationNodes, &v.OrganizationNodes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOrganizationPortfolioAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationPortfolioAccess, schemas.ListOrganizationPortfolioAccessInput, schemas.ListOrganizationPortfolioAccessOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOrganizationPortfolioAccess{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationPortfolioAccess, schemas.ListOrganizationPortfolioAccessInput, schemas.ListOrganizationPortfolioAccessOutput), output: &ListOrganizationPortfolioAccessOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOrganizationPortfolioAccess"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListOrganizationPortfolioAccessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizationPortfolioAccess(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,12 +116,6 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -307,11 +215,3 @@ type ListOrganizationPortfolioAccessAPIClient interface {
 }
 
 var _ ListOrganizationPortfolioAccessAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOrganizationPortfolioAccess(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOrganizationPortfolioAccess",
-	}
-}

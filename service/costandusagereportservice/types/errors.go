@@ -34,6 +34,17 @@ func (e *DuplicateReportNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateReportNameException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateReportNameException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateReportNameException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateReportNameException_Message, *v.Message)
+	}
+}
 func (v *DuplicateReportNameException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplicateReportNameException, func(s *smithy.Schema) error {
 		switch s {
@@ -71,6 +82,17 @@ func (e *InternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalErrorException_Message, *v.Message)
+	}
+}
 func (v *InternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalErrorException, func(s *smithy.Schema) error {
 		switch s {
@@ -108,6 +130,17 @@ func (e *ReportLimitReachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ReportLimitReachedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportLimitReachedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportLimitReachedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReportLimitReachedException_Message, *v.Message)
+	}
+}
 func (v *ReportLimitReachedException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReportLimitReachedException, func(s *smithy.Schema) error {
 		switch s {
@@ -144,6 +177,17 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
 func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
 		switch s {
@@ -181,6 +225,17 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
 func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
 		switch s {

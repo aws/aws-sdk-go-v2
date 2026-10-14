@@ -1,0 +1,3 @@
+GET /2021-01-01/opensearch/reservedInstances?maxResults=1&nextToken=__NextToken__&reservationId=__ReservedInstanceId__
+
+

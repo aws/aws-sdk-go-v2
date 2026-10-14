@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/segments/__SegmentDefinitionName__/snapshots
+
+Content-Type: application/json
+
+{"DataFormat":"CSV","DestinationUri":"__DestinationUri__","EncryptionKey":"__EncryptionKey__","RoleArn":"__RoleArn__"}

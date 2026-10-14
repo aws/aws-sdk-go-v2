@@ -1,0 +1,5 @@
+PATCH /group/__GroupIdentifier__/disassociate
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__"}

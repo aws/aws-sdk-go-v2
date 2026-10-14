@@ -1,0 +1,5 @@
+PUT /configureLogs/channel
+
+Content-Type: application/json
+
+{"ChannelName":"__ChannelName__","LogTypes":["AS_RUN","AS_RUN"]}

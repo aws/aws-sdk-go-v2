@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeImageReferences&DryRun=true&ImageId.1=__Member__&ImageId.2=__Member__&IncludeAllResourceTypes=true&MaxResults=1&NextToken=__NextToken__&ResourceType.1.ResourceType=ec2%3AInstance&ResourceType.1.ResourceTypeOption.1.OptionName=state-name&ResourceType.1.ResourceTypeOption.1.OptionValue.1=__Member__&ResourceType.1.ResourceTypeOption.1.OptionValue.2=__Member__&ResourceType.1.ResourceTypeOption.2.OptionName=state-name&ResourceType.1.ResourceTypeOption.2.OptionValue.1=__Member__&ResourceType.1.ResourceTypeOption.2.OptionValue.2=__Member__&ResourceType.2.ResourceType=ec2%3AInstance&ResourceType.2.ResourceTypeOption.1.OptionName=state-name&ResourceType.2.ResourceTypeOption.1.OptionValue.1=__Member__&ResourceType.2.ResourceTypeOption.1.OptionValue.2=__Member__&ResourceType.2.ResourceTypeOption.2.OptionName=state-name&ResourceType.2.ResourceTypeOption.2.OptionValue.1=__Member__&ResourceType.2.ResourceTypeOption.2.OptionValue.2=__Member__&Version=2016-11-15

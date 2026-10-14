@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/ListVirtualMachines
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£iNextTokenm__NextToken__mHypervisorArnq__HypervisorArn__jMaxResults

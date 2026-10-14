@@ -4,10 +4,9 @@ package appconfig
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new configuration in the AppConfig hosted configuration store. If
@@ -15,7 +14,7 @@ import (
 // JSON schema for feature flag data. For more information, see [Type reference for AWS.AppConfig.FeatureFlags]in the AppConfig
 // User Guide.
 //
-// [Type reference for AWS.AppConfig.FeatureFlags]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags
+// [Type reference for AWS.AppConfig.FeatureFlags]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-type-reference-feature-flags.html
 func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *CreateHostedConfigurationVersionInput, optFns ...func(*Options)) (*CreateHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &CreateHostedConfigurationVersionInput{}
@@ -60,6 +59,8 @@ type CreateHostedConfigurationVersionInput struct {
 	ContentType *string
 
 	// A description of the configuration.
+	//
+	// Due to HTTP limitations, this field only supports ASCII characters.
 	Description *string
 
 	// An optional locking token used to prevent race conditions from overwriting
@@ -75,6 +76,36 @@ type CreateHostedConfigurationVersionInput struct {
 	VersionLabel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateHostedConfigurationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHostedConfigurationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHostedConfigurationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.Content != nil {
+		s.WriteBlob(schemas.CreateHostedConfigurationVersionRequest_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_Description, *v.Description)
+	}
+	if v.LatestVersionNumber != nil {
+		s.WriteInt32(schemas.CreateHostedConfigurationVersionRequest_LatestVersionNumber, *v.LatestVersionNumber)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.CreateHostedConfigurationVersionRequest_VersionLabel, *v.VersionLabel)
+	}
 }
 
 type CreateHostedConfigurationVersionOutput struct {
@@ -114,77 +145,88 @@ type CreateHostedConfigurationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHostedConfigurationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostedConfigurationVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHostedConfigurationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.Content != nil {
+		s.WriteBlob(schemas.HostedConfigurationVersion_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_Description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.HostedConfigurationVersion_VersionLabel, *v.VersionLabel)
+	}
+	if v.VersionNumber != 0 {
+		s.WriteInt32(schemas.HostedConfigurationVersion_VersionNumber, v.VersionNumber)
+	}
+}
+func (v *CreateHostedConfigurationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostedConfigurationVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostedConfigurationVersion_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ApplicationId, v.ApplicationId)
+		case schemas.HostedConfigurationVersion_ConfigurationProfileId:
+			v.ConfigurationProfileId = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ConfigurationProfileId, v.ConfigurationProfileId)
+		case schemas.HostedConfigurationVersion_Content:
+			return d.ReadBlob(schemas.HostedConfigurationVersion_Content, &v.Content)
+		case schemas.HostedConfigurationVersion_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_ContentType, v.ContentType)
+		case schemas.HostedConfigurationVersion_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_Description, v.Description)
+		case schemas.HostedConfigurationVersion_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_KmsKeyArn, v.KmsKeyArn)
+		case schemas.HostedConfigurationVersion_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersion_VersionLabel, v.VersionLabel)
+		case schemas.HostedConfigurationVersion_VersionNumber:
+			return d.ReadInt32(schemas.HostedConfigurationVersion_VersionNumber, &v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHostedConfigurationVersion, schemas.CreateHostedConfigurationVersionRequest, schemas.HostedConfigurationVersion)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHostedConfigurationVersion, schemas.CreateHostedConfigurationVersionRequest, schemas.HostedConfigurationVersion), output: &CreateHostedConfigurationVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHostedConfigurationVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateHostedConfigurationVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHostedConfigurationVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +241,8 @@ func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateHostedConfigurationVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateHostedConfigurationVersion",
-	}
 }

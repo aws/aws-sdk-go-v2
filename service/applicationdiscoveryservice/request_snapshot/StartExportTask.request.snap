@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.StartExportTask
+
+{"endTime":946684800,"exportDataFormat":["CSV","CSV"],"filters":[{"condition":"__Condition__","name":"__Name__","values":["__Member__","__Member__"]},{"condition":"__Condition__","name":"__Name__","values":["__Member__","__Member__"]}],"preferences":{"ec2RecommendationsPreferences":{"cpuPerformanceMetricBasis":{"name":"__Name__","percentageAdjust":1},"enabled":true,"excludedInstanceTypes":["__Member__","__Member__"],"preferredRegion":"__PreferredRegion__","ramPerformanceMetricBasis":{"name":"__Name__","percentageAdjust":1},"reservedInstanceOptions":{"offeringClass":"STANDARD","purchasingOption":"ALL_UPFRONT","termLength":"ONE_YEAR"},"tenancy":"DEDICATED"}},"startTime":946684800}

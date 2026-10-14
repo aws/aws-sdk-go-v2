@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Given a user pool app client ID, updates the configuration. To avoid setting
@@ -353,6 +352,74 @@ type UpdateUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolClientRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenValidity != nil {
+		s.WriteInt32(schemas.UpdateUserPoolClientRequest_AccessTokenValidity, *v.AccessTokenValidity)
+	}
+	serializeOAuthFlowsType(s, schemas.UpdateUserPoolClientRequest_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlowsUserPoolClient != false {
+		s.WriteBool(schemas.UpdateUserPoolClientRequest_AllowedOAuthFlowsUserPoolClient, v.AllowedOAuthFlowsUserPoolClient)
+	}
+	serializeScopeListType(s, schemas.UpdateUserPoolClientRequest_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AnalyticsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolClientRequest_AnalyticsConfiguration)
+		v.AnalyticsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthSessionValidity != nil {
+		s.WriteInt32(schemas.UpdateUserPoolClientRequest_AuthSessionValidity, *v.AuthSessionValidity)
+	}
+	serializeCallbackURLsListType(s, schemas.UpdateUserPoolClientRequest_CallbackURLs, v.CallbackURLs)
+	if v.ClientId != nil {
+		s.WriteString(schemas.UpdateUserPoolClientRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientName != nil {
+		s.WriteString(schemas.UpdateUserPoolClientRequest_ClientName, *v.ClientName)
+	}
+	if v.DefaultRedirectURI != nil {
+		s.WriteString(schemas.UpdateUserPoolClientRequest_DefaultRedirectURI, *v.DefaultRedirectURI)
+	}
+	if v.EnablePropagateAdditionalUserContextData != nil {
+		s.WriteBool(schemas.UpdateUserPoolClientRequest_EnablePropagateAdditionalUserContextData, *v.EnablePropagateAdditionalUserContextData)
+	}
+	if v.EnableTokenRevocation != nil {
+		s.WriteBool(schemas.UpdateUserPoolClientRequest_EnableTokenRevocation, *v.EnableTokenRevocation)
+	}
+	serializeExplicitAuthFlowsListType(s, schemas.UpdateUserPoolClientRequest_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.IdTokenValidity != nil {
+		s.WriteInt32(schemas.UpdateUserPoolClientRequest_IdTokenValidity, *v.IdTokenValidity)
+	}
+	serializeLogoutURLsListType(s, schemas.UpdateUserPoolClientRequest_LogoutURLs, v.LogoutURLs)
+	if v.PreventUserExistenceErrors != "" {
+		s.WriteString(schemas.UpdateUserPoolClientRequest_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
+	}
+	serializeClientPermissionListType(s, schemas.UpdateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)
+	if v.RefreshTokenRotation != nil {
+		s.WriteStruct(schemas.UpdateUserPoolClientRequest_RefreshTokenRotation)
+		v.RefreshTokenRotation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshTokenValidity != 0 {
+		s.WriteInt32(schemas.UpdateUserPoolClientRequest_RefreshTokenValidity, v.RefreshTokenValidity)
+	}
+	serializeSupportedIdentityProvidersListType(s, schemas.UpdateUserPoolClientRequest_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.TokenValidityUnits != nil {
+		s.WriteStruct(schemas.UpdateUserPoolClientRequest_TokenValidityUnits)
+		v.TokenValidityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateUserPoolClientRequest_UserPoolId, *v.UserPoolId)
+	}
+	serializeClientPermissionListType(s, schemas.UpdateUserPoolClientRequest_WriteAttributes, v.WriteAttributes)
+}
+
 // Represents the response from the server to the request to update the user pool
 // client.
 type UpdateUserPoolClientOutput struct {
@@ -366,77 +433,50 @@ type UpdateUserPoolClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolClientResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolClient != nil {
+		s.WriteStruct(schemas.UpdateUserPoolClientResponse_UserPoolClient)
+		v.UserPoolClient.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUserPoolClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserPoolClientResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserPoolClientResponse_UserPoolClient:
+			v.UserPoolClient = &types.UserPoolClientType{}
+			return v.UserPoolClient.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolClient, schemas.UpdateUserPoolClientRequest, schemas.UpdateUserPoolClientResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPoolClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolClient, schemas.UpdateUserPoolClientRequest, schemas.UpdateUserPoolClientResponse), output: &UpdateUserPoolClientOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserPoolClient{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUserPoolClient"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateUserPoolClientValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserPoolClient(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -451,22 +491,8 @@ func (c *Client) addOperationUpdateUserPoolClientMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateUserPoolClient(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateUserPoolClient",
-	}
 }

@@ -1,0 +1,4 @@
+GET /assignment/accounts?max_result=1&next_token=__NextToken__
+
+X-Amz-Sso_bearer_token: __AccessToken__
+

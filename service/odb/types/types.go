@@ -9,6 +9,2996 @@ import (
 	"time"
 )
 
+// The configuration of the admin password source. This is a union, so only one of
+// the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret
+type AdminPasswordSourceConfiguration interface {
+	isAdminPasswordSourceConfiguration()
+}
+
+// The configuration for a customer-managed Amazon Web Services Secrets Manager
+// secret used as the admin password source.
+type AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret) isAdminPasswordSourceConfiguration() {
+}
+func (v *AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminPasswordSourceConfiguration_customerManagedAwsSecret)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The input configuration for the admin password source. This is a union, so only
+// one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret
+type AdminPasswordSourceConfigurationInput interface {
+	isAdminPasswordSourceConfigurationInput()
+}
+
+// The configuration for using a customer-managed Amazon Web Services Secrets
+// Manager secret as the admin password source.
+type AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) isAdminPasswordSourceConfigurationInput() {
+}
+func (v *AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminPasswordSourceConfigurationInput_customerManagedAwsSecret)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of the admin password source configuration for an Autonomous Database.
+type AdminPasswordSourceSummary struct {
+
+	// The source of the admin password for the Autonomous Database.
+	AdminPasswordSource AdminPasswordSource
+
+	// The configuration of the admin password source for the Autonomous Database.
+	AdminPasswordSourceConfiguration AdminPasswordSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdminPasswordSourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminPasswordSourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminPasswordSourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPasswordSource != "" {
+		s.WriteString(schemas.AdminPasswordSourceSummary_adminPasswordSource, string(v.AdminPasswordSource))
+	}
+	serializeAdminPasswordSourceConfiguration(s, schemas.AdminPasswordSourceSummary_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
+}
+func (v *AdminPasswordSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminPasswordSourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminPasswordSourceSummary_adminPasswordSource:
+			var ev string
+			if err := d.ReadString(schemas.AdminPasswordSourceSummary_adminPasswordSource, &ev); err != nil {
+				return err
+			}
+			v.AdminPasswordSource = AdminPasswordSource(ev)
+			return nil
+		case schemas.AdminPasswordSourceSummary_adminPasswordSourceConfiguration:
+			return deserializeAdminPasswordSourceConfiguration(d, schemas.AdminPasswordSourceSummary_adminPasswordSourceConfiguration, &v.AdminPasswordSourceConfiguration)
+		}
+		return nil
+	})
+}
+
+// Information about an Autonomous Database.
+type AutonomousDatabase struct {
+
+	// The actual amount of data storage currently in use by the Autonomous Database,
+	// in TB.
+	ActualUsedDataStorageSizeInTBs *float64
+
+	// The summary of the admin password source configuration for the Autonomous
+	// Database.
+	AdminPasswordSourceSummary *AdminPasswordSourceSummary
+
+	// The amount of storage currently allocated to the Autonomous Database, in TB.
+	AllocatedStorageSizeInTBs *float64
+
+	// The list of IP addresses that are allowed to access the Autonomous Database.
+	AllowlistedIps []string
+
+	// The Oracle Application Express (APEX) details for the Autonomous Database.
+	ApexDetails *AutonomousDatabaseApex
+
+	// The frequency, in seconds, at which the refreshable clone Autonomous Database
+	// is automatically refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source
+	// Autonomous Database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The maintenance schedule type for the Autonomous Database.
+	AutonomousMaintenanceScheduleType AutonomousMaintenanceScheduleType
+
+	// The Availability Zone where the Autonomous Database is located.
+	AvailabilityZone *string
+
+	// The unique identifier of the Availability Zone where the Autonomous Database is
+	// located.
+	AvailabilityZoneId *string
+
+	// The list of Oracle Database software versions to which the Autonomous Database
+	// can be upgraded.
+	AvailableUpgradeVersions []string
+
+	// The retention period, in days, for automatic backups of the Autonomous Database.
+	BackupRetentionPeriodInDays *int32
+
+	// The maximum number of compute resources that you can allocate to the Autonomous
+	// Database under the bring-your-own-license (BYOL) model.
+	ByolComputeCountLimit *int32
+
+	// The character set of the Autonomous Database.
+	CharacterSet *string
+
+	// The list of tablespace identifiers to clone for the Autonomous Database.
+	CloneTableSpaceList []int32
+
+	// The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs),
+	// assigned to the Autonomous Database.
+	ComputeCount *float32
+
+	// The compute model of the Autonomous Database, either ECPU or OCPU.
+	ComputeModel ComputeModel
+
+	// The connection string details for the Autonomous Database.
+	ConnectionStringDetails *AutonomousDatabaseConnectionStrings
+
+	// The connection URLs for accessing tools and services for the Autonomous
+	// Database.
+	ConnectionUrls *AutonomousDatabaseConnectionUrls
+
+	// The number of CPU cores allocated to the Autonomous Database.
+	CpuCoreCount *int32
+
+	// The date and time when the Autonomous Database was created.
+	CreatedAt *time.Time
+
+	// The list of customer contacts that receive operational notifications from
+	// Oracle for the Autonomous Database.
+	CustomerContacts []CustomerContact
+
+	// The status of the Oracle Data Safe registration for the Autonomous Database.
+	DataSafeStatus DataSafeStatus
+
+	// The size, in gigabytes (GB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInGBs *int32
+
+	// The size, in terabytes (TB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInTBs *float64
+
+	// The Oracle Database edition of the Autonomous Database.
+	DatabaseEdition DatabaseEdition
+
+	// The status of Oracle Database Management for the Autonomous Database.
+	DatabaseManagementStatus DatabaseManagementStatus
+
+	// The type of the Autonomous Database, either a regular database or a clone.
+	DatabaseType DatabaseType
+
+	// The name of the Autonomous Database.
+	DbName *string
+
+	// The list of database management tools enabled for the Autonomous Database.
+	DbToolsDetails []DatabaseTool
+
+	// The Oracle Database software version of the Autonomous Database.
+	DbVersion *string
+
+	// The intended use of the Autonomous Database, such as transaction processing,
+	// data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// The user-friendly name of the Autonomous Database.
+	DisplayName *string
+
+	// The encryption configuration for the Autonomous Database.
+	EncryptionSummary *EncryptionSummary
+
+	// The amount of time, in seconds, that the data in the Autonomous Database is
+	// behind the data in the primary database.
+	FailedDataRecoveryInSeconds *int32
+
+	// The size of the in-memory area of the Autonomous Database, in GB.
+	InMemoryAreaInGBs *int32
+
+	// Indicates whether automatic scaling of the compute resources is enabled for the
+	// Autonomous Database.
+	IsAutoScalingEnabled *bool
+
+	// Indicates whether automatic scaling of the storage is enabled for the
+	// Autonomous Database.
+	IsAutoScalingForStorageEnabled *bool
+
+	// Indicates whether the backup retention period of the Autonomous Database is
+	// locked.
+	IsBackupRetentionLocked *bool
+
+	// Indicates whether local Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsLocalDataGuardEnabled *bool
+
+	// Indicates whether mutual TLS (mTLS) authentication is required to connect to
+	// the Autonomous Database.
+	IsMtlsConnectionRequired *bool
+
+	// Indicates whether reconnecting the refreshable clone to its source Autonomous
+	// Database is enabled.
+	IsReconnectCloneEnabled *bool
+
+	// Indicates whether the Autonomous Database is a refreshable clone.
+	IsRefreshableClone *bool
+
+	// Indicates whether remote Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsRemoteDataGuardEnabled *bool
+
+	// The Oracle license model that applies to the Autonomous Database.
+	LicenseModel LicenseModel
+
+	// The maximum data loss limit, in seconds, for automatic failover to the local
+	// Oracle Data Guard standby database.
+	LocalAdgAutoFailoverMaxDataLossLimit *int32
+
+	// The type of local disaster recovery configured for the Autonomous Database.
+	LocalDisasterRecoveryType DisasterRecoveryType
+
+	// The details of the local standby Autonomous Database in an Oracle Data Guard
+	// configuration.
+	LocalStandbyDb *DatabaseStandbySummary
+
+	// The long-term backup schedule for the Autonomous Database.
+	LongTermBackupSchedule *LongTermBackupSchedule
+
+	// The component on the Autonomous Database that the current maintenance is being
+	// applied to.
+	MaintenanceTargetComponent *string
+
+	// The amount of memory allocated per Oracle Compute Unit, in GB.
+	MemoryPerOracleComputeUnitInGBs *int32
+
+	// The national character set of the Autonomous Database.
+	NcharacterSet *string
+
+	// The Oracle Net Services architecture of the Autonomous Database, either
+	// dedicated or shared.
+	NetServicesArchitecture NetServicesArchitecture
+
+	// The date and time of the next scheduled long-term backup of the Autonomous
+	// Database.
+	NextLongTermBackupTimeStamp *time.Time
+
+	// The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated
+	// with the Autonomous Database.
+	OciResourceAnchorName *string
+
+	// The URL for accessing the OCI console page for the Autonomous Database.
+	OciUrl *string
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with the
+	// Autonomous Database.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network associated with the Autonomous
+	// Database.
+	OdbNetworkId *string
+
+	// The mode in which the Autonomous Database is open, either read-only or
+	// read/write.
+	OpenMode OpenMode
+
+	// The status of Oracle Operations Insights for the Autonomous Database.
+	OperationsInsightsStatus OperationsInsightsStatus
+
+	// The list of unique identifiers of the peer Autonomous Databases.
+	PeerDbIds []string
+
+	// The progress of the current operation on the Autonomous Database, as a
+	// percentage.
+	PercentProgress *float32
+
+	// The permission level of the Autonomous Database.
+	PermissionLevel PermissionLevel
+
+	// The private endpoint for the Autonomous Database.
+	PrivateEndpoint *string
+
+	// The private endpoint IP address for the Autonomous Database.
+	PrivateEndpointIp *string
+
+	// The private endpoint label for the Autonomous Database.
+	PrivateEndpointLabel *string
+
+	// The list of CPU core counts that you can provision for the Autonomous Database.
+	ProvisionableCpus []int32
+
+	// The refresh mode of the refreshable clone Autonomous Database.
+	RefreshableMode RefreshableMode
+
+	// The refresh status of the refreshable clone Autonomous Database.
+	RefreshableStatus RefreshableStatus
+
+	// The configuration of the remote disaster recovery for the Autonomous Database.
+	RemoteDisasterRecoveryConfiguration *DisasterRecoveryConfiguration
+
+	// The unique identifier of the resource pool leader Autonomous Database.
+	ResourcePoolLeaderId *string
+
+	// The configuration of the resource pool for the Autonomous Database.
+	ResourcePoolSummary *ResourcePoolSummary
+
+	// The Oracle Data Guard role of the Autonomous Database.
+	Role DataGuardRole
+
+	// The list of scheduled start and stop times for the Autonomous Database.
+	ScheduledOperations []ScheduledOperationDetails
+
+	// The URL for accessing the Oracle service console for the Autonomous Database.
+	ServiceConsoleUrl *string
+
+	// The unique identifier of the source from which the Autonomous Database was
+	// created.
+	SourceId *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlWebDeveloperUrl *string
+
+	// The list of IP addresses that are allowed to access the standby Autonomous
+	// Database.
+	StandbyAllowlistedIps []string
+
+	// The source of the allowlisted IP addresses for the standby Autonomous Database.
+	StandbyAllowlistedIpsSource StandbyAllowlistedIpsSource
+
+	// The details of the standby Autonomous Database in a cross-Region Oracle Data
+	// Guard configuration.
+	StandbyDb *DatabaseStandbySummary
+
+	// The current status of the Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the Autonomous Database, if
+	// applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the Autonomous Database
+	// last changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the inactive Always Free Autonomous Database is
+	// scheduled to be automatically deleted.
+	TimeDeletionOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the disaster recovery role of the Autonomous Database
+	// last changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when local Oracle Data Guard was enabled for the Autonomous
+	// Database.
+	TimeLocalDataGuardEnabled *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database ends.
+	TimeMaintenanceEnd *time.Time
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// Autonomous Database starts.
+	TimeOfAutoRefreshStart *time.Time
+
+	// The date and time of the last backup of the Autonomous Database.
+	TimeOfLastBackup *time.Time
+
+	// The date and time of the last failover operation for the Autonomous Database.
+	TimeOfLastFailover *time.Time
+
+	// The date and time of the last refresh of the refreshable clone Autonomous
+	// Database.
+	TimeOfLastRefresh *time.Time
+
+	// The date and time as of which the data in the refreshable clone Autonomous
+	// Database is current.
+	TimeOfLastRefreshPoint *time.Time
+
+	// The date and time of the last switchover operation for the Autonomous Database.
+	TimeOfLastSwitchover *time.Time
+
+	// The date and time of the next scheduled refresh of the refreshable clone
+	// Autonomous Database.
+	TimeOfNextRefresh *time.Time
+
+	// The date and time when the Always Free Autonomous Database is scheduled to be
+	// stopped because of inactivity.
+	TimeReclamationOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the Autonomous Database was restored after deletion.
+	TimeUndeleted *time.Time
+
+	// The date and time until which reconnecting the refreshable clone to its source
+	// Autonomous Database is allowed.
+	TimeUntilReconnectCloneEnabled *time.Time
+
+	// The total amount of backup storage used by the Autonomous Database, in GB.
+	TotalBackupStorageSizeInGBs *float64
+
+	// The amount of data storage currently in use by the Autonomous Database, in GB.
+	UsedDataStorageSizeInGBs *int32
+
+	// The amount of data storage currently in use by the Autonomous Database, in TB.
+	UsedDataStorageSizeInTBs *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualUsedDataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabase_actualUsedDataStorageSizeInTBs, *v.ActualUsedDataStorageSizeInTBs)
+	}
+	if v.AdminPasswordSourceSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_adminPasswordSourceSummary)
+		v.AdminPasswordSourceSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AllocatedStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabase_allocatedStorageSizeInTBs, *v.AllocatedStorageSizeInTBs)
+	}
+	serializeStringList(s, schemas.AutonomousDatabase_allowlistedIps, v.AllowlistedIps)
+	if v.ApexDetails != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_apexDetails)
+		v.ApexDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRefreshFrequencyInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_autoRefreshFrequencyInSeconds, *v.AutoRefreshFrequencyInSeconds)
+	}
+	if v.AutoRefreshPointLagInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_autoRefreshPointLagInSeconds, *v.AutoRefreshPointLagInSeconds)
+	}
+	if v.AutonomousDatabaseArn != nil {
+		s.WriteString(schemas.AutonomousDatabase_autonomousDatabaseArn, *v.AutonomousDatabaseArn)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabase_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.AutonomousMaintenanceScheduleType != "" {
+		s.WriteString(schemas.AutonomousDatabase_autonomousMaintenanceScheduleType, string(v.AutonomousMaintenanceScheduleType))
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.AutonomousDatabase_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.AutonomousDatabase_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	serializeStringList(s, schemas.AutonomousDatabase_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	if v.BackupRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_backupRetentionPeriodInDays, *v.BackupRetentionPeriodInDays)
+	}
+	if v.ByolComputeCountLimit != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_byolComputeCountLimit, *v.ByolComputeCountLimit)
+	}
+	if v.CharacterSet != nil {
+		s.WriteString(schemas.AutonomousDatabase_characterSet, *v.CharacterSet)
+	}
+	serializeIntegerList(s, schemas.AutonomousDatabase_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.ComputeCount != nil {
+		s.WriteFloat32(schemas.AutonomousDatabase_computeCount, *v.ComputeCount)
+	}
+	if v.ComputeModel != "" {
+		s.WriteString(schemas.AutonomousDatabase_computeModel, string(v.ComputeModel))
+	}
+	if v.ConnectionStringDetails != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_connectionStringDetails)
+		v.ConnectionStringDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionUrls != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_connectionUrls)
+		v.ConnectionUrls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CpuCoreCount != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_cpuCoreCount, *v.CpuCoreCount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutonomousDatabase_createdAt, *v.CreatedAt)
+	}
+	serializeCustomerContacts(s, schemas.AutonomousDatabase_customerContacts, v.CustomerContacts)
+	if v.DataSafeStatus != "" {
+		s.WriteString(schemas.AutonomousDatabase_dataSafeStatus, string(v.DataSafeStatus))
+	}
+	if v.DataStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_dataStorageSizeInGBs, *v.DataStorageSizeInGBs)
+	}
+	if v.DataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabase_dataStorageSizeInTBs, *v.DataStorageSizeInTBs)
+	}
+	if v.DatabaseEdition != "" {
+		s.WriteString(schemas.AutonomousDatabase_databaseEdition, string(v.DatabaseEdition))
+	}
+	if v.DatabaseManagementStatus != "" {
+		s.WriteString(schemas.AutonomousDatabase_databaseManagementStatus, string(v.DatabaseManagementStatus))
+	}
+	if v.DatabaseType != "" {
+		s.WriteString(schemas.AutonomousDatabase_databaseType, string(v.DatabaseType))
+	}
+	if v.DbName != nil {
+		s.WriteString(schemas.AutonomousDatabase_dbName, *v.DbName)
+	}
+	serializeDatabaseToolList(s, schemas.AutonomousDatabase_dbToolsDetails, v.DbToolsDetails)
+	if v.DbVersion != nil {
+		s.WriteString(schemas.AutonomousDatabase_dbVersion, *v.DbVersion)
+	}
+	if v.DbWorkload != "" {
+		s.WriteString(schemas.AutonomousDatabase_dbWorkload, string(v.DbWorkload))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AutonomousDatabase_displayName, *v.DisplayName)
+	}
+	if v.EncryptionSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_encryptionSummary)
+		v.EncryptionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedDataRecoveryInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_failedDataRecoveryInSeconds, *v.FailedDataRecoveryInSeconds)
+	}
+	if v.InMemoryAreaInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_inMemoryAreaInGBs, *v.InMemoryAreaInGBs)
+	}
+	if v.IsAutoScalingEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isAutoScalingEnabled, *v.IsAutoScalingEnabled)
+	}
+	if v.IsAutoScalingForStorageEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isAutoScalingForStorageEnabled, *v.IsAutoScalingForStorageEnabled)
+	}
+	if v.IsBackupRetentionLocked != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isBackupRetentionLocked, *v.IsBackupRetentionLocked)
+	}
+	if v.IsLocalDataGuardEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isLocalDataGuardEnabled, *v.IsLocalDataGuardEnabled)
+	}
+	if v.IsMtlsConnectionRequired != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isMtlsConnectionRequired, *v.IsMtlsConnectionRequired)
+	}
+	if v.IsReconnectCloneEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isReconnectCloneEnabled, *v.IsReconnectCloneEnabled)
+	}
+	if v.IsRefreshableClone != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isRefreshableClone, *v.IsRefreshableClone)
+	}
+	if v.IsRemoteDataGuardEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabase_isRemoteDataGuardEnabled, *v.IsRemoteDataGuardEnabled)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.AutonomousDatabase_licenseModel, string(v.LicenseModel))
+	}
+	if v.LocalAdgAutoFailoverMaxDataLossLimit != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit, *v.LocalAdgAutoFailoverMaxDataLossLimit)
+	}
+	if v.LocalDisasterRecoveryType != "" {
+		s.WriteString(schemas.AutonomousDatabase_localDisasterRecoveryType, string(v.LocalDisasterRecoveryType))
+	}
+	if v.LocalStandbyDb != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_localStandbyDb)
+		v.LocalStandbyDb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LongTermBackupSchedule != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_longTermBackupSchedule)
+		v.LongTermBackupSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceTargetComponent != nil {
+		s.WriteString(schemas.AutonomousDatabase_maintenanceTargetComponent, *v.MaintenanceTargetComponent)
+	}
+	if v.MemoryPerOracleComputeUnitInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_memoryPerOracleComputeUnitInGBs, *v.MemoryPerOracleComputeUnitInGBs)
+	}
+	if v.NcharacterSet != nil {
+		s.WriteString(schemas.AutonomousDatabase_ncharacterSet, *v.NcharacterSet)
+	}
+	if v.NetServicesArchitecture != "" {
+		s.WriteString(schemas.AutonomousDatabase_netServicesArchitecture, string(v.NetServicesArchitecture))
+	}
+	if v.NextLongTermBackupTimeStamp != nil {
+		s.WriteTime(schemas.AutonomousDatabase_nextLongTermBackupTimeStamp, *v.NextLongTermBackupTimeStamp)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.AutonomousDatabase_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.AutonomousDatabase_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabase_ocid, *v.Ocid)
+	}
+	if v.OdbNetworkArn != nil {
+		s.WriteString(schemas.AutonomousDatabase_odbNetworkArn, *v.OdbNetworkArn)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.AutonomousDatabase_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.OpenMode != "" {
+		s.WriteString(schemas.AutonomousDatabase_openMode, string(v.OpenMode))
+	}
+	if v.OperationsInsightsStatus != "" {
+		s.WriteString(schemas.AutonomousDatabase_operationsInsightsStatus, string(v.OperationsInsightsStatus))
+	}
+	serializeStringList(s, schemas.AutonomousDatabase_peerDbIds, v.PeerDbIds)
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.AutonomousDatabase_percentProgress, *v.PercentProgress)
+	}
+	if v.PermissionLevel != "" {
+		s.WriteString(schemas.AutonomousDatabase_permissionLevel, string(v.PermissionLevel))
+	}
+	if v.PrivateEndpoint != nil {
+		s.WriteString(schemas.AutonomousDatabase_privateEndpoint, *v.PrivateEndpoint)
+	}
+	if v.PrivateEndpointIp != nil {
+		s.WriteString(schemas.AutonomousDatabase_privateEndpointIp, *v.PrivateEndpointIp)
+	}
+	if v.PrivateEndpointLabel != nil {
+		s.WriteString(schemas.AutonomousDatabase_privateEndpointLabel, *v.PrivateEndpointLabel)
+	}
+	serializeIntegerList(s, schemas.AutonomousDatabase_provisionableCpus, v.ProvisionableCpus)
+	if v.RefreshableMode != "" {
+		s.WriteString(schemas.AutonomousDatabase_refreshableMode, string(v.RefreshableMode))
+	}
+	if v.RefreshableStatus != "" {
+		s.WriteString(schemas.AutonomousDatabase_refreshableStatus, string(v.RefreshableStatus))
+	}
+	if v.RemoteDisasterRecoveryConfiguration != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_remoteDisasterRecoveryConfiguration)
+		v.RemoteDisasterRecoveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcePoolLeaderId != nil {
+		s.WriteString(schemas.AutonomousDatabase_resourcePoolLeaderId, *v.ResourcePoolLeaderId)
+	}
+	if v.ResourcePoolSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_resourcePoolSummary)
+		v.ResourcePoolSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.AutonomousDatabase_role, string(v.Role))
+	}
+	serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabase_scheduledOperations, v.ScheduledOperations)
+	if v.ServiceConsoleUrl != nil {
+		s.WriteString(schemas.AutonomousDatabase_serviceConsoleUrl, *v.ServiceConsoleUrl)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.AutonomousDatabase_sourceId, *v.SourceId)
+	}
+	if v.SqlWebDeveloperUrl != nil {
+		s.WriteString(schemas.AutonomousDatabase_sqlWebDeveloperUrl, *v.SqlWebDeveloperUrl)
+	}
+	serializeStringList(s, schemas.AutonomousDatabase_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.StandbyAllowlistedIpsSource != "" {
+		s.WriteString(schemas.AutonomousDatabase_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
+	}
+	if v.StandbyDb != nil {
+		s.WriteStruct(schemas.AutonomousDatabase_standbyDb)
+		v.StandbyDb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutonomousDatabase_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AutonomousDatabase_statusReason, *v.StatusReason)
+	}
+	if v.TimeDataGuardRoleChanged != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeDataGuardRoleChanged, *v.TimeDataGuardRoleChanged)
+	}
+	if v.TimeDeletionOfFreeAutonomousDatabase != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase, *v.TimeDeletionOfFreeAutonomousDatabase)
+	}
+	if v.TimeDisasterRecoveryRoleChanged != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeDisasterRecoveryRoleChanged, *v.TimeDisasterRecoveryRoleChanged)
+	}
+	if v.TimeLocalDataGuardEnabled != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeLocalDataGuardEnabled, *v.TimeLocalDataGuardEnabled)
+	}
+	if v.TimeMaintenanceBegin != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeMaintenanceBegin, *v.TimeMaintenanceBegin)
+	}
+	if v.TimeMaintenanceEnd != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeMaintenanceEnd, *v.TimeMaintenanceEnd)
+	}
+	if v.TimeOfAutoRefreshStart != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfAutoRefreshStart, *v.TimeOfAutoRefreshStart)
+	}
+	if v.TimeOfLastBackup != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfLastBackup, *v.TimeOfLastBackup)
+	}
+	if v.TimeOfLastFailover != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfLastFailover, *v.TimeOfLastFailover)
+	}
+	if v.TimeOfLastRefresh != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfLastRefresh, *v.TimeOfLastRefresh)
+	}
+	if v.TimeOfLastRefreshPoint != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfLastRefreshPoint, *v.TimeOfLastRefreshPoint)
+	}
+	if v.TimeOfLastSwitchover != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfLastSwitchover, *v.TimeOfLastSwitchover)
+	}
+	if v.TimeOfNextRefresh != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeOfNextRefresh, *v.TimeOfNextRefresh)
+	}
+	if v.TimeReclamationOfFreeAutonomousDatabase != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase, *v.TimeReclamationOfFreeAutonomousDatabase)
+	}
+	if v.TimeUndeleted != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeUndeleted, *v.TimeUndeleted)
+	}
+	if v.TimeUntilReconnectCloneEnabled != nil {
+		s.WriteTime(schemas.AutonomousDatabase_timeUntilReconnectCloneEnabled, *v.TimeUntilReconnectCloneEnabled)
+	}
+	if v.TotalBackupStorageSizeInGBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabase_totalBackupStorageSizeInGBs, *v.TotalBackupStorageSizeInGBs)
+	}
+	if v.UsedDataStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabase_usedDataStorageSizeInGBs, *v.UsedDataStorageSizeInGBs)
+	}
+	if v.UsedDataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabase_usedDataStorageSizeInTBs, *v.UsedDataStorageSizeInTBs)
+	}
+}
+func (v *AutonomousDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabase_actualUsedDataStorageSizeInTBs:
+			v.ActualUsedDataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabase_actualUsedDataStorageSizeInTBs, v.ActualUsedDataStorageSizeInTBs)
+		case schemas.AutonomousDatabase_adminPasswordSourceSummary:
+			v.AdminPasswordSourceSummary = &AdminPasswordSourceSummary{}
+			return v.AdminPasswordSourceSummary.Deserialize(d)
+		case schemas.AutonomousDatabase_allocatedStorageSizeInTBs:
+			v.AllocatedStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabase_allocatedStorageSizeInTBs, v.AllocatedStorageSizeInTBs)
+		case schemas.AutonomousDatabase_allowlistedIps:
+			return deserializeStringList(d, schemas.AutonomousDatabase_allowlistedIps, &v.AllowlistedIps)
+		case schemas.AutonomousDatabase_apexDetails:
+			v.ApexDetails = &AutonomousDatabaseApex{}
+			return v.ApexDetails.Deserialize(d)
+		case schemas.AutonomousDatabase_autoRefreshFrequencyInSeconds:
+			v.AutoRefreshFrequencyInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_autoRefreshFrequencyInSeconds, v.AutoRefreshFrequencyInSeconds)
+		case schemas.AutonomousDatabase_autoRefreshPointLagInSeconds:
+			v.AutoRefreshPointLagInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_autoRefreshPointLagInSeconds, v.AutoRefreshPointLagInSeconds)
+		case schemas.AutonomousDatabase_autonomousDatabaseArn:
+			v.AutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_autonomousDatabaseArn, v.AutonomousDatabaseArn)
+		case schemas.AutonomousDatabase_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabase_autonomousMaintenanceScheduleType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_autonomousMaintenanceScheduleType, &ev); err != nil {
+				return err
+			}
+			v.AutonomousMaintenanceScheduleType = AutonomousMaintenanceScheduleType(ev)
+			return nil
+		case schemas.AutonomousDatabase_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_availabilityZone, v.AvailabilityZone)
+		case schemas.AutonomousDatabase_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.AutonomousDatabase_availableUpgradeVersions:
+			return deserializeStringList(d, schemas.AutonomousDatabase_availableUpgradeVersions, &v.AvailableUpgradeVersions)
+		case schemas.AutonomousDatabase_backupRetentionPeriodInDays:
+			v.BackupRetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_backupRetentionPeriodInDays, v.BackupRetentionPeriodInDays)
+		case schemas.AutonomousDatabase_byolComputeCountLimit:
+			v.ByolComputeCountLimit = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_byolComputeCountLimit, v.ByolComputeCountLimit)
+		case schemas.AutonomousDatabase_characterSet:
+			v.CharacterSet = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_characterSet, v.CharacterSet)
+		case schemas.AutonomousDatabase_cloneTableSpaceList:
+			return deserializeIntegerList(d, schemas.AutonomousDatabase_cloneTableSpaceList, &v.CloneTableSpaceList)
+		case schemas.AutonomousDatabase_computeCount:
+			v.ComputeCount = new(float32)
+			return d.ReadFloat32(schemas.AutonomousDatabase_computeCount, v.ComputeCount)
+		case schemas.AutonomousDatabase_computeModel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_computeModel, &ev); err != nil {
+				return err
+			}
+			v.ComputeModel = ComputeModel(ev)
+			return nil
+		case schemas.AutonomousDatabase_connectionStringDetails:
+			v.ConnectionStringDetails = &AutonomousDatabaseConnectionStrings{}
+			return v.ConnectionStringDetails.Deserialize(d)
+		case schemas.AutonomousDatabase_connectionUrls:
+			v.ConnectionUrls = &AutonomousDatabaseConnectionUrls{}
+			return v.ConnectionUrls.Deserialize(d)
+		case schemas.AutonomousDatabase_cpuCoreCount:
+			v.CpuCoreCount = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_cpuCoreCount, v.CpuCoreCount)
+		case schemas.AutonomousDatabase_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_createdAt, v.CreatedAt)
+		case schemas.AutonomousDatabase_customerContacts:
+			return deserializeCustomerContacts(d, schemas.AutonomousDatabase_customerContacts, &v.CustomerContacts)
+		case schemas.AutonomousDatabase_dataSafeStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_dataSafeStatus, &ev); err != nil {
+				return err
+			}
+			v.DataSafeStatus = DataSafeStatus(ev)
+			return nil
+		case schemas.AutonomousDatabase_dataStorageSizeInGBs:
+			v.DataStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_dataStorageSizeInGBs, v.DataStorageSizeInGBs)
+		case schemas.AutonomousDatabase_dataStorageSizeInTBs:
+			v.DataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabase_dataStorageSizeInTBs, v.DataStorageSizeInTBs)
+		case schemas.AutonomousDatabase_databaseEdition:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_databaseEdition, &ev); err != nil {
+				return err
+			}
+			v.DatabaseEdition = DatabaseEdition(ev)
+			return nil
+		case schemas.AutonomousDatabase_databaseManagementStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_databaseManagementStatus, &ev); err != nil {
+				return err
+			}
+			v.DatabaseManagementStatus = DatabaseManagementStatus(ev)
+			return nil
+		case schemas.AutonomousDatabase_databaseType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_databaseType, &ev); err != nil {
+				return err
+			}
+			v.DatabaseType = DatabaseType(ev)
+			return nil
+		case schemas.AutonomousDatabase_dbName:
+			v.DbName = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_dbName, v.DbName)
+		case schemas.AutonomousDatabase_dbToolsDetails:
+			return deserializeDatabaseToolList(d, schemas.AutonomousDatabase_dbToolsDetails, &v.DbToolsDetails)
+		case schemas.AutonomousDatabase_dbVersion:
+			v.DbVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_dbVersion, v.DbVersion)
+		case schemas.AutonomousDatabase_dbWorkload:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_dbWorkload, &ev); err != nil {
+				return err
+			}
+			v.DbWorkload = DbWorkload(ev)
+			return nil
+		case schemas.AutonomousDatabase_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_displayName, v.DisplayName)
+		case schemas.AutonomousDatabase_encryptionSummary:
+			v.EncryptionSummary = &EncryptionSummary{}
+			return v.EncryptionSummary.Deserialize(d)
+		case schemas.AutonomousDatabase_failedDataRecoveryInSeconds:
+			v.FailedDataRecoveryInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_failedDataRecoveryInSeconds, v.FailedDataRecoveryInSeconds)
+		case schemas.AutonomousDatabase_inMemoryAreaInGBs:
+			v.InMemoryAreaInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_inMemoryAreaInGBs, v.InMemoryAreaInGBs)
+		case schemas.AutonomousDatabase_isAutoScalingEnabled:
+			v.IsAutoScalingEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isAutoScalingEnabled, v.IsAutoScalingEnabled)
+		case schemas.AutonomousDatabase_isAutoScalingForStorageEnabled:
+			v.IsAutoScalingForStorageEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isAutoScalingForStorageEnabled, v.IsAutoScalingForStorageEnabled)
+		case schemas.AutonomousDatabase_isBackupRetentionLocked:
+			v.IsBackupRetentionLocked = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isBackupRetentionLocked, v.IsBackupRetentionLocked)
+		case schemas.AutonomousDatabase_isLocalDataGuardEnabled:
+			v.IsLocalDataGuardEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isLocalDataGuardEnabled, v.IsLocalDataGuardEnabled)
+		case schemas.AutonomousDatabase_isMtlsConnectionRequired:
+			v.IsMtlsConnectionRequired = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isMtlsConnectionRequired, v.IsMtlsConnectionRequired)
+		case schemas.AutonomousDatabase_isReconnectCloneEnabled:
+			v.IsReconnectCloneEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isReconnectCloneEnabled, v.IsReconnectCloneEnabled)
+		case schemas.AutonomousDatabase_isRefreshableClone:
+			v.IsRefreshableClone = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isRefreshableClone, v.IsRefreshableClone)
+		case schemas.AutonomousDatabase_isRemoteDataGuardEnabled:
+			v.IsRemoteDataGuardEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabase_isRemoteDataGuardEnabled, v.IsRemoteDataGuardEnabled)
+		case schemas.AutonomousDatabase_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit:
+			v.LocalAdgAutoFailoverMaxDataLossLimit = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit, v.LocalAdgAutoFailoverMaxDataLossLimit)
+		case schemas.AutonomousDatabase_localDisasterRecoveryType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_localDisasterRecoveryType, &ev); err != nil {
+				return err
+			}
+			v.LocalDisasterRecoveryType = DisasterRecoveryType(ev)
+			return nil
+		case schemas.AutonomousDatabase_localStandbyDb:
+			v.LocalStandbyDb = &DatabaseStandbySummary{}
+			return v.LocalStandbyDb.Deserialize(d)
+		case schemas.AutonomousDatabase_longTermBackupSchedule:
+			v.LongTermBackupSchedule = &LongTermBackupSchedule{}
+			return v.LongTermBackupSchedule.Deserialize(d)
+		case schemas.AutonomousDatabase_maintenanceTargetComponent:
+			v.MaintenanceTargetComponent = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_maintenanceTargetComponent, v.MaintenanceTargetComponent)
+		case schemas.AutonomousDatabase_memoryPerOracleComputeUnitInGBs:
+			v.MemoryPerOracleComputeUnitInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_memoryPerOracleComputeUnitInGBs, v.MemoryPerOracleComputeUnitInGBs)
+		case schemas.AutonomousDatabase_ncharacterSet:
+			v.NcharacterSet = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_ncharacterSet, v.NcharacterSet)
+		case schemas.AutonomousDatabase_netServicesArchitecture:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_netServicesArchitecture, &ev); err != nil {
+				return err
+			}
+			v.NetServicesArchitecture = NetServicesArchitecture(ev)
+			return nil
+		case schemas.AutonomousDatabase_nextLongTermBackupTimeStamp:
+			v.NextLongTermBackupTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_nextLongTermBackupTimeStamp, v.NextLongTermBackupTimeStamp)
+		case schemas.AutonomousDatabase_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.AutonomousDatabase_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_ociUrl, v.OciUrl)
+		case schemas.AutonomousDatabase_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_ocid, v.Ocid)
+		case schemas.AutonomousDatabase_odbNetworkArn:
+			v.OdbNetworkArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_odbNetworkArn, v.OdbNetworkArn)
+		case schemas.AutonomousDatabase_odbNetworkId:
+			v.OdbNetworkId = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_odbNetworkId, v.OdbNetworkId)
+		case schemas.AutonomousDatabase_openMode:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_openMode, &ev); err != nil {
+				return err
+			}
+			v.OpenMode = OpenMode(ev)
+			return nil
+		case schemas.AutonomousDatabase_operationsInsightsStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_operationsInsightsStatus, &ev); err != nil {
+				return err
+			}
+			v.OperationsInsightsStatus = OperationsInsightsStatus(ev)
+			return nil
+		case schemas.AutonomousDatabase_peerDbIds:
+			return deserializeStringList(d, schemas.AutonomousDatabase_peerDbIds, &v.PeerDbIds)
+		case schemas.AutonomousDatabase_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.AutonomousDatabase_percentProgress, v.PercentProgress)
+		case schemas.AutonomousDatabase_permissionLevel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_permissionLevel, &ev); err != nil {
+				return err
+			}
+			v.PermissionLevel = PermissionLevel(ev)
+			return nil
+		case schemas.AutonomousDatabase_privateEndpoint:
+			v.PrivateEndpoint = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_privateEndpoint, v.PrivateEndpoint)
+		case schemas.AutonomousDatabase_privateEndpointIp:
+			v.PrivateEndpointIp = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_privateEndpointIp, v.PrivateEndpointIp)
+		case schemas.AutonomousDatabase_privateEndpointLabel:
+			v.PrivateEndpointLabel = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_privateEndpointLabel, v.PrivateEndpointLabel)
+		case schemas.AutonomousDatabase_provisionableCpus:
+			return deserializeIntegerList(d, schemas.AutonomousDatabase_provisionableCpus, &v.ProvisionableCpus)
+		case schemas.AutonomousDatabase_refreshableMode:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_refreshableMode, &ev); err != nil {
+				return err
+			}
+			v.RefreshableMode = RefreshableMode(ev)
+			return nil
+		case schemas.AutonomousDatabase_refreshableStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_refreshableStatus, &ev); err != nil {
+				return err
+			}
+			v.RefreshableStatus = RefreshableStatus(ev)
+			return nil
+		case schemas.AutonomousDatabase_remoteDisasterRecoveryConfiguration:
+			v.RemoteDisasterRecoveryConfiguration = &DisasterRecoveryConfiguration{}
+			return v.RemoteDisasterRecoveryConfiguration.Deserialize(d)
+		case schemas.AutonomousDatabase_resourcePoolLeaderId:
+			v.ResourcePoolLeaderId = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_resourcePoolLeaderId, v.ResourcePoolLeaderId)
+		case schemas.AutonomousDatabase_resourcePoolSummary:
+			v.ResourcePoolSummary = &ResourcePoolSummary{}
+			return v.ResourcePoolSummary.Deserialize(d)
+		case schemas.AutonomousDatabase_role:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_role, &ev); err != nil {
+				return err
+			}
+			v.Role = DataGuardRole(ev)
+			return nil
+		case schemas.AutonomousDatabase_scheduledOperations:
+			return deserializeScheduledOperationDetailsList(d, schemas.AutonomousDatabase_scheduledOperations, &v.ScheduledOperations)
+		case schemas.AutonomousDatabase_serviceConsoleUrl:
+			v.ServiceConsoleUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_serviceConsoleUrl, v.ServiceConsoleUrl)
+		case schemas.AutonomousDatabase_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_sourceId, v.SourceId)
+		case schemas.AutonomousDatabase_sqlWebDeveloperUrl:
+			v.SqlWebDeveloperUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_sqlWebDeveloperUrl, v.SqlWebDeveloperUrl)
+		case schemas.AutonomousDatabase_standbyAllowlistedIps:
+			return deserializeStringList(d, schemas.AutonomousDatabase_standbyAllowlistedIps, &v.StandbyAllowlistedIps)
+		case schemas.AutonomousDatabase_standbyAllowlistedIpsSource:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_standbyAllowlistedIpsSource, &ev); err != nil {
+				return err
+			}
+			v.StandbyAllowlistedIpsSource = StandbyAllowlistedIpsSource(ev)
+			return nil
+		case schemas.AutonomousDatabase_standbyDb:
+			v.StandbyDb = &DatabaseStandbySummary{}
+			return v.StandbyDb.Deserialize(d)
+		case schemas.AutonomousDatabase_status:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabase_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.AutonomousDatabase_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AutonomousDatabase_statusReason, v.StatusReason)
+		case schemas.AutonomousDatabase_timeDataGuardRoleChanged:
+			v.TimeDataGuardRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeDataGuardRoleChanged, v.TimeDataGuardRoleChanged)
+		case schemas.AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase:
+			v.TimeDeletionOfFreeAutonomousDatabase = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase, v.TimeDeletionOfFreeAutonomousDatabase)
+		case schemas.AutonomousDatabase_timeDisasterRecoveryRoleChanged:
+			v.TimeDisasterRecoveryRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeDisasterRecoveryRoleChanged, v.TimeDisasterRecoveryRoleChanged)
+		case schemas.AutonomousDatabase_timeLocalDataGuardEnabled:
+			v.TimeLocalDataGuardEnabled = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeLocalDataGuardEnabled, v.TimeLocalDataGuardEnabled)
+		case schemas.AutonomousDatabase_timeMaintenanceBegin:
+			v.TimeMaintenanceBegin = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeMaintenanceBegin, v.TimeMaintenanceBegin)
+		case schemas.AutonomousDatabase_timeMaintenanceEnd:
+			v.TimeMaintenanceEnd = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeMaintenanceEnd, v.TimeMaintenanceEnd)
+		case schemas.AutonomousDatabase_timeOfAutoRefreshStart:
+			v.TimeOfAutoRefreshStart = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfAutoRefreshStart, v.TimeOfAutoRefreshStart)
+		case schemas.AutonomousDatabase_timeOfLastBackup:
+			v.TimeOfLastBackup = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfLastBackup, v.TimeOfLastBackup)
+		case schemas.AutonomousDatabase_timeOfLastFailover:
+			v.TimeOfLastFailover = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfLastFailover, v.TimeOfLastFailover)
+		case schemas.AutonomousDatabase_timeOfLastRefresh:
+			v.TimeOfLastRefresh = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfLastRefresh, v.TimeOfLastRefresh)
+		case schemas.AutonomousDatabase_timeOfLastRefreshPoint:
+			v.TimeOfLastRefreshPoint = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfLastRefreshPoint, v.TimeOfLastRefreshPoint)
+		case schemas.AutonomousDatabase_timeOfLastSwitchover:
+			v.TimeOfLastSwitchover = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfLastSwitchover, v.TimeOfLastSwitchover)
+		case schemas.AutonomousDatabase_timeOfNextRefresh:
+			v.TimeOfNextRefresh = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeOfNextRefresh, v.TimeOfNextRefresh)
+		case schemas.AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase:
+			v.TimeReclamationOfFreeAutonomousDatabase = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase, v.TimeReclamationOfFreeAutonomousDatabase)
+		case schemas.AutonomousDatabase_timeUndeleted:
+			v.TimeUndeleted = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeUndeleted, v.TimeUndeleted)
+		case schemas.AutonomousDatabase_timeUntilReconnectCloneEnabled:
+			v.TimeUntilReconnectCloneEnabled = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabase_timeUntilReconnectCloneEnabled, v.TimeUntilReconnectCloneEnabled)
+		case schemas.AutonomousDatabase_totalBackupStorageSizeInGBs:
+			v.TotalBackupStorageSizeInGBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabase_totalBackupStorageSizeInGBs, v.TotalBackupStorageSizeInGBs)
+		case schemas.AutonomousDatabase_usedDataStorageSizeInGBs:
+			v.UsedDataStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabase_usedDataStorageSizeInGBs, v.UsedDataStorageSizeInGBs)
+		case schemas.AutonomousDatabase_usedDataStorageSizeInTBs:
+			v.UsedDataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabase_usedDataStorageSizeInTBs, v.UsedDataStorageSizeInTBs)
+		}
+		return nil
+	})
+}
+
+// The Oracle Application Express (APEX) details for an Autonomous Database.
+type AutonomousDatabaseApex struct {
+
+	// The Oracle Application Express (APEX) version of the Autonomous Database.
+	ApexVersion *string
+
+	// The Oracle REST Data Services (ORDS) version of the Autonomous Database.
+	OrdsVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseApex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseApex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseApex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApexVersion != nil {
+		s.WriteString(schemas.AutonomousDatabaseApex_apexVersion, *v.ApexVersion)
+	}
+	if v.OrdsVersion != nil {
+		s.WriteString(schemas.AutonomousDatabaseApex_ordsVersion, *v.OrdsVersion)
+	}
+}
+func (v *AutonomousDatabaseApex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseApex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseApex_apexVersion:
+			v.ApexVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseApex_apexVersion, v.ApexVersion)
+		case schemas.AutonomousDatabaseApex_ordsVersion:
+			v.OrdsVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseApex_ordsVersion, v.OrdsVersion)
+		}
+		return nil
+	})
+}
+
+// Information about an Autonomous Database backup.
+type AutonomousDatabaseBackup struct {
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database backup.
+	AutonomousDatabaseBackupArn *string
+
+	// The unique identifier of the Autonomous Database backup.
+	AutonomousDatabaseBackupId *string
+
+	// The unique identifier of the Autonomous Database that the backup was created
+	// from.
+	AutonomousDatabaseId *string
+
+	// The Oracle Database software version of the Autonomous Database backup.
+	DbVersion *string
+
+	// The user-friendly name of the Autonomous Database backup.
+	DisplayName *string
+
+	// Indicates whether the backup was created automatically.
+	IsAutomatic *bool
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.
+	Ocid *string
+
+	// The retention period, in days, for the Autonomous Database backup.
+	RetentionPeriodInDays *int32
+
+	// The size of the Autonomous Database backup, in terabytes (TB).
+	SizeInTBs *float64
+
+	// The current status of the Autonomous Database backup.
+	Status AutonomousDatabaseBackupStatus
+
+	// Additional information about the current status of the Autonomous Database
+	// backup, if applicable.
+	StatusReason *string
+
+	// The date and time until which the Autonomous Database backup is available for
+	// restore.
+	TimeAvailableTill *time.Time
+
+	// The date and time when the Autonomous Database backup ended.
+	TimeEnded *time.Time
+
+	// The date and time when the Autonomous Database backup started.
+	TimeStarted *time.Time
+
+	// The type of the Autonomous Database backup.
+	Type AutonomousDatabaseBackupType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseBackup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseBackup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseBackup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupArn != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupArn, *v.AutonomousDatabaseBackupArn)
+	}
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DbVersion != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_dbVersion, *v.DbVersion)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_displayName, *v.DisplayName)
+	}
+	if v.IsAutomatic != nil {
+		s.WriteBool(schemas.AutonomousDatabaseBackup_isAutomatic, *v.IsAutomatic)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_ocid, *v.Ocid)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseBackup_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.SizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseBackup_sizeInTBs, *v.SizeInTBs)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutonomousDatabaseBackup_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackup_statusReason, *v.StatusReason)
+	}
+	if v.TimeAvailableTill != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackup_timeAvailableTill, *v.TimeAvailableTill)
+	}
+	if v.TimeEnded != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackup_timeEnded, *v.TimeEnded)
+	}
+	if v.TimeStarted != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackup_timeStarted, *v.TimeStarted)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AutonomousDatabaseBackup_type, string(v.Type))
+	}
+}
+func (v *AutonomousDatabaseBackup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseBackup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupArn:
+			v.AutonomousDatabaseBackupArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupArn, v.AutonomousDatabaseBackupArn)
+		case schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupId:
+			v.AutonomousDatabaseBackupId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_autonomousDatabaseBackupId, v.AutonomousDatabaseBackupId)
+		case schemas.AutonomousDatabaseBackup_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabaseBackup_dbVersion:
+			v.DbVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_dbVersion, v.DbVersion)
+		case schemas.AutonomousDatabaseBackup_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_displayName, v.DisplayName)
+		case schemas.AutonomousDatabaseBackup_isAutomatic:
+			v.IsAutomatic = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseBackup_isAutomatic, v.IsAutomatic)
+		case schemas.AutonomousDatabaseBackup_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_ocid, v.Ocid)
+		case schemas.AutonomousDatabaseBackup_retentionPeriodInDays:
+			v.RetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseBackup_retentionPeriodInDays, v.RetentionPeriodInDays)
+		case schemas.AutonomousDatabaseBackup_sizeInTBs:
+			v.SizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseBackup_sizeInTBs, v.SizeInTBs)
+		case schemas.AutonomousDatabaseBackup_status:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseBackup_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseBackupStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseBackup_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackup_statusReason, v.StatusReason)
+		case schemas.AutonomousDatabaseBackup_timeAvailableTill:
+			v.TimeAvailableTill = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackup_timeAvailableTill, v.TimeAvailableTill)
+		case schemas.AutonomousDatabaseBackup_timeEnded:
+			v.TimeEnded = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackup_timeEnded, v.TimeEnded)
+		case schemas.AutonomousDatabaseBackup_timeStarted:
+			v.TimeStarted = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackup_timeStarted, v.TimeStarted)
+		case schemas.AutonomousDatabaseBackup_type:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseBackup_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutonomousDatabaseBackupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an Autonomous Database backup.
+type AutonomousDatabaseBackupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database backup.
+	AutonomousDatabaseBackupArn *string
+
+	// The unique identifier of the Autonomous Database backup.
+	AutonomousDatabaseBackupId *string
+
+	// The unique identifier of the Autonomous Database that the backup was created
+	// from.
+	AutonomousDatabaseId *string
+
+	// The Oracle Database software version of the Autonomous Database backup.
+	DbVersion *string
+
+	// The user-friendly name of the Autonomous Database backup.
+	DisplayName *string
+
+	// Indicates whether the backup was created automatically.
+	IsAutomatic *bool
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.
+	Ocid *string
+
+	// The retention period, in days, for the Autonomous Database backup.
+	RetentionPeriodInDays *int32
+
+	// The size of the Autonomous Database backup, in terabytes (TB).
+	SizeInTBs *float64
+
+	// The current status of the Autonomous Database backup.
+	Status AutonomousDatabaseBackupStatus
+
+	// Additional information about the current status of the Autonomous Database
+	// backup, if applicable.
+	StatusReason *string
+
+	// The date and time until which the Autonomous Database backup is available for
+	// restore.
+	TimeAvailableTill *time.Time
+
+	// The date and time when the Autonomous Database backup ended.
+	TimeEnded *time.Time
+
+	// The date and time when the Autonomous Database backup started.
+	TimeStarted *time.Time
+
+	// The type of the Autonomous Database backup.
+	Type AutonomousDatabaseBackupType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseBackupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseBackupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseBackupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupArn != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn, *v.AutonomousDatabaseBackupArn)
+	}
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DbVersion != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_dbVersion, *v.DbVersion)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_displayName, *v.DisplayName)
+	}
+	if v.IsAutomatic != nil {
+		s.WriteBool(schemas.AutonomousDatabaseBackupSummary_isAutomatic, *v.IsAutomatic)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_ocid, *v.Ocid)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseBackupSummary_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.SizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseBackupSummary_sizeInTBs, *v.SizeInTBs)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_statusReason, *v.StatusReason)
+	}
+	if v.TimeAvailableTill != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackupSummary_timeAvailableTill, *v.TimeAvailableTill)
+	}
+	if v.TimeEnded != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackupSummary_timeEnded, *v.TimeEnded)
+	}
+	if v.TimeStarted != nil {
+		s.WriteTime(schemas.AutonomousDatabaseBackupSummary_timeStarted, *v.TimeStarted)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AutonomousDatabaseBackupSummary_type, string(v.Type))
+	}
+}
+func (v *AutonomousDatabaseBackupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseBackupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn:
+			v.AutonomousDatabaseBackupArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn, v.AutonomousDatabaseBackupArn)
+		case schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId:
+			v.AutonomousDatabaseBackupId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId, v.AutonomousDatabaseBackupId)
+		case schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabaseBackupSummary_dbVersion:
+			v.DbVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_dbVersion, v.DbVersion)
+		case schemas.AutonomousDatabaseBackupSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_displayName, v.DisplayName)
+		case schemas.AutonomousDatabaseBackupSummary_isAutomatic:
+			v.IsAutomatic = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseBackupSummary_isAutomatic, v.IsAutomatic)
+		case schemas.AutonomousDatabaseBackupSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_ocid, v.Ocid)
+		case schemas.AutonomousDatabaseBackupSummary_retentionPeriodInDays:
+			v.RetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseBackupSummary_retentionPeriodInDays, v.RetentionPeriodInDays)
+		case schemas.AutonomousDatabaseBackupSummary_sizeInTBs:
+			v.SizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseBackupSummary_sizeInTBs, v.SizeInTBs)
+		case schemas.AutonomousDatabaseBackupSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseBackupSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseBackupStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseBackupSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseBackupSummary_statusReason, v.StatusReason)
+		case schemas.AutonomousDatabaseBackupSummary_timeAvailableTill:
+			v.TimeAvailableTill = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackupSummary_timeAvailableTill, v.TimeAvailableTill)
+		case schemas.AutonomousDatabaseBackupSummary_timeEnded:
+			v.TimeEnded = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackupSummary_timeEnded, v.TimeEnded)
+		case schemas.AutonomousDatabaseBackupSummary_timeStarted:
+			v.TimeStarted = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseBackupSummary_timeStarted, v.TimeStarted)
+		case schemas.AutonomousDatabaseBackupSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseBackupSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutonomousDatabaseBackupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an available character set for Autonomous Databases.
+type AutonomousDatabaseCharacterSetSummary struct {
+
+	// The name of the character set.
+	CharacterSet *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseCharacterSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseCharacterSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseCharacterSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CharacterSet != nil {
+		s.WriteString(schemas.AutonomousDatabaseCharacterSetSummary_characterSet, *v.CharacterSet)
+	}
+}
+func (v *AutonomousDatabaseCharacterSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseCharacterSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseCharacterSetSummary_characterSet:
+			v.CharacterSet = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseCharacterSetSummary_characterSet, v.CharacterSet)
+		}
+		return nil
+	})
+}
+
+// The connection strings used to connect to an Autonomous Database.
+type AutonomousDatabaseConnectionStrings struct {
+
+	// The list of all connection strings that you can use to connect to the
+	// Autonomous Database.
+	AllConnectionStrings map[string]string
+
+	// The connection string for connecting to the Autonomous Database with a
+	// dedicated service.
+	Dedicated *string
+
+	// The connection string for the high-priority database service.
+	High *string
+
+	// The connection string for the low-priority database service.
+	Low *string
+
+	// The connection string for the medium-priority database service.
+	Medium *string
+
+	// The list of connection string profiles for the Autonomous Database.
+	Profiles []DatabaseConnectionStringProfile
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseConnectionStrings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseConnectionStrings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseConnectionStrings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseConnectionStringMap(s, schemas.AutonomousDatabaseConnectionStrings_allConnectionStrings, v.AllConnectionStrings)
+	if v.Dedicated != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_dedicated, *v.Dedicated)
+	}
+	if v.High != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_high, *v.High)
+	}
+	if v.Low != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_low, *v.Low)
+	}
+	if v.Medium != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_medium, *v.Medium)
+	}
+	serializeDatabaseConnectionStringProfileList(s, schemas.AutonomousDatabaseConnectionStrings_profiles, v.Profiles)
+}
+func (v *AutonomousDatabaseConnectionStrings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseConnectionStrings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseConnectionStrings_allConnectionStrings:
+			return deserializeDatabaseConnectionStringMap(d, schemas.AutonomousDatabaseConnectionStrings_allConnectionStrings, &v.AllConnectionStrings)
+		case schemas.AutonomousDatabaseConnectionStrings_dedicated:
+			v.Dedicated = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionStrings_dedicated, v.Dedicated)
+		case schemas.AutonomousDatabaseConnectionStrings_high:
+			v.High = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionStrings_high, v.High)
+		case schemas.AutonomousDatabaseConnectionStrings_low:
+			v.Low = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionStrings_low, v.Low)
+		case schemas.AutonomousDatabaseConnectionStrings_medium:
+			v.Medium = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionStrings_medium, v.Medium)
+		case schemas.AutonomousDatabaseConnectionStrings_profiles:
+			return deserializeDatabaseConnectionStringProfileList(d, schemas.AutonomousDatabaseConnectionStrings_profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
+
+// The connection URLs for accessing tools and services for an Autonomous Database.
+type AutonomousDatabaseConnectionUrls struct {
+
+	// The URL for accessing Oracle Application Express (APEX) for the Autonomous
+	// Database.
+	ApexUrl *string
+
+	// The URL for accessing Oracle Database Transforms for the Autonomous Database.
+	DatabaseTransformsUrl *string
+
+	// The URL for accessing Oracle Graph Studio for the Autonomous Database.
+	GraphStudioUrl *string
+
+	// The URL for accessing the Oracle Machine Learning notebook for the Autonomous
+	// Database.
+	MachineLearningNotebookUrl *string
+
+	// The URL for accessing Oracle Machine Learning user management for the
+	// Autonomous Database.
+	MachineLearningUserManagementUrl *string
+
+	// The URL for accessing the MongoDB API for the Autonomous Database.
+	MongoDbUrl *string
+
+	// The URL for accessing Oracle REST Data Services (ORDS) for the Autonomous
+	// Database.
+	OrdsUrl *string
+
+	// The URL for accessing Oracle Spatial Studio for the Autonomous Database.
+	SpatialStudioUrl *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlDevWebUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseConnectionUrls) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseConnectionUrls)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseConnectionUrls) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApexUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_apexUrl, *v.ApexUrl)
+	}
+	if v.DatabaseTransformsUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_databaseTransformsUrl, *v.DatabaseTransformsUrl)
+	}
+	if v.GraphStudioUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_graphStudioUrl, *v.GraphStudioUrl)
+	}
+	if v.MachineLearningNotebookUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl, *v.MachineLearningNotebookUrl)
+	}
+	if v.MachineLearningUserManagementUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl, *v.MachineLearningUserManagementUrl)
+	}
+	if v.MongoDbUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_mongoDbUrl, *v.MongoDbUrl)
+	}
+	if v.OrdsUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_ordsUrl, *v.OrdsUrl)
+	}
+	if v.SpatialStudioUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_spatialStudioUrl, *v.SpatialStudioUrl)
+	}
+	if v.SqlDevWebUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseConnectionUrls_sqlDevWebUrl, *v.SqlDevWebUrl)
+	}
+}
+func (v *AutonomousDatabaseConnectionUrls) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseConnectionUrls, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseConnectionUrls_apexUrl:
+			v.ApexUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_apexUrl, v.ApexUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_databaseTransformsUrl:
+			v.DatabaseTransformsUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_databaseTransformsUrl, v.DatabaseTransformsUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_graphStudioUrl:
+			v.GraphStudioUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_graphStudioUrl, v.GraphStudioUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl:
+			v.MachineLearningNotebookUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl, v.MachineLearningNotebookUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl:
+			v.MachineLearningUserManagementUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl, v.MachineLearningUserManagementUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_mongoDbUrl:
+			v.MongoDbUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_mongoDbUrl, v.MongoDbUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_ordsUrl:
+			v.OrdsUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_ordsUrl, v.OrdsUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_spatialStudioUrl:
+			v.SpatialStudioUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_spatialStudioUrl, v.SpatialStudioUrl)
+		case schemas.AutonomousDatabaseConnectionUrls_sqlDevWebUrl:
+			v.SqlDevWebUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseConnectionUrls_sqlDevWebUrl, v.SqlDevWebUrl)
+		}
+		return nil
+	})
+}
+
+// A summary of a peer database of an Autonomous Database.
+type AutonomousDatabasePeerSummary struct {
+
+	// The Amazon Resource Name (ARN) of the peer Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the peer Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The Oracle Cloud Identifier (OCID) of the peer Autonomous Database.
+	Ocid *string
+
+	// The Amazon Web Services Region where the peer Autonomous Database is located.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabasePeerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabasePeerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabasePeerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseArn != nil {
+		s.WriteString(schemas.AutonomousDatabasePeerSummary_autonomousDatabaseArn, *v.AutonomousDatabaseArn)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabasePeerSummary_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabasePeerSummary_ocid, *v.Ocid)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AutonomousDatabasePeerSummary_region, *v.Region)
+	}
+}
+func (v *AutonomousDatabasePeerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabasePeerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabasePeerSummary_autonomousDatabaseArn:
+			v.AutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabasePeerSummary_autonomousDatabaseArn, v.AutonomousDatabaseArn)
+		case schemas.AutonomousDatabasePeerSummary_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabasePeerSummary_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabasePeerSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabasePeerSummary_ocid, v.Ocid)
+		case schemas.AutonomousDatabasePeerSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AutonomousDatabasePeerSummary_region, v.Region)
+		}
+		return nil
+	})
+}
+
+// A summary of an Autonomous Database.
+type AutonomousDatabaseSummary struct {
+
+	// The actual amount of data storage currently in use by the Autonomous Database,
+	// in TB.
+	ActualUsedDataStorageSizeInTBs *float64
+
+	// The summary of the admin password source configuration for the Autonomous
+	// Database.
+	AdminPasswordSourceSummary *AdminPasswordSourceSummary
+
+	// The amount of storage currently allocated to the Autonomous Database, in TB.
+	AllocatedStorageSizeInTBs *float64
+
+	// The list of IP addresses that are allowed to access the Autonomous Database.
+	AllowlistedIps []string
+
+	// The Oracle Application Express (APEX) details for the Autonomous Database.
+	ApexDetails *AutonomousDatabaseApex
+
+	// The frequency, in seconds, at which the refreshable clone Autonomous Database
+	// is automatically refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source
+	// Autonomous Database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The maintenance schedule type for the Autonomous Database.
+	AutonomousMaintenanceScheduleType AutonomousMaintenanceScheduleType
+
+	// The Availability Zone where the Autonomous Database is located.
+	AvailabilityZone *string
+
+	// The unique identifier of the Availability Zone where the Autonomous Database is
+	// located.
+	AvailabilityZoneId *string
+
+	// The list of Oracle Database software versions to which the Autonomous Database
+	// can be upgraded.
+	AvailableUpgradeVersions []string
+
+	// The retention period, in days, for automatic backups of the Autonomous Database.
+	BackupRetentionPeriodInDays *int32
+
+	// The maximum number of compute resources that you can allocate to the Autonomous
+	// Database under the bring-your-own-license (BYOL) model.
+	ByolComputeCountLimit *int32
+
+	// The character set of the Autonomous Database.
+	CharacterSet *string
+
+	// The list of tablespace identifiers to clone for the Autonomous Database.
+	CloneTableSpaceList []int32
+
+	// The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs),
+	// assigned to the Autonomous Database.
+	ComputeCount *float32
+
+	// The compute model of the Autonomous Database, either ECPU or OCPU.
+	ComputeModel ComputeModel
+
+	// The connection string details for the Autonomous Database.
+	ConnectionStringDetails *AutonomousDatabaseConnectionStrings
+
+	// The connection URLs for accessing tools and services for the Autonomous
+	// Database.
+	ConnectionUrls *AutonomousDatabaseConnectionUrls
+
+	// The number of CPU cores allocated to the Autonomous Database.
+	CpuCoreCount *int32
+
+	// The date and time when the Autonomous Database was created.
+	CreatedAt *time.Time
+
+	// The list of customer contacts that receive operational notifications from
+	// Oracle for the Autonomous Database.
+	CustomerContacts []CustomerContact
+
+	// The status of the Oracle Data Safe registration for the Autonomous Database.
+	DataSafeStatus DataSafeStatus
+
+	// The size, in gigabytes (GB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInGBs *int32
+
+	// The size, in terabytes (TB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInTBs *float64
+
+	// The Oracle Database edition of the Autonomous Database.
+	DatabaseEdition DatabaseEdition
+
+	// The status of Oracle Database Management for the Autonomous Database.
+	DatabaseManagementStatus DatabaseManagementStatus
+
+	// The type of the Autonomous Database, either a regular database or a clone.
+	DatabaseType DatabaseType
+
+	// The name of the Autonomous Database.
+	DbName *string
+
+	// The list of database management tools enabled for the Autonomous Database.
+	DbToolsDetails []DatabaseTool
+
+	// The Oracle Database software version of the Autonomous Database.
+	DbVersion *string
+
+	// The intended use of the Autonomous Database, such as transaction processing,
+	// data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// The user-friendly name of the Autonomous Database.
+	DisplayName *string
+
+	// The encryption configuration for the Autonomous Database.
+	EncryptionSummary *EncryptionSummary
+
+	// The amount of time, in seconds, that the data in the Autonomous Database is
+	// behind the data in the primary database.
+	FailedDataRecoveryInSeconds *int32
+
+	// The size of the in-memory area of the Autonomous Database, in GB.
+	InMemoryAreaInGBs *int32
+
+	// Indicates whether automatic scaling of the compute resources is enabled for the
+	// Autonomous Database.
+	IsAutoScalingEnabled *bool
+
+	// Indicates whether automatic scaling of the storage is enabled for the
+	// Autonomous Database.
+	IsAutoScalingForStorageEnabled *bool
+
+	// Indicates whether the backup retention period of the Autonomous Database is
+	// locked.
+	IsBackupRetentionLocked *bool
+
+	// Indicates whether local Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsLocalDataGuardEnabled *bool
+
+	// Indicates whether mutual TLS (mTLS) authentication is required to connect to
+	// the Autonomous Database.
+	IsMtlsConnectionRequired *bool
+
+	// Indicates whether reconnecting the refreshable clone to its source Autonomous
+	// Database is enabled.
+	IsReconnectCloneEnabled *bool
+
+	// Indicates whether the Autonomous Database is a refreshable clone.
+	IsRefreshableClone *bool
+
+	// Indicates whether remote Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsRemoteDataGuardEnabled *bool
+
+	// The Oracle license model that applies to the Autonomous Database.
+	LicenseModel LicenseModel
+
+	// The maximum data loss limit, in seconds, for automatic failover to the local
+	// Oracle Data Guard standby database.
+	LocalAdgAutoFailoverMaxDataLossLimit *int32
+
+	// The type of local disaster recovery configured for the Autonomous Database.
+	LocalDisasterRecoveryType DisasterRecoveryType
+
+	// The details of the local standby Autonomous Database in an Oracle Data Guard
+	// configuration.
+	LocalStandbyDb *DatabaseStandbySummary
+
+	// The long-term backup schedule for the Autonomous Database.
+	LongTermBackupSchedule *LongTermBackupSchedule
+
+	// The component on the Autonomous Database that the current maintenance is being
+	// applied to.
+	MaintenanceTargetComponent *string
+
+	// The amount of memory allocated per Oracle Compute Unit, in GB.
+	MemoryPerOracleComputeUnitInGBs *int32
+
+	// The national character set of the Autonomous Database.
+	NcharacterSet *string
+
+	// The Oracle Net Services architecture of the Autonomous Database, either
+	// dedicated or shared.
+	NetServicesArchitecture NetServicesArchitecture
+
+	// The date and time of the next scheduled long-term backup of the Autonomous
+	// Database.
+	NextLongTermBackupTimeStamp *time.Time
+
+	// The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated
+	// with the Autonomous Database.
+	OciResourceAnchorName *string
+
+	// The URL for accessing the OCI console page for the Autonomous Database.
+	OciUrl *string
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with the
+	// Autonomous Database.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network associated with the Autonomous
+	// Database.
+	OdbNetworkId *string
+
+	// The mode in which the Autonomous Database is open, either read-only or
+	// read/write.
+	OpenMode OpenMode
+
+	// The status of Oracle Operations Insights for the Autonomous Database.
+	OperationsInsightsStatus OperationsInsightsStatus
+
+	// The list of unique identifiers of the peer Autonomous Databases.
+	PeerDbIds []string
+
+	// The progress of the current operation on the Autonomous Database, as a
+	// percentage.
+	PercentProgress *float32
+
+	// The permission level of the Autonomous Database.
+	PermissionLevel PermissionLevel
+
+	// The private endpoint for the Autonomous Database.
+	PrivateEndpoint *string
+
+	// The private endpoint IP address for the Autonomous Database.
+	PrivateEndpointIp *string
+
+	// The private endpoint label for the Autonomous Database.
+	PrivateEndpointLabel *string
+
+	// The list of CPU core counts that you can provision for the Autonomous Database.
+	ProvisionableCpus []int32
+
+	// The refresh mode of the refreshable clone Autonomous Database.
+	RefreshableMode RefreshableMode
+
+	// The refresh status of the refreshable clone Autonomous Database.
+	RefreshableStatus RefreshableStatus
+
+	// The configuration of the remote disaster recovery for the Autonomous Database.
+	RemoteDisasterRecoveryConfiguration *DisasterRecoveryConfiguration
+
+	// The unique identifier of the resource pool leader Autonomous Database.
+	ResourcePoolLeaderId *string
+
+	// The configuration of the resource pool for the Autonomous Database.
+	ResourcePoolSummary *ResourcePoolSummary
+
+	// The Oracle Data Guard role of the Autonomous Database.
+	Role DataGuardRole
+
+	// The list of scheduled start and stop times for the Autonomous Database.
+	ScheduledOperations []ScheduledOperationDetails
+
+	// The URL for accessing the Oracle service console for the Autonomous Database.
+	ServiceConsoleUrl *string
+
+	// The unique identifier of the source from which the Autonomous Database was
+	// created.
+	SourceId *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlWebDeveloperUrl *string
+
+	// The list of IP addresses that are allowed to access the standby Autonomous
+	// Database.
+	StandbyAllowlistedIps []string
+
+	// The source of the allowlisted IP addresses for the standby Autonomous Database.
+	StandbyAllowlistedIpsSource StandbyAllowlistedIpsSource
+
+	// The details of the standby Autonomous Database in a cross-Region Oracle Data
+	// Guard configuration.
+	StandbyDb *DatabaseStandbySummary
+
+	// The current status of the Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the Autonomous Database, if
+	// applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the Autonomous Database
+	// last changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the inactive Always Free Autonomous Database is
+	// scheduled to be automatically deleted.
+	TimeDeletionOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the disaster recovery role of the Autonomous Database
+	// last changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when local Oracle Data Guard was enabled for the Autonomous
+	// Database.
+	TimeLocalDataGuardEnabled *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database ends.
+	TimeMaintenanceEnd *time.Time
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// Autonomous Database starts.
+	TimeOfAutoRefreshStart *time.Time
+
+	// The date and time of the last backup of the Autonomous Database.
+	TimeOfLastBackup *time.Time
+
+	// The date and time of the last failover operation for the Autonomous Database.
+	TimeOfLastFailover *time.Time
+
+	// The date and time of the last refresh of the refreshable clone Autonomous
+	// Database.
+	TimeOfLastRefresh *time.Time
+
+	// The date and time as of which the data in the refreshable clone Autonomous
+	// Database is current.
+	TimeOfLastRefreshPoint *time.Time
+
+	// The date and time of the last switchover operation for the Autonomous Database.
+	TimeOfLastSwitchover *time.Time
+
+	// The date and time of the next scheduled refresh of the refreshable clone
+	// Autonomous Database.
+	TimeOfNextRefresh *time.Time
+
+	// The date and time when the Always Free Autonomous Database is scheduled to be
+	// stopped because of inactivity.
+	TimeReclamationOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the Autonomous Database was restored after deletion.
+	TimeUndeleted *time.Time
+
+	// The date and time until which reconnecting the refreshable clone to its source
+	// Autonomous Database is allowed.
+	TimeUntilReconnectCloneEnabled *time.Time
+
+	// The total amount of backup storage used by the Autonomous Database, in GB.
+	TotalBackupStorageSizeInGBs *float64
+
+	// The amount of data storage currently in use by the Autonomous Database, in GB.
+	UsedDataStorageSizeInGBs *int32
+
+	// The amount of data storage currently in use by the Autonomous Database, in TB.
+	UsedDataStorageSizeInTBs *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualUsedDataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs, *v.ActualUsedDataStorageSizeInTBs)
+	}
+	if v.AdminPasswordSourceSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_adminPasswordSourceSummary)
+		v.AdminPasswordSourceSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AllocatedStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseSummary_allocatedStorageSizeInTBs, *v.AllocatedStorageSizeInTBs)
+	}
+	serializeStringList(s, schemas.AutonomousDatabaseSummary_allowlistedIps, v.AllowlistedIps)
+	if v.ApexDetails != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_apexDetails)
+		v.ApexDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRefreshFrequencyInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds, *v.AutoRefreshFrequencyInSeconds)
+	}
+	if v.AutoRefreshPointLagInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_autoRefreshPointLagInSeconds, *v.AutoRefreshPointLagInSeconds)
+	}
+	if v.AutonomousDatabaseArn != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_autonomousDatabaseArn, *v.AutonomousDatabaseArn)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.AutonomousMaintenanceScheduleType != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_autonomousMaintenanceScheduleType, string(v.AutonomousMaintenanceScheduleType))
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	serializeStringList(s, schemas.AutonomousDatabaseSummary_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	if v.BackupRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_backupRetentionPeriodInDays, *v.BackupRetentionPeriodInDays)
+	}
+	if v.ByolComputeCountLimit != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_byolComputeCountLimit, *v.ByolComputeCountLimit)
+	}
+	if v.CharacterSet != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_characterSet, *v.CharacterSet)
+	}
+	serializeIntegerList(s, schemas.AutonomousDatabaseSummary_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.ComputeCount != nil {
+		s.WriteFloat32(schemas.AutonomousDatabaseSummary_computeCount, *v.ComputeCount)
+	}
+	if v.ComputeModel != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_computeModel, string(v.ComputeModel))
+	}
+	if v.ConnectionStringDetails != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_connectionStringDetails)
+		v.ConnectionStringDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionUrls != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_connectionUrls)
+		v.ConnectionUrls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CpuCoreCount != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_cpuCoreCount, *v.CpuCoreCount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_createdAt, *v.CreatedAt)
+	}
+	serializeCustomerContacts(s, schemas.AutonomousDatabaseSummary_customerContacts, v.CustomerContacts)
+	if v.DataSafeStatus != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_dataSafeStatus, string(v.DataSafeStatus))
+	}
+	if v.DataStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_dataStorageSizeInGBs, *v.DataStorageSizeInGBs)
+	}
+	if v.DataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseSummary_dataStorageSizeInTBs, *v.DataStorageSizeInTBs)
+	}
+	if v.DatabaseEdition != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_databaseEdition, string(v.DatabaseEdition))
+	}
+	if v.DatabaseManagementStatus != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_databaseManagementStatus, string(v.DatabaseManagementStatus))
+	}
+	if v.DatabaseType != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_databaseType, string(v.DatabaseType))
+	}
+	if v.DbName != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_dbName, *v.DbName)
+	}
+	serializeDatabaseToolList(s, schemas.AutonomousDatabaseSummary_dbToolsDetails, v.DbToolsDetails)
+	if v.DbVersion != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_dbVersion, *v.DbVersion)
+	}
+	if v.DbWorkload != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_dbWorkload, string(v.DbWorkload))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_displayName, *v.DisplayName)
+	}
+	if v.EncryptionSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_encryptionSummary)
+		v.EncryptionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedDataRecoveryInSeconds != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_failedDataRecoveryInSeconds, *v.FailedDataRecoveryInSeconds)
+	}
+	if v.InMemoryAreaInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_inMemoryAreaInGBs, *v.InMemoryAreaInGBs)
+	}
+	if v.IsAutoScalingEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isAutoScalingEnabled, *v.IsAutoScalingEnabled)
+	}
+	if v.IsAutoScalingForStorageEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isAutoScalingForStorageEnabled, *v.IsAutoScalingForStorageEnabled)
+	}
+	if v.IsBackupRetentionLocked != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isBackupRetentionLocked, *v.IsBackupRetentionLocked)
+	}
+	if v.IsLocalDataGuardEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isLocalDataGuardEnabled, *v.IsLocalDataGuardEnabled)
+	}
+	if v.IsMtlsConnectionRequired != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isMtlsConnectionRequired, *v.IsMtlsConnectionRequired)
+	}
+	if v.IsReconnectCloneEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isReconnectCloneEnabled, *v.IsReconnectCloneEnabled)
+	}
+	if v.IsRefreshableClone != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isRefreshableClone, *v.IsRefreshableClone)
+	}
+	if v.IsRemoteDataGuardEnabled != nil {
+		s.WriteBool(schemas.AutonomousDatabaseSummary_isRemoteDataGuardEnabled, *v.IsRemoteDataGuardEnabled)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_licenseModel, string(v.LicenseModel))
+	}
+	if v.LocalAdgAutoFailoverMaxDataLossLimit != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit, *v.LocalAdgAutoFailoverMaxDataLossLimit)
+	}
+	if v.LocalDisasterRecoveryType != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_localDisasterRecoveryType, string(v.LocalDisasterRecoveryType))
+	}
+	if v.LocalStandbyDb != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_localStandbyDb)
+		v.LocalStandbyDb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LongTermBackupSchedule != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_longTermBackupSchedule)
+		v.LongTermBackupSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceTargetComponent != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_maintenanceTargetComponent, *v.MaintenanceTargetComponent)
+	}
+	if v.MemoryPerOracleComputeUnitInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs, *v.MemoryPerOracleComputeUnitInGBs)
+	}
+	if v.NcharacterSet != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_ncharacterSet, *v.NcharacterSet)
+	}
+	if v.NetServicesArchitecture != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_netServicesArchitecture, string(v.NetServicesArchitecture))
+	}
+	if v.NextLongTermBackupTimeStamp != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_nextLongTermBackupTimeStamp, *v.NextLongTermBackupTimeStamp)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_ocid, *v.Ocid)
+	}
+	if v.OdbNetworkArn != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_odbNetworkArn, *v.OdbNetworkArn)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.OpenMode != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_openMode, string(v.OpenMode))
+	}
+	if v.OperationsInsightsStatus != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_operationsInsightsStatus, string(v.OperationsInsightsStatus))
+	}
+	serializeStringList(s, schemas.AutonomousDatabaseSummary_peerDbIds, v.PeerDbIds)
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.AutonomousDatabaseSummary_percentProgress, *v.PercentProgress)
+	}
+	if v.PermissionLevel != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_permissionLevel, string(v.PermissionLevel))
+	}
+	if v.PrivateEndpoint != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_privateEndpoint, *v.PrivateEndpoint)
+	}
+	if v.PrivateEndpointIp != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_privateEndpointIp, *v.PrivateEndpointIp)
+	}
+	if v.PrivateEndpointLabel != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_privateEndpointLabel, *v.PrivateEndpointLabel)
+	}
+	serializeIntegerList(s, schemas.AutonomousDatabaseSummary_provisionableCpus, v.ProvisionableCpus)
+	if v.RefreshableMode != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_refreshableMode, string(v.RefreshableMode))
+	}
+	if v.RefreshableStatus != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_refreshableStatus, string(v.RefreshableStatus))
+	}
+	if v.RemoteDisasterRecoveryConfiguration != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration)
+		v.RemoteDisasterRecoveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcePoolLeaderId != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_resourcePoolLeaderId, *v.ResourcePoolLeaderId)
+	}
+	if v.ResourcePoolSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_resourcePoolSummary)
+		v.ResourcePoolSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_role, string(v.Role))
+	}
+	serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabaseSummary_scheduledOperations, v.ScheduledOperations)
+	if v.ServiceConsoleUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_serviceConsoleUrl, *v.ServiceConsoleUrl)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_sourceId, *v.SourceId)
+	}
+	if v.SqlWebDeveloperUrl != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_sqlWebDeveloperUrl, *v.SqlWebDeveloperUrl)
+	}
+	serializeStringList(s, schemas.AutonomousDatabaseSummary_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.StandbyAllowlistedIpsSource != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
+	}
+	if v.StandbyDb != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseSummary_standbyDb)
+		v.StandbyDb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutonomousDatabaseSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AutonomousDatabaseSummary_statusReason, *v.StatusReason)
+	}
+	if v.TimeDataGuardRoleChanged != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeDataGuardRoleChanged, *v.TimeDataGuardRoleChanged)
+	}
+	if v.TimeDeletionOfFreeAutonomousDatabase != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase, *v.TimeDeletionOfFreeAutonomousDatabase)
+	}
+	if v.TimeDisasterRecoveryRoleChanged != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged, *v.TimeDisasterRecoveryRoleChanged)
+	}
+	if v.TimeLocalDataGuardEnabled != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeLocalDataGuardEnabled, *v.TimeLocalDataGuardEnabled)
+	}
+	if v.TimeMaintenanceBegin != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeMaintenanceBegin, *v.TimeMaintenanceBegin)
+	}
+	if v.TimeMaintenanceEnd != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeMaintenanceEnd, *v.TimeMaintenanceEnd)
+	}
+	if v.TimeOfAutoRefreshStart != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfAutoRefreshStart, *v.TimeOfAutoRefreshStart)
+	}
+	if v.TimeOfLastBackup != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfLastBackup, *v.TimeOfLastBackup)
+	}
+	if v.TimeOfLastFailover != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfLastFailover, *v.TimeOfLastFailover)
+	}
+	if v.TimeOfLastRefresh != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfLastRefresh, *v.TimeOfLastRefresh)
+	}
+	if v.TimeOfLastRefreshPoint != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfLastRefreshPoint, *v.TimeOfLastRefreshPoint)
+	}
+	if v.TimeOfLastSwitchover != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfLastSwitchover, *v.TimeOfLastSwitchover)
+	}
+	if v.TimeOfNextRefresh != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeOfNextRefresh, *v.TimeOfNextRefresh)
+	}
+	if v.TimeReclamationOfFreeAutonomousDatabase != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase, *v.TimeReclamationOfFreeAutonomousDatabase)
+	}
+	if v.TimeUndeleted != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeUndeleted, *v.TimeUndeleted)
+	}
+	if v.TimeUntilReconnectCloneEnabled != nil {
+		s.WriteTime(schemas.AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled, *v.TimeUntilReconnectCloneEnabled)
+	}
+	if v.TotalBackupStorageSizeInGBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseSummary_totalBackupStorageSizeInGBs, *v.TotalBackupStorageSizeInGBs)
+	}
+	if v.UsedDataStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.AutonomousDatabaseSummary_usedDataStorageSizeInGBs, *v.UsedDataStorageSizeInGBs)
+	}
+	if v.UsedDataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.AutonomousDatabaseSummary_usedDataStorageSizeInTBs, *v.UsedDataStorageSizeInTBs)
+	}
+}
+func (v *AutonomousDatabaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs:
+			v.ActualUsedDataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs, v.ActualUsedDataStorageSizeInTBs)
+		case schemas.AutonomousDatabaseSummary_adminPasswordSourceSummary:
+			v.AdminPasswordSourceSummary = &AdminPasswordSourceSummary{}
+			return v.AdminPasswordSourceSummary.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_allocatedStorageSizeInTBs:
+			v.AllocatedStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseSummary_allocatedStorageSizeInTBs, v.AllocatedStorageSizeInTBs)
+		case schemas.AutonomousDatabaseSummary_allowlistedIps:
+			return deserializeStringList(d, schemas.AutonomousDatabaseSummary_allowlistedIps, &v.AllowlistedIps)
+		case schemas.AutonomousDatabaseSummary_apexDetails:
+			v.ApexDetails = &AutonomousDatabaseApex{}
+			return v.ApexDetails.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds:
+			v.AutoRefreshFrequencyInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds, v.AutoRefreshFrequencyInSeconds)
+		case schemas.AutonomousDatabaseSummary_autoRefreshPointLagInSeconds:
+			v.AutoRefreshPointLagInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_autoRefreshPointLagInSeconds, v.AutoRefreshPointLagInSeconds)
+		case schemas.AutonomousDatabaseSummary_autonomousDatabaseArn:
+			v.AutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_autonomousDatabaseArn, v.AutonomousDatabaseArn)
+		case schemas.AutonomousDatabaseSummary_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabaseSummary_autonomousMaintenanceScheduleType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_autonomousMaintenanceScheduleType, &ev); err != nil {
+				return err
+			}
+			v.AutonomousMaintenanceScheduleType = AutonomousMaintenanceScheduleType(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_availabilityZone, v.AvailabilityZone)
+		case schemas.AutonomousDatabaseSummary_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.AutonomousDatabaseSummary_availableUpgradeVersions:
+			return deserializeStringList(d, schemas.AutonomousDatabaseSummary_availableUpgradeVersions, &v.AvailableUpgradeVersions)
+		case schemas.AutonomousDatabaseSummary_backupRetentionPeriodInDays:
+			v.BackupRetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_backupRetentionPeriodInDays, v.BackupRetentionPeriodInDays)
+		case schemas.AutonomousDatabaseSummary_byolComputeCountLimit:
+			v.ByolComputeCountLimit = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_byolComputeCountLimit, v.ByolComputeCountLimit)
+		case schemas.AutonomousDatabaseSummary_characterSet:
+			v.CharacterSet = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_characterSet, v.CharacterSet)
+		case schemas.AutonomousDatabaseSummary_cloneTableSpaceList:
+			return deserializeIntegerList(d, schemas.AutonomousDatabaseSummary_cloneTableSpaceList, &v.CloneTableSpaceList)
+		case schemas.AutonomousDatabaseSummary_computeCount:
+			v.ComputeCount = new(float32)
+			return d.ReadFloat32(schemas.AutonomousDatabaseSummary_computeCount, v.ComputeCount)
+		case schemas.AutonomousDatabaseSummary_computeModel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_computeModel, &ev); err != nil {
+				return err
+			}
+			v.ComputeModel = ComputeModel(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_connectionStringDetails:
+			v.ConnectionStringDetails = &AutonomousDatabaseConnectionStrings{}
+			return v.ConnectionStringDetails.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_connectionUrls:
+			v.ConnectionUrls = &AutonomousDatabaseConnectionUrls{}
+			return v.ConnectionUrls.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_cpuCoreCount:
+			v.CpuCoreCount = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_cpuCoreCount, v.CpuCoreCount)
+		case schemas.AutonomousDatabaseSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_createdAt, v.CreatedAt)
+		case schemas.AutonomousDatabaseSummary_customerContacts:
+			return deserializeCustomerContacts(d, schemas.AutonomousDatabaseSummary_customerContacts, &v.CustomerContacts)
+		case schemas.AutonomousDatabaseSummary_dataSafeStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_dataSafeStatus, &ev); err != nil {
+				return err
+			}
+			v.DataSafeStatus = DataSafeStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_dataStorageSizeInGBs:
+			v.DataStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_dataStorageSizeInGBs, v.DataStorageSizeInGBs)
+		case schemas.AutonomousDatabaseSummary_dataStorageSizeInTBs:
+			v.DataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseSummary_dataStorageSizeInTBs, v.DataStorageSizeInTBs)
+		case schemas.AutonomousDatabaseSummary_databaseEdition:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_databaseEdition, &ev); err != nil {
+				return err
+			}
+			v.DatabaseEdition = DatabaseEdition(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_databaseManagementStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_databaseManagementStatus, &ev); err != nil {
+				return err
+			}
+			v.DatabaseManagementStatus = DatabaseManagementStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_databaseType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_databaseType, &ev); err != nil {
+				return err
+			}
+			v.DatabaseType = DatabaseType(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_dbName:
+			v.DbName = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_dbName, v.DbName)
+		case schemas.AutonomousDatabaseSummary_dbToolsDetails:
+			return deserializeDatabaseToolList(d, schemas.AutonomousDatabaseSummary_dbToolsDetails, &v.DbToolsDetails)
+		case schemas.AutonomousDatabaseSummary_dbVersion:
+			v.DbVersion = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_dbVersion, v.DbVersion)
+		case schemas.AutonomousDatabaseSummary_dbWorkload:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_dbWorkload, &ev); err != nil {
+				return err
+			}
+			v.DbWorkload = DbWorkload(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_displayName, v.DisplayName)
+		case schemas.AutonomousDatabaseSummary_encryptionSummary:
+			v.EncryptionSummary = &EncryptionSummary{}
+			return v.EncryptionSummary.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_failedDataRecoveryInSeconds:
+			v.FailedDataRecoveryInSeconds = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_failedDataRecoveryInSeconds, v.FailedDataRecoveryInSeconds)
+		case schemas.AutonomousDatabaseSummary_inMemoryAreaInGBs:
+			v.InMemoryAreaInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_inMemoryAreaInGBs, v.InMemoryAreaInGBs)
+		case schemas.AutonomousDatabaseSummary_isAutoScalingEnabled:
+			v.IsAutoScalingEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isAutoScalingEnabled, v.IsAutoScalingEnabled)
+		case schemas.AutonomousDatabaseSummary_isAutoScalingForStorageEnabled:
+			v.IsAutoScalingForStorageEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isAutoScalingForStorageEnabled, v.IsAutoScalingForStorageEnabled)
+		case schemas.AutonomousDatabaseSummary_isBackupRetentionLocked:
+			v.IsBackupRetentionLocked = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isBackupRetentionLocked, v.IsBackupRetentionLocked)
+		case schemas.AutonomousDatabaseSummary_isLocalDataGuardEnabled:
+			v.IsLocalDataGuardEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isLocalDataGuardEnabled, v.IsLocalDataGuardEnabled)
+		case schemas.AutonomousDatabaseSummary_isMtlsConnectionRequired:
+			v.IsMtlsConnectionRequired = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isMtlsConnectionRequired, v.IsMtlsConnectionRequired)
+		case schemas.AutonomousDatabaseSummary_isReconnectCloneEnabled:
+			v.IsReconnectCloneEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isReconnectCloneEnabled, v.IsReconnectCloneEnabled)
+		case schemas.AutonomousDatabaseSummary_isRefreshableClone:
+			v.IsRefreshableClone = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isRefreshableClone, v.IsRefreshableClone)
+		case schemas.AutonomousDatabaseSummary_isRemoteDataGuardEnabled:
+			v.IsRemoteDataGuardEnabled = new(bool)
+			return d.ReadBool(schemas.AutonomousDatabaseSummary_isRemoteDataGuardEnabled, v.IsRemoteDataGuardEnabled)
+		case schemas.AutonomousDatabaseSummary_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit:
+			v.LocalAdgAutoFailoverMaxDataLossLimit = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit, v.LocalAdgAutoFailoverMaxDataLossLimit)
+		case schemas.AutonomousDatabaseSummary_localDisasterRecoveryType:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_localDisasterRecoveryType, &ev); err != nil {
+				return err
+			}
+			v.LocalDisasterRecoveryType = DisasterRecoveryType(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_localStandbyDb:
+			v.LocalStandbyDb = &DatabaseStandbySummary{}
+			return v.LocalStandbyDb.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_longTermBackupSchedule:
+			v.LongTermBackupSchedule = &LongTermBackupSchedule{}
+			return v.LongTermBackupSchedule.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_maintenanceTargetComponent:
+			v.MaintenanceTargetComponent = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_maintenanceTargetComponent, v.MaintenanceTargetComponent)
+		case schemas.AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs:
+			v.MemoryPerOracleComputeUnitInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs, v.MemoryPerOracleComputeUnitInGBs)
+		case schemas.AutonomousDatabaseSummary_ncharacterSet:
+			v.NcharacterSet = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_ncharacterSet, v.NcharacterSet)
+		case schemas.AutonomousDatabaseSummary_netServicesArchitecture:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_netServicesArchitecture, &ev); err != nil {
+				return err
+			}
+			v.NetServicesArchitecture = NetServicesArchitecture(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_nextLongTermBackupTimeStamp:
+			v.NextLongTermBackupTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_nextLongTermBackupTimeStamp, v.NextLongTermBackupTimeStamp)
+		case schemas.AutonomousDatabaseSummary_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.AutonomousDatabaseSummary_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_ociUrl, v.OciUrl)
+		case schemas.AutonomousDatabaseSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_ocid, v.Ocid)
+		case schemas.AutonomousDatabaseSummary_odbNetworkArn:
+			v.OdbNetworkArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_odbNetworkArn, v.OdbNetworkArn)
+		case schemas.AutonomousDatabaseSummary_odbNetworkId:
+			v.OdbNetworkId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_odbNetworkId, v.OdbNetworkId)
+		case schemas.AutonomousDatabaseSummary_openMode:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_openMode, &ev); err != nil {
+				return err
+			}
+			v.OpenMode = OpenMode(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_operationsInsightsStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_operationsInsightsStatus, &ev); err != nil {
+				return err
+			}
+			v.OperationsInsightsStatus = OperationsInsightsStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_peerDbIds:
+			return deserializeStringList(d, schemas.AutonomousDatabaseSummary_peerDbIds, &v.PeerDbIds)
+		case schemas.AutonomousDatabaseSummary_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.AutonomousDatabaseSummary_percentProgress, v.PercentProgress)
+		case schemas.AutonomousDatabaseSummary_permissionLevel:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_permissionLevel, &ev); err != nil {
+				return err
+			}
+			v.PermissionLevel = PermissionLevel(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_privateEndpoint:
+			v.PrivateEndpoint = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_privateEndpoint, v.PrivateEndpoint)
+		case schemas.AutonomousDatabaseSummary_privateEndpointIp:
+			v.PrivateEndpointIp = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_privateEndpointIp, v.PrivateEndpointIp)
+		case schemas.AutonomousDatabaseSummary_privateEndpointLabel:
+			v.PrivateEndpointLabel = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_privateEndpointLabel, v.PrivateEndpointLabel)
+		case schemas.AutonomousDatabaseSummary_provisionableCpus:
+			return deserializeIntegerList(d, schemas.AutonomousDatabaseSummary_provisionableCpus, &v.ProvisionableCpus)
+		case schemas.AutonomousDatabaseSummary_refreshableMode:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_refreshableMode, &ev); err != nil {
+				return err
+			}
+			v.RefreshableMode = RefreshableMode(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_refreshableStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_refreshableStatus, &ev); err != nil {
+				return err
+			}
+			v.RefreshableStatus = RefreshableStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration:
+			v.RemoteDisasterRecoveryConfiguration = &DisasterRecoveryConfiguration{}
+			return v.RemoteDisasterRecoveryConfiguration.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_resourcePoolLeaderId:
+			v.ResourcePoolLeaderId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_resourcePoolLeaderId, v.ResourcePoolLeaderId)
+		case schemas.AutonomousDatabaseSummary_resourcePoolSummary:
+			v.ResourcePoolSummary = &ResourcePoolSummary{}
+			return v.ResourcePoolSummary.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_role:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_role, &ev); err != nil {
+				return err
+			}
+			v.Role = DataGuardRole(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_scheduledOperations:
+			return deserializeScheduledOperationDetailsList(d, schemas.AutonomousDatabaseSummary_scheduledOperations, &v.ScheduledOperations)
+		case schemas.AutonomousDatabaseSummary_serviceConsoleUrl:
+			v.ServiceConsoleUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_serviceConsoleUrl, v.ServiceConsoleUrl)
+		case schemas.AutonomousDatabaseSummary_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_sourceId, v.SourceId)
+		case schemas.AutonomousDatabaseSummary_sqlWebDeveloperUrl:
+			v.SqlWebDeveloperUrl = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_sqlWebDeveloperUrl, v.SqlWebDeveloperUrl)
+		case schemas.AutonomousDatabaseSummary_standbyAllowlistedIps:
+			return deserializeStringList(d, schemas.AutonomousDatabaseSummary_standbyAllowlistedIps, &v.StandbyAllowlistedIps)
+		case schemas.AutonomousDatabaseSummary_standbyAllowlistedIpsSource:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_standbyAllowlistedIpsSource, &ev); err != nil {
+				return err
+			}
+			v.StandbyAllowlistedIpsSource = StandbyAllowlistedIpsSource(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_standbyDb:
+			v.StandbyDb = &DatabaseStandbySummary{}
+			return v.StandbyDb.Deserialize(d)
+		case schemas.AutonomousDatabaseSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseSummary_statusReason, v.StatusReason)
+		case schemas.AutonomousDatabaseSummary_timeDataGuardRoleChanged:
+			v.TimeDataGuardRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeDataGuardRoleChanged, v.TimeDataGuardRoleChanged)
+		case schemas.AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase:
+			v.TimeDeletionOfFreeAutonomousDatabase = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase, v.TimeDeletionOfFreeAutonomousDatabase)
+		case schemas.AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged:
+			v.TimeDisasterRecoveryRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged, v.TimeDisasterRecoveryRoleChanged)
+		case schemas.AutonomousDatabaseSummary_timeLocalDataGuardEnabled:
+			v.TimeLocalDataGuardEnabled = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeLocalDataGuardEnabled, v.TimeLocalDataGuardEnabled)
+		case schemas.AutonomousDatabaseSummary_timeMaintenanceBegin:
+			v.TimeMaintenanceBegin = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeMaintenanceBegin, v.TimeMaintenanceBegin)
+		case schemas.AutonomousDatabaseSummary_timeMaintenanceEnd:
+			v.TimeMaintenanceEnd = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeMaintenanceEnd, v.TimeMaintenanceEnd)
+		case schemas.AutonomousDatabaseSummary_timeOfAutoRefreshStart:
+			v.TimeOfAutoRefreshStart = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfAutoRefreshStart, v.TimeOfAutoRefreshStart)
+		case schemas.AutonomousDatabaseSummary_timeOfLastBackup:
+			v.TimeOfLastBackup = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfLastBackup, v.TimeOfLastBackup)
+		case schemas.AutonomousDatabaseSummary_timeOfLastFailover:
+			v.TimeOfLastFailover = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfLastFailover, v.TimeOfLastFailover)
+		case schemas.AutonomousDatabaseSummary_timeOfLastRefresh:
+			v.TimeOfLastRefresh = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfLastRefresh, v.TimeOfLastRefresh)
+		case schemas.AutonomousDatabaseSummary_timeOfLastRefreshPoint:
+			v.TimeOfLastRefreshPoint = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfLastRefreshPoint, v.TimeOfLastRefreshPoint)
+		case schemas.AutonomousDatabaseSummary_timeOfLastSwitchover:
+			v.TimeOfLastSwitchover = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfLastSwitchover, v.TimeOfLastSwitchover)
+		case schemas.AutonomousDatabaseSummary_timeOfNextRefresh:
+			v.TimeOfNextRefresh = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeOfNextRefresh, v.TimeOfNextRefresh)
+		case schemas.AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase:
+			v.TimeReclamationOfFreeAutonomousDatabase = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase, v.TimeReclamationOfFreeAutonomousDatabase)
+		case schemas.AutonomousDatabaseSummary_timeUndeleted:
+			v.TimeUndeleted = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeUndeleted, v.TimeUndeleted)
+		case schemas.AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled:
+			v.TimeUntilReconnectCloneEnabled = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled, v.TimeUntilReconnectCloneEnabled)
+		case schemas.AutonomousDatabaseSummary_totalBackupStorageSizeInGBs:
+			v.TotalBackupStorageSizeInGBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseSummary_totalBackupStorageSizeInGBs, v.TotalBackupStorageSizeInGBs)
+		case schemas.AutonomousDatabaseSummary_usedDataStorageSizeInGBs:
+			v.UsedDataStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.AutonomousDatabaseSummary_usedDataStorageSizeInGBs, v.UsedDataStorageSizeInGBs)
+		case schemas.AutonomousDatabaseSummary_usedDataStorageSizeInTBs:
+			v.UsedDataStorageSizeInTBs = new(float64)
+			return d.ReadFloat64(schemas.AutonomousDatabaseSummary_usedDataStorageSizeInTBs, v.UsedDataStorageSizeInTBs)
+		}
+		return nil
+	})
+}
+
+// A summary of an available Oracle Database software version for Autonomous
+// Databases.
+type AutonomousDatabaseVersionSummary struct {
+
+	// The intended use of the Autonomous Database that the version supports, such as
+	// transaction processing, data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// Additional details about the Autonomous Database software version.
+	Details *string
+
+	// The Oracle Database software version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbWorkload != "" {
+		s.WriteString(schemas.AutonomousDatabaseVersionSummary_dbWorkload, string(v.DbWorkload))
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.AutonomousDatabaseVersionSummary_details, *v.Details)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AutonomousDatabaseVersionSummary_version, *v.Version)
+	}
+}
+func (v *AutonomousDatabaseVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseVersionSummary_dbWorkload:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseVersionSummary_dbWorkload, &ev); err != nil {
+				return err
+			}
+			v.DbWorkload = DbWorkload(ev)
+			return nil
+		case schemas.AutonomousDatabaseVersionSummary_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseVersionSummary_details, v.Details)
+		case schemas.AutonomousDatabaseVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseVersionSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// The wallet details for an Autonomous Database.
+type AutonomousDatabaseWalletDetails struct {
+
+	// The summary of the password source configuration for the Autonomous Database
+	// wallet.
+	PasswordSourceSummary *WalletPasswordSourceSummary
+
+	// The current status of the Autonomous Database wallet.
+	Status AutonomousDatabaseWalletStatus
+
+	// The date and time when the Autonomous Database wallet was last rotated.
+	TimeRotated *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseWalletDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseWalletDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseWalletDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordSourceSummary != nil {
+		s.WriteStruct(schemas.AutonomousDatabaseWalletDetails_passwordSourceSummary)
+		v.PasswordSourceSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutonomousDatabaseWalletDetails_status, string(v.Status))
+	}
+	if v.TimeRotated != nil {
+		s.WriteTime(schemas.AutonomousDatabaseWalletDetails_timeRotated, *v.TimeRotated)
+	}
+}
+func (v *AutonomousDatabaseWalletDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseWalletDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseWalletDetails_passwordSourceSummary:
+			v.PasswordSourceSummary = &WalletPasswordSourceSummary{}
+			return v.PasswordSourceSummary.Deserialize(d)
+		case schemas.AutonomousDatabaseWalletDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.AutonomousDatabaseWalletDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseWalletStatus(ev)
+			return nil
+		case schemas.AutonomousDatabaseWalletDetails_timeRotated:
+			v.TimeRotated = new(time.Time)
+			return d.ReadTime(schemas.AutonomousDatabaseWalletDetails_timeRotated, v.TimeRotated)
+		}
+		return nil
+	})
+}
+
 // A summary of an Autonomous Virtual Machine (VM) within an Autonomous VM cluster.
 type AutonomousVirtualMachineSummary struct {
 
@@ -151,6 +3141,218 @@ func (v *AutonomousVirtualMachineSummary) Deserialize(d smithy.ShapeDeserializer
 		case schemas.AutonomousVirtualMachineSummary_vmName:
 			v.VmName = new(string)
 			return d.ReadString(schemas.AutonomousVirtualMachineSummary_vmName, v.VmName)
+		}
+		return nil
+	})
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key used for an Autonomous Database.
+type AwsEncryptionKeyConfiguration struct {
+
+	// The type of external identifier associated with the encryption key.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that grants access to the KMS key.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services KMS key used for encryption.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsEncryptionKeyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsEncryptionKeyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsEncryptionKeyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalIdType != "" {
+		s.WriteString(schemas.AwsEncryptionKeyConfiguration_externalIdType, string(v.ExternalIdType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.AwsEncryptionKeyConfiguration_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.AwsEncryptionKeyConfiguration_kmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *AwsEncryptionKeyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsEncryptionKeyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsEncryptionKeyConfiguration_externalIdType:
+			var ev string
+			if err := d.ReadString(schemas.AwsEncryptionKeyConfiguration_externalIdType, &ev); err != nil {
+				return err
+			}
+			v.ExternalIdType = ExternalIdType(ev)
+			return nil
+		case schemas.AwsEncryptionKeyConfiguration_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.AwsEncryptionKeyConfiguration_iamRoleArn, v.IamRoleArn)
+		case schemas.AwsEncryptionKeyConfiguration_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.AwsEncryptionKeyConfiguration_kmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key to use for an Autonomous Database.
+type AwsEncryptionKeyConfigurationInput struct {
+
+	// The type of external identifier associated with the encryption key.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that grants access to the KMS key.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services KMS key to use for encryption.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsEncryptionKeyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsEncryptionKeyConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsEncryptionKeyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalIdType != "" {
+		s.WriteString(schemas.AwsEncryptionKeyConfigurationInput_externalIdType, string(v.ExternalIdType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.AwsEncryptionKeyConfigurationInput_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.AwsEncryptionKeyConfigurationInput_kmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *AwsEncryptionKeyConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsEncryptionKeyConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsEncryptionKeyConfigurationInput_externalIdType:
+			var ev string
+			if err := d.ReadString(schemas.AwsEncryptionKeyConfigurationInput_externalIdType, &ev); err != nil {
+				return err
+			}
+			v.ExternalIdType = ExternalIdType(ev)
+			return nil
+		case schemas.AwsEncryptionKeyConfigurationInput_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.AwsEncryptionKeyConfigurationInput_iamRoleArn, v.IamRoleArn)
+		case schemas.AwsEncryptionKeyConfigurationInput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.AwsEncryptionKeyConfigurationInput_kmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
+}
+
+// The configuration for creating an Autonomous Database as a refreshable clone.
+type CloneToRefreshableConfiguration struct {
+
+	// The unique identifier of the source Autonomous Database to create the
+	// refreshable clone from.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	// The frequency, in seconds, at which the refreshable clone is automatically
+	// refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The type of clone to create.
+	CloneType CloneType
+
+	// The mode in which to open the refreshable clone, either read-only or read/write.
+	OpenMode OpenMode
+
+	// The refresh mode of the refreshable clone, either automatic or manual.
+	RefreshableMode RefreshableMode
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// starts.
+	TimeOfAutoRefreshStart *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *CloneToRefreshableConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneToRefreshableConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneToRefreshableConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRefreshFrequencyInSeconds != nil {
+		s.WriteInt32(schemas.CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds, *v.AutoRefreshFrequencyInSeconds)
+	}
+	if v.AutoRefreshPointLagInSeconds != nil {
+		s.WriteInt32(schemas.CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds, *v.AutoRefreshPointLagInSeconds)
+	}
+	if v.CloneType != "" {
+		s.WriteString(schemas.CloneToRefreshableConfiguration_cloneType, string(v.CloneType))
+	}
+	if v.OpenMode != "" {
+		s.WriteString(schemas.CloneToRefreshableConfiguration_openMode, string(v.OpenMode))
+	}
+	if v.RefreshableMode != "" {
+		s.WriteString(schemas.CloneToRefreshableConfiguration_refreshableMode, string(v.RefreshableMode))
+	}
+	if v.SourceAutonomousDatabaseId != nil {
+		s.WriteString(schemas.CloneToRefreshableConfiguration_sourceAutonomousDatabaseId, *v.SourceAutonomousDatabaseId)
+	}
+	if v.TimeOfAutoRefreshStart != nil {
+		s.WriteTime(schemas.CloneToRefreshableConfiguration_timeOfAutoRefreshStart, *v.TimeOfAutoRefreshStart)
+	}
+}
+func (v *CloneToRefreshableConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloneToRefreshableConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds:
+			v.AutoRefreshFrequencyInSeconds = new(int32)
+			return d.ReadInt32(schemas.CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds, v.AutoRefreshFrequencyInSeconds)
+		case schemas.CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds:
+			v.AutoRefreshPointLagInSeconds = new(int32)
+			return d.ReadInt32(schemas.CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds, v.AutoRefreshPointLagInSeconds)
+		case schemas.CloneToRefreshableConfiguration_cloneType:
+			var ev string
+			if err := d.ReadString(schemas.CloneToRefreshableConfiguration_cloneType, &ev); err != nil {
+				return err
+			}
+			v.CloneType = CloneType(ev)
+			return nil
+		case schemas.CloneToRefreshableConfiguration_openMode:
+			var ev string
+			if err := d.ReadString(schemas.CloneToRefreshableConfiguration_openMode, &ev); err != nil {
+				return err
+			}
+			v.OpenMode = OpenMode(ev)
+			return nil
+		case schemas.CloneToRefreshableConfiguration_refreshableMode:
+			var ev string
+			if err := d.ReadString(schemas.CloneToRefreshableConfiguration_refreshableMode, &ev); err != nil {
+				return err
+			}
+			v.RefreshableMode = RefreshableMode(ev)
+			return nil
+		case schemas.CloneToRefreshableConfiguration_sourceAutonomousDatabaseId:
+			v.SourceAutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.CloneToRefreshableConfiguration_sourceAutonomousDatabaseId, v.SourceAutonomousDatabaseId)
+		case schemas.CloneToRefreshableConfiguration_timeOfAutoRefreshStart:
+			v.TimeOfAutoRefreshStart = new(time.Time)
+			return d.ReadTime(schemas.CloneToRefreshableConfiguration_timeOfAutoRefreshStart, v.TimeOfAutoRefreshStart)
 		}
 		return nil
 	})
@@ -2221,8 +5423,8 @@ type CloudVmCluster struct {
 	// expressed as a percentage.
 	PercentProgress *float32
 
-	// The FQDN of the DNS record for the Single Client Access Name (SCAN) IP
-	// addresses that are associated with the VM cluster.
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the VM cluster.
 	ScanDnsName *string
 
 	// The OCID of the DNS record for the SCAN IP addresses that are associated with
@@ -2658,8 +5860,8 @@ type CloudVmClusterSummary struct {
 	// expressed as a percentage.
 	PercentProgress *float32
 
-	// The FQDN of the DNS record for the Single Client Access Name (SCAN) IP
-	// addresses that are associated with the VM cluster.
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the VM cluster.
 	ScanDnsName *string
 
 	// The OCID of the DNS record for the SCAN IP addresses that are associated with
@@ -2981,6 +6183,102 @@ func (v *CloudVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The configuration for creating an Autonomous Database as a cross-Region Oracle
+// Data Guard peer.
+type CrossRegionDataGuardConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the source Autonomous Database for the
+	// cross-Region Oracle Data Guard configuration.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossRegionDataGuardConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionDataGuardConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionDataGuardConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceAutonomousDatabaseArn != nil {
+		s.WriteString(schemas.CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn, *v.SourceAutonomousDatabaseArn)
+	}
+}
+func (v *CrossRegionDataGuardConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionDataGuardConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn:
+			v.SourceAutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn, v.SourceAutonomousDatabaseArn)
+		}
+		return nil
+	})
+}
+
+// The configuration for creating an Autonomous Database as a cross-Region
+// disaster recovery peer.
+type CrossRegionDisasterRecoveryConfiguration struct {
+
+	// The type of remote disaster recovery to configure, either Autonomous Data Guard
+	// or backup-based.
+	//
+	// This member is required.
+	RemoteDisasterRecoveryType DisasterRecoveryType
+
+	// The Amazon Resource Name (ARN) of the source Autonomous Database for the
+	// cross-Region disaster recovery configuration.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseArn *string
+
+	// Indicates whether automatic backups are replicated to the disaster recovery
+	// database.
+	IsReplicateAutomaticBackups *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossRegionDisasterRecoveryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionDisasterRecoveryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionDisasterRecoveryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsReplicateAutomaticBackups != nil {
+		s.WriteBool(schemas.CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups, *v.IsReplicateAutomaticBackups)
+	}
+	if v.RemoteDisasterRecoveryType != "" {
+		s.WriteString(schemas.CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType, string(v.RemoteDisasterRecoveryType))
+	}
+	if v.SourceAutonomousDatabaseArn != nil {
+		s.WriteString(schemas.CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn, *v.SourceAutonomousDatabaseArn)
+	}
+}
+func (v *CrossRegionDisasterRecoveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionDisasterRecoveryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups:
+			v.IsReplicateAutomaticBackups = new(bool)
+			return d.ReadBool(schemas.CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups, v.IsReplicateAutomaticBackups)
+		case schemas.CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType:
+			var ev string
+			if err := d.ReadString(schemas.CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType, &ev); err != nil {
+				return err
+			}
+			v.RemoteDisasterRecoveryType = DisasterRecoveryType(ev)
+			return nil
+		case schemas.CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn:
+			v.SourceAutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn, v.SourceAutonomousDatabaseArn)
+		}
+		return nil
+	})
+}
+
 // The configuration access for the cross-Region Amazon S3 database restore source
 // for the ODB network.
 type CrossRegionS3RestoreSourcesAccess struct {
@@ -3059,6 +6357,449 @@ func (v *CustomerContact) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CustomerContact_email:
 			v.Email = new(string)
 			return d.ReadString(schemas.CustomerContact_email, v.Email)
+		}
+		return nil
+	})
+}
+
+// The configuration of a customer-managed Amazon Web Services Secrets Manager
+// secret used to supply a password.
+type CustomerManagedAwsSecretConfiguration struct {
+
+	// The type of Oracle Cloud Identifier (OCID) used as the external ID when
+	// assuming the IAM role.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that OCI assumes to retrieve the secret value.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services Secrets Manager secret that
+	// contains the password.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomerManagedAwsSecretConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerManagedAwsSecretConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerManagedAwsSecretConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalIdType != "" {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfiguration_externalIdType, string(v.ExternalIdType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfiguration_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfiguration_secretId, *v.SecretId)
+	}
+}
+func (v *CustomerManagedAwsSecretConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerManagedAwsSecretConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerManagedAwsSecretConfiguration_externalIdType:
+			var ev string
+			if err := d.ReadString(schemas.CustomerManagedAwsSecretConfiguration_externalIdType, &ev); err != nil {
+				return err
+			}
+			v.ExternalIdType = ExternalIdType(ev)
+			return nil
+		case schemas.CustomerManagedAwsSecretConfiguration_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.CustomerManagedAwsSecretConfiguration_iamRoleArn, v.IamRoleArn)
+		case schemas.CustomerManagedAwsSecretConfiguration_secretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.CustomerManagedAwsSecretConfiguration_secretId, v.SecretId)
+		}
+		return nil
+	})
+}
+
+// The input configuration for a customer-managed Amazon Web Services Secrets
+// Manager secret used to supply a password.
+type CustomerManagedAwsSecretConfigurationInput struct {
+
+	// The type of Oracle Cloud Identifier (OCID) used as the external ID when
+	// assuming the IAM role.
+	//
+	// The valid values depend on the operation. For the CreateAutonomousDatabase
+	// operation, only compartment_ocid and tenant_ocid are allowed. For the
+	// UpdateAutonomousDatabase and CreateAutonomousDatabaseWallet operations,
+	// database_ocid , compartment_ocid , and tenant_ocid are all allowed.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that OCI assumes to retrieve the secret value.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services Secrets Manager secret that
+	// contains the password.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomerManagedAwsSecretConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerManagedAwsSecretConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerManagedAwsSecretConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalIdType != "" {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfigurationInput_externalIdType, string(v.ExternalIdType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfigurationInput_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.CustomerManagedAwsSecretConfigurationInput_secretId, *v.SecretId)
+	}
+}
+func (v *CustomerManagedAwsSecretConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerManagedAwsSecretConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerManagedAwsSecretConfigurationInput_externalIdType:
+			var ev string
+			if err := d.ReadString(schemas.CustomerManagedAwsSecretConfigurationInput_externalIdType, &ev); err != nil {
+				return err
+			}
+			v.ExternalIdType = ExternalIdType(ev)
+			return nil
+		case schemas.CustomerManagedAwsSecretConfigurationInput_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.CustomerManagedAwsSecretConfigurationInput_iamRoleArn, v.IamRoleArn)
+		case schemas.CustomerManagedAwsSecretConfigurationInput_secretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.CustomerManagedAwsSecretConfigurationInput_secretId, v.SecretId)
+		}
+		return nil
+	})
+}
+
+// The configuration for creating an Autonomous Database as a clone of an existing
+// database.
+type DatabaseCloneConfiguration struct {
+
+	// The type of clone to create, either a full clone, a metadata clone, or a
+	// partial clone.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The unique identifier of the source Autonomous Database to clone.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseCloneConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseCloneConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseCloneConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloneType != "" {
+		s.WriteString(schemas.DatabaseCloneConfiguration_cloneType, string(v.CloneType))
+	}
+	if v.SourceAutonomousDatabaseId != nil {
+		s.WriteString(schemas.DatabaseCloneConfiguration_sourceAutonomousDatabaseId, *v.SourceAutonomousDatabaseId)
+	}
+}
+func (v *DatabaseCloneConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseCloneConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseCloneConfiguration_cloneType:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseCloneConfiguration_cloneType, &ev); err != nil {
+				return err
+			}
+			v.CloneType = CloneType(ev)
+			return nil
+		case schemas.DatabaseCloneConfiguration_sourceAutonomousDatabaseId:
+			v.SourceAutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.DatabaseCloneConfiguration_sourceAutonomousDatabaseId, v.SourceAutonomousDatabaseId)
+		}
+		return nil
+	})
+}
+
+// A connection string profile for an Autonomous Database.
+type DatabaseConnectionStringProfile struct {
+
+	// The consumer group associated with the connection string profile.
+	ConsumerGroup *string
+
+	// The user-friendly name of the connection string profile.
+	DisplayName *string
+
+	// The host name format used in the connection string.
+	HostFormat *string
+
+	// Indicates whether the connection string profile is regional.
+	IsRegional *bool
+
+	// The protocol used by the connection string profile.
+	Protocol *string
+
+	// The session mode of the connection string profile.
+	SessionMode *string
+
+	// The syntax format of the connection string profile.
+	SyntaxFormat *string
+
+	// The TLS authentication method used by the connection string profile.
+	TlsAuthentication *string
+
+	// The connection string value of the profile.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseConnectionStringProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseConnectionStringProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseConnectionStringProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerGroup != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_consumerGroup, *v.ConsumerGroup)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_displayName, *v.DisplayName)
+	}
+	if v.HostFormat != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_hostFormat, *v.HostFormat)
+	}
+	if v.IsRegional != nil {
+		s.WriteBool(schemas.DatabaseConnectionStringProfile_isRegional, *v.IsRegional)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_protocol, *v.Protocol)
+	}
+	if v.SessionMode != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_sessionMode, *v.SessionMode)
+	}
+	if v.SyntaxFormat != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_syntaxFormat, *v.SyntaxFormat)
+	}
+	if v.TlsAuthentication != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_tlsAuthentication, *v.TlsAuthentication)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DatabaseConnectionStringProfile_value, *v.Value)
+	}
+}
+func (v *DatabaseConnectionStringProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseConnectionStringProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseConnectionStringProfile_consumerGroup:
+			v.ConsumerGroup = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_consumerGroup, v.ConsumerGroup)
+		case schemas.DatabaseConnectionStringProfile_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_displayName, v.DisplayName)
+		case schemas.DatabaseConnectionStringProfile_hostFormat:
+			v.HostFormat = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_hostFormat, v.HostFormat)
+		case schemas.DatabaseConnectionStringProfile_isRegional:
+			v.IsRegional = new(bool)
+			return d.ReadBool(schemas.DatabaseConnectionStringProfile_isRegional, v.IsRegional)
+		case schemas.DatabaseConnectionStringProfile_protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_protocol, v.Protocol)
+		case schemas.DatabaseConnectionStringProfile_sessionMode:
+			v.SessionMode = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_sessionMode, v.SessionMode)
+		case schemas.DatabaseConnectionStringProfile_syntaxFormat:
+			v.SyntaxFormat = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_syntaxFormat, v.SyntaxFormat)
+		case schemas.DatabaseConnectionStringProfile_tlsAuthentication:
+			v.TlsAuthentication = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_tlsAuthentication, v.TlsAuthentication)
+		case schemas.DatabaseConnectionStringProfile_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DatabaseConnectionStringProfile_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A summary of a standby Autonomous Database in an Oracle Data Guard
+// configuration.
+type DatabaseStandbySummary struct {
+
+	// The availability domain of the standby Autonomous Database.
+	AvailabilityDomain *string
+
+	// The time lag, in seconds, between the standby database and the primary database.
+	LagTimeInSeconds *int32
+
+	// The component on the standby Autonomous Database that the current maintenance
+	// is being applied to.
+	MaintenanceTargetComponent *string
+
+	// The current status of the standby Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the standby Autonomous
+	// Database, if applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the standby database last
+	// changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the disaster recovery role of the standby database last
+	// changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when the next maintenance of the standby database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the standby database ends.
+	TimeMaintenanceEnd *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseStandbySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseStandbySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseStandbySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityDomain != nil {
+		s.WriteString(schemas.DatabaseStandbySummary_availabilityDomain, *v.AvailabilityDomain)
+	}
+	if v.LagTimeInSeconds != nil {
+		s.WriteInt32(schemas.DatabaseStandbySummary_lagTimeInSeconds, *v.LagTimeInSeconds)
+	}
+	if v.MaintenanceTargetComponent != nil {
+		s.WriteString(schemas.DatabaseStandbySummary_maintenanceTargetComponent, *v.MaintenanceTargetComponent)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatabaseStandbySummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DatabaseStandbySummary_statusReason, *v.StatusReason)
+	}
+	if v.TimeDataGuardRoleChanged != nil {
+		s.WriteTime(schemas.DatabaseStandbySummary_timeDataGuardRoleChanged, *v.TimeDataGuardRoleChanged)
+	}
+	if v.TimeDisasterRecoveryRoleChanged != nil {
+		s.WriteTime(schemas.DatabaseStandbySummary_timeDisasterRecoveryRoleChanged, *v.TimeDisasterRecoveryRoleChanged)
+	}
+	if v.TimeMaintenanceBegin != nil {
+		s.WriteTime(schemas.DatabaseStandbySummary_timeMaintenanceBegin, *v.TimeMaintenanceBegin)
+	}
+	if v.TimeMaintenanceEnd != nil {
+		s.WriteTime(schemas.DatabaseStandbySummary_timeMaintenanceEnd, *v.TimeMaintenanceEnd)
+	}
+}
+func (v *DatabaseStandbySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseStandbySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseStandbySummary_availabilityDomain:
+			v.AvailabilityDomain = new(string)
+			return d.ReadString(schemas.DatabaseStandbySummary_availabilityDomain, v.AvailabilityDomain)
+		case schemas.DatabaseStandbySummary_lagTimeInSeconds:
+			v.LagTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.DatabaseStandbySummary_lagTimeInSeconds, v.LagTimeInSeconds)
+		case schemas.DatabaseStandbySummary_maintenanceTargetComponent:
+			v.MaintenanceTargetComponent = new(string)
+			return d.ReadString(schemas.DatabaseStandbySummary_maintenanceTargetComponent, v.MaintenanceTargetComponent)
+		case schemas.DatabaseStandbySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseStandbySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.DatabaseStandbySummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DatabaseStandbySummary_statusReason, v.StatusReason)
+		case schemas.DatabaseStandbySummary_timeDataGuardRoleChanged:
+			v.TimeDataGuardRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.DatabaseStandbySummary_timeDataGuardRoleChanged, v.TimeDataGuardRoleChanged)
+		case schemas.DatabaseStandbySummary_timeDisasterRecoveryRoleChanged:
+			v.TimeDisasterRecoveryRoleChanged = new(time.Time)
+			return d.ReadTime(schemas.DatabaseStandbySummary_timeDisasterRecoveryRoleChanged, v.TimeDisasterRecoveryRoleChanged)
+		case schemas.DatabaseStandbySummary_timeMaintenanceBegin:
+			v.TimeMaintenanceBegin = new(time.Time)
+			return d.ReadTime(schemas.DatabaseStandbySummary_timeMaintenanceBegin, v.TimeMaintenanceBegin)
+		case schemas.DatabaseStandbySummary_timeMaintenanceEnd:
+			v.TimeMaintenanceEnd = new(time.Time)
+			return d.ReadTime(schemas.DatabaseStandbySummary_timeMaintenanceEnd, v.TimeMaintenanceEnd)
+		}
+		return nil
+	})
+}
+
+// Information about a database management tool for an Autonomous Database.
+type DatabaseTool struct {
+
+	// The compute capacity allocated to the database management tool.
+	ComputeCount *float64
+
+	// Indicates whether the database management tool is enabled.
+	IsEnabled *bool
+
+	// The maximum amount of time, in minutes, that the database management tool can
+	// be idle before it is shut down.
+	MaxIdleTimeInMinutes *int32
+
+	// The name of the database management tool.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatabaseTool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseTool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseTool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeCount != nil {
+		s.WriteFloat64(schemas.DatabaseTool_computeCount, *v.ComputeCount)
+	}
+	if v.IsEnabled != nil {
+		s.WriteBool(schemas.DatabaseTool_isEnabled, *v.IsEnabled)
+	}
+	if v.MaxIdleTimeInMinutes != nil {
+		s.WriteInt32(schemas.DatabaseTool_maxIdleTimeInMinutes, *v.MaxIdleTimeInMinutes)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DatabaseTool_name, *v.Name)
+	}
+}
+func (v *DatabaseTool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseTool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseTool_computeCount:
+			v.ComputeCount = new(float64)
+			return d.ReadFloat64(schemas.DatabaseTool_computeCount, v.ComputeCount)
+		case schemas.DatabaseTool_isEnabled:
+			v.IsEnabled = new(bool)
+			return d.ReadBool(schemas.DatabaseTool_isEnabled, v.IsEnabled)
+		case schemas.DatabaseTool_maxIdleTimeInMinutes:
+			v.MaxIdleTimeInMinutes = new(int32)
+			return d.ReadInt32(schemas.DatabaseTool_maxIdleTimeInMinutes, v.MaxIdleTimeInMinutes)
+		case schemas.DatabaseTool_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DatabaseTool_name, v.Name)
 		}
 		return nil
 	})
@@ -3226,8 +6967,8 @@ type DbNode struct {
 	// The unique identifier of the DB node.
 	DbNodeId *string
 
-	// The amount of local node storage, in gigabytes (GBs), that's allocated on the
-	// DB node.
+	// The amount of local node storage, in gigabytes (GB), that's allocated on the DB
+	// node.
 	DbNodeStorageSizeInGBs *int32
 
 	// The unique identifier of the Db server that is associated with the DB node.
@@ -4323,6 +8064,10 @@ type DbSystemShapeSummary struct {
 	// The runtime minimum number of CPU cores that can be enabled for the shape.
 	RuntimeMinimumCoreCount *int32
 
+	// If provided and applicable, return DB System shape parameters based on the
+	// shape attribute provided.
+	ShapeAttributes []ShapeAttribute
+
 	// The family of the shape.
 	ShapeFamily *string
 
@@ -4405,6 +8150,7 @@ func (v *DbSystemShapeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuntimeMinimumCoreCount != nil {
 		s.WriteInt32(schemas.DbSystemShapeSummary_runtimeMinimumCoreCount, *v.RuntimeMinimumCoreCount)
 	}
+	serializeShapeAttributeList(s, schemas.DbSystemShapeSummary_shapeAttributes, v.ShapeAttributes)
 	if v.ShapeFamily != nil {
 		s.WriteString(schemas.DbSystemShapeSummary_shapeFamily, *v.ShapeFamily)
 	}
@@ -4485,6 +8231,8 @@ func (v *DbSystemShapeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DbSystemShapeSummary_runtimeMinimumCoreCount:
 			v.RuntimeMinimumCoreCount = new(int32)
 			return d.ReadInt32(schemas.DbSystemShapeSummary_runtimeMinimumCoreCount, v.RuntimeMinimumCoreCount)
+		case schemas.DbSystemShapeSummary_shapeAttributes:
+			return deserializeShapeAttributeList(d, schemas.DbSystemShapeSummary_shapeAttributes, &v.ShapeAttributes)
 		case schemas.DbSystemShapeSummary_shapeFamily:
 			v.ShapeFamily = new(string)
 			return d.ReadString(schemas.DbSystemShapeSummary_shapeFamily, v.ShapeFamily)
@@ -4494,6 +8242,202 @@ func (v *DbSystemShapeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShapeType = ShapeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The disaster recovery configuration for an Autonomous Database.
+type DisasterRecoveryConfiguration struct {
+
+	// The type of disaster recovery configured for the Autonomous Database.
+	DisasterRecoveryType DisasterRecoveryType
+
+	// Indicates whether automatic backups are replicated to the disaster recovery
+	// database.
+	IsReplicateAutomaticBackups *bool
+
+	// Indicates whether the standby database is a snapshot standby.
+	IsSnapshotStandby *bool
+
+	// The date and time until which the snapshot standby database remains enabled.
+	TimeSnapshotStandbyEnabledTill *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DisasterRecoveryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisasterRecoveryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisasterRecoveryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisasterRecoveryType != "" {
+		s.WriteString(schemas.DisasterRecoveryConfiguration_disasterRecoveryType, string(v.DisasterRecoveryType))
+	}
+	if v.IsReplicateAutomaticBackups != nil {
+		s.WriteBool(schemas.DisasterRecoveryConfiguration_isReplicateAutomaticBackups, *v.IsReplicateAutomaticBackups)
+	}
+	if v.IsSnapshotStandby != nil {
+		s.WriteBool(schemas.DisasterRecoveryConfiguration_isSnapshotStandby, *v.IsSnapshotStandby)
+	}
+	if v.TimeSnapshotStandbyEnabledTill != nil {
+		s.WriteTime(schemas.DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill, *v.TimeSnapshotStandbyEnabledTill)
+	}
+}
+func (v *DisasterRecoveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisasterRecoveryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisasterRecoveryConfiguration_disasterRecoveryType:
+			var ev string
+			if err := d.ReadString(schemas.DisasterRecoveryConfiguration_disasterRecoveryType, &ev); err != nil {
+				return err
+			}
+			v.DisasterRecoveryType = DisasterRecoveryType(ev)
+			return nil
+		case schemas.DisasterRecoveryConfiguration_isReplicateAutomaticBackups:
+			v.IsReplicateAutomaticBackups = new(bool)
+			return d.ReadBool(schemas.DisasterRecoveryConfiguration_isReplicateAutomaticBackups, v.IsReplicateAutomaticBackups)
+		case schemas.DisasterRecoveryConfiguration_isSnapshotStandby:
+			v.IsSnapshotStandby = new(bool)
+			return d.ReadBool(schemas.DisasterRecoveryConfiguration_isSnapshotStandby, v.IsSnapshotStandby)
+		case schemas.DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill:
+			v.TimeSnapshotStandbyEnabledTill = new(time.Time)
+			return d.ReadTime(schemas.DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill, v.TimeSnapshotStandbyEnabledTill)
+		}
+		return nil
+	})
+}
+
+// The configuration of the encryption key used for an Autonomous Database. This
+// is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionKeyConfigurationMemberAwsEncryptionKey
+//	EncryptionKeyConfigurationMemberOciEncryptionKey
+//	EncryptionKeyConfigurationMemberOkvEncryptionKey
+type EncryptionKeyConfiguration interface {
+	isEncryptionKeyConfiguration()
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key.
+type EncryptionKeyConfigurationMemberAwsEncryptionKey struct {
+	Value AwsEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberAwsEncryptionKey) isEncryptionKeyConfiguration() {}
+func (v *EncryptionKeyConfigurationMemberAwsEncryptionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionKeyConfiguration_awsEncryptionKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionKeyConfigurationMemberAwsEncryptionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key.
+type EncryptionKeyConfigurationMemberOciEncryptionKey struct {
+	Value OciEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberOciEncryptionKey) isEncryptionKeyConfiguration() {}
+func (v *EncryptionKeyConfigurationMemberOciEncryptionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionKeyConfiguration_ociEncryptionKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionKeyConfigurationMemberOciEncryptionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration of the Oracle Key Vault (OKV) encryption key.
+type EncryptionKeyConfigurationMemberOkvEncryptionKey struct {
+	Value OkvEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberOkvEncryptionKey) isEncryptionKeyConfiguration() {}
+func (v *EncryptionKeyConfigurationMemberOkvEncryptionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionKeyConfiguration_okvEncryptionKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionKeyConfigurationMemberOkvEncryptionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration of the encryption key to use for an Autonomous Database. This
+// is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionKeyConfigurationInputMemberAwsEncryptionKey
+type EncryptionKeyConfigurationInput interface {
+	isEncryptionKeyConfigurationInput()
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key to use.
+type EncryptionKeyConfigurationInputMemberAwsEncryptionKey struct {
+	Value AwsEncryptionKeyConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationInputMemberAwsEncryptionKey) isEncryptionKeyConfigurationInput() {}
+func (v *EncryptionKeyConfigurationInputMemberAwsEncryptionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionKeyConfigurationInput_awsEncryptionKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EncryptionKeyConfigurationInputMemberAwsEncryptionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The encryption configuration for an Autonomous Database.
+type EncryptionSummary struct {
+
+	// The configuration of the encryption key used for the Autonomous Database.
+	EncryptionKeyConfiguration EncryptionKeyConfiguration
+
+	// The provider of the encryption key used for the Autonomous Database.
+	EncryptionKeyProvider EncryptionKeyProvider
+
+	noSmithyDocumentSerde
+}
+
+func (v *EncryptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionKeyConfiguration(s, schemas.EncryptionSummary_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyProvider != "" {
+		s.WriteString(schemas.EncryptionSummary_encryptionKeyProvider, string(v.EncryptionKeyProvider))
+	}
+}
+func (v *EncryptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionSummary_encryptionKeyConfiguration:
+			return deserializeEncryptionKeyConfiguration(d, schemas.EncryptionSummary_encryptionKeyConfiguration, &v.EncryptionKeyConfiguration)
+		case schemas.EncryptionSummary_encryptionKeyProvider:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionSummary_encryptionKeyProvider, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyProvider = EncryptionKeyProvider(ev)
 			return nil
 		}
 		return nil
@@ -4558,6 +8502,1611 @@ func (v *ExadataIormConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Objective = Objective(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Information about an Exascale VM cluster.
+type ExadbVmCluster struct {
+
+	// The unique identifier of the Exascale VM cluster.
+	//
+	// This member is required.
+	ExadbVmClusterId *string
+
+	// The name of the Grid Infrastructure (GI) cluster.
+	ClusterName *string
+
+	// The date and time when the Exascale VM cluster was created.
+	CreatedAt *time.Time
+
+	// The set of diagnostic collection options enabled for the Exascale VM cluster.
+	DataCollectionOptions *DataCollectionOptions
+
+	// The user-friendly name for the Exascale VM cluster.
+	DisplayName *string
+
+	// The domain of the Exascale VM cluster.
+	Domain *string
+
+	// The number of elastic compute processing units (ECPUs) enabled on the Exascale
+	// VM cluster.
+	EnabledEcpuCount *int32
+
+	// The Amazon Resource Name (ARN) of the Exascale VM cluster.
+	ExadbVmClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault associated with
+	// this Exascale VM cluster.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault associated with this
+	// Exascale VM cluster.
+	ExascaleDbStorageVaultId *string
+
+	// The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM
+	// cluster.
+	GiVersion *string
+
+	// The Grid Infrastructure software image ID for the Exascale VM cluster.
+	GridImageId *string
+
+	// The type of Grid Infrastructure image for the Exascale VM cluster.
+	GridImageType GridImageType
+
+	// The host name for the Exascale VM cluster.
+	Hostname *string
+
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Exascale VM cluster.
+	IamRoles []IamRole
+
+	// The I/O Resource Management (IORM) configuration cache details for the Exascale
+	// VM cluster.
+	IormConfigCache *ExadataIormConfig
+
+	// The Oracle Cloud ID (OCID) of the last maintenance update history entry.
+	LastUpdateHistoryEntryId *string
+
+	// The Oracle license model applied to the Exascale VM cluster.
+	LicenseModel LicenseModel
+
+	// The port number configured for the listener on the Exascale VM cluster.
+	ListenerPort *int32
+
+	// The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM
+	// cluster.
+	MemorySizeInGBs *int32
+
+	// The number of nodes in the Exascale VM cluster.
+	NodeCount *int32
+
+	// The name of the OCI resource anchor for the Exascale VM cluster.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale VM cluster.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this Exascale
+	// VM cluster.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network for the Exascale VM cluster.
+	OdbNetworkId *string
+
+	// The amount of progress made on the current operation on the Exascale VM
+	// cluster, expressed as a percentage.
+	PercentProgress *float32
+
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanDnsName *string
+
+	// The OCID of the DNS record for the SCAN IP addresses that are associated with
+	// the Exascale VM cluster.
+	ScanDnsRecordId *string
+
+	// The OCID of the SCAN IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanIpIds []string
+
+	// The port number for TCP connections to the Single Client Access Name (SCAN)
+	// listener for the Exascale VM cluster.
+	ScanListenerPortTcp *int32
+
+	// The port number for TCP connections with SSL to the Single Client Access Name
+	// (SCAN) listener for the Exascale VM cluster.
+	ScanListenerPortTcpSsl *int32
+
+	// The hardware model name of the Exadata infrastructure that's running the
+	// Exascale VM cluster.
+	Shape *string
+
+	// The shape attribute for the Exascale VM cluster.
+	ShapeAttribute ShapeAttribute
+
+	// The snapshot file system storage details for the Exascale VM cluster.
+	SnapshotFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The public key portion of one or more key pairs used for SSH access to the
+	// Exascale VM cluster.
+	SshPublicKeys []string
+
+	// The current status of the Exascale VM cluster.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale VM cluster.
+	StatusReason *string
+
+	// The operating system version of the image chosen for the Exascale VM cluster.
+	SystemVersion *string
+
+	// The time zone of the Exascale VM cluster.
+	TimeZone *string
+
+	// The total number of ECPUs for the Exascale VM cluster.
+	TotalEcpuCount *int32
+
+	// The total file system storage details for the Exascale VM cluster.
+	TotalFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP
+	// address is assigned per node to support failover. If a node fails, its VIP is
+	// reassigned to another active node in the cluster.
+	VipIds []string
+
+	// The VM file system storage details for the Exascale VM cluster.
+	VmFileSystemStorage *ExadbVmClusterStorageDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExadbVmCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExadbVmCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExadbVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ExadbVmCluster_clusterName, *v.ClusterName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExadbVmCluster_createdAt, *v.CreatedAt)
+	}
+	if v.DataCollectionOptions != nil {
+		s.WriteStruct(schemas.ExadbVmCluster_dataCollectionOptions)
+		v.DataCollectionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ExadbVmCluster_displayName, *v.DisplayName)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ExadbVmCluster_domain, *v.Domain)
+	}
+	if v.EnabledEcpuCount != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_enabledEcpuCount, *v.EnabledEcpuCount)
+	}
+	if v.ExadbVmClusterArn != nil {
+		s.WriteString(schemas.ExadbVmCluster_exadbVmClusterArn, *v.ExadbVmClusterArn)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.ExadbVmCluster_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.ExadbVmCluster_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.ExadbVmCluster_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.GiVersion != nil {
+		s.WriteString(schemas.ExadbVmCluster_giVersion, *v.GiVersion)
+	}
+	if v.GridImageId != nil {
+		s.WriteString(schemas.ExadbVmCluster_gridImageId, *v.GridImageId)
+	}
+	if v.GridImageType != "" {
+		s.WriteString(schemas.ExadbVmCluster_gridImageType, string(v.GridImageType))
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.ExadbVmCluster_hostname, *v.Hostname)
+	}
+	serializeIamRoleList(s, schemas.ExadbVmCluster_iamRoles, v.IamRoles)
+	if v.IormConfigCache != nil {
+		s.WriteStruct(schemas.ExadbVmCluster_iormConfigCache)
+		v.IormConfigCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdateHistoryEntryId != nil {
+		s.WriteString(schemas.ExadbVmCluster_lastUpdateHistoryEntryId, *v.LastUpdateHistoryEntryId)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.ExadbVmCluster_licenseModel, string(v.LicenseModel))
+	}
+	if v.ListenerPort != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_listenerPort, *v.ListenerPort)
+	}
+	if v.MemorySizeInGBs != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_memorySizeInGBs, *v.MemorySizeInGBs)
+	}
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_nodeCount, *v.NodeCount)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.ExadbVmCluster_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.ExadbVmCluster_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.ExadbVmCluster_ocid, *v.Ocid)
+	}
+	if v.OdbNetworkArn != nil {
+		s.WriteString(schemas.ExadbVmCluster_odbNetworkArn, *v.OdbNetworkArn)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.ExadbVmCluster_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.ExadbVmCluster_percentProgress, *v.PercentProgress)
+	}
+	if v.ScanDnsName != nil {
+		s.WriteString(schemas.ExadbVmCluster_scanDnsName, *v.ScanDnsName)
+	}
+	if v.ScanDnsRecordId != nil {
+		s.WriteString(schemas.ExadbVmCluster_scanDnsRecordId, *v.ScanDnsRecordId)
+	}
+	serializeStringList(s, schemas.ExadbVmCluster_scanIpIds, v.ScanIpIds)
+	if v.ScanListenerPortTcp != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_scanListenerPortTcp, *v.ScanListenerPortTcp)
+	}
+	if v.ScanListenerPortTcpSsl != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_scanListenerPortTcpSsl, *v.ScanListenerPortTcpSsl)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.ExadbVmCluster_shape, *v.Shape)
+	}
+	if v.ShapeAttribute != "" {
+		s.WriteString(schemas.ExadbVmCluster_shapeAttribute, string(v.ShapeAttribute))
+	}
+	if v.SnapshotFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmCluster_snapshotFileSystemStorage)
+		v.SnapshotFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.ExadbVmCluster_sshPublicKeys, v.SshPublicKeys)
+	if v.Status != "" {
+		s.WriteString(schemas.ExadbVmCluster_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExadbVmCluster_statusReason, *v.StatusReason)
+	}
+	if v.SystemVersion != nil {
+		s.WriteString(schemas.ExadbVmCluster_systemVersion, *v.SystemVersion)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ExadbVmCluster_timeZone, *v.TimeZone)
+	}
+	if v.TotalEcpuCount != nil {
+		s.WriteInt32(schemas.ExadbVmCluster_totalEcpuCount, *v.TotalEcpuCount)
+	}
+	if v.TotalFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmCluster_totalFileSystemStorage)
+		v.TotalFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.ExadbVmCluster_vipIds, v.VipIds)
+	if v.VmFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmCluster_vmFileSystemStorage)
+		v.VmFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExadbVmCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExadbVmCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExadbVmCluster_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_clusterName, v.ClusterName)
+		case schemas.ExadbVmCluster_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExadbVmCluster_createdAt, v.CreatedAt)
+		case schemas.ExadbVmCluster_dataCollectionOptions:
+			v.DataCollectionOptions = &DataCollectionOptions{}
+			return v.DataCollectionOptions.Deserialize(d)
+		case schemas.ExadbVmCluster_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_displayName, v.DisplayName)
+		case schemas.ExadbVmCluster_domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_domain, v.Domain)
+		case schemas.ExadbVmCluster_enabledEcpuCount:
+			v.EnabledEcpuCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_enabledEcpuCount, v.EnabledEcpuCount)
+		case schemas.ExadbVmCluster_exadbVmClusterArn:
+			v.ExadbVmClusterArn = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_exadbVmClusterArn, v.ExadbVmClusterArn)
+		case schemas.ExadbVmCluster_exadbVmClusterId:
+			v.ExadbVmClusterId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_exadbVmClusterId, v.ExadbVmClusterId)
+		case schemas.ExadbVmCluster_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.ExadbVmCluster_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.ExadbVmCluster_giVersion:
+			v.GiVersion = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_giVersion, v.GiVersion)
+		case schemas.ExadbVmCluster_gridImageId:
+			v.GridImageId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_gridImageId, v.GridImageId)
+		case schemas.ExadbVmCluster_gridImageType:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmCluster_gridImageType, &ev); err != nil {
+				return err
+			}
+			v.GridImageType = GridImageType(ev)
+			return nil
+		case schemas.ExadbVmCluster_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_hostname, v.Hostname)
+		case schemas.ExadbVmCluster_iamRoles:
+			return deserializeIamRoleList(d, schemas.ExadbVmCluster_iamRoles, &v.IamRoles)
+		case schemas.ExadbVmCluster_iormConfigCache:
+			v.IormConfigCache = &ExadataIormConfig{}
+			return v.IormConfigCache.Deserialize(d)
+		case schemas.ExadbVmCluster_lastUpdateHistoryEntryId:
+			v.LastUpdateHistoryEntryId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_lastUpdateHistoryEntryId, v.LastUpdateHistoryEntryId)
+		case schemas.ExadbVmCluster_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmCluster_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.ExadbVmCluster_listenerPort:
+			v.ListenerPort = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_listenerPort, v.ListenerPort)
+		case schemas.ExadbVmCluster_memorySizeInGBs:
+			v.MemorySizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_memorySizeInGBs, v.MemorySizeInGBs)
+		case schemas.ExadbVmCluster_nodeCount:
+			v.NodeCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_nodeCount, v.NodeCount)
+		case schemas.ExadbVmCluster_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.ExadbVmCluster_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_ociUrl, v.OciUrl)
+		case schemas.ExadbVmCluster_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_ocid, v.Ocid)
+		case schemas.ExadbVmCluster_odbNetworkArn:
+			v.OdbNetworkArn = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_odbNetworkArn, v.OdbNetworkArn)
+		case schemas.ExadbVmCluster_odbNetworkId:
+			v.OdbNetworkId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_odbNetworkId, v.OdbNetworkId)
+		case schemas.ExadbVmCluster_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.ExadbVmCluster_percentProgress, v.PercentProgress)
+		case schemas.ExadbVmCluster_scanDnsName:
+			v.ScanDnsName = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_scanDnsName, v.ScanDnsName)
+		case schemas.ExadbVmCluster_scanDnsRecordId:
+			v.ScanDnsRecordId = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_scanDnsRecordId, v.ScanDnsRecordId)
+		case schemas.ExadbVmCluster_scanIpIds:
+			return deserializeStringList(d, schemas.ExadbVmCluster_scanIpIds, &v.ScanIpIds)
+		case schemas.ExadbVmCluster_scanListenerPortTcp:
+			v.ScanListenerPortTcp = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_scanListenerPortTcp, v.ScanListenerPortTcp)
+		case schemas.ExadbVmCluster_scanListenerPortTcpSsl:
+			v.ScanListenerPortTcpSsl = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_scanListenerPortTcpSsl, v.ScanListenerPortTcpSsl)
+		case schemas.ExadbVmCluster_shape:
+			v.Shape = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_shape, v.Shape)
+		case schemas.ExadbVmCluster_shapeAttribute:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmCluster_shapeAttribute, &ev); err != nil {
+				return err
+			}
+			v.ShapeAttribute = ShapeAttribute(ev)
+			return nil
+		case schemas.ExadbVmCluster_snapshotFileSystemStorage:
+			v.SnapshotFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.SnapshotFileSystemStorage.Deserialize(d)
+		case schemas.ExadbVmCluster_sshPublicKeys:
+			return deserializeStringList(d, schemas.ExadbVmCluster_sshPublicKeys, &v.SshPublicKeys)
+		case schemas.ExadbVmCluster_status:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmCluster_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		case schemas.ExadbVmCluster_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_statusReason, v.StatusReason)
+		case schemas.ExadbVmCluster_systemVersion:
+			v.SystemVersion = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_systemVersion, v.SystemVersion)
+		case schemas.ExadbVmCluster_timeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ExadbVmCluster_timeZone, v.TimeZone)
+		case schemas.ExadbVmCluster_totalEcpuCount:
+			v.TotalEcpuCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmCluster_totalEcpuCount, v.TotalEcpuCount)
+		case schemas.ExadbVmCluster_totalFileSystemStorage:
+			v.TotalFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.TotalFileSystemStorage.Deserialize(d)
+		case schemas.ExadbVmCluster_vipIds:
+			return deserializeStringList(d, schemas.ExadbVmCluster_vipIds, &v.VipIds)
+		case schemas.ExadbVmCluster_vmFileSystemStorage:
+			v.VmFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.VmFileSystemStorage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Storage details for an Exascale VM cluster.
+type ExadbVmClusterStorageDetails struct {
+
+	// The total storage size, in gigabytes (GB).
+	TotalSizeInGBs *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExadbVmClusterStorageDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExadbVmClusterStorageDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExadbVmClusterStorageDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TotalSizeInGBs != nil {
+		s.WriteInt32(schemas.ExadbVmClusterStorageDetails_totalSizeInGBs, *v.TotalSizeInGBs)
+	}
+}
+func (v *ExadbVmClusterStorageDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExadbVmClusterStorageDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExadbVmClusterStorageDetails_totalSizeInGBs:
+			v.TotalSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterStorageDetails_totalSizeInGBs, v.TotalSizeInGBs)
+		}
+		return nil
+	})
+}
+
+// Summary information about an Exascale VM cluster.
+type ExadbVmClusterSummary struct {
+
+	// The unique identifier of the Exascale VM cluster.
+	//
+	// This member is required.
+	ExadbVmClusterId *string
+
+	// The name of the Grid Infrastructure (GI) cluster.
+	ClusterName *string
+
+	// The date and time when the Exascale VM cluster was created.
+	CreatedAt *time.Time
+
+	// The set of diagnostic collection options enabled for the Exascale VM cluster.
+	DataCollectionOptions *DataCollectionOptions
+
+	// The user-friendly name for the Exascale VM cluster.
+	DisplayName *string
+
+	// The domain of the Exascale VM cluster.
+	Domain *string
+
+	// The number of elastic compute processing units (ECPUs) enabled on the Exascale
+	// VM cluster.
+	EnabledEcpuCount *int32
+
+	// The Amazon Resource Name (ARN) of the Exascale VM cluster.
+	ExadbVmClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault associated with
+	// this Exascale VM cluster.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault associated with this
+	// Exascale VM cluster.
+	ExascaleDbStorageVaultId *string
+
+	// The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM
+	// cluster.
+	GiVersion *string
+
+	// The Grid Infrastructure software image ID for the Exascale VM cluster.
+	GridImageId *string
+
+	// The type of Grid Infrastructure image for the Exascale VM cluster.
+	GridImageType GridImageType
+
+	// The host name for the Exascale VM cluster.
+	Hostname *string
+
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Exascale VM cluster.
+	IamRoles []IamRole
+
+	// The I/O Resource Management (IORM) configuration cache details for the Exascale
+	// VM cluster.
+	IormConfigCache *ExadataIormConfig
+
+	// The Oracle Cloud ID (OCID) of the last maintenance update history entry.
+	LastUpdateHistoryEntryId *string
+
+	// The Oracle license model applied to the Exascale VM cluster.
+	LicenseModel LicenseModel
+
+	// The port number configured for the listener on the Exascale VM cluster.
+	ListenerPort *int32
+
+	// The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM
+	// cluster.
+	MemorySizeInGBs *int32
+
+	// The number of nodes in the Exascale VM cluster.
+	NodeCount *int32
+
+	// The name of the OCI resource anchor for the Exascale VM cluster.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale VM cluster.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this Exascale
+	// VM cluster.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network for the Exascale VM cluster.
+	OdbNetworkId *string
+
+	// The amount of progress made on the current operation on the Exascale VM
+	// cluster, expressed as a percentage.
+	PercentProgress *float32
+
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanDnsName *string
+
+	// The OCID of the DNS record for the SCAN IP addresses that are associated with
+	// the Exascale VM cluster.
+	ScanDnsRecordId *string
+
+	// The OCID of the SCAN IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanIpIds []string
+
+	// The port number for TCP connections to the Single Client Access Name (SCAN)
+	// listener for the Exascale VM cluster.
+	ScanListenerPortTcp *int32
+
+	// The port number for TCP connections with SSL to the Single Client Access Name
+	// (SCAN) listener for the Exascale VM cluster.
+	ScanListenerPortTcpSsl *int32
+
+	// The hardware model name of the Exadata infrastructure that's running the
+	// Exascale VM cluster.
+	Shape *string
+
+	// The shape attribute for the Exascale VM cluster.
+	ShapeAttribute ShapeAttribute
+
+	// The snapshot file system storage details for the Exascale VM cluster.
+	SnapshotFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The public key portion of one or more key pairs used for SSH access to the
+	// Exascale VM cluster.
+	SshPublicKeys []string
+
+	// The current status of the Exascale VM cluster.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale VM cluster.
+	StatusReason *string
+
+	// The operating system version of the image chosen for the Exascale VM cluster.
+	SystemVersion *string
+
+	// The time zone of the Exascale VM cluster.
+	TimeZone *string
+
+	// The total number of ECPUs for the Exascale VM cluster.
+	TotalEcpuCount *int32
+
+	// The total file system storage details for the Exascale VM cluster.
+	TotalFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP
+	// address is assigned per node to support failover. If a node fails, its VIP is
+	// reassigned to another active node in the cluster.
+	VipIds []string
+
+	// The VM file system storage details for the Exascale VM cluster.
+	VmFileSystemStorage *ExadbVmClusterStorageDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExadbVmClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExadbVmClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExadbVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_clusterName, *v.ClusterName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExadbVmClusterSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DataCollectionOptions != nil {
+		s.WriteStruct(schemas.ExadbVmClusterSummary_dataCollectionOptions)
+		v.DataCollectionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_displayName, *v.DisplayName)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_domain, *v.Domain)
+	}
+	if v.EnabledEcpuCount != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_enabledEcpuCount, *v.EnabledEcpuCount)
+	}
+	if v.ExadbVmClusterArn != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_exadbVmClusterArn, *v.ExadbVmClusterArn)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.GiVersion != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_giVersion, *v.GiVersion)
+	}
+	if v.GridImageId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_gridImageId, *v.GridImageId)
+	}
+	if v.GridImageType != "" {
+		s.WriteString(schemas.ExadbVmClusterSummary_gridImageType, string(v.GridImageType))
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_hostname, *v.Hostname)
+	}
+	serializeIamRoleList(s, schemas.ExadbVmClusterSummary_iamRoles, v.IamRoles)
+	if v.IormConfigCache != nil {
+		s.WriteStruct(schemas.ExadbVmClusterSummary_iormConfigCache)
+		v.IormConfigCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdateHistoryEntryId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_lastUpdateHistoryEntryId, *v.LastUpdateHistoryEntryId)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.ExadbVmClusterSummary_licenseModel, string(v.LicenseModel))
+	}
+	if v.ListenerPort != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_listenerPort, *v.ListenerPort)
+	}
+	if v.MemorySizeInGBs != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_memorySizeInGBs, *v.MemorySizeInGBs)
+	}
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_nodeCount, *v.NodeCount)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_ocid, *v.Ocid)
+	}
+	if v.OdbNetworkArn != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_odbNetworkArn, *v.OdbNetworkArn)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.ExadbVmClusterSummary_percentProgress, *v.PercentProgress)
+	}
+	if v.ScanDnsName != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_scanDnsName, *v.ScanDnsName)
+	}
+	if v.ScanDnsRecordId != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_scanDnsRecordId, *v.ScanDnsRecordId)
+	}
+	serializeStringList(s, schemas.ExadbVmClusterSummary_scanIpIds, v.ScanIpIds)
+	if v.ScanListenerPortTcp != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_scanListenerPortTcp, *v.ScanListenerPortTcp)
+	}
+	if v.ScanListenerPortTcpSsl != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_scanListenerPortTcpSsl, *v.ScanListenerPortTcpSsl)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_shape, *v.Shape)
+	}
+	if v.ShapeAttribute != "" {
+		s.WriteString(schemas.ExadbVmClusterSummary_shapeAttribute, string(v.ShapeAttribute))
+	}
+	if v.SnapshotFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmClusterSummary_snapshotFileSystemStorage)
+		v.SnapshotFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.ExadbVmClusterSummary_sshPublicKeys, v.SshPublicKeys)
+	if v.Status != "" {
+		s.WriteString(schemas.ExadbVmClusterSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_statusReason, *v.StatusReason)
+	}
+	if v.SystemVersion != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_systemVersion, *v.SystemVersion)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ExadbVmClusterSummary_timeZone, *v.TimeZone)
+	}
+	if v.TotalEcpuCount != nil {
+		s.WriteInt32(schemas.ExadbVmClusterSummary_totalEcpuCount, *v.TotalEcpuCount)
+	}
+	if v.TotalFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmClusterSummary_totalFileSystemStorage)
+		v.TotalFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.ExadbVmClusterSummary_vipIds, v.VipIds)
+	if v.VmFileSystemStorage != nil {
+		s.WriteStruct(schemas.ExadbVmClusterSummary_vmFileSystemStorage)
+		v.VmFileSystemStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExadbVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExadbVmClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExadbVmClusterSummary_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_clusterName, v.ClusterName)
+		case schemas.ExadbVmClusterSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExadbVmClusterSummary_createdAt, v.CreatedAt)
+		case schemas.ExadbVmClusterSummary_dataCollectionOptions:
+			v.DataCollectionOptions = &DataCollectionOptions{}
+			return v.DataCollectionOptions.Deserialize(d)
+		case schemas.ExadbVmClusterSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_displayName, v.DisplayName)
+		case schemas.ExadbVmClusterSummary_domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_domain, v.Domain)
+		case schemas.ExadbVmClusterSummary_enabledEcpuCount:
+			v.EnabledEcpuCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_enabledEcpuCount, v.EnabledEcpuCount)
+		case schemas.ExadbVmClusterSummary_exadbVmClusterArn:
+			v.ExadbVmClusterArn = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_exadbVmClusterArn, v.ExadbVmClusterArn)
+		case schemas.ExadbVmClusterSummary_exadbVmClusterId:
+			v.ExadbVmClusterId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_exadbVmClusterId, v.ExadbVmClusterId)
+		case schemas.ExadbVmClusterSummary_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.ExadbVmClusterSummary_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.ExadbVmClusterSummary_giVersion:
+			v.GiVersion = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_giVersion, v.GiVersion)
+		case schemas.ExadbVmClusterSummary_gridImageId:
+			v.GridImageId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_gridImageId, v.GridImageId)
+		case schemas.ExadbVmClusterSummary_gridImageType:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmClusterSummary_gridImageType, &ev); err != nil {
+				return err
+			}
+			v.GridImageType = GridImageType(ev)
+			return nil
+		case schemas.ExadbVmClusterSummary_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_hostname, v.Hostname)
+		case schemas.ExadbVmClusterSummary_iamRoles:
+			return deserializeIamRoleList(d, schemas.ExadbVmClusterSummary_iamRoles, &v.IamRoles)
+		case schemas.ExadbVmClusterSummary_iormConfigCache:
+			v.IormConfigCache = &ExadataIormConfig{}
+			return v.IormConfigCache.Deserialize(d)
+		case schemas.ExadbVmClusterSummary_lastUpdateHistoryEntryId:
+			v.LastUpdateHistoryEntryId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_lastUpdateHistoryEntryId, v.LastUpdateHistoryEntryId)
+		case schemas.ExadbVmClusterSummary_licenseModel:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmClusterSummary_licenseModel, &ev); err != nil {
+				return err
+			}
+			v.LicenseModel = LicenseModel(ev)
+			return nil
+		case schemas.ExadbVmClusterSummary_listenerPort:
+			v.ListenerPort = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_listenerPort, v.ListenerPort)
+		case schemas.ExadbVmClusterSummary_memorySizeInGBs:
+			v.MemorySizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_memorySizeInGBs, v.MemorySizeInGBs)
+		case schemas.ExadbVmClusterSummary_nodeCount:
+			v.NodeCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_nodeCount, v.NodeCount)
+		case schemas.ExadbVmClusterSummary_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.ExadbVmClusterSummary_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_ociUrl, v.OciUrl)
+		case schemas.ExadbVmClusterSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_ocid, v.Ocid)
+		case schemas.ExadbVmClusterSummary_odbNetworkArn:
+			v.OdbNetworkArn = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_odbNetworkArn, v.OdbNetworkArn)
+		case schemas.ExadbVmClusterSummary_odbNetworkId:
+			v.OdbNetworkId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_odbNetworkId, v.OdbNetworkId)
+		case schemas.ExadbVmClusterSummary_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.ExadbVmClusterSummary_percentProgress, v.PercentProgress)
+		case schemas.ExadbVmClusterSummary_scanDnsName:
+			v.ScanDnsName = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_scanDnsName, v.ScanDnsName)
+		case schemas.ExadbVmClusterSummary_scanDnsRecordId:
+			v.ScanDnsRecordId = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_scanDnsRecordId, v.ScanDnsRecordId)
+		case schemas.ExadbVmClusterSummary_scanIpIds:
+			return deserializeStringList(d, schemas.ExadbVmClusterSummary_scanIpIds, &v.ScanIpIds)
+		case schemas.ExadbVmClusterSummary_scanListenerPortTcp:
+			v.ScanListenerPortTcp = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_scanListenerPortTcp, v.ScanListenerPortTcp)
+		case schemas.ExadbVmClusterSummary_scanListenerPortTcpSsl:
+			v.ScanListenerPortTcpSsl = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_scanListenerPortTcpSsl, v.ScanListenerPortTcpSsl)
+		case schemas.ExadbVmClusterSummary_shape:
+			v.Shape = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_shape, v.Shape)
+		case schemas.ExadbVmClusterSummary_shapeAttribute:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmClusterSummary_shapeAttribute, &ev); err != nil {
+				return err
+			}
+			v.ShapeAttribute = ShapeAttribute(ev)
+			return nil
+		case schemas.ExadbVmClusterSummary_snapshotFileSystemStorage:
+			v.SnapshotFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.SnapshotFileSystemStorage.Deserialize(d)
+		case schemas.ExadbVmClusterSummary_sshPublicKeys:
+			return deserializeStringList(d, schemas.ExadbVmClusterSummary_sshPublicKeys, &v.SshPublicKeys)
+		case schemas.ExadbVmClusterSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ExadbVmClusterSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		case schemas.ExadbVmClusterSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_statusReason, v.StatusReason)
+		case schemas.ExadbVmClusterSummary_systemVersion:
+			v.SystemVersion = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_systemVersion, v.SystemVersion)
+		case schemas.ExadbVmClusterSummary_timeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ExadbVmClusterSummary_timeZone, v.TimeZone)
+		case schemas.ExadbVmClusterSummary_totalEcpuCount:
+			v.TotalEcpuCount = new(int32)
+			return d.ReadInt32(schemas.ExadbVmClusterSummary_totalEcpuCount, v.TotalEcpuCount)
+		case schemas.ExadbVmClusterSummary_totalFileSystemStorage:
+			v.TotalFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.TotalFileSystemStorage.Deserialize(d)
+		case schemas.ExadbVmClusterSummary_vipIds:
+			return deserializeStringList(d, schemas.ExadbVmClusterSummary_vipIds, &v.VipIds)
+		case schemas.ExadbVmClusterSummary_vmFileSystemStorage:
+			v.VmFileSystemStorage = &ExadbVmClusterStorageDetails{}
+			return v.VmFileSystemStorage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The storage details for an Exascale storage vault.
+type ExascaleDbStorageDetails struct {
+
+	// The available storage size, in gigabytes (GB).
+	AvailableSizeInGBs *int32
+
+	// The total storage size, in gigabytes (GB).
+	TotalSizeInGBs *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExascaleDbStorageDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExascaleDbStorageDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExascaleDbStorageDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageDetails_availableSizeInGBs, *v.AvailableSizeInGBs)
+	}
+	if v.TotalSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageDetails_totalSizeInGBs, *v.TotalSizeInGBs)
+	}
+}
+func (v *ExascaleDbStorageDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExascaleDbStorageDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExascaleDbStorageDetails_availableSizeInGBs:
+			v.AvailableSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageDetails_availableSizeInGBs, v.AvailableSizeInGBs)
+		case schemas.ExascaleDbStorageDetails_totalSizeInGBs:
+			v.TotalSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageDetails_totalSizeInGBs, v.TotalSizeInGBs)
+		}
+		return nil
+	})
+}
+
+// Information about an Exascale storage vault.
+type ExascaleDbStorageVault struct {
+
+	// The unique identifier of the Exascale storage vault.
+	//
+	// This member is required.
+	ExascaleDbStorageVaultId *string
+
+	// The additional flash cache percentage for the Exascale storage vault.
+	AdditionalFlashCacheInPercent *int32
+
+	// The list of shape attributes attached to the Exascale storage vault.
+	AttachedShapeAttributes []ShapeAttribute
+
+	// The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+	AutoscaleLimitInGBs *int32
+
+	// The Availability Zone for the Exascale storage vault.
+	AvailabilityZone *string
+
+	// The Availability Zone ID for the Exascale storage vault.
+	AvailabilityZoneId *string
+
+	// The date and time when the Exascale storage vault was created.
+	CreatedAt *time.Time
+
+	// The description of the Exascale storage vault.
+	Description *string
+
+	// The user-friendly name for the Exascale storage vault.
+	DisplayName *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The high-capacity database storage details for the Exascale storage vault.
+	HighCapacityDatabaseStorage *ExascaleDbStorageDetails
+
+	// Specifies whether autoscaling is enabled for the Exascale storage vault.
+	IsAutoscaleEnabled *bool
+
+	// The name of the OCI resource anchor for the Exascale storage vault.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure
+	// (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale storage vault.
+	Ocid *string
+
+	// The amount of progress made on the current operation on the Exascale storage
+	// vault, expressed as a percentage.
+	PercentProgress *float32
+
+	// The current status of the Exascale storage vault.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale storage vault.
+	StatusReason *string
+
+	// The time zone of the Exascale storage vault.
+	TimeZone *string
+
+	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
+	// this Exascale storage vault.
+	VmClusterArns []string
+
+	// The number of VM clusters associated with this Exascale storage vault.
+	VmClusterCount *int32
+
+	// The list of unique identifiers of the VM clusters associated with this Exascale
+	// storage vault.
+	VmClusterIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExascaleDbStorageVault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExascaleDbStorageVault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExascaleDbStorageVault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFlashCacheInPercent != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVault_additionalFlashCacheInPercent, *v.AdditionalFlashCacheInPercent)
+	}
+	serializeShapeAttributeList(s, schemas.ExascaleDbStorageVault_attachedShapeAttributes, v.AttachedShapeAttributes)
+	if v.AutoscaleLimitInGBs != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVault_autoscaleLimitInGBs, *v.AutoscaleLimitInGBs)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExascaleDbStorageVault_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_displayName, *v.DisplayName)
+	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.HighCapacityDatabaseStorage != nil {
+		s.WriteStruct(schemas.ExascaleDbStorageVault_highCapacityDatabaseStorage)
+		v.HighCapacityDatabaseStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsAutoscaleEnabled != nil {
+		s.WriteBool(schemas.ExascaleDbStorageVault_isAutoscaleEnabled, *v.IsAutoscaleEnabled)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_ocid, *v.Ocid)
+	}
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.ExascaleDbStorageVault_percentProgress, *v.PercentProgress)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExascaleDbStorageVault_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_statusReason, *v.StatusReason)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_timeZone, *v.TimeZone)
+	}
+	serializeResourceArnList(s, schemas.ExascaleDbStorageVault_vmClusterArns, v.VmClusterArns)
+	if v.VmClusterCount != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVault_vmClusterCount, *v.VmClusterCount)
+	}
+	serializeResourceIdList(s, schemas.ExascaleDbStorageVault_vmClusterIds, v.VmClusterIds)
+}
+func (v *ExascaleDbStorageVault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExascaleDbStorageVault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExascaleDbStorageVault_additionalFlashCacheInPercent:
+			v.AdditionalFlashCacheInPercent = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVault_additionalFlashCacheInPercent, v.AdditionalFlashCacheInPercent)
+		case schemas.ExascaleDbStorageVault_attachedShapeAttributes:
+			return deserializeShapeAttributeList(d, schemas.ExascaleDbStorageVault_attachedShapeAttributes, &v.AttachedShapeAttributes)
+		case schemas.ExascaleDbStorageVault_autoscaleLimitInGBs:
+			v.AutoscaleLimitInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVault_autoscaleLimitInGBs, v.AutoscaleLimitInGBs)
+		case schemas.ExascaleDbStorageVault_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_availabilityZone, v.AvailabilityZone)
+		case schemas.ExascaleDbStorageVault_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ExascaleDbStorageVault_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExascaleDbStorageVault_createdAt, v.CreatedAt)
+		case schemas.ExascaleDbStorageVault_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_description, v.Description)
+		case schemas.ExascaleDbStorageVault_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_displayName, v.DisplayName)
+		case schemas.ExascaleDbStorageVault_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.ExascaleDbStorageVault_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.ExascaleDbStorageVault_highCapacityDatabaseStorage:
+			v.HighCapacityDatabaseStorage = &ExascaleDbStorageDetails{}
+			return v.HighCapacityDatabaseStorage.Deserialize(d)
+		case schemas.ExascaleDbStorageVault_isAutoscaleEnabled:
+			v.IsAutoscaleEnabled = new(bool)
+			return d.ReadBool(schemas.ExascaleDbStorageVault_isAutoscaleEnabled, v.IsAutoscaleEnabled)
+		case schemas.ExascaleDbStorageVault_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.ExascaleDbStorageVault_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_ociUrl, v.OciUrl)
+		case schemas.ExascaleDbStorageVault_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_ocid, v.Ocid)
+		case schemas.ExascaleDbStorageVault_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.ExascaleDbStorageVault_percentProgress, v.PercentProgress)
+		case schemas.ExascaleDbStorageVault_status:
+			var ev string
+			if err := d.ReadString(schemas.ExascaleDbStorageVault_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		case schemas.ExascaleDbStorageVault_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_statusReason, v.StatusReason)
+		case schemas.ExascaleDbStorageVault_timeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_timeZone, v.TimeZone)
+		case schemas.ExascaleDbStorageVault_vmClusterArns:
+			return deserializeResourceArnList(d, schemas.ExascaleDbStorageVault_vmClusterArns, &v.VmClusterArns)
+		case schemas.ExascaleDbStorageVault_vmClusterCount:
+			v.VmClusterCount = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVault_vmClusterCount, v.VmClusterCount)
+		case schemas.ExascaleDbStorageVault_vmClusterIds:
+			return deserializeResourceIdList(d, schemas.ExascaleDbStorageVault_vmClusterIds, &v.VmClusterIds)
+		}
+		return nil
+	})
+}
+
+// Summary information about an Exascale storage vault.
+type ExascaleDbStorageVaultSummary struct {
+
+	// The unique identifier of the Exascale storage vault.
+	//
+	// This member is required.
+	ExascaleDbStorageVaultId *string
+
+	// The additional flash cache percentage for the Exascale storage vault.
+	AdditionalFlashCacheInPercent *int32
+
+	// The list of shape attributes attached to the Exascale storage vault.
+	AttachedShapeAttributes []ShapeAttribute
+
+	// The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+	AutoscaleLimitInGBs *int32
+
+	// The Availability Zone for the Exascale storage vault.
+	AvailabilityZone *string
+
+	// The Availability Zone ID for the Exascale storage vault.
+	AvailabilityZoneId *string
+
+	// The date and time when the Exascale storage vault was created.
+	CreatedAt *time.Time
+
+	// The description of the Exascale storage vault.
+	Description *string
+
+	// The user-friendly name for the Exascale storage vault.
+	DisplayName *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The high-capacity database storage details for the Exascale storage vault.
+	HighCapacityDatabaseStorage *ExascaleDbStorageDetails
+
+	// Specifies whether autoscaling is enabled for the Exascale storage vault.
+	IsAutoscaleEnabled *bool
+
+	// The name of the OCI resource anchor for the Exascale storage vault.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure
+	// (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale storage vault.
+	Ocid *string
+
+	// The amount of progress made on the current operation on the Exascale storage
+	// vault, expressed as a percentage.
+	PercentProgress *float32
+
+	// The current status of the Exascale storage vault.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale storage vault.
+	StatusReason *string
+
+	// The time zone of the Exascale storage vault.
+	TimeZone *string
+
+	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
+	// this Exascale storage vault.
+	VmClusterArns []string
+
+	// The number of VM clusters associated with this Exascale storage vault.
+	VmClusterCount *int32
+
+	// The list of unique identifiers of the VM clusters associated with this Exascale
+	// storage vault.
+	VmClusterIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExascaleDbStorageVaultSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExascaleDbStorageVaultSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExascaleDbStorageVaultSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFlashCacheInPercent != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent, *v.AdditionalFlashCacheInPercent)
+	}
+	serializeShapeAttributeList(s, schemas.ExascaleDbStorageVaultSummary_attachedShapeAttributes, v.AttachedShapeAttributes)
+	if v.AutoscaleLimitInGBs != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_autoscaleLimitInGBs, *v.AutoscaleLimitInGBs)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExascaleDbStorageVaultSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_displayName, *v.DisplayName)
+	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.HighCapacityDatabaseStorage != nil {
+		s.WriteStruct(schemas.ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage)
+		v.HighCapacityDatabaseStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsAutoscaleEnabled != nil {
+		s.WriteBool(schemas.ExascaleDbStorageVaultSummary_isAutoscaleEnabled, *v.IsAutoscaleEnabled)
+	}
+	if v.OciResourceAnchorName != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_ociResourceAnchorName, *v.OciResourceAnchorName)
+	}
+	if v.OciUrl != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_ociUrl, *v.OciUrl)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_ocid, *v.Ocid)
+	}
+	if v.PercentProgress != nil {
+		s.WriteFloat32(schemas.ExascaleDbStorageVaultSummary_percentProgress, *v.PercentProgress)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_statusReason, *v.StatusReason)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_timeZone, *v.TimeZone)
+	}
+	serializeResourceArnList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, v.VmClusterArns)
+	if v.VmClusterCount != nil {
+		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_vmClusterCount, *v.VmClusterCount)
+	}
+	serializeResourceIdList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterIds, v.VmClusterIds)
+}
+func (v *ExascaleDbStorageVaultSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExascaleDbStorageVaultSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent:
+			v.AdditionalFlashCacheInPercent = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent, v.AdditionalFlashCacheInPercent)
+		case schemas.ExascaleDbStorageVaultSummary_attachedShapeAttributes:
+			return deserializeShapeAttributeList(d, schemas.ExascaleDbStorageVaultSummary_attachedShapeAttributes, &v.AttachedShapeAttributes)
+		case schemas.ExascaleDbStorageVaultSummary_autoscaleLimitInGBs:
+			v.AutoscaleLimitInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVaultSummary_autoscaleLimitInGBs, v.AutoscaleLimitInGBs)
+		case schemas.ExascaleDbStorageVaultSummary_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_availabilityZone, v.AvailabilityZone)
+		case schemas.ExascaleDbStorageVaultSummary_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ExascaleDbStorageVaultSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExascaleDbStorageVaultSummary_createdAt, v.CreatedAt)
+		case schemas.ExascaleDbStorageVaultSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_description, v.Description)
+		case schemas.ExascaleDbStorageVaultSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_displayName, v.DisplayName)
+		case schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage:
+			v.HighCapacityDatabaseStorage = &ExascaleDbStorageDetails{}
+			return v.HighCapacityDatabaseStorage.Deserialize(d)
+		case schemas.ExascaleDbStorageVaultSummary_isAutoscaleEnabled:
+			v.IsAutoscaleEnabled = new(bool)
+			return d.ReadBool(schemas.ExascaleDbStorageVaultSummary_isAutoscaleEnabled, v.IsAutoscaleEnabled)
+		case schemas.ExascaleDbStorageVaultSummary_ociResourceAnchorName:
+			v.OciResourceAnchorName = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_ociResourceAnchorName, v.OciResourceAnchorName)
+		case schemas.ExascaleDbStorageVaultSummary_ociUrl:
+			v.OciUrl = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_ociUrl, v.OciUrl)
+		case schemas.ExascaleDbStorageVaultSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_ocid, v.Ocid)
+		case schemas.ExascaleDbStorageVaultSummary_percentProgress:
+			v.PercentProgress = new(float32)
+			return d.ReadFloat32(schemas.ExascaleDbStorageVaultSummary_percentProgress, v.PercentProgress)
+		case schemas.ExascaleDbStorageVaultSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ExascaleDbStorageVaultSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		case schemas.ExascaleDbStorageVaultSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_statusReason, v.StatusReason)
+		case schemas.ExascaleDbStorageVaultSummary_timeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_timeZone, v.TimeZone)
+		case schemas.ExascaleDbStorageVaultSummary_vmClusterArns:
+			return deserializeResourceArnList(d, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, &v.VmClusterArns)
+		case schemas.ExascaleDbStorageVaultSummary_vmClusterCount:
+			v.VmClusterCount = new(int32)
+			return d.ReadInt32(schemas.ExascaleDbStorageVaultSummary_vmClusterCount, v.VmClusterCount)
+		case schemas.ExascaleDbStorageVaultSummary_vmClusterIds:
+			return deserializeResourceIdList(d, schemas.ExascaleDbStorageVaultSummary_vmClusterIds, &v.VmClusterIds)
+		}
+		return nil
+	})
+}
+
+// Information about a flex component that's available for an Exadata
+// infrastructure. A flex component defines the hardware resources, such as CPU
+// cores, memory, and storage, that can be allocated to a shape.
+type FlexComponentSummary struct {
+
+	// The maximum number of CPU cores that can be enabled for the flex component.
+	AvailableCoreCount *int32
+
+	// The maximum amount of database storage, in gigabytes (GB), that can be enabled
+	// for the flex component.
+	AvailableDbStorageInGBs *int32
+
+	// The maximum amount of local storage, in gigabytes (GB), that can be enabled for
+	// the flex component.
+	AvailableLocalStorageInGBs *int32
+
+	// The maximum amount of memory, in gigabytes (GB), that can be enabled for the
+	// flex component.
+	AvailableMemoryInGBs *int32
+
+	// The OCI model compute model used when you create or clone an instance: ECPU or
+	// OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on
+	// the number of cores elastically allocated from a pool of compute and storage
+	// servers. An OCPU is a legacy physical measure of compute resources. OCPUs are
+	// based on the physical core of a processor with hyper-threading enabled.
+	ComputeModel ComputeModel
+
+	// A summary description of the flex component.
+	DescriptionSummary *string
+
+	// The type of hardware for the flex component. Valid values are COMPUTE for
+	// compute servers and CELL for storage servers.
+	HardwareType HardwareType
+
+	// The minimum number of CPU cores that can be enabled for the flex component.
+	MinimumCoreCount *int32
+
+	// The name of the flex component.
+	Name *string
+
+	// The runtime minimum number of CPU cores that can be enabled for the flex
+	// component.
+	RuntimeMinimumCoreCount *int32
+
+	// The shape that uses the flex component.
+	Shape *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FlexComponentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlexComponentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlexComponentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableCoreCount != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_availableCoreCount, *v.AvailableCoreCount)
+	}
+	if v.AvailableDbStorageInGBs != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_availableDbStorageInGBs, *v.AvailableDbStorageInGBs)
+	}
+	if v.AvailableLocalStorageInGBs != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_availableLocalStorageInGBs, *v.AvailableLocalStorageInGBs)
+	}
+	if v.AvailableMemoryInGBs != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_availableMemoryInGBs, *v.AvailableMemoryInGBs)
+	}
+	if v.ComputeModel != "" {
+		s.WriteString(schemas.FlexComponentSummary_computeModel, string(v.ComputeModel))
+	}
+	if v.DescriptionSummary != nil {
+		s.WriteString(schemas.FlexComponentSummary_descriptionSummary, *v.DescriptionSummary)
+	}
+	if v.HardwareType != "" {
+		s.WriteString(schemas.FlexComponentSummary_hardwareType, string(v.HardwareType))
+	}
+	if v.MinimumCoreCount != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_minimumCoreCount, *v.MinimumCoreCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FlexComponentSummary_name, *v.Name)
+	}
+	if v.RuntimeMinimumCoreCount != nil {
+		s.WriteInt32(schemas.FlexComponentSummary_runtimeMinimumCoreCount, *v.RuntimeMinimumCoreCount)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.FlexComponentSummary_shape, *v.Shape)
+	}
+}
+func (v *FlexComponentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlexComponentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlexComponentSummary_availableCoreCount:
+			v.AvailableCoreCount = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_availableCoreCount, v.AvailableCoreCount)
+		case schemas.FlexComponentSummary_availableDbStorageInGBs:
+			v.AvailableDbStorageInGBs = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_availableDbStorageInGBs, v.AvailableDbStorageInGBs)
+		case schemas.FlexComponentSummary_availableLocalStorageInGBs:
+			v.AvailableLocalStorageInGBs = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_availableLocalStorageInGBs, v.AvailableLocalStorageInGBs)
+		case schemas.FlexComponentSummary_availableMemoryInGBs:
+			v.AvailableMemoryInGBs = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_availableMemoryInGBs, v.AvailableMemoryInGBs)
+		case schemas.FlexComponentSummary_computeModel:
+			var ev string
+			if err := d.ReadString(schemas.FlexComponentSummary_computeModel, &ev); err != nil {
+				return err
+			}
+			v.ComputeModel = ComputeModel(ev)
+			return nil
+		case schemas.FlexComponentSummary_descriptionSummary:
+			v.DescriptionSummary = new(string)
+			return d.ReadString(schemas.FlexComponentSummary_descriptionSummary, v.DescriptionSummary)
+		case schemas.FlexComponentSummary_hardwareType:
+			var ev string
+			if err := d.ReadString(schemas.FlexComponentSummary_hardwareType, &ev); err != nil {
+				return err
+			}
+			v.HardwareType = HardwareType(ev)
+			return nil
+		case schemas.FlexComponentSummary_minimumCoreCount:
+			v.MinimumCoreCount = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_minimumCoreCount, v.MinimumCoreCount)
+		case schemas.FlexComponentSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FlexComponentSummary_name, v.Name)
+		case schemas.FlexComponentSummary_runtimeMinimumCoreCount:
+			v.RuntimeMinimumCoreCount = new(int32)
+			return d.ReadInt32(schemas.FlexComponentSummary_runtimeMinimumCoreCount, v.RuntimeMinimumCoreCount)
+		case schemas.FlexComponentSummary_shape:
+			v.Shape = new(string)
+			return d.ReadString(schemas.FlexComponentSummary_shape, v.Shape)
+		}
+		return nil
+	})
+}
+
+// Summary information about an Oracle Grid Infrastructure (GI) minor version.
+type GiMinorVersionSummary struct {
+
+	// The GI minor version.
+	//
+	// This member is required.
+	Version *string
+
+	// The Grid Infrastructure software image ID for this minor version.
+	GridImageId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GiMinorVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GiMinorVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GiMinorVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GridImageId != nil {
+		s.WriteString(schemas.GiMinorVersionSummary_gridImageId, *v.GridImageId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GiMinorVersionSummary_version, *v.Version)
+	}
+}
+func (v *GiMinorVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GiMinorVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GiMinorVersionSummary_gridImageId:
+			v.GridImageId = new(string)
+			return d.ReadString(schemas.GiMinorVersionSummary_gridImageId, v.GridImageId)
+		case schemas.GiMinorVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GiMinorVersionSummary_version, v.Version)
 		}
 		return nil
 	})
@@ -4725,6 +10274,68 @@ func (v *KmsAccess) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = ManagedResourceStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The long-term backup schedule for an Autonomous Database.
+type LongTermBackupSchedule struct {
+
+	// Indicates whether the long-term backup schedule is disabled.
+	IsDisabled *bool
+
+	// The cadence at which long-term backups are taken.
+	RepeatCadence RepeatCadence
+
+	// The retention period, in days, for long-term backups.
+	RetentionPeriodInDays *int32
+
+	// The date and time at which the long-term backup is taken.
+	TimeOfBackup *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *LongTermBackupSchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LongTermBackupSchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LongTermBackupSchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsDisabled != nil {
+		s.WriteBool(schemas.LongTermBackupSchedule_isDisabled, *v.IsDisabled)
+	}
+	if v.RepeatCadence != "" {
+		s.WriteString(schemas.LongTermBackupSchedule_repeatCadence, string(v.RepeatCadence))
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.LongTermBackupSchedule_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.TimeOfBackup != nil {
+		s.WriteTime(schemas.LongTermBackupSchedule_timeOfBackup, *v.TimeOfBackup)
+	}
+}
+func (v *LongTermBackupSchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LongTermBackupSchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LongTermBackupSchedule_isDisabled:
+			v.IsDisabled = new(bool)
+			return d.ReadBool(schemas.LongTermBackupSchedule_isDisabled, v.IsDisabled)
+		case schemas.LongTermBackupSchedule_repeatCadence:
+			var ev string
+			if err := d.ReadString(schemas.LongTermBackupSchedule_repeatCadence, &ev); err != nil {
+				return err
+			}
+			v.RepeatCadence = RepeatCadence(ev)
+			return nil
+		case schemas.LongTermBackupSchedule_retentionPeriodInDays:
+			v.RetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.LongTermBackupSchedule_retentionPeriodInDays, v.RetentionPeriodInDays)
+		case schemas.LongTermBackupSchedule_timeOfBackup:
+			v.TimeOfBackup = new(time.Time)
+			return d.ReadTime(schemas.LongTermBackupSchedule_timeOfBackup, v.TimeOfBackup)
 		}
 		return nil
 	})
@@ -5068,6 +10679,123 @@ func (v *OciDnsForwardingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.OciDnsForwardingConfig_ociDnsListenerIp:
 			v.OciDnsListenerIp = new(string)
 			return d.ReadString(schemas.OciDnsForwardingConfig_ociDnsListenerIp, v.OciDnsListenerIp)
+		}
+		return nil
+	})
+}
+
+// The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key
+// used for an Autonomous Database.
+type OciEncryptionKeyConfiguration struct {
+
+	// The Oracle Cloud Identifier (OCID) of the OCI Vault key to use for encryption.
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// The Oracle Cloud Identifier (OCID) of the OCI Vault that contains the
+	// encryption key.
+	//
+	// This member is required.
+	VaultId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OciEncryptionKeyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OciEncryptionKeyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OciEncryptionKeyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.OciEncryptionKeyConfiguration_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.VaultId != nil {
+		s.WriteString(schemas.OciEncryptionKeyConfiguration_vaultId, *v.VaultId)
+	}
+}
+func (v *OciEncryptionKeyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OciEncryptionKeyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OciEncryptionKeyConfiguration_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.OciEncryptionKeyConfiguration_kmsKeyId, v.KmsKeyId)
+		case schemas.OciEncryptionKeyConfiguration_vaultId:
+			v.VaultId = new(string)
+			return d.ReadString(schemas.OciEncryptionKeyConfiguration_vaultId, v.VaultId)
+		}
+		return nil
+	})
+}
+
+// Information about an Amazon Web Services Identity and Access Management (IAM)
+// service role used for Autonomous Database integration with Oracle Cloud
+// Infrastructure (OCI).
+type OciIamRole struct {
+
+	// The Amazon Web Services integration configuration settings for the Amazon Web
+	// Services Identity and Access Management (IAM) service role.
+	AwsIntegration OciAwsIntegration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) service role.
+	IamRoleArn *string
+
+	// The current lifecycle status of the IAM service role.
+	Status OciIamRoleStatus
+
+	// Additional information about the current status of the IAM service role, if
+	// applicable.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OciIamRole) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OciIamRole)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OciIamRole) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsIntegration != "" {
+		s.WriteString(schemas.OciIamRole_awsIntegration, string(v.AwsIntegration))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.OciIamRole_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OciIamRole_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.OciIamRole_statusReason, *v.StatusReason)
+	}
+}
+func (v *OciIamRole) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OciIamRole, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OciIamRole_awsIntegration:
+			var ev string
+			if err := d.ReadString(schemas.OciIamRole_awsIntegration, &ev); err != nil {
+				return err
+			}
+			v.AwsIntegration = OciAwsIntegration(ev)
+			return nil
+		case schemas.OciIamRole_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.OciIamRole_iamRoleArn, v.IamRoleArn)
+		case schemas.OciIamRole_status:
+			var ev string
+			if err := d.ReadString(schemas.OciIamRole_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OciIamRoleStatus(ev)
+			return nil
+		case schemas.OciIamRole_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.OciIamRole_statusReason, v.StatusReason)
 		}
 		return nil
 	})
@@ -5868,6 +11596,287 @@ func (v *OdbPeeringConnectionSummary) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// The configuration of the Oracle Key Vault (OKV) encryption key used for an
+// Autonomous Database.
+type OkvEncryptionKeyConfiguration struct {
+
+	// The name of the directory that contains the Oracle Key Vault (OKV) certificate.
+	//
+	// This member is required.
+	CertificateDirectoryName *string
+
+	// The name of the directory where the Oracle Key Vault (OKV) configuration is
+	// stored.
+	//
+	// This member is required.
+	DirectoryName *string
+
+	// The identifier of the Oracle Key Vault (OKV) key to use for encryption.
+	//
+	// This member is required.
+	OkvKmsKey *string
+
+	// The URI of the Oracle Key Vault (OKV) server.
+	//
+	// This member is required.
+	OkvUri *string
+
+	// The identifier of the Oracle Key Vault (OKV) certificate.
+	CertificateId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OkvEncryptionKeyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OkvEncryptionKeyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OkvEncryptionKeyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateDirectoryName != nil {
+		s.WriteString(schemas.OkvEncryptionKeyConfiguration_certificateDirectoryName, *v.CertificateDirectoryName)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.OkvEncryptionKeyConfiguration_certificateId, *v.CertificateId)
+	}
+	if v.DirectoryName != nil {
+		s.WriteString(schemas.OkvEncryptionKeyConfiguration_directoryName, *v.DirectoryName)
+	}
+	if v.OkvKmsKey != nil {
+		s.WriteString(schemas.OkvEncryptionKeyConfiguration_okvKmsKey, *v.OkvKmsKey)
+	}
+	if v.OkvUri != nil {
+		s.WriteString(schemas.OkvEncryptionKeyConfiguration_okvUri, *v.OkvUri)
+	}
+}
+func (v *OkvEncryptionKeyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OkvEncryptionKeyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OkvEncryptionKeyConfiguration_certificateDirectoryName:
+			v.CertificateDirectoryName = new(string)
+			return d.ReadString(schemas.OkvEncryptionKeyConfiguration_certificateDirectoryName, v.CertificateDirectoryName)
+		case schemas.OkvEncryptionKeyConfiguration_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.OkvEncryptionKeyConfiguration_certificateId, v.CertificateId)
+		case schemas.OkvEncryptionKeyConfiguration_directoryName:
+			v.DirectoryName = new(string)
+			return d.ReadString(schemas.OkvEncryptionKeyConfiguration_directoryName, v.DirectoryName)
+		case schemas.OkvEncryptionKeyConfiguration_okvKmsKey:
+			v.OkvKmsKey = new(string)
+			return d.ReadString(schemas.OkvEncryptionKeyConfiguration_okvKmsKey, v.OkvKmsKey)
+		case schemas.OkvEncryptionKeyConfiguration_okvUri:
+			v.OkvUri = new(string)
+			return d.ReadString(schemas.OkvEncryptionKeyConfiguration_okvUri, v.OkvUri)
+		}
+		return nil
+	})
+}
+
+// The configuration for creating an Autonomous Database by restoring to a point
+// in time.
+type PointInTimeRestoreConfiguration struct {
+
+	// The type of clone to create from the point-in-time restore.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The unique identifier of the source Autonomous Database to restore from.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	// The list of tablespace identifiers to clone from the point-in-time restore.
+	CloneTableSpaceList []int32
+
+	// The date and time to which to restore the Autonomous Database.
+	Timestamp *time.Time
+
+	// Indicates whether to use the latest available backup timestamp for the restore.
+	UseLatestAvailableBackupTimestamp *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *PointInTimeRestoreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PointInTimeRestoreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PointInTimeRestoreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegerList(s, schemas.PointInTimeRestoreConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneType != "" {
+		s.WriteString(schemas.PointInTimeRestoreConfiguration_cloneType, string(v.CloneType))
+	}
+	if v.SourceAutonomousDatabaseId != nil {
+		s.WriteString(schemas.PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId, *v.SourceAutonomousDatabaseId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.PointInTimeRestoreConfiguration_timestamp, *v.Timestamp)
+	}
+	if v.UseLatestAvailableBackupTimestamp != nil {
+		s.WriteBool(schemas.PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp, *v.UseLatestAvailableBackupTimestamp)
+	}
+}
+func (v *PointInTimeRestoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PointInTimeRestoreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PointInTimeRestoreConfiguration_cloneTableSpaceList:
+			return deserializeIntegerList(d, schemas.PointInTimeRestoreConfiguration_cloneTableSpaceList, &v.CloneTableSpaceList)
+		case schemas.PointInTimeRestoreConfiguration_cloneType:
+			var ev string
+			if err := d.ReadString(schemas.PointInTimeRestoreConfiguration_cloneType, &ev); err != nil {
+				return err
+			}
+			v.CloneType = CloneType(ev)
+			return nil
+		case schemas.PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId:
+			v.SourceAutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId, v.SourceAutonomousDatabaseId)
+		case schemas.PointInTimeRestoreConfiguration_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.PointInTimeRestoreConfiguration_timestamp, v.Timestamp)
+		case schemas.PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp:
+			v.UseLatestAvailableBackupTimestamp = new(bool)
+			return d.ReadBool(schemas.PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp, v.UseLatestAvailableBackupTimestamp)
+		}
+		return nil
+	})
+}
+
+// The configuration of a resource pool for an Autonomous Database.
+type ResourcePoolSummary struct {
+
+	// The available compute capacity in the resource pool.
+	AvailableComputeCapacity *int32
+
+	// The available storage capacity in the resource pool, in TB.
+	AvailableStorageCapacityInTBs *float64
+
+	// Indicates whether the resource pool is disabled.
+	IsDisabled *bool
+
+	// The number of Autonomous Databases that the resource pool can contain.
+	PoolSize *int32
+
+	// The total storage size of the resource pool, in terabytes (TB).
+	PoolStorageSizeInTBs *int32
+
+	// The total compute capacity of the resource pool.
+	TotalComputeCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourcePoolSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePoolSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePoolSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableComputeCapacity != nil {
+		s.WriteInt32(schemas.ResourcePoolSummary_availableComputeCapacity, *v.AvailableComputeCapacity)
+	}
+	if v.AvailableStorageCapacityInTBs != nil {
+		s.WriteFloat64(schemas.ResourcePoolSummary_availableStorageCapacityInTBs, *v.AvailableStorageCapacityInTBs)
+	}
+	if v.IsDisabled != nil {
+		s.WriteBool(schemas.ResourcePoolSummary_isDisabled, *v.IsDisabled)
+	}
+	if v.PoolSize != nil {
+		s.WriteInt32(schemas.ResourcePoolSummary_poolSize, *v.PoolSize)
+	}
+	if v.PoolStorageSizeInTBs != nil {
+		s.WriteInt32(schemas.ResourcePoolSummary_poolStorageSizeInTBs, *v.PoolStorageSizeInTBs)
+	}
+	if v.TotalComputeCapacity != nil {
+		s.WriteInt32(schemas.ResourcePoolSummary_totalComputeCapacity, *v.TotalComputeCapacity)
+	}
+}
+func (v *ResourcePoolSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePoolSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePoolSummary_availableComputeCapacity:
+			v.AvailableComputeCapacity = new(int32)
+			return d.ReadInt32(schemas.ResourcePoolSummary_availableComputeCapacity, v.AvailableComputeCapacity)
+		case schemas.ResourcePoolSummary_availableStorageCapacityInTBs:
+			v.AvailableStorageCapacityInTBs = new(float64)
+			return d.ReadFloat64(schemas.ResourcePoolSummary_availableStorageCapacityInTBs, v.AvailableStorageCapacityInTBs)
+		case schemas.ResourcePoolSummary_isDisabled:
+			v.IsDisabled = new(bool)
+			return d.ReadBool(schemas.ResourcePoolSummary_isDisabled, v.IsDisabled)
+		case schemas.ResourcePoolSummary_poolSize:
+			v.PoolSize = new(int32)
+			return d.ReadInt32(schemas.ResourcePoolSummary_poolSize, v.PoolSize)
+		case schemas.ResourcePoolSummary_poolStorageSizeInTBs:
+			v.PoolStorageSizeInTBs = new(int32)
+			return d.ReadInt32(schemas.ResourcePoolSummary_poolStorageSizeInTBs, v.PoolStorageSizeInTBs)
+		case schemas.ResourcePoolSummary_totalComputeCapacity:
+			v.TotalComputeCapacity = new(int32)
+			return d.ReadInt32(schemas.ResourcePoolSummary_totalComputeCapacity, v.TotalComputeCapacity)
+		}
+		return nil
+	})
+}
+
+// The configuration for creating an Autonomous Database by restoring from a
+// backup.
+type RestoreFromBackupConfiguration struct {
+
+	// The unique identifier of the Autonomous Database backup to restore from.
+	//
+	// This member is required.
+	AutonomousDatabaseBackupId *string
+
+	// The type of clone to create from the backup.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The list of tablespace identifiers to clone from the backup.
+	CloneTableSpaceList []int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestoreFromBackupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreFromBackupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreFromBackupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.RestoreFromBackupConfiguration_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	serializeIntegerList(s, schemas.RestoreFromBackupConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneType != "" {
+		s.WriteString(schemas.RestoreFromBackupConfiguration_cloneType, string(v.CloneType))
+	}
+}
+func (v *RestoreFromBackupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreFromBackupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreFromBackupConfiguration_autonomousDatabaseBackupId:
+			v.AutonomousDatabaseBackupId = new(string)
+			return d.ReadString(schemas.RestoreFromBackupConfiguration_autonomousDatabaseBackupId, v.AutonomousDatabaseBackupId)
+		case schemas.RestoreFromBackupConfiguration_cloneTableSpaceList:
+			return deserializeIntegerList(d, schemas.RestoreFromBackupConfiguration_cloneTableSpaceList, &v.CloneTableSpaceList)
+		case schemas.RestoreFromBackupConfiguration_cloneType:
+			var ev string
+			if err := d.ReadString(schemas.RestoreFromBackupConfiguration_cloneType, &ev); err != nil {
+				return err
+			}
+			v.CloneType = CloneType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration for Amazon S3 access from the ODB network.
 type S3Access struct {
 
@@ -5927,6 +11936,60 @@ func (v *S3Access) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The scheduled start and stop times for an Autonomous Database on a specific day
+// of the week.
+type ScheduledOperationDetails struct {
+
+	// The day of the week on which the scheduled operation occurs.
+	//
+	// This member is required.
+	DayOfWeek *DayOfWeek
+
+	// The scheduled start time for the Autonomous Database, in UTC.
+	ScheduledStartTime *string
+
+	// The scheduled stop time for the Autonomous Database, in UTC.
+	ScheduledStopTime *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScheduledOperationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledOperationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledOperationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfWeek != nil {
+		s.WriteStruct(schemas.ScheduledOperationDetails_dayOfWeek)
+		v.DayOfWeek.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledStartTime != nil {
+		s.WriteString(schemas.ScheduledOperationDetails_scheduledStartTime, *v.ScheduledStartTime)
+	}
+	if v.ScheduledStopTime != nil {
+		s.WriteString(schemas.ScheduledOperationDetails_scheduledStopTime, *v.ScheduledStopTime)
+	}
+}
+func (v *ScheduledOperationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledOperationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledOperationDetails_dayOfWeek:
+			v.DayOfWeek = &DayOfWeek{}
+			return v.DayOfWeek.Deserialize(d)
+		case schemas.ScheduledOperationDetails_scheduledStartTime:
+			v.ScheduledStartTime = new(string)
+			return d.ReadString(schemas.ScheduledOperationDetails_scheduledStartTime, v.ScheduledStartTime)
+		case schemas.ScheduledOperationDetails_scheduledStopTime:
+			v.ScheduledStopTime = new(string)
+			return d.ReadString(schemas.ScheduledOperationDetails_scheduledStopTime, v.ScheduledStopTime)
+		}
+		return nil
+	})
+}
+
 // The configuration for a service network endpoint.
 type ServiceNetworkEndpoint struct {
 
@@ -5969,6 +12032,128 @@ func (v *ServiceNetworkEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// The configuration details for the source used to create an Autonomous Database.
+// This is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	SourceConfigurationMemberCloneToRefreshable
+//	SourceConfigurationMemberCrossRegionDataGuard
+//	SourceConfigurationMemberCrossRegionDisasterRecovery
+//	SourceConfigurationMemberDatabaseClone
+//	SourceConfigurationMemberPointInTimeRestore
+//	SourceConfigurationMemberRestoreFromBackup
+type SourceConfiguration interface {
+	isSourceConfiguration()
+}
+
+// The configuration for creating the Autonomous Database as a refreshable clone.
+type SourceConfigurationMemberCloneToRefreshable struct {
+	Value CloneToRefreshableConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCloneToRefreshable) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberCloneToRefreshable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_cloneToRefreshable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberCloneToRefreshable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for creating the Autonomous Database as a cross-Region Oracle
+// Data Guard peer.
+type SourceConfigurationMemberCrossRegionDataGuard struct {
+	Value CrossRegionDataGuardConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCrossRegionDataGuard) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberCrossRegionDataGuard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_crossRegionDataGuard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberCrossRegionDataGuard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for creating the Autonomous Database as a cross-Region
+// disaster recovery peer.
+type SourceConfigurationMemberCrossRegionDisasterRecovery struct {
+	Value CrossRegionDisasterRecoveryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCrossRegionDisasterRecovery) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberCrossRegionDisasterRecovery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_crossRegionDisasterRecovery)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberCrossRegionDisasterRecovery) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for creating the Autonomous Database as a clone of an
+// existing database.
+type SourceConfigurationMemberDatabaseClone struct {
+	Value DatabaseCloneConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberDatabaseClone) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberDatabaseClone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_databaseClone)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberDatabaseClone) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for creating the Autonomous Database by restoring to a point
+// in time.
+type SourceConfigurationMemberPointInTimeRestore struct {
+	Value PointInTimeRestoreConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberPointInTimeRestore) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberPointInTimeRestore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_pointInTimeRestore)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberPointInTimeRestore) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for creating the Autonomous Database by restoring from a
+// backup.
+type SourceConfigurationMemberRestoreFromBackup struct {
+	Value RestoreFromBackupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberRestoreFromBackup) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberRestoreFromBackup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_restoreFromBackup)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberRestoreFromBackup) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Configuration for Amazon Web Services Security Token Service (STS) access from
@@ -6035,6 +12220,37 @@ func (v *StsAccess) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about an error that occurred during the subscription process.
+type SubscriptionError struct {
+
+	// A human-readable message that describes the subscription error.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubscriptionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriptionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriptionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.SubscriptionError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *SubscriptionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriptionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriptionError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.SubscriptionError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
 // Information about the compatible system versions that can be used with a
 // specific Exadata shape and Grid Infrastructure (GI) version.
 type SystemVersionSummary struct {
@@ -6078,6 +12294,39 @@ func (v *SystemVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.SystemVersionSummary_shape, v.Shape)
 		case schemas.SystemVersionSummary_systemVersions:
 			return deserializeStringList(d, schemas.SystemVersionSummary_systemVersions, &v.SystemVersions)
+		}
+		return nil
+	})
+}
+
+// The transportable tablespace configuration used when creating an Autonomous
+// Database.
+type TransportableTablespace struct {
+
+	// The URL of the transportable tablespace bundle to use when creating the
+	// Autonomous Database.
+	TtsBundleUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TransportableTablespace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransportableTablespace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransportableTablespace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TtsBundleUrl != nil {
+		s.WriteString(schemas.TransportableTablespace_ttsBundleUrl, *v.TtsBundleUrl)
+	}
+}
+func (v *TransportableTablespace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransportableTablespace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransportableTablespace_ttsBundleUrl:
+			v.TtsBundleUrl = new(string)
+			return d.ReadString(schemas.TransportableTablespace_ttsBundleUrl, v.TtsBundleUrl)
 		}
 		return nil
 	})
@@ -6128,6 +12377,106 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The configuration of the wallet password source. This is a union, so only one
+// of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret
+type WalletPasswordSourceConfiguration interface {
+	isWalletPasswordSourceConfiguration()
+}
+
+// The configuration for a customer-managed Amazon Web Services Secrets Manager
+// secret used as the wallet password source.
+type WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret) isWalletPasswordSourceConfiguration() {
+}
+func (v *WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WalletPasswordSourceConfiguration_customerManagedAwsSecret)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The input configuration for the wallet password source. This is a union, so
+// only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret
+type WalletPasswordSourceConfigurationInput interface {
+	isWalletPasswordSourceConfigurationInput()
+}
+
+// The configuration for using a customer-managed Amazon Web Services Secrets
+// Manager secret as the wallet password source.
+type WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) isWalletPasswordSourceConfigurationInput() {
+}
+func (v *WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WalletPasswordSourceConfigurationInput_customerManagedAwsSecret)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of the password source configuration for an Autonomous Database
+// wallet.
+type WalletPasswordSourceSummary struct {
+
+	// The source of the password for the Autonomous Database wallet.
+	PasswordSource WalletPasswordSource
+
+	// The configuration of the password source for the Autonomous Database wallet.
+	PasswordSourceConfiguration WalletPasswordSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *WalletPasswordSourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WalletPasswordSourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WalletPasswordSourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordSource != "" {
+		s.WriteString(schemas.WalletPasswordSourceSummary_passwordSource, string(v.PasswordSource))
+	}
+	serializeWalletPasswordSourceConfiguration(s, schemas.WalletPasswordSourceSummary_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+}
+func (v *WalletPasswordSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WalletPasswordSourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WalletPasswordSourceSummary_passwordSource:
+			var ev string
+			if err := d.ReadString(schemas.WalletPasswordSourceSummary_passwordSource, &ev); err != nil {
+				return err
+			}
+			v.PasswordSource = WalletPasswordSource(ev)
+			return nil
+		case schemas.WalletPasswordSourceSummary_passwordSourceConfiguration:
+			return deserializeWalletPasswordSourceConfiguration(d, schemas.WalletPasswordSourceSummary_passwordSourceConfiguration, &v.PasswordSourceConfiguration)
+		}
+		return nil
+	})
+}
+
 // The configuration for Zero-ETL access from the ODB network.
 type ZeroEtlAccess struct {
 
@@ -6173,3 +12522,20 @@ func (v *ZeroEtlAccess) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAdminPasswordSourceConfiguration()       {}
+func (*UnknownUnionMember) isAdminPasswordSourceConfigurationInput()  {}
+func (*UnknownUnionMember) isEncryptionKeyConfiguration()             {}
+func (*UnknownUnionMember) isEncryptionKeyConfigurationInput()        {}
+func (*UnknownUnionMember) isSourceConfiguration()                    {}
+func (*UnknownUnionMember) isWalletPasswordSourceConfiguration()      {}
+func (*UnknownUnionMember) isWalletPasswordSourceConfigurationInput() {}

@@ -5,12 +5,8 @@ package supplychain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables you to programmatically list all data pipelines for the provided Amazon
@@ -48,24 +44,6 @@ type ListDataIntegrationFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationFlowsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataIntegrationFlowsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataIntegrationFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListDataIntegrationFlowsRequest_instanceId, *v.InstanceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataIntegrationFlowsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataIntegrationFlowsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // The response parameters for ListDataIntegrationFlows.
 type ListDataIntegrationFlowsOutput struct {
 
@@ -83,87 +61,29 @@ type ListDataIntegrationFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataIntegrationFlowsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataIntegrationFlowsResponse_flows:
-			return deserializeDataIntegrationFlowList(d, schemas.ListDataIntegrationFlowsResponse_flows, &v.Flows)
-		case schemas.ListDataIntegrationFlowsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataIntegrationFlowsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataIntegrationFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrationFlows{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlows, schemas.ListDataIntegrationFlowsRequest, schemas.ListDataIntegrationFlowsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrationFlows{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlows, schemas.ListDataIntegrationFlowsRequest, schemas.ListDataIntegrationFlowsResponse), output: &ListDataIntegrationFlowsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataIntegrationFlows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataIntegrationFlowsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataIntegrationFlows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +96,6 @@ func (c *Client) addOperationListDataIntegrationFlowsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,11 +199,3 @@ type ListDataIntegrationFlowsAPIClient interface {
 }
 
 var _ ListDataIntegrationFlowsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataIntegrationFlows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataIntegrationFlows",
-	}
-}

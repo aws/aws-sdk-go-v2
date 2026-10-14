@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.ExportKey
+
+{"WrappedKey":{"KeyCheckValue":"__KeyCheckValue__","KeyCheckValueAlgorithm":"CMAC","KeyMaterial":"__KeyMaterial__","WrappedKeyMaterialFormat":"KEY_CRYPTOGRAM","WrappingKeyArn":"__WrappingKeyArn__"}}

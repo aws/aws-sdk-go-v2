@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The CreateTable operation adds a new table to your account. In an Amazon Web
@@ -260,6 +260,31 @@ type CreateTableInput struct {
 	// [Tagging for DynamoDB]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
 	Tags []types.Tag
 
+	// One or more vector indexes to be created on the table. Each vector index
+	// enables similarity search on a vector attribute. Each element in the list
+	// consists of:
+	//
+	//   - IndexName - The name of the vector index. Must be unique within the table.
+	//
+	//   - VectorAttribute - The attribute that contains vector embeddings. If multiple
+	//   vector indexes reference the same attribute, they must all use the same number
+	//   of dimensions.
+	//
+	//   - Dimensions - The number of dimensions in each vector.
+	//
+	//   - DistanceFunction - The distance function used to calculate similarity. Valid
+	//   values: COSINE , EUCLIDEAN , DOT_PRODUCT .
+	//
+	//   - Projection - Specifies attributes that are copied (projected) from the table
+	//   into the vector index. The total number of projected non-key attributes is
+	//   shared across the vector attribute (counts as 1) and INLINE_FILTER search
+	//   schema elements (each counts as 1). HASH search schema elements do not count
+	//   toward this limit.
+	//
+	//   - SearchSchema - (Optional) Defines the partition key ( HASH ) and inline
+	//   filter ( INLINE_FILTER ) attributes for the vector index.
+	VectorIndexes []types.VectorIndex
+
 	// Represents the warm throughput (in read units per second and write units per
 	// second) for creating a table.
 	WarmThroughput *types.WarmThroughput
@@ -267,6 +292,66 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeDefinitions(s, schemas.CreateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.CreateTableInput_BillingMode, string(v.BillingMode))
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateTableInput_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	serializeGlobalSecondaryIndexList(s, schemas.CreateTableInput_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalTableSettingsReplicationMode != "" {
+		s.WriteString(schemas.CreateTableInput_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
+	}
+	if v.GlobalTableSourceArn != nil {
+		s.WriteString(schemas.CreateTableInput_GlobalTableSourceArn, *v.GlobalTableSourceArn)
+	}
+	serializeKeySchema(s, schemas.CreateTableInput_KeySchema, v.KeySchema)
+	serializeLocalSecondaryIndexList(s, schemas.CreateTableInput_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.OnDemandThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_OnDemandThroughput)
+		v.OnDemandThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisionedThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_ProvisionedThroughput)
+		v.ProvisionedThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.CreateTableInput_ResourcePolicy, *v.ResourcePolicy)
+	}
+	if v.SSESpecification != nil {
+		s.WriteStruct(schemas.CreateTableInput_SSESpecification)
+		v.SSESpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamSpecification != nil {
+		s.WriteStruct(schemas.CreateTableInput_StreamSpecification)
+		v.StreamSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableClass != "" {
+		s.WriteString(schemas.CreateTableInput_TableClass, string(v.TableClass))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreateTableInput_TableName, *v.TableName)
+	}
+	serializeTagList(s, schemas.CreateTableInput_Tags, v.Tags)
+	serializeVectorIndexList(s, schemas.CreateTableInput_VectorIndexes, v.VectorIndexes)
+	if v.WarmThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_WarmThroughput)
+		v.WarmThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *CreateTableInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -285,68 +370,47 @@ type CreateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableDescription != nil {
+		s.WriteStruct(schemas.CreateTableOutput_TableDescription)
+		v.TableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableOutput_TableDescription:
+			v.TableDescription = &types.TableDescription{}
+			return v.TableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableInput, schemas.CreateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableInput, schemas.CreateTableOutput), output: &CreateTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTableDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -356,12 +420,6 @@ func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -380,12 +438,6 @@ func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -435,12 +487,4 @@ func (c *Client) fetchOpCreateTableDiscoverEndpoint(ctx context.Context, region 
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opCreateTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTable",
-	}
 }

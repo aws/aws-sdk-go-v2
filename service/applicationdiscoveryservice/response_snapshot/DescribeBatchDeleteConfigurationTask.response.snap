@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.DescribeBatchDeleteConfigurationTask
+
+{"task":{"configurationType":"SERVER","deletedConfigurations":["__Member__","__Member__"],"deletionWarnings":[{"configurationId":"__ConfigurationId__","warningCode":1,"warningText":"__WarningText__"},{"configurationId":"__ConfigurationId__","warningCode":1,"warningText":"__WarningText__"}],"endTime":946684800,"failedConfigurations":[{"configurationId":"__ConfigurationId__","errorMessage":"__ErrorMessage__","errorStatusCode":1},{"configurationId":"__ConfigurationId__","errorMessage":"__ErrorMessage__","errorStatusCode":1}],"requestedConfigurations":["__Member__","__Member__"],"startTime":946684800,"status":"INITIALIZING","taskId":"__TaskId__"}}

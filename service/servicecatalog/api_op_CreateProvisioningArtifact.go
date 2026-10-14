@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a provisioning artifact (also known as a version) for the specified
@@ -67,29 +63,6 @@ type CreateProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProvisioningArtifactInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.CreateProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.CreateProvisioningArtifactInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.Parameters != nil {
-		s.WriteStruct(schemas.CreateProvisioningArtifactInput_Parameters)
-		v.Parameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.CreateProvisioningArtifactInput_ProductId, *v.ProductId)
-	}
-}
-
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.
@@ -121,82 +94,23 @@ type CreateProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProvisioningArtifactOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProvisioningArtifactOutput_Info:
-			return deserializeProvisioningArtifactInfo(d, schemas.CreateProvisioningArtifactOutput_Info, &v.Info)
-		case schemas.CreateProvisioningArtifactOutput_ProvisioningArtifactDetail:
-			v.ProvisioningArtifactDetail = &types.ProvisioningArtifactDetail{}
-			return v.ProvisioningArtifactDetail.Deserialize(d)
-		case schemas.CreateProvisioningArtifactOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.CreateProvisioningArtifactOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningArtifact, schemas.CreateProvisioningArtifactInput, schemas.CreateProvisioningArtifactOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningArtifact, schemas.CreateProvisioningArtifactInput, schemas.CreateProvisioningArtifactOutput), output: &CreateProvisioningArtifactOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProvisioningArtifact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -206,12 +120,6 @@ func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCreateProvisioningArtifactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningArtifact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,12 +132,6 @@ func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,12 +171,4 @@ func (m *idempotencyToken_initializeOpCreateProvisioningArtifact) HandleInitiali
 }
 func addIdempotencyToken_opCreateProvisioningArtifactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProvisioningArtifact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProvisioningArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProvisioningArtifact",
-	}
 }

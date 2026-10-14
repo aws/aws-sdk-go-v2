@@ -1,0 +1,5 @@
+POST /model-import-jobs
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","importedModelKmsKeyId":"__ImportedModelKmsKeyId__","importedModelName":"__ImportedModelName__","importedModelTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"jobName":"__JobName__","jobTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"modelDataSource":{"s3DataSource":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__","vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}

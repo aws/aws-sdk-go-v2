@@ -1,0 +1,3 @@
+DELETE /kx/environments/__EnvironmentId__/kxvolumes/__VolumeName__?clientToken=__ClientToken__
+
+

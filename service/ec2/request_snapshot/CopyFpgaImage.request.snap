@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CopyFpgaImage&ClientToken=__ClientToken__&Description=__Description__&DryRun=true&Name=__Name__&SourceFpgaImageId=__SourceFpgaImageId__&SourceRegion=__SourceRegion__&Version=2016-11-15

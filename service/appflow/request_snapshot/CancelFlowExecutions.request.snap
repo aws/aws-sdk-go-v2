@@ -1,0 +1,5 @@
+POST /cancel-flow-executions
+
+Content-Type: application/json
+
+{"executionIds":["__Member__","__Member__"],"flowName":"__FlowName__"}

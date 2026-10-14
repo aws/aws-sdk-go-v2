@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the automatic tape creation policies for a gateway. If there are no
@@ -39,6 +38,18 @@ type ListAutomaticTapeCreationPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomaticTapeCreationPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomaticTapeCreationPoliciesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomaticTapeCreationPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListAutomaticTapeCreationPoliciesInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type ListAutomaticTapeCreationPoliciesOutput struct {
 
 	// Gets a listing of information about the gateway's automatic tape creation
@@ -52,74 +63,42 @@ type ListAutomaticTapeCreationPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomaticTapeCreationPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomaticTapeCreationPoliciesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomaticTapeCreationPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomaticTapeCreationPolicyInfos(s, schemas.ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos, v.AutomaticTapeCreationPolicyInfos)
+}
+func (v *ListAutomaticTapeCreationPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomaticTapeCreationPoliciesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos:
+			return deserializeAutomaticTapeCreationPolicyInfos(d, schemas.ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos, &v.AutomaticTapeCreationPolicyInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomaticTapeCreationPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomaticTapeCreationPolicies, schemas.ListAutomaticTapeCreationPoliciesInput, schemas.ListAutomaticTapeCreationPoliciesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAutomaticTapeCreationPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomaticTapeCreationPolicies, schemas.ListAutomaticTapeCreationPoliciesInput, schemas.ListAutomaticTapeCreationPoliciesOutput), output: &ListAutomaticTapeCreationPoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAutomaticTapeCreationPolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomaticTapeCreationPolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomaticTapeCreationPolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +113,8 @@ func (c *Client) addOperationListAutomaticTapeCreationPoliciesMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAutomaticTapeCreationPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutomaticTapeCreationPolicies",
-	}
 }

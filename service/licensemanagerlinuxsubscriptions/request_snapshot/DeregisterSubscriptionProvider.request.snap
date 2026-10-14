@@ -1,0 +1,5 @@
+POST /subscription/DeregisterSubscriptionProvider
+
+Content-Type: application/json
+
+{"SubscriptionProviderArn":"__SubscriptionProviderArn__"}

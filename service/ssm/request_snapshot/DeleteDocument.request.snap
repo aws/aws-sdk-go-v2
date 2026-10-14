@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DeleteDocument
+
+{"DocumentVersion":"__DocumentVersion__","Force":true,"Name":"__Name__","VersionName":"__VersionName__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.MergeBranchesBySquash
+
+{"authorName":"__AuthorName__","commitMessage":"__CommitMessage__","conflictDetailLevel":"FILE_LEVEL","conflictResolution":{"deleteFiles":[{"filePath":"__FilePath__"},{"filePath":"__FilePath__"}],"replaceContents":[{"content":"YmxvYg==","fileMode":"EXECUTABLE","filePath":"__FilePath__","replacementType":"KEEP_BASE"},{"content":"YmxvYg==","fileMode":"EXECUTABLE","filePath":"__FilePath__","replacementType":"KEEP_BASE"}],"setFileModes":[{"fileMode":"EXECUTABLE","filePath":"__FilePath__"},{"fileMode":"EXECUTABLE","filePath":"__FilePath__"}]},"conflictResolutionStrategy":"NONE","destinationCommitSpecifier":"__DestinationCommitSpecifier__","email":"__Email__","keepEmptyFolders":true,"repositoryName":"__RepositoryName__","sourceCommitSpecifier":"__SourceCommitSpecifier__","targetBranch":"__TargetBranch__"}

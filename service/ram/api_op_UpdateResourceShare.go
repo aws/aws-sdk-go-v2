@@ -4,11 +4,10 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies some of the properties of the specified resource share.
@@ -61,6 +60,27 @@ type UpdateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowExternalPrincipals != nil {
+		s.WriteBool(schemas.UpdateResourceShareRequest_allowExternalPrincipals, *v.AllowExternalPrincipals)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_name, *v.Name)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.UpdateResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+
 type UpdateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -78,77 +98,56 @@ type UpdateResourceShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceShareResponse_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShare != nil {
+		s.WriteStruct(schemas.UpdateResourceShareResponse_resourceShare)
+		v.ResourceShare.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceShareResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateResourceShareResponse_clientToken, v.ClientToken)
+		case schemas.UpdateResourceShareResponse_resourceShare:
+			v.ResourceShare = &types.ResourceShare{}
+			return v.ResourceShare.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceShare, schemas.UpdateResourceShareRequest, schemas.UpdateResourceShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceShare, schemas.UpdateResourceShareRequest, schemas.UpdateResourceShareResponse), output: &UpdateResourceShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResourceShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateResourceShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResourceShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +162,8 @@ func (c *Client) addOperationUpdateResourceShareMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateResourceShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateResourceShare",
-	}
 }

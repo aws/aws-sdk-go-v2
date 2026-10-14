@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +42,34 @@ type GetEntityInput struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.GetEntityRequest_entityId, *v.EntityId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetEntityRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetEntityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEntityRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.GetEntityRequest_entityId, v.EntityId)
+		case schemas.GetEntityRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetEntityRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type GetEntityOutput struct {
@@ -110,65 +139,113 @@ type GetEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AreAllComponentsReturned != nil {
+		s.WriteBool(schemas.GetEntityResponse_areAllComponentsReturned, *v.AreAllComponentsReturned)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetEntityResponse_arn, *v.Arn)
+	}
+	serializeComponentsMap(s, schemas.GetEntityResponse_components, v.Components)
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetEntityResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetEntityResponse_description, *v.Description)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.GetEntityResponse_entityId, *v.EntityId)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.GetEntityResponse_entityName, *v.EntityName)
+	}
+	if v.HasChildEntities != nil {
+		s.WriteBool(schemas.GetEntityResponse_hasChildEntities, *v.HasChildEntities)
+	}
+	if v.ParentEntityId != nil {
+		s.WriteString(schemas.GetEntityResponse_parentEntityId, *v.ParentEntityId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetEntityResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.GetEntityResponse_syncSource, *v.SyncSource)
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetEntityResponse_updateDateTime, *v.UpdateDateTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetEntityResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEntityResponse_areAllComponentsReturned:
+			v.AreAllComponentsReturned = new(bool)
+			return d.ReadBool(schemas.GetEntityResponse_areAllComponentsReturned, v.AreAllComponentsReturned)
+		case schemas.GetEntityResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetEntityResponse_arn, v.Arn)
+		case schemas.GetEntityResponse_components:
+			return deserializeComponentsMap(d, schemas.GetEntityResponse_components, &v.Components)
+		case schemas.GetEntityResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetEntityResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetEntityResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEntityResponse_description, v.Description)
+		case schemas.GetEntityResponse_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.GetEntityResponse_entityId, v.EntityId)
+		case schemas.GetEntityResponse_entityName:
+			v.EntityName = new(string)
+			return d.ReadString(schemas.GetEntityResponse_entityName, v.EntityName)
+		case schemas.GetEntityResponse_hasChildEntities:
+			v.HasChildEntities = new(bool)
+			return d.ReadBool(schemas.GetEntityResponse_hasChildEntities, v.HasChildEntities)
+		case schemas.GetEntityResponse_parentEntityId:
+			v.ParentEntityId = new(string)
+			return d.ReadString(schemas.GetEntityResponse_parentEntityId, v.ParentEntityId)
+		case schemas.GetEntityResponse_status:
+			v.Status = &types.Status{}
+			return v.Status.Deserialize(d)
+		case schemas.GetEntityResponse_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.GetEntityResponse_syncSource, v.SyncSource)
+		case schemas.GetEntityResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetEntityResponse_updateDateTime, v.UpdateDateTime)
+		case schemas.GetEntityResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetEntityResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntity, schemas.GetEntityRequest, schemas.GetEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntity, schemas.GetEntityRequest, schemas.GetEntityResponse), output: &GetEntityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEntity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEntity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -178,12 +255,6 @@ func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpGetEntityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,12 +267,6 @@ func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -235,12 +300,4 @@ func (m *endpointPrefix_opGetEntityMiddleware) HandleFinalize(ctx context.Contex
 }
 func addEndpointPrefix_opGetEntityMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetEntityMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetEntity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEntity",
-	}
 }

@@ -1,0 +1,5 @@
+POST /lenses/__LensAlias__/versions
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","IsMajorVersion":true,"LensVersion":"__LensVersion__"}

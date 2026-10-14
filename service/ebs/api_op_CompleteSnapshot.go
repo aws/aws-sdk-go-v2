@@ -4,13 +4,8 @@ package ebs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Seals and completes the snapshot after all of the required blocks of data have
@@ -69,30 +64,6 @@ type CompleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CompleteSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CompleteSnapshotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CompleteSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangedBlocksCount != nil {
-		s.WriteInt32(schemas.CompleteSnapshotRequest_ChangedBlocksCount, *v.ChangedBlocksCount)
-	}
-	if v.Checksum != nil {
-		s.WriteString(schemas.CompleteSnapshotRequest_Checksum, *v.Checksum)
-	}
-	if v.ChecksumAggregationMethod != "" {
-		s.WriteString(schemas.CompleteSnapshotRequest_ChecksumAggregationMethod, string(v.ChecksumAggregationMethod))
-	}
-	if v.ChecksumAlgorithm != "" {
-		s.WriteString(schemas.CompleteSnapshotRequest_ChecksumAlgorithm, string(v.ChecksumAlgorithm))
-	}
-	if v.SnapshotId != nil {
-		s.WriteString(schemas.CompleteSnapshotRequest_SnapshotId, *v.SnapshotId)
-	}
-}
-
 type CompleteSnapshotOutput struct {
 
 	// The status of the snapshot.
@@ -104,89 +75,29 @@ type CompleteSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CompleteSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CompleteSnapshotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CompleteSnapshotResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.CompleteSnapshotResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteSnapshot, schemas.CompleteSnapshotRequest, schemas.CompleteSnapshotResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteSnapshot{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteSnapshot, schemas.CompleteSnapshotRequest, schemas.CompleteSnapshotResponse), output: &CompleteSnapshotOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CompleteSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCompleteSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +112,8 @@ func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCompleteSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CompleteSnapshot",
-	}
 }

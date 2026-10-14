@@ -183,7 +183,8 @@ var EC2WindowsBarleyService = smithy.NewServiceSchema(_EC2WindowsBarleyService, 
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -277,7 +278,8 @@ var _AutoCreate = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "BadRequestException",
 		StatusCode: 400})
 var BadRequestException_Message *smithy.Schema
@@ -536,7 +538,8 @@ var _Insights = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
 		StatusCode: 500})
 var InternalServerException_Message *smithy.Schema
@@ -894,7 +897,8 @@ var _ResourceGroupName = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceInUseException",
 		StatusCode: 400})
 var ResourceInUseException_Message *smithy.Schema
@@ -908,7 +912,8 @@ var _ResourceList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
 		StatusCode: 404})
 var ResourceNotFoundException_Message *smithy.Schema
@@ -1022,7 +1027,8 @@ var _TagList_member *smithy.Schema
 var TagsAlreadyExistException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "TagsAlreadyExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagsAlreadyExistException_Message *smithy.Schema
 
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
@@ -1088,7 +1094,8 @@ var _Title = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var TooManyTagsException_ResourceName *smithy.Schema
@@ -1107,7 +1114,8 @@ var UpdateStatus_RESOLVED *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationinsights",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
 		StatusCode: 400})
 var ValidationException_Message *smithy.Schema

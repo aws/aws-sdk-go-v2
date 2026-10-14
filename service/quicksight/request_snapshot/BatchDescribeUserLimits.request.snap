@@ -1,0 +1,5 @@
+POST /governance/limits/accounts/__AccountId__/user-limits
+
+Content-Type: application/json
+
+{"resourceTypes":["INDEX_STORAGE","INDEX_STORAGE"],"users":[{"namespace":"__Namespace__","userName":"__UserName__"},{"namespace":"__Namespace__","userName":"__UserName__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusterVpcEndpoint":"__ClusterVpcEndpoint__","serviceName":"__ServiceName__"}

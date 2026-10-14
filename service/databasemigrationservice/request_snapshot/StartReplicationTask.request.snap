@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.StartReplicationTask
+
+{"CdcStartPosition":"__CdcStartPosition__","CdcStartTime":946684800,"CdcStopPosition":"__CdcStopPosition__","ReplicationTaskArn":"__ReplicationTaskArn__","StartReplicationTaskType":"start-replication"}

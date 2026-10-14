@@ -5,12 +5,8 @@ package finspacedata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Dataview for a Dataset.
@@ -64,34 +60,6 @@ type CreateDataViewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataViewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AsOfTimestamp != nil {
-		s.WriteInt64(schemas.CreateDataViewRequest_asOfTimestamp, *v.AsOfTimestamp)
-	}
-	if v.AutoUpdate != false {
-		s.WriteBool(schemas.CreateDataViewRequest_autoUpdate, v.AutoUpdate)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataViewRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.CreateDataViewRequest_datasetId, *v.DatasetId)
-	}
-	if v.DestinationTypeParams != nil {
-		s.WriteStruct(schemas.CreateDataViewRequest_destinationTypeParams)
-		v.DestinationTypeParams.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePartitionColumnList(s, schemas.CreateDataViewRequest_partitionColumns, v.PartitionColumns)
-	serializeSortColumnList(s, schemas.CreateDataViewRequest_sortColumns, v.SortColumns)
-}
-
 // Response for creating a data view.
 type CreateDataViewOutput struct {
 
@@ -107,79 +75,26 @@ type CreateDataViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataViewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataViewResponse_dataViewId:
-			v.DataViewId = new(string)
-			return d.ReadString(schemas.CreateDataViewResponse_dataViewId, v.DataViewId)
-		case schemas.CreateDataViewResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.CreateDataViewResponse_datasetId, v.DatasetId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataView, schemas.CreateDataViewRequest, schemas.CreateDataViewResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataView{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataView, schemas.CreateDataViewRequest, schemas.CreateDataViewResponse), output: &CreateDataViewOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -189,12 +104,6 @@ func (c *Client) addOperationCreateDataViewMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateDataViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,12 +116,6 @@ func (c *Client) addOperationCreateDataViewMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,12 +155,4 @@ func (m *idempotencyToken_initializeOpCreateDataView) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateDataViewMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataView{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataView",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /v1/whatsapp/waba/phone?id=__Id__
+
+Content-Type: application/json
+
+{"callSettings":{"callbackPermissionStatus":"__CallbackPermissionStatus__","callEnabled":true,"callHours":{"enabled":true,"holidaySchedule":[{"date":"__Date__","endTime":{"hours":1,"minutes":1},"startTime":{"hours":1,"minutes":1}},{"date":"__Date__","endTime":{"hours":1,"minutes":1},"startTime":{"hours":1,"minutes":1}}],"timezone":"__Timezone__","weeklyOperatingHours":[{"closeTime":{"hours":1,"minutes":1},"dayOfWeek":"MONDAY","openTime":{"hours":1,"minutes":1}},{"closeTime":{"hours":1,"minutes":1},"dayOfWeek":"MONDAY","openTime":{"hours":1,"minutes":1}}]},"callIconVisibility":"__CallIconVisibility__"}}

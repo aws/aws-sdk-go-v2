@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContactFlowModuleAlias":{"AliasId":"__AliasId__","ContactFlowModuleArn":"__ContactFlowModuleArn__","ContactFlowModuleId":"__ContactFlowModuleId__","Description":"__Description__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Version":1}}

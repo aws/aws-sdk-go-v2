@@ -1,0 +1,5 @@
+PUT /spaces/__SpaceId__
+
+Content-Type: application/json
+
+{"description":"__Description__","roleArn":"__RoleArn__","supportedEmailDomains":{"allowedDomains":["__Member__","__Member__"],"enabled":"ENABLED"},"tier":"BASIC"}

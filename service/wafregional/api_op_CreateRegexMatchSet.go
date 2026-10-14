@@ -4,13 +4,8 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -77,21 +72,6 @@ type CreateRegexMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRegexMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRegexMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRegexMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.CreateRegexMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateRegexMatchSetRequest_Name, *v.Name)
-	}
-}
-
 type CreateRegexMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRegexMatchSet request. You
@@ -108,88 +88,29 @@ type CreateRegexMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRegexMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRegexMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRegexMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.CreateRegexMatchSetResponse_ChangeToken, v.ChangeToken)
-		case schemas.CreateRegexMatchSetResponse_RegexMatchSet:
-			v.RegexMatchSet = &types.RegexMatchSet{}
-			return v.RegexMatchSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRegexMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegexMatchSet, schemas.CreateRegexMatchSetRequest, schemas.CreateRegexMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRegexMatchSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegexMatchSet, schemas.CreateRegexMatchSetRequest, schemas.CreateRegexMatchSetResponse), output: &CreateRegexMatchSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRegexMatchSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRegexMatchSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegexMatchSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +125,8 @@ func (c *Client) addOperationCreateRegexMatchSetMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRegexMatchSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRegexMatchSet",
-	}
 }

@@ -5,9 +5,9 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all supported Elasticsearch versions
@@ -46,6 +46,21 @@ type ListElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListElasticsearchVersionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the parameters for response received from ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {
 
@@ -63,74 +78,48 @@ type ListElasticsearchVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElasticsearchVersionList(s, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, v.ElasticsearchVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListElasticsearchVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListElasticsearchVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions:
+			return deserializeElasticsearchVersionList(d, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, &v.ElasticsearchVersions)
+		case schemas.ListElasticsearchVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListElasticsearchVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchVersions, schemas.ListElasticsearchVersionsRequest, schemas.ListElasticsearchVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchVersions, schemas.ListElasticsearchVersionsRequest, schemas.ListElasticsearchVersionsResponse), output: &ListElasticsearchVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListElasticsearchVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListElasticsearchVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListElasticsearchVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +132,6 @@ func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +231,3 @@ type ListElasticsearchVersionsAPIClient interface {
 }
 
 var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListElasticsearchVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListElasticsearchVersions",
-	}
-}

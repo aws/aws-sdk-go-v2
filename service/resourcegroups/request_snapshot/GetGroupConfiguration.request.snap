@@ -1,0 +1,5 @@
+POST /get-group-configuration
+
+Content-Type: application/json
+
+{"Group":"__Group__"}

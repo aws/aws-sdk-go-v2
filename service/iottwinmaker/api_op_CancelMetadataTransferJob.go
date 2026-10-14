@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +37,18 @@ type CancelMetadataTransferJobInput struct {
 	MetadataTransferJobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelMetadataTransferJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataTransferJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataTransferJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.CancelMetadataTransferJobRequest_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
 }
 
 type CancelMetadataTransferJobOutput struct {
@@ -69,65 +82,70 @@ type CancelMetadataTransferJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataTransferJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataTransferJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataTransferJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelMetadataTransferJobResponse_arn, *v.Arn)
+	}
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.CancelMetadataTransferJobResponse_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
+	if v.Progress != nil {
+		s.WriteStruct(schemas.CancelMetadataTransferJobResponse_progress)
+		v.Progress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CancelMetadataTransferJobResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.CancelMetadataTransferJobResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *CancelMetadataTransferJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMetadataTransferJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMetadataTransferJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelMetadataTransferJobResponse_arn, v.Arn)
+		case schemas.CancelMetadataTransferJobResponse_metadataTransferJobId:
+			v.MetadataTransferJobId = new(string)
+			return d.ReadString(schemas.CancelMetadataTransferJobResponse_metadataTransferJobId, v.MetadataTransferJobId)
+		case schemas.CancelMetadataTransferJobResponse_progress:
+			v.Progress = &types.MetadataTransferJobProgress{}
+			return v.Progress.Deserialize(d)
+		case schemas.CancelMetadataTransferJobResponse_status:
+			v.Status = &types.MetadataTransferJobStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CancelMetadataTransferJobResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.CancelMetadataTransferJobResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMetadataTransferJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataTransferJob, schemas.CancelMetadataTransferJobRequest, schemas.CancelMetadataTransferJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelMetadataTransferJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataTransferJob, schemas.CancelMetadataTransferJobRequest, schemas.CancelMetadataTransferJobResponse), output: &CancelMetadataTransferJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelMetadataTransferJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelMetadataTransferJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -137,12 +155,6 @@ func (c *Client) addOperationCancelMetadataTransferJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCancelMetadataTransferJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMetadataTransferJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +167,6 @@ func (c *Client) addOperationCancelMetadataTransferJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -194,12 +200,4 @@ func (m *endpointPrefix_opCancelMetadataTransferJobMiddleware) HandleFinalize(ct
 }
 func addEndpointPrefix_opCancelMetadataTransferJobMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCancelMetadataTransferJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCancelMetadataTransferJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelMetadataTransferJob",
-	}
 }

@@ -1,0 +1,3 @@
+GET /wireless_device_import_task?id=__Id__&maxResults=1&nextToken=__NextToken__&status=INITIALIZED
+
+

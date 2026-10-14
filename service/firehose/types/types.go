@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,34 @@ type AmazonOpenSearchServerlessBufferingHints struct {
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonOpenSearchServerlessBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonOpenSearchServerlessBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonOpenSearchServerlessBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.AmazonOpenSearchServerlessBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.AmazonOpenSearchServerlessBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *AmazonOpenSearchServerlessBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonOpenSearchServerlessBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonOpenSearchServerlessBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.AmazonOpenSearchServerlessBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.AmazonOpenSearchServerlessBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.AmazonOpenSearchServerlessBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in the Serverless offering for
@@ -81,6 +111,98 @@ type AmazonOpenSearchServerlessDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonOpenSearchServerlessDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonOpenSearchServerlessDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CollectionEndpoint != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint, *v.CollectionEndpoint)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_IndexName, *v.IndexName)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmazonOpenSearchServerlessDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonOpenSearchServerlessDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &AmazonOpenSearchServerlessBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint:
+			v.CollectionEndpoint = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_CollectionEndpoint, v.CollectionEndpoint)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_IndexName, v.IndexName)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &AmazonOpenSearchServerlessRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonOpenSearchServerlessDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = AmazonOpenSearchServerlessS3BackupMode(ev)
+			return nil
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationConfiguration_VpcConfiguration:
+			v.VpcConfiguration = &VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The destination description in the Serverless offering for Amazon OpenSearch
 // Service.
 type AmazonOpenSearchServerlessDestinationDescription struct {
@@ -117,6 +239,98 @@ type AmazonOpenSearchServerlessDestinationDescription struct {
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonOpenSearchServerlessDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonOpenSearchServerlessDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CollectionEndpoint != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint, *v.CollectionEndpoint)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationDescription_IndexName, *v.IndexName)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfigurationDescription != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription)
+		v.VpcConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmazonOpenSearchServerlessDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonOpenSearchServerlessDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_BufferingHints:
+			v.BufferingHints = &AmazonOpenSearchServerlessBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint:
+			v.CollectionEndpoint = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationDescription_CollectionEndpoint, v.CollectionEndpoint)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationDescription_IndexName, v.IndexName)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_RetryOptions:
+			v.RetryOptions = &AmazonOpenSearchServerlessRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonOpenSearchServerlessDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = AmazonOpenSearchServerlessS3BackupMode(ev)
+			return nil
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationDescription_VpcConfigurationDescription:
+			v.VpcConfigurationDescription = &VpcConfigurationDescription{}
+			return v.VpcConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in the Serverless offering for Amazon
@@ -156,6 +370,80 @@ type AmazonOpenSearchServerlessDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonOpenSearchServerlessDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonOpenSearchServerlessDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CollectionEndpoint != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint, *v.CollectionEndpoint)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationUpdate_IndexName, *v.IndexName)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonOpenSearchServerlessDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.AmazonOpenSearchServerlessDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmazonOpenSearchServerlessDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonOpenSearchServerlessDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_BufferingHints:
+			v.BufferingHints = &AmazonOpenSearchServerlessBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint:
+			v.CollectionEndpoint = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationUpdate_CollectionEndpoint, v.CollectionEndpoint)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationUpdate_IndexName, v.IndexName)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_RetryOptions:
+			v.RetryOptions = &AmazonOpenSearchServerlessRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonOpenSearchServerlessDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.AmazonOpenSearchServerlessDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configures retry behavior in case Firehose is unable to deliver documents to
 // the Serverless offering for Amazon OpenSearch Service.
 type AmazonOpenSearchServerlessRetryOptions struct {
@@ -168,6 +456,28 @@ type AmazonOpenSearchServerlessRetryOptions struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonOpenSearchServerlessRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonOpenSearchServerlessRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonOpenSearchServerlessRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.AmazonOpenSearchServerlessRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *AmazonOpenSearchServerlessRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonOpenSearchServerlessRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonOpenSearchServerlessRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.AmazonOpenSearchServerlessRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // Describes the buffering to perform before delivering data to the Amazon
@@ -187,6 +497,34 @@ type AmazonopensearchserviceBufferingHints struct {
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonopensearchserviceBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonopensearchserviceBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonopensearchserviceBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.AmazonopensearchserviceBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.AmazonopensearchserviceBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *AmazonopensearchserviceBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonopensearchserviceBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonopensearchserviceBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.AmazonopensearchserviceBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.AmazonopensearchserviceBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.AmazonopensearchserviceBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Amazon OpenSearch Service
@@ -260,6 +598,128 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonopensearchserviceDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonopensearchserviceDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationConfiguration_TypeName, *v.TypeName)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationConfiguration_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmazonopensearchserviceDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonopensearchserviceDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonopensearchserviceDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &AmazonopensearchserviceBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_DomainARN, v.DomainARN)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_IndexName, v.IndexName)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = AmazonopensearchserviceIndexRotationPeriod(ev)
+			return nil
+		case schemas.AmazonopensearchserviceDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &AmazonopensearchserviceRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = AmazonopensearchserviceS3BackupMode(ev)
+			return nil
+		case schemas.AmazonopensearchserviceDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationConfiguration_TypeName, v.TypeName)
+		case schemas.AmazonopensearchserviceDestinationConfiguration_VpcConfiguration:
+			v.VpcConfiguration = &VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The destination description in Amazon OpenSearch Service.
 type AmazonopensearchserviceDestinationDescription struct {
 
@@ -311,6 +771,128 @@ type AmazonopensearchserviceDestinationDescription struct {
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonopensearchserviceDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonopensearchserviceDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationDescription_TypeName, *v.TypeName)
+	}
+	if v.VpcConfigurationDescription != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationDescription_VpcConfigurationDescription)
+		v.VpcConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmazonopensearchserviceDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonopensearchserviceDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonopensearchserviceDestinationDescription_BufferingHints:
+			v.BufferingHints = &AmazonopensearchserviceBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.AmazonopensearchserviceDestinationDescription_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_DomainARN, v.DomainARN)
+		case schemas.AmazonopensearchserviceDestinationDescription_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_IndexName, v.IndexName)
+		case schemas.AmazonopensearchserviceDestinationDescription_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = AmazonopensearchserviceIndexRotationPeriod(ev)
+			return nil
+		case schemas.AmazonopensearchserviceDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_RetryOptions:
+			v.RetryOptions = &AmazonopensearchserviceRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.AmazonopensearchserviceDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = AmazonopensearchserviceS3BackupMode(ev)
+			return nil
+		case schemas.AmazonopensearchserviceDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationDescription_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationDescription_TypeName, v.TypeName)
+		case schemas.AmazonopensearchserviceDestinationDescription_VpcConfigurationDescription:
+			v.VpcConfigurationDescription = &VpcConfigurationDescription{}
+			return v.VpcConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in Amazon OpenSearch Service.
@@ -371,6 +953,110 @@ type AmazonopensearchserviceDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonopensearchserviceDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonopensearchserviceDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.AmazonopensearchserviceDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.AmazonopensearchserviceDestinationUpdate_TypeName, *v.TypeName)
+	}
+}
+func (v *AmazonopensearchserviceDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonopensearchserviceDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonopensearchserviceDestinationUpdate_BufferingHints:
+			v.BufferingHints = &AmazonopensearchserviceBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.AmazonopensearchserviceDestinationUpdate_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_DomainARN, v.DomainARN)
+		case schemas.AmazonopensearchserviceDestinationUpdate_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_IndexName, v.IndexName)
+		case schemas.AmazonopensearchserviceDestinationUpdate_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = AmazonopensearchserviceIndexRotationPeriod(ev)
+			return nil
+		case schemas.AmazonopensearchserviceDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_RetryOptions:
+			v.RetryOptions = &AmazonopensearchserviceRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.AmazonopensearchserviceDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.AmazonopensearchserviceDestinationUpdate_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.AmazonopensearchserviceDestinationUpdate_TypeName, v.TypeName)
+		}
+		return nil
+	})
+}
+
 // Configures retry behavior in case Firehose is unable to deliver documents to
 // Amazon OpenSearch Service.
 type AmazonopensearchserviceRetryOptions struct {
@@ -383,6 +1069,28 @@ type AmazonopensearchserviceRetryOptions struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonopensearchserviceRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonopensearchserviceRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonopensearchserviceRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.AmazonopensearchserviceRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *AmazonopensearchserviceRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonopensearchserviceRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonopensearchserviceRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.AmazonopensearchserviceRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // The authentication configuration of the Amazon MSK cluster.
@@ -399,6 +1107,38 @@ type AuthenticationConfiguration struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthenticationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connectivity != "" {
+		s.WriteString(schemas.AuthenticationConfiguration_Connectivity, string(v.Connectivity))
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.AuthenticationConfiguration_RoleARN, *v.RoleARN)
+	}
+}
+func (v *AuthenticationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationConfiguration_Connectivity:
+			var ev string
+			if err := d.ReadString(schemas.AuthenticationConfiguration_Connectivity, &ev); err != nil {
+				return err
+			}
+			v.Connectivity = Connectivity(ev)
+			return nil
+		case schemas.AuthenticationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.AuthenticationConfiguration_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Describes hints for the buffering to perform before delivering data to the
@@ -427,6 +1167,34 @@ type BufferingHints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.BufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.BufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *BufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.BufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.BufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.BufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
+}
+
 //	Describes the containers where the destination Apache Iceberg Tables are
 //
 // persisted.
@@ -446,6 +1214,34 @@ type CatalogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CatalogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogARN != nil {
+		s.WriteString(schemas.CatalogConfiguration_CatalogARN, *v.CatalogARN)
+	}
+	if v.WarehouseLocation != nil {
+		s.WriteString(schemas.CatalogConfiguration_WarehouseLocation, *v.WarehouseLocation)
+	}
+}
+func (v *CatalogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogConfiguration_CatalogARN:
+			v.CatalogARN = new(string)
+			return d.ReadString(schemas.CatalogConfiguration_CatalogARN, v.CatalogARN)
+		case schemas.CatalogConfiguration_WarehouseLocation:
+			v.WarehouseLocation = new(string)
+			return d.ReadString(schemas.CatalogConfiguration_WarehouseLocation, v.WarehouseLocation)
+		}
+		return nil
+	})
+}
+
 // Describes the Amazon CloudWatch logging options for your Firehose stream.
 type CloudWatchLoggingOptions struct {
 
@@ -461,6 +1257,40 @@ type CloudWatchLoggingOptions struct {
 	LogStreamName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLoggingOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CloudWatchLoggingOptions_Enabled, *v.Enabled)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptions_LogGroupName, *v.LogGroupName)
+	}
+	if v.LogStreamName != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptions_LogStreamName, *v.LogStreamName)
+	}
+}
+func (v *CloudWatchLoggingOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOptions_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CloudWatchLoggingOptions_Enabled, v.Enabled)
+		case schemas.CloudWatchLoggingOptions_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptions_LogGroupName, v.LogGroupName)
+		case schemas.CloudWatchLoggingOptions_LogStreamName:
+			v.LogStreamName = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptions_LogStreamName, v.LogStreamName)
+		}
+		return nil
+	})
 }
 
 // Describes a COPY command for Amazon Redshift.
@@ -501,6 +1331,40 @@ type CopyCommand struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyCommand) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyCommand)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyCommand) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyOptions != nil {
+		s.WriteString(schemas.CopyCommand_CopyOptions, *v.CopyOptions)
+	}
+	if v.DataTableColumns != nil {
+		s.WriteString(schemas.CopyCommand_DataTableColumns, *v.DataTableColumns)
+	}
+	if v.DataTableName != nil {
+		s.WriteString(schemas.CopyCommand_DataTableName, *v.DataTableName)
+	}
+}
+func (v *CopyCommand) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyCommand, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyCommand_CopyOptions:
+			v.CopyOptions = new(string)
+			return d.ReadString(schemas.CopyCommand_CopyOptions, v.CopyOptions)
+		case schemas.CopyCommand_DataTableColumns:
+			v.DataTableColumns = new(string)
+			return d.ReadString(schemas.CopyCommand_DataTableColumns, v.DataTableColumns)
+		case schemas.CopyCommand_DataTableName:
+			v.DataTableName = new(string)
+			return d.ReadString(schemas.CopyCommand_DataTableName, v.DataTableName)
+		}
+		return nil
+	})
+}
+
 // The structure used to configure the list of column patterns in source database
 // endpoint for Firehose to read from.
 //
@@ -522,6 +1386,28 @@ type DatabaseColumnList struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatabaseColumnList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseColumnList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseColumnList) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Exclude, v.Exclude)
+	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseColumnList_Include, v.Include)
+}
+func (v *DatabaseColumnList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseColumnList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseColumnList_Exclude:
+			return deserializeDatabaseColumnIncludeOrExcludeList(d, schemas.DatabaseColumnList_Exclude, &v.Exclude)
+		case schemas.DatabaseColumnList_Include:
+			return deserializeDatabaseColumnIncludeOrExcludeList(d, schemas.DatabaseColumnList_Include, &v.Include)
+		}
+		return nil
+	})
+}
+
 // The structure used to configure the list of database patterns in source
 // database endpoint for Firehose to read from.
 //
@@ -541,6 +1427,28 @@ type DatabaseList struct {
 	Include []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseList) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Exclude, v.Exclude)
+	serializeDatabaseIncludeOrExcludeList(s, schemas.DatabaseList_Include, v.Include)
+}
+func (v *DatabaseList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseList_Exclude:
+			return deserializeDatabaseIncludeOrExcludeList(d, schemas.DatabaseList_Exclude, &v.Exclude)
+		case schemas.DatabaseList_Include:
+			return deserializeDatabaseIncludeOrExcludeList(d, schemas.DatabaseList_Include, &v.Include)
+		}
+		return nil
+	})
 }
 
 //	The structure that describes the snapshot information of a table in source
@@ -594,6 +1502,68 @@ type DatabaseSnapshotInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatabaseSnapshotInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSnapshotInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSnapshotInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureDescription != nil {
+		s.WriteStruct(schemas.DatabaseSnapshotInfo_FailureDescription)
+		v.FailureDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DatabaseSnapshotInfo_Id, *v.Id)
+	}
+	if v.RequestTimestamp != nil {
+		s.WriteTime(schemas.DatabaseSnapshotInfo_RequestTimestamp, *v.RequestTimestamp)
+	}
+	if v.RequestedBy != "" {
+		s.WriteString(schemas.DatabaseSnapshotInfo_RequestedBy, string(v.RequestedBy))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatabaseSnapshotInfo_Status, string(v.Status))
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.DatabaseSnapshotInfo_Table, *v.Table)
+	}
+}
+func (v *DatabaseSnapshotInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSnapshotInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSnapshotInfo_FailureDescription:
+			v.FailureDescription = &FailureDescription{}
+			return v.FailureDescription.Deserialize(d)
+		case schemas.DatabaseSnapshotInfo_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DatabaseSnapshotInfo_Id, v.Id)
+		case schemas.DatabaseSnapshotInfo_RequestTimestamp:
+			v.RequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DatabaseSnapshotInfo_RequestTimestamp, v.RequestTimestamp)
+		case schemas.DatabaseSnapshotInfo_RequestedBy:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSnapshotInfo_RequestedBy, &ev); err != nil {
+				return err
+			}
+			v.RequestedBy = SnapshotRequestedBy(ev)
+			return nil
+		case schemas.DatabaseSnapshotInfo_Status:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSnapshotInfo_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SnapshotStatus(ev)
+			return nil
+		case schemas.DatabaseSnapshotInfo_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.DatabaseSnapshotInfo_Table, v.Table)
+		}
+		return nil
+	})
+}
+
 //	The structure to configure the authentication methods for Firehose to connect
 //
 // to source database endpoint.
@@ -607,6 +1577,30 @@ type DatabaseSourceAuthenticationConfiguration struct {
 	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseSourceAuthenticationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSourceAuthenticationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSourceAuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.DatabaseSourceAuthenticationConfiguration_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatabaseSourceAuthenticationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSourceAuthenticationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSourceAuthenticationConfiguration_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	The top level object for configuring streams with database as a source.
@@ -704,6 +1698,103 @@ type DatabaseSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatabaseSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Columns != nil {
+		s.WriteStruct(schemas.DatabaseSourceConfiguration_Columns)
+		v.Columns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseSourceAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.DatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration)
+		v.DatabaseSourceAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseSourceVPCConfiguration != nil {
+		s.WriteStruct(schemas.DatabaseSourceConfiguration_DatabaseSourceVPCConfiguration)
+		v.DatabaseSourceVPCConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Databases != nil {
+		s.WriteStruct(schemas.DatabaseSourceConfiguration_Databases)
+		v.Databases.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DatabaseSourceConfiguration_Endpoint, *v.Endpoint)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DatabaseSourceConfiguration_Port, *v.Port)
+	}
+	if v.SSLMode != "" {
+		s.WriteString(schemas.DatabaseSourceConfiguration_SSLMode, string(v.SSLMode))
+	}
+	if v.SnapshotWatermarkTable != nil {
+		s.WriteString(schemas.DatabaseSourceConfiguration_SnapshotWatermarkTable, *v.SnapshotWatermarkTable)
+	}
+	serializeDatabaseSurrogateKeyList(s, schemas.DatabaseSourceConfiguration_SurrogateKeys, v.SurrogateKeys)
+	if v.Tables != nil {
+		s.WriteStruct(schemas.DatabaseSourceConfiguration_Tables)
+		v.Tables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DatabaseSourceConfiguration_Type, string(v.Type))
+	}
+}
+func (v *DatabaseSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSourceConfiguration_Columns:
+			v.Columns = &DatabaseColumnList{}
+			return v.Columns.Deserialize(d)
+		case schemas.DatabaseSourceConfiguration_DatabaseSourceAuthenticationConfiguration:
+			v.DatabaseSourceAuthenticationConfiguration = &DatabaseSourceAuthenticationConfiguration{}
+			return v.DatabaseSourceAuthenticationConfiguration.Deserialize(d)
+		case schemas.DatabaseSourceConfiguration_DatabaseSourceVPCConfiguration:
+			v.DatabaseSourceVPCConfiguration = &DatabaseSourceVPCConfiguration{}
+			return v.DatabaseSourceVPCConfiguration.Deserialize(d)
+		case schemas.DatabaseSourceConfiguration_Databases:
+			v.Databases = &DatabaseList{}
+			return v.Databases.Deserialize(d)
+		case schemas.DatabaseSourceConfiguration_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DatabaseSourceConfiguration_Endpoint, v.Endpoint)
+		case schemas.DatabaseSourceConfiguration_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DatabaseSourceConfiguration_Port, v.Port)
+		case schemas.DatabaseSourceConfiguration_SSLMode:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSourceConfiguration_SSLMode, &ev); err != nil {
+				return err
+			}
+			v.SSLMode = SSLMode(ev)
+			return nil
+		case schemas.DatabaseSourceConfiguration_SnapshotWatermarkTable:
+			v.SnapshotWatermarkTable = new(string)
+			return d.ReadString(schemas.DatabaseSourceConfiguration_SnapshotWatermarkTable, v.SnapshotWatermarkTable)
+		case schemas.DatabaseSourceConfiguration_SurrogateKeys:
+			return deserializeDatabaseSurrogateKeyList(d, schemas.DatabaseSourceConfiguration_SurrogateKeys, &v.SurrogateKeys)
+		case schemas.DatabaseSourceConfiguration_Tables:
+			v.Tables = &DatabaseTableList{}
+			return v.Tables.Deserialize(d)
+		case schemas.DatabaseSourceConfiguration_Type:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSourceConfiguration_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DatabaseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The top level object for database source description.
 //
 // Amazon Data Firehose is in preview release and is subject to change.
@@ -789,6 +1880,106 @@ type DatabaseSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatabaseSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Columns != nil {
+		s.WriteStruct(schemas.DatabaseSourceDescription_Columns)
+		v.Columns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseSourceAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.DatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration)
+		v.DatabaseSourceAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseSourceVPCConfiguration != nil {
+		s.WriteStruct(schemas.DatabaseSourceDescription_DatabaseSourceVPCConfiguration)
+		v.DatabaseSourceVPCConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Databases != nil {
+		s.WriteStruct(schemas.DatabaseSourceDescription_Databases)
+		v.Databases.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DatabaseSourceDescription_Endpoint, *v.Endpoint)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.DatabaseSourceDescription_Port, *v.Port)
+	}
+	if v.SSLMode != "" {
+		s.WriteString(schemas.DatabaseSourceDescription_SSLMode, string(v.SSLMode))
+	}
+	serializeDatabaseSnapshotInfoList(s, schemas.DatabaseSourceDescription_SnapshotInfo, v.SnapshotInfo)
+	if v.SnapshotWatermarkTable != nil {
+		s.WriteString(schemas.DatabaseSourceDescription_SnapshotWatermarkTable, *v.SnapshotWatermarkTable)
+	}
+	serializeDatabaseColumnIncludeOrExcludeList(s, schemas.DatabaseSourceDescription_SurrogateKeys, v.SurrogateKeys)
+	if v.Tables != nil {
+		s.WriteStruct(schemas.DatabaseSourceDescription_Tables)
+		v.Tables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DatabaseSourceDescription_Type, string(v.Type))
+	}
+}
+func (v *DatabaseSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSourceDescription_Columns:
+			v.Columns = &DatabaseColumnList{}
+			return v.Columns.Deserialize(d)
+		case schemas.DatabaseSourceDescription_DatabaseSourceAuthenticationConfiguration:
+			v.DatabaseSourceAuthenticationConfiguration = &DatabaseSourceAuthenticationConfiguration{}
+			return v.DatabaseSourceAuthenticationConfiguration.Deserialize(d)
+		case schemas.DatabaseSourceDescription_DatabaseSourceVPCConfiguration:
+			v.DatabaseSourceVPCConfiguration = &DatabaseSourceVPCConfiguration{}
+			return v.DatabaseSourceVPCConfiguration.Deserialize(d)
+		case schemas.DatabaseSourceDescription_Databases:
+			v.Databases = &DatabaseList{}
+			return v.Databases.Deserialize(d)
+		case schemas.DatabaseSourceDescription_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DatabaseSourceDescription_Endpoint, v.Endpoint)
+		case schemas.DatabaseSourceDescription_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.DatabaseSourceDescription_Port, v.Port)
+		case schemas.DatabaseSourceDescription_SSLMode:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSourceDescription_SSLMode, &ev); err != nil {
+				return err
+			}
+			v.SSLMode = SSLMode(ev)
+			return nil
+		case schemas.DatabaseSourceDescription_SnapshotInfo:
+			return deserializeDatabaseSnapshotInfoList(d, schemas.DatabaseSourceDescription_SnapshotInfo, &v.SnapshotInfo)
+		case schemas.DatabaseSourceDescription_SnapshotWatermarkTable:
+			v.SnapshotWatermarkTable = new(string)
+			return d.ReadString(schemas.DatabaseSourceDescription_SnapshotWatermarkTable, v.SnapshotWatermarkTable)
+		case schemas.DatabaseSourceDescription_SurrogateKeys:
+			return deserializeDatabaseColumnIncludeOrExcludeList(d, schemas.DatabaseSourceDescription_SurrogateKeys, &v.SurrogateKeys)
+		case schemas.DatabaseSourceDescription_Tables:
+			v.Tables = &DatabaseTableList{}
+			return v.Tables.Deserialize(d)
+		case schemas.DatabaseSourceDescription_Type:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSourceDescription_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DatabaseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The structure for details of the VPC Endpoint Service which Firehose uses to
 //
 // create a PrivateLink to the database.
@@ -807,6 +1998,28 @@ type DatabaseSourceVPCConfiguration struct {
 	VpcEndpointServiceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseSourceVPCConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSourceVPCConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSourceVPCConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointServiceName != nil {
+		s.WriteString(schemas.DatabaseSourceVPCConfiguration_VpcEndpointServiceName, *v.VpcEndpointServiceName)
+	}
+}
+func (v *DatabaseSourceVPCConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSourceVPCConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSourceVPCConfiguration_VpcEndpointServiceName:
+			v.VpcEndpointServiceName = new(string)
+			return d.ReadString(schemas.DatabaseSourceVPCConfiguration_VpcEndpointServiceName, v.VpcEndpointServiceName)
+		}
+		return nil
+	})
 }
 
 // The structure used to configure the list of table patterns in source database
@@ -828,6 +2041,28 @@ type DatabaseTableList struct {
 	Include []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseTableList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseTableList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseTableList) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Exclude, v.Exclude)
+	serializeDatabaseTableIncludeOrExcludeList(s, schemas.DatabaseTableList_Include, v.Include)
+}
+func (v *DatabaseTableList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseTableList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseTableList_Exclude:
+			return deserializeDatabaseTableIncludeOrExcludeList(d, schemas.DatabaseTableList_Exclude, &v.Exclude)
+		case schemas.DatabaseTableList_Include:
+			return deserializeDatabaseTableIncludeOrExcludeList(d, schemas.DatabaseTableList_Include, &v.Include)
+		}
+		return nil
+	})
 }
 
 // Specifies that you want Firehose to convert data from the JSON format to the
@@ -858,6 +2093,52 @@ type DataFormatConversionConfiguration struct {
 	SchemaConfiguration *SchemaConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataFormatConversionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataFormatConversionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataFormatConversionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DataFormatConversionConfiguration_Enabled, *v.Enabled)
+	}
+	if v.InputFormatConfiguration != nil {
+		s.WriteStruct(schemas.DataFormatConversionConfiguration_InputFormatConfiguration)
+		v.InputFormatConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputFormatConfiguration != nil {
+		s.WriteStruct(schemas.DataFormatConversionConfiguration_OutputFormatConfiguration)
+		v.OutputFormatConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaConfiguration != nil {
+		s.WriteStruct(schemas.DataFormatConversionConfiguration_SchemaConfiguration)
+		v.SchemaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataFormatConversionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataFormatConversionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataFormatConversionConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DataFormatConversionConfiguration_Enabled, v.Enabled)
+		case schemas.DataFormatConversionConfiguration_InputFormatConfiguration:
+			v.InputFormatConfiguration = &InputFormatConfiguration{}
+			return v.InputFormatConfiguration.Deserialize(d)
+		case schemas.DataFormatConversionConfiguration_OutputFormatConfiguration:
+			v.OutputFormatConfiguration = &OutputFormatConfiguration{}
+			return v.OutputFormatConfiguration.Deserialize(d)
+		case schemas.DataFormatConversionConfiguration_SchemaConfiguration:
+			v.SchemaConfiguration = &SchemaConfiguration{}
+			return v.SchemaConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about a Firehose stream.
@@ -932,6 +2213,105 @@ type DeliveryStreamDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeliveryStreamDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliveryStreamDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliveryStreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.DeliveryStreamDescription_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.DeliveryStreamARN != nil {
+		s.WriteString(schemas.DeliveryStreamDescription_DeliveryStreamARN, *v.DeliveryStreamARN)
+	}
+	if v.DeliveryStreamEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DeliveryStreamDescription_DeliveryStreamEncryptionConfiguration)
+		v.DeliveryStreamEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.DeliveryStreamDescription_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.DeliveryStreamStatus != "" {
+		s.WriteString(schemas.DeliveryStreamDescription_DeliveryStreamStatus, string(v.DeliveryStreamStatus))
+	}
+	if v.DeliveryStreamType != "" {
+		s.WriteString(schemas.DeliveryStreamDescription_DeliveryStreamType, string(v.DeliveryStreamType))
+	}
+	serializeDestinationDescriptionList(s, schemas.DeliveryStreamDescription_Destinations, v.Destinations)
+	if v.FailureDescription != nil {
+		s.WriteStruct(schemas.DeliveryStreamDescription_FailureDescription)
+		v.FailureDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HasMoreDestinations != nil {
+		s.WriteBool(schemas.DeliveryStreamDescription_HasMoreDestinations, *v.HasMoreDestinations)
+	}
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.DeliveryStreamDescription_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.DeliveryStreamDescription_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DeliveryStreamDescription_VersionId, *v.VersionId)
+	}
+}
+func (v *DeliveryStreamDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeliveryStreamDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeliveryStreamDescription_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeliveryStreamDescription_CreateTimestamp, v.CreateTimestamp)
+		case schemas.DeliveryStreamDescription_DeliveryStreamARN:
+			v.DeliveryStreamARN = new(string)
+			return d.ReadString(schemas.DeliveryStreamDescription_DeliveryStreamARN, v.DeliveryStreamARN)
+		case schemas.DeliveryStreamDescription_DeliveryStreamEncryptionConfiguration:
+			v.DeliveryStreamEncryptionConfiguration = &DeliveryStreamEncryptionConfiguration{}
+			return v.DeliveryStreamEncryptionConfiguration.Deserialize(d)
+		case schemas.DeliveryStreamDescription_DeliveryStreamName:
+			v.DeliveryStreamName = new(string)
+			return d.ReadString(schemas.DeliveryStreamDescription_DeliveryStreamName, v.DeliveryStreamName)
+		case schemas.DeliveryStreamDescription_DeliveryStreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryStreamDescription_DeliveryStreamStatus, &ev); err != nil {
+				return err
+			}
+			v.DeliveryStreamStatus = DeliveryStreamStatus(ev)
+			return nil
+		case schemas.DeliveryStreamDescription_DeliveryStreamType:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryStreamDescription_DeliveryStreamType, &ev); err != nil {
+				return err
+			}
+			v.DeliveryStreamType = DeliveryStreamType(ev)
+			return nil
+		case schemas.DeliveryStreamDescription_Destinations:
+			return deserializeDestinationDescriptionList(d, schemas.DeliveryStreamDescription_Destinations, &v.Destinations)
+		case schemas.DeliveryStreamDescription_FailureDescription:
+			v.FailureDescription = &FailureDescription{}
+			return v.FailureDescription.Deserialize(d)
+		case schemas.DeliveryStreamDescription_HasMoreDestinations:
+			v.HasMoreDestinations = new(bool)
+			return d.ReadBool(schemas.DeliveryStreamDescription_HasMoreDestinations, v.HasMoreDestinations)
+		case schemas.DeliveryStreamDescription_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeliveryStreamDescription_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.DeliveryStreamDescription_Source:
+			v.Source = &SourceDescription{}
+			return v.Source.Deserialize(d)
+		case schemas.DeliveryStreamDescription_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.DeliveryStreamDescription_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // Contains information about the server-side encryption (SSE) status for the
 // delivery stream, the type customer master key (CMK) in use, if any, and the ARN
 // of the CMK. You can get DeliveryStreamEncryptionConfiguration by invoking the DescribeDeliveryStream
@@ -961,6 +2341,56 @@ type DeliveryStreamEncryptionConfiguration struct {
 	Status DeliveryStreamEncryptionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeliveryStreamEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliveryStreamEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliveryStreamEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureDescription != nil {
+		s.WriteStruct(schemas.DeliveryStreamEncryptionConfiguration_FailureDescription)
+		v.FailureDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyARN != nil {
+		s.WriteString(schemas.DeliveryStreamEncryptionConfiguration_KeyARN, *v.KeyARN)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.DeliveryStreamEncryptionConfiguration_KeyType, string(v.KeyType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeliveryStreamEncryptionConfiguration_Status, string(v.Status))
+	}
+}
+func (v *DeliveryStreamEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeliveryStreamEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeliveryStreamEncryptionConfiguration_FailureDescription:
+			v.FailureDescription = &FailureDescription{}
+			return v.FailureDescription.Deserialize(d)
+		case schemas.DeliveryStreamEncryptionConfiguration_KeyARN:
+			v.KeyARN = new(string)
+			return d.ReadString(schemas.DeliveryStreamEncryptionConfiguration_KeyARN, v.KeyARN)
+		case schemas.DeliveryStreamEncryptionConfiguration_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryStreamEncryptionConfiguration_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		case schemas.DeliveryStreamEncryptionConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryStreamEncryptionConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeliveryStreamEncryptionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the type and Amazon Resource Name (ARN) of the CMK to use for
@@ -1001,6 +2431,38 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeliveryStreamEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliveryStreamEncryptionConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliveryStreamEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyARN != nil {
+		s.WriteString(schemas.DeliveryStreamEncryptionConfigurationInput_KeyARN, *v.KeyARN)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.DeliveryStreamEncryptionConfigurationInput_KeyType, string(v.KeyType))
+	}
+}
+func (v *DeliveryStreamEncryptionConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeliveryStreamEncryptionConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeliveryStreamEncryptionConfigurationInput_KeyARN:
+			v.KeyARN = new(string)
+			return d.ReadString(schemas.DeliveryStreamEncryptionConfigurationInput_KeyARN, v.KeyARN)
+		case schemas.DeliveryStreamEncryptionConfigurationInput_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryStreamEncryptionConfigurationInput_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The deserializer you want Firehose to use for converting the input data from
 // JSON. Firehose then serializes the data to its final format using the Serializer.
 // Firehose supports two types of deserializers: the [Apache Hive JSON SerDe]and the [OpenX JSON SerDe].
@@ -1024,6 +2486,38 @@ type Deserializer struct {
 	OpenXJsonSerDe *OpenXJsonSerDe
 
 	noSmithyDocumentSerde
+}
+
+func (v *Deserializer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Deserializer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Deserializer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HiveJsonSerDe != nil {
+		s.WriteStruct(schemas.Deserializer_HiveJsonSerDe)
+		v.HiveJsonSerDe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenXJsonSerDe != nil {
+		s.WriteStruct(schemas.Deserializer_OpenXJsonSerDe)
+		v.OpenXJsonSerDe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Deserializer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Deserializer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Deserializer_HiveJsonSerDe:
+			v.HiveJsonSerDe = &HiveJsonSerDe{}
+			return v.HiveJsonSerDe.Deserialize(d)
+		case schemas.Deserializer_OpenXJsonSerDe:
+			v.OpenXJsonSerDe = &OpenXJsonSerDe{}
+			return v.OpenXJsonSerDe.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the destination for a Firehose stream.
@@ -1067,6 +2561,108 @@ type DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonOpenSearchServerlessDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_AmazonOpenSearchServerlessDestinationDescription)
+		v.AmazonOpenSearchServerlessDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AmazonopensearchserviceDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_AmazonopensearchserviceDestinationDescription)
+		v.AmazonopensearchserviceDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationId != nil {
+		s.WriteString(schemas.DestinationDescription_DestinationId, *v.DestinationId)
+	}
+	if v.ElasticsearchDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_ElasticsearchDestinationDescription)
+		v.ElasticsearchDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedS3DestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_ExtendedS3DestinationDescription)
+		v.ExtendedS3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpEndpointDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_HttpEndpointDestinationDescription)
+		v.HttpEndpointDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_IcebergDestinationDescription)
+		v.IcebergDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_RedshiftDestinationDescription)
+		v.RedshiftDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_SnowflakeDestinationDescription)
+		v.SnowflakeDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SplunkDestinationDescription != nil {
+		s.WriteStruct(schemas.DestinationDescription_SplunkDestinationDescription)
+		v.SplunkDestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationDescription_AmazonOpenSearchServerlessDestinationDescription:
+			v.AmazonOpenSearchServerlessDestinationDescription = &AmazonOpenSearchServerlessDestinationDescription{}
+			return v.AmazonOpenSearchServerlessDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_AmazonopensearchserviceDestinationDescription:
+			v.AmazonopensearchserviceDestinationDescription = &AmazonopensearchserviceDestinationDescription{}
+			return v.AmazonopensearchserviceDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_DestinationId:
+			v.DestinationId = new(string)
+			return d.ReadString(schemas.DestinationDescription_DestinationId, v.DestinationId)
+		case schemas.DestinationDescription_ElasticsearchDestinationDescription:
+			v.ElasticsearchDestinationDescription = &ElasticsearchDestinationDescription{}
+			return v.ElasticsearchDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_ExtendedS3DestinationDescription:
+			v.ExtendedS3DestinationDescription = &ExtendedS3DestinationDescription{}
+			return v.ExtendedS3DestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_HttpEndpointDestinationDescription:
+			v.HttpEndpointDestinationDescription = &HttpEndpointDestinationDescription{}
+			return v.HttpEndpointDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_IcebergDestinationDescription:
+			v.IcebergDestinationDescription = &IcebergDestinationDescription{}
+			return v.IcebergDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_RedshiftDestinationDescription:
+			v.RedshiftDestinationDescription = &RedshiftDestinationDescription{}
+			return v.RedshiftDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_SnowflakeDestinationDescription:
+			v.SnowflakeDestinationDescription = &SnowflakeDestinationDescription{}
+			return v.SnowflakeDestinationDescription.Deserialize(d)
+		case schemas.DestinationDescription_SplunkDestinationDescription:
+			v.SplunkDestinationDescription = &SplunkDestinationDescription{}
+			return v.SplunkDestinationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration of a destination in Apache Iceberg Tables.
 type DestinationTableConfiguration struct {
 
@@ -1098,6 +2694,51 @@ type DestinationTableConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationTableConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationTableConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationTableConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationDatabaseName != nil {
+		s.WriteString(schemas.DestinationTableConfiguration_DestinationDatabaseName, *v.DestinationDatabaseName)
+	}
+	if v.DestinationTableName != nil {
+		s.WriteString(schemas.DestinationTableConfiguration_DestinationTableName, *v.DestinationTableName)
+	}
+	if v.PartitionSpec != nil {
+		s.WriteStruct(schemas.DestinationTableConfiguration_PartitionSpec)
+		v.PartitionSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ErrorOutputPrefix != nil {
+		s.WriteString(schemas.DestinationTableConfiguration_S3ErrorOutputPrefix, *v.S3ErrorOutputPrefix)
+	}
+	serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.DestinationTableConfiguration_UniqueKeys, v.UniqueKeys)
+}
+func (v *DestinationTableConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationTableConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationTableConfiguration_DestinationDatabaseName:
+			v.DestinationDatabaseName = new(string)
+			return d.ReadString(schemas.DestinationTableConfiguration_DestinationDatabaseName, v.DestinationDatabaseName)
+		case schemas.DestinationTableConfiguration_DestinationTableName:
+			v.DestinationTableName = new(string)
+			return d.ReadString(schemas.DestinationTableConfiguration_DestinationTableName, v.DestinationTableName)
+		case schemas.DestinationTableConfiguration_PartitionSpec:
+			v.PartitionSpec = &PartitionSpec{}
+			return v.PartitionSpec.Deserialize(d)
+		case schemas.DestinationTableConfiguration_S3ErrorOutputPrefix:
+			v.S3ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.DestinationTableConfiguration_S3ErrorOutputPrefix, v.S3ErrorOutputPrefix)
+		case schemas.DestinationTableConfiguration_UniqueKeys:
+			return deserializeListOfNonEmptyStringsWithoutWhitespace(d, schemas.DestinationTableConfiguration_UniqueKeys, &v.UniqueKeys)
+		}
+		return nil
+	})
+}
+
 // The structure that configures parameters such as ThroughputHintInMBs for a
 // stream configured with Direct PUT as a source.
 type DirectPutSourceConfiguration struct {
@@ -1114,6 +2755,28 @@ type DirectPutSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectPutSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectPutSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectPutSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThroughputHintInMBs != nil {
+		s.WriteInt32(schemas.DirectPutSourceConfiguration_ThroughputHintInMBs, *v.ThroughputHintInMBs)
+	}
+}
+func (v *DirectPutSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectPutSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectPutSourceConfiguration_ThroughputHintInMBs:
+			v.ThroughputHintInMBs = new(int32)
+			return d.ReadInt32(schemas.DirectPutSourceConfiguration_ThroughputHintInMBs, v.ThroughputHintInMBs)
+		}
+		return nil
+	})
+}
+
 // The structure that configures parameters such as ThroughputHintInMBs for a
 // stream configured with Direct PUT as a source.
 type DirectPutSourceDescription struct {
@@ -1126,6 +2789,28 @@ type DirectPutSourceDescription struct {
 	ThroughputHintInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectPutSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectPutSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectPutSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThroughputHintInMBs != nil {
+		s.WriteInt32(schemas.DirectPutSourceDescription_ThroughputHintInMBs, *v.ThroughputHintInMBs)
+	}
+}
+func (v *DirectPutSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectPutSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectPutSourceDescription_ThroughputHintInMBs:
+			v.ThroughputHintInMBs = new(int32)
+			return d.ReadInt32(schemas.DirectPutSourceDescription_ThroughputHintInMBs, v.ThroughputHintInMBs)
+		}
+		return nil
+	})
 }
 
 // Indicates the method for setting up document ID. The supported methods are
@@ -1152,6 +2837,32 @@ type DocumentIdOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentIdOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentIdOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentIdOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultDocumentIdFormat != "" {
+		s.WriteString(schemas.DocumentIdOptions_DefaultDocumentIdFormat, string(v.DefaultDocumentIdFormat))
+	}
+}
+func (v *DocumentIdOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentIdOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentIdOptions_DefaultDocumentIdFormat:
+			var ev string
+			if err := d.ReadString(schemas.DocumentIdOptions_DefaultDocumentIdFormat, &ev); err != nil {
+				return err
+			}
+			v.DefaultDocumentIdFormat = DefaultDocumentIdFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration of the dynamic partitioning mechanism that creates smaller
 // data sets from the streaming data by partitioning it based on partition keys.
 // Currently, dynamic partitioning is only supported for Amazon S3 destinations.
@@ -1165,6 +2876,36 @@ type DynamicPartitioningConfiguration struct {
 	RetryOptions *RetryOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *DynamicPartitioningConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynamicPartitioningConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynamicPartitioningConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DynamicPartitioningConfiguration_Enabled, *v.Enabled)
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.DynamicPartitioningConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DynamicPartitioningConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynamicPartitioningConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynamicPartitioningConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DynamicPartitioningConfiguration_Enabled, v.Enabled)
+		case schemas.DynamicPartitioningConfiguration_RetryOptions:
+			v.RetryOptions = &RetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the buffering to perform before delivering data to the Amazon
@@ -1184,6 +2925,34 @@ type ElasticsearchBufferingHints struct {
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ElasticsearchBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticsearchBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticsearchBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.ElasticsearchBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.ElasticsearchBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *ElasticsearchBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticsearchBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticsearchBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.ElasticsearchBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.ElasticsearchBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.ElasticsearchBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Amazon OpenSearch Service.
@@ -1273,6 +3042,128 @@ type ElasticsearchDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElasticsearchDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticsearchDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticsearchDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationConfiguration_TypeName, *v.TypeName)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationConfiguration_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ElasticsearchDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticsearchDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticsearchDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &ElasticsearchBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationConfiguration_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.ElasticsearchDestinationConfiguration_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationConfiguration_DomainARN, v.DomainARN)
+		case schemas.ElasticsearchDestinationConfiguration_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationConfiguration_IndexName, v.IndexName)
+		case schemas.ElasticsearchDestinationConfiguration_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.ElasticsearchDestinationConfiguration_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = ElasticsearchIndexRotationPeriod(ev)
+			return nil
+		case schemas.ElasticsearchDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &ElasticsearchRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.ElasticsearchDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.ElasticsearchDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = ElasticsearchS3BackupMode(ev)
+			return nil
+		case schemas.ElasticsearchDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.ElasticsearchDestinationConfiguration_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationConfiguration_TypeName, v.TypeName)
+		case schemas.ElasticsearchDestinationConfiguration_VpcConfiguration:
+			v.VpcConfiguration = &VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The destination description in Amazon OpenSearch Service.
 type ElasticsearchDestinationDescription struct {
 
@@ -1333,6 +3224,128 @@ type ElasticsearchDestinationDescription struct {
 	VpcConfigurationDescription *VpcConfigurationDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *ElasticsearchDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticsearchDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticsearchDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationDescription_TypeName, *v.TypeName)
+	}
+	if v.VpcConfigurationDescription != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationDescription_VpcConfigurationDescription)
+		v.VpcConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ElasticsearchDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticsearchDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticsearchDestinationDescription_BufferingHints:
+			v.BufferingHints = &ElasticsearchBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationDescription_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.ElasticsearchDestinationDescription_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationDescription_DomainARN, v.DomainARN)
+		case schemas.ElasticsearchDestinationDescription_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationDescription_IndexName, v.IndexName)
+		case schemas.ElasticsearchDestinationDescription_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.ElasticsearchDestinationDescription_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = ElasticsearchIndexRotationPeriod(ev)
+			return nil
+		case schemas.ElasticsearchDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_RetryOptions:
+			v.RetryOptions = &ElasticsearchRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.ElasticsearchDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.ElasticsearchDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = ElasticsearchS3BackupMode(ev)
+			return nil
+		case schemas.ElasticsearchDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.ElasticsearchDestinationDescription_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationDescription_TypeName, v.TypeName)
+		case schemas.ElasticsearchDestinationDescription_VpcConfigurationDescription:
+			v.VpcConfigurationDescription = &VpcConfigurationDescription{}
+			return v.VpcConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in Amazon OpenSearch Service.
@@ -1403,6 +3416,110 @@ type ElasticsearchDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElasticsearchDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticsearchDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticsearchDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_ClusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.DocumentIdOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_DocumentIdOptions)
+		v.DocumentIdOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_DomainARN, *v.DomainARN)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_IndexName, *v.IndexName)
+	}
+	if v.IndexRotationPeriod != "" {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_IndexRotationPeriod, string(v.IndexRotationPeriod))
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.ElasticsearchDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ElasticsearchDestinationUpdate_TypeName, *v.TypeName)
+	}
+}
+func (v *ElasticsearchDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticsearchDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticsearchDestinationUpdate_BufferingHints:
+			v.BufferingHints = &ElasticsearchBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_ClusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationUpdate_ClusterEndpoint, v.ClusterEndpoint)
+		case schemas.ElasticsearchDestinationUpdate_DocumentIdOptions:
+			v.DocumentIdOptions = &DocumentIdOptions{}
+			return v.DocumentIdOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_DomainARN:
+			v.DomainARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationUpdate_DomainARN, v.DomainARN)
+		case schemas.ElasticsearchDestinationUpdate_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationUpdate_IndexName, v.IndexName)
+		case schemas.ElasticsearchDestinationUpdate_IndexRotationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.ElasticsearchDestinationUpdate_IndexRotationPeriod, &ev); err != nil {
+				return err
+			}
+			v.IndexRotationPeriod = ElasticsearchIndexRotationPeriod(ev)
+			return nil
+		case schemas.ElasticsearchDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_RetryOptions:
+			v.RetryOptions = &ElasticsearchRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.ElasticsearchDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.ElasticsearchDestinationUpdate_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ElasticsearchDestinationUpdate_TypeName, v.TypeName)
+		}
+		return nil
+	})
+}
+
 // Configures retry behavior in case Firehose is unable to deliver documents to
 // Amazon OpenSearch Service.
 type ElasticsearchRetryOptions struct {
@@ -1417,6 +3534,28 @@ type ElasticsearchRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElasticsearchRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticsearchRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticsearchRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.ElasticsearchRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *ElasticsearchRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticsearchRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticsearchRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.ElasticsearchRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
+}
+
 // Describes the encryption for a destination in Amazon S3.
 type EncryptionConfiguration struct {
 
@@ -1428,6 +3567,40 @@ type EncryptionConfiguration struct {
 	NoEncryptionConfig NoEncryptionConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KMSEncryptionConfig != nil {
+		s.WriteStruct(schemas.EncryptionConfiguration_KMSEncryptionConfig)
+		v.KMSEncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoEncryptionConfig != "" {
+		s.WriteString(schemas.EncryptionConfiguration_NoEncryptionConfig, string(v.NoEncryptionConfig))
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_KMSEncryptionConfig:
+			v.KMSEncryptionConfig = &KMSEncryptionConfig{}
+			return v.KMSEncryptionConfig.Deserialize(d)
+		case schemas.EncryptionConfiguration_NoEncryptionConfig:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfiguration_NoEncryptionConfig, &ev); err != nil {
+				return err
+			}
+			v.NoEncryptionConfig = NoEncryptionConfig(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -1501,6 +3674,134 @@ type ExtendedS3DestinationConfiguration struct {
 	S3BackupMode S3BackupMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExtendedS3DestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedS3DestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedS3DestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.CustomTimeZone != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_CustomTimeZone, *v.CustomTimeZone)
+	}
+	if v.DataFormatConversionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_DataFormatConversionConfiguration)
+		v.DataFormatConversionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamicPartitioningConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration)
+		v.DynamicPartitioningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.FileExtension != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_FileExtension, *v.FileExtension)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_Prefix, *v.Prefix)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationConfiguration_S3BackupConfiguration)
+		v.S3BackupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.ExtendedS3DestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+}
+func (v *ExtendedS3DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedS3DestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedS3DestinationConfiguration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_BucketARN, v.BucketARN)
+		case schemas.ExtendedS3DestinationConfiguration_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationConfiguration_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.ExtendedS3DestinationConfiguration_CustomTimeZone:
+			v.CustomTimeZone = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_CustomTimeZone, v.CustomTimeZone)
+		case schemas.ExtendedS3DestinationConfiguration_DataFormatConversionConfiguration:
+			v.DataFormatConversionConfiguration = &DataFormatConversionConfiguration{}
+			return v.DataFormatConversionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_DynamicPartitioningConfiguration:
+			v.DynamicPartitioningConfiguration = &DynamicPartitioningConfiguration{}
+			return v.DynamicPartitioningConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.ExtendedS3DestinationConfiguration_FileExtension:
+			v.FileExtension = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_FileExtension, v.FileExtension)
+		case schemas.ExtendedS3DestinationConfiguration_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_Prefix, v.Prefix)
+		case schemas.ExtendedS3DestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.ExtendedS3DestinationConfiguration_S3BackupConfiguration:
+			v.S3BackupConfiguration = &S3DestinationConfiguration{}
+			return v.S3BackupConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = S3BackupMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a destination in Amazon S3.
@@ -1580,6 +3881,134 @@ type ExtendedS3DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendedS3DestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedS3DestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedS3DestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.CustomTimeZone != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_CustomTimeZone, *v.CustomTimeZone)
+	}
+	if v.DataFormatConversionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_DataFormatConversionConfiguration)
+		v.DataFormatConversionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamicPartitioningConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_DynamicPartitioningConfiguration)
+		v.DynamicPartitioningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.FileExtension != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_FileExtension, *v.FileExtension)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_Prefix, *v.Prefix)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupDescription != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationDescription_S3BackupDescription)
+		v.S3BackupDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.ExtendedS3DestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+}
+func (v *ExtendedS3DestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedS3DestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedS3DestinationDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_BucketARN, v.BucketARN)
+		case schemas.ExtendedS3DestinationDescription_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationDescription_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.ExtendedS3DestinationDescription_CustomTimeZone:
+			v.CustomTimeZone = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_CustomTimeZone, v.CustomTimeZone)
+		case schemas.ExtendedS3DestinationDescription_DataFormatConversionConfiguration:
+			v.DataFormatConversionConfiguration = &DataFormatConversionConfiguration{}
+			return v.DataFormatConversionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_DynamicPartitioningConfiguration:
+			v.DynamicPartitioningConfiguration = &DynamicPartitioningConfiguration{}
+			return v.DynamicPartitioningConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.ExtendedS3DestinationDescription_FileExtension:
+			v.FileExtension = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_FileExtension, v.FileExtension)
+		case schemas.ExtendedS3DestinationDescription_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_Prefix, v.Prefix)
+		case schemas.ExtendedS3DestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationDescription_RoleARN, v.RoleARN)
+		case schemas.ExtendedS3DestinationDescription_S3BackupDescription:
+			v.S3BackupDescription = &S3DestinationDescription{}
+			return v.S3BackupDescription.Deserialize(d)
+		case schemas.ExtendedS3DestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = S3BackupMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an update for a destination in Amazon S3.
 type ExtendedS3DestinationUpdate struct {
 
@@ -1648,6 +4077,134 @@ type ExtendedS3DestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendedS3DestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedS3DestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedS3DestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.CustomTimeZone != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_CustomTimeZone, *v.CustomTimeZone)
+	}
+	if v.DataFormatConversionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_DataFormatConversionConfiguration)
+		v.DataFormatConversionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamicPartitioningConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_DynamicPartitioningConfiguration)
+		v.DynamicPartitioningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.FileExtension != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_FileExtension, *v.FileExtension)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_Prefix, *v.Prefix)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.ExtendedS3DestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3BackupUpdate != nil {
+		s.WriteStruct(schemas.ExtendedS3DestinationUpdate_S3BackupUpdate)
+		v.S3BackupUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExtendedS3DestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedS3DestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedS3DestinationUpdate_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_BucketARN, v.BucketARN)
+		case schemas.ExtendedS3DestinationUpdate_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationUpdate_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.ExtendedS3DestinationUpdate_CustomTimeZone:
+			v.CustomTimeZone = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_CustomTimeZone, v.CustomTimeZone)
+		case schemas.ExtendedS3DestinationUpdate_DataFormatConversionConfiguration:
+			v.DataFormatConversionConfiguration = &DataFormatConversionConfiguration{}
+			return v.DataFormatConversionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_DynamicPartitioningConfiguration:
+			v.DynamicPartitioningConfiguration = &DynamicPartitioningConfiguration{}
+			return v.DynamicPartitioningConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.ExtendedS3DestinationUpdate_FileExtension:
+			v.FileExtension = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_FileExtension, v.FileExtension)
+		case schemas.ExtendedS3DestinationUpdate_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_Prefix, v.Prefix)
+		case schemas.ExtendedS3DestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.ExtendedS3DestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ExtendedS3DestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.ExtendedS3DestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedS3DestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = S3BackupMode(ev)
+			return nil
+		case schemas.ExtendedS3DestinationUpdate_S3BackupUpdate:
+			v.S3BackupUpdate = &S3DestinationUpdate{}
+			return v.S3BackupUpdate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides details in case one of the following operations fails due to an error
 // related to KMS: CreateDeliveryStream, DeleteDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption.
 type FailureDescription struct {
@@ -1663,6 +4220,38 @@ type FailureDescription struct {
 	Type DeliveryStreamFailureType
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailureDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailureDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailureDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.FailureDescription_Details, *v.Details)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FailureDescription_Type, string(v.Type))
+	}
+}
+func (v *FailureDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailureDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailureDescription_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.FailureDescription_Details, v.Details)
+		case schemas.FailureDescription_Type:
+			var ev string
+			if err := d.ReadString(schemas.FailureDescription_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DeliveryStreamFailureType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The native Hive / HCatalog JsonSerDe. Used by Firehose for deserializing data,
@@ -1683,6 +4272,25 @@ type HiveJsonSerDe struct {
 	TimestampFormats []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HiveJsonSerDe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HiveJsonSerDe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HiveJsonSerDe) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfNonEmptyStrings(s, schemas.HiveJsonSerDe_TimestampFormats, v.TimestampFormats)
+}
+func (v *HiveJsonSerDe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HiveJsonSerDe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HiveJsonSerDe_TimestampFormats:
+			return deserializeListOfNonEmptyStrings(d, schemas.HiveJsonSerDe_TimestampFormats, &v.TimestampFormats)
+		}
+		return nil
+	})
 }
 
 // Describes the buffering options that can be applied before data is delivered to
@@ -1707,6 +4315,34 @@ type HttpEndpointBufferingHints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEndpointBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.HttpEndpointBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.HttpEndpointBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *HttpEndpointBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.HttpEndpointBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.HttpEndpointBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.HttpEndpointBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
+}
+
 // Describes the metadata that's delivered to the specified HTTP endpoint
 // destination.
 type HttpEndpointCommonAttribute struct {
@@ -1722,6 +4358,34 @@ type HttpEndpointCommonAttribute struct {
 	AttributeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpEndpointCommonAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointCommonAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointCommonAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.HttpEndpointCommonAttribute_AttributeName, *v.AttributeName)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.HttpEndpointCommonAttribute_AttributeValue, *v.AttributeValue)
+	}
+}
+func (v *HttpEndpointCommonAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointCommonAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointCommonAttribute_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.HttpEndpointCommonAttribute_AttributeName, v.AttributeName)
+		case schemas.HttpEndpointCommonAttribute_AttributeValue:
+			v.AttributeValue = new(string)
+			return d.ReadString(schemas.HttpEndpointCommonAttribute_AttributeValue, v.AttributeValue)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of the HTTP endpoint to which Kinesis Firehose
@@ -1748,6 +4412,40 @@ type HttpEndpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKey != nil {
+		s.WriteString(schemas.HttpEndpointConfiguration_AccessKey, *v.AccessKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.HttpEndpointConfiguration_Name, *v.Name)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.HttpEndpointConfiguration_Url, *v.Url)
+	}
+}
+func (v *HttpEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointConfiguration_AccessKey:
+			v.AccessKey = new(string)
+			return d.ReadString(schemas.HttpEndpointConfiguration_AccessKey, v.AccessKey)
+		case schemas.HttpEndpointConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HttpEndpointConfiguration_Name, v.Name)
+		case schemas.HttpEndpointConfiguration_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.HttpEndpointConfiguration_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Describes the HTTP endpoint selected as the destination.
 type HttpEndpointDescription struct {
 
@@ -1758,6 +4456,34 @@ type HttpEndpointDescription struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpEndpointDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.HttpEndpointDescription_Name, *v.Name)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.HttpEndpointDescription_Url, *v.Url)
+	}
+}
+func (v *HttpEndpointDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HttpEndpointDescription_Name, v.Name)
+		case schemas.HttpEndpointDescription_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.HttpEndpointDescription_Url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of the HTTP endpoint destination.
@@ -1812,6 +4538,102 @@ type HttpEndpointDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEndpointDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_RequestConfiguration)
+		v.RequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.HttpEndpointDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.HttpEndpointDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationConfiguration_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpEndpointDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &HttpEndpointBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_EndpointConfiguration:
+			v.EndpointConfiguration = &HttpEndpointConfiguration{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_RequestConfiguration:
+			v.RequestConfiguration = &HttpEndpointRequestConfiguration{}
+			return v.RequestConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &HttpEndpointRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.HttpEndpointDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.HttpEndpointDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.HttpEndpointDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = HttpEndpointS3BackupMode(ev)
+			return nil
+		case schemas.HttpEndpointDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.HttpEndpointDestinationConfiguration_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the HTTP endpoint destination.
 type HttpEndpointDestinationDescription struct {
 
@@ -1858,6 +4680,102 @@ type HttpEndpointDestinationDescription struct {
 	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpEndpointDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_RequestConfiguration)
+		v.RequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.HttpEndpointDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.HttpEndpointDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationDescription_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpEndpointDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointDestinationDescription_BufferingHints:
+			v.BufferingHints = &HttpEndpointBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_EndpointConfiguration:
+			v.EndpointConfiguration = &HttpEndpointDescription{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_RequestConfiguration:
+			v.RequestConfiguration = &HttpEndpointRequestConfiguration{}
+			return v.RequestConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_RetryOptions:
+			v.RetryOptions = &HttpEndpointRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.HttpEndpointDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.HttpEndpointDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.HttpEndpointDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = HttpEndpointS3BackupMode(ev)
+			return nil
+		case schemas.HttpEndpointDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.HttpEndpointDestinationDescription_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Updates the specified HTTP endpoint destination.
@@ -1908,6 +4826,102 @@ type HttpEndpointDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEndpointDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_RequestConfiguration)
+		v.RequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.HttpEndpointDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.HttpEndpointDestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.HttpEndpointDestinationUpdate_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpEndpointDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointDestinationUpdate_BufferingHints:
+			v.BufferingHints = &HttpEndpointBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_EndpointConfiguration:
+			v.EndpointConfiguration = &HttpEndpointConfiguration{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_RequestConfiguration:
+			v.RequestConfiguration = &HttpEndpointRequestConfiguration{}
+			return v.RequestConfiguration.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_RetryOptions:
+			v.RetryOptions = &HttpEndpointRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.HttpEndpointDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.HttpEndpointDestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.HttpEndpointDestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = HttpEndpointS3BackupMode(ev)
+			return nil
+		case schemas.HttpEndpointDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.HttpEndpointDestinationUpdate_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration of the HTTP endpoint request.
 type HttpEndpointRequestConfiguration struct {
 
@@ -1924,6 +4938,35 @@ type HttpEndpointRequestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEndpointRequestConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointRequestConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpEndpointCommonAttributesList(s, schemas.HttpEndpointRequestConfiguration_CommonAttributes, v.CommonAttributes)
+	if v.ContentEncoding != "" {
+		s.WriteString(schemas.HttpEndpointRequestConfiguration_ContentEncoding, string(v.ContentEncoding))
+	}
+}
+func (v *HttpEndpointRequestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointRequestConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointRequestConfiguration_CommonAttributes:
+			return deserializeHttpEndpointCommonAttributesList(d, schemas.HttpEndpointRequestConfiguration_CommonAttributes, &v.CommonAttributes)
+		case schemas.HttpEndpointRequestConfiguration_ContentEncoding:
+			var ev string
+			if err := d.ReadString(schemas.HttpEndpointRequestConfiguration_ContentEncoding, &ev); err != nil {
+				return err
+			}
+			v.ContentEncoding = ContentEncoding(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the retry behavior in case Firehose is unable to deliver data to the
 // specified HTTP endpoint destination, or if it doesn't receive a valid
 // acknowledgment of receipt from the specified HTTP endpoint destination.
@@ -1936,6 +4979,28 @@ type HttpEndpointRetryOptions struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpEndpointRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEndpointRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEndpointRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.HttpEndpointRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *HttpEndpointRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEndpointRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEndpointRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.HttpEndpointRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // Specifies the destination configure settings for Apache Iceberg Table.
@@ -2006,6 +5071,111 @@ type IcebergDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppendOnly != nil {
+		s.WriteBool(schemas.IcebergDestinationConfiguration_AppendOnly, *v.AppendOnly)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_CatalogConfiguration)
+		v.CatalogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationConfiguration_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.IcebergDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.IcebergDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaEvolutionConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_SchemaEvolutionConfiguration)
+		v.SchemaEvolutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCreationConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationConfiguration_TableCreationConfiguration)
+		v.TableCreationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IcebergDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergDestinationConfiguration_AppendOnly:
+			v.AppendOnly = new(bool)
+			return d.ReadBool(schemas.IcebergDestinationConfiguration_AppendOnly, v.AppendOnly)
+		case schemas.IcebergDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_CatalogConfiguration:
+			v.CatalogConfiguration = &CatalogConfiguration{}
+			return v.CatalogConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_DestinationTableConfigurationList:
+			return deserializeDestinationTableConfigurationList(d, schemas.IcebergDestinationConfiguration_DestinationTableConfigurationList, &v.DestinationTableConfigurationList)
+		case schemas.IcebergDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &RetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.IcebergDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.IcebergDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.IcebergDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = IcebergS3BackupMode(ev)
+			return nil
+		case schemas.IcebergDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_SchemaEvolutionConfiguration:
+			v.SchemaEvolutionConfiguration = &SchemaEvolutionConfiguration{}
+			return v.SchemaEvolutionConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationConfiguration_TableCreationConfiguration:
+			v.TableCreationConfiguration = &TableCreationConfiguration{}
+			return v.TableCreationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a destination in Apache Iceberg Tables.
 type IcebergDestinationDescription struct {
 
@@ -2065,6 +5235,111 @@ type IcebergDestinationDescription struct {
 	TableCreationConfiguration *TableCreationConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *IcebergDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppendOnly != nil {
+		s.WriteBool(schemas.IcebergDestinationDescription_AppendOnly, *v.AppendOnly)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_CatalogConfiguration)
+		v.CatalogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationDescription_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.IcebergDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.IcebergDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaEvolutionConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_SchemaEvolutionConfiguration)
+		v.SchemaEvolutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCreationConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationDescription_TableCreationConfiguration)
+		v.TableCreationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IcebergDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergDestinationDescription_AppendOnly:
+			v.AppendOnly = new(bool)
+			return d.ReadBool(schemas.IcebergDestinationDescription_AppendOnly, v.AppendOnly)
+		case schemas.IcebergDestinationDescription_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.IcebergDestinationDescription_CatalogConfiguration:
+			v.CatalogConfiguration = &CatalogConfiguration{}
+			return v.CatalogConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.IcebergDestinationDescription_DestinationTableConfigurationList:
+			return deserializeDestinationTableConfigurationList(d, schemas.IcebergDestinationDescription_DestinationTableConfigurationList, &v.DestinationTableConfigurationList)
+		case schemas.IcebergDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationDescription_RetryOptions:
+			v.RetryOptions = &RetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.IcebergDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.IcebergDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.IcebergDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.IcebergDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = IcebergS3BackupMode(ev)
+			return nil
+		case schemas.IcebergDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.IcebergDestinationDescription_SchemaEvolutionConfiguration:
+			v.SchemaEvolutionConfiguration = &SchemaEvolutionConfiguration{}
+			return v.SchemaEvolutionConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationDescription_TableCreationConfiguration:
+			v.TableCreationConfiguration = &TableCreationConfiguration{}
+			return v.TableCreationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in Apache Iceberg Tables.
@@ -2128,6 +5403,111 @@ type IcebergDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppendOnly != nil {
+		s.WriteBool(schemas.IcebergDestinationUpdate_AppendOnly, *v.AppendOnly)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_CatalogConfiguration)
+		v.CatalogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDestinationTableConfigurationList(s, schemas.IcebergDestinationUpdate_DestinationTableConfigurationList, v.DestinationTableConfigurationList)
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.IcebergDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.IcebergDestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaEvolutionConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_SchemaEvolutionConfiguration)
+		v.SchemaEvolutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCreationConfiguration != nil {
+		s.WriteStruct(schemas.IcebergDestinationUpdate_TableCreationConfiguration)
+		v.TableCreationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IcebergDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergDestinationUpdate_AppendOnly:
+			v.AppendOnly = new(bool)
+			return d.ReadBool(schemas.IcebergDestinationUpdate_AppendOnly, v.AppendOnly)
+		case schemas.IcebergDestinationUpdate_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_CatalogConfiguration:
+			v.CatalogConfiguration = &CatalogConfiguration{}
+			return v.CatalogConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_DestinationTableConfigurationList:
+			return deserializeDestinationTableConfigurationList(d, schemas.IcebergDestinationUpdate_DestinationTableConfigurationList, &v.DestinationTableConfigurationList)
+		case schemas.IcebergDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_RetryOptions:
+			v.RetryOptions = &RetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.IcebergDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.IcebergDestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.IcebergDestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = IcebergS3BackupMode(ev)
+			return nil
+		case schemas.IcebergDestinationUpdate_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_SchemaEvolutionConfiguration:
+			v.SchemaEvolutionConfiguration = &SchemaEvolutionConfiguration{}
+			return v.SchemaEvolutionConfiguration.Deserialize(d)
+		case schemas.IcebergDestinationUpdate_TableCreationConfiguration:
+			v.TableCreationConfiguration = &TableCreationConfiguration{}
+			return v.TableCreationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the deserializer you want to use to convert the format of the input
 // data. This parameter is required if Enabled is set to true.
 type InputFormatConfiguration struct {
@@ -2138,6 +5518,30 @@ type InputFormatConfiguration struct {
 	Deserializer *Deserializer
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputFormatConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputFormatConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputFormatConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deserializer != nil {
+		s.WriteStruct(schemas.InputFormatConfiguration_Deserializer)
+		v.Deserializer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputFormatConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputFormatConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputFormatConfiguration_Deserializer:
+			v.Deserializer = &Deserializer{}
+			return v.Deserializer.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used
@@ -2162,6 +5566,34 @@ type KinesisStreamSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisStreamARN != nil {
+		s.WriteString(schemas.KinesisStreamSourceConfiguration_KinesisStreamARN, *v.KinesisStreamARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamSourceConfiguration_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamSourceConfiguration_KinesisStreamARN:
+			v.KinesisStreamARN = new(string)
+			return d.ReadString(schemas.KinesisStreamSourceConfiguration_KinesisStreamARN, v.KinesisStreamARN)
+		case schemas.KinesisStreamSourceConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamSourceConfiguration_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Details about a Kinesis data stream used as the source for a Firehose stream.
 type KinesisStreamSourceDescription struct {
 
@@ -2184,6 +5616,40 @@ type KinesisStreamSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStartTimestamp != nil {
+		s.WriteTime(schemas.KinesisStreamSourceDescription_DeliveryStartTimestamp, *v.DeliveryStartTimestamp)
+	}
+	if v.KinesisStreamARN != nil {
+		s.WriteString(schemas.KinesisStreamSourceDescription_KinesisStreamARN, *v.KinesisStreamARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamSourceDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamSourceDescription_DeliveryStartTimestamp:
+			v.DeliveryStartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KinesisStreamSourceDescription_DeliveryStartTimestamp, v.DeliveryStartTimestamp)
+		case schemas.KinesisStreamSourceDescription_KinesisStreamARN:
+			v.KinesisStreamARN = new(string)
+			return d.ReadString(schemas.KinesisStreamSourceDescription_KinesisStreamARN, v.KinesisStreamARN)
+		case schemas.KinesisStreamSourceDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamSourceDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes an encryption key for a destination in Amazon S3.
 type KMSEncryptionConfig struct {
 
@@ -2197,6 +5663,28 @@ type KMSEncryptionConfig struct {
 	AWSKMSKeyARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KMSEncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSEncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSEncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSKMSKeyARN != nil {
+		s.WriteString(schemas.KMSEncryptionConfig_AWSKMSKeyARN, *v.AWSKMSKeyARN)
+	}
+}
+func (v *KMSEncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSEncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSEncryptionConfig_AWSKMSKeyARN:
+			v.AWSKMSKeyARN = new(string)
+			return d.ReadString(schemas.KMSEncryptionConfig_AWSKMSKeyARN, v.AWSKMSKeyARN)
+		}
+		return nil
+	})
 }
 
 // The configuration for the Amazon MSK cluster to be used as the source for a
@@ -2230,6 +5718,48 @@ type MSKSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MSKSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSKSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSKSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.MSKSourceConfiguration_AuthenticationConfiguration)
+		v.AuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MSKClusterARN != nil {
+		s.WriteString(schemas.MSKSourceConfiguration_MSKClusterARN, *v.MSKClusterARN)
+	}
+	if v.ReadFromTimestamp != nil {
+		s.WriteTime(schemas.MSKSourceConfiguration_ReadFromTimestamp, *v.ReadFromTimestamp)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.MSKSourceConfiguration_TopicName, *v.TopicName)
+	}
+}
+func (v *MSKSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSKSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSKSourceConfiguration_AuthenticationConfiguration:
+			v.AuthenticationConfiguration = &AuthenticationConfiguration{}
+			return v.AuthenticationConfiguration.Deserialize(d)
+		case schemas.MSKSourceConfiguration_MSKClusterARN:
+			v.MSKClusterARN = new(string)
+			return d.ReadString(schemas.MSKSourceConfiguration_MSKClusterARN, v.MSKClusterARN)
+		case schemas.MSKSourceConfiguration_ReadFromTimestamp:
+			v.ReadFromTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MSKSourceConfiguration_ReadFromTimestamp, v.ReadFromTimestamp)
+		case schemas.MSKSourceConfiguration_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.MSKSourceConfiguration_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
+
 // Details about the Amazon MSK cluster used as the source for a Firehose stream.
 type MSKSourceDescription struct {
 
@@ -2256,6 +5786,54 @@ type MSKSourceDescription struct {
 	TopicName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MSKSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSKSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSKSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.MSKSourceDescription_AuthenticationConfiguration)
+		v.AuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryStartTimestamp != nil {
+		s.WriteTime(schemas.MSKSourceDescription_DeliveryStartTimestamp, *v.DeliveryStartTimestamp)
+	}
+	if v.MSKClusterARN != nil {
+		s.WriteString(schemas.MSKSourceDescription_MSKClusterARN, *v.MSKClusterARN)
+	}
+	if v.ReadFromTimestamp != nil {
+		s.WriteTime(schemas.MSKSourceDescription_ReadFromTimestamp, *v.ReadFromTimestamp)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.MSKSourceDescription_TopicName, *v.TopicName)
+	}
+}
+func (v *MSKSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSKSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSKSourceDescription_AuthenticationConfiguration:
+			v.AuthenticationConfiguration = &AuthenticationConfiguration{}
+			return v.AuthenticationConfiguration.Deserialize(d)
+		case schemas.MSKSourceDescription_DeliveryStartTimestamp:
+			v.DeliveryStartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MSKSourceDescription_DeliveryStartTimestamp, v.DeliveryStartTimestamp)
+		case schemas.MSKSourceDescription_MSKClusterARN:
+			v.MSKClusterARN = new(string)
+			return d.ReadString(schemas.MSKSourceDescription_MSKClusterARN, v.MSKClusterARN)
+		case schemas.MSKSourceDescription_ReadFromTimestamp:
+			v.ReadFromTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MSKSourceDescription_ReadFromTimestamp, v.ReadFromTimestamp)
+		case schemas.MSKSourceDescription_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.MSKSourceDescription_TopicName, v.TopicName)
+		}
+		return nil
+	})
 }
 
 // The OpenX SerDe. Used by Firehose for deserializing data, which means
@@ -2285,6 +5863,37 @@ type OpenXJsonSerDe struct {
 	ConvertDotsInJsonKeysToUnderscores *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenXJsonSerDe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenXJsonSerDe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenXJsonSerDe) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseInsensitive != nil {
+		s.WriteBool(schemas.OpenXJsonSerDe_CaseInsensitive, *v.CaseInsensitive)
+	}
+	serializeColumnToJsonKeyMappings(s, schemas.OpenXJsonSerDe_ColumnToJsonKeyMappings, v.ColumnToJsonKeyMappings)
+	if v.ConvertDotsInJsonKeysToUnderscores != nil {
+		s.WriteBool(schemas.OpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores, *v.ConvertDotsInJsonKeysToUnderscores)
+	}
+}
+func (v *OpenXJsonSerDe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenXJsonSerDe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenXJsonSerDe_CaseInsensitive:
+			v.CaseInsensitive = new(bool)
+			return d.ReadBool(schemas.OpenXJsonSerDe_CaseInsensitive, v.CaseInsensitive)
+		case schemas.OpenXJsonSerDe_ColumnToJsonKeyMappings:
+			return deserializeColumnToJsonKeyMappings(d, schemas.OpenXJsonSerDe_ColumnToJsonKeyMappings, &v.ColumnToJsonKeyMappings)
+		case schemas.OpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores:
+			v.ConvertDotsInJsonKeysToUnderscores = new(bool)
+			return d.ReadBool(schemas.OpenXJsonSerDe_ConvertDotsInJsonKeysToUnderscores, v.ConvertDotsInJsonKeysToUnderscores)
+		}
+		return nil
+	})
 }
 
 // A serializer to use for converting data to the ORC format before storing it in
@@ -2351,6 +5960,87 @@ type OrcSerDe struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrcSerDe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrcSerDe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrcSerDe) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockSizeBytes != nil {
+		s.WriteInt32(schemas.OrcSerDe_BlockSizeBytes, *v.BlockSizeBytes)
+	}
+	serializeListOfNonEmptyStringsWithoutWhitespace(s, schemas.OrcSerDe_BloomFilterColumns, v.BloomFilterColumns)
+	if v.BloomFilterFalsePositiveProbability != nil {
+		s.WriteFloat64(schemas.OrcSerDe_BloomFilterFalsePositiveProbability, *v.BloomFilterFalsePositiveProbability)
+	}
+	if v.Compression != "" {
+		s.WriteString(schemas.OrcSerDe_Compression, string(v.Compression))
+	}
+	if v.DictionaryKeyThreshold != nil {
+		s.WriteFloat64(schemas.OrcSerDe_DictionaryKeyThreshold, *v.DictionaryKeyThreshold)
+	}
+	if v.EnablePadding != nil {
+		s.WriteBool(schemas.OrcSerDe_EnablePadding, *v.EnablePadding)
+	}
+	if v.FormatVersion != "" {
+		s.WriteString(schemas.OrcSerDe_FormatVersion, string(v.FormatVersion))
+	}
+	if v.PaddingTolerance != nil {
+		s.WriteFloat64(schemas.OrcSerDe_PaddingTolerance, *v.PaddingTolerance)
+	}
+	if v.RowIndexStride != nil {
+		s.WriteInt32(schemas.OrcSerDe_RowIndexStride, *v.RowIndexStride)
+	}
+	if v.StripeSizeBytes != nil {
+		s.WriteInt32(schemas.OrcSerDe_StripeSizeBytes, *v.StripeSizeBytes)
+	}
+}
+func (v *OrcSerDe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrcSerDe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrcSerDe_BlockSizeBytes:
+			v.BlockSizeBytes = new(int32)
+			return d.ReadInt32(schemas.OrcSerDe_BlockSizeBytes, v.BlockSizeBytes)
+		case schemas.OrcSerDe_BloomFilterColumns:
+			return deserializeListOfNonEmptyStringsWithoutWhitespace(d, schemas.OrcSerDe_BloomFilterColumns, &v.BloomFilterColumns)
+		case schemas.OrcSerDe_BloomFilterFalsePositiveProbability:
+			v.BloomFilterFalsePositiveProbability = new(float64)
+			return d.ReadFloat64(schemas.OrcSerDe_BloomFilterFalsePositiveProbability, v.BloomFilterFalsePositiveProbability)
+		case schemas.OrcSerDe_Compression:
+			var ev string
+			if err := d.ReadString(schemas.OrcSerDe_Compression, &ev); err != nil {
+				return err
+			}
+			v.Compression = OrcCompression(ev)
+			return nil
+		case schemas.OrcSerDe_DictionaryKeyThreshold:
+			v.DictionaryKeyThreshold = new(float64)
+			return d.ReadFloat64(schemas.OrcSerDe_DictionaryKeyThreshold, v.DictionaryKeyThreshold)
+		case schemas.OrcSerDe_EnablePadding:
+			v.EnablePadding = new(bool)
+			return d.ReadBool(schemas.OrcSerDe_EnablePadding, v.EnablePadding)
+		case schemas.OrcSerDe_FormatVersion:
+			var ev string
+			if err := d.ReadString(schemas.OrcSerDe_FormatVersion, &ev); err != nil {
+				return err
+			}
+			v.FormatVersion = OrcFormatVersion(ev)
+			return nil
+		case schemas.OrcSerDe_PaddingTolerance:
+			v.PaddingTolerance = new(float64)
+			return d.ReadFloat64(schemas.OrcSerDe_PaddingTolerance, v.PaddingTolerance)
+		case schemas.OrcSerDe_RowIndexStride:
+			v.RowIndexStride = new(int32)
+			return d.ReadInt32(schemas.OrcSerDe_RowIndexStride, v.RowIndexStride)
+		case schemas.OrcSerDe_StripeSizeBytes:
+			v.StripeSizeBytes = new(int32)
+			return d.ReadInt32(schemas.OrcSerDe_StripeSizeBytes, v.StripeSizeBytes)
+		}
+		return nil
+	})
+}
+
 // Specifies the serializer that you want Firehose to use to convert the format of
 // your data before it writes it to Amazon S3. This parameter is required if
 // Enabled is set to true.
@@ -2361,6 +6051,30 @@ type OutputFormatConfiguration struct {
 	Serializer *Serializer
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputFormatConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputFormatConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputFormatConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Serializer != nil {
+		s.WriteStruct(schemas.OutputFormatConfiguration_Serializer)
+		v.Serializer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputFormatConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputFormatConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputFormatConfiguration_Serializer:
+			v.Serializer = &Serializer{}
+			return v.Serializer.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A serializer to use for converting data to the Parquet format before storing it
@@ -2400,6 +6114,66 @@ type ParquetSerDe struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParquetSerDe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParquetSerDe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParquetSerDe) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockSizeBytes != nil {
+		s.WriteInt32(schemas.ParquetSerDe_BlockSizeBytes, *v.BlockSizeBytes)
+	}
+	if v.Compression != "" {
+		s.WriteString(schemas.ParquetSerDe_Compression, string(v.Compression))
+	}
+	if v.EnableDictionaryCompression != nil {
+		s.WriteBool(schemas.ParquetSerDe_EnableDictionaryCompression, *v.EnableDictionaryCompression)
+	}
+	if v.MaxPaddingBytes != nil {
+		s.WriteInt32(schemas.ParquetSerDe_MaxPaddingBytes, *v.MaxPaddingBytes)
+	}
+	if v.PageSizeBytes != nil {
+		s.WriteInt32(schemas.ParquetSerDe_PageSizeBytes, *v.PageSizeBytes)
+	}
+	if v.WriterVersion != "" {
+		s.WriteString(schemas.ParquetSerDe_WriterVersion, string(v.WriterVersion))
+	}
+}
+func (v *ParquetSerDe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParquetSerDe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParquetSerDe_BlockSizeBytes:
+			v.BlockSizeBytes = new(int32)
+			return d.ReadInt32(schemas.ParquetSerDe_BlockSizeBytes, v.BlockSizeBytes)
+		case schemas.ParquetSerDe_Compression:
+			var ev string
+			if err := d.ReadString(schemas.ParquetSerDe_Compression, &ev); err != nil {
+				return err
+			}
+			v.Compression = ParquetCompression(ev)
+			return nil
+		case schemas.ParquetSerDe_EnableDictionaryCompression:
+			v.EnableDictionaryCompression = new(bool)
+			return d.ReadBool(schemas.ParquetSerDe_EnableDictionaryCompression, v.EnableDictionaryCompression)
+		case schemas.ParquetSerDe_MaxPaddingBytes:
+			v.MaxPaddingBytes = new(int32)
+			return d.ReadInt32(schemas.ParquetSerDe_MaxPaddingBytes, v.MaxPaddingBytes)
+		case schemas.ParquetSerDe_PageSizeBytes:
+			v.PageSizeBytes = new(int32)
+			return d.ReadInt32(schemas.ParquetSerDe_PageSizeBytes, v.PageSizeBytes)
+		case schemas.ParquetSerDe_WriterVersion:
+			var ev string
+			if err := d.ReadString(schemas.ParquetSerDe_WriterVersion, &ev); err != nil {
+				return err
+			}
+			v.WriterVersion = ParquetWriterVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a single field in a PartitionSpec .
 //
 // Amazon Data Firehose is in preview release and is subject to change.
@@ -2413,6 +6187,28 @@ type PartitionField struct {
 	SourceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartitionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceName != nil {
+		s.WriteString(schemas.PartitionField_SourceName, *v.SourceName)
+	}
+}
+func (v *PartitionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionField_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.PartitionField_SourceName, v.SourceName)
+		}
+		return nil
+	})
 }
 
 // Represents how to produce partition data for a table. Partition data is
@@ -2438,6 +6234,25 @@ type PartitionSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartitionSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartitionFields(s, schemas.PartitionSpec_Identity, v.Identity)
+}
+func (v *PartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionSpec_Identity:
+			return deserializePartitionFields(d, schemas.PartitionSpec_Identity, &v.Identity)
+		}
+		return nil
+	})
+}
+
 // Describes a data processing configuration.
 type ProcessingConfiguration struct {
 
@@ -2448,6 +6263,31 @@ type ProcessingConfiguration struct {
 	Processors []Processor
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcessingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ProcessingConfiguration_Enabled, *v.Enabled)
+	}
+	serializeProcessorList(s, schemas.ProcessingConfiguration_Processors, v.Processors)
+}
+func (v *ProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcessingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcessingConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ProcessingConfiguration_Enabled, v.Enabled)
+		case schemas.ProcessingConfiguration_Processors:
+			return deserializeProcessorList(d, schemas.ProcessingConfiguration_Processors, &v.Processors)
+		}
+		return nil
+	})
 }
 
 // Describes a data processor.
@@ -2467,6 +6307,35 @@ type Processor struct {
 	Parameters []ProcessorParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *Processor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Processor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Processor) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProcessorParameterList(s, schemas.Processor_Parameters, v.Parameters)
+	if v.Type != "" {
+		s.WriteString(schemas.Processor_Type, string(v.Type))
+	}
+}
+func (v *Processor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Processor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Processor_Parameters:
+			return deserializeProcessorParameterList(d, schemas.Processor_Parameters, &v.Parameters)
+		case schemas.Processor_Type:
+			var ev string
+			if err := d.ReadString(schemas.Processor_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ProcessorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the processor parameter.
@@ -2489,6 +6358,38 @@ type ProcessorParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProcessorParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcessorParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcessorParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != "" {
+		s.WriteString(schemas.ProcessorParameter_ParameterName, string(v.ParameterName))
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.ProcessorParameter_ParameterValue, *v.ParameterValue)
+	}
+}
+func (v *ProcessorParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcessorParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcessorParameter_ParameterName:
+			var ev string
+			if err := d.ReadString(schemas.ProcessorParameter_ParameterName, &ev); err != nil {
+				return err
+			}
+			v.ParameterName = ProcessorParameterName(ev)
+			return nil
+		case schemas.ProcessorParameter_ParameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.ProcessorParameter_ParameterValue, v.ParameterValue)
+		}
+		return nil
+	})
+}
+
 // Contains the result for an individual record from a PutRecordBatch request. If the record is
 // successfully added to your Firehose stream, it receives a record ID. If the
 // record fails to be added to your Firehose stream, the result includes an error
@@ -2507,6 +6408,40 @@ type PutRecordBatchResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordBatchResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordBatchResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordBatchResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.PutRecordBatchResponseEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PutRecordBatchResponseEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.PutRecordBatchResponseEntry_RecordId, *v.RecordId)
+	}
+}
+func (v *PutRecordBatchResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordBatchResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordBatchResponseEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.PutRecordBatchResponseEntry_ErrorCode, v.ErrorCode)
+		case schemas.PutRecordBatchResponseEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PutRecordBatchResponseEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.PutRecordBatchResponseEntry_RecordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.PutRecordBatchResponseEntry_RecordId, v.RecordId)
+		}
+		return nil
+	})
+}
+
 // The unit of data in a Firehose stream.
 type Record struct {
 
@@ -2517,6 +6452,27 @@ type Record struct {
 	Data []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.Record_Data, v.Data)
+	}
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_Data:
+			return d.ReadBlob(schemas.Record_Data, &v.Data)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Amazon Redshift.
@@ -2581,6 +6537,112 @@ type RedshiftDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterJDBCURL != nil {
+		s.WriteString(schemas.RedshiftDestinationConfiguration_ClusterJDBCURL, *v.ClusterJDBCURL)
+	}
+	if v.CopyCommand != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_CopyCommand)
+		v.CopyCommand.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.RedshiftDestinationConfiguration_Password, *v.Password)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.RedshiftDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_S3BackupConfiguration)
+		v.S3BackupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.RedshiftDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationConfiguration_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RedshiftDestinationConfiguration_Username, *v.Username)
+	}
+}
+func (v *RedshiftDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_ClusterJDBCURL:
+			v.ClusterJDBCURL = new(string)
+			return d.ReadString(schemas.RedshiftDestinationConfiguration_ClusterJDBCURL, v.ClusterJDBCURL)
+		case schemas.RedshiftDestinationConfiguration_CopyCommand:
+			v.CopyCommand = &CopyCommand{}
+			return v.CopyCommand.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.RedshiftDestinationConfiguration_Password, v.Password)
+		case schemas.RedshiftDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &RedshiftRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.RedshiftDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.RedshiftDestinationConfiguration_S3BackupConfiguration:
+			v.S3BackupConfiguration = &S3DestinationConfiguration{}
+			return v.S3BackupConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.RedshiftDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = RedshiftS3BackupMode(ev)
+			return nil
+		case schemas.RedshiftDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationConfiguration_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RedshiftDestinationConfiguration_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Describes a destination in Amazon Redshift.
 type RedshiftDestinationDescription struct {
 
@@ -2630,6 +6692,106 @@ type RedshiftDestinationDescription struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterJDBCURL != nil {
+		s.WriteString(schemas.RedshiftDestinationDescription_ClusterJDBCURL, *v.ClusterJDBCURL)
+	}
+	if v.CopyCommand != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_CopyCommand)
+		v.CopyCommand.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.RedshiftDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupDescription != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_S3BackupDescription)
+		v.S3BackupDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.RedshiftDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationDescription_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RedshiftDestinationDescription_Username, *v.Username)
+	}
+}
+func (v *RedshiftDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_ClusterJDBCURL:
+			v.ClusterJDBCURL = new(string)
+			return d.ReadString(schemas.RedshiftDestinationDescription_ClusterJDBCURL, v.ClusterJDBCURL)
+		case schemas.RedshiftDestinationDescription_CopyCommand:
+			v.CopyCommand = &CopyCommand{}
+			return v.CopyCommand.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_RetryOptions:
+			v.RetryOptions = &RedshiftRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.RedshiftDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.RedshiftDestinationDescription_S3BackupDescription:
+			v.S3BackupDescription = &S3DestinationDescription{}
+			return v.S3BackupDescription.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.RedshiftDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = RedshiftS3BackupMode(ev)
+			return nil
+		case schemas.RedshiftDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationDescription_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RedshiftDestinationDescription_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in Amazon Redshift.
@@ -2683,6 +6845,112 @@ type RedshiftDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterJDBCURL != nil {
+		s.WriteString(schemas.RedshiftDestinationUpdate_ClusterJDBCURL, *v.ClusterJDBCURL)
+	}
+	if v.CopyCommand != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_CopyCommand)
+		v.CopyCommand.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.RedshiftDestinationUpdate_Password, *v.Password)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.RedshiftDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.RedshiftDestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3BackupUpdate != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_S3BackupUpdate)
+		v.S3BackupUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.RedshiftDestinationUpdate_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RedshiftDestinationUpdate_Username, *v.Username)
+	}
+}
+func (v *RedshiftDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_ClusterJDBCURL:
+			v.ClusterJDBCURL = new(string)
+			return d.ReadString(schemas.RedshiftDestinationUpdate_ClusterJDBCURL, v.ClusterJDBCURL)
+		case schemas.RedshiftDestinationUpdate_CopyCommand:
+			v.CopyCommand = &CopyCommand{}
+			return v.CopyCommand.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.RedshiftDestinationUpdate_Password, v.Password)
+		case schemas.RedshiftDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_RetryOptions:
+			v.RetryOptions = &RedshiftRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.RedshiftDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.RedshiftDestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.RedshiftDestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = RedshiftS3BackupMode(ev)
+			return nil
+		case schemas.RedshiftDestinationUpdate_S3BackupUpdate:
+			v.S3BackupUpdate = &S3DestinationUpdate{}
+			return v.S3BackupUpdate.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.RedshiftDestinationUpdate_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RedshiftDestinationUpdate_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Configures retry behavior in case Firehose is unable to deliver documents to
 // Amazon Redshift.
 type RedshiftRetryOptions struct {
@@ -2697,6 +6965,28 @@ type RedshiftRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.RedshiftRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *RedshiftRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.RedshiftRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
+}
+
 // The retry behavior in case Firehose is unable to deliver data to a destination.
 type RetryOptions struct {
 
@@ -2705,6 +6995,28 @@ type RetryOptions struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.RetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *RetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.RetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -2757,6 +7069,80 @@ type S3DestinationConfiguration struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3DestinationConfiguration_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.S3DestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.S3DestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.S3DestinationConfiguration_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.S3DestinationConfiguration_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.S3DestinationConfiguration_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3DestinationConfiguration_Prefix, *v.Prefix)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.S3DestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+}
+func (v *S3DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationConfiguration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3DestinationConfiguration_BucketARN, v.BucketARN)
+		case schemas.S3DestinationConfiguration_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.S3DestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.S3DestinationConfiguration_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3DestinationConfiguration_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.S3DestinationConfiguration_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.S3DestinationConfiguration_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.S3DestinationConfiguration_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.S3DestinationConfiguration_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3DestinationConfiguration_Prefix, v.Prefix)
+		case schemas.S3DestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.S3DestinationConfiguration_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Describes a destination in Amazon S3.
@@ -2813,6 +7199,80 @@ type S3DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3DestinationDescription_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.S3DestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.S3DestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.S3DestinationDescription_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.S3DestinationDescription_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.S3DestinationDescription_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3DestinationDescription_Prefix, *v.Prefix)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.S3DestinationDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *S3DestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3DestinationDescription_BucketARN, v.BucketARN)
+		case schemas.S3DestinationDescription_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.S3DestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.S3DestinationDescription_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3DestinationDescription_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.S3DestinationDescription_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.S3DestinationDescription_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.S3DestinationDescription_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.S3DestinationDescription_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3DestinationDescription_Prefix, v.Prefix)
+		case schemas.S3DestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.S3DestinationDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes an update for a destination in Amazon S3.
 type S3DestinationUpdate struct {
 
@@ -2861,6 +7321,80 @@ type S3DestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3DestinationUpdate_BucketARN, *v.BucketARN)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.S3DestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.S3DestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompressionFormat != "" {
+		s.WriteString(schemas.S3DestinationUpdate_CompressionFormat, string(v.CompressionFormat))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.S3DestinationUpdate_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.S3DestinationUpdate_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3DestinationUpdate_Prefix, *v.Prefix)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.S3DestinationUpdate_RoleARN, *v.RoleARN)
+	}
+}
+func (v *S3DestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationUpdate_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3DestinationUpdate_BucketARN, v.BucketARN)
+		case schemas.S3DestinationUpdate_BufferingHints:
+			v.BufferingHints = &BufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.S3DestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.S3DestinationUpdate_CompressionFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3DestinationUpdate_CompressionFormat, &ev); err != nil {
+				return err
+			}
+			v.CompressionFormat = CompressionFormat(ev)
+			return nil
+		case schemas.S3DestinationUpdate_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.S3DestinationUpdate_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.S3DestinationUpdate_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.S3DestinationUpdate_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3DestinationUpdate_Prefix, v.Prefix)
+		case schemas.S3DestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.S3DestinationUpdate_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Specifies the schema to which you want Firehose to configure your data before
 // it writes it to Amazon S3. This parameter is required if Enabled is set to true.
 type SchemaConfiguration struct {
@@ -2906,6 +7440,58 @@ type SchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.SchemaConfiguration_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.SchemaConfiguration_DatabaseName, *v.DatabaseName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SchemaConfiguration_Region, *v.Region)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.SchemaConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.SchemaConfiguration_TableName, *v.TableName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.SchemaConfiguration_VersionId, *v.VersionId)
+	}
+}
+func (v *SchemaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaConfiguration_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_CatalogId, v.CatalogId)
+		case schemas.SchemaConfiguration_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_DatabaseName, v.DatabaseName)
+		case schemas.SchemaConfiguration_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_Region, v.Region)
+		case schemas.SchemaConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_RoleARN, v.RoleARN)
+		case schemas.SchemaConfiguration_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_TableName, v.TableName)
+		case schemas.SchemaConfiguration_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.SchemaConfiguration_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // The configuration to enable schema evolution.
 //
 // Amazon Data Firehose is in preview release and is subject to change.
@@ -2919,6 +7505,28 @@ type SchemaEvolutionConfiguration struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaEvolutionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaEvolutionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaEvolutionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SchemaEvolutionConfiguration_Enabled, *v.Enabled)
+	}
+}
+func (v *SchemaEvolutionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaEvolutionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaEvolutionConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SchemaEvolutionConfiguration_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // The structure that defines how Firehose accesses the secret.
@@ -2948,6 +7556,40 @@ type SecretsManagerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecretsManagerConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecretsManagerConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecretsManagerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SecretsManagerConfiguration_Enabled, *v.Enabled)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.SecretsManagerConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.SecretARN != nil {
+		s.WriteString(schemas.SecretsManagerConfiguration_SecretARN, *v.SecretARN)
+	}
+}
+func (v *SecretsManagerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecretsManagerConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecretsManagerConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SecretsManagerConfiguration_Enabled, v.Enabled)
+		case schemas.SecretsManagerConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.SecretsManagerConfiguration_RoleARN, v.RoleARN)
+		case schemas.SecretsManagerConfiguration_SecretARN:
+			v.SecretARN = new(string)
+			return d.ReadString(schemas.SecretsManagerConfiguration_SecretARN, v.SecretARN)
+		}
+		return nil
+	})
+}
+
 // The serializer that you want Firehose to use to convert data to the target
 // format before writing it to Amazon S3. Firehose supports two types of
 // serializers: the ORC SerDe and the Parquet SerDe.
@@ -2968,6 +7610,38 @@ type Serializer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Serializer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Serializer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Serializer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrcSerDe != nil {
+		s.WriteStruct(schemas.Serializer_OrcSerDe)
+		v.OrcSerDe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParquetSerDe != nil {
+		s.WriteStruct(schemas.Serializer_ParquetSerDe)
+		v.ParquetSerDe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Serializer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Serializer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Serializer_OrcSerDe:
+			v.OrcSerDe = &OrcSerDe{}
+			return v.OrcSerDe.Deserialize(d)
+		case schemas.Serializer_ParquetSerDe:
+			v.ParquetSerDe = &ParquetSerDe{}
+			return v.ParquetSerDe.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Describes the buffering to perform before delivering data to the Snowflake
 //
 // destination. If you do not specify any value, Firehose uses the default values.
@@ -2982,6 +7656,34 @@ type SnowflakeBufferingHints struct {
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.SnowflakeBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.SnowflakeBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *SnowflakeBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.SnowflakeBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.SnowflakeBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.SnowflakeBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
 }
 
 // Configure Snowflake destination
@@ -3092,6 +7794,166 @@ type SnowflakeDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnowflakeDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_AccountUrl, *v.AccountUrl)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContentColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_ContentColumnName, *v.ContentColumnName)
+	}
+	if v.DataLoadingOption != "" {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_DataLoadingOption, string(v.DataLoadingOption))
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_Database, *v.Database)
+	}
+	if v.KeyPassphrase != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_KeyPassphrase, *v.KeyPassphrase)
+	}
+	if v.MetaDataColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_MetaDataColumnName, *v.MetaDataColumnName)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_PrivateKey, *v.PrivateKey)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_Schema, *v.Schema)
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeRoleConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_SnowflakeRoleConfiguration)
+		v.SnowflakeRoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeVpcConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationConfiguration_SnowflakeVpcConfiguration)
+		v.SnowflakeVpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_Table, *v.Table)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.SnowflakeDestinationConfiguration_User, *v.User)
+	}
+}
+func (v *SnowflakeDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeDestinationConfiguration_AccountUrl:
+			v.AccountUrl = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_AccountUrl, v.AccountUrl)
+		case schemas.SnowflakeDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &SnowflakeBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_ContentColumnName:
+			v.ContentColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_ContentColumnName, v.ContentColumnName)
+		case schemas.SnowflakeDestinationConfiguration_DataLoadingOption:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationConfiguration_DataLoadingOption, &ev); err != nil {
+				return err
+			}
+			v.DataLoadingOption = SnowflakeDataLoadingOption(ev)
+			return nil
+		case schemas.SnowflakeDestinationConfiguration_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_Database, v.Database)
+		case schemas.SnowflakeDestinationConfiguration_KeyPassphrase:
+			v.KeyPassphrase = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_KeyPassphrase, v.KeyPassphrase)
+		case schemas.SnowflakeDestinationConfiguration_MetaDataColumnName:
+			v.MetaDataColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_MetaDataColumnName, v.MetaDataColumnName)
+		case schemas.SnowflakeDestinationConfiguration_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_PrivateKey, v.PrivateKey)
+		case schemas.SnowflakeDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &SnowflakeRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_RoleARN, v.RoleARN)
+		case schemas.SnowflakeDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SnowflakeS3BackupMode(ev)
+			return nil
+		case schemas.SnowflakeDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_Schema, v.Schema)
+		case schemas.SnowflakeDestinationConfiguration_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_SnowflakeRoleConfiguration:
+			v.SnowflakeRoleConfiguration = &SnowflakeRoleConfiguration{}
+			return v.SnowflakeRoleConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_SnowflakeVpcConfiguration:
+			v.SnowflakeVpcConfiguration = &SnowflakeVpcConfiguration{}
+			return v.SnowflakeVpcConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationConfiguration_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_Table, v.Table)
+		case schemas.SnowflakeDestinationConfiguration_User:
+			v.User = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationConfiguration_User, v.User)
+		}
+		return nil
+	})
+}
+
 // Optional Snowflake destination description
 type SnowflakeDestinationDescription struct {
 
@@ -3163,6 +8025,154 @@ type SnowflakeDestinationDescription struct {
 	User *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_AccountUrl, *v.AccountUrl)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContentColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_ContentColumnName, *v.ContentColumnName)
+	}
+	if v.DataLoadingOption != "" {
+		s.WriteString(schemas.SnowflakeDestinationDescription_DataLoadingOption, string(v.DataLoadingOption))
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_Database, *v.Database)
+	}
+	if v.MetaDataColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_MetaDataColumnName, *v.MetaDataColumnName)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SnowflakeDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_Schema, *v.Schema)
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeRoleConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_SnowflakeRoleConfiguration)
+		v.SnowflakeRoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeVpcConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationDescription_SnowflakeVpcConfiguration)
+		v.SnowflakeVpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_Table, *v.Table)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.SnowflakeDestinationDescription_User, *v.User)
+	}
+}
+func (v *SnowflakeDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeDestinationDescription_AccountUrl:
+			v.AccountUrl = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_AccountUrl, v.AccountUrl)
+		case schemas.SnowflakeDestinationDescription_BufferingHints:
+			v.BufferingHints = &SnowflakeBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_ContentColumnName:
+			v.ContentColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_ContentColumnName, v.ContentColumnName)
+		case schemas.SnowflakeDestinationDescription_DataLoadingOption:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationDescription_DataLoadingOption, &ev); err != nil {
+				return err
+			}
+			v.DataLoadingOption = SnowflakeDataLoadingOption(ev)
+			return nil
+		case schemas.SnowflakeDestinationDescription_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_Database, v.Database)
+		case schemas.SnowflakeDestinationDescription_MetaDataColumnName:
+			v.MetaDataColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_MetaDataColumnName, v.MetaDataColumnName)
+		case schemas.SnowflakeDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_RetryOptions:
+			v.RetryOptions = &SnowflakeRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_RoleARN, v.RoleARN)
+		case schemas.SnowflakeDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SnowflakeS3BackupMode(ev)
+			return nil
+		case schemas.SnowflakeDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_Schema, v.Schema)
+		case schemas.SnowflakeDestinationDescription_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_SnowflakeRoleConfiguration:
+			v.SnowflakeRoleConfiguration = &SnowflakeRoleConfiguration{}
+			return v.SnowflakeRoleConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_SnowflakeVpcConfiguration:
+			v.SnowflakeVpcConfiguration = &SnowflakeVpcConfiguration{}
+			return v.SnowflakeVpcConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationDescription_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_Table, v.Table)
+		case schemas.SnowflakeDestinationDescription_User:
+			v.User = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationDescription_User, v.User)
+		}
+		return nil
+	})
 }
 
 // Update to configuration settings
@@ -3262,6 +8272,158 @@ type SnowflakeDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnowflakeDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_AccountUrl, *v.AccountUrl)
+	}
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContentColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_ContentColumnName, *v.ContentColumnName)
+	}
+	if v.DataLoadingOption != "" {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_DataLoadingOption, string(v.DataLoadingOption))
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_Database, *v.Database)
+	}
+	if v.KeyPassphrase != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_KeyPassphrase, *v.KeyPassphrase)
+	}
+	if v.MetaDataColumnName != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_MetaDataColumnName, *v.MetaDataColumnName)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_PrivateKey, *v.PrivateKey)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_RoleARN, *v.RoleARN)
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_Schema, *v.Schema)
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeRoleConfiguration != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationUpdate_SnowflakeRoleConfiguration)
+		v.SnowflakeRoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_Table, *v.Table)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.SnowflakeDestinationUpdate_User, *v.User)
+	}
+}
+func (v *SnowflakeDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeDestinationUpdate_AccountUrl:
+			v.AccountUrl = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_AccountUrl, v.AccountUrl)
+		case schemas.SnowflakeDestinationUpdate_BufferingHints:
+			v.BufferingHints = &SnowflakeBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_ContentColumnName:
+			v.ContentColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_ContentColumnName, v.ContentColumnName)
+		case schemas.SnowflakeDestinationUpdate_DataLoadingOption:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationUpdate_DataLoadingOption, &ev); err != nil {
+				return err
+			}
+			v.DataLoadingOption = SnowflakeDataLoadingOption(ev)
+			return nil
+		case schemas.SnowflakeDestinationUpdate_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_Database, v.Database)
+		case schemas.SnowflakeDestinationUpdate_KeyPassphrase:
+			v.KeyPassphrase = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_KeyPassphrase, v.KeyPassphrase)
+		case schemas.SnowflakeDestinationUpdate_MetaDataColumnName:
+			v.MetaDataColumnName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_MetaDataColumnName, v.MetaDataColumnName)
+		case schemas.SnowflakeDestinationUpdate_PrivateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_PrivateKey, v.PrivateKey)
+		case schemas.SnowflakeDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_RetryOptions:
+			v.RetryOptions = &SnowflakeRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_RoleARN, v.RoleARN)
+		case schemas.SnowflakeDestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SnowflakeDestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SnowflakeS3BackupMode(ev)
+			return nil
+		case schemas.SnowflakeDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_Schema, v.Schema)
+		case schemas.SnowflakeDestinationUpdate_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_SnowflakeRoleConfiguration:
+			v.SnowflakeRoleConfiguration = &SnowflakeRoleConfiguration{}
+			return v.SnowflakeRoleConfiguration.Deserialize(d)
+		case schemas.SnowflakeDestinationUpdate_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_Table, v.Table)
+		case schemas.SnowflakeDestinationUpdate_User:
+			v.User = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationUpdate_User, v.User)
+		}
+		return nil
+	})
+}
+
 // Specify how long Firehose retries sending data to the New Relic HTTP endpoint.
 //
 // After sending data, Firehose first waits for an acknowledgment from the HTTP
@@ -3291,6 +8453,28 @@ type SnowflakeRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnowflakeRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.SnowflakeRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *SnowflakeRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.SnowflakeRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
+}
+
 // Optionally configure a Snowflake role. Otherwise the default user role will be
 // used.
 type SnowflakeRoleConfiguration struct {
@@ -3302,6 +8486,34 @@ type SnowflakeRoleConfiguration struct {
 	SnowflakeRole *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeRoleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeRoleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeRoleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SnowflakeRoleConfiguration_Enabled, *v.Enabled)
+	}
+	if v.SnowflakeRole != nil {
+		s.WriteString(schemas.SnowflakeRoleConfiguration_SnowflakeRole, *v.SnowflakeRole)
+	}
+}
+func (v *SnowflakeRoleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeRoleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeRoleConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SnowflakeRoleConfiguration_Enabled, v.Enabled)
+		case schemas.SnowflakeRoleConfiguration_SnowflakeRole:
+			v.SnowflakeRole = new(string)
+			return d.ReadString(schemas.SnowflakeRoleConfiguration_SnowflakeRole, v.SnowflakeRole)
+		}
+		return nil
+	})
 }
 
 // Configure a Snowflake VPC
@@ -3316,6 +8528,28 @@ type SnowflakeVpcConfiguration struct {
 	PrivateLinkVpceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivateLinkVpceId != nil {
+		s.WriteString(schemas.SnowflakeVpcConfiguration_PrivateLinkVpceId, *v.PrivateLinkVpceId)
+	}
+}
+func (v *SnowflakeVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeVpcConfiguration_PrivateLinkVpceId:
+			v.PrivateLinkVpceId = new(string)
+			return d.ReadString(schemas.SnowflakeVpcConfiguration_PrivateLinkVpceId, v.PrivateLinkVpceId)
+		}
+		return nil
+	})
 }
 
 // Details about a Kinesis data stream used as the source for a Firehose stream.
@@ -3339,6 +8573,54 @@ type SourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseSourceDescription != nil {
+		s.WriteStruct(schemas.SourceDescription_DatabaseSourceDescription)
+		v.DatabaseSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectPutSourceDescription != nil {
+		s.WriteStruct(schemas.SourceDescription_DirectPutSourceDescription)
+		v.DirectPutSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamSourceDescription != nil {
+		s.WriteStruct(schemas.SourceDescription_KinesisStreamSourceDescription)
+		v.KinesisStreamSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MSKSourceDescription != nil {
+		s.WriteStruct(schemas.SourceDescription_MSKSourceDescription)
+		v.MSKSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceDescription_DatabaseSourceDescription:
+			v.DatabaseSourceDescription = &DatabaseSourceDescription{}
+			return v.DatabaseSourceDescription.Deserialize(d)
+		case schemas.SourceDescription_DirectPutSourceDescription:
+			v.DirectPutSourceDescription = &DirectPutSourceDescription{}
+			return v.DirectPutSourceDescription.Deserialize(d)
+		case schemas.SourceDescription_KinesisStreamSourceDescription:
+			v.KinesisStreamSourceDescription = &KinesisStreamSourceDescription{}
+			return v.KinesisStreamSourceDescription.Deserialize(d)
+		case schemas.SourceDescription_MSKSourceDescription:
+			v.MSKSourceDescription = &MSKSourceDescription{}
+			return v.MSKSourceDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The buffering options. If no value is specified, the default values for Splunk
 // are used.
 type SplunkBufferingHints struct {
@@ -3352,6 +8634,34 @@ type SplunkBufferingHints struct {
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SplunkBufferingHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplunkBufferingHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplunkBufferingHints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalInSeconds != nil {
+		s.WriteInt32(schemas.SplunkBufferingHints_IntervalInSeconds, *v.IntervalInSeconds)
+	}
+	if v.SizeInMBs != nil {
+		s.WriteInt32(schemas.SplunkBufferingHints_SizeInMBs, *v.SizeInMBs)
+	}
+}
+func (v *SplunkBufferingHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplunkBufferingHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplunkBufferingHints_IntervalInSeconds:
+			v.IntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.SplunkBufferingHints_IntervalInSeconds, v.IntervalInSeconds)
+		case schemas.SplunkBufferingHints_SizeInMBs:
+			v.SizeInMBs = new(int32)
+			return d.ReadInt32(schemas.SplunkBufferingHints_SizeInMBs, v.SizeInMBs)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration of a destination in Splunk.
@@ -3411,6 +8721,108 @@ type SplunkDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SplunkDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplunkDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplunkDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HECAcknowledgmentTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.SplunkDestinationConfiguration_HECAcknowledgmentTimeoutInSeconds, *v.HECAcknowledgmentTimeoutInSeconds)
+	}
+	if v.HECEndpoint != nil {
+		s.WriteString(schemas.SplunkDestinationConfiguration_HECEndpoint, *v.HECEndpoint)
+	}
+	if v.HECEndpointType != "" {
+		s.WriteString(schemas.SplunkDestinationConfiguration_HECEndpointType, string(v.HECEndpointType))
+	}
+	if v.HECToken != nil {
+		s.WriteString(schemas.SplunkDestinationConfiguration_HECToken, *v.HECToken)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SplunkDestinationConfiguration_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationConfiguration_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SplunkDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplunkDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplunkDestinationConfiguration_BufferingHints:
+			v.BufferingHints = &SplunkBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SplunkDestinationConfiguration_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SplunkDestinationConfiguration_HECAcknowledgmentTimeoutInSeconds:
+			v.HECAcknowledgmentTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.SplunkDestinationConfiguration_HECAcknowledgmentTimeoutInSeconds, v.HECAcknowledgmentTimeoutInSeconds)
+		case schemas.SplunkDestinationConfiguration_HECEndpoint:
+			v.HECEndpoint = new(string)
+			return d.ReadString(schemas.SplunkDestinationConfiguration_HECEndpoint, v.HECEndpoint)
+		case schemas.SplunkDestinationConfiguration_HECEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationConfiguration_HECEndpointType, &ev); err != nil {
+				return err
+			}
+			v.HECEndpointType = HECEndpointType(ev)
+			return nil
+		case schemas.SplunkDestinationConfiguration_HECToken:
+			v.HECToken = new(string)
+			return d.ReadString(schemas.SplunkDestinationConfiguration_HECToken, v.HECToken)
+		case schemas.SplunkDestinationConfiguration_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SplunkDestinationConfiguration_RetryOptions:
+			v.RetryOptions = &SplunkRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SplunkDestinationConfiguration_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationConfiguration_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SplunkS3BackupMode(ev)
+			return nil
+		case schemas.SplunkDestinationConfiguration_S3Configuration:
+			v.S3Configuration = &S3DestinationConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		case schemas.SplunkDestinationConfiguration_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a destination in Splunk.
 type SplunkDestinationDescription struct {
 
@@ -3456,6 +8868,108 @@ type SplunkDestinationDescription struct {
 	SecretsManagerConfiguration *SecretsManagerConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *SplunkDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplunkDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplunkDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HECAcknowledgmentTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.SplunkDestinationDescription_HECAcknowledgmentTimeoutInSeconds, *v.HECAcknowledgmentTimeoutInSeconds)
+	}
+	if v.HECEndpoint != nil {
+		s.WriteString(schemas.SplunkDestinationDescription_HECEndpoint, *v.HECEndpoint)
+	}
+	if v.HECEndpointType != "" {
+		s.WriteString(schemas.SplunkDestinationDescription_HECEndpointType, string(v.HECEndpointType))
+	}
+	if v.HECToken != nil {
+		s.WriteString(schemas.SplunkDestinationDescription_HECToken, *v.HECToken)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SplunkDestinationDescription_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3DestinationDescription != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_S3DestinationDescription)
+		v.S3DestinationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationDescription_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SplunkDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplunkDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplunkDestinationDescription_BufferingHints:
+			v.BufferingHints = &SplunkBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SplunkDestinationDescription_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SplunkDestinationDescription_HECAcknowledgmentTimeoutInSeconds:
+			v.HECAcknowledgmentTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.SplunkDestinationDescription_HECAcknowledgmentTimeoutInSeconds, v.HECAcknowledgmentTimeoutInSeconds)
+		case schemas.SplunkDestinationDescription_HECEndpoint:
+			v.HECEndpoint = new(string)
+			return d.ReadString(schemas.SplunkDestinationDescription_HECEndpoint, v.HECEndpoint)
+		case schemas.SplunkDestinationDescription_HECEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationDescription_HECEndpointType, &ev); err != nil {
+				return err
+			}
+			v.HECEndpointType = HECEndpointType(ev)
+			return nil
+		case schemas.SplunkDestinationDescription_HECToken:
+			v.HECToken = new(string)
+			return d.ReadString(schemas.SplunkDestinationDescription_HECToken, v.HECToken)
+		case schemas.SplunkDestinationDescription_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SplunkDestinationDescription_RetryOptions:
+			v.RetryOptions = &SplunkRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SplunkDestinationDescription_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationDescription_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SplunkS3BackupMode(ev)
+			return nil
+		case schemas.SplunkDestinationDescription_S3DestinationDescription:
+			v.S3DestinationDescription = &S3DestinationDescription{}
+			return v.S3DestinationDescription.Deserialize(d)
+		case schemas.SplunkDestinationDescription_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an update for a destination in Splunk.
@@ -3509,6 +9023,108 @@ type SplunkDestinationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SplunkDestinationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplunkDestinationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplunkDestinationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BufferingHints != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_BufferingHints)
+		v.BufferingHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLoggingOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_CloudWatchLoggingOptions)
+		v.CloudWatchLoggingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HECAcknowledgmentTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.SplunkDestinationUpdate_HECAcknowledgmentTimeoutInSeconds, *v.HECAcknowledgmentTimeoutInSeconds)
+	}
+	if v.HECEndpoint != nil {
+		s.WriteString(schemas.SplunkDestinationUpdate_HECEndpoint, *v.HECEndpoint)
+	}
+	if v.HECEndpointType != "" {
+		s.WriteString(schemas.SplunkDestinationUpdate_HECEndpointType, string(v.HECEndpointType))
+	}
+	if v.HECToken != nil {
+		s.WriteString(schemas.SplunkDestinationUpdate_HECToken, *v.HECToken)
+	}
+	if v.ProcessingConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_ProcessingConfiguration)
+		v.ProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryOptions != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_RetryOptions)
+		v.RetryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BackupMode != "" {
+		s.WriteString(schemas.SplunkDestinationUpdate_S3BackupMode, string(v.S3BackupMode))
+	}
+	if v.S3Update != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_S3Update)
+		v.S3Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretsManagerConfiguration != nil {
+		s.WriteStruct(schemas.SplunkDestinationUpdate_SecretsManagerConfiguration)
+		v.SecretsManagerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SplunkDestinationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplunkDestinationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplunkDestinationUpdate_BufferingHints:
+			v.BufferingHints = &SplunkBufferingHints{}
+			return v.BufferingHints.Deserialize(d)
+		case schemas.SplunkDestinationUpdate_CloudWatchLoggingOptions:
+			v.CloudWatchLoggingOptions = &CloudWatchLoggingOptions{}
+			return v.CloudWatchLoggingOptions.Deserialize(d)
+		case schemas.SplunkDestinationUpdate_HECAcknowledgmentTimeoutInSeconds:
+			v.HECAcknowledgmentTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.SplunkDestinationUpdate_HECAcknowledgmentTimeoutInSeconds, v.HECAcknowledgmentTimeoutInSeconds)
+		case schemas.SplunkDestinationUpdate_HECEndpoint:
+			v.HECEndpoint = new(string)
+			return d.ReadString(schemas.SplunkDestinationUpdate_HECEndpoint, v.HECEndpoint)
+		case schemas.SplunkDestinationUpdate_HECEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationUpdate_HECEndpointType, &ev); err != nil {
+				return err
+			}
+			v.HECEndpointType = HECEndpointType(ev)
+			return nil
+		case schemas.SplunkDestinationUpdate_HECToken:
+			v.HECToken = new(string)
+			return d.ReadString(schemas.SplunkDestinationUpdate_HECToken, v.HECToken)
+		case schemas.SplunkDestinationUpdate_ProcessingConfiguration:
+			v.ProcessingConfiguration = &ProcessingConfiguration{}
+			return v.ProcessingConfiguration.Deserialize(d)
+		case schemas.SplunkDestinationUpdate_RetryOptions:
+			v.RetryOptions = &SplunkRetryOptions{}
+			return v.RetryOptions.Deserialize(d)
+		case schemas.SplunkDestinationUpdate_S3BackupMode:
+			var ev string
+			if err := d.ReadString(schemas.SplunkDestinationUpdate_S3BackupMode, &ev); err != nil {
+				return err
+			}
+			v.S3BackupMode = SplunkS3BackupMode(ev)
+			return nil
+		case schemas.SplunkDestinationUpdate_S3Update:
+			v.S3Update = &S3DestinationUpdate{}
+			return v.S3Update.Deserialize(d)
+		case schemas.SplunkDestinationUpdate_SecretsManagerConfiguration:
+			v.SecretsManagerConfiguration = &SecretsManagerConfiguration{}
+			return v.SecretsManagerConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configures retry behavior in case Firehose is unable to deliver documents to
 // Splunk, or if it doesn't receive an acknowledgment from Splunk.
 type SplunkRetryOptions struct {
@@ -3520,6 +9136,28 @@ type SplunkRetryOptions struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SplunkRetryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplunkRetryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplunkRetryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.SplunkRetryOptions_DurationInSeconds, *v.DurationInSeconds)
+	}
+}
+func (v *SplunkRetryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplunkRetryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplunkRetryOptions_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.SplunkRetryOptions_DurationInSeconds, v.DurationInSeconds)
+		}
+		return nil
+	})
 }
 
 // The configuration to enable automatic table creation.
@@ -3535,6 +9173,28 @@ type TableCreationConfiguration struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableCreationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableCreationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableCreationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.TableCreationConfiguration_Enabled, *v.Enabled)
+	}
+}
+func (v *TableCreationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableCreationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableCreationConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.TableCreationConfiguration_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Metadata that you can assign to a Firehose stream, consisting of a key-value
@@ -3553,6 +9213,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
@@ -3628,6 +9316,34 @@ type VpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleARN != nil {
+		s.WriteString(schemas.VpcConfiguration_RoleARN, *v.RoleARN)
+	}
+	serializeSecurityGroupIdList(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.VpcConfiguration_RoleARN, v.RoleARN)
+		case schemas.VpcConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.VpcConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfiguration_SubnetIds:
+			return deserializeSubnetIdList(d, schemas.VpcConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
 // The details of the VPC of the Amazon OpenSearch Service destination.
 type VpcConfigurationDescription struct {
 
@@ -3700,6 +9416,40 @@ type VpcConfigurationDescription struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleARN != nil {
+		s.WriteString(schemas.VpcConfigurationDescription_RoleARN, *v.RoleARN)
+	}
+	serializeSecurityGroupIdList(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfigurationDescription_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigurationDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.VpcConfigurationDescription_RoleARN, v.RoleARN)
+		case schemas.VpcConfigurationDescription_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.VpcConfigurationDescription_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfigurationDescription_SubnetIds:
+			return deserializeSubnetIdList(d, schemas.VpcConfigurationDescription_SubnetIds, &v.SubnetIds)
+		case schemas.VpcConfigurationDescription_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfigurationDescription_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

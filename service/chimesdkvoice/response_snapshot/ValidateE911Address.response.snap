@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Address":{"city":"__City__","country":"__Country__","postDirectional":"__PostDirectional__","postalCode":"__PostalCode__","postalCodePlus4":"__PostalCodePlus4__","preDirectional":"__PreDirectional__","state":"__State__","streetName":"__StreetName__","streetNumber":"__StreetNumber__","streetSuffix":"__StreetSuffix__"},"AddressExternalId":"__AddressExternalId__","CandidateAddressList":[{"city":"__City__","country":"__Country__","postalCode":"__PostalCode__","postalCodePlus4":"__PostalCodePlus4__","state":"__State__","streetInfo":"__StreetInfo__","streetNumber":"__StreetNumber__"},{"city":"__City__","country":"__Country__","postalCode":"__PostalCode__","postalCodePlus4":"__PostalCodePlus4__","state":"__State__","streetInfo":"__StreetInfo__","streetNumber":"__StreetNumber__"}],"ValidationResult":1}

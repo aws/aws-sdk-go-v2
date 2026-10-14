@@ -1,0 +1,3 @@
+GET /prod/signal-maps?cloudWatchAlarmTemplateGroupIdentifier=__CloudWatchAlarmTemplateGroupIdentifier__&eventBridgeRuleTemplateGroupIdentifier=__EventBridgeRuleTemplateGroupIdentifier__&maxResults=1&nextToken=__NextToken__
+
+

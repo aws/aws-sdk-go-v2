@@ -382,6 +382,15 @@
                 "smithy.api#documentation": "<p>Contains a summary of an advanced prompt optimization job.</p>"
             }
         },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|))|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:application-inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))$"
+            }
+        },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig": {
             "type": "structure",
             "members": {
@@ -479,6 +488,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#CustomModelResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#DataRetentionResource"
                 },
                 {
                     "target": "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource"
@@ -3356,7 +3368,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3422,7 +3434,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$"
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyDefinitionTypeValuePair": {
@@ -3517,7 +3529,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                "smithy.api#pattern": "^\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8229,6 +8241,55 @@
                 "smithy.api#documentation": "<p>For a Distillation job, the status details for the data processing sub-task of the job.</p>"
             }
         },
+        "com.amazonaws.bedrock#DataRetentionMode": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "AWS_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws_review"
+                    }
+                },
+                "PROVIDER_DATA_SHARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provider_data_share"
+                    }
+                },
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inherit"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data retention mode for the account. Valid values are:</p> <ul> <li> <p> <code>default</code> – The standard data handling for the model applies.</p> </li> <li> <p> <code>none</code> – Zero data retention.</p> </li> <li> <p> <code>aws_review</code> – Amazon Web Services may review the request data. The data is not shared with the model provider. A model must support this mode to be invoked under it.</p> </li> <li> <p> <code>provider_data_share</code> – Data may be shared with the model provider.</p> </li> <li> <p> <code>inherit</code> – No data retention mode is set at this scope.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#GetAccountDataRetention"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutAccountDataRetention"
+                }
+            ]
+        },
         "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicy": {
             "type": "operation",
             "input": {
@@ -10695,6 +10756,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details for response generation based on retrieved text chunks.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode configured for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob": {
@@ -19355,9 +19476,9 @@
             "type": "structure",
             "members": {
                 "modelId": {
-                    "target": "com.amazonaws.bedrock#BedrockModelId",
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the model to use for optimization.</p>",
+                        "smithy.api#documentation": "<p>The model to use for optimization. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html\">Models at a glance</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a cross-Region (system-defined) inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for inference profiles</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an application inference profile, specify its full ARN, including the account ID and Region.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20925,6 +21046,74 @@
                     "target": "com.amazonaws.bedrock#UpdateProvisionedModelThroughput"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode to set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration": {
             "type": "operation",

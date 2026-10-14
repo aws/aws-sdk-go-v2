@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RuleArn":"__RuleArn__","RuleId":"__RuleId__"}

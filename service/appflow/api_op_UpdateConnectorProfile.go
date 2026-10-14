@@ -5,10 +5,10 @@ package appflow
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a given connector profile associated with your account.
@@ -63,6 +63,29 @@ type UpdateConnectorProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateConnectorProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.UpdateConnectorProfileRequest_connectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectorProfileConfig != nil {
+		s.WriteStruct(schemas.UpdateConnectorProfileRequest_connectorProfileConfig)
+		v.ConnectorProfileConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.UpdateConnectorProfileRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+}
+
 type UpdateConnectorProfileOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the connector profile.
@@ -74,65 +97,42 @@ type UpdateConnectorProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorProfileArn != nil {
+		s.WriteString(schemas.UpdateConnectorProfileResponse_connectorProfileArn, *v.ConnectorProfileArn)
+	}
+}
+func (v *UpdateConnectorProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorProfileResponse_connectorProfileArn:
+			v.ConnectorProfileArn = new(string)
+			return d.ReadString(schemas.UpdateConnectorProfileResponse_connectorProfileArn, v.ConnectorProfileArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorProfile, schemas.UpdateConnectorProfileRequest, schemas.UpdateConnectorProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorProfile, schemas.UpdateConnectorProfileRequest, schemas.UpdateConnectorProfileResponse), output: &UpdateConnectorProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnectorProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +142,6 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpUpdateConnectorProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectorProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +154,6 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +193,4 @@ func (m *idempotencyToken_initializeOpUpdateConnectorProfile) HandleInitialize(c
 }
 func addIdempotencyToken_opUpdateConnectorProfileMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateConnectorProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateConnectorProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConnectorProfile",
-	}
 }

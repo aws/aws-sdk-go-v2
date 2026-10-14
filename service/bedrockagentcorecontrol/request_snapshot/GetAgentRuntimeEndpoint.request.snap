@@ -1,0 +1,3 @@
+GET /runtimes/__AgentRuntimeId__/runtime-endpoints/__EndpointName__/
+
+

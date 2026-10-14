@@ -1,0 +1,5 @@
+PUT /channels
+
+Content-Type: application/json
+
+{"Config":{"Filters":{"MessageTypes":["NEW_INSIGHT","NEW_INSIGHT"],"Severities":["LOW","LOW"]},"Sns":{"TopicArn":"__TopicArn__"}}}

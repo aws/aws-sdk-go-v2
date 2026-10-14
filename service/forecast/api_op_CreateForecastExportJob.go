@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage
@@ -102,6 +101,30 @@ type CreateForecastExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.CreateForecastExportJobRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.CreateForecastExportJobRequest_ForecastArn, *v.ForecastArn)
+	}
+	if v.ForecastExportJobName != nil {
+		s.WriteString(schemas.CreateForecastExportJobRequest_ForecastExportJobName, *v.ForecastExportJobName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.CreateForecastExportJobRequest_Format, *v.Format)
+	}
+	serializeTags(s, schemas.CreateForecastExportJobRequest_Tags, v.Tags)
+}
+
 type CreateForecastExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the export job.
@@ -113,77 +136,48 @@ type CreateForecastExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastExportJobArn != nil {
+		s.WriteString(schemas.CreateForecastExportJobResponse_ForecastExportJobArn, *v.ForecastExportJobArn)
+	}
+}
+func (v *CreateForecastExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateForecastExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateForecastExportJobResponse_ForecastExportJobArn:
+			v.ForecastExportJobArn = new(string)
+			return d.ReadString(schemas.CreateForecastExportJobResponse_ForecastExportJobArn, v.ForecastExportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecastExportJob, schemas.CreateForecastExportJobRequest, schemas.CreateForecastExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateForecastExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecastExportJob, schemas.CreateForecastExportJobRequest, schemas.CreateForecastExportJobResponse), output: &CreateForecastExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateForecastExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateForecastExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateForecastExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateForecastExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,22 +192,8 @@ func (c *Client) addOperationCreateForecastExportJobMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateForecastExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateForecastExportJob",
-	}
 }

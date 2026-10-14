@@ -1,0 +1,5 @@
+POST /amazonclouddirectory/2017-01-11/schema/getappliedschema
+
+Content-Type: application/json
+
+{"SchemaArn":"__SchemaArn__"}

@@ -4,10 +4,9 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all rule groups that are managed by Firewall Manager from the specified WebACL
@@ -51,6 +50,21 @@ type DeleteFirewallManagerRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallManagerRuleGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallManagerRuleGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallManagerRuleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebACLArn != nil {
+		s.WriteString(schemas.DeleteFirewallManagerRuleGroupsRequest_WebACLArn, *v.WebACLArn)
+	}
+	if v.WebACLLockToken != nil {
+		s.WriteString(schemas.DeleteFirewallManagerRuleGroupsRequest_WebACLLockToken, *v.WebACLLockToken)
+	}
+}
+
 type DeleteFirewallManagerRuleGroupsOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list
@@ -68,77 +82,48 @@ type DeleteFirewallManagerRuleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallManagerRuleGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallManagerRuleGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallManagerRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextWebACLLockToken != nil {
+		s.WriteString(schemas.DeleteFirewallManagerRuleGroupsResponse_NextWebACLLockToken, *v.NextWebACLLockToken)
+	}
+}
+func (v *DeleteFirewallManagerRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallManagerRuleGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallManagerRuleGroupsResponse_NextWebACLLockToken:
+			v.NextWebACLLockToken = new(string)
+			return d.ReadString(schemas.DeleteFirewallManagerRuleGroupsResponse_NextWebACLLockToken, v.NextWebACLLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallManagerRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallManagerRuleGroups, schemas.DeleteFirewallManagerRuleGroupsRequest, schemas.DeleteFirewallManagerRuleGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFirewallManagerRuleGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallManagerRuleGroups, schemas.DeleteFirewallManagerRuleGroupsRequest, schemas.DeleteFirewallManagerRuleGroupsResponse), output: &DeleteFirewallManagerRuleGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFirewallManagerRuleGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewallManagerRuleGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteFirewallManagerRuleGroupsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFirewallManagerRuleGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +138,8 @@ func (c *Client) addOperationDeleteFirewallManagerRuleGroupsMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteFirewallManagerRuleGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteFirewallManagerRuleGroups",
-	}
 }

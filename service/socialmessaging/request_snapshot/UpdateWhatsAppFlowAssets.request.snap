@@ -1,0 +1,5 @@
+POST /v1/whatsapp/flow/assets/update
+
+Content-Type: application/json
+
+{"flowId":"__FlowId__","flowJson":"YmxvYg==","id":"__Id__"}

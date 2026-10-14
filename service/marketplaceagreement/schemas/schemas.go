@@ -143,7 +143,7 @@ var AWSMPCommerceService_v20200301 = smithy.NewServiceSchema(_AWSMPCommerceServi
 var AcceptedTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AcceptedTerm",
-}, smithy.ShapeTypeUnion, 12)
+}, smithy.ShapeTypeUnion, 13)
 var AcceptedTerm_legalTerm *smithy.Schema
 
 var AcceptedTerm_supportTerm *smithy.Schema
@@ -168,6 +168,8 @@ var AcceptedTerm_fixedUpfrontPricingTerm *smithy.Schema
 
 var AcceptedTerm_variablePaymentTerm *smithy.Schema
 
+var AcceptedTerm_netPaymentTerm *smithy.Schema
+
 var _AcceptedTermList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AcceptedTermList",
@@ -183,7 +185,8 @@ var Acceptor_accountId *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_requestId *smithy.Schema
 
 var AccessDeniedException_message *smithy.Schema
@@ -421,7 +424,7 @@ var _AgreementType = smithy.NewSchema(smithy.ShapeID{
 var AgreementViewSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AgreementViewSummary",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 14)
 var AgreementViewSummary_agreementId *smithy.Schema
 
 var AgreementViewSummary_acceptanceTime *smithy.Schema
@@ -429,6 +432,8 @@ var AgreementViewSummary_acceptanceTime *smithy.Schema
 var AgreementViewSummary_startTime *smithy.Schema
 
 var AgreementViewSummary_endTime *smithy.Schema
+
+var AgreementViewSummary_lastUpdateTime *smithy.Schema
 
 var AgreementViewSummary_agreementType *smithy.Schema
 
@@ -441,6 +446,12 @@ var AgreementViewSummary_proposalSummary *smithy.Schema
 var AgreementViewSummary_status *smithy.Schema
 
 var AgreementViewSummary_entitlements *smithy.Schema
+
+var AgreementViewSummary_initialAgreementId *smithy.Schema
+
+var AgreementViewSummary_endTimeBehaviorType *smithy.Schema
+
+var AgreementViewSummary_endTimeBehaviorReasonCode *smithy.Schema
 
 var _AgreementViewSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -645,6 +656,11 @@ var _ChargeId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ChargeId",
 }, smithy.ShapeTypeString, 0)
 
+var _ChargePercentage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ChargePercentage",
+}, smithy.ShapeTypeString, 0)
+
 var _ChargeRevision = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ChargeRevision",
@@ -720,7 +736,8 @@ var _ConfigurableUpfrontRateCardList_member *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_requestId *smithy.Schema
 
 var ConflictException_message *smithy.Schema
@@ -740,6 +757,11 @@ var Constraints_quantityConfiguration *smithy.Schema
 var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "CurrencyCode",
+}, smithy.ShapeTypeString, 0)
+
+var _DayDuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "DayDuration",
 }, smithy.ShapeTypeString, 0)
 
 var Dimension = smithy.NewSchema(smithy.ShapeID{
@@ -771,6 +793,38 @@ var _DocumentList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DocumentList",
 }, smithy.ShapeTypeList, 1)
 var _DocumentList_member *smithy.Schema
+
+var EndTimeBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EndTimeBehavior",
+}, smithy.ShapeTypeStructure, 3)
+var EndTimeBehavior_type *smithy.Schema
+
+var EndTimeBehavior_reasonCode *smithy.Schema
+
+var EndTimeBehavior_renewalSummary *smithy.Schema
+
+var EndTimeBehaviorReasonCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EndTimeBehaviorReasonCode",
+}, smithy.ShapeTypeEnum, 4)
+var EndTimeBehaviorReasonCode_PROPOSER_RENEW_OPTED_OUT *smithy.Schema
+
+var EndTimeBehaviorReasonCode_ACCEPTOR_RENEW_OPTED_OUT *smithy.Schema
+
+var EndTimeBehaviorReasonCode_NO_RENEWAL_TERM *smithy.Schema
+
+var EndTimeBehaviorReasonCode_RENEWAL_LIMIT_EXHAUSTED *smithy.Schema
+
+var EndTimeBehaviorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EndTimeBehaviorType",
+}, smithy.ShapeTypeEnum, 3)
+var EndTimeBehaviorType_RENEW *smithy.Schema
+
+var EndTimeBehaviorType_REPLACE *smithy.Schema
+
+var EndTimeBehaviorType_EXPIRE *smithy.Schema
 
 var Entitlement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -862,6 +916,12 @@ var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FilterValueList_member *smithy.Schema
 
+var FixedPercentage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "FixedPercentage",
+}, smithy.ShapeTypeStructure, 1)
+var FixedPercentage_value *smithy.Schema
+
 var FixedUpfrontPricingTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "FixedUpfrontPricingTerm",
@@ -917,7 +977,8 @@ var Intent_REPLACE *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_requestId *smithy.Schema
 
 var InternalServerException_message *smithy.Schema
@@ -997,6 +1058,16 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
 
+var NetPaymentTerm = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "NetPaymentTerm",
+}, smithy.ShapeTypeStructure, 3)
+var NetPaymentTerm_type *smithy.Schema
+
+var NetPaymentTerm_id *smithy.Schema
+
+var NetPaymentTerm_paymentDuePeriod *smithy.Schema
+
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "NextToken",
@@ -1010,6 +1081,11 @@ var _OfferId = smithy.NewSchema(smithy.ShapeID{
 var _OfferSetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "OfferSetId",
+}, smithy.ShapeTypeString, 0)
+
+var _OffsetDuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "OffsetDuration",
 }, smithy.ShapeTypeString, 0)
 
 var _PartyType = smithy.NewSchema(smithy.ShapeID{
@@ -1094,6 +1170,22 @@ var _PaymentRequestSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PaymentRequestSummaryList_member *smithy.Schema
 
+var PaymentScheduleEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PaymentScheduleEntry",
+}, smithy.ShapeTypeStructure, 3)
+var PaymentScheduleEntry_chargeDateOffset *smithy.Schema
+
+var PaymentScheduleEntry_chargePercentage *smithy.Schema
+
+var PaymentScheduleEntry_dayOfMonth *smithy.Schema
+
+var _PaymentScheduleEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PaymentScheduleEntryList",
+}, smithy.ShapeTypeList, 1)
+var _PaymentScheduleEntryList_member *smithy.Schema
+
 var PaymentScheduleTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "PaymentScheduleTerm",
@@ -1106,6 +1198,22 @@ var PaymentScheduleTerm_currencyCode *smithy.Schema
 
 var PaymentScheduleTerm_schedule *smithy.Schema
 
+var PaymentScheduleTermTemplate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PaymentScheduleTermTemplate",
+}, smithy.ShapeTypeStructure, 1)
+var PaymentScheduleTermTemplate_schedule *smithy.Schema
+
+var PercentageRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PercentageRange",
+}, smithy.ShapeTypeStructure, 3)
+var PercentageRange_minValue *smithy.Schema
+
+var PercentageRange_maxValue *smithy.Schema
+
+var PercentageRange_defaultValue *smithy.Schema
+
 var _PositiveAmountUpto8Decimals = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "PositiveAmountUpto8Decimals",
@@ -1115,6 +1223,19 @@ var _PositiveIntegerWithDefaultValueOne = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "PositiveIntegerWithDefaultValueOne",
 }, smithy.ShapeTypeInteger, 0)
+
+var PriceIncrease = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PriceIncrease",
+}, smithy.ShapeTypeUnion, 2)
+var PriceIncrease_fixedPercentage *smithy.Schema
+
+var PriceIncrease_percentageRange *smithy.Schema
+
+var _PriceIncreasePercentage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PriceIncreasePercentage",
+}, smithy.ShapeTypeString, 0)
 
 var PricingCurrencyAmount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1198,15 +1319,31 @@ var _RegistrationToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegistrationToken",
 }, smithy.ShapeTypeString, 0)
 
+var RenewalSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RenewalSummary",
+}, smithy.ShapeTypeStructure, 1)
+var RenewalSummary_offerId *smithy.Schema
+
 var RenewalTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "RenewalTerm",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 8)
 var RenewalTerm_type *smithy.Schema
 
 var RenewalTerm_id *smithy.Schema
 
 var RenewalTerm_configuration *smithy.Schema
+
+var RenewalTerm_lockoutPeriod *smithy.Schema
+
+var RenewalTerm_maxRenewals *smithy.Schema
+
+var RenewalTerm_adjustmentDeadline *smithy.Schema
+
+var RenewalTerm_priceIncrease *smithy.Schema
+
+var RenewalTerm_termTemplates *smithy.Schema
 
 var RenewalTermConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1259,7 +1396,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_requestId *smithy.Schema
 
 var ResourceNotFoundException_message *smithy.Schema
@@ -1319,7 +1457,8 @@ var Selector_value *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_requestId *smithy.Schema
 
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -1398,10 +1537,23 @@ var _TermId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TermId",
 }, smithy.ShapeTypeString, 0)
 
+var TermTemplate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "TermTemplate",
+}, smithy.ShapeTypeUnion, 1)
+var TermTemplate_paymentScheduleTermTemplate *smithy.Schema
+
+var _TermTemplateList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "TermTemplateList",
+}, smithy.ShapeTypeList, 1)
+var _TermTemplateList_member *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_requestId *smithy.Schema
 
 var ThrottlingException_message *smithy.Schema
@@ -1453,7 +1605,8 @@ var _UsageBasedRateCardList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_requestId *smithy.Schema
 
 var ValidationException_message *smithy.Schema
@@ -1875,7 +2028,7 @@ var DescribeAgreementInput_agreementId *smithy.Schema
 var DescribeAgreementOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "DescribeAgreementOutput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var DescribeAgreementOutput_agreementId *smithy.Schema
 
 var DescribeAgreementOutput_acceptor *smithy.Schema
@@ -1895,6 +2048,10 @@ var DescribeAgreementOutput_estimatedCharges *smithy.Schema
 var DescribeAgreementOutput_proposalSummary *smithy.Schema
 
 var DescribeAgreementOutput_status *smithy.Schema
+
+var DescribeAgreementOutput_initialAgreementId *smithy.Schema
+
+var DescribeAgreementOutput_endTimeBehavior *smithy.Schema
 
 var GetAgreementCancellationRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2348,11 +2505,47 @@ func init() {
 
 	RenewalTermConfiguration_enableAutoRenew = RenewalTermConfiguration.AddMember("enableAutoRenew", _Boolean)
 
+	FixedPercentage_value = FixedPercentage.AddMember("value", _PriceIncreasePercentage)
+
+	PercentageRange_minValue = PercentageRange.AddMember("minValue", _PriceIncreasePercentage)
+
+	PercentageRange_maxValue = PercentageRange.AddMember("maxValue", _PriceIncreasePercentage)
+
+	PercentageRange_defaultValue = PercentageRange.AddMember("defaultValue", _PriceIncreasePercentage)
+
+	PriceIncrease_fixedPercentage = PriceIncrease.AddMember("fixedPercentage", FixedPercentage)
+
+	PriceIncrease_percentageRange = PriceIncrease.AddMember("percentageRange", PercentageRange)
+
+	PaymentScheduleEntry_chargeDateOffset = PaymentScheduleEntry.AddMember("chargeDateOffset", _OffsetDuration)
+
+	PaymentScheduleEntry_chargePercentage = PaymentScheduleEntry.AddMember("chargePercentage", _ChargePercentage)
+
+	PaymentScheduleEntry_dayOfMonth = PaymentScheduleEntry.AddMember("dayOfMonth", smithyprelude.Integer)
+
+	_PaymentScheduleEntryList_member = _PaymentScheduleEntryList.AddMember("member", PaymentScheduleEntry)
+
+	PaymentScheduleTermTemplate_schedule = PaymentScheduleTermTemplate.AddMember("schedule", _PaymentScheduleEntryList)
+
+	TermTemplate_paymentScheduleTermTemplate = TermTemplate.AddMember("paymentScheduleTermTemplate", PaymentScheduleTermTemplate)
+
+	_TermTemplateList_member = _TermTemplateList.AddMember("member", TermTemplate)
+
 	RenewalTerm_type = RenewalTerm.AddMember("type", _UnversionedTermType)
 
 	RenewalTerm_id = RenewalTerm.AddMember("id", _TermId)
 
 	RenewalTerm_configuration = RenewalTerm.AddMember("configuration", RenewalTermConfiguration)
+
+	RenewalTerm_lockoutPeriod = RenewalTerm.AddMember("lockoutPeriod", _DayDuration)
+
+	RenewalTerm_maxRenewals = RenewalTerm.AddMember("maxRenewals", smithyprelude.Integer)
+
+	RenewalTerm_adjustmentDeadline = RenewalTerm.AddMember("adjustmentDeadline", _DayDuration)
+
+	RenewalTerm_priceIncrease = RenewalTerm.AddMember("priceIncrease", PriceIncrease)
+
+	RenewalTerm_termTemplates = RenewalTerm.AddMember("termTemplates", _TermTemplateList)
 
 	RateCardItem_dimensionKey = RateCardItem.AddMember("dimensionKey", _BoundedString)
 
@@ -2490,6 +2683,12 @@ func init() {
 
 	VariablePaymentTerm_configuration = VariablePaymentTerm.AddMember("configuration", VariablePaymentTermConfiguration)
 
+	NetPaymentTerm_type = NetPaymentTerm.AddMember("type", _UnversionedTermType)
+
+	NetPaymentTerm_id = NetPaymentTerm.AddMember("id", _TermId)
+
+	NetPaymentTerm_paymentDuePeriod = NetPaymentTerm.AddMember("paymentDuePeriod", _BoundedString)
+
 	AcceptedTerm_legalTerm = AcceptedTerm.AddMember("legalTerm", LegalTerm)
 
 	AcceptedTerm_supportTerm = AcceptedTerm.AddMember("supportTerm", SupportTerm)
@@ -2513,6 +2712,8 @@ func init() {
 	AcceptedTerm_fixedUpfrontPricingTerm = AcceptedTerm.AddMember("fixedUpfrontPricingTerm", FixedUpfrontPricingTerm)
 
 	AcceptedTerm_variablePaymentTerm = AcceptedTerm.AddMember("variablePaymentTerm", VariablePaymentTerm)
+
+	AcceptedTerm_netPaymentTerm = AcceptedTerm.AddMember("netPaymentTerm", NetPaymentTerm)
 
 	_AcceptedTermList_member = _AcceptedTermList.AddMember("member", AcceptedTerm)
 
@@ -2690,6 +2891,20 @@ func init() {
 
 	_EntitlementList_member = _EntitlementList.AddMember("member", Entitlement)
 
+	EndTimeBehaviorType_RENEW = EndTimeBehaviorType.AddMember("RENEW", smithyprelude.Unit)
+
+	EndTimeBehaviorType_REPLACE = EndTimeBehaviorType.AddMember("REPLACE", smithyprelude.Unit)
+
+	EndTimeBehaviorType_EXPIRE = EndTimeBehaviorType.AddMember("EXPIRE", smithyprelude.Unit)
+
+	EndTimeBehaviorReasonCode_PROPOSER_RENEW_OPTED_OUT = EndTimeBehaviorReasonCode.AddMember("PROPOSER_RENEW_OPTED_OUT", smithyprelude.Unit)
+
+	EndTimeBehaviorReasonCode_ACCEPTOR_RENEW_OPTED_OUT = EndTimeBehaviorReasonCode.AddMember("ACCEPTOR_RENEW_OPTED_OUT", smithyprelude.Unit)
+
+	EndTimeBehaviorReasonCode_NO_RENEWAL_TERM = EndTimeBehaviorReasonCode.AddMember("NO_RENEWAL_TERM", smithyprelude.Unit)
+
+	EndTimeBehaviorReasonCode_RENEWAL_LIMIT_EXHAUSTED = EndTimeBehaviorReasonCode.AddMember("RENEWAL_LIMIT_EXHAUSTED", smithyprelude.Unit)
+
 	AgreementViewSummary_agreementId = AgreementViewSummary.AddMember("agreementId", _ResourceId)
 
 	AgreementViewSummary_acceptanceTime = AgreementViewSummary.AddMember("acceptanceTime", _Timestamp)
@@ -2697,6 +2912,8 @@ func init() {
 	AgreementViewSummary_startTime = AgreementViewSummary.AddMember("startTime", _Timestamp)
 
 	AgreementViewSummary_endTime = AgreementViewSummary.AddMember("endTime", _Timestamp)
+
+	AgreementViewSummary_lastUpdateTime = AgreementViewSummary.AddMember("lastUpdateTime", _Timestamp)
 
 	AgreementViewSummary_agreementType = AgreementViewSummary.AddMember("agreementType", _AgreementType)
 
@@ -2709,6 +2926,12 @@ func init() {
 	AgreementViewSummary_status = AgreementViewSummary.AddMember("status", AgreementStatus)
 
 	AgreementViewSummary_entitlements = AgreementViewSummary.AddMember("entitlements", _EntitlementList)
+
+	AgreementViewSummary_initialAgreementId = AgreementViewSummary.AddMember("initialAgreementId", _ResourceId)
+
+	AgreementViewSummary_endTimeBehaviorType = AgreementViewSummary.AddMember("endTimeBehaviorType", EndTimeBehaviorType)
+
+	AgreementViewSummary_endTimeBehaviorReasonCode = AgreementViewSummary.AddMember("endTimeBehaviorReasonCode", EndTimeBehaviorReasonCode)
 
 	_AgreementViewSummaryList_member = _AgreementViewSummaryList.AddMember("member", AgreementViewSummary)
 
@@ -2891,6 +3114,14 @@ func init() {
 	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", ResourceType)
+
+	RenewalSummary_offerId = RenewalSummary.AddMember("offerId", _OfferId)
+
+	EndTimeBehavior_type = EndTimeBehavior.AddMember("type", EndTimeBehaviorType)
+
+	EndTimeBehavior_reasonCode = EndTimeBehavior.AddMember("reasonCode", EndTimeBehaviorReasonCode)
+
+	EndTimeBehavior_renewalSummary = EndTimeBehavior.AddMember("renewalSummary", RenewalSummary)
 
 	EstimatedCharges_currencyCode = EstimatedCharges.AddMember("currencyCode", _CurrencyCode)
 
@@ -3323,6 +3554,10 @@ func init() {
 	DescribeAgreementOutput_proposalSummary = DescribeAgreementOutput.AddMember("proposalSummary", ProposalSummary)
 
 	DescribeAgreementOutput_status = DescribeAgreementOutput.AddMember("status", AgreementStatus)
+
+	DescribeAgreementOutput_initialAgreementId = DescribeAgreementOutput.AddMember("initialAgreementId", _ResourceId)
+
+	DescribeAgreementOutput_endTimeBehavior = DescribeAgreementOutput.AddMember("endTimeBehavior", EndTimeBehavior)
 
 	GetAgreementCancellationRequestInput_agreementCancellationRequestId = GetAgreementCancellationRequestInput.AddMember("agreementCancellationRequestId", _AgreementCancellationRequestId)
 

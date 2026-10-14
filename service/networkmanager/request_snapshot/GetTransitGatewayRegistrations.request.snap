@@ -1,0 +1,3 @@
+GET /global-networks/__GlobalNetworkId__/transit-gateway-registrations?maxResults=1&nextToken=__NextToken__&transitGatewayArns=__Member__&transitGatewayArns=__Member__
+
+

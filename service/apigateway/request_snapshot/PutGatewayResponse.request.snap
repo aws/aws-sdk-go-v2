@@ -1,0 +1,6 @@
+PUT /restapis/__RestApiId__/gatewayresponses/DEFAULT_4XX
+
+Accept: application/json
+Content-Type: application/json
+
+{"responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"statusCode":"__StatusCode__"}

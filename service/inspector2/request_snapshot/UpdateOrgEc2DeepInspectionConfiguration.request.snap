@@ -1,0 +1,5 @@
+POST /ec2deepinspectionconfiguration/org/update
+
+Content-Type: application/json
+
+{"orgPackagePaths":["__Member__","__Member__"]}

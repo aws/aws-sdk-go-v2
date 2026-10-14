@@ -4,11 +4,10 @@ package mq
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeBrokerInput struct {
 	BrokerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DescribeBrokerRequest_BrokerId, *v.BrokerId)
+	}
 }
 
 type DescribeBrokerOutput struct {
@@ -144,6 +155,9 @@ type DescribeBrokerOutput struct {
 	// The list of pending security groups to authorize connections to brokers.
 	PendingSecurityGroups []string
 
+	// The pending storage size in GB, to be applied on the next broker restart.
+	PendingStorageSize *int32
+
 	// Enables connections from applications outside of the VPC that hosts the
 	// broker's subnets.
 	PubliclyAccessible *bool
@@ -151,6 +165,9 @@ type DescribeBrokerOutput struct {
 	// The list of rules (1 minimum, 125 maximum) that authorize connections to
 	// brokers.
 	SecurityGroups []string
+
+	// The broker's storage size in GB.
+	StorageSize *int32
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
@@ -171,77 +188,279 @@ type DescribeBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfActionRequired(s, schemas.DescribeBrokerResponse_ActionsRequired, v.ActionsRequired)
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.DescribeBrokerResponse_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.BrokerArn != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_BrokerArn, *v.BrokerArn)
+	}
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_BrokerId, *v.BrokerId)
+	}
+	serialize__listOfBrokerInstance(s, schemas.DescribeBrokerResponse_BrokerInstances, v.BrokerInstances)
+	if v.BrokerName != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_BrokerName, *v.BrokerName)
+	}
+	if v.BrokerState != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_BrokerState, string(v.BrokerState))
+	}
+	if v.Configurations != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_Configurations)
+		v.Configurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.DescribeBrokerResponse_Created, *v.Created)
+	}
+	if v.DataReplicationMetadata != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_DataReplicationMetadata)
+		v.DataReplicationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationMode != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_DataReplicationMode, string(v.DataReplicationMode))
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_DeploymentMode, string(v.DeploymentMode))
+	}
+	if v.EncryptionOptions != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_EncryptionOptions)
+		v.EncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_EngineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_EngineVersion, *v.EngineVersion)
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_HostInstanceType, *v.HostInstanceType)
+	}
+	if v.LdapServerMetadata != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_LdapServerMetadata)
+		v.LdapServerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logs != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_Logs)
+		v.Logs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_MaintenanceWindowStartTime)
+		v.MaintenanceWindowStartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingAuthenticationStrategy != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_PendingAuthenticationStrategy, string(v.PendingAuthenticationStrategy))
+	}
+	if v.PendingDataReplicationMetadata != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_PendingDataReplicationMetadata)
+		v.PendingDataReplicationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingDataReplicationMode != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_PendingDataReplicationMode, string(v.PendingDataReplicationMode))
+	}
+	if v.PendingEngineVersion != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_PendingEngineVersion, *v.PendingEngineVersion)
+	}
+	if v.PendingHostInstanceType != nil {
+		s.WriteString(schemas.DescribeBrokerResponse_PendingHostInstanceType, *v.PendingHostInstanceType)
+	}
+	if v.PendingLdapServerMetadata != nil {
+		s.WriteStruct(schemas.DescribeBrokerResponse_PendingLdapServerMetadata)
+		v.PendingLdapServerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.DescribeBrokerResponse_PendingSecurityGroups, v.PendingSecurityGroups)
+	if v.PendingStorageSize != nil {
+		s.WriteInt32(schemas.DescribeBrokerResponse_PendingStorageSize, *v.PendingStorageSize)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.DescribeBrokerResponse_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	serialize__listOf__string(s, schemas.DescribeBrokerResponse_SecurityGroups, v.SecurityGroups)
+	if v.StorageSize != nil {
+		s.WriteInt32(schemas.DescribeBrokerResponse_StorageSize, *v.StorageSize)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.DescribeBrokerResponse_StorageType, string(v.StorageType))
+	}
+	serialize__listOf__string(s, schemas.DescribeBrokerResponse_SubnetIds, v.SubnetIds)
+	serialize__mapOf__string(s, schemas.DescribeBrokerResponse_Tags, v.Tags)
+	serialize__listOfUserSummary(s, schemas.DescribeBrokerResponse_Users, v.Users)
+}
+func (v *DescribeBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBrokerResponse_ActionsRequired:
+			return deserialize__listOfActionRequired(d, schemas.DescribeBrokerResponse_ActionsRequired, &v.ActionsRequired)
+		case schemas.DescribeBrokerResponse_AuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_AuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationStrategy = types.AuthenticationStrategy(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_AutoMinorVersionUpgrade:
+			v.AutoMinorVersionUpgrade = new(bool)
+			return d.ReadBool(schemas.DescribeBrokerResponse_AutoMinorVersionUpgrade, v.AutoMinorVersionUpgrade)
+		case schemas.DescribeBrokerResponse_BrokerArn:
+			v.BrokerArn = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_BrokerArn, v.BrokerArn)
+		case schemas.DescribeBrokerResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_BrokerId, v.BrokerId)
+		case schemas.DescribeBrokerResponse_BrokerInstances:
+			return deserialize__listOfBrokerInstance(d, schemas.DescribeBrokerResponse_BrokerInstances, &v.BrokerInstances)
+		case schemas.DescribeBrokerResponse_BrokerName:
+			v.BrokerName = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_BrokerName, v.BrokerName)
+		case schemas.DescribeBrokerResponse_BrokerState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_BrokerState, &ev); err != nil {
+				return err
+			}
+			v.BrokerState = types.BrokerState(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_Configurations:
+			v.Configurations = &types.Configurations{}
+			return v.Configurations.Deserialize(d)
+		case schemas.DescribeBrokerResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.DescribeBrokerResponse_Created, v.Created)
+		case schemas.DescribeBrokerResponse_DataReplicationMetadata:
+			v.DataReplicationMetadata = &types.DataReplicationMetadataOutput{}
+			return v.DataReplicationMetadata.Deserialize(d)
+		case schemas.DescribeBrokerResponse_DataReplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_DataReplicationMode, &ev); err != nil {
+				return err
+			}
+			v.DataReplicationMode = types.DataReplicationMode(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_DeploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_DeploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = types.DeploymentMode(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_EncryptionOptions:
+			v.EncryptionOptions = &types.EncryptionOptions{}
+			return v.EncryptionOptions.Deserialize(d)
+		case schemas.DescribeBrokerResponse_EngineType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_EngineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_EngineVersion, v.EngineVersion)
+		case schemas.DescribeBrokerResponse_HostInstanceType:
+			v.HostInstanceType = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_HostInstanceType, v.HostInstanceType)
+		case schemas.DescribeBrokerResponse_LdapServerMetadata:
+			v.LdapServerMetadata = &types.LdapServerMetadataOutput{}
+			return v.LdapServerMetadata.Deserialize(d)
+		case schemas.DescribeBrokerResponse_Logs:
+			v.Logs = &types.LogsSummary{}
+			return v.Logs.Deserialize(d)
+		case schemas.DescribeBrokerResponse_MaintenanceWindowStartTime:
+			v.MaintenanceWindowStartTime = &types.WeeklyStartTime{}
+			return v.MaintenanceWindowStartTime.Deserialize(d)
+		case schemas.DescribeBrokerResponse_PendingAuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_PendingAuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.PendingAuthenticationStrategy = types.AuthenticationStrategy(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_PendingDataReplicationMetadata:
+			v.PendingDataReplicationMetadata = &types.DataReplicationMetadataOutput{}
+			return v.PendingDataReplicationMetadata.Deserialize(d)
+		case schemas.DescribeBrokerResponse_PendingDataReplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_PendingDataReplicationMode, &ev); err != nil {
+				return err
+			}
+			v.PendingDataReplicationMode = types.DataReplicationMode(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_PendingEngineVersion:
+			v.PendingEngineVersion = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_PendingEngineVersion, v.PendingEngineVersion)
+		case schemas.DescribeBrokerResponse_PendingHostInstanceType:
+			v.PendingHostInstanceType = new(string)
+			return d.ReadString(schemas.DescribeBrokerResponse_PendingHostInstanceType, v.PendingHostInstanceType)
+		case schemas.DescribeBrokerResponse_PendingLdapServerMetadata:
+			v.PendingLdapServerMetadata = &types.LdapServerMetadataOutput{}
+			return v.PendingLdapServerMetadata.Deserialize(d)
+		case schemas.DescribeBrokerResponse_PendingSecurityGroups:
+			return deserialize__listOf__string(d, schemas.DescribeBrokerResponse_PendingSecurityGroups, &v.PendingSecurityGroups)
+		case schemas.DescribeBrokerResponse_PendingStorageSize:
+			v.PendingStorageSize = new(int32)
+			return d.ReadInt32(schemas.DescribeBrokerResponse_PendingStorageSize, v.PendingStorageSize)
+		case schemas.DescribeBrokerResponse_PubliclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.DescribeBrokerResponse_PubliclyAccessible, v.PubliclyAccessible)
+		case schemas.DescribeBrokerResponse_SecurityGroups:
+			return deserialize__listOf__string(d, schemas.DescribeBrokerResponse_SecurityGroups, &v.SecurityGroups)
+		case schemas.DescribeBrokerResponse_StorageSize:
+			v.StorageSize = new(int32)
+			return d.ReadInt32(schemas.DescribeBrokerResponse_StorageSize, v.StorageSize)
+		case schemas.DescribeBrokerResponse_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBrokerResponse_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = types.BrokerStorageType(ev)
+			return nil
+		case schemas.DescribeBrokerResponse_SubnetIds:
+			return deserialize__listOf__string(d, schemas.DescribeBrokerResponse_SubnetIds, &v.SubnetIds)
+		case schemas.DescribeBrokerResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeBrokerResponse_Tags, &v.Tags)
+		case schemas.DescribeBrokerResponse_Users:
+			return deserialize__listOfUserSummary(d, schemas.DescribeBrokerResponse_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBroker, schemas.DescribeBrokerRequest, schemas.DescribeBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBroker, schemas.DescribeBrokerRequest, schemas.DescribeBrokerResponse), output: &DescribeBrokerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBroker{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBroker"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeBrokerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBroker(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -256,22 +475,8 @@ func (c *Client) addOperationDescribeBrokerMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeBroker(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeBroker",
-	}
 }

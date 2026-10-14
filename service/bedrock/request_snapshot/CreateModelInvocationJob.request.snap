@@ -1,0 +1,5 @@
+POST /model-invocation-job
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","inputDataConfig":{"s3InputDataConfig":{"s3BucketOwner":"__S3BucketOwner__","s3InputFormat":"JSONL","s3Uri":"__S3Uri__"}},"jobName":"__JobName__","modelId":"__ModelId__","modelInvocationType":"InvokeModel","outputDataConfig":{"s3OutputDataConfig":{"s3BucketOwner":"__S3BucketOwner__","s3EncryptionKeyId":"__S3EncryptionKeyId__","s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"timeoutDurationInHours":1,"vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}

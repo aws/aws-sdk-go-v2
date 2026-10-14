@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -74,52 +71,6 @@ type UpdateMapInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMapInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMapRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationUpdate != nil {
-		s.WriteStruct(schemas.UpdateMapRequest_ConfigurationUpdate)
-		v.ConfigurationUpdate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateMapRequest_Description, *v.Description)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.UpdateMapRequest_MapName, *v.MapName)
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.UpdateMapRequest_PricingPlan, string(v.PricingPlan))
-	}
-}
-func (v *UpdateMapInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMapRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMapRequest_ConfigurationUpdate:
-			v.ConfigurationUpdate = &types.MapConfigurationUpdate{}
-			return v.ConfigurationUpdate.Deserialize(d)
-		case schemas.UpdateMapRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateMapRequest_Description, v.Description)
-		case schemas.UpdateMapRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.UpdateMapRequest_MapName, v.MapName)
-		case schemas.UpdateMapRequest_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.UpdateMapRequest_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type UpdateMapOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated map resource. Used to specify a
@@ -149,96 +100,23 @@ type UpdateMapOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMapOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMapResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MapArn != nil {
-		s.WriteString(schemas.UpdateMapResponse_MapArn, *v.MapArn)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.UpdateMapResponse_MapName, *v.MapName)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.UpdateMapResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *UpdateMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMapResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMapResponse_MapArn:
-			v.MapArn = new(string)
-			return d.ReadString(schemas.UpdateMapResponse_MapArn, v.MapArn)
-		case schemas.UpdateMapResponse_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.UpdateMapResponse_MapName, v.MapName)
-		case schemas.UpdateMapResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateMapResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMap{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMap, schemas.UpdateMapRequest, schemas.UpdateMapResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMap{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMap, schemas.UpdateMapRequest, schemas.UpdateMapResponse), output: &UpdateMapOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMap"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -248,12 +126,6 @@ func (c *Client) addOperationUpdateMapMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpUpdateMapValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMap(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,12 +138,6 @@ func (c *Client) addOperationUpdateMapMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -305,12 +171,4 @@ func (m *endpointPrefix_opUpdateMapMiddleware) HandleFinalize(ctx context.Contex
 }
 func addEndpointPrefix_opUpdateMapMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateMapMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateMap(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMap",
-	}
 }

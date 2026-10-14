@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateRelationalDatabaseFromSnapshot
+
+{"availabilityZone":"__AvailabilityZone__","publiclyAccessible":true,"relationalDatabaseBundleId":"__RelationalDatabaseBundleId__","relationalDatabaseName":"__RelationalDatabaseName__","relationalDatabaseSnapshotName":"__RelationalDatabaseSnapshotName__","restoreTime":946684800,"sourceRelationalDatabaseName":"__SourceRelationalDatabaseName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"useLatestRestorableTime":true}

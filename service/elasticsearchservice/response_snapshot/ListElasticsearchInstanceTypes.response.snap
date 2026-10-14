@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ElasticsearchInstanceTypes":["m3.medium.elasticsearch","m3.medium.elasticsearch"],"NextToken":"__NextToken__"}

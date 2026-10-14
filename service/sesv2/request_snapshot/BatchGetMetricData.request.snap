@@ -1,0 +1,5 @@
+POST /v2/email/metrics/batch
+
+Content-Type: application/json
+
+{"Queries":[{"Dimensions":{"key0":"__Value__"},"EndDate":946684800,"Id":"__Id__","Metric":"SEND","Namespace":"VDM","StartDate":946684800},{"Dimensions":{"key0":"__Value__"},"EndDate":946684800,"Id":"__Id__","Metric":"SEND","Namespace":"VDM","StartDate":946684800}]}

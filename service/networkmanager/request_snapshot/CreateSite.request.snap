@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/sites
+
+Content-Type: application/json
+
+{"Description":"__Description__","Location":{"Address":"__Address__","Latitude":"__Latitude__","Longitude":"__Longitude__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,8 @@
+PUT /?website=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+<WebsiteConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><ErrorDocument><Key>__Key__</Key></ErrorDocument><IndexDocument><Suffix>__Suffix__</Suffix></IndexDocument><RedirectAllRequestsTo><HostName>__HostName__</HostName><Protocol>http</Protocol></RedirectAllRequestsTo><RoutingRules><RoutingRule><Condition><HttpErrorCodeReturnedEquals>__HttpErrorCodeReturnedEquals__</HttpErrorCodeReturnedEquals><KeyPrefixEquals>__KeyPrefixEquals__</KeyPrefixEquals></Condition><Redirect><HostName>__HostName__</HostName><HttpRedirectCode>__HttpRedirectCode__</HttpRedirectCode><Protocol>http</Protocol><ReplaceKeyPrefixWith>__ReplaceKeyPrefixWith__</ReplaceKeyPrefixWith><ReplaceKeyWith>__ReplaceKeyWith__</ReplaceKeyWith></Redirect></RoutingRule><RoutingRule><Condition><HttpErrorCodeReturnedEquals>__HttpErrorCodeReturnedEquals__</HttpErrorCodeReturnedEquals><KeyPrefixEquals>__KeyPrefixEquals__</KeyPrefixEquals></Condition><Redirect><HostName>__HostName__</HostName><HttpRedirectCode>__HttpRedirectCode__</HttpRedirectCode><Protocol>http</Protocol><ReplaceKeyPrefixWith>__ReplaceKeyPrefixWith__</ReplaceKeyPrefixWith><ReplaceKeyWith>__ReplaceKeyWith__</ReplaceKeyWith></Redirect></RoutingRule></RoutingRules></WebsiteConfiguration>

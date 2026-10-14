@@ -1,0 +1,5 @@
+POST /backlog/agent-space/__AgentSpaceId__/recommendations/list
+
+Content-Type: application/json
+
+{"goalId":"__GoalId__","limit":1,"nextToken":"__NextToken__","priority":"HIGH","status":"PROPOSED","taskId":"__TaskId__"}

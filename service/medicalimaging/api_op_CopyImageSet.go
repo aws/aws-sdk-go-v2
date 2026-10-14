@@ -5,10 +5,7 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,32 +56,6 @@ type CopyImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyImageSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyImageSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyImageSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CopyImageSetInformation != nil {
-		s.WriteStruct(schemas.CopyImageSetRequest_copyImageSetInformation)
-		v.CopyImageSetInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.CopyImageSetRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.Force != nil {
-		s.WriteBool(schemas.CopyImageSetRequest_force, *v.Force)
-	}
-	if v.PromoteToPrimary != nil {
-		s.WriteBool(schemas.CopyImageSetRequest_promoteToPrimary, *v.PromoteToPrimary)
-	}
-	if v.SourceImageSetId != nil {
-		s.WriteString(schemas.CopyImageSetRequest_sourceImageSetId, *v.SourceImageSetId)
-	}
-}
-
 type CopyImageSetOutput struct {
 
 	// The data store identifier.
@@ -108,79 +79,23 @@ type CopyImageSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyImageSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyImageSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyImageSetResponse_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.CopyImageSetResponse_datastoreId, v.DatastoreId)
-		case schemas.CopyImageSetResponse_destinationImageSetProperties:
-			v.DestinationImageSetProperties = &types.CopyDestinationImageSetProperties{}
-			return v.DestinationImageSetProperties.Deserialize(d)
-		case schemas.CopyImageSetResponse_sourceImageSetProperties:
-			v.SourceImageSetProperties = &types.CopySourceImageSetProperties{}
-			return v.SourceImageSetProperties.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyImageSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImageSet, schemas.CopyImageSetRequest, schemas.CopyImageSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyImageSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImageSet, schemas.CopyImageSetRequest, schemas.CopyImageSetResponse), output: &CopyImageSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyImageSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -190,12 +105,6 @@ func (c *Client) addOperationCopyImageSetMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCopyImageSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyImageSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +117,6 @@ func (c *Client) addOperationCopyImageSetMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,12 +150,4 @@ func (m *endpointPrefix_opCopyImageSetMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opCopyImageSetMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCopyImageSetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCopyImageSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyImageSet",
-	}
 }

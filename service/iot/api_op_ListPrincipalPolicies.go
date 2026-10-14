@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the policies attached to the specified principal. If you use an Cognito
@@ -61,6 +61,27 @@ type ListPrincipalPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListPrincipalPoliciesRequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListPrincipalPoliciesRequest_pageSize, *v.PageSize)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesRequest_principal, *v.Principal)
+	}
+}
+
 // The output from the ListPrincipalPolicies operation.
 type ListPrincipalPoliciesOutput struct {
 
@@ -77,77 +98,51 @@ type ListPrincipalPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesResponse_nextMarker, *v.NextMarker)
+	}
+	serializePolicies(s, schemas.ListPrincipalPoliciesResponse_policies, v.Policies)
+}
+func (v *ListPrincipalPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrincipalPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrincipalPoliciesResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListPrincipalPoliciesResponse_nextMarker, v.NextMarker)
+		case schemas.ListPrincipalPoliciesResponse_policies:
+			return deserializePolicies(d, schemas.ListPrincipalPoliciesResponse_policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalPolicies, schemas.ListPrincipalPoliciesRequest, schemas.ListPrincipalPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrincipalPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalPolicies, schemas.ListPrincipalPoliciesRequest, schemas.ListPrincipalPoliciesResponse), output: &ListPrincipalPoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrincipalPolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPrincipalPolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPrincipalPoliciesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPrincipalPolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +155,6 @@ func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +256,3 @@ type ListPrincipalPoliciesAPIClient interface {
 }
 
 var _ ListPrincipalPoliciesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPrincipalPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPrincipalPolicies",
-	}
-}

@@ -4,12 +4,7 @@ package kinesisvideowebrtcstorage
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Join the ongoing one way-video and/or multi-way audio WebRTC session as a
@@ -59,21 +54,6 @@ type JoinStorageSessionAsViewerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JoinStorageSessionAsViewerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JoinStorageSessionAsViewerInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JoinStorageSessionAsViewerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.JoinStorageSessionAsViewerInput_channelArn, *v.ChannelArn)
-	}
-	if v.ClientId != nil {
-		s.WriteString(schemas.JoinStorageSessionAsViewerInput_clientId, *v.ClientId)
-	}
-}
-
 type JoinStorageSessionAsViewerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,90 +61,29 @@ type JoinStorageSessionAsViewerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JoinStorageSessionAsViewerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JoinStorageSessionAsViewerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *JoinStorageSessionAsViewerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationJoinStorageSessionAsViewerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpJoinStorageSessionAsViewer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinStorageSessionAsViewer, schemas.JoinStorageSessionAsViewerInput, nil)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJoinStorageSessionAsViewer{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinStorageSessionAsViewer, schemas.JoinStorageSessionAsViewerInput, nil), output: &JoinStorageSessionAsViewerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "JoinStorageSessionAsViewer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpJoinStorageSessionAsViewerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJoinStorageSessionAsViewer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +98,8 @@ func (c *Client) addOperationJoinStorageSessionAsViewerMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opJoinStorageSessionAsViewer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "JoinStorageSessionAsViewer",
-	}
 }

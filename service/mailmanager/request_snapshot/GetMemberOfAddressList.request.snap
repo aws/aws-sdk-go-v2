@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/GetMemberOfAddressList
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢mAddressListIdq__AddressListId__gAddressk__Address__

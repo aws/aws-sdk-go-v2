@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *AcceleratorNotDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AcceleratorNotDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AcceleratorNotDisabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorNotDisabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorNotDisabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AcceleratorNotDisabledException_Message, *v.Message)
+	}
+}
+func (v *AcceleratorNotDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorNotDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorNotDisabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AcceleratorNotDisabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The accelerator that you specified doesn't exist.
 type AcceleratorNotFoundException struct {
@@ -58,6 +80,27 @@ func (e *AcceleratorNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AcceleratorNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AcceleratorNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AcceleratorNotFoundException_Message, *v.Message)
+	}
+}
+func (v *AcceleratorNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AcceleratorNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You don't have access permission.
 type AccessDeniedException struct {
@@ -84,6 +127,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The listener that you specified has an endpoint group associated with it. You
 // must remove all dependent resources from a listener before you can delete it.
@@ -113,6 +177,27 @@ func (e *AssociatedEndpointGroupFoundException) ErrorCode() string {
 func (e *AssociatedEndpointGroupFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AssociatedEndpointGroupFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedEndpointGroupFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedEndpointGroupFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AssociatedEndpointGroupFoundException_Message, *v.Message)
+	}
+}
+func (v *AssociatedEndpointGroupFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedEndpointGroupFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedEndpointGroupFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssociatedEndpointGroupFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The accelerator that you specified has a listener associated with it. You must
 // remove all dependent resources from an accelerator before you can delete it.
@@ -140,6 +225,27 @@ func (e *AssociatedListenerFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AssociatedListenerFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AssociatedListenerFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedListenerFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedListenerFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AssociatedListenerFoundException_Message, *v.Message)
+	}
+}
+func (v *AssociatedListenerFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedListenerFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedListenerFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssociatedListenerFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No cross-account attachment was found.
 type AttachmentNotFoundException struct {
@@ -166,6 +272,27 @@ func (e *AttachmentNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AttachmentNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachmentNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachmentNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AttachmentNotFoundException_Message, *v.Message)
+	}
+}
+func (v *AttachmentNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachmentNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachmentNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AttachmentNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The CIDR that you specified was not found or is incorrect.
 type ByoipCidrNotFoundException struct {
@@ -192,6 +319,27 @@ func (e *ByoipCidrNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ByoipCidrNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ByoipCidrNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByoipCidrNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByoipCidrNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ByoipCidrNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ByoipCidrNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByoipCidrNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByoipCidrNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ByoipCidrNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't use both of those options.
 type ConflictException struct {
@@ -218,6 +366,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The endpoint that you specified doesn't exist.
 type EndpointAlreadyExistsException struct {
@@ -244,6 +413,27 @@ func (e *EndpointAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EndpointAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EndpointAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointAlreadyExistsException_Message, *v.Message)
+	}
+}
+func (v *EndpointAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The endpoint group that you specified already exists.
 type EndpointGroupAlreadyExistsException struct {
@@ -272,6 +462,27 @@ func (e *EndpointGroupAlreadyExistsException) ErrorCode() string {
 func (e *EndpointGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *EndpointGroupAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointGroupAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointGroupAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointGroupAlreadyExistsException_Message, *v.Message)
+	}
+}
+func (v *EndpointGroupAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointGroupAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointGroupAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointGroupAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The endpoint group that you specified doesn't exist.
 type EndpointGroupNotFoundException struct {
@@ -298,6 +509,27 @@ func (e *EndpointGroupNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EndpointGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EndpointGroupNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointGroupNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointGroupNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointGroupNotFoundException_Message, *v.Message)
+	}
+}
+func (v *EndpointGroupNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointGroupNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointGroupNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointGroupNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The endpoint that you specified doesn't exist.
 type EndpointNotFoundException struct {
@@ -324,6 +556,27 @@ func (e *EndpointNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EndpointNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointNotFoundException_Message, *v.Message)
+	}
+}
+func (v *EndpointNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The CIDR that you specified is not valid for this action. For example, the
 // state of the CIDR might be incorrect for this action.
@@ -351,6 +604,27 @@ func (e *IncorrectCidrStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncorrectCidrStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IncorrectCidrStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncorrectCidrStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncorrectCidrStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IncorrectCidrStateException_Message, *v.Message)
+	}
+}
+func (v *IncorrectCidrStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncorrectCidrStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncorrectCidrStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IncorrectCidrStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was an internal error for Global Accelerator.
 type InternalServiceErrorException struct {
@@ -377,6 +651,27 @@ func (e *InternalServiceErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalServiceErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An argument that you specified is invalid.
 type InvalidArgumentException struct {
@@ -403,6 +698,27 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArgumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidArgumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidArgumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidArgumentException_Message, *v.Message)
+	}
+}
+func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArgumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There isn't another item to return.
 type InvalidNextTokenException struct {
@@ -429,6 +745,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_Message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The port numbers that you specified are not valid numbers or are not unique for
 // this accelerator.
@@ -456,6 +793,27 @@ func (e *InvalidPortRangeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPortRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPortRangeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPortRangeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPortRangeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPortRangeException_Message, *v.Message)
+	}
+}
+func (v *InvalidPortRangeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPortRangeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPortRangeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPortRangeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Processing your request would cause you to exceed an Global Accelerator limit.
 type LimitExceededException struct {
@@ -482,6 +840,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The listener that you specified doesn't exist.
 type ListenerNotFoundException struct {
@@ -508,6 +887,27 @@ func (e *ListenerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ListenerNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ListenerNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ListenerNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListenerNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There's already a transaction in progress. Another transaction can't be
 // processed.
@@ -535,3 +935,24 @@ func (e *TransactionInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TransactionInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TransactionInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransactionInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransactionInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TransactionInProgressException_Message, *v.Message)
+	}
+}
+func (v *TransactionInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionInProgressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransactionInProgressException_Message, v.Message)
+		}
+		return nil
+	})
+}

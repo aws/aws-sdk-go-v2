@@ -5,10 +5,10 @@ package lambda
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Lambda function URLs for the specified function.
@@ -57,6 +57,24 @@ type ListFunctionUrlConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionUrlConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionUrlConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionUrlConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListFunctionUrlConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListFunctionUrlConfigsOutput struct {
 
 	// A list of function URL configurations.
@@ -73,77 +91,51 @@ type ListFunctionUrlConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionUrlConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionUrlConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionUrlConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFunctionUrlConfigList(s, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, v.FunctionUrlConfigs)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFunctionUrlConfigsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFunctionUrlConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionUrlConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs:
+			return deserializeFunctionUrlConfigList(d, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, &v.FunctionUrlConfigs)
+		case schemas.ListFunctionUrlConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFunctionUrlConfigsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionUrlConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionUrlConfigs, schemas.ListFunctionUrlConfigsRequest, schemas.ListFunctionUrlConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionUrlConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionUrlConfigs, schemas.ListFunctionUrlConfigsRequest, schemas.ListFunctionUrlConfigsResponse), output: &ListFunctionUrlConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctionUrlConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFunctionUrlConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFunctionUrlConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctionUrlConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +148,6 @@ func (c *Client) addOperationListFunctionUrlConfigsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +251,3 @@ type ListFunctionUrlConfigsAPIClient interface {
 }
 
 var _ ListFunctionUrlConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFunctionUrlConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFunctionUrlConfigs",
-	}
-}

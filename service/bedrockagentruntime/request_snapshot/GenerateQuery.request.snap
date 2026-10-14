@@ -1,0 +1,5 @@
+POST /generateQuery
+
+Content-Type: application/json
+
+{"queryGenerationInput":{"text":"__Text__","type":"TEXT"},"transformationConfiguration":{"mode":"TEXT_TO_SQL","textToSqlConfiguration":{"knowledgeBaseConfiguration":{"knowledgeBaseArn":"__KnowledgeBaseArn__"},"type":"KNOWLEDGE_BASE"}}}

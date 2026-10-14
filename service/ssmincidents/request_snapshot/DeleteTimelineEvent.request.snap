@@ -1,0 +1,5 @@
+POST /deleteTimelineEvent
+
+Content-Type: application/json
+
+{"eventId":"__EventId__","incidentRecordArn":"__IncidentRecordArn__"}

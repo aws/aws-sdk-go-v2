@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/BatchAssociateUserStack
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡uUserStackAssociations‚¤iStackNamem__StackName__hUserNamel__UserName__rAuthenticationTypecAPIuSendEmailNotificationõ¤iStackNamem__StackName__hUserNamel__UserName__rAuthenticationTypecAPIuSendEmailNotificationõ

@@ -1,0 +1,5 @@
+PUT /sessions/__SessionIdentifier__/invocations/
+
+Content-Type: application/json
+
+{"description":"__Description__","invocationId":"__InvocationId__"}

@@ -1,0 +1,3 @@
+GET /voice-connectors/__VoiceConnectorId__/voice-tone-analysis-tasks/__VoiceToneAnalysisTaskId__?isCaller=true
+
+

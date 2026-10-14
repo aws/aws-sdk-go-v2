@@ -4,12 +4,7 @@ package ssmincidents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a timeline event from an incident.
@@ -44,34 +39,6 @@ type DeleteTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTimelineEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteTimelineEventInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTimelineEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventId != nil {
-		s.WriteString(schemas.DeleteTimelineEventInput_eventId, *v.EventId)
-	}
-	if v.IncidentRecordArn != nil {
-		s.WriteString(schemas.DeleteTimelineEventInput_incidentRecordArn, *v.IncidentRecordArn)
-	}
-}
-func (v *DeleteTimelineEventInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteTimelineEventInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteTimelineEventInput_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.DeleteTimelineEventInput_eventId, v.EventId)
-		case schemas.DeleteTimelineEventInput_incidentRecordArn:
-			v.IncidentRecordArn = new(string)
-			return d.ReadString(schemas.DeleteTimelineEventInput_incidentRecordArn, v.IncidentRecordArn)
-		}
-		return nil
-	})
-}
-
 type DeleteTimelineEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,90 +46,29 @@ type DeleteTimelineEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTimelineEventOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteTimelineEventOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTimelineEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteTimelineEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteTimelineEventOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTimelineEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimelineEvent, schemas.DeleteTimelineEventInput, schemas.DeleteTimelineEventOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTimelineEvent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimelineEvent, schemas.DeleteTimelineEventInput, schemas.DeleteTimelineEventOutput), output: &DeleteTimelineEventOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTimelineEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteTimelineEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTimelineEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +83,8 @@ func (c *Client) addOperationDeleteTimelineEventMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteTimelineEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteTimelineEvent",
-	}
 }

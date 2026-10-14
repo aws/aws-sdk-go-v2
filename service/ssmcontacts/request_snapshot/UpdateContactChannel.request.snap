@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.UpdateContactChannel
+
+{"ContactChannelId":"__ContactChannelId__","DeliveryAddress":{"SimpleAddress":"__SimpleAddress__"},"Name":"__Name__"}

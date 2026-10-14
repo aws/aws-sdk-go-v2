@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListUserPoolClients
+
+{"NextToken":"__NextToken__","UserPoolClients":[{"ClientId":"__ClientId__","ClientName":"__ClientName__","UserPoolId":"__UserPoolId__"},{"ClientId":"__ClientId__","ClientName":"__ClientName__","UserPoolId":"__UserPoolId__"}]}

@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,45 +36,23 @@ type UpdateApiKeyCredentialProviderInput struct {
 	// key and is encrypted and stored securely.
 	ApiKey *string
 
-	// A reference to the AWS Secrets Manager secret that stores the API key. This
-	// includes the secret ID and the JSON key used to extract the API key value from
-	// the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// API key. This includes the secret ID and the JSON key used to extract the API
+	// key value from the secret. Required when apiKeySecretSource is set to EXTERNAL .
 	ApiKeySecretConfig *types.SecretReference
 
 	// The source type of the API key secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ApiKeySecretSource types.SecretSourceType
 
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApiKeyCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApiKeyCredentialProviderRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApiKeyCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiKey != nil {
-		s.WriteString(schemas.UpdateApiKeyCredentialProviderRequest_apiKey, *v.ApiKey)
-	}
-	if v.ApiKeySecretConfig != nil {
-		s.WriteStruct(schemas.UpdateApiKeyCredentialProviderRequest_apiKeySecretConfig)
-		v.ApiKeySecretConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApiKeySecretSource != "" {
-		s.WriteString(schemas.UpdateApiKeyCredentialProviderRequest_apiKeySecretSource, string(v.ApiKeySecretSource))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateApiKeyCredentialProviderRequest_name, *v.Name)
-	}
-}
-
 type UpdateApiKeyCredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ApiKeySecretArn *types.Secret
@@ -104,12 +77,13 @@ type UpdateApiKeyCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// The JSON key used to extract the API key value from the AWS Secrets Manager
-	// secret.
+	// The JSON key used to extract the API key value from the Amazon Web Services
+	// Secrets Manager secret.
 	ApiKeySecretJsonKey *string
 
 	// The source type of the API key secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ApiKeySecretSource types.SecretSourceType
 
 	// Metadata pertaining to the operation's result.
@@ -118,107 +92,29 @@ type UpdateApiKeyCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApiKeyCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApiKeyCredentialProviderResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateApiKeyCredentialProviderResponse_apiKeySecretArn:
-			v.ApiKeySecretArn = &types.Secret{}
-			return v.ApiKeySecretArn.Deserialize(d)
-		case schemas.UpdateApiKeyCredentialProviderResponse_apiKeySecretJsonKey:
-			v.ApiKeySecretJsonKey = new(string)
-			return d.ReadString(schemas.UpdateApiKeyCredentialProviderResponse_apiKeySecretJsonKey, v.ApiKeySecretJsonKey)
-		case schemas.UpdateApiKeyCredentialProviderResponse_apiKeySecretSource:
-			var ev string
-			if err := d.ReadString(schemas.UpdateApiKeyCredentialProviderResponse_apiKeySecretSource, &ev); err != nil {
-				return err
-			}
-			v.ApiKeySecretSource = types.SecretSourceType(ev)
-			return nil
-		case schemas.UpdateApiKeyCredentialProviderResponse_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateApiKeyCredentialProviderResponse_createdTime, v.CreatedTime)
-		case schemas.UpdateApiKeyCredentialProviderResponse_credentialProviderArn:
-			v.CredentialProviderArn = new(string)
-			return d.ReadString(schemas.UpdateApiKeyCredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
-		case schemas.UpdateApiKeyCredentialProviderResponse_lastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateApiKeyCredentialProviderResponse_lastUpdatedTime, v.LastUpdatedTime)
-		case schemas.UpdateApiKeyCredentialProviderResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateApiKeyCredentialProviderResponse_name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiKeyCredentialProvider{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKeyCredentialProvider, schemas.UpdateApiKeyCredentialProviderRequest, schemas.UpdateApiKeyCredentialProviderResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApiKeyCredentialProvider{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiKeyCredentialProvider, schemas.UpdateApiKeyCredentialProviderRequest, schemas.UpdateApiKeyCredentialProviderResponse), output: &UpdateApiKeyCredentialProviderOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApiKeyCredentialProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateApiKeyCredentialProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApiKeyCredentialProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,22 +129,8 @@ func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateApiKeyCredentialProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateApiKeyCredentialProvider",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v1/email/configuration-sets
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__","DeliveryOptions":{"SendingPoolName":"__SendingPoolName__","TlsPolicy":"REQUIRE"},"ReputationOptions":{"LastFreshStart":946684800,"ReputationMetricsEnabled":true},"SendingOptions":{"SendingEnabled":true},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrackingOptions":{"CustomRedirectDomain":"__CustomRedirectDomain__"}}

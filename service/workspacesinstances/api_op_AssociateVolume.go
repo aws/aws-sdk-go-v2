@@ -4,12 +4,7 @@ package workspacesinstances
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a volume to a WorkSpace Instance.
@@ -49,24 +44,6 @@ type AssociateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateVolumeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateVolumeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Device != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_Device, *v.Device)
-	}
-	if v.VolumeId != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_VolumeId, *v.VolumeId)
-	}
-	if v.WorkspaceInstanceId != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
-	}
-}
-
 // Confirms volume attachment.
 type AssociateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -75,82 +52,32 @@ type AssociateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateVolumeResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateVolume{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateVolume{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse), output: &AssociateVolumeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +92,8 @@ func (c *Client) addOperationAssociateVolumeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateVolume",
-	}
 }

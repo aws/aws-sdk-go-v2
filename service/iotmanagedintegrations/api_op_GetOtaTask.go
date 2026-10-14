@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type GetOtaTaskInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetOtaTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOtaTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOtaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetOtaTaskRequest_Identifier, *v.Identifier)
-	}
 }
 
 type GetOtaTaskOutput struct {
@@ -111,147 +94,29 @@ type GetOtaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOtaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOtaTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOtaTaskResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOtaTaskResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetOtaTaskResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_Description, v.Description)
-		case schemas.GetOtaTaskResponse_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOtaTaskResponse_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetOtaTaskResponse_OtaMechanism:
-			var ev string
-			if err := d.ReadString(schemas.GetOtaTaskResponse_OtaMechanism, &ev); err != nil {
-				return err
-			}
-			v.OtaMechanism = types.OtaMechanism(ev)
-			return nil
-		case schemas.GetOtaTaskResponse_OtaSchedulingConfig:
-			v.OtaSchedulingConfig = &types.OtaTaskSchedulingConfig{}
-			return v.OtaSchedulingConfig.Deserialize(d)
-		case schemas.GetOtaTaskResponse_OtaTargetQueryString:
-			v.OtaTargetQueryString = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_OtaTargetQueryString, v.OtaTargetQueryString)
-		case schemas.GetOtaTaskResponse_OtaTaskExecutionRetryConfig:
-			v.OtaTaskExecutionRetryConfig = &types.OtaTaskExecutionRetryConfig{}
-			return v.OtaTaskExecutionRetryConfig.Deserialize(d)
-		case schemas.GetOtaTaskResponse_OtaType:
-			var ev string
-			if err := d.ReadString(schemas.GetOtaTaskResponse_OtaType, &ev); err != nil {
-				return err
-			}
-			v.OtaType = types.OtaType(ev)
-			return nil
-		case schemas.GetOtaTaskResponse_Protocol:
-			var ev string
-			if err := d.ReadString(schemas.GetOtaTaskResponse_Protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = types.OtaProtocol(ev)
-			return nil
-		case schemas.GetOtaTaskResponse_S3Url:
-			v.S3Url = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_S3Url, v.S3Url)
-		case schemas.GetOtaTaskResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetOtaTaskResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.OtaStatus(ev)
-			return nil
-		case schemas.GetOtaTaskResponse_Tags:
-			return deserializeTagsMap(d, schemas.GetOtaTaskResponse_Tags, &v.Tags)
-		case schemas.GetOtaTaskResponse_Target:
-			return deserializeTarget(d, schemas.GetOtaTaskResponse_Target, &v.Target)
-		case schemas.GetOtaTaskResponse_TaskArn:
-			v.TaskArn = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_TaskArn, v.TaskArn)
-		case schemas.GetOtaTaskResponse_TaskConfigurationId:
-			v.TaskConfigurationId = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_TaskConfigurationId, v.TaskConfigurationId)
-		case schemas.GetOtaTaskResponse_TaskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.GetOtaTaskResponse_TaskId, v.TaskId)
-		case schemas.GetOtaTaskResponse_TaskProcessingDetails:
-			v.TaskProcessingDetails = &types.TaskProcessingDetails{}
-			return v.TaskProcessingDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOtaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOtaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOtaTask, schemas.GetOtaTaskRequest, schemas.GetOtaTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOtaTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOtaTask, schemas.GetOtaTaskRequest, schemas.GetOtaTaskResponse), output: &GetOtaTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOtaTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOtaTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOtaTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,22 +131,8 @@ func (c *Client) addOperationGetOtaTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOtaTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOtaTask",
-	}
 }

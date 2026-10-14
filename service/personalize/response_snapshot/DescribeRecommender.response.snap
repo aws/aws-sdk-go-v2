@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeRecommender
+
+{"recommender":{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","failureReason":"__FailureReason__","lastUpdatedDateTime":946684800,"latestRecommenderUpdate":{"creationDateTime":946684800,"failureReason":"__FailureReason__","lastUpdatedDateTime":946684800,"recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"]}}},"status":"__Status__"},"modelMetrics":{"key0":1},"name":"__Name__","recipeArn":"__RecipeArn__","recommenderArn":"__RecommenderArn__","recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"]}}},"status":"__Status__"}}

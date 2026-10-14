@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.DescribeResourceServer
+
+{"Identifier":"__Identifier__","UserPoolId":"__UserPoolId__"}

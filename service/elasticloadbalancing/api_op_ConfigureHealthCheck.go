@@ -4,13 +4,8 @@ package elasticloadbalancing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies the health check settings to use when evaluating the health state of
@@ -50,23 +45,6 @@ type ConfigureHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigureHealthCheckInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfigureHealthCheckInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConfigureHealthCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthCheck != nil {
-		s.WriteStruct(schemas.ConfigureHealthCheckInput_HealthCheck)
-		v.HealthCheck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.ConfigureHealthCheckInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output of ConfigureHealthCheck.
 type ConfigureHealthCheckOutput struct {
 
@@ -79,85 +57,29 @@ type ConfigureHealthCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigureHealthCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfigureHealthCheckOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfigureHealthCheckOutput_HealthCheck:
-			v.HealthCheck = &types.HealthCheck{}
-			return v.HealthCheck.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationConfigureHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpConfigureHealthCheck{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureHealthCheck, schemas.ConfigureHealthCheckInput, schemas.ConfigureHealthCheckOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpConfigureHealthCheck{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureHealthCheck, schemas.ConfigureHealthCheckInput, schemas.ConfigureHealthCheckOutput), output: &ConfigureHealthCheckOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfigureHealthCheck"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfigureHealthCheckValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfigureHealthCheck(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +94,8 @@ func (c *Client) addOperationConfigureHealthCheckMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfigureHealthCheck(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfigureHealthCheck",
-	}
 }

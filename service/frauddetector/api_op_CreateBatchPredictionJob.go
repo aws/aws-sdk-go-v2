@@ -4,11 +4,10 @@ package frauddetector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a batch prediction job.
@@ -74,6 +73,37 @@ type CreateBatchPredictionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorName != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_detectorName, *v.DetectorName)
+	}
+	if v.DetectorVersion != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_detectorVersion, *v.DetectorVersion)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_eventTypeName, *v.EventTypeName)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.InputPath != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_inputPath, *v.InputPath)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_jobId, *v.JobId)
+	}
+	if v.OutputPath != nil {
+		s.WriteString(schemas.CreateBatchPredictionJobRequest_outputPath, *v.OutputPath)
+	}
+	serializetagList(s, schemas.CreateBatchPredictionJobRequest_tags, v.Tags)
+}
+
 type CreateBatchPredictionJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,77 +111,42 @@ type CreateBatchPredictionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateBatchPredictionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchPredictionJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPredictionJob, schemas.CreateBatchPredictionJobRequest, schemas.CreateBatchPredictionJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchPredictionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPredictionJob, schemas.CreateBatchPredictionJobRequest, schemas.CreateBatchPredictionJobResult), output: &CreateBatchPredictionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchPredictionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBatchPredictionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBatchPredictionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchPredictionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +161,8 @@ func (c *Client) addOperationCreateBatchPredictionJobMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBatchPredictionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBatchPredictionJob",
-	}
 }

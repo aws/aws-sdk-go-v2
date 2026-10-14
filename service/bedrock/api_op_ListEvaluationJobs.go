@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,6 +65,42 @@ type ListEvaluationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEvaluationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEvaluationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEvaluationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationTypeEquals != "" {
+		s.WriteString(schemas.ListEvaluationJobsRequest_applicationTypeEquals, string(v.ApplicationTypeEquals))
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListEvaluationJobsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListEvaluationJobsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEvaluationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListEvaluationJobsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEvaluationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListEvaluationJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListEvaluationJobsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListEvaluationJobsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListEvaluationJobsOutput struct {
 
 	// A list of summaries of the evaluation jobs.
@@ -80,74 +116,48 @@ type ListEvaluationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEvaluationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEvaluationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEvaluationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationSummaries(s, schemas.ListEvaluationJobsResponse_jobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEvaluationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEvaluationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEvaluationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEvaluationJobsResponse_jobSummaries:
+			return deserializeEvaluationSummaries(d, schemas.ListEvaluationJobsResponse_jobSummaries, &v.JobSummaries)
+		case schemas.ListEvaluationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEvaluationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEvaluationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluationJobs, schemas.ListEvaluationJobsRequest, schemas.ListEvaluationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEvaluationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluationJobs, schemas.ListEvaluationJobsRequest, schemas.ListEvaluationJobsResponse), output: &ListEvaluationJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEvaluationJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEvaluationJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEvaluationJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +170,6 @@ func (c *Client) addOperationListEvaluationJobsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +271,3 @@ type ListEvaluationJobsAPIClient interface {
 }
 
 var _ ListEvaluationJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEvaluationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEvaluationJobs",
-	}
-}

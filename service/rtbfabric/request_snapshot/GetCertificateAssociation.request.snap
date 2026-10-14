@@ -1,0 +1,3 @@
+GET /responder-gateway/__GatewayId__/certificate?acmCertificateArn=__AcmCertificateArn__
+
+

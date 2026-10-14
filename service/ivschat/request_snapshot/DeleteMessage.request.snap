@@ -1,0 +1,5 @@
+POST /DeleteMessage
+
+Content-Type: application/json
+
+{"id":"__Id__","reason":"__Reason__","roomIdentifier":"__RoomIdentifier__"}

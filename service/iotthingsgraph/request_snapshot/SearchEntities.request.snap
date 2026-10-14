@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.SearchEntities
+
+{"entityTypes":["DEVICE","DEVICE"],"filters":[{"name":"NAME","value":["__Member__","__Member__"]},{"name":"NAME","value":["__Member__","__Member__"]}],"maxResults":1,"namespaceVersion":1,"nextToken":"__NextToken__"}

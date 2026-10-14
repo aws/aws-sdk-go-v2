@@ -5,10 +5,10 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Ingests documents directly into the knowledge base that is connected to the
@@ -61,6 +61,25 @@ type IngestKnowledgeBaseDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestKnowledgeBaseDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestKnowledgeBaseDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
+	}
+	serializeKnowledgeBaseDocuments(s, schemas.IngestKnowledgeBaseDocumentsRequest_documents, v.Documents)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type IngestKnowledgeBaseDocumentsOutput struct {
 
 	// A list of objects, each of which contains information about the documents that
@@ -73,65 +92,39 @@ type IngestKnowledgeBaseDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IngestKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngestKnowledgeBaseDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngestKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKnowledgeBaseDocumentDetails(s, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+}
+func (v *IngestKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngestKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails:
+			return deserializeKnowledgeBaseDocumentDetails(d, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, &v.DocumentDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIngestKnowledgeBaseDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestKnowledgeBaseDocuments, schemas.IngestKnowledgeBaseDocumentsRequest, schemas.IngestKnowledgeBaseDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpIngestKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IngestKnowledgeBaseDocuments, schemas.IngestKnowledgeBaseDocumentsRequest, schemas.IngestKnowledgeBaseDocumentsResponse), output: &IngestKnowledgeBaseDocumentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpIngestKnowledgeBaseDocuments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "IngestKnowledgeBaseDocuments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -141,12 +134,6 @@ func (c *Client) addOperationIngestKnowledgeBaseDocumentsMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpIngestKnowledgeBaseDocumentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opIngestKnowledgeBaseDocuments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +146,6 @@ func (c *Client) addOperationIngestKnowledgeBaseDocumentsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -204,12 +185,4 @@ func (m *idempotencyToken_initializeOpIngestKnowledgeBaseDocuments) HandleInitia
 }
 func addIdempotencyToken_opIngestKnowledgeBaseDocumentsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpIngestKnowledgeBaseDocuments{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opIngestKnowledgeBaseDocuments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "IngestKnowledgeBaseDocuments",
-	}
 }

@@ -1,0 +1,3 @@
+GET /prod/channels/__ChannelId__/thumbnails?pipelineId=__PipelineId__&thumbnailType=__ThumbnailType__
+
+

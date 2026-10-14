@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configurations":[{"createdAt":946684800,"expiresAt":946684800,"mode":"LIVE","ruleId":"__RuleId__","status":"ACTIVE","statusReason":"__StatusReason__","updatedAt":946684800},{"createdAt":946684800,"expiresAt":946684800,"mode":"LIVE","ruleId":"__RuleId__","status":"ACTIVE","statusReason":"__StatusReason__","updatedAt":946684800}],"nextToken":"__NextToken__"}

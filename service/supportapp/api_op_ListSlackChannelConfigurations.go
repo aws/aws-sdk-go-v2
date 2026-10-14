@@ -5,12 +5,8 @@ package supportapp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the Slack channel configurations for an Amazon Web Services account.
@@ -41,28 +37,6 @@ type ListSlackChannelConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSlackChannelConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSlackChannelConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSlackChannelConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSlackChannelConfigurationsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListSlackChannelConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSlackChannelConfigurationsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSlackChannelConfigurationsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSlackChannelConfigurationsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListSlackChannelConfigurationsOutput struct {
 
 	// The configurations for a Slack channel.
@@ -80,96 +54,26 @@ type ListSlackChannelConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSlackChannelConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSlackChannelConfigurationsResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSlackChannelConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSlackChannelConfigurationsResult_nextToken, *v.NextToken)
-	}
-	serializeslackChannelConfigurationList(s, schemas.ListSlackChannelConfigurationsResult_slackChannelConfigurations, v.SlackChannelConfigurations)
-}
-func (v *ListSlackChannelConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSlackChannelConfigurationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSlackChannelConfigurationsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSlackChannelConfigurationsResult_nextToken, v.NextToken)
-		case schemas.ListSlackChannelConfigurationsResult_slackChannelConfigurations:
-			return deserializeslackChannelConfigurationList(d, schemas.ListSlackChannelConfigurationsResult_slackChannelConfigurations, &v.SlackChannelConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSlackChannelConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSlackChannelConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlackChannelConfigurations, schemas.ListSlackChannelConfigurationsRequest, schemas.ListSlackChannelConfigurationsResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSlackChannelConfigurations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlackChannelConfigurations, schemas.ListSlackChannelConfigurationsRequest, schemas.ListSlackChannelConfigurationsResult), output: &ListSlackChannelConfigurationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSlackChannelConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSlackChannelConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +86,6 @@ func (c *Client) addOperationListSlackChannelConfigurationsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +177,3 @@ type ListSlackChannelConfigurationsAPIClient interface {
 }
 
 var _ ListSlackChannelConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSlackChannelConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSlackChannelConfigurations",
-	}
-}

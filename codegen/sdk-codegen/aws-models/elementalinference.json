@@ -161,10 +161,47 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string that you want Elemental Inference to always include in the event clipping metadata for this output. The string might identify the sports event in the source media, for example. </p>"
                     }
+                },
+                "dataSourceConfiguration": {
+                    "target": "com.amazonaws.elementalinference#DataSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source to map onto this clipping output. This parameter is optional. When you include this parameter, Elemental Inference reads the event data for the fixture that you specify, and includes that data in the event clipping metadata for this output. </p> <p>If you omit this parameter, Elemental Inference doesn't map a data source onto this output. </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the clip feature.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#Competitor": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the competitor, as provided by the data source.</p>"
+                    }
+                },
+                "isHome": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this competitor is the home side in the fixture. If true, this competitor is the home side. If false, this competitor is the away side. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about one competitor in a fixture. It is used in the FixtureSummary that is in the SearchFixtures response. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#CompetitorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#Competitor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 30
+                }
             }
         },
         "com.amazonaws.elementalinference#ConflictException": {
@@ -182,6 +219,26 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ContextualMetadataConfig": {
+            "type": "structure",
+            "members": {
+                "summaryGeneration": {
+                    "target": "com.amazonaws.elementalinference#SummaryGenerationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates a descriptive summary of the media content for this output, along with the objects and actions that it detects. This setting is independent of <code>extendedAnalysis</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the summary, objects, and actions fields, along with the IAB taxonomy and GARM suitability classifications. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the summary, objects, and actions fields. </p> </li> </ul>"
+                    }
+                },
+                "extendedAnalysis": {
+                    "target": "com.amazonaws.elementalinference#ExtendedAnalysisMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates extended analysis of the media content for this output. Extended analysis identifies the people, environments, brands, and on-screen text in the media content. This setting is independent of <code>summaryGeneration</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the people, environments, brands, and on-screen text fields. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the people, environments, brands, and on-screen text fields. </p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration settings for the contextual metadata feature. Use this structure when the feed output generates metadata that describes the media content. </p>"
             }
         },
         "com.amazonaws.elementalinference#CreateDictionary": {
@@ -393,6 +450,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that Elemental Inference assumes to access resources in your account on your behalf. For example, the smart crop feature uses this role to read graphics-compositing templates from your Amazon S3 bucket. You specify one access role for each feed. </p>"
+                    }
+                },
                 "outputs": {
                     "target": "com.amazonaws.elementalinference#CreateOutputList",
                     "traits": {
@@ -451,6 +514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Repeats the outputs that you specified in the request.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that you specified in the request. This property is absent if you didn't specify an IAM role. </p>"
                     }
                 },
                 "status": {
@@ -528,9 +597,48 @@
         },
         "com.amazonaws.elementalinference#CroppingConfig": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "templateGroups": {
+                    "target": "com.amazonaws.elementalinference#TemplateGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of template groups for the crop output. Each template group provides the graphics-compositing templates that Elemental Inference applies to the cropped video. You can specify from 1 to 4 template groups. </p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the crop feature.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#DataSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the fixture whose event data you want Elemental Inference to map onto this clipping output. The fixture should be the sports event in the source media that the feed is processing. </p> <p>To obtain this ID, use the SearchFixtures operation to find the fixture, then use the fixtureId from the matching FixtureSummary. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the data source configuration for a clipping output. It identifies the fixture whose event data Elemental Inference maps onto the clipping metadata. It is used in the dataSourceConfiguration property of a ClippingConfig. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#DataSourceSport": {
+            "type": "enum",
+            "members": {
+                "BASKETBALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "basketball"
+                    }
+                },
+                "AMERICAN_FOOTBALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "american-football"
+                    }
+                }
             }
         },
         "com.amazonaws.elementalinference#DeleteDictionary": {
@@ -658,6 +766,65 @@
                     "code": 202
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteFeedPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the resource-based policy of a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes the resource-based policy attached to the specified feed. After you delete the policy, the operation revokes the cross-account access that the policy granted. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed whose policy you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elementalinference#DeleteFeedRequest": {
@@ -1008,7 +1175,13 @@
             "version": "2018-11-14",
             "operations": [
                 {
+                    "target": "com.amazonaws.elementalinference#GetFixture"
+                },
+                {
                     "target": "com.amazonaws.elementalinference#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#SearchFixtures"
                 },
                 {
                     "target": "com.amazonaws.elementalinference#TagResource"
@@ -1069,6 +1242,194 @@
                     "UnstableTrait.aws.api#tagEnabled"
                 ],
                 "smithy.api#title": "AWS Elemental Inference",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elemental-inference-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elemental-inference-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elemental-inference.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elemental-inference.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1759,6 +2120,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#ExtendedAnalysisMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elementalinference#FeedArn": {
             "type": "string",
             "traits": {
@@ -1823,7 +2201,16 @@
                     "target": "com.amazonaws.elementalinference#AssociateFeed"
                 },
                 {
+                    "target": "com.amazonaws.elementalinference#DeleteFeedPolicy"
+                },
+                {
                     "target": "com.amazonaws.elementalinference#DisassociateFeed"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#GetFeedPolicy"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#PutFeedPolicy"
                 }
             ],
             "traits": {
@@ -1943,6 +2330,124 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elementalinference#FeedSummary"
+            }
+        },
+        "com.amazonaws.elementalinference#FilterName": {
+            "type": "enum",
+            "members": {
+                "COMPETITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPETITOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#FilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FixtureDate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+        },
+        "com.amazonaws.elementalinference#FixtureId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FixtureSummary": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the fixture. Specify this ID in the clipping output of a feed, to identify the fixture whose event data you want Elemental Inference to map onto the clipping metadata. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fixture, as provided by the data source. For example, the names of the two competing teams. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fixtureGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group that the fixture belongs to, such as the competition, league, or tournament. The data source doesn't provide this information for every fixture. </p>"
+                    }
+                },
+                "scheduledStart": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduled start time of the fixture, as provided by the data source. The actual start time might differ. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the fixture in its lifecycle, as provided by the data source. For example, Scheduled or Completed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "competitors": {
+                    "target": "com.amazonaws.elementalinference#CompetitorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the competitors (the teams or individuals) in the fixture.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about one fixture. It is used in the SearchFixtures response.</p> <p>Elemental Inference relays the information in this structure from the data source, so that you can identify the fixture that matches your source media. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FixtureSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#FixtureSummary"
+            }
+        },
+        "com.amazonaws.elementalinference#GatewayTimedOutException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request timed out before the service returned a response. This is a temporary condition. Retry the request. If the problem persists, contact AWS Support. </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 504,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.elementalinference#GetDictionary": {
@@ -2143,6 +2648,80 @@
                 }
             }
         },
+        "com.amazonaws.elementalinference#GetFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetFeedPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetFeedPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get the resource-based policy of a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves the resource-based policy attached to the specified feed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed whose policy you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFeedPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.elementalinference#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document attached to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#GetFeedRequest": {
             "type": "structure",
             "members": {
@@ -2197,6 +2776,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that Elemental Inference assumes. Elemental Inference uses this role to access resources in your account on your behalf. This property is absent if the feed doesn't have an IAM role. </p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.elementalinference#FeedStatus",
                     "traits": {
@@ -2222,6 +2807,115 @@
                     "target": "com.amazonaws.elementalinference#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the tags, if any, for the feed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixture": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetFixtureRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetFixtureResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#GatewayTimedOutException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a fixture"
+                },
+                "smithy.api#documentation": "<p>Retrieves information about the specified fixture (a sports event, such as a specific basketball game). You obtain a fixtureId from SearchFixtures, or from the clipping output of a feed. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/fixtures/{fixtureId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixtureRequest": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the fixture to retrieve, as returned by SearchFixtures.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixtureResponse": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that you specified in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fixture, as provided by the data source. For example, the names of the two competing teams. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fixtureGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group that the fixture belongs to, such as the competition, league, or tournament. The data source doesn't provide this information for every fixture. </p>"
+                    }
+                },
+                "scheduledStart": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduled start time of the fixture, as provided by the data source. The actual start time might differ. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the fixture in its lifecycle, as provided by the data source. For example, Scheduled or Completed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "competitors": {
+                    "target": "com.amazonaws.elementalinference#CompetitorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the competitors (the teams or individuals) in the fixture.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -2278,6 +2972,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elementalinference#GetOutput"
+            }
+        },
+        "com.amazonaws.elementalinference#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.elementalinference#InternalServerErrorException": {
@@ -2579,6 +3283,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The output config type that applies to the smart subtitling feature.</p>"
                     }
+                },
+                "contextualMetadata": {
+                    "target": "com.amazonaws.elementalinference#ContextualMetadataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output config type that applies to the contextual metadata feature.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2599,6 +3309,15 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#PolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
                 }
             }
         },
@@ -2623,6 +3342,82 @@
                         "smithy.api#enumValue": "DROP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#PutFeedPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#PutFeedPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to put a resource-based policy on a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Attaches or replaces a resource-based policy on the specified feed. A resource-based policy grants cross-account access to the feed. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed to attach the policy to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.elementalinference#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document to attach to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elementalinference#ResourceArn": {
@@ -2665,6 +3460,167 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.elementalinference#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"
+            }
+        },
+        "com.amazonaws.elementalinference#SearchFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension of the fixture to filter on. Valid values: COMPETITOR.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.elementalinference#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of values to match in the dimension that you specified in name. You can specify up to 10 values. A fixture appears in the results if it matches at least one of these values. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for a fixture search. It is used in the filters array of a SearchFixtures request. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#SearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#SearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#SearchFixtures": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#SearchFixturesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#SearchFixturesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#GatewayTimedOutException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to search fixtures"
+                },
+                "smithy.api#documentation": "<p>Searches for the fixtures (sports events, such as a specific basketball game) that are available for a sport in a date window. Each fixture in the response includes a fixtureId that you specify in the clipping output of a feed, so that Elemental Inference maps the event data for that fixture onto the clipping metadata. This operation is paginated: if there are more fixtures than fit in one page, the response includes a nextToken that you pass in a subsequent request. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/fixtures",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "fixtures",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#SearchFixturesRequest": {
+            "type": "structure",
+            "members": {
+                "sport": {
+                    "target": "com.amazonaws.elementalinference#DataSourceSport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sport to search for fixtures. Valid values: basketball (search for basketball fixtures), american-football (search for american-football fixtures). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.elementalinference#FixtureDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first day of the search window, in UTC. The search includes fixtures that are scheduled on this day. </p> <p>Specify the date in ISO 8601 format, as <code>YYYY-MM-DD</code>. For example, 2026-03-14. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.elementalinference#FixtureDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last day of the search window, in UTC. The search includes fixtures that are scheduled on this day. Specify the date in ISO 8601 format, as <code>YYYY-MM-DD</code>. </p> <p>If you omit this parameter, Elemental Inference searches only the day that you specified in startDate. The window from startDate through endDate must not exceed seven days. </p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.elementalinference#SearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters that narrow the results. Each filter applies to one dimension of a fixture, such as the competitor. You can specify up to 10 filters. </p> <p>A fixture must satisfy every filter in the array in order to appear in the results. Within one filter, a fixture must match at least one of the values. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of fixtures to return for each API request.</p> <p>The service might return fewer fixtures than the maxResults value. When more fixtures match the search, the response also includes a nextToken value that you can use to fetch the next batch of results. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the batch of results that you want to see.</p> <p>For example, you submit a SearchFixtures request with maxResults set at 5. The service returns the first batch of results (up to 5) and a nextToken value. To see the next batch of results, you submit the SearchFixtures request a second time, with the same search criteria, and specify the nextToken value. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#SearchFixturesResponse": {
+            "type": "structure",
+            "members": {
+                "fixtures": {
+                    "target": "com.amazonaws.elementalinference#FixtureSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of FixtureSummary objects, one for each fixture that matches the search. The array is empty if no fixtures match. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the next batch of results. To see the next batch, submit the SearchFixtures request again, with the same search criteria, and specify this value in nextToken. </p> <p>This parameter is absent when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -2679,6 +3635,23 @@
                 "smithy.api#documentation": "<p>The request was rejected because it would exceed one or more service quotas for your account. Review your service quotas and either delete unused resources or request a quota increase. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.elementalinference#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is temporarily unable to handle the request. Retry the request. If the problem persists, contact AWS Support. </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.elementalinference#StringList": {
@@ -2717,7 +3690,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
+                "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#SummaryGenerationMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.elementalinference#TagKey": {
@@ -2823,6 +3813,52 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateGroup": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the template group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateUris": {
+                    "target": "com.amazonaws.elementalinference#TemplateUriList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon S3 URIs that point to the graphics-compositing templates for this group. You can specify 1 or 2 URIs. Each URI must be in the form <code>s3://bucket-name/key</code>. Elemental Inference reads these templates using the IAM role that you specify in accessRoleArn. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A named set of graphics-compositing templates used by the crop feature, specified in the templateGroups array of a CroppingConfig. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#TemplateGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#TemplateUriList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#S3Uri"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -3167,6 +4203,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that Elemental Inference assumes to access resources in your account on your behalf. You can specify the existing role (to leave it unchanged) or a new role. You specify one access role for each feed. </p>"
+                    }
+                },
                 "id": {
                     "target": "com.amazonaws.elementalinference#FeedId",
                     "traits": {
@@ -3227,6 +4269,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The array of outputs in the feed. You might have left this array unchanged, or you might have changed it. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role for the feed, after the update. This property is absent if the feed doesn't have an IAM role. </p>"
                     }
                 },
                 "status": {

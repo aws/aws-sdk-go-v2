@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +76,28 @@ type CreateEngagementContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	serializeEngagementContextPayload(s, schemas.CreateEngagementContextRequest_Payload, v.Payload)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateEngagementContextRequest_Type, string(v.Type))
+	}
+}
+
 type CreateEngagementContextOutput struct {
 
 	// The unique identifier assigned to the newly created engagement context. This ID
@@ -103,65 +125,60 @@ type CreateEngagementContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_ContextId, *v.ContextId)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_EngagementArn, *v.EngagementArn)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.CreateEngagementContextResponse_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+}
+func (v *CreateEngagementContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEngagementContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEngagementContextResponse_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_ContextId, v.ContextId)
+		case schemas.CreateEngagementContextResponse_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_EngagementArn, v.EngagementArn)
+		case schemas.CreateEngagementContextResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_EngagementId, v.EngagementId)
+		case schemas.CreateEngagementContextResponse_EngagementLastModifiedAt:
+			v.EngagementLastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEngagementContextResponse_EngagementLastModifiedAt, v.EngagementLastModifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEngagementContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementContext, schemas.CreateEngagementContextRequest, schemas.CreateEngagementContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementContext, schemas.CreateEngagementContextRequest, schemas.CreateEngagementContextResponse), output: &CreateEngagementContextOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEngagementContext{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEngagementContext"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -171,12 +188,6 @@ func (c *Client) addOperationCreateEngagementContextMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCreateEngagementContextValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEngagementContext(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +200,6 @@ func (c *Client) addOperationCreateEngagementContextMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -234,12 +239,4 @@ func (m *idempotencyToken_initializeOpCreateEngagementContext) HandleInitialize(
 }
 func addIdempotencyToken_opCreateEngagementContextMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEngagementContext{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEngagementContext(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEngagementContext",
-	}
 }

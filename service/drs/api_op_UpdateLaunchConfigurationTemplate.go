@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Launch Configuration Template by ID.
@@ -57,10 +56,103 @@ type UpdateLaunchConfigurationTemplateInput struct {
 	// Whether we want to activate post-launch actions.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode types.RecoveryMode
+
 	// Target instance type right-sizing method.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateLaunchConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLaunchConfigurationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLaunchConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.UpdateLaunchConfigurationTemplateRequest_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.UpdateLaunchConfigurationTemplateRequest_copyTags, *v.CopyTags)
+	}
+	if v.ExportBucketArn != nil {
+		s.WriteString(schemas.UpdateLaunchConfigurationTemplateRequest_exportBucketArn, *v.ExportBucketArn)
+	}
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.UpdateLaunchConfigurationTemplateRequest_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.LaunchIntoSourceInstance != nil {
+		s.WriteBool(schemas.UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, *v.LaunchIntoSourceInstance)
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.UpdateLaunchConfigurationTemplateRequest_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostLaunchEnabled != nil {
+		s.WriteBool(schemas.UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled, *v.PostLaunchEnabled)
+	}
+	if v.RecoveryMode != "" {
+		s.WriteString(schemas.UpdateLaunchConfigurationTemplateRequest_recoveryMode, string(v.RecoveryMode))
+	}
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *UpdateLaunchConfigurationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLaunchConfigurationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLaunchConfigurationTemplateRequest_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.UpdateLaunchConfigurationTemplateRequest_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.UpdateLaunchConfigurationTemplateRequest_copyTags, v.CopyTags)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_exportBucketArn:
+			v.ExportBucketArn = new(string)
+			return d.ReadString(schemas.UpdateLaunchConfigurationTemplateRequest_exportBucketArn, v.ExportBucketArn)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.UpdateLaunchConfigurationTemplateRequest_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance:
+			v.LaunchIntoSourceInstance = new(bool)
+			return d.ReadBool(schemas.UpdateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, v.LaunchIntoSourceInstance)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled:
+			v.PostLaunchEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateLaunchConfigurationTemplateRequest_postLaunchEnabled, v.PostLaunchEnabled)
+		case schemas.UpdateLaunchConfigurationTemplateRequest_recoveryMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateLaunchConfigurationTemplateRequest_recoveryMode, &ev); err != nil {
+				return err
+			}
+			v.RecoveryMode = types.RecoveryMode(ev)
+			return nil
+		case schemas.UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.UpdateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type UpdateLaunchConfigurationTemplateOutput struct {
@@ -74,77 +166,50 @@ type UpdateLaunchConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLaunchConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLaunchConfigurationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLaunchConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurationTemplate != nil {
+		s.WriteStruct(schemas.UpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate)
+		v.LaunchConfigurationTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateLaunchConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLaunchConfigurationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLaunchConfigurationTemplateResponse_launchConfigurationTemplate:
+			v.LaunchConfigurationTemplate = &types.LaunchConfigurationTemplate{}
+			return v.LaunchConfigurationTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLaunchConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLaunchConfigurationTemplate, schemas.UpdateLaunchConfigurationTemplateRequest, schemas.UpdateLaunchConfigurationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLaunchConfigurationTemplate, schemas.UpdateLaunchConfigurationTemplateRequest, schemas.UpdateLaunchConfigurationTemplateResponse), output: &UpdateLaunchConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLaunchConfigurationTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLaunchConfigurationTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLaunchConfigurationTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +224,8 @@ func (c *Client) addOperationUpdateLaunchConfigurationTemplateMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLaunchConfigurationTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLaunchConfigurationTemplate",
-	}
 }

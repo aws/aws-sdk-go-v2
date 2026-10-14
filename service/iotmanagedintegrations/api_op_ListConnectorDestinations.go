@@ -5,12 +5,8 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all connector destinations, with optional filtering by cloud connector ID.
@@ -43,24 +39,6 @@ type ListConnectorDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectorDestinationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectorDestinationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectorDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudConnectorId != nil {
-		s.WriteString(schemas.ListConnectorDestinationsRequest_CloudConnectorId, *v.CloudConnectorId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConnectorDestinationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectorDestinationsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListConnectorDestinationsOutput struct {
 
 	// The list of connector destinations that match the specified criteria.
@@ -76,84 +54,26 @@ type ListConnectorDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectorDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConnectorDestinationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConnectorDestinationsResponse_ConnectorDestinationList:
-			return deserializeConnectorDestinationListDefinition(d, schemas.ListConnectorDestinationsResponse_ConnectorDestinationList, &v.ConnectorDestinationList)
-		case schemas.ListConnectorDestinationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConnectorDestinationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConnectorDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDestinations, schemas.ListConnectorDestinationsRequest, schemas.ListConnectorDestinationsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorDestinations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDestinations, schemas.ListConnectorDestinationsRequest, schemas.ListConnectorDestinationsResponse), output: &ListConnectorDestinationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectorDestinations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConnectorDestinations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +86,6 @@ func (c *Client) addOperationListConnectorDestinationsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +188,3 @@ type ListConnectorDestinationsAPIClient interface {
 }
 
 var _ ListConnectorDestinationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConnectorDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConnectorDestinations",
-	}
-}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate
+
+{"nextToken":"__NextToken__","repositoryNames":["__Member__","__Member__"]}

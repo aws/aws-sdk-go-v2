@@ -4,13 +4,17 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns configuration parameters for a schema conversion project.
+//
+// Required permissions: dms:DescribeConversionConfiguration . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeConversionConfiguration(ctx context.Context, params *DescribeConversionConfigurationInput, optFns ...func(*Options)) (*DescribeConversionConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeConversionConfigurationInput{}
@@ -37,9 +41,24 @@ type DescribeConversionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConversionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConversionConfigurationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConversionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeConversionConfigurationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DescribeConversionConfigurationOutput struct {
 
-	// The configuration parameters for the schema conversion project.
+	// A JSON string that contains the schema conversion settings for the migration
+	// project. For the format and available settings, see [Specifying schema conversion settings for migration projects].
+	//
+	// [Specifying schema conversion settings for migration projects]: https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html
 	ConversionConfiguration *string
 
 	// The name or Amazon Resource Name (ARN) for the schema conversion project.
@@ -51,77 +70,54 @@ type DescribeConversionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConversionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConversionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConversionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversionConfiguration != nil {
+		s.WriteString(schemas.DescribeConversionConfigurationResponse_ConversionConfiguration, *v.ConversionConfiguration)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeConversionConfigurationResponse_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+func (v *DescribeConversionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConversionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConversionConfigurationResponse_ConversionConfiguration:
+			v.ConversionConfiguration = new(string)
+			return d.ReadString(schemas.DescribeConversionConfigurationResponse_ConversionConfiguration, v.ConversionConfiguration)
+		case schemas.DescribeConversionConfigurationResponse_MigrationProjectIdentifier:
+			v.MigrationProjectIdentifier = new(string)
+			return d.ReadString(schemas.DescribeConversionConfigurationResponse_MigrationProjectIdentifier, v.MigrationProjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConversionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConversionConfiguration, schemas.DescribeConversionConfigurationMessage, schemas.DescribeConversionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConversionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConversionConfiguration, schemas.DescribeConversionConfigurationMessage, schemas.DescribeConversionConfigurationResponse), output: &DescribeConversionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConversionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConversionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConversionConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConversionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +132,8 @@ func (c *Client) addOperationDescribeConversionConfigurationMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConversionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConversionConfiguration",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.ListLogGroups
+
+{"accountIdentifiers":["__Member__","__Member__"],"dataSources":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"fieldIndexNames":["__Member__","__Member__"],"includeLinkedAccounts":true,"limit":1,"logGroupClass":"STANDARD","logGroupNamePattern":"__LogGroupNamePattern__","logGroupTags":[{"key":"__Key__","values":["__Member__","__Member__"]},{"key":"__Key__","values":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

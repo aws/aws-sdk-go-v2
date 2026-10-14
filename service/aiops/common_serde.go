@@ -67,6 +67,7 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func deserializeChatConfigurationArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -80,6 +81,7 @@ func deserializeChatConfigurationArns(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeCrossAccountConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CrossAccountConfiguration) error {
+	*v = make([]types.CrossAccountConfiguration, 0)
 	var vv types.CrossAccountConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CrossAccountConfiguration{}
@@ -93,6 +95,7 @@ func deserializeCrossAccountConfigurations(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeInvestigationGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListInvestigationGroupsModel) error {
+	*v = make([]types.ListInvestigationGroupsModel, 0)
 	var vv types.ListInvestigationGroupsModel
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ListInvestigationGroupsModel{}
@@ -106,6 +109,7 @@ func deserializeInvestigationGroups(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTagKeyBoundaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -119,6 +123,7 @@ func deserializeTagKeyBoundaries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -159,6 +164,14 @@ func deserializeChatbotNotificationChannel(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeChatConfigurationArns(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -173,6 +186,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

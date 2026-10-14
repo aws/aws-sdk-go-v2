@@ -1,0 +1,3 @@
+DELETE /apps/__AppId__/backendenvironments/__EnvironmentName__
+
+

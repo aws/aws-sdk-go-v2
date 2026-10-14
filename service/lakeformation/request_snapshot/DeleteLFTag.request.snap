@@ -1,0 +1,5 @@
+POST /DeleteLFTag
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","TagKey":"__TagKey__"}

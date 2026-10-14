@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetFolder
+
+{"commitId":"__CommitId__","files":[{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE","relativePath":"__RelativePath__"},{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE","relativePath":"__RelativePath__"}],"folderPath":"__FolderPath__","subFolders":[{"absolutePath":"__AbsolutePath__","relativePath":"__RelativePath__","treeId":"__TreeId__"},{"absolutePath":"__AbsolutePath__","relativePath":"__RelativePath__","treeId":"__TreeId__"}],"subModules":[{"absolutePath":"__AbsolutePath__","commitId":"__CommitId__","relativePath":"__RelativePath__"},{"absolutePath":"__AbsolutePath__","commitId":"__CommitId__","relativePath":"__RelativePath__"}],"symbolicLinks":[{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE","relativePath":"__RelativePath__"},{"absolutePath":"__AbsolutePath__","blobId":"__BlobId__","fileMode":"EXECUTABLE","relativePath":"__RelativePath__"}],"treeId":"__TreeId__"}

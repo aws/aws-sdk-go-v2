@@ -4,19 +4,18 @@ package emrcontainers
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Displays detailed information about a specified virtual cluster. Virtual
-// cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list
-// and delete virtual clusters. They do not consume any additional resource in your
-// system. A single virtual cluster maps to a single Kubernetes namespace. Given
-// this relationship, you can model virtual clusters the same way you model
-// Kubernetes namespaces to meet your requirements.
+// cluster is a managed entity on Amazon EMR on EKS. You can create, update,
+// describe, list and delete virtual clusters. They do not consume any additional
+// resource in your system. A single virtual cluster maps to a single Kubernetes
+// namespace. Given this relationship, you can model virtual clusters the same way
+// you model Kubernetes namespaces to meet your requirements.
 func (c *Client) DescribeVirtualCluster(ctx context.Context, params *DescribeVirtualClusterInput, optFns ...func(*Options)) (*DescribeVirtualClusterOutput, error) {
 	if params == nil {
 		params = &DescribeVirtualClusterInput{}
@@ -42,6 +41,18 @@ type DescribeVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeVirtualClusterRequest_id, *v.Id)
+	}
+}
+
 type DescribeVirtualClusterOutput struct {
 
 	// This output displays information about the specified virtual cluster.
@@ -53,77 +64,50 @@ type DescribeVirtualClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualCluster != nil {
+		s.WriteStruct(schemas.DescribeVirtualClusterResponse_virtualCluster)
+		v.VirtualCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVirtualClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualClusterResponse_virtualCluster:
+			v.VirtualCluster = &types.VirtualCluster{}
+			return v.VirtualCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualCluster, schemas.DescribeVirtualClusterRequest, schemas.DescribeVirtualClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualCluster, schemas.DescribeVirtualClusterRequest, schemas.DescribeVirtualClusterResponse), output: &DescribeVirtualClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVirtualCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVirtualCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeVirtualClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVirtualCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +122,8 @@ func (c *Client) addOperationDescribeVirtualClusterMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeVirtualCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeVirtualCluster",
-	}
 }

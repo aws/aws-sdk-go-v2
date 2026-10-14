@@ -1706,8 +1706,8 @@ func (v *CatalogConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) err
 // process of persisting application state for fault tolerance. For more
 // information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 //
-// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
+// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
 type CheckpointConfiguration struct {
 
 	// Describes whether the application uses Managed Service for Apache Flink'
@@ -1751,8 +1751,8 @@ type CheckpointConfiguration struct {
 	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	//
-	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/ops/state/large_state_tuning/#tuning-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
+	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/ops/state/large_state_tuning/#tuning-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
@@ -2731,8 +2731,8 @@ type FlinkApplicationConfiguration struct {
 	// process of persisting application state for fault tolerance. For more
 	// information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
 	//
-	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
+	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
 	CheckpointConfiguration *CheckpointConfiguration
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -2798,8 +2798,8 @@ type FlinkApplicationConfigurationDescription struct {
 	// in the [Apache Flink Documentation]. To retrieve the job plan for the application, use the DescribeApplicationRequest$IncludeAdditionalDetails parameter of
 	// the DescribeApplicationoperation.
 	//
-	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
-	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-2.2/internals/job_scheduling.html
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
+	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-2.3/internals/job_scheduling.html
 	JobPlanDescription *string
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -2933,8 +2933,8 @@ type FlinkRunConfiguration struct {
 	// this parameter, AllowNonRestoredState will be set to false , even if it was
 	// previously set to true .
 	//
-	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/ops/state/savepoints/#allowing-non-restored-state
-	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
+	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/ops/state/savepoints/#allowing-non-restored-state
+	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
 	AllowNonRestoredState *bool
 
 	noSmithyDocumentSerde
@@ -5058,8 +5058,8 @@ func (v *OutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 // executes multiple tasks simultaneously. For more information about parallelism,
 // see [Parallel Execution]in the [Apache Flink Documentation].
 //
-// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-2.2/dev/parallel.html
-// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.2/
+// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-2.3/dev/parallel.html
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-2.3/
 type ParallelismConfiguration struct {
 
 	// Describes whether the application uses the default parallelism for the Managed

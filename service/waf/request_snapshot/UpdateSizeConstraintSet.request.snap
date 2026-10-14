@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.UpdateSizeConstraintSet
+
+{"ChangeToken":"__ChangeToken__","SizeConstraintSetId":"__SizeConstraintSetId__","Updates":[{"Action":"INSERT","SizeConstraint":{"ComparisonOperator":"EQ","FieldToMatch":{"Data":"__Data__","Type":"URI"},"Size":1,"TextTransformation":"NONE"}},{"Action":"INSERT","SizeConstraint":{"ComparisonOperator":"EQ","FieldToMatch":{"Data":"__Data__","Type":"URI"},"Size":1,"TextTransformation":"NONE"}}]}

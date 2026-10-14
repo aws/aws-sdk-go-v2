@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.GetServiceSyncBlockerSummary
+
+{"serviceSyncBlockerSummary":{"latestBlockers":[{"contexts":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"createdAt":946684800,"createdReason":"__CreatedReason__","id":"__Id__","resolvedAt":946684800,"resolvedReason":"__ResolvedReason__","status":"ACTIVE","type":"AUTOMATED"},{"contexts":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"createdAt":946684800,"createdReason":"__CreatedReason__","id":"__Id__","resolvedAt":946684800,"resolvedReason":"__ResolvedReason__","status":"ACTIVE","type":"AUTOMATED"}],"serviceInstanceName":"__ServiceInstanceName__","serviceName":"__ServiceName__"}}

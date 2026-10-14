@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a data repository association on an Amazon FSx for Lustre file system.
@@ -51,6 +51,24 @@ type DeleteDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeleteDataInFileSystem != nil {
+		s.WriteBool(schemas.DeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem, *v.DeleteDataInFileSystem)
+	}
+}
+
 type DeleteDataRepositoryAssociationOutput struct {
 
 	// The ID of the data repository association being deleted.
@@ -69,65 +87,58 @@ type DeleteDataRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationResponse_AssociationId, *v.AssociationId)
+	}
+	if v.DeleteDataInFileSystem != nil {
+		s.WriteBool(schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem, *v.DeleteDataInFileSystem)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationResponse_Lifecycle, string(v.Lifecycle))
+	}
+}
+func (v *DeleteDataRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataRepositoryAssociationResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.DeleteDataRepositoryAssociationResponse_AssociationId, v.AssociationId)
+		case schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem:
+			v.DeleteDataInFileSystem = new(bool)
+			return d.ReadBool(schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem, v.DeleteDataInFileSystem)
+		case schemas.DeleteDataRepositoryAssociationResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDataRepositoryAssociationResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.DataRepositoryLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRepositoryAssociation, schemas.DeleteDataRepositoryAssociationRequest, schemas.DeleteDataRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRepositoryAssociation, schemas.DeleteDataRepositoryAssociationRequest, schemas.DeleteDataRepositoryAssociationResponse), output: &DeleteDataRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataRepositoryAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -137,12 +148,6 @@ func (c *Client) addOperationDeleteDataRepositoryAssociationMiddlewares(stack *m
 		return err
 	}
 	if err = addOpDeleteDataRepositoryAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataRepositoryAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +160,6 @@ func (c *Client) addOperationDeleteDataRepositoryAssociationMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -200,12 +199,4 @@ func (m *idempotencyToken_initializeOpDeleteDataRepositoryAssociation) HandleIni
 }
 func addIdempotencyToken_opDeleteDataRepositoryAssociationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteDataRepositoryAssociation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteDataRepositoryAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDataRepositoryAssociation",
-	}
 }

@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,38 +60,6 @@ type CreateProjectProfileInput struct {
 	Status types.Status
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateProjectProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProjectProfileInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProjectProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowCustomProjectResourceTags != nil {
-		s.WriteBool(schemas.CreateProjectProfileInput_allowCustomProjectResourceTags, *v.AllowCustomProjectResourceTags)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateProjectProfileInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateProjectProfileInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.DomainUnitIdentifier != nil {
-		s.WriteString(schemas.CreateProjectProfileInput_domainUnitIdentifier, *v.DomainUnitIdentifier)
-	}
-	serializeEnvironmentConfigurationsList(s, schemas.CreateProjectProfileInput_environmentConfigurations, v.EnvironmentConfigurations)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProjectProfileInput_name, *v.Name)
-	}
-	serializeProjectResourceTagParameters(s, schemas.CreateProjectProfileInput_projectResourceTags, v.ProjectResourceTags)
-	if v.ProjectResourceTagsDescription != nil {
-		s.WriteString(schemas.CreateProjectProfileInput_projectResourceTagsDescription, *v.ProjectResourceTagsDescription)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CreateProjectProfileInput_status, string(v.Status))
-	}
 }
 
 type CreateProjectProfileOutput struct {
@@ -155,123 +118,29 @@ type CreateProjectProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProjectProfileOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProjectProfileOutput_allowCustomProjectResourceTags:
-			v.AllowCustomProjectResourceTags = new(bool)
-			return d.ReadBool(schemas.CreateProjectProfileOutput_allowCustomProjectResourceTags, v.AllowCustomProjectResourceTags)
-		case schemas.CreateProjectProfileOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProjectProfileOutput_createdAt, v.CreatedAt)
-		case schemas.CreateProjectProfileOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_createdBy, v.CreatedBy)
-		case schemas.CreateProjectProfileOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_description, v.Description)
-		case schemas.CreateProjectProfileOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_domainId, v.DomainId)
-		case schemas.CreateProjectProfileOutput_domainUnitId:
-			v.DomainUnitId = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_domainUnitId, v.DomainUnitId)
-		case schemas.CreateProjectProfileOutput_environmentConfigurations:
-			return deserializeEnvironmentConfigurationsList(d, schemas.CreateProjectProfileOutput_environmentConfigurations, &v.EnvironmentConfigurations)
-		case schemas.CreateProjectProfileOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_id, v.Id)
-		case schemas.CreateProjectProfileOutput_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProjectProfileOutput_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.CreateProjectProfileOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_name, v.Name)
-		case schemas.CreateProjectProfileOutput_projectResourceTags:
-			return deserializeProjectResourceTagParameters(d, schemas.CreateProjectProfileOutput_projectResourceTags, &v.ProjectResourceTags)
-		case schemas.CreateProjectProfileOutput_projectResourceTagsDescription:
-			v.ProjectResourceTagsDescription = new(string)
-			return d.ReadString(schemas.CreateProjectProfileOutput_projectResourceTagsDescription, v.ProjectResourceTagsDescription)
-		case schemas.CreateProjectProfileOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateProjectProfileOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProjectProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProjectProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectProfile, schemas.CreateProjectProfileInput, schemas.CreateProjectProfileOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProjectProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProjectProfile, schemas.CreateProjectProfileInput, schemas.CreateProjectProfileOutput), output: &CreateProjectProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProjectProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProjectProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProjectProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -286,22 +155,8 @@ func (c *Client) addOperationCreateProjectProfileMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProjectProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProjectProfile",
-	}
 }

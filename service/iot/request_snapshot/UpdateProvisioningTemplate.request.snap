@@ -1,0 +1,5 @@
+PATCH /provisioning-templates/__TemplateName__
+
+Content-Type: application/json
+
+{"defaultVersionId":1,"description":"__Description__","enabled":true,"preProvisioningHook":{"payloadVersion":"__PayloadVersion__","targetArn":"__TargetArn__"},"provisioningRoleArn":"__ProvisioningRoleArn__","removePreProvisioningHook":true}

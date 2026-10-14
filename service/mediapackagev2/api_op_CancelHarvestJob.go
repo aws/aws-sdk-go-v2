@@ -4,12 +4,7 @@ package mediapackagev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels an in-progress harvest job.
@@ -60,30 +55,6 @@ type CancelHarvestJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelHarvestJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelHarvestJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelHarvestJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.CancelHarvestJobRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.CancelHarvestJobRequest_ChannelName, *v.ChannelName)
-	}
-	if v.ETag != nil {
-		s.WriteString(schemas.CancelHarvestJobRequest_ETag, *v.ETag)
-	}
-	if v.HarvestJobName != nil {
-		s.WriteString(schemas.CancelHarvestJobRequest_HarvestJobName, *v.HarvestJobName)
-	}
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.CancelHarvestJobRequest_OriginEndpointName, *v.OriginEndpointName)
-	}
-}
-
 type CancelHarvestJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,82 +62,29 @@ type CancelHarvestJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelHarvestJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelHarvestJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelHarvestJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelHarvestJob, schemas.CancelHarvestJobRequest, schemas.CancelHarvestJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelHarvestJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelHarvestJob, schemas.CancelHarvestJobRequest, schemas.CancelHarvestJobResponse), output: &CancelHarvestJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelHarvestJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelHarvestJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelHarvestJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +99,8 @@ func (c *Client) addOperationCancelHarvestJobMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelHarvestJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelHarvestJob",
-	}
 }

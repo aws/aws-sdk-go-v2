@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DetachVpnGateway&DryRun=true&Version=2016-11-15&VpcId=__VpcId__&VpnGatewayId=__VpnGatewayId__

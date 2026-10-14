@@ -5,10 +5,10 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a private DNS namespace.
@@ -48,6 +48,26 @@ type UpdatePrivateDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivateDnsNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivateDnsNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivateDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceRequest_Id, *v.Id)
+	}
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.UpdatePrivateDnsNamespaceRequest_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdaterRequestId != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceRequest_UpdaterRequestId, *v.UpdaterRequestId)
+	}
+}
+
 type UpdatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -62,65 +82,42 @@ type UpdatePrivateDnsNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivateDnsNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivateDnsNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivateDnsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdatePrivateDnsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePrivateDnsNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePrivateDnsNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdatePrivateDnsNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateDnsNamespace, schemas.UpdatePrivateDnsNamespaceRequest, schemas.UpdatePrivateDnsNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrivateDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateDnsNamespace, schemas.UpdatePrivateDnsNamespaceRequest, schemas.UpdatePrivateDnsNamespaceResponse), output: &UpdatePrivateDnsNamespaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrivateDnsNamespace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePrivateDnsNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -130,12 +127,6 @@ func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpUpdatePrivateDnsNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrivateDnsNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +139,6 @@ func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -193,12 +178,4 @@ func (m *idempotencyToken_initializeOpUpdatePrivateDnsNamespace) HandleInitializ
 }
 func addIdempotencyToken_opUpdatePrivateDnsNamespaceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdatePrivateDnsNamespace{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdatePrivateDnsNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePrivateDnsNamespace",
-	}
 }

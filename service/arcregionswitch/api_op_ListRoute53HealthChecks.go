@@ -5,13 +5,11 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the Amazon Route 53 health checks.
@@ -98,6 +96,18 @@ type ListRoute53HealthChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoute53HealthChecksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoute53HealthChecksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoute53HealthChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRoute53HealthCheckList(s, schemas.ListRoute53HealthChecksResponse_healthChecks, v.HealthChecks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksResponse_nextToken, *v.NextToken)
+	}
+}
 func (v *ListRoute53HealthChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoute53HealthChecksResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -111,62 +121,20 @@ func (v *ListRoute53HealthChecksOutput) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse), output: &ListRoute53HealthChecksOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoute53HealthChecks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -176,12 +144,6 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpListRoute53HealthChecksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoute53HealthChecks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +156,6 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +258,3 @@ type ListRoute53HealthChecksAPIClient interface {
 }
 
 var _ ListRoute53HealthChecksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRoute53HealthChecks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRoute53HealthChecks",
-	}
-}

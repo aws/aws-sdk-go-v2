@@ -5,10 +5,10 @@ package m2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a data set import task for a specific application.
@@ -49,6 +49,37 @@ type CreateDataSetImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSetImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateDataSetImportTaskRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataSetImportTaskRequest_clientToken, *v.ClientToken)
+	}
+	serializeDataSetImportConfig(s, schemas.CreateDataSetImportTaskRequest_importConfig, v.ImportConfig)
+}
+func (v *CreateDataSetImportTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSetImportTaskRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSetImportTaskRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateDataSetImportTaskRequest_applicationId, v.ApplicationId)
+		case schemas.CreateDataSetImportTaskRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateDataSetImportTaskRequest_clientToken, v.ClientToken)
+		case schemas.CreateDataSetImportTaskRequest_importConfig:
+			return deserializeDataSetImportConfig(d, schemas.CreateDataSetImportTaskRequest_importConfig, &v.ImportConfig)
+		}
+		return nil
+	})
+}
+
 type CreateDataSetImportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with
@@ -63,65 +94,42 @@ type CreateDataSetImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSetImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetImportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateDataSetImportTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *CreateDataSetImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSetImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSetImportTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateDataSetImportTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSetImportTask, schemas.CreateDataSetImportTaskRequest, schemas.CreateDataSetImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSetImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSetImportTask, schemas.CreateDataSetImportTaskRequest, schemas.CreateDataSetImportTaskResponse), output: &CreateDataSetImportTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSetImportTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataSetImportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -131,12 +139,6 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCreateDataSetImportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSetImportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +151,6 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -194,12 +190,4 @@ func (m *idempotencyToken_initializeOpCreateDataSetImportTask) HandleInitialize(
 }
 func addIdempotencyToken_opCreateDataSetImportTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataSetImportTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataSetImportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataSetImportTask",
-	}
 }

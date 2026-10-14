@@ -4,16 +4,9 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/entityresolution/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the ProviderService of a given name.
@@ -46,21 +39,6 @@ type GetProviderServiceInput struct {
 	ProviderServiceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetProviderServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetProviderServiceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetProviderServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProviderName != nil {
-		s.WriteString(schemas.GetProviderServiceInput_providerName, *v.ProviderName)
-	}
-	if v.ProviderServiceName != nil {
-		s.WriteString(schemas.GetProviderServiceInput_providerServiceName, *v.ProviderServiceName)
-	}
 }
 
 type GetProviderServiceOutput struct {
@@ -132,142 +110,29 @@ type GetProviderServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProviderServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetProviderServiceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetProviderServiceOutput_anonymizedOutput:
-			v.AnonymizedOutput = new(bool)
-			return d.ReadBool(schemas.GetProviderServiceOutput_anonymizedOutput, v.AnonymizedOutput)
-		case schemas.GetProviderServiceOutput_providerComponentSchema:
-			v.ProviderComponentSchema = &types.ProviderComponentSchema{}
-			return v.ProviderComponentSchema.Deserialize(d)
-		case schemas.GetProviderServiceOutput_providerConfigurationDefinition:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerConfigurationDefinition, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.ProviderConfigurationDefinition = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetProviderServiceOutput_providerEndpointConfiguration:
-			return deserializeProviderEndpointConfiguration(d, schemas.GetProviderServiceOutput_providerEndpointConfiguration, &v.ProviderEndpointConfiguration)
-		case schemas.GetProviderServiceOutput_providerEntityOutputDefinition:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerEntityOutputDefinition, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.ProviderEntityOutputDefinition = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetProviderServiceOutput_providerIdNameSpaceConfiguration:
-			v.ProviderIdNameSpaceConfiguration = &types.ProviderIdNameSpaceConfiguration{}
-			return v.ProviderIdNameSpaceConfiguration.Deserialize(d)
-		case schemas.GetProviderServiceOutput_providerIntermediateDataAccessConfiguration:
-			v.ProviderIntermediateDataAccessConfiguration = &types.ProviderIntermediateDataAccessConfiguration{}
-			return v.ProviderIntermediateDataAccessConfiguration.Deserialize(d)
-		case schemas.GetProviderServiceOutput_providerJobConfiguration:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetProviderServiceOutput_providerJobConfiguration, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.ProviderJobConfiguration = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetProviderServiceOutput_providerName:
-			v.ProviderName = new(string)
-			return d.ReadString(schemas.GetProviderServiceOutput_providerName, v.ProviderName)
-		case schemas.GetProviderServiceOutput_providerServiceArn:
-			v.ProviderServiceArn = new(string)
-			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceArn, v.ProviderServiceArn)
-		case schemas.GetProviderServiceOutput_providerServiceDisplayName:
-			v.ProviderServiceDisplayName = new(string)
-			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceDisplayName, v.ProviderServiceDisplayName)
-		case schemas.GetProviderServiceOutput_providerServiceName:
-			v.ProviderServiceName = new(string)
-			return d.ReadString(schemas.GetProviderServiceOutput_providerServiceName, v.ProviderServiceName)
-		case schemas.GetProviderServiceOutput_providerServiceType:
-			var ev string
-			if err := d.ReadString(schemas.GetProviderServiceOutput_providerServiceType, &ev); err != nil {
-				return err
-			}
-			v.ProviderServiceType = types.ServiceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProviderService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProviderService, schemas.GetProviderServiceInput, schemas.GetProviderServiceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProviderService{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProviderService, schemas.GetProviderServiceInput, schemas.GetProviderServiceOutput), output: &GetProviderServiceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProviderService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProviderServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProviderService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -282,22 +147,8 @@ func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProviderService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProviderService",
-	}
 }

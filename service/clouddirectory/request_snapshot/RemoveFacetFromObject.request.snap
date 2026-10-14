@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object/facets/delete
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"ObjectReference":{"Selector":"__Selector__"},"SchemaFacet":{"FacetName":"__FacetName__","SchemaArn":"__SchemaArn__"}}

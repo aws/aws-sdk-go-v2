@@ -4,13 +4,8 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the metadata of a WhatsApp Flow, such as its name or categories. This
@@ -47,29 +42,16 @@ type UpdateWhatsAppFlowInput struct {
 	// The updated categories for the Flow.
 	Categories []types.MetaFlowCategory
 
+	// The updated HTTPS endpoint for a data exchange Flow.
+	EndpointUri *string
+
 	// The updated name for the Flow.
 	FlowName *string
 
+	// The ID of the Meta application to attach to the Flow.
+	MetaAppId *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateWhatsAppFlowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowCategoryList(s, schemas.UpdateWhatsAppFlowInput_categories, v.Categories)
-	if v.FlowId != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_flowId, *v.FlowId)
-	}
-	if v.FlowName != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_flowName, *v.FlowName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_id, *v.Id)
-	}
 }
 
 type UpdateWhatsAppFlowOutput struct {
@@ -79,82 +61,29 @@ type UpdateWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateWhatsAppFlowOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppFlow, schemas.UpdateWhatsAppFlowInput, schemas.UpdateWhatsAppFlowOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppFlow, schemas.UpdateWhatsAppFlowInput, schemas.UpdateWhatsAppFlowOutput), output: &UpdateWhatsAppFlowOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWhatsAppFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWhatsAppFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWhatsAppFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +98,8 @@ func (c *Client) addOperationUpdateWhatsAppFlowMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWhatsAppFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWhatsAppFlow",
-	}
 }

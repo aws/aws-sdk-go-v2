@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.DeleteFHIRDatastore
+
+{"DatastoreArn":"__DatastoreArn__","DatastoreEndpoint":"__DatastoreEndpoint__","DatastoreId":"__DatastoreId__","DatastoreStatus":"CREATING"}

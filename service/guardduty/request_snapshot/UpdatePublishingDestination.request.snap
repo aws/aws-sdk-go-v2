@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/publishingDestination/__DestinationId__
+
+Content-Type: application/json
+
+{"destinationProperties":{"destinationArn":"__DestinationArn__","kmsKeyArn":"__KmsKeyArn__"}}

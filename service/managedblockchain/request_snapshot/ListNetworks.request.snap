@@ -1,0 +1,3 @@
+GET /networks?framework=HYPERLEDGER_FABRIC&maxResults=1&name=__Name__&nextToken=__NextToken__&status=CREATING
+
+

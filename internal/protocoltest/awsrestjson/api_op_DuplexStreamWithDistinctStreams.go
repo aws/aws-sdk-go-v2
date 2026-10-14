@@ -4,8 +4,6 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	smithy "github.com/aws/smithy-go"
@@ -55,6 +53,15 @@ type DuplexStreamWithDistinctStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamWithDistinctStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplexStreamWithDistinctStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplexStreamWithDistinctStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSingletonEventStream(s, schemas.DuplexStreamWithDistinctStreamsOutput_stream, v.Stream)
+}
 func (v *DuplexStreamWithDistinctStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DuplexStreamWithDistinctStreamsOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -71,9 +78,6 @@ func (o *DuplexStreamWithDistinctStreamsOutput) GetStream() *DuplexStreamWithDis
 }
 
 func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DuplexStreamWithDistinctStreams, schemas.DuplexStreamWithDistinctStreamsInput, schemas.DuplexStreamWithDistinctStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
@@ -86,19 +90,7 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 	if err := stack.Deserialize.Insert(&deserializeOpEventStreamDuplexStreamWithDistinctStreams{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DuplexStreamWithDistinctStreams"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -108,34 +100,10 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDuplexStreamWithDistinctStreams(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,24 +118,10 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDuplexStreamWithDistinctStreams(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DuplexStreamWithDistinctStreams",
-	}
 }
 
 // DuplexStreamWithDistinctStreamsEventStream provides the event stream handling for the DuplexStreamWithDistinctStreams operation.

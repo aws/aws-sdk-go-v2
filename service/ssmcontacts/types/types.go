@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,34 +21,6 @@ type ChannelTargetInfo struct {
 	RetryIntervalInMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelTargetInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelTargetInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelTargetInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactChannelId != nil {
-		s.WriteString(schemas.ChannelTargetInfo_ContactChannelId, *v.ContactChannelId)
-	}
-	if v.RetryIntervalInMinutes != nil {
-		s.WriteInt32(schemas.ChannelTargetInfo_RetryIntervalInMinutes, *v.RetryIntervalInMinutes)
-	}
-}
-func (v *ChannelTargetInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelTargetInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelTargetInfo_ContactChannelId:
-			v.ContactChannelId = new(string)
-			return d.ReadString(schemas.ChannelTargetInfo_ContactChannelId, v.ContactChannelId)
-		case schemas.ChannelTargetInfo_RetryIntervalInMinutes:
-			v.RetryIntervalInMinutes = new(int32)
-			return d.ReadInt32(schemas.ChannelTargetInfo_RetryIntervalInMinutes, v.RetryIntervalInMinutes)
-		}
-		return nil
-	})
 }
 
 // A personal contact or escalation plan that Incident Manager engages during an
@@ -82,50 +52,6 @@ type Contact struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Contact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Contact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.Contact_Alias, *v.Alias)
-	}
-	if v.ContactArn != nil {
-		s.WriteString(schemas.Contact_ContactArn, *v.ContactArn)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.Contact_DisplayName, *v.DisplayName)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Contact_Type, string(v.Type))
-	}
-}
-func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Contact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Contact_Alias:
-			v.Alias = new(string)
-			return d.ReadString(schemas.Contact_Alias, v.Alias)
-		case schemas.Contact_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.Contact_ContactArn, v.ContactArn)
-		case schemas.Contact_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.Contact_DisplayName, v.DisplayName)
-		case schemas.Contact_Type:
-			var ev string
-			if err := d.ReadString(schemas.Contact_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ContactType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The method that Incident Manager uses to engage a contact.
@@ -172,68 +98,6 @@ type ContactChannel struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ContactChannel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContactChannel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContactChannel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationStatus != "" {
-		s.WriteString(schemas.ContactChannel_ActivationStatus, string(v.ActivationStatus))
-	}
-	if v.ContactArn != nil {
-		s.WriteString(schemas.ContactChannel_ContactArn, *v.ContactArn)
-	}
-	if v.ContactChannelArn != nil {
-		s.WriteString(schemas.ContactChannel_ContactChannelArn, *v.ContactChannelArn)
-	}
-	if v.DeliveryAddress != nil {
-		s.WriteStruct(schemas.ContactChannel_DeliveryAddress)
-		v.DeliveryAddress.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ContactChannel_Name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ContactChannel_Type, string(v.Type))
-	}
-}
-func (v *ContactChannel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContactChannel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContactChannel_ActivationStatus:
-			var ev string
-			if err := d.ReadString(schemas.ContactChannel_ActivationStatus, &ev); err != nil {
-				return err
-			}
-			v.ActivationStatus = ActivationStatus(ev)
-			return nil
-		case schemas.ContactChannel_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.ContactChannel_ContactArn, v.ContactArn)
-		case schemas.ContactChannel_ContactChannelArn:
-			v.ContactChannelArn = new(string)
-			return d.ReadString(schemas.ContactChannel_ContactChannelArn, v.ContactChannelArn)
-		case schemas.ContactChannel_DeliveryAddress:
-			v.DeliveryAddress = &ContactChannelAddress{}
-			return v.DeliveryAddress.Deserialize(d)
-		case schemas.ContactChannel_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ContactChannel_Name, v.Name)
-		case schemas.ContactChannel_Type:
-			var ev string
-			if err := d.ReadString(schemas.ContactChannel_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The details that Incident Manager uses when trying to engage the contact
 // channel.
 type ContactChannelAddress struct {
@@ -251,28 +115,6 @@ type ContactChannelAddress struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ContactChannelAddress) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContactChannelAddress)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContactChannelAddress) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SimpleAddress != nil {
-		s.WriteString(schemas.ContactChannelAddress_SimpleAddress, *v.SimpleAddress)
-	}
-}
-func (v *ContactChannelAddress) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContactChannelAddress, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContactChannelAddress_SimpleAddress:
-			v.SimpleAddress = new(string)
-			return d.ReadString(schemas.ContactChannelAddress_SimpleAddress, v.SimpleAddress)
-		}
-		return nil
-	})
-}
-
 // The contact that Incident Manager is engaging during an incident.
 type ContactTargetInfo struct {
 
@@ -288,34 +130,6 @@ type ContactTargetInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ContactTargetInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContactTargetInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContactTargetInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactId != nil {
-		s.WriteString(schemas.ContactTargetInfo_ContactId, *v.ContactId)
-	}
-	if v.IsEssential != nil {
-		s.WriteBool(schemas.ContactTargetInfo_IsEssential, *v.IsEssential)
-	}
-}
-func (v *ContactTargetInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContactTargetInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContactTargetInfo_ContactId:
-			v.ContactId = new(string)
-			return d.ReadString(schemas.ContactTargetInfo_ContactId, v.ContactId)
-		case schemas.ContactTargetInfo_IsEssential:
-			v.IsEssential = new(bool)
-			return d.ReadBool(schemas.ContactTargetInfo_IsEssential, v.IsEssential)
-		}
-		return nil
-	})
-}
-
 // Information about when an on-call shift begins and ends.
 type CoverageTime struct {
 
@@ -326,38 +140,6 @@ type CoverageTime struct {
 	Start *HandOffTime
 
 	noSmithyDocumentSerde
-}
-
-func (v *CoverageTime) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CoverageTime)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CoverageTime) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.End != nil {
-		s.WriteStruct(schemas.CoverageTime_End)
-		v.End.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Start != nil {
-		s.WriteStruct(schemas.CoverageTime_Start)
-		v.Start.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CoverageTime) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CoverageTime, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CoverageTime_End:
-			v.End = &HandOffTime{}
-			return v.End.Deserialize(d)
-		case schemas.CoverageTime_Start:
-			v.Start = &HandOffTime{}
-			return v.Start.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Information about a resource that another resource is related to or depends on.
@@ -378,31 +160,6 @@ type DependentEntity struct {
 	RelationType *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DependentEntity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DependentEntity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DependentEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.DependentEntity_DependentResourceIds, v.DependentResourceIds)
-	if v.RelationType != nil {
-		s.WriteString(schemas.DependentEntity_RelationType, *v.RelationType)
-	}
-}
-func (v *DependentEntity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DependentEntity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DependentEntity_DependentResourceIds:
-			return deserializeSsmContactsArnList(d, schemas.DependentEntity_DependentResourceIds, &v.DependentResourceIds)
-		case schemas.DependentEntity_RelationType:
-			v.RelationType = new(string)
-			return d.ReadString(schemas.DependentEntity_RelationType, v.RelationType)
-		}
-		return nil
-	})
 }
 
 // Incident Manager reaching out to a contact or escalation plan to engage contact
@@ -436,58 +193,6 @@ type Engagement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Engagement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Engagement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Engagement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactArn != nil {
-		s.WriteString(schemas.Engagement_ContactArn, *v.ContactArn)
-	}
-	if v.EngagementArn != nil {
-		s.WriteString(schemas.Engagement_EngagementArn, *v.EngagementArn)
-	}
-	if v.IncidentId != nil {
-		s.WriteString(schemas.Engagement_IncidentId, *v.IncidentId)
-	}
-	if v.Sender != nil {
-		s.WriteString(schemas.Engagement_Sender, *v.Sender)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.Engagement_StartTime, *v.StartTime)
-	}
-	if v.StopTime != nil {
-		s.WriteTime(schemas.Engagement_StopTime, *v.StopTime)
-	}
-}
-func (v *Engagement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Engagement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Engagement_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.Engagement_ContactArn, v.ContactArn)
-		case schemas.Engagement_EngagementArn:
-			v.EngagementArn = new(string)
-			return d.ReadString(schemas.Engagement_EngagementArn, v.EngagementArn)
-		case schemas.Engagement_IncidentId:
-			v.IncidentId = new(string)
-			return d.ReadString(schemas.Engagement_IncidentId, v.IncidentId)
-		case schemas.Engagement_Sender:
-			v.Sender = new(string)
-			return d.ReadString(schemas.Engagement_Sender, v.Sender)
-		case schemas.Engagement_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.Engagement_StartTime, v.StartTime)
-		case schemas.Engagement_StopTime:
-			v.StopTime = new(time.Time)
-			return d.ReadTime(schemas.Engagement_StopTime, v.StopTime)
-		}
-		return nil
-	})
-}
-
 // Details about when an on-call rotation shift begins or ends.
 type HandOffTime struct {
 
@@ -504,28 +209,6 @@ type HandOffTime struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HandOffTime) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HandOffTime)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HandOffTime) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt32(schemas.HandOffTime_HourOfDay, v.HourOfDay)
-	s.WriteInt32(schemas.HandOffTime_MinuteOfHour, v.MinuteOfHour)
-}
-func (v *HandOffTime) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HandOffTime, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HandOffTime_HourOfDay:
-			return d.ReadInt32(schemas.HandOffTime_HourOfDay, &v.HourOfDay)
-		case schemas.HandOffTime_MinuteOfHour:
-			return d.ReadInt32(schemas.HandOffTime_MinuteOfHour, &v.MinuteOfHour)
-		}
-		return nil
-	})
-}
-
 // Information about on-call rotations that recur monthly.
 type MonthlySetting struct {
 
@@ -540,36 +223,6 @@ type MonthlySetting struct {
 	HandOffTime *HandOffTime
 
 	noSmithyDocumentSerde
-}
-
-func (v *MonthlySetting) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonthlySetting)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonthlySetting) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfMonth != nil {
-		s.WriteInt32(schemas.MonthlySetting_DayOfMonth, *v.DayOfMonth)
-	}
-	if v.HandOffTime != nil {
-		s.WriteStruct(schemas.MonthlySetting_HandOffTime)
-		v.HandOffTime.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MonthlySetting) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonthlySetting, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonthlySetting_DayOfMonth:
-			v.DayOfMonth = new(int32)
-			return d.ReadInt32(schemas.MonthlySetting_DayOfMonth, v.DayOfMonth)
-		case schemas.MonthlySetting_HandOffTime:
-			v.HandOffTime = &HandOffTime{}
-			return v.HandOffTime.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Incident Manager engaging a contact's contact channel.
@@ -610,70 +263,6 @@ type Page struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Page) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Page)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Page) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactArn != nil {
-		s.WriteString(schemas.Page_ContactArn, *v.ContactArn)
-	}
-	if v.DeliveryTime != nil {
-		s.WriteTime(schemas.Page_DeliveryTime, *v.DeliveryTime)
-	}
-	if v.EngagementArn != nil {
-		s.WriteString(schemas.Page_EngagementArn, *v.EngagementArn)
-	}
-	if v.IncidentId != nil {
-		s.WriteString(schemas.Page_IncidentId, *v.IncidentId)
-	}
-	if v.PageArn != nil {
-		s.WriteString(schemas.Page_PageArn, *v.PageArn)
-	}
-	if v.ReadTime != nil {
-		s.WriteTime(schemas.Page_ReadTime, *v.ReadTime)
-	}
-	if v.Sender != nil {
-		s.WriteString(schemas.Page_Sender, *v.Sender)
-	}
-	if v.SentTime != nil {
-		s.WriteTime(schemas.Page_SentTime, *v.SentTime)
-	}
-}
-func (v *Page) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Page, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Page_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.Page_ContactArn, v.ContactArn)
-		case schemas.Page_DeliveryTime:
-			v.DeliveryTime = new(time.Time)
-			return d.ReadTime(schemas.Page_DeliveryTime, v.DeliveryTime)
-		case schemas.Page_EngagementArn:
-			v.EngagementArn = new(string)
-			return d.ReadString(schemas.Page_EngagementArn, v.EngagementArn)
-		case schemas.Page_IncidentId:
-			v.IncidentId = new(string)
-			return d.ReadString(schemas.Page_IncidentId, v.IncidentId)
-		case schemas.Page_PageArn:
-			v.PageArn = new(string)
-			return d.ReadString(schemas.Page_PageArn, v.PageArn)
-		case schemas.Page_ReadTime:
-			v.ReadTime = new(time.Time)
-			return d.ReadTime(schemas.Page_ReadTime, v.ReadTime)
-		case schemas.Page_Sender:
-			v.Sender = new(string)
-			return d.ReadString(schemas.Page_Sender, v.Sender)
-		case schemas.Page_SentTime:
-			v.SentTime = new(time.Time)
-			return d.ReadTime(schemas.Page_SentTime, v.SentTime)
-		}
-		return nil
-	})
-}
-
 // Information about the stages and on-call rotation teams associated with an
 // escalation plan or engagement plan.
 type Plan struct {
@@ -689,28 +278,6 @@ type Plan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Plan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Plan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.Plan_RotationIds, v.RotationIds)
-	serializeStagesList(s, schemas.Plan_Stages, v.Stages)
-}
-func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Plan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Plan_RotationIds:
-			return deserializeSsmContactsArnList(d, schemas.Plan_RotationIds, &v.RotationIds)
-		case schemas.Plan_Stages:
-			return deserializeStagesList(d, schemas.Plan_Stages, &v.Stages)
-		}
-		return nil
-	})
-}
-
 // Information about contacts and times that an on-call override replaces.
 type PreviewOverride struct {
 
@@ -724,37 +291,6 @@ type PreviewOverride struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *PreviewOverride) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PreviewOverride)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PreviewOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.PreviewOverride_EndTime, *v.EndTime)
-	}
-	serializeRotationOverridePreviewMemberList(s, schemas.PreviewOverride_NewMembers, v.NewMembers)
-	if v.StartTime != nil {
-		s.WriteTime(schemas.PreviewOverride_StartTime, *v.StartTime)
-	}
-}
-func (v *PreviewOverride) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PreviewOverride, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PreviewOverride_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.PreviewOverride_EndTime, v.EndTime)
-		case schemas.PreviewOverride_NewMembers:
-			return deserializeRotationOverridePreviewMemberList(d, schemas.PreviewOverride_NewMembers, &v.NewMembers)
-		case schemas.PreviewOverride_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.PreviewOverride_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 // Records events during an engagement.
@@ -777,50 +313,6 @@ type Receipt struct {
 	ReceiptInfo *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Receipt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Receipt)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Receipt) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactChannelArn != nil {
-		s.WriteString(schemas.Receipt_ContactChannelArn, *v.ContactChannelArn)
-	}
-	if v.ReceiptInfo != nil {
-		s.WriteString(schemas.Receipt_ReceiptInfo, *v.ReceiptInfo)
-	}
-	if v.ReceiptTime != nil {
-		s.WriteTime(schemas.Receipt_ReceiptTime, *v.ReceiptTime)
-	}
-	if v.ReceiptType != "" {
-		s.WriteString(schemas.Receipt_ReceiptType, string(v.ReceiptType))
-	}
-}
-func (v *Receipt) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Receipt, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Receipt_ContactChannelArn:
-			v.ContactChannelArn = new(string)
-			return d.ReadString(schemas.Receipt_ContactChannelArn, v.ContactChannelArn)
-		case schemas.Receipt_ReceiptInfo:
-			v.ReceiptInfo = new(string)
-			return d.ReadString(schemas.Receipt_ReceiptInfo, v.ReceiptInfo)
-		case schemas.Receipt_ReceiptTime:
-			v.ReceiptTime = new(time.Time)
-			return d.ReadTime(schemas.Receipt_ReceiptTime, v.ReceiptTime)
-		case schemas.Receipt_ReceiptType:
-			var ev string
-			if err := d.ReadString(schemas.Receipt_ReceiptType, &ev); err != nil {
-				return err
-			}
-			v.ReceiptType = ReceiptType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Information about when an on-call rotation is in effect and how long the
@@ -856,46 +348,6 @@ type RecurrenceSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RecurrenceSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecurrenceSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecurrenceSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDailySettings(s, schemas.RecurrenceSettings_DailySettings, v.DailySettings)
-	serializeMonthlySettings(s, schemas.RecurrenceSettings_MonthlySettings, v.MonthlySettings)
-	if v.NumberOfOnCalls != nil {
-		s.WriteInt32(schemas.RecurrenceSettings_NumberOfOnCalls, *v.NumberOfOnCalls)
-	}
-	if v.RecurrenceMultiplier != nil {
-		s.WriteInt32(schemas.RecurrenceSettings_RecurrenceMultiplier, *v.RecurrenceMultiplier)
-	}
-	serializeShiftCoveragesMap(s, schemas.RecurrenceSettings_ShiftCoverages, v.ShiftCoverages)
-	serializeWeeklySettings(s, schemas.RecurrenceSettings_WeeklySettings, v.WeeklySettings)
-}
-func (v *RecurrenceSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecurrenceSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecurrenceSettings_DailySettings:
-			return deserializeDailySettings(d, schemas.RecurrenceSettings_DailySettings, &v.DailySettings)
-		case schemas.RecurrenceSettings_MonthlySettings:
-			return deserializeMonthlySettings(d, schemas.RecurrenceSettings_MonthlySettings, &v.MonthlySettings)
-		case schemas.RecurrenceSettings_NumberOfOnCalls:
-			v.NumberOfOnCalls = new(int32)
-			return d.ReadInt32(schemas.RecurrenceSettings_NumberOfOnCalls, v.NumberOfOnCalls)
-		case schemas.RecurrenceSettings_RecurrenceMultiplier:
-			v.RecurrenceMultiplier = new(int32)
-			return d.ReadInt32(schemas.RecurrenceSettings_RecurrenceMultiplier, v.RecurrenceMultiplier)
-		case schemas.RecurrenceSettings_ShiftCoverages:
-			return deserializeShiftCoveragesMap(d, schemas.RecurrenceSettings_ShiftCoverages, &v.ShiftCoverages)
-		case schemas.RecurrenceSettings_WeeklySettings:
-			return deserializeWeeklySettings(d, schemas.RecurrenceSettings_WeeklySettings, &v.WeeklySettings)
-		}
-		return nil
-	})
-}
-
 // Information about the engagement resolution steps. The resolution starts from
 // the first contact, which can be an escalation plan, then resolves to an on-call
 // rotation, and finally to a personal contact.
@@ -920,44 +372,6 @@ type ResolutionContact struct {
 	StageIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResolutionContact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResolutionContact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResolutionContact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactArn != nil {
-		s.WriteString(schemas.ResolutionContact_ContactArn, *v.ContactArn)
-	}
-	if v.StageIndex != nil {
-		s.WriteInt32(schemas.ResolutionContact_StageIndex, *v.StageIndex)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ResolutionContact_Type, string(v.Type))
-	}
-}
-func (v *ResolutionContact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResolutionContact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResolutionContact_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.ResolutionContact_ContactArn, v.ContactArn)
-		case schemas.ResolutionContact_StageIndex:
-			v.StageIndex = new(int32)
-			return d.ReadInt32(schemas.ResolutionContact_StageIndex, v.StageIndex)
-		case schemas.ResolutionContact_Type:
-			var ev string
-			if err := d.ReadString(schemas.ResolutionContact_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ContactType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Information about a rotation in an on-call schedule.
@@ -989,57 +403,6 @@ type Rotation struct {
 	TimeZoneId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Rotation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Rotation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Rotation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.Rotation_ContactIds, v.ContactIds)
-	if v.Name != nil {
-		s.WriteString(schemas.Rotation_Name, *v.Name)
-	}
-	if v.Recurrence != nil {
-		s.WriteStruct(schemas.Rotation_Recurrence)
-		v.Recurrence.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RotationArn != nil {
-		s.WriteString(schemas.Rotation_RotationArn, *v.RotationArn)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.Rotation_StartTime, *v.StartTime)
-	}
-	if v.TimeZoneId != nil {
-		s.WriteString(schemas.Rotation_TimeZoneId, *v.TimeZoneId)
-	}
-}
-func (v *Rotation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Rotation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Rotation_ContactIds:
-			return deserializeSsmContactsArnList(d, schemas.Rotation_ContactIds, &v.ContactIds)
-		case schemas.Rotation_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Rotation_Name, v.Name)
-		case schemas.Rotation_Recurrence:
-			v.Recurrence = &RecurrenceSettings{}
-			return v.Recurrence.Deserialize(d)
-		case schemas.Rotation_RotationArn:
-			v.RotationArn = new(string)
-			return d.ReadString(schemas.Rotation_RotationArn, v.RotationArn)
-		case schemas.Rotation_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.Rotation_StartTime, v.StartTime)
-		case schemas.Rotation_TimeZoneId:
-			v.TimeZoneId = new(string)
-			return d.ReadString(schemas.Rotation_TimeZoneId, v.TimeZoneId)
-		}
-		return nil
-	})
 }
 
 // Information about an override specified for an on-call rotation.
@@ -1074,49 +437,6 @@ type RotationOverride struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RotationOverride) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RotationOverride)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RotationOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.RotationOverride_CreateTime, *v.CreateTime)
-	}
-	if v.EndTime != nil {
-		s.WriteTime(schemas.RotationOverride_EndTime, *v.EndTime)
-	}
-	serializeSsmContactsArnList(s, schemas.RotationOverride_NewContactIds, v.NewContactIds)
-	if v.RotationOverrideId != nil {
-		s.WriteString(schemas.RotationOverride_RotationOverrideId, *v.RotationOverrideId)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.RotationOverride_StartTime, *v.StartTime)
-	}
-}
-func (v *RotationOverride) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RotationOverride, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RotationOverride_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.RotationOverride_CreateTime, v.CreateTime)
-		case schemas.RotationOverride_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.RotationOverride_EndTime, v.EndTime)
-		case schemas.RotationOverride_NewContactIds:
-			return deserializeSsmContactsArnList(d, schemas.RotationOverride_NewContactIds, &v.NewContactIds)
-		case schemas.RotationOverride_RotationOverrideId:
-			v.RotationOverrideId = new(string)
-			return d.ReadString(schemas.RotationOverride_RotationOverrideId, v.RotationOverrideId)
-		case schemas.RotationOverride_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.RotationOverride_StartTime, v.StartTime)
-		}
-		return nil
-	})
-}
-
 // Information about a shift that belongs to an on-call rotation.
 type RotationShift struct {
 
@@ -1143,55 +463,6 @@ type RotationShift struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RotationShift) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RotationShift)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RotationShift) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.RotationShift_ContactIds, v.ContactIds)
-	if v.EndTime != nil {
-		s.WriteTime(schemas.RotationShift_EndTime, *v.EndTime)
-	}
-	if v.ShiftDetails != nil {
-		s.WriteStruct(schemas.RotationShift_ShiftDetails)
-		v.ShiftDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.RotationShift_StartTime, *v.StartTime)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RotationShift_Type, string(v.Type))
-	}
-}
-func (v *RotationShift) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RotationShift, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RotationShift_ContactIds:
-			return deserializeSsmContactsArnList(d, schemas.RotationShift_ContactIds, &v.ContactIds)
-		case schemas.RotationShift_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.RotationShift_EndTime, v.EndTime)
-		case schemas.RotationShift_ShiftDetails:
-			v.ShiftDetails = &ShiftDetails{}
-			return v.ShiftDetails.Deserialize(d)
-		case schemas.RotationShift_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.RotationShift_StartTime, v.StartTime)
-		case schemas.RotationShift_Type:
-			var ev string
-			if err := d.ReadString(schemas.RotationShift_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ShiftType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Information about overrides to an on-call rotation shift.
 type ShiftDetails struct {
 
@@ -1203,25 +474,6 @@ type ShiftDetails struct {
 	OverriddenContactIds []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ShiftDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ShiftDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ShiftDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.ShiftDetails_OverriddenContactIds, v.OverriddenContactIds)
-}
-func (v *ShiftDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ShiftDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ShiftDetails_OverriddenContactIds:
-			return deserializeSsmContactsArnList(d, schemas.ShiftDetails_OverriddenContactIds, &v.OverriddenContactIds)
-		}
-		return nil
-	})
 }
 
 // A set amount of time that an escalation plan or engagement plan engages the
@@ -1243,31 +495,6 @@ type Stage struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Stage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Stage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Stage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationInMinutes != nil {
-		s.WriteInt32(schemas.Stage_DurationInMinutes, *v.DurationInMinutes)
-	}
-	serializeTargetsList(s, schemas.Stage_Targets, v.Targets)
-}
-func (v *Stage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Stage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Stage_DurationInMinutes:
-			v.DurationInMinutes = new(int32)
-			return d.ReadInt32(schemas.Stage_DurationInMinutes, v.DurationInMinutes)
-		case schemas.Stage_Targets:
-			return deserializeTargetsList(d, schemas.Stage_Targets, &v.Targets)
-		}
-		return nil
-	})
-}
-
 // A container of a key-value name pair.
 type Tag struct {
 
@@ -1278,34 +505,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The contact or contact channel that's being engaged.
@@ -1320,38 +519,6 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Target) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Target)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelTargetInfo != nil {
-		s.WriteStruct(schemas.Target_ChannelTargetInfo)
-		v.ChannelTargetInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ContactTargetInfo != nil {
-		s.WriteStruct(schemas.Target_ContactTargetInfo)
-		v.ContactTargetInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Target_ChannelTargetInfo:
-			v.ChannelTargetInfo = &ChannelTargetInfo{}
-			return v.ChannelTargetInfo.Deserialize(d)
-		case schemas.Target_ContactTargetInfo:
-			v.ContactTargetInfo = &ContactTargetInfo{}
-			return v.ContactTargetInfo.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A range of between two set times
 type TimeRange struct {
 
@@ -1362,34 +529,6 @@ type TimeRange struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.TimeRange_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.TimeRange_StartTime, *v.StartTime)
-	}
-}
-func (v *TimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeRange_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.TimeRange_EndTime, v.EndTime)
-		case schemas.TimeRange_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.TimeRange_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 // Provides information about which field caused the exception.
@@ -1408,34 +547,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
-		case schemas.ValidationExceptionField_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Information about rotations that recur weekly.
 type WeeklySetting struct {
 
@@ -1450,40 +561,6 @@ type WeeklySetting struct {
 	HandOffTime *HandOffTime
 
 	noSmithyDocumentSerde
-}
-
-func (v *WeeklySetting) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WeeklySetting)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WeeklySetting) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfWeek != "" {
-		s.WriteString(schemas.WeeklySetting_DayOfWeek, string(v.DayOfWeek))
-	}
-	if v.HandOffTime != nil {
-		s.WriteStruct(schemas.WeeklySetting_HandOffTime)
-		v.HandOffTime.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WeeklySetting) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WeeklySetting, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WeeklySetting_DayOfWeek:
-			var ev string
-			if err := d.ReadString(schemas.WeeklySetting_DayOfWeek, &ev); err != nil {
-				return err
-			}
-			v.DayOfWeek = DayOfWeek(ev)
-			return nil
-		case schemas.WeeklySetting_HandOffTime:
-			v.HandOffTime = &HandOffTime{}
-			return v.HandOffTime.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

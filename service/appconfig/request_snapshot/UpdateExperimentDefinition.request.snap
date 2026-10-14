@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__
+
+Content-Type: application/json
+
+{"AudienceDescription":"__AudienceDescription__","AudienceRule":"__AudienceRule__","Control":{"Description":"__Description__","FlagValue":{"AttributeValues":{"key0":{"StringValue":"__AttributeValueMemberStringValue__"}},"Enabled":true},"Weight":1},"Hypothesis":"__Hypothesis__","LaunchCriteria":"__LaunchCriteria__","Treatments":[{"Description":"__Description__","FlagValue":{"AttributeValues":{"key0":{"StringValue":"__AttributeValueMemberStringValue__"}},"Enabled":true},"Weight":1},{"Description":"__Description__","FlagValue":{"AttributeValues":{"key0":{"StringValue":"__AttributeValueMemberStringValue__"}},"Enabled":true},"Weight":1}]}

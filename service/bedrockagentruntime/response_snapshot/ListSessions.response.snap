@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sessionSummaries":[{"createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","sessionArn":"__SessionArn__","sessionId":"__SessionId__","sessionStatus":"ACTIVE"},{"createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","sessionArn":"__SessionArn__","sessionId":"__SessionId__","sessionStatus":"ACTIVE"}]}

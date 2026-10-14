@@ -1,0 +1,5 @@
+POST /anomalies/insight/__InsightId__
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","Filters":{"ServiceCollection":{"ServiceNames":["API_GATEWAY","API_GATEWAY"]}},"MaxResults":1,"NextToken":"__NextToken__","StartTimeRange":{"FromTime":946684800,"ToTime":946684800}}

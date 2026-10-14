@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/ListArchiveSearches
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£iArchiveIdm__ArchiveId__iNextTokenm__NextToken__hPageSize

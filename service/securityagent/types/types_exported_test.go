@@ -7,12 +7,88 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
 )
 
+func ExampleCaCertificateSource_outputUsage() {
+	var union types.CaCertificateSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CaCertificateSourceMemberArtifactId:
+		_ = v.Value // Value is string
+
+	case *types.CaCertificateSourceMemberInlinePem:
+		_ = v.Value // Value is string
+
+	case *types.CaCertificateSourceMemberS3Location:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
+
+func ExampleDiffSource_outputUsage() {
+	var union types.DiffSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DiffSourceMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleImportSource_outputUsage() {
+	var union types.ImportSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImportSourceMemberDocuments:
+		_ = v.Value // Value is []types.SecurityRequirementArtifact
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.SecurityRequirementArtifact
+
 func ExampleIntegratedResource_outputUsage() {
 	var union types.IntegratedResource
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IntegratedResourceMemberAzureDevOpsRepository:
+		_ = v.Value // Value is types.AzureDevOpsRepositoryResource
+
+	case *types.IntegratedResourceMemberBitbucketRepository:
+		_ = v.Value // Value is types.BitbucketRepositoryResource
+
+	case *types.IntegratedResourceMemberConfluenceDocument:
+		_ = v.Value // Value is types.ConfluenceDocumentResource
+
 	case *types.IntegratedResourceMemberGithubRepository:
 		_ = v.Value // Value is types.GitHubRepositoryResource
+
+	case *types.IntegratedResourceMemberGitlabRepository:
+		_ = v.Value // Value is types.GitLabRepositoryResource
+
+	case *types.IntegratedResourceMemberJiraProject:
+		_ = v.Value // Value is types.JiraProjectResource
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -24,13 +100,33 @@ func ExampleIntegratedResource_outputUsage() {
 }
 
 var _ *types.GitHubRepositoryResource
+var _ *types.BitbucketRepositoryResource
+var _ *types.ConfluenceDocumentResource
+var _ *types.GitLabRepositoryResource
+var _ *types.JiraProjectResource
+var _ *types.AzureDevOpsRepositoryResource
 
 func ExampleIntegratedResourceMetadata_outputUsage() {
 	var union types.IntegratedResourceMetadata
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IntegratedResourceMetadataMemberAzureDevOpsRepository:
+		_ = v.Value // Value is types.AzureDevOpsRepositoryMetadata
+
+	case *types.IntegratedResourceMetadataMemberBitbucketRepository:
+		_ = v.Value // Value is types.BitbucketRepositoryMetadata
+
+	case *types.IntegratedResourceMetadataMemberConfluenceDocument:
+		_ = v.Value // Value is types.ConfluenceDocumentMetadata
+
 	case *types.IntegratedResourceMetadataMemberGithubRepository:
 		_ = v.Value // Value is types.GitHubRepositoryMetadata
+
+	case *types.IntegratedResourceMetadataMemberGitlabRepository:
+		_ = v.Value // Value is types.GitLabRepositoryMetadata
+
+	case *types.IntegratedResourceMetadataMemberJiraProject:
+		_ = v.Value // Value is types.JiraProjectMetadata
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -42,6 +138,11 @@ func ExampleIntegratedResourceMetadata_outputUsage() {
 }
 
 var _ *types.GitHubRepositoryMetadata
+var _ *types.BitbucketRepositoryMetadata
+var _ *types.JiraProjectMetadata
+var _ *types.AzureDevOpsRepositoryMetadata
+var _ *types.GitLabRepositoryMetadata
+var _ *types.ConfluenceDocumentMetadata
 
 func ExampleIntegrationFilter_outputUsage() {
 	var union types.IntegrationFilter
@@ -101,12 +202,15 @@ func ExampleMembershipConfig_outputUsage() {
 
 var _ *types.UserConfig
 
-func ExampleProviderInput_outputUsage() {
-	var union types.ProviderInput
+func ExamplePrivateConnectionMode_outputUsage() {
+	var union types.PrivateConnectionMode
 	// type switches can be used to check the union value
 	switch v := union.(type) {
-	case *types.ProviderInputMemberGithub:
-		_ = v.Value // Value is types.GitHubIntegrationInput
+	case *types.PrivateConnectionModeMemberSelfManaged:
+		_ = v.Value // Value is types.SelfManagedInput
+
+	case *types.PrivateConnectionModeMemberServiceManaged:
+		_ = v.Value // Value is types.ServiceManagedInput
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -117,14 +221,72 @@ func ExampleProviderInput_outputUsage() {
 	}
 }
 
+var _ *types.SelfManagedInput
+var _ *types.ServiceManagedInput
+
+func ExampleProviderInput_outputUsage() {
+	var union types.ProviderInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderInputMemberAzureDevOps:
+		_ = v.Value // Value is types.AzureDevOpsIntegrationInput
+
+	case *types.ProviderInputMemberBitbucket:
+		_ = v.Value // Value is types.BitbucketIntegrationInput
+
+	case *types.ProviderInputMemberBitbucketDataCenter:
+		_ = v.Value // Value is types.BitbucketDataCenterIntegrationInput
+
+	case *types.ProviderInputMemberConfluence:
+		_ = v.Value // Value is types.ConfluenceIntegrationInput
+
+	case *types.ProviderInputMemberGithub:
+		_ = v.Value // Value is types.GitHubIntegrationInput
+
+	case *types.ProviderInputMemberGitlab:
+		_ = v.Value // Value is types.GitLabIntegrationInput
+
+	case *types.ProviderInputMemberJira:
+		_ = v.Value // Value is types.JiraIntegrationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureDevOpsIntegrationInput
+var _ *types.BitbucketIntegrationInput
+var _ *types.GitLabIntegrationInput
+var _ *types.BitbucketDataCenterIntegrationInput
+var _ *types.JiraIntegrationInput
+var _ *types.ConfluenceIntegrationInput
 var _ *types.GitHubIntegrationInput
 
 func ExampleProviderResourceCapabilities_outputUsage() {
 	var union types.ProviderResourceCapabilities
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderResourceCapabilitiesMemberAzureDevOps:
+		_ = v.Value // Value is types.AzureDevOpsResourceCapabilities
+
+	case *types.ProviderResourceCapabilitiesMemberBitbucket:
+		_ = v.Value // Value is types.BitbucketResourceCapabilities
+
+	case *types.ProviderResourceCapabilitiesMemberConfluence:
+		_ = v.Value // Value is types.ConfluenceResourceCapabilities
+
 	case *types.ProviderResourceCapabilitiesMemberGithub:
 		_ = v.Value // Value is types.GitHubResourceCapabilities
+
+	case *types.ProviderResourceCapabilitiesMemberGitlab:
+		_ = v.Value // Value is types.GitLabResourceCapabilities
+
+	case *types.ProviderResourceCapabilitiesMemberJira:
+		_ = v.Value // Value is types.JiraResourceCapabilities
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -135,4 +297,9 @@ func ExampleProviderResourceCapabilities_outputUsage() {
 	}
 }
 
+var _ *types.BitbucketResourceCapabilities
+var _ *types.GitLabResourceCapabilities
+var _ *types.ConfluenceResourceCapabilities
 var _ *types.GitHubResourceCapabilities
+var _ *types.AzureDevOpsResourceCapabilities
+var _ *types.JiraResourceCapabilities

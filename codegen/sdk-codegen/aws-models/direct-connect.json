@@ -296,6 +296,9 @@
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
                 }
             ],
@@ -349,6 +352,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
@@ -406,6 +412,9 @@
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
                 }
             ],
@@ -459,6 +468,55 @@
         "com.amazonaws.directconnect#AmazonAddress": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#AsPathList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#LongAsn"
+            }
+        },
+        "com.amazonaws.directconnect#AsPathSegment": {
+            "type": "structure",
+            "members": {
+                "pathType": {
+                    "target": "com.amazonaws.directconnect#AsPathType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AS path segment.</p>\n         <p>The valid values are <code>seq</code> (an ordered <code>AS_SEQUENCE</code>) and <code>set</code> (an unordered <code>AS_SET</code>).</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.directconnect#AsPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autonomous system (AS) numbers in the segment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A segment of an autonomous system (AS) path.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#AsPathSegmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#AsPathSegment"
+            }
+        },
+        "com.amazonaws.directconnect#AsPathType": {
+            "type": "enum",
+            "members": {
+                "Seq": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "seq"
+                    }
+                },
+                "Set": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "set"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#AssociateConnectionWithLag": {
             "type": "operation",
             "input": {
@@ -473,6 +531,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
                 }
             ],
             "traits": {
@@ -499,6 +560,71 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates one or more connections with the specified resiliency group. This operation is\n      atomic: either all of the specified connections are associated, or the operation fails and no\n      changes are made.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "connectionIdentifiers": {
+                    "target": "com.amazonaws.directconnect#ConnectionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs or ARNs of the connections to associate with the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.directconnect#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupAssociations": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection associations for the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#AssociateHostedConnection": {
@@ -719,6 +845,38 @@
         "com.amazonaws.directconnect#AssociatedGatewayId": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#AvailableBillingMode": {
+            "type": "structure",
+            "members": {
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode.</p>"
+                    }
+                },
+                "availablePortSpeeds": {
+                    "target": "com.amazonaws.directconnect#AvailablePortSpeeds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port speeds available for the billing mode.</p>"
+                    }
+                },
+                "includedRegions": {
+                    "target": "com.amazonaws.directconnect#IncludedRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions included with the billing mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a billing mode available at an Direct Connect location.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#AvailableBillingModeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#AvailableBillingMode"
+            }
+        },
         "com.amazonaws.directconnect#AvailableMacSecPortSpeeds": {
             "type": "list",
             "member": {
@@ -759,13 +917,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "authKey": {
@@ -897,6 +1055,77 @@
         "com.amazonaws.directconnect#Bandwidth": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#BillingMode": {
+            "type": "enum",
+            "members": {
+                "PayAsYouGo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PayAsYouGo"
+                    }
+                },
+                "FlatRateTier1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier1"
+                    }
+                },
+                "FlatRateTier2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier2"
+                    }
+                },
+                "FlatRateTier3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier3"
+                    }
+                },
+                "FlatRateTier4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier4"
+                    }
+                },
+                "FlatRateTier5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier5"
+                    }
+                },
+                "PortPairFlatRateTier1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PortPairFlatRateTier1"
+                    }
+                },
+                "PortPairFlatRateTier2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PortPairFlatRateTier2"
+                    }
+                },
+                "PortPairFlatRateTier3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PortPairFlatRateTier3"
+                    }
+                },
+                "PortPairFlatRateTier4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PortPairFlatRateTier4"
+                    }
+                },
+                "PortPairFlatRateTier5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PortPairFlatRateTier5"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#BooleanFlag": {
             "type": "boolean",
             "traits": {
@@ -911,6 +1140,15 @@
         },
         "com.amazonaws.directconnect#Ckn": {
             "type": "string"
+        },
+        "com.amazonaws.directconnect#CommunityEntry": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#CommunityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#CommunityEntry"
+            }
         },
         "com.amazonaws.directconnect#ConfirmConnection": {
             "type": "operation",
@@ -1311,10 +1549,46 @@
                         "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the connection.</p>"
                     }
                 },
+                "rateLimiterStatus": {
+                    "target": "com.amazonaws.directconnect#RateLimiterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limiter status for the connection, including how many rate limiters are in use and the maximum allowed.</p>"
+                    }
+                },
                 "partnerInterconnectMacSecCapable": {
                     "target": "com.amazonaws.directconnect#PartnerInterconnectMacSecCapable",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the interconnect hosting this connection supports MAC Security (MACsec).</p>"
+                    }
+                },
+                "prefixPoolSizeIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>"
+                    }
+                },
+                "prefixPoolSizeIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the connection. Not applicable to hosted connections or interconnects.</p>"
+                    }
+                },
+                "prefixPoolUnallocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolUnallocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>"
+                    }
+                },
+                "prefixPoolUnallocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolUnallocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes in the connection prefix pool not yet allocated to a virtual interface. Not applicable to hosted connections or interconnects.</p>"
+                    }
+                },
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode of the connection.</p>"
                     }
                 }
             },
@@ -1322,8 +1596,50 @@
                 "smithy.api#documentation": "<p>Information about an Direct Connect connection.</p>"
             }
         },
+        "com.amazonaws.directconnect#ConnectionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.directconnect#ConnectionId": {
             "type": "string"
+        },
+        "com.amazonaws.directconnect#ConnectionIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#ConnectionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.directconnect#ConnectionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.directconnect#ConnectionIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#ConnectionIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
         },
         "com.amazonaws.directconnect#ConnectionList": {
             "type": "list",
@@ -1562,6 +1878,12 @@
                     "target": "com.amazonaws.directconnect#RequestMACSec",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether you want the connection to support MAC Security (MACsec).</p>\n         <p>MAC Security (MACsec) is unavailable on hosted connections. For information about MAC Security (MACsec) prerequisites, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html\">MAC Security in Direct Connect</a> in the <i>Direct Connect User Guide</i>.</p>"
+                    }
+                },
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#RequestBillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the connection.</p>"
                     }
                 }
             },
@@ -1938,6 +2260,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the connection will support MAC Security (MACsec).</p>\n         <note>\n            <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>\n         </note>"
                     }
+                },
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#RequestBillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode for the LAG.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1961,6 +2289,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
@@ -2011,6 +2342,9 @@
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
                 }
             ],
@@ -2040,6 +2374,83 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.directconnect#CreateResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#CreateResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#CreateResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a resiliency group. A resiliency group lets you group Direct Connect connections together\n      and manage them as a single unit to meet a target resiliency model.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#CreateResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupName": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "intendedResiliencyModel": {
+                    "target": "com.amazonaws.directconnect#ResiliencyModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resiliency model that the resiliency group is intended to meet. The valid values are\n      <code>maximum-resiliency</code>, <code>high-resiliency</code>, and\n      <code>basic-resiliency</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.directconnect#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.directconnect#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#CreateResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroup": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directconnect#CreateTransitVirtualInterface": {
             "type": "operation",
             "input": {
@@ -2057,6 +2468,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#DuplicateTagKeysException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.directconnect#TooManyTagsException"
@@ -2158,13 +2572,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "customerAddress": {
@@ -2473,6 +2887,55 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#DeleteResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#DeleteResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#DeleteResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified resiliency group. Deletion is asynchronous: the resiliency group\n      transitions through the <code>deleting</code> state before it reaches the\n      <code>deleted</code> state. The response returns the resiliency group so you can observe its\n      current state without a subsequent <a>GetResiliencyGroup</a> call.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#DeleteResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#DeleteResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroup": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#DeleteVirtualInterface": {
@@ -3462,7 +3925,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays all virtual interfaces for an Amazon Web Services account. Virtual interfaces deleted fewer\n      than 15 minutes before you make the request are also returned. If you specify a\n      connection ID, only the virtual interfaces associated with the connection are returned.\n      If you specify a virtual interface ID, then only a single virtual interface is returned.</p>\n         <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>\n         <ul>\n            <li>\n               <p>If you're using an <code>asn</code>, the response includes ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you're using <code>asnLong</code>, the response returns a value of <code>0</code> (zero) for the <code>asn</code> attribute because it exceeds the highest ASN value of 2,147,483,647 that it can support</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Displays all virtual interfaces for an Amazon Web Services account. Virtual interfaces deleted fewer\n      than 15 minutes before you make the request are also returned. If you specify a\n      connection ID, only the virtual interfaces associated with the connection are returned.\n      If you specify a virtual interface ID, then only a single virtual interface is returned.</p>\n         <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>\n         <ul>\n            <li>\n               <p>If you're using an <code>asn</code>, the response includes the ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you're using <code>asnLong</code>, the response returns a value of <code>0</code> (zero) for the <code>asn</code> attribute because it exceeds the highest ASN value of 2,147,483,647 that it can support</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.directconnect#DescribeVirtualInterfacesRequest": {
@@ -3546,6 +4009,12 @@
                     "target": "com.amazonaws.directconnect#StateChangeError",
                     "traits": {
                         "smithy.api#documentation": "<p>The error message if the state of an object failed to advance.</p>"
+                    }
+                },
+                "totalPrefixPoolAllocations": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of inbound route prefixes allocated to the attachments on the Direct Connect gateway. The count combines the IPv4 and IPv6 address families.</p>"
                     }
                 },
                 "tags": {
@@ -3957,6 +4426,68 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates one or more connections from the specified resiliency group. This operation\n      is atomic: either all of the specified connections are disassociated, or the operation fails\n      and no changes are made.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "connectionIdentifiers": {
+                    "target": "com.amazonaws.directconnect#ConnectionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs or ARNs of the connections to disassociate from the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.directconnect#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupAssociations": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection associations for the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directconnect#DisassociateMacSecKey": {
             "type": "operation",
             "input": {
@@ -4069,6 +4600,55 @@
                 }
             }
         },
+        "com.amazonaws.directconnect#GetResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#GetResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#GetResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#GetResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#GetResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroup": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directconnect#HasLogicalRedundancy": {
             "type": "enum",
             "members": {
@@ -4090,6 +4670,21 @@
                         "smithy.api#enumValue": "no"
                     }
                 }
+            }
+        },
+        "com.amazonaws.directconnect#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.directconnect#IncludedRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#Region"
             }
         },
         "com.amazonaws.directconnect#Interconnect": {
@@ -4424,6 +5019,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the LAG.</p>"
                     }
+                },
+                "prefixPoolSizeIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of inbound IPv4 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>"
+                    }
+                },
+                "prefixPoolSizeIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of inbound IPv6 route prefixes you can allocate across the virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and support hosted connections.</p>"
+                    }
+                },
+                "prefixPoolUnallocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolUnallocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>"
+                    }
+                },
+                "prefixPoolUnallocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolUnallocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes in the LAG prefix pool not yet allocated to a virtual interface. Not applicable to LAGs that are interconnects and support hosted connections.</p>"
+                    }
+                },
+                "rateLimiterStatus": {
+                    "target": "com.amazonaws.directconnect#RateLimiterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limiter status for the LAG, including how many rate limiters are in use and the maximum allowed.</p>"
+                    }
+                },
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode of the LAG.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4504,6 +5135,224 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.directconnect#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.directconnect#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rate limiter limit has been exceeded for the connection. You cannot add more rate limiters to virtual interfaces on this connection.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroupAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#ListResiliencyGroupAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#ListResiliencyGroupAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the connection associations for the specified resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroupAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroupAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection associations for the resiliency group.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#ListResiliencyGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#ListResiliencyGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the resiliency groups owned by your Amazon Web Services account in the current\n      Amazon Web Services Region.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#ListResiliencyGroupsResult": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the resiliency groups.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directconnect#ListVirtualInterfaceRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#ListVirtualInterfaceRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#ListVirtualInterfaceRoutesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the routes for the specified virtual interface.</p>\n         <p>Use the <code>routeDirection</code> filter to control which routes are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>accepted</code>: routes received from the customer network over the virtual interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>advertised</code>: routes advertised to the customer network over the virtual interface.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.directconnect#ListVirtualInterfaceRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "virtualInterfaceId": {
+                    "target": "com.amazonaws.directconnect#VirtualInterfaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual interface.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.directconnect#RouteFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the routes returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.directconnect#MaxResultSetSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>\n         <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are\n      returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#ListVirtualInterfaceRoutesResponse": {
+            "type": "structure",
+            "members": {
+                "virtualInterfaceId": {
+                    "target": "com.amazonaws.directconnect#VirtualInterfaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual interface.</p>"
+                    }
+                },
+                "routes": {
+                    "target": "com.amazonaws.directconnect#RouteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routes for the virtual interface.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.directconnect#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.directconnect#ListVirtualInterfaceTestHistory": {
@@ -4665,6 +5514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The available MAC Security (MACsec) port speeds for the location.</p>"
                     }
+                },
+                "availableBillingModes": {
+                    "target": "com.amazonaws.directconnect#AvailableBillingModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing modes available at the location, including the port speeds and\n      Amazon Web Services Regions supported by each mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4811,13 +5666,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>\n         <p>The valid values are 1-2147483646.</p>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "mtu": {
@@ -4873,6 +5728,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
                     }
+                },
+                "prefixPoolAllocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes to allocate to the virtual interface.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes to allocate to the virtual interface.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4901,13 +5774,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>\n         <p>The valid values are 1-2147483646.</p>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ASN when allocating a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The ASN when allocating a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "mtu": {
@@ -4945,6 +5818,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the private virtual interface.</p>"
                     }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4973,13 +5852,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "authKey": {
@@ -5016,6 +5895,12 @@
                     "target": "com.amazonaws.directconnect#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the public virtual interface.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
                     }
                 }
             },
@@ -5045,13 +5930,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>\n         <p>The valid values are 1-2147483646.</p>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ASN when allocating a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The ASN when allocating a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "authKey": {
@@ -5089,6 +5974,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the public virtual interface.</p>"
                     }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5115,13 +6006,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for a new transit virtual interface.The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for a new transit virtual interface.The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "mtu": {
@@ -5171,6 +6062,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
                     }
+                },
+                "prefixPoolAllocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes to allocate to the virtual interface.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes to allocate to the virtual interface.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5197,13 +6106,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The valid values are 1-2147483646.</p>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>\n         <p>The valid values are 1-2147483646.</p>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ASN when allocating a new transit virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The ASN when allocating a new transit virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "mtu": {
@@ -5240,6 +6149,12 @@
                     "target": "com.amazonaws.directconnect#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the transitive virtual interface.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. The rate limit restricts the maximum bandwidth that the virtual interface can use on the parent connection.</p>"
                     }
                 }
             },
@@ -5291,6 +6206,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#AllocateTransitVirtualInterface"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#AssociateConnectionsToResiliencyGroup"
                 },
                 {
                     "target": "com.amazonaws.directconnect#AssociateConnectionWithLag"
@@ -5347,6 +6265,9 @@
                     "target": "com.amazonaws.directconnect#CreatePublicVirtualInterface"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#CreateResiliencyGroup"
+                },
+                {
                     "target": "com.amazonaws.directconnect#CreateTransitVirtualInterface"
                 },
                 {
@@ -5369,6 +6290,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#DeleteLag"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DeleteResiliencyGroup"
                 },
                 {
                     "target": "com.amazonaws.directconnect#DeleteVirtualInterface"
@@ -5431,7 +6355,22 @@
                     "target": "com.amazonaws.directconnect#DisassociateConnectionFromLag"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#DisassociateConnectionsFromResiliencyGroup"
+                },
+                {
                     "target": "com.amazonaws.directconnect#DisassociateMacSecKey"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#GetResiliencyGroup"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#ListResiliencyGroupAssociations"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#ListResiliencyGroups"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#ListVirtualInterfaceRoutes"
                 },
                 {
                     "target": "com.amazonaws.directconnect#ListVirtualInterfaceTestHistory"
@@ -5452,6 +6391,9 @@
                     "target": "com.amazonaws.directconnect#UpdateConnection"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#UpdateConnectionsBillingMode"
+                },
+                {
                     "target": "com.amazonaws.directconnect#UpdateDirectConnectGateway"
                 },
                 {
@@ -5459,6 +6401,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#UpdateLag"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#UpdateResiliencyGroup"
                 },
                 {
                     "target": "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributes"
@@ -6628,6 +7573,30 @@
         "com.amazonaws.directconnect#PortSpeed": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#PrefixPoolAllocatedCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.directconnect#PrefixPoolSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.directconnect#PrefixPoolUnallocatedCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.directconnect#ProviderList": {
             "type": "list",
             "member": {
@@ -6637,11 +7606,344 @@
         "com.amazonaws.directconnect#ProviderName": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#RateLimit": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#RateLimiterStatus": {
+            "type": "structure",
+            "members": {
+                "maxAllowed": {
+                    "target": "com.amazonaws.directconnect#Count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of rate limiters allowed on the connection.</p>"
+                    }
+                },
+                "inUse": {
+                    "target": "com.amazonaws.directconnect#Count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of rate limiters currently in use on the connection.</p>"
+                    }
+                },
+                "remaining": {
+                    "target": "com.amazonaws.directconnect#Count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of rate limiters remaining (available) on the connection.</p>"
+                    }
+                },
+                "totalBandwidth": {
+                    "target": "com.amazonaws.directconnect#Bandwidth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total bandwidth allocated across all rate limiters on the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the rate limiter status for a connection, including the maximum number of rate limiters allowed, the number currently in use, and the remaining capacity.</p>"
+            }
+        },
         "com.amazonaws.directconnect#Region": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#RequestBillingMode": {
+            "type": "enum",
+            "members": {
+                "PayAsYouGo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PayAsYouGo"
+                    }
+                },
+                "FlatRateTier1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier1"
+                    }
+                },
+                "FlatRateTier2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier2"
+                    }
+                },
+                "FlatRateTier3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier3"
+                    }
+                },
+                "FlatRateTier4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier4"
+                    }
+                },
+                "FlatRateTier5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlatRateTier5"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#RequestMACSec": {
             "type": "boolean"
+        },
+        "com.amazonaws.directconnect#ResiliencyGroup": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupArn": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupName": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupType": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resiliency group. The valid value is <code>Managed</code>.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.directconnect#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the resiliency group.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the resiliency group. The valid values are <code>pending</code>,\n      <code>available</code>, <code>deleting</code>, and <code>deleted</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.directconnect#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):directconnect::[0-9]{12}:dx-resiliency-group/dxrg-[0-9a-z]{17}$"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupAssociation": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>"
+                    }
+                },
+                "connectionArn": {
+                    "target": "com.amazonaws.directconnect#ConnectionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated connection.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupAssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the association. The valid values are <code>associating</code>,\n      <code>associated</code>, <code>disassociating</code>, and <code>disassociated</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an association between a connection and a resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#ResiliencyGroupAssociation"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupAssociationState": {
+            "type": "enum",
+            "members": {
+                "Associating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "associating"
+                    }
+                },
+                "Associated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "associated"
+                    }
+                },
+                "Disassociating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disassociating"
+                    }
+                },
+                "Disassociated": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disassociated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 22
+                },
+                "smithy.api#pattern": "^(dxrg|DXRG)-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]+$"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupState": {
+            "type": "enum",
+            "members": {
+                "Pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "Deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupSummary": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupArn": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupName": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resiliency group.</p>"
+                    }
+                },
+                "resiliencyGroupType": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resiliency group. The valid value is <code>Managed</code>.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "com.amazonaws.directconnect#OwnerAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the resiliency group.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#ResiliencyGroupSummary"
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyGroupType": {
+            "type": "enum",
+            "members": {
+                "Managed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Managed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#ResiliencyModel": {
+            "type": "enum",
+            "members": {
+                "MaximumResiliency": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "maximum-resiliency"
+                    }
+                },
+                "HighResiliency": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "high-resiliency"
+                    }
+                },
+                "BasicResiliency": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "basic-resiliency"
+                    }
+                }
+            }
         },
         "com.amazonaws.directconnect#ResourceArn": {
             "type": "string"
@@ -6678,6 +7980,91 @@
                 "target": "com.amazonaws.directconnect#ResourceTag"
             }
         },
+        "com.amazonaws.directconnect#Route": {
+            "type": "structure",
+            "members": {
+                "cidr": {
+                    "target": "com.amazonaws.directconnect#RouteCidr",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR (prefix) of the route.</p>"
+                    }
+                },
+                "routeDirection": {
+                    "target": "com.amazonaws.directconnect#RouteDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction of the route.</p>\n         <p>The valid values are <code>accepted</code> (received from the customer network) and <code>advertised</code> (advertised to the customer network).</p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.directconnect#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address family of the route.</p>\n         <p>The valid values are <code>ipv4</code> and <code>ipv6</code>.</p>"
+                    }
+                },
+                "asPath": {
+                    "target": "com.amazonaws.directconnect#AsPathSegmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autonomous system (AS) path of the route.</p>"
+                    }
+                },
+                "communities": {
+                    "target": "com.amazonaws.directconnect#CommunityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP communities associated with the route.</p>"
+                    }
+                },
+                "awsLogicalDeviceId": {
+                    "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
+                    }
+                },
+                "routeInstalledAt": {
+                    "target": "com.amazonaws.directconnect#RouteInstalledAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the route was installed. The value is displayed in UTC format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a route for a virtual interface.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#RouteCidr": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#RouteDirection": {
+            "type": "enum",
+            "members": {
+                "Accepted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accepted"
+                    }
+                },
+                "Advertised": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertised"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#RouteFilterCidrString": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#RouteFilterCidrStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#RouteFilterCidrString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.directconnect#RouteFilterPrefix": {
             "type": "structure",
             "members": {
@@ -6696,6 +8083,53 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.directconnect#RouteFilterPrefix"
+            }
+        },
+        "com.amazonaws.directconnect#RouteFilters": {
+            "type": "structure",
+            "members": {
+                "routeDirection": {
+                    "target": "com.amazonaws.directconnect#RouteDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction of the routes to return.</p>\n         <p>The valid values are <code>accepted</code> (routes received from the customer network) and <code>advertised</code> (routes advertised to the customer network).</p>"
+                    }
+                },
+                "addressFamily": {
+                    "target": "com.amazonaws.directconnect#AddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address family of the routes to return.</p>\n         <p>The valid values are <code>ipv4</code> and <code>ipv6</code>.</p>"
+                    }
+                },
+                "cidrs": {
+                    "target": "com.amazonaws.directconnect#RouteFilterCidrStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDRs (prefixes) used to filter the routes. You can specify up to 10 CIDRs.</p>"
+                    }
+                },
+                "asPath": {
+                    "target": "com.amazonaws.directconnect#AsPathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autonomous system (AS) numbers used to filter the routes by their AS path.</p>"
+                    }
+                },
+                "communities": {
+                    "target": "com.amazonaws.directconnect#CommunityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BGP communities used to filter the routes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters used to limit the routes returned by <a>ListVirtualInterfaceRoutes</a>.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#RouteInstalledAt": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.directconnect#RouteList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#Route"
             }
         },
         "com.amazonaws.directconnect#RouterConfig": {
@@ -7115,6 +8549,68 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.directconnect#UpdateConnectionsBillingMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#UpdateConnectionsBillingModeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#UpdateConnectionsBillingModeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the billing mode for the specified Direct Connect connections. You can update the billing\n      mode for up to 200 connections in a single request.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#UpdateConnectionsBillingModeRequest": {
+            "type": "structure",
+            "members": {
+                "connectionIds": {
+                    "target": "com.amazonaws.directconnect#ConnectionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the connections to update. You can specify from 1 to 200 connections.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#RequestBillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode to apply to the specified connections. The valid values are\n      <code>PayAsYouGo</code>, <code>FlatRateTier1</code>, <code>FlatRateTier2</code>,\n      <code>FlatRateTier3</code>, <code>FlatRateTier4</code>, and\n      <code>FlatRateTier5</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#UpdateConnectionsBillingModeResponse": {
+            "type": "structure",
+            "members": {
+                "billingMode": {
+                    "target": "com.amazonaws.directconnect#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing mode applied to the connections.</p>"
+                    }
+                },
+                "connections": {
+                    "target": "com.amazonaws.directconnect#ConnectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connections with the updated billing mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directconnect#UpdateDirectConnectGateway": {
             "type": "operation",
             "input": {
@@ -7285,6 +8781,68 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.directconnect#UpdateResiliencyGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#UpdateResiliencyGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#UpdateResiliencyGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the name of the specified resiliency group.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#UpdateResiliencyGroupRequest": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroupId": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resiliencyGroupName": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new name of the resiliency group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.directconnect#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directconnect#UpdateResiliencyGroupResult": {
+            "type": "structure",
+            "members": {
+                "resiliencyGroup": {
+                    "target": "com.amazonaws.directconnect#ResiliencyGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resiliency group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributes": {
             "type": "operation",
             "input": {
@@ -7331,6 +8889,24 @@
                     "target": "com.amazonaws.directconnect#VirtualInterfaceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the virtual private interface.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) to apply to the virtual interface. Use this to update the bandwidth allocation on an existing virtual interface.</p>"
                     }
                 }
             },
@@ -7446,13 +9022,13 @@
                     "target": "com.amazonaws.directconnect#ASN",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.\n              </p>\n            </li>\n            <li>\n               <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.\n              </p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "asnLong": {
                     "target": "com.amazonaws.directconnect#LongAsn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <note>\n            <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            <ul>\n               <li>\n                  <p>The <code>asnLong</code> attribute accepts both ASN and long ASN\n                            ranges.</p>\n               </li>\n               <li>\n                  <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>\n         <p>Note the following limitations when using <code>asnLong</code>:</p>\n         <ul>\n            <li>\n               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.\n              </p>\n            </li>\n            <li>\n               <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>If you are using a 2-byte ASN, the API response will include the\n2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>\n            </li>\n            <li>\n               <p>If you provide a value in the same API call for both <code>asn</code>\n                            and <code>asnLong</code>, the API will only accept the value for\n                                <code>asnLong</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "amazonSideAsn": {
@@ -7561,6 +9137,24 @@
                     "target": "com.amazonaws.directconnect#SiteLinkEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether SiteLink is enabled.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv4": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv4 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>"
+                    }
+                },
+                "prefixPoolAllocatedCountIpv6": {
+                    "target": "com.amazonaws.directconnect#PrefixPoolAllocatedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of inbound IPv6 route prefixes allocated to the virtual interface. Not applicable to public virtual interfaces.</p>"
+                    }
+                },
+                "rateLimit": {
+                    "target": "com.amazonaws.directconnect#RateLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate limit (bandwidth allocation) applied to the virtual interface. The value must be one of the supported bandwidth values and cannot exceed the bandwidth of the parent connection or LAG. Supported values: <code>50Mbps</code>, <code>100Mbps</code>, <code>200Mbps</code>, <code>300Mbps</code>, <code>400Mbps</code>, <code>500Mbps</code>, <code>600Mbps</code>, <code>700Mbps</code>, <code>800Mbps</code>, <code>900Mbps</code>, <code>1Gbps</code>, <code>1.2Gbps</code>, <code>1.5Gbps</code>, <code>1.8Gbps</code>, <code>2Gbps</code>, <code>2.1Gbps</code>, <code>2.4Gbps</code>, <code>2.7Gbps</code>, <code>3Gbps</code>, <code>3.2Gbps</code>, <code>3.6Gbps</code>, <code>4Gbps</code>, <code>5Gbps</code>, <code>6Gbps</code>, <code>7Gbps</code>, <code>8Gbps</code>, <code>9Gbps</code>, <code>10Gbps</code>, <code>12Gbps</code>, <code>15Gbps</code>, <code>18Gbps</code>, <code>20Gbps</code>, <code>21Gbps</code>, <code>24Gbps</code>, <code>27Gbps</code>, <code>30Gbps</code>, <code>32Gbps</code>, <code>36Gbps</code>, <code>40Gbps</code>, <code>50Gbps</code>, <code>60Gbps</code>, <code>70Gbps</code>, <code>80Gbps</code>, <code>100Gbps</code>, <code>120Gbps</code>, <code>150Gbps</code>, <code>180Gbps</code>, <code>200Gbps</code>, <code>210Gbps</code>, <code>240Gbps</code>, <code>270Gbps</code>, <code>300Gbps</code>, <code>320Gbps</code>, <code>360Gbps</code>, <code>400Gbps</code>, <code>450Gbps</code>, <code>480Gbps</code>, <code>500Gbps</code>, <code>540Gbps</code>, <code>600Gbps</code>, <code>700Gbps</code>, <code>800Gbps</code>, <code>900Gbps</code>, <code>1Tbps</code>, <code>1.1Tbps</code>, <code>1.2Tbps</code>, <code>1.3Tbps</code>, <code>1.4Tbps</code>, <code>1.5Tbps</code>, <code>1.6Tbps</code>.</p>"
                     }
                 }
             },

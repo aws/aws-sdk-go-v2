@@ -4,13 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -110,6 +107,52 @@ type GetAddressListImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddressListImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddressListImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddressListImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_AddressListId, *v.AddressListId)
+	}
+	if v.CompletedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_CompletedTimestamp, *v.CompletedTimestamp)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Error, *v.Error)
+	}
+	if v.FailedItemsCount != nil {
+		s.WriteInt32(schemas.GetAddressListImportJobResponse_FailedItemsCount, *v.FailedItemsCount)
+	}
+	if v.ImportDataFormat != nil {
+		s.WriteStruct(schemas.GetAddressListImportJobResponse_ImportDataFormat)
+		v.ImportDataFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportedItemsCount != nil {
+		s.WriteInt32(schemas.GetAddressListImportJobResponse_ImportedItemsCount, *v.ImportedItemsCount)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_JobId, *v.JobId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Name, *v.Name)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_StartTimestamp, *v.StartTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Status, string(v.Status))
+	}
+}
 func (v *GetAddressListImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAddressListImportJobResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -158,74 +201,29 @@ func (v *GetAddressListImportJobOutput) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 func (c *Client) addOperationGetAddressListImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressListImportJob, schemas.GetAddressListImportJobRequest, schemas.GetAddressListImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressListImportJob, schemas.GetAddressListImportJobRequest, schemas.GetAddressListImportJobResponse), output: &GetAddressListImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAddressListImportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAddressListImportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAddressListImportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,22 +238,8 @@ func (c *Client) addOperationGetAddressListImportJobMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAddressListImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAddressListImportJob",
-	}
 }

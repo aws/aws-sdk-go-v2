@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"flows":[{"availabilityZone":"__AvailabilityZone__","description":"__Description__","flowArn":"__FlowArn__","maintenance":{"maintenanceDay":"Monday","maintenanceDeadline":"__MaintenanceDeadline__","maintenanceScheduledDate":"__MaintenanceScheduledDate__","maintenanceStartHour":"__MaintenanceStartHour__"},"name":"__Name__","sourceType":"OWNED","status":"STANDBY"},{"availabilityZone":"__AvailabilityZone__","description":"__Description__","flowArn":"__FlowArn__","maintenance":{"maintenanceDay":"Monday","maintenanceDeadline":"__MaintenanceDeadline__","maintenanceScheduledDate":"__MaintenanceScheduledDate__","maintenanceStartHour":"__MaintenanceStartHour__"},"name":"__Name__","sourceType":"OWNED","status":"STANDBY"}],"nextToken":"__NextToken__"}

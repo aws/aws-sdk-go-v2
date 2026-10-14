@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts automatically generated business-friendly metadata for your Amazon
@@ -59,33 +55,6 @@ type AcceptPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptPredictionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptPredictionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcceptChoices(s, schemas.AcceptPredictionsInput_acceptChoices, v.AcceptChoices)
-	if v.AcceptRule != nil {
-		s.WriteStruct(schemas.AcceptPredictionsInput_acceptRule)
-		v.AcceptRule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.AcceptPredictionsInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.AcceptPredictionsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.AcceptPredictionsInput_identifier, *v.Identifier)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.AcceptPredictionsInput_revision, *v.Revision)
-	}
-}
-
 type AcceptPredictionsOutput struct {
 
 	// The ID of the asset.
@@ -109,79 +78,23 @@ type AcceptPredictionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptPredictionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptPredictionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptPredictionsOutput_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.AcceptPredictionsOutput_assetId, v.AssetId)
-		case schemas.AcceptPredictionsOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.AcceptPredictionsOutput_domainId, v.DomainId)
-		case schemas.AcceptPredictionsOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.AcceptPredictionsOutput_revision, v.Revision)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptPredictions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPredictions, schemas.AcceptPredictionsInput, schemas.AcceptPredictionsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptPredictions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPredictions, schemas.AcceptPredictionsInput, schemas.AcceptPredictionsOutput), output: &AcceptPredictionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptPredictions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +104,6 @@ func (c *Client) addOperationAcceptPredictionsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpAcceptPredictionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptPredictions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +116,6 @@ func (c *Client) addOperationAcceptPredictionsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,12 +155,4 @@ func (m *idempotencyToken_initializeOpAcceptPredictions) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opAcceptPredictionsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAcceptPredictions{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAcceptPredictions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptPredictions",
-	}
 }

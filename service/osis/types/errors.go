@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The client attempted to remove a resource that is currently in use.
 type ConflictException struct {
@@ -69,16 +58,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception is thrown when an operation has been disabled.
 type DisabledOperationException struct {
@@ -105,16 +84,6 @@ func (e *DisabledOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DisabledOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisabledOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisabledOperationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DisabledOperationException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request failed because of an unknown error, exception, or failure (the
 // failure is internal to the service).
@@ -142,16 +111,6 @@ func (e *InternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An invalid pagination token provided in the request.
 type InvalidPaginationTokenException struct {
@@ -178,16 +137,6 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidPaginationTokenException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidPaginationTokenException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidPaginationTokenException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidPaginationTokenException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You attempted to create more than the allowed number of tags.
 type LimitExceededException struct {
@@ -214,16 +163,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You attempted to create a resource that already exists.
 type ResourceAlreadyExistsException struct {
@@ -250,16 +189,6 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceAlreadyExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceAlreadyExistsException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceAlreadyExistsException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You attempted to access or delete a resource that does not exist.
 type ResourceNotFoundException struct {
@@ -286,16 +215,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An exception for missing or invalid input fields.
 type ValidationException struct {
@@ -322,13 +241,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		}
-		return nil
-	})
-}

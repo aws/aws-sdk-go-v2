@@ -1,0 +1,5 @@
+POST /user-hierarchy-structure/__InstanceId__
+
+Content-Type: application/json
+
+{"HierarchyStructure":{"LevelFive":{"Name":"__Name__"},"LevelFour":{"Name":"__Name__"},"LevelOne":{"Name":"__Name__"},"LevelThree":{"Name":"__Name__"},"LevelTwo":{"Name":"__Name__"}}}

@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new recording configuration, used to enable recording to Amazon S3.
@@ -73,6 +72,60 @@ type CreateRecordingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecordingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecordingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecordingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateRecordingConfigurationRequest_destinationConfiguration)
+		v.DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecordingConfigurationRequest_name, *v.Name)
+	}
+	if v.RecordingReconnectWindowSeconds != 0 {
+		s.WriteInt32(schemas.CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds, v.RecordingReconnectWindowSeconds)
+	}
+	if v.RenditionConfiguration != nil {
+		s.WriteStruct(schemas.CreateRecordingConfigurationRequest_renditionConfiguration)
+		v.RenditionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateRecordingConfigurationRequest_tags, v.Tags)
+	if v.ThumbnailConfiguration != nil {
+		s.WriteStruct(schemas.CreateRecordingConfigurationRequest_thumbnailConfiguration)
+		v.ThumbnailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRecordingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecordingConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecordingConfigurationRequest_destinationConfiguration:
+			v.DestinationConfiguration = &types.DestinationConfiguration{}
+			return v.DestinationConfiguration.Deserialize(d)
+		case schemas.CreateRecordingConfigurationRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRecordingConfigurationRequest_name, v.Name)
+		case schemas.CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds:
+			return d.ReadInt32(schemas.CreateRecordingConfigurationRequest_recordingReconnectWindowSeconds, &v.RecordingReconnectWindowSeconds)
+		case schemas.CreateRecordingConfigurationRequest_renditionConfiguration:
+			v.RenditionConfiguration = &types.RenditionConfiguration{}
+			return v.RenditionConfiguration.Deserialize(d)
+		case schemas.CreateRecordingConfigurationRequest_tags:
+			return deserializeTags(d, schemas.CreateRecordingConfigurationRequest_tags, &v.Tags)
+		case schemas.CreateRecordingConfigurationRequest_thumbnailConfiguration:
+			v.ThumbnailConfiguration = &types.ThumbnailConfiguration{}
+			return v.ThumbnailConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateRecordingConfigurationOutput struct {
 
 	//
@@ -84,77 +137,50 @@ type CreateRecordingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecordingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecordingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecordingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordingConfiguration != nil {
+		s.WriteStruct(schemas.CreateRecordingConfigurationResponse_recordingConfiguration)
+		v.RecordingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRecordingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecordingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecordingConfigurationResponse_recordingConfiguration:
+			v.RecordingConfiguration = &types.RecordingConfiguration{}
+			return v.RecordingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecordingConfiguration, schemas.CreateRecordingConfigurationRequest, schemas.CreateRecordingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecordingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecordingConfiguration, schemas.CreateRecordingConfigurationRequest, schemas.CreateRecordingConfigurationResponse), output: &CreateRecordingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecordingConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRecordingConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRecordingConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRecordingConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +195,8 @@ func (c *Client) addOperationCreateRecordingConfigurationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRecordingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRecordingConfiguration",
-	}
 }

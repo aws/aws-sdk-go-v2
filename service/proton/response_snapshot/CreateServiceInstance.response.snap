@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateServiceInstance
+
+{"serviceInstance":{"arn":"__Arn__","createdAt":946684800,"deploymentStatus":"IN_PROGRESS","deploymentStatusMessage":"__DeploymentStatusMessage__","environmentName":"__EnvironmentName__","lastAttemptedDeploymentId":"__LastAttemptedDeploymentId__","lastClientRequestToken":"__LastClientRequestToken__","lastDeploymentAttemptedAt":946684800,"lastDeploymentSucceededAt":946684800,"lastSucceededDeploymentId":"__LastSucceededDeploymentId__","name":"__Name__","serviceName":"__ServiceName__","spec":"__Spec__","templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__","templateName":"__TemplateName__"}}

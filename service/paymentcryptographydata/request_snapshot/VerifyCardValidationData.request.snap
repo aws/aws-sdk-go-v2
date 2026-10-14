@@ -1,0 +1,5 @@
+POST /cardvalidationdata/verify
+
+Content-Type: application/json
+
+{"KeyIdentifier":"__KeyIdentifier__","PrimaryAccountNumber":"__PrimaryAccountNumber__","ValidationData":"__ValidationData__","VerificationAttributes":{"AmexCardSecurityCodeVersion1":{"CardExpiryDate":"__CardExpiryDate__"}}}

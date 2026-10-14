@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyManagedPrefixList&AddEntry.1.Cidr=__Cidr__&AddEntry.1.Description=__Description__&AddEntry.2.Cidr=__Cidr__&AddEntry.2.Description=__Description__&CurrentVersion=1&DryRun=true&IpamPrefixListResolverSyncEnabled=true&MaxEntries=1&PrefixListId=__PrefixListId__&PrefixListName=__PrefixListName__&RemoveEntry.1.Cidr=__Cidr__&RemoveEntry.2.Cidr=__Cidr__&Version=2016-11-15

@@ -1,0 +1,3 @@
+POST /payments/managers/__PaymentManagerId__/connectors-list?maxResults=1&nextToken=__NextToken__
+
+

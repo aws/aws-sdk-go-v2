@@ -5,12 +5,8 @@ package rum
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the Amazon CloudWatch RUM app monitors in the account.
@@ -42,34 +38,6 @@ type ListAppMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAppMonitorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAppMonitorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAppMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAppMonitorsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAppMonitorsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListAppMonitorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAppMonitorsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAppMonitorsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListAppMonitorsRequest_MaxResults, v.MaxResults)
-		case schemas.ListAppMonitorsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAppMonitorsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListAppMonitorsOutput struct {
 
 	// An array of structures that contain information about the returned app monitors.
@@ -85,96 +53,26 @@ type ListAppMonitorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAppMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAppMonitorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAppMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppMonitorSummaryList(s, schemas.ListAppMonitorsResponse_AppMonitorSummaries, v.AppMonitorSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAppMonitorsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListAppMonitorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAppMonitorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAppMonitorsResponse_AppMonitorSummaries:
-			return deserializeAppMonitorSummaryList(d, schemas.ListAppMonitorsResponse_AppMonitorSummaries, &v.AppMonitorSummaries)
-		case schemas.ListAppMonitorsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAppMonitorsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAppMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppMonitors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppMonitors, schemas.ListAppMonitorsRequest, schemas.ListAppMonitorsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppMonitors{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppMonitors, schemas.ListAppMonitorsRequest, schemas.ListAppMonitorsResponse), output: &ListAppMonitorsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppMonitors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppMonitors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +85,6 @@ func (c *Client) addOperationListAppMonitorsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -294,11 +186,3 @@ type ListAppMonitorsAPIClient interface {
 }
 
 var _ ListAppMonitorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppMonitors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppMonitors",
-	}
-}

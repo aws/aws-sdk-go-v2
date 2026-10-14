@@ -1,0 +1,5 @@
+POST /places/v0/indexes/__IndexName__/search/suggestions?key=__Key__
+
+Content-Type: application/json
+
+{"BiasPosition":[1,1],"FilterBBox":[1,1],"FilterCategories":["__Member__","__Member__"],"FilterCountries":["__Member__","__Member__"],"Language":"__Language__","MaxResults":1,"Text":"__Text__"}

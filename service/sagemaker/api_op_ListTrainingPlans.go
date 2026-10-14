@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +54,34 @@ type ListTrainingPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingPlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTrainingPlanFilters(s, schemas.ListTrainingPlansRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrainingPlansRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingPlansRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTrainingPlansRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTrainingPlansRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StartTimeAfter != nil {
+		s.WriteTime(schemas.ListTrainingPlansRequest_StartTimeAfter, *v.StartTimeAfter)
+	}
+	if v.StartTimeBefore != nil {
+		s.WriteTime(schemas.ListTrainingPlansRequest_StartTimeBefore, *v.StartTimeBefore)
+	}
+}
+
 type ListTrainingPlansOutput struct {
 
 	// A list of summary information for the training plans.
@@ -70,77 +98,51 @@ type ListTrainingPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingPlansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingPlansResponse_NextToken, *v.NextToken)
+	}
+	serializeTrainingPlanSummaries(s, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, v.TrainingPlanSummaries)
+}
+func (v *ListTrainingPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrainingPlansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrainingPlansResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrainingPlansResponse_NextToken, v.NextToken)
+		case schemas.ListTrainingPlansResponse_TrainingPlanSummaries:
+			return deserializeTrainingPlanSummaries(d, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, &v.TrainingPlanSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrainingPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingPlans, schemas.ListTrainingPlansRequest, schemas.ListTrainingPlansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingPlans, schemas.ListTrainingPlansRequest, schemas.ListTrainingPlansResponse), output: &ListTrainingPlansOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrainingPlans{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrainingPlans"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTrainingPlansValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingPlans(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +155,6 @@ func (c *Client) addOperationListTrainingPlansMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +255,3 @@ type ListTrainingPlansAPIClient interface {
 }
 
 var _ ListTrainingPlansAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTrainingPlans(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTrainingPlans",
-	}
-}

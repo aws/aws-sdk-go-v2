@@ -1,0 +1,6 @@
+PUT /?id=__Id__&metrics=
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+
+<MetricsConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Filter><Prefix>__MetricsFilterMemberPrefix__</Prefix></Filter><Id>__Id__</Id></MetricsConfiguration>

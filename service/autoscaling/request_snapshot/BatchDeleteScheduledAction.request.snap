@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=BatchDeleteScheduledAction&AutoScalingGroupName=__AutoScalingGroupName__&ScheduledActionNames.member.1=__Member__&ScheduledActionNames.member.2=__Member__&Version=2011-01-01

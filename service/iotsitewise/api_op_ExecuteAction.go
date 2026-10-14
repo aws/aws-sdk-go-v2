@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,36 +54,6 @@ type ExecuteActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteActionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionDefinitionId != nil {
-		s.WriteString(schemas.ExecuteActionRequest_actionDefinitionId, *v.ActionDefinitionId)
-	}
-	if v.ActionPayload != nil {
-		s.WriteStruct(schemas.ExecuteActionRequest_actionPayload)
-		v.ActionPayload.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ExecuteActionRequest_clientToken, *v.ClientToken)
-	}
-	if v.ResolveTo != nil {
-		s.WriteStruct(schemas.ExecuteActionRequest_resolveTo)
-		v.ResolveTo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TargetResource != nil {
-		s.WriteStruct(schemas.ExecuteActionRequest_targetResource)
-		v.TargetResource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ExecuteActionOutput struct {
 
 	// The ID of the action.
@@ -100,73 +67,23 @@ type ExecuteActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteActionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteActionResponse_actionId:
-			v.ActionId = new(string)
-			return d.ReadString(schemas.ExecuteActionResponse_actionId, v.ActionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteAction, schemas.ExecuteActionRequest, schemas.ExecuteActionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteAction{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteAction, schemas.ExecuteActionRequest, schemas.ExecuteActionResponse), output: &ExecuteActionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -176,12 +93,6 @@ func (c *Client) addOperationExecuteActionMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpExecuteActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +105,6 @@ func (c *Client) addOperationExecuteActionMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +138,4 @@ func (m *endpointPrefix_opExecuteActionMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opExecuteActionMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opExecuteActionMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opExecuteAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExecuteAction",
-	}
 }

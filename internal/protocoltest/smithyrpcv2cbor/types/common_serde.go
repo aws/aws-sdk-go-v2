@@ -3,9 +3,60 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	smithy "github.com/aws/smithy-go"
 	"time"
 )
+
+func serializeRpcV2CborNestedUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v RpcV2CborNestedUnion) {
+	switch vv := v.(type) {
+	case *RpcV2CborNestedUnionMemberStringValue:
+		s.WriteUnion(schema, schemas.RpcV2CborNestedUnion_stringValue)
+		s.WriteString(schemas.RpcV2CborNestedUnion_stringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeRpcV2CborUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v RpcV2CborUnion) {
+	switch vv := v.(type) {
+	case *RpcV2CborUnionMemberStringValue:
+		s.WriteUnion(schema, schemas.RpcV2CborUnion_stringValue)
+		s.WriteString(schemas.RpcV2CborUnion_stringValue, vv.Value)
+		s.CloseUnion()
+	case *RpcV2CborUnionMemberUnionValue:
+		s.WriteUnion(schema, schemas.RpcV2CborUnion_unionValue)
+		serializeRpcV2CborNestedUnion(s, schemas.RpcV2CborUnion_unionValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func deserializeRpcV2CborNestedUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *RpcV2CborNestedUnion) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RpcV2CborNestedUnion_stringValue:
+			vv := &RpcV2CborNestedUnionMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeRpcV2CborUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *RpcV2CborUnion) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RpcV2CborUnion_stringValue:
+			vv := &RpcV2CborUnionMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RpcV2CborUnion_unionValue:
+			vv := &RpcV2CborUnionMemberUnionValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
 	if v == nil {
@@ -159,6 +210,7 @@ func serializeTimestampList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -172,6 +224,7 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeStructureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]StructureListMember) error {
+	*v = make([]StructureListMember, 0)
 	var vv StructureListMember
 	return smithy.ReadList(d, s, func() error {
 		vv = StructureListMember{}
@@ -185,6 +238,7 @@ func deserializeStructureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTestStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -198,6 +252,7 @@ func deserializeTestStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeBlobList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]byte) error {
+	*v = make([][]byte, 0)
 	var vv []byte
 	return smithy.ReadList(d, s, func() error {
 
@@ -211,6 +266,7 @@ func deserializeBlobList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]by
 }
 
 func deserializeBooleanList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]bool) error {
+	*v = make([]bool, 0)
 	var vv bool
 	return smithy.ReadList(d, s, func() error {
 
@@ -224,6 +280,7 @@ func deserializeBooleanList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]b
 }
 
 func deserializeFooEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FooEnum) error {
+	*v = make([]FooEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -237,6 +294,7 @@ func deserializeFooEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]F
 }
 
 func deserializeIntegerEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IntegerEnum) error {
+	*v = make([]IntegerEnum, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -250,6 +308,7 @@ func deserializeIntegerEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -263,6 +322,7 @@ func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]i
 }
 
 func deserializeNestedStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]string) error {
+	*v = make([][]string, 0)
 	var vv []string
 	return smithy.ReadList(d, s, func() error {
 		vv = nil
@@ -276,7 +336,7 @@ func deserializeNestedStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]*string) error {
-	var vv string
+	*v = make([]*string, 0)
 	return smithy.ReadList(d, s, func() error {
 		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
 			return err
@@ -284,6 +344,10 @@ func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 			*v = append(*v, nil)
 			return nil
 		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
@@ -295,6 +359,7 @@ func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -308,6 +373,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeStringSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -321,6 +387,7 @@ func deserializeStringSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeTimestampList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]time.Time) error {
+	*v = make([]time.Time, 0)
 	var vv time.Time
 	return smithy.ReadList(d, s, func() error {
 
@@ -493,6 +560,13 @@ func deserializeDenseBooleanMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]bool)
 	var vv bool
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero bool
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadBool(s.MapValue(), &vv); err != nil {
 			return err
@@ -507,6 +581,13 @@ func deserializeDenseNumberMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]int32)
 	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -521,6 +602,14 @@ func deserializeDenseSetMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeStringSet(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -535,6 +624,13 @@ func deserializeDenseStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -549,6 +645,14 @@ func deserializeDenseStructMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]GreetingStruct)
 	var vv GreetingStruct
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero GreetingStruct
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = GreetingStruct{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -561,7 +665,6 @@ func deserializeDenseStructMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 
 func deserializeSparseBooleanMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*bool) error {
 	*v = make(map[string]*bool)
-	var vv bool
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
@@ -569,6 +672,10 @@ func deserializeSparseBooleanMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 			(*v)[k] = nil
 			return nil
 		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv bool
 
 		if err := d.ReadBool(s.MapValue(), &vv); err != nil {
 			return err
@@ -581,7 +688,6 @@ func deserializeSparseBooleanMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 
 func deserializeSparseNumberMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*int32) error {
 	*v = make(map[string]*int32)
-	var vv int32
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
@@ -589,6 +695,10 @@ func deserializeSparseNumberMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			(*v)[k] = nil
 			return nil
 		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv int32
 
 		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
 			return err
@@ -601,7 +711,6 @@ func deserializeSparseNumberMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 
 func deserializeSparseSetMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
 	*v = make(map[string][]string)
-	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
@@ -610,6 +719,9 @@ func deserializeSparseSetMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 			return nil
 		}
 
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv []string
 		vv = nil
 		if err := deserializeStringSet(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -622,7 +734,6 @@ func deserializeSparseSetMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 
 func deserializeSparseStructMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*GreetingStruct) error {
 	*v = make(map[string]*GreetingStruct)
-	var vv GreetingStruct
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
@@ -631,6 +742,9 @@ func deserializeSparseStructMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			return nil
 		}
 
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv GreetingStruct
 		vv = GreetingStruct{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -645,6 +759,13 @@ func deserializeTestStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -657,7 +778,6 @@ func deserializeTestStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 
 func deserializeSparseStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]*string) error {
 	*v = make(map[string]*string)
-	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
@@ -665,6 +785,10 @@ func deserializeSparseStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			(*v)[k] = nil
 			return nil
 		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

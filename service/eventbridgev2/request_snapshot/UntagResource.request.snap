@@ -1,0 +1,7 @@
+POST /service/AWSEventsV2/operation/UntagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kResourceArno__ResourceArn__gTagKeysŸj__Member__j__Member__ÿÿ

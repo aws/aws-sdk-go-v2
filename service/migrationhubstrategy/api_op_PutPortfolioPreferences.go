@@ -4,13 +4,8 @@ package migrationhubstrategy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Saves the specified migration and modernization preferences.
@@ -46,56 +41,6 @@ type PutPortfolioPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPortfolioPreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPortfolioPreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPortfolioPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationMode != "" {
-		s.WriteString(schemas.PutPortfolioPreferencesRequest_applicationMode, string(v.ApplicationMode))
-	}
-	if v.ApplicationPreferences != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_applicationPreferences)
-		v.ApplicationPreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatabasePreferences != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_databasePreferences)
-		v.DatabasePreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrioritizeBusinessGoals != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_prioritizeBusinessGoals)
-		v.PrioritizeBusinessGoals.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PutPortfolioPreferencesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPortfolioPreferencesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutPortfolioPreferencesRequest_applicationMode:
-			var ev string
-			if err := d.ReadString(schemas.PutPortfolioPreferencesRequest_applicationMode, &ev); err != nil {
-				return err
-			}
-			v.ApplicationMode = types.ApplicationMode(ev)
-			return nil
-		case schemas.PutPortfolioPreferencesRequest_applicationPreferences:
-			v.ApplicationPreferences = &types.ApplicationPreferences{}
-			return v.ApplicationPreferences.Deserialize(d)
-		case schemas.PutPortfolioPreferencesRequest_databasePreferences:
-			v.DatabasePreferences = &types.DatabasePreferences{}
-			return v.DatabasePreferences.Deserialize(d)
-		case schemas.PutPortfolioPreferencesRequest_prioritizeBusinessGoals:
-			v.PrioritizeBusinessGoals = &types.PrioritizeBusinessGoals{}
-			return v.PrioritizeBusinessGoals.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type PutPortfolioPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,90 +48,29 @@ type PutPortfolioPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPortfolioPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPortfolioPreferencesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPortfolioPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutPortfolioPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPortfolioPreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPortfolioPreferences, schemas.PutPortfolioPreferencesRequest, schemas.PutPortfolioPreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPortfolioPreferences, schemas.PutPortfolioPreferencesRequest, schemas.PutPortfolioPreferencesResponse), output: &PutPortfolioPreferencesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPortfolioPreferences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutPortfolioPreferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPortfolioPreferences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +85,8 @@ func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutPortfolioPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutPortfolioPreferences",
-	}
 }

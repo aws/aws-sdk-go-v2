@@ -1,0 +1,12 @@
+GET /__Key__?attributes=&versionId=__VersionId__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Max-Parts: 1
+X-Amz-Object-Attributes: ETag
+X-Amz-Object-Attributes: ETag
+X-Amz-Part-Number-Marker: __PartNumberMarker__
+X-Amz-Request-Payer: requester
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+

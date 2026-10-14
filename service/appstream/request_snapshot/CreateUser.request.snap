@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/CreateUser
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥mMessageActionhSUPPRESSiFirstNamem__FirstName__hLastNamel__LastName__rAuthenticationTypecAPIhUserNamel__UserName__

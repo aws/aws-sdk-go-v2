@@ -1,0 +1,5 @@
+POST /get-ms-teams-channel-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__"}

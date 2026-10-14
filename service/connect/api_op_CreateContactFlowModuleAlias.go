@@ -4,10 +4,9 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a named alias that points to a specific version of a contact flow
@@ -58,6 +57,30 @@ type CreateContactFlowModuleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowModuleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowModuleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowModuleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.ContactFlowModuleVersion != nil {
+		s.WriteInt64(schemas.CreateContactFlowModuleAliasRequest_ContactFlowModuleVersion, *v.ContactFlowModuleVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type CreateContactFlowModuleAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow module.
@@ -72,77 +95,54 @@ type CreateContactFlowModuleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowModuleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowModuleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowModuleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowModuleArn != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasResponse_ContactFlowModuleArn, *v.ContactFlowModuleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateContactFlowModuleAliasResponse_Id, *v.Id)
+	}
+}
+func (v *CreateContactFlowModuleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContactFlowModuleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContactFlowModuleAliasResponse_ContactFlowModuleArn:
+			v.ContactFlowModuleArn = new(string)
+			return d.ReadString(schemas.CreateContactFlowModuleAliasResponse_ContactFlowModuleArn, v.ContactFlowModuleArn)
+		case schemas.CreateContactFlowModuleAliasResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateContactFlowModuleAliasResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContactFlowModuleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlowModuleAlias, schemas.CreateContactFlowModuleAliasRequest, schemas.CreateContactFlowModuleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlowModuleAlias, schemas.CreateContactFlowModuleAliasRequest, schemas.CreateContactFlowModuleAliasResponse), output: &CreateContactFlowModuleAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContactFlowModuleAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateContactFlowModuleAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContactFlowModuleAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +157,8 @@ func (c *Client) addOperationCreateContactFlowModuleAliasMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateContactFlowModuleAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContactFlowModuleAlias",
-	}
 }

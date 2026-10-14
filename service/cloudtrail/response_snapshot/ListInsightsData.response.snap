@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListInsightsData
+
+{"Events":[{"AccessKeyId":"__AccessKeyId__","CloudTrailEvent":"__CloudTrailEvent__","EventId":"__EventId__","EventName":"__EventName__","EventSource":"__EventSource__","EventTime":946684800,"ReadOnly":"__ReadOnly__","Resources":[{"ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"},{"ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"}],"Username":"__Username__"},{"AccessKeyId":"__AccessKeyId__","CloudTrailEvent":"__CloudTrailEvent__","EventId":"__EventId__","EventName":"__EventName__","EventSource":"__EventSource__","EventTime":946684800,"ReadOnly":"__ReadOnly__","Resources":[{"ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"},{"ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"}],"Username":"__Username__"}],"NextToken":"__NextToken__"}

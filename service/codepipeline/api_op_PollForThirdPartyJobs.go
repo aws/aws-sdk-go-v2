@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Determines whether there are any third party jobs for a job worker to act on.
@@ -46,6 +45,23 @@ type PollForThirdPartyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForThirdPartyJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForThirdPartyJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForThirdPartyJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTypeId != nil {
+		s.WriteStruct(schemas.PollForThirdPartyJobsInput_actionTypeId)
+		v.ActionTypeId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxBatchSize != nil {
+		s.WriteInt32(schemas.PollForThirdPartyJobsInput_maxBatchSize, *v.MaxBatchSize)
+	}
+}
+
 // Represents the output of a PollForThirdPartyJobs action.
 type PollForThirdPartyJobsOutput struct {
 
@@ -58,77 +74,45 @@ type PollForThirdPartyJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForThirdPartyJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForThirdPartyJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForThirdPartyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+}
+func (v *PollForThirdPartyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PollForThirdPartyJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PollForThirdPartyJobsOutput_jobs:
+			return deserializeThirdPartyJobList(d, schemas.PollForThirdPartyJobsOutput_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForThirdPartyJobs, schemas.PollForThirdPartyJobsInput, schemas.PollForThirdPartyJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForThirdPartyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForThirdPartyJobs, schemas.PollForThirdPartyJobsInput, schemas.PollForThirdPartyJobsOutput), output: &PollForThirdPartyJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForThirdPartyJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PollForThirdPartyJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPollForThirdPartyJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPollForThirdPartyJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +127,8 @@ func (c *Client) addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPollForThirdPartyJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PollForThirdPartyJobs",
-	}
 }

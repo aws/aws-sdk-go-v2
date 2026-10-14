@@ -1,0 +1,5 @@
+POST /migrations
+
+Content-Type: application/json
+
+{"migrationStrategy":"CREATE_NEW","v1BotName":"__V1BotName__","v1BotVersion":"__V1BotVersion__","v2BotName":"__V2BotName__","v2BotRole":"__V2BotRole__"}

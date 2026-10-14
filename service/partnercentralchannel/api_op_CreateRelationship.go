@@ -5,12 +5,8 @@ package partnercentralchannel
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new partner relationship between accounts.
@@ -76,41 +72,6 @@ type CreateRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelationshipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRelationshipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedAccountId != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_associatedAccountId, *v.AssociatedAccountId)
-	}
-	if v.AssociationType != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_associationType, string(v.AssociationType))
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_catalog, *v.Catalog)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_clientToken, *v.ClientToken)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_displayName, *v.DisplayName)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-	serializeSupportPlan(s, schemas.CreateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
-	if v.ResaleAccountModel != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_resaleAccountModel, string(v.ResaleAccountModel))
-	}
-	if v.Sector != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_sector, string(v.Sector))
-	}
-	serializeTagList(s, schemas.CreateRelationshipRequest_tags, v.Tags)
-}
-
 type CreateRelationshipOutput struct {
 
 	// Details of the created relationship.
@@ -122,73 +83,23 @@ type CreateRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRelationshipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRelationshipResponse_relationshipDetail:
-			v.RelationshipDetail = &types.CreateRelationshipDetail{}
-			return v.RelationshipDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationship, schemas.CreateRelationshipRequest, schemas.CreateRelationshipResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRelationship{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationship, schemas.CreateRelationshipRequest, schemas.CreateRelationshipResponse), output: &CreateRelationshipOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelationship"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -198,12 +109,6 @@ func (c *Client) addOperationCreateRelationshipMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateRelationshipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelationship(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +121,6 @@ func (c *Client) addOperationCreateRelationshipMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +160,4 @@ func (m *idempotencyToken_initializeOpCreateRelationship) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateRelationshipMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRelationship{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRelationship(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRelationship",
-	}
 }

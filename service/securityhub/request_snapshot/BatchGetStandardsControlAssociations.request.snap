@@ -1,0 +1,5 @@
+POST /associations/batchGet
+
+Content-Type: application/json
+
+{"StandardsControlAssociationIds":[{"SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__"},{"SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__"}]}

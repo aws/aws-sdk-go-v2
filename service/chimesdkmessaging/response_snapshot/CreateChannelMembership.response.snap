@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelArn":"__ChannelArn__","Member":{"Arn":"__Arn__","Name":"__Name__"},"SubChannelId":"__SubChannelId__"}

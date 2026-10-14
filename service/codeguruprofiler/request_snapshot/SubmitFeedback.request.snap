@@ -1,0 +1,5 @@
+POST /internal/profilingGroups/__ProfilingGroupName__/anomalies/__AnomalyInstanceId__/feedback
+
+Content-Type: application/json
+
+{"comment":"__Comment__","type":"Positive"}

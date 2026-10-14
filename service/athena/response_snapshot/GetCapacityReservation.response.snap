@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.GetCapacityReservation
+
+{"CapacityReservation":{"AllocatedDpus":1,"CreationTime":946684800,"LastAllocation":{"RequestCompletionTime":946684800,"RequestTime":946684800,"Status":"PENDING","StatusMessage":"__StatusMessage__"},"LastSuccessfulAllocationTime":946684800,"Name":"__Name__","Status":"PENDING","TargetDpus":1}}

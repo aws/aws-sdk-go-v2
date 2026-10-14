@@ -1,0 +1,5 @@
+POST /contact/stop
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","DisconnectReason":{"Code":"__Code__"},"InstanceId":"__InstanceId__"}

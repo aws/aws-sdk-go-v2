@@ -1,0 +1,5 @@
+PATCH /2023-10-12/farms/__FarmId__/queue-limit-associations/__QueueId__/__LimitId__
+
+Content-Type: application/json
+
+{"status":"ACTIVE"}

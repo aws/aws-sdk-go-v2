@@ -4,13 +4,8 @@ package docdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of cluster snapshot attribute names and values for a manual DB
@@ -48,18 +43,6 @@ type DescribeDBClusterSnapshotAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBClusterSnapshotAttributesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDBClusterSnapshotAttributesMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDBClusterSnapshotAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterSnapshotIdentifier != nil {
-		s.WriteString(schemas.DescribeDBClusterSnapshotAttributesMessage_DBClusterSnapshotIdentifier, *v.DBClusterSnapshotIdentifier)
-	}
-}
-
 type DescribeDBClusterSnapshotAttributesOutput struct {
 
 	// Detailed information about the attributes that are associated with a cluster
@@ -72,85 +55,29 @@ type DescribeDBClusterSnapshotAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBClusterSnapshotAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDBClusterSnapshotAttributesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDBClusterSnapshotAttributesResult_DBClusterSnapshotAttributesResult:
-			v.DBClusterSnapshotAttributesResult = &types.DBClusterSnapshotAttributesResult{}
-			return v.DBClusterSnapshotAttributesResult.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterSnapshotAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshotAttributes, schemas.DescribeDBClusterSnapshotAttributesMessage, schemas.DescribeDBClusterSnapshotAttributesResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterSnapshotAttributes{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterSnapshotAttributes, schemas.DescribeDBClusterSnapshotAttributesMessage, schemas.DescribeDBClusterSnapshotAttributesResult), output: &DescribeDBClusterSnapshotAttributesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBClusterSnapshotAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDBClusterSnapshotAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterSnapshotAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +92,8 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDBClusterSnapshotAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDBClusterSnapshotAttributes",
-	}
 }

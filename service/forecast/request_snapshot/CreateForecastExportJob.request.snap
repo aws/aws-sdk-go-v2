@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.CreateForecastExportJob
+
+{"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"ForecastArn":"__ForecastArn__","ForecastExportJobName":"__ForecastExportJobName__","Format":"__Format__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

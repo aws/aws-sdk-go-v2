@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdateNotifyConfiguration
+
+{"CreatedTimestamp":946684800,"DefaultTemplateId":"__DefaultTemplateId__","DeletionProtectionEnabled":true,"DisplayName":"__DisplayName__","EnabledChannels":["SMS","SMS"],"EnabledCountries":["__Member__","__Member__"],"NotifyConfigurationArn":"__NotifyConfigurationArn__","NotifyConfigurationId":"__NotifyConfigurationId__","PoolId":"__PoolId__","RejectionReason":"__RejectionReason__","Status":"PENDING","Tier":"BASIC","TierUpgradeStatus":"BASIC","UseCase":"CODE_VERIFICATION"}

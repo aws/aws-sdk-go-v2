@@ -4,12 +4,7 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a security group from a Wickr network. This operation cannot be
@@ -44,21 +39,6 @@ type DeleteSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSecurityGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.DeleteSecurityGroupRequest_groupId, *v.GroupId)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.DeleteSecurityGroupRequest_networkId, *v.NetworkId)
-	}
-}
-
 type DeleteSecurityGroupOutput struct {
 
 	// The ID of the security group that was deleted.
@@ -76,91 +56,29 @@ type DeleteSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSecurityGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSecurityGroupResponse_groupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_groupId, v.GroupId)
-		case schemas.DeleteSecurityGroupResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_message, v.Message)
-		case schemas.DeleteSecurityGroupResponse_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_networkId, v.NetworkId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse), output: &DeleteSecurityGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSecurityGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteSecurityGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSecurityGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +93,8 @@ func (c *Client) addOperationDeleteSecurityGroupMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteSecurityGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteSecurityGroup",
-	}
 }

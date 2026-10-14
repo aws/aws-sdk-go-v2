@@ -1,0 +1,7 @@
+POST /service/PerformanceInsightsv20180227/operation/GetPerformanceAnalysisReport
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿nAcceptLanguageeEN_USpAnalysisReportIdt__AnalysisReportId__jIdentifiern__Identifier__kServiceTypecRDSjTextFormatjPLAIN_TEXTÿ

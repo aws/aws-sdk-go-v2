@@ -53,6 +53,332 @@ func (v *ActiveTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An additional charge applied to an Enterprise Support contract.
+type AdditionalCharge struct {
+
+	// A description of the additional charge.
+	//
+	// This member is required.
+	Description *string
+
+	// The charge amount.
+	Amount *string
+
+	// The type of additional charge.
+	ChargeType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdditionalCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.AdditionalCharge_amount, *v.Amount)
+	}
+	if v.ChargeType != nil {
+		s.WriteString(schemas.AdditionalCharge_chargeType, *v.ChargeType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AdditionalCharge_description, *v.Description)
+	}
+}
+func (v *AdditionalCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalCharge_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.AdditionalCharge_amount, v.Amount)
+		case schemas.AdditionalCharge_chargeType:
+			v.ChargeType = new(string)
+			return d.ReadString(schemas.AdditionalCharge_chargeType, v.ChargeType)
+		case schemas.AdditionalCharge_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AdditionalCharge_description, v.Description)
+		}
+		return nil
+	})
+}
+
+// A monetary amount with a currency code. Used throughout the Billing API to
+// represent credit balances, allocations, and adjustments.
+type Amount struct {
+
+	// The amount as a decimal string (for example, "743.21" ). Negative values
+	// represent credits that reduce a bill.
+	//
+	// This member is required.
+	CurrencyAmount *string
+
+	// The ISO 4217 currency code for the amount (for example, USD ).
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Amount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Amount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Amount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyAmount != nil {
+		s.WriteString(schemas.Amount_currencyAmount, *v.CurrencyAmount)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.Amount_currencyCode, *v.CurrencyCode)
+	}
+}
+func (v *Amount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Amount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Amount_currencyAmount:
+			v.CurrencyAmount = new(string)
+			return d.ReadString(schemas.Amount_currencyAmount, v.CurrencyAmount)
+		case schemas.Amount_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.Amount_currencyCode, v.CurrencyCode)
+		}
+		return nil
+	})
+}
+
+// A filter that narrows the set of preferences returned by GetBillingPreferences .
+type BillingFeatureFilter struct {
+
+	// The filter name. Currently the only supported value is PREFERENCE_KEY .
+	Name BillingFeatureFilterName
+
+	// The filter values to match. For PREFERENCE_KEY , supply 1 to 10 preference key
+	// values to match.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingFeatureFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingFeatureFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingFeatureFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.BillingFeatureFilter_name, string(v.Name))
+	}
+	serializeBillingFeatureFilterValues(s, schemas.BillingFeatureFilter_value, v.Value)
+}
+func (v *BillingFeatureFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingFeatureFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingFeatureFilter_name:
+			var ev string
+			if err := d.ReadString(schemas.BillingFeatureFilter_name, &ev); err != nil {
+				return err
+			}
+			v.Name = BillingFeatureFilterName(ev)
+			return nil
+		case schemas.BillingFeatureFilter_value:
+			return deserializeBillingFeatureFilterValues(d, schemas.BillingFeatureFilter_value, &v.Value)
+		}
+		return nil
+	})
+}
+
+// A specific billing period identified by year and month.
+type BillingPeriod struct {
+
+	// The month of the billing period as an integer between 1 and 12.
+	//
+	// This member is required.
+	Month *int32
+
+	// The four-digit year of the billing period.
+	//
+	// This member is required.
+	Year *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Month != nil {
+		s.WriteInt32(schemas.BillingPeriod_month, *v.Month)
+	}
+	if v.Year != nil {
+		s.WriteInt32(schemas.BillingPeriod_year, *v.Year)
+	}
+}
+func (v *BillingPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingPeriod_month:
+			v.Month = new(int32)
+			return d.ReadInt32(schemas.BillingPeriod_month, v.Month)
+		case schemas.BillingPeriod_year:
+			v.Year = new(int32)
+			return d.ReadInt32(schemas.BillingPeriod_year, v.Year)
+		}
+		return nil
+	})
+}
+
+// A single key/value entry used to update a billing preference.
+type BillingPreferenceForKey struct {
+
+	// The preference key. Format depends on the feature being updated.
+	//
+	// This member is required.
+	Key *string
+
+	// The preference value. Valid values: ENABLED or DISABLED .
+	//
+	// This member is required.
+	Value PreferenceValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingPreferenceForKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingPreferenceForKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingPreferenceForKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.BillingPreferenceForKey_key, *v.Key)
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.BillingPreferenceForKey_value, string(v.Value))
+	}
+}
+func (v *BillingPreferenceForKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingPreferenceForKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingPreferenceForKey_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.BillingPreferenceForKey_key, v.Key)
+		case schemas.BillingPreferenceForKey_value:
+			var ev string
+			if err := d.ReadString(schemas.BillingPreferenceForKey_value, &ev); err != nil {
+				return err
+			}
+			v.Value = PreferenceValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A single billing preference entry returned by GetBillingPreferences .
+type BillingPreferenceSummary struct {
+
+	// The feature this preference belongs to.
+	//
+	// This member is required.
+	Feature BillingFeature
+
+	// The preference key. Format depends on the feature.
+	//
+	// This member is required.
+	Key *string
+
+	// The preference value. Valid values: ENABLED or DISABLED .
+	//
+	// This member is required.
+	Value PreferenceValue
+
+	// The associated Amazon Web Services account ID. Populated for account-list keys;
+	// null otherwise.
+	AccountId *string
+
+	// The display name of the account. Populated together with accountId ; null
+	// otherwise.
+	AccountName *string
+
+	// The billing period associated with the preference change. Populated only for
+	// the history features RI_SHARING_HISTORY and CREDIT_SHARING_HISTORY .
+	BillingPeriod *BillingPeriod
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingPreferenceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingPreferenceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingPreferenceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BillingPreferenceSummary_accountId, *v.AccountId)
+	}
+	if v.AccountName != nil {
+		s.WriteString(schemas.BillingPreferenceSummary_accountName, *v.AccountName)
+	}
+	if v.BillingPeriod != nil {
+		s.WriteStruct(schemas.BillingPreferenceSummary_billingPeriod)
+		v.BillingPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Feature != "" {
+		s.WriteString(schemas.BillingPreferenceSummary_feature, string(v.Feature))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.BillingPreferenceSummary_key, *v.Key)
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.BillingPreferenceSummary_value, string(v.Value))
+	}
+}
+func (v *BillingPreferenceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingPreferenceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingPreferenceSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BillingPreferenceSummary_accountId, v.AccountId)
+		case schemas.BillingPreferenceSummary_accountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.BillingPreferenceSummary_accountName, v.AccountName)
+		case schemas.BillingPreferenceSummary_billingPeriod:
+			v.BillingPeriod = &BillingPeriod{}
+			return v.BillingPeriod.Deserialize(d)
+		case schemas.BillingPreferenceSummary_feature:
+			var ev string
+			if err := d.ReadString(schemas.BillingPreferenceSummary_feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = BillingFeature(ev)
+			return nil
+		case schemas.BillingPreferenceSummary_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.BillingPreferenceSummary_key, v.Key)
+		case schemas.BillingPreferenceSummary_value:
+			var ev string
+			if err := d.ReadString(schemas.BillingPreferenceSummary_value, &ev); err != nil {
+				return err
+			}
+			v.Value = PreferenceValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata associated to the billing view.
 type BillingViewElement struct {
 
@@ -340,6 +666,612 @@ func (v *BillingViewListElement) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	A billing view segment. A segment represents a time range during which the
+//
+// billing domain and account relationships for a billing view remained unchanged.
+type BillingViewSegmentsListElement struct {
+
+	//  The billing group primary account ID. The response includes this field for
+	// billing group members. Compare this value to your own account ID to determine
+	// whether you are the primary account.
+	BillingGroupPrimaryAccountId *string
+
+	//  The billing transfer account ID. The response includes this field only when
+	// the caller is a billing transfer source account. The response omits this field
+	// for billing group billing views.
+	BillingTransferAccountId *string
+
+	// The billing domain for this segment. The following values are valid:
+	//
+	//   - PRO_FORMA - Data shaped by Billing Conductor that doesn't reflect the final
+	//   charges owed to Amazon Web Services.
+	//
+	//   - BILLABLE - Data that represents the final charges owed to Amazon Web
+	//   Services.
+	Domain BillingDomain
+
+	//  The management account ID of the organization. The response includes this
+	// field for organization member accounts.
+	ManagementAccountId *string
+
+	//  The time range during which this segment is effective.
+	TimeRange *BillingViewSegmentTimeRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentsListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentsListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentsListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupPrimaryAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, *v.BillingGroupPrimaryAccountId)
+	}
+	if v.BillingTransferAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, *v.BillingTransferAccountId)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.BillingViewSegmentsListElement_domain, string(v.Domain))
+	}
+	if v.ManagementAccountId != nil {
+		s.WriteString(schemas.BillingViewSegmentsListElement_managementAccountId, *v.ManagementAccountId)
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.BillingViewSegmentsListElement_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BillingViewSegmentsListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentsListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId:
+			v.BillingGroupPrimaryAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingGroupPrimaryAccountId, v.BillingGroupPrimaryAccountId)
+		case schemas.BillingViewSegmentsListElement_billingTransferAccountId:
+			v.BillingTransferAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_billingTransferAccountId, v.BillingTransferAccountId)
+		case schemas.BillingViewSegmentsListElement_domain:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewSegmentsListElement_domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = BillingDomain(ev)
+			return nil
+		case schemas.BillingViewSegmentsListElement_managementAccountId:
+			v.ManagementAccountId = new(string)
+			return d.ReadString(schemas.BillingViewSegmentsListElement_managementAccountId, v.ManagementAccountId)
+		case schemas.BillingViewSegmentsListElement_timeRange:
+			v.TimeRange = &BillingViewSegmentTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies a time range with an inclusive begin date and an exclusive end date.
+type BillingViewSegmentTimeRange struct {
+
+	//  The inclusive start of the time range. This value can't be in the future.
+	BeginDateInclusive *time.Time
+
+	//  The exclusive end of the time range. This value must be after
+	// beginDateInclusive .
+	EndDateExclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BillingViewSegmentTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewSegmentTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewSegmentTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDateInclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, *v.BeginDateInclusive)
+	}
+	if v.EndDateExclusive != nil {
+		s.WriteTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, *v.EndDateExclusive)
+	}
+}
+func (v *BillingViewSegmentTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewSegmentTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewSegmentTimeRange_beginDateInclusive:
+			v.BeginDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_beginDateInclusive, v.BeginDateInclusive)
+		case schemas.BillingViewSegmentTimeRange_endDateExclusive:
+			v.EndDateExclusive = new(time.Time)
+			return d.ReadTime(schemas.BillingViewSegmentTimeRange_endDateExclusive, v.EndDateExclusive)
+		}
+		return nil
+	})
+}
+
+// Business Support charges for a linked account.
+type BusinessSupportAccountCharge struct {
+
+	// The linked account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Support plan name for this account. Valid values: AWSSupportBusiness
+	// (Business Support plan), AWSSupportDeveloper (Developer Support plan),
+	// AWSSupportEssential (Basic Support plan).
+	//
+	// This member is required.
+	SupportPlanName *string
+
+	// The total Business Support charge amount for this account in the billing month.
+	//
+	// This member is required.
+	TotalCharge *string
+
+	// The total Support-eligible spend used as the basis for calculating the Business
+	// Support charge for this account.
+	//
+	// This member is required.
+	TotalUsageBasis *string
+
+	// The discount applied to the Business Support charge for this account, if any.
+	// This field is absent when no discount applies.
+	SupportDiscount *BusinessSupportDiscount
+
+	// The Support-eligible spend broken down by contributing service for this account.
+	SupportEligibleSpendByService []BusinessSupportServiceSpend
+
+	// The tier-level charges that make up the total Business Support charge for this
+	// account. Each tier represents a spend range with its own rate.
+	TierCharges []BusinessSupportTierCharge
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportAccountCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportAccountCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportAccountCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_accountId, *v.AccountId)
+	}
+	if v.SupportDiscount != nil {
+		s.WriteStruct(schemas.BusinessSupportAccountCharge_supportDiscount)
+		v.SupportDiscount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBusinessSupportServiceSpendList(s, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	if v.SupportPlanName != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_supportPlanName, *v.SupportPlanName)
+	}
+	serializeBusinessSupportTierChargeList(s, schemas.BusinessSupportAccountCharge_tierCharges, v.TierCharges)
+	if v.TotalCharge != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_totalCharge, *v.TotalCharge)
+	}
+	if v.TotalUsageBasis != nil {
+		s.WriteString(schemas.BusinessSupportAccountCharge_totalUsageBasis, *v.TotalUsageBasis)
+	}
+}
+func (v *BusinessSupportAccountCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportAccountCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportAccountCharge_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_accountId, v.AccountId)
+		case schemas.BusinessSupportAccountCharge_supportDiscount:
+			v.SupportDiscount = &BusinessSupportDiscount{}
+			return v.SupportDiscount.Deserialize(d)
+		case schemas.BusinessSupportAccountCharge_supportEligibleSpendByService:
+			return deserializeBusinessSupportServiceSpendList(d, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, &v.SupportEligibleSpendByService)
+		case schemas.BusinessSupportAccountCharge_supportPlanName:
+			v.SupportPlanName = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_supportPlanName, v.SupportPlanName)
+		case schemas.BusinessSupportAccountCharge_tierCharges:
+			return deserializeBusinessSupportTierChargeList(d, schemas.BusinessSupportAccountCharge_tierCharges, &v.TierCharges)
+		case schemas.BusinessSupportAccountCharge_totalCharge:
+			v.TotalCharge = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_totalCharge, v.TotalCharge)
+		case schemas.BusinessSupportAccountCharge_totalUsageBasis:
+			v.TotalUsageBasis = new(string)
+			return d.ReadString(schemas.BusinessSupportAccountCharge_totalUsageBasis, v.TotalUsageBasis)
+		}
+		return nil
+	})
+}
+
+// A discount applied to a Business Support account charge, including the discount
+// amount, percentage, type, and source.
+type BusinessSupportDiscount struct {
+
+	// The discount amount applied to the Business Support charge. This value is
+	// negative, representing a reduction in the charge.
+	DiscountAmount *string
+
+	// The discount percentage applied to the Business Support charge, expressed as a
+	// decimal (for example, 0.12 for a 12% discount).
+	DiscountPercentage *string
+
+	// The source or program through which the discount was applied.
+	DiscountSource *string
+
+	// The type of discount applied. Valid values: Distributor_Discount (a discount
+	// applied through a distributor arrangement), SPP_Discount (a discount applied
+	// through the Solution Provider Program).
+	DiscountType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportDiscount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportDiscount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportDiscount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscountAmount != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountAmount, *v.DiscountAmount)
+	}
+	if v.DiscountPercentage != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountPercentage, *v.DiscountPercentage)
+	}
+	if v.DiscountSource != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountSource, *v.DiscountSource)
+	}
+	if v.DiscountType != nil {
+		s.WriteString(schemas.BusinessSupportDiscount_discountType, *v.DiscountType)
+	}
+}
+func (v *BusinessSupportDiscount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportDiscount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportDiscount_discountAmount:
+			v.DiscountAmount = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountAmount, v.DiscountAmount)
+		case schemas.BusinessSupportDiscount_discountPercentage:
+			v.DiscountPercentage = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountPercentage, v.DiscountPercentage)
+		case schemas.BusinessSupportDiscount_discountSource:
+			v.DiscountSource = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountSource, v.DiscountSource)
+		case schemas.BusinessSupportDiscount_discountType:
+			v.DiscountType = new(string)
+			return d.ReadString(schemas.BusinessSupportDiscount_discountType, v.DiscountType)
+		}
+		return nil
+	})
+}
+
+// A service-level spend entry contributing to Business Support eligible spend.
+type BusinessSupportServiceSpend struct {
+
+	// The Support-eligible spend amount for this service.
+	//
+	// This member is required.
+	ChargeAmount *string
+
+	// The name of the Amazon Web Services service contributing to the
+	// Support-eligible spend.
+	//
+	// This member is required.
+	ContributingService *string
+
+	// The ISO 4217 currency code for the charge amount (for example, USD ).
+	//
+	// This member is required.
+	Currency *string
+
+	// The type of the line item. Valid values: Usage .
+	//
+	// This member is required.
+	ItemType *string
+
+	// A human-readable description of the service spend entry.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportServiceSpend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportServiceSpend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportServiceSpend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ContributingService != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_contributingService, *v.ContributingService)
+	}
+	if v.Currency != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_currency, *v.Currency)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_description, *v.Description)
+	}
+	if v.ItemType != nil {
+		s.WriteString(schemas.BusinessSupportServiceSpend_itemType, *v.ItemType)
+	}
+}
+func (v *BusinessSupportServiceSpend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportServiceSpend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportServiceSpend_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_chargeAmount, v.ChargeAmount)
+		case schemas.BusinessSupportServiceSpend_contributingService:
+			v.ContributingService = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_contributingService, v.ContributingService)
+		case schemas.BusinessSupportServiceSpend_currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_currency, v.Currency)
+		case schemas.BusinessSupportServiceSpend_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_description, v.Description)
+		case schemas.BusinessSupportServiceSpend_itemType:
+			v.ItemType = new(string)
+			return d.ReadString(schemas.BusinessSupportServiceSpend_itemType, v.ItemType)
+		}
+		return nil
+	})
+}
+
+// A Business Support subscription contract for an account.
+type BusinessSupportSubscriptionContract struct {
+
+	// The account ID associated with this subscription contract.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The end date of the subscription contract.
+	//
+	// This member is required.
+	ContractEndDate *time.Time
+
+	// The start date of the subscription contract.
+	//
+	// This member is required.
+	ContractStartDate *time.Time
+
+	// The name of the Support plan for this subscription contract. Valid values:
+	// AWSSupportBusiness (Business Support plan), AWSSupportDeveloper (Developer
+	// Support plan), AWSSupportEssential (Basic Support plan).
+	//
+	// This member is required.
+	PlanName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportSubscriptionContract) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportSubscriptionContract)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportSubscriptionContract) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BusinessSupportSubscriptionContract_accountId, *v.AccountId)
+	}
+	if v.ContractEndDate != nil {
+		s.WriteTime(schemas.BusinessSupportSubscriptionContract_contractEndDate, *v.ContractEndDate)
+	}
+	if v.ContractStartDate != nil {
+		s.WriteTime(schemas.BusinessSupportSubscriptionContract_contractStartDate, *v.ContractStartDate)
+	}
+	if v.PlanName != nil {
+		s.WriteString(schemas.BusinessSupportSubscriptionContract_planName, *v.PlanName)
+	}
+}
+func (v *BusinessSupportSubscriptionContract) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportSubscriptionContract, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportSubscriptionContract_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BusinessSupportSubscriptionContract_accountId, v.AccountId)
+		case schemas.BusinessSupportSubscriptionContract_contractEndDate:
+			v.ContractEndDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportSubscriptionContract_contractEndDate, v.ContractEndDate)
+		case schemas.BusinessSupportSubscriptionContract_contractStartDate:
+			v.ContractStartDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportSubscriptionContract_contractStartDate, v.ContractStartDate)
+		case schemas.BusinessSupportSubscriptionContract_planName:
+			v.PlanName = new(string)
+			return d.ReadString(schemas.BusinessSupportSubscriptionContract_planName, v.PlanName)
+		}
+		return nil
+	})
+}
+
+// A tier-level charge within a Business Support pricing plan. Business Support
+// uses tiered pricing where different percentage rates apply to different ranges
+// of Support-eligible spend.
+type BusinessSupportTierCharge struct {
+
+	// The Business Support charge amount calculated for this pricing tier.
+	//
+	// This member is required.
+	TierCharge *string
+
+	// A human-readable description of the pricing tier, including the spend range and
+	// percentage rate applied.
+	//
+	// This member is required.
+	TierDescription *string
+
+	// The percentage rate applied to Support-eligible spend within this pricing tier.
+	//
+	// This member is required.
+	TierRate *string
+
+	// The amount of Support-eligible spend that falls within this pricing tier.
+	//
+	// This member is required.
+	UsageSlice *string
+
+	// The end date of the charge period for this tier charge.
+	ChargePeriodEndDate *time.Time
+
+	// The start date of the charge period for this tier charge.
+	ChargePeriodStartDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BusinessSupportTierCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessSupportTierCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessSupportTierCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargePeriodEndDate != nil {
+		s.WriteTime(schemas.BusinessSupportTierCharge_chargePeriodEndDate, *v.ChargePeriodEndDate)
+	}
+	if v.ChargePeriodStartDate != nil {
+		s.WriteTime(schemas.BusinessSupportTierCharge_chargePeriodStartDate, *v.ChargePeriodStartDate)
+	}
+	if v.TierCharge != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierCharge, *v.TierCharge)
+	}
+	if v.TierDescription != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierDescription, *v.TierDescription)
+	}
+	if v.TierRate != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_tierRate, *v.TierRate)
+	}
+	if v.UsageSlice != nil {
+		s.WriteString(schemas.BusinessSupportTierCharge_usageSlice, *v.UsageSlice)
+	}
+}
+func (v *BusinessSupportTierCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessSupportTierCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessSupportTierCharge_chargePeriodEndDate:
+			v.ChargePeriodEndDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportTierCharge_chargePeriodEndDate, v.ChargePeriodEndDate)
+		case schemas.BusinessSupportTierCharge_chargePeriodStartDate:
+			v.ChargePeriodStartDate = new(time.Time)
+			return d.ReadTime(schemas.BusinessSupportTierCharge_chargePeriodStartDate, v.ChargePeriodStartDate)
+		case schemas.BusinessSupportTierCharge_tierCharge:
+			v.TierCharge = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierCharge, v.TierCharge)
+		case schemas.BusinessSupportTierCharge_tierDescription:
+			v.TierDescription = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierDescription, v.TierDescription)
+		case schemas.BusinessSupportTierCharge_tierRate:
+			v.TierRate = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_tierRate, v.TierRate)
+		case schemas.BusinessSupportTierCharge_usageSlice:
+			v.UsageSlice = new(string)
+			return d.ReadString(schemas.BusinessSupportTierCharge_usageSlice, v.UsageSlice)
+		}
+		return nil
+	})
+}
+
+// An account that is charged all or a portion of the total Support charge and the
+// percentage of the charge allocated to it.
+type ChargeAccount struct {
+
+	// The account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The percentage of the total Support charge allocated to this account. This is
+	// 0.0 when supportAllocationMethod = Proportional.
+	//
+	// This member is required.
+	ChargePercentage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChargeAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChargeAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChargeAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ChargeAccount_accountId, *v.AccountId)
+	}
+	if v.ChargePercentage != nil {
+		s.WriteString(schemas.ChargeAccount_chargePercentage, *v.ChargePercentage)
+	}
+}
+func (v *ChargeAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChargeAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChargeAccount_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ChargeAccount_accountId, v.AccountId)
+		case schemas.ChargeAccount_chargePercentage:
+			v.ChargePercentage = new(string)
+			return d.ReadString(schemas.ChargeAccount_chargePercentage, v.ChargePercentage)
+		}
+		return nil
+	})
+}
+
+// An account that is covered by the Enterprise Support contract.
+type ContractAccount struct {
+
+	// The account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// When true, Support charges are calculated on charges before private discounts.
+	// When false, they are calculated after private discounts.
+	//
+	// This member is required.
+	IsGdn *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContractAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContractAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContractAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ContractAccount_accountId, *v.AccountId)
+	}
+	if v.IsGdn != nil {
+		s.WriteBool(schemas.ContractAccount_isGdn, *v.IsGdn)
+	}
+}
+func (v *ContractAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContractAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContractAccount_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ContractAccount_accountId, v.AccountId)
+		case schemas.ContractAccount_isGdn:
+			v.IsGdn = new(bool)
+			return d.ReadBool(schemas.ContractAccount_isGdn, v.IsGdn)
+		}
+		return nil
+	})
+}
+
 // The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 
@@ -376,6 +1308,343 @@ func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.CostCategoryValues_key, v.Key)
 		case schemas.CostCategoryValues_values:
 			return deserializeValues(d, schemas.CostCategoryValues_values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// A single entry in the credit allocation history, representing how a credit was
+// applied to a specific service during a billing month.
+type CreditAllocationHistoryEntry struct {
+
+	// The Amazon Web Services account the credit was applied to.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Web Services service the credit was applied to.
+	//
+	// This member is required.
+	AppliedServiceName *string
+
+	// The billing month of the application in YYYY-MM format.
+	//
+	// This member is required.
+	BillingMonth *string
+
+	// The amount of credit applied. Negative values represent credits that reduced
+	// the bill.
+	//
+	// This member is required.
+	CreditAmount *Amount
+
+	// The identifier of the credit that was applied.
+	//
+	// This member is required.
+	CreditId *string
+
+	// true when the entry was applied to an in-flight bill that has not yet been
+	// finalized.
+	//
+	// This member is required.
+	IsEstimatedBill *bool
+
+	// A human-readable description of the credit allocation.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreditAllocationHistoryEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreditAllocationHistoryEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreditAllocationHistoryEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreditAllocationHistoryEntry_accountId, *v.AccountId)
+	}
+	if v.AppliedServiceName != nil {
+		s.WriteString(schemas.CreditAllocationHistoryEntry_appliedServiceName, *v.AppliedServiceName)
+	}
+	if v.BillingMonth != nil {
+		s.WriteString(schemas.CreditAllocationHistoryEntry_billingMonth, *v.BillingMonth)
+	}
+	if v.CreditAmount != nil {
+		s.WriteStruct(schemas.CreditAllocationHistoryEntry_creditAmount)
+		v.CreditAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreditId != nil {
+		s.WriteString(schemas.CreditAllocationHistoryEntry_creditId, *v.CreditId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreditAllocationHistoryEntry_description, *v.Description)
+	}
+	if v.IsEstimatedBill != nil {
+		s.WriteBool(schemas.CreditAllocationHistoryEntry_isEstimatedBill, *v.IsEstimatedBill)
+	}
+}
+func (v *CreditAllocationHistoryEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreditAllocationHistoryEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreditAllocationHistoryEntry_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CreditAllocationHistoryEntry_accountId, v.AccountId)
+		case schemas.CreditAllocationHistoryEntry_appliedServiceName:
+			v.AppliedServiceName = new(string)
+			return d.ReadString(schemas.CreditAllocationHistoryEntry_appliedServiceName, v.AppliedServiceName)
+		case schemas.CreditAllocationHistoryEntry_billingMonth:
+			v.BillingMonth = new(string)
+			return d.ReadString(schemas.CreditAllocationHistoryEntry_billingMonth, v.BillingMonth)
+		case schemas.CreditAllocationHistoryEntry_creditAmount:
+			v.CreditAmount = &Amount{}
+			return v.CreditAmount.Deserialize(d)
+		case schemas.CreditAllocationHistoryEntry_creditId:
+			v.CreditId = new(string)
+			return d.ReadString(schemas.CreditAllocationHistoryEntry_creditId, v.CreditId)
+		case schemas.CreditAllocationHistoryEntry_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreditAllocationHistoryEntry_description, v.Description)
+		case schemas.CreditAllocationHistoryEntry_isEstimatedBill:
+			v.IsEstimatedBill = new(bool)
+			return d.ReadBool(schemas.CreditAllocationHistoryEntry_isEstimatedBill, v.IsEstimatedBill)
+		}
+		return nil
+	})
+}
+
+// Detailed information about an Amazon Web Services credit, including its
+// identifier, type, monetary amounts, applicable products, sharing configuration,
+// and current enabled status.
+type CreditData struct {
+
+	// The Amazon Web Services account ID that owns the credit.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The unique identifier for the credit.
+	//
+	// This member is required.
+	CreditId *string
+
+	// The type of credit. Examples: Promotion , Refund , TrueUp .
+	//
+	// This member is required.
+	CreditType *string
+
+	// A human-readable description of the credit.
+	//
+	// This member is required.
+	Description *string
+
+	// The initial amount of the credit when it was issued.
+	//
+	// This member is required.
+	InitialAmount *Amount
+
+	// The unused balance of the credit.
+	//
+	// This member is required.
+	RemainingAmount *Amount
+
+	// The date the credit becomes valid, as Unix epoch seconds.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// Whether the owning account has account-level credit sharing turned on.
+	AccountHasCreditSharingEnabled *bool
+
+	// The names of Amazon Web Services services this credit applies to.
+	ApplicableProductNames []string
+
+	// When the credit is applied during bill computation. Valid values:
+	// BEFORE_CROSS_SERVICE_DISCOUNTS , AFTER_DISCOUNTS .
+	ApplicationType ApplicationType
+
+	// The Amazon Resource Name (ARN) of the Cost Category controlling the credit's
+	// sharing scope. Present only when creditSharingType is COST_CATEGORY_RULE .
+	CostCategoryArn *string
+
+	// The display configuration for the credit in the Amazon Web Services Billing
+	// console.
+	CreditConsoleVisibility *string
+
+	// The sharing configuration for the credit. Valid values: DEFAULT , DISABLED ,
+	// CUSTOM , COST_CATEGORY_RULE .
+	CreditSharingType CreditSharingType
+
+	// Whether the credit participates in billing runs. Valid values: ENABLED ,
+	// DISABLED .
+	CreditStatus CreditStatus
+
+	// The date the credit expires, as Unix epoch seconds.
+	EndDate *time.Time
+
+	// The estimated remaining balance, including in-flight (open) bills that have not
+	// yet been finalized.
+	EstimatedAmount *Amount
+
+	// The date the credit balance reached zero, as Unix epoch seconds.
+	ExhaustDate *time.Time
+
+	// Restricts which purchase types this credit applies to. When null or omitted,
+	// the credit applies to all purchase types.
+	PurchaseTypeApplications []string
+
+	// The rule name within the Cost Category. Present only when creditSharingType is
+	// COST_CATEGORY_RULE .
+	RuleName *string
+
+	// The Amazon Web Services account IDs entitled to apply this credit.
+	ShareableAccounts []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreditData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreditData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreditData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountHasCreditSharingEnabled != nil {
+		s.WriteBool(schemas.CreditData_accountHasCreditSharingEnabled, *v.AccountHasCreditSharingEnabled)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreditData_accountId, *v.AccountId)
+	}
+	serializeProductNames(s, schemas.CreditData_applicableProductNames, v.ApplicableProductNames)
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.CreditData_applicationType, string(v.ApplicationType))
+	}
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.CreditData_costCategoryArn, *v.CostCategoryArn)
+	}
+	if v.CreditConsoleVisibility != nil {
+		s.WriteString(schemas.CreditData_creditConsoleVisibility, *v.CreditConsoleVisibility)
+	}
+	if v.CreditId != nil {
+		s.WriteString(schemas.CreditData_creditId, *v.CreditId)
+	}
+	if v.CreditSharingType != "" {
+		s.WriteString(schemas.CreditData_creditSharingType, string(v.CreditSharingType))
+	}
+	if v.CreditStatus != "" {
+		s.WriteString(schemas.CreditData_creditStatus, string(v.CreditStatus))
+	}
+	if v.CreditType != nil {
+		s.WriteString(schemas.CreditData_creditType, *v.CreditType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreditData_description, *v.Description)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.CreditData_endDate, *v.EndDate)
+	}
+	if v.EstimatedAmount != nil {
+		s.WriteStruct(schemas.CreditData_estimatedAmount)
+		v.EstimatedAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExhaustDate != nil {
+		s.WriteTime(schemas.CreditData_exhaustDate, *v.ExhaustDate)
+	}
+	if v.InitialAmount != nil {
+		s.WriteStruct(schemas.CreditData_initialAmount)
+		v.InitialAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePurchaseTypeApplications(s, schemas.CreditData_purchaseTypeApplications, v.PurchaseTypeApplications)
+	if v.RemainingAmount != nil {
+		s.WriteStruct(schemas.CreditData_remainingAmount)
+		v.RemainingAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreditData_ruleName, *v.RuleName)
+	}
+	serializeShareableAccountIds(s, schemas.CreditData_shareableAccounts, v.ShareableAccounts)
+	if v.StartDate != nil {
+		s.WriteTime(schemas.CreditData_startDate, *v.StartDate)
+	}
+}
+func (v *CreditData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreditData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreditData_accountHasCreditSharingEnabled:
+			v.AccountHasCreditSharingEnabled = new(bool)
+			return d.ReadBool(schemas.CreditData_accountHasCreditSharingEnabled, v.AccountHasCreditSharingEnabled)
+		case schemas.CreditData_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CreditData_accountId, v.AccountId)
+		case schemas.CreditData_applicableProductNames:
+			return deserializeProductNames(d, schemas.CreditData_applicableProductNames, &v.ApplicableProductNames)
+		case schemas.CreditData_applicationType:
+			var ev string
+			if err := d.ReadString(schemas.CreditData_applicationType, &ev); err != nil {
+				return err
+			}
+			v.ApplicationType = ApplicationType(ev)
+			return nil
+		case schemas.CreditData_costCategoryArn:
+			v.CostCategoryArn = new(string)
+			return d.ReadString(schemas.CreditData_costCategoryArn, v.CostCategoryArn)
+		case schemas.CreditData_creditConsoleVisibility:
+			v.CreditConsoleVisibility = new(string)
+			return d.ReadString(schemas.CreditData_creditConsoleVisibility, v.CreditConsoleVisibility)
+		case schemas.CreditData_creditId:
+			v.CreditId = new(string)
+			return d.ReadString(schemas.CreditData_creditId, v.CreditId)
+		case schemas.CreditData_creditSharingType:
+			var ev string
+			if err := d.ReadString(schemas.CreditData_creditSharingType, &ev); err != nil {
+				return err
+			}
+			v.CreditSharingType = CreditSharingType(ev)
+			return nil
+		case schemas.CreditData_creditStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreditData_creditStatus, &ev); err != nil {
+				return err
+			}
+			v.CreditStatus = CreditStatus(ev)
+			return nil
+		case schemas.CreditData_creditType:
+			v.CreditType = new(string)
+			return d.ReadString(schemas.CreditData_creditType, v.CreditType)
+		case schemas.CreditData_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreditData_description, v.Description)
+		case schemas.CreditData_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.CreditData_endDate, v.EndDate)
+		case schemas.CreditData_estimatedAmount:
+			v.EstimatedAmount = &Amount{}
+			return v.EstimatedAmount.Deserialize(d)
+		case schemas.CreditData_exhaustDate:
+			v.ExhaustDate = new(time.Time)
+			return d.ReadTime(schemas.CreditData_exhaustDate, v.ExhaustDate)
+		case schemas.CreditData_initialAmount:
+			v.InitialAmount = &Amount{}
+			return v.InitialAmount.Deserialize(d)
+		case schemas.CreditData_purchaseTypeApplications:
+			return deserializePurchaseTypeApplications(d, schemas.CreditData_purchaseTypeApplications, &v.PurchaseTypeApplications)
+		case schemas.CreditData_remainingAmount:
+			v.RemainingAmount = &Amount{}
+			return v.RemainingAmount.Deserialize(d)
+		case schemas.CreditData_ruleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.CreditData_ruleName, v.RuleName)
+		case schemas.CreditData_shareableAccounts:
+			return deserializeShareableAccountIds(d, schemas.CreditData_shareableAccounts, &v.ShareableAccounts)
+		case schemas.CreditData_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.CreditData_startDate, v.StartDate)
 		}
 		return nil
 	})
@@ -422,6 +1691,48 @@ func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.DimensionValues_values:
 			return deserializeValues(d, schemas.DimensionValues_values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// A time period for Enterprise Support billing.
+type EnterpriseSupportTimePeriod struct {
+
+	// The begin date of the time period.
+	//
+	// This member is required.
+	BeginDate *time.Time
+
+	// The end date of the time period.
+	EndDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *EnterpriseSupportTimePeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnterpriseSupportTimePeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnterpriseSupportTimePeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDate != nil {
+		s.WriteTime(schemas.EnterpriseSupportTimePeriod_beginDate, *v.BeginDate)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.EnterpriseSupportTimePeriod_endDate, *v.EndDate)
+	}
+}
+func (v *EnterpriseSupportTimePeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnterpriseSupportTimePeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnterpriseSupportTimePeriod_beginDate:
+			v.BeginDate = new(time.Time)
+			return d.ReadTime(schemas.EnterpriseSupportTimePeriod_beginDate, v.BeginDate)
+		case schemas.EnterpriseSupportTimePeriod_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.EnterpriseSupportTimePeriod_endDate, v.EndDate)
 		}
 		return nil
 	})
@@ -495,6 +1806,357 @@ func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Enterprise Support charges for a linked account.
+type LinkedAccountCharge struct {
+
+	// The linked account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The number of billable seconds in the billing period based on when the account
+	// was subscribed to Enterprise Support.
+	//
+	// This member is required.
+	BillableSeconds *int64
+
+	// The payer account ID that is authorized to view Enterprise Support data for all
+	// accounts in its Support profile.
+	//
+	// This member is required.
+	PayerAccountId *string
+
+	// The prorated total support-eligible spend based on when the account was
+	// subscribed to Enterprise Support.
+	//
+	// This member is required.
+	ProratedTotalSupportEligibleSpend *string
+
+	// The total number of seconds in the billing period.
+	//
+	// This member is required.
+	TotalSeconds *int64
+
+	// The total support-eligible spend for this account.
+	//
+	// This member is required.
+	TotalSupportEligibleSpend *string
+
+	// The type of account.
+	AccountType *string
+
+	// The time periods during which this account was linked.
+	LinkedTimePeriods []EnterpriseSupportTimePeriod
+
+	// The subscription time periods for this account.
+	SubscriptionTimePeriods []EnterpriseSupportTimePeriod
+
+	// The support-eligible spend broken down by service.
+	SupportEligibleSpendByService []ServiceLevelAccountUsage
+
+	// The total support-eligible Reserved Instance spend for this account.
+	TotalSupportEligibleReservedInstanceSpend *string
+
+	// The total support-eligible Savings Plan spend for this account.
+	TotalSupportEligibleSavingsPlanSpend *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LinkedAccountCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkedAccountCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkedAccountCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.LinkedAccountCharge_accountId, *v.AccountId)
+	}
+	if v.AccountType != nil {
+		s.WriteString(schemas.LinkedAccountCharge_accountType, *v.AccountType)
+	}
+	if v.BillableSeconds != nil {
+		s.WriteInt64(schemas.LinkedAccountCharge_billableSeconds, *v.BillableSeconds)
+	}
+	serializeTimePeriodList(s, schemas.LinkedAccountCharge_linkedTimePeriods, v.LinkedTimePeriods)
+	if v.PayerAccountId != nil {
+		s.WriteString(schemas.LinkedAccountCharge_payerAccountId, *v.PayerAccountId)
+	}
+	if v.ProratedTotalSupportEligibleSpend != nil {
+		s.WriteString(schemas.LinkedAccountCharge_proratedTotalSupportEligibleSpend, *v.ProratedTotalSupportEligibleSpend)
+	}
+	serializeTimePeriodList(s, schemas.LinkedAccountCharge_subscriptionTimePeriods, v.SubscriptionTimePeriods)
+	serializeServiceLevelAccountUsageList(s, schemas.LinkedAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	if v.TotalSeconds != nil {
+		s.WriteInt64(schemas.LinkedAccountCharge_totalSeconds, *v.TotalSeconds)
+	}
+	if v.TotalSupportEligibleReservedInstanceSpend != nil {
+		s.WriteString(schemas.LinkedAccountCharge_totalSupportEligibleReservedInstanceSpend, *v.TotalSupportEligibleReservedInstanceSpend)
+	}
+	if v.TotalSupportEligibleSavingsPlanSpend != nil {
+		s.WriteString(schemas.LinkedAccountCharge_totalSupportEligibleSavingsPlanSpend, *v.TotalSupportEligibleSavingsPlanSpend)
+	}
+	if v.TotalSupportEligibleSpend != nil {
+		s.WriteString(schemas.LinkedAccountCharge_totalSupportEligibleSpend, *v.TotalSupportEligibleSpend)
+	}
+}
+func (v *LinkedAccountCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkedAccountCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkedAccountCharge_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_accountId, v.AccountId)
+		case schemas.LinkedAccountCharge_accountType:
+			v.AccountType = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_accountType, v.AccountType)
+		case schemas.LinkedAccountCharge_billableSeconds:
+			v.BillableSeconds = new(int64)
+			return d.ReadInt64(schemas.LinkedAccountCharge_billableSeconds, v.BillableSeconds)
+		case schemas.LinkedAccountCharge_linkedTimePeriods:
+			return deserializeTimePeriodList(d, schemas.LinkedAccountCharge_linkedTimePeriods, &v.LinkedTimePeriods)
+		case schemas.LinkedAccountCharge_payerAccountId:
+			v.PayerAccountId = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_payerAccountId, v.PayerAccountId)
+		case schemas.LinkedAccountCharge_proratedTotalSupportEligibleSpend:
+			v.ProratedTotalSupportEligibleSpend = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_proratedTotalSupportEligibleSpend, v.ProratedTotalSupportEligibleSpend)
+		case schemas.LinkedAccountCharge_subscriptionTimePeriods:
+			return deserializeTimePeriodList(d, schemas.LinkedAccountCharge_subscriptionTimePeriods, &v.SubscriptionTimePeriods)
+		case schemas.LinkedAccountCharge_supportEligibleSpendByService:
+			return deserializeServiceLevelAccountUsageList(d, schemas.LinkedAccountCharge_supportEligibleSpendByService, &v.SupportEligibleSpendByService)
+		case schemas.LinkedAccountCharge_totalSeconds:
+			v.TotalSeconds = new(int64)
+			return d.ReadInt64(schemas.LinkedAccountCharge_totalSeconds, v.TotalSeconds)
+		case schemas.LinkedAccountCharge_totalSupportEligibleReservedInstanceSpend:
+			v.TotalSupportEligibleReservedInstanceSpend = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_totalSupportEligibleReservedInstanceSpend, v.TotalSupportEligibleReservedInstanceSpend)
+		case schemas.LinkedAccountCharge_totalSupportEligibleSavingsPlanSpend:
+			v.TotalSupportEligibleSavingsPlanSpend = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_totalSupportEligibleSavingsPlanSpend, v.TotalSupportEligibleSavingsPlanSpend)
+		case schemas.LinkedAccountCharge_totalSupportEligibleSpend:
+			v.TotalSupportEligibleSpend = new(string)
+			return d.ReadString(schemas.LinkedAccountCharge_totalSupportEligibleSpend, v.TotalSupportEligibleSpend)
+		}
+		return nil
+	})
+}
+
+// A pricing plan for Enterprise Support billing.
+type PricingPlan struct {
+
+	// The pricing tiers within this plan.
+	//
+	// This member is required.
+	Tiers []PricingPlanTier
+
+	// A description of the pricing plan.
+	Description *string
+
+	// Whether the discount applies to the minimum Support charge.
+	DiscountAppliesToMinimumCharge *bool
+
+	// The end date of the pricing plan.
+	EndDate *time.Time
+
+	// The minimum Support charge amount for this pricing plan.
+	MinimumCharge *string
+
+	// The name of the pricing plan.
+	Name *string
+
+	// The discount percentage applied by this pricing plan.
+	PlanDiscountPercent *string
+
+	// The unique identifier for the pricing plan.
+	PricingPlanId *string
+
+	// The start date of the pricing plan.
+	StartDate *time.Time
+
+	// Whether the pricing plan uses tiered pricing.
+	Tiered *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PricingPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PricingPlan_description, *v.Description)
+	}
+	if v.DiscountAppliesToMinimumCharge != nil {
+		s.WriteBool(schemas.PricingPlan_discountAppliesToMinimumCharge, *v.DiscountAppliesToMinimumCharge)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.PricingPlan_endDate, *v.EndDate)
+	}
+	if v.MinimumCharge != nil {
+		s.WriteString(schemas.PricingPlan_minimumCharge, *v.MinimumCharge)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PricingPlan_name, *v.Name)
+	}
+	if v.PlanDiscountPercent != nil {
+		s.WriteString(schemas.PricingPlan_planDiscountPercent, *v.PlanDiscountPercent)
+	}
+	if v.PricingPlanId != nil {
+		s.WriteString(schemas.PricingPlan_pricingPlanId, *v.PricingPlanId)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.PricingPlan_startDate, *v.StartDate)
+	}
+	if v.Tiered != nil {
+		s.WriteString(schemas.PricingPlan_tiered, *v.Tiered)
+	}
+	serializePricingPlanTierList(s, schemas.PricingPlan_tiers, v.Tiers)
+}
+func (v *PricingPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingPlan_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PricingPlan_description, v.Description)
+		case schemas.PricingPlan_discountAppliesToMinimumCharge:
+			v.DiscountAppliesToMinimumCharge = new(bool)
+			return d.ReadBool(schemas.PricingPlan_discountAppliesToMinimumCharge, v.DiscountAppliesToMinimumCharge)
+		case schemas.PricingPlan_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.PricingPlan_endDate, v.EndDate)
+		case schemas.PricingPlan_minimumCharge:
+			v.MinimumCharge = new(string)
+			return d.ReadString(schemas.PricingPlan_minimumCharge, v.MinimumCharge)
+		case schemas.PricingPlan_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PricingPlan_name, v.Name)
+		case schemas.PricingPlan_planDiscountPercent:
+			v.PlanDiscountPercent = new(string)
+			return d.ReadString(schemas.PricingPlan_planDiscountPercent, v.PlanDiscountPercent)
+		case schemas.PricingPlan_pricingPlanId:
+			v.PricingPlanId = new(string)
+			return d.ReadString(schemas.PricingPlan_pricingPlanId, v.PricingPlanId)
+		case schemas.PricingPlan_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.PricingPlan_startDate, v.StartDate)
+		case schemas.PricingPlan_tiered:
+			v.Tiered = new(string)
+			return d.ReadString(schemas.PricingPlan_tiered, v.Tiered)
+		case schemas.PricingPlan_tiers:
+			return deserializePricingPlanTierList(d, schemas.PricingPlan_tiers, &v.Tiers)
+		}
+		return nil
+	})
+}
+
+// A tier within an Enterprise Support pricing plan.
+type PricingPlanTier struct {
+
+	// The additional percentage applied to aggregate charges in this tier.
+	//
+	// This member is required.
+	AdditionalPercentageOfAggregateCharges *string
+
+	// The adjustment applied to aggregate charges.
+	//
+	// This member is required.
+	AggregateChargesAdjustment *string
+
+	// The base charge for this tier.
+	//
+	// This member is required.
+	BaseCharge *string
+
+	// Whether the tier charges are calculated incrementally.
+	//
+	// This member is required.
+	Incremental *bool
+
+	// The minimum spend threshold for this tier.
+	//
+	// This member is required.
+	TierMinimum *string
+
+	// The increment amount for incremental tier calculations.
+	Increment *string
+
+	// The charge per increment.
+	IncrementCharge *string
+
+	// The maximum spend threshold for this tier.
+	TierMaximum *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PricingPlanTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingPlanTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingPlanTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalPercentageOfAggregateCharges != nil {
+		s.WriteString(schemas.PricingPlanTier_additionalPercentageOfAggregateCharges, *v.AdditionalPercentageOfAggregateCharges)
+	}
+	if v.AggregateChargesAdjustment != nil {
+		s.WriteString(schemas.PricingPlanTier_aggregateChargesAdjustment, *v.AggregateChargesAdjustment)
+	}
+	if v.BaseCharge != nil {
+		s.WriteString(schemas.PricingPlanTier_baseCharge, *v.BaseCharge)
+	}
+	if v.Increment != nil {
+		s.WriteString(schemas.PricingPlanTier_increment, *v.Increment)
+	}
+	if v.IncrementCharge != nil {
+		s.WriteString(schemas.PricingPlanTier_incrementCharge, *v.IncrementCharge)
+	}
+	if v.Incremental != nil {
+		s.WriteBool(schemas.PricingPlanTier_incremental, *v.Incremental)
+	}
+	if v.TierMaximum != nil {
+		s.WriteString(schemas.PricingPlanTier_tierMaximum, *v.TierMaximum)
+	}
+	if v.TierMinimum != nil {
+		s.WriteString(schemas.PricingPlanTier_tierMinimum, *v.TierMinimum)
+	}
+}
+func (v *PricingPlanTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingPlanTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingPlanTier_additionalPercentageOfAggregateCharges:
+			v.AdditionalPercentageOfAggregateCharges = new(string)
+			return d.ReadString(schemas.PricingPlanTier_additionalPercentageOfAggregateCharges, v.AdditionalPercentageOfAggregateCharges)
+		case schemas.PricingPlanTier_aggregateChargesAdjustment:
+			v.AggregateChargesAdjustment = new(string)
+			return d.ReadString(schemas.PricingPlanTier_aggregateChargesAdjustment, v.AggregateChargesAdjustment)
+		case schemas.PricingPlanTier_baseCharge:
+			v.BaseCharge = new(string)
+			return d.ReadString(schemas.PricingPlanTier_baseCharge, v.BaseCharge)
+		case schemas.PricingPlanTier_increment:
+			v.Increment = new(string)
+			return d.ReadString(schemas.PricingPlanTier_increment, v.Increment)
+		case schemas.PricingPlanTier_incrementCharge:
+			v.IncrementCharge = new(string)
+			return d.ReadString(schemas.PricingPlanTier_incrementCharge, v.IncrementCharge)
+		case schemas.PricingPlanTier_incremental:
+			v.Incremental = new(bool)
+			return d.ReadBool(schemas.PricingPlanTier_incremental, v.Incremental)
+		case schemas.PricingPlanTier_tierMaximum:
+			v.TierMaximum = new(string)
+			return d.ReadString(schemas.PricingPlanTier_tierMaximum, v.TierMaximum)
+		case schemas.PricingPlanTier_tierMinimum:
+			v.TierMinimum = new(string)
+			return d.ReadString(schemas.PricingPlanTier_tierMinimum, v.TierMinimum)
+		}
+		return nil
+	})
+}
+
 // The tag structure that contains a tag key and value.
 type ResourceTag struct {
 
@@ -532,6 +2194,46 @@ func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceTag_value:
 			v.Value = new(string)
 			return d.ReadString(schemas.ResourceTag_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Service-level usage details by account.
+type ServiceLevelAccountUsage struct {
+
+	// The service code for which to return Support-eligible spend data.
+	ServiceCode *string
+
+	// The total support-eligible spend for the service.
+	TotalSupportEligibleSpend *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelAccountUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelAccountUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelAccountUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ServiceLevelAccountUsage_serviceCode, *v.ServiceCode)
+	}
+	if v.TotalSupportEligibleSpend != nil {
+		s.WriteString(schemas.ServiceLevelAccountUsage_totalSupportEligibleSpend, *v.TotalSupportEligibleSpend)
+	}
+}
+func (v *ServiceLevelAccountUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelAccountUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelAccountUsage_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.ServiceLevelAccountUsage_serviceCode, v.ServiceCode)
+		case schemas.ServiceLevelAccountUsage_totalSupportEligibleSpend:
+			v.TotalSupportEligibleSpend = new(string)
+			return d.ReadString(schemas.ServiceLevelAccountUsage_totalSupportEligibleSpend, v.TotalSupportEligibleSpend)
 		}
 		return nil
 	})

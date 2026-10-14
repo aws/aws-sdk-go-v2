@@ -1,0 +1,3 @@
+GET /runBatch/__BatchId__/run?maxItems=1&runId=__RunId__&runSettingId=__RunSettingId__&startingToken=__StartingToken__&submissionStatus=SUCCESS
+
+

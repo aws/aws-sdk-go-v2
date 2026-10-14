@@ -143,6 +143,7 @@ func serializeZonalShiftSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func deserializeAllowedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -156,6 +157,7 @@ func deserializeAllowedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeAutoshiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoshiftInResource) error {
+	*v = make([]types.AutoshiftInResource, 0)
 	var vv types.AutoshiftInResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AutoshiftInResource{}
@@ -169,6 +171,7 @@ func deserializeAutoshiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeAutoshiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoshiftSummary) error {
+	*v = make([]types.AutoshiftSummary, 0)
 	var vv types.AutoshiftSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AutoshiftSummary{}
@@ -182,6 +185,7 @@ func deserializeAutoshiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeAvailabilityZones(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -195,6 +199,7 @@ func deserializeAvailabilityZones(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeBlockedDates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -208,6 +213,7 @@ func deserializeBlockedDates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeBlockedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -221,6 +227,7 @@ func deserializeBlockedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeBlockingAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ControlCondition) error {
+	*v = make([]types.ControlCondition, 0)
 	var vv types.ControlCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ControlCondition{}
@@ -234,6 +241,7 @@ func deserializeBlockingAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeManagedResourceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ManagedResourceSummary) error {
+	*v = make([]types.ManagedResourceSummary, 0)
 	var vv types.ManagedResourceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ManagedResourceSummary{}
@@ -247,6 +255,7 @@ func deserializeManagedResourceSummaries(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeOutcomeAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ControlCondition) error {
+	*v = make([]types.ControlCondition, 0)
 	var vv types.ControlCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ControlCondition{}
@@ -260,6 +269,7 @@ func deserializeOutcomeAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeZonalShiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ZonalShiftInResource) error {
+	*v = make([]types.ZonalShiftInResource, 0)
 	var vv types.ZonalShiftInResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ZonalShiftInResource{}
@@ -273,6 +283,7 @@ func deserializeZonalShiftsInResource(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeZonalShiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ZonalShiftSummary) error {
+	*v = make([]types.ZonalShiftSummary, 0)
 	var vv types.ZonalShiftSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ZonalShiftSummary{}
@@ -301,6 +312,13 @@ func deserializeAppliedWeights(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]float32)
 	var vv float32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat32(s.MapValue(), &vv); err != nil {
 			return err

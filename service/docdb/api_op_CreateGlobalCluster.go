@@ -4,13 +4,8 @@ package docdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon DocumentDB global cluster that can span multiple multiple
@@ -73,36 +68,6 @@ type CreateGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGlobalClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_DatabaseName, *v.DatabaseName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.CreateGlobalClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.Engine != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_Engine, *v.Engine)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.SourceDBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
-	}
-	if v.StorageEncrypted != nil {
-		s.WriteBool(schemas.CreateGlobalClusterMessage_StorageEncrypted, *v.StorageEncrypted)
-	}
-}
-
 type CreateGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -114,85 +79,29 @@ type CreateGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGlobalClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGlobalClusterResult_GlobalCluster:
-			v.GlobalCluster = &types.GlobalCluster{}
-			return v.GlobalCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult), output: &CreateGlobalClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGlobalCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGlobalClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlobalCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +116,8 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGlobalCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGlobalCluster",
-	}
 }

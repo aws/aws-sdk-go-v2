@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.DescribeReplay
+
+{"Description":"__Description__","Destination":{"Arn":"__Arn__","FilterArns":["__Member__","__Member__"]},"EventEndTime":946684800,"EventLastReplayedTime":946684800,"EventSourceArn":"__EventSourceArn__","EventStartTime":946684800,"ReplayArn":"__ReplayArn__","ReplayEndTime":946684800,"ReplayName":"__ReplayName__","ReplayStartTime":946684800,"State":"STARTING","StateReason":"__StateReason__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateReplicationTask
+
+{"CdcStartPosition":"__CdcStartPosition__","CdcStartTime":946684800,"CdcStopPosition":"__CdcStopPosition__","MigrationType":"full-load","ReplicationInstanceArn":"__ReplicationInstanceArn__","ReplicationTaskIdentifier":"__ReplicationTaskIdentifier__","ReplicationTaskSettings":"__ReplicationTaskSettings__","ResourceIdentifier":"__ResourceIdentifier__","SourceEndpointArn":"__SourceEndpointArn__","TableMappings":"__TableMappings__","Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}],"TargetEndpointArn":"__TargetEndpointArn__","TaskData":"__TaskData__"}

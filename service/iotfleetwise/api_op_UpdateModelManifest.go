@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Updates a vehicle model (model manifest). If created vehicles are associated
@@ -54,6 +53,50 @@ type UpdateModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateModelManifestRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelManifestRequest_name, *v.Name)
+	}
+	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToAdd, v.NodesToAdd)
+	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToRemove, v.NodesToRemove)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateModelManifestRequest_status, string(v.Status))
+	}
+}
+func (v *UpdateModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelManifestRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateModelManifestRequest_description, v.Description)
+		case schemas.UpdateModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateModelManifestRequest_name, v.Name)
+		case schemas.UpdateModelManifestRequest_nodesToAdd:
+			return deserializeNodePaths(d, schemas.UpdateModelManifestRequest_nodesToAdd, &v.NodesToAdd)
+		case schemas.UpdateModelManifestRequest_nodesToRemove:
+			return deserializeNodePaths(d, schemas.UpdateModelManifestRequest_nodesToRemove, &v.NodesToRemove)
+		case schemas.UpdateModelManifestRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateModelManifestRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateModelManifestOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated vehicle model.
@@ -72,77 +115,54 @@ type UpdateModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateModelManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelManifestResponse_name, *v.Name)
+	}
+}
+func (v *UpdateModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateModelManifestResponse_arn, v.Arn)
+		case schemas.UpdateModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateModelManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelManifest, schemas.UpdateModelManifestRequest, schemas.UpdateModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelManifest, schemas.UpdateModelManifestRequest, schemas.UpdateModelManifestResponse), output: &UpdateModelManifestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateModelManifest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateModelManifest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateModelManifestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelManifest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +177,8 @@ func (c *Client) addOperationUpdateModelManifestMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateModelManifest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateModelManifest",
-	}
 }

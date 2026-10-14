@@ -1,0 +1,3 @@
+DELETE /v1/clusters/__ClusterArn__/topics/__TopicName__
+
+

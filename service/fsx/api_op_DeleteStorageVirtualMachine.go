@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM). Prior
@@ -44,6 +44,21 @@ type DeleteStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStorageVirtualMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStorageVirtualMachineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStorageVirtualMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineRequest_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+}
+
 type DeleteStorageVirtualMachineOutput struct {
 
 	// Describes the lifecycle state of the SVM being deleted.
@@ -58,65 +73,52 @@ type DeleteStorageVirtualMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStorageVirtualMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStorageVirtualMachineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStorageVirtualMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteStorageVirtualMachineResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+}
+func (v *DeleteStorageVirtualMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStorageVirtualMachineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStorageVirtualMachineResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteStorageVirtualMachineResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.StorageVirtualMachineLifecycle(ev)
+			return nil
+		case schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStorageVirtualMachine, schemas.DeleteStorageVirtualMachineRequest, schemas.DeleteStorageVirtualMachineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStorageVirtualMachine, schemas.DeleteStorageVirtualMachineRequest, schemas.DeleteStorageVirtualMachineResponse), output: &DeleteStorageVirtualMachineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStorageVirtualMachine{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteStorageVirtualMachine"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -126,12 +128,6 @@ func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpDeleteStorageVirtualMachineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStorageVirtualMachine(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +140,6 @@ func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -189,12 +179,4 @@ func (m *idempotencyToken_initializeOpDeleteStorageVirtualMachine) HandleInitial
 }
 func addIdempotencyToken_opDeleteStorageVirtualMachineMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteStorageVirtualMachine{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteStorageVirtualMachine(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteStorageVirtualMachine",
-	}
 }

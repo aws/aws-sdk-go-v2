@@ -1,0 +1,5 @@
+PUT /BatchPutMetrics
+
+Content-Type: application/json
+
+{"MetricData":[{"MetricName":"__MetricName__","Step":1,"Timestamp":946684800,"Value":1},{"MetricName":"__MetricName__","Step":1,"Timestamp":946684800,"Value":1}],"TrialComponentName":"__TrialComponentName__"}

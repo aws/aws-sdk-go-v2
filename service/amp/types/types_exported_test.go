@@ -53,6 +53,9 @@ func ExampleDestination_outputUsage() {
 	case *types.DestinationMemberAmpConfiguration:
 		_ = v.Value // Value is types.AmpConfiguration
 
+	case *types.DestinationMemberCloudWatchConfiguration:
+		_ = v.Value // Value is types.CloudWatchConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -62,7 +65,26 @@ func ExampleDestination_outputUsage() {
 	}
 }
 
+var _ *types.CloudWatchConfiguration
 var _ *types.AmpConfiguration
+
+func ExampleExporterConfiguration_outputUsage() {
+	var union types.ExporterConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExporterConfigurationMemberOpenSearchConfiguration:
+		_ = v.Value // Value is types.OpenSearchExporterConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OpenSearchExporterConfiguration
 
 func ExampleIgnoreNearExpected_outputUsage() {
 	var union types.IgnoreNearExpected

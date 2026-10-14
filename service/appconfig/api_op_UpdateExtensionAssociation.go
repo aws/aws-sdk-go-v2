@@ -4,10 +4,9 @@ package appconfig
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an association. For more information about extensions and associations,
@@ -42,6 +41,19 @@ type UpdateExtensionAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtensionAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExtensionAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtensionAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionAssociationId != nil {
+		s.WriteString(schemas.UpdateExtensionAssociationRequest_ExtensionAssociationId, *v.ExtensionAssociationId)
+	}
+	serializeParameterValueMap(s, schemas.UpdateExtensionAssociationRequest_Parameters, v.Parameters)
+}
+
 type UpdateExtensionAssociationOutput struct {
 
 	// The system-generated Amazon Resource Name (ARN) for the extension.
@@ -69,77 +81,74 @@ type UpdateExtensionAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtensionAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtensionAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ExtensionAssociation_Arn, *v.Arn)
+	}
+	if v.ExtensionArn != nil {
+		s.WriteString(schemas.ExtensionAssociation_ExtensionArn, *v.ExtensionArn)
+	}
+	if v.ExtensionVersionNumber != 0 {
+		s.WriteInt32(schemas.ExtensionAssociation_ExtensionVersionNumber, v.ExtensionVersionNumber)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExtensionAssociation_Id, *v.Id)
+	}
+	serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ExtensionAssociation_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *UpdateExtensionAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionAssociation_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_Arn, v.Arn)
+		case schemas.ExtensionAssociation_ExtensionArn:
+			v.ExtensionArn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_ExtensionArn, v.ExtensionArn)
+		case schemas.ExtensionAssociation_ExtensionVersionNumber:
+			return d.ReadInt32(schemas.ExtensionAssociation_ExtensionVersionNumber, &v.ExtensionVersionNumber)
+		case schemas.ExtensionAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_Id, v.Id)
+		case schemas.ExtensionAssociation_Parameters:
+			return deserializeParameterValueMap(d, schemas.ExtensionAssociation_Parameters, &v.Parameters)
+		case schemas.ExtensionAssociation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExtensionAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtensionAssociation, schemas.UpdateExtensionAssociationRequest, schemas.ExtensionAssociation)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExtensionAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtensionAssociation, schemas.UpdateExtensionAssociationRequest, schemas.ExtensionAssociation), output: &UpdateExtensionAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExtensionAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateExtensionAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateExtensionAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExtensionAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +163,8 @@ func (c *Client) addOperationUpdateExtensionAssociationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateExtensionAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateExtensionAssociation",
-	}
 }

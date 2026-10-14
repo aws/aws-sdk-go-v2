@@ -5,10 +5,10 @@ package proton
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an environment account connection in an environment account so that
@@ -93,6 +93,61 @@ type CreateEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentAccountConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentAccountConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentAccountConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_clientToken, *v.ClientToken)
+	}
+	if v.CodebuildRoleArn != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_codebuildRoleArn, *v.CodebuildRoleArn)
+	}
+	if v.ComponentRoleArn != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_componentRoleArn, *v.ComponentRoleArn)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_environmentName, *v.EnvironmentName)
+	}
+	if v.ManagementAccountId != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_managementAccountId, *v.ManagementAccountId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateEnvironmentAccountConnectionInput_tags, v.Tags)
+}
+func (v *CreateEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentAccountConnectionInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_clientToken, v.ClientToken)
+		case schemas.CreateEnvironmentAccountConnectionInput_codebuildRoleArn:
+			v.CodebuildRoleArn = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_codebuildRoleArn, v.CodebuildRoleArn)
+		case schemas.CreateEnvironmentAccountConnectionInput_componentRoleArn:
+			v.ComponentRoleArn = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_componentRoleArn, v.ComponentRoleArn)
+		case schemas.CreateEnvironmentAccountConnectionInput_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_environmentName, v.EnvironmentName)
+		case schemas.CreateEnvironmentAccountConnectionInput_managementAccountId:
+			v.ManagementAccountId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_managementAccountId, v.ManagementAccountId)
+		case schemas.CreateEnvironmentAccountConnectionInput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateEnvironmentAccountConnectionInput_roleArn, v.RoleArn)
+		case schemas.CreateEnvironmentAccountConnectionInput_tags:
+			return deserializeTagList(d, schemas.CreateEnvironmentAccountConnectionInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateEnvironmentAccountConnectionOutput struct {
 
 	// The environment account connection detail data that's returned by Proton.
@@ -106,65 +161,44 @@ type CreateEnvironmentAccountConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentAccountConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentAccountConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentAccountConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentAccountConnection != nil {
+		s.WriteStruct(schemas.CreateEnvironmentAccountConnectionOutput_environmentAccountConnection)
+		v.EnvironmentAccountConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEnvironmentAccountConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentAccountConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentAccountConnectionOutput_environmentAccountConnection:
+			v.EnvironmentAccountConnection = &types.EnvironmentAccountConnection{}
+			return v.EnvironmentAccountConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentAccountConnection, schemas.CreateEnvironmentAccountConnectionInput, schemas.CreateEnvironmentAccountConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentAccountConnection, schemas.CreateEnvironmentAccountConnectionInput, schemas.CreateEnvironmentAccountConnectionOutput), output: &CreateEnvironmentAccountConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironmentAccountConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +208,6 @@ func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack
 		return err
 	}
 	if err = addOpCreateEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +220,6 @@ func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +259,4 @@ func (m *idempotencyToken_initializeOpCreateEnvironmentAccountConnection) Handle
 }
 func addIdempotencyToken_opCreateEnvironmentAccountConnectionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEnvironmentAccountConnection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEnvironmentAccountConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEnvironmentAccountConnection",
-	}
 }

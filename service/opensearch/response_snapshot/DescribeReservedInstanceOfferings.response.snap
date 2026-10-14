@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ReservedInstanceOfferings":[{"CurrencyCode":"__CurrencyCode__","Duration":1,"FixedPrice":1,"InstanceType":"m3.medium.search","PaymentOption":"ALL_UPFRONT","RecurringCharges":[{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"},{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"}],"ReservedInstanceOfferingId":"__ReservedInstanceOfferingId__","UsagePrice":1},{"CurrencyCode":"__CurrencyCode__","Duration":1,"FixedPrice":1,"InstanceType":"m3.medium.search","PaymentOption":"ALL_UPFRONT","RecurringCharges":[{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"},{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"}],"ReservedInstanceOfferingId":"__ReservedInstanceOfferingId__","UsagePrice":1}]}

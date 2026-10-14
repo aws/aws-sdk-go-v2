@@ -1,0 +1,5 @@
+POST /codesecurity/scan/start
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"}}

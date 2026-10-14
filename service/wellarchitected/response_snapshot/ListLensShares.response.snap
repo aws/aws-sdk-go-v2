@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LensShareSummaries":[{"ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"},{"ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"}],"NextToken":"__NextToken__"}

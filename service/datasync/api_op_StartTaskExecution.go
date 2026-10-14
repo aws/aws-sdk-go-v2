@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an DataSync transfer task. For each task, you can only run one task
@@ -107,6 +106,36 @@ type StartTaskExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.StartTaskExecutionRequest_Excludes, v.Excludes)
+	serializeFilterList(s, schemas.StartTaskExecutionRequest_Includes, v.Includes)
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideOptions != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_OverrideOptions)
+		v.OverrideOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputTagList(s, schemas.StartTaskExecutionRequest_Tags, v.Tags)
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartTaskExecutionRequest_TaskArn, *v.TaskArn)
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // StartTaskExecutionResponse
 type StartTaskExecutionOutput struct {
 
@@ -119,77 +148,48 @@ type StartTaskExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.StartTaskExecutionResponse_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+}
+func (v *StartTaskExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTaskExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTaskExecutionResponse_TaskExecutionArn:
+			v.TaskExecutionArn = new(string)
+			return d.ReadString(schemas.StartTaskExecutionResponse_TaskExecutionArn, v.TaskExecutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskExecution, schemas.StartTaskExecutionRequest, schemas.StartTaskExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskExecution, schemas.StartTaskExecutionRequest, schemas.StartTaskExecutionResponse), output: &StartTaskExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTaskExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTaskExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartTaskExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTaskExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +204,8 @@ func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartTaskExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartTaskExecution",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthType":"NONE","Cors":{"AllowCredentials":true,"AllowHeaders":["__Member__","__Member__"],"AllowMethods":["__Member__","__Member__"],"AllowOrigins":["__Member__","__Member__"],"ExposeHeaders":["__Member__","__Member__"],"MaxAge":1},"CreationTime":"__CreationTime__","FunctionArn":"__FunctionArn__","FunctionUrl":"__FunctionUrl__","InvokeMode":"BUFFERED","LastModifiedTime":"__LastModifiedTime__"}

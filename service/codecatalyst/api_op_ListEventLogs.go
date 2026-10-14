@@ -5,12 +5,8 @@ package codecatalyst
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -80,33 +76,6 @@ type ListEventLogsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEventLogsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEventLogsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEventLogsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListEventLogsRequest_endTime, *v.EndTime)
-	}
-	if v.EventName != nil {
-		s.WriteString(schemas.ListEventLogsRequest_eventName, *v.EventName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEventLogsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEventLogsRequest_nextToken, *v.NextToken)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.ListEventLogsRequest_spaceName, *v.SpaceName)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListEventLogsRequest_startTime, *v.StartTime)
-	}
-}
-
 type ListEventLogsOutput struct {
 
 	// Information about each event retrieved in the list.
@@ -124,81 +93,23 @@ type ListEventLogsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEventLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEventLogsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEventLogsResponse_items:
-			return deserializeEventLogEntries(d, schemas.ListEventLogsResponse_items, &v.Items)
-		case schemas.ListEventLogsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEventLogsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEventLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventLogs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventLogs, schemas.ListEventLogsRequest, schemas.ListEventLogsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventLogs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventLogs, schemas.ListEventLogsRequest, schemas.ListEventLogsResponse), output: &ListEventLogsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEventLogs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEventLogsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventLogs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,12 +122,6 @@ func (c *Client) addOperationListEventLogsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -318,11 +223,3 @@ type ListEventLogsAPIClient interface {
 }
 
 var _ ListEventLogsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEventLogs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEventLogs",
-	}
-}

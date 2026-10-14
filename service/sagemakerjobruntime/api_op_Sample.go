@@ -4,12 +4,7 @@ package sagemakerjobruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends an inference request to the model during a job execution. The request and
@@ -52,24 +47,6 @@ type SampleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SampleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SampleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SampleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Body != nil {
-		s.WriteBlob(schemas.SampleRequest_Body, v.Body)
-	}
-	if v.JobArn != nil {
-		s.WriteString(schemas.SampleRequest_JobArn, *v.JobArn)
-	}
-	if v.TrajectoryId != nil {
-		s.WriteString(schemas.SampleRequest_TrajectoryId, *v.TrajectoryId)
-	}
-}
-
 type SampleOutput struct {
 
 	// The raw inference response body from the model.
@@ -86,87 +63,29 @@ type SampleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SampleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SampleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SampleResponse_Body:
-			return d.ReadBlob(schemas.SampleResponse_Body, &v.Body)
-		case schemas.SampleResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.SampleResponse_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSampleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSample{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sample, schemas.SampleRequest, schemas.SampleResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSample{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sample, schemas.SampleRequest, schemas.SampleResponse), output: &SampleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Sample"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSampleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSample(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +100,8 @@ func (c *Client) addOperationSampleMiddlewares(stack *middleware.Stack, options 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSample(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Sample",
-	}
 }

@@ -5,11 +5,7 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an engagement to a contact or escalation plan. The engagement engages
@@ -71,39 +67,6 @@ type StartEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartEngagementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartEngagementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactId != nil {
-		s.WriteString(schemas.StartEngagementRequest_ContactId, *v.ContactId)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.StartEngagementRequest_Content, *v.Content)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.StartEngagementRequest_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.IncidentId != nil {
-		s.WriteString(schemas.StartEngagementRequest_IncidentId, *v.IncidentId)
-	}
-	if v.PublicContent != nil {
-		s.WriteString(schemas.StartEngagementRequest_PublicContent, *v.PublicContent)
-	}
-	if v.PublicSubject != nil {
-		s.WriteString(schemas.StartEngagementRequest_PublicSubject, *v.PublicSubject)
-	}
-	if v.Sender != nil {
-		s.WriteString(schemas.StartEngagementRequest_Sender, *v.Sender)
-	}
-	if v.Subject != nil {
-		s.WriteString(schemas.StartEngagementRequest_Subject, *v.Subject)
-	}
-}
-
 type StartEngagementOutput struct {
 
 	// The ARN of the engagement.
@@ -117,73 +80,23 @@ type StartEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartEngagementResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartEngagementResult_EngagementArn:
-			v.EngagementArn = new(string)
-			return d.ReadString(schemas.StartEngagementResult_EngagementArn, v.EngagementArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEngagement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagement, schemas.StartEngagementRequest, schemas.StartEngagementResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEngagement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagement, schemas.StartEngagementRequest, schemas.StartEngagementResult), output: &StartEngagementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartEngagement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -193,12 +106,6 @@ func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpStartEngagementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartEngagement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,12 +118,6 @@ func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,12 +157,4 @@ func (m *idempotencyToken_initializeOpStartEngagement) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opStartEngagementMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartEngagement{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartEngagement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartEngagement",
-	}
 }

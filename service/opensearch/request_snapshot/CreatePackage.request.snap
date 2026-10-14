@@ -1,0 +1,5 @@
+POST /2021-01-01/packages
+
+Content-Type: application/json
+
+{"EngineVersion":"__EngineVersion__","PackageConfiguration":{"ConfigurationRequirement":"REQUIRED","LicenseFilepath":"__LicenseFilepath__","LicenseRequirement":"REQUIRED","RequiresRestartForConfigurationUpdate":true},"PackageDescription":"__PackageDescription__","PackageEncryptionOptions":{"EncryptionEnabled":true,"KmsKeyIdentifier":"__KmsKeyIdentifier__"},"PackageName":"__PackageName__","PackageSource":{"S3BucketName":"__S3BucketName__","S3Key":"__S3Key__"},"PackageType":"TXT-DICTIONARY","PackageVendingOptions":{"VendingEnabled":true}}

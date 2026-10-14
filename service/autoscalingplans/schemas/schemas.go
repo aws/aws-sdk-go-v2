@@ -62,7 +62,8 @@ var _ApplicationSources_member *smithy.Schema
 var ConcurrentUpdateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "ConcurrentUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
 		StatusCode: 500})
 var ConcurrentUpdateException_Message *smithy.Schema
@@ -144,7 +145,8 @@ var ForecastDataType_ScheduledActionMaxCapacity *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
 		StatusCode: 500})
 var InternalServiceException_Message *smithy.Schema
@@ -152,7 +154,8 @@ var InternalServiceException_Message *smithy.Schema
 var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
 		StatusCode: 400})
 var InvalidNextTokenException_Message *smithy.Schema
@@ -160,7 +163,8 @@ var InvalidNextTokenException_Message *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
 		StatusCode: 400})
 var LimitExceededException_Message *smithy.Schema
@@ -248,7 +252,8 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
 		StatusCode: 400})
 var ObjectNotFoundException_Message *smithy.Schema
@@ -594,7 +599,8 @@ var _TimestampType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.autoscalingplans",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
 		StatusCode: 400})
 var ValidationException_Message *smithy.Schema

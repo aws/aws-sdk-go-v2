@@ -1,0 +1,5 @@
+POST /UpdateIntegration
+
+Content-Type: application/json
+
+{"integrationId":"__IntegrationId__","webhookAction":"CREATE_IF_ABSENT"}

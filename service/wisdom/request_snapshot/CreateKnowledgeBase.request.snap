@@ -1,0 +1,5 @@
+POST /knowledgeBases
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","knowledgeBaseType":"EXTERNAL","name":"__Name__","renderingConfiguration":{"templateUri":"__TemplateUri__"},"serverSideEncryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"sourceConfiguration":{"appIntegrations":{"appIntegrationArn":"__AppIntegrationArn__","objectFields":["__Member__","__Member__"]}},"tags":{"key0":"__Value__"}}

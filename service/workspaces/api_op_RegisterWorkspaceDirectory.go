@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers the specified directory. This operation is asynchronous and returns
@@ -87,6 +86,51 @@ type RegisterWorkspaceDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterWorkspaceDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterWorkspaceDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterWorkspaceDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryConfig != nil {
+		s.WriteStruct(schemas.RegisterWorkspaceDirectoryRequest_ActiveDirectoryConfig)
+		v.ActiveDirectoryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.EnableSelfService != nil {
+		s.WriteBool(schemas.RegisterWorkspaceDirectoryRequest_EnableSelfService, *v.EnableSelfService)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_IdcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.MicrosoftEntraConfig != nil {
+		s.WriteStruct(schemas.RegisterWorkspaceDirectoryRequest_MicrosoftEntraConfig)
+		v.MicrosoftEntraConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubnetIds(s, schemas.RegisterWorkspaceDirectoryRequest_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.RegisterWorkspaceDirectoryRequest_Tags, v.Tags)
+	if v.Tenancy != "" {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_Tenancy, string(v.Tenancy))
+	}
+	if v.UserIdentityType != "" {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_UserIdentityType, string(v.UserIdentityType))
+	}
+	if v.WorkspaceDirectoryDescription != nil {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryDescription, *v.WorkspaceDirectoryDescription)
+	}
+	if v.WorkspaceDirectoryName != nil {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryName, *v.WorkspaceDirectoryName)
+	}
+	if v.WorkspaceType != "" {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceType, string(v.WorkspaceType))
+	}
+}
+
 type RegisterWorkspaceDirectoryOutput struct {
 
 	// The identifier of the directory.
@@ -101,77 +145,58 @@ type RegisterWorkspaceDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterWorkspaceDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterWorkspaceDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterWorkspaceDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryResult_DirectoryId, *v.DirectoryId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryResult_State, string(v.State))
+	}
+}
+func (v *RegisterWorkspaceDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterWorkspaceDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterWorkspaceDirectoryResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.RegisterWorkspaceDirectoryResult_DirectoryId, v.DirectoryId)
+		case schemas.RegisterWorkspaceDirectoryResult_State:
+			var ev string
+			if err := d.ReadString(schemas.RegisterWorkspaceDirectoryResult_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.WorkspaceDirectoryState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterWorkspaceDirectory, schemas.RegisterWorkspaceDirectoryRequest, schemas.RegisterWorkspaceDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterWorkspaceDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterWorkspaceDirectory, schemas.RegisterWorkspaceDirectoryRequest, schemas.RegisterWorkspaceDirectoryResult), output: &RegisterWorkspaceDirectoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterWorkspaceDirectory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterWorkspaceDirectory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterWorkspaceDirectoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterWorkspaceDirectory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +211,8 @@ func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterWorkspaceDirectory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterWorkspaceDirectory",
-	}
 }

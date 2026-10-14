@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.AssociateDelegationSignerToDomain
+
+{"DomainName":"__DomainName__","SigningAttributes":{"Algorithm":1,"Flags":1,"PublicKey":"__PublicKey__"}}

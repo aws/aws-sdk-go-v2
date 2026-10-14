@@ -58,6 +58,11 @@ var DisassociateEipFromVlan = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DisassociateEipFromVlan",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetAccountSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "GetAccountSettings",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetDepotUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "GetDepotUrl",
@@ -103,6 +108,11 @@ var ListVmEntitlements = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListVmEntitlements",
 }, smithy.ShapeTypeOperation, 0)
 
+var PutAccountSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "PutAccountSettings",
+}, smithy.ShapeTypeOperation, 0)
+
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "TagResource",
@@ -124,6 +134,20 @@ var _AmazonElasticVMwareService = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeService, 0)
 
 var AmazonElasticVMwareService = smithy.NewServiceSchema(_AmazonElasticVMwareService, "2023-07-27")
+
+var AccountSetting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "AccountSetting",
+}, smithy.ShapeTypeStructure, 2)
+var AccountSetting_name *smithy.Schema
+
+var AccountSetting_value *smithy.Schema
+
+var _AccountSettingList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "AccountSettingList",
+}, smithy.ShapeTypeList, 1)
+var _AccountSettingList_member *smithy.Schema
 
 var _AllocationId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -148,8 +172,10 @@ var _AssociationId = smithy.NewSchema(smithy.ShapeID{
 var Check = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "Check",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var Check_type *smithy.Schema
+
+var Check_id *smithy.Schema
 
 var Check_result *smithy.Schema
 
@@ -174,7 +200,7 @@ var _ChecksList_member *smithy.Schema
 var CheckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "CheckType",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 13)
 var CheckType_KEY_REUSE *smithy.Schema
 
 var CheckType_KEY_COVERAGE *smithy.Schema
@@ -188,6 +214,18 @@ var CheckType_VCENTER_REACHABILITY *smithy.Schema
 var CheckType_VCENTER_VM_SYNC *smithy.Schema
 
 var CheckType_VCENTER_VM_EVENT *smithy.Schema
+
+var CheckType_OPERATIONS_MANAGER_REACHABILITY *smithy.Schema
+
+var CheckType_SDDC_MANAGER_REACHABILITY *smithy.Schema
+
+var CheckType_SDDC_MANAGER_HOST_COUNT *smithy.Schema
+
+var CheckType_SDDC_MANAGER_KEY_COVERAGE *smithy.Schema
+
+var CheckType_SDDC_MANAGER_KEY_REUSE *smithy.Schema
+
+var CheckType_CONNECTOR_HEALTH *smithy.Schema
 
 var _Cidr = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -281,7 +319,11 @@ var ConnectorState_DELETED *smithy.Schema
 var ConnectorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "ConnectorType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 3)
+var ConnectorType_OPERATIONS_MANAGER *smithy.Schema
+
+var ConnectorType_SDDC_MANAGER *smithy.Schema
+
 var ConnectorType_VCENTER *smithy.Schema
 
 var _DedicatedHostId = smithy.NewSchema(smithy.ShapeID{
@@ -560,10 +602,12 @@ var InitialVlans_hcxNetworkAclId *smithy.Schema
 var InstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "InstanceType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var InstanceType_I4I_METAL *smithy.Schema
 
 var InstanceType_I7I_METAL_24XL *smithy.Schema
+
+var InstanceType_I7I_METAL_48XL *smithy.Schema
 
 var InstanceTypeEsxVersionsInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -588,7 +632,8 @@ var _InstanceTypeList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _IpAddress = smithy.NewSchema(smithy.ShapeID{
@@ -663,7 +708,8 @@ var _RequestTagMap_value *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -726,8 +772,19 @@ var ServiceAccessSecurityGroups_securityGroups *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
+
+var _SettingName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "SettingName",
+}, smithy.ShapeTypeString, 0)
+
+var _SettingValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "SettingValue",
+}, smithy.ShapeTypeString, 0)
 
 var _SolutionKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -758,7 +815,8 @@ var _TagKeys_member *smithy.Schema
 var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagPolicyException_message *smithy.Schema
 
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
@@ -769,7 +827,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_retryAfterSeconds *smithy.Schema
@@ -777,13 +836,15 @@ var ThrottlingException_retryAfterSeconds *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -841,10 +902,12 @@ var VcfHostnames_cloudBuilder *smithy.Schema
 var VcfVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "VcfVersion",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var VcfVersion_VCF_5_2_1 *smithy.Schema
 
 var VcfVersion_VCF_5_2_2 *smithy.Schema
+
+var VcfVersion_SELF_DEPLOYED *smithy.Schema
 
 var VcfVersionInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -1073,13 +1136,13 @@ var CreateEnvironmentRequest_vcfVersion *smithy.Schema
 
 var CreateEnvironmentRequest_termsAccepted *smithy.Schema
 
-var CreateEnvironmentRequest_licenseInfo *smithy.Schema
-
 var CreateEnvironmentRequest_initialVlans *smithy.Schema
 
-var CreateEnvironmentRequest_hosts *smithy.Schema
-
 var CreateEnvironmentRequest_connectivityInfo *smithy.Schema
+
+var CreateEnvironmentRequest_licenseInfo *smithy.Schema
+
+var CreateEnvironmentRequest_hosts *smithy.Schema
 
 var CreateEnvironmentRequest_vcfHostnames *smithy.Schema
 
@@ -1178,6 +1241,17 @@ var DisassociateEipFromVlanResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DisassociateEipFromVlanResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DisassociateEipFromVlanResponse_vlan *smithy.Schema
+
+var GetAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "GetAccountSettingsRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var GetAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "GetAccountSettingsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetAccountSettingsResponse_settings *smithy.Schema
 
 var GetDepotUrlRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
@@ -1326,6 +1400,18 @@ var ListVmEntitlementsResponse_nextToken *smithy.Schema
 
 var ListVmEntitlementsResponse_entitlements *smithy.Schema
 
+var PutAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "PutAccountSettingsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var PutAccountSettingsRequest_settings *smithy.Schema
+
+var PutAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.evs",
+	Name:      "PutAccountSettingsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var PutAccountSettingsResponse_settings *smithy.Schema
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.evs",
 	Name:      "TagResourceRequest",
@@ -1375,6 +1461,12 @@ var UpdateEnvironmentConnectorResponse_connector *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	AccountSetting_name = AccountSetting.AddMember("name", _SettingName)
+
+	AccountSetting_value = AccountSetting.AddMember("value", _SettingValue)
+
+	_AccountSettingList_member = _AccountSettingList.AddMember("member", AccountSetting)
+
 	CheckType_KEY_REUSE = CheckType.AddMember("KEY_REUSE", smithyprelude.Unit)
 
 	CheckType_KEY_COVERAGE = CheckType.AddMember("KEY_COVERAGE", smithyprelude.Unit)
@@ -1389,6 +1481,18 @@ func init() {
 
 	CheckType_VCENTER_VM_EVENT = CheckType.AddMember("VCENTER_VM_EVENT", smithyprelude.Unit)
 
+	CheckType_OPERATIONS_MANAGER_REACHABILITY = CheckType.AddMember("OPERATIONS_MANAGER_REACHABILITY", smithyprelude.Unit)
+
+	CheckType_SDDC_MANAGER_REACHABILITY = CheckType.AddMember("SDDC_MANAGER_REACHABILITY", smithyprelude.Unit)
+
+	CheckType_SDDC_MANAGER_HOST_COUNT = CheckType.AddMember("SDDC_MANAGER_HOST_COUNT", smithyprelude.Unit)
+
+	CheckType_SDDC_MANAGER_KEY_COVERAGE = CheckType.AddMember("SDDC_MANAGER_KEY_COVERAGE", smithyprelude.Unit)
+
+	CheckType_SDDC_MANAGER_KEY_REUSE = CheckType.AddMember("SDDC_MANAGER_KEY_REUSE", smithyprelude.Unit)
+
+	CheckType_CONNECTOR_HEALTH = CheckType.AddMember("CONNECTOR_HEALTH", smithyprelude.Unit)
+
 	CheckResult_PASSED = CheckResult.AddMember("PASSED", smithyprelude.Unit)
 
 	CheckResult_FAILED = CheckResult.AddMember("FAILED", smithyprelude.Unit)
@@ -1396,6 +1500,8 @@ func init() {
 	CheckResult_UNKNOWN = CheckResult.AddMember("UNKNOWN", smithyprelude.Unit)
 
 	Check_type = Check.AddMember("type", CheckType)
+
+	Check_id = Check.AddMember("id", smithyprelude.String)
 
 	Check_result = Check.AddMember("result", CheckResult)
 
@@ -1406,6 +1512,10 @@ func init() {
 	_RouteServerPeeringList_member = _RouteServerPeeringList.AddMember("member", _RouteServerPeering)
 
 	ConnectivityInfo_privateRouteServerPeerings = ConnectivityInfo.AddMember("privateRouteServerPeerings", _RouteServerPeeringList)
+
+	ConnectorType_OPERATIONS_MANAGER = ConnectorType.AddMember("OPERATIONS_MANAGER", smithyprelude.Unit)
+
+	ConnectorType_SDDC_MANAGER = ConnectorType.AddMember("SDDC_MANAGER", smithyprelude.Unit)
 
 	ConnectorType_VCENTER = ConnectorType.AddMember("VCENTER", smithyprelude.Unit)
 
@@ -1492,6 +1602,8 @@ func init() {
 	VcfVersion_VCF_5_2_1 = VcfVersion.AddMember("VCF_5_2_1", smithyprelude.Unit)
 
 	VcfVersion_VCF_5_2_2 = VcfVersion.AddMember("VCF_5_2_2", smithyprelude.Unit)
+
+	VcfVersion_SELF_DEPLOYED = VcfVersion.AddMember("SELF_DEPLOYED", smithyprelude.Unit)
 
 	LicenseInfo_solutionKey = LicenseInfo.AddMember("solutionKey", _SolutionKey)
 
@@ -1594,6 +1706,8 @@ func init() {
 	InstanceType_I4I_METAL = InstanceType.AddMember("I4I_METAL", smithyprelude.Unit)
 
 	InstanceType_I7I_METAL_24XL = InstanceType.AddMember("I7I_METAL_24XL", smithyprelude.Unit)
+
+	InstanceType_I7I_METAL_48XL = InstanceType.AddMember("I7I_METAL_48XL", smithyprelude.Unit)
 
 	HostState_CREATING = HostState.AddMember("CREATING", smithyprelude.Unit)
 
@@ -1867,13 +1981,13 @@ func init() {
 
 	CreateEnvironmentRequest_termsAccepted = CreateEnvironmentRequest.AddMember("termsAccepted", smithyprelude.Boolean)
 
-	CreateEnvironmentRequest_licenseInfo = CreateEnvironmentRequest.AddMember("licenseInfo", _LicenseInfoList)
-
 	CreateEnvironmentRequest_initialVlans = CreateEnvironmentRequest.AddMember("initialVlans", InitialVlans)
 
-	CreateEnvironmentRequest_hosts = CreateEnvironmentRequest.AddMember("hosts", _HostInfoForCreateList)
-
 	CreateEnvironmentRequest_connectivityInfo = CreateEnvironmentRequest.AddMember("connectivityInfo", ConnectivityInfo)
+
+	CreateEnvironmentRequest_licenseInfo = CreateEnvironmentRequest.AddMember("licenseInfo", _LicenseInfoList)
+
+	CreateEnvironmentRequest_hosts = CreateEnvironmentRequest.AddMember("hosts", _HostInfoForCreateList)
 
 	CreateEnvironmentRequest_vcfHostnames = CreateEnvironmentRequest.AddMember("vcfHostnames", VcfHostnames)
 
@@ -1928,6 +2042,8 @@ func init() {
 	DisassociateEipFromVlanRequest_associationId = DisassociateEipFromVlanRequest.AddMember("associationId", _AssociationId)
 
 	DisassociateEipFromVlanResponse_vlan = DisassociateEipFromVlanResponse.AddMember("vlan", Vlan)
+
+	GetAccountSettingsResponse_settings = GetAccountSettingsResponse.AddMember("settings", _AccountSettingList)
 
 	GetDepotUrlRequest_environmentId = GetDepotUrlRequest.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
 
@@ -2002,6 +2118,10 @@ func init() {
 	ListVmEntitlementsResponse_nextToken = ListVmEntitlementsResponse.AddMember("nextToken", _PaginationToken)
 
 	ListVmEntitlementsResponse_entitlements = ListVmEntitlementsResponse.AddMember("entitlements", _VmEntitlementList)
+
+	PutAccountSettingsRequest_settings = PutAccountSettingsRequest.AddMember("settings", _AccountSettingList)
+
+	PutAccountSettingsResponse_settings = PutAccountSettingsResponse.AddMember("settings", _AccountSettingList)
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn)
 

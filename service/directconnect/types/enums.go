@@ -21,6 +21,25 @@ func (AddressFamily) Values() []AddressFamily {
 	}
 }
 
+type AsPathType string
+
+// Enum values for AsPathType
+const (
+	AsPathTypeSeq AsPathType = "seq"
+	AsPathTypeSet AsPathType = "set"
+)
+
+// Values returns all known values for AsPathType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AsPathType) Values() []AsPathType {
+	return []AsPathType{
+		"seq",
+		"set",
+	}
+}
+
 type BGPPeerState string
 
 // Enum values for BGPPeerState
@@ -64,6 +83,43 @@ func (BGPStatus) Values() []BGPStatus {
 		"up",
 		"down",
 		"unknown",
+	}
+}
+
+type BillingMode string
+
+// Enum values for BillingMode
+const (
+	BillingModePayAsYouGo            BillingMode = "PayAsYouGo"
+	BillingModeFlatRateTier1         BillingMode = "FlatRateTier1"
+	BillingModeFlatRateTier2         BillingMode = "FlatRateTier2"
+	BillingModeFlatRateTier3         BillingMode = "FlatRateTier3"
+	BillingModeFlatRateTier4         BillingMode = "FlatRateTier4"
+	BillingModeFlatRateTier5         BillingMode = "FlatRateTier5"
+	BillingModePortPairFlatRateTier1 BillingMode = "PortPairFlatRateTier1"
+	BillingModePortPairFlatRateTier2 BillingMode = "PortPairFlatRateTier2"
+	BillingModePortPairFlatRateTier3 BillingMode = "PortPairFlatRateTier3"
+	BillingModePortPairFlatRateTier4 BillingMode = "PortPairFlatRateTier4"
+	BillingModePortPairFlatRateTier5 BillingMode = "PortPairFlatRateTier5"
+)
+
+// Values returns all known values for BillingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingMode) Values() []BillingMode {
+	return []BillingMode{
+		"PayAsYouGo",
+		"FlatRateTier1",
+		"FlatRateTier2",
+		"FlatRateTier3",
+		"FlatRateTier4",
+		"FlatRateTier5",
+		"PortPairFlatRateTier1",
+		"PortPairFlatRateTier2",
+		"PortPairFlatRateTier3",
+		"PortPairFlatRateTier4",
+		"PortPairFlatRateTier5",
 	}
 }
 
@@ -348,6 +404,137 @@ func (NniPartnerType) Values() []NniPartnerType {
 		"v1",
 		"v2",
 		"nonPartner",
+	}
+}
+
+type RequestBillingMode string
+
+// Enum values for RequestBillingMode
+const (
+	RequestBillingModePayAsYouGo    RequestBillingMode = "PayAsYouGo"
+	RequestBillingModeFlatRateTier1 RequestBillingMode = "FlatRateTier1"
+	RequestBillingModeFlatRateTier2 RequestBillingMode = "FlatRateTier2"
+	RequestBillingModeFlatRateTier3 RequestBillingMode = "FlatRateTier3"
+	RequestBillingModeFlatRateTier4 RequestBillingMode = "FlatRateTier4"
+	RequestBillingModeFlatRateTier5 RequestBillingMode = "FlatRateTier5"
+)
+
+// Values returns all known values for RequestBillingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RequestBillingMode) Values() []RequestBillingMode {
+	return []RequestBillingMode{
+		"PayAsYouGo",
+		"FlatRateTier1",
+		"FlatRateTier2",
+		"FlatRateTier3",
+		"FlatRateTier4",
+		"FlatRateTier5",
+	}
+}
+
+type ResiliencyGroupAssociationState string
+
+// Enum values for ResiliencyGroupAssociationState
+const (
+	ResiliencyGroupAssociationStateAssociating    ResiliencyGroupAssociationState = "associating"
+	ResiliencyGroupAssociationStateAssociated     ResiliencyGroupAssociationState = "associated"
+	ResiliencyGroupAssociationStateDisassociating ResiliencyGroupAssociationState = "disassociating"
+	ResiliencyGroupAssociationStateDisassociated  ResiliencyGroupAssociationState = "disassociated"
+)
+
+// Values returns all known values for ResiliencyGroupAssociationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResiliencyGroupAssociationState) Values() []ResiliencyGroupAssociationState {
+	return []ResiliencyGroupAssociationState{
+		"associating",
+		"associated",
+		"disassociating",
+		"disassociated",
+	}
+}
+
+type ResiliencyGroupState string
+
+// Enum values for ResiliencyGroupState
+const (
+	ResiliencyGroupStatePending   ResiliencyGroupState = "pending"
+	ResiliencyGroupStateAvailable ResiliencyGroupState = "available"
+	ResiliencyGroupStateDeleting  ResiliencyGroupState = "deleting"
+	ResiliencyGroupStateDeleted   ResiliencyGroupState = "deleted"
+)
+
+// Values returns all known values for ResiliencyGroupState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResiliencyGroupState) Values() []ResiliencyGroupState {
+	return []ResiliencyGroupState{
+		"pending",
+		"available",
+		"deleting",
+		"deleted",
+	}
+}
+
+type ResiliencyGroupType string
+
+// Enum values for ResiliencyGroupType
+const (
+	ResiliencyGroupTypeManaged ResiliencyGroupType = "Managed"
+)
+
+// Values returns all known values for ResiliencyGroupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResiliencyGroupType) Values() []ResiliencyGroupType {
+	return []ResiliencyGroupType{
+		"Managed",
+	}
+}
+
+type ResiliencyModel string
+
+// Enum values for ResiliencyModel
+const (
+	ResiliencyModelMaximumResiliency ResiliencyModel = "maximum-resiliency"
+	ResiliencyModelHighResiliency    ResiliencyModel = "high-resiliency"
+	ResiliencyModelBasicResiliency   ResiliencyModel = "basic-resiliency"
+)
+
+// Values returns all known values for ResiliencyModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResiliencyModel) Values() []ResiliencyModel {
+	return []ResiliencyModel{
+		"maximum-resiliency",
+		"high-resiliency",
+		"basic-resiliency",
+	}
+}
+
+type RouteDirection string
+
+// Enum values for RouteDirection
+const (
+	RouteDirectionAccepted   RouteDirection = "accepted"
+	RouteDirectionAdvertised RouteDirection = "advertised"
+)
+
+// Values returns all known values for RouteDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteDirection) Values() []RouteDirection {
+	return []RouteDirection{
+		"accepted",
+		"advertised",
 	}
 }
 

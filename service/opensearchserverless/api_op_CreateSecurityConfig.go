@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies a security configuration for OpenSearch Serverless. For more
@@ -63,6 +63,74 @@ type CreateSecurityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_description, *v.Description)
+	}
+	if v.IamFederationOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_iamFederationOptions)
+		v.IamFederationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamIdentityCenterOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_iamIdentityCenterOptions)
+		v.IamIdentityCenterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_name, *v.Name)
+	}
+	if v.SamlOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_samlOptions)
+		v.SamlOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSecurityConfigRequest_type, string(v.Type))
+	}
+}
+func (v *CreateSecurityConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_clientToken, v.ClientToken)
+		case schemas.CreateSecurityConfigRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_description, v.Description)
+		case schemas.CreateSecurityConfigRequest_iamFederationOptions:
+			v.IamFederationOptions = &types.IamFederationConfigOptions{}
+			return v.IamFederationOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_iamIdentityCenterOptions:
+			v.IamIdentityCenterOptions = &types.CreateIamIdentityCenterConfigOptions{}
+			return v.IamIdentityCenterOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_name, v.Name)
+		case schemas.CreateSecurityConfigRequest_samlOptions:
+			v.SamlOptions = &types.SamlConfigOptions{}
+			return v.SamlOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateSecurityConfigRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateSecurityConfigOutput struct {
 
 	// Details about the created security configuration.
@@ -74,65 +142,44 @@ type CreateSecurityConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityConfigDetail != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigResponse_securityConfigDetail)
+		v.SecurityConfigDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSecurityConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigResponse_securityConfigDetail:
+			v.SecurityConfigDetail = &types.SecurityConfigDetail{}
+			return v.SecurityConfigDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfig, schemas.CreateSecurityConfigRequest, schemas.CreateSecurityConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSecurityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfig, schemas.CreateSecurityConfigRequest, schemas.CreateSecurityConfigResponse), output: &CreateSecurityConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSecurityConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSecurityConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +189,6 @@ func (c *Client) addOperationCreateSecurityConfigMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateSecurityConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecurityConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +201,6 @@ func (c *Client) addOperationCreateSecurityConfigMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +240,4 @@ func (m *idempotencyToken_initializeOpCreateSecurityConfig) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateSecurityConfigMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSecurityConfig{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSecurityConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSecurityConfig",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v2/update-dependency
+
+Content-Type: application/json
+
+{"comment":"__Comment__","criticality":"HARD","dependencyId":"__DependencyId__","serviceArn":"__ServiceArn__"}

@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists project profiles.
@@ -62,33 +58,6 @@ type ListProjectProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProjectProfilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProjectProfilesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProjectProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListProjectProfilesInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProjectProfilesInput_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListProjectProfilesInput_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProjectProfilesInput_nextToken, *v.NextToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListProjectProfilesInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListProjectProfilesInput_sortOrder, string(v.SortOrder))
-	}
-}
-
 type ListProjectProfilesOutput struct {
 
 	// The results of the ListProjectProfiles action.
@@ -107,87 +76,29 @@ type ListProjectProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProjectProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProjectProfilesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProjectProfilesOutput_items:
-			return deserializeProjectProfileSummaries(d, schemas.ListProjectProfilesOutput_items, &v.Items)
-		case schemas.ListProjectProfilesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProjectProfilesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProjectProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProjectProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectProfiles, schemas.ListProjectProfilesInput, schemas.ListProjectProfilesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProjectProfiles{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectProfiles, schemas.ListProjectProfilesInput, schemas.ListProjectProfilesOutput), output: &ListProjectProfilesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProjectProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListProjectProfilesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProjectProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +111,6 @@ func (c *Client) addOperationListProjectProfilesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -311,11 +216,3 @@ type ListProjectProfilesAPIClient interface {
 }
 
 var _ ListProjectProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProjectProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProjectProfiles",
-	}
-}

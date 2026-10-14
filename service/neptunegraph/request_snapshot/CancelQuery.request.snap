@@ -1,0 +1,4 @@
+DELETE /queries/__QueryId__
+
+Graphidentifier: GraphIdentifier-value
+

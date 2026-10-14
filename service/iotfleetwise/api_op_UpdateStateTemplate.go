@@ -4,10 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a state template.
@@ -71,6 +70,25 @@ type UpdateStateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStateTemplateRequest_description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateStateTemplateRequest_identifier, *v.Identifier)
+	}
+	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToAdd, v.StateTemplatePropertiesToAdd)
+	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToRemove, v.StateTemplatePropertiesToRemove)
+}
+
 type UpdateStateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the state template.
@@ -88,77 +106,60 @@ type UpdateStateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_name, *v.Name)
+	}
+}
+func (v *UpdateStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStateTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_arn, v.Arn)
+		case schemas.UpdateStateTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_id, v.Id)
+		case schemas.UpdateStateTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateTemplate, schemas.UpdateStateTemplateRequest, schemas.UpdateStateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateTemplate, schemas.UpdateStateTemplateRequest, schemas.UpdateStateTemplateResponse), output: &UpdateStateTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateStateTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStateTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateStateTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStateTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +174,8 @@ func (c *Client) addOperationUpdateStateTemplateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateStateTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateStateTemplate",
-	}
 }

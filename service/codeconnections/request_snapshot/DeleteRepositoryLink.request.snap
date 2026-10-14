@@ -1,0 +1,7 @@
+POST /service/CodeConnections_20231201/operation/DeleteRepositoryLink
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿pRepositoryLinkIdt__RepositoryLinkId__ÿ

@@ -5,12 +5,8 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,30 +53,6 @@ type ListRotationOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRotationOverridesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRotationOverridesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRotationOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListRotationOverridesRequest_EndTime, *v.EndTime)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRotationOverridesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRotationOverridesRequest_NextToken, *v.NextToken)
-	}
-	if v.RotationId != nil {
-		s.WriteString(schemas.ListRotationOverridesRequest_RotationId, *v.RotationId)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListRotationOverridesRequest_StartTime, *v.StartTime)
-	}
-}
-
 type ListRotationOverridesOutput struct {
 
 	// The token for the next set of items to return. Use this token to get the next
@@ -96,87 +68,29 @@ type ListRotationOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRotationOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRotationOverridesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRotationOverridesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRotationOverridesResult_NextToken, v.NextToken)
-		case schemas.ListRotationOverridesResult_RotationOverrides:
-			return deserializeRotationOverrides(d, schemas.ListRotationOverridesResult_RotationOverrides, &v.RotationOverrides)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRotationOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRotationOverrides{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotationOverrides, schemas.ListRotationOverridesRequest, schemas.ListRotationOverridesResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRotationOverrides{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRotationOverrides, schemas.ListRotationOverridesRequest, schemas.ListRotationOverridesResult), output: &ListRotationOverridesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRotationOverrides"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRotationOverridesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRotationOverrides(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +103,6 @@ func (c *Client) addOperationListRotationOverridesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -297,11 +205,3 @@ type ListRotationOverridesAPIClient interface {
 }
 
 var _ ListRotationOverridesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRotationOverrides(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRotationOverrides",
-	}
-}

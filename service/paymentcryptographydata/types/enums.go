@@ -406,6 +406,7 @@ const (
 	SessionKeyDerivationModeAmex                 SessionKeyDerivationMode = "AMEX"
 	SessionKeyDerivationModeMastercardSessionKey SessionKeyDerivationMode = "MASTERCARD_SESSION_KEY"
 	SessionKeyDerivationModeVisa                 SessionKeyDerivationMode = "VISA"
+	SessionKeyDerivationModeUnionPay             SessionKeyDerivationMode = "UNION_PAY"
 )
 
 // Values returns all known values for SessionKeyDerivationMode. Note that this
@@ -419,6 +420,7 @@ func (SessionKeyDerivationMode) Values() []SessionKeyDerivationMode {
 		"AMEX",
 		"MASTERCARD_SESSION_KEY",
 		"VISA",
+		"UNION_PAY",
 	}
 }
 

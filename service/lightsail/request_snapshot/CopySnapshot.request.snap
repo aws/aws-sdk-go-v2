@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CopySnapshot
+
+{"restoreDate":"__RestoreDate__","sourceRegion":"us-east-1","sourceResourceName":"__SourceResourceName__","sourceSnapshotName":"__SourceSnapshotName__","targetSnapshotName":"__TargetSnapshotName__","useLatestRestorableAutoSnapshot":true}

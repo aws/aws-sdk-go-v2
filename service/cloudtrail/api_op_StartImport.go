@@ -4,16 +4,18 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-//	Starts an import of logged trail events from a source S3 bucket to a
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Starts an import of logged trail events from a source S3 bucket to a
 // destination event data store. By default, CloudTrail only imports events
 // contained in the S3 bucket's CloudTrail prefix and the prefixes inside the
 // CloudTrail prefix, and does not check prefixes for other Amazon Web Services
@@ -32,6 +34,7 @@ import (
 // management account to import trail events. You cannot use the delegated
 // administrator account for the organization.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Considerations for copying trail events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
 // [Controlling ownership of objects and disabling ACLs for your bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
 func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optFns ...func(*Options)) (*StartImportOutput, error) {
@@ -78,6 +81,30 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportDestinations(s, schemas.StartImportRequest_Destinations, v.Destinations)
+	if v.EndEventTime != nil {
+		s.WriteTime(schemas.StartImportRequest_EndEventTime, *v.EndEventTime)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportRequest_ImportId, *v.ImportId)
+	}
+	if v.ImportSource != nil {
+		s.WriteStruct(schemas.StartImportRequest_ImportSource)
+		v.ImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartEventTime != nil {
+		s.WriteTime(schemas.StartImportRequest_StartEventTime, *v.StartEventTime)
+	}
+}
+
 type StartImportOutput struct {
 
 	//  The timestamp for the import's creation.
@@ -114,77 +141,93 @@ type StartImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.StartImportResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeImportDestinations(s, schemas.StartImportResponse_Destinations, v.Destinations)
+	if v.EndEventTime != nil {
+		s.WriteTime(schemas.StartImportResponse_EndEventTime, *v.EndEventTime)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportResponse_ImportId, *v.ImportId)
+	}
+	if v.ImportSource != nil {
+		s.WriteStruct(schemas.StartImportResponse_ImportSource)
+		v.ImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.StartImportResponse_ImportStatus, string(v.ImportStatus))
+	}
+	if v.StartEventTime != nil {
+		s.WriteTime(schemas.StartImportResponse_StartEventTime, *v.StartEventTime)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.StartImportResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.StartImportResponse_Destinations:
+			return deserializeImportDestinations(d, schemas.StartImportResponse_Destinations, &v.Destinations)
+		case schemas.StartImportResponse_EndEventTime:
+			v.EndEventTime = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_EndEventTime, v.EndEventTime)
+		case schemas.StartImportResponse_ImportId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.StartImportResponse_ImportId, v.ImportId)
+		case schemas.StartImportResponse_ImportSource:
+			v.ImportSource = &types.ImportSource{}
+			return v.ImportSource.Deserialize(d)
+		case schemas.StartImportResponse_ImportStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartImportResponse_ImportStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.ImportStatus(ev)
+			return nil
+		case schemas.StartImportResponse_StartEventTime:
+			v.StartEventTime = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_StartEventTime, v.StartEventTime)
+		case schemas.StartImportResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse), output: &StartImportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartImport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartImportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartImport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +242,8 @@ func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartImport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartImport",
-	}
 }

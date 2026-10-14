@@ -1,0 +1,3 @@
+POST /orders/__OrderId__/cancel
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","permissions":[{"operation":"ENABLE_SCANNING","service":"EC2"},{"operation":"ENABLE_SCANNING","service":"EC2"}]}

@@ -1,0 +1,3 @@
+GET /suiteRuns?maxResults=1&nextToken=__NextToken__&suiteDefinitionId=__SuiteDefinitionId__&suiteDefinitionVersion=__SuiteDefinitionVersion__
+
+

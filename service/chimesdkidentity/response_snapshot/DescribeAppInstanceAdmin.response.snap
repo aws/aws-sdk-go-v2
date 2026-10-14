@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceAdmin":{"Admin":{"Arn":"__Arn__","Name":"__Name__"},"AppInstanceArn":"__AppInstanceArn__","CreatedTimestamp":946684800}}

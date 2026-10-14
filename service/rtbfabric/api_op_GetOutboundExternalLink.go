@@ -5,13 +5,9 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -45,21 +41,6 @@ type GetOutboundExternalLinkInput struct {
 	LinkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetOutboundExternalLinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOutboundExternalLinkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOutboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.GetOutboundExternalLinkRequest_gatewayId, *v.GatewayId)
-	}
-	if v.LinkId != nil {
-		s.WriteString(schemas.GetOutboundExternalLinkRequest_linkId, *v.LinkId)
-	}
 }
 
 type GetOutboundExternalLinkOutput struct {
@@ -115,123 +96,29 @@ type GetOutboundExternalLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOutboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOutboundExternalLinkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOutboundExternalLinkResponse_attributes:
-			v.Attributes = &types.LinkAttributes{}
-			return v.Attributes.Deserialize(d)
-		case schemas.GetOutboundExternalLinkResponse_connectivityType:
-			var ev string
-			if err := d.ReadString(schemas.GetOutboundExternalLinkResponse_connectivityType, &ev); err != nil {
-				return err
-			}
-			v.ConnectivityType = types.ConnectivityType(ev)
-			return nil
-		case schemas.GetOutboundExternalLinkResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOutboundExternalLinkResponse_createdAt, v.CreatedAt)
-		case schemas.GetOutboundExternalLinkResponse_flowModules:
-			return deserializeModuleConfigurationList(d, schemas.GetOutboundExternalLinkResponse_flowModules, &v.FlowModules)
-		case schemas.GetOutboundExternalLinkResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.GetOutboundExternalLinkResponse_gatewayId, v.GatewayId)
-		case schemas.GetOutboundExternalLinkResponse_linkId:
-			v.LinkId = new(string)
-			return d.ReadString(schemas.GetOutboundExternalLinkResponse_linkId, v.LinkId)
-		case schemas.GetOutboundExternalLinkResponse_logSettings:
-			v.LogSettings = &types.LinkLogSettings{}
-			return v.LogSettings.Deserialize(d)
-		case schemas.GetOutboundExternalLinkResponse_pendingFlowModules:
-			return deserializeModuleConfigurationList(d, schemas.GetOutboundExternalLinkResponse_pendingFlowModules, &v.PendingFlowModules)
-		case schemas.GetOutboundExternalLinkResponse_publicEndpoint:
-			v.PublicEndpoint = new(string)
-			return d.ReadString(schemas.GetOutboundExternalLinkResponse_publicEndpoint, v.PublicEndpoint)
-		case schemas.GetOutboundExternalLinkResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetOutboundExternalLinkResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.LinkStatus(ev)
-			return nil
-		case schemas.GetOutboundExternalLinkResponse_tags:
-			return deserializeTagsMap(d, schemas.GetOutboundExternalLinkResponse_tags, &v.Tags)
-		case schemas.GetOutboundExternalLinkResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOutboundExternalLinkResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOutboundExternalLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutboundExternalLink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutboundExternalLink, schemas.GetOutboundExternalLinkRequest, schemas.GetOutboundExternalLinkResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutboundExternalLink{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutboundExternalLink, schemas.GetOutboundExternalLinkRequest, schemas.GetOutboundExternalLinkResponse), output: &GetOutboundExternalLinkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOutboundExternalLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOutboundExternalLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOutboundExternalLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,12 +131,6 @@ func (c *Client) addOperationGetOutboundExternalLinkMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -683,11 +564,3 @@ type GetOutboundExternalLinkAPIClient interface {
 }
 
 var _ GetOutboundExternalLinkAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetOutboundExternalLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOutboundExternalLink",
-	}
-}

@@ -4,11 +4,10 @@ package fsx
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels an existing Amazon FSx for Lustre data repository task if that task is
@@ -50,6 +49,18 @@ type CancelDataRepositoryTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataRepositoryTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataRepositoryTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataRepositoryTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelDataRepositoryTaskRequest_TaskId, *v.TaskId)
+	}
+}
+
 type CancelDataRepositoryTaskOutput struct {
 
 	// The lifecycle status of the data repository task, as follows:
@@ -78,77 +89,58 @@ type CancelDataRepositoryTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataRepositoryTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataRepositoryTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataRepositoryTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.CancelDataRepositoryTaskResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelDataRepositoryTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *CancelDataRepositoryTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDataRepositoryTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelDataRepositoryTaskResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.CancelDataRepositoryTaskResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.DataRepositoryTaskLifecycle(ev)
+			return nil
+		case schemas.CancelDataRepositoryTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelDataRepositoryTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataRepositoryTask, schemas.CancelDataRepositoryTaskRequest, schemas.CancelDataRepositoryTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDataRepositoryTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataRepositoryTask, schemas.CancelDataRepositoryTaskRequest, schemas.CancelDataRepositoryTaskResponse), output: &CancelDataRepositoryTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelDataRepositoryTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelDataRepositoryTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelDataRepositoryTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDataRepositoryTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +155,8 @@ func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelDataRepositoryTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelDataRepositoryTask",
-	}
 }

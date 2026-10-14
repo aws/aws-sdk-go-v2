@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateVpnConcentrator&DryRun=true&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&TransitGatewayId=__TransitGatewayId__&Type=ipsec.1&Version=2016-11-15

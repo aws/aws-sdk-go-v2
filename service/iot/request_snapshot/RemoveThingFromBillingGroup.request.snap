@@ -1,0 +1,5 @@
+PUT /billing-groups/removeThingFromBillingGroup
+
+Content-Type: application/json
+
+{"billingGroupArn":"__BillingGroupArn__","billingGroupName":"__BillingGroupName__","thingArn":"__ThingArn__","thingName":"__ThingName__"}

@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/DescribeComponent
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£iAccountIdm__AccountId__qResourceGroupNameu__ResourceGroupName__mComponentNameq__ComponentName__

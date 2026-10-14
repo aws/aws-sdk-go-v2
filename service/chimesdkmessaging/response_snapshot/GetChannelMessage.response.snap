@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelMessage":{"ChannelArn":"__ChannelArn__","Content":"__Content__","ContentType":"__ContentType__","CreatedTimestamp":946684800,"LastEditedTimestamp":946684800,"LastUpdatedTimestamp":946684800,"MessageAttributes":{"key0":{"StringValues":["__Member__","__Member__"]}},"MessageId":"__MessageId__","Metadata":"__Metadata__","Persistence":"PERSISTENT","Redacted":true,"Sender":{"Arn":"__Arn__","Name":"__Name__"},"Status":{"Detail":"__Detail__","Value":"SENT"},"SubChannelId":"__SubChannelId__","Target":[{"MemberArn":"__MemberArn__"},{"MemberArn":"__MemberArn__"}],"Type":"STANDARD"}}

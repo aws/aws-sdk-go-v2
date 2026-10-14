@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/configuredTableAssociations/__ConfiguredTableAssociationIdentifier__/analysisRule
+
+Content-Type: application/json
+
+{"analysisRulePolicy":{"v1":{"list":{"allowedAdditionalAnalyses":["__Member__","__Member__"],"allowedResultReceivers":["__Member__","__Member__"]}}},"analysisRuleType":"AGGREGATION"}

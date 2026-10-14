@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,6 +64,41 @@ type UpdateBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.UpdateBotAliasRequest_botAliasId, *v.BotAliasId)
+	}
+	serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasName != nil {
+		s.WriteString(schemas.UpdateBotAliasRequest_botAliasName, *v.BotAliasName)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotAliasRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotAliasRequest_botVersion, *v.BotVersion)
+	}
+	if v.ConversationLogSettings != nil {
+		s.WriteStruct(schemas.UpdateBotAliasRequest_conversationLogSettings)
+		v.ConversationLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotAliasRequest_description, *v.Description)
+	}
+	if v.SentimentAnalysisSettings != nil {
+		s.WriteStruct(schemas.UpdateBotAliasRequest_sentimentAnalysisSettings)
+		v.SentimentAnalysisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateBotAliasOutput struct {
 
 	// The identifier of the updated bot alias.
@@ -109,77 +143,113 @@ type UpdateBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.UpdateBotAliasResponse_botAliasId, *v.BotAliasId)
+	}
+	serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasName != nil {
+		s.WriteString(schemas.UpdateBotAliasResponse_botAliasName, *v.BotAliasName)
+	}
+	if v.BotAliasStatus != "" {
+		s.WriteString(schemas.UpdateBotAliasResponse_botAliasStatus, string(v.BotAliasStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotAliasResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotAliasResponse_botVersion, *v.BotVersion)
+	}
+	if v.ConversationLogSettings != nil {
+		s.WriteStruct(schemas.UpdateBotAliasResponse_conversationLogSettings)
+		v.ConversationLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateBotAliasResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotAliasResponse_description, *v.Description)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateBotAliasResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.SentimentAnalysisSettings != nil {
+		s.WriteStruct(schemas.UpdateBotAliasResponse_sentimentAnalysisSettings)
+		v.SentimentAnalysisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBotAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBotAliasResponse_botAliasId:
+			v.BotAliasId = new(string)
+			return d.ReadString(schemas.UpdateBotAliasResponse_botAliasId, v.BotAliasId)
+		case schemas.UpdateBotAliasResponse_botAliasLocaleSettings:
+			return deserializeBotAliasLocaleSettingsMap(d, schemas.UpdateBotAliasResponse_botAliasLocaleSettings, &v.BotAliasLocaleSettings)
+		case schemas.UpdateBotAliasResponse_botAliasName:
+			v.BotAliasName = new(string)
+			return d.ReadString(schemas.UpdateBotAliasResponse_botAliasName, v.BotAliasName)
+		case schemas.UpdateBotAliasResponse_botAliasStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotAliasResponse_botAliasStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAliasStatus = types.BotAliasStatus(ev)
+			return nil
+		case schemas.UpdateBotAliasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateBotAliasResponse_botId, v.BotId)
+		case schemas.UpdateBotAliasResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateBotAliasResponse_botVersion, v.BotVersion)
+		case schemas.UpdateBotAliasResponse_conversationLogSettings:
+			v.ConversationLogSettings = &types.ConversationLogSettings{}
+			return v.ConversationLogSettings.Deserialize(d)
+		case schemas.UpdateBotAliasResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotAliasResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateBotAliasResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateBotAliasResponse_description, v.Description)
+		case schemas.UpdateBotAliasResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotAliasResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateBotAliasResponse_sentimentAnalysisSettings:
+			v.SentimentAnalysisSettings = &types.SentimentAnalysisSettings{}
+			return v.SentimentAnalysisSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotAlias, schemas.UpdateBotAliasRequest, schemas.UpdateBotAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotAlias, schemas.UpdateBotAliasRequest, schemas.UpdateBotAliasResponse), output: &UpdateBotAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBotAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBotAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBotAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBotAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +264,8 @@ func (c *Client) addOperationUpdateBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBotAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBotAlias",
-	}
 }

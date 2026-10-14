@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.GetResolverQueryLogConfig
+
+{"ResolverQueryLogConfig":{"Arn":"__Arn__","AssociationCount":1,"CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","DestinationArn":"__DestinationArn__","Id":"__Id__","Name":"__Name__","OwnerId":"__OwnerId__","ShareStatus":"NOT_SHARED","Status":"CREATING"}}

@@ -1,0 +1,5 @@
+POST /stop-assessment
+
+Content-Type: application/json
+
+{"assessmentId":"__AssessmentId__"}

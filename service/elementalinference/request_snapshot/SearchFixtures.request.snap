@@ -1,0 +1,5 @@
+POST /v1/fixtures
+
+Content-Type: application/json
+
+{"endDate":"__EndDate__","filters":[{"name":"COMPETITOR","values":["__Member__","__Member__"]},{"name":"COMPETITOR","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","sport":"basketball","startDate":"__StartDate__"}

@@ -1,0 +1,5 @@
+POST /v1/whatsapp/template/put
+
+Content-Type: application/json
+
+{"id":"__Id__","templateDefinition":"YmxvYg=="}

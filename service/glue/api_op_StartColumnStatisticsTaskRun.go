@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a column statistics task run, for a specified table and columns.
@@ -62,6 +61,34 @@ type StartColumnStatisticsTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartColumnStatisticsTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartColumnStatisticsTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartColumnStatisticsTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogID != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_CatalogID, *v.CatalogID)
+	}
+	serializeColumnNameList(s, schemas.StartColumnStatisticsTaskRunRequest_ColumnNameList, v.ColumnNameList)
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_Role, *v.Role)
+	}
+	if v.SampleSize != 0 {
+		s.WriteFloat64(schemas.StartColumnStatisticsTaskRunRequest_SampleSize, v.SampleSize)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_TableName, *v.TableName)
+	}
+}
+
 type StartColumnStatisticsTaskRunOutput struct {
 
 	// The identifier for the column statistics task run.
@@ -73,77 +100,48 @@ type StartColumnStatisticsTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartColumnStatisticsTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartColumnStatisticsTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartColumnStatisticsTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnStatisticsTaskRunId != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRunId, *v.ColumnStatisticsTaskRunId)
+	}
+}
+func (v *StartColumnStatisticsTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartColumnStatisticsTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRunId:
+			v.ColumnStatisticsTaskRunId = new(string)
+			return d.ReadString(schemas.StartColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRunId, v.ColumnStatisticsTaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartColumnStatisticsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartColumnStatisticsTaskRun, schemas.StartColumnStatisticsTaskRunRequest, schemas.StartColumnStatisticsTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartColumnStatisticsTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartColumnStatisticsTaskRun, schemas.StartColumnStatisticsTaskRunRequest, schemas.StartColumnStatisticsTaskRunResponse), output: &StartColumnStatisticsTaskRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartColumnStatisticsTaskRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartColumnStatisticsTaskRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartColumnStatisticsTaskRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartColumnStatisticsTaskRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +156,8 @@ func (c *Client) addOperationStartColumnStatisticsTaskRunMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartColumnStatisticsTaskRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartColumnStatisticsTaskRun",
-	}
 }

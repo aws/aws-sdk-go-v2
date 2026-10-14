@@ -1,0 +1,3 @@
+GET /api/datalake/instance/__InstanceId__/namespaces?maxResults=1&nextToken=__NextToken__
+
+

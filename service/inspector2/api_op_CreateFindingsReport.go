@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a finding report. By default only ACTIVE findings are returned in the
@@ -47,6 +46,48 @@ type CreateFindingsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFindingsReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFindingsReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFindingsReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.CreateFindingsReportRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportFormat != "" {
+		s.WriteString(schemas.CreateFindingsReportRequest_reportFormat, string(v.ReportFormat))
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.CreateFindingsReportRequest_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFindingsReportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFindingsReportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFindingsReportRequest_filterCriteria:
+			v.FilterCriteria = &types.FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.CreateFindingsReportRequest_reportFormat:
+			var ev string
+			if err := d.ReadString(schemas.CreateFindingsReportRequest_reportFormat, &ev); err != nil {
+				return err
+			}
+			v.ReportFormat = types.ReportFormat(ev)
+			return nil
+		case schemas.CreateFindingsReportRequest_s3Destination:
+			v.S3Destination = &types.Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateFindingsReportOutput struct {
 
 	// The ID of the report.
@@ -58,77 +99,48 @@ type CreateFindingsReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFindingsReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFindingsReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFindingsReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CreateFindingsReportResponse_reportId, *v.ReportId)
+	}
+}
+func (v *CreateFindingsReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFindingsReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFindingsReportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.CreateFindingsReportResponse_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFindingsReport, schemas.CreateFindingsReportRequest, schemas.CreateFindingsReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFindingsReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFindingsReport, schemas.CreateFindingsReportRequest, schemas.CreateFindingsReportResponse), output: &CreateFindingsReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFindingsReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFindingsReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFindingsReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFindingsReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +155,8 @@ func (c *Client) addOperationCreateFindingsReportMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFindingsReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFindingsReport",
-	}
 }

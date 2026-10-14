@@ -1,0 +1,4 @@
+DELETE /key-value-stores/__KvsARN__/keys/__Key__
+
+If-Match: __IfMatch__
+

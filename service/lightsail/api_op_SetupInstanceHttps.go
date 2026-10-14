@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an SSL/TLS certificate that secures traffic for your website. After the
@@ -58,6 +57,25 @@ type SetupInstanceHttpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetupInstanceHttpsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetupInstanceHttpsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetupInstanceHttpsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateProvider != "" {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_certificateProvider, string(v.CertificateProvider))
+	}
+	serializeSetupDomainNameList(s, schemas.SetupInstanceHttpsRequest_domainNames, v.DomainNames)
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_emailAddress, *v.EmailAddress)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type SetupInstanceHttpsOutput struct {
 
 	// The available API operations for SetupInstanceHttps .
@@ -69,77 +87,45 @@ type SetupInstanceHttpsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetupInstanceHttpsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetupInstanceHttpsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetupInstanceHttpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.SetupInstanceHttpsResult_operations, v.Operations)
+}
+func (v *SetupInstanceHttpsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetupInstanceHttpsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetupInstanceHttpsResult_operations:
+			return deserializeOperationList(d, schemas.SetupInstanceHttpsResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetupInstanceHttpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetupInstanceHttps, schemas.SetupInstanceHttpsRequest, schemas.SetupInstanceHttpsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetupInstanceHttps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetupInstanceHttps, schemas.SetupInstanceHttpsRequest, schemas.SetupInstanceHttpsResult), output: &SetupInstanceHttpsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetupInstanceHttps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetupInstanceHttps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetupInstanceHttpsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetupInstanceHttps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +140,8 @@ func (c *Client) addOperationSetupInstanceHttpsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetupInstanceHttps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetupInstanceHttps",
-	}
 }

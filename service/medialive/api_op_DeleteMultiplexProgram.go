@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete a program from a multiplex.
@@ -43,6 +42,21 @@ type DeleteMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiplexProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramRequest_ProgramName, *v.ProgramName)
+	}
+}
+
 // Placeholder documentation for DeleteMultiplexProgramResponse
 type DeleteMultiplexProgramOutput struct {
 
@@ -70,77 +84,73 @@ type DeleteMultiplexProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiplexProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramResponse_ChannelId, *v.ChannelId)
+	}
+	if v.MultiplexProgramSettings != nil {
+		s.WriteStruct(schemas.DeleteMultiplexProgramResponse_MultiplexProgramSettings)
+		v.MultiplexProgramSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PacketIdentifiersMap != nil {
+		s.WriteStruct(schemas.DeleteMultiplexProgramResponse_PacketIdentifiersMap)
+		v.PacketIdentifiersMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfMultiplexProgramPipelineDetail(s, schemas.DeleteMultiplexProgramResponse_PipelineDetails, v.PipelineDetails)
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DeleteMultiplexProgramResponse_ProgramName, *v.ProgramName)
+	}
+}
+func (v *DeleteMultiplexProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMultiplexProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMultiplexProgramResponse_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.DeleteMultiplexProgramResponse_ChannelId, v.ChannelId)
+		case schemas.DeleteMultiplexProgramResponse_MultiplexProgramSettings:
+			v.MultiplexProgramSettings = &types.MultiplexProgramSettings{}
+			return v.MultiplexProgramSettings.Deserialize(d)
+		case schemas.DeleteMultiplexProgramResponse_PacketIdentifiersMap:
+			v.PacketIdentifiersMap = &types.MultiplexProgramPacketIdentifiersMap{}
+			return v.PacketIdentifiersMap.Deserialize(d)
+		case schemas.DeleteMultiplexProgramResponse_PipelineDetails:
+			return deserialize__listOfMultiplexProgramPipelineDetail(d, schemas.DeleteMultiplexProgramResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.DeleteMultiplexProgramResponse_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DeleteMultiplexProgramResponse_ProgramName, v.ProgramName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplexProgram, schemas.DeleteMultiplexProgramRequest, schemas.DeleteMultiplexProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplexProgram, schemas.DeleteMultiplexProgramRequest, schemas.DeleteMultiplexProgramResponse), output: &DeleteMultiplexProgramOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMultiplexProgram{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMultiplexProgram"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteMultiplexProgramValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMultiplexProgram(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +165,8 @@ func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteMultiplexProgram(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteMultiplexProgram",
-	}
 }

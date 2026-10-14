@@ -4,9 +4,11 @@ package transfermanager
 
 import (
 	"bytes"
+	"context"
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
@@ -59,4 +61,63 @@ func TestInteg_DownloadObject(t *testing.T) {
 			testDownloadObject(t, setupMetadata.Buckets.Source.Name, c)
 		})
 	}
+}
+
+// TestInteg_DownloadObject_UnequalSize verifies that downloading a multipart
+// object whose parts have unequal sizes returns exactly the uploaded content,
+// in both parts and ranges modes (#3526).
+func TestInteg_DownloadObject_UnequalSize(t *testing.T) {
+	const mib = 1024 * 1024
+	// Distinct byte patterns per part so any misplacement corrupts the result.
+	// All parts but the last are >= 5MB to satisfy the S3 minimum part size.
+	partA := bytes.Repeat([]byte{'A'}, 6*mib)
+	partB := bytes.Repeat([]byte{'B'}, 5*mib)
+	partC := bytes.Repeat([]byte{'C'}, 1*mib)
+	body := bytes.Join([][]byte{partA, partB, partC}, nil)
+	partSizes := []int64{6 * mib, 5 * mib, 1 * mib}
+
+	cases := map[string]downloadObjectTestData{
+		"parts get unequal part sizes": {
+			Body:       bytes.NewReader(body),
+			ExpectBody: body,
+			PartSizes:  partSizes,
+		},
+		"ranges get unequal part sizes": {
+			Body:       bytes.NewReader(body),
+			ExpectBody: body,
+			PartSizes:  partSizes,
+			OptFns: []func(*Options){
+				func(opt *Options) {
+					opt.GetObjectType = types.GetObjectRanges
+				},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			testDownloadObjectWithChangingPartSize(t, setupMetadata.Buckets.Source.Name, c)
+		})
+	}
+}
+
+// TestInteg_DownloadObject_RandomizedReassembly is the property-based
+// durability test for https://github.com/aws/aws-sdk-go-v2/issues/3526, driving the DownloadObject
+// (WriterAt) path. It uploads randomized multipart layouts and asserts the
+// downloaded bytes equal the uploaded bytes byte for byte. See
+// runRandomizedReassembly in setup_integ_test.go. Reproduce a failure with
+// TM_REASSEMBLY_SEED.
+func TestInteg_DownloadObject_RandomizedReassembly(t *testing.T) {
+	runRandomizedReassembly(t, "DownloadObject", func(t *testing.T, ctx context.Context, bucket, key string, c reassemblyCase) []byte {
+		w := types.NewWriteAtBuffer(make([]byte, 0))
+		if _, err := s3TransferManagerClient.DownloadObject(ctx, &DownloadObjectInput{
+			Bucket:   aws.String(bucket),
+			Key:      aws.String(key),
+			WriterAt: w,
+			Range:    c.rangePtr(),
+		}, c.optFns()...); err != nil {
+			t.Fatalf("DownloadObject: %v", err)
+		}
+		return w.Bytes()
+	})
 }

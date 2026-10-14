@@ -1,0 +1,5 @@
+POST /2021-01-01/tags-removal
+
+Content-Type: application/json
+
+{"ARN":"__ARN__","TagKeys":["__Member__","__Member__"]}

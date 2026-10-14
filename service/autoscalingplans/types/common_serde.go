@@ -146,6 +146,7 @@ func serializeTargetTrackingConfigurations(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeApplicationSources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApplicationSource) error {
+	*v = make([]ApplicationSource, 0)
 	var vv ApplicationSource
 	return smithy.ReadList(d, s, func() error {
 		vv = ApplicationSource{}
@@ -159,6 +160,7 @@ func deserializeApplicationSources(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeDatapoints(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Datapoint) error {
+	*v = make([]Datapoint, 0)
 	var vv Datapoint
 	return smithy.ReadList(d, s, func() error {
 		vv = Datapoint{}
@@ -172,6 +174,7 @@ func deserializeDatapoints(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Da
 }
 
 func deserializeMetricDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricDimension) error {
+	*v = make([]MetricDimension, 0)
 	var vv MetricDimension
 	return smithy.ReadList(d, s, func() error {
 		vv = MetricDimension{}
@@ -185,6 +188,7 @@ func deserializeMetricDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeScalingInstructions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScalingInstruction) error {
+	*v = make([]ScalingInstruction, 0)
 	var vv ScalingInstruction
 	return smithy.ReadList(d, s, func() error {
 		vv = ScalingInstruction{}
@@ -198,6 +202,7 @@ func deserializeScalingInstructions(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeScalingPlanNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -211,6 +216,7 @@ func deserializeScalingPlanNames(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeScalingPlanResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScalingPlanResource) error {
+	*v = make([]ScalingPlanResource, 0)
 	var vv ScalingPlanResource
 	return smithy.ReadList(d, s, func() error {
 		vv = ScalingPlanResource{}
@@ -224,6 +230,7 @@ func deserializeScalingPlanResources(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeScalingPlans(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScalingPlan) error {
+	*v = make([]ScalingPlan, 0)
 	var vv ScalingPlan
 	return smithy.ReadList(d, s, func() error {
 		vv = ScalingPlan{}
@@ -237,6 +244,7 @@ func deserializeScalingPlans(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeScalingPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScalingPolicy) error {
+	*v = make([]ScalingPolicy, 0)
 	var vv ScalingPolicy
 	return smithy.ReadList(d, s, func() error {
 		vv = ScalingPolicy{}
@@ -250,6 +258,7 @@ func deserializeScalingPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TagFilter) error {
+	*v = make([]TagFilter, 0)
 	var vv TagFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = TagFilter{}
@@ -263,6 +272,7 @@ func deserializeTagFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ta
 }
 
 func deserializeTagValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -276,6 +286,7 @@ func deserializeTagValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeTargetTrackingConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TargetTrackingConfiguration) error {
+	*v = make([]TargetTrackingConfiguration, 0)
 	var vv TargetTrackingConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = TargetTrackingConfiguration{}

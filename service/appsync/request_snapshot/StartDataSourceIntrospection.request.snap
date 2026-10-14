@@ -1,0 +1,5 @@
+POST /v1/datasources/introspections
+
+Content-Type: application/json
+
+{"rdsDataApiConfig":{"databaseName":"__DatabaseName__","resourceArn":"__ResourceArn__","secretArn":"__SecretArn__"}}

@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the version of the theme that the specified theme alias points to. If
@@ -49,6 +48,24 @@ type DeleteThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeAliasRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type DeleteThemeAliasOutput struct {
 
 	// The name for the theme alias.
@@ -72,77 +89,71 @@ type DeleteThemeAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_AliasName, *v.AliasName)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteThemeAliasResponse_Status, v.Status)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeAliasResponse_ThemeId, *v.ThemeId)
+	}
+}
+func (v *DeleteThemeAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThemeAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteThemeAliasResponse_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_AliasName, v.AliasName)
+		case schemas.DeleteThemeAliasResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_Arn, v.Arn)
+		case schemas.DeleteThemeAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_RequestId, v.RequestId)
+		case schemas.DeleteThemeAliasResponse_Status:
+			return d.ReadInt32(schemas.DeleteThemeAliasResponse_Status, &v.Status)
+		case schemas.DeleteThemeAliasResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.DeleteThemeAliasResponse_ThemeId, v.ThemeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeAlias, schemas.DeleteThemeAliasRequest, schemas.DeleteThemeAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThemeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeAlias, schemas.DeleteThemeAliasRequest, schemas.DeleteThemeAliasResponse), output: &DeleteThemeAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThemeAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteThemeAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteThemeAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteThemeAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +168,8 @@ func (c *Client) addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteThemeAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteThemeAlias",
-	}
 }

@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/UpdateImagePermissions
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£dNameh__Name__oSharedAccountIds__SharedAccountId__pImagePermissions¢qallowImageBuilderõjallowFleetõ

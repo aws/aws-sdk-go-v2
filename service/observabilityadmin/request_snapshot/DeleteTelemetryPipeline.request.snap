@@ -1,0 +1,5 @@
+POST /DeleteTelemetryPipeline
+
+Content-Type: application/json
+
+{"PipelineIdentifier":"__PipelineIdentifier__"}

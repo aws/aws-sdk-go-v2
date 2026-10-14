@@ -1,0 +1,5 @@
+POST /v2/create-report
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","reportType":"FAILURE_MODE","serviceArn":"__ServiceArn__"}

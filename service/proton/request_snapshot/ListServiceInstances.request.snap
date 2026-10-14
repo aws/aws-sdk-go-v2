@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListServiceInstances
+
+{"filters":[{"key":"name","value":"__Value__"},{"key":"name","value":"__Value__"}],"maxResults":1,"nextToken":"__NextToken__","serviceName":"__ServiceName__","sortBy":"name","sortOrder":"ASCENDING"}

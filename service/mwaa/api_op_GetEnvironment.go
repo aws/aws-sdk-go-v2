@@ -5,10 +5,7 @@ package mwaa
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +36,6 @@ type GetEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GetEnvironmentInput_Name, *v.Name)
-	}
-}
-func (v *GetEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetEnvironmentInput_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 type GetEnvironmentOutput struct {
 
 	// An object containing all available details about the environment.
@@ -72,86 +47,23 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Environment != nil {
-		s.WriteStruct(schemas.GetEnvironmentOutput_Environment)
-		v.Environment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentOutput_Environment:
-			v.Environment = &types.Environment{}
-			return v.Environment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput), output: &GetEnvironmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -161,12 +73,6 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpGetEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +85,6 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +118,4 @@ func (m *endpointPrefix_opGetEnvironmentMiddleware) HandleFinalize(ctx context.C
 }
 func addEndpointPrefix_opGetEnvironmentMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetEnvironmentMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnvironment",
-	}
 }

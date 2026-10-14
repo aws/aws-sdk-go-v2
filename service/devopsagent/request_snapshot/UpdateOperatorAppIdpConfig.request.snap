@@ -1,0 +1,5 @@
+PATCH /v1/agentspaces/__AgentSpaceId__/operator/idp
+
+Content-Type: application/json
+
+{"idpClientSecret":"__IdpClientSecret__"}

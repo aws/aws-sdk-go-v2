@@ -1,0 +1,3 @@
+GET /api/data-integration/instance/__InstanceId__/data-integration-flows/__Name__
+
+

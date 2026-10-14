@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -93,6 +92,39 @@ type UpdateGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameSessionQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameSessionQueueInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomEventData != nil {
+		s.WriteString(schemas.UpdateGameSessionQueueInput_CustomEventData, *v.CustomEventData)
+	}
+	serializeGameSessionQueueDestinationList(s, schemas.UpdateGameSessionQueueInput_Destinations, v.Destinations)
+	if v.FilterConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGameSessionQueueInput_FilterConfiguration)
+		v.FilterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGameSessionQueueInput_Name, *v.Name)
+	}
+	if v.NotificationTarget != nil {
+		s.WriteString(schemas.UpdateGameSessionQueueInput_NotificationTarget, *v.NotificationTarget)
+	}
+	serializePlayerLatencyPolicyList(s, schemas.UpdateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PriorityConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGameSessionQueueInput_PriorityConfiguration)
+		v.PriorityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.UpdateGameSessionQueueInput_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+
 type UpdateGameSessionQueueOutput struct {
 
 	// An object that describes the newly updated game session queue.
@@ -104,65 +136,44 @@ type UpdateGameSessionQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameSessionQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameSessionQueueOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameSessionQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionQueue != nil {
+		s.WriteStruct(schemas.UpdateGameSessionQueueOutput_GameSessionQueue)
+		v.GameSessionQueue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGameSessionQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGameSessionQueueOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGameSessionQueueOutput_GameSessionQueue:
+			v.GameSessionQueue = &types.GameSessionQueue{}
+			return v.GameSessionQueue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameSessionQueue, schemas.UpdateGameSessionQueueInput, schemas.UpdateGameSessionQueueOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameSessionQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameSessionQueue, schemas.UpdateGameSessionQueueInput, schemas.UpdateGameSessionQueueOutput), output: &UpdateGameSessionQueueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameSessionQueue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGameSessionQueue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -172,12 +183,6 @@ func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpUpdateGameSessionQueueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGameSessionQueue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +197,8 @@ func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGameSessionQueue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGameSessionQueue",
-	}
 }

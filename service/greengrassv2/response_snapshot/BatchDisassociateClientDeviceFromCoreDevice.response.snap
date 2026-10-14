@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errorEntries":[{"code":"__Code__","message":"__Message__","thingName":"__ThingName__"},{"code":"__Code__","message":"__Message__","thingName":"__ThingName__"}]}

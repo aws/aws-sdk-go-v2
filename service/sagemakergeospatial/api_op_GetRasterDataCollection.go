@@ -4,13 +4,8 @@ package sagemakergeospatial
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to get details of a specific raster data collection.
@@ -37,28 +32,6 @@ type GetRasterDataCollectionInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetRasterDataCollectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRasterDataCollectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRasterDataCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetRasterDataCollectionInput_Arn, *v.Arn)
-	}
-}
-func (v *GetRasterDataCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRasterDataCollectionInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRasterDataCollectionInput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetRasterDataCollectionInput_Arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 type GetRasterDataCollectionOutput struct {
@@ -107,133 +80,29 @@ type GetRasterDataCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRasterDataCollectionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRasterDataCollectionOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRasterDataCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetRasterDataCollectionOutput_Arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.GetRasterDataCollectionOutput_Description, *v.Description)
-	}
-	if v.DescriptionPageUrl != nil {
-		s.WriteString(schemas.GetRasterDataCollectionOutput_DescriptionPageUrl, *v.DescriptionPageUrl)
-	}
-	serializeImageSourceBandList(s, schemas.GetRasterDataCollectionOutput_ImageSourceBands, v.ImageSourceBands)
-	if v.Name != nil {
-		s.WriteString(schemas.GetRasterDataCollectionOutput_Name, *v.Name)
-	}
-	serializeFilterList(s, schemas.GetRasterDataCollectionOutput_SupportedFilters, v.SupportedFilters)
-	serializeTags(s, schemas.GetRasterDataCollectionOutput_Tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.GetRasterDataCollectionOutput_Type, string(v.Type))
-	}
-}
-func (v *GetRasterDataCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRasterDataCollectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRasterDataCollectionOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetRasterDataCollectionOutput_Arn, v.Arn)
-		case schemas.GetRasterDataCollectionOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetRasterDataCollectionOutput_Description, v.Description)
-		case schemas.GetRasterDataCollectionOutput_DescriptionPageUrl:
-			v.DescriptionPageUrl = new(string)
-			return d.ReadString(schemas.GetRasterDataCollectionOutput_DescriptionPageUrl, v.DescriptionPageUrl)
-		case schemas.GetRasterDataCollectionOutput_ImageSourceBands:
-			return deserializeImageSourceBandList(d, schemas.GetRasterDataCollectionOutput_ImageSourceBands, &v.ImageSourceBands)
-		case schemas.GetRasterDataCollectionOutput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetRasterDataCollectionOutput_Name, v.Name)
-		case schemas.GetRasterDataCollectionOutput_SupportedFilters:
-			return deserializeFilterList(d, schemas.GetRasterDataCollectionOutput_SupportedFilters, &v.SupportedFilters)
-		case schemas.GetRasterDataCollectionOutput_Tags:
-			return deserializeTags(d, schemas.GetRasterDataCollectionOutput_Tags, &v.Tags)
-		case schemas.GetRasterDataCollectionOutput_Type:
-			var ev string
-			if err := d.ReadString(schemas.GetRasterDataCollectionOutput_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.DataCollectionType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRasterDataCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRasterDataCollection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRasterDataCollection, schemas.GetRasterDataCollectionInput, schemas.GetRasterDataCollectionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRasterDataCollection{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRasterDataCollection, schemas.GetRasterDataCollectionInput, schemas.GetRasterDataCollectionOutput), output: &GetRasterDataCollectionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRasterDataCollection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRasterDataCollectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRasterDataCollection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,22 +117,8 @@ func (c *Client) addOperationGetRasterDataCollectionMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRasterDataCollection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRasterDataCollection",
-	}
 }

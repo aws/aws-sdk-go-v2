@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"buckets":[{"creationDate":"__CreationDate__","name":"__Name__"},{"creationDate":"__CreationDate__","name":"__Name__"}],"nextToken":"__NextToken__"}

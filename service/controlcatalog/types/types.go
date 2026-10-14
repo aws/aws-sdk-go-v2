@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,34 +19,6 @@ type AssociatedDomainSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatedDomainSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatedDomainSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatedDomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AssociatedDomainSummary_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AssociatedDomainSummary_Name, *v.Name)
-	}
-}
-func (v *AssociatedDomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatedDomainSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatedDomainSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AssociatedDomainSummary_Arn, v.Arn)
-		case schemas.AssociatedDomainSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AssociatedDomainSummary_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // A summary of the objective that a common control supports.
 type AssociatedObjectiveSummary struct {
 
@@ -59,34 +29,6 @@ type AssociatedObjectiveSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociatedObjectiveSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatedObjectiveSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatedObjectiveSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AssociatedObjectiveSummary_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AssociatedObjectiveSummary_Name, *v.Name)
-	}
-}
-func (v *AssociatedObjectiveSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatedObjectiveSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatedObjectiveSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AssociatedObjectiveSummary_Arn, v.Arn)
-		case schemas.AssociatedObjectiveSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AssociatedObjectiveSummary_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // An optional filter that narrows the results to a specific objective.
@@ -101,25 +43,6 @@ type CommonControlFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CommonControlFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommonControlFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommonControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectiveResourceFilterList(s, schemas.CommonControlFilter_Objectives, v.Objectives)
-}
-func (v *CommonControlFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommonControlFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommonControlFilter_Objectives:
-			return deserializeObjectiveResourceFilterList(d, schemas.CommonControlFilter_Objectives, &v.Objectives)
-		}
-		return nil
-	})
-}
-
 // A structure that contains details about a common control mapping. In
 // particular, it returns the Amazon Resource Name (ARN) of the common control.
 type CommonControlMappingDetails struct {
@@ -131,28 +54,6 @@ type CommonControlMappingDetails struct {
 	CommonControlArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CommonControlMappingDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommonControlMappingDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommonControlMappingDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CommonControlArn != nil {
-		s.WriteString(schemas.CommonControlMappingDetails_CommonControlArn, *v.CommonControlArn)
-	}
-}
-func (v *CommonControlMappingDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommonControlMappingDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommonControlMappingDetails_CommonControlArn:
-			v.CommonControlArn = new(string)
-			return d.ReadString(schemas.CommonControlMappingDetails_CommonControlArn, v.CommonControlArn)
-		}
-		return nil
-	})
 }
 
 // A summary of metadata for a common control.
@@ -196,68 +97,6 @@ type CommonControlSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CommonControlSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommonControlSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommonControlSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CommonControlSummary_Arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.CommonControlSummary_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CommonControlSummary_Description, *v.Description)
-	}
-	if v.Domain != nil {
-		s.WriteStruct(schemas.CommonControlSummary_Domain)
-		v.Domain.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdateTime != nil {
-		s.WriteTime(schemas.CommonControlSummary_LastUpdateTime, *v.LastUpdateTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CommonControlSummary_Name, *v.Name)
-	}
-	if v.Objective != nil {
-		s.WriteStruct(schemas.CommonControlSummary_Objective)
-		v.Objective.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CommonControlSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommonControlSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommonControlSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CommonControlSummary_Arn, v.Arn)
-		case schemas.CommonControlSummary_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.CommonControlSummary_CreateTime, v.CreateTime)
-		case schemas.CommonControlSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CommonControlSummary_Description, v.Description)
-		case schemas.CommonControlSummary_Domain:
-			v.Domain = &AssociatedDomainSummary{}
-			return v.Domain.Deserialize(d)
-		case schemas.CommonControlSummary_LastUpdateTime:
-			v.LastUpdateTime = new(time.Time)
-			return d.ReadTime(schemas.CommonControlSummary_LastUpdateTime, v.LastUpdateTime)
-		case schemas.CommonControlSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CommonControlSummary_Name, v.Name)
-		case schemas.CommonControlSummary_Objective:
-			v.Objective = &AssociatedObjectiveSummary{}
-			return v.Objective.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A structure that defines filtering criteria for the ListControls operation. You
 // can use this filter to narrow down the list of controls based on their
 // implementation details.
@@ -274,33 +113,6 @@ type ControlFilter struct {
 	Implementations *ImplementationFilter
 
 	noSmithyDocumentSerde
-}
-
-func (v *ControlFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGovernedProviderFilterList(s, schemas.ControlFilter_GovernedProviders, v.GovernedProviders)
-	if v.Implementations != nil {
-		s.WriteStruct(schemas.ControlFilter_Implementations)
-		v.Implementations.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ControlFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlFilter_GovernedProviders:
-			return deserializeGovernedProviderFilterList(d, schemas.ControlFilter_GovernedProviders, &v.GovernedProviders)
-		case schemas.ControlFilter_Implementations:
-			v.Implementations = &ImplementationFilter{}
-			return v.Implementations.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A structure that contains information about a control mapping, including the
@@ -326,41 +138,6 @@ type ControlMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ControlMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlArn != nil {
-		s.WriteString(schemas.ControlMapping_ControlArn, *v.ControlArn)
-	}
-	serializeMapping(s, schemas.ControlMapping_Mapping, v.Mapping)
-	if v.MappingType != "" {
-		s.WriteString(schemas.ControlMapping_MappingType, string(v.MappingType))
-	}
-}
-func (v *ControlMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlMapping_ControlArn:
-			v.ControlArn = new(string)
-			return d.ReadString(schemas.ControlMapping_ControlArn, v.ControlArn)
-		case schemas.ControlMapping_Mapping:
-			return deserializeMapping(d, schemas.ControlMapping_Mapping, &v.Mapping)
-		case schemas.ControlMapping_MappingType:
-			var ev string
-			if err := d.ReadString(schemas.ControlMapping_MappingType, &ev); err != nil {
-				return err
-			}
-			v.MappingType = MappingType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that defines filtering criteria for the ListControlMappings
 // operation. You can use this filter to narrow down the list of control mappings
 // based on control ARNs, common control ARNs, or mapping types.
@@ -379,31 +156,6 @@ type ControlMappingFilter struct {
 	MappingTypes []MappingType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ControlMappingFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlMappingFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlMappingFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommonControlArnFilterList(s, schemas.ControlMappingFilter_CommonControlArns, v.CommonControlArns)
-	serializeControlArnFilterList(s, schemas.ControlMappingFilter_ControlArns, v.ControlArns)
-	serializeMappingTypeFilterList(s, schemas.ControlMappingFilter_MappingTypes, v.MappingTypes)
-}
-func (v *ControlMappingFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlMappingFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlMappingFilter_CommonControlArns:
-			return deserializeCommonControlArnFilterList(d, schemas.ControlMappingFilter_CommonControlArns, &v.CommonControlArns)
-		case schemas.ControlMappingFilter_ControlArns:
-			return deserializeControlArnFilterList(d, schemas.ControlMappingFilter_ControlArns, &v.ControlArns)
-		case schemas.ControlMappingFilter_MappingTypes:
-			return deserializeMappingTypeFilterList(d, schemas.ControlMappingFilter_MappingTypes, &v.MappingTypes)
-		}
-		return nil
-	})
 }
 
 // Five types of control parameters are supported.
@@ -466,38 +218,6 @@ type ControlParameter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ControlParameter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlParameter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlParameter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.ControlParameter_Name, *v.Name)
-	}
-	if v.Requirement != "" {
-		s.WriteString(schemas.ControlParameter_Requirement, string(v.Requirement))
-	}
-}
-func (v *ControlParameter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlParameter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlParameter_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ControlParameter_Name, v.Name)
-		case schemas.ControlParameter_Requirement:
-			var ev string
-			if err := d.ReadString(schemas.ControlParameter_Requirement, &ev); err != nil {
-				return err
-			}
-			v.Requirement = ControlParameterRequirement(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Overview of information about a control.
 type ControlSummary struct {
 
@@ -557,93 +277,6 @@ type ControlSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ControlSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlAliases(s, schemas.ControlSummary_Aliases, v.Aliases)
-	if v.Arn != nil {
-		s.WriteString(schemas.ControlSummary_Arn, *v.Arn)
-	}
-	if v.Behavior != "" {
-		s.WriteString(schemas.ControlSummary_Behavior, string(v.Behavior))
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.ControlSummary_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ControlSummary_Description, *v.Description)
-	}
-	serializeGovernedProviders(s, schemas.ControlSummary_GovernedProviders, v.GovernedProviders)
-	serializeGovernedResources(s, schemas.ControlSummary_GovernedResources, v.GovernedResources)
-	if v.Implementation != nil {
-		s.WriteStruct(schemas.ControlSummary_Implementation)
-		v.Implementation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ControlSummary_Name, *v.Name)
-	}
-	if v.ParameterRequirementSummary != "" {
-		s.WriteString(schemas.ControlSummary_ParameterRequirementSummary, string(v.ParameterRequirementSummary))
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ControlSummary_Severity, string(v.Severity))
-	}
-}
-func (v *ControlSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlSummary_Aliases:
-			return deserializeControlAliases(d, schemas.ControlSummary_Aliases, &v.Aliases)
-		case schemas.ControlSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ControlSummary_Arn, v.Arn)
-		case schemas.ControlSummary_Behavior:
-			var ev string
-			if err := d.ReadString(schemas.ControlSummary_Behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = ControlBehavior(ev)
-			return nil
-		case schemas.ControlSummary_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.ControlSummary_CreateTime, v.CreateTime)
-		case schemas.ControlSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ControlSummary_Description, v.Description)
-		case schemas.ControlSummary_GovernedProviders:
-			return deserializeGovernedProviders(d, schemas.ControlSummary_GovernedProviders, &v.GovernedProviders)
-		case schemas.ControlSummary_GovernedResources:
-			return deserializeGovernedResources(d, schemas.ControlSummary_GovernedResources, &v.GovernedResources)
-		case schemas.ControlSummary_Implementation:
-			v.Implementation = &ImplementationSummary{}
-			return v.Implementation.Deserialize(d)
-		case schemas.ControlSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ControlSummary_Name, v.Name)
-		case schemas.ControlSummary_ParameterRequirementSummary:
-			var ev string
-			if err := d.ReadString(schemas.ControlSummary_ParameterRequirementSummary, &ev); err != nil {
-				return err
-			}
-			v.ParameterRequirementSummary = ParameterRequirementSummary(ev)
-			return nil
-		case schemas.ControlSummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ControlSummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = ControlSeverity(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The domain resource that's being used as a filter.
 type DomainResourceFilter struct {
 
@@ -651,28 +284,6 @@ type DomainResourceFilter struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DomainResourceFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DomainResourceFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DomainResourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DomainResourceFilter_Arn, *v.Arn)
-	}
-}
-func (v *DomainResourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DomainResourceFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DomainResourceFilter_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DomainResourceFilter_Arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 // A summary of metadata for a domain.
@@ -706,52 +317,6 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DomainSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DomainSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DomainSummary_Arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.DomainSummary_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DomainSummary_Description, *v.Description)
-	}
-	if v.LastUpdateTime != nil {
-		s.WriteTime(schemas.DomainSummary_LastUpdateTime, *v.LastUpdateTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DomainSummary_Name, *v.Name)
-	}
-}
-func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DomainSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DomainSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DomainSummary_Arn, v.Arn)
-		case schemas.DomainSummary_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.DomainSummary_CreateTime, v.CreateTime)
-		case schemas.DomainSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DomainSummary_Description, v.Description)
-		case schemas.DomainSummary_LastUpdateTime:
-			v.LastUpdateTime = new(time.Time)
-			return d.ReadTime(schemas.DomainSummary_LastUpdateTime, v.LastUpdateTime)
-		case schemas.DomainSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DomainSummary_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // A structure that contains details about a framework mapping, including the
 // framework name and specific item within the framework that the control maps to.
 type FrameworkMappingDetails struct {
@@ -767,34 +332,6 @@ type FrameworkMappingDetails struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FrameworkMappingDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FrameworkMappingDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FrameworkMappingDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Item != nil {
-		s.WriteString(schemas.FrameworkMappingDetails_Item, *v.Item)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FrameworkMappingDetails_Name, *v.Name)
-	}
-}
-func (v *FrameworkMappingDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FrameworkMappingDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FrameworkMappingDetails_Item:
-			v.Item = new(string)
-			return d.ReadString(schemas.FrameworkMappingDetails_Item, v.Item)
-		case schemas.FrameworkMappingDetails_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FrameworkMappingDetails_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // An object that describes the implementation type for a control.
@@ -831,34 +368,6 @@ type ImplementationDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImplementationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImplementationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImplementationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.ImplementationDetails_Identifier, *v.Identifier)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ImplementationDetails_Type, *v.Type)
-	}
-}
-func (v *ImplementationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImplementationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImplementationDetails_Identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.ImplementationDetails_Identifier, v.Identifier)
-		case schemas.ImplementationDetails_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ImplementationDetails_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 // A structure that defines filtering criteria for control implementations. You
 // can use this filter to find controls that are implemented by specific Amazon Web
 // Services services or with specific service identifiers.
@@ -875,28 +384,6 @@ type ImplementationFilter struct {
 	Types []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ImplementationFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImplementationFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImplementationFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImplementationIdentifierFilterList(s, schemas.ImplementationFilter_Identifiers, v.Identifiers)
-	serializeImplementationTypeFilterList(s, schemas.ImplementationFilter_Types, v.Types)
-}
-func (v *ImplementationFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImplementationFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImplementationFilter_Identifiers:
-			return deserializeImplementationIdentifierFilterList(d, schemas.ImplementationFilter_Identifiers, &v.Identifiers)
-		case schemas.ImplementationFilter_Types:
-			return deserializeImplementationTypeFilterList(d, schemas.ImplementationFilter_Types, &v.Types)
-		}
-		return nil
-	})
 }
 
 // A summary of how the control is implemented, including the Amazon Web Services
@@ -922,34 +409,6 @@ type ImplementationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImplementationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImplementationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImplementationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.ImplementationSummary_Identifier, *v.Identifier)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ImplementationSummary_Type, *v.Type)
-	}
-}
-func (v *ImplementationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImplementationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImplementationSummary_Identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.ImplementationSummary_Identifier, v.Identifier)
-		case schemas.ImplementationSummary_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ImplementationSummary_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 // A structure that contains the details of a mapping relationship, which can be
 // either to a framework or to a common control.
 //
@@ -971,14 +430,6 @@ type MappingMemberCommonControl struct {
 }
 
 func (*MappingMemberCommonControl) isMapping() {}
-func (v *MappingMemberCommonControl) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Mapping_CommonControl)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MappingMemberCommonControl) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The framework mapping details when the mapping type relates to a compliance
 // framework.
@@ -989,14 +440,6 @@ type MappingMemberFramework struct {
 }
 
 func (*MappingMemberFramework) isMapping() {}
-func (v *MappingMemberFramework) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Mapping_Framework)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MappingMemberFramework) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Returns information about controls that are related to the specified control.
 type MappingMemberRelatedControl struct {
@@ -1006,14 +449,6 @@ type MappingMemberRelatedControl struct {
 }
 
 func (*MappingMemberRelatedControl) isMapping() {}
-func (v *MappingMemberRelatedControl) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Mapping_RelatedControl)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MappingMemberRelatedControl) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An optional filter that narrows the list of objectives to a specific domain.
 type ObjectiveFilter struct {
@@ -1027,25 +462,6 @@ type ObjectiveFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ObjectiveFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ObjectiveFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ObjectiveFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainResourceFilterList(s, schemas.ObjectiveFilter_Domains, v.Domains)
-}
-func (v *ObjectiveFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ObjectiveFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ObjectiveFilter_Domains:
-			return deserializeDomainResourceFilterList(d, schemas.ObjectiveFilter_Domains, &v.Domains)
-		}
-		return nil
-	})
-}
-
 // The objective resource that's being used as a filter.
 type ObjectiveResourceFilter struct {
 
@@ -1053,28 +469,6 @@ type ObjectiveResourceFilter struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ObjectiveResourceFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ObjectiveResourceFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ObjectiveResourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ObjectiveResourceFilter_Arn, *v.Arn)
-	}
-}
-func (v *ObjectiveResourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ObjectiveResourceFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ObjectiveResourceFilter_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ObjectiveResourceFilter_Arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 // A summary of metadata for an objective.
@@ -1113,60 +507,6 @@ type ObjectiveSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ObjectiveSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ObjectiveSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ObjectiveSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ObjectiveSummary_Arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.ObjectiveSummary_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ObjectiveSummary_Description, *v.Description)
-	}
-	if v.Domain != nil {
-		s.WriteStruct(schemas.ObjectiveSummary_Domain)
-		v.Domain.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdateTime != nil {
-		s.WriteTime(schemas.ObjectiveSummary_LastUpdateTime, *v.LastUpdateTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ObjectiveSummary_Name, *v.Name)
-	}
-}
-func (v *ObjectiveSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ObjectiveSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ObjectiveSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ObjectiveSummary_Arn, v.Arn)
-		case schemas.ObjectiveSummary_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.ObjectiveSummary_CreateTime, v.CreateTime)
-		case schemas.ObjectiveSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ObjectiveSummary_Description, v.Description)
-		case schemas.ObjectiveSummary_Domain:
-			v.Domain = &AssociatedDomainSummary{}
-			return v.Domain.Deserialize(d)
-		case schemas.ObjectiveSummary_LastUpdateTime:
-			v.LastUpdateTime = new(time.Time)
-			return d.ReadTime(schemas.ObjectiveSummary_LastUpdateTime, v.LastUpdateTime)
-		case schemas.ObjectiveSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ObjectiveSummary_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Returns information about the control, including the scope of the control, if
 // enabled, and the Regions in which the control is available for deployment. For
 // more information about scope, see [Global services].
@@ -1201,35 +541,6 @@ type RegionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeployableRegions(s, schemas.RegionConfiguration_DeployableRegions, v.DeployableRegions)
-	if v.Scope != "" {
-		s.WriteString(schemas.RegionConfiguration_Scope, string(v.Scope))
-	}
-}
-func (v *RegionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegionConfiguration_DeployableRegions:
-			return deserializeDeployableRegions(d, schemas.RegionConfiguration_DeployableRegions, &v.DeployableRegions)
-		case schemas.RegionConfiguration_Scope:
-			var ev string
-			if err := d.ReadString(schemas.RegionConfiguration_Scope, &ev); err != nil {
-				return err
-			}
-			v.Scope = ControlScope(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes a control's relationship status with other controls.
 type RelatedControlMappingDetails struct {
 
@@ -1243,38 +554,6 @@ type RelatedControlMappingDetails struct {
 	ControlArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RelatedControlMappingDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RelatedControlMappingDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RelatedControlMappingDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlArn != nil {
-		s.WriteString(schemas.RelatedControlMappingDetails_ControlArn, *v.ControlArn)
-	}
-	if v.RelationType != "" {
-		s.WriteString(schemas.RelatedControlMappingDetails_RelationType, string(v.RelationType))
-	}
-}
-func (v *RelatedControlMappingDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RelatedControlMappingDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RelatedControlMappingDetails_ControlArn:
-			v.ControlArn = new(string)
-			return d.ReadString(schemas.RelatedControlMappingDetails_ControlArn, v.ControlArn)
-		case schemas.RelatedControlMappingDetails_RelationType:
-			var ev string
-			if err := d.ReadString(schemas.RelatedControlMappingDetails_RelationType, &ev); err != nil {
-				return err
-			}
-			v.RelationType = ControlRelationType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

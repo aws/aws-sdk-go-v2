@@ -1,0 +1,3 @@
+GET /v2LoggingLevel?maxResults=1&nextToken=__NextToken__&targetType=DEFAULT
+
+

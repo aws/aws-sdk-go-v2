@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/TagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kresourceArno__ResourceArn__dtagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

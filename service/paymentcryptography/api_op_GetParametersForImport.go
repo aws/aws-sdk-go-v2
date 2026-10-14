@@ -4,11 +4,10 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -84,6 +83,24 @@ type GetParametersForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForImportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyMaterialType != "" {
+		s.WriteString(schemas.GetParametersForImportInput_KeyMaterialType, string(v.KeyMaterialType))
+	}
+	if v.ReuseLastGeneratedToken != nil {
+		s.WriteBool(schemas.GetParametersForImportInput_ReuseLastGeneratedToken, *v.ReuseLastGeneratedToken)
+	}
+	if v.WrappingKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForImportInput_WrappingKeyAlgorithm, string(v.WrappingKeyAlgorithm))
+	}
+}
+
 type GetParametersForImportOutput struct {
 
 	// The import token to initiate key import into Amazon Web Services Payment
@@ -122,77 +139,76 @@ type GetParametersForImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForImportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportToken != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_ImportToken, *v.ImportToken)
+	}
+	if v.ParametersValidUntilTimestamp != nil {
+		s.WriteTime(schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp, *v.ParametersValidUntilTimestamp)
+	}
+	if v.WrappingKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyAlgorithm, string(v.WrappingKeyAlgorithm))
+	}
+	if v.WrappingKeyCertificate != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyCertificate, *v.WrappingKeyCertificate)
+	}
+	if v.WrappingKeyCertificateChain != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyCertificateChain, *v.WrappingKeyCertificateChain)
+	}
+}
+func (v *GetParametersForImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersForImportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersForImportOutput_ImportToken:
+			v.ImportToken = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_ImportToken, v.ImportToken)
+		case schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp:
+			v.ParametersValidUntilTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp, v.ParametersValidUntilTimestamp)
+		case schemas.GetParametersForImportOutput_WrappingKeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.WrappingKeyAlgorithm = types.KeyAlgorithm(ev)
+			return nil
+		case schemas.GetParametersForImportOutput_WrappingKeyCertificate:
+			v.WrappingKeyCertificate = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyCertificate, v.WrappingKeyCertificate)
+		case schemas.GetParametersForImportOutput_WrappingKeyCertificateChain:
+			v.WrappingKeyCertificateChain = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyCertificateChain, v.WrappingKeyCertificateChain)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForImport, schemas.GetParametersForImportInput, schemas.GetParametersForImportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetParametersForImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForImport, schemas.GetParametersForImportInput, schemas.GetParametersForImportOutput), output: &GetParametersForImportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetParametersForImport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetParametersForImport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetParametersForImportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParametersForImport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +223,8 @@ func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetParametersForImport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetParametersForImport",
-	}
 }

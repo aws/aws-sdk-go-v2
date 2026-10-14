@@ -1,0 +1,3 @@
+GET /2023-10-12/farms/__FarmId__/sessions-statistics-aggregation?aggregationId=__AggregationId__&maxResults=1&nextToken=__NextToken__
+
+

@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a volume on a specified gateway. This operation is only supported in
@@ -126,6 +125,38 @@ type CreateStorediSCSIVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorediSCSIVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorediSCSIVolumeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorediSCSIVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_DiskId, *v.DiskId)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.CreateStorediSCSIVolumeInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_KMSKey, *v.KMSKey)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	s.WriteBool(schemas.CreateStorediSCSIVolumeInput_PreserveExistingData, v.PreserveExistingData)
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_SnapshotId, *v.SnapshotId)
+	}
+	serializeTags(s, schemas.CreateStorediSCSIVolumeInput_Tags, v.Tags)
+	if v.TargetName != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_TargetName, *v.TargetName)
+	}
+}
+
 // A JSON object containing the following fields:
 type CreateStorediSCSIVolumeOutput struct {
 
@@ -145,77 +176,59 @@ type CreateStorediSCSIVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorediSCSIVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorediSCSIVolumeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorediSCSIVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeOutput_TargetARN, *v.TargetARN)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeOutput_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+}
+func (v *CreateStorediSCSIVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorediSCSIVolumeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorediSCSIVolumeOutput_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.CreateStorediSCSIVolumeOutput_TargetARN, v.TargetARN)
+		case schemas.CreateStorediSCSIVolumeOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.CreateStorediSCSIVolumeOutput_VolumeARN, v.VolumeARN)
+		case schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorediSCSIVolume, schemas.CreateStorediSCSIVolumeInput, schemas.CreateStorediSCSIVolumeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStorediSCSIVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorediSCSIVolume, schemas.CreateStorediSCSIVolumeInput, schemas.CreateStorediSCSIVolumeOutput), output: &CreateStorediSCSIVolumeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStorediSCSIVolume{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStorediSCSIVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStorediSCSIVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStorediSCSIVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +243,8 @@ func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStorediSCSIVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStorediSCSIVolume",
-	}
 }

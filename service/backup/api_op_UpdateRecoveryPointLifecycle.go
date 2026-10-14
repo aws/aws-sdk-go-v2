@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the transition lifecycle of a recovery point.
@@ -78,6 +77,26 @@ type UpdateRecoveryPointLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointLifecycleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointLifecycleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointLifecycleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleInput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type UpdateRecoveryPointLifecycleOutput struct {
 
 	// An ARN that uniquely identifies a backup vault; for example,
@@ -115,77 +134,70 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointLifecycleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointLifecycleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.CalculatedLifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput_CalculatedLifecycle)
+		v.CalculatedLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPointLifecycleOutput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+func (v *UpdateRecoveryPointLifecycleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecoveryPointLifecycleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointLifecycleOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.UpdateRecoveryPointLifecycleOutput_CalculatedLifecycle:
+			v.CalculatedLifecycle = &types.CalculatedLifecycle{}
+			return v.CalculatedLifecycle.Deserialize(d)
+		case schemas.UpdateRecoveryPointLifecycleOutput_Lifecycle:
+			v.Lifecycle = &types.Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointLifecycleOutput_RecoveryPointArn, v.RecoveryPointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointLifecycle, schemas.UpdateRecoveryPointLifecycleInput, schemas.UpdateRecoveryPointLifecycleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryPointLifecycle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointLifecycle, schemas.UpdateRecoveryPointLifecycleInput, schemas.UpdateRecoveryPointLifecycleOutput), output: &UpdateRecoveryPointLifecycleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryPointLifecycle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRecoveryPointLifecycle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRecoveryPointLifecycleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecoveryPointLifecycle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +212,8 @@ func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRecoveryPointLifecycle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRecoveryPointLifecycle",
-	}
 }

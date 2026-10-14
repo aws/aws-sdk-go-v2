@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +39,6 @@ type DeleteBrowserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBrowserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BrowserId != nil {
-		s.WriteString(schemas.DeleteBrowserRequest_browserId, *v.BrowserId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteBrowserRequest_clientToken, *v.ClientToken)
-	}
-}
-
 type DeleteBrowserOutput struct {
 
 	// The unique identifier of the deleted browser.
@@ -81,83 +62,23 @@ type DeleteBrowserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteBrowserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteBrowserResponse_browserId:
-			v.BrowserId = new(string)
-			return d.ReadString(schemas.DeleteBrowserResponse_browserId, v.BrowserId)
-		case schemas.DeleteBrowserResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteBrowserResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.DeleteBrowserResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteBrowserResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.BrowserStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBrowserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBrowser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowser, schemas.DeleteBrowserRequest, schemas.DeleteBrowserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBrowser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowser, schemas.DeleteBrowserRequest, schemas.DeleteBrowserResponse), output: &DeleteBrowserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBrowser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +88,6 @@ func (c *Client) addOperationDeleteBrowserMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpDeleteBrowserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBrowser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +100,6 @@ func (c *Client) addOperationDeleteBrowserMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +139,4 @@ func (m *idempotencyToken_initializeOpDeleteBrowser) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opDeleteBrowserMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteBrowser{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteBrowser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBrowser",
-	}
 }

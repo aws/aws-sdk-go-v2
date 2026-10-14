@@ -3,9 +3,8 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // The width and height of the output video. Used in SubtitlingConfig to determine
@@ -25,34 +24,6 @@ type AspectRatio struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AspectRatio) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AspectRatio)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AspectRatio) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Height != nil {
-		s.WriteInt32(schemas.AspectRatio_height, *v.Height)
-	}
-	if v.Width != nil {
-		s.WriteInt32(schemas.AspectRatio_width, *v.Width)
-	}
-}
-func (v *AspectRatio) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AspectRatio, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AspectRatio_height:
-			v.Height = new(int32)
-			return d.ReadInt32(schemas.AspectRatio_height, v.Height)
-		case schemas.AspectRatio_width:
-			v.Width = new(int32)
-			return d.ReadInt32(schemas.AspectRatio_width, v.Width)
-		}
-		return nil
-	})
-}
-
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
 type ClippingConfig struct {
 
@@ -61,29 +32,66 @@ type ClippingConfig struct {
 	// the source media, for example.
 	CallbackMetadata *string
 
+	// The data source to map onto this clipping output. This parameter is optional.
+	// When you include this parameter, Elemental Inference reads the event data for
+	// the fixture that you specify, and includes that data in the event clipping
+	// metadata for this output.
+	//
+	// If you omit this parameter, Elemental Inference doesn't map a data source onto
+	// this output.
+	DataSourceConfiguration *DataSourceConfiguration
+
 	noSmithyDocumentSerde
 }
 
-func (v *ClippingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClippingConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// Contains information about one competitor in a fixture. It is used in the
+// FixtureSummary that is in the SearchFixtures response.
+type Competitor struct {
+
+	// Specifies whether this competitor is the home side in the fixture. If true,
+	// this competitor is the home side. If false, this competitor is the away side.
+	IsHome *bool
+
+	// The name of the competitor, as provided by the data source.
+	Name *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *ClippingConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CallbackMetadata != nil {
-		s.WriteString(schemas.ClippingConfig_callbackMetadata, *v.CallbackMetadata)
-	}
-}
-func (v *ClippingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClippingConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClippingConfig_callbackMetadata:
-			v.CallbackMetadata = new(string)
-			return d.ReadString(schemas.ClippingConfig_callbackMetadata, v.CallbackMetadata)
-		}
-		return nil
-	})
+// The output configuration settings for the contextual metadata feature. Use this
+// structure when the feed output generates metadata that describes the media
+// content.
+type ContextualMetadataConfig struct {
+
+	// Specifies whether Elemental Inference generates extended analysis of the media
+	// content for this output. Extended analysis identifies the people, environments,
+	// brands, and on-screen text in the media content. This setting is independent of
+	// summaryGeneration .
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference populates the people, environments,
+	//   brands, and on-screen text fields.
+	//
+	//   - DISABLED – Elemental Inference doesn't populate the people, environments,
+	//   brands, and on-screen text fields.
+	ExtendedAnalysis ExtendedAnalysisMode
+
+	// Specifies whether Elemental Inference generates a descriptive summary of the
+	// media content for this output, along with the objects and actions that it
+	// detects. This setting is independent of extendedAnalysis .
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference populates the summary, objects, and
+	//   actions fields, along with the IAB taxonomy and GARM suitability
+	//   classifications.
+	//
+	//   - DISABLED – Elemental Inference doesn't populate the summary, objects, and
+	//   actions fields.
+	SummaryGeneration SummaryGenerationMode
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -114,66 +122,33 @@ type CreateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateOutput_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateOutput_name, *v.Name)
-	}
-	serializeOutputConfig(s, schemas.CreateOutput_outputConfig, v.OutputConfig)
-	if v.Status != "" {
-		s.WriteString(schemas.CreateOutput_status, string(v.Status))
-	}
-}
-func (v *CreateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateOutput_description, v.Description)
-		case schemas.CreateOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateOutput_name, v.Name)
-		case schemas.CreateOutput_outputConfig:
-			return deserializeOutputConfig(d, schemas.CreateOutput_outputConfig, &v.OutputConfig)
-		case schemas.CreateOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = OutputStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A type of OutputConfig, used when the output in a feed is for the crop feature.
 type CroppingConfig struct {
+
+	// An array of template groups for the crop output. Each template group provides
+	// the graphics-compositing templates that Elemental Inference applies to the
+	// cropped video. You can specify from 1 to 4 template groups.
+	TemplateGroups []TemplateGroup
+
 	noSmithyDocumentSerde
 }
 
-func (v *CroppingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CroppingConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// Contains the data source configuration for a clipping output. It identifies the
+// fixture whose event data Elemental Inference maps onto the clipping metadata. It
+// is used in the dataSourceConfiguration property of a ClippingConfig.
+type DataSourceConfiguration struct {
 
-func (v *CroppingConfig) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *CroppingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CroppingConfig, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
+	// The ID of the fixture whose event data you want Elemental Inference to map onto
+	// this clipping output. The fixture should be the sports event in the source media
+	// that the feed is processing.
+	//
+	// To obtain this ID, use the SearchFixtures operation to find the fixture, then
+	// use the fixtureId from the matching FixtureSummary.
+	//
+	// This member is required.
+	FixtureId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a dictionary. Used in the ListDictionaries
@@ -208,60 +183,6 @@ type DictionarySummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DictionarySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DictionarySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DictionarySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DictionarySummary_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DictionarySummary_id, *v.Id)
-	}
-	if v.Language != "" {
-		s.WriteString(schemas.DictionarySummary_language, string(v.Language))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DictionarySummary_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DictionarySummary_status, string(v.Status))
-	}
-}
-func (v *DictionarySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DictionarySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DictionarySummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DictionarySummary_arn, v.Arn)
-		case schemas.DictionarySummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DictionarySummary_id, v.Id)
-		case schemas.DictionarySummary_language:
-			var ev string
-			if err := d.ReadString(schemas.DictionarySummary_language, &ev); err != nil {
-				return err
-			}
-			v.Language = DictionaryLanguage(ev)
-			return nil
-		case schemas.DictionarySummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DictionarySummary_name, v.Name)
-		case schemas.DictionarySummary_status:
-			var ev string
-			if err := d.ReadString(schemas.DictionarySummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = DictionaryStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about the resource that is associated with a feed. It is
 // used in the FeedSummary that is used in the response of a ListFeeds action.
 type FeedAssociation struct {
@@ -272,28 +193,6 @@ type FeedAssociation struct {
 	AssociatedResourceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FeedAssociation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FeedAssociation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FeedAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedResourceName != nil {
-		s.WriteString(schemas.FeedAssociation_associatedResourceName, *v.AssociatedResourceName)
-	}
-}
-func (v *FeedAssociation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FeedAssociation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FeedAssociation_associatedResourceName:
-			v.AssociatedResourceName = new(string)
-			return d.ReadString(schemas.FeedAssociation_associatedResourceName, v.AssociatedResourceName)
-		}
-		return nil
-	})
 }
 
 // Contains configuration information about a feed. It is used in the ListFeeds
@@ -326,56 +225,46 @@ type FeedSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FeedSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FeedSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// Contains information about one fixture. It is used in the SearchFixtures
+// response.
+//
+// Elemental Inference relays the information in this structure from the data
+// source, so that you can identify the fixture that matches your source media.
+type FixtureSummary struct {
 
-func (v *FeedSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.FeedSummary_arn, *v.Arn)
-	}
-	if v.Association != nil {
-		s.WriteStruct(schemas.FeedSummary_association)
-		v.Association.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.FeedSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FeedSummary_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.FeedSummary_status, string(v.Status))
-	}
-}
-func (v *FeedSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FeedSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FeedSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.FeedSummary_arn, v.Arn)
-		case schemas.FeedSummary_association:
-			v.Association = &FeedAssociation{}
-			return v.Association.Deserialize(d)
-		case schemas.FeedSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.FeedSummary_id, v.Id)
-		case schemas.FeedSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FeedSummary_name, v.Name)
-		case schemas.FeedSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.FeedSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = FeedStatus(ev)
-			return nil
-		}
-		return nil
-	})
+	// An array of the competitors (the teams or individuals) in the fixture.
+	//
+	// This member is required.
+	Competitors []Competitor
+
+	// The ID of the fixture. Specify this ID in the clipping output of a feed, to
+	// identify the fixture whose event data you want Elemental Inference to map onto
+	// the clipping metadata.
+	//
+	// This member is required.
+	FixtureId *string
+
+	// The name of the fixture, as provided by the data source. For example, the names
+	// of the two competing teams.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the fixture in its lifecycle, as provided by the data source. For
+	// example, Scheduled or Completed.
+	//
+	// This member is required.
+	Status *string
+
+	// The group that the fixture belongs to, such as the competition, league, or
+	// tournament. The data source doesn't provide this information for every fixture.
+	FixtureGroup *string
+
+	// The scheduled start time of the fixture, as provided by the data source. The
+	// actual start time might differ.
+	ScheduledStart *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -413,59 +302,13 @@ type GetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.GetOutput_description, *v.Description)
-	}
-	if v.FromAssociation != nil {
-		s.WriteBool(schemas.GetOutput_fromAssociation, *v.FromAssociation)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetOutput_name, *v.Name)
-	}
-	serializeOutputConfig(s, schemas.GetOutput_outputConfig, v.OutputConfig)
-	if v.Status != "" {
-		s.WriteString(schemas.GetOutput_status, string(v.Status))
-	}
-}
-func (v *GetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetOutput_description, v.Description)
-		case schemas.GetOutput_fromAssociation:
-			v.FromAssociation = new(bool)
-			return d.ReadBool(schemas.GetOutput_fromAssociation, v.FromAssociation)
-		case schemas.GetOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetOutput_name, v.Name)
-		case schemas.GetOutput_outputConfig:
-			return deserializeOutputConfig(d, schemas.GetOutput_outputConfig, &v.OutputConfig)
-		case schemas.GetOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = OutputStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains one typed output. It is used in the CreateOutput, GetOutput, and
 // Update Output structures.
 //
 // The following types satisfy this interface:
 //
 //	OutputConfigMemberClipping
+//	OutputConfigMemberContextualMetadata
 //	OutputConfigMemberCropping
 //	OutputConfigMemberSubtitling
 type OutputConfig interface {
@@ -480,14 +323,15 @@ type OutputConfigMemberClipping struct {
 }
 
 func (*OutputConfigMemberClipping) isOutputConfig() {}
-func (v *OutputConfigMemberClipping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputConfig_clipping)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
+
+// The output config type that applies to the contextual metadata feature.
+type OutputConfigMemberContextualMetadata struct {
+	Value ContextualMetadataConfig
+
+	noSmithyDocumentSerde
 }
-func (v *OutputConfigMemberClipping) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
+
+func (*OutputConfigMemberContextualMetadata) isOutputConfig() {}
 
 // The output config type that applies to the cropping feature.
 type OutputConfigMemberCropping struct {
@@ -497,14 +341,6 @@ type OutputConfigMemberCropping struct {
 }
 
 func (*OutputConfigMemberCropping) isOutputConfig() {}
-func (v *OutputConfigMemberCropping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputConfig_cropping)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *OutputConfigMemberCropping) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The output config type that applies to the smart subtitling feature.
 type OutputConfigMemberSubtitling struct {
@@ -514,17 +350,28 @@ type OutputConfigMemberSubtitling struct {
 }
 
 func (*OutputConfigMemberSubtitling) isOutputConfig() {}
-func (v *OutputConfigMemberSubtitling) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputConfig_subtitling)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *OutputConfigMemberSubtitling) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
+
+// A filter for a fixture search. It is used in the filters array of a
+// SearchFixtures request.
+type SearchFilter struct {
+
+	// The dimension of the fixture to filter on. Valid values: COMPETITOR.
+	//
+	// This member is required.
+	Name FilterName
+
+	// An array of values to match in the dimension that you specified in name. You
+	// can specify up to 10 values. A fixture appears in the results if it matches at
+	// least one of these values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A type of OutputConfig, used when the output in a feed is for the smart
-// subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
+// subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to
 // generate live TTML subtitles from the audio in your source media.
 type SubtitlingConfig struct {
 
@@ -554,54 +401,24 @@ type SubtitlingConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubtitlingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubtitlingConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// A named set of graphics-compositing templates used by the crop feature,
+// specified in the templateGroups array of a CroppingConfig.
+type TemplateGroup struct {
 
-func (v *SubtitlingConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AspectRatio != nil {
-		s.WriteStruct(schemas.SubtitlingConfig_aspectRatio)
-		v.AspectRatio.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Dictionary != nil {
-		s.WriteString(schemas.SubtitlingConfig_dictionary, *v.Dictionary)
-	}
-	if v.Language != "" {
-		s.WriteString(schemas.SubtitlingConfig_language, string(v.Language))
-	}
-	if v.ProfanityFilter != "" {
-		s.WriteString(schemas.SubtitlingConfig_profanityFilter, string(v.ProfanityFilter))
-	}
-}
-func (v *SubtitlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubtitlingConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubtitlingConfig_aspectRatio:
-			v.AspectRatio = &AspectRatio{}
-			return v.AspectRatio.Deserialize(d)
-		case schemas.SubtitlingConfig_dictionary:
-			v.Dictionary = new(string)
-			return d.ReadString(schemas.SubtitlingConfig_dictionary, v.Dictionary)
-		case schemas.SubtitlingConfig_language:
-			var ev string
-			if err := d.ReadString(schemas.SubtitlingConfig_language, &ev); err != nil {
-				return err
-			}
-			v.Language = TranscriptionLanguage(ev)
-			return nil
-		case schemas.SubtitlingConfig_profanityFilter:
-			var ev string
-			if err := d.ReadString(schemas.SubtitlingConfig_profanityFilter, &ev); err != nil {
-				return err
-			}
-			v.ProfanityFilter = ProfanityFilterMode(ev)
-			return nil
-		}
-		return nil
-	})
+	// A name for the template group.
+	//
+	// This member is required.
+	Name *string
+
+	// An array of Amazon S3 URIs that point to the graphics-compositing templates for
+	// this group. You can specify 1 or 2 URIs. Each URI must be in the form
+	// s3://bucket-name/key . Elemental Inference reads these templates using the IAM
+	// role that you specify in accessRoleArn.
+	//
+	// This member is required.
+	TemplateUris []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -639,53 +456,6 @@ type UpdateOutput struct {
 	FromAssociation *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateOutput_description, *v.Description)
-	}
-	if v.FromAssociation != nil {
-		s.WriteBool(schemas.UpdateOutput_fromAssociation, *v.FromAssociation)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateOutput_name, *v.Name)
-	}
-	serializeOutputConfig(s, schemas.UpdateOutput_outputConfig, v.OutputConfig)
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateOutput_status, string(v.Status))
-	}
-}
-func (v *UpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateOutput_description, v.Description)
-		case schemas.UpdateOutput_fromAssociation:
-			v.FromAssociation = new(bool)
-			return d.ReadBool(schemas.UpdateOutput_fromAssociation, v.FromAssociation)
-		case schemas.UpdateOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateOutput_name, v.Name)
-		case schemas.UpdateOutput_outputConfig:
-			return deserializeOutputConfig(d, schemas.UpdateOutput_outputConfig, &v.OutputConfig)
-		case schemas.UpdateOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = OutputStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

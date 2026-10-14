@@ -211,7 +211,7 @@ var FailureHandlingPolicy_DoNothing *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemakeredge",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InternalServiceException_Message *smithy.Schema
 
 var _Metric = smithy.NewSchema(smithy.ShapeID{

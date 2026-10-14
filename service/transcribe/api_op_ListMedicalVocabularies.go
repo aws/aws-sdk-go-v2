@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of custom medical vocabularies that match the specified
@@ -59,6 +59,27 @@ type ListMedicalVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMedicalVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_NextToken, *v.NextToken)
+	}
+	if v.StateEquals != "" {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_StateEquals, string(v.StateEquals))
+	}
+}
+
 type ListMedicalVocabulariesOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -83,74 +104,58 @@ type ListMedicalVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalVocabulariesResponse_Status, string(v.Status))
+	}
+	serializeVocabularies(s, schemas.ListMedicalVocabulariesResponse_Vocabularies, v.Vocabularies)
+}
+func (v *ListMedicalVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMedicalVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMedicalVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMedicalVocabulariesResponse_NextToken, v.NextToken)
+		case schemas.ListMedicalVocabulariesResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListMedicalVocabulariesResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VocabularyState(ev)
+			return nil
+		case schemas.ListMedicalVocabulariesResponse_Vocabularies:
+			return deserializeVocabularies(d, schemas.ListMedicalVocabulariesResponse_Vocabularies, &v.Vocabularies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalVocabularies, schemas.ListMedicalVocabulariesRequest, schemas.ListMedicalVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMedicalVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalVocabularies, schemas.ListMedicalVocabulariesRequest, schemas.ListMedicalVocabulariesResponse), output: &ListMedicalVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMedicalVocabularies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMedicalVocabularies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMedicalVocabularies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +168,6 @@ func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +273,3 @@ type ListMedicalVocabulariesAPIClient interface {
 }
 
 var _ ListMedicalVocabulariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMedicalVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMedicalVocabularies",
-	}
-}

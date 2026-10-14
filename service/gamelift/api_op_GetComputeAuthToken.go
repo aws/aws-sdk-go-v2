@@ -4,10 +4,9 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +75,21 @@ type GetComputeAuthTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComputeAuthTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComputeAuthTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComputeAuthTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.GetComputeAuthTokenInput_ComputeName, *v.ComputeName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetComputeAuthTokenInput_FleetId, *v.FleetId)
+	}
+}
+
 type GetComputeAuthTokenOutput struct {
 
 	// A valid temporary authentication token.
@@ -111,65 +125,72 @@ type GetComputeAuthTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComputeAuthTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComputeAuthTokenOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComputeAuthTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthToken != nil {
+		s.WriteString(schemas.GetComputeAuthTokenOutput_AuthToken, *v.AuthToken)
+	}
+	if v.ComputeArn != nil {
+		s.WriteString(schemas.GetComputeAuthTokenOutput_ComputeArn, *v.ComputeArn)
+	}
+	if v.ComputeName != nil {
+		s.WriteString(schemas.GetComputeAuthTokenOutput_ComputeName, *v.ComputeName)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.GetComputeAuthTokenOutput_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.GetComputeAuthTokenOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetComputeAuthTokenOutput_FleetId, *v.FleetId)
+	}
+}
+func (v *GetComputeAuthTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComputeAuthTokenOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComputeAuthTokenOutput_AuthToken:
+			v.AuthToken = new(string)
+			return d.ReadString(schemas.GetComputeAuthTokenOutput_AuthToken, v.AuthToken)
+		case schemas.GetComputeAuthTokenOutput_ComputeArn:
+			v.ComputeArn = new(string)
+			return d.ReadString(schemas.GetComputeAuthTokenOutput_ComputeArn, v.ComputeArn)
+		case schemas.GetComputeAuthTokenOutput_ComputeName:
+			v.ComputeName = new(string)
+			return d.ReadString(schemas.GetComputeAuthTokenOutput_ComputeName, v.ComputeName)
+		case schemas.GetComputeAuthTokenOutput_ExpirationTimestamp:
+			v.ExpirationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetComputeAuthTokenOutput_ExpirationTimestamp, v.ExpirationTimestamp)
+		case schemas.GetComputeAuthTokenOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.GetComputeAuthTokenOutput_FleetArn, v.FleetArn)
+		case schemas.GetComputeAuthTokenOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetComputeAuthTokenOutput_FleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComputeAuthTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeAuthToken, schemas.GetComputeAuthTokenInput, schemas.GetComputeAuthTokenOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetComputeAuthToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeAuthToken, schemas.GetComputeAuthTokenInput, schemas.GetComputeAuthTokenOutput), output: &GetComputeAuthTokenOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetComputeAuthToken{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComputeAuthToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -179,12 +200,6 @@ func (c *Client) addOperationGetComputeAuthTokenMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpGetComputeAuthTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComputeAuthToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +214,8 @@ func (c *Client) addOperationGetComputeAuthTokenMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetComputeAuthToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComputeAuthToken",
-	}
 }

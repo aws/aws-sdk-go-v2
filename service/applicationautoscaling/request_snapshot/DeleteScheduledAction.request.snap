@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.DeleteScheduledAction
+
+{"ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ScheduledActionName":"__ScheduledActionName__","ServiceNamespace":"ecs"}

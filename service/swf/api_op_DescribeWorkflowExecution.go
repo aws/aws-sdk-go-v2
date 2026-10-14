@@ -4,11 +4,10 @@ package swf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,6 +65,23 @@ type DescribeWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkflowExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeWorkflowExecutionInput_domain, *v.Domain)
+	}
+	if v.Execution != nil {
+		s.WriteStruct(schemas.DescribeWorkflowExecutionInput_execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains details about a workflow execution.
 type DescribeWorkflowExecutionOutput struct {
 
@@ -102,77 +118,78 @@ type DescribeWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionConfiguration != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_executionConfiguration)
+		v.ExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionInfo != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_executionInfo)
+		v.ExecutionInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestActivityTaskTimestamp != nil {
+		s.WriteTime(schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp, *v.LatestActivityTaskTimestamp)
+	}
+	if v.LatestExecutionContext != nil {
+		s.WriteString(schemas.WorkflowExecutionDetail_latestExecutionContext, *v.LatestExecutionContext)
+	}
+	if v.OpenCounts != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_openCounts)
+		v.OpenCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionDetail_executionConfiguration:
+			v.ExecutionConfiguration = &types.WorkflowExecutionConfiguration{}
+			return v.ExecutionConfiguration.Deserialize(d)
+		case schemas.WorkflowExecutionDetail_executionInfo:
+			v.ExecutionInfo = &types.WorkflowExecutionInfo{}
+			return v.ExecutionInfo.Deserialize(d)
+		case schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp:
+			v.LatestActivityTaskTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp, v.LatestActivityTaskTimestamp)
+		case schemas.WorkflowExecutionDetail_latestExecutionContext:
+			v.LatestExecutionContext = new(string)
+			return d.ReadString(schemas.WorkflowExecutionDetail_latestExecutionContext, v.LatestExecutionContext)
+		case schemas.WorkflowExecutionDetail_openCounts:
+			v.OpenCounts = &types.WorkflowExecutionOpenCounts{}
+			return v.OpenCounts.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowExecution, schemas.DescribeWorkflowExecutionInput, schemas.WorkflowExecutionDetail)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowExecution, schemas.DescribeWorkflowExecutionInput, schemas.WorkflowExecutionDetail), output: &DescribeWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeWorkflowExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkflowExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeWorkflowExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkflowExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +204,8 @@ func (c *Client) addOperationDescribeWorkflowExecutionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeWorkflowExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkflowExecution",
-	}
 }

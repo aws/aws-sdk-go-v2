@@ -518,6 +518,18 @@ func TestCheckSnapshot_ExportAutomatedReasoningPolicyVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountDataRetention(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountDataRetention(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
@@ -1087,6 +1099,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountDataRetention(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDataRetention(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountDataRetention")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1789,6 +1813,18 @@ func TestUpdateSnapshot_ExportAutomatedReasoningPolicyVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountDataRetention(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountDataRetention(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
@@ -2358,6 +2394,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountDataRetention(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDataRetention(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountDataRetention")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiKey":{"deletes":1,"description":"__Description__","expires":1,"id":"__Id__"}}

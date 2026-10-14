@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateExascaleDbStorageVault
+
+{"additionalFlashCacheInPercent":1,"autoscaleLimitInGBs":1,"description":"__Description__","displayName":"__DisplayName__","exascaleDbStorageVaultId":"__ExascaleDbStorageVaultId__","highCapacityDatabaseStorageTotalSizeInGBs":1,"isAutoscaleEnabled":true}

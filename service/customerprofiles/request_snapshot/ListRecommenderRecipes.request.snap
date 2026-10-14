@@ -1,0 +1,3 @@
+GET /recommender-recipes?max-results=1&next-token=__NextToken__
+
+

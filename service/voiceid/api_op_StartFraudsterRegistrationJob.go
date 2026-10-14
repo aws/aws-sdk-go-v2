@@ -5,10 +5,10 @@ package voiceid
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a new batch fraudster registration job using provided details.
@@ -74,6 +74,70 @@ type StartFraudsterRegistrationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFraudsterRegistrationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFraudsterRegistrationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFraudsterRegistrationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartFraudsterRegistrationJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartFraudsterRegistrationJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartFraudsterRegistrationJobRequest_DomainId, *v.DomainId)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartFraudsterRegistrationJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartFraudsterRegistrationJobRequest_JobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartFraudsterRegistrationJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistrationConfig != nil {
+		s.WriteStruct(schemas.StartFraudsterRegistrationJobRequest_RegistrationConfig)
+		v.RegistrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartFraudsterRegistrationJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFraudsterRegistrationJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFraudsterRegistrationJobRequest_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartFraudsterRegistrationJobRequest_ClientToken, v.ClientToken)
+		case schemas.StartFraudsterRegistrationJobRequest_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.StartFraudsterRegistrationJobRequest_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.StartFraudsterRegistrationJobRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartFraudsterRegistrationJobRequest_DomainId, v.DomainId)
+		case schemas.StartFraudsterRegistrationJobRequest_InputDataConfig:
+			v.InputDataConfig = &types.InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.StartFraudsterRegistrationJobRequest_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.StartFraudsterRegistrationJobRequest_JobName, v.JobName)
+		case schemas.StartFraudsterRegistrationJobRequest_OutputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.StartFraudsterRegistrationJobRequest_RegistrationConfig:
+			v.RegistrationConfig = &types.RegistrationConfig{}
+			return v.RegistrationConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type StartFraudsterRegistrationJobOutput struct {
 
 	// Details about the started fraudster registration job.
@@ -85,65 +149,44 @@ type StartFraudsterRegistrationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFraudsterRegistrationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFraudsterRegistrationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFraudsterRegistrationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartFraudsterRegistrationJobResponse_Job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartFraudsterRegistrationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFraudsterRegistrationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFraudsterRegistrationJobResponse_Job:
+			v.Job = &types.FraudsterRegistrationJob{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFraudsterRegistrationJob, schemas.StartFraudsterRegistrationJobRequest, schemas.StartFraudsterRegistrationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFraudsterRegistrationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFraudsterRegistrationJob, schemas.StartFraudsterRegistrationJobRequest, schemas.StartFraudsterRegistrationJobResponse), output: &StartFraudsterRegistrationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartFraudsterRegistrationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFraudsterRegistrationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -153,12 +196,6 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpStartFraudsterRegistrationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartFraudsterRegistrationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +208,6 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -216,12 +247,4 @@ func (m *idempotencyToken_initializeOpStartFraudsterRegistrationJob) HandleIniti
 }
 func addIdempotencyToken_opStartFraudsterRegistrationJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartFraudsterRegistrationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartFraudsterRegistrationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartFraudsterRegistrationJob",
-	}
 }

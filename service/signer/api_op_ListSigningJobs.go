@@ -5,10 +5,10 @@ package signer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,6 +75,42 @@ type ListSigningJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsRevoked != false {
+		s.WriteBool(schemas.ListSigningJobsRequest_isRevoked, v.IsRevoked)
+	}
+	if v.JobInvoker != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_jobInvoker, *v.JobInvoker)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSigningJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_platformId, *v.PlatformId)
+	}
+	if v.RequestedBy != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_requestedBy, *v.RequestedBy)
+	}
+	if v.SignatureExpiresAfter != nil {
+		s.WriteTime(schemas.ListSigningJobsRequest_signatureExpiresAfter, *v.SignatureExpiresAfter)
+	}
+	if v.SignatureExpiresBefore != nil {
+		s.WriteTime(schemas.ListSigningJobsRequest_signatureExpiresBefore, *v.SignatureExpiresBefore)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListSigningJobsRequest_status, string(v.Status))
+	}
+}
+
 type ListSigningJobsOutput struct {
 
 	// A list of your signing jobs.
@@ -89,74 +125,48 @@ type ListSigningJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSigningJobs(s, schemas.ListSigningJobsResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSigningJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSigningJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSigningJobsResponse_jobs:
+			return deserializeSigningJobs(d, schemas.ListSigningJobsResponse_jobs, &v.Jobs)
+		case schemas.ListSigningJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSigningJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningJobs, schemas.ListSigningJobsRequest, schemas.ListSigningJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningJobs, schemas.ListSigningJobsRequest, schemas.ListSigningJobsResponse), output: &ListSigningJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSigningJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSigningJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSigningJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +179,6 @@ func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +282,3 @@ type ListSigningJobsAPIClient interface {
 }
 
 var _ ListSigningJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSigningJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSigningJobs",
-	}
-}

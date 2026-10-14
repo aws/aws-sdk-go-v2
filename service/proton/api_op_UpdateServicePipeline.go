@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the service pipeline.
@@ -115,6 +114,56 @@ type UpdateServicePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServicePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServicePipelineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServicePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.UpdateServicePipelineInput_deploymentType, string(v.DeploymentType))
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.UpdateServicePipelineInput_serviceName, *v.ServiceName)
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.UpdateServicePipelineInput_spec, *v.Spec)
+	}
+	if v.TemplateMajorVersion != nil {
+		s.WriteString(schemas.UpdateServicePipelineInput_templateMajorVersion, *v.TemplateMajorVersion)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteString(schemas.UpdateServicePipelineInput_templateMinorVersion, *v.TemplateMinorVersion)
+	}
+}
+func (v *UpdateServicePipelineInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServicePipelineInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServicePipelineInput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServicePipelineInput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentUpdateType(ev)
+			return nil
+		case schemas.UpdateServicePipelineInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.UpdateServicePipelineInput_serviceName, v.ServiceName)
+		case schemas.UpdateServicePipelineInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.UpdateServicePipelineInput_spec, v.Spec)
+		case schemas.UpdateServicePipelineInput_templateMajorVersion:
+			v.TemplateMajorVersion = new(string)
+			return d.ReadString(schemas.UpdateServicePipelineInput_templateMajorVersion, v.TemplateMajorVersion)
+		case schemas.UpdateServicePipelineInput_templateMinorVersion:
+			v.TemplateMinorVersion = new(string)
+			return d.ReadString(schemas.UpdateServicePipelineInput_templateMinorVersion, v.TemplateMinorVersion)
+		}
+		return nil
+	})
+}
+
 type UpdateServicePipelineOutput struct {
 
 	// The pipeline details that are returned by Proton.
@@ -128,77 +177,50 @@ type UpdateServicePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServicePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServicePipelineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServicePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.UpdateServicePipelineOutput_pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServicePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServicePipelineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServicePipelineOutput_pipeline:
+			v.Pipeline = &types.ServicePipeline{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServicePipeline, schemas.UpdateServicePipelineInput, schemas.UpdateServicePipelineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServicePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServicePipeline, schemas.UpdateServicePipelineInput, schemas.UpdateServicePipelineOutput), output: &UpdateServicePipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServicePipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServicePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServicePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServicePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +235,8 @@ func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServicePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServicePipeline",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListProspectingFromEngagementTasks
+
+{"NextToken":"__NextToken__","TaskSummaries":[{"CompletedEngagementCount":1,"EndTime":"2000-01-01T00:00:00Z","FailedEngagementCount":1,"StartTime":"2000-01-01T00:00:00Z","TaskArn":"__TaskArn__","TaskId":"__TaskId__","TaskName":"__TaskName__","TotalEngagementCount":1},{"CompletedEngagementCount":1,"EndTime":"2000-01-01T00:00:00Z","FailedEngagementCount":1,"StartTime":"2000-01-01T00:00:00Z","TaskArn":"__TaskArn__","TaskId":"__TaskId__","TaskName":"__TaskName__","TotalEngagementCount":1}]}

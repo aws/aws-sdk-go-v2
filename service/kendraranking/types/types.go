@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,28 @@ type CapacityUnitsConfiguration struct {
 	RescoreCapacityUnits *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityUnitsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityUnitsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityUnitsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RescoreCapacityUnits != nil {
+		s.WriteInt32(schemas.CapacityUnitsConfiguration_RescoreCapacityUnits, *v.RescoreCapacityUnits)
+	}
+}
+func (v *CapacityUnitsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityUnitsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityUnitsConfiguration_RescoreCapacityUnits:
+			v.RescoreCapacityUnits = new(int32)
+			return d.ReadInt32(schemas.CapacityUnitsConfiguration_RescoreCapacityUnits, v.RescoreCapacityUnits)
+		}
+		return nil
+	})
 }
 
 // Information about a document from a search service such as OpenSearch (self
@@ -65,6 +89,58 @@ type Document struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Document) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Document)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Document) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.Document_Body, *v.Body)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.Document_GroupId, *v.GroupId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Document_Id, *v.Id)
+	}
+	if v.OriginalScore != nil {
+		s.WriteFloat32(schemas.Document_OriginalScore, *v.OriginalScore)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Document_Title, *v.Title)
+	}
+	serializeBodyTokensList(s, schemas.Document_TokenizedBody, v.TokenizedBody)
+	serializeTitleTokensList(s, schemas.Document_TokenizedTitle, v.TokenizedTitle)
+}
+func (v *Document) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Document, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Document_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.Document_Body, v.Body)
+		case schemas.Document_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.Document_GroupId, v.GroupId)
+		case schemas.Document_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Document_Id, v.Id)
+		case schemas.Document_OriginalScore:
+			v.OriginalScore = new(float32)
+			return d.ReadFloat32(schemas.Document_OriginalScore, v.OriginalScore)
+		case schemas.Document_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Document_Title, v.Title)
+		case schemas.Document_TokenizedBody:
+			return deserializeBodyTokensList(d, schemas.Document_TokenizedBody, &v.TokenizedBody)
+		case schemas.Document_TokenizedTitle:
+			return deserializeTitleTokensList(d, schemas.Document_TokenizedTitle, &v.TokenizedTitle)
+		}
+		return nil
+	})
+}
+
 // Summary information for a rescore execution plan. A rescore execution plan is
 // an Amazon Kendra Intelligent Ranking resource used for provisioning the Rescore
 // API.
@@ -89,6 +165,56 @@ type RescoreExecutionPlanSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RescoreExecutionPlanSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreExecutionPlanSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreExecutionPlanSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RescoreExecutionPlanSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RescoreExecutionPlanSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RescoreExecutionPlanSummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RescoreExecutionPlanSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RescoreExecutionPlanSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RescoreExecutionPlanSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RescoreExecutionPlanSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RescoreExecutionPlanSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RescoreExecutionPlanSummary_CreatedAt, v.CreatedAt)
+		case schemas.RescoreExecutionPlanSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RescoreExecutionPlanSummary_Id, v.Id)
+		case schemas.RescoreExecutionPlanSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RescoreExecutionPlanSummary_Name, v.Name)
+		case schemas.RescoreExecutionPlanSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.RescoreExecutionPlanSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RescoreExecutionPlanStatus(ev)
+			return nil
+		case schemas.RescoreExecutionPlanSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RescoreExecutionPlanSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A result item for a document with a new relevancy score.
 type RescoreResultItem struct {
 
@@ -100,6 +226,34 @@ type RescoreResultItem struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RescoreResultItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreResultItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreResultItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentId != nil {
+		s.WriteString(schemas.RescoreResultItem_DocumentId, *v.DocumentId)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.RescoreResultItem_Score, *v.Score)
+	}
+}
+func (v *RescoreResultItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RescoreResultItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RescoreResultItem_DocumentId:
+			v.DocumentId = new(string)
+			return d.ReadString(schemas.RescoreResultItem_DocumentId, v.DocumentId)
+		case schemas.RescoreResultItem_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.RescoreResultItem_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // A key-value pair that identifies or categorizes a rescore execution plan. A
@@ -121,6 +275,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

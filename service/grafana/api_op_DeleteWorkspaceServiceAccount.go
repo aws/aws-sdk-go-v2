@@ -4,10 +4,9 @@ package grafana
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a workspace service account from the workspace.
@@ -48,6 +47,21 @@ type DeleteWorkspaceServiceAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceServiceAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceServiceAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceServiceAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountRequest_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeleteWorkspaceServiceAccountOutput struct {
 
 	// The ID of the service account deleted.
@@ -66,77 +80,54 @@ type DeleteWorkspaceServiceAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceServiceAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceServiceAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceServiceAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountResponse_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteWorkspaceServiceAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceServiceAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceServiceAccountResponse_serviceAccountId:
+			v.ServiceAccountId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceServiceAccountResponse_serviceAccountId, v.ServiceAccountId)
+		case schemas.DeleteWorkspaceServiceAccountResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceServiceAccountResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceServiceAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceServiceAccount, schemas.DeleteWorkspaceServiceAccountRequest, schemas.DeleteWorkspaceServiceAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceServiceAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceServiceAccount, schemas.DeleteWorkspaceServiceAccountRequest, schemas.DeleteWorkspaceServiceAccountResponse), output: &DeleteWorkspaceServiceAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceServiceAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkspaceServiceAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteWorkspaceServiceAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspaceServiceAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +142,8 @@ func (c *Client) addOperationDeleteWorkspaceServiceAccountMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteWorkspaceServiceAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteWorkspaceServiceAccount",
-	}
 }

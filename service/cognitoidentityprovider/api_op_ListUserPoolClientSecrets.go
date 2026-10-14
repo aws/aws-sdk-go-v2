@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all client secrets associated with a user pool app client. Returns
@@ -55,6 +54,24 @@ type ListUserPoolClientSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolClientSecretsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolClientSecretsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolClientSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_ClientId, *v.ClientId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response containing the list of client secret metadata. This response does
 // not include a NextToken field as all secrets are returned in a single response.
 type ListUserPoolClientSecretsOutput struct {
@@ -76,77 +93,51 @@ type ListUserPoolClientSecretsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolClientSecretsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolClientSecretsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolClientSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientSecretDescriptorListType(s, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, v.ClientSecrets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListUserPoolClientSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserPoolClientSecretsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserPoolClientSecretsResponse_ClientSecrets:
+			return deserializeClientSecretDescriptorListType(d, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, &v.ClientSecrets)
+		case schemas.ListUserPoolClientSecretsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserPoolClientSecretsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserPoolClientSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolClientSecrets, schemas.ListUserPoolClientSecretsRequest, schemas.ListUserPoolClientSecretsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserPoolClientSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolClientSecrets, schemas.ListUserPoolClientSecretsRequest, schemas.ListUserPoolClientSecretsResponse), output: &ListUserPoolClientSecretsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUserPoolClientSecrets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUserPoolClientSecrets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUserPoolClientSecretsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUserPoolClientSecrets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +152,8 @@ func (c *Client) addOperationListUserPoolClientSecretsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListUserPoolClientSecrets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUserPoolClientSecrets",
-	}
 }

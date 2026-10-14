@@ -5,11 +5,7 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -56,28 +52,6 @@ type CreateKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxDatabaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKxDatabaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKxDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateKxDatabaseRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.CreateKxDatabaseRequest_databaseName, *v.DatabaseName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateKxDatabaseRequest_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.CreateKxDatabaseRequest_environmentId, *v.EnvironmentId)
-	}
-	serializeTagMap(s, schemas.CreateKxDatabaseRequest_tags, v.Tags)
-}
-
 type CreateKxDatabaseOutput struct {
 
 	// The timestamp at which the database is created in FinSpace. The value is
@@ -108,91 +82,26 @@ type CreateKxDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKxDatabaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKxDatabaseResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxDatabaseResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.CreateKxDatabaseResponse_databaseArn:
-			v.DatabaseArn = new(string)
-			return d.ReadString(schemas.CreateKxDatabaseResponse_databaseArn, v.DatabaseArn)
-		case schemas.CreateKxDatabaseResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.CreateKxDatabaseResponse_databaseName, v.DatabaseName)
-		case schemas.CreateKxDatabaseResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateKxDatabaseResponse_description, v.Description)
-		case schemas.CreateKxDatabaseResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateKxDatabaseResponse_environmentId, v.EnvironmentId)
-		case schemas.CreateKxDatabaseResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxDatabaseResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateKxDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxDatabase, schemas.CreateKxDatabaseRequest, schemas.CreateKxDatabaseResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxDatabase, schemas.CreateKxDatabaseRequest, schemas.CreateKxDatabaseResponse), output: &CreateKxDatabaseOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxDatabase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -202,12 +111,6 @@ func (c *Client) addOperationCreateKxDatabaseMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateKxDatabaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxDatabase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +123,6 @@ func (c *Client) addOperationCreateKxDatabaseMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,12 +162,4 @@ func (m *idempotencyToken_initializeOpCreateKxDatabase) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateKxDatabaseMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKxDatabase{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKxDatabase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKxDatabase",
-	}
 }

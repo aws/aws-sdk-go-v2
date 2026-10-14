@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates an alarm and associates it with the specified metric, metric
@@ -203,6 +202,22 @@ type PutMetricAlarmInput struct {
 	// points be breaching to trigger the alarm, this value specifies that number. If
 	// you are setting an "M out of N" alarm, this value is the N.
 	EvaluationPeriods *int32
+
+	// The evaluation window that the alarm uses to select the range of metric data
+	// that it evaluates. Specify either a sliding window or a wall clock window. If
+	// you omit this parameter, the alarm uses a sliding window.
+	//
+	// A sliding window advances each time the alarm is evaluated, forming a rolling
+	// time window. A wall clock window aligns the evaluated range to fixed clock
+	// boundaries, such as the top of the hour or the start of the day.
+	//
+	// You can use EvaluationWindow with any type of metric alarm except alarms that
+	// are based on a PromQL query.
+	//
+	// For more information, see [Alarm evaluation windows] in the CloudWatch User Guide.
+	//
+	// [Alarm evaluation windows]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+	EvaluationWindow types.EvaluationWindow
 
 	// The extended statistic for the metric specified in MetricName . When you call
 	// PutMetricAlarm and specify a MetricName , you must specify either Statistic or
@@ -471,7 +486,90 @@ type PutMetricAlarmInput struct {
 	// stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
 
+	// The warm-up configuration for the alarm. A warm-up period delays alarm
+	// evaluation after you create or update the alarm. The warm-up period reduces
+	// alarm noise from missing data while a new resource or service starts publishing
+	// metrics.
+	//
+	// For more information, see [Alarm warm-up periods] in the Amazon CloudWatch User Guide.
+	//
+	// [Alarm warm-up periods]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+	WarmUpConfiguration *types.WarmUpConfiguration
+
 	noSmithyDocumentSerde
+}
+
+func (v *PutMetricAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricAlarmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.PutMetricAlarmInput_ActionsEnabled, *v.ActionsEnabled)
+	}
+	serializeResourceList(s, schemas.PutMetricAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_AlarmName, *v.AlarmName)
+	}
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.PutMetricAlarmInput_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.DatapointsToAlarm != nil {
+		s.WriteInt32(schemas.PutMetricAlarmInput_DatapointsToAlarm, *v.DatapointsToAlarm)
+	}
+	serializeDimensions(s, schemas.PutMetricAlarmInput_Dimensions, v.Dimensions)
+	if v.EvaluateLowSampleCountPercentile != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_EvaluateLowSampleCountPercentile, *v.EvaluateLowSampleCountPercentile)
+	}
+	serializeEvaluationCriteria(s, schemas.PutMetricAlarmInput_EvaluationCriteria, v.EvaluationCriteria)
+	if v.EvaluationInterval != nil {
+		s.WriteInt32(schemas.PutMetricAlarmInput_EvaluationInterval, *v.EvaluationInterval)
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.PutMetricAlarmInput_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	serializeEvaluationWindow(s, schemas.PutMetricAlarmInput_EvaluationWindow, v.EvaluationWindow)
+	if v.ExtendedStatistic != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_ExtendedStatistic, *v.ExtendedStatistic)
+	}
+	serializeResourceList(s, schemas.PutMetricAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_MetricName, *v.MetricName)
+	}
+	serializeMetricDataQueries(s, schemas.PutMetricAlarmInput_Metrics, v.Metrics)
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_Namespace, *v.Namespace)
+	}
+	serializeResourceList(s, schemas.PutMetricAlarmInput_OKActions, v.OKActions)
+	if v.Period != nil {
+		s.WriteInt32(schemas.PutMetricAlarmInput_Period, *v.Period)
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.PutMetricAlarmInput_Statistic, string(v.Statistic))
+	}
+	serializeTagList(s, schemas.PutMetricAlarmInput_Tags, v.Tags)
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.PutMetricAlarmInput_Threshold, *v.Threshold)
+	}
+	if v.ThresholdMetricId != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_ThresholdMetricId, *v.ThresholdMetricId)
+	}
+	if v.TreatMissingData != nil {
+		s.WriteString(schemas.PutMetricAlarmInput_TreatMissingData, *v.TreatMissingData)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.PutMetricAlarmInput_Unit, string(v.Unit))
+	}
+	if v.WarmUpConfiguration != nil {
+		s.WriteStruct(schemas.PutMetricAlarmInput_WarmUpConfiguration)
+		v.WarmUpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type PutMetricAlarmOutput struct {
@@ -481,65 +579,36 @@ type PutMetricAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMetricAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricAlarm, schemas.PutMetricAlarmInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutMetricAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricAlarm, schemas.PutMetricAlarmInput, nil), output: &PutMetricAlarmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutMetricAlarm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMetricAlarm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -549,12 +618,6 @@ func (c *Client) addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpPutMetricAlarmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutMetricAlarm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -569,22 +632,8 @@ func (c *Client) addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutMetricAlarm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutMetricAlarm",
-	}
 }

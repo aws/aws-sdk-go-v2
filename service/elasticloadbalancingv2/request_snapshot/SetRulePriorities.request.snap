@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetRulePriorities&RulePriorities.member.1.Priority=1&RulePriorities.member.1.RuleArn=__RuleArn__&RulePriorities.member.2.Priority=1&RulePriorities.member.2.RuleArn=__RuleArn__&Version=2015-12-01

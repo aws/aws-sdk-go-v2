@@ -59,7 +59,6 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"ResolveEndpointV2",
 				"Retry",
 				"APITokenProvider",
-				"RetryMetricsHeader",
 				"Signing",
 			},
 			ExpectDeserialize: []string{
@@ -96,7 +95,6 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"GetIdentity",
 				"ResolveEndpointV2",
 				"Retry",
-				"RetryMetricsHeader",
 				"Signing",
 			},
 			ExpectDeserialize: []string{

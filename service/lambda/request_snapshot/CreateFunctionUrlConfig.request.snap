@@ -1,0 +1,5 @@
+POST /2021-10-31/functions/__FunctionName__/url?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"AuthType":"NONE","Cors":{"AllowCredentials":true,"AllowHeaders":["__Member__","__Member__"],"AllowMethods":["__Member__","__Member__"],"AllowOrigins":["__Member__","__Member__"],"ExposeHeaders":["__Member__","__Member__"],"MaxAge":1},"InvokeMode":"BUFFERED"}

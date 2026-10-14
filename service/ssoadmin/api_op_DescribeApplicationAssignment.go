@@ -4,13 +4,8 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a direct assignment of a user or group to an application. If the user
@@ -57,24 +52,6 @@ type DescribeApplicationAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeApplicationAssignmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeApplicationAssignmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeApplicationAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_PrincipalType, string(v.PrincipalType))
-	}
-}
-
 type DescribeApplicationAssignmentOutput struct {
 
 	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
@@ -97,95 +74,29 @@ type DescribeApplicationAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeApplicationAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeApplicationAssignmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeApplicationAssignmentResponse_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.DescribeApplicationAssignmentResponse_ApplicationArn, v.ApplicationArn)
-		case schemas.DescribeApplicationAssignmentResponse_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.DescribeApplicationAssignmentResponse_PrincipalId, v.PrincipalId)
-		case schemas.DescribeApplicationAssignmentResponse_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeApplicationAssignmentResponse_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = types.PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationAssignment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssignment, schemas.DescribeApplicationAssignmentRequest, schemas.DescribeApplicationAssignmentResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationAssignment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssignment, schemas.DescribeApplicationAssignmentRequest, schemas.DescribeApplicationAssignmentResponse), output: &DescribeApplicationAssignmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplicationAssignment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeApplicationAssignmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplicationAssignment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +111,8 @@ func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeApplicationAssignment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeApplicationAssignment",
-	}
 }

@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The resource policy for the lineage group.
@@ -36,6 +35,18 @@ type GetLineageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineageGroupName != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyRequest_LineageGroupName, *v.LineageGroupName)
+	}
+}
+
 type GetLineageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lineage group.
@@ -50,77 +61,54 @@ type GetLineageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyResponse_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+func (v *GetLineageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLineageGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLineageGroupPolicyResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.GetLineageGroupPolicyResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.GetLineageGroupPolicyResponse_ResourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.GetLineageGroupPolicyResponse_ResourcePolicy, v.ResourcePolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLineageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageGroupPolicy, schemas.GetLineageGroupPolicyRequest, schemas.GetLineageGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLineageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageGroupPolicy, schemas.GetLineageGroupPolicyRequest, schemas.GetLineageGroupPolicyResponse), output: &GetLineageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLineageGroupPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLineageGroupPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLineageGroupPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLineageGroupPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +123,8 @@ func (c *Client) addOperationGetLineageGroupPolicyMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLineageGroupPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLineageGroupPolicy",
-	}
 }

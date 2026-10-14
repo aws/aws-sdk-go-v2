@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets user attributes and and MFA settings for the currently signed-in user.
@@ -50,6 +49,18 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GetUserRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 // Represents the response from the server from the request to get information
 // about the user.
 type GetUserOutput struct {
@@ -87,74 +98,60 @@ type GetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMFAOptionListType(s, schemas.GetUserResponse_MFAOptions, v.MFAOptions)
+	if v.PreferredMfaSetting != nil {
+		s.WriteString(schemas.GetUserResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
+	}
+	serializeAttributeListType(s, schemas.GetUserResponse_UserAttributes, v.UserAttributes)
+	serializeUserMFASettingListType(s, schemas.GetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.Username != nil {
+		s.WriteString(schemas.GetUserResponse_Username, *v.Username)
+	}
+}
+func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserResponse_MFAOptions:
+			return deserializeMFAOptionListType(d, schemas.GetUserResponse_MFAOptions, &v.MFAOptions)
+		case schemas.GetUserResponse_PreferredMfaSetting:
+			v.PreferredMfaSetting = new(string)
+			return d.ReadString(schemas.GetUserResponse_PreferredMfaSetting, v.PreferredMfaSetting)
+		case schemas.GetUserResponse_UserAttributes:
+			return deserializeAttributeListType(d, schemas.GetUserResponse_UserAttributes, &v.UserAttributes)
+		case schemas.GetUserResponse_UserMFASettingList:
+			return deserializeUserMFASettingListType(d, schemas.GetUserResponse_UserMFASettingList, &v.UserMFASettingList)
+		case schemas.GetUserResponse_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.GetUserResponse_Username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse), output: &GetUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +166,8 @@ func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUser",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /cissession/health/send
+
+Content-Type: application/json
+
+{"scanJobId":"__ScanJobId__","sessionToken":"__SessionToken__"}

@@ -1,0 +1,6 @@
+PATCH /networks/__NetworkId__
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"encryptionKeyArn":"__EncryptionKeyArn__","networkName":"__NetworkName__"}

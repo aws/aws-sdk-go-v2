@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the current status of the configuration recorder you specify as well as
@@ -55,9 +54,27 @@ type DescribeConfigurationRecorderStatusInput struct {
 
 	// For service-linked configuration recorders, you can use the service principal
 	// of the linked Amazon Web Services service to specify the configuration recorder.
+	// This field is only supported for Amazon Web Services service principals. For
+	// third-party service-linked configuration recorders, use Arn instead.
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConfigurationRecorderStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRecorderStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRecorderStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_Arn, *v.Arn)
+	}
+	serializeConfigurationRecorderNameList(s, schemas.DescribeConfigurationRecorderStatusRequest_ConfigurationRecorderNames, v.ConfigurationRecorderNames)
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
 }
 
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
@@ -72,74 +89,42 @@ type DescribeConfigurationRecorderStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRecorderStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRecorderStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRecorderStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationRecorderStatusList(s, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, v.ConfigurationRecordersStatus)
+}
+func (v *DescribeConfigurationRecorderStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationRecorderStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus:
+			return deserializeConfigurationRecorderStatusList(d, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, &v.ConfigurationRecordersStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRecorderStatus, schemas.DescribeConfigurationRecorderStatusRequest, schemas.DescribeConfigurationRecorderStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationRecorderStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRecorderStatus, schemas.DescribeConfigurationRecorderStatusRequest, schemas.DescribeConfigurationRecorderStatusResponse), output: &DescribeConfigurationRecorderStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurationRecorderStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationRecorderStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationRecorderStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +139,8 @@ func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConfigurationRecorderStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConfigurationRecorderStatus",
-	}
 }

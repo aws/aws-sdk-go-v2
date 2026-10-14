@@ -15,6 +15,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AccessDeniedException,
 			New:    func() any { return &types.AccessDeniedException{} },
 		},
+		"com.amazonaws.appintegrations#ConflictException": {
+			Schema: schemas.ConflictException,
+			New:    func() any { return &types.ConflictException{} },
+		},
 		"com.amazonaws.appintegrations#DuplicateResourceException": {
 			Schema: schemas.DuplicateResourceException,
 			New:    func() any { return &types.DuplicateResourceException{} },

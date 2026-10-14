@@ -22300,6 +22300,23 @@
                 }
             }
         },
+        "com.amazonaws.s3control#S3AnnotationDirective": {
+            "type": "enum",
+            "members": {
+                "COPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPY"
+                    }
+                },
+                "EXCLUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#S3BucketArnString": {
             "type": "string",
             "traits": {
@@ -22526,6 +22543,12 @@
                         "smithy.api#documentation": "<p></p>"
                     }
                 },
+                "AnnotationDirective": {
+                    "target": "com.amazonaws.s3control#S3AnnotationDirective",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Batch Operations copy job copies object annotations from the source\n         object or skips them. If this property isn't specified, <code>COPY</code> is the default\n         behavior.</p>\n         <p>Valid Values: <code>COPY | EXCLUDE</code>\n         </p>\n         <note>\n            <p>This functionality is not supported by directory buckets.</p>\n         </note>"
+                    }
+                },
                 "ModifiedSinceConstraint": {
                     "target": "com.amazonaws.s3control#TimeStamp",
                     "traits": {
@@ -22610,6 +22633,18 @@
                     "target": "com.amazonaws.s3control#S3ChecksumAlgorithm",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the algorithm\n         that\n         you want Amazon S3 to use to create the checksum. For more\n         information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\"> Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                    }
+                },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status to be applied to all objects in the Batch Operations copy job. Set to\n         <code>ON</code> to enable an event hold or <code>OFF</code> to disable it.</p>\n         <note>\n            <p>This functionality is not supported by directory buckets.</p>\n         </note>"
+                    }
+                },
+                "ObjectLockEventHoldDuration": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockEventHoldDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration to be applied to all objects in the Batch Operations copy job. The\n         duration specifies how long the object remains protected after the event hold is\n         released.</p>\n         <note>\n            <p>This functionality is not supported by directory buckets.</p>\n         </note>"
                     }
                 }
             },
@@ -22769,7 +22804,7 @@
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the bucket the generated manifest is written to. If\n         provided the generated manifest bucket's owner Amazon Web Services account ID must match this value, else\n         the job fails.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the source bucket specified in <code>SourceBucket</code>. If\n         provided, the manifest source bucket owner's Amazon Web Services account ID must match this value, else\n         the job fails.</p>"
                     }
                 },
                 "SourceBucket": {
@@ -22871,6 +22906,61 @@
                 }
             }
         },
+        "com.amazonaws.s3control#S3ObjectLockEventHold": {
+            "type": "enum",
+            "members": {
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockEventHoldDuration": {
+            "type": "structure",
+            "members": {
+                "Days": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for the event hold duration. The minimum value is 1 and the maximum\n         value is 36,500.</p>"
+                    }
+                },
+                "Years": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of years for the event hold duration. The minimum value is 1 and the maximum\n         value is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the duration configuration for an event hold, specified in either days or\n         years.</p>"
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockEventHoldDurationDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 36500
+                }
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockEventHoldDurationYears": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.s3control#S3ObjectLockLegalHold": {
             "type": "structure",
             "members": {
@@ -22917,6 +23007,61 @@
                     "traits": {
                         "smithy.api#enumValue": "GOVERNANCE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockRetentionEventHold": {
+            "type": "enum",
+            "members": {
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDuration": {
+            "type": "structure",
+            "members": {
+                "Days": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for the event hold duration. The minimum value is 1 and the maximum\n         value is 36,500.</p>"
+                    }
+                },
+                "Years": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of years for the event hold duration. The minimum value is 1 and the maximum\n         value is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the duration configuration for an event hold, specified in either days or\n         years.</p>"
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDurationDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 36500
+                }
+            }
+        },
+        "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDurationYears": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -23147,6 +23292,18 @@
                     "target": "com.amazonaws.s3control#S3ObjectLockRetentionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The Object Lock retention mode to be applied to all objects in the Batch Operations\n         job.</p>"
+                    }
+                },
+                "EventHold": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockRetentionEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status to be applied to all objects in the Batch Operations job. Set to\n         <code>ON</code> to enable an event hold or <code>OFF</code> to disable it.</p>"
+                    }
+                },
+                "EventHoldDuration": {
+                    "target": "com.amazonaws.s3control#S3ObjectLockRetentionEventHoldDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration to be applied to all objects in the Batch Operations job. The duration\n         specifies how long the object remains protected after the event hold is released.</p>"
                     }
                 }
             },
@@ -23557,7 +23714,7 @@
                 "MinStorageBytesPercentage": {
                     "target": "com.amazonaws.s3control#MinStorageBytesPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of storage bytes percentage whose metrics will be selected.</p>\n         <note>\n            <p>You must choose a value greater than or equal to <code>1.0</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The minimum percentage of total bucket storage that a prefix must hold for its metrics to be included.</p>"
                     }
                 }
             },

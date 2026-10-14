@@ -1,0 +1,5 @@
+PATCH /applications/__Application__
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__"}

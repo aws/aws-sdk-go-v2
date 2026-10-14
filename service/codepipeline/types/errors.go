@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ActionExecutionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActionExecutionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActionExecutionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionExecutionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionExecutionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActionExecutionNotFoundException_message, *v.Message)
+	}
+}
+func (v *ActionExecutionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionExecutionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionExecutionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActionExecutionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified action cannot be found.
 type ActionNotFoundException struct {
@@ -58,6 +80,27 @@ func (e *ActionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActionNotFoundException_message, *v.Message)
+	}
+}
+func (v *ActionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified action type cannot be found.
 type ActionTypeNotFoundException struct {
@@ -84,6 +127,27 @@ func (e *ActionTypeNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActionTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActionTypeNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionTypeNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionTypeNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ActionTypeNotFoundException_message, *v.Message)
+	}
+}
+func (v *ActionTypeNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionTypeNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionTypeNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActionTypeNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The approval action has already been approved or rejected.
 type ApprovalAlreadyCompletedException struct {
@@ -110,6 +174,27 @@ func (e *ApprovalAlreadyCompletedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ApprovalAlreadyCompletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ApprovalAlreadyCompletedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalAlreadyCompletedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalAlreadyCompletedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ApprovalAlreadyCompletedException_message, *v.Message)
+	}
+}
+func (v *ApprovalAlreadyCompletedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalAlreadyCompletedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalAlreadyCompletedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ApprovalAlreadyCompletedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to modify the tag due to a simultaneous update request.
 type ConcurrentModificationException struct {
@@ -136,6 +221,27 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_message, *v.Message)
+	}
+}
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The pipeline has reached the limit for concurrent pipeline executions.
 type ConcurrentPipelineExecutionsLimitExceededException struct {
@@ -164,6 +270,27 @@ func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorCode() string 
 func (e *ConcurrentPipelineExecutionsLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ConcurrentPipelineExecutionsLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentPipelineExecutionsLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentPipelineExecutionsLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentPipelineExecutionsLimitExceededException_message, *v.Message)
+	}
+}
+func (v *ConcurrentPipelineExecutionsLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentPipelineExecutionsLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentPipelineExecutionsLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentPipelineExecutionsLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to override because the condition does not allow overrides.
 type ConditionNotOverridableException struct {
@@ -190,6 +317,27 @@ func (e *ConditionNotOverridableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConditionNotOverridableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConditionNotOverridableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionNotOverridableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionNotOverridableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConditionNotOverridableException_message, *v.Message)
+	}
+}
+func (v *ConditionNotOverridableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionNotOverridableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionNotOverridableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConditionNotOverridableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request cannot be handled because the pipeline is busy handling ongoing
 // activities. Try again later.
@@ -217,6 +365,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The pipeline execution is already in a Stopping state. If you already chose to
 // stop and wait, you cannot make that request again. You can choose to stop and
@@ -247,6 +416,27 @@ func (e *DuplicatedStopRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicatedStopRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicatedStopRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicatedStopRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicatedStopRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicatedStopRequestException_message, *v.Message)
+	}
+}
+func (v *DuplicatedStopRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicatedStopRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicatedStopRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicatedStopRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The action declaration was specified in an invalid format.
 type InvalidActionDeclarationException struct {
@@ -273,6 +463,27 @@ func (e *InvalidActionDeclarationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidActionDeclarationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidActionDeclarationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidActionDeclarationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidActionDeclarationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidActionDeclarationException_message, *v.Message)
+	}
+}
+func (v *InvalidActionDeclarationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidActionDeclarationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidActionDeclarationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidActionDeclarationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The approval request already received a response or has expired.
 type InvalidApprovalTokenException struct {
@@ -299,6 +510,27 @@ func (e *InvalidApprovalTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidApprovalTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidApprovalTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidApprovalTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidApprovalTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidApprovalTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidApprovalTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidApprovalTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidApprovalTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidApprovalTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource ARN is invalid.
 type InvalidArnException struct {
@@ -325,6 +557,27 @@ func (e *InvalidArnException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArnException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidArnException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidArnException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidArnException_message, *v.Message)
+	}
+}
+func (v *InvalidArnException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArnException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArnException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArnException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Reserved for future use.
 type InvalidBlockerDeclarationException struct {
@@ -353,6 +606,27 @@ func (e *InvalidBlockerDeclarationException) ErrorCode() string {
 func (e *InvalidBlockerDeclarationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidBlockerDeclarationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidBlockerDeclarationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidBlockerDeclarationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidBlockerDeclarationException_message, *v.Message)
+	}
+}
+func (v *InvalidBlockerDeclarationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidBlockerDeclarationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidBlockerDeclarationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidBlockerDeclarationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The client token was specified in an invalid format
 type InvalidClientTokenException struct {
@@ -379,6 +653,27 @@ func (e *InvalidClientTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidClientTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidClientTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidClientTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidClientTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidClientTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidClientTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidClientTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidClientTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The job was specified in an invalid format or cannot be found.
 type InvalidJobException struct {
@@ -405,6 +700,27 @@ func (e *InvalidJobException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidJobException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidJobException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidJobException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidJobException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidJobException_message, *v.Message)
+	}
+}
+func (v *InvalidJobException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidJobException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidJobException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidJobException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The job state was specified in an invalid format.
 type InvalidJobStateException struct {
@@ -431,6 +747,27 @@ func (e *InvalidJobStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidJobStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidJobStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidJobStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidJobStateException_message, *v.Message)
+	}
+}
+func (v *InvalidJobStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidJobStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidJobStateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidJobStateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The next token was specified in an invalid format. Make sure that the next
 // token you provide is the token returned by a previous call.
@@ -458,6 +795,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The nonce was specified in an invalid format.
 type InvalidNonceException struct {
@@ -484,6 +842,27 @@ func (e *InvalidNonceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNonceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNonceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNonceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNonceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNonceException_message, *v.Message)
+	}
+}
+func (v *InvalidNonceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNonceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNonceException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNonceException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The stage declaration was specified in an invalid format.
 type InvalidStageDeclarationException struct {
@@ -510,6 +889,27 @@ func (e *InvalidStageDeclarationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidStageDeclarationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidStageDeclarationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidStageDeclarationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidStageDeclarationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidStageDeclarationException_message, *v.Message)
+	}
+}
+func (v *InvalidStageDeclarationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidStageDeclarationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidStageDeclarationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidStageDeclarationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The structure was specified in an invalid format.
 type InvalidStructureException struct {
@@ -536,6 +936,27 @@ func (e *InvalidStructureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidStructureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidStructureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidStructureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidStructureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidStructureException_message, *v.Message)
+	}
+}
+func (v *InvalidStructureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidStructureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidStructureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidStructureException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource tags are invalid.
 type InvalidTagsException struct {
@@ -562,6 +983,27 @@ func (e *InvalidTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTagsException_message, *v.Message)
+	}
+}
+func (v *InvalidTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTagsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified authentication type is in an invalid format.
 type InvalidWebhookAuthenticationParametersException struct {
@@ -589,6 +1031,27 @@ func (e *InvalidWebhookAuthenticationParametersException) ErrorCode() string {
 }
 func (e *InvalidWebhookAuthenticationParametersException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidWebhookAuthenticationParametersException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidWebhookAuthenticationParametersException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidWebhookAuthenticationParametersException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidWebhookAuthenticationParametersException_message, *v.Message)
+	}
+}
+func (v *InvalidWebhookAuthenticationParametersException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidWebhookAuthenticationParametersException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidWebhookAuthenticationParametersException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidWebhookAuthenticationParametersException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The specified event filter rule is in an invalid format.
@@ -618,6 +1081,27 @@ func (e *InvalidWebhookFilterPatternException) ErrorCode() string {
 func (e *InvalidWebhookFilterPatternException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidWebhookFilterPatternException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidWebhookFilterPatternException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidWebhookFilterPatternException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidWebhookFilterPatternException_message, *v.Message)
+	}
+}
+func (v *InvalidWebhookFilterPatternException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidWebhookFilterPatternException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidWebhookFilterPatternException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidWebhookFilterPatternException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The job was specified in an invalid format or cannot be found.
 type JobNotFoundException struct {
@@ -644,6 +1128,27 @@ func (e *JobNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *JobNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.JobNotFoundException_message, *v.Message)
+	}
+}
+func (v *JobNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.JobNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of pipelines associated with the Amazon Web Services account has
 // exceeded the limit allowed for the account.
@@ -671,6 +1176,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The stage has failed in a later run of the pipeline and the pipelineExecutionId
 // associated with the request is out of date.
@@ -700,6 +1226,27 @@ func (e *NotLatestPipelineExecutionException) ErrorCode() string {
 func (e *NotLatestPipelineExecutionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *NotLatestPipelineExecutionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotLatestPipelineExecutionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotLatestPipelineExecutionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotLatestPipelineExecutionException_message, *v.Message)
+	}
+}
+func (v *NotLatestPipelineExecutionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotLatestPipelineExecutionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotLatestPipelineExecutionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotLatestPipelineExecutionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exceeded the total size limit for all variables in the pipeline.
 type OutputVariablesSizeExceededException struct {
@@ -727,6 +1274,27 @@ func (e *OutputVariablesSizeExceededException) ErrorCode() string {
 }
 func (e *OutputVariablesSizeExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *OutputVariablesSizeExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputVariablesSizeExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputVariablesSizeExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OutputVariablesSizeExceededException_message, *v.Message)
+	}
+}
+func (v *OutputVariablesSizeExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputVariablesSizeExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputVariablesSizeExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OutputVariablesSizeExceededException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The pipeline execution was specified in an invalid format or cannot be found,
@@ -757,6 +1325,27 @@ func (e *PipelineExecutionNotFoundException) ErrorCode() string {
 func (e *PipelineExecutionNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *PipelineExecutionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineExecutionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineExecutionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineExecutionNotFoundException_message, *v.Message)
+	}
+}
+func (v *PipelineExecutionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineExecutionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineExecutionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineExecutionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to stop the pipeline execution. The execution might already be in a
 // Stopped state, or it might no longer be in progress.
@@ -785,6 +1374,27 @@ func (e *PipelineExecutionNotStoppableException) ErrorCode() string {
 }
 func (e *PipelineExecutionNotStoppableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *PipelineExecutionNotStoppableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineExecutionNotStoppableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineExecutionNotStoppableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineExecutionNotStoppableException_message, *v.Message)
+	}
+}
+func (v *PipelineExecutionNotStoppableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineExecutionNotStoppableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineExecutionNotStoppableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineExecutionNotStoppableException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The specified pipeline execution is outdated and cannot be used as a target
@@ -815,6 +1425,27 @@ func (e *PipelineExecutionOutdatedException) ErrorCode() string {
 func (e *PipelineExecutionOutdatedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *PipelineExecutionOutdatedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineExecutionOutdatedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineExecutionOutdatedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineExecutionOutdatedException_message, *v.Message)
+	}
+}
+func (v *PipelineExecutionOutdatedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineExecutionOutdatedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineExecutionOutdatedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineExecutionOutdatedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified pipeline name is already in use.
 type PipelineNameInUseException struct {
@@ -841,6 +1472,27 @@ func (e *PipelineNameInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineNameInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PipelineNameInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineNameInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineNameInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineNameInUseException_message, *v.Message)
+	}
+}
+func (v *PipelineNameInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineNameInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineNameInUseException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineNameInUseException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The pipeline was specified in an invalid format or cannot be found.
 type PipelineNotFoundException struct {
@@ -867,6 +1519,27 @@ func (e *PipelineNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PipelineNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineNotFoundException_message, *v.Message)
+	}
+}
+func (v *PipelineNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The pipeline version was specified in an invalid format or cannot be found.
 type PipelineVersionNotFoundException struct {
@@ -893,6 +1566,27 @@ func (e *PipelineVersionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineVersionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PipelineVersionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineVersionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineVersionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineVersionNotFoundException_message, *v.Message)
+	}
+}
+func (v *PipelineVersionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineVersionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineVersionNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PipelineVersionNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because of an unknown error, exception, or failure.
 type RequestFailedException struct {
@@ -919,6 +1613,27 @@ func (e *RequestFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestFailedException_message, *v.Message)
+	}
+}
+func (v *RequestFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestFailedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestFailedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource was specified in an invalid format.
 type ResourceNotFoundException struct {
@@ -945,6 +1660,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The stage was specified in an invalid format or cannot be found.
 type StageNotFoundException struct {
@@ -971,6 +1707,27 @@ func (e *StageNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StageNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StageNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StageNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StageNotFoundException_message, *v.Message)
+	}
+}
+func (v *StageNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StageNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StageNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StageNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to retry. The pipeline structure or stage state might have changed while
 // actions awaited retry, or the stage contains no failed actions.
@@ -998,6 +1755,27 @@ func (e *StageNotRetryableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StageNotRetryableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StageNotRetryableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StageNotRetryableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StageNotRetryableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StageNotRetryableException_message, *v.Message)
+	}
+}
+func (v *StageNotRetryableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StageNotRetryableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StageNotRetryableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StageNotRetryableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The tags limit for a resource has been exceeded.
 type TooManyTagsException struct {
@@ -1024,6 +1802,27 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to roll back the stage. The cause might be if the pipeline version has
 // changed since the target pipeline execution was deployed, the stage is currently
@@ -1052,6 +1851,27 @@ func (e *UnableToRollbackStageException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnableToRollbackStageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnableToRollbackStageException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnableToRollbackStageException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnableToRollbackStageException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnableToRollbackStageException_message, *v.Message)
+	}
+}
+func (v *UnableToRollbackStageException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnableToRollbackStageException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnableToRollbackStageException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnableToRollbackStageException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The validation was specified in an invalid format.
 type ValidationException struct {
@@ -1078,6 +1898,27 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified webhook was entered in an invalid format or cannot be found.
 type WebhookNotFoundException struct {
@@ -1104,3 +1945,18 @@ func (e *WebhookNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WebhookNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WebhookNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebhookNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebhookNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *WebhookNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebhookNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}

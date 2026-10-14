@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/dashboard?accessSystemProfileLogs=true&resourceId=__ResourceId__&resourceType=SESSION
+
+

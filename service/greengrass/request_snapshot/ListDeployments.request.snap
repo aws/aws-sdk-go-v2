@@ -1,0 +1,3 @@
+GET /greengrass/groups/__GroupId__/deployments?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

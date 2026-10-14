@@ -37,7 +37,7 @@ type ApplicationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Application request metrics for an AWS Elastic Beanstalk environment.
+// Application request metrics for an Elastic Beanstalk environment.
 type ApplicationMetrics struct {
 
 	// The amount of time that the metrics cover (usually 10 seconds). For example,
@@ -62,7 +62,7 @@ type ApplicationMetrics struct {
 
 // The resource lifecycle configuration for an application. Defines lifecycle
 // settings for resources that belong to the application, and the service role that
-// AWS Elastic Beanstalk assumes in order to apply lifecycle settings. The version
+// Elastic Beanstalk assumes in order to apply lifecycle settings. The version
 // lifecycle configuration defines lifecycle settings for application versions.
 type ApplicationResourceLifecycleConfig struct {
 
@@ -92,7 +92,7 @@ type ApplicationVersionDescription struct {
 	// The Amazon Resource Name (ARN) of the application version.
 	ApplicationVersionArn *string
 
-	// Reference to the artifact from the AWS CodeBuild build.
+	// Reference to the artifact from the CodeBuild build.
 	BuildArn *string
 
 	// The creation date of the application version.
@@ -104,8 +104,25 @@ type ApplicationVersionDescription struct {
 	// The description of the application version.
 	Description *string
 
-	// If the version's source code was retrieved from AWS CodeCommit, the location of
-	// the source code for the application version.
+	// The settings that Elastic Beanstalk uses to build a container image from the
+	// source bundle of the application version. Not present for an application version
+	// created from an image you provide.
+	ImageBuildConfiguration *ImageBuildConfiguration
+
+	// The location of the container image for the application version.
+	//
+	// For an application version created from an image you provide, this is that
+	// image. For one that Elastic Beanstalk builds from your source bundle, Elastic
+	// Beanstalk fills this in with the image it pushed after the build succeeds.
+	ImageSource *ImageSource
+
+	// Indicates whether Elastic Beanstalk pre-processed and validated the environment
+	// manifest ( env.yaml ) and configuration files ( *.config files in the
+	// .ebextensions folder) in the source bundle of the application version.
+	Process *bool
+
+	// If the version's source code was retrieved from CodeCommit, the location of the
+	// source code for the application version.
 	SourceBuildInformation *SourceBuildInformation
 
 	// The storage location of the application version's source bundle in Amazon S3.
@@ -123,12 +140,11 @@ type ApplicationVersionDescription struct {
 	//   - Processing – Elastic Beanstalk is currently processing the application
 	//   version.
 	//
-	//   - Building – Application version is currently undergoing an AWS CodeBuild
-	//   build.
+	//   - Building – Application version is currently undergoing an CodeBuild build.
 	//
 	//   - Processed – Elastic Beanstalk was successfully pre-processed and validated.
 	//
-	//   - Failed – Either the AWS CodeBuild build failed or configuration files didn't
+	//   - Failed – Either the CodeBuild build failed or configuration files didn't
 	//   pass validation. This application version isn't usable.
 	Status ApplicationVersionStatus
 
@@ -167,12 +183,12 @@ type AutoScalingGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for an AWS CodeBuild build.
+// Settings for an CodeBuild build.
 type BuildConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that enables AWS CodeBuild to interact with dependent AWS services on
-	// behalf of the AWS account.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that enables CodeBuild to interact with dependent Amazon Web Services service on
+	// behalf of the Amazon Web Services account.
 	//
 	// This member is required.
 	CodeBuildServiceRole *string
@@ -198,7 +214,7 @@ type BuildConfiguration struct {
 	//   - BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
 	ComputeType ComputeType
 
-	// How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until
+	// How long in minutes, from 5 to 480 (8 hours), for CodeBuild to wait until
 	// timing out any related build that does not get marked as completed. The default
 	// is 60 minutes.
 	TimeoutInMinutes *int32
@@ -215,6 +231,15 @@ type Builder struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Amazon EKS cluster that an environment runs on.
+type Cluster struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+	ClusterArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the possible values for a configuration option.
 type ConfigurationOptionDescription struct {
 
@@ -224,9 +249,9 @@ type ConfigurationOptionDescription struct {
 	//   - NoInterruption : There is no interruption to the environment or application
 	//   availability.
 	//
-	//   - RestartEnvironment : The environment is entirely restarted, all AWS
-	//   resources are deleted and recreated, and the environment is unavailable during
-	//   the process.
+	//   - RestartEnvironment : The environment is entirely restarted, all A resources
+	//   are deleted and recreated, and the environment is unavailable during the
+	//   process.
 	//
 	//   - RestartApplicationServer : The environment is available the entire time.
 	//   However, a short application outage occurs when the application servers on the
@@ -251,7 +276,8 @@ type ConfigurationOptionDescription struct {
 	// The name of the configuration option.
 	Name *string
 
-	// A unique namespace identifying the option's associated AWS resource.
+	// A unique namespace identifying the option's associated Amazon Web Services
+	// resource.
 	Namespace *string
 
 	// If specified, the configuration option must be a string value that satisfies
@@ -294,12 +320,13 @@ type ConfigurationOptionDescription struct {
 
 // A specification identifying an individual configuration option along with its
 // current value. For a list of possible namespaces and option values, see [Option Values]in the
-// AWS Elastic Beanstalk Developer Guide.
+// Elastic Beanstalk Developer Guide.
 //
 // [Option Values]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
 type ConfigurationOptionSetting struct {
 
-	// A unique namespace that identifies the option's associated AWS resource.
+	// A unique namespace that identifies the option's associated Amazon Web Services
+	// resource.
 	Namespace *string
 
 	// The name of the configuration option.
@@ -496,8 +523,8 @@ type EnvironmentDescription struct {
 	// The name of this environment.
 	EnvironmentName *string
 
-	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
-	// the failure levels for a running environment:
+	// Describes the health status of the environment. Elastic Beanstalk indicates the
+	// failure levels for a running environment:
 	//
 	//   - Red : Indicates the environment is not responsive. Occurs when three or more
 	//   consecutive failures occur for an environment.
@@ -520,16 +547,16 @@ type EnvironmentDescription struct {
 	// [Health Colors and Statuses]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus EnvironmentHealthStatus
 
-	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+	// The operations role feature of Elastic Beanstalk is in beta release and is
+	// subject to change.
 	//
-	// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+	// The Amazon Resource Name (ARN) of the environment's operations role.
 	OperationsRole *string
 
 	// The ARN of the platform version.
 	PlatformArn *string
 
-	// The description of the AWS resources used by this environment.
+	// The description of the Amazon Web Services resources used by this environment.
 	Resources *EnvironmentResourcesDescription
 
 	//  The name of the SolutionStack deployed with this environment.
@@ -537,7 +564,15 @@ type EnvironmentDescription struct {
 
 	// The current operational status of the environment:
 	//
+	//   - Aborting : Environment is in the process of aborting a deployment.
+	//
 	//   - Launching : Environment is in the process of initial deployment.
+	//
+	//   - LinkingFrom : Environment is in the process of being linked to by another
+	//   environment. See [Environment links]for details.
+	//
+	//   - LinkingTo : Environment is in the process of linking to another environment.
+	//   See [Environment links]for details.
 	//
 	//   - Updating : Environment is in the process of updating its configuration
 	//   settings or application version.
@@ -548,6 +583,8 @@ type EnvironmentDescription struct {
 	//   - Terminating : Environment is in the shut-down process.
 	//
 	//   - Terminated : Environment is not running.
+	//
+	// [Environment links]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html
 	Status EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this
@@ -601,11 +638,16 @@ type EnvironmentLink struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the AWS resources in use by this environment. This data is live.
+// Describes the Amazon Web Services resources in use by this environment. This
+// data is live.
 type EnvironmentResourceDescription struct {
 
 	//  The AutoScalingGroups used by this environment.
 	AutoScalingGroups []AutoScalingGroup
+
+	// The Amazon EKS cluster that this environment runs on. This member is present
+	// only for environments in the Cluster tier.
+	Cluster *Cluster
 
 	// The name of the environment.
 	EnvironmentName *string
@@ -631,8 +673,8 @@ type EnvironmentResourceDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the AWS resources in use by this environment. This data is not live
-// data.
+// Describes the Amazon Web Services resources in use by this environment. This
+// data is not live data.
 type EnvironmentResourcesDescription struct {
 
 	// Describes the LoadBalancer.
@@ -648,9 +690,11 @@ type EnvironmentTier struct {
 	//
 	// Valid values:
 	//
-	//   - For Web server tier – WebServer
+	//   - For Standard-mode EC2-based web server – WebServer
 	//
-	//   - For Worker tier – Worker
+	//   - For Standard-mode EC2-based backend application with Amazon SQS – Worker
+	//
+	//   - For Cluster-mode Amazon EKS-based applications – Cluster
 	Name *string
 
 	// The type of this environment tier.
@@ -660,6 +704,8 @@ type EnvironmentTier struct {
 	//   - For Web server tier – Standard
 	//
 	//   - For Worker tier – SQS/HTTP
+	//
+	//   - For Cluster tier – EKS
 	Type *string
 
 	// The version of this environment tier. When you don't set a value to it, Elastic
@@ -705,6 +751,105 @@ type EventDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Settings that Elastic Beanstalk uses to build a container image from the source
+// bundle of an application version.
+type ImageBuildConfiguration struct {
+
+	// The processor architecture that Elastic Beanstalk builds the container image
+	// for. The architecture must match the architecture of the instances in the
+	// environment that you deploy the application version to.
+	//
+	// Valid values:
+	//
+	//   - amd64 – x86-64 instances. This is the default.
+	//
+	//   - arm64 – Amazon Web Services Graviton instances.
+	Architecture ArchitectureType
+
+	// The Cloud Native Buildpacks builder image that Elastic Beanstalk uses to build
+	// the container image. For example, paketobuildpacks/builder-jammy-base .
+	//
+	// This member is required when Type is buildpack . Elastic Beanstalk doesn't
+	// provide a default builder.
+	Buildpack *string
+
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that CodeBuild assumes to run the build in your Amazon Web Services account.
+	// Elastic Beanstalk rejects a Build that doesn't specify this role.
+	CodeBuildServiceRole *string
+
+	// The size of the compute resources that run the build. If you don't specify it,
+	// Elastic Beanstalk uses BUILD_GENERAL1_MEDIUM .
+	//
+	// Valid values:
+	//
+	//   - BUILD_GENERAL1_SMALL – Use up to 3 GB memory and 2 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_MEDIUM – Use up to 7 GB memory and 4 vCPUs for builds.
+	//
+	//   - BUILD_GENERAL1_LARGE – Use up to 15 GB memory and 8 vCPUs for builds.
+	ComputeType ComputeType
+
+	// The path to the Dockerfile within the source bundle, relative to the root of
+	// the source bundle. For example, backend/Dockerfile .
+	//
+	// Elastic Beanstalk uses this member only when Type is docker . If you don't
+	// specify it, Elastic Beanstalk uses the Dockerfile at the root of the source
+	// bundle.
+	DockerfileLocation *string
+
+	// How long, in minutes from 5 to 480 (8 hours), Elastic Beanstalk waits before
+	// stopping a build that hasn't completed. The default is 60 minutes.
+	TimeoutInMinutes *int32
+
+	// How Elastic Beanstalk builds the container image. Elastic Beanstalk rejects a
+	// Build that doesn't specify it.
+	//
+	// Valid values:
+	//
+	//   - docker – Elastic Beanstalk builds the image from a Dockerfile in your source
+	//   bundle. Specify the Dockerfile with DockerfileLocation .
+	//
+	//   - buildpack – Elastic Beanstalk builds the image with a Cloud Native
+	//   Buildpacks builder. Specify the builder with Buildpack .
+	Type ImageBuildType
+
+	noSmithyDocumentSerde
+}
+
+// The source of the container image for an application version: an image that you
+// built and pushed to a container registry yourself, or settings for Elastic
+// Beanstalk to build one from your source bundle.
+type ImageConfiguration struct {
+
+	// Settings that Elastic Beanstalk uses to build a container image from the source
+	// bundle of the application version.
+	//
+	// If you specify Build , also specify the request's SourceBundle parameter, and
+	// don't specify Source .
+	Build *ImageBuildConfiguration
+
+	// The location of a container image that you built and pushed to a container
+	// registry yourself. Elastic Beanstalk deploys the image without a build step.
+	//
+	// If you specify Source , don't specify Build or the request's SourceBundle
+	// parameter.
+	Source *ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The location of a container image.
+type ImageSource struct {
+
+	// The URI of the container image, including the registry, the repository, and the
+	// image tag or digest. For example,
+	// 111122223333.dkr.ecr.us-east-1.amazonaws.com/my-repository:latest .
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The description of an Amazon EC2 instance.
 type Instance struct {
 
@@ -727,7 +872,7 @@ type InstanceHealthSummary struct {
 	//  Green. An operation is in progress on an instance.
 	Info *int32
 
-	//  Grey. AWS Elastic Beanstalk and the health agent are reporting no data on an
+	//  Grey. Elastic Beanstalk and the health agent are reporting no data on an
 	// instance.
 	NoData *int32
 
@@ -742,7 +887,7 @@ type InstanceHealthSummary struct {
 	// other issues for an instance or environment.
 	Severe *int32
 
-	//  Grey. AWS Elastic Beanstalk and the health agent are reporting an insufficient
+	//  Grey. Elastic Beanstalk and the health agent are reporting an insufficient
 	// amount of data on an instance.
 	Unknown *int32
 
@@ -954,7 +1099,8 @@ type OptionRestrictionRegex struct {
 // A specification identifying an individual configuration option.
 type OptionSpecification struct {
 
-	// A unique namespace identifying the option's associated AWS resource.
+	// A unique namespace identifying the option's associated Amazon Web Services
+	// resource.
 	Namespace *string
 
 	// The name of the configuration option.
@@ -1049,7 +1195,8 @@ type PlatformDescription struct {
 	// The name of the platform version.
 	PlatformName *string
 
-	// The AWS account ID of the person who created the platform version.
+	// The Amazon Web Services account ID of the person who created the platform
+	// version.
 	PlatformOwner *string
 
 	// The status of the platform version.
@@ -1162,7 +1309,8 @@ type PlatformSummary struct {
 	// recommended one for its branch.
 	PlatformLifecycleState *string
 
-	// The AWS account ID of the person who created the platform version.
+	// The Amazon Web Services account ID of the person who created the platform
+	// version.
 	PlatformOwner *string
 
 	// The status of the platform version. You can create an environment from the
@@ -1193,34 +1341,35 @@ type Queue struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Elastic Beanstalk quota information for a single resource type in an
-// AWS account. It reflects the resource's limits for this account.
+// The Elastic Beanstalk quota information for a single resource type in an Amazon
+// Web Services account. It reflects the resource's limits for this account.
 type ResourceQuota struct {
 
 	// The maximum number of instances of this Elastic Beanstalk resource type that an
-	// AWS account can use.
+	// Amazon Web Services account can use.
 	Maximum *int32
 
 	noSmithyDocumentSerde
 }
 
-// A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS
-// account. They reflect Elastic Beanstalk resource limits for this account.
+// A set of per-resource Elastic Beanstalk quotas associated with an Amazon Web
+// Services account. They reflect Elastic Beanstalk resource limits for this
+// account.
 type ResourceQuotas struct {
 
-	// The quota for applications in the AWS account.
+	// The quota for applications in the Amazon Web Services account.
 	ApplicationQuota *ResourceQuota
 
-	// The quota for application versions in the AWS account.
+	// The quota for application versions in the Amazon Web Services account.
 	ApplicationVersionQuota *ResourceQuota
 
-	// The quota for configuration templates in the AWS account.
+	// The quota for configuration templates in the Amazon Web Services account.
 	ConfigurationTemplateQuota *ResourceQuota
 
-	// The quota for custom platforms in the AWS account.
+	// The quota for custom platforms in the Amazon Web Services account.
 	CustomPlatformQuota *ResourceQuota
 
-	// The quota for environments in the AWS account.
+	// The quota for environments in the Amazon Web Services account.
 	EnvironmentQuota *ResourceQuota
 
 	noSmithyDocumentSerde

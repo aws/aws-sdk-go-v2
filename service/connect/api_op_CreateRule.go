@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a rule for the specified Connect Customer instance.
@@ -73,7 +73,54 @@ type CreateRuleInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
+	// The pre-evaluation filters for the rule, that restrict the rule to be applied
+	// to only certain resources based on the resource's attributes, such as tags
+	// assigned to a contact. The pre-evaluation filters are applied even before rule
+	// conditions are evaluated and are used to enforce tag-based-access-control while
+	// applying rules.
+	PreEvaluationFilters *types.PreEvaluationFilters
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleActions(s, schemas.CreateRuleRequest_Actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRuleRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Function != nil {
+		s.WriteString(schemas.CreateRuleRequest_Function, *v.Function)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateRuleRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRuleRequest_Name, *v.Name)
+	}
+	if v.PreEvaluationFilters != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_PreEvaluationFilters)
+		v.PreEvaluationFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PublishStatus != "" {
+		s.WriteString(schemas.CreateRuleRequest_PublishStatus, string(v.PublishStatus))
+	}
+	serializeTagMap(s, schemas.CreateRuleRequest_Tags, v.Tags)
+	if v.TriggerEventSource != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_TriggerEventSource)
+		v.TriggerEventSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateRuleOutput struct {
@@ -94,65 +141,48 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateRuleResponse_RuleArn, *v.RuleArn)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.CreateRuleResponse_RuleId, *v.RuleId)
+	}
+}
+func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_RuleArn, v.RuleArn)
+		case schemas.CreateRuleResponse_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse), output: &CreateRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +192,6 @@ func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCreateRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +204,6 @@ func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +243,4 @@ func (m *idempotencyToken_initializeOpCreateRule) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCreateRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRule",
-	}
 }

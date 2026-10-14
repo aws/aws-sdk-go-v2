@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeActionInput struct {
 	ActionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.DescribeActionRequest_ActionName, *v.ActionName)
+	}
 }
 
 type DescribeActionOutput struct {
@@ -85,77 +96,129 @@ type DescribeActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionArn != nil {
+		s.WriteString(schemas.DescribeActionResponse_ActionArn, *v.ActionArn)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.DescribeActionResponse_ActionName, *v.ActionName)
+	}
+	if v.ActionType != nil {
+		s.WriteString(schemas.DescribeActionResponse_ActionType, *v.ActionType)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeActionResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeActionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeActionResponse_Description, *v.Description)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeActionResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeActionResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.DescribeActionResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.DescribeActionResponse_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineageEntityParameters(s, schemas.DescribeActionResponse_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeActionResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeActionResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActionResponse_ActionArn:
+			v.ActionArn = new(string)
+			return d.ReadString(schemas.DescribeActionResponse_ActionArn, v.ActionArn)
+		case schemas.DescribeActionResponse_ActionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.DescribeActionResponse_ActionName, v.ActionName)
+		case schemas.DescribeActionResponse_ActionType:
+			v.ActionType = new(string)
+			return d.ReadString(schemas.DescribeActionResponse_ActionType, v.ActionType)
+		case schemas.DescribeActionResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeActionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeActionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeActionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeActionResponse_Description, v.Description)
+		case schemas.DescribeActionResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeActionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeActionResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeActionResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeActionResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.DescribeActionResponse_MetadataProperties:
+			v.MetadataProperties = &types.MetadataProperties{}
+			return v.MetadataProperties.Deserialize(d)
+		case schemas.DescribeActionResponse_Properties:
+			return deserializeLineageEntityParameters(d, schemas.DescribeActionResponse_Properties, &v.Properties)
+		case schemas.DescribeActionResponse_Source:
+			v.Source = &types.ActionSource{}
+			return v.Source.Deserialize(d)
+		case schemas.DescribeActionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeActionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ActionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAction, schemas.DescribeActionRequest, schemas.DescribeActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAction, schemas.DescribeActionRequest, schemas.DescribeActionResponse), output: &DescribeActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +233,8 @@ func (c *Client) addOperationDescribeActionMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAction",
-	}
 }

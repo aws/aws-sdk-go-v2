@@ -1,0 +1,5 @@
+POST /shares?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"resourceArns":["__Member__","__Member__"],"status":["PENDING","PENDING"],"type":["VARIANT_STORE","VARIANT_STORE"]},"resourceOwner":"SELF"}

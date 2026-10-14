@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribePipeline
+
+{"CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"LastModifiedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"LastModifiedTime":946684800,"LastRunTime":946684800,"ParallelismConfiguration":{"MaxParallelExecutionSteps":1},"PipelineArn":"__PipelineArn__","PipelineDefinition":"__PipelineDefinition__","PipelineDescription":"__PipelineDescription__","PipelineDisplayName":"__PipelineDisplayName__","PipelineName":"__PipelineName__","PipelineStatus":"Active","PipelineVersionDescription":"__PipelineVersionDescription__","PipelineVersionDisplayName":"__PipelineVersionDisplayName__","RoleArn":"__RoleArn__"}

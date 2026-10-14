@@ -1,0 +1,5 @@
+PATCH /dataIntegrations/__DataIntegrationIdentifier__/associations/__DataIntegrationAssociationIdentifier__
+
+Content-Type: application/json
+
+{"ExecutionConfiguration":{"ExecutionMode":"ON_DEMAND","OnDemandConfiguration":{"EndTime":"__EndTime__","StartTime":"__StartTime__"},"ScheduleConfiguration":{"FirstExecutionFrom":"__FirstExecutionFrom__","Object":"__Object__","ScheduleExpression":"__ScheduleExpression__"}}}

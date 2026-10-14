@@ -5,12 +5,10 @@ package keyspacesstreams
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -155,6 +153,39 @@ type GetStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationRequestDateTime != nil {
+		s.WriteTime(schemas.GetStreamOutput_creationRequestDateTime, *v.CreationRequestDateTime)
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetStreamOutput_keyspaceName, *v.KeyspaceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetStreamOutput_nextToken, *v.NextToken)
+	}
+	serializeShardDescriptionList(s, schemas.GetStreamOutput_shards, v.Shards)
+	if v.StreamArn != nil {
+		s.WriteString(schemas.GetStreamOutput_streamArn, *v.StreamArn)
+	}
+	if v.StreamLabel != nil {
+		s.WriteString(schemas.GetStreamOutput_streamLabel, *v.StreamLabel)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.GetStreamOutput_streamStatus, string(v.StreamStatus))
+	}
+	if v.StreamViewType != "" {
+		s.WriteString(schemas.GetStreamOutput_streamViewType, string(v.StreamViewType))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetStreamOutput_tableName, *v.TableName)
+	}
+}
 func (v *GetStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetStreamOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -197,74 +228,26 @@ func (v *GetStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput), output: &GetStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -277,12 +260,6 @@ func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -383,11 +360,3 @@ type GetStreamAPIClient interface {
 }
 
 var _ GetStreamAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStream",
-	}
-}

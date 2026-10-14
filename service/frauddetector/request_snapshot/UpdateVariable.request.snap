@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.UpdateVariable
+
+{"defaultValue":"__DefaultValue__","description":"__Description__","name":"__Name__","variableType":"__VariableType__"}

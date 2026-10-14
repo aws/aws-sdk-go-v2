@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeLocationFsxWindowsInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationFsxWindowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxWindowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxWindowsRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 type DescribeLocationFsxWindowsOutput struct {
@@ -92,77 +103,99 @@ type DescribeLocationFsxWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxWindowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxWindowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationFsxWindowsResponse_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationFsxWindowsResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationFsxWindowsResponse_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeLocationFsxWindowsResponse_Domain, *v.Domain)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxWindowsResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationFsxWindowsResponse_LocationUri, *v.LocationUri)
+	}
+	if v.ManagedSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationFsxWindowsResponse_ManagedSecretConfig)
+		v.ManagedSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxWindowsResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.User != nil {
+		s.WriteString(schemas.DescribeLocationFsxWindowsResponse_User, *v.User)
+	}
+}
+func (v *DescribeLocationFsxWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationFsxWindowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationFsxWindowsResponse_CmkSecretConfig:
+			v.CmkSecretConfig = &types.CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationFsxWindowsResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationFsxWindowsResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationFsxWindowsResponse_CustomSecretConfig:
+			v.CustomSecretConfig = &types.CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationFsxWindowsResponse_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxWindowsResponse_Domain, v.Domain)
+		case schemas.DescribeLocationFsxWindowsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxWindowsResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationFsxWindowsResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxWindowsResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationFsxWindowsResponse_ManagedSecretConfig:
+			v.ManagedSecretConfig = &types.ManagedSecretConfig{}
+			return v.ManagedSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationFsxWindowsResponse_SecurityGroupArns:
+			return deserializeEc2SecurityGroupArnList(d, schemas.DescribeLocationFsxWindowsResponse_SecurityGroupArns, &v.SecurityGroupArns)
+		case schemas.DescribeLocationFsxWindowsResponse_User:
+			v.User = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxWindowsResponse_User, v.User)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxWindows, schemas.DescribeLocationFsxWindowsRequest, schemas.DescribeLocationFsxWindowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxWindows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxWindows, schemas.DescribeLocationFsxWindowsRequest, schemas.DescribeLocationFsxWindowsResponse), output: &DescribeLocationFsxWindowsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxWindows{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLocationFsxWindows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLocationFsxWindowsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationFsxWindows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +210,8 @@ func (c *Client) addOperationDescribeLocationFsxWindowsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLocationFsxWindows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLocationFsxWindows",
-	}
 }

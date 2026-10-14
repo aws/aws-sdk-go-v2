@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a persistent application user interface.
@@ -49,6 +48,30 @@ type CreatePersistentAppUIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentAppUIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentAppUIInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentAppUIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EMRContainersConfig != nil {
+		s.WriteStruct(schemas.CreatePersistentAppUIInput_EMRContainersConfig)
+		v.EMRContainersConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfilerType != "" {
+		s.WriteString(schemas.CreatePersistentAppUIInput_ProfilerType, string(v.ProfilerType))
+	}
+	serializeTagList(s, schemas.CreatePersistentAppUIInput_Tags, v.Tags)
+	if v.TargetResourceArn != nil {
+		s.WriteString(schemas.CreatePersistentAppUIInput_TargetResourceArn, *v.TargetResourceArn)
+	}
+	if v.XReferer != nil {
+		s.WriteString(schemas.CreatePersistentAppUIInput_XReferer, *v.XReferer)
+	}
+}
+
 type CreatePersistentAppUIOutput struct {
 
 	// The persistent application user interface identifier.
@@ -64,77 +87,54 @@ type CreatePersistentAppUIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentAppUIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentAppUIOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentAppUIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.CreatePersistentAppUIOutput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+	if v.RuntimeRoleEnabledCluster != nil {
+		s.WriteBool(schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster, *v.RuntimeRoleEnabledCluster)
+	}
+}
+func (v *CreatePersistentAppUIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePersistentAppUIOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePersistentAppUIOutput_PersistentAppUIId:
+			v.PersistentAppUIId = new(string)
+			return d.ReadString(schemas.CreatePersistentAppUIOutput_PersistentAppUIId, v.PersistentAppUIId)
+		case schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster:
+			v.RuntimeRoleEnabledCluster = new(bool)
+			return d.ReadBool(schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster, v.RuntimeRoleEnabledCluster)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePersistentAppUIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentAppUI, schemas.CreatePersistentAppUIInput, schemas.CreatePersistentAppUIOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentAppUI, schemas.CreatePersistentAppUIInput, schemas.CreatePersistentAppUIOutput), output: &CreatePersistentAppUIOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePersistentAppUI{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePersistentAppUI"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePersistentAppUIValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePersistentAppUI(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +149,8 @@ func (c *Client) addOperationCreatePersistentAppUIMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePersistentAppUI(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePersistentAppUI",
-	}
 }

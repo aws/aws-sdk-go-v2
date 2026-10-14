@@ -1118,6 +1118,68 @@ func (v *EventTypeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A lifecycle event for an Amazon Web Services service version, such as
+// end-of-support or end-of-life.
+type LifecycleEvent struct {
+
+	// The date of the lifecycle event.
+	Date *time.Time
+
+	// A description of the lifecycle event.
+	Description *string
+
+	// The potential impact risks associated with this lifecycle event.
+	ImpactRisks []string
+
+	// The type of lifecycle event (for example, end-of-support, end-of-life).
+	LifecycleEventType *string
+
+	// The Amazon Web Services Regions affected by this lifecycle event.
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LifecycleEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecycleEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteTime(schemas.LifecycleEvent_date, *v.Date)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LifecycleEvent_description, *v.Description)
+	}
+	serializeImpactRiskList(s, schemas.LifecycleEvent_impactRisks, v.ImpactRisks)
+	if v.LifecycleEventType != nil {
+		s.WriteString(schemas.LifecycleEvent_lifecycleEventType, *v.LifecycleEventType)
+	}
+	serializeregionList(s, schemas.LifecycleEvent_regions, v.Regions)
+}
+func (v *LifecycleEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleEvent_date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.LifecycleEvent_date, v.Date)
+		case schemas.LifecycleEvent_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LifecycleEvent_description, v.Description)
+		case schemas.LifecycleEvent_impactRisks:
+			return deserializeImpactRiskList(d, schemas.LifecycleEvent_impactRisks, &v.ImpactRisks)
+		case schemas.LifecycleEvent_lifecycleEventType:
+			v.LifecycleEventType = new(string)
+			return d.ReadString(schemas.LifecycleEvent_lifecycleEventType, v.LifecycleEventType)
+		case schemas.LifecycleEvent_regions:
+			return deserializeregionList(d, schemas.LifecycleEvent_regions, &v.Regions)
+		}
+		return nil
+	})
+}
+
 // Error information returned when a [DescribeAffectedEntitiesForOrganization] operation can't find or process a specific
 // entity.
 //
@@ -1741,6 +1803,102 @@ func (v *OrganizationEventFilter) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.OrganizationEventFilter_startTime:
 			v.StartTime = &DateTimeRange{}
 			return v.StartTime.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains lifecycle information for an Amazon Web Services service version,
+// including lifecycle events and version recommendations.
+type ServiceLifecycle struct {
+
+	// The list of lifecycle events for this service version.
+	LifecycleEvents []LifecycleEvent
+
+	// The recommended version to upgrade to.
+	RecommendedVersion *string
+
+	// The name of the Amazon Web Services service.
+	Service *string
+
+	// A human-readable title for the lifecycle entry.
+	Title *string
+
+	// The version of the service.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecycleEventList(s, schemas.ServiceLifecycle_lifecycleEvents, v.LifecycleEvents)
+	if v.RecommendedVersion != nil {
+		s.WriteString(schemas.ServiceLifecycle_recommendedVersion, *v.RecommendedVersion)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ServiceLifecycle_service, *v.Service)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ServiceLifecycle_title, *v.Title)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.ServiceLifecycle_version, *v.Version)
+	}
+}
+func (v *ServiceLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLifecycle_lifecycleEvents:
+			return deserializeLifecycleEventList(d, schemas.ServiceLifecycle_lifecycleEvents, &v.LifecycleEvents)
+		case schemas.ServiceLifecycle_recommendedVersion:
+			v.RecommendedVersion = new(string)
+			return d.ReadString(schemas.ServiceLifecycle_recommendedVersion, v.RecommendedVersion)
+		case schemas.ServiceLifecycle_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.ServiceLifecycle_service, v.Service)
+		case schemas.ServiceLifecycle_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ServiceLifecycle_title, v.Title)
+		case schemas.ServiceLifecycle_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ServiceLifecycle_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// A filter for narrowing down service lifecycle results.
+type ServiceLifecycleFilter struct {
+
+	// The Amazon Web Services service name to filter by.
+	Service *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceLifecycleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLifecycleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLifecycleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteString(schemas.ServiceLifecycleFilter_service, *v.Service)
+	}
+}
+func (v *ServiceLifecycleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLifecycleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLifecycleFilter_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.ServiceLifecycleFilter_service, v.Service)
 		}
 		return nil
 	})

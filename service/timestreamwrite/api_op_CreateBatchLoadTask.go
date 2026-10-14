@@ -5,13 +5,9 @@ package timestreamwrite
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Timestream batch load task. A batch load task processes data from
@@ -74,42 +70,6 @@ type CreateBatchLoadTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBatchLoadTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBatchLoadTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBatchLoadTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateBatchLoadTaskRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DataModelConfiguration != nil {
-		s.WriteStruct(schemas.CreateBatchLoadTaskRequest_DataModelConfiguration)
-		v.DataModelConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataSourceConfiguration != nil {
-		s.WriteStruct(schemas.CreateBatchLoadTaskRequest_DataSourceConfiguration)
-		v.DataSourceConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RecordVersion != nil {
-		s.WriteInt64(schemas.CreateBatchLoadTaskRequest_RecordVersion, *v.RecordVersion)
-	}
-	if v.ReportConfiguration != nil {
-		s.WriteStruct(schemas.CreateBatchLoadTaskRequest_ReportConfiguration)
-		v.ReportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TargetDatabaseName != nil {
-		s.WriteString(schemas.CreateBatchLoadTaskRequest_TargetDatabaseName, *v.TargetDatabaseName)
-	}
-	if v.TargetTableName != nil {
-		s.WriteString(schemas.CreateBatchLoadTaskRequest_TargetTableName, *v.TargetTableName)
-	}
-}
-
 type CreateBatchLoadTaskOutput struct {
 
 	// The ID of the batch load task.
@@ -123,76 +83,26 @@ type CreateBatchLoadTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBatchLoadTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBatchLoadTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBatchLoadTaskResponse_TaskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.CreateBatchLoadTaskResponse_TaskId, v.TaskId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBatchLoadTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchLoadTask, schemas.CreateBatchLoadTaskRequest, schemas.CreateBatchLoadTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateBatchLoadTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchLoadTask, schemas.CreateBatchLoadTaskRequest, schemas.CreateBatchLoadTaskResponse), output: &CreateBatchLoadTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBatchLoadTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBatchLoadTaskDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -202,12 +112,6 @@ func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateBatchLoadTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchLoadTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +124,6 @@ func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -317,12 +215,4 @@ func (m *idempotencyToken_initializeOpCreateBatchLoadTask) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateBatchLoadTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateBatchLoadTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateBatchLoadTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBatchLoadTask",
-	}
 }

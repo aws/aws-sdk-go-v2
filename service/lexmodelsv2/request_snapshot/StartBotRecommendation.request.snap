@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/botrecommendations
+
+Content-Type: application/json
+
+{"encryptionSetting":{"associatedTranscriptsPassword":"__AssociatedTranscriptsPassword__","botLocaleExportPassword":"__BotLocaleExportPassword__","kmsKeyArn":"__KmsKeyArn__"},"transcriptSourceSetting":{"s3BucketTranscriptSource":{"kmsKeyArn":"__KmsKeyArn__","pathFormat":{"objectPrefixes":["__Member__","__Member__"]},"s3BucketName":"__S3BucketName__","transcriptFilter":{"lexTranscriptFilter":{"dateRangeFilter":{"endDateTime":946684800,"startDateTime":946684800}}},"transcriptFormat":"Lex"}}}

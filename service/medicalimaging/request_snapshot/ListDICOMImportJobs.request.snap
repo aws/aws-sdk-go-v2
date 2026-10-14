@@ -1,0 +1,3 @@
+GET /listDICOMImportJobs/datastore/__DatastoreId__?jobStatus=SUBMITTED&maxResults=1&nextToken=__NextToken__
+
+

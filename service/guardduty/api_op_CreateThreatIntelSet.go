@@ -5,10 +5,10 @@ package guardduty
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP
@@ -78,6 +78,37 @@ type CreateThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatIntelSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatIntelSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatIntelSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.CreateThreatIntelSetRequest_Activate, *v.Activate)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateThreatIntelSetRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateThreatIntelSetRequest_Tags, v.Tags)
+}
+
 type CreateThreatIntelSetOutput struct {
 
 	// The ID of the ThreatIntelSet resource.
@@ -91,65 +122,42 @@ type CreateThreatIntelSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatIntelSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatIntelSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatIntelSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThreatIntelSetId != nil {
+		s.WriteString(schemas.CreateThreatIntelSetResponse_ThreatIntelSetId, *v.ThreatIntelSetId)
+	}
+}
+func (v *CreateThreatIntelSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThreatIntelSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThreatIntelSetResponse_ThreatIntelSetId:
+			v.ThreatIntelSetId = new(string)
+			return d.ReadString(schemas.CreateThreatIntelSetResponse_ThreatIntelSetId, v.ThreatIntelSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatIntelSet, schemas.CreateThreatIntelSetRequest, schemas.CreateThreatIntelSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreatIntelSet, schemas.CreateThreatIntelSetRequest, schemas.CreateThreatIntelSetResponse), output: &CreateThreatIntelSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThreatIntelSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateThreatIntelSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +167,6 @@ func (c *Client) addOperationCreateThreatIntelSetMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateThreatIntelSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThreatIntelSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +179,6 @@ func (c *Client) addOperationCreateThreatIntelSetMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +218,4 @@ func (m *idempotencyToken_initializeOpCreateThreatIntelSet) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateThreatIntelSetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateThreatIntelSet{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateThreatIntelSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateThreatIntelSet",
-	}
 }

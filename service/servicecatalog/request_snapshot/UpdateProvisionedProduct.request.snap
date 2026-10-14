@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisionedProduct
+
+{"AcceptLanguage":"__AcceptLanguage__","PathId":"__PathId__","PathName":"__PathName__","ProductId":"__ProductId__","ProductName":"__ProductName__","ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductName":"__ProvisionedProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningArtifactName":"__ProvisioningArtifactName__","ProvisioningParameters":[{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"},{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"}],"ProvisioningPreferences":{"StackSetAccounts":["__Member__","__Member__"],"StackSetFailureToleranceCount":1,"StackSetFailureTolerancePercentage":1,"StackSetMaxConcurrencyCount":1,"StackSetMaxConcurrencyPercentage":1,"StackSetOperationType":"CREATE","StackSetRegions":["__Member__","__Member__"]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UpdateToken":"__UpdateToken__"}

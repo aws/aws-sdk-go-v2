@@ -5,11 +5,7 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -52,27 +48,6 @@ type UpdateKxDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxDatabaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKxDatabaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKxDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateKxDatabaseRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.UpdateKxDatabaseRequest_databaseName, *v.DatabaseName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateKxDatabaseRequest_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.UpdateKxDatabaseRequest_environmentId, *v.EnvironmentId)
-	}
-}
-
 type UpdateKxDatabaseOutput struct {
 
 	// The name of the kdb database.
@@ -95,85 +70,26 @@ type UpdateKxDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKxDatabaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKxDatabaseResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.UpdateKxDatabaseResponse_databaseName, v.DatabaseName)
-		case schemas.UpdateKxDatabaseResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateKxDatabaseResponse_description, v.Description)
-		case schemas.UpdateKxDatabaseResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.UpdateKxDatabaseResponse_environmentId, v.EnvironmentId)
-		case schemas.UpdateKxDatabaseResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.UpdateKxDatabaseResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKxDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDatabase, schemas.UpdateKxDatabaseRequest, schemas.UpdateKxDatabaseResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxDatabase, schemas.UpdateKxDatabaseRequest, schemas.UpdateKxDatabaseResponse), output: &UpdateKxDatabaseOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxDatabase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -183,12 +99,6 @@ func (c *Client) addOperationUpdateKxDatabaseMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpUpdateKxDatabaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxDatabase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,12 +111,6 @@ func (c *Client) addOperationUpdateKxDatabaseMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,12 +150,4 @@ func (m *idempotencyToken_initializeOpUpdateKxDatabase) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opUpdateKxDatabaseMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateKxDatabase{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateKxDatabase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateKxDatabase",
-	}
 }

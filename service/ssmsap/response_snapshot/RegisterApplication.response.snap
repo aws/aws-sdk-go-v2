@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Application":{"AppRegistryArn":"__AppRegistryArn__","Arn":"__Arn__","AssociatedApplicationArns":["__Member__","__Member__"],"Components":["__Member__","__Member__"],"DiscoveryStatus":"SUCCESS","Id":"__Id__","LastUpdated":946684800,"Status":"ACTIVATED","StatusMessage":"__StatusMessage__","Type":"HANA"},"OperationId":"__OperationId__"}

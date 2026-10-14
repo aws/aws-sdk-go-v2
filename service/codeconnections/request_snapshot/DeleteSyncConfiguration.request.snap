@@ -1,0 +1,7 @@
+POST /service/CodeConnections_20231201/operation/DeleteSyncConfiguration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿lResourceNamep__ResourceName__hSyncTypenCFN_STACK_SYNCÿ

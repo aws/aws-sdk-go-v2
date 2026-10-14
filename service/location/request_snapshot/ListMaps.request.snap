@@ -1,0 +1,5 @@
+POST /maps/v0/list-maps
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

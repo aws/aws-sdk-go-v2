@@ -5,10 +5,7 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +41,6 @@ type DeleteImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteImageSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteImageSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteImageSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DeleteImageSetRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.DeleteImageSetRequest_imageSetId, *v.ImageSetId)
-	}
-}
-
 type DeleteImageSetOutput struct {
 
 	// The data store identifier.
@@ -87,90 +69,23 @@ type DeleteImageSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteImageSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteImageSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteImageSetResponse_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.DeleteImageSetResponse_datastoreId, v.DatastoreId)
-		case schemas.DeleteImageSetResponse_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.DeleteImageSetResponse_imageSetId, v.ImageSetId)
-		case schemas.DeleteImageSetResponse_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.DeleteImageSetResponse_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = types.ImageSetState(ev)
-			return nil
-		case schemas.DeleteImageSetResponse_imageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.DeleteImageSetResponse_imageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteImageSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageSet, schemas.DeleteImageSetRequest, schemas.DeleteImageSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteImageSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageSet, schemas.DeleteImageSetRequest, schemas.DeleteImageSetResponse), output: &DeleteImageSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteImageSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -180,12 +95,6 @@ func (c *Client) addOperationDeleteImageSetMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpDeleteImageSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteImageSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +107,6 @@ func (c *Client) addOperationDeleteImageSetMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +140,4 @@ func (m *endpointPrefix_opDeleteImageSetMiddleware) HandleFinalize(ctx context.C
 }
 func addEndpointPrefix_opDeleteImageSetMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDeleteImageSetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDeleteImageSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteImageSet",
-	}
 }

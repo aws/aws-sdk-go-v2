@@ -5,12 +5,8 @@ package novaact
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new workflow definition template that can be used to execute multiple
@@ -52,29 +48,6 @@ type CreateWorkflowDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkflowDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkflowDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkflowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateWorkflowDefinitionRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateWorkflowDefinitionRequest_description, *v.Description)
-	}
-	if v.ExportConfig != nil {
-		s.WriteStruct(schemas.CreateWorkflowDefinitionRequest_exportConfig)
-		v.ExportConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWorkflowDefinitionRequest_name, *v.Name)
-	}
-}
-
 type CreateWorkflowDefinitionOutput struct {
 
 	// The current status of the workflow definition after creation.
@@ -88,77 +61,23 @@ type CreateWorkflowDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkflowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkflowDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkflowDefinitionResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateWorkflowDefinitionResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.WorkflowDefinitionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkflowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflowDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowDefinition, schemas.CreateWorkflowDefinitionRequest, schemas.CreateWorkflowDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflowDefinition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowDefinition, schemas.CreateWorkflowDefinitionRequest, schemas.CreateWorkflowDefinitionResponse), output: &CreateWorkflowDefinitionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkflowDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +87,6 @@ func (c *Client) addOperationCreateWorkflowDefinitionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCreateWorkflowDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkflowDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +99,6 @@ func (c *Client) addOperationCreateWorkflowDefinitionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -231,12 +138,4 @@ func (m *idempotencyToken_initializeOpCreateWorkflowDefinition) HandleInitialize
 }
 func addIdempotencyToken_opCreateWorkflowDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkflowDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWorkflowDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkflowDefinition",
-	}
 }

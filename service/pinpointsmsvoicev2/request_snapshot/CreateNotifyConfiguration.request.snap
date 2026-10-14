@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreateNotifyConfiguration
+
+{"ClientToken":"__ClientToken__","DefaultTemplateId":"__DefaultTemplateId__","DeletionProtectionEnabled":true,"DisplayName":"__DisplayName__","EnabledChannels":["SMS","SMS"],"EnabledCountries":["__Member__","__Member__"],"PoolId":"__PoolId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UseCase":"CODE_VERIFICATION"}

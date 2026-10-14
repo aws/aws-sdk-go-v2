@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","notificationHubs":[{"creationTime":"2000-01-01T00:00:00Z","lastActivationTime":"2000-01-01T00:00:00Z","notificationHubRegion":"__NotificationHubRegion__","statusSummary":{"reason":"__Reason__","status":"ACTIVE"}},{"creationTime":"2000-01-01T00:00:00Z","lastActivationTime":"2000-01-01T00:00:00Z","notificationHubRegion":"__NotificationHubRegion__","statusSummary":{"reason":"__Reason__","status":"ACTIVE"}}]}

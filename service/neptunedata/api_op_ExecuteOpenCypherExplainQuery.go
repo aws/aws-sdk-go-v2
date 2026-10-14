@@ -4,13 +4,8 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Executes an openCypher explain request. See [The openCypher explain feature] for more information.
@@ -59,24 +54,6 @@ type ExecuteOpenCypherExplainQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteOpenCypherExplainQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteOpenCypherExplainQueryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteOpenCypherExplainQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExplainMode != "" {
-		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_explainMode, string(v.ExplainMode))
-	}
-	if v.OpenCypherQuery != nil {
-		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_openCypherQuery, *v.OpenCypherQuery)
-	}
-	if v.Parameters != nil {
-		s.WriteString(schemas.ExecuteOpenCypherExplainQueryInput_parameters, *v.Parameters)
-	}
-}
-
 type ExecuteOpenCypherExplainQueryOutput struct {
 
 	// A text blob containing the openCypher explain results.
@@ -90,84 +67,29 @@ type ExecuteOpenCypherExplainQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteOpenCypherExplainQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteOpenCypherExplainQueryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteOpenCypherExplainQueryOutput_results:
-			return d.ReadBlob(schemas.ExecuteOpenCypherExplainQueryOutput_results, &v.Results)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteOpenCypherExplainQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteOpenCypherExplainQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherExplainQuery, schemas.ExecuteOpenCypherExplainQueryInput, schemas.ExecuteOpenCypherExplainQueryOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteOpenCypherExplainQuery{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherExplainQuery, schemas.ExecuteOpenCypherExplainQueryInput, schemas.ExecuteOpenCypherExplainQueryOutput), output: &ExecuteOpenCypherExplainQueryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteOpenCypherExplainQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpExecuteOpenCypherExplainQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteOpenCypherExplainQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +104,8 @@ func (c *Client) addOperationExecuteOpenCypherExplainQueryMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExecuteOpenCypherExplainQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExecuteOpenCypherExplainQuery",
-	}
 }

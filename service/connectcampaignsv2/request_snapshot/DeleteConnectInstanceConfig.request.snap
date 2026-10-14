@@ -1,0 +1,3 @@
+DELETE /v2/connect-instance/__ConnectInstanceId__/config?campaignDeletionPolicy=RETAIN_ALL
+
+

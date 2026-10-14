@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all related items for an incident record.
@@ -47,40 +43,6 @@ type ListRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRelatedItemsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncidentRecordArn != nil {
-		s.WriteString(schemas.ListRelatedItemsInput_incidentRecordArn, *v.IncidentRecordArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRelatedItemsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRelatedItemsInput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListRelatedItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRelatedItemsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRelatedItemsInput_incidentRecordArn:
-			v.IncidentRecordArn = new(string)
-			return d.ReadString(schemas.ListRelatedItemsInput_incidentRecordArn, v.IncidentRecordArn)
-		case schemas.ListRelatedItemsInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListRelatedItemsInput_maxResults, v.MaxResults)
-		case schemas.ListRelatedItemsInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRelatedItemsInput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListRelatedItemsOutput struct {
 
 	// Details about each related item.
@@ -98,99 +60,29 @@ type ListRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRelatedItemsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRelatedItemsOutput_nextToken, *v.NextToken)
-	}
-	serializeRelatedItemList(s, schemas.ListRelatedItemsOutput_relatedItems, v.RelatedItems)
-}
-func (v *ListRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRelatedItemsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRelatedItemsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRelatedItemsOutput_nextToken, v.NextToken)
-		case schemas.ListRelatedItemsOutput_relatedItems:
-			return deserializeRelatedItemList(d, schemas.ListRelatedItemsOutput_relatedItems, &v.RelatedItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRelatedItems{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedItems, schemas.ListRelatedItemsInput, schemas.ListRelatedItemsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRelatedItems{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedItems, schemas.ListRelatedItemsInput, schemas.ListRelatedItemsOutput), output: &ListRelatedItemsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRelatedItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRelatedItemsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRelatedItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,12 +95,6 @@ func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -309,11 +195,3 @@ type ListRelatedItemsAPIClient interface {
 }
 
 var _ ListRelatedItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRelatedItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRelatedItems",
-	}
-}

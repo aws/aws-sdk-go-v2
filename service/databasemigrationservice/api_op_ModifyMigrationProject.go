@@ -4,16 +4,19 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the specified migration project using the provided parameters.
 //
+// Required permissions: dms:UpdateMigrationProject . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // The migration project must be closed before you can modify it.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ModifyMigrationProject(ctx context.Context, params *ModifyMigrationProjectInput, optFns ...func(*Options)) (*ModifyMigrationProjectOutput, error) {
 	if params == nil {
 		params = &ModifyMigrationProjectInput{}
@@ -59,13 +62,49 @@ type ModifyMigrationProjectInput struct {
 	// Web Services Secrets Manager parameters.
 	TargetDataProviderDescriptors []types.DataProviderDescriptorDefinition
 
-	// The settings in JSON format for migration rules. Migration rules make it
-	// possible for you to change the object names according to the rules that you
-	// specify. For example, you can change an object name to lowercase or uppercase,
-	// add or remove a prefix or suffix, or rename objects.
+	// A JSON string that specifies the transformation rules for the migration
+	// project. Transformation rules let you customize how DMS Schema Conversion
+	// converts your source database objects, including renaming, adding prefixes or
+	// suffixes, and changing data types. For the transformation rule format and
+	// examples, see [Transformation rules in DMS Schema Conversion].
+	//
+	// Homogeneous data migrations do not support transformation rules.
+	//
+	// [Transformation rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html
 	TransformationRules *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModifyMigrationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyMigrationProjectMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyMigrationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ModifyMigrationProjectMessage_Description, *v.Description)
+	}
+	if v.InstanceProfileIdentifier != nil {
+		s.WriteString(schemas.ModifyMigrationProjectMessage_InstanceProfileIdentifier, *v.InstanceProfileIdentifier)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.ModifyMigrationProjectMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.MigrationProjectName != nil {
+		s.WriteString(schemas.ModifyMigrationProjectMessage_MigrationProjectName, *v.MigrationProjectName)
+	}
+	if v.SchemaConversionApplicationAttributes != nil {
+		s.WriteStruct(schemas.ModifyMigrationProjectMessage_SchemaConversionApplicationAttributes)
+		v.SchemaConversionApplicationAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataProviderDescriptorDefinitionList(s, schemas.ModifyMigrationProjectMessage_SourceDataProviderDescriptors, v.SourceDataProviderDescriptors)
+	serializeDataProviderDescriptorDefinitionList(s, schemas.ModifyMigrationProjectMessage_TargetDataProviderDescriptors, v.TargetDataProviderDescriptors)
+	if v.TransformationRules != nil {
+		s.WriteString(schemas.ModifyMigrationProjectMessage_TransformationRules, *v.TransformationRules)
+	}
 }
 
 type ModifyMigrationProjectOutput struct {
@@ -79,77 +118,50 @@ type ModifyMigrationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyMigrationProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyMigrationProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyMigrationProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProject != nil {
+		s.WriteStruct(schemas.ModifyMigrationProjectResponse_MigrationProject)
+		v.MigrationProject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyMigrationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyMigrationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyMigrationProjectResponse_MigrationProject:
+			v.MigrationProject = &types.MigrationProject{}
+			return v.MigrationProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyMigrationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyMigrationProject, schemas.ModifyMigrationProjectMessage, schemas.ModifyMigrationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyMigrationProject, schemas.ModifyMigrationProjectMessage, schemas.ModifyMigrationProjectResponse), output: &ModifyMigrationProjectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyMigrationProject{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyMigrationProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyMigrationProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyMigrationProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +176,8 @@ func (c *Client) addOperationModifyMigrationProjectMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyMigrationProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyMigrationProject",
-	}
 }

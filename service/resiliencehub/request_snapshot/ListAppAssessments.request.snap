@@ -1,0 +1,3 @@
+GET /list-app-assessments?appArn=__AppArn__&assessmentName=__AssessmentName__&assessmentStatus=Pending&assessmentStatus=Pending&complianceStatus=PolicyBreached&invoker=User&maxResults=1&nextToken=__NextToken__&reverseOrder=true
+
+

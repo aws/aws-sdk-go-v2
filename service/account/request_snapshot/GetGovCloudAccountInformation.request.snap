@@ -1,0 +1,5 @@
+POST /getGovCloudAccountInformation
+
+Content-Type: application/json
+
+{"StandardAccountId":"__StandardAccountId__"}

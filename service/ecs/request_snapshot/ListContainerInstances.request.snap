@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListContainerInstances
+
+{"cluster":"__Cluster__","filter":"__Filter__","maxResults":1,"nextToken":"__NextToken__","status":"ACTIVE"}

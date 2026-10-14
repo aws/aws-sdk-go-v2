@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/importjob
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","roleArn":"__RoleArn__","sources":[{"description":"__Description__","generatedFrom":"__GeneratedFrom__","name":"__Name__","referenceArn":"__ReferenceArn__","sampleId":"__SampleId__","sourceFiles":{"source1":"__Source1__","source2":"__Source2__"},"sourceFileType":"FASTQ","subjectId":"__SubjectId__","tags":{"key0":"__Value__"}},{"description":"__Description__","generatedFrom":"__GeneratedFrom__","name":"__Name__","referenceArn":"__ReferenceArn__","sampleId":"__SampleId__","sourceFiles":{"source1":"__Source1__","source2":"__Source2__"},"sourceFileType":"FASTQ","subjectId":"__SubjectId__","tags":{"key0":"__Value__"}}]}

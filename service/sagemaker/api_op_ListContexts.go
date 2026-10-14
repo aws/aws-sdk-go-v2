@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +59,39 @@ type ListContextsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContextsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContextsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContextsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextType != nil {
+		s.WriteString(schemas.ListContextsRequest_ContextType, *v.ContextType)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListContextsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListContextsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContextsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContextsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListContextsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListContextsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.ListContextsRequest_SourceUri, *v.SourceUri)
+	}
+}
+
 type ListContextsOutput struct {
 
 	// A list of contexts and their properties.
@@ -73,74 +106,48 @@ type ListContextsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContextsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContextsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContextsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContextSummaries(s, schemas.ListContextsResponse_ContextSummaries, v.ContextSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContextsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContextsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContextsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContextsResponse_ContextSummaries:
+			return deserializeContextSummaries(d, schemas.ListContextsResponse_ContextSummaries, &v.ContextSummaries)
+		case schemas.ListContextsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContextsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContexts, schemas.ListContextsRequest, schemas.ListContextsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContexts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContexts, schemas.ListContextsRequest, schemas.ListContextsResponse), output: &ListContextsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContexts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContexts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContexts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +160,6 @@ func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +260,3 @@ type ListContextsAPIClient interface {
 }
 
 var _ ListContextsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContexts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContexts",
-	}
-}

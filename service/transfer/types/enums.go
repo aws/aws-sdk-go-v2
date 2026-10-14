@@ -99,6 +99,25 @@ func (CertificateUsageType) Values() []CertificateUsageType {
 	}
 }
 
+type CommunicationMode string
+
+// Enum values for CommunicationMode
+const (
+	CommunicationModeClientTalkFirst CommunicationMode = "CLIENT_TALK_FIRST"
+	CommunicationModeServerTalkFirst CommunicationMode = "SERVER_TALK_FIRST"
+)
+
+// Values returns all known values for CommunicationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommunicationMode) Values() []CommunicationMode {
+	return []CommunicationMode{
+		"CLIENT_TALK_FIRST",
+		"SERVER_TALK_FIRST",
+	}
+}
+
 type CompressionEnum string
 
 // Enum values for CompressionEnum
@@ -595,6 +614,25 @@ func (Protocol) Values() []Protocol {
 		"FTP",
 		"FTPS",
 		"AS2",
+	}
+}
+
+type ProxyMode string
+
+// Enum values for ProxyMode
+const (
+	ProxyModeNone                    ProxyMode = "NONE"
+	ProxyModeProxyProtocolV2Enforced ProxyMode = "PROXY_PROTOCOL_V2_ENFORCED"
+)
+
+// Values returns all known values for ProxyMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProxyMode) Values() []ProxyMode {
+	return []ProxyMode{
+		"NONE",
+		"PROXY_PROTOCOL_V2_ENFORCED",
 	}
 }
 

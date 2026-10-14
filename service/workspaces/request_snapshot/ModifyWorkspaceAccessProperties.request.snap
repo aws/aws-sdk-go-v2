@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifyWorkspaceAccessProperties
+
+{"ResourceId":"__ResourceId__","WorkspaceAccessProperties":{"AccessEndpointConfig":{"AccessEndpoints":[{"AccessEndpointType":"STREAMING_WSP","VpcEndpointId":"__VpcEndpointId__"},{"AccessEndpointType":"STREAMING_WSP","VpcEndpointId":"__VpcEndpointId__"}],"InternetFallbackProtocols":["PCOIP","PCOIP"]},"DeviceTypeAndroid":"ALLOW","DeviceTypeChromeOs":"ALLOW","DeviceTypeIos":"ALLOW","DeviceTypeLinux":"ALLOW","DeviceTypeOsx":"ALLOW","DeviceTypeWeb":"ALLOW","DeviceTypeWindows":"ALLOW","DeviceTypeWorkSpacesThinClient":"ALLOW","DeviceTypeZeroClient":"ALLOW"}}

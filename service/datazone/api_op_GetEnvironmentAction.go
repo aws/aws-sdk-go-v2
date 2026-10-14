@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the specified environment action.
@@ -50,24 +45,6 @@ type GetEnvironmentActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentActionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentActionInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentActionInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetEnvironmentActionInput_identifier, *v.Identifier)
-	}
-}
-
 type GetEnvironmentActionOutput struct {
 
 	// The ID of the Amazon DataZone domain in which the environment action lives.
@@ -104,99 +81,29 @@ type GetEnvironmentActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentActionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentActionOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetEnvironmentActionOutput_description, v.Description)
-		case schemas.GetEnvironmentActionOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetEnvironmentActionOutput_domainId, v.DomainId)
-		case schemas.GetEnvironmentActionOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetEnvironmentActionOutput_environmentId, v.EnvironmentId)
-		case schemas.GetEnvironmentActionOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetEnvironmentActionOutput_id, v.Id)
-		case schemas.GetEnvironmentActionOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetEnvironmentActionOutput_name, v.Name)
-		case schemas.GetEnvironmentActionOutput_parameters:
-			return deserializeActionParameters(d, schemas.GetEnvironmentActionOutput_parameters, &v.Parameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnvironmentActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentAction, schemas.GetEnvironmentActionInput, schemas.GetEnvironmentActionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentAction{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentAction, schemas.GetEnvironmentActionInput, schemas.GetEnvironmentActionOutput), output: &GetEnvironmentActionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEnvironmentActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,22 +118,8 @@ func (c *Client) addOperationGetEnvironmentActionMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEnvironmentAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnvironmentAction",
-	}
 }

@@ -4,12 +4,7 @@ package codecatalyst
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,30 +56,6 @@ type CreateSourceRepositoryBranchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSourceRepositoryBranchInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSourceRepositoryBranchRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSourceRepositoryBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HeadCommitId != nil {
-		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_headCommitId, *v.HeadCommitId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_name, *v.Name)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_projectName, *v.ProjectName)
-	}
-	if v.SourceRepositoryName != nil {
-		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_sourceRepositoryName, *v.SourceRepositoryName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.CreateSourceRepositoryBranchRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type CreateSourceRepositoryBranchOutput struct {
 
 	// The commit ID of the tip of the newly created branch.
@@ -108,88 +79,23 @@ type CreateSourceRepositoryBranchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSourceRepositoryBranchOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSourceRepositoryBranchResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSourceRepositoryBranchResponse_headCommitId:
-			v.HeadCommitId = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_headCommitId, v.HeadCommitId)
-		case schemas.CreateSourceRepositoryBranchResponse_lastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.CreateSourceRepositoryBranchResponse_lastUpdatedTime, v.LastUpdatedTime)
-		case schemas.CreateSourceRepositoryBranchResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_name, v.Name)
-		case schemas.CreateSourceRepositoryBranchResponse_ref:
-			v.Ref = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryBranchResponse_ref, v.Ref)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSourceRepositoryBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSourceRepositoryBranch{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepositoryBranch, schemas.CreateSourceRepositoryBranchRequest, schemas.CreateSourceRepositoryBranchResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSourceRepositoryBranch{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepositoryBranch, schemas.CreateSourceRepositoryBranchRequest, schemas.CreateSourceRepositoryBranchResponse), output: &CreateSourceRepositoryBranchOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSourceRepositoryBranch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSourceRepositoryBranchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSourceRepositoryBranch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +110,8 @@ func (c *Client) addOperationCreateSourceRepositoryBranchMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSourceRepositoryBranch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSourceRepositoryBranch",
-	}
 }

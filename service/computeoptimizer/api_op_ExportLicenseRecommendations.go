@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Export optimization recommendations for your licenses.
@@ -106,6 +105,29 @@ type ExportLicenseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLicenseRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLicenseRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLicenseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ExportLicenseRecommendationsRequest_accountIds, v.AccountIds)
+	serializeExportableLicenseFields(s, schemas.ExportLicenseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ExportLicenseRecommendationsRequest_fileFormat, string(v.FileFormat))
+	}
+	serializeLicenseRecommendationFilters(s, schemas.ExportLicenseRecommendationsRequest_filters, v.Filters)
+	if v.IncludeMemberAccounts != false {
+		s.WriteBool(schemas.ExportLicenseRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
+	}
+	if v.S3DestinationConfig != nil {
+		s.WriteStruct(schemas.ExportLicenseRecommendationsRequest_s3DestinationConfig)
+		v.S3DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExportLicenseRecommendationsOutput struct {
 
 	//  The identification number of the export job.
@@ -124,65 +146,50 @@ type ExportLicenseRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLicenseRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLicenseRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLicenseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportLicenseRecommendationsResponse_jobId, *v.JobId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.ExportLicenseRecommendationsResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportLicenseRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportLicenseRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportLicenseRecommendationsResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportLicenseRecommendationsResponse_jobId, v.JobId)
+		case schemas.ExportLicenseRecommendationsResponse_s3Destination:
+			v.S3Destination = &types.S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportLicenseRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLicenseRecommendations, schemas.ExportLicenseRecommendationsRequest, schemas.ExportLicenseRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportLicenseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLicenseRecommendations, schemas.ExportLicenseRecommendationsRequest, schemas.ExportLicenseRecommendationsResponse), output: &ExportLicenseRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportLicenseRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportLicenseRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -192,12 +199,6 @@ func (c *Client) addOperationExportLicenseRecommendationsMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpExportLicenseRecommendationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportLicenseRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +213,8 @@ func (c *Client) addOperationExportLicenseRecommendationsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExportLicenseRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExportLicenseRecommendations",
-	}
 }

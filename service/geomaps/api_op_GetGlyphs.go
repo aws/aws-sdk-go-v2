@@ -4,12 +4,7 @@ package geomaps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // GetGlyphs returns the map's glyphs.
@@ -214,21 +209,6 @@ type GetGlyphsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlyphsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGlyphsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGlyphsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FontStack != nil {
-		s.WriteString(schemas.GetGlyphsRequest_FontStack, *v.FontStack)
-	}
-	if v.FontUnicodeRange != nil {
-		s.WriteString(schemas.GetGlyphsRequest_FontUnicodeRange, *v.FontUnicodeRange)
-	}
-}
-
 type GetGlyphsOutput struct {
 
 	// The Glyph, as a binary blob.
@@ -250,93 +230,29 @@ type GetGlyphsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlyphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGlyphsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGlyphsResponse_Blob:
-			return d.ReadBlob(schemas.GetGlyphsResponse_Blob, &v.Blob)
-		case schemas.GetGlyphsResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetGlyphsResponse_CacheControl, v.CacheControl)
-		case schemas.GetGlyphsResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetGlyphsResponse_ContentType, v.ContentType)
-		case schemas.GetGlyphsResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.GetGlyphsResponse_ETag, v.ETag)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlyphs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlyphs, schemas.GetGlyphsRequest, schemas.GetGlyphsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlyphs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlyphs, schemas.GetGlyphsRequest, schemas.GetGlyphsResponse), output: &GetGlyphsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGlyphs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGlyphsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGlyphs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -351,22 +267,8 @@ func (c *Client) addOperationGetGlyphsMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGlyphs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGlyphs",
-	}
 }

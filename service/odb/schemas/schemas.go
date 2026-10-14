@@ -18,6 +18,26 @@ var AssociateIamRoleToResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateIamRoleToResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var AssociateVirtualMachinesToExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseBackup",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateAutonomousDatabaseWallet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseWallet",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateCloudAutonomousVmCluster",
@@ -33,6 +53,16 @@ var CreateCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateCloudVmCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExascaleDbStorageVault",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateOdbNetwork = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateOdbNetwork",
@@ -41,6 +71,16 @@ var CreateOdbNetwork = smithy.NewSchema(smithy.ShapeID{
 var CreateOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateOdbPeeringConnection",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabaseBackup",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
@@ -58,6 +98,16 @@ var DeleteCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteCloudVmCluster",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExascaleDbStorageVault",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteOdbNetwork = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DeleteOdbNetwork",
@@ -71,6 +121,31 @@ var DeleteOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
 var DisassociateIamRoleFromResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DisassociateIamRoleFromResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var DisassociateVirtualMachinesFromExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var FailoverAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FailoverAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseBackup",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAutonomousDatabaseWalletDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseWalletDetails",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
@@ -103,6 +178,16 @@ var GetDbServer = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetDbServer",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExascaleDbStorageVault",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetOciOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "GetOciOnboardingStatus",
@@ -121,6 +206,36 @@ var GetOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
 var InitializeService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "InitializeService",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabaseBackups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseBackups",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabaseCharacterSets = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseCharacterSets",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabaseClones = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseClones",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabasePeers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabasePeers",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabases = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabases",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAutonomousDatabaseVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseVersions",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListAutonomousVirtualMachines = smithy.NewSchema(smithy.ShapeID{
@@ -158,6 +273,26 @@ var ListDbSystemShapes = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListDbSystemShapes",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListExadbVmClusters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExadbVmClusters",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListExascaleDbStorageVaults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExascaleDbStorageVaults",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListFlexComponents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListFlexComponents",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListGiMinorVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListGiMinorVersions",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListGiVersions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListGiVersions",
@@ -183,9 +318,29 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var RebootAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RebootAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
 var RebootDbNode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "RebootDbNode",
+}, smithy.ShapeTypeOperation, 0)
+
+var RestoreAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RestoreAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var ShrinkAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ShrinkAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabase",
 }, smithy.ShapeTypeOperation, 0)
 
 var StartDbNode = smithy.NewSchema(smithy.ShapeID{
@@ -193,9 +348,19 @@ var StartDbNode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartDbNode",
 }, smithy.ShapeTypeOperation, 0)
 
+var StopAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StopAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
 var StopDbNode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "StopDbNode",
+}, smithy.ShapeTypeOperation, 0)
+
+var SwitchoverAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SwitchoverAutonomousDatabase",
 }, smithy.ShapeTypeOperation, 0)
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -208,9 +373,29 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabaseBackup",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "UpdateCloudExadataInfrastructure",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExadbVmCluster",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleDbStorageVault",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateOdbNetwork = smithy.NewSchema(smithy.ShapeID{
@@ -241,13 +426,748 @@ var Access_DISABLED *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
+
+var AdminPasswordSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AdminPasswordSource",
+}, smithy.ShapeTypeEnum, 2)
+var AdminPasswordSource_CUSTOMER_MANAGED_AWS_SECRET *smithy.Schema
+
+var AdminPasswordSource_API_REQUEST_PARAMETER *smithy.Schema
+
+var AdminPasswordSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AdminPasswordSourceConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var AdminPasswordSourceConfiguration_customerManagedAwsSecret *smithy.Schema
+
+var AdminPasswordSourceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AdminPasswordSourceConfigurationInput",
+}, smithy.ShapeTypeUnion, 1)
+var AdminPasswordSourceConfigurationInput_customerManagedAwsSecret *smithy.Schema
+
+var AdminPasswordSourceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AdminPasswordSourceSummary",
+}, smithy.ShapeTypeStructure, 2)
+var AdminPasswordSourceSummary_adminPasswordSource *smithy.Schema
+
+var AdminPasswordSourceSummary_adminPasswordSourceConfiguration *smithy.Schema
 
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "Arn",
 }, smithy.ShapeTypeString, 0)
+
+var AutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabase",
+}, smithy.ShapeTypeStructure, 104)
+var AutonomousDatabase_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabase_autonomousDatabaseArn *smithy.Schema
+
+var AutonomousDatabase_ociResourceAnchorName *smithy.Schema
+
+var AutonomousDatabase_percentProgress *smithy.Schema
+
+var AutonomousDatabase_ocid *smithy.Schema
+
+var AutonomousDatabase_ociUrl *smithy.Schema
+
+var AutonomousDatabase_displayName *smithy.Schema
+
+var AutonomousDatabase_dbName *smithy.Schema
+
+var AutonomousDatabase_sourceId *smithy.Schema
+
+var AutonomousDatabase_status *smithy.Schema
+
+var AutonomousDatabase_statusReason *smithy.Schema
+
+var AutonomousDatabase_databaseType *smithy.Schema
+
+var AutonomousDatabase_dbVersion *smithy.Schema
+
+var AutonomousDatabase_dbWorkload *smithy.Schema
+
+var AutonomousDatabase_characterSet *smithy.Schema
+
+var AutonomousDatabase_ncharacterSet *smithy.Schema
+
+var AutonomousDatabase_databaseEdition *smithy.Schema
+
+var AutonomousDatabase_licenseModel *smithy.Schema
+
+var AutonomousDatabase_openMode *smithy.Schema
+
+var AutonomousDatabase_permissionLevel *smithy.Schema
+
+var AutonomousDatabase_isMtlsConnectionRequired *smithy.Schema
+
+var AutonomousDatabase_autonomousMaintenanceScheduleType *smithy.Schema
+
+var AutonomousDatabase_netServicesArchitecture *smithy.Schema
+
+var AutonomousDatabase_availableUpgradeVersions *smithy.Schema
+
+var AutonomousDatabase_byolComputeCountLimit *smithy.Schema
+
+var AutonomousDatabase_connectionStringDetails *smithy.Schema
+
+var AutonomousDatabase_serviceConsoleUrl *smithy.Schema
+
+var AutonomousDatabase_sqlWebDeveloperUrl *smithy.Schema
+
+var AutonomousDatabase_customerContacts *smithy.Schema
+
+var AutonomousDatabase_apexDetails *smithy.Schema
+
+var AutonomousDatabase_standbyDb *smithy.Schema
+
+var AutonomousDatabase_localStandbyDb *smithy.Schema
+
+var AutonomousDatabase_dataSafeStatus *smithy.Schema
+
+var AutonomousDatabase_databaseManagementStatus *smithy.Schema
+
+var AutonomousDatabase_operationsInsightsStatus *smithy.Schema
+
+var AutonomousDatabase_availabilityZone *smithy.Schema
+
+var AutonomousDatabase_availabilityZoneId *smithy.Schema
+
+var AutonomousDatabase_maintenanceTargetComponent *smithy.Schema
+
+var AutonomousDatabase_connectionUrls *smithy.Schema
+
+var AutonomousDatabase_dbToolsDetails *smithy.Schema
+
+var AutonomousDatabase_scheduledOperations *smithy.Schema
+
+var AutonomousDatabase_resourcePoolLeaderId *smithy.Schema
+
+var AutonomousDatabase_computeCount *smithy.Schema
+
+var AutonomousDatabase_computeModel *smithy.Schema
+
+var AutonomousDatabase_cpuCoreCount *smithy.Schema
+
+var AutonomousDatabase_memoryPerOracleComputeUnitInGBs *smithy.Schema
+
+var AutonomousDatabase_provisionableCpus *smithy.Schema
+
+var AutonomousDatabase_isAutoScalingEnabled *smithy.Schema
+
+var AutonomousDatabase_dataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabase_dataStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabase_usedDataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabase_usedDataStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabase_actualUsedDataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabase_allocatedStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabase_inMemoryAreaInGBs *smithy.Schema
+
+var AutonomousDatabase_isAutoScalingForStorageEnabled *smithy.Schema
+
+var AutonomousDatabase_odbNetworkId *smithy.Schema
+
+var AutonomousDatabase_odbNetworkArn *smithy.Schema
+
+var AutonomousDatabase_privateEndpoint *smithy.Schema
+
+var AutonomousDatabase_privateEndpointIp *smithy.Schema
+
+var AutonomousDatabase_privateEndpointLabel *smithy.Schema
+
+var AutonomousDatabase_allowlistedIps *smithy.Schema
+
+var AutonomousDatabase_standbyAllowlistedIps *smithy.Schema
+
+var AutonomousDatabase_standbyAllowlistedIpsSource *smithy.Schema
+
+var AutonomousDatabase_isLocalDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabase_isRemoteDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabase_localDisasterRecoveryType *smithy.Schema
+
+var AutonomousDatabase_role *smithy.Schema
+
+var AutonomousDatabase_peerDbIds *smithy.Schema
+
+var AutonomousDatabase_failedDataRecoveryInSeconds *smithy.Schema
+
+var AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
+
+var AutonomousDatabase_remoteDisasterRecoveryConfiguration *smithy.Schema
+
+var AutonomousDatabase_isRefreshableClone *smithy.Schema
+
+var AutonomousDatabase_refreshableMode *smithy.Schema
+
+var AutonomousDatabase_refreshableStatus *smithy.Schema
+
+var AutonomousDatabase_autoRefreshFrequencyInSeconds *smithy.Schema
+
+var AutonomousDatabase_autoRefreshPointLagInSeconds *smithy.Schema
+
+var AutonomousDatabase_isReconnectCloneEnabled *smithy.Schema
+
+var AutonomousDatabase_cloneTableSpaceList *smithy.Schema
+
+var AutonomousDatabase_backupRetentionPeriodInDays *smithy.Schema
+
+var AutonomousDatabase_longTermBackupSchedule *smithy.Schema
+
+var AutonomousDatabase_isBackupRetentionLocked *smithy.Schema
+
+var AutonomousDatabase_totalBackupStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabase_resourcePoolSummary *smithy.Schema
+
+var AutonomousDatabase_encryptionSummary *smithy.Schema
+
+var AutonomousDatabase_createdAt *smithy.Schema
+
+var AutonomousDatabase_timeOfLastBackup *smithy.Schema
+
+var AutonomousDatabase_timeMaintenanceBegin *smithy.Schema
+
+var AutonomousDatabase_timeMaintenanceEnd *smithy.Schema
+
+var AutonomousDatabase_timeLocalDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabase_timeDataGuardRoleChanged *smithy.Schema
+
+var AutonomousDatabase_timeOfLastSwitchover *smithy.Schema
+
+var AutonomousDatabase_timeOfLastFailover *smithy.Schema
+
+var AutonomousDatabase_timeOfLastRefresh *smithy.Schema
+
+var AutonomousDatabase_timeOfLastRefreshPoint *smithy.Schema
+
+var AutonomousDatabase_timeOfNextRefresh *smithy.Schema
+
+var AutonomousDatabase_timeOfAutoRefreshStart *smithy.Schema
+
+var AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase *smithy.Schema
+
+var AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase *smithy.Schema
+
+var AutonomousDatabase_timeDisasterRecoveryRoleChanged *smithy.Schema
+
+var AutonomousDatabase_timeUntilReconnectCloneEnabled *smithy.Schema
+
+var AutonomousDatabase_nextLongTermBackupTimeStamp *smithy.Schema
+
+var AutonomousDatabase_timeUndeleted *smithy.Schema
+
+var AutonomousDatabase_adminPasswordSourceSummary *smithy.Schema
+
+var AutonomousDatabaseApex = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseApex",
+}, smithy.ShapeTypeStructure, 2)
+var AutonomousDatabaseApex_apexVersion *smithy.Schema
+
+var AutonomousDatabaseApex_ordsVersion *smithy.Schema
+
+var AutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseBackup",
+}, smithy.ShapeTypeStructure, 15)
+var AutonomousDatabaseBackup_autonomousDatabaseBackupId *smithy.Schema
+
+var AutonomousDatabaseBackup_autonomousDatabaseBackupArn *smithy.Schema
+
+var AutonomousDatabaseBackup_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabaseBackup_ocid *smithy.Schema
+
+var AutonomousDatabaseBackup_displayName *smithy.Schema
+
+var AutonomousDatabaseBackup_dbVersion *smithy.Schema
+
+var AutonomousDatabaseBackup_status *smithy.Schema
+
+var AutonomousDatabaseBackup_statusReason *smithy.Schema
+
+var AutonomousDatabaseBackup_isAutomatic *smithy.Schema
+
+var AutonomousDatabaseBackup_retentionPeriodInDays *smithy.Schema
+
+var AutonomousDatabaseBackup_sizeInTBs *smithy.Schema
+
+var AutonomousDatabaseBackup_timeAvailableTill *smithy.Schema
+
+var AutonomousDatabaseBackup_timeStarted *smithy.Schema
+
+var AutonomousDatabaseBackup_timeEnded *smithy.Schema
+
+var AutonomousDatabaseBackup_type *smithy.Schema
+
+var _AutonomousDatabaseBackupList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseBackupList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabaseBackupList_member *smithy.Schema
+
+var AutonomousDatabaseBackupStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseBackupStatus",
+}, smithy.ShapeTypeEnum, 5)
+var AutonomousDatabaseBackupStatus_ACTIVE *smithy.Schema
+
+var AutonomousDatabaseBackupStatus_CREATING *smithy.Schema
+
+var AutonomousDatabaseBackupStatus_UPDATING *smithy.Schema
+
+var AutonomousDatabaseBackupStatus_DELETING *smithy.Schema
+
+var AutonomousDatabaseBackupStatus_FAILED *smithy.Schema
+
+var AutonomousDatabaseBackupSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseBackupSummary",
+}, smithy.ShapeTypeStructure, 15)
+var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_ocid *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_displayName *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_dbVersion *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_status *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_statusReason *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_isAutomatic *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_retentionPeriodInDays *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_sizeInTBs *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_timeAvailableTill *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_timeStarted *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_timeEnded *smithy.Schema
+
+var AutonomousDatabaseBackupSummary_type *smithy.Schema
+
+var AutonomousDatabaseBackupType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseBackupType",
+}, smithy.ShapeTypeEnum, 6)
+var AutonomousDatabaseBackupType_INCREMENTAL *smithy.Schema
+
+var AutonomousDatabaseBackupType_FULL *smithy.Schema
+
+var AutonomousDatabaseBackupType_LONGTERM *smithy.Schema
+
+var AutonomousDatabaseBackupType_VIRTUAL_FULL *smithy.Schema
+
+var AutonomousDatabaseBackupType_CUMULATIVE_INCREMENTAL *smithy.Schema
+
+var AutonomousDatabaseBackupType_ROLL_FORWARD_IMAGE_COPY *smithy.Schema
+
+var _AutonomousDatabaseCharacterSetList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseCharacterSetList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabaseCharacterSetList_member *smithy.Schema
+
+var AutonomousDatabaseCharacterSetSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseCharacterSetSummary",
+}, smithy.ShapeTypeStructure, 1)
+var AutonomousDatabaseCharacterSetSummary_characterSet *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseConnectionStrings",
+}, smithy.ShapeTypeStructure, 6)
+var AutonomousDatabaseConnectionStrings_allConnectionStrings *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings_dedicated *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings_high *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings_medium *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings_low *smithy.Schema
+
+var AutonomousDatabaseConnectionStrings_profiles *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseConnectionUrls",
+}, smithy.ShapeTypeStructure, 9)
+var AutonomousDatabaseConnectionUrls_apexUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_databaseTransformsUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_graphStudioUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_mongoDbUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_ordsUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_spatialStudioUrl *smithy.Schema
+
+var AutonomousDatabaseConnectionUrls_sqlDevWebUrl *smithy.Schema
+
+var _AutonomousDatabaseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabaseList_member *smithy.Schema
+
+var _AutonomousDatabasePeerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabasePeerList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabasePeerList_member *smithy.Schema
+
+var AutonomousDatabasePeerSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabasePeerSummary",
+}, smithy.ShapeTypeStructure, 4)
+var AutonomousDatabasePeerSummary_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabasePeerSummary_autonomousDatabaseArn *smithy.Schema
+
+var AutonomousDatabasePeerSummary_ocid *smithy.Schema
+
+var AutonomousDatabasePeerSummary_region *smithy.Schema
+
+var AutonomousDatabaseResourceStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseResourceStatus",
+}, smithy.ShapeTypeEnum, 22)
+var AutonomousDatabaseResourceStatus_AVAILABLE *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_FAILED *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_PROVISIONING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_TERMINATED *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_TERMINATING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_UPDATING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_MAINTENANCE_IN_PROGRESS *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_STOPPING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_STOPPED *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_STARTING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_UNAVAILABLE *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_RESTORE_IN_PROGRESS *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_RESTORE_FAILED *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_BACKUP_IN_PROGRESS *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_SCALE_IN_PROGRESS *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_AVAILABLE_NEEDS_ATTENTION *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_RESTARTING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_RECREATING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_ROLE_CHANGE_IN_PROGRESS *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_UPGRADING *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_INACCESSIBLE *smithy.Schema
+
+var AutonomousDatabaseResourceStatus_STANDBY *smithy.Schema
+
+var AutonomousDatabaseSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseSummary",
+}, smithy.ShapeTypeStructure, 104)
+var AutonomousDatabaseSummary_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabaseSummary_autonomousDatabaseArn *smithy.Schema
+
+var AutonomousDatabaseSummary_ociResourceAnchorName *smithy.Schema
+
+var AutonomousDatabaseSummary_percentProgress *smithy.Schema
+
+var AutonomousDatabaseSummary_ocid *smithy.Schema
+
+var AutonomousDatabaseSummary_ociUrl *smithy.Schema
+
+var AutonomousDatabaseSummary_displayName *smithy.Schema
+
+var AutonomousDatabaseSummary_dbName *smithy.Schema
+
+var AutonomousDatabaseSummary_sourceId *smithy.Schema
+
+var AutonomousDatabaseSummary_status *smithy.Schema
+
+var AutonomousDatabaseSummary_statusReason *smithy.Schema
+
+var AutonomousDatabaseSummary_databaseType *smithy.Schema
+
+var AutonomousDatabaseSummary_dbVersion *smithy.Schema
+
+var AutonomousDatabaseSummary_dbWorkload *smithy.Schema
+
+var AutonomousDatabaseSummary_characterSet *smithy.Schema
+
+var AutonomousDatabaseSummary_ncharacterSet *smithy.Schema
+
+var AutonomousDatabaseSummary_databaseEdition *smithy.Schema
+
+var AutonomousDatabaseSummary_licenseModel *smithy.Schema
+
+var AutonomousDatabaseSummary_openMode *smithy.Schema
+
+var AutonomousDatabaseSummary_permissionLevel *smithy.Schema
+
+var AutonomousDatabaseSummary_isMtlsConnectionRequired *smithy.Schema
+
+var AutonomousDatabaseSummary_autonomousMaintenanceScheduleType *smithy.Schema
+
+var AutonomousDatabaseSummary_netServicesArchitecture *smithy.Schema
+
+var AutonomousDatabaseSummary_availableUpgradeVersions *smithy.Schema
+
+var AutonomousDatabaseSummary_byolComputeCountLimit *smithy.Schema
+
+var AutonomousDatabaseSummary_connectionStringDetails *smithy.Schema
+
+var AutonomousDatabaseSummary_serviceConsoleUrl *smithy.Schema
+
+var AutonomousDatabaseSummary_sqlWebDeveloperUrl *smithy.Schema
+
+var AutonomousDatabaseSummary_customerContacts *smithy.Schema
+
+var AutonomousDatabaseSummary_apexDetails *smithy.Schema
+
+var AutonomousDatabaseSummary_standbyDb *smithy.Schema
+
+var AutonomousDatabaseSummary_localStandbyDb *smithy.Schema
+
+var AutonomousDatabaseSummary_dataSafeStatus *smithy.Schema
+
+var AutonomousDatabaseSummary_databaseManagementStatus *smithy.Schema
+
+var AutonomousDatabaseSummary_operationsInsightsStatus *smithy.Schema
+
+var AutonomousDatabaseSummary_availabilityZone *smithy.Schema
+
+var AutonomousDatabaseSummary_availabilityZoneId *smithy.Schema
+
+var AutonomousDatabaseSummary_maintenanceTargetComponent *smithy.Schema
+
+var AutonomousDatabaseSummary_connectionUrls *smithy.Schema
+
+var AutonomousDatabaseSummary_dbToolsDetails *smithy.Schema
+
+var AutonomousDatabaseSummary_scheduledOperations *smithy.Schema
+
+var AutonomousDatabaseSummary_resourcePoolLeaderId *smithy.Schema
+
+var AutonomousDatabaseSummary_computeCount *smithy.Schema
+
+var AutonomousDatabaseSummary_computeModel *smithy.Schema
+
+var AutonomousDatabaseSummary_cpuCoreCount *smithy.Schema
+
+var AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs *smithy.Schema
+
+var AutonomousDatabaseSummary_provisionableCpus *smithy.Schema
+
+var AutonomousDatabaseSummary_isAutoScalingEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_dataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabaseSummary_dataStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabaseSummary_usedDataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabaseSummary_usedDataStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabaseSummary_allocatedStorageSizeInTBs *smithy.Schema
+
+var AutonomousDatabaseSummary_inMemoryAreaInGBs *smithy.Schema
+
+var AutonomousDatabaseSummary_isAutoScalingForStorageEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_odbNetworkId *smithy.Schema
+
+var AutonomousDatabaseSummary_odbNetworkArn *smithy.Schema
+
+var AutonomousDatabaseSummary_privateEndpoint *smithy.Schema
+
+var AutonomousDatabaseSummary_privateEndpointIp *smithy.Schema
+
+var AutonomousDatabaseSummary_privateEndpointLabel *smithy.Schema
+
+var AutonomousDatabaseSummary_allowlistedIps *smithy.Schema
+
+var AutonomousDatabaseSummary_standbyAllowlistedIps *smithy.Schema
+
+var AutonomousDatabaseSummary_standbyAllowlistedIpsSource *smithy.Schema
+
+var AutonomousDatabaseSummary_isLocalDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_isRemoteDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_localDisasterRecoveryType *smithy.Schema
+
+var AutonomousDatabaseSummary_role *smithy.Schema
+
+var AutonomousDatabaseSummary_peerDbIds *smithy.Schema
+
+var AutonomousDatabaseSummary_failedDataRecoveryInSeconds *smithy.Schema
+
+var AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
+
+var AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration *smithy.Schema
+
+var AutonomousDatabaseSummary_isRefreshableClone *smithy.Schema
+
+var AutonomousDatabaseSummary_refreshableMode *smithy.Schema
+
+var AutonomousDatabaseSummary_refreshableStatus *smithy.Schema
+
+var AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds *smithy.Schema
+
+var AutonomousDatabaseSummary_autoRefreshPointLagInSeconds *smithy.Schema
+
+var AutonomousDatabaseSummary_isReconnectCloneEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_cloneTableSpaceList *smithy.Schema
+
+var AutonomousDatabaseSummary_backupRetentionPeriodInDays *smithy.Schema
+
+var AutonomousDatabaseSummary_longTermBackupSchedule *smithy.Schema
+
+var AutonomousDatabaseSummary_isBackupRetentionLocked *smithy.Schema
+
+var AutonomousDatabaseSummary_totalBackupStorageSizeInGBs *smithy.Schema
+
+var AutonomousDatabaseSummary_resourcePoolSummary *smithy.Schema
+
+var AutonomousDatabaseSummary_encryptionSummary *smithy.Schema
+
+var AutonomousDatabaseSummary_createdAt *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfLastBackup *smithy.Schema
+
+var AutonomousDatabaseSummary_timeMaintenanceBegin *smithy.Schema
+
+var AutonomousDatabaseSummary_timeMaintenanceEnd *smithy.Schema
+
+var AutonomousDatabaseSummary_timeLocalDataGuardEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_timeDataGuardRoleChanged *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfLastSwitchover *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfLastFailover *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfLastRefresh *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfLastRefreshPoint *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfNextRefresh *smithy.Schema
+
+var AutonomousDatabaseSummary_timeOfAutoRefreshStart *smithy.Schema
+
+var AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase *smithy.Schema
+
+var AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase *smithy.Schema
+
+var AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged *smithy.Schema
+
+var AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled *smithy.Schema
+
+var AutonomousDatabaseSummary_nextLongTermBackupTimeStamp *smithy.Schema
+
+var AutonomousDatabaseSummary_timeUndeleted *smithy.Schema
+
+var AutonomousDatabaseSummary_adminPasswordSourceSummary *smithy.Schema
+
+var _AutonomousDatabaseVersionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseVersionList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabaseVersionList_member *smithy.Schema
+
+var AutonomousDatabaseVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseVersionSummary",
+}, smithy.ShapeTypeStructure, 3)
+var AutonomousDatabaseVersionSummary_dbWorkload *smithy.Schema
+
+var AutonomousDatabaseVersionSummary_details *smithy.Schema
+
+var AutonomousDatabaseVersionSummary_version *smithy.Schema
+
+var AutonomousDatabaseWalletDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseWalletDetails",
+}, smithy.ShapeTypeStructure, 3)
+var AutonomousDatabaseWalletDetails_status *smithy.Schema
+
+var AutonomousDatabaseWalletDetails_timeRotated *smithy.Schema
+
+var AutonomousDatabaseWalletDetails_passwordSourceSummary *smithy.Schema
+
+var _AutonomousDatabaseWalletFile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseWalletFile",
+}, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "application/zip"},
+	&smithytraits.Sensitive{})
+
+var AutonomousDatabaseWalletStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseWalletStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AutonomousDatabaseWalletStatus_ACTIVE *smithy.Schema
+
+var AutonomousDatabaseWalletStatus_UPDATING *smithy.Schema
+
+var AutonomousMaintenanceScheduleType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousMaintenanceScheduleType",
+}, smithy.ShapeTypeEnum, 2)
+var AutonomousMaintenanceScheduleType_EARLY *smithy.Schema
+
+var AutonomousMaintenanceScheduleType_REGULAR *smithy.Schema
 
 var _AutonomousVirtualMachineList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -284,6 +1204,62 @@ var AutonomousVirtualMachineSummary_cloudAutonomousVmClusterId *smithy.Schema
 var AutonomousVirtualMachineSummary_ocid *smithy.Schema
 
 var AutonomousVirtualMachineSummary_ociResourceAnchorName *smithy.Schema
+
+var AwsEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AwsEncryptionKeyConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var AwsEncryptionKeyConfiguration_iamRoleArn *smithy.Schema
+
+var AwsEncryptionKeyConfiguration_externalIdType *smithy.Schema
+
+var AwsEncryptionKeyConfiguration_kmsKeyId *smithy.Schema
+
+var AwsEncryptionKeyConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AwsEncryptionKeyConfigurationInput",
+}, smithy.ShapeTypeStructure, 3)
+var AwsEncryptionKeyConfigurationInput_iamRoleArn *smithy.Schema
+
+var AwsEncryptionKeyConfigurationInput_externalIdType *smithy.Schema
+
+var AwsEncryptionKeyConfigurationInput_kmsKeyId *smithy.Schema
+
+var characterSetType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "characterSetType",
+}, smithy.ShapeTypeEnum, 2)
+var characterSetType_DATABASE *smithy.Schema
+
+var characterSetType_NATIONAL *smithy.Schema
+
+var CloneToRefreshableConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CloneToRefreshableConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var CloneToRefreshableConfiguration_sourceAutonomousDatabaseId *smithy.Schema
+
+var CloneToRefreshableConfiguration_refreshableMode *smithy.Schema
+
+var CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds *smithy.Schema
+
+var CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds *smithy.Schema
+
+var CloneToRefreshableConfiguration_timeOfAutoRefreshStart *smithy.Schema
+
+var CloneToRefreshableConfiguration_openMode *smithy.Schema
+
+var CloneToRefreshableConfiguration_cloneType *smithy.Schema
+
+var CloneType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CloneType",
+}, smithy.ShapeTypeEnum, 3)
+var CloneType_FULL *smithy.Schema
+
+var CloneType_METADATA *smithy.Schema
+
+var CloneType_PARTIAL *smithy.Schema
 
 var CloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -891,6 +1867,11 @@ var CloudVmClusterSummary_computeModel *smithy.Schema
 
 var CloudVmClusterSummary_iamRoles *smithy.Schema
 
+var _ClusterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ClusterName",
+}, smithy.ShapeTypeString, 0)
+
 var ComputeModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ComputeModel",
@@ -902,12 +1883,29 @@ var ComputeModel_OCPU *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
 
 var ConflictException_resourceType *smithy.Schema
+
+var CrossRegionDataGuardConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CrossRegionDataGuardConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn *smithy.Schema
+
+var CrossRegionDisasterRecoveryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CrossRegionDisasterRecoveryConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn *smithy.Schema
+
+var CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType *smithy.Schema
+
+var CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups *smithy.Schema
 
 var CrossRegionS3RestoreSourcesAccess = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -937,6 +1935,142 @@ var _CustomerContacts = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CustomerContacts_member *smithy.Schema
 
+var CustomerManagedAwsSecretConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CustomerManagedAwsSecretConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var CustomerManagedAwsSecretConfiguration_iamRoleArn *smithy.Schema
+
+var CustomerManagedAwsSecretConfiguration_secretId *smithy.Schema
+
+var CustomerManagedAwsSecretConfiguration_externalIdType *smithy.Schema
+
+var CustomerManagedAwsSecretConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CustomerManagedAwsSecretConfigurationInput",
+}, smithy.ShapeTypeStructure, 3)
+var CustomerManagedAwsSecretConfigurationInput_secretId *smithy.Schema
+
+var CustomerManagedAwsSecretConfigurationInput_iamRoleArn *smithy.Schema
+
+var CustomerManagedAwsSecretConfigurationInput_externalIdType *smithy.Schema
+
+var DatabaseCloneConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseCloneConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var DatabaseCloneConfiguration_sourceAutonomousDatabaseId *smithy.Schema
+
+var DatabaseCloneConfiguration_cloneType *smithy.Schema
+
+var _DatabaseConnectionStringMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseConnectionStringMap",
+}, smithy.ShapeTypeMap, 2)
+var _DatabaseConnectionStringMap_key *smithy.Schema
+
+var _DatabaseConnectionStringMap_value *smithy.Schema
+
+var DatabaseConnectionStringProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseConnectionStringProfile",
+}, smithy.ShapeTypeStructure, 9)
+var DatabaseConnectionStringProfile_consumerGroup *smithy.Schema
+
+var DatabaseConnectionStringProfile_displayName *smithy.Schema
+
+var DatabaseConnectionStringProfile_hostFormat *smithy.Schema
+
+var DatabaseConnectionStringProfile_isRegional *smithy.Schema
+
+var DatabaseConnectionStringProfile_protocol *smithy.Schema
+
+var DatabaseConnectionStringProfile_sessionMode *smithy.Schema
+
+var DatabaseConnectionStringProfile_syntaxFormat *smithy.Schema
+
+var DatabaseConnectionStringProfile_tlsAuthentication *smithy.Schema
+
+var DatabaseConnectionStringProfile_value *smithy.Schema
+
+var _DatabaseConnectionStringProfileList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseConnectionStringProfileList",
+}, smithy.ShapeTypeList, 1)
+var _DatabaseConnectionStringProfileList_member *smithy.Schema
+
+var DatabaseEdition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseEdition",
+}, smithy.ShapeTypeEnum, 2)
+var DatabaseEdition_STANDARD_EDITION *smithy.Schema
+
+var DatabaseEdition_ENTERPRISE_EDITION *smithy.Schema
+
+var DatabaseManagementStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseManagementStatus",
+}, smithy.ShapeTypeEnum, 6)
+var DatabaseManagementStatus_ENABLING *smithy.Schema
+
+var DatabaseManagementStatus_ENABLED *smithy.Schema
+
+var DatabaseManagementStatus_DISABLING *smithy.Schema
+
+var DatabaseManagementStatus_NOT_ENABLED *smithy.Schema
+
+var DatabaseManagementStatus_FAILED_ENABLING *smithy.Schema
+
+var DatabaseManagementStatus_FAILED_DISABLING *smithy.Schema
+
+var DatabaseStandbySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseStandbySummary",
+}, smithy.ShapeTypeStructure, 9)
+var DatabaseStandbySummary_availabilityDomain *smithy.Schema
+
+var DatabaseStandbySummary_lagTimeInSeconds *smithy.Schema
+
+var DatabaseStandbySummary_status *smithy.Schema
+
+var DatabaseStandbySummary_statusReason *smithy.Schema
+
+var DatabaseStandbySummary_maintenanceTargetComponent *smithy.Schema
+
+var DatabaseStandbySummary_timeDataGuardRoleChanged *smithy.Schema
+
+var DatabaseStandbySummary_timeDisasterRecoveryRoleChanged *smithy.Schema
+
+var DatabaseStandbySummary_timeMaintenanceBegin *smithy.Schema
+
+var DatabaseStandbySummary_timeMaintenanceEnd *smithy.Schema
+
+var DatabaseTool = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseTool",
+}, smithy.ShapeTypeStructure, 4)
+var DatabaseTool_isEnabled *smithy.Schema
+
+var DatabaseTool_name *smithy.Schema
+
+var DatabaseTool_computeCount *smithy.Schema
+
+var DatabaseTool_maxIdleTimeInMinutes *smithy.Schema
+
+var _DatabaseToolList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseToolList",
+}, smithy.ShapeTypeList, 1)
+var _DatabaseToolList_member *smithy.Schema
+
+var DatabaseType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DatabaseType",
+}, smithy.ShapeTypeEnum, 2)
+var DatabaseType_REGULAR *smithy.Schema
+
+var DatabaseType_CLONE *smithy.Schema
+
 var DataCollectionOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DataCollectionOptions",
@@ -946,6 +2080,34 @@ var DataCollectionOptions_isDiagnosticsEventsEnabled *smithy.Schema
 var DataCollectionOptions_isHealthMonitoringEnabled *smithy.Schema
 
 var DataCollectionOptions_isIncidentLogsEnabled *smithy.Schema
+
+var DataGuardRole = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DataGuardRole",
+}, smithy.ShapeTypeEnum, 5)
+var DataGuardRole_PRIMARY *smithy.Schema
+
+var DataGuardRole_STANDBY *smithy.Schema
+
+var DataGuardRole_DISABLED_STANDBY *smithy.Schema
+
+var DataGuardRole_BACKUP_COPY *smithy.Schema
+
+var DataGuardRole_SNAPSHOT_STANDBY *smithy.Schema
+
+var DataSafeStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DataSafeStatus",
+}, smithy.ShapeTypeEnum, 5)
+var DataSafeStatus_REGISTERING *smithy.Schema
+
+var DataSafeStatus_REGISTERED *smithy.Schema
+
+var DataSafeStatus_DEREGISTERING *smithy.Schema
+
+var DataSafeStatus_NOT_REGISTERED *smithy.Schema
+
+var DataSafeStatus_FAILED *smithy.Schema
 
 var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1270,7 +2432,7 @@ var _DbSystemShapeList_member *smithy.Schema
 var DbSystemShapeSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DbSystemShapeSummary",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var DbSystemShapeSummary_availableCoreCount *smithy.Schema
 
 var DbSystemShapeSummary_availableCoreCountPerNode *smithy.Schema
@@ -1313,11 +2475,45 @@ var DbSystemShapeSummary_shapeFamily *smithy.Schema
 
 var DbSystemShapeSummary_shapeType *smithy.Schema
 
+var DbSystemShapeSummary_shapeAttributes *smithy.Schema
+
 var DbSystemShapeSummary_name *smithy.Schema
 
 var DbSystemShapeSummary_computeModel *smithy.Schema
 
 var DbSystemShapeSummary_areServerTypesSupported *smithy.Schema
+
+var DbWorkload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DbWorkload",
+}, smithy.ShapeTypeEnum, 4)
+var DbWorkload_OLTP *smithy.Schema
+
+var DbWorkload_AJD *smithy.Schema
+
+var DbWorkload_APEX *smithy.Schema
+
+var DbWorkload_LH *smithy.Schema
+
+var DisasterRecoveryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisasterRecoveryConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var DisasterRecoveryConfiguration_disasterRecoveryType *smithy.Schema
+
+var DisasterRecoveryConfiguration_isReplicateAutomaticBackups *smithy.Schema
+
+var DisasterRecoveryConfiguration_isSnapshotStandby *smithy.Schema
+
+var DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill *smithy.Schema
+
+var DisasterRecoveryType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisasterRecoveryType",
+}, smithy.ShapeTypeEnum, 2)
+var DisasterRecoveryType_ADG *smithy.Schema
+
+var DisasterRecoveryType_BACKUP_BASED *smithy.Schema
 
 var DiskRedundancy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1326,6 +2522,50 @@ var DiskRedundancy = smithy.NewSchema(smithy.ShapeID{
 var DiskRedundancy_HIGH *smithy.Schema
 
 var DiskRedundancy_NORMAL *smithy.Schema
+
+var EncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "EncryptionKeyConfiguration",
+}, smithy.ShapeTypeUnion, 3)
+var EncryptionKeyConfiguration_awsEncryptionKey *smithy.Schema
+
+var EncryptionKeyConfiguration_ociEncryptionKey *smithy.Schema
+
+var EncryptionKeyConfiguration_okvEncryptionKey *smithy.Schema
+
+var EncryptionKeyConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "EncryptionKeyConfigurationInput",
+}, smithy.ShapeTypeUnion, 1)
+var EncryptionKeyConfigurationInput_awsEncryptionKey *smithy.Schema
+
+var EncryptionKeyProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "EncryptionKeyProvider",
+}, smithy.ShapeTypeEnum, 4)
+var EncryptionKeyProvider_ORACLE_MANAGED *smithy.Schema
+
+var EncryptionKeyProvider_AWS_KMS *smithy.Schema
+
+var EncryptionKeyProvider_OKV *smithy.Schema
+
+var EncryptionKeyProvider_OCI *smithy.Schema
+
+var EncryptionKeyProviderInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "EncryptionKeyProviderInput",
+}, smithy.ShapeTypeEnum, 2)
+var EncryptionKeyProviderInput_ORACLE_MANAGED *smithy.Schema
+
+var EncryptionKeyProviderInput_AWS_KMS *smithy.Schema
+
+var EncryptionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "EncryptionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var EncryptionSummary_encryptionKeyProvider *smithy.Schema
+
+var EncryptionSummary_encryptionKeyConfiguration *smithy.Schema
 
 var ExadataIormConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1339,10 +2579,372 @@ var ExadataIormConfig_lifecycleState *smithy.Schema
 
 var ExadataIormConfig_objective *smithy.Schema
 
+var ExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExadbVmCluster",
+}, smithy.ShapeTypeStructure, 44)
+var ExadbVmCluster_exadbVmClusterId *smithy.Schema
+
+var ExadbVmCluster_clusterName *smithy.Schema
+
+var ExadbVmCluster_createdAt *smithy.Schema
+
+var ExadbVmCluster_dataCollectionOptions *smithy.Schema
+
+var ExadbVmCluster_displayName *smithy.Schema
+
+var ExadbVmCluster_domain *smithy.Schema
+
+var ExadbVmCluster_enabledEcpuCount *smithy.Schema
+
+var ExadbVmCluster_exadbVmClusterArn *smithy.Schema
+
+var ExadbVmCluster_exascaleDbStorageVaultArn *smithy.Schema
+
+var ExadbVmCluster_exascaleDbStorageVaultId *smithy.Schema
+
+var ExadbVmCluster_giVersion *smithy.Schema
+
+var ExadbVmCluster_gridImageId *smithy.Schema
+
+var ExadbVmCluster_gridImageType *smithy.Schema
+
+var ExadbVmCluster_hostname *smithy.Schema
+
+var ExadbVmCluster_iamRoles *smithy.Schema
+
+var ExadbVmCluster_iormConfigCache *smithy.Schema
+
+var ExadbVmCluster_lastUpdateHistoryEntryId *smithy.Schema
+
+var ExadbVmCluster_licenseModel *smithy.Schema
+
+var ExadbVmCluster_listenerPort *smithy.Schema
+
+var ExadbVmCluster_memorySizeInGBs *smithy.Schema
+
+var ExadbVmCluster_nodeCount *smithy.Schema
+
+var ExadbVmCluster_ocid *smithy.Schema
+
+var ExadbVmCluster_ociResourceAnchorName *smithy.Schema
+
+var ExadbVmCluster_ociUrl *smithy.Schema
+
+var ExadbVmCluster_odbNetworkArn *smithy.Schema
+
+var ExadbVmCluster_odbNetworkId *smithy.Schema
+
+var ExadbVmCluster_percentProgress *smithy.Schema
+
+var ExadbVmCluster_scanDnsName *smithy.Schema
+
+var ExadbVmCluster_scanDnsRecordId *smithy.Schema
+
+var ExadbVmCluster_scanIpIds *smithy.Schema
+
+var ExadbVmCluster_scanListenerPortTcp *smithy.Schema
+
+var ExadbVmCluster_scanListenerPortTcpSsl *smithy.Schema
+
+var ExadbVmCluster_shape *smithy.Schema
+
+var ExadbVmCluster_shapeAttribute *smithy.Schema
+
+var ExadbVmCluster_snapshotFileSystemStorage *smithy.Schema
+
+var ExadbVmCluster_sshPublicKeys *smithy.Schema
+
+var ExadbVmCluster_status *smithy.Schema
+
+var ExadbVmCluster_statusReason *smithy.Schema
+
+var ExadbVmCluster_systemVersion *smithy.Schema
+
+var ExadbVmCluster_timeZone *smithy.Schema
+
+var ExadbVmCluster_totalEcpuCount *smithy.Schema
+
+var ExadbVmCluster_totalFileSystemStorage *smithy.Schema
+
+var ExadbVmCluster_vipIds *smithy.Schema
+
+var ExadbVmCluster_vmFileSystemStorage *smithy.Schema
+
+var _ExadbVmClusterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExadbVmClusterList",
+}, smithy.ShapeTypeList, 1)
+var _ExadbVmClusterList_member *smithy.Schema
+
+var ExadbVmClusterStorageDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExadbVmClusterStorageDetails",
+}, smithy.ShapeTypeStructure, 1)
+var ExadbVmClusterStorageDetails_totalSizeInGBs *smithy.Schema
+
+var ExadbVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExadbVmClusterSummary",
+}, smithy.ShapeTypeStructure, 44)
+var ExadbVmClusterSummary_exadbVmClusterId *smithy.Schema
+
+var ExadbVmClusterSummary_clusterName *smithy.Schema
+
+var ExadbVmClusterSummary_createdAt *smithy.Schema
+
+var ExadbVmClusterSummary_dataCollectionOptions *smithy.Schema
+
+var ExadbVmClusterSummary_displayName *smithy.Schema
+
+var ExadbVmClusterSummary_domain *smithy.Schema
+
+var ExadbVmClusterSummary_enabledEcpuCount *smithy.Schema
+
+var ExadbVmClusterSummary_exadbVmClusterArn *smithy.Schema
+
+var ExadbVmClusterSummary_exascaleDbStorageVaultArn *smithy.Schema
+
+var ExadbVmClusterSummary_exascaleDbStorageVaultId *smithy.Schema
+
+var ExadbVmClusterSummary_giVersion *smithy.Schema
+
+var ExadbVmClusterSummary_gridImageId *smithy.Schema
+
+var ExadbVmClusterSummary_gridImageType *smithy.Schema
+
+var ExadbVmClusterSummary_hostname *smithy.Schema
+
+var ExadbVmClusterSummary_iamRoles *smithy.Schema
+
+var ExadbVmClusterSummary_iormConfigCache *smithy.Schema
+
+var ExadbVmClusterSummary_lastUpdateHistoryEntryId *smithy.Schema
+
+var ExadbVmClusterSummary_licenseModel *smithy.Schema
+
+var ExadbVmClusterSummary_listenerPort *smithy.Schema
+
+var ExadbVmClusterSummary_memorySizeInGBs *smithy.Schema
+
+var ExadbVmClusterSummary_nodeCount *smithy.Schema
+
+var ExadbVmClusterSummary_ocid *smithy.Schema
+
+var ExadbVmClusterSummary_ociResourceAnchorName *smithy.Schema
+
+var ExadbVmClusterSummary_ociUrl *smithy.Schema
+
+var ExadbVmClusterSummary_odbNetworkArn *smithy.Schema
+
+var ExadbVmClusterSummary_odbNetworkId *smithy.Schema
+
+var ExadbVmClusterSummary_percentProgress *smithy.Schema
+
+var ExadbVmClusterSummary_scanDnsName *smithy.Schema
+
+var ExadbVmClusterSummary_scanDnsRecordId *smithy.Schema
+
+var ExadbVmClusterSummary_scanIpIds *smithy.Schema
+
+var ExadbVmClusterSummary_scanListenerPortTcp *smithy.Schema
+
+var ExadbVmClusterSummary_scanListenerPortTcpSsl *smithy.Schema
+
+var ExadbVmClusterSummary_shape *smithy.Schema
+
+var ExadbVmClusterSummary_shapeAttribute *smithy.Schema
+
+var ExadbVmClusterSummary_snapshotFileSystemStorage *smithy.Schema
+
+var ExadbVmClusterSummary_sshPublicKeys *smithy.Schema
+
+var ExadbVmClusterSummary_status *smithy.Schema
+
+var ExadbVmClusterSummary_statusReason *smithy.Schema
+
+var ExadbVmClusterSummary_systemVersion *smithy.Schema
+
+var ExadbVmClusterSummary_timeZone *smithy.Schema
+
+var ExadbVmClusterSummary_totalEcpuCount *smithy.Schema
+
+var ExadbVmClusterSummary_totalFileSystemStorage *smithy.Schema
+
+var ExadbVmClusterSummary_vipIds *smithy.Schema
+
+var ExadbVmClusterSummary_vmFileSystemStorage *smithy.Schema
+
+var ExascaleDbStorageDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleDbStorageDetails",
+}, smithy.ShapeTypeStructure, 2)
+var ExascaleDbStorageDetails_availableSizeInGBs *smithy.Schema
+
+var ExascaleDbStorageDetails_totalSizeInGBs *smithy.Schema
+
+var ExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleDbStorageVault",
+}, smithy.ShapeTypeStructure, 22)
+var ExascaleDbStorageVault_exascaleDbStorageVaultId *smithy.Schema
+
+var ExascaleDbStorageVault_additionalFlashCacheInPercent *smithy.Schema
+
+var ExascaleDbStorageVault_attachedShapeAttributes *smithy.Schema
+
+var ExascaleDbStorageVault_autoscaleLimitInGBs *smithy.Schema
+
+var ExascaleDbStorageVault_availabilityZone *smithy.Schema
+
+var ExascaleDbStorageVault_availabilityZoneId *smithy.Schema
+
+var ExascaleDbStorageVault_createdAt *smithy.Schema
+
+var ExascaleDbStorageVault_description *smithy.Schema
+
+var ExascaleDbStorageVault_displayName *smithy.Schema
+
+var ExascaleDbStorageVault_vmClusterArns *smithy.Schema
+
+var ExascaleDbStorageVault_vmClusterCount *smithy.Schema
+
+var ExascaleDbStorageVault_vmClusterIds *smithy.Schema
+
+var ExascaleDbStorageVault_exascaleDbStorageVaultArn *smithy.Schema
+
+var ExascaleDbStorageVault_highCapacityDatabaseStorage *smithy.Schema
+
+var ExascaleDbStorageVault_isAutoscaleEnabled *smithy.Schema
+
+var ExascaleDbStorageVault_ocid *smithy.Schema
+
+var ExascaleDbStorageVault_ociResourceAnchorName *smithy.Schema
+
+var ExascaleDbStorageVault_ociUrl *smithy.Schema
+
+var ExascaleDbStorageVault_percentProgress *smithy.Schema
+
+var ExascaleDbStorageVault_status *smithy.Schema
+
+var ExascaleDbStorageVault_statusReason *smithy.Schema
+
+var ExascaleDbStorageVault_timeZone *smithy.Schema
+
+var _ExascaleDbStorageVaultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleDbStorageVaultList",
+}, smithy.ShapeTypeList, 1)
+var _ExascaleDbStorageVaultList_member *smithy.Schema
+
+var ExascaleDbStorageVaultSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExascaleDbStorageVaultSummary",
+}, smithy.ShapeTypeStructure, 22)
+var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_attachedShapeAttributes *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_autoscaleLimitInGBs *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_availabilityZone *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_availabilityZoneId *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_createdAt *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_description *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_displayName *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_vmClusterArns *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_vmClusterCount *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_vmClusterIds *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_isAutoscaleEnabled *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_ocid *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_ociResourceAnchorName *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_ociUrl *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_percentProgress *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_status *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_statusReason *smithy.Schema
+
+var ExascaleDbStorageVaultSummary_timeZone *smithy.Schema
+
+var ExternalIdType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ExternalIdType",
+}, smithy.ShapeTypeEnum, 3)
+var ExternalIdType_DATABASE_OCID *smithy.Schema
+
+var ExternalIdType_COMPARTMENT_OCID *smithy.Schema
+
+var ExternalIdType_TENANT_OCID *smithy.Schema
+
+var _FlexComponentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FlexComponentList",
+}, smithy.ShapeTypeList, 1)
+var _FlexComponentList_member *smithy.Schema
+
+var FlexComponentSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FlexComponentSummary",
+}, smithy.ShapeTypeStructure, 11)
+var FlexComponentSummary_availableCoreCount *smithy.Schema
+
+var FlexComponentSummary_availableDbStorageInGBs *smithy.Schema
+
+var FlexComponentSummary_availableLocalStorageInGBs *smithy.Schema
+
+var FlexComponentSummary_availableMemoryInGBs *smithy.Schema
+
+var FlexComponentSummary_computeModel *smithy.Schema
+
+var FlexComponentSummary_descriptionSummary *smithy.Schema
+
+var FlexComponentSummary_hardwareType *smithy.Schema
+
+var FlexComponentSummary_minimumCoreCount *smithy.Schema
+
+var FlexComponentSummary_name *smithy.Schema
+
+var FlexComponentSummary_runtimeMinimumCoreCount *smithy.Schema
+
+var FlexComponentSummary_shape *smithy.Schema
+
 var _GeneralInputString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "GeneralInputString",
 }, smithy.ShapeTypeString, 0)
+
+var _GiMinorVersionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GiMinorVersionList",
+}, smithy.ShapeTypeList, 1)
+var _GiMinorVersionList_member *smithy.Schema
+
+var GiMinorVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GiMinorVersionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var GiMinorVersionSummary_version *smithy.Schema
+
+var GiMinorVersionSummary_gridImageId *smithy.Schema
 
 var _GiVersionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1355,6 +2957,27 @@ var GiVersionSummary = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GiVersionSummary",
 }, smithy.ShapeTypeStructure, 1)
 var GiVersionSummary_version *smithy.Schema
+
+var GridImageType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GridImageType",
+}, smithy.ShapeTypeEnum, 2)
+var GridImageType_RELEASE_UPDATE *smithy.Schema
+
+var GridImageType_CUSTOM_IMAGE *smithy.Schema
+
+var HardwareType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "HardwareType",
+}, smithy.ShapeTypeEnum, 2)
+var HardwareType_COMPUTE *smithy.Schema
+
+var HardwareType_CELL *smithy.Schema
+
+var _Hostname = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "Hostname",
+}, smithy.ShapeTypeString, 0)
 
 var _HoursOfDay = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1398,10 +3021,17 @@ var IamRoleStatus_PARTIALLY_CONNECTED *smithy.Schema
 
 var IamRoleStatus_UNKNOWN *smithy.Schema
 
+var _IntegerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "IntegerList",
+}, smithy.ShapeTypeList, 1)
+var _IntegerList_member *smithy.Schema
+
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_retryAfterSeconds *smithy.Schema
@@ -1432,6 +3062,11 @@ var KmsAccess_domainName *smithy.Schema
 
 var KmsAccess_kmsPolicyDocument *smithy.Schema
 
+var _KmsKeyIdOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "KmsKeyIdOrArn",
+}, smithy.ShapeTypeString, 0)
+
 var LicenseModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "LicenseModel",
@@ -1439,6 +3074,18 @@ var LicenseModel = smithy.NewSchema(smithy.ShapeID{
 var LicenseModel_BRING_YOUR_OWN_LICENSE *smithy.Schema
 
 var LicenseModel_LICENSE_INCLUDED *smithy.Schema
+
+var LongTermBackupSchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "LongTermBackupSchedule",
+}, smithy.ShapeTypeStructure, 4)
+var LongTermBackupSchedule_isDisabled *smithy.Schema
+
+var LongTermBackupSchedule_repeatCadence *smithy.Schema
+
+var LongTermBackupSchedule_retentionPeriodInDays *smithy.Schema
+
+var LongTermBackupSchedule_timeOfBackup *smithy.Schema
 
 var MaintenanceWindow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1548,6 +3195,14 @@ var _Months = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Months_member *smithy.Schema
 
+var NetServicesArchitecture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "NetServicesArchitecture",
+}, smithy.ShapeTypeEnum, 2)
+var NetServicesArchitecture_DEDICATED *smithy.Schema
+
+var NetServicesArchitecture_SHARED *smithy.Schema
+
 var Objective = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "Objective",
@@ -1562,6 +3217,14 @@ var Objective_HIGH_THROUGHPUT *smithy.Schema
 
 var Objective_LOW_LATENCY *smithy.Schema
 
+var OciAwsIntegration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OciAwsIntegration",
+}, smithy.ShapeTypeEnum, 2)
+var OciAwsIntegration_KmsTde *smithy.Schema
+
+var OciAwsIntegration_SecretsManager *smithy.Schema
+
 var OciDnsForwardingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "OciDnsForwardingConfig",
@@ -1575,6 +3238,46 @@ var _OciDnsForwardingConfigList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OciDnsForwardingConfigList",
 }, smithy.ShapeTypeList, 1)
 var _OciDnsForwardingConfigList_member *smithy.Schema
+
+var OciEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OciEncryptionKeyConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var OciEncryptionKeyConfiguration_kmsKeyId *smithy.Schema
+
+var OciEncryptionKeyConfiguration_vaultId *smithy.Schema
+
+var OciIamRole = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OciIamRole",
+}, smithy.ShapeTypeStructure, 4)
+var OciIamRole_iamRoleArn *smithy.Schema
+
+var OciIamRole_awsIntegration *smithy.Schema
+
+var OciIamRole_status *smithy.Schema
+
+var OciIamRole_statusReason *smithy.Schema
+
+var _OciIamRoleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OciIamRoleList",
+}, smithy.ShapeTypeList, 1)
+var _OciIamRoleList_member *smithy.Schema
+
+var OciIamRoleStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OciIamRoleStatus",
+}, smithy.ShapeTypeEnum, 5)
+var OciIamRoleStatus_PROVISIONING *smithy.Schema
+
+var OciIamRoleStatus_AVAILABLE *smithy.Schema
+
+var OciIamRoleStatus_PROVISION_FAILED *smithy.Schema
+
+var OciIamRoleStatus_TERMINATING *smithy.Schema
+
+var OciIamRoleStatus_TERMINATE_FAILED *smithy.Schema
 
 var OciIdentityDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1780,6 +3483,44 @@ var OdbPeeringConnectionSummary_createdAt *smithy.Schema
 
 var OdbPeeringConnectionSummary_percentProgress *smithy.Schema
 
+var OkvEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OkvEncryptionKeyConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var OkvEncryptionKeyConfiguration_certificateDirectoryName *smithy.Schema
+
+var OkvEncryptionKeyConfiguration_certificateId *smithy.Schema
+
+var OkvEncryptionKeyConfiguration_directoryName *smithy.Schema
+
+var OkvEncryptionKeyConfiguration_okvKmsKey *smithy.Schema
+
+var OkvEncryptionKeyConfiguration_okvUri *smithy.Schema
+
+var OpenMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OpenMode",
+}, smithy.ShapeTypeEnum, 2)
+var OpenMode_READ_ONLY *smithy.Schema
+
+var OpenMode_READ_WRITE *smithy.Schema
+
+var OperationsInsightsStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "OperationsInsightsStatus",
+}, smithy.ShapeTypeEnum, 6)
+var OperationsInsightsStatus_ENABLING *smithy.Schema
+
+var OperationsInsightsStatus_ENABLED *smithy.Schema
+
+var OperationsInsightsStatus_DISABLING *smithy.Schema
+
+var OperationsInsightsStatus_NOT_ENABLED *smithy.Schema
+
+var OperationsInsightsStatus_FAILED_ENABLING *smithy.Schema
+
+var OperationsInsightsStatus_FAILED_DISABLING *smithy.Schema
+
 var PatchingModeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "PatchingModeType",
@@ -1810,6 +3551,28 @@ var _PeerNetworkRouteTableIdList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PeerNetworkRouteTableIdList_member *smithy.Schema
 
+var PermissionLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "PermissionLevel",
+}, smithy.ShapeTypeEnum, 2)
+var PermissionLevel_RESTRICTED *smithy.Schema
+
+var PermissionLevel_UNRESTRICTED *smithy.Schema
+
+var PointInTimeRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "PointInTimeRestoreConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId *smithy.Schema
+
+var PointInTimeRestoreConfiguration_cloneType *smithy.Schema
+
+var PointInTimeRestoreConfiguration_timestamp *smithy.Schema
+
+var PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp *smithy.Schema
+
+var PointInTimeRestoreConfiguration_cloneTableSpaceList *smithy.Schema
+
 var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "PolicyDocument",
@@ -1823,6 +3586,34 @@ var PreferenceType_NO_PREFERENCE *smithy.Schema
 
 var PreferenceType_CUSTOM_PREFERENCE *smithy.Schema
 
+var RefreshableMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RefreshableMode",
+}, smithy.ShapeTypeEnum, 2)
+var RefreshableMode_AUTOMATIC *smithy.Schema
+
+var RefreshableMode_MANUAL *smithy.Schema
+
+var RefreshableStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RefreshableStatus",
+}, smithy.ShapeTypeEnum, 2)
+var RefreshableStatus_REFRESHING *smithy.Schema
+
+var RefreshableStatus_NOT_REFRESHING *smithy.Schema
+
+var RepeatCadence = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RepeatCadence",
+}, smithy.ShapeTypeEnum, 4)
+var RepeatCadence_ONE_TIME *smithy.Schema
+
+var RepeatCadence_WEEKLY *smithy.Schema
+
+var RepeatCadence_MONTHLY *smithy.Schema
+
+var RepeatCadence_YEARLY *smithy.Schema
+
 var _RequestTagMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "RequestTagMap",
@@ -1835,6 +3626,12 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ResourceArn",
 }, smithy.ShapeTypeString, 0)
+
+var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ResourceArnList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceArnList_member *smithy.Schema
 
 var _ResourceDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1860,12 +3657,29 @@ var _ResourceIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
 
 var ResourceNotFoundException_resourceType *smithy.Schema
+
+var ResourcePoolSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ResourcePoolSummary",
+}, smithy.ShapeTypeStructure, 6)
+var ResourcePoolSummary_isDisabled *smithy.Schema
+
+var ResourcePoolSummary_poolSize *smithy.Schema
+
+var ResourcePoolSummary_poolStorageSizeInTBs *smithy.Schema
+
+var ResourcePoolSummary_availableStorageCapacityInTBs *smithy.Schema
+
+var ResourcePoolSummary_totalComputeCapacity *smithy.Schema
+
+var ResourcePoolSummary_availableComputeCapacity *smithy.Schema
 
 var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1893,6 +3707,16 @@ var _ResponseTagMap_key *smithy.Schema
 
 var _ResponseTagMap_value *smithy.Schema
 
+var RestoreFromBackupConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RestoreFromBackupConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var RestoreFromBackupConfiguration_autonomousDatabaseBackupId *smithy.Schema
+
+var RestoreFromBackupConfiguration_cloneType *smithy.Schema
+
+var RestoreFromBackupConfiguration_cloneTableSpaceList *smithy.Schema
+
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "RoleArn",
@@ -1909,6 +3733,27 @@ var S3Access_ipv4Addresses *smithy.Schema
 var S3Access_domainName *smithy.Schema
 
 var S3Access_s3PolicyDocument *smithy.Schema
+
+var ScheduledOperationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ScheduledOperationDetails",
+}, smithy.ShapeTypeStructure, 3)
+var ScheduledOperationDetails_dayOfWeek *smithy.Schema
+
+var ScheduledOperationDetails_scheduledStartTime *smithy.Schema
+
+var ScheduledOperationDetails_scheduledStopTime *smithy.Schema
+
+var _ScheduledOperationDetailsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ScheduledOperationDetailsList",
+}, smithy.ShapeTypeList, 1)
+var _ScheduledOperationDetailsList_member *smithy.Schema
+
+var _SecretIdOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SecretIdOrArn",
+}, smithy.ShapeTypeString, 0)
 
 var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1932,7 +3777,8 @@ var ServiceNetworkEndpoint_vpcEndpointType *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceQuotaExceededException_resourceId *smithy.Schema
@@ -1940,6 +3786,20 @@ var ServiceQuotaExceededException_resourceId *smithy.Schema
 var ServiceQuotaExceededException_resourceType *smithy.Schema
 
 var ServiceQuotaExceededException_quotaCode *smithy.Schema
+
+var ShapeAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ShapeAttribute",
+}, smithy.ShapeTypeEnum, 2)
+var ShapeAttribute_SMART_STORAGE *smithy.Schema
+
+var ShapeAttribute_BLOCK_STORAGE *smithy.Schema
+
+var _ShapeAttributeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ShapeAttributeList",
+}, smithy.ShapeTypeList, 1)
+var _ShapeAttributeList_member *smithy.Schema
 
 var ShapeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1952,6 +3812,50 @@ var ShapeType_INTEL *smithy.Schema
 var ShapeType_INTEL_FLEX_X9 *smithy.Schema
 
 var ShapeType_AMPERE_FLEX_A1 *smithy.Schema
+
+var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SourceConfiguration",
+}, smithy.ShapeTypeUnion, 6)
+var SourceConfiguration_databaseClone *smithy.Schema
+
+var SourceConfiguration_restoreFromBackup *smithy.Schema
+
+var SourceConfiguration_pointInTimeRestore *smithy.Schema
+
+var SourceConfiguration_crossRegionDataGuard *smithy.Schema
+
+var SourceConfiguration_crossRegionDisasterRecovery *smithy.Schema
+
+var SourceConfiguration_cloneToRefreshable *smithy.Schema
+
+var SourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SourceType",
+}, smithy.ShapeTypeEnum, 7)
+var SourceType_NONE *smithy.Schema
+
+var SourceType_DATABASE *smithy.Schema
+
+var SourceType_BACKUP_FROM_ID *smithy.Schema
+
+var SourceType_BACKUP_FROM_TIMESTAMP *smithy.Schema
+
+var SourceType_CROSS_REGION_DATAGUARD *smithy.Schema
+
+var SourceType_CROSS_REGION_DISASTER_RECOVERY *smithy.Schema
+
+var SourceType_CLONE_TO_REFRESHABLE *smithy.Schema
+
+var StandbyAllowlistedIpsSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StandbyAllowlistedIpsSource",
+}, smithy.ShapeTypeEnum, 3)
+var StandbyAllowlistedIpsSource_PRIMARY *smithy.Schema
+
+var StandbyAllowlistedIpsSource_SEPARATE *smithy.Schema
+
+var StandbyAllowlistedIpsSource_NOT_APPLICABLE *smithy.Schema
 
 var _StringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -1970,6 +3874,18 @@ var StsAccess_ipv4Addresses *smithy.Schema
 var StsAccess_domainName *smithy.Schema
 
 var StsAccess_stsPolicyDocument *smithy.Schema
+
+var SubscriptionError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SubscriptionError",
+}, smithy.ShapeTypeStructure, 1)
+var SubscriptionError_errorMessage *smithy.Schema
+
+var _SubscriptionErrors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SubscriptionErrors",
+}, smithy.ShapeTypeList, 1)
+var _SubscriptionErrors_member *smithy.Schema
 
 var SupportedAwsIntegration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2012,15 +3928,35 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_retryAfterSeconds *smithy.Schema
 
+var TransportableTablespace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "TransportableTablespace",
+}, smithy.ShapeTypeStructure, 1)
+var TransportableTablespace_ttsBundleUrl *smithy.Schema
+
+var UpdateAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAction",
+}, smithy.ShapeTypeEnum, 4)
+var UpdateAction_ROLLING_APPLY *smithy.Schema
+
+var UpdateAction_NON_ROLLING_APPLY *smithy.Schema
+
+var UpdateAction_PRECHECK *smithy.Schema
+
+var UpdateAction_ROLLBACK *smithy.Schema
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -2058,6 +3994,42 @@ var VpcEndpointType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VpcEndpointType",
 }, smithy.ShapeTypeEnum, 1)
 var VpcEndpointType_SERVICENETWORK *smithy.Schema
+
+var WalletPasswordSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "WalletPasswordSource",
+}, smithy.ShapeTypeEnum, 2)
+var WalletPasswordSource_CUSTOMER_MANAGED_AWS_SECRET *smithy.Schema
+
+var WalletPasswordSource_API_REQUEST_PARAMETER *smithy.Schema
+
+var WalletPasswordSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "WalletPasswordSourceConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var WalletPasswordSourceConfiguration_customerManagedAwsSecret *smithy.Schema
+
+var WalletPasswordSourceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "WalletPasswordSourceConfigurationInput",
+}, smithy.ShapeTypeUnion, 1)
+var WalletPasswordSourceConfigurationInput_customerManagedAwsSecret *smithy.Schema
+
+var WalletPasswordSourceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "WalletPasswordSourceSummary",
+}, smithy.ShapeTypeStructure, 2)
+var WalletPasswordSourceSummary_passwordSource *smithy.Schema
+
+var WalletPasswordSourceSummary_passwordSourceConfiguration *smithy.Schema
+
+var WalletType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "WalletType",
+}, smithy.ShapeTypeEnum, 2)
+var WalletType_REGIONAL *smithy.Schema
+
+var WalletType_INSTANCE *smithy.Schema
 
 var _WeeksOfMonth = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2098,6 +4070,172 @@ var AssociateIamRoleToResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "AssociateIamRoleToResourceOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var AssociateVirtualMachinesToExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 2)
+var AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId *smithy.Schema
+
+var AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount *smithy.Schema
+
+var AssociateVirtualMachinesToExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AssociateVirtualMachinesToExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var AssociateVirtualMachinesToExadbVmClusterOutput_displayName *smithy.Schema
+
+var AssociateVirtualMachinesToExadbVmClusterOutput_status *smithy.Schema
+
+var AssociateVirtualMachinesToExadbVmClusterOutput_statusReason *smithy.Schema
+
+var AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
+
+var CreateAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseBackupInput",
+}, smithy.ShapeTypeStructure, 5)
+var CreateAutonomousDatabaseBackupInput_autonomousDatabaseId *smithy.Schema
+
+var CreateAutonomousDatabaseBackupInput_displayName *smithy.Schema
+
+var CreateAutonomousDatabaseBackupInput_retentionPeriodInDays *smithy.Schema
+
+var CreateAutonomousDatabaseBackupInput_clientToken *smithy.Schema
+
+var CreateAutonomousDatabaseBackupInput_tags *smithy.Schema
+
+var CreateAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseBackupOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAutonomousDatabaseBackupOutput_displayName *smithy.Schema
+
+var CreateAutonomousDatabaseBackupOutput_status *smithy.Schema
+
+var CreateAutonomousDatabaseBackupOutput_statusReason *smithy.Schema
+
+var CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId *smithy.Schema
+
+var CreateAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 41)
+var CreateAutonomousDatabaseInput_odbNetworkId *smithy.Schema
+
+var CreateAutonomousDatabaseInput_displayName *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dbName *smithy.Schema
+
+var CreateAutonomousDatabaseInput_adminPassword *smithy.Schema
+
+var CreateAutonomousDatabaseInput_computeCount *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dataStorageSizeInTBs *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dataStorageSizeInGBs *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dbWorkload *smithy.Schema
+
+var CreateAutonomousDatabaseInput_isAutoScalingEnabled *smithy.Schema
+
+var CreateAutonomousDatabaseInput_isAutoScalingForStorageEnabled *smithy.Schema
+
+var CreateAutonomousDatabaseInput_licenseModel *smithy.Schema
+
+var CreateAutonomousDatabaseInput_characterSet *smithy.Schema
+
+var CreateAutonomousDatabaseInput_ncharacterSet *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dbVersion *smithy.Schema
+
+var CreateAutonomousDatabaseInput_databaseEdition *smithy.Schema
+
+var CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource *smithy.Schema
+
+var CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType *smithy.Schema
+
+var CreateAutonomousDatabaseInput_backupRetentionPeriodInDays *smithy.Schema
+
+var CreateAutonomousDatabaseInput_byolComputeCountLimit *smithy.Schema
+
+var CreateAutonomousDatabaseInput_cpuCoreCount *smithy.Schema
+
+var CreateAutonomousDatabaseInput_customerContactsToSendToOCI *smithy.Schema
+
+var CreateAutonomousDatabaseInput_privateEndpointIp *smithy.Schema
+
+var CreateAutonomousDatabaseInput_privateEndpointLabel *smithy.Schema
+
+var CreateAutonomousDatabaseInput_resourcePoolLeaderId *smithy.Schema
+
+var CreateAutonomousDatabaseInput_resourcePoolSummary *smithy.Schema
+
+var CreateAutonomousDatabaseInput_scheduledOperations *smithy.Schema
+
+var CreateAutonomousDatabaseInput_standbyAllowlistedIps *smithy.Schema
+
+var CreateAutonomousDatabaseInput_allowlistedIps *smithy.Schema
+
+var CreateAutonomousDatabaseInput_transportableTablespace *smithy.Schema
+
+var CreateAutonomousDatabaseInput_isBackupRetentionLocked *smithy.Schema
+
+var CreateAutonomousDatabaseInput_isLocalDataGuardEnabled *smithy.Schema
+
+var CreateAutonomousDatabaseInput_isMtlsConnectionRequired *smithy.Schema
+
+var CreateAutonomousDatabaseInput_dbToolsDetails *smithy.Schema
+
+var CreateAutonomousDatabaseInput_source *smithy.Schema
+
+var CreateAutonomousDatabaseInput_sourceConfiguration *smithy.Schema
+
+var CreateAutonomousDatabaseInput_encryptionKeyProvider *smithy.Schema
+
+var CreateAutonomousDatabaseInput_encryptionKeyConfiguration *smithy.Schema
+
+var CreateAutonomousDatabaseInput_adminPasswordSource *smithy.Schema
+
+var CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration *smithy.Schema
+
+var CreateAutonomousDatabaseInput_clientToken *smithy.Schema
+
+var CreateAutonomousDatabaseInput_tags *smithy.Schema
+
+var CreateAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var CreateAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var CreateAutonomousDatabaseOutput_status *smithy.Schema
+
+var CreateAutonomousDatabaseOutput_statusReason *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseWalletInput",
+}, smithy.ShapeTypeStructure, 6)
+var CreateAutonomousDatabaseWalletInput_autonomousDatabaseId *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput_walletType *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput_password *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput_passwordSource *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration *smithy.Schema
+
+var CreateAutonomousDatabaseWalletInput_clientToken *smithy.Schema
+
+var CreateAutonomousDatabaseWalletOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateAutonomousDatabaseWalletOutput",
+}, smithy.ShapeTypeStructure, 1)
+var CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile *smithy.Schema
 
 var CreateCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2247,6 +4385,102 @@ var CreateCloudVmClusterOutput_statusReason *smithy.Schema
 
 var CreateCloudVmClusterOutput_cloudVmClusterId *smithy.Schema
 
+var CreateExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 21)
+var CreateExadbVmClusterInput_displayName *smithy.Schema
+
+var CreateExadbVmClusterInput_enabledEcpuCount *smithy.Schema
+
+var CreateExadbVmClusterInput_exascaleDbStorageVaultId *smithy.Schema
+
+var CreateExadbVmClusterInput_gridImageId *smithy.Schema
+
+var CreateExadbVmClusterInput_hostname *smithy.Schema
+
+var CreateExadbVmClusterInput_nodeCount *smithy.Schema
+
+var CreateExadbVmClusterInput_odbNetworkId *smithy.Schema
+
+var CreateExadbVmClusterInput_shape *smithy.Schema
+
+var CreateExadbVmClusterInput_sshPublicKeys *smithy.Schema
+
+var CreateExadbVmClusterInput_totalEcpuCount *smithy.Schema
+
+var CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs *smithy.Schema
+
+var CreateExadbVmClusterInput_clusterName *smithy.Schema
+
+var CreateExadbVmClusterInput_dataCollectionOptions *smithy.Schema
+
+var CreateExadbVmClusterInput_licenseModel *smithy.Schema
+
+var CreateExadbVmClusterInput_scanListenerPortTcp *smithy.Schema
+
+var CreateExadbVmClusterInput_scanListenerPortTcpSsl *smithy.Schema
+
+var CreateExadbVmClusterInput_shapeAttribute *smithy.Schema
+
+var CreateExadbVmClusterInput_systemVersion *smithy.Schema
+
+var CreateExadbVmClusterInput_tags *smithy.Schema
+
+var CreateExadbVmClusterInput_timeZone *smithy.Schema
+
+var CreateExadbVmClusterInput_clientToken *smithy.Schema
+
+var CreateExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateExadbVmClusterOutput_displayName *smithy.Schema
+
+var CreateExadbVmClusterOutput_status *smithy.Schema
+
+var CreateExadbVmClusterOutput_statusReason *smithy.Schema
+
+var CreateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExascaleDbStorageVaultInput",
+}, smithy.ShapeTypeStructure, 11)
+var CreateExascaleDbStorageVaultInput_displayName *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_availabilityZoneId *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_availabilityZone *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_description *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_isAutoscaleEnabled *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_tags *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_timeZone *smithy.Schema
+
+var CreateExascaleDbStorageVaultInput_clientToken *smithy.Schema
+
+var CreateExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "CreateExascaleDbStorageVaultOutput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateExascaleDbStorageVaultOutput_displayName *smithy.Schema
+
+var CreateExascaleDbStorageVaultOutput_status *smithy.Schema
+
+var CreateExascaleDbStorageVaultOutput_statusReason *smithy.Schema
+
+var CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId *smithy.Schema
+
 var CreateOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "CreateOdbNetworkInput",
@@ -2327,6 +4561,28 @@ var CreateOdbPeeringConnectionOutput_statusReason *smithy.Schema
 
 var CreateOdbPeeringConnectionOutput_odbPeeringConnectionId *smithy.Schema
 
+var DeleteAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabaseBackupInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
+
+var DeleteAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabaseBackupOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var DeleteAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DeleteCloudAutonomousVmClusterInput",
@@ -2358,6 +4614,28 @@ var DeleteCloudVmClusterInput_cloudVmClusterId *smithy.Schema
 var DeleteCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DeleteCloudVmClusterOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteExadbVmClusterInput_exadbVmClusterId *smithy.Schema
+
+var DeleteExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExascaleDbStorageVaultInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
+
+var DeleteExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DeleteExascaleDbStorageVaultOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
@@ -2398,6 +4676,82 @@ var DisassociateIamRoleFromResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "DisassociateIamRoleFromResourceOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var DisassociateVirtualMachinesFromExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId *smithy.Schema
+
+var DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds *smithy.Schema
+
+var DisassociateVirtualMachinesFromExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "DisassociateVirtualMachinesFromExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_displayName *smithy.Schema
+
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_status *smithy.Schema
+
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_statusReason *smithy.Schema
+
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
+
+var FailoverAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FailoverAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 2)
+var FailoverAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var FailoverAutonomousDatabaseInput_peerDbArn *smithy.Schema
+
+var FailoverAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "FailoverAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var FailoverAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var FailoverAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var FailoverAutonomousDatabaseOutput_status *smithy.Schema
+
+var FailoverAutonomousDatabaseOutput_statusReason *smithy.Schema
+
+var GetAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseBackupInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
+
+var GetAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseBackupOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup *smithy.Schema
+
+var GetAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var GetAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseOutput_autonomousDatabase *smithy.Schema
+
+var GetAutonomousDatabaseWalletDetailsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseWalletDetailsInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId *smithy.Schema
+
+var GetAutonomousDatabaseWalletDetailsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetAutonomousDatabaseWalletDetailsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails *smithy.Schema
 
 var GetCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2452,8 +4806,10 @@ var GetCloudVmClusterOutput_cloudVmCluster *smithy.Schema
 var GetDbNodeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "GetDbNodeInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetDbNodeInput_cloudVmClusterId *smithy.Schema
+
+var GetDbNodeInput_exadbVmClusterId *smithy.Schema
 
 var GetDbNodeInput_dbNodeId *smithy.Schema
 
@@ -2477,6 +4833,30 @@ var GetDbServerOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetDbServerOutput_dbServer *smithy.Schema
 
+var GetExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetExadbVmClusterInput_exadbVmClusterId *smithy.Schema
+
+var GetExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetExadbVmClusterOutput_exadbVmCluster *smithy.Schema
+
+var GetExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExascaleDbStorageVaultInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
+
+var GetExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "GetExascaleDbStorageVaultOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetExascaleDbStorageVaultOutput_exascaleDbStorageVault *smithy.Schema
+
 var GetOciOnboardingStatusInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "GetOciOnboardingStatusInput",
@@ -2485,7 +4865,7 @@ var GetOciOnboardingStatusInput = smithy.NewSchema(smithy.ShapeID{
 var GetOciOnboardingStatusOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "GetOciOnboardingStatusOutput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 8)
 var GetOciOnboardingStatusOutput_status *smithy.Schema
 
 var GetOciOnboardingStatusOutput_existingTenancyActivationLink *smithy.Schema
@@ -2493,6 +4873,14 @@ var GetOciOnboardingStatusOutput_existingTenancyActivationLink *smithy.Schema
 var GetOciOnboardingStatusOutput_newTenancyActivationLink *smithy.Schema
 
 var GetOciOnboardingStatusOutput_ociIdentityDomain *smithy.Schema
+
+var GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles *smithy.Schema
+
+var GetOciOnboardingStatusOutput_linkedOciTenancyId *smithy.Schema
+
+var GetOciOnboardingStatusOutput_linkedOciCompartmentId *smithy.Schema
+
+var GetOciOnboardingStatusOutput_subscriptionErrors *smithy.Schema
 
 var GetOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2521,13 +4909,125 @@ var GetOdbPeeringConnectionOutput_odbPeeringConnection *smithy.Schema
 var InitializeServiceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "InitializeServiceInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var InitializeServiceInput_ociIdentityDomain *smithy.Schema
+
+var InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration *smithy.Schema
 
 var InitializeServiceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "InitializeServiceOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var ListAutonomousDatabaseBackupsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseBackupsInput",
+}, smithy.ShapeTypeStructure, 5)
+var ListAutonomousDatabaseBackupsInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabaseBackupsInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseBackupsInput_autonomousDatabaseId *smithy.Schema
+
+var ListAutonomousDatabaseBackupsInput_status *smithy.Schema
+
+var ListAutonomousDatabaseBackupsInput_type *smithy.Schema
+
+var ListAutonomousDatabaseBackupsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseBackupsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabaseBackupsOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups *smithy.Schema
+
+var ListAutonomousDatabaseCharacterSetsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseCharacterSetsInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListAutonomousDatabaseCharacterSetsInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabaseCharacterSetsInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseCharacterSetsInput_characterSetType *smithy.Schema
+
+var ListAutonomousDatabaseCharacterSetsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseCharacterSetsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabaseCharacterSetsOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets *smithy.Schema
+
+var ListAutonomousDatabaseClonesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseClonesInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListAutonomousDatabaseClonesInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabaseClonesInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseClonesInput_autonomousDatabaseId *smithy.Schema
+
+var ListAutonomousDatabaseClonesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseClonesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabaseClonesOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones *smithy.Schema
+
+var ListAutonomousDatabasePeersInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabasePeersInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListAutonomousDatabasePeersInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabasePeersInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabasePeersInput_autonomousDatabaseId *smithy.Schema
+
+var ListAutonomousDatabasePeersOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabasePeersOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabasePeersOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabasePeersOutput_autonomousDatabasePeers *smithy.Schema
+
+var ListAutonomousDatabasesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabasesInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabasesInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabasesInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabasesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabasesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabasesOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabasesOutput_autonomousDatabases *smithy.Schema
+
+var ListAutonomousDatabaseVersionsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseVersionsInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListAutonomousDatabaseVersionsInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabaseVersionsInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseVersionsInput_dbWorkload *smithy.Schema
+
+var ListAutonomousDatabaseVersionsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseVersionsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabaseVersionsOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions *smithy.Schema
 
 var ListAutonomousVirtualMachinesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2602,12 +5102,14 @@ var ListCloudVmClustersOutput_cloudVmClusters *smithy.Schema
 var ListDbNodesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListDbNodesInput",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListDbNodesInput_maxResults *smithy.Schema
 
 var ListDbNodesInput_nextToken *smithy.Schema
 
 var ListDbNodesInput_cloudVmClusterId *smithy.Schema
+
+var ListDbNodesInput_exadbVmClusterId *smithy.Schema
 
 var ListDbNodesOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2638,7 +5140,7 @@ var ListDbServersOutput_dbServers *smithy.Schema
 var ListDbSystemShapesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListDbSystemShapesInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListDbSystemShapesInput_maxResults *smithy.Schema
 
 var ListDbSystemShapesInput_nextToken *smithy.Schema
@@ -2647,6 +5149,8 @@ var ListDbSystemShapesInput_availabilityZone *smithy.Schema
 
 var ListDbSystemShapesInput_availabilityZoneId *smithy.Schema
 
+var ListDbSystemShapesInput_shapeFamily *smithy.Schema
+
 var ListDbSystemShapesOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListDbSystemShapesOutput",
@@ -2654,6 +5158,82 @@ var ListDbSystemShapesOutput = smithy.NewSchema(smithy.ShapeID{
 var ListDbSystemShapesOutput_nextToken *smithy.Schema
 
 var ListDbSystemShapesOutput_dbSystemShapes *smithy.Schema
+
+var ListExadbVmClustersInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExadbVmClustersInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListExadbVmClustersInput_exascaleDbStorageVaultId *smithy.Schema
+
+var ListExadbVmClustersInput_maxResults *smithy.Schema
+
+var ListExadbVmClustersInput_nextToken *smithy.Schema
+
+var ListExadbVmClustersOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExadbVmClustersOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListExadbVmClustersOutput_nextToken *smithy.Schema
+
+var ListExadbVmClustersOutput_exadbVmClusters *smithy.Schema
+
+var ListExascaleDbStorageVaultsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExascaleDbStorageVaultsInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListExascaleDbStorageVaultsInput_maxResults *smithy.Schema
+
+var ListExascaleDbStorageVaultsInput_nextToken *smithy.Schema
+
+var ListExascaleDbStorageVaultsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListExascaleDbStorageVaultsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListExascaleDbStorageVaultsOutput_nextToken *smithy.Schema
+
+var ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults *smithy.Schema
+
+var ListFlexComponentsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListFlexComponentsInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListFlexComponentsInput_maxResults *smithy.Schema
+
+var ListFlexComponentsInput_nextToken *smithy.Schema
+
+var ListFlexComponentsInput_shape *smithy.Schema
+
+var ListFlexComponentsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListFlexComponentsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListFlexComponentsOutput_nextToken *smithy.Schema
+
+var ListFlexComponentsOutput_flexComponents *smithy.Schema
+
+var ListGiMinorVersionsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListGiMinorVersionsInput",
+}, smithy.ShapeTypeStructure, 6)
+var ListGiMinorVersionsInput_giVersion *smithy.Schema
+
+var ListGiMinorVersionsInput_maxResults *smithy.Schema
+
+var ListGiMinorVersionsInput_nextToken *smithy.Schema
+
+var ListGiMinorVersionsInput_shapeFamily *smithy.Schema
+
+var ListGiMinorVersionsInput_availabilityZone *smithy.Schema
+
+var ListGiMinorVersionsInput_availabilityZoneId *smithy.Schema
+
+var ListGiMinorVersionsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListGiMinorVersionsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListGiMinorVersionsOutput_nextToken *smithy.Schema
+
+var ListGiMinorVersionsOutput_giMinorVersions *smithy.Schema
 
 var ListGiVersionsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2739,11 +5319,33 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var RebootAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RebootAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 2)
+var RebootAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var RebootAutonomousDatabaseInput_isOnlineReboot *smithy.Schema
+
+var RebootAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RebootAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var RebootAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var RebootAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var RebootAutonomousDatabaseOutput_status *smithy.Schema
+
+var RebootAutonomousDatabaseOutput_statusReason *smithy.Schema
+
 var RebootDbNodeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "RebootDbNodeInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var RebootDbNodeInput_cloudVmClusterId *smithy.Schema
+
+var RebootDbNodeInput_exadbVmClusterId *smithy.Schema
 
 var RebootDbNodeInput_dbNodeId *smithy.Schema
 
@@ -2757,11 +5359,69 @@ var RebootDbNodeOutput_status *smithy.Schema
 
 var RebootDbNodeOutput_statusReason *smithy.Schema
 
+var RestoreAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RestoreAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 2)
+var RestoreAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var RestoreAutonomousDatabaseInput_timestamp *smithy.Schema
+
+var RestoreAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "RestoreAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var RestoreAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var RestoreAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var RestoreAutonomousDatabaseOutput_status *smithy.Schema
+
+var RestoreAutonomousDatabaseOutput_statusReason *smithy.Schema
+
+var ShrinkAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ShrinkAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 1)
+var ShrinkAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var ShrinkAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ShrinkAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var ShrinkAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var ShrinkAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var ShrinkAutonomousDatabaseOutput_status *smithy.Schema
+
+var ShrinkAutonomousDatabaseOutput_statusReason *smithy.Schema
+
+var StartAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 1)
+var StartAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var StartAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var StartAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var StartAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var StartAutonomousDatabaseOutput_status *smithy.Schema
+
+var StartAutonomousDatabaseOutput_statusReason *smithy.Schema
+
 var StartDbNodeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "StartDbNodeInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StartDbNodeInput_cloudVmClusterId *smithy.Schema
+
+var StartDbNodeInput_exadbVmClusterId *smithy.Schema
 
 var StartDbNodeInput_dbNodeId *smithy.Schema
 
@@ -2775,11 +5435,31 @@ var StartDbNodeOutput_status *smithy.Schema
 
 var StartDbNodeOutput_statusReason *smithy.Schema
 
+var StopAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StopAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 1)
+var StopAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var StopAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StopAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var StopAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var StopAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var StopAutonomousDatabaseOutput_status *smithy.Schema
+
+var StopAutonomousDatabaseOutput_statusReason *smithy.Schema
+
 var StopDbNodeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "StopDbNodeInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StopDbNodeInput_cloudVmClusterId *smithy.Schema
+
+var StopDbNodeInput_exadbVmClusterId *smithy.Schema
 
 var StopDbNodeInput_dbNodeId *smithy.Schema
 
@@ -2792,6 +5472,26 @@ var StopDbNodeOutput_dbNodeId *smithy.Schema
 var StopDbNodeOutput_status *smithy.Schema
 
 var StopDbNodeOutput_statusReason *smithy.Schema
+
+var SwitchoverAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SwitchoverAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 2)
+var SwitchoverAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var SwitchoverAutonomousDatabaseInput_peerDbArn *smithy.Schema
+
+var SwitchoverAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "SwitchoverAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var SwitchoverAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var SwitchoverAutonomousDatabaseOutput_status *smithy.Schema
+
+var SwitchoverAutonomousDatabaseOutput_statusReason *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2819,6 +5519,132 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabaseBackupInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
+
+var UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays *smithy.Schema
+
+var UpdateAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabaseBackupOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateAutonomousDatabaseBackupOutput_displayName *smithy.Schema
+
+var UpdateAutonomousDatabaseBackupOutput_status *smithy.Schema
+
+var UpdateAutonomousDatabaseBackupOutput_statusReason *smithy.Schema
+
+var UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId *smithy.Schema
+
+var UpdateAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabaseInput",
+}, smithy.ShapeTypeStructure, 45)
+var UpdateAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_adminPassword *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_computeCount *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_cpuCoreCount *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dataStorageSizeInTBs *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dataStorageSizeInGBs *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_displayName *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dbName *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dbVersion *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dbWorkload *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_dbToolsDetails *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_databaseEdition *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_licenseModel *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isAutoScalingEnabled *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isBackupRetentionLocked *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isMtlsConnectionRequired *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isRefreshableClone *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_isDisconnectPeer *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_byolComputeCountLimit *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_customerContactsToSendToOCI *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_scheduledOperations *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_longTermBackupSchedule *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_openMode *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_permissionLevel *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_refreshableMode *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_privateEndpointIp *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_privateEndpointLabel *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_peerDbId *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_resourcePoolLeaderId *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_resourcePoolSummary *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_standbyAllowlistedIps *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_allowlistedIps *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_encryptionKeyProvider *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_encryptionKeyConfiguration *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_adminPasswordSource *smithy.Schema
+
+var UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration *smithy.Schema
+
+var UpdateAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateAutonomousDatabaseOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
+
+var UpdateAutonomousDatabaseOutput_displayName *smithy.Schema
+
+var UpdateAutonomousDatabaseOutput_status *smithy.Schema
+
+var UpdateAutonomousDatabaseOutput_statusReason *smithy.Schema
+
 var UpdateCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "UpdateCloudExadataInfrastructureInput",
@@ -2838,6 +5664,74 @@ var UpdateCloudExadataInfrastructureOutput_status *smithy.Schema
 var UpdateCloudExadataInfrastructureOutput_statusReason *smithy.Schema
 
 var UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
+
+var UpdateExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExadbVmClusterInput",
+}, smithy.ShapeTypeStructure, 11)
+var UpdateExadbVmClusterInput_exadbVmClusterId *smithy.Schema
+
+var UpdateExadbVmClusterInput_dataCollectionOptions *smithy.Schema
+
+var UpdateExadbVmClusterInput_displayName *smithy.Schema
+
+var UpdateExadbVmClusterInput_enabledEcpuCount *smithy.Schema
+
+var UpdateExadbVmClusterInput_gridImageId *smithy.Schema
+
+var UpdateExadbVmClusterInput_licenseModel *smithy.Schema
+
+var UpdateExadbVmClusterInput_sshPublicKeys *smithy.Schema
+
+var UpdateExadbVmClusterInput_systemVersion *smithy.Schema
+
+var UpdateExadbVmClusterInput_totalEcpuCount *smithy.Schema
+
+var UpdateExadbVmClusterInput_updateAction *smithy.Schema
+
+var UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs *smithy.Schema
+
+var UpdateExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExadbVmClusterOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateExadbVmClusterOutput_displayName *smithy.Schema
+
+var UpdateExadbVmClusterOutput_status *smithy.Schema
+
+var UpdateExadbVmClusterOutput_statusReason *smithy.Schema
+
+var UpdateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleDbStorageVaultInput",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_additionalFlashCacheInPercent *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_autoscaleLimitInGBs *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_description *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_displayName *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs *smithy.Schema
+
+var UpdateExascaleDbStorageVaultInput_isAutoscaleEnabled *smithy.Schema
+
+var UpdateExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "UpdateExascaleDbStorageVaultOutput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateExascaleDbStorageVaultOutput_displayName *smithy.Schema
+
+var UpdateExascaleDbStorageVaultOutput_status *smithy.Schema
+
+var UpdateExascaleDbStorageVaultOutput_statusReason *smithy.Schema
+
+var UpdateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId *smithy.Schema
 
 var UpdateOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -2914,6 +5808,918 @@ func init() {
 
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
+	AdminPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = AdminPasswordSource.AddMember("CUSTOMER_MANAGED_AWS_SECRET", smithyprelude.Unit)
+
+	AdminPasswordSource_API_REQUEST_PARAMETER = AdminPasswordSource.AddMember("API_REQUEST_PARAMETER", smithyprelude.Unit)
+
+	ExternalIdType_DATABASE_OCID = ExternalIdType.AddMember("DATABASE_OCID", smithyprelude.Unit)
+
+	ExternalIdType_COMPARTMENT_OCID = ExternalIdType.AddMember("COMPARTMENT_OCID", smithyprelude.Unit)
+
+	ExternalIdType_TENANT_OCID = ExternalIdType.AddMember("TENANT_OCID", smithyprelude.Unit)
+
+	CustomerManagedAwsSecretConfiguration_iamRoleArn = CustomerManagedAwsSecretConfiguration.AddMember("iamRoleArn", _RoleArn)
+
+	CustomerManagedAwsSecretConfiguration_secretId = CustomerManagedAwsSecretConfiguration.AddMember("secretId", _SecretIdOrArn)
+
+	CustomerManagedAwsSecretConfiguration_externalIdType = CustomerManagedAwsSecretConfiguration.AddMember("externalIdType", ExternalIdType)
+
+	AdminPasswordSourceConfiguration_customerManagedAwsSecret = AdminPasswordSourceConfiguration.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfiguration)
+
+	CustomerManagedAwsSecretConfigurationInput_secretId = CustomerManagedAwsSecretConfigurationInput.AddMember("secretId", _SecretIdOrArn)
+
+	CustomerManagedAwsSecretConfigurationInput_iamRoleArn = CustomerManagedAwsSecretConfigurationInput.AddMember("iamRoleArn", _RoleArn)
+
+	CustomerManagedAwsSecretConfigurationInput_externalIdType = CustomerManagedAwsSecretConfigurationInput.AddMember("externalIdType", ExternalIdType)
+
+	AdminPasswordSourceConfigurationInput_customerManagedAwsSecret = AdminPasswordSourceConfigurationInput.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfigurationInput)
+
+	AdminPasswordSourceSummary_adminPasswordSource = AdminPasswordSourceSummary.AddMember("adminPasswordSource", AdminPasswordSource)
+
+	AdminPasswordSourceSummary_adminPasswordSourceConfiguration = AdminPasswordSourceSummary.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfiguration)
+
+	AutonomousDatabaseResourceStatus_AVAILABLE = AutonomousDatabaseResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_FAILED = AutonomousDatabaseResourceStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_PROVISIONING = AutonomousDatabaseResourceStatus.AddMember("PROVISIONING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_TERMINATED = AutonomousDatabaseResourceStatus.AddMember("TERMINATED", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_TERMINATING = AutonomousDatabaseResourceStatus.AddMember("TERMINATING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_UPDATING = AutonomousDatabaseResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_MAINTENANCE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_STOPPING = AutonomousDatabaseResourceStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_STOPPED = AutonomousDatabaseResourceStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_STARTING = AutonomousDatabaseResourceStatus.AddMember("STARTING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_UNAVAILABLE = AutonomousDatabaseResourceStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_RESTORE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("RESTORE_IN_PROGRESS", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_RESTORE_FAILED = AutonomousDatabaseResourceStatus.AddMember("RESTORE_FAILED", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_BACKUP_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("BACKUP_IN_PROGRESS", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_SCALE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("SCALE_IN_PROGRESS", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_AVAILABLE_NEEDS_ATTENTION = AutonomousDatabaseResourceStatus.AddMember("AVAILABLE_NEEDS_ATTENTION", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_RESTARTING = AutonomousDatabaseResourceStatus.AddMember("RESTARTING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_RECREATING = AutonomousDatabaseResourceStatus.AddMember("RECREATING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_ROLE_CHANGE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("ROLE_CHANGE_IN_PROGRESS", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_UPGRADING = AutonomousDatabaseResourceStatus.AddMember("UPGRADING", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_INACCESSIBLE = AutonomousDatabaseResourceStatus.AddMember("INACCESSIBLE", smithyprelude.Unit)
+
+	AutonomousDatabaseResourceStatus_STANDBY = AutonomousDatabaseResourceStatus.AddMember("STANDBY", smithyprelude.Unit)
+
+	DatabaseType_REGULAR = DatabaseType.AddMember("REGULAR", smithyprelude.Unit)
+
+	DatabaseType_CLONE = DatabaseType.AddMember("CLONE", smithyprelude.Unit)
+
+	DbWorkload_OLTP = DbWorkload.AddMember("OLTP", smithyprelude.Unit)
+
+	DbWorkload_AJD = DbWorkload.AddMember("AJD", smithyprelude.Unit)
+
+	DbWorkload_APEX = DbWorkload.AddMember("APEX", smithyprelude.Unit)
+
+	DbWorkload_LH = DbWorkload.AddMember("LH", smithyprelude.Unit)
+
+	DatabaseEdition_STANDARD_EDITION = DatabaseEdition.AddMember("STANDARD_EDITION", smithyprelude.Unit)
+
+	DatabaseEdition_ENTERPRISE_EDITION = DatabaseEdition.AddMember("ENTERPRISE_EDITION", smithyprelude.Unit)
+
+	LicenseModel_BRING_YOUR_OWN_LICENSE = LicenseModel.AddMember("BRING_YOUR_OWN_LICENSE", smithyprelude.Unit)
+
+	LicenseModel_LICENSE_INCLUDED = LicenseModel.AddMember("LICENSE_INCLUDED", smithyprelude.Unit)
+
+	OpenMode_READ_ONLY = OpenMode.AddMember("READ_ONLY", smithyprelude.Unit)
+
+	OpenMode_READ_WRITE = OpenMode.AddMember("READ_WRITE", smithyprelude.Unit)
+
+	PermissionLevel_RESTRICTED = PermissionLevel.AddMember("RESTRICTED", smithyprelude.Unit)
+
+	PermissionLevel_UNRESTRICTED = PermissionLevel.AddMember("UNRESTRICTED", smithyprelude.Unit)
+
+	AutonomousMaintenanceScheduleType_EARLY = AutonomousMaintenanceScheduleType.AddMember("EARLY", smithyprelude.Unit)
+
+	AutonomousMaintenanceScheduleType_REGULAR = AutonomousMaintenanceScheduleType.AddMember("REGULAR", smithyprelude.Unit)
+
+	NetServicesArchitecture_DEDICATED = NetServicesArchitecture.AddMember("DEDICATED", smithyprelude.Unit)
+
+	NetServicesArchitecture_SHARED = NetServicesArchitecture.AddMember("SHARED", smithyprelude.Unit)
+
+	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
+
+	_DatabaseConnectionStringMap_key = _DatabaseConnectionStringMap.AddMember("key", smithyprelude.String)
+
+	_DatabaseConnectionStringMap_value = _DatabaseConnectionStringMap.AddMember("value", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_consumerGroup = DatabaseConnectionStringProfile.AddMember("consumerGroup", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_displayName = DatabaseConnectionStringProfile.AddMember("displayName", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_hostFormat = DatabaseConnectionStringProfile.AddMember("hostFormat", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_isRegional = DatabaseConnectionStringProfile.AddMember("isRegional", smithyprelude.Boolean)
+
+	DatabaseConnectionStringProfile_protocol = DatabaseConnectionStringProfile.AddMember("protocol", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_sessionMode = DatabaseConnectionStringProfile.AddMember("sessionMode", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_syntaxFormat = DatabaseConnectionStringProfile.AddMember("syntaxFormat", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_tlsAuthentication = DatabaseConnectionStringProfile.AddMember("tlsAuthentication", smithyprelude.String)
+
+	DatabaseConnectionStringProfile_value = DatabaseConnectionStringProfile.AddMember("value", smithyprelude.String)
+
+	_DatabaseConnectionStringProfileList_member = _DatabaseConnectionStringProfileList.AddMember("member", DatabaseConnectionStringProfile)
+
+	AutonomousDatabaseConnectionStrings_allConnectionStrings = AutonomousDatabaseConnectionStrings.AddMember("allConnectionStrings", _DatabaseConnectionStringMap)
+
+	AutonomousDatabaseConnectionStrings_dedicated = AutonomousDatabaseConnectionStrings.AddMember("dedicated", smithyprelude.String)
+
+	AutonomousDatabaseConnectionStrings_high = AutonomousDatabaseConnectionStrings.AddMember("high", smithyprelude.String)
+
+	AutonomousDatabaseConnectionStrings_medium = AutonomousDatabaseConnectionStrings.AddMember("medium", smithyprelude.String)
+
+	AutonomousDatabaseConnectionStrings_low = AutonomousDatabaseConnectionStrings.AddMember("low", smithyprelude.String)
+
+	AutonomousDatabaseConnectionStrings_profiles = AutonomousDatabaseConnectionStrings.AddMember("profiles", _DatabaseConnectionStringProfileList)
+
+	CustomerContact_email = CustomerContact.AddMember("email", _SensitiveString)
+
+	_CustomerContacts_member = _CustomerContacts.AddMember("member", CustomerContact)
+
+	AutonomousDatabaseApex_apexVersion = AutonomousDatabaseApex.AddMember("apexVersion", smithyprelude.String)
+
+	AutonomousDatabaseApex_ordsVersion = AutonomousDatabaseApex.AddMember("ordsVersion", smithyprelude.String)
+
+	DatabaseStandbySummary_availabilityDomain = DatabaseStandbySummary.AddMember("availabilityDomain", smithyprelude.String)
+
+	DatabaseStandbySummary_lagTimeInSeconds = DatabaseStandbySummary.AddMember("lagTimeInSeconds", smithyprelude.Integer)
+
+	DatabaseStandbySummary_status = DatabaseStandbySummary.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	DatabaseStandbySummary_statusReason = DatabaseStandbySummary.AddMember("statusReason", smithyprelude.String)
+
+	DatabaseStandbySummary_maintenanceTargetComponent = DatabaseStandbySummary.AddMember("maintenanceTargetComponent", smithyprelude.String)
+
+	DatabaseStandbySummary_timeDataGuardRoleChanged = DatabaseStandbySummary.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DatabaseStandbySummary_timeDisasterRecoveryRoleChanged = DatabaseStandbySummary.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DatabaseStandbySummary_timeMaintenanceBegin = DatabaseStandbySummary.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DatabaseStandbySummary_timeMaintenanceEnd = DatabaseStandbySummary.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DataSafeStatus_REGISTERING = DataSafeStatus.AddMember("REGISTERING", smithyprelude.Unit)
+
+	DataSafeStatus_REGISTERED = DataSafeStatus.AddMember("REGISTERED", smithyprelude.Unit)
+
+	DataSafeStatus_DEREGISTERING = DataSafeStatus.AddMember("DEREGISTERING", smithyprelude.Unit)
+
+	DataSafeStatus_NOT_REGISTERED = DataSafeStatus.AddMember("NOT_REGISTERED", smithyprelude.Unit)
+
+	DataSafeStatus_FAILED = DataSafeStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DatabaseManagementStatus_ENABLING = DatabaseManagementStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	DatabaseManagementStatus_ENABLED = DatabaseManagementStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	DatabaseManagementStatus_DISABLING = DatabaseManagementStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	DatabaseManagementStatus_NOT_ENABLED = DatabaseManagementStatus.AddMember("NOT_ENABLED", smithyprelude.Unit)
+
+	DatabaseManagementStatus_FAILED_ENABLING = DatabaseManagementStatus.AddMember("FAILED_ENABLING", smithyprelude.Unit)
+
+	DatabaseManagementStatus_FAILED_DISABLING = DatabaseManagementStatus.AddMember("FAILED_DISABLING", smithyprelude.Unit)
+
+	OperationsInsightsStatus_ENABLING = OperationsInsightsStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	OperationsInsightsStatus_ENABLED = OperationsInsightsStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	OperationsInsightsStatus_DISABLING = OperationsInsightsStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	OperationsInsightsStatus_NOT_ENABLED = OperationsInsightsStatus.AddMember("NOT_ENABLED", smithyprelude.Unit)
+
+	OperationsInsightsStatus_FAILED_ENABLING = OperationsInsightsStatus.AddMember("FAILED_ENABLING", smithyprelude.Unit)
+
+	OperationsInsightsStatus_FAILED_DISABLING = OperationsInsightsStatus.AddMember("FAILED_DISABLING", smithyprelude.Unit)
+
+	AutonomousDatabaseConnectionUrls_apexUrl = AutonomousDatabaseConnectionUrls.AddMember("apexUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_databaseTransformsUrl = AutonomousDatabaseConnectionUrls.AddMember("databaseTransformsUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_graphStudioUrl = AutonomousDatabaseConnectionUrls.AddMember("graphStudioUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl = AutonomousDatabaseConnectionUrls.AddMember("machineLearningNotebookUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl = AutonomousDatabaseConnectionUrls.AddMember("machineLearningUserManagementUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_mongoDbUrl = AutonomousDatabaseConnectionUrls.AddMember("mongoDbUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_ordsUrl = AutonomousDatabaseConnectionUrls.AddMember("ordsUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_spatialStudioUrl = AutonomousDatabaseConnectionUrls.AddMember("spatialStudioUrl", smithyprelude.String)
+
+	AutonomousDatabaseConnectionUrls_sqlDevWebUrl = AutonomousDatabaseConnectionUrls.AddMember("sqlDevWebUrl", smithyprelude.String)
+
+	DatabaseTool_isEnabled = DatabaseTool.AddMember("isEnabled", smithyprelude.Boolean)
+
+	DatabaseTool_name = DatabaseTool.AddMember("name", smithyprelude.String)
+
+	DatabaseTool_computeCount = DatabaseTool.AddMember("computeCount", smithyprelude.Double)
+
+	DatabaseTool_maxIdleTimeInMinutes = DatabaseTool.AddMember("maxIdleTimeInMinutes", smithyprelude.Integer)
+
+	_DatabaseToolList_member = _DatabaseToolList.AddMember("member", DatabaseTool)
+
+	DayOfWeekName_MONDAY = DayOfWeekName.AddMember("MONDAY", smithyprelude.Unit)
+
+	DayOfWeekName_TUESDAY = DayOfWeekName.AddMember("TUESDAY", smithyprelude.Unit)
+
+	DayOfWeekName_WEDNESDAY = DayOfWeekName.AddMember("WEDNESDAY", smithyprelude.Unit)
+
+	DayOfWeekName_THURSDAY = DayOfWeekName.AddMember("THURSDAY", smithyprelude.Unit)
+
+	DayOfWeekName_FRIDAY = DayOfWeekName.AddMember("FRIDAY", smithyprelude.Unit)
+
+	DayOfWeekName_SATURDAY = DayOfWeekName.AddMember("SATURDAY", smithyprelude.Unit)
+
+	DayOfWeekName_SUNDAY = DayOfWeekName.AddMember("SUNDAY", smithyprelude.Unit)
+
+	DayOfWeek_name = DayOfWeek.AddMember("name", DayOfWeekName)
+
+	ScheduledOperationDetails_dayOfWeek = ScheduledOperationDetails.AddMember("dayOfWeek", DayOfWeek)
+
+	ScheduledOperationDetails_scheduledStartTime = ScheduledOperationDetails.AddMember("scheduledStartTime", smithyprelude.String)
+
+	ScheduledOperationDetails_scheduledStopTime = ScheduledOperationDetails.AddMember("scheduledStopTime", smithyprelude.String)
+
+	_ScheduledOperationDetailsList_member = _ScheduledOperationDetailsList.AddMember("member", ScheduledOperationDetails)
+
+	ComputeModel_ECPU = ComputeModel.AddMember("ECPU", smithyprelude.Unit)
+
+	ComputeModel_OCPU = ComputeModel.AddMember("OCPU", smithyprelude.Unit)
+
+	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
+
+	StandbyAllowlistedIpsSource_PRIMARY = StandbyAllowlistedIpsSource.AddMember("PRIMARY", smithyprelude.Unit)
+
+	StandbyAllowlistedIpsSource_SEPARATE = StandbyAllowlistedIpsSource.AddMember("SEPARATE", smithyprelude.Unit)
+
+	StandbyAllowlistedIpsSource_NOT_APPLICABLE = StandbyAllowlistedIpsSource.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	DisasterRecoveryType_ADG = DisasterRecoveryType.AddMember("ADG", smithyprelude.Unit)
+
+	DisasterRecoveryType_BACKUP_BASED = DisasterRecoveryType.AddMember("BACKUP_BASED", smithyprelude.Unit)
+
+	DataGuardRole_PRIMARY = DataGuardRole.AddMember("PRIMARY", smithyprelude.Unit)
+
+	DataGuardRole_STANDBY = DataGuardRole.AddMember("STANDBY", smithyprelude.Unit)
+
+	DataGuardRole_DISABLED_STANDBY = DataGuardRole.AddMember("DISABLED_STANDBY", smithyprelude.Unit)
+
+	DataGuardRole_BACKUP_COPY = DataGuardRole.AddMember("BACKUP_COPY", smithyprelude.Unit)
+
+	DataGuardRole_SNAPSHOT_STANDBY = DataGuardRole.AddMember("SNAPSHOT_STANDBY", smithyprelude.Unit)
+
+	DisasterRecoveryConfiguration_disasterRecoveryType = DisasterRecoveryConfiguration.AddMember("disasterRecoveryType", DisasterRecoveryType)
+
+	DisasterRecoveryConfiguration_isReplicateAutomaticBackups = DisasterRecoveryConfiguration.AddMember("isReplicateAutomaticBackups", smithyprelude.Boolean)
+
+	DisasterRecoveryConfiguration_isSnapshotStandby = DisasterRecoveryConfiguration.AddMember("isSnapshotStandby", smithyprelude.Boolean)
+
+	DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill = DisasterRecoveryConfiguration.AddMember("timeSnapshotStandbyEnabledTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	RefreshableMode_AUTOMATIC = RefreshableMode.AddMember("AUTOMATIC", smithyprelude.Unit)
+
+	RefreshableMode_MANUAL = RefreshableMode.AddMember("MANUAL", smithyprelude.Unit)
+
+	RefreshableStatus_REFRESHING = RefreshableStatus.AddMember("REFRESHING", smithyprelude.Unit)
+
+	RefreshableStatus_NOT_REFRESHING = RefreshableStatus.AddMember("NOT_REFRESHING", smithyprelude.Unit)
+
+	RepeatCadence_ONE_TIME = RepeatCadence.AddMember("ONE_TIME", smithyprelude.Unit)
+
+	RepeatCadence_WEEKLY = RepeatCadence.AddMember("WEEKLY", smithyprelude.Unit)
+
+	RepeatCadence_MONTHLY = RepeatCadence.AddMember("MONTHLY", smithyprelude.Unit)
+
+	RepeatCadence_YEARLY = RepeatCadence.AddMember("YEARLY", smithyprelude.Unit)
+
+	LongTermBackupSchedule_isDisabled = LongTermBackupSchedule.AddMember("isDisabled", smithyprelude.Boolean)
+
+	LongTermBackupSchedule_repeatCadence = LongTermBackupSchedule.AddMember("repeatCadence", RepeatCadence)
+
+	LongTermBackupSchedule_retentionPeriodInDays = LongTermBackupSchedule.AddMember("retentionPeriodInDays", smithyprelude.Integer)
+
+	LongTermBackupSchedule_timeOfBackup = LongTermBackupSchedule.AddMember("timeOfBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ResourcePoolSummary_isDisabled = ResourcePoolSummary.AddMember("isDisabled", smithyprelude.Boolean)
+
+	ResourcePoolSummary_poolSize = ResourcePoolSummary.AddMember("poolSize", smithyprelude.Integer)
+
+	ResourcePoolSummary_poolStorageSizeInTBs = ResourcePoolSummary.AddMember("poolStorageSizeInTBs", smithyprelude.Integer)
+
+	ResourcePoolSummary_availableStorageCapacityInTBs = ResourcePoolSummary.AddMember("availableStorageCapacityInTBs", smithyprelude.Double)
+
+	ResourcePoolSummary_totalComputeCapacity = ResourcePoolSummary.AddMember("totalComputeCapacity", smithyprelude.Integer)
+
+	ResourcePoolSummary_availableComputeCapacity = ResourcePoolSummary.AddMember("availableComputeCapacity", smithyprelude.Integer)
+
+	EncryptionKeyProvider_ORACLE_MANAGED = EncryptionKeyProvider.AddMember("ORACLE_MANAGED", smithyprelude.Unit)
+
+	EncryptionKeyProvider_AWS_KMS = EncryptionKeyProvider.AddMember("AWS_KMS", smithyprelude.Unit)
+
+	EncryptionKeyProvider_OKV = EncryptionKeyProvider.AddMember("OKV", smithyprelude.Unit)
+
+	EncryptionKeyProvider_OCI = EncryptionKeyProvider.AddMember("OCI", smithyprelude.Unit)
+
+	AwsEncryptionKeyConfiguration_iamRoleArn = AwsEncryptionKeyConfiguration.AddMember("iamRoleArn", _RoleArn)
+
+	AwsEncryptionKeyConfiguration_externalIdType = AwsEncryptionKeyConfiguration.AddMember("externalIdType", ExternalIdType)
+
+	AwsEncryptionKeyConfiguration_kmsKeyId = AwsEncryptionKeyConfiguration.AddMember("kmsKeyId", _KmsKeyIdOrArn)
+
+	OciEncryptionKeyConfiguration_kmsKeyId = OciEncryptionKeyConfiguration.AddMember("kmsKeyId", smithyprelude.String)
+
+	OciEncryptionKeyConfiguration_vaultId = OciEncryptionKeyConfiguration.AddMember("vaultId", smithyprelude.String)
+
+	OkvEncryptionKeyConfiguration_certificateDirectoryName = OkvEncryptionKeyConfiguration.AddMember("certificateDirectoryName", smithyprelude.String)
+
+	OkvEncryptionKeyConfiguration_certificateId = OkvEncryptionKeyConfiguration.AddMember("certificateId", smithyprelude.String)
+
+	OkvEncryptionKeyConfiguration_directoryName = OkvEncryptionKeyConfiguration.AddMember("directoryName", smithyprelude.String)
+
+	OkvEncryptionKeyConfiguration_okvKmsKey = OkvEncryptionKeyConfiguration.AddMember("okvKmsKey", smithyprelude.String)
+
+	OkvEncryptionKeyConfiguration_okvUri = OkvEncryptionKeyConfiguration.AddMember("okvUri", smithyprelude.String)
+
+	EncryptionKeyConfiguration_awsEncryptionKey = EncryptionKeyConfiguration.AddMember("awsEncryptionKey", AwsEncryptionKeyConfiguration)
+
+	EncryptionKeyConfiguration_ociEncryptionKey = EncryptionKeyConfiguration.AddMember("ociEncryptionKey", OciEncryptionKeyConfiguration)
+
+	EncryptionKeyConfiguration_okvEncryptionKey = EncryptionKeyConfiguration.AddMember("okvEncryptionKey", OkvEncryptionKeyConfiguration)
+
+	EncryptionSummary_encryptionKeyProvider = EncryptionSummary.AddMember("encryptionKeyProvider", EncryptionKeyProvider)
+
+	EncryptionSummary_encryptionKeyConfiguration = EncryptionSummary.AddMember("encryptionKeyConfiguration", EncryptionKeyConfiguration)
+
+	AutonomousDatabase_autonomousDatabaseId = AutonomousDatabase.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	AutonomousDatabase_autonomousDatabaseArn = AutonomousDatabase.AddMember("autonomousDatabaseArn", _ResourceArn)
+
+	AutonomousDatabase_ociResourceAnchorName = AutonomousDatabase.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	AutonomousDatabase_percentProgress = AutonomousDatabase.AddMember("percentProgress", smithyprelude.Float)
+
+	AutonomousDatabase_ocid = AutonomousDatabase.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabase_ociUrl = AutonomousDatabase.AddMember("ociUrl", smithyprelude.String)
+
+	AutonomousDatabase_displayName = AutonomousDatabase.AddMember("displayName", smithyprelude.String)
+
+	AutonomousDatabase_dbName = AutonomousDatabase.AddMember("dbName", smithyprelude.String)
+
+	AutonomousDatabase_sourceId = AutonomousDatabase.AddMember("sourceId", smithyprelude.String)
+
+	AutonomousDatabase_status = AutonomousDatabase.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	AutonomousDatabase_statusReason = AutonomousDatabase.AddMember("statusReason", smithyprelude.String)
+
+	AutonomousDatabase_databaseType = AutonomousDatabase.AddMember("databaseType", DatabaseType)
+
+	AutonomousDatabase_dbVersion = AutonomousDatabase.AddMember("dbVersion", smithyprelude.String)
+
+	AutonomousDatabase_dbWorkload = AutonomousDatabase.AddMember("dbWorkload", DbWorkload)
+
+	AutonomousDatabase_characterSet = AutonomousDatabase.AddMember("characterSet", smithyprelude.String)
+
+	AutonomousDatabase_ncharacterSet = AutonomousDatabase.AddMember("ncharacterSet", smithyprelude.String)
+
+	AutonomousDatabase_databaseEdition = AutonomousDatabase.AddMember("databaseEdition", DatabaseEdition)
+
+	AutonomousDatabase_licenseModel = AutonomousDatabase.AddMember("licenseModel", LicenseModel)
+
+	AutonomousDatabase_openMode = AutonomousDatabase.AddMember("openMode", OpenMode)
+
+	AutonomousDatabase_permissionLevel = AutonomousDatabase.AddMember("permissionLevel", PermissionLevel)
+
+	AutonomousDatabase_isMtlsConnectionRequired = AutonomousDatabase.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
+
+	AutonomousDatabase_autonomousMaintenanceScheduleType = AutonomousDatabase.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
+
+	AutonomousDatabase_netServicesArchitecture = AutonomousDatabase.AddMember("netServicesArchitecture", NetServicesArchitecture)
+
+	AutonomousDatabase_availableUpgradeVersions = AutonomousDatabase.AddMember("availableUpgradeVersions", _StringList)
+
+	AutonomousDatabase_byolComputeCountLimit = AutonomousDatabase.AddMember("byolComputeCountLimit", smithyprelude.Integer)
+
+	AutonomousDatabase_connectionStringDetails = AutonomousDatabase.AddMember("connectionStringDetails", AutonomousDatabaseConnectionStrings)
+
+	AutonomousDatabase_serviceConsoleUrl = AutonomousDatabase.AddMember("serviceConsoleUrl", smithyprelude.String)
+
+	AutonomousDatabase_sqlWebDeveloperUrl = AutonomousDatabase.AddMember("sqlWebDeveloperUrl", smithyprelude.String)
+
+	AutonomousDatabase_customerContacts = AutonomousDatabase.AddMember("customerContacts", _CustomerContacts)
+
+	AutonomousDatabase_apexDetails = AutonomousDatabase.AddMember("apexDetails", AutonomousDatabaseApex)
+
+	AutonomousDatabase_standbyDb = AutonomousDatabase.AddMember("standbyDb", DatabaseStandbySummary)
+
+	AutonomousDatabase_localStandbyDb = AutonomousDatabase.AddMember("localStandbyDb", DatabaseStandbySummary)
+
+	AutonomousDatabase_dataSafeStatus = AutonomousDatabase.AddMember("dataSafeStatus", DataSafeStatus)
+
+	AutonomousDatabase_databaseManagementStatus = AutonomousDatabase.AddMember("databaseManagementStatus", DatabaseManagementStatus)
+
+	AutonomousDatabase_operationsInsightsStatus = AutonomousDatabase.AddMember("operationsInsightsStatus", OperationsInsightsStatus)
+
+	AutonomousDatabase_availabilityZone = AutonomousDatabase.AddMember("availabilityZone", smithyprelude.String)
+
+	AutonomousDatabase_availabilityZoneId = AutonomousDatabase.AddMember("availabilityZoneId", smithyprelude.String)
+
+	AutonomousDatabase_maintenanceTargetComponent = AutonomousDatabase.AddMember("maintenanceTargetComponent", smithyprelude.String)
+
+	AutonomousDatabase_connectionUrls = AutonomousDatabase.AddMember("connectionUrls", AutonomousDatabaseConnectionUrls)
+
+	AutonomousDatabase_dbToolsDetails = AutonomousDatabase.AddMember("dbToolsDetails", _DatabaseToolList)
+
+	AutonomousDatabase_scheduledOperations = AutonomousDatabase.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
+
+	AutonomousDatabase_resourcePoolLeaderId = AutonomousDatabase.AddMember("resourcePoolLeaderId", smithyprelude.String)
+
+	AutonomousDatabase_computeCount = AutonomousDatabase.AddMember("computeCount", smithyprelude.Float)
+
+	AutonomousDatabase_computeModel = AutonomousDatabase.AddMember("computeModel", ComputeModel)
+
+	AutonomousDatabase_cpuCoreCount = AutonomousDatabase.AddMember("cpuCoreCount", smithyprelude.Integer)
+
+	AutonomousDatabase_memoryPerOracleComputeUnitInGBs = AutonomousDatabase.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
+
+	AutonomousDatabase_provisionableCpus = AutonomousDatabase.AddMember("provisionableCpus", _IntegerList)
+
+	AutonomousDatabase_isAutoScalingEnabled = AutonomousDatabase.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabase_dataStorageSizeInTBs = AutonomousDatabase.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabase_dataStorageSizeInGBs = AutonomousDatabase.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
+
+	AutonomousDatabase_usedDataStorageSizeInTBs = AutonomousDatabase.AddMember("usedDataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabase_usedDataStorageSizeInGBs = AutonomousDatabase.AddMember("usedDataStorageSizeInGBs", smithyprelude.Integer)
+
+	AutonomousDatabase_actualUsedDataStorageSizeInTBs = AutonomousDatabase.AddMember("actualUsedDataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabase_allocatedStorageSizeInTBs = AutonomousDatabase.AddMember("allocatedStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabase_inMemoryAreaInGBs = AutonomousDatabase.AddMember("inMemoryAreaInGBs", smithyprelude.Integer)
+
+	AutonomousDatabase_isAutoScalingForStorageEnabled = AutonomousDatabase.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabase_odbNetworkId = AutonomousDatabase.AddMember("odbNetworkId", _ResourceId)
+
+	AutonomousDatabase_odbNetworkArn = AutonomousDatabase.AddMember("odbNetworkArn", _ResourceArn)
+
+	AutonomousDatabase_privateEndpoint = AutonomousDatabase.AddMember("privateEndpoint", smithyprelude.String)
+
+	AutonomousDatabase_privateEndpointIp = AutonomousDatabase.AddMember("privateEndpointIp", smithyprelude.String)
+
+	AutonomousDatabase_privateEndpointLabel = AutonomousDatabase.AddMember("privateEndpointLabel", smithyprelude.String)
+
+	AutonomousDatabase_allowlistedIps = AutonomousDatabase.AddMember("allowlistedIps", _StringList)
+
+	AutonomousDatabase_standbyAllowlistedIps = AutonomousDatabase.AddMember("standbyAllowlistedIps", _StringList)
+
+	AutonomousDatabase_standbyAllowlistedIpsSource = AutonomousDatabase.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
+
+	AutonomousDatabase_isLocalDataGuardEnabled = AutonomousDatabase.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabase_isRemoteDataGuardEnabled = AutonomousDatabase.AddMember("isRemoteDataGuardEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabase_localDisasterRecoveryType = AutonomousDatabase.AddMember("localDisasterRecoveryType", DisasterRecoveryType)
+
+	AutonomousDatabase_role = AutonomousDatabase.AddMember("role", DataGuardRole)
+
+	AutonomousDatabase_peerDbIds = AutonomousDatabase.AddMember("peerDbIds", _StringList)
+
+	AutonomousDatabase_failedDataRecoveryInSeconds = AutonomousDatabase.AddMember("failedDataRecoveryInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit = AutonomousDatabase.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
+
+	AutonomousDatabase_remoteDisasterRecoveryConfiguration = AutonomousDatabase.AddMember("remoteDisasterRecoveryConfiguration", DisasterRecoveryConfiguration)
+
+	AutonomousDatabase_isRefreshableClone = AutonomousDatabase.AddMember("isRefreshableClone", smithyprelude.Boolean)
+
+	AutonomousDatabase_refreshableMode = AutonomousDatabase.AddMember("refreshableMode", RefreshableMode)
+
+	AutonomousDatabase_refreshableStatus = AutonomousDatabase.AddMember("refreshableStatus", RefreshableStatus)
+
+	AutonomousDatabase_autoRefreshFrequencyInSeconds = AutonomousDatabase.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabase_autoRefreshPointLagInSeconds = AutonomousDatabase.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabase_isReconnectCloneEnabled = AutonomousDatabase.AddMember("isReconnectCloneEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabase_cloneTableSpaceList = AutonomousDatabase.AddMember("cloneTableSpaceList", _IntegerList)
+
+	AutonomousDatabase_backupRetentionPeriodInDays = AutonomousDatabase.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
+
+	AutonomousDatabase_longTermBackupSchedule = AutonomousDatabase.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
+
+	AutonomousDatabase_isBackupRetentionLocked = AutonomousDatabase.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
+
+	AutonomousDatabase_totalBackupStorageSizeInGBs = AutonomousDatabase.AddMember("totalBackupStorageSizeInGBs", smithyprelude.Double)
+
+	AutonomousDatabase_resourcePoolSummary = AutonomousDatabase.AddMember("resourcePoolSummary", ResourcePoolSummary)
+
+	AutonomousDatabase_encryptionSummary = AutonomousDatabase.AddMember("encryptionSummary", EncryptionSummary)
+
+	AutonomousDatabase_createdAt = AutonomousDatabase.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfLastBackup = AutonomousDatabase.AddMember("timeOfLastBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeMaintenanceBegin = AutonomousDatabase.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeMaintenanceEnd = AutonomousDatabase.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeLocalDataGuardEnabled = AutonomousDatabase.AddMember("timeLocalDataGuardEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeDataGuardRoleChanged = AutonomousDatabase.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfLastSwitchover = AutonomousDatabase.AddMember("timeOfLastSwitchover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfLastFailover = AutonomousDatabase.AddMember("timeOfLastFailover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfLastRefresh = AutonomousDatabase.AddMember("timeOfLastRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfLastRefreshPoint = AutonomousDatabase.AddMember("timeOfLastRefreshPoint", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfNextRefresh = AutonomousDatabase.AddMember("timeOfNextRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeOfAutoRefreshStart = AutonomousDatabase.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase = AutonomousDatabase.AddMember("timeDeletionOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase = AutonomousDatabase.AddMember("timeReclamationOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeDisasterRecoveryRoleChanged = AutonomousDatabase.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeUntilReconnectCloneEnabled = AutonomousDatabase.AddMember("timeUntilReconnectCloneEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_nextLongTermBackupTimeStamp = AutonomousDatabase.AddMember("nextLongTermBackupTimeStamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_timeUndeleted = AutonomousDatabase.AddMember("timeUndeleted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabase_adminPasswordSourceSummary = AutonomousDatabase.AddMember("adminPasswordSourceSummary", AdminPasswordSourceSummary)
+
+	AutonomousDatabaseBackupStatus_ACTIVE = AutonomousDatabaseBackupStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupStatus_CREATING = AutonomousDatabaseBackupStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupStatus_UPDATING = AutonomousDatabaseBackupStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupStatus_DELETING = AutonomousDatabaseBackupStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupStatus_FAILED = AutonomousDatabaseBackupStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_INCREMENTAL = AutonomousDatabaseBackupType.AddMember("INCREMENTAL", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_FULL = AutonomousDatabaseBackupType.AddMember("FULL", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_LONGTERM = AutonomousDatabaseBackupType.AddMember("LONGTERM", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_VIRTUAL_FULL = AutonomousDatabaseBackupType.AddMember("VIRTUAL_FULL", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_CUMULATIVE_INCREMENTAL = AutonomousDatabaseBackupType.AddMember("CUMULATIVE_INCREMENTAL", smithyprelude.Unit)
+
+	AutonomousDatabaseBackupType_ROLL_FORWARD_IMAGE_COPY = AutonomousDatabaseBackupType.AddMember("ROLL_FORWARD_IMAGE_COPY", smithyprelude.Unit)
+
+	AutonomousDatabaseBackup_autonomousDatabaseBackupId = AutonomousDatabaseBackup.AddMember("autonomousDatabaseBackupId", _ResourceId)
+
+	AutonomousDatabaseBackup_autonomousDatabaseBackupArn = AutonomousDatabaseBackup.AddMember("autonomousDatabaseBackupArn", _ResourceArn)
+
+	AutonomousDatabaseBackup_autonomousDatabaseId = AutonomousDatabaseBackup.AddMember("autonomousDatabaseId", _ResourceId)
+
+	AutonomousDatabaseBackup_ocid = AutonomousDatabaseBackup.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabaseBackup_displayName = AutonomousDatabaseBackup.AddMember("displayName", smithyprelude.String)
+
+	AutonomousDatabaseBackup_dbVersion = AutonomousDatabaseBackup.AddMember("dbVersion", smithyprelude.String)
+
+	AutonomousDatabaseBackup_status = AutonomousDatabaseBackup.AddMember("status", AutonomousDatabaseBackupStatus)
+
+	AutonomousDatabaseBackup_statusReason = AutonomousDatabaseBackup.AddMember("statusReason", smithyprelude.String)
+
+	AutonomousDatabaseBackup_isAutomatic = AutonomousDatabaseBackup.AddMember("isAutomatic", smithyprelude.Boolean)
+
+	AutonomousDatabaseBackup_retentionPeriodInDays = AutonomousDatabaseBackup.AddMember("retentionPeriodInDays", smithyprelude.Integer)
+
+	AutonomousDatabaseBackup_sizeInTBs = AutonomousDatabaseBackup.AddMember("sizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseBackup_timeAvailableTill = AutonomousDatabaseBackup.AddMember("timeAvailableTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackup_timeStarted = AutonomousDatabaseBackup.AddMember("timeStarted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackup_timeEnded = AutonomousDatabaseBackup.AddMember("timeEnded", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackup_type = AutonomousDatabaseBackup.AddMember("type", AutonomousDatabaseBackupType)
+
+	AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseBackupId", _ResourceId)
+
+	AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseBackupArn", _ResourceArn)
+
+	AutonomousDatabaseBackupSummary_autonomousDatabaseId = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseId", _ResourceId)
+
+	AutonomousDatabaseBackupSummary_ocid = AutonomousDatabaseBackupSummary.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabaseBackupSummary_displayName = AutonomousDatabaseBackupSummary.AddMember("displayName", smithyprelude.String)
+
+	AutonomousDatabaseBackupSummary_dbVersion = AutonomousDatabaseBackupSummary.AddMember("dbVersion", smithyprelude.String)
+
+	AutonomousDatabaseBackupSummary_status = AutonomousDatabaseBackupSummary.AddMember("status", AutonomousDatabaseBackupStatus)
+
+	AutonomousDatabaseBackupSummary_statusReason = AutonomousDatabaseBackupSummary.AddMember("statusReason", smithyprelude.String)
+
+	AutonomousDatabaseBackupSummary_isAutomatic = AutonomousDatabaseBackupSummary.AddMember("isAutomatic", smithyprelude.Boolean)
+
+	AutonomousDatabaseBackupSummary_retentionPeriodInDays = AutonomousDatabaseBackupSummary.AddMember("retentionPeriodInDays", smithyprelude.Integer)
+
+	AutonomousDatabaseBackupSummary_sizeInTBs = AutonomousDatabaseBackupSummary.AddMember("sizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseBackupSummary_timeAvailableTill = AutonomousDatabaseBackupSummary.AddMember("timeAvailableTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackupSummary_timeStarted = AutonomousDatabaseBackupSummary.AddMember("timeStarted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackupSummary_timeEnded = AutonomousDatabaseBackupSummary.AddMember("timeEnded", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseBackupSummary_type = AutonomousDatabaseBackupSummary.AddMember("type", AutonomousDatabaseBackupType)
+
+	_AutonomousDatabaseBackupList_member = _AutonomousDatabaseBackupList.AddMember("member", AutonomousDatabaseBackupSummary)
+
+	AutonomousDatabaseCharacterSetSummary_characterSet = AutonomousDatabaseCharacterSetSummary.AddMember("characterSet", smithyprelude.String)
+
+	_AutonomousDatabaseCharacterSetList_member = _AutonomousDatabaseCharacterSetList.AddMember("member", AutonomousDatabaseCharacterSetSummary)
+
+	AutonomousDatabaseSummary_autonomousDatabaseId = AutonomousDatabaseSummary.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	AutonomousDatabaseSummary_autonomousDatabaseArn = AutonomousDatabaseSummary.AddMember("autonomousDatabaseArn", _ResourceArn)
+
+	AutonomousDatabaseSummary_ociResourceAnchorName = AutonomousDatabaseSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	AutonomousDatabaseSummary_percentProgress = AutonomousDatabaseSummary.AddMember("percentProgress", smithyprelude.Float)
+
+	AutonomousDatabaseSummary_ocid = AutonomousDatabaseSummary.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabaseSummary_ociUrl = AutonomousDatabaseSummary.AddMember("ociUrl", smithyprelude.String)
+
+	AutonomousDatabaseSummary_displayName = AutonomousDatabaseSummary.AddMember("displayName", smithyprelude.String)
+
+	AutonomousDatabaseSummary_dbName = AutonomousDatabaseSummary.AddMember("dbName", smithyprelude.String)
+
+	AutonomousDatabaseSummary_sourceId = AutonomousDatabaseSummary.AddMember("sourceId", smithyprelude.String)
+
+	AutonomousDatabaseSummary_status = AutonomousDatabaseSummary.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	AutonomousDatabaseSummary_statusReason = AutonomousDatabaseSummary.AddMember("statusReason", smithyprelude.String)
+
+	AutonomousDatabaseSummary_databaseType = AutonomousDatabaseSummary.AddMember("databaseType", DatabaseType)
+
+	AutonomousDatabaseSummary_dbVersion = AutonomousDatabaseSummary.AddMember("dbVersion", smithyprelude.String)
+
+	AutonomousDatabaseSummary_dbWorkload = AutonomousDatabaseSummary.AddMember("dbWorkload", DbWorkload)
+
+	AutonomousDatabaseSummary_characterSet = AutonomousDatabaseSummary.AddMember("characterSet", smithyprelude.String)
+
+	AutonomousDatabaseSummary_ncharacterSet = AutonomousDatabaseSummary.AddMember("ncharacterSet", smithyprelude.String)
+
+	AutonomousDatabaseSummary_databaseEdition = AutonomousDatabaseSummary.AddMember("databaseEdition", DatabaseEdition)
+
+	AutonomousDatabaseSummary_licenseModel = AutonomousDatabaseSummary.AddMember("licenseModel", LicenseModel)
+
+	AutonomousDatabaseSummary_openMode = AutonomousDatabaseSummary.AddMember("openMode", OpenMode)
+
+	AutonomousDatabaseSummary_permissionLevel = AutonomousDatabaseSummary.AddMember("permissionLevel", PermissionLevel)
+
+	AutonomousDatabaseSummary_isMtlsConnectionRequired = AutonomousDatabaseSummary.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_autonomousMaintenanceScheduleType = AutonomousDatabaseSummary.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
+
+	AutonomousDatabaseSummary_netServicesArchitecture = AutonomousDatabaseSummary.AddMember("netServicesArchitecture", NetServicesArchitecture)
+
+	AutonomousDatabaseSummary_availableUpgradeVersions = AutonomousDatabaseSummary.AddMember("availableUpgradeVersions", _StringList)
+
+	AutonomousDatabaseSummary_byolComputeCountLimit = AutonomousDatabaseSummary.AddMember("byolComputeCountLimit", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_connectionStringDetails = AutonomousDatabaseSummary.AddMember("connectionStringDetails", AutonomousDatabaseConnectionStrings)
+
+	AutonomousDatabaseSummary_serviceConsoleUrl = AutonomousDatabaseSummary.AddMember("serviceConsoleUrl", smithyprelude.String)
+
+	AutonomousDatabaseSummary_sqlWebDeveloperUrl = AutonomousDatabaseSummary.AddMember("sqlWebDeveloperUrl", smithyprelude.String)
+
+	AutonomousDatabaseSummary_customerContacts = AutonomousDatabaseSummary.AddMember("customerContacts", _CustomerContacts)
+
+	AutonomousDatabaseSummary_apexDetails = AutonomousDatabaseSummary.AddMember("apexDetails", AutonomousDatabaseApex)
+
+	AutonomousDatabaseSummary_standbyDb = AutonomousDatabaseSummary.AddMember("standbyDb", DatabaseStandbySummary)
+
+	AutonomousDatabaseSummary_localStandbyDb = AutonomousDatabaseSummary.AddMember("localStandbyDb", DatabaseStandbySummary)
+
+	AutonomousDatabaseSummary_dataSafeStatus = AutonomousDatabaseSummary.AddMember("dataSafeStatus", DataSafeStatus)
+
+	AutonomousDatabaseSummary_databaseManagementStatus = AutonomousDatabaseSummary.AddMember("databaseManagementStatus", DatabaseManagementStatus)
+
+	AutonomousDatabaseSummary_operationsInsightsStatus = AutonomousDatabaseSummary.AddMember("operationsInsightsStatus", OperationsInsightsStatus)
+
+	AutonomousDatabaseSummary_availabilityZone = AutonomousDatabaseSummary.AddMember("availabilityZone", smithyprelude.String)
+
+	AutonomousDatabaseSummary_availabilityZoneId = AutonomousDatabaseSummary.AddMember("availabilityZoneId", smithyprelude.String)
+
+	AutonomousDatabaseSummary_maintenanceTargetComponent = AutonomousDatabaseSummary.AddMember("maintenanceTargetComponent", smithyprelude.String)
+
+	AutonomousDatabaseSummary_connectionUrls = AutonomousDatabaseSummary.AddMember("connectionUrls", AutonomousDatabaseConnectionUrls)
+
+	AutonomousDatabaseSummary_dbToolsDetails = AutonomousDatabaseSummary.AddMember("dbToolsDetails", _DatabaseToolList)
+
+	AutonomousDatabaseSummary_scheduledOperations = AutonomousDatabaseSummary.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
+
+	AutonomousDatabaseSummary_resourcePoolLeaderId = AutonomousDatabaseSummary.AddMember("resourcePoolLeaderId", smithyprelude.String)
+
+	AutonomousDatabaseSummary_computeCount = AutonomousDatabaseSummary.AddMember("computeCount", smithyprelude.Float)
+
+	AutonomousDatabaseSummary_computeModel = AutonomousDatabaseSummary.AddMember("computeModel", ComputeModel)
+
+	AutonomousDatabaseSummary_cpuCoreCount = AutonomousDatabaseSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs = AutonomousDatabaseSummary.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_provisionableCpus = AutonomousDatabaseSummary.AddMember("provisionableCpus", _IntegerList)
+
+	AutonomousDatabaseSummary_isAutoScalingEnabled = AutonomousDatabaseSummary.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_dataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseSummary_dataStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_usedDataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("usedDataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseSummary_usedDataStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("usedDataStorageSizeInGBs", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("actualUsedDataStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseSummary_allocatedStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("allocatedStorageSizeInTBs", smithyprelude.Double)
+
+	AutonomousDatabaseSummary_inMemoryAreaInGBs = AutonomousDatabaseSummary.AddMember("inMemoryAreaInGBs", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_isAutoScalingForStorageEnabled = AutonomousDatabaseSummary.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_odbNetworkId = AutonomousDatabaseSummary.AddMember("odbNetworkId", _ResourceId)
+
+	AutonomousDatabaseSummary_odbNetworkArn = AutonomousDatabaseSummary.AddMember("odbNetworkArn", _ResourceArn)
+
+	AutonomousDatabaseSummary_privateEndpoint = AutonomousDatabaseSummary.AddMember("privateEndpoint", smithyprelude.String)
+
+	AutonomousDatabaseSummary_privateEndpointIp = AutonomousDatabaseSummary.AddMember("privateEndpointIp", smithyprelude.String)
+
+	AutonomousDatabaseSummary_privateEndpointLabel = AutonomousDatabaseSummary.AddMember("privateEndpointLabel", smithyprelude.String)
+
+	AutonomousDatabaseSummary_allowlistedIps = AutonomousDatabaseSummary.AddMember("allowlistedIps", _StringList)
+
+	AutonomousDatabaseSummary_standbyAllowlistedIps = AutonomousDatabaseSummary.AddMember("standbyAllowlistedIps", _StringList)
+
+	AutonomousDatabaseSummary_standbyAllowlistedIpsSource = AutonomousDatabaseSummary.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
+
+	AutonomousDatabaseSummary_isLocalDataGuardEnabled = AutonomousDatabaseSummary.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_isRemoteDataGuardEnabled = AutonomousDatabaseSummary.AddMember("isRemoteDataGuardEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_localDisasterRecoveryType = AutonomousDatabaseSummary.AddMember("localDisasterRecoveryType", DisasterRecoveryType)
+
+	AutonomousDatabaseSummary_role = AutonomousDatabaseSummary.AddMember("role", DataGuardRole)
+
+	AutonomousDatabaseSummary_peerDbIds = AutonomousDatabaseSummary.AddMember("peerDbIds", _StringList)
+
+	AutonomousDatabaseSummary_failedDataRecoveryInSeconds = AutonomousDatabaseSummary.AddMember("failedDataRecoveryInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit = AutonomousDatabaseSummary.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration = AutonomousDatabaseSummary.AddMember("remoteDisasterRecoveryConfiguration", DisasterRecoveryConfiguration)
+
+	AutonomousDatabaseSummary_isRefreshableClone = AutonomousDatabaseSummary.AddMember("isRefreshableClone", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_refreshableMode = AutonomousDatabaseSummary.AddMember("refreshableMode", RefreshableMode)
+
+	AutonomousDatabaseSummary_refreshableStatus = AutonomousDatabaseSummary.AddMember("refreshableStatus", RefreshableStatus)
+
+	AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds = AutonomousDatabaseSummary.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_autoRefreshPointLagInSeconds = AutonomousDatabaseSummary.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_isReconnectCloneEnabled = AutonomousDatabaseSummary.AddMember("isReconnectCloneEnabled", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_cloneTableSpaceList = AutonomousDatabaseSummary.AddMember("cloneTableSpaceList", _IntegerList)
+
+	AutonomousDatabaseSummary_backupRetentionPeriodInDays = AutonomousDatabaseSummary.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
+
+	AutonomousDatabaseSummary_longTermBackupSchedule = AutonomousDatabaseSummary.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
+
+	AutonomousDatabaseSummary_isBackupRetentionLocked = AutonomousDatabaseSummary.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
+
+	AutonomousDatabaseSummary_totalBackupStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("totalBackupStorageSizeInGBs", smithyprelude.Double)
+
+	AutonomousDatabaseSummary_resourcePoolSummary = AutonomousDatabaseSummary.AddMember("resourcePoolSummary", ResourcePoolSummary)
+
+	AutonomousDatabaseSummary_encryptionSummary = AutonomousDatabaseSummary.AddMember("encryptionSummary", EncryptionSummary)
+
+	AutonomousDatabaseSummary_createdAt = AutonomousDatabaseSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfLastBackup = AutonomousDatabaseSummary.AddMember("timeOfLastBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeMaintenanceBegin = AutonomousDatabaseSummary.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeMaintenanceEnd = AutonomousDatabaseSummary.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeLocalDataGuardEnabled = AutonomousDatabaseSummary.AddMember("timeLocalDataGuardEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeDataGuardRoleChanged = AutonomousDatabaseSummary.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfLastSwitchover = AutonomousDatabaseSummary.AddMember("timeOfLastSwitchover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfLastFailover = AutonomousDatabaseSummary.AddMember("timeOfLastFailover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfLastRefresh = AutonomousDatabaseSummary.AddMember("timeOfLastRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfLastRefreshPoint = AutonomousDatabaseSummary.AddMember("timeOfLastRefreshPoint", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfNextRefresh = AutonomousDatabaseSummary.AddMember("timeOfNextRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeOfAutoRefreshStart = AutonomousDatabaseSummary.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase = AutonomousDatabaseSummary.AddMember("timeDeletionOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase = AutonomousDatabaseSummary.AddMember("timeReclamationOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged = AutonomousDatabaseSummary.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled = AutonomousDatabaseSummary.AddMember("timeUntilReconnectCloneEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_nextLongTermBackupTimeStamp = AutonomousDatabaseSummary.AddMember("nextLongTermBackupTimeStamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_timeUndeleted = AutonomousDatabaseSummary.AddMember("timeUndeleted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseSummary_adminPasswordSourceSummary = AutonomousDatabaseSummary.AddMember("adminPasswordSourceSummary", AdminPasswordSourceSummary)
+
+	_AutonomousDatabaseList_member = _AutonomousDatabaseList.AddMember("member", AutonomousDatabaseSummary)
+
+	AutonomousDatabasePeerSummary_autonomousDatabaseId = AutonomousDatabasePeerSummary.AddMember("autonomousDatabaseId", _ResourceId)
+
+	AutonomousDatabasePeerSummary_autonomousDatabaseArn = AutonomousDatabasePeerSummary.AddMember("autonomousDatabaseArn", _ResourceArn)
+
+	AutonomousDatabasePeerSummary_ocid = AutonomousDatabasePeerSummary.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabasePeerSummary_region = AutonomousDatabasePeerSummary.AddMember("region", smithyprelude.String)
+
+	_AutonomousDatabasePeerList_member = _AutonomousDatabasePeerList.AddMember("member", AutonomousDatabasePeerSummary)
+
+	AutonomousDatabaseVersionSummary_dbWorkload = AutonomousDatabaseVersionSummary.AddMember("dbWorkload", DbWorkload)
+
+	AutonomousDatabaseVersionSummary_details = AutonomousDatabaseVersionSummary.AddMember("details", smithyprelude.String)
+
+	AutonomousDatabaseVersionSummary_version = AutonomousDatabaseVersionSummary.AddMember("version", smithyprelude.String)
+
+	_AutonomousDatabaseVersionList_member = _AutonomousDatabaseVersionList.AddMember("member", AutonomousDatabaseVersionSummary)
+
+	AutonomousDatabaseWalletStatus_ACTIVE = AutonomousDatabaseWalletStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AutonomousDatabaseWalletStatus_UPDATING = AutonomousDatabaseWalletStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	WalletPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = WalletPasswordSource.AddMember("CUSTOMER_MANAGED_AWS_SECRET", smithyprelude.Unit)
+
+	WalletPasswordSource_API_REQUEST_PARAMETER = WalletPasswordSource.AddMember("API_REQUEST_PARAMETER", smithyprelude.Unit)
+
+	WalletPasswordSourceConfiguration_customerManagedAwsSecret = WalletPasswordSourceConfiguration.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfiguration)
+
+	WalletPasswordSourceSummary_passwordSource = WalletPasswordSourceSummary.AddMember("passwordSource", WalletPasswordSource)
+
+	WalletPasswordSourceSummary_passwordSourceConfiguration = WalletPasswordSourceSummary.AddMember("passwordSourceConfiguration", WalletPasswordSourceConfiguration)
+
+	AutonomousDatabaseWalletDetails_status = AutonomousDatabaseWalletDetails.AddMember("status", AutonomousDatabaseWalletStatus)
+
+	AutonomousDatabaseWalletDetails_timeRotated = AutonomousDatabaseWalletDetails.AddMember("timeRotated", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AutonomousDatabaseWalletDetails_passwordSourceSummary = AutonomousDatabaseWalletDetails.AddMember("passwordSourceSummary", WalletPasswordSourceSummary)
+
 	ResourceStatus_AVAILABLE = ResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
 	ResourceStatus_FAILED = ResourceStatus.AddMember("FAILED", smithyprelude.Unit)
@@ -2956,31 +6762,35 @@ func init() {
 
 	_AutonomousVirtualMachineList_member = _AutonomousVirtualMachineList.AddMember("member", AutonomousVirtualMachineSummary)
 
-	ComputeModel_ECPU = ComputeModel.AddMember("ECPU", smithyprelude.Unit)
+	AwsEncryptionKeyConfigurationInput_iamRoleArn = AwsEncryptionKeyConfigurationInput.AddMember("iamRoleArn", _RoleArn)
 
-	ComputeModel_OCPU = ComputeModel.AddMember("OCPU", smithyprelude.Unit)
+	AwsEncryptionKeyConfigurationInput_externalIdType = AwsEncryptionKeyConfigurationInput.AddMember("externalIdType", ExternalIdType)
 
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
+	AwsEncryptionKeyConfigurationInput_kmsKeyId = AwsEncryptionKeyConfigurationInput.AddMember("kmsKeyId", _KmsKeyIdOrArn)
 
-	LicenseModel_BRING_YOUR_OWN_LICENSE = LicenseModel.AddMember("BRING_YOUR_OWN_LICENSE", smithyprelude.Unit)
+	characterSetType_DATABASE = characterSetType.AddMember("DATABASE", smithyprelude.Unit)
 
-	LicenseModel_LICENSE_INCLUDED = LicenseModel.AddMember("LICENSE_INCLUDED", smithyprelude.Unit)
+	characterSetType_NATIONAL = characterSetType.AddMember("NATIONAL", smithyprelude.Unit)
 
-	DayOfWeekName_MONDAY = DayOfWeekName.AddMember("MONDAY", smithyprelude.Unit)
+	CloneType_FULL = CloneType.AddMember("FULL", smithyprelude.Unit)
 
-	DayOfWeekName_TUESDAY = DayOfWeekName.AddMember("TUESDAY", smithyprelude.Unit)
+	CloneType_METADATA = CloneType.AddMember("METADATA", smithyprelude.Unit)
 
-	DayOfWeekName_WEDNESDAY = DayOfWeekName.AddMember("WEDNESDAY", smithyprelude.Unit)
+	CloneType_PARTIAL = CloneType.AddMember("PARTIAL", smithyprelude.Unit)
 
-	DayOfWeekName_THURSDAY = DayOfWeekName.AddMember("THURSDAY", smithyprelude.Unit)
+	CloneToRefreshableConfiguration_sourceAutonomousDatabaseId = CloneToRefreshableConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
 
-	DayOfWeekName_FRIDAY = DayOfWeekName.AddMember("FRIDAY", smithyprelude.Unit)
+	CloneToRefreshableConfiguration_refreshableMode = CloneToRefreshableConfiguration.AddMember("refreshableMode", RefreshableMode)
 
-	DayOfWeekName_SATURDAY = DayOfWeekName.AddMember("SATURDAY", smithyprelude.Unit)
+	CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds = CloneToRefreshableConfiguration.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
 
-	DayOfWeekName_SUNDAY = DayOfWeekName.AddMember("SUNDAY", smithyprelude.Unit)
+	CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds = CloneToRefreshableConfiguration.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
 
-	DayOfWeek_name = DayOfWeek.AddMember("name", DayOfWeekName)
+	CloneToRefreshableConfiguration_timeOfAutoRefreshStart = CloneToRefreshableConfiguration.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CloneToRefreshableConfiguration_openMode = CloneToRefreshableConfiguration.AddMember("openMode", OpenMode)
+
+	CloneToRefreshableConfiguration_cloneType = CloneToRefreshableConfiguration.AddMember("cloneType", CloneType)
 
 	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", DayOfWeek)
 
@@ -3285,10 +7095,6 @@ func init() {
 	CloudAutonomousVmClusterResourceDetails_unallocatedAdbStorageInTBs = CloudAutonomousVmClusterResourceDetails.AddMember("unallocatedAdbStorageInTBs", smithyprelude.Double)
 
 	_CloudAutonomousVmClusterResourceDetailsList_member = _CloudAutonomousVmClusterResourceDetailsList.AddMember("member", CloudAutonomousVmClusterResourceDetails)
-
-	CustomerContact_email = CustomerContact.AddMember("email", _SensitiveString)
-
-	_CustomerContacts_member = _CustomerContacts.AddMember("member", CustomerContact)
 
 	CloudExadataInfrastructure_cloudExadataInfrastructureId = CloudExadataInfrastructure.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
@@ -3686,6 +7492,14 @@ func init() {
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
 
+	CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn = CrossRegionDataGuardConfiguration.AddMember("sourceAutonomousDatabaseArn", _Arn)
+
+	CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn = CrossRegionDisasterRecoveryConfiguration.AddMember("sourceAutonomousDatabaseArn", _Arn)
+
+	CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType = CrossRegionDisasterRecoveryConfiguration.AddMember("remoteDisasterRecoveryType", DisasterRecoveryType)
+
+	CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups = CrossRegionDisasterRecoveryConfiguration.AddMember("isReplicateAutomaticBackups", smithyprelude.Boolean)
+
 	ManagedResourceStatus_ENABLED = ManagedResourceStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	ManagedResourceStatus_ENABLING = ManagedResourceStatus.AddMember("ENABLING", smithyprelude.Unit)
@@ -3701,6 +7515,10 @@ func init() {
 	CrossRegionS3RestoreSourcesAccess_status = CrossRegionS3RestoreSourcesAccess.AddMember("status", ManagedResourceStatus)
 
 	_CrossRegionS3RestoreSourcesAccessList_member = _CrossRegionS3RestoreSourcesAccessList.AddMember("member", CrossRegionS3RestoreSourcesAccess)
+
+	DatabaseCloneConfiguration_sourceAutonomousDatabaseId = DatabaseCloneConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
+
+	DatabaseCloneConfiguration_cloneType = DatabaseCloneConfiguration.AddMember("cloneType", CloneType)
 
 	DbNodeResourceStatus_AVAILABLE = DbNodeResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
@@ -3938,6 +7756,12 @@ func init() {
 
 	ShapeType_AMPERE_FLEX_A1 = ShapeType.AddMember("AMPERE_FLEX_A1", smithyprelude.Unit)
 
+	ShapeAttribute_SMART_STORAGE = ShapeAttribute.AddMember("SMART_STORAGE", smithyprelude.Unit)
+
+	ShapeAttribute_BLOCK_STORAGE = ShapeAttribute.AddMember("BLOCK_STORAGE", smithyprelude.Unit)
+
+	_ShapeAttributeList_member = _ShapeAttributeList.AddMember("member", ShapeAttribute)
+
 	DbSystemShapeSummary_availableCoreCount = DbSystemShapeSummary.AddMember("availableCoreCount", smithyprelude.Integer)
 
 	DbSystemShapeSummary_availableCoreCountPerNode = DbSystemShapeSummary.AddMember("availableCoreCountPerNode", smithyprelude.Integer)
@@ -3980,6 +7804,8 @@ func init() {
 
 	DbSystemShapeSummary_shapeType = DbSystemShapeSummary.AddMember("shapeType", ShapeType)
 
+	DbSystemShapeSummary_shapeAttributes = DbSystemShapeSummary.AddMember("shapeAttributes", _ShapeAttributeList)
+
 	DbSystemShapeSummary_name = DbSystemShapeSummary.AddMember("name", smithyprelude.String)
 
 	DbSystemShapeSummary_computeModel = DbSystemShapeSummary.AddMember("computeModel", ComputeModel)
@@ -3987,6 +7813,328 @@ func init() {
 	DbSystemShapeSummary_areServerTypesSupported = DbSystemShapeSummary.AddMember("areServerTypesSupported", smithyprelude.Boolean)
 
 	_DbSystemShapeList_member = _DbSystemShapeList.AddMember("member", DbSystemShapeSummary)
+
+	EncryptionKeyConfigurationInput_awsEncryptionKey = EncryptionKeyConfigurationInput.AddMember("awsEncryptionKey", AwsEncryptionKeyConfigurationInput)
+
+	EncryptionKeyProviderInput_ORACLE_MANAGED = EncryptionKeyProviderInput.AddMember("ORACLE_MANAGED", smithyprelude.Unit)
+
+	EncryptionKeyProviderInput_AWS_KMS = EncryptionKeyProviderInput.AddMember("AWS_KMS", smithyprelude.Unit)
+
+	GridImageType_RELEASE_UPDATE = GridImageType.AddMember("RELEASE_UPDATE", smithyprelude.Unit)
+
+	GridImageType_CUSTOM_IMAGE = GridImageType.AddMember("CUSTOM_IMAGE", smithyprelude.Unit)
+
+	ExadbVmClusterStorageDetails_totalSizeInGBs = ExadbVmClusterStorageDetails.AddMember("totalSizeInGBs", smithyprelude.Integer)
+
+	ExadbVmCluster_exadbVmClusterId = ExadbVmCluster.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	ExadbVmCluster_clusterName = ExadbVmCluster.AddMember("clusterName", _ClusterName)
+
+	ExadbVmCluster_createdAt = ExadbVmCluster.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ExadbVmCluster_dataCollectionOptions = ExadbVmCluster.AddMember("dataCollectionOptions", DataCollectionOptions)
+
+	ExadbVmCluster_displayName = ExadbVmCluster.AddMember("displayName", _ResourceDisplayName)
+
+	ExadbVmCluster_domain = ExadbVmCluster.AddMember("domain", smithyprelude.String)
+
+	ExadbVmCluster_enabledEcpuCount = ExadbVmCluster.AddMember("enabledEcpuCount", smithyprelude.Integer)
+
+	ExadbVmCluster_exadbVmClusterArn = ExadbVmCluster.AddMember("exadbVmClusterArn", _ResourceArn)
+
+	ExadbVmCluster_exascaleDbStorageVaultArn = ExadbVmCluster.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	ExadbVmCluster_exascaleDbStorageVaultId = ExadbVmCluster.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	ExadbVmCluster_giVersion = ExadbVmCluster.AddMember("giVersion", smithyprelude.String)
+
+	ExadbVmCluster_gridImageId = ExadbVmCluster.AddMember("gridImageId", smithyprelude.String)
+
+	ExadbVmCluster_gridImageType = ExadbVmCluster.AddMember("gridImageType", GridImageType)
+
+	ExadbVmCluster_hostname = ExadbVmCluster.AddMember("hostname", _Hostname)
+
+	ExadbVmCluster_iamRoles = ExadbVmCluster.AddMember("iamRoles", _IamRoleList)
+
+	ExadbVmCluster_iormConfigCache = ExadbVmCluster.AddMember("iormConfigCache", ExadataIormConfig)
+
+	ExadbVmCluster_lastUpdateHistoryEntryId = ExadbVmCluster.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
+
+	ExadbVmCluster_licenseModel = ExadbVmCluster.AddMember("licenseModel", LicenseModel)
+
+	ExadbVmCluster_listenerPort = ExadbVmCluster.AddMember("listenerPort", smithyprelude.Integer)
+
+	ExadbVmCluster_memorySizeInGBs = ExadbVmCluster.AddMember("memorySizeInGBs", smithyprelude.Integer)
+
+	ExadbVmCluster_nodeCount = ExadbVmCluster.AddMember("nodeCount", smithyprelude.Integer)
+
+	ExadbVmCluster_ocid = ExadbVmCluster.AddMember("ocid", smithyprelude.String)
+
+	ExadbVmCluster_ociResourceAnchorName = ExadbVmCluster.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	ExadbVmCluster_ociUrl = ExadbVmCluster.AddMember("ociUrl", smithyprelude.String)
+
+	ExadbVmCluster_odbNetworkArn = ExadbVmCluster.AddMember("odbNetworkArn", _ResourceArn)
+
+	ExadbVmCluster_odbNetworkId = ExadbVmCluster.AddMember("odbNetworkId", _ResourceIdOrArn)
+
+	ExadbVmCluster_percentProgress = ExadbVmCluster.AddMember("percentProgress", smithyprelude.Float)
+
+	ExadbVmCluster_scanDnsName = ExadbVmCluster.AddMember("scanDnsName", smithyprelude.String)
+
+	ExadbVmCluster_scanDnsRecordId = ExadbVmCluster.AddMember("scanDnsRecordId", smithyprelude.String)
+
+	ExadbVmCluster_scanIpIds = ExadbVmCluster.AddMember("scanIpIds", _StringList)
+
+	ExadbVmCluster_scanListenerPortTcp = ExadbVmCluster.AddMember("scanListenerPortTcp", smithyprelude.Integer)
+
+	ExadbVmCluster_scanListenerPortTcpSsl = ExadbVmCluster.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
+
+	ExadbVmCluster_shape = ExadbVmCluster.AddMember("shape", smithyprelude.String)
+
+	ExadbVmCluster_shapeAttribute = ExadbVmCluster.AddMember("shapeAttribute", ShapeAttribute)
+
+	ExadbVmCluster_snapshotFileSystemStorage = ExadbVmCluster.AddMember("snapshotFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	ExadbVmCluster_sshPublicKeys = ExadbVmCluster.AddMember("sshPublicKeys", _StringList)
+
+	ExadbVmCluster_status = ExadbVmCluster.AddMember("status", ResourceStatus)
+
+	ExadbVmCluster_statusReason = ExadbVmCluster.AddMember("statusReason", smithyprelude.String)
+
+	ExadbVmCluster_systemVersion = ExadbVmCluster.AddMember("systemVersion", smithyprelude.String)
+
+	ExadbVmCluster_timeZone = ExadbVmCluster.AddMember("timeZone", smithyprelude.String)
+
+	ExadbVmCluster_totalEcpuCount = ExadbVmCluster.AddMember("totalEcpuCount", smithyprelude.Integer)
+
+	ExadbVmCluster_totalFileSystemStorage = ExadbVmCluster.AddMember("totalFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	ExadbVmCluster_vipIds = ExadbVmCluster.AddMember("vipIds", _StringList)
+
+	ExadbVmCluster_vmFileSystemStorage = ExadbVmCluster.AddMember("vmFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	ExadbVmClusterSummary_exadbVmClusterId = ExadbVmClusterSummary.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	ExadbVmClusterSummary_clusterName = ExadbVmClusterSummary.AddMember("clusterName", _ClusterName)
+
+	ExadbVmClusterSummary_createdAt = ExadbVmClusterSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ExadbVmClusterSummary_dataCollectionOptions = ExadbVmClusterSummary.AddMember("dataCollectionOptions", DataCollectionOptions)
+
+	ExadbVmClusterSummary_displayName = ExadbVmClusterSummary.AddMember("displayName", _ResourceDisplayName)
+
+	ExadbVmClusterSummary_domain = ExadbVmClusterSummary.AddMember("domain", smithyprelude.String)
+
+	ExadbVmClusterSummary_enabledEcpuCount = ExadbVmClusterSummary.AddMember("enabledEcpuCount", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_exadbVmClusterArn = ExadbVmClusterSummary.AddMember("exadbVmClusterArn", _ResourceArn)
+
+	ExadbVmClusterSummary_exascaleDbStorageVaultArn = ExadbVmClusterSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	ExadbVmClusterSummary_exascaleDbStorageVaultId = ExadbVmClusterSummary.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	ExadbVmClusterSummary_giVersion = ExadbVmClusterSummary.AddMember("giVersion", smithyprelude.String)
+
+	ExadbVmClusterSummary_gridImageId = ExadbVmClusterSummary.AddMember("gridImageId", smithyprelude.String)
+
+	ExadbVmClusterSummary_gridImageType = ExadbVmClusterSummary.AddMember("gridImageType", GridImageType)
+
+	ExadbVmClusterSummary_hostname = ExadbVmClusterSummary.AddMember("hostname", _Hostname)
+
+	ExadbVmClusterSummary_iamRoles = ExadbVmClusterSummary.AddMember("iamRoles", _IamRoleList)
+
+	ExadbVmClusterSummary_iormConfigCache = ExadbVmClusterSummary.AddMember("iormConfigCache", ExadataIormConfig)
+
+	ExadbVmClusterSummary_lastUpdateHistoryEntryId = ExadbVmClusterSummary.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
+
+	ExadbVmClusterSummary_licenseModel = ExadbVmClusterSummary.AddMember("licenseModel", LicenseModel)
+
+	ExadbVmClusterSummary_listenerPort = ExadbVmClusterSummary.AddMember("listenerPort", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_memorySizeInGBs = ExadbVmClusterSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_nodeCount = ExadbVmClusterSummary.AddMember("nodeCount", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_ocid = ExadbVmClusterSummary.AddMember("ocid", smithyprelude.String)
+
+	ExadbVmClusterSummary_ociResourceAnchorName = ExadbVmClusterSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	ExadbVmClusterSummary_ociUrl = ExadbVmClusterSummary.AddMember("ociUrl", smithyprelude.String)
+
+	ExadbVmClusterSummary_odbNetworkArn = ExadbVmClusterSummary.AddMember("odbNetworkArn", _ResourceArn)
+
+	ExadbVmClusterSummary_odbNetworkId = ExadbVmClusterSummary.AddMember("odbNetworkId", _ResourceIdOrArn)
+
+	ExadbVmClusterSummary_percentProgress = ExadbVmClusterSummary.AddMember("percentProgress", smithyprelude.Float)
+
+	ExadbVmClusterSummary_scanDnsName = ExadbVmClusterSummary.AddMember("scanDnsName", smithyprelude.String)
+
+	ExadbVmClusterSummary_scanDnsRecordId = ExadbVmClusterSummary.AddMember("scanDnsRecordId", smithyprelude.String)
+
+	ExadbVmClusterSummary_scanIpIds = ExadbVmClusterSummary.AddMember("scanIpIds", _StringList)
+
+	ExadbVmClusterSummary_scanListenerPortTcp = ExadbVmClusterSummary.AddMember("scanListenerPortTcp", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_scanListenerPortTcpSsl = ExadbVmClusterSummary.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_shape = ExadbVmClusterSummary.AddMember("shape", smithyprelude.String)
+
+	ExadbVmClusterSummary_shapeAttribute = ExadbVmClusterSummary.AddMember("shapeAttribute", ShapeAttribute)
+
+	ExadbVmClusterSummary_snapshotFileSystemStorage = ExadbVmClusterSummary.AddMember("snapshotFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	ExadbVmClusterSummary_sshPublicKeys = ExadbVmClusterSummary.AddMember("sshPublicKeys", _StringList)
+
+	ExadbVmClusterSummary_status = ExadbVmClusterSummary.AddMember("status", ResourceStatus)
+
+	ExadbVmClusterSummary_statusReason = ExadbVmClusterSummary.AddMember("statusReason", smithyprelude.String)
+
+	ExadbVmClusterSummary_systemVersion = ExadbVmClusterSummary.AddMember("systemVersion", smithyprelude.String)
+
+	ExadbVmClusterSummary_timeZone = ExadbVmClusterSummary.AddMember("timeZone", smithyprelude.String)
+
+	ExadbVmClusterSummary_totalEcpuCount = ExadbVmClusterSummary.AddMember("totalEcpuCount", smithyprelude.Integer)
+
+	ExadbVmClusterSummary_totalFileSystemStorage = ExadbVmClusterSummary.AddMember("totalFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	ExadbVmClusterSummary_vipIds = ExadbVmClusterSummary.AddMember("vipIds", _StringList)
+
+	ExadbVmClusterSummary_vmFileSystemStorage = ExadbVmClusterSummary.AddMember("vmFileSystemStorage", ExadbVmClusterStorageDetails)
+
+	_ExadbVmClusterList_member = _ExadbVmClusterList.AddMember("member", ExadbVmClusterSummary)
+
+	ExascaleDbStorageDetails_availableSizeInGBs = ExascaleDbStorageDetails.AddMember("availableSizeInGBs", smithyprelude.Integer)
+
+	ExascaleDbStorageDetails_totalSizeInGBs = ExascaleDbStorageDetails.AddMember("totalSizeInGBs", smithyprelude.Integer)
+
+	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
+
+	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
+
+	ExascaleDbStorageVault_exascaleDbStorageVaultId = ExascaleDbStorageVault.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	ExascaleDbStorageVault_additionalFlashCacheInPercent = ExascaleDbStorageVault.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
+
+	ExascaleDbStorageVault_attachedShapeAttributes = ExascaleDbStorageVault.AddMember("attachedShapeAttributes", _ShapeAttributeList)
+
+	ExascaleDbStorageVault_autoscaleLimitInGBs = ExascaleDbStorageVault.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
+
+	ExascaleDbStorageVault_availabilityZone = ExascaleDbStorageVault.AddMember("availabilityZone", smithyprelude.String)
+
+	ExascaleDbStorageVault_availabilityZoneId = ExascaleDbStorageVault.AddMember("availabilityZoneId", smithyprelude.String)
+
+	ExascaleDbStorageVault_createdAt = ExascaleDbStorageVault.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ExascaleDbStorageVault_description = ExascaleDbStorageVault.AddMember("description", smithyprelude.String)
+
+	ExascaleDbStorageVault_displayName = ExascaleDbStorageVault.AddMember("displayName", smithyprelude.String)
+
+	ExascaleDbStorageVault_vmClusterArns = ExascaleDbStorageVault.AddMember("vmClusterArns", _ResourceArnList)
+
+	ExascaleDbStorageVault_vmClusterCount = ExascaleDbStorageVault.AddMember("vmClusterCount", smithyprelude.Integer)
+
+	ExascaleDbStorageVault_vmClusterIds = ExascaleDbStorageVault.AddMember("vmClusterIds", _ResourceIdList)
+
+	ExascaleDbStorageVault_exascaleDbStorageVaultArn = ExascaleDbStorageVault.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	ExascaleDbStorageVault_highCapacityDatabaseStorage = ExascaleDbStorageVault.AddMember("highCapacityDatabaseStorage", ExascaleDbStorageDetails)
+
+	ExascaleDbStorageVault_isAutoscaleEnabled = ExascaleDbStorageVault.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
+
+	ExascaleDbStorageVault_ocid = ExascaleDbStorageVault.AddMember("ocid", smithyprelude.String)
+
+	ExascaleDbStorageVault_ociResourceAnchorName = ExascaleDbStorageVault.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	ExascaleDbStorageVault_ociUrl = ExascaleDbStorageVault.AddMember("ociUrl", smithyprelude.String)
+
+	ExascaleDbStorageVault_percentProgress = ExascaleDbStorageVault.AddMember("percentProgress", smithyprelude.Float)
+
+	ExascaleDbStorageVault_status = ExascaleDbStorageVault.AddMember("status", ResourceStatus)
+
+	ExascaleDbStorageVault_statusReason = ExascaleDbStorageVault.AddMember("statusReason", smithyprelude.String)
+
+	ExascaleDbStorageVault_timeZone = ExascaleDbStorageVault.AddMember("timeZone", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId = ExascaleDbStorageVaultSummary.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent = ExascaleDbStorageVaultSummary.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
+
+	ExascaleDbStorageVaultSummary_attachedShapeAttributes = ExascaleDbStorageVaultSummary.AddMember("attachedShapeAttributes", _ShapeAttributeList)
+
+	ExascaleDbStorageVaultSummary_autoscaleLimitInGBs = ExascaleDbStorageVaultSummary.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
+
+	ExascaleDbStorageVaultSummary_availabilityZone = ExascaleDbStorageVaultSummary.AddMember("availabilityZone", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_availabilityZoneId = ExascaleDbStorageVaultSummary.AddMember("availabilityZoneId", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_createdAt = ExascaleDbStorageVaultSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ExascaleDbStorageVaultSummary_description = ExascaleDbStorageVaultSummary.AddMember("description", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_displayName = ExascaleDbStorageVaultSummary.AddMember("displayName", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_vmClusterArns = ExascaleDbStorageVaultSummary.AddMember("vmClusterArns", _ResourceArnList)
+
+	ExascaleDbStorageVaultSummary_vmClusterCount = ExascaleDbStorageVaultSummary.AddMember("vmClusterCount", smithyprelude.Integer)
+
+	ExascaleDbStorageVaultSummary_vmClusterIds = ExascaleDbStorageVaultSummary.AddMember("vmClusterIds", _ResourceIdList)
+
+	ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn = ExascaleDbStorageVaultSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
+
+	ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage = ExascaleDbStorageVaultSummary.AddMember("highCapacityDatabaseStorage", ExascaleDbStorageDetails)
+
+	ExascaleDbStorageVaultSummary_isAutoscaleEnabled = ExascaleDbStorageVaultSummary.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
+
+	ExascaleDbStorageVaultSummary_ocid = ExascaleDbStorageVaultSummary.AddMember("ocid", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_ociResourceAnchorName = ExascaleDbStorageVaultSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_ociUrl = ExascaleDbStorageVaultSummary.AddMember("ociUrl", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_percentProgress = ExascaleDbStorageVaultSummary.AddMember("percentProgress", smithyprelude.Float)
+
+	ExascaleDbStorageVaultSummary_status = ExascaleDbStorageVaultSummary.AddMember("status", ResourceStatus)
+
+	ExascaleDbStorageVaultSummary_statusReason = ExascaleDbStorageVaultSummary.AddMember("statusReason", smithyprelude.String)
+
+	ExascaleDbStorageVaultSummary_timeZone = ExascaleDbStorageVaultSummary.AddMember("timeZone", smithyprelude.String)
+
+	_ExascaleDbStorageVaultList_member = _ExascaleDbStorageVaultList.AddMember("member", ExascaleDbStorageVaultSummary)
+
+	HardwareType_COMPUTE = HardwareType.AddMember("COMPUTE", smithyprelude.Unit)
+
+	HardwareType_CELL = HardwareType.AddMember("CELL", smithyprelude.Unit)
+
+	FlexComponentSummary_availableCoreCount = FlexComponentSummary.AddMember("availableCoreCount", smithyprelude.Integer)
+
+	FlexComponentSummary_availableDbStorageInGBs = FlexComponentSummary.AddMember("availableDbStorageInGBs", smithyprelude.Integer)
+
+	FlexComponentSummary_availableLocalStorageInGBs = FlexComponentSummary.AddMember("availableLocalStorageInGBs", smithyprelude.Integer)
+
+	FlexComponentSummary_availableMemoryInGBs = FlexComponentSummary.AddMember("availableMemoryInGBs", smithyprelude.Integer)
+
+	FlexComponentSummary_computeModel = FlexComponentSummary.AddMember("computeModel", ComputeModel)
+
+	FlexComponentSummary_descriptionSummary = FlexComponentSummary.AddMember("descriptionSummary", smithyprelude.String)
+
+	FlexComponentSummary_hardwareType = FlexComponentSummary.AddMember("hardwareType", HardwareType)
+
+	FlexComponentSummary_minimumCoreCount = FlexComponentSummary.AddMember("minimumCoreCount", smithyprelude.Integer)
+
+	FlexComponentSummary_name = FlexComponentSummary.AddMember("name", smithyprelude.String)
+
+	FlexComponentSummary_runtimeMinimumCoreCount = FlexComponentSummary.AddMember("runtimeMinimumCoreCount", smithyprelude.Integer)
+
+	FlexComponentSummary_shape = FlexComponentSummary.AddMember("shape", smithyprelude.String)
+
+	_FlexComponentList_member = _FlexComponentList.AddMember("member", FlexComponentSummary)
+
+	GiMinorVersionSummary_version = GiMinorVersionSummary.AddMember("version", smithyprelude.String)
+
+	GiMinorVersionSummary_gridImageId = GiMinorVersionSummary.AddMember("gridImageId", smithyprelude.String)
+
+	_GiMinorVersionList_member = _GiMinorVersionList.AddMember("member", GiMinorVersionSummary)
 
 	GiVersionSummary_version = GiVersionSummary.AddMember("version", smithyprelude.String)
 
@@ -4054,11 +8202,35 @@ func init() {
 
 	ManagedServices_crossRegionS3RestoreSourcesAccess = ManagedServices.AddMember("crossRegionS3RestoreSourcesAccess", _CrossRegionS3RestoreSourcesAccessList)
 
+	OciAwsIntegration_KmsTde = OciAwsIntegration.AddMember("KmsTde", smithyprelude.Unit)
+
+	OciAwsIntegration_SecretsManager = OciAwsIntegration.AddMember("SecretsManager", smithyprelude.Unit)
+
 	OciDnsForwardingConfig_domainName = OciDnsForwardingConfig.AddMember("domainName", smithyprelude.String)
 
 	OciDnsForwardingConfig_ociDnsListenerIp = OciDnsForwardingConfig.AddMember("ociDnsListenerIp", smithyprelude.String)
 
 	_OciDnsForwardingConfigList_member = _OciDnsForwardingConfigList.AddMember("member", OciDnsForwardingConfig)
+
+	OciIamRoleStatus_PROVISIONING = OciIamRoleStatus.AddMember("PROVISIONING", smithyprelude.Unit)
+
+	OciIamRoleStatus_AVAILABLE = OciIamRoleStatus.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	OciIamRoleStatus_PROVISION_FAILED = OciIamRoleStatus.AddMember("PROVISION_FAILED", smithyprelude.Unit)
+
+	OciIamRoleStatus_TERMINATING = OciIamRoleStatus.AddMember("TERMINATING", smithyprelude.Unit)
+
+	OciIamRoleStatus_TERMINATE_FAILED = OciIamRoleStatus.AddMember("TERMINATE_FAILED", smithyprelude.Unit)
+
+	OciIamRole_iamRoleArn = OciIamRole.AddMember("iamRoleArn", _RoleArn)
+
+	OciIamRole_awsIntegration = OciIamRole.AddMember("awsIntegration", OciAwsIntegration)
+
+	OciIamRole_status = OciIamRole.AddMember("status", OciIamRoleStatus)
+
+	OciIamRole_statusReason = OciIamRole.AddMember("statusReason", smithyprelude.String)
+
+	_OciIamRoleList_member = _OciIamRoleList.AddMember("member", OciIamRole)
 
 	OciIdentityDomain_ociIdentityDomainId = OciIdentityDomain.AddMember("ociIdentityDomainId", smithyprelude.String)
 
@@ -4095,8 +8267,6 @@ func init() {
 	OciOnboardingStatus_SUSPENDED = OciOnboardingStatus.AddMember("SUSPENDED", smithyprelude.Unit)
 
 	OciOnboardingStatus_CANCELED = OciOnboardingStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
 
 	OdbNetwork_odbNetworkId = OdbNetwork.AddMember("odbNetworkId", _ResourceIdOrArn)
 
@@ -4238,6 +8408,16 @@ func init() {
 
 	_PeerNetworkRouteTableIdList_member = _PeerNetworkRouteTableIdList.AddMember("member", _PeerNetworkRouteTableId)
 
+	PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId = PointInTimeRestoreConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
+
+	PointInTimeRestoreConfiguration_cloneType = PointInTimeRestoreConfiguration.AddMember("cloneType", CloneType)
+
+	PointInTimeRestoreConfiguration_timestamp = PointInTimeRestoreConfiguration.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp = PointInTimeRestoreConfiguration.AddMember("useLatestAvailableBackupTimestamp", smithyprelude.Boolean)
+
+	PointInTimeRestoreConfiguration_cloneTableSpaceList = PointInTimeRestoreConfiguration.AddMember("cloneTableSpaceList", _IntegerList)
+
 	_RequestTagMap_key = _RequestTagMap.AddMember("key", _TagKey)
 
 	_RequestTagMap_value = _RequestTagMap.AddMember("value", _TagValue)
@@ -4252,6 +8432,12 @@ func init() {
 
 	_ResponseTagMap_value = _ResponseTagMap.AddMember("value", _TagValue)
 
+	RestoreFromBackupConfiguration_autonomousDatabaseBackupId = RestoreFromBackupConfiguration.AddMember("autonomousDatabaseBackupId", _ResourceIdOrArn)
+
+	RestoreFromBackupConfiguration_cloneType = RestoreFromBackupConfiguration.AddMember("cloneType", CloneType)
+
+	RestoreFromBackupConfiguration_cloneTableSpaceList = RestoreFromBackupConfiguration.AddMember("cloneTableSpaceList", _IntegerList)
+
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
 
 	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
@@ -4259,6 +8445,36 @@ func init() {
 	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
 
 	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
+
+	SourceConfiguration_databaseClone = SourceConfiguration.AddMember("databaseClone", DatabaseCloneConfiguration)
+
+	SourceConfiguration_restoreFromBackup = SourceConfiguration.AddMember("restoreFromBackup", RestoreFromBackupConfiguration)
+
+	SourceConfiguration_pointInTimeRestore = SourceConfiguration.AddMember("pointInTimeRestore", PointInTimeRestoreConfiguration)
+
+	SourceConfiguration_crossRegionDataGuard = SourceConfiguration.AddMember("crossRegionDataGuard", CrossRegionDataGuardConfiguration)
+
+	SourceConfiguration_crossRegionDisasterRecovery = SourceConfiguration.AddMember("crossRegionDisasterRecovery", CrossRegionDisasterRecoveryConfiguration)
+
+	SourceConfiguration_cloneToRefreshable = SourceConfiguration.AddMember("cloneToRefreshable", CloneToRefreshableConfiguration)
+
+	SourceType_NONE = SourceType.AddMember("NONE", smithyprelude.Unit)
+
+	SourceType_DATABASE = SourceType.AddMember("DATABASE", smithyprelude.Unit)
+
+	SourceType_BACKUP_FROM_ID = SourceType.AddMember("BACKUP_FROM_ID", smithyprelude.Unit)
+
+	SourceType_BACKUP_FROM_TIMESTAMP = SourceType.AddMember("BACKUP_FROM_TIMESTAMP", smithyprelude.Unit)
+
+	SourceType_CROSS_REGION_DATAGUARD = SourceType.AddMember("CROSS_REGION_DATAGUARD", smithyprelude.Unit)
+
+	SourceType_CROSS_REGION_DISASTER_RECOVERY = SourceType.AddMember("CROSS_REGION_DISASTER_RECOVERY", smithyprelude.Unit)
+
+	SourceType_CLONE_TO_REFRESHABLE = SourceType.AddMember("CLONE_TO_REFRESHABLE", smithyprelude.Unit)
+
+	SubscriptionError_errorMessage = SubscriptionError.AddMember("errorMessage", smithyprelude.String)
+
+	_SubscriptionErrors_member = _SubscriptionErrors.AddMember("member", SubscriptionError)
 
 	SystemVersionSummary_giVersion = SystemVersionSummary.AddMember("giVersion", smithyprelude.String)
 
@@ -4273,6 +8489,16 @@ func init() {
 	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
 
 	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
+
+	TransportableTablespace_ttsBundleUrl = TransportableTablespace.AddMember("ttsBundleUrl", smithyprelude.String)
+
+	UpdateAction_ROLLING_APPLY = UpdateAction.AddMember("ROLLING_APPLY", smithyprelude.Unit)
+
+	UpdateAction_NON_ROLLING_APPLY = UpdateAction.AddMember("NON_ROLLING_APPLY", smithyprelude.Unit)
+
+	UpdateAction_PRECHECK = UpdateAction.AddMember("PRECHECK", smithyprelude.Unit)
+
+	UpdateAction_ROLLBACK = UpdateAction.AddMember("ROLLBACK", smithyprelude.Unit)
 
 	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
 
@@ -4294,6 +8520,12 @@ func init() {
 
 	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
 
+	WalletPasswordSourceConfigurationInput_customerManagedAwsSecret = WalletPasswordSourceConfigurationInput.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfigurationInput)
+
+	WalletType_REGIONAL = WalletType.AddMember("REGIONAL", smithyprelude.Unit)
+
+	WalletType_INSTANCE = WalletType.AddMember("INSTANCE", smithyprelude.Unit)
+
 	AcceptMarketplaceRegistrationInput_marketplaceRegistrationToken = AcceptMarketplaceRegistrationInput.AddMember("marketplaceRegistrationToken", smithyprelude.String)
 
 	AssociateIamRoleToResourceInput_iamRoleArn = AssociateIamRoleToResourceInput.AddMember("iamRoleArn", _RoleArn)
@@ -4301,6 +8533,140 @@ func init() {
 	AssociateIamRoleToResourceInput_awsIntegration = AssociateIamRoleToResourceInput.AddMember("awsIntegration", SupportedAwsIntegration)
 
 	AssociateIamRoleToResourceInput_resourceArn = AssociateIamRoleToResourceInput.AddMember("resourceArn", _Arn)
+
+	AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("desiredNodeCount", smithyprelude.Integer)
+
+	AssociateVirtualMachinesToExadbVmClusterOutput_displayName = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	AssociateVirtualMachinesToExadbVmClusterOutput_status = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("status", ResourceStatus)
+
+	AssociateVirtualMachinesToExadbVmClusterOutput_statusReason = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
+
+	CreateAutonomousDatabaseBackupInput_autonomousDatabaseId = CreateAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	CreateAutonomousDatabaseBackupInput_displayName = CreateAutonomousDatabaseBackupInput.AddMember("displayName", _ResourceDisplayName)
+
+	CreateAutonomousDatabaseBackupInput_retentionPeriodInDays = CreateAutonomousDatabaseBackupInput.AddMember("retentionPeriodInDays", smithyprelude.Integer)
+
+	CreateAutonomousDatabaseBackupInput_clientToken = CreateAutonomousDatabaseBackupInput.AddMember("clientToken", _GeneralInputString)
+
+	CreateAutonomousDatabaseBackupInput_tags = CreateAutonomousDatabaseBackupInput.AddMember("tags", _RequestTagMap)
+
+	CreateAutonomousDatabaseBackupOutput_displayName = CreateAutonomousDatabaseBackupOutput.AddMember("displayName", smithyprelude.String)
+
+	CreateAutonomousDatabaseBackupOutput_status = CreateAutonomousDatabaseBackupOutput.AddMember("status", ResourceStatus)
+
+	CreateAutonomousDatabaseBackupOutput_statusReason = CreateAutonomousDatabaseBackupOutput.AddMember("statusReason", smithyprelude.String)
+
+	CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = CreateAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackupId", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_odbNetworkId = CreateAutonomousDatabaseInput.AddMember("odbNetworkId", _ResourceIdOrArn)
+
+	CreateAutonomousDatabaseInput_displayName = CreateAutonomousDatabaseInput.AddMember("displayName", _ResourceDisplayName)
+
+	CreateAutonomousDatabaseInput_dbName = CreateAutonomousDatabaseInput.AddMember("dbName", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_adminPassword = CreateAutonomousDatabaseInput.AddMember("adminPassword", _SensitiveString)
+
+	CreateAutonomousDatabaseInput_computeCount = CreateAutonomousDatabaseInput.AddMember("computeCount", smithyprelude.Double)
+
+	CreateAutonomousDatabaseInput_dataStorageSizeInTBs = CreateAutonomousDatabaseInput.AddMember("dataStorageSizeInTBs", smithyprelude.Integer)
+
+	CreateAutonomousDatabaseInput_dataStorageSizeInGBs = CreateAutonomousDatabaseInput.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
+
+	CreateAutonomousDatabaseInput_dbWorkload = CreateAutonomousDatabaseInput.AddMember("dbWorkload", DbWorkload)
+
+	CreateAutonomousDatabaseInput_isAutoScalingEnabled = CreateAutonomousDatabaseInput.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
+
+	CreateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = CreateAutonomousDatabaseInput.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
+
+	CreateAutonomousDatabaseInput_licenseModel = CreateAutonomousDatabaseInput.AddMember("licenseModel", LicenseModel)
+
+	CreateAutonomousDatabaseInput_characterSet = CreateAutonomousDatabaseInput.AddMember("characterSet", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_ncharacterSet = CreateAutonomousDatabaseInput.AddMember("ncharacterSet", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_dbVersion = CreateAutonomousDatabaseInput.AddMember("dbVersion", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_databaseEdition = CreateAutonomousDatabaseInput.AddMember("databaseEdition", DatabaseEdition)
+
+	CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource = CreateAutonomousDatabaseInput.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
+
+	CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = CreateAutonomousDatabaseInput.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
+
+	CreateAutonomousDatabaseInput_backupRetentionPeriodInDays = CreateAutonomousDatabaseInput.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
+
+	CreateAutonomousDatabaseInput_byolComputeCountLimit = CreateAutonomousDatabaseInput.AddMember("byolComputeCountLimit", smithyprelude.Double)
+
+	CreateAutonomousDatabaseInput_cpuCoreCount = CreateAutonomousDatabaseInput.AddMember("cpuCoreCount", smithyprelude.Integer)
+
+	CreateAutonomousDatabaseInput_customerContactsToSendToOCI = CreateAutonomousDatabaseInput.AddMember("customerContactsToSendToOCI", _CustomerContacts)
+
+	CreateAutonomousDatabaseInput_privateEndpointIp = CreateAutonomousDatabaseInput.AddMember("privateEndpointIp", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_privateEndpointLabel = CreateAutonomousDatabaseInput.AddMember("privateEndpointLabel", smithyprelude.String)
+
+	CreateAutonomousDatabaseInput_resourcePoolLeaderId = CreateAutonomousDatabaseInput.AddMember("resourcePoolLeaderId", _ResourceIdOrArn)
+
+	CreateAutonomousDatabaseInput_resourcePoolSummary = CreateAutonomousDatabaseInput.AddMember("resourcePoolSummary", ResourcePoolSummary)
+
+	CreateAutonomousDatabaseInput_scheduledOperations = CreateAutonomousDatabaseInput.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
+
+	CreateAutonomousDatabaseInput_standbyAllowlistedIps = CreateAutonomousDatabaseInput.AddMember("standbyAllowlistedIps", _StringList)
+
+	CreateAutonomousDatabaseInput_allowlistedIps = CreateAutonomousDatabaseInput.AddMember("allowlistedIps", _StringList)
+
+	CreateAutonomousDatabaseInput_transportableTablespace = CreateAutonomousDatabaseInput.AddMember("transportableTablespace", TransportableTablespace)
+
+	CreateAutonomousDatabaseInput_isBackupRetentionLocked = CreateAutonomousDatabaseInput.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
+
+	CreateAutonomousDatabaseInput_isLocalDataGuardEnabled = CreateAutonomousDatabaseInput.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
+
+	CreateAutonomousDatabaseInput_isMtlsConnectionRequired = CreateAutonomousDatabaseInput.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
+
+	CreateAutonomousDatabaseInput_dbToolsDetails = CreateAutonomousDatabaseInput.AddMember("dbToolsDetails", _DatabaseToolList)
+
+	CreateAutonomousDatabaseInput_source = CreateAutonomousDatabaseInput.AddMember("source", SourceType)
+
+	CreateAutonomousDatabaseInput_sourceConfiguration = CreateAutonomousDatabaseInput.AddMember("sourceConfiguration", SourceConfiguration)
+
+	CreateAutonomousDatabaseInput_encryptionKeyProvider = CreateAutonomousDatabaseInput.AddMember("encryptionKeyProvider", EncryptionKeyProviderInput)
+
+	CreateAutonomousDatabaseInput_encryptionKeyConfiguration = CreateAutonomousDatabaseInput.AddMember("encryptionKeyConfiguration", EncryptionKeyConfigurationInput)
+
+	CreateAutonomousDatabaseInput_adminPasswordSource = CreateAutonomousDatabaseInput.AddMember("adminPasswordSource", AdminPasswordSource)
+
+	CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration = CreateAutonomousDatabaseInput.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfigurationInput)
+
+	CreateAutonomousDatabaseInput_clientToken = CreateAutonomousDatabaseInput.AddMember("clientToken", _GeneralInputString)
+
+	CreateAutonomousDatabaseInput_tags = CreateAutonomousDatabaseInput.AddMember("tags", _RequestTagMap)
+
+	CreateAutonomousDatabaseOutput_autonomousDatabaseId = CreateAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	CreateAutonomousDatabaseOutput_displayName = CreateAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	CreateAutonomousDatabaseOutput_status = CreateAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	CreateAutonomousDatabaseOutput_statusReason = CreateAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	CreateAutonomousDatabaseWalletInput_autonomousDatabaseId = CreateAutonomousDatabaseWalletInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	CreateAutonomousDatabaseWalletInput_walletType = CreateAutonomousDatabaseWalletInput.AddMember("walletType", WalletType)
+
+	CreateAutonomousDatabaseWalletInput_password = CreateAutonomousDatabaseWalletInput.AddMember("password", _SensitiveString)
+
+	CreateAutonomousDatabaseWalletInput_passwordSource = CreateAutonomousDatabaseWalletInput.AddMember("passwordSource", WalletPasswordSource)
+
+	CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration = CreateAutonomousDatabaseWalletInput.AddMember("passwordSourceConfiguration", WalletPasswordSourceConfigurationInput)
+
+	CreateAutonomousDatabaseWalletInput_clientToken = CreateAutonomousDatabaseWalletInput.AddMember("clientToken", _GeneralInputString)
+
+	CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile = CreateAutonomousDatabaseWalletOutput.AddMember("autonomousDatabaseWalletFile", _AutonomousDatabaseWalletFile)
 
 	CreateCloudAutonomousVmClusterInput_cloudExadataInfrastructureId = CreateCloudAutonomousVmClusterInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
 
@@ -4384,13 +8750,13 @@ func init() {
 
 	CreateCloudVmClusterInput_giVersion = CreateCloudVmClusterInput.AddMember("giVersion", smithyprelude.String)
 
-	CreateCloudVmClusterInput_hostname = CreateCloudVmClusterInput.AddMember("hostname", smithyprelude.String)
+	CreateCloudVmClusterInput_hostname = CreateCloudVmClusterInput.AddMember("hostname", _Hostname)
 
 	CreateCloudVmClusterInput_sshPublicKeys = CreateCloudVmClusterInput.AddMember("sshPublicKeys", _StringList)
 
 	CreateCloudVmClusterInput_odbNetworkId = CreateCloudVmClusterInput.AddMember("odbNetworkId", _ResourceIdOrArn)
 
-	CreateCloudVmClusterInput_clusterName = CreateCloudVmClusterInput.AddMember("clusterName", smithyprelude.String)
+	CreateCloudVmClusterInput_clusterName = CreateCloudVmClusterInput.AddMember("clusterName", _ClusterName)
 
 	CreateCloudVmClusterInput_dataCollectionOptions = CreateCloudVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
 
@@ -4425,6 +8791,86 @@ func init() {
 	CreateCloudVmClusterOutput_statusReason = CreateCloudVmClusterOutput.AddMember("statusReason", smithyprelude.String)
 
 	CreateCloudVmClusterOutput_cloudVmClusterId = CreateCloudVmClusterOutput.AddMember("cloudVmClusterId", smithyprelude.String)
+
+	CreateExadbVmClusterInput_displayName = CreateExadbVmClusterInput.AddMember("displayName", _ResourceDisplayName)
+
+	CreateExadbVmClusterInput_enabledEcpuCount = CreateExadbVmClusterInput.AddMember("enabledEcpuCount", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_exascaleDbStorageVaultId = CreateExadbVmClusterInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	CreateExadbVmClusterInput_gridImageId = CreateExadbVmClusterInput.AddMember("gridImageId", smithyprelude.String)
+
+	CreateExadbVmClusterInput_hostname = CreateExadbVmClusterInput.AddMember("hostname", _Hostname)
+
+	CreateExadbVmClusterInput_nodeCount = CreateExadbVmClusterInput.AddMember("nodeCount", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_odbNetworkId = CreateExadbVmClusterInput.AddMember("odbNetworkId", _ResourceIdOrArn)
+
+	CreateExadbVmClusterInput_shape = CreateExadbVmClusterInput.AddMember("shape", smithyprelude.String)
+
+	CreateExadbVmClusterInput_sshPublicKeys = CreateExadbVmClusterInput.AddMember("sshPublicKeys", _StringList)
+
+	CreateExadbVmClusterInput_totalEcpuCount = CreateExadbVmClusterInput.AddMember("totalEcpuCount", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = CreateExadbVmClusterInput.AddMember("vmFileSystemStorageTotalSizeInGBs", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_clusterName = CreateExadbVmClusterInput.AddMember("clusterName", _ClusterName)
+
+	CreateExadbVmClusterInput_dataCollectionOptions = CreateExadbVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
+
+	CreateExadbVmClusterInput_licenseModel = CreateExadbVmClusterInput.AddMember("licenseModel", LicenseModel)
+
+	CreateExadbVmClusterInput_scanListenerPortTcp = CreateExadbVmClusterInput.AddMember("scanListenerPortTcp", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_scanListenerPortTcpSsl = CreateExadbVmClusterInput.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
+
+	CreateExadbVmClusterInput_shapeAttribute = CreateExadbVmClusterInput.AddMember("shapeAttribute", ShapeAttribute)
+
+	CreateExadbVmClusterInput_systemVersion = CreateExadbVmClusterInput.AddMember("systemVersion", smithyprelude.String)
+
+	CreateExadbVmClusterInput_tags = CreateExadbVmClusterInput.AddMember("tags", _RequestTagMap)
+
+	CreateExadbVmClusterInput_timeZone = CreateExadbVmClusterInput.AddMember("timeZone", smithyprelude.String)
+
+	CreateExadbVmClusterInput_clientToken = CreateExadbVmClusterInput.AddMember("clientToken", _GeneralInputString)
+
+	CreateExadbVmClusterOutput_displayName = CreateExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	CreateExadbVmClusterOutput_status = CreateExadbVmClusterOutput.AddMember("status", ResourceStatus)
+
+	CreateExadbVmClusterOutput_statusReason = CreateExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	CreateExadbVmClusterOutput_exadbVmClusterId = CreateExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultInput_displayName = CreateExascaleDbStorageVaultInput.AddMember("displayName", _ResourceDisplayName)
+
+	CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = CreateExascaleDbStorageVaultInput.AddMember("highCapacityDatabaseStorageTotalSizeInGBs", smithyprelude.Integer)
+
+	CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = CreateExascaleDbStorageVaultInput.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
+
+	CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs = CreateExascaleDbStorageVaultInput.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
+
+	CreateExascaleDbStorageVaultInput_availabilityZoneId = CreateExascaleDbStorageVaultInput.AddMember("availabilityZoneId", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultInput_availabilityZone = CreateExascaleDbStorageVaultInput.AddMember("availabilityZone", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultInput_description = CreateExascaleDbStorageVaultInput.AddMember("description", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultInput_isAutoscaleEnabled = CreateExascaleDbStorageVaultInput.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
+
+	CreateExascaleDbStorageVaultInput_tags = CreateExascaleDbStorageVaultInput.AddMember("tags", _RequestTagMap)
+
+	CreateExascaleDbStorageVaultInput_timeZone = CreateExascaleDbStorageVaultInput.AddMember("timeZone", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultInput_clientToken = CreateExascaleDbStorageVaultInput.AddMember("clientToken", _GeneralInputString)
+
+	CreateExascaleDbStorageVaultOutput_displayName = CreateExascaleDbStorageVaultOutput.AddMember("displayName", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultOutput_status = CreateExascaleDbStorageVaultOutput.AddMember("status", ResourceStatus)
+
+	CreateExascaleDbStorageVaultOutput_statusReason = CreateExascaleDbStorageVaultOutput.AddMember("statusReason", smithyprelude.String)
+
+	CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = CreateExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVaultId", smithyprelude.String)
 
 	CreateOdbNetworkInput_displayName = CreateOdbNetworkInput.AddMember("displayName", _ResourceDisplayName)
 
@@ -4490,11 +8936,19 @@ func init() {
 
 	CreateOdbPeeringConnectionOutput_odbPeeringConnectionId = CreateOdbPeeringConnectionOutput.AddMember("odbPeeringConnectionId", smithyprelude.String)
 
+	DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = DeleteAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteAutonomousDatabaseInput_autonomousDatabaseId = DeleteAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
 	DeleteCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = DeleteCloudAutonomousVmClusterInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
 
 	DeleteCloudExadataInfrastructureInput_cloudExadataInfrastructureId = DeleteCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 
 	DeleteCloudVmClusterInput_cloudVmClusterId = DeleteCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteExadbVmClusterInput_exadbVmClusterId = DeleteExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId = DeleteExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
 
 	DeleteOdbNetworkInput_odbNetworkId = DeleteOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 
@@ -4507,6 +8961,42 @@ func init() {
 	DisassociateIamRoleFromResourceInput_awsIntegration = DisassociateIamRoleFromResourceInput.AddMember("awsIntegration", SupportedAwsIntegration)
 
 	DisassociateIamRoleFromResourceInput_resourceArn = DisassociateIamRoleFromResourceInput.AddMember("resourceArn", _Arn)
+
+	DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId = DisassociateVirtualMachinesFromExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds = DisassociateVirtualMachinesFromExadbVmClusterInput.AddMember("dbNodeIds", _ResourceIdList)
+
+	DisassociateVirtualMachinesFromExadbVmClusterOutput_displayName = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	DisassociateVirtualMachinesFromExadbVmClusterOutput_status = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("status", ResourceStatus)
+
+	DisassociateVirtualMachinesFromExadbVmClusterOutput_statusReason = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	DisassociateVirtualMachinesFromExadbVmClusterOutput_exadbVmClusterId = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
+
+	FailoverAutonomousDatabaseInput_autonomousDatabaseId = FailoverAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	FailoverAutonomousDatabaseInput_peerDbArn = FailoverAutonomousDatabaseInput.AddMember("peerDbArn", _ResourceArn)
+
+	FailoverAutonomousDatabaseOutput_autonomousDatabaseId = FailoverAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	FailoverAutonomousDatabaseOutput_displayName = FailoverAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	FailoverAutonomousDatabaseOutput_status = FailoverAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	FailoverAutonomousDatabaseOutput_statusReason = FailoverAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = GetAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup = GetAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackup", AutonomousDatabaseBackup)
+
+	GetAutonomousDatabaseInput_autonomousDatabaseId = GetAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	GetAutonomousDatabaseOutput_autonomousDatabase = GetAutonomousDatabaseOutput.AddMember("autonomousDatabase", AutonomousDatabase)
+
+	GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId = GetAutonomousDatabaseWalletDetailsInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails = GetAutonomousDatabaseWalletDetailsOutput.AddMember("autonomousDatabaseWalletDetails", AutonomousDatabaseWalletDetails)
 
 	GetCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = GetCloudAutonomousVmClusterInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4526,7 +9016,9 @@ func init() {
 
 	GetCloudVmClusterOutput_cloudVmCluster = GetCloudVmClusterOutput.AddMember("cloudVmCluster", CloudVmCluster)
 
-	GetDbNodeInput_cloudVmClusterId = GetDbNodeInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+	GetDbNodeInput_cloudVmClusterId = GetDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
+
+	GetDbNodeInput_exadbVmClusterId = GetDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
 
 	GetDbNodeInput_dbNodeId = GetDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4538,6 +9030,14 @@ func init() {
 
 	GetDbServerOutput_dbServer = GetDbServerOutput.AddMember("dbServer", DbServer)
 
+	GetExadbVmClusterInput_exadbVmClusterId = GetExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	GetExadbVmClusterOutput_exadbVmCluster = GetExadbVmClusterOutput.AddMember("exadbVmCluster", ExadbVmCluster)
+
+	GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId = GetExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	GetExascaleDbStorageVaultOutput_exascaleDbStorageVault = GetExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVault", ExascaleDbStorageVault)
+
 	GetOciOnboardingStatusOutput_status = GetOciOnboardingStatusOutput.AddMember("status", OciOnboardingStatus)
 
 	GetOciOnboardingStatusOutput_existingTenancyActivationLink = GetOciOnboardingStatusOutput.AddMember("existingTenancyActivationLink", smithyprelude.String)
@@ -4545,6 +9045,14 @@ func init() {
 	GetOciOnboardingStatusOutput_newTenancyActivationLink = GetOciOnboardingStatusOutput.AddMember("newTenancyActivationLink", smithyprelude.String)
 
 	GetOciOnboardingStatusOutput_ociIdentityDomain = GetOciOnboardingStatusOutput.AddMember("ociIdentityDomain", OciIdentityDomain)
+
+	GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles = GetOciOnboardingStatusOutput.AddMember("autonomousDatabaseOciIntegrationIamRoles", _OciIamRoleList)
+
+	GetOciOnboardingStatusOutput_linkedOciTenancyId = GetOciOnboardingStatusOutput.AddMember("linkedOciTenancyId", smithyprelude.String)
+
+	GetOciOnboardingStatusOutput_linkedOciCompartmentId = GetOciOnboardingStatusOutput.AddMember("linkedOciCompartmentId", smithyprelude.String)
+
+	GetOciOnboardingStatusOutput_subscriptionErrors = GetOciOnboardingStatusOutput.AddMember("subscriptionErrors", _SubscriptionErrors)
 
 	GetOdbNetworkInput_odbNetworkId = GetOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 
@@ -4555,6 +9063,70 @@ func init() {
 	GetOdbPeeringConnectionOutput_odbPeeringConnection = GetOdbPeeringConnectionOutput.AddMember("odbPeeringConnection", OdbPeeringConnection)
 
 	InitializeServiceInput_ociIdentityDomain = InitializeServiceInput.AddMember("ociIdentityDomain", smithyprelude.Boolean)
+
+	InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration = InitializeServiceInput.AddMember("autonomousDatabaseOciAwsSecretsManagerIntegration", Access)
+
+	ListAutonomousDatabaseBackupsInput_maxResults = ListAutonomousDatabaseBackupsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabaseBackupsInput_nextToken = ListAutonomousDatabaseBackupsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabaseBackupsInput_autonomousDatabaseId = ListAutonomousDatabaseBackupsInput.AddMember("autonomousDatabaseId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	ListAutonomousDatabaseBackupsInput_status = ListAutonomousDatabaseBackupsInput.AddMember("status", AutonomousDatabaseBackupStatus)
+
+	ListAutonomousDatabaseBackupsInput_type = ListAutonomousDatabaseBackupsInput.AddMember("type", AutonomousDatabaseBackupType)
+
+	ListAutonomousDatabaseBackupsOutput_nextToken = ListAutonomousDatabaseBackupsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups = ListAutonomousDatabaseBackupsOutput.AddMember("autonomousDatabaseBackups", _AutonomousDatabaseBackupList)
+
+	ListAutonomousDatabaseCharacterSetsInput_maxResults = ListAutonomousDatabaseCharacterSetsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabaseCharacterSetsInput_nextToken = ListAutonomousDatabaseCharacterSetsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabaseCharacterSetsInput_characterSetType = ListAutonomousDatabaseCharacterSetsInput.AddMember("characterSetType", characterSetType)
+
+	ListAutonomousDatabaseCharacterSetsOutput_nextToken = ListAutonomousDatabaseCharacterSetsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets = ListAutonomousDatabaseCharacterSetsOutput.AddMember("autonomousDatabaseCharacterSets", _AutonomousDatabaseCharacterSetList)
+
+	ListAutonomousDatabaseClonesInput_maxResults = ListAutonomousDatabaseClonesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabaseClonesInput_nextToken = ListAutonomousDatabaseClonesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabaseClonesInput_autonomousDatabaseId = ListAutonomousDatabaseClonesInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListAutonomousDatabaseClonesOutput_nextToken = ListAutonomousDatabaseClonesOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones = ListAutonomousDatabaseClonesOutput.AddMember("autonomousDatabaseClones", _AutonomousDatabaseList)
+
+	ListAutonomousDatabasePeersInput_maxResults = ListAutonomousDatabasePeersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabasePeersInput_nextToken = ListAutonomousDatabasePeersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabasePeersInput_autonomousDatabaseId = ListAutonomousDatabasePeersInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListAutonomousDatabasePeersOutput_nextToken = ListAutonomousDatabasePeersOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabasePeersOutput_autonomousDatabasePeers = ListAutonomousDatabasePeersOutput.AddMember("autonomousDatabasePeers", _AutonomousDatabasePeerList)
+
+	ListAutonomousDatabasesInput_maxResults = ListAutonomousDatabasesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabasesInput_nextToken = ListAutonomousDatabasesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabasesOutput_nextToken = ListAutonomousDatabasesOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabasesOutput_autonomousDatabases = ListAutonomousDatabasesOutput.AddMember("autonomousDatabases", _AutonomousDatabaseList)
+
+	ListAutonomousDatabaseVersionsInput_maxResults = ListAutonomousDatabaseVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabaseVersionsInput_nextToken = ListAutonomousDatabaseVersionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabaseVersionsInput_dbWorkload = ListAutonomousDatabaseVersionsInput.AddMember("dbWorkload", DbWorkload)
+
+	ListAutonomousDatabaseVersionsOutput_nextToken = ListAutonomousDatabaseVersionsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions = ListAutonomousDatabaseVersionsOutput.AddMember("autonomousDatabaseVersions", _AutonomousDatabaseVersionList)
 
 	ListAutonomousVirtualMachinesInput_maxResults = ListAutonomousVirtualMachinesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -4598,7 +9170,9 @@ func init() {
 
 	ListDbNodesInput_nextToken = ListDbNodesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
 
-	ListDbNodesInput_cloudVmClusterId = ListDbNodesInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+	ListDbNodesInput_cloudVmClusterId = ListDbNodesInput.AddMember("cloudVmClusterId", _ResourceId)
+
+	ListDbNodesInput_exadbVmClusterId = ListDbNodesInput.AddMember("exadbVmClusterId", _ResourceId)
 
 	ListDbNodesOutput_nextToken = ListDbNodesOutput.AddMember("nextToken", smithyprelude.String)
 
@@ -4622,9 +9196,55 @@ func init() {
 
 	ListDbSystemShapesInput_availabilityZoneId = ListDbSystemShapesInput.AddMember("availabilityZoneId", smithyprelude.String)
 
+	ListDbSystemShapesInput_shapeFamily = ListDbSystemShapesInput.AddMember("shapeFamily", smithyprelude.String)
+
 	ListDbSystemShapesOutput_nextToken = ListDbSystemShapesOutput.AddMember("nextToken", smithyprelude.String)
 
 	ListDbSystemShapesOutput_dbSystemShapes = ListDbSystemShapesOutput.AddMember("dbSystemShapes", _DbSystemShapeList)
+
+	ListExadbVmClustersInput_exascaleDbStorageVaultId = ListExadbVmClustersInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn, &smithytraits.HTTPQuery{Name: "exascaleDbStorageVaultId"})
+
+	ListExadbVmClustersInput_maxResults = ListExadbVmClustersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListExadbVmClustersInput_nextToken = ListExadbVmClustersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListExadbVmClustersOutput_nextToken = ListExadbVmClustersOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListExadbVmClustersOutput_exadbVmClusters = ListExadbVmClustersOutput.AddMember("exadbVmClusters", _ExadbVmClusterList)
+
+	ListExascaleDbStorageVaultsInput_maxResults = ListExascaleDbStorageVaultsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListExascaleDbStorageVaultsInput_nextToken = ListExascaleDbStorageVaultsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListExascaleDbStorageVaultsOutput_nextToken = ListExascaleDbStorageVaultsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults = ListExascaleDbStorageVaultsOutput.AddMember("exascaleDbStorageVaults", _ExascaleDbStorageVaultList)
+
+	ListFlexComponentsInput_maxResults = ListFlexComponentsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListFlexComponentsInput_nextToken = ListFlexComponentsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListFlexComponentsInput_shape = ListFlexComponentsInput.AddMember("shape", smithyprelude.String)
+
+	ListFlexComponentsOutput_nextToken = ListFlexComponentsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListFlexComponentsOutput_flexComponents = ListFlexComponentsOutput.AddMember("flexComponents", _FlexComponentList)
+
+	ListGiMinorVersionsInput_giVersion = ListGiMinorVersionsInput.AddMember("giVersion", smithyprelude.String)
+
+	ListGiMinorVersionsInput_maxResults = ListGiMinorVersionsInput.AddMember("maxResults", smithyprelude.Integer)
+
+	ListGiMinorVersionsInput_nextToken = ListGiMinorVersionsInput.AddMember("nextToken", smithyprelude.String)
+
+	ListGiMinorVersionsInput_shapeFamily = ListGiMinorVersionsInput.AddMember("shapeFamily", smithyprelude.String)
+
+	ListGiMinorVersionsInput_availabilityZone = ListGiMinorVersionsInput.AddMember("availabilityZone", smithyprelude.String)
+
+	ListGiMinorVersionsInput_availabilityZoneId = ListGiMinorVersionsInput.AddMember("availabilityZoneId", smithyprelude.String)
+
+	ListGiMinorVersionsOutput_nextToken = ListGiMinorVersionsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListGiMinorVersionsOutput_giMinorVersions = ListGiMinorVersionsOutput.AddMember("giMinorVersions", _GiMinorVersionList)
 
 	ListGiVersionsInput_maxResults = ListGiVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -4670,7 +9290,21 @@ func init() {
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _ResponseTagMap)
 
-	RebootDbNodeInput_cloudVmClusterId = RebootDbNodeInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+	RebootAutonomousDatabaseInput_autonomousDatabaseId = RebootAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	RebootAutonomousDatabaseInput_isOnlineReboot = RebootAutonomousDatabaseInput.AddMember("isOnlineReboot", smithyprelude.Boolean)
+
+	RebootAutonomousDatabaseOutput_autonomousDatabaseId = RebootAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	RebootAutonomousDatabaseOutput_displayName = RebootAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	RebootAutonomousDatabaseOutput_status = RebootAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	RebootAutonomousDatabaseOutput_statusReason = RebootAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	RebootDbNodeInput_cloudVmClusterId = RebootDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
+
+	RebootDbNodeInput_exadbVmClusterId = RebootDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
 
 	RebootDbNodeInput_dbNodeId = RebootDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4680,7 +9314,41 @@ func init() {
 
 	RebootDbNodeOutput_statusReason = RebootDbNodeOutput.AddMember("statusReason", smithyprelude.String)
 
-	StartDbNodeInput_cloudVmClusterId = StartDbNodeInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+	RestoreAutonomousDatabaseInput_autonomousDatabaseId = RestoreAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	RestoreAutonomousDatabaseInput_timestamp = RestoreAutonomousDatabaseInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	RestoreAutonomousDatabaseOutput_autonomousDatabaseId = RestoreAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	RestoreAutonomousDatabaseOutput_displayName = RestoreAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	RestoreAutonomousDatabaseOutput_status = RestoreAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	RestoreAutonomousDatabaseOutput_statusReason = RestoreAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	ShrinkAutonomousDatabaseInput_autonomousDatabaseId = ShrinkAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	ShrinkAutonomousDatabaseOutput_autonomousDatabaseId = ShrinkAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	ShrinkAutonomousDatabaseOutput_displayName = ShrinkAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	ShrinkAutonomousDatabaseOutput_status = ShrinkAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	ShrinkAutonomousDatabaseOutput_statusReason = ShrinkAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	StartAutonomousDatabaseInput_autonomousDatabaseId = StartAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	StartAutonomousDatabaseOutput_autonomousDatabaseId = StartAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	StartAutonomousDatabaseOutput_displayName = StartAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	StartAutonomousDatabaseOutput_status = StartAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	StartAutonomousDatabaseOutput_statusReason = StartAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	StartDbNodeInput_cloudVmClusterId = StartDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
+
+	StartDbNodeInput_exadbVmClusterId = StartDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
 
 	StartDbNodeInput_dbNodeId = StartDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4690,7 +9358,19 @@ func init() {
 
 	StartDbNodeOutput_statusReason = StartDbNodeOutput.AddMember("statusReason", smithyprelude.String)
 
-	StopDbNodeInput_cloudVmClusterId = StopDbNodeInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
+	StopAutonomousDatabaseInput_autonomousDatabaseId = StopAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	StopAutonomousDatabaseOutput_autonomousDatabaseId = StopAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	StopAutonomousDatabaseOutput_displayName = StopAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	StopAutonomousDatabaseOutput_status = StopAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	StopAutonomousDatabaseOutput_statusReason = StopAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	StopDbNodeInput_cloudVmClusterId = StopDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
+
+	StopDbNodeInput_exadbVmClusterId = StopDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
 
 	StopDbNodeInput_dbNodeId = StopDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4700,6 +9380,18 @@ func init() {
 
 	StopDbNodeOutput_statusReason = StopDbNodeOutput.AddMember("statusReason", smithyprelude.String)
 
+	SwitchoverAutonomousDatabaseInput_autonomousDatabaseId = SwitchoverAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	SwitchoverAutonomousDatabaseInput_peerDbArn = SwitchoverAutonomousDatabaseInput.AddMember("peerDbArn", _ResourceArn)
+
+	SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId = SwitchoverAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	SwitchoverAutonomousDatabaseOutput_displayName = SwitchoverAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	SwitchoverAutonomousDatabaseOutput_status = SwitchoverAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	SwitchoverAutonomousDatabaseOutput_statusReason = SwitchoverAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
 
 	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _RequestTagMap)
@@ -4707,6 +9399,116 @@ func init() {
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 
 	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys)
+
+	UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = UpdateAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays = UpdateAutonomousDatabaseBackupInput.AddMember("retentionPeriodInDays", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseBackupOutput_displayName = UpdateAutonomousDatabaseBackupOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateAutonomousDatabaseBackupOutput_status = UpdateAutonomousDatabaseBackupOutput.AddMember("status", ResourceStatus)
+
+	UpdateAutonomousDatabaseBackupOutput_statusReason = UpdateAutonomousDatabaseBackupOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = UpdateAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackupId", smithyprelude.String)
+
+	UpdateAutonomousDatabaseInput_autonomousDatabaseId = UpdateAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	UpdateAutonomousDatabaseInput_adminPassword = UpdateAutonomousDatabaseInput.AddMember("adminPassword", _SensitiveString)
+
+	UpdateAutonomousDatabaseInput_computeCount = UpdateAutonomousDatabaseInput.AddMember("computeCount", smithyprelude.Double)
+
+	UpdateAutonomousDatabaseInput_cpuCoreCount = UpdateAutonomousDatabaseInput.AddMember("cpuCoreCount", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_dataStorageSizeInTBs = UpdateAutonomousDatabaseInput.AddMember("dataStorageSizeInTBs", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_dataStorageSizeInGBs = UpdateAutonomousDatabaseInput.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_displayName = UpdateAutonomousDatabaseInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateAutonomousDatabaseInput_dbName = UpdateAutonomousDatabaseInput.AddMember("dbName", smithyprelude.String)
+
+	UpdateAutonomousDatabaseInput_dbVersion = UpdateAutonomousDatabaseInput.AddMember("dbVersion", smithyprelude.String)
+
+	UpdateAutonomousDatabaseInput_dbWorkload = UpdateAutonomousDatabaseInput.AddMember("dbWorkload", DbWorkload)
+
+	UpdateAutonomousDatabaseInput_dbToolsDetails = UpdateAutonomousDatabaseInput.AddMember("dbToolsDetails", _DatabaseToolList)
+
+	UpdateAutonomousDatabaseInput_databaseEdition = UpdateAutonomousDatabaseInput.AddMember("databaseEdition", DatabaseEdition)
+
+	UpdateAutonomousDatabaseInput_licenseModel = UpdateAutonomousDatabaseInput.AddMember("licenseModel", LicenseModel)
+
+	UpdateAutonomousDatabaseInput_isAutoScalingEnabled = UpdateAutonomousDatabaseInput.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = UpdateAutonomousDatabaseInput.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isBackupRetentionLocked = UpdateAutonomousDatabaseInput.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled = UpdateAutonomousDatabaseInput.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isMtlsConnectionRequired = UpdateAutonomousDatabaseInput.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isRefreshableClone = UpdateAutonomousDatabaseInput.AddMember("isRefreshableClone", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_isDisconnectPeer = UpdateAutonomousDatabaseInput.AddMember("isDisconnectPeer", smithyprelude.Boolean)
+
+	UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays = UpdateAutonomousDatabaseInput.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_byolComputeCountLimit = UpdateAutonomousDatabaseInput.AddMember("byolComputeCountLimit", smithyprelude.Double)
+
+	UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit = UpdateAutonomousDatabaseInput.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = UpdateAutonomousDatabaseInput.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
+
+	UpdateAutonomousDatabaseInput_customerContactsToSendToOCI = UpdateAutonomousDatabaseInput.AddMember("customerContactsToSendToOCI", _CustomerContacts)
+
+	UpdateAutonomousDatabaseInput_scheduledOperations = UpdateAutonomousDatabaseInput.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
+
+	UpdateAutonomousDatabaseInput_longTermBackupSchedule = UpdateAutonomousDatabaseInput.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
+
+	UpdateAutonomousDatabaseInput_openMode = UpdateAutonomousDatabaseInput.AddMember("openMode", OpenMode)
+
+	UpdateAutonomousDatabaseInput_permissionLevel = UpdateAutonomousDatabaseInput.AddMember("permissionLevel", PermissionLevel)
+
+	UpdateAutonomousDatabaseInput_refreshableMode = UpdateAutonomousDatabaseInput.AddMember("refreshableMode", RefreshableMode)
+
+	UpdateAutonomousDatabaseInput_privateEndpointIp = UpdateAutonomousDatabaseInput.AddMember("privateEndpointIp", smithyprelude.String)
+
+	UpdateAutonomousDatabaseInput_privateEndpointLabel = UpdateAutonomousDatabaseInput.AddMember("privateEndpointLabel", smithyprelude.String)
+
+	UpdateAutonomousDatabaseInput_peerDbId = UpdateAutonomousDatabaseInput.AddMember("peerDbId", _ResourceIdOrArn)
+
+	UpdateAutonomousDatabaseInput_resourcePoolLeaderId = UpdateAutonomousDatabaseInput.AddMember("resourcePoolLeaderId", _ResourceIdOrArn)
+
+	UpdateAutonomousDatabaseInput_resourcePoolSummary = UpdateAutonomousDatabaseInput.AddMember("resourcePoolSummary", ResourcePoolSummary)
+
+	UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource = UpdateAutonomousDatabaseInput.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
+
+	UpdateAutonomousDatabaseInput_standbyAllowlistedIps = UpdateAutonomousDatabaseInput.AddMember("standbyAllowlistedIps", _StringList)
+
+	UpdateAutonomousDatabaseInput_allowlistedIps = UpdateAutonomousDatabaseInput.AddMember("allowlistedIps", _StringList)
+
+	UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds = UpdateAutonomousDatabaseInput.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds = UpdateAutonomousDatabaseInput.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
+
+	UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart = UpdateAutonomousDatabaseInput.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	UpdateAutonomousDatabaseInput_encryptionKeyProvider = UpdateAutonomousDatabaseInput.AddMember("encryptionKeyProvider", EncryptionKeyProviderInput)
+
+	UpdateAutonomousDatabaseInput_encryptionKeyConfiguration = UpdateAutonomousDatabaseInput.AddMember("encryptionKeyConfiguration", EncryptionKeyConfigurationInput)
+
+	UpdateAutonomousDatabaseInput_adminPasswordSource = UpdateAutonomousDatabaseInput.AddMember("adminPasswordSource", AdminPasswordSource)
+
+	UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration = UpdateAutonomousDatabaseInput.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfigurationInput)
+
+	UpdateAutonomousDatabaseOutput_autonomousDatabaseId = UpdateAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	UpdateAutonomousDatabaseOutput_displayName = UpdateAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateAutonomousDatabaseOutput_status = UpdateAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	UpdateAutonomousDatabaseOutput_statusReason = UpdateAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
 
 	UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 
@@ -4719,6 +9521,58 @@ func init() {
 	UpdateCloudExadataInfrastructureOutput_statusReason = UpdateCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
 
 	UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
+
+	UpdateExadbVmClusterInput_exadbVmClusterId = UpdateExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
+
+	UpdateExadbVmClusterInput_dataCollectionOptions = UpdateExadbVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
+
+	UpdateExadbVmClusterInput_displayName = UpdateExadbVmClusterInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateExadbVmClusterInput_enabledEcpuCount = UpdateExadbVmClusterInput.AddMember("enabledEcpuCount", smithyprelude.Integer)
+
+	UpdateExadbVmClusterInput_gridImageId = UpdateExadbVmClusterInput.AddMember("gridImageId", smithyprelude.String)
+
+	UpdateExadbVmClusterInput_licenseModel = UpdateExadbVmClusterInput.AddMember("licenseModel", LicenseModel)
+
+	UpdateExadbVmClusterInput_sshPublicKeys = UpdateExadbVmClusterInput.AddMember("sshPublicKeys", _StringList)
+
+	UpdateExadbVmClusterInput_systemVersion = UpdateExadbVmClusterInput.AddMember("systemVersion", smithyprelude.String)
+
+	UpdateExadbVmClusterInput_totalEcpuCount = UpdateExadbVmClusterInput.AddMember("totalEcpuCount", smithyprelude.Integer)
+
+	UpdateExadbVmClusterInput_updateAction = UpdateExadbVmClusterInput.AddMember("updateAction", UpdateAction)
+
+	UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = UpdateExadbVmClusterInput.AddMember("vmFileSystemStorageTotalSizeInGBs", smithyprelude.Integer)
+
+	UpdateExadbVmClusterOutput_displayName = UpdateExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateExadbVmClusterOutput_status = UpdateExadbVmClusterOutput.AddMember("status", ResourceStatus)
+
+	UpdateExadbVmClusterOutput_statusReason = UpdateExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateExadbVmClusterOutput_exadbVmClusterId = UpdateExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
+
+	UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId = UpdateExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
+
+	UpdateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = UpdateExascaleDbStorageVaultInput.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
+
+	UpdateExascaleDbStorageVaultInput_autoscaleLimitInGBs = UpdateExascaleDbStorageVaultInput.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
+
+	UpdateExascaleDbStorageVaultInput_description = UpdateExascaleDbStorageVaultInput.AddMember("description", smithyprelude.String)
+
+	UpdateExascaleDbStorageVaultInput_displayName = UpdateExascaleDbStorageVaultInput.AddMember("displayName", _ResourceDisplayName)
+
+	UpdateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = UpdateExascaleDbStorageVaultInput.AddMember("highCapacityDatabaseStorageTotalSizeInGBs", smithyprelude.Integer)
+
+	UpdateExascaleDbStorageVaultInput_isAutoscaleEnabled = UpdateExascaleDbStorageVaultInput.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
+
+	UpdateExascaleDbStorageVaultOutput_displayName = UpdateExascaleDbStorageVaultOutput.AddMember("displayName", smithyprelude.String)
+
+	UpdateExascaleDbStorageVaultOutput_status = UpdateExascaleDbStorageVaultOutput.AddMember("status", ResourceStatus)
+
+	UpdateExascaleDbStorageVaultOutput_statusReason = UpdateExascaleDbStorageVaultOutput.AddMember("statusReason", smithyprelude.String)
+
+	UpdateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = UpdateExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVaultId", smithyprelude.String)
 
 	UpdateOdbNetworkInput_odbNetworkId = UpdateOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
 

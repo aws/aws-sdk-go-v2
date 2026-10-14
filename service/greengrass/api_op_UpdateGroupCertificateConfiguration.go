@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the Certificate expiry time for a group.
@@ -39,6 +38,21 @@ type UpdateGroupCertificateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupCertificateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupCertificateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupCertificateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationRequest_CertificateExpiryInMilliseconds, *v.CertificateExpiryInMilliseconds)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationRequest_GroupId, *v.GroupId)
+	}
+}
+
 type UpdateGroupCertificateConfigurationOutput struct {
 
 	// The amount of time remaining before the certificate authority expires, in
@@ -57,77 +71,60 @@ type UpdateGroupCertificateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupCertificateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupCertificateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupCertificateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, *v.CertificateAuthorityExpiryInMilliseconds)
+	}
+	if v.CertificateExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, *v.CertificateExpiryInMilliseconds)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_GroupId, *v.GroupId)
+	}
+}
+func (v *UpdateGroupCertificateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupCertificateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds:
+			v.CertificateAuthorityExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, v.CertificateAuthorityExpiryInMilliseconds)
+		case schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds:
+			v.CertificateExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, v.CertificateExpiryInMilliseconds)
+		case schemas.UpdateGroupCertificateConfigurationResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_GroupId, v.GroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupCertificateConfiguration, schemas.UpdateGroupCertificateConfigurationRequest, schemas.UpdateGroupCertificateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupCertificateConfiguration, schemas.UpdateGroupCertificateConfigurationRequest, schemas.UpdateGroupCertificateConfigurationResponse), output: &UpdateGroupCertificateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGroupCertificateConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGroupCertificateConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGroupCertificateConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +139,8 @@ func (c *Client) addOperationUpdateGroupCertificateConfigurationMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGroupCertificateConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGroupCertificateConfiguration",
-	}
 }

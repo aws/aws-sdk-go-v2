@@ -70,6 +70,26 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachClusterNodeNetworkInterface struct {
+}
+
+func (*validateOpAttachClusterNodeNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachClusterNodeNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachClusterNodeNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachClusterNodeNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAttachClusterNodeVolume struct {
 }
 
@@ -1510,6 +1530,26 @@ func (m *validateOpCreateTrainingPlan) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTrainingSession struct {
+}
+
+func (*validateOpCreateTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTransformJob struct {
 }
 
@@ -2765,6 +2805,26 @@ func (m *validateOpDeleteTrainingJob) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTrainingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrainingSession struct {
+}
+
+func (*validateOpDeleteTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrainingSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4290,6 +4350,26 @@ func (m *validateOpDescribeTrainingPlan) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrainingSession struct {
+}
+
+func (*validateOpDescribeTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTransformJob struct {
 }
 
@@ -5710,6 +5790,26 @@ func (m *validateOpStopTrainingJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopTrainingSession struct {
+}
+
+func (*validateOpStopTrainingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTrainingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTrainingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTrainingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopTransformJob struct {
 }
 
@@ -6642,6 +6742,10 @@ func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
 }
 
+func addOpAttachClusterNodeNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachClusterNodeNetworkInterface{}, middleware.After)
+}
+
 func addOpAttachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachClusterNodeVolume{}, middleware.After)
 }
@@ -6930,6 +7034,10 @@ func addOpCreateTrainingPlanValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateTrainingPlan{}, middleware.After)
 }
 
+func addOpCreateTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrainingSession{}, middleware.After)
+}
+
 func addOpCreateTransformJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTransformJob{}, middleware.After)
 }
@@ -7180,6 +7288,10 @@ func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrainingJob{}, middleware.After)
+}
+
+func addOpDeleteTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrainingSession{}, middleware.After)
 }
 
 func addOpDeleteTrialComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -7486,6 +7598,10 @@ func addOpDescribeTrainingPlanValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeTrainingPlan{}, middleware.After)
 }
 
+func addOpDescribeTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrainingSession{}, middleware.After)
+}
+
 func addOpDescribeTransformJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTransformJob{}, middleware.After)
 }
@@ -7768,6 +7884,10 @@ func addOpStopProcessingJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopTrainingJob{}, middleware.After)
+}
+
+func addOpStopTrainingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTrainingSession{}, middleware.After)
 }
 
 func addOpStopTransformJobValidationMiddleware(stack *middleware.Stack) error {
@@ -8127,6 +8247,100 @@ func validateAdditionalS3DataSource(v *types.AdditionalS3DataSource) error {
 	}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterModelPackageEntry(v *types.AIAdapterModelPackageEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterModelPackageEntry"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.ModelPackageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterModelPackageEntryList(v []types.AIAdapterModelPackageEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterModelPackageEntryList"}
+	for i := range v {
+		if err := validateAIAdapterModelPackageEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterS3Entry(v *types.AIAdapterS3Entry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterS3Entry"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterS3EntryList(v []types.AIAdapterS3Entry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterS3EntryList"}
+	for i := range v {
+		if err := validateAIAdapterS3Entry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterSource(v types.AIAdapterSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterSource"}
+	switch uv := v.(type) {
+	case *types.AIAdapterSourceMemberModelPackageArns:
+		if err := validateAIAdapterModelPackageEntryList(uv.Value); err != nil {
+			invalidParams.AddNested("[ModelPackageArns]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AIAdapterSourceMemberS3Uris:
+		if err := validateAIAdapterS3EntryList(uv.Value); err != nil {
+			invalidParams.AddNested("[S3Uris]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9507,6 +9721,44 @@ func validateClarifyTextConfig(v *types.ClarifyTextConfig) error {
 	}
 }
 
+func validateClusterAccountingDatabase(v *types.ClusterAccountingDatabase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterAccountingDatabase"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterAutoPatchConfig(v *types.ClusterAutoPatchConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterAutoPatchConfig"}
+	if len(v.PatchingStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PatchingStrategy"))
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterAutoScalingConfig(v *types.ClusterAutoScalingConfig) error {
 	if v == nil {
 		return nil
@@ -9587,6 +9839,11 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.ScheduledUpdateConfig != nil {
 		if err := validateScheduledUpdateConfig(v.ScheduledUpdateConfig); err != nil {
 			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoPatchConfig != nil {
+		if err := validateClusterAutoPatchConfig(v.AutoPatchConfig); err != nil {
+			invalidParams.AddNested("AutoPatchConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.KubernetesConfig != nil {
@@ -9741,6 +9998,11 @@ func validateClusterOrchestrator(v *types.ClusterOrchestrator) error {
 			invalidParams.AddNested("Eks", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Slurm != nil {
+		if err := validateClusterOrchestratorSlurmConfig(v.Slurm); err != nil {
+			invalidParams.AddNested("Slurm", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9755,6 +10017,23 @@ func validateClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig)
 	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestratorEksConfig"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterOrchestratorSlurmConfig(v *types.ClusterOrchestratorSlurmConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestratorSlurmConfig"}
+	if v.AccountingDatabase != nil {
+		if err := validateClusterAccountingDatabase(v.AccountingDatabase); err != nil {
+			invalidParams.AddNested("AccountingDatabase", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10096,6 +10375,11 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 			invalidParams.AddNested("AdditionalModelDataSources", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContainerMetricsConfig != nil {
+		if err := validateContainerMetricsConfig(v.ContainerMetricsConfig); err != nil {
+			invalidParams.AddNested("ContainerMetricsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10111,6 +10395,23 @@ func validateContainerDefinitionList(v []types.ContainerDefinition) error {
 	for i := range v {
 		if err := validateContainerDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMetricsConfig(v *types.ContainerMetricsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMetricsConfig"}
+	if v.MetricsEndpoints != nil {
+		if err := validateMetricsEndpointList(v.MetricsEndpoints); err != nil {
+			invalidParams.AddNested("MetricsEndpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11868,6 +12169,21 @@ func validateHyperParameterTuningResourceConfig(v *types.HyperParameterTuningRes
 	}
 }
 
+func validateIdcConfigInput(v *types.IdcConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdcConfigInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageConfig(v *types.ImageConfig) error {
 	if v == nil {
 		return nil
@@ -11928,6 +12244,23 @@ func validateInferenceComponentComputeResourceRequirements(v *types.InferenceCom
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentComputeResourceRequirements"}
 	if v.MinMemoryRequiredInMb == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinMemoryRequiredInMb"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInferenceComponentContainerSpecification(v *types.InferenceComponentContainerSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentContainerSpecification"}
+	if v.ContainerMetricsConfig != nil {
+		if err := validateContainerMetricsConfig(v.ContainerMetricsConfig); err != nil {
+			invalidParams.AddNested("ContainerMetricsConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12037,6 +12370,11 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentSpecification"}
+	if v.Container != nil {
+		if err := validateInferenceComponentContainerSpecification(v.Container); err != nil {
+			invalidParams.AddNested("Container", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ComputeResourceRequirements != nil {
 		if err := validateInferenceComponentComputeResourceRequirements(v.ComputeResourceRequirements); err != nil {
 			invalidParams.AddNested("ComputeResourceRequirements", err.(smithy.InvalidParamsError))
@@ -12288,6 +12626,38 @@ func validateInstancePoolList(v []types.InstancePool) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InstancePoolList"}
 	for i := range v {
 		if err := validateInstancePool(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstancePreference(v *types.InstancePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstancePreference"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstancePreferenceList(v []types.InstancePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstancePreferenceList"}
+	for i := range v {
+		if err := validateInstancePreference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -12584,6 +12954,24 @@ func validateLabelingJobSnsDataSource(v *types.LabelingJobSnsDataSource) error {
 	}
 }
 
+func validateLoraConfig(v *types.LoraConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoraConfig"}
+	if v.Rank == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rank"))
+	}
+	if v.Alpha == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alpha"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemberDefinition(v *types.MemberDefinition) error {
 	if v == nil {
 		return nil
@@ -12643,6 +13031,38 @@ func validateMetricDefinitionList(v []types.MetricDefinition) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionList"}
 	for i := range v {
 		if err := validateMetricDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsEndpoint(v *types.MetricsEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsEndpoint"}
+	if v.MetricsEndpointPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricsEndpointPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsEndpointList(v []types.MetricsEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsEndpointList"}
+	for i := range v {
+		if err := validateMetricsEndpoint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -14086,14 +14506,13 @@ func validateProcessingClusterConfig(v *types.ProcessingClusterConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessingClusterConfig"}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.VolumeSizeInGB == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
+	}
+	if v.InstancePreferences != nil {
+		if err := validateProcessingInstancePreferenceList(v.InstancePreferences); err != nil {
+			invalidParams.AddNested("InstancePreferences", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14149,6 +14568,38 @@ func validateProcessingInputs(v []types.ProcessingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessingInputs"}
 	for i := range v {
 		if err := validateProcessingInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProcessingInstancePreference(v *types.ProcessingInstancePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProcessingInstancePreference"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProcessingInstancePreferenceList(v []types.ProcessingInstancePreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProcessingInstancePreferenceList"}
+	for i := range v {
+		if err := validateProcessingInstancePreference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -14611,6 +15062,11 @@ func validateResourceConfig(v *types.ResourceConfig) error {
 	if v.InstancePlacementConfig != nil {
 		if err := validateInstancePlacementConfig(v.InstancePlacementConfig); err != nil {
 			invalidParams.AddNested("InstancePlacementConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstancePreferences != nil {
+		if err := validateInstancePreferenceList(v.InstancePreferences); err != nil {
+			invalidParams.AddNested("InstancePreferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -15674,6 +16130,55 @@ func validateTrainingRepositoryAuthConfig(v *types.TrainingRepositoryAuthConfig)
 	}
 }
 
+func validateTrainingSessionModelConfig(v *types.TrainingSessionModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionModelConfig"}
+	if v.BaseModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseModelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingSessionOutputConfig(v *types.TrainingSessionOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionOutputConfig"}
+	if v.S3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Location"))
+	} else if v.S3Location != nil {
+		if err := validateTrainingSessionS3Location(v.S3Location); err != nil {
+			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrainingSessionS3Location(v *types.TrainingSessionS3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrainingSessionS3Location"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrainingSpecification(v *types.TrainingSpecification) error {
 	if v == nil {
 		return nil
@@ -16145,6 +16650,27 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 }
 
+func validateOpAttachClusterNodeNetworkInterfaceInput(v *AttachClusterNodeNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachClusterNodeNetworkInterfaceInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.NetworkInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAttachClusterNodeVolumeInput(v *AttachClusterNodeVolumeInput) error {
 	if v == nil {
 		return nil
@@ -16353,6 +16879,11 @@ func validateOpCreateAIRecommendationJobInput(v *CreateAIRecommendationJobInput)
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.AdapterSource != nil {
+		if err := validateAIAdapterSource(v.AdapterSource); err != nil {
+			invalidParams.AddNested("AdapterSource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -18197,6 +18728,11 @@ func validateOpCreatePartnerAppInput(v *CreatePartnerAppInput) error {
 			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.IdcConfig != nil {
+		if err := validateIdcConfigInput(v.IdcConfig); err != nil {
+			invalidParams.AddNested("IdcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.AuthType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
 	}
@@ -18582,6 +19118,55 @@ func validateOpCreateTrainingPlanInput(v *CreateTrainingPlanInput) error {
 	}
 	if v.TrainingPlanOfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanOfferingId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTrainingSessionInput(v *CreateTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
+	}
+	if v.LoraConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoraConfig"))
+	} else if v.LoraConfig != nil {
+		if err := validateLoraConfig(v.LoraConfig); err != nil {
+			invalidParams.AddNested("LoraConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfig"))
+	} else if v.ModelConfig != nil {
+		if err := validateTrainingSessionModelConfig(v.ModelConfig); err != nil {
+			invalidParams.AddNested("ModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateTrainingSessionOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -19678,6 +20263,21 @@ func validateOpDeleteTrainingJobInput(v *DeleteTrainingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainingJobInput"}
 	if v.TrainingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrainingSessionInput(v *DeleteTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20851,6 +21451,21 @@ func validateOpDescribeTrainingPlanInput(v *DescribeTrainingPlanInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingPlanInput"}
 	if v.TrainingPlanName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingPlanName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTrainingSessionInput(v *DescribeTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22064,6 +22679,21 @@ func validateOpStopTrainingJobInput(v *StopTrainingJobInput) error {
 	}
 }
 
+func validateOpStopTrainingSessionInput(v *StopTrainingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTrainingSessionInput"}
+	if v.TrainingSessionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingSessionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopTransformJobInput(v *StopTransformJobInput) error {
 	if v == nil {
 		return nil
@@ -22801,6 +23431,11 @@ func validateOpUpdatePartnerAppInput(v *UpdatePartnerAppInput) error {
 	if v.ApplicationConfig != nil {
 		if err := validatePartnerAppConfig(v.ApplicationConfig); err != nil {
 			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdcConfig != nil {
+		if err := validateIdcConfigInput(v.IdcConfig); err != nil {
+			invalidParams.AddNested("IdcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {

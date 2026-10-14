@@ -4,11 +4,10 @@ package codeguruprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Remove one anomaly notifications channel for a profiling group.
@@ -44,6 +43,34 @@ type RemoveNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveNotificationChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveNotificationChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveNotificationChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.RemoveNotificationChannelRequest_channelId, *v.ChannelId)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.RemoveNotificationChannelRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *RemoveNotificationChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveNotificationChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveNotificationChannelRequest_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.RemoveNotificationChannelRequest_channelId, v.ChannelId)
+		case schemas.RemoveNotificationChannelRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.RemoveNotificationChannelRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the RemoveNotificationChannelResponse.
 type RemoveNotificationChannelOutput struct {
 
@@ -56,77 +83,50 @@ type RemoveNotificationChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveNotificationChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveNotificationChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveNotificationChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.RemoveNotificationChannelResponse_notificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemoveNotificationChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveNotificationChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveNotificationChannelResponse_notificationConfiguration:
+			v.NotificationConfiguration = &types.NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveNotificationChannel, schemas.RemoveNotificationChannelRequest, schemas.RemoveNotificationChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveNotificationChannel, schemas.RemoveNotificationChannelRequest, schemas.RemoveNotificationChannelResponse), output: &RemoveNotificationChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveNotificationChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveNotificationChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveNotificationChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveNotificationChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +141,8 @@ func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveNotificationChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveNotificationChannel",
-	}
 }

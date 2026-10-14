@@ -5,14 +5,18 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT SiteWise Monitor feature will no longer be open to new customers
+// starting November 7, 2025. If you would like to use the IoT SiteWise Monitor
+// feature, sign up prior to that date. Existing customers can continue to use the
+// service as normal. For more information, see [IoT SiteWise Monitor availability change].
+//
 // Updates an IoT SiteWise Monitor dashboard.
+//
+// [IoT SiteWise Monitor availability change]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html
 func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInput, optFns ...func(*Options)) (*UpdateDashboardOutput, error) {
 	if params == nil {
 		params = &UpdateDashboardInput{}
@@ -64,30 +68,6 @@ type UpdateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDashboardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateDashboardRequest_clientToken, *v.ClientToken)
-	}
-	if v.DashboardDefinition != nil {
-		s.WriteString(schemas.UpdateDashboardRequest_dashboardDefinition, *v.DashboardDefinition)
-	}
-	if v.DashboardDescription != nil {
-		s.WriteString(schemas.UpdateDashboardRequest_dashboardDescription, *v.DashboardDescription)
-	}
-	if v.DashboardId != nil {
-		s.WriteString(schemas.UpdateDashboardRequest_dashboardId, *v.DashboardId)
-	}
-	if v.DashboardName != nil {
-		s.WriteString(schemas.UpdateDashboardRequest_dashboardName, *v.DashboardName)
-	}
-}
-
 type UpdateDashboardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -95,70 +75,23 @@ type UpdateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDashboardResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboard{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse), output: &UpdateDashboardOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +106,6 @@ func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addOpUpdateDashboardValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -189,12 +116,6 @@ func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +182,4 @@ func (m *idempotencyToken_initializeOpUpdateDashboard) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opUpdateDashboardMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateDashboard{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDashboard",
-	}
 }

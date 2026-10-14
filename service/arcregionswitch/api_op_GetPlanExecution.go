@@ -5,13 +5,11 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -162,6 +160,63 @@ type GetPlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualRecoveryTime != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_actualRecoveryTime, *v.ActualRecoveryTime)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_comment, *v.Comment)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_endTime, *v.EndTime)
+	}
+	if v.ExecutionAction != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionAction, string(v.ExecutionAction))
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.ExecutionRegion != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionRegion, *v.ExecutionRegion)
+	}
+	if v.ExecutionState != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionState, string(v.ExecutionState))
+	}
+	serializeGeneratedReportDetails(s, schemas.GetPlanExecutionResponse_generatedReportDetails, v.GeneratedReportDetails)
+	if v.Mode != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_mode, string(v.Mode))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_nextToken, *v.NextToken)
+	}
+	if v.Plan != nil {
+		s.WriteStruct(schemas.GetPlanExecutionResponse_plan)
+		v.Plan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_planArn, *v.PlanArn)
+	}
+	if v.RecoveryExecutionId != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_recoveryExecutionId, *v.RecoveryExecutionId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_startTime, *v.StartTime)
+	}
+	serializeStepStates(s, schemas.GetPlanExecutionResponse_stepStates, v.StepStates)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_version, *v.Version)
+	}
+}
 func (v *GetPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPlanExecutionResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -231,62 +286,20 @@ func (v *GetPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetPlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanExecution, schemas.GetPlanExecutionRequest, schemas.GetPlanExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanExecution, schemas.GetPlanExecutionRequest, schemas.GetPlanExecutionResponse), output: &GetPlanExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlanExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -296,12 +309,6 @@ func (c *Client) addOperationGetPlanExecutionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpGetPlanExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlanExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -314,12 +321,6 @@ func (c *Client) addOperationGetPlanExecutionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -637,11 +638,3 @@ type GetPlanExecutionAPIClient interface {
 }
 
 var _ GetPlanExecutionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetPlanExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlanExecution",
-	}
-}

@@ -5,9 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an on-demand report job for the specified report plan.
@@ -41,6 +41,21 @@ type StartReportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReportJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartReportJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.StartReportJobInput_ReportPlanName, *v.ReportPlanName)
+	}
+}
+
 type StartReportJobOutput struct {
 
 	// The identifier of the report job. A unique, randomly generated, Unicode, UTF-8
@@ -54,65 +69,42 @@ type StartReportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReportJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportJobId != nil {
+		s.WriteString(schemas.StartReportJobOutput_ReportJobId, *v.ReportJobId)
+	}
+}
+func (v *StartReportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReportJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReportJobOutput_ReportJobId:
+			v.ReportJobId = new(string)
+			return d.ReadString(schemas.StartReportJobOutput_ReportJobId, v.ReportJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReportJob, schemas.StartReportJobInput, schemas.StartReportJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReportJob, schemas.StartReportJobInput, schemas.StartReportJobOutput), output: &StartReportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartReportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -122,12 +114,6 @@ func (c *Client) addOperationStartReportJobMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpStartReportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartReportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +126,6 @@ func (c *Client) addOperationStartReportJobMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -185,12 +165,4 @@ func (m *idempotencyToken_initializeOpStartReportJob) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opStartReportJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartReportJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartReportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartReportJob",
-	}
 }

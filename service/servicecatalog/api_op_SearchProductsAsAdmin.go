@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the products for the specified portfolio or all products.
@@ -64,37 +60,6 @@ type SearchProductsAsAdminInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchProductsAsAdminInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchProductsAsAdminInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchProductsAsAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.SearchProductsAsAdminInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	serializeProductViewFilters(s, schemas.SearchProductsAsAdminInput_Filters, v.Filters)
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.SearchProductsAsAdminInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.SearchProductsAsAdminInput_PageToken, *v.PageToken)
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.SearchProductsAsAdminInput_PortfolioId, *v.PortfolioId)
-	}
-	if v.ProductSource != "" {
-		s.WriteString(schemas.SearchProductsAsAdminInput_ProductSource, string(v.ProductSource))
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.SearchProductsAsAdminInput_SortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.SearchProductsAsAdminInput_SortOrder, string(v.SortOrder))
-	}
-}
-
 type SearchProductsAsAdminOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -110,84 +75,26 @@ type SearchProductsAsAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchProductsAsAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchProductsAsAdminOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchProductsAsAdminOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.SearchProductsAsAdminOutput_NextPageToken, v.NextPageToken)
-		case schemas.SearchProductsAsAdminOutput_ProductViewDetails:
-			return deserializeProductViewDetails(d, schemas.SearchProductsAsAdminOutput_ProductViewDetails, &v.ProductViewDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchProductsAsAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProductsAsAdmin, schemas.SearchProductsAsAdminInput, schemas.SearchProductsAsAdminOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchProductsAsAdmin{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProductsAsAdmin, schemas.SearchProductsAsAdminInput, schemas.SearchProductsAsAdminOutput), output: &SearchProductsAsAdminOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchProductsAsAdmin"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProductsAsAdmin(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +107,6 @@ func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -303,11 +204,3 @@ type SearchProductsAsAdminAPIClient interface {
 }
 
 var _ SearchProductsAsAdminAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchProductsAsAdmin(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchProductsAsAdmin",
-	}
-}

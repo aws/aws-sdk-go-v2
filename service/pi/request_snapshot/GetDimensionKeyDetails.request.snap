@@ -1,0 +1,7 @@
+POST /service/PerformanceInsightsv20180227/operation/GetDimensionKeyDetails
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿eGroupi__Group__oGroupIdentifiers__GroupIdentifier__jIdentifiern__Identifier__sRequestedDimensionsŸj__Member__j__Member__ÿkServiceTypecRDSÿ

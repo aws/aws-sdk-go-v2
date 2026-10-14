@@ -5,10 +5,10 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all invocation steps associated with a session and optionally, an
@@ -56,6 +56,27 @@ type ListInvocationStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvocationStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvocationStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvocationStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationIdentifier != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_invocationIdentifier, *v.InvocationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvocationStepsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type ListInvocationStepsOutput struct {
 
 	// A list of summaries for each invocation step associated with a session and if
@@ -75,77 +96,51 @@ type ListInvocationStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvocationStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvocationStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvocationStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvocationStepSummaries(s, schemas.ListInvocationStepsResponse_invocationStepSummaries, v.InvocationStepSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvocationStepsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInvocationStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvocationStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvocationStepsResponse_invocationStepSummaries:
+			return deserializeInvocationStepSummaries(d, schemas.ListInvocationStepsResponse_invocationStepSummaries, &v.InvocationStepSummaries)
+		case schemas.ListInvocationStepsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvocationStepsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvocationStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvocationSteps, schemas.ListInvocationStepsRequest, schemas.ListInvocationStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInvocationSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvocationSteps, schemas.ListInvocationStepsRequest, schemas.ListInvocationStepsResponse), output: &ListInvocationStepsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInvocationSteps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInvocationSteps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInvocationStepsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInvocationSteps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +153,6 @@ func (c *Client) addOperationListInvocationStepsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +257,3 @@ type ListInvocationStepsAPIClient interface {
 }
 
 var _ ListInvocationStepsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInvocationSteps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInvocationSteps",
-	}
-}

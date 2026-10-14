@@ -5,12 +5,8 @@ package securityir
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -105,39 +101,6 @@ type CreateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateCaseRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateCaseRequest_description, *v.Description)
-	}
-	if v.EngagementType != "" {
-		s.WriteString(schemas.CreateCaseRequest_engagementType, string(v.EngagementType))
-	}
-	serializeImpactedAccounts(s, schemas.CreateCaseRequest_impactedAccounts, v.ImpactedAccounts)
-	serializeImpactedAwsRegionList(s, schemas.CreateCaseRequest_impactedAwsRegions, v.ImpactedAwsRegions)
-	serializeImpactedServicesList(s, schemas.CreateCaseRequest_impactedServices, v.ImpactedServices)
-	if v.ReportedIncidentStartDate != nil {
-		s.WriteTime(schemas.CreateCaseRequest_reportedIncidentStartDate, *v.ReportedIncidentStartDate)
-	}
-	if v.ResolverType != "" {
-		s.WriteString(schemas.CreateCaseRequest_resolverType, string(v.ResolverType))
-	}
-	serializeTagMap(s, schemas.CreateCaseRequest_tags, v.Tags)
-	serializeThreatActorIpList(s, schemas.CreateCaseRequest_threatActorIpAddresses, v.ThreatActorIpAddresses)
-	if v.Title != nil {
-		s.WriteString(schemas.CreateCaseRequest_title, *v.Title)
-	}
-	serializeWatchers(s, schemas.CreateCaseRequest_watchers, v.Watchers)
-}
-
 type CreateCaseOutput struct {
 
 	// A response element providing responses for requests to CreateCase. This element
@@ -152,73 +115,23 @@ type CreateCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCaseResponse_caseId:
-			v.CaseId = new(string)
-			return d.ReadString(schemas.CreateCaseResponse_caseId, v.CaseId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse), output: &CreateCaseOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -228,12 +141,6 @@ func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCreateCaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -246,12 +153,6 @@ func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,12 +192,4 @@ func (m *idempotencyToken_initializeOpCreateCase) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCreateCaseMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCase{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCase",
-	}
 }

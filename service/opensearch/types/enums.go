@@ -297,6 +297,27 @@ func (ConnectionMode) Values() []ConnectionMode {
 	}
 }
 
+type DataSourceAttachmentStatus string
+
+// Enum values for DataSourceAttachmentStatus
+const (
+	DataSourceAttachmentStatusPending  DataSourceAttachmentStatus = "PENDING"
+	DataSourceAttachmentStatusAttached DataSourceAttachmentStatus = "ATTACHED"
+	DataSourceAttachmentStatusFailed   DataSourceAttachmentStatus = "FAILED"
+)
+
+// Values returns all known values for DataSourceAttachmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceAttachmentStatus) Values() []DataSourceAttachmentStatus {
+	return []DataSourceAttachmentStatus{
+		"PENDING",
+		"ATTACHED",
+		"FAILED",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
@@ -485,6 +506,29 @@ func (DomainState) Values() []DomainState {
 	}
 }
 
+type DomainUseCase string
+
+// Enum values for DomainUseCase
+const (
+	DomainUseCaseSearch        DomainUseCase = "SEARCH"
+	DomainUseCaseVector        DomainUseCase = "VECTOR"
+	DomainUseCaseObservability DomainUseCase = "OBSERVABILITY"
+	DomainUseCaseMixed         DomainUseCase = "MIXED"
+)
+
+// Values returns all known values for DomainUseCase. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainUseCase) Values() []DomainUseCase {
+	return []DomainUseCase{
+		"SEARCH",
+		"VECTOR",
+		"OBSERVABILITY",
+		"MIXED",
+	}
+}
+
 type DryRunMode string
 
 // Enum values for DryRunMode
@@ -501,6 +545,44 @@ func (DryRunMode) Values() []DryRunMode {
 	return []DryRunMode{
 		"Basic",
 		"Verbose",
+	}
+}
+
+type EncryptionMode string
+
+// Enum values for EncryptionMode
+const (
+	EncryptionModeDisk   EncryptionMode = "DISK"
+	EncryptionModeNative EncryptionMode = "NATIVE"
+)
+
+// Values returns all known values for EncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionMode) Values() []EncryptionMode {
+	return []EncryptionMode{
+		"DISK",
+		"NATIVE",
+	}
+}
+
+type EngineMode string
+
+// Enum values for EngineMode
+const (
+	EngineModeGeneral   EngineMode = "GENERAL"
+	EngineModeOptimized EngineMode = "OPTIMIZED"
+)
+
+// Values returns all known values for EngineMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngineMode) Values() []EngineMode {
+	return []EngineMode{
+		"GENERAL",
+		"OPTIMIZED",
 	}
 }
 
@@ -613,6 +695,42 @@ func (InsightEntityType) Values() []InsightEntityType {
 	}
 }
 
+type InsightFeedbackEntityType string
+
+// Enum values for InsightFeedbackEntityType
+const (
+	InsightFeedbackEntityTypeDomain InsightFeedbackEntityType = "DomainName"
+)
+
+// Values returns all known values for InsightFeedbackEntityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightFeedbackEntityType) Values() []InsightFeedbackEntityType {
+	return []InsightFeedbackEntityType{
+		"DomainName",
+	}
+}
+
+type InsightFeedbackThumbs string
+
+// Enum values for InsightFeedbackThumbs
+const (
+	InsightFeedbackThumbsUp   InsightFeedbackThumbs = "Up"
+	InsightFeedbackThumbsDown InsightFeedbackThumbs = "Down"
+)
+
+// Values returns all known values for InsightFeedbackThumbs. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightFeedbackThumbs) Values() []InsightFeedbackThumbs {
+	return []InsightFeedbackThumbs{
+		"Up",
+		"Down",
+	}
+}
+
 type InsightFieldType string
 
 // Enum values for InsightFieldType
@@ -652,6 +770,25 @@ func (InsightPriorityLevel) Values() []InsightPriorityLevel {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+	}
+}
+
+type InsightResponseStatus string
+
+// Enum values for InsightResponseStatus
+const (
+	InsightResponseStatusSuccess InsightResponseStatus = "SUCCESS"
+	InsightResponseStatusError   InsightResponseStatus = "ERROR"
+)
+
+// Values returns all known values for InsightResponseStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightResponseStatus) Values() []InsightResponseStatus {
+	return []InsightResponseStatus{
+		"SUCCESS",
+		"ERROR",
 	}
 }
 
@@ -1675,6 +1812,25 @@ func (UpgradeStep) Values() []UpgradeStep {
 		"PRE_UPGRADE_CHECK",
 		"SNAPSHOT",
 		"UPGRADE",
+	}
+}
+
+type ValidationFailureSeverity string
+
+// Enum values for ValidationFailureSeverity
+const (
+	ValidationFailureSeverityCritical ValidationFailureSeverity = "Critical"
+	ValidationFailureSeverityWarning  ValidationFailureSeverity = "Warning"
+)
+
+// Values returns all known values for ValidationFailureSeverity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationFailureSeverity) Values() []ValidationFailureSeverity {
+	return []ValidationFailureSeverity{
+		"Critical",
+		"Warning",
 	}
 }
 

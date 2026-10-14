@@ -5,10 +5,10 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a proposal for a change to the network that other members of the
@@ -81,6 +81,33 @@ type CreateProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProposalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		s.WriteStruct(schemas.CreateProposalInput_Actions)
+		v.Actions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProposalInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProposalInput_Description, *v.Description)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.CreateProposalInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateProposalInput_NetworkId, *v.NetworkId)
+	}
+	serializeInputTagMap(s, schemas.CreateProposalInput_Tags, v.Tags)
+}
+
 type CreateProposalOutput struct {
 
 	// The unique identifier of the proposal.
@@ -92,65 +119,42 @@ type CreateProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProposalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProposalId != nil {
+		s.WriteString(schemas.CreateProposalOutput_ProposalId, *v.ProposalId)
+	}
+}
+func (v *CreateProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProposalOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProposalOutput_ProposalId:
+			v.ProposalId = new(string)
+			return d.ReadString(schemas.CreateProposalOutput_ProposalId, v.ProposalId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProposal, schemas.CreateProposalInput, schemas.CreateProposalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProposal, schemas.CreateProposalInput, schemas.CreateProposalOutput), output: &CreateProposalOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProposal{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProposal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -160,12 +164,6 @@ func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateProposalValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProposal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,12 +176,6 @@ func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -223,12 +215,4 @@ func (m *idempotencyToken_initializeOpCreateProposal) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateProposalMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProposal{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProposal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProposal",
-	}
 }

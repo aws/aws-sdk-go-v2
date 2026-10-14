@@ -4,17 +4,16 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
 //
-// Defines a new matchmaking configuration for use with FlexMatch. Whether your
-// are using FlexMatch with Amazon GameLift Servers hosting or as a standalone
+// Defines a new matchmaking configuration for use with FlexMatch. Whether you are
+// using FlexMatch with Amazon GameLift Servers hosting or as a standalone
 // matchmaking service, the matchmaking configuration sets out rules for matching
 // players and forming teams. If you're also using Amazon GameLift Servers hosting,
 // it defines how to start game sessions for each match. Your matchmaking system
@@ -156,8 +155,10 @@ type CreateMatchmakingConfigurationInput struct {
 	// session queue resource and uniquely identifies it. ARNs are unique across all
 	// Regions. Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located
 	// in any Region. Queues are used to start new Amazon GameLift Servers-hosted game
-	// sessions for matches that are created with this matchmaking configuration. If
-	// FlexMatchMode is set to STANDALONE , do not set this parameter.
+	// sessions for matches that are created with this matchmaking configuration. A
+	// matchmaking configuration supports only one queue; if you specify more than one
+	// ARN, the request fails with an InvalidRequestException . If FlexMatchMode is
+	// set to STANDALONE , do not set this parameter.
 	//
 	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArns []string
@@ -169,7 +170,7 @@ type CreateMatchmakingConfigurationInput struct {
 	NotificationTarget *string
 
 	// A list of labels to assign to the new matchmaking configuration resource. Tags
-	// are developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// are developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
 	//
@@ -177,6 +178,54 @@ type CreateMatchmakingConfigurationInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateMatchmakingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMatchmakingConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMatchmakingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceRequired != nil {
+		s.WriteBool(schemas.CreateMatchmakingConfigurationInput_AcceptanceRequired, *v.AcceptanceRequired)
+	}
+	if v.AcceptanceTimeoutSeconds != nil {
+		s.WriteInt32(schemas.CreateMatchmakingConfigurationInput_AcceptanceTimeoutSeconds, *v.AcceptanceTimeoutSeconds)
+	}
+	if v.AdditionalPlayerCount != nil {
+		s.WriteInt32(schemas.CreateMatchmakingConfigurationInput_AdditionalPlayerCount, *v.AdditionalPlayerCount)
+	}
+	if v.BackfillMode != "" {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_BackfillMode, string(v.BackfillMode))
+	}
+	if v.CustomEventData != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_CustomEventData, *v.CustomEventData)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_Description, *v.Description)
+	}
+	if v.FlexMatchMode != "" {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_FlexMatchMode, string(v.FlexMatchMode))
+	}
+	serializeGamePropertyList(s, schemas.CreateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_GameSessionData, *v.GameSessionData)
+	}
+	serializeQueueArnsList(s, schemas.CreateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_Name, *v.Name)
+	}
+	if v.NotificationTarget != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_NotificationTarget, *v.NotificationTarget)
+	}
+	if v.RequestTimeoutSeconds != nil {
+		s.WriteInt32(schemas.CreateMatchmakingConfigurationInput_RequestTimeoutSeconds, *v.RequestTimeoutSeconds)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.CreateMatchmakingConfigurationInput_RuleSetName, *v.RuleSetName)
+	}
+	serializeTagList(s, schemas.CreateMatchmakingConfigurationInput_Tags, v.Tags)
 }
 
 type CreateMatchmakingConfigurationOutput struct {
@@ -190,65 +239,44 @@ type CreateMatchmakingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMatchmakingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMatchmakingConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMatchmakingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateMatchmakingConfigurationOutput_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMatchmakingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMatchmakingConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMatchmakingConfigurationOutput_Configuration:
+			v.Configuration = &types.MatchmakingConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchmakingConfiguration, schemas.CreateMatchmakingConfigurationInput, schemas.CreateMatchmakingConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateMatchmakingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchmakingConfiguration, schemas.CreateMatchmakingConfigurationInput, schemas.CreateMatchmakingConfigurationOutput), output: &CreateMatchmakingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateMatchmakingConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMatchmakingConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -258,12 +286,6 @@ func (c *Client) addOperationCreateMatchmakingConfigurationMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpCreateMatchmakingConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMatchmakingConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -278,22 +300,8 @@ func (c *Client) addOperationCreateMatchmakingConfigurationMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMatchmakingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMatchmakingConfiguration",
-	}
 }

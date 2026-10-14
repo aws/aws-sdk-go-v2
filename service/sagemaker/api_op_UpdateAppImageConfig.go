@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of an AppImageConfig.
@@ -46,6 +45,33 @@ type UpdateAppImageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppImageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppImageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppImageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppImageConfigName != nil {
+		s.WriteString(schemas.UpdateAppImageConfigRequest_AppImageConfigName, *v.AppImageConfigName)
+	}
+	if v.CodeEditorAppImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_CodeEditorAppImageConfig)
+		v.CodeEditorAppImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JupyterLabAppImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_JupyterLabAppImageConfig)
+		v.JupyterLabAppImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KernelGatewayImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_KernelGatewayImageConfig)
+		v.KernelGatewayImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAppImageConfigOutput struct {
 
 	// The ARN for the AppImageConfig.
@@ -57,77 +83,48 @@ type UpdateAppImageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppImageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppImageConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppImageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppImageConfigArn != nil {
+		s.WriteString(schemas.UpdateAppImageConfigResponse_AppImageConfigArn, *v.AppImageConfigArn)
+	}
+}
+func (v *UpdateAppImageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppImageConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppImageConfigResponse_AppImageConfigArn:
+			v.AppImageConfigArn = new(string)
+			return d.ReadString(schemas.UpdateAppImageConfigResponse_AppImageConfigArn, v.AppImageConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppImageConfig, schemas.UpdateAppImageConfigRequest, schemas.UpdateAppImageConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAppImageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppImageConfig, schemas.UpdateAppImageConfigRequest, schemas.UpdateAppImageConfigResponse), output: &UpdateAppImageConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAppImageConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppImageConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAppImageConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAppImageConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +139,8 @@ func (c *Client) addOperationUpdateAppImageConfigMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAppImageConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAppImageConfig",
-	}
 }

@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Once you have a ruleset definition (either recommended or your own), you call
@@ -69,6 +68,39 @@ type StartDataQualityRulesetEvaluationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSourceMap(s, schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalRunOptions != nil {
+		s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalRunOptions)
+		v.AdditionalRunOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.StartDataQualityRulesetEvaluationRunRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunRequest_Role, *v.Role)
+	}
+	serializeRulesetNames(s, schemas.StartDataQualityRulesetEvaluationRunRequest_RulesetNames, v.RulesetNames)
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.StartDataQualityRulesetEvaluationRunRequest_Timeout, *v.Timeout)
+	}
+}
+
 type StartDataQualityRulesetEvaluationRunOutput struct {
 
 	// The unique run identifier associated with this run.
@@ -80,77 +112,48 @@ type StartDataQualityRulesetEvaluationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StartDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataQualityRulesetEvaluationRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartDataQualityRulesetEvaluationRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataQualityRulesetEvaluationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRulesetEvaluationRun, schemas.StartDataQualityRulesetEvaluationRunRequest, schemas.StartDataQualityRulesetEvaluationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRulesetEvaluationRun, schemas.StartDataQualityRulesetEvaluationRunRequest, schemas.StartDataQualityRulesetEvaluationRunResponse), output: &StartDataQualityRulesetEvaluationRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataQualityRulesetEvaluationRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDataQualityRulesetEvaluationRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDataQualityRulesetEvaluationRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataQualityRulesetEvaluationRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +168,8 @@ func (c *Client) addOperationStartDataQualityRulesetEvaluationRunMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDataQualityRulesetEvaluationRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDataQualityRulesetEvaluationRun",
-	}
 }

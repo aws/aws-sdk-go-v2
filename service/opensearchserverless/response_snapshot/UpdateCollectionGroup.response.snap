@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateCollectionGroup
+
+{"updateCollectionGroupDetail":{"arn":"__Arn__","capacityLimits":{"maxIndexingCapacityInOCU":1,"maxSearchCapacityInOCU":1,"minIndexingCapacityInOCU":1,"minSearchCapacityInOCU":1},"createdDate":1,"description":"__Description__","generation":"CLASSIC","id":"__Id__","lastModifiedDate":1,"name":"__Name__"}}

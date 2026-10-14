@@ -5049,6 +5049,32 @@ func awsAwsquery_serializeDocumentDesiredConfiguration(v *types.DesiredConfigura
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDistributionSegment(v *types.DistributionSegment, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TargetCapacityTypes != nil {
+		objectKey := object.Key("TargetCapacityTypes")
+		if err := awsAwsquery_serializeDocumentTargetCapacityTypes(v.TargetCapacityTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentDistributionSegments(v []types.DistributionSegment, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentDistributionSegment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentEbs(v *types.Ebs, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5410,6 +5436,13 @@ func awsAwsquery_serializeDocumentInstanceReusePolicy(v *types.InstanceReusePoli
 func awsAwsquery_serializeDocumentInstancesDistribution(v *types.InstancesDistribution, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DistributionSegments != nil {
+		objectKey := object.Key("DistributionSegments")
+		if err := awsAwsquery_serializeDocumentDistributionSegments(v.DistributionSegments, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.OnDemandAllocationStrategy != nil {
 		objectKey := object.Key("OnDemandAllocationStrategy")
@@ -5886,6 +5919,18 @@ func awsAwsquery_serializeDocumentNetworkInterfaceCountRequest(v *types.NetworkI
 	if v.Min != nil {
 		objectKey := object.Key("Min")
 		objectKey.Integer(*v.Min)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentOperator(v *types.Operator, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Principal != nil {
+		objectKey := object.Key("Principal")
+		objectKey.String(*v.Principal)
 	}
 
 	return nil
@@ -6451,6 +6496,16 @@ func awsAwsquery_serializeDocumentTags(v []types.Tag, value query.Value) error {
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTargetCapacityTypes(v []types.TargetCapacityType, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentTargetGroupARNs(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -6582,6 +6637,16 @@ func awsAwsquery_serializeDocumentTargetTrackingMetricStat(v *types.TargetTracki
 		objectKey.String(*v.Unit)
 	}
 
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTerminationInstanceIds(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -7021,6 +7086,13 @@ func awsAwsquery_serializeOpDocumentCreateAutoScalingGroupInput(v *CreateAutoSca
 	if v.NewInstancesProtectedFromScaleIn != nil {
 		objectKey := object.Key("NewInstancesProtectedFromScaleIn")
 		objectKey.Boolean(*v.NewInstancesProtectedFromScaleIn)
+	}
+
+	if v.Operator != nil {
+		objectKey := object.Key("Operator")
+		if err := awsAwsquery_serializeDocumentOperator(v.Operator, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.PlacementGroup != nil {
@@ -8442,9 +8514,21 @@ func awsAwsquery_serializeOpDocumentTerminateInstanceInAutoScalingGroupInput(v *
 	object := value.Object()
 	_ = object
 
+	if v.AutoScalingGroupName != nil {
+		objectKey := object.Key("AutoScalingGroupName")
+		objectKey.String(*v.AutoScalingGroupName)
+	}
+
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if v.InstanceIds != nil {
+		objectKey := object.Key("InstanceIds")
+		if err := awsAwsquery_serializeDocumentTerminationInstanceIds(v.InstanceIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ShouldDecrementDesiredCapacity != nil {

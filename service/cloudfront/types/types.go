@@ -4361,6 +4361,14 @@ type OriginAccessControlConfig struct {
 	//   must add the Authorization header to a [cache policy]for all cache behaviors that use
 	//   origins associated with this origin access control.
 	//
+	//   - always-amz-auth – CloudFront signs all origin requests with Amazon
+	//   authentication headers. If the viewer request contains the Authorization
+	//   header, then CloudFront also forwards that header to the origin. This value is
+	//   only valid with Lambda-Web origins. WARNING: To forward the Authorization
+	//   header from the viewer request, you must add the Authorization header to a [cache policy]
+	//   for all cache behaviors that use origins associated with this origin access
+	//   control.
+	//
 	// [origin access control advanced settings]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings
 	// [cache policy]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
 	//
@@ -4368,7 +4376,8 @@ type OriginAccessControlConfig struct {
 	SigningBehavior OriginAccessControlSigningBehaviors
 
 	// The signing protocol of the origin access control, which determines how
-	// CloudFront signs (authenticates) requests. The only valid value is sigv4 .
+	// CloudFront signs (authenticates) requests. The only valid values are sigv4 and
+	// sigv4a .
 	//
 	// This member is required.
 	SigningProtocol OriginAccessControlSigningProtocols
@@ -4450,12 +4459,16 @@ type OriginAccessControlSummary struct {
 	//   Authorization header, CloudFront doesn't sign the origin request, but instead
 	//   passes along the Authorization header that it received in the viewer request.
 	//
+	//   - always-amz-auth – CloudFront signs all origin requests with Amazon
+	//   authentication headers, and forwards the viewer's Authorization header to the
+	//   origin if one is present. This value is only valid with Lambda-Web origins.
+	//
 	// This member is required.
 	SigningBehavior OriginAccessControlSigningBehaviors
 
 	// The signing protocol of the origin access control. The signing protocol
-	// determines how CloudFront signs (authenticates) requests. The only valid value
-	// is sigv4 .
+	// determines how CloudFront signs (authenticates) requests. The only valid values
+	// are sigv4 and sigv4a .
 	//
 	// This member is required.
 	SigningProtocol OriginAccessControlSigningProtocols
@@ -6886,14 +6899,14 @@ type ViewerCertificate struct {
 	//
 	//   - static-ip - Do not specify this value unless your distribution has been
 	//   enabled for this feature by the CloudFront team. If you have a use case that
-	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web Services Support Center]
+	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web ServicesSupport Center]
 	//   .
 	//
 	// If the distribution uses the CloudFront domain name such as
 	// d111111abcdef8.cloudfront.net , don't set a value for this field.
 	//
+	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
-	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home
 	SSLSupportMethod SSLSupportMethod
 
 	noSmithyDocumentSerde

@@ -4,10 +4,9 @@ package controltower
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resets an enabled control. Does not work for controls implemented with SCPs.
@@ -36,6 +35,18 @@ type ResetEnabledControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledControlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledControlInput_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+}
+
 type ResetEnabledControlOutput struct {
 
 	//  The operation identifier for this ResetEnabledControl operation.
@@ -49,77 +60,48 @@ type ResetEnabledControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledControlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledControlOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *ResetEnabledControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetEnabledControlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetEnabledControlOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.ResetEnabledControlOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetEnabledControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledControl, schemas.ResetEnabledControlInput, schemas.ResetEnabledControlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetEnabledControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledControl, schemas.ResetEnabledControlInput, schemas.ResetEnabledControlOutput), output: &ResetEnabledControlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetEnabledControl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetEnabledControl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpResetEnabledControlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetEnabledControl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +116,8 @@ func (c *Client) addOperationResetEnabledControlMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResetEnabledControl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResetEnabledControl",
-	}
 }

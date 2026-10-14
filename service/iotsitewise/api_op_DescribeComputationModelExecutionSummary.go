@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +42,6 @@ type DescribeComputationModelExecutionSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeComputationModelExecutionSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeComputationModelExecutionSummaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeComputationModelExecutionSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComputationModelId != nil {
-		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_computationModelId, *v.ComputationModelId)
-	}
-	if v.ResolveToResourceId != nil {
-		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_resolveToResourceId, *v.ResolveToResourceId)
-	}
-	if v.ResolveToResourceType != "" {
-		s.WriteString(schemas.DescribeComputationModelExecutionSummaryRequest_resolveToResourceType, string(v.ResolveToResourceType))
-	}
-}
-
 type DescribeComputationModelExecutionSummaryOutput struct {
 
 	// Contains the execution summary of the computation model.
@@ -84,78 +63,23 @@ type DescribeComputationModelExecutionSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeComputationModelExecutionSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeComputationModelExecutionSummaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary:
-			return deserializeComputationModelExecutionSummary(d, schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary, &v.ComputationModelExecutionSummary)
-		case schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId:
-			v.ComputationModelId = new(string)
-			return d.ReadString(schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId, v.ComputationModelId)
-		case schemas.DescribeComputationModelExecutionSummaryResponse_resolveTo:
-			v.ResolveTo = &types.ResolveTo{}
-			return v.ResolveTo.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeComputationModelExecutionSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComputationModelExecutionSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModelExecutionSummary, schemas.DescribeComputationModelExecutionSummaryRequest, schemas.DescribeComputationModelExecutionSummaryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComputationModelExecutionSummary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputationModelExecutionSummary, schemas.DescribeComputationModelExecutionSummaryRequest, schemas.DescribeComputationModelExecutionSummaryResponse), output: &DescribeComputationModelExecutionSummaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComputationModelExecutionSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +89,6 @@ func (c *Client) addOperationDescribeComputationModelExecutionSummaryMiddlewares
 		return err
 	}
 	if err = addOpDescribeComputationModelExecutionSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComputationModelExecutionSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +101,6 @@ func (c *Client) addOperationDescribeComputationModelExecutionSummaryMiddlewares
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +134,4 @@ func (m *endpointPrefix_opDescribeComputationModelExecutionSummaryMiddleware) Ha
 }
 func addEndpointPrefix_opDescribeComputationModelExecutionSummaryMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeComputationModelExecutionSummaryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeComputationModelExecutionSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeComputationModelExecutionSummary",
-	}
 }

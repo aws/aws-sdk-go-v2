@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentSummaries":[{"agentId":"__AgentId__","agentName":"__AgentName__","agentStatus":"CREATING","description":"__Description__","guardrailConfiguration":{"guardrailIdentifier":"__GuardrailIdentifier__","guardrailVersion":"__GuardrailVersion__"},"latestAgentVersion":"__LatestAgentVersion__","updatedAt":"2000-01-01T00:00:00Z"},{"agentId":"__AgentId__","agentName":"__AgentName__","agentStatus":"CREATING","description":"__Description__","guardrailConfiguration":{"guardrailIdentifier":"__GuardrailIdentifier__","guardrailVersion":"__GuardrailVersion__"},"latestAgentVersion":"__LatestAgentVersion__","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

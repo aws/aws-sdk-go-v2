@@ -5,13 +5,9 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -59,21 +55,6 @@ type GetStreamSessionInput struct {
 	StreamSessionIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetStreamSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStreamSessionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetStreamSessionInput_Identifier, *v.Identifier)
-	}
-	if v.StreamSessionIdentifier != nil {
-		s.WriteString(schemas.GetStreamSessionInput_StreamSessionIdentifier, *v.StreamSessionIdentifier)
-	}
 }
 
 type GetStreamSessionOutput struct {
@@ -135,6 +116,9 @@ type GetStreamSessionOutput struct {
 	// time.
 	Description *string
 
+	// The configuration for the stream session's virtual monitor.
+	DisplayConfiguration *types.DisplayConfiguration
+
 	// Provides details about the stream session's exported files.
 	ExportFilesMetadata *types.ExportFilesMetadata
 
@@ -160,6 +144,11 @@ type GetStreamSessionOutput struct {
 
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
 
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
@@ -266,155 +255,29 @@ type GetStreamSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStreamSessionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables:
-			return deserializeEnvironmentVariables(d, schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables, &v.AdditionalEnvironmentVariables)
-		case schemas.GetStreamSessionOutput_AdditionalLaunchArgs:
-			return deserializeGameLaunchArgList(d, schemas.GetStreamSessionOutput_AdditionalLaunchArgs, &v.AdditionalLaunchArgs)
-		case schemas.GetStreamSessionOutput_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_ApplicationArn, v.ApplicationArn)
-		case schemas.GetStreamSessionOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_Arn, v.Arn)
-		case schemas.GetStreamSessionOutput_ConnectionTimeoutSeconds:
-			v.ConnectionTimeoutSeconds = new(int32)
-			return d.ReadInt32(schemas.GetStreamSessionOutput_ConnectionTimeoutSeconds, v.ConnectionTimeoutSeconds)
-		case schemas.GetStreamSessionOutput_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetStreamSessionOutput_CreatedAt, v.CreatedAt)
-		case schemas.GetStreamSessionOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_Description, v.Description)
-		case schemas.GetStreamSessionOutput_ExportFilesMetadata:
-			v.ExportFilesMetadata = &types.ExportFilesMetadata{}
-			return v.ExportFilesMetadata.Deserialize(d)
-		case schemas.GetStreamSessionOutput_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetStreamSessionOutput_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetStreamSessionOutput_Location:
-			v.Location = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_Location, v.Location)
-		case schemas.GetStreamSessionOutput_LogFileLocationUri:
-			v.LogFileLocationUri = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_LogFileLocationUri, v.LogFileLocationUri)
-		case schemas.GetStreamSessionOutput_PerformanceStatsConfiguration:
-			v.PerformanceStatsConfiguration = &types.PerformanceStatsConfiguration{}
-			return v.PerformanceStatsConfiguration.Deserialize(d)
-		case schemas.GetStreamSessionOutput_Protocol:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamSessionOutput_Protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = types.Protocol(ev)
-			return nil
-		case schemas.GetStreamSessionOutput_SessionLengthSeconds:
-			v.SessionLengthSeconds = new(int32)
-			return d.ReadInt32(schemas.GetStreamSessionOutput_SessionLengthSeconds, v.SessionLengthSeconds)
-		case schemas.GetStreamSessionOutput_SignalRequest:
-			v.SignalRequest = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_SignalRequest, v.SignalRequest)
-		case schemas.GetStreamSessionOutput_SignalResponse:
-			v.SignalResponse = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_SignalResponse, v.SignalResponse)
-		case schemas.GetStreamSessionOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamSessionOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.StreamSessionStatus(ev)
-			return nil
-		case schemas.GetStreamSessionOutput_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamSessionOutput_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = types.StreamSessionStatusReason(ev)
-			return nil
-		case schemas.GetStreamSessionOutput_StreamGroupId:
-			v.StreamGroupId = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_StreamGroupId, v.StreamGroupId)
-		case schemas.GetStreamSessionOutput_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_UserId, v.UserId)
-		case schemas.GetStreamSessionOutput_WebSdkProtocolUrl:
-			v.WebSdkProtocolUrl = new(string)
-			return d.ReadString(schemas.GetStreamSessionOutput_WebSdkProtocolUrl, v.WebSdkProtocolUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionInput, schemas.GetStreamSessionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamSession{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionInput, schemas.GetStreamSessionOutput), output: &GetStreamSessionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStreamSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStreamSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStreamSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -427,12 +290,6 @@ func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -635,11 +492,3 @@ type GetStreamSessionAPIClient interface {
 }
 
 var _ GetStreamSessionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetStreamSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStreamSession",
-	}
-}

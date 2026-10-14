@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new, immutable version of a core network policy. A subsequent change
@@ -55,6 +55,30 @@ type PutCoreNetworkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCoreNetworkPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCoreNetworkPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCoreNetworkPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutCoreNetworkPolicyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PutCoreNetworkPolicyRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutCoreNetworkPolicyRequest_Description, *v.Description)
+	}
+	if v.LatestVersionId != nil {
+		s.WriteInt32(schemas.PutCoreNetworkPolicyRequest_LatestVersionId, *v.LatestVersionId)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.PutCoreNetworkPolicyRequest_PolicyDocument, *v.PolicyDocument)
+	}
+}
+
 type PutCoreNetworkPolicyOutput struct {
 
 	// Describes the changed core network policy.
@@ -66,65 +90,44 @@ type PutCoreNetworkPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCoreNetworkPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCoreNetworkPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCoreNetworkPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkPolicy != nil {
+		s.WriteStruct(schemas.PutCoreNetworkPolicyResponse_CoreNetworkPolicy)
+		v.CoreNetworkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutCoreNetworkPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutCoreNetworkPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutCoreNetworkPolicyResponse_CoreNetworkPolicy:
+			v.CoreNetworkPolicy = &types.CoreNetworkPolicy{}
+			return v.CoreNetworkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCoreNetworkPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCoreNetworkPolicy, schemas.PutCoreNetworkPolicyRequest, schemas.PutCoreNetworkPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCoreNetworkPolicy, schemas.PutCoreNetworkPolicyRequest, schemas.PutCoreNetworkPolicyResponse), output: &PutCoreNetworkPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutCoreNetworkPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +137,6 @@ func (c *Client) addOperationPutCoreNetworkPolicyMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpPutCoreNetworkPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutCoreNetworkPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +149,6 @@ func (c *Client) addOperationPutCoreNetworkPolicyMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +188,4 @@ func (m *idempotencyToken_initializeOpPutCoreNetworkPolicy) HandleInitialize(ctx
 }
 func addIdempotencyToken_opPutCoreNetworkPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutCoreNetworkPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutCoreNetworkPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutCoreNetworkPolicy",
-	}
 }

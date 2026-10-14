@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConcurrentModificationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConcurrentModificationException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Another operation is in progress on the resource that conflicts with the
 // current operation.
@@ -70,16 +59,6 @@ func (e *ConflictingOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictingOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictingOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictingOperationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictingOperationException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The limit has been reached on the number of custom properties for the specified
 // resource.
@@ -108,16 +87,6 @@ func (e *CustomMetadataLimitExceededException) ErrorCode() string {
 }
 func (e *CustomMetadataLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (v *CustomMetadataLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomMetadataLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomMetadataLimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CustomMetadataLimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
 }
 
 // The last user in the organization is being deactivated.
@@ -149,19 +118,6 @@ func (e *DeactivatingLastSystemUserException) ErrorCode() string {
 func (e *DeactivatingLastSystemUserException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *DeactivatingLastSystemUserException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeactivatingLastSystemUserException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeactivatingLastSystemUserException_Code:
-			v.Code = new(string)
-			return d.ReadString(schemas.DeactivatingLastSystemUserException_Code, v.Code)
-		case schemas.DeactivatingLastSystemUserException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DeactivatingLastSystemUserException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This exception is thrown when the document is locked for comments and user
 // tries to create or delete a comment on that document.
@@ -191,16 +147,6 @@ func (e *DocumentLockedForCommentsException) ErrorCode() string {
 func (e *DocumentLockedForCommentsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *DocumentLockedForCommentsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DocumentLockedForCommentsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DocumentLockedForCommentsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DocumentLockedForCommentsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This exception is thrown when a valid checkout ID is not presented on document
 // version upload calls for a document that has been checked out from Web client.
@@ -228,16 +174,6 @@ func (e *DraftUploadOutOfSyncException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DraftUploadOutOfSyncException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DraftUploadOutOfSyncException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DraftUploadOutOfSyncException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DraftUploadOutOfSyncException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DraftUploadOutOfSyncException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource already exists.
 type EntityAlreadyExistsException struct {
@@ -264,16 +200,6 @@ func (e *EntityAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *EntityAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EntityAlreadyExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EntityAlreadyExistsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.EntityAlreadyExistsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource does not exist.
 type EntityNotExistsException struct {
@@ -302,18 +228,6 @@ func (e *EntityNotExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityNotExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *EntityNotExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EntityNotExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EntityNotExistsException_EntityIds:
-			return deserializeEntityIdList(d, schemas.EntityNotExistsException_EntityIds, &v.EntityIds)
-		case schemas.EntityNotExistsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.EntityNotExistsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The Directory Service cannot reach an on-premises instance. Or a dependency
 // under the control of the organization is failing, such as a connected Active
@@ -342,16 +256,6 @@ func (e *FailedDependencyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *FailedDependencyException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailedDependencyException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailedDependencyException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.FailedDependencyException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The user is undergoing transfer of ownership.
 type IllegalUserStateException struct {
@@ -378,16 +282,6 @@ func (e *IllegalUserStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalUserStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *IllegalUserStateException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IllegalUserStateException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IllegalUserStateException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IllegalUserStateException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The pagination marker or limit fields are not valid.
 type InvalidArgumentException struct {
@@ -414,16 +308,6 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidArgumentException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The requested operation is not allowed on the specified comment object.
 type InvalidCommentOperationException struct {
@@ -450,16 +334,6 @@ func (e *InvalidCommentOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCommentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidCommentOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidCommentOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidCommentOperationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidCommentOperationException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The operation is invalid.
 type InvalidOperationException struct {
@@ -486,16 +360,6 @@ func (e *InvalidOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidOperationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidOperationException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The password is invalid.
 type InvalidPasswordException struct {
@@ -522,16 +386,6 @@ func (e *InvalidPasswordException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidPasswordException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidPasswordException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidPasswordException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidPasswordException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The maximum of 100,000 files and folders under the parent folder has been
 // exceeded.
@@ -559,16 +413,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified document version is not in the INITIALIZED state.
 type ProhibitedStateException struct {
@@ -595,16 +439,6 @@ func (e *ProhibitedStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ProhibitedStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ProhibitedStateException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProhibitedStateException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProhibitedStateException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ProhibitedStateException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The response is too large to return. The request must include a filter to
 // reduce the size of the response.
@@ -632,16 +466,6 @@ func (e *RequestedEntityTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestedEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RequestedEntityTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestedEntityTooLargeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestedEntityTooLargeException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RequestedEntityTooLargeException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource is already checked out.
 type ResourceAlreadyCheckedOutException struct {
@@ -670,16 +494,6 @@ func (e *ResourceAlreadyCheckedOutException) ErrorCode() string {
 func (e *ResourceAlreadyCheckedOutException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *ResourceAlreadyCheckedOutException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceAlreadyCheckedOutException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceAlreadyCheckedOutException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceAlreadyCheckedOutException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more of the dependencies is unavailable.
 type ServiceUnavailableException struct {
@@ -706,16 +520,6 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The storage limit has been exceeded.
 type StorageLimitExceededException struct {
@@ -742,16 +546,6 @@ func (e *StorageLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StorageLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *StorageLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StorageLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StorageLimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.StorageLimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The storage limit will be exceeded.
 type StorageLimitWillExceedException struct {
@@ -778,16 +572,6 @@ func (e *StorageLimitWillExceedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StorageLimitWillExceedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *StorageLimitWillExceedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StorageLimitWillExceedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StorageLimitWillExceedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.StorageLimitWillExceedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The limit has been reached on the number of labels for the specified resource.
 type TooManyLabelsException struct {
@@ -814,16 +598,6 @@ func (e *TooManyLabelsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyLabelsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyLabelsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyLabelsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyLabelsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyLabelsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You've reached the limit on the number of subscriptions for the WorkDocs
 // instance.
@@ -851,16 +625,6 @@ func (e *TooManySubscriptionsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManySubscriptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManySubscriptionsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManySubscriptionsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManySubscriptionsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManySubscriptionsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The operation is not permitted.
 type UnauthorizedOperationException struct {
@@ -889,19 +653,6 @@ func (e *UnauthorizedOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *UnauthorizedOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnauthorizedOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnauthorizedOperationException_Code:
-			v.Code = new(string)
-			return d.ReadString(schemas.UnauthorizedOperationException_Code, v.Code)
-		case schemas.UnauthorizedOperationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UnauthorizedOperationException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The caller does not have access to perform the action on the resource.
 type UnauthorizedResourceAccessException struct {
@@ -929,14 +680,4 @@ func (e *UnauthorizedResourceAccessException) ErrorCode() string {
 }
 func (e *UnauthorizedResourceAccessException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
-}
-func (v *UnauthorizedResourceAccessException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnauthorizedResourceAccessException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnauthorizedResourceAccessException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UnauthorizedResourceAccessException_Message, v.Message)
-		}
-		return nil
-	})
 }

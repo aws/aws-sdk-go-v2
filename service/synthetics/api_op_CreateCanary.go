@@ -4,13 +4,8 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a canary. Canaries are scripts that monitor your endpoints and APIs
@@ -112,6 +107,11 @@ type CreateCanaryInput struct {
 	// This member is required.
 	Schedule *types.CanaryScheduleInput
 
+	// A list of locations (Amazon Web Services Regions) to add as replicas for the
+	// canary. Each location specifies a Region and optional VPC configuration for the
+	// replica. You can add up to 50 replica locations.
+	AddReplicaLocations []types.AddReplicaLocationInput
+
 	// A structure that contains the configuration for canary artifacts, including the
 	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *types.ArtifactConfigInput
@@ -133,6 +133,12 @@ type CreateCanaryInput struct {
 	//
 	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
+
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key.
+	KmsKeyArn *string
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
 	// canary when the canary is deleted. If you omit this parameter, the default of
@@ -194,64 +200,6 @@ type CreateCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCanaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCanaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArtifactConfig != nil {
-		s.WriteStruct(schemas.CreateCanaryRequest_ArtifactConfig)
-		v.ArtifactConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ArtifactS3Location != nil {
-		s.WriteString(schemas.CreateCanaryRequest_ArtifactS3Location, *v.ArtifactS3Location)
-	}
-	serializeBrowserConfigs(s, schemas.CreateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
-	if v.Code != nil {
-		s.WriteStruct(schemas.CreateCanaryRequest_Code)
-		v.Code.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.CreateCanaryRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.FailureRetentionPeriodInDays != nil {
-		s.WriteInt32(schemas.CreateCanaryRequest_FailureRetentionPeriodInDays, *v.FailureRetentionPeriodInDays)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateCanaryRequest_Name, *v.Name)
-	}
-	if v.ProvisionedResourceCleanup != "" {
-		s.WriteString(schemas.CreateCanaryRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
-	}
-	serializeResourceList(s, schemas.CreateCanaryRequest_ResourcesToReplicateTags, v.ResourcesToReplicateTags)
-	if v.RunConfig != nil {
-		s.WriteStruct(schemas.CreateCanaryRequest_RunConfig)
-		v.RunConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuntimeVersion != nil {
-		s.WriteString(schemas.CreateCanaryRequest_RuntimeVersion, *v.RuntimeVersion)
-	}
-	if v.Schedule != nil {
-		s.WriteStruct(schemas.CreateCanaryRequest_Schedule)
-		v.Schedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SuccessRetentionPeriodInDays != nil {
-		s.WriteInt32(schemas.CreateCanaryRequest_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
-	}
-	serializeTagMap(s, schemas.CreateCanaryRequest_Tags, v.Tags)
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.CreateCanaryRequest_VpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateCanaryOutput struct {
 
 	// The full details about the canary you have created.
@@ -263,85 +211,29 @@ type CreateCanaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCanaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCanaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCanaryResponse_Canary:
-			v.Canary = &types.Canary{}
-			return v.Canary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCanary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCanary, schemas.CreateCanaryRequest, schemas.CreateCanaryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCanary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCanary, schemas.CreateCanaryRequest, schemas.CreateCanaryResponse), output: &CreateCanaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCanary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCanaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCanary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -356,22 +248,8 @@ func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCanary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCanary",
-	}
 }

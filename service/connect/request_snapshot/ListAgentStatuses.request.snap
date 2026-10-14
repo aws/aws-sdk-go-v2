@@ -1,0 +1,3 @@
+GET /agent-status/__InstanceId__?AgentStatusTypes=ROUTABLE&AgentStatusTypes=ROUTABLE&maxResults=1&nextToken=__NextToken__
+
+

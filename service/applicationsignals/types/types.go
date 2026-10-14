@@ -328,6 +328,265 @@ func (v *AuditTargetEntityMemberSlo) Deserialize(d smithy.ShapeDeserializer) err
 	return v.Value.Deserialize(d)
 }
 
+// Parameters for targeted delete by ARN list.
+type BatchDeleteByResourceArns struct {
+
+	// Instrumentation type: BREAKPOINT or PROBE.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// List of resource ARNs to delete.
+	//
+	// This member is required.
+	ResourceArns []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteByResourceArns) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteByResourceArns)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteByResourceArns) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.BatchDeleteByResourceArns_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeBatchDeleteResourceArnList(s, schemas.BatchDeleteByResourceArns_ResourceArns, v.ResourceArns)
+}
+func (v *BatchDeleteByResourceArns) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteByResourceArns, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteByResourceArns_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteByResourceArns_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.BatchDeleteByResourceArns_ResourceArns:
+			return deserializeBatchDeleteResourceArnList(d, schemas.BatchDeleteByResourceArns_ResourceArns, &v.ResourceArns)
+		}
+		return nil
+	})
+}
+
+// Union type for batch delete target selection. Exactly one of the two modes must
+// be specified.
+//
+// The following types satisfy this interface:
+//
+//	BatchDeleteDeletionTargetMemberResourceArns
+//	BatchDeleteDeletionTargetMemberScope
+type BatchDeleteDeletionTarget interface {
+	isBatchDeleteDeletionTarget()
+}
+
+// Delete specific configurations by ARN list.
+type BatchDeleteDeletionTargetMemberResourceArns struct {
+	Value BatchDeleteByResourceArns
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchDeleteDeletionTargetMemberResourceArns) isBatchDeleteDeletionTarget() {}
+func (v *BatchDeleteDeletionTargetMemberResourceArns) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDeletionTarget_ResourceArns)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *BatchDeleteDeletionTargetMemberResourceArns) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Delete all configurations matching the specified scope.
+type BatchDeleteDeletionTargetMemberScope struct {
+	Value BatchDeleteScope
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchDeleteDeletionTargetMemberScope) isBatchDeleteDeletionTarget() {}
+func (v *BatchDeleteDeletionTargetMemberScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDeletionTarget_Scope)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *BatchDeleteDeletionTargetMemberScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Represents an error that occurred when attempting to delete a configuration.
+type BatchDeleteError struct {
+
+	// Error code indicating the type of failure.
+	//
+	// This member is required.
+	Code BatchDeleteErrorCode
+
+	// Descriptive error message.
+	//
+	// This member is required.
+	Message *string
+
+	// ARN of the configuration that failed to delete.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.BatchDeleteError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteError_Message, *v.Message)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BatchDeleteError_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *BatchDeleteError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteError_Code:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = BatchDeleteErrorCode(ev)
+			return nil
+		case schemas.BatchDeleteError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteError_Message, v.Message)
+		case schemas.BatchDeleteError_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BatchDeleteError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
+// Scope parameters for bulk delete by scope.
+type BatchDeleteScope struct {
+
+	// Environment identifier for the instrumentation configurations.
+	//
+	// This member is required.
+	Environment *string
+
+	// Instrumentation type: BREAKPOINT or PROBE.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// Service name for the instrumentation configurations.
+	//
+	// This member is required.
+	Service *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.BatchDeleteScope_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.BatchDeleteScope_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.BatchDeleteScope_Service, *v.Service)
+	}
+}
+func (v *BatchDeleteScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteScope_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.BatchDeleteScope_Environment, v.Environment)
+		case schemas.BatchDeleteScope_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteScope_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.BatchDeleteScope_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.BatchDeleteScope_Service, v.Service)
+		}
+		return nil
+	})
+}
+
+// Represents a successfully deleted instrumentation configuration.
+type BatchDeleteSuccessfulDeletion struct {
+
+	// Location hash of the deleted configuration (populated only when deleting by
+	// scope).
+	LocationHash *string
+
+	// ARN of the deleted configuration (populated only when deleting by ARN list).
+	ResourceArn *string
+
+	// Signal type of the deleted configuration (populated only when deleting by
+	// scope).
+	SignalType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteSuccessfulDeletion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteSuccessfulDeletion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteSuccessfulDeletion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationHash != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_LocationHash, *v.LocationHash)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_ResourceArn, *v.ResourceArn)
+	}
+	if v.SignalType != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_SignalType, *v.SignalType)
+	}
+}
+func (v *BatchDeleteSuccessfulDeletion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteSuccessfulDeletion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteSuccessfulDeletion_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_LocationHash, v.LocationHash)
+		case schemas.BatchDeleteSuccessfulDeletion_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_ResourceArn, v.ResourceArn)
+		case schemas.BatchDeleteSuccessfulDeletion_SignalType:
+			v.SignalType = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_SignalType, v.SignalType)
+		}
+		return nil
+	})
+}
+
 // An array of structures, where each structure includes an error indicating that
 // one of the requests in the array was not valid.
 type BatchUpdateExclusionWindowsError struct {
@@ -534,6 +793,133 @@ func (v *CanaryEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A union that defines what data to capture when the instrumentation point is
+// hit. Specify CodeCapture for code-level capture settings.
+//
+// The following types satisfy this interface:
+//
+//	CaptureConfigurationMemberCodeCapture
+type CaptureConfiguration interface {
+	isCaptureConfiguration()
+}
+
+// Capture settings for code-level instrumentation, including arguments, return
+// values, stack traces, local variables, and safety limits.
+type CaptureConfigurationMemberCodeCapture struct {
+	Value CodeCaptureConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CaptureConfigurationMemberCodeCapture) isCaptureConfiguration() {}
+func (v *CaptureConfigurationMemberCodeCapture) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptureConfiguration_CodeCapture)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CaptureConfigurationMemberCodeCapture) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Guardrails that prevent instrumentation from impacting application performance
+// by limiting how much data is captured.
+type CaptureLimitsConfig struct {
+
+	// The maximum nesting depth to traverse inside collections. Defaults to 3.
+	MaxCollectionDepth *int32
+
+	// The maximum number of items to capture from any collection to prevent large
+	// payloads. Defaults to 10.
+	MaxCollectionWidth *int32
+
+	// The maximum number of fields to capture for any object. Defaults to 10.
+	MaxFieldsPerObject *int32
+
+	// The maximum number of times the instrumentation point can be hit before it is
+	// automatically disabled. Defaults to 100.
+	MaxHits *int32
+
+	// The maximum depth for nested object traversal when capturing structured data.
+	// Defaults to 3.
+	MaxObjectDepth *int32
+
+	// The maximum number of stack frames to capture in stack traces. Defaults to 2.
+	MaxStackFrames *int32
+
+	// The maximum total size, in bytes, of a captured stack trace. Defaults to 1000.
+	MaxStackTraceSize *int32
+
+	// The maximum length of captured string values in characters. Strings longer than
+	// this are truncated. Defaults to 128.
+	MaxStringLength *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *CaptureLimitsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptureLimitsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptureLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCollectionDepth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxCollectionDepth, *v.MaxCollectionDepth)
+	}
+	if v.MaxCollectionWidth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxCollectionWidth, *v.MaxCollectionWidth)
+	}
+	if v.MaxFieldsPerObject != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxFieldsPerObject, *v.MaxFieldsPerObject)
+	}
+	if v.MaxHits != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxHits, *v.MaxHits)
+	}
+	if v.MaxObjectDepth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxObjectDepth, *v.MaxObjectDepth)
+	}
+	if v.MaxStackFrames != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStackFrames, *v.MaxStackFrames)
+	}
+	if v.MaxStackTraceSize != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStackTraceSize, *v.MaxStackTraceSize)
+	}
+	if v.MaxStringLength != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStringLength, *v.MaxStringLength)
+	}
+}
+func (v *CaptureLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptureLimitsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptureLimitsConfig_MaxCollectionDepth:
+			v.MaxCollectionDepth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxCollectionDepth, v.MaxCollectionDepth)
+		case schemas.CaptureLimitsConfig_MaxCollectionWidth:
+			v.MaxCollectionWidth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxCollectionWidth, v.MaxCollectionWidth)
+		case schemas.CaptureLimitsConfig_MaxFieldsPerObject:
+			v.MaxFieldsPerObject = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxFieldsPerObject, v.MaxFieldsPerObject)
+		case schemas.CaptureLimitsConfig_MaxHits:
+			v.MaxHits = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxHits, v.MaxHits)
+		case schemas.CaptureLimitsConfig_MaxObjectDepth:
+			v.MaxObjectDepth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxObjectDepth, v.MaxObjectDepth)
+		case schemas.CaptureLimitsConfig_MaxStackFrames:
+			v.MaxStackFrames = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStackFrames, v.MaxStackFrames)
+		case schemas.CaptureLimitsConfig_MaxStackTraceSize:
+			v.MaxStackTraceSize = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStackTraceSize, v.MaxStackTraceSize)
+		case schemas.CaptureLimitsConfig_MaxStringLength:
+			v.MaxStringLength = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStringLength, v.MaxStringLength)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a change event that occurred for a
 // service, such as a deployment or configuration change.
 type ChangeEvent struct {
@@ -667,6 +1053,168 @@ func (v *ChangeEvent) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ChangeEvent_UserName:
 			v.UserName = new(string)
 			return d.ReadString(schemas.ChangeEvent_UserName, v.UserName)
+		}
+		return nil
+	})
+}
+
+// Defines what data to capture for code-level instrumentation, including
+// arguments, return values, stack traces, local variables, and safety limits.
+type CodeCaptureConfiguration struct {
+
+	// Safety limits that bound what is captured, including hit counts, string length,
+	// collection depth, and stack trace size.
+	//
+	// This member is required.
+	CaptureLimits *CaptureLimitsConfig
+
+	// The function arguments to capture. Omit to capture defaults, use an empty list
+	// to capture none, use ["*"] to capture all arguments, or specify argument names
+	// to capture selectively (up to 10 entries).
+	CaptureArguments []string
+
+	// The local variables to capture by name. Omit or pass an empty list to capture
+	// none. You can specify up to 20 names.
+	CaptureLocals []string
+
+	// Whether to capture the return value. Defaults to false.
+	CaptureReturn *bool
+
+	// Whether to capture a stack trace when the instrumentation point is hit.
+	// Defaults to true.
+	CaptureStackTrace *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *CodeCaptureConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeCaptureConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeCaptureConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureArguments, v.CaptureArguments)
+	if v.CaptureLimits != nil {
+		s.WriteStruct(schemas.CodeCaptureConfiguration_CaptureLimits)
+		v.CaptureLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureLocals, v.CaptureLocals)
+	if v.CaptureReturn != nil {
+		s.WriteBool(schemas.CodeCaptureConfiguration_CaptureReturn, *v.CaptureReturn)
+	}
+	if v.CaptureStackTrace != nil {
+		s.WriteBool(schemas.CodeCaptureConfiguration_CaptureStackTrace, *v.CaptureStackTrace)
+	}
+}
+func (v *CodeCaptureConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeCaptureConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeCaptureConfiguration_CaptureArguments:
+			return deserializeStringList(d, schemas.CodeCaptureConfiguration_CaptureArguments, &v.CaptureArguments)
+		case schemas.CodeCaptureConfiguration_CaptureLimits:
+			v.CaptureLimits = &CaptureLimitsConfig{}
+			return v.CaptureLimits.Deserialize(d)
+		case schemas.CodeCaptureConfiguration_CaptureLocals:
+			return deserializeStringList(d, schemas.CodeCaptureConfiguration_CaptureLocals, &v.CaptureLocals)
+		case schemas.CodeCaptureConfiguration_CaptureReturn:
+			v.CaptureReturn = new(bool)
+			return d.ReadBool(schemas.CodeCaptureConfiguration_CaptureReturn, v.CaptureReturn)
+		case schemas.CodeCaptureConfiguration_CaptureStackTrace:
+			v.CaptureStackTrace = new(bool)
+			return d.ReadBool(schemas.CodeCaptureConfiguration_CaptureStackTrace, v.CaptureStackTrace)
+		}
+		return nil
+	})
+}
+
+// Identifies a code location to instrument, including the programming language,
+// code unit, class, method, file path, and optional line number.
+type CodeLocation struct {
+
+	// The source file path relative to the project or source root, such as
+	// src/payment/PaymentProcessor.java or src/payment/PaymentProcessor.py .
+	//
+	// This member is required.
+	FilePath *string
+
+	// The programming language for this instrumentation point, such as Java, Python,
+	// or JavaScript.
+	//
+	// This member is required.
+	Language ProgrammingLanguage
+
+	// The class or type name that contains the method. This is required for Java and
+	// optional for Python module-level functions.
+	ClassName *string
+
+	// The package, module, or namespace that contains the target code, for example
+	// com.amazon.payment or payment_service .
+	CodeUnit *string
+
+	// The line number to instrument. Provide this to disambiguate overloaded methods
+	// and to target a specific line when needed.
+	LineNumber *int32
+
+	// The method or function name to instrument, such as validateCreditCard or
+	// __init__ .
+	MethodName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClassName != nil {
+		s.WriteString(schemas.CodeLocation_ClassName, *v.ClassName)
+	}
+	if v.CodeUnit != nil {
+		s.WriteString(schemas.CodeLocation_CodeUnit, *v.CodeUnit)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.CodeLocation_FilePath, *v.FilePath)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.CodeLocation_Language, string(v.Language))
+	}
+	if v.LineNumber != nil {
+		s.WriteInt32(schemas.CodeLocation_LineNumber, *v.LineNumber)
+	}
+	if v.MethodName != nil {
+		s.WriteString(schemas.CodeLocation_MethodName, *v.MethodName)
+	}
+}
+func (v *CodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeLocation_ClassName:
+			v.ClassName = new(string)
+			return d.ReadString(schemas.CodeLocation_ClassName, v.ClassName)
+		case schemas.CodeLocation_CodeUnit:
+			v.CodeUnit = new(string)
+			return d.ReadString(schemas.CodeLocation_CodeUnit, v.CodeUnit)
+		case schemas.CodeLocation_FilePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.CodeLocation_FilePath, v.FilePath)
+		case schemas.CodeLocation_Language:
+			var ev string
+			if err := d.ReadString(schemas.CodeLocation_Language, &ev); err != nil {
+				return err
+			}
+			v.Language = ProgrammingLanguage(ev)
+			return nil
+		case schemas.CodeLocation_LineNumber:
+			v.LineNumber = new(int32)
+			return d.ReadInt32(schemas.CodeLocation_LineNumber, v.LineNumber)
+		case schemas.CodeLocation_MethodName:
+			v.MethodName = new(string)
+			return d.ReadString(schemas.CodeLocation_MethodName, v.MethodName)
 		}
 		return nil
 	})
@@ -1193,6 +1741,437 @@ func (v *GroupingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The full instrumentation configuration, including the instrumentation type,
+// service, environment, signal type, location details, stable location hash,
+// capture settings, filters, expiration, creation time, and ARN.
+type InstrumentationConfiguration struct {
+
+	// ARN for the instrumentation configuration
+	//
+	// This member is required.
+	ARN *string
+
+	// The capture settings for this instrumentation configuration.
+	//
+	// This member is required.
+	CaptureConfiguration CaptureConfiguration
+
+	// The timestamp when this instrumentation configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The environment where the service is running.
+	//
+	// This member is required.
+	Environment *string
+
+	// The type of instrumentation for this configuration.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The location where this instrumentation is applied.
+	//
+	// This member is required.
+	Location Location
+
+	// The stable hash derived from the location that uniquely identifies this
+	// instrumentation point within the service and environment.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The service that this instrumentation configuration targets.
+	//
+	// This member is required.
+	Service *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// Client-side filters that determine which instances apply this instrumentation.
+	AttributeFilters []map[string]string
+
+	// An optional short description of the instrumentation configuration.
+	Description *string
+
+	// The timestamp when this configuration expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_ARN, *v.ARN)
+	}
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfiguration_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.InstrumentationConfiguration_CaptureConfiguration, v.CaptureConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InstrumentationConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Description, *v.Description)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Environment, *v.Environment)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.InstrumentationConfiguration_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfiguration_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.InstrumentationConfiguration_Location, v.Location)
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_LocationHash, *v.LocationHash)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfiguration_SignalType, string(v.SignalType))
+	}
+}
+func (v *InstrumentationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfiguration_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_ARN, v.ARN)
+		case schemas.InstrumentationConfiguration_AttributeFilters:
+			return deserializeDynamicInstrumentationAttributeFilters(d, schemas.InstrumentationConfiguration_AttributeFilters, &v.AttributeFilters)
+		case schemas.InstrumentationConfiguration_CaptureConfiguration:
+			return deserializeCaptureConfiguration(d, schemas.InstrumentationConfiguration_CaptureConfiguration, &v.CaptureConfiguration)
+		case schemas.InstrumentationConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.InstrumentationConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Description, v.Description)
+		case schemas.InstrumentationConfiguration_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Environment, v.Environment)
+		case schemas.InstrumentationConfiguration_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfiguration_ExpiresAt, v.ExpiresAt)
+		case schemas.InstrumentationConfiguration_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfiguration_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfiguration_Location:
+			return deserializeLocation(d, schemas.InstrumentationConfiguration_Location, &v.Location)
+		case schemas.InstrumentationConfiguration_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfiguration_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Service, v.Service)
+		case schemas.InstrumentationConfiguration_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfiguration_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The status of a single instrumentation configuration reported by an SDK
+// instance.
+type InstrumentationConfigurationStatusReport struct {
+
+	// The type of instrumentation configuration being reported.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The stable hash of the instrumentation location that identifies the
+	// configuration being reported.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// The status of the instrumentation configuration: READY , ERROR , ACTIVE , or
+	// DISABLED .
+	//
+	// This member is required.
+	Status InstrumentationConfigurationStatus
+
+	// The timestamp when the status event occurred.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The error cause when the status is ERROR , such as the file or method not being
+	// found.
+	ErrorCause InstrumentationErrorCause
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationConfigurationStatusReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfigurationStatusReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfigurationStatusReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCause != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_ErrorCause, string(v.ErrorCause))
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_SignalType, string(v.SignalType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_Status, string(v.Status))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationStatusReport_Time, *v.Time)
+	}
+}
+func (v *InstrumentationConfigurationStatusReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfigurationStatusReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfigurationStatusReport_ErrorCause:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_ErrorCause, &ev); err != nil {
+				return err
+			}
+			v.ErrorCause = InstrumentationErrorCause(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationStatusReport_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfigurationStatusReport_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_Status:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstrumentationConfigurationStatus(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationStatusReport_Time, v.Time)
+		}
+		return nil
+	})
+}
+
+// An instrumentation configuration that omits service and environment because
+// they are provided at a higher level, such as in a list response.
+type InstrumentationConfigurationWithoutServiceEnv struct {
+
+	// ARN for the instrumentation configuration
+	//
+	// This member is required.
+	ARN *string
+
+	// The capture settings for this instrumentation configuration.
+	//
+	// This member is required.
+	CaptureConfiguration CaptureConfiguration
+
+	// The timestamp when this instrumentation configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The type of instrumentation for this configuration.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The location where this instrumentation is applied.
+	//
+	// This member is required.
+	Location Location
+
+	// The stable hash derived from the location that identifies this instrumentation
+	// point.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for this instrumentation configuration.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// Client-side filters that determine which instances apply this instrumentation.
+	AttributeFilters []map[string]string
+
+	// An optional short description of the instrumentation configuration.
+	Description *string
+
+	// The timestamp when this configuration expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationConfigurationWithoutServiceEnv) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfigurationWithoutServiceEnv)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfigurationWithoutServiceEnv) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_ARN, *v.ARN)
+	}
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, v.CaptureConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_Description, *v.Description)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, v.Location)
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType, string(v.SignalType))
+	}
+}
+func (v *InstrumentationConfigurationWithoutServiceEnv) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfigurationWithoutServiceEnv, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_ARN, v.ARN)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters:
+			return deserializeDynamicInstrumentationAttributeFilters(d, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, &v.AttributeFilters)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration:
+			return deserializeCaptureConfiguration(d, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, &v.CaptureConfiguration)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt, v.CreatedAt)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_Description, v.Description)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt, v.ExpiresAt)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_Location:
+			return deserializeLocation(d, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, &v.Location)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A status event for an instrumentation configuration returned by
+// GetInstrumentationConfigurationStatus . Events include the timestamp and, for
+// errors, an error cause.
+type InstrumentationStatusEvent struct {
+
+	// The time when the status was reported, rounded to the nearest minute.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The error cause when the status is ERROR .
+	ErrorCause InstrumentationErrorCause
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationStatusEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationStatusEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationStatusEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCause != "" {
+		s.WriteString(schemas.InstrumentationStatusEvent_ErrorCause, string(v.ErrorCause))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.InstrumentationStatusEvent_Time, *v.Time)
+	}
+}
+func (v *InstrumentationStatusEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationStatusEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationStatusEvent_ErrorCause:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationStatusEvent_ErrorCause, &ev); err != nil {
+				return err
+			}
+			v.ErrorCause = InstrumentationErrorCause(ev)
+			return nil
+		case schemas.InstrumentationStatusEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationStatusEvent_Time, v.Time)
+		}
+		return nil
+	})
+}
+
 // The time period used to evaluate the SLO. It can be either a calendar interval
 // or rolling interval.
 //
@@ -1238,6 +2217,78 @@ func (v *IntervalMemberRollingInterval) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *IntervalMemberRollingInterval) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// A union that identifies the location to instrument. Specify a CodeLocation for
+// code-level instrumentation.
+//
+// The following types satisfy this interface:
+//
+//	LocationMemberCodeLocation
+type Location interface {
+	isLocation()
+}
+
+// A code location for code-level instrumentation, including language, code unit,
+// class, method, file path, and optional line number.
+type LocationMemberCodeLocation struct {
+	Value CodeLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationMemberCodeLocation) isLocation() {}
+func (v *LocationMemberCodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Location_CodeLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LocationMemberCodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Union type for identifying an instrumentation configuration by code location or
+// locationHash. Used in Get/Delete/GetStatus operations to allow flexible
+// identification.
+//
+// The following types satisfy this interface:
+//
+//	LocationIdentifierMemberCodeLocation
+//	LocationIdentifierMemberLocationHash
+type LocationIdentifier interface {
+	isLocationIdentifier()
+}
+
+// The full code location specification (will be hashed internally)
+type LocationIdentifierMemberCodeLocation struct {
+	Value CodeLocation
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationIdentifierMemberCodeLocation) isLocationIdentifier() {}
+func (v *LocationIdentifierMemberCodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationIdentifier_CodeLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LocationIdentifierMemberCodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The pre-computed location hash (16-character hex string)
+type LocationIdentifierMemberLocationHash struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*LocationIdentifierMemberLocationHash) isLocationIdentifier() {}
+func (v *LocationIdentifierMemberLocationHash) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.LocationIdentifier_LocationHash, v.Value)
+}
+func (v *LocationIdentifierMemberLocationHash) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.LocationIdentifier_LocationHash, &v.Value)
 }
 
 // This structure defines the metric used for a service level indicator, including
@@ -4114,6 +5165,111 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A status event that could not be processed by the service.
+type UnprocessedStatusEvent struct {
+
+	// The reason why this status event could not be processed, such as throttling or
+	// validation errors.
+	//
+	// This member is required.
+	FailedReason UnprocessedStatusEventFailureReason
+
+	// The type of instrumentation configuration for the unprocessed status event.
+	//
+	// This member is required.
+	InstrumentationType InstrumentationType
+
+	// The stable hash of the instrumentation location for the unprocessed event.
+	//
+	// This member is required.
+	LocationHash *string
+
+	// The telemetry signal type for the unprocessed status event.
+	//
+	// This member is required.
+	SignalType DynamicInstrumentationSignalType
+
+	// The status that failed to be processed.
+	//
+	// This member is required.
+	Status InstrumentationConfigurationStatus
+
+	// The timestamp of the status event that failed to be processed.
+	//
+	// This member is required.
+	Time *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *UnprocessedStatusEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedStatusEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedStatusEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedReason != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_FailedReason, string(v.FailedReason))
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.LocationHash != nil {
+		s.WriteString(schemas.UnprocessedStatusEvent_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_SignalType, string(v.SignalType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_Status, string(v.Status))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.UnprocessedStatusEvent_Time, *v.Time)
+	}
+}
+func (v *UnprocessedStatusEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedStatusEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedStatusEvent_FailedReason:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_FailedReason, &ev); err != nil {
+				return err
+			}
+			v.FailedReason = UnprocessedStatusEventFailureReason(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.UnprocessedStatusEvent_LocationHash, v.LocationHash)
+		case schemas.UnprocessedStatusEvent_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_Status:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstrumentationConfigurationStatus(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.UnprocessedStatusEvent_Time, v.Time)
+		}
+		return nil
+	})
+}
+
 // The object that defines the time length of an exclusion window.
 type Window struct {
 
@@ -4175,6 +5331,10 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAuditTargetEntity()                      {}
+func (*UnknownUnionMember) isBatchDeleteDeletionTarget()              {}
+func (*UnknownUnionMember) isCaptureConfiguration()                   {}
 func (*UnknownUnionMember) isCompositeSliComponent()                  {}
 func (*UnknownUnionMember) isInterval()                               {}
+func (*UnknownUnionMember) isLocation()                               {}
+func (*UnknownUnionMember) isLocationIdentifier()                     {}
 func (*UnknownUnionMember) isMonitoredRequestCountMetricDataQueries() {}

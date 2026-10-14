@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,6 +57,30 @@ type GetTaskInput struct {
 	TaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetTaskRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetTaskRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetTaskRequest_queueId, *v.QueueId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.GetTaskRequest_stepId, *v.StepId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetTaskRequest_taskId, *v.TaskId)
+	}
 }
 
 type GetTaskOutput struct {
@@ -110,65 +135,113 @@ type GetTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTaskResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetTaskResponse_createdBy, *v.CreatedBy)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetTaskResponse_endedAt, *v.EndedAt)
+	}
+	if v.FailureRetryCount != nil {
+		s.WriteInt32(schemas.GetTaskResponse_failureRetryCount, *v.FailureRetryCount)
+	}
+	if v.LatestSessionActionId != nil {
+		s.WriteString(schemas.GetTaskResponse_latestSessionActionId, *v.LatestSessionActionId)
+	}
+	serializeTaskParameters(s, schemas.GetTaskResponse_parameters, v.Parameters)
+	if v.RunStatus != "" {
+		s.WriteString(schemas.GetTaskResponse_runStatus, string(v.RunStatus))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetTaskResponse_startedAt, *v.StartedAt)
+	}
+	if v.TargetRunStatus != "" {
+		s.WriteString(schemas.GetTaskResponse_targetRunStatus, string(v.TargetRunStatus))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetTaskResponse_taskId, *v.TaskId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetTaskResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetTaskResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaskResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskResponse_createdAt, v.CreatedAt)
+		case schemas.GetTaskResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetTaskResponse_createdBy, v.CreatedBy)
+		case schemas.GetTaskResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskResponse_endedAt, v.EndedAt)
+		case schemas.GetTaskResponse_failureRetryCount:
+			v.FailureRetryCount = new(int32)
+			return d.ReadInt32(schemas.GetTaskResponse_failureRetryCount, v.FailureRetryCount)
+		case schemas.GetTaskResponse_latestSessionActionId:
+			v.LatestSessionActionId = new(string)
+			return d.ReadString(schemas.GetTaskResponse_latestSessionActionId, v.LatestSessionActionId)
+		case schemas.GetTaskResponse_parameters:
+			return deserializeTaskParameters(d, schemas.GetTaskResponse_parameters, &v.Parameters)
+		case schemas.GetTaskResponse_runStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTaskResponse_runStatus, &ev); err != nil {
+				return err
+			}
+			v.RunStatus = types.TaskRunStatus(ev)
+			return nil
+		case schemas.GetTaskResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskResponse_startedAt, v.StartedAt)
+		case schemas.GetTaskResponse_targetRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTaskResponse_targetRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetRunStatus = types.TaskTargetRunStatus(ev)
+			return nil
+		case schemas.GetTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetTaskResponse_taskId, v.TaskId)
+		case schemas.GetTaskResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetTaskResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetTaskResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTask, schemas.GetTaskRequest, schemas.GetTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTask, schemas.GetTaskRequest, schemas.GetTaskResponse), output: &GetTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -178,12 +251,6 @@ func (c *Client) addOperationGetTaskMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addOpGetTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,12 +263,6 @@ func (c *Client) addOperationGetTaskMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -235,12 +296,4 @@ func (m *endpointPrefix_opGetTaskMiddleware) HandleFinalize(ctx context.Context,
 }
 func addEndpointPrefix_opGetTaskMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetTaskMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTask",
-	}
 }

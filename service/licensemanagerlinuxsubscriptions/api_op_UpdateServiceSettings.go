@@ -4,13 +4,8 @@ package licensemanagerlinuxsubscriptions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the service settings for Linux subscriptions.
@@ -51,46 +46,6 @@ type UpdateServiceSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateServiceSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateServiceSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowUpdate != nil {
-		s.WriteBool(schemas.UpdateServiceSettingsRequest_AllowUpdate, *v.AllowUpdate)
-	}
-	if v.LinuxSubscriptionsDiscovery != "" {
-		s.WriteString(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
-	}
-	if v.LinuxSubscriptionsDiscoverySettings != nil {
-		s.WriteStruct(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings)
-		v.LinuxSubscriptionsDiscoverySettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateServiceSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateServiceSettingsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateServiceSettingsRequest_AllowUpdate:
-			v.AllowUpdate = new(bool)
-			return d.ReadBool(schemas.UpdateServiceSettingsRequest_AllowUpdate, v.AllowUpdate)
-		case schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery:
-			var ev string
-			if err := d.ReadString(schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery, &ev); err != nil {
-				return err
-			}
-			v.LinuxSubscriptionsDiscovery = types.LinuxSubscriptionsDiscovery(ev)
-			return nil
-		case schemas.UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings:
-			v.LinuxSubscriptionsDiscoverySettings = &types.LinuxSubscriptionsDiscoverySettings{}
-			return v.LinuxSubscriptionsDiscoverySettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateServiceSettingsOutput struct {
 
 	// The Region in which License Manager displays the aggregated data for Linux
@@ -117,124 +72,29 @@ type UpdateServiceSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateServiceSettingsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.UpdateServiceSettingsResponse_HomeRegions, v.HomeRegions)
-	if v.LinuxSubscriptionsDiscovery != "" {
-		s.WriteString(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
-	}
-	if v.LinuxSubscriptionsDiscoverySettings != nil {
-		s.WriteStruct(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings)
-		v.LinuxSubscriptionsDiscoverySettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateServiceSettingsResponse_Status, string(v.Status))
-	}
-	serializeStringMap(s, schemas.UpdateServiceSettingsResponse_StatusMessage, v.StatusMessage)
-}
-func (v *UpdateServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateServiceSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateServiceSettingsResponse_HomeRegions:
-			return deserializeStringList(d, schemas.UpdateServiceSettingsResponse_HomeRegions, &v.HomeRegions)
-		case schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery:
-			var ev string
-			if err := d.ReadString(schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery, &ev); err != nil {
-				return err
-			}
-			v.LinuxSubscriptionsDiscovery = types.LinuxSubscriptionsDiscovery(ev)
-			return nil
-		case schemas.UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings:
-			v.LinuxSubscriptionsDiscoverySettings = &types.LinuxSubscriptionsDiscoverySettings{}
-			return v.LinuxSubscriptionsDiscoverySettings.Deserialize(d)
-		case schemas.UpdateServiceSettingsResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateServiceSettingsResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.UpdateServiceSettingsResponse_StatusMessage:
-			return deserializeStringMap(d, schemas.UpdateServiceSettingsResponse_StatusMessage, &v.StatusMessage)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse), output: &UpdateServiceSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServiceSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +109,8 @@ func (c *Client) addOperationUpdateServiceSettingsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServiceSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServiceSettings",
-	}
 }

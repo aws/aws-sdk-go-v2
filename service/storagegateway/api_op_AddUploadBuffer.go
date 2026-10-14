@@ -4,10 +4,9 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures one or more gateway local disks as upload buffer for a specified
@@ -50,6 +49,19 @@ type AddUploadBufferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUploadBufferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUploadBufferInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUploadBufferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.AddUploadBufferInput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddUploadBufferInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type AddUploadBufferOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -62,77 +74,48 @@ type AddUploadBufferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUploadBufferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUploadBufferOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUploadBufferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddUploadBufferOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *AddUploadBufferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddUploadBufferOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddUploadBufferOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.AddUploadBufferOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUploadBuffer, schemas.AddUploadBufferInput, schemas.AddUploadBufferOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddUploadBuffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUploadBuffer, schemas.AddUploadBufferInput, schemas.AddUploadBufferOutput), output: &AddUploadBufferOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddUploadBuffer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddUploadBuffer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddUploadBufferValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddUploadBuffer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +130,8 @@ func (c *Client) addOperationAddUploadBufferMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddUploadBuffer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddUploadBuffer",
-	}
 }

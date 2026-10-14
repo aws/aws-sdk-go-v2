@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the analysis template metadata.
@@ -45,6 +44,40 @@ type UpdateAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateIdentifier != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier, *v.AnalysisTemplateIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *UpdateAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier:
+			v.AnalysisTemplateIdentifier = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier, v.AnalysisTemplateIdentifier)
+		case schemas.UpdateAnalysisTemplateInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_description, v.Description)
+		case schemas.UpdateAnalysisTemplateInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateAnalysisTemplateOutput struct {
 
 	// The analysis template.
@@ -58,77 +91,50 @@ type UpdateAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplate != nil {
+		s.WriteStruct(schemas.UpdateAnalysisTemplateOutput_analysisTemplate)
+		v.AnalysisTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisTemplateOutput_analysisTemplate:
+			v.AnalysisTemplate = &types.AnalysisTemplate{}
+			return v.AnalysisTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisTemplate, schemas.UpdateAnalysisTemplateInput, schemas.UpdateAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisTemplate, schemas.UpdateAnalysisTemplateInput, schemas.UpdateAnalysisTemplateOutput), output: &UpdateAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnalysisTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAnalysisTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAnalysisTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnalysisTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +149,8 @@ func (c *Client) addOperationUpdateAnalysisTemplateMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAnalysisTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAnalysisTemplate",
-	}
 }

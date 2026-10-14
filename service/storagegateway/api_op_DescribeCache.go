@@ -4,10 +4,9 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the cache of a gateway. This operation is only
@@ -39,6 +38,18 @@ type DescribeCacheInput struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeCacheInput_GatewayARN, *v.GatewayARN)
+	}
 }
 
 type DescribeCacheOutput struct {
@@ -79,77 +90,76 @@ type DescribeCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheAllocatedInBytes != 0 {
+		s.WriteInt64(schemas.DescribeCacheOutput_CacheAllocatedInBytes, v.CacheAllocatedInBytes)
+	}
+	if v.CacheDirtyPercentage != 0 {
+		s.WriteFloat64(schemas.DescribeCacheOutput_CacheDirtyPercentage, v.CacheDirtyPercentage)
+	}
+	if v.CacheHitPercentage != 0 {
+		s.WriteFloat64(schemas.DescribeCacheOutput_CacheHitPercentage, v.CacheHitPercentage)
+	}
+	if v.CacheMissPercentage != 0 {
+		s.WriteFloat64(schemas.DescribeCacheOutput_CacheMissPercentage, v.CacheMissPercentage)
+	}
+	if v.CacheUsedPercentage != 0 {
+		s.WriteFloat64(schemas.DescribeCacheOutput_CacheUsedPercentage, v.CacheUsedPercentage)
+	}
+	serializeDiskIds(s, schemas.DescribeCacheOutput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeCacheOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *DescribeCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCacheOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCacheOutput_CacheAllocatedInBytes:
+			return d.ReadInt64(schemas.DescribeCacheOutput_CacheAllocatedInBytes, &v.CacheAllocatedInBytes)
+		case schemas.DescribeCacheOutput_CacheDirtyPercentage:
+			return d.ReadFloat64(schemas.DescribeCacheOutput_CacheDirtyPercentage, &v.CacheDirtyPercentage)
+		case schemas.DescribeCacheOutput_CacheHitPercentage:
+			return d.ReadFloat64(schemas.DescribeCacheOutput_CacheHitPercentage, &v.CacheHitPercentage)
+		case schemas.DescribeCacheOutput_CacheMissPercentage:
+			return d.ReadFloat64(schemas.DescribeCacheOutput_CacheMissPercentage, &v.CacheMissPercentage)
+		case schemas.DescribeCacheOutput_CacheUsedPercentage:
+			return d.ReadFloat64(schemas.DescribeCacheOutput_CacheUsedPercentage, &v.CacheUsedPercentage)
+		case schemas.DescribeCacheOutput_DiskIds:
+			return deserializeDiskIds(d, schemas.DescribeCacheOutput_DiskIds, &v.DiskIds)
+		case schemas.DescribeCacheOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeCacheOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCache, schemas.DescribeCacheInput, schemas.DescribeCacheOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCache, schemas.DescribeCacheInput, schemas.DescribeCacheOutput), output: &DescribeCacheOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCache{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCache"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCacheValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCache(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +174,8 @@ func (c *Client) addOperationDescribeCacheMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeCache(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCache",
-	}
 }

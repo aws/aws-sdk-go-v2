@@ -5,10 +5,11 @@ package acm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Retrieves a list of certificates matching search criteria. You can filter
@@ -56,6 +57,32 @@ type SearchCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateFilterStatement(s, schemas.SearchCertificatesRequest_FilterStatement, v.FilterStatement)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchCertificatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchCertificatesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.SearchCertificatesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SearchCertificatesRequest_SortOrder, string(v.SortOrder))
+	}
+}
+func (in *SearchCertificatesInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
+}
+
 type SearchCertificatesOutput struct {
 
 	// When the list is truncated, this value is present and contains the value to use
@@ -72,77 +99,51 @@ type SearchCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchCertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchCertificatesResponse_NextToken, *v.NextToken)
+	}
+	serializeCertificateSearchResultList(s, schemas.SearchCertificatesResponse_Results, v.Results)
+}
+func (v *SearchCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchCertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchCertificatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchCertificatesResponse_NextToken, v.NextToken)
+		case schemas.SearchCertificatesResponse_Results:
+			return deserializeCertificateSearchResultList(d, schemas.SearchCertificatesResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchCertificates, schemas.SearchCertificatesRequest, schemas.SearchCertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchCertificates, schemas.SearchCertificatesRequest, schemas.SearchCertificatesResponse), output: &SearchCertificatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchCertificates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchCertificates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchCertificatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchCertificates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +156,6 @@ func (c *Client) addOperationSearchCertificatesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +257,3 @@ type SearchCertificatesAPIClient interface {
 }
 
 var _ SearchCertificatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchCertificates",
-	}
-}

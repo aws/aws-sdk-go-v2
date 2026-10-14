@@ -1,0 +1,5 @@
+POST /connector-destinations
+
+Content-Type: application/json
+
+{"AuthConfig":{"GeneralAuthorization":[{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}},{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}],"oAuth":{"authUrl":"__AuthUrl__","oAuthCompleteRedirectUrl":"__OAuthCompleteRedirectUrl__","proactiveRefreshTokenRenewal":{"DaysBeforeRenewal":1,"enabled":true},"scope":"__Scope__","tokenEndpointAuthenticationScheme":"HTTP_BASIC","tokenUrl":"__TokenUrl__"}},"AuthType":"OAUTH","ClientToken":"__ClientToken__","CloudConnectorId":"__CloudConnectorId__","Description":"__Description__","Name":"__Name__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}

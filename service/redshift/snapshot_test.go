@@ -338,6 +338,18 @@ func TestCheckSnapshot_CreateIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQev2IdcApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRedshiftIdcApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRedshiftIdcApplication(context.Background(), nil, func(o *Options) {
@@ -571,6 +583,18 @@ func TestCheckSnapshot_DeletePartner(t *testing.T) {
 	_, err := svc.DeletePartner(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePartner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQev2IdcApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1015,6 +1039,18 @@ func TestCheckSnapshot_DescribePartners(t *testing.T) {
 	_, err := svc.DescribePartners(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribePartners")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeQev2IdcApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQev2IdcApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQev2IdcApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1495,6 +1531,18 @@ func TestCheckSnapshot_ModifyLakehouseConfiguration(t *testing.T) {
 	_, err := svc.ModifyLakehouseConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyLakehouseConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyQev2IdcApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2029,6 +2077,18 @@ func TestUpdateSnapshot_CreateIntegration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQev2IdcApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRedshiftIdcApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRedshiftIdcApplication(context.Background(), nil, func(o *Options) {
@@ -2262,6 +2322,18 @@ func TestUpdateSnapshot_DeletePartner(t *testing.T) {
 	_, err := svc.DeletePartner(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePartner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQev2IdcApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2706,6 +2778,18 @@ func TestUpdateSnapshot_DescribePartners(t *testing.T) {
 	_, err := svc.DescribePartners(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribePartners")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeQev2IdcApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQev2IdcApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQev2IdcApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3186,6 +3270,18 @@ func TestUpdateSnapshot_ModifyLakehouseConfiguration(t *testing.T) {
 	_, err := svc.ModifyLakehouseConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyLakehouseConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyQev2IdcApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyQev2IdcApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyQev2IdcApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

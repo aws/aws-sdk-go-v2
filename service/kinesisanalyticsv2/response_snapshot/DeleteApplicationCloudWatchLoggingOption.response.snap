@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.DeleteApplicationCloudWatchLoggingOption
+
+{"ApplicationARN":"__ApplicationARN__","ApplicationVersionId":1,"CloudWatchLoggingOptionDescriptions":[{"CloudWatchLoggingOptionId":"__CloudWatchLoggingOptionId__","LogStreamARN":"__LogStreamARN__","RoleARN":"__RoleARN__"},{"CloudWatchLoggingOptionId":"__CloudWatchLoggingOptionId__","LogStreamARN":"__LogStreamARN__","RoleARN":"__RoleARN__"}],"OperationId":"__OperationId__"}

@@ -11618,6 +11618,35 @@ func awsAwsquery_serializeDocumentConnectionPoolConfiguration(v *types.Connectio
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDBClusterAssociatedRole(v *types.DBClusterAssociatedRole, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.FeatureName != nil {
+		objectKey := object.Key("FeatureName")
+		objectKey.String(*v.FeatureName)
+	}
+
+	if v.RoleArn != nil {
+		objectKey := object.Key("RoleArn")
+		objectKey.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentDBClusterAssociatedRoles(v []types.DBClusterAssociatedRole, value query.Value) error {
+	array := value.Array("DBClusterAssociatedRole")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentDBClusterAssociatedRole(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentDBSecurityGroupNameList(v []string, value query.Value) error {
 	array := value.Array("DBSecurityGroupName")
 
@@ -12242,6 +12271,35 @@ func awsAwsquery_serializeDocumentTagSpecificationList(v []types.TagSpecificatio
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTargetResourceConfiguration(v *types.TargetResourceConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SourceArn != nil {
+		objectKey := object.Key("SourceArn")
+		objectKey.String(*v.SourceArn)
+	}
+
+	if v.TargetKmsKeyId != nil {
+		objectKey := object.Key("TargetKmsKeyId")
+		objectKey.String(*v.TargetKmsKeyId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTargetResourceConfigurationList(v []types.TargetResourceConfiguration, value query.Value) error {
+	array := value.Array("TargetResourceConfiguration")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentTargetResourceConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentUserAuthConfig(v *types.UserAuthConfig, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -12725,6 +12783,13 @@ func awsAwsquery_serializeOpDocumentCreateBlueGreenDeploymentInput(v *CreateBlue
 		objectKey.Integer(*v.TargetIops)
 	}
 
+	if v.TargetResourceConfigurations != nil {
+		objectKey := object.Key("TargetResourceConfigurations")
+		if err := awsAwsquery_serializeDocumentTargetResourceConfigurationList(v.TargetResourceConfigurations, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetStorageThroughput != nil {
 		objectKey := object.Key("TargetStorageThroughput")
 		objectKey.Integer(*v.TargetStorageThroughput)
@@ -12864,6 +12929,13 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.AllocatedStorage != nil {
 		objectKey := object.Key("AllocatedStorage")
 		objectKey.Integer(*v.AllocatedStorage)
+	}
+
+	if v.AssociatedRoles != nil {
+		objectKey := object.Key("AssociatedRoles")
+		if err := awsAwsquery_serializeDocumentDBClusterAssociatedRoles(v.AssociatedRoles, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.AutoMinorVersionUpgrade != nil {
@@ -16726,6 +16798,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Boolean(*v.EnablePerformanceInsights)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineMode != nil {
 		objectKey := object.Key("EngineMode")
 		objectKey.String(*v.EngineMode)
@@ -17065,6 +17142,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineVersion != nil {
@@ -17980,6 +18062,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 	object := value.Object()
 	_ = object
 
+	if v.AssociatedRoles != nil {
+		objectKey := object.Key("AssociatedRoles")
+		if err := awsAwsquery_serializeDocumentDBClusterAssociatedRoles(v.AssociatedRoles, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
@@ -18188,6 +18277,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *RestoreDBClusterFromSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AssociatedRoles != nil {
+		objectKey := object.Key("AssociatedRoles")
+		if err := awsAwsquery_serializeDocumentDBClusterAssociatedRoles(v.AssociatedRoles, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.AvailabilityZones != nil {
 		objectKey := object.Key("AvailabilityZones")
@@ -18411,6 +18507,13 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *RestoreDBClusterToPointInTimeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AssociatedRoles != nil {
+		objectKey := object.Key("AssociatedRoles")
+		if err := awsAwsquery_serializeDocumentDBClusterAssociatedRoles(v.AssociatedRoles, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.BacktrackWindow != nil {
 		objectKey := object.Key("BacktrackWindow")

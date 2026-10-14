@@ -30,6 +30,26 @@ func (m *validateOpAssociateWhatsAppBusinessAccount) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWhatsAppDataset struct {
+}
+
+func (*validateOpCreateWhatsAppDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWhatsAppDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWhatsAppDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWhatsAppDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWhatsAppFlow struct {
 }
 
@@ -245,6 +265,46 @@ func (m *validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber) HandleInitialize
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLinkedWhatsAppBusinessAccountPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWhatsAppBusinessPublicKey struct {
+}
+
+func (*validateOpGetWhatsAppBusinessPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWhatsAppBusinessPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWhatsAppBusinessPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWhatsAppBusinessPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWhatsAppCallPermission struct {
+}
+
+func (*validateOpGetWhatsAppCallPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWhatsAppCallPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWhatsAppCallPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWhatsAppCallPermissionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +550,66 @@ func (m *validateOpPutWhatsAppBusinessAccountEventDestinations) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutWhatsAppBusinessPublicKey struct {
+}
+
+func (*validateOpPutWhatsAppBusinessPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutWhatsAppBusinessPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutWhatsAppBusinessPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutWhatsAppBusinessPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendWhatsAppCallEvent struct {
+}
+
+func (*validateOpSendWhatsAppCallEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendWhatsAppCallEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendWhatsAppCallEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendWhatsAppCallEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendWhatsAppConversionEvent struct {
+}
+
+func (*validateOpSendWhatsAppConversionEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendWhatsAppConversionEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendWhatsAppConversionEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendWhatsAppConversionEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendWhatsAppMessage struct {
 }
 
@@ -545,6 +665,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber struct {
+}
+
+func (*validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -614,6 +754,10 @@ func addOpAssociateWhatsAppBusinessAccountValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpAssociateWhatsAppBusinessAccount{}, middleware.After)
 }
 
+func addOpCreateWhatsAppDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWhatsAppDataset{}, middleware.After)
+}
+
 func addOpCreateWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWhatsAppFlow{}, middleware.After)
 }
@@ -656,6 +800,14 @@ func addOpGetLinkedWhatsAppBusinessAccountValidationMiddleware(stack *middleware
 
 func addOpGetLinkedWhatsAppBusinessAccountPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
+}
+
+func addOpGetWhatsAppBusinessPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWhatsAppBusinessPublicKey{}, middleware.After)
+}
+
+func addOpGetWhatsAppCallPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWhatsAppCallPermission{}, middleware.After)
 }
 
 func addOpGetWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
@@ -706,6 +858,18 @@ func addOpPutWhatsAppBusinessAccountEventDestinationsValidationMiddleware(stack 
 	return stack.Initialize.Add(&validateOpPutWhatsAppBusinessAccountEventDestinations{}, middleware.After)
 }
 
+func addOpPutWhatsAppBusinessPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutWhatsAppBusinessPublicKey{}, middleware.After)
+}
+
+func addOpSendWhatsAppCallEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendWhatsAppCallEvent{}, middleware.After)
+}
+
+func addOpSendWhatsAppConversionEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendWhatsAppConversionEvent{}, middleware.After)
+}
+
 func addOpSendWhatsAppMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendWhatsAppMessage{}, middleware.After)
 }
@@ -716,6 +880,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateLinkedWhatsAppBusinessAccountPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
 }
 
 func addOpUpdateWhatsAppFlowAssetsValidationMiddleware(stack *middleware.Stack) error {
@@ -916,6 +1084,102 @@ func validateWhatsAppBusinessAccountEventDestinations(v []types.WhatsAppBusiness
 	}
 }
 
+func validateWhatsAppCallHours(v *types.WhatsAppCallHours) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppCallHours"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.Timezone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timezone"))
+	}
+	if v.WeeklyOperatingHours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WeeklyOperatingHours"))
+	} else if v.WeeklyOperatingHours != nil {
+		if err := validateWhatsAppWeeklyOperatingHoursList(v.WeeklyOperatingHours); err != nil {
+			invalidParams.AddNested("WeeklyOperatingHours", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HolidaySchedule != nil {
+		if err := validateWhatsAppHolidayScheduleList(v.HolidaySchedule); err != nil {
+			invalidParams.AddNested("HolidaySchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppCallSettings(v *types.WhatsAppCallSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppCallSettings"}
+	if v.CallEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallEnabled"))
+	}
+	if v.CallHours != nil {
+		if err := validateWhatsAppCallHours(v.CallHours); err != nil {
+			invalidParams.AddNested("CallHours", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppHolidayScheduleEntry(v *types.WhatsAppHolidayScheduleEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppHolidayScheduleEntry"}
+	if v.Date == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Date"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	} else if v.StartTime != nil {
+		if err := validateWhatsAppTimeOfDay(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	} else if v.EndTime != nil {
+		if err := validateWhatsAppTimeOfDay(v.EndTime); err != nil {
+			invalidParams.AddNested("EndTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppHolidayScheduleList(v []types.WhatsAppHolidayScheduleEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppHolidayScheduleList"}
+	for i := range v {
+		if err := validateWhatsAppHolidayScheduleEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWhatsAppSetupFinalization(v *types.WhatsAppSetupFinalization) error {
 	if v == nil {
 		return nil
@@ -958,6 +1222,70 @@ func validateWhatsAppSignupCallback(v *types.WhatsAppSignupCallback) error {
 	}
 }
 
+func validateWhatsAppTimeOfDay(v *types.WhatsAppTimeOfDay) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppTimeOfDay"}
+	if v.Hours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hours"))
+	}
+	if v.Minutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Minutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppWeeklyOperatingHoursEntry(v *types.WhatsAppWeeklyOperatingHoursEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppWeeklyOperatingHoursEntry"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
+	}
+	if v.OpenTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenTime"))
+	} else if v.OpenTime != nil {
+		if err := validateWhatsAppTimeOfDay(v.OpenTime); err != nil {
+			invalidParams.AddNested("OpenTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloseTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloseTime"))
+	} else if v.CloseTime != nil {
+		if err := validateWhatsAppTimeOfDay(v.CloseTime); err != nil {
+			invalidParams.AddNested("CloseTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWhatsAppWeeklyOperatingHoursList(v []types.WhatsAppWeeklyOperatingHoursEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WhatsAppWeeklyOperatingHoursList"}
+	for i := range v {
+		if err := validateWhatsAppWeeklyOperatingHoursEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateWhatsAppBusinessAccountInput(v *AssociateWhatsAppBusinessAccountInput) error {
 	if v == nil {
 		return nil
@@ -972,6 +1300,21 @@ func validateOpAssociateWhatsAppBusinessAccountInput(v *AssociateWhatsAppBusines
 		if err := validateWhatsAppSetupFinalization(v.SetupFinalization); err != nil {
 			invalidParams.AddNested("SetupFinalization", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWhatsAppDatasetInput(v *CreateWhatsAppDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWhatsAppDatasetInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1170,6 +1513,36 @@ func validateOpGetLinkedWhatsAppBusinessAccountPhoneNumberInput(v *GetLinkedWhat
 	invalidParams := smithy.InvalidParamsError{Context: "GetLinkedWhatsAppBusinessAccountPhoneNumberInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWhatsAppBusinessPublicKeyInput(v *GetWhatsAppBusinessPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppBusinessPublicKeyInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWhatsAppCallPermissionInput(v *GetWhatsAppCallPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppCallPermissionInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1400,6 +1773,63 @@ func validateOpPutWhatsAppBusinessAccountEventDestinationsInput(v *PutWhatsAppBu
 	}
 }
 
+func validateOpPutWhatsAppBusinessPublicKeyInput(v *PutWhatsAppBusinessPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutWhatsAppBusinessPublicKeyInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendWhatsAppCallEventInput(v *SendWhatsAppCallEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendWhatsAppCallEventInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
+	}
+	if v.MetaApiVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetaApiVersion"))
+	}
+	if v.CallEvent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallEvent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendWhatsAppConversionEventInput(v *SendWhatsAppConversionEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendWhatsAppConversionEventInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if v.EventData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendWhatsAppMessageInput(v *SendWhatsAppMessageInput) error {
 	if v == nil {
 		return nil
@@ -1453,6 +1883,28 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput(v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.CallSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallSettings"))
+	} else if v.CallSettings != nil {
+		if err := validateWhatsAppCallSettings(v.CallSettings); err != nil {
+			invalidParams.AddNested("CallSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

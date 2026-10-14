@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a pricing rule can be associated to a pricing plan, or a set of
@@ -95,6 +95,101 @@ type CreatePricingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePricingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePricingRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePricingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingEntity != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_BillingEntity, *v.BillingEntity)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_Description, *v.Description)
+	}
+	if v.ModifierPercentage != nil {
+		s.WriteFloat64(schemas.CreatePricingRuleInput_ModifierPercentage, *v.ModifierPercentage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_Name, *v.Name)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_Operation, *v.Operation)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.CreatePricingRuleInput_Scope, string(v.Scope))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_Service, *v.Service)
+	}
+	serializeTagMap(s, schemas.CreatePricingRuleInput_Tags, v.Tags)
+	if v.Tiering != nil {
+		s.WriteStruct(schemas.CreatePricingRuleInput_Tiering)
+		v.Tiering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreatePricingRuleInput_Type, string(v.Type))
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.CreatePricingRuleInput_UsageType, *v.UsageType)
+	}
+}
+func (v *CreatePricingRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePricingRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePricingRuleInput_BillingEntity:
+			v.BillingEntity = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_BillingEntity, v.BillingEntity)
+		case schemas.CreatePricingRuleInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_ClientToken, v.ClientToken)
+		case schemas.CreatePricingRuleInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_Description, v.Description)
+		case schemas.CreatePricingRuleInput_ModifierPercentage:
+			v.ModifierPercentage = new(float64)
+			return d.ReadFloat64(schemas.CreatePricingRuleInput_ModifierPercentage, v.ModifierPercentage)
+		case schemas.CreatePricingRuleInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_Name, v.Name)
+		case schemas.CreatePricingRuleInput_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_Operation, v.Operation)
+		case schemas.CreatePricingRuleInput_Scope:
+			var ev string
+			if err := d.ReadString(schemas.CreatePricingRuleInput_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = types.PricingRuleScope(ev)
+			return nil
+		case schemas.CreatePricingRuleInput_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_Service, v.Service)
+		case schemas.CreatePricingRuleInput_Tags:
+			return deserializeTagMap(d, schemas.CreatePricingRuleInput_Tags, &v.Tags)
+		case schemas.CreatePricingRuleInput_Tiering:
+			v.Tiering = &types.CreateTieringInput{}
+			return v.Tiering.Deserialize(d)
+		case schemas.CreatePricingRuleInput_Type:
+			var ev string
+			if err := d.ReadString(schemas.CreatePricingRuleInput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PricingRuleType(ev)
+			return nil
+		case schemas.CreatePricingRuleInput_UsageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.CreatePricingRuleInput_UsageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
 type CreatePricingRuleOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the created pricing rule.
@@ -106,65 +201,42 @@ type CreatePricingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePricingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePricingRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePricingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePricingRuleOutput_Arn, *v.Arn)
+	}
+}
+func (v *CreatePricingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePricingRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePricingRuleOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePricingRuleOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePricingRule, schemas.CreatePricingRuleInput, schemas.CreatePricingRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePricingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePricingRule, schemas.CreatePricingRuleInput, schemas.CreatePricingRuleOutput), output: &CreatePricingRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePricingRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePricingRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +246,6 @@ func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreatePricingRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePricingRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +258,6 @@ func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +297,4 @@ func (m *idempotencyToken_initializeOpCreatePricingRule) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreatePricingRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePricingRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePricingRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePricingRule",
-	}
 }

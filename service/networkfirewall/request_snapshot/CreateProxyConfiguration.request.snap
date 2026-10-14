@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.CreateProxyConfiguration
+
+{"DefaultRulePhaseActions":{"PostRESPONSE":"ALLOW","PreDNS":"ALLOW","PreREQUEST":"ALLOW"},"Description":"__Description__","ProxyConfigurationName":"__ProxyConfigurationName__","RuleGroupArns":["__Member__","__Member__"],"RuleGroupNames":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

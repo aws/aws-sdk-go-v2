@@ -5,12 +5,8 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A contact channel is the method that Incident Manager uses to engage your
@@ -79,35 +75,6 @@ type CreateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateContactChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateContactChannelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateContactChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactId != nil {
-		s.WriteString(schemas.CreateContactChannelRequest_ContactId, *v.ContactId)
-	}
-	if v.DeferActivation != nil {
-		s.WriteBool(schemas.CreateContactChannelRequest_DeferActivation, *v.DeferActivation)
-	}
-	if v.DeliveryAddress != nil {
-		s.WriteStruct(schemas.CreateContactChannelRequest_DeliveryAddress)
-		v.DeliveryAddress.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.CreateContactChannelRequest_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateContactChannelRequest_Name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.CreateContactChannelRequest_Type, string(v.Type))
-	}
-}
-
 type CreateContactChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the contact channel.
@@ -121,73 +88,23 @@ type CreateContactChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateContactChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateContactChannelResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateContactChannelResult_ContactChannelArn:
-			v.ContactChannelArn = new(string)
-			return d.ReadString(schemas.CreateContactChannelResult_ContactChannelArn, v.ContactChannelArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContactChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactChannel, schemas.CreateContactChannelRequest, schemas.CreateContactChannelResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContactChannel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactChannel, schemas.CreateContactChannelRequest, schemas.CreateContactChannelResult), output: &CreateContactChannelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContactChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -197,12 +114,6 @@ func (c *Client) addOperationCreateContactChannelMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateContactChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContactChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,12 +126,6 @@ func (c *Client) addOperationCreateContactChannelMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,12 +165,4 @@ func (m *idempotencyToken_initializeOpCreateContactChannel) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateContactChannelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateContactChannel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateContactChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContactChannel",
-	}
 }

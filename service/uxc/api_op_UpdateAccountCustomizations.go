@@ -4,13 +4,8 @@ package uxc
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/uxc/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/uxc/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates one or more account customization settings. You can update account
@@ -61,20 +56,6 @@ type UpdateAccountCustomizationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountCustomizationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAccountCustomizationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccountCustomizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountColor != "" {
-		s.WriteString(schemas.UpdateAccountCustomizationsInput_accountColor, string(v.AccountColor))
-	}
-	serializeRegionsList(s, schemas.UpdateAccountCustomizationsInput_visibleRegions, v.VisibleRegions)
-	serializeServiceList(s, schemas.UpdateAccountCustomizationsInput_visibleServices, v.VisibleServices)
-}
-
 type UpdateAccountCustomizationsOutput struct {
 
 	// The current account color preference after the update.
@@ -92,90 +73,26 @@ type UpdateAccountCustomizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountCustomizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAccountCustomizationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateAccountCustomizationsOutput_accountColor:
-			var ev string
-			if err := d.ReadString(schemas.UpdateAccountCustomizationsOutput_accountColor, &ev); err != nil {
-				return err
-			}
-			v.AccountColor = types.AccountColor(ev)
-			return nil
-		case schemas.UpdateAccountCustomizationsOutput_visibleRegions:
-			return deserializeRegionsList(d, schemas.UpdateAccountCustomizationsOutput_visibleRegions, &v.VisibleRegions)
-		case schemas.UpdateAccountCustomizationsOutput_visibleServices:
-			return deserializeServiceList(d, schemas.UpdateAccountCustomizationsOutput_visibleServices, &v.VisibleServices)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAccountCustomizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountCustomizations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomizations, schemas.UpdateAccountCustomizationsInput, schemas.UpdateAccountCustomizationsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountCustomizations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomizations, schemas.UpdateAccountCustomizationsInput, schemas.UpdateAccountCustomizationsOutput), output: &UpdateAccountCustomizationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountCustomizations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountCustomizations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +107,8 @@ func (c *Client) addOperationUpdateAccountCustomizationsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccountCustomizations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccountCustomizations",
-	}
 }

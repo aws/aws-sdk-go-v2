@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"execution":{"approximateSecondsBeforeTimedOut":1,"executionNumber":1,"forceCanceled":true,"jobId":"__JobId__","lastUpdatedAt":946684800,"queuedAt":946684800,"startedAt":946684800,"status":"QUEUED","statusDetails":{"detailsMap":{"key0":"__Value__"}},"thingArn":"__ThingArn__","versionNumber":1}}

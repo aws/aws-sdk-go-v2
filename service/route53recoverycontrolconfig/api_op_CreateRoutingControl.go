@@ -5,12 +5,8 @@ package route53recoverycontrolconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new routing control.
@@ -60,27 +56,6 @@ type CreateRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRoutingControlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRoutingControlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRoutingControlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateRoutingControlRequest_ClientToken, *v.ClientToken)
-	}
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.CreateRoutingControlRequest_ClusterArn, *v.ClusterArn)
-	}
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.CreateRoutingControlRequest_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.RoutingControlName != nil {
-		s.WriteString(schemas.CreateRoutingControlRequest_RoutingControlName, *v.RoutingControlName)
-	}
-}
-
 type CreateRoutingControlOutput struct {
 
 	// The routing control that is created.
@@ -92,73 +67,23 @@ type CreateRoutingControlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRoutingControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRoutingControlResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRoutingControlResponse_RoutingControl:
-			v.RoutingControl = &types.RoutingControl{}
-			return v.RoutingControl.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingControl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingControl, schemas.CreateRoutingControlRequest, schemas.CreateRoutingControlResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingControl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingControl, schemas.CreateRoutingControlRequest, schemas.CreateRoutingControlResponse), output: &CreateRoutingControlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRoutingControl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +93,6 @@ func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateRoutingControlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingControl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +105,6 @@ func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -231,12 +144,4 @@ func (m *idempotencyToken_initializeOpCreateRoutingControl) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateRoutingControlMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRoutingControl{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRoutingControl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRoutingControl",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteSnapshot&SnapshotName=__SnapshotName__&Version=2015-02-02

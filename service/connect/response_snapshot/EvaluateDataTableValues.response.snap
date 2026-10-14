@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Values":[{"AttributeName":"__AttributeName__","Error":true,"EvaluatedValue":"__EvaluatedValue__","Found":true,"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}],"RecordId":"__RecordId__","ValueType":"TEXT"},{"AttributeName":"__AttributeName__","Error":true,"EvaluatedValue":"__EvaluatedValue__","Found":true,"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}],"RecordId":"__RecordId__","ValueType":"TEXT"}]}

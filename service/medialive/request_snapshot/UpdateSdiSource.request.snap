@@ -1,0 +1,5 @@
+PUT /prod/sdiSources/__SdiSourceId__
+
+Content-Type: application/json
+
+{"mode":"QUADRANT","name":"__Name__","type":"SINGLE"}

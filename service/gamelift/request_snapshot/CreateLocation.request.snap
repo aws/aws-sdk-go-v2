@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/CreateLocation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢lLocationNamep__LocationName__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__

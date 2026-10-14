@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,6 +56,24 @@ type GetMobileDeviceAccessOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_DeviceId, *v.DeviceId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_UserId, *v.UserId)
+	}
+}
+
 type GetMobileDeviceAccessOverrideOutput struct {
 
 	// The date the override was first created.
@@ -83,77 +100,82 @@ type GetMobileDeviceAccessOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessOverrideResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.GetMobileDeviceAccessOverrideResponse_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.GetMobileDeviceAccessOverrideResponse_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_DeviceId, *v.DeviceId)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_Effect, string(v.Effect))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_UserId, *v.UserId)
+	}
+}
+func (v *GetMobileDeviceAccessOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMobileDeviceAccessOverrideResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMobileDeviceAccessOverrideResponse_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.GetMobileDeviceAccessOverrideResponse_DateCreated, v.DateCreated)
+		case schemas.GetMobileDeviceAccessOverrideResponse_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.GetMobileDeviceAccessOverrideResponse_DateModified, v.DateModified)
+		case schemas.GetMobileDeviceAccessOverrideResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_Description, v.Description)
+		case schemas.GetMobileDeviceAccessOverrideResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_DeviceId, v.DeviceId)
+		case schemas.GetMobileDeviceAccessOverrideResponse_Effect:
+			var ev string
+			if err := d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.MobileDeviceAccessRuleEffect(ev)
+			return nil
+		case schemas.GetMobileDeviceAccessOverrideResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMobileDeviceAccessOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessOverride, schemas.GetMobileDeviceAccessOverrideRequest, schemas.GetMobileDeviceAccessOverrideResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessOverride, schemas.GetMobileDeviceAccessOverrideRequest, schemas.GetMobileDeviceAccessOverrideResponse), output: &GetMobileDeviceAccessOverrideOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMobileDeviceAccessOverride"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMobileDeviceAccessOverrideValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMobileDeviceAccessOverride(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +190,8 @@ func (c *Client) addOperationGetMobileDeviceAccessOverrideMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMobileDeviceAccessOverride(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMobileDeviceAccessOverride",
-	}
 }

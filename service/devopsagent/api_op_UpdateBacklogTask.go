@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +48,6 @@ type UpdateBacklogTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBacklogTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBacklogTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBacklogTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.UpdateBacklogTaskRequest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateBacklogTaskRequest_clientToken, *v.ClientToken)
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.UpdateBacklogTaskRequest_taskId, *v.TaskId)
-	}
-	if v.TaskStatus != "" {
-		s.WriteString(schemas.UpdateBacklogTaskRequest_taskStatus, string(v.TaskStatus))
-	}
-}
-
 // Response structure containing the updated task
 type UpdateBacklogTaskOutput struct {
 
@@ -86,73 +62,23 @@ type UpdateBacklogTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBacklogTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBacklogTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBacklogTaskResponse_task:
-			v.Task = &types.Task{}
-			return v.Task.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateBacklogTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBacklogTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBacklogTask, schemas.UpdateBacklogTaskRequest, schemas.UpdateBacklogTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBacklogTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBacklogTask, schemas.UpdateBacklogTaskRequest, schemas.UpdateBacklogTaskResponse), output: &UpdateBacklogTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBacklogTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +93,6 @@ func (c *Client) addOperationUpdateBacklogTaskMiddlewares(stack *middleware.Stac
 	if err = addOpUpdateBacklogTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBacklogTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -183,12 +103,6 @@ func (c *Client) addOperationUpdateBacklogTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,12 +169,4 @@ func (m *idempotencyToken_initializeOpUpdateBacklogTask) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opUpdateBacklogTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateBacklogTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateBacklogTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBacklogTask",
-	}
 }

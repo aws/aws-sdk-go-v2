@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateHub
+
+{"HubDescription":"__HubDescription__","HubDisplayName":"__HubDisplayName__","HubName":"__HubName__","HubSearchKeywords":["__Member__","__Member__"],"S3StorageConfig":{"S3OutputPath":"__S3OutputPath__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

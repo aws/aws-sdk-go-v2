@@ -1,0 +1,5 @@
+POST /describe-metrics-export
+
+Content-Type: application/json
+
+{"metricsExportId":"__MetricsExportId__"}

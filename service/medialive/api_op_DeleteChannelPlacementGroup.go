@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete the specified ChannelPlacementGroup that exists in the specified Cluster.
@@ -41,6 +40,21 @@ type DeleteChannelPlacementGroupInput struct {
 	ClusterId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteChannelPlacementGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelPlacementGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelPlacementGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelPlacementGroupId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupRequest_ChannelPlacementGroupId, *v.ChannelPlacementGroupId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupRequest_ClusterId, *v.ClusterId)
+	}
 }
 
 // Placeholder documentation for DeleteChannelPlacementGroupResponse
@@ -76,77 +90,82 @@ type DeleteChannelPlacementGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelPlacementGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelPlacementGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_Name, *v.Name)
+	}
+	serialize__listOf__string(s, schemas.DeleteChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.State != "" {
+		s.WriteString(schemas.DeleteChannelPlacementGroupResponse_State, string(v.State))
+	}
+}
+func (v *DeleteChannelPlacementGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelPlacementGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChannelPlacementGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Arn, v.Arn)
+		case schemas.DeleteChannelPlacementGroupResponse_Channels:
+			return deserialize__listOf__string(d, schemas.DeleteChannelPlacementGroupResponse_Channels, &v.Channels)
+		case schemas.DeleteChannelPlacementGroupResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_ClusterId, v.ClusterId)
+		case schemas.DeleteChannelPlacementGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Id, v.Id)
+		case schemas.DeleteChannelPlacementGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteChannelPlacementGroupResponse_Name, v.Name)
+		case schemas.DeleteChannelPlacementGroupResponse_Nodes:
+			return deserialize__listOf__string(d, schemas.DeleteChannelPlacementGroupResponse_Nodes, &v.Nodes)
+		case schemas.DeleteChannelPlacementGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteChannelPlacementGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelPlacementGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelPlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelPlacementGroup, schemas.DeleteChannelPlacementGroupRequest, schemas.DeleteChannelPlacementGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelPlacementGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelPlacementGroup, schemas.DeleteChannelPlacementGroupRequest, schemas.DeleteChannelPlacementGroupResponse), output: &DeleteChannelPlacementGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannelPlacementGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteChannelPlacementGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteChannelPlacementGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteChannelPlacementGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +180,8 @@ func (c *Client) addOperationDeleteChannelPlacementGroupMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteChannelPlacementGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteChannelPlacementGroup",
-	}
 }

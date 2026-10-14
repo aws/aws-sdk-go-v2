@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -28,43 +26,6 @@ type IceServer struct {
 	Username *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IceServer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IceServer)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IceServer) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Password != nil {
-		s.WriteString(schemas.IceServer_Password, *v.Password)
-	}
-	if v.Ttl != nil {
-		s.WriteInt32(schemas.IceServer_Ttl, *v.Ttl)
-	}
-	serializeUris(s, schemas.IceServer_Uris, v.Uris)
-	if v.Username != nil {
-		s.WriteString(schemas.IceServer_Username, *v.Username)
-	}
-}
-func (v *IceServer) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IceServer, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IceServer_Password:
-			v.Password = new(string)
-			return d.ReadString(schemas.IceServer_Password, v.Password)
-		case schemas.IceServer_Ttl:
-			v.Ttl = new(int32)
-			return d.ReadInt32(schemas.IceServer_Ttl, v.Ttl)
-		case schemas.IceServer_Uris:
-			return deserializeUris(d, schemas.IceServer_Uris, &v.Uris)
-		case schemas.IceServer_Username:
-			v.Username = new(string)
-			return d.ReadString(schemas.IceServer_Username, v.Username)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

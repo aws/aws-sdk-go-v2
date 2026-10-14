@@ -1,0 +1,5 @@
+POST /managed-device/__ManagedDeviceId__/resources/ec2/describe
+
+Content-Type: application/json
+
+{"instanceIds":["__Member__","__Member__"]}

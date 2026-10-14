@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,34 @@ type Alternative struct {
 	Transcript *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Alternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alternative) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.Alternative_Entities, v.Entities)
+	serializeItemList(s, schemas.Alternative_Items, v.Items)
+	if v.Transcript != nil {
+		s.WriteString(schemas.Alternative_Transcript, *v.Transcript)
+	}
+}
+func (v *Alternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alternative_Entities:
+			return deserializeEntityList(d, schemas.Alternative_Entities, &v.Entities)
+		case schemas.Alternative_Items:
+			return deserializeItemList(d, schemas.Alternative_Items, &v.Items)
+		case schemas.Alternative_Transcript:
+			v.Transcript = new(string)
+			return d.ReadString(schemas.Alternative_Transcript, v.Transcript)
+		}
+		return nil
+	})
 }
 
 // A wrapper for your audio chunks. Your audio stream consists of one or more
@@ -53,6 +83,27 @@ type AudioEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChunk != nil {
+		s.WriteBlob(schemas.AudioEvent_AudioChunk, v.AudioChunk)
+	}
+}
+func (v *AudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioEvent_AudioChunk:
+			return d.ReadBlob(schemas.AudioEvent_AudioChunk, &v.AudioChunk)
+		}
+		return nil
+	})
+}
+
 // An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or
 // WebSocket data frames.
 //
@@ -81,6 +132,14 @@ type AudioStreamMemberAudioEvent struct {
 }
 
 func (*AudioStreamMemberAudioEvent) isAudioStream() {}
+func (v *AudioStreamMemberAudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioStream_AudioEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AudioStreamMemberAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains audio channel definitions and post-call analytics settings.
 type AudioStreamMemberConfigurationEvent struct {
@@ -90,6 +149,14 @@ type AudioStreamMemberConfigurationEvent struct {
 }
 
 func (*AudioStreamMemberConfigurationEvent) isAudioStream() {}
+func (v *AudioStreamMemberConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioStream_ConfigurationEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AudioStreamMemberConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains entities identified as personally identifiable information (PII) in
 // your transcription output, along with various associated attributes. Examples
@@ -122,6 +189,58 @@ type CallAnalyticsEntity struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CallAnalyticsEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt64(schemas.CallAnalyticsEntity_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.CallAnalyticsEntity_Category, *v.Category)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.CallAnalyticsEntity_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.CallAnalyticsEntity_Content, *v.Content)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt64(schemas.CallAnalyticsEntity_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CallAnalyticsEntity_Type, *v.Type)
+	}
+}
+func (v *CallAnalyticsEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsEntity_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.CallAnalyticsEntity_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.CallAnalyticsEntity_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.CallAnalyticsEntity_Category, v.Category)
+		case schemas.CallAnalyticsEntity_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.CallAnalyticsEntity_Confidence, v.Confidence)
+		case schemas.CallAnalyticsEntity_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.CallAnalyticsEntity_Content, v.Content)
+		case schemas.CallAnalyticsEntity_EndOffsetMillis:
+			v.EndOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.CallAnalyticsEntity_EndOffsetMillis, v.EndOffsetMillis)
+		case schemas.CallAnalyticsEntity_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CallAnalyticsEntity_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // A word, phrase, or punctuation mark in your Call Analytics transcription
@@ -164,6 +283,67 @@ type CallAnalyticsItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CallAnalyticsItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt64(schemas.CallAnalyticsItem_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.CallAnalyticsItem_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.CallAnalyticsItem_Content, *v.Content)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt64(schemas.CallAnalyticsItem_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+	if v.Stable != nil {
+		s.WriteBool(schemas.CallAnalyticsItem_Stable, *v.Stable)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CallAnalyticsItem_Type, string(v.Type))
+	}
+	if v.VocabularyFilterMatch != false {
+		s.WriteBool(schemas.CallAnalyticsItem_VocabularyFilterMatch, v.VocabularyFilterMatch)
+	}
+}
+func (v *CallAnalyticsItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsItem_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.CallAnalyticsItem_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.CallAnalyticsItem_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.CallAnalyticsItem_Confidence, v.Confidence)
+		case schemas.CallAnalyticsItem_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.CallAnalyticsItem_Content, v.Content)
+		case schemas.CallAnalyticsItem_EndOffsetMillis:
+			v.EndOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.CallAnalyticsItem_EndOffsetMillis, v.EndOffsetMillis)
+		case schemas.CallAnalyticsItem_Stable:
+			v.Stable = new(bool)
+			return d.ReadBool(schemas.CallAnalyticsItem_Stable, v.Stable)
+		case schemas.CallAnalyticsItem_Type:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsItem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ItemType(ev)
+			return nil
+		case schemas.CallAnalyticsItem_VocabularyFilterMatch:
+			return d.ReadBool(schemas.CallAnalyticsItem_VocabularyFilterMatch, &v.VocabularyFilterMatch)
+		}
+		return nil
+	})
+}
+
 // The language code that represents the language identified in your audio,
 // including the associated confidence score.
 type CallAnalyticsLanguageWithScore struct {
@@ -177,6 +357,37 @@ type CallAnalyticsLanguageWithScore struct {
 	Score float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CallAnalyticsLanguageWithScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsLanguageWithScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsLanguageWithScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CallAnalyticsLanguageWithScore_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Score != 0 {
+		s.WriteFloat64(schemas.CallAnalyticsLanguageWithScore_Score, v.Score)
+	}
+}
+func (v *CallAnalyticsLanguageWithScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsLanguageWithScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsLanguageWithScore_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsLanguageWithScore_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = CallAnalyticsLanguageCode(ev)
+			return nil
+		case schemas.CallAnalyticsLanguageWithScore_Score:
+			return d.ReadFloat64(schemas.CallAnalyticsLanguageWithScore_Score, &v.Score)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about your real-time Call Analytics session.
@@ -200,6 +411,14 @@ type CallAnalyticsTranscriptResultStreamMemberCategoryEvent struct {
 
 func (*CallAnalyticsTranscriptResultStreamMemberCategoryEvent) isCallAnalyticsTranscriptResultStream() {
 }
+func (v *CallAnalyticsTranscriptResultStreamMemberCategoryEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsTranscriptResultStream_CategoryEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CallAnalyticsTranscriptResultStreamMemberCategoryEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains set of transcription results from one or more audio segments, along
 // with additional information per your request parameters. This can include
@@ -212,6 +431,14 @@ type CallAnalyticsTranscriptResultStreamMemberUtteranceEvent struct {
 }
 
 func (*CallAnalyticsTranscriptResultStreamMemberUtteranceEvent) isCallAnalyticsTranscriptResultStream() {
+}
+func (v *CallAnalyticsTranscriptResultStreamMemberUtteranceEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsTranscriptResultStream_UtteranceEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CallAnalyticsTranscriptResultStreamMemberUtteranceEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Provides information on any TranscriptFilterType categories that matched your
@@ -227,6 +454,28 @@ type CategoryEvent struct {
 	MatchedDetails map[string]PointsOfInterest
 
 	noSmithyDocumentSerde
+}
+
+func (v *CategoryEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CategoryEvent_MatchedCategories, v.MatchedCategories)
+	serializeMatchedCategoryDetails(s, schemas.CategoryEvent_MatchedDetails, v.MatchedDetails)
+}
+func (v *CategoryEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryEvent_MatchedCategories:
+			return deserializeStringList(d, schemas.CategoryEvent_MatchedCategories, &v.MatchedCategories)
+		case schemas.CategoryEvent_MatchedDetails:
+			return deserializeMatchedCategoryDetails(d, schemas.CategoryEvent_MatchedDetails, &v.MatchedDetails)
+		}
+		return nil
+	})
 }
 
 // Makes it possible to specify which speaker is on which audio channel. For
@@ -249,6 +498,35 @@ type ChannelDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.ChannelDefinition_ChannelId, v.ChannelId)
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.ChannelDefinition_ParticipantRole, string(v.ParticipantRole))
+	}
+}
+func (v *ChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelDefinition_ChannelId:
+			return d.ReadInt32(schemas.ChannelDefinition_ChannelId, &v.ChannelId)
+		case schemas.ChannelDefinition_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.ChannelDefinition_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides the location, using character count, in your transcript where a match
 // is identified. For example, the location of an issue or a category match within
 // a segment.
@@ -265,6 +543,34 @@ type CharacterOffsets struct {
 	End *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CharacterOffsets) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CharacterOffsets)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CharacterOffsets) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Begin != nil {
+		s.WriteInt32(schemas.CharacterOffsets_Begin, *v.Begin)
+	}
+	if v.End != nil {
+		s.WriteInt32(schemas.CharacterOffsets_End, *v.End)
+	}
+}
+func (v *CharacterOffsets) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CharacterOffsets, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CharacterOffsets_Begin:
+			v.Begin = new(int32)
+			return d.ReadInt32(schemas.CharacterOffsets_Begin, v.Begin)
+		case schemas.CharacterOffsets_End:
+			v.End = new(int32)
+			return d.ReadInt32(schemas.CharacterOffsets_End, v.End)
+		}
+		return nil
+	})
 }
 
 // The details for clinical note generation, including status, and output
@@ -300,6 +606,50 @@ type ClinicalNoteGenerationResult struct {
 	TranscriptOutputLocation *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClinicalNoteGenerationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClinicalNoteGenerationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClinicalNoteGenerationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClinicalNoteOutputLocation != nil {
+		s.WriteString(schemas.ClinicalNoteGenerationResult_ClinicalNoteOutputLocation, *v.ClinicalNoteOutputLocation)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.ClinicalNoteGenerationResult_FailureReason, *v.FailureReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClinicalNoteGenerationResult_Status, string(v.Status))
+	}
+	if v.TranscriptOutputLocation != nil {
+		s.WriteString(schemas.ClinicalNoteGenerationResult_TranscriptOutputLocation, *v.TranscriptOutputLocation)
+	}
+}
+func (v *ClinicalNoteGenerationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClinicalNoteGenerationResult_ClinicalNoteOutputLocation:
+			v.ClinicalNoteOutputLocation = new(string)
+			return d.ReadString(schemas.ClinicalNoteGenerationResult_ClinicalNoteOutputLocation, v.ClinicalNoteOutputLocation)
+		case schemas.ClinicalNoteGenerationResult_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.ClinicalNoteGenerationResult_FailureReason, v.FailureReason)
+		case schemas.ClinicalNoteGenerationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.ClinicalNoteGenerationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClinicalNoteGenerationStatus(ev)
+			return nil
+		case schemas.ClinicalNoteGenerationResult_TranscriptOutputLocation:
+			v.TranscriptOutputLocation = new(string)
+			return d.ReadString(schemas.ClinicalNoteGenerationResult_TranscriptOutputLocation, v.TranscriptOutputLocation)
+		}
+		return nil
+	})
 }
 
 // The output configuration for aggregated transcript and clinical note generation.
@@ -351,6 +701,38 @@ type ClinicalNoteGenerationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClinicalNoteGenerationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClinicalNoteGenerationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClinicalNoteGenerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NoteTemplate != "" {
+		s.WriteString(schemas.ClinicalNoteGenerationSettings_NoteTemplate, string(v.NoteTemplate))
+	}
+	if v.OutputBucketName != nil {
+		s.WriteString(schemas.ClinicalNoteGenerationSettings_OutputBucketName, *v.OutputBucketName)
+	}
+}
+func (v *ClinicalNoteGenerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClinicalNoteGenerationSettings_NoteTemplate:
+			var ev string
+			if err := d.ReadString(schemas.ClinicalNoteGenerationSettings_NoteTemplate, &ev); err != nil {
+				return err
+			}
+			v.NoteTemplate = MedicalScribeNoteTemplate(ev)
+			return nil
+		case schemas.ClinicalNoteGenerationSettings_OutputBucketName:
+			v.OutputBucketName = new(string)
+			return d.ReadString(schemas.ClinicalNoteGenerationSettings_OutputBucketName, v.OutputBucketName)
+		}
+		return nil
+	})
+}
+
 // Allows you to set audio channel definitions and post-call analytics settings.
 type ConfigurationEvent struct {
 
@@ -368,6 +750,33 @@ type ConfigurationEvent struct {
 	PostCallAnalyticsSettings *PostCallAnalyticsSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelDefinitions(s, schemas.ConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	if v.PostCallAnalyticsSettings != nil {
+		s.WriteStruct(schemas.ConfigurationEvent_PostCallAnalyticsSettings)
+		v.PostCallAnalyticsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationEvent_ChannelDefinitions:
+			return deserializeChannelDefinitions(d, schemas.ConfigurationEvent_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.ConfigurationEvent_PostCallAnalyticsSettings:
+			v.PostCallAnalyticsSettings = &PostCallAnalyticsSettings{}
+			return v.PostCallAnalyticsSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains entities identified as personally identifiable information (PII) in
@@ -403,6 +812,56 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.Entity_Category, *v.Category)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.Entity_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.Entity_Content, *v.Content)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.Entity_EndTime, v.EndTime)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.Entity_StartTime, v.StartTime)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Entity_Type, *v.Type)
+	}
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.Entity_Category, v.Category)
+		case schemas.Entity_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.Entity_Confidence, v.Confidence)
+		case schemas.Entity_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Entity_Content, v.Content)
+		case schemas.Entity_EndTime:
+			return d.ReadFloat64(schemas.Entity_EndTime, &v.EndTime)
+		case schemas.Entity_StartTime:
+			return d.ReadFloat64(schemas.Entity_StartTime, &v.StartTime)
+		case schemas.Entity_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Entity_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Lists the issues that were identified in your audio segment.
 type IssueDetected struct {
 
@@ -411,6 +870,30 @@ type IssueDetected struct {
 	CharacterOffsets *CharacterOffsets
 
 	noSmithyDocumentSerde
+}
+
+func (v *IssueDetected) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssueDetected)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssueDetected) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CharacterOffsets != nil {
+		s.WriteStruct(schemas.IssueDetected_CharacterOffsets)
+		v.CharacterOffsets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IssueDetected) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IssueDetected, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IssueDetected_CharacterOffsets:
+			v.CharacterOffsets = &CharacterOffsets{}
+			return v.CharacterOffsets.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A word, phrase, or punctuation mark in your transcription output, along with
@@ -456,6 +939,71 @@ type Item struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.Item_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.Item_Content, *v.Content)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.Item_EndTime, v.EndTime)
+	}
+	if v.Speaker != nil {
+		s.WriteString(schemas.Item_Speaker, *v.Speaker)
+	}
+	if v.Stable != nil {
+		s.WriteBool(schemas.Item_Stable, *v.Stable)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.Item_StartTime, v.StartTime)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Item_Type, string(v.Type))
+	}
+	if v.VocabularyFilterMatch != false {
+		s.WriteBool(schemas.Item_VocabularyFilterMatch, v.VocabularyFilterMatch)
+	}
+}
+func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Item, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Item_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.Item_Confidence, v.Confidence)
+		case schemas.Item_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Item_Content, v.Content)
+		case schemas.Item_EndTime:
+			return d.ReadFloat64(schemas.Item_EndTime, &v.EndTime)
+		case schemas.Item_Speaker:
+			v.Speaker = new(string)
+			return d.ReadString(schemas.Item_Speaker, v.Speaker)
+		case schemas.Item_Stable:
+			v.Stable = new(bool)
+			return d.ReadBool(schemas.Item_Stable, v.Stable)
+		case schemas.Item_StartTime:
+			return d.ReadFloat64(schemas.Item_StartTime, &v.StartTime)
+		case schemas.Item_Type:
+			var ev string
+			if err := d.ReadString(schemas.Item_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ItemType(ev)
+			return nil
+		case schemas.Item_VocabularyFilterMatch:
+			return d.ReadBool(schemas.Item_VocabularyFilterMatch, &v.VocabularyFilterMatch)
+		}
+		return nil
+	})
+}
+
 // The language code that represents the language identified in your audio,
 // including the associated confidence score. If you enabled channel identification
 // in your request and each channel contained a different language, you will have
@@ -473,6 +1021,37 @@ type LanguageWithScore struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LanguageWithScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LanguageWithScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LanguageWithScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.LanguageWithScore_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Score != 0 {
+		s.WriteFloat64(schemas.LanguageWithScore_Score, v.Score)
+	}
+}
+func (v *LanguageWithScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LanguageWithScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LanguageWithScore_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.LanguageWithScore_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.LanguageWithScore_Score:
+			return d.ReadFloat64(schemas.LanguageWithScore_Score, &v.Score)
+		}
+		return nil
+	})
+}
+
 // A list of possible alternative transcriptions for the input audio. Each
 // alternative may contain one or more of Items , Entities , or Transcript .
 type MedicalAlternative struct {
@@ -488,6 +1067,34 @@ type MedicalAlternative struct {
 	Transcript *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalEntityList(s, schemas.MedicalAlternative_Entities, v.Entities)
+	serializeMedicalItemList(s, schemas.MedicalAlternative_Items, v.Items)
+	if v.Transcript != nil {
+		s.WriteString(schemas.MedicalAlternative_Transcript, *v.Transcript)
+	}
+}
+func (v *MedicalAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalAlternative_Entities:
+			return deserializeMedicalEntityList(d, schemas.MedicalAlternative_Entities, &v.Entities)
+		case schemas.MedicalAlternative_Items:
+			return deserializeMedicalItemList(d, schemas.MedicalAlternative_Items, &v.Items)
+		case schemas.MedicalAlternative_Transcript:
+			v.Transcript = new(string)
+			return d.ReadString(schemas.MedicalAlternative_Transcript, v.Transcript)
+		}
+		return nil
+	})
 }
 
 // Contains entities identified as personal health information (PHI) in your
@@ -515,6 +1122,50 @@ type MedicalEntity struct {
 	StartTime float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.MedicalEntity_Category, *v.Category)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.MedicalEntity_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.MedicalEntity_Content, *v.Content)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.MedicalEntity_EndTime, v.EndTime)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.MedicalEntity_StartTime, v.StartTime)
+	}
+}
+func (v *MedicalEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalEntity_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.MedicalEntity_Category, v.Category)
+		case schemas.MedicalEntity_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.MedicalEntity_Confidence, v.Confidence)
+		case schemas.MedicalEntity_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.MedicalEntity_Content, v.Content)
+		case schemas.MedicalEntity_EndTime:
+			return d.ReadFloat64(schemas.MedicalEntity_EndTime, &v.EndTime)
+		case schemas.MedicalEntity_StartTime:
+			return d.ReadFloat64(schemas.MedicalEntity_StartTime, &v.StartTime)
+		}
+		return nil
+	})
 }
 
 // A word, phrase, or punctuation mark in your transcription output, along with
@@ -547,6 +1198,60 @@ type MedicalItem struct {
 	Type ItemType
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.MedicalItem_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.MedicalItem_Content, *v.Content)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.MedicalItem_EndTime, v.EndTime)
+	}
+	if v.Speaker != nil {
+		s.WriteString(schemas.MedicalItem_Speaker, *v.Speaker)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.MedicalItem_StartTime, v.StartTime)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MedicalItem_Type, string(v.Type))
+	}
+}
+func (v *MedicalItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalItem_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.MedicalItem_Confidence, v.Confidence)
+		case schemas.MedicalItem_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.MedicalItem_Content, v.Content)
+		case schemas.MedicalItem_EndTime:
+			return d.ReadFloat64(schemas.MedicalItem_EndTime, &v.EndTime)
+		case schemas.MedicalItem_Speaker:
+			v.Speaker = new(string)
+			return d.ReadString(schemas.MedicalItem_Speaker, v.Speaker)
+		case schemas.MedicalItem_StartTime:
+			return d.ReadFloat64(schemas.MedicalItem_StartTime, &v.StartTime)
+		case schemas.MedicalItem_Type:
+			var ev string
+			if err := d.ReadString(schemas.MedicalItem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ItemType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Result associated with a .
@@ -583,6 +1288,52 @@ type MedicalResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalAlternativeList(s, schemas.MedicalResult_Alternatives, v.Alternatives)
+	if v.ChannelId != nil {
+		s.WriteString(schemas.MedicalResult_ChannelId, *v.ChannelId)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.MedicalResult_EndTime, v.EndTime)
+	}
+	if v.IsPartial != false {
+		s.WriteBool(schemas.MedicalResult_IsPartial, v.IsPartial)
+	}
+	if v.ResultId != nil {
+		s.WriteString(schemas.MedicalResult_ResultId, *v.ResultId)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.MedicalResult_StartTime, v.StartTime)
+	}
+}
+func (v *MedicalResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalResult_Alternatives:
+			return deserializeMedicalAlternativeList(d, schemas.MedicalResult_Alternatives, &v.Alternatives)
+		case schemas.MedicalResult_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.MedicalResult_ChannelId, v.ChannelId)
+		case schemas.MedicalResult_EndTime:
+			return d.ReadFloat64(schemas.MedicalResult_EndTime, &v.EndTime)
+		case schemas.MedicalResult_IsPartial:
+			return d.ReadBool(schemas.MedicalResult_IsPartial, &v.IsPartial)
+		case schemas.MedicalResult_ResultId:
+			v.ResultId = new(string)
+			return d.ReadString(schemas.MedicalResult_ResultId, v.ResultId)
+		case schemas.MedicalResult_StartTime:
+			return d.ReadFloat64(schemas.MedicalResult_StartTime, &v.StartTime)
+		}
+		return nil
+	})
+}
+
 // A wrapper for your audio chunks
 //
 // For more information, see [Event stream encoding].
@@ -613,6 +1364,27 @@ type MedicalScribeAudioEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeAudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeAudioEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeAudioEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChunk != nil {
+		s.WriteBlob(schemas.MedicalScribeAudioEvent_AudioChunk, v.AudioChunk)
+	}
+}
+func (v *MedicalScribeAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeAudioEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeAudioEvent_AudioChunk:
+			return d.ReadBlob(schemas.MedicalScribeAudioEvent_AudioChunk, &v.AudioChunk)
+		}
+		return nil
+	})
+}
+
 // Makes it possible to specify which speaker is on which channel. For example, if
 // the clinician is the first participant to speak, you would set the ChannelId of
 // the first ChannelDefinition in the list to 0 (to indicate the first channel)
@@ -637,6 +1409,35 @@ type MedicalScribeChannelDefinition struct {
 	ParticipantRole MedicalScribeParticipantRole
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.MedicalScribeChannelDefinition_ChannelId, v.ChannelId)
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.MedicalScribeChannelDefinition_ParticipantRole, string(v.ParticipantRole))
+	}
+}
+func (v *MedicalScribeChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeChannelDefinition_ChannelId:
+			return d.ReadInt32(schemas.MedicalScribeChannelDefinition_ChannelId, &v.ChannelId)
+		case schemas.MedicalScribeChannelDefinition_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeChannelDefinition_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = MedicalScribeParticipantRole(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specify details to configure the streaming session, including channel
@@ -704,6 +1505,77 @@ type MedicalScribeConfigurationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeConfigurationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	if v.EncryptionSettings != nil {
+		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_EncryptionSettings)
+		v.EncryptionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MedicalScribeContext != nil {
+		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_MedicalScribeContext)
+		v.MedicalScribeContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostStreamAnalyticsSettings != nil {
+		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_PostStreamAnalyticsSettings)
+		v.PostStreamAnalyticsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceAccessRoleArn != nil {
+		s.WriteString(schemas.MedicalScribeConfigurationEvent_ResourceAccessRoleArn, *v.ResourceAccessRoleArn)
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.MedicalScribeConfigurationEvent_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.MedicalScribeConfigurationEvent_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.MedicalScribeConfigurationEvent_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *MedicalScribeConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeConfigurationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeConfigurationEvent_ChannelDefinitions:
+			return deserializeMedicalScribeChannelDefinitions(d, schemas.MedicalScribeConfigurationEvent_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.MedicalScribeConfigurationEvent_EncryptionSettings:
+			v.EncryptionSettings = &MedicalScribeEncryptionSettings{}
+			return v.EncryptionSettings.Deserialize(d)
+		case schemas.MedicalScribeConfigurationEvent_MedicalScribeContext:
+			v.MedicalScribeContext = &MedicalScribeContext{}
+			return v.MedicalScribeContext.Deserialize(d)
+		case schemas.MedicalScribeConfigurationEvent_PostStreamAnalyticsSettings:
+			v.PostStreamAnalyticsSettings = &MedicalScribePostStreamAnalyticsSettings{}
+			return v.PostStreamAnalyticsSettings.Deserialize(d)
+		case schemas.MedicalScribeConfigurationEvent_ResourceAccessRoleArn:
+			v.ResourceAccessRoleArn = new(string)
+			return d.ReadString(schemas.MedicalScribeConfigurationEvent_ResourceAccessRoleArn, v.ResourceAccessRoleArn)
+		case schemas.MedicalScribeConfigurationEvent_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeConfigurationEvent_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = MedicalScribeVocabularyFilterMethod(ev)
+			return nil
+		case schemas.MedicalScribeConfigurationEvent_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.MedicalScribeConfigurationEvent_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.MedicalScribeConfigurationEvent_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.MedicalScribeConfigurationEvent_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // The MedicalScribeContext object that contains contextual information which is
 // used during clinical note generation to add relevant context to the note.
 type MedicalScribeContext struct {
@@ -713,6 +1585,30 @@ type MedicalScribeContext struct {
 	PatientContext *MedicalScribePatientContext
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PatientContext != nil {
+		s.WriteStruct(schemas.MedicalScribeContext_PatientContext)
+		v.PatientContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalScribeContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeContext_PatientContext:
+			v.PatientContext = &MedicalScribePatientContext{}
+			return v.PatientContext.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains encryption related settings to be used for data encryption with Key
@@ -766,6 +1662,31 @@ type MedicalScribeEncryptionSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKMSEncryptionContextMap(s, schemas.MedicalScribeEncryptionSettings_KmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.MedicalScribeEncryptionSettings_KmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *MedicalScribeEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeEncryptionSettings_KmsEncryptionContext:
+			return deserializeKMSEncryptionContextMap(d, schemas.MedicalScribeEncryptionSettings_KmsEncryptionContext, &v.KmsEncryptionContext)
+		case schemas.MedicalScribeEncryptionSettings_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.MedicalScribeEncryptionSettings_KmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
+}
+
 // An encoded stream of events. The stream is encoded as HTTP/2 data frames.
 //
 // An input stream consists of the following types of events. The first element of
@@ -798,6 +1719,14 @@ type MedicalScribeInputStreamMemberAudioEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberAudioEvent) isMedicalScribeInputStream() {}
+func (v *MedicalScribeInputStreamMemberAudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeInputStream_AudioEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeInputStreamMemberAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specify additional streaming session configurations beyond those provided in
 // your initial start request headers. For example, specify channel definitions,
@@ -812,6 +1741,14 @@ type MedicalScribeInputStreamMemberConfigurationEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberConfigurationEvent) isMedicalScribeInputStream() {}
+func (v *MedicalScribeInputStreamMemberConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeInputStream_ConfigurationEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeInputStreamMemberConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specify the lifecycle of your streaming session, such as ending the session.
 type MedicalScribeInputStreamMemberSessionControlEvent struct {
@@ -821,6 +1758,14 @@ type MedicalScribeInputStreamMemberSessionControlEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberSessionControlEvent) isMedicalScribeInputStream() {}
+func (v *MedicalScribeInputStreamMemberSessionControlEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeInputStream_SessionControlEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeInputStreamMemberSessionControlEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains patient-specific information.
 type MedicalScribePatientContext struct {
@@ -832,6 +1777,32 @@ type MedicalScribePatientContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribePatientContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribePatientContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribePatientContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pronouns != "" {
+		s.WriteString(schemas.MedicalScribePatientContext_Pronouns, string(v.Pronouns))
+	}
+}
+func (v *MedicalScribePatientContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribePatientContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribePatientContext_Pronouns:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribePatientContext_Pronouns, &ev); err != nil {
+				return err
+			}
+			v.Pronouns = Pronouns(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details for the result of post-stream analytics.
 type MedicalScribePostStreamAnalyticsResult struct {
 
@@ -839,6 +1810,30 @@ type MedicalScribePostStreamAnalyticsResult struct {
 	ClinicalNoteGenerationResult *ClinicalNoteGenerationResult
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribePostStreamAnalyticsResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribePostStreamAnalyticsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribePostStreamAnalyticsResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClinicalNoteGenerationResult != nil {
+		s.WriteStruct(schemas.MedicalScribePostStreamAnalyticsResult_ClinicalNoteGenerationResult)
+		v.ClinicalNoteGenerationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalScribePostStreamAnalyticsResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamAnalyticsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribePostStreamAnalyticsResult_ClinicalNoteGenerationResult:
+			v.ClinicalNoteGenerationResult = &ClinicalNoteGenerationResult{}
+			return v.ClinicalNoteGenerationResult.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The settings for post-stream analytics.
@@ -850,6 +1845,30 @@ type MedicalScribePostStreamAnalyticsSettings struct {
 	ClinicalNoteGenerationSettings *ClinicalNoteGenerationSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribePostStreamAnalyticsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribePostStreamAnalyticsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribePostStreamAnalyticsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClinicalNoteGenerationSettings != nil {
+		s.WriteStruct(schemas.MedicalScribePostStreamAnalyticsSettings_ClinicalNoteGenerationSettings)
+		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalScribePostStreamAnalyticsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamAnalyticsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribePostStreamAnalyticsSettings_ClinicalNoteGenerationSettings:
+			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettings{}
+			return v.ClinicalNoteGenerationSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Result stream where you will receive the output events. The details are
@@ -870,6 +1889,14 @@ type MedicalScribeResultStreamMemberTranscriptEvent struct {
 }
 
 func (*MedicalScribeResultStreamMemberTranscriptEvent) isMedicalScribeResultStream() {}
+func (v *MedicalScribeResultStreamMemberTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeResultStream_TranscriptEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeResultStreamMemberTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specify the lifecycle of your streaming session.
 type MedicalScribeSessionControlEvent struct {
@@ -893,6 +1920,32 @@ type MedicalScribeSessionControlEvent struct {
 	Type MedicalScribeSessionControlEventType
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeSessionControlEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeSessionControlEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeSessionControlEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.MedicalScribeSessionControlEvent_Type, string(v.Type))
+	}
+}
+func (v *MedicalScribeSessionControlEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeSessionControlEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeSessionControlEvent_Type:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeSessionControlEvent_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MedicalScribeSessionControlEventType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains details about a Amazon Web Services HealthScribe streaming session.
@@ -967,6 +2020,137 @@ type MedicalScribeStreamDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeStreamDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeStreamDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeStreamDetails_ChannelDefinitions, v.ChannelDefinitions)
+	if v.EncryptionSettings != nil {
+		s.WriteStruct(schemas.MedicalScribeStreamDetails_EncryptionSettings)
+		v.EncryptionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.MedicalScribeStreamDetails_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.MedicalScribeStreamDetails_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.MedicalScribeStreamDetails_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.MedicalScribeContextProvided != nil {
+		s.WriteBool(schemas.MedicalScribeStreamDetails_MedicalScribeContextProvided, *v.MedicalScribeContextProvided)
+	}
+	if v.PostStreamAnalyticsResult != nil {
+		s.WriteStruct(schemas.MedicalScribeStreamDetails_PostStreamAnalyticsResult)
+		v.PostStreamAnalyticsResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostStreamAnalyticsSettings != nil {
+		s.WriteStruct(schemas.MedicalScribeStreamDetails_PostStreamAnalyticsSettings)
+		v.PostStreamAnalyticsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceAccessRoleArn != nil {
+		s.WriteString(schemas.MedicalScribeStreamDetails_ResourceAccessRoleArn, *v.ResourceAccessRoleArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.MedicalScribeStreamDetails_SessionId, *v.SessionId)
+	}
+	if v.StreamCreatedAt != nil {
+		s.WriteTime(schemas.MedicalScribeStreamDetails_StreamCreatedAt, *v.StreamCreatedAt)
+	}
+	if v.StreamEndedAt != nil {
+		s.WriteTime(schemas.MedicalScribeStreamDetails_StreamEndedAt, *v.StreamEndedAt)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.MedicalScribeStreamDetails_StreamStatus, string(v.StreamStatus))
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.MedicalScribeStreamDetails_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.MedicalScribeStreamDetails_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.MedicalScribeStreamDetails_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *MedicalScribeStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeStreamDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeStreamDetails_ChannelDefinitions:
+			return deserializeMedicalScribeChannelDefinitions(d, schemas.MedicalScribeStreamDetails_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.MedicalScribeStreamDetails_EncryptionSettings:
+			v.EncryptionSettings = &MedicalScribeEncryptionSettings{}
+			return v.EncryptionSettings.Deserialize(d)
+		case schemas.MedicalScribeStreamDetails_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeStreamDetails_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.MedicalScribeStreamDetails_MediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeStreamDetails_MediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = MedicalScribeMediaEncoding(ev)
+			return nil
+		case schemas.MedicalScribeStreamDetails_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.MedicalScribeStreamDetails_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.MedicalScribeStreamDetails_MedicalScribeContextProvided:
+			v.MedicalScribeContextProvided = new(bool)
+			return d.ReadBool(schemas.MedicalScribeStreamDetails_MedicalScribeContextProvided, v.MedicalScribeContextProvided)
+		case schemas.MedicalScribeStreamDetails_PostStreamAnalyticsResult:
+			v.PostStreamAnalyticsResult = &MedicalScribePostStreamAnalyticsResult{}
+			return v.PostStreamAnalyticsResult.Deserialize(d)
+		case schemas.MedicalScribeStreamDetails_PostStreamAnalyticsSettings:
+			v.PostStreamAnalyticsSettings = &MedicalScribePostStreamAnalyticsSettings{}
+			return v.PostStreamAnalyticsSettings.Deserialize(d)
+		case schemas.MedicalScribeStreamDetails_ResourceAccessRoleArn:
+			v.ResourceAccessRoleArn = new(string)
+			return d.ReadString(schemas.MedicalScribeStreamDetails_ResourceAccessRoleArn, v.ResourceAccessRoleArn)
+		case schemas.MedicalScribeStreamDetails_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.MedicalScribeStreamDetails_SessionId, v.SessionId)
+		case schemas.MedicalScribeStreamDetails_StreamCreatedAt:
+			v.StreamCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeStreamDetails_StreamCreatedAt, v.StreamCreatedAt)
+		case schemas.MedicalScribeStreamDetails_StreamEndedAt:
+			v.StreamEndedAt = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeStreamDetails_StreamEndedAt, v.StreamEndedAt)
+		case schemas.MedicalScribeStreamDetails_StreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeStreamDetails_StreamStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamStatus = MedicalScribeStreamStatus(ev)
+			return nil
+		case schemas.MedicalScribeStreamDetails_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeStreamDetails_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = MedicalScribeVocabularyFilterMethod(ev)
+			return nil
+		case schemas.MedicalScribeStreamDetails_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.MedicalScribeStreamDetails_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.MedicalScribeStreamDetails_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.MedicalScribeStreamDetails_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // The event associated with MedicalScribeResultStream .
 //
 // Contains MedicalScribeTranscriptSegment , which contains segment related
@@ -977,6 +2161,30 @@ type MedicalScribeTranscriptEvent struct {
 	TranscriptSegment *MedicalScribeTranscriptSegment
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeTranscriptEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeTranscriptEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptSegment != nil {
+		s.WriteStruct(schemas.MedicalScribeTranscriptEvent_TranscriptSegment)
+		v.TranscriptSegment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalScribeTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeTranscriptEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeTranscriptEvent_TranscriptSegment:
+			v.TranscriptSegment = &MedicalScribeTranscriptSegment{}
+			return v.TranscriptSegment.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A word, phrase, or punctuation mark in your transcription output, along with
@@ -1010,6 +2218,60 @@ type MedicalScribeTranscriptItem struct {
 	VocabularyFilterMatch *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeTranscriptItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeTranscriptItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeTranscriptItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginAudioTime != 0 {
+		s.WriteFloat64(schemas.MedicalScribeTranscriptItem_BeginAudioTime, v.BeginAudioTime)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.MedicalScribeTranscriptItem_Confidence, *v.Confidence)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.MedicalScribeTranscriptItem_Content, *v.Content)
+	}
+	if v.EndAudioTime != 0 {
+		s.WriteFloat64(schemas.MedicalScribeTranscriptItem_EndAudioTime, v.EndAudioTime)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MedicalScribeTranscriptItem_Type, string(v.Type))
+	}
+	if v.VocabularyFilterMatch != nil {
+		s.WriteBool(schemas.MedicalScribeTranscriptItem_VocabularyFilterMatch, *v.VocabularyFilterMatch)
+	}
+}
+func (v *MedicalScribeTranscriptItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeTranscriptItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeTranscriptItem_BeginAudioTime:
+			return d.ReadFloat64(schemas.MedicalScribeTranscriptItem_BeginAudioTime, &v.BeginAudioTime)
+		case schemas.MedicalScribeTranscriptItem_Confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.MedicalScribeTranscriptItem_Confidence, v.Confidence)
+		case schemas.MedicalScribeTranscriptItem_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.MedicalScribeTranscriptItem_Content, v.Content)
+		case schemas.MedicalScribeTranscriptItem_EndAudioTime:
+			return d.ReadFloat64(schemas.MedicalScribeTranscriptItem_EndAudioTime, &v.EndAudioTime)
+		case schemas.MedicalScribeTranscriptItem_Type:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeTranscriptItem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MedicalScribeTranscriptItemType(ev)
+			return nil
+		case schemas.MedicalScribeTranscriptItem_VocabularyFilterMatch:
+			v.VocabularyFilterMatch = new(bool)
+			return d.ReadBool(schemas.MedicalScribeTranscriptItem_VocabularyFilterMatch, v.VocabularyFilterMatch)
+		}
+		return nil
+	})
 }
 
 // Contains a set of transcription results, along with additional information of
@@ -1047,6 +2309,58 @@ type MedicalScribeTranscriptSegment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeTranscriptSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeTranscriptSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeTranscriptSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginAudioTime != 0 {
+		s.WriteFloat64(schemas.MedicalScribeTranscriptSegment_BeginAudioTime, v.BeginAudioTime)
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.MedicalScribeTranscriptSegment_ChannelId, *v.ChannelId)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.MedicalScribeTranscriptSegment_Content, *v.Content)
+	}
+	if v.EndAudioTime != 0 {
+		s.WriteFloat64(schemas.MedicalScribeTranscriptSegment_EndAudioTime, v.EndAudioTime)
+	}
+	if v.IsPartial != false {
+		s.WriteBool(schemas.MedicalScribeTranscriptSegment_IsPartial, v.IsPartial)
+	}
+	serializeMedicalScribeTranscriptItemList(s, schemas.MedicalScribeTranscriptSegment_Items, v.Items)
+	if v.SegmentId != nil {
+		s.WriteString(schemas.MedicalScribeTranscriptSegment_SegmentId, *v.SegmentId)
+	}
+}
+func (v *MedicalScribeTranscriptSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeTranscriptSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeTranscriptSegment_BeginAudioTime:
+			return d.ReadFloat64(schemas.MedicalScribeTranscriptSegment_BeginAudioTime, &v.BeginAudioTime)
+		case schemas.MedicalScribeTranscriptSegment_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.MedicalScribeTranscriptSegment_ChannelId, v.ChannelId)
+		case schemas.MedicalScribeTranscriptSegment_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.MedicalScribeTranscriptSegment_Content, v.Content)
+		case schemas.MedicalScribeTranscriptSegment_EndAudioTime:
+			return d.ReadFloat64(schemas.MedicalScribeTranscriptSegment_EndAudioTime, &v.EndAudioTime)
+		case schemas.MedicalScribeTranscriptSegment_IsPartial:
+			return d.ReadBool(schemas.MedicalScribeTranscriptSegment_IsPartial, &v.IsPartial)
+		case schemas.MedicalScribeTranscriptSegment_Items:
+			return deserializeMedicalScribeTranscriptItemList(d, schemas.MedicalScribeTranscriptSegment_Items, &v.Items)
+		case schemas.MedicalScribeTranscriptSegment_SegmentId:
+			v.SegmentId = new(string)
+			return d.ReadString(schemas.MedicalScribeTranscriptSegment_SegmentId, v.SegmentId)
+		}
+		return nil
+	})
+}
+
 // The MedicalTranscript associated with a .
 //
 // MedicalTranscript contains Results , which contains a set of transcription
@@ -1064,6 +2378,25 @@ type MedicalTranscript struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalTranscript) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscript)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscript) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalResultList(s, schemas.MedicalTranscript_Results, v.Results)
+}
+func (v *MedicalTranscript) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscript, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscript_Results:
+			return deserializeMedicalResultList(d, schemas.MedicalTranscript_Results, &v.Results)
+		}
+		return nil
+	})
+}
+
 // The MedicalTranscriptEvent associated with a MedicalTranscriptResultStream .
 //
 // Contains a set of transcription results from one or more audio segments, along
@@ -1078,6 +2411,30 @@ type MedicalTranscriptEvent struct {
 	Transcript *MedicalTranscript
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscriptEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscriptEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.MedicalTranscriptEvent_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscriptEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscriptEvent_Transcript:
+			v.Transcript = &MedicalTranscript{}
+			return v.Transcript.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about your streaming session.
@@ -1103,6 +2460,14 @@ type MedicalTranscriptResultStreamMemberTranscriptEvent struct {
 }
 
 func (*MedicalTranscriptResultStreamMemberTranscriptEvent) isMedicalTranscriptResultStream() {}
+func (v *MedicalTranscriptResultStreamMemberTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscriptResultStream_TranscriptEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalTranscriptResultStreamMemberTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the timestamps of matched categories.
 type PointsOfInterest struct {
@@ -1112,6 +2477,25 @@ type PointsOfInterest struct {
 	TimestampRanges []TimestampRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PointsOfInterest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PointsOfInterest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PointsOfInterest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTimestampRanges(s, schemas.PointsOfInterest_TimestampRanges, v.TimestampRanges)
+}
+func (v *PointsOfInterest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PointsOfInterest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PointsOfInterest_TimestampRanges:
+			return deserializeTimestampRanges(d, schemas.PointsOfInterest_TimestampRanges, &v.TimestampRanges)
+		}
+		return nil
+	})
 }
 
 // Allows you to specify additional settings for your Call Analytics post-call
@@ -1195,6 +2579,50 @@ type PostCallAnalyticsSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostCallAnalyticsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostCallAnalyticsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostCallAnalyticsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentRedactionOutput != "" {
+		s.WriteString(schemas.PostCallAnalyticsSettings_ContentRedactionOutput, string(v.ContentRedactionOutput))
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.OutputEncryptionKMSKeyId != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId, *v.OutputEncryptionKMSKeyId)
+	}
+	if v.OutputLocation != nil {
+		s.WriteString(schemas.PostCallAnalyticsSettings_OutputLocation, *v.OutputLocation)
+	}
+}
+func (v *PostCallAnalyticsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostCallAnalyticsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostCallAnalyticsSettings_ContentRedactionOutput:
+			var ev string
+			if err := d.ReadString(schemas.PostCallAnalyticsSettings_ContentRedactionOutput, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionOutput = ContentRedactionOutput(ev)
+			return nil
+		case schemas.PostCallAnalyticsSettings_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId:
+			v.OutputEncryptionKMSKeyId = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_OutputEncryptionKMSKeyId, v.OutputEncryptionKMSKeyId)
+		case schemas.PostCallAnalyticsSettings_OutputLocation:
+			v.OutputLocation = new(string)
+			return d.ReadString(schemas.PostCallAnalyticsSettings_OutputLocation, v.OutputLocation)
+		}
+		return nil
+	})
+}
+
 // The Result associated with a .
 //
 // Contains a set of transcription results from one or more audio segments, along
@@ -1239,6 +2667,65 @@ type Result struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Result) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Result)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Result) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternativeList(s, schemas.Result_Alternatives, v.Alternatives)
+	if v.ChannelId != nil {
+		s.WriteString(schemas.Result_ChannelId, *v.ChannelId)
+	}
+	if v.EndTime != 0 {
+		s.WriteFloat64(schemas.Result_EndTime, v.EndTime)
+	}
+	if v.IsPartial != false {
+		s.WriteBool(schemas.Result_IsPartial, v.IsPartial)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.Result_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLanguageIdentification(s, schemas.Result_LanguageIdentification, v.LanguageIdentification)
+	if v.ResultId != nil {
+		s.WriteString(schemas.Result_ResultId, *v.ResultId)
+	}
+	if v.StartTime != 0 {
+		s.WriteFloat64(schemas.Result_StartTime, v.StartTime)
+	}
+}
+func (v *Result) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Result, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Result_Alternatives:
+			return deserializeAlternativeList(d, schemas.Result_Alternatives, &v.Alternatives)
+		case schemas.Result_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.Result_ChannelId, v.ChannelId)
+		case schemas.Result_EndTime:
+			return d.ReadFloat64(schemas.Result_EndTime, &v.EndTime)
+		case schemas.Result_IsPartial:
+			return d.ReadBool(schemas.Result_IsPartial, &v.IsPartial)
+		case schemas.Result_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.Result_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.Result_LanguageIdentification:
+			return deserializeLanguageIdentification(d, schemas.Result_LanguageIdentification, &v.LanguageIdentification)
+		case schemas.Result_ResultId:
+			v.ResultId = new(string)
+			return d.ReadString(schemas.Result_ResultId, v.ResultId)
+		case schemas.Result_StartTime:
+			return d.ReadFloat64(schemas.Result_StartTime, &v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Contains the timestamp range (start time through end time) of a matched
 // category.
 type TimestampRange struct {
@@ -1252,6 +2739,34 @@ type TimestampRange struct {
 	EndOffsetMillis *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimestampRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt64(schemas.TimestampRange_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt64(schemas.TimestampRange_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+}
+func (v *TimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampRange_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.TimestampRange_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.TimestampRange_EndOffsetMillis:
+			v.EndOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.TimestampRange_EndOffsetMillis, v.EndOffsetMillis)
+		}
+		return nil
+	})
 }
 
 // The Transcript associated with a .
@@ -1271,6 +2786,25 @@ type Transcript struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Transcript) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Transcript)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResultList(s, schemas.Transcript_Results, v.Results)
+}
+func (v *Transcript) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Transcript, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Transcript_Results:
+			return deserializeResultList(d, schemas.Transcript_Results, &v.Results)
+		}
+		return nil
+	})
+}
+
 // The TranscriptEvent associated with a TranscriptResultStream .
 //
 // Contains a set of transcription results from one or more audio segments, along
@@ -1285,6 +2819,30 @@ type TranscriptEvent struct {
 	Transcript *Transcript
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.TranscriptEvent_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptEvent_Transcript:
+			v.Transcript = &Transcript{}
+			return v.Transcript.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about your streaming session.
@@ -1306,6 +2864,14 @@ type TranscriptResultStreamMemberTranscriptEvent struct {
 }
 
 func (*TranscriptResultStreamMemberTranscriptEvent) isTranscriptResultStream() {}
+func (v *TranscriptResultStreamMemberTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptResultStream_TranscriptEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TranscriptResultStreamMemberTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains set of transcription results from one or more audio segments, along
 // with additional information about the parameters included in your request. For
@@ -1356,6 +2922,93 @@ type UtteranceEvent struct {
 	UtteranceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UtteranceEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UtteranceEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UtteranceEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt64(schemas.UtteranceEvent_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt64(schemas.UtteranceEvent_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+	serializeCallAnalyticsEntityList(s, schemas.UtteranceEvent_Entities, v.Entities)
+	if v.IsPartial != false {
+		s.WriteBool(schemas.UtteranceEvent_IsPartial, v.IsPartial)
+	}
+	serializeIssuesDetected(s, schemas.UtteranceEvent_IssuesDetected, v.IssuesDetected)
+	serializeCallAnalyticsItemList(s, schemas.UtteranceEvent_Items, v.Items)
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UtteranceEvent_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCallAnalyticsLanguageIdentification(s, schemas.UtteranceEvent_LanguageIdentification, v.LanguageIdentification)
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.UtteranceEvent_ParticipantRole, string(v.ParticipantRole))
+	}
+	if v.Sentiment != "" {
+		s.WriteString(schemas.UtteranceEvent_Sentiment, string(v.Sentiment))
+	}
+	if v.Transcript != nil {
+		s.WriteString(schemas.UtteranceEvent_Transcript, *v.Transcript)
+	}
+	if v.UtteranceId != nil {
+		s.WriteString(schemas.UtteranceEvent_UtteranceId, *v.UtteranceId)
+	}
+}
+func (v *UtteranceEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UtteranceEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UtteranceEvent_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.UtteranceEvent_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.UtteranceEvent_EndOffsetMillis:
+			v.EndOffsetMillis = new(int64)
+			return d.ReadInt64(schemas.UtteranceEvent_EndOffsetMillis, v.EndOffsetMillis)
+		case schemas.UtteranceEvent_Entities:
+			return deserializeCallAnalyticsEntityList(d, schemas.UtteranceEvent_Entities, &v.Entities)
+		case schemas.UtteranceEvent_IsPartial:
+			return d.ReadBool(schemas.UtteranceEvent_IsPartial, &v.IsPartial)
+		case schemas.UtteranceEvent_IssuesDetected:
+			return deserializeIssuesDetected(d, schemas.UtteranceEvent_IssuesDetected, &v.IssuesDetected)
+		case schemas.UtteranceEvent_Items:
+			return deserializeCallAnalyticsItemList(d, schemas.UtteranceEvent_Items, &v.Items)
+		case schemas.UtteranceEvent_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.UtteranceEvent_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = CallAnalyticsLanguageCode(ev)
+			return nil
+		case schemas.UtteranceEvent_LanguageIdentification:
+			return deserializeCallAnalyticsLanguageIdentification(d, schemas.UtteranceEvent_LanguageIdentification, &v.LanguageIdentification)
+		case schemas.UtteranceEvent_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.UtteranceEvent_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		case schemas.UtteranceEvent_Sentiment:
+			var ev string
+			if err := d.ReadString(schemas.UtteranceEvent_Sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = Sentiment(ev)
+			return nil
+		case schemas.UtteranceEvent_Transcript:
+			v.Transcript = new(string)
+			return d.ReadString(schemas.UtteranceEvent_Transcript, v.Transcript)
+		case schemas.UtteranceEvent_UtteranceId:
+			v.UtteranceId = new(string)
+			return d.ReadString(schemas.UtteranceEvent_UtteranceId, v.UtteranceId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

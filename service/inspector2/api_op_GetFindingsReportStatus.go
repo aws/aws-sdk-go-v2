@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the status of a findings report.
@@ -33,6 +32,28 @@ type GetFindingsReportStatusInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFindingsReportStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetFindingsReportStatusRequest_reportId, *v.ReportId)
+	}
+}
+func (v *GetFindingsReportStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportStatusRequest_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.GetFindingsReportStatusRequest_reportId, v.ReportId)
+		}
+		return nil
+	})
 }
 
 type GetFindingsReportStatusOutput struct {
@@ -61,74 +82,87 @@ type GetFindingsReportStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsReportStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.GetFindingsReportStatusResponse_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.GetFindingsReportStatusResponse_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetFindingsReportStatusResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.GetFindingsReportStatusResponse_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetFindingsReportStatusResponse_reportId, *v.ReportId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFindingsReportStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetFindingsReportStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportStatusResponse_destination:
+			v.Destination = &types.Destination{}
+			return v.Destination.Deserialize(d)
+		case schemas.GetFindingsReportStatusResponse_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingsReportStatusResponse_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = types.ReportingErrorCode(ev)
+			return nil
+		case schemas.GetFindingsReportStatusResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetFindingsReportStatusResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetFindingsReportStatusResponse_filterCriteria:
+			v.FilterCriteria = &types.FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.GetFindingsReportStatusResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.GetFindingsReportStatusResponse_reportId, v.ReportId)
+		case schemas.GetFindingsReportStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingsReportStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExternalReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsReportStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportStatus, schemas.GetFindingsReportStatusRequest, schemas.GetFindingsReportStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsReportStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportStatus, schemas.GetFindingsReportStatusRequest, schemas.GetFindingsReportStatusResponse), output: &GetFindingsReportStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsReportStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFindingsReportStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsReportStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +177,8 @@ func (c *Client) addOperationGetFindingsReportStatusMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFindingsReportStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFindingsReportStatus",
-	}
 }

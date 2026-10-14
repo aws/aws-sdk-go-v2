@@ -4,13 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get a payment session.
@@ -51,27 +46,6 @@ type GetPaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPaymentSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPaymentSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPaymentSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentName != nil {
-		s.WriteString(schemas.GetPaymentSessionRequest_agentName, *v.AgentName)
-	}
-	if v.PaymentManagerArn != nil {
-		s.WriteString(schemas.GetPaymentSessionRequest_paymentManagerArn, *v.PaymentManagerArn)
-	}
-	if v.PaymentSessionId != nil {
-		s.WriteString(schemas.GetPaymentSessionRequest_paymentSessionId, *v.PaymentSessionId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.GetPaymentSessionRequest_userId, *v.UserId)
-	}
-}
-
 // Response structure for getting a payment session.
 type GetPaymentSessionOutput struct {
 
@@ -86,85 +60,29 @@ type GetPaymentSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPaymentSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPaymentSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPaymentSessionResponse_paymentSession:
-			v.PaymentSession = &types.PaymentSession{}
-			return v.PaymentSession.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPaymentSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentSession, schemas.GetPaymentSessionRequest, schemas.GetPaymentSessionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentSession{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentSession, schemas.GetPaymentSessionRequest, schemas.GetPaymentSessionResponse), output: &GetPaymentSessionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPaymentSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPaymentSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPaymentSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +97,8 @@ func (c *Client) addOperationGetPaymentSessionMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPaymentSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPaymentSession",
-	}
 }

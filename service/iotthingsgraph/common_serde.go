@@ -265,6 +265,7 @@ func serializeUrns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) 
 }
 
 func deserializeDependencyRevisions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DependencyRevision) error {
+	*v = make([]types.DependencyRevision, 0)
 	var vv types.DependencyRevision
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DependencyRevision{}
@@ -278,6 +279,7 @@ func deserializeDependencyRevisions(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeEntityDescriptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntityDescription) error {
+	*v = make([]types.EntityDescription, 0)
 	var vv types.EntityDescription
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EntityDescription{}
@@ -291,6 +293,7 @@ func deserializeEntityDescriptions(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeEntityFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntityFilter) error {
+	*v = make([]types.EntityFilter, 0)
 	var vv types.EntityFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EntityFilter{}
@@ -304,6 +307,7 @@ func deserializeEntityFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeEntityFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -317,6 +321,7 @@ func deserializeEntityFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeEntityTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntityType) error {
+	*v = make([]types.EntityType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -330,6 +335,7 @@ func deserializeEntityTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeFlowExecutionMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FlowExecutionMessage) error {
+	*v = make([]types.FlowExecutionMessage, 0)
 	var vv types.FlowExecutionMessage
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FlowExecutionMessage{}
@@ -343,6 +349,7 @@ func deserializeFlowExecutionMessages(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeFlowExecutionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FlowExecutionSummary) error {
+	*v = make([]types.FlowExecutionSummary, 0)
 	var vv types.FlowExecutionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FlowExecutionSummary{}
@@ -356,6 +363,7 @@ func deserializeFlowExecutionSummaries(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeFlowTemplateFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FlowTemplateFilter) error {
+	*v = make([]types.FlowTemplateFilter, 0)
 	var vv types.FlowTemplateFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FlowTemplateFilter{}
@@ -369,6 +377,7 @@ func deserializeFlowTemplateFilters(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeFlowTemplateFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -382,6 +391,7 @@ func deserializeFlowTemplateFilterValues(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeFlowTemplateSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FlowTemplateSummary) error {
+	*v = make([]types.FlowTemplateSummary, 0)
 	var vv types.FlowTemplateSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FlowTemplateSummary{}
@@ -395,6 +405,7 @@ func deserializeFlowTemplateSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -408,6 +419,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeSystemInstanceFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SystemInstanceFilter) error {
+	*v = make([]types.SystemInstanceFilter, 0)
 	var vv types.SystemInstanceFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SystemInstanceFilter{}
@@ -421,6 +433,7 @@ func deserializeSystemInstanceFilters(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeSystemInstanceFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -434,6 +447,7 @@ func deserializeSystemInstanceFilterValues(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeSystemInstanceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SystemInstanceSummary) error {
+	*v = make([]types.SystemInstanceSummary, 0)
 	var vv types.SystemInstanceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SystemInstanceSummary{}
@@ -447,6 +461,7 @@ func deserializeSystemInstanceSummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeSystemTemplateFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SystemTemplateFilter) error {
+	*v = make([]types.SystemTemplateFilter, 0)
 	var vv types.SystemTemplateFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SystemTemplateFilter{}
@@ -460,6 +475,7 @@ func deserializeSystemTemplateFilters(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeSystemTemplateFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -473,6 +489,7 @@ func deserializeSystemTemplateFilterValues(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeSystemTemplateSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SystemTemplateSummary) error {
+	*v = make([]types.SystemTemplateSummary, 0)
 	var vv types.SystemTemplateSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SystemTemplateSummary{}
@@ -486,6 +503,7 @@ func deserializeSystemTemplateSummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -499,6 +517,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -512,6 +531,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeThings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Thing) error {
+	*v = make([]types.Thing, 0)
 	var vv types.Thing
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Thing{}
@@ -525,6 +545,7 @@ func deserializeThings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 }
 
 func deserializeUrns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

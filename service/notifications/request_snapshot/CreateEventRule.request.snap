@@ -1,0 +1,5 @@
+POST /event-rules
+
+Content-Type: application/json
+
+{"eventPattern":"__EventPattern__","eventType":"__EventType__","notificationConfigurationArn":"__NotificationConfigurationArn__","regions":["__Member__","__Member__"],"source":"__Source__"}

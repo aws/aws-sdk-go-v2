@@ -5,12 +5,8 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,33 +53,6 @@ type ListRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRecoveryPointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRecoveryPointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRecoveryPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListRecoveryPointsRequest_endTime, *v.EndTime)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRecoveryPointsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NamespaceArn != nil {
-		s.WriteString(schemas.ListRecoveryPointsRequest_namespaceArn, *v.NamespaceArn)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.ListRecoveryPointsRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRecoveryPointsRequest_nextToken, *v.NextToken)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListRecoveryPointsRequest_startTime, *v.StartTime)
-	}
-}
-
 type ListRecoveryPointsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -100,84 +69,26 @@ type ListRecoveryPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRecoveryPointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRecoveryPointsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRecoveryPointsResponse_nextToken, v.NextToken)
-		case schemas.ListRecoveryPointsResponse_recoveryPoints:
-			return deserializeRecoveryPointList(d, schemas.ListRecoveryPointsResponse_recoveryPoints, &v.RecoveryPoints)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRecoveryPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPoints, schemas.ListRecoveryPointsRequest, schemas.ListRecoveryPointsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRecoveryPoints{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPoints, schemas.ListRecoveryPointsRequest, schemas.ListRecoveryPointsResponse), output: &ListRecoveryPointsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecoveryPoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecoveryPoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +101,6 @@ func (c *Client) addOperationListRecoveryPointsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -298,11 +203,3 @@ type ListRecoveryPointsAPIClient interface {
 }
 
 var _ ListRecoveryPointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRecoveryPoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRecoveryPoints",
-	}
-}

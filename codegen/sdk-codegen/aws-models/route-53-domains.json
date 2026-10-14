@@ -336,6 +336,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the domain name is available for registering.</p>\n         <note>\n            <p>You can register only domains designated as <code>AVAILABLE</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>AVAILABLE</dt>\n            <dd>\n               <p>The domain name is available.</p>\n            </dd>\n            <dt>AVAILABLE_RESERVED</dt>\n            <dd>\n               <p>The domain name is reserved under specific conditions.</p>\n            </dd>\n            <dt>AVAILABLE_PREORDER</dt>\n            <dd>\n               <p>The domain name is available and can be preordered.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name is available. Route 53 can return this response for a variety of\n\t\t\t\t\t\treasons, for example, the registry is performing maintenance. Try again\n\t\t\t\t\t\tlater.</p>\n            </dd>\n            <dt>INVALID_NAME_FOR_TLD</dt>\n            <dd>\n               <p>The TLD isn't valid. For example, it can contain characters that aren't allowed.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>RESERVED</dt>\n            <dd>\n               <p>The domain name has been reserved for another person or\n\t\t\t\t\t\torganization.</p>\n            </dd>\n            <dt>UNAVAILABLE</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_PREMIUM</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_RESTRICTED</dt>\n            <dd>\n               <p>The domain name is forbidden.</p>\n            </dd>\n         </dl>"
                     }
+                },
+                "Price": {
+                    "target": "com.amazonaws.route53domains#PriceWithCurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price to register the domain name, in the currency that <code>Currency</code>\n\t\t\tspecifies. If the domain has registry premium pricing, this price is different from the\n\t\t\tstandard rate for the TLD that <code>ListPrices</code> returns. Use\n\t\t\t\t<code>PriceType</code> to determine which rate applies.</p>\n         <p>This element is returned only when <code>Availability</code> is\n\t\t\t\t<code>AVAILABLE</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -402,6 +408,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides an explanation for when a domain can't be transferred.</p>"
                     }
+                },
+                "Price": {
+                    "target": "com.amazonaws.route53domains#PriceWithCurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price to transfer the domain name to Route 53, in the currency that\n\t\t\t\t<code>Currency</code> specifies. If the domain has registry premium pricing, this\n\t\t\tprice is different from the standard rate for the TLD that <code>ListPrices</code>\n\t\t\treturns. Use <code>PriceType</code> to determine which rate applies.</p>\n         <p>This element is returned only when Route 53 can determine whether the domain is\n\t\t\ttransferable.</p>"
+                    }
                 }
             },
             "traits": {
@@ -423,23 +435,33 @@
             "type": "structure",
             "members": {
                 "MaxPrice": {
-                    "target": "com.amazonaws.route53domains#Price",
+                    "target": "com.amazonaws.route53domains#ConsentPrice",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> Maximum amount the customer agreed to accept. </p>",
+                        "smithy.api#documentation": "<p> The maximum amount that you agree to accept. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Currency": {
                     "target": "com.amazonaws.route53domains#Currency",
                     "traits": {
-                        "smithy.api#documentation": "<p> Currency for the <code>MaxPrice</code>. </p>",
+                        "smithy.api#documentation": "<p> The currency for the <code>MaxPrice</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Customer's consent for the owner change request. </p>"
+                "smithy.api#documentation": "<p> The maximum amount that you agree to pay for an operation, and the\n\t\t\tcurrency for that amount. </p>"
+            }
+        },
+        "com.amazonaws.route53domains#ConsentPrice": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 2000000000.0
+                }
             }
         },
         "com.amazonaws.route53domains#ContactDetail": {
@@ -2409,13 +2431,21 @@
                 "Flags": {
                     "target": "com.amazonaws.route53domains#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of key. It can be either a KSK (key-signing-key, value 257) or ZSK\n\t\t\t(zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK if your DNS\n\t\t\tprovider isn't Route 53 and you don’t have KSK available.</p>\n         <p>If you have KSK and ZSK keys, always use KSK to create a delegations signer (DS)\n\t\t\trecord. If you have ZSK keys only – use ZSK to create a DS record.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-10-01",
+                            "message": "The DnssecKey response no longer returns the flags."
+                        },
+                        "smithy.api#documentation": "<p>The DNSKEY flags that indicate the key type. This field is deprecated; the\n\t\t\t<code>DnssecKey</code> response no longer returns the flags.</p>"
                     }
                 },
                 "PublicKey": {
                     "target": "com.amazonaws.route53domains#DnssecPublicKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base64-encoded public key part of the key pair that is passed to the registry\n\t\t\t.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-10-01",
+                            "message": "The DnssecKey response no longer returns the public key."
+                        },
+                        "smithy.api#documentation": "<p>The base64-encoded public key of the key pair. This field is deprecated; the\n\t\t\t<code>DnssecKey</code> response no longer returns the public key.</p>"
                     }
                 },
                 "DigestType": {
@@ -2607,7 +2637,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53domains#DomainPriceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the TLD for which the prices apply.</p>"
+                        "smithy.api#documentation": "<p>The TLD or domain name that the prices apply to.</p>"
                     }
                 },
                 "RegistrationPrice": {
@@ -2642,7 +2672,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the domain price associated with a TLD.</p>"
+                "smithy.api#documentation": "<p>Information about the prices associated with a TLD or a domain name.</p>"
             }
         },
         "com.amazonaws.route53domains#DomainPriceList": {
@@ -2681,7 +2711,13 @@
                 "Availability": {
                     "target": "com.amazonaws.route53domains#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the domain name is available for registering.</p>\n         <note>\n            <p>You can register only the domains that are designated as\n\t\t\t\t<code>AVAILABLE</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>AVAILABLE</dt>\n            <dd>\n               <p>The domain name is available.</p>\n            </dd>\n            <dt>AVAILABLE_RESERVED</dt>\n            <dd>\n               <p>The domain name is reserved under specific conditions.</p>\n            </dd>\n            <dt>AVAILABLE_PREORDER</dt>\n            <dd>\n               <p>The domain name is available and can be preordered.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name is available. Route 53 can return this response for a variety of\n\t\t\t\t\t\treasons, for example, the registry is performing maintenance. Try again\n\t\t\t\t\t\tlater.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>RESERVED</dt>\n            <dd>\n               <p>The domain name has been reserved for another person or\n\t\t\t\t\t\torganization.</p>\n            </dd>\n            <dt>UNAVAILABLE</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_PREMIUM</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_RESTRICTED</dt>\n            <dd>\n               <p>The domain name is forbidden.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies whether the domain name is available for registering. This element is\n\t\t\tpopulated only if you specified <code>true</code> for <code>OnlyAvailable</code> in the\n\t\t\trequest.</p>\n         <note>\n            <p>You can register only the domains that are designated as\n\t\t\t\t<code>AVAILABLE</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>AVAILABLE</dt>\n            <dd>\n               <p>The domain name is available.</p>\n            </dd>\n            <dt>AVAILABLE_RESERVED</dt>\n            <dd>\n               <p>The domain name is reserved under specific conditions.</p>\n            </dd>\n            <dt>AVAILABLE_PREORDER</dt>\n            <dd>\n               <p>The domain name is available and can be preordered.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name is available. Route 53 can return this response for a variety of\n\t\t\t\t\t\treasons, for example, the registry is performing maintenance. Try again\n\t\t\t\t\t\tlater.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>RESERVED</dt>\n            <dd>\n               <p>The domain name has been reserved for another person or\n\t\t\t\t\t\torganization.</p>\n            </dd>\n            <dt>UNAVAILABLE</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_PREMIUM</dt>\n            <dd>\n               <p>The domain name is not available.</p>\n            </dd>\n            <dt>UNAVAILABLE_RESTRICTED</dt>\n            <dd>\n               <p>The domain name is forbidden.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "Price": {
+                    "target": "com.amazonaws.route53domains#PriceWithCurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price to register the suggested domain name, in the currency that\n\t\t\t<code>Currency</code> specifies. This element is populated only if you specified\n\t\t\t<code>true</code> for <code>OnlyAvailable</code> in the request.</p>"
                     }
                 }
             },
@@ -3446,6 +3482,61 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53domains#GetDomainPrices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53domains#GetDomainPricesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53domains#GetDomainPricesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53domains#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#TLDInMaintenance"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#UnsupportedTLD"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the following prices for the specified domain:</p>\n         <ul>\n            <li>\n               <p>Registration</p>\n            </li>\n            <li>\n               <p>Transfer</p>\n            </li>\n            <li>\n               <p>Owner change</p>\n            </li>\n            <li>\n               <p>Renewal</p>\n            </li>\n            <li>\n               <p>Restoration</p>\n            </li>\n         </ul>\n         <p>For most domains, the prices match the standard prices for the TLD that the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListPrices.html\">ListPrices</a> operation returns. For a premium domain, the registry sets the\n\t\t\tprice individually. Premium prices might differ from the standard prices and can change\n\t\t\tover time.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.route53domains#GetDomainPricesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.route53domains#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that you want to get the prices for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The GetDomainPrices request includes the following element.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53domains#GetDomainPricesResponse": {
+            "type": "structure",
+            "members": {
+                "DomainPrice": {
+                    "target": "com.amazonaws.route53domains#DomainPrice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration, transfer, owner change, renewal, and restoration prices for\n\t\t\tthe specified domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The GetDomainPrices response includes the following element.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53domains#GetDomainSuggestions": {
             "type": "operation",
             "input": {
@@ -3490,8 +3581,14 @@
                 "OnlyAvailable": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>OnlyAvailable</code> is <code>true</code>, Route 53 returns only domain names\n\t\t\tthat are available. If <code>OnlyAvailable</code> is <code>false</code>, Route 53\n\t\t\treturns domain names without checking whether they're available to be registered. To\n\t\t\tdetermine whether the domain is available, you can call\n\t\t\t\t<code>checkDomainAvailability</code> for each suggestion.</p>",
+                        "smithy.api#documentation": "<p>If <code>OnlyAvailable</code> is <code>true</code>, Route 53 returns only domain names\n\t\t\tthat are available. If <code>OnlyAvailable</code> is <code>false</code>, Route 53\n\t\t\treturns domain names without checking whether they're available to be registered. To\n\t\t\tdetermine whether the domain is available, call <code>checkDomainAvailability</code> for\n\t\t\teach suggestion.</p>\n         <p>If <code>OnlyAvailable</code> is <code>false</code>, Route 53 does not return pricing\n\t\t\tinformation for the suggested domain names.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OnlyStandardPrices": {
+                    "target": "com.amazonaws.route53domains#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, Route 53 returns only domain names that are priced at the\n\t\t\tstandard registration rate for their TLD. If <code>false</code>, Route 53 includes\n\t\t\tdomain names with premium pricing in the suggestions list. The default is\n\t\t\t<code>true</code>.</p>"
                     }
                 }
             },
@@ -3665,7 +3762,7 @@
         "com.amazonaws.route53domains#LangCode": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^|[A-Za-z]{2,3}$"
+                "smithy.api#pattern": "^(|[A-Za-z]{2,3})$"
             }
         },
         "com.amazonaws.route53domains#ListDomains": {
@@ -3898,7 +3995,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the following prices for either all the TLDs supported by Route 53, or\n\t\t\tthe specified TLD:</p>\n         <ul>\n            <li>\n               <p>Registration</p>\n            </li>\n            <li>\n               <p>Transfer</p>\n            </li>\n            <li>\n               <p>Owner change</p>\n            </li>\n            <li>\n               <p>Domain renewal</p>\n            </li>\n            <li>\n               <p>Domain restoration</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists the following prices for either all the TLDs supported by Route 53, or\n\t\t\tthe specified TLD:</p>\n         <ul>\n            <li>\n               <p>Registration</p>\n            </li>\n            <li>\n               <p>Transfer</p>\n            </li>\n            <li>\n               <p>Owner change</p>\n            </li>\n            <li>\n               <p>Renewal</p>\n            </li>\n            <li>\n               <p>Restoration</p>\n            </li>\n         </ul>\n         <note>\n            <p>The prices that <code>ListPrices</code> returns are the standard rates for a TLD.\n\t\t\t\t\t<code>ListPrices</code> doesn't return registry premium prices, which apply to\n\t\t\t\tindividual domain names rather than to a TLD. To get accurate pricing for a specific\n\t\t\t\tdomain name, including premium prices, call <code>GetDomainPrices</code>.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextPageMarker",
@@ -4380,6 +4477,23 @@
                 }
             }
         },
+        "com.amazonaws.route53domains#PriceType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "REGISTRY_PREMIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRY_PREMIUM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53domains#PriceWithCurrency": {
             "type": "structure",
             "members": {
@@ -4396,6 +4510,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The currency specifier.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PriceType": {
+                    "target": "com.amazonaws.route53domains#PriceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the domain has standard or premium pricing. A value of\n\t\t\t<code>STANDARD</code> means the domain is priced at the regular rate for its TLD. A\n\t\t\tvalue of <code>REGISTRY_PREMIUM</code> means the domain has registry premium pricing,\n\t\t\twhich may be different than the standard rate.</p>"
                     }
                 }
             },
@@ -4585,6 +4705,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the billing contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
+                },
+                "Consent": {
+                    "target": "com.amazonaws.route53domains#Consent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum price that you agree to pay to register the domain name. This element is\n\t\t\trequired if the domain has registry premium pricing, and optional if the domain\n\t\t\tis priced at the standard rate for its TLD. If you include it and the registration\n\t\t\tprice is more than <code>MaxPrice</code>, the request fails.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4724,6 +4850,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The year when the registration for the domain is set to expire. This value must match\n\t\t\tthe current expiration date for the domain.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Consent": {
+                    "target": "com.amazonaws.route53domains#Consent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum price that you agree to pay to renew the domain name. This element is\n\t\t\trequired if the domain has registry premium pricing, and optional if the domain\n\t\t\tis priced at the standard rate for its TLD. If you include it and the renewal\n\t\t\tprice is more than <code>MaxPrice</code>, the request fails.</p>"
                     }
                 }
             },
@@ -4952,6 +5084,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53domains#GetDomainDetail"
+                },
+                {
+                    "target": "com.amazonaws.route53domains#GetDomainPrices"
                 },
                 {
                     "target": "com.amazonaws.route53domains#GetDomainSuggestions"
@@ -6115,6 +6250,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tWhether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar or for our registrar associate,\n\t\t\tGandi. If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the billing contact.\n\t\t</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, billing, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>"
                     }
+                },
+                "Consent": {
+                    "target": "com.amazonaws.route53domains#Consent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum price that you agree to pay to transfer the domain name to Route 53. This element is\n\t\t\trequired if the domain has registry premium pricing, and optional if the domain\n\t\t\tis priced at the standard rate for its TLD. If you include it and the transfer\n\t\t\tprice is more than <code>MaxPrice</code>, the request fails.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6245,10 +6386,16 @@
                     "traits": {
                         "smithy.api#enumValue": "PREMIUM_DOMAIN"
                     }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Whether the domain name can be transferred to Route 53.</p>\n         <note>\n            <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> or\n\t\t\t\t\t<code>Transferable</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>TRANSFERABLE</dt>\n            <dd>\n               <p>The domain name can be transferred to Route 53.</p>\n            </dd>\n            <dt>UNTRANSFERRABLE</dt>\n            <dd>\n               <p>The domain name can't be transferred to Route 53.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't respond in time or didn't provide a definitive answer about domain transferability, which can occur due to registry maintenance or temporary delays.</p>\n            </dd>\n            <dt>DOMAIN_IN_OWN_ACCOUNT</dt>\n            <dd>\n               <p>The domain already exists in the current Amazon Web Services account.</p>\n            </dd>\n            <dt>DOMAIN_IN_ANOTHER_ACCOUNT</dt>\n            <dd>\n               <p> The domain exists in another Amazon Web Services account.</p>\n            </dd>\n            <dt>PREMIUM_DOMAIN</dt>\n            <dd>\n               <p>Premium domain transfer is not supported.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>Whether the domain name can be transferred to Route 53.</p>\n         <note>\n            <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> or\n\t\t\t\t\t<code>Transferable</code>.</p>\n         </note>\n         <p>Valid values:</p>\n         <dl>\n            <dt>TRANSFERABLE</dt>\n            <dd>\n               <p>The domain name can be transferred to Route 53.</p>\n            </dd>\n            <dt>UNTRANSFERRABLE</dt>\n            <dd>\n               <p>The domain name can't be transferred to Route 53.</p>\n            </dd>\n            <dt>DONT_KNOW</dt>\n            <dd>\n               <p>The TLD registry didn't reply with a definitive answer about whether the\n\t\t\t\t\t\tdomain name can be transferred. Route 53 can return this response for a\n\t\t\t\t\t\tvariety of reasons, for example, the registry is performing maintenance. Try\n\t\t\t\t\t\tagain later.</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>The TLD registry didn't return a response in the expected amount of time.\n\t\t\t\t\t\tWhen the response is delayed, it usually takes just a few extra seconds. You\n\t\t\t\t\t\tcan resubmit the request immediately.</p>\n            </dd>\n            <dt>DOMAIN_IN_OWN_ACCOUNT</dt>\n            <dd>\n               <p>The domain already exists in the current Amazon Web Services account.</p>\n            </dd>\n            <dt>DOMAIN_IN_ANOTHER_ACCOUNT</dt>\n            <dd>\n               <p> The domain exists in another Amazon Web Services account.</p>\n            </dd>\n            <dt>PREMIUM_DOMAIN</dt>\n            <dd>\n               <p>Premium domain transfer is not supported.</p>\n            </dd>\n         </dl>"
             }
         },
         "com.amazonaws.route53domains#UnsupportedTLD": {
@@ -6411,7 +6558,7 @@
                 "Consent": {
                     "target": "com.amazonaws.route53domains#Consent",
                     "traits": {
-                        "smithy.api#documentation": "<p> Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).</p>"
+                        "smithy.api#documentation": "<p> The maximum amount that you agree to pay for the owner change. Required if the domain is not free (consent price is more than USD $0.00).</p>"
                     }
                 },
                 "BillingContact": {

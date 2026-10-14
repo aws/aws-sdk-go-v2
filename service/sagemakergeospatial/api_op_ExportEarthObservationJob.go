@@ -5,12 +5,8 @@ package sagemakergeospatial
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,54 +54,6 @@ type ExportEarthObservationJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportEarthObservationJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportEarthObservationJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportEarthObservationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ExportEarthObservationJobInput_Arn, *v.Arn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ExportEarthObservationJobInput_ClientToken, *v.ClientToken)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.ExportEarthObservationJobInput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.ExportSourceImages != nil {
-		s.WriteBool(schemas.ExportEarthObservationJobInput_ExportSourceImages, *v.ExportSourceImages)
-	}
-	if v.OutputConfig != nil {
-		s.WriteStruct(schemas.ExportEarthObservationJobInput_OutputConfig)
-		v.OutputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ExportEarthObservationJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportEarthObservationJobInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportEarthObservationJobInput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ExportEarthObservationJobInput_Arn, v.Arn)
-		case schemas.ExportEarthObservationJobInput_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.ExportEarthObservationJobInput_ClientToken, v.ClientToken)
-		case schemas.ExportEarthObservationJobInput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.ExportEarthObservationJobInput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.ExportEarthObservationJobInput_ExportSourceImages:
-			v.ExportSourceImages = new(bool)
-			return d.ReadBool(schemas.ExportEarthObservationJobInput_ExportSourceImages, v.ExportSourceImages)
-		case schemas.ExportEarthObservationJobInput_OutputConfig:
-			v.OutputConfig = &types.OutputConfigInput{}
-			return v.OutputConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type ExportEarthObservationJobOutput struct {
 
 	// The output Amazon Resource Name (ARN) of the Earth Observation job being
@@ -143,120 +91,23 @@ type ExportEarthObservationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportEarthObservationJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportEarthObservationJobOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportEarthObservationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ExportEarthObservationJobOutput_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ExportEarthObservationJobOutput_CreationTime, *v.CreationTime)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.ExportEarthObservationJobOutput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.ExportSourceImages != nil {
-		s.WriteBool(schemas.ExportEarthObservationJobOutput_ExportSourceImages, *v.ExportSourceImages)
-	}
-	if v.ExportStatus != "" {
-		s.WriteString(schemas.ExportEarthObservationJobOutput_ExportStatus, string(v.ExportStatus))
-	}
-	if v.OutputConfig != nil {
-		s.WriteStruct(schemas.ExportEarthObservationJobOutput_OutputConfig)
-		v.OutputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ExportEarthObservationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportEarthObservationJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportEarthObservationJobOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ExportEarthObservationJobOutput_Arn, v.Arn)
-		case schemas.ExportEarthObservationJobOutput_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ExportEarthObservationJobOutput_CreationTime, v.CreationTime)
-		case schemas.ExportEarthObservationJobOutput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.ExportEarthObservationJobOutput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.ExportEarthObservationJobOutput_ExportSourceImages:
-			v.ExportSourceImages = new(bool)
-			return d.ReadBool(schemas.ExportEarthObservationJobOutput_ExportSourceImages, v.ExportSourceImages)
-		case schemas.ExportEarthObservationJobOutput_ExportStatus:
-			var ev string
-			if err := d.ReadString(schemas.ExportEarthObservationJobOutput_ExportStatus, &ev); err != nil {
-				return err
-			}
-			v.ExportStatus = types.EarthObservationJobExportStatus(ev)
-			return nil
-		case schemas.ExportEarthObservationJobOutput_OutputConfig:
-			v.OutputConfig = &types.OutputConfigInput{}
-			return v.OutputConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExportEarthObservationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportEarthObservationJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportEarthObservationJob, schemas.ExportEarthObservationJobInput, schemas.ExportEarthObservationJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportEarthObservationJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportEarthObservationJob, schemas.ExportEarthObservationJobInput, schemas.ExportEarthObservationJobOutput), output: &ExportEarthObservationJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportEarthObservationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -266,12 +117,6 @@ func (c *Client) addOperationExportEarthObservationJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpExportEarthObservationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportEarthObservationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -284,12 +129,6 @@ func (c *Client) addOperationExportEarthObservationJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -329,12 +168,4 @@ func (m *idempotencyToken_initializeOpExportEarthObservationJob) HandleInitializ
 }
 func addIdempotencyToken_opExportEarthObservationJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpExportEarthObservationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opExportEarthObservationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExportEarthObservationJob",
-	}
 }

@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.CreateModelManifest
+
+{"__type":"InvalidSignalsException","invalidSignals":[{"name":"__Name__","reason":"__Reason__"},{"name":"__Name__","reason":"__Reason__"}],"message":"__Message__"}

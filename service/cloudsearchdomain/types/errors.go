@@ -35,6 +35,20 @@ func (e *DocumentServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DocumentServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentServiceException_message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DocumentServiceException_status, *v.Status)
+	}
+}
 func (v *DocumentServiceException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentServiceException, func(s *smithy.Schema) error {
 		switch s {
@@ -74,6 +88,17 @@ func (e *SearchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SearchException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SearchException_message, *v.Message)
+	}
+}
 func (v *SearchException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchException, func(s *smithy.Schema) error {
 		switch s {

@@ -5,11 +5,7 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a self-service action with a provisioning artifact.
@@ -60,30 +56,6 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateServiceActionWithProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateServiceActionWithProvisioningArtifactInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateServiceActionWithProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ProductId, *v.ProductId)
-	}
-	if v.ProvisioningArtifactId != nil {
-		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
-	}
-	if v.ServiceActionId != nil {
-		s.WriteString(schemas.AssociateServiceActionWithProvisioningArtifactInput_ServiceActionId, *v.ServiceActionId)
-	}
-}
-
 type AssociateServiceActionWithProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,70 +63,23 @@ type AssociateServiceActionWithProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateServiceActionWithProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateServiceActionWithProvisioningArtifactOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceActionWithProvisioningArtifact, schemas.AssociateServiceActionWithProvisioningArtifactInput, schemas.AssociateServiceActionWithProvisioningArtifactOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateServiceActionWithProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceActionWithProvisioningArtifact, schemas.AssociateServiceActionWithProvisioningArtifactInput, schemas.AssociateServiceActionWithProvisioningArtifactOutput), output: &AssociateServiceActionWithProvisioningArtifactOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateServiceActionWithProvisioningArtifact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -164,12 +89,6 @@ func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddl
 		return err
 	}
 	if err = addOpAssociateServiceActionWithProvisioningArtifactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateServiceActionWithProvisioningArtifact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +101,6 @@ func (c *Client) addOperationAssociateServiceActionWithProvisioningArtifactMiddl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -227,12 +140,4 @@ func (m *idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArti
 }
 func addIdempotencyToken_opAssociateServiceActionWithProvisioningArtifactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateServiceActionWithProvisioningArtifact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateServiceActionWithProvisioningArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateServiceActionWithProvisioningArtifact",
-	}
 }

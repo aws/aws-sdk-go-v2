@@ -5,10 +5,11 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/document"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing flow. Supply only the fields you want to change. Updates
@@ -64,6 +65,33 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateFlowRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateFlowRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowRequest_Description, *v.Description)
+	}
+	if v.FlowDefinition != nil {
+		s.WriteDocument(schemas.UpdateFlowRequest_FlowDefinition, &smithydocument.Opaque{Value: v.FlowDefinition})
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.UpdateFlowRequest_FlowId, *v.FlowId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowRequest_Name, *v.Name)
+	}
+}
+
 type UpdateFlowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -88,65 +116,59 @@ type UpdateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFlowResponse_Arn, *v.Arn)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.UpdateFlowResponse_FlowId, *v.FlowId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateFlowResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateFlowResponse_Status, v.Status)
+	}
+}
+func (v *UpdateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_Arn, v.Arn)
+		case schemas.UpdateFlowResponse_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_FlowId, v.FlowId)
+		case schemas.UpdateFlowResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateFlowResponse_RequestId, v.RequestId)
+		case schemas.UpdateFlowResponse_Status:
+			return d.ReadInt32(schemas.UpdateFlowResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse), output: &UpdateFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -156,12 +178,6 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpUpdateFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +190,6 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -219,12 +229,4 @@ func (m *idempotencyToken_initializeOpUpdateFlow) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opUpdateFlowMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFlow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFlow",
-	}
 }

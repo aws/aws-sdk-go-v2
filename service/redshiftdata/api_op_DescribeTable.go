@@ -5,12 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the detailed information about a table from metadata in the cluster.
@@ -118,45 +114,6 @@ type DescribeTableInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTableInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTableRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.DescribeTableRequest_ClusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ConnectedDatabase != nil {
-		s.WriteString(schemas.DescribeTableRequest_ConnectedDatabase, *v.ConnectedDatabase)
-	}
-	if v.Database != nil {
-		s.WriteString(schemas.DescribeTableRequest_Database, *v.Database)
-	}
-	if v.DbUser != nil {
-		s.WriteString(schemas.DescribeTableRequest_DbUser, *v.DbUser)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.DescribeTableRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeTableRequest_NextToken, *v.NextToken)
-	}
-	if v.Schema != nil {
-		s.WriteString(schemas.DescribeTableRequest_Schema, *v.Schema)
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.DescribeTableRequest_SecretArn, *v.SecretArn)
-	}
-	if v.Table != nil {
-		s.WriteString(schemas.DescribeTableRequest_Table, *v.Table)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.DescribeTableRequest_WorkgroupName, *v.WorkgroupName)
-	}
-}
-
 type DescribeTableOutput struct {
 
 	// A list of columns in the table.
@@ -178,90 +135,29 @@ type DescribeTableOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTableResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTableResponse_ColumnList:
-			return deserializeColumnList(d, schemas.DescribeTableResponse_ColumnList, &v.ColumnList)
-		case schemas.DescribeTableResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeTableResponse_NextToken, v.NextToken)
-		case schemas.DescribeTableResponse_TableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.DescribeTableResponse_TableName, v.TableName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTable{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTable, schemas.DescribeTableRequest, schemas.DescribeTableResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTable{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTable, schemas.DescribeTableRequest, schemas.DescribeTableResponse), output: &DescribeTableOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,12 +170,6 @@ func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -377,11 +267,3 @@ type DescribeTableAPIClient interface {
 }
 
 var _ DescribeTableAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTable",
-	}
-}

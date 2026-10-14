@@ -1,0 +1,3 @@
+DELETE /DeleteComponent?componentBuildVersionArn=__ComponentBuildVersionArn__
+
+

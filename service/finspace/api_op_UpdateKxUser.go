@@ -5,11 +5,7 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the user details. You can only update the IAM role associated with a
@@ -52,27 +48,6 @@ type UpdateKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKxUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKxUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateKxUserRequest_clientToken, *v.ClientToken)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.UpdateKxUserRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.IamRole != nil {
-		s.WriteString(schemas.UpdateKxUserRequest_iamRole, *v.IamRole)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.UpdateKxUserRequest_userName, *v.UserName)
-	}
-}
-
 type UpdateKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
@@ -96,85 +71,26 @@ type UpdateKxUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKxUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKxUserResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.UpdateKxUserResponse_environmentId, v.EnvironmentId)
-		case schemas.UpdateKxUserResponse_iamRole:
-			v.IamRole = new(string)
-			return d.ReadString(schemas.UpdateKxUserResponse_iamRole, v.IamRole)
-		case schemas.UpdateKxUserResponse_userArn:
-			v.UserArn = new(string)
-			return d.ReadString(schemas.UpdateKxUserResponse_userArn, v.UserArn)
-		case schemas.UpdateKxUserResponse_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.UpdateKxUserResponse_userName, v.UserName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKxUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxUser, schemas.UpdateKxUserRequest, schemas.UpdateKxUserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxUser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxUser, schemas.UpdateKxUserRequest, schemas.UpdateKxUserResponse), output: &UpdateKxUserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -184,12 +100,6 @@ func (c *Client) addOperationUpdateKxUserMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpUpdateKxUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,12 +112,6 @@ func (c *Client) addOperationUpdateKxUserMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,12 +151,4 @@ func (m *idempotencyToken_initializeOpUpdateKxUser) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opUpdateKxUserMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateKxUser{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateKxUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateKxUser",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationDateTime":946684800,"description":"__Description__","failureReasons":["__Member__","__Member__"],"generationDataSource":{"conversationLogsDataSource":{"botAliasId":"__BotAliasId__","botId":"__BotId__","filter":{"endTime":946684800,"inputMode":"Speech","startTime":946684800},"localeId":"__LocaleId__"}},"lastUpdatedDateTime":946684800,"roleArn":"__RoleArn__","storageLocation":{"kmsKeyArn":"__KmsKeyArn__","s3BucketName":"__S3BucketName__","s3Path":"__S3Path__"},"testSetGenerationId":"__TestSetGenerationId__","testSetGenerationStatus":"Generating","testSetId":"__TestSetId__","testSetName":"__TestSetName__"}

@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets code to perform a specified mapping.
@@ -62,6 +61,31 @@ type GetPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalPlanOptionsMap(s, schemas.GetPlanRequest_AdditionalPlanOptionsMap, v.AdditionalPlanOptionsMap)
+	if v.Language != "" {
+		s.WriteString(schemas.GetPlanRequest_Language, string(v.Language))
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.GetPlanRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMappingList(s, schemas.GetPlanRequest_Mapping, v.Mapping)
+	serializeCatalogEntries(s, schemas.GetPlanRequest_Sinks, v.Sinks)
+	if v.Source != nil {
+		s.WriteStruct(schemas.GetPlanRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetPlanOutput struct {
 
 	// A Python script to perform the mapping.
@@ -76,77 +100,54 @@ type GetPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PythonScript != nil {
+		s.WriteString(schemas.GetPlanResponse_PythonScript, *v.PythonScript)
+	}
+	if v.ScalaCode != nil {
+		s.WriteString(schemas.GetPlanResponse_ScalaCode, *v.ScalaCode)
+	}
+}
+func (v *GetPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanResponse_PythonScript:
+			v.PythonScript = new(string)
+			return d.ReadString(schemas.GetPlanResponse_PythonScript, v.PythonScript)
+		case schemas.GetPlanResponse_ScalaCode:
+			v.ScalaCode = new(string)
+			return d.ReadString(schemas.GetPlanResponse_ScalaCode, v.ScalaCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse), output: &GetPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +162,8 @@ func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlan",
-	}
 }

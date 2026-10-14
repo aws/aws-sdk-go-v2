@@ -5,12 +5,8 @@ package braket
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for tasks that match the specified filter values.
@@ -48,37 +44,6 @@ type SearchQuantumTasksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchQuantumTasksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchQuantumTasksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchQuantumTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchQuantumTasksFilterList(s, schemas.SearchQuantumTasksRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchQuantumTasksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchQuantumTasksRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *SearchQuantumTasksInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchQuantumTasksRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchQuantumTasksRequest_filters:
-			return deserializeSearchQuantumTasksFilterList(d, schemas.SearchQuantumTasksRequest_filters, &v.Filters)
-		case schemas.SearchQuantumTasksRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.SearchQuantumTasksRequest_maxResults, v.MaxResults)
-		case schemas.SearchQuantumTasksRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchQuantumTasksRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type SearchQuantumTasksOutput struct {
 
 	// An array of QuantumTaskSummary objects for quantum tasks that match the
@@ -98,99 +63,29 @@ type SearchQuantumTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchQuantumTasksOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchQuantumTasksResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchQuantumTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchQuantumTasksResponse_nextToken, *v.NextToken)
-	}
-	serializeQuantumTaskSummaryList(s, schemas.SearchQuantumTasksResponse_quantumTasks, v.QuantumTasks)
-}
-func (v *SearchQuantumTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchQuantumTasksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchQuantumTasksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchQuantumTasksResponse_nextToken, v.NextToken)
-		case schemas.SearchQuantumTasksResponse_quantumTasks:
-			return deserializeQuantumTaskSummaryList(d, schemas.SearchQuantumTasksResponse_quantumTasks, &v.QuantumTasks)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchQuantumTasks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuantumTasks, schemas.SearchQuantumTasksRequest, schemas.SearchQuantumTasksResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchQuantumTasks{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuantumTasks, schemas.SearchQuantumTasksRequest, schemas.SearchQuantumTasksResponse), output: &SearchQuantumTasksOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchQuantumTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchQuantumTasksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchQuantumTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,12 +98,6 @@ func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -310,11 +199,3 @@ type SearchQuantumTasksAPIClient interface {
 }
 
 var _ SearchQuantumTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchQuantumTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchQuantumTasks",
-	}
-}

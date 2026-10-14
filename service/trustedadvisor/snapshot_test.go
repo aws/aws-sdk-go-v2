@@ -170,6 +170,18 @@ func TestCheckSnapshot_ListRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRecommendationsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecommendationsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecommendationsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateOrganizationRecommendationLifecycle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateOrganizationRecommendationLifecycle(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_ListRecommendations(t *testing.T) {
 	_, err := svc.ListRecommendations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecommendationsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecommendationsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecommendationsForResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the listeners for a custom routing accelerator.
@@ -45,6 +45,24 @@ type ListCustomRoutingListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingListenersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingListenersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingListenersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.ListCustomRoutingListenersRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomRoutingListenersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingListenersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCustomRoutingListenersOutput struct {
 
 	// The list of listeners for a custom routing accelerator.
@@ -60,77 +78,51 @@ type ListCustomRoutingListenersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingListenersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingListenersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingListeners(s, schemas.ListCustomRoutingListenersResponse_Listeners, v.Listeners)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingListenersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomRoutingListenersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomRoutingListenersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomRoutingListenersResponse_Listeners:
+			return deserializeCustomRoutingListeners(d, schemas.ListCustomRoutingListenersResponse_Listeners, &v.Listeners)
+		case schemas.ListCustomRoutingListenersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomRoutingListenersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingListeners, schemas.ListCustomRoutingListenersRequest, schemas.ListCustomRoutingListenersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingListeners, schemas.ListCustomRoutingListenersRequest, schemas.ListCustomRoutingListenersResponse), output: &ListCustomRoutingListenersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomRoutingListeners{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomRoutingListeners"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCustomRoutingListenersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomRoutingListeners(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +135,6 @@ func (c *Client) addOperationListCustomRoutingListenersMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +239,3 @@ type ListCustomRoutingListenersAPIClient interface {
 }
 
 var _ ListCustomRoutingListenersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCustomRoutingListeners(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCustomRoutingListeners",
-	}
-}

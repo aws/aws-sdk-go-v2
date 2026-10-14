@@ -4,13 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the lakehouse configuration for a namespace. This operation allows you
@@ -65,33 +60,6 @@ type UpdateLakehouseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLakehouseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateLakehouseConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateLakehouseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogName != nil {
-		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_catalogName, *v.CatalogName)
-	}
-	if v.DryRun != nil {
-		s.WriteBool(schemas.UpdateLakehouseConfigurationRequest_dryRun, *v.DryRun)
-	}
-	if v.LakehouseIdcApplicationArn != nil {
-		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseIdcApplicationArn, *v.LakehouseIdcApplicationArn)
-	}
-	if v.LakehouseIdcRegistration != "" {
-		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseIdcRegistration, string(v.LakehouseIdcRegistration))
-	}
-	if v.LakehouseRegistration != "" {
-		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseRegistration, string(v.LakehouseRegistration))
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_namespaceName, *v.NamespaceName)
-	}
-}
-
 type UpdateLakehouseConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the
@@ -115,94 +83,29 @@ type UpdateLakehouseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLakehouseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateLakehouseConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateLakehouseConfigurationResponse_catalogArn:
-			v.CatalogArn = new(string)
-			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_catalogArn, v.CatalogArn)
-		case schemas.UpdateLakehouseConfigurationResponse_lakehouseIdcApplicationArn:
-			v.LakehouseIdcApplicationArn = new(string)
-			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_lakehouseIdcApplicationArn, v.LakehouseIdcApplicationArn)
-		case schemas.UpdateLakehouseConfigurationResponse_lakehouseRegistrationStatus:
-			v.LakehouseRegistrationStatus = new(string)
-			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_lakehouseRegistrationStatus, v.LakehouseRegistrationStatus)
-		case schemas.UpdateLakehouseConfigurationResponse_namespaceName:
-			v.NamespaceName = new(string)
-			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_namespaceName, v.NamespaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateLakehouseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLakehouseConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLakehouseConfiguration, schemas.UpdateLakehouseConfigurationRequest, schemas.UpdateLakehouseConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLakehouseConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLakehouseConfiguration, schemas.UpdateLakehouseConfigurationRequest, schemas.UpdateLakehouseConfigurationResponse), output: &UpdateLakehouseConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLakehouseConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLakehouseConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLakehouseConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,22 +120,8 @@ func (c *Client) addOperationUpdateLakehouseConfigurationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLakehouseConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLakehouseConfiguration",
-	}
 }

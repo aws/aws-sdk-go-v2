@@ -5,12 +5,8 @@ package migrationhubstrategy
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of all the application components (processes).
@@ -59,63 +55,6 @@ type ListApplicationComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationComponentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationComponentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationComponentCriteria != "" {
-		s.WriteString(schemas.ListApplicationComponentsRequest_applicationComponentCriteria, string(v.ApplicationComponentCriteria))
-	}
-	if v.FilterValue != nil {
-		s.WriteString(schemas.ListApplicationComponentsRequest_filterValue, *v.FilterValue)
-	}
-	serializeGroupIds(s, schemas.ListApplicationComponentsRequest_groupIdFilter, v.GroupIdFilter)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListApplicationComponentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationComponentsRequest_nextToken, *v.NextToken)
-	}
-	if v.Sort != "" {
-		s.WriteString(schemas.ListApplicationComponentsRequest_sort, string(v.Sort))
-	}
-}
-func (v *ListApplicationComponentsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationComponentsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationComponentsRequest_applicationComponentCriteria:
-			var ev string
-			if err := d.ReadString(schemas.ListApplicationComponentsRequest_applicationComponentCriteria, &ev); err != nil {
-				return err
-			}
-			v.ApplicationComponentCriteria = types.ApplicationComponentCriteria(ev)
-			return nil
-		case schemas.ListApplicationComponentsRequest_filterValue:
-			v.FilterValue = new(string)
-			return d.ReadString(schemas.ListApplicationComponentsRequest_filterValue, v.FilterValue)
-		case schemas.ListApplicationComponentsRequest_groupIdFilter:
-			return deserializeGroupIds(d, schemas.ListApplicationComponentsRequest_groupIdFilter, &v.GroupIdFilter)
-		case schemas.ListApplicationComponentsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListApplicationComponentsRequest_maxResults, v.MaxResults)
-		case schemas.ListApplicationComponentsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationComponentsRequest_nextToken, v.NextToken)
-		case schemas.ListApplicationComponentsRequest_sort:
-			var ev string
-			if err := d.ReadString(schemas.ListApplicationComponentsRequest_sort, &ev); err != nil {
-				return err
-			}
-			v.Sort = types.SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type ListApplicationComponentsOutput struct {
 
 	//  The list of application components with detailed information about each
@@ -132,96 +71,26 @@ type ListApplicationComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationComponentsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationComponentsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationComponentDetails(s, schemas.ListApplicationComponentsResponse_applicationComponentInfos, v.ApplicationComponentInfos)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationComponentsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListApplicationComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationComponentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationComponentsResponse_applicationComponentInfos:
-			return deserializeApplicationComponentDetails(d, schemas.ListApplicationComponentsResponse_applicationComponentInfos, &v.ApplicationComponentInfos)
-		case schemas.ListApplicationComponentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationComponentsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationComponents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationComponents, schemas.ListApplicationComponentsRequest, schemas.ListApplicationComponentsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationComponents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationComponents, schemas.ListApplicationComponentsRequest, schemas.ListApplicationComponentsResponse), output: &ListApplicationComponentsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationComponents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationComponents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,12 +103,6 @@ func (c *Client) addOperationListApplicationComponentsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -343,11 +206,3 @@ type ListApplicationComponentsAPIClient interface {
 }
 
 var _ ListApplicationComponentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListApplicationComponents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListApplicationComponents",
-	}
-}

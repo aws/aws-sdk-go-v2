@@ -1,0 +1,3 @@
+GET /aggregatorv2/list?MaxResults=1&NextToken=__NextToken__
+
+

@@ -4,10 +4,10 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Describes the shard limits and usage for the account.
@@ -35,6 +35,19 @@ type DescribeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (in *DescribeLimitsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
+}
+
 type DescribeLimitsOutput struct {
 
 	//  Indicates the number of data streams with the on-demand capacity mode.
@@ -57,80 +70,90 @@ type DescribeLimitsOutput struct {
 	// This member is required.
 	ShardLimit *int32
 
+	// The number of channels in the account.
+	ChannelCount *int32
+
+	// The maximum number of channels allowed in the account.
+	ChannelCountLimit *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ChannelCount, *v.ChannelCount)
+	}
+	if v.ChannelCountLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ChannelCountLimit, *v.ChannelCountLimit)
+	}
+	if v.OnDemandStreamCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OnDemandStreamCount, *v.OnDemandStreamCount)
+	}
+	if v.OnDemandStreamCountLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OnDemandStreamCountLimit, *v.OnDemandStreamCountLimit)
+	}
+	if v.OpenShardCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OpenShardCount, *v.OpenShardCount)
+	}
+	if v.ShardLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ShardLimit, *v.ShardLimit)
+	}
+}
+func (v *DescribeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLimitsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLimitsOutput_ChannelCount:
+			v.ChannelCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ChannelCount, v.ChannelCount)
+		case schemas.DescribeLimitsOutput_ChannelCountLimit:
+			v.ChannelCountLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ChannelCountLimit, v.ChannelCountLimit)
+		case schemas.DescribeLimitsOutput_OnDemandStreamCount:
+			v.OnDemandStreamCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OnDemandStreamCount, v.OnDemandStreamCount)
+		case schemas.DescribeLimitsOutput_OnDemandStreamCountLimit:
+			v.OnDemandStreamCountLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OnDemandStreamCountLimit, v.OnDemandStreamCountLimit)
+		case schemas.DescribeLimitsOutput_OpenShardCount:
+			v.OpenShardCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OpenShardCount, v.OpenShardCount)
+		case schemas.DescribeLimitsOutput_ShardLimit:
+			v.ShardLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ShardLimit, v.ShardLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimits, schemas.DescribeLimitsInput, schemas.DescribeLimitsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimits, schemas.DescribeLimitsInput, schemas.DescribeLimitsOutput), output: &DescribeLimitsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLimits{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLimits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLimits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +168,8 @@ func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLimits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLimits",
-	}
 }

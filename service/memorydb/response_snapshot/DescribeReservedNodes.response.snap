@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeReservedNodes
+
+{"NextToken":"__NextToken__","ReservedNodes":[{"ARN":"__ARN__","Duration":1,"FixedPrice":1,"NodeCount":1,"NodeType":"__NodeType__","OfferingType":"__OfferingType__","RecurringCharges":[{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"},{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"}],"ReservationId":"__ReservationId__","ReservedNodesOfferingId":"__ReservedNodesOfferingId__","StartTime":946684800,"State":"__State__"},{"ARN":"__ARN__","Duration":1,"FixedPrice":1,"NodeCount":1,"NodeType":"__NodeType__","OfferingType":"__OfferingType__","RecurringCharges":[{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"},{"RecurringChargeAmount":1,"RecurringChargeFrequency":"__RecurringChargeFrequency__"}],"ReservationId":"__ReservationId__","ReservedNodesOfferingId":"__ReservedNodesOfferingId__","StartTime":946684800,"State":"__State__"}]}

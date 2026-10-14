@@ -5,12 +5,8 @@ package directoryservicedata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns member information for the specified group.
@@ -74,33 +70,6 @@ type ListGroupMembersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupMembersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGroupMembersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGroupMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListGroupMembersRequest_MaxResults, *v.MaxResults)
-	}
-	if v.MemberRealm != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_MemberRealm, *v.MemberRealm)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_NextToken, *v.NextToken)
-	}
-	if v.Realm != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_Realm, *v.Realm)
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_SAMAccountName, *v.SAMAccountName)
-	}
-}
-
 type ListGroupMembersOutput struct {
 
 	// Identifier (ID) of the directory associated with the group.
@@ -125,96 +94,29 @@ type ListGroupMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGroupMembersResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGroupMembersResult_DirectoryId:
-			v.DirectoryId = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_DirectoryId, v.DirectoryId)
-		case schemas.ListGroupMembersResult_MemberRealm:
-			v.MemberRealm = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_MemberRealm, v.MemberRealm)
-		case schemas.ListGroupMembersResult_Members:
-			return deserializeMemberList(d, schemas.ListGroupMembersResult_Members, &v.Members)
-		case schemas.ListGroupMembersResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_NextToken, v.NextToken)
-		case schemas.ListGroupMembersResult_Realm:
-			v.Realm = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_Realm, v.Realm)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupMembers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMembers, schemas.ListGroupMembersRequest, schemas.ListGroupMembersResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupMembers{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMembers, schemas.ListGroupMembersRequest, schemas.ListGroupMembersResult), output: &ListGroupMembersOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroupMembers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListGroupMembersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupMembers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -227,12 +129,6 @@ func (c *Client) addOperationListGroupMembersMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -333,11 +229,3 @@ type ListGroupMembersAPIClient interface {
 }
 
 var _ ListGroupMembersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGroupMembers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGroupMembers",
-	}
-}

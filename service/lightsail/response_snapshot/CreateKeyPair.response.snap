@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateKeyPair
+
+{"keyPair":{"arn":"__Arn__","createdAt":946684800,"fingerprint":"__Fingerprint__","location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","resourceType":"ContainerService","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},"operation":{"createdAt":946684800,"errorCode":"__ErrorCode__","errorDetails":"__ErrorDetails__","id":"__Id__","isTerminal":true,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"operationDetails":"__OperationDetails__","operationType":"DeleteKnownHostKeys","resourceName":"__ResourceName__","resourceType":"ContainerService","status":"NotStarted","statusChangedAt":946684800},"privateKeyBase64":"__PrivateKeyBase64__","publicKeyBase64":"__PublicKeyBase64__"}

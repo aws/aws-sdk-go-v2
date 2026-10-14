@@ -4,11 +4,10 @@ package frauddetector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Evaluates an event against a detector version. If a version ID is not provided,
@@ -93,6 +92,33 @@ type GetEventPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventPredictionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetEventPredictionRequest_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.GetEventPredictionRequest_detectorVersionId, *v.DetectorVersionId)
+	}
+	serializelistOfEntities(s, schemas.GetEventPredictionRequest_entities, v.Entities)
+	if v.EventId != nil {
+		s.WriteString(schemas.GetEventPredictionRequest_eventId, *v.EventId)
+	}
+	if v.EventTimestamp != nil {
+		s.WriteString(schemas.GetEventPredictionRequest_eventTimestamp, *v.EventTimestamp)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetEventPredictionRequest_eventTypeName, *v.EventTypeName)
+	}
+	serializeEventVariableMap(s, schemas.GetEventPredictionRequest_eventVariables, v.EventVariables)
+	serializeExternalModelEndpointDataBlobMap(s, schemas.GetEventPredictionRequest_externalModelEndpointDataBlobs, v.ExternalModelEndpointDataBlobs)
+}
+
 type GetEventPredictionOutput struct {
 
 	// The model scores for Amazon SageMaker models.
@@ -114,77 +140,51 @@ type GetEventPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventPredictionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfExternalModelOutputs(s, schemas.GetEventPredictionResult_externalModelOutputs, v.ExternalModelOutputs)
+	serializeListOfModelScores(s, schemas.GetEventPredictionResult_modelScores, v.ModelScores)
+	serializeListOfRuleResults(s, schemas.GetEventPredictionResult_ruleResults, v.RuleResults)
+}
+func (v *GetEventPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventPredictionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventPredictionResult_externalModelOutputs:
+			return deserializeListOfExternalModelOutputs(d, schemas.GetEventPredictionResult_externalModelOutputs, &v.ExternalModelOutputs)
+		case schemas.GetEventPredictionResult_modelScores:
+			return deserializeListOfModelScores(d, schemas.GetEventPredictionResult_modelScores, &v.ModelScores)
+		case schemas.GetEventPredictionResult_ruleResults:
+			return deserializeListOfRuleResults(d, schemas.GetEventPredictionResult_ruleResults, &v.RuleResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventPrediction, schemas.GetEventPredictionRequest, schemas.GetEventPredictionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventPrediction, schemas.GetEventPredictionRequest, schemas.GetEventPredictionResult), output: &GetEventPredictionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEventPrediction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEventPrediction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEventPredictionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventPrediction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +199,8 @@ func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEventPrediction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEventPrediction",
-	}
 }

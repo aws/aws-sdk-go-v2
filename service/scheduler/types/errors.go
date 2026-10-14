@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Unexpected error encountered while processing the request.
 type InternalServerException struct {
@@ -69,16 +58,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request references a resource which does not exist.
 type ResourceNotFoundException struct {
@@ -105,16 +84,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request exceeds a service quota.
 type ServiceQuotaExceededException struct {
@@ -141,16 +110,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -177,16 +136,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
@@ -213,13 +162,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		}
-		return nil
-	})
-}

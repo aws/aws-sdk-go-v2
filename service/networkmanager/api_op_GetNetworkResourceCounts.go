@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the count of network resources, by resource type, for the specified global
@@ -87,6 +87,27 @@ type GetNetworkResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceCountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceCountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceCountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkResourceCountsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetNetworkResourceCountsOutput struct {
 
 	// The count of resources.
@@ -101,77 +122,51 @@ type GetNetworkResourceCountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceCountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceCountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceCountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkResourceCountList(s, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, v.NetworkResourceCounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetNetworkResourceCountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkResourceCountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts:
+			return deserializeNetworkResourceCountList(d, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, &v.NetworkResourceCounts)
+		case schemas.GetNetworkResourceCountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkResourceCountsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceCounts, schemas.GetNetworkResourceCountsRequest, schemas.GetNetworkResourceCountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceCounts, schemas.GetNetworkResourceCountsRequest, schemas.GetNetworkResourceCountsResponse), output: &GetNetworkResourceCountsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkResourceCounts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNetworkResourceCounts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNetworkResourceCountsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetworkResourceCounts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +179,6 @@ func (c *Client) addOperationGetNetworkResourceCountsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -292,11 +281,3 @@ type GetNetworkResourceCountsAPIClient interface {
 }
 
 var _ GetNetworkResourceCountsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetNetworkResourceCounts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNetworkResourceCounts",
-	}
-}

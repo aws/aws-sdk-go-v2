@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -46,21 +42,6 @@ type GetChannelInput struct {
 	SpaceId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetChannelInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != nil {
-		s.WriteString(schemas.GetChannelInput_channelId, *v.ChannelId)
-	}
-	if v.SpaceId != nil {
-		s.WriteString(schemas.GetChannelInput_spaceId, *v.SpaceId)
-	}
 }
 
 type GetChannelOutput struct {
@@ -106,109 +87,29 @@ type GetChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetChannelOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetChannelOutput_channelDescription:
-			v.ChannelDescription = new(string)
-			return d.ReadString(schemas.GetChannelOutput_channelDescription, v.ChannelDescription)
-		case schemas.GetChannelOutput_channelId:
-			v.ChannelId = new(string)
-			return d.ReadString(schemas.GetChannelOutput_channelId, v.ChannelId)
-		case schemas.GetChannelOutput_channelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.GetChannelOutput_channelName, v.ChannelName)
-		case schemas.GetChannelOutput_channelRoles:
-			return deserializeChannelRoles(d, schemas.GetChannelOutput_channelRoles, &v.ChannelRoles)
-		case schemas.GetChannelOutput_channelStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetChannelOutput_channelStatus, &ev); err != nil {
-				return err
-			}
-			v.ChannelStatus = types.ChannelStatus(ev)
-			return nil
-		case schemas.GetChannelOutput_createDateTime:
-			v.CreateDateTime = new(time.Time)
-			return d.ReadTime(schemas.GetChannelOutput_createDateTime, v.CreateDateTime)
-		case schemas.GetChannelOutput_deleteDateTime:
-			v.DeleteDateTime = new(time.Time)
-			return d.ReadTime(schemas.GetChannelOutput_deleteDateTime, v.DeleteDateTime)
-		case schemas.GetChannelOutput_spaceId:
-			v.SpaceId = new(string)
-			return d.ReadString(schemas.GetChannelOutput_spaceId, v.SpaceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelInput, schemas.GetChannelOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelInput, schemas.GetChannelOutput), output: &GetChannelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,12 +122,6 @@ func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -638,11 +533,3 @@ type GetChannelAPIClient interface {
 }
 
 var _ GetChannelAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetChannel",
-	}
-}

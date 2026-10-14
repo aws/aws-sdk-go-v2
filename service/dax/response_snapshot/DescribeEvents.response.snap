@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDAXV3.DescribeEvents
+
+{"Events":[{"Date":946684800,"Message":"__Message__","SourceName":"__SourceName__","SourceType":"CLUSTER"},{"Date":946684800,"Message":"__Message__","SourceName":"__SourceName__","SourceType":"CLUSTER"}],"NextToken":"__NextToken__"}

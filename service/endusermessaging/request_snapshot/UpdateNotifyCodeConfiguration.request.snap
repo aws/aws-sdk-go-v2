@@ -1,0 +1,5 @@
+PUT /v1/notify-code-configurations/__NotifyCodeConfigurationId__
+
+Content-Type: application/json
+
+{"channelParameters":{"notify":{"notifyTemplateId":"__NotifyTemplateId__","voiceId":"__VoiceId__"},"text":{"destinationCountryParameters":{"key0":"__Value__"},"inlineTemplateBody":"__InlineTemplateBody__"},"voice":{"inlineTemplateBody":"__InlineTemplateBody__","languageCode":"__LanguageCode__","voiceId":"__VoiceId__","voiceMessageBodyTextType":"TEXT"},"whatsApp":{"languageCode":"__LanguageCode__","whatsAppTemplateName":"__WhatsAppTemplateName__"}},"codeConfigurationParameters":{"codeLength":1,"codeType":"NUMERIC","maxAttempts":1,"validityPeriodMinutes":1},"deletionProtectionEnabled":true,"notifyCodeConfigurationName":"__NotifyCodeConfigurationName__"}

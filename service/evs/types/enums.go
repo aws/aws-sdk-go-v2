@@ -27,13 +27,19 @@ type CheckType string
 
 // Enum values for CheckType
 const (
-	CheckTypeKeyReuse            CheckType = "KEY_REUSE"
-	CheckTypeKeyCoverage         CheckType = "KEY_COVERAGE"
-	CheckTypeReachability        CheckType = "REACHABILITY"
-	CheckTypeHostCount           CheckType = "HOST_COUNT"
-	CheckTypeVcenterReachability CheckType = "VCENTER_REACHABILITY"
-	CheckTypeVcenterVmSync       CheckType = "VCENTER_VM_SYNC"
-	CheckTypeVcenterVmEvent      CheckType = "VCENTER_VM_EVENT"
+	CheckTypeKeyReuse                      CheckType = "KEY_REUSE"
+	CheckTypeKeyCoverage                   CheckType = "KEY_COVERAGE"
+	CheckTypeReachability                  CheckType = "REACHABILITY"
+	CheckTypeHostCount                     CheckType = "HOST_COUNT"
+	CheckTypeVcenterReachability           CheckType = "VCENTER_REACHABILITY"
+	CheckTypeVcenterVmSync                 CheckType = "VCENTER_VM_SYNC"
+	CheckTypeVcenterVmEvent                CheckType = "VCENTER_VM_EVENT"
+	CheckTypeOperationsManagerReachability CheckType = "OPERATIONS_MANAGER_REACHABILITY"
+	CheckTypeSddcManagerReachability       CheckType = "SDDC_MANAGER_REACHABILITY"
+	CheckTypeSddcManagerHostCount          CheckType = "SDDC_MANAGER_HOST_COUNT"
+	CheckTypeSddcManagerKeyCoverage        CheckType = "SDDC_MANAGER_KEY_COVERAGE"
+	CheckTypeSddcManagerKeyReuse           CheckType = "SDDC_MANAGER_KEY_REUSE"
+	CheckTypeConnectorHealth               CheckType = "CONNECTOR_HEALTH"
 )
 
 // Values returns all known values for CheckType. Note that this can be expanded
@@ -49,6 +55,12 @@ func (CheckType) Values() []CheckType {
 		"VCENTER_REACHABILITY",
 		"VCENTER_VM_SYNC",
 		"VCENTER_VM_EVENT",
+		"OPERATIONS_MANAGER_REACHABILITY",
+		"SDDC_MANAGER_REACHABILITY",
+		"SDDC_MANAGER_HOST_COUNT",
+		"SDDC_MANAGER_KEY_COVERAGE",
+		"SDDC_MANAGER_KEY_REUSE",
+		"CONNECTOR_HEALTH",
 	}
 }
 
@@ -85,7 +97,9 @@ type ConnectorType string
 
 // Enum values for ConnectorType
 const (
-	ConnectorTypeVcenter ConnectorType = "VCENTER"
+	ConnectorTypeOperationsManager ConnectorType = "OPERATIONS_MANAGER"
+	ConnectorTypeSddcManager       ConnectorType = "SDDC_MANAGER"
+	ConnectorTypeVcenter           ConnectorType = "VCENTER"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -94,6 +108,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorType) Values() []ConnectorType {
 	return []ConnectorType{
+		"OPERATIONS_MANAGER",
+		"SDDC_MANAGER",
 		"VCENTER",
 	}
 }
@@ -202,6 +218,7 @@ type InstanceType string
 const (
 	InstanceTypeI4iMetal     InstanceType = "i4i.metal"
 	InstanceTypeI7iMetal24xl InstanceType = "i7i.metal-24xl"
+	InstanceTypeI7iMetal48xl InstanceType = "i7i.metal-48xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -212,6 +229,7 @@ func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"i4i.metal",
 		"i7i.metal-24xl",
+		"i7i.metal-48xl",
 	}
 }
 
@@ -242,8 +260,9 @@ type VcfVersion string
 
 // Enum values for VcfVersion
 const (
-	VcfVersionVcf521 VcfVersion = "VCF-5.2.1"
-	VcfVersionVcf522 VcfVersion = "VCF-5.2.2"
+	VcfVersionVcf521       VcfVersion = "VCF-5.2.1"
+	VcfVersionVcf522       VcfVersion = "VCF-5.2.2"
+	VcfVersionSelfDeployed VcfVersion = "SELF_DEPLOYED"
 )
 
 // Values returns all known values for VcfVersion. Note that this can be expanded
@@ -254,6 +273,7 @@ func (VcfVersion) Values() []VcfVersion {
 	return []VcfVersion{
 		"VCF-5.2.1",
 		"VCF-5.2.2",
+		"SELF_DEPLOYED",
 	}
 }
 

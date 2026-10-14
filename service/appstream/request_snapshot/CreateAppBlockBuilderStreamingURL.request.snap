@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/CreateAppBlockBuilderStreamingURL
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢sAppBlockBuilderNamew__AppBlockBuilderName__hValidity

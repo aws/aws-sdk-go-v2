@@ -1,0 +1,3 @@
+GET /scans/__ScanName__?runId=__RunId__
+
+

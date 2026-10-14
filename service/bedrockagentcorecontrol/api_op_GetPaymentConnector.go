@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +38,6 @@ type GetPaymentConnectorInput struct {
 	PaymentManagerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPaymentConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPaymentConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PaymentConnectorId != nil {
-		s.WriteString(schemas.GetPaymentConnectorRequest_paymentConnectorId, *v.PaymentConnectorId)
-	}
-	if v.PaymentManagerId != nil {
-		s.WriteString(schemas.GetPaymentConnectorRequest_paymentManagerId, *v.PaymentManagerId)
-	}
 }
 
 type GetPaymentConnectorOutput struct {
@@ -99,8 +79,30 @@ type GetPaymentConnectorOutput struct {
 	// This member is required.
 	Type types.PaymentConnectorType
 
+	// The URL that the user must open to complete OAuth consent. This field is only
+	// present when the payment connector status is PENDING_AUTHENTICATION .
+	AuthorizationUrl *string
+
+	// The timestamp when the payment connector's current service-managed credentials
+	// took effect. It is first set when the credentials are provisioned and is updated
+	// by each rotation. This field is present only for payment connectors with a
+	// provisionMode of QUICK_CREATE .
+	CredentialsUpdatedAt *time.Time
+
 	// The description of the payment connector.
 	Description *string
+
+	// Specifies how the payment connector was provisioned. Payment connectors that
+	// were created before this field was available return MANUAL .
+	//
+	//   - MANUAL - You provided the credential provider configurations, so you own the
+	//   credentials. Rotate them with the payment provider, then call
+	//   UpdatePaymentCredentialProvider .
+	//
+	//   - QUICK_CREATE - AgentCore provisioned the credential provider for you, so the
+	//   credentials are service-managed. You can rotate them with
+	//   RotatePaymentConnectorCredentials .
+	ProvisionMode types.PaymentConnectorProvisionMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -108,113 +110,29 @@ type GetPaymentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPaymentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPaymentConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPaymentConnectorResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPaymentConnectorResponse_createdAt, v.CreatedAt)
-		case schemas.GetPaymentConnectorResponse_credentialProviderConfigurations:
-			return deserializeCredentialsProviderConfigurations(d, schemas.GetPaymentConnectorResponse_credentialProviderConfigurations, &v.CredentialProviderConfigurations)
-		case schemas.GetPaymentConnectorResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetPaymentConnectorResponse_description, v.Description)
-		case schemas.GetPaymentConnectorResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPaymentConnectorResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetPaymentConnectorResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetPaymentConnectorResponse_name, v.Name)
-		case schemas.GetPaymentConnectorResponse_paymentConnectorId:
-			v.PaymentConnectorId = new(string)
-			return d.ReadString(schemas.GetPaymentConnectorResponse_paymentConnectorId, v.PaymentConnectorId)
-		case schemas.GetPaymentConnectorResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetPaymentConnectorResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PaymentConnectorStatus(ev)
-			return nil
-		case schemas.GetPaymentConnectorResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetPaymentConnectorResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.PaymentConnectorType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPaymentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentConnector, schemas.GetPaymentConnectorRequest, schemas.GetPaymentConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentConnector, schemas.GetPaymentConnectorRequest, schemas.GetPaymentConnectorResponse), output: &GetPaymentConnectorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPaymentConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPaymentConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPaymentConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,22 +147,8 @@ func (c *Client) addOperationGetPaymentConnectorMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPaymentConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPaymentConnector",
-	}
 }

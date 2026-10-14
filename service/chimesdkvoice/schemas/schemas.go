@@ -690,7 +690,8 @@ var ChimeSDKTelephonyService = smithy.NewServiceSchema(_ChimeSDKTelephonyService
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Code *smithy.Schema
 
 var AccessDeniedException_Message *smithy.Schema
@@ -756,7 +757,8 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Code *smithy.Schema
 
 var BadRequestException_Message *smithy.Schema
@@ -775,6 +777,14 @@ var CallDetails_VoiceConnectorId *smithy.Schema
 var CallDetails_TransactionId *smithy.Schema
 
 var CallDetails_IsCaller *smithy.Schema
+
+var CallDistributionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.chimesdkvoice",
+	Name:      "CallDistributionType",
+}, smithy.ShapeTypeEnum, 2)
+var CallDistributionType_PriorityWeightedDistribution *smithy.Schema
+
+var CallDistributionType_LoadBalancedDistribution *smithy.Schema
 
 var _CallingName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
@@ -863,7 +873,8 @@ var _ConfidenceScore = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Code *smithy.Schema
 
 var ConflictException_Message *smithy.Schema
@@ -957,7 +968,7 @@ var EmergencyCallingConfiguration_DNIS *smithy.Schema
 var ErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 17)
 var ErrorCode_BadRequest *smithy.Schema
 
 var ErrorCode_Conflict *smithy.Schema
@@ -990,6 +1001,8 @@ var ErrorCode_PhoneNumberAssociationsExist *smithy.Schema
 
 var ErrorCode_Gone *smithy.Schema
 
+var ErrorCode_Validation *smithy.Schema
+
 var ExternalSystemsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ExternalSystemsConfiguration",
@@ -1001,7 +1014,8 @@ var ExternalSystemsConfiguration_ContactCenterSystemTypes *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_Code *smithy.Schema
 
 var ForbiddenException_Message *smithy.Schema
@@ -1030,7 +1044,8 @@ var GeoMatchParams_AreaCode *smithy.Schema
 var GoneException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 var GoneException_Code *smithy.Schema
 
 var GoneException_Message *smithy.Schema
@@ -1109,7 +1124,8 @@ var _NonEmptyStringList_member *smithy.Schema
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Code *smithy.Schema
 
 var NotFoundException_Message *smithy.Schema
@@ -1230,10 +1246,12 @@ var _Participants_member *smithy.Schema
 var PhoneNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "PhoneNumber",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var PhoneNumber_PhoneNumberId *smithy.Schema
 
 var PhoneNumber_E164PhoneNumber *smithy.Schema
+
+var PhoneNumber_PhoneNumberArn *smithy.Schema
 
 var PhoneNumber_Country *smithy.Schema
 
@@ -1533,7 +1551,8 @@ var ProxySessionStatus_Closed *smithy.Schema
 var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceLimitExceededException_Code *smithy.Schema
 
 var ResourceLimitExceededException_Message *smithy.Schema
@@ -1542,6 +1561,11 @@ var _ResultMax = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ResultMax",
 }, smithy.ShapeTypeInteger, 0)
+
+var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.chimesdkvoice",
+	Name:      "S3BucketName",
+}, smithy.ShapeTypeString, 0)
 
 var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
@@ -1568,7 +1592,8 @@ var ServerSideEncryptionConfiguration_KmsKeyArn *smithy.Schema
 var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceFailureException_Code *smithy.Schema
 
 var ServiceFailureException_Message *smithy.Schema
@@ -1576,7 +1601,8 @@ var ServiceFailureException_Message *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Code *smithy.Schema
 
 var ServiceUnavailableException_Message *smithy.Schema
@@ -1883,7 +1909,8 @@ var TerminationHealth_Source *smithy.Schema
 var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottledClientException_Code *smithy.Schema
 
 var ThrottledClientException_Message *smithy.Schema
@@ -1896,7 +1923,8 @@ var _TollFreePrefix = smithy.NewSchema(smithy.ShapeID{
 var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var UnauthorizedClientException_Code *smithy.Schema
 
 var UnauthorizedClientException_Message *smithy.Schema
@@ -1904,7 +1932,8 @@ var UnauthorizedClientException_Message *smithy.Schema
 var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 422})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 422})
 var UnprocessableEntityException_Code *smithy.Schema
 
 var UnprocessableEntityException_Message *smithy.Schema
@@ -1989,7 +2018,7 @@ var _VoiceConnectorAwsRegionList_member *smithy.Schema
 var VoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "VoiceConnectorGroup",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var VoiceConnectorGroup_VoiceConnectorGroupId *smithy.Schema
 
 var VoiceConnectorGroup_Name *smithy.Schema
@@ -2002,6 +2031,8 @@ var VoiceConnectorGroup_UpdatedTimestamp *smithy.Schema
 
 var VoiceConnectorGroup_VoiceConnectorGroupArn *smithy.Schema
 
+var VoiceConnectorGroup_CallDistributionType *smithy.Schema
+
 var _VoiceConnectorGroupList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "VoiceConnectorGroupList",
@@ -2011,6 +2042,11 @@ var _VoiceConnectorGroupList_member *smithy.Schema
 var _VoiceConnectorGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "VoiceConnectorGroupName",
+}, smithy.ShapeTypeString, 0)
+
+var _VoiceConnectorId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.chimesdkvoice",
+	Name:      "VoiceConnectorId",
 }, smithy.ShapeTypeString, 0)
 
 var VoiceConnectorIntegrationType = smithy.NewSchema(smithy.ShapeID{
@@ -2322,10 +2358,12 @@ var CreateSipRuleResponse_SipRule *smithy.Schema
 var CreateVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "CreateVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var CreateVoiceConnectorGroupRequest_Name *smithy.Schema
 
 var CreateVoiceConnectorGroupRequest_VoiceConnectorItems *smithy.Schema
+
+var CreateVoiceConnectorGroupRequest_CallDistributionType *smithy.Schema
 
 var CreateVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
@@ -3338,12 +3376,14 @@ var UpdateSipRuleResponse_SipRule *smithy.Schema
 var UpdateVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
 	Name:      "UpdateVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
 
 var UpdateVoiceConnectorGroupRequest_Name *smithy.Schema
 
 var UpdateVoiceConnectorGroupRequest_VoiceConnectorItems *smithy.Schema
+
+var UpdateVoiceConnectorGroupRequest_CallDistributionType *smithy.Schema
 
 var UpdateVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.chimesdkvoice",
@@ -3462,6 +3502,8 @@ func init() {
 
 	ErrorCode_Gone = ErrorCode.AddMember("Gone", smithyprelude.Unit)
 
+	ErrorCode_Validation = ErrorCode.AddMember("Validation", smithyprelude.Unit)
+
 	AccessDeniedException_Code = AccessDeniedException.AddMember("Code", ErrorCode)
 
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
@@ -3496,11 +3538,15 @@ func init() {
 
 	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
 
-	CallDetails_VoiceConnectorId = CallDetails.AddMember("VoiceConnectorId", _NonEmptyString128)
+	CallDetails_VoiceConnectorId = CallDetails.AddMember("VoiceConnectorId", _VoiceConnectorId)
 
 	CallDetails_TransactionId = CallDetails.AddMember("TransactionId", _NonEmptyString256)
 
 	CallDetails_IsCaller = CallDetails.AddMember("IsCaller", _Boolean)
+
+	CallDistributionType_PriorityWeightedDistribution = CallDistributionType.AddMember("PriorityWeightedDistribution", smithyprelude.Unit)
+
+	CallDistributionType_LoadBalancedDistribution = CallDistributionType.AddMember("LoadBalancedDistribution", smithyprelude.Unit)
 
 	CallingNameStatus_Unassigned = CallingNameStatus.AddMember("Unassigned", smithyprelude.Unit)
 
@@ -3734,6 +3780,8 @@ func init() {
 
 	PhoneNumber_E164PhoneNumber = PhoneNumber.AddMember("E164PhoneNumber", _E164PhoneNumber)
 
+	PhoneNumber_PhoneNumberArn = PhoneNumber.AddMember("PhoneNumberArn", _NonEmptyString)
+
 	PhoneNumber_Country = PhoneNumber.AddMember("Country", _Alpha2CountryCode)
 
 	PhoneNumber_Type = PhoneNumber.AddMember("Type", PhoneNumberType)
@@ -3818,7 +3866,7 @@ func init() {
 
 	PhoneNumberOrder_UpdatedTimestamp = PhoneNumberOrder.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
 
-	PhoneNumberOrder_FocDate = PhoneNumberOrder.AddMember("FocDate", _Iso8601Timestamp)
+	PhoneNumberOrder_FocDate = PhoneNumberOrder.AddMember("FocDate", _String)
 
 	_PhoneNumberOrderList_member = _PhoneNumberOrderList.AddMember("member", PhoneNumberOrder)
 
@@ -3838,7 +3886,7 @@ func init() {
 
 	ProxySessionStatus_Closed = ProxySessionStatus.AddMember("Closed", smithyprelude.Unit)
 
-	ProxySession_VoiceConnectorId = ProxySession.AddMember("VoiceConnectorId", _NonEmptyString128)
+	ProxySession_VoiceConnectorId = ProxySession.AddMember("VoiceConnectorId", _VoiceConnectorId)
 
 	ProxySession_ProxySessionId = ProxySession.AddMember("ProxySessionId", _NonEmptyString128)
 
@@ -4058,7 +4106,7 @@ func init() {
 
 	VoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR = VoiceConnectorIntegrationType.AddMember("CONNECT_ANALYTICS_CONNECTOR", smithyprelude.Unit)
 
-	VoiceConnector_VoiceConnectorId = VoiceConnector.AddMember("VoiceConnectorId", _NonEmptyString)
+	VoiceConnector_VoiceConnectorId = VoiceConnector.AddMember("VoiceConnectorId", _VoiceConnectorId)
 
 	VoiceConnector_AwsRegion = VoiceConnector.AddMember("AwsRegion", VoiceConnectorAwsRegion)
 
@@ -4080,7 +4128,7 @@ func init() {
 
 	_VoiceConnectorAwsRegionList_member = _VoiceConnectorAwsRegionList.AddMember("member", VoiceConnectorAwsRegion)
 
-	VoiceConnectorItem_VoiceConnectorId = VoiceConnectorItem.AddMember("VoiceConnectorId", _NonEmptyString)
+	VoiceConnectorItem_VoiceConnectorId = VoiceConnectorItem.AddMember("VoiceConnectorId", _VoiceConnectorId)
 
 	VoiceConnectorItem_Priority = VoiceConnectorItem.AddMember("Priority", _VoiceConnectorItemPriority)
 
@@ -4098,11 +4146,13 @@ func init() {
 
 	VoiceConnectorGroup_VoiceConnectorGroupArn = VoiceConnectorGroup.AddMember("VoiceConnectorGroupArn", _NonEmptyString)
 
+	VoiceConnectorGroup_CallDistributionType = VoiceConnectorGroup.AddMember("CallDistributionType", CallDistributionType)
+
 	_VoiceConnectorGroupList_member = _VoiceConnectorGroupList.AddMember("member", VoiceConnectorGroup)
 
 	_VoiceConnectorList_member = _VoiceConnectorList.AddMember("member", VoiceConnector)
 
-	VoiceConnectorSettings_CdrBucket = VoiceConnectorSettings.AddMember("CdrBucket", _String)
+	VoiceConnectorSettings_CdrBucket = VoiceConnectorSettings.AddMember("CdrBucket", _S3BucketName)
 
 	VoiceProfile_VoiceProfileId = VoiceProfile.AddMember("VoiceProfileId", _NonEmptyString256)
 
@@ -4180,7 +4230,7 @@ func init() {
 
 	AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors = AssociatePhoneNumbersWithVoiceConnectorGroupResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
 
-	AssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	AssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	AssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
 
@@ -4204,7 +4254,7 @@ func init() {
 
 	CreatePhoneNumberOrderResponse_PhoneNumberOrder = CreatePhoneNumberOrderResponse.AddMember("PhoneNumberOrder", PhoneNumberOrder)
 
-	CreateProxySessionRequest_VoiceConnectorId = CreateProxySessionRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	CreateProxySessionRequest_VoiceConnectorId = CreateProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	CreateProxySessionRequest_ParticipantPhoneNumbers = CreateProxySessionRequest.AddMember("ParticipantPhoneNumbers", _ParticipantPhoneNumberList)
 
@@ -4260,6 +4310,8 @@ func init() {
 
 	CreateVoiceConnectorGroupRequest_VoiceConnectorItems = CreateVoiceConnectorGroupRequest.AddMember("VoiceConnectorItems", _VoiceConnectorItemList)
 
+	CreateVoiceConnectorGroupRequest_CallDistributionType = CreateVoiceConnectorGroupRequest.AddMember("CallDistributionType", CallDistributionType)
+
 	CreateVoiceConnectorGroupResponse_VoiceConnectorGroup = CreateVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
 
 	CreateVoiceConnectorRequest_Name = CreateVoiceConnectorRequest.AddMember("Name", _VoiceConnectorName)
@@ -4294,7 +4346,7 @@ func init() {
 
 	DeletePhoneNumberRequest_PhoneNumberId = DeletePhoneNumberRequest.AddMember("PhoneNumberId", _SensitiveNonEmptyString, &smithytraits.HTTPLabel{})
 
-	DeleteProxySessionRequest_VoiceConnectorId = DeleteProxySessionRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	DeleteProxySessionRequest_VoiceConnectorId = DeleteProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	DeleteProxySessionRequest_ProxySessionId = DeleteProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
 
@@ -4302,25 +4354,25 @@ func init() {
 
 	DeleteSipRuleRequest_SipRuleId = DeleteSipRuleRequest.AddMember("SipRuleId", _NonEmptyString, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	DeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId = DeleteVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorRequest_VoiceConnectorId = DeleteVoiceConnectorRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorRequest_VoiceConnectorId = DeleteVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorOriginationRequest_VoiceConnectorId = DeleteVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorOriginationRequest_VoiceConnectorId = DeleteVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorProxyRequest_VoiceConnectorId = DeleteVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorProxyRequest_VoiceConnectorId = DeleteVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	DeleteVoiceConnectorTerminationCredentialsRequest_Usernames = DeleteVoiceConnectorTerminationCredentialsRequest.AddMember("Usernames", _SensitiveStringList)
 
-	DeleteVoiceConnectorTerminationRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DeleteVoiceConnectorTerminationRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	DeleteVoiceProfileDomainRequest_VoiceProfileDomainId = DeleteVoiceProfileDomainRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256, &smithytraits.HTTPLabel{})
 
@@ -4332,7 +4384,7 @@ func init() {
 
 	DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors = DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
 
-	DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = DisassociatePhoneNumbersFromVoiceConnectorRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = DisassociatePhoneNumbersFromVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	DisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers = DisassociatePhoneNumbersFromVoiceConnectorRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
 
@@ -4352,7 +4404,7 @@ func init() {
 
 	GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = GetPhoneNumberSettingsResponse.AddMember("CallingNameUpdatedTimestamp", _Iso8601Timestamp)
 
-	GetProxySessionRequest_VoiceConnectorId = GetProxySessionRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	GetProxySessionRequest_VoiceConnectorId = GetProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetProxySessionRequest_ProxySessionId = GetProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
 
@@ -4374,17 +4426,17 @@ func init() {
 
 	GetSipRuleResponse_SipRule = GetSipRuleResponse.AddMember("SipRule", SipRule)
 
-	GetSpeakerSearchTaskRequest_VoiceConnectorId = GetSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	GetSpeakerSearchTaskRequest_VoiceConnectorId = GetSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetSpeakerSearchTaskRequest_SpeakerSearchTaskId = GetSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
 
 	GetSpeakerSearchTaskResponse_SpeakerSearchTask = GetSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
 
-	GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = GetVoiceConnectorEmergencyCallingConfigurationResponse.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
 
-	GetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = GetVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = GetVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = GetVoiceConnectorExternalSystemsConfigurationResponse.AddMember("ExternalSystemsConfiguration", ExternalSystemsConfiguration)
 
@@ -4392,31 +4444,31 @@ func init() {
 
 	GetVoiceConnectorGroupResponse_VoiceConnectorGroup = GetVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
 
-	GetVoiceConnectorRequest_VoiceConnectorId = GetVoiceConnectorRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorRequest_VoiceConnectorId = GetVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
-	GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = GetVoiceConnectorLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
 
-	GetVoiceConnectorOriginationRequest_VoiceConnectorId = GetVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorOriginationRequest_VoiceConnectorId = GetVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorOriginationResponse_Origination = GetVoiceConnectorOriginationResponse.AddMember("Origination", Origination)
 
 	GetVoiceConnectorResponse_VoiceConnector = GetVoiceConnectorResponse.AddMember("VoiceConnector", VoiceConnector)
 
-	GetVoiceConnectorProxyRequest_VoiceConnectorId = GetVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorProxyRequest_VoiceConnectorId = GetVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorProxyResponse_Proxy = GetVoiceConnectorProxyResponse.AddMember("Proxy", Proxy)
 
-	GetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = GetVoiceConnectorStreamingConfigurationResponse.AddMember("StreamingConfiguration", StreamingConfiguration)
 
-	GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = GetVoiceConnectorTerminationHealthRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = GetVoiceConnectorTerminationHealthRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorTerminationHealthResponse_TerminationHealth = GetVoiceConnectorTerminationHealthResponse.AddMember("TerminationHealth", TerminationHealth)
 
-	GetVoiceConnectorTerminationRequest_VoiceConnectorId = GetVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	GetVoiceConnectorTerminationRequest_VoiceConnectorId = GetVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceConnectorTerminationResponse_Termination = GetVoiceConnectorTerminationResponse.AddMember("Termination", Termination)
 
@@ -4428,7 +4480,7 @@ func init() {
 
 	GetVoiceProfileResponse_VoiceProfile = GetVoiceProfileResponse.AddMember("VoiceProfile", VoiceProfile)
 
-	GetVoiceToneAnalysisTaskRequest_VoiceConnectorId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	GetVoiceToneAnalysisTaskRequest_VoiceConnectorId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
 
@@ -4438,7 +4490,7 @@ func init() {
 
 	ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions = ListAvailableVoiceConnectorRegionsResponse.AddMember("VoiceConnectorRegions", _VoiceConnectorAwsRegionList)
 
-	ListPhoneNumberOrdersRequest_NextToken = ListPhoneNumberOrdersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
+	ListPhoneNumberOrdersRequest_NextToken = ListPhoneNumberOrdersRequest.AddMember("NextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "next-token"})
 
 	ListPhoneNumberOrdersRequest_MaxResults = ListPhoneNumberOrdersRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
 
@@ -4462,7 +4514,7 @@ func init() {
 
 	ListPhoneNumbersResponse_NextToken = ListPhoneNumbersResponse.AddMember("NextToken", _String)
 
-	ListProxySessionsRequest_VoiceConnectorId = ListProxySessionsRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	ListProxySessionsRequest_VoiceConnectorId = ListProxySessionsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	ListProxySessionsRequest_Status = ListProxySessionsRequest.AddMember("Status", ProxySessionStatus, &smithytraits.HTTPQuery{Name: "status"})
 
@@ -4516,7 +4568,7 @@ func init() {
 
 	ListVoiceConnectorsResponse_NextToken = ListVoiceConnectorsResponse.AddMember("NextToken", _String)
 
-	ListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = ListVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	ListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = ListVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	ListVoiceConnectorTerminationCredentialsResponse_Usernames = ListVoiceConnectorTerminationCredentialsResponse.AddMember("Usernames", _SensitiveStringList)
 
@@ -4550,13 +4602,13 @@ func init() {
 
 	PutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = PutSipMediaApplicationLoggingConfigurationResponse.AddMember("SipMediaApplicationLoggingConfiguration", SipMediaApplicationLoggingConfiguration)
 
-	PutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration = PutVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
 
 	PutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = PutVoiceConnectorEmergencyCallingConfigurationResponse.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
 
-	PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("SessionBorderControllerTypes", _SessionBorderControllerTypeList)
 
@@ -4564,19 +4616,19 @@ func init() {
 
 	PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = PutVoiceConnectorExternalSystemsConfigurationResponse.AddMember("ExternalSystemsConfiguration", ExternalSystemsConfiguration)
 
-	PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration = PutVoiceConnectorLoggingConfigurationRequest.AddMember("LoggingConfiguration", LoggingConfiguration)
 
 	PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = PutVoiceConnectorLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
 
-	PutVoiceConnectorOriginationRequest_VoiceConnectorId = PutVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorOriginationRequest_VoiceConnectorId = PutVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorOriginationRequest_Origination = PutVoiceConnectorOriginationRequest.AddMember("Origination", Origination)
 
 	PutVoiceConnectorOriginationResponse_Origination = PutVoiceConnectorOriginationResponse.AddMember("Origination", Origination)
 
-	PutVoiceConnectorProxyRequest_VoiceConnectorId = PutVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorProxyRequest_VoiceConnectorId = PutVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes = PutVoiceConnectorProxyRequest.AddMember("DefaultSessionExpiryMinutes", _Integer)
 
@@ -4588,17 +4640,17 @@ func init() {
 
 	PutVoiceConnectorProxyResponse_Proxy = PutVoiceConnectorProxyResponse.AddMember("Proxy", Proxy)
 
-	PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration = PutVoiceConnectorStreamingConfigurationRequest.AddMember("StreamingConfiguration", StreamingConfiguration)
 
 	PutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = PutVoiceConnectorStreamingConfigurationResponse.AddMember("StreamingConfiguration", StreamingConfiguration)
 
-	PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = PutVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = PutVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorTerminationCredentialsRequest_Credentials = PutVoiceConnectorTerminationCredentialsRequest.AddMember("Credentials", _CredentialList)
 
-	PutVoiceConnectorTerminationRequest_VoiceConnectorId = PutVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	PutVoiceConnectorTerminationRequest_VoiceConnectorId = PutVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	PutVoiceConnectorTerminationRequest_Termination = PutVoiceConnectorTerminationRequest.AddMember("Termination", Termination)
 
@@ -4628,7 +4680,7 @@ func init() {
 
 	SearchAvailablePhoneNumbersResponse_NextToken = SearchAvailablePhoneNumbersResponse.AddMember("NextToken", _String)
 
-	StartSpeakerSearchTaskRequest_VoiceConnectorId = StartSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	StartSpeakerSearchTaskRequest_VoiceConnectorId = StartSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	StartSpeakerSearchTaskRequest_TransactionId = StartSpeakerSearchTaskRequest.AddMember("TransactionId", _NonEmptyString256)
 
@@ -4640,7 +4692,7 @@ func init() {
 
 	StartSpeakerSearchTaskResponse_SpeakerSearchTask = StartSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
 
-	StartVoiceToneAnalysisTaskRequest_VoiceConnectorId = StartVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	StartVoiceToneAnalysisTaskRequest_VoiceConnectorId = StartVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	StartVoiceToneAnalysisTaskRequest_TransactionId = StartVoiceToneAnalysisTaskRequest.AddMember("TransactionId", _NonEmptyString256)
 
@@ -4650,11 +4702,11 @@ func init() {
 
 	StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = StartVoiceToneAnalysisTaskResponse.AddMember("VoiceToneAnalysisTask", VoiceToneAnalysisTask)
 
-	StopSpeakerSearchTaskRequest_VoiceConnectorId = StopSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	StopSpeakerSearchTaskRequest_VoiceConnectorId = StopSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	StopSpeakerSearchTaskRequest_SpeakerSearchTaskId = StopSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
 
-	StopVoiceToneAnalysisTaskRequest_VoiceConnectorId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	StopVoiceToneAnalysisTaskRequest_VoiceConnectorId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
 
@@ -4680,7 +4732,7 @@ func init() {
 
 	UpdatePhoneNumberSettingsRequest_CallingName = UpdatePhoneNumberSettingsRequest.AddMember("CallingName", _CallingName)
 
-	UpdateProxySessionRequest_VoiceConnectorId = UpdateProxySessionRequest.AddMember("VoiceConnectorId", _NonEmptyString128, &smithytraits.HTTPLabel{})
+	UpdateProxySessionRequest_VoiceConnectorId = UpdateProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	UpdateProxySessionRequest_ProxySessionId = UpdateProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
 
@@ -4722,9 +4774,11 @@ func init() {
 
 	UpdateVoiceConnectorGroupRequest_VoiceConnectorItems = UpdateVoiceConnectorGroupRequest.AddMember("VoiceConnectorItems", _VoiceConnectorItemList)
 
+	UpdateVoiceConnectorGroupRequest_CallDistributionType = UpdateVoiceConnectorGroupRequest.AddMember("CallDistributionType", CallDistributionType)
+
 	UpdateVoiceConnectorGroupResponse_VoiceConnectorGroup = UpdateVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
 
-	UpdateVoiceConnectorRequest_VoiceConnectorId = UpdateVoiceConnectorRequest.AddMember("VoiceConnectorId", _NonEmptyString, &smithytraits.HTTPLabel{})
+	UpdateVoiceConnectorRequest_VoiceConnectorId = UpdateVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
 
 	UpdateVoiceConnectorRequest_Name = UpdateVoiceConnectorRequest.AddMember("Name", _VoiceConnectorName)
 

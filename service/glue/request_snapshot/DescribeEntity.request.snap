@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.DescribeEntity
+
+{"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","DataStoreApiVersion":"__DataStoreApiVersion__","EntityName":"__EntityName__","NextToken":"__NextToken__"}

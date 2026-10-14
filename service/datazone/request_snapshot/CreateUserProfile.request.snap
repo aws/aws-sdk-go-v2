@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/user-profiles
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","sessionName":"__SessionName__","userIdentifier":"__UserIdentifier__","userType":"IAM_USER"}

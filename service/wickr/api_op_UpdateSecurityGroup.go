@@ -4,13 +4,8 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of an existing security group in a Wickr network, such
@@ -54,29 +49,6 @@ type UpdateSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSecurityGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.UpdateSecurityGroupRequest_groupId, *v.GroupId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateSecurityGroupRequest_name, *v.Name)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.UpdateSecurityGroupRequest_networkId, *v.NetworkId)
-	}
-	if v.SecurityGroupSettings != nil {
-		s.WriteStruct(schemas.UpdateSecurityGroupRequest_securityGroupSettings)
-		v.SecurityGroupSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateSecurityGroupOutput struct {
 
 	// The updated security group details, including the new settings.
@@ -90,85 +62,29 @@ type UpdateSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSecurityGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSecurityGroupResponse_securityGroup:
-			v.SecurityGroup = &types.SecurityGroup{}
-			return v.SecurityGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityGroup, schemas.UpdateSecurityGroupRequest, schemas.UpdateSecurityGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityGroup, schemas.UpdateSecurityGroupRequest, schemas.UpdateSecurityGroupResponse), output: &UpdateSecurityGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSecurityGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSecurityGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +99,8 @@ func (c *Client) addOperationUpdateSecurityGroupMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSecurityGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSecurityGroup",
-	}
 }

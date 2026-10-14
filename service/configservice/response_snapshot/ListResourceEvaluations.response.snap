@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.ListResourceEvaluations
+
+{"NextToken":"__NextToken__","ResourceEvaluations":[{"EvaluationMode":"DETECTIVE","EvaluationStartTimestamp":946684800,"ResourceEvaluationId":"__ResourceEvaluationId__"},{"EvaluationMode":"DETECTIVE","EvaluationStartTimestamp":946684800,"ResourceEvaluationId":"__ResourceEvaluationId__"}]}

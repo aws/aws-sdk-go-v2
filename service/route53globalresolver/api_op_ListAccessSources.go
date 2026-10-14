@@ -5,12 +5,8 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all access sources with pagination support.
@@ -50,22 +46,6 @@ type ListAccessSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessSourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccessSourcesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccessSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListAccessSourcesInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccessSourcesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccessSourcesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListAccessSourcesOutput struct {
 
 	// An array containing information about the access sources, such as the ID, CIDR
@@ -85,84 +65,26 @@ type ListAccessSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccessSourcesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccessSourcesOutput_accessSources:
-			return deserializeAccessSources(d, schemas.ListAccessSourcesOutput_accessSources, &v.AccessSources)
-		case schemas.ListAccessSourcesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccessSourcesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccessSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessSources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessSources, schemas.ListAccessSourcesInput, schemas.ListAccessSourcesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessSources{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessSources, schemas.ListAccessSourcesInput, schemas.ListAccessSourcesOutput), output: &ListAccessSourcesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccessSources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessSources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +97,6 @@ func (c *Client) addOperationListAccessSourcesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +197,3 @@ type ListAccessSourcesAPIClient interface {
 }
 
 var _ ListAccessSourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccessSources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccessSources",
-	}
-}

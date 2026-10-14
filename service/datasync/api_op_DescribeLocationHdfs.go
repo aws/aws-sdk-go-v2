@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type DescribeLocationHdfsInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationHdfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationHdfsRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 type DescribeLocationHdfsOutput struct {
@@ -106,77 +117,138 @@ type DescribeLocationHdfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationHdfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationHdfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationHdfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.DescribeLocationHdfsResponse_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.BlockSize != nil {
+		s.WriteInt32(schemas.DescribeLocationHdfsResponse_BlockSize, *v.BlockSize)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationHdfsResponse_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationHdfsResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationHdfsResponse_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.KmsKeyProviderUri != nil {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_KmsKeyProviderUri, *v.KmsKeyProviderUri)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_LocationUri, *v.LocationUri)
+	}
+	if v.ManagedSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationHdfsResponse_ManagedSecretConfig)
+		v.ManagedSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHdfsNameNodeList(s, schemas.DescribeLocationHdfsResponse_NameNodes, v.NameNodes)
+	if v.QopConfiguration != nil {
+		s.WriteStruct(schemas.DescribeLocationHdfsResponse_QopConfiguration)
+		v.QopConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.DescribeLocationHdfsResponse_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.SimpleUser != nil {
+		s.WriteString(schemas.DescribeLocationHdfsResponse_SimpleUser, *v.SimpleUser)
+	}
+}
+func (v *DescribeLocationHdfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationHdfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationHdfsResponse_AgentArns:
+			return deserializeAgentArnList(d, schemas.DescribeLocationHdfsResponse_AgentArns, &v.AgentArns)
+		case schemas.DescribeLocationHdfsResponse_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLocationHdfsResponse_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = types.HdfsAuthenticationType(ev)
+			return nil
+		case schemas.DescribeLocationHdfsResponse_BlockSize:
+			v.BlockSize = new(int32)
+			return d.ReadInt32(schemas.DescribeLocationHdfsResponse_BlockSize, v.BlockSize)
+		case schemas.DescribeLocationHdfsResponse_CmkSecretConfig:
+			v.CmkSecretConfig = &types.CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationHdfsResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationHdfsResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationHdfsResponse_CustomSecretConfig:
+			v.CustomSecretConfig = &types.CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationHdfsResponse_KerberosPrincipal:
+			v.KerberosPrincipal = new(string)
+			return d.ReadString(schemas.DescribeLocationHdfsResponse_KerberosPrincipal, v.KerberosPrincipal)
+		case schemas.DescribeLocationHdfsResponse_KmsKeyProviderUri:
+			v.KmsKeyProviderUri = new(string)
+			return d.ReadString(schemas.DescribeLocationHdfsResponse_KmsKeyProviderUri, v.KmsKeyProviderUri)
+		case schemas.DescribeLocationHdfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationHdfsResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationHdfsResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationHdfsResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationHdfsResponse_ManagedSecretConfig:
+			v.ManagedSecretConfig = &types.ManagedSecretConfig{}
+			return v.ManagedSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationHdfsResponse_NameNodes:
+			return deserializeHdfsNameNodeList(d, schemas.DescribeLocationHdfsResponse_NameNodes, &v.NameNodes)
+		case schemas.DescribeLocationHdfsResponse_QopConfiguration:
+			v.QopConfiguration = &types.QopConfiguration{}
+			return v.QopConfiguration.Deserialize(d)
+		case schemas.DescribeLocationHdfsResponse_ReplicationFactor:
+			v.ReplicationFactor = new(int32)
+			return d.ReadInt32(schemas.DescribeLocationHdfsResponse_ReplicationFactor, v.ReplicationFactor)
+		case schemas.DescribeLocationHdfsResponse_SimpleUser:
+			v.SimpleUser = new(string)
+			return d.ReadString(schemas.DescribeLocationHdfsResponse_SimpleUser, v.SimpleUser)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationHdfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationHdfs, schemas.DescribeLocationHdfsRequest, schemas.DescribeLocationHdfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationHdfs, schemas.DescribeLocationHdfsRequest, schemas.DescribeLocationHdfsResponse), output: &DescribeLocationHdfsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationHdfs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLocationHdfs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLocationHdfsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationHdfs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +263,8 @@ func (c *Client) addOperationDescribeLocationHdfsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLocationHdfs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLocationHdfs",
-	}
 }

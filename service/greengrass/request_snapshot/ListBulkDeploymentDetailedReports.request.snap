@@ -1,0 +1,3 @@
+GET /greengrass/bulk/deployments/__BulkDeploymentId__/detailed-reports?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

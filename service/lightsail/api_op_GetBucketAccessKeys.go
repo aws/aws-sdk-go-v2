@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the existing access key IDs for the specified Amazon Lightsail bucket.
@@ -43,6 +42,18 @@ type GetBucketAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketAccessKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketAccessKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketAccessKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.GetBucketAccessKeysRequest_bucketName, *v.BucketName)
+	}
+}
+
 type GetBucketAccessKeysOutput struct {
 
 	// An object that describes the access keys for the specified bucket.
@@ -54,77 +65,45 @@ type GetBucketAccessKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketAccessKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketAccessKeysResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketAccessKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessKeyList(s, schemas.GetBucketAccessKeysResult_accessKeys, v.AccessKeys)
+}
+func (v *GetBucketAccessKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketAccessKeysResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketAccessKeysResult_accessKeys:
+			return deserializeAccessKeyList(d, schemas.GetBucketAccessKeysResult_accessKeys, &v.AccessKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketAccessKeys, schemas.GetBucketAccessKeysRequest, schemas.GetBucketAccessKeysResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBucketAccessKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketAccessKeys, schemas.GetBucketAccessKeysRequest, schemas.GetBucketAccessKeysResult), output: &GetBucketAccessKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBucketAccessKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBucketAccessKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBucketAccessKeysValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketAccessKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +118,8 @@ func (c *Client) addOperationGetBucketAccessKeysMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBucketAccessKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBucketAccessKeys",
-	}
 }

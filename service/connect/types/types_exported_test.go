@@ -342,6 +342,9 @@ func ExampleRealtimeContactAnalysisSegment_outputUsage() {
 	case *types.RealtimeContactAnalysisSegmentMemberEvent:
 		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentEvent
 
+	case *types.RealtimeContactAnalysisSegmentMemberExtractedInformation:
+		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentExtractedInformation
+
 	case *types.RealtimeContactAnalysisSegmentMemberIssues:
 		_ = v.Value // Value is types.RealTimeContactAnalysisSegmentIssues
 
@@ -363,6 +366,7 @@ func ExampleRealtimeContactAnalysisSegment_outputUsage() {
 var _ *types.RealTimeContactAnalysisSegmentEvent
 var _ *types.RealTimeContactAnalysisSegmentIssues
 var _ *types.RealTimeContactAnalysisSegmentCategories
+var _ *types.RealTimeContactAnalysisSegmentExtractedInformation
 var _ *types.RealTimeContactAnalysisSegmentPostContactSummary
 var _ *types.RealTimeContactAnalysisSegmentAttachments
 var _ *types.RealTimeContactAnalysisSegmentTranscript
@@ -391,6 +395,9 @@ func ExampleReferenceSummary_outputUsage() {
 	switch v := union.(type) {
 	case *types.ReferenceSummaryMemberAttachment:
 		_ = v.Value // Value is types.AttachmentReference
+
+	case *types.ReferenceSummaryMemberContactAnalysis:
+		_ = v.Value // Value is types.ContactAnalysisReference
 
 	case *types.ReferenceSummaryMemberDate:
 		_ = v.Value // Value is types.DateReference
@@ -433,6 +440,7 @@ var _ *types.UrlReference
 var _ *types.EmailMessageReference
 var _ *types.NumberReference
 var _ *types.StringReference
+var _ *types.ContactAnalysisReference
 var _ *types.DateReference
 var _ *types.EmailReference
 

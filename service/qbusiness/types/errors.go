@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,16 +34,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You are trying to perform an action that conflicts with the current status of
 // your resource. Fix any inconsistencies with your resources and try again.
@@ -75,22 +64,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_message, v.Message)
-		case schemas.ConflictException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ConflictException_resourceId, v.ResourceId)
-		case schemas.ConflictException_resourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ConflictException_resourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // An external resource that you configured with your application is returning
 // errors and preventing this operation from succeeding. Fix those errors and try
@@ -119,16 +92,6 @@ func (e *ExternalResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExternalResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ExternalResourceException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExternalResourceException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExternalResourceException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ExternalResourceException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An issue occurred with the internal server used for your Amazon Q Business
 // service. Wait some minutes and try again, or contact [Support]for help.
@@ -158,16 +121,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You don't have permissions to perform the action because your license is
 // inactive. Ask your admin to activate your license and try again after your
@@ -196,16 +149,6 @@ func (e *LicenseNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LicenseNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LicenseNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LicenseNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LicenseNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LicenseNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The requested media object is too large to be returned.
 type MediaTooLargeException struct {
@@ -232,16 +175,6 @@ func (e *MediaTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MediaTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *MediaTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MediaTooLargeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MediaTooLargeException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.MediaTooLargeException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The application or plugin resource you want to use doesn’t exist. Make sure you
 // have provided the correct resource and try again.
@@ -272,22 +205,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		case schemas.ResourceNotFoundException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_resourceId, v.ResourceId)
-		case schemas.ResourceNotFoundException_resourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_resourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // You have exceeded the set limits for your Amazon Q Business service.
 type ServiceQuotaExceededException struct {
@@ -317,22 +234,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
-		case schemas.ServiceQuotaExceededException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_resourceId, v.ResourceId)
-		case schemas.ServiceQuotaExceededException_resourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_resourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to throttling. Reduce the number of requests and try
 // again.
@@ -360,16 +261,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The input doesn't meet the constraints set by the Amazon Q Business service.
 // Provide the correct input and try again.
@@ -400,22 +291,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_fields:
-			return deserializeValidationExceptionFields(d, schemas.ValidationException_fields, &v.Fields)
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		case schemas.ValidationException_reason:
-			var ev string
-			if err := d.ReadString(schemas.ValidationException_reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ValidationExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}

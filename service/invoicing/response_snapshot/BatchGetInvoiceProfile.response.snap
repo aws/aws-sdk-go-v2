@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.BatchGetInvoiceProfile
+
+{"Profiles":[{"AccountId":"__AccountId__","Issuer":"__Issuer__","ReceiverAddress":{"AddressLine1":"__AddressLine1__","AddressLine2":"__AddressLine2__","AddressLine3":"__AddressLine3__","City":"__City__","CompanyName":"__CompanyName__","CountryCode":"__CountryCode__","DistrictOrCounty":"__DistrictOrCounty__","PostalCode":"__PostalCode__","StateOrRegion":"__StateOrRegion__"},"ReceiverEmail":"__ReceiverEmail__","ReceiverName":"__ReceiverName__","TaxRegistrationNumber":"__TaxRegistrationNumber__"},{"AccountId":"__AccountId__","Issuer":"__Issuer__","ReceiverAddress":{"AddressLine1":"__AddressLine1__","AddressLine2":"__AddressLine2__","AddressLine3":"__AddressLine3__","City":"__City__","CompanyName":"__CompanyName__","CountryCode":"__CountryCode__","DistrictOrCounty":"__DistrictOrCounty__","PostalCode":"__PostalCode__","StateOrRegion":"__StateOrRegion__"},"ReceiverEmail":"__ReceiverEmail__","ReceiverName":"__ReceiverName__","TaxRegistrationNumber":"__TaxRegistrationNumber__"}]}

@@ -4,11 +4,10 @@ package chime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the suspension from up to 50 previously suspended users for the
@@ -51,6 +50,19 @@ type BatchUnsuspendUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUnsuspendUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUnsuspendUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUnsuspendUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchUnsuspendUserRequest_AccountId, *v.AccountId)
+	}
+	serializeUserIdList(s, schemas.BatchUnsuspendUserRequest_UserIdList, v.UserIdList)
+}
+
 type BatchUnsuspendUserOutput struct {
 
 	// If the BatchUnsuspendUser action fails for one or more of the user IDs in the request, a list of
@@ -63,77 +75,45 @@ type BatchUnsuspendUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUnsuspendUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUnsuspendUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUnsuspendUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserErrorList(s, schemas.BatchUnsuspendUserResponse_UserErrors, v.UserErrors)
+}
+func (v *BatchUnsuspendUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUnsuspendUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUnsuspendUserResponse_UserErrors:
+			return deserializeUserErrorList(d, schemas.BatchUnsuspendUserResponse_UserErrors, &v.UserErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUnsuspendUser, schemas.BatchUnsuspendUserRequest, schemas.BatchUnsuspendUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUnsuspendUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUnsuspendUser, schemas.BatchUnsuspendUserRequest, schemas.BatchUnsuspendUserResponse), output: &BatchUnsuspendUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUnsuspendUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUnsuspendUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUnsuspendUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUnsuspendUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +128,8 @@ func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUnsuspendUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUnsuspendUser",
-	}
 }

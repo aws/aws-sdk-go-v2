@@ -1,0 +1,5 @@
+POST /CreateExtendedSourceServer
+
+Content-Type: application/json
+
+{"sourceServerArn":"__SourceServerArn__","tags":{"key0":"__Value__"}}

@@ -5,11 +5,7 @@ package scheduler
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified schedule group. Deleting a schedule group results in
@@ -51,34 +47,6 @@ type DeleteScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteScheduleGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteScheduleGroupInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteScheduleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteScheduleGroupInput_ClientToken, *v.ClientToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteScheduleGroupInput_Name, *v.Name)
-	}
-}
-func (v *DeleteScheduleGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteScheduleGroupInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteScheduleGroupInput_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.DeleteScheduleGroupInput_ClientToken, v.ClientToken)
-		case schemas.DeleteScheduleGroupInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteScheduleGroupInput_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 type DeleteScheduleGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,78 +54,23 @@ type DeleteScheduleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteScheduleGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteScheduleGroupOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteScheduleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteScheduleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteScheduleGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteScheduleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduleGroup, schemas.DeleteScheduleGroupInput, schemas.DeleteScheduleGroupOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteScheduleGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduleGroup, schemas.DeleteScheduleGroupInput, schemas.DeleteScheduleGroupOutput), output: &DeleteScheduleGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteScheduleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +80,6 @@ func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpDeleteScheduleGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteScheduleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +92,6 @@ func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +131,4 @@ func (m *idempotencyToken_initializeOpDeleteScheduleGroup) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opDeleteScheduleGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteScheduleGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteScheduleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteScheduleGroup",
-	}
 }

@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the name, Amazon Resource Name (ARN), rules, definition, and effective
@@ -46,6 +45,21 @@ type DescribeCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCostCategoryDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCostCategoryDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCostCategoryDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.DescribeCostCategoryDefinitionRequest_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.EffectiveOn != nil {
+		s.WriteString(schemas.DescribeCostCategoryDefinitionRequest_EffectiveOn, *v.EffectiveOn)
+	}
+}
+
 type DescribeCostCategoryDefinitionOutput struct {
 
 	// The structure of Cost Categories. This includes detailed metadata and the set
@@ -58,77 +72,50 @@ type DescribeCostCategoryDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCostCategoryDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCostCategoryDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCostCategoryDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategory != nil {
+		s.WriteStruct(schemas.DescribeCostCategoryDefinitionResponse_CostCategory)
+		v.CostCategory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCostCategoryDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCostCategoryDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCostCategoryDefinitionResponse_CostCategory:
+			v.CostCategory = &types.CostCategory{}
+			return v.CostCategory.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCostCategoryDefinition, schemas.DescribeCostCategoryDefinitionRequest, schemas.DescribeCostCategoryDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCostCategoryDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCostCategoryDefinition, schemas.DescribeCostCategoryDefinitionRequest, schemas.DescribeCostCategoryDefinitionResponse), output: &DescribeCostCategoryDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCostCategoryDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCostCategoryDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCostCategoryDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCostCategoryDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +130,8 @@ func (c *Client) addOperationDescribeCostCategoryDefinitionMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeCostCategoryDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCostCategoryDefinition",
-	}
 }

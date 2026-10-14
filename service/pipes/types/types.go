@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,6 +34,38 @@ type AwsVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignPublicIp != "" {
+		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
+	}
+	serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+}
+func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsVpcConfiguration_AssignPublicIp:
+			var ev string
+			if err := d.ReadString(schemas.AwsVpcConfiguration_AssignPublicIp, &ev); err != nil {
+				return err
+			}
+			v.AssignPublicIp = AssignPublicIp(ev)
+			return nil
+		case schemas.AwsVpcConfiguration_SecurityGroups:
+			return deserializeSecurityGroups(d, schemas.AwsVpcConfiguration_SecurityGroups, &v.SecurityGroups)
+		case schemas.AwsVpcConfiguration_Subnets:
+			return deserializeSubnets(d, schemas.AwsVpcConfiguration_Subnets, &v.Subnets)
+		}
+		return nil
+	})
+}
+
 // The array properties for the submitted job, such as the size of the array. The
 // array size can be between 2 and 10,000. If you specify array properties for a
 // job, it becomes an array job. This parameter is used only if the target is an
@@ -42,6 +76,28 @@ type BatchArrayProperties struct {
 	Size *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchArrayProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchArrayProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchArrayProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Size != nil {
+		s.WriteInt32(schemas.BatchArrayProperties_Size, *v.Size)
+	}
+}
+func (v *BatchArrayProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchArrayProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchArrayProperties_Size:
+			v.Size = new(int32)
+			return d.ReadInt32(schemas.BatchArrayProperties_Size, v.Size)
+		}
+		return nil
+	})
 }
 
 // The overrides that are sent to a container.
@@ -73,6 +129,37 @@ type BatchContainerOverrides struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchContainerOverrides) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchContainerOverrides)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchContainerOverrides) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.BatchContainerOverrides_Command, v.Command)
+	serializeBatchEnvironmentVariableList(s, schemas.BatchContainerOverrides_Environment, v.Environment)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.BatchContainerOverrides_InstanceType, *v.InstanceType)
+	}
+	serializeBatchResourceRequirementsList(s, schemas.BatchContainerOverrides_ResourceRequirements, v.ResourceRequirements)
+}
+func (v *BatchContainerOverrides) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchContainerOverrides, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchContainerOverrides_Command:
+			return deserializeStringList(d, schemas.BatchContainerOverrides_Command, &v.Command)
+		case schemas.BatchContainerOverrides_Environment:
+			return deserializeBatchEnvironmentVariableList(d, schemas.BatchContainerOverrides_Environment, &v.Environment)
+		case schemas.BatchContainerOverrides_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.BatchContainerOverrides_InstanceType, v.InstanceType)
+		case schemas.BatchContainerOverrides_ResourceRequirements:
+			return deserializeBatchResourceRequirementsList(d, schemas.BatchContainerOverrides_ResourceRequirements, &v.ResourceRequirements)
+		}
+		return nil
+	})
+}
+
 // The environment variables to send to the container. You can add new environment
 // variables, which are added to the container at launch, or you can override the
 // existing environment variables from the Docker image or the task definition.
@@ -92,6 +179,34 @@ type BatchEnvironmentVariable struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchEnvironmentVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchEnvironmentVariable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchEnvironmentVariable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.BatchEnvironmentVariable_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.BatchEnvironmentVariable_Value, *v.Value)
+	}
+}
+func (v *BatchEnvironmentVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchEnvironmentVariable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchEnvironmentVariable_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BatchEnvironmentVariable_Name, v.Name)
+		case schemas.BatchEnvironmentVariable_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.BatchEnvironmentVariable_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // An object that represents an Batch job dependency.
 type BatchJobDependency struct {
 
@@ -102,6 +217,38 @@ type BatchJobDependency struct {
 	Type BatchJobDependencyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchJobDependency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchJobDependency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchJobDependency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.BatchJobDependency_JobId, *v.JobId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.BatchJobDependency_Type, string(v.Type))
+	}
+}
+func (v *BatchJobDependency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchJobDependency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchJobDependency_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.BatchJobDependency_JobId, v.JobId)
+		case schemas.BatchJobDependency_Type:
+			var ev string
+			if err := d.ReadString(schemas.BatchJobDependency_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BatchJobDependencyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The type and amount of a resource to assign to a container. The supported
@@ -214,6 +361,38 @@ type BatchResourceRequirement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchResourceRequirement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchResourceRequirement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchResourceRequirement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.BatchResourceRequirement_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.BatchResourceRequirement_Value, *v.Value)
+	}
+}
+func (v *BatchResourceRequirement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchResourceRequirement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchResourceRequirement_Type:
+			var ev string
+			if err := d.ReadString(schemas.BatchResourceRequirement_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BatchResourceRequirementType(ev)
+			return nil
+		case schemas.BatchResourceRequirement_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.BatchResourceRequirement_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The retry strategy that's associated with a job. For more information, see [Automated job retries] in
 // the Batch User Guide.
 //
@@ -226,6 +405,28 @@ type BatchRetryStrategy struct {
 	Attempts *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchRetryStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRetryStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRetryStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attempts != nil {
+		s.WriteInt32(schemas.BatchRetryStrategy_Attempts, *v.Attempts)
+	}
+}
+func (v *BatchRetryStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRetryStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRetryStrategy_Attempts:
+			v.Attempts = new(int32)
+			return d.ReadInt32(schemas.BatchRetryStrategy_Attempts, v.Attempts)
+		}
+		return nil
+	})
 }
 
 // The details of a capacity provider strategy. To learn more, see [CapacityProviderStrategyItem] in the Amazon
@@ -253,6 +454,38 @@ type CapacityProviderStrategyItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityProviderStrategyItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityProviderStrategyItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityProviderStrategyItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_base, v.Base)
+	}
+	if v.CapacityProvider != nil {
+		s.WriteString(schemas.CapacityProviderStrategyItem_capacityProvider, *v.CapacityProvider)
+	}
+	if v.Weight != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_weight, v.Weight)
+	}
+}
+func (v *CapacityProviderStrategyItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityProviderStrategyItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityProviderStrategyItem_base:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_base, &v.Base)
+		case schemas.CapacityProviderStrategyItem_capacityProvider:
+			v.CapacityProvider = new(string)
+			return d.ReadString(schemas.CapacityProviderStrategyItem_capacityProvider, v.CapacityProvider)
+		case schemas.CapacityProviderStrategyItem_weight:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_weight, &v.Weight)
+		}
+		return nil
+	})
+}
+
 // The Amazon CloudWatch Logs logging configuration settings for the pipe.
 type CloudwatchLogsLogDestination struct {
 
@@ -261,6 +494,28 @@ type CloudwatchLogsLogDestination struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudwatchLogsLogDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudwatchLogsLogDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudwatchLogsLogDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudwatchLogsLogDestination_LogGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudwatchLogsLogDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudwatchLogsLogDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudwatchLogsLogDestination_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudwatchLogsLogDestination_LogGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // The Amazon CloudWatch Logs logging configuration settings for the pipe.
@@ -275,6 +530,28 @@ type CloudwatchLogsLogDestinationParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudwatchLogsLogDestinationParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudwatchLogsLogDestinationParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudwatchLogsLogDestinationParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudwatchLogsLogDestinationParameters_LogGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudwatchLogsLogDestinationParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudwatchLogsLogDestinationParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudwatchLogsLogDestinationParameters_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudwatchLogsLogDestinationParameters_LogGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
+}
+
 // A DeadLetterConfig object that contains information about a dead-letter queue
 // configuration.
 type DeadLetterConfig struct {
@@ -286,6 +563,28 @@ type DeadLetterConfig struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeadLetterConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeadLetterConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeadLetterConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeadLetterConfig_Arn, *v.Arn)
+	}
+}
+func (v *DeadLetterConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeadLetterConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeadLetterConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeadLetterConfig_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // Maps source data to a dimension in the target Timestream for LiveAnalytics
@@ -314,6 +613,44 @@ type DimensionMapping struct {
 	DimensionValueType DimensionValueType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionName != nil {
+		s.WriteString(schemas.DimensionMapping_DimensionName, *v.DimensionName)
+	}
+	if v.DimensionValue != nil {
+		s.WriteString(schemas.DimensionMapping_DimensionValue, *v.DimensionValue)
+	}
+	if v.DimensionValueType != "" {
+		s.WriteString(schemas.DimensionMapping_DimensionValueType, string(v.DimensionValueType))
+	}
+}
+func (v *DimensionMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionMapping_DimensionName:
+			v.DimensionName = new(string)
+			return d.ReadString(schemas.DimensionMapping_DimensionName, v.DimensionName)
+		case schemas.DimensionMapping_DimensionValue:
+			v.DimensionValue = new(string)
+			return d.ReadString(schemas.DimensionMapping_DimensionValue, v.DimensionValue)
+		case schemas.DimensionMapping_DimensionValueType:
+			var ev string
+			if err := d.ReadString(schemas.DimensionMapping_DimensionValueType, &ev); err != nil {
+				return err
+			}
+			v.DimensionValueType = DimensionValueType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The overrides that are sent to a container. An empty container override can be
@@ -361,6 +698,58 @@ type EcsContainerOverride struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsContainerOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsContainerOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsContainerOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.EcsContainerOverride_Command, v.Command)
+	if v.Cpu != nil {
+		s.WriteInt32(schemas.EcsContainerOverride_Cpu, *v.Cpu)
+	}
+	serializeEcsEnvironmentVariableList(s, schemas.EcsContainerOverride_Environment, v.Environment)
+	serializeEcsEnvironmentFileList(s, schemas.EcsContainerOverride_EnvironmentFiles, v.EnvironmentFiles)
+	if v.Memory != nil {
+		s.WriteInt32(schemas.EcsContainerOverride_Memory, *v.Memory)
+	}
+	if v.MemoryReservation != nil {
+		s.WriteInt32(schemas.EcsContainerOverride_MemoryReservation, *v.MemoryReservation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EcsContainerOverride_Name, *v.Name)
+	}
+	serializeEcsResourceRequirementsList(s, schemas.EcsContainerOverride_ResourceRequirements, v.ResourceRequirements)
+}
+func (v *EcsContainerOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsContainerOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsContainerOverride_Command:
+			return deserializeStringList(d, schemas.EcsContainerOverride_Command, &v.Command)
+		case schemas.EcsContainerOverride_Cpu:
+			v.Cpu = new(int32)
+			return d.ReadInt32(schemas.EcsContainerOverride_Cpu, v.Cpu)
+		case schemas.EcsContainerOverride_Environment:
+			return deserializeEcsEnvironmentVariableList(d, schemas.EcsContainerOverride_Environment, &v.Environment)
+		case schemas.EcsContainerOverride_EnvironmentFiles:
+			return deserializeEcsEnvironmentFileList(d, schemas.EcsContainerOverride_EnvironmentFiles, &v.EnvironmentFiles)
+		case schemas.EcsContainerOverride_Memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.EcsContainerOverride_Memory, v.Memory)
+		case schemas.EcsContainerOverride_MemoryReservation:
+			v.MemoryReservation = new(int32)
+			return d.ReadInt32(schemas.EcsContainerOverride_MemoryReservation, v.MemoryReservation)
+		case schemas.EcsContainerOverride_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EcsContainerOverride_Name, v.Name)
+		case schemas.EcsContainerOverride_ResourceRequirements:
+			return deserializeEcsResourceRequirementsList(d, schemas.EcsContainerOverride_ResourceRequirements, &v.ResourceRequirements)
+		}
+		return nil
+	})
+}
+
 // A list of files containing the environment variables to pass to a container.
 // You can specify up to ten environment files. The file must have a .env file
 // extension. Each line in an environment file should contain an environment
@@ -400,6 +789,38 @@ type EcsEnvironmentFile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsEnvironmentFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsEnvironmentFile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsEnvironmentFile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.EcsEnvironmentFile_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.EcsEnvironmentFile_value, *v.Value)
+	}
+}
+func (v *EcsEnvironmentFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsEnvironmentFile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsEnvironmentFile_type:
+			var ev string
+			if err := d.ReadString(schemas.EcsEnvironmentFile_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EcsEnvironmentFileType(ev)
+			return nil
+		case schemas.EcsEnvironmentFile_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.EcsEnvironmentFile_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The environment variables to send to the container. You can add new environment
 // variables, which are added to the container at launch, or you can override the
 // existing environment variables from the Docker image or the task definition. You
@@ -415,6 +836,34 @@ type EcsEnvironmentVariable struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EcsEnvironmentVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsEnvironmentVariable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsEnvironmentVariable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.EcsEnvironmentVariable_name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.EcsEnvironmentVariable_value, *v.Value)
+	}
+}
+func (v *EcsEnvironmentVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsEnvironmentVariable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsEnvironmentVariable_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EcsEnvironmentVariable_name, v.Name)
+		case schemas.EcsEnvironmentVariable_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.EcsEnvironmentVariable_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The amount of ephemeral storage to allocate for the task. This parameter is
@@ -438,6 +887,28 @@ type EcsEphemeralStorage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsEphemeralStorage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsEphemeralStorage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsEphemeralStorage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SizeInGiB != nil {
+		s.WriteInt32(schemas.EcsEphemeralStorage_sizeInGiB, *v.SizeInGiB)
+	}
+}
+func (v *EcsEphemeralStorage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsEphemeralStorage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsEphemeralStorage_sizeInGiB:
+			v.SizeInGiB = new(int32)
+			return d.ReadInt32(schemas.EcsEphemeralStorage_sizeInGiB, v.SizeInGiB)
+		}
+		return nil
+	})
+}
+
 // Details on an Elastic Inference accelerator task override. This parameter is
 // used to override the Elastic Inference accelerator specified in the task
 // definition. For more information, see [Working with Amazon Elastic Inference on Amazon ECS]in the Amazon Elastic Container Service
@@ -454,6 +925,34 @@ type EcsInferenceAcceleratorOverride struct {
 	DeviceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EcsInferenceAcceleratorOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsInferenceAcceleratorOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsInferenceAcceleratorOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceName != nil {
+		s.WriteString(schemas.EcsInferenceAcceleratorOverride_deviceName, *v.DeviceName)
+	}
+	if v.DeviceType != nil {
+		s.WriteString(schemas.EcsInferenceAcceleratorOverride_deviceType, *v.DeviceType)
+	}
+}
+func (v *EcsInferenceAcceleratorOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsInferenceAcceleratorOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsInferenceAcceleratorOverride_deviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.EcsInferenceAcceleratorOverride_deviceName, v.DeviceName)
+		case schemas.EcsInferenceAcceleratorOverride_deviceType:
+			v.DeviceType = new(string)
+			return d.ReadString(schemas.EcsInferenceAcceleratorOverride_deviceType, v.DeviceType)
+		}
+		return nil
+	})
 }
 
 // The type and amount of a resource to assign to a container. The supported
@@ -484,6 +983,38 @@ type EcsResourceRequirement struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EcsResourceRequirement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsResourceRequirement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsResourceRequirement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.EcsResourceRequirement_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.EcsResourceRequirement_value, *v.Value)
+	}
+}
+func (v *EcsResourceRequirement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsResourceRequirement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsResourceRequirement_type:
+			var ev string
+			if err := d.ReadString(schemas.EcsResourceRequirement_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EcsResourceRequirementType(ev)
+			return nil
+		case schemas.EcsResourceRequirement_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.EcsResourceRequirement_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The overrides that are associated with a task.
@@ -529,6 +1060,60 @@ type EcsTaskOverride struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsTaskOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsTaskOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsTaskOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEcsContainerOverrideList(s, schemas.EcsTaskOverride_ContainerOverrides, v.ContainerOverrides)
+	if v.Cpu != nil {
+		s.WriteString(schemas.EcsTaskOverride_Cpu, *v.Cpu)
+	}
+	if v.EphemeralStorage != nil {
+		s.WriteStruct(schemas.EcsTaskOverride_EphemeralStorage)
+		v.EphemeralStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.EcsTaskOverride_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	serializeEcsInferenceAcceleratorOverrideList(s, schemas.EcsTaskOverride_InferenceAcceleratorOverrides, v.InferenceAcceleratorOverrides)
+	if v.Memory != nil {
+		s.WriteString(schemas.EcsTaskOverride_Memory, *v.Memory)
+	}
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.EcsTaskOverride_TaskRoleArn, *v.TaskRoleArn)
+	}
+}
+func (v *EcsTaskOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsTaskOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsTaskOverride_ContainerOverrides:
+			return deserializeEcsContainerOverrideList(d, schemas.EcsTaskOverride_ContainerOverrides, &v.ContainerOverrides)
+		case schemas.EcsTaskOverride_Cpu:
+			v.Cpu = new(string)
+			return d.ReadString(schemas.EcsTaskOverride_Cpu, v.Cpu)
+		case schemas.EcsTaskOverride_EphemeralStorage:
+			v.EphemeralStorage = &EcsEphemeralStorage{}
+			return v.EphemeralStorage.Deserialize(d)
+		case schemas.EcsTaskOverride_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.EcsTaskOverride_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.EcsTaskOverride_InferenceAcceleratorOverrides:
+			return deserializeEcsInferenceAcceleratorOverrideList(d, schemas.EcsTaskOverride_InferenceAcceleratorOverrides, &v.InferenceAcceleratorOverrides)
+		case schemas.EcsTaskOverride_Memory:
+			v.Memory = new(string)
+			return d.ReadString(schemas.EcsTaskOverride_Memory, v.Memory)
+		case schemas.EcsTaskOverride_TaskRoleArn:
+			v.TaskRoleArn = new(string)
+			return d.ReadString(schemas.EcsTaskOverride_TaskRoleArn, v.TaskRoleArn)
+		}
+		return nil
+	})
+}
+
 // Filter events using an event pattern. For more information, see [Events and Event Patterns] in the Amazon
 // EventBridge User Guide.
 //
@@ -539,6 +1124,28 @@ type Filter struct {
 	Pattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pattern != nil {
+		s.WriteString(schemas.Filter_Pattern, *v.Pattern)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.Filter_Pattern, v.Pattern)
+		}
+		return nil
+	})
 }
 
 // The collection of event patterns used to filter events.
@@ -557,6 +1164,25 @@ type FilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FilterCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.FilterCriteria_Filters, v.Filters)
+}
+func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterCriteria_Filters:
+			return deserializeFilterList(d, schemas.FilterCriteria_Filters, &v.Filters)
+		}
+		return nil
+	})
+}
+
 // The Amazon Data Firehose logging configuration settings for the pipe.
 type FirehoseLogDestination struct {
 
@@ -565,6 +1191,28 @@ type FirehoseLogDestination struct {
 	DeliveryStreamArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirehoseLogDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirehoseLogDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirehoseLogDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamArn != nil {
+		s.WriteString(schemas.FirehoseLogDestination_DeliveryStreamArn, *v.DeliveryStreamArn)
+	}
+}
+func (v *FirehoseLogDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirehoseLogDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirehoseLogDestination_DeliveryStreamArn:
+			v.DeliveryStreamArn = new(string)
+			return d.ReadString(schemas.FirehoseLogDestination_DeliveryStreamArn, v.DeliveryStreamArn)
+		}
+		return nil
+	})
 }
 
 // The Amazon Data Firehose logging configuration settings for the pipe.
@@ -577,6 +1225,28 @@ type FirehoseLogDestinationParameters struct {
 	DeliveryStreamArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirehoseLogDestinationParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirehoseLogDestinationParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirehoseLogDestinationParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamArn != nil {
+		s.WriteString(schemas.FirehoseLogDestinationParameters_DeliveryStreamArn, *v.DeliveryStreamArn)
+	}
+}
+func (v *FirehoseLogDestinationParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirehoseLogDestinationParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirehoseLogDestinationParameters_DeliveryStreamArn:
+			v.DeliveryStreamArn = new(string)
+			return d.ReadString(schemas.FirehoseLogDestinationParameters_DeliveryStreamArn, v.DeliveryStreamArn)
+		}
+		return nil
+	})
 }
 
 // The Secrets Manager secret that stores your broker credentials.
@@ -596,6 +1266,12 @@ type MQBrokerAccessCredentialsMemberBasicAuth struct {
 }
 
 func (*MQBrokerAccessCredentialsMemberBasicAuth) isMQBrokerAccessCredentials() {}
+func (v *MQBrokerAccessCredentialsMemberBasicAuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MQBrokerAccessCredentials_BasicAuth, v.Value)
+}
+func (v *MQBrokerAccessCredentialsMemberBasicAuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.MQBrokerAccessCredentials_BasicAuth, &v.Value)
+}
 
 // The Secrets Manager secret that stores your stream credentials.
 //
@@ -615,6 +1291,12 @@ type MSKAccessCredentialsMemberClientCertificateTlsAuth struct {
 }
 
 func (*MSKAccessCredentialsMemberClientCertificateTlsAuth) isMSKAccessCredentials() {}
+func (v *MSKAccessCredentialsMemberClientCertificateTlsAuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MSKAccessCredentials_ClientCertificateTlsAuth, v.Value)
+}
+func (v *MSKAccessCredentialsMemberClientCertificateTlsAuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.MSKAccessCredentials_ClientCertificateTlsAuth, &v.Value)
+}
 
 // The ARN of the Secrets Manager secret.
 type MSKAccessCredentialsMemberSaslScram512Auth struct {
@@ -624,6 +1306,12 @@ type MSKAccessCredentialsMemberSaslScram512Auth struct {
 }
 
 func (*MSKAccessCredentialsMemberSaslScram512Auth) isMSKAccessCredentials() {}
+func (v *MSKAccessCredentialsMemberSaslScram512Auth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MSKAccessCredentials_SaslScram512Auth, v.Value)
+}
+func (v *MSKAccessCredentialsMemberSaslScram512Auth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.MSKAccessCredentials_SaslScram512Auth, &v.Value)
+}
 
 // A mapping of a source event data field to a measure in a Timestream for
 // LiveAnalytics record.
@@ -645,6 +1333,44 @@ type MultiMeasureAttributeMapping struct {
 	MultiMeasureAttributeName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiMeasureAttributeMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiMeasureAttributeMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiMeasureAttributeMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeasureValue != nil {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_MeasureValue, *v.MeasureValue)
+	}
+	if v.MeasureValueType != "" {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_MeasureValueType, string(v.MeasureValueType))
+	}
+	if v.MultiMeasureAttributeName != nil {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_MultiMeasureAttributeName, *v.MultiMeasureAttributeName)
+	}
+}
+func (v *MultiMeasureAttributeMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiMeasureAttributeMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiMeasureAttributeMapping_MeasureValue:
+			v.MeasureValue = new(string)
+			return d.ReadString(schemas.MultiMeasureAttributeMapping_MeasureValue, v.MeasureValue)
+		case schemas.MultiMeasureAttributeMapping_MeasureValueType:
+			var ev string
+			if err := d.ReadString(schemas.MultiMeasureAttributeMapping_MeasureValueType, &ev); err != nil {
+				return err
+			}
+			v.MeasureValueType = MeasureValueType(ev)
+			return nil
+		case schemas.MultiMeasureAttributeMapping_MultiMeasureAttributeName:
+			v.MultiMeasureAttributeName = new(string)
+			return d.ReadString(schemas.MultiMeasureAttributeMapping_MultiMeasureAttributeName, v.MultiMeasureAttributeName)
+		}
+		return nil
+	})
 }
 
 // Maps multiple measures from the source event to the same Timestream for
@@ -669,6 +1395,31 @@ type MultiMeasureMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MultiMeasureMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiMeasureMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiMeasureAttributeMappings(s, schemas.MultiMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.MultiMeasureName != nil {
+		s.WriteString(schemas.MultiMeasureMapping_MultiMeasureName, *v.MultiMeasureName)
+	}
+}
+func (v *MultiMeasureMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiMeasureMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiMeasureMapping_MultiMeasureAttributeMappings:
+			return deserializeMultiMeasureAttributeMappings(d, schemas.MultiMeasureMapping_MultiMeasureAttributeMappings, &v.MultiMeasureAttributeMappings)
+		case schemas.MultiMeasureMapping_MultiMeasureName:
+			v.MultiMeasureName = new(string)
+			return d.ReadString(schemas.MultiMeasureMapping_MultiMeasureName, v.MultiMeasureName)
+		}
+		return nil
+	})
+}
+
 // This structure specifies the network configuration for an Amazon ECS task.
 type NetworkConfiguration struct {
 
@@ -678,6 +1429,30 @@ type NetworkConfiguration struct {
 	AwsvpcConfiguration *AwsVpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsvpcConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConfiguration_awsvpcConfiguration)
+		v.AwsvpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_awsvpcConfiguration:
+			v.AwsvpcConfiguration = &AwsVpcConfiguration{}
+			return v.AwsvpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents a pipe. Amazon EventBridgePipes connect event sources
@@ -719,6 +1494,90 @@ type Pipe struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Pipe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Pipe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Pipe) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Pipe_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Pipe_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentState != "" {
+		s.WriteString(schemas.Pipe_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.Pipe_DesiredState, string(v.DesiredState))
+	}
+	if v.Enrichment != nil {
+		s.WriteString(schemas.Pipe_Enrichment, *v.Enrichment)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Pipe_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Pipe_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.Pipe_Source, *v.Source)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Pipe_StateReason, *v.StateReason)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.Pipe_Target, *v.Target)
+	}
+}
+func (v *Pipe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Pipe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Pipe_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Pipe_Arn, v.Arn)
+		case schemas.Pipe_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Pipe_CreationTime, v.CreationTime)
+		case schemas.Pipe_CurrentState:
+			var ev string
+			if err := d.ReadString(schemas.Pipe_CurrentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = PipeState(ev)
+			return nil
+		case schemas.Pipe_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.Pipe_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = RequestedPipeState(ev)
+			return nil
+		case schemas.Pipe_Enrichment:
+			v.Enrichment = new(string)
+			return d.ReadString(schemas.Pipe_Enrichment, v.Enrichment)
+		case schemas.Pipe_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Pipe_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Pipe_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Pipe_Name, v.Name)
+		case schemas.Pipe_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.Pipe_Source, v.Source)
+		case schemas.Pipe_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Pipe_StateReason, v.StateReason)
+		case schemas.Pipe_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.Pipe_Target, v.Target)
+		}
+		return nil
+	})
+}
+
 // These are custom parameter to be used when the target is an API Gateway REST
 // APIs or EventBridge ApiDestinations. In the latter case, these are merged with
 // any InvocationParameters specified on the Connection, with any values from the
@@ -738,6 +1597,31 @@ type PipeEnrichmentHttpParameters struct {
 	QueryStringParameters map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeEnrichmentHttpParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeEnrichmentHttpParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeEnrichmentHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHeaderParametersMap(s, schemas.PipeEnrichmentHttpParameters_HeaderParameters, v.HeaderParameters)
+	serializePathParameterList(s, schemas.PipeEnrichmentHttpParameters_PathParameterValues, v.PathParameterValues)
+	serializeQueryStringParametersMap(s, schemas.PipeEnrichmentHttpParameters_QueryStringParameters, v.QueryStringParameters)
+}
+func (v *PipeEnrichmentHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeEnrichmentHttpParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeEnrichmentHttpParameters_HeaderParameters:
+			return deserializeHeaderParametersMap(d, schemas.PipeEnrichmentHttpParameters_HeaderParameters, &v.HeaderParameters)
+		case schemas.PipeEnrichmentHttpParameters_PathParameterValues:
+			return deserializePathParameterList(d, schemas.PipeEnrichmentHttpParameters_PathParameterValues, &v.PathParameterValues)
+		case schemas.PipeEnrichmentHttpParameters_QueryStringParameters:
+			return deserializeQueryStringParametersMap(d, schemas.PipeEnrichmentHttpParameters_QueryStringParameters, &v.QueryStringParameters)
+		}
+		return nil
+	})
 }
 
 // The parameters required to set up enrichment on your pipe.
@@ -763,6 +1647,36 @@ type PipeEnrichmentParameters struct {
 	InputTemplate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeEnrichmentParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeEnrichmentParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeEnrichmentParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpParameters != nil {
+		s.WriteStruct(schemas.PipeEnrichmentParameters_HttpParameters)
+		v.HttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputTemplate != nil {
+		s.WriteString(schemas.PipeEnrichmentParameters_InputTemplate, *v.InputTemplate)
+	}
+}
+func (v *PipeEnrichmentParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeEnrichmentParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeEnrichmentParameters_HttpParameters:
+			v.HttpParameters = &PipeEnrichmentHttpParameters{}
+			return v.HttpParameters.Deserialize(d)
+		case schemas.PipeEnrichmentParameters_InputTemplate:
+			v.InputTemplate = new(string)
+			return d.ReadString(schemas.PipeEnrichmentParameters_InputTemplate, v.InputTemplate)
+		}
+		return nil
+	})
 }
 
 // The logging configuration settings for the pipe.
@@ -792,6 +1706,59 @@ type PipeLogConfiguration struct {
 	S3LogDestination *S3LogDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudwatchLogsLogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfiguration_CloudwatchLogsLogDestination)
+		v.CloudwatchLogsLogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirehoseLogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfiguration_FirehoseLogDestination)
+		v.FirehoseLogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludeExecutionData(s, schemas.PipeLogConfiguration_IncludeExecutionData, v.IncludeExecutionData)
+	if v.Level != "" {
+		s.WriteString(schemas.PipeLogConfiguration_Level, string(v.Level))
+	}
+	if v.S3LogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfiguration_S3LogDestination)
+		v.S3LogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeLogConfiguration_CloudwatchLogsLogDestination:
+			v.CloudwatchLogsLogDestination = &CloudwatchLogsLogDestination{}
+			return v.CloudwatchLogsLogDestination.Deserialize(d)
+		case schemas.PipeLogConfiguration_FirehoseLogDestination:
+			v.FirehoseLogDestination = &FirehoseLogDestination{}
+			return v.FirehoseLogDestination.Deserialize(d)
+		case schemas.PipeLogConfiguration_IncludeExecutionData:
+			return deserializeIncludeExecutionData(d, schemas.PipeLogConfiguration_IncludeExecutionData, &v.IncludeExecutionData)
+		case schemas.PipeLogConfiguration_Level:
+			var ev string
+			if err := d.ReadString(schemas.PipeLogConfiguration_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = LogLevel(ev)
+			return nil
+		case schemas.PipeLogConfiguration_S3LogDestination:
+			v.S3LogDestination = &S3LogDestination{}
+			return v.S3LogDestination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the logging configuration settings for the pipe.
@@ -849,6 +1816,59 @@ type PipeLogConfigurationParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeLogConfigurationParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeLogConfigurationParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeLogConfigurationParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudwatchLogsLogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfigurationParameters_CloudwatchLogsLogDestination)
+		v.CloudwatchLogsLogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirehoseLogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfigurationParameters_FirehoseLogDestination)
+		v.FirehoseLogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludeExecutionData(s, schemas.PipeLogConfigurationParameters_IncludeExecutionData, v.IncludeExecutionData)
+	if v.Level != "" {
+		s.WriteString(schemas.PipeLogConfigurationParameters_Level, string(v.Level))
+	}
+	if v.S3LogDestination != nil {
+		s.WriteStruct(schemas.PipeLogConfigurationParameters_S3LogDestination)
+		v.S3LogDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeLogConfigurationParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeLogConfigurationParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeLogConfigurationParameters_CloudwatchLogsLogDestination:
+			v.CloudwatchLogsLogDestination = &CloudwatchLogsLogDestinationParameters{}
+			return v.CloudwatchLogsLogDestination.Deserialize(d)
+		case schemas.PipeLogConfigurationParameters_FirehoseLogDestination:
+			v.FirehoseLogDestination = &FirehoseLogDestinationParameters{}
+			return v.FirehoseLogDestination.Deserialize(d)
+		case schemas.PipeLogConfigurationParameters_IncludeExecutionData:
+			return deserializeIncludeExecutionData(d, schemas.PipeLogConfigurationParameters_IncludeExecutionData, &v.IncludeExecutionData)
+		case schemas.PipeLogConfigurationParameters_Level:
+			var ev string
+			if err := d.ReadString(schemas.PipeLogConfigurationParameters_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = LogLevel(ev)
+			return nil
+		case schemas.PipeLogConfigurationParameters_S3LogDestination:
+			v.S3LogDestination = &S3LogDestinationParameters{}
+			return v.S3LogDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an Active MQ broker as a source.
 type PipeSourceActiveMQBrokerParameters struct {
 
@@ -869,6 +1889,43 @@ type PipeSourceActiveMQBrokerParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeSourceActiveMQBrokerParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceActiveMQBrokerParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceActiveMQBrokerParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceActiveMQBrokerParameters_BatchSize, *v.BatchSize)
+	}
+	serializeMQBrokerAccessCredentials(s, schemas.PipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.QueueName != nil {
+		s.WriteString(schemas.PipeSourceActiveMQBrokerParameters_QueueName, *v.QueueName)
+	}
+}
+func (v *PipeSourceActiveMQBrokerParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceActiveMQBrokerParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceActiveMQBrokerParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceActiveMQBrokerParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceActiveMQBrokerParameters_Credentials:
+			return deserializeMQBrokerAccessCredentials(d, schemas.PipeSourceActiveMQBrokerParameters_Credentials, &v.Credentials)
+		case schemas.PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceActiveMQBrokerParameters_QueueName:
+			v.QueueName = new(string)
+			return d.ReadString(schemas.PipeSourceActiveMQBrokerParameters_QueueName, v.QueueName)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a DynamoDB stream as a source.
@@ -909,6 +1966,80 @@ type PipeSourceDynamoDBStreamParameters struct {
 	ParallelizationFactor *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeSourceDynamoDBStreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceDynamoDBStreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceDynamoDBStreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceDynamoDBStreamParameters_BatchSize, *v.BatchSize)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.PipeSourceDynamoDBStreamParameters_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.MaximumRecordAgeInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, *v.MaximumRecordAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.OnPartialBatchItemFailure != "" {
+		s.WriteString(schemas.PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, string(v.OnPartialBatchItemFailure))
+	}
+	if v.ParallelizationFactor != nil {
+		s.WriteInt32(schemas.PipeSourceDynamoDBStreamParameters_ParallelizationFactor, *v.ParallelizationFactor)
+	}
+	if v.StartingPosition != "" {
+		s.WriteString(schemas.PipeSourceDynamoDBStreamParameters_StartingPosition, string(v.StartingPosition))
+	}
+}
+func (v *PipeSourceDynamoDBStreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceDynamoDBStreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceDynamoDBStreamParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceDynamoDBStreamParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceDynamoDBStreamParameters_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds:
+			v.MaximumRecordAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, v.MaximumRecordAgeInSeconds)
+		case schemas.PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		case schemas.PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, &ev); err != nil {
+				return err
+			}
+			v.OnPartialBatchItemFailure = OnPartialBatchItemFailureStreams(ev)
+			return nil
+		case schemas.PipeSourceDynamoDBStreamParameters_ParallelizationFactor:
+			v.ParallelizationFactor = new(int32)
+			return d.ReadInt32(schemas.PipeSourceDynamoDBStreamParameters_ParallelizationFactor, v.ParallelizationFactor)
+		case schemas.PipeSourceDynamoDBStreamParameters_StartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceDynamoDBStreamParameters_StartingPosition, &ev); err != nil {
+				return err
+			}
+			v.StartingPosition = DynamoDBStreamStartPosition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The parameters for using a Kinesis stream as a source.
@@ -955,6 +2086,86 @@ type PipeSourceKinesisStreamParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeSourceKinesisStreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceKinesisStreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceKinesisStreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceKinesisStreamParameters_BatchSize, *v.BatchSize)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.PipeSourceKinesisStreamParameters_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.MaximumRecordAgeInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, *v.MaximumRecordAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.PipeSourceKinesisStreamParameters_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.OnPartialBatchItemFailure != "" {
+		s.WriteString(schemas.PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, string(v.OnPartialBatchItemFailure))
+	}
+	if v.ParallelizationFactor != nil {
+		s.WriteInt32(schemas.PipeSourceKinesisStreamParameters_ParallelizationFactor, *v.ParallelizationFactor)
+	}
+	if v.StartingPosition != "" {
+		s.WriteString(schemas.PipeSourceKinesisStreamParameters_StartingPosition, string(v.StartingPosition))
+	}
+	if v.StartingPositionTimestamp != nil {
+		s.WriteTime(schemas.PipeSourceKinesisStreamParameters_StartingPositionTimestamp, *v.StartingPositionTimestamp)
+	}
+}
+func (v *PipeSourceKinesisStreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceKinesisStreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceKinesisStreamParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceKinesisStreamParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceKinesisStreamParameters_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds:
+			v.MaximumRecordAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, v.MaximumRecordAgeInSeconds)
+		case schemas.PipeSourceKinesisStreamParameters_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.PipeSourceKinesisStreamParameters_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		case schemas.PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, &ev); err != nil {
+				return err
+			}
+			v.OnPartialBatchItemFailure = OnPartialBatchItemFailureStreams(ev)
+			return nil
+		case schemas.PipeSourceKinesisStreamParameters_ParallelizationFactor:
+			v.ParallelizationFactor = new(int32)
+			return d.ReadInt32(schemas.PipeSourceKinesisStreamParameters_ParallelizationFactor, v.ParallelizationFactor)
+		case schemas.PipeSourceKinesisStreamParameters_StartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceKinesisStreamParameters_StartingPosition, &ev); err != nil {
+				return err
+			}
+			v.StartingPosition = KinesisStreamStartPosition(ev)
+			return nil
+		case schemas.PipeSourceKinesisStreamParameters_StartingPositionTimestamp:
+			v.StartingPositionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PipeSourceKinesisStreamParameters_StartingPositionTimestamp, v.StartingPositionTimestamp)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an MSK stream as a source.
 type PipeSourceManagedStreamingKafkaParameters struct {
 
@@ -979,6 +2190,59 @@ type PipeSourceManagedStreamingKafkaParameters struct {
 	StartingPosition MSKStartPosition
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeSourceManagedStreamingKafkaParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceManagedStreamingKafkaParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceManagedStreamingKafkaParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceManagedStreamingKafkaParameters_BatchSize, *v.BatchSize)
+	}
+	if v.ConsumerGroupID != nil {
+		s.WriteString(schemas.PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID, *v.ConsumerGroupID)
+	}
+	serializeMSKAccessCredentials(s, schemas.PipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.StartingPosition != "" {
+		s.WriteString(schemas.PipeSourceManagedStreamingKafkaParameters_StartingPosition, string(v.StartingPosition))
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.PipeSourceManagedStreamingKafkaParameters_TopicName, *v.TopicName)
+	}
+}
+func (v *PipeSourceManagedStreamingKafkaParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceManagedStreamingKafkaParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceManagedStreamingKafkaParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceManagedStreamingKafkaParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID:
+			v.ConsumerGroupID = new(string)
+			return d.ReadString(schemas.PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID, v.ConsumerGroupID)
+		case schemas.PipeSourceManagedStreamingKafkaParameters_Credentials:
+			return deserializeMSKAccessCredentials(d, schemas.PipeSourceManagedStreamingKafkaParameters_Credentials, &v.Credentials)
+		case schemas.PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceManagedStreamingKafkaParameters_StartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceManagedStreamingKafkaParameters_StartingPosition, &ev); err != nil {
+				return err
+			}
+			v.StartingPosition = MSKStartPosition(ev)
+			return nil
+		case schemas.PipeSourceManagedStreamingKafkaParameters_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.PipeSourceManagedStreamingKafkaParameters_TopicName, v.TopicName)
+		}
+		return nil
+	})
 }
 
 // The parameters required to set up a source for your pipe.
@@ -1028,6 +2292,86 @@ type PipeSourceParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeSourceParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveMQBrokerParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_ActiveMQBrokerParameters)
+		v.ActiveMQBrokerParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamoDBStreamParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_DynamoDBStreamParameters)
+		v.DynamoDBStreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_FilterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_KinesisStreamParameters)
+		v.KinesisStreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedStreamingKafkaParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_ManagedStreamingKafkaParameters)
+		v.ManagedStreamingKafkaParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RabbitMQBrokerParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_RabbitMQBrokerParameters)
+		v.RabbitMQBrokerParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedKafkaParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_SelfManagedKafkaParameters)
+		v.SelfManagedKafkaParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsQueueParameters != nil {
+		s.WriteStruct(schemas.PipeSourceParameters_SqsQueueParameters)
+		v.SqsQueueParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeSourceParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceParameters_ActiveMQBrokerParameters:
+			v.ActiveMQBrokerParameters = &PipeSourceActiveMQBrokerParameters{}
+			return v.ActiveMQBrokerParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_DynamoDBStreamParameters:
+			v.DynamoDBStreamParameters = &PipeSourceDynamoDBStreamParameters{}
+			return v.DynamoDBStreamParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_FilterCriteria:
+			v.FilterCriteria = &FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.PipeSourceParameters_KinesisStreamParameters:
+			v.KinesisStreamParameters = &PipeSourceKinesisStreamParameters{}
+			return v.KinesisStreamParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_ManagedStreamingKafkaParameters:
+			v.ManagedStreamingKafkaParameters = &PipeSourceManagedStreamingKafkaParameters{}
+			return v.ManagedStreamingKafkaParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_RabbitMQBrokerParameters:
+			v.RabbitMQBrokerParameters = &PipeSourceRabbitMQBrokerParameters{}
+			return v.RabbitMQBrokerParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_SelfManagedKafkaParameters:
+			v.SelfManagedKafkaParameters = &PipeSourceSelfManagedKafkaParameters{}
+			return v.SelfManagedKafkaParameters.Deserialize(d)
+		case schemas.PipeSourceParameters_SqsQueueParameters:
+			v.SqsQueueParameters = &PipeSourceSqsQueueParameters{}
+			return v.SqsQueueParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Rabbit MQ broker as a source.
 type PipeSourceRabbitMQBrokerParameters struct {
 
@@ -1051,6 +2395,49 @@ type PipeSourceRabbitMQBrokerParameters struct {
 	VirtualHost *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeSourceRabbitMQBrokerParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceRabbitMQBrokerParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceRabbitMQBrokerParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceRabbitMQBrokerParameters_BatchSize, *v.BatchSize)
+	}
+	serializeMQBrokerAccessCredentials(s, schemas.PipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.QueueName != nil {
+		s.WriteString(schemas.PipeSourceRabbitMQBrokerParameters_QueueName, *v.QueueName)
+	}
+	if v.VirtualHost != nil {
+		s.WriteString(schemas.PipeSourceRabbitMQBrokerParameters_VirtualHost, *v.VirtualHost)
+	}
+}
+func (v *PipeSourceRabbitMQBrokerParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceRabbitMQBrokerParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceRabbitMQBrokerParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceRabbitMQBrokerParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceRabbitMQBrokerParameters_Credentials:
+			return deserializeMQBrokerAccessCredentials(d, schemas.PipeSourceRabbitMQBrokerParameters_Credentials, &v.Credentials)
+		case schemas.PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceRabbitMQBrokerParameters_QueueName:
+			v.QueueName = new(string)
+			return d.ReadString(schemas.PipeSourceRabbitMQBrokerParameters_QueueName, v.QueueName)
+		case schemas.PipeSourceRabbitMQBrokerParameters_VirtualHost:
+			v.VirtualHost = new(string)
+			return d.ReadString(schemas.PipeSourceRabbitMQBrokerParameters_VirtualHost, v.VirtualHost)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
@@ -1099,6 +2486,76 @@ type PipeSourceSelfManagedKafkaParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeSourceSelfManagedKafkaParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceSelfManagedKafkaParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceSelfManagedKafkaParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKafkaBootstrapServers(s, schemas.PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers, v.AdditionalBootstrapServers)
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceSelfManagedKafkaParameters_BatchSize, *v.BatchSize)
+	}
+	if v.ConsumerGroupID != nil {
+		s.WriteString(schemas.PipeSourceSelfManagedKafkaParameters_ConsumerGroupID, *v.ConsumerGroupID)
+	}
+	serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.PipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.ServerRootCaCertificate != nil {
+		s.WriteString(schemas.PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, *v.ServerRootCaCertificate)
+	}
+	if v.StartingPosition != "" {
+		s.WriteString(schemas.PipeSourceSelfManagedKafkaParameters_StartingPosition, string(v.StartingPosition))
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.PipeSourceSelfManagedKafkaParameters_TopicName, *v.TopicName)
+	}
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.PipeSourceSelfManagedKafkaParameters_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeSourceSelfManagedKafkaParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceSelfManagedKafkaParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers:
+			return deserializeKafkaBootstrapServers(d, schemas.PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers, &v.AdditionalBootstrapServers)
+		case schemas.PipeSourceSelfManagedKafkaParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceSelfManagedKafkaParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceSelfManagedKafkaParameters_ConsumerGroupID:
+			v.ConsumerGroupID = new(string)
+			return d.ReadString(schemas.PipeSourceSelfManagedKafkaParameters_ConsumerGroupID, v.ConsumerGroupID)
+		case schemas.PipeSourceSelfManagedKafkaParameters_Credentials:
+			return deserializeSelfManagedKafkaAccessConfigurationCredentials(d, schemas.PipeSourceSelfManagedKafkaParameters_Credentials, &v.Credentials)
+		case schemas.PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate:
+			v.ServerRootCaCertificate = new(string)
+			return d.ReadString(schemas.PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, v.ServerRootCaCertificate)
+		case schemas.PipeSourceSelfManagedKafkaParameters_StartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.PipeSourceSelfManagedKafkaParameters_StartingPosition, &ev); err != nil {
+				return err
+			}
+			v.StartingPosition = SelfManagedKafkaStartPosition(ev)
+			return nil
+		case schemas.PipeSourceSelfManagedKafkaParameters_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.PipeSourceSelfManagedKafkaParameters_TopicName, v.TopicName)
+		case schemas.PipeSourceSelfManagedKafkaParameters_Vpc:
+			v.Vpc = &SelfManagedKafkaAccessConfigurationVpc{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Amazon SQS stream as a source.
 type PipeSourceSqsQueueParameters struct {
 
@@ -1109,6 +2566,34 @@ type PipeSourceSqsQueueParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeSourceSqsQueueParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeSourceSqsQueueParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeSourceSqsQueueParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.PipeSourceSqsQueueParameters_BatchSize, *v.BatchSize)
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+}
+func (v *PipeSourceSqsQueueParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeSourceSqsQueueParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeSourceSqsQueueParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.PipeSourceSqsQueueParameters_BatchSize, v.BatchSize)
+		case schemas.PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		}
+		return nil
+	})
 }
 
 // The parameters for using an Batch job as a target.
@@ -1158,6 +2643,64 @@ type PipeTargetBatchJobParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetBatchJobParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetBatchJobParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetBatchJobParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrayProperties != nil {
+		s.WriteStruct(schemas.PipeTargetBatchJobParameters_ArrayProperties)
+		v.ArrayProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerOverrides != nil {
+		s.WriteStruct(schemas.PipeTargetBatchJobParameters_ContainerOverrides)
+		v.ContainerOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBatchDependsOn(s, schemas.PipeTargetBatchJobParameters_DependsOn, v.DependsOn)
+	if v.JobDefinition != nil {
+		s.WriteString(schemas.PipeTargetBatchJobParameters_JobDefinition, *v.JobDefinition)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.PipeTargetBatchJobParameters_JobName, *v.JobName)
+	}
+	serializeBatchParametersMap(s, schemas.PipeTargetBatchJobParameters_Parameters, v.Parameters)
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.PipeTargetBatchJobParameters_RetryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeTargetBatchJobParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetBatchJobParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetBatchJobParameters_ArrayProperties:
+			v.ArrayProperties = &BatchArrayProperties{}
+			return v.ArrayProperties.Deserialize(d)
+		case schemas.PipeTargetBatchJobParameters_ContainerOverrides:
+			v.ContainerOverrides = &BatchContainerOverrides{}
+			return v.ContainerOverrides.Deserialize(d)
+		case schemas.PipeTargetBatchJobParameters_DependsOn:
+			return deserializeBatchDependsOn(d, schemas.PipeTargetBatchJobParameters_DependsOn, &v.DependsOn)
+		case schemas.PipeTargetBatchJobParameters_JobDefinition:
+			v.JobDefinition = new(string)
+			return d.ReadString(schemas.PipeTargetBatchJobParameters_JobDefinition, v.JobDefinition)
+		case schemas.PipeTargetBatchJobParameters_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.PipeTargetBatchJobParameters_JobName, v.JobName)
+		case schemas.PipeTargetBatchJobParameters_Parameters:
+			return deserializeBatchParametersMap(d, schemas.PipeTargetBatchJobParameters_Parameters, &v.Parameters)
+		case schemas.PipeTargetBatchJobParameters_RetryStrategy:
+			v.RetryStrategy = &BatchRetryStrategy{}
+			return v.RetryStrategy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an CloudWatch Logs log stream as a target.
 type PipeTargetCloudWatchLogsParameters struct {
 
@@ -1169,6 +2712,34 @@ type PipeTargetCloudWatchLogsParameters struct {
 	Timestamp *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetCloudWatchLogsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetCloudWatchLogsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetCloudWatchLogsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogStreamName != nil {
+		s.WriteString(schemas.PipeTargetCloudWatchLogsParameters_LogStreamName, *v.LogStreamName)
+	}
+	if v.Timestamp != nil {
+		s.WriteString(schemas.PipeTargetCloudWatchLogsParameters_Timestamp, *v.Timestamp)
+	}
+}
+func (v *PipeTargetCloudWatchLogsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetCloudWatchLogsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetCloudWatchLogsParameters_LogStreamName:
+			v.LogStreamName = new(string)
+			return d.ReadString(schemas.PipeTargetCloudWatchLogsParameters_LogStreamName, v.LogStreamName)
+		case schemas.PipeTargetCloudWatchLogsParameters_Timestamp:
+			v.Timestamp = new(string)
+			return d.ReadString(schemas.PipeTargetCloudWatchLogsParameters_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // The parameters for using an Amazon ECS task as a target.
@@ -1264,6 +2835,110 @@ type PipeTargetEcsTaskParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetEcsTaskParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetEcsTaskParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetEcsTaskParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderStrategy(s, schemas.PipeTargetEcsTaskParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.PipeTargetEcsTaskParameters_EnableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.PipeTargetEcsTaskParameters_EnableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_Group, *v.Group)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_LaunchType, string(v.LaunchType))
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.PipeTargetEcsTaskParameters_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.PipeTargetEcsTaskParameters_Overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.PipeTargetEcsTaskParameters_PlacementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.PipeTargetEcsTaskParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_PlatformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_PropagateTags, string(v.PropagateTags))
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_ReferenceId, *v.ReferenceId)
+	}
+	serializeTagList(s, schemas.PipeTargetEcsTaskParameters_Tags, v.Tags)
+	if v.TaskCount != nil {
+		s.WriteInt32(schemas.PipeTargetEcsTaskParameters_TaskCount, *v.TaskCount)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.PipeTargetEcsTaskParameters_TaskDefinitionArn, *v.TaskDefinitionArn)
+	}
+}
+func (v *PipeTargetEcsTaskParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetEcsTaskParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetEcsTaskParameters_CapacityProviderStrategy:
+			return deserializeCapacityProviderStrategy(d, schemas.PipeTargetEcsTaskParameters_CapacityProviderStrategy, &v.CapacityProviderStrategy)
+		case schemas.PipeTargetEcsTaskParameters_EnableECSManagedTags:
+			return d.ReadBool(schemas.PipeTargetEcsTaskParameters_EnableECSManagedTags, &v.EnableECSManagedTags)
+		case schemas.PipeTargetEcsTaskParameters_EnableExecuteCommand:
+			return d.ReadBool(schemas.PipeTargetEcsTaskParameters_EnableExecuteCommand, &v.EnableExecuteCommand)
+		case schemas.PipeTargetEcsTaskParameters_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.PipeTargetEcsTaskParameters_Group, v.Group)
+		case schemas.PipeTargetEcsTaskParameters_LaunchType:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetEcsTaskParameters_LaunchType, &ev); err != nil {
+				return err
+			}
+			v.LaunchType = LaunchType(ev)
+			return nil
+		case schemas.PipeTargetEcsTaskParameters_NetworkConfiguration:
+			v.NetworkConfiguration = &NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.PipeTargetEcsTaskParameters_Overrides:
+			v.Overrides = &EcsTaskOverride{}
+			return v.Overrides.Deserialize(d)
+		case schemas.PipeTargetEcsTaskParameters_PlacementConstraints:
+			return deserializePlacementConstraints(d, schemas.PipeTargetEcsTaskParameters_PlacementConstraints, &v.PlacementConstraints)
+		case schemas.PipeTargetEcsTaskParameters_PlacementStrategy:
+			return deserializePlacementStrategies(d, schemas.PipeTargetEcsTaskParameters_PlacementStrategy, &v.PlacementStrategy)
+		case schemas.PipeTargetEcsTaskParameters_PlatformVersion:
+			v.PlatformVersion = new(string)
+			return d.ReadString(schemas.PipeTargetEcsTaskParameters_PlatformVersion, v.PlatformVersion)
+		case schemas.PipeTargetEcsTaskParameters_PropagateTags:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetEcsTaskParameters_PropagateTags, &ev); err != nil {
+				return err
+			}
+			v.PropagateTags = PropagateTags(ev)
+			return nil
+		case schemas.PipeTargetEcsTaskParameters_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.PipeTargetEcsTaskParameters_ReferenceId, v.ReferenceId)
+		case schemas.PipeTargetEcsTaskParameters_Tags:
+			return deserializeTagList(d, schemas.PipeTargetEcsTaskParameters_Tags, &v.Tags)
+		case schemas.PipeTargetEcsTaskParameters_TaskCount:
+			v.TaskCount = new(int32)
+			return d.ReadInt32(schemas.PipeTargetEcsTaskParameters_TaskCount, v.TaskCount)
+		case schemas.PipeTargetEcsTaskParameters_TaskDefinitionArn:
+			v.TaskDefinitionArn = new(string)
+			return d.ReadString(schemas.PipeTargetEcsTaskParameters_TaskDefinitionArn, v.TaskDefinitionArn)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an EventBridge event bus as a target.
 type PipeTargetEventBridgeEventBusParameters struct {
 
@@ -1293,6 +2968,49 @@ type PipeTargetEventBridgeEventBusParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetEventBridgeEventBusParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetEventBridgeEventBusParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetEventBridgeEventBusParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetailType != nil {
+		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_DetailType, *v.DetailType)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_EndpointId, *v.EndpointId)
+	}
+	serializeEventBridgeEventResourceList(s, schemas.PipeTargetEventBridgeEventBusParameters_Resources, v.Resources)
+	if v.Source != nil {
+		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_Source, *v.Source)
+	}
+	if v.Time != nil {
+		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_Time, *v.Time)
+	}
+}
+func (v *PipeTargetEventBridgeEventBusParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetEventBridgeEventBusParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetEventBridgeEventBusParameters_DetailType:
+			v.DetailType = new(string)
+			return d.ReadString(schemas.PipeTargetEventBridgeEventBusParameters_DetailType, v.DetailType)
+		case schemas.PipeTargetEventBridgeEventBusParameters_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.PipeTargetEventBridgeEventBusParameters_EndpointId, v.EndpointId)
+		case schemas.PipeTargetEventBridgeEventBusParameters_Resources:
+			return deserializeEventBridgeEventResourceList(d, schemas.PipeTargetEventBridgeEventBusParameters_Resources, &v.Resources)
+		case schemas.PipeTargetEventBridgeEventBusParameters_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.PipeTargetEventBridgeEventBusParameters_Source, v.Source)
+		case schemas.PipeTargetEventBridgeEventBusParameters_Time:
+			v.Time = new(string)
+			return d.ReadString(schemas.PipeTargetEventBridgeEventBusParameters_Time, v.Time)
+		}
+		return nil
+	})
+}
+
 // These are custom parameter to be used when the target is an API Gateway REST
 // APIs or EventBridge ApiDestinations.
 type PipeTargetHttpParameters struct {
@@ -1310,6 +3028,31 @@ type PipeTargetHttpParameters struct {
 	QueryStringParameters map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetHttpParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetHttpParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHeaderParametersMap(s, schemas.PipeTargetHttpParameters_HeaderParameters, v.HeaderParameters)
+	serializePathParameterList(s, schemas.PipeTargetHttpParameters_PathParameterValues, v.PathParameterValues)
+	serializeQueryStringParametersMap(s, schemas.PipeTargetHttpParameters_QueryStringParameters, v.QueryStringParameters)
+}
+func (v *PipeTargetHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetHttpParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetHttpParameters_HeaderParameters:
+			return deserializeHeaderParametersMap(d, schemas.PipeTargetHttpParameters_HeaderParameters, &v.HeaderParameters)
+		case schemas.PipeTargetHttpParameters_PathParameterValues:
+			return deserializePathParameterList(d, schemas.PipeTargetHttpParameters_PathParameterValues, &v.PathParameterValues)
+		case schemas.PipeTargetHttpParameters_QueryStringParameters:
+			return deserializeQueryStringParametersMap(d, schemas.PipeTargetHttpParameters_QueryStringParameters, &v.QueryStringParameters)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a Kinesis stream as a target.
@@ -1330,6 +3073,28 @@ type PipeTargetKinesisStreamParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetKinesisStreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetKinesisStreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetKinesisStreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionKey != nil {
+		s.WriteString(schemas.PipeTargetKinesisStreamParameters_PartitionKey, *v.PartitionKey)
+	}
+}
+func (v *PipeTargetKinesisStreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetKinesisStreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetKinesisStreamParameters_PartitionKey:
+			v.PartitionKey = new(string)
+			return d.ReadString(schemas.PipeTargetKinesisStreamParameters_PartitionKey, v.PartitionKey)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Lambda function as a target.
 type PipeTargetLambdaFunctionParameters struct {
 
@@ -1348,6 +3113,32 @@ type PipeTargetLambdaFunctionParameters struct {
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetLambdaFunctionParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetLambdaFunctionParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetLambdaFunctionParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationType != "" {
+		s.WriteString(schemas.PipeTargetLambdaFunctionParameters_InvocationType, string(v.InvocationType))
+	}
+}
+func (v *PipeTargetLambdaFunctionParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetLambdaFunctionParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetLambdaFunctionParameters_InvocationType:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetLambdaFunctionParameters_InvocationType, &ev); err != nil {
+				return err
+			}
+			v.InvocationType = PipeTargetInvocationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The parameters required to set up a target for your pipe.
@@ -1407,6 +3198,124 @@ type PipeTargetParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchJobParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_BatchJobParameters)
+		v.BatchJobParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloudWatchLogsParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_CloudWatchLogsParameters)
+		v.CloudWatchLogsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsTaskParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_EcsTaskParameters)
+		v.EcsTaskParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridgeEventBusParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_EventBridgeEventBusParameters)
+		v.EventBridgeEventBusParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_HttpParameters)
+		v.HttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputTemplate != nil {
+		s.WriteString(schemas.PipeTargetParameters_InputTemplate, *v.InputTemplate)
+	}
+	if v.KinesisStreamParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_KinesisStreamParameters)
+		v.KinesisStreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_LambdaFunctionParameters)
+		v.LambdaFunctionParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDataParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_RedshiftDataParameters)
+		v.RedshiftDataParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SageMakerPipelineParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_SageMakerPipelineParameters)
+		v.SageMakerPipelineParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsQueueParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_SqsQueueParameters)
+		v.SqsQueueParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StepFunctionStateMachineParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_StepFunctionStateMachineParameters)
+		v.StepFunctionStateMachineParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimestreamParameters != nil {
+		s.WriteStruct(schemas.PipeTargetParameters_TimestreamParameters)
+		v.TimestreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PipeTargetParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetParameters_BatchJobParameters:
+			v.BatchJobParameters = &PipeTargetBatchJobParameters{}
+			return v.BatchJobParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_CloudWatchLogsParameters:
+			v.CloudWatchLogsParameters = &PipeTargetCloudWatchLogsParameters{}
+			return v.CloudWatchLogsParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_EcsTaskParameters:
+			v.EcsTaskParameters = &PipeTargetEcsTaskParameters{}
+			return v.EcsTaskParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_EventBridgeEventBusParameters:
+			v.EventBridgeEventBusParameters = &PipeTargetEventBridgeEventBusParameters{}
+			return v.EventBridgeEventBusParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_HttpParameters:
+			v.HttpParameters = &PipeTargetHttpParameters{}
+			return v.HttpParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_InputTemplate:
+			v.InputTemplate = new(string)
+			return d.ReadString(schemas.PipeTargetParameters_InputTemplate, v.InputTemplate)
+		case schemas.PipeTargetParameters_KinesisStreamParameters:
+			v.KinesisStreamParameters = &PipeTargetKinesisStreamParameters{}
+			return v.KinesisStreamParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_LambdaFunctionParameters:
+			v.LambdaFunctionParameters = &PipeTargetLambdaFunctionParameters{}
+			return v.LambdaFunctionParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_RedshiftDataParameters:
+			v.RedshiftDataParameters = &PipeTargetRedshiftDataParameters{}
+			return v.RedshiftDataParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_SageMakerPipelineParameters:
+			v.SageMakerPipelineParameters = &PipeTargetSageMakerPipelineParameters{}
+			return v.SageMakerPipelineParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_SqsQueueParameters:
+			v.SqsQueueParameters = &PipeTargetSqsQueueParameters{}
+			return v.SqsQueueParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_StepFunctionStateMachineParameters:
+			v.StepFunctionStateMachineParameters = &PipeTargetStateMachineParameters{}
+			return v.StepFunctionStateMachineParameters.Deserialize(d)
+		case schemas.PipeTargetParameters_TimestreamParameters:
+			v.TimestreamParameters = &PipeTargetTimestreamParameters{}
+			return v.TimestreamParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // These are custom parameters to be used when the target is a Amazon Redshift
 // cluster to invoke the Amazon Redshift Data API BatchExecuteStatement.
 type PipeTargetRedshiftDataParameters struct {
@@ -1441,6 +3350,54 @@ type PipeTargetRedshiftDataParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetRedshiftDataParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetRedshiftDataParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetRedshiftDataParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteString(schemas.PipeTargetRedshiftDataParameters_Database, *v.Database)
+	}
+	if v.DbUser != nil {
+		s.WriteString(schemas.PipeTargetRedshiftDataParameters_DbUser, *v.DbUser)
+	}
+	if v.SecretManagerArn != nil {
+		s.WriteString(schemas.PipeTargetRedshiftDataParameters_SecretManagerArn, *v.SecretManagerArn)
+	}
+	serializeSqls(s, schemas.PipeTargetRedshiftDataParameters_Sqls, v.Sqls)
+	if v.StatementName != nil {
+		s.WriteString(schemas.PipeTargetRedshiftDataParameters_StatementName, *v.StatementName)
+	}
+	if v.WithEvent != false {
+		s.WriteBool(schemas.PipeTargetRedshiftDataParameters_WithEvent, v.WithEvent)
+	}
+}
+func (v *PipeTargetRedshiftDataParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetRedshiftDataParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetRedshiftDataParameters_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.PipeTargetRedshiftDataParameters_Database, v.Database)
+		case schemas.PipeTargetRedshiftDataParameters_DbUser:
+			v.DbUser = new(string)
+			return d.ReadString(schemas.PipeTargetRedshiftDataParameters_DbUser, v.DbUser)
+		case schemas.PipeTargetRedshiftDataParameters_SecretManagerArn:
+			v.SecretManagerArn = new(string)
+			return d.ReadString(schemas.PipeTargetRedshiftDataParameters_SecretManagerArn, v.SecretManagerArn)
+		case schemas.PipeTargetRedshiftDataParameters_Sqls:
+			return deserializeSqls(d, schemas.PipeTargetRedshiftDataParameters_Sqls, &v.Sqls)
+		case schemas.PipeTargetRedshiftDataParameters_StatementName:
+			v.StatementName = new(string)
+			return d.ReadString(schemas.PipeTargetRedshiftDataParameters_StatementName, v.StatementName)
+		case schemas.PipeTargetRedshiftDataParameters_WithEvent:
+			return d.ReadBool(schemas.PipeTargetRedshiftDataParameters_WithEvent, &v.WithEvent)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a SageMaker pipeline as a target.
 type PipeTargetSageMakerPipelineParameters struct {
 
@@ -1449,6 +3406,25 @@ type PipeTargetSageMakerPipelineParameters struct {
 	PipelineParameterList []SageMakerPipelineParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetSageMakerPipelineParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetSageMakerPipelineParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetSageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSageMakerPipelineParameterList(s, schemas.PipeTargetSageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+}
+func (v *PipeTargetSageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetSageMakerPipelineParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetSageMakerPipelineParameters_PipelineParameterList:
+			return deserializeSageMakerPipelineParameterList(d, schemas.PipeTargetSageMakerPipelineParameters_PipelineParameterList, &v.PipelineParameterList)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a Amazon SQS stream as a target.
@@ -1463,6 +3439,34 @@ type PipeTargetSqsQueueParameters struct {
 	MessageGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetSqsQueueParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetSqsQueueParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetSqsQueueParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageDeduplicationId != nil {
+		s.WriteString(schemas.PipeTargetSqsQueueParameters_MessageDeduplicationId, *v.MessageDeduplicationId)
+	}
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.PipeTargetSqsQueueParameters_MessageGroupId, *v.MessageGroupId)
+	}
+}
+func (v *PipeTargetSqsQueueParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetSqsQueueParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetSqsQueueParameters_MessageDeduplicationId:
+			v.MessageDeduplicationId = new(string)
+			return d.ReadString(schemas.PipeTargetSqsQueueParameters_MessageDeduplicationId, v.MessageDeduplicationId)
+		case schemas.PipeTargetSqsQueueParameters_MessageGroupId:
+			v.MessageGroupId = new(string)
+			return d.ReadString(schemas.PipeTargetSqsQueueParameters_MessageGroupId, v.MessageGroupId)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a Step Functions state machine as a target.
@@ -1487,6 +3491,32 @@ type PipeTargetStateMachineParameters struct {
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipeTargetStateMachineParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetStateMachineParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetStateMachineParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationType != "" {
+		s.WriteString(schemas.PipeTargetStateMachineParameters_InvocationType, string(v.InvocationType))
+	}
+}
+func (v *PipeTargetStateMachineParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetStateMachineParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetStateMachineParameters_InvocationType:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetStateMachineParameters_InvocationType, &ev); err != nil {
+				return err
+			}
+			v.InvocationType = PipeTargetInvocationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The parameters for using a Timestream for LiveAnalytics table as a target.
@@ -1554,6 +3584,69 @@ type PipeTargetTimestreamParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipeTargetTimestreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipeTargetTimestreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipeTargetTimestreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionMappings(s, schemas.PipeTargetTimestreamParameters_DimensionMappings, v.DimensionMappings)
+	if v.EpochTimeUnit != "" {
+		s.WriteString(schemas.PipeTargetTimestreamParameters_EpochTimeUnit, string(v.EpochTimeUnit))
+	}
+	serializeMultiMeasureMappings(s, schemas.PipeTargetTimestreamParameters_MultiMeasureMappings, v.MultiMeasureMappings)
+	serializeSingleMeasureMappings(s, schemas.PipeTargetTimestreamParameters_SingleMeasureMappings, v.SingleMeasureMappings)
+	if v.TimeFieldType != "" {
+		s.WriteString(schemas.PipeTargetTimestreamParameters_TimeFieldType, string(v.TimeFieldType))
+	}
+	if v.TimeValue != nil {
+		s.WriteString(schemas.PipeTargetTimestreamParameters_TimeValue, *v.TimeValue)
+	}
+	if v.TimestampFormat != nil {
+		s.WriteString(schemas.PipeTargetTimestreamParameters_TimestampFormat, *v.TimestampFormat)
+	}
+	if v.VersionValue != nil {
+		s.WriteString(schemas.PipeTargetTimestreamParameters_VersionValue, *v.VersionValue)
+	}
+}
+func (v *PipeTargetTimestreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipeTargetTimestreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipeTargetTimestreamParameters_DimensionMappings:
+			return deserializeDimensionMappings(d, schemas.PipeTargetTimestreamParameters_DimensionMappings, &v.DimensionMappings)
+		case schemas.PipeTargetTimestreamParameters_EpochTimeUnit:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetTimestreamParameters_EpochTimeUnit, &ev); err != nil {
+				return err
+			}
+			v.EpochTimeUnit = EpochTimeUnit(ev)
+			return nil
+		case schemas.PipeTargetTimestreamParameters_MultiMeasureMappings:
+			return deserializeMultiMeasureMappings(d, schemas.PipeTargetTimestreamParameters_MultiMeasureMappings, &v.MultiMeasureMappings)
+		case schemas.PipeTargetTimestreamParameters_SingleMeasureMappings:
+			return deserializeSingleMeasureMappings(d, schemas.PipeTargetTimestreamParameters_SingleMeasureMappings, &v.SingleMeasureMappings)
+		case schemas.PipeTargetTimestreamParameters_TimeFieldType:
+			var ev string
+			if err := d.ReadString(schemas.PipeTargetTimestreamParameters_TimeFieldType, &ev); err != nil {
+				return err
+			}
+			v.TimeFieldType = TimeFieldType(ev)
+			return nil
+		case schemas.PipeTargetTimestreamParameters_TimeValue:
+			v.TimeValue = new(string)
+			return d.ReadString(schemas.PipeTargetTimestreamParameters_TimeValue, v.TimeValue)
+		case schemas.PipeTargetTimestreamParameters_TimestampFormat:
+			v.TimestampFormat = new(string)
+			return d.ReadString(schemas.PipeTargetTimestreamParameters_TimestampFormat, v.TimestampFormat)
+		case schemas.PipeTargetTimestreamParameters_VersionValue:
+			v.VersionValue = new(string)
+			return d.ReadString(schemas.PipeTargetTimestreamParameters_VersionValue, v.VersionValue)
+		}
+		return nil
+	})
+}
+
 // An object representing a constraint on task placement. To learn more, see [Task Placement Constraints] in
 // the Amazon Elastic Container Service Developer Guide.
 //
@@ -1573,6 +3666,38 @@ type PlacementConstraint struct {
 	Type PlacementConstraintType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlacementConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.PlacementConstraint_expression, *v.Expression)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementConstraint_type, string(v.Type))
+	}
+}
+func (v *PlacementConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementConstraint_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.PlacementConstraint_expression, v.Expression)
+		case schemas.PlacementConstraint_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementConstraint_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementConstraintType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The task placement strategy for a task or service. To learn more, see [Task Placement Strategies] in the
@@ -1601,6 +3726,38 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlacementStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != nil {
+		s.WriteString(schemas.PlacementStrategy_field, *v.Field)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementStrategy_type, string(v.Type))
+	}
+}
+func (v *PlacementStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementStrategy_field:
+			v.Field = new(string)
+			return d.ReadString(schemas.PlacementStrategy_field, v.Field)
+		case schemas.PlacementStrategy_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementStrategy_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementStrategyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 logging configuration settings for the pipe.
 type S3LogDestination struct {
 
@@ -1625,6 +3782,50 @@ type S3LogDestination struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3LogDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3LogDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3LogDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3LogDestination_BucketName, *v.BucketName)
+	}
+	if v.BucketOwner != nil {
+		s.WriteString(schemas.S3LogDestination_BucketOwner, *v.BucketOwner)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.S3LogDestination_OutputFormat, string(v.OutputFormat))
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3LogDestination_Prefix, *v.Prefix)
+	}
+}
+func (v *S3LogDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3LogDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3LogDestination_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3LogDestination_BucketName, v.BucketName)
+		case schemas.S3LogDestination_BucketOwner:
+			v.BucketOwner = new(string)
+			return d.ReadString(schemas.S3LogDestination_BucketOwner, v.BucketOwner)
+		case schemas.S3LogDestination_OutputFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3LogDestination_OutputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = S3OutputFormat(ev)
+			return nil
+		case schemas.S3LogDestination_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3LogDestination_Prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 logging configuration settings for the pipe.
@@ -1661,6 +3862,50 @@ type S3LogDestinationParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3LogDestinationParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3LogDestinationParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3LogDestinationParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3LogDestinationParameters_BucketName, *v.BucketName)
+	}
+	if v.BucketOwner != nil {
+		s.WriteString(schemas.S3LogDestinationParameters_BucketOwner, *v.BucketOwner)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.S3LogDestinationParameters_OutputFormat, string(v.OutputFormat))
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3LogDestinationParameters_Prefix, *v.Prefix)
+	}
+}
+func (v *S3LogDestinationParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3LogDestinationParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3LogDestinationParameters_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3LogDestinationParameters_BucketName, v.BucketName)
+		case schemas.S3LogDestinationParameters_BucketOwner:
+			v.BucketOwner = new(string)
+			return d.ReadString(schemas.S3LogDestinationParameters_BucketOwner, v.BucketOwner)
+		case schemas.S3LogDestinationParameters_OutputFormat:
+			var ev string
+			if err := d.ReadString(schemas.S3LogDestinationParameters_OutputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = S3OutputFormat(ev)
+			return nil
+		case schemas.S3LogDestinationParameters_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3LogDestinationParameters_Prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Name/Value pair of a parameter to start execution of a SageMaker Model Building
 // Pipeline.
 type SageMakerPipelineParameter struct {
@@ -1676,6 +3921,34 @@ type SageMakerPipelineParameter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SageMakerPipelineParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerPipelineParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerPipelineParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Value, *v.Value)
+	}
+}
+func (v *SageMakerPipelineParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerPipelineParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Name, v.Name)
+		case schemas.SageMakerPipelineParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The Secrets Manager secret that stores your stream credentials.
@@ -1699,6 +3972,12 @@ type SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth struct {
 
 func (*SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth) isSelfManagedKafkaAccessConfigurationCredentials() {
 }
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SelfManagedKafkaAccessConfigurationCredentials_BasicAuth, v.Value)
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SelfManagedKafkaAccessConfigurationCredentials_BasicAuth, &v.Value)
+}
 
 // The ARN of the Secrets Manager secret.
 type SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth struct {
@@ -1708,6 +3987,12 @@ type SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAut
 }
 
 func (*SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth) isSelfManagedKafkaAccessConfigurationCredentials() {
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth, v.Value)
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth, &v.Value)
 }
 
 // The ARN of the Secrets Manager secret.
@@ -1719,6 +4004,12 @@ type SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth struct
 
 func (*SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth) isSelfManagedKafkaAccessConfigurationCredentials() {
 }
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth, v.Value)
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth, &v.Value)
+}
 
 // The ARN of the Secrets Manager secret.
 type SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth struct {
@@ -1728,6 +4019,12 @@ type SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth struct
 }
 
 func (*SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth) isSelfManagedKafkaAccessConfigurationCredentials() {
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth, v.Value)
+}
+func (v *SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth, &v.Value)
 }
 
 // This structure specifies the VPC subnets and security groups for the stream,
@@ -1743,6 +4040,28 @@ type SelfManagedKafkaAccessConfigurationVpc struct {
 	Subnets []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelfManagedKafkaAccessConfigurationVpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelfManagedKafkaAccessConfigurationVpc)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelfManagedKafkaAccessConfigurationVpc) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_SecurityGroup, v.SecurityGroup)
+	serializeSubnetIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_Subnets, v.Subnets)
+}
+func (v *SelfManagedKafkaAccessConfigurationVpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelfManagedKafkaAccessConfigurationVpc, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelfManagedKafkaAccessConfigurationVpc_SecurityGroup:
+			return deserializeSecurityGroupIds(d, schemas.SelfManagedKafkaAccessConfigurationVpc_SecurityGroup, &v.SecurityGroup)
+		case schemas.SelfManagedKafkaAccessConfigurationVpc_Subnets:
+			return deserializeSubnetIds(d, schemas.SelfManagedKafkaAccessConfigurationVpc_Subnets, &v.Subnets)
+		}
+		return nil
+	})
 }
 
 // Maps a single source data field to a single record in the specified Timestream
@@ -1771,6 +4090,44 @@ type SingleMeasureMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SingleMeasureMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleMeasureMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeasureName != nil {
+		s.WriteString(schemas.SingleMeasureMapping_MeasureName, *v.MeasureName)
+	}
+	if v.MeasureValue != nil {
+		s.WriteString(schemas.SingleMeasureMapping_MeasureValue, *v.MeasureValue)
+	}
+	if v.MeasureValueType != "" {
+		s.WriteString(schemas.SingleMeasureMapping_MeasureValueType, string(v.MeasureValueType))
+	}
+}
+func (v *SingleMeasureMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleMeasureMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleMeasureMapping_MeasureName:
+			v.MeasureName = new(string)
+			return d.ReadString(schemas.SingleMeasureMapping_MeasureName, v.MeasureName)
+		case schemas.SingleMeasureMapping_MeasureValue:
+			v.MeasureValue = new(string)
+			return d.ReadString(schemas.SingleMeasureMapping_MeasureValue, v.MeasureValue)
+		case schemas.SingleMeasureMapping_MeasureValueType:
+			var ev string
+			if err := d.ReadString(schemas.SingleMeasureMapping_MeasureValueType, &ev); err != nil {
+				return err
+			}
+			v.MeasureValueType = MeasureValueType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A key-value pair associated with an Amazon Web Services resource. In
 // EventBridge, rules and event buses support tagging.
 type Tag struct {
@@ -1789,6 +4146,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an Active MQ broker as a source.
 type UpdatePipeSourceActiveMQBrokerParameters struct {
 
@@ -1804,6 +4189,37 @@ type UpdatePipeSourceActiveMQBrokerParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePipeSourceActiveMQBrokerParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceActiveMQBrokerParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceActiveMQBrokerParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_BatchSize, *v.BatchSize)
+	}
+	serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+}
+func (v *UpdatePipeSourceActiveMQBrokerParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceActiveMQBrokerParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceActiveMQBrokerParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceActiveMQBrokerParameters_Credentials:
+			return deserializeMQBrokerAccessCredentials(d, schemas.UpdatePipeSourceActiveMQBrokerParameters_Credentials, &v.Credentials)
+		case schemas.UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a DynamoDB stream as a source.
@@ -1841,6 +4257,70 @@ type UpdatePipeSourceDynamoDBStreamParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeSourceDynamoDBStreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceDynamoDBStreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceDynamoDBStreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_BatchSize, *v.BatchSize)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.MaximumRecordAgeInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, *v.MaximumRecordAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.OnPartialBatchItemFailure != "" {
+		s.WriteString(schemas.UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, string(v.OnPartialBatchItemFailure))
+	}
+	if v.ParallelizationFactor != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor, *v.ParallelizationFactor)
+	}
+}
+func (v *UpdatePipeSourceDynamoDBStreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceDynamoDBStreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds:
+			v.MaximumRecordAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, v.MaximumRecordAgeInSeconds)
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, &ev); err != nil {
+				return err
+			}
+			v.OnPartialBatchItemFailure = OnPartialBatchItemFailureStreams(ev)
+			return nil
+		case schemas.UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor:
+			v.ParallelizationFactor = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor, v.ParallelizationFactor)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Kinesis stream as a source.
 type UpdatePipeSourceKinesisStreamParameters struct {
 
@@ -1876,6 +4356,70 @@ type UpdatePipeSourceKinesisStreamParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeSourceKinesisStreamParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceKinesisStreamParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceKinesisStreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceKinesisStreamParameters_BatchSize, *v.BatchSize)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceKinesisStreamParameters_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.MaximumRecordAgeInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, *v.MaximumRecordAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.OnPartialBatchItemFailure != "" {
+		s.WriteString(schemas.UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, string(v.OnPartialBatchItemFailure))
+	}
+	if v.ParallelizationFactor != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor, *v.ParallelizationFactor)
+	}
+}
+func (v *UpdatePipeSourceKinesisStreamParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceKinesisStreamParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceKinesisStreamParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceKinesisStreamParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceKinesisStreamParameters_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds:
+			v.MaximumRecordAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, v.MaximumRecordAgeInSeconds)
+		case schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		case schemas.UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, &ev); err != nil {
+				return err
+			}
+			v.OnPartialBatchItemFailure = OnPartialBatchItemFailureStreams(ev)
+			return nil
+		case schemas.UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor:
+			v.ParallelizationFactor = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor, v.ParallelizationFactor)
+		}
+		return nil
+	})
+}
+
 // The parameters for using an MSK stream as a source.
 type UpdatePipeSourceManagedStreamingKafkaParameters struct {
 
@@ -1889,6 +4433,37 @@ type UpdatePipeSourceManagedStreamingKafkaParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePipeSourceManagedStreamingKafkaParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceManagedStreamingKafkaParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceManagedStreamingKafkaParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize, *v.BatchSize)
+	}
+	serializeMSKAccessCredentials(s, schemas.UpdatePipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+}
+func (v *UpdatePipeSourceManagedStreamingKafkaParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceManagedStreamingKafkaParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceManagedStreamingKafkaParameters_Credentials:
+			return deserializeMSKAccessCredentials(d, schemas.UpdatePipeSourceManagedStreamingKafkaParameters_Credentials, &v.Credentials)
+		case schemas.UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		}
+		return nil
+	})
 }
 
 // The parameters required to set up a source for your pipe.
@@ -1938,6 +4513,86 @@ type UpdatePipeSourceParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeSourceParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveMQBrokerParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_ActiveMQBrokerParameters)
+		v.ActiveMQBrokerParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamoDBStreamParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_DynamoDBStreamParameters)
+		v.DynamoDBStreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_FilterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_KinesisStreamParameters)
+		v.KinesisStreamParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedStreamingKafkaParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_ManagedStreamingKafkaParameters)
+		v.ManagedStreamingKafkaParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RabbitMQBrokerParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_RabbitMQBrokerParameters)
+		v.RabbitMQBrokerParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedKafkaParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_SelfManagedKafkaParameters)
+		v.SelfManagedKafkaParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsQueueParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceParameters_SqsQueueParameters)
+		v.SqsQueueParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePipeSourceParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceParameters_ActiveMQBrokerParameters:
+			v.ActiveMQBrokerParameters = &UpdatePipeSourceActiveMQBrokerParameters{}
+			return v.ActiveMQBrokerParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_DynamoDBStreamParameters:
+			v.DynamoDBStreamParameters = &UpdatePipeSourceDynamoDBStreamParameters{}
+			return v.DynamoDBStreamParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_FilterCriteria:
+			v.FilterCriteria = &FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_KinesisStreamParameters:
+			v.KinesisStreamParameters = &UpdatePipeSourceKinesisStreamParameters{}
+			return v.KinesisStreamParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_ManagedStreamingKafkaParameters:
+			v.ManagedStreamingKafkaParameters = &UpdatePipeSourceManagedStreamingKafkaParameters{}
+			return v.ManagedStreamingKafkaParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_RabbitMQBrokerParameters:
+			v.RabbitMQBrokerParameters = &UpdatePipeSourceRabbitMQBrokerParameters{}
+			return v.RabbitMQBrokerParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_SelfManagedKafkaParameters:
+			v.SelfManagedKafkaParameters = &UpdatePipeSourceSelfManagedKafkaParameters{}
+			return v.SelfManagedKafkaParameters.Deserialize(d)
+		case schemas.UpdatePipeSourceParameters_SqsQueueParameters:
+			v.SqsQueueParameters = &UpdatePipeSourceSqsQueueParameters{}
+			return v.SqsQueueParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Rabbit MQ broker as a source.
 type UpdatePipeSourceRabbitMQBrokerParameters struct {
 
@@ -1953,6 +4608,37 @@ type UpdatePipeSourceRabbitMQBrokerParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePipeSourceRabbitMQBrokerParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceRabbitMQBrokerParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceRabbitMQBrokerParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_BatchSize, *v.BatchSize)
+	}
+	serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+}
+func (v *UpdatePipeSourceRabbitMQBrokerParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceRabbitMQBrokerParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceRabbitMQBrokerParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceRabbitMQBrokerParameters_Credentials:
+			return deserializeMQBrokerAccessCredentials(d, schemas.UpdatePipeSourceRabbitMQBrokerParameters_Credentials, &v.Credentials)
+		case schemas.UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		}
+		return nil
+	})
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
@@ -1987,6 +4673,51 @@ type UpdatePipeSourceSelfManagedKafkaParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeSourceSelfManagedKafkaParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceSelfManagedKafkaParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceSelfManagedKafkaParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_BatchSize, *v.BatchSize)
+	}
+	serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.UpdatePipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.ServerRootCaCertificate != nil {
+		s.WriteString(schemas.UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, *v.ServerRootCaCertificate)
+	}
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.UpdatePipeSourceSelfManagedKafkaParameters_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePipeSourceSelfManagedKafkaParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceSelfManagedKafkaParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceSelfManagedKafkaParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceSelfManagedKafkaParameters_Credentials:
+			return deserializeSelfManagedKafkaAccessConfigurationCredentials(d, schemas.UpdatePipeSourceSelfManagedKafkaParameters_Credentials, &v.Credentials)
+		case schemas.UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate:
+			v.ServerRootCaCertificate = new(string)
+			return d.ReadString(schemas.UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, v.ServerRootCaCertificate)
+		case schemas.UpdatePipeSourceSelfManagedKafkaParameters_Vpc:
+			v.Vpc = &SelfManagedKafkaAccessConfigurationVpc{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The parameters for using a Amazon SQS stream as a source.
 type UpdatePipeSourceSqsQueueParameters struct {
 
@@ -1997,6 +4728,34 @@ type UpdatePipeSourceSqsQueueParameters struct {
 	MaximumBatchingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePipeSourceSqsQueueParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeSourceSqsQueueParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeSourceSqsQueueParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceSqsQueueParameters_BatchSize, *v.BatchSize)
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+}
+func (v *UpdatePipeSourceSqsQueueParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeSourceSqsQueueParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeSourceSqsQueueParameters_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceSqsQueueParameters_BatchSize, v.BatchSize)
+		case schemas.UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		}
+		return nil
+	})
 }
 
 // Indicates that an error has occurred while performing a validate operation.
@@ -2013,6 +4772,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a device profile.
@@ -39,18 +34,6 @@ type GetDeviceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDeviceProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDeviceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetDeviceProfileRequest_Id, *v.Id)
-	}
-}
-
 type GetDeviceProfileOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -74,97 +57,29 @@ type GetDeviceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDeviceProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDeviceProfileResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetDeviceProfileResponse_Arn, v.Arn)
-		case schemas.GetDeviceProfileResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetDeviceProfileResponse_Id, v.Id)
-		case schemas.GetDeviceProfileResponse_LoRaWAN:
-			v.LoRaWAN = &types.LoRaWANDeviceProfile{}
-			return v.LoRaWAN.Deserialize(d)
-		case schemas.GetDeviceProfileResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetDeviceProfileResponse_Name, v.Name)
-		case schemas.GetDeviceProfileResponse_Sidewalk:
-			v.Sidewalk = &types.SidewalkGetDeviceProfile{}
-			return v.Sidewalk.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceProfile, schemas.GetDeviceProfileRequest, schemas.GetDeviceProfileResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceProfile, schemas.GetDeviceProfileRequest, schemas.GetDeviceProfileResponse), output: &GetDeviceProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeviceProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeviceProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeviceProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +94,8 @@ func (c *Client) addOperationGetDeviceProfileMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDeviceProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeviceProfile",
-	}
 }

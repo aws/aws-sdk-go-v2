@@ -4,13 +4,8 @@ package support
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the refresh status of the Trusted Advisor checks that have the
@@ -21,11 +16,16 @@ import (
 // you call this operation for these checks, you might see an InvalidParameterValue
 // error.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
 //
@@ -64,16 +64,6 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds, v.CheckIds)
-}
-
 // The statuses of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckRefreshStatuses operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 
@@ -88,84 +78,29 @@ type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses:
-			return deserializeTrustedAdvisorCheckRefreshStatusList(d, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses, &v.Statuses)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTrustedAdvisorCheckRefreshStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckRefreshStatuses{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedAdvisorCheckRefreshStatuses, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrustedAdvisorCheckRefreshStatuses{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedAdvisorCheckRefreshStatuses, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse), output: &DescribeTrustedAdvisorCheckRefreshStatusesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTrustedAdvisorCheckRefreshStatuses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTrustedAdvisorCheckRefreshStatusesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckRefreshStatuses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +115,8 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckRefreshStatusesMiddlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckRefreshStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTrustedAdvisorCheckRefreshStatuses",
-	}
 }

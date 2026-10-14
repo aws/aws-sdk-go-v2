@@ -5,10 +5,10 @@ package textract
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new version of an adapter. Operates on a provided AdapterId and a
@@ -86,6 +86,35 @@ type CreateAdapterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_AdapterId, *v.AdapterId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DatasetConfig != nil {
+		s.WriteStruct(schemas.CreateAdapterVersionRequest_DatasetConfig)
+		v.DatasetConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAdapterVersionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateAdapterVersionRequest_Tags, v.Tags)
+}
+
 type CreateAdapterVersionOutput struct {
 
 	// A string containing the unique ID for the adapter that has received a new
@@ -101,65 +130,48 @@ type CreateAdapterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.CreateAdapterVersionResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.CreateAdapterVersionResponse_AdapterVersion, *v.AdapterVersion)
+	}
+}
+func (v *CreateAdapterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAdapterVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAdapterVersionResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.CreateAdapterVersionResponse_AdapterId, v.AdapterId)
+		case schemas.CreateAdapterVersionResponse_AdapterVersion:
+			v.AdapterVersion = new(string)
+			return d.ReadString(schemas.CreateAdapterVersionResponse_AdapterVersion, v.AdapterVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAdapterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.CreateAdapterVersionRequest, schemas.CreateAdapterVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.CreateAdapterVersionRequest, schemas.CreateAdapterVersionResponse), output: &CreateAdapterVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAdapterVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAdapterVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -169,12 +181,6 @@ func (c *Client) addOperationCreateAdapterVersionMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateAdapterVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdapterVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +193,6 @@ func (c *Client) addOperationCreateAdapterVersionMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -232,12 +232,4 @@ func (m *idempotencyToken_initializeOpCreateAdapterVersion) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateAdapterVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAdapterVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAdapterVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAdapterVersion",
-	}
 }

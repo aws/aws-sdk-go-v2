@@ -1,0 +1,3 @@
+POST /account-associations/__AccountAssociationId__/refresh
+
+

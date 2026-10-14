@@ -5,26 +5,15 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Deletes specific examples by ID from DRAFT.
+//	Deletes specific examples by ID from DRAFT. All example IDs are validated
 //
-// Validation: All example IDs are validated before any deletes occur. If any ID
-// does not exist in DRAFT, the entire batch is rejected with
-// ResourceNotFoundException — no examples are deleted (all-or-nothing semantics).
-//
-// Asynchronous: Operates in-place on DRAFT. No version bump occurs. Use
-// CreateDatasetVersion to publish DRAFT as a new numbered version.
-//
-// State guard: Returns ConflictException (DATASET_NOT_READY) if the dataset
-// status is not in {DRAFT, ACTIVE}.
+// before any deletes occur. If any ID does not exist in DRAFT, the entire batch is
+// rejected (all-or-nothing semantics).
 func (c *Client) DeleteDatasetExamples(ctx context.Context, params *DeleteDatasetExamplesInput, optFns ...func(*Options)) (*DeleteDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetExamplesInput{}
@@ -63,22 +52,6 @@ type DeleteDatasetExamplesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDatasetExamplesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteDatasetExamplesRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.DeleteDatasetExamplesRequest_datasetId, *v.DatasetId)
-	}
-	serializeExampleIdList(s, schemas.DeleteDatasetExamplesRequest_exampleIds, v.ExampleIds)
-}
-
 type DeleteDatasetExamplesOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the dataset.
@@ -112,89 +85,23 @@ type DeleteDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDatasetExamplesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDatasetExamplesResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.DeleteDatasetExamplesResponse_datasetArn, v.DatasetArn)
-		case schemas.DeleteDatasetExamplesResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.DeleteDatasetExamplesResponse_datasetId, v.DatasetId)
-		case schemas.DeleteDatasetExamplesResponse_deletedCount:
-			v.DeletedCount = new(int64)
-			return d.ReadInt64(schemas.DeleteDatasetExamplesResponse_deletedCount, v.DeletedCount)
-		case schemas.DeleteDatasetExamplesResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDatasetExamplesResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.DeleteDatasetExamplesResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDatasetExamplesResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetExamples, schemas.DeleteDatasetExamplesRequest, schemas.DeleteDatasetExamplesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetExamples, schemas.DeleteDatasetExamplesRequest, schemas.DeleteDatasetExamplesResponse), output: &DeleteDatasetExamplesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDatasetExamples"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -204,12 +111,6 @@ func (c *Client) addOperationDeleteDatasetExamplesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpDeleteDatasetExamplesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatasetExamples(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,12 +123,6 @@ func (c *Client) addOperationDeleteDatasetExamplesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,12 +162,4 @@ func (m *idempotencyToken_initializeOpDeleteDatasetExamples) HandleInitialize(ct
 }
 func addIdempotencyToken_opDeleteDatasetExamplesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteDatasetExamples{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteDatasetExamples(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDatasetExamples",
-	}
 }

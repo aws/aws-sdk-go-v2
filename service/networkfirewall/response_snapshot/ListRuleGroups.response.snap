@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.ListRuleGroups
+
+{"NextToken":"__NextToken__","RuleGroups":[{"Arn":"__Arn__","Name":"__Name__","VendorName":"__VendorName__"},{"Arn":"__Arn__","Name":"__Name__","VendorName":"__VendorName__"}]}

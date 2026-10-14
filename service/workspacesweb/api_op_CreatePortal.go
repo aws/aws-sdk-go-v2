@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a web portal.
@@ -81,38 +77,6 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePortalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePortalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreatePortalRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.AuthenticationType != "" {
-		s.WriteString(schemas.CreatePortalRequest_authenticationType, string(v.AuthenticationType))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePortalRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreatePortalRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreatePortalRequest_displayName, *v.DisplayName)
-	}
-	if v.InstanceType != "" {
-		s.WriteString(schemas.CreatePortalRequest_instanceType, string(v.InstanceType))
-	}
-	if v.MaxConcurrentSessions != nil {
-		s.WriteInt32(schemas.CreatePortalRequest_maxConcurrentSessions, *v.MaxConcurrentSessions)
-	}
-	if v.PortalCustomDomain != nil {
-		s.WriteString(schemas.CreatePortalRequest_portalCustomDomain, *v.PortalCustomDomain)
-	}
-	serializeTagList(s, schemas.CreatePortalRequest_tags, v.Tags)
-}
-
 type CreatePortalOutput struct {
 
 	// The ARN of the web portal.
@@ -132,76 +96,23 @@ type CreatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePortalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePortalResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_portalArn, v.PortalArn)
-		case schemas.CreatePortalResponse_portalEndpoint:
-			v.PortalEndpoint = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_portalEndpoint, v.PortalEndpoint)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePortal{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePortal{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse), output: &CreatePortalOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePortal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -211,12 +122,6 @@ func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCreatePortalValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePortal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,12 +134,6 @@ func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,12 +173,4 @@ func (m *idempotencyToken_initializeOpCreatePortal) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreatePortalMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePortal{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePortal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePortal",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.ListAvailablePhoneNumbers
+
+{"IsoCountryCode":"__IsoCountryCode__","MaxResults":1,"NextToken":"__NextToken__","NumberCapabilities":["SMS","SMS"],"NumberPreference":[{"Filter":["__Member__","__Member__"],"PreferenceType":["StartsWith","StartsWith"]},{"Filter":["__Member__","__Member__"],"PreferenceType":["StartsWith","StartsWith"]}],"NumberType":"TEN_DLC","RegistrationId":"__RegistrationId__"}

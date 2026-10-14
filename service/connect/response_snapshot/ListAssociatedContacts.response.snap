@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContactSummaryList":[{"Channel":"VOICE","ContactArn":"__ContactArn__","ContactId":"__ContactId__","DisconnectTimestamp":946684800,"InitialContactId":"__InitialContactId__","InitiationMethod":"INBOUND","InitiationTimestamp":946684800,"PreviousContactId":"__PreviousContactId__","RelatedContactId":"__RelatedContactId__"},{"Channel":"VOICE","ContactArn":"__ContactArn__","ContactId":"__ContactId__","DisconnectTimestamp":946684800,"InitialContactId":"__InitialContactId__","InitiationMethod":"INBOUND","InitiationTimestamp":946684800,"PreviousContactId":"__PreviousContactId__","RelatedContactId":"__RelatedContactId__"}],"NextToken":"__NextToken__"}

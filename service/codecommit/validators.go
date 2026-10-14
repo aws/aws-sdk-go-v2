@@ -490,6 +490,26 @@ func (m *validateOpGetApprovalRuleTemplate) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBlobDifferences struct {
+}
+
+func (*validateOpGetBlobDifferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBlobDifferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBlobDifferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBlobDifferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBlob struct {
 }
 
@@ -1626,6 +1646,10 @@ func addOpGetApprovalRuleTemplateValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetApprovalRuleTemplate{}, middleware.After)
 }
 
+func addOpGetBlobDifferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBlobDifferences{}, middleware.After)
+}
+
 func addOpGetBlobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBlob{}, middleware.After)
 }
@@ -2548,6 +2572,24 @@ func validateOpGetApprovalRuleTemplateInput(v *GetApprovalRuleTemplateInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetApprovalRuleTemplateInput"}
 	if v.ApprovalRuleTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleTemplateName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBlobDifferencesInput(v *GetBlobDifferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBlobDifferencesInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.AfterBlobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AfterBlobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

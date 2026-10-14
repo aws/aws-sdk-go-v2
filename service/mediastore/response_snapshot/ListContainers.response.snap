@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MediaStore_20170901.ListContainers
+
+{"Containers":[{"ARN":"__ARN__","AccessLoggingEnabled":true,"CreationTime":946684800,"Endpoint":"__Endpoint__","Name":"__Name__","Status":"ACTIVE"},{"ARN":"__ARN__","AccessLoggingEnabled":true,"CreationTime":946684800,"Endpoint":"__Endpoint__","Name":"__Name__","Status":"ACTIVE"}],"NextToken":"__NextToken__"}

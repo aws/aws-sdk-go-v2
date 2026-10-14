@@ -5,13 +5,9 @@ package timestreamquery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Transitions your account to use TCUs for query pricing and modifies the maximum
@@ -72,26 +68,6 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAccountSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxQueryTCU != nil {
-		s.WriteInt32(schemas.UpdateAccountSettingsRequest_MaxQueryTCU, *v.MaxQueryTCU)
-	}
-	if v.QueryCompute != nil {
-		s.WriteStruct(schemas.UpdateAccountSettingsRequest_QueryCompute)
-		v.QueryCompute.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryPricingModel != "" {
-		s.WriteString(schemas.UpdateAccountSettingsRequest_QueryPricingModel, string(v.QueryPricingModel))
-	}
-}
-
 type UpdateAccountSettingsOutput struct {
 
 	// The configured maximum number of compute units the service will use at any
@@ -110,98 +86,32 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateAccountSettingsResponse_MaxQueryTCU:
-			v.MaxQueryTCU = new(int32)
-			return d.ReadInt32(schemas.UpdateAccountSettingsResponse_MaxQueryTCU, v.MaxQueryTCU)
-		case schemas.UpdateAccountSettingsResponse_QueryCompute:
-			v.QueryCompute = &types.QueryComputeResponse{}
-			return v.QueryCompute.Deserialize(d)
-		case schemas.UpdateAccountSettingsResponse_QueryPricingModel:
-			var ev string
-			if err := d.ReadString(schemas.UpdateAccountSettingsResponse_QueryPricingModel, &ev); err != nil {
-				return err
-			}
-			v.QueryPricingModel = types.QueryPricingModel(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAccountSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAccountSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.UpdateAccountSettingsResponse), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAccountSettingsDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,12 +124,6 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,12 +182,4 @@ func (c *Client) fetchOpUpdateAccountSettingsDiscoverEndpoint(ctx context.Contex
 		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
 	}
 	return weighted, nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccountSettings",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /v1/accounts/__AwsAccountId__/spaces/__SpaceId__/permissions
+
+Content-Type: application/json
+
+{"GrantPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RevokePermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}]}

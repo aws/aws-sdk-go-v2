@@ -4,11 +4,10 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the association between an approval rule template and one or more
@@ -48,6 +47,19 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+	serializeRepositoryNameList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames, v.RepositoryNames)
+}
+
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 
 	// A list of repository names that have had their association with the template
@@ -68,77 +80,48 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRepositoryNameList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames, v.DisassociatedRepositoryNames)
+	serializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors, v.Errors)
+}
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames:
+			return deserializeRepositoryNameList(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames, &v.DisassociatedRepositoryNames)
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors:
+			return deserializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateApprovalRuleTemplateFromRepositories, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateApprovalRuleTemplateFromRepositories, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput), output: &BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateApprovalRuleTemplateFromRepositories{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDisassociateApprovalRuleTemplateFromRepositories"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDisassociateApprovalRuleTemplateFromRepositoriesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateApprovalRuleTemplateFromRepositories(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +136,8 @@ func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositori
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDisassociateApprovalRuleTemplateFromRepositories(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDisassociateApprovalRuleTemplateFromRepositories",
-	}
 }

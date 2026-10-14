@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVpcEndpointPayerResponsibility&DryRun=true&PayerResponsibility=vpc-endpoint-account&Scope=vpc-endpoint-charges&ServiceId=__ServiceId__&Version=2016-11-15&VpcEndpointId=__VpcEndpointId__

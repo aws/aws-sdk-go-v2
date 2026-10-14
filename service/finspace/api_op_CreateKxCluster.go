@@ -5,12 +5,8 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -159,84 +155,6 @@ type CreateKxClusterInput struct {
 	TickerplantLogConfiguration *types.TickerplantLogConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateKxClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKxClusterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKxClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoScalingConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_autoScalingConfiguration)
-		v.AutoScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.AzMode != "" {
-		s.WriteString(schemas.CreateKxClusterRequest_azMode, string(v.AzMode))
-	}
-	serializeKxCacheStorageConfigurations(s, schemas.CreateKxClusterRequest_cacheStorageConfigurations, v.CacheStorageConfigurations)
-	if v.CapacityConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_capacityConfiguration)
-		v.CapacityConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterDescription != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_clusterDescription, *v.ClusterDescription)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_clusterName, *v.ClusterName)
-	}
-	if v.ClusterType != "" {
-		s.WriteString(schemas.CreateKxClusterRequest_clusterType, string(v.ClusterType))
-	}
-	if v.Code != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_code)
-		v.Code.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeKxCommandLineArguments(s, schemas.CreateKxClusterRequest_commandLineArguments, v.CommandLineArguments)
-	serializeKxDatabaseConfigurations(s, schemas.CreateKxClusterRequest_databases, v.Databases)
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_executionRole, *v.ExecutionRole)
-	}
-	if v.InitializationScript != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_initializationScript, *v.InitializationScript)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.CreateKxClusterRequest_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.SavedownStorageConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_savedownStorageConfiguration)
-		v.SavedownStorageConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScalingGroupConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_scalingGroupConfiguration)
-		v.ScalingGroupConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateKxClusterRequest_tags, v.Tags)
-	if v.TickerplantLogConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_tickerplantLogConfiguration)
-		v.TickerplantLogConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VpcConfiguration != nil {
-		s.WriteStruct(schemas.CreateKxClusterRequest_vpcConfiguration)
-		v.VpcConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type CreateKxClusterOutput struct {
@@ -389,153 +307,26 @@ type CreateKxClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKxClusterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKxClusterResponse_autoScalingConfiguration:
-			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
-			return v.AutoScalingConfiguration.Deserialize(d)
-		case schemas.CreateKxClusterResponse_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.CreateKxClusterResponse_azMode:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxClusterResponse_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = types.KxAzMode(ev)
-			return nil
-		case schemas.CreateKxClusterResponse_cacheStorageConfigurations:
-			return deserializeKxCacheStorageConfigurations(d, schemas.CreateKxClusterResponse_cacheStorageConfigurations, &v.CacheStorageConfigurations)
-		case schemas.CreateKxClusterResponse_capacityConfiguration:
-			v.CapacityConfiguration = &types.CapacityConfiguration{}
-			return v.CapacityConfiguration.Deserialize(d)
-		case schemas.CreateKxClusterResponse_clusterDescription:
-			v.ClusterDescription = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_clusterDescription, v.ClusterDescription)
-		case schemas.CreateKxClusterResponse_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_clusterName, v.ClusterName)
-		case schemas.CreateKxClusterResponse_clusterType:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxClusterResponse_clusterType, &ev); err != nil {
-				return err
-			}
-			v.ClusterType = types.KxClusterType(ev)
-			return nil
-		case schemas.CreateKxClusterResponse_code:
-			v.Code = &types.CodeConfiguration{}
-			return v.Code.Deserialize(d)
-		case schemas.CreateKxClusterResponse_commandLineArguments:
-			return deserializeKxCommandLineArguments(d, schemas.CreateKxClusterResponse_commandLineArguments, &v.CommandLineArguments)
-		case schemas.CreateKxClusterResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxClusterResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.CreateKxClusterResponse_databases:
-			return deserializeKxDatabaseConfigurations(d, schemas.CreateKxClusterResponse_databases, &v.Databases)
-		case schemas.CreateKxClusterResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_environmentId, v.EnvironmentId)
-		case schemas.CreateKxClusterResponse_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_executionRole, v.ExecutionRole)
-		case schemas.CreateKxClusterResponse_initializationScript:
-			v.InitializationScript = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_initializationScript, v.InitializationScript)
-		case schemas.CreateKxClusterResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxClusterResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.CreateKxClusterResponse_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_releaseLabel, v.ReleaseLabel)
-		case schemas.CreateKxClusterResponse_savedownStorageConfiguration:
-			v.SavedownStorageConfiguration = &types.KxSavedownStorageConfiguration{}
-			return v.SavedownStorageConfiguration.Deserialize(d)
-		case schemas.CreateKxClusterResponse_scalingGroupConfiguration:
-			v.ScalingGroupConfiguration = &types.KxScalingGroupConfiguration{}
-			return v.ScalingGroupConfiguration.Deserialize(d)
-		case schemas.CreateKxClusterResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxClusterResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxClusterStatus(ev)
-			return nil
-		case schemas.CreateKxClusterResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.CreateKxClusterResponse_statusReason, v.StatusReason)
-		case schemas.CreateKxClusterResponse_tickerplantLogConfiguration:
-			v.TickerplantLogConfiguration = &types.TickerplantLogConfiguration{}
-			return v.TickerplantLogConfiguration.Deserialize(d)
-		case schemas.CreateKxClusterResponse_volumes:
-			return deserializeVolumes(d, schemas.CreateKxClusterResponse_volumes, &v.Volumes)
-		case schemas.CreateKxClusterResponse_vpcConfiguration:
-			v.VpcConfiguration = &types.VpcConfiguration{}
-			return v.VpcConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateKxClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxCluster, schemas.CreateKxClusterRequest, schemas.CreateKxClusterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxCluster, schemas.CreateKxClusterRequest, schemas.CreateKxClusterResponse), output: &CreateKxClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -545,12 +336,6 @@ func (c *Client) addOperationCreateKxClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpCreateKxClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -563,12 +348,6 @@ func (c *Client) addOperationCreateKxClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -608,12 +387,4 @@ func (m *idempotencyToken_initializeOpCreateKxCluster) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateKxClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKxCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKxCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKxCluster",
-	}
 }

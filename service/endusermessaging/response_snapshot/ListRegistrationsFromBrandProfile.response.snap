@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","registrationAssociations":[{"createdAt":946684800,"registrationId":"__RegistrationId__","registrationType":"__RegistrationType__","smartMatchUsed":true},{"createdAt":946684800,"registrationId":"__RegistrationId__","registrationType":"__RegistrationType__","smartMatchUsed":true}]}

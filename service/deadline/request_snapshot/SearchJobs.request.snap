@@ -1,0 +1,5 @@
+POST /2023-10-12/farms/__FarmId__/search/jobs
+
+Content-Type: application/json
+
+{"filterExpressions":{"filters":[{"dateTimeFilter":{"dateTime":"2000-01-01T00:00:00Z","name":"__Name__","operator":"EQUAL"}},{"dateTimeFilter":{"dateTime":"2000-01-01T00:00:00Z","name":"__Name__","operator":"EQUAL"}}],"operator":"AND"},"itemOffset":1,"pageSize":1,"queueIds":["__Member__","__Member__"],"sortExpressions":[{"userJobsFirst":{"userIdentityId":"__UserIdentityId__"}},{"userJobsFirst":{"userIdentityId":"__UserIdentityId__"}}]}

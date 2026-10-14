@@ -1,0 +1,5 @@
+POST /list-tag-sync-tasks
+
+Content-Type: application/json
+
+{"Filters":[{"GroupArn":"__GroupArn__","GroupName":"__GroupName__"},{"GroupArn":"__GroupArn__","GroupName":"__GroupName__"}],"MaxResults":1,"NextToken":"__NextToken__"}

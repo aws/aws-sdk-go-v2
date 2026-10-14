@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new configured table resource.
@@ -73,6 +72,56 @@ type CreateConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedColumnList(s, schemas.CreateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	if v.AnalysisMethod != "" {
+		s.WriteString(schemas.CreateConfiguredTableInput_analysisMethod, string(v.AnalysisMethod))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfiguredTableInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfiguredTableInput_name, *v.Name)
+	}
+	serializeSelectedAnalysisMethods(s, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	serializeTableReference(s, schemas.CreateConfiguredTableInput_tableReference, v.TableReference)
+	serializeTagMap(s, schemas.CreateConfiguredTableInput_tags, v.Tags)
+}
+func (v *CreateConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredTableInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredTableInput_allowedColumns:
+			return deserializeAllowedColumnList(d, schemas.CreateConfiguredTableInput_allowedColumns, &v.AllowedColumns)
+		case schemas.CreateConfiguredTableInput_analysisMethod:
+			var ev string
+			if err := d.ReadString(schemas.CreateConfiguredTableInput_analysisMethod, &ev); err != nil {
+				return err
+			}
+			v.AnalysisMethod = types.AnalysisMethod(ev)
+			return nil
+		case schemas.CreateConfiguredTableInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateConfiguredTableInput_description, v.Description)
+		case schemas.CreateConfiguredTableInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConfiguredTableInput_name, v.Name)
+		case schemas.CreateConfiguredTableInput_selectedAnalysisMethods:
+			return deserializeSelectedAnalysisMethods(d, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, &v.SelectedAnalysisMethods)
+		case schemas.CreateConfiguredTableInput_tableReference:
+			return deserializeTableReference(d, schemas.CreateConfiguredTableInput_tableReference, &v.TableReference)
+		case schemas.CreateConfiguredTableInput_tags:
+			return deserializeTagMap(d, schemas.CreateConfiguredTableInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateConfiguredTableOutput struct {
 
 	// The created configured table.
@@ -86,77 +135,50 @@ type CreateConfiguredTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTable != nil {
+		s.WriteStruct(schemas.CreateConfiguredTableOutput_configuredTable)
+		v.ConfiguredTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConfiguredTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredTableOutput_configuredTable:
+			v.ConfiguredTable = &types.ConfiguredTable{}
+			return v.ConfiguredTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfiguredTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredTable, schemas.CreateConfiguredTableInput, schemas.CreateConfiguredTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredTable, schemas.CreateConfiguredTableInput, schemas.CreateConfiguredTableOutput), output: &CreateConfiguredTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguredTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfiguredTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConfiguredTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguredTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +193,8 @@ func (c *Client) addOperationCreateConfiguredTableMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConfiguredTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConfiguredTable",
-	}
 }

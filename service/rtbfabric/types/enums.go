@@ -28,6 +28,25 @@ func (CertificateAssociationStatus) Values() []CertificateAssociationStatus {
 	}
 }
 
+type ClientRoutingPolicy string
+
+// Enum values for ClientRoutingPolicy
+const (
+	ClientRoutingPolicyAvailabilityZoneAffinity ClientRoutingPolicy = "AVAILABILITY_ZONE_AFFINITY"
+	ClientRoutingPolicyAnyAvailabilityZone      ClientRoutingPolicy = "ANY_AVAILABILITY_ZONE"
+)
+
+// Values returns all known values for ClientRoutingPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientRoutingPolicy) Values() []ClientRoutingPolicy {
+	return []ClientRoutingPolicy{
+		"AVAILABILITY_ZONE_AFFINITY",
+		"ANY_AVAILABILITY_ZONE",
+	}
+}
+
 type ConnectivityType string
 
 // Enum values for ConnectivityType

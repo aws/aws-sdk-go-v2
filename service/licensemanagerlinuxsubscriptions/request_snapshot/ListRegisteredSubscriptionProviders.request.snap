@@ -1,0 +1,5 @@
+POST /subscription/ListRegisteredSubscriptionProviders
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","SubscriptionProviderSources":["RedHat","RedHat"]}

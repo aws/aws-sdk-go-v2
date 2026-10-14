@@ -5,12 +5,8 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an inbound external link.
@@ -31,7 +27,19 @@ func (c *Client) CreateInboundExternalLink(ctx context.Context, params *CreateIn
 
 type CreateInboundExternalLinkInput struct {
 
-	// The unique client token.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same clientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	//
 	// This member is required.
 	ClientToken *string
@@ -53,32 +61,6 @@ type CreateInboundExternalLinkInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateInboundExternalLinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateInboundExternalLinkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attributes != nil {
-		s.WriteStruct(schemas.CreateInboundExternalLinkRequest_attributes)
-		v.Attributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateInboundExternalLinkRequest_clientToken, *v.ClientToken)
-	}
-	if v.GatewayId != nil {
-		s.WriteString(schemas.CreateInboundExternalLinkRequest_gatewayId, *v.GatewayId)
-	}
-	if v.LogSettings != nil {
-		s.WriteStruct(schemas.CreateInboundExternalLinkRequest_logSettings)
-		v.LogSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagsMap(s, schemas.CreateInboundExternalLinkRequest_tags, v.Tags)
 }
 
 type CreateInboundExternalLinkOutput struct {
@@ -109,86 +91,23 @@ type CreateInboundExternalLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateInboundExternalLinkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateInboundExternalLinkResponse_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.CreateInboundExternalLinkResponse_domainName, v.DomainName)
-		case schemas.CreateInboundExternalLinkResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.CreateInboundExternalLinkResponse_gatewayId, v.GatewayId)
-		case schemas.CreateInboundExternalLinkResponse_linkId:
-			v.LinkId = new(string)
-			return d.ReadString(schemas.CreateInboundExternalLinkResponse_linkId, v.LinkId)
-		case schemas.CreateInboundExternalLinkResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateInboundExternalLinkResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.LinkStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateInboundExternalLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInboundExternalLink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInboundExternalLink, schemas.CreateInboundExternalLinkRequest, schemas.CreateInboundExternalLinkResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInboundExternalLink{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInboundExternalLink, schemas.CreateInboundExternalLinkRequest, schemas.CreateInboundExternalLinkResponse), output: &CreateInboundExternalLinkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInboundExternalLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -198,12 +117,6 @@ func (c *Client) addOperationCreateInboundExternalLinkMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCreateInboundExternalLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInboundExternalLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +129,6 @@ func (c *Client) addOperationCreateInboundExternalLinkMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +168,4 @@ func (m *idempotencyToken_initializeOpCreateInboundExternalLink) HandleInitializ
 }
 func addIdempotencyToken_opCreateInboundExternalLinkMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInboundExternalLink{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateInboundExternalLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateInboundExternalLink",
-	}
 }

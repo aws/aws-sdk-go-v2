@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Modifies the parameters of a DB cluster parameter group to the default value.
@@ -59,22 +54,6 @@ type ResetDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResetDBClusterParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResetDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.ResetDBClusterParameterGroupMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	serializeParametersList(s, schemas.ResetDBClusterParameterGroupMessage_Parameters, v.Parameters)
-	if v.ResetAllParameters != nil {
-		s.WriteBool(schemas.ResetDBClusterParameterGroupMessage_ResetAllParameters, *v.ResetAllParameters)
-	}
-}
-
 type ResetDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group.
@@ -96,96 +75,29 @@ type ResetDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetDBClusterParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DBClusterParameterGroupNameMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResetDBClusterParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-}
-func (v *ResetDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DBClusterParameterGroupNameMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName:
-			v.DBClusterParameterGroupName = new(string)
-			return d.ReadString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, v.DBClusterParameterGroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBClusterParameterGroup, schemas.ResetDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResetDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBClusterParameterGroup, schemas.ResetDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage), output: &ResetDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetDBClusterParameterGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpResetDBClusterParameterGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetDBClusterParameterGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +112,8 @@ func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResetDBClusterParameterGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResetDBClusterParameterGroup",
-	}
 }

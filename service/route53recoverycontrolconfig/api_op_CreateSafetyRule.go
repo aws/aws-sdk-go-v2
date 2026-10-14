@@ -5,12 +5,8 @@ package route53recoverycontrolconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a safety rule in a control panel. Safety rules let you add safeguards
@@ -68,29 +64,6 @@ type CreateSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSafetyRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSafetyRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssertionRule != nil {
-		s.WriteStruct(schemas.CreateSafetyRuleRequest_AssertionRule)
-		v.AssertionRule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSafetyRuleRequest_ClientToken, *v.ClientToken)
-	}
-	if v.GatingRule != nil {
-		s.WriteStruct(schemas.CreateSafetyRuleRequest_GatingRule)
-		v.GatingRule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateSafetyRuleRequest_Tags, v.Tags)
-}
-
 type CreateSafetyRuleOutput struct {
 
 	// The assertion rule created.
@@ -105,76 +78,23 @@ type CreateSafetyRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSafetyRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSafetyRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSafetyRuleResponse_AssertionRule:
-			v.AssertionRule = &types.AssertionRule{}
-			return v.AssertionRule.Deserialize(d)
-		case schemas.CreateSafetyRuleResponse_GatingRule:
-			v.GatingRule = &types.GatingRule{}
-			return v.GatingRule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSafetyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSafetyRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSafetyRule, schemas.CreateSafetyRuleRequest, schemas.CreateSafetyRuleResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSafetyRule{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSafetyRule, schemas.CreateSafetyRuleRequest, schemas.CreateSafetyRuleResponse), output: &CreateSafetyRuleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSafetyRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -184,12 +104,6 @@ func (c *Client) addOperationCreateSafetyRuleMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateSafetyRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSafetyRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,12 +116,6 @@ func (c *Client) addOperationCreateSafetyRuleMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,12 +155,4 @@ func (m *idempotencyToken_initializeOpCreateSafetyRule) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateSafetyRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSafetyRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSafetyRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSafetyRule",
-	}
 }

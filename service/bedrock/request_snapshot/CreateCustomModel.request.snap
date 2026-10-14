@@ -1,0 +1,5 @@
+POST /custom-models/create-custom-model
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","customModelDataSource":{"modelPackageArnDataSource":{"modelPackageArn":"__ModelPackageArn__"}},"modelKmsKeyArn":"__ModelKmsKeyArn__","modelName":"__ModelName__","modelSourceConfig":{"s3DataSource":{"s3Uri":"__S3Uri__"}},"modelTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"roleArn":"__RoleArn__"}

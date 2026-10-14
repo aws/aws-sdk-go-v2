@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the service networks owned by or shared with this account. The account ID
@@ -39,6 +39,34 @@ type ListServiceNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceNetworksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworksRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceNetworksInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworksRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworksRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceNetworksRequest_maxResults, v.MaxResults)
+		case schemas.ListServiceNetworksRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworksRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListServiceNetworksOutput struct {
 
 	// Information about the service networks.
@@ -56,74 +84,48 @@ type ListServiceNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceNetworkList(s, schemas.ListServiceNetworksResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworksResponse_items:
+			return deserializeServiceNetworkList(d, schemas.ListServiceNetworksResponse_items, &v.Items)
+		case schemas.ListServiceNetworksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworks, schemas.ListServiceNetworksRequest, schemas.ListServiceNetworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworks, schemas.ListServiceNetworksRequest, schemas.ListServiceNetworksResponse), output: &ListServiceNetworksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceNetworks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceNetworks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceNetworks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +138,6 @@ func (c *Client) addOperationListServiceNetworksMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +239,3 @@ type ListServiceNetworksAPIClient interface {
 }
 
 var _ ListServiceNetworksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceNetworks",
-	}
-}

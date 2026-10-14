@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.GetBenefitAllocation
+
+{"ApplicableBenefitIds":["__Member__","__Member__"],"Arn":"__Arn__","BenefitApplicationId":"__BenefitApplicationId__","BenefitId":"__BenefitId__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","ExpiresAt":"2000-01-01T00:00:00Z","FulfillmentDetail":{"DisbursementDetails":{"DisbursedAmount":{"Amount":"__Amount__","CurrencyCode":"AED"},"IssuanceDetails":{"IssuanceAmount":{"Amount":"__Amount__","CurrencyCode":"AED"},"IssuanceId":"__IssuanceId__","IssuedAt":"2000-01-01T00:00:00Z"}}},"FulfillmentType":"CREDITS","Id":"__Id__","Name":"__Name__","StartsAt":"2000-01-01T00:00:00Z","Status":"ACTIVE","StatusReason":"__StatusReason__","UpdatedAt":"2000-01-01T00:00:00Z"}

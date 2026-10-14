@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EndTime":946684800,"ObservationSummary":{"ObservationsFailed":1,"ObservationsPassed":1,"TotalObservations":1},"StartTime":946684800,"Status":"INITIATED"}

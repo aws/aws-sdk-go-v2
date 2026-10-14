@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateUserPoolClient
+
+{"AccessTokenValidity":1,"AllowedOAuthFlows":["code","code"],"AllowedOAuthFlowsUserPoolClient":true,"AllowedOAuthScopes":["__Member__","__Member__"],"AnalyticsConfiguration":{"ApplicationArn":"__ApplicationArn__","ApplicationId":"__ApplicationId__","ExternalId":"__ExternalId__","RoleArn":"__RoleArn__","UserDataShared":true},"AuthSessionValidity":1,"CallbackURLs":["__Member__","__Member__"],"ClientId":"__ClientId__","ClientName":"__ClientName__","DefaultRedirectURI":"__DefaultRedirectURI__","EnablePropagateAdditionalUserContextData":true,"EnableTokenRevocation":true,"ExplicitAuthFlows":["ADMIN_NO_SRP_AUTH","ADMIN_NO_SRP_AUTH"],"IdTokenValidity":1,"LogoutURLs":["__Member__","__Member__"],"PreventUserExistenceErrors":"LEGACY","ReadAttributes":["__Member__","__Member__"],"RefreshTokenRotation":{"Feature":"ENABLED","RetryGracePeriodSeconds":1},"RefreshTokenValidity":1,"SupportedIdentityProviders":["__Member__","__Member__"],"TokenValidityUnits":{"AccessToken":"seconds","IdToken":"seconds","RefreshToken":"seconds"},"UserPoolId":"__UserPoolId__","WriteAttributes":["__Member__","__Member__"]}

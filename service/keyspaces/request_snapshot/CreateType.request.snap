@@ -1,0 +1,7 @@
+POST /service/KeyspacesService/operation/CreateType
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿pfieldDefinitionsŸ¿dnameh__Name__dtypeh__Type__ÿ¿dnameh__Name__dtypeh__Type__ÿÿlkeyspaceNamep__KeyspaceName__htypeNamel__TypeName__ÿ

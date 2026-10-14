@@ -4,11 +4,10 @@ package opensearchserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns attributes for one or more VPC endpoints associated with the current
@@ -40,6 +39,25 @@ type BatchGetVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointIds(s, schemas.BatchGetVpcEndpointRequest_ids, v.Ids)
+}
+func (v *BatchGetVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetVpcEndpointRequest_ids:
+			return deserializeVpcEndpointIds(d, schemas.BatchGetVpcEndpointRequest_ids, &v.Ids)
+		}
+		return nil
+	})
+}
+
 type BatchGetVpcEndpointOutput struct {
 
 	// Details about the specified VPC endpoint.
@@ -54,77 +72,48 @@ type BatchGetVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, v.VpcEndpointDetails)
+	serializeVpcEndpointErrorDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, v.VpcEndpointErrorDetails)
+}
+func (v *BatchGetVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails:
+			return deserializeVpcEndpointDetails(d, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, &v.VpcEndpointDetails)
+		case schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails:
+			return deserializeVpcEndpointErrorDetails(d, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, &v.VpcEndpointErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVpcEndpoint, schemas.BatchGetVpcEndpointRequest, schemas.BatchGetVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVpcEndpoint, schemas.BatchGetVpcEndpointRequest, schemas.BatchGetVpcEndpointResponse), output: &BatchGetVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetVpcEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetVpcEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetVpcEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetVpcEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +128,8 @@ func (c *Client) addOperationBatchGetVpcEndpointMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetVpcEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetVpcEndpoint",
-	}
 }

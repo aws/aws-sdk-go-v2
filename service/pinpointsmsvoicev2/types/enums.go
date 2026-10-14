@@ -366,6 +366,15 @@ const (
 	EventTypeMediaFileInaccessible    EventType = "MEDIA_FILE_INACCESSIBLE"
 	EventTypeMediaFileTypeUnsupported EventType = "MEDIA_FILE_TYPE_UNSUPPORTED"
 	EventTypeMediaFileSizeExceeded    EventType = "MEDIA_FILE_SIZE_EXCEEDED"
+	EventTypeRcsAll                   EventType = "RCS_ALL"
+	EventTypeRcsQueued                EventType = "RCS_QUEUED"
+	EventTypeRcsSent                  EventType = "RCS_SENT"
+	EventTypeRcsDelivered             EventType = "RCS_DELIVERED"
+	EventTypeRcsRead                  EventType = "RCS_READ"
+	EventTypeRcsFailed                EventType = "RCS_FAILED"
+	EventTypeRcsTtlExpired            EventType = "RCS_TTL_EXPIRED"
+	EventTypeRcsProtectBlocked        EventType = "RCS_PROTECT_BLOCKED"
+	EventTypeRcsFallenBackToSms       EventType = "RCS_FALLEN_BACK_TO_SMS"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -417,6 +426,15 @@ func (EventType) Values() []EventType {
 		"MEDIA_FILE_INACCESSIBLE",
 		"MEDIA_FILE_TYPE_UNSUPPORTED",
 		"MEDIA_FILE_SIZE_EXCEEDED",
+		"RCS_ALL",
+		"RCS_QUEUED",
+		"RCS_SENT",
+		"RCS_DELIVERED",
+		"RCS_READ",
+		"RCS_FAILED",
+		"RCS_TTL_EXPIRED",
+		"RCS_PROTECT_BLOCKED",
+		"RCS_FALLEN_BACK_TO_SMS",
 	}
 }
 
@@ -885,6 +903,8 @@ type PhoneNumberType string
 const (
 	PhoneNumberTypeMobile   PhoneNumberType = "MOBILE"
 	PhoneNumberTypeLandline PhoneNumberType = "LANDLINE"
+	PhoneNumberTypeVoip     PhoneNumberType = "VOIP"
+	PhoneNumberTypePrepaid  PhoneNumberType = "PREPAID"
 	PhoneNumberTypeOther    PhoneNumberType = "OTHER"
 	PhoneNumberTypeInvalid  PhoneNumberType = "INVALID"
 )
@@ -897,6 +917,8 @@ func (PhoneNumberType) Values() []PhoneNumberType {
 	return []PhoneNumberType{
 		"MOBILE",
 		"LANDLINE",
+		"VOIP",
+		"PREPAID",
 		"OTHER",
 		"INVALID",
 	}
@@ -971,6 +993,29 @@ func (PoolStatus) Values() []PoolStatus {
 		"CREATING",
 		"ACTIVE",
 		"DELETING",
+	}
+}
+
+type PreferenceType string
+
+// Enum values for PreferenceType
+const (
+	PreferenceTypeStartsWith PreferenceType = "StartsWith"
+	PreferenceTypeEndsWith   PreferenceType = "EndsWith"
+	PreferenceTypeContains   PreferenceType = "Contains"
+	PreferenceTypeExactMatch PreferenceType = "ExactMatch"
+)
+
+// Values returns all known values for PreferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceType) Values() []PreferenceType {
+	return []PreferenceType{
+		"StartsWith",
+		"EndsWith",
+		"Contains",
+		"ExactMatch",
 	}
 }
 
@@ -1118,6 +1163,25 @@ func (RcsAgentStatus) Values() []RcsAgentStatus {
 		"PARTIAL",
 		"ACTIVE",
 		"DELETED",
+	}
+}
+
+type RcsFallbackChannel string
+
+// Enum values for RcsFallbackChannel
+const (
+	RcsFallbackChannelSms RcsFallbackChannel = "SMS"
+	RcsFallbackChannelMms RcsFallbackChannel = "MMS"
+)
+
+// Values returns all known values for RcsFallbackChannel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RcsFallbackChannel) Values() []RcsFallbackChannel {
+	return []RcsFallbackChannel{
+		"SMS",
+		"MMS",
 	}
 }
 
@@ -1407,6 +1471,23 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type SearchableNumberType string
+
+// Enum values for SearchableNumberType
+const (
+	SearchableNumberTypeTenDlc SearchableNumberType = "TEN_DLC"
+)
+
+// Values returns all known values for SearchableNumberType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchableNumberType) Values() []SearchableNumberType {
+	return []SearchableNumberType{
+		"TEN_DLC",
+	}
+}
+
 type SenderIdFilterName string
 
 // Enum values for SenderIdFilterName
@@ -1445,6 +1526,7 @@ const (
 	ServiceQuotaExceededExceptionReasonKeywordsPerPool                      ServiceQuotaExceededExceptionReason = "KEYWORDS_PER_POOL"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForMedia     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForNotify    ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY"
+	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForRcs       ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_RCS"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForText      ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForVoice     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"
 	ServiceQuotaExceededExceptionReasonNotifyConfigurationsPerAccount       ServiceQuotaExceededExceptionReason = "NOTIFY_CONFIGURATIONS_PER_ACCOUNT"
@@ -1481,6 +1563,7 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 		"KEYWORDS_PER_POOL",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY",
+		"MONTHLY_SPEND_LIMIT_REACHED_FOR_RCS",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE",
 		"NOTIFY_CONFIGURATIONS_PER_ACCOUNT",
@@ -1510,6 +1593,7 @@ const (
 	SpendLimitNameVoiceMessageMonthlySpendLimit  SpendLimitName = "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
 	SpendLimitNameMediaMessageMonthlySpendLimit  SpendLimitName = "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
 	SpendLimitNameNotifyMessageMonthlySpendLimit SpendLimitName = "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameRcsMessageMonthlySpendLimit    SpendLimitName = "RCS_MESSAGE_MONTHLY_SPEND_LIMIT"
 )
 
 // Values returns all known values for SpendLimitName. Note that this can be
@@ -1522,6 +1606,7 @@ func (SpendLimitName) Values() []SpendLimitName {
 		"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
 		"MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
 		"NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT",
+		"RCS_MESSAGE_MONTHLY_SPEND_LIMIT",
 	}
 }
 

@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/nodes/type
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","targetInstanceType":"__TargetInstanceType__"}

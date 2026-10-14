@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.UntagResource
+
+{"resourceArn":"__ResourceArn__","tagKeys":["__Member__","__Member__"]}

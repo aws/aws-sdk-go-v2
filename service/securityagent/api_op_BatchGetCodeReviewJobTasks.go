@@ -4,13 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about one or more tasks within a code review job.
@@ -45,19 +40,6 @@ type BatchGetCodeReviewJobTasksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetCodeReviewJobTasksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetCodeReviewJobTasksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetCodeReviewJobTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.BatchGetCodeReviewJobTasksInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	serializeTaskIdList(s, schemas.BatchGetCodeReviewJobTasksInput_codeReviewJobTaskIds, v.CodeReviewJobTaskIds)
-}
-
 // Output for the BatchGetCodeReviewJobTasks operation.
 type BatchGetCodeReviewJobTasksOutput struct {
 
@@ -73,86 +55,29 @@ type BatchGetCodeReviewJobTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetCodeReviewJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetCodeReviewJobTasksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetCodeReviewJobTasksOutput_codeReviewJobTasks:
-			return deserializeCodeReviewJobTaskList(d, schemas.BatchGetCodeReviewJobTasksOutput_codeReviewJobTasks, &v.CodeReviewJobTasks)
-		case schemas.BatchGetCodeReviewJobTasksOutput_notFound:
-			return deserializeTaskIdList(d, schemas.BatchGetCodeReviewJobTasksOutput_notFound, &v.NotFound)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetCodeReviewJobTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCodeReviewJobTasks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviewJobTasks, schemas.BatchGetCodeReviewJobTasksInput, schemas.BatchGetCodeReviewJobTasksOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCodeReviewJobTasks{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviewJobTasks, schemas.BatchGetCodeReviewJobTasksInput, schemas.BatchGetCodeReviewJobTasksOutput), output: &BatchGetCodeReviewJobTasksOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetCodeReviewJobTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetCodeReviewJobTasksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCodeReviewJobTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +92,8 @@ func (c *Client) addOperationBatchGetCodeReviewJobTasksMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetCodeReviewJobTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetCodeReviewJobTasks",
-	}
 }

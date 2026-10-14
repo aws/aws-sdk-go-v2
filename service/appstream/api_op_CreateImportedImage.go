@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom WorkSpaces Applications image by importing an EC2 AMI. This
@@ -85,6 +84,46 @@ type CreateImportedImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportedImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportedImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSoftwareVersion != "" {
+		s.WriteString(schemas.CreateImportedImageRequest_AgentSoftwareVersion, string(v.AgentSoftwareVersion))
+	}
+	serializeAppCatalogConfig(s, schemas.CreateImportedImageRequest_AppCatalogConfig, v.AppCatalogConfig)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CreateImportedImageRequest_DryRun, *v.DryRun)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_Name, *v.Name)
+	}
+	if v.RuntimeValidationConfig != nil {
+		s.WriteStruct(schemas.CreateImportedImageRequest_RuntimeValidationConfig)
+		v.RuntimeValidationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceAmiId != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_SourceAmiId, *v.SourceAmiId)
+	}
+	serializeTags(s, schemas.CreateImportedImageRequest_Tags, v.Tags)
+	if v.WorkspaceImageId != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_WorkspaceImageId, *v.WorkspaceImageId)
+	}
+}
+
 type CreateImportedImageOutput struct {
 
 	// Describes an image.
@@ -96,77 +135,53 @@ type CreateImportedImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportedImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportedImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportedImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.CreateImportedImageResult_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateImportedImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImportedImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImportedImageResult_Image:
+			v.Image = &types.Image{}
+			return v.Image.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImportedImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportedImage, schemas.CreateImportedImageRequest, schemas.CreateImportedImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImportedImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportedImage, schemas.CreateImportedImageRequest, schemas.CreateImportedImageResult), output: &CreateImportedImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateImportedImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateImportedImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateImportedImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImportedImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +196,8 @@ func (c *Client) addOperationCreateImportedImageMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateImportedImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateImportedImage",
-	}
 }

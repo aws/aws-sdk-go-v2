@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetNetworkInsightsAccessScopeAnalysisFindings&DryRun=true&MaxResults=1&NetworkInsightsAccessScopeAnalysisId=__NetworkInsightsAccessScopeAnalysisId__&NextToken=__NextToken__&Version=2016-11-15

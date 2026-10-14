@@ -120,6 +120,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Column) error {
+	*v = make([]Column, 0)
 	var vv Column
 	return smithy.ReadList(d, s, func() error {
 		vv = Column{}
@@ -133,6 +134,7 @@ func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Co
 }
 
 func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExecutionReference) error {
+	*v = make([]ExecutionReference, 0)
 	var vv ExecutionReference
 	return smithy.ReadList(d, s, func() error {
 		vv = ExecutionReference{}
@@ -146,6 +148,7 @@ func deserializeExecutionReferenceList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExportReference) error {
+	*v = make([]ExportReference, 0)
 	var vv ExportReference
 	return smithy.ReadList(d, s, func() error {
 		vv = ExportReference{}
@@ -159,6 +162,7 @@ func deserializeExportReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -172,6 +176,7 @@ func deserializeGenericStringList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -185,6 +190,7 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceTag) error {
+	*v = make([]ResourceTag, 0)
 	var vv ResourceTag
 	return smithy.ReadList(d, s, func() error {
 		vv = ResourceTag{}
@@ -198,6 +204,7 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Table) error {
+	*v = make([]Table, 0)
 	var vv Table
 	return smithy.ReadList(d, s, func() error {
 		vv = Table{}
@@ -211,6 +218,7 @@ func deserializeTableList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tab
 }
 
 func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TablePropertyDescription) error {
+	*v = make([]TablePropertyDescription, 0)
 	var vv TablePropertyDescription
 	return smithy.ReadList(d, s, func() error {
 		vv = TablePropertyDescription{}
@@ -224,6 +232,7 @@ func deserializeTablePropertyDescriptionList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -264,6 +273,14 @@ func deserializeTableConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeTableProperties(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -278,6 +295,13 @@ func deserializeTableProperties(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

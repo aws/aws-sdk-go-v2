@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.CreateContact
+
+{"Alias":"__Alias__","DisplayName":"__DisplayName__","IdempotencyToken":"__IdempotencyToken__","Plan":{"RotationIds":["__Member__","__Member__"],"Stages":[{"DurationInMinutes":1,"Targets":[{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}},{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}}]},{"DurationInMinutes":1,"Targets":[{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}},{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}}]}]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"PERSONAL"}

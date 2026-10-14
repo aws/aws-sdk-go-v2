@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.ListServerNeighbors
+
+{"configurationId":"__ConfigurationId__","maxResults":1,"neighborConfigurationIds":["__Member__","__Member__"],"nextToken":"__NextToken__","portInformationNeeded":true}

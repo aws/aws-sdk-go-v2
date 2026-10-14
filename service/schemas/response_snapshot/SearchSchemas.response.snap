@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Schemas":[{"RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaVersions":[{"CreatedDate":"2000-01-01T00:00:00Z","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"},{"CreatedDate":"2000-01-01T00:00:00Z","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"}]},{"RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaVersions":[{"CreatedDate":"2000-01-01T00:00:00Z","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"},{"CreatedDate":"2000-01-01T00:00:00Z","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"}]}]}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListResourceCatalogs
+
+{"NextToken":"__NextToken__","ResourceCatalogs":[{"CreationTime":946684800,"Description":"__Description__","ResourceCatalogArn":"__ResourceCatalogArn__","ResourceCatalogName":"__ResourceCatalogName__"},{"CreationTime":946684800,"Description":"__Description__","ResourceCatalogArn":"__ResourceCatalogArn__","ResourceCatalogName":"__ResourceCatalogName__"}]}

@@ -5,12 +5,8 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -79,40 +75,6 @@ type ListPreviewRotationShiftsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPreviewRotationShiftsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPreviewRotationShiftsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPreviewRotationShiftsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_EndTime, *v.EndTime)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPreviewRotationShiftsRequest_MaxResults, *v.MaxResults)
-	}
-	serializeRotationPreviewMemberList(s, schemas.ListPreviewRotationShiftsRequest_Members, v.Members)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPreviewRotationShiftsRequest_NextToken, *v.NextToken)
-	}
-	serializeOverrideList(s, schemas.ListPreviewRotationShiftsRequest_Overrides, v.Overrides)
-	if v.Recurrence != nil {
-		s.WriteStruct(schemas.ListPreviewRotationShiftsRequest_Recurrence)
-		v.Recurrence.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RotationStartTime != nil {
-		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_RotationStartTime, *v.RotationStartTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListPreviewRotationShiftsRequest_StartTime, *v.StartTime)
-	}
-	if v.TimeZoneId != nil {
-		s.WriteString(schemas.ListPreviewRotationShiftsRequest_TimeZoneId, *v.TimeZoneId)
-	}
-}
-
 type ListPreviewRotationShiftsOutput struct {
 
 	// The token for the next set of items to return. This token is used to get the
@@ -128,87 +90,29 @@ type ListPreviewRotationShiftsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPreviewRotationShiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPreviewRotationShiftsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPreviewRotationShiftsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPreviewRotationShiftsResult_NextToken, v.NextToken)
-		case schemas.ListPreviewRotationShiftsResult_RotationShifts:
-			return deserializeRotationShifts(d, schemas.ListPreviewRotationShiftsResult_RotationShifts, &v.RotationShifts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPreviewRotationShiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPreviewRotationShifts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPreviewRotationShifts, schemas.ListPreviewRotationShiftsRequest, schemas.ListPreviewRotationShiftsResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPreviewRotationShifts{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPreviewRotationShifts, schemas.ListPreviewRotationShiftsRequest, schemas.ListPreviewRotationShiftsResult), output: &ListPreviewRotationShiftsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPreviewRotationShifts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPreviewRotationShiftsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPreviewRotationShifts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,12 +125,6 @@ func (c *Client) addOperationListPreviewRotationShiftsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -330,11 +228,3 @@ type ListPreviewRotationShiftsAPIClient interface {
 }
 
 var _ ListPreviewRotationShiftsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPreviewRotationShifts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPreviewRotationShifts",
-	}
-}

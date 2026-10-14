@@ -1,0 +1,3 @@
+DELETE /packages/__PackageName__/versions/__VersionName__/sbom?clientToken=__ClientToken__
+
+

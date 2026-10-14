@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the BaseConfigurationItem for one or more requested resources. The
@@ -47,6 +46,16 @@ type BatchGetResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceKeys(s, schemas.BatchGetResourceConfigRequest_resourceKeys, v.ResourceKeys)
+}
+
 type BatchGetResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.
@@ -66,77 +75,48 @@ type BatchGetResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBaseConfigurationItems(s, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, v.BaseConfigurationItems)
+	serializeResourceKeys(s, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, v.UnprocessedResourceKeys)
+}
+func (v *BatchGetResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetResourceConfigResponse_baseConfigurationItems:
+			return deserializeBaseConfigurationItems(d, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, &v.BaseConfigurationItems)
+		case schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys:
+			return deserializeResourceKeys(d, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, &v.UnprocessedResourceKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetResourceConfig, schemas.BatchGetResourceConfigRequest, schemas.BatchGetResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetResourceConfig, schemas.BatchGetResourceConfigRequest, schemas.BatchGetResourceConfigResponse), output: &BatchGetResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetResourceConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetResourceConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetResourceConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetResourceConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +131,8 @@ func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetResourceConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetResourceConfig",
-	}
 }

@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,6 +49,31 @@ type CreateProductRestEndpointPageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProductRestEndpointPageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProductRestEndpointPageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProductRestEndpointPageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.CreateProductRestEndpointPageRequest_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.CreateProductRestEndpointPageRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.RestEndpointIdentifier != nil {
+		s.WriteStruct(schemas.CreateProductRestEndpointPageRequest_RestEndpointIdentifier)
+		v.RestEndpointIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TryItState != "" {
+		s.WriteString(schemas.CreateProductRestEndpointPageRequest_TryItState, string(v.TryItState))
+	}
+}
+
 type CreateProductRestEndpointPageOutput struct {
 
 	// The display content.
@@ -82,77 +106,104 @@ type CreateProductRestEndpointPageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProductRestEndpointPageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProductRestEndpointPageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProductRestEndpointPageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayContent != nil {
+		s.WriteStruct(schemas.CreateProductRestEndpointPageResponse_DisplayContent)
+		v.DisplayContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CreateProductRestEndpointPageResponse_LastModified, *v.LastModified)
+	}
+	if v.ProductRestEndpointPageArn != nil {
+		s.WriteString(schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn, *v.ProductRestEndpointPageArn)
+	}
+	if v.ProductRestEndpointPageId != nil {
+		s.WriteString(schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageId, *v.ProductRestEndpointPageId)
+	}
+	if v.RestEndpointIdentifier != nil {
+		s.WriteStruct(schemas.CreateProductRestEndpointPageResponse_RestEndpointIdentifier)
+		v.RestEndpointIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateProductRestEndpointPageResponse_Status, string(v.Status))
+	}
+	if v.StatusException != nil {
+		s.WriteStruct(schemas.CreateProductRestEndpointPageResponse_StatusException)
+		v.StatusException.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TryItState != "" {
+		s.WriteString(schemas.CreateProductRestEndpointPageResponse_TryItState, string(v.TryItState))
+	}
+}
+func (v *CreateProductRestEndpointPageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProductRestEndpointPageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProductRestEndpointPageResponse_DisplayContent:
+			v.DisplayContent = &types.EndpointDisplayContentResponse{}
+			return v.DisplayContent.Deserialize(d)
+		case schemas.CreateProductRestEndpointPageResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CreateProductRestEndpointPageResponse_LastModified, v.LastModified)
+		case schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn:
+			v.ProductRestEndpointPageArn = new(string)
+			return d.ReadString(schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn, v.ProductRestEndpointPageArn)
+		case schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageId:
+			v.ProductRestEndpointPageId = new(string)
+			return d.ReadString(schemas.CreateProductRestEndpointPageResponse_ProductRestEndpointPageId, v.ProductRestEndpointPageId)
+		case schemas.CreateProductRestEndpointPageResponse_RestEndpointIdentifier:
+			v.RestEndpointIdentifier = &types.RestEndpointIdentifier{}
+			return v.RestEndpointIdentifier.Deserialize(d)
+		case schemas.CreateProductRestEndpointPageResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateProductRestEndpointPageResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.CreateProductRestEndpointPageResponse_StatusException:
+			v.StatusException = &types.StatusException{}
+			return v.StatusException.Deserialize(d)
+		case schemas.CreateProductRestEndpointPageResponse_TryItState:
+			var ev string
+			if err := d.ReadString(schemas.CreateProductRestEndpointPageResponse_TryItState, &ev); err != nil {
+				return err
+			}
+			v.TryItState = types.TryItState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProductRestEndpointPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProductRestEndpointPage, schemas.CreateProductRestEndpointPageRequest, schemas.CreateProductRestEndpointPageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProductRestEndpointPage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProductRestEndpointPage, schemas.CreateProductRestEndpointPageRequest, schemas.CreateProductRestEndpointPageResponse), output: &CreateProductRestEndpointPageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProductRestEndpointPage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProductRestEndpointPage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProductRestEndpointPageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProductRestEndpointPage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +218,8 @@ func (c *Client) addOperationCreateProductRestEndpointPageMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProductRestEndpointPage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProductRestEndpointPage",
-	}
 }

@@ -1,0 +1,3 @@
+GET /guardrails?guardrailIdentifier=__GuardrailIdentifier__&maxResults=1&nextToken=__NextToken__
+
+

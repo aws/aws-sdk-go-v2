@@ -4,12 +4,7 @@ package codecatalyst
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an empty Git-based source repository in a specified project. The
@@ -56,27 +51,6 @@ type CreateSourceRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSourceRepositoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSourceRepositoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSourceRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateSourceRepositoryRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSourceRepositoryRequest_name, *v.Name)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.CreateSourceRepositoryRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.CreateSourceRepositoryRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type CreateSourceRepositoryOutput struct {
 
 	// The name of the source repository.
@@ -103,88 +77,23 @@ type CreateSourceRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSourceRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSourceRepositoryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSourceRepositoryResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryResponse_description, v.Description)
-		case schemas.CreateSourceRepositoryResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryResponse_name, v.Name)
-		case schemas.CreateSourceRepositoryResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryResponse_projectName, v.ProjectName)
-		case schemas.CreateSourceRepositoryResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.CreateSourceRepositoryResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSourceRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSourceRepository{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepository, schemas.CreateSourceRepositoryRequest, schemas.CreateSourceRepositoryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSourceRepository{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceRepository, schemas.CreateSourceRepositoryRequest, schemas.CreateSourceRepositoryResponse), output: &CreateSourceRepositoryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSourceRepository"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSourceRepositoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSourceRepository(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +108,8 @@ func (c *Client) addOperationCreateSourceRepositoryMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSourceRepository(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSourceRepository",
-	}
 }

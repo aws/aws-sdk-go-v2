@@ -4,13 +4,8 @@ package chatbot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an Microsoft Teams channel configuration.
@@ -69,35 +64,6 @@ type UpdateMicrosoftTeamsChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMicrosoftTeamsChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTeamsChannelConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMicrosoftTeamsChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != nil {
-		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_ChannelId, *v.ChannelId)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_ChannelName, *v.ChannelName)
-	}
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	serializeGuardrailPolicyArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
-	}
-	serializeSnsTopicArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	if v.UserAuthorizationRequired != nil {
-		s.WriteBool(schemas.UpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
-	}
-}
-
 type UpdateMicrosoftTeamsChannelConfigurationOutput struct {
 
 	// The configuration for a Microsoft Teams channel configured with AWS Chatbot.
@@ -109,85 +75,29 @@ type UpdateMicrosoftTeamsChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMicrosoftTeamsChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTeamsChannelConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTeamsChannelConfigurationResult_ChannelConfiguration:
-			v.ChannelConfiguration = &types.TeamsChannelConfiguration{}
-			return v.ChannelConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMicrosoftTeamsChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMicrosoftTeamsChannelConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMicrosoftTeamsChannelConfiguration, schemas.UpdateTeamsChannelConfigurationRequest, schemas.UpdateTeamsChannelConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMicrosoftTeamsChannelConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMicrosoftTeamsChannelConfiguration, schemas.UpdateTeamsChannelConfigurationRequest, schemas.UpdateTeamsChannelConfigurationResult), output: &UpdateMicrosoftTeamsChannelConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMicrosoftTeamsChannelConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMicrosoftTeamsChannelConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMicrosoftTeamsChannelConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +112,8 @@ func (c *Client) addOperationUpdateMicrosoftTeamsChannelConfigurationMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMicrosoftTeamsChannelConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMicrosoftTeamsChannelConfiguration",
-	}
 }

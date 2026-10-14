@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches predefined attributes that meet certain criteria. A predefined
@@ -67,6 +67,29 @@ type SearchPredefinedAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPredefinedAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPredefinedAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPredefinedAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPredefinedAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchPredefinedAttributesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchPredefinedAttributesOutput struct {
 
 	// The approximate number of predefined attributes which matched your search query.
@@ -85,77 +108,57 @@ type SearchPredefinedAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPredefinedAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPredefinedAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPredefinedAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesResponse_NextToken, *v.NextToken)
+	}
+	serializePredefinedAttributeSearchSummaryList(s, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, v.PredefinedAttributes)
+}
+func (v *SearchPredefinedAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPredefinedAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchPredefinedAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchPredefinedAttributesResponse_NextToken, v.NextToken)
+		case schemas.SearchPredefinedAttributesResponse_PredefinedAttributes:
+			return deserializePredefinedAttributeSearchSummaryList(d, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, &v.PredefinedAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchPredefinedAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPredefinedAttributes, schemas.SearchPredefinedAttributesRequest, schemas.SearchPredefinedAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPredefinedAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPredefinedAttributes, schemas.SearchPredefinedAttributesRequest, schemas.SearchPredefinedAttributesResponse), output: &SearchPredefinedAttributesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchPredefinedAttributes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchPredefinedAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchPredefinedAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchPredefinedAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +171,6 @@ func (c *Client) addOperationSearchPredefinedAttributesMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,11 +274,3 @@ type SearchPredefinedAttributesAPIClient interface {
 }
 
 var _ SearchPredefinedAttributesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchPredefinedAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchPredefinedAttributes",
-	}
-}

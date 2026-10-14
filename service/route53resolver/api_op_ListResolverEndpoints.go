@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the Resolver endpoints that were created using the current Amazon Web
@@ -53,6 +53,22 @@ type ListResolverEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverEndpointsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResolverEndpointsOutput struct {
 
 	// The value that you specified for MaxResults in the request.
@@ -73,74 +89,54 @@ type ListResolverEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointsResponse_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverEndpoints(s, schemas.ListResolverEndpointsResponse_ResolverEndpoints, v.ResolverEndpoints)
+}
+func (v *ListResolverEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverEndpointsResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResolverEndpointsResponse_MaxResults, v.MaxResults)
+		case schemas.ListResolverEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverEndpointsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverEndpointsResponse_ResolverEndpoints:
+			return deserializeResolverEndpoints(d, schemas.ListResolverEndpointsResponse_ResolverEndpoints, &v.ResolverEndpoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpoints, schemas.ListResolverEndpointsRequest, schemas.ListResolverEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpoints, schemas.ListResolverEndpointsRequest, schemas.ListResolverEndpointsResponse), output: &ListResolverEndpointsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverEndpoints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResolverEndpoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverEndpoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +149,6 @@ func (c *Client) addOperationListResolverEndpointsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +252,3 @@ type ListResolverEndpointsAPIClient interface {
 }
 
 var _ ListResolverEndpointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResolverEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResolverEndpoints",
-	}
-}

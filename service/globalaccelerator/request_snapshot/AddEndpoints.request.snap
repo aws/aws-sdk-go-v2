@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.AddEndpoints
+
+{"EndpointConfigurations":[{"AttachmentArn":"__AttachmentArn__","ClientIPPreservationEnabled":true,"EndpointId":"__EndpointId__","Weight":1},{"AttachmentArn":"__AttachmentArn__","ClientIPPreservationEnabled":true,"EndpointId":"__EndpointId__","Weight":1}],"EndpointGroupArn":"__EndpointGroupArn__"}

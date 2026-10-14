@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","authType":"NONE","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","numberOfAssociatedServices":1,"numberOfAssociatedVPCs":1,"sharingConfig":{"enabled":true}}

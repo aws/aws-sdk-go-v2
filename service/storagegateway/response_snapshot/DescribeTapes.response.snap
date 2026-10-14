@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.DescribeTapes
+
+{"Marker":"__Marker__","Tapes":[{"KMSKey":"__KMSKey__","PoolEntryDate":946684800,"PoolId":"__PoolId__","Progress":1,"RetentionStartDate":946684800,"TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeCreatedDate":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__","TapeUsedInBytes":1,"VTLDevice":"__VTLDevice__","Worm":true},{"KMSKey":"__KMSKey__","PoolEntryDate":946684800,"PoolId":"__PoolId__","Progress":1,"RetentionStartDate":946684800,"TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeCreatedDate":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__","TapeUsedInBytes":1,"VTLDevice":"__VTLDevice__","Worm":true}]}

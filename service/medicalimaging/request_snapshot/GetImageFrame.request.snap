@@ -1,0 +1,5 @@
+POST /datastore/__DatastoreId__/imageSet/__ImageSetId__/getImageFrame
+
+Content-Type: application/json
+
+{"imageFrameId":"__ImageFrameId__"}

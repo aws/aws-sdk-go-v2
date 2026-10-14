@@ -371,16 +371,19 @@ type SigningAlgorithm string
 
 // Enum values for SigningAlgorithm
 const (
-	SigningAlgorithmSha256withecdsa SigningAlgorithm = "SHA256WITHECDSA"
-	SigningAlgorithmSha384withecdsa SigningAlgorithm = "SHA384WITHECDSA"
-	SigningAlgorithmSha512withecdsa SigningAlgorithm = "SHA512WITHECDSA"
-	SigningAlgorithmSha256withrsa   SigningAlgorithm = "SHA256WITHRSA"
-	SigningAlgorithmSha384withrsa   SigningAlgorithm = "SHA384WITHRSA"
-	SigningAlgorithmSha512withrsa   SigningAlgorithm = "SHA512WITHRSA"
-	SigningAlgorithmSm3withsm2      SigningAlgorithm = "SM3WITHSM2"
-	SigningAlgorithmMlDsa44         SigningAlgorithm = "ML_DSA_44"
-	SigningAlgorithmMlDsa65         SigningAlgorithm = "ML_DSA_65"
-	SigningAlgorithmMlDsa87         SigningAlgorithm = "ML_DSA_87"
+	SigningAlgorithmSha256withecdsa  SigningAlgorithm = "SHA256WITHECDSA"
+	SigningAlgorithmSha384withecdsa  SigningAlgorithm = "SHA384WITHECDSA"
+	SigningAlgorithmSha512withecdsa  SigningAlgorithm = "SHA512WITHECDSA"
+	SigningAlgorithmSha256withrsa    SigningAlgorithm = "SHA256WITHRSA"
+	SigningAlgorithmSha384withrsa    SigningAlgorithm = "SHA384WITHRSA"
+	SigningAlgorithmSha512withrsa    SigningAlgorithm = "SHA512WITHRSA"
+	SigningAlgorithmSha256withrsaPss SigningAlgorithm = "SHA256WITHRSA_PSS"
+	SigningAlgorithmSha384withrsaPss SigningAlgorithm = "SHA384WITHRSA_PSS"
+	SigningAlgorithmSha512withrsaPss SigningAlgorithm = "SHA512WITHRSA_PSS"
+	SigningAlgorithmSm3withsm2       SigningAlgorithm = "SM3WITHSM2"
+	SigningAlgorithmMlDsa44          SigningAlgorithm = "ML_DSA_44"
+	SigningAlgorithmMlDsa65          SigningAlgorithm = "ML_DSA_65"
+	SigningAlgorithmMlDsa87          SigningAlgorithm = "ML_DSA_87"
 )
 
 // Values returns all known values for SigningAlgorithm. Note that this can be
@@ -395,6 +398,9 @@ func (SigningAlgorithm) Values() []SigningAlgorithm {
 		"SHA256WITHRSA",
 		"SHA384WITHRSA",
 		"SHA512WITHRSA",
+		"SHA256WITHRSA_PSS",
+		"SHA384WITHRSA_PSS",
+		"SHA512WITHRSA_PSS",
 		"SM3WITHSM2",
 		"ML_DSA_44",
 		"ML_DSA_65",

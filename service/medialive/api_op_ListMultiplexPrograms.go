@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the programs that currently exist for a specific multiplex.
@@ -44,6 +44,24 @@ type ListMultiplexProgramsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexProgramsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexProgramsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexProgramsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMultiplexProgramsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.ListMultiplexProgramsRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexProgramsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListMultiplexProgramsResponse
 type ListMultiplexProgramsOutput struct {
 
@@ -59,77 +77,51 @@ type ListMultiplexProgramsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexProgramsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexProgramsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexProgramsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfMultiplexProgramSummary(s, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, v.MultiplexPrograms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexProgramsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMultiplexProgramsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultiplexProgramsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultiplexProgramsResponse_MultiplexPrograms:
+			return deserialize__listOfMultiplexProgramSummary(d, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, &v.MultiplexPrograms)
+		case schemas.ListMultiplexProgramsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMultiplexProgramsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexPrograms, schemas.ListMultiplexProgramsRequest, schemas.ListMultiplexProgramsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiplexPrograms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexPrograms, schemas.ListMultiplexProgramsRequest, schemas.ListMultiplexProgramsResponse), output: &ListMultiplexProgramsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultiplexPrograms{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMultiplexPrograms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListMultiplexProgramsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMultiplexPrograms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +134,6 @@ func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +235,3 @@ type ListMultiplexProgramsAPIClient interface {
 }
 
 var _ ListMultiplexProgramsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMultiplexPrograms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMultiplexPrograms",
-	}
-}

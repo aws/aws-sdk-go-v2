@@ -1,0 +1,5 @@
+POST /identities/GetWorkloadAccessTokenForJWT
+
+Content-Type: application/json
+
+{"userToken":"__UserToken__","workloadName":"__WorkloadName__"}

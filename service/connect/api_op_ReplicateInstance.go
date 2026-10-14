@@ -5,9 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Replicates an Connect Customer instance in the specified Amazon Web Services
@@ -44,11 +44,6 @@ type ReplicateInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The alias for the replicated instance. The ReplicaAlias must be unique.
-	//
-	// This member is required.
-	ReplicaAlias *string
-
 	// The Amazon Web Services Region where to replicate the Connect Customer instance.
 	//
 	// This member is required.
@@ -61,7 +56,31 @@ type ReplicateInstanceInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
+	// The alias for the replicated instance. The ReplicaAlias must be unique.
+	ReplicaAlias *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ReplicaAlias != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ReplicaAlias, *v.ReplicaAlias)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ReplicaRegion, *v.ReplicaRegion)
+	}
 }
 
 type ReplicateInstanceOutput struct {
@@ -80,65 +99,48 @@ type ReplicateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicateInstanceResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReplicateInstanceResponse_Id, *v.Id)
+	}
+}
+func (v *ReplicateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicateInstanceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicateInstanceResponse_Arn, v.Arn)
+		case schemas.ReplicateInstanceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReplicateInstanceResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateInstance, schemas.ReplicateInstanceRequest, schemas.ReplicateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReplicateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateInstance, schemas.ReplicateInstanceRequest, schemas.ReplicateInstanceResponse), output: &ReplicateInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReplicateInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ReplicateInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -148,12 +150,6 @@ func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpReplicateInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReplicateInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +162,6 @@ func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -211,12 +201,4 @@ func (m *idempotencyToken_initializeOpReplicateInstance) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opReplicateInstanceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpReplicateInstance{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opReplicateInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ReplicateInstance",
-	}
 }

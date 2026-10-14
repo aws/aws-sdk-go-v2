@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/asset-bundle-export-jobs?max-results=1&next-token=__NextToken__
+
+

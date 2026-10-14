@@ -1,0 +1,5 @@
+PUT /v1/feed/__Id__/policy
+
+Content-Type: application/json
+
+{"policy":"__Policy__"}

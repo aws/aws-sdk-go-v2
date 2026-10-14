@@ -5,10 +5,10 @@ package codebuild
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of command executions for a sandbox.
@@ -47,6 +47,27 @@ type ListCommandExecutionsForSandboxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandExecutionsForSandboxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandExecutionsForSandboxInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandExecutionsForSandboxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCommandExecutionsForSandboxInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_nextToken, *v.NextToken)
+	}
+	if v.SandboxId != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_sandboxId, *v.SandboxId)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCommandExecutionsForSandboxOutput struct {
 
 	// Information about the requested command executions.
@@ -61,77 +82,51 @@ type ListCommandExecutionsForSandboxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandExecutionsForSandboxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandExecutionsForSandboxOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandExecutionsForSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCommandExecutionsForSandboxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommandExecutionsForSandboxOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommandExecutionsForSandboxOutput_commandExecutions:
+			return deserializeCommandExecutions(d, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, &v.CommandExecutions)
+		case schemas.ListCommandExecutionsForSandboxOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommandExecutionsForSandboxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandExecutionsForSandbox, schemas.ListCommandExecutionsForSandboxInput, schemas.ListCommandExecutionsForSandboxOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCommandExecutionsForSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandExecutionsForSandbox, schemas.ListCommandExecutionsForSandboxInput, schemas.ListCommandExecutionsForSandboxOutput), output: &ListCommandExecutionsForSandboxOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCommandExecutionsForSandbox{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCommandExecutionsForSandbox"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCommandExecutionsForSandboxValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCommandExecutionsForSandbox(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +139,6 @@ func (c *Client) addOperationListCommandExecutionsForSandboxMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type ListCommandExecutionsForSandboxAPIClient interface {
 }
 
 var _ ListCommandExecutionsForSandboxAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCommandExecutionsForSandbox(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCommandExecutionsForSandbox",
-	}
-}

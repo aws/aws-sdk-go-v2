@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.RegisterAccount
+
+{"iamResources":{"roleArn":"__RoleArn__"},"timestreamResources":{"timestreamDatabaseName":"__TimestreamDatabaseName__","timestreamTableName":"__TimestreamTableName__"}}

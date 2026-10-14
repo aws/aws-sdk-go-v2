@@ -1,0 +1,5 @@
+PUT /data-automation-libraries/__LibraryArn__/
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","libraryDescription":"__LibraryDescription__"}

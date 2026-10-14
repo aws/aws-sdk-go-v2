@@ -1,0 +1,6 @@
+POST /domainnames/__DomainName__/basepathmappings?domainNameId=__DomainNameId__
+
+Accept: application/json
+Content-Type: application/json
+
+{"basePath":"__BasePath__","restApiId":"__RestApiId__","stage":"__Stage__"}

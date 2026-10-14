@@ -4,13 +4,8 @@ package kinesisvideo
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides an endpoint for the specified signaling channel to send and receive
@@ -57,23 +52,6 @@ type GetSignalingChannelEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSignalingChannelEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSignalingChannelEndpointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSignalingChannelEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelARN != nil {
-		s.WriteString(schemas.GetSignalingChannelEndpointInput_ChannelARN, *v.ChannelARN)
-	}
-	if v.SingleMasterChannelEndpointConfiguration != nil {
-		s.WriteStruct(schemas.GetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration)
-		v.SingleMasterChannelEndpointConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type GetSignalingChannelEndpointOutput struct {
 
 	// A list of endpoints for the specified signaling channel.
@@ -85,84 +63,29 @@ type GetSignalingChannelEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSignalingChannelEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSignalingChannelEndpointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSignalingChannelEndpointOutput_ResourceEndpointList:
-			return deserializeResourceEndpointList(d, schemas.GetSignalingChannelEndpointOutput_ResourceEndpointList, &v.ResourceEndpointList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSignalingChannelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSignalingChannelEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalingChannelEndpoint, schemas.GetSignalingChannelEndpointInput, schemas.GetSignalingChannelEndpointOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSignalingChannelEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalingChannelEndpoint, schemas.GetSignalingChannelEndpointInput, schemas.GetSignalingChannelEndpointOutput), output: &GetSignalingChannelEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSignalingChannelEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSignalingChannelEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSignalingChannelEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +100,8 @@ func (c *Client) addOperationGetSignalingChannelEndpointMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSignalingChannelEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSignalingChannelEndpoint",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.UpdateCrossAccountAttachment
+
+{"AddPrincipals":["__Member__","__Member__"],"AddResources":[{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"},{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"}],"AttachmentArn":"__AttachmentArn__","Name":"__Name__","RemovePrincipals":["__Member__","__Member__"],"RemoveResources":[{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"},{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"}]}

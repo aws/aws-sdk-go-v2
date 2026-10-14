@@ -5,12 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of product listings based on search criteria and filters. You
@@ -37,6 +33,12 @@ type SearchListingsInput struct {
 	// Multiple values within the same filter are combined with OR logic.
 	Filters []types.SearchFilter
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -56,31 +58,6 @@ type SearchListingsInput struct {
 	SortOrder types.SearchListingsSortOrder
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchListingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchListingsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchListingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchFilterList(s, schemas.SearchListingsInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchListingsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchListingsInput_nextToken, *v.NextToken)
-	}
-	if v.SearchText != nil {
-		s.WriteString(schemas.SearchListingsInput_searchText, *v.SearchText)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.SearchListingsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.SearchListingsInput_sortOrder, string(v.SortOrder))
-	}
 }
 
 type SearchListingsOutput struct {
@@ -107,90 +84,29 @@ type SearchListingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchListingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchListingsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchListingsOutput_listingSummaries:
-			return deserializeListingSummaryList(d, schemas.SearchListingsOutput_listingSummaries, &v.ListingSummaries)
-		case schemas.SearchListingsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchListingsOutput_nextToken, v.NextToken)
-		case schemas.SearchListingsOutput_totalResults:
-			v.TotalResults = new(int64)
-			return d.ReadInt64(schemas.SearchListingsOutput_totalResults, v.TotalResults)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchListingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchListings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchListings, schemas.SearchListingsInput, schemas.SearchListingsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchListings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchListings, schemas.SearchListingsInput, schemas.SearchListingsOutput), output: &SearchListingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchListings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchListingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchListings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,12 +119,6 @@ func (c *Client) addOperationSearchListingsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -310,11 +220,3 @@ type SearchListingsAPIClient interface {
 }
 
 var _ SearchListingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchListings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchListings",
-	}
-}

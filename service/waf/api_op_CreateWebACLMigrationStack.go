@@ -4,12 +4,7 @@ package waf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an AWS CloudFormation WAFV2 template for the specified web ACL in the
@@ -73,24 +68,6 @@ type CreateWebACLMigrationStackInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebACLMigrationStackInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebACLMigrationStackRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebACLMigrationStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IgnoreUnsupportedType != nil {
-		s.WriteBool(schemas.CreateWebACLMigrationStackRequest_IgnoreUnsupportedType, *v.IgnoreUnsupportedType)
-	}
-	if v.S3BucketName != nil {
-		s.WriteString(schemas.CreateWebACLMigrationStackRequest_S3BucketName, *v.S3BucketName)
-	}
-	if v.WebACLId != nil {
-		s.WriteString(schemas.CreateWebACLMigrationStackRequest_WebACLId, *v.WebACLId)
-	}
-}
-
 type CreateWebACLMigrationStackOutput struct {
 
 	// The URL of the template created in Amazon S3.
@@ -104,85 +81,29 @@ type CreateWebACLMigrationStackOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebACLMigrationStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebACLMigrationStackResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebACLMigrationStackResponse_S3ObjectUrl:
-			v.S3ObjectUrl = new(string)
-			return d.ReadString(schemas.CreateWebACLMigrationStackResponse_S3ObjectUrl, v.S3ObjectUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebACLMigrationStack{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACLMigrationStack, schemas.CreateWebACLMigrationStackRequest, schemas.CreateWebACLMigrationStackResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebACLMigrationStack{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACLMigrationStack, schemas.CreateWebACLMigrationStackRequest, schemas.CreateWebACLMigrationStackResponse), output: &CreateWebACLMigrationStackOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebACLMigrationStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWebACLMigrationStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWebACLMigrationStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +118,8 @@ func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWebACLMigrationStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWebACLMigrationStack",
-	}
 }

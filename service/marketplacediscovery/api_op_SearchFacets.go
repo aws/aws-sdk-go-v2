@@ -5,12 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns available facet values for filtering listings, such as categories,
@@ -41,6 +37,12 @@ type SearchFacetsInput struct {
 	// AND logic. Multiple values within the same filter are combined with OR logic.
 	Filters []types.SearchFilter
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.
 	NextToken *string
@@ -49,23 +51,6 @@ type SearchFacetsInput struct {
 	SearchText *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchFacetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchFacetsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchFacetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetTypeList(s, schemas.SearchFacetsInput_facetTypes, v.FacetTypes)
-	serializeSearchFilterList(s, schemas.SearchFacetsInput_filters, v.Filters)
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchFacetsInput_nextToken, *v.NextToken)
-	}
-	if v.SearchText != nil {
-		s.WriteString(schemas.SearchFacetsInput_searchText, *v.SearchText)
-	}
 }
 
 type SearchFacetsOutput struct {
@@ -91,90 +76,29 @@ type SearchFacetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchFacetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchFacetsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchFacetsOutput_listingFacets:
-			return deserializeTypeToFacetMap(d, schemas.SearchFacetsOutput_listingFacets, &v.ListingFacets)
-		case schemas.SearchFacetsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchFacetsOutput_nextToken, v.NextToken)
-		case schemas.SearchFacetsOutput_totalResults:
-			v.TotalResults = new(int64)
-			return d.ReadInt64(schemas.SearchFacetsOutput_totalResults, v.TotalResults)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchFacetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchFacets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacets, schemas.SearchFacetsInput, schemas.SearchFacetsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchFacets{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFacets, schemas.SearchFacetsInput, schemas.SearchFacetsOutput), output: &SearchFacetsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchFacets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchFacetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchFacets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +111,6 @@ func (c *Client) addOperationSearchFacetsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +198,3 @@ type SearchFacetsAPIClient interface {
 }
 
 var _ SearchFacetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchFacets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchFacets",
-	}
-}

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a specific database that is currently running in Amazon Lightsail.
@@ -52,6 +51,21 @@ type StopRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.StopRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.RelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.StopRelationalDatabaseRequest_relationalDatabaseSnapshotName, *v.RelationalDatabaseSnapshotName)
+	}
+}
+
 type StopRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -65,77 +79,45 @@ type StopRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.StopRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *StopRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.StopRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRelationalDatabase, schemas.StopRelationalDatabaseRequest, schemas.StopRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRelationalDatabase, schemas.StopRelationalDatabaseRequest, schemas.StopRelationalDatabaseResult), output: &StopRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopRelationalDatabase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopRelationalDatabase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopRelationalDatabaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopRelationalDatabase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +132,8 @@ func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopRelationalDatabase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopRelationalDatabase",
-	}
 }

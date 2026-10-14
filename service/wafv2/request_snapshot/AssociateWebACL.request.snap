@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.AssociateWebACL
+
+{"ResourceArn":"__ResourceArn__","WebACLArn":"__WebACLArn__"}

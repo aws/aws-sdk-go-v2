@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the default encryption configuration for the Amazon Web Services account.
@@ -46,21 +41,6 @@ type PutDefaultEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDefaultEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutDefaultEncryptionConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutDefaultEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionType != "" {
-		s.WriteString(schemas.PutDefaultEncryptionConfigurationRequest_encryptionType, string(v.EncryptionType))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.PutDefaultEncryptionConfigurationRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-}
-
 type PutDefaultEncryptionConfigurationOutput struct {
 
 	// Provides the status of the default encryption configuration for an Amazon Web
@@ -84,95 +64,29 @@ type PutDefaultEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDefaultEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutDefaultEncryptionConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutDefaultEncryptionConfigurationResponse_configurationStatus:
-			v.ConfigurationStatus = &types.ConfigurationStatus{}
-			return v.ConfigurationStatus.Deserialize(d)
-		case schemas.PutDefaultEncryptionConfigurationResponse_encryptionType:
-			var ev string
-			if err := d.ReadString(schemas.PutDefaultEncryptionConfigurationResponse_encryptionType, &ev); err != nil {
-				return err
-			}
-			v.EncryptionType = types.EncryptionType(ev)
-			return nil
-		case schemas.PutDefaultEncryptionConfigurationResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.PutDefaultEncryptionConfigurationResponse_kmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDefaultEncryptionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDefaultEncryptionConfiguration, schemas.PutDefaultEncryptionConfigurationRequest, schemas.PutDefaultEncryptionConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDefaultEncryptionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDefaultEncryptionConfiguration, schemas.PutDefaultEncryptionConfigurationRequest, schemas.PutDefaultEncryptionConfigurationResponse), output: &PutDefaultEncryptionConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDefaultEncryptionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDefaultEncryptionConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDefaultEncryptionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +101,8 @@ func (c *Client) addOperationPutDefaultEncryptionConfigurationMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDefaultEncryptionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDefaultEncryptionConfiguration",
-	}
 }

@@ -5,10 +5,10 @@ package route53domains
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation returns all the domain names registered with Amazon Route 53 for
@@ -58,6 +58,27 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterConditions(s, schemas.ListDomainsRequest_FilterConditions, v.FilterConditions)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDomainsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListDomainsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.SortCondition != nil {
+		s.WriteStruct(schemas.ListDomainsRequest_SortCondition)
+		v.SortCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
 
@@ -75,77 +96,51 @@ type ListDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainSummaryList(s, schemas.ListDomainsResponse_Domains, v.Domains)
+	if v.NextPageMarker != nil {
+		s.WriteString(schemas.ListDomainsResponse_NextPageMarker, *v.NextPageMarker)
+	}
+}
+func (v *ListDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainsResponse_Domains:
+			return deserializeDomainSummaryList(d, schemas.ListDomainsResponse_Domains, &v.Domains)
+		case schemas.ListDomainsResponse_NextPageMarker:
+			v.NextPageMarker = new(string)
+			return d.ReadString(schemas.ListDomainsResponse_NextPageMarker, v.NextPageMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsRequest, schemas.ListDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsRequest, schemas.ListDomainsResponse), output: &ListDomainsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDomains{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomains"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDomainsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomains(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +153,6 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +254,3 @@ type ListDomainsAPIClient interface {
 }
 
 var _ ListDomainsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDomains(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDomains",
-	}
-}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateOpenIDConnectProviderThumbprint&OpenIDConnectProviderArn=__OpenIDConnectProviderArn__&ThumbprintList.member.1=__Member__&ThumbprintList.member.2=__Member__&Version=2010-05-08

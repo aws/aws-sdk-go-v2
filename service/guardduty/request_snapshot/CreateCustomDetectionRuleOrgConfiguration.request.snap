@@ -1,0 +1,5 @@
+POST /custom-detection-rule/org-configuration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","excludeAccountIds":["__Member__","__Member__"],"includeAccountIds":["__Member__","__Member__"],"mode":"LIVE","ruleId":"__RuleId__"}

@@ -4,11 +4,10 @@ package codedeploy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about one or more application revisions. The maximum number of
@@ -46,6 +45,19 @@ type BatchGetApplicationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationRevisionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsInput_applicationName, *v.ApplicationName)
+	}
+	serializeRevisionLocationList(s, schemas.BatchGetApplicationRevisionsInput_revisions, v.Revisions)
+}
+
 // Represents the output of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsOutput struct {
 
@@ -64,77 +76,57 @@ type BatchGetApplicationRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationRevisionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsOutput_applicationName, *v.ApplicationName)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsOutput_errorMessage, *v.ErrorMessage)
+	}
+	serializeRevisionInfoList(s, schemas.BatchGetApplicationRevisionsOutput_revisions, v.Revisions)
+}
+func (v *BatchGetApplicationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetApplicationRevisionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetApplicationRevisionsOutput_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.BatchGetApplicationRevisionsOutput_applicationName, v.ApplicationName)
+		case schemas.BatchGetApplicationRevisionsOutput_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetApplicationRevisionsOutput_errorMessage, v.ErrorMessage)
+		case schemas.BatchGetApplicationRevisionsOutput_revisions:
+			return deserializeRevisionInfoList(d, schemas.BatchGetApplicationRevisionsOutput_revisions, &v.Revisions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplicationRevisions, schemas.BatchGetApplicationRevisionsInput, schemas.BatchGetApplicationRevisionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetApplicationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplicationRevisions, schemas.BatchGetApplicationRevisionsInput, schemas.BatchGetApplicationRevisionsOutput), output: &BatchGetApplicationRevisionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetApplicationRevisions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetApplicationRevisions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetApplicationRevisionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetApplicationRevisions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +141,8 @@ func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetApplicationRevisions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetApplicationRevisions",
-	}
 }

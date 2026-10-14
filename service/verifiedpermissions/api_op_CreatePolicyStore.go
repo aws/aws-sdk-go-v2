@@ -5,12 +5,8 @@ package verifiedpermissions
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -99,31 +95,6 @@ type CreatePolicyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyStoreInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePolicyStoreInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePolicyStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePolicyStoreInput_clientToken, *v.ClientToken)
-	}
-	if v.DeletionProtection != "" {
-		s.WriteString(schemas.CreatePolicyStoreInput_deletionProtection, string(v.DeletionProtection))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePolicyStoreInput_description, *v.Description)
-	}
-	serializeEncryptionSettings(s, schemas.CreatePolicyStoreInput_encryptionSettings, v.EncryptionSettings)
-	serializeTagMap(s, schemas.CreatePolicyStoreInput_tags, v.Tags)
-	if v.ValidationSettings != nil {
-		s.WriteStruct(schemas.CreatePolicyStoreInput_validationSettings)
-		v.ValidationSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreatePolicyStoreOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new policy store.
@@ -152,82 +123,23 @@ type CreatePolicyStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePolicyStoreOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePolicyStoreOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreatePolicyStoreOutput_arn, v.Arn)
-		case schemas.CreatePolicyStoreOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyStoreOutput_createdDate, v.CreatedDate)
-		case schemas.CreatePolicyStoreOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyStoreOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.CreatePolicyStoreOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.CreatePolicyStoreOutput_policyStoreId, v.PolicyStoreId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreatePolicyStore{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicyStore, schemas.CreatePolicyStoreInput, schemas.CreatePolicyStoreOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreatePolicyStore{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicyStore, schemas.CreatePolicyStoreInput, schemas.CreatePolicyStoreOutput), output: &CreatePolicyStoreOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicyStore"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -237,12 +149,6 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreatePolicyStoreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicyStore(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,12 +161,6 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -300,12 +200,4 @@ func (m *idempotencyToken_initializeOpCreatePolicyStore) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreatePolicyStoreMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePolicyStore{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePolicyStore(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePolicyStore",
-	}
 }

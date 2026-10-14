@@ -4,13 +4,8 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type GetMatchingWorkflowInput struct {
 	WorkflowName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMatchingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMatchingWorkflowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.GetMatchingWorkflowInput_workflowName, *v.WorkflowName)
-	}
 }
 
 type GetMatchingWorkflowOutput struct {
@@ -114,112 +97,29 @@ type GetMatchingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMatchingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMatchingWorkflowOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMatchingWorkflowOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMatchingWorkflowOutput_createdAt, v.CreatedAt)
-		case schemas.GetMatchingWorkflowOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetMatchingWorkflowOutput_description, v.Description)
-		case schemas.GetMatchingWorkflowOutput_incrementalRunConfig:
-			v.IncrementalRunConfig = &types.IncrementalRunConfig{}
-			return v.IncrementalRunConfig.Deserialize(d)
-		case schemas.GetMatchingWorkflowOutput_inputSourceConfig:
-			return deserializeInputSourceConfig(d, schemas.GetMatchingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.GetMatchingWorkflowOutput_outputSourceConfig:
-			return deserializeOutputSourceConfig(d, schemas.GetMatchingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.GetMatchingWorkflowOutput_resolutionTechniques:
-			v.ResolutionTechniques = &types.ResolutionTechniques{}
-			return v.ResolutionTechniques.Deserialize(d)
-		case schemas.GetMatchingWorkflowOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetMatchingWorkflowOutput_roleArn, v.RoleArn)
-		case schemas.GetMatchingWorkflowOutput_tags:
-			return deserializeTagMap(d, schemas.GetMatchingWorkflowOutput_tags, &v.Tags)
-		case schemas.GetMatchingWorkflowOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMatchingWorkflowOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetMatchingWorkflowOutput_workflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.GetMatchingWorkflowOutput_workflowArn, v.WorkflowArn)
-		case schemas.GetMatchingWorkflowOutput_workflowName:
-			v.WorkflowName = new(string)
-			return d.ReadString(schemas.GetMatchingWorkflowOutput_workflowName, v.WorkflowName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMatchingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingWorkflow, schemas.GetMatchingWorkflowInput, schemas.GetMatchingWorkflowOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingWorkflow, schemas.GetMatchingWorkflowInput, schemas.GetMatchingWorkflowOutput), output: &GetMatchingWorkflowOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMatchingWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMatchingWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMatchingWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +134,8 @@ func (c *Client) addOperationGetMatchingWorkflowMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMatchingWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMatchingWorkflow",
-	}
 }

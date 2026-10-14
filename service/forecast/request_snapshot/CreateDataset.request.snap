@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.CreateDataset
+
+{"DataFrequency":"__DataFrequency__","DatasetName":"__DatasetName__","DatasetType":"TARGET_TIME_SERIES","Domain":"RETAIL","EncryptionConfig":{"KMSKeyArn":"__KMSKeyArn__","RoleArn":"__RoleArn__"},"Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

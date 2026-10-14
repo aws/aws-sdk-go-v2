@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *InternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The parameters of the request were invalid.
 type InvalidInputException struct {
@@ -59,6 +81,27 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_Message, *v.Message)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because there was nothing to do or the operation wasn't
 // possible. For example, you might have submitted an AssociateAdminAccount
@@ -90,6 +133,27 @@ func (e *InvalidOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidOperationException_Message, *v.Message)
+	}
+}
+func (v *InvalidOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidOperationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidOperationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The value of the Type parameter is invalid.
 type InvalidTypeException struct {
@@ -116,6 +180,27 @@ func (e *InvalidTypeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTypeException_Message, *v.Message)
+	}
+}
+func (v *InvalidTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTypeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTypeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation exceeds a resource limit, for example, the maximum number of
 // policy objects that you can create for an Amazon Web Services account. For more
@@ -146,6 +231,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -172,3 +278,24 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}

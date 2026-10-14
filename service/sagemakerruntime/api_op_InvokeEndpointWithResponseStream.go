@@ -4,11 +4,7 @@ package sagemakerruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -111,6 +107,15 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// An identifier that you assign to your request.
 	InferenceId *string
 
+	// An optional, stable identifier that serves as a routing hint for prefix-aware
+	// routing. The service routes requests with the same prefix and the same
+	// identifier to the same instance. If requests from different applications might
+	// have the same prompt prefix, set a different identifier for each application to
+	// differentiate their routing decisions.
+	//
+	// Applies only to endpoints configured with a RoutingStrategy of PREFIX_AWARE .
+	PrefixAwareId *string
+
 	// The ID of a stateful session to handle your request.
 	//
 	// You can't create a stateful session by using the
@@ -135,45 +140,6 @@ type InvokeEndpointWithResponseStreamInput struct {
 	TargetVariant *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokeEndpointWithResponseStreamInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeEndpointWithResponseStreamInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeEndpointWithResponseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accept != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_Accept, *v.Accept)
-	}
-	if v.Body != nil {
-		s.WriteBlob(schemas.InvokeEndpointWithResponseStreamInput_Body, v.Body)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_ContentType, *v.ContentType)
-	}
-	if v.CustomAttributes != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_CustomAttributes, *v.CustomAttributes)
-	}
-	if v.EndpointName != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_EndpointName, *v.EndpointName)
-	}
-	if v.InferenceComponentName != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_InferenceComponentName, *v.InferenceComponentName)
-	}
-	if v.InferenceId != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_InferenceId, *v.InferenceId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_SessionId, *v.SessionId)
-	}
-	if v.TargetContainerHostname != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_TargetContainerHostname, *v.TargetContainerHostname)
-	}
-	if v.TargetVariant != nil {
-		s.WriteString(schemas.InvokeEndpointWithResponseStreamInput_TargetVariant, *v.TargetVariant)
-	}
 }
 
 type InvokeEndpointWithResponseStreamOutput struct {
@@ -214,55 +180,22 @@ type InvokeEndpointWithResponseStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeEndpointWithResponseStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeEndpointWithResponseStreamOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeEndpointWithResponseStreamOutput_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_ContentType, v.ContentType)
-		case schemas.InvokeEndpointWithResponseStreamOutput_CustomAttributes:
-			v.CustomAttributes = new(string)
-			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_CustomAttributes, v.CustomAttributes)
-		case schemas.InvokeEndpointWithResponseStreamOutput_InvokedProductionVariant:
-			v.InvokedProductionVariant = new(string)
-			return d.ReadString(schemas.InvokeEndpointWithResponseStreamOutput_InvokedProductionVariant, v.InvokedProductionVariant)
-		}
-		return nil
-	})
-}
-
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeEndpointWithResponseStreamOutput) GetStream() *InvokeEndpointWithResponseStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpointWithResponseStream{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithResponseStream, schemas.InvokeEndpointWithResponseStreamInput, schemas.InvokeEndpointWithResponseStreamOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeEndpointWithResponseStream{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithResponseStream, schemas.InvokeEndpointWithResponseStreamInput, schemas.InvokeEndpointWithResponseStreamOutput), output: &InvokeEndpointWithResponseStreamOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeEndpointWithResponseStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeEndpointWithResponseStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
+	if err = addEventStreamInvokeEndpointWithResponseStreamMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -271,37 +204,13 @@ func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeEndpointWithResponseStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeEndpointWithResponseStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -316,24 +225,10 @@ func (c *Client) addOperationInvokeEndpointWithResponseStreamMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeEndpointWithResponseStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeEndpointWithResponseStream",
-	}
 }
 
 // InvokeEndpointWithResponseStreamEventStream provides the event stream handling for the InvokeEndpointWithResponseStream operation.

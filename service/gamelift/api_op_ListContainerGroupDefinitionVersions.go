@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -70,6 +70,24 @@ type ListContainerGroupDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerGroupDefinitionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerGroupDefinitionVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerGroupDefinitionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListContainerGroupDefinitionVersionsInput_Limit, *v.Limit)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListContainerGroupDefinitionVersionsInput_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerGroupDefinitionVersionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListContainerGroupDefinitionVersionsOutput struct {
 
 	// A result set of container group definitions that match the request.
@@ -86,65 +104,45 @@ type ListContainerGroupDefinitionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerGroupDefinitionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerGroupDefinitionVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerGroupDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerGroupDefinitionList(s, schemas.ListContainerGroupDefinitionVersionsOutput_ContainerGroupDefinitions, v.ContainerGroupDefinitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerGroupDefinitionVersionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerGroupDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerGroupDefinitionVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerGroupDefinitionVersionsOutput_ContainerGroupDefinitions:
+			return deserializeContainerGroupDefinitionList(d, schemas.ListContainerGroupDefinitionVersionsOutput_ContainerGroupDefinitions, &v.ContainerGroupDefinitions)
+		case schemas.ListContainerGroupDefinitionVersionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerGroupDefinitionVersionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerGroupDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerGroupDefinitionVersions, schemas.ListContainerGroupDefinitionVersionsInput, schemas.ListContainerGroupDefinitionVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListContainerGroupDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerGroupDefinitionVersions, schemas.ListContainerGroupDefinitionVersionsInput, schemas.ListContainerGroupDefinitionVersionsOutput), output: &ListContainerGroupDefinitionVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListContainerGroupDefinitionVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContainerGroupDefinitionVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -154,12 +152,6 @@ func (c *Client) addOperationListContainerGroupDefinitionVersionsMiddlewares(sta
 		return err
 	}
 	if err = addOpListContainerGroupDefinitionVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerGroupDefinitionVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +164,6 @@ func (c *Client) addOperationListContainerGroupDefinitionVersionsMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -282,11 +268,3 @@ type ListContainerGroupDefinitionVersionsAPIClient interface {
 }
 
 var _ ListContainerGroupDefinitionVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContainerGroupDefinitionVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContainerGroupDefinitionVersions",
-	}
-}

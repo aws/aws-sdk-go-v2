@@ -1,0 +1,3 @@
+GET /gateways/__GatewayIdentifier__/targets/?maxResults=1&nextToken=__NextToken__
+
+

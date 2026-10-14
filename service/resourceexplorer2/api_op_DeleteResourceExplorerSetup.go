@@ -4,10 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a Resource Explorer setup configuration. This operation removes indexes
@@ -44,6 +43,19 @@ type DeleteResourceExplorerSetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceExplorerSetupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteInAllRegions != nil {
+		s.WriteBool(schemas.DeleteResourceExplorerSetupInput_DeleteInAllRegions, *v.DeleteInAllRegions)
+	}
+	serializeRegionList(s, schemas.DeleteResourceExplorerSetupInput_RegionList, v.RegionList)
+}
+
 type DeleteResourceExplorerSetupOutput struct {
 
 	// The unique identifier for the deletion task. Use this ID with
@@ -58,74 +70,45 @@ type DeleteResourceExplorerSetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceExplorerSetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceExplorerSetupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DeleteResourceExplorerSetupOutput_TaskId, *v.TaskId)
+	}
+}
+func (v *DeleteResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceExplorerSetupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceExplorerSetupOutput_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DeleteResourceExplorerSetupOutput_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceExplorerSetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceExplorerSetup, schemas.DeleteResourceExplorerSetupInput, schemas.DeleteResourceExplorerSetupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceExplorerSetup, schemas.DeleteResourceExplorerSetupInput, schemas.DeleteResourceExplorerSetupOutput), output: &DeleteResourceExplorerSetupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourceExplorerSetup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourceExplorerSetup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceExplorerSetup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +123,8 @@ func (c *Client) addOperationDeleteResourceExplorerSetupMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteResourceExplorerSetup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteResourceExplorerSetup",
-	}
 }

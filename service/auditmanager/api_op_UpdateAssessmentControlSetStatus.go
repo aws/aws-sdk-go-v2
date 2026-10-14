@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the status of a control set in an Audit Manager assessment.
@@ -52,6 +51,27 @@ type UpdateAssessmentControlSetStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentControlSetStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentControlSetStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentControlSetStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_comment, *v.Comment)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_status, string(v.Status))
+	}
+}
+
 type UpdateAssessmentControlSetStatusOutput struct {
 
 	//  The name of the updated control set that the UpdateAssessmentControlSetStatus
@@ -64,77 +84,50 @@ type UpdateAssessmentControlSetStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentControlSetStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentControlSetStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentControlSetStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlSet != nil {
+		s.WriteStruct(schemas.UpdateAssessmentControlSetStatusResponse_controlSet)
+		v.ControlSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssessmentControlSetStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentControlSetStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentControlSetStatusResponse_controlSet:
+			v.ControlSet = &types.AssessmentControlSet{}
+			return v.ControlSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssessmentControlSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentControlSetStatus, schemas.UpdateAssessmentControlSetStatusRequest, schemas.UpdateAssessmentControlSetStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessmentControlSetStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentControlSetStatus, schemas.UpdateAssessmentControlSetStatusRequest, schemas.UpdateAssessmentControlSetStatusResponse), output: &UpdateAssessmentControlSetStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssessmentControlSetStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAssessmentControlSetStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAssessmentControlSetStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssessmentControlSetStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +142,8 @@ func (c *Client) addOperationUpdateAssessmentControlSetStatusMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAssessmentControlSetStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAssessmentControlSetStatus",
-	}
 }

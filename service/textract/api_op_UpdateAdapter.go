@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,6 +47,27 @@ type UpdateAdapterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdapterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdapterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.UpdateAdapterRequest_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterName != nil {
+		s.WriteString(schemas.UpdateAdapterRequest_AdapterName, *v.AdapterName)
+	}
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.UpdateAdapterRequest_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAdapterRequest_Description, *v.Description)
+	}
+}
+
 type UpdateAdapterOutput struct {
 
 	// A string containing a unique ID for the adapter that has been updated.
@@ -74,77 +94,79 @@ type UpdateAdapterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdapterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdapterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.UpdateAdapterResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterName != nil {
+		s.WriteString(schemas.UpdateAdapterResponse_AdapterName, *v.AdapterName)
+	}
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.UpdateAdapterResponse_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateAdapterResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAdapterResponse_Description, *v.Description)
+	}
+	serializeFeatureTypes(s, schemas.UpdateAdapterResponse_FeatureTypes, v.FeatureTypes)
+}
+func (v *UpdateAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAdapterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAdapterResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.UpdateAdapterResponse_AdapterId, v.AdapterId)
+		case schemas.UpdateAdapterResponse_AdapterName:
+			v.AdapterName = new(string)
+			return d.ReadString(schemas.UpdateAdapterResponse_AdapterName, v.AdapterName)
+		case schemas.UpdateAdapterResponse_AutoUpdate:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAdapterResponse_AutoUpdate, &ev); err != nil {
+				return err
+			}
+			v.AutoUpdate = types.AutoUpdate(ev)
+			return nil
+		case schemas.UpdateAdapterResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateAdapterResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateAdapterResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAdapterResponse_Description, v.Description)
+		case schemas.UpdateAdapterResponse_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.UpdateAdapterResponse_FeatureTypes, &v.FeatureTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAdapterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdapter, schemas.UpdateAdapterRequest, schemas.UpdateAdapterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdapter, schemas.UpdateAdapterRequest, schemas.UpdateAdapterResponse), output: &UpdateAdapterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAdapter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAdapter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAdapterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAdapter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +181,8 @@ func (c *Client) addOperationUpdateAdapterMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAdapter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAdapter",
-	}
 }

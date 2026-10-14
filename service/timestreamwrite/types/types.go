@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -33,52 +31,6 @@ type BatchLoadProgressReport struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchLoadProgressReport) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchLoadProgressReport)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchLoadProgressReport) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BytesMetered != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_BytesMetered, v.BytesMetered)
-	}
-	if v.FileFailures != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_FileFailures, v.FileFailures)
-	}
-	if v.ParseFailures != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_ParseFailures, v.ParseFailures)
-	}
-	if v.RecordIngestionFailures != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_RecordIngestionFailures, v.RecordIngestionFailures)
-	}
-	if v.RecordsIngested != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_RecordsIngested, v.RecordsIngested)
-	}
-	if v.RecordsProcessed != 0 {
-		s.WriteInt64(schemas.BatchLoadProgressReport_RecordsProcessed, v.RecordsProcessed)
-	}
-}
-func (v *BatchLoadProgressReport) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchLoadProgressReport, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchLoadProgressReport_BytesMetered:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_BytesMetered, &v.BytesMetered)
-		case schemas.BatchLoadProgressReport_FileFailures:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_FileFailures, &v.FileFailures)
-		case schemas.BatchLoadProgressReport_ParseFailures:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_ParseFailures, &v.ParseFailures)
-		case schemas.BatchLoadProgressReport_RecordIngestionFailures:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_RecordIngestionFailures, &v.RecordIngestionFailures)
-		case schemas.BatchLoadProgressReport_RecordsIngested:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_RecordsIngested, &v.RecordsIngested)
-		case schemas.BatchLoadProgressReport_RecordsProcessed:
-			return d.ReadInt64(schemas.BatchLoadProgressReport_RecordsProcessed, &v.RecordsProcessed)
-		}
-		return nil
-	})
-}
-
 // Details about a batch load task.
 type BatchLoadTask struct {
 
@@ -104,68 +56,6 @@ type BatchLoadTask struct {
 	TaskStatus BatchLoadStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchLoadTask) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchLoadTask)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchLoadTask) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.BatchLoadTask_CreationTime, *v.CreationTime)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.BatchLoadTask_DatabaseName, *v.DatabaseName)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.BatchLoadTask_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.ResumableUntil != nil {
-		s.WriteTime(schemas.BatchLoadTask_ResumableUntil, *v.ResumableUntil)
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.BatchLoadTask_TableName, *v.TableName)
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.BatchLoadTask_TaskId, *v.TaskId)
-	}
-	if v.TaskStatus != "" {
-		s.WriteString(schemas.BatchLoadTask_TaskStatus, string(v.TaskStatus))
-	}
-}
-func (v *BatchLoadTask) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchLoadTask, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchLoadTask_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTask_CreationTime, v.CreationTime)
-		case schemas.BatchLoadTask_DatabaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.BatchLoadTask_DatabaseName, v.DatabaseName)
-		case schemas.BatchLoadTask_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTask_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.BatchLoadTask_ResumableUntil:
-			v.ResumableUntil = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTask_ResumableUntil, v.ResumableUntil)
-		case schemas.BatchLoadTask_TableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.BatchLoadTask_TableName, v.TableName)
-		case schemas.BatchLoadTask_TaskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.BatchLoadTask_TaskId, v.TaskId)
-		case schemas.BatchLoadTask_TaskStatus:
-			var ev string
-			if err := d.ReadString(schemas.BatchLoadTask_TaskStatus, &ev); err != nil {
-				return err
-			}
-			v.TaskStatus = BatchLoadStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details about a batch load task.
@@ -215,111 +105,6 @@ type BatchLoadTaskDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchLoadTaskDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchLoadTaskDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchLoadTaskDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.BatchLoadTaskDescription_CreationTime, *v.CreationTime)
-	}
-	if v.DataModelConfiguration != nil {
-		s.WriteStruct(schemas.BatchLoadTaskDescription_DataModelConfiguration)
-		v.DataModelConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataSourceConfiguration != nil {
-		s.WriteStruct(schemas.BatchLoadTaskDescription_DataSourceConfiguration)
-		v.DataSourceConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchLoadTaskDescription_ErrorMessage, *v.ErrorMessage)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.BatchLoadTaskDescription_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.ProgressReport != nil {
-		s.WriteStruct(schemas.BatchLoadTaskDescription_ProgressReport)
-		v.ProgressReport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RecordVersion != 0 {
-		s.WriteInt64(schemas.BatchLoadTaskDescription_RecordVersion, v.RecordVersion)
-	}
-	if v.ReportConfiguration != nil {
-		s.WriteStruct(schemas.BatchLoadTaskDescription_ReportConfiguration)
-		v.ReportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResumableUntil != nil {
-		s.WriteTime(schemas.BatchLoadTaskDescription_ResumableUntil, *v.ResumableUntil)
-	}
-	if v.TargetDatabaseName != nil {
-		s.WriteString(schemas.BatchLoadTaskDescription_TargetDatabaseName, *v.TargetDatabaseName)
-	}
-	if v.TargetTableName != nil {
-		s.WriteString(schemas.BatchLoadTaskDescription_TargetTableName, *v.TargetTableName)
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.BatchLoadTaskDescription_TaskId, *v.TaskId)
-	}
-	if v.TaskStatus != "" {
-		s.WriteString(schemas.BatchLoadTaskDescription_TaskStatus, string(v.TaskStatus))
-	}
-}
-func (v *BatchLoadTaskDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchLoadTaskDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchLoadTaskDescription_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTaskDescription_CreationTime, v.CreationTime)
-		case schemas.BatchLoadTaskDescription_DataModelConfiguration:
-			v.DataModelConfiguration = &DataModelConfiguration{}
-			return v.DataModelConfiguration.Deserialize(d)
-		case schemas.BatchLoadTaskDescription_DataSourceConfiguration:
-			v.DataSourceConfiguration = &DataSourceConfiguration{}
-			return v.DataSourceConfiguration.Deserialize(d)
-		case schemas.BatchLoadTaskDescription_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchLoadTaskDescription_ErrorMessage, v.ErrorMessage)
-		case schemas.BatchLoadTaskDescription_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTaskDescription_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.BatchLoadTaskDescription_ProgressReport:
-			v.ProgressReport = &BatchLoadProgressReport{}
-			return v.ProgressReport.Deserialize(d)
-		case schemas.BatchLoadTaskDescription_RecordVersion:
-			return d.ReadInt64(schemas.BatchLoadTaskDescription_RecordVersion, &v.RecordVersion)
-		case schemas.BatchLoadTaskDescription_ReportConfiguration:
-			v.ReportConfiguration = &ReportConfiguration{}
-			return v.ReportConfiguration.Deserialize(d)
-		case schemas.BatchLoadTaskDescription_ResumableUntil:
-			v.ResumableUntil = new(time.Time)
-			return d.ReadTime(schemas.BatchLoadTaskDescription_ResumableUntil, v.ResumableUntil)
-		case schemas.BatchLoadTaskDescription_TargetDatabaseName:
-			v.TargetDatabaseName = new(string)
-			return d.ReadString(schemas.BatchLoadTaskDescription_TargetDatabaseName, v.TargetDatabaseName)
-		case schemas.BatchLoadTaskDescription_TargetTableName:
-			v.TargetTableName = new(string)
-			return d.ReadString(schemas.BatchLoadTaskDescription_TargetTableName, v.TargetTableName)
-		case schemas.BatchLoadTaskDescription_TaskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.BatchLoadTaskDescription_TaskId, v.TaskId)
-		case schemas.BatchLoadTaskDescription_TaskStatus:
-			var ev string
-			if err := d.ReadString(schemas.BatchLoadTaskDescription_TaskStatus, &ev); err != nil {
-				return err
-			}
-			v.TaskStatus = BatchLoadStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A delimited data format where the column separator can be a comma and the
 // record separator is a newline character.
 type CsvConfiguration struct {
@@ -341,52 +126,6 @@ type CsvConfiguration struct {
 	TrimWhiteSpace *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *CsvConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CsvConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CsvConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ColumnSeparator != nil {
-		s.WriteString(schemas.CsvConfiguration_ColumnSeparator, *v.ColumnSeparator)
-	}
-	if v.EscapeChar != nil {
-		s.WriteString(schemas.CsvConfiguration_EscapeChar, *v.EscapeChar)
-	}
-	if v.NullValue != nil {
-		s.WriteString(schemas.CsvConfiguration_NullValue, *v.NullValue)
-	}
-	if v.QuoteChar != nil {
-		s.WriteString(schemas.CsvConfiguration_QuoteChar, *v.QuoteChar)
-	}
-	if v.TrimWhiteSpace != nil {
-		s.WriteBool(schemas.CsvConfiguration_TrimWhiteSpace, *v.TrimWhiteSpace)
-	}
-}
-func (v *CsvConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CsvConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CsvConfiguration_ColumnSeparator:
-			v.ColumnSeparator = new(string)
-			return d.ReadString(schemas.CsvConfiguration_ColumnSeparator, v.ColumnSeparator)
-		case schemas.CsvConfiguration_EscapeChar:
-			v.EscapeChar = new(string)
-			return d.ReadString(schemas.CsvConfiguration_EscapeChar, v.EscapeChar)
-		case schemas.CsvConfiguration_NullValue:
-			v.NullValue = new(string)
-			return d.ReadString(schemas.CsvConfiguration_NullValue, v.NullValue)
-		case schemas.CsvConfiguration_QuoteChar:
-			v.QuoteChar = new(string)
-			return d.ReadString(schemas.CsvConfiguration_QuoteChar, v.QuoteChar)
-		case schemas.CsvConfiguration_TrimWhiteSpace:
-			v.TrimWhiteSpace = new(bool)
-			return d.ReadBool(schemas.CsvConfiguration_TrimWhiteSpace, v.TrimWhiteSpace)
-		}
-		return nil
-	})
 }
 
 // A top-level container for a table. Databases and tables are the fundamental
@@ -413,57 +152,6 @@ type Database struct {
 	TableCount int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Database) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Database)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Database) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Database_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.Database_CreationTime, *v.CreationTime)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.Database_DatabaseName, *v.DatabaseName)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.Database_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.Database_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.TableCount != 0 {
-		s.WriteInt64(schemas.Database_TableCount, v.TableCount)
-	}
-}
-func (v *Database) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Database, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Database_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Database_Arn, v.Arn)
-		case schemas.Database_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.Database_CreationTime, v.CreationTime)
-		case schemas.Database_DatabaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.Database_DatabaseName, v.DatabaseName)
-		case schemas.Database_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.Database_KmsKeyId, v.KmsKeyId)
-		case schemas.Database_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.Database_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.Database_TableCount:
-			return d.ReadInt64(schemas.Database_TableCount, &v.TableCount)
-		}
-		return nil
-	})
 }
 
 // Data model for a batch load task.
@@ -494,58 +182,6 @@ type DataModel struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataModel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataModel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataModel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionMappings(s, schemas.DataModel_DimensionMappings, v.DimensionMappings)
-	if v.MeasureNameColumn != nil {
-		s.WriteString(schemas.DataModel_MeasureNameColumn, *v.MeasureNameColumn)
-	}
-	serializeMixedMeasureMappingList(s, schemas.DataModel_MixedMeasureMappings, v.MixedMeasureMappings)
-	if v.MultiMeasureMappings != nil {
-		s.WriteStruct(schemas.DataModel_MultiMeasureMappings)
-		v.MultiMeasureMappings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TimeColumn != nil {
-		s.WriteString(schemas.DataModel_TimeColumn, *v.TimeColumn)
-	}
-	if v.TimeUnit != "" {
-		s.WriteString(schemas.DataModel_TimeUnit, string(v.TimeUnit))
-	}
-}
-func (v *DataModel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataModel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataModel_DimensionMappings:
-			return deserializeDimensionMappings(d, schemas.DataModel_DimensionMappings, &v.DimensionMappings)
-		case schemas.DataModel_MeasureNameColumn:
-			v.MeasureNameColumn = new(string)
-			return d.ReadString(schemas.DataModel_MeasureNameColumn, v.MeasureNameColumn)
-		case schemas.DataModel_MixedMeasureMappings:
-			return deserializeMixedMeasureMappingList(d, schemas.DataModel_MixedMeasureMappings, &v.MixedMeasureMappings)
-		case schemas.DataModel_MultiMeasureMappings:
-			v.MultiMeasureMappings = &MultiMeasureMappings{}
-			return v.MultiMeasureMappings.Deserialize(d)
-		case schemas.DataModel_TimeColumn:
-			v.TimeColumn = new(string)
-			return d.ReadString(schemas.DataModel_TimeColumn, v.TimeColumn)
-		case schemas.DataModel_TimeUnit:
-			var ev string
-			if err := d.ReadString(schemas.DataModel_TimeUnit, &ev); err != nil {
-				return err
-			}
-			v.TimeUnit = TimeUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type DataModelConfiguration struct {
 
 	//
@@ -557,38 +193,6 @@ type DataModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataModelConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataModelConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataModel != nil {
-		s.WriteStruct(schemas.DataModelConfiguration_DataModel)
-		v.DataModel.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataModelS3Configuration != nil {
-		s.WriteStruct(schemas.DataModelConfiguration_DataModelS3Configuration)
-		v.DataModelS3Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataModelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataModelConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataModelConfiguration_DataModel:
-			v.DataModel = &DataModel{}
-			return v.DataModel.Deserialize(d)
-		case schemas.DataModelConfiguration_DataModelS3Configuration:
-			v.DataModelS3Configuration = &DataModelS3Configuration{}
-			return v.DataModelS3Configuration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type DataModelS3Configuration struct {
 
 	//
@@ -598,34 +202,6 @@ type DataModelS3Configuration struct {
 	ObjectKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataModelS3Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataModelS3Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataModelS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.DataModelS3Configuration_BucketName, *v.BucketName)
-	}
-	if v.ObjectKey != nil {
-		s.WriteString(schemas.DataModelS3Configuration_ObjectKey, *v.ObjectKey)
-	}
-}
-func (v *DataModelS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataModelS3Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataModelS3Configuration_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.DataModelS3Configuration_BucketName, v.BucketName)
-		case schemas.DataModelS3Configuration_ObjectKey:
-			v.ObjectKey = new(string)
-			return d.ReadString(schemas.DataModelS3Configuration_ObjectKey, v.ObjectKey)
-		}
-		return nil
-	})
 }
 
 // Defines configuration details about the data source.
@@ -648,48 +224,6 @@ type DataSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataSourceConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CsvConfiguration != nil {
-		s.WriteStruct(schemas.DataSourceConfiguration_CsvConfiguration)
-		v.CsvConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataFormat != "" {
-		s.WriteString(schemas.DataSourceConfiguration_DataFormat, string(v.DataFormat))
-	}
-	if v.DataSourceS3Configuration != nil {
-		s.WriteStruct(schemas.DataSourceConfiguration_DataSourceS3Configuration)
-		v.DataSourceS3Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataSourceConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataSourceConfiguration_CsvConfiguration:
-			v.CsvConfiguration = &CsvConfiguration{}
-			return v.CsvConfiguration.Deserialize(d)
-		case schemas.DataSourceConfiguration_DataFormat:
-			var ev string
-			if err := d.ReadString(schemas.DataSourceConfiguration_DataFormat, &ev); err != nil {
-				return err
-			}
-			v.DataFormat = BatchLoadDataFormat(ev)
-			return nil
-		case schemas.DataSourceConfiguration_DataSourceS3Configuration:
-			v.DataSourceS3Configuration = &DataSourceS3Configuration{}
-			return v.DataSourceS3Configuration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type DataSourceS3Configuration struct {
 
 	// The bucket name of the customer S3 bucket.
@@ -701,34 +235,6 @@ type DataSourceS3Configuration struct {
 	ObjectKeyPrefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataSourceS3Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataSourceS3Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataSourceS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.DataSourceS3Configuration_BucketName, *v.BucketName)
-	}
-	if v.ObjectKeyPrefix != nil {
-		s.WriteString(schemas.DataSourceS3Configuration_ObjectKeyPrefix, *v.ObjectKeyPrefix)
-	}
-}
-func (v *DataSourceS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataSourceS3Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataSourceS3Configuration_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.DataSourceS3Configuration_BucketName, v.BucketName)
-		case schemas.DataSourceS3Configuration_ObjectKeyPrefix:
-			v.ObjectKeyPrefix = new(string)
-			return d.ReadString(schemas.DataSourceS3Configuration_ObjectKeyPrefix, v.ObjectKeyPrefix)
-		}
-		return nil
-	})
 }
 
 // Represents the metadata attributes of the time series. For example, the name
@@ -758,44 +264,6 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Dimension)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DimensionValueType != "" {
-		s.WriteString(schemas.Dimension_DimensionValueType, string(v.DimensionValueType))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Dimension_Name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Dimension_Value, *v.Value)
-	}
-}
-func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Dimension_DimensionValueType:
-			var ev string
-			if err := d.ReadString(schemas.Dimension_DimensionValueType, &ev); err != nil {
-				return err
-			}
-			v.DimensionValueType = DimensionValueType(ev)
-			return nil
-		case schemas.Dimension_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Dimension_Name, v.Name)
-		case schemas.Dimension_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Dimension_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 type DimensionMapping struct {
 
 	//
@@ -805,34 +273,6 @@ type DimensionMapping struct {
 	SourceColumn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DimensionMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DimensionMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DimensionMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationColumn != nil {
-		s.WriteString(schemas.DimensionMapping_DestinationColumn, *v.DestinationColumn)
-	}
-	if v.SourceColumn != nil {
-		s.WriteString(schemas.DimensionMapping_SourceColumn, *v.SourceColumn)
-	}
-}
-func (v *DimensionMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DimensionMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DimensionMapping_DestinationColumn:
-			v.DestinationColumn = new(string)
-			return d.ReadString(schemas.DimensionMapping_DestinationColumn, v.DestinationColumn)
-		case schemas.DimensionMapping_SourceColumn:
-			v.SourceColumn = new(string)
-			return d.ReadString(schemas.DimensionMapping_SourceColumn, v.SourceColumn)
-		}
-		return nil
-	})
 }
 
 // Represents an available endpoint against which to make API calls against, as
@@ -852,31 +292,6 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Endpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Address != nil {
-		s.WriteString(schemas.Endpoint_Address, *v.Address)
-	}
-	s.WriteInt64(schemas.Endpoint_CachePeriodInMinutes, v.CachePeriodInMinutes)
-}
-func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Endpoint_Address:
-			v.Address = new(string)
-			return d.ReadString(schemas.Endpoint_Address, v.Address)
-		case schemas.Endpoint_CachePeriodInMinutes:
-			return d.ReadInt64(schemas.Endpoint_CachePeriodInMinutes, &v.CachePeriodInMinutes)
-		}
-		return nil
-	})
-}
-
 // The location to write error reports for records rejected, asynchronously,
 // during magnetic store writes.
 type MagneticStoreRejectedDataLocation struct {
@@ -886,30 +301,6 @@ type MagneticStoreRejectedDataLocation struct {
 	S3Configuration *S3Configuration
 
 	noSmithyDocumentSerde
-}
-
-func (v *MagneticStoreRejectedDataLocation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MagneticStoreRejectedDataLocation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MagneticStoreRejectedDataLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Configuration != nil {
-		s.WriteStruct(schemas.MagneticStoreRejectedDataLocation_S3Configuration)
-		v.S3Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MagneticStoreRejectedDataLocation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MagneticStoreRejectedDataLocation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MagneticStoreRejectedDataLocation_S3Configuration:
-			v.S3Configuration = &S3Configuration{}
-			return v.S3Configuration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The set of properties on a table for configuring magnetic store writes.
@@ -925,36 +316,6 @@ type MagneticStoreWriteProperties struct {
 	MagneticStoreRejectedDataLocation *MagneticStoreRejectedDataLocation
 
 	noSmithyDocumentSerde
-}
-
-func (v *MagneticStoreWriteProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MagneticStoreWriteProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MagneticStoreWriteProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnableMagneticStoreWrites != nil {
-		s.WriteBool(schemas.MagneticStoreWriteProperties_EnableMagneticStoreWrites, *v.EnableMagneticStoreWrites)
-	}
-	if v.MagneticStoreRejectedDataLocation != nil {
-		s.WriteStruct(schemas.MagneticStoreWriteProperties_MagneticStoreRejectedDataLocation)
-		v.MagneticStoreRejectedDataLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MagneticStoreWriteProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MagneticStoreWriteProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MagneticStoreWriteProperties_EnableMagneticStoreWrites:
-			v.EnableMagneticStoreWrites = new(bool)
-			return d.ReadBool(schemas.MagneticStoreWriteProperties_EnableMagneticStoreWrites, v.EnableMagneticStoreWrites)
-		case schemas.MagneticStoreWriteProperties_MagneticStoreRejectedDataLocation:
-			v.MagneticStoreRejectedDataLocation = &MagneticStoreRejectedDataLocation{}
-			return v.MagneticStoreRejectedDataLocation.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	Represents the data attribute of the time series. For example, the CPU
@@ -991,44 +352,6 @@ type MeasureValue struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MeasureValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MeasureValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MeasureValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.MeasureValue_Name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.MeasureValue_Type, string(v.Type))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.MeasureValue_Value, *v.Value)
-	}
-}
-func (v *MeasureValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MeasureValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MeasureValue_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MeasureValue_Name, v.Name)
-		case schemas.MeasureValue_Type:
-			var ev string
-			if err := d.ReadString(schemas.MeasureValue_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = MeasureValueType(ev)
-			return nil
-		case schemas.MeasureValue_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.MeasureValue_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 type MixedMeasureMapping struct {
 
 	//
@@ -1051,53 +374,6 @@ type MixedMeasureMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MixedMeasureMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MixedMeasureMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MixedMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MeasureName != nil {
-		s.WriteString(schemas.MixedMeasureMapping_MeasureName, *v.MeasureName)
-	}
-	if v.MeasureValueType != "" {
-		s.WriteString(schemas.MixedMeasureMapping_MeasureValueType, string(v.MeasureValueType))
-	}
-	serializeMultiMeasureAttributeMappingList(s, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
-	if v.SourceColumn != nil {
-		s.WriteString(schemas.MixedMeasureMapping_SourceColumn, *v.SourceColumn)
-	}
-	if v.TargetMeasureName != nil {
-		s.WriteString(schemas.MixedMeasureMapping_TargetMeasureName, *v.TargetMeasureName)
-	}
-}
-func (v *MixedMeasureMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MixedMeasureMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MixedMeasureMapping_MeasureName:
-			v.MeasureName = new(string)
-			return d.ReadString(schemas.MixedMeasureMapping_MeasureName, v.MeasureName)
-		case schemas.MixedMeasureMapping_MeasureValueType:
-			var ev string
-			if err := d.ReadString(schemas.MixedMeasureMapping_MeasureValueType, &ev); err != nil {
-				return err
-			}
-			v.MeasureValueType = MeasureValueType(ev)
-			return nil
-		case schemas.MixedMeasureMapping_MultiMeasureAttributeMappings:
-			return deserializeMultiMeasureAttributeMappingList(d, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, &v.MultiMeasureAttributeMappings)
-		case schemas.MixedMeasureMapping_SourceColumn:
-			v.SourceColumn = new(string)
-			return d.ReadString(schemas.MixedMeasureMapping_SourceColumn, v.SourceColumn)
-		case schemas.MixedMeasureMapping_TargetMeasureName:
-			v.TargetMeasureName = new(string)
-			return d.ReadString(schemas.MixedMeasureMapping_TargetMeasureName, v.TargetMeasureName)
-		}
-		return nil
-	})
-}
-
 type MultiMeasureAttributeMapping struct {
 
 	//
@@ -1114,44 +390,6 @@ type MultiMeasureAttributeMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MultiMeasureAttributeMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MultiMeasureAttributeMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MultiMeasureAttributeMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MeasureValueType != "" {
-		s.WriteString(schemas.MultiMeasureAttributeMapping_MeasureValueType, string(v.MeasureValueType))
-	}
-	if v.SourceColumn != nil {
-		s.WriteString(schemas.MultiMeasureAttributeMapping_SourceColumn, *v.SourceColumn)
-	}
-	if v.TargetMultiMeasureAttributeName != nil {
-		s.WriteString(schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName, *v.TargetMultiMeasureAttributeName)
-	}
-}
-func (v *MultiMeasureAttributeMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MultiMeasureAttributeMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MultiMeasureAttributeMapping_MeasureValueType:
-			var ev string
-			if err := d.ReadString(schemas.MultiMeasureAttributeMapping_MeasureValueType, &ev); err != nil {
-				return err
-			}
-			v.MeasureValueType = ScalarMeasureValueType(ev)
-			return nil
-		case schemas.MultiMeasureAttributeMapping_SourceColumn:
-			v.SourceColumn = new(string)
-			return d.ReadString(schemas.MultiMeasureAttributeMapping_SourceColumn, v.SourceColumn)
-		case schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName:
-			v.TargetMultiMeasureAttributeName = new(string)
-			return d.ReadString(schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName, v.TargetMultiMeasureAttributeName)
-		}
-		return nil
-	})
-}
-
 type MultiMeasureMappings struct {
 
 	//
@@ -1163,31 +401,6 @@ type MultiMeasureMappings struct {
 	TargetMultiMeasureName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MultiMeasureMappings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MultiMeasureMappings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MultiMeasureMappings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiMeasureAttributeMappingList(s, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
-	if v.TargetMultiMeasureName != nil {
-		s.WriteString(schemas.MultiMeasureMappings_TargetMultiMeasureName, *v.TargetMultiMeasureName)
-	}
-}
-func (v *MultiMeasureMappings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MultiMeasureMappings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MultiMeasureMappings_MultiMeasureAttributeMappings:
-			return deserializeMultiMeasureAttributeMappingList(d, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, &v.MultiMeasureAttributeMappings)
-		case schemas.MultiMeasureMappings_TargetMultiMeasureName:
-			v.TargetMultiMeasureName = new(string)
-			return d.ReadString(schemas.MultiMeasureMappings_TargetMultiMeasureName, v.TargetMultiMeasureName)
-		}
-		return nil
-	})
 }
 
 //	An attribute used in partitioning data in a table. A dimension key partitions
@@ -1212,48 +425,6 @@ type PartitionKey struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PartitionKey) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartitionKey)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartitionKey) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnforcementInRecord != "" {
-		s.WriteString(schemas.PartitionKey_EnforcementInRecord, string(v.EnforcementInRecord))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PartitionKey_Name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.PartitionKey_Type, string(v.Type))
-	}
-}
-func (v *PartitionKey) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartitionKey, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartitionKey_EnforcementInRecord:
-			var ev string
-			if err := d.ReadString(schemas.PartitionKey_EnforcementInRecord, &ev); err != nil {
-				return err
-			}
-			v.EnforcementInRecord = PartitionKeyEnforcementLevel(ev)
-			return nil
-		case schemas.PartitionKey_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PartitionKey_Name, v.Name)
-		case schemas.PartitionKey_Type:
-			var ev string
-			if err := d.ReadString(schemas.PartitionKey_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = PartitionKeyType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents a time-series data point being written into Timestream. Each record
@@ -1318,72 +489,6 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Record) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Record)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.Record_Dimensions, v.Dimensions)
-	if v.MeasureName != nil {
-		s.WriteString(schemas.Record_MeasureName, *v.MeasureName)
-	}
-	if v.MeasureValue != nil {
-		s.WriteString(schemas.Record_MeasureValue, *v.MeasureValue)
-	}
-	if v.MeasureValueType != "" {
-		s.WriteString(schemas.Record_MeasureValueType, string(v.MeasureValueType))
-	}
-	serializeMeasureValues(s, schemas.Record_MeasureValues, v.MeasureValues)
-	if v.Time != nil {
-		s.WriteString(schemas.Record_Time, *v.Time)
-	}
-	if v.TimeUnit != "" {
-		s.WriteString(schemas.Record_TimeUnit, string(v.TimeUnit))
-	}
-	if v.Version != nil {
-		s.WriteInt64(schemas.Record_Version, *v.Version)
-	}
-}
-func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Record_Dimensions:
-			return deserializeDimensions(d, schemas.Record_Dimensions, &v.Dimensions)
-		case schemas.Record_MeasureName:
-			v.MeasureName = new(string)
-			return d.ReadString(schemas.Record_MeasureName, v.MeasureName)
-		case schemas.Record_MeasureValue:
-			v.MeasureValue = new(string)
-			return d.ReadString(schemas.Record_MeasureValue, v.MeasureValue)
-		case schemas.Record_MeasureValueType:
-			var ev string
-			if err := d.ReadString(schemas.Record_MeasureValueType, &ev); err != nil {
-				return err
-			}
-			v.MeasureValueType = MeasureValueType(ev)
-			return nil
-		case schemas.Record_MeasureValues:
-			return deserializeMeasureValues(d, schemas.Record_MeasureValues, &v.MeasureValues)
-		case schemas.Record_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.Record_Time, v.Time)
-		case schemas.Record_TimeUnit:
-			var ev string
-			if err := d.ReadString(schemas.Record_TimeUnit, &ev); err != nil {
-				return err
-			}
-			v.TimeUnit = TimeUnit(ev)
-			return nil
-		case schemas.Record_Version:
-			v.Version = new(int64)
-			return d.ReadInt64(schemas.Record_Version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Information on the records ingested by this request.
 type RecordsIngested struct {
 
@@ -1397,37 +502,6 @@ type RecordsIngested struct {
 	Total int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecordsIngested) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecordsIngested)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecordsIngested) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MagneticStore != 0 {
-		s.WriteInt32(schemas.RecordsIngested_MagneticStore, v.MagneticStore)
-	}
-	if v.MemoryStore != 0 {
-		s.WriteInt32(schemas.RecordsIngested_MemoryStore, v.MemoryStore)
-	}
-	if v.Total != 0 {
-		s.WriteInt32(schemas.RecordsIngested_Total, v.Total)
-	}
-}
-func (v *RecordsIngested) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecordsIngested, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecordsIngested_MagneticStore:
-			return d.ReadInt32(schemas.RecordsIngested_MagneticStore, &v.MagneticStore)
-		case schemas.RecordsIngested_MemoryStore:
-			return d.ReadInt32(schemas.RecordsIngested_MemoryStore, &v.MemoryStore)
-		case schemas.RecordsIngested_Total:
-			return d.ReadInt32(schemas.RecordsIngested_Total, &v.Total)
-		}
-		return nil
-	})
 }
 
 //	Represents records that were not successfully inserted into Timestream due to
@@ -1482,39 +556,6 @@ type RejectedRecord struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectedRecord) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectedRecord)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectedRecord) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExistingVersion != nil {
-		s.WriteInt64(schemas.RejectedRecord_ExistingVersion, *v.ExistingVersion)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.RejectedRecord_Reason, *v.Reason)
-	}
-	if v.RecordIndex != 0 {
-		s.WriteInt32(schemas.RejectedRecord_RecordIndex, v.RecordIndex)
-	}
-}
-func (v *RejectedRecord) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectedRecord, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectedRecord_ExistingVersion:
-			v.ExistingVersion = new(int64)
-			return d.ReadInt64(schemas.RejectedRecord_ExistingVersion, v.ExistingVersion)
-		case schemas.RejectedRecord_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.RejectedRecord_Reason, v.Reason)
-		case schemas.RejectedRecord_RecordIndex:
-			return d.ReadInt32(schemas.RejectedRecord_RecordIndex, &v.RecordIndex)
-		}
-		return nil
-	})
-}
-
 // Report configuration for a batch load task. This contains details about where
 // error reports are stored.
 type ReportConfiguration struct {
@@ -1524,30 +565,6 @@ type ReportConfiguration struct {
 	ReportS3Configuration *ReportS3Configuration
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReportConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReportS3Configuration != nil {
-		s.WriteStruct(schemas.ReportConfiguration_ReportS3Configuration)
-		v.ReportS3Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportConfiguration_ReportS3Configuration:
-			v.ReportS3Configuration = &ReportS3Configuration{}
-			return v.ReportS3Configuration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 type ReportS3Configuration struct {
@@ -1569,50 +586,6 @@ type ReportS3Configuration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReportS3Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportS3Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.ReportS3Configuration_BucketName, *v.BucketName)
-	}
-	if v.EncryptionOption != "" {
-		s.WriteString(schemas.ReportS3Configuration_EncryptionOption, string(v.EncryptionOption))
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.ReportS3Configuration_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.ObjectKeyPrefix != nil {
-		s.WriteString(schemas.ReportS3Configuration_ObjectKeyPrefix, *v.ObjectKeyPrefix)
-	}
-}
-func (v *ReportS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportS3Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportS3Configuration_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.ReportS3Configuration_BucketName, v.BucketName)
-		case schemas.ReportS3Configuration_EncryptionOption:
-			var ev string
-			if err := d.ReadString(schemas.ReportS3Configuration_EncryptionOption, &ev); err != nil {
-				return err
-			}
-			v.EncryptionOption = S3EncryptionOption(ev)
-			return nil
-		case schemas.ReportS3Configuration_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.ReportS3Configuration_KmsKeyId, v.KmsKeyId)
-		case schemas.ReportS3Configuration_ObjectKeyPrefix:
-			v.ObjectKeyPrefix = new(string)
-			return d.ReadString(schemas.ReportS3Configuration_ObjectKeyPrefix, v.ObjectKeyPrefix)
-		}
-		return nil
-	})
-}
-
 // Retention properties contain the duration for which your time-series data must
 // be stored in the magnetic store and the memory store.
 type RetentionProperties struct {
@@ -1628,34 +601,6 @@ type RetentionProperties struct {
 	MemoryStoreRetentionPeriodInHours *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RetentionProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RetentionProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RetentionProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MagneticStoreRetentionPeriodInDays != nil {
-		s.WriteInt64(schemas.RetentionProperties_MagneticStoreRetentionPeriodInDays, *v.MagneticStoreRetentionPeriodInDays)
-	}
-	if v.MemoryStoreRetentionPeriodInHours != nil {
-		s.WriteInt64(schemas.RetentionProperties_MemoryStoreRetentionPeriodInHours, *v.MemoryStoreRetentionPeriodInHours)
-	}
-}
-func (v *RetentionProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RetentionProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RetentionProperties_MagneticStoreRetentionPeriodInDays:
-			v.MagneticStoreRetentionPeriodInDays = new(int64)
-			return d.ReadInt64(schemas.RetentionProperties_MagneticStoreRetentionPeriodInDays, v.MagneticStoreRetentionPeriodInDays)
-		case schemas.RetentionProperties_MemoryStoreRetentionPeriodInHours:
-			v.MemoryStoreRetentionPeriodInHours = new(int64)
-			return d.ReadInt64(schemas.RetentionProperties_MemoryStoreRetentionPeriodInHours, v.MemoryStoreRetentionPeriodInHours)
-		}
-		return nil
-	})
 }
 
 // The configuration that specifies an S3 location.
@@ -1678,50 +623,6 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3Configuration_BucketName, *v.BucketName)
-	}
-	if v.EncryptionOption != "" {
-		s.WriteString(schemas.S3Configuration_EncryptionOption, string(v.EncryptionOption))
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.S3Configuration_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.ObjectKeyPrefix != nil {
-		s.WriteString(schemas.S3Configuration_ObjectKeyPrefix, *v.ObjectKeyPrefix)
-	}
-}
-func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Configuration_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3Configuration_BucketName, v.BucketName)
-		case schemas.S3Configuration_EncryptionOption:
-			var ev string
-			if err := d.ReadString(schemas.S3Configuration_EncryptionOption, &ev); err != nil {
-				return err
-			}
-			v.EncryptionOption = S3EncryptionOption(ev)
-			return nil
-		case schemas.S3Configuration_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.S3Configuration_KmsKeyId, v.KmsKeyId)
-		case schemas.S3Configuration_ObjectKeyPrefix:
-			v.ObjectKeyPrefix = new(string)
-			return d.ReadString(schemas.S3Configuration_ObjectKeyPrefix, v.ObjectKeyPrefix)
-		}
-		return nil
-	})
-}
-
 // A Schema specifies the expected data model of the table.
 type Schema struct {
 
@@ -1733,25 +634,6 @@ type Schema struct {
 	CompositePartitionKey []PartitionKey
 
 	noSmithyDocumentSerde
-}
-
-func (v *Schema) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Schema)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionKeyList(s, schemas.Schema_CompositePartitionKey, v.CompositePartitionKey)
-}
-func (v *Schema) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Schema, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Schema_CompositePartitionKey:
-			return deserializePartitionKeyList(d, schemas.Schema_CompositePartitionKey, &v.CompositePartitionKey)
-		}
-		return nil
-	})
 }
 
 // Represents a database table in Timestream. Tables contain one or more related
@@ -1793,86 +675,6 @@ type Table struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Table) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Table)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Table) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Table_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.Table_CreationTime, *v.CreationTime)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.Table_DatabaseName, *v.DatabaseName)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.Table_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.MagneticStoreWriteProperties != nil {
-		s.WriteStruct(schemas.Table_MagneticStoreWriteProperties)
-		v.MagneticStoreWriteProperties.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RetentionProperties != nil {
-		s.WriteStruct(schemas.Table_RetentionProperties)
-		v.RetentionProperties.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Schema != nil {
-		s.WriteStruct(schemas.Table_Schema)
-		v.Schema.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.Table_TableName, *v.TableName)
-	}
-	if v.TableStatus != "" {
-		s.WriteString(schemas.Table_TableStatus, string(v.TableStatus))
-	}
-}
-func (v *Table) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Table, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Table_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Table_Arn, v.Arn)
-		case schemas.Table_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.Table_CreationTime, v.CreationTime)
-		case schemas.Table_DatabaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.Table_DatabaseName, v.DatabaseName)
-		case schemas.Table_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.Table_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.Table_MagneticStoreWriteProperties:
-			v.MagneticStoreWriteProperties = &MagneticStoreWriteProperties{}
-			return v.MagneticStoreWriteProperties.Deserialize(d)
-		case schemas.Table_RetentionProperties:
-			v.RetentionProperties = &RetentionProperties{}
-			return v.RetentionProperties.Deserialize(d)
-		case schemas.Table_Schema:
-			v.Schema = &Schema{}
-			return v.Schema.Deserialize(d)
-		case schemas.Table_TableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.Table_TableName, v.TableName)
-		case schemas.Table_TableStatus:
-			var ev string
-			if err := d.ReadString(schemas.Table_TableStatus, &ev); err != nil {
-				return err
-			}
-			v.TableStatus = TableStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	A tag is a label that you assign to a Timestream database and/or table. Each
 //
 // tag consists of a key and an optional value, both of which you define. With
@@ -1891,34 +693,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

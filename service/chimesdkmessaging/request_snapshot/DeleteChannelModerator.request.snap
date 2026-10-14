@@ -1,0 +1,4 @@
+DELETE /channels/__ChannelArn__/moderators/__ChannelModeratorArn__
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

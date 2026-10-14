@@ -1,0 +1,3 @@
+DELETE /gateways/__GatewayIdentifier__/rate-limits/__RateLimitId__
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.CreateResourceDataSync
+
+{"S3Destination":{"AWSKMSKeyARN":"__AWSKMSKeyARN__","BucketName":"__BucketName__","DestinationDataSharing":{"DestinationDataSharingType":"__DestinationDataSharingType__"},"Prefix":"__Prefix__","Region":"__Region__","SyncFormat":"JsonSerDe"},"SyncName":"__SyncName__","SyncSource":{"AwsOrganizationsSource":{"OrganizationalUnits":[{"OrganizationalUnitId":"__OrganizationalUnitId__"},{"OrganizationalUnitId":"__OrganizationalUnitId__"}],"OrganizationSourceType":"__OrganizationSourceType__"},"EnableAllOpsDataSources":true,"IncludeFutureRegions":true,"SourceRegions":["__Member__","__Member__"],"SourceType":"__SourceType__"},"SyncType":"__SyncType__"}

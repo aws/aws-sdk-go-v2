@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"knowledgeBaseId":"__KnowledgeBaseId__","status":"CREATING"}

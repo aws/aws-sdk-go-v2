@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a new FeatureGroup . A FeatureGroup is a group of Features defined in
@@ -166,6 +165,47 @@ type CreateFeatureGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFeatureGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFeatureGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFeatureGroupRequest_Description, *v.Description)
+	}
+	if v.EventTimeFeatureName != nil {
+		s.WriteString(schemas.CreateFeatureGroupRequest_EventTimeFeatureName, *v.EventTimeFeatureName)
+	}
+	serializeFeatureDefinitions(s, schemas.CreateFeatureGroupRequest_FeatureDefinitions, v.FeatureDefinitions)
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.CreateFeatureGroupRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.OfflineStoreConfig != nil {
+		s.WriteStruct(schemas.CreateFeatureGroupRequest_OfflineStoreConfig)
+		v.OfflineStoreConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnlineStoreConfig != nil {
+		s.WriteStruct(schemas.CreateFeatureGroupRequest_OnlineStoreConfig)
+		v.OnlineStoreConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordIdentifierFeatureName != nil {
+		s.WriteString(schemas.CreateFeatureGroupRequest_RecordIdentifierFeatureName, *v.RecordIdentifierFeatureName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFeatureGroupRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateFeatureGroupRequest_Tags, v.Tags)
+	if v.ThroughputConfig != nil {
+		s.WriteStruct(schemas.CreateFeatureGroupRequest_ThroughputConfig)
+		v.ThroughputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFeatureGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FeatureGroup . This is a unique identifier
@@ -180,77 +220,48 @@ type CreateFeatureGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFeatureGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFeatureGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFeatureGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupArn != nil {
+		s.WriteString(schemas.CreateFeatureGroupResponse_FeatureGroupArn, *v.FeatureGroupArn)
+	}
+}
+func (v *CreateFeatureGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFeatureGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFeatureGroupResponse_FeatureGroupArn:
+			v.FeatureGroupArn = new(string)
+			return d.ReadString(schemas.CreateFeatureGroupResponse_FeatureGroupArn, v.FeatureGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeatureGroup, schemas.CreateFeatureGroupRequest, schemas.CreateFeatureGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFeatureGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeatureGroup, schemas.CreateFeatureGroupRequest, schemas.CreateFeatureGroupResponse), output: &CreateFeatureGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFeatureGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFeatureGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFeatureGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFeatureGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -265,22 +276,8 @@ func (c *Client) addOperationCreateFeatureGroupMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFeatureGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFeatureGroup",
-	}
 }

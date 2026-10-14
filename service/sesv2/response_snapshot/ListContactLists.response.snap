@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContactLists":[{"ContactListName":"__ContactListName__","LastUpdatedTimestamp":946684800},{"ContactListName":"__ContactListName__","LastUpdatedTimestamp":946684800}],"NextToken":"__NextToken__"}

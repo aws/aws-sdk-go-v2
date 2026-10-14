@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies the parameters of a planned commitment purchase and starts the
@@ -39,6 +38,20 @@ type StartCommitmentPurchaseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommitmentPurchaseAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommitmentPurchaseAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitmentPurchaseAnalysisConfiguration != nil {
+		s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisRequest_CommitmentPurchaseAnalysisConfiguration)
+		v.CommitmentPurchaseAnalysisConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartCommitmentPurchaseAnalysisOutput struct {
 
 	// The analysis ID that's associated with the commitment purchase analysis.
@@ -62,77 +75,60 @@ type StartCommitmentPurchaseAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCommitmentPurchaseAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCommitmentPurchaseAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCommitmentPurchaseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.AnalysisStartedTime != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime, *v.AnalysisStartedTime)
+	}
+	if v.EstimatedCompletionTime != nil {
+		s.WriteString(schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+}
+func (v *StartCommitmentPurchaseAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCommitmentPurchaseAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime:
+			v.AnalysisStartedTime = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_AnalysisStartedTime, v.AnalysisStartedTime)
+		case schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime:
+			v.EstimatedCompletionTime = new(string)
+			return d.ReadString(schemas.StartCommitmentPurchaseAnalysisResponse_EstimatedCompletionTime, v.EstimatedCompletionTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCommitmentPurchaseAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommitmentPurchaseAnalysis, schemas.StartCommitmentPurchaseAnalysisRequest, schemas.StartCommitmentPurchaseAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCommitmentPurchaseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCommitmentPurchaseAnalysis, schemas.StartCommitmentPurchaseAnalysisRequest, schemas.StartCommitmentPurchaseAnalysisResponse), output: &StartCommitmentPurchaseAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCommitmentPurchaseAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartCommitmentPurchaseAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartCommitmentPurchaseAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCommitmentPurchaseAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +143,8 @@ func (c *Client) addOperationStartCommitmentPurchaseAnalysisMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartCommitmentPurchaseAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartCommitmentPurchaseAnalysis",
-	}
 }

@@ -1,0 +1,7 @@
+POST /service/AWSMPCommerceService_v20200301/operation/SearchAgreements
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gcatalogk__Catalog__gfiltersŸ¿dnameh__Name__fvaluesŸj__Member__j__Member__ÿÿ¿dnameh__Name__fvaluesŸj__Member__j__Member__ÿÿÿjmaxResultsinextTokenm__NextToken__dsort¿fsortByj__SortBy__isortOrderiASCENDINGÿÿ

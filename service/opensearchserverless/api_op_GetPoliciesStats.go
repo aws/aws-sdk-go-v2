@@ -4,11 +4,10 @@ package opensearchserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns statistical information about your OpenSearch Serverless access
@@ -30,6 +29,22 @@ func (c *Client) GetPoliciesStats(ctx context.Context, params *GetPoliciesStatsI
 
 type GetPoliciesStatsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetPoliciesStatsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPoliciesStatsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPoliciesStatsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetPoliciesStatsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPoliciesStatsRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type GetPoliciesStatsOutput struct {
@@ -56,74 +71,77 @@ type GetPoliciesStatsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPoliciesStatsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPoliciesStatsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPoliciesStatsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyStats != nil {
+		s.WriteStruct(schemas.GetPoliciesStatsResponse_AccessPolicyStats)
+		v.AccessPolicyStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecyclePolicyStats != nil {
+		s.WriteStruct(schemas.GetPoliciesStatsResponse_LifecyclePolicyStats)
+		v.LifecyclePolicyStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityConfigStats != nil {
+		s.WriteStruct(schemas.GetPoliciesStatsResponse_SecurityConfigStats)
+		v.SecurityConfigStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityPolicyStats != nil {
+		s.WriteStruct(schemas.GetPoliciesStatsResponse_SecurityPolicyStats)
+		v.SecurityPolicyStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalPolicyCount != nil {
+		s.WriteInt64(schemas.GetPoliciesStatsResponse_TotalPolicyCount, *v.TotalPolicyCount)
+	}
+}
+func (v *GetPoliciesStatsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPoliciesStatsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPoliciesStatsResponse_AccessPolicyStats:
+			v.AccessPolicyStats = &types.AccessPolicyStats{}
+			return v.AccessPolicyStats.Deserialize(d)
+		case schemas.GetPoliciesStatsResponse_LifecyclePolicyStats:
+			v.LifecyclePolicyStats = &types.LifecyclePolicyStats{}
+			return v.LifecyclePolicyStats.Deserialize(d)
+		case schemas.GetPoliciesStatsResponse_SecurityConfigStats:
+			v.SecurityConfigStats = &types.SecurityConfigStats{}
+			return v.SecurityConfigStats.Deserialize(d)
+		case schemas.GetPoliciesStatsResponse_SecurityPolicyStats:
+			v.SecurityPolicyStats = &types.SecurityPolicyStats{}
+			return v.SecurityPolicyStats.Deserialize(d)
+		case schemas.GetPoliciesStatsResponse_TotalPolicyCount:
+			v.TotalPolicyCount = new(int64)
+			return d.ReadInt64(schemas.GetPoliciesStatsResponse_TotalPolicyCount, v.TotalPolicyCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPoliciesStatsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPoliciesStats, schemas.GetPoliciesStatsRequest, schemas.GetPoliciesStatsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPoliciesStats{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPoliciesStats, schemas.GetPoliciesStatsRequest, schemas.GetPoliciesStatsResponse), output: &GetPoliciesStatsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPoliciesStats{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPoliciesStats"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPoliciesStats(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +156,8 @@ func (c *Client) addOperationGetPoliciesStatsMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPoliciesStats(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPoliciesStats",
-	}
 }

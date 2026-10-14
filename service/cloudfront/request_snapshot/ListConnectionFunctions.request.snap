@@ -1,0 +1,5 @@
+POST /2020-05-31/connection-functions
+
+Content-Type: application/xml
+
+<ListConnectionFunctionsRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Marker>__Marker__</Marker><MaxItems>1</MaxItems><Stage>DEVELOPMENT</Stage></ListConnectionFunctionsRequest>

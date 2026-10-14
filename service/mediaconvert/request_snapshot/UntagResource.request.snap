@@ -1,0 +1,5 @@
+PUT /2017-08-29/tags/__Arn__
+
+Content-Type: application/json
+
+{"tagKeys":["__Member__","__Member__"]}

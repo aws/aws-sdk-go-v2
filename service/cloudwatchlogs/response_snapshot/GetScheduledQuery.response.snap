@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.GetScheduledQuery
+
+{"creationTime":1,"description":"__Description__","destinationConfiguration":{"lookupTableConfiguration":{"description":"__Description__","kmsKeyId":"__KmsKeyId__","roleArn":"__RoleArn__","tableName":"__TableName__","tags":{"key0":"__Value__"}},"s3Configuration":{"destinationIdentifier":"__DestinationIdentifier__","kmsKeyId":"__KmsKeyId__","ownerAccountId":"__OwnerAccountId__","roleArn":"__RoleArn__"}},"endTimeOffset":1,"executionRoleArn":"__ExecutionRoleArn__","lastExecutionStatus":"Running","lastTriggeredTime":1,"lastUpdatedTime":1,"logGroupIdentifiers":["__Member__","__Member__"],"name":"__Name__","queryLanguage":"CWLI","queryString":"__QueryString__","scheduleEndTime":1,"scheduleExpression":"__ScheduleExpression__","scheduleStartTime":1,"scheduleType":"CUSTOMER_MANAGED","scheduledQueryArn":"__ScheduledQueryArn__","startTimeOffset":1,"state":"ENABLED","timezone":"__Timezone__"}

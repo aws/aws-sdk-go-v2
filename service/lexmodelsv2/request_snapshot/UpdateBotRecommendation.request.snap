@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/botrecommendations/__BotRecommendationId__
+
+Content-Type: application/json
+
+{"encryptionSetting":{"associatedTranscriptsPassword":"__AssociatedTranscriptsPassword__","botLocaleExportPassword":"__BotLocaleExportPassword__","kmsKeyArn":"__KmsKeyArn__"}}

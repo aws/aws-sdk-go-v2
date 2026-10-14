@@ -4,13 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,35 +52,6 @@ type UpdateAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAgentSpaceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.UpdateAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.AwsResources != nil {
-		s.WriteStruct(schemas.UpdateAgentSpaceInput_awsResources)
-		v.AwsResources.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CodeReviewSettings != nil {
-		s.WriteStruct(schemas.UpdateAgentSpaceInput_codeReviewSettings)
-		v.CodeReviewSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateAgentSpaceInput_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateAgentSpaceInput_name, *v.Name)
-	}
-	serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceInput_targetDomainIds, v.TargetDomainIds)
-}
-
 // Output for the UpdateAgentSpace operation.
 type UpdateAgentSpaceOutput struct {
 
@@ -123,105 +89,29 @@ type UpdateAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAgentSpaceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateAgentSpaceOutput_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.UpdateAgentSpaceOutput_agentSpaceId, v.AgentSpaceId)
-		case schemas.UpdateAgentSpaceOutput_awsResources:
-			v.AwsResources = &types.AWSResources{}
-			return v.AwsResources.Deserialize(d)
-		case schemas.UpdateAgentSpaceOutput_codeReviewSettings:
-			v.CodeReviewSettings = &types.CodeReviewSettings{}
-			return v.CodeReviewSettings.Deserialize(d)
-		case schemas.UpdateAgentSpaceOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateAgentSpaceOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateAgentSpaceOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateAgentSpaceOutput_description, v.Description)
-		case schemas.UpdateAgentSpaceOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateAgentSpaceOutput_name, v.Name)
-		case schemas.UpdateAgentSpaceOutput_targetDomainIds:
-			return deserializeTargetDomainIdList(d, schemas.UpdateAgentSpaceOutput_targetDomainIds, &v.TargetDomainIds)
-		case schemas.UpdateAgentSpaceOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateAgentSpaceOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentSpace, schemas.UpdateAgentSpaceInput, schemas.UpdateAgentSpaceOutput), output: &UpdateAgentSpaceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAgentSpace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAgentSpaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgentSpace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,22 +126,8 @@ func (c *Client) addOperationUpdateAgentSpaceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAgentSpace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAgentSpace",
-	}
 }

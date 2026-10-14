@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/customizations?namespace=__Namespace__
+
+Content-Type: application/json
+
+{"AccountCustomization":{"DefaultEmailCustomizationTemplate":"__DefaultEmailCustomizationTemplate__","DefaultTheme":"__DefaultTheme__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

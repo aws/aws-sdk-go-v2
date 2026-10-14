@@ -4,11 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Transcribes the audio from a medical dictation or conversation and applies any
@@ -221,6 +220,57 @@ type StartMedicalTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalTranscriptionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalTranscriptionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	serializeKMSEncryptionContextMap(s, schemas.StartMedicalTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.StartMedicalTranscriptionJobRequest_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalTranscriptionJobRequest_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.MedicalTranscriptionJobName != nil {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_MedicalTranscriptionJobName, *v.MedicalTranscriptionJobName)
+	}
+	if v.OutputBucketName != nil {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_OutputBucketName, *v.OutputBucketName)
+	}
+	if v.OutputEncryptionKMSKeyId != nil {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_OutputEncryptionKMSKeyId, *v.OutputEncryptionKMSKeyId)
+	}
+	if v.OutputKey != nil {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_OutputKey, *v.OutputKey)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.StartMedicalTranscriptionJobRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_Specialty, string(v.Specialty))
+	}
+	serializeTagList(s, schemas.StartMedicalTranscriptionJobRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_Type, string(v.Type))
+	}
+}
+
 type StartMedicalTranscriptionJobOutput struct {
 
 	// Provides detailed information about the current medical transcription job,
@@ -233,77 +283,50 @@ type StartMedicalTranscriptionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalTranscriptionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalTranscriptionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalTranscriptionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedicalTranscriptionJob != nil {
+		s.WriteStruct(schemas.StartMedicalTranscriptionJobResponse_MedicalTranscriptionJob)
+		v.MedicalTranscriptionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMedicalTranscriptionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalTranscriptionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMedicalTranscriptionJobResponse_MedicalTranscriptionJob:
+			v.MedicalTranscriptionJob = &types.MedicalTranscriptionJob{}
+			return v.MedicalTranscriptionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalTranscriptionJob, schemas.StartMedicalTranscriptionJobRequest, schemas.StartMedicalTranscriptionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMedicalTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalTranscriptionJob, schemas.StartMedicalTranscriptionJobRequest, schemas.StartMedicalTranscriptionJobResponse), output: &StartMedicalTranscriptionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMedicalTranscriptionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMedicalTranscriptionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMedicalTranscriptionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -318,22 +341,8 @@ func (c *Client) addOperationStartMedicalTranscriptionJobMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMedicalTranscriptionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMedicalTranscriptionJob",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DkimAttributes":{"SigningEnabled":true,"Status":"PENDING","Tokens":["__Member__","__Member__"]},"FeedbackForwardingStatus":true,"IdentityType":"EMAIL_ADDRESS","MailFromAttributes":{"BehaviorOnMxFailure":"USE_DEFAULT_VALUE","MailFromDomain":"__MailFromDomain__","MailFromDomainStatus":"PENDING"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VerifiedForSendingStatus":true}

@@ -1,0 +1,3 @@
+DELETE /legal-holds/__LegalHoldId__?cancelDescription=__CancelDescription__&retainRecordInDays=1
+
+

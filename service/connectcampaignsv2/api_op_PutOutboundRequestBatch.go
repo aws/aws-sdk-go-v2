@@ -4,13 +4,8 @@ package connectcampaignsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates outbound requests for the specified campaign Amazon Connect account.
@@ -46,19 +41,6 @@ type PutOutboundRequestBatchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutOutboundRequestBatchInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutOutboundRequestBatchRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutOutboundRequestBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.PutOutboundRequestBatchRequest_id, *v.Id)
-	}
-	serializeOutboundRequestList(s, schemas.PutOutboundRequestBatchRequest_outboundRequests, v.OutboundRequests)
-}
-
 // The response for PutOutboundRequestBatch API.
 type PutOutboundRequestBatchOutput struct {
 
@@ -74,86 +56,29 @@ type PutOutboundRequestBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutOutboundRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutOutboundRequestBatchResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutOutboundRequestBatchResponse_failedRequests:
-			return deserializeFailedRequestList(d, schemas.PutOutboundRequestBatchResponse_failedRequests, &v.FailedRequests)
-		case schemas.PutOutboundRequestBatchResponse_successfulRequests:
-			return deserializeSuccessfulRequestList(d, schemas.PutOutboundRequestBatchResponse_successfulRequests, &v.SuccessfulRequests)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutOutboundRequestBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutOutboundRequestBatch{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOutboundRequestBatch, schemas.PutOutboundRequestBatchRequest, schemas.PutOutboundRequestBatchResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutOutboundRequestBatch{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOutboundRequestBatch, schemas.PutOutboundRequestBatchRequest, schemas.PutOutboundRequestBatchResponse), output: &PutOutboundRequestBatchOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutOutboundRequestBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutOutboundRequestBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutOutboundRequestBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +93,8 @@ func (c *Client) addOperationPutOutboundRequestBatchMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutOutboundRequestBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutOutboundRequestBatch",
-	}
 }

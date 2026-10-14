@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/positions/verify
+
+Content-Type: application/json
+
+{"DeviceState":{"Accuracy":{"Horizontal":1},"CellSignals":{"LteCellDetails":[{"CellId":1,"LocalId":{"Earfcn":1,"Pci":1},"Mcc":1,"Mnc":1,"NetworkMeasurements":[{"CellId":1,"Earfcn":1,"Pci":1,"Rsrp":1,"Rsrq":1},{"CellId":1,"Earfcn":1,"Pci":1,"Rsrp":1,"Rsrq":1}],"NrCapable":true,"Rsrp":1,"Rsrq":1,"Tac":1,"TimingAdvance":1},{"CellId":1,"LocalId":{"Earfcn":1,"Pci":1},"Mcc":1,"Mnc":1,"NetworkMeasurements":[{"CellId":1,"Earfcn":1,"Pci":1,"Rsrp":1,"Rsrq":1},{"CellId":1,"Earfcn":1,"Pci":1,"Rsrp":1,"Rsrq":1}],"NrCapable":true,"Rsrp":1,"Rsrq":1,"Tac":1,"TimingAdvance":1}]},"DeviceId":"__DeviceId__","Ipv4Address":"__Ipv4Address__","Position":[1,1],"SampleTime":"2000-01-01T00:00:00Z","WiFiAccessPoints":[{"MacAddress":"__MacAddress__","Rss":1},{"MacAddress":"__MacAddress__","Rss":1}]},"DistanceUnit":"Kilometers"}

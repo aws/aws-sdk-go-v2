@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a workload share.
@@ -77,6 +77,27 @@ type CreateWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkloadShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkloadShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkloadShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateWorkloadShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.CreateWorkloadShareInput_PermissionType, string(v.PermissionType))
+	}
+	if v.SharedWith != nil {
+		s.WriteString(schemas.CreateWorkloadShareInput_SharedWith, *v.SharedWith)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.CreateWorkloadShareInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Input for Create Workload Share
 type CreateWorkloadShareOutput struct {
 
@@ -93,65 +114,48 @@ type CreateWorkloadShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkloadShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkloadShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkloadShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.CreateWorkloadShareOutput_ShareId, *v.ShareId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.CreateWorkloadShareOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *CreateWorkloadShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkloadShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkloadShareOutput_ShareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.CreateWorkloadShareOutput_ShareId, v.ShareId)
+		case schemas.CreateWorkloadShareOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.CreateWorkloadShareOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkloadShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadShare, schemas.CreateWorkloadShareInput, schemas.CreateWorkloadShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkloadShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadShare, schemas.CreateWorkloadShareInput, schemas.CreateWorkloadShareOutput), output: &CreateWorkloadShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkloadShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkloadShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -161,12 +165,6 @@ func (c *Client) addOperationCreateWorkloadShareMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateWorkloadShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkloadShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +177,6 @@ func (c *Client) addOperationCreateWorkloadShareMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,12 +216,4 @@ func (m *idempotencyToken_initializeOpCreateWorkloadShare) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateWorkloadShareMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkloadShare{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWorkloadShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkloadShare",
-	}
 }

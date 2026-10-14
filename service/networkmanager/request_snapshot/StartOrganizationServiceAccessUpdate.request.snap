@@ -1,0 +1,5 @@
+POST /organizations/service-access
+
+Content-Type: application/json
+
+{"Action":"__Action__"}

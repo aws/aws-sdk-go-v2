@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a standby WorkSpace in a secondary Region.
@@ -42,6 +41,19 @@ type CreateStandbyWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStandbyWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStandbyWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStandbyWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.CreateStandbyWorkspacesRequest_PrimaryRegion, *v.PrimaryRegion)
+	}
+	serializeStandbyWorkspacesList(s, schemas.CreateStandbyWorkspacesRequest_StandbyWorkspaces, v.StandbyWorkspaces)
+}
+
 type CreateStandbyWorkspacesOutput struct {
 
 	// Information about the standby WorkSpace that could not be created.
@@ -56,77 +68,48 @@ type CreateStandbyWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStandbyWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStandbyWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStandbyWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, v.FailedStandbyRequests)
+	serializePendingCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, v.PendingStandbyRequests)
+}
+func (v *CreateStandbyWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStandbyWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests:
+			return deserializeFailedCreateStandbyWorkspacesRequestList(d, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, &v.FailedStandbyRequests)
+		case schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests:
+			return deserializePendingCreateStandbyWorkspacesRequestList(d, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, &v.PendingStandbyRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStandbyWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStandbyWorkspaces, schemas.CreateStandbyWorkspacesRequest, schemas.CreateStandbyWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStandbyWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStandbyWorkspaces, schemas.CreateStandbyWorkspacesRequest, schemas.CreateStandbyWorkspacesResult), output: &CreateStandbyWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStandbyWorkspaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStandbyWorkspaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStandbyWorkspacesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStandbyWorkspaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +124,8 @@ func (c *Client) addOperationCreateStandbyWorkspacesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStandbyWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStandbyWorkspaces",
-	}
 }

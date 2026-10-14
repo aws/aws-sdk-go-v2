@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/trained-models
+
+Content-Type: application/json
+
+{"configuredModelAlgorithmAssociationArn":"__ConfiguredModelAlgorithmAssociationArn__","dataChannels":[{"channelName":"__ChannelName__","mlInputChannelArn":"__MlInputChannelArn__","s3DataDistributionType":"FullyReplicated"},{"channelName":"__ChannelName__","mlInputChannelArn":"__MlInputChannelArn__","s3DataDistributionType":"FullyReplicated"}],"description":"__Description__","environment":{"key0":"__Value__"},"hyperparameters":{"key0":"__Value__"},"incrementalTrainingDataChannels":[{"channelName":"__ChannelName__","trainedModelArn":"__TrainedModelArn__","versionIdentifier":"__VersionIdentifier__"},{"channelName":"__ChannelName__","trainedModelArn":"__TrainedModelArn__","versionIdentifier":"__VersionIdentifier__"}],"kmsKeyArn":"__KmsKeyArn__","mlModelTrainingPayerAccountId":"__MlModelTrainingPayerAccountId__","name":"__Name__","resourceConfig":{"instanceCount":1,"instanceType":"ml.m4.xlarge","volumeSizeInGB":1},"stoppingCondition":{"maxRuntimeInSeconds":1},"tags":{"key0":"__Value__"},"trainingInputMode":"File"}

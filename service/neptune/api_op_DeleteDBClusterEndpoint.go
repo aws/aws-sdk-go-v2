@@ -4,12 +4,7 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
@@ -37,18 +32,6 @@ type DeleteDBClusterEndpointInput struct {
 	DBClusterEndpointIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDBClusterEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDBClusterEndpointMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDBClusterEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterEndpointIdentifier != nil {
-		s.WriteString(schemas.DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
-	}
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -111,110 +94,29 @@ type DeleteDBClusterEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDBClusterEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDBClusterEndpointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDBClusterEndpointOutput_CustomEndpointType:
-			v.CustomEndpointType = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_CustomEndpointType, v.CustomEndpointType)
-		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointArn:
-			v.DBClusterEndpointArn = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointArn, v.DBClusterEndpointArn)
-		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier:
-			v.DBClusterEndpointIdentifier = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointIdentifier, v.DBClusterEndpointIdentifier)
-		case schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier:
-			v.DBClusterEndpointResourceIdentifier = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, v.DBClusterEndpointResourceIdentifier)
-		case schemas.DeleteDBClusterEndpointOutput_DBClusterIdentifier:
-			v.DBClusterIdentifier = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_DBClusterIdentifier, v.DBClusterIdentifier)
-		case schemas.DeleteDBClusterEndpointOutput_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_Endpoint, v.Endpoint)
-		case schemas.DeleteDBClusterEndpointOutput_EndpointType:
-			v.EndpointType = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_EndpointType, v.EndpointType)
-		case schemas.DeleteDBClusterEndpointOutput_ExcludedMembers:
-			return deserializeStringList(d, schemas.DeleteDBClusterEndpointOutput_ExcludedMembers, &v.ExcludedMembers)
-		case schemas.DeleteDBClusterEndpointOutput_StaticMembers:
-			return deserializeStringList(d, schemas.DeleteDBClusterEndpointOutput_StaticMembers, &v.StaticMembers)
-		case schemas.DeleteDBClusterEndpointOutput_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.DeleteDBClusterEndpointOutput_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterEndpoint, schemas.DeleteDBClusterEndpointMessage, schemas.DeleteDBClusterEndpointOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterEndpoint, schemas.DeleteDBClusterEndpointMessage, schemas.DeleteDBClusterEndpointOutput), output: &DeleteDBClusterEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDBClusterEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDBClusterEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBClusterEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,22 +131,8 @@ func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDBClusterEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDBClusterEndpoint",
-	}
 }

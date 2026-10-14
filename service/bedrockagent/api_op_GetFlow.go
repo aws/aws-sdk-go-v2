@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,7 +37,27 @@ type GetFlowInput struct {
 	// This member is required.
 	FlowIdentifier *string
 
+	// Controls the scope of data returned. Set to METADATA_ONLY to return only
+	// resource metadata. Set to ALL_DATA or omit this field to return the full
+	// response.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetFlowRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.IncludedData != "" {
+		s.WriteString(schemas.GetFlowRequest_includedData, string(v.IncludedData))
+	}
 }
 
 type GetFlowOutput struct {
@@ -122,77 +141,117 @@ type GetFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFlowResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFlowResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.GetFlowResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetFlowResponse_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFlowResponse_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetFlowResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFlowResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFlowResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFlowResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFlowResponse_updatedAt, *v.UpdatedAt)
+	}
+	serializeFlowValidations(s, schemas.GetFlowResponse_validations, v.Validations)
+	if v.Version != nil {
+		s.WriteString(schemas.GetFlowResponse_version, *v.Version)
+	}
+}
+func (v *GetFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFlowResponse_arn, v.Arn)
+		case schemas.GetFlowResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowResponse_createdAt, v.CreatedAt)
+		case schemas.GetFlowResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetFlowResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.GetFlowResponse_definition:
+			v.Definition = &types.FlowDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetFlowResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFlowResponse_description, v.Description)
+		case schemas.GetFlowResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.GetFlowResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.GetFlowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFlowResponse_id, v.Id)
+		case schemas.GetFlowResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFlowResponse_name, v.Name)
+		case schemas.GetFlowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFlowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowStatus(ev)
+			return nil
+		case schemas.GetFlowResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetFlowResponse_validations:
+			return deserializeFlowValidations(d, schemas.GetFlowResponse_validations, &v.Validations)
+		case schemas.GetFlowResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetFlowResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlow, schemas.GetFlowRequest, schemas.GetFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlow, schemas.GetFlowRequest, schemas.GetFlowResponse), output: &GetFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +266,8 @@ func (c *Client) addOperationGetFlowMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFlow",
-	}
 }

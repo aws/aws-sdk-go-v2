@@ -4,13 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Timestream for InfluxDB cluster.
@@ -36,6 +31,9 @@ type UpdateDbClusterInput struct {
 	// This member is required.
 	DbClusterId *string
 
+	// A list of backup configurations to update for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// Update the DB cluster to use the specified DB instance Type.
 	DbInstanceType types.DbInstanceType
 
@@ -58,40 +56,6 @@ type UpdateDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDbClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDbClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DbClusterId != nil {
-		s.WriteString(schemas.UpdateDbClusterInput_dbClusterId, *v.DbClusterId)
-	}
-	if v.DbInstanceType != "" {
-		s.WriteString(schemas.UpdateDbClusterInput_dbInstanceType, string(v.DbInstanceType))
-	}
-	if v.DbParameterGroupIdentifier != nil {
-		s.WriteString(schemas.UpdateDbClusterInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
-	}
-	if v.FailoverMode != "" {
-		s.WriteString(schemas.UpdateDbClusterInput_failoverMode, string(v.FailoverMode))
-	}
-	if v.LogDeliveryConfiguration != nil {
-		s.WriteStruct(schemas.UpdateDbClusterInput_logDeliveryConfiguration)
-		v.LogDeliveryConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaintenanceSchedule != nil {
-		s.WriteStruct(schemas.UpdateDbClusterInput_maintenanceSchedule)
-		v.MaintenanceSchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.UpdateDbClusterInput_port, *v.Port)
-	}
-}
-
 type UpdateDbClusterOutput struct {
 
 	// The status of the DB cluster.
@@ -103,89 +67,29 @@ type UpdateDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDbClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDbClusterOutput_dbClusterStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateDbClusterOutput_dbClusterStatus, &ev); err != nil {
-				return err
-			}
-			v.DbClusterStatus = types.ClusterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDbCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbCluster, schemas.UpdateDbClusterInput, schemas.UpdateDbClusterOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateDbCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbCluster, schemas.UpdateDbClusterInput, schemas.UpdateDbClusterOutput), output: &UpdateDbClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDbCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDbClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDbCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +104,8 @@ func (c *Client) addOperationUpdateDbClusterMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDbCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDbCluster",
-	}
 }

@@ -1,0 +1,6 @@
+PUT /channels/__ChannelArn__/memberships/__MemberArn__/preferences
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"Preferences":{"PushNotifications":{"AllowNotifications":"ALL","FilterRule":"__FilterRule__"}}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.CreateStorediSCSIVolume
+
+{"DiskId":"__DiskId__","GatewayARN":"__GatewayARN__","KMSEncrypted":true,"KMSKey":"__KMSKey__","NetworkInterfaceId":"__NetworkInterfaceId__","PreserveExistingData":true,"SnapshotId":"__SnapshotId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetName":"__TargetName__"}

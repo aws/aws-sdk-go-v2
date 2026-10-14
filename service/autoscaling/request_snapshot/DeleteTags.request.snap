@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteTags&Tags.member.1.Key=__Key__&Tags.member.1.PropagateAtLaunch=true&Tags.member.1.ResourceId=__ResourceId__&Tags.member.1.ResourceType=__ResourceType__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.PropagateAtLaunch=true&Tags.member.2.ResourceId=__ResourceId__&Tags.member.2.ResourceType=__ResourceType__&Tags.member.2.Value=__Value__&Version=2011-01-01

@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates properties of a FUOTA task.
@@ -79,47 +74,6 @@ type UpdateFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFuotaTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFuotaTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_Description, *v.Description)
-	}
-	if v.Descriptor != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_Descriptor, *v.Descriptor)
-	}
-	if v.FirmwareUpdateImage != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_FirmwareUpdateImage, *v.FirmwareUpdateImage)
-	}
-	if v.FirmwareUpdateRole != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_FirmwareUpdateRole, *v.FirmwareUpdateRole)
-	}
-	if v.FragmentIntervalMS != nil {
-		s.WriteInt32(schemas.UpdateFuotaTaskRequest_FragmentIntervalMS, *v.FragmentIntervalMS)
-	}
-	if v.FragmentSizeBytes != nil {
-		s.WriteInt32(schemas.UpdateFuotaTaskRequest_FragmentSizeBytes, *v.FragmentSizeBytes)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_Id, *v.Id)
-	}
-	if v.LoRaWAN != nil {
-		s.WriteStruct(schemas.UpdateFuotaTaskRequest_LoRaWAN)
-		v.LoRaWAN.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateFuotaTaskRequest_Name, *v.Name)
-	}
-	if v.RedundancyPercent != nil {
-		s.WriteInt32(schemas.UpdateFuotaTaskRequest_RedundancyPercent, *v.RedundancyPercent)
-	}
-}
-
 type UpdateFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -127,82 +81,29 @@ type UpdateFuotaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFuotaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFuotaTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateFuotaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFuotaTask, schemas.UpdateFuotaTaskRequest, schemas.UpdateFuotaTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFuotaTask, schemas.UpdateFuotaTaskRequest, schemas.UpdateFuotaTaskResponse), output: &UpdateFuotaTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFuotaTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFuotaTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFuotaTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,22 +118,8 @@ func (c *Client) addOperationUpdateFuotaTaskMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFuotaTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFuotaTask",
-	}
 }

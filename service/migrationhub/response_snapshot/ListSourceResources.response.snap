@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.ListSourceResources
+
+{"NextToken":"__NextToken__","SourceResourceList":[{"Description":"__Description__","Name":"__Name__","StatusDetail":"__StatusDetail__"},{"Description":"__Description__","Name":"__Name__","StatusDetail":"__StatusDetail__"}]}

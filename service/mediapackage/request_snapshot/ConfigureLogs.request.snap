@@ -1,0 +1,5 @@
+PUT /channels/__Id__/configure_logs
+
+Content-Type: application/json
+
+{"egressAccessLogs":{"logGroupName":"__LogGroupName__"},"ingressAccessLogs":{"logGroupName":"__LogGroupName__"}}

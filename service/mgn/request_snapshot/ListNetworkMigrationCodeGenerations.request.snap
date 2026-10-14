@@ -1,0 +1,5 @@
+POST /network-migration/ListNetworkMigrationCodeGenerations
+
+Content-Type: application/json
+
+{"filters":{"jobIDs":["__Member__","__Member__"]},"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__"}

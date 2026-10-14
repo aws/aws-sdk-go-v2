@@ -319,7 +319,7 @@ func TestEndpointCase7(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
 						return sp
 					}(),
 				},
@@ -369,7 +369,7 @@ func TestEndpointCase8(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "cn-northwest-1")
+						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
 						return sp
 					}(),
 				},

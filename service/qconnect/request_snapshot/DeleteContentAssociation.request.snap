@@ -1,0 +1,3 @@
+DELETE /knowledgeBases/__KnowledgeBaseId__/contents/__ContentId__/associations/__ContentAssociationId__
+
+

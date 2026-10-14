@@ -6,8 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,6 +40,18 @@ type GetLicenseEndpointInput struct {
 	LicenseEndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLicenseEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseEndpointId != nil {
+		s.WriteString(schemas.GetLicenseEndpointRequest_licenseEndpointId, *v.LicenseEndpointId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -78,65 +91,76 @@ type GetLicenseEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsName != nil {
+		s.WriteString(schemas.GetLicenseEndpointResponse_dnsName, *v.DnsName)
+	}
+	if v.LicenseEndpointId != nil {
+		s.WriteString(schemas.GetLicenseEndpointResponse_licenseEndpointId, *v.LicenseEndpointId)
+	}
+	serializeSecurityGroupIdList(s, schemas.GetLicenseEndpointResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.GetLicenseEndpointResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetLicenseEndpointResponse_statusMessage, *v.StatusMessage)
+	}
+	serializeSubnetIdList(s, schemas.GetLicenseEndpointResponse_subnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.GetLicenseEndpointResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *GetLicenseEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseEndpointResponse_dnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GetLicenseEndpointResponse_dnsName, v.DnsName)
+		case schemas.GetLicenseEndpointResponse_licenseEndpointId:
+			v.LicenseEndpointId = new(string)
+			return d.ReadString(schemas.GetLicenseEndpointResponse_licenseEndpointId, v.LicenseEndpointId)
+		case schemas.GetLicenseEndpointResponse_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.GetLicenseEndpointResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.GetLicenseEndpointResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetLicenseEndpointResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseEndpointStatus(ev)
+			return nil
+		case schemas.GetLicenseEndpointResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetLicenseEndpointResponse_statusMessage, v.StatusMessage)
+		case schemas.GetLicenseEndpointResponse_subnetIds:
+			return deserializeSubnetIdList(d, schemas.GetLicenseEndpointResponse_subnetIds, &v.SubnetIds)
+		case schemas.GetLicenseEndpointResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetLicenseEndpointResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseEndpoint, schemas.GetLicenseEndpointRequest, schemas.GetLicenseEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLicenseEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseEndpoint, schemas.GetLicenseEndpointRequest, schemas.GetLicenseEndpointResponse), output: &GetLicenseEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLicenseEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLicenseEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -146,12 +170,6 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpGetLicenseEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLicenseEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +182,6 @@ func (c *Client) addOperationGetLicenseEndpointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -583,11 +595,3 @@ type GetLicenseEndpointAPIClient interface {
 }
 
 var _ GetLicenseEndpointAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetLicenseEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLicenseEndpoint",
-	}
-}

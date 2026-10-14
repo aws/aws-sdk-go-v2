@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.DeleteTable
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","Name":"__Name__","TransactionId":"__TransactionId__"}

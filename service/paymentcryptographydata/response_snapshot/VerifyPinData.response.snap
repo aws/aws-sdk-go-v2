@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EncryptionKeyArn":"__EncryptionKeyArn__","EncryptionKeyCheckValue":"__EncryptionKeyCheckValue__","VerificationKeyArn":"__VerificationKeyArn__","VerificationKeyCheckValue":"__VerificationKeyCheckValue__"}

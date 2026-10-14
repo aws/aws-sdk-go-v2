@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a currently running data ingestion job. You can send a StartIngestionJob
@@ -50,6 +49,24 @@ type StopIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.StopIngestionJobRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.StopIngestionJobRequest_ingestionJobId, *v.IngestionJobId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.StopIngestionJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type StopIngestionJobOutput struct {
 
 	// Contains information about the stopped data ingestion job.
@@ -63,77 +80,50 @@ type StopIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopIngestionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopIngestionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopIngestionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngestionJob != nil {
+		s.WriteStruct(schemas.StopIngestionJobResponse_ingestionJob)
+		v.IngestionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopIngestionJobResponse_ingestionJob:
+			v.IngestionJob = &types.IngestionJob{}
+			return v.IngestionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopIngestionJob, schemas.StopIngestionJobRequest, schemas.StopIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopIngestionJob, schemas.StopIngestionJobRequest, schemas.StopIngestionJobResponse), output: &StopIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopIngestionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopIngestionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopIngestionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopIngestionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +138,8 @@ func (c *Client) addOperationStopIngestionJobMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopIngestionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopIngestionJob",
-	}
 }

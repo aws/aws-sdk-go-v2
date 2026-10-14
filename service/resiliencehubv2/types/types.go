@@ -16,6 +16,10 @@ type Achievability struct {
 	// The achievability status of the availability SLO target for the service.
 	AvailabilitySlo AchievabilityStatus
 
+	// The achievability status of the data recovery time between backups for the
+	// service.
+	DataRecoveryTimeBetweenBackups AchievabilityStatus
+
 	// The achievability status of the multi-AZ RTO and RPO targets for the service.
 	MultiAzRtoRpo AchievabilityStatus
 
@@ -36,6 +40,9 @@ func (v *Achievability) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilitySlo != "" {
 		s.WriteString(schemas.Achievability_availabilitySlo, string(v.AvailabilitySlo))
 	}
+	if v.DataRecoveryTimeBetweenBackups != "" {
+		s.WriteString(schemas.Achievability_dataRecoveryTimeBetweenBackups, string(v.DataRecoveryTimeBetweenBackups))
+	}
 	if v.MultiAzRtoRpo != "" {
 		s.WriteString(schemas.Achievability_multiAzRtoRpo, string(v.MultiAzRtoRpo))
 	}
@@ -53,6 +60,13 @@ func (v *Achievability) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.AvailabilitySlo = AchievabilityStatus(ev)
 			return nil
+		case schemas.Achievability_dataRecoveryTimeBetweenBackups:
+			var ev string
+			if err := d.ReadString(schemas.Achievability_dataRecoveryTimeBetweenBackups, &ev); err != nil {
+				return err
+			}
+			v.DataRecoveryTimeBetweenBackups = AchievabilityStatus(ev)
+			return nil
 		case schemas.Achievability_multiAzRtoRpo:
 			var ev string
 			if err := d.ReadString(schemas.Achievability_multiAzRtoRpo, &ev); err != nil {
@@ -66,6 +80,66 @@ func (v *Achievability) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.MultiRegionRtoRpo = AchievabilityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Details about a CloudWatch alarm state change observed during a test run.
+type AlarmStateChangeDetail struct {
+
+	// The state the alarm transitioned to.
+	//
+	// This member is required.
+	State AlarmState
+
+	// The state the alarm transitioned from. Absent on the initial event, which
+	// records the alarm's state when collection began.
+	PreviousState AlarmState
+
+	// A human-readable explanation of the state change, as reported by CloudWatch.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AlarmStateChangeDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmStateChangeDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmStateChangeDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreviousState != "" {
+		s.WriteString(schemas.AlarmStateChangeDetail_previousState, string(v.PreviousState))
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.AlarmStateChangeDetail_reason, *v.Reason)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.AlarmStateChangeDetail_state, string(v.State))
+	}
+}
+func (v *AlarmStateChangeDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmStateChangeDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmStateChangeDetail_previousState:
+			var ev string
+			if err := d.ReadString(schemas.AlarmStateChangeDetail_previousState, &ev); err != nil {
+				return err
+			}
+			v.PreviousState = AlarmState(ev)
+			return nil
+		case schemas.AlarmStateChangeDetail_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.AlarmStateChangeDetail_reason, v.Reason)
+		case schemas.AlarmStateChangeDetail_state:
+			var ev string
+			if err := d.ReadString(schemas.AlarmStateChangeDetail_state, &ev); err != nil {
+				return err
+			}
+			v.State = AlarmState(ev)
 			return nil
 		}
 		return nil
@@ -637,6 +711,13 @@ type DependencyDiscoveryConfig struct {
 	// This member is required.
 	Status DependencyDiscoveryStatus
 
+	// The count of resources eligible for dependency attribution.
+	EligibleResourceCount *int32
+
+	// A status message for dependency discovery, displayed during the initialization
+	// state.
+	Message *string
+
 	// The timestamp when dependency discovery was last updated.
 	UpdatedAt *time.Time
 
@@ -650,6 +731,12 @@ func (v *DependencyDiscoveryConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DependencyDiscoveryConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EligibleResourceCount != nil {
+		s.WriteInt32(schemas.DependencyDiscoveryConfig_eligibleResourceCount, *v.EligibleResourceCount)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DependencyDiscoveryConfig_message, *v.Message)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DependencyDiscoveryConfig_status, string(v.Status))
 	}
@@ -660,6 +747,12 @@ func (v *DependencyDiscoveryConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DependencyDiscoveryConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DependencyDiscoveryConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DependencyDiscoveryConfig_eligibleResourceCount:
+			v.EligibleResourceCount = new(int32)
+			return d.ReadInt32(schemas.DependencyDiscoveryConfig_eligibleResourceCount, v.EligibleResourceCount)
+		case schemas.DependencyDiscoveryConfig_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DependencyDiscoveryConfig_message, v.Message)
 		case schemas.DependencyDiscoveryConfig_status:
 			var ev string
 			if err := d.ReadString(schemas.DependencyDiscoveryConfig_status, &ev); err != nil {
@@ -670,6 +763,68 @@ func (v *DependencyDiscoveryConfig) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.DependencyDiscoveryConfig_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.DependencyDiscoveryConfig_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains a single insight about a service's dependencies.
+type DependencyInsight struct {
+
+	// The category of the insight. Valid values:
+	//
+	//   - CROSS_REGION - The insight relates to dependencies used across multiple
+	//   Regions.
+	//
+	//   - NEW_DEPENDENCY - The insight relates to a recently detected dependency.
+	//
+	//   - THIRD_PARTY - The insight relates to a third-party dependency.
+	//
+	//   - UNEVEN_USAGE - The insight relates to a dependency with uneven usage across
+	//   the service.
+	//
+	//   - AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services
+	//   service.
+	//
+	// This member is required.
+	Category InsightsCategory
+
+	// A human-readable explanation of the insight, describing the dependency behavior
+	// or condition that was detected.
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DependencyInsight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyInsight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyInsight) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.DependencyInsight_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DependencyInsight_description, *v.Description)
+	}
+}
+func (v *DependencyInsight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyInsight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyInsight_category:
+			var ev string
+			if err := d.ReadString(schemas.DependencyInsight_category, &ev); err != nil {
+				return err
+			}
+			v.Category = InsightsCategory(ev)
+			return nil
+		case schemas.DependencyInsight_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DependencyInsight_description, v.Description)
 		}
 		return nil
 	})
@@ -812,6 +967,249 @@ func (v *DependencySummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.DependencySummary_serviceArn, v.ServiceArn)
 		case schemas.DependencySummary_sourceRegions:
 			return deserializeRegionList(d, schemas.DependencySummary_sourceRegions, &v.SourceRegions)
+		}
+		return nil
+	})
+}
+
+// The AWS DevOps Agent (DevOps Agent) integration configuration that you supply
+// when creating or updating a service. Connecting a service to a DevOps Agent
+// Agent Space lets DevOps Agent investigate the service's resilience test runs and
+// attach its analysis to the results. Include this block with an Agent Space
+// Amazon Resource Name (ARN) to connect or reconnect the service to an Agent
+// Space. Include it without an Agent Space ARN to disconnect the service. Omit it
+// to leave the existing linkage unchanged.
+type DevOpsAgentConfiguration struct {
+
+	// The ARN of the DevOps Agent Agent Space to link to this service.
+	AgentSpaceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceArn != nil {
+		s.WriteString(schemas.DevOpsAgentConfiguration_agentSpaceArn, *v.AgentSpaceArn)
+	}
+}
+func (v *DevOpsAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentConfiguration_agentSpaceArn:
+			v.AgentSpaceArn = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfiguration_agentSpaceArn, v.AgentSpaceArn)
+		}
+		return nil
+	})
+}
+
+// The current DevOps Agent integration state for a service. Read operations
+// return this state.
+type DevOpsAgentConfigurationView struct {
+
+	// The ARN of the linked DevOps Agent Agent Space.
+	AgentSpaceArn *string
+
+	// The identifier of the linked DevOps Agent Agent Space.
+	AgentSpaceId *string
+
+	// The timestamp when the service successfully connected to the DevOps Agent Agent
+	// Space.
+	ConnectedAt *time.Time
+
+	// The URL of the DevOps Agent Operator App for the linked Agent Space. This URL
+	// is present when the connection status is CONNECTED.
+	OperatorAppUrl *string
+
+	// The AWS Region of the linked DevOps Agent Agent Space.
+	Region *string
+
+	// The connection status of the DevOps Agent integration for this service. Valid
+	// values:
+	//
+	//   - CONNECTING - The service is being connected to the Agent Space.
+	//
+	//   - CONNECTED - The service is connected to the Agent Space.
+	//
+	//   - DISCONNECTED - The service is not connected to an Agent Space.
+	//
+	//   - FAILED - The connection attempt failed. See statusReason for details.
+	Status DevOpsAgentConnectionStatus
+
+	// A human-readable explanation of the current connection status. This field
+	// explains the status when the connection fails.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentConfigurationView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentConfigurationView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentConfigurationView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceArn != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_agentSpaceArn, *v.AgentSpaceArn)
+	}
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ConnectedAt != nil {
+		s.WriteTime(schemas.DevOpsAgentConfigurationView_connectedAt, *v.ConnectedAt)
+	}
+	if v.OperatorAppUrl != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_operatorAppUrl, *v.OperatorAppUrl)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_region, *v.Region)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DevOpsAgentConfigurationView_statusReason, *v.StatusReason)
+	}
+}
+func (v *DevOpsAgentConfigurationView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentConfigurationView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentConfigurationView_agentSpaceArn:
+			v.AgentSpaceArn = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_agentSpaceArn, v.AgentSpaceArn)
+		case schemas.DevOpsAgentConfigurationView_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_agentSpaceId, v.AgentSpaceId)
+		case schemas.DevOpsAgentConfigurationView_connectedAt:
+			v.ConnectedAt = new(time.Time)
+			return d.ReadTime(schemas.DevOpsAgentConfigurationView_connectedAt, v.ConnectedAt)
+		case schemas.DevOpsAgentConfigurationView_operatorAppUrl:
+			v.OperatorAppUrl = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_operatorAppUrl, v.OperatorAppUrl)
+		case schemas.DevOpsAgentConfigurationView_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_region, v.Region)
+		case schemas.DevOpsAgentConfigurationView_status:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentConfigurationView_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DevOpsAgentConnectionStatus(ev)
+			return nil
+		case schemas.DevOpsAgentConfigurationView_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DevOpsAgentConfigurationView_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
+// The result when DevOps Agent investigates a resilience test run. The verdict is
+// advisory and builds on the test run's own result, which remains authoritative.
+type DevOpsAgentInvestigation struct {
+
+	// The confidence level of the verdict. Valid values:
+	//
+	//   - HIGH - The verdict is highly reliable.
+	//
+	//   - MEDIUM - The verdict has moderate reliability.
+	//
+	//   - LOW - The verdict has low reliability.
+	Confidence DevOpsAgentConfidence
+
+	// A deep link to the interactive DevOps Agent investigation session.
+	DeepLink *string
+
+	// The lifecycle status of the investigation. Valid values:
+	//
+	//   - PENDING - The investigation has been created but has not started.
+	//
+	//   - IN_PROGRESS - The investigation is running.
+	//
+	//   - COMPLETED - The investigation finished successfully.
+	//
+	//   - FAILED - The investigation failed to complete.
+	//
+	//   - TIMED_OUT - The investigation did not complete within the allotted time.
+	//
+	//   - CANCELED - The investigation was canceled.
+	Status DevOpsAgentInvestigationStatus
+
+	// The DevOps Agent analysis summary for the investigation.
+	Summary *string
+
+	// The investigation verdict. Valid values:
+	//
+	//   - PASS - The resilience test run passed.
+	//
+	//   - FAIL - The resilience test run failed.
+	//
+	//   - INCONCLUSIVE - The investigation could not determine a clear outcome.
+	Verdict DevOpsAgentVerdict
+
+	noSmithyDocumentSerde
+}
+
+func (v *DevOpsAgentInvestigation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevOpsAgentInvestigation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevOpsAgentInvestigation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_confidence, string(v.Confidence))
+	}
+	if v.DeepLink != nil {
+		s.WriteString(schemas.DevOpsAgentInvestigation_deepLink, *v.DeepLink)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_status, string(v.Status))
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.DevOpsAgentInvestigation_summary, *v.Summary)
+	}
+	if v.Verdict != "" {
+		s.WriteString(schemas.DevOpsAgentInvestigation_verdict, string(v.Verdict))
+	}
+}
+func (v *DevOpsAgentInvestigation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevOpsAgentInvestigation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevOpsAgentInvestigation_confidence:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_confidence, &ev); err != nil {
+				return err
+			}
+			v.Confidence = DevOpsAgentConfidence(ev)
+			return nil
+		case schemas.DevOpsAgentInvestigation_deepLink:
+			v.DeepLink = new(string)
+			return d.ReadString(schemas.DevOpsAgentInvestigation_deepLink, v.DeepLink)
+		case schemas.DevOpsAgentInvestigation_status:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DevOpsAgentInvestigationStatus(ev)
+			return nil
+		case schemas.DevOpsAgentInvestigation_summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.DevOpsAgentInvestigation_summary, v.Summary)
+		case schemas.DevOpsAgentInvestigation_verdict:
+			var ev string
+			if err := d.ReadString(schemas.DevOpsAgentInvestigation_verdict, &ev); err != nil {
+				return err
+			}
+			v.Verdict = DevOpsAgentVerdict(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1025,6 +1423,102 @@ func (v *EffectivePolicyValues) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A label selector that filters the Kubernetes objects discovered from an Amazon
+// EKS input source. An object must satisfy both matchLabels and matchExpressions
+// to match the selector. A selector with neither matches every object. The
+// selector must render to 2,048 characters or fewer in Kubernetes label selector
+// syntax.
+type EksLabelSelector struct {
+
+	// The label requirements that an object must satisfy. All requirements in the
+	// list must match for the object to be selected.
+	MatchExpressions []EksLabelSelectorRequirement
+
+	// The label key-value pairs that an object must have. All pairs must match for
+	// the object to be selected.
+	MatchLabels map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksLabelSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksLabelSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksLabelSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEksLabelSelectorRequirementList(s, schemas.EksLabelSelector_matchExpressions, v.MatchExpressions)
+	serializeEksLabelMap(s, schemas.EksLabelSelector_matchLabels, v.MatchLabels)
+}
+func (v *EksLabelSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksLabelSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksLabelSelector_matchExpressions:
+			return deserializeEksLabelSelectorRequirementList(d, schemas.EksLabelSelector_matchExpressions, &v.MatchExpressions)
+		case schemas.EksLabelSelector_matchLabels:
+			return deserializeEksLabelMap(d, schemas.EksLabelSelector_matchLabels, &v.MatchLabels)
+		}
+		return nil
+	})
+}
+
+// A single label requirement in a label selector, expressed as a key, an
+// operator, and an optional list of values.
+type EksLabelSelectorRequirement struct {
+
+	// The label key that the requirement applies to.
+	//
+	// This member is required.
+	Key *string
+
+	// The operator that relates the label key to the values.
+	//
+	// This member is required.
+	Operator EksLabelSelectorOperator
+
+	// The label values to compare against. Specify values when the operator is IN or
+	// NOT_IN. Leave this empty when the operator is EXISTS or DOES_NOT_EXIST.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksLabelSelectorRequirement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksLabelSelectorRequirement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksLabelSelectorRequirement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.EksLabelSelectorRequirement_key, *v.Key)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.EksLabelSelectorRequirement_operator, string(v.Operator))
+	}
+	serializeEksLabelValueList(s, schemas.EksLabelSelectorRequirement_values, v.Values)
+}
+func (v *EksLabelSelectorRequirement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksLabelSelectorRequirement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksLabelSelectorRequirement_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.EksLabelSelectorRequirement_key, v.Key)
+		case schemas.EksLabelSelectorRequirement_operator:
+			var ev string
+			if err := d.ReadString(schemas.EksLabelSelectorRequirement_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = EksLabelSelectorOperator(ev)
+			return nil
+		case schemas.EksLabelSelectorRequirement_values:
+			return deserializeEksLabelValueList(d, schemas.EksLabelSelectorRequirement_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Defines an Amazon EKS cluster and its namespaces as an input source for
 // resource discovery.
 type EksSource struct {
@@ -1039,6 +1533,10 @@ type EksSource struct {
 	// This member is required.
 	Namespaces []string
 
+	// Filters discovery to the Kubernetes objects whose labels match the selector.
+	// When omitted, all supported objects in the specified namespaces are discovered.
+	LabelSelector *EksLabelSelector
+
 	noSmithyDocumentSerde
 }
 
@@ -1052,6 +1550,11 @@ func (v *EksSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.EksSource_clusterArn, *v.ClusterArn)
 	}
+	if v.LabelSelector != nil {
+		s.WriteStruct(schemas.EksSource_labelSelector)
+		v.LabelSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeEksNamespaceList(s, schemas.EksSource_namespaces, v.Namespaces)
 }
 func (v *EksSource) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1060,6 +1563,9 @@ func (v *EksSource) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksSource_clusterArn:
 			v.ClusterArn = new(string)
 			return d.ReadString(schemas.EksSource_clusterArn, v.ClusterArn)
+		case schemas.EksSource_labelSelector:
+			v.LabelSelector = &EksLabelSelector{}
+			return v.LabelSelector.Deserialize(d)
 		case schemas.EksSource_namespaces:
 			return deserializeEksNamespaceList(d, schemas.EksSource_namespaces, &v.Namespaces)
 		}
@@ -1133,6 +1639,49 @@ func (v *EventActor) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details about an AWS Fault Injection Service (AWS FIS) experiment run as part
+// of a test run.
+type ExperimentDetails struct {
+
+	// The ARN of the AWS FIS experiment.
+	//
+	// This member is required.
+	ExperimentArn *string
+
+	// Additional details about the experiment.
+	Details *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExperimentDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ExperimentDetails_details, *v.Details)
+	}
+	if v.ExperimentArn != nil {
+		s.WriteString(schemas.ExperimentDetails_experimentArn, *v.ExperimentArn)
+	}
+}
+func (v *ExperimentDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentDetails_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ExperimentDetails_details, v.Details)
+		case schemas.ExperimentDetails_experimentArn:
+			v.ExperimentArn = new(string)
+			return d.ReadString(schemas.ExperimentDetails_experimentArn, v.ExperimentArn)
+		}
+		return nil
+	})
+}
+
 // Details when report generation failed.
 type FailedReportOutput struct {
 
@@ -1197,6 +1746,10 @@ type Finding struct {
 	// Infrastructure and code recommendations to address the finding.
 	InfrastructureAndCodeRecommendations []InfrastructureAndCodeRecommendation
 
+	// A deep link to an interactive DevOps Agent investigation seeded with this
+	// finding. This value is null until DevOps Agent creates an investigation.
+	InvestigationDeepLink *string
+
 	// The name of the finding.
 	Name *string
 
@@ -1247,6 +1800,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.Finding_findingId, *v.FindingId)
 	}
 	serializeInfrastructureAndCodeRecommendationsList(s, schemas.Finding_infrastructureAndCodeRecommendations, v.InfrastructureAndCodeRecommendations)
+	if v.InvestigationDeepLink != nil {
+		s.WriteString(schemas.Finding_investigationDeepLink, *v.InvestigationDeepLink)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Finding_name, *v.Name)
 	}
@@ -1290,6 +1846,9 @@ func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Finding_findingId, v.FindingId)
 		case schemas.Finding_infrastructureAndCodeRecommendations:
 			return deserializeInfrastructureAndCodeRecommendationsList(d, schemas.Finding_infrastructureAndCodeRecommendations, &v.InfrastructureAndCodeRecommendations)
+		case schemas.Finding_investigationDeepLink:
+			v.InvestigationDeepLink = new(string)
+			return d.ReadString(schemas.Finding_investigationDeepLink, v.InvestigationDeepLink)
 		case schemas.Finding_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Finding_name, v.Name)
@@ -1343,6 +1902,10 @@ type FindingSummary struct {
 	// The unique identifier of the finding.
 	FindingId *string
 
+	// A deep link to an interactive DevOps Agent investigation seeded with this
+	// finding. This value is null until DevOps Agent creates an investigation.
+	InvestigationDeepLink *string
+
 	// The name of the finding.
 	Name *string
 
@@ -1380,6 +1943,9 @@ func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FindingId != nil {
 		s.WriteString(schemas.FindingSummary_findingId, *v.FindingId)
 	}
+	if v.InvestigationDeepLink != nil {
+		s.WriteString(schemas.FindingSummary_investigationDeepLink, *v.InvestigationDeepLink)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FindingSummary_name, *v.Name)
 	}
@@ -1415,6 +1981,9 @@ func (v *FindingSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FindingSummary_findingId:
 			v.FindingId = new(string)
 			return d.ReadString(schemas.FindingSummary_findingId, v.FindingId)
+		case schemas.FindingSummary_investigationDeepLink:
+			v.InvestigationDeepLink = new(string)
+			return d.ReadString(schemas.FindingSummary_investigationDeepLink, v.InvestigationDeepLink)
 		case schemas.FindingSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.FindingSummary_name, v.Name)
@@ -1625,6 +2194,55 @@ func (v *InputSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration for test execution logging destinations.
+type LoggingConfiguration struct {
+
+	// The ARN of the CloudWatch Logs log group for log delivery.
+	CloudWatchLogGroupArn *string
+
+	// The version of the log schema.
+	LogSchemaVersion *string
+
+	// The name of the S3 bucket for log delivery.
+	S3BucketName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupArn != nil {
+		s.WriteString(schemas.LoggingConfiguration_cloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
+	}
+	if v.LogSchemaVersion != nil {
+		s.WriteString(schemas.LoggingConfiguration_logSchemaVersion, *v.LogSchemaVersion)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.LoggingConfiguration_s3BucketName, *v.S3BucketName)
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_cloudWatchLogGroupArn:
+			v.CloudWatchLogGroupArn = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_cloudWatchLogGroupArn, v.CloudWatchLogGroupArn)
+		case schemas.LoggingConfiguration_logSchemaVersion:
+			v.LogSchemaVersion = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_logSchemaVersion, v.LogSchemaVersion)
+		case schemas.LoggingConfiguration_s3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_s3BucketName, v.S3BucketName)
+		}
+		return nil
+	})
+}
+
 // Defines the multi-AZ disaster recovery targets for a resilience policy.
 type MultiAzTargets struct {
 
@@ -1726,6 +2344,114 @@ func (v *MultiRegionTargets) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MultiRegionTargets_rtoInMinutes:
 			v.RtoInMinutes = new(int32)
 			return d.ReadInt32(schemas.MultiRegionTargets_rtoInMinutes, v.RtoInMinutes)
+		}
+		return nil
+	})
+}
+
+// Identifies an observability alarm by its ARN.
+type ObservabilityAlarmInput struct {
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObservabilityAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservabilityAlarmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservabilityAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.ObservabilityAlarmInput_alarmArn, *v.AlarmArn)
+	}
+}
+func (v *ObservabilityAlarmInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservabilityAlarmInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservabilityAlarmInput_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.ObservabilityAlarmInput_alarmArn, v.AlarmArn)
+		}
+		return nil
+	})
+}
+
+// Summary information about a configured observability alarm.
+type ObservabilityAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The timestamp when the source was configured.
+	CreatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ObservabilityAlarmSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservabilityAlarmSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservabilityAlarmSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ObservabilityAlarmSummary_accountId, *v.AccountId)
+	}
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.ObservabilityAlarmSummary_alarmArn, *v.AlarmArn)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.ObservabilityAlarmSummary_alarmName, *v.AlarmName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ObservabilityAlarmSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ObservabilityAlarmSummary_region, *v.Region)
+	}
+}
+func (v *ObservabilityAlarmSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservabilityAlarmSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservabilityAlarmSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ObservabilityAlarmSummary_accountId, v.AccountId)
+		case schemas.ObservabilityAlarmSummary_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.ObservabilityAlarmSummary_alarmArn, v.AlarmArn)
+		case schemas.ObservabilityAlarmSummary_alarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.ObservabilityAlarmSummary_alarmName, v.AlarmName)
+		case schemas.ObservabilityAlarmSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ObservabilityAlarmSummary_createdAt, v.CreatedAt)
+		case schemas.ObservabilityAlarmSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ObservabilityAlarmSummary_region, v.Region)
 		}
 		return nil
 	})
@@ -1836,6 +2562,12 @@ type Policy struct {
 	// The multi-Region disaster recovery targets defined in the policy.
 	MultiRegion *MultiRegionTargets
 
+	// The identifier of the organization this policy is shared with.
+	OrganizationId *string
+
+	// Specifies whether cross-account sharing is enabled.
+	SharingEnabled *bool
+
 	// Resource tags.
 	Tags map[string]string
 
@@ -1887,8 +2619,14 @@ func (v *Policy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Policy_name, *v.Name)
 	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.Policy_organizationId, *v.OrganizationId)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.Policy_policyArn, *v.PolicyArn)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.Policy_sharingEnabled, *v.SharingEnabled)
 	}
 	serializeTagMap(s, schemas.Policy_tags, v.Tags)
 	if v.UpdatedAt != nil {
@@ -1925,14 +2663,407 @@ func (v *Policy) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Policy_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Policy_name, v.Name)
+		case schemas.Policy_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.Policy_organizationId, v.OrganizationId)
 		case schemas.Policy_policyArn:
 			v.PolicyArn = new(string)
 			return d.ReadString(schemas.Policy_policyArn, v.PolicyArn)
+		case schemas.Policy_sharingEnabled:
+			v.SharingEnabled = new(bool)
+			return d.ReadBool(schemas.Policy_sharingEnabled, v.SharingEnabled)
 		case schemas.Policy_tags:
 			return deserializeTagMap(d, schemas.Policy_tags, &v.Tags)
 		case schemas.Policy_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.Policy_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains details about the service that started using the policy, such as the
+// account that owns the service.
+type PolicyAttachedToServiceMetadata struct {
+
+	// The account that owns the service.
+	AccountId *string
+
+	// ARN identifier.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyAttachedToServiceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyAttachedToServiceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyAttachedToServiceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PolicyAttachedToServiceMetadata_accountId, *v.AccountId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PolicyAttachedToServiceMetadata_serviceArn, *v.ServiceArn)
+	}
+}
+func (v *PolicyAttachedToServiceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyAttachedToServiceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyAttachedToServiceMetadata_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.PolicyAttachedToServiceMetadata_accountId, v.AccountId)
+		case schemas.PolicyAttachedToServiceMetadata_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.PolicyAttachedToServiceMetadata_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// Contains details about a policy that was deleted, including the number of
+// services that were affected.
+type PolicyDeletedMetadata struct {
+
+	// The number of services that were using the policy when it was deleted.
+	AffectedServiceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyDeletedMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDeletedMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyDeletedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedServiceCount != nil {
+		s.WriteInt32(schemas.PolicyDeletedMetadata_affectedServiceCount, *v.AffectedServiceCount)
+	}
+}
+func (v *PolicyDeletedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyDeletedMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyDeletedMetadata_affectedServiceCount:
+			v.AffectedServiceCount = new(int32)
+			return d.ReadInt32(schemas.PolicyDeletedMetadata_affectedServiceCount, v.AffectedServiceCount)
+		}
+		return nil
+	})
+}
+
+// Contains details about the service that stopped using the policy, such as the
+// account that owns the service.
+type PolicyDetachedFromServiceMetadata struct {
+
+	// The account that owns the service.
+	AccountId *string
+
+	// ARN identifier.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyDetachedFromServiceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDetachedFromServiceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyDetachedFromServiceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PolicyDetachedFromServiceMetadata_accountId, *v.AccountId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PolicyDetachedFromServiceMetadata_serviceArn, *v.ServiceArn)
+	}
+}
+func (v *PolicyDetachedFromServiceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyDetachedFromServiceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyDetachedFromServiceMetadata_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.PolicyDetachedFromServiceMetadata_accountId, v.AccountId)
+		case schemas.PolicyDetachedFromServiceMetadata_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.PolicyDetachedFromServiceMetadata_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// An event on the timeline of a resilience policy.
+type PolicyEvent struct {
+
+	// Identifies the actor that triggered an event.
+	//
+	// This member is required.
+	Actor *EventActor
+
+	// The details of the event.
+	//
+	// This member is required.
+	EventDetails *PolicyEventDetails
+
+	// The identifier of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The type of the event.
+	//
+	// This member is required.
+	EventType PolicyEventType
+
+	// ARN identifier.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The time the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actor != nil {
+		s.WriteStruct(schemas.PolicyEvent_actor)
+		v.Actor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDetails != nil {
+		s.WriteStruct(schemas.PolicyEvent_eventDetails)
+		v.EventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PolicyEvent_eventId, *v.EventId)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.PolicyEvent_eventType, string(v.EventType))
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.PolicyEvent_policyArn, *v.PolicyArn)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.PolicyEvent_timestamp, *v.Timestamp)
+	}
+}
+func (v *PolicyEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEvent_actor:
+			v.Actor = &EventActor{}
+			return v.Actor.Deserialize(d)
+		case schemas.PolicyEvent_eventDetails:
+			v.EventDetails = &PolicyEventDetails{}
+			return v.EventDetails.Deserialize(d)
+		case schemas.PolicyEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PolicyEvent_eventId, v.EventId)
+		case schemas.PolicyEvent_eventType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyEvent_eventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = PolicyEventType(ev)
+			return nil
+		case schemas.PolicyEvent_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.PolicyEvent_policyArn, v.PolicyArn)
+		case schemas.PolicyEvent_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.PolicyEvent_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
+// Contains the title, description, and event-specific metadata for a single event
+// on the timeline of a resilience policy.
+type PolicyEventDetails struct {
+
+	// A description of the event.
+	//
+	// This member is required.
+	Description *string
+
+	// A short summary of the event.
+	//
+	// This member is required.
+	Title *string
+
+	// The event-specific metadata, with one member populated according to the event
+	// type.
+	EventMetadata PolicyEventMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PolicyEventDetails_description, *v.Description)
+	}
+	serializePolicyEventMetadata(s, schemas.PolicyEventDetails_eventMetadata, v.EventMetadata)
+	if v.Title != nil {
+		s.WriteString(schemas.PolicyEventDetails_title, *v.Title)
+	}
+}
+func (v *PolicyEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEventDetails_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PolicyEventDetails_description, v.Description)
+		case schemas.PolicyEventDetails_eventMetadata:
+			return deserializePolicyEventMetadata(d, schemas.PolicyEventDetails_eventMetadata, &v.EventMetadata)
+		case schemas.PolicyEventDetails_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PolicyEventDetails_title, v.Title)
+		}
+		return nil
+	})
+}
+
+// Contains the event-specific metadata for a policy event. Exactly one member is
+// populated, according to the event type.
+//
+//   - policyAttachedToService — a service started using the policy.
+//
+//   - policyDetachedFromService — a service stopped using the policy.
+//
+//   - policySharingRevoked — cross-account sharing was disabled for the policy.
+//
+//   - policyDeleted — the policy was deleted.
+//
+// The following types satisfy this interface:
+//
+//	PolicyEventMetadataMemberPolicyAttachedToService
+//	PolicyEventMetadataMemberPolicyDeleted
+//	PolicyEventMetadataMemberPolicyDetachedFromService
+//	PolicyEventMetadataMemberPolicySharingRevoked
+type PolicyEventMetadata interface {
+	isPolicyEventMetadata()
+}
+
+// Contains details about the service that started using the policy, such as the
+// account that owns the service.
+type PolicyEventMetadataMemberPolicyAttachedToService struct {
+	Value PolicyAttachedToServiceMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyAttachedToService) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyAttachedToService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyAttachedToService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyAttachedToService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy that was deleted, including the number of
+// services that were affected.
+type PolicyEventMetadataMemberPolicyDeleted struct {
+	Value PolicyDeletedMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyDeleted) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyDeleted) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyDeleted)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyDeleted) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about the service that stopped using the policy, such as the
+// account that owns the service.
+type PolicyEventMetadataMemberPolicyDetachedFromService struct {
+	Value PolicyDetachedFromServiceMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyDetachedFromService) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyDetachedFromService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyDetachedFromService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyDetachedFromService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy for which organization sharing was revoked,
+// including the number of services that were affected.
+type PolicyEventMetadataMemberPolicySharingRevoked struct {
+	Value PolicySharingRevokedMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicySharingRevoked) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicySharingRevoked) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policySharingRevoked)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicySharingRevoked) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy for which organization sharing was revoked,
+// including the number of services that were affected.
+type PolicySharingRevokedMetadata struct {
+
+	// The number of services that were using the policy when sharing was revoked.
+	AffectedServiceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicySharingRevokedMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicySharingRevokedMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicySharingRevokedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedServiceCount != nil {
+		s.WriteInt32(schemas.PolicySharingRevokedMetadata_affectedServiceCount, *v.AffectedServiceCount)
+	}
+}
+func (v *PolicySharingRevokedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicySharingRevokedMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicySharingRevokedMetadata_affectedServiceCount:
+			v.AffectedServiceCount = new(int32)
+			return d.ReadInt32(schemas.PolicySharingRevokedMetadata_affectedServiceCount, v.AffectedServiceCount)
 		}
 		return nil
 	})
@@ -1968,6 +3099,12 @@ type PolicySummary struct {
 
 	// The multi-Region disaster recovery targets defined in the policy.
 	MultiRegion *MultiRegionTargets
+
+	// The identifier of the organization this policy is shared with.
+	OrganizationId *string
+
+	// Specifies whether cross-account sharing is enabled.
+	SharingEnabled *bool
 
 	// The timestamp when the policy was last updated.
 	UpdatedAt *time.Time
@@ -2011,8 +3148,14 @@ func (v *PolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PolicySummary_name, *v.Name)
 	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PolicySummary_organizationId, *v.OrganizationId)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.PolicySummary_policyArn, *v.PolicyArn)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.PolicySummary_sharingEnabled, *v.SharingEnabled)
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PolicySummary_updatedAt, *v.UpdatedAt)
@@ -2042,9 +3185,15 @@ func (v *PolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PolicySummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.PolicySummary_name, v.Name)
+		case schemas.PolicySummary_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.PolicySummary_organizationId, v.OrganizationId)
 		case schemas.PolicySummary_policyArn:
 			v.PolicyArn = new(string)
 			return d.ReadString(schemas.PolicySummary_policyArn, v.PolicyArn)
+		case schemas.PolicySummary_sharingEnabled:
+			v.SharingEnabled = new(bool)
+			return d.ReadBool(schemas.PolicySummary_sharingEnabled, v.SharingEnabled)
 		case schemas.PolicySummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PolicySummary_updatedAt, v.UpdatedAt)
@@ -2189,6 +3338,13 @@ type ReportGenerationResult struct {
 	// The service this report was generated for.
 	ServiceArn *string
 
+	// The unique identifier of a test run.
+	TestRunId *string
+
+	// An ARN owned by the service. Accepts either a standard 12-digit account ID or
+	// the literal "aws" for AWS-managed resources, such as AWS-managed test templates.
+	TestTemplateArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2214,6 +3370,12 @@ func (v *ReportGenerationResult) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.ReportGenerationResult_status, string(v.Status))
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.ReportGenerationResult_testRunId, *v.TestRunId)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.ReportGenerationResult_testTemplateArn, *v.TestTemplateArn)
 	}
 }
 func (v *ReportGenerationResult) Deserialize(d smithy.ShapeDeserializer) error {
@@ -2244,6 +3406,12 @@ func (v *ReportGenerationResult) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = ReportGenerationStatus(ev)
 			return nil
+		case schemas.ReportGenerationResult_testRunId:
+			v.TestRunId = new(string)
+			return d.ReadString(schemas.ReportGenerationResult_testRunId, v.TestRunId)
+		case schemas.ReportGenerationResult_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.ReportGenerationResult_testTemplateArn, v.TestTemplateArn)
 		}
 		return nil
 	})
@@ -2319,6 +3487,60 @@ func (v *ReportOutputConfigurationMemberS3) Deserialize(d smithy.ShapeDeserializ
 	return v.Value.Deserialize(d)
 }
 
+// A single AWS resource that AWS Fault Injection Service (AWS FIS) resolved as a
+// target during a test run.
+type ResolvedTargetResource struct {
+
+	// The AWS FIS resource type the target belongs to, such as aws:ec2:instance,
+	// aws:ecs:task, or aws:eks:pod.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The raw target information map as returned by AWS FIS.
+	//
+	// This member is required.
+	TargetInformation map[string]string
+
+	// The name of the target in the AWS FIS experiment template.
+	//
+	// This member is required.
+	TargetName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResolvedTargetResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolvedTargetResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolvedTargetResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResolvedTargetResource_resourceType, *v.ResourceType)
+	}
+	serializeResolvedTargetInformation(s, schemas.ResolvedTargetResource_targetInformation, v.TargetInformation)
+	if v.TargetName != nil {
+		s.WriteString(schemas.ResolvedTargetResource_targetName, *v.TargetName)
+	}
+}
+func (v *ResolvedTargetResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolvedTargetResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolvedTargetResource_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResolvedTargetResource_resourceType, v.ResourceType)
+		case schemas.ResolvedTargetResource_targetInformation:
+			return deserializeResolvedTargetInformation(d, schemas.ResolvedTargetResource_targetInformation, &v.TargetInformation)
+		case schemas.ResolvedTargetResource_targetName:
+			v.TargetName = new(string)
+			return d.ReadString(schemas.ResolvedTargetResource_targetName, v.TargetName)
+		}
+		return nil
+	})
+}
+
 // Represents an AWS resource discovered by Resilience Hub.
 type Resource struct {
 
@@ -2327,11 +3549,28 @@ type Resource struct {
 	// This member is required.
 	Identifier *string
 
+	// The Availability Zone ID of the Availability Zone that hosts the resource, such
+	// as use1-az1. The Availability Zone ID is consistent across Amazon Web Services
+	// (AWS) accounts, unlike the Availability Zone name.
+	AvailabilityZoneId *string
+
+	// The name of the Availability Zone that hosts the resource, such as us-west-2a.
+	AvailabilityZoneName *string
+
 	// The AWS account ID that owns the resource.
 	AwsAccountId *string
 
 	// The AWS Region where the resource is located.
 	AwsRegion *string
+
+	// The identifier of the single parent resource that contains this resource, used
+	// to represent containment relationships in the resource topology. A resource has
+	// at most one containment parent.
+	ContainmentParentId *string
+
+	// The identifier of the logical resource group that this resource belongs to.
+	// Resources that share this identifier are managed as a single unit.
+	LogicalResourceGroupId *string
 
 	// The type of the resource.
 	ResourceType *string
@@ -2346,14 +3585,26 @@ func (v *Resource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.Resource_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.AvailabilityZoneName != nil {
+		s.WriteString(schemas.Resource_availabilityZoneName, *v.AvailabilityZoneName)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.Resource_awsAccountId, *v.AwsAccountId)
 	}
 	if v.AwsRegion != nil {
 		s.WriteString(schemas.Resource_awsRegion, *v.AwsRegion)
 	}
+	if v.ContainmentParentId != nil {
+		s.WriteString(schemas.Resource_containmentParentId, *v.ContainmentParentId)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.Resource_identifier, *v.Identifier)
+	}
+	if v.LogicalResourceGroupId != nil {
+		s.WriteString(schemas.Resource_logicalResourceGroupId, *v.LogicalResourceGroupId)
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.Resource_resourceType, *v.ResourceType)
@@ -2362,15 +3613,27 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Resource_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.Resource_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.Resource_availabilityZoneName:
+			v.AvailabilityZoneName = new(string)
+			return d.ReadString(schemas.Resource_availabilityZoneName, v.AvailabilityZoneName)
 		case schemas.Resource_awsAccountId:
 			v.AwsAccountId = new(string)
 			return d.ReadString(schemas.Resource_awsAccountId, v.AwsAccountId)
 		case schemas.Resource_awsRegion:
 			v.AwsRegion = new(string)
 			return d.ReadString(schemas.Resource_awsRegion, v.AwsRegion)
+		case schemas.Resource_containmentParentId:
+			v.ContainmentParentId = new(string)
+			return d.ReadString(schemas.Resource_containmentParentId, v.ContainmentParentId)
 		case schemas.Resource_identifier:
 			v.Identifier = new(string)
 			return d.ReadString(schemas.Resource_identifier, v.Identifier)
+		case schemas.Resource_logicalResourceGroupId:
+			v.LogicalResourceGroupId = new(string)
+			return d.ReadString(schemas.Resource_logicalResourceGroupId, v.LogicalResourceGroupId)
 		case schemas.Resource_resourceType:
 			v.ResourceType = new(string)
 			return d.ReadString(schemas.Resource_resourceType, v.ResourceType)
@@ -2688,6 +3951,9 @@ type Service struct {
 	// Resource description for services and policies.
 	Description *string
 
+	// The current DevOps Agent integration state for the service.
+	DevOpsAgentConfiguration *DevOpsAgentConfigurationView
+
 	// The effective policy values for the service.
 	EffectivePolicyValues *EffectivePolicyValues
 
@@ -2712,7 +3978,7 @@ type Service struct {
 	// ARN identifier.
 	PolicyArn *string
 
-	// The AWS Regions where the service operates.
+	// The Regions where the service operates.
 	Regions []string
 
 	// Configuration for automatic report generation on a Service.
@@ -2765,6 +4031,11 @@ func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.Service_description, *v.Description)
+	}
+	if v.DevOpsAgentConfiguration != nil {
+		s.WriteStruct(schemas.Service_devOpsAgentConfiguration)
+		v.DevOpsAgentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.EffectivePolicyValues != nil {
 		s.WriteStruct(schemas.Service_effectivePolicyValues)
@@ -2851,6 +4122,9 @@ func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Service_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.Service_description, v.Description)
+		case schemas.Service_devOpsAgentConfiguration:
+			v.DevOpsAgentConfiguration = &DevOpsAgentConfigurationView{}
+			return v.DevOpsAgentConfiguration.Deserialize(d)
 		case schemas.Service_effectivePolicyValues:
 			v.EffectivePolicyValues = &EffectivePolicyValues{}
 			return v.EffectivePolicyValues.Deserialize(d)
@@ -3874,6 +5148,17 @@ type ServicePolicyAssociatedMetadata struct {
 	// The name of the associated policy.
 	PolicyName *string
 
+	// The account that owns the policy.
+	PolicyOwnerAccountId *string
+
+	// The source of the policy.
+	//
+	//   - SELF — the policy belongs to the account that owns the service.
+	//
+	//   - CROSS_ACCOUNT — the policy belongs to another account and was shared with
+	//   the organization.
+	PolicySource PolicyValueSource
+
 	noSmithyDocumentSerde
 }
 
@@ -3890,6 +5175,12 @@ func (v *ServicePolicyAssociatedMetadata) SerializeMembers(s smithy.ShapeSeriali
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policyName, *v.PolicyName)
 	}
+	if v.PolicyOwnerAccountId != nil {
+		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId, *v.PolicyOwnerAccountId)
+	}
+	if v.PolicySource != "" {
+		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policySource, string(v.PolicySource))
+	}
 }
 func (v *ServicePolicyAssociatedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServicePolicyAssociatedMetadata, func(s *smithy.Schema) error {
@@ -3900,6 +5191,16 @@ func (v *ServicePolicyAssociatedMetadata) Deserialize(d smithy.ShapeDeserializer
 		case schemas.ServicePolicyAssociatedMetadata_policyName:
 			v.PolicyName = new(string)
 			return d.ReadString(schemas.ServicePolicyAssociatedMetadata_policyName, v.PolicyName)
+		case schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId:
+			v.PolicyOwnerAccountId = new(string)
+			return d.ReadString(schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId, v.PolicyOwnerAccountId)
+		case schemas.ServicePolicyAssociatedMetadata_policySource:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyAssociatedMetadata_policySource, &ev); err != nil {
+				return err
+			}
+			v.PolicySource = PolicyValueSource(ev)
+			return nil
 		}
 		return nil
 	})
@@ -3913,6 +5214,20 @@ type ServicePolicyDisassociatedMetadata struct {
 
 	// The name of the disassociated policy.
 	PolicyName *string
+
+	// The account that owns the policy.
+	PolicyOwnerAccountId *string
+
+	// The source of the policy.
+	//
+	//   - SELF — the policy belongs to the account that owns the service.
+	//
+	//   - CROSS_ACCOUNT — the policy belongs to another account and was shared with
+	//   the organization.
+	PolicySource PolicyValueSource
+
+	// The reason the policy was disassociated from the service.
+	Reason PolicyDisassociationReason
 
 	noSmithyDocumentSerde
 }
@@ -3930,6 +5245,15 @@ func (v *ServicePolicyDisassociatedMetadata) SerializeMembers(s smithy.ShapeSeri
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policyName, *v.PolicyName)
 	}
+	if v.PolicyOwnerAccountId != nil {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId, *v.PolicyOwnerAccountId)
+	}
+	if v.PolicySource != "" {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policySource, string(v.PolicySource))
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_reason, string(v.Reason))
+	}
 }
 func (v *ServicePolicyDisassociatedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServicePolicyDisassociatedMetadata, func(s *smithy.Schema) error {
@@ -3940,6 +5264,23 @@ func (v *ServicePolicyDisassociatedMetadata) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ServicePolicyDisassociatedMetadata_policyName:
 			v.PolicyName = new(string)
 			return d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policyName, v.PolicyName)
+		case schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId:
+			v.PolicyOwnerAccountId = new(string)
+			return d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId, v.PolicyOwnerAccountId)
+		case schemas.ServicePolicyDisassociatedMetadata_policySource:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policySource, &ev); err != nil {
+				return err
+			}
+			v.PolicySource = PolicyValueSource(ev)
+			return nil
+		case schemas.ServicePolicyDisassociatedMetadata_reason:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyDisassociatedMetadata_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = PolicyDisassociationReason(ev)
+			return nil
 		}
 		return nil
 	})
@@ -4211,6 +5552,21 @@ type ServiceSummary struct {
 	// The dependency discovery configuration.
 	DependencyDiscovery *DependencyDiscoveryConfig
 
+	// The ARN of the DevOps Agent Agent Space linked to the service, when the service
+	// is linked to one.
+	DevOpsAgentSpaceArn *string
+
+	// The DevOps Agent connection status for the service. Valid values:
+	//
+	//   - CONNECTING - The service is being connected to the Agent Space.
+	//
+	//   - CONNECTED - The service is connected to the Agent Space.
+	//
+	//   - DISCONNECTED - The service is not connected to an Agent Space.
+	//
+	//   - FAILED - The connection attempt failed.
+	DevOpsAgentStatus DevOpsAgentConnectionStatus
+
 	// The number of open findings.
 	OpenFindingsCount *int32
 
@@ -4223,7 +5579,7 @@ type ServiceSummary struct {
 	// ARN identifier.
 	PolicyArn *string
 
-	// The AWS Regions where the service operates.
+	// The Regions where the service operates.
 	Regions []string
 
 	// The number of resolved findings.
@@ -4261,6 +5617,12 @@ func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.ServiceSummary_dependencyDiscovery)
 		v.DependencyDiscovery.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.DevOpsAgentSpaceArn != nil {
+		s.WriteString(schemas.ServiceSummary_devOpsAgentSpaceArn, *v.DevOpsAgentSpaceArn)
+	}
+	if v.DevOpsAgentStatus != "" {
+		s.WriteString(schemas.ServiceSummary_devOpsAgentStatus, string(v.DevOpsAgentStatus))
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.ServiceSummary_name, *v.Name)
@@ -4312,6 +5674,16 @@ func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ServiceSummary_dependencyDiscovery:
 			v.DependencyDiscovery = &DependencyDiscoveryConfig{}
 			return v.DependencyDiscovery.Deserialize(d)
+		case schemas.ServiceSummary_devOpsAgentSpaceArn:
+			v.DevOpsAgentSpaceArn = new(string)
+			return d.ReadString(schemas.ServiceSummary_devOpsAgentSpaceArn, v.DevOpsAgentSpaceArn)
+		case schemas.ServiceSummary_devOpsAgentStatus:
+			var ev string
+			if err := d.ReadString(schemas.ServiceSummary_devOpsAgentStatus, &ev); err != nil {
+				return err
+			}
+			v.DevOpsAgentStatus = DevOpsAgentConnectionStatus(ev)
+			return nil
 		case schemas.ServiceSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ServiceSummary_name, v.Name)
@@ -4445,8 +5817,20 @@ type ServiceTopologyEdgeSummary struct {
 	// This member is required.
 	SourceResourceIdentifier *string
 
+	// The AWS account ID of the destination resource.
+	DestinationAccount *string
+
+	// The AWS Region of the destination resource.
+	DestinationRegion *string
+
 	// The properties of the topology edge.
 	Properties []EdgePropertySummary
+
+	// The AWS account ID of the source resource.
+	SourceAccount *string
+
+	// The AWS Region of the source resource.
+	SourceRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -4458,10 +5842,22 @@ func (v *ServiceTopologyEdgeSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceTopologyEdgeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAccount != nil {
+		s.WriteString(schemas.ServiceTopologyEdgeSummary_destinationAccount, *v.DestinationAccount)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.ServiceTopologyEdgeSummary_destinationRegion, *v.DestinationRegion)
+	}
 	if v.DestinationResourceIdentifier != nil {
 		s.WriteString(schemas.ServiceTopologyEdgeSummary_destinationResourceIdentifier, *v.DestinationResourceIdentifier)
 	}
 	serializeEdgePropertyList(s, schemas.ServiceTopologyEdgeSummary_properties, v.Properties)
+	if v.SourceAccount != nil {
+		s.WriteString(schemas.ServiceTopologyEdgeSummary_sourceAccount, *v.SourceAccount)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.ServiceTopologyEdgeSummary_sourceRegion, *v.SourceRegion)
+	}
 	if v.SourceResourceIdentifier != nil {
 		s.WriteString(schemas.ServiceTopologyEdgeSummary_sourceResourceIdentifier, *v.SourceResourceIdentifier)
 	}
@@ -4469,11 +5865,23 @@ func (v *ServiceTopologyEdgeSummary) SerializeMembers(s smithy.ShapeSerializer) 
 func (v *ServiceTopologyEdgeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceTopologyEdgeSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ServiceTopologyEdgeSummary_destinationAccount:
+			v.DestinationAccount = new(string)
+			return d.ReadString(schemas.ServiceTopologyEdgeSummary_destinationAccount, v.DestinationAccount)
+		case schemas.ServiceTopologyEdgeSummary_destinationRegion:
+			v.DestinationRegion = new(string)
+			return d.ReadString(schemas.ServiceTopologyEdgeSummary_destinationRegion, v.DestinationRegion)
 		case schemas.ServiceTopologyEdgeSummary_destinationResourceIdentifier:
 			v.DestinationResourceIdentifier = new(string)
 			return d.ReadString(schemas.ServiceTopologyEdgeSummary_destinationResourceIdentifier, v.DestinationResourceIdentifier)
 		case schemas.ServiceTopologyEdgeSummary_properties:
 			return deserializeEdgePropertyList(d, schemas.ServiceTopologyEdgeSummary_properties, &v.Properties)
+		case schemas.ServiceTopologyEdgeSummary_sourceAccount:
+			v.SourceAccount = new(string)
+			return d.ReadString(schemas.ServiceTopologyEdgeSummary_sourceAccount, v.SourceAccount)
+		case schemas.ServiceTopologyEdgeSummary_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.ServiceTopologyEdgeSummary_sourceRegion, v.SourceRegion)
 		case schemas.ServiceTopologyEdgeSummary_sourceResourceIdentifier:
 			v.SourceResourceIdentifier = new(string)
 			return d.ReadString(schemas.ServiceTopologyEdgeSummary_sourceResourceIdentifier, v.SourceResourceIdentifier)
@@ -4576,6 +5984,55 @@ func (v *SloSource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A CloudWatch alarm that automatically stops a test run if it breaches its
+// threshold.
+type StopCondition struct {
+
+	// The source of the stop condition.
+	//
+	// This member is required.
+	Source StopConditionSource
+
+	// The value of the stop condition, such as the ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *StopCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != "" {
+		s.WriteString(schemas.StopCondition_source, string(v.Source))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.StopCondition_value, *v.Value)
+	}
+}
+func (v *StopCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopCondition_source:
+			var ev string
+			if err := d.ReadString(schemas.StopCondition_source, &ev); err != nil {
+				return err
+			}
+			v.Source = StopConditionSource(ev)
+			return nil
+		case schemas.StopCondition_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.StopCondition_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes a change from one string value to another.
 type StringChange struct {
 
@@ -4611,6 +6068,114 @@ func (v *StringChange) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StringChange_oldValue:
 			v.OldValue = new(string)
 			return d.ReadString(schemas.StringChange_oldValue, v.OldValue)
+		}
+		return nil
+	})
+}
+
+// Identifies a success criteria alarm by its ARN.
+type SuccessCriteriaAlarmInput struct {
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SuccessCriteriaAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuccessCriteriaAlarmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuccessCriteriaAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.SuccessCriteriaAlarmInput_alarmArn, *v.AlarmArn)
+	}
+}
+func (v *SuccessCriteriaAlarmInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuccessCriteriaAlarmInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuccessCriteriaAlarmInput_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.SuccessCriteriaAlarmInput_alarmArn, v.AlarmArn)
+		}
+		return nil
+	})
+}
+
+// Summary information about a configured success criteria alarm.
+type SuccessCriteriaAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The timestamp when the source was configured.
+	CreatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *SuccessCriteriaAlarmSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuccessCriteriaAlarmSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuccessCriteriaAlarmSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.SuccessCriteriaAlarmSummary_accountId, *v.AccountId)
+	}
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.SuccessCriteriaAlarmSummary_alarmArn, *v.AlarmArn)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.SuccessCriteriaAlarmSummary_alarmName, *v.AlarmName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SuccessCriteriaAlarmSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SuccessCriteriaAlarmSummary_region, *v.Region)
+	}
+}
+func (v *SuccessCriteriaAlarmSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuccessCriteriaAlarmSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuccessCriteriaAlarmSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.SuccessCriteriaAlarmSummary_accountId, v.AccountId)
+		case schemas.SuccessCriteriaAlarmSummary_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.SuccessCriteriaAlarmSummary_alarmArn, v.AlarmArn)
+		case schemas.SuccessCriteriaAlarmSummary_alarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.SuccessCriteriaAlarmSummary_alarmName, v.AlarmName)
+		case schemas.SuccessCriteriaAlarmSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SuccessCriteriaAlarmSummary_createdAt, v.CreatedAt)
+		case schemas.SuccessCriteriaAlarmSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SuccessCriteriaAlarmSummary_region, v.Region)
 		}
 		return nil
 	})
@@ -5557,6 +7122,197 @@ func (v *TargetSource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Represents a test created for a service by configuring a test template.
+type Test struct {
+
+	// The timestamp when the test was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The name of the test.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the service the test belongs to.
+	//
+	// This member is required.
+	ServiceArn *string
+
+	// The number of successful runs of the test.
+	//
+	// This member is required.
+	SuccessfulTestRuns *int32
+
+	// The unique identifier of the test.
+	//
+	// This member is required.
+	TestId *string
+
+	// The ARN of the test template the test was created from.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The total number of runs of the test.
+	//
+	// This member is required.
+	TotalTestRuns *int32
+
+	// The fault actions the test runs.
+	Actions []TestAction
+
+	// The logging configuration for the test.
+	LoggingConfiguration *LoggingConfiguration
+
+	// The parameter values configured for the test.
+	Parameters map[string][]string
+
+	// The name of the IAM execution role used to run the test.
+	RoleName *string
+
+	// The stop conditions for the test.
+	StopConditions []StopCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *Test) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Test)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Test) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestActionList(s, schemas.Test_actions, v.Actions)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Test_creationTime, *v.CreationTime)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.Test_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Test_name, *v.Name)
+	}
+	serializeTestParameters(s, schemas.Test_parameters, v.Parameters)
+	if v.RoleName != nil {
+		s.WriteString(schemas.Test_roleName, *v.RoleName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.Test_serviceArn, *v.ServiceArn)
+	}
+	serializeStopConditionList(s, schemas.Test_stopConditions, v.StopConditions)
+	if v.SuccessfulTestRuns != nil {
+		s.WriteInt32(schemas.Test_successfulTestRuns, *v.SuccessfulTestRuns)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.Test_testId, *v.TestId)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.Test_testTemplateArn, *v.TestTemplateArn)
+	}
+	if v.TotalTestRuns != nil {
+		s.WriteInt32(schemas.Test_totalTestRuns, *v.TotalTestRuns)
+	}
+}
+func (v *Test) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Test, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Test_actions:
+			return deserializeTestActionList(d, schemas.Test_actions, &v.Actions)
+		case schemas.Test_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Test_creationTime, v.CreationTime)
+		case schemas.Test_loggingConfiguration:
+			v.LoggingConfiguration = &LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.Test_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Test_name, v.Name)
+		case schemas.Test_parameters:
+			return deserializeTestParameters(d, schemas.Test_parameters, &v.Parameters)
+		case schemas.Test_roleName:
+			v.RoleName = new(string)
+			return d.ReadString(schemas.Test_roleName, v.RoleName)
+		case schemas.Test_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.Test_serviceArn, v.ServiceArn)
+		case schemas.Test_stopConditions:
+			return deserializeStopConditionList(d, schemas.Test_stopConditions, &v.StopConditions)
+		case schemas.Test_successfulTestRuns:
+			v.SuccessfulTestRuns = new(int32)
+			return d.ReadInt32(schemas.Test_successfulTestRuns, v.SuccessfulTestRuns)
+		case schemas.Test_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.Test_testId, v.TestId)
+		case schemas.Test_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.Test_testTemplateArn, v.TestTemplateArn)
+		case schemas.Test_totalTestRuns:
+			v.TotalTestRuns = new(int32)
+			return d.ReadInt32(schemas.Test_totalTestRuns, v.TotalTestRuns)
+		}
+		return nil
+	})
+}
+
+// Represents a fault action that a test runs, along with the resource type it
+// targets.
+type TestAction struct {
+
+	// The identifier of the fault action.
+	//
+	// This member is required.
+	ActionId *string
+
+	// The resource type that the action targets.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// A description of the fault action.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.TestAction_actionId, *v.ActionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TestAction_description, *v.Description)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TestAction_resourceType, *v.ResourceType)
+	}
+}
+func (v *TestAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestAction_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.TestAction_actionId, v.ActionId)
+		case schemas.TestAction_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TestAction_description, v.Description)
+		case schemas.TestAction_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TestAction_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // A testing recommendation to address a finding.
 type TestingRecommendation struct {
 
@@ -5580,6 +7336,1419 @@ func (v *TestingRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.TestingRecommendation_suggestedChanges:
 			return deserializeSuggestedChangesList(d, schemas.TestingRecommendation_suggestedChanges, &v.SuggestedChanges)
+		}
+		return nil
+	})
+}
+
+// Represents a single run of a test. Configuration is snapshotted from the test
+// and service at the time the run is started.
+type TestRun struct {
+
+	// The timestamp when the test run started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the test run.
+	//
+	// This member is required.
+	Status TestRunStatus
+
+	// The identifier of the test that was run.
+	//
+	// This member is required.
+	TestId *string
+
+	// The unique identifier of the test run.
+	//
+	// This member is required.
+	TestRunId *string
+
+	// The ARN of the test template snapshotted from the test when the run was started.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// Indicates whether the test run targets resources in a single AWS account or
+	// across multiple accounts.
+	AccountTargeting AccountTargeting
+
+	// The DevOps Agent investigation result for the test run, present when the
+	// integration is enabled for the service.
+	DevOpsAgentInvestigation *DevOpsAgentInvestigation
+
+	// The timestamp when the test run ended.
+	EndedAt *time.Time
+
+	// A human-readable reason for test run failure. Only present when the status is
+	// FAILED or ERROR.
+	ErrorMessage *string
+
+	// The number of events recorded for the test run. Use ListTestRunEvents to
+	// retrieve the details.
+	EventCount *int32
+
+	// The AWS Fault Injection Service (AWS FIS) experiments run as part of the test
+	// run.
+	Experiments []ExperimentDetails
+
+	// The logging configuration snapshotted from the test when the run was started.
+	LoggingConfiguration *LoggingConfiguration
+
+	// The parameter values used for the test run.
+	Parameters map[string][]string
+
+	// The permission model snapshotted from the service when the run was started.
+	PermissionModel *PermissionModel
+
+	// The resilience policy snapshotted from the service when the run was started.
+	Policy *TestRunPolicySnapshot
+
+	// The identifier of the ARC Region switch execution detected during the test run.
+	RegionSwitchExecutionId *string
+
+	// The ARN of the ARC Region switch plan associated with the test run.
+	RegionSwitchPlanArn *string
+
+	// The Regions snapshotted from the service when the run was started.
+	Regions []string
+
+	// The report configuration snapshotted from the service when the run was started.
+	ReportConfiguration *TestRunReportConfiguration
+
+	// The report generation result for the test run. Present after report generation
+	// completes or fails.
+	ReportOutput *ReportGenerationResult
+
+	// The IAM execution role name snapshotted from the test when the run was started.
+	RoleName *string
+
+	// The ARN of the service the test run belongs to.
+	ServiceArn *string
+
+	// The stop conditions snapshotted from the test when the run was started.
+	StopConditions []StopCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRun) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRun) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTargeting != "" {
+		s.WriteString(schemas.TestRun_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.DevOpsAgentInvestigation != nil {
+		s.WriteStruct(schemas.TestRun_devOpsAgentInvestigation)
+		v.DevOpsAgentInvestigation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.TestRun_endedAt, *v.EndedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.TestRun_errorMessage, *v.ErrorMessage)
+	}
+	if v.EventCount != nil {
+		s.WriteInt32(schemas.TestRun_eventCount, *v.EventCount)
+	}
+	serializeExperimentDetailsList(s, schemas.TestRun_experiments, v.Experiments)
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.TestRun_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTestParameters(s, schemas.TestRun_parameters, v.Parameters)
+	if v.PermissionModel != nil {
+		s.WriteStruct(schemas.TestRun_permissionModel)
+		v.PermissionModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Policy != nil {
+		s.WriteStruct(schemas.TestRun_policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegionSwitchExecutionId != nil {
+		s.WriteString(schemas.TestRun_regionSwitchExecutionId, *v.RegionSwitchExecutionId)
+	}
+	if v.RegionSwitchPlanArn != nil {
+		s.WriteString(schemas.TestRun_regionSwitchPlanArn, *v.RegionSwitchPlanArn)
+	}
+	serializeRegionList(s, schemas.TestRun_regions, v.Regions)
+	if v.ReportConfiguration != nil {
+		s.WriteStruct(schemas.TestRun_reportConfiguration)
+		v.ReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportOutput != nil {
+		s.WriteStruct(schemas.TestRun_reportOutput)
+		v.ReportOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.TestRun_roleName, *v.RoleName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.TestRun_serviceArn, *v.ServiceArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.TestRun_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TestRun_status, string(v.Status))
+	}
+	serializeStopConditionList(s, schemas.TestRun_stopConditions, v.StopConditions)
+	if v.TestId != nil {
+		s.WriteString(schemas.TestRun_testId, *v.TestId)
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.TestRun_testRunId, *v.TestRunId)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.TestRun_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+func (v *TestRun) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRun_accountTargeting:
+			var ev string
+			if err := d.ReadString(schemas.TestRun_accountTargeting, &ev); err != nil {
+				return err
+			}
+			v.AccountTargeting = AccountTargeting(ev)
+			return nil
+		case schemas.TestRun_devOpsAgentInvestigation:
+			v.DevOpsAgentInvestigation = &DevOpsAgentInvestigation{}
+			return v.DevOpsAgentInvestigation.Deserialize(d)
+		case schemas.TestRun_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.TestRun_endedAt, v.EndedAt)
+		case schemas.TestRun_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.TestRun_errorMessage, v.ErrorMessage)
+		case schemas.TestRun_eventCount:
+			v.EventCount = new(int32)
+			return d.ReadInt32(schemas.TestRun_eventCount, v.EventCount)
+		case schemas.TestRun_experiments:
+			return deserializeExperimentDetailsList(d, schemas.TestRun_experiments, &v.Experiments)
+		case schemas.TestRun_loggingConfiguration:
+			v.LoggingConfiguration = &LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.TestRun_parameters:
+			return deserializeTestParameters(d, schemas.TestRun_parameters, &v.Parameters)
+		case schemas.TestRun_permissionModel:
+			v.PermissionModel = &PermissionModel{}
+			return v.PermissionModel.Deserialize(d)
+		case schemas.TestRun_policy:
+			v.Policy = &TestRunPolicySnapshot{}
+			return v.Policy.Deserialize(d)
+		case schemas.TestRun_regionSwitchExecutionId:
+			v.RegionSwitchExecutionId = new(string)
+			return d.ReadString(schemas.TestRun_regionSwitchExecutionId, v.RegionSwitchExecutionId)
+		case schemas.TestRun_regionSwitchPlanArn:
+			v.RegionSwitchPlanArn = new(string)
+			return d.ReadString(schemas.TestRun_regionSwitchPlanArn, v.RegionSwitchPlanArn)
+		case schemas.TestRun_regions:
+			return deserializeRegionList(d, schemas.TestRun_regions, &v.Regions)
+		case schemas.TestRun_reportConfiguration:
+			v.ReportConfiguration = &TestRunReportConfiguration{}
+			return v.ReportConfiguration.Deserialize(d)
+		case schemas.TestRun_reportOutput:
+			v.ReportOutput = &ReportGenerationResult{}
+			return v.ReportOutput.Deserialize(d)
+		case schemas.TestRun_roleName:
+			v.RoleName = new(string)
+			return d.ReadString(schemas.TestRun_roleName, v.RoleName)
+		case schemas.TestRun_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.TestRun_serviceArn, v.ServiceArn)
+		case schemas.TestRun_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.TestRun_startedAt, v.StartedAt)
+		case schemas.TestRun_status:
+			var ev string
+			if err := d.ReadString(schemas.TestRun_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TestRunStatus(ev)
+			return nil
+		case schemas.TestRun_stopConditions:
+			return deserializeStopConditionList(d, schemas.TestRun_stopConditions, &v.StopConditions)
+		case schemas.TestRun_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestRun_testId, v.TestId)
+		case schemas.TestRun_testRunId:
+			v.TestRunId = new(string)
+			return d.ReadString(schemas.TestRun_testRunId, v.TestRunId)
+		case schemas.TestRun_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.TestRun_testTemplateArn, v.TestTemplateArn)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a dependency that a test run blocked, as
+// captured when the run started.
+type TestRunDependencySummary struct {
+
+	// The criticality classification of the dependency when the run started. A
+	// dependency that was not discovered has the UNKNOWN criticality.
+	//
+	// This member is required.
+	Criticality DependencyCriticality
+
+	// The name of the dependency.
+	//
+	// This member is required.
+	DependencyName *string
+
+	// The DNS name of the dependency that the test run blocked.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The origin of the dependency. A discovered dependency was found by dependency
+	// discovery; a manual dependency was entered when the run started.
+	//
+	// This member is required.
+	Source TestRunDependencySource
+
+	// The unique identifier of the dependency. Absent when the dependency was entered
+	// manually and was not part of dependency discovery.
+	DependencyId *string
+
+	// The location of the dependency.
+	Location *string
+
+	// The provider of the dependency.
+	Provider *string
+
+	// The source Regions from which the dependency was detected.
+	SourceRegions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunDependencySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunDependencySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunDependencySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criticality != "" {
+		s.WriteString(schemas.TestRunDependencySummary_criticality, string(v.Criticality))
+	}
+	if v.DependencyId != nil {
+		s.WriteString(schemas.TestRunDependencySummary_dependencyId, *v.DependencyId)
+	}
+	if v.DependencyName != nil {
+		s.WriteString(schemas.TestRunDependencySummary_dependencyName, *v.DependencyName)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.TestRunDependencySummary_dnsName, *v.DnsName)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.TestRunDependencySummary_location, *v.Location)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.TestRunDependencySummary_provider, *v.Provider)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.TestRunDependencySummary_source, string(v.Source))
+	}
+	serializeRegionList(s, schemas.TestRunDependencySummary_sourceRegions, v.SourceRegions)
+}
+func (v *TestRunDependencySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunDependencySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunDependencySummary_criticality:
+			var ev string
+			if err := d.ReadString(schemas.TestRunDependencySummary_criticality, &ev); err != nil {
+				return err
+			}
+			v.Criticality = DependencyCriticality(ev)
+			return nil
+		case schemas.TestRunDependencySummary_dependencyId:
+			v.DependencyId = new(string)
+			return d.ReadString(schemas.TestRunDependencySummary_dependencyId, v.DependencyId)
+		case schemas.TestRunDependencySummary_dependencyName:
+			v.DependencyName = new(string)
+			return d.ReadString(schemas.TestRunDependencySummary_dependencyName, v.DependencyName)
+		case schemas.TestRunDependencySummary_dnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.TestRunDependencySummary_dnsName, v.DnsName)
+		case schemas.TestRunDependencySummary_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.TestRunDependencySummary_location, v.Location)
+		case schemas.TestRunDependencySummary_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.TestRunDependencySummary_provider, v.Provider)
+		case schemas.TestRunDependencySummary_source:
+			var ev string
+			if err := d.ReadString(schemas.TestRunDependencySummary_source, &ev); err != nil {
+				return err
+			}
+			v.Source = TestRunDependencySource(ev)
+			return nil
+		case schemas.TestRunDependencySummary_sourceRegions:
+			return deserializeRegionList(d, schemas.TestRunDependencySummary_sourceRegions, &v.SourceRegions)
+		}
+		return nil
+	})
+}
+
+// A single event in a test run's timeline.
+type TestRunEvent struct {
+
+	// The unique identifier of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The type of the event, such as action_started, action_completed, or
+	// rto_recovery_detected.
+	//
+	// This member is required.
+	EventType *string
+
+	// A human-readable description of what happened.
+	//
+	// This member is required.
+	Message *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// Machine-parseable key-value attributes for the event.
+	Attributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestRunEventAttributes(s, schemas.TestRunEvent_attributes, v.Attributes)
+	if v.EventId != nil {
+		s.WriteString(schemas.TestRunEvent_eventId, *v.EventId)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.TestRunEvent_eventType, *v.EventType)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TestRunEvent_message, *v.Message)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.TestRunEvent_timestamp, *v.Timestamp)
+	}
+}
+func (v *TestRunEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunEvent_attributes:
+			return deserializeTestRunEventAttributes(d, schemas.TestRunEvent_attributes, &v.Attributes)
+		case schemas.TestRunEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.TestRunEvent_eventId, v.EventId)
+		case schemas.TestRunEvent_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.TestRunEvent_eventType, v.EventType)
+		case schemas.TestRunEvent_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TestRunEvent_message, v.Message)
+		case schemas.TestRunEvent_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.TestRunEvent_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
+// Summary information about an observability alarm snapshot captured for a test
+// run.
+type TestRunObservabilityAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunObservabilityAlarmSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunObservabilityAlarmSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunObservabilityAlarmSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.TestRunObservabilityAlarmSummary_accountId, *v.AccountId)
+	}
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.TestRunObservabilityAlarmSummary_alarmArn, *v.AlarmArn)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.TestRunObservabilityAlarmSummary_alarmName, *v.AlarmName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.TestRunObservabilityAlarmSummary_region, *v.Region)
+	}
+}
+func (v *TestRunObservabilityAlarmSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunObservabilityAlarmSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunObservabilityAlarmSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.TestRunObservabilityAlarmSummary_accountId, v.AccountId)
+		case schemas.TestRunObservabilityAlarmSummary_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.TestRunObservabilityAlarmSummary_alarmArn, v.AlarmArn)
+		case schemas.TestRunObservabilityAlarmSummary_alarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.TestRunObservabilityAlarmSummary_alarmName, v.AlarmName)
+		case schemas.TestRunObservabilityAlarmSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.TestRunObservabilityAlarmSummary_region, v.Region)
+		}
+		return nil
+	})
+}
+
+// A snapshot of the resilience policy captured onto a test run from the service
+// when the run was started.
+type TestRunPolicySnapshot struct {
+
+	// The availability SLO targets.
+	AvailabilitySlo *AvailabilitySlo
+
+	// The data recovery targets.
+	DataRecovery *DataRecoveryTargets
+
+	// The multi-AZ resilience targets.
+	MultiAz *MultiAzTargets
+
+	// The multi-Region resilience targets.
+	MultiRegion *MultiRegionTargets
+
+	// The name of the policy.
+	Name *string
+
+	// The ARN of the policy.
+	PolicyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunPolicySnapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunPolicySnapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunPolicySnapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilitySlo != nil {
+		s.WriteStruct(schemas.TestRunPolicySnapshot_availabilitySlo)
+		v.AvailabilitySlo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataRecovery != nil {
+		s.WriteStruct(schemas.TestRunPolicySnapshot_dataRecovery)
+		v.DataRecovery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiAz != nil {
+		s.WriteStruct(schemas.TestRunPolicySnapshot_multiAz)
+		v.MultiAz.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegion != nil {
+		s.WriteStruct(schemas.TestRunPolicySnapshot_multiRegion)
+		v.MultiRegion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TestRunPolicySnapshot_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.TestRunPolicySnapshot_policyArn, *v.PolicyArn)
+	}
+}
+func (v *TestRunPolicySnapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunPolicySnapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunPolicySnapshot_availabilitySlo:
+			v.AvailabilitySlo = &AvailabilitySlo{}
+			return v.AvailabilitySlo.Deserialize(d)
+		case schemas.TestRunPolicySnapshot_dataRecovery:
+			v.DataRecovery = &DataRecoveryTargets{}
+			return v.DataRecovery.Deserialize(d)
+		case schemas.TestRunPolicySnapshot_multiAz:
+			v.MultiAz = &MultiAzTargets{}
+			return v.MultiAz.Deserialize(d)
+		case schemas.TestRunPolicySnapshot_multiRegion:
+			v.MultiRegion = &MultiRegionTargets{}
+			return v.MultiRegion.Deserialize(d)
+		case schemas.TestRunPolicySnapshot_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TestRunPolicySnapshot_name, v.Name)
+		case schemas.TestRunPolicySnapshot_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.TestRunPolicySnapshot_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
+
+// A snapshot of the report configuration captured onto a test run from the
+// service when the run was started.
+type TestRunReportConfiguration struct {
+
+	// The output destinations for generated reports.
+	//
+	// This member is required.
+	ReportOutput []ReportOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunReportConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunReportConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReportOutputConfigurationList(s, schemas.TestRunReportConfiguration_reportOutput, v.ReportOutput)
+}
+func (v *TestRunReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunReportConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunReportConfiguration_reportOutput:
+			return deserializeReportOutputConfigurationList(d, schemas.TestRunReportConfiguration_reportOutput, &v.ReportOutput)
+		}
+		return nil
+	})
+}
+
+// A state-change event observed for a test run monitoring source.
+type TestRunSourceEvent struct {
+
+	// The event payload.
+	//
+	// This member is required.
+	Detail TestRunSourceEventDetail
+
+	// The type of the event. ALARM indicates an event from a CloudWatch alarm source;
+	// the detail member carries either the alarm state change or a collection error.
+	//
+	// This member is required.
+	EventType TestRunSourceEventType
+
+	// The ARN of the monitoring source the event belongs to.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunSourceEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunSourceEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestRunSourceEventDetail(s, schemas.TestRunSourceEvent_detail, v.Detail)
+	if v.EventType != "" {
+		s.WriteString(schemas.TestRunSourceEvent_eventType, string(v.EventType))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.TestRunSourceEvent_sourceArn, *v.SourceArn)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.TestRunSourceEvent_timestamp, *v.Timestamp)
+	}
+}
+func (v *TestRunSourceEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunSourceEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunSourceEvent_detail:
+			return deserializeTestRunSourceEventDetail(d, schemas.TestRunSourceEvent_detail, &v.Detail)
+		case schemas.TestRunSourceEvent_eventType:
+			var ev string
+			if err := d.ReadString(schemas.TestRunSourceEvent_eventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = TestRunSourceEventType(ev)
+			return nil
+		case schemas.TestRunSourceEvent_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.TestRunSourceEvent_sourceArn, v.SourceArn)
+		case schemas.TestRunSourceEvent_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.TestRunSourceEvent_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
+// The payload of a test run source event. Exactly one member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestRunSourceEventDetailMemberAlarmStateChange
+//	TestRunSourceEventDetailMemberError
+type TestRunSourceEventDetail interface {
+	isTestRunSourceEventDetail()
+}
+
+// A CloudWatch alarm state change.
+type TestRunSourceEventDetailMemberAlarmStateChange struct {
+	Value AlarmStateChangeDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceEventDetailMemberAlarmStateChange) isTestRunSourceEventDetail() {}
+func (v *TestRunSourceEventDetailMemberAlarmStateChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceEventDetail_alarmStateChange)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestRunSourceEventDetailMemberAlarmStateChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An error that prevented event collection from the source.
+type TestRunSourceEventDetailMemberError struct {
+	Value TestRunSourceEventError
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceEventDetailMemberError) isTestRunSourceEventDetail() {}
+func (v *TestRunSourceEventDetailMemberError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceEventDetail_error)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestRunSourceEventDetailMemberError) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Describes an error that prevented event collection from a test run monitoring
+// source.
+type TestRunSourceEventError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode TestRunSourceEventErrorCode
+
+	// A human-readable description of the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunSourceEventError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceEventError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunSourceEventError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.TestRunSourceEventError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.TestRunSourceEventError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *TestRunSourceEventError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunSourceEventError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunSourceEventError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.TestRunSourceEventError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = TestRunSourceEventErrorCode(ev)
+			return nil
+		case schemas.TestRunSourceEventError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.TestRunSourceEventError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// A monitoring-source snapshot captured for a test run. Exactly one member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestRunSourceSummaryMemberObservabilityAlarm
+//	TestRunSourceSummaryMemberSuccessCriteriaAlarm
+type TestRunSourceSummary interface {
+	isTestRunSourceSummary()
+}
+
+// An observability alarm snapshot captured for the test run.
+type TestRunSourceSummaryMemberObservabilityAlarm struct {
+	Value TestRunObservabilityAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceSummaryMemberObservabilityAlarm) isTestRunSourceSummary() {}
+func (v *TestRunSourceSummaryMemberObservabilityAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceSummary_observabilityAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestRunSourceSummaryMemberObservabilityAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A success criteria alarm snapshot captured for the test run.
+type TestRunSourceSummaryMemberSuccessCriteriaAlarm struct {
+	Value TestRunSuccessCriteriaAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceSummaryMemberSuccessCriteriaAlarm) isTestRunSourceSummary() {}
+func (v *TestRunSourceSummaryMemberSuccessCriteriaAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSourceSummary_successCriteriaAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestRunSourceSummaryMemberSuccessCriteriaAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Summary information about a success criteria alarm snapshot captured for a test
+// run.
+type TestRunSuccessCriteriaAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The evaluation outcome of the source. Absent while the source has not yet been
+	// evaluated; set to the terminal outcome afterwards.
+	Outcome TestSourceOutcome
+
+	// A human-readable reason for the outcome.
+	OutcomeReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunSuccessCriteriaAlarmSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSuccessCriteriaAlarmSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunSuccessCriteriaAlarmSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_accountId, *v.AccountId)
+	}
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_alarmArn, *v.AlarmArn)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_alarmName, *v.AlarmName)
+	}
+	if v.Outcome != "" {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_outcome, string(v.Outcome))
+	}
+	if v.OutcomeReason != nil {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_outcomeReason, *v.OutcomeReason)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.TestRunSuccessCriteriaAlarmSummary_region, *v.Region)
+	}
+}
+func (v *TestRunSuccessCriteriaAlarmSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunSuccessCriteriaAlarmSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunSuccessCriteriaAlarmSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_accountId, v.AccountId)
+		case schemas.TestRunSuccessCriteriaAlarmSummary_alarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_alarmArn, v.AlarmArn)
+		case schemas.TestRunSuccessCriteriaAlarmSummary_alarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_alarmName, v.AlarmName)
+		case schemas.TestRunSuccessCriteriaAlarmSummary_outcome:
+			var ev string
+			if err := d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_outcome, &ev); err != nil {
+				return err
+			}
+			v.Outcome = TestSourceOutcome(ev)
+			return nil
+		case schemas.TestRunSuccessCriteriaAlarmSummary_outcomeReason:
+			v.OutcomeReason = new(string)
+			return d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_outcomeReason, v.OutcomeReason)
+		case schemas.TestRunSuccessCriteriaAlarmSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.TestRunSuccessCriteriaAlarmSummary_region, v.Region)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a test run.
+type TestRunSummary struct {
+
+	// The timestamp when the test run started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the test run.
+	//
+	// This member is required.
+	Status TestRunStatus
+
+	// The unique identifier of the test run.
+	//
+	// This member is required.
+	TestRunId *string
+
+	// The ARN of the test template the test run was based on.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// Indicates whether the test run targets resources in a single AWS account or
+	// across multiple accounts.
+	AccountTargeting AccountTargeting
+
+	// The timestamp when the test run ended.
+	EndedAt *time.Time
+
+	// A human-readable reason for test run failure. Only present when the status is
+	// FAILED or ERROR.
+	ErrorMessage *string
+
+	// The ARN of the service the test run belongs to.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTargeting != "" {
+		s.WriteString(schemas.TestRunSummary_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.TestRunSummary_endedAt, *v.EndedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.TestRunSummary_errorMessage, *v.ErrorMessage)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.TestRunSummary_serviceArn, *v.ServiceArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.TestRunSummary_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TestRunSummary_status, string(v.Status))
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.TestRunSummary_testRunId, *v.TestRunId)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.TestRunSummary_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+func (v *TestRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunSummary_accountTargeting:
+			var ev string
+			if err := d.ReadString(schemas.TestRunSummary_accountTargeting, &ev); err != nil {
+				return err
+			}
+			v.AccountTargeting = AccountTargeting(ev)
+			return nil
+		case schemas.TestRunSummary_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.TestRunSummary_endedAt, v.EndedAt)
+		case schemas.TestRunSummary_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.TestRunSummary_errorMessage, v.ErrorMessage)
+		case schemas.TestRunSummary_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.TestRunSummary_serviceArn, v.ServiceArn)
+		case schemas.TestRunSummary_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.TestRunSummary_startedAt, v.StartedAt)
+		case schemas.TestRunSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.TestRunSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TestRunStatus(ev)
+			return nil
+		case schemas.TestRunSummary_testRunId:
+			v.TestRunId = new(string)
+			return d.ReadString(schemas.TestRunSummary_testRunId, v.TestRunId)
+		case schemas.TestRunSummary_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.TestRunSummary_testTemplateArn, v.TestTemplateArn)
+		}
+		return nil
+	})
+}
+
+// Identifies a monitoring source to add to or remove from a test. Exactly one
+// member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestSourceInputMemberObservabilityAlarm
+//	TestSourceInputMemberSuccessCriteriaAlarm
+type TestSourceInput interface {
+	isTestSourceInput()
+}
+
+// An observability alarm included for visibility only.
+type TestSourceInputMemberObservabilityAlarm struct {
+	Value ObservabilityAlarmInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceInputMemberObservabilityAlarm) isTestSourceInput() {}
+func (v *TestSourceInputMemberObservabilityAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestSourceInput_observabilityAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestSourceInputMemberObservabilityAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A success criteria alarm that determines whether the test passes or fails.
+type TestSourceInputMemberSuccessCriteriaAlarm struct {
+	Value SuccessCriteriaAlarmInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceInputMemberSuccessCriteriaAlarm) isTestSourceInput() {}
+func (v *TestSourceInputMemberSuccessCriteriaAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestSourceInput_successCriteriaAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestSourceInputMemberSuccessCriteriaAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A configured monitoring source returned by ListTestSources. Exactly one member
+// is set.
+//
+// The following types satisfy this interface:
+//
+//	TestSourceSummaryMemberObservabilityAlarm
+//	TestSourceSummaryMemberSuccessCriteriaAlarm
+type TestSourceSummary interface {
+	isTestSourceSummary()
+}
+
+// A configured observability alarm.
+type TestSourceSummaryMemberObservabilityAlarm struct {
+	Value ObservabilityAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceSummaryMemberObservabilityAlarm) isTestSourceSummary() {}
+func (v *TestSourceSummaryMemberObservabilityAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestSourceSummary_observabilityAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestSourceSummaryMemberObservabilityAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A configured success criteria alarm.
+type TestSourceSummaryMemberSuccessCriteriaAlarm struct {
+	Value SuccessCriteriaAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceSummaryMemberSuccessCriteriaAlarm) isTestSourceSummary() {}
+func (v *TestSourceSummaryMemberSuccessCriteriaAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestSourceSummary_successCriteriaAlarm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TestSourceSummaryMemberSuccessCriteriaAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains summary information about a test.
+type TestSummary struct {
+
+	// The timestamp when the test was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The ARN of the service the test belongs to.
+	//
+	// This member is required.
+	ServiceArn *string
+
+	// The number of successful runs of the test.
+	//
+	// This member is required.
+	SuccessfulTestRuns *int32
+
+	// The unique identifier of the test.
+	//
+	// This member is required.
+	TestId *string
+
+	// The ARN of the test template the test was created from.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The total number of runs of the test.
+	//
+	// This member is required.
+	TotalTestRuns *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TestSummary_creationTime, *v.CreationTime)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.TestSummary_serviceArn, *v.ServiceArn)
+	}
+	if v.SuccessfulTestRuns != nil {
+		s.WriteInt32(schemas.TestSummary_successfulTestRuns, *v.SuccessfulTestRuns)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestSummary_testId, *v.TestId)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.TestSummary_testTemplateArn, *v.TestTemplateArn)
+	}
+	if v.TotalTestRuns != nil {
+		s.WriteInt32(schemas.TestSummary_totalTestRuns, *v.TotalTestRuns)
+	}
+}
+func (v *TestSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TestSummary_creationTime, v.CreationTime)
+		case schemas.TestSummary_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.TestSummary_serviceArn, v.ServiceArn)
+		case schemas.TestSummary_successfulTestRuns:
+			v.SuccessfulTestRuns = new(int32)
+			return d.ReadInt32(schemas.TestSummary_successfulTestRuns, v.SuccessfulTestRuns)
+		case schemas.TestSummary_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestSummary_testId, v.TestId)
+		case schemas.TestSummary_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.TestSummary_testTemplateArn, v.TestTemplateArn)
+		case schemas.TestSummary_totalTestRuns:
+			v.TotalTestRuns = new(int32)
+			return d.ReadInt32(schemas.TestSummary_totalTestRuns, v.TotalTestRuns)
+		}
+		return nil
+	})
+}
+
+// A pre-configured, AWS recommended test that defines which resilience capability
+// to validate, the fault actions it runs, and the parameters it accepts.
+type TestTemplate struct {
+
+	// The name of the test template.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the test template.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The fault actions the test template runs.
+	Actions []TestAction
+
+	// A description of the test template.
+	Description *string
+
+	// The parameters the test template accepts.
+	Parameters []TestTemplateParameter
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestActionList(s, schemas.TestTemplate_actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.TestTemplate_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TestTemplate_name, *v.Name)
+	}
+	serializeTestTemplateParameterList(s, schemas.TestTemplate_parameters, v.Parameters)
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.TestTemplate_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+func (v *TestTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestTemplate_actions:
+			return deserializeTestActionList(d, schemas.TestTemplate_actions, &v.Actions)
+		case schemas.TestTemplate_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TestTemplate_description, v.Description)
+		case schemas.TestTemplate_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TestTemplate_name, v.Name)
+		case schemas.TestTemplate_parameters:
+			return deserializeTestTemplateParameterList(d, schemas.TestTemplate_parameters, &v.Parameters)
+		case schemas.TestTemplate_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.TestTemplate_testTemplateArn, v.TestTemplateArn)
+		}
+		return nil
+	})
+}
+
+// Describes a parameter accepted by a test template.
+type TestTemplateParameter struct {
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates whether the parameter is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// The data type of the parameter.
+	//
+	// This member is required.
+	Type ParameterType
+
+	// The default value of the parameter.
+	DefaultValue *string
+
+	// A description of the parameter.
+	Description *string
+
+	// The maximum number of values the parameter accepts.
+	MaxValues *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestTemplateParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestTemplateParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestTemplateParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TestTemplateParameter_defaultValue, *v.DefaultValue)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TestTemplateParameter_description, *v.Description)
+	}
+	if v.MaxValues != nil {
+		s.WriteInt32(schemas.TestTemplateParameter_maxValues, *v.MaxValues)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TestTemplateParameter_name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.TestTemplateParameter_required, *v.Required)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TestTemplateParameter_type, string(v.Type))
+	}
+}
+func (v *TestTemplateParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestTemplateParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestTemplateParameter_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TestTemplateParameter_defaultValue, v.DefaultValue)
+		case schemas.TestTemplateParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TestTemplateParameter_description, v.Description)
+		case schemas.TestTemplateParameter_maxValues:
+			v.MaxValues = new(int32)
+			return d.ReadInt32(schemas.TestTemplateParameter_maxValues, v.MaxValues)
+		case schemas.TestTemplateParameter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TestTemplateParameter_name, v.Name)
+		case schemas.TestTemplateParameter_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.TestTemplateParameter_required, v.Required)
+		case schemas.TestTemplateParameter_type:
+			var ev string
+			if err := d.ReadString(schemas.TestTemplateParameter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ParameterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a test template.
+type TestTemplateSummary struct {
+
+	// A description of the test template.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the test template.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the test template.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestTemplateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestTemplateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.TestTemplateSummary_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TestTemplateSummary_name, *v.Name)
+	}
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.TestTemplateSummary_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+func (v *TestTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestTemplateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestTemplateSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TestTemplateSummary_description, v.Description)
+		case schemas.TestTemplateSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TestTemplateSummary_name, v.Name)
+		case schemas.TestTemplateSummary_testTemplateArn:
+			v.TestTemplateArn = new(string)
+			return d.ReadString(schemas.TestTemplateSummary_testTemplateArn, v.TestTemplateArn)
 		}
 		return nil
 	})
@@ -5826,8 +8995,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isPolicyEventMetadata()       {}
 func (*UnknownUnionMember) isReportOutput()              {}
 func (*UnknownUnionMember) isReportOutputConfiguration() {}
 func (*UnknownUnionMember) isResourceConfiguration()     {}
 func (*UnknownUnionMember) isServiceEventMetadata()      {}
 func (*UnknownUnionMember) isSystemEventMetadata()       {}
+func (*UnknownUnionMember) isTestRunSourceEventDetail()  {}
+func (*UnknownUnionMember) isTestRunSourceSummary()      {}
+func (*UnknownUnionMember) isTestSourceInput()           {}
+func (*UnknownUnionMember) isTestSourceSummary()         {}

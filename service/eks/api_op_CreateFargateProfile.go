@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Fargate profile for your Amazon EKS cluster. You must have at least
@@ -105,6 +105,30 @@ type CreateFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFargateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFargateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFargateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_clusterName, *v.ClusterName)
+	}
+	if v.FargateProfileName != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_fargateProfileName, *v.FargateProfileName)
+	}
+	if v.PodExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateFargateProfileRequest_podExecutionRoleArn, *v.PodExecutionRoleArn)
+	}
+	serializeFargateProfileSelectors(s, schemas.CreateFargateProfileRequest_selectors, v.Selectors)
+	serializeStringList(s, schemas.CreateFargateProfileRequest_subnets, v.Subnets)
+	serializeTagMap(s, schemas.CreateFargateProfileRequest_tags, v.Tags)
+}
+
 type CreateFargateProfileOutput struct {
 
 	// The full description of your new Fargate profile.
@@ -116,65 +140,44 @@ type CreateFargateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFargateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFargateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFargateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FargateProfile != nil {
+		s.WriteStruct(schemas.CreateFargateProfileResponse_fargateProfile)
+		v.FargateProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFargateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFargateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFargateProfileResponse_fargateProfile:
+			v.FargateProfile = &types.FargateProfile{}
+			return v.FargateProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFargateProfile, schemas.CreateFargateProfileRequest, schemas.CreateFargateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFargateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFargateProfile, schemas.CreateFargateProfileRequest, schemas.CreateFargateProfileResponse), output: &CreateFargateProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFargateProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFargateProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -184,12 +187,6 @@ func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateFargateProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFargateProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,12 +199,6 @@ func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,12 +238,4 @@ func (m *idempotencyToken_initializeOpCreateFargateProfile) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateFargateProfileMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFargateProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFargateProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFargateProfile",
-	}
 }

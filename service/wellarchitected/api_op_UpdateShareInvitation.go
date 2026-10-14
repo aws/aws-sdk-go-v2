@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update a workload or custom lens share invitation.
@@ -46,6 +45,21 @@ type UpdateShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShareInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShareInvitationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShareInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareInvitationAction != "" {
+		s.WriteString(schemas.UpdateShareInvitationInput_ShareInvitationAction, string(v.ShareInvitationAction))
+	}
+	if v.ShareInvitationId != nil {
+		s.WriteString(schemas.UpdateShareInvitationInput_ShareInvitationId, *v.ShareInvitationId)
+	}
+}
+
 type UpdateShareInvitationOutput struct {
 
 	// The updated workload or custom lens share invitation.
@@ -57,77 +71,50 @@ type UpdateShareInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShareInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShareInvitationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShareInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareInvitation != nil {
+		s.WriteStruct(schemas.UpdateShareInvitationOutput_ShareInvitation)
+		v.ShareInvitation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateShareInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateShareInvitationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateShareInvitationOutput_ShareInvitation:
+			v.ShareInvitation = &types.ShareInvitation{}
+			return v.ShareInvitation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShareInvitation, schemas.UpdateShareInvitationInput, schemas.UpdateShareInvitationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShareInvitation, schemas.UpdateShareInvitationInput, schemas.UpdateShareInvitationOutput), output: &UpdateShareInvitationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateShareInvitation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateShareInvitation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateShareInvitationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateShareInvitation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +129,8 @@ func (c *Client) addOperationUpdateShareInvitationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateShareInvitation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateShareInvitation",
-	}
 }

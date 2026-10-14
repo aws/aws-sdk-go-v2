@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/deployments/__DeploymentId__?embed=__Member__&embed=__Member__
+
+Accept: application/json
+

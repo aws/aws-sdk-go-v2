@@ -80,6 +80,23 @@ func (AuthType) Values() []AuthType {
 	}
 }
 
+type BlueprintCategory string
+
+// Enum values for BlueprintCategory
+const (
+	BlueprintCategoryTooling BlueprintCategory = "TOOLING"
+)
+
+// Values returns all known values for BlueprintCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintCategory) Values() []BlueprintCategory {
+	return []BlueprintCategory{
+		"TOOLING",
+	}
+}
+
 type ChangeAction string
 
 // Enum values for ChangeAction
@@ -236,6 +253,8 @@ const (
 	ConnectionTypeAmazonQ       ConnectionType = "AMAZON_Q"
 	ConnectionTypeMlflow        ConnectionType = "MLFLOW"
 	ConnectionTypeVpc           ConnectionType = "VPC"
+	// A Git connection type.
+	ConnectionTypeGit ConnectionType = "GIT"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -267,6 +286,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"AMAZON_Q",
 		"MLFLOW",
 		"VPC",
+		"GIT",
 	}
 }
 
@@ -1353,6 +1373,10 @@ const (
 	NotebookStatusActive NotebookStatus = "ACTIVE"
 	// The notebook is archived.
 	NotebookStatusArchived NotebookStatus = "ARCHIVED"
+	// The notebook sync is in progress.
+	NotebookStatusSyncInProgress NotebookStatus = "SYNC_IN_PROGRESS"
+	// The notebook sync failed.
+	NotebookStatusSyncFailed NotebookStatus = "SYNC_FAILED"
 )
 
 // Values returns all known values for NotebookStatus. Note that this can be
@@ -1363,6 +1387,29 @@ func (NotebookStatus) Values() []NotebookStatus {
 	return []NotebookStatus{
 		"ACTIVE",
 		"ARCHIVED",
+		"SYNC_IN_PROGRESS",
+		"SYNC_FAILED",
+	}
+}
+
+type NotebookType string
+
+// Enum values for NotebookType
+const (
+	// A data notebook.
+	NotebookTypeData NotebookType = "DATA"
+	// A SQL notebook.
+	NotebookTypeSql NotebookType = "SQL"
+)
+
+// Values returns all known values for NotebookType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookType) Values() []NotebookType {
+	return []NotebookType{
+		"DATA",
+		"SQL",
 	}
 }
 
@@ -1424,6 +1471,42 @@ func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"TASK",
 		"EVENT",
+	}
+}
+
+type NotifyOnState string
+
+// Enum values for NotifyOnState
+const (
+	// Notify when the notebook run succeeds.
+	NotifyOnStateSucceeded NotifyOnState = "SUCCEEDED"
+	// Notify when the notebook run fails.
+	NotifyOnStateFailed NotifyOnState = "FAILED"
+	// Notify when the notebook run is stopped.
+	NotifyOnStateStopped NotifyOnState = "STOPPED"
+	// Notify when the notebook run is queued.
+	NotifyOnStateQueued NotifyOnState = "QUEUED"
+	// Notify when the notebook run is starting.
+	NotifyOnStateStarting NotifyOnState = "STARTING"
+	// Notify when the notebook run is running.
+	NotifyOnStateRunning NotifyOnState = "RUNNING"
+	// Notify when the notebook run is stopping.
+	NotifyOnStateStopping NotifyOnState = "STOPPING"
+)
+
+// Values returns all known values for NotifyOnState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyOnState) Values() []NotifyOnState {
+	return []NotifyOnState{
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+		"QUEUED",
+		"STARTING",
+		"RUNNING",
+		"STOPPING",
 	}
 }
 

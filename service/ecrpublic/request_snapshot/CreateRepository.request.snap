@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SpencerFrontendService.CreateRepository
+
+{"catalogData":{"aboutText":"__AboutText__","architectures":["__Member__","__Member__"],"description":"__Description__","logoImageBlob":"YmxvYg==","operatingSystems":["__Member__","__Member__"],"usageText":"__UsageText__"},"repositoryName":"__RepositoryName__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

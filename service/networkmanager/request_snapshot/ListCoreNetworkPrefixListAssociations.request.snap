@@ -1,0 +1,3 @@
+GET /prefix-list/core-network/__CoreNetworkId__?maxResults=1&nextToken=__NextToken__&prefixListArn=__PrefixListArn__
+
+

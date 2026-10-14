@@ -333,6 +333,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAssociateClientDeviceWithCoreDeviceEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AssociateClientDeviceWithCoreDeviceEntry) error {
+	*v = make([]AssociateClientDeviceWithCoreDeviceEntry, 0)
 	var vv AssociateClientDeviceWithCoreDeviceEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = AssociateClientDeviceWithCoreDeviceEntry{}
@@ -346,6 +347,7 @@ func deserializeAssociateClientDeviceWithCoreDeviceEntryList(d smithy.ShapeDeser
 }
 
 func deserializeAssociateClientDeviceWithCoreDeviceErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AssociateClientDeviceWithCoreDeviceErrorEntry) error {
+	*v = make([]AssociateClientDeviceWithCoreDeviceErrorEntry, 0)
 	var vv AssociateClientDeviceWithCoreDeviceErrorEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = AssociateClientDeviceWithCoreDeviceErrorEntry{}
@@ -359,6 +361,7 @@ func deserializeAssociateClientDeviceWithCoreDeviceErrorList(d smithy.ShapeDeser
 }
 
 func deserializeAssociatedClientDeviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AssociatedClientDevice) error {
+	*v = make([]AssociatedClientDevice, 0)
 	var vv AssociatedClientDevice
 	return smithy.ReadList(d, s, func() error {
 		vv = AssociatedClientDevice{}
@@ -372,6 +375,7 @@ func deserializeAssociatedClientDeviceList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeComponentCandidateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ComponentCandidate) error {
+	*v = make([]ComponentCandidate, 0)
 	var vv ComponentCandidate
 	return smithy.ReadList(d, s, func() error {
 		vv = ComponentCandidate{}
@@ -385,6 +389,7 @@ func deserializeComponentCandidateList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeComponentConfigurationPathList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -398,6 +403,7 @@ func deserializeComponentConfigurationPathList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeComponentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Component) error {
+	*v = make([]Component, 0)
 	var vv Component
 	return smithy.ReadList(d, s, func() error {
 		vv = Component{}
@@ -411,6 +417,7 @@ func deserializeComponentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeComponentPlatformList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ComponentPlatform) error {
+	*v = make([]ComponentPlatform, 0)
 	var vv ComponentPlatform
 	return smithy.ReadList(d, s, func() error {
 		vv = ComponentPlatform{}
@@ -424,6 +431,7 @@ func deserializeComponentPlatformList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeComponentVersionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ComponentVersionListItem) error {
+	*v = make([]ComponentVersionListItem, 0)
 	var vv ComponentVersionListItem
 	return smithy.ReadList(d, s, func() error {
 		vv = ComponentVersionListItem{}
@@ -437,6 +445,7 @@ func deserializeComponentVersionList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeconnectivityInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConnectivityInfo) error {
+	*v = make([]ConnectivityInfo, 0)
 	var vv ConnectivityInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = ConnectivityInfo{}
@@ -450,6 +459,7 @@ func deserializeconnectivityInfoList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCoreDevicesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CoreDevice) error {
+	*v = make([]CoreDevice, 0)
 	var vv CoreDevice
 	return smithy.ReadList(d, s, func() error {
 		vv = CoreDevice{}
@@ -463,6 +473,7 @@ func deserializeCoreDevicesList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeDeploymentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Deployment) error {
+	*v = make([]Deployment, 0)
 	var vv Deployment
 	return smithy.ReadList(d, s, func() error {
 		vv = Deployment{}
@@ -476,6 +487,7 @@ func deserializeDeploymentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeDisassociateClientDeviceFromCoreDeviceEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DisassociateClientDeviceFromCoreDeviceEntry) error {
+	*v = make([]DisassociateClientDeviceFromCoreDeviceEntry, 0)
 	var vv DisassociateClientDeviceFromCoreDeviceEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = DisassociateClientDeviceFromCoreDeviceEntry{}
@@ -489,6 +501,7 @@ func deserializeDisassociateClientDeviceFromCoreDeviceEntryList(d smithy.ShapeDe
 }
 
 func deserializeDisassociateClientDeviceFromCoreDeviceErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DisassociateClientDeviceFromCoreDeviceErrorEntry) error {
+	*v = make([]DisassociateClientDeviceFromCoreDeviceErrorEntry, 0)
 	var vv DisassociateClientDeviceFromCoreDeviceErrorEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = DisassociateClientDeviceFromCoreDeviceErrorEntry{}
@@ -502,6 +515,7 @@ func deserializeDisassociateClientDeviceFromCoreDeviceErrorList(d smithy.ShapeDe
 }
 
 func deserializeEffectiveDeploymentErrorStack(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -515,6 +529,7 @@ func deserializeEffectiveDeploymentErrorStack(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeEffectiveDeploymentErrorTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -528,6 +543,7 @@ func deserializeEffectiveDeploymentErrorTypeList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeEffectiveDeploymentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EffectiveDeployment) error {
+	*v = make([]EffectiveDeployment, 0)
 	var vv EffectiveDeployment
 	return smithy.ReadList(d, s, func() error {
 		vv = EffectiveDeployment{}
@@ -541,6 +557,7 @@ func deserializeEffectiveDeploymentsList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeInstalledComponentLifecycleStatusCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -554,6 +571,7 @@ func deserializeInstalledComponentLifecycleStatusCodeList(d smithy.ShapeDeserial
 }
 
 func deserializeInstalledComponentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InstalledComponent) error {
+	*v = make([]InstalledComponent, 0)
 	var vv InstalledComponent
 	return smithy.ReadList(d, s, func() error {
 		vv = InstalledComponent{}
@@ -567,6 +585,7 @@ func deserializeInstalledComponentList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeIoTJobAbortCriteriaList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IoTJobAbortCriteria) error {
+	*v = make([]IoTJobAbortCriteria, 0)
 	var vv IoTJobAbortCriteria
 	return smithy.ReadList(d, s, func() error {
 		vv = IoTJobAbortCriteria{}
@@ -580,6 +599,7 @@ func deserializeIoTJobAbortCriteriaList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeLambdaDeviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LambdaDeviceMount) error {
+	*v = make([]LambdaDeviceMount, 0)
 	var vv LambdaDeviceMount
 	return smithy.ReadList(d, s, func() error {
 		vv = LambdaDeviceMount{}
@@ -593,6 +613,7 @@ func deserializeLambdaDeviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeLambdaEventSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LambdaEventSource) error {
+	*v = make([]LambdaEventSource, 0)
 	var vv LambdaEventSource
 	return smithy.ReadList(d, s, func() error {
 		vv = LambdaEventSource{}
@@ -606,6 +627,7 @@ func deserializeLambdaEventSourceList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeLambdaExecArgsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -619,6 +641,7 @@ func deserializeLambdaExecArgsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeLambdaVolumeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LambdaVolumeMount) error {
+	*v = make([]LambdaVolumeMount, 0)
 	var vv LambdaVolumeMount
 	return smithy.ReadList(d, s, func() error {
 		vv = LambdaVolumeMount{}
@@ -632,6 +655,7 @@ func deserializeLambdaVolumeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeResolvedComponentVersionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResolvedComponentVersion) error {
+	*v = make([]ResolvedComponentVersion, 0)
 	var vv ResolvedComponentVersion
 	return smithy.ReadList(d, s, func() error {
 		vv = ResolvedComponentVersion{}
@@ -645,6 +669,7 @@ func deserializeResolvedComponentVersionsList(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -658,6 +683,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -762,6 +788,14 @@ func deserializeComponentDependencyMap(d smithy.ShapeDeserializer, s *smithy.Sch
 	*v = make(map[string]ComponentDependencyRequirement)
 	var vv ComponentDependencyRequirement
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ComponentDependencyRequirement
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ComponentDependencyRequirement{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -776,6 +810,14 @@ func deserializeComponentDeploymentSpecifications(d smithy.ShapeDeserializer, s 
 	*v = make(map[string]ComponentDeploymentSpecification)
 	var vv ComponentDeploymentSpecification
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ComponentDeploymentSpecification
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ComponentDeploymentSpecification{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -790,6 +832,13 @@ func deserializeComponentVersionRequirementMap(d smithy.ShapeDeserializer, s *sm
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -804,6 +853,13 @@ func deserializeLambdaEnvironmentVariables(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -818,6 +874,13 @@ func deserializePlatformAttributesMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -832,6 +895,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -846,6 +916,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

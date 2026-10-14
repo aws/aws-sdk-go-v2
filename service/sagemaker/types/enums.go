@@ -221,6 +221,12 @@ const (
 	AIRecommendationInstanceTypeMlG6e16xlarge    AIRecommendationInstanceType = "ml.g6e.16xlarge"
 	AIRecommendationInstanceTypeMlG6e24xlarge    AIRecommendationInstanceType = "ml.g6e.24xlarge"
 	AIRecommendationInstanceTypeMlG6e48xlarge    AIRecommendationInstanceType = "ml.g6e.48xlarge"
+	AIRecommendationInstanceTypeMlG72xlarge      AIRecommendationInstanceType = "ml.g7.2xlarge"
+	AIRecommendationInstanceTypeMlG74xlarge      AIRecommendationInstanceType = "ml.g7.4xlarge"
+	AIRecommendationInstanceTypeMlG78xlarge      AIRecommendationInstanceType = "ml.g7.8xlarge"
+	AIRecommendationInstanceTypeMlG712xlarge     AIRecommendationInstanceType = "ml.g7.12xlarge"
+	AIRecommendationInstanceTypeMlG724xlarge     AIRecommendationInstanceType = "ml.g7.24xlarge"
+	AIRecommendationInstanceTypeMlG748xlarge     AIRecommendationInstanceType = "ml.g7.48xlarge"
 	AIRecommendationInstanceTypeMlG7e2xlarge     AIRecommendationInstanceType = "ml.g7e.2xlarge"
 	AIRecommendationInstanceTypeMlG7e4xlarge     AIRecommendationInstanceType = "ml.g7e.4xlarge"
 	AIRecommendationInstanceTypeMlG7e8xlarge     AIRecommendationInstanceType = "ml.g7e.8xlarge"
@@ -270,6 +276,12 @@ func (AIRecommendationInstanceType) Values() []AIRecommendationInstanceType {
 		"ml.g6e.16xlarge",
 		"ml.g6e.24xlarge",
 		"ml.g6e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 		"ml.g7e.2xlarge",
 		"ml.g7e.4xlarge",
 		"ml.g7e.8xlarge",
@@ -588,6 +600,18 @@ const (
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
 	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
+	AppInstanceTypeMlG72xlarge             AppInstanceType = "ml.g7.2xlarge"
+	AppInstanceTypeMlG74xlarge             AppInstanceType = "ml.g7.4xlarge"
+	AppInstanceTypeMlG78xlarge             AppInstanceType = "ml.g7.8xlarge"
+	AppInstanceTypeMlG712xlarge            AppInstanceType = "ml.g7.12xlarge"
+	AppInstanceTypeMlG724xlarge            AppInstanceType = "ml.g7.24xlarge"
+	AppInstanceTypeMlG748xlarge            AppInstanceType = "ml.g7.48xlarge"
+	AppInstanceTypeMlG7e2xlarge            AppInstanceType = "ml.g7e.2xlarge"
+	AppInstanceTypeMlG7e4xlarge            AppInstanceType = "ml.g7e.4xlarge"
+	AppInstanceTypeMlG7e8xlarge            AppInstanceType = "ml.g7e.8xlarge"
+	AppInstanceTypeMlG7e12xlarge           AppInstanceType = "ml.g7e.12xlarge"
+	AppInstanceTypeMlG7e24xlarge           AppInstanceType = "ml.g7e.24xlarge"
+	AppInstanceTypeMlG7e48xlarge           AppInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -760,6 +784,18 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
 		"ml.p5.4xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 
@@ -1978,6 +2014,25 @@ func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
 	}
 }
 
+type CleanupFailureErrorCode string
+
+// Enum values for CleanupFailureErrorCode
+const (
+	CleanupFailureErrorCodeClientError     CleanupFailureErrorCode = "ClientError"
+	CleanupFailureErrorCodeInternalFailure CleanupFailureErrorCode = "InternalFailure"
+)
+
+// Values returns all known values for CleanupFailureErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CleanupFailureErrorCode) Values() []CleanupFailureErrorCode {
+	return []CleanupFailureErrorCode{
+		"ClientError",
+		"InternalFailure",
+	}
+}
+
 type ClusterAutoScalerType string
 
 // Enum values for ClusterAutoScalerType
@@ -2141,8 +2196,10 @@ type ClusterImageVersionStatus string
 
 // Enum values for ClusterImageVersionStatus
 const (
-	ClusterImageVersionStatusUpToDate        ClusterImageVersionStatus = "UpToDate"
-	ClusterImageVersionStatusUpdateAvailable ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusUpToDate               ClusterImageVersionStatus = "UpToDate"
+	ClusterImageVersionStatusUpdateAvailable        ClusterImageVersionStatus = "UpdateAvailable"
+	ClusterImageVersionStatusSecurityUpdateRequired ClusterImageVersionStatus = "SecurityUpdateRequired"
+	ClusterImageVersionStatusEndOfLife              ClusterImageVersionStatus = "EndOfLife"
 )
 
 // Values returns all known values for ClusterImageVersionStatus. Note that this
@@ -2153,6 +2210,8 @@ func (ClusterImageVersionStatus) Values() []ClusterImageVersionStatus {
 	return []ClusterImageVersionStatus{
 		"UpToDate",
 		"UpdateAvailable",
+		"SecurityUpdateRequired",
+		"EndOfLife",
 	}
 }
 
@@ -2312,6 +2371,92 @@ const (
 	ClusterInstanceTypeMlG7e24xlarge      ClusterInstanceType = "ml.g7e.24xlarge"
 	ClusterInstanceTypeMlG7e48xlarge      ClusterInstanceType = "ml.g7e.48xlarge"
 	ClusterInstanceTypeMlP6B30048xlarge   ClusterInstanceType = "ml.p6-b300.48xlarge"
+	ClusterInstanceTypeMlG4dnXlarge       ClusterInstanceType = "ml.g4dn.xlarge"
+	ClusterInstanceTypeMlG4dn2xlarge      ClusterInstanceType = "ml.g4dn.2xlarge"
+	ClusterInstanceTypeMlG4dn4xlarge      ClusterInstanceType = "ml.g4dn.4xlarge"
+	ClusterInstanceTypeMlG4dn8xlarge      ClusterInstanceType = "ml.g4dn.8xlarge"
+	ClusterInstanceTypeMlG4dn12xlarge     ClusterInstanceType = "ml.g4dn.12xlarge"
+	ClusterInstanceTypeMlG4dn16xlarge     ClusterInstanceType = "ml.g4dn.16xlarge"
+	ClusterInstanceTypeMlC6gMedium        ClusterInstanceType = "ml.c6g.medium"
+	ClusterInstanceTypeMlC6gLarge         ClusterInstanceType = "ml.c6g.large"
+	ClusterInstanceTypeMlC6gXlarge        ClusterInstanceType = "ml.c6g.xlarge"
+	ClusterInstanceTypeMlC6g2xlarge       ClusterInstanceType = "ml.c6g.2xlarge"
+	ClusterInstanceTypeMlC6g4xlarge       ClusterInstanceType = "ml.c6g.4xlarge"
+	ClusterInstanceTypeMlC6g8xlarge       ClusterInstanceType = "ml.c6g.8xlarge"
+	ClusterInstanceTypeMlC6g12xlarge      ClusterInstanceType = "ml.c6g.12xlarge"
+	ClusterInstanceTypeMlC6g16xlarge      ClusterInstanceType = "ml.c6g.16xlarge"
+	ClusterInstanceTypeMlC7gMedium        ClusterInstanceType = "ml.c7g.medium"
+	ClusterInstanceTypeMlC7gLarge         ClusterInstanceType = "ml.c7g.large"
+	ClusterInstanceTypeMlC7gXlarge        ClusterInstanceType = "ml.c7g.xlarge"
+	ClusterInstanceTypeMlC7g2xlarge       ClusterInstanceType = "ml.c7g.2xlarge"
+	ClusterInstanceTypeMlC7g4xlarge       ClusterInstanceType = "ml.c7g.4xlarge"
+	ClusterInstanceTypeMlC7g8xlarge       ClusterInstanceType = "ml.c7g.8xlarge"
+	ClusterInstanceTypeMlC7g12xlarge      ClusterInstanceType = "ml.c7g.12xlarge"
+	ClusterInstanceTypeMlC7g16xlarge      ClusterInstanceType = "ml.c7g.16xlarge"
+	ClusterInstanceTypeMlC8gMedium        ClusterInstanceType = "ml.c8g.medium"
+	ClusterInstanceTypeMlC8gLarge         ClusterInstanceType = "ml.c8g.large"
+	ClusterInstanceTypeMlC8gXlarge        ClusterInstanceType = "ml.c8g.xlarge"
+	ClusterInstanceTypeMlC8g2xlarge       ClusterInstanceType = "ml.c8g.2xlarge"
+	ClusterInstanceTypeMlC8g4xlarge       ClusterInstanceType = "ml.c8g.4xlarge"
+	ClusterInstanceTypeMlC8g8xlarge       ClusterInstanceType = "ml.c8g.8xlarge"
+	ClusterInstanceTypeMlC8g12xlarge      ClusterInstanceType = "ml.c8g.12xlarge"
+	ClusterInstanceTypeMlC8g16xlarge      ClusterInstanceType = "ml.c8g.16xlarge"
+	ClusterInstanceTypeMlC8g24xlarge      ClusterInstanceType = "ml.c8g.24xlarge"
+	ClusterInstanceTypeMlC8g48xlarge      ClusterInstanceType = "ml.c8g.48xlarge"
+	ClusterInstanceTypeMlC6aLarge         ClusterInstanceType = "ml.c6a.large"
+	ClusterInstanceTypeMlC6aXlarge        ClusterInstanceType = "ml.c6a.xlarge"
+	ClusterInstanceTypeMlC6a2xlarge       ClusterInstanceType = "ml.c6a.2xlarge"
+	ClusterInstanceTypeMlC6a4xlarge       ClusterInstanceType = "ml.c6a.4xlarge"
+	ClusterInstanceTypeMlC6a8xlarge       ClusterInstanceType = "ml.c6a.8xlarge"
+	ClusterInstanceTypeMlC6a12xlarge      ClusterInstanceType = "ml.c6a.12xlarge"
+	ClusterInstanceTypeMlC6a16xlarge      ClusterInstanceType = "ml.c6a.16xlarge"
+	ClusterInstanceTypeMlC6a24xlarge      ClusterInstanceType = "ml.c6a.24xlarge"
+	ClusterInstanceTypeMlC6a32xlarge      ClusterInstanceType = "ml.c6a.32xlarge"
+	ClusterInstanceTypeMlC6a48xlarge      ClusterInstanceType = "ml.c6a.48xlarge"
+	ClusterInstanceTypeMlM6aLarge         ClusterInstanceType = "ml.m6a.large"
+	ClusterInstanceTypeMlM6aXlarge        ClusterInstanceType = "ml.m6a.xlarge"
+	ClusterInstanceTypeMlM6a2xlarge       ClusterInstanceType = "ml.m6a.2xlarge"
+	ClusterInstanceTypeMlM6a4xlarge       ClusterInstanceType = "ml.m6a.4xlarge"
+	ClusterInstanceTypeMlM6a8xlarge       ClusterInstanceType = "ml.m6a.8xlarge"
+	ClusterInstanceTypeMlM6a12xlarge      ClusterInstanceType = "ml.m6a.12xlarge"
+	ClusterInstanceTypeMlM6a16xlarge      ClusterInstanceType = "ml.m6a.16xlarge"
+	ClusterInstanceTypeMlM6a24xlarge      ClusterInstanceType = "ml.m6a.24xlarge"
+	ClusterInstanceTypeMlM6a32xlarge      ClusterInstanceType = "ml.m6a.32xlarge"
+	ClusterInstanceTypeMlM6a48xlarge      ClusterInstanceType = "ml.m6a.48xlarge"
+	ClusterInstanceTypeMlM6gMedium        ClusterInstanceType = "ml.m6g.medium"
+	ClusterInstanceTypeMlM6gLarge         ClusterInstanceType = "ml.m6g.large"
+	ClusterInstanceTypeMlM6gXlarge        ClusterInstanceType = "ml.m6g.xlarge"
+	ClusterInstanceTypeMlM6g2xlarge       ClusterInstanceType = "ml.m6g.2xlarge"
+	ClusterInstanceTypeMlM6g4xlarge       ClusterInstanceType = "ml.m6g.4xlarge"
+	ClusterInstanceTypeMlM6g8xlarge       ClusterInstanceType = "ml.m6g.8xlarge"
+	ClusterInstanceTypeMlM6g12xlarge      ClusterInstanceType = "ml.m6g.12xlarge"
+	ClusterInstanceTypeMlM6g16xlarge      ClusterInstanceType = "ml.m6g.16xlarge"
+	ClusterInstanceTypeMlM7gMedium        ClusterInstanceType = "ml.m7g.medium"
+	ClusterInstanceTypeMlM7gLarge         ClusterInstanceType = "ml.m7g.large"
+	ClusterInstanceTypeMlM7gXlarge        ClusterInstanceType = "ml.m7g.xlarge"
+	ClusterInstanceTypeMlM7g2xlarge       ClusterInstanceType = "ml.m7g.2xlarge"
+	ClusterInstanceTypeMlM7g4xlarge       ClusterInstanceType = "ml.m7g.4xlarge"
+	ClusterInstanceTypeMlM7g8xlarge       ClusterInstanceType = "ml.m7g.8xlarge"
+	ClusterInstanceTypeMlM7g12xlarge      ClusterInstanceType = "ml.m7g.12xlarge"
+	ClusterInstanceTypeMlM7g16xlarge      ClusterInstanceType = "ml.m7g.16xlarge"
+	ClusterInstanceTypeMlM8gMedium        ClusterInstanceType = "ml.m8g.medium"
+	ClusterInstanceTypeMlM8gLarge         ClusterInstanceType = "ml.m8g.large"
+	ClusterInstanceTypeMlM8gXlarge        ClusterInstanceType = "ml.m8g.xlarge"
+	ClusterInstanceTypeMlM8g2xlarge       ClusterInstanceType = "ml.m8g.2xlarge"
+	ClusterInstanceTypeMlM8g4xlarge       ClusterInstanceType = "ml.m8g.4xlarge"
+	ClusterInstanceTypeMlM8g8xlarge       ClusterInstanceType = "ml.m8g.8xlarge"
+	ClusterInstanceTypeMlM8g12xlarge      ClusterInstanceType = "ml.m8g.12xlarge"
+	ClusterInstanceTypeMlM8g16xlarge      ClusterInstanceType = "ml.m8g.16xlarge"
+	ClusterInstanceTypeMlM8g24xlarge      ClusterInstanceType = "ml.m8g.24xlarge"
+	ClusterInstanceTypeMlM8g48xlarge      ClusterInstanceType = "ml.m8g.48xlarge"
+	ClusterInstanceTypeMlG72xlarge        ClusterInstanceType = "ml.g7.2xlarge"
+	ClusterInstanceTypeMlG74xlarge        ClusterInstanceType = "ml.g7.4xlarge"
+	ClusterInstanceTypeMlG78xlarge        ClusterInstanceType = "ml.g7.8xlarge"
+	ClusterInstanceTypeMlG712xlarge       ClusterInstanceType = "ml.g7.12xlarge"
+	ClusterInstanceTypeMlG724xlarge       ClusterInstanceType = "ml.g7.24xlarge"
+	ClusterInstanceTypeMlG748xlarge       ClusterInstanceType = "ml.g7.48xlarge"
+	ClusterInstanceTypeMlC8a16xlarge      ClusterInstanceType = "ml.c8a.16xlarge"
+	ClusterInstanceTypeMlM8a16xlarge      ClusterInstanceType = "ml.m8a.16xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -2443,6 +2588,92 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
 		"ml.p6-b300.48xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
+		"ml.c6g.medium",
+		"ml.c6g.large",
+		"ml.c6g.xlarge",
+		"ml.c6g.2xlarge",
+		"ml.c6g.4xlarge",
+		"ml.c6g.8xlarge",
+		"ml.c6g.12xlarge",
+		"ml.c6g.16xlarge",
+		"ml.c7g.medium",
+		"ml.c7g.large",
+		"ml.c7g.xlarge",
+		"ml.c7g.2xlarge",
+		"ml.c7g.4xlarge",
+		"ml.c7g.8xlarge",
+		"ml.c7g.12xlarge",
+		"ml.c7g.16xlarge",
+		"ml.c8g.medium",
+		"ml.c8g.large",
+		"ml.c8g.xlarge",
+		"ml.c8g.2xlarge",
+		"ml.c8g.4xlarge",
+		"ml.c8g.8xlarge",
+		"ml.c8g.12xlarge",
+		"ml.c8g.16xlarge",
+		"ml.c8g.24xlarge",
+		"ml.c8g.48xlarge",
+		"ml.c6a.large",
+		"ml.c6a.xlarge",
+		"ml.c6a.2xlarge",
+		"ml.c6a.4xlarge",
+		"ml.c6a.8xlarge",
+		"ml.c6a.12xlarge",
+		"ml.c6a.16xlarge",
+		"ml.c6a.24xlarge",
+		"ml.c6a.32xlarge",
+		"ml.c6a.48xlarge",
+		"ml.m6a.large",
+		"ml.m6a.xlarge",
+		"ml.m6a.2xlarge",
+		"ml.m6a.4xlarge",
+		"ml.m6a.8xlarge",
+		"ml.m6a.12xlarge",
+		"ml.m6a.16xlarge",
+		"ml.m6a.24xlarge",
+		"ml.m6a.32xlarge",
+		"ml.m6a.48xlarge",
+		"ml.m6g.medium",
+		"ml.m6g.large",
+		"ml.m6g.xlarge",
+		"ml.m6g.2xlarge",
+		"ml.m6g.4xlarge",
+		"ml.m6g.8xlarge",
+		"ml.m6g.12xlarge",
+		"ml.m6g.16xlarge",
+		"ml.m7g.medium",
+		"ml.m7g.large",
+		"ml.m7g.xlarge",
+		"ml.m7g.2xlarge",
+		"ml.m7g.4xlarge",
+		"ml.m7g.8xlarge",
+		"ml.m7g.12xlarge",
+		"ml.m7g.16xlarge",
+		"ml.m8g.medium",
+		"ml.m8g.large",
+		"ml.m8g.xlarge",
+		"ml.m8g.2xlarge",
+		"ml.m8g.4xlarge",
+		"ml.m8g.8xlarge",
+		"ml.m8g.12xlarge",
+		"ml.m8g.16xlarge",
+		"ml.m8g.24xlarge",
+		"ml.m8g.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
+		"ml.c8a.16xlarge",
+		"ml.m8a.16xlarge",
 	}
 }
 
@@ -2520,6 +2751,25 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	return []ClusterNodeRecovery{
 		"Automatic",
 		"None",
+	}
+}
+
+type ClusterPatchingStrategy string
+
+// Enum values for ClusterPatchingStrategy
+const (
+	ClusterPatchingStrategyWhenIdle    ClusterPatchingStrategy = "WhenIdle"
+	ClusterPatchingStrategyWhenAllIdle ClusterPatchingStrategy = "WhenAllIdle"
+)
+
+// Values returns all known values for ClusterPatchingStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterPatchingStrategy) Values() []ClusterPatchingStrategy {
+	return []ClusterPatchingStrategy{
+		"WhenIdle",
+		"WhenAllIdle",
 	}
 }
 
@@ -2835,6 +3085,28 @@ func (CustomizationTechnique) Values() []CustomizationTechnique {
 		"DPO",
 		"RLVR",
 		"RLAIF",
+	}
+}
+
+type DatabaseConfigurationRollbackStatus string
+
+// Enum values for DatabaseConfigurationRollbackStatus
+const (
+	DatabaseConfigurationRollbackStatusNotApplicable DatabaseConfigurationRollbackStatus = "NotApplicable"
+	DatabaseConfigurationRollbackStatusReverted      DatabaseConfigurationRollbackStatus = "Reverted"
+	DatabaseConfigurationRollbackStatusRevertFailed  DatabaseConfigurationRollbackStatus = "RevertFailed"
+)
+
+// Values returns all known values for DatabaseConfigurationRollbackStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseConfigurationRollbackStatus) Values() []DatabaseConfigurationRollbackStatus {
+	return []DatabaseConfigurationRollbackStatus{
+		"NotApplicable",
+		"Reverted",
+		"RevertFailed",
 	}
 }
 
@@ -3572,6 +3844,27 @@ func (FlowDefinitionStatus) Values() []FlowDefinitionStatus {
 		"Active",
 		"Failed",
 		"Deleting",
+	}
+}
+
+type ForEachStatus string
+
+// Enum values for ForEachStatus
+const (
+	ForEachStatusSucceeded ForEachStatus = "Succeeded"
+	ForEachStatusFailed    ForEachStatus = "Failed"
+	ForEachStatusStopped   ForEachStatus = "Stopped"
+)
+
+// Values returns all known values for ForEachStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ForEachStatus) Values() []ForEachStatus {
+	return []ForEachStatus{
+		"Succeeded",
+		"Failed",
+		"Stopped",
 	}
 }
 
@@ -4521,8 +4814,22 @@ const (
 	InstanceTypeMlG616xlarge     InstanceType = "ml.g6.16xlarge"
 	InstanceTypeMlG624xlarge     InstanceType = "ml.g6.24xlarge"
 	InstanceTypeMlG648xlarge     InstanceType = "ml.g6.48xlarge"
+	InstanceTypeMlG7e2xlarge     InstanceType = "ml.g7e.2xlarge"
+	InstanceTypeMlG7e4xlarge     InstanceType = "ml.g7e.4xlarge"
+	InstanceTypeMlG7e8xlarge     InstanceType = "ml.g7e.8xlarge"
+	InstanceTypeMlG7e12xlarge    InstanceType = "ml.g7e.12xlarge"
+	InstanceTypeMlG7e24xlarge    InstanceType = "ml.g7e.24xlarge"
+	InstanceTypeMlG7e48xlarge    InstanceType = "ml.g7e.48xlarge"
 	InstanceTypeMlP54xlarge      InstanceType = "ml.p5.4xlarge"
 	InstanceTypeMlP5en48xlarge   InstanceType = "ml.p5en.48xlarge"
+	InstanceTypeMlG6eXlarge      InstanceType = "ml.g6e.xlarge"
+	InstanceTypeMlG6e2xlarge     InstanceType = "ml.g6e.2xlarge"
+	InstanceTypeMlG6e4xlarge     InstanceType = "ml.g6e.4xlarge"
+	InstanceTypeMlG6e8xlarge     InstanceType = "ml.g6e.8xlarge"
+	InstanceTypeMlG6e12xlarge    InstanceType = "ml.g6e.12xlarge"
+	InstanceTypeMlG6e16xlarge    InstanceType = "ml.g6e.16xlarge"
+	InstanceTypeMlG6e24xlarge    InstanceType = "ml.g6e.24xlarge"
+	InstanceTypeMlG6e48xlarge    InstanceType = "ml.g6e.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4704,8 +5011,22 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 		"ml.p5.4xlarge",
 		"ml.p5en.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 	}
 }
 
@@ -6302,13 +6623,15 @@ type NotebookInstanceStatus string
 
 // Enum values for NotebookInstanceStatus
 const (
-	NotebookInstanceStatusPending   NotebookInstanceStatus = "Pending"
-	NotebookInstanceStatusInService NotebookInstanceStatus = "InService"
-	NotebookInstanceStatusStopping  NotebookInstanceStatus = "Stopping"
-	NotebookInstanceStatusStopped   NotebookInstanceStatus = "Stopped"
-	NotebookInstanceStatusFailed    NotebookInstanceStatus = "Failed"
-	NotebookInstanceStatusDeleting  NotebookInstanceStatus = "Deleting"
-	NotebookInstanceStatusUpdating  NotebookInstanceStatus = "Updating"
+	NotebookInstanceStatusPending            NotebookInstanceStatus = "Pending"
+	NotebookInstanceStatusInService          NotebookInstanceStatus = "InService"
+	NotebookInstanceStatusStopping           NotebookInstanceStatus = "Stopping"
+	NotebookInstanceStatusStopped            NotebookInstanceStatus = "Stopped"
+	NotebookInstanceStatusFailed             NotebookInstanceStatus = "Failed"
+	NotebookInstanceStatusDeleting           NotebookInstanceStatus = "Deleting"
+	NotebookInstanceStatusUpdating           NotebookInstanceStatus = "Updating"
+	NotebookInstanceStatusPendingMaintenance NotebookInstanceStatus = "PendingMaintenance"
+	NotebookInstanceStatusInMaintenance      NotebookInstanceStatus = "InMaintenance"
 )
 
 // Values returns all known values for NotebookInstanceStatus. Note that this can
@@ -6324,6 +6647,8 @@ func (NotebookInstanceStatus) Values() []NotebookInstanceStatus {
 		"Failed",
 		"Deleting",
 		"Updating",
+		"PendingMaintenance",
+		"InMaintenance",
 	}
 }
 
@@ -6427,48 +6752,61 @@ type OptimizationJobDeploymentInstanceType string
 
 // Enum values for OptimizationJobDeploymentInstanceType
 const (
-	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge  OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP548xlarge    OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge  OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dnXlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn2xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn4xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn8xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn12xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn16xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG5Xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG52xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG54xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG58xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG512xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG516xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG524xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG548xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6Xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG62xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG64xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG68xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG612xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG616xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG624xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG648xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6eXlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e2xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e4xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e8xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e12xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e16xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e24xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e48xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf2Xlarge    OptimizationJobDeploymentInstanceType = "ml.inf2.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf28xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf224xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf248xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn12xlarge   OptimizationJobDeploymentInstanceType = "ml.trn1.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn132xlarge  OptimizationJobDeploymentInstanceType = "ml.trn1.32xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn1n32xlarge OptimizationJobDeploymentInstanceType = "ml.trn1n.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge    OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP548xlarge     OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge    OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dnXlarge     OptimizationJobDeploymentInstanceType = "ml.g4dn.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn2xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn4xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn8xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn12xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn16xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG5Xlarge       OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG52xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG54xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG58xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG512xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG516xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG524xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG548xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6Xlarge       OptimizationJobDeploymentInstanceType = "ml.g6.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG62xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG64xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG68xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG612xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG616xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG624xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG648xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6eXlarge      OptimizationJobDeploymentInstanceType = "ml.g6e.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e2xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e4xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e8xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e12xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e16xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e24xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e48xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf2Xlarge     OptimizationJobDeploymentInstanceType = "ml.inf2.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf28xlarge    OptimizationJobDeploymentInstanceType = "ml.inf2.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf224xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf248xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn12xlarge    OptimizationJobDeploymentInstanceType = "ml.trn1.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn132xlarge   OptimizationJobDeploymentInstanceType = "ml.trn1.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn1n32xlarge  OptimizationJobDeploymentInstanceType = "ml.trn1n.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP6B20048xlarge OptimizationJobDeploymentInstanceType = "ml.p6-b200.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e2xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e4xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e8xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e12xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e24xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e48xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG72xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG74xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG78xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG712xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG724xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG748xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.48xlarge"
 )
 
 // Values returns all known values for OptimizationJobDeploymentInstanceType. Note
@@ -6520,6 +6858,19 @@ func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymen
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
+		"ml.p6-b200.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 	}
 }
 
@@ -6616,6 +6967,7 @@ type PartnerAppAuthType string
 // Enum values for PartnerAppAuthType
 const (
 	PartnerAppAuthTypeIam PartnerAppAuthType = "IAM"
+	PartnerAppAuthTypeIdc PartnerAppAuthType = "IDC"
 )
 
 // Values returns all known values for PartnerAppAuthType. Note that this can be
@@ -6625,6 +6977,7 @@ const (
 func (PartnerAppAuthType) Values() []PartnerAppAuthType {
 	return []PartnerAppAuthType{
 		"IAM",
+		"IDC",
 	}
 }
 
@@ -6706,6 +7059,10 @@ const (
 	PipelineExecutionStatusStopped   PipelineExecutionStatus = "Stopped"
 	PipelineExecutionStatusFailed    PipelineExecutionStatus = "Failed"
 	PipelineExecutionStatusSucceeded PipelineExecutionStatus = "Succeeded"
+	// The pipeline completed all reachable work after one or more steps failed. Every
+	// failed step was handled by a scheduled downstream step whose trigger is Failed
+	// or Any .
+	PipelineExecutionStatusCompletedWithFailures PipelineExecutionStatus = "CompletedWithFailures"
 )
 
 // Values returns all known values for PipelineExecutionStatus. Note that this can
@@ -6719,6 +7076,7 @@ func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 		"Stopped",
 		"Failed",
 		"Succeeded",
+		"CompletedWithFailures",
 	}
 }
 
@@ -6785,133 +7143,213 @@ type ProcessingInstanceType string
 
 // Enum values for ProcessingInstanceType
 const (
-	ProcessingInstanceTypeMlT3Medium     ProcessingInstanceType = "ml.t3.medium"
-	ProcessingInstanceTypeMlT3Large      ProcessingInstanceType = "ml.t3.large"
-	ProcessingInstanceTypeMlT3Xlarge     ProcessingInstanceType = "ml.t3.xlarge"
-	ProcessingInstanceTypeMlT32xlarge    ProcessingInstanceType = "ml.t3.2xlarge"
-	ProcessingInstanceTypeMlM4Xlarge     ProcessingInstanceType = "ml.m4.xlarge"
-	ProcessingInstanceTypeMlM42xlarge    ProcessingInstanceType = "ml.m4.2xlarge"
-	ProcessingInstanceTypeMlM44xlarge    ProcessingInstanceType = "ml.m4.4xlarge"
-	ProcessingInstanceTypeMlM410xlarge   ProcessingInstanceType = "ml.m4.10xlarge"
-	ProcessingInstanceTypeMlM416xlarge   ProcessingInstanceType = "ml.m4.16xlarge"
-	ProcessingInstanceTypeMlC4Xlarge     ProcessingInstanceType = "ml.c4.xlarge"
-	ProcessingInstanceTypeMlC42xlarge    ProcessingInstanceType = "ml.c4.2xlarge"
-	ProcessingInstanceTypeMlC44xlarge    ProcessingInstanceType = "ml.c4.4xlarge"
-	ProcessingInstanceTypeMlC48xlarge    ProcessingInstanceType = "ml.c4.8xlarge"
-	ProcessingInstanceTypeMlP2Xlarge     ProcessingInstanceType = "ml.p2.xlarge"
-	ProcessingInstanceTypeMlP28xlarge    ProcessingInstanceType = "ml.p2.8xlarge"
-	ProcessingInstanceTypeMlP216xlarge   ProcessingInstanceType = "ml.p2.16xlarge"
-	ProcessingInstanceTypeMlP32xlarge    ProcessingInstanceType = "ml.p3.2xlarge"
-	ProcessingInstanceTypeMlP38xlarge    ProcessingInstanceType = "ml.p3.8xlarge"
-	ProcessingInstanceTypeMlP316xlarge   ProcessingInstanceType = "ml.p3.16xlarge"
-	ProcessingInstanceTypeMlC5Xlarge     ProcessingInstanceType = "ml.c5.xlarge"
-	ProcessingInstanceTypeMlC52xlarge    ProcessingInstanceType = "ml.c5.2xlarge"
-	ProcessingInstanceTypeMlC54xlarge    ProcessingInstanceType = "ml.c5.4xlarge"
-	ProcessingInstanceTypeMlC59xlarge    ProcessingInstanceType = "ml.c5.9xlarge"
-	ProcessingInstanceTypeMlC518xlarge   ProcessingInstanceType = "ml.c5.18xlarge"
-	ProcessingInstanceTypeMlM5Large      ProcessingInstanceType = "ml.m5.large"
-	ProcessingInstanceTypeMlM5Xlarge     ProcessingInstanceType = "ml.m5.xlarge"
-	ProcessingInstanceTypeMlM52xlarge    ProcessingInstanceType = "ml.m5.2xlarge"
-	ProcessingInstanceTypeMlM54xlarge    ProcessingInstanceType = "ml.m5.4xlarge"
-	ProcessingInstanceTypeMlM512xlarge   ProcessingInstanceType = "ml.m5.12xlarge"
-	ProcessingInstanceTypeMlM524xlarge   ProcessingInstanceType = "ml.m5.24xlarge"
-	ProcessingInstanceTypeMlR5Large      ProcessingInstanceType = "ml.r5.large"
-	ProcessingInstanceTypeMlR5Xlarge     ProcessingInstanceType = "ml.r5.xlarge"
-	ProcessingInstanceTypeMlR52xlarge    ProcessingInstanceType = "ml.r5.2xlarge"
-	ProcessingInstanceTypeMlR54xlarge    ProcessingInstanceType = "ml.r5.4xlarge"
-	ProcessingInstanceTypeMlR58xlarge    ProcessingInstanceType = "ml.r5.8xlarge"
-	ProcessingInstanceTypeMlR512xlarge   ProcessingInstanceType = "ml.r5.12xlarge"
-	ProcessingInstanceTypeMlR516xlarge   ProcessingInstanceType = "ml.r5.16xlarge"
-	ProcessingInstanceTypeMlR524xlarge   ProcessingInstanceType = "ml.r5.24xlarge"
-	ProcessingInstanceTypeMlG4dnXlarge   ProcessingInstanceType = "ml.g4dn.xlarge"
-	ProcessingInstanceTypeMlG4dn2xlarge  ProcessingInstanceType = "ml.g4dn.2xlarge"
-	ProcessingInstanceTypeMlG4dn4xlarge  ProcessingInstanceType = "ml.g4dn.4xlarge"
-	ProcessingInstanceTypeMlG4dn8xlarge  ProcessingInstanceType = "ml.g4dn.8xlarge"
-	ProcessingInstanceTypeMlG4dn12xlarge ProcessingInstanceType = "ml.g4dn.12xlarge"
-	ProcessingInstanceTypeMlG4dn16xlarge ProcessingInstanceType = "ml.g4dn.16xlarge"
-	ProcessingInstanceTypeMlG5Xlarge     ProcessingInstanceType = "ml.g5.xlarge"
-	ProcessingInstanceTypeMlG52xlarge    ProcessingInstanceType = "ml.g5.2xlarge"
-	ProcessingInstanceTypeMlG54xlarge    ProcessingInstanceType = "ml.g5.4xlarge"
-	ProcessingInstanceTypeMlG58xlarge    ProcessingInstanceType = "ml.g5.8xlarge"
-	ProcessingInstanceTypeMlG516xlarge   ProcessingInstanceType = "ml.g5.16xlarge"
-	ProcessingInstanceTypeMlG512xlarge   ProcessingInstanceType = "ml.g5.12xlarge"
-	ProcessingInstanceTypeMlG524xlarge   ProcessingInstanceType = "ml.g5.24xlarge"
-	ProcessingInstanceTypeMlG548xlarge   ProcessingInstanceType = "ml.g5.48xlarge"
-	ProcessingInstanceTypeMlR5dLarge     ProcessingInstanceType = "ml.r5d.large"
-	ProcessingInstanceTypeMlR5dXlarge    ProcessingInstanceType = "ml.r5d.xlarge"
-	ProcessingInstanceTypeMlR5d2xlarge   ProcessingInstanceType = "ml.r5d.2xlarge"
-	ProcessingInstanceTypeMlR5d4xlarge   ProcessingInstanceType = "ml.r5d.4xlarge"
-	ProcessingInstanceTypeMlR5d8xlarge   ProcessingInstanceType = "ml.r5d.8xlarge"
-	ProcessingInstanceTypeMlR5d12xlarge  ProcessingInstanceType = "ml.r5d.12xlarge"
-	ProcessingInstanceTypeMlR5d16xlarge  ProcessingInstanceType = "ml.r5d.16xlarge"
-	ProcessingInstanceTypeMlR5d24xlarge  ProcessingInstanceType = "ml.r5d.24xlarge"
-	ProcessingInstanceTypeMlG6Xlarge     ProcessingInstanceType = "ml.g6.xlarge"
-	ProcessingInstanceTypeMlG62xlarge    ProcessingInstanceType = "ml.g6.2xlarge"
-	ProcessingInstanceTypeMlG64xlarge    ProcessingInstanceType = "ml.g6.4xlarge"
-	ProcessingInstanceTypeMlG68xlarge    ProcessingInstanceType = "ml.g6.8xlarge"
-	ProcessingInstanceTypeMlG612xlarge   ProcessingInstanceType = "ml.g6.12xlarge"
-	ProcessingInstanceTypeMlG616xlarge   ProcessingInstanceType = "ml.g6.16xlarge"
-	ProcessingInstanceTypeMlG624xlarge   ProcessingInstanceType = "ml.g6.24xlarge"
-	ProcessingInstanceTypeMlG648xlarge   ProcessingInstanceType = "ml.g6.48xlarge"
-	ProcessingInstanceTypeMlG6eXlarge    ProcessingInstanceType = "ml.g6e.xlarge"
-	ProcessingInstanceTypeMlG6e2xlarge   ProcessingInstanceType = "ml.g6e.2xlarge"
-	ProcessingInstanceTypeMlG6e4xlarge   ProcessingInstanceType = "ml.g6e.4xlarge"
-	ProcessingInstanceTypeMlG6e8xlarge   ProcessingInstanceType = "ml.g6e.8xlarge"
-	ProcessingInstanceTypeMlG6e12xlarge  ProcessingInstanceType = "ml.g6e.12xlarge"
-	ProcessingInstanceTypeMlG6e16xlarge  ProcessingInstanceType = "ml.g6e.16xlarge"
-	ProcessingInstanceTypeMlG6e24xlarge  ProcessingInstanceType = "ml.g6e.24xlarge"
-	ProcessingInstanceTypeMlG6e48xlarge  ProcessingInstanceType = "ml.g6e.48xlarge"
-	ProcessingInstanceTypeMlM6iLarge     ProcessingInstanceType = "ml.m6i.large"
-	ProcessingInstanceTypeMlM6iXlarge    ProcessingInstanceType = "ml.m6i.xlarge"
-	ProcessingInstanceTypeMlM6i2xlarge   ProcessingInstanceType = "ml.m6i.2xlarge"
-	ProcessingInstanceTypeMlM6i4xlarge   ProcessingInstanceType = "ml.m6i.4xlarge"
-	ProcessingInstanceTypeMlM6i8xlarge   ProcessingInstanceType = "ml.m6i.8xlarge"
-	ProcessingInstanceTypeMlM6i12xlarge  ProcessingInstanceType = "ml.m6i.12xlarge"
-	ProcessingInstanceTypeMlM6i16xlarge  ProcessingInstanceType = "ml.m6i.16xlarge"
-	ProcessingInstanceTypeMlM6i24xlarge  ProcessingInstanceType = "ml.m6i.24xlarge"
-	ProcessingInstanceTypeMlM6i32xlarge  ProcessingInstanceType = "ml.m6i.32xlarge"
-	ProcessingInstanceTypeMlC6iXlarge    ProcessingInstanceType = "ml.c6i.xlarge"
-	ProcessingInstanceTypeMlC6i2xlarge   ProcessingInstanceType = "ml.c6i.2xlarge"
-	ProcessingInstanceTypeMlC6i4xlarge   ProcessingInstanceType = "ml.c6i.4xlarge"
-	ProcessingInstanceTypeMlC6i8xlarge   ProcessingInstanceType = "ml.c6i.8xlarge"
-	ProcessingInstanceTypeMlC6i12xlarge  ProcessingInstanceType = "ml.c6i.12xlarge"
-	ProcessingInstanceTypeMlC6i16xlarge  ProcessingInstanceType = "ml.c6i.16xlarge"
-	ProcessingInstanceTypeMlC6i24xlarge  ProcessingInstanceType = "ml.c6i.24xlarge"
-	ProcessingInstanceTypeMlC6i32xlarge  ProcessingInstanceType = "ml.c6i.32xlarge"
-	ProcessingInstanceTypeMlM7iLarge     ProcessingInstanceType = "ml.m7i.large"
-	ProcessingInstanceTypeMlM7iXlarge    ProcessingInstanceType = "ml.m7i.xlarge"
-	ProcessingInstanceTypeMlM7i2xlarge   ProcessingInstanceType = "ml.m7i.2xlarge"
-	ProcessingInstanceTypeMlM7i4xlarge   ProcessingInstanceType = "ml.m7i.4xlarge"
-	ProcessingInstanceTypeMlM7i8xlarge   ProcessingInstanceType = "ml.m7i.8xlarge"
-	ProcessingInstanceTypeMlM7i12xlarge  ProcessingInstanceType = "ml.m7i.12xlarge"
-	ProcessingInstanceTypeMlM7i16xlarge  ProcessingInstanceType = "ml.m7i.16xlarge"
-	ProcessingInstanceTypeMlM7i24xlarge  ProcessingInstanceType = "ml.m7i.24xlarge"
-	ProcessingInstanceTypeMlM7i48xlarge  ProcessingInstanceType = "ml.m7i.48xlarge"
-	ProcessingInstanceTypeMlC7iLarge     ProcessingInstanceType = "ml.c7i.large"
-	ProcessingInstanceTypeMlC7iXlarge    ProcessingInstanceType = "ml.c7i.xlarge"
-	ProcessingInstanceTypeMlC7i2xlarge   ProcessingInstanceType = "ml.c7i.2xlarge"
-	ProcessingInstanceTypeMlC7i4xlarge   ProcessingInstanceType = "ml.c7i.4xlarge"
-	ProcessingInstanceTypeMlC7i8xlarge   ProcessingInstanceType = "ml.c7i.8xlarge"
-	ProcessingInstanceTypeMlC7i12xlarge  ProcessingInstanceType = "ml.c7i.12xlarge"
-	ProcessingInstanceTypeMlC7i16xlarge  ProcessingInstanceType = "ml.c7i.16xlarge"
-	ProcessingInstanceTypeMlC7i24xlarge  ProcessingInstanceType = "ml.c7i.24xlarge"
-	ProcessingInstanceTypeMlC7i48xlarge  ProcessingInstanceType = "ml.c7i.48xlarge"
-	ProcessingInstanceTypeMlR7iLarge     ProcessingInstanceType = "ml.r7i.large"
-	ProcessingInstanceTypeMlR7iXlarge    ProcessingInstanceType = "ml.r7i.xlarge"
-	ProcessingInstanceTypeMlR7i2xlarge   ProcessingInstanceType = "ml.r7i.2xlarge"
-	ProcessingInstanceTypeMlR7i4xlarge   ProcessingInstanceType = "ml.r7i.4xlarge"
-	ProcessingInstanceTypeMlR7i8xlarge   ProcessingInstanceType = "ml.r7i.8xlarge"
-	ProcessingInstanceTypeMlR7i12xlarge  ProcessingInstanceType = "ml.r7i.12xlarge"
-	ProcessingInstanceTypeMlR7i16xlarge  ProcessingInstanceType = "ml.r7i.16xlarge"
-	ProcessingInstanceTypeMlR7i24xlarge  ProcessingInstanceType = "ml.r7i.24xlarge"
-	ProcessingInstanceTypeMlR7i48xlarge  ProcessingInstanceType = "ml.r7i.48xlarge"
-	ProcessingInstanceTypeMlP54xlarge    ProcessingInstanceType = "ml.p5.4xlarge"
-	ProcessingInstanceTypeMlG7e2xlarge   ProcessingInstanceType = "ml.g7e.2xlarge"
-	ProcessingInstanceTypeMlG7e4xlarge   ProcessingInstanceType = "ml.g7e.4xlarge"
-	ProcessingInstanceTypeMlG7e8xlarge   ProcessingInstanceType = "ml.g7e.8xlarge"
-	ProcessingInstanceTypeMlG7e12xlarge  ProcessingInstanceType = "ml.g7e.12xlarge"
-	ProcessingInstanceTypeMlG7e24xlarge  ProcessingInstanceType = "ml.g7e.24xlarge"
-	ProcessingInstanceTypeMlG7e48xlarge  ProcessingInstanceType = "ml.g7e.48xlarge"
+	ProcessingInstanceTypeMlT3Medium        ProcessingInstanceType = "ml.t3.medium"
+	ProcessingInstanceTypeMlT3Large         ProcessingInstanceType = "ml.t3.large"
+	ProcessingInstanceTypeMlT3Xlarge        ProcessingInstanceType = "ml.t3.xlarge"
+	ProcessingInstanceTypeMlT32xlarge       ProcessingInstanceType = "ml.t3.2xlarge"
+	ProcessingInstanceTypeMlM4Xlarge        ProcessingInstanceType = "ml.m4.xlarge"
+	ProcessingInstanceTypeMlM42xlarge       ProcessingInstanceType = "ml.m4.2xlarge"
+	ProcessingInstanceTypeMlM44xlarge       ProcessingInstanceType = "ml.m4.4xlarge"
+	ProcessingInstanceTypeMlM410xlarge      ProcessingInstanceType = "ml.m4.10xlarge"
+	ProcessingInstanceTypeMlM416xlarge      ProcessingInstanceType = "ml.m4.16xlarge"
+	ProcessingInstanceTypeMlC4Xlarge        ProcessingInstanceType = "ml.c4.xlarge"
+	ProcessingInstanceTypeMlC42xlarge       ProcessingInstanceType = "ml.c4.2xlarge"
+	ProcessingInstanceTypeMlC44xlarge       ProcessingInstanceType = "ml.c4.4xlarge"
+	ProcessingInstanceTypeMlC48xlarge       ProcessingInstanceType = "ml.c4.8xlarge"
+	ProcessingInstanceTypeMlP2Xlarge        ProcessingInstanceType = "ml.p2.xlarge"
+	ProcessingInstanceTypeMlP28xlarge       ProcessingInstanceType = "ml.p2.8xlarge"
+	ProcessingInstanceTypeMlP216xlarge      ProcessingInstanceType = "ml.p2.16xlarge"
+	ProcessingInstanceTypeMlP32xlarge       ProcessingInstanceType = "ml.p3.2xlarge"
+	ProcessingInstanceTypeMlP38xlarge       ProcessingInstanceType = "ml.p3.8xlarge"
+	ProcessingInstanceTypeMlP316xlarge      ProcessingInstanceType = "ml.p3.16xlarge"
+	ProcessingInstanceTypeMlC5Xlarge        ProcessingInstanceType = "ml.c5.xlarge"
+	ProcessingInstanceTypeMlC52xlarge       ProcessingInstanceType = "ml.c5.2xlarge"
+	ProcessingInstanceTypeMlC54xlarge       ProcessingInstanceType = "ml.c5.4xlarge"
+	ProcessingInstanceTypeMlC59xlarge       ProcessingInstanceType = "ml.c5.9xlarge"
+	ProcessingInstanceTypeMlC518xlarge      ProcessingInstanceType = "ml.c5.18xlarge"
+	ProcessingInstanceTypeMlM5Large         ProcessingInstanceType = "ml.m5.large"
+	ProcessingInstanceTypeMlM5Xlarge        ProcessingInstanceType = "ml.m5.xlarge"
+	ProcessingInstanceTypeMlM52xlarge       ProcessingInstanceType = "ml.m5.2xlarge"
+	ProcessingInstanceTypeMlM54xlarge       ProcessingInstanceType = "ml.m5.4xlarge"
+	ProcessingInstanceTypeMlM512xlarge      ProcessingInstanceType = "ml.m5.12xlarge"
+	ProcessingInstanceTypeMlM524xlarge      ProcessingInstanceType = "ml.m5.24xlarge"
+	ProcessingInstanceTypeMlR5Large         ProcessingInstanceType = "ml.r5.large"
+	ProcessingInstanceTypeMlR5Xlarge        ProcessingInstanceType = "ml.r5.xlarge"
+	ProcessingInstanceTypeMlR52xlarge       ProcessingInstanceType = "ml.r5.2xlarge"
+	ProcessingInstanceTypeMlR54xlarge       ProcessingInstanceType = "ml.r5.4xlarge"
+	ProcessingInstanceTypeMlR58xlarge       ProcessingInstanceType = "ml.r5.8xlarge"
+	ProcessingInstanceTypeMlR512xlarge      ProcessingInstanceType = "ml.r5.12xlarge"
+	ProcessingInstanceTypeMlR516xlarge      ProcessingInstanceType = "ml.r5.16xlarge"
+	ProcessingInstanceTypeMlR524xlarge      ProcessingInstanceType = "ml.r5.24xlarge"
+	ProcessingInstanceTypeMlG4dnXlarge      ProcessingInstanceType = "ml.g4dn.xlarge"
+	ProcessingInstanceTypeMlG4dn2xlarge     ProcessingInstanceType = "ml.g4dn.2xlarge"
+	ProcessingInstanceTypeMlG4dn4xlarge     ProcessingInstanceType = "ml.g4dn.4xlarge"
+	ProcessingInstanceTypeMlG4dn8xlarge     ProcessingInstanceType = "ml.g4dn.8xlarge"
+	ProcessingInstanceTypeMlG4dn12xlarge    ProcessingInstanceType = "ml.g4dn.12xlarge"
+	ProcessingInstanceTypeMlG4dn16xlarge    ProcessingInstanceType = "ml.g4dn.16xlarge"
+	ProcessingInstanceTypeMlG5Xlarge        ProcessingInstanceType = "ml.g5.xlarge"
+	ProcessingInstanceTypeMlG52xlarge       ProcessingInstanceType = "ml.g5.2xlarge"
+	ProcessingInstanceTypeMlG54xlarge       ProcessingInstanceType = "ml.g5.4xlarge"
+	ProcessingInstanceTypeMlG58xlarge       ProcessingInstanceType = "ml.g5.8xlarge"
+	ProcessingInstanceTypeMlG516xlarge      ProcessingInstanceType = "ml.g5.16xlarge"
+	ProcessingInstanceTypeMlG512xlarge      ProcessingInstanceType = "ml.g5.12xlarge"
+	ProcessingInstanceTypeMlG524xlarge      ProcessingInstanceType = "ml.g5.24xlarge"
+	ProcessingInstanceTypeMlG548xlarge      ProcessingInstanceType = "ml.g5.48xlarge"
+	ProcessingInstanceTypeMlR5dLarge        ProcessingInstanceType = "ml.r5d.large"
+	ProcessingInstanceTypeMlR5dXlarge       ProcessingInstanceType = "ml.r5d.xlarge"
+	ProcessingInstanceTypeMlR5d2xlarge      ProcessingInstanceType = "ml.r5d.2xlarge"
+	ProcessingInstanceTypeMlR5d4xlarge      ProcessingInstanceType = "ml.r5d.4xlarge"
+	ProcessingInstanceTypeMlR5d8xlarge      ProcessingInstanceType = "ml.r5d.8xlarge"
+	ProcessingInstanceTypeMlR5d12xlarge     ProcessingInstanceType = "ml.r5d.12xlarge"
+	ProcessingInstanceTypeMlR5d16xlarge     ProcessingInstanceType = "ml.r5d.16xlarge"
+	ProcessingInstanceTypeMlR5d24xlarge     ProcessingInstanceType = "ml.r5d.24xlarge"
+	ProcessingInstanceTypeMlG6Xlarge        ProcessingInstanceType = "ml.g6.xlarge"
+	ProcessingInstanceTypeMlG62xlarge       ProcessingInstanceType = "ml.g6.2xlarge"
+	ProcessingInstanceTypeMlG64xlarge       ProcessingInstanceType = "ml.g6.4xlarge"
+	ProcessingInstanceTypeMlG68xlarge       ProcessingInstanceType = "ml.g6.8xlarge"
+	ProcessingInstanceTypeMlG612xlarge      ProcessingInstanceType = "ml.g6.12xlarge"
+	ProcessingInstanceTypeMlG616xlarge      ProcessingInstanceType = "ml.g6.16xlarge"
+	ProcessingInstanceTypeMlG624xlarge      ProcessingInstanceType = "ml.g6.24xlarge"
+	ProcessingInstanceTypeMlG648xlarge      ProcessingInstanceType = "ml.g6.48xlarge"
+	ProcessingInstanceTypeMlG6eXlarge       ProcessingInstanceType = "ml.g6e.xlarge"
+	ProcessingInstanceTypeMlG6e2xlarge      ProcessingInstanceType = "ml.g6e.2xlarge"
+	ProcessingInstanceTypeMlG6e4xlarge      ProcessingInstanceType = "ml.g6e.4xlarge"
+	ProcessingInstanceTypeMlG6e8xlarge      ProcessingInstanceType = "ml.g6e.8xlarge"
+	ProcessingInstanceTypeMlG6e12xlarge     ProcessingInstanceType = "ml.g6e.12xlarge"
+	ProcessingInstanceTypeMlG6e16xlarge     ProcessingInstanceType = "ml.g6e.16xlarge"
+	ProcessingInstanceTypeMlG6e24xlarge     ProcessingInstanceType = "ml.g6e.24xlarge"
+	ProcessingInstanceTypeMlG6e48xlarge     ProcessingInstanceType = "ml.g6e.48xlarge"
+	ProcessingInstanceTypeMlM6iLarge        ProcessingInstanceType = "ml.m6i.large"
+	ProcessingInstanceTypeMlM6iXlarge       ProcessingInstanceType = "ml.m6i.xlarge"
+	ProcessingInstanceTypeMlM6i2xlarge      ProcessingInstanceType = "ml.m6i.2xlarge"
+	ProcessingInstanceTypeMlM6i4xlarge      ProcessingInstanceType = "ml.m6i.4xlarge"
+	ProcessingInstanceTypeMlM6i8xlarge      ProcessingInstanceType = "ml.m6i.8xlarge"
+	ProcessingInstanceTypeMlM6i12xlarge     ProcessingInstanceType = "ml.m6i.12xlarge"
+	ProcessingInstanceTypeMlM6i16xlarge     ProcessingInstanceType = "ml.m6i.16xlarge"
+	ProcessingInstanceTypeMlM6i24xlarge     ProcessingInstanceType = "ml.m6i.24xlarge"
+	ProcessingInstanceTypeMlM6i32xlarge     ProcessingInstanceType = "ml.m6i.32xlarge"
+	ProcessingInstanceTypeMlC6iXlarge       ProcessingInstanceType = "ml.c6i.xlarge"
+	ProcessingInstanceTypeMlC6i2xlarge      ProcessingInstanceType = "ml.c6i.2xlarge"
+	ProcessingInstanceTypeMlC6i4xlarge      ProcessingInstanceType = "ml.c6i.4xlarge"
+	ProcessingInstanceTypeMlC6i8xlarge      ProcessingInstanceType = "ml.c6i.8xlarge"
+	ProcessingInstanceTypeMlC6i12xlarge     ProcessingInstanceType = "ml.c6i.12xlarge"
+	ProcessingInstanceTypeMlC6i16xlarge     ProcessingInstanceType = "ml.c6i.16xlarge"
+	ProcessingInstanceTypeMlC6i24xlarge     ProcessingInstanceType = "ml.c6i.24xlarge"
+	ProcessingInstanceTypeMlC6i32xlarge     ProcessingInstanceType = "ml.c6i.32xlarge"
+	ProcessingInstanceTypeMlM7iLarge        ProcessingInstanceType = "ml.m7i.large"
+	ProcessingInstanceTypeMlM7iXlarge       ProcessingInstanceType = "ml.m7i.xlarge"
+	ProcessingInstanceTypeMlM7i2xlarge      ProcessingInstanceType = "ml.m7i.2xlarge"
+	ProcessingInstanceTypeMlM7i4xlarge      ProcessingInstanceType = "ml.m7i.4xlarge"
+	ProcessingInstanceTypeMlM7i8xlarge      ProcessingInstanceType = "ml.m7i.8xlarge"
+	ProcessingInstanceTypeMlM7i12xlarge     ProcessingInstanceType = "ml.m7i.12xlarge"
+	ProcessingInstanceTypeMlM7i16xlarge     ProcessingInstanceType = "ml.m7i.16xlarge"
+	ProcessingInstanceTypeMlM7i24xlarge     ProcessingInstanceType = "ml.m7i.24xlarge"
+	ProcessingInstanceTypeMlM7i48xlarge     ProcessingInstanceType = "ml.m7i.48xlarge"
+	ProcessingInstanceTypeMlC7iLarge        ProcessingInstanceType = "ml.c7i.large"
+	ProcessingInstanceTypeMlC7iXlarge       ProcessingInstanceType = "ml.c7i.xlarge"
+	ProcessingInstanceTypeMlC7i2xlarge      ProcessingInstanceType = "ml.c7i.2xlarge"
+	ProcessingInstanceTypeMlC7i4xlarge      ProcessingInstanceType = "ml.c7i.4xlarge"
+	ProcessingInstanceTypeMlC7i8xlarge      ProcessingInstanceType = "ml.c7i.8xlarge"
+	ProcessingInstanceTypeMlC7i12xlarge     ProcessingInstanceType = "ml.c7i.12xlarge"
+	ProcessingInstanceTypeMlC7i16xlarge     ProcessingInstanceType = "ml.c7i.16xlarge"
+	ProcessingInstanceTypeMlC7i24xlarge     ProcessingInstanceType = "ml.c7i.24xlarge"
+	ProcessingInstanceTypeMlC7i48xlarge     ProcessingInstanceType = "ml.c7i.48xlarge"
+	ProcessingInstanceTypeMlR7iLarge        ProcessingInstanceType = "ml.r7i.large"
+	ProcessingInstanceTypeMlR7iXlarge       ProcessingInstanceType = "ml.r7i.xlarge"
+	ProcessingInstanceTypeMlR7i2xlarge      ProcessingInstanceType = "ml.r7i.2xlarge"
+	ProcessingInstanceTypeMlR7i4xlarge      ProcessingInstanceType = "ml.r7i.4xlarge"
+	ProcessingInstanceTypeMlR7i8xlarge      ProcessingInstanceType = "ml.r7i.8xlarge"
+	ProcessingInstanceTypeMlR7i12xlarge     ProcessingInstanceType = "ml.r7i.12xlarge"
+	ProcessingInstanceTypeMlR7i16xlarge     ProcessingInstanceType = "ml.r7i.16xlarge"
+	ProcessingInstanceTypeMlR7i24xlarge     ProcessingInstanceType = "ml.r7i.24xlarge"
+	ProcessingInstanceTypeMlR7i48xlarge     ProcessingInstanceType = "ml.r7i.48xlarge"
+	ProcessingInstanceTypeMlP54xlarge       ProcessingInstanceType = "ml.p5.4xlarge"
+	ProcessingInstanceTypeMlG7e2xlarge      ProcessingInstanceType = "ml.g7e.2xlarge"
+	ProcessingInstanceTypeMlG7e4xlarge      ProcessingInstanceType = "ml.g7e.4xlarge"
+	ProcessingInstanceTypeMlG7e8xlarge      ProcessingInstanceType = "ml.g7e.8xlarge"
+	ProcessingInstanceTypeMlG7e12xlarge     ProcessingInstanceType = "ml.g7e.12xlarge"
+	ProcessingInstanceTypeMlG7e24xlarge     ProcessingInstanceType = "ml.g7e.24xlarge"
+	ProcessingInstanceTypeMlG7e48xlarge     ProcessingInstanceType = "ml.g7e.48xlarge"
+	ProcessingInstanceTypeMlG72xlarge       ProcessingInstanceType = "ml.g7.2xlarge"
+	ProcessingInstanceTypeMlG74xlarge       ProcessingInstanceType = "ml.g7.4xlarge"
+	ProcessingInstanceTypeMlG78xlarge       ProcessingInstanceType = "ml.g7.8xlarge"
+	ProcessingInstanceTypeMlG712xlarge      ProcessingInstanceType = "ml.g7.12xlarge"
+	ProcessingInstanceTypeMlG724xlarge      ProcessingInstanceType = "ml.g7.24xlarge"
+	ProcessingInstanceTypeMlG748xlarge      ProcessingInstanceType = "ml.g7.48xlarge"
+	ProcessingInstanceTypeMlR6iLarge        ProcessingInstanceType = "ml.r6i.large"
+	ProcessingInstanceTypeMlR6iXlarge       ProcessingInstanceType = "ml.r6i.xlarge"
+	ProcessingInstanceTypeMlR6i2xlarge      ProcessingInstanceType = "ml.r6i.2xlarge"
+	ProcessingInstanceTypeMlR6i4xlarge      ProcessingInstanceType = "ml.r6i.4xlarge"
+	ProcessingInstanceTypeMlR6i8xlarge      ProcessingInstanceType = "ml.r6i.8xlarge"
+	ProcessingInstanceTypeMlR6i12xlarge     ProcessingInstanceType = "ml.r6i.12xlarge"
+	ProcessingInstanceTypeMlR6i16xlarge     ProcessingInstanceType = "ml.r6i.16xlarge"
+	ProcessingInstanceTypeMlR6i24xlarge     ProcessingInstanceType = "ml.r6i.24xlarge"
+	ProcessingInstanceTypeMlR6i32xlarge     ProcessingInstanceType = "ml.r6i.32xlarge"
+	ProcessingInstanceTypeMlM8iLarge        ProcessingInstanceType = "ml.m8i.large"
+	ProcessingInstanceTypeMlM8iXlarge       ProcessingInstanceType = "ml.m8i.xlarge"
+	ProcessingInstanceTypeMlM8i2xlarge      ProcessingInstanceType = "ml.m8i.2xlarge"
+	ProcessingInstanceTypeMlM8i4xlarge      ProcessingInstanceType = "ml.m8i.4xlarge"
+	ProcessingInstanceTypeMlM8i8xlarge      ProcessingInstanceType = "ml.m8i.8xlarge"
+	ProcessingInstanceTypeMlM8i12xlarge     ProcessingInstanceType = "ml.m8i.12xlarge"
+	ProcessingInstanceTypeMlM8i16xlarge     ProcessingInstanceType = "ml.m8i.16xlarge"
+	ProcessingInstanceTypeMlM8i24xlarge     ProcessingInstanceType = "ml.m8i.24xlarge"
+	ProcessingInstanceTypeMlM8i32xlarge     ProcessingInstanceType = "ml.m8i.32xlarge"
+	ProcessingInstanceTypeMlM8i48xlarge     ProcessingInstanceType = "ml.m8i.48xlarge"
+	ProcessingInstanceTypeMlM8i96xlarge     ProcessingInstanceType = "ml.m8i.96xlarge"
+	ProcessingInstanceTypeMlC8iXlarge       ProcessingInstanceType = "ml.c8i.xlarge"
+	ProcessingInstanceTypeMlC8i2xlarge      ProcessingInstanceType = "ml.c8i.2xlarge"
+	ProcessingInstanceTypeMlC8i4xlarge      ProcessingInstanceType = "ml.c8i.4xlarge"
+	ProcessingInstanceTypeMlC8i8xlarge      ProcessingInstanceType = "ml.c8i.8xlarge"
+	ProcessingInstanceTypeMlC8i12xlarge     ProcessingInstanceType = "ml.c8i.12xlarge"
+	ProcessingInstanceTypeMlC8i16xlarge     ProcessingInstanceType = "ml.c8i.16xlarge"
+	ProcessingInstanceTypeMlC8i24xlarge     ProcessingInstanceType = "ml.c8i.24xlarge"
+	ProcessingInstanceTypeMlC8i32xlarge     ProcessingInstanceType = "ml.c8i.32xlarge"
+	ProcessingInstanceTypeMlC8i48xlarge     ProcessingInstanceType = "ml.c8i.48xlarge"
+	ProcessingInstanceTypeMlC8i96xlarge     ProcessingInstanceType = "ml.c8i.96xlarge"
+	ProcessingInstanceTypeMlR8iLarge        ProcessingInstanceType = "ml.r8i.large"
+	ProcessingInstanceTypeMlR8iXlarge       ProcessingInstanceType = "ml.r8i.xlarge"
+	ProcessingInstanceTypeMlR8i2xlarge      ProcessingInstanceType = "ml.r8i.2xlarge"
+	ProcessingInstanceTypeMlR8i4xlarge      ProcessingInstanceType = "ml.r8i.4xlarge"
+	ProcessingInstanceTypeMlR8i8xlarge      ProcessingInstanceType = "ml.r8i.8xlarge"
+	ProcessingInstanceTypeMlR8i12xlarge     ProcessingInstanceType = "ml.r8i.12xlarge"
+	ProcessingInstanceTypeMlR8i16xlarge     ProcessingInstanceType = "ml.r8i.16xlarge"
+	ProcessingInstanceTypeMlR8i24xlarge     ProcessingInstanceType = "ml.r8i.24xlarge"
+	ProcessingInstanceTypeMlR8i32xlarge     ProcessingInstanceType = "ml.r8i.32xlarge"
+	ProcessingInstanceTypeMlR8i48xlarge     ProcessingInstanceType = "ml.r8i.48xlarge"
+	ProcessingInstanceTypeMlR8i96xlarge     ProcessingInstanceType = "ml.r8i.96xlarge"
+	ProcessingInstanceTypeMlM7iFlexLarge    ProcessingInstanceType = "ml.m7i-flex.large"
+	ProcessingInstanceTypeMlM7iFlexXlarge   ProcessingInstanceType = "ml.m7i-flex.xlarge"
+	ProcessingInstanceTypeMlM7iFlex2xlarge  ProcessingInstanceType = "ml.m7i-flex.2xlarge"
+	ProcessingInstanceTypeMlM7iFlex4xlarge  ProcessingInstanceType = "ml.m7i-flex.4xlarge"
+	ProcessingInstanceTypeMlM7iFlex8xlarge  ProcessingInstanceType = "ml.m7i-flex.8xlarge"
+	ProcessingInstanceTypeMlM7iFlex12xlarge ProcessingInstanceType = "ml.m7i-flex.12xlarge"
+	ProcessingInstanceTypeMlM7iFlex16xlarge ProcessingInstanceType = "ml.m7i-flex.16xlarge"
+	ProcessingInstanceTypeMlC7iFlexXlarge   ProcessingInstanceType = "ml.c7i-flex.xlarge"
+	ProcessingInstanceTypeMlC7iFlex2xlarge  ProcessingInstanceType = "ml.c7i-flex.2xlarge"
+	ProcessingInstanceTypeMlC7iFlex4xlarge  ProcessingInstanceType = "ml.c7i-flex.4xlarge"
+	ProcessingInstanceTypeMlC7iFlex8xlarge  ProcessingInstanceType = "ml.c7i-flex.8xlarge"
+	ProcessingInstanceTypeMlC7iFlex12xlarge ProcessingInstanceType = "ml.c7i-flex.12xlarge"
+	ProcessingInstanceTypeMlC7iFlex16xlarge ProcessingInstanceType = "ml.c7i-flex.16xlarge"
+	ProcessingInstanceTypeMlM8iFlexLarge    ProcessingInstanceType = "ml.m8i-flex.large"
+	ProcessingInstanceTypeMlM8iFlexXlarge   ProcessingInstanceType = "ml.m8i-flex.xlarge"
+	ProcessingInstanceTypeMlM8iFlex2xlarge  ProcessingInstanceType = "ml.m8i-flex.2xlarge"
+	ProcessingInstanceTypeMlM8iFlex4xlarge  ProcessingInstanceType = "ml.m8i-flex.4xlarge"
+	ProcessingInstanceTypeMlM8iFlex8xlarge  ProcessingInstanceType = "ml.m8i-flex.8xlarge"
+	ProcessingInstanceTypeMlM8iFlex12xlarge ProcessingInstanceType = "ml.m8i-flex.12xlarge"
+	ProcessingInstanceTypeMlM8iFlex16xlarge ProcessingInstanceType = "ml.m8i-flex.16xlarge"
+	ProcessingInstanceTypeMlC8iFlexXlarge   ProcessingInstanceType = "ml.c8i-flex.xlarge"
+	ProcessingInstanceTypeMlC8iFlex2xlarge  ProcessingInstanceType = "ml.c8i-flex.2xlarge"
+	ProcessingInstanceTypeMlC8iFlex4xlarge  ProcessingInstanceType = "ml.c8i-flex.4xlarge"
+	ProcessingInstanceTypeMlC8iFlex8xlarge  ProcessingInstanceType = "ml.c8i-flex.8xlarge"
+	ProcessingInstanceTypeMlC8iFlex12xlarge ProcessingInstanceType = "ml.c8i-flex.12xlarge"
+	ProcessingInstanceTypeMlC8iFlex16xlarge ProcessingInstanceType = "ml.c8i-flex.16xlarge"
+	ProcessingInstanceTypeMlR8iFlexLarge    ProcessingInstanceType = "ml.r8i-flex.large"
+	ProcessingInstanceTypeMlR8iFlexXlarge   ProcessingInstanceType = "ml.r8i-flex.xlarge"
+	ProcessingInstanceTypeMlR8iFlex2xlarge  ProcessingInstanceType = "ml.r8i-flex.2xlarge"
+	ProcessingInstanceTypeMlR8iFlex4xlarge  ProcessingInstanceType = "ml.r8i-flex.4xlarge"
+	ProcessingInstanceTypeMlR8iFlex8xlarge  ProcessingInstanceType = "ml.r8i-flex.8xlarge"
+	ProcessingInstanceTypeMlR8iFlex12xlarge ProcessingInstanceType = "ml.r8i-flex.12xlarge"
+	ProcessingInstanceTypeMlR8iFlex16xlarge ProcessingInstanceType = "ml.r8i-flex.16xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -7047,6 +7485,86 @@ func (ProcessingInstanceType) Values() []ProcessingInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
+		"ml.m8i.large",
+		"ml.m8i.xlarge",
+		"ml.m8i.2xlarge",
+		"ml.m8i.4xlarge",
+		"ml.m8i.8xlarge",
+		"ml.m8i.12xlarge",
+		"ml.m8i.16xlarge",
+		"ml.m8i.24xlarge",
+		"ml.m8i.32xlarge",
+		"ml.m8i.48xlarge",
+		"ml.m8i.96xlarge",
+		"ml.c8i.xlarge",
+		"ml.c8i.2xlarge",
+		"ml.c8i.4xlarge",
+		"ml.c8i.8xlarge",
+		"ml.c8i.12xlarge",
+		"ml.c8i.16xlarge",
+		"ml.c8i.24xlarge",
+		"ml.c8i.32xlarge",
+		"ml.c8i.48xlarge",
+		"ml.c8i.96xlarge",
+		"ml.r8i.large",
+		"ml.r8i.xlarge",
+		"ml.r8i.2xlarge",
+		"ml.r8i.4xlarge",
+		"ml.r8i.8xlarge",
+		"ml.r8i.12xlarge",
+		"ml.r8i.16xlarge",
+		"ml.r8i.24xlarge",
+		"ml.r8i.32xlarge",
+		"ml.r8i.48xlarge",
+		"ml.r8i.96xlarge",
+		"ml.m7i-flex.large",
+		"ml.m7i-flex.xlarge",
+		"ml.m7i-flex.2xlarge",
+		"ml.m7i-flex.4xlarge",
+		"ml.m7i-flex.8xlarge",
+		"ml.m7i-flex.12xlarge",
+		"ml.m7i-flex.16xlarge",
+		"ml.c7i-flex.xlarge",
+		"ml.c7i-flex.2xlarge",
+		"ml.c7i-flex.4xlarge",
+		"ml.c7i-flex.8xlarge",
+		"ml.c7i-flex.12xlarge",
+		"ml.c7i-flex.16xlarge",
+		"ml.m8i-flex.large",
+		"ml.m8i-flex.xlarge",
+		"ml.m8i-flex.2xlarge",
+		"ml.m8i-flex.4xlarge",
+		"ml.m8i-flex.8xlarge",
+		"ml.m8i-flex.12xlarge",
+		"ml.m8i-flex.16xlarge",
+		"ml.c8i-flex.xlarge",
+		"ml.c8i-flex.2xlarge",
+		"ml.c8i-flex.4xlarge",
+		"ml.c8i-flex.8xlarge",
+		"ml.c8i-flex.12xlarge",
+		"ml.c8i-flex.16xlarge",
+		"ml.r8i-flex.large",
+		"ml.r8i-flex.xlarge",
+		"ml.r8i-flex.2xlarge",
+		"ml.r8i-flex.4xlarge",
+		"ml.r8i-flex.8xlarge",
+		"ml.r8i-flex.12xlarge",
+		"ml.r8i-flex.16xlarge",
 	}
 }
 
@@ -7382,6 +7900,12 @@ const (
 	ProductionVariantInstanceTypeMlG7e12xlarge      ProductionVariantInstanceType = "ml.g7e.12xlarge"
 	ProductionVariantInstanceTypeMlG7e24xlarge      ProductionVariantInstanceType = "ml.g7e.24xlarge"
 	ProductionVariantInstanceTypeMlG7e48xlarge      ProductionVariantInstanceType = "ml.g7e.48xlarge"
+	ProductionVariantInstanceTypeMlG72xlarge        ProductionVariantInstanceType = "ml.g7.2xlarge"
+	ProductionVariantInstanceTypeMlG74xlarge        ProductionVariantInstanceType = "ml.g7.4xlarge"
+	ProductionVariantInstanceTypeMlG78xlarge        ProductionVariantInstanceType = "ml.g7.8xlarge"
+	ProductionVariantInstanceTypeMlG712xlarge       ProductionVariantInstanceType = "ml.g7.12xlarge"
+	ProductionVariantInstanceTypeMlG724xlarge       ProductionVariantInstanceType = "ml.g7.24xlarge"
+	ProductionVariantInstanceTypeMlG748xlarge       ProductionVariantInstanceType = "ml.g7.48xlarge"
 	ProductionVariantInstanceTypeMlP4d24xlarge      ProductionVariantInstanceType = "ml.p4d.24xlarge"
 	ProductionVariantInstanceTypeMlC7gLarge         ProductionVariantInstanceType = "ml.c7g.large"
 	ProductionVariantInstanceTypeMlC7gXlarge        ProductionVariantInstanceType = "ml.c7g.xlarge"
@@ -7662,6 +8186,12 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 		"ml.p4d.24xlarge",
 		"ml.c7g.large",
 		"ml.c7g.xlarge",
@@ -8268,6 +8798,7 @@ const (
 	ResourceTypeModelCard                ResourceType = "ModelCard"
 	ResourceTypePipelineVersion          ResourceType = "PipelineVersion"
 	ResourceTypeJob                      ResourceType = "Job"
+	ResourceTypeHubContent               ResourceType = "HubContent"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -8295,6 +8826,7 @@ func (ResourceType) Values() []ResourceType {
 		"ModelCard",
 		"PipelineVersion",
 		"Job",
+		"HubContent",
 	}
 }
 
@@ -8342,6 +8874,7 @@ type RoutingStrategy string
 const (
 	RoutingStrategyLeastOutstandingRequests RoutingStrategy = "LEAST_OUTSTANDING_REQUESTS"
 	RoutingStrategyRandom                   RoutingStrategy = "RANDOM"
+	RoutingStrategyPrefixAware              RoutingStrategy = "PREFIX_AWARE"
 )
 
 // Values returns all known values for RoutingStrategy. Note that this can be
@@ -8352,6 +8885,7 @@ func (RoutingStrategy) Values() []RoutingStrategy {
 	return []RoutingStrategy{
 		"LEAST_OUTSTANDING_REQUESTS",
 		"RANDOM",
+		"PREFIX_AWARE",
 	}
 }
 
@@ -8747,6 +9281,63 @@ func (SkipModelValidation) Values() []SkipModelValidation {
 	return []SkipModelValidation{
 		"All",
 		"None",
+	}
+}
+
+type SlurmHealthComponent string
+
+// Enum values for SlurmHealthComponent
+const (
+	SlurmHealthComponentSlurmdbd SlurmHealthComponent = "Slurmdbd"
+)
+
+// Values returns all known values for SlurmHealthComponent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthComponent) Values() []SlurmHealthComponent {
+	return []SlurmHealthComponent{
+		"Slurmdbd",
+	}
+}
+
+type SlurmHealthReason string
+
+// Enum values for SlurmHealthReason
+const (
+	SlurmHealthReasonDaemonDown     SlurmHealthReason = "DaemonDown"
+	SlurmHealthReasonDaemonDisabled SlurmHealthReason = "DaemonDisabled"
+	SlurmHealthReasonDbUnreachable  SlurmHealthReason = "DbUnreachable"
+)
+
+// Values returns all known values for SlurmHealthReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthReason) Values() []SlurmHealthReason {
+	return []SlurmHealthReason{
+		"DaemonDown",
+		"DaemonDisabled",
+		"DbUnreachable",
+	}
+}
+
+type SlurmHealthStatus string
+
+// Enum values for SlurmHealthStatus
+const (
+	SlurmHealthStatusHealthy   SlurmHealthStatus = "Healthy"
+	SlurmHealthStatusUnhealthy SlurmHealthStatus = "Unhealthy"
+)
+
+// Values returns all known values for SlurmHealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SlurmHealthStatus) Values() []SlurmHealthStatus {
+	return []SlurmHealthStatus{
+		"Healthy",
+		"Unhealthy",
 	}
 }
 
@@ -9277,8 +9868,9 @@ type StorageType string
 
 // Enum values for StorageType
 const (
-	StorageTypeStandard StorageType = "Standard"
-	StorageTypeInMemory StorageType = "InMemory"
+	StorageTypeStandard   StorageType = "Standard"
+	StorageTypeStandardV2 StorageType = "Standard_V2"
+	StorageTypeInMemory   StorageType = "InMemory"
 )
 
 // Values returns all known values for StorageType. Note that this can be expanded
@@ -9288,6 +9880,7 @@ const (
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"Standard",
+		"Standard_V2",
 		"InMemory",
 	}
 }
@@ -9874,6 +10467,86 @@ const (
 	TrainingInstanceTypeMlG7e12xlarge      TrainingInstanceType = "ml.g7e.12xlarge"
 	TrainingInstanceTypeMlG7e24xlarge      TrainingInstanceType = "ml.g7e.24xlarge"
 	TrainingInstanceTypeMlG7e48xlarge      TrainingInstanceType = "ml.g7e.48xlarge"
+	TrainingInstanceTypeMlG72xlarge        TrainingInstanceType = "ml.g7.2xlarge"
+	TrainingInstanceTypeMlG74xlarge        TrainingInstanceType = "ml.g7.4xlarge"
+	TrainingInstanceTypeMlG78xlarge        TrainingInstanceType = "ml.g7.8xlarge"
+	TrainingInstanceTypeMlG712xlarge       TrainingInstanceType = "ml.g7.12xlarge"
+	TrainingInstanceTypeMlG724xlarge       TrainingInstanceType = "ml.g7.24xlarge"
+	TrainingInstanceTypeMlG748xlarge       TrainingInstanceType = "ml.g7.48xlarge"
+	TrainingInstanceTypeMlR6iLarge         TrainingInstanceType = "ml.r6i.large"
+	TrainingInstanceTypeMlR6iXlarge        TrainingInstanceType = "ml.r6i.xlarge"
+	TrainingInstanceTypeMlR6i2xlarge       TrainingInstanceType = "ml.r6i.2xlarge"
+	TrainingInstanceTypeMlR6i4xlarge       TrainingInstanceType = "ml.r6i.4xlarge"
+	TrainingInstanceTypeMlR6i8xlarge       TrainingInstanceType = "ml.r6i.8xlarge"
+	TrainingInstanceTypeMlR6i12xlarge      TrainingInstanceType = "ml.r6i.12xlarge"
+	TrainingInstanceTypeMlR6i16xlarge      TrainingInstanceType = "ml.r6i.16xlarge"
+	TrainingInstanceTypeMlR6i24xlarge      TrainingInstanceType = "ml.r6i.24xlarge"
+	TrainingInstanceTypeMlR6i32xlarge      TrainingInstanceType = "ml.r6i.32xlarge"
+	TrainingInstanceTypeMlM8iLarge         TrainingInstanceType = "ml.m8i.large"
+	TrainingInstanceTypeMlM8iXlarge        TrainingInstanceType = "ml.m8i.xlarge"
+	TrainingInstanceTypeMlM8i2xlarge       TrainingInstanceType = "ml.m8i.2xlarge"
+	TrainingInstanceTypeMlM8i4xlarge       TrainingInstanceType = "ml.m8i.4xlarge"
+	TrainingInstanceTypeMlM8i8xlarge       TrainingInstanceType = "ml.m8i.8xlarge"
+	TrainingInstanceTypeMlM8i12xlarge      TrainingInstanceType = "ml.m8i.12xlarge"
+	TrainingInstanceTypeMlM8i16xlarge      TrainingInstanceType = "ml.m8i.16xlarge"
+	TrainingInstanceTypeMlM8i24xlarge      TrainingInstanceType = "ml.m8i.24xlarge"
+	TrainingInstanceTypeMlM8i32xlarge      TrainingInstanceType = "ml.m8i.32xlarge"
+	TrainingInstanceTypeMlM8i48xlarge      TrainingInstanceType = "ml.m8i.48xlarge"
+	TrainingInstanceTypeMlM8i96xlarge      TrainingInstanceType = "ml.m8i.96xlarge"
+	TrainingInstanceTypeMlC8iXlarge        TrainingInstanceType = "ml.c8i.xlarge"
+	TrainingInstanceTypeMlC8i2xlarge       TrainingInstanceType = "ml.c8i.2xlarge"
+	TrainingInstanceTypeMlC8i4xlarge       TrainingInstanceType = "ml.c8i.4xlarge"
+	TrainingInstanceTypeMlC8i8xlarge       TrainingInstanceType = "ml.c8i.8xlarge"
+	TrainingInstanceTypeMlC8i12xlarge      TrainingInstanceType = "ml.c8i.12xlarge"
+	TrainingInstanceTypeMlC8i16xlarge      TrainingInstanceType = "ml.c8i.16xlarge"
+	TrainingInstanceTypeMlC8i24xlarge      TrainingInstanceType = "ml.c8i.24xlarge"
+	TrainingInstanceTypeMlC8i32xlarge      TrainingInstanceType = "ml.c8i.32xlarge"
+	TrainingInstanceTypeMlC8i48xlarge      TrainingInstanceType = "ml.c8i.48xlarge"
+	TrainingInstanceTypeMlC8i96xlarge      TrainingInstanceType = "ml.c8i.96xlarge"
+	TrainingInstanceTypeMlR8iLarge         TrainingInstanceType = "ml.r8i.large"
+	TrainingInstanceTypeMlR8iXlarge        TrainingInstanceType = "ml.r8i.xlarge"
+	TrainingInstanceTypeMlR8i2xlarge       TrainingInstanceType = "ml.r8i.2xlarge"
+	TrainingInstanceTypeMlR8i4xlarge       TrainingInstanceType = "ml.r8i.4xlarge"
+	TrainingInstanceTypeMlR8i8xlarge       TrainingInstanceType = "ml.r8i.8xlarge"
+	TrainingInstanceTypeMlR8i12xlarge      TrainingInstanceType = "ml.r8i.12xlarge"
+	TrainingInstanceTypeMlR8i16xlarge      TrainingInstanceType = "ml.r8i.16xlarge"
+	TrainingInstanceTypeMlR8i24xlarge      TrainingInstanceType = "ml.r8i.24xlarge"
+	TrainingInstanceTypeMlR8i32xlarge      TrainingInstanceType = "ml.r8i.32xlarge"
+	TrainingInstanceTypeMlR8i48xlarge      TrainingInstanceType = "ml.r8i.48xlarge"
+	TrainingInstanceTypeMlR8i96xlarge      TrainingInstanceType = "ml.r8i.96xlarge"
+	TrainingInstanceTypeMlM7iFlexLarge     TrainingInstanceType = "ml.m7i-flex.large"
+	TrainingInstanceTypeMlM7iFlexXlarge    TrainingInstanceType = "ml.m7i-flex.xlarge"
+	TrainingInstanceTypeMlM7iFlex2xlarge   TrainingInstanceType = "ml.m7i-flex.2xlarge"
+	TrainingInstanceTypeMlM7iFlex4xlarge   TrainingInstanceType = "ml.m7i-flex.4xlarge"
+	TrainingInstanceTypeMlM7iFlex8xlarge   TrainingInstanceType = "ml.m7i-flex.8xlarge"
+	TrainingInstanceTypeMlM7iFlex12xlarge  TrainingInstanceType = "ml.m7i-flex.12xlarge"
+	TrainingInstanceTypeMlM7iFlex16xlarge  TrainingInstanceType = "ml.m7i-flex.16xlarge"
+	TrainingInstanceTypeMlC7iFlexXlarge    TrainingInstanceType = "ml.c7i-flex.xlarge"
+	TrainingInstanceTypeMlC7iFlex2xlarge   TrainingInstanceType = "ml.c7i-flex.2xlarge"
+	TrainingInstanceTypeMlC7iFlex4xlarge   TrainingInstanceType = "ml.c7i-flex.4xlarge"
+	TrainingInstanceTypeMlC7iFlex8xlarge   TrainingInstanceType = "ml.c7i-flex.8xlarge"
+	TrainingInstanceTypeMlC7iFlex12xlarge  TrainingInstanceType = "ml.c7i-flex.12xlarge"
+	TrainingInstanceTypeMlC7iFlex16xlarge  TrainingInstanceType = "ml.c7i-flex.16xlarge"
+	TrainingInstanceTypeMlM8iFlexLarge     TrainingInstanceType = "ml.m8i-flex.large"
+	TrainingInstanceTypeMlM8iFlexXlarge    TrainingInstanceType = "ml.m8i-flex.xlarge"
+	TrainingInstanceTypeMlM8iFlex2xlarge   TrainingInstanceType = "ml.m8i-flex.2xlarge"
+	TrainingInstanceTypeMlM8iFlex4xlarge   TrainingInstanceType = "ml.m8i-flex.4xlarge"
+	TrainingInstanceTypeMlM8iFlex8xlarge   TrainingInstanceType = "ml.m8i-flex.8xlarge"
+	TrainingInstanceTypeMlM8iFlex12xlarge  TrainingInstanceType = "ml.m8i-flex.12xlarge"
+	TrainingInstanceTypeMlM8iFlex16xlarge  TrainingInstanceType = "ml.m8i-flex.16xlarge"
+	TrainingInstanceTypeMlC8iFlexXlarge    TrainingInstanceType = "ml.c8i-flex.xlarge"
+	TrainingInstanceTypeMlC8iFlex2xlarge   TrainingInstanceType = "ml.c8i-flex.2xlarge"
+	TrainingInstanceTypeMlC8iFlex4xlarge   TrainingInstanceType = "ml.c8i-flex.4xlarge"
+	TrainingInstanceTypeMlC8iFlex8xlarge   TrainingInstanceType = "ml.c8i-flex.8xlarge"
+	TrainingInstanceTypeMlC8iFlex12xlarge  TrainingInstanceType = "ml.c8i-flex.12xlarge"
+	TrainingInstanceTypeMlC8iFlex16xlarge  TrainingInstanceType = "ml.c8i-flex.16xlarge"
+	TrainingInstanceTypeMlR8iFlexLarge     TrainingInstanceType = "ml.r8i-flex.large"
+	TrainingInstanceTypeMlR8iFlexXlarge    TrainingInstanceType = "ml.r8i-flex.xlarge"
+	TrainingInstanceTypeMlR8iFlex2xlarge   TrainingInstanceType = "ml.r8i-flex.2xlarge"
+	TrainingInstanceTypeMlR8iFlex4xlarge   TrainingInstanceType = "ml.r8i-flex.4xlarge"
+	TrainingInstanceTypeMlR8iFlex8xlarge   TrainingInstanceType = "ml.r8i-flex.8xlarge"
+	TrainingInstanceTypeMlR8iFlex12xlarge  TrainingInstanceType = "ml.r8i-flex.12xlarge"
+	TrainingInstanceTypeMlR8iFlex16xlarge  TrainingInstanceType = "ml.r8i-flex.16xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -10027,6 +10700,86 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
+		"ml.m8i.large",
+		"ml.m8i.xlarge",
+		"ml.m8i.2xlarge",
+		"ml.m8i.4xlarge",
+		"ml.m8i.8xlarge",
+		"ml.m8i.12xlarge",
+		"ml.m8i.16xlarge",
+		"ml.m8i.24xlarge",
+		"ml.m8i.32xlarge",
+		"ml.m8i.48xlarge",
+		"ml.m8i.96xlarge",
+		"ml.c8i.xlarge",
+		"ml.c8i.2xlarge",
+		"ml.c8i.4xlarge",
+		"ml.c8i.8xlarge",
+		"ml.c8i.12xlarge",
+		"ml.c8i.16xlarge",
+		"ml.c8i.24xlarge",
+		"ml.c8i.32xlarge",
+		"ml.c8i.48xlarge",
+		"ml.c8i.96xlarge",
+		"ml.r8i.large",
+		"ml.r8i.xlarge",
+		"ml.r8i.2xlarge",
+		"ml.r8i.4xlarge",
+		"ml.r8i.8xlarge",
+		"ml.r8i.12xlarge",
+		"ml.r8i.16xlarge",
+		"ml.r8i.24xlarge",
+		"ml.r8i.32xlarge",
+		"ml.r8i.48xlarge",
+		"ml.r8i.96xlarge",
+		"ml.m7i-flex.large",
+		"ml.m7i-flex.xlarge",
+		"ml.m7i-flex.2xlarge",
+		"ml.m7i-flex.4xlarge",
+		"ml.m7i-flex.8xlarge",
+		"ml.m7i-flex.12xlarge",
+		"ml.m7i-flex.16xlarge",
+		"ml.c7i-flex.xlarge",
+		"ml.c7i-flex.2xlarge",
+		"ml.c7i-flex.4xlarge",
+		"ml.c7i-flex.8xlarge",
+		"ml.c7i-flex.12xlarge",
+		"ml.c7i-flex.16xlarge",
+		"ml.m8i-flex.large",
+		"ml.m8i-flex.xlarge",
+		"ml.m8i-flex.2xlarge",
+		"ml.m8i-flex.4xlarge",
+		"ml.m8i-flex.8xlarge",
+		"ml.m8i-flex.12xlarge",
+		"ml.m8i-flex.16xlarge",
+		"ml.c8i-flex.xlarge",
+		"ml.c8i-flex.2xlarge",
+		"ml.c8i-flex.4xlarge",
+		"ml.c8i-flex.8xlarge",
+		"ml.c8i-flex.12xlarge",
+		"ml.c8i-flex.16xlarge",
+		"ml.r8i-flex.large",
+		"ml.r8i-flex.xlarge",
+		"ml.r8i-flex.2xlarge",
+		"ml.r8i-flex.4xlarge",
+		"ml.r8i-flex.8xlarge",
+		"ml.r8i-flex.12xlarge",
+		"ml.r8i-flex.16xlarge",
 	}
 }
 
@@ -10202,6 +10955,41 @@ func (TrainingRepositoryAccessMode) Values() []TrainingRepositoryAccessMode {
 	}
 }
 
+type TrainingSessionStatus string
+
+// Enum values for TrainingSessionStatus
+const (
+	TrainingSessionStatusCreated        TrainingSessionStatus = "Created"
+	TrainingSessionStatusBlocked        TrainingSessionStatus = "Blocked"
+	TrainingSessionStatusRunning        TrainingSessionStatus = "Running"
+	TrainingSessionStatusFailed         TrainingSessionStatus = "Failed"
+	TrainingSessionStatusScheduled      TrainingSessionStatus = "Scheduled"
+	TrainingSessionStatusStopping       TrainingSessionStatus = "Stopping"
+	TrainingSessionStatusStopped        TrainingSessionStatus = "Stopped"
+	TrainingSessionStatusExpired        TrainingSessionStatus = "Expired"
+	TrainingSessionStatusDeleting       TrainingSessionStatus = "Deleting"
+	TrainingSessionStatusDeletionFailed TrainingSessionStatus = "DeletionFailed"
+)
+
+// Values returns all known values for TrainingSessionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingSessionStatus) Values() []TrainingSessionStatus {
+	return []TrainingSessionStatus{
+		"Created",
+		"Blocked",
+		"Running",
+		"Failed",
+		"Scheduled",
+		"Stopping",
+		"Stopped",
+		"Expired",
+		"Deleting",
+		"DeletionFailed",
+	}
+}
+
 type TransformInstanceType string
 
 // Enum values for TransformInstanceType
@@ -10314,6 +11102,14 @@ const (
 	TransformInstanceTypeMlG616xlarge   TransformInstanceType = "ml.g6.16xlarge"
 	TransformInstanceTypeMlG624xlarge   TransformInstanceType = "ml.g6.24xlarge"
 	TransformInstanceTypeMlG648xlarge   TransformInstanceType = "ml.g6.48xlarge"
+	TransformInstanceTypeMlG6eXlarge    TransformInstanceType = "ml.g6e.xlarge"
+	TransformInstanceTypeMlG6e2xlarge   TransformInstanceType = "ml.g6e.2xlarge"
+	TransformInstanceTypeMlG6e4xlarge   TransformInstanceType = "ml.g6e.4xlarge"
+	TransformInstanceTypeMlG6e8xlarge   TransformInstanceType = "ml.g6e.8xlarge"
+	TransformInstanceTypeMlG6e12xlarge  TransformInstanceType = "ml.g6e.12xlarge"
+	TransformInstanceTypeMlG6e16xlarge  TransformInstanceType = "ml.g6e.16xlarge"
+	TransformInstanceTypeMlG6e24xlarge  TransformInstanceType = "ml.g6e.24xlarge"
+	TransformInstanceTypeMlG6e48xlarge  TransformInstanceType = "ml.g6e.48xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can
@@ -10430,6 +11226,14 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 	}
 }
 

@@ -199,6 +199,12 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#CFNResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.resourceexplorer2#CfnIndex": {
             "type": "resource",
             "identifiers": {
@@ -2524,6 +2530,22 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.resourceexplorer2#RecorderType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a service-linked recorder.</p> <ul> <li> <p> <code>AWS</code> – Managed by an Amazon Web Services service.</p> </li> <li> <p> <code>THIRD_PARTY</code> – Managed by a third-party service.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "name": "AWS",
+                        "value": "AWS"
+                    },
+                    {
+                        "name": "THIRD_PARTY",
+                        "value": "THIRD_PARTY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.resourceexplorer2#RegionList": {
             "type": "list",
             "member": {
@@ -2597,6 +2619,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services service that owns the resource and is responsible for creating and updating it.</p>"
+                    }
+                },
+                "CfnResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFormation resource type identifier for the resource, such as <code>AWS::EC2::Instance</code> or <code>AWS::S3::Bucket</code>.</p>"
                     }
                 },
                 "LastReportedAt": {
@@ -3716,6 +3744,32 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#ServiceLinkedRecorderInfo": {
+            "type": "structure",
+            "members": {
+                "ServicePrincipal": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service that owns the service-linked recorder, such as <code>observabilityadmin.amazonaws.com</code>.</p>"
+                    }
+                },
+                "RecorderName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service-linked recorder, such as <code>AWSConfigurationRecorderForObservabilityAdmin</code>.</p>"
+                    }
+                },
+                "RecorderType": {
+                    "target": "com.amazonaws.resourceexplorer2#RecorderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the recorder. Valid values are <code>AWS</code> and <code>THIRD_PARTY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the service-linked recorder paired with a service view.</p>"
+            }
+        },
         "com.amazonaws.resourceexplorer2#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -3781,6 +3835,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The scope type of the service view, which determines what resources are included.</p>"
+                    }
+                },
+                "ServiceLinkedRecorder": {
+                    "target": "com.amazonaws.resourceexplorer2#ServiceLinkedRecorderInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the service-linked recorder associated with this service view. When a service view is paired with a service-linked recorder, Resource Explorer uses the recorder's resource type list to filter search results and streaming data.</p>"
                     }
                 }
             },
@@ -3851,6 +3911,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the resource type.</p>"
+                    }
+                },
+                "CFNResourceTypes": {
+                    "target": "com.amazonaws.resourceexplorer2#CFNResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFormation resource type identifiers for this resource type, such as <code>AWS::EC2::Instance</code>.</p>"
                     }
                 }
             },

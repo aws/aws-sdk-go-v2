@@ -4,13 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +71,9 @@ type CreateDbInstanceInput struct {
 	// organization.
 	Bucket *string
 
+	// A list of backup configurations to enable automated backups for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// The id of the DB parameter group to assign to your DB instance. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
@@ -96,6 +94,10 @@ type CreateDbInstanceInput struct {
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.
 	DeploymentType types.DeploymentType
+
+	// The Amazon Web Services KMS key identifier to use for encryption of the DB
+	// instance. Can be a key ID, key ARN, alias name, or alias ARN.
+	KmsKeyId *string
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
@@ -139,67 +141,6 @@ type CreateDbInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDbInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDbInstanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllocatedStorage != nil {
-		s.WriteInt32(schemas.CreateDbInstanceInput_allocatedStorage, *v.AllocatedStorage)
-	}
-	if v.Bucket != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_bucket, *v.Bucket)
-	}
-	if v.DbInstanceType != "" {
-		s.WriteString(schemas.CreateDbInstanceInput_dbInstanceType, string(v.DbInstanceType))
-	}
-	if v.DbParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
-	}
-	if v.DbStorageType != "" {
-		s.WriteString(schemas.CreateDbInstanceInput_dbStorageType, string(v.DbStorageType))
-	}
-	if v.DeploymentType != "" {
-		s.WriteString(schemas.CreateDbInstanceInput_deploymentType, string(v.DeploymentType))
-	}
-	if v.LogDeliveryConfiguration != nil {
-		s.WriteStruct(schemas.CreateDbInstanceInput_logDeliveryConfiguration)
-		v.LogDeliveryConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaintenanceSchedule != nil {
-		s.WriteStruct(schemas.CreateDbInstanceInput_maintenanceSchedule)
-		v.MaintenanceSchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_name, *v.Name)
-	}
-	if v.NetworkType != "" {
-		s.WriteString(schemas.CreateDbInstanceInput_networkType, string(v.NetworkType))
-	}
-	if v.Organization != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_organization, *v.Organization)
-	}
-	if v.Password != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_password, *v.Password)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateDbInstanceInput_port, *v.Port)
-	}
-	if v.PubliclyAccessible != nil {
-		s.WriteBool(schemas.CreateDbInstanceInput_publiclyAccessible, *v.PubliclyAccessible)
-	}
-	serializeRequestTagMap(s, schemas.CreateDbInstanceInput_tags, v.Tags)
-	if v.Username != nil {
-		s.WriteString(schemas.CreateDbInstanceInput_username, *v.Username)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbInstanceInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbInstanceInput_vpcSubnetIds, v.VpcSubnetIds)
-}
-
 type CreateDbInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the DB instance.
@@ -228,6 +169,9 @@ type CreateDbInstanceOutput struct {
 
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
+
+	// The backup configurations for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
 
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
@@ -259,6 +203,9 @@ type CreateDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -300,178 +247,29 @@ type CreateDbInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDbInstanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDbInstanceOutput_allocatedStorage:
-			v.AllocatedStorage = new(int32)
-			return d.ReadInt32(schemas.CreateDbInstanceOutput_allocatedStorage, v.AllocatedStorage)
-		case schemas.CreateDbInstanceOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_arn, v.Arn)
-		case schemas.CreateDbInstanceOutput_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_availabilityZone, v.AvailabilityZone)
-		case schemas.CreateDbInstanceOutput_dbClusterId:
-			v.DbClusterId = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_dbClusterId, v.DbClusterId)
-		case schemas.CreateDbInstanceOutput_dbInstanceType:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_dbInstanceType, &ev); err != nil {
-				return err
-			}
-			v.DbInstanceType = types.DbInstanceType(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_dbParameterGroupIdentifier:
-			v.DbParameterGroupIdentifier = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
-		case schemas.CreateDbInstanceOutput_dbStorageType:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_dbStorageType, &ev); err != nil {
-				return err
-			}
-			v.DbStorageType = types.DbStorageType(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_deploymentType:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_deploymentType, &ev); err != nil {
-				return err
-			}
-			v.DeploymentType = types.DeploymentType(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_endpoint, v.Endpoint)
-		case schemas.CreateDbInstanceOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_id, v.Id)
-		case schemas.CreateDbInstanceOutput_influxAuthParametersSecretArn:
-			v.InfluxAuthParametersSecretArn = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
-		case schemas.CreateDbInstanceOutput_instanceMode:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_instanceMode, &ev); err != nil {
-				return err
-			}
-			v.InstanceMode = types.InstanceMode(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_instanceModes:
-			return deserializeInstanceModeList(d, schemas.CreateDbInstanceOutput_instanceModes, &v.InstanceModes)
-		case schemas.CreateDbInstanceOutput_lastMaintenanceTime:
-			v.LastMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.CreateDbInstanceOutput_lastMaintenanceTime, v.LastMaintenanceTime)
-		case schemas.CreateDbInstanceOutput_logDeliveryConfiguration:
-			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
-			return v.LogDeliveryConfiguration.Deserialize(d)
-		case schemas.CreateDbInstanceOutput_maintenanceSchedule:
-			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
-			return v.MaintenanceSchedule.Deserialize(d)
-		case schemas.CreateDbInstanceOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_name, v.Name)
-		case schemas.CreateDbInstanceOutput_networkType:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_networkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = types.NetworkType(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_nextMaintenanceTime:
-			v.NextMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.CreateDbInstanceOutput_nextMaintenanceTime, v.NextMaintenanceTime)
-		case schemas.CreateDbInstanceOutput_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.CreateDbInstanceOutput_port, v.Port)
-		case schemas.CreateDbInstanceOutput_publiclyAccessible:
-			v.PubliclyAccessible = new(bool)
-			return d.ReadBool(schemas.CreateDbInstanceOutput_publiclyAccessible, v.PubliclyAccessible)
-		case schemas.CreateDbInstanceOutput_secondaryAvailabilityZone:
-			v.SecondaryAvailabilityZone = new(string)
-			return d.ReadString(schemas.CreateDbInstanceOutput_secondaryAvailabilityZone, v.SecondaryAvailabilityZone)
-		case schemas.CreateDbInstanceOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbInstanceOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.CreateDbInstanceOutput_vpcSecurityGroupIds:
-			return deserializeVpcSecurityGroupIdList(d, schemas.CreateDbInstanceOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		case schemas.CreateDbInstanceOutput_vpcSubnetIds:
-			return deserializeVpcSubnetIdList(d, schemas.CreateDbInstanceOutput_vpcSubnetIds, &v.VpcSubnetIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDbInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbInstance, schemas.CreateDbInstanceInput, schemas.CreateDbInstanceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDbInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbInstance, schemas.CreateDbInstanceInput, schemas.CreateDbInstanceOutput), output: &CreateDbInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDbInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDbInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -486,22 +284,8 @@ func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDbInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDbInstance",
-	}
 }

@@ -5,10 +5,10 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list that contains the number of managed Contributor Insights rules
@@ -48,6 +48,24 @@ type ListManagedInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedInsightRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedInsightRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedInsightRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedInsightRulesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedInsightRulesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ListManagedInsightRulesInput_ResourceARN, *v.ResourceARN)
+	}
+}
+
 type ListManagedInsightRulesOutput struct {
 
 	//  The managed rules that are available for the specified Amazon Web Services
@@ -64,65 +82,45 @@ type ListManagedInsightRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedInsightRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedRuleDescriptions(s, schemas.ListManagedInsightRulesOutput_ManagedRules, v.ManagedRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedInsightRulesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedInsightRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedInsightRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedInsightRulesOutput_ManagedRules:
+			return deserializeManagedRuleDescriptions(d, schemas.ListManagedInsightRulesOutput_ManagedRules, &v.ManagedRules)
+		case schemas.ListManagedInsightRulesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedInsightRulesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedInsightRules, schemas.ListManagedInsightRulesInput, schemas.ListManagedInsightRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListManagedInsightRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedInsightRules, schemas.ListManagedInsightRulesInput, schemas.ListManagedInsightRulesOutput), output: &ListManagedInsightRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListManagedInsightRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedInsightRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -132,12 +130,6 @@ func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpListManagedInsightRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedInsightRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +142,6 @@ func (c *Client) addOperationListManagedInsightRulesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +245,3 @@ type ListManagedInsightRulesAPIClient interface {
 }
 
 var _ ListManagedInsightRulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListManagedInsightRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListManagedInsightRules",
-	}
-}

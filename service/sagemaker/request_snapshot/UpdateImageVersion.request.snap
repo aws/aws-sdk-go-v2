@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateImageVersion
+
+{"Alias":"__Alias__","AliasesToAdd":["__Member__","__Member__"],"AliasesToDelete":["__Member__","__Member__"],"Horovod":true,"ImageName":"__ImageName__","JobType":"TRAINING","MLFramework":"__MLFramework__","Processor":"CPU","ProgrammingLang":"__ProgrammingLang__","ReleaseNotes":"__ReleaseNotes__","VendorGuidance":"NOT_PROVIDED","Version":1}

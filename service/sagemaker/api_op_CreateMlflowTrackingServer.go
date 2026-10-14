@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an MLflow Tracking Server using a general purpose Amazon S3 bucket as
@@ -97,6 +96,43 @@ type CreateMlflowTrackingServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowTrackingServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowTrackingServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	if v.AutomaticModelRegistration != nil {
+		s.WriteBool(schemas.CreateMlflowTrackingServerRequest_AutomaticModelRegistration, *v.AutomaticModelRegistration)
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketOwnerAccountId != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_S3BucketOwnerAccountId, *v.S3BucketOwnerAccountId)
+	}
+	if v.S3BucketOwnerVerification != nil {
+		s.WriteBool(schemas.CreateMlflowTrackingServerRequest_S3BucketOwnerVerification, *v.S3BucketOwnerVerification)
+	}
+	serializeTagList(s, schemas.CreateMlflowTrackingServerRequest_Tags, v.Tags)
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
+	}
+	if v.TrackingServerSize != "" {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_TrackingServerSize, string(v.TrackingServerSize))
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+
 type CreateMlflowTrackingServerOutput struct {
 
 	// The ARN of the tracking server.
@@ -108,77 +144,48 @@ type CreateMlflowTrackingServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowTrackingServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowTrackingServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowTrackingServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerArn != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerResponse_TrackingServerArn, *v.TrackingServerArn)
+	}
+}
+func (v *CreateMlflowTrackingServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMlflowTrackingServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMlflowTrackingServerResponse_TrackingServerArn:
+			v.TrackingServerArn = new(string)
+			return d.ReadString(schemas.CreateMlflowTrackingServerResponse_TrackingServerArn, v.TrackingServerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowTrackingServer, schemas.CreateMlflowTrackingServerRequest, schemas.CreateMlflowTrackingServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowTrackingServer, schemas.CreateMlflowTrackingServerRequest, schemas.CreateMlflowTrackingServerResponse), output: &CreateMlflowTrackingServerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMlflowTrackingServer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMlflowTrackingServer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMlflowTrackingServerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMlflowTrackingServer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +200,8 @@ func (c *Client) addOperationCreateMlflowTrackingServerMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMlflowTrackingServer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMlflowTrackingServer",
-	}
 }

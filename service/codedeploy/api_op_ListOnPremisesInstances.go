@@ -4,11 +4,10 @@ package codedeploy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of names for one or more on-premises instances.
@@ -53,6 +52,22 @@ type ListOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOnPremisesInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOnPremisesInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOnPremisesInstancesInput_nextToken, *v.NextToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListOnPremisesInstancesInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	serializeTagFilterList(s, schemas.ListOnPremisesInstancesInput_tagFilters, v.TagFilters)
+}
+
 // Represents the output of the list on-premises instances operation.
 type ListOnPremisesInstancesOutput struct {
 
@@ -70,74 +85,48 @@ type ListOnPremisesInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOnPremisesInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOnPremisesInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOnPremisesInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceNameList(s, schemas.ListOnPremisesInstancesOutput_instanceNames, v.InstanceNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOnPremisesInstancesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListOnPremisesInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOnPremisesInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOnPremisesInstancesOutput_instanceNames:
+			return deserializeInstanceNameList(d, schemas.ListOnPremisesInstancesOutput_instanceNames, &v.InstanceNames)
+		case schemas.ListOnPremisesInstancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOnPremisesInstancesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOnPremisesInstances, schemas.ListOnPremisesInstancesInput, schemas.ListOnPremisesInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOnPremisesInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOnPremisesInstances, schemas.ListOnPremisesInstancesInput, schemas.ListOnPremisesInstancesOutput), output: &ListOnPremisesInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOnPremisesInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOnPremisesInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOnPremisesInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +141,8 @@ func (c *Client) addOperationListOnPremisesInstancesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListOnPremisesInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOnPremisesInstances",
-	}
 }

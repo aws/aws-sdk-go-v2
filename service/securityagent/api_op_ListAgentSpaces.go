@@ -5,12 +5,8 @@ package securityagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of agent space summaries in your account.
@@ -43,21 +39,6 @@ type ListAgentSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAgentSpacesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAgentSpacesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAgentSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAgentSpacesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAgentSpacesInput_nextToken, *v.NextToken)
-	}
-}
-
 // Output for the ListAgentSpaces operation.
 type ListAgentSpacesOutput struct {
 
@@ -75,84 +56,26 @@ type ListAgentSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAgentSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAgentSpacesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAgentSpacesOutput_agentSpaceSummaries:
-			return deserializeAgentSpaceSummaryList(d, schemas.ListAgentSpacesOutput_agentSpaceSummaries, &v.AgentSpaceSummaries)
-		case schemas.ListAgentSpacesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAgentSpacesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAgentSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentSpaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentSpaces{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentSpaces, schemas.ListAgentSpacesInput, schemas.ListAgentSpacesOutput), output: &ListAgentSpacesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAgentSpaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAgentSpaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +88,6 @@ func (c *Client) addOperationListAgentSpacesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +188,3 @@ type ListAgentSpacesAPIClient interface {
 }
 
 var _ ListAgentSpacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAgentSpaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAgentSpaces",
-	}
-}

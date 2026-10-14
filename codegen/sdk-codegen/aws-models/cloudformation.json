@@ -2845,7 +2845,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Continues rolling back a stack from <code>UPDATE_ROLLBACK_FAILED</code> to\n        <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can\n      manually fix the error and continue the rollback. By continuing the rollback, you can return\n      your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state) and then try\n      to update the stack again.</p>\n         <p>A stack enters the <code>UPDATE_ROLLBACK_FAILED</code> state when CloudFormation can't roll\n      back all changes after a failed stack update. For example, this might occur when a stack\n      attempts to roll back to an old database that was deleted outside of CloudFormation. Because\n      CloudFormation doesn't know the instance was deleted, it assumes the instance still exists and\n      attempts to roll back to it, causing the update rollback to fail.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>. For\n      information for troubleshooting a failed update rollback, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\">Update rollback failed</a>.</p>"
+                "smithy.api#documentation": "<p>Continues rolling back a stack from <code>UPDATE_ROLLBACK_FAILED</code> to\n        <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can\n      manually fix the error and continue the rollback. By continuing the rollback, you can return\n      your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state) and then try\n      to update the stack again.</p>\n         <p>A stack enters the <code>UPDATE_ROLLBACK_FAILED</code> state when CloudFormation can't roll\n      back all changes after a failed stack update. For example, this might occur when a stack\n      attempts to roll back to an old database that was deleted outside of CloudFormation. Because\n      CloudFormation doesn't know the instance was deleted, it assumes the instance still exists and\n      attempts to roll back to it, causing the update rollback to fail.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>. For\n      information for troubleshooting a failed update rollback, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\">Update rollback failed</a>.</p>\n         <p>\n            <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.\n      For details, see <a>ContinueUpdateRollbackInput$ForceRollback</a>.</p>"
             }
         },
         "com.amazonaws.cloudformation#ContinueUpdateRollbackInput": {
@@ -2875,6 +2875,12 @@
                     "target": "com.amazonaws.cloudformation#ClientRequestToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for this <code>ContinueUpdateRollback</code> request. Specify this\n      token if you plan to retry requests so that CloudFormation knows that you're not attempting to\n      continue the rollback to a stack with the same name. You might retry\n        <code>ContinueUpdateRollback</code> requests to ensure that CloudFormation successfully received\n      them.</p>"
+                    }
+                },
+                "ForceRollback": {
+                    "target": "com.amazonaws.cloudformation#ForceRollback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether CloudFormation forces the rollback to continue by skipping resources\n      currently in the <code>UPDATE_FAILED</code> state. Use this instead of listing each resource\n      individually in <code>ResourcesToSkip</code>. Only resources that entered the\n        <code>UPDATE_FAILED</code> state because a rollback failed are skipped. If you don't specify\n      a value, the default is <code>false</code> and CloudFormation doesn't skip any resources.</p>\n         <p>\n            <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.\n      Specifying both in the same request returns a validation error.</p>\n         <important>\n            <p>We recommend that you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\">troubleshoot</a> resources before skipping them. CloudFormation sets the status of the\n        skipped resources to <code>UPDATE_COMPLETE</code> and continues to roll back the stack,\n        including resources in nested stacks. After the rollback completes, the skipped resources no\n        longer match the resources in the stack template. Before performing another stack update,\n        you must update the stack or resources to be consistent with each other. If you don't,\n        subsequent stack updates might fail, and the stack will become unrecoverable.</p>\n            <p>Drift detection reports skipped resources as <code>NOT_CHECKED</code>. For guidance,\n        see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>\n         </important>"
                     }
                 }
             },
@@ -3039,6 +3045,18 @@
                     "target": "com.amazonaws.cloudformation#DeploymentMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines how CloudFormation handles configuration drift during deployment.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REVERT_DRIFT</code> – Creates a drift-aware change set that brings actual\n          resource states in line with template definitions. Provides a three-way comparison between\n          actual state, previous deployment state, and desired state.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html\">Using drift-aware\n        change sets</a> in the <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -3318,6 +3336,18 @@
                     "target": "com.amazonaws.cloudformation#RetainExceptOnCreate",
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -3906,6 +3936,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the deletion mode for the stack. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Use the standard behavior. Specifying this value is the same\n          as not specifying this parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DELETE_STACK</code> - Delete the stack if it's stuck in a\n            <code>DELETE_FAILED</code> state due to resource deletion failure.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4087,6 +4123,43 @@
         },
         "com.amazonaws.cloudformation#DeletionTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.cloudformation#DeploymentConfig": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfigMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deployment mode for the stack operation. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Use the standard deployment behavior, ensuring resources are\n     ready to serve traffic before completing the operation. This is the default. You do not need\n     to specify this value explicitly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPRESS</code> - Complete the stack operation when resource configuration is\n     applied, without waiting for resources to become ready to serve traffic. Resources continue\n     becoming ready in the background.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DisableRollback": {
+                    "target": "com.amazonaws.cloudformation#DisableRollback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to disable rollback of the stack if the stack operation fails.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment configuration for a stack operation, including the deployment mode.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#DeploymentConfigMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "EXPRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPRESS"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudformation#DeploymentMode": {
             "type": "enum",
@@ -4596,6 +4669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment mode specified when the change set was created. Valid value is\n        <code>REVERT_DRIFT</code>. Only present for drift-aware change sets.</p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration specified when the change set was created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4626,7 +4705,7 @@
                 "StackName": {
                     "target": "com.amazonaws.cloudformation#StackNameOrId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or unique stack ID for which you want to retrieve events.</p>"
+                        "smithy.api#documentation": "<p>The name or unique stack ID for which you want to retrieve events. If you specified the\n      name of a change set, specify the stack name or ID (ARN) of the change set you want to\n      describe.</p>"
                     }
                 },
                 "ChangeSetName": {
@@ -6734,6 +6813,12 @@
         "com.amazonaws.cloudformation#DisableRollback": {
             "type": "boolean"
         },
+        "com.amazonaws.cloudformation#DisableValidation": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "<p>Boolean to enable or disable pre-deployment validations in changeset and stack operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code>: disable pre-deployment validations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code>: enable pre-deployment validations.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.cloudformation#DriftIgnoredReason": {
             "type": "enum",
             "members": {
@@ -6747,6 +6832,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WRITE_ONLY_PROPERTY"
+                    }
+                },
+                "SENSITIVE_PROPERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENSITIVE_PROPERTY"
                     }
                 }
             }
@@ -7128,6 +7219,9 @@
                     "max": 100
                 }
             }
+        },
+        "com.amazonaws.cloudformation#ForceRollback": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudformation#GeneratedTemplateDeletionPolicy": {
             "type": "enum",
@@ -12144,7 +12238,7 @@
                 "Reason": {
                     "target": "com.amazonaws.cloudformation#DriftIgnoredReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reason why drift was ignored for the attribute, can have 2 possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITE_ONLY_PROPERTY</code> - Property is not included in read response for the\n     resource’s live state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED_BY_AWS</code> - Property is managed by an Amazon Web Services service and is expected to be\n     dynamically modified.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Reason why drift was ignored for the attribute, can have 3 possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITE_ONLY_PROPERTY</code> – Property is not included in read response for the\n     resource’s live state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED_BY_AWS</code> – Property is managed by an Amazon Web Services service and is expected to be\n     dynamically modified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SENSITIVE_PROPERTY</code> – Property has a sensitive value, such as an Amazon Web Services Secrets Manager value.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -12954,6 +13048,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13453,6 +13553,12 @@
                     "target": "com.amazonaws.cloudformation#DisableRollback",
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean to enable or disable rollback on stack creation failures:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code>: disable rollback.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code>: enable rollback.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for the stack, including the deployment mode used for stack\n   operations.</p>"
                     }
                 },
                 "NotificationARNs": {
@@ -14922,7 +15028,7 @@
                     "target": "com.amazonaws.cloudformation#StackResourceDriftStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Status of the resource's actual configuration compared to its expected configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected configuration in that it has\n     been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: The resource differs from its expected configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation hasn't checked if the resource differs from its\n     expected configuration.</p>\n               <p>Any resources that don't currently support drift detection have a status of\n      <code>NOT_CHECKED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resource\n      type support for imports and drift detection</a>. If you performed an <a>ContinueUpdateRollback</a> operation on a stack, any resources included in\n      <code>ResourcesToSkip</code> will also have a status of <code>NOT_CHECKED</code>. For more\n     information about skipping resources during rollback operations, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected\n     configuration.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Status of the resource's actual configuration compared to its expected configuration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETED</code>: The resource differs from its expected configuration in that it has\n     been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFIED</code>: The resource differs from its expected configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_CHECKED</code>: CloudFormation hasn't checked if the resource differs from its\n     expected configuration.</p>\n               <p>Any resources that don't currently support drift detection have a status of\n      <code>NOT_CHECKED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resource\n      type support for imports and drift detection</a>. If you performed a <a>ContinueUpdateRollback</a> operation on a stack, resources skipped using\n      <code>ResourcesToSkip</code> or <code>ForceRollback</code> also have a status of\n      <code>NOT_CHECKED</code>. To detect whether a skipped resource actually differs from the\n      template, run <a>DetectStackResourceDrift</a>. For more information about\n      skipping resources during rollback operations, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_SYNC</code>: The resource's actual configuration matches its expected\n     configuration.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17420,6 +17526,18 @@
                     "target": "com.amazonaws.cloudformation#RetainExceptOnCreate",
                     "traits": {
                         "smithy.api#documentation": "<p>When set to <code>true</code>, newly created resources are deleted when the operation\n      rolls back. This includes newly created resources marked with a deletion policy of\n        <code>Retain</code>.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.cloudformation#DeploymentConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for this stack operation, including the deployment\n      mode.</p>"
+                    }
+                },
+                "DisableValidation": {
+                    "target": "com.amazonaws.cloudformation#DisableValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.\n    </p>\n         <p>\n    Default: <code>false</code>\n         </p>"
                     }
                 }
             },

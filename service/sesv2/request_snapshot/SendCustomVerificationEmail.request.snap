@@ -1,0 +1,5 @@
+POST /v2/email/outbound-custom-verification-emails
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__","EmailAddress":"__EmailAddress__","TemplateName":"__TemplateName__"}

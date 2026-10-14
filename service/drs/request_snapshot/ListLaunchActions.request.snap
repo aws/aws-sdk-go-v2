@@ -1,0 +1,5 @@
+POST /ListLaunchActions
+
+Content-Type: application/json
+
+{"filters":{"actionIds":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__","resourceId":"__ResourceId__"}

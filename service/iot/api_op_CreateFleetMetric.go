@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a fleet metric.
@@ -80,6 +79,45 @@ type CreateFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_aggregationField, *v.AggregationField)
+	}
+	if v.AggregationType != nil {
+		s.WriteStruct(schemas.CreateFleetMetricRequest_aggregationType)
+		v.AggregationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_description, *v.Description)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_indexName, *v.IndexName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_metricName, *v.MetricName)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.CreateFleetMetricRequest_period, *v.Period)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_queryVersion, *v.QueryVersion)
+	}
+	serializeTagList(s, schemas.CreateFleetMetricRequest_tags, v.Tags)
+	if v.Unit != "" {
+		s.WriteString(schemas.CreateFleetMetricRequest_unit, string(v.Unit))
+	}
+}
+
 type CreateFleetMetricOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new fleet metric.
@@ -94,77 +132,54 @@ type CreateFleetMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricArn != nil {
+		s.WriteString(schemas.CreateFleetMetricResponse_metricArn, *v.MetricArn)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateFleetMetricResponse_metricName, *v.MetricName)
+	}
+}
+func (v *CreateFleetMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFleetMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFleetMetricResponse_metricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.CreateFleetMetricResponse_metricArn, v.MetricArn)
+		case schemas.CreateFleetMetricResponse_metricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CreateFleetMetricResponse_metricName, v.MetricName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFleetMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleetMetric, schemas.CreateFleetMetricRequest, schemas.CreateFleetMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFleetMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleetMetric, schemas.CreateFleetMetricRequest, schemas.CreateFleetMetricResponse), output: &CreateFleetMetricOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFleetMetric{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFleetMetric"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFleetMetricValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFleetMetric(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +194,8 @@ func (c *Client) addOperationCreateFleetMetricMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFleetMetric(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFleetMetric",
-	}
 }

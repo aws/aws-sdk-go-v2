@@ -4,11 +4,10 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the provisioned concurrency configuration for a function's alias or
@@ -54,6 +53,21 @@ type GetProvisionedConcurrencyConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedConcurrencyConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedConcurrencyConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedConcurrencyConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type GetProvisionedConcurrencyConfigOutput struct {
 
 	// The amount of provisioned concurrency allocated. When a weighted alias is used
@@ -85,77 +99,82 @@ type GetProvisionedConcurrencyConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedConcurrencyConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedConcurrencyConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedConcurrencyConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions, *v.AllocatedProvisionedConcurrentExecutions)
+	}
+	if v.AvailableProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions, *v.AvailableProvisionedConcurrentExecutions)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_LastModified, *v.LastModified)
+	}
+	if v.RequestedProvisionedConcurrentExecutions != nil {
+		s.WriteInt32(schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions, *v.RequestedProvisionedConcurrentExecutions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetProvisionedConcurrencyConfigResponse_StatusReason, *v.StatusReason)
+	}
+}
+func (v *GetProvisionedConcurrencyConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisionedConcurrencyConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions:
+			v.AllocatedProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_AllocatedProvisionedConcurrentExecutions, v.AllocatedProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions:
+			v.AvailableProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_AvailableProvisionedConcurrentExecutions, v.AvailableProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_LastModified, v.LastModified)
+		case schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions:
+			v.RequestedProvisionedConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedConcurrencyConfigResponse_RequestedProvisionedConcurrentExecutions, v.RequestedProvisionedConcurrentExecutions)
+		case schemas.GetProvisionedConcurrencyConfigResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProvisionedConcurrencyStatusEnum(ev)
+			return nil
+		case schemas.GetProvisionedConcurrencyConfigResponse_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetProvisionedConcurrencyConfigResponse_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedConcurrencyConfig, schemas.GetProvisionedConcurrencyConfigRequest, schemas.GetProvisionedConcurrencyConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedConcurrencyConfig, schemas.GetProvisionedConcurrencyConfigRequest, schemas.GetProvisionedConcurrencyConfigResponse), output: &GetProvisionedConcurrencyConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProvisionedConcurrencyConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProvisionedConcurrencyConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProvisionedConcurrencyConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProvisionedConcurrencyConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +189,8 @@ func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProvisionedConcurrencyConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProvisionedConcurrencyConfig",
-	}
 }

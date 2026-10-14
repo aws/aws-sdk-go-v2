@@ -1,0 +1,7 @@
+POST /service/PerformanceInsightsv20180227/operation/ListAvailableResourceDimensions
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿qAuthorizedActionsŸuDescribeDimensionKeysuDescribeDimensionKeysÿjIdentifiern__Identifier__jMaxResultsgMetricsŸj__Member__j__Member__ÿiNextTokenm__NextToken__kServiceTypecRDSÿ

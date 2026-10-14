@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"documentDetails":[{"dataSourceId":"__DataSourceId__","identifier":{"custom":{"id":"__Id__"},"dataSourceType":"CUSTOM","s3":{"uri":"__Uri__"}},"knowledgeBaseId":"__KnowledgeBaseId__","status":"INDEXED","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z"},{"dataSourceId":"__DataSourceId__","identifier":{"custom":{"id":"__Id__"},"dataSourceType":"CUSTOM","s3":{"uri":"__Uri__"}},"knowledgeBaseId":"__KnowledgeBaseId__","status":"INDEXED","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

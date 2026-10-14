@@ -1,0 +1,3 @@
+GET /flows/__FlowIdentifier__/aliases?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/fields
+
+Content-Type: application/json
+
+{"attributes":{"text":{"isMultiline":true}},"description":"__Description__","name":"__Name__","type":"Text"}

@@ -4,11 +4,10 @@ package securitylake
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a subscriber for accounts that are already enabled in Amazon Security
@@ -62,6 +61,29 @@ type CreateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessTypeList(s, schemas.CreateSubscriberRequest_accessTypes, v.AccessTypes)
+	serializeLogSourceResourceList(s, schemas.CreateSubscriberRequest_sources, v.Sources)
+	if v.SubscriberDescription != nil {
+		s.WriteString(schemas.CreateSubscriberRequest_subscriberDescription, *v.SubscriberDescription)
+	}
+	if v.SubscriberIdentity != nil {
+		s.WriteStruct(schemas.CreateSubscriberRequest_subscriberIdentity)
+		v.SubscriberIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubscriberName != nil {
+		s.WriteString(schemas.CreateSubscriberRequest_subscriberName, *v.SubscriberName)
+	}
+	serializeTagList(s, schemas.CreateSubscriberRequest_tags, v.Tags)
+}
+
 type CreateSubscriberOutput struct {
 
 	// Retrieve information about the subscriber created using the CreateSubscriber
@@ -74,77 +96,50 @@ type CreateSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscriber != nil {
+		s.WriteStruct(schemas.CreateSubscriberResponse_subscriber)
+		v.Subscriber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubscriberResponse_subscriber:
+			v.Subscriber = &types.SubscriberResource{}
+			return v.Subscriber.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse), output: &CreateSubscriberOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriber{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubscriber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSubscriberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +154,8 @@ func (c *Client) addOperationCreateSubscriberMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSubscriber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSubscriber",
-	}
 }

@@ -4,10 +4,9 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the name of the stack with which the specified fleet is associated.
@@ -40,6 +39,21 @@ type ListAssociatedStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedStacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetName != nil {
+		s.WriteString(schemas.ListAssociatedStacksRequest_FleetName, *v.FleetName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedStacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssociatedStacksOutput struct {
 
 	// The name of the stack.
@@ -55,77 +69,54 @@ type ListAssociatedStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedStacksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListAssociatedStacksResult_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedStacksResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociatedStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedStacksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedStacksResult_Names:
+			return deserializeStringList(d, schemas.ListAssociatedStacksResult_Names, &v.Names)
+		case schemas.ListAssociatedStacksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedStacksResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedStacks, schemas.ListAssociatedStacksRequest, schemas.ListAssociatedStacksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociatedStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedStacks, schemas.ListAssociatedStacksRequest, schemas.ListAssociatedStacksResult), output: &ListAssociatedStacksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssociatedStacks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssociatedStacks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssociatedStacksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssociatedStacks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +131,8 @@ func (c *Client) addOperationListAssociatedStacksMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAssociatedStacks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssociatedStacks",
-	}
 }

@@ -5,12 +5,8 @@ package macie2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the status of automated sensitive data discovery for one or more
@@ -49,22 +45,6 @@ type ListAutomatedDiscoveryAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutomatedDiscoveryAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAutomatedDiscoveryAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAutomatedDiscoveryAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ListAutomatedDiscoveryAccountsRequest_accountIds, v.AccountIds)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAutomatedDiscoveryAccountsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAutomatedDiscoveryAccountsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAutomatedDiscoveryAccountsOutput struct {
 
 	// An array of objects, one for each account specified in the request. Each object
@@ -82,84 +62,26 @@ type ListAutomatedDiscoveryAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutomatedDiscoveryAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAutomatedDiscoveryAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAutomatedDiscoveryAccountsResponse_items:
-			return deserialize__listOfAutomatedDiscoveryAccount(d, schemas.ListAutomatedDiscoveryAccountsResponse_items, &v.Items)
-		case schemas.ListAutomatedDiscoveryAccountsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAutomatedDiscoveryAccountsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAutomatedDiscoveryAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedDiscoveryAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedDiscoveryAccounts, schemas.ListAutomatedDiscoveryAccountsRequest, schemas.ListAutomatedDiscoveryAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedDiscoveryAccounts{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedDiscoveryAccounts, schemas.ListAutomatedDiscoveryAccountsRequest, schemas.ListAutomatedDiscoveryAccountsResponse), output: &ListAutomatedDiscoveryAccountsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomatedDiscoveryAccounts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomatedDiscoveryAccounts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +94,6 @@ func (c *Client) addOperationListAutomatedDiscoveryAccountsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +197,3 @@ type ListAutomatedDiscoveryAccountsAPIClient interface {
 }
 
 var _ ListAutomatedDiscoveryAccountsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAutomatedDiscoveryAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutomatedDiscoveryAccounts",
-	}
-}

@@ -5,11 +5,11 @@ package groundstation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -43,6 +43,21 @@ type DescribeContactVersionInput struct {
 	VersionId *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeContactVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.DescribeContactVersionRequest_contactId, *v.ContactId)
+	}
+	if v.VersionId != nil {
+		s.WriteInt32(schemas.DescribeContactVersionRequest_versionId, *v.VersionId)
+	}
 }
 
 type DescribeContactVersionOutput struct {
@@ -123,77 +138,162 @@ type DescribeContactVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_contactId, *v.ContactId)
+	}
+	if v.ContactStatus != "" {
+		s.WriteString(schemas.DescribeContactVersionResponse_contactStatus, string(v.ContactStatus))
+	}
+	serializeDataflowList(s, schemas.DescribeContactVersionResponse_dataflowList, v.DataflowList)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_endTime, *v.EndTime)
+	}
+	if v.Ephemeris != nil {
+		s.WriteStruct(schemas.DescribeContactVersionResponse_ephemeris)
+		v.Ephemeris.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.GroundStation != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_groundStation, *v.GroundStation)
+	}
+	if v.MaximumElevation != nil {
+		s.WriteStruct(schemas.DescribeContactVersionResponse_maximumElevation)
+		v.MaximumElevation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MissionProfileArn != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_missionProfileArn, *v.MissionProfileArn)
+	}
+	if v.PostPassEndTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_postPassEndTime, *v.PostPassEndTime)
+	}
+	if v.PrePassStartTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_prePassStartTime, *v.PrePassStartTime)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_region, *v.Region)
+	}
+	if v.SatelliteArn != nil {
+		s.WriteString(schemas.DescribeContactVersionResponse_satelliteArn, *v.SatelliteArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_startTime, *v.StartTime)
+	}
+	serializeTagsMap(s, schemas.DescribeContactVersionResponse_tags, v.Tags)
+	if v.TrackingOverrides != nil {
+		s.WriteStruct(schemas.DescribeContactVersionResponse_trackingOverrides)
+		v.TrackingOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteStruct(schemas.DescribeContactVersionResponse_version)
+		v.Version.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisibilityEndTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_visibilityEndTime, *v.VisibilityEndTime)
+	}
+	if v.VisibilityStartTime != nil {
+		s.WriteTime(schemas.DescribeContactVersionResponse_visibilityStartTime, *v.VisibilityStartTime)
+	}
+}
+func (v *DescribeContactVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContactVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContactVersionResponse_contactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_contactId, v.ContactId)
+		case schemas.DescribeContactVersionResponse_contactStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeContactVersionResponse_contactStatus, &ev); err != nil {
+				return err
+			}
+			v.ContactStatus = types.ContactStatus(ev)
+			return nil
+		case schemas.DescribeContactVersionResponse_dataflowList:
+			return deserializeDataflowList(d, schemas.DescribeContactVersionResponse_dataflowList, &v.DataflowList)
+		case schemas.DescribeContactVersionResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_endTime, v.EndTime)
+		case schemas.DescribeContactVersionResponse_ephemeris:
+			v.Ephemeris = &types.EphemerisResponseData{}
+			return v.Ephemeris.Deserialize(d)
+		case schemas.DescribeContactVersionResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeContactVersionResponse_groundStation:
+			v.GroundStation = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_groundStation, v.GroundStation)
+		case schemas.DescribeContactVersionResponse_maximumElevation:
+			v.MaximumElevation = &types.Elevation{}
+			return v.MaximumElevation.Deserialize(d)
+		case schemas.DescribeContactVersionResponse_missionProfileArn:
+			v.MissionProfileArn = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_missionProfileArn, v.MissionProfileArn)
+		case schemas.DescribeContactVersionResponse_postPassEndTime:
+			v.PostPassEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_postPassEndTime, v.PostPassEndTime)
+		case schemas.DescribeContactVersionResponse_prePassStartTime:
+			v.PrePassStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_prePassStartTime, v.PrePassStartTime)
+		case schemas.DescribeContactVersionResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_region, v.Region)
+		case schemas.DescribeContactVersionResponse_satelliteArn:
+			v.SatelliteArn = new(string)
+			return d.ReadString(schemas.DescribeContactVersionResponse_satelliteArn, v.SatelliteArn)
+		case schemas.DescribeContactVersionResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_startTime, v.StartTime)
+		case schemas.DescribeContactVersionResponse_tags:
+			return deserializeTagsMap(d, schemas.DescribeContactVersionResponse_tags, &v.Tags)
+		case schemas.DescribeContactVersionResponse_trackingOverrides:
+			v.TrackingOverrides = &types.TrackingOverrides{}
+			return v.TrackingOverrides.Deserialize(d)
+		case schemas.DescribeContactVersionResponse_version:
+			v.Version = &types.ContactVersion{}
+			return v.Version.Deserialize(d)
+		case schemas.DescribeContactVersionResponse_visibilityEndTime:
+			v.VisibilityEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_visibilityEndTime, v.VisibilityEndTime)
+		case schemas.DescribeContactVersionResponse_visibilityStartTime:
+			v.VisibilityStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactVersionResponse_visibilityStartTime, v.VisibilityStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContactVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactVersion, schemas.DescribeContactVersionRequest, schemas.DescribeContactVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContactVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactVersion, schemas.DescribeContactVersionRequest, schemas.DescribeContactVersionResponse), output: &DescribeContactVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeContactVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeContactVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeContactVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeContactVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +306,6 @@ func (c *Client) addOperationDescribeContactVersionMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -422,11 +516,3 @@ type DescribeContactVersionAPIClient interface {
 }
 
 var _ DescribeContactVersionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeContactVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeContactVersion",
-	}
-}

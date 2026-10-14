@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.DescribeModelVersions
+
+{"maxResults":1,"modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS","modelVersionNumber":"__ModelVersionNumber__","nextToken":"__NextToken__"}

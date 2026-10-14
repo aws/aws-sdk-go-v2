@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a transform job. A transform job uses a trained model to get inferences
@@ -171,6 +170,67 @@ type CreateTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransformJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransformJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchStrategy != "" {
+		s.WriteString(schemas.CreateTransformJobRequest_BatchStrategy, string(v.BatchStrategy))
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataProcessing != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_DataProcessing)
+		v.DataProcessing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTransformEnvironmentMap(s, schemas.CreateTransformJobRequest_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxConcurrentTransforms != nil {
+		s.WriteInt32(schemas.CreateTransformJobRequest_MaxConcurrentTransforms, *v.MaxConcurrentTransforms)
+	}
+	if v.MaxPayloadInMB != nil {
+		s.WriteInt32(schemas.CreateTransformJobRequest_MaxPayloadInMB, *v.MaxPayloadInMB)
+	}
+	if v.ModelClientConfig != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_ModelClientConfig)
+		v.ModelClientConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateTransformJobRequest_ModelName, *v.ModelName)
+	}
+	serializeTagList(s, schemas.CreateTransformJobRequest_Tags, v.Tags)
+	if v.TransformInput != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_TransformInput)
+		v.TransformInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformJobName != nil {
+		s.WriteString(schemas.CreateTransformJobRequest_TransformJobName, *v.TransformJobName)
+	}
+	if v.TransformOutput != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_TransformOutput)
+		v.TransformOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformResources != nil {
+		s.WriteStruct(schemas.CreateTransformJobRequest_TransformResources)
+		v.TransformResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateTransformJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the transform job.
@@ -184,77 +244,48 @@ type CreateTransformJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransformJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransformJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformJobArn != nil {
+		s.WriteString(schemas.CreateTransformJobResponse_TransformJobArn, *v.TransformJobArn)
+	}
+}
+func (v *CreateTransformJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTransformJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTransformJobResponse_TransformJobArn:
+			v.TransformJobArn = new(string)
+			return d.ReadString(schemas.CreateTransformJobResponse_TransformJobArn, v.TransformJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransformJob, schemas.CreateTransformJobRequest, schemas.CreateTransformJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransformJob, schemas.CreateTransformJobRequest, schemas.CreateTransformJobResponse), output: &CreateTransformJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTransformJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTransformJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTransformJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransformJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -269,22 +300,8 @@ func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTransformJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTransformJob",
-	}
 }

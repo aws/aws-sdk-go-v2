@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/RegisterCompute
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦gFleetIdk__FleetId__kComputeNameo__ComputeName__oCertificatePaths__CertificatePath__gDnsNamek__DnsName__iIpAddressm__IpAddress__hLocationl__Location__

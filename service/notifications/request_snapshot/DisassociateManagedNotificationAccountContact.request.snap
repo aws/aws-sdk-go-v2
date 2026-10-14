@@ -1,0 +1,5 @@
+PUT /contacts/disassociate-managed-notification/ACCOUNT_PRIMARY
+
+Content-Type: application/json
+
+{"managedNotificationConfigurationArn":"__ManagedNotificationConfigurationArn__"}

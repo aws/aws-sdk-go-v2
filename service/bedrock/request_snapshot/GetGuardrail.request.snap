@@ -1,0 +1,3 @@
+GET /guardrails/__GuardrailIdentifier__?guardrailVersion=__GuardrailVersion__
+
+

@@ -1,0 +1,4 @@
+GET /queries/__QueryId__
+
+Graphidentifier: GraphIdentifier-value
+

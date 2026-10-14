@@ -506,6 +506,18 @@ func TestCheckSnapshot_ListManagedFirewallDomainLists(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSharedDNSViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSharedDNSViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSharedDNSViews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1074,18 @@ func TestUpdateSnapshot_ListManagedFirewallDomainLists(t *testing.T) {
 	_, err := svc.ListManagedFirewallDomainLists(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListManagedFirewallDomainLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSharedDNSViews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSharedDNSViews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSharedDNSViews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

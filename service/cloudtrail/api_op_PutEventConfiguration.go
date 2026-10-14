@@ -4,11 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the event configuration settings for the specified event data store or
@@ -54,6 +53,26 @@ type PutEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.PutEventConfigurationRequest_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.PutEventConfigurationRequest_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.PutEventConfigurationRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.PutEventConfigurationRequest_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.PutEventConfigurationRequest_TrailName, *v.TrailName)
+	}
+}
+
 type PutEventConfigurationOutput struct {
 
 	// A list of aggregation configurations that are configured for the trail.
@@ -78,77 +97,70 @@ type PutEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.PutEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.PutEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.PutEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.PutEventConfigurationResponse_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.PutEventConfigurationResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *PutEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventConfigurationResponse_AggregationConfigurations:
+			return deserializeAggregationConfigurations(d, schemas.PutEventConfigurationResponse_AggregationConfigurations, &v.AggregationConfigurations)
+		case schemas.PutEventConfigurationResponse_ContextKeySelectors:
+			return deserializeContextKeySelectors(d, schemas.PutEventConfigurationResponse_ContextKeySelectors, &v.ContextKeySelectors)
+		case schemas.PutEventConfigurationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.PutEventConfigurationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.PutEventConfigurationResponse_MaxEventSize:
+			var ev string
+			if err := d.ReadString(schemas.PutEventConfigurationResponse_MaxEventSize, &ev); err != nil {
+				return err
+			}
+			v.MaxEventSize = types.MaxEventSize(ev)
+			return nil
+		case schemas.PutEventConfigurationResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.PutEventConfigurationResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventConfiguration, schemas.PutEventConfigurationRequest, schemas.PutEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventConfiguration, schemas.PutEventConfigurationRequest, schemas.PutEventConfigurationResponse), output: &PutEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEventConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEventConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutEventConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEventConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +175,8 @@ func (c *Client) addOperationPutEventConfigurationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutEventConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutEventConfiguration",
-	}
 }

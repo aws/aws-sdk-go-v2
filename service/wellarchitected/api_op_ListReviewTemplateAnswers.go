@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the answers of a review template.
@@ -65,6 +65,30 @@ type ListReviewTemplateAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewTemplateAnswersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewTemplateAnswersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewTemplateAnswersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReviewTemplateAnswersInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_PillarId, *v.PillarId)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type ListReviewTemplateAnswersOutput struct {
 
 	// List of answer summaries of a lens review in a review template.
@@ -97,77 +121,63 @@ type ListReviewTemplateAnswersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewTemplateAnswersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewTemplateAnswersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewTemplateAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReviewTemplateAnswerSummaries(s, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_LensAlias, *v.LensAlias)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_NextToken, *v.NextToken)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *ListReviewTemplateAnswersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReviewTemplateAnswersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReviewTemplateAnswersOutput_AnswerSummaries:
+			return deserializeReviewTemplateAnswerSummaries(d, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, &v.AnswerSummaries)
+		case schemas.ListReviewTemplateAnswersOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_LensAlias, v.LensAlias)
+		case schemas.ListReviewTemplateAnswersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_NextToken, v.NextToken)
+		case schemas.ListReviewTemplateAnswersOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReviewTemplateAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewTemplateAnswers, schemas.ListReviewTemplateAnswersInput, schemas.ListReviewTemplateAnswersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReviewTemplateAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewTemplateAnswers, schemas.ListReviewTemplateAnswersInput, schemas.ListReviewTemplateAnswersOutput), output: &ListReviewTemplateAnswersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReviewTemplateAnswers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReviewTemplateAnswers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListReviewTemplateAnswersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReviewTemplateAnswers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +190,6 @@ func (c *Client) addOperationListReviewTemplateAnswersMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -288,11 +292,3 @@ type ListReviewTemplateAnswersAPIClient interface {
 }
 
 var _ ListReviewTemplateAnswersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReviewTemplateAnswers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReviewTemplateAnswers",
-	}
-}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetServiceLinkedRoleDeletionStatus&DeletionTaskId=__DeletionTaskId__&Version=2010-05-08

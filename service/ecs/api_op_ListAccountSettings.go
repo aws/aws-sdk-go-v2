@@ -5,10 +5,10 @@ package ecs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the account settings for a specified principal.
@@ -74,6 +74,33 @@ type ListAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EffectiveSettings != false {
+		s.WriteBool(schemas.ListAccountSettingsRequest_effectiveSettings, v.EffectiveSettings)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListAccountSettingsRequest_maxResults, v.MaxResults)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.ListAccountSettingsRequest_name, string(v.Name))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_principalArn, *v.PrincipalArn)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListAccountSettingsRequest_value, *v.Value)
+	}
+}
+
 type ListAccountSettingsOutput struct {
 
 	// The nextToken value to include in a future ListAccountSettings request. When
@@ -91,74 +118,48 @@ type ListAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountSettingsResponse_nextToken, *v.NextToken)
+	}
+	serializeSettings(s, schemas.ListAccountSettingsResponse_settings, v.Settings)
+}
+func (v *ListAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountSettingsResponse_nextToken, v.NextToken)
+		case schemas.ListAccountSettingsResponse_settings:
+			return deserializeSettings(d, schemas.ListAccountSettingsResponse_settings, &v.Settings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountSettings, schemas.ListAccountSettingsRequest, schemas.ListAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountSettings, schemas.ListAccountSettingsRequest, schemas.ListAccountSettingsResponse), output: &ListAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +172,6 @@ func (c *Client) addOperationListAccountSettingsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +276,3 @@ type ListAccountSettingsAPIClient interface {
 }
 
 var _ ListAccountSettingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccountSettings",
-	}
-}

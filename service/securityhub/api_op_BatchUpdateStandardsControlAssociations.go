@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	For a batch of security controls and standards, this operation updates the
@@ -43,6 +42,16 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateStandardsControlAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateStandardsControlAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateStandardsControlAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsRequest_StandardsControlAssociationUpdates, v.StandardsControlAssociationUpdates)
+}
+
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
 	//  A security control (identified with SecurityControlId , SecurityControlArn , or
@@ -56,77 +65,45 @@ type BatchUpdateStandardsControlAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateStandardsControlAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateStandardsControlAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateStandardsControlAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, v.UnprocessedAssociationUpdates)
+}
+func (v *BatchUpdateStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateStandardsControlAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates:
+			return deserializeUnprocessedStandardsControlAssociationUpdates(d, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, &v.UnprocessedAssociationUpdates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateStandardsControlAssociations, schemas.BatchUpdateStandardsControlAssociationsRequest, schemas.BatchUpdateStandardsControlAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateStandardsControlAssociations, schemas.BatchUpdateStandardsControlAssociationsRequest, schemas.BatchUpdateStandardsControlAssociationsResponse), output: &BatchUpdateStandardsControlAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateStandardsControlAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateStandardsControlAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +118,8 @@ func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateStandardsControlAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateStandardsControlAssociations",
-	}
 }

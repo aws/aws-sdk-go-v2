@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AgenticRetrieveStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AgenticRetrieveStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AgenticRetrieveStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckIngestedDocumentAcl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -146,6 +170,18 @@ func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDocumentContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetExecutionFlowSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetExecutionFlowSnapshot(context.Background(), nil, func(o *Options) {
@@ -163,6 +199,18 @@ func TestCheckSnapshot_GetFlowExecution(t *testing.T) {
 	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIngestedDocumentAcl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +481,30 @@ func TestCheckSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AgenticRetrieveStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AgenticRetrieveStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AgenticRetrieveStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckIngestedDocumentAcl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -517,6 +589,18 @@ func TestUpdateSnapshot_GetAgentMemory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDocumentContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetExecutionFlowSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetExecutionFlowSnapshot(context.Background(), nil, func(o *Options) {
@@ -534,6 +618,18 @@ func TestUpdateSnapshot_GetFlowExecution(t *testing.T) {
 	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIngestedDocumentAcl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

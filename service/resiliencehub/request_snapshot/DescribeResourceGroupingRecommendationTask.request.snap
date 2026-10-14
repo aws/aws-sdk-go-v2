@@ -1,0 +1,5 @@
+POST /describe-resource-grouping-recommendation-task
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","groupingId":"__GroupingId__"}

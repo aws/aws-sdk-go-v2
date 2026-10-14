@@ -5,10 +5,10 @@ package inspector2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists scan results aggregated by checks.
@@ -54,6 +54,35 @@ type ListCisScanResultsAggregatedByChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByChecksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCisScanResultsAggregatedByChecksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_nextToken, *v.NextToken)
+	}
+	if v.ScanArn != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_scanArn, *v.ScanArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCisScanResultsAggregatedByChecksOutput struct {
 
 	// The check aggregations.
@@ -69,77 +98,51 @@ type ListCisScanResultsAggregatedByChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByChecksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCisCheckAggregationList(s, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, v.CheckAggregations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCisScanResultsAggregatedByChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCisScanResultsAggregatedByChecksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations:
+			return deserializeCisCheckAggregationList(d, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, &v.CheckAggregations)
+		case schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCisScanResultsAggregatedByChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByChecks, schemas.ListCisScanResultsAggregatedByChecksRequest, schemas.ListCisScanResultsAggregatedByChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCisScanResultsAggregatedByChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByChecks, schemas.ListCisScanResultsAggregatedByChecksRequest, schemas.ListCisScanResultsAggregatedByChecksResponse), output: &ListCisScanResultsAggregatedByChecksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCisScanResultsAggregatedByChecks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCisScanResultsAggregatedByChecks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCisScanResultsAggregatedByChecksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCisScanResultsAggregatedByChecks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +155,6 @@ func (c *Client) addOperationListCisScanResultsAggregatedByChecksMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +259,3 @@ type ListCisScanResultsAggregatedByChecksAPIClient interface {
 }
 
 var _ ListCisScanResultsAggregatedByChecksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCisScanResultsAggregatedByChecks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCisScanResultsAggregatedByChecks",
-	}
-}

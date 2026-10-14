@@ -5,10 +5,7 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +39,6 @@ type GetQueryStateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryStateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQueryStateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQueryStateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryId != nil {
-		s.WriteString(schemas.GetQueryStateRequest_QueryId, *v.QueryId)
-	}
-}
-
 // A structure for the output.
 type GetQueryStateOutput struct {
 
@@ -81,80 +66,23 @@ type GetQueryStateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQueryStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQueryStateResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.GetQueryStateResponse_Error, v.Error)
-		case schemas.GetQueryStateResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetQueryStateResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.QueryStateString(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetQueryStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryState{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryState, schemas.GetQueryStateRequest, schemas.GetQueryStateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryState{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryState, schemas.GetQueryStateRequest, schemas.GetQueryStateResponse), output: &GetQueryStateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryState"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -164,12 +92,6 @@ func (c *Client) addOperationGetQueryStateMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpGetQueryStateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueryState(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +104,6 @@ func (c *Client) addOperationGetQueryStateMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -221,12 +137,4 @@ func (m *endpointPrefix_opGetQueryStateMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opGetQueryStateMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetQueryStateMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetQueryState(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetQueryState",
-	}
 }

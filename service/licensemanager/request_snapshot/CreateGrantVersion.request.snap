@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CreateGrantVersion
+
+{"AllowedOperations":["CreateGrant","CreateGrant"],"ClientToken":"__ClientToken__","GrantArn":"__GrantArn__","GrantName":"__GrantName__","Options":{"ActivationOverrideBehavior":"DISTRIBUTED_GRANTS_ONLY"},"SourceVersion":"__SourceVersion__","Status":"PENDING_WORKFLOW","StatusReason":"__StatusReason__"}

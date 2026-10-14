@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified provisioning artifact (also known as a
@@ -61,36 +56,6 @@ type DescribeProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProvisioningArtifactInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IncludeProvisioningArtifactParameters != false {
-		s.WriteBool(schemas.DescribeProvisioningArtifactInput_IncludeProvisioningArtifactParameters, v.IncludeProvisioningArtifactParameters)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProductId, *v.ProductId)
-	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProductName, *v.ProductName)
-	}
-	if v.ProvisioningArtifactId != nil {
-		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
-	}
-	if v.ProvisioningArtifactName != nil {
-		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
-	}
-	if v.Verbose != false {
-		s.WriteBool(schemas.DescribeProvisioningArtifactInput_Verbose, v.Verbose)
-	}
-}
-
 type DescribeProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
@@ -111,93 +76,26 @@ type DescribeProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProvisioningArtifactOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProvisioningArtifactOutput_Info:
-			return deserializeProvisioningArtifactInfo(d, schemas.DescribeProvisioningArtifactOutput_Info, &v.Info)
-		case schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactDetail:
-			v.ProvisioningArtifactDetail = &types.ProvisioningArtifactDetail{}
-			return v.ProvisioningArtifactDetail.Deserialize(d)
-		case schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters:
-			return deserializeProvisioningArtifactParameters(d, schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters, &v.ProvisioningArtifactParameters)
-		case schemas.DescribeProvisioningArtifactOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeProvisioningArtifactOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningArtifact, schemas.DescribeProvisioningArtifactInput, schemas.DescribeProvisioningArtifactOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProvisioningArtifact{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningArtifact, schemas.DescribeProvisioningArtifactInput, schemas.DescribeProvisioningArtifactOutput), output: &DescribeProvisioningArtifactOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisioningArtifact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisioningArtifact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +110,8 @@ func (c *Client) addOperationDescribeProvisioningArtifactMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeProvisioningArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeProvisioningArtifact",
-	}
 }

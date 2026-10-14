@@ -1,0 +1,5 @@
+POST /update-server-config/
+
+Content-Type: application/json
+
+{"serverId":"__ServerId__","strategyOption":{"isPreferred":true,"strategy":"Rehost","targetDestination":"None specified","toolName":"App2Container"}}

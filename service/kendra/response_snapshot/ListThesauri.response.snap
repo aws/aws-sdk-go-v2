@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListThesauri
+
+{"NextToken":"__NextToken__","ThesaurusSummaryItems":[{"CreatedAt":946684800,"Id":"__Id__","Name":"__Name__","Status":"CREATING","UpdatedAt":946684800},{"CreatedAt":946684800,"Id":"__Id__","Name":"__Name__","Status":"CREATING","UpdatedAt":946684800}]}

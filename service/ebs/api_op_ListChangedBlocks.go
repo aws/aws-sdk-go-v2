@@ -5,12 +5,8 @@ package ebs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -79,30 +75,6 @@ type ListChangedBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChangedBlocksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChangedBlocksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChangedBlocksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FirstSnapshotId != nil {
-		s.WriteString(schemas.ListChangedBlocksRequest_FirstSnapshotId, *v.FirstSnapshotId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChangedBlocksRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChangedBlocksRequest_NextToken, *v.NextToken)
-	}
-	if v.SecondSnapshotId != nil {
-		s.WriteString(schemas.ListChangedBlocksRequest_SecondSnapshotId, *v.SecondSnapshotId)
-	}
-	if v.StartingBlockIndex != nil {
-		s.WriteInt32(schemas.ListChangedBlocksRequest_StartingBlockIndex, *v.StartingBlockIndex)
-	}
-}
-
 type ListChangedBlocksOutput struct {
 
 	// The size of the blocks in the snapshot, in bytes.
@@ -127,96 +99,29 @@ type ListChangedBlocksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChangedBlocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChangedBlocksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChangedBlocksResponse_BlockSize:
-			v.BlockSize = new(int32)
-			return d.ReadInt32(schemas.ListChangedBlocksResponse_BlockSize, v.BlockSize)
-		case schemas.ListChangedBlocksResponse_ChangedBlocks:
-			return deserializeChangedBlocks(d, schemas.ListChangedBlocksResponse_ChangedBlocks, &v.ChangedBlocks)
-		case schemas.ListChangedBlocksResponse_ExpiryTime:
-			v.ExpiryTime = new(time.Time)
-			return d.ReadTime(schemas.ListChangedBlocksResponse_ExpiryTime, v.ExpiryTime)
-		case schemas.ListChangedBlocksResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChangedBlocksResponse_NextToken, v.NextToken)
-		case schemas.ListChangedBlocksResponse_VolumeSize:
-			v.VolumeSize = new(int64)
-			return d.ReadInt64(schemas.ListChangedBlocksResponse_VolumeSize, v.VolumeSize)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChangedBlocks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangedBlocks, schemas.ListChangedBlocksRequest, schemas.ListChangedBlocksResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChangedBlocks{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangedBlocks, schemas.ListChangedBlocksRequest, schemas.ListChangedBlocksResponse), output: &ListChangedBlocksOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChangedBlocks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListChangedBlocksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChangedBlocks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,12 +134,6 @@ func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -342,11 +241,3 @@ type ListChangedBlocksAPIClient interface {
 }
 
 var _ ListChangedBlocksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListChangedBlocks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListChangedBlocks",
-	}
-}

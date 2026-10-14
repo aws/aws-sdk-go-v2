@@ -542,6 +542,18 @@ func TestCheckSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLanguageModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLanguageModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLanguageModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMedicalVocabulary(context.Background(), nil, func(o *Options) {
@@ -1050,6 +1062,18 @@ func TestUpdateSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 	_, err := svc.UpdateCallAnalyticsCategory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCallAnalyticsCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLanguageModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLanguageModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLanguageModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

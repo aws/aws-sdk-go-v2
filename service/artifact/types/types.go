@@ -44,6 +44,55 @@ func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Citation information for AI-generated responses.
+type Citation struct {
+
+	// Content text from the compliance source.
+	SourceContent *string
+
+	// Label identifying the compliance source.
+	SourceLabel *string
+
+	// Link to the compliance source.
+	SourceLink *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Citation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Citation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Citation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceContent != nil {
+		s.WriteString(schemas.Citation_sourceContent, *v.SourceContent)
+	}
+	if v.SourceLabel != nil {
+		s.WriteString(schemas.Citation_sourceLabel, *v.SourceLabel)
+	}
+	if v.SourceLink != nil {
+		s.WriteString(schemas.Citation_sourceLink, *v.SourceLink)
+	}
+}
+func (v *Citation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Citation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Citation_sourceContent:
+			v.SourceContent = new(string)
+			return d.ReadString(schemas.Citation_sourceContent, v.SourceContent)
+		case schemas.Citation_sourceLabel:
+			v.SourceLabel = new(string)
+			return d.ReadString(schemas.Citation_sourceLabel, v.SourceLabel)
+		case schemas.Citation_sourceLink:
+			v.SourceLink = new(string)
+			return d.ReadString(schemas.Citation_sourceLink, v.SourceLink)
+		}
+		return nil
+	})
+}
+
 // Summary for customer-agreement resource.
 type CustomerAgreementSummary struct {
 
@@ -180,6 +229,451 @@ func (v *CustomerAgreementSummary) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Type = AgreementType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Content for creating a compliance inquiry - either a single query or file
+// content.
+//
+// The following types satisfy this interface:
+//
+//	InquiryContentMemberFileContent
+//	InquiryContentMemberQuery
+type InquiryContent interface {
+	isInquiryContent()
+}
+
+// File content with multiple questions.
+type InquiryContentMemberFileContent struct {
+	Value InquiryFileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*InquiryContentMemberFileContent) isInquiryContent() {}
+func (v *InquiryContentMemberFileContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InquiryContent_fileContent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *InquiryContentMemberFileContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Single text query for AI-generated answer.
+type InquiryContentMemberQuery struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*InquiryContentMemberQuery) isInquiryContent() {}
+func (v *InquiryContentMemberQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.InquiryContent_query, v.Value)
+}
+func (v *InquiryContentMemberQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.InquiryContent_query, &v.Value)
+}
+
+// Detailed information about a compliance inquiry.
+type InquiryDetail struct {
+
+	// ARN of the compliance inquiry resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Timestamp indicating when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Unique resource ID for the compliance inquiry.
+	//
+	// This member is required.
+	Id *string
+
+	// Type of inquiry content (text or file).
+	//
+	// This member is required.
+	InputSource InputSource
+
+	// Title of the inquiry.
+	//
+	// This member is required.
+	Name *string
+
+	// Current processing status of the inquiry.
+	//
+	// This member is required.
+	Status InquiryStatus
+
+	// Status message providing additional context.
+	//
+	// This member is required.
+	StatusMessage InquiryStatusMessage
+
+	// Support mode for this inquiry. AI_ONLY provides AI-generated responses.
+	// FULL_SUPPORT includes human expert review.
+	SupportMode InquirySupportMode
+
+	// Timestamp indicating when the resource was last modified.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InquiryDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InquiryDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InquiryDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InquiryDetail_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InquiryDetail_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.InquiryDetail_id, *v.Id)
+	}
+	if v.InputSource != "" {
+		s.WriteString(schemas.InquiryDetail_inputSource, string(v.InputSource))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InquiryDetail_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InquiryDetail_status, string(v.Status))
+	}
+	if v.StatusMessage != "" {
+		s.WriteString(schemas.InquiryDetail_statusMessage, string(v.StatusMessage))
+	}
+	if v.SupportMode != "" {
+		s.WriteString(schemas.InquiryDetail_supportMode, string(v.SupportMode))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.InquiryDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *InquiryDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InquiryDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InquiryDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InquiryDetail_arn, v.Arn)
+		case schemas.InquiryDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InquiryDetail_createdAt, v.CreatedAt)
+		case schemas.InquiryDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InquiryDetail_id, v.Id)
+		case schemas.InquiryDetail_inputSource:
+			var ev string
+			if err := d.ReadString(schemas.InquiryDetail_inputSource, &ev); err != nil {
+				return err
+			}
+			v.InputSource = InputSource(ev)
+			return nil
+		case schemas.InquiryDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InquiryDetail_name, v.Name)
+		case schemas.InquiryDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.InquiryDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = InquiryStatus(ev)
+			return nil
+		case schemas.InquiryDetail_statusMessage:
+			var ev string
+			if err := d.ReadString(schemas.InquiryDetail_statusMessage, &ev); err != nil {
+				return err
+			}
+			v.StatusMessage = InquiryStatusMessage(ev)
+			return nil
+		case schemas.InquiryDetail_supportMode:
+			var ev string
+			if err := d.ReadString(schemas.InquiryDetail_supportMode, &ev); err != nil {
+				return err
+			}
+			v.SupportMode = InquirySupportMode(ev)
+			return nil
+		case schemas.InquiryDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.InquiryDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// File content structure for compliance inquiry uploads.
+type InquiryFileContent struct {
+
+	// Binary content of the uploaded file.
+	//
+	// This member is required.
+	Content []byte
+
+	// List of file sections/sheets to process.
+	FileSections []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InquiryFileContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InquiryFileContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InquiryFileContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.InquiryFileContent_content, v.Content)
+	}
+	serializeFileSectionList(s, schemas.InquiryFileContent_fileSections, v.FileSections)
+}
+func (v *InquiryFileContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InquiryFileContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InquiryFileContent_content:
+			return d.ReadBlob(schemas.InquiryFileContent_content, &v.Content)
+		case schemas.InquiryFileContent_fileSections:
+			return deserializeFileSectionList(d, schemas.InquiryFileContent_fileSections, &v.FileSections)
+		}
+		return nil
+	})
+}
+
+// Summary information about a compliance inquiry.
+type InquirySummary struct {
+
+	// ARN of the compliance inquiry resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Timestamp indicating when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Unique resource ID for the compliance inquiry.
+	//
+	// This member is required.
+	Id *string
+
+	// Type of inquiry content (text or file).
+	//
+	// This member is required.
+	InputSource InputSource
+
+	// Title of the inquiry.
+	//
+	// This member is required.
+	Name *string
+
+	// Current processing status of the inquiry.
+	//
+	// This member is required.
+	Status InquiryStatus
+
+	// Status message providing additional context.
+	//
+	// This member is required.
+	StatusMessage InquiryStatusMessage
+
+	noSmithyDocumentSerde
+}
+
+func (v *InquirySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InquirySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InquirySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InquirySummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InquirySummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.InquirySummary_id, *v.Id)
+	}
+	if v.InputSource != "" {
+		s.WriteString(schemas.InquirySummary_inputSource, string(v.InputSource))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InquirySummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InquirySummary_status, string(v.Status))
+	}
+	if v.StatusMessage != "" {
+		s.WriteString(schemas.InquirySummary_statusMessage, string(v.StatusMessage))
+	}
+}
+func (v *InquirySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InquirySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InquirySummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InquirySummary_arn, v.Arn)
+		case schemas.InquirySummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InquirySummary_createdAt, v.CreatedAt)
+		case schemas.InquirySummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InquirySummary_id, v.Id)
+		case schemas.InquirySummary_inputSource:
+			var ev string
+			if err := d.ReadString(schemas.InquirySummary_inputSource, &ev); err != nil {
+				return err
+			}
+			v.InputSource = InputSource(ev)
+			return nil
+		case schemas.InquirySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InquirySummary_name, v.Name)
+		case schemas.InquirySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.InquirySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = InquiryStatus(ev)
+			return nil
+		case schemas.InquirySummary_statusMessage:
+			var ev string
+			if err := d.ReadString(schemas.InquirySummary_statusMessage, &ev); err != nil {
+				return err
+			}
+			v.StatusMessage = InquiryStatusMessage(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about a single query within a compliance inquiry.
+type QuerySummary struct {
+
+	// Timestamp when the query was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The actual query text.
+	//
+	// This member is required.
+	Query *string
+
+	// Sequential identifier of the query within the inquiry.
+	//
+	// This member is required.
+	QueryIdentifier *int32
+
+	// Current processing status of the query.
+	//
+	// This member is required.
+	Status QueryStatus
+
+	// Descriptive status message.
+	//
+	// This member is required.
+	StatusMessage QueryStatusMessage
+
+	// Supporting citations for the response.
+	Citations []Citation
+
+	// Generated response to the query.
+	Response *string
+
+	// Type of review for the response.
+	ReviewType ReviewType
+
+	// Ordered list of response version history entries, oldest first.
+	UpdatedResponseVersions []ResponseVersion
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuerySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCitationList(s, schemas.QuerySummary_citations, v.Citations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.QuerySummary_createdAt, *v.CreatedAt)
+	}
+	if v.Query != nil {
+		s.WriteString(schemas.QuerySummary_query, *v.Query)
+	}
+	if v.QueryIdentifier != nil {
+		s.WriteInt32(schemas.QuerySummary_queryIdentifier, *v.QueryIdentifier)
+	}
+	if v.Response != nil {
+		s.WriteString(schemas.QuerySummary_response, *v.Response)
+	}
+	if v.ReviewType != "" {
+		s.WriteString(schemas.QuerySummary_reviewType, string(v.ReviewType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.QuerySummary_status, string(v.Status))
+	}
+	if v.StatusMessage != "" {
+		s.WriteString(schemas.QuerySummary_statusMessage, string(v.StatusMessage))
+	}
+	serializeResponseVersionList(s, schemas.QuerySummary_updatedResponseVersions, v.UpdatedResponseVersions)
+}
+func (v *QuerySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySummary_citations:
+			return deserializeCitationList(d, schemas.QuerySummary_citations, &v.Citations)
+		case schemas.QuerySummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.QuerySummary_createdAt, v.CreatedAt)
+		case schemas.QuerySummary_query:
+			v.Query = new(string)
+			return d.ReadString(schemas.QuerySummary_query, v.Query)
+		case schemas.QuerySummary_queryIdentifier:
+			v.QueryIdentifier = new(int32)
+			return d.ReadInt32(schemas.QuerySummary_queryIdentifier, v.QueryIdentifier)
+		case schemas.QuerySummary_response:
+			v.Response = new(string)
+			return d.ReadString(schemas.QuerySummary_response, v.Response)
+		case schemas.QuerySummary_reviewType:
+			var ev string
+			if err := d.ReadString(schemas.QuerySummary_reviewType, &ev); err != nil {
+				return err
+			}
+			v.ReviewType = ReviewType(ev)
+			return nil
+		case schemas.QuerySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.QuerySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = QueryStatus(ev)
+			return nil
+		case schemas.QuerySummary_statusMessage:
+			var ev string
+			if err := d.ReadString(schemas.QuerySummary_statusMessage, &ev); err != nil {
+				return err
+			}
+			v.StatusMessage = QueryStatusMessage(ev)
+			return nil
+		case schemas.QuerySummary_updatedResponseVersions:
+			return deserializeResponseVersionList(d, schemas.QuerySummary_updatedResponseVersions, &v.UpdatedResponseVersions)
 		}
 		return nil
 	})
@@ -568,6 +1062,50 @@ func (v *ReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A versioned snapshot of a response edit.
+type ResponseVersion struct {
+
+	// The response text for this version.
+	//
+	// This member is required.
+	ResponseText *string
+
+	// ISO 8601 timestamp of when this edit was made.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResponseVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponseText != nil {
+		s.WriteString(schemas.ResponseVersion_responseText, *v.ResponseText)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ResponseVersion_timestamp, *v.Timestamp)
+	}
+}
+func (v *ResponseVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseVersion_responseText:
+			v.ResponseText = new(string)
+			return d.ReadString(schemas.ResponseVersion_responseText, v.ResponseText)
+		case schemas.ResponseVersion_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ResponseVersion_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Validation exception message and name.
 type ValidationExceptionField struct {
 
@@ -613,3 +1151,14 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isInquiryContent() {}

@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves detailed information about a specific construct within a mapper
@@ -53,6 +52,27 @@ type GetNetworkMigrationMapperSegmentConstructInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationMapperSegmentConstructInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationMapperSegmentConstructInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstructID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_constructID, *v.ConstructID)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.SegmentID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_segmentID, *v.SegmentID)
+	}
+}
+
 type GetNetworkMigrationMapperSegmentConstructOutput struct {
 
 	// The construct metadata including type, name, and configuration.
@@ -64,77 +84,50 @@ type GetNetworkMigrationMapperSegmentConstructOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Construct != nil {
+		s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructResponse_construct)
+		v.Construct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkMigrationMapperSegmentConstructResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkMigrationMapperSegmentConstructResponse_construct:
+			v.Construct = &types.NetworkMigrationMapperSegmentConstruct{}
+			return v.Construct.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkMigrationMapperSegmentConstructMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationMapperSegmentConstruct, schemas.GetNetworkMigrationMapperSegmentConstructRequest, schemas.GetNetworkMigrationMapperSegmentConstructResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkMigrationMapperSegmentConstruct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationMapperSegmentConstruct, schemas.GetNetworkMigrationMapperSegmentConstructRequest, schemas.GetNetworkMigrationMapperSegmentConstructResponse), output: &GetNetworkMigrationMapperSegmentConstructOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkMigrationMapperSegmentConstruct{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNetworkMigrationMapperSegmentConstruct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNetworkMigrationMapperSegmentConstructValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetworkMigrationMapperSegmentConstruct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +142,8 @@ func (c *Client) addOperationGetNetworkMigrationMapperSegmentConstructMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetNetworkMigrationMapperSegmentConstruct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNetworkMigrationMapperSegmentConstruct",
-	}
 }

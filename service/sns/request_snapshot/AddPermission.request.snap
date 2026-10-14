@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AWSAccountId.member.1=__Member__&AWSAccountId.member.2=__Member__&Action=AddPermission&ActionName.member.1=__Member__&ActionName.member.2=__Member__&Label=__Label__&TopicArn=__TopicArn__&Version=2010-03-31

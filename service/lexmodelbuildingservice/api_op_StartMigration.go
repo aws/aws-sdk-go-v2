@@ -4,13 +4,8 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -83,30 +78,6 @@ type StartMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMigrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartMigrationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MigrationStrategy != "" {
-		s.WriteString(schemas.StartMigrationRequest_migrationStrategy, string(v.MigrationStrategy))
-	}
-	if v.V1BotName != nil {
-		s.WriteString(schemas.StartMigrationRequest_v1BotName, *v.V1BotName)
-	}
-	if v.V1BotVersion != nil {
-		s.WriteString(schemas.StartMigrationRequest_v1BotVersion, *v.V1BotVersion)
-	}
-	if v.V2BotName != nil {
-		s.WriteString(schemas.StartMigrationRequest_v2BotName, *v.V2BotName)
-	}
-	if v.V2BotRole != nil {
-		s.WriteString(schemas.StartMigrationRequest_v2BotRole, *v.V2BotRole)
-	}
-}
-
 type StartMigrationOutput struct {
 
 	// The unique identifier that Amazon Lex assigned to the migration.
@@ -139,114 +110,29 @@ type StartMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartMigrationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartMigrationResponse_migrationId:
-			v.MigrationId = new(string)
-			return d.ReadString(schemas.StartMigrationResponse_migrationId, v.MigrationId)
-		case schemas.StartMigrationResponse_migrationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.StartMigrationResponse_migrationStrategy, &ev); err != nil {
-				return err
-			}
-			v.MigrationStrategy = types.MigrationStrategy(ev)
-			return nil
-		case schemas.StartMigrationResponse_migrationTimestamp:
-			v.MigrationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.StartMigrationResponse_migrationTimestamp, v.MigrationTimestamp)
-		case schemas.StartMigrationResponse_v1BotLocale:
-			var ev string
-			if err := d.ReadString(schemas.StartMigrationResponse_v1BotLocale, &ev); err != nil {
-				return err
-			}
-			v.V1BotLocale = types.Locale(ev)
-			return nil
-		case schemas.StartMigrationResponse_v1BotName:
-			v.V1BotName = new(string)
-			return d.ReadString(schemas.StartMigrationResponse_v1BotName, v.V1BotName)
-		case schemas.StartMigrationResponse_v1BotVersion:
-			v.V1BotVersion = new(string)
-			return d.ReadString(schemas.StartMigrationResponse_v1BotVersion, v.V1BotVersion)
-		case schemas.StartMigrationResponse_v2BotId:
-			v.V2BotId = new(string)
-			return d.ReadString(schemas.StartMigrationResponse_v2BotId, v.V2BotId)
-		case schemas.StartMigrationResponse_v2BotRole:
-			v.V2BotRole = new(string)
-			return d.ReadString(schemas.StartMigrationResponse_v2BotRole, v.V2BotRole)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMigration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationRequest, schemas.StartMigrationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMigration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMigration, schemas.StartMigrationRequest, schemas.StartMigrationResponse), output: &StartMigrationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMigration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMigrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMigration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -261,22 +147,8 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMigration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMigration",
-	}
 }

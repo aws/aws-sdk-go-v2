@@ -4,11 +4,10 @@ package appmesh
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an existing route.
@@ -54,6 +53,46 @@ type DeleteRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DeleteRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.RouteName != nil {
+		s.WriteString(schemas.DeleteRouteInput_routeName, *v.RouteName)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.DeleteRouteInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *DeleteRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteRouteInput_meshName, v.MeshName)
+		case schemas.DeleteRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DeleteRouteInput_meshOwner, v.MeshOwner)
+		case schemas.DeleteRouteInput_routeName:
+			v.RouteName = new(string)
+			return d.ReadString(schemas.DeleteRouteInput_routeName, v.RouteName)
+		case schemas.DeleteRouteInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.DeleteRouteInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type DeleteRouteOutput struct {
 
 	// The route that was deleted.
@@ -67,77 +106,50 @@ type DeleteRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Route != nil {
+		s.WriteStruct(schemas.DeleteRouteOutput_route)
+		v.Route.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRouteOutput_route:
+			v.Route = &types.RouteData{}
+			return v.Route.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoute, schemas.DeleteRouteInput, schemas.DeleteRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoute, schemas.DeleteRouteInput, schemas.DeleteRouteOutput), output: &DeleteRouteOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRoute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRouteValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRoute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +164,8 @@ func (c *Client) addOperationDeleteRouteMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRoute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRoute",
-	}
 }

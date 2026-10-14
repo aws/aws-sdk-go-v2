@@ -5,10 +5,7 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +46,6 @@ type GetWorkUnitsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkUnitsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWorkUnitsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWorkUnitsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetWorkUnitsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.GetWorkUnitsRequest_PageSize, *v.PageSize)
-	}
-	if v.QueryId != nil {
-		s.WriteString(schemas.GetWorkUnitsRequest_QueryId, *v.QueryId)
-	}
-}
-
 // A structure for the output.
 type GetWorkUnitsOutput struct {
 
@@ -91,78 +70,23 @@ type GetWorkUnitsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkUnitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWorkUnitsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWorkUnitsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetWorkUnitsResponse_NextToken, v.NextToken)
-		case schemas.GetWorkUnitsResponse_QueryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.GetWorkUnitsResponse_QueryId, v.QueryId)
-		case schemas.GetWorkUnitsResponse_WorkUnitRanges:
-			return deserializeWorkUnitRangeList(d, schemas.GetWorkUnitsResponse_WorkUnitRanges, &v.WorkUnitRanges)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWorkUnitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkUnits{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnits, schemas.GetWorkUnitsRequest, schemas.GetWorkUnitsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkUnits{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnits, schemas.GetWorkUnitsRequest, schemas.GetWorkUnitsResponse), output: &GetWorkUnitsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkUnits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -172,12 +96,6 @@ func (c *Client) addOperationGetWorkUnitsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpGetWorkUnitsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkUnits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +108,6 @@ func (c *Client) addOperationGetWorkUnitsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -326,11 +238,3 @@ type GetWorkUnitsAPIClient interface {
 }
 
 var _ GetWorkUnitsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetWorkUnits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkUnits",
-	}
-}

@@ -1,0 +1,5 @@
+PUT /queues/__InstanceId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","EmailAddressesConfig":[{"EmailAddressId":"__EmailAddressId__"},{"EmailAddressId":"__EmailAddressId__"}],"HoursOfOperationId":"__HoursOfOperationId__","MaxContacts":1,"Name":"__Name__","OutboundCallerConfig":{"OutboundCallerIdName":"__OutboundCallerIdName__","OutboundCallerIdNumberId":"__OutboundCallerIdNumberId__","OutboundFlowId":"__OutboundFlowId__"},"OutboundEmailConfig":{"OutboundEmailAddressId":"__OutboundEmailAddressId__"},"QuickConnectIds":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}

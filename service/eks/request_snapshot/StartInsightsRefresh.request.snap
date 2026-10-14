@@ -1,0 +1,3 @@
+POST /clusters/__ClusterName__/insights-refresh
+
+

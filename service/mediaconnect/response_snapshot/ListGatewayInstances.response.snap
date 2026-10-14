@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"instances":[{"gatewayArn":"__GatewayArn__","gatewayInstanceArn":"__GatewayInstanceArn__","instanceId":"__InstanceId__","instanceState":"REGISTERING"},{"gatewayArn":"__GatewayArn__","gatewayInstanceArn":"__GatewayInstanceArn__","instanceId":"__InstanceId__","instanceState":"REGISTERING"}],"nextToken":"__NextToken__"}

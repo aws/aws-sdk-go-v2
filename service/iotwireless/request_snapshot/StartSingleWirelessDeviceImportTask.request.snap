@@ -1,0 +1,5 @@
+POST /wireless_single_device_import_task
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","DestinationName":"__DestinationName__","DeviceName":"__DeviceName__","Positioning":"Enabled","Sidewalk":{"Positioning":{"DestinationName":"__DestinationName__"},"SidewalkManufacturingSn":"__SidewalkManufacturingSn__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

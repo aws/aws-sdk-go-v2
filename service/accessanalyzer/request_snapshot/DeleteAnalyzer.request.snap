@@ -1,0 +1,3 @@
+DELETE /analyzer/__AnalyzerName__?clientToken=__ClientToken__
+
+

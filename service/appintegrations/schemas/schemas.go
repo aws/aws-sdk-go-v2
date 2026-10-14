@@ -179,7 +179,8 @@ var AmazonAppIntegrationService = smithy.NewServiceSchema(_AmazonAppIntegrationS
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var _ApplicationApprovedOrigins = smithy.NewSchema(smithy.ShapeID{
@@ -260,12 +261,14 @@ var _ApplicationTrustedSource = smithy.NewSchema(smithy.ShapeID{
 var ApplicationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ApplicationType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ApplicationType_STANDARD *smithy.Schema
 
 var ApplicationType_SERVICE *smithy.Schema
 
 var ApplicationType_MCP_SERVER *smithy.Schema
+
+var ApplicationType_A2A_SERVER *smithy.Schema
 
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -276,6 +279,24 @@ var _ArnOrUUID = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ArnOrUUID",
 }, smithy.ShapeTypeString, 0)
+
+var AuthConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appintegrations",
+	Name:      "AuthConfig",
+}, smithy.ShapeTypeStructure, 3)
+var AuthConfig_AuthType *smithy.Schema
+
+var AuthConfig_CredentialProviderIdentifier *smithy.Schema
+
+var AuthConfig_AudienceOverride *smithy.Schema
+
+var AuthType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appintegrations",
+	Name:      "AuthType",
+}, smithy.ShapeTypeEnum, 2)
+var AuthType_API_KEY *smithy.Schema
+
+var AuthType_CONNECT_JWT *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -294,6 +315,13 @@ var _ClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ClientId",
 }, smithy.ShapeTypeString, 0)
+
+var ConflictException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appintegrations",
+	Name:      "ConflictException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var ConflictException_Message *smithy.Schema
 
 var ContactHandling = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -360,7 +388,8 @@ var _DestinationURI = smithy.NewSchema(smithy.ShapeID{
 var DuplicateResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "DuplicateResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DuplicateResourceException_Message *smithy.Schema
 
 var _EventBridgeBus = smithy.NewSchema(smithy.ShapeID{
@@ -539,13 +568,15 @@ var _InitializationTimeout = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceError_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var LastExecutionStatus = smithy.NewSchema(smithy.ShapeID{
@@ -637,13 +668,15 @@ var _PublicationList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ResourceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ResourceQuotaExceededException_Message *smithy.Schema
 
 var ScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -707,7 +740,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -718,7 +752,8 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var _URL = smithy.NewSchema(smithy.ShapeID{
@@ -734,7 +769,7 @@ var _UUID = smithy.NewSchema(smithy.ShapeID{
 var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "CreateApplicationRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateApplicationRequest_Name *smithy.Schema
 
 var CreateApplicationRequest_Namespace *smithy.Schema
@@ -762,6 +797,8 @@ var CreateApplicationRequest_ApplicationConfig *smithy.Schema
 var CreateApplicationRequest_IframeConfig *smithy.Schema
 
 var CreateApplicationRequest_ApplicationType *smithy.Schema
+
+var CreateApplicationRequest_AuthConfig *smithy.Schema
 
 var CreateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -870,8 +907,10 @@ var CreateEventIntegrationResponse_EventIntegrationArn *smithy.Schema
 var DeleteApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "DeleteApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var DeleteApplicationRequest_Arn *smithy.Schema
+
+var DeleteApplicationRequest_Force *smithy.Schema
 
 var DeleteApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -909,7 +948,7 @@ var GetApplicationRequest_Arn *smithy.Schema
 var GetApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "GetApplicationResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var GetApplicationResponse_Arn *smithy.Schema
 
 var GetApplicationResponse_Id *smithy.Schema
@@ -943,6 +982,8 @@ var GetApplicationResponse_ApplicationConfig *smithy.Schema
 var GetApplicationResponse_IframeConfig *smithy.Schema
 
 var GetApplicationResponse_ApplicationType *smithy.Schema
+
+var GetApplicationResponse_AuthConfig *smithy.Schema
 
 var GetDataIntegrationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -1141,7 +1182,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
 	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var UpdateApplicationRequest_Arn *smithy.Schema
 
 var UpdateApplicationRequest_Name *smithy.Schema
@@ -1165,6 +1206,8 @@ var UpdateApplicationRequest_ApplicationConfig *smithy.Schema
 var UpdateApplicationRequest_IframeConfig *smithy.Schema
 
 var UpdateApplicationRequest_ApplicationType *smithy.Schema
+
+var UpdateApplicationRequest_AuthConfig *smithy.Schema
 
 var UpdateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appintegrations",
@@ -1243,6 +1286,8 @@ func init() {
 
 	ApplicationType_MCP_SERVER = ApplicationType.AddMember("MCP_SERVER", smithyprelude.Unit)
 
+	ApplicationType_A2A_SERVER = ApplicationType.AddMember("A2A_SERVER", smithyprelude.Unit)
+
 	ApplicationSummary_Arn = ApplicationSummary.AddMember("Arn", _Arn)
 
 	ApplicationSummary_Id = ApplicationSummary.AddMember("Id", _UUID)
@@ -1267,9 +1312,21 @@ func init() {
 
 	ApplicationSourceConfig_ExternalUrlConfig = ApplicationSourceConfig.AddMember("ExternalUrlConfig", ExternalUrlConfig)
 
+	AuthType_API_KEY = AuthType.AddMember("API_KEY", smithyprelude.Unit)
+
+	AuthType_CONNECT_JWT = AuthType.AddMember("CONNECT_JWT", smithyprelude.Unit)
+
+	AuthConfig_AuthType = AuthConfig.AddMember("AuthType", AuthType)
+
+	AuthConfig_CredentialProviderIdentifier = AuthConfig.AddMember("CredentialProviderIdentifier", _Arn)
+
+	AuthConfig_AudienceOverride = AuthConfig.AddMember("AudienceOverride", _Identifier)
+
 	_ClientAssociationMetadata_key = _ClientAssociationMetadata.AddMember("key", _NonBlankString)
 
 	_ClientAssociationMetadata_value = _ClientAssociationMetadata.AddMember("value", _NonBlankString)
+
+	ConflictException_Message = ConflictException.AddMember("Message", _Message)
 
 	ExecutionStatus_COMPLETED = ExecutionStatus.AddMember("COMPLETED", smithyprelude.Unit)
 
@@ -1439,6 +1496,8 @@ func init() {
 
 	CreateApplicationRequest_ApplicationType = CreateApplicationRequest.AddMember("ApplicationType", ApplicationType)
 
+	CreateApplicationRequest_AuthConfig = CreateApplicationRequest.AddMember("AuthConfig", AuthConfig)
+
 	CreateApplicationResponse_Arn = CreateApplicationResponse.AddMember("Arn", _Arn)
 
 	CreateApplicationResponse_Id = CreateApplicationResponse.AddMember("Id", _UUID)
@@ -1517,6 +1576,8 @@ func init() {
 
 	DeleteApplicationRequest_Arn = DeleteApplicationRequest.AddMember("Arn", _ArnOrUUID, &smithytraits.HTTPLabel{})
 
+	DeleteApplicationRequest_Force = DeleteApplicationRequest.AddMember("Force", _Boolean, &smithytraits.HTTPQuery{Name: "force"})
+
 	DeleteDataIntegrationRequest_DataIntegrationIdentifier = DeleteDataIntegrationRequest.AddMember("DataIntegrationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
 
 	DeleteEventIntegrationRequest_Name = DeleteEventIntegrationRequest.AddMember("Name", _Name, &smithytraits.HTTPLabel{})
@@ -1556,6 +1617,8 @@ func init() {
 	GetApplicationResponse_IframeConfig = GetApplicationResponse.AddMember("IframeConfig", IframeConfig)
 
 	GetApplicationResponse_ApplicationType = GetApplicationResponse.AddMember("ApplicationType", ApplicationType)
+
+	GetApplicationResponse_AuthConfig = GetApplicationResponse.AddMember("AuthConfig", AuthConfig)
 
 	GetDataIntegrationRequest_Identifier = GetDataIntegrationRequest.AddMember("Identifier", _Identifier, &smithytraits.HTTPLabel{})
 
@@ -1684,6 +1747,8 @@ func init() {
 	UpdateApplicationRequest_IframeConfig = UpdateApplicationRequest.AddMember("IframeConfig", IframeConfig)
 
 	UpdateApplicationRequest_ApplicationType = UpdateApplicationRequest.AddMember("ApplicationType", ApplicationType)
+
+	UpdateApplicationRequest_AuthConfig = UpdateApplicationRequest.AddMember("AuthConfig", AuthConfig)
 
 	UpdateDataIntegrationAssociationRequest_DataIntegrationIdentifier = UpdateDataIntegrationAssociationRequest.AddMember("DataIntegrationIdentifier", _Identifier, &smithytraits.HTTPLabel{})
 

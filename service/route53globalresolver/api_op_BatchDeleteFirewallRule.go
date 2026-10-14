@@ -4,13 +4,8 @@ package route53globalresolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes multiple DNS firewall rules in a single operation. This is more
@@ -46,16 +41,6 @@ type BatchDeleteFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteFirewallRuleInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteFirewallRuleInputItems(s, schemas.BatchDeleteFirewallRuleInput_firewallRules, v.FirewallRules)
-}
-
 type BatchDeleteFirewallRuleOutput struct {
 
 	// High level information about the DNS Firewall rules that failed to delete.
@@ -75,86 +60,29 @@ type BatchDeleteFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteFirewallRuleOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteFirewallRuleOutput_failures:
-			return deserializeBatchDeleteFirewallRuleOutputItems(d, schemas.BatchDeleteFirewallRuleOutput_failures, &v.Failures)
-		case schemas.BatchDeleteFirewallRuleOutput_successes:
-			return deserializeBatchDeleteFirewallRuleOutputItems(d, schemas.BatchDeleteFirewallRuleOutput_successes, &v.Successes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFirewallRule, schemas.BatchDeleteFirewallRuleInput, schemas.BatchDeleteFirewallRuleOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFirewallRule, schemas.BatchDeleteFirewallRuleInput, schemas.BatchDeleteFirewallRuleOutput), output: &BatchDeleteFirewallRuleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteFirewallRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteFirewallRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteFirewallRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +97,8 @@ func (c *Client) addOperationBatchDeleteFirewallRuleMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteFirewallRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteFirewallRule",
-	}
 }

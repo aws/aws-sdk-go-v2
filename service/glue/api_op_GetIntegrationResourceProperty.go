@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is used for fetching the ResourceProperty of the Glue connection (for
@@ -38,6 +37,18 @@ type GetIntegrationResourcePropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationResourcePropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResourcePropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationResourcePropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetIntegrationResourcePropertyOutput struct {
 
 	// The connection ARN of the source, or the database ARN of the target.
@@ -59,77 +70,70 @@ type GetIntegrationResourcePropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationResourcePropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationResourcePropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourcePropertyArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn, *v.ResourcePropertyArn)
+	}
+	if v.SourceProcessingProperties != nil {
+		s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse_SourceProcessingProperties)
+		v.SourceProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetProcessingProperties != nil {
+		s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse_TargetProcessingProperties)
+		v.TargetProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIntegrationResourcePropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationResourcePropertyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationResourcePropertyResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResourcePropertyResponse_ResourceArn, v.ResourceArn)
+		case schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn:
+			v.ResourcePropertyArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn, v.ResourcePropertyArn)
+		case schemas.GetIntegrationResourcePropertyResponse_SourceProcessingProperties:
+			v.SourceProcessingProperties = &types.SourceProcessingProperties{}
+			return v.SourceProcessingProperties.Deserialize(d)
+		case schemas.GetIntegrationResourcePropertyResponse_TargetProcessingProperties:
+			v.TargetProcessingProperties = &types.TargetProcessingProperties{}
+			return v.TargetProcessingProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationResourcePropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrationResourceProperty, schemas.GetIntegrationResourcePropertyRequest, schemas.GetIntegrationResourcePropertyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrationResourceProperty, schemas.GetIntegrationResourcePropertyRequest, schemas.GetIntegrationResourcePropertyResponse), output: &GetIntegrationResourcePropertyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIntegrationResourceProperty"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIntegrationResourcePropertyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntegrationResourceProperty(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +148,8 @@ func (c *Client) addOperationGetIntegrationResourcePropertyMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIntegrationResourceProperty(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIntegrationResourceProperty",
-	}
 }

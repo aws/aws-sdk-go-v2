@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows a third-party analytical engine to retrieve unfiltered table metadata
@@ -111,6 +110,50 @@ type GetUnfilteredTableMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUnfilteredTableMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUnfilteredTableMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUnfilteredTableMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetUnfilteredTableMetadataRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_Name, *v.Name)
+	}
+	if v.ParentResourceArn != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_ParentResourceArn, *v.ParentResourceArn)
+	}
+	serializePermissionList(s, schemas.GetUnfilteredTableMetadataRequest_Permissions, v.Permissions)
+	if v.QuerySessionContext != nil {
+		s.WriteStruct(schemas.GetUnfilteredTableMetadataRequest_QuerySessionContext)
+		v.QuerySessionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_Region, *v.Region)
+	}
+	if v.RootResourceArn != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_RootResourceArn, *v.RootResourceArn)
+	}
+	if v.SupportedDialect != nil {
+		s.WriteStruct(schemas.GetUnfilteredTableMetadataRequest_SupportedDialect)
+		v.SupportedDialect.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePermissionTypeList(s, schemas.GetUnfilteredTableMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+}
+
 type GetUnfilteredTableMetadataOutput struct {
 
 	// A list of column names that the user has been granted access to.
@@ -161,77 +204,97 @@ type GetUnfilteredTableMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUnfilteredTableMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUnfilteredTableMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUnfilteredTableMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNameStringList(s, schemas.GetUnfilteredTableMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
+	serializeColumnRowFilterList(s, schemas.GetUnfilteredTableMetadataResponse_CellFilters, v.CellFilters)
+	if v.IsMaterializedView != false {
+		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsMaterializedView, v.IsMaterializedView)
+	}
+	if v.IsMultiDialectView != false {
+		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsMultiDialectView, v.IsMultiDialectView)
+	}
+	if v.IsProtected != false {
+		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsProtected, v.IsProtected)
+	}
+	if v.IsRegisteredWithLakeFormation != false {
+		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsRegisteredWithLakeFormation, v.IsRegisteredWithLakeFormation)
+	}
+	serializePermissionList(s, schemas.GetUnfilteredTableMetadataResponse_Permissions, v.Permissions)
+	if v.QueryAuthorizationId != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataResponse_QueryAuthorizationId, *v.QueryAuthorizationId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.RowFilter != nil {
+		s.WriteString(schemas.GetUnfilteredTableMetadataResponse_RowFilter, *v.RowFilter)
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.GetUnfilteredTableMetadataResponse_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUnfilteredTableMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUnfilteredTableMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUnfilteredTableMetadataResponse_AuthorizedColumns:
+			return deserializeNameStringList(d, schemas.GetUnfilteredTableMetadataResponse_AuthorizedColumns, &v.AuthorizedColumns)
+		case schemas.GetUnfilteredTableMetadataResponse_CellFilters:
+			return deserializeColumnRowFilterList(d, schemas.GetUnfilteredTableMetadataResponse_CellFilters, &v.CellFilters)
+		case schemas.GetUnfilteredTableMetadataResponse_IsMaterializedView:
+			return d.ReadBool(schemas.GetUnfilteredTableMetadataResponse_IsMaterializedView, &v.IsMaterializedView)
+		case schemas.GetUnfilteredTableMetadataResponse_IsMultiDialectView:
+			return d.ReadBool(schemas.GetUnfilteredTableMetadataResponse_IsMultiDialectView, &v.IsMultiDialectView)
+		case schemas.GetUnfilteredTableMetadataResponse_IsProtected:
+			return d.ReadBool(schemas.GetUnfilteredTableMetadataResponse_IsProtected, &v.IsProtected)
+		case schemas.GetUnfilteredTableMetadataResponse_IsRegisteredWithLakeFormation:
+			return d.ReadBool(schemas.GetUnfilteredTableMetadataResponse_IsRegisteredWithLakeFormation, &v.IsRegisteredWithLakeFormation)
+		case schemas.GetUnfilteredTableMetadataResponse_Permissions:
+			return deserializePermissionList(d, schemas.GetUnfilteredTableMetadataResponse_Permissions, &v.Permissions)
+		case schemas.GetUnfilteredTableMetadataResponse_QueryAuthorizationId:
+			v.QueryAuthorizationId = new(string)
+			return d.ReadString(schemas.GetUnfilteredTableMetadataResponse_QueryAuthorizationId, v.QueryAuthorizationId)
+		case schemas.GetUnfilteredTableMetadataResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetUnfilteredTableMetadataResponse_ResourceArn, v.ResourceArn)
+		case schemas.GetUnfilteredTableMetadataResponse_RowFilter:
+			v.RowFilter = new(string)
+			return d.ReadString(schemas.GetUnfilteredTableMetadataResponse_RowFilter, v.RowFilter)
+		case schemas.GetUnfilteredTableMetadataResponse_Table:
+			v.Table = &types.Table{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUnfilteredTableMetadata, schemas.GetUnfilteredTableMetadataRequest, schemas.GetUnfilteredTableMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUnfilteredTableMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUnfilteredTableMetadata, schemas.GetUnfilteredTableMetadataRequest, schemas.GetUnfilteredTableMetadataResponse), output: &GetUnfilteredTableMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUnfilteredTableMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUnfilteredTableMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUnfilteredTableMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -246,22 +309,8 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUnfilteredTableMetadata",
-	}
 }

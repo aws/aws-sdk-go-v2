@@ -5,12 +5,8 @@ package sagemakergeospatial
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you run image query on a specific raster data collection to get a list
@@ -54,26 +50,6 @@ type SearchRasterDataCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchRasterDataCollectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchRasterDataCollectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchRasterDataCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.SearchRasterDataCollectionInput_Arn, *v.Arn)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchRasterDataCollectionInput_NextToken, *v.NextToken)
-	}
-	if v.RasterDataCollectionQuery != nil {
-		s.WriteStruct(schemas.SearchRasterDataCollectionInput_RasterDataCollectionQuery)
-		v.RasterDataCollectionQuery.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SearchRasterDataCollectionOutput struct {
 
 	// Approximate number of results in the response.
@@ -94,90 +70,29 @@ type SearchRasterDataCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchRasterDataCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchRasterDataCollectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchRasterDataCollectionOutput_ApproximateResultCount:
-			v.ApproximateResultCount = new(int32)
-			return d.ReadInt32(schemas.SearchRasterDataCollectionOutput_ApproximateResultCount, v.ApproximateResultCount)
-		case schemas.SearchRasterDataCollectionOutput_Items:
-			return deserializeItemSourceList(d, schemas.SearchRasterDataCollectionOutput_Items, &v.Items)
-		case schemas.SearchRasterDataCollectionOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchRasterDataCollectionOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRasterDataCollection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRasterDataCollection, schemas.SearchRasterDataCollectionInput, schemas.SearchRasterDataCollectionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRasterDataCollection{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRasterDataCollection, schemas.SearchRasterDataCollectionInput, schemas.SearchRasterDataCollectionOutput), output: &SearchRasterDataCollectionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchRasterDataCollection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchRasterDataCollectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchRasterDataCollection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +105,6 @@ func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -287,11 +196,3 @@ type SearchRasterDataCollectionAPIClient interface {
 }
 
 var _ SearchRasterDataCollectionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchRasterDataCollection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchRasterDataCollection",
-	}
-}

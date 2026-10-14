@@ -1,0 +1,5 @@
+PATCH /rules/__Identifier__/lock
+
+Content-Type: application/json
+
+{"LockConfiguration":{"UnlockDelay":{"UnlockDelayUnit":"DAYS","UnlockDelayValue":1}}}

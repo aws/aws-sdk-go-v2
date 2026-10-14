@@ -2923,6 +2923,12 @@
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the instance of IAM Identity Center.</p>"
                     }
                 },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>"
+                    }
+                },
                 "OwnerAccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
@@ -2953,10 +2959,28 @@
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance fails to create or update, this field contains information about the cause, which may include issues with KMS key configuration, permission problems with the specified KMS key, or service-related errors. </p>"
                     }
                 },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
+                    }
+                },
                 "EncryptionConfigurationDetails": {
                     "target": "com.amazonaws.ssoadmin#EncryptionConfigurationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>"
+                    }
+                },
+                "PermissionSetsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether permission sets are enabled for this Identity Center instance.</p>"
                     }
                 }
             },
@@ -4139,6 +4163,16 @@
                 "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
+        "com.amazonaws.ssoadmin#InstanceIdentityStoreArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 62,
+                    "max": 93
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/(d-[0-9a-f]{10}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
+            }
+        },
         "com.amazonaws.ssoadmin#InstanceList": {
             "type": "list",
             "member": {
@@ -4164,6 +4198,12 @@
                     "target": "com.amazonaws.ssoadmin#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the Identity Center instance.</p>"
+                    }
+                },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the Identity Center instance.</p>"
                     }
                 },
                 "OwnerAccountId": {
@@ -4194,6 +4234,18 @@
                     "target": "com.amazonaws.ssoadmin#Reason",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>"
+                    }
+                },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
                     }
                 }
             },
@@ -9376,7 +9428,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p> <p>In a single <code>UpdateInstance</code> request, you can perform only one of the following operations:</p> <ul> <li> <p>Update the encryption configuration of the instance by specifying <code>EncryptionConfiguration</code>.</p> </li> <li> <p>Enable permission sets for the instance by specifying <code>PermissionSetsEnabled</code>.</p> </li> </ul> <p>A request that specifies both <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> returns a <code>ValidationException</code>. To perform both operations, call <code>UpdateInstance</code> separately for each. The two calls can be made in parallel.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfiguration": {
@@ -9460,6 +9512,12 @@
                     "target": "com.amazonaws.ssoadmin#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>"
+                    }
+                },
+                "PermissionSetsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p> <note> <p>You can't set <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in the same request. To configure both, make two separate <code>UpdateInstance</code> calls. These calls can be made in parallel.</p> </note>"
                     }
                 }
             },

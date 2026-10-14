@@ -1,0 +1,4 @@
+GET /?continuation-token=__ContinuationToken__&intelligent-tiering=&x-id=ListBucketIntelligentTieringConfigurations
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

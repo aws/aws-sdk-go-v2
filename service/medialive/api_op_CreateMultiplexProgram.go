@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a new program in the multiplex.
@@ -53,6 +53,29 @@ type CreateMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiplexProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiplexProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiplexProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.CreateMultiplexProgramRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.MultiplexProgramSettings != nil {
+		s.WriteStruct(schemas.CreateMultiplexProgramRequest_MultiplexProgramSettings)
+		v.MultiplexProgramSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.CreateMultiplexProgramRequest_ProgramName, *v.ProgramName)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateMultiplexProgramRequest_RequestId, *v.RequestId)
+	}
+}
+
 // Placeholder documentation for CreateMultiplexProgramResponse
 type CreateMultiplexProgramOutput struct {
 
@@ -65,65 +88,44 @@ type CreateMultiplexProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiplexProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiplexProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiplexProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexProgram != nil {
+		s.WriteStruct(schemas.CreateMultiplexProgramResponse_MultiplexProgram)
+		v.MultiplexProgram.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMultiplexProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultiplexProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultiplexProgramResponse_MultiplexProgram:
+			v.MultiplexProgram = &types.MultiplexProgram{}
+			return v.MultiplexProgram.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiplexProgram, schemas.CreateMultiplexProgramRequest, schemas.CreateMultiplexProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiplexProgram, schemas.CreateMultiplexProgramRequest, schemas.CreateMultiplexProgramResponse), output: &CreateMultiplexProgramOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultiplexProgram{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMultiplexProgram"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -133,12 +135,6 @@ func (c *Client) addOperationCreateMultiplexProgramMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateMultiplexProgramValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultiplexProgram(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +147,6 @@ func (c *Client) addOperationCreateMultiplexProgramMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -196,12 +186,4 @@ func (m *idempotencyToken_initializeOpCreateMultiplexProgram) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateMultiplexProgramMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMultiplexProgram{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMultiplexProgram(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMultiplexProgram",
-	}
 }

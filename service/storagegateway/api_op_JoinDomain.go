@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a file gateway to an Active Directory domain. This operation is only
@@ -87,6 +86,34 @@ type JoinDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHosts(s, schemas.JoinDomainInput_DomainControllers, v.DomainControllers)
+	if v.DomainName != nil {
+		s.WriteString(schemas.JoinDomainInput_DomainName, *v.DomainName)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.JoinDomainInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.OrganizationalUnit != nil {
+		s.WriteString(schemas.JoinDomainInput_OrganizationalUnit, *v.OrganizationalUnit)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.JoinDomainInput_Password, *v.Password)
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.JoinDomainInput_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.JoinDomainInput_UserName, *v.UserName)
+	}
+}
+
 // JoinDomainOutput
 type JoinDomainOutput struct {
 
@@ -127,77 +154,58 @@ type JoinDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinDomainOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryStatus != "" {
+		s.WriteString(schemas.JoinDomainOutput_ActiveDirectoryStatus, string(v.ActiveDirectoryStatus))
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.JoinDomainOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *JoinDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JoinDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JoinDomainOutput_ActiveDirectoryStatus:
+			var ev string
+			if err := d.ReadString(schemas.JoinDomainOutput_ActiveDirectoryStatus, &ev); err != nil {
+				return err
+			}
+			v.ActiveDirectoryStatus = types.ActiveDirectoryStatus(ev)
+			return nil
+		case schemas.JoinDomainOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.JoinDomainOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJoinDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinDomain, schemas.JoinDomainInput, schemas.JoinDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJoinDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinDomain, schemas.JoinDomainInput, schemas.JoinDomainOutput), output: &JoinDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpJoinDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "JoinDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpJoinDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJoinDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +220,8 @@ func (c *Client) addOperationJoinDomainMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opJoinDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "JoinDomain",
-	}
 }

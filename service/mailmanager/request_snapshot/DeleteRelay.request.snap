@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/DeleteRelay
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡gRelayIdk__RelayId__

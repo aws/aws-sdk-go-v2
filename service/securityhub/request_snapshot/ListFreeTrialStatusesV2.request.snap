@@ -1,0 +1,5 @@
+POST /freetrial/statusv2/list
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","Statuses":["ACTIVE","ACTIVE"]}

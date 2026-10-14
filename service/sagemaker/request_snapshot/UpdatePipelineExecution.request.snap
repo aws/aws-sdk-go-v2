@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdatePipelineExecution
+
+{"ParallelismConfiguration":{"MaxParallelExecutionSteps":1},"PipelineExecutionArn":"__PipelineExecutionArn__","PipelineExecutionDescription":"__PipelineExecutionDescription__","PipelineExecutionDisplayName":"__PipelineExecutionDisplayName__"}

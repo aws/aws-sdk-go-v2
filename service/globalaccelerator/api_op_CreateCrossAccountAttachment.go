@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a cross-account attachment in Global Accelerator. You create a
@@ -83,6 +83,24 @@ type CreateCrossAccountAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrossAccountAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateCrossAccountAttachmentRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCrossAccountAttachmentRequest_Name, *v.Name)
+	}
+	serializePrincipals(s, schemas.CreateCrossAccountAttachmentRequest_Principals, v.Principals)
+	serializeResources(s, schemas.CreateCrossAccountAttachmentRequest_Resources, v.Resources)
+	serializeTags(s, schemas.CreateCrossAccountAttachmentRequest_Tags, v.Tags)
+}
+
 type CreateCrossAccountAttachmentOutput struct {
 
 	// Information about the cross-account attachment.
@@ -94,65 +112,44 @@ type CreateCrossAccountAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrossAccountAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrossAccountAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrossAccountAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAttachment != nil {
+		s.WriteStruct(schemas.CreateCrossAccountAttachmentResponse_CrossAccountAttachment)
+		v.CrossAccountAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCrossAccountAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCrossAccountAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCrossAccountAttachmentResponse_CrossAccountAttachment:
+			v.CrossAccountAttachment = &types.Attachment{}
+			return v.CrossAccountAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrossAccountAttachment, schemas.CreateCrossAccountAttachmentRequest, schemas.CreateCrossAccountAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrossAccountAttachment, schemas.CreateCrossAccountAttachmentRequest, schemas.CreateCrossAccountAttachmentResponse), output: &CreateCrossAccountAttachmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCrossAccountAttachment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCrossAccountAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +159,6 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateCrossAccountAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCrossAccountAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +171,6 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +210,4 @@ func (m *idempotencyToken_initializeOpCreateCrossAccountAttachment) HandleInitia
 }
 func addIdempotencyToken_opCreateCrossAccountAttachmentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCrossAccountAttachment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCrossAccountAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCrossAccountAttachment",
-	}
 }

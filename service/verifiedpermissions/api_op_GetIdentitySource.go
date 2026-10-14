@@ -4,13 +4,8 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,21 +52,6 @@ type GetIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIdentitySourceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentitySourceId != nil {
-		s.WriteString(schemas.GetIdentitySourceInput_identitySourceId, *v.IdentitySourceId)
-	}
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.GetIdentitySourceInput_policyStoreId, *v.PolicyStoreId)
-	}
-}
-
 type GetIdentitySourceOutput struct {
 
 	// The date and time that the identity source was originally created.
@@ -115,102 +95,29 @@ type GetIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIdentitySourceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIdentitySourceOutput_configuration:
-			return deserializeConfigurationDetail(d, schemas.GetIdentitySourceOutput_configuration, &v.Configuration)
-		case schemas.GetIdentitySourceOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetIdentitySourceOutput_createdDate, v.CreatedDate)
-		case schemas.GetIdentitySourceOutput_details:
-			v.Details = &types.IdentitySourceDetails{}
-			return v.Details.Deserialize(d)
-		case schemas.GetIdentitySourceOutput_identitySourceId:
-			v.IdentitySourceId = new(string)
-			return d.ReadString(schemas.GetIdentitySourceOutput_identitySourceId, v.IdentitySourceId)
-		case schemas.GetIdentitySourceOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetIdentitySourceOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetIdentitySourceOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.GetIdentitySourceOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.GetIdentitySourceOutput_principalEntityType:
-			v.PrincipalEntityType = new(string)
-			return d.ReadString(schemas.GetIdentitySourceOutput_principalEntityType, v.PrincipalEntityType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentitySource, schemas.GetIdentitySourceInput, schemas.GetIdentitySourceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentitySource, schemas.GetIdentitySourceInput, schemas.GetIdentitySourceOutput), output: &GetIdentitySourceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIdentitySource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIdentitySourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentitySource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,22 +132,8 @@ func (c *Client) addOperationGetIdentitySourceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIdentitySource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIdentitySource",
-	}
 }

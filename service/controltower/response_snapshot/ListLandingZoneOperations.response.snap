@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"landingZoneOperations":[{"operationIdentifier":"__OperationIdentifier__","operationType":"DELETE","status":"SUCCEEDED"},{"operationIdentifier":"__OperationIdentifier__","operationType":"DELETE","status":"SUCCEEDED"}],"nextToken":"__NextToken__"}

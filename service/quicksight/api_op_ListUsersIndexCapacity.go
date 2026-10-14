@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists per-user index capacity consumption for an account.
@@ -57,6 +56,34 @@ type ListUsersIndexCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersIndexCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersIndexCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersIndexCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListUsersIndexCapacityRequest_awsAccountId, *v.AwsAccountId)
+	}
+	serializeUserIndexCapacityFilters(s, schemas.ListUsersIndexCapacityRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsersIndexCapacityRequest_maxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListUsersIndexCapacityRequest_namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersIndexCapacityRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListUsersIndexCapacityRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListUsersIndexCapacityRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListUsersIndexCapacityOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -74,77 +101,57 @@ type ListUsersIndexCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersIndexCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersIndexCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersIndexCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersIndexCapacityResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListUsersIndexCapacityResponse_requestId, *v.RequestId)
+	}
+	serializeUserIndexCapacityList(s, schemas.ListUsersIndexCapacityResponse_users, v.Users)
+}
+func (v *ListUsersIndexCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersIndexCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersIndexCapacityResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersIndexCapacityResponse_nextToken, v.NextToken)
+		case schemas.ListUsersIndexCapacityResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListUsersIndexCapacityResponse_requestId, v.RequestId)
+		case schemas.ListUsersIndexCapacityResponse_users:
+			return deserializeUserIndexCapacityList(d, schemas.ListUsersIndexCapacityResponse_users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersIndexCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersIndexCapacity, schemas.ListUsersIndexCapacityRequest, schemas.ListUsersIndexCapacityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUsersIndexCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersIndexCapacity, schemas.ListUsersIndexCapacityRequest, schemas.ListUsersIndexCapacityResponse), output: &ListUsersIndexCapacityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUsersIndexCapacity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsersIndexCapacity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUsersIndexCapacityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsersIndexCapacity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +166,8 @@ func (c *Client) addOperationListUsersIndexCapacityMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListUsersIndexCapacity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUsersIndexCapacity",
-	}
 }

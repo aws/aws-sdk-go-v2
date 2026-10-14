@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists information about the specified query logging configurations. Each
@@ -112,6 +112,28 @@ type ListResolverQueryLogConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverQueryLogConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverQueryLogConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverQueryLogConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverQueryLogConfigsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigsRequest_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListResolverQueryLogConfigsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListResolverQueryLogConfigsOutput struct {
 
 	// If there are more than MaxResults query logging configurations, you can submit
@@ -144,74 +166,58 @@ type ListResolverQueryLogConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverQueryLogConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverQueryLogConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverQueryLogConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverQueryLogConfigList(s, schemas.ListResolverQueryLogConfigsResponse_ResolverQueryLogConfigs, v.ResolverQueryLogConfigs)
+	if v.TotalCount != 0 {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigsResponse_TotalCount, v.TotalCount)
+	}
+	if v.TotalFilteredCount != 0 {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigsResponse_TotalFilteredCount, v.TotalFilteredCount)
+	}
+}
+func (v *ListResolverQueryLogConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverQueryLogConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverQueryLogConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverQueryLogConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverQueryLogConfigsResponse_ResolverQueryLogConfigs:
+			return deserializeResolverQueryLogConfigList(d, schemas.ListResolverQueryLogConfigsResponse_ResolverQueryLogConfigs, &v.ResolverQueryLogConfigs)
+		case schemas.ListResolverQueryLogConfigsResponse_TotalCount:
+			return d.ReadInt32(schemas.ListResolverQueryLogConfigsResponse_TotalCount, &v.TotalCount)
+		case schemas.ListResolverQueryLogConfigsResponse_TotalFilteredCount:
+			return d.ReadInt32(schemas.ListResolverQueryLogConfigsResponse_TotalFilteredCount, &v.TotalFilteredCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverQueryLogConfigs, schemas.ListResolverQueryLogConfigsRequest, schemas.ListResolverQueryLogConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverQueryLogConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverQueryLogConfigs, schemas.ListResolverQueryLogConfigsRequest, schemas.ListResolverQueryLogConfigsResponse), output: &ListResolverQueryLogConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverQueryLogConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResolverQueryLogConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverQueryLogConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,12 +230,6 @@ func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -335,11 +335,3 @@ type ListResolverQueryLogConfigsAPIClient interface {
 }
 
 var _ ListResolverQueryLogConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResolverQueryLogConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResolverQueryLogConfigs",
-	}
-}

@@ -5,7 +5,8 @@ package dataexchange
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +69,64 @@ type SendApiAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendApiAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendApiAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendApiAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.SendApiAssetRequest_AssetId, *v.AssetId)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.SendApiAssetRequest_Body, *v.Body)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.SendApiAssetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Method != nil {
+		s.WriteString(schemas.SendApiAssetRequest_Method, *v.Method)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.SendApiAssetRequest_Path, *v.Path)
+	}
+	serializeMapOf__string(s, schemas.SendApiAssetRequest_QueryStringParameters, v.QueryStringParameters)
+	serializeMapOf__string(s, schemas.SendApiAssetRequest_RequestHeaders, v.RequestHeaders)
+	if v.RevisionId != nil {
+		s.WriteString(schemas.SendApiAssetRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *SendApiAssetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendApiAssetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendApiAssetRequest_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_AssetId, v.AssetId)
+		case schemas.SendApiAssetRequest_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_Body, v.Body)
+		case schemas.SendApiAssetRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_DataSetId, v.DataSetId)
+		case schemas.SendApiAssetRequest_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_Method, v.Method)
+		case schemas.SendApiAssetRequest_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_Path, v.Path)
+		case schemas.SendApiAssetRequest_QueryStringParameters:
+			return deserializeMapOf__string(d, schemas.SendApiAssetRequest_QueryStringParameters, &v.QueryStringParameters)
+		case schemas.SendApiAssetRequest_RequestHeaders:
+			return deserializeMapOf__string(d, schemas.SendApiAssetRequest_RequestHeaders, &v.RequestHeaders)
+		case schemas.SendApiAssetRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.SendApiAssetRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type SendApiAssetOutput struct {
 
 	// The response body from the underlying API tracked by the API asset.
@@ -84,65 +143,45 @@ type SendApiAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendApiAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendApiAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendApiAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.SendApiAssetResponse_Body, *v.Body)
+	}
+	serializeMapOf__string(s, schemas.SendApiAssetResponse_ResponseHeaders, v.ResponseHeaders)
+}
+func (v *SendApiAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendApiAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendApiAssetResponse_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.SendApiAssetResponse_Body, v.Body)
+		case schemas.SendApiAssetResponse_ResponseHeaders:
+			return deserializeMapOf__string(d, schemas.SendApiAssetResponse_ResponseHeaders, &v.ResponseHeaders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendApiAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendApiAsset, schemas.SendApiAssetRequest, schemas.SendApiAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendApiAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendApiAsset, schemas.SendApiAssetRequest, schemas.SendApiAssetResponse), output: &SendApiAssetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendApiAsset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendApiAsset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -152,12 +191,6 @@ func (c *Client) addOperationSendApiAssetMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpSendApiAssetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendApiAsset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +203,6 @@ func (c *Client) addOperationSendApiAssetMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -209,12 +236,4 @@ func (m *endpointPrefix_opSendApiAssetMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opSendApiAssetMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opSendApiAssetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opSendApiAsset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendApiAsset",
-	}
 }

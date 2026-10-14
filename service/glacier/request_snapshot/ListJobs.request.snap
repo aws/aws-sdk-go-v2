@@ -1,0 +1,4 @@
+GET /__AccountId__/vaults/__VaultName__/jobs?completed=__Completed__&limit=1&marker=__Marker__&statuscode=__Statuscode__
+
+X-Amz-Glacier-Version: 2012-06-01
+

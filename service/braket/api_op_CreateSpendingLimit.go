@@ -5,12 +5,8 @@ package braket
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a spending limit for a specified quantum device. Spending limits help
@@ -63,30 +59,6 @@ type CreateSpendingLimitInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSpendingLimitInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSpendingLimitRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSpendingLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSpendingLimitRequest_clientToken, *v.ClientToken)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.CreateSpendingLimitRequest_deviceArn, *v.DeviceArn)
-	}
-	if v.SpendingLimit != nil {
-		s.WriteString(schemas.CreateSpendingLimitRequest_spendingLimit, *v.SpendingLimit)
-	}
-	serializeTagsMap(s, schemas.CreateSpendingLimitRequest_tags, v.Tags)
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.CreateSpendingLimitRequest_timePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateSpendingLimitOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created spending limit.
@@ -100,73 +72,23 @@ type CreateSpendingLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSpendingLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSpendingLimitResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSpendingLimitResponse_spendingLimitArn:
-			v.SpendingLimitArn = new(string)
-			return d.ReadString(schemas.CreateSpendingLimitResponse_spendingLimitArn, v.SpendingLimitArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSpendingLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSpendingLimit{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpendingLimit, schemas.CreateSpendingLimitRequest, schemas.CreateSpendingLimitResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSpendingLimit{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpendingLimit, schemas.CreateSpendingLimitRequest, schemas.CreateSpendingLimitResponse), output: &CreateSpendingLimitOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSpendingLimit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -176,12 +98,6 @@ func (c *Client) addOperationCreateSpendingLimitMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateSpendingLimitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSpendingLimit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +110,6 @@ func (c *Client) addOperationCreateSpendingLimitMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,12 +149,4 @@ func (m *idempotencyToken_initializeOpCreateSpendingLimit) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateSpendingLimitMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSpendingLimit{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSpendingLimit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSpendingLimit",
-	}
 }

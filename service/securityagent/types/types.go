@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,8 +18,14 @@ type Actor struct {
 	// A description of the actor.
 	Description *string
 
+	// Whether email-based MFA is enabled for this actor.
+	EnableEmailMfa *bool
+
 	// The unique identifier for the actor.
 	Identifier *string
+
+	// Server-generated email forwarding address for receiving MFA codes.
+	MfaForwardingAddress *string
 
 	// The list of URIs that the actor targets during testing.
 	Uris []string
@@ -29,43 +33,23 @@ type Actor struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Actor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Actor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// A message received at an actor's server-generated email MFA address.
+type ActorMessage struct {
 
-func (v *Actor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Authentication != nil {
-		s.WriteStruct(schemas.Actor_authentication)
-		v.Authentication.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Actor_description, *v.Description)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.Actor_identifier, *v.Identifier)
-	}
-	serializeUriList(s, schemas.Actor_uris, v.Uris)
-}
-func (v *Actor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Actor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Actor_authentication:
-			v.Authentication = &Authentication{}
-			return v.Authentication.Deserialize(d)
-		case schemas.Actor_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Actor_description, v.Description)
-		case schemas.Actor_identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.Actor_identifier, v.Identifier)
-		case schemas.Actor_uris:
-			return deserializeUriList(d, schemas.Actor_uris, &v.Uris)
-		}
-		return nil
-	})
+	// The plain-text body of the message, containing the MFA code or verification
+	// link.
+	Body *string
+
+	// The time the message was received.
+	ReceivedAt *time.Time
+
+	// The address the message was sent from.
+	Sender *string
+
+	// The subject line of the message.
+	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an agent space, which is a dedicated workspace for securing a
@@ -107,77 +91,6 @@ type AgentSpace struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AgentSpace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AgentSpace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AgentSpace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.AgentSpace_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.AwsResources != nil {
-		s.WriteStruct(schemas.AgentSpace_awsResources)
-		v.AwsResources.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CodeReviewSettings != nil {
-		s.WriteStruct(schemas.AgentSpace_codeReviewSettings)
-		v.CodeReviewSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.AgentSpace_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.AgentSpace_description, *v.Description)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.AgentSpace_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AgentSpace_name, *v.Name)
-	}
-	serializeTargetDomainIdList(s, schemas.AgentSpace_targetDomainIds, v.TargetDomainIds)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AgentSpace_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *AgentSpace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AgentSpace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AgentSpace_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.AgentSpace_agentSpaceId, v.AgentSpaceId)
-		case schemas.AgentSpace_awsResources:
-			v.AwsResources = &AWSResources{}
-			return v.AwsResources.Deserialize(d)
-		case schemas.AgentSpace_codeReviewSettings:
-			v.CodeReviewSettings = &CodeReviewSettings{}
-			return v.CodeReviewSettings.Deserialize(d)
-		case schemas.AgentSpace_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.AgentSpace_createdAt, v.CreatedAt)
-		case schemas.AgentSpace_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AgentSpace_description, v.Description)
-		case schemas.AgentSpace_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.AgentSpace_kmsKeyId, v.KmsKeyId)
-		case schemas.AgentSpace_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AgentSpace_name, v.Name)
-		case schemas.AgentSpace_targetDomainIds:
-			return deserializeTargetDomainIdList(d, schemas.AgentSpace_targetDomainIds, &v.TargetDomainIds)
-		case schemas.AgentSpace_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AgentSpace_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains summary information about an agent space.
 type AgentSpaceSummary struct {
 
@@ -198,46 +111,6 @@ type AgentSpaceSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *AgentSpaceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AgentSpaceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AgentSpaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.AgentSpaceSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.AgentSpaceSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AgentSpaceSummary_name, *v.Name)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AgentSpaceSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *AgentSpaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AgentSpaceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AgentSpaceSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.AgentSpaceSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.AgentSpaceSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.AgentSpaceSummary_createdAt, v.CreatedAt)
-		case schemas.AgentSpaceSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AgentSpaceSummary_name, v.Name)
-		case schemas.AgentSpaceSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AgentSpaceSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about an application.
@@ -265,46 +138,6 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ApplicationSummary_applicationId, *v.ApplicationId)
-	}
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.ApplicationSummary_applicationName, *v.ApplicationName)
-	}
-	if v.DefaultKmsKeyId != nil {
-		s.WriteString(schemas.ApplicationSummary_defaultKmsKeyId, *v.DefaultKmsKeyId)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.ApplicationSummary_domain, *v.Domain)
-	}
-}
-func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationSummary_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_applicationId, v.ApplicationId)
-		case schemas.ApplicationSummary_applicationName:
-			v.ApplicationName = new(string)
-			return d.ReadString(schemas.ApplicationSummary_applicationName, v.ApplicationName)
-		case schemas.ApplicationSummary_defaultKmsKeyId:
-			v.DefaultKmsKeyId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_defaultKmsKeyId, v.DefaultKmsKeyId)
-		case schemas.ApplicationSummary_domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.ApplicationSummary_domain, v.Domain)
-		}
-		return nil
-	})
-}
-
 // Represents an artifact that provides context for security testing, such as
 // documentation, diagrams, or configuration files.
 type Artifact struct {
@@ -320,38 +153,6 @@ type Artifact struct {
 	Type ArtifactType
 
 	noSmithyDocumentSerde
-}
-
-func (v *Artifact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Artifact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Artifact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Contents != nil {
-		s.WriteString(schemas.Artifact_contents, *v.Contents)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Artifact_type, string(v.Type))
-	}
-}
-func (v *Artifact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Artifact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Artifact_contents:
-			v.Contents = new(string)
-			return d.ReadString(schemas.Artifact_contents, v.Contents)
-		case schemas.Artifact_type:
-			var ev string
-			if err := d.ReadString(schemas.Artifact_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ArtifactType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains metadata about an artifact.
@@ -380,46 +181,6 @@ type ArtifactMetadataItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ArtifactMetadataItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ArtifactMetadataItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ArtifactMetadataItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ArtifactMetadataItem_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.ArtifactId != nil {
-		s.WriteString(schemas.ArtifactMetadataItem_artifactId, *v.ArtifactId)
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.ArtifactMetadataItem_fileName, *v.FileName)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ArtifactMetadataItem_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ArtifactMetadataItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ArtifactMetadataItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ArtifactMetadataItem_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.ArtifactMetadataItem_agentSpaceId, v.AgentSpaceId)
-		case schemas.ArtifactMetadataItem_artifactId:
-			v.ArtifactId = new(string)
-			return d.ReadString(schemas.ArtifactMetadataItem_artifactId, v.ArtifactId)
-		case schemas.ArtifactMetadataItem_fileName:
-			v.FileName = new(string)
-			return d.ReadString(schemas.ArtifactMetadataItem_fileName, v.FileName)
-		case schemas.ArtifactMetadataItem_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ArtifactMetadataItem_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains summary information about an artifact.
 type ArtifactSummary struct {
 
@@ -441,44 +202,6 @@ type ArtifactSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ArtifactSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ArtifactSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ArtifactSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArtifactId != nil {
-		s.WriteString(schemas.ArtifactSummary_artifactId, *v.ArtifactId)
-	}
-	if v.ArtifactType != "" {
-		s.WriteString(schemas.ArtifactSummary_artifactType, string(v.ArtifactType))
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.ArtifactSummary_fileName, *v.FileName)
-	}
-}
-func (v *ArtifactSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ArtifactSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ArtifactSummary_artifactId:
-			v.ArtifactId = new(string)
-			return d.ReadString(schemas.ArtifactSummary_artifactId, v.ArtifactId)
-		case schemas.ArtifactSummary_artifactType:
-			var ev string
-			if err := d.ReadString(schemas.ArtifactSummary_artifactType, &ev); err != nil {
-				return err
-			}
-			v.ArtifactType = ArtifactType(ev)
-			return nil
-		case schemas.ArtifactSummary_fileName:
-			v.FileName = new(string)
-			return d.ReadString(schemas.ArtifactSummary_fileName, v.FileName)
-		}
-		return nil
-	})
-}
-
 // The collection of assets used in a pentest configuration, including endpoints,
 // actors, documents, source code repositories, and integrated repositories.
 type Assets struct {
@@ -498,38 +221,12 @@ type Assets struct {
 	// The list of source code repositories to analyze during the pentest.
 	SourceCode []SourceCodeRepository
 
+	// The trust anchors used to validate target endpoint TLS certificates. Provide
+	// these for endpoints served by a private or internal certificate authority (CA),
+	// an intermediate CA, or a self-signed certificate.
+	TrustedCaCertificates []TrustedCaCertificate
+
 	noSmithyDocumentSerde
-}
-
-func (v *Assets) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Assets)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Assets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorList(s, schemas.Assets_actors, v.Actors)
-	serializeDocumentList(s, schemas.Assets_documents, v.Documents)
-	serializeEndpointList(s, schemas.Assets_endpoints, v.Endpoints)
-	serializeIntegratedRepositoryList(s, schemas.Assets_integratedRepositories, v.IntegratedRepositories)
-	serializeSourceCodeRepositoryList(s, schemas.Assets_sourceCode, v.SourceCode)
-}
-func (v *Assets) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Assets, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Assets_actors:
-			return deserializeActorList(d, schemas.Assets_actors, &v.Actors)
-		case schemas.Assets_documents:
-			return deserializeDocumentList(d, schemas.Assets_documents, &v.Documents)
-		case schemas.Assets_endpoints:
-			return deserializeEndpointList(d, schemas.Assets_endpoints, &v.Endpoints)
-		case schemas.Assets_integratedRepositories:
-			return deserializeIntegratedRepositoryList(d, schemas.Assets_integratedRepositories, &v.IntegratedRepositories)
-		case schemas.Assets_sourceCode:
-			return deserializeSourceCodeRepositoryList(d, schemas.Assets_sourceCode, &v.SourceCode)
-		}
-		return nil
-	})
 }
 
 // The authentication configuration for an actor, specifying the provider type and
@@ -545,38 +242,6 @@ type Authentication struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Authentication) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Authentication)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Authentication) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProviderType != "" {
-		s.WriteString(schemas.Authentication_providerType, string(v.ProviderType))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Authentication_value, *v.Value)
-	}
-}
-func (v *Authentication) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Authentication, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Authentication_providerType:
-			var ev string
-			if err := d.ReadString(schemas.Authentication_providerType, &ev); err != nil {
-				return err
-			}
-			v.ProviderType = AuthenticationProviderType(ev)
-			return nil
-		case schemas.Authentication_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Authentication_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The AWS resources associated with an agent space, including VPCs, log groups,
@@ -608,39 +273,413 @@ type AWSResources struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AWSResources) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AWSResources)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// Connection details for an Azure DevOps integration.
+type AzureDevOpsIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The name of the Azure DevOps organization to connect, for example my-org .
+	//
+	// This member is required.
+	OrganizationName *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *AWSResources) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIamRoles(s, schemas.AWSResources_iamRoles, v.IamRoles)
-	serializeLambdaFunctionArns(s, schemas.AWSResources_lambdaFunctionArns, v.LambdaFunctionArns)
-	serializeLogGroupArns(s, schemas.AWSResources_logGroups, v.LogGroups)
-	serializeS3BucketArns(s, schemas.AWSResources_s3Buckets, v.S3Buckets)
-	serializeSecretArns(s, schemas.AWSResources_secretArns, v.SecretArns)
-	serializeVpcConfigs(s, schemas.AWSResources_vpcs, v.Vpcs)
+// Metadata for an integrated Azure DevOps repository.
+type AzureDevOpsRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	// The GUID of the Azure DevOps project that contains the repository.
+	ProjectId *string
+
+	noSmithyDocumentSerde
 }
-func (v *AWSResources) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AWSResources, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AWSResources_iamRoles:
-			return deserializeIamRoles(d, schemas.AWSResources_iamRoles, &v.IamRoles)
-		case schemas.AWSResources_lambdaFunctionArns:
-			return deserializeLambdaFunctionArns(d, schemas.AWSResources_lambdaFunctionArns, &v.LambdaFunctionArns)
-		case schemas.AWSResources_logGroups:
-			return deserializeLogGroupArns(d, schemas.AWSResources_logGroups, &v.LogGroups)
-		case schemas.AWSResources_s3Buckets:
-			return deserializeS3BucketArns(d, schemas.AWSResources_s3Buckets, &v.S3Buckets)
-		case schemas.AWSResources_secretArns:
-			return deserializeSecretArns(d, schemas.AWSResources_secretArns, &v.SecretArns)
-		case schemas.AWSResources_vpcs:
-			return deserializeVpcConfigs(d, schemas.AWSResources_vpcs, &v.Vpcs)
-		}
-		return nil
-	})
+
+// An Azure DevOps repository integrated as a resource.
+type AzureDevOpsRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Azure DevOps organization that owns the repository.
+	//
+	// This member is required.
+	Organization *string
+
+	// The name of the Azure DevOps project that contains the repository.
+	Project *string
+
+	noSmithyDocumentSerde
 }
+
+// Capabilities for an integrated Azure DevOps repository.
+type AzureDevOpsResourceCapabilities struct {
+
+	// Whether to post code review comments on pull requests.
+	LeaveComments *bool
+
+	// Whether to create pull requests with automated fixes.
+	RemediateCode *bool
+
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a successfully created security requirement.
+type BatchCreateSecurityRequirementResult struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding that failed to disassociate, with the cause of the failure.
+type BatchDisassociateFindingIssueError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding that failed to disassociate.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of the failure.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue could not be created, with the cause of the failure.
+type BatchExportFindingError struct {
+
+	// The machine-readable failure category.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The identifier of the finding this error corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// A customer-facing explanation of why the issue could not be created.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A finding whose issue was created.
+type BatchExportFindingResult struct {
+
+	// The identifier of the finding this result corresponds to.
+	//
+	// This member is required.
+	FindingId *string
+
+	// The issue that was created for the finding.
+	//
+	// This member is required.
+	LinkedIssue *LinkedIssue
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a successfully retrieved security requirement.
+type BatchGetSecurityRequirementResult struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an error that occurred for a specific security
+// requirement during a batch operation.
+type BatchSecurityRequirementError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the security requirement that caused the error.
+	//
+	// This member is required.
+	SecurityRequirementName *string
+
+	noSmithyDocumentSerde
+}
+
+// Connection details for a self-managed Bitbucket Data Center integration.
+type BitbucketDataCenterIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned to your redirect URL after the
+	// connection is authorized.
+	//
+	// This member is required.
+	Code *string
+
+	// The CSRF state value returned by InitiateProviderRegistration and echoed back
+	// on the authorization redirect.
+	//
+	// This member is required.
+	State *string
+
+	// The HTTPS URL of your Bitbucket Data Center instance, for example
+	// https://bitbucket.example.com .
+	//
+	// This member is required.
+	TargetUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating a Bitbucket integration.
+type BitbucketIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	// The Bitbucket workspace slug that identifies the workspace to integrate, for
+	// example acme-corp.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an integrated Bitbucket repository.
+type BitbucketRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The workspace slug that owns the repository.
+	//
+	// This member is required.
+	Workspace *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	noSmithyDocumentSerde
+}
+
+// A Bitbucket repository integrated as a resource.
+type BitbucketRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The workspace slug that owns the repository.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Bitbucket repository.
+type BitbucketResourceCapabilities struct {
+
+	// Whether to post code review comments on pull requests.
+	LeaveComments *bool
+
+	// Whether to create pull requests with automated fixes.
+	RemediateCode *bool
+
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
+	noSmithyDocumentSerde
+}
+
+// The source of a trusted CA certificate. Exactly one member must be set.
+//
+// The following types satisfy this interface:
+//
+//	CaCertificateSourceMemberArtifactId
+//	CaCertificateSourceMemberInlinePem
+//	CaCertificateSourceMemberS3Location
+type CaCertificateSource interface {
+	isCaCertificateSource()
+}
+
+// The artifact ID of an uploaded certificate file.
+type CaCertificateSourceMemberArtifactId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberArtifactId) isCaCertificateSource() {}
+
+// A PEM-encoded X.509 certificate supplied inline.
+type CaCertificateSourceMemberInlinePem struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberInlinePem) isCaCertificateSource() {}
+
+// The Amazon S3 location URI of a customer-staged certificate.
+type CaCertificateSourceMemberS3Location struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberS3Location) isCaCertificateSource() {}
 
 // Represents a category assigned to a security testing task.
 type Category struct {
@@ -654,32 +693,14 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Category) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Category)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+// scoped to the code changes in each pipeline run.
+type CiCdConfiguration struct {
 
-func (v *Category) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsPrimary != nil {
-		s.WriteBool(schemas.Category_isPrimary, *v.IsPrimary)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Category_name, *v.Name)
-	}
-}
-func (v *Category) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Category, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Category_isPrimary:
-			v.IsPrimary = new(bool)
-			return d.ReadBool(schemas.Category_isPrimary, v.IsPrimary)
-		case schemas.Category_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Category_name, v.Name)
-		}
-		return nil
-	})
+	// Whether CI/CD pentesting is enabled for this pentest.
+	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon CloudWatch Logs configuration for pentest job logging.
@@ -692,34 +713,6 @@ type CloudWatchLog struct {
 	LogStream *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudWatchLog) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchLog)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchLog) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroup != nil {
-		s.WriteString(schemas.CloudWatchLog_logGroup, *v.LogGroup)
-	}
-	if v.LogStream != nil {
-		s.WriteString(schemas.CloudWatchLog_logStream, *v.LogStream)
-	}
-}
-func (v *CloudWatchLog) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchLog, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchLog_logGroup:
-			v.LogGroup = new(string)
-			return d.ReadString(schemas.CloudWatchLog_logGroup, v.LogGroup)
-		case schemas.CloudWatchLog_logStream:
-			v.LogStream = new(string)
-			return d.ReadString(schemas.CloudWatchLog_logStream, v.LogStream)
-		}
-		return nil
-	})
 }
 
 // Represents a location in source code associated with a security finding.
@@ -742,46 +735,6 @@ type CodeLocation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeLocation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeLocation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilePath != nil {
-		s.WriteString(schemas.CodeLocation_filePath, *v.FilePath)
-	}
-	if v.Label != nil {
-		s.WriteString(schemas.CodeLocation_label, *v.Label)
-	}
-	if v.LineEnd != nil {
-		s.WriteInt32(schemas.CodeLocation_lineEnd, *v.LineEnd)
-	}
-	if v.LineStart != nil {
-		s.WriteInt32(schemas.CodeLocation_lineStart, *v.LineStart)
-	}
-}
-func (v *CodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeLocation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeLocation_filePath:
-			v.FilePath = new(string)
-			return d.ReadString(schemas.CodeLocation_filePath, v.FilePath)
-		case schemas.CodeLocation_label:
-			v.Label = new(string)
-			return d.ReadString(schemas.CodeLocation_label, v.Label)
-		case schemas.CodeLocation_lineEnd:
-			v.LineEnd = new(int32)
-			return d.ReadInt32(schemas.CodeLocation_lineEnd, v.LineEnd)
-		case schemas.CodeLocation_lineStart:
-			v.LineStart = new(int32)
-			return d.ReadInt32(schemas.CodeLocation_lineStart, v.LineStart)
-		}
-		return nil
-	})
-}
-
 // Represents a code remediation task that was initiated to fix a security finding.
 type CodeRemediationTask struct {
 
@@ -800,41 +753,6 @@ type CodeRemediationTask struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeRemediationTask) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeRemediationTask)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeRemediationTask) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.CodeRemediationTask_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.CodeRemediationTask_statusReason, *v.StatusReason)
-	}
-	serializeCodeRemediationTaskDetailsList(s, schemas.CodeRemediationTask_taskDetails, v.TaskDetails)
-}
-func (v *CodeRemediationTask) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeRemediationTask, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeRemediationTask_status:
-			var ev string
-			if err := d.ReadString(schemas.CodeRemediationTask_status, &ev); err != nil {
-				return err
-			}
-			v.Status = CodeRemediationTaskStatus(ev)
-			return nil
-		case schemas.CodeRemediationTask_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.CodeRemediationTask_statusReason, v.StatusReason)
-		case schemas.CodeRemediationTask_taskDetails:
-			return deserializeCodeRemediationTaskDetailsList(d, schemas.CodeRemediationTask_taskDetails, &v.TaskDetails)
-		}
-		return nil
-	})
-}
-
 // Contains details about a code remediation task, including links to the code
 // diff and pull request.
 type CodeRemediationTaskDetails struct {
@@ -849,40 +767,6 @@ type CodeRemediationTaskDetails struct {
 	RepoName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeRemediationTaskDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeRemediationTaskDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeRemediationTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeDiffLink != nil {
-		s.WriteString(schemas.CodeRemediationTaskDetails_codeDiffLink, *v.CodeDiffLink)
-	}
-	if v.PullRequestLink != nil {
-		s.WriteString(schemas.CodeRemediationTaskDetails_pullRequestLink, *v.PullRequestLink)
-	}
-	if v.RepoName != nil {
-		s.WriteString(schemas.CodeRemediationTaskDetails_repoName, *v.RepoName)
-	}
-}
-func (v *CodeRemediationTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeRemediationTaskDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeRemediationTaskDetails_codeDiffLink:
-			v.CodeDiffLink = new(string)
-			return d.ReadString(schemas.CodeRemediationTaskDetails_codeDiffLink, v.CodeDiffLink)
-		case schemas.CodeRemediationTaskDetails_pullRequestLink:
-			v.PullRequestLink = new(string)
-			return d.ReadString(schemas.CodeRemediationTaskDetails_pullRequestLink, v.PullRequestLink)
-		case schemas.CodeRemediationTaskDetails_repoName:
-			v.RepoName = new(string)
-			return d.ReadString(schemas.CodeRemediationTaskDetails_repoName, v.RepoName)
-		}
-		return nil
-	})
 }
 
 // Represents a code review configuration that defines the parameters for
@@ -919,91 +803,28 @@ type CodeReview struct {
 	// The CloudWatch Logs configuration for the code review.
 	LogConfig *CloudWatchLog
 
+	// The maximum number of billable task hours allowed for jobs started from this
+	// code review. If a job reaches the configured limit, it is gracefully stopped. If
+	// not set, jobs run to completion with no budget cap.
+	MaxTaskHours *float64
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
 	// The date and time the code review was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The validation mode for the code review. Valid values are SIMULATED and
+	// DISABLED.
+	ValidationMode ValidationMode
+
 	noSmithyDocumentSerde
-}
-
-func (v *CodeReview) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReview)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReview) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.CodeReview_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.Assets != nil {
-		s.WriteStruct(schemas.CodeReview_assets)
-		v.Assets.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CodeRemediationStrategy != "" {
-		s.WriteString(schemas.CodeReview_codeRemediationStrategy, string(v.CodeRemediationStrategy))
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReview_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReview_createdAt, *v.CreatedAt)
-	}
-	if v.LogConfig != nil {
-		s.WriteStruct(schemas.CodeReview_logConfig)
-		v.LogConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceRole != nil {
-		s.WriteString(schemas.CodeReview_serviceRole, *v.ServiceRole)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReview_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReview_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CodeReview) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReview, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReview_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.CodeReview_agentSpaceId, v.AgentSpaceId)
-		case schemas.CodeReview_assets:
-			v.Assets = &Assets{}
-			return v.Assets.Deserialize(d)
-		case schemas.CodeReview_codeRemediationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.CodeReview_codeRemediationStrategy, &ev); err != nil {
-				return err
-			}
-			v.CodeRemediationStrategy = CodeRemediationStrategy(ev)
-			return nil
-		case schemas.CodeReview_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReview_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReview_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReview_createdAt, v.CreatedAt)
-		case schemas.CodeReview_logConfig:
-			v.LogConfig = &CloudWatchLog{}
-			return v.LogConfig.Deserialize(d)
-		case schemas.CodeReview_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.CodeReview_serviceRole, v.ServiceRole)
-		case schemas.CodeReview_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReview_title, v.Title)
-		case schemas.CodeReview_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReview_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Represents a code review job, which is an execution instance of a code review.
@@ -1038,8 +859,15 @@ type CodeReviewJob struct {
 	// The CloudWatch Logs configuration for the code review job.
 	LogConfig *CloudWatchLog
 
+	// The maximum number of billable task hours allowed for this code review job. If
+	// the cumulative task hours reach this limit, the job is gracefully stopped.
+	MaxTaskHours *float64
+
 	// An overview of the code review job results.
 	Overview *string
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
 
 	// The IAM service role used for the code review job.
 	ServiceRole *string
@@ -1060,115 +888,6 @@ type CodeReviewJob struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeReviewJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReviewJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeRemediationStrategy != "" {
-		s.WriteString(schemas.CodeReviewJob_codeRemediationStrategy, string(v.CodeRemediationStrategy))
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReviewJob_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.CodeReviewJob_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJob_createdAt, *v.CreatedAt)
-	}
-	serializeDocumentList(s, schemas.CodeReviewJob_documents, v.Documents)
-	if v.ErrorInformation != nil {
-		s.WriteStruct(schemas.CodeReviewJob_errorInformation)
-		v.ErrorInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeExecutionContextList(s, schemas.CodeReviewJob_executionContext, v.ExecutionContext)
-	serializeIntegratedRepositoryList(s, schemas.CodeReviewJob_integratedRepositories, v.IntegratedRepositories)
-	if v.LogConfig != nil {
-		s.WriteStruct(schemas.CodeReviewJob_logConfig)
-		v.LogConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Overview != nil {
-		s.WriteString(schemas.CodeReviewJob_overview, *v.Overview)
-	}
-	if v.ServiceRole != nil {
-		s.WriteString(schemas.CodeReviewJob_serviceRole, *v.ServiceRole)
-	}
-	serializeSourceCodeRepositoryList(s, schemas.CodeReviewJob_sourceCode, v.SourceCode)
-	if v.Status != "" {
-		s.WriteString(schemas.CodeReviewJob_status, string(v.Status))
-	}
-	serializeStepList(s, schemas.CodeReviewJob_steps, v.Steps)
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReviewJob_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJob_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CodeReviewJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewJob_codeRemediationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJob_codeRemediationStrategy, &ev); err != nil {
-				return err
-			}
-			v.CodeRemediationStrategy = CodeRemediationStrategy(ev)
-			return nil
-		case schemas.CodeReviewJob_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReviewJob_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReviewJob_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.CodeReviewJob_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.CodeReviewJob_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJob_createdAt, v.CreatedAt)
-		case schemas.CodeReviewJob_documents:
-			return deserializeDocumentList(d, schemas.CodeReviewJob_documents, &v.Documents)
-		case schemas.CodeReviewJob_errorInformation:
-			v.ErrorInformation = &ErrorInformation{}
-			return v.ErrorInformation.Deserialize(d)
-		case schemas.CodeReviewJob_executionContext:
-			return deserializeExecutionContextList(d, schemas.CodeReviewJob_executionContext, &v.ExecutionContext)
-		case schemas.CodeReviewJob_integratedRepositories:
-			return deserializeIntegratedRepositoryList(d, schemas.CodeReviewJob_integratedRepositories, &v.IntegratedRepositories)
-		case schemas.CodeReviewJob_logConfig:
-			v.LogConfig = &CloudWatchLog{}
-			return v.LogConfig.Deserialize(d)
-		case schemas.CodeReviewJob_overview:
-			v.Overview = new(string)
-			return d.ReadString(schemas.CodeReviewJob_overview, v.Overview)
-		case schemas.CodeReviewJob_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.CodeReviewJob_serviceRole, v.ServiceRole)
-		case schemas.CodeReviewJob_sourceCode:
-			return deserializeSourceCodeRepositoryList(d, schemas.CodeReviewJob_sourceCode, &v.SourceCode)
-		case schemas.CodeReviewJob_status:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJob_status, &ev); err != nil {
-				return err
-			}
-			v.Status = JobStatus(ev)
-			return nil
-		case schemas.CodeReviewJob_steps:
-			return deserializeStepList(d, schemas.CodeReviewJob_steps, &v.Steps)
-		case schemas.CodeReviewJob_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReviewJob_title, v.Title)
-		case schemas.CodeReviewJob_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJob_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a code review job.
@@ -1197,62 +916,6 @@ type CodeReviewJobSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeReviewJobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewJobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReviewJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReviewJobSummary_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.CodeReviewJobSummary_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CodeReviewJobSummary_status, string(v.Status))
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReviewJobSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CodeReviewJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewJobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewJobSummary_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReviewJobSummary_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReviewJobSummary_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.CodeReviewJobSummary_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.CodeReviewJobSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobSummary_createdAt, v.CreatedAt)
-		case schemas.CodeReviewJobSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJobSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = JobStatus(ev)
-			return nil
-		case schemas.CodeReviewJobSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReviewJobSummary_title, v.Title)
-		case schemas.CodeReviewJobSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Represents an individual security test task within a code review job. Each task
@@ -1300,101 +963,6 @@ type CodeReviewJobTask struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeReviewJobTask) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewJobTask)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReviewJobTask) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.CodeReviewJobTask_agentSpaceId, *v.AgentSpaceId)
-	}
-	serializeCategoryList(s, schemas.CodeReviewJobTask_categories, v.Categories)
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReviewJobTask_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.CodeReviewJobTask_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobTask_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CodeReviewJobTask_description, *v.Description)
-	}
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.CodeReviewJobTask_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.LogsLocation != nil {
-		s.WriteStruct(schemas.CodeReviewJobTask_logsLocation)
-		v.LogsLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RiskType != "" {
-		s.WriteString(schemas.CodeReviewJobTask_riskType, string(v.RiskType))
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.CodeReviewJobTask_taskId, *v.TaskId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReviewJobTask_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobTask_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CodeReviewJobTask) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewJobTask, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewJobTask_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_agentSpaceId, v.AgentSpaceId)
-		case schemas.CodeReviewJobTask_categories:
-			return deserializeCategoryList(d, schemas.CodeReviewJobTask_categories, &v.Categories)
-		case schemas.CodeReviewJobTask_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReviewJobTask_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.CodeReviewJobTask_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobTask_createdAt, v.CreatedAt)
-		case schemas.CodeReviewJobTask_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_description, v.Description)
-		case schemas.CodeReviewJobTask_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJobTask_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = TaskExecutionStatus(ev)
-			return nil
-		case schemas.CodeReviewJobTask_logsLocation:
-			v.LogsLocation = &LogLocation{}
-			return v.LogsLocation.Deserialize(d)
-		case schemas.CodeReviewJobTask_riskType:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJobTask_riskType, &ev); err != nil {
-				return err
-			}
-			v.RiskType = RiskType(ev)
-			return nil
-		case schemas.CodeReviewJobTask_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_taskId, v.TaskId)
-		case schemas.CodeReviewJobTask_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReviewJobTask_title, v.Title)
-		case schemas.CodeReviewJobTask_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobTask_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains summary information about a code review job task.
 type CodeReviewJobTaskSummary struct {
 
@@ -1430,84 +998,6 @@ type CodeReviewJobTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeReviewJobTaskSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewJobTaskSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReviewJobTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobTaskSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.RiskType != "" {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_riskType, string(v.RiskType))
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_taskId, *v.TaskId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReviewJobTaskSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReviewJobTaskSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CodeReviewJobTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewJobTaskSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewJobTaskSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTaskSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.CodeReviewJobTaskSummary_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTaskSummary_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReviewJobTaskSummary_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTaskSummary_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.CodeReviewJobTaskSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobTaskSummary_createdAt, v.CreatedAt)
-		case schemas.CodeReviewJobTaskSummary_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJobTaskSummary_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = TaskExecutionStatus(ev)
-			return nil
-		case schemas.CodeReviewJobTaskSummary_riskType:
-			var ev string
-			if err := d.ReadString(schemas.CodeReviewJobTaskSummary_riskType, &ev); err != nil {
-				return err
-			}
-			v.RiskType = RiskType(ev)
-			return nil
-		case schemas.CodeReviewJobTaskSummary_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.CodeReviewJobTaskSummary_taskId, v.TaskId)
-		case schemas.CodeReviewJobTaskSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReviewJobTaskSummary_title, v.Title)
-		case schemas.CodeReviewJobTaskSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewJobTaskSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The code review settings for an agent space, controlling which types of
 // scanning are enabled.
 type CodeReviewSettings struct {
@@ -1523,34 +1013,6 @@ type CodeReviewSettings struct {
 	GeneralPurposeScanning *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeReviewSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeReviewSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlsScanning != nil {
-		s.WriteBool(schemas.CodeReviewSettings_controlsScanning, *v.ControlsScanning)
-	}
-	if v.GeneralPurposeScanning != nil {
-		s.WriteBool(schemas.CodeReviewSettings_generalPurposeScanning, *v.GeneralPurposeScanning)
-	}
-}
-func (v *CodeReviewSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewSettings_controlsScanning:
-			v.ControlsScanning = new(bool)
-			return d.ReadBool(schemas.CodeReviewSettings_controlsScanning, v.ControlsScanning)
-		case schemas.CodeReviewSettings_generalPurposeScanning:
-			v.GeneralPurposeScanning = new(bool)
-			return d.ReadBool(schemas.CodeReviewSettings_generalPurposeScanning, v.GeneralPurposeScanning)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a code review.
@@ -1580,50 +1042,134 @@ type CodeReviewSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeReviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeReviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// Metadata for an integrated Confluence document.
+type ConfluenceDocumentMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Confluence page identifier.
+	//
+	// This member is required.
+	PageId *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The Confluence space key containing the document.
+	//
+	// This member is required.
+	SpaceKey *string
+
+	// The display title of the Confluence space.
+	SpaceTitle *string
+
+	// The display title of the Confluence page.
+	Title *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *CodeReviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.CodeReviewSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.CodeReviewSummary_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CodeReviewSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CodeReviewSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CodeReviewSummary_updatedAt, *v.UpdatedAt)
-	}
+// A Confluence document (page) integrated as a resource.
+type ConfluenceDocumentResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Confluence page identifier.
+	//
+	// This member is required.
+	PageId *string
+
+	// The Confluence space key containing the document.
+	//
+	// This member is required.
+	SpaceKey *string
+
+	// The display title of the Confluence space.
+	SpaceTitle *string
+
+	// The display title of the Confluence page.
+	Title *string
+
+	noSmithyDocumentSerde
 }
-func (v *CodeReviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeReviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeReviewSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.CodeReviewSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.CodeReviewSummary_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.CodeReviewSummary_codeReviewId, v.CodeReviewId)
-		case schemas.CodeReviewSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewSummary_createdAt, v.CreatedAt)
-		case schemas.CodeReviewSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.CodeReviewSummary_title, v.Title)
-		case schemas.CodeReviewSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CodeReviewSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
+
+// The configuration for creating a Confluence integration.
+type ConfluenceIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The Confluence Cloud site URL, for example https://mysite.atlassian.net.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Confluence space.
+type ConfluenceResourceCapabilities struct {
+
+	// Whether to create documents in this space.
+	CreateDocument *bool
+
+	// Whether to fetch documents from this space.
+	FetchDocument *bool
+
+	// Whether to update documents in this space.
+	UpdateDocument *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for a security requirement to create within a pack.
+type CreateSecurityRequirementEntry struct {
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The security domain the requirement belongs to.
+	//
+	// This member is required.
+	Domain *string
+
+	// The evaluation criteria used to assess compliance with this requirement.
+	//
+	// This member is required.
+	Evaluation *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The recommended remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
 }
 
 // A custom HTTP header to include in network traffic during penetration testing.
@@ -1638,34 +1184,6 @@ type CustomHeader struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomHeader) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomHeader)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomHeader) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CustomHeader_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.CustomHeader_value, *v.Value)
-	}
-}
-func (v *CustomHeader) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomHeader, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomHeader_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CustomHeader_name, v.Name)
-		case schemas.CustomHeader_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.CustomHeader_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Contains information about a code review that failed to delete.
 type DeleteCodeReviewFailure struct {
 
@@ -1676,34 +1194,6 @@ type DeleteCodeReviewFailure struct {
 	Reason *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteCodeReviewFailure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCodeReviewFailure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCodeReviewFailure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.DeleteCodeReviewFailure_codeReviewId, *v.CodeReviewId)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.DeleteCodeReviewFailure_reason, *v.Reason)
-	}
-}
-func (v *DeleteCodeReviewFailure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteCodeReviewFailure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteCodeReviewFailure_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.DeleteCodeReviewFailure_codeReviewId, v.CodeReviewId)
-		case schemas.DeleteCodeReviewFailure_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.DeleteCodeReviewFailure_reason, v.Reason)
-		}
-		return nil
-	})
 }
 
 // Contains information about a pentest that failed to delete.
@@ -1718,33 +1208,36 @@ type DeletePentestFailure struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePentestFailure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePentestFailure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// Contains information about a threat model that failed to delete.
+type DeleteThreatModelFailure struct {
+
+	// The reason the threat model failed to delete.
+	Reason *string
+
+	// The unique identifier of the threat model that failed to delete.
+	ThreatModelId *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *DeletePentestFailure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PentestId != nil {
-		s.WriteString(schemas.DeletePentestFailure_pentestId, *v.PentestId)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.DeletePentestFailure_reason, *v.Reason)
-	}
+// Source of the diff for a differential code scan.
+//
+// The following types satisfy this interface:
+//
+//	DiffSourceMemberS3Uri
+type DiffSource interface {
+	isDiffSource()
 }
-func (v *DeletePentestFailure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletePentestFailure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletePentestFailure_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.DeletePentestFailure_pentestId, v.PentestId)
-		case schemas.DeletePentestFailure_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.DeletePentestFailure_reason, v.Reason)
-		}
-		return nil
-	})
+
+// S3 URI pointing to a unified diff file. The file must be in standard unified
+// diff format and stored in an S3 bucket connected to your Agent Space.
+type DiffSourceMemberS3Uri struct {
+	Value string
+
+	noSmithyDocumentSerde
 }
+
+func (*DiffSourceMemberS3Uri) isDiffSource() {}
 
 // Represents an endpoint discovered during a pentest job.
 type DiscoveredEndpoint struct {
@@ -1782,64 +1275,6 @@ type DiscoveredEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DiscoveredEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DiscoveredEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DiscoveredEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_description, *v.Description)
-	}
-	if v.Evidence != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_evidence, *v.Evidence)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_operation, *v.Operation)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_pentestJobId, *v.PentestJobId)
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_taskId, *v.TaskId)
-	}
-	if v.Uri != nil {
-		s.WriteString(schemas.DiscoveredEndpoint_uri, *v.Uri)
-	}
-}
-func (v *DiscoveredEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DiscoveredEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DiscoveredEndpoint_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_agentSpaceId, v.AgentSpaceId)
-		case schemas.DiscoveredEndpoint_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_description, v.Description)
-		case schemas.DiscoveredEndpoint_evidence:
-			v.Evidence = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_evidence, v.Evidence)
-		case schemas.DiscoveredEndpoint_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_operation, v.Operation)
-		case schemas.DiscoveredEndpoint_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_pentestJobId, v.PentestJobId)
-		case schemas.DiscoveredEndpoint_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_taskId, v.TaskId)
-		case schemas.DiscoveredEndpoint_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.DiscoveredEndpoint_uri, v.Uri)
-		}
-		return nil
-	})
-}
-
 // Contains DNS verification details for a target domain, including the DNS record
 // to create for domain ownership verification.
 type DnsVerification struct {
@@ -1856,82 +1291,19 @@ type DnsVerification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DnsVerification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DnsVerification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DnsVerification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DnsRecordName != nil {
-		s.WriteString(schemas.DnsVerification_dnsRecordName, *v.DnsRecordName)
-	}
-	if v.DnsRecordType != "" {
-		s.WriteString(schemas.DnsVerification_dnsRecordType, string(v.DnsRecordType))
-	}
-	if v.Token != nil {
-		s.WriteString(schemas.DnsVerification_token, *v.Token)
-	}
-}
-func (v *DnsVerification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DnsVerification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DnsVerification_dnsRecordName:
-			v.DnsRecordName = new(string)
-			return d.ReadString(schemas.DnsVerification_dnsRecordName, v.DnsRecordName)
-		case schemas.DnsVerification_dnsRecordType:
-			var ev string
-			if err := d.ReadString(schemas.DnsVerification_dnsRecordType, &ev); err != nil {
-				return err
-			}
-			v.DnsRecordType = DNSRecordType(ev)
-			return nil
-		case schemas.DnsVerification_token:
-			v.Token = new(string)
-			return d.ReadString(schemas.DnsVerification_token, v.Token)
-		}
-		return nil
-	})
-}
-
 // Represents a document that provides context for security testing.
 type DocumentInfo struct {
 
 	// The unique identifier of the artifact associated with the document.
 	ArtifactId *string
 
+	// A reference to a document in an integrated third-party provider.
+	IntegratedDocument *IntegratedDocument
+
 	// The Amazon S3 location of the document.
 	S3Location *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DocumentInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DocumentInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DocumentInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArtifactId != nil {
-		s.WriteString(schemas.DocumentInfo_artifactId, *v.ArtifactId)
-	}
-	if v.S3Location != nil {
-		s.WriteString(schemas.DocumentInfo_s3Location, *v.S3Location)
-	}
-}
-func (v *DocumentInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DocumentInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DocumentInfo_artifactId:
-			v.ArtifactId = new(string)
-			return d.ReadString(schemas.DocumentInfo_artifactId, v.ArtifactId)
-		case schemas.DocumentInfo_s3Location:
-			v.S3Location = new(string)
-			return d.ReadString(schemas.DocumentInfo_s3Location, v.S3Location)
-		}
-		return nil
-	})
 }
 
 // Represents a target endpoint for penetration testing.
@@ -1941,28 +1313,6 @@ type Endpoint struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Endpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uri != nil {
-		s.WriteString(schemas.Endpoint_uri, *v.Uri)
-	}
-}
-func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Endpoint_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.Endpoint_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Contains error information for a pentest job that encountered an error.
@@ -1976,38 +1326,6 @@ type ErrorInformation struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ErrorInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.ErrorInformation_code, string(v.Code))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ErrorInformation_message, *v.Message)
-	}
-}
-func (v *ErrorInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorInformation_code:
-			var ev string
-			if err := d.ReadString(schemas.ErrorInformation_code, &ev); err != nil {
-				return err
-			}
-			v.Code = ErrorCode(ev)
-			return nil
-		case schemas.ErrorInformation_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ErrorInformation_message, v.Message)
-		}
-		return nil
-	})
 }
 
 // Contains contextual information about the execution of a pentest job, such as
@@ -2027,44 +1345,6 @@ type ExecutionContext struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecutionContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecutionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Context != nil {
-		s.WriteString(schemas.ExecutionContext_context, *v.Context)
-	}
-	if v.ContextType != "" {
-		s.WriteString(schemas.ExecutionContext_contextType, string(v.ContextType))
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.ExecutionContext_timestamp, *v.Timestamp)
-	}
-}
-func (v *ExecutionContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecutionContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecutionContext_context:
-			v.Context = new(string)
-			return d.ReadString(schemas.ExecutionContext_context, v.Context)
-		case schemas.ExecutionContext_contextType:
-			var ev string
-			if err := d.ReadString(schemas.ExecutionContext_contextType, &ev); err != nil {
-				return err
-			}
-			v.ContextType = ContextType(ev)
-			return nil
-		case schemas.ExecutionContext_timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.ExecutionContext_timestamp, v.Timestamp)
-		}
-		return nil
-	})
-}
-
 // Represents a security finding discovered during a pentest job. A finding
 // contains details about a vulnerability, including its risk level, confidence,
 // and remediation status.
@@ -2079,6 +1359,10 @@ type Finding struct {
 	//
 	// This member is required.
 	FindingId *string
+
+	// The rationale provided by the alignment agent explaining how the finding was
+	// adjusted based on customer preferences.
+	AlignmentRationale *string
 
 	// The attack script used to reproduce the finding.
 	AttackScript *string
@@ -2104,14 +1388,24 @@ type Finding struct {
 	// The date and time the finding was created, in UTC format.
 	CreatedAt *time.Time
 
+	// A customer-provided note on the finding.
+	CustomerNote *string
+
 	// A description of the finding.
 	Description *string
 
 	// The identifier of the entity that last updated the finding.
 	LastUpdatedBy *string
 
+	// The issue in a third-party issue tracker that this finding has been exported to.
+	LinkedIssue *LinkedIssue
+
 	// The name of the finding.
 	Name *string
+
+	// The identifier of the original finding that this revalidation finding was
+	// produced from.
+	OriginalFindingId *string
 
 	// The unique identifier of the pentest associated with the finding.
 	PentestId *string
@@ -2122,6 +1416,14 @@ type Finding struct {
 	// The reasoning behind the finding, explaining why it was identified as a
 	// vulnerability.
 	Reasoning *string
+
+	// The suggested fix for the finding, describing the changes recommended to
+	// remediate the vulnerability, with example code or configuration.
+	RemediationCode *string
+
+	// The list of pentest job identifiers for revalidation jobs that retested this
+	// finding.
+	RevalidationJobIds []string
 
 	// The risk level of the finding. Valid values include UNKNOWN, INFORMATIONAL,
 	// LOW, MEDIUM, HIGH, and CRITICAL.
@@ -2143,172 +1445,15 @@ type Finding struct {
 	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The simulated validation status of the finding. Valid values are NOT_VALIDATED,
+	// VALIDATING, CONFIRMED, NOT_REPRODUCED, and VALIDATION_FAILED.
+	ValidationStatus ValidationStatus
+
 	// The verification script metadata for reproducing the finding, including
 	// download URL, instructions, and required environment variables.
 	VerificationScript *VerificationScript
 
 	noSmithyDocumentSerde
-}
-
-func (v *Finding) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Finding)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.Finding_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.AttackScript != nil {
-		s.WriteString(schemas.Finding_attackScript, *v.AttackScript)
-	}
-	serializeCodeLocationList(s, schemas.Finding_codeLocations, v.CodeLocations)
-	if v.CodeRemediationTask != nil {
-		s.WriteStruct(schemas.Finding_codeRemediationTask)
-		v.CodeRemediationTask.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.Finding_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.Finding_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.Confidence != "" {
-		s.WriteString(schemas.Finding_confidence, string(v.Confidence))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Finding_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Finding_description, *v.Description)
-	}
-	if v.FindingId != nil {
-		s.WriteString(schemas.Finding_findingId, *v.FindingId)
-	}
-	if v.LastUpdatedBy != nil {
-		s.WriteString(schemas.Finding_lastUpdatedBy, *v.LastUpdatedBy)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Finding_name, *v.Name)
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.Finding_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.Finding_pentestJobId, *v.PentestJobId)
-	}
-	if v.Reasoning != nil {
-		s.WriteString(schemas.Finding_reasoning, *v.Reasoning)
-	}
-	if v.RiskLevel != "" {
-		s.WriteString(schemas.Finding_riskLevel, string(v.RiskLevel))
-	}
-	if v.RiskScore != nil {
-		s.WriteString(schemas.Finding_riskScore, *v.RiskScore)
-	}
-	if v.RiskType != nil {
-		s.WriteString(schemas.Finding_riskType, *v.RiskType)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Finding_status, string(v.Status))
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.Finding_taskId, *v.TaskId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Finding_updatedAt, *v.UpdatedAt)
-	}
-	if v.VerificationScript != nil {
-		s.WriteStruct(schemas.Finding_verificationScript)
-		v.VerificationScript.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Finding, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Finding_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.Finding_agentSpaceId, v.AgentSpaceId)
-		case schemas.Finding_attackScript:
-			v.AttackScript = new(string)
-			return d.ReadString(schemas.Finding_attackScript, v.AttackScript)
-		case schemas.Finding_codeLocations:
-			return deserializeCodeLocationList(d, schemas.Finding_codeLocations, &v.CodeLocations)
-		case schemas.Finding_codeRemediationTask:
-			v.CodeRemediationTask = &CodeRemediationTask{}
-			return v.CodeRemediationTask.Deserialize(d)
-		case schemas.Finding_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.Finding_codeReviewId, v.CodeReviewId)
-		case schemas.Finding_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.Finding_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.Finding_confidence:
-			var ev string
-			if err := d.ReadString(schemas.Finding_confidence, &ev); err != nil {
-				return err
-			}
-			v.Confidence = ConfidenceLevel(ev)
-			return nil
-		case schemas.Finding_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_createdAt, v.CreatedAt)
-		case schemas.Finding_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Finding_description, v.Description)
-		case schemas.Finding_findingId:
-			v.FindingId = new(string)
-			return d.ReadString(schemas.Finding_findingId, v.FindingId)
-		case schemas.Finding_lastUpdatedBy:
-			v.LastUpdatedBy = new(string)
-			return d.ReadString(schemas.Finding_lastUpdatedBy, v.LastUpdatedBy)
-		case schemas.Finding_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Finding_name, v.Name)
-		case schemas.Finding_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.Finding_pentestId, v.PentestId)
-		case schemas.Finding_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.Finding_pentestJobId, v.PentestJobId)
-		case schemas.Finding_reasoning:
-			v.Reasoning = new(string)
-			return d.ReadString(schemas.Finding_reasoning, v.Reasoning)
-		case schemas.Finding_riskLevel:
-			var ev string
-			if err := d.ReadString(schemas.Finding_riskLevel, &ev); err != nil {
-				return err
-			}
-			v.RiskLevel = RiskLevel(ev)
-			return nil
-		case schemas.Finding_riskScore:
-			v.RiskScore = new(string)
-			return d.ReadString(schemas.Finding_riskScore, v.RiskScore)
-		case schemas.Finding_riskType:
-			v.RiskType = new(string)
-			return d.ReadString(schemas.Finding_riskType, v.RiskType)
-		case schemas.Finding_status:
-			var ev string
-			if err := d.ReadString(schemas.Finding_status, &ev); err != nil {
-				return err
-			}
-			v.Status = FindingStatus(ev)
-			return nil
-		case schemas.Finding_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.Finding_taskId, v.TaskId)
-		case schemas.Finding_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_updatedAt, v.UpdatedAt)
-		case schemas.Finding_verificationScript:
-			v.VerificationScript = &VerificationScript{}
-			return v.VerificationScript.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a security finding.
@@ -2357,113 +1502,10 @@ type FindingSummary struct {
 	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The simulated validation status of the finding.
+	ValidationStatus ValidationStatus
+
 	noSmithyDocumentSerde
-}
-
-func (v *FindingSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.FindingSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CodeReviewId != nil {
-		s.WriteString(schemas.FindingSummary_codeReviewId, *v.CodeReviewId)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.FindingSummary_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.Confidence != "" {
-		s.WriteString(schemas.FindingSummary_confidence, string(v.Confidence))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.FindingSummary_createdAt, *v.CreatedAt)
-	}
-	if v.FindingId != nil {
-		s.WriteString(schemas.FindingSummary_findingId, *v.FindingId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FindingSummary_name, *v.Name)
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.FindingSummary_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.FindingSummary_pentestJobId, *v.PentestJobId)
-	}
-	if v.RiskLevel != "" {
-		s.WriteString(schemas.FindingSummary_riskLevel, string(v.RiskLevel))
-	}
-	if v.RiskType != nil {
-		s.WriteString(schemas.FindingSummary_riskType, *v.RiskType)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.FindingSummary_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.FindingSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *FindingSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.FindingSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.FindingSummary_codeReviewId:
-			v.CodeReviewId = new(string)
-			return d.ReadString(schemas.FindingSummary_codeReviewId, v.CodeReviewId)
-		case schemas.FindingSummary_codeReviewJobId:
-			v.CodeReviewJobId = new(string)
-			return d.ReadString(schemas.FindingSummary_codeReviewJobId, v.CodeReviewJobId)
-		case schemas.FindingSummary_confidence:
-			var ev string
-			if err := d.ReadString(schemas.FindingSummary_confidence, &ev); err != nil {
-				return err
-			}
-			v.Confidence = ConfidenceLevel(ev)
-			return nil
-		case schemas.FindingSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.FindingSummary_createdAt, v.CreatedAt)
-		case schemas.FindingSummary_findingId:
-			v.FindingId = new(string)
-			return d.ReadString(schemas.FindingSummary_findingId, v.FindingId)
-		case schemas.FindingSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FindingSummary_name, v.Name)
-		case schemas.FindingSummary_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.FindingSummary_pentestId, v.PentestId)
-		case schemas.FindingSummary_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.FindingSummary_pentestJobId, v.PentestJobId)
-		case schemas.FindingSummary_riskLevel:
-			var ev string
-			if err := d.ReadString(schemas.FindingSummary_riskLevel, &ev); err != nil {
-				return err
-			}
-			v.RiskLevel = RiskLevel(ev)
-			return nil
-		case schemas.FindingSummary_riskType:
-			v.RiskType = new(string)
-			return d.ReadString(schemas.FindingSummary_riskType, v.RiskType)
-		case schemas.FindingSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.FindingSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = FindingStatus(ev)
-			return nil
-		case schemas.FindingSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.FindingSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // The input required to create a GitHub integration, including the OAuth
@@ -2480,44 +1522,19 @@ type GitHubIntegrationInput struct {
 	// This member is required.
 	State *string
 
+	// The installation identifier provided by GitHub Enterprise Server on the install
+	// callback. Required for GitHub Enterprise Server integrations and ignored for
+	// GitHub.com.
+	InstallationId *string
+
 	// The name of the GitHub organization to integrate with.
 	OrganizationName *string
 
+	// The HTTPS URL of a self-hosted GitHub Enterprise Server instance. Omit this
+	// value for GitHub.com.
+	TargetUrl *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *GitHubIntegrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GitHubIntegrationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GitHubIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.GitHubIntegrationInput_code, *v.Code)
-	}
-	if v.OrganizationName != nil {
-		s.WriteString(schemas.GitHubIntegrationInput_organizationName, *v.OrganizationName)
-	}
-	if v.State != nil {
-		s.WriteString(schemas.GitHubIntegrationInput_state, *v.State)
-	}
-}
-func (v *GitHubIntegrationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GitHubIntegrationInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GitHubIntegrationInput_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.GitHubIntegrationInput_code, v.Code)
-		case schemas.GitHubIntegrationInput_organizationName:
-			v.OrganizationName = new(string)
-			return d.ReadString(schemas.GitHubIntegrationInput_organizationName, v.OrganizationName)
-		case schemas.GitHubIntegrationInput_state:
-			v.State = new(string)
-			return d.ReadString(schemas.GitHubIntegrationInput_state, v.State)
-		}
-		return nil
-	})
 }
 
 // Contains metadata about a GitHub repository that is integrated with the service.
@@ -2544,50 +1561,6 @@ type GitHubRepositoryMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GitHubRepositoryMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GitHubRepositoryMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GitHubRepositoryMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessType != "" {
-		s.WriteString(schemas.GitHubRepositoryMetadata_accessType, string(v.AccessType))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GitHubRepositoryMetadata_name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.GitHubRepositoryMetadata_owner, *v.Owner)
-	}
-	if v.ProviderResourceId != nil {
-		s.WriteString(schemas.GitHubRepositoryMetadata_providerResourceId, *v.ProviderResourceId)
-	}
-}
-func (v *GitHubRepositoryMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GitHubRepositoryMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GitHubRepositoryMetadata_accessType:
-			var ev string
-			if err := d.ReadString(schemas.GitHubRepositoryMetadata_accessType, &ev); err != nil {
-				return err
-			}
-			v.AccessType = AccessType(ev)
-			return nil
-		case schemas.GitHubRepositoryMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GitHubRepositoryMetadata_name, v.Name)
-		case schemas.GitHubRepositoryMetadata_owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.GitHubRepositoryMetadata_owner, v.Owner)
-		case schemas.GitHubRepositoryMetadata_providerResourceId:
-			v.ProviderResourceId = new(string)
-			return d.ReadString(schemas.GitHubRepositoryMetadata_providerResourceId, v.ProviderResourceId)
-		}
-		return nil
-	})
-}
-
 // Represents a GitHub repository resource used in an integration.
 type GitHubRepositoryResource struct {
 
@@ -2604,34 +1577,6 @@ type GitHubRepositoryResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GitHubRepositoryResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GitHubRepositoryResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GitHubRepositoryResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GitHubRepositoryResource_name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.GitHubRepositoryResource_owner, *v.Owner)
-	}
-}
-func (v *GitHubRepositoryResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GitHubRepositoryResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GitHubRepositoryResource_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GitHubRepositoryResource_name, v.Name)
-		case schemas.GitHubRepositoryResource_owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.GitHubRepositoryResource_owner, v.Owner)
-		}
-		return nil
-	})
-}
-
 // The capabilities enabled for a GitHub resource integration.
 type GitHubResourceCapabilities struct {
 
@@ -2641,35 +1586,97 @@ type GitHubResourceCapabilities struct {
 	// Indicates whether the integration can create code remediation pull requests.
 	RemediateCode *bool
 
+	// The filter groups that control which pull request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
-func (v *GitHubResourceCapabilities) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GitHubResourceCapabilities)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// The configuration for creating a GitLab integration.
+type GitLabIntegrationInput struct {
+
+	// The GitLab access token used to authenticate. This can be a personal access
+	// token or a group access token.
+	//
+	// This member is required.
+	AccessToken *string
+
+	// The type of GitLab access token provided in accessToken.
+	//
+	// This member is required.
+	TokenType GitLabTokenType
+
+	// The identifier of the GitLab group. Required when tokenType is group and
+	// ignored for personal tokens.
+	GroupId *string
+
+	// The HTTPS URL of a self-managed GitLab instance. Omit this value for GitLab
+	// SaaS (gitlab.com).
+	TargetUrl *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *GitHubResourceCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LeaveComments != nil {
-		s.WriteBool(schemas.GitHubResourceCapabilities_leaveComments, *v.LeaveComments)
-	}
-	if v.RemediateCode != nil {
-		s.WriteBool(schemas.GitHubResourceCapabilities_remediateCode, *v.RemediateCode)
-	}
+// Metadata for an integrated GitLab repository.
+type GitLabRepositoryMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace (group or user path) that owns the project.
+	//
+	// This member is required.
+	Namespace *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// Defines the visibility level of provider resources. PRIVATE indicates
+	// restricted access, while PUBLIC indicates open access.
+	AccessType AccessType
+
+	noSmithyDocumentSerde
 }
-func (v *GitHubResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GitHubResourceCapabilities, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GitHubResourceCapabilities_leaveComments:
-			v.LeaveComments = new(bool)
-			return d.ReadBool(schemas.GitHubResourceCapabilities_leaveComments, v.LeaveComments)
-		case schemas.GitHubResourceCapabilities_remediateCode:
-			v.RemediateCode = new(bool)
-			return d.ReadBool(schemas.GitHubResourceCapabilities_remediateCode, v.RemediateCode)
-		}
-		return nil
-	})
+
+// A GitLab repository integrated as a resource.
+type GitLabRepositoryResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace (group or user path) that owns the project.
+	//
+	// This member is required.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated GitLab repository.
+type GitLabResourceCapabilities struct {
+
+	// Whether to post code review comments on merge request discussions.
+	LeaveComments *bool
+
+	// Whether to create merge requests with automated fixes.
+	RemediateCode *bool
+
+	// The filter groups that control which merge request events start an automatic
+	// code review when leaveComments is enabled. A review starts when any group
+	// matches. If you omit this, a review starts on PULL_REQUEST_READY_FOR_REVIEW
+	// events.
+	TriggerFilterGroups []TriggerFilterGroup
+
+	noSmithyDocumentSerde
 }
 
 // Contains HTTP route verification details for a target domain, including the
@@ -2685,34 +1692,6 @@ type HttpVerification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HttpVerification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HttpVerification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HttpVerification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RoutePath != nil {
-		s.WriteString(schemas.HttpVerification_routePath, *v.RoutePath)
-	}
-	if v.Token != nil {
-		s.WriteString(schemas.HttpVerification_token, *v.Token)
-	}
-}
-func (v *HttpVerification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HttpVerification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HttpVerification_routePath:
-			v.RoutePath = new(string)
-			return d.ReadString(schemas.HttpVerification_routePath, v.RoutePath)
-		case schemas.HttpVerification_token:
-			v.Token = new(string)
-			return d.ReadString(schemas.HttpVerification_token, v.Token)
-		}
-		return nil
-	})
-}
-
 // The IAM Identity Center configuration for an application.
 type IdCConfiguration struct {
 
@@ -2725,32 +1704,40 @@ type IdCConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IdCConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdCConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// The source from which to import security requirements. Currently supports
+// document uploads.
+//
+// The following types satisfy this interface:
+//
+//	ImportSourceMemberDocuments
+type ImportSource interface {
+	isImportSource()
 }
 
-func (v *IdCConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdcApplicationArn != nil {
-		s.WriteString(schemas.IdCConfiguration_idcApplicationArn, *v.IdcApplicationArn)
-	}
-	if v.IdcInstanceArn != nil {
-		s.WriteString(schemas.IdCConfiguration_idcInstanceArn, *v.IdcInstanceArn)
-	}
+// The list of documents to extract security requirements from.
+type ImportSourceMemberDocuments struct {
+	Value []SecurityRequirementArtifact
+
+	noSmithyDocumentSerde
 }
-func (v *IdCConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdCConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdCConfiguration_idcApplicationArn:
-			v.IdcApplicationArn = new(string)
-			return d.ReadString(schemas.IdCConfiguration_idcApplicationArn, v.IdcApplicationArn)
-		case schemas.IdCConfiguration_idcInstanceArn:
-			v.IdcInstanceArn = new(string)
-			return d.ReadString(schemas.IdCConfiguration_idcInstanceArn, v.IdcInstanceArn)
-		}
-		return nil
-	})
+
+func (*ImportSourceMemberDocuments) isImportSource() {}
+
+// A reference to a document in a third-party provider, such as a Confluence page
+// linked via an integration.
+type IntegratedDocument struct {
+
+	// The identifier of the integration that provides access to the document.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific resource identifier for the document.
+	//
+	// This member is required.
+	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a code repository that is integrated with the service through a
@@ -2767,35 +1754,10 @@ type IntegratedRepository struct {
 	// This member is required.
 	ProviderResourceId *string
 
+	// An optional override for the repository branch.
+	Branch *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *IntegratedRepository) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegratedRepository)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntegratedRepository) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IntegrationId != nil {
-		s.WriteString(schemas.IntegratedRepository_integrationId, *v.IntegrationId)
-	}
-	if v.ProviderResourceId != nil {
-		s.WriteString(schemas.IntegratedRepository_providerResourceId, *v.ProviderResourceId)
-	}
-}
-func (v *IntegratedRepository) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntegratedRepository, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntegratedRepository_integrationId:
-			v.IntegrationId = new(string)
-			return d.ReadString(schemas.IntegratedRepository_integrationId, v.IntegrationId)
-		case schemas.IntegratedRepository_providerResourceId:
-			v.ProviderResourceId = new(string)
-			return d.ReadString(schemas.IntegratedRepository_providerResourceId, v.ProviderResourceId)
-		}
-		return nil
-	})
 }
 
 // Represents an integrated resource from a third-party provider. This is a union
@@ -2803,10 +1765,42 @@ func (v *IntegratedRepository) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMemberAzureDevOpsRepository
+//	IntegratedResourceMemberBitbucketRepository
+//	IntegratedResourceMemberConfluenceDocument
 //	IntegratedResourceMemberGithubRepository
+//	IntegratedResourceMemberGitlabRepository
+//	IntegratedResourceMemberJiraProject
 type IntegratedResource interface {
 	isIntegratedResource()
 }
+
+// The Azure DevOps repository resource information.
+type IntegratedResourceMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberAzureDevOpsRepository) isIntegratedResource() {}
+
+// A Bitbucket repository integrated as a resource.
+type IntegratedResourceMemberBitbucketRepository struct {
+	Value BitbucketRepositoryResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberBitbucketRepository) isIntegratedResource() {}
+
+// A Confluence document (page) integrated as a resource.
+type IntegratedResourceMemberConfluenceDocument struct {
+	Value ConfluenceDocumentResource
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMemberConfluenceDocument) isIntegratedResource() {}
 
 // The GitHub repository resource information.
 type IntegratedResourceMemberGithubRepository struct {
@@ -2816,14 +1810,24 @@ type IntegratedResourceMemberGithubRepository struct {
 }
 
 func (*IntegratedResourceMemberGithubRepository) isIntegratedResource() {}
-func (v *IntegratedResourceMemberGithubRepository) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegratedResource_githubRepository)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
+
+// A GitLab repository integrated as a resource.
+type IntegratedResourceMemberGitlabRepository struct {
+	Value GitLabRepositoryResource
+
+	noSmithyDocumentSerde
 }
-func (v *IntegratedResourceMemberGithubRepository) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
+
+func (*IntegratedResourceMemberGitlabRepository) isIntegratedResource() {}
+
+// The Jira project resource information.
+type IntegratedResourceMemberJiraProject struct {
+	Value JiraProjectResource
+
+	noSmithyDocumentSerde
 }
+
+func (*IntegratedResourceMemberJiraProject) isIntegratedResource() {}
 
 // Represents an input item for updating integrated resources, including the
 // resource and its capabilities.
@@ -2840,37 +1844,47 @@ type IntegratedResourceInputItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IntegratedResourceInputItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegratedResourceInputItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntegratedResourceInputItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderResourceCapabilities(s, schemas.IntegratedResourceInputItem_capabilities, v.Capabilities)
-	serializeIntegratedResource(s, schemas.IntegratedResourceInputItem_resource, v.Resource)
-}
-func (v *IntegratedResourceInputItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntegratedResourceInputItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntegratedResourceInputItem_capabilities:
-			return deserializeProviderResourceCapabilities(d, schemas.IntegratedResourceInputItem_capabilities, &v.Capabilities)
-		case schemas.IntegratedResourceInputItem_resource:
-			return deserializeIntegratedResource(d, schemas.IntegratedResourceInputItem_resource, &v.Resource)
-		}
-		return nil
-	})
-}
-
 // Contains metadata about an integrated resource. This is a union type that
 // contains provider-specific metadata.
 //
 // The following types satisfy this interface:
 //
+//	IntegratedResourceMetadataMemberAzureDevOpsRepository
+//	IntegratedResourceMetadataMemberBitbucketRepository
+//	IntegratedResourceMetadataMemberConfluenceDocument
 //	IntegratedResourceMetadataMemberGithubRepository
+//	IntegratedResourceMetadataMemberGitlabRepository
+//	IntegratedResourceMetadataMemberJiraProject
 type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
+
+// The Azure DevOps repository metadata.
+type IntegratedResourceMetadataMemberAzureDevOpsRepository struct {
+	Value AzureDevOpsRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberAzureDevOpsRepository) isIntegratedResourceMetadata() {}
+
+// Metadata for an integrated Bitbucket repository.
+type IntegratedResourceMetadataMemberBitbucketRepository struct {
+	Value BitbucketRepositoryMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberBitbucketRepository) isIntegratedResourceMetadata() {}
+
+// Metadata for an integrated Confluence document.
+type IntegratedResourceMetadataMemberConfluenceDocument struct {
+	Value ConfluenceDocumentMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegratedResourceMetadataMemberConfluenceDocument) isIntegratedResourceMetadata() {}
 
 // The GitHub repository metadata.
 type IntegratedResourceMetadataMemberGithubRepository struct {
@@ -2880,14 +1894,24 @@ type IntegratedResourceMetadataMemberGithubRepository struct {
 }
 
 func (*IntegratedResourceMetadataMemberGithubRepository) isIntegratedResourceMetadata() {}
-func (v *IntegratedResourceMetadataMemberGithubRepository) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegratedResourceMetadata_githubRepository)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
+
+// Metadata for an integrated GitLab repository.
+type IntegratedResourceMetadataMemberGitlabRepository struct {
+	Value GitLabRepositoryMetadata
+
+	noSmithyDocumentSerde
 }
-func (v *IntegratedResourceMetadataMemberGithubRepository) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
+
+func (*IntegratedResourceMetadataMemberGitlabRepository) isIntegratedResourceMetadata() {}
+
+// The Jira project metadata.
+type IntegratedResourceMetadataMemberJiraProject struct {
+	Value JiraProjectMetadata
+
+	noSmithyDocumentSerde
 }
+
+func (*IntegratedResourceMetadataMemberJiraProject) isIntegratedResourceMetadata() {}
 
 // Contains summary information about an integrated resource.
 type IntegratedResourceSummary struct {
@@ -2906,34 +1930,6 @@ type IntegratedResourceSummary struct {
 	Capabilities ProviderResourceCapabilities
 
 	noSmithyDocumentSerde
-}
-
-func (v *IntegratedResourceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegratedResourceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntegratedResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderResourceCapabilities(s, schemas.IntegratedResourceSummary_capabilities, v.Capabilities)
-	if v.IntegrationId != nil {
-		s.WriteString(schemas.IntegratedResourceSummary_integrationId, *v.IntegrationId)
-	}
-	serializeIntegratedResourceMetadata(s, schemas.IntegratedResourceSummary_resource, v.Resource)
-}
-func (v *IntegratedResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntegratedResourceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntegratedResourceSummary_capabilities:
-			return deserializeProviderResourceCapabilities(d, schemas.IntegratedResourceSummary_capabilities, &v.Capabilities)
-		case schemas.IntegratedResourceSummary_integrationId:
-			v.IntegrationId = new(string)
-			return d.ReadString(schemas.IntegratedResourceSummary_integrationId, v.IntegrationId)
-		case schemas.IntegratedResourceSummary_resource:
-			return deserializeIntegratedResourceMetadata(d, schemas.IntegratedResourceSummary_resource, &v.Resource)
-		}
-		return nil
-	})
 }
 
 // A filter for listing integrations. This is a union type where you can filter by
@@ -2955,17 +1951,6 @@ type IntegrationFilterMemberProvider struct {
 }
 
 func (*IntegrationFilterMemberProvider) isIntegrationFilter() {}
-func (v *IntegrationFilterMemberProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.IntegrationFilter_provider, string(v.Value))
-}
-func (v *IntegrationFilterMemberProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	var s string
-	if err := d.ReadString(schemas.IntegrationFilter_provider, &s); err != nil {
-		return err
-	}
-	v.Value = Provider(s)
-	return nil
-}
 
 // Filter integrations by provider type.
 type IntegrationFilterMemberProviderType struct {
@@ -2975,17 +1960,6 @@ type IntegrationFilterMemberProviderType struct {
 }
 
 func (*IntegrationFilterMemberProviderType) isIntegrationFilter() {}
-func (v *IntegrationFilterMemberProviderType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.IntegrationFilter_providerType, string(v.Value))
-}
-func (v *IntegrationFilterMemberProviderType) Deserialize(d smithy.ShapeDeserializer) error {
-	var s string
-	if err := d.ReadString(schemas.IntegrationFilter_providerType, &s); err != nil {
-		return err
-	}
-	v.Value = ProviderType(s)
-	return nil
-}
 
 // Contains summary information about an integration.
 type IntegrationSummary struct {
@@ -3015,61 +1989,168 @@ type IntegrationSummary struct {
 	// This member is required.
 	ProviderType ProviderType
 
+	// The name of the private connection used to reach the integration's self-hosted
+	// instance over private networking, if one is configured.
+	PrivateConnectionName *string
+
+	// The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise
+	// Server or self-managed GitLab instance. This value is absent for SaaS
+	// integrations.
+	TargetUrl *string
+
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
+
 	noSmithyDocumentSerde
 }
 
-func (v *IntegrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// The destination for filing findings as issues in an integrated issue tracker.
+type IssueDestination struct {
+
+	// The integration identifier for the issue-tracker provider.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The identifier of the project the issues are filed under.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *IntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisplayName != nil {
-		s.WriteString(schemas.IntegrationSummary_displayName, *v.DisplayName)
-	}
-	if v.InstallationId != nil {
-		s.WriteString(schemas.IntegrationSummary_installationId, *v.InstallationId)
-	}
-	if v.IntegrationId != nil {
-		s.WriteString(schemas.IntegrationSummary_integrationId, *v.IntegrationId)
-	}
-	if v.Provider != "" {
-		s.WriteString(schemas.IntegrationSummary_provider, string(v.Provider))
-	}
-	if v.ProviderType != "" {
-		s.WriteString(schemas.IntegrationSummary_providerType, string(v.ProviderType))
-	}
+// The configuration for creating a Jira integration.
+type JiraIntegrationInput struct {
+
+	// The OAuth 2.0 authorization code returned from the consent redirect.
+	//
+	// This member is required.
+	Code *string
+
+	// The Atlassian installation identifier, available from the Atlassian
+	// administration console.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The Jira Cloud site URL, for example https://mysite.atlassian.net.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The CSRF state token echoed back from the OAuth redirect.
+	//
+	// This member is required.
+	State *string
+
+	noSmithyDocumentSerde
 }
-func (v *IntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntegrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntegrationSummary_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.IntegrationSummary_displayName, v.DisplayName)
-		case schemas.IntegrationSummary_installationId:
-			v.InstallationId = new(string)
-			return d.ReadString(schemas.IntegrationSummary_installationId, v.InstallationId)
-		case schemas.IntegrationSummary_integrationId:
-			v.IntegrationId = new(string)
-			return d.ReadString(schemas.IntegrationSummary_integrationId, v.IntegrationId)
-		case schemas.IntegrationSummary_provider:
-			var ev string
-			if err := d.ReadString(schemas.IntegrationSummary_provider, &ev); err != nil {
-				return err
-			}
-			v.Provider = Provider(ev)
-			return nil
-		case schemas.IntegrationSummary_providerType:
-			var ev string
-			if err := d.ReadString(schemas.IntegrationSummary_providerType, &ev); err != nil {
-				return err
-			}
-			v.ProviderType = ProviderType(ev)
-			return nil
-		}
-		return nil
-	})
+
+// Contains metadata about a Jira project that is integrated with the service.
+type JiraProjectMetadata struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// Provider Id of the resource e.g. GitHub repository id, etc.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a Jira project resource used in an integration.
+type JiraProjectResource struct {
+
+	// Name of the resource e.g. repository name, etc.
+	//
+	// This member is required.
+	Name *string
+
+	// The Jira project identifier.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The Jira project key, for example PROJ.
+	//
+	// This member is required.
+	ProjectKey *string
+
+	// The display name of the Jira project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Capabilities for an integrated Jira project.
+type JiraResourceCapabilities struct {
+
+	// Whether to post comments on issues in the integrated jira project.
+	CommentIssue *bool
+
+	// Whether to create issues in the integrated jira project.
+	CreateIssue *bool
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an issue created for a finding in a third-party issue tracker.
+type LinkedIssue struct {
+
+	// The integration identifier for the issue-tracker provider.
+	IntegrationId *string
+
+	// The stable numeric issue identifier.
+	IssueId *string
+
+	// The issue key.
+	IssueKey *string
+
+	// The issue URL.
+	IssueUrl *string
+
+	// The key of the project the issue belongs to.
+	ProjectKey *string
+
+	// The issue-tracker provider.
+	Provider Provider
+
+	// The Atlassian Cloud site URL.
+	SiteUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter criteria for listing security requirement packs.
+type ListSecurityRequirementPackFilter struct {
+
+	// Filter packs by management type. Valid values are AWS_MANAGED and
+	// CUSTOMER_MANAGED.
+	ManagementType ManagementType
+
+	// Filter packs by status. Valid values are ENABLED and DISABLED.
+	Status SecurityRequirementPackStatus
+
+	noSmithyDocumentSerde
 }
 
 // The log location for a task, specifying where task execution logs are stored.
@@ -3082,40 +2163,6 @@ type LogLocation struct {
 	LogType LogType
 
 	noSmithyDocumentSerde
-}
-
-func (v *LogLocation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogLocation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudWatchLog != nil {
-		s.WriteStruct(schemas.LogLocation_cloudWatchLog)
-		v.CloudWatchLog.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogType != "" {
-		s.WriteString(schemas.LogLocation_logType, string(v.LogType))
-	}
-}
-func (v *LogLocation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogLocation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogLocation_cloudWatchLog:
-			v.CloudWatchLog = &CloudWatchLog{}
-			return v.CloudWatchLog.Deserialize(d)
-		case schemas.LogLocation_logType:
-			var ev string
-			if err := d.ReadString(schemas.LogLocation_logType, &ev); err != nil {
-				return err
-			}
-			v.LogType = LogType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains metadata about a member. This is a union type that contains
@@ -3136,14 +2183,6 @@ type MemberMetadataMemberUser struct {
 }
 
 func (*MemberMetadataMemberUser) isMemberMetadata() {}
-func (v *MemberMetadataMemberUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MemberMetadata_user)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MemberMetadataMemberUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The configuration for a membership. This is a union type that contains
 // member-type-specific configuration.
@@ -3163,14 +2202,6 @@ type MembershipConfigMemberUser struct {
 }
 
 func (*MembershipConfigMemberUser) isMembershipConfig() {}
-func (v *MembershipConfigMemberUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MembershipConfig_user)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MembershipConfigMemberUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains summary information about a membership.
 type MembershipSummary struct {
@@ -3224,80 +2255,6 @@ type MembershipSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MembershipSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MembershipSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.MembershipSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.MembershipSummary_applicationId, *v.ApplicationId)
-	}
-	serializeMembershipConfig(s, schemas.MembershipSummary_config, v.Config)
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.MembershipSummary_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.MembershipSummary_createdBy, *v.CreatedBy)
-	}
-	if v.MemberType != "" {
-		s.WriteString(schemas.MembershipSummary_memberType, string(v.MemberType))
-	}
-	if v.MembershipId != nil {
-		s.WriteString(schemas.MembershipSummary_membershipId, *v.MembershipId)
-	}
-	serializeMemberMetadata(s, schemas.MembershipSummary_metadata, v.Metadata)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.MembershipSummary_updatedAt, *v.UpdatedAt)
-	}
-	if v.UpdatedBy != nil {
-		s.WriteString(schemas.MembershipSummary_updatedBy, *v.UpdatedBy)
-	}
-}
-func (v *MembershipSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MembershipSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MembershipSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.MembershipSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.MembershipSummary_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.MembershipSummary_applicationId, v.ApplicationId)
-		case schemas.MembershipSummary_config:
-			return deserializeMembershipConfig(d, schemas.MembershipSummary_config, &v.Config)
-		case schemas.MembershipSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.MembershipSummary_createdAt, v.CreatedAt)
-		case schemas.MembershipSummary_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.MembershipSummary_createdBy, v.CreatedBy)
-		case schemas.MembershipSummary_memberType:
-			var ev string
-			if err := d.ReadString(schemas.MembershipSummary_memberType, &ev); err != nil {
-				return err
-			}
-			v.MemberType = MembershipType(ev)
-			return nil
-		case schemas.MembershipSummary_membershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.MembershipSummary_membershipId, v.MembershipId)
-		case schemas.MembershipSummary_metadata:
-			return deserializeMemberMetadata(d, schemas.MembershipSummary_metadata, &v.Metadata)
-		case schemas.MembershipSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.MembershipSummary_updatedAt, v.UpdatedAt)
-		case schemas.MembershipSummary_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.MembershipSummary_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
-
 // The network traffic configuration for a pentest, including custom headers and
 // traffic rules.
 type NetworkTrafficConfig struct {
@@ -3310,28 +2267,6 @@ type NetworkTrafficConfig struct {
 	Rules []NetworkTrafficRule
 
 	noSmithyDocumentSerde
-}
-
-func (v *NetworkTrafficConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkTrafficConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkTrafficConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHeaderList(s, schemas.NetworkTrafficConfig_customHeaders, v.CustomHeaders)
-	serializeNetworkTrafficRuleList(s, schemas.NetworkTrafficConfig_rules, v.Rules)
-}
-func (v *NetworkTrafficConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkTrafficConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkTrafficConfig_customHeaders:
-			return deserializeCustomHeaderList(d, schemas.NetworkTrafficConfig_customHeaders, &v.CustomHeaders)
-		case schemas.NetworkTrafficConfig_rules:
-			return deserializeNetworkTrafficRuleList(d, schemas.NetworkTrafficConfig_rules, &v.Rules)
-		}
-		return nil
-	})
 }
 
 // A rule that controls network traffic during penetration testing by allowing or
@@ -3348,48 +2283,6 @@ type NetworkTrafficRule struct {
 	Pattern *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NetworkTrafficRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkTrafficRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkTrafficRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Effect != "" {
-		s.WriteString(schemas.NetworkTrafficRule_effect, string(v.Effect))
-	}
-	if v.NetworkTrafficRuleType != "" {
-		s.WriteString(schemas.NetworkTrafficRule_networkTrafficRuleType, string(v.NetworkTrafficRuleType))
-	}
-	if v.Pattern != nil {
-		s.WriteString(schemas.NetworkTrafficRule_pattern, *v.Pattern)
-	}
-}
-func (v *NetworkTrafficRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkTrafficRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkTrafficRule_effect:
-			var ev string
-			if err := d.ReadString(schemas.NetworkTrafficRule_effect, &ev); err != nil {
-				return err
-			}
-			v.Effect = NetworkTrafficRuleEffect(ev)
-			return nil
-		case schemas.NetworkTrafficRule_networkTrafficRuleType:
-			var ev string
-			if err := d.ReadString(schemas.NetworkTrafficRule_networkTrafficRuleType, &ev); err != nil {
-				return err
-			}
-			v.NetworkTrafficRuleType = NetworkTrafficRuleType(ev)
-			return nil
-		case schemas.NetworkTrafficRule_pattern:
-			v.Pattern = new(string)
-			return d.ReadString(schemas.NetworkTrafficRule_pattern, v.Pattern)
-		}
-		return nil
-	})
 }
 
 // Represents a pentest configuration that defines the parameters for security
@@ -3417,11 +2310,22 @@ type Pentest struct {
 	// This member is required.
 	Title *string
 
+	// The CI/CD pentesting configuration for this pentest. Present when the pentest
+	// is set up to run from a CI/CD pipeline.
+	CicdConfiguration *CiCdConfiguration
+
+	// Strategy for cleaning up resources after pentest job completion.
+	CleanUpStrategy CleanUpStrategy
+
 	// The code remediation strategy for the pentest.
 	CodeRemediationStrategy CodeRemediationStrategy
 
 	// The date and time the pentest was created, in UTC format.
 	CreatedAt *time.Time
+
+	// A list of managed skills to disable for this pentest. Valid values include
+	// FINDING_PERSONALIZATION and LOGIN_OPTIMIZATION.
+	DisableManagedSkills []SkillType
 
 	// The list of risk types excluded from the pentest.
 	ExcludeRiskTypes []RiskType
@@ -3429,11 +2333,25 @@ type Pentest struct {
 	// The CloudWatch Logs configuration for the pentest.
 	LogConfig *CloudWatchLog
 
+	// The maximum number of billable task hours allowed for jobs started from this
+	// pentest. If a job reaches the configured limit, it is gracefully stopped. If not
+	// set, jobs run to completion with no budget cap.
+	MaxTaskHours *float64
+
 	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The report-generation filters applied when the report is exported.
+	ReportFilters *ReportFilters
+
 	// The IAM service role used for the pentest.
 	ServiceRole *string
+
+	// The category of application a pentest targets.
+	TestScope *TestScope
 
 	// The date and time the pentest was last updated, in UTC format.
 	UpdatedAt *time.Time
@@ -3442,103 +2360,6 @@ type Pentest struct {
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *Pentest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Pentest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Pentest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.Pentest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.Assets != nil {
-		s.WriteStruct(schemas.Pentest_assets)
-		v.Assets.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CodeRemediationStrategy != "" {
-		s.WriteString(schemas.Pentest_codeRemediationStrategy, string(v.CodeRemediationStrategy))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Pentest_createdAt, *v.CreatedAt)
-	}
-	serializeRiskTypeList(s, schemas.Pentest_excludeRiskTypes, v.ExcludeRiskTypes)
-	if v.LogConfig != nil {
-		s.WriteStruct(schemas.Pentest_logConfig)
-		v.LogConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NetworkTrafficConfig != nil {
-		s.WriteStruct(schemas.Pentest_networkTrafficConfig)
-		v.NetworkTrafficConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.Pentest_pentestId, *v.PentestId)
-	}
-	if v.ServiceRole != nil {
-		s.WriteString(schemas.Pentest_serviceRole, *v.ServiceRole)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.Pentest_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Pentest_updatedAt, *v.UpdatedAt)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.Pentest_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Pentest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Pentest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Pentest_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.Pentest_agentSpaceId, v.AgentSpaceId)
-		case schemas.Pentest_assets:
-			v.Assets = &Assets{}
-			return v.Assets.Deserialize(d)
-		case schemas.Pentest_codeRemediationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.Pentest_codeRemediationStrategy, &ev); err != nil {
-				return err
-			}
-			v.CodeRemediationStrategy = CodeRemediationStrategy(ev)
-			return nil
-		case schemas.Pentest_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Pentest_createdAt, v.CreatedAt)
-		case schemas.Pentest_excludeRiskTypes:
-			return deserializeRiskTypeList(d, schemas.Pentest_excludeRiskTypes, &v.ExcludeRiskTypes)
-		case schemas.Pentest_logConfig:
-			v.LogConfig = &CloudWatchLog{}
-			return v.LogConfig.Deserialize(d)
-		case schemas.Pentest_networkTrafficConfig:
-			v.NetworkTrafficConfig = &NetworkTrafficConfig{}
-			return v.NetworkTrafficConfig.Deserialize(d)
-		case schemas.Pentest_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.Pentest_pentestId, v.PentestId)
-		case schemas.Pentest_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.Pentest_serviceRole, v.ServiceRole)
-		case schemas.Pentest_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.Pentest_title, v.Title)
-		case schemas.Pentest_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Pentest_updatedAt, v.UpdatedAt)
-		case schemas.Pentest_vpcConfig:
-			v.VpcConfig = &VpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents a pentest job, which is an execution instance of a pentest. A
@@ -3552,11 +2373,22 @@ type PentestJob struct {
 	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
 
+	// The configuration that enables a pentest to run as part of a CI/CD pipeline,
+	// scoped to the code changes in each pipeline run.
+	CicdConfiguration *CiCdConfiguration
+
+	// Strategy for cleaning up resources after pentest job completion.
+	CleanUpStrategy CleanUpStrategy
+
 	// The code remediation strategy for the pentest job.
 	CodeRemediationStrategy CodeRemediationStrategy
 
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
+
+	// A list of managed skills disabled for this pentest job. Valid values include
+	// FINDING_PERSONALIZATION and LOGIN_OPTIMIZATION.
+	DisableManagedSkills []SkillType
 
 	// The list of documents providing context for the pentest job.
 	Documents []DocumentInfo
@@ -3579,8 +2411,15 @@ type PentestJob struct {
 	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
+	JobType JobType
+
 	// The CloudWatch Logs configuration for the pentest job.
 	LogConfig *CloudWatchLog
+
+	// The maximum number of billable task hours allowed for this pentest job. If the
+	// cumulative task hours reach this limit, the job is gracefully stopped.
+	MaxTaskHours *float64
 
 	// The network traffic configuration for the pentest job.
 	NetworkTrafficConfig *NetworkTrafficConfig
@@ -3594,6 +2433,24 @@ type PentestJob struct {
 	// The unique identifier of the pentest job.
 	PentestJobId *string
 
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
+
+	// The code changes that defined the scope of this CI/CD pentest job. Present only
+	// for jobs of type CICD.
+	ScopeChanges []ScopeChange
+
+	// The scoping outcome for this CI/CD pentest job. Present only for jobs of type
+	// CICD.
+	ScopeResult *ScopeResult
+
+	// The list of finding identifiers selected for revalidation. Present only when
+	// jobType is REVALIDATION.
+	SelectedFindingIds []string
+
 	// The IAM service role used for the pentest job.
 	ServiceRole *string
 
@@ -3606,8 +2463,15 @@ type PentestJob struct {
 	// The list of steps in the pentest job execution.
 	Steps []Step
 
+	// The category of application a pentest targets.
+	TestScope *TestScope
+
 	// The title of the pentest job.
 	Title *string
+
+	// The trust anchors used to validate target endpoint TLS certificates during the
+	// pentest job.
+	TrustedCaCertificates []TrustedCaCertificate
 
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
@@ -3616,146 +2480,6 @@ type PentestJob struct {
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *PentestJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PentestJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorList(s, schemas.PentestJob_actors, v.Actors)
-	serializeEndpointList(s, schemas.PentestJob_allowedDomains, v.AllowedDomains)
-	if v.CodeRemediationStrategy != "" {
-		s.WriteString(schemas.PentestJob_codeRemediationStrategy, string(v.CodeRemediationStrategy))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.PentestJob_createdAt, *v.CreatedAt)
-	}
-	serializeDocumentList(s, schemas.PentestJob_documents, v.Documents)
-	serializeEndpointList(s, schemas.PentestJob_endpoints, v.Endpoints)
-	if v.ErrorInformation != nil {
-		s.WriteStruct(schemas.PentestJob_errorInformation)
-		v.ErrorInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEndpointList(s, schemas.PentestJob_excludePaths, v.ExcludePaths)
-	serializeRiskTypeList(s, schemas.PentestJob_excludeRiskTypes, v.ExcludeRiskTypes)
-	serializeExecutionContextList(s, schemas.PentestJob_executionContext, v.ExecutionContext)
-	serializeIntegratedRepositoryList(s, schemas.PentestJob_integratedRepositories, v.IntegratedRepositories)
-	if v.LogConfig != nil {
-		s.WriteStruct(schemas.PentestJob_logConfig)
-		v.LogConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NetworkTrafficConfig != nil {
-		s.WriteStruct(schemas.PentestJob_networkTrafficConfig)
-		v.NetworkTrafficConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Overview != nil {
-		s.WriteString(schemas.PentestJob_overview, *v.Overview)
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.PentestJob_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.PentestJob_pentestJobId, *v.PentestJobId)
-	}
-	if v.ServiceRole != nil {
-		s.WriteString(schemas.PentestJob_serviceRole, *v.ServiceRole)
-	}
-	serializeSourceCodeRepositoryList(s, schemas.PentestJob_sourceCode, v.SourceCode)
-	if v.Status != "" {
-		s.WriteString(schemas.PentestJob_status, string(v.Status))
-	}
-	serializeStepList(s, schemas.PentestJob_steps, v.Steps)
-	if v.Title != nil {
-		s.WriteString(schemas.PentestJob_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.PentestJob_updatedAt, *v.UpdatedAt)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.PentestJob_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PentestJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PentestJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PentestJob_actors:
-			return deserializeActorList(d, schemas.PentestJob_actors, &v.Actors)
-		case schemas.PentestJob_allowedDomains:
-			return deserializeEndpointList(d, schemas.PentestJob_allowedDomains, &v.AllowedDomains)
-		case schemas.PentestJob_codeRemediationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.PentestJob_codeRemediationStrategy, &ev); err != nil {
-				return err
-			}
-			v.CodeRemediationStrategy = CodeRemediationStrategy(ev)
-			return nil
-		case schemas.PentestJob_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestJob_createdAt, v.CreatedAt)
-		case schemas.PentestJob_documents:
-			return deserializeDocumentList(d, schemas.PentestJob_documents, &v.Documents)
-		case schemas.PentestJob_endpoints:
-			return deserializeEndpointList(d, schemas.PentestJob_endpoints, &v.Endpoints)
-		case schemas.PentestJob_errorInformation:
-			v.ErrorInformation = &ErrorInformation{}
-			return v.ErrorInformation.Deserialize(d)
-		case schemas.PentestJob_excludePaths:
-			return deserializeEndpointList(d, schemas.PentestJob_excludePaths, &v.ExcludePaths)
-		case schemas.PentestJob_excludeRiskTypes:
-			return deserializeRiskTypeList(d, schemas.PentestJob_excludeRiskTypes, &v.ExcludeRiskTypes)
-		case schemas.PentestJob_executionContext:
-			return deserializeExecutionContextList(d, schemas.PentestJob_executionContext, &v.ExecutionContext)
-		case schemas.PentestJob_integratedRepositories:
-			return deserializeIntegratedRepositoryList(d, schemas.PentestJob_integratedRepositories, &v.IntegratedRepositories)
-		case schemas.PentestJob_logConfig:
-			v.LogConfig = &CloudWatchLog{}
-			return v.LogConfig.Deserialize(d)
-		case schemas.PentestJob_networkTrafficConfig:
-			v.NetworkTrafficConfig = &NetworkTrafficConfig{}
-			return v.NetworkTrafficConfig.Deserialize(d)
-		case schemas.PentestJob_overview:
-			v.Overview = new(string)
-			return d.ReadString(schemas.PentestJob_overview, v.Overview)
-		case schemas.PentestJob_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.PentestJob_pentestId, v.PentestId)
-		case schemas.PentestJob_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.PentestJob_pentestJobId, v.PentestJobId)
-		case schemas.PentestJob_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.PentestJob_serviceRole, v.ServiceRole)
-		case schemas.PentestJob_sourceCode:
-			return deserializeSourceCodeRepositoryList(d, schemas.PentestJob_sourceCode, &v.SourceCode)
-		case schemas.PentestJob_status:
-			var ev string
-			if err := d.ReadString(schemas.PentestJob_status, &ev); err != nil {
-				return err
-			}
-			v.Status = JobStatus(ev)
-			return nil
-		case schemas.PentestJob_steps:
-			return deserializeStepList(d, schemas.PentestJob_steps, &v.Steps)
-		case schemas.PentestJob_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.PentestJob_title, v.Title)
-		case schemas.PentestJob_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestJob_updatedAt, v.UpdatedAt)
-		case schemas.PentestJob_vpcConfig:
-			v.VpcConfig = &VpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a pentest job.
@@ -3774,6 +2498,12 @@ type PentestJobSummary struct {
 	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
 
+	// The type of the pentest job. Valid values are FULL, REVALIDATION, and CICD.
+	JobType JobType
+
+	// The URL to view this pentest job's findings report in the console.
+	ReportUrl *string
+
 	// The current status of the pentest job.
 	Status JobStatus
 
@@ -3784,62 +2514,6 @@ type PentestJobSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *PentestJobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PentestJobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PentestJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.PentestJobSummary_createdAt, *v.CreatedAt)
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.PentestJobSummary_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.PentestJobSummary_pentestJobId, *v.PentestJobId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PentestJobSummary_status, string(v.Status))
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.PentestJobSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.PentestJobSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *PentestJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PentestJobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PentestJobSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestJobSummary_createdAt, v.CreatedAt)
-		case schemas.PentestJobSummary_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.PentestJobSummary_pentestId, v.PentestId)
-		case schemas.PentestJobSummary_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.PentestJobSummary_pentestJobId, v.PentestJobId)
-		case schemas.PentestJobSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.PentestJobSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = JobStatus(ev)
-			return nil
-		case schemas.PentestJobSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.PentestJobSummary_title, v.Title)
-		case schemas.PentestJobSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestJobSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a pentest.
@@ -3869,50 +2543,82 @@ type PentestSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PentestSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PentestSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// The configuration for a private connection. Specify either a service-managed or
+// a self-managed mode.
+//
+// The following types satisfy this interface:
+//
+//	PrivateConnectionModeMemberSelfManaged
+//	PrivateConnectionModeMemberServiceManaged
+type PrivateConnectionMode interface {
+	isPrivateConnectionMode()
 }
 
-func (v *PentestSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.PentestSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.PentestSummary_createdAt, *v.CreatedAt)
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.PentestSummary_pentestId, *v.PentestId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.PentestSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.PentestSummary_updatedAt, *v.UpdatedAt)
-	}
+// The configuration for a self-managed private connection, where you manage your
+// own resource configuration.
+type PrivateConnectionModeMemberSelfManaged struct {
+	Value SelfManagedInput
+
+	noSmithyDocumentSerde
 }
-func (v *PentestSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PentestSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PentestSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.PentestSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.PentestSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestSummary_createdAt, v.CreatedAt)
-		case schemas.PentestSummary_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.PentestSummary_pentestId, v.PentestId)
-		case schemas.PentestSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.PentestSummary_title, v.Title)
-		case schemas.PentestSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.PentestSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
+
+func (*PrivateConnectionModeMemberSelfManaged) isPrivateConnectionMode() {}
+
+// The configuration for a service-managed private connection, where the service
+// manages the resource gateway lifecycle.
+type PrivateConnectionModeMemberServiceManaged struct {
+	Value ServiceManagedInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PrivateConnectionModeMemberServiceManaged) isPrivateConnectionMode() {}
+
+// Summarizes a private connection.
+type PrivateConnectionSummary struct {
+
+	// The name of the private connection.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the private connection.
+	//
+	// This member is required.
+	Status PrivateConnectionStatus
+
+	// The type of the private connection, indicating whether it is service-managed or
+	// self-managed.
+	//
+	// This member is required.
+	Type PrivateConnectionType
+
+	// The date and time the connection's certificate expires, in UTC format.
+	CertificateExpiryTime *time.Time
+
+	// The DNS resolution mode for the resource gateway.
+	DnsResolution ResourceConfigDnsResolution
+
+	// A message describing why the private connection entered a failed state, if
+	// applicable.
+	FailureMessage *string
+
+	// The IP address or DNS name of the target resource.
+	HostAddress *string
+
+	// The identifier or ARN of the VPC Lattice resource configuration.
+	ResourceConfigurationId *string
+
+	// The identifier or ARN of the VPC Lattice resource gateway.
+	ResourceGatewayId *string
+
+	// The tags attached to the private connection.
+	Tags map[string]string
+
+	// The identifier of the VPC the resource gateway is created in.
+	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The provider-specific input for creating an integration. This is a union type
@@ -3920,10 +2626,52 @@ func (v *PentestSummary) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	ProviderInputMemberAzureDevOps
+//	ProviderInputMemberBitbucket
+//	ProviderInputMemberBitbucketDataCenter
+//	ProviderInputMemberConfluence
 //	ProviderInputMemberGithub
+//	ProviderInputMemberGitlab
+//	ProviderInputMemberJira
 type ProviderInput interface {
 	isProviderInput()
 }
+
+// The Azure DevOps-specific input for creating an integration.
+type ProviderInputMemberAzureDevOps struct {
+	Value AzureDevOpsIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberAzureDevOps) isProviderInput() {}
+
+// The configuration for a Bitbucket integration.
+type ProviderInputMemberBitbucket struct {
+	Value BitbucketIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberBitbucket) isProviderInput() {}
+
+// The Bitbucket Data Center-specific input for creating an integration.
+type ProviderInputMemberBitbucketDataCenter struct {
+	Value BitbucketDataCenterIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberBitbucketDataCenter) isProviderInput() {}
+
+// The configuration for a Confluence integration.
+type ProviderInputMemberConfluence struct {
+	Value ConfluenceIntegrationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderInputMemberConfluence) isProviderInput() {}
 
 // The GitHub-specific input for creating an integration.
 type ProviderInputMemberGithub struct {
@@ -3933,24 +2681,66 @@ type ProviderInputMemberGithub struct {
 }
 
 func (*ProviderInputMemberGithub) isProviderInput() {}
-func (v *ProviderInputMemberGithub) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProviderInput_github)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
+
+// The configuration for a GitLab integration.
+type ProviderInputMemberGitlab struct {
+	Value GitLabIntegrationInput
+
+	noSmithyDocumentSerde
 }
-func (v *ProviderInputMemberGithub) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
+
+func (*ProviderInputMemberGitlab) isProviderInput() {}
+
+// The configuration for a Jira integration.
+type ProviderInputMemberJira struct {
+	Value JiraIntegrationInput
+
+	noSmithyDocumentSerde
 }
+
+func (*ProviderInputMemberJira) isProviderInput() {}
 
 // The capabilities for an integrated resource from a third-party provider. This
 // is a union type that contains provider-specific capabilities.
 //
 // The following types satisfy this interface:
 //
+//	ProviderResourceCapabilitiesMemberAzureDevOps
+//	ProviderResourceCapabilitiesMemberBitbucket
+//	ProviderResourceCapabilitiesMemberConfluence
 //	ProviderResourceCapabilitiesMemberGithub
+//	ProviderResourceCapabilitiesMemberGitlab
+//	ProviderResourceCapabilitiesMemberJira
 type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
+
+// The Azure DevOps-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberAzureDevOps struct {
+	Value AzureDevOpsResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberAzureDevOps) isProviderResourceCapabilities() {}
+
+// Capabilities for an integrated Bitbucket repository.
+type ProviderResourceCapabilitiesMemberBitbucket struct {
+	Value BitbucketResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberBitbucket) isProviderResourceCapabilities() {}
+
+// Capabilities for an integrated Confluence space.
+type ProviderResourceCapabilitiesMemberConfluence struct {
+	Value ConfluenceResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberConfluence) isProviderResourceCapabilities() {}
 
 // The GitHub-specific resource capabilities.
 type ProviderResourceCapabilitiesMemberGithub struct {
@@ -3960,13 +2750,273 @@ type ProviderResourceCapabilitiesMemberGithub struct {
 }
 
 func (*ProviderResourceCapabilitiesMemberGithub) isProviderResourceCapabilities() {}
-func (v *ProviderResourceCapabilitiesMemberGithub) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProviderResourceCapabilities_github)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
+
+// Capabilities for an integrated GitLab repository.
+type ProviderResourceCapabilitiesMemberGitlab struct {
+	Value GitLabResourceCapabilities
+
+	noSmithyDocumentSerde
 }
-func (v *ProviderResourceCapabilitiesMemberGithub) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
+
+func (*ProviderResourceCapabilitiesMemberGitlab) isProviderResourceCapabilities() {}
+
+// The Jira-specific resource capabilities.
+type ProviderResourceCapabilitiesMemberJira struct {
+	Value JiraResourceCapabilities
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderResourceCapabilitiesMemberJira) isProviderResourceCapabilities() {}
+
+// Destination for publishing scan reports to an integrated document provider.
+type ReportDestination struct {
+
+	// The container identifier where the report will be published.
+	//
+	// This member is required.
+	ContainerId *string
+
+	// The integration identifier for the document provider.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The existing document identifier to update instead of creating a new document.
+	DocumentId *string
+
+	// The parent document identifier under which the report will be created.
+	ParentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The report-generation filters applied when a pentest or code review report is
+// exported.
+type ReportFilters struct {
+
+	// Whether to include reviewer annotation notes under each finding.
+	AnnotationNotes *bool
+
+	// Whether to include the compliance-ready report additions.
+	ComplianceReport *bool
+
+	// The confidence levels to include in the report.
+	ConfidenceLevels []ConfidenceLevel
+
+	// The finding types to include in the report.
+	FindingTypes []string
+
+	// The severity levels to include in the report.
+	RiskLevels []RiskLevel
+
+	// The risk types to include in the report.
+	RiskTypes []RiskType
+
+	// The finding statuses to include in the report.
+	Statuses []FindingStatus
+
+	// The task execution statuses to include in the report's task table.
+	TaskStatuses []TaskExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// A code change in a CI/CD pipeline run that defines what a CI/CD pentest job
+// tests. Each scope change identifies an integrated repository and the commit
+// range for the change.
+type ScopeChange struct {
+
+	// The commit SHA at the tip of the change to be tested.
+	//
+	// This member is required.
+	HeadCommitSha *string
+
+	// The identifier of the integration for the source-code provider that hosts the
+	// repository.
+	//
+	// This member is required.
+	IntegrationId *string
+
+	// The provider-specific identifier of the repository the change belongs to.
+	//
+	// This member is required.
+	ProviderResourceId *string
+
+	// The commit SHA that the change is compared against. When omitted, the change is
+	// evaluated against the head commit alone.
+	BaseCommitSha *string
+
+	// The identifier of the CI/CD pipeline run that triggered this pentest job.
+	TriggerRunId *string
+
+	noSmithyDocumentSerde
+}
+
+// The outcome of scoping a CI/CD pentest job's code changes, including the
+// decision and the reason for it.
+type ScopeResult struct {
+
+	// The scoping decision for the job's code changes.
+	//
+	// This member is required.
+	Decision ScopeDecision
+
+	// A human-readable explanation of the scoping decision.
+	//
+	// This member is required.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// A document used as source material for importing security requirements.
+type SecurityRequirementArtifact struct {
+
+	// The binary content of the document.
+	//
+	// This member is required.
+	Content []byte
+
+	// The format of the document. Valid values are MD, PDF, TXT, DOCX, and DOC.
+	//
+	// This member is required.
+	Format SecurityRequirementArtifactFormat
+
+	// The file name of the document.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a security requirement pack.
+type SecurityRequirementPackSummary struct {
+
+	// The date and time the security requirement pack was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The management type of the pack.
+	//
+	// This member is required.
+	ManagementType ManagementType
+
+	// The name of the security requirement pack.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the security requirement pack.
+	//
+	// This member is required.
+	PackId *string
+
+	// The status of the security requirement pack.
+	//
+	// This member is required.
+	Status SecurityRequirementPackStatus
+
+	// The date and time the security requirement pack was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the security requirement pack.
+	Description *string
+
+	// The vendor name for AWS managed packs.
+	VendorName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a security requirement.
+type SecurityRequirementSummary struct {
+
+	// The date and time the security requirement was created, in UTC format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A description of the security requirement.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the security requirement.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier of the pack containing the security requirement.
+	//
+	// This member is required.
+	PackId *string
+
+	// The date and time the security requirement was last updated, in UTC format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a self-managed private connection.
+type SelfManagedInput struct {
+
+	// The identifier or ARN of the resource configuration.
+	//
+	// This member is required.
+	ResourceConfigurationId *string
+
+	// The certificate for the private connection.
+	Certificate *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a service-managed private connection.
+type ServiceManagedInput struct {
+
+	// The IP address or DNS name of the target resource.
+	//
+	// This member is required.
+	HostAddress *string
+
+	// The subnets that the service-managed resource gateway spans.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The VPC to create the service-managed resource gateway in.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The certificate for the private connection.
+	Certificate *string
+
+	// The DNS resolution mode for the resource gateway. Defaults to PUBLIC when not
+	// set.
+	DnsResolution ResourceConfigDnsResolution
+
+	// The IP address type of the service-managed resource gateway.
+	IpAddressType IpAddressType
+
+	// The number of IPv4 addresses in each elastic network interface for the
+	// service-managed resource gateway.
+	Ipv4AddressesPerEni *int32
+
+	// The TCP port ranges that a consumer can use to access the resource.
+	PortRanges []string
+
+	// The security groups to attach to the service-managed resource gateway.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a source code repository used for security analysis during a pentest.
@@ -3978,28 +3028,6 @@ type SourceCodeRepository struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SourceCodeRepository) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SourceCodeRepository)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SourceCodeRepository) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Location != nil {
-		s.WriteString(schemas.SourceCodeRepository_s3Location, *v.S3Location)
-	}
-}
-func (v *SourceCodeRepository) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SourceCodeRepository, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SourceCodeRepository_s3Location:
-			v.S3Location = new(string)
-			return d.ReadString(schemas.SourceCodeRepository_s3Location, v.S3Location)
-		}
-		return nil
-	})
-}
-
 // Represents a step in the pentest job execution pipeline. Steps include
 // preflight, static analysis, pentest, and finalizing.
 type Step struct {
@@ -4008,7 +3036,7 @@ type Step struct {
 	CreatedAt *time.Time
 
 	// The name of the step. Valid values include PREFLIGHT, STATIC_ANALYSIS, PENTEST,
-	// and FINALIZING.
+	// VALIDATION, and FINALIZING.
 	Name StepName
 
 	// The current status of the step.
@@ -4018,54 +3046,6 @@ type Step struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *Step) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Step)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Step_createdAt, *v.CreatedAt)
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.Step_name, string(v.Name))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Step_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Step_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Step_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Step_createdAt, v.CreatedAt)
-		case schemas.Step_name:
-			var ev string
-			if err := d.ReadString(schemas.Step_name, &ev); err != nil {
-				return err
-			}
-			v.Name = StepName(ev)
-			return nil
-		case schemas.Step_status:
-			var ev string
-			if err := d.ReadString(schemas.Step_status, &ev); err != nil {
-				return err
-			}
-			v.Status = StepStatus(ev)
-			return nil
-		case schemas.Step_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Step_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Represents a target domain registered for penetration testing. A target domain
@@ -4101,70 +3081,6 @@ type TargetDomain struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TargetDomain) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TargetDomain)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TargetDomain) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.TargetDomain_createdAt, *v.CreatedAt)
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.TargetDomain_domainName, *v.DomainName)
-	}
-	if v.TargetDomainId != nil {
-		s.WriteString(schemas.TargetDomain_targetDomainId, *v.TargetDomainId)
-	}
-	if v.VerificationDetails != nil {
-		s.WriteStruct(schemas.TargetDomain_verificationDetails)
-		v.VerificationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VerificationStatus != "" {
-		s.WriteString(schemas.TargetDomain_verificationStatus, string(v.VerificationStatus))
-	}
-	if v.VerificationStatusReason != nil {
-		s.WriteString(schemas.TargetDomain_verificationStatusReason, *v.VerificationStatusReason)
-	}
-	if v.VerifiedAt != nil {
-		s.WriteTime(schemas.TargetDomain_verifiedAt, *v.VerifiedAt)
-	}
-}
-func (v *TargetDomain) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TargetDomain, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TargetDomain_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.TargetDomain_createdAt, v.CreatedAt)
-		case schemas.TargetDomain_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.TargetDomain_domainName, v.DomainName)
-		case schemas.TargetDomain_targetDomainId:
-			v.TargetDomainId = new(string)
-			return d.ReadString(schemas.TargetDomain_targetDomainId, v.TargetDomainId)
-		case schemas.TargetDomain_verificationDetails:
-			v.VerificationDetails = &VerificationDetails{}
-			return v.VerificationDetails.Deserialize(d)
-		case schemas.TargetDomain_verificationStatus:
-			var ev string
-			if err := d.ReadString(schemas.TargetDomain_verificationStatus, &ev); err != nil {
-				return err
-			}
-			v.VerificationStatus = TargetDomainStatus(ev)
-			return nil
-		case schemas.TargetDomain_verificationStatusReason:
-			v.VerificationStatusReason = new(string)
-			return d.ReadString(schemas.TargetDomain_verificationStatusReason, v.VerificationStatusReason)
-		case schemas.TargetDomain_verifiedAt:
-			v.VerifiedAt = new(time.Time)
-			return d.ReadTime(schemas.TargetDomain_verifiedAt, v.VerifiedAt)
-		}
-		return nil
-	})
-}
-
 // Contains summary information about a target domain.
 type TargetDomainSummary struct {
 
@@ -4182,44 +3098,6 @@ type TargetDomainSummary struct {
 	VerificationStatus TargetDomainStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *TargetDomainSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TargetDomainSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TargetDomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.TargetDomainSummary_domainName, *v.DomainName)
-	}
-	if v.TargetDomainId != nil {
-		s.WriteString(schemas.TargetDomainSummary_targetDomainId, *v.TargetDomainId)
-	}
-	if v.VerificationStatus != "" {
-		s.WriteString(schemas.TargetDomainSummary_verificationStatus, string(v.VerificationStatus))
-	}
-}
-func (v *TargetDomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TargetDomainSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TargetDomainSummary_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.TargetDomainSummary_domainName, v.DomainName)
-		case schemas.TargetDomainSummary_targetDomainId:
-			v.TargetDomainId = new(string)
-			return d.ReadString(schemas.TargetDomainSummary_targetDomainId, v.TargetDomainId)
-		case schemas.TargetDomainSummary_verificationStatus:
-			var ev string
-			if err := d.ReadString(schemas.TargetDomainSummary_verificationStatus, &ev); err != nil {
-				return err
-			}
-			v.VerificationStatus = TargetDomainStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents an individual security test task within a pentest job. Each task
@@ -4261,6 +3139,9 @@ type Task struct {
 	// The target endpoint being tested by the task.
 	TargetEndpoint *Endpoint
 
+	// The number of active work hours consumed by the task during execution.
+	TaskHours *float64
+
 	// The title of the task.
 	Title *string
 
@@ -4268,109 +3149,6 @@ type Task struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *Task) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Task)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Task) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.Task_agentSpaceId, *v.AgentSpaceId)
-	}
-	serializeCategoryList(s, schemas.Task_categories, v.Categories)
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Task_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Task_description, *v.Description)
-	}
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.Task_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.LogsLocation != nil {
-		s.WriteStruct(schemas.Task_logsLocation)
-		v.LogsLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.Task_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.Task_pentestJobId, *v.PentestJobId)
-	}
-	if v.RiskType != "" {
-		s.WriteString(schemas.Task_riskType, string(v.RiskType))
-	}
-	if v.TargetEndpoint != nil {
-		s.WriteStruct(schemas.Task_targetEndpoint)
-		v.TargetEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.Task_taskId, *v.TaskId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.Task_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Task_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Task) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Task, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Task_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.Task_agentSpaceId, v.AgentSpaceId)
-		case schemas.Task_categories:
-			return deserializeCategoryList(d, schemas.Task_categories, &v.Categories)
-		case schemas.Task_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Task_createdAt, v.CreatedAt)
-		case schemas.Task_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Task_description, v.Description)
-		case schemas.Task_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.Task_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = TaskExecutionStatus(ev)
-			return nil
-		case schemas.Task_logsLocation:
-			v.LogsLocation = &LogLocation{}
-			return v.LogsLocation.Deserialize(d)
-		case schemas.Task_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.Task_pentestId, v.PentestId)
-		case schemas.Task_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.Task_pentestJobId, v.PentestJobId)
-		case schemas.Task_riskType:
-			var ev string
-			if err := d.ReadString(schemas.Task_riskType, &ev); err != nil {
-				return err
-			}
-			v.RiskType = RiskType(ev)
-			return nil
-		case schemas.Task_targetEndpoint:
-			v.TargetEndpoint = &Endpoint{}
-			return v.TargetEndpoint.Deserialize(d)
-		case schemas.Task_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.Task_taskId, v.TaskId)
-		case schemas.Task_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.Task_title, v.Title)
-		case schemas.Task_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Task_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a task.
@@ -4399,6 +3177,9 @@ type TaskSummary struct {
 	// The type of security risk the task is testing for.
 	RiskType RiskType
 
+	// The number of active work hours consumed by the task during execution.
+	TaskHours *float64
+
 	// The title of the task.
 	Title *string
 
@@ -4408,82 +3189,452 @@ type TaskSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TaskSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TaskSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// The category of application a pentest targets.
+type TestScope struct {
+
+	// The category of application under test.
+	//
+	// This member is required.
+	Type TestScopeType
+
+	noSmithyDocumentSerde
 }
 
-func (v *TaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.TaskSummary_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.TaskSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.TaskSummary_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.PentestId != nil {
-		s.WriteString(schemas.TaskSummary_pentestId, *v.PentestId)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.TaskSummary_pentestJobId, *v.PentestJobId)
-	}
-	if v.RiskType != "" {
-		s.WriteString(schemas.TaskSummary_riskType, string(v.RiskType))
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.TaskSummary_taskId, *v.TaskId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.TaskSummary_title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.TaskSummary_updatedAt, *v.UpdatedAt)
-	}
+// Represents a threat identified during threat modeling.
+type Threat struct {
+
+	// The DFD element this threat is anchored to.
+	Anchor *ThreatAnchorShape
+
+	// Optional customer comment on the threat.
+	Comments *string
+
+	// The date and time the threat was created, in UTC format.
+	CreatedAt *time.Time
+
+	// Who created this threat.
+	CreatedBy ThreatActor
+
+	// The source code files supporting the threat.
+	Evidence []ThreatEvidenceShape
+
+	// The specific assets affected by the threat.
+	ImpactedAssets []string
+
+	// The security goals affected by the threat.
+	ImpactedGoal []string
+
+	// The conditions required for the threat to be exploitable.
+	Prerequisites *string
+
+	// The recommended mitigation guidance for this threat.
+	Recommendation *string
+
+	// The severity level of the threat.
+	Severity ThreatSeverity
+
+	// The natural-language threat statement.
+	Statement *string
+
+	// The current status of the threat.
+	Status ThreatStatus
+
+	// The STRIDE categories applicable to this threat.
+	Stride []StrideCategory
+
+	// What the threat source can do.
+	ThreatAction *string
+
+	// The unique identifier of the threat.
+	ThreatId *string
+
+	// The direct consequence of the threat action.
+	ThreatImpact *string
+
+	// The unique identifier of the threat model job that produced the threat.
+	ThreatJobId *string
+
+	// The actor or origin of the threat.
+	ThreatSource *string
+
+	// A short title summarizing the threat.
+	Title *string
+
+	// The date and time the threat was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	// Who last updated this threat.
+	UpdatedBy ThreatActor
+
+	noSmithyDocumentSerde
 }
-func (v *TaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TaskSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TaskSummary_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.TaskSummary_agentSpaceId, v.AgentSpaceId)
-		case schemas.TaskSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.TaskSummary_createdAt, v.CreatedAt)
-		case schemas.TaskSummary_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.TaskSummary_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = TaskExecutionStatus(ev)
-			return nil
-		case schemas.TaskSummary_pentestId:
-			v.PentestId = new(string)
-			return d.ReadString(schemas.TaskSummary_pentestId, v.PentestId)
-		case schemas.TaskSummary_pentestJobId:
-			v.PentestJobId = new(string)
-			return d.ReadString(schemas.TaskSummary_pentestJobId, v.PentestJobId)
-		case schemas.TaskSummary_riskType:
-			var ev string
-			if err := d.ReadString(schemas.TaskSummary_riskType, &ev); err != nil {
-				return err
-			}
-			v.RiskType = RiskType(ev)
-			return nil
-		case schemas.TaskSummary_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.TaskSummary_taskId, v.TaskId)
-		case schemas.TaskSummary_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.TaskSummary_title, v.Title)
-		case schemas.TaskSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.TaskSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
+
+// DFD element that a threat is anchored to.
+type ThreatAnchorShape struct {
+
+	// The identifier of the DFD element.
+	Id *string
+
+	// The kind of DFD element.
+	Kind *string
+
+	// The package identifier containing the DFD element.
+	PackageId *string
+
+	noSmithyDocumentSerde
+}
+
+// Source code file supporting a threat.
+type ThreatEvidenceShape struct {
+
+	// The package identifier containing the evidence file.
+	PackageId *string
+
+	// The file path of the evidence.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a threat model configuration that defines the parameters for
+// automated threat analysis, including target assets and logging configuration.
+type ThreatModel struct {
+
+	// The unique identifier of the agent space that contains the threat model.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The assets included in the threat model.
+	//
+	// This member is required.
+	Assets *Assets
+
+	// The unique identifier of the threat model.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The title of the threat model.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the threat model was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the application or system being threat modeled.
+	Description *string
+
+	// The CloudWatch Logs configuration for the threat model.
+	LogConfig *CloudWatchLog
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The scoped documents for the agent to focus on during threat modeling.
+	ScopeDocs []DocumentInfo
+
+	// The IAM service role used for the threat model.
+	ServiceRole *string
+
+	// The date and time the threat model was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a threat model job, which is an execution instance of a threat model.
+type ThreatModelJob struct {
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the threat model job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The list of documents used for threat modeling.
+	Documents []DocumentInfo
+
+	// Error information if the threat model job encountered an error.
+	ErrorInformation *ErrorInformation
+
+	// The date and time the threat model job execution ended, in UTC format.
+	ExecutionEndTime *time.Time
+
+	// The date and time the threat model job execution started, in UTC format.
+	ExecutionStartTime *time.Time
+
+	// The list of integrated repositories used for threat modeling.
+	IntegratedRepositories []IntegratedRepository
+
+	// The destination for publishing scan reports to an integrated document provider.
+	ReportDestination *ReportDestination
+
+	// The scoped documents for the agent to focus on during threat modeling.
+	ScopeDocs []DocumentInfo
+
+	// The list of source code repositories used for threat modeling.
+	SourceCode []SourceCodeRepository
+
+	// The current status of the threat model job.
+	Status JobStatus
+
+	// The system overview generated during threat modeling.
+	SystemOverview *string
+
+	// The unique identifier of the threat model associated with the job.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job.
+	ThreatModelJobId *string
+
+	// The title of the threat model job.
+	Title *string
+
+	// The date and time the threat model job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model job.
+type ThreatModelJobSummary struct {
+
+	// The unique identifier of the threat model associated with the job.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job.
+	//
+	// This member is required.
+	ThreatModelJobId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the threat model job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current status of the threat model job.
+	Status JobStatus
+
+	// The title of the threat model job.
+	Title *string
+
+	// The date and time the threat model job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an individual task within a threat model job.
+type ThreatModelJobTask struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the task.
+	Description *string
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The location of the task execution logs.
+	LogsLocation *LogLocation
+
+	// The unique identifier of the threat model associated with the task.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job that contains the task.
+	ThreatModelJobId *string
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model job task.
+type ThreatModelJobTaskSummary struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The unique identifier of the threat model associated with the task.
+	ThreatModelId *string
+
+	// The unique identifier of the threat model job that contains the task.
+	ThreatModelJobId *string
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat model.
+type ThreatModelSummary struct {
+
+	// The unique identifier of the agent space that contains the threat model.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The unique identifier of the threat model.
+	//
+	// This member is required.
+	ThreatModelId *string
+
+	// The title of the threat model.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the threat model was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The date and time the threat model was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a threat.
+type ThreatSummary struct {
+
+	// The date and time the threat was created, in UTC format.
+	CreatedAt *time.Time
+
+	// Who created this threat.
+	CreatedBy ThreatActor
+
+	// The severity level of the threat.
+	Severity ThreatSeverity
+
+	// The natural-language threat statement.
+	Statement *string
+
+	// The current status of the threat.
+	Status ThreatStatus
+
+	// The STRIDE categories applicable to this threat.
+	Stride []StrideCategory
+
+	// The unique identifier of the threat.
+	ThreatId *string
+
+	// The unique identifier of the threat model job that produced the threat.
+	ThreatJobId *string
+
+	// A short title summarizing the threat.
+	Title *string
+
+	// The date and time the threat was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	// Who last updated this threat.
+	UpdatedBy ThreatActor
+
+	noSmithyDocumentSerde
+}
+
+// A condition on a pull request value.
+type TriggerFilter struct {
+
+	// The regular expressions to match against the value.
+	//
+	// This member is required.
+	Patterns []string
+
+	// The pull request value to match.
+	//
+	// This member is required.
+	Type TriggerFilterType
+
+	// Whether the value must match the patterns. The default is INCLUDE .
+	MatchMode TriggerFilterMatchMode
+
+	noSmithyDocumentSerde
+}
+
+// A set of conditions that start an automatic code review when they all pass. A
+// filter group must include events , filters , or both.
+type TriggerFilterGroup struct {
+
+	// Passes when the pull request event is one of the listed events. If you omit
+	// this, the group matches PULL_REQUEST_READY_FOR_REVIEW and PULL_REQUEST_DRAFT
+	// events only.
+	Events []TriggerEvent
+
+	// Passes when every filter passes. If you omit this, the group matches its events
+	// on any target branch and with any labels.
+	Filters []TriggerFilter
+
+	noSmithyDocumentSerde
+}
+
+// A trust anchor used when validating a target endpoint's TLS certificate.
+type TrustedCaCertificate struct {
+
+	// The source that Security Agent reads the certificate from.
+	//
+	// This member is required.
+	Source CaCertificateSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details for updating an existing security requirement within a
+// pack. The name is an immutable identifier used to locate the requirement and
+// cannot be modified.
+type UpdateSecurityRequirementEntry struct {
+
+	// The name of the security requirement to update. This is an immutable identifier
+	// and cannot be changed once the requirement is created.
+	//
+	// This member is required.
+	Name *string
+
+	// The updated description of the security requirement.
+	Description *string
+
+	// The updated security domain the requirement belongs to.
+	Domain *string
+
+	// The updated evaluation criteria used to assess compliance with this requirement.
+	Evaluation *string
+
+	// The updated remediation steps when the requirement is not met.
+	Remediation *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a user membership, including the role assigned to the
@@ -4494,32 +3645,6 @@ type UserConfig struct {
 	Role UserRole
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Role != "" {
-		s.WriteString(schemas.UserConfig_role, string(v.Role))
-	}
-}
-func (v *UserConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserConfig_role:
-			var ev string
-			if err := d.ReadString(schemas.UserConfig_role, &ev); err != nil {
-				return err
-			}
-			v.Role = UserRole(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains metadata about a user member, including the username and email address.
@@ -4536,34 +3661,6 @@ type UserMetadata struct {
 	Username *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Email != nil {
-		s.WriteString(schemas.UserMetadata_email, *v.Email)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.UserMetadata_username, *v.Username)
-	}
-}
-func (v *UserMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserMetadata_email:
-			v.Email = new(string)
-			return d.ReadString(schemas.UserMetadata_email, v.Email)
-		case schemas.UserMetadata_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.UserMetadata_username, v.Username)
-		}
-		return nil
-	})
 }
 
 // Describes one specific validation failure for an input member.
@@ -4583,34 +3680,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
-		}
-		return nil
-	})
-}
-
 // Contains the verification details for a target domain, including the
 // verification method and provider-specific details.
 type VerificationDetails struct {
@@ -4625,48 +3694,6 @@ type VerificationDetails struct {
 	Method DomainVerificationMethod
 
 	noSmithyDocumentSerde
-}
-
-func (v *VerificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DnsTxt != nil {
-		s.WriteStruct(schemas.VerificationDetails_dnsTxt)
-		v.DnsTxt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HttpRoute != nil {
-		s.WriteStruct(schemas.VerificationDetails_httpRoute)
-		v.HttpRoute.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Method != "" {
-		s.WriteString(schemas.VerificationDetails_method, string(v.Method))
-	}
-}
-func (v *VerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerificationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerificationDetails_dnsTxt:
-			v.DnsTxt = &DnsVerification{}
-			return v.DnsTxt.Deserialize(d)
-		case schemas.VerificationDetails_httpRoute:
-			v.HttpRoute = &HttpVerification{}
-			return v.HttpRoute.Deserialize(d)
-		case schemas.VerificationDetails_method:
-			var ev string
-			if err := d.ReadString(schemas.VerificationDetails_method, &ev); err != nil {
-				return err
-			}
-			v.Method = DomainVerificationMethod(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains metadata for a verification script that can be used to reproduce a
@@ -4689,43 +3716,6 @@ type VerificationScript struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VerificationScript) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationScript)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VerificationScript) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVerificationScriptEnvVarList(s, schemas.VerificationScript_envVars, v.EnvVars)
-	if v.Instructions != nil {
-		s.WriteString(schemas.VerificationScript_instructions, *v.Instructions)
-	}
-	if v.ScriptType != nil {
-		s.WriteString(schemas.VerificationScript_scriptType, *v.ScriptType)
-	}
-	if v.ScriptUrl != nil {
-		s.WriteString(schemas.VerificationScript_scriptUrl, *v.ScriptUrl)
-	}
-}
-func (v *VerificationScript) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerificationScript, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerificationScript_envVars:
-			return deserializeVerificationScriptEnvVarList(d, schemas.VerificationScript_envVars, &v.EnvVars)
-		case schemas.VerificationScript_instructions:
-			v.Instructions = new(string)
-			return d.ReadString(schemas.VerificationScript_instructions, v.Instructions)
-		case schemas.VerificationScript_scriptType:
-			v.ScriptType = new(string)
-			return d.ReadString(schemas.VerificationScript_scriptType, v.ScriptType)
-		case schemas.VerificationScript_scriptUrl:
-			v.ScriptUrl = new(string)
-			return d.ReadString(schemas.VerificationScript_scriptUrl, v.ScriptUrl)
-		}
-		return nil
-	})
-}
-
 // Represents an environment variable required to run a verification script.
 type VerificationScriptEnvVar struct {
 
@@ -4738,77 +3728,22 @@ type VerificationScriptEnvVar struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VerificationScriptEnvVar) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationScriptEnvVar)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VerificationScriptEnvVar) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.VerificationScriptEnvVar_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.VerificationScriptEnvVar_value, *v.Value)
-	}
-}
-func (v *VerificationScriptEnvVar) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerificationScriptEnvVar, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerificationScriptEnvVar_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.VerificationScriptEnvVar_name, v.Name)
-		case schemas.VerificationScriptEnvVar_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.VerificationScriptEnvVar_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // The VPC configuration for a pentest, specifying the VPC, security groups, and
 // subnets to use during testing.
 type VpcConfig struct {
 
-	// The Amazon Resource Names (ARNs) of the security groups for the VPC
+	// The Amazon Resource Names (ARNs) or IDs of the security groups for the VPC
 	// configuration.
 	SecurityGroupArns []string
 
-	// The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.
+	// The Amazon Resource Names (ARNs) or IDs of the subnets for the VPC
+	// configuration.
 	SubnetArns []string
 
-	// The Amazon Resource Name (ARN) of the VPC.
+	// The Amazon Resource Name (ARN) or ID of the VPC.
 	VpcArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupArns(s, schemas.VpcConfig_securityGroupArns, v.SecurityGroupArns)
-	serializeSubnetArns(s, schemas.VpcConfig_subnetArns, v.SubnetArns)
-	if v.VpcArn != nil {
-		s.WriteString(schemas.VpcConfig_vpcArn, *v.VpcArn)
-	}
-}
-func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcConfig_securityGroupArns:
-			return deserializeSecurityGroupArns(d, schemas.VpcConfig_securityGroupArns, &v.SecurityGroupArns)
-		case schemas.VpcConfig_subnetArns:
-			return deserializeSubnetArns(d, schemas.VpcConfig_subnetArns, &v.SubnetArns)
-		case schemas.VpcConfig_vpcArn:
-			v.VpcArn = new(string)
-			return d.ReadString(schemas.VpcConfig_vpcArn, v.VpcArn)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
@@ -4822,10 +3757,14 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isCaCertificateSource()          {}
+func (*UnknownUnionMember) isDiffSource()                   {}
+func (*UnknownUnionMember) isImportSource()                 {}
 func (*UnknownUnionMember) isIntegratedResource()           {}
 func (*UnknownUnionMember) isIntegratedResourceMetadata()   {}
 func (*UnknownUnionMember) isIntegrationFilter()            {}
 func (*UnknownUnionMember) isMemberMetadata()               {}
 func (*UnknownUnionMember) isMembershipConfig()             {}
+func (*UnknownUnionMember) isPrivateConnectionMode()        {}
 func (*UnknownUnionMember) isProviderInput()                {}
 func (*UnknownUnionMember) isProviderResourceCapabilities() {}

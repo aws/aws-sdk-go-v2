@@ -4,10 +4,9 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a description of the specified consumable resource.
@@ -34,6 +33,18 @@ type DescribeConsumableResourceInput struct {
 	ConsumableResource *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConsumableResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConsumableResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConsumableResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResource != nil {
+		s.WriteString(schemas.DescribeConsumableResourceRequest_consumableResource, *v.ConsumableResource)
+	}
 }
 
 type DescribeConsumableResourceOutput struct {
@@ -82,77 +93,87 @@ type DescribeConsumableResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConsumableResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConsumableResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableQuantity != nil {
+		s.WriteInt64(schemas.DescribeConsumableResourceResponse_availableQuantity, *v.AvailableQuantity)
+	}
+	if v.ConsumableResourceArn != nil {
+		s.WriteString(schemas.DescribeConsumableResourceResponse_consumableResourceArn, *v.ConsumableResourceArn)
+	}
+	if v.ConsumableResourceName != nil {
+		s.WriteString(schemas.DescribeConsumableResourceResponse_consumableResourceName, *v.ConsumableResourceName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteInt64(schemas.DescribeConsumableResourceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.InUseQuantity != nil {
+		s.WriteInt64(schemas.DescribeConsumableResourceResponse_inUseQuantity, *v.InUseQuantity)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeConsumableResourceResponse_resourceType, *v.ResourceType)
+	}
+	serializeTagrisTagsMap(s, schemas.DescribeConsumableResourceResponse_tags, v.Tags)
+	if v.TotalQuantity != nil {
+		s.WriteInt64(schemas.DescribeConsumableResourceResponse_totalQuantity, *v.TotalQuantity)
+	}
+}
+func (v *DescribeConsumableResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConsumableResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConsumableResourceResponse_availableQuantity:
+			v.AvailableQuantity = new(int64)
+			return d.ReadInt64(schemas.DescribeConsumableResourceResponse_availableQuantity, v.AvailableQuantity)
+		case schemas.DescribeConsumableResourceResponse_consumableResourceArn:
+			v.ConsumableResourceArn = new(string)
+			return d.ReadString(schemas.DescribeConsumableResourceResponse_consumableResourceArn, v.ConsumableResourceArn)
+		case schemas.DescribeConsumableResourceResponse_consumableResourceName:
+			v.ConsumableResourceName = new(string)
+			return d.ReadString(schemas.DescribeConsumableResourceResponse_consumableResourceName, v.ConsumableResourceName)
+		case schemas.DescribeConsumableResourceResponse_createdAt:
+			v.CreatedAt = new(int64)
+			return d.ReadInt64(schemas.DescribeConsumableResourceResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeConsumableResourceResponse_inUseQuantity:
+			v.InUseQuantity = new(int64)
+			return d.ReadInt64(schemas.DescribeConsumableResourceResponse_inUseQuantity, v.InUseQuantity)
+		case schemas.DescribeConsumableResourceResponse_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeConsumableResourceResponse_resourceType, v.ResourceType)
+		case schemas.DescribeConsumableResourceResponse_tags:
+			return deserializeTagrisTagsMap(d, schemas.DescribeConsumableResourceResponse_tags, &v.Tags)
+		case schemas.DescribeConsumableResourceResponse_totalQuantity:
+			v.TotalQuantity = new(int64)
+			return d.ReadInt64(schemas.DescribeConsumableResourceResponse_totalQuantity, v.TotalQuantity)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConsumableResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConsumableResource, schemas.DescribeConsumableResourceRequest, schemas.DescribeConsumableResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConsumableResource, schemas.DescribeConsumableResourceRequest, schemas.DescribeConsumableResourceResponse), output: &DescribeConsumableResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConsumableResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConsumableResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConsumableResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConsumableResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +188,8 @@ func (c *Client) addOperationDescribeConsumableResourceMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConsumableResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConsumableResource",
-	}
 }

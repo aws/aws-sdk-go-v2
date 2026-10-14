@@ -1,0 +1,5 @@
+POST /2025-09-09/microvms/__MicrovmIdentifier__/shell-auth-token
+
+Content-Type: application/json
+
+{"expirationInMinutes":1}

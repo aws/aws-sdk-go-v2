@@ -5,12 +5,8 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a responder gateway.
@@ -33,7 +29,19 @@ func (c *Client) CreateResponderGateway(ctx context.Context, params *CreateRespo
 
 type CreateResponderGatewayInput struct {
 
-	// The unique client token.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same clientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	//
 	// This member is required.
 	ClientToken *string
@@ -53,7 +61,10 @@ type CreateResponderGatewayInput struct {
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The unique identifiers of the subnets.
+	// Unique identifiers of the subnets. A service quota for your account sets the
+	// number of Availability Zones that your subnets can span. By default, this quota
+	// is one Availability Zone. To span more Availability Zones, request a quota
+	// increase.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -62,6 +73,29 @@ type CreateResponderGatewayInput struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. Valid values are the following:
+	//
+	//   - AVAILABILITY_ZONE_AFFINITY : RTB Fabric routes each requester's traffic to
+	//   gateway capacity in the requester's own Availability Zone when the gateway has
+	//   capacity available there. Otherwise, RTB Fabric routes the traffic to gateway
+	//   capacity in the other Availability Zones of the gateway.
+	//
+	//   - ANY_AVAILABILITY_ZONE : RTB Fabric routes each requester's traffic to
+	//   gateway capacity in every Availability Zone that the subnets of the gateway
+	//   span. The Availability Zone that the requester is in does not change this.
+	//
+	// If you don't specify a value, RTB Fabric uses AVAILABILITY_ZONE_AFFINITY . To
+	// get the behavior of ANY_AVAILABILITY_ZONE , create the gateway with subnets in
+	// more than one Availability Zone. RTB Fabric does not support partial
+	// Availability Zone affinity, so PARTIAL_AVAILABILITY_ZONE_AFFINITY is not a
+	// valid value. For more information, see [Configuring Availability Zone affinity]in the Amazon Web Services RTB Fabric
+	// User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
 
 	// An optional description for the responder gateway.
 	Description *string
@@ -88,50 +122,6 @@ type CreateResponderGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResponderGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateResponderGatewayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateResponderGatewayRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateResponderGatewayRequest_description, *v.Description)
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.CreateResponderGatewayRequest_domainName, *v.DomainName)
-	}
-	if v.GatewayType != "" {
-		s.WriteString(schemas.CreateResponderGatewayRequest_gatewayType, string(v.GatewayType))
-	}
-	if v.ListenerConfig != nil {
-		s.WriteStruct(schemas.CreateResponderGatewayRequest_listenerConfig)
-		v.ListenerConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeManagedEndpointConfiguration(s, schemas.CreateResponderGatewayRequest_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateResponderGatewayRequest_port, *v.Port)
-	}
-	if v.Protocol != "" {
-		s.WriteString(schemas.CreateResponderGatewayRequest_protocol, string(v.Protocol))
-	}
-	serializeSecurityGroupIdList(s, schemas.CreateResponderGatewayRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateResponderGatewayRequest_subnetIds, v.SubnetIds)
-	serializeTagsMap(s, schemas.CreateResponderGatewayRequest_tags, v.Tags)
-	if v.TrustStoreConfiguration != nil {
-		s.WriteStruct(schemas.CreateResponderGatewayRequest_trustStoreConfiguration)
-		v.TrustStoreConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.CreateResponderGatewayRequest_vpcId, *v.VpcId)
-	}
-}
-
 type CreateResponderGatewayOutput struct {
 
 	// The unique identifier of the gateway.
@@ -143,6 +133,14 @@ type CreateResponderGatewayOutput struct {
 	//
 	// This member is required.
 	Status types.ResponderGatewayStatus
+
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. For more information, see [Configuring Availability Zone affinity]in the Amazon Web
+	// Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
 
 	// The external inbound endpoint for the responder gateway.
 	ExternalInboundEndpoint *string
@@ -156,86 +154,23 @@ type CreateResponderGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateResponderGatewayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateResponderGatewayResponse_externalInboundEndpoint:
-			v.ExternalInboundEndpoint = new(string)
-			return d.ReadString(schemas.CreateResponderGatewayResponse_externalInboundEndpoint, v.ExternalInboundEndpoint)
-		case schemas.CreateResponderGatewayResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.CreateResponderGatewayResponse_gatewayId, v.GatewayId)
-		case schemas.CreateResponderGatewayResponse_listenerConfig:
-			v.ListenerConfig = &types.ListenerConfig{}
-			return v.ListenerConfig.Deserialize(d)
-		case schemas.CreateResponderGatewayResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateResponderGatewayResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ResponderGatewayStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResponderGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResponderGateway, schemas.CreateResponderGatewayRequest, schemas.CreateResponderGatewayResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResponderGateway{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResponderGateway, schemas.CreateResponderGatewayRequest, schemas.CreateResponderGatewayResponse), output: &CreateResponderGatewayOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResponderGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -245,12 +180,6 @@ func (c *Client) addOperationCreateResponderGatewayMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateResponderGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResponderGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -263,12 +192,6 @@ func (c *Client) addOperationCreateResponderGatewayMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -308,12 +231,4 @@ func (m *idempotencyToken_initializeOpCreateResponderGateway) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateResponderGatewayMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateResponderGateway{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateResponderGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResponderGateway",
-	}
 }

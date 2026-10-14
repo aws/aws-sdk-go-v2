@@ -1,0 +1,5 @@
+POST /listDeployments
+
+Content-Type: application/json
+
+{"filters":[{"name":"WORKLOAD_NAME","values":["__Member__","__Member__"]},{"name":"WORKLOAD_NAME","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

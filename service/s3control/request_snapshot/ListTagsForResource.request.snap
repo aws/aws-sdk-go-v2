@@ -1,0 +1,4 @@
+GET /v20180820/tags/__ResourceArn__
+
+X-Amz-Account-Id: AccountId-value
+

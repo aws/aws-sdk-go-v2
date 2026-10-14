@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.UpdateExperience
+
+{"Configuration":{"ContentSourceConfiguration":{"DataSourceIds":["__Member__","__Member__"],"DirectPutContent":true,"FaqIds":["__Member__","__Member__"]},"UserIdentityConfiguration":{"IdentityAttributeName":"__IdentityAttributeName__"}},"Description":"__Description__","Id":"__Id__","IndexId":"__IndexId__","Name":"__Name__","RoleArn":"__RoleArn__"}

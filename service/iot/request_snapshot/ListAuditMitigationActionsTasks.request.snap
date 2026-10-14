@@ -1,0 +1,3 @@
+GET /audit/mitigationactions/tasks?auditTaskId=__AuditTaskId__&endTime=2000-01-01T00%3A00%3A00Z&findingId=__FindingId__&maxResults=1&nextToken=__NextToken__&startTime=2000-01-01T00%3A00%3A00Z&taskStatus=IN_PROGRESS
+
+

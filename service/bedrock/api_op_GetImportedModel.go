@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetImportedModelInput struct {
 	ModelIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetImportedModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImportedModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImportedModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.GetImportedModelRequest_modelIdentifier, *v.ModelIdentifier)
+	}
 }
 
 type GetImportedModelOutput struct {
@@ -76,77 +87,101 @@ type GetImportedModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImportedModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImportedModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImportedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetImportedModelResponse_creationTime, *v.CreationTime)
+	}
+	if v.CustomModelUnits != nil {
+		s.WriteStruct(schemas.GetImportedModelResponse_customModelUnits)
+		v.CustomModelUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstructSupported != nil {
+		s.WriteBool(schemas.GetImportedModelResponse_instructSupported, *v.InstructSupported)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetImportedModelResponse_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetImportedModelResponse_jobName, *v.JobName)
+	}
+	if v.ModelArchitecture != nil {
+		s.WriteString(schemas.GetImportedModelResponse_modelArchitecture, *v.ModelArchitecture)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.GetImportedModelResponse_modelArn, *v.ModelArn)
+	}
+	serializeModelDataSource(s, schemas.GetImportedModelResponse_modelDataSource, v.ModelDataSource)
+	if v.ModelKmsKeyArn != nil {
+		s.WriteString(schemas.GetImportedModelResponse_modelKmsKeyArn, *v.ModelKmsKeyArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.GetImportedModelResponse_modelName, *v.ModelName)
+	}
+}
+func (v *GetImportedModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImportedModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImportedModelResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetImportedModelResponse_creationTime, v.CreationTime)
+		case schemas.GetImportedModelResponse_customModelUnits:
+			v.CustomModelUnits = &types.CustomModelUnits{}
+			return v.CustomModelUnits.Deserialize(d)
+		case schemas.GetImportedModelResponse_instructSupported:
+			v.InstructSupported = new(bool)
+			return d.ReadBool(schemas.GetImportedModelResponse_instructSupported, v.InstructSupported)
+		case schemas.GetImportedModelResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_jobArn, v.JobArn)
+		case schemas.GetImportedModelResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_jobName, v.JobName)
+		case schemas.GetImportedModelResponse_modelArchitecture:
+			v.ModelArchitecture = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_modelArchitecture, v.ModelArchitecture)
+		case schemas.GetImportedModelResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_modelArn, v.ModelArn)
+		case schemas.GetImportedModelResponse_modelDataSource:
+			return deserializeModelDataSource(d, schemas.GetImportedModelResponse_modelDataSource, &v.ModelDataSource)
+		case schemas.GetImportedModelResponse_modelKmsKeyArn:
+			v.ModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_modelKmsKeyArn, v.ModelKmsKeyArn)
+		case schemas.GetImportedModelResponse_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.GetImportedModelResponse_modelName, v.ModelName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImportedModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportedModel, schemas.GetImportedModelRequest, schemas.GetImportedModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImportedModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportedModel, schemas.GetImportedModelRequest, schemas.GetImportedModelResponse), output: &GetImportedModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImportedModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImportedModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetImportedModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImportedModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +196,8 @@ func (c *Client) addOperationGetImportedModelMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetImportedModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetImportedModel",
-	}
 }

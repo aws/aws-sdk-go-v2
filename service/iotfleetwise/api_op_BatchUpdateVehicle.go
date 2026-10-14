@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Updates a group, or batch, of vehicles.
@@ -46,6 +45,25 @@ type BatchUpdateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeupdateVehicleRequestItems(s, schemas.BatchUpdateVehicleRequest_vehicles, v.Vehicles)
+}
+func (v *BatchUpdateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateVehicleRequest_vehicles:
+			return deserializeupdateVehicleRequestItems(d, schemas.BatchUpdateVehicleRequest_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
+
 type BatchUpdateVehicleOutput struct {
 
 	// A list of information about errors returned while updating a batch of vehicles,
@@ -63,77 +81,48 @@ type BatchUpdateVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeupdateVehicleErrors(s, schemas.BatchUpdateVehicleResponse_errors, v.Errors)
+	serializeupdateVehicleResponseItems(s, schemas.BatchUpdateVehicleResponse_vehicles, v.Vehicles)
+}
+func (v *BatchUpdateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateVehicleResponse_errors:
+			return deserializeupdateVehicleErrors(d, schemas.BatchUpdateVehicleResponse_errors, &v.Errors)
+		case schemas.BatchUpdateVehicleResponse_vehicles:
+			return deserializeupdateVehicleResponseItems(d, schemas.BatchUpdateVehicleResponse_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateVehicle, schemas.BatchUpdateVehicleRequest, schemas.BatchUpdateVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateVehicle, schemas.BatchUpdateVehicleRequest, schemas.BatchUpdateVehicleResponse), output: &BatchUpdateVehicleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateVehicle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateVehicle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateVehicleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateVehicle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +137,8 @@ func (c *Client) addOperationBatchUpdateVehicleMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateVehicle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateVehicle",
-	}
 }

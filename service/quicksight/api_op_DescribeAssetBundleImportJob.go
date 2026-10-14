@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,21 @@ type DescribeAssetBundleImportJobInput struct {
 	AwsAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetBundleImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetBundleImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetBundleImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetBundleImportJobId != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobRequest_AssetBundleImportJobId, *v.AssetBundleImportJobId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
 }
 
 type DescribeAssetBundleImportJobOutput struct {
@@ -128,77 +142,146 @@ type DescribeAssetBundleImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetBundleImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetBundleImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_Arn, *v.Arn)
+	}
+	if v.AssetBundleImportJobId != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_AssetBundleImportJobId, *v.AssetBundleImportJobId)
+	}
+	if v.AssetBundleImportSource != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse_AssetBundleImportSource)
+		v.AssetBundleImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribeAssetBundleImportJobResponse_CreatedTime, *v.CreatedTime)
+	}
+	serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_Errors, v.Errors)
+	if v.FailureAction != "" {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_FailureAction, string(v.FailureAction))
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.OverrideParameters != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse_OverrideParameters)
+		v.OverrideParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverridePermissions != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse_OverridePermissions)
+		v.OverridePermissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideTags != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse_OverrideTags)
+		v.OverrideTags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideValidationStrategy != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleImportJobResponse_OverrideValidationStrategy)
+		v.OverrideValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAssetBundleImportJobResponse_RequestId, *v.RequestId)
+	}
+	serializeAssetBundleImportJobErrorList(s, schemas.DescribeAssetBundleImportJobResponse_RollbackErrors, v.RollbackErrors)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAssetBundleImportJobResponse_Status, v.Status)
+	}
+	serializeAssetBundleImportJobWarningList(s, schemas.DescribeAssetBundleImportJobResponse_Warnings, v.Warnings)
+}
+func (v *DescribeAssetBundleImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetBundleImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetBundleImportJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleImportJobResponse_Arn, v.Arn)
+		case schemas.DescribeAssetBundleImportJobResponse_AssetBundleImportJobId:
+			v.AssetBundleImportJobId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleImportJobResponse_AssetBundleImportJobId, v.AssetBundleImportJobId)
+		case schemas.DescribeAssetBundleImportJobResponse_AssetBundleImportSource:
+			v.AssetBundleImportSource = &types.AssetBundleImportSourceDescription{}
+			return v.AssetBundleImportSource.Deserialize(d)
+		case schemas.DescribeAssetBundleImportJobResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleImportJobResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeAssetBundleImportJobResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetBundleImportJobResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribeAssetBundleImportJobResponse_Errors:
+			return deserializeAssetBundleImportJobErrorList(d, schemas.DescribeAssetBundleImportJobResponse_Errors, &v.Errors)
+		case schemas.DescribeAssetBundleImportJobResponse_FailureAction:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetBundleImportJobResponse_FailureAction, &ev); err != nil {
+				return err
+			}
+			v.FailureAction = types.AssetBundleImportFailureAction(ev)
+			return nil
+		case schemas.DescribeAssetBundleImportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetBundleImportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.AssetBundleImportJobStatus(ev)
+			return nil
+		case schemas.DescribeAssetBundleImportJobResponse_OverrideParameters:
+			v.OverrideParameters = &types.AssetBundleImportJobOverrideParameters{}
+			return v.OverrideParameters.Deserialize(d)
+		case schemas.DescribeAssetBundleImportJobResponse_OverridePermissions:
+			v.OverridePermissions = &types.AssetBundleImportJobOverridePermissions{}
+			return v.OverridePermissions.Deserialize(d)
+		case schemas.DescribeAssetBundleImportJobResponse_OverrideTags:
+			v.OverrideTags = &types.AssetBundleImportJobOverrideTags{}
+			return v.OverrideTags.Deserialize(d)
+		case schemas.DescribeAssetBundleImportJobResponse_OverrideValidationStrategy:
+			v.OverrideValidationStrategy = &types.AssetBundleImportJobOverrideValidationStrategy{}
+			return v.OverrideValidationStrategy.Deserialize(d)
+		case schemas.DescribeAssetBundleImportJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleImportJobResponse_RequestId, v.RequestId)
+		case schemas.DescribeAssetBundleImportJobResponse_RollbackErrors:
+			return deserializeAssetBundleImportJobErrorList(d, schemas.DescribeAssetBundleImportJobResponse_RollbackErrors, &v.RollbackErrors)
+		case schemas.DescribeAssetBundleImportJobResponse_Status:
+			return d.ReadInt32(schemas.DescribeAssetBundleImportJobResponse_Status, &v.Status)
+		case schemas.DescribeAssetBundleImportJobResponse_Warnings:
+			return deserializeAssetBundleImportJobWarningList(d, schemas.DescribeAssetBundleImportJobResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetBundleImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetBundleImportJob, schemas.DescribeAssetBundleImportJobRequest, schemas.DescribeAssetBundleImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetBundleImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetBundleImportJob, schemas.DescribeAssetBundleImportJobRequest, schemas.DescribeAssetBundleImportJobResponse), output: &DescribeAssetBundleImportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetBundleImportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetBundleImportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAssetBundleImportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetBundleImportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +296,8 @@ func (c *Client) addOperationDescribeAssetBundleImportJobMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAssetBundleImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAssetBundleImportJob",
-	}
 }

@@ -5,12 +5,8 @@ package timestreaminfluxdb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Timestream for InfluxDB DB parameter groups.
@@ -44,21 +40,6 @@ type ListDbParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbParameterGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDbParameterGroupsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDbParameterGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDbParameterGroupsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDbParameterGroupsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDbParameterGroupsOutput struct {
 
 	// A list of Timestream for InfluxDB DB parameter group summaries.
@@ -76,84 +57,26 @@ type ListDbParameterGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDbParameterGroupsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDbParameterGroupsOutput_items:
-			return deserializeDbParameterGroupSummaryList(d, schemas.ListDbParameterGroupsOutput_items, &v.Items)
-		case schemas.ListDbParameterGroupsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDbParameterGroupsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDbParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbParameterGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbParameterGroups, schemas.ListDbParameterGroupsInput, schemas.ListDbParameterGroupsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbParameterGroups{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbParameterGroups, schemas.ListDbParameterGroupsInput, schemas.ListDbParameterGroupsOutput), output: &ListDbParameterGroupsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbParameterGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDbParameterGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +89,6 @@ func (c *Client) addOperationListDbParameterGroupsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -276,11 +193,3 @@ type ListDbParameterGroupsAPIClient interface {
 }
 
 var _ ListDbParameterGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDbParameterGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDbParameterGroups",
-	}
-}

@@ -4,13 +4,12 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a materialized view refresh task run, for a specified table and columns.
+// Stops a materialized view refresh task run for a specified materialized view.
 func (c *Client) StopMaterializedViewRefreshTaskRun(ctx context.Context, params *StopMaterializedViewRefreshTaskRunInput, optFns ...func(*Options)) (*StopMaterializedViewRefreshTaskRunOutput, error) {
 	if params == nil {
 		params = &StopMaterializedViewRefreshTaskRunInput{}
@@ -39,12 +38,30 @@ type StopMaterializedViewRefreshTaskRunInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table to generate statistics.
+	// The name of the materialized view.
 	//
 	// This member is required.
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StopMaterializedViewRefreshTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMaterializedViewRefreshTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMaterializedViewRefreshTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StopMaterializedViewRefreshTaskRunRequest_TableName, *v.TableName)
+	}
 }
 
 type StopMaterializedViewRefreshTaskRunOutput struct {
@@ -54,77 +71,42 @@ type StopMaterializedViewRefreshTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMaterializedViewRefreshTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMaterializedViewRefreshTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMaterializedViewRefreshTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopMaterializedViewRefreshTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMaterializedViewRefreshTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMaterializedViewRefreshTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMaterializedViewRefreshTaskRun, schemas.StopMaterializedViewRefreshTaskRunRequest, schemas.StopMaterializedViewRefreshTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMaterializedViewRefreshTaskRun, schemas.StopMaterializedViewRefreshTaskRunRequest, schemas.StopMaterializedViewRefreshTaskRunResponse), output: &StopMaterializedViewRefreshTaskRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopMaterializedViewRefreshTaskRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopMaterializedViewRefreshTaskRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopMaterializedViewRefreshTaskRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopMaterializedViewRefreshTaskRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +121,8 @@ func (c *Client) addOperationStopMaterializedViewRefreshTaskRunMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopMaterializedViewRefreshTaskRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopMaterializedViewRefreshTaskRun",
-	}
 }

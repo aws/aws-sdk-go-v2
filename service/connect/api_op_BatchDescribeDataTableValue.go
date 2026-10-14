@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves multiple values from a data table without evaluating expressions.
@@ -52,6 +51,22 @@ type BatchDescribeDataTableValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeDataTableValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeDataTableValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeDataTableValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.BatchDescribeDataTableValueRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchDescribeDataTableValueRequest_InstanceId, *v.InstanceId)
+	}
+	serializeDataTableValueIdentifierList(s, schemas.BatchDescribeDataTableValueRequest_Values, v.Values)
+}
+
 type BatchDescribeDataTableValueOutput struct {
 
 	// A list of values that failed to be retrieved with error messages explaining the
@@ -72,77 +87,48 @@ type BatchDescribeDataTableValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeDataTableValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeDataTableValueFailureResultList(s, schemas.BatchDescribeDataTableValueResponse_Failed, v.Failed)
+	serializeBatchDescribeDataTableValueSuccessResultList(s, schemas.BatchDescribeDataTableValueResponse_Successful, v.Successful)
+}
+func (v *BatchDescribeDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeDataTableValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeDataTableValueResponse_Failed:
+			return deserializeBatchDescribeDataTableValueFailureResultList(d, schemas.BatchDescribeDataTableValueResponse_Failed, &v.Failed)
+		case schemas.BatchDescribeDataTableValueResponse_Successful:
+			return deserializeBatchDescribeDataTableValueSuccessResultList(d, schemas.BatchDescribeDataTableValueResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeDataTableValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeDataTableValue, schemas.BatchDescribeDataTableValueRequest, schemas.BatchDescribeDataTableValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDescribeDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeDataTableValue, schemas.BatchDescribeDataTableValueRequest, schemas.BatchDescribeDataTableValueResponse), output: &BatchDescribeDataTableValueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDescribeDataTableValue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDescribeDataTableValue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDescribeDataTableValueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDescribeDataTableValue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +143,8 @@ func (c *Client) addOperationBatchDescribeDataTableValueMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDescribeDataTableValue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDescribeDataTableValue",
-	}
 }

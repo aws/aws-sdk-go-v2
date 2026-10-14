@@ -1,0 +1,5 @@
+PUT /backup-vaults/__BackupVaultName__/mpaApprovalTeam
+
+Content-Type: application/json
+
+{"MpaApprovalTeamArn":"__MpaApprovalTeamArn__","RequesterComment":"__RequesterComment__"}

@@ -98,6 +98,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func deserializeAZList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -111,6 +112,7 @@ func deserializeAZList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func deserializeClientList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -124,6 +126,7 @@ func deserializeClientList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeHapgList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -137,6 +140,7 @@ func deserializeHapgList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]stri
 }
 
 func deserializeHsmList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -150,6 +154,7 @@ func deserializeHsmList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializePartitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -163,6 +168,7 @@ func deserializePartitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializePartitionSerialList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -176,6 +182,7 @@ func deserializePartitionSerialList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -189,6 +196,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}

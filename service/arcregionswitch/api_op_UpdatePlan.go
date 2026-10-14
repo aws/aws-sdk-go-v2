@@ -4,14 +4,11 @@ package arcregionswitch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Region switch plan. You can modify the plan's description,
@@ -62,6 +59,9 @@ type UpdatePlanInput struct {
 	// The updated report configuration for the plan.
 	ReportConfiguration *types.ReportConfiguration
 
+	// Specifies whether service quota checks are enabled for the Region switch plan.
+	ServiceQuotaChecksEnabled *bool
+
 	// The updated conditions that can automatically trigger the execution of the plan.
 	Triggers []types.Trigger
 
@@ -93,6 +93,9 @@ func (v *UpdatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ServiceQuotaChecksEnabled != nil {
+		s.WriteBool(schemas.UpdatePlanRequest_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
+	}
 	serializeTriggerList(s, schemas.UpdatePlanRequest_triggers, v.Triggers)
 	serializeWorkflowList(s, schemas.UpdatePlanRequest_workflows, v.Workflows)
 }
@@ -112,6 +115,19 @@ type UpdatePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Plan != nil {
+		s.WriteStruct(schemas.UpdatePlanResponse_plan)
+		v.Plan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *UpdatePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePlanResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -123,62 +139,20 @@ func (v *UpdatePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationUpdatePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlan, schemas.UpdatePlanRequest, schemas.UpdatePlanResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlan, schemas.UpdatePlanRequest, schemas.UpdatePlanResponse), output: &UpdatePlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -188,12 +162,6 @@ func (c *Client) addOperationUpdatePlanMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpUpdatePlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,22 +176,8 @@ func (c *Client) addOperationUpdatePlanMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePlan",
-	}
 }

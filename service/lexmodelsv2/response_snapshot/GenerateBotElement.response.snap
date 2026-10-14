@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersion":"__BotVersion__","intentId":"__IntentId__","localeId":"__LocaleId__","sampleUtterances":[{"utterance":"__Utterance__"},{"utterance":"__Utterance__"}]}

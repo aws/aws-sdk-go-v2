@@ -1,0 +1,5 @@
+POST /geofencing/v0/list-collections
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

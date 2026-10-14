@@ -1,0 +1,9 @@
+200
+Access-Control-Allow-Origin: __AccessControlAllowOrigin__
+Access-Control-Expose-Headers: __AccessControlExposeHeaders__
+Cache-Control: __CacheControl__
+Content-Security-Policy: __ContentSecurityPolicy__
+Strict-Transport-Security: __StrictTransportSecurity__
+X-Content-Type-Options: __XContentTypeOptions__
+X-Frame-Options: __XFrameOptions__
+

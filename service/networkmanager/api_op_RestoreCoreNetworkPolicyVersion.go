@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Restores a previous policy version as a new, immutable version of a core
@@ -44,6 +43,21 @@ type RestoreCoreNetworkPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreCoreNetworkPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreCoreNetworkPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreCoreNetworkPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.RestoreCoreNetworkPolicyVersionRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.RestoreCoreNetworkPolicyVersionRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type RestoreCoreNetworkPolicyVersionOutput struct {
 
 	// Describes the restored core network policy.
@@ -55,77 +69,50 @@ type RestoreCoreNetworkPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreCoreNetworkPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreCoreNetworkPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreCoreNetworkPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkPolicy != nil {
+		s.WriteStruct(schemas.RestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy)
+		v.CoreNetworkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreCoreNetworkPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreCoreNetworkPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy:
+			v.CoreNetworkPolicy = &types.CoreNetworkPolicy{}
+			return v.CoreNetworkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreCoreNetworkPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreCoreNetworkPolicyVersion, schemas.RestoreCoreNetworkPolicyVersionRequest, schemas.RestoreCoreNetworkPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreCoreNetworkPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreCoreNetworkPolicyVersion, schemas.RestoreCoreNetworkPolicyVersionRequest, schemas.RestoreCoreNetworkPolicyVersionResponse), output: &RestoreCoreNetworkPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestoreCoreNetworkPolicyVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreCoreNetworkPolicyVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreCoreNetworkPolicyVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreCoreNetworkPolicyVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +127,8 @@ func (c *Client) addOperationRestoreCoreNetworkPolicyVersionMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreCoreNetworkPolicyVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreCoreNetworkPolicyVersion",
-	}
 }

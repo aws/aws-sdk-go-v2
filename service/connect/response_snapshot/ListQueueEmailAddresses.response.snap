@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EmailAddressMetadataList":[{"Arn":"__Arn__","Id":"__Id__","IsDefaultOutboundEmail":true},{"Arn":"__Arn__","Id":"__Id__","IsDefaultOutboundEmail":true}],"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__"}

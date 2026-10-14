@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeStackInstance&CallAs=SELF&StackInstanceAccount=__StackInstanceAccount__&StackInstanceRegion=__StackInstanceRegion__&StackSetName=__StackSetName__&Version=2010-05-15

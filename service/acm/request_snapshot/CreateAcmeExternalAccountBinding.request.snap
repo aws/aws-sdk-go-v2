@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.CreateAcmeExternalAccountBinding
+
+{"AcmeEndpointArn":"__AcmeEndpointArn__","Expiration":{"Type":"MINUTES","Value":1},"IdempotencyToken":"__IdempotencyToken__","RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/subscription-requests/__Identifier__/accept
+
+Content-Type: application/json
+
+{"assetPermissions":[{"assetId":"__AssetId__","permissions":{"s3":["READ","READ"]}},{"assetId":"__AssetId__","permissions":{"s3":["READ","READ"]}}],"assetScopes":[{"assetId":"__AssetId__","filterIds":["__Member__","__Member__"]},{"assetId":"__AssetId__","filterIds":["__Member__","__Member__"]}],"decisionComment":"__DecisionComment__"}

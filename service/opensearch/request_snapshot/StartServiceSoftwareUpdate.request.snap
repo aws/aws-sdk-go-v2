@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/serviceSoftwareUpdate/start
+
+Content-Type: application/json
+
+{"DesiredStartTime":1,"DomainName":"__DomainName__","ScheduleAt":"NOW"}

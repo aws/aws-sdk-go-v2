@@ -5,10 +5,10 @@ package athena
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the calculations that have been submitted to a session in descending
@@ -68,6 +68,27 @@ type ListCalculationExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculationExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculationExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculationExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCalculationExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_SessionId, *v.SessionId)
+	}
+	if v.StateFilter != "" {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_StateFilter, string(v.StateFilter))
+	}
+}
+
 type ListCalculationExecutionsOutput struct {
 
 	// A list of CalculationSummary objects.
@@ -84,77 +105,51 @@ type ListCalculationExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculationExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculationExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculationExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCalculationsList(s, schemas.ListCalculationExecutionsResponse_Calculations, v.Calculations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculationExecutionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCalculationExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCalculationExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCalculationExecutionsResponse_Calculations:
+			return deserializeCalculationsList(d, schemas.ListCalculationExecutionsResponse_Calculations, &v.Calculations)
+		case schemas.ListCalculationExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCalculationExecutionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCalculationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculationExecutions, schemas.ListCalculationExecutionsRequest, schemas.ListCalculationExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCalculationExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculationExecutions, schemas.ListCalculationExecutionsRequest, schemas.ListCalculationExecutionsResponse), output: &ListCalculationExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCalculationExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCalculationExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCalculationExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCalculationExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +162,6 @@ func (c *Client) addOperationListCalculationExecutionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,11 +264,3 @@ type ListCalculationExecutionsAPIClient interface {
 }
 
 var _ ListCalculationExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCalculationExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCalculationExecutions",
-	}
-}

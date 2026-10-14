@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Deletes the specified anomaly detection model from your account. For more
@@ -33,6 +32,11 @@ func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomal
 }
 
 type DeleteAnomalyDetectorInput struct {
+
+	// Specifies the unique identifier of the anomaly detector to delete. If you
+	// specify this parameter, you do not need to specify a metric to identify the
+	// detector.
+	AnomalyDetectorId *string
 
 	// The metric dimensions associated with the anomaly detection model to delete.
 	//
@@ -95,6 +99,38 @@ type DeleteAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalyDetectorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorInput_AnomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	serializeDimensions(s, schemas.DeleteAnomalyDetectorInput_Dimensions, v.Dimensions)
+	if v.MetricMathAnomalyDetector != nil {
+		s.WriteStruct(schemas.DeleteAnomalyDetectorInput_MetricMathAnomalyDetector)
+		v.MetricMathAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorInput_Namespace, *v.Namespace)
+	}
+	if v.SingleMetricAnomalyDetector != nil {
+		s.WriteStruct(schemas.DeleteAnomalyDetectorInput_SingleMetricAnomalyDetector)
+		v.SingleMetricAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorInput_Stat, *v.Stat)
+	}
+}
+
 type DeleteAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -102,65 +138,36 @@ type DeleteAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalyDetectorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnomalyDetectorOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyDetector, schemas.DeleteAnomalyDetectorInput, schemas.DeleteAnomalyDetectorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyDetector, schemas.DeleteAnomalyDetectorInput, schemas.DeleteAnomalyDetectorOutput), output: &DeleteAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteAnomalyDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAnomalyDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -170,12 +177,6 @@ func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpDeleteAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnomalyDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +191,8 @@ func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAnomalyDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAnomalyDetector",
-	}
 }

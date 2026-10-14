@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a Amazon DataZone domain.
@@ -36,32 +32,28 @@ type DeleteDomainInput struct {
 	// This member is required.
 	Identifier *string
 
+	// Specifies whether to delete the domain along with all of its associated
+	// resources. When you use this parameter, Amazon DataZone deletes the domain and
+	// cleanly removes its associated resources without leaving orphaned resources
+	// behind. Amazon DataZone reports deletion progress in the deleteProgress field.
+	// Amazon DataZone reports any resources that it can't delete in the failureReasons
+	// field of the GetDomain response. You can't use this parameter together with
+	// skipDeletionCheck . If you don't specify a value, the default is false .
+	CascadeDelete *bool
+
 	// A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
-	// Specifies the optional flag to delete all child entities within the domain.
+	// Specifies whether to skip the check that prevents deletion of a domain that
+	// still contains resources. When you use this parameter, Amazon DataZone deletes
+	// the domain but might not remove its associated resources, which can leave
+	// orphaned resources behind. To delete a domain and fully clean up its associated
+	// resources, use cascadeDelete instead. You can't use this parameter together
+	// with cascadeDelete .
 	SkipDeletionCheck *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDomainInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDomainInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteDomainInput_clientToken, *v.ClientToken)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteDomainInput_identifier, *v.Identifier)
-	}
-	if v.SkipDeletionCheck != nil {
-		s.WriteBool(schemas.DeleteDomainInput_skipDeletionCheck, *v.SkipDeletionCheck)
-	}
 }
 
 type DeleteDomainOutput struct {
@@ -77,77 +69,23 @@ type DeleteDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDomainOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDomainOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDomainOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DomainStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomain{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput), output: &DeleteDomainOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -157,12 +95,6 @@ func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpDeleteDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +107,6 @@ func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -220,12 +146,4 @@ func (m *idempotencyToken_initializeOpDeleteDomain) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opDeleteDomainMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteDomain{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDomain",
-	}
 }

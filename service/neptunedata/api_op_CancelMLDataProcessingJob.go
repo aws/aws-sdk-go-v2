@@ -4,12 +4,7 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels a Neptune ML data processing job. See [The dataprocessing command]dataprocessing .
@@ -54,24 +49,6 @@ type CancelMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelMLDataProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelMLDataProcessingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelMLDataProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Clean != nil {
-		s.WriteBool(schemas.CancelMLDataProcessingJobInput_clean, *v.Clean)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CancelMLDataProcessingJobInput_id, *v.Id)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.CancelMLDataProcessingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-}
-
 type CancelMLDataProcessingJobOutput struct {
 
 	// The status of the cancellation request.
@@ -83,85 +60,29 @@ type CancelMLDataProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelMLDataProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelMLDataProcessingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelMLDataProcessingJobOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CancelMLDataProcessingJobOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLDataProcessingJob, schemas.CancelMLDataProcessingJobInput, schemas.CancelMLDataProcessingJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLDataProcessingJob, schemas.CancelMLDataProcessingJobInput, schemas.CancelMLDataProcessingJobOutput), output: &CancelMLDataProcessingJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelMLDataProcessingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelMLDataProcessingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMLDataProcessingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +97,8 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelMLDataProcessingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelMLDataProcessingJob",
-	}
 }

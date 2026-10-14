@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"consumableResourceArn":"__ConsumableResourceArn__","consumableResourceName":"__ConsumableResourceName__","totalQuantity":1}

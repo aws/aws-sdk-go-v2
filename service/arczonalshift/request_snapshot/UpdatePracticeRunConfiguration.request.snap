@@ -1,0 +1,5 @@
+PATCH /configuration/__ResourceIdentifier__
+
+Content-Type: application/json
+
+{"allowedWindows":["__Member__","__Member__"],"blockedDates":["__Member__","__Member__"],"blockedWindows":["__Member__","__Member__"],"blockingAlarms":[{"alarmIdentifier":"__AlarmIdentifier__","type":"CLOUDWATCH"},{"alarmIdentifier":"__AlarmIdentifier__","type":"CLOUDWATCH"}],"outcomeAlarms":[{"alarmIdentifier":"__AlarmIdentifier__","type":"CLOUDWATCH"},{"alarmIdentifier":"__AlarmIdentifier__","type":"CLOUDWATCH"}]}

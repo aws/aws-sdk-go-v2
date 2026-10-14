@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifySnapshotAttribute&Attribute=productCodes&CreateVolumePermission.Add.1.Group=all&CreateVolumePermission.Add.1.UserId=__UserId__&CreateVolumePermission.Add.2.Group=all&CreateVolumePermission.Add.2.UserId=__UserId__&CreateVolumePermission.Remove.1.Group=all&CreateVolumePermission.Remove.1.UserId=__UserId__&CreateVolumePermission.Remove.2.Group=all&CreateVolumePermission.Remove.2.UserId=__UserId__&DryRun=true&OperationType=add&SnapshotId=__SnapshotId__&UserGroup.1=__Member__&UserGroup.2=__Member__&UserId.1=__Member__&UserId.2=__Member__&Version=2016-11-15

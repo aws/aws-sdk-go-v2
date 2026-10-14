@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -33,8 +32,8 @@ import (
 //     that you want to change only. All other values remain the same as the source
 //     version.
 //
-//   - Change a game server container definition. Provide the updated container
-//     definition.
+//   - Change a game server container definition. Provide a complete set of
+//     container definitions, including the updated definition.
 //
 //   - Add or change a support container definition. Provide a complete set of
 //     container definitions, including the updated definition.
@@ -43,12 +42,18 @@ import (
 //     definitions, excluding the definition to remove. If the container group has only
 //     one support container definition, provide an empty set.
 //
+//   - Remove the total vCPU limit from a game server container group so that its
+//     containers can use up to the instance's available vCPU. Set RemoveAttributes
+//     to TOTAL_VCPU_LIMIT . The game server container must have a Vcpu value,
+//     because a game server container group needs either a total vCPU limit or a game
+//     server Vcpu value.
+//
 // Results:
 //
 // If successful, this operation returns the complete properties of the new
 // container group definition version.
 //
-// If the container group definition version is used in an active fleets, the
+// If the container group definition version is used in an active fleet, the
 // update automatically initiates a new fleet deployment of the new version. You
 // can track a fleet's deployments using [ListFleetDeployments].
 //
@@ -93,6 +98,13 @@ type UpdateContainerGroupDefinitionInput struct {
 	// [Amazon Linux 2 FAQs]: http://aws.amazon.com/amazon-linux-2/faqs/
 	OperatingSystem types.ContainerOperatingSystem
 
+	// If set, this update removes the container group's total vCPU limit, and the
+	// group's containers can use up to the instance's available vCPU. You can't remove
+	// the total vCPU limit from a per-instance container group. A game server
+	// container group needs either a total vCPU limit or a Vcpu value for the game
+	// server container. You can't set TotalVcpuLimit in the same request.
+	RemoveAttributes []types.ContainerGroupDefinitionRemoveAttribute
+
 	// The container group definition version to update. The new version starts with
 	// values from the source version, and then updates values included in this
 	// request.
@@ -110,15 +122,60 @@ type UpdateContainerGroupDefinitionInput struct {
 	TotalMemoryLimitMebibytes *int32
 
 	// The maximum amount of vCPU units to allocate to the container group (1 vCPU is
-	// equal to 1024 CPU units). All containers in the group share this memory. If you
-	// specify vCPU limits for individual containers, the total value must be equal to
-	// or greater than the sum of the CPU limits for all containers in the group.
+	// equal to 1024 CPU units). All containers in the group share these resources. If
+	// you set vCPU reservations for individual containers, the total value must be
+	// equal to or greater than the sum of the Vcpu values for all containers in the
+	// group.
+	//
+	// For a game server container group, Amazon GameLift Servers requires either a
+	// total vCPU limit or a Vcpu value for the game server container. If the
+	// container group has a total vCPU limit, Amazon GameLift Servers uses this value
+	// to calculate how many game server container groups fit on an instance. If the
+	// container group doesn't have a total vCPU limit, its containers can use up to
+	// the instance's available vCPU, and Amazon GameLift Servers uses the sum of the
+	// containers' Vcpu values to calculate how many game server container groups fit
+	// on an instance. To remove the total vCPU limit, omit this parameter and set
+	// RemoveAttributes to TOTAL_VCPU_LIMIT .
 	TotalVcpuLimit *float64
 
 	// A description for this update to the container group definition.
 	VersionDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateContainerGroupDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerGroupDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerContainerDefinition != nil {
+		s.WriteStruct(schemas.UpdateContainerGroupDefinitionInput_GameServerContainerDefinition)
+		v.GameServerContainerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
+	}
+	serializeContainerGroupDefinitionRemoveAttributeList(s, schemas.UpdateContainerGroupDefinitionInput_RemoveAttributes, v.RemoveAttributes)
+	if v.SourceVersionNumber != nil {
+		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_SourceVersionNumber, *v.SourceVersionNumber)
+	}
+	serializeSupportContainerDefinitionInputList(s, schemas.UpdateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.TotalMemoryLimitMebibytes != nil {
+		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
+	}
+	if v.TotalVcpuLimit != nil {
+		s.WriteFloat64(schemas.UpdateContainerGroupDefinitionInput_TotalVcpuLimit, *v.TotalVcpuLimit)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_VersionDescription, *v.VersionDescription)
+	}
 }
 
 type UpdateContainerGroupDefinitionOutput struct {
@@ -132,65 +189,44 @@ type UpdateContainerGroupDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerGroupDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerGroupDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerGroupDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinition != nil {
+		s.WriteStruct(schemas.UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition)
+		v.ContainerGroupDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateContainerGroupDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContainerGroupDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition:
+			v.ContainerGroupDefinition = &types.ContainerGroupDefinition{}
+			return v.ContainerGroupDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContainerGroupDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerGroupDefinition, schemas.UpdateContainerGroupDefinitionInput, schemas.UpdateContainerGroupDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerGroupDefinition, schemas.UpdateContainerGroupDefinitionInput, schemas.UpdateContainerGroupDefinitionOutput), output: &UpdateContainerGroupDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateContainerGroupDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -200,12 +236,6 @@ func (c *Client) addOperationUpdateContainerGroupDefinitionMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpUpdateContainerGroupDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContainerGroupDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +250,8 @@ func (c *Client) addOperationUpdateContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateContainerGroupDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateContainerGroupDefinition",
-	}
 }

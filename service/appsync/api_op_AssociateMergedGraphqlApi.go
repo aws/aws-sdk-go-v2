@@ -4,11 +4,10 @@ package appsync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an association between a Merged API and source API using the source
@@ -57,6 +56,29 @@ type AssociateMergedGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMergedGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMergedGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMergedGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AssociateMergedGraphqlApiRequest_description, *v.Description)
+	}
+	if v.MergedApiIdentifier != nil {
+		s.WriteString(schemas.AssociateMergedGraphqlApiRequest_mergedApiIdentifier, *v.MergedApiIdentifier)
+	}
+	if v.SourceApiAssociationConfig != nil {
+		s.WriteStruct(schemas.AssociateMergedGraphqlApiRequest_sourceApiAssociationConfig)
+		v.SourceApiAssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceApiIdentifier != nil {
+		s.WriteString(schemas.AssociateMergedGraphqlApiRequest_sourceApiIdentifier, *v.SourceApiIdentifier)
+	}
+}
+
 type AssociateMergedGraphqlApiOutput struct {
 
 	// The SourceApiAssociation object data.
@@ -68,77 +90,50 @@ type AssociateMergedGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMergedGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMergedGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMergedGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceApiAssociation != nil {
+		s.WriteStruct(schemas.AssociateMergedGraphqlApiResponse_sourceApiAssociation)
+		v.SourceApiAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateMergedGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMergedGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateMergedGraphqlApiResponse_sourceApiAssociation:
+			v.SourceApiAssociation = &types.SourceApiAssociation{}
+			return v.SourceApiAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMergedGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMergedGraphqlApi, schemas.AssociateMergedGraphqlApiRequest, schemas.AssociateMergedGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMergedGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMergedGraphqlApi, schemas.AssociateMergedGraphqlApiRequest, schemas.AssociateMergedGraphqlApiResponse), output: &AssociateMergedGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMergedGraphqlApi{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateMergedGraphqlApi"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateMergedGraphqlApiValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateMergedGraphqlApi(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +148,8 @@ func (c *Client) addOperationAssociateMergedGraphqlApiMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateMergedGraphqlApi(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateMergedGraphqlApi",
-	}
 }

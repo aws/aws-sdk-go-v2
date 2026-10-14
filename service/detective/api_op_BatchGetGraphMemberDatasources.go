@@ -4,11 +4,10 @@ package detective
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets data source package information for the behavior graph.
@@ -43,6 +42,19 @@ type BatchGetGraphMemberDatasourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetGraphMemberDatasourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetGraphMemberDatasourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetGraphMemberDatasourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdExtendedList(s, schemas.BatchGetGraphMemberDatasourcesRequest_AccountIds, v.AccountIds)
+	if v.GraphArn != nil {
+		s.WriteString(schemas.BatchGetGraphMemberDatasourcesRequest_GraphArn, *v.GraphArn)
+	}
+}
+
 type BatchGetGraphMemberDatasourcesOutput struct {
 
 	// Details on the status of data source packages for members of the behavior graph.
@@ -57,77 +69,48 @@ type BatchGetGraphMemberDatasourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetGraphMemberDatasourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetGraphMemberDatasourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetGraphMemberDatasourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembershipDatasourcesList(s, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, v.MemberDatasources)
+	serializeUnprocessedAccountList(s, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *BatchGetGraphMemberDatasourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetGraphMemberDatasourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources:
+			return deserializeMembershipDatasourcesList(d, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, &v.MemberDatasources)
+		case schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccountList(d, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetGraphMemberDatasourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetGraphMemberDatasources, schemas.BatchGetGraphMemberDatasourcesRequest, schemas.BatchGetGraphMemberDatasourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetGraphMemberDatasources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetGraphMemberDatasources, schemas.BatchGetGraphMemberDatasourcesRequest, schemas.BatchGetGraphMemberDatasourcesResponse), output: &BatchGetGraphMemberDatasourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetGraphMemberDatasources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetGraphMemberDatasources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetGraphMemberDatasourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetGraphMemberDatasources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +125,8 @@ func (c *Client) addOperationBatchGetGraphMemberDatasourcesMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetGraphMemberDatasources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetGraphMemberDatasources",
-	}
 }

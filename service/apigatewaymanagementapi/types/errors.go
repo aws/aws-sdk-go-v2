@@ -33,6 +33,14 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
 		switch s {
@@ -66,6 +74,14 @@ func (e *GoneException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GoneException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoneException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoneException) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *GoneException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GoneException, func(s *smithy.Schema) error {
 		switch s {
@@ -100,6 +116,14 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
 		switch s {
@@ -133,6 +157,17 @@ func (e *PayloadTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PayloadTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PayloadTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PayloadTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PayloadTooLargeException_Message, *v.Message)
+	}
+}
 func (v *PayloadTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PayloadTooLargeException, func(s *smithy.Schema) error {
 		switch s {

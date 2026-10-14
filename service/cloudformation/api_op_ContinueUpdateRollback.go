@@ -4,10 +4,7 @@ package cloudformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Continues rolling back a stack from UPDATE_ROLLBACK_FAILED to
@@ -25,6 +22,8 @@ import (
 //
 // For more information, see [Continue rolling back an update] in the CloudFormation User Guide. For information
 // for troubleshooting a failed update rollback, see [Update rollback failed].
+//
+// ForceRollback and ResourcesToSkip are mutually exclusive. For details, see ContinueUpdateRollbackInput$ForceRollback.
 //
 // [Continue rolling back an update]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
 // [Update rollback failed]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
@@ -61,6 +60,30 @@ type ContinueUpdateRollbackInput struct {
 	// retry ContinueUpdateRollback requests to ensure that CloudFormation
 	// successfully received them.
 	ClientRequestToken *string
+
+	// Specifies whether CloudFormation forces the rollback to continue by skipping
+	// resources currently in the UPDATE_FAILED state. Use this instead of listing
+	// each resource individually in ResourcesToSkip . Only resources that entered the
+	// UPDATE_FAILED state because a rollback failed are skipped. If you don't specify
+	// a value, the default is false and CloudFormation doesn't skip any resources.
+	//
+	// ForceRollback and ResourcesToSkip are mutually exclusive. Specifying both in
+	// the same request returns a validation error.
+	//
+	// We recommend that you [troubleshoot] resources before skipping them. CloudFormation sets the
+	// status of the skipped resources to UPDATE_COMPLETE and continues to roll back
+	// the stack, including resources in nested stacks. After the rollback completes,
+	// the skipped resources no longer match the resources in the stack template.
+	// Before performing another stack update, you must update the stack or resources
+	// to be consistent with each other. If you don't, subsequent stack updates might
+	// fail, and the stack will become unrecoverable.
+	//
+	// Drift detection reports skipped resources as NOT_CHECKED . For guidance, see [Continue rolling back an update]
+	// in the CloudFormation User Guide.
+	//
+	// [troubleshoot]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+	// [Continue rolling back an update]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
+	ForceRollback *bool
 
 	// A list of the logical IDs of the resources that CloudFormation skips during the
 	// continue update rollback operation. You can specify only resources that are in
@@ -120,9 +143,6 @@ type ContinueUpdateRollbackOutput struct {
 }
 
 func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpContinueUpdateRollback{}, middleware.After)
 	if err != nil {
 		return err
@@ -131,65 +151,20 @@ func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ContinueUpdateRollback"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpContinueUpdateRollbackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opContinueUpdateRollback(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +179,8 @@ func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opContinueUpdateRollback(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ContinueUpdateRollback",
-	}
 }

@@ -33,6 +33,17 @@ func (e *InternalServiceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceError_message, *v.Message)
+	}
+}
 func (v *InternalServiceError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalServiceError, func(s *smithy.Schema) error {
 		switch s {
@@ -71,6 +82,17 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+}
 func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
 		switch s {
@@ -107,6 +129,17 @@ func (e *PipelineDeletedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PipelineDeletedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineDeletedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineDeletedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineDeletedException_message, *v.Message)
+	}
+}
 func (v *PipelineDeletedException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineDeletedException, func(s *smithy.Schema) error {
 		switch s {
@@ -144,6 +177,17 @@ func (e *PipelineNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PipelineNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PipelineNotFoundException_message, *v.Message)
+	}
+}
 func (v *PipelineNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineNotFoundException, func(s *smithy.Schema) error {
 		switch s {
@@ -180,6 +224,17 @@ func (e *TaskNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TaskNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TaskNotFoundException_message, *v.Message)
+	}
+}
 func (v *TaskNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskNotFoundException, func(s *smithy.Schema) error {
 		switch s {

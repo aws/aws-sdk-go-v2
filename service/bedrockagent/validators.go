@@ -250,6 +250,26 @@ func (m *validateOpCreatePromptVersion) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcConfiguration struct {
+}
+
+func (*validateOpCreateVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAgentActionGroup struct {
 }
 
@@ -465,6 +485,46 @@ func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcConfiguration struct {
+}
+
+func (*validateOpDeleteVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +850,46 @@ func (m *validateOpGetPrompt) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVpcConfiguration struct {
+}
+
+func (*validateOpGetVpcConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVpcConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVpcConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVpcConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpIngestKnowledgeBaseDocuments struct {
 }
 
@@ -1030,6 +1130,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListVpcConfigurations struct {
+}
+
+func (*validateOpListVpcConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVpcConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVpcConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVpcConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPrepareAgent struct {
 }
 
@@ -1065,6 +1185,26 @@ func (m *validateOpPrepareFlow) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPrepareFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1418,6 +1558,10 @@ func addOpCreatePromptVersionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreatePromptVersion{}, middleware.After)
 }
 
+func addOpCreateVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcConfiguration{}, middleware.After)
+}
+
 func addOpDeleteAgentActionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentActionGroup{}, middleware.After)
 }
@@ -1460,6 +1604,14 @@ func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
+}
+
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDeleteVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcConfiguration{}, middleware.After)
 }
 
 func addOpDisassociateAgentCollaboratorValidationMiddleware(stack *middleware.Stack) error {
@@ -1526,6 +1678,14 @@ func addOpGetPromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPrompt{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
+func addOpGetVpcConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVpcConfiguration{}, middleware.After)
+}
+
 func addOpIngestKnowledgeBaseDocumentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpIngestKnowledgeBaseDocuments{}, middleware.After)
 }
@@ -1574,12 +1734,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListVpcConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVpcConfigurations{}, middleware.After)
+}
+
 func addOpPrepareAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPrepareAgent{}, middleware.After)
 }
 
 func addOpPrepareFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPrepareFlow{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
 func addOpStartIngestionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1685,6 +1853,21 @@ func validateAudioConfigurations(v []types.AudioConfiguration) error {
 		if err := validateAudioConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioExtractionConfiguration(v *types.AudioExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioExtractionConfiguration"}
+	if len(v.AudioExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioExtractionStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2155,6 +2338,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.ManagedKnowledgeBaseConnectorConfiguration != nil {
+		if err := validateManagedKnowledgeBaseConnectorConfiguration(v.ManagedKnowledgeBaseConnectorConfiguration); err != nil {
+			invalidParams.AddNested("ManagedKnowledgeBaseConnectorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.S3Configuration != nil {
 		if err := validateS3DataSourceConfiguration(v.S3Configuration); err != nil {
 			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
@@ -2178,6 +2366,59 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.SharePointConfiguration != nil {
 		if err := validateSharePointDataSourceConfiguration(v.SharePointConfiguration); err != nil {
 			invalidParams.AddNested("SharePointConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeletionProtectionConfiguration(v *types.DeletionProtectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletionProtectionConfiguration"}
+	if len(v.DeletionProtectionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletionProtectionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentAccessControlEntry(v *types.DocumentAccessControlEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentAccessControlEntry"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Access) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Access"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentAccessControlList(v []types.DocumentAccessControlEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentAccessControlList"}
+	for i := range v {
+		if err := validateDocumentAccessControlEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2270,6 +2511,11 @@ func validateDocumentMetadata(v *types.DocumentMetadata) error {
 	if v.S3Location != nil {
 		if err := validateCustomS3Location(v.S3Location); err != nil {
 			invalidParams.AddNested("S3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessControlList != nil {
+		if err := validateDocumentAccessControlList(v.AccessControlList); err != nil {
+			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2835,6 +3081,21 @@ func validateHierarchicalChunkingLevelConfigurations(v []types.HierarchicalChunk
 	}
 }
 
+func validateImageExtractionConfiguration(v *types.ImageExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageExtractionConfiguration"}
+	if len(v.ImageExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngestionJobFilter(v *types.IngestionJobFilter) error {
 	if v == nil {
 		return nil
@@ -2981,6 +3242,11 @@ func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) err
 			invalidParams.AddNested("VectorKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ManagedKnowledgeBaseConfiguration != nil {
+		if err := validateManagedKnowledgeBaseConfiguration(v.ManagedKnowledgeBaseConfiguration); err != nil {
+			invalidParams.AddNested("ManagedKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.KendraKnowledgeBaseConfiguration != nil {
 		if err := validateKendraKnowledgeBaseConfiguration(v.KendraKnowledgeBaseConfiguration); err != nil {
 			invalidParams.AddNested("KendraKnowledgeBaseConfiguration", err.(smithy.InvalidParamsError))
@@ -3121,6 +3387,82 @@ func validateLoopFlowNodeConfiguration(v *types.LoopFlowNodeConfiguration) error
 	} else if v.Definition != nil {
 		if err := validateFlowDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedKnowledgeBaseConfiguration(v *types.ManagedKnowledgeBaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedKnowledgeBaseConfiguration"}
+	if v.EmbeddingModelConfiguration != nil {
+		if err := validateEmbeddingModelConfiguration(v.EmbeddingModelConfiguration); err != nil {
+			invalidParams.AddNested("EmbeddingModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SupplementalDataStorageConfiguration != nil {
+		if err := validateSupplementalDataStorageConfiguration(v.SupplementalDataStorageConfiguration); err != nil {
+			invalidParams.AddNested("SupplementalDataStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedKnowledgeBaseConnectorConfiguration(v *types.ManagedKnowledgeBaseConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedKnowledgeBaseConnectorConfiguration"}
+	if v.DeletionProtectionConfiguration != nil {
+		if err := validateDeletionProtectionConfiguration(v.DeletionProtectionConfiguration); err != nil {
+			invalidParams.AddNested("DeletionProtectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SyncSchedule != nil {
+		if err := validateSyncSchedule(v.SyncSchedule); err != nil {
+			invalidParams.AddNested("SyncSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaExtractionConfiguration(v *types.MediaExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaExtractionConfiguration"}
+	if v.ImageExtractionConfiguration != nil {
+		if err := validateImageExtractionConfiguration(v.ImageExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ImageExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AudioExtractionConfiguration != nil {
+		if err := validateAudioExtractionConfiguration(v.AudioExtractionConfiguration); err != nil {
+			invalidParams.AddNested("AudioExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VideoExtractionConfiguration != nil {
+		if err := validateVideoExtractionConfiguration(v.VideoExtractionConfiguration); err != nil {
+			invalidParams.AddNested("VideoExtractionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3305,6 +3647,21 @@ func validateMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping) error {
 	}
 	if v.MetadataField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonthlySchedule(v *types.MonthlySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlySchedule"}
+	if v.DayOfMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfMonth"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4701,6 +5058,30 @@ func validateSupplementalDataStorageLocations(v []types.SupplementalDataStorageL
 	}
 }
 
+func validateSyncSchedule(v types.SyncSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyncSchedule"}
+	switch uv := v.(type) {
+	case *types.SyncScheduleMemberMonthly:
+		if err := validateMonthlySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[monthly]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SyncScheduleMemberWeekly:
+		if err := validateWeeklySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[weekly]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSystemContentBlock(v types.SystemContentBlock) error {
 	if v == nil {
 		return nil
@@ -5099,6 +5480,21 @@ func validateVideoConfigurations(v []types.VideoConfiguration) error {
 	}
 }
 
+func validateVideoExtractionConfiguration(v *types.VideoExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoExtractionConfiguration"}
+	if len(v.VideoExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VideoExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVideoSegmentationConfiguration(v *types.VideoSegmentationConfiguration) error {
 	if v == nil {
 		return nil
@@ -5140,6 +5536,21 @@ func validateWebSourceConfiguration(v *types.WebSourceConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "WebSourceConfiguration"}
 	if v.UrlConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UrlConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklySchedule(v *types.WeeklySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklySchedule"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5427,6 +5838,39 @@ func validateOpCreatePromptVersionInput(v *CreatePromptVersionInput) error {
 	}
 }
 
+func validateOpCreateVpcConfigurationInput(v *CreateVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.ResourceTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTarget"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if len(v.ResolutionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolutionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAgentActionGroupInput(v *DeleteAgentActionGroupInput) error {
 	if v == nil {
 		return nil
@@ -5615,6 +6059,39 @@ func validateOpDeletePromptInput(v *DeletePromptInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePromptInput"}
 	if v.PromptIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PromptIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcConfigurationInput(v *DeleteVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5924,6 +6401,39 @@ func validateOpGetPromptInput(v *GetPromptInput) error {
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVpcConfigurationInput(v *GetVpcConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVpcConfigurationInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.VpcConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpIngestKnowledgeBaseDocumentsInput(v *IngestKnowledgeBaseDocumentsInput) error {
 	if v == nil {
 		return nil
@@ -6139,6 +6649,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListVpcConfigurationsInput(v *ListVpcConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVpcConfigurationsInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPrepareAgentInput(v *PrepareAgentInput) error {
 	if v == nil {
 		return nil
@@ -6161,6 +6686,24 @@ func validateOpPrepareFlowInput(v *PrepareFlowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrepareFlowInput"}
 	if v.FlowIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

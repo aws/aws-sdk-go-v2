@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Marker":"__Marker__","VaultList":[{"CreationDate":"__CreationDate__","LastInventoryDate":"__LastInventoryDate__","NumberOfArchives":1,"SizeInBytes":1,"VaultARN":"__VaultARN__","VaultName":"__VaultName__"},{"CreationDate":"__CreationDate__","LastInventoryDate":"__LastInventoryDate__","NumberOfArchives":1,"SizeInBytes":1,"VaultARN":"__VaultARN__","VaultName":"__VaultName__"}]}

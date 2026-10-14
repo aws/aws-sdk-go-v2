@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a version of a connector definition which has already been defined.
@@ -44,6 +43,22 @@ type CreateConnectorDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.ConnectorDefinitionId != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionRequest_ConnectorDefinitionId, *v.ConnectorDefinitionId)
+	}
+	serialize__listOfConnector(s, schemas.CreateConnectorDefinitionVersionRequest_Connectors, v.Connectors)
+}
+
 type CreateConnectorDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -64,77 +79,66 @@ type CreateConnectorDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateConnectorDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateConnectorDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateConnectorDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDefinitionVersion, schemas.CreateConnectorDefinitionVersionRequest, schemas.CreateConnectorDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDefinitionVersion, schemas.CreateConnectorDefinitionVersionRequest, schemas.CreateConnectorDefinitionVersionResponse), output: &CreateConnectorDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorDefinitionVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnectorDefinitionVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConnectorDefinitionVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnectorDefinitionVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +153,8 @@ func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConnectorDefinitionVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConnectorDefinitionVersion",
-	}
 }

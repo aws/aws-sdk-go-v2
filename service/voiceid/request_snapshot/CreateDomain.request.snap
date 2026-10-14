@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.CreateDomain
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","ServerSideEncryptionConfiguration":{"KmsKeyId":"__KmsKeyId__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

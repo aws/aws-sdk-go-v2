@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Queue":{"Description":"__Description__","HoursOfOperationId":"__HoursOfOperationId__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"MaxContacts":1,"Name":"__Name__","OutboundCallerConfig":{"OutboundCallerIdName":"__OutboundCallerIdName__","OutboundCallerIdNumberId":"__OutboundCallerIdNumberId__","OutboundFlowId":"__OutboundFlowId__"},"OutboundEmailConfig":{"OutboundEmailAddressId":"__OutboundEmailAddressId__"},"QueueArn":"__QueueArn__","QueueId":"__QueueId__","Status":"ENABLED","Tags":{"key0":"__Value__"}}}

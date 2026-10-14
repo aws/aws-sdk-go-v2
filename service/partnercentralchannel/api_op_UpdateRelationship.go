@@ -4,13 +4,8 @@ package partnercentralchannel
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of a partner relationship.
@@ -59,31 +54,6 @@ type UpdateRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRelationshipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRelationshipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.UpdateRelationshipRequest_catalog, *v.Catalog)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateRelationshipRequest_displayName, *v.DisplayName)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateRelationshipRequest_identifier, *v.Identifier)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.UpdateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-	serializeSupportPlan(s, schemas.UpdateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
-	if v.Revision != nil {
-		s.WriteString(schemas.UpdateRelationshipRequest_revision, *v.Revision)
-	}
-}
-
 type UpdateRelationshipOutput struct {
 
 	// Details of the updated relationship.
@@ -95,85 +65,29 @@ type UpdateRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRelationshipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRelationshipResponse_relationshipDetail:
-			v.RelationshipDetail = &types.UpdateRelationshipDetail{}
-			return v.RelationshipDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationship, schemas.UpdateRelationshipRequest, schemas.UpdateRelationshipResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRelationship{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationship, schemas.UpdateRelationshipRequest, schemas.UpdateRelationshipResponse), output: &UpdateRelationshipOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRelationship"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRelationshipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRelationship(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +102,8 @@ func (c *Client) addOperationUpdateRelationshipMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRelationship(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRelationship",
-	}
 }

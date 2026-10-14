@@ -107,6 +107,7 @@ func serializeTenantIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func deserializeAttendeeIdsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttendeeIdItem) error {
+	*v = make([]AttendeeIdItem, 0)
 	var vv AttendeeIdItem
 	return smithy.ReadList(d, s, func() error {
 		vv = AttendeeIdItem{}
@@ -120,6 +121,7 @@ func deserializeAttendeeIdsList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeAttendeeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Attendee) error {
+	*v = make([]Attendee, 0)
 	var vv Attendee
 	return smithy.ReadList(d, s, func() error {
 		vv = Attendee{}
@@ -133,6 +135,7 @@ func deserializeAttendeeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeBatchCreateAttendeeErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CreateAttendeeError) error {
+	*v = make([]CreateAttendeeError, 0)
 	var vv CreateAttendeeError
 	return smithy.ReadList(d, s, func() error {
 		vv = CreateAttendeeError{}
@@ -146,6 +149,7 @@ func deserializeBatchCreateAttendeeErrorList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeCreateAttendeeRequestItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CreateAttendeeRequestItem) error {
+	*v = make([]CreateAttendeeRequestItem, 0)
 	var vv CreateAttendeeRequestItem
 	return smithy.ReadList(d, s, func() error {
 		vv = CreateAttendeeRequestItem{}
@@ -159,6 +163,7 @@ func deserializeCreateAttendeeRequestItemList(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeCreateMeetingWithAttendeesRequestItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CreateAttendeeRequestItem) error {
+	*v = make([]CreateAttendeeRequestItem, 0)
 	var vv CreateAttendeeRequestItem
 	return smithy.ReadList(d, s, func() error {
 		vv = CreateAttendeeRequestItem{}
@@ -172,6 +177,7 @@ func deserializeCreateMeetingWithAttendeesRequestItemList(d smithy.ShapeDeserial
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -185,6 +191,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -198,6 +205,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeTenantIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterNodes
+
+{"ClusterName":"__ClusterName__","CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"IncludeNodeLogicalIds":true,"InstanceGroupNameContains":"__InstanceGroupNameContains__","MaxResults":1,"NextToken":"__NextToken__","SortBy":"CREATION_TIME","SortOrder":"Ascending"}

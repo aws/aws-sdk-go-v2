@@ -188,13 +188,13 @@ var _int = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datapipeline",
 	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServiceError_message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datapipeline",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_message *smithy.Schema
 
 var _longString = smithy.NewSchema(smithy.ShapeID{
@@ -269,7 +269,7 @@ var _ParameterValueList_member *smithy.Schema
 var PipelineDeletedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datapipeline",
 	Name:      "PipelineDeletedException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineDeletedException_message *smithy.Schema
 
 var PipelineDescription = smithy.NewSchema(smithy.ShapeID{
@@ -309,7 +309,7 @@ var _pipelineList_member *smithy.Schema
 var PipelineNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datapipeline",
 	Name:      "PipelineNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var PipelineNotFoundException_message *smithy.Schema
 
 var PipelineObject = smithy.NewSchema(smithy.ShapeID{
@@ -399,7 +399,7 @@ var _taskId = smithy.NewSchema(smithy.ShapeID{
 var TaskNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datapipeline",
 	Name:      "TaskNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TaskNotFoundException_message *smithy.Schema
 
 var TaskObject = smithy.NewSchema(smithy.ShapeID{

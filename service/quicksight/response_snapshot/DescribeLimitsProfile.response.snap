@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"profile":{"accountId":"__AccountId__","arn":"__Arn__","createdAt":946684800,"description":"__Description__","profileId":"__ProfileId__","profileName":"__ProfileName__","resourceLimits":{"key0":{"maxValue":1,"unit":"MB"}},"updatedAt":946684800}}

@@ -1,0 +1,5 @@
+POST /PutResourcePolicy
+
+Content-Type: application/json
+
+{"BypassPolicyLockoutCheck":true,"PolicyDocument":"__PolicyDocument__","PolicyName":"__PolicyName__","PolicyRevisionId":"__PolicyRevisionId__"}

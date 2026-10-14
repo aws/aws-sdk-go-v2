@@ -1,0 +1,5 @@
+POST /2015-01-01/es/upgradeDomain
+
+Content-Type: application/json
+
+{"DomainName":"__DomainName__","PerformCheckOnly":true,"TargetVersion":"__TargetVersion__"}

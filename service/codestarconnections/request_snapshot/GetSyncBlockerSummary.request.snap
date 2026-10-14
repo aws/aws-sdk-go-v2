@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeStar_connections_20191201.GetSyncBlockerSummary
+
+{"ResourceName":"__ResourceName__","SyncType":"CFN_STACK_SYNC"}

@@ -1,0 +1,7 @@
+POST /service/AWSFMS_20180101/operation/GetPolicy
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hPolicyIdl__PolicyId__ÿ

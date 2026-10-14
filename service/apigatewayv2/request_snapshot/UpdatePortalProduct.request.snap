@@ -1,0 +1,5 @@
+PATCH /v2/portalproducts/__PortalProductId__
+
+Content-Type: application/json
+
+{"description":"__Description__","displayName":"__DisplayName__","displayOrder":{"contents":[{"productRestEndpointPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"},{"productRestEndpointPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"}],"overviewPageArn":"__OverviewPageArn__","productPageArns":["__Member__","__Member__"]}}

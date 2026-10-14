@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.DeleteActivityType
+
+{"__type":"TypeNotDeprecatedFault","message":"__Message__"}

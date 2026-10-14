@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeContainerGroupDefinition
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢dNameh__Name__mVersionNumber

@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/index/__IndexId__/documents/__DocumentId__/content?dataSourceId=__DataSourceId__&outputFormat=RAW
+
+

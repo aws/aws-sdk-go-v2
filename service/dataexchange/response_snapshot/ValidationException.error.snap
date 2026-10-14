@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ValidationException","ExceptionCause":"InsufficientS3BucketPolicy","Message":"__Message__"}

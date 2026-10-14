@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DisassociateTransitGatewayMulticastDomain&DryRun=true&SubnetIds.1=__Member__&SubnetIds.2=__Member__&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&TransitGatewayMulticastDomainId=__TransitGatewayMulticastDomainId__&Version=2016-11-15

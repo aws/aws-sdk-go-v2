@@ -1,0 +1,5 @@
+POST /updateSignalingChannel
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","CurrentVersion":"__CurrentVersion__","SingleMasterConfiguration":{"MessageTtlSeconds":1}}

@@ -4,11 +4,10 @@ package notifications
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an [EventRule]EventRule that is associated with a specified
@@ -76,6 +75,28 @@ type CreateEventRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventPattern != nil {
+		s.WriteString(schemas.CreateEventRuleRequest_eventPattern, *v.EventPattern)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.CreateEventRuleRequest_eventType, *v.EventType)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.CreateEventRuleRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	serializeRegions(s, schemas.CreateEventRuleRequest_regions, v.Regions)
+	if v.Source != nil {
+		s.WriteString(schemas.CreateEventRuleRequest_source, *v.Source)
+	}
+}
+
 type CreateEventRuleOutput struct {
 
 	// The ARN of the resource.
@@ -100,77 +121,57 @@ type CreateEventRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEventRuleResponse_arn, *v.Arn)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.CreateEventRuleResponse_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	serializeStatusSummaryByRegion(s, schemas.CreateEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+}
+func (v *CreateEventRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventRuleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEventRuleResponse_arn, v.Arn)
+		case schemas.CreateEventRuleResponse_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateEventRuleResponse_notificationConfigurationArn, v.NotificationConfigurationArn)
+		case schemas.CreateEventRuleResponse_statusSummaryByRegion:
+			return deserializeStatusSummaryByRegion(d, schemas.CreateEventRuleResponse_statusSummaryByRegion, &v.StatusSummaryByRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventRule, schemas.CreateEventRuleRequest, schemas.CreateEventRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventRule, schemas.CreateEventRuleRequest, schemas.CreateEventRuleResponse), output: &CreateEventRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEventRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEventRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +186,8 @@ func (c *Client) addOperationCreateEventRuleMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEventRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEventRule",
-	}
 }

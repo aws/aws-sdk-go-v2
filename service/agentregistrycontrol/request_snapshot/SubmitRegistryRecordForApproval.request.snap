@@ -1,0 +1,3 @@
+POST /registries/__RegistryId__/records/__RecordId__/submit-for-approval
+
+

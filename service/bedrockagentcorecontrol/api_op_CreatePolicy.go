@@ -5,19 +5,15 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Creates a policy within the AgentCore Policy system. Policies provide
 // real-time, deterministic control over agentic interactions with AgentCore
-// Gateway. Using the Cedar policy language, you can define fine-grained policies
-// that specify which interactions with Gateway tools are permitted based on input
+// Gateway. Using Cedar or Dogwood, you can define fine-grained policies that
+// specify which interactions with Gateway tools are permitted based on input
 // parameters and OAuth claims, ensuring agents operate within defined boundaries
 // and business rules. The policy is validated during creation against the Cedar
 // schema generated from the Gateway's tools' input schemas, which defines the
@@ -25,6 +21,13 @@ import (
 // asynchronous operation. Use the [GetPolicy]operation to poll the status field to track
 // completion.
 //
+// If the new policy is a temporal policy, creating it invalidates the policy
+// engine's active temporal sessions. For more information about temporal policy
+// sessions, see [session-based temporal policies]. The policy engine returns an HTTP 409 ConflictException to
+// in-flight sessions. To resume, you must start a new session with a new session
+// ID.
+//
+// [session-based temporal policies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
 // [GetPolicy]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
@@ -43,10 +46,10 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 type CreatePolicyInput struct {
 
-	// The Cedar policy statement that defines the access control rules. This contains
-	// the actual policy logic written in Cedar policy language, specifying effect
-	// (permit or forbid), principals, actions, resources, and conditions for agent
-	// behavior control.
+	// The Cedar or Dogwood policy statement that defines the access control rules.
+	// This contains the actual policy logic written in Cedar or Dogwood, specifying
+	// effect (permit or forbid), principals, actions, resources, and conditions for
+	// agent behavior control.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition
@@ -65,9 +68,10 @@ type CreatePolicyInput struct {
 	PolicyEngineId *string
 
 	// A unique, case-sensitive identifier to ensure the idempotency of the request.
-	// The AWS SDK automatically generates this token, so you don't need to provide it
-	// in most cases. If you retry a request with the same client token, the service
-	// returns the same response without creating a duplicate policy.
+	// The Amazon Web Services SDK automatically generates this token, so you don't
+	// need to provide it in most cases. If you retry a request with the same client
+	// token, the service returns the same response without creating a duplicate
+	// policy.
 	ClientToken *string
 
 	// A human-readable description of the policy's purpose and functionality (1-4,096
@@ -77,6 +81,11 @@ type CreatePolicyInput struct {
 	// for maintenance. Clear descriptions are essential for policy governance,
 	// auditing, and troubleshooting.
 	Description *string
+
+	// The enforcement mode for the policy. Run this policy in LOG_ONLY mode to
+	// collect data on how it affects your application. Once you are satisfied with the
+	// data gathered, switch the policy to ACTIVE . Defaults to ACTIVE .
+	EnforcementMode types.EnforcementMode
 
 	// The validation mode for the policy creation. Determines how Cedar analyzer
 	// validation results are handled during policy creation. FAIL_ON_ANY_FINDINGS
@@ -92,31 +101,6 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePolicyRequest_clientToken, *v.ClientToken)
-	}
-	serializePolicyDefinition(s, schemas.CreatePolicyRequest_definition, v.Definition)
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePolicyRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreatePolicyRequest_name, *v.Name)
-	}
-	if v.PolicyEngineId != nil {
-		s.WriteString(schemas.CreatePolicyRequest_policyEngineId, *v.PolicyEngineId)
-	}
-	if v.ValidationMode != "" {
-		s.WriteString(schemas.CreatePolicyRequest_validationMode, string(v.ValidationMode))
-	}
-}
-
 type CreatePolicyOutput struct {
 
 	// The timestamp when the policy was created. This is automatically set by the
@@ -125,8 +109,9 @@ type CreatePolicyOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Cedar policy statement that was created. This is the validated policy
-	// definition that will be used for agent behavior control and access decisions.
+	// The Cedar or Dogwood policy statement that was created. This is the validated
+	// policy definition that will be used for agent behavior control and access
+	// decisions.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition
@@ -179,108 +164,32 @@ type CreatePolicyOutput struct {
 	// helps administrators understand and manage the policy.
 	Description *string
 
+	// The enforcement mode of the created policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePolicyResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyResponse_createdAt, v.CreatedAt)
-		case schemas.CreatePolicyResponse_definition:
-			return deserializePolicyDefinition(d, schemas.CreatePolicyResponse_definition, &v.Definition)
-		case schemas.CreatePolicyResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreatePolicyResponse_description, v.Description)
-		case schemas.CreatePolicyResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreatePolicyResponse_name, v.Name)
-		case schemas.CreatePolicyResponse_policyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.CreatePolicyResponse_policyArn, v.PolicyArn)
-		case schemas.CreatePolicyResponse_policyEngineId:
-			v.PolicyEngineId = new(string)
-			return d.ReadString(schemas.CreatePolicyResponse_policyEngineId, v.PolicyEngineId)
-		case schemas.CreatePolicyResponse_policyId:
-			v.PolicyId = new(string)
-			return d.ReadString(schemas.CreatePolicyResponse_policyId, v.PolicyId)
-		case schemas.CreatePolicyResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreatePolicyResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PolicyStatus(ev)
-			return nil
-		case schemas.CreatePolicyResponse_statusReasons:
-			return deserializePolicyStatusReasons(d, schemas.CreatePolicyResponse_statusReasons, &v.StatusReasons)
-		case schemas.CreatePolicyResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePolicy{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse), output: &CreatePolicyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -290,12 +199,6 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCreatePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -308,12 +211,6 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -353,12 +250,4 @@ func (m *idempotencyToken_initializeOpCreatePolicy) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreatePolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePolicy",
-	}
 }

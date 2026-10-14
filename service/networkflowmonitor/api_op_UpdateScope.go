@@ -4,13 +4,8 @@ package networkflowmonitor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update a scope to add or remove resources that you want to be available for
@@ -49,20 +44,6 @@ type UpdateScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateScopeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToAdd, v.ResourcesToAdd)
-	serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToDelete, v.ResourcesToDelete)
-	if v.ScopeId != nil {
-		s.WriteString(schemas.UpdateScopeInput_scopeId, *v.ScopeId)
-	}
-}
-
 type UpdateScopeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scope.
@@ -96,97 +77,29 @@ type UpdateScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateScopeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateScopeOutput_scopeArn:
-			v.ScopeArn = new(string)
-			return d.ReadString(schemas.UpdateScopeOutput_scopeArn, v.ScopeArn)
-		case schemas.UpdateScopeOutput_scopeId:
-			v.ScopeId = new(string)
-			return d.ReadString(schemas.UpdateScopeOutput_scopeId, v.ScopeId)
-		case schemas.UpdateScopeOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateScopeOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ScopeStatus(ev)
-			return nil
-		case schemas.UpdateScopeOutput_tags:
-			return deserializeTagMap(d, schemas.UpdateScopeOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScope, schemas.UpdateScopeInput, schemas.UpdateScopeOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScope{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScope, schemas.UpdateScopeInput, schemas.UpdateScopeOutput), output: &UpdateScopeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScope"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateScopeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScope(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +114,8 @@ func (c *Client) addOperationUpdateScopeMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateScope(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateScope",
-	}
 }

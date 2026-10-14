@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get an event log configuration.
@@ -39,18 +34,6 @@ type GetEventLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEventLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEventLogConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEventLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetEventLogConfigurationRequest_Id, *v.Id)
-	}
-}
-
 type GetEventLogConfigurationOutput struct {
 
 	// The logging level for the event log configuration.
@@ -71,98 +54,29 @@ type GetEventLogConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEventLogConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEventLogConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEventLogConfigurationResponse_EventLogLevel:
-			var ev string
-			if err := d.ReadString(schemas.GetEventLogConfigurationResponse_EventLogLevel, &ev); err != nil {
-				return err
-			}
-			v.EventLogLevel = types.LogLevel(ev)
-			return nil
-		case schemas.GetEventLogConfigurationResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetEventLogConfigurationResponse_Id, v.Id)
-		case schemas.GetEventLogConfigurationResponse_ResourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.GetEventLogConfigurationResponse_ResourceId, v.ResourceId)
-		case schemas.GetEventLogConfigurationResponse_ResourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.GetEventLogConfigurationResponse_ResourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEventLogConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventLogConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventLogConfiguration, schemas.GetEventLogConfigurationRequest, schemas.GetEventLogConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventLogConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventLogConfiguration, schemas.GetEventLogConfigurationRequest, schemas.GetEventLogConfigurationResponse), output: &GetEventLogConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEventLogConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEventLogConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventLogConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +91,8 @@ func (c *Client) addOperationGetEventLogConfigurationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEventLogConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEventLogConfiguration",
-	}
 }

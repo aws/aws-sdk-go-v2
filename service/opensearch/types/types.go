@@ -1897,6 +1897,10 @@ func (v *ChangeProgressStage) Deserialize(d smithy.ShapeDeserializer) error {
 // The progress details of a specific domain configuration change.
 type ChangeProgressStatusDetails struct {
 
+	// The list of advisory warning codes that were accepted for the configuration
+	// change.
+	AcceptedWarnings []string
+
 	// The unique change identifier associated with a specific domain configuration
 	// change.
 	ChangeId *string
@@ -1930,6 +1934,9 @@ type ChangeProgressStatusDetails struct {
 	// The total number of stages required for the configuration change.
 	TotalNumberOfStages int32
 
+	// The validation failures that occurred as a result of the configuration change.
+	ValidationFailures []ValidationFailure
+
 	noSmithyDocumentSerde
 }
 
@@ -1940,6 +1947,7 @@ func (v *ChangeProgressStatusDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptedWarningsList(s, schemas.ChangeProgressStatusDetails_AcceptedWarnings, v.AcceptedWarnings)
 	if v.ChangeId != nil {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ChangeId, *v.ChangeId)
 	}
@@ -1964,10 +1972,13 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TotalNumberOfStages != 0 {
 		s.WriteInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, v.TotalNumberOfStages)
 	}
+	serializeValidationFailures(s, schemas.ChangeProgressStatusDetails_ValidationFailures, v.ValidationFailures)
 }
 func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChangeProgressStatusDetails, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ChangeProgressStatusDetails_AcceptedWarnings:
+			return deserializeAcceptedWarningsList(d, schemas.ChangeProgressStatusDetails_AcceptedWarnings, &v.AcceptedWarnings)
 		case schemas.ChangeProgressStatusDetails_ChangeId:
 			v.ChangeId = new(string)
 			return d.ReadString(schemas.ChangeProgressStatusDetails_ChangeId, v.ChangeId)
@@ -2006,6 +2017,8 @@ func (v *ChangeProgressStatusDetails) Deserialize(d smithy.ShapeDeserializer) er
 			return nil
 		case schemas.ChangeProgressStatusDetails_TotalNumberOfStages:
 			return d.ReadInt32(schemas.ChangeProgressStatusDetails_TotalNumberOfStages, &v.TotalNumberOfStages)
+		case schemas.ChangeProgressStatusDetails_ValidationFailures:
+			return deserializeValidationFailures(d, schemas.ChangeProgressStatusDetails_ValidationFailures, &v.ValidationFailures)
 		}
 		return nil
 	})
@@ -2583,6 +2596,64 @@ func (v *DataSource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Summary information about a data source attachment, including its identifier,
+// data source ARN, and current status.
+type DataSourceAttachmentSummary struct {
+
+	// The unique identifier assigned to the data source attachment.
+	AttachmentId *string
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	DataSourceArn *string
+
+	// The current status of the data source attachment. Valid values are PENDING ,
+	// ATTACHED , and FAILED .
+	Status DataSourceAttachmentStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataSourceAttachmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSourceAttachmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSourceAttachmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.DataSourceAttachmentSummary_attachmentId, *v.AttachmentId)
+	}
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DataSourceAttachmentSummary_dataSourceArn, *v.DataSourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DataSourceAttachmentSummary_status, string(v.Status))
+	}
+}
+func (v *DataSourceAttachmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSourceAttachmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSourceAttachmentSummary_attachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.DataSourceAttachmentSummary_attachmentId, v.AttachmentId)
+		case schemas.DataSourceAttachmentSummary_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.DataSourceAttachmentSummary_dataSourceArn, v.DataSourceArn)
+		case schemas.DataSourceAttachmentSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DataSourceAttachmentSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DataSourceAttachmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about a direct-query data source.
 type DataSourceDetails struct {
 
@@ -2977,6 +3048,9 @@ type DomainConfig struct {
 	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
 
+	// The engine mode configured for the domain.
+	EngineMode *EngineModeStatus
+
 	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
@@ -3008,6 +3082,9 @@ type DomainConfig struct {
 
 	// Software update options for the domain.
 	SoftwareUpdateOptions *SoftwareUpdateOptionsStatus
+
+	// The use case configured for the domain.
+	UseCase *UseCaseStatus
 
 	// The current VPC options for the domain and the status of any updates to their
 	// configuration.
@@ -3088,6 +3165,11 @@ func (v *DomainConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionAtRestOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EngineMode != nil {
+		s.WriteStruct(schemas.DomainConfig_EngineMode)
+		v.EngineMode.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EngineVersion != nil {
 		s.WriteStruct(schemas.DomainConfig_EngineVersion)
 		v.EngineVersion.SerializeMembers(s)
@@ -3127,6 +3209,11 @@ func (v *DomainConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SoftwareUpdateOptions != nil {
 		s.WriteStruct(schemas.DomainConfig_SoftwareUpdateOptions)
 		v.SoftwareUpdateOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseCase != nil {
+		s.WriteStruct(schemas.DomainConfig_UseCase)
+		v.UseCase.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.VPCOptions != nil {
@@ -3177,6 +3264,9 @@ func (v *DomainConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DomainConfig_EncryptionAtRestOptions:
 			v.EncryptionAtRestOptions = &EncryptionAtRestOptionsStatus{}
 			return v.EncryptionAtRestOptions.Deserialize(d)
+		case schemas.DomainConfig_EngineMode:
+			v.EngineMode = &EngineModeStatus{}
+			return v.EngineMode.Deserialize(d)
 		case schemas.DomainConfig_EngineVersion:
 			v.EngineVersion = &VersionStatus{}
 			return v.EngineVersion.Deserialize(d)
@@ -3203,6 +3293,9 @@ func (v *DomainConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DomainConfig_SoftwareUpdateOptions:
 			v.SoftwareUpdateOptions = &SoftwareUpdateOptionsStatus{}
 			return v.SoftwareUpdateOptions.Deserialize(d)
+		case schemas.DomainConfig_UseCase:
+			v.UseCase = &UseCaseStatus{}
+			return v.UseCase.Deserialize(d)
 		case schemas.DomainConfig_VPCOptions:
 			v.VPCOptions = &VPCDerivedInfoStatus{}
 			return v.VPCOptions.Deserialize(d)
@@ -3872,6 +3965,9 @@ type DomainStatus struct {
 	//   'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'
 	Endpoints map[string]string
 
+	// The engine mode for the domain.
+	EngineMode EngineMode
+
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the
 	// format Elasticsearch_X.Y or OpenSearch_X.Y .
 	EngineVersion *string
@@ -3914,6 +4010,9 @@ type DomainStatus struct {
 	// Elasticsearch. True if OpenSearch Service is in the process of a version
 	// upgrade. False if the configuration is active.
 	UpgradeProcessing *bool
+
+	// The primary use case for the domain.
+	UseCase DomainUseCase
 
 	// The VPC configuration for the domain.
 	VPCOptions *VPCDerivedInfo
@@ -4015,6 +4114,9 @@ func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DomainStatus_EndpointV2, *v.EndpointV2)
 	}
 	serializeEndpointsMap(s, schemas.DomainStatus_Endpoints, v.Endpoints)
+	if v.EngineMode != "" {
+		s.WriteString(schemas.DomainStatus_EngineMode, string(v.EngineMode))
+	}
 	if v.EngineVersion != nil {
 		s.WriteString(schemas.DomainStatus_EngineVersion, *v.EngineVersion)
 	}
@@ -4058,6 +4160,9 @@ func (v *DomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpgradeProcessing != nil {
 		s.WriteBool(schemas.DomainStatus_UpgradeProcessing, *v.UpgradeProcessing)
+	}
+	if v.UseCase != "" {
+		s.WriteString(schemas.DomainStatus_UseCase, string(v.UseCase))
 	}
 	if v.VPCOptions != nil {
 		s.WriteStruct(schemas.DomainStatus_VPCOptions)
@@ -4139,6 +4244,13 @@ func (v *DomainStatus) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.DomainStatus_EndpointV2, v.EndpointV2)
 		case schemas.DomainStatus_Endpoints:
 			return deserializeEndpointsMap(d, schemas.DomainStatus_Endpoints, &v.Endpoints)
+		case schemas.DomainStatus_EngineMode:
+			var ev string
+			if err := d.ReadString(schemas.DomainStatus_EngineMode, &ev); err != nil {
+				return err
+			}
+			v.EngineMode = EngineMode(ev)
+			return nil
 		case schemas.DomainStatus_EngineVersion:
 			v.EngineVersion = new(string)
 			return d.ReadString(schemas.DomainStatus_EngineVersion, v.EngineVersion)
@@ -4177,6 +4289,13 @@ func (v *DomainStatus) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DomainStatus_UpgradeProcessing:
 			v.UpgradeProcessing = new(bool)
 			return d.ReadBool(schemas.DomainStatus_UpgradeProcessing, v.UpgradeProcessing)
+		case schemas.DomainStatus_UseCase:
+			var ev string
+			if err := d.ReadString(schemas.DomainStatus_UseCase, &ev); err != nil {
+				return err
+			}
+			v.UseCase = DomainUseCase(ev)
+			return nil
 		case schemas.DomainStatus_VPCOptions:
 			v.VPCOptions = &VPCDerivedInfo{}
 			return v.VPCOptions.Deserialize(d)
@@ -4208,7 +4327,11 @@ type DryRunProgressStatus struct {
 	// This member is required.
 	UpdateDate *string
 
-	// Any validation failures that occurred as a result of the dry run.
+	// The list of advisory warning codes that were accepted for the configuration
+	// change.
+	AcceptedWarnings []string
+
+	// The validation failures that occurred as a result of the dry run.
 	ValidationFailures []ValidationFailure
 
 	noSmithyDocumentSerde
@@ -4221,6 +4344,7 @@ func (v *DryRunProgressStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptedWarningsList(s, schemas.DryRunProgressStatus_AcceptedWarnings, v.AcceptedWarnings)
 	if v.CreationDate != nil {
 		s.WriteString(schemas.DryRunProgressStatus_CreationDate, *v.CreationDate)
 	}
@@ -4238,6 +4362,8 @@ func (v *DryRunProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DryRunProgressStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DryRunProgressStatus, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DryRunProgressStatus_AcceptedWarnings:
+			return deserializeAcceptedWarningsList(d, schemas.DryRunProgressStatus_AcceptedWarnings, &v.AcceptedWarnings)
 		case schemas.DryRunProgressStatus_CreationDate:
 			v.CreationDate = new(string)
 			return d.ReadString(schemas.DryRunProgressStatus_CreationDate, v.CreationDate)
@@ -4486,6 +4612,13 @@ type EncryptionAtRestOptions struct {
 	// True to enable encryption at rest.
 	Enabled *bool
 
+	// The type of encryption at rest applied to the domain's data. Valid values are
+	// DISK and NATIVE . DISK is the default and uses volume-level encryption. NATIVE
+	// uses engine-native, index-level encryption and requires encryption at rest to be
+	// enabled and OpenSearch version 3.3 or later. After the mode is set to NATIVE ,
+	// it can't be changed back to DISK .
+	EncryptionMode EncryptionMode
+
 	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a .
 	KmsKeyId *string
 
@@ -4502,6 +4635,9 @@ func (v *EncryptionAtRestOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.EncryptionAtRestOptions_Enabled, *v.Enabled)
 	}
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.EncryptionAtRestOptions_EncryptionMode, string(v.EncryptionMode))
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.EncryptionAtRestOptions_KmsKeyId, *v.KmsKeyId)
 	}
@@ -4512,6 +4648,13 @@ func (v *EncryptionAtRestOptions) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.EncryptionAtRestOptions_Enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.EncryptionAtRestOptions_Enabled, v.Enabled)
+		case schemas.EncryptionAtRestOptions_EncryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionAtRestOptions_EncryptionMode, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMode = EncryptionMode(ev)
+			return nil
 		case schemas.EncryptionAtRestOptions_KmsKeyId:
 			v.KmsKeyId = new(string)
 			return d.ReadString(schemas.EncryptionAtRestOptions_KmsKeyId, v.KmsKeyId)
@@ -4562,6 +4705,56 @@ func (v *EncryptionAtRestOptionsStatus) Deserialize(d smithy.ShapeDeserializer) 
 			v.Options = &EncryptionAtRestOptions{}
 			return v.Options.Deserialize(d)
 		case schemas.EncryptionAtRestOptionsStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The status of the engine mode for the domain.
+type EngineModeStatus struct {
+
+	// The engine mode configured for the domain.
+	//
+	// This member is required.
+	Options EngineMode
+
+	// The current status of the engine mode for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *EngineModeStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineModeStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineModeStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != "" {
+		s.WriteString(schemas.EngineModeStatus_Options, string(v.Options))
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.EngineModeStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EngineModeStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineModeStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineModeStatus_Options:
+			var ev string
+			if err := d.ReadString(schemas.EngineModeStatus_Options, &ev); err != nil {
+				return err
+			}
+			v.Options = EngineMode(ev)
+			return nil
+		case schemas.EngineModeStatus_Status:
 			v.Status = &OptionStatus{}
 			return v.Status.Deserialize(d)
 		}
@@ -4632,6 +4825,52 @@ func (v *ErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ErrorDetails_ErrorType:
 			v.ErrorType = new(string)
 			return d.ReadString(schemas.ErrorDetails_ErrorType, v.ErrorType)
+		}
+		return nil
+	})
+}
+
+// Options to filter the scope of saved objects to export during a migration.
+type ExportOptions struct {
+
+	// Specifies whether to include all objects referenced by the exported objects,
+	// recursively.
+	IncludeReferencesDeep *bool
+
+	// A list of specific saved objects to include in the migration, identified by
+	// type and ID.
+	Objects []SavedObjectIdentifier
+
+	// A list of saved object types to include in the migration. Valid values include
+	// dashboard , visualization , index-pattern , search , and query .
+	Types []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExportOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeReferencesDeep != nil {
+		s.WriteBool(schemas.ExportOptions_includeReferencesDeep, *v.IncludeReferencesDeep)
+	}
+	serializeSavedObjectIdentifierList(s, schemas.ExportOptions_objects, v.Objects)
+	serializeStringList(s, schemas.ExportOptions_types, v.Types)
+}
+func (v *ExportOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportOptions_includeReferencesDeep:
+			v.IncludeReferencesDeep = new(bool)
+			return d.ReadBool(schemas.ExportOptions_includeReferencesDeep, v.IncludeReferencesDeep)
+		case schemas.ExportOptions_objects:
+			return deserializeSavedObjectIdentifierList(d, schemas.ExportOptions_objects, &v.Objects)
+		case schemas.ExportOptions_types:
+			return deserializeStringList(d, schemas.ExportOptions_types, &v.Types)
 		}
 		return nil
 	})
@@ -5418,6 +5657,55 @@ func (v *InsightEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the entity for which to submit insight feedback. An entity represents
+// an Amazon OpenSearch Service domain.
+type InsightFeedbackEntity struct {
+
+	// The type of the entity. Possible values are DomainName .
+	//
+	// This member is required.
+	Type InsightFeedbackEntityType
+
+	// The value of the entity, such as a domain name.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InsightFeedbackEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightFeedbackEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightFeedbackEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.InsightFeedbackEntity_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.InsightFeedbackEntity_Value, *v.Value)
+	}
+}
+func (v *InsightFeedbackEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightFeedbackEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightFeedbackEntity_Type:
+			var ev string
+			if err := d.ReadString(schemas.InsightFeedbackEntity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = InsightFeedbackEntityType(ev)
+			return nil
+		case schemas.InsightFeedbackEntity_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.InsightFeedbackEntity_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents a field in the detailed view of an insight, returned by the
 // DescribeInsightDetails operation.
 type InsightField struct {
@@ -6097,6 +6385,318 @@ func (v *MasterUserOptions) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MasterUserOptions_MasterUserPassword:
 			v.MasterUserPassword = new(string)
 			return d.ReadString(schemas.MasterUserOptions_MasterUserPassword, v.MasterUserPassword)
+		}
+		return nil
+	})
+}
+
+// Contains error details for a migration that failed or completed with errors.
+type MigrationError struct {
+
+	// The error code identifying the type of failure.
+	Code *string
+
+	// A human-readable description of the error.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.MigrationError_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MigrationError_message, *v.Message)
+	}
+}
+func (v *MigrationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.MigrationError_code, v.Code)
+		case schemas.MigrationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MigrationError_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The configuration options for a saved objects migration job.
+type MigrationOptions struct {
+
+	// The data source from which to export saved objects.
+	//
+	// This member is required.
+	Source *MigrationSource
+
+	// The target workspace configuration for importing saved objects. You can specify
+	// an existing workspace or request creation of a new workspace.
+	//
+	// This member is required.
+	Workspace *MigrationWorkspace
+
+	// The strategy for resolving conflicts when saved objects already exist in the
+	// target workspace. Valid values are CREATE_NEW_COPIES , which creates new objects
+	// with unique IDs, and overwrite , which replaces existing objects.
+	ConflictResolution *string
+
+	// Options to filter the scope of saved objects to export from the source.
+	ExportOptions *ExportOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictResolution != nil {
+		s.WriteString(schemas.MigrationOptions_conflictResolution, *v.ConflictResolution)
+	}
+	if v.ExportOptions != nil {
+		s.WriteStruct(schemas.MigrationOptions_exportOptions)
+		v.ExportOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.MigrationOptions_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Workspace != nil {
+		s.WriteStruct(schemas.MigrationOptions_workspace)
+		v.Workspace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MigrationOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationOptions_conflictResolution:
+			v.ConflictResolution = new(string)
+			return d.ReadString(schemas.MigrationOptions_conflictResolution, v.ConflictResolution)
+		case schemas.MigrationOptions_exportOptions:
+			v.ExportOptions = &ExportOptions{}
+			return v.ExportOptions.Deserialize(d)
+		case schemas.MigrationOptions_source:
+			v.Source = &MigrationSource{}
+			return v.Source.Deserialize(d)
+		case schemas.MigrationOptions_workspace:
+			v.Workspace = &MigrationWorkspace{}
+			return v.Workspace.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The source configuration for a migration, specifying the data source from which
+// to export saved objects.
+type MigrationSource struct {
+
+	// The Amazon Resource Name (ARN) of the data source to migrate saved objects from.
+	//
+	// This member is required.
+	DatasourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasourceArn != nil {
+		s.WriteString(schemas.MigrationSource_datasourceArn, *v.DatasourceArn)
+	}
+}
+func (v *MigrationSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationSource_datasourceArn:
+			v.DatasourceArn = new(string)
+			return d.ReadString(schemas.MigrationSource_datasourceArn, v.DatasourceArn)
+		}
+		return nil
+	})
+}
+
+// A summary of a migration job, including its status and progress.
+type MigrationSummary struct {
+
+	// The unique identifier of the OpenSearch application associated with the
+	// migration.
+	ApplicationId *string
+
+	// The date and time when the migration job was created.
+	CreatedAt *time.Time
+
+	// Error details if the migration failed or completed with errors.
+	Error *MigrationError
+
+	// The number of saved objects exported from the source data source.
+	ExportedCount int32
+
+	// The number of saved objects successfully imported into the target workspace.
+	ImportedCount int32
+
+	// The unique identifier of the migration job.
+	MigrationId *string
+
+	// The source configuration for the migration.
+	Source *MigrationSource
+
+	// The current status of the migration job.
+	Status *string
+
+	// The date and time when the migration job was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.MigrationSummary_applicationId, *v.ApplicationId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MigrationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.MigrationSummary_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportedCount != 0 {
+		s.WriteInt32(schemas.MigrationSummary_exportedCount, v.ExportedCount)
+	}
+	if v.ImportedCount != 0 {
+		s.WriteInt32(schemas.MigrationSummary_importedCount, v.ImportedCount)
+	}
+	if v.MigrationId != nil {
+		s.WriteString(schemas.MigrationSummary_migrationId, *v.MigrationId)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.MigrationSummary_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.MigrationSummary_status, *v.Status)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.MigrationSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *MigrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationSummary_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.MigrationSummary_applicationId, v.ApplicationId)
+		case schemas.MigrationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MigrationSummary_createdAt, v.CreatedAt)
+		case schemas.MigrationSummary_error:
+			v.Error = &MigrationError{}
+			return v.Error.Deserialize(d)
+		case schemas.MigrationSummary_exportedCount:
+			return d.ReadInt32(schemas.MigrationSummary_exportedCount, &v.ExportedCount)
+		case schemas.MigrationSummary_importedCount:
+			return d.ReadInt32(schemas.MigrationSummary_importedCount, &v.ImportedCount)
+		case schemas.MigrationSummary_migrationId:
+			v.MigrationId = new(string)
+			return d.ReadString(schemas.MigrationSummary_migrationId, v.MigrationId)
+		case schemas.MigrationSummary_source:
+			v.Source = &MigrationSource{}
+			return v.Source.Deserialize(d)
+		case schemas.MigrationSummary_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.MigrationSummary_status, v.Status)
+		case schemas.MigrationSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MigrationSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The target workspace configuration for a migration. You can specify an existing
+// workspace by ID or request creation of a new workspace.
+type MigrationWorkspace struct {
+
+	// Specifies whether to create a new workspace as the migration target. If true ,
+	// you must also specify name .
+	CreateWorkspace *bool
+
+	// The name of the new workspace to create. Required when createWorkspace is true .
+	Name *string
+
+	// The type of the new workspace to create.
+	Type *string
+
+	// The unique identifier of an existing workspace to use as the migration target.
+	// Specify either this parameter or createWorkspace .
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationWorkspace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationWorkspace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationWorkspace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateWorkspace != nil {
+		s.WriteBool(schemas.MigrationWorkspace_createWorkspace, *v.CreateWorkspace)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MigrationWorkspace_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.MigrationWorkspace_type, *v.Type)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.MigrationWorkspace_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *MigrationWorkspace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationWorkspace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationWorkspace_createWorkspace:
+			v.CreateWorkspace = new(bool)
+			return d.ReadBool(schemas.MigrationWorkspace_createWorkspace, v.CreateWorkspace)
+		case schemas.MigrationWorkspace_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MigrationWorkspace_name, v.Name)
+		case schemas.MigrationWorkspace_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.MigrationWorkspace_type, v.Type)
+		case schemas.MigrationWorkspace_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.MigrationWorkspace_workspaceId, v.WorkspaceId)
 		}
 		return nil
 	})
@@ -8087,6 +8687,51 @@ func (v *SAMLOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Identifies a specific saved object by its type and unique identifier.
+type SavedObjectIdentifier struct {
+
+	// The unique identifier of the saved object.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of the saved object, such as dashboard , visualization , index-pattern
+	// , search , or query .
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SavedObjectIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavedObjectIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavedObjectIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SavedObjectIdentifier_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SavedObjectIdentifier_type, *v.Type)
+	}
+}
+func (v *SavedObjectIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavedObjectIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavedObjectIdentifier_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SavedObjectIdentifier_id, v.Id)
+		case schemas.SavedObjectIdentifier_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SavedObjectIdentifier_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Information about a scheduled configuration change for an OpenSearch Service
 // domain. This actions can be a [service software update]or a [blue/green Auto-Tune enhancement].
 //
@@ -8960,6 +9605,56 @@ func (v *UpgradeStepItem) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The status of the use case for the domain.
+type UseCaseStatus struct {
+
+	// The use case configured for the domain.
+	//
+	// This member is required.
+	Options DomainUseCase
+
+	// The current status of the use case for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *UseCaseStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UseCaseStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UseCaseStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != "" {
+		s.WriteString(schemas.UseCaseStatus_Options, string(v.Options))
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.UseCaseStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UseCaseStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UseCaseStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UseCaseStatus_Options:
+			var ev string
+			if err := d.ReadString(schemas.UseCaseStatus_Options, &ev); err != nil {
+				return err
+			}
+			v.Options = DomainUseCase(ev)
+			return nil
+		case schemas.UseCaseStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A validation failure that occurred as the result of a pre-update validation
 // check (verbose dry run) on a domain.
 type ValidationFailure struct {
@@ -8969,6 +9664,9 @@ type ValidationFailure struct {
 
 	// A message corresponding to the failure.
 	Message *string
+
+	// The severity of the validation failure.
+	Severity ValidationFailureSeverity
 
 	noSmithyDocumentSerde
 }
@@ -8986,6 +9684,9 @@ func (v *ValidationFailure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationFailure_Message, *v.Message)
 	}
+	if v.Severity != "" {
+		s.WriteString(schemas.ValidationFailure_Severity, string(v.Severity))
+	}
 }
 func (v *ValidationFailure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationFailure, func(s *smithy.Schema) error {
@@ -8996,6 +9697,13 @@ func (v *ValidationFailure) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ValidationFailure_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ValidationFailure_Message, v.Message)
+		case schemas.ValidationFailure_Severity:
+			var ev string
+			if err := d.ReadString(schemas.ValidationFailure_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = ValidationFailureSeverity(ev)
+			return nil
 		}
 		return nil
 	})
@@ -9449,6 +10157,56 @@ func (v *WindowStartTime) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt64(schemas.WindowStartTime_Hours, &v.Hours)
 		case schemas.WindowStartTime_Minutes:
 			return d.ReadInt64(schemas.WindowStartTime_Minutes, &v.Minutes)
+		}
+		return nil
+	})
+}
+
+// Configuration for creating a new workspace when attaching a data source to an
+// OpenSearch application. The workspace is created after the data source is
+// successfully attached.
+type WorkspaceConfigurationInput struct {
+
+	// The name of the workspace to create. Must be between 1 and 40 characters and
+	// can contain alphanumeric characters, parentheses, brackets, hyphens,
+	// underscores, and spaces.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of workspace to create, which determines the use-case features enabled
+	// for the workspace. Valid values are OBSERVABILITY , SECURITY_ANALYTICS , and
+	// SEARCH .
+	//
+	// This member is required.
+	WorkspaceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.WorkspaceConfigurationInput_name, *v.Name)
+	}
+	if v.WorkspaceType != nil {
+		s.WriteString(schemas.WorkspaceConfigurationInput_workspaceType, *v.WorkspaceType)
+	}
+}
+func (v *WorkspaceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceConfigurationInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkspaceConfigurationInput_name, v.Name)
+		case schemas.WorkspaceConfigurationInput_workspaceType:
+			v.WorkspaceType = new(string)
+			return d.ReadString(schemas.WorkspaceConfigurationInput_workspaceType, v.WorkspaceType)
 		}
 		return nil
 	})

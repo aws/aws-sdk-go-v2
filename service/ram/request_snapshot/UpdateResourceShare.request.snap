@@ -1,0 +1,5 @@
+POST /updateresourceshare
+
+Content-Type: application/json
+
+{"allowExternalPrincipals":true,"clientToken":"__ClientToken__","name":"__Name__","resourceShareArn":"__ResourceShareArn__"}

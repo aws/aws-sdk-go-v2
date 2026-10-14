@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/cc/outboundConnection
+
+Content-Type: application/json
+
+{"ConnectionAlias":"__ConnectionAlias__","ConnectionMode":"DIRECT","ConnectionProperties":{"CrossClusterSearch":{"SkipUnavailable":"ENABLED"},"Endpoint":"__Endpoint__"},"LocalDomainInfo":{"AWSDomainInformation":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}},"RemoteDomainInfo":{"AWSDomainInformation":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}}}

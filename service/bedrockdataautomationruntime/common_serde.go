@@ -82,6 +82,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func deserializeBlueprintList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Blueprint) error {
+	*v = make([]types.Blueprint, 0)
 	var vv types.Blueprint
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Blueprint{}
@@ -95,6 +96,7 @@ func deserializeBlueprintList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeOutputSegmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OutputSegment) error {
+	*v = make([]types.OutputSegment, 0)
 	var vv types.OutputSegment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.OutputSegment{}
@@ -108,6 +110,7 @@ func deserializeOutputSegmentList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -121,6 +124,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -149,6 +153,13 @@ func deserializeEncryptionContextMap(d smithy.ShapeDeserializer, s *smithy.Schem
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

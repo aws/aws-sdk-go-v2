@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.GetCreditAllocationHistory
+
+{"accountId":"__AccountId__","creditId":1,"endDate":946684800,"maxResults":1,"nextToken":"__NextToken__","startDate":946684800}

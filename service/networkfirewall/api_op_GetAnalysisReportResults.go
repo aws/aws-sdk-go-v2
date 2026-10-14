@@ -5,12 +5,10 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -126,6 +124,33 @@ type GetAnalysisReportResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisReportResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisReportResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisReportResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisReportResults(s, schemas.GetAnalysisReportResultsResponse_AnalysisReportResults, v.AnalysisReportResults)
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.GetAnalysisReportResultsResponse_AnalysisType, string(v.AnalysisType))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetAnalysisReportResultsResponse_EndTime, *v.EndTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsResponse_NextToken, *v.NextToken)
+	}
+	if v.ReportTime != nil {
+		s.WriteTime(schemas.GetAnalysisReportResultsResponse_ReportTime, *v.ReportTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetAnalysisReportResultsResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetAnalysisReportResultsResponse_Status, *v.Status)
+	}
+}
 func (v *GetAnalysisReportResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAnalysisReportResultsResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -158,74 +183,26 @@ func (v *GetAnalysisReportResultsOutput) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 func (c *Client) addOperationGetAnalysisReportResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisReportResults, schemas.GetAnalysisReportResultsRequest, schemas.GetAnalysisReportResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisReportResults, schemas.GetAnalysisReportResultsRequest, schemas.GetAnalysisReportResultsResponse), output: &GetAnalysisReportResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAnalysisReportResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAnalysisReportResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnalysisReportResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,12 +215,6 @@ func (c *Client) addOperationGetAnalysisReportResultsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -349,11 +320,3 @@ type GetAnalysisReportResultsAPIClient interface {
 }
 
 var _ GetAnalysisReportResultsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAnalysisReportResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAnalysisReportResults",
-	}
-}

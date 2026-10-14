@@ -1,0 +1,5 @@
+POST /updateNotificationRule
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","DetailType":"BASIC","EventTypeIds":["__Member__","__Member__"],"Name":"__Name__","Status":"ENABLED","Targets":[{"TargetAddress":"__TargetAddress__","TargetType":"__TargetType__"},{"TargetAddress":"__TargetAddress__","TargetType":"__TargetType__"}]}

@@ -15,6 +15,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AccessDeniedException,
 			New:    func() any { return &types.AccessDeniedException{} },
 		},
+		"com.amazonaws.arcregionswitch#ConflictException": {
+			Schema: schemas.ConflictException,
+			New:    func() any { return &types.ConflictException{} },
+		},
 		"com.amazonaws.arcregionswitch#IllegalArgumentException": {
 			Schema: schemas.IllegalArgumentException,
 			New:    func() any { return &types.IllegalArgumentException{} },

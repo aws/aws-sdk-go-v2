@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.CancelQuery
+
+{"EventDataStore":"__EventDataStore__","EventDataStoreOwnerAccountId":"__EventDataStoreOwnerAccountId__","QueryId":"__QueryId__"}

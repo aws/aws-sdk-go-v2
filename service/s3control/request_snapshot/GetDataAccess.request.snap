@@ -1,0 +1,4 @@
+GET /v20180820/accessgrantsinstance/dataaccess?auditContext=__AuditContext__&durationSeconds=1&permission=READ&privilege=Minimal&target=__Target__&targetType=Object
+
+X-Amz-Account-Id: AccountId-value
+

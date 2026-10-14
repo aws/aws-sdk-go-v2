@@ -4,13 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,18 +35,6 @@ type GetDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDbClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDbClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DbClusterId != nil {
-		s.WriteString(schemas.GetDbClusterInput_dbClusterId, *v.DbClusterId)
-	}
-}
-
 type GetDbClusterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the DB cluster.
@@ -75,6 +58,9 @@ type GetDbClusterOutput struct {
 	// Configuration for node modes in the DbCluster.
 	ClusterConfiguration *types.ClusterConfiguration
 
+	// The backup configurations for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
@@ -86,6 +72,13 @@ type GetDbClusterOutput struct {
 
 	// Deployment type of the DB cluster.
 	DeploymentType types.ClusterDeploymentType
+
+	// The ID of the DB parameter group actually applied to your DB cluster. When the
+	// service applies optimized defaults, it creates a service-managed DB parameter
+	// group and this field reflects that group, while dbParameterGroupIdentifier
+	// reflects the customer-provided DB parameter group. When no service-managed DB
+	// parameter group is applied, this value matches dbParameterGroupIdentifier.
+	EffectiveDbParameterGroupIdentifier *string
 
 	// The endpoint used to connect to the Timestream for InfluxDB cluster for write
 	// and read operations.
@@ -102,6 +95,9 @@ type GetDbClusterOutput struct {
 	// key-value pair holding InfluxDB authorization values: organization, bucket,
 	// username, and password.
 	InfluxAuthParametersSecretArn *string
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB cluster.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB cluster.
 	LastMaintenanceTime *time.Time
@@ -146,180 +142,29 @@ type GetDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDbClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDbClusterOutput_allocatedStorage:
-			v.AllocatedStorage = new(int32)
-			return d.ReadInt32(schemas.GetDbClusterOutput_allocatedStorage, v.AllocatedStorage)
-		case schemas.GetDbClusterOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_arn, v.Arn)
-		case schemas.GetDbClusterOutput_clusterConfiguration:
-			v.ClusterConfiguration = &types.ClusterConfiguration{}
-			return v.ClusterConfiguration.Deserialize(d)
-		case schemas.GetDbClusterOutput_dbInstanceType:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_dbInstanceType, &ev); err != nil {
-				return err
-			}
-			v.DbInstanceType = types.DbInstanceType(ev)
-			return nil
-		case schemas.GetDbClusterOutput_dbParameterGroupIdentifier:
-			v.DbParameterGroupIdentifier = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
-		case schemas.GetDbClusterOutput_dbStorageType:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_dbStorageType, &ev); err != nil {
-				return err
-			}
-			v.DbStorageType = types.DbStorageType(ev)
-			return nil
-		case schemas.GetDbClusterOutput_deploymentType:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_deploymentType, &ev); err != nil {
-				return err
-			}
-			v.DeploymentType = types.ClusterDeploymentType(ev)
-			return nil
-		case schemas.GetDbClusterOutput_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_endpoint, v.Endpoint)
-		case schemas.GetDbClusterOutput_engineType:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_engineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = types.EngineType(ev)
-			return nil
-		case schemas.GetDbClusterOutput_failoverMode:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_failoverMode, &ev); err != nil {
-				return err
-			}
-			v.FailoverMode = types.FailoverMode(ev)
-			return nil
-		case schemas.GetDbClusterOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_id, v.Id)
-		case schemas.GetDbClusterOutput_influxAuthParametersSecretArn:
-			v.InfluxAuthParametersSecretArn = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
-		case schemas.GetDbClusterOutput_lastMaintenanceTime:
-			v.LastMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.GetDbClusterOutput_lastMaintenanceTime, v.LastMaintenanceTime)
-		case schemas.GetDbClusterOutput_logDeliveryConfiguration:
-			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
-			return v.LogDeliveryConfiguration.Deserialize(d)
-		case schemas.GetDbClusterOutput_maintenanceSchedule:
-			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
-			return v.MaintenanceSchedule.Deserialize(d)
-		case schemas.GetDbClusterOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_name, v.Name)
-		case schemas.GetDbClusterOutput_networkType:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_networkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = types.NetworkType(ev)
-			return nil
-		case schemas.GetDbClusterOutput_nextMaintenanceTime:
-			v.NextMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.GetDbClusterOutput_nextMaintenanceTime, v.NextMaintenanceTime)
-		case schemas.GetDbClusterOutput_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.GetDbClusterOutput_port, v.Port)
-		case schemas.GetDbClusterOutput_publiclyAccessible:
-			v.PubliclyAccessible = new(bool)
-			return d.ReadBool(schemas.GetDbClusterOutput_publiclyAccessible, v.PubliclyAccessible)
-		case schemas.GetDbClusterOutput_readerEndpoint:
-			v.ReaderEndpoint = new(string)
-			return d.ReadString(schemas.GetDbClusterOutput_readerEndpoint, v.ReaderEndpoint)
-		case schemas.GetDbClusterOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDbClusterOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ClusterStatus(ev)
-			return nil
-		case schemas.GetDbClusterOutput_vpcSecurityGroupIds:
-			return deserializeVpcSecurityGroupIdList(d, schemas.GetDbClusterOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		case schemas.GetDbClusterOutput_vpcSubnetIds:
-			return deserializeVpcSubnetIdList(d, schemas.GetDbClusterOutput_vpcSubnetIds, &v.VpcSubnetIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbCluster, schemas.GetDbClusterInput, schemas.GetDbClusterOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbCluster, schemas.GetDbClusterInput, schemas.GetDbClusterOutput), output: &GetDbClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDbClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDbCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -334,22 +179,8 @@ func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDbCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDbCluster",
-	}
 }

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the resource permissions for a theme. Permissions apply to the action
@@ -88,6 +87,23 @@ type UpdateThemePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateThemePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.ThemeId != nil {
+		s.WriteString(schemas.UpdateThemePermissionsRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type UpdateThemePermissionsOutput struct {
 
 	// The resulting list of resource permissions for the theme.
@@ -111,77 +127,68 @@ type UpdateThemePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateThemePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateThemePermissionsResponse_Status, v.Status)
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.UpdateThemePermissionsResponse_ThemeArn, *v.ThemeArn)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.UpdateThemePermissionsResponse_ThemeId, *v.ThemeId)
+	}
+}
+func (v *UpdateThemePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThemePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateThemePermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.UpdateThemePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateThemePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateThemePermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateThemePermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateThemePermissionsResponse_Status, &v.Status)
+		case schemas.UpdateThemePermissionsResponse_ThemeArn:
+			v.ThemeArn = new(string)
+			return d.ReadString(schemas.UpdateThemePermissionsResponse_ThemeArn, v.ThemeArn)
+		case schemas.UpdateThemePermissionsResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.UpdateThemePermissionsResponse_ThemeId, v.ThemeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThemePermissions, schemas.UpdateThemePermissionsRequest, schemas.UpdateThemePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThemePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThemePermissions, schemas.UpdateThemePermissionsRequest, schemas.UpdateThemePermissionsResponse), output: &UpdateThemePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThemePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateThemePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateThemePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateThemePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +203,8 @@ func (c *Client) addOperationUpdateThemePermissionsMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateThemePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateThemePermissions",
-	}
 }

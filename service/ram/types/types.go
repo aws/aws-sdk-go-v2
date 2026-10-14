@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -73,6 +75,74 @@ type AssociatedPermission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatedPermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedPermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedPermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociatedPermission_arn, *v.Arn)
+	}
+	if v.DefaultVersion != nil {
+		s.WriteBool(schemas.AssociatedPermission_defaultVersion, *v.DefaultVersion)
+	}
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.AssociatedPermission_featureSet, string(v.FeatureSet))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.AssociatedPermission_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.PermissionVersion != nil {
+		s.WriteString(schemas.AssociatedPermission_permissionVersion, *v.PermissionVersion)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.AssociatedPermission_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.AssociatedPermission_resourceType, *v.ResourceType)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.AssociatedPermission_status, *v.Status)
+	}
+}
+func (v *AssociatedPermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedPermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedPermission_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociatedPermission_arn, v.Arn)
+		case schemas.AssociatedPermission_defaultVersion:
+			v.DefaultVersion = new(bool)
+			return d.ReadBool(schemas.AssociatedPermission_defaultVersion, v.DefaultVersion)
+		case schemas.AssociatedPermission_featureSet:
+			var ev string
+			if err := d.ReadString(schemas.AssociatedPermission_featureSet, &ev); err != nil {
+				return err
+			}
+			v.FeatureSet = PermissionFeatureSet(ev)
+			return nil
+		case schemas.AssociatedPermission_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.AssociatedPermission_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AssociatedPermission_permissionVersion:
+			v.PermissionVersion = new(string)
+			return d.ReadString(schemas.AssociatedPermission_permissionVersion, v.PermissionVersion)
+		case schemas.AssociatedPermission_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.AssociatedPermission_resourceShareArn, v.ResourceShareArn)
+		case schemas.AssociatedPermission_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.AssociatedPermission_resourceType, v.ResourceType)
+		case schemas.AssociatedPermission_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AssociatedPermission_status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Information about a source association in a resource share. Source associations
 // control which sources can be used with service principals.
 type AssociatedSource struct {
@@ -103,6 +173,64 @@ type AssociatedSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatedSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssociatedSource_creationTime, *v.CreationTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.AssociatedSource_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.AssociatedSource_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.AssociatedSource_sourceId, *v.SourceId)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.AssociatedSource_sourceType, *v.SourceType)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.AssociatedSource_status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.AssociatedSource_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *AssociatedSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedSource_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssociatedSource_creationTime, v.CreationTime)
+		case schemas.AssociatedSource_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.AssociatedSource_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AssociatedSource_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.AssociatedSource_resourceShareArn, v.ResourceShareArn)
+		case schemas.AssociatedSource_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.AssociatedSource_sourceId, v.SourceId)
+		case schemas.AssociatedSource_sourceType:
+			v.SourceType = new(string)
+			return d.ReadString(schemas.AssociatedSource_sourceType, v.SourceType)
+		case schemas.AssociatedSource_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AssociatedSource_status, v.Status)
+		case schemas.AssociatedSource_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.AssociatedSource_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Describes a principal for use with Resource Access Manager.
 type Principal struct {
 
@@ -130,6 +258,52 @@ type Principal struct {
 	ResourceShareArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Principal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Principal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Principal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Principal_creationTime, *v.CreationTime)
+	}
+	if v.External != nil {
+		s.WriteBool(schemas.Principal_external, *v.External)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Principal_id, *v.Id)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.Principal_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.Principal_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+func (v *Principal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Principal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Principal_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Principal_creationTime, v.CreationTime)
+		case schemas.Principal_external:
+			v.External = new(bool)
+			return d.ReadBool(schemas.Principal_external, v.External)
+		case schemas.Principal_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Principal_id, v.Id)
+		case schemas.Principal_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.Principal_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.Principal_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.Principal_resourceShareArn, v.ResourceShareArn)
+		}
+		return nil
+	})
 }
 
 // A structure that represents the background work that RAM performs when you
@@ -180,6 +354,80 @@ type ReplacePermissionAssociationsWork struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplacePermissionAssociationsWork) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplacePermissionAssociationsWork)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplacePermissionAssociationsWork) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ReplacePermissionAssociationsWork_creationTime, *v.CreationTime)
+	}
+	if v.FromPermissionArn != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_fromPermissionArn, *v.FromPermissionArn)
+	}
+	if v.FromPermissionVersion != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_fromPermissionVersion, *v.FromPermissionVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_id, *v.Id)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ReplacePermissionAssociationsWork_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_statusMessage, *v.StatusMessage)
+	}
+	if v.ToPermissionArn != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_toPermissionArn, *v.ToPermissionArn)
+	}
+	if v.ToPermissionVersion != nil {
+		s.WriteString(schemas.ReplacePermissionAssociationsWork_toPermissionVersion, *v.ToPermissionVersion)
+	}
+}
+func (v *ReplacePermissionAssociationsWork) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplacePermissionAssociationsWork, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplacePermissionAssociationsWork_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ReplacePermissionAssociationsWork_creationTime, v.CreationTime)
+		case schemas.ReplacePermissionAssociationsWork_fromPermissionArn:
+			v.FromPermissionArn = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_fromPermissionArn, v.FromPermissionArn)
+		case schemas.ReplacePermissionAssociationsWork_fromPermissionVersion:
+			v.FromPermissionVersion = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_fromPermissionVersion, v.FromPermissionVersion)
+		case schemas.ReplacePermissionAssociationsWork_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_id, v.Id)
+		case schemas.ReplacePermissionAssociationsWork_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ReplacePermissionAssociationsWork_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ReplacePermissionAssociationsWork_status:
+			var ev string
+			if err := d.ReadString(schemas.ReplacePermissionAssociationsWork_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplacePermissionAssociationsWorkStatus(ev)
+			return nil
+		case schemas.ReplacePermissionAssociationsWork_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_statusMessage, v.StatusMessage)
+		case schemas.ReplacePermissionAssociationsWork_toPermissionArn:
+			v.ToPermissionArn = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_toPermissionArn, v.ToPermissionArn)
+		case schemas.ReplacePermissionAssociationsWork_toPermissionVersion:
+			v.ToPermissionVersion = new(string)
+			return d.ReadString(schemas.ReplacePermissionAssociationsWork_toPermissionVersion, v.ToPermissionVersion)
+		}
+		return nil
+	})
+}
+
 // Describes a resource associated with a resource share in RAM.
 type Resource struct {
 
@@ -226,6 +474,84 @@ type Resource struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Resource_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Resource_creationTime, *v.CreationTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.Resource_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResourceGroupArn != nil {
+		s.WriteString(schemas.Resource_resourceGroupArn, *v.ResourceGroupArn)
+	}
+	if v.ResourceRegionScope != "" {
+		s.WriteString(schemas.Resource_resourceRegionScope, string(v.ResourceRegionScope))
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.Resource_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Resource_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Resource_statusMessage, *v.StatusMessage)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Resource_type, *v.Type)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Resource_arn, v.Arn)
+		case schemas.Resource_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Resource_creationTime, v.CreationTime)
+		case schemas.Resource_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.Resource_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.Resource_resourceGroupArn:
+			v.ResourceGroupArn = new(string)
+			return d.ReadString(schemas.Resource_resourceGroupArn, v.ResourceGroupArn)
+		case schemas.Resource_resourceRegionScope:
+			var ev string
+			if err := d.ReadString(schemas.Resource_resourceRegionScope, &ev); err != nil {
+				return err
+			}
+			v.ResourceRegionScope = ResourceRegionScope(ev)
+			return nil
+		case schemas.Resource_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.Resource_resourceShareArn, v.ResourceShareArn)
+		case schemas.Resource_status:
+			var ev string
+			if err := d.ReadString(schemas.Resource_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		case schemas.Resource_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Resource_statusMessage, v.StatusMessage)
+		case schemas.Resource_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Resource_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Describes a resource share in RAM.
@@ -294,6 +620,95 @@ type ResourceShare struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceShare) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShare)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceShare) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowExternalPrincipals != nil {
+		s.WriteBool(schemas.ResourceShare_allowExternalPrincipals, *v.AllowExternalPrincipals)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ResourceShare_creationTime, *v.CreationTime)
+	}
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.ResourceShare_featureSet, string(v.FeatureSet))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ResourceShare_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceShare_name, *v.Name)
+	}
+	if v.OwningAccountId != nil {
+		s.WriteString(schemas.ResourceShare_owningAccountId, *v.OwningAccountId)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.ResourceShare_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.ResourceShareConfiguration != nil {
+		s.WriteStruct(schemas.ResourceShare_resourceShareConfiguration)
+		v.ResourceShareConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceShare_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ResourceShare_statusMessage, *v.StatusMessage)
+	}
+	serializeTagList(s, schemas.ResourceShare_tags, v.Tags)
+}
+func (v *ResourceShare) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceShare, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceShare_allowExternalPrincipals:
+			v.AllowExternalPrincipals = new(bool)
+			return d.ReadBool(schemas.ResourceShare_allowExternalPrincipals, v.AllowExternalPrincipals)
+		case schemas.ResourceShare_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceShare_creationTime, v.CreationTime)
+		case schemas.ResourceShare_featureSet:
+			var ev string
+			if err := d.ReadString(schemas.ResourceShare_featureSet, &ev); err != nil {
+				return err
+			}
+			v.FeatureSet = ResourceShareFeatureSet(ev)
+			return nil
+		case schemas.ResourceShare_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceShare_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ResourceShare_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceShare_name, v.Name)
+		case schemas.ResourceShare_owningAccountId:
+			v.OwningAccountId = new(string)
+			return d.ReadString(schemas.ResourceShare_owningAccountId, v.OwningAccountId)
+		case schemas.ResourceShare_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.ResourceShare_resourceShareArn, v.ResourceShareArn)
+		case schemas.ResourceShare_resourceShareConfiguration:
+			v.ResourceShareConfiguration = &ResourceShareConfiguration{}
+			return v.ResourceShareConfiguration.Deserialize(d)
+		case schemas.ResourceShare_status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceShare_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceShareStatus(ev)
+			return nil
+		case schemas.ResourceShare_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ResourceShare_statusMessage, v.StatusMessage)
+		case schemas.ResourceShare_tags:
+			return deserializeTagList(d, schemas.ResourceShare_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes an association between a resource share and either a principal or a
 // resource.
 type ResourceShareAssociation struct {
@@ -347,6 +762,84 @@ type ResourceShareAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceShareAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceShareAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedEntity != nil {
+		s.WriteString(schemas.ResourceShareAssociation_associatedEntity, *v.AssociatedEntity)
+	}
+	if v.AssociationType != "" {
+		s.WriteString(schemas.ResourceShareAssociation_associationType, string(v.AssociationType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ResourceShareAssociation_creationTime, *v.CreationTime)
+	}
+	if v.External != nil {
+		s.WriteBool(schemas.ResourceShareAssociation_external, *v.External)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ResourceShareAssociation_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.ResourceShareAssociation_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.ResourceShareName != nil {
+		s.WriteString(schemas.ResourceShareAssociation_resourceShareName, *v.ResourceShareName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceShareAssociation_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ResourceShareAssociation_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *ResourceShareAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceShareAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceShareAssociation_associatedEntity:
+			v.AssociatedEntity = new(string)
+			return d.ReadString(schemas.ResourceShareAssociation_associatedEntity, v.AssociatedEntity)
+		case schemas.ResourceShareAssociation_associationType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceShareAssociation_associationType, &ev); err != nil {
+				return err
+			}
+			v.AssociationType = ResourceShareAssociationType(ev)
+			return nil
+		case schemas.ResourceShareAssociation_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceShareAssociation_creationTime, v.CreationTime)
+		case schemas.ResourceShareAssociation_external:
+			v.External = new(bool)
+			return d.ReadBool(schemas.ResourceShareAssociation_external, v.External)
+		case schemas.ResourceShareAssociation_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceShareAssociation_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ResourceShareAssociation_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.ResourceShareAssociation_resourceShareArn, v.ResourceShareArn)
+		case schemas.ResourceShareAssociation_resourceShareName:
+			v.ResourceShareName = new(string)
+			return d.ReadString(schemas.ResourceShareAssociation_resourceShareName, v.ResourceShareName)
+		case schemas.ResourceShareAssociation_status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceShareAssociation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceShareAssociationStatus(ev)
+			return nil
+		case schemas.ResourceShareAssociation_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ResourceShareAssociation_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // The configuration of the resource share
 type ResourceShareConfiguration struct {
 
@@ -355,6 +848,28 @@ type ResourceShareConfiguration struct {
 	RetainSharingOnAccountLeaveOrganization *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceShareConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceShareConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetainSharingOnAccountLeaveOrganization != nil {
+		s.WriteBool(schemas.ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization, *v.RetainSharingOnAccountLeaveOrganization)
+	}
+}
+func (v *ResourceShareConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceShareConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization:
+			v.RetainSharingOnAccountLeaveOrganization = new(bool)
+			return d.ReadBool(schemas.ResourceShareConfiguration_retainSharingOnAccountLeaveOrganization, v.RetainSharingOnAccountLeaveOrganization)
+		}
+		return nil
+	})
 }
 
 // Describes an invitation for an Amazon Web Services account to join a resource
@@ -397,6 +912,77 @@ type ResourceShareInvitation struct {
 	Status ResourceShareInvitationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceShareInvitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareInvitation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceShareInvitation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvitationTimestamp != nil {
+		s.WriteTime(schemas.ResourceShareInvitation_invitationTimestamp, *v.InvitationTimestamp)
+	}
+	if v.ReceiverAccountId != nil {
+		s.WriteString(schemas.ResourceShareInvitation_receiverAccountId, *v.ReceiverAccountId)
+	}
+	if v.ReceiverArn != nil {
+		s.WriteString(schemas.ResourceShareInvitation_receiverArn, *v.ReceiverArn)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.ResourceShareInvitation_resourceShareArn, *v.ResourceShareArn)
+	}
+	serializeResourceShareAssociationList(s, schemas.ResourceShareInvitation_resourceShareAssociations, v.ResourceShareAssociations)
+	if v.ResourceShareInvitationArn != nil {
+		s.WriteString(schemas.ResourceShareInvitation_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
+	}
+	if v.ResourceShareName != nil {
+		s.WriteString(schemas.ResourceShareInvitation_resourceShareName, *v.ResourceShareName)
+	}
+	if v.SenderAccountId != nil {
+		s.WriteString(schemas.ResourceShareInvitation_senderAccountId, *v.SenderAccountId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceShareInvitation_status, string(v.Status))
+	}
+}
+func (v *ResourceShareInvitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceShareInvitation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceShareInvitation_invitationTimestamp:
+			v.InvitationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ResourceShareInvitation_invitationTimestamp, v.InvitationTimestamp)
+		case schemas.ResourceShareInvitation_receiverAccountId:
+			v.ReceiverAccountId = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_receiverAccountId, v.ReceiverAccountId)
+		case schemas.ResourceShareInvitation_receiverArn:
+			v.ReceiverArn = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_receiverArn, v.ReceiverArn)
+		case schemas.ResourceShareInvitation_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_resourceShareArn, v.ResourceShareArn)
+		case schemas.ResourceShareInvitation_resourceShareAssociations:
+			return deserializeResourceShareAssociationList(d, schemas.ResourceShareInvitation_resourceShareAssociations, &v.ResourceShareAssociations)
+		case schemas.ResourceShareInvitation_resourceShareInvitationArn:
+			v.ResourceShareInvitationArn = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_resourceShareInvitationArn, v.ResourceShareInvitationArn)
+		case schemas.ResourceShareInvitation_resourceShareName:
+			v.ResourceShareName = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_resourceShareName, v.ResourceShareName)
+		case schemas.ResourceShareInvitation_senderAccountId:
+			v.SenderAccountId = new(string)
+			return d.ReadString(schemas.ResourceShareInvitation_senderAccountId, v.SenderAccountId)
+		case schemas.ResourceShareInvitation_status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceShareInvitation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceShareInvitationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a RAM managed permission.
@@ -488,6 +1074,109 @@ type ResourceSharePermissionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSharePermissionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSharePermissionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSharePermissionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceSharePermissionDetail_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ResourceSharePermissionDetail_creationTime, *v.CreationTime)
+	}
+	if v.DefaultVersion != nil {
+		s.WriteBool(schemas.ResourceSharePermissionDetail_defaultVersion, *v.DefaultVersion)
+	}
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.ResourceSharePermissionDetail_featureSet, string(v.FeatureSet))
+	}
+	if v.IsResourceTypeDefault != nil {
+		s.WriteBool(schemas.ResourceSharePermissionDetail_isResourceTypeDefault, *v.IsResourceTypeDefault)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ResourceSharePermissionDetail_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceSharePermissionDetail_name, *v.Name)
+	}
+	if v.Permission != nil {
+		s.WriteString(schemas.ResourceSharePermissionDetail_permission, *v.Permission)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.ResourceSharePermissionDetail_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceSharePermissionDetail_resourceType, *v.ResourceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceSharePermissionDetail_status, string(v.Status))
+	}
+	serializeTagList(s, schemas.ResourceSharePermissionDetail_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.ResourceSharePermissionDetail_version, *v.Version)
+	}
+}
+func (v *ResourceSharePermissionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSharePermissionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSharePermissionDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionDetail_arn, v.Arn)
+		case schemas.ResourceSharePermissionDetail_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSharePermissionDetail_creationTime, v.CreationTime)
+		case schemas.ResourceSharePermissionDetail_defaultVersion:
+			v.DefaultVersion = new(bool)
+			return d.ReadBool(schemas.ResourceSharePermissionDetail_defaultVersion, v.DefaultVersion)
+		case schemas.ResourceSharePermissionDetail_featureSet:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionDetail_featureSet, &ev); err != nil {
+				return err
+			}
+			v.FeatureSet = PermissionFeatureSet(ev)
+			return nil
+		case schemas.ResourceSharePermissionDetail_isResourceTypeDefault:
+			v.IsResourceTypeDefault = new(bool)
+			return d.ReadBool(schemas.ResourceSharePermissionDetail_isResourceTypeDefault, v.IsResourceTypeDefault)
+		case schemas.ResourceSharePermissionDetail_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSharePermissionDetail_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ResourceSharePermissionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionDetail_name, v.Name)
+		case schemas.ResourceSharePermissionDetail_permission:
+			v.Permission = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionDetail_permission, v.Permission)
+		case schemas.ResourceSharePermissionDetail_permissionType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionDetail_permissionType, &ev); err != nil {
+				return err
+			}
+			v.PermissionType = PermissionType(ev)
+			return nil
+		case schemas.ResourceSharePermissionDetail_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionDetail_resourceType, v.ResourceType)
+		case schemas.ResourceSharePermissionDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PermissionStatus(ev)
+			return nil
+		case schemas.ResourceSharePermissionDetail_tags:
+			return deserializeTagList(d, schemas.ResourceSharePermissionDetail_tags, &v.Tags)
+		case schemas.ResourceSharePermissionDetail_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionDetail_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Information about an RAM permission.
 type ResourceSharePermissionSummary struct {
 
@@ -563,6 +1252,99 @@ type ResourceSharePermissionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSharePermissionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSharePermissionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSharePermissionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceSharePermissionSummary_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ResourceSharePermissionSummary_creationTime, *v.CreationTime)
+	}
+	if v.DefaultVersion != nil {
+		s.WriteBool(schemas.ResourceSharePermissionSummary_defaultVersion, *v.DefaultVersion)
+	}
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.ResourceSharePermissionSummary_featureSet, string(v.FeatureSet))
+	}
+	if v.IsResourceTypeDefault != nil {
+		s.WriteBool(schemas.ResourceSharePermissionSummary_isResourceTypeDefault, *v.IsResourceTypeDefault)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ResourceSharePermissionSummary_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceSharePermissionSummary_name, *v.Name)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.ResourceSharePermissionSummary_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceSharePermissionSummary_resourceType, *v.ResourceType)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResourceSharePermissionSummary_status, *v.Status)
+	}
+	serializeTagList(s, schemas.ResourceSharePermissionSummary_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.ResourceSharePermissionSummary_version, *v.Version)
+	}
+}
+func (v *ResourceSharePermissionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSharePermissionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSharePermissionSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionSummary_arn, v.Arn)
+		case schemas.ResourceSharePermissionSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSharePermissionSummary_creationTime, v.CreationTime)
+		case schemas.ResourceSharePermissionSummary_defaultVersion:
+			v.DefaultVersion = new(bool)
+			return d.ReadBool(schemas.ResourceSharePermissionSummary_defaultVersion, v.DefaultVersion)
+		case schemas.ResourceSharePermissionSummary_featureSet:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionSummary_featureSet, &ev); err != nil {
+				return err
+			}
+			v.FeatureSet = PermissionFeatureSet(ev)
+			return nil
+		case schemas.ResourceSharePermissionSummary_isResourceTypeDefault:
+			v.IsResourceTypeDefault = new(bool)
+			return d.ReadBool(schemas.ResourceSharePermissionSummary_isResourceTypeDefault, v.IsResourceTypeDefault)
+		case schemas.ResourceSharePermissionSummary_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSharePermissionSummary_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ResourceSharePermissionSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionSummary_name, v.Name)
+		case schemas.ResourceSharePermissionSummary_permissionType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionSummary_permissionType, &ev); err != nil {
+				return err
+			}
+			v.PermissionType = PermissionType(ev)
+			return nil
+		case schemas.ResourceSharePermissionSummary_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionSummary_resourceType, v.ResourceType)
+		case schemas.ResourceSharePermissionSummary_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionSummary_status, v.Status)
+		case schemas.ResourceSharePermissionSummary_tags:
+			return deserializeTagList(d, schemas.ResourceSharePermissionSummary_tags, &v.Tags)
+		case schemas.ResourceSharePermissionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ResourceSharePermissionSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Information about a shareable resource type and the Amazon Web Services service
 // to which resources of that type belong.
 type ServiceNameAndResourceType struct {
@@ -587,6 +1369,44 @@ type ServiceNameAndResourceType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceNameAndResourceType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNameAndResourceType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNameAndResourceType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceRegionScope != "" {
+		s.WriteString(schemas.ServiceNameAndResourceType_resourceRegionScope, string(v.ResourceRegionScope))
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ServiceNameAndResourceType_resourceType, *v.ResourceType)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ServiceNameAndResourceType_serviceName, *v.ServiceName)
+	}
+}
+func (v *ServiceNameAndResourceType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNameAndResourceType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNameAndResourceType_resourceRegionScope:
+			var ev string
+			if err := d.ReadString(schemas.ServiceNameAndResourceType_resourceRegionScope, &ev); err != nil {
+				return err
+			}
+			v.ResourceRegionScope = ResourceRegionScope(ev)
+			return nil
+		case schemas.ServiceNameAndResourceType_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ServiceNameAndResourceType_resourceType, v.ResourceType)
+		case schemas.ServiceNameAndResourceType_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ServiceNameAndResourceType_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // A structure containing a tag. A tag is metadata that you can attach to your
 // resources to help organize and categorize them. You can also use them to help
 // you secure your resources. For more information, see [Controlling access to Amazon Web Services resources using tags].
@@ -609,6 +1429,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A tag key and optional list of possible values that you can use to filter
 // results for tagged resources.
 //
@@ -623,6 +1471,31 @@ type TagFilter struct {
 	TagValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagKey != nil {
+		s.WriteString(schemas.TagFilter_tagKey, *v.TagKey)
+	}
+	serializeTagValueList(s, schemas.TagFilter_tagValues, v.TagValues)
+}
+func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagFilter_tagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.TagFilter_tagKey, v.TagKey)
+		case schemas.TagFilter_tagValues:
+			return deserializeTagValueList(d, schemas.TagFilter_tagValues, &v.TagValues)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,10 +5,10 @@ package amp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to create or update the label sets, label set limits, and
@@ -49,10 +49,43 @@ type UpdateWorkspaceConfigurationInput struct {
 	// sets. Each label name in a label set must be unique.
 	LimitsPerLabelSet []types.LimitsPerLabelSet
 
+	// Specifies the time window in seconds for accepting out of order samples. Out of
+	// order samples older than this window are rejected.
+	OutOfOrderTimeWindowInSeconds *int32
+
 	// Specifies how many days that metrics will be retained in the workspace.
 	RetentionPeriodInDays *int32
 
+	// Specifies the duration in seconds to offset rule evaluation queries into the
+	// past. This allows ingested samples to be available before rule evaluation.
+	RuleQueryOffsetInSeconds *int32
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	serializeLimitsPerLabelSetList(s, schemas.UpdateWorkspaceConfigurationRequest_limitsPerLabelSet, v.LimitsPerLabelSet)
+	if v.OutOfOrderTimeWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds, *v.OutOfOrderTimeWindowInSeconds)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.RuleQueryOffsetInSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds, *v.RuleQueryOffsetInSeconds)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
 }
 
 type UpdateWorkspaceConfigurationOutput struct {
@@ -68,65 +101,44 @@ type UpdateWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceConfigurationResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceConfigurationResponse_status:
+			v.Status = &types.WorkspaceConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse), output: &UpdateWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkspaceConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +148,6 @@ func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpUpdateWorkspaceConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +160,6 @@ func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +199,4 @@ func (m *idempotencyToken_initializeOpUpdateWorkspaceConfiguration) HandleInitia
 }
 func addIdempotencyToken_opUpdateWorkspaceConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateWorkspaceConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkspaceConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkspaceConfiguration",
-	}
 }

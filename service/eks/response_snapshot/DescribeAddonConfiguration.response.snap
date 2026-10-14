@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"addonName":"__AddonName__","addonVersion":"__AddonVersion__","configurationSchema":"__ConfigurationSchema__","podIdentityConfiguration":[{"recommendedManagedPolicies":["__Member__","__Member__"],"serviceAccount":"__ServiceAccount__"},{"recommendedManagedPolicies":["__Member__","__Member__"],"serviceAccount":"__ServiceAccount__"}]}

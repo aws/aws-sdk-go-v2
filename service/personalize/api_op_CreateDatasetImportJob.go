@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a job that imports training data from your data source (an Amazon S3
@@ -110,6 +109,36 @@ type CreateDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.CreateDatasetImportJobRequest_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_datasetArn, *v.DatasetArn)
+	}
+	if v.ImportMode != "" {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_importMode, string(v.ImportMode))
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_jobName, *v.JobName)
+	}
+	if v.PublishAttributionMetricsToS3 != nil {
+		s.WriteBool(schemas.CreateDatasetImportJobRequest_publishAttributionMetricsToS3, *v.PublishAttributionMetricsToS3)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateDatasetImportJobRequest_tags, v.Tags)
+}
+
 type CreateDatasetImportJobOutput struct {
 
 	// The ARN of the dataset import job.
@@ -121,77 +150,48 @@ type CreateDatasetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.CreateDatasetImportJobResponse_datasetImportJobArn, *v.DatasetImportJobArn)
+	}
+}
+func (v *CreateDatasetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetImportJobResponse_datasetImportJobArn:
+			v.DatasetImportJobArn = new(string)
+			return d.ReadString(schemas.CreateDatasetImportJobResponse_datasetImportJobArn, v.DatasetImportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetImportJob, schemas.CreateDatasetImportJobRequest, schemas.CreateDatasetImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetImportJob, schemas.CreateDatasetImportJobRequest, schemas.CreateDatasetImportJobResponse), output: &CreateDatasetImportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatasetImportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDatasetImportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDatasetImportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetImportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +206,8 @@ func (c *Client) addOperationCreateDatasetImportJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDatasetImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDatasetImportJob",
-	}
 }

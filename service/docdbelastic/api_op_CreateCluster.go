@@ -5,12 +5,8 @@ package docdbelastic
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon DocumentDB elastic cluster and returns its cluster
@@ -144,107 +140,6 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdminUserName != nil {
-		s.WriteString(schemas.CreateClusterInput_adminUserName, *v.AdminUserName)
-	}
-	if v.AdminUserPassword != nil {
-		s.WriteString(schemas.CreateClusterInput_adminUserPassword, *v.AdminUserPassword)
-	}
-	if v.AuthType != "" {
-		s.WriteString(schemas.CreateClusterInput_authType, string(v.AuthType))
-	}
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.CreateClusterInput_backupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateClusterInput_clientToken, *v.ClientToken)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.CreateClusterInput_clusterName, *v.ClusterName)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateClusterInput_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.CreateClusterInput_preferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.CreateClusterInput_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.ShardCapacity != nil {
-		s.WriteInt32(schemas.CreateClusterInput_shardCapacity, *v.ShardCapacity)
-	}
-	if v.ShardCount != nil {
-		s.WriteInt32(schemas.CreateClusterInput_shardCount, *v.ShardCount)
-	}
-	if v.ShardInstanceCount != nil {
-		s.WriteInt32(schemas.CreateClusterInput_shardInstanceCount, *v.ShardInstanceCount)
-	}
-	serializeStringList(s, schemas.CreateClusterInput_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
-	serializeStringList(s, schemas.CreateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-func (v *CreateClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateClusterInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateClusterInput_adminUserName:
-			v.AdminUserName = new(string)
-			return d.ReadString(schemas.CreateClusterInput_adminUserName, v.AdminUserName)
-		case schemas.CreateClusterInput_adminUserPassword:
-			v.AdminUserPassword = new(string)
-			return d.ReadString(schemas.CreateClusterInput_adminUserPassword, v.AdminUserPassword)
-		case schemas.CreateClusterInput_authType:
-			var ev string
-			if err := d.ReadString(schemas.CreateClusterInput_authType, &ev); err != nil {
-				return err
-			}
-			v.AuthType = types.Auth(ev)
-			return nil
-		case schemas.CreateClusterInput_backupRetentionPeriod:
-			v.BackupRetentionPeriod = new(int32)
-			return d.ReadInt32(schemas.CreateClusterInput_backupRetentionPeriod, v.BackupRetentionPeriod)
-		case schemas.CreateClusterInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateClusterInput_clientToken, v.ClientToken)
-		case schemas.CreateClusterInput_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.CreateClusterInput_clusterName, v.ClusterName)
-		case schemas.CreateClusterInput_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.CreateClusterInput_kmsKeyId, v.KmsKeyId)
-		case schemas.CreateClusterInput_preferredBackupWindow:
-			v.PreferredBackupWindow = new(string)
-			return d.ReadString(schemas.CreateClusterInput_preferredBackupWindow, v.PreferredBackupWindow)
-		case schemas.CreateClusterInput_preferredMaintenanceWindow:
-			v.PreferredMaintenanceWindow = new(string)
-			return d.ReadString(schemas.CreateClusterInput_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
-		case schemas.CreateClusterInput_shardCapacity:
-			v.ShardCapacity = new(int32)
-			return d.ReadInt32(schemas.CreateClusterInput_shardCapacity, v.ShardCapacity)
-		case schemas.CreateClusterInput_shardCount:
-			v.ShardCount = new(int32)
-			return d.ReadInt32(schemas.CreateClusterInput_shardCount, v.ShardCount)
-		case schemas.CreateClusterInput_shardInstanceCount:
-			v.ShardInstanceCount = new(int32)
-			return d.ReadInt32(schemas.CreateClusterInput_shardInstanceCount, v.ShardInstanceCount)
-		case schemas.CreateClusterInput_subnetIds:
-			return deserializeStringList(d, schemas.CreateClusterInput_subnetIds, &v.SubnetIds)
-		case schemas.CreateClusterInput_tags:
-			return deserializeTagMap(d, schemas.CreateClusterInput_tags, &v.Tags)
-		case schemas.CreateClusterInput_vpcSecurityGroupIds:
-			return deserializeStringList(d, schemas.CreateClusterInput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		}
-		return nil
-	})
-}
-
 type CreateClusterOutput struct {
 
 	// The new elastic cluster that has been created.
@@ -258,86 +153,23 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateClusterOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cluster != nil {
-		s.WriteStruct(schemas.CreateClusterOutput_cluster)
-		v.Cluster.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateClusterOutput_cluster:
-			v.Cluster = &types.Cluster{}
-			return v.Cluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterInput, schemas.CreateClusterOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterInput, schemas.CreateClusterOutput), output: &CreateClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -347,12 +179,6 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -365,12 +191,6 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -410,12 +230,4 @@ func (m *idempotencyToken_initializeOpCreateCluster) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCluster",
-	}
 }

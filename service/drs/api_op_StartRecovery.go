@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Launches Recovery Instances for the specified Source Servers. For each Source
@@ -45,6 +44,34 @@ type StartRecoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsDrill != nil {
+		s.WriteBool(schemas.StartRecoveryRequest_isDrill, *v.IsDrill)
+	}
+	serializeStartRecoveryRequestSourceServers(s, schemas.StartRecoveryRequest_sourceServers, v.SourceServers)
+	serializeTagsMap(s, schemas.StartRecoveryRequest_tags, v.Tags)
+}
+func (v *StartRecoveryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecoveryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecoveryRequest_isDrill:
+			v.IsDrill = new(bool)
+			return d.ReadBool(schemas.StartRecoveryRequest_isDrill, v.IsDrill)
+		case schemas.StartRecoveryRequest_sourceServers:
+			return deserializeStartRecoveryRequestSourceServers(d, schemas.StartRecoveryRequest_sourceServers, &v.SourceServers)
+		case schemas.StartRecoveryRequest_tags:
+			return deserializeTagsMap(d, schemas.StartRecoveryRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartRecoveryOutput struct {
 
 	// The Recovery Job.
@@ -56,77 +83,50 @@ type StartRecoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartRecoveryResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartRecoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecoveryResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRecoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecovery, schemas.StartRecoveryRequest, schemas.StartRecoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecovery, schemas.StartRecoveryRequest, schemas.StartRecoveryResponse), output: &StartRecoveryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecovery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRecovery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartRecoveryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRecovery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +141,8 @@ func (c *Client) addOperationStartRecoveryMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartRecovery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRecovery",
-	}
 }

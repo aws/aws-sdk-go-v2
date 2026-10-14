@@ -1,0 +1,5 @@
+POST /delete-console-authorization-configuration
+
+Content-Type: application/json
+
+{"targetId":"__TargetId__"}

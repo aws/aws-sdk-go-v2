@@ -1,0 +1,5 @@
+POST /intents/__Name__/versions
+
+Content-Type: application/json
+
+{"checksum":"__Checksum__"}

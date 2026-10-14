@@ -4,13 +4,8 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -51,18 +46,6 @@ type GetXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetXssMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetXssMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetXssMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.XssMatchSetId != nil {
-		s.WriteString(schemas.GetXssMatchSetRequest_XssMatchSetId, *v.XssMatchSetId)
-	}
-}
-
 // The response to a GetXssMatchSet request.
 type GetXssMatchSetOutput struct {
 
@@ -85,85 +68,29 @@ type GetXssMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetXssMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetXssMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetXssMatchSetResponse_XssMatchSet:
-			v.XssMatchSet = &types.XssMatchSet{}
-			return v.XssMatchSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetXssMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetXssMatchSet, schemas.GetXssMatchSetRequest, schemas.GetXssMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetXssMatchSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetXssMatchSet, schemas.GetXssMatchSetRequest, schemas.GetXssMatchSetResponse), output: &GetXssMatchSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetXssMatchSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetXssMatchSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetXssMatchSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +105,8 @@ func (c *Client) addOperationGetXssMatchSetMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetXssMatchSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetXssMatchSet",
-	}
 }

@@ -1,0 +1,5 @@
+POST /metrics/environments/__EnvironmentName__
+
+Content-Type: application/json
+
+{"MetricData":[{"Dimensions":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"MetricName":"__MetricName__","StatisticValues":{"Maximum":1,"Minimum":1,"SampleCount":1,"Sum":1},"Timestamp":946684800,"Unit":"Seconds","Value":1},{"Dimensions":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"MetricName":"__MetricName__","StatisticValues":{"Maximum":1,"Minimum":1,"SampleCount":1,"Sum":1},"Timestamp":946684800,"Unit":"Seconds","Value":1}]}

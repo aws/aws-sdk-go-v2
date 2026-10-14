@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new client secret for an existing confidential user pool app client.
@@ -49,6 +48,24 @@ type AddUserPoolClientSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUserPoolClientSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUserPoolClientSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUserPoolClientSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response from creating a new client secret.
 type AddUserPoolClientSecretOutput struct {
 
@@ -64,77 +81,50 @@ type AddUserPoolClientSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUserPoolClientSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUserPoolClientSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUserPoolClientSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSecretDescriptor != nil {
+		s.WriteStruct(schemas.AddUserPoolClientSecretResponse_ClientSecretDescriptor)
+		v.ClientSecretDescriptor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AddUserPoolClientSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddUserPoolClientSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddUserPoolClientSecretResponse_ClientSecretDescriptor:
+			v.ClientSecretDescriptor = &types.ClientSecretDescriptorType{}
+			return v.ClientSecretDescriptor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddUserPoolClientSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUserPoolClientSecret, schemas.AddUserPoolClientSecretRequest, schemas.AddUserPoolClientSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddUserPoolClientSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUserPoolClientSecret, schemas.AddUserPoolClientSecretRequest, schemas.AddUserPoolClientSecretResponse), output: &AddUserPoolClientSecretOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddUserPoolClientSecret{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddUserPoolClientSecret"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddUserPoolClientSecretValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddUserPoolClientSecret(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +139,8 @@ func (c *Client) addOperationAddUserPoolClientSecretMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddUserPoolClientSecret(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddUserPoolClientSecret",
-	}
 }

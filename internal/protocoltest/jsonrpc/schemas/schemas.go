@@ -108,7 +108,7 @@ var JsonProtocol = smithy.NewServiceSchema(_JsonProtocol, "2018-01-01")
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ComplexError_TopLevel *smithy.Schema
 
 var ComplexError_Nested *smithy.Schema
@@ -132,7 +132,7 @@ var EmptyStruct = smithy.NewSchema(smithy.ShapeID{
 var ErrorWithMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "ErrorWithMembers",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 7, &smithytraits.Error{Type: "client"})
 var ErrorWithMembers_Code *smithy.Schema
 
 var ErrorWithMembers_ComplexData *smithy.Schema
@@ -150,17 +150,17 @@ var ErrorWithMembers_StringField *smithy.Schema
 var ErrorWithoutMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "ErrorWithoutMembers",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"})
 
 var FooError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "FooError",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"})
 
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.json",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidGreeting_Message *smithy.Schema
 
 var _JsonValue = smithy.NewSchema(smithy.ShapeID{

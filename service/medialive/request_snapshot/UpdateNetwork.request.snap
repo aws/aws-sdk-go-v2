@@ -1,0 +1,5 @@
+PUT /prod/networks/__NetworkId__
+
+Content-Type: application/json
+
+{"ipPools":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"name":"__Name__","routes":[{"cidr":"__Cidr__","gateway":"__Gateway__"},{"cidr":"__Cidr__","gateway":"__Gateway__"}]}

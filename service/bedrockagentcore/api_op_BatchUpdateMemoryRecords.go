@@ -4,13 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates multiple memory records with custom content in a single batch operation
@@ -42,20 +37,26 @@ type BatchUpdateMemoryRecordsInput struct {
 	// This member is required.
 	Records []types.MemoryRecordUpdateInput
 
+	// The record expiry (long-term memory time-to-live) applied to every record
+	// updated by this request. Set recordExpiryDurationDays to configure or overwrite
+	// the number of days after which the records expire, or set action to REMOVE to
+	// clear a previously configured expiry so that the records no longer expire.
+	//
+	// When you do not provide this value, the service determines each record's expiry
+	// from its current state:
+	//
+	//   - If the record already has an expiry configured, the service resets and
+	//   reapplies the expiry based on the last applied recordExpiryDurationDays .
+	//
+	//   - If the record does not have an expiry configured, no expiry is applied and
+	//   the record remains non-expiring. This is the outcome regardless of whether the
+	//   record's strategy configures an expiry.
+	//
+	// Providing an explicit recordExpiryDurationDays always takes precedence: it
+	// overwrites an existing expiry, or sets one on a record that previously had none.
+	RecordExpirySpecification types.RecordExpirySpecification
+
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUpdateMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateMemoryRecordsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemoryId != nil {
-		s.WriteString(schemas.BatchUpdateMemoryRecordsInput_memoryId, *v.MemoryId)
-	}
-	serializeMemoryRecordsUpdateInputList(s, schemas.BatchUpdateMemoryRecordsInput_records, v.Records)
 }
 
 type BatchUpdateMemoryRecordsOutput struct {
@@ -78,86 +79,29 @@ type BatchUpdateMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateMemoryRecordsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateMemoryRecordsOutput_failedRecords:
-			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_failedRecords, &v.FailedRecords)
-		case schemas.BatchUpdateMemoryRecordsOutput_successfulRecords:
-			return deserializeMemoryRecordsOutputList(d, schemas.BatchUpdateMemoryRecordsOutput_successfulRecords, &v.SuccessfulRecords)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateMemoryRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateMemoryRecords{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemoryRecords, schemas.BatchUpdateMemoryRecordsInput, schemas.BatchUpdateMemoryRecordsOutput), output: &BatchUpdateMemoryRecordsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateMemoryRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateMemoryRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateMemoryRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +116,8 @@ func (c *Client) addOperationBatchUpdateMemoryRecordsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateMemoryRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateMemoryRecords",
-	}
 }

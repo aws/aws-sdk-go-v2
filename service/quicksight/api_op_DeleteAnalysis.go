@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,6 +65,27 @@ type DeleteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DeleteAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ForceDeleteWithoutRecovery != false {
+		s.WriteBool(schemas.DeleteAnalysisRequest_ForceDeleteWithoutRecovery, v.ForceDeleteWithoutRecovery)
+	}
+	if v.RecoveryWindowInDays != nil {
+		s.WriteInt64(schemas.DeleteAnalysisRequest_RecoveryWindowInDays, *v.RecoveryWindowInDays)
+	}
+}
+
 type DeleteAnalysisOutput struct {
 
 	// The ID of the deleted analysis.
@@ -89,77 +109,71 @@ type DeleteAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DeleteAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteAnalysisResponse_Arn, *v.Arn)
+	}
+	if v.DeletionTime != nil {
+		s.WriteTime(schemas.DeleteAnalysisResponse_DeletionTime, *v.DeletionTime)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteAnalysisResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *DeleteAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.DeleteAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.DeleteAnalysisResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteAnalysisResponse_Arn, v.Arn)
+		case schemas.DeleteAnalysisResponse_DeletionTime:
+			v.DeletionTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteAnalysisResponse_DeletionTime, v.DeletionTime)
+		case schemas.DeleteAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteAnalysisResponse_RequestId, v.RequestId)
+		case schemas.DeleteAnalysisResponse_Status:
+			return d.ReadInt32(schemas.DeleteAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysis, schemas.DeleteAnalysisRequest, schemas.DeleteAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysis, schemas.DeleteAnalysisRequest, schemas.DeleteAnalysisResponse), output: &DeleteAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +188,8 @@ func (c *Client) addOperationDeleteAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAnalysis",
-	}
 }

@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the custom action targets in Security Hub CSPM in your
@@ -46,6 +46,22 @@ type DescribeActionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArnList(s, schemas.DescribeActionTargetsRequest_ActionTargetArns, v.ActionTargetArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeActionTargetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActionTargetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeActionTargetsOutput struct {
 
 	// A list of ActionTarget objects. Each object includes the ActionTargetArn ,
@@ -63,74 +79,48 @@ type DescribeActionTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionTargetList(s, schemas.DescribeActionTargetsResponse_ActionTargets, v.ActionTargets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActionTargetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeActionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActionTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActionTargetsResponse_ActionTargets:
+			return deserializeActionTargetList(d, schemas.DescribeActionTargetsResponse_ActionTargets, &v.ActionTargets)
+		case schemas.DescribeActionTargetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeActionTargetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionTargets, schemas.DescribeActionTargetsRequest, schemas.DescribeActionTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeActionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionTargets, schemas.DescribeActionTargetsRequest, schemas.DescribeActionTargetsResponse), output: &DescribeActionTargetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeActionTargets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeActionTargets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActionTargets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +133,6 @@ func (c *Client) addOperationDescribeActionTargetsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +234,3 @@ type DescribeActionTargetsAPIClient interface {
 }
 
 var _ DescribeActionTargetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeActionTargets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeActionTargets",
-	}
-}

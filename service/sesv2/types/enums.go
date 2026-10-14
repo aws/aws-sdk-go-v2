@@ -127,6 +127,23 @@ func (BulkEmailStatus) Values() []BulkEmailStatus {
 	}
 }
 
+type ConfigurationSetFilterKey string
+
+// Enum values for ConfigurationSetFilterKey
+const (
+	ConfigurationSetFilterKeyConfigurationSetNameContains ConfigurationSetFilterKey = "CONFIGURATION_SET_NAME_CONTAINS"
+)
+
+// Values returns all known values for ConfigurationSetFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationSetFilterKey) Values() []ConfigurationSetFilterKey {
+	return []ConfigurationSetFilterKey{
+		"CONFIGURATION_SET_NAME_CONTAINS",
+	}
+}
+
 type ContactLanguage string
 
 // Enum values for ContactLanguage
@@ -306,6 +323,8 @@ const (
 	DkimSigningAttributesOriginAwsSesEuCentral2   DkimSigningAttributesOrigin = "AWS_SES_EU_CENTRAL_2"
 	DkimSigningAttributesOriginAwsSesApSoutheast5 DkimSigningAttributesOrigin = "AWS_SES_AP_SOUTHEAST_5"
 	DkimSigningAttributesOriginAwsSesCaWest1      DkimSigningAttributesOrigin = "AWS_SES_CA_WEST_1"
+	DkimSigningAttributesOriginAwsSesUsGovEast1   DkimSigningAttributesOrigin = "AWS_SES_US_GOV_EAST_1"
+	DkimSigningAttributesOriginAwsSesUsGovWest1   DkimSigningAttributesOrigin = "AWS_SES_US_GOV_WEST_1"
 )
 
 // Values returns all known values for DkimSigningAttributesOrigin. Note that this
@@ -343,6 +362,8 @@ func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 		"AWS_SES_EU_CENTRAL_2",
 		"AWS_SES_AP_SOUTHEAST_5",
 		"AWS_SES_CA_WEST_1",
+		"AWS_SES_US_GOV_EAST_1",
+		"AWS_SES_US_GOV_WEST_1",
 	}
 }
 
@@ -525,6 +546,52 @@ func (HttpsPolicy) Values() []HttpsPolicy {
 	}
 }
 
+type IdentityCertificateStatus string
+
+// Enum values for IdentityCertificateStatus
+const (
+	IdentityCertificateStatusProvisioning   IdentityCertificateStatus = "PROVISIONING"
+	IdentityCertificateStatusInactive       IdentityCertificateStatus = "INACTIVE"
+	IdentityCertificateStatusDeprovisioning IdentityCertificateStatus = "DEPROVISIONING"
+	IdentityCertificateStatusActive         IdentityCertificateStatus = "ACTIVE"
+	IdentityCertificateStatusFailed         IdentityCertificateStatus = "FAILED"
+)
+
+// Values returns all known values for IdentityCertificateStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityCertificateStatus) Values() []IdentityCertificateStatus {
+	return []IdentityCertificateStatus{
+		"PROVISIONING",
+		"INACTIVE",
+		"DEPROVISIONING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
+type IdentityFilterKey string
+
+// Enum values for IdentityFilterKey
+const (
+	IdentityFilterKeyIdentityNameContains IdentityFilterKey = "IDENTITY_NAME_CONTAINS"
+	IdentityFilterKeyIdentityType         IdentityFilterKey = "IDENTITY_TYPE"
+	IdentityFilterKeyVerificationStatus   IdentityFilterKey = "VERIFICATION_STATUS"
+)
+
+// Values returns all known values for IdentityFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityFilterKey) Values() []IdentityFilterKey {
+	return []IdentityFilterKey{
+		"IDENTITY_NAME_CONTAINS",
+		"IDENTITY_TYPE",
+		"VERIFICATION_STATUS",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -632,6 +699,25 @@ func (ListTenantResourcesFilterKey) Values() []ListTenantResourcesFilterKey {
 	}
 }
 
+type ListTenantsFilterKey string
+
+// Enum values for ListTenantsFilterKey
+const (
+	ListTenantsFilterKeyTenantNameContains ListTenantsFilterKey = "TENANT_NAME_CONTAINS"
+	ListTenantsFilterKeySendingStatus      ListTenantsFilterKey = "SENDING_STATUS"
+)
+
+// Values returns all known values for ListTenantsFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListTenantsFilterKey) Values() []ListTenantsFilterKey {
+	return []ListTenantsFilterKey{
+		"TENANT_NAME_CONTAINS",
+		"SENDING_STATUS",
+	}
+}
+
 type MailFromDomainStatus string
 
 // Enum values for MailFromDomainStatus
@@ -735,6 +821,7 @@ const (
 	MetricDimensionNameEmailIdentity    MetricDimensionName = "EMAIL_IDENTITY"
 	MetricDimensionNameConfigurationSet MetricDimensionName = "CONFIGURATION_SET"
 	MetricDimensionNameIsp              MetricDimensionName = "ISP"
+	MetricDimensionNameTenantName       MetricDimensionName = "TENANT_NAME"
 )
 
 // Values returns all known values for MetricDimensionName. Note that this can be
@@ -746,6 +833,7 @@ func (MetricDimensionName) Values() []MetricDimensionName {
 		"EMAIL_IDENTITY",
 		"CONFIGURATION_SET",
 		"ISP",
+		"TENANT_NAME",
 	}
 }
 
@@ -763,6 +851,29 @@ const (
 func (MetricNamespace) Values() []MetricNamespace {
 	return []MetricNamespace{
 		"VDM",
+	}
+}
+
+type PricingPlan string
+
+// Enum values for PricingPlan
+const (
+	PricingPlanNone       PricingPlan = "NONE"
+	PricingPlanEssentials PricingPlan = "ESSENTIALS"
+	PricingPlanPro        PricingPlan = "PRO"
+	PricingPlanEnterprise PricingPlan = "ENTERPRISE"
+)
+
+// Values returns all known values for PricingPlan. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PricingPlan) Values() []PricingPlan {
+	return []PricingPlan{
+		"NONE",
+		"ESSENTIALS",
+		"PRO",
+		"ENTERPRISE",
 	}
 }
 
@@ -975,6 +1086,23 @@ func (SendingStatus) Values() []SendingStatus {
 		"ENABLED",
 		"REINSTATED",
 		"DISABLED",
+	}
+}
+
+type SignatureFormat string
+
+// Enum values for SignatureFormat
+const (
+	SignatureFormatDetached SignatureFormat = "DETACHED"
+)
+
+// Values returns all known values for SignatureFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SignatureFormat) Values() []SignatureFormat {
+	return []SignatureFormat{
+		"DETACHED",
 	}
 }
 

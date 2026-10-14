@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -25,6 +27,37 @@ type ComplianceDetails struct {
 	NoncompliantKeys []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComplianceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplianceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplianceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceStatus != nil {
+		s.WriteBool(schemas.ComplianceDetails_ComplianceStatus, *v.ComplianceStatus)
+	}
+	serializeTagKeyList(s, schemas.ComplianceDetails_KeysWithNoncompliantValues, v.KeysWithNoncompliantValues)
+	serializeTagKeyList(s, schemas.ComplianceDetails_MissingTagKeys, v.MissingTagKeys)
+	serializeTagKeyList(s, schemas.ComplianceDetails_NoncompliantKeys, v.NoncompliantKeys)
+}
+func (v *ComplianceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplianceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplianceDetails_ComplianceStatus:
+			v.ComplianceStatus = new(bool)
+			return d.ReadBool(schemas.ComplianceDetails_ComplianceStatus, v.ComplianceStatus)
+		case schemas.ComplianceDetails_KeysWithNoncompliantValues:
+			return deserializeTagKeyList(d, schemas.ComplianceDetails_KeysWithNoncompliantValues, &v.KeysWithNoncompliantValues)
+		case schemas.ComplianceDetails_MissingTagKeys:
+			return deserializeTagKeyList(d, schemas.ComplianceDetails_MissingTagKeys, &v.MissingTagKeys)
+		case schemas.ComplianceDetails_NoncompliantKeys:
+			return deserializeTagKeyList(d, schemas.ComplianceDetails_NoncompliantKeys, &v.NoncompliantKeys)
+		}
+		return nil
+	})
 }
 
 // Information about the errors that are returned for each failed resource. This
@@ -69,6 +102,43 @@ type FailureInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailureInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailureInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailureInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.FailureInfo_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailureInfo_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.FailureInfo_StatusCode, v.StatusCode)
+	}
+}
+func (v *FailureInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailureInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailureInfo_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.FailureInfo_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.FailureInfo_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailureInfo_ErrorMessage, v.ErrorMessage)
+		case schemas.FailureInfo_StatusCode:
+			return d.ReadInt32(schemas.FailureInfo_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
+
 // Information that describes the required tags for a given resource type.
 type RequiredTag struct {
 
@@ -83,6 +153,34 @@ type RequiredTag struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequiredTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequiredTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequiredTag) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCloudFormationResourceTypes(s, schemas.RequiredTag_CloudFormationResourceTypes, v.CloudFormationResourceTypes)
+	serializeReportingTagKeys(s, schemas.RequiredTag_ReportingTagKeys, v.ReportingTagKeys)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RequiredTag_ResourceType, *v.ResourceType)
+	}
+}
+func (v *RequiredTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequiredTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequiredTag_CloudFormationResourceTypes:
+			return deserializeCloudFormationResourceTypes(d, schemas.RequiredTag_CloudFormationResourceTypes, &v.CloudFormationResourceTypes)
+		case schemas.RequiredTag_ReportingTagKeys:
+			return deserializeReportingTagKeys(d, schemas.RequiredTag_ReportingTagKeys, &v.ReportingTagKeys)
+		case schemas.RequiredTag_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RequiredTag_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // A list of resource ARNs and the tags (keys and values) that are associated with
@@ -100,6 +198,39 @@ type ResourceTagMapping struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTagMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTagMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTagMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceDetails != nil {
+		s.WriteStruct(schemas.ResourceTagMapping_ComplianceDetails)
+		v.ComplianceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ResourceTagMapping_ResourceARN, *v.ResourceARN)
+	}
+	serializeTagList(s, schemas.ResourceTagMapping_Tags, v.Tags)
+}
+func (v *ResourceTagMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTagMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTagMapping_ComplianceDetails:
+			v.ComplianceDetails = &ComplianceDetails{}
+			return v.ComplianceDetails.Deserialize(d)
+		case schemas.ResourceTagMapping_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ResourceTagMapping_ResourceARN, v.ResourceARN)
+		case schemas.ResourceTagMapping_Tags:
+			return deserializeTagList(d, schemas.ResourceTagMapping_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // A count of noncompliant resources.
@@ -129,6 +260,61 @@ type Summary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Summary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Summary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Summary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdated != nil {
+		s.WriteString(schemas.Summary_LastUpdated, *v.LastUpdated)
+	}
+	if v.NonCompliantResources != 0 {
+		s.WriteInt64(schemas.Summary_NonCompliantResources, v.NonCompliantResources)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Summary_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Summary_ResourceType, *v.ResourceType)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.Summary_TargetId, *v.TargetId)
+	}
+	if v.TargetIdType != "" {
+		s.WriteString(schemas.Summary_TargetIdType, string(v.TargetIdType))
+	}
+}
+func (v *Summary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Summary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Summary_LastUpdated:
+			v.LastUpdated = new(string)
+			return d.ReadString(schemas.Summary_LastUpdated, v.LastUpdated)
+		case schemas.Summary_NonCompliantResources:
+			return d.ReadInt64(schemas.Summary_NonCompliantResources, &v.NonCompliantResources)
+		case schemas.Summary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Summary_Region, v.Region)
+		case schemas.Summary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Summary_ResourceType, v.ResourceType)
+		case schemas.Summary_TargetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.Summary_TargetId, v.TargetId)
+		case schemas.Summary_TargetIdType:
+			var ev string
+			if err := d.ReadString(schemas.Summary_TargetIdType, &ev); err != nil {
+				return err
+			}
+			v.TargetIdType = TargetIdType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata that you apply to Amazon Web Services resources to help you
 // categorize and organize them. Each tag consists of a key and a value, both of
 // which you define. For more information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General
@@ -152,6 +338,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A list of tags (keys and values) that are used to specify the associated
 // resources.
 type TagFilter struct {
@@ -165,6 +379,31 @@ type TagFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagFilter_Key, *v.Key)
+	}
+	serializeTagValueList(s, schemas.TagFilter_Values, v.Values)
+}
+func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagFilter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagFilter_Key, v.Key)
+		case schemas.TagFilter_Values:
+			return deserializeTagValueList(d, schemas.TagFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

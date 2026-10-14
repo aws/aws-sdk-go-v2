@@ -5,13 +5,14 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists workflow build versions based on filtering parameters.
+// Lists workflow versions based on filtering parameters. To list the build
+// versions of a specific workflow version, call ListWorkflowBuildVersions.
 func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, optFns ...func(*Options)) (*ListWorkflowsOutput, error) {
 	if params == nil {
 		params = &ListWorkflowsInput{}
@@ -29,24 +30,51 @@ func (c *Client) ListWorkflows(ctx context.Context, params *ListWorkflowsInput, 
 
 type ListWorkflowsInput struct {
 
-	// Specify all or part of the workflow name to streamline results.
+	// Specifies whether to return one entry per workflow name, with all versions of
+	// each workflow aggregated. Defaults to false , which returns one entry per
+	// workflow version. You can't combine this option with the version filter.
 	ByName bool
 
-	// Used to streamline search results.
+	// Filters to narrow the list of workflows. You can filter on name , version ,
+	// description , and type .
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
-	// Used to get a list of workflow build version filtered by the identity of the
-	// creator.
+	// Filters results based on the workflow owner. By default, this request returns
+	// the workflows that your account owns ( Self ). Specify Amazon to list the
+	// workflows that Image Builder manages. Image Builder rejects the Shared and
+	// ThirdParty owner values for workflows, and AWSMarketplace returns no results.
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListWorkflowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByName != false {
+		s.WriteBool(schemas.ListWorkflowsRequest_byName, v.ByName)
+	}
+	serializeFilterList(s, schemas.ListWorkflowsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowsRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListWorkflowsRequest_owner, string(v.Owner))
+	}
 }
 
 type ListWorkflowsOutput struct {
@@ -56,7 +84,7 @@ type ListWorkflowsOutput struct {
 	// this token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// A list of workflow build versions that match the request criteria.
+	// A list of workflow versions that match the request criteria.
 	WorkflowVersionList []types.WorkflowVersion
 
 	// Metadata pertaining to the operation's result.
@@ -65,74 +93,48 @@ type ListWorkflowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowsResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkflowVersionList(s, schemas.ListWorkflowsResponse_workflowVersionList, v.WorkflowVersionList)
+}
+func (v *ListWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkflowsResponse_workflowVersionList:
+			return deserializeWorkflowVersionList(d, schemas.ListWorkflowsResponse_workflowVersionList, &v.WorkflowVersionList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflows, schemas.ListWorkflowsRequest, schemas.ListWorkflowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflows, schemas.ListWorkflowsRequest, schemas.ListWorkflowsResponse), output: &ListWorkflowsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflows{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkflows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkflows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +149,6 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -161,7 +157,7 @@ func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, o
 
 // ListWorkflowsPaginatorOptions is the paginator options for ListWorkflows
 type ListWorkflowsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -250,11 +246,3 @@ type ListWorkflowsAPIClient interface {
 }
 
 var _ ListWorkflowsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListWorkflows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListWorkflows",
-	}
-}

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +42,21 @@ type GetFlowMetadataInput struct {
 	FlowId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFlowMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetFlowMetadataInput_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowMetadataInput_FlowId, *v.FlowId)
+	}
 }
 
 type GetFlowMetadataOutput struct {
@@ -95,77 +109,109 @@ type GetFlowMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFlowMetadataOutput_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetFlowMetadataOutput_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFlowMetadataOutput_Description, *v.Description)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowMetadataOutput_FlowId, *v.FlowId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetFlowMetadataOutput_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFlowMetadataOutput_Name, *v.Name)
+	}
+	if v.PublishState != "" {
+		s.WriteString(schemas.GetFlowMetadataOutput_PublishState, string(v.PublishState))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetFlowMetadataOutput_RequestId, *v.RequestId)
+	}
+	if v.RunCount != 0 {
+		s.WriteInt32(schemas.GetFlowMetadataOutput_RunCount, v.RunCount)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetFlowMetadataOutput_Status, v.Status)
+	}
+	if v.UserCount != 0 {
+		s.WriteInt32(schemas.GetFlowMetadataOutput_UserCount, v.UserCount)
+	}
+}
+func (v *GetFlowMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowMetadataOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFlowMetadataOutput_Arn, v.Arn)
+		case schemas.GetFlowMetadataOutput_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetFlowMetadataOutput_CreatedTime, v.CreatedTime)
+		case schemas.GetFlowMetadataOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFlowMetadataOutput_Description, v.Description)
+		case schemas.GetFlowMetadataOutput_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetFlowMetadataOutput_FlowId, v.FlowId)
+		case schemas.GetFlowMetadataOutput_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetFlowMetadataOutput_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetFlowMetadataOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFlowMetadataOutput_Name, v.Name)
+		case schemas.GetFlowMetadataOutput_PublishState:
+			var ev string
+			if err := d.ReadString(schemas.GetFlowMetadataOutput_PublishState, &ev); err != nil {
+				return err
+			}
+			v.PublishState = types.FlowPublishState(ev)
+			return nil
+		case schemas.GetFlowMetadataOutput_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetFlowMetadataOutput_RequestId, v.RequestId)
+		case schemas.GetFlowMetadataOutput_RunCount:
+			return d.ReadInt32(schemas.GetFlowMetadataOutput_RunCount, &v.RunCount)
+		case schemas.GetFlowMetadataOutput_Status:
+			return d.ReadInt32(schemas.GetFlowMetadataOutput_Status, &v.Status)
+		case schemas.GetFlowMetadataOutput_UserCount:
+			return d.ReadInt32(schemas.GetFlowMetadataOutput_UserCount, &v.UserCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowMetadata, schemas.GetFlowMetadataInput, schemas.GetFlowMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowMetadata, schemas.GetFlowMetadataInput, schemas.GetFlowMetadataOutput), output: &GetFlowMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlowMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFlowMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFlowMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +226,8 @@ func (c *Client) addOperationGetFlowMetadataMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFlowMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFlowMetadata",
-	}
 }

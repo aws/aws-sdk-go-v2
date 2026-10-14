@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"checksum":{"encryptionAlgorithm":"SHA256","hash":"__Hash__"},"createdAt":946684800,"endedAt":946684800,"jobID":"__JobID__","s3BucketTarget":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"status":"PENDING","statusDetails":"__StatusDetails__"},{"checksum":{"encryptionAlgorithm":"SHA256","hash":"__Hash__"},"createdAt":946684800,"endedAt":946684800,"jobID":"__JobID__","s3BucketTarget":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"status":"PENDING","statusDetails":"__StatusDetails__"}],"nextToken":"__NextToken__"}

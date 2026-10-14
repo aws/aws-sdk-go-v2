@@ -50,6 +50,26 @@ func (m *validateOpCancelLegalHold) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBackupAccessPoint struct {
+}
+
+func (*validateOpCreateBackupAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBackupAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBackupAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBackupAccessPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBackupPlan struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpCreateTieringConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTieringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBackupAccessPoint struct {
+}
+
+func (*validateOpDeleteBackupAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBackupAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBackupAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBackupAccessPointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +545,26 @@ func (m *validateOpDeleteTieringConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTieringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBackupAccessPoint struct {
+}
+
+func (*validateOpDescribeBackupAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBackupAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBackupAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBackupAccessPointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1085,6 +1145,46 @@ func (m *validateOpGetTieringConfiguration) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTieringConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBackupAccessPointsByRecoveryPoint struct {
+}
+
+func (*validateOpListBackupAccessPointsByRecoveryPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBackupAccessPointsByRecoveryPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBackupAccessPointsByRecoveryPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBackupAccessPointsByRecoveryPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBackupAccessPointsByResource struct {
+}
+
+func (*validateOpListBackupAccessPointsByResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBackupAccessPointsByResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBackupAccessPointsByResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBackupAccessPointsByResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1718,6 +1818,10 @@ func addOpCancelLegalHoldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelLegalHold{}, middleware.After)
 }
 
+func addOpCreateBackupAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBackupAccessPoint{}, middleware.After)
+}
+
 func addOpCreateBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackupPlan{}, middleware.After)
 }
@@ -1760,6 +1864,10 @@ func addOpCreateRestoreTestingSelectionValidationMiddleware(stack *middleware.St
 
 func addOpCreateTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTieringConfiguration{}, middleware.After)
+}
+
+func addOpDeleteBackupAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBackupAccessPoint{}, middleware.After)
 }
 
 func addOpDeleteBackupPlanValidationMiddleware(stack *middleware.Stack) error {
@@ -1808,6 +1916,10 @@ func addOpDeleteRestoreTestingSelectionValidationMiddleware(stack *middleware.St
 
 func addOpDeleteTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTieringConfiguration{}, middleware.After)
+}
+
+func addOpDescribeBackupAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBackupAccessPoint{}, middleware.After)
 }
 
 func addOpDescribeBackupJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1924,6 +2036,14 @@ func addOpGetRestoreTestingSelectionValidationMiddleware(stack *middleware.Stack
 
 func addOpGetTieringConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTieringConfiguration{}, middleware.After)
+}
+
+func addOpListBackupAccessPointsByRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBackupAccessPointsByRecoveryPoint{}, middleware.After)
+}
+
+func addOpListBackupAccessPointsByResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBackupAccessPointsByResource{}, middleware.After)
 }
 
 func addOpListBackupPlanVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2544,6 +2664,24 @@ func validateOpCancelLegalHoldInput(v *CancelLegalHoldInput) error {
 	}
 }
 
+func validateOpCreateBackupAccessPointInput(v *CreateBackupAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupAccessPointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBackupPlanInput(v *CreateBackupPlanInput) error {
 	if v == nil {
 		return nil
@@ -2770,6 +2908,21 @@ func validateOpCreateTieringConfigurationInput(v *CreateTieringConfigurationInpu
 	}
 }
 
+func validateOpDeleteBackupAccessPointInput(v *DeleteBackupAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBackupAccessPointInput"}
+	if v.AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBackupPlanInput(v *DeleteBackupPlanInput) error {
 	if v == nil {
 		return nil
@@ -2951,6 +3104,21 @@ func validateOpDeleteTieringConfigurationInput(v *DeleteTieringConfigurationInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTieringConfigurationInput"}
 	if v.TieringConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBackupAccessPointInput(v *DescribeBackupAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBackupAccessPointInput"}
+	if v.AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3419,6 +3587,36 @@ func validateOpGetTieringConfigurationInput(v *GetTieringConfigurationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetTieringConfigurationInput"}
 	if v.TieringConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TieringConfigurationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBackupAccessPointsByRecoveryPointInput(v *ListBackupAccessPointsByRecoveryPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBackupAccessPointsByRecoveryPointInput"}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBackupAccessPointsByResourceInput(v *ListBackupAccessPointsByResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBackupAccessPointsByResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

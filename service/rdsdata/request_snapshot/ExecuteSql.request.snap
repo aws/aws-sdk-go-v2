@@ -1,0 +1,5 @@
+POST /ExecuteSql
+
+Content-Type: application/json
+
+{"awsSecretStoreArn":"__AwsSecretStoreArn__","database":"__Database__","dbClusterOrInstanceArn":"__DbClusterOrInstanceArn__","schema":"__Schema__","sqlStatements":"__SqlStatements__"}

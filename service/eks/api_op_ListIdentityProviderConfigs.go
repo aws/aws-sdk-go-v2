@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the identity provider configurations for your cluster.
@@ -54,6 +54,24 @@ type ListIdentityProviderConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProviderConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProviderConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProviderConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityProviderConfigsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListIdentityProviderConfigsOutput struct {
 
 	// The identity provider configurations for the cluster.
@@ -74,77 +92,51 @@ type ListIdentityProviderConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProviderConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProviderConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProviderConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProviderConfigs(s, schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs, v.IdentityProviderConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentityProviderConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityProviderConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs:
+			return deserializeIdentityProviderConfigs(d, schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs, &v.IdentityProviderConfigs)
+		case schemas.ListIdentityProviderConfigsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityProviderConfigsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviderConfigs, schemas.ListIdentityProviderConfigsRequest, schemas.ListIdentityProviderConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityProviderConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviderConfigs, schemas.ListIdentityProviderConfigsRequest, schemas.ListIdentityProviderConfigsResponse), output: &ListIdentityProviderConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityProviderConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdentityProviderConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIdentityProviderConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdentityProviderConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +149,6 @@ func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +257,3 @@ type ListIdentityProviderConfigsAPIClient interface {
 }
 
 var _ ListIdentityProviderConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIdentityProviderConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIdentityProviderConfigs",
-	}
-}

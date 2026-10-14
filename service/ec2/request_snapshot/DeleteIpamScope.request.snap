@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIpamScope&DryRun=true&IpamScopeId=__IpamScopeId__&Version=2016-11-15

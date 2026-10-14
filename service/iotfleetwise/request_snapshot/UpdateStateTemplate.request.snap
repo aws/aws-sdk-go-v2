@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.UpdateStateTemplate
+
+{"dataExtraDimensions":["__Member__","__Member__"],"description":"__Description__","identifier":"__Identifier__","metadataExtraDimensions":["__Member__","__Member__"],"stateTemplatePropertiesToAdd":["__Member__","__Member__"],"stateTemplatePropertiesToRemove":["__Member__","__Member__"]}

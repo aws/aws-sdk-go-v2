@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"caseRuleArn":"__CaseRuleArn__","caseRuleId":"__CaseRuleId__"}

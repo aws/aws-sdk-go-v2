@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeKeywords
+
+{"Keywords":[{"Keyword":"__Keyword__","KeywordAction":"AUTOMATIC_RESPONSE","KeywordMessage":"__KeywordMessage__"},{"Keyword":"__Keyword__","KeywordAction":"AUTOMATIC_RESPONSE","KeywordMessage":"__KeywordMessage__"}],"NextToken":"__NextToken__","OriginationIdentity":"__OriginationIdentity__","OriginationIdentityArn":"__OriginationIdentityArn__"}

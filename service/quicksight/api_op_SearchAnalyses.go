@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for analyses that belong to the user specified in the filter.
@@ -52,6 +52,25 @@ type SearchAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAnalysesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAnalysesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchAnalysesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeAnalysisSearchFilterList(s, schemas.SearchAnalysesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAnalysesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAnalysesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchAnalysesOutput struct {
 
 	// Metadata describing the analyses that you searched for.
@@ -72,77 +91,62 @@ type SearchAnalysesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAnalysesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisSummaryList(s, schemas.SearchAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAnalysesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchAnalysesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.SearchAnalysesResponse_Status, v.Status)
+	}
+}
+func (v *SearchAnalysesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAnalysesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAnalysesResponse_AnalysisSummaryList:
+			return deserializeAnalysisSummaryList(d, schemas.SearchAnalysesResponse_AnalysisSummaryList, &v.AnalysisSummaryList)
+		case schemas.SearchAnalysesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAnalysesResponse_NextToken, v.NextToken)
+		case schemas.SearchAnalysesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchAnalysesResponse_RequestId, v.RequestId)
+		case schemas.SearchAnalysesResponse_Status:
+			return d.ReadInt32(schemas.SearchAnalysesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAnalyses, schemas.SearchAnalysesRequest, schemas.SearchAnalysesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAnalyses, schemas.SearchAnalysesRequest, schemas.SearchAnalysesResponse), output: &SearchAnalysesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchAnalyses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchAnalyses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchAnalysesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAnalyses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +159,6 @@ func (c *Client) addOperationSearchAnalysesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +259,3 @@ type SearchAnalysesAPIClient interface {
 }
 
 var _ SearchAnalysesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchAnalyses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchAnalyses",
-	}
-}

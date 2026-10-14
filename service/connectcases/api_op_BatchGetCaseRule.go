@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a batch of case rules. In the Amazon Connect admin website, case rules are
@@ -46,6 +45,19 @@ type BatchGetCaseRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCaseRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseRuleIdentifierList(s, schemas.BatchGetCaseRuleRequest_caseRules, v.CaseRules)
+	if v.DomainId != nil {
+		s.WriteString(schemas.BatchGetCaseRuleRequest_domainId, *v.DomainId)
+	}
+}
+
 type BatchGetCaseRuleOutput struct {
 
 	// A list of detailed case rule information.
@@ -67,77 +79,51 @@ type BatchGetCaseRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCaseRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetCaseRuleList(s, schemas.BatchGetCaseRuleResponse_caseRules, v.CaseRules)
+	serializeBatchGetCaseRuleErrorList(s, schemas.BatchGetCaseRuleResponse_errors, v.Errors)
+	serializeBatchGetCaseRuleUnprocessedList(s, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, v.UnprocessedCaseRules)
+}
+func (v *BatchGetCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCaseRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCaseRuleResponse_caseRules:
+			return deserializeBatchGetCaseRuleList(d, schemas.BatchGetCaseRuleResponse_caseRules, &v.CaseRules)
+		case schemas.BatchGetCaseRuleResponse_errors:
+			return deserializeBatchGetCaseRuleErrorList(d, schemas.BatchGetCaseRuleResponse_errors, &v.Errors)
+		case schemas.BatchGetCaseRuleResponse_unprocessedCaseRules:
+			return deserializeBatchGetCaseRuleUnprocessedList(d, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, &v.UnprocessedCaseRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCaseRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.BatchGetCaseRuleRequest, schemas.BatchGetCaseRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.BatchGetCaseRuleRequest, schemas.BatchGetCaseRuleResponse), output: &BatchGetCaseRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCaseRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetCaseRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetCaseRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCaseRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +138,8 @@ func (c *Client) addOperationBatchGetCaseRuleMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetCaseRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetCaseRule",
-	}
 }

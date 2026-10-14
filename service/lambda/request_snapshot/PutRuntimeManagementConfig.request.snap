@@ -1,0 +1,5 @@
+PUT /2021-07-20/functions/__FunctionName__/runtime-management-config?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"RuntimeVersionArn":"__RuntimeVersionArn__","UpdateRuntimeOn":"Auto"}

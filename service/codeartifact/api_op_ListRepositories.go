@@ -5,12 +5,8 @@ package codeartifact
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of [RepositorySummary] objects. Each RepositorySummary contains information about
@@ -50,24 +46,6 @@ type ListRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRepositoriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRepositoriesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRepositoriesRequest_nextToken, *v.NextToken)
-	}
-	if v.RepositoryPrefix != nil {
-		s.WriteString(schemas.ListRepositoriesRequest_repositoryPrefix, *v.RepositoryPrefix)
-	}
-}
-
 type ListRepositoriesOutput struct {
 
 	//  If there are additional results, this is the token for the next set of
@@ -85,84 +63,26 @@ type ListRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRepositoriesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRepositoriesResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRepositoriesResult_nextToken, v.NextToken)
-		case schemas.ListRepositoriesResult_repositories:
-			return deserializeRepositorySummaryList(d, schemas.ListRepositoriesResult_repositories, &v.Repositories)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRepositories{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositories, schemas.ListRepositoriesRequest, schemas.ListRepositoriesResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRepositories{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositories, schemas.ListRepositoriesRequest, schemas.ListRepositoriesResult), output: &ListRepositoriesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRepositories"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositories(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +95,6 @@ func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +195,3 @@ type ListRepositoriesAPIClient interface {
 }
 
 var _ ListRepositoriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRepositories(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRepositories",
-	}
-}

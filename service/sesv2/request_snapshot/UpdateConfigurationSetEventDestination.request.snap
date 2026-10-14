@@ -1,0 +1,5 @@
+PUT /v2/email/configuration-sets/__ConfigurationSetName__/event-destinations/__EventDestinationName__
+
+Content-Type: application/json
+
+{"EventDestination":{"CloudWatchDestination":{"DimensionConfigurations":[{"DefaultDimensionValue":"__DefaultDimensionValue__","DimensionName":"__DimensionName__","DimensionValueSource":"MESSAGE_TAG"},{"DefaultDimensionValue":"__DefaultDimensionValue__","DimensionName":"__DimensionName__","DimensionValueSource":"MESSAGE_TAG"}]},"Enabled":true,"EventBridgeDestination":{"EventBusArn":"__EventBusArn__"},"KinesisFirehoseDestination":{"DeliveryStreamArn":"__DeliveryStreamArn__","IamRoleArn":"__IamRoleArn__"},"MatchingEventTypes":["SEND","SEND"],"PinpointDestination":{"ApplicationArn":"__ApplicationArn__"},"SnsDestination":{"TopicArn":"__TopicArn__"}}}

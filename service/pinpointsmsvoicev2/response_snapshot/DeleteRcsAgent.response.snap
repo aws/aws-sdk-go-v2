@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteRcsAgent
+
+{"CreatedTimestamp":946684800,"DeletionProtectionEnabled":true,"OptOutListName":"__OptOutListName__","RcsAgentArn":"__RcsAgentArn__","RcsAgentId":"__RcsAgentId__","SelfManagedOptOutsEnabled":true,"Status":"CREATED","TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true,"TwoWayRcsEventsEnabled":["__Member__","__Member__"]}

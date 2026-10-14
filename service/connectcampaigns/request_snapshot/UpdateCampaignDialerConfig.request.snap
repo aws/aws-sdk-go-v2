@@ -1,0 +1,5 @@
+POST /campaigns/__Id__/dialer-config
+
+Content-Type: application/json
+
+{"dialerConfig":{"progressiveDialerConfig":{"bandwidthAllocation":1,"dialingCapacity":1}}}

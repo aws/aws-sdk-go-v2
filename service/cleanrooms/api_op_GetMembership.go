@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a specified membership for an identifier.
@@ -37,6 +36,28 @@ type GetMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetMembershipInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *GetMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMembershipInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMembershipInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetMembershipInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetMembershipOutput struct {
 
 	// The membership retrieved for the provided identifier.
@@ -50,77 +71,50 @@ type GetMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.GetMembershipOutput_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMembershipOutput_membership:
+			v.Membership = &types.Membership{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipInput, schemas.GetMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipInput, schemas.GetMembershipOutput), output: &GetMembershipOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMembership{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMembership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMembershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMembership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +129,8 @@ func (c *Client) addOperationGetMembershipMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMembership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMembership",
-	}
 }

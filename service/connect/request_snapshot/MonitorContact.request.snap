@@ -1,0 +1,5 @@
+POST /contact/monitor
+
+Content-Type: application/json
+
+{"AllowedMonitorCapabilities":["SILENT_MONITOR","SILENT_MONITOR"],"ClientToken":"__ClientToken__","ContactId":"__ContactId__","InstanceId":"__InstanceId__","UserId":"__UserId__"}

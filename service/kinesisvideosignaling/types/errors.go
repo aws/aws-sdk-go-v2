@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,16 +33,6 @@ func (e *ClientLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ClientLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClientLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClientLimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ClientLimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -70,16 +59,6 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidArgumentException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified client is invalid.
 type InvalidClientException struct {
@@ -106,16 +85,6 @@ func (e *InvalidClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidClientException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidClientException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidClientException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidClientException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
@@ -142,16 +111,6 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *NotAuthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotAuthorizedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotAuthorizedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.NotAuthorizedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified resource is not found.
 type ResourceNotFoundException struct {
@@ -178,16 +137,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // If the client session is expired. Once the client is connected, the session is
 // valid for 45 minutes. Client should reconnect to the channel to continue
@@ -216,13 +165,3 @@ func (e *SessionExpiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SessionExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *SessionExpiredException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionExpiredException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionExpiredException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.SessionExpiredException_message, v.Message)
-		}
-		return nil
-	})
-}

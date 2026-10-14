@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/object
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"LinkName":"__LinkName__","ObjectAttributeList":[{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}},{"Key":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Value":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}],"ParentReference":{"Selector":"__Selector__"},"SchemaFacets":[{"FacetName":"__FacetName__","SchemaArn":"__SchemaArn__"},{"FacetName":"__FacetName__","SchemaArn":"__SchemaArn__"}]}

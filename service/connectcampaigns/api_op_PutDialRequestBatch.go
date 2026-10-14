@@ -4,13 +4,8 @@ package connectcampaigns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates dials requests for the specified campaign Amazon Connect account. This
@@ -46,31 +41,6 @@ type PutDialRequestBatchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDialRequestBatchInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutDialRequestBatchRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutDialRequestBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDialRequestList(s, schemas.PutDialRequestBatchRequest_dialRequests, v.DialRequests)
-	if v.Id != nil {
-		s.WriteString(schemas.PutDialRequestBatchRequest_id, *v.Id)
-	}
-}
-func (v *PutDialRequestBatchInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutDialRequestBatchRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutDialRequestBatchRequest_dialRequests:
-			return deserializeDialRequestList(d, schemas.PutDialRequestBatchRequest_dialRequests, &v.DialRequests)
-		case schemas.PutDialRequestBatchRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PutDialRequestBatchRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // PutDialRequestBatchResponse
 type PutDialRequestBatchOutput struct {
 
@@ -86,96 +56,29 @@ type PutDialRequestBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDialRequestBatchOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutDialRequestBatchResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutDialRequestBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRequestList(s, schemas.PutDialRequestBatchResponse_failedRequests, v.FailedRequests)
-	serializeSuccessfulRequestList(s, schemas.PutDialRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
-}
-func (v *PutDialRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutDialRequestBatchResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutDialRequestBatchResponse_failedRequests:
-			return deserializeFailedRequestList(d, schemas.PutDialRequestBatchResponse_failedRequests, &v.FailedRequests)
-		case schemas.PutDialRequestBatchResponse_successfulRequests:
-			return deserializeSuccessfulRequestList(d, schemas.PutDialRequestBatchResponse_successfulRequests, &v.SuccessfulRequests)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutDialRequestBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDialRequestBatch{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDialRequestBatch, schemas.PutDialRequestBatchRequest, schemas.PutDialRequestBatchResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDialRequestBatch{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDialRequestBatch, schemas.PutDialRequestBatchRequest, schemas.PutDialRequestBatchResponse), output: &PutDialRequestBatchOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDialRequestBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDialRequestBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDialRequestBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +93,8 @@ func (c *Client) addOperationPutDialRequestBatchMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDialRequestBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDialRequestBatch",
-	}
 }

@@ -1,0 +1,5 @@
+POST /policy/validation?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"locale":"DE","policyDocument":"__PolicyDocument__","policyType":"IDENTITY_POLICY","validatePolicyResourceType":"AWS::S3::Bucket"}

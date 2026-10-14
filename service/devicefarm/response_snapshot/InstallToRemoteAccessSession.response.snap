@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.InstallToRemoteAccessSession
+
+{"appUpload":{"arn":"__Arn__","category":"CURATED","contentType":"__ContentType__","created":946684800,"message":"__Message__","metadata":"__Metadata__","name":"__Name__","status":"INITIALIZED","type":"ANDROID_APP","url":"__Url__"}}

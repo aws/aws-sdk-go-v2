@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"destination":"__Destination__","format":"PARQUET","graphId":"__GraphId__","kmsKeyIdentifier":"__KmsKeyIdentifier__","parquetType":"COLUMNAR","roleArn":"__RoleArn__","status":"INITIALIZING","statusReason":"__StatusReason__","taskId":"__TaskId__"}

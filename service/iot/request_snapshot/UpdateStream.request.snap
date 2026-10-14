@@ -1,0 +1,5 @@
+PUT /streams/__StreamId__
+
+Content-Type: application/json
+
+{"description":"__Description__","files":[{"fileId":1,"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},{"fileId":1,"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}}],"roleArn":"__RoleArn__"}

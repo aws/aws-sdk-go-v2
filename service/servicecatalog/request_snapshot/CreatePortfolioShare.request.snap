@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreatePortfolioShare
+
+{"AcceptLanguage":"__AcceptLanguage__","AccountId":"__AccountId__","OrganizationNode":{"Type":"ORGANIZATION","Value":"__Value__"},"PortfolioId":"__PortfolioId__","SharePrincipals":true,"ShareTagOptions":true}

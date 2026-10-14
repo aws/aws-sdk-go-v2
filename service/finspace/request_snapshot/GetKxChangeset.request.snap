@@ -1,0 +1,3 @@
+GET /kx/environments/__EnvironmentId__/databases/__DatabaseName__/changesets/__ChangesetId__
+
+

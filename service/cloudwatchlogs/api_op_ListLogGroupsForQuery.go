@@ -5,9 +5,9 @@ package cloudwatchlogs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the log groups that were analyzed during a single CloudWatch
@@ -52,6 +52,24 @@ type ListLogGroupsForQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogGroupsForQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogGroupsForQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogGroupsForQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLogGroupsForQueryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogGroupsForQueryRequest_nextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.ListLogGroupsForQueryRequest_queryId, *v.QueryId)
+	}
+}
+
 type ListLogGroupsForQueryOutput struct {
 
 	// An array of the names and ARNs of the log groups that were processed in the
@@ -67,77 +85,51 @@ type ListLogGroupsForQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogGroupsForQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogGroupsForQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogGroupsForQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogGroupIdentifiers(s, schemas.ListLogGroupsForQueryResponse_logGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogGroupsForQueryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLogGroupsForQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLogGroupsForQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLogGroupsForQueryResponse_logGroupIdentifiers:
+			return deserializeLogGroupIdentifiers(d, schemas.ListLogGroupsForQueryResponse_logGroupIdentifiers, &v.LogGroupIdentifiers)
+		case schemas.ListLogGroupsForQueryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLogGroupsForQueryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLogGroupsForQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogGroupsForQuery, schemas.ListLogGroupsForQueryRequest, schemas.ListLogGroupsForQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogGroupsForQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogGroupsForQuery, schemas.ListLogGroupsForQueryRequest, schemas.ListLogGroupsForQueryResponse), output: &ListLogGroupsForQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogGroupsForQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLogGroupsForQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLogGroupsForQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogGroupsForQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +142,6 @@ func (c *Client) addOperationListLogGroupsForQueryMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +243,3 @@ type ListLogGroupsForQueryAPIClient interface {
 }
 
 var _ ListLogGroupsForQueryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLogGroupsForQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLogGroupsForQuery",
-	}
-}

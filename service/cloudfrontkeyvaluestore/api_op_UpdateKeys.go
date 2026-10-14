@@ -4,13 +4,8 @@ package cloudfrontkeyvaluestore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Puts or Deletes multiple key value pairs in a single, all-or-nothing operation.
@@ -51,22 +46,6 @@ type UpdateKeysInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKeysInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKeysRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteKeyRequestsList(s, schemas.UpdateKeysRequest_Deletes, v.Deletes)
-	if v.IfMatch != nil {
-		s.WriteString(schemas.UpdateKeysRequest_IfMatch, *v.IfMatch)
-	}
-	if v.KvsARN != nil {
-		s.WriteString(schemas.UpdateKeysRequest_KvsARN, *v.KvsARN)
-	}
-	serializePutKeyRequestsList(s, schemas.UpdateKeysRequest_Puts, v.Puts)
-}
 func (in *UpdateKeysInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -98,91 +77,29 @@ type UpdateKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKeysResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKeysResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.UpdateKeysResponse_ETag, v.ETag)
-		case schemas.UpdateKeysResponse_ItemCount:
-			v.ItemCount = new(int32)
-			return d.ReadInt32(schemas.UpdateKeysResponse_ItemCount, v.ItemCount)
-		case schemas.UpdateKeysResponse_TotalSizeInBytes:
-			v.TotalSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.UpdateKeysResponse_TotalSizeInBytes, v.TotalSizeInBytes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKeys{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeys, schemas.UpdateKeysRequest, schemas.UpdateKeysResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKeys{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeys, schemas.UpdateKeysRequest, schemas.UpdateKeysResponse), output: &UpdateKeysOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateKeysValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +114,8 @@ func (c *Client) addOperationUpdateKeysMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateKeys",
-	}
 }

@@ -1,0 +1,5 @@
+POST /updateReplicationSet
+
+Content-Type: application/json
+
+{"actions":[{"addRegionAction":{"regionName":"__RegionName__","sseKmsKeyId":"__SseKmsKeyId__"}},{"addRegionAction":{"regionName":"__RegionName__","sseKmsKeyId":"__SseKmsKeyId__"}}],"arn":"__Arn__","clientToken":"__ClientToken__"}

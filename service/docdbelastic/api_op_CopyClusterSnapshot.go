@@ -4,13 +4,8 @@ package docdbelastic
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies a snapshot of an elastic cluster.
@@ -84,28 +79,6 @@ type CopyClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyClusterSnapshotInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CopyTags != nil {
-		s.WriteBool(schemas.CopyClusterSnapshotInput_copyTags, *v.CopyTags)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.SnapshotArn != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_snapshotArn, *v.SnapshotArn)
-	}
-	serializeTagMap(s, schemas.CopyClusterSnapshotInput_tags, v.Tags)
-	if v.TargetSnapshotName != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_targetSnapshotName, *v.TargetSnapshotName)
-	}
-}
-
 type CopyClusterSnapshotOutput struct {
 
 	// Returns information about a specific elastic cluster snapshot.
@@ -119,85 +92,29 @@ type CopyClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyClusterSnapshotOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyClusterSnapshotOutput_snapshot:
-			v.Snapshot = &types.ClusterSnapshot{}
-			return v.Snapshot.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotInput, schemas.CopyClusterSnapshotOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotInput, schemas.CopyClusterSnapshotOutput), output: &CopyClusterSnapshotOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyClusterSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCopyClusterSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyClusterSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +129,8 @@ func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCopyClusterSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyClusterSnapshot",
-	}
 }

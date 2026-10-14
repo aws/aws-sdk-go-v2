@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.GetMailDomain
+
+{"DkimVerificationStatus":"PENDING","IsDefault":true,"IsTestDomain":true,"OwnershipVerificationStatus":"PENDING","Records":[{"Hostname":"__Hostname__","Type":"__Type__","Value":"__Value__"},{"Hostname":"__Hostname__","Type":"__Type__","Value":"__Value__"}]}

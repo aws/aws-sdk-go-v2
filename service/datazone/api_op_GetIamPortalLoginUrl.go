@@ -4,12 +4,7 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the data portal URL for the specified Amazon DataZone domain.
@@ -38,18 +33,6 @@ type GetIamPortalLoginUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIamPortalLoginUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIamPortalLoginUrlInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIamPortalLoginUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetIamPortalLoginUrlInput_domainIdentifier, *v.DomainIdentifier)
-	}
-}
-
 type GetIamPortalLoginUrlOutput struct {
 
 	// The ID of the user profile.
@@ -66,88 +49,29 @@ type GetIamPortalLoginUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIamPortalLoginUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIamPortalLoginUrlOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIamPortalLoginUrlOutput_authCodeUrl:
-			v.AuthCodeUrl = new(string)
-			return d.ReadString(schemas.GetIamPortalLoginUrlOutput_authCodeUrl, v.AuthCodeUrl)
-		case schemas.GetIamPortalLoginUrlOutput_userProfileId:
-			v.UserProfileId = new(string)
-			return d.ReadString(schemas.GetIamPortalLoginUrlOutput_userProfileId, v.UserProfileId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIamPortalLoginUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIamPortalLoginUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIamPortalLoginUrl, schemas.GetIamPortalLoginUrlInput, schemas.GetIamPortalLoginUrlOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIamPortalLoginUrl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIamPortalLoginUrl, schemas.GetIamPortalLoginUrlInput, schemas.GetIamPortalLoginUrlOutput), output: &GetIamPortalLoginUrlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIamPortalLoginUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIamPortalLoginUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIamPortalLoginUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +86,8 @@ func (c *Client) addOperationGetIamPortalLoginUrlMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIamPortalLoginUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIamPortalLoginUrl",
-	}
 }

@@ -1,0 +1,3 @@
+DELETE /v1/repository/permissions/policies?domain=__Domain__&domain-owner=__DomainOwner__&policy-revision=__PolicyRevision__&repository=__Repository__
+
+

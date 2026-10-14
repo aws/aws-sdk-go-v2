@@ -1,0 +1,5 @@
+POST /members/get
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"]}

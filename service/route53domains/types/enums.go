@@ -802,6 +802,25 @@ func (Operator) Values() []Operator {
 	}
 }
 
+type PriceType string
+
+// Enum values for PriceType
+const (
+	PriceTypeStandard        PriceType = "STANDARD"
+	PriceTypeRegistryPremium PriceType = "REGISTRY_PREMIUM"
+)
+
+// Values returns all known values for PriceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PriceType) Values() []PriceType {
+	return []PriceType{
+		"STANDARD",
+		"REGISTRY_PREMIUM",
+	}
+}
+
 type ReachabilityStatus string
 
 // Enum values for ReachabilityStatus
@@ -877,6 +896,7 @@ const (
 	TransferableDomainInOwnAccount     Transferable = "DOMAIN_IN_OWN_ACCOUNT"
 	TransferableDomainInAnotherAccount Transferable = "DOMAIN_IN_ANOTHER_ACCOUNT"
 	TransferablePremiumDomain          Transferable = "PREMIUM_DOMAIN"
+	TransferablePending                Transferable = "PENDING"
 )
 
 // Values returns all known values for Transferable. Note that this can be
@@ -891,5 +911,6 @@ func (Transferable) Values() []Transferable {
 		"DOMAIN_IN_OWN_ACCOUNT",
 		"DOMAIN_IN_ANOTHER_ACCOUNT",
 		"PREMIUM_DOMAIN",
+		"PENDING",
 	}
 }

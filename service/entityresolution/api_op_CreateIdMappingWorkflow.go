@@ -4,13 +4,8 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an IdMappingWorkflow object which stores the configuration of the data
@@ -73,37 +68,6 @@ type CreateIdMappingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdMappingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateIdMappingWorkflowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateIdMappingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateIdMappingWorkflowInput_description, *v.Description)
-	}
-	if v.IdMappingTechniques != nil {
-		s.WriteStruct(schemas.CreateIdMappingWorkflowInput_idMappingTechniques)
-		v.IdMappingTechniques.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncrementalRunConfig != nil {
-		s.WriteStruct(schemas.CreateIdMappingWorkflowInput_incrementalRunConfig)
-		v.IncrementalRunConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIdMappingWorkflowInputSourceConfig(s, schemas.CreateIdMappingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
-	serializeIdMappingWorkflowOutputSourceConfig(s, schemas.CreateIdMappingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateIdMappingWorkflowInput_roleArn, *v.RoleArn)
-	}
-	serializeTagMap(s, schemas.CreateIdMappingWorkflowInput_tags, v.Tags)
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.CreateIdMappingWorkflowInput_workflowName, *v.WorkflowName)
-	}
-}
-
 type CreateIdMappingWorkflowOutput struct {
 
 	// An object which defines the ID mapping technique and any additional
@@ -149,104 +113,29 @@ type CreateIdMappingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdMappingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateIdMappingWorkflowOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateIdMappingWorkflowOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateIdMappingWorkflowOutput_description, v.Description)
-		case schemas.CreateIdMappingWorkflowOutput_idMappingTechniques:
-			v.IdMappingTechniques = &types.IdMappingTechniques{}
-			return v.IdMappingTechniques.Deserialize(d)
-		case schemas.CreateIdMappingWorkflowOutput_incrementalRunConfig:
-			v.IncrementalRunConfig = &types.IdMappingIncrementalRunConfig{}
-			return v.IncrementalRunConfig.Deserialize(d)
-		case schemas.CreateIdMappingWorkflowOutput_inputSourceConfig:
-			return deserializeIdMappingWorkflowInputSourceConfig(d, schemas.CreateIdMappingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.CreateIdMappingWorkflowOutput_outputSourceConfig:
-			return deserializeIdMappingWorkflowOutputSourceConfig(d, schemas.CreateIdMappingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.CreateIdMappingWorkflowOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.CreateIdMappingWorkflowOutput_roleArn, v.RoleArn)
-		case schemas.CreateIdMappingWorkflowOutput_workflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.CreateIdMappingWorkflowOutput_workflowArn, v.WorkflowArn)
-		case schemas.CreateIdMappingWorkflowOutput_workflowName:
-			v.WorkflowName = new(string)
-			return d.ReadString(schemas.CreateIdMappingWorkflowOutput_workflowName, v.WorkflowName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateIdMappingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIdMappingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdMappingWorkflow, schemas.CreateIdMappingWorkflowInput, schemas.CreateIdMappingWorkflowOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIdMappingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdMappingWorkflow, schemas.CreateIdMappingWorkflowInput, schemas.CreateIdMappingWorkflowOutput), output: &CreateIdMappingWorkflowOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIdMappingWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateIdMappingWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIdMappingWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -261,22 +150,8 @@ func (c *Client) addOperationCreateIdMappingWorkflowMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateIdMappingWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIdMappingWorkflow",
-	}
 }

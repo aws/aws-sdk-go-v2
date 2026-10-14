@@ -5,12 +5,8 @@ package route53recoveryreadiness
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Displays a summary of information about a recovery group's readiness status.
@@ -47,24 +43,6 @@ type GetRecoveryGroupReadinessSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecoveryGroupReadinessSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRecoveryGroupReadinessSummaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRecoveryGroupReadinessSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetRecoveryGroupReadinessSummaryRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryRequest_NextToken, *v.NextToken)
-	}
-	if v.RecoveryGroupName != nil {
-		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName, *v.RecoveryGroupName)
-	}
-}
-
 type GetRecoveryGroupReadinessSummaryOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -82,94 +60,29 @@ type GetRecoveryGroupReadinessSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecoveryGroupReadinessSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRecoveryGroupReadinessSummaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRecoveryGroupReadinessSummaryResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetRecoveryGroupReadinessSummaryResponse_NextToken, v.NextToken)
-		case schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness:
-			var ev string
-			if err := d.ReadString(schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness, &ev); err != nil {
-				return err
-			}
-			v.Readiness = types.Readiness(ev)
-			return nil
-		case schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks:
-			return deserialize__listOfReadinessCheckSummary(d, schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks, &v.ReadinessChecks)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRecoveryGroupReadinessSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecoveryGroupReadinessSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryGroupReadinessSummary, schemas.GetRecoveryGroupReadinessSummaryRequest, schemas.GetRecoveryGroupReadinessSummaryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecoveryGroupReadinessSummary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryGroupReadinessSummary, schemas.GetRecoveryGroupReadinessSummaryRequest, schemas.GetRecoveryGroupReadinessSummaryResponse), output: &GetRecoveryGroupReadinessSummaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecoveryGroupReadinessSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRecoveryGroupReadinessSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecoveryGroupReadinessSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +95,6 @@ func (c *Client) addOperationGetRecoveryGroupReadinessSummaryMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +198,3 @@ type GetRecoveryGroupReadinessSummaryAPIClient interface {
 }
 
 var _ GetRecoveryGroupReadinessSummaryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetRecoveryGroupReadinessSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRecoveryGroupReadinessSummary",
-	}
-}

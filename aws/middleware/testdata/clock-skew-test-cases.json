@@ -1,0 +1,340 @@
+{
+  "documentation": "Test cases for clock skew correction. Each test defines a sequence of operations on a single client. Each operation defines a sequence of attempts (the retry loop). The SDK under test must use the provided 'clientTime' values instead of the real clock. 'initialClientSkew' is the value of ClientSkew at the start of the test (0 for the first operation unless the test specifies otherwise, carried forward for subsequent operations). After all attempts in an operation complete, 'expectedClientSkew' is asserted.",
+  "tests": [
+    {
+      "description": "Clocks agree, request succeeds on first attempt, ClientSkew updated to 0",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:00:01 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success"
+        }
+      ]
+    },
+    {
+      "description": "Definite clock skew error on first attempt, retry succeeds, ClientSkew persists to next operation",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 403,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:05:01 GMT"
+                },
+                "errorCode": "RequestTimeTooSkewed"
+              }
+            },
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:02Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:04Z",
+              "expectedSigningTime": "2026-01-01T00:05:02Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:05:03 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "success"
+        },
+        {
+          "initialClientSkew": 300,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:01:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:01:02Z",
+              "expectedSigningTime": "2026-01-01T00:06:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:06:01 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "success"
+        }
+      ]
+    },
+    {
+      "description": "Clock skew error with no retry budget still updates ClientSkew",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "maxAttempts": 1,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 403,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:05:01 GMT"
+                },
+                "errorCode": "RequestTimeTooSkewed"
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "error"
+        }
+      ]
+    },
+    {
+      "description": "Delayed response exceeding trust threshold does not update ClientSkew",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:16:00Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:10:00 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success"
+        },
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:17:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:17:02Z",
+              "expectedSigningTime": "2026-01-01T00:17:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:22:01 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "success"
+        }
+      ]
+    },
+    {
+      "description": "Stale ClientSkew is silently corrected by a successful response without error or retry",
+      "operations": [
+        {
+          "initialClientSkew": 300,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:05:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:00:01 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success"
+        }
+      ]
+    },
+    {
+      "description": "Possible clock skew error with skew below detection threshold is not retried as clock skew",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 400,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:02:01 GMT"
+                },
+                "errorCode": "InvalidSignatureException"
+              }
+            }
+          ],
+          "expectedClientSkew": 120,
+          "expectedOutcome": "error",
+          "documentation": "Skew is ~2 minutes which is below the 4-minute detection threshold. The error is NOT retried as a clock skew candidate. ClientSkew is still updated from the Date header (unconditional recording)."
+        }
+      ]
+    },
+    {
+      "description": "Possible clock skew error with skew above detection threshold is retried and succeeds",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 400,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:05:01 GMT"
+                },
+                "errorCode": "InvalidSignatureException"
+              }
+            },
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:02Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:04Z",
+              "expectedSigningTime": "2026-01-01T00:05:02Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 00:05:03 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "success"
+        }
+      ]
+    },
+    {
+      "description": "Clock skew error with no Date header is not treated as a candidate, ClientSkew is not updated",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T00:00:00Z",
+              "clientTimeAtReceive": "2026-01-01T00:00:02Z",
+              "expectedSigningTime": "2026-01-01T00:00:00Z",
+              "response": {
+                "statusCode": 403,
+                "headers": {},
+                "errorCode": "RequestTimeTooSkewed"
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "error"
+        }
+      ]
+    },
+    {
+      "description": "Cached response with Age header does not update ClientSkew",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T16:51:00Z",
+              "clientTimeAtReceive": "2026-01-01T16:51:02Z",
+              "expectedSigningTime": "2026-01-01T16:51:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 12:03:01 GMT",
+                  "Age": "17280"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success",
+          "documentation": "The Date header is ~4.8 hours in the past because the response is served from a CDN cache. The Age header (17280 seconds) signals this is a cached response. The SDK MUST NOT compute skew from this response."
+        },
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T16:51:10Z",
+              "clientTimeAtReceive": "2026-01-01T16:51:12Z",
+              "expectedSigningTime": "2026-01-01T16:51:10Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 16:56:11 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 300,
+          "expectedOutcome": "success",
+          "documentation": "Subsequent non-cached response (no Age header) with actual 5-minute skew is learned normally."
+        }
+      ]
+    },
+    {
+      "description": "Cached response with Age header does not poison ClientSkew even when followed by a clock skew error",
+      "operations": [
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T16:51:00Z",
+              "clientTimeAtReceive": "2026-01-01T16:51:02Z",
+              "expectedSigningTime": "2026-01-01T16:51:00Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 12:03:01 GMT",
+                  "Age": "17280"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success",
+          "documentation": "First operation returns a cached response. ClientSkew stays at 0."
+        },
+        {
+          "initialClientSkew": 0,
+          "attempts": [
+            {
+              "clientTimeAtSend": "2026-01-01T16:51:10Z",
+              "clientTimeAtReceive": "2026-01-01T16:51:12Z",
+              "expectedSigningTime": "2026-01-01T16:51:10Z",
+              "response": {
+                "statusCode": 200,
+                "headers": {
+                  "Date": "Thu, 01 Jan 2026 16:51:11 GMT"
+                }
+              }
+            }
+          ],
+          "expectedClientSkew": 0,
+          "expectedOutcome": "success",
+          "documentation": "Second operation hits a non-cached endpoint. Signing time is correct (no false skew applied). Request succeeds."
+        }
+      ]
+    }
+  ]
+}

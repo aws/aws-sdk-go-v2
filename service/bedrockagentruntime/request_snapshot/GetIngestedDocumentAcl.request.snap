@@ -1,0 +1,5 @@
+POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/get-ingested-document-acl
+
+Content-Type: application/json
+
+{"documentId":"__DocumentId__"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteLoadBalancerListeners&LoadBalancerName=__LoadBalancerName__&LoadBalancerPorts.member.1=1&LoadBalancerPorts.member.2=1&Version=2012-06-01

@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/source
+
+Content-Type: application/json
+
+{"source":{"customerProfilesSegmentArn":"__SourceMemberCustomerProfilesSegmentArn__"}}

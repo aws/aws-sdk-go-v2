@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and starts a new Spark Connect session on the specified cluster. The
@@ -68,6 +67,37 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSessionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.StartSessionInput_ClusterId, *v.ClusterId)
+	}
+	serializeConfigurationList(s, schemas.StartSessionInput_EngineConfigurations, v.EngineConfigurations)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartSessionInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.StartSessionInput_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartSessionInput_Name, *v.Name)
+	}
+	if v.SessionIdleTimeoutInMinutes != nil {
+		s.WriteInt64(schemas.StartSessionInput_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
+	}
+	serializeTagList(s, schemas.StartSessionInput_Tags, v.Tags)
+}
+
 // Output of the StartSession operation.
 type StartSessionOutput struct {
 
@@ -95,77 +125,76 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.StartSessionOutput_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StartSessionOutput_Arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.StartSessionOutput_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartSessionOutput_Id, *v.Id)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartSessionOutput_State, string(v.State))
+	}
+}
+func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSessionOutput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.StartSessionOutput_AccountId, v.AccountId)
+		case schemas.StartSessionOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartSessionOutput_Arn, v.Arn)
+		case schemas.StartSessionOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.StartSessionOutput_ClusterId, v.ClusterId)
+		case schemas.StartSessionOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartSessionOutput_Id, v.Id)
+		case schemas.StartSessionOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.StartSessionOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.SessionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionInput, schemas.StartSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionInput, schemas.StartSessionOutput), output: &StartSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +209,8 @@ func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSession",
-	}
 }

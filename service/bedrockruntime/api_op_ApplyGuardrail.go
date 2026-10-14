@@ -4,11 +4,10 @@ package bedrockruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The action to apply a guardrail.
@@ -67,6 +66,28 @@ type ApplyGuardrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContentBlockList(s, schemas.ApplyGuardrailRequest_content, v.Content)
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.ApplyGuardrailRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.ApplyGuardrailRequest_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.OutputScope != "" {
+		s.WriteString(schemas.ApplyGuardrailRequest_outputScope, string(v.OutputScope))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ApplyGuardrailRequest_source, string(v.Source))
+	}
+}
+
 type ApplyGuardrailOutput struct {
 
 	// The action taken in the response from the guardrail.
@@ -101,77 +122,80 @@ type ApplyGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ApplyGuardrailResponse_action, string(v.Action))
+	}
+	if v.ActionReason != nil {
+		s.WriteString(schemas.ApplyGuardrailResponse_actionReason, *v.ActionReason)
+	}
+	serializeGuardrailAssessmentList(s, schemas.ApplyGuardrailResponse_assessments, v.Assessments)
+	if v.GuardrailCoverage != nil {
+		s.WriteStruct(schemas.ApplyGuardrailResponse_guardrailCoverage)
+		v.GuardrailCoverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGuardrailOutputContentList(s, schemas.ApplyGuardrailResponse_outputs, v.Outputs)
+	if v.Usage != nil {
+		s.WriteStruct(schemas.ApplyGuardrailResponse_usage)
+		v.Usage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplyGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplyGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplyGuardrailResponse_action:
+			var ev string
+			if err := d.ReadString(schemas.ApplyGuardrailResponse_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.GuardrailAction(ev)
+			return nil
+		case schemas.ApplyGuardrailResponse_actionReason:
+			v.ActionReason = new(string)
+			return d.ReadString(schemas.ApplyGuardrailResponse_actionReason, v.ActionReason)
+		case schemas.ApplyGuardrailResponse_assessments:
+			return deserializeGuardrailAssessmentList(d, schemas.ApplyGuardrailResponse_assessments, &v.Assessments)
+		case schemas.ApplyGuardrailResponse_guardrailCoverage:
+			v.GuardrailCoverage = &types.GuardrailCoverage{}
+			return v.GuardrailCoverage.Deserialize(d)
+		case schemas.ApplyGuardrailResponse_outputs:
+			return deserializeGuardrailOutputContentList(d, schemas.ApplyGuardrailResponse_outputs, &v.Outputs)
+		case schemas.ApplyGuardrailResponse_usage:
+			v.Usage = &types.GuardrailUsage{}
+			return v.Usage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplyGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyGuardrail, schemas.ApplyGuardrailRequest, schemas.ApplyGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplyGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyGuardrail, schemas.ApplyGuardrailRequest, schemas.ApplyGuardrailResponse), output: &ApplyGuardrailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpApplyGuardrail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ApplyGuardrail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpApplyGuardrailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opApplyGuardrail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +210,8 @@ func (c *Client) addOperationApplyGuardrailMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opApplyGuardrail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ApplyGuardrail",
-	}
 }

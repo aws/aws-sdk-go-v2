@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *ClusterLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *ClusterLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You get this exception when you call CreateReturnShippingLabel more than once
 // when other requests are not completed.
@@ -63,6 +85,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictResource != nil {
+		s.WriteString(schemas.ConflictException_ConflictResource, *v.ConflictResource)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_ConflictResource:
+			v.ConflictResource = new(string)
+			return d.ReadString(schemas.ConflictException_ConflictResource, v.ConflictResource)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your user lacks the necessary Amazon EC2 permissions to perform the attempted
 // action.
@@ -90,6 +139,27 @@ func (e *Ec2RequestFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *Ec2RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *Ec2RequestFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ec2RequestFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ec2RequestFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.Ec2RequestFailedException_Message, *v.Message)
+	}
+}
+func (v *Ec2RequestFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ec2RequestFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ec2RequestFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Ec2RequestFailedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The address provided was invalid. Check the address with your region's carrier,
 // and try again.
@@ -117,6 +187,27 @@ func (e *InvalidAddressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidAddressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidAddressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidAddressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidAddressException_Message, *v.Message)
+	}
+}
+func (v *InvalidAddressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAddressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAddressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAddressException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
 // the CreateClusterRequest$SnowballTypevalue supports your CreateJobRequest$JobType, and try again.
@@ -144,6 +235,27 @@ func (e *InvalidInputCombinationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputCombinationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputCombinationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputCombinationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputCombinationException_Message, *v.Message)
+	}
+}
+func (v *InvalidInputCombinationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputCombinationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputCombinationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputCombinationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The action can't be performed because the job's current state doesn't allow
 // that action to be performed.
@@ -171,6 +283,27 @@ func (e *InvalidJobStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidJobStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidJobStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidJobStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidJobStateException_Message, *v.Message)
+	}
+}
+func (v *InvalidJobStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidJobStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidJobStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidJobStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The NextToken string was altered unexpectedly, and the operation has stopped.
 // Run the operation without changing the NextToken string, and try again.
@@ -198,6 +331,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_Message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource can't be found. Check the information you provided in
 // your last request, and try again.
@@ -227,6 +381,33 @@ func (e *InvalidResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidResourceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidResourceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidResourceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidResourceException_Message, *v.Message)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.InvalidResourceException_ResourceType, *v.ResourceType)
+	}
+}
+func (v *InvalidResourceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidResourceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidResourceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidResourceException_Message, v.Message)
+		case schemas.InvalidResourceException_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.InvalidResourceException_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 
 // The provided Key Management Service key lacks the permissions to perform the
 // specified CreateJobor UpdateJob action.
@@ -254,6 +435,27 @@ func (e *KMSRequestFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *KMSRequestFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSRequestFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSRequestFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KMSRequestFailedException_Message, *v.Message)
+	}
+}
+func (v *KMSRequestFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSRequestFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSRequestFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KMSRequestFailedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You get this exception if you call CreateReturnShippingLabel and a valid return
 // shipping label already exists. In this case, use DescribeReturnShippingLabel to
@@ -284,6 +486,27 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorCode() string {
 func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ReturnShippingLabelAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReturnShippingLabelAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReturnShippingLabelAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReturnShippingLabelAlreadyExistsException_Message, *v.Message)
+	}
+}
+func (v *ReturnShippingLabelAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReturnShippingLabelAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReturnShippingLabelAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReturnShippingLabelAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The address is either outside the serviceable area for your region, or an error
 // occurred. Check the address with your region's carrier and try again. If the
@@ -312,3 +535,24 @@ func (e *UnsupportedAddressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedAddressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedAddressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedAddressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedAddressException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedAddressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedAddressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedAddressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedAddressException_Message, v.Message)
+		}
+		return nil
+	})
+}

@@ -123,7 +123,8 @@ var PaymentCryptographyDataPlane = smithy.NewServiceSchema(_PaymentCryptographyD
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AmexAttributes = smithy.NewSchema(smithy.ShapeID{
@@ -693,7 +694,8 @@ var _IntegerRangeBetween4And32 = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var KekValidationRequest = smithy.NewSchema(smithy.ShapeID{
@@ -1008,15 +1010,18 @@ var RandomKeySendVariantMask_VARIANT_MASK_82 *smithy.Schema
 var ReEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ReEncryptionAttributes",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var ReEncryptionAttributes_Symmetric *smithy.Schema
+
+var ReEncryptionAttributes_Asymmetric *smithy.Schema
 
 var ReEncryptionAttributes_Dukpt *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_ResourceId *smithy.Schema
 
 var _ServiceCodeType = smithy.NewSchema(smithy.ShapeID{
@@ -1040,7 +1045,7 @@ var SessionKeyAmex_PanSequenceNumber *smithy.Schema
 var SessionKeyDerivation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "SessionKeyDerivation",
-}, smithy.ShapeTypeUnion, 5)
+}, smithy.ShapeTypeUnion, 6)
 var SessionKeyDerivation_EmvCommon *smithy.Schema
 
 var SessionKeyDerivation_Mastercard *smithy.Schema
@@ -1051,10 +1056,12 @@ var SessionKeyDerivation_Amex *smithy.Schema
 
 var SessionKeyDerivation_Visa *smithy.Schema
 
+var SessionKeyDerivation_UnionPay *smithy.Schema
+
 var SessionKeyDerivationMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "SessionKeyDerivationMode",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var SessionKeyDerivationMode_EMV_COMMON_SESSION_KEY *smithy.Schema
 
 var SessionKeyDerivationMode_EMV2000 *smithy.Schema
@@ -1064,6 +1071,8 @@ var SessionKeyDerivationMode_AMEX *smithy.Schema
 var SessionKeyDerivationMode_MASTERCARD_SESSION_KEY *smithy.Schema
 
 var SessionKeyDerivationMode_VISA *smithy.Schema
+
+var SessionKeyDerivationMode_UNION_PAY *smithy.Schema
 
 var SessionKeyDerivationValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
@@ -1104,6 +1113,16 @@ var SessionKeyMastercard_PanSequenceNumber *smithy.Schema
 var SessionKeyMastercard_ApplicationTransactionCounter *smithy.Schema
 
 var SessionKeyMastercard_UnpredictableNumber *smithy.Schema
+
+var SessionKeyUnionPay = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.paymentcryptographydata",
+	Name:      "SessionKeyUnionPay",
+}, smithy.ShapeTypeStructure, 3)
+var SessionKeyUnionPay_PrimaryAccountNumber *smithy.Schema
+
+var SessionKeyUnionPay_PanSequenceNumber *smithy.Schema
+
+var SessionKeyUnionPay_ApplicationTransactionCounter *smithy.Schema
 
 var SessionKeyVisa = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
@@ -1158,7 +1177,8 @@ var _SystemTraceAuditNumberType = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _Tr31WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
@@ -1220,7 +1240,7 @@ var _ValidationDataType = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_fieldList *smithy.Schema
@@ -1242,7 +1262,8 @@ var _ValidationExceptionFieldList_member *smithy.Schema
 var VerificationFailedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.paymentcryptographydata",
 	Name:      "VerificationFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var VerificationFailedException_Reason *smithy.Schema
 
 var VerificationFailedException_Message *smithy.Schema
@@ -2141,6 +2162,8 @@ func init() {
 
 	SessionKeyDerivationMode_VISA = SessionKeyDerivationMode.AddMember("VISA", smithyprelude.Unit)
 
+	SessionKeyDerivationMode_UNION_PAY = SessionKeyDerivationMode.AddMember("UNION_PAY", smithyprelude.Unit)
+
 	SessionKeyDerivationValue_ApplicationCryptogram = SessionKeyDerivationValue.AddMember("ApplicationCryptogram", _ApplicationCryptogramType)
 
 	SessionKeyDerivationValue_ApplicationTransactionCounter = SessionKeyDerivationValue.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
@@ -2219,6 +2242,8 @@ func init() {
 
 	ReEncryptionAttributes_Symmetric = ReEncryptionAttributes.AddMember("Symmetric", SymmetricEncryptionAttributes)
 
+	ReEncryptionAttributes_Asymmetric = ReEncryptionAttributes.AddMember("Asymmetric", AsymmetricEncryptionAttributes)
+
 	ReEncryptionAttributes_Dukpt = ReEncryptionAttributes.AddMember("Dukpt", DukptEncryptionAttributes)
 
 	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
@@ -2251,6 +2276,12 @@ func init() {
 
 	SessionKeyVisa_PanSequenceNumber = SessionKeyVisa.AddMember("PanSequenceNumber", _NumberLengthEquals2)
 
+	SessionKeyUnionPay_PrimaryAccountNumber = SessionKeyUnionPay.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
+
+	SessionKeyUnionPay_PanSequenceNumber = SessionKeyUnionPay.AddMember("PanSequenceNumber", _NumberLengthEquals2)
+
+	SessionKeyUnionPay_ApplicationTransactionCounter = SessionKeyUnionPay.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
+
 	SessionKeyDerivation_EmvCommon = SessionKeyDerivation.AddMember("EmvCommon", SessionKeyEmvCommon)
 
 	SessionKeyDerivation_Mastercard = SessionKeyDerivation.AddMember("Mastercard", SessionKeyMastercard)
@@ -2260,6 +2291,8 @@ func init() {
 	SessionKeyDerivation_Amex = SessionKeyDerivation.AddMember("Amex", SessionKeyAmex)
 
 	SessionKeyDerivation_Visa = SessionKeyDerivation.AddMember("Visa", SessionKeyVisa)
+
+	SessionKeyDerivation_UnionPay = SessionKeyDerivation.AddMember("UnionPay", SessionKeyUnionPay)
 
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
 

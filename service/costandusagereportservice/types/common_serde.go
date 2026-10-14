@@ -66,6 +66,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeAdditionalArtifactList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AdditionalArtifact) error {
+	*v = make([]AdditionalArtifact, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -79,6 +80,7 @@ func deserializeAdditionalArtifactList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeReportDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReportDefinition) error {
+	*v = make([]ReportDefinition, 0)
 	var vv ReportDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = ReportDefinition{}
@@ -92,6 +94,7 @@ func deserializeReportDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeSchemaElementList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SchemaElement) error {
+	*v = make([]SchemaElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -105,6 +108,7 @@ func deserializeSchemaElementList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -118,6 +122,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

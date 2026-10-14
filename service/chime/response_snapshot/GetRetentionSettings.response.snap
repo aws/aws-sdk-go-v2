@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"InitiateDeletionTimestamp":"2000-01-01T00:00:00Z","RetentionSettings":{"ConversationRetentionSettings":{"RetentionDays":1},"RoomRetentionSettings":{"RetentionDays":1}}}

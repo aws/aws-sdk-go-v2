@@ -178,6 +178,9 @@ const (
 	ConstraintViolationExceptionReasonTransferResponsibilityTargetDeletionInProgress         ConstraintViolationExceptionReason = "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS"
 	ConstraintViolationExceptionReasonTransferResponsibilitySourceDeletionInProgress         ConstraintViolationExceptionReason = "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS"
 	ConstraintViolationExceptionReasonUnsupportedPricing                                     ConstraintViolationExceptionReason = "UNSUPPORTED_PRICING"
+	ConstraintViolationExceptionReasonUnmetBillingPrerequisite                               ConstraintViolationExceptionReason = "UNMET_BILLING_PREREQUISITE"
+	ConstraintViolationExceptionReasonAccountNotActiveForTransferResponsibility              ConstraintViolationExceptionReason = "ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY"
+	ConstraintViolationExceptionReasonTransferResponsibilityUpdateNotAllowed                 ConstraintViolationExceptionReason = "TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -232,6 +235,9 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS",
 		"TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
 		"UNSUPPORTED_PRICING",
+		"UNMET_BILLING_PREREQUISITE",
+		"ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY",
+		"TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED",
 	}
 }
 
@@ -316,6 +322,7 @@ const (
 	EffectivePolicyTypeBedrockPolicy                 EffectivePolicyType = "BEDROCK_POLICY"
 	EffectivePolicyTypeS3Policy                      EffectivePolicyType = "S3_POLICY"
 	EffectivePolicyTypeNetworkSecurityDirectorPolicy EffectivePolicyType = "NETWORK_SECURITY_DIRECTOR_POLICY"
+	EffectivePolicyTypeGuarddutyPolicy               EffectivePolicyType = "GUARDDUTY_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -335,6 +342,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"BEDROCK_POLICY",
 		"S3_POLICY",
 		"NETWORK_SECURITY_DIRECTOR_POLICY",
+		"GUARDDUTY_POLICY",
 	}
 }
 
@@ -356,6 +364,8 @@ const (
 	HandshakeConstraintViolationExceptionReasonSourceAndTargetCannotMatch                       HandshakeConstraintViolationExceptionReason = "SOURCE_AND_TARGET_CANNOT_MATCH"
 	HandshakeConstraintViolationExceptionReasonUnusedPrepaymentBalance                          HandshakeConstraintViolationExceptionReason = "UNUSED_PREPAYMENT_BALANCE"
 	HandshakeConstraintViolationExceptionReasonLegacyPermissionsStillInUse                      HandshakeConstraintViolationExceptionReason = "LEGACY_PERMISSIONS_STILL_IN_USE"
+	HandshakeConstraintViolationExceptionReasonPastDueInvoice                                   HandshakeConstraintViolationExceptionReason = "PAST_DUE_INVOICE"
+	HandshakeConstraintViolationExceptionReasonTargetAccountValidationFailure                   HandshakeConstraintViolationExceptionReason = "TARGET_ACCOUNT_VALIDATION_FAILURE"
 )
 
 // Values returns all known values for
@@ -379,6 +389,8 @@ func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstrain
 		"SOURCE_AND_TARGET_CANNOT_MATCH",
 		"UNUSED_PREPAYMENT_BALANCE",
 		"LEGACY_PERMISSIONS_STILL_IN_USE",
+		"PAST_DUE_INVOICE",
+		"TARGET_ACCOUNT_VALIDATION_FAILURE",
 	}
 }
 
@@ -535,6 +547,7 @@ const (
 	InvalidInputExceptionReasonInvalidStartDate                          InvalidInputExceptionReason = "INVALID_START_DATE"
 	InvalidInputExceptionReasonEndDateNotEndOfMonth                      InvalidInputExceptionReason = "END_DATE_NOT_END_OF_MONTH"
 	InvalidInputExceptionReasonEndDateTooEarly                           InvalidInputExceptionReason = "END_DATE_TOO_EARLY"
+	InvalidInputExceptionReasonEndDateTooLate                            InvalidInputExceptionReason = "END_DATE_TOO_LATE"
 	InvalidInputExceptionReasonInvalidEndDate                            InvalidInputExceptionReason = "INVALID_END_DATE"
 )
 
@@ -583,6 +596,7 @@ func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 		"INVALID_START_DATE",
 		"END_DATE_NOT_END_OF_MONTH",
 		"END_DATE_TOO_EARLY",
+		"END_DATE_TOO_LATE",
 		"INVALID_END_DATE",
 	}
 }
@@ -642,6 +656,7 @@ const (
 	PolicyTypeBedrockPolicy                 PolicyType = "BEDROCK_POLICY"
 	PolicyTypeS3Policy                      PolicyType = "S3_POLICY"
 	PolicyTypeNetworkSecurityDirectorPolicy PolicyType = "NETWORK_SECURITY_DIRECTOR_POLICY"
+	PolicyTypeGuarddutyPolicy               PolicyType = "GUARDDUTY_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -663,6 +678,7 @@ func (PolicyType) Values() []PolicyType {
 		"BEDROCK_POLICY",
 		"S3_POLICY",
 		"NETWORK_SECURITY_DIRECTOR_POLICY",
+		"GUARDDUTY_POLICY",
 	}
 }
 

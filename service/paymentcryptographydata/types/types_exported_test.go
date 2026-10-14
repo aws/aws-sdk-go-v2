@@ -375,6 +375,9 @@ func ExampleReEncryptionAttributes_outputUsage() {
 	var union types.ReEncryptionAttributes
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ReEncryptionAttributesMemberAsymmetric:
+		_ = v.Value // Value is types.AsymmetricEncryptionAttributes
+
 	case *types.ReEncryptionAttributesMemberDukpt:
 		_ = v.Value // Value is types.DukptEncryptionAttributes
 
@@ -391,6 +394,7 @@ func ExampleReEncryptionAttributes_outputUsage() {
 }
 
 var _ *types.SymmetricEncryptionAttributes
+var _ *types.AsymmetricEncryptionAttributes
 var _ *types.DukptEncryptionAttributes
 
 func ExampleSessionKeyDerivation_outputUsage() {
@@ -409,6 +413,9 @@ func ExampleSessionKeyDerivation_outputUsage() {
 	case *types.SessionKeyDerivationMemberMastercard:
 		_ = v.Value // Value is types.SessionKeyMastercard
 
+	case *types.SessionKeyDerivationMemberUnionPay:
+		_ = v.Value // Value is types.SessionKeyUnionPay
+
 	case *types.SessionKeyDerivationMemberVisa:
 		_ = v.Value // Value is types.SessionKeyVisa
 
@@ -422,6 +429,7 @@ func ExampleSessionKeyDerivation_outputUsage() {
 }
 
 var _ *types.SessionKeyVisa
+var _ *types.SessionKeyUnionPay
 var _ *types.SessionKeyEmvCommon
 var _ *types.SessionKeyEmv2000
 var _ *types.SessionKeyAmex

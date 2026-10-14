@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.CreateInterconnect
+
+{"bandwidth":"__Bandwidth__","interconnectName":"__InterconnectName__","lagId":"__LagId__","location":"__Location__","providerName":"__ProviderName__","requestMACSec":true,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

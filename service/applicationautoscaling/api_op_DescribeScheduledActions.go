@@ -5,10 +5,10 @@ package applicationautoscaling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the Application Auto Scaling scheduled actions for the specified
@@ -219,6 +219,31 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeScheduledActionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	serializeResourceIdsMaxLen1600(s, schemas.DescribeScheduledActionsRequest_ScheduledActionNames, v.ScheduledActionNames)
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DescribeScheduledActionsRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// The token required to get the next set of results. This value is null if there
@@ -234,77 +259,51 @@ type DescribeScheduledActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduledActionsResponse_NextToken, *v.NextToken)
+	}
+	serializeScheduledActions(s, schemas.DescribeScheduledActionsResponse_ScheduledActions, v.ScheduledActions)
+}
+func (v *DescribeScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScheduledActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScheduledActionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScheduledActionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeScheduledActionsResponse_ScheduledActions:
+			return deserializeScheduledActions(d, schemas.DescribeScheduledActionsResponse_ScheduledActions, &v.ScheduledActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsRequest, schemas.DescribeScheduledActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsRequest, schemas.DescribeScheduledActionsResponse), output: &DescribeScheduledActionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeScheduledActions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeScheduledActionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeScheduledActions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -317,12 +316,6 @@ func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -431,11 +424,3 @@ type DescribeScheduledActionsAPIClient interface {
 }
 
 var _ DescribeScheduledActionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeScheduledActions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeScheduledActions",
-	}
-}

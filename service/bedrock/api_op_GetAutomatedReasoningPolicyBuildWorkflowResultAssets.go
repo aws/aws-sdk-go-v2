@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the resulting assets from a completed Automated Reasoning policy
@@ -59,6 +58,27 @@ type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest_assetId, *v.AssetId)
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest_assetType, string(v.AssetType))
+	}
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput struct {
 
 	// The unique identifier of the build workflow.
@@ -82,77 +102,57 @@ type GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildResultAssets(s, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowAssets, v.BuildWorkflowAssets)
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_policyArn, *v.PolicyArn)
+	}
+}
+func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowAssets:
+			return deserializeAutomatedReasoningPolicyBuildResultAssets(d, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowAssets, &v.BuildWorkflowAssets)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowId:
+			v.BuildWorkflowId = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowId, v.BuildWorkflowId)
+		case schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomatedReasoningPolicyBuildWorkflowResultAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssets, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssets, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse), output: &GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomatedReasoningPolicyBuildWorkflowResultAssets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAutomatedReasoningPolicyBuildWorkflowResultAssets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAutomatedReasoningPolicyBuildWorkflowResultAssetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAutomatedReasoningPolicyBuildWorkflowResultAssets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +167,8 @@ func (c *Client) addOperationGetAutomatedReasoningPolicyBuildWorkflowResultAsset
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAutomatedReasoningPolicyBuildWorkflowResultAssets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAutomatedReasoningPolicyBuildWorkflowResultAssets",
-	}
 }

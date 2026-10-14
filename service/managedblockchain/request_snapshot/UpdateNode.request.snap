@@ -1,0 +1,5 @@
+PATCH /networks/__NetworkId__/nodes/__NodeId__
+
+Content-Type: application/json
+
+{"LogPublishingConfiguration":{"Fabric":{"ChaincodeLogs":{"Cloudwatch":{"Enabled":true}},"PeerLogs":{"Cloudwatch":{"Enabled":true}}}},"MemberId":"__MemberId__"}

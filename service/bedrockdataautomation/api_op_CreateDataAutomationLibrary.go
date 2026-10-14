@@ -5,12 +5,8 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Bedrock Data Automation Library
@@ -52,30 +48,6 @@ type CreateDataAutomationLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAutomationLibraryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataAutomationLibraryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_clientToken, *v.ClientToken)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataAutomationLibraryRequest_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LibraryDescription != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_libraryDescription, *v.LibraryDescription)
-	}
-	if v.LibraryName != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_libraryName, *v.LibraryName)
-	}
-	serializeTagList(s, schemas.CreateDataAutomationLibraryRequest_tags, v.Tags)
-}
-
 // Create DataAutomationLibrary Response
 type CreateDataAutomationLibraryOutput struct {
 
@@ -91,80 +63,23 @@ type CreateDataAutomationLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAutomationLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataAutomationLibraryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataAutomationLibraryResponse_libraryArn:
-			v.LibraryArn = new(string)
-			return d.ReadString(schemas.CreateDataAutomationLibraryResponse_libraryArn, v.LibraryArn)
-		case schemas.CreateDataAutomationLibraryResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDataAutomationLibraryResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataAutomationLibraryStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataAutomationLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAutomationLibrary, schemas.CreateDataAutomationLibraryRequest, schemas.CreateDataAutomationLibraryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAutomationLibrary, schemas.CreateDataAutomationLibraryRequest, schemas.CreateDataAutomationLibraryResponse), output: &CreateDataAutomationLibraryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataAutomationLibrary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +89,6 @@ func (c *Client) addOperationCreateDataAutomationLibraryMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreateDataAutomationLibraryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataAutomationLibrary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +101,6 @@ func (c *Client) addOperationCreateDataAutomationLibraryMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +140,4 @@ func (m *idempotencyToken_initializeOpCreateDataAutomationLibrary) HandleInitial
 }
 func addIdempotencyToken_opCreateDataAutomationLibraryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataAutomationLibrary{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataAutomationLibrary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataAutomationLibrary",
-	}
 }

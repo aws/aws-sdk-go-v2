@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the Amazon Lightsail instance metadata parameters on a running or
@@ -77,6 +76,30 @@ type UpdateInstanceMetadataOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceMetadataOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceMetadataOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceMetadataOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpoint != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpEndpoint, string(v.HttpEndpoint))
+	}
+	if v.HttpProtocolIpv6 != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpProtocolIpv6, string(v.HttpProtocolIpv6))
+	}
+	if v.HttpPutResponseHopLimit != nil {
+		s.WriteInt32(schemas.UpdateInstanceMetadataOptionsRequest_httpPutResponseHopLimit, *v.HttpPutResponseHopLimit)
+	}
+	if v.HttpTokens != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpTokens, string(v.HttpTokens))
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type UpdateInstanceMetadataOptionsOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -90,77 +113,50 @@ type UpdateInstanceMetadataOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceMetadataOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceMetadataOptionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceMetadataOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UpdateInstanceMetadataOptionsResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInstanceMetadataOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceMetadataOptionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstanceMetadataOptionsResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceMetadataOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceMetadataOptions, schemas.UpdateInstanceMetadataOptionsRequest, schemas.UpdateInstanceMetadataOptionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceMetadataOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceMetadataOptions, schemas.UpdateInstanceMetadataOptionsRequest, schemas.UpdateInstanceMetadataOptionsResult), output: &UpdateInstanceMetadataOptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateInstanceMetadataOptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInstanceMetadataOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateInstanceMetadataOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInstanceMetadataOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +171,8 @@ func (c *Client) addOperationUpdateInstanceMetadataOptionsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateInstanceMetadataOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateInstanceMetadataOptions",
-	}
 }

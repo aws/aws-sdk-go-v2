@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EmailAddressArn":"__EmailAddressArn__","EmailAddressId":"__EmailAddressId__"}

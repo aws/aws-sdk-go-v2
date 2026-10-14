@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateDatasetKmsKey struct {
+}
+
+func (*validateOpAssociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateResourceMetricsConfiguration struct {
+}
+
+func (*validateOpCreateResourceMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResourceMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResourceMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResourceMetricsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlarmMuteRule struct {
 }
 
@@ -130,6 +170,26 @@ func (m *validateOpDeleteMetricStream) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourceMetricsConfiguration struct {
+}
+
+func (*validateOpDeleteResourceMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceMetricsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAlarmContributors struct {
 }
 
@@ -230,6 +290,26 @@ func (m *validateOpDisableInsightRules) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateDatasetKmsKey struct {
+}
+
+func (*validateOpDisassociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableAlarmActions struct {
 }
 
@@ -305,6 +385,26 @@ func (m *validateOpGetDashboard) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataset struct {
+}
+
+func (*validateOpGetDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -405,6 +505,26 @@ func (m *validateOpGetMetricWidgetImage) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMetricWidgetImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceMetricsConfiguration struct {
+}
+
+func (*validateOpGetResourceMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceMetricsConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +690,26 @@ func (m *validateOpPutInsightRule) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutLogAlarm struct {
+}
+
+func (*validateOpPutLogAlarm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLogAlarm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLogAlarmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLogAlarmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutManagedInsightRules struct {
 }
 
@@ -690,6 +830,26 @@ func (m *validateOpStartMetricStreams) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartOTelEnrichment struct {
+}
+
+func (*validateOpStartOTelEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOTelEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOTelEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOTelEnrichmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopMetricStreams struct {
 }
 
@@ -750,6 +910,54 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOTelEnrichment struct {
+}
+
+func (*validateOpUpdateOTelEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOTelEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOTelEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOTelEnrichmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateResourceMetricsConfiguration struct {
+}
+
+func (*validateOpUpdateResourceMetricsConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceMetricsConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceMetricsConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceMetricsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAssociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDatasetKmsKey{}, middleware.After)
+}
+
+func addOpCreateResourceMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResourceMetricsConfiguration{}, middleware.After)
+}
+
 func addOpDeleteAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlarmMuteRule{}, middleware.After)
 }
@@ -774,6 +982,10 @@ func addOpDeleteMetricStreamValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteMetricStream{}, middleware.After)
 }
 
+func addOpDeleteResourceMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceMetricsConfiguration{}, middleware.After)
+}
+
 func addOpDescribeAlarmContributorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAlarmContributors{}, middleware.After)
 }
@@ -794,6 +1006,10 @@ func addOpDisableInsightRulesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisableInsightRules{}, middleware.After)
 }
 
+func addOpDisassociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateDatasetKmsKey{}, middleware.After)
+}
+
 func addOpEnableAlarmActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableAlarmActions{}, middleware.After)
 }
@@ -808,6 +1024,10 @@ func addOpGetAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDashboard{}, middleware.After)
+}
+
+func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataset{}, middleware.After)
 }
 
 func addOpGetInsightRuleReportValidationMiddleware(stack *middleware.Stack) error {
@@ -828,6 +1048,10 @@ func addOpGetMetricStreamValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMetricWidgetImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricWidgetImage{}, middleware.After)
+}
+
+func addOpGetResourceMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceMetricsConfiguration{}, middleware.After)
 }
 
 func addOpListManagedInsightRulesValidationMiddleware(stack *middleware.Stack) error {
@@ -862,6 +1086,10 @@ func addOpPutInsightRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutInsightRule{}, middleware.After)
 }
 
+func addOpPutLogAlarmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLogAlarm{}, middleware.After)
+}
+
 func addOpPutManagedInsightRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutManagedInsightRules{}, middleware.After)
 }
@@ -886,6 +1114,10 @@ func addOpStartMetricStreamsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpStartMetricStreams{}, middleware.After)
 }
 
+func addOpStartOTelEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOTelEnrichment{}, middleware.After)
+}
+
 func addOpStopMetricStreamsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopMetricStreams{}, middleware.After)
 }
@@ -896,6 +1128,14 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateOTelEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOTelEnrichment{}, middleware.After)
+}
+
+func addOpUpdateResourceMetricsConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceMetricsConfiguration{}, middleware.After)
 }
 
 func validateAlarmPromQLCriteria(v *types.AlarmPromQLCriteria) error {
@@ -1334,6 +1574,38 @@ func validateMuteTargets(v *types.MuteTargets) error {
 	}
 }
 
+func validateOTelEnrichmentMetricSelector(v *types.OTelEnrichmentMetricSelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OTelEnrichmentMetricSelector"}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOTelEnrichmentMetricSelectorList(v []types.OTelEnrichmentMetricSelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OTelEnrichmentMetricSelectorList"}
+	for i := range v {
+		if err := validateOTelEnrichmentMetricSelector(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRange(v *types.Range) error {
 	if v == nil {
 		return nil
@@ -1344,6 +1616,38 @@ func validateRange(v *types.Range) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceMetricSelection(v *types.ResourceMetricSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceMetricSelection"}
+	if v.IncludeMetrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IncludeMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceMetricSelectionList(v []types.ResourceMetricSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceMetricSelectionList"}
+	for i := range v {
+		if err := validateResourceMetricSelection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,6 +1685,57 @@ func validateSchedule(v *types.Schedule) error {
 	}
 	if v.Duration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if v.StartTimeOffset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeOffset"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledQueryConfiguration(v *types.ScheduledQueryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledQueryConfiguration"}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.ScheduledQueryRoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryRoleARN"))
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationExpression"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1456,6 +1811,59 @@ func validateTagList(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWarmUpConfiguration(v *types.WarmUpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WarmUpConfiguration"}
+	if v.WarmUpPeriodDurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WarmUpPeriodDurationInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateDatasetKmsKeyInput(v *AssociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateResourceMetricsConfigurationInput(v *CreateResourceMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceMetricsConfigurationInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.MetricSelections != nil {
+		if err := validateResourceMetricSelectionList(v.MetricSelections); err != nil {
+			invalidParams.AddNested("MetricSelections", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1567,6 +1975,21 @@ func validateOpDeleteMetricStreamInput(v *DeleteMetricStreamInput) error {
 	}
 }
 
+func validateOpDeleteResourceMetricsConfigurationInput(v *DeleteResourceMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceMetricsConfigurationInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAlarmContributorsInput(v *DescribeAlarmContributorsInput) error {
 	if v == nil {
 		return nil
@@ -1652,6 +2075,21 @@ func validateOpDisableInsightRulesInput(v *DisableInsightRulesInput) error {
 	}
 }
 
+func validateOpDisassociateDatasetKmsKeyInput(v *DisassociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableAlarmActionsInput(v *EnableAlarmActionsInput) error {
 	if v == nil {
 		return nil
@@ -1704,6 +2142,21 @@ func validateOpGetDashboardInput(v *GetDashboardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardInput"}
 	if v.DashboardName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDatasetInput(v *GetDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1815,6 +2268,21 @@ func validateOpGetMetricWidgetImageInput(v *GetMetricWidgetImageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetMetricWidgetImageInput"}
 	if v.MetricWidget == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricWidget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceMetricsConfigurationInput(v *GetResourceMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceMetricsConfigurationInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2003,6 +2471,50 @@ func validateOpPutInsightRuleInput(v *PutInsightRuleInput) error {
 	}
 }
 
+func validateOpPutLogAlarmInput(v *PutLogAlarmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLogAlarmInput"}
+	if v.AlarmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if v.ScheduledQueryConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryConfiguration"))
+	} else if v.ScheduledQueryConfiguration != nil {
+		if err := validateScheduledQueryConfiguration(v.ScheduledQueryConfiguration); err != nil {
+			invalidParams.AddNested("ScheduledQueryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryResultsToEvaluate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToEvaluate"))
+	}
+	if v.QueryResultsToAlarm == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToAlarm"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutManagedInsightRulesInput(v *PutManagedInsightRulesInput) error {
 	if v == nil {
 		return nil
@@ -2043,6 +2555,11 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EvaluationCriteria != nil {
@@ -2152,6 +2669,28 @@ func validateOpStartMetricStreamsInput(v *StartMetricStreamsInput) error {
 	}
 }
 
+func validateOpStartOTelEnrichmentInput(v *StartOTelEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOTelEnrichmentInput"}
+	if v.IncludeFilters != nil {
+		if err := validateOTelEnrichmentMetricSelectorList(v.IncludeFilters); err != nil {
+			invalidParams.AddNested("IncludeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExcludeFilters != nil {
+		if err := validateOTelEnrichmentMetricSelectorList(v.ExcludeFilters); err != nil {
+			invalidParams.AddNested("ExcludeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopMetricStreamsInput(v *StopMetricStreamsInput) error {
 	if v == nil {
 		return nil
@@ -2199,6 +2738,48 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOTelEnrichmentInput(v *UpdateOTelEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOTelEnrichmentInput"}
+	if v.IncludeFilters != nil {
+		if err := validateOTelEnrichmentMetricSelectorList(v.IncludeFilters); err != nil {
+			invalidParams.AddNested("IncludeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExcludeFilters != nil {
+		if err := validateOTelEnrichmentMetricSelectorList(v.ExcludeFilters); err != nil {
+			invalidParams.AddNested("ExcludeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourceMetricsConfigurationInput(v *UpdateResourceMetricsConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceMetricsConfigurationInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.MetricSelections != nil {
+		if err := validateResourceMetricSelectionList(v.MetricSelections); err != nil {
+			invalidParams.AddNested("MetricSelections", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

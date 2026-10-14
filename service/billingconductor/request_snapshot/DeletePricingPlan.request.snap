@@ -1,0 +1,5 @@
+POST /delete-pricing-plan
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

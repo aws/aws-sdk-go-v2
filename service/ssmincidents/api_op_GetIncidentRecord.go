@@ -4,13 +4,8 @@ package ssmincidents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the details for the specified incident record.
@@ -39,28 +34,6 @@ type GetIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIncidentRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIncidentRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIncidentRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetIncidentRecordInput_arn, *v.Arn)
-	}
-}
-func (v *GetIncidentRecordInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIncidentRecordInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIncidentRecordInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetIncidentRecordInput_arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 type GetIncidentRecordOutput struct {
 
 	// Details the structure of the incident record.
@@ -74,98 +47,29 @@ type GetIncidentRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIncidentRecordOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIncidentRecordOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIncidentRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncidentRecord != nil {
-		s.WriteStruct(schemas.GetIncidentRecordOutput_incidentRecord)
-		v.IncidentRecord.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetIncidentRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIncidentRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIncidentRecordOutput_incidentRecord:
-			v.IncidentRecord = &types.IncidentRecord{}
-			return v.IncidentRecord.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIncidentRecord, schemas.GetIncidentRecordInput, schemas.GetIncidentRecordOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIncidentRecord, schemas.GetIncidentRecordInput, schemas.GetIncidentRecordOutput), output: &GetIncidentRecordOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIncidentRecord"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIncidentRecordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIncidentRecord(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +84,8 @@ func (c *Client) addOperationGetIncidentRecordMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIncidentRecord(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIncidentRecord",
-	}
 }

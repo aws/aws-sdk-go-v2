@@ -4,12 +4,7 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Publishes a development schema with a major version and a recommended minor
@@ -54,27 +49,6 @@ type PublishSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishSchemaInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishSchemaRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DevelopmentSchemaArn != nil {
-		s.WriteString(schemas.PublishSchemaRequest_DevelopmentSchemaArn, *v.DevelopmentSchemaArn)
-	}
-	if v.MinorVersion != nil {
-		s.WriteString(schemas.PublishSchemaRequest_MinorVersion, *v.MinorVersion)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PublishSchemaRequest_Name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.PublishSchemaRequest_Version, *v.Version)
-	}
-}
-
 type PublishSchemaOutput struct {
 
 	// The ARN that is associated with the published schema. For more information, see arns
@@ -87,85 +61,29 @@ type PublishSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishSchemaResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PublishSchemaResponse_PublishedSchemaArn:
-			v.PublishedSchemaArn = new(string)
-			return d.ReadString(schemas.PublishSchemaResponse_PublishedSchemaArn, v.PublishedSchemaArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishSchema, schemas.PublishSchemaRequest, schemas.PublishSchemaResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishSchema{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishSchema, schemas.PublishSchemaRequest, schemas.PublishSchemaResponse), output: &PublishSchemaOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishSchema"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPublishSchemaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishSchema(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +98,8 @@ func (c *Client) addOperationPublishSchemaMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPublishSchema(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PublishSchema",
-	}
 }

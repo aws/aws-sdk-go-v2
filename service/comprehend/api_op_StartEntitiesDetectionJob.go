@@ -5,10 +5,10 @@ package comprehend
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an asynchronous entity detection job for a collection of documents. Use
@@ -104,6 +104,52 @@ type StartEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartEntitiesDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartEntitiesDetectionJobOutput struct {
 
 	// The ARN of the custom entity recognition model.
@@ -147,65 +193,64 @@ type StartEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn:
+			v.EntityRecognizerArn = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn, v.EntityRecognizerArn)
+		case schemas.StartEntitiesDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartEntitiesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartEntitiesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionJob, schemas.StartEntitiesDetectionJobRequest, schemas.StartEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionJob, schemas.StartEntitiesDetectionJobRequest, schemas.StartEntitiesDetectionJobResponse), output: &StartEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartEntitiesDetectionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -215,12 +260,6 @@ func (c *Client) addOperationStartEntitiesDetectionJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpStartEntitiesDetectionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartEntitiesDetectionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,12 +272,6 @@ func (c *Client) addOperationStartEntitiesDetectionJobMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,12 +311,4 @@ func (m *idempotencyToken_initializeOpStartEntitiesDetectionJob) HandleInitializ
 }
 func addIdempotencyToken_opStartEntitiesDetectionJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartEntitiesDetectionJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartEntitiesDetectionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartEntitiesDetectionJob",
-	}
 }

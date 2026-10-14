@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channels":{"key0":{"ApplicationId":"__ApplicationId__","CreationDate":"__CreationDate__","Enabled":true,"HasCredential":true,"Id":"__Id__","IsArchived":true,"LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":"__LastModifiedDate__","Version":1}}}

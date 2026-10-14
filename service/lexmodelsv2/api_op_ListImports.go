@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the imports for a bot, bot locale, or custom vocabulary. Imports are kept
@@ -66,6 +66,36 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListImportsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListImportsRequest_botVersion, *v.BotVersion)
+	}
+	serializeImportFilters(s, schemas.ListImportsRequest_filters, v.Filters)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListImportsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListImportsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListImportsOutput struct {
 
 	// The unique identifier assigned by Amazon Lex to the bot.
@@ -95,77 +125,69 @@ type ListImportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListImportsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListImportsResponse_botVersion, *v.BotVersion)
+	}
+	serializeImportSummaryList(s, schemas.ListImportsResponse_importSummaries, v.ImportSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListImportsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListImportsResponse_botId, v.BotId)
+		case schemas.ListImportsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListImportsResponse_botVersion, v.BotVersion)
+		case schemas.ListImportsResponse_importSummaries:
+			return deserializeImportSummaryList(d, schemas.ListImportsResponse_importSummaries, &v.ImportSummaries)
+		case schemas.ListImportsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListImportsResponse_localeId, v.LocaleId)
+		case schemas.ListImportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse), output: &ListImportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListImportsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,12 +200,6 @@ func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,11 +301,3 @@ type ListImportsAPIClient interface {
 }
 
 var _ ListImportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImports",
-	}
-}

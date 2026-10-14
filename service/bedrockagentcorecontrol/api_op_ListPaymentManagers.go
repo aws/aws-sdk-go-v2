@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all payment managers in the account.
@@ -45,21 +41,6 @@ type ListPaymentManagersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPaymentManagersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPaymentManagersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPaymentManagersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPaymentManagersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPaymentManagersRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListPaymentManagersOutput struct {
 
 	// The list of payment manager summaries. For details about the fields in each
@@ -79,84 +60,26 @@ type ListPaymentManagersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPaymentManagersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPaymentManagersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPaymentManagersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPaymentManagersResponse_nextToken, v.NextToken)
-		case schemas.ListPaymentManagersResponse_paymentManagers:
-			return deserializePaymentManagerSummaries(d, schemas.ListPaymentManagersResponse_paymentManagers, &v.PaymentManagers)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPaymentManagersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPaymentManagers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentManagers, schemas.ListPaymentManagersRequest, schemas.ListPaymentManagersResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPaymentManagers{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentManagers, schemas.ListPaymentManagersRequest, schemas.ListPaymentManagersResponse), output: &ListPaymentManagersOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPaymentManagers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPaymentManagers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +92,6 @@ func (c *Client) addOperationListPaymentManagersMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +196,3 @@ type ListPaymentManagersAPIClient interface {
 }
 
 var _ ListPaymentManagersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPaymentManagers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPaymentManagers",
-	}
-}

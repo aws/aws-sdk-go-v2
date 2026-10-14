@@ -1,0 +1,5 @@
+POST /v1/whatsapp/waba/dataset
+
+Content-Type: application/json
+
+{"id":"__Id__"}

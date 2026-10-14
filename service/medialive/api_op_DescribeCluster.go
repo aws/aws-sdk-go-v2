@@ -6,11 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -40,6 +40,18 @@ type DescribeClusterInput struct {
 	ClusterId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DescribeClusterRequest_ClusterId, *v.ClusterId)
+	}
 }
 
 // Placeholder documentation for DescribeClusterResponse
@@ -80,77 +92,97 @@ type DescribeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeClusterResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeClusterResponse_ChannelIds, v.ChannelIds)
+	if v.ClusterType != "" {
+		s.WriteString(schemas.DescribeClusterResponse_ClusterType, string(v.ClusterType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeClusterResponse_Id, *v.Id)
+	}
+	if v.InstanceRoleArn != nil {
+		s.WriteString(schemas.DescribeClusterResponse_InstanceRoleArn, *v.InstanceRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeClusterResponse_Name, *v.Name)
+	}
+	if v.NetworkSettings != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_NetworkSettings)
+		v.NetworkSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeClusterResponse_State, string(v.State))
+	}
+}
+func (v *DescribeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_Arn, v.Arn)
+		case schemas.DescribeClusterResponse_ChannelIds:
+			return deserialize__listOf__string(d, schemas.DescribeClusterResponse_ChannelIds, &v.ChannelIds)
+		case schemas.DescribeClusterResponse_ClusterType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterResponse_ClusterType, &ev); err != nil {
+				return err
+			}
+			v.ClusterType = types.ClusterType(ev)
+			return nil
+		case schemas.DescribeClusterResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_Id, v.Id)
+		case schemas.DescribeClusterResponse_InstanceRoleArn:
+			v.InstanceRoleArn = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_InstanceRoleArn, v.InstanceRoleArn)
+		case schemas.DescribeClusterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_Name, v.Name)
+		case schemas.DescribeClusterResponse_NetworkSettings:
+			v.NetworkSettings = &types.ClusterNetworkSettings{}
+			return v.NetworkSettings.Deserialize(d)
+		case schemas.DescribeClusterResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ClusterState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResponse), output: &DescribeClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +195,6 @@ func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -578,11 +604,3 @@ type DescribeClusterAPIClient interface {
 }
 
 var _ DescribeClusterAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCluster",
-	}
-}

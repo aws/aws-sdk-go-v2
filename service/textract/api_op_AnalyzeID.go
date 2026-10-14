@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Analyzes identity documents for relevant information. This information is
@@ -40,6 +39,16 @@ type AnalyzeIDInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeIDInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeIDRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeIDInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentPages(s, schemas.AnalyzeIDRequest_DocumentPages, v.DocumentPages)
+}
+
 type AnalyzeIDOutput struct {
 
 	// The version of the AnalyzeIdentity API being used to process documents.
@@ -58,77 +67,59 @@ type AnalyzeIDOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeIDOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeIDResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeIDOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeIDModelVersion != nil {
+		s.WriteString(schemas.AnalyzeIDResponse_AnalyzeIDModelVersion, *v.AnalyzeIDModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.AnalyzeIDResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdentityDocumentList(s, schemas.AnalyzeIDResponse_IdentityDocuments, v.IdentityDocuments)
+}
+func (v *AnalyzeIDOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyzeIDResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyzeIDResponse_AnalyzeIDModelVersion:
+			v.AnalyzeIDModelVersion = new(string)
+			return d.ReadString(schemas.AnalyzeIDResponse_AnalyzeIDModelVersion, v.AnalyzeIDModelVersion)
+		case schemas.AnalyzeIDResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.AnalyzeIDResponse_IdentityDocuments:
+			return deserializeIdentityDocumentList(d, schemas.AnalyzeIDResponse_IdentityDocuments, &v.IdentityDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAnalyzeIDMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeID, schemas.AnalyzeIDRequest, schemas.AnalyzeIDResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAnalyzeID{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeID, schemas.AnalyzeIDRequest, schemas.AnalyzeIDResponse), output: &AnalyzeIDOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAnalyzeID{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AnalyzeID"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAnalyzeIDValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAnalyzeID(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +134,8 @@ func (c *Client) addOperationAnalyzeIDMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAnalyzeID(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AnalyzeID",
-	}
 }

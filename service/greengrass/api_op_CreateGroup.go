@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a group. You may provide the initial version of the group or use
@@ -49,6 +48,27 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateGroupRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.InitialVersion != nil {
+		s.WriteStruct(schemas.CreateGroupRequest_InitialVersion)
+		v.InitialVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGroupRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateGroupRequest_tags, v.Tags)
+}
+
 type CreateGroupOutput struct {
 
 	// The ARN of the definition.
@@ -78,77 +98,84 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateGroupResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateGroupResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.CreateGroupResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.CreateGroupResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.CreateGroupResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGroupResponse_Name, *v.Name)
+	}
+}
+func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Arn, v.Arn)
+		case schemas.CreateGroupResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Id, v.Id)
+		case schemas.CreateGroupResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.CreateGroupResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LatestVersion, v.LatestVersion)
+		case schemas.CreateGroupResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.CreateGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse), output: &CreateGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +190,8 @@ func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGroup",
-	}
 }

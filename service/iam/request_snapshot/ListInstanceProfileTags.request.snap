@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListInstanceProfileTags&InstanceProfileName=__InstanceProfileName__&Marker=__Marker__&MaxItems=1&Version=2010-05-08

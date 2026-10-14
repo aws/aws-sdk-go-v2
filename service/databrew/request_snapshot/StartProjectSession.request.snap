@@ -1,0 +1,5 @@
+PUT /projects/__Name__/startProjectSession
+
+Content-Type: application/json
+
+{"AssumeControl":true}

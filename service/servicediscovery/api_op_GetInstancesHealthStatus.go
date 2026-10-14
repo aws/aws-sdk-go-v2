@@ -5,10 +5,10 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the current health status ( Healthy , Unhealthy , or Unknown ) of one or
@@ -70,6 +70,25 @@ type GetInstancesHealthStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstancesHealthStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstancesHealthStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstancesHealthStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceIdList(s, schemas.GetInstancesHealthStatusRequest_Instances, v.Instances)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetInstancesHealthStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInstancesHealthStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.GetInstancesHealthStatusRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type GetInstancesHealthStatusOutput struct {
 
 	// If more than MaxResults instances match the specified criteria, you can submit
@@ -87,77 +106,51 @@ type GetInstancesHealthStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstancesHealthStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstancesHealthStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstancesHealthStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInstancesHealthStatusResponse_NextToken, *v.NextToken)
+	}
+	serializeInstanceHealthStatusMap(s, schemas.GetInstancesHealthStatusResponse_Status, v.Status)
+}
+func (v *GetInstancesHealthStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstancesHealthStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstancesHealthStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInstancesHealthStatusResponse_NextToken, v.NextToken)
+		case schemas.GetInstancesHealthStatusResponse_Status:
+			return deserializeInstanceHealthStatusMap(d, schemas.GetInstancesHealthStatusResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstancesHealthStatus, schemas.GetInstancesHealthStatusRequest, schemas.GetInstancesHealthStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstancesHealthStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstancesHealthStatus, schemas.GetInstancesHealthStatusRequest, schemas.GetInstancesHealthStatusResponse), output: &GetInstancesHealthStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInstancesHealthStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInstancesHealthStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInstancesHealthStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInstancesHealthStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +163,6 @@ func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +267,3 @@ type GetInstancesHealthStatusAPIClient interface {
 }
 
 var _ GetInstancesHealthStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetInstancesHealthStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInstancesHealthStatus",
-	}
-}

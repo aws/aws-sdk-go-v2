@@ -4,13 +4,8 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -76,21 +71,6 @@ type CreateSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSizeConstraintSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSizeConstraintSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSizeConstraintSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.CreateSizeConstraintSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSizeConstraintSetRequest_Name, *v.Name)
-	}
-}
-
 type CreateSizeConstraintSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.
@@ -107,88 +87,29 @@ type CreateSizeConstraintSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSizeConstraintSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSizeConstraintSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSizeConstraintSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.CreateSizeConstraintSetResponse_ChangeToken, v.ChangeToken)
-		case schemas.CreateSizeConstraintSetResponse_SizeConstraintSet:
-			v.SizeConstraintSet = &types.SizeConstraintSet{}
-			return v.SizeConstraintSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSizeConstraintSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSizeConstraintSet, schemas.CreateSizeConstraintSetRequest, schemas.CreateSizeConstraintSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSizeConstraintSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSizeConstraintSet, schemas.CreateSizeConstraintSetRequest, schemas.CreateSizeConstraintSetResponse), output: &CreateSizeConstraintSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSizeConstraintSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSizeConstraintSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSizeConstraintSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +124,8 @@ func (c *Client) addOperationCreateSizeConstraintSetMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSizeConstraintSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSizeConstraintSet",
-	}
 }

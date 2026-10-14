@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +41,6 @@ type UpdateOperatorAppIdpConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOperatorAppIdpConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOperatorAppIdpConfigInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOperatorAppIdpConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.UpdateOperatorAppIdpConfigInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.IdpClientSecret != nil {
-		s.WriteString(schemas.UpdateOperatorAppIdpConfigInput_idpClientSecret, *v.IdpClientSecret)
-	}
-}
-
 // Output containing the updated IdP configuration.
 type UpdateOperatorAppIdpConfigOutput struct {
 
@@ -79,76 +61,23 @@ type UpdateOperatorAppIdpConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOperatorAppIdpConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOperatorAppIdpConfigOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOperatorAppIdpConfigOutput_agentSpaceId:
-			v.AgentSpaceId = new(string)
-			return d.ReadString(schemas.UpdateOperatorAppIdpConfigOutput_agentSpaceId, v.AgentSpaceId)
-		case schemas.UpdateOperatorAppIdpConfigOutput_idp:
-			v.Idp = &types.IdpAuthConfiguration{}
-			return v.Idp.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateOperatorAppIdpConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOperatorAppIdpConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOperatorAppIdpConfig, schemas.UpdateOperatorAppIdpConfigInput, schemas.UpdateOperatorAppIdpConfigOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOperatorAppIdpConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOperatorAppIdpConfig, schemas.UpdateOperatorAppIdpConfigInput, schemas.UpdateOperatorAppIdpConfigOutput), output: &UpdateOperatorAppIdpConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOperatorAppIdpConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -158,12 +87,6 @@ func (c *Client) addOperationUpdateOperatorAppIdpConfigMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpUpdateOperatorAppIdpConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOperatorAppIdpConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +99,6 @@ func (c *Client) addOperationUpdateOperatorAppIdpConfigMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -215,12 +132,4 @@ func (m *endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware) HandleFinalize(c
 }
 func addEndpointPrefix_opUpdateOperatorAppIdpConfigMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateOperatorAppIdpConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateOperatorAppIdpConfig",
-	}
 }

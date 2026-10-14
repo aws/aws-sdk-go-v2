@@ -1,0 +1,3 @@
+GET /list-resiliency-policies?maxResults=1&nextToken=__NextToken__&policyName=__PolicyName__
+
+

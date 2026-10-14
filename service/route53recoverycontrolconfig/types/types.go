@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -69,73 +67,6 @@ type AssertionRule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssertionRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssertionRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssertionRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.AssertionRule_AssertedControls, v.AssertedControls)
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.AssertionRule_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AssertionRule_Name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.AssertionRule_Owner, *v.Owner)
-	}
-	if v.RuleConfig != nil {
-		s.WriteStruct(schemas.AssertionRule_RuleConfig)
-		v.RuleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SafetyRuleArn != nil {
-		s.WriteString(schemas.AssertionRule_SafetyRuleArn, *v.SafetyRuleArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AssertionRule_Status, string(v.Status))
-	}
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.AssertionRule_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *AssertionRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssertionRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssertionRule_AssertedControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.AssertionRule_AssertedControls, &v.AssertedControls)
-		case schemas.AssertionRule_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.AssertionRule_ControlPanelArn, v.ControlPanelArn)
-		case schemas.AssertionRule_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AssertionRule_Name, v.Name)
-		case schemas.AssertionRule_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.AssertionRule_Owner, v.Owner)
-		case schemas.AssertionRule_RuleConfig:
-			v.RuleConfig = &RuleConfig{}
-			return v.RuleConfig.Deserialize(d)
-		case schemas.AssertionRule_SafetyRuleArn:
-			v.SafetyRuleArn = new(string)
-			return d.ReadString(schemas.AssertionRule_SafetyRuleArn, v.SafetyRuleArn)
-		case schemas.AssertionRule_Status:
-			var ev string
-			if err := d.ReadString(schemas.AssertionRule_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		case schemas.AssertionRule_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.AssertionRule_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
-}
-
 // An update to an assertion rule. You can update the name or the evaluation
 // period (wait period). If you don't specify one of the items to update, the item
 // is unchanged.
@@ -160,40 +91,6 @@ type AssertionRuleUpdate struct {
 	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssertionRuleUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssertionRuleUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssertionRuleUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.AssertionRuleUpdate_Name, *v.Name)
-	}
-	if v.SafetyRuleArn != nil {
-		s.WriteString(schemas.AssertionRuleUpdate_SafetyRuleArn, *v.SafetyRuleArn)
-	}
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.AssertionRuleUpdate_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *AssertionRuleUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssertionRuleUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssertionRuleUpdate_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AssertionRuleUpdate_Name, v.Name)
-		case schemas.AssertionRuleUpdate_SafetyRuleArn:
-			v.SafetyRuleArn = new(string)
-			return d.ReadString(schemas.AssertionRuleUpdate_SafetyRuleArn, v.SafetyRuleArn)
-		case schemas.AssertionRuleUpdate_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.AssertionRuleUpdate_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
 }
 
 // A set of five redundant Regional endpoints against which you can execute API
@@ -228,63 +125,6 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Cluster)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.Cluster_ClusterArn, *v.ClusterArn)
-	}
-	serialize__listOfClusterEndpoint(s, schemas.Cluster_ClusterEndpoints, v.ClusterEndpoints)
-	if v.Name != nil {
-		s.WriteString(schemas.Cluster_Name, *v.Name)
-	}
-	if v.NetworkType != "" {
-		s.WriteString(schemas.Cluster_NetworkType, string(v.NetworkType))
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.Cluster_Owner, *v.Owner)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Cluster_Status, string(v.Status))
-	}
-}
-func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Cluster_ClusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.Cluster_ClusterArn, v.ClusterArn)
-		case schemas.Cluster_ClusterEndpoints:
-			return deserialize__listOfClusterEndpoint(d, schemas.Cluster_ClusterEndpoints, &v.ClusterEndpoints)
-		case schemas.Cluster_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Cluster_Name, v.Name)
-		case schemas.Cluster_NetworkType:
-			var ev string
-			if err := d.ReadString(schemas.Cluster_NetworkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = NetworkType(ev)
-			return nil
-		case schemas.Cluster_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.Cluster_Owner, v.Owner)
-		case schemas.Cluster_Status:
-			var ev string
-			if err := d.ReadString(schemas.Cluster_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A cluster endpoint. Specify an endpoint when you want to set or retrieve a
 // routing control state in the cluster.
 type ClusterEndpoint struct {
@@ -300,34 +140,6 @@ type ClusterEndpoint struct {
 	Region *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClusterEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClusterEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClusterEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Endpoint != nil {
-		s.WriteString(schemas.ClusterEndpoint_Endpoint, *v.Endpoint)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.ClusterEndpoint_Region, *v.Region)
-	}
-}
-func (v *ClusterEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClusterEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClusterEndpoint_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.ClusterEndpoint_Endpoint, v.Endpoint)
-		case schemas.ClusterEndpoint_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.ClusterEndpoint_Region, v.Region)
-		}
-		return nil
-	})
 }
 
 // A control panel represents a group of routing controls that can be changed
@@ -362,68 +174,6 @@ type ControlPanel struct {
 	Status Status
 
 	noSmithyDocumentSerde
-}
-
-func (v *ControlPanel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ControlPanel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ControlPanel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.ControlPanel_ClusterArn, *v.ClusterArn)
-	}
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.ControlPanel_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.DefaultControlPanel != nil {
-		s.WriteBool(schemas.ControlPanel_DefaultControlPanel, *v.DefaultControlPanel)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ControlPanel_Name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.ControlPanel_Owner, *v.Owner)
-	}
-	if v.RoutingControlCount != nil {
-		s.WriteInt32(schemas.ControlPanel_RoutingControlCount, *v.RoutingControlCount)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ControlPanel_Status, string(v.Status))
-	}
-}
-func (v *ControlPanel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ControlPanel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ControlPanel_ClusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.ControlPanel_ClusterArn, v.ClusterArn)
-		case schemas.ControlPanel_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.ControlPanel_ControlPanelArn, v.ControlPanelArn)
-		case schemas.ControlPanel_DefaultControlPanel:
-			v.DefaultControlPanel = new(bool)
-			return d.ReadBool(schemas.ControlPanel_DefaultControlPanel, v.DefaultControlPanel)
-		case schemas.ControlPanel_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ControlPanel_Name, v.Name)
-		case schemas.ControlPanel_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.ControlPanel_Owner, v.Owner)
-		case schemas.ControlPanel_RoutingControlCount:
-			v.RoutingControlCount = new(int32)
-			return d.ReadInt32(schemas.ControlPanel_RoutingControlCount, v.RoutingControlCount)
-		case schemas.ControlPanel_Status:
-			var ev string
-			if err := d.ReadString(schemas.ControlPanel_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A gating rule verifies that a gating routing control or set of gating routing
@@ -498,76 +248,6 @@ type GatingRule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GatingRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GatingRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GatingRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.GatingRule_ControlPanelArn, *v.ControlPanelArn)
-	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_GatingControls, v.GatingControls)
-	if v.Name != nil {
-		s.WriteString(schemas.GatingRule_Name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.GatingRule_Owner, *v.Owner)
-	}
-	if v.RuleConfig != nil {
-		s.WriteStruct(schemas.GatingRule_RuleConfig)
-		v.RuleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SafetyRuleArn != nil {
-		s.WriteString(schemas.GatingRule_SafetyRuleArn, *v.SafetyRuleArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.GatingRule_Status, string(v.Status))
-	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_TargetControls, v.TargetControls)
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.GatingRule_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *GatingRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GatingRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GatingRule_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.GatingRule_ControlPanelArn, v.ControlPanelArn)
-		case schemas.GatingRule_GatingControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.GatingRule_GatingControls, &v.GatingControls)
-		case schemas.GatingRule_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GatingRule_Name, v.Name)
-		case schemas.GatingRule_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.GatingRule_Owner, v.Owner)
-		case schemas.GatingRule_RuleConfig:
-			v.RuleConfig = &RuleConfig{}
-			return v.RuleConfig.Deserialize(d)
-		case schemas.GatingRule_SafetyRuleArn:
-			v.SafetyRuleArn = new(string)
-			return d.ReadString(schemas.GatingRule_SafetyRuleArn, v.SafetyRuleArn)
-		case schemas.GatingRule_Status:
-			var ev string
-			if err := d.ReadString(schemas.GatingRule_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		case schemas.GatingRule_TargetControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.GatingRule_TargetControls, &v.TargetControls)
-		case schemas.GatingRule_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.GatingRule_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
-}
-
 // Update to a gating rule. You can update the name or the evaluation period (wait
 // period). If you don't specify one of the items to update, the item is unchanged.
 type GatingRuleUpdate struct {
@@ -591,40 +271,6 @@ type GatingRuleUpdate struct {
 	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *GatingRuleUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GatingRuleUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GatingRuleUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GatingRuleUpdate_Name, *v.Name)
-	}
-	if v.SafetyRuleArn != nil {
-		s.WriteString(schemas.GatingRuleUpdate_SafetyRuleArn, *v.SafetyRuleArn)
-	}
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.GatingRuleUpdate_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *GatingRuleUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GatingRuleUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GatingRuleUpdate_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GatingRuleUpdate_Name, v.Name)
-		case schemas.GatingRuleUpdate_SafetyRuleArn:
-			v.SafetyRuleArn = new(string)
-			return d.ReadString(schemas.GatingRuleUpdate_SafetyRuleArn, v.SafetyRuleArn)
-		case schemas.GatingRuleUpdate_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.GatingRuleUpdate_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
 }
 
 // A new assertion rule for a control panel.
@@ -667,51 +313,6 @@ type NewAssertionRule struct {
 	WaitPeriodMs *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *NewAssertionRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NewAssertionRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NewAssertionRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewAssertionRule_AssertedControls, v.AssertedControls)
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.NewAssertionRule_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.NewAssertionRule_Name, *v.Name)
-	}
-	if v.RuleConfig != nil {
-		s.WriteStruct(schemas.NewAssertionRule_RuleConfig)
-		v.RuleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.NewAssertionRule_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *NewAssertionRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NewAssertionRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NewAssertionRule_AssertedControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.NewAssertionRule_AssertedControls, &v.AssertedControls)
-		case schemas.NewAssertionRule_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.NewAssertionRule_ControlPanelArn, v.ControlPanelArn)
-		case schemas.NewAssertionRule_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.NewAssertionRule_Name, v.Name)
-		case schemas.NewAssertionRule_RuleConfig:
-			v.RuleConfig = &RuleConfig{}
-			return v.RuleConfig.Deserialize(d)
-		case schemas.NewAssertionRule_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.NewAssertionRule_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
 }
 
 // A new gating rule for a control panel.
@@ -764,54 +365,6 @@ type NewGatingRule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NewGatingRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NewGatingRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NewGatingRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.NewGatingRule_ControlPanelArn, *v.ControlPanelArn)
-	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_GatingControls, v.GatingControls)
-	if v.Name != nil {
-		s.WriteString(schemas.NewGatingRule_Name, *v.Name)
-	}
-	if v.RuleConfig != nil {
-		s.WriteStruct(schemas.NewGatingRule_RuleConfig)
-		v.RuleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_TargetControls, v.TargetControls)
-	if v.WaitPeriodMs != nil {
-		s.WriteInt32(schemas.NewGatingRule_WaitPeriodMs, *v.WaitPeriodMs)
-	}
-}
-func (v *NewGatingRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NewGatingRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NewGatingRule_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.NewGatingRule_ControlPanelArn, v.ControlPanelArn)
-		case schemas.NewGatingRule_GatingControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.NewGatingRule_GatingControls, &v.GatingControls)
-		case schemas.NewGatingRule_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.NewGatingRule_Name, v.Name)
-		case schemas.NewGatingRule_RuleConfig:
-			v.RuleConfig = &RuleConfig{}
-			return v.RuleConfig.Deserialize(d)
-		case schemas.NewGatingRule_TargetControls:
-			return deserialize__listOf__stringMin1Max256PatternAZaZ09(d, schemas.NewGatingRule_TargetControls, &v.TargetControls)
-		case schemas.NewGatingRule_WaitPeriodMs:
-			v.WaitPeriodMs = new(int32)
-			return d.ReadInt32(schemas.NewGatingRule_WaitPeriodMs, v.WaitPeriodMs)
-		}
-		return nil
-	})
-}
-
 // A routing control has one of two states: ON and OFF. You can map the routing
 // control state to the state of an Amazon Route 53 health check, which can be used
 // to control traffic routing.
@@ -835,56 +388,6 @@ type RoutingControl struct {
 	Status Status
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutingControl) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutingControl)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutingControl) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.RoutingControl_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RoutingControl_Name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.RoutingControl_Owner, *v.Owner)
-	}
-	if v.RoutingControlArn != nil {
-		s.WriteString(schemas.RoutingControl_RoutingControlArn, *v.RoutingControlArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RoutingControl_Status, string(v.Status))
-	}
-}
-func (v *RoutingControl) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutingControl, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutingControl_ControlPanelArn:
-			v.ControlPanelArn = new(string)
-			return d.ReadString(schemas.RoutingControl_ControlPanelArn, v.ControlPanelArn)
-		case schemas.RoutingControl_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RoutingControl_Name, v.Name)
-		case schemas.RoutingControl_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.RoutingControl_Owner, v.Owner)
-		case schemas.RoutingControl_RoutingControlArn:
-			v.RoutingControlArn = new(string)
-			return d.ReadString(schemas.RoutingControl_RoutingControlArn, v.RoutingControlArn)
-		case schemas.RoutingControl_Status:
-			var ev string
-			if err := d.ReadString(schemas.RoutingControl_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A safety rule. A safety rule can be an assertion rule or a gating rule.
@@ -913,38 +416,6 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Rule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Rule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ASSERTION != nil {
-		s.WriteStruct(schemas.Rule_ASSERTION)
-		v.ASSERTION.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GATING != nil {
-		s.WriteStruct(schemas.Rule_GATING)
-		v.GATING.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Rule_ASSERTION:
-			v.ASSERTION = &AssertionRule{}
-			return v.ASSERTION.Deserialize(d)
-		case schemas.Rule_GATING:
-			v.GATING = &GatingRule{}
-			return v.GATING.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The rule configuration for an assertion rule. That is, the criteria that you
 // set for specific assertion controls (routing controls) that specify how many
 // control states must be ON after a transaction completes.
@@ -968,44 +439,6 @@ type RuleConfig struct {
 	Type RuleType
 
 	noSmithyDocumentSerde
-}
-
-func (v *RuleConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RuleConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RuleConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Inverted != nil {
-		s.WriteBool(schemas.RuleConfig_Inverted, *v.Inverted)
-	}
-	if v.Threshold != nil {
-		s.WriteInt32(schemas.RuleConfig_Threshold, *v.Threshold)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RuleConfig_Type, string(v.Type))
-	}
-}
-func (v *RuleConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RuleConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RuleConfig_Inverted:
-			v.Inverted = new(bool)
-			return d.ReadBool(schemas.RuleConfig_Inverted, v.Inverted)
-		case schemas.RuleConfig_Threshold:
-			v.Threshold = new(int32)
-			return d.ReadInt32(schemas.RuleConfig_Threshold, v.Threshold)
-		case schemas.RuleConfig_Type:
-			var ev string
-			if err := d.ReadString(schemas.RuleConfig_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RuleType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

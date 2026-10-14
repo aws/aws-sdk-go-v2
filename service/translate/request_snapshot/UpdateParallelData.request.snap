@@ -1,0 +1,7 @@
+POST /service/AWSShineFrontendService_20170701/operation/UpdateParallelData
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kClientTokeno__ClientToken__kDescriptiono__Description__dNameh__Name__rParallelDataConfig¿fFormatcTSVeS3Urii__S3Uri__ÿÿ

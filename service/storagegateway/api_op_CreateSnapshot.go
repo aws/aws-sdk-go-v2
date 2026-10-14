@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a snapshot of a volume.
@@ -85,6 +84,22 @@ type CreateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotDescription != nil {
+		s.WriteString(schemas.CreateSnapshotInput_SnapshotDescription, *v.SnapshotDescription)
+	}
+	serializeTags(s, schemas.CreateSnapshotInput_Tags, v.Tags)
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CreateSnapshotInput_VolumeARN, *v.VolumeARN)
+	}
+}
+
 // A JSON object containing the following fields:
 type CreateSnapshotOutput struct {
 
@@ -102,77 +117,54 @@ type CreateSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateSnapshotOutput_SnapshotId, *v.SnapshotId)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CreateSnapshotOutput_VolumeARN, *v.VolumeARN)
+	}
+}
+func (v *CreateSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapshotOutput_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.CreateSnapshotOutput_SnapshotId, v.SnapshotId)
+		case schemas.CreateSnapshotOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.CreateSnapshotOutput_VolumeARN, v.VolumeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotInput, schemas.CreateSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotInput, schemas.CreateSnapshotOutput), output: &CreateSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +179,8 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSnapshot",
-	}
 }

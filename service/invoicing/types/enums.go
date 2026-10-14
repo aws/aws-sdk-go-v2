@@ -203,6 +203,27 @@ func (ListInvoiceSummariesResourceType) Values() []ListInvoiceSummariesResourceT
 	}
 }
 
+type ProcurementPortalEnv string
+
+// Enum values for ProcurementPortalEnv
+const (
+	// The production environment.
+	ProcurementPortalEnvProd ProcurementPortalEnv = "PROD"
+	// The sandbox or test environment.
+	ProcurementPortalEnvTest ProcurementPortalEnv = "TEST"
+)
+
+// Values returns all known values for ProcurementPortalEnv. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcurementPortalEnv) Values() []ProcurementPortalEnv {
+	return []ProcurementPortalEnv{
+		"PROD",
+		"TEST",
+	}
+}
+
 type ProcurementPortalName string
 
 // Enum values for ProcurementPortalName
@@ -227,6 +248,7 @@ type ProcurementPortalPreferenceStatus string
 // Enum values for ProcurementPortalPreferenceStatus
 const (
 	ProcurementPortalPreferenceStatusPendingVerification      ProcurementPortalPreferenceStatus = "PENDING_VERIFICATION"
+	ProcurementPortalPreferenceStatusValidated                ProcurementPortalPreferenceStatus = "VALIDATED"
 	ProcurementPortalPreferenceStatusTestInitialized          ProcurementPortalPreferenceStatus = "TEST_INITIALIZED"
 	ProcurementPortalPreferenceStatusTestInitializationFailed ProcurementPortalPreferenceStatus = "TEST_INITIALIZATION_FAILED"
 	ProcurementPortalPreferenceStatusTestFailed               ProcurementPortalPreferenceStatus = "TEST_FAILED"
@@ -242,6 +264,7 @@ const (
 func (ProcurementPortalPreferenceStatus) Values() []ProcurementPortalPreferenceStatus {
 	return []ProcurementPortalPreferenceStatus{
 		"PENDING_VERIFICATION",
+		"VALIDATED",
 		"TEST_INITIALIZED",
 		"TEST_INITIALIZATION_FAILED",
 		"TEST_FAILED",

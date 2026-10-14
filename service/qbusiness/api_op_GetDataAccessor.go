@@ -4,13 +4,8 @@ package qbusiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,21 +43,6 @@ type GetDataAccessorInput struct {
 	DataAccessorId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDataAccessorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetDataAccessorRequest_applicationId, *v.ApplicationId)
-	}
-	if v.DataAccessorId != nil {
-		s.WriteString(schemas.GetDataAccessorRequest_dataAccessorId, *v.DataAccessorId)
-	}
 }
 
 type GetDataAccessorOutput struct {
@@ -108,111 +88,29 @@ type GetDataAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDataAccessorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDataAccessorResponse_actionConfigurations:
-			return deserializeActionConfigurationList(d, schemas.GetDataAccessorResponse_actionConfigurations, &v.ActionConfigurations)
-		case schemas.GetDataAccessorResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_applicationId, v.ApplicationId)
-		case schemas.GetDataAccessorResponse_authenticationDetail:
-			v.AuthenticationDetail = &types.DataAccessorAuthenticationDetail{}
-			return v.AuthenticationDetail.Deserialize(d)
-		case schemas.GetDataAccessorResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDataAccessorResponse_createdAt, v.CreatedAt)
-		case schemas.GetDataAccessorResponse_dataAccessorArn:
-			v.DataAccessorArn = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_dataAccessorArn, v.DataAccessorArn)
-		case schemas.GetDataAccessorResponse_dataAccessorId:
-			v.DataAccessorId = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_dataAccessorId, v.DataAccessorId)
-		case schemas.GetDataAccessorResponse_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_displayName, v.DisplayName)
-		case schemas.GetDataAccessorResponse_idcApplicationArn:
-			v.IdcApplicationArn = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_idcApplicationArn, v.IdcApplicationArn)
-		case schemas.GetDataAccessorResponse_principal:
-			v.Principal = new(string)
-			return d.ReadString(schemas.GetDataAccessorResponse_principal, v.Principal)
-		case schemas.GetDataAccessorResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDataAccessorResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDataAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAccessor, schemas.GetDataAccessorRequest, schemas.GetDataAccessorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAccessor, schemas.GetDataAccessorRequest, schemas.GetDataAccessorResponse), output: &GetDataAccessorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataAccessor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDataAccessorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataAccessor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -227,22 +125,8 @@ func (c *Client) addOperationGetDataAccessorMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataAccessor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataAccessor",
-	}
 }

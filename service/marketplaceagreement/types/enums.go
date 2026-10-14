@@ -250,6 +250,50 @@ func (BillingAdjustmentStatus) Values() []BillingAdjustmentStatus {
 	}
 }
 
+type EndTimeBehaviorReasonCode string
+
+// Enum values for EndTimeBehaviorReasonCode
+const (
+	EndTimeBehaviorReasonCodeProposerRenewOptedOut EndTimeBehaviorReasonCode = "PROPOSER_RENEW_OPTED_OUT"
+	EndTimeBehaviorReasonCodeAcceptorRenewOptedOut EndTimeBehaviorReasonCode = "ACCEPTOR_RENEW_OPTED_OUT"
+	EndTimeBehaviorReasonCodeNoRenewalTerm         EndTimeBehaviorReasonCode = "NO_RENEWAL_TERM"
+	EndTimeBehaviorReasonCodeRenewalLimitExhausted EndTimeBehaviorReasonCode = "RENEWAL_LIMIT_EXHAUSTED"
+)
+
+// Values returns all known values for EndTimeBehaviorReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndTimeBehaviorReasonCode) Values() []EndTimeBehaviorReasonCode {
+	return []EndTimeBehaviorReasonCode{
+		"PROPOSER_RENEW_OPTED_OUT",
+		"ACCEPTOR_RENEW_OPTED_OUT",
+		"NO_RENEWAL_TERM",
+		"RENEWAL_LIMIT_EXHAUSTED",
+	}
+}
+
+type EndTimeBehaviorType string
+
+// Enum values for EndTimeBehaviorType
+const (
+	EndTimeBehaviorTypeRenew   EndTimeBehaviorType = "RENEW"
+	EndTimeBehaviorTypeReplace EndTimeBehaviorType = "REPLACE"
+	EndTimeBehaviorTypeExpire  EndTimeBehaviorType = "EXPIRE"
+)
+
+// Values returns all known values for EndTimeBehaviorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndTimeBehaviorType) Values() []EndTimeBehaviorType {
+	return []EndTimeBehaviorType{
+		"RENEW",
+		"REPLACE",
+		"EXPIRE",
+	}
+}
+
 type Intent string
 
 // Enum values for Intent

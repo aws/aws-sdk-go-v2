@@ -1857,3 +1857,455 @@ func TestEndpointCase51(t *testing.T) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
+
+// Gov IPv4 only: us-gov-west-1 primary, dualstack and FIPS disabled
+func TestEndpointCase52(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-gov-west-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.us-gov.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Gov IPv4 only: us-gov-east-1, dualstack and FIPS disabled (proves both gov
+// regions resolve identically)
+func TestEndpointCase53(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-gov-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.us-gov.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Gov dualstack: us-gov-west-1, dualstack enabled, FIPS disabled (no global.
+// prefix; api.aws not global.api.aws)
+func TestEndpointCase54(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-gov-west-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.us-gov.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Gov FIPS: us-gov-west-1, FIPS enabled, dualstack disabled — FIPS not supported
+// with multi-region endpoints
+func TestEndpointCase55(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("us-gov-west-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Gov FIPS+dualstack: us-gov-west-1, both FIPS and dualstack enabled — FIPS check
+// precedes dualstack branch selection
+func TestEndpointCase56(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("us-gov-west-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Gov custom SDK endpoint: us-gov-west-1, EndpointId set, custom Endpoint — passes
+// through unchanged with SigV4a
+func TestEndpointCase57(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-gov-west-1"),
+		Endpoint:     ptr.String("https://example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// China IPv4 regression: cn-north-1, dualstack disabled — endpoint uses aws-cn
+// dnsSuffix (amazonaws.com.cn)
+func TestEndpointCase58(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("cn-north-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// China dualstack regression: cn-north-1, dualstack enabled — uses global. prefix
+// with aws-cn dualStackDnsSuffix (api.amazonwebservices.com.cn)
+func TestEndpointCase59(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("cn-north-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.global.api.amazonwebservices.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Gov custom SDK endpoint with FIPS: FIPS guard sits above the SDK passthrough, so
+// error wins
+func TestEndpointCase60(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(false),
+		UseFIPS:      ptr.Bool(true),
+		Region:       ptr.String("us-gov-west-1"),
+		Endpoint:     ptr.String("https://example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with multi-region endpoints", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Gov dualstack OSU (us-gov-east-1) matches PDT dualstack output (us-gov.api.aws,
+// no global. prefix)
+func TestEndpointCase61(t *testing.T) {
+	var params = EndpointParameters{
+		EndpointId:   ptr.String("abc123.456def"),
+		UseDualStack: ptr.Bool(true),
+		UseFIPS:      ptr.Bool(false),
+		Region:       ptr.String("us-gov-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123.456def.endpoints.email.us-gov.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "ses")
+						smithyhttp.SetSigV4ASigningName(&sp, "ses")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}

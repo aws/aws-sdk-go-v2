@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,6 +74,38 @@ type UpdateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrialComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrialComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateTrialComponentRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.UpdateTrialComponentRequest_EndTime, *v.EndTime)
+	}
+	serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
+	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_InputArtifactsToRemove, v.InputArtifactsToRemove)
+	serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
+	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_OutputArtifactsToRemove, v.OutputArtifactsToRemove)
+	serializeTrialComponentParameters(s, schemas.UpdateTrialComponentRequest_Parameters, v.Parameters)
+	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_ParametersToRemove, v.ParametersToRemove)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.UpdateTrialComponentRequest_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateTrialComponentRequest_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.UpdateTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
+	}
+}
+
 type UpdateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial component.
@@ -86,77 +117,48 @@ type UpdateTrialComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrialComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrialComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialComponentArn != nil {
+		s.WriteString(schemas.UpdateTrialComponentResponse_TrialComponentArn, *v.TrialComponentArn)
+	}
+}
+func (v *UpdateTrialComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrialComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrialComponentResponse_TrialComponentArn:
+			v.TrialComponentArn = new(string)
+			return d.ReadString(schemas.UpdateTrialComponentResponse_TrialComponentArn, v.TrialComponentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrialComponent, schemas.UpdateTrialComponentRequest, schemas.UpdateTrialComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrialComponent, schemas.UpdateTrialComponentRequest, schemas.UpdateTrialComponentResponse), output: &UpdateTrialComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrialComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTrialComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTrialComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTrialComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +173,8 @@ func (c *Client) addOperationUpdateTrialComponentMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTrialComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTrialComponent",
-	}
 }

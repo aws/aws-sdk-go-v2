@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.UpdateProfileWithAgent
+
+{"AgentResponse":{"Body":"__Body__","OptionsList":["__Member__","__Member__"],"Type":"INITIAL_GREETING"},"ConversationId":"__ConversationId__"}

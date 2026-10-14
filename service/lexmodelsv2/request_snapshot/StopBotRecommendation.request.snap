@@ -1,0 +1,3 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/botrecommendations/__BotRecommendationId__/stopbotrecommendation
+
+

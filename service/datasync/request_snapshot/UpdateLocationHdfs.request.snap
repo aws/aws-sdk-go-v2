@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateLocationHdfs
+
+{"AgentArns":["__Member__","__Member__"],"AuthenticationType":"SIMPLE","BlockSize":1,"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"KerberosKeytab":"YmxvYg==","KerberosKrb5Conf":"YmxvYg==","KerberosPrincipal":"__KerberosPrincipal__","KmsKeyProviderUri":"__KmsKeyProviderUri__","LocationArn":"__LocationArn__","NameNodes":[{"Hostname":"__Hostname__","Port":1},{"Hostname":"__Hostname__","Port":1}],"QopConfiguration":{"DataTransferProtection":"DISABLED","RpcProtection":"DISABLED"},"ReplicationFactor":1,"SimpleUser":"__SimpleUser__","Subdirectory":"__Subdirectory__"}

@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/users/__UserId__
+
+

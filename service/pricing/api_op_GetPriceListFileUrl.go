@@ -4,12 +4,7 @@ package pricing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This feature is in preview release and is subject to change. Your use of
@@ -59,21 +54,6 @@ type GetPriceListFileUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPriceListFileUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPriceListFileUrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPriceListFileUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FileFormat != nil {
-		s.WriteString(schemas.GetPriceListFileUrlRequest_FileFormat, *v.FileFormat)
-	}
-	if v.PriceListArn != nil {
-		s.WriteString(schemas.GetPriceListFileUrlRequest_PriceListArn, *v.PriceListArn)
-	}
-}
-
 type GetPriceListFileUrlOutput struct {
 
 	// The URL to download your Price List file from.
@@ -85,85 +65,29 @@ type GetPriceListFileUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPriceListFileUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPriceListFileUrlResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPriceListFileUrlResponse_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetPriceListFileUrlResponse_Url, v.Url)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPriceListFileUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPriceListFileUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPriceListFileUrl, schemas.GetPriceListFileUrlRequest, schemas.GetPriceListFileUrlResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPriceListFileUrl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPriceListFileUrl, schemas.GetPriceListFileUrlRequest, schemas.GetPriceListFileUrlResponse), output: &GetPriceListFileUrlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPriceListFileUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPriceListFileUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPriceListFileUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +102,8 @@ func (c *Client) addOperationGetPriceListFileUrlMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPriceListFileUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPriceListFileUrl",
-	}
 }

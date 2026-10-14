@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -37,31 +35,6 @@ type Circle struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Circle) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Circle)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Circle) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.Circle_Center, v.Center)
-	if v.Radius != nil {
-		s.WriteFloat64(schemas.Circle_Radius, *v.Radius)
-	}
-}
-func (v *Circle) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Circle, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Circle_Center:
-			return deserializePosition(d, schemas.Circle_Center, &v.Center)
-		case schemas.Circle_Radius:
-			v.Radius = new(float64)
-			return d.ReadFloat64(schemas.Circle_Radius, v.Radius)
-		}
-		return nil
-	})
-}
-
 // Geometry defined as a corridor - a LineString with a radius that defines the
 // width of the corridor.
 type Corridor struct {
@@ -79,31 +52,6 @@ type Corridor struct {
 	Radius *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Corridor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Corridor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Corridor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.Corridor_LineString, v.LineString)
-	if v.Radius != nil {
-		s.WriteInt32(schemas.Corridor_Radius, *v.Radius)
-	}
-}
-func (v *Corridor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Corridor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Corridor_LineString:
-			return deserializeLineString(d, schemas.Corridor_LineString, &v.LineString)
-		case schemas.Corridor_Radius:
-			v.Radius = new(int32)
-			return d.ReadInt32(schemas.Corridor_Radius, v.Radius)
-		}
-		return nil
-	})
 }
 
 // Represents a single reachable area calculated for a specific threshold.
@@ -135,38 +83,6 @@ type Isoline struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Isoline) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Isoline)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Isoline) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineConnectionList(s, schemas.Isoline_Connections, v.Connections)
-	if v.DistanceThreshold != 0 {
-		s.WriteInt64(schemas.Isoline_DistanceThreshold, v.DistanceThreshold)
-	}
-	serializeIsolineShapeGeometryList(s, schemas.Isoline_Geometries, v.Geometries)
-	if v.TimeThreshold != 0 {
-		s.WriteInt64(schemas.Isoline_TimeThreshold, v.TimeThreshold)
-	}
-}
-func (v *Isoline) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Isoline, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Isoline_Connections:
-			return deserializeIsolineConnectionList(d, schemas.Isoline_Connections, &v.Connections)
-		case schemas.Isoline_DistanceThreshold:
-			return d.ReadInt64(schemas.Isoline_DistanceThreshold, &v.DistanceThreshold)
-		case schemas.Isoline_Geometries:
-			return deserializeIsolineShapeGeometryList(d, schemas.Isoline_Geometries, &v.Geometries)
-		case schemas.Isoline_TimeThreshold:
-			return d.ReadInt64(schemas.Isoline_TimeThreshold, &v.TimeThreshold)
-		}
-		return nil
-	})
-}
-
 // Special road types or features that should be considered available for routing.
 // For example, this attribute can be used to allow the use of HOV (high-occupancy
 // vehicle) or HOT (high-occupancy toll) lanes, even if they would otherwise not
@@ -188,34 +104,6 @@ type IsolineAllowOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineAllowOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineAllowOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineAllowOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hot != nil {
-		s.WriteBool(schemas.IsolineAllowOptions_Hot, *v.Hot)
-	}
-	if v.Hov != nil {
-		s.WriteBool(schemas.IsolineAllowOptions_Hov, *v.Hov)
-	}
-}
-func (v *IsolineAllowOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineAllowOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineAllowOptions_Hot:
-			v.Hot = new(bool)
-			return d.ReadBool(schemas.IsolineAllowOptions_Hot, v.Hot)
-		case schemas.IsolineAllowOptions_Hov:
-			v.Hov = new(bool)
-			return d.ReadBool(schemas.IsolineAllowOptions_Hov, v.Hov)
-		}
-		return nil
-	})
-}
-
 // Defines an area to avoid when calculating routes. Consists of a primary
 // geometry to avoid, with the ability to specify exception areas within that
 // geometry where travel is permitted.
@@ -233,33 +121,6 @@ type IsolineAvoidanceArea struct {
 	Except []IsolineAvoidanceAreaGeometry
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineAvoidanceArea)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineAvoidanceAreaGeometryList(s, schemas.IsolineAvoidanceArea_Except, v.Except)
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.IsolineAvoidanceArea_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IsolineAvoidanceArea) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineAvoidanceArea, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineAvoidanceArea_Except:
-			return deserializeIsolineAvoidanceAreaGeometryList(d, schemas.IsolineAvoidanceArea_Except, &v.Except)
-		case schemas.IsolineAvoidanceArea_Geometry:
-			v.Geometry = &IsolineAvoidanceAreaGeometry{}
-			return v.Geometry.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Defines an area to avoid during calculations using one of several supported
@@ -293,47 +154,6 @@ type IsolineAvoidanceAreaGeometry struct {
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineAvoidanceAreaGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.IsolineAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
-	if v.Corridor != nil {
-		s.WriteStruct(schemas.IsolineAvoidanceAreaGeometry_Corridor)
-		v.Corridor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeLinearRings(s, schemas.IsolineAvoidanceAreaGeometry_Polygon, v.Polygon)
-	if v.PolylineCorridor != nil {
-		s.WriteStruct(schemas.IsolineAvoidanceAreaGeometry_PolylineCorridor)
-		v.PolylineCorridor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePolylineRingList(s, schemas.IsolineAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
-}
-func (v *IsolineAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineAvoidanceAreaGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineAvoidanceAreaGeometry_BoundingBox:
-			return deserializeBoundingBox(d, schemas.IsolineAvoidanceAreaGeometry_BoundingBox, &v.BoundingBox)
-		case schemas.IsolineAvoidanceAreaGeometry_Corridor:
-			v.Corridor = &Corridor{}
-			return v.Corridor.Deserialize(d)
-		case schemas.IsolineAvoidanceAreaGeometry_Polygon:
-			return deserializeLinearRings(d, schemas.IsolineAvoidanceAreaGeometry_Polygon, &v.Polygon)
-		case schemas.IsolineAvoidanceAreaGeometry_PolylineCorridor:
-			v.PolylineCorridor = &PolylineCorridor{}
-			return v.PolylineCorridor.Deserialize(d)
-		case schemas.IsolineAvoidanceAreaGeometry_PolylinePolygon:
-			return deserializePolylineRingList(d, schemas.IsolineAvoidanceAreaGeometry_PolylinePolygon, &v.PolylinePolygon)
-		}
-		return nil
-	})
 }
 
 // Specifies features of the road network to avoid when calculating reachable
@@ -407,85 +227,6 @@ type IsolineAvoidanceOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineAvoidanceOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineAvoidanceAreaList(s, schemas.IsolineAvoidanceOptions_Areas, v.Areas)
-	if v.CarShuttleTrains != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
-	}
-	if v.ControlledAccessHighways != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_ControlledAccessHighways, *v.ControlledAccessHighways)
-	}
-	if v.DirtRoads != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_DirtRoads, *v.DirtRoads)
-	}
-	if v.Ferries != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_Ferries, *v.Ferries)
-	}
-	if v.SeasonalClosure != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_SeasonalClosure, *v.SeasonalClosure)
-	}
-	if v.TollRoads != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_TollRoads, *v.TollRoads)
-	}
-	if v.TollTransponders != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_TollTransponders, *v.TollTransponders)
-	}
-	serializeTruckRoadTypeList(s, schemas.IsolineAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
-	if v.Tunnels != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_Tunnels, *v.Tunnels)
-	}
-	if v.UTurns != nil {
-		s.WriteBool(schemas.IsolineAvoidanceOptions_UTurns, *v.UTurns)
-	}
-	serializeIsolineAvoidanceZoneCategoryList(s, schemas.IsolineAvoidanceOptions_ZoneCategories, v.ZoneCategories)
-}
-func (v *IsolineAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineAvoidanceOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineAvoidanceOptions_Areas:
-			return deserializeIsolineAvoidanceAreaList(d, schemas.IsolineAvoidanceOptions_Areas, &v.Areas)
-		case schemas.IsolineAvoidanceOptions_CarShuttleTrains:
-			v.CarShuttleTrains = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_CarShuttleTrains, v.CarShuttleTrains)
-		case schemas.IsolineAvoidanceOptions_ControlledAccessHighways:
-			v.ControlledAccessHighways = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_ControlledAccessHighways, v.ControlledAccessHighways)
-		case schemas.IsolineAvoidanceOptions_DirtRoads:
-			v.DirtRoads = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_DirtRoads, v.DirtRoads)
-		case schemas.IsolineAvoidanceOptions_Ferries:
-			v.Ferries = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_Ferries, v.Ferries)
-		case schemas.IsolineAvoidanceOptions_SeasonalClosure:
-			v.SeasonalClosure = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_SeasonalClosure, v.SeasonalClosure)
-		case schemas.IsolineAvoidanceOptions_TollRoads:
-			v.TollRoads = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_TollRoads, v.TollRoads)
-		case schemas.IsolineAvoidanceOptions_TollTransponders:
-			v.TollTransponders = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_TollTransponders, v.TollTransponders)
-		case schemas.IsolineAvoidanceOptions_TruckRoadTypes:
-			return deserializeTruckRoadTypeList(d, schemas.IsolineAvoidanceOptions_TruckRoadTypes, &v.TruckRoadTypes)
-		case schemas.IsolineAvoidanceOptions_Tunnels:
-			v.Tunnels = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_Tunnels, v.Tunnels)
-		case schemas.IsolineAvoidanceOptions_UTurns:
-			v.UTurns = new(bool)
-			return d.ReadBool(schemas.IsolineAvoidanceOptions_UTurns, v.UTurns)
-		case schemas.IsolineAvoidanceOptions_ZoneCategories:
-			return deserializeIsolineAvoidanceZoneCategoryList(d, schemas.IsolineAvoidanceOptions_ZoneCategories, &v.ZoneCategories)
-		}
-		return nil
-	})
-}
-
 // Types of regulated zones that may affect routing.
 type IsolineAvoidanceZoneCategory struct {
 
@@ -495,32 +236,6 @@ type IsolineAvoidanceZoneCategory struct {
 	Category IsolineZoneCategory
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineAvoidanceZoneCategory) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineAvoidanceZoneCategory)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineAvoidanceZoneCategory) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.IsolineAvoidanceZoneCategory_Category, string(v.Category))
-	}
-}
-func (v *IsolineAvoidanceZoneCategory) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineAvoidanceZoneCategory, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineAvoidanceZoneCategory_Category:
-			var ev string
-			if err := d.ReadString(schemas.IsolineAvoidanceZoneCategory_Category, &ev); err != nil {
-				return err
-			}
-			v.Category = IsolineZoneCategory(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Vehicle characteristics and preferences that affect routing for passenger cars.
@@ -560,52 +275,6 @@ type IsolineCarOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineCarOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineCarOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineCarOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngineType != "" {
-		s.WriteString(schemas.IsolineCarOptions_EngineType, string(v.EngineType))
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.IsolineCarOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.IsolineCarOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.IsolineCarOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *IsolineCarOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineCarOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineCarOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.IsolineCarOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = IsolineEngineType(ev)
-			return nil
-		case schemas.IsolineCarOptions_LicensePlate:
-			v.LicensePlate = &IsolineVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.IsolineCarOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.IsolineCarOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.IsolineCarOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.IsolineCarOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // Represents a segment of the transportation network that connects separate parts
 // of a reachable area. These connections show how discontinuous areas are linked,
 // such as by ferry routes or bridges crossing unroutable terrain.
@@ -628,42 +297,6 @@ type IsolineConnection struct {
 	ToPolygonIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineConnection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineConnection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineConnection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FromPolygonIndex != nil {
-		s.WriteInt32(schemas.IsolineConnection_FromPolygonIndex, *v.FromPolygonIndex)
-	}
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.IsolineConnection_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ToPolygonIndex != nil {
-		s.WriteInt32(schemas.IsolineConnection_ToPolygonIndex, *v.ToPolygonIndex)
-	}
-}
-func (v *IsolineConnection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineConnection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineConnection_FromPolygonIndex:
-			v.FromPolygonIndex = new(int32)
-			return d.ReadInt32(schemas.IsolineConnection_FromPolygonIndex, v.FromPolygonIndex)
-		case schemas.IsolineConnection_Geometry:
-			v.Geometry = &IsolineConnectionGeometry{}
-			return v.Geometry.Deserialize(d)
-		case schemas.IsolineConnection_ToPolygonIndex:
-			v.ToPolygonIndex = new(int32)
-			return d.ReadInt32(schemas.IsolineConnection_ToPolygonIndex, v.ToPolygonIndex)
-		}
-		return nil
-	})
 }
 
 // Represents the geometry of connections between non-contiguous parts of an
@@ -689,31 +322,6 @@ type IsolineConnectionGeometry struct {
 	Polyline *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineConnectionGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineConnectionGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineConnectionGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.IsolineConnectionGeometry_LineString, v.LineString)
-	if v.Polyline != nil {
-		s.WriteString(schemas.IsolineConnectionGeometry_Polyline, *v.Polyline)
-	}
-}
-func (v *IsolineConnectionGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineConnectionGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineConnectionGeometry_LineString:
-			return deserializeLineString(d, schemas.IsolineConnectionGeometry_LineString, &v.LineString)
-		case schemas.IsolineConnectionGeometry_Polyline:
-			v.Polyline = new(string)
-			return d.ReadString(schemas.IsolineConnectionGeometry_Polyline, v.Polyline)
-		}
-		return nil
-	})
 }
 
 // Options that control how the destination point is interpreted and matched to
@@ -744,48 +352,6 @@ type IsolineDestinationOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineDestinationOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineDestinationOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineDestinationOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.IsolineDestinationOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.IsolineDestinationOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.IsolineDestinationOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.IsolineDestinationOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IsolineDestinationOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineDestinationOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineDestinationOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.IsolineDestinationOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.IsolineDestinationOptions_Heading:
-			return d.ReadFloat64(schemas.IsolineDestinationOptions_Heading, &v.Heading)
-		case schemas.IsolineDestinationOptions_Matching:
-			v.Matching = &IsolineMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.IsolineDestinationOptions_SideOfStreet:
-			v.SideOfStreet = &IsolineSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Controls the detail level and smoothness of generated isolines. More detailed
 // isolines provide better visual representation of reachable areas but require
 // more processing time and result in larger responses.
@@ -802,33 +368,6 @@ type IsolineGranularityOptions struct {
 	MaxResolution int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineGranularityOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineGranularityOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineGranularityOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxPoints != nil {
-		s.WriteInt32(schemas.IsolineGranularityOptions_MaxPoints, *v.MaxPoints)
-	}
-	if v.MaxResolution != 0 {
-		s.WriteInt64(schemas.IsolineGranularityOptions_MaxResolution, v.MaxResolution)
-	}
-}
-func (v *IsolineGranularityOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineGranularityOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineGranularityOptions_MaxPoints:
-			v.MaxPoints = new(int32)
-			return d.ReadInt32(schemas.IsolineGranularityOptions_MaxPoints, v.MaxPoints)
-		case schemas.IsolineGranularityOptions_MaxResolution:
-			return d.ReadInt64(schemas.IsolineGranularityOptions_MaxResolution, &v.MaxResolution)
-		}
-		return nil
-	})
 }
 
 // Controls how origin and destination points are matched to the road network when
@@ -862,48 +401,6 @@ type IsolineMatchingOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineMatchingOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineMatchingOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineMatchingOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NameHint != nil {
-		s.WriteString(schemas.IsolineMatchingOptions_NameHint, *v.NameHint)
-	}
-	if v.OnRoadThreshold != 0 {
-		s.WriteInt64(schemas.IsolineMatchingOptions_OnRoadThreshold, v.OnRoadThreshold)
-	}
-	if v.Radius != 0 {
-		s.WriteInt64(schemas.IsolineMatchingOptions_Radius, v.Radius)
-	}
-	if v.Strategy != "" {
-		s.WriteString(schemas.IsolineMatchingOptions_Strategy, string(v.Strategy))
-	}
-}
-func (v *IsolineMatchingOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineMatchingOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineMatchingOptions_NameHint:
-			v.NameHint = new(string)
-			return d.ReadString(schemas.IsolineMatchingOptions_NameHint, v.NameHint)
-		case schemas.IsolineMatchingOptions_OnRoadThreshold:
-			return d.ReadInt64(schemas.IsolineMatchingOptions_OnRoadThreshold, &v.OnRoadThreshold)
-		case schemas.IsolineMatchingOptions_Radius:
-			return d.ReadInt64(schemas.IsolineMatchingOptions_Radius, &v.Radius)
-		case schemas.IsolineMatchingOptions_Strategy:
-			var ev string
-			if err := d.ReadString(schemas.IsolineMatchingOptions_Strategy, &ev); err != nil {
-				return err
-			}
-			v.Strategy = MatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Options that control how the origin point is interpreted when calculating
 // reachable areas. These options affect which roads are considered accessible from
 // the starting point and how initial routing decisions are made.
@@ -931,48 +428,6 @@ type IsolineOriginOptions struct {
 	SideOfStreet *IsolineSideOfStreetOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineOriginOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineOriginOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineOriginOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.IsolineOriginOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.IsolineOriginOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.IsolineOriginOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.IsolineOriginOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IsolineOriginOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineOriginOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineOriginOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.IsolineOriginOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.IsolineOriginOptions_Heading:
-			return d.ReadFloat64(schemas.IsolineOriginOptions_Heading, &v.Heading)
-		case schemas.IsolineOriginOptions_Matching:
-			v.Matching = &IsolineMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.IsolineOriginOptions_SideOfStreet:
-			v.SideOfStreet = &IsolineSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Vehicle characteristics that affect which roads and paths can be used when
@@ -1012,52 +467,6 @@ type IsolineScooterOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineScooterOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineScooterOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineScooterOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngineType != "" {
-		s.WriteString(schemas.IsolineScooterOptions_EngineType, string(v.EngineType))
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.IsolineScooterOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.IsolineScooterOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.IsolineScooterOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *IsolineScooterOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineScooterOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineScooterOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.IsolineScooterOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = IsolineEngineType(ev)
-			return nil
-		case schemas.IsolineScooterOptions_LicensePlate:
-			v.LicensePlate = &IsolineVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.IsolineScooterOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.IsolineScooterOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.IsolineScooterOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.IsolineScooterOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // Represents the shape of a reachable area. The geometry can be provided either
 // as coordinate pairs ( Polygon ) or in encoded format ( PolylinePolygon ),
 // matching the format specified in the request.
@@ -1083,28 +492,6 @@ type IsolineShapeGeometry struct {
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineShapeGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineShapeGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineShapeGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRings(s, schemas.IsolineShapeGeometry_Polygon, v.Polygon)
-	serializePolylineRingList(s, schemas.IsolineShapeGeometry_PolylinePolygon, v.PolylinePolygon)
-}
-func (v *IsolineShapeGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineShapeGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineShapeGeometry_Polygon:
-			return deserializeLinearRings(d, schemas.IsolineShapeGeometry_Polygon, &v.Polygon)
-		case schemas.IsolineShapeGeometry_PolylinePolygon:
-			return deserializePolylineRingList(d, schemas.IsolineShapeGeometry_PolylinePolygon, &v.PolylinePolygon)
-		}
-		return nil
-	})
 }
 
 // Controls how points are matched to specific sides of streets. This is important
@@ -1133,35 +520,6 @@ type IsolineSideOfStreetOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineSideOfStreetOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.IsolineSideOfStreetOptions_Position, v.Position)
-	if v.UseWith != "" {
-		s.WriteString(schemas.IsolineSideOfStreetOptions_UseWith, string(v.UseWith))
-	}
-}
-func (v *IsolineSideOfStreetOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineSideOfStreetOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineSideOfStreetOptions_Position:
-			return deserializePosition(d, schemas.IsolineSideOfStreetOptions_Position, &v.Position)
-		case schemas.IsolineSideOfStreetOptions_UseWith:
-			var ev string
-			if err := d.ReadString(schemas.IsolineSideOfStreetOptions_UseWith, &ev); err != nil {
-				return err
-			}
-			v.UseWith = SideOfStreetMatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies the time or distance limits used to calculate reachable areas. You
 // can provide up to five thresholds for a single type to generate multiple
 // isolines in a single request. For example, you might request areas reachable
@@ -1177,28 +535,6 @@ type IsolineThresholds struct {
 	Time []int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineThresholds) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineThresholds)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineThresholds) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistanceThresholdList(s, schemas.IsolineThresholds_Distance, v.Distance)
-	serializeTimeThresholdList(s, schemas.IsolineThresholds_Time, v.Time)
-}
-func (v *IsolineThresholds) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineThresholds, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineThresholds_Distance:
-			return deserializeDistanceThresholdList(d, schemas.IsolineThresholds_Distance, &v.Distance)
-		case schemas.IsolineThresholds_Time:
-			return deserializeTimeThresholdList(d, schemas.IsolineThresholds_Time, &v.Time)
-		}
-		return nil
-	})
 }
 
 // Controls how real-time and historical traffic data is used when calculating
@@ -1226,37 +562,6 @@ type IsolineTrafficOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineTrafficOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineTrafficOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineTrafficOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FlowEventThresholdOverride != 0 {
-		s.WriteInt64(schemas.IsolineTrafficOptions_FlowEventThresholdOverride, v.FlowEventThresholdOverride)
-	}
-	if v.Usage != "" {
-		s.WriteString(schemas.IsolineTrafficOptions_Usage, string(v.Usage))
-	}
-}
-func (v *IsolineTrafficOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineTrafficOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineTrafficOptions_FlowEventThresholdOverride:
-			return d.ReadInt64(schemas.IsolineTrafficOptions_FlowEventThresholdOverride, &v.FlowEventThresholdOverride)
-		case schemas.IsolineTrafficOptions_Usage:
-			var ev string
-			if err := d.ReadString(schemas.IsolineTrafficOptions_Usage, &ev); err != nil {
-				return err
-			}
-			v.Usage = TrafficUsage(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Additional specifications when the vehicle includes one or more trailers.
 type IsolineTrailerOptions struct {
 
@@ -1271,34 +576,6 @@ type IsolineTrailerOptions struct {
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineTrailerOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineTrailerOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineTrailerOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AxleCount != nil {
-		s.WriteInt32(schemas.IsolineTrailerOptions_AxleCount, *v.AxleCount)
-	}
-	if v.TrailerCount != nil {
-		s.WriteInt32(schemas.IsolineTrailerOptions_TrailerCount, *v.TrailerCount)
-	}
-}
-func (v *IsolineTrailerOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineTrailerOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineTrailerOptions_AxleCount:
-			v.AxleCount = new(int32)
-			return d.ReadInt32(schemas.IsolineTrailerOptions_AxleCount, v.AxleCount)
-		case schemas.IsolineTrailerOptions_TrailerCount:
-			v.TrailerCount = new(int32)
-			return d.ReadInt32(schemas.IsolineTrailerOptions_TrailerCount, v.TrailerCount)
-		}
-		return nil
-	})
 }
 
 // Mode-specific routing options that further refine how reachable areas are
@@ -1322,46 +599,6 @@ type IsolineTravelModeOptions struct {
 	Truck *IsolineTruckOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineTravelModeOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineTravelModeOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineTravelModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Car != nil {
-		s.WriteStruct(schemas.IsolineTravelModeOptions_Car)
-		v.Car.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Scooter != nil {
-		s.WriteStruct(schemas.IsolineTravelModeOptions_Scooter)
-		v.Scooter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Truck != nil {
-		s.WriteStruct(schemas.IsolineTravelModeOptions_Truck)
-		v.Truck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IsolineTravelModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineTravelModeOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineTravelModeOptions_Car:
-			v.Car = &IsolineCarOptions{}
-			return v.Car.Deserialize(d)
-		case schemas.IsolineTravelModeOptions_Scooter:
-			v.Scooter = &IsolineScooterOptions{}
-			return v.Scooter.Deserialize(d)
-		case schemas.IsolineTravelModeOptions_Truck:
-			v.Truck = &IsolineTruckOptions{}
-			return v.Truck.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Vehicle characteristics and restrictions that affect which roads can be used
@@ -1534,139 +771,6 @@ type IsolineTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IsolineTruckOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineTruckOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AxleCount != nil {
-		s.WriteInt32(schemas.IsolineTruckOptions_AxleCount, *v.AxleCount)
-	}
-	if v.EngineType != "" {
-		s.WriteString(schemas.IsolineTruckOptions_EngineType, string(v.EngineType))
-	}
-	if v.GrossWeight != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_GrossWeight, v.GrossWeight)
-	}
-	serializeIsolineHazardousCargoTypeList(s, schemas.IsolineTruckOptions_HazardousCargos, v.HazardousCargos)
-	if v.Height != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_Height, v.Height)
-	}
-	if v.HeightAboveFirstAxle != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_HeightAboveFirstAxle, v.HeightAboveFirstAxle)
-	}
-	if v.KpraLength != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_KpraLength, v.KpraLength)
-	}
-	if v.Length != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_Length, v.Length)
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.IsolineTruckOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.IsolineTruckOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.IsolineTruckOptions_Occupancy, *v.Occupancy)
-	}
-	if v.PayloadCapacity != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_PayloadCapacity, v.PayloadCapacity)
-	}
-	if v.TireCount != nil {
-		s.WriteInt32(schemas.IsolineTruckOptions_TireCount, *v.TireCount)
-	}
-	if v.Trailer != nil {
-		s.WriteStruct(schemas.IsolineTruckOptions_Trailer)
-		v.Trailer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TruckType != "" {
-		s.WriteString(schemas.IsolineTruckOptions_TruckType, string(v.TruckType))
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.IsolineTruckOptions_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-	if v.WeightPerAxle != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_WeightPerAxle, v.WeightPerAxle)
-	}
-	if v.WeightPerAxleGroup != nil {
-		s.WriteStruct(schemas.IsolineTruckOptions_WeightPerAxleGroup)
-		v.WeightPerAxleGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Width != 0 {
-		s.WriteInt64(schemas.IsolineTruckOptions_Width, v.Width)
-	}
-}
-func (v *IsolineTruckOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineTruckOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineTruckOptions_AxleCount:
-			v.AxleCount = new(int32)
-			return d.ReadInt32(schemas.IsolineTruckOptions_AxleCount, v.AxleCount)
-		case schemas.IsolineTruckOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.IsolineTruckOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = IsolineEngineType(ev)
-			return nil
-		case schemas.IsolineTruckOptions_GrossWeight:
-			return d.ReadInt64(schemas.IsolineTruckOptions_GrossWeight, &v.GrossWeight)
-		case schemas.IsolineTruckOptions_HazardousCargos:
-			return deserializeIsolineHazardousCargoTypeList(d, schemas.IsolineTruckOptions_HazardousCargos, &v.HazardousCargos)
-		case schemas.IsolineTruckOptions_Height:
-			return d.ReadInt64(schemas.IsolineTruckOptions_Height, &v.Height)
-		case schemas.IsolineTruckOptions_HeightAboveFirstAxle:
-			return d.ReadInt64(schemas.IsolineTruckOptions_HeightAboveFirstAxle, &v.HeightAboveFirstAxle)
-		case schemas.IsolineTruckOptions_KpraLength:
-			return d.ReadInt64(schemas.IsolineTruckOptions_KpraLength, &v.KpraLength)
-		case schemas.IsolineTruckOptions_Length:
-			return d.ReadInt64(schemas.IsolineTruckOptions_Length, &v.Length)
-		case schemas.IsolineTruckOptions_LicensePlate:
-			v.LicensePlate = &IsolineVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.IsolineTruckOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.IsolineTruckOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.IsolineTruckOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.IsolineTruckOptions_Occupancy, v.Occupancy)
-		case schemas.IsolineTruckOptions_PayloadCapacity:
-			return d.ReadInt64(schemas.IsolineTruckOptions_PayloadCapacity, &v.PayloadCapacity)
-		case schemas.IsolineTruckOptions_TireCount:
-			v.TireCount = new(int32)
-			return d.ReadInt32(schemas.IsolineTruckOptions_TireCount, v.TireCount)
-		case schemas.IsolineTruckOptions_Trailer:
-			v.Trailer = &IsolineTrailerOptions{}
-			return v.Trailer.Deserialize(d)
-		case schemas.IsolineTruckOptions_TruckType:
-			var ev string
-			if err := d.ReadString(schemas.IsolineTruckOptions_TruckType, &ev); err != nil {
-				return err
-			}
-			v.TruckType = IsolineTruckType(ev)
-			return nil
-		case schemas.IsolineTruckOptions_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.IsolineTruckOptions_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		case schemas.IsolineTruckOptions_WeightPerAxle:
-			return d.ReadInt64(schemas.IsolineTruckOptions_WeightPerAxle, &v.WeightPerAxle)
-		case schemas.IsolineTruckOptions_WeightPerAxleGroup:
-			v.WeightPerAxleGroup = &WeightPerAxleGroup{}
-			return v.WeightPerAxleGroup.Deserialize(d)
-		case schemas.IsolineTruckOptions_Width:
-			return d.ReadInt64(schemas.IsolineTruckOptions_Width, &v.Width)
-		}
-		return nil
-	})
-}
-
 // License plate information used in regions where road access or routing
 // restrictions are based on license plate numbers.
 type IsolineVehicleLicensePlate struct {
@@ -1677,28 +781,6 @@ type IsolineVehicleLicensePlate struct {
 	LastCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IsolineVehicleLicensePlate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IsolineVehicleLicensePlate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IsolineVehicleLicensePlate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastCharacter != nil {
-		s.WriteString(schemas.IsolineVehicleLicensePlate_LastCharacter, *v.LastCharacter)
-	}
-}
-func (v *IsolineVehicleLicensePlate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsolineVehicleLicensePlate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsolineVehicleLicensePlate_LastCharacter:
-			v.LastCharacter = new(string)
-			return d.ReadString(schemas.IsolineVehicleLicensePlate_LastCharacter, v.LastCharacter)
-		}
-		return nil
-	})
 }
 
 // The localized string.
@@ -1715,34 +797,6 @@ type LocalizedString struct {
 	Language *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LocalizedString) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LocalizedString)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LocalizedString) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Language != nil {
-		s.WriteString(schemas.LocalizedString_Language, *v.Language)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.LocalizedString_Value, *v.Value)
-	}
-}
-func (v *LocalizedString) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LocalizedString, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LocalizedString_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.LocalizedString_Language, v.Language)
-		case schemas.LocalizedString_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.LocalizedString_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Geometry defined as an encoded corridor - an encoded polyline with a radius
@@ -1769,34 +823,6 @@ type PolylineCorridor struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PolylineCorridor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolylineCorridor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolylineCorridor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Polyline != nil {
-		s.WriteString(schemas.PolylineCorridor_Polyline, *v.Polyline)
-	}
-	if v.Radius != nil {
-		s.WriteInt32(schemas.PolylineCorridor_Radius, *v.Radius)
-	}
-}
-func (v *PolylineCorridor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolylineCorridor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolylineCorridor_Polyline:
-			v.Polyline = new(string)
-			return d.ReadString(schemas.PolylineCorridor_Polyline, v.Polyline)
-		case schemas.PolylineCorridor_Radius:
-			v.Radius = new(int32)
-			return d.ReadInt32(schemas.PolylineCorridor_Radius, v.Radius)
-		}
-		return nil
-	})
-}
-
 // Notices provide information around factors that may have influenced snapping in
 // a manner atypical to the standard use cases.
 type RoadSnapNotice struct {
@@ -1819,41 +845,6 @@ type RoadSnapNotice struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoadSnapNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RoadSnapNotice_Code, string(v.Code))
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.RoadSnapNotice_Title, *v.Title)
-	}
-	serializeRoadSnapTracePointIndexList(s, schemas.RoadSnapNotice_TracePointIndexes, v.TracePointIndexes)
-}
-func (v *RoadSnapNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RoadSnapNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RoadSnapNoticeCode(ev)
-			return nil
-		case schemas.RoadSnapNotice_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.RoadSnapNotice_Title, v.Title)
-		case schemas.RoadSnapNotice_TracePointIndexes:
-			return deserializeRoadSnapTracePointIndexList(d, schemas.RoadSnapNotice_TracePointIndexes, &v.TracePointIndexes)
-		}
-		return nil
-	})
-}
-
 // Interpolated geometry for the snapped route that is overlay-able onto a map.
 type RoadSnapSnappedGeometry struct {
 
@@ -1869,31 +860,6 @@ type RoadSnapSnappedGeometry struct {
 	Polyline *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoadSnapSnappedGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapSnappedGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapSnappedGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.RoadSnapSnappedGeometry_LineString, v.LineString)
-	if v.Polyline != nil {
-		s.WriteString(schemas.RoadSnapSnappedGeometry_Polyline, *v.Polyline)
-	}
-}
-func (v *RoadSnapSnappedGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapSnappedGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapSnappedGeometry_LineString:
-			return deserializeLineString(d, schemas.RoadSnapSnappedGeometry_LineString, &v.LineString)
-		case schemas.RoadSnapSnappedGeometry_Polyline:
-			v.Polyline = new(string)
-			return d.ReadString(schemas.RoadSnapSnappedGeometry_Polyline, v.Polyline)
-		}
-		return nil
-	})
 }
 
 // TracePoints snapped onto the road network.
@@ -1918,34 +884,6 @@ type RoadSnapSnappedTracePoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoadSnapSnappedTracePoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapSnappedTracePoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapSnappedTracePoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Confidence != nil {
-		s.WriteFloat64(schemas.RoadSnapSnappedTracePoint_Confidence, *v.Confidence)
-	}
-	serializePosition(s, schemas.RoadSnapSnappedTracePoint_OriginalPosition, v.OriginalPosition)
-	serializePosition(s, schemas.RoadSnapSnappedTracePoint_SnappedPosition, v.SnappedPosition)
-}
-func (v *RoadSnapSnappedTracePoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapSnappedTracePoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapSnappedTracePoint_Confidence:
-			v.Confidence = new(float64)
-			return d.ReadFloat64(schemas.RoadSnapSnappedTracePoint_Confidence, v.Confidence)
-		case schemas.RoadSnapSnappedTracePoint_OriginalPosition:
-			return deserializePosition(d, schemas.RoadSnapSnappedTracePoint_OriginalPosition, &v.OriginalPosition)
-		case schemas.RoadSnapSnappedTracePoint_SnappedPosition:
-			return deserializePosition(d, schemas.RoadSnapSnappedTracePoint_SnappedPosition, &v.SnappedPosition)
-		}
-		return nil
-	})
-}
-
 // TracePoint indices for which the provided notice code corresponds to.
 type RoadSnapTracePoint struct {
 
@@ -1968,41 +906,6 @@ type RoadSnapTracePoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoadSnapTracePoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapTracePoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapTracePoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RoadSnapTracePoint_Heading, v.Heading)
-	}
-	serializePosition(s, schemas.RoadSnapTracePoint_Position, v.Position)
-	if v.Speed != 0 {
-		s.WriteFloat64(schemas.RoadSnapTracePoint_Speed, v.Speed)
-	}
-	if v.Timestamp != nil {
-		s.WriteString(schemas.RoadSnapTracePoint_Timestamp, *v.Timestamp)
-	}
-}
-func (v *RoadSnapTracePoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapTracePoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapTracePoint_Heading:
-			return d.ReadFloat64(schemas.RoadSnapTracePoint_Heading, &v.Heading)
-		case schemas.RoadSnapTracePoint_Position:
-			return deserializePosition(d, schemas.RoadSnapTracePoint_Position, &v.Position)
-		case schemas.RoadSnapTracePoint_Speed:
-			return d.ReadFloat64(schemas.RoadSnapTracePoint_Speed, &v.Speed)
-		case schemas.RoadSnapTracePoint_Timestamp:
-			v.Timestamp = new(string)
-			return d.ReadString(schemas.RoadSnapTracePoint_Timestamp, v.Timestamp)
-		}
-		return nil
-	})
-}
-
 // Trailer options corresponding to the vehicle.
 type RoadSnapTrailerOptions struct {
 
@@ -2014,28 +917,6 @@ type RoadSnapTrailerOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoadSnapTrailerOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapTrailerOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapTrailerOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrailerCount != nil {
-		s.WriteInt32(schemas.RoadSnapTrailerOptions_TrailerCount, *v.TrailerCount)
-	}
-}
-func (v *RoadSnapTrailerOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapTrailerOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapTrailerOptions_TrailerCount:
-			v.TrailerCount = new(int32)
-			return d.ReadInt32(schemas.RoadSnapTrailerOptions_TrailerCount, v.TrailerCount)
-		}
-		return nil
-	})
-}
-
 // Travel mode related options for the provided travel mode.
 type RoadSnapTravelModeOptions struct {
 
@@ -2043,30 +924,6 @@ type RoadSnapTravelModeOptions struct {
 	Truck *RoadSnapTruckOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoadSnapTravelModeOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapTravelModeOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapTravelModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Truck != nil {
-		s.WriteStruct(schemas.RoadSnapTravelModeOptions_Truck)
-		v.Truck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RoadSnapTravelModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapTravelModeOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapTravelModeOptions_Truck:
-			v.Truck = &RoadSnapTruckOptions{}
-			return v.Truck.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Travel mode options when the provided travel mode is Truck .
@@ -2130,59 +987,6 @@ type RoadSnapTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoadSnapTruckOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoadSnapTruckOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoadSnapTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GrossWeight != 0 {
-		s.WriteInt64(schemas.RoadSnapTruckOptions_GrossWeight, v.GrossWeight)
-	}
-	serializeRoadSnapHazardousCargoTypeList(s, schemas.RoadSnapTruckOptions_HazardousCargos, v.HazardousCargos)
-	if v.Height != 0 {
-		s.WriteInt64(schemas.RoadSnapTruckOptions_Height, v.Height)
-	}
-	if v.Length != 0 {
-		s.WriteInt64(schemas.RoadSnapTruckOptions_Length, v.Length)
-	}
-	if v.Trailer != nil {
-		s.WriteStruct(schemas.RoadSnapTruckOptions_Trailer)
-		v.Trailer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.RoadSnapTruckOptions_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-	if v.Width != 0 {
-		s.WriteInt64(schemas.RoadSnapTruckOptions_Width, v.Width)
-	}
-}
-func (v *RoadSnapTruckOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoadSnapTruckOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoadSnapTruckOptions_GrossWeight:
-			return d.ReadInt64(schemas.RoadSnapTruckOptions_GrossWeight, &v.GrossWeight)
-		case schemas.RoadSnapTruckOptions_HazardousCargos:
-			return deserializeRoadSnapHazardousCargoTypeList(d, schemas.RoadSnapTruckOptions_HazardousCargos, &v.HazardousCargos)
-		case schemas.RoadSnapTruckOptions_Height:
-			return d.ReadInt64(schemas.RoadSnapTruckOptions_Height, &v.Height)
-		case schemas.RoadSnapTruckOptions_Length:
-			return d.ReadInt64(schemas.RoadSnapTruckOptions_Length, &v.Length)
-		case schemas.RoadSnapTruckOptions_Trailer:
-			v.Trailer = &RoadSnapTrailerOptions{}
-			return v.Trailer.Deserialize(d)
-		case schemas.RoadSnapTruckOptions_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.RoadSnapTruckOptions_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		case schemas.RoadSnapTruckOptions_Width:
-			return d.ReadInt64(schemas.RoadSnapTruckOptions_Width, &v.Width)
-		}
-		return nil
-	})
-}
-
 // The route.
 type Route struct {
 
@@ -2207,36 +1011,6 @@ type Route struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Route) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Route)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteLegList(s, schemas.Route_Legs, v.Legs)
-	serializeRouteMajorRoadLabelList(s, schemas.Route_MajorRoadLabels, v.MajorRoadLabels)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.Route_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Route) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Route, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Route_Legs:
-			return deserializeRouteLegList(d, schemas.Route_Legs, &v.Legs)
-		case schemas.Route_MajorRoadLabels:
-			return deserializeRouteMajorRoadLabelList(d, schemas.Route_MajorRoadLabels, &v.MajorRoadLabels)
-		case schemas.Route_Summary:
-			v.Summary = &RouteSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Details about the availability of accessibility features.
 type RouteAccessibilityAvailabilityDetails struct {
 
@@ -2246,32 +1020,6 @@ type RouteAccessibilityAvailabilityDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteAccessibilityAvailabilityDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAccessibilityAvailabilityDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAccessibilityAvailabilityDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Wheelchair != "" {
-		s.WriteString(schemas.RouteAccessibilityAvailabilityDetails_Wheelchair, string(v.Wheelchair))
-	}
-}
-func (v *RouteAccessibilityAvailabilityDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAccessibilityAvailabilityDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAccessibilityAvailabilityDetails_Wheelchair:
-			var ev string
-			if err := d.ReadString(schemas.RouteAccessibilityAvailabilityDetails_Wheelchair, &ev); err != nil {
-				return err
-			}
-			v.Wheelchair = RouteAccessibilityAvailability(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details of the access point.
 type RouteAccessPointDetails struct {
 
@@ -2279,30 +1027,6 @@ type RouteAccessPointDetails struct {
 	Accessibility *RouteAccessibilityAvailabilityDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteAccessPointDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAccessPointDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAccessPointDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accessibility != nil {
-		s.WriteStruct(schemas.RouteAccessPointDetails_Accessibility)
-		v.Accessibility.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteAccessPointDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAccessPointDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAccessPointDetails_Accessibility:
-			v.Accessibility = &RouteAccessibilityAvailabilityDetails{}
-			return v.Accessibility.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Features that are allowed while calculating a route.
@@ -2321,34 +1045,6 @@ type RouteAllowOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteAllowOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAllowOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAllowOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hot != nil {
-		s.WriteBool(schemas.RouteAllowOptions_Hot, *v.Hot)
-	}
-	if v.Hov != nil {
-		s.WriteBool(schemas.RouteAllowOptions_Hov, *v.Hov)
-	}
-}
-func (v *RouteAllowOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAllowOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAllowOptions_Hot:
-			v.Hot = new(bool)
-			return d.ReadBool(schemas.RouteAllowOptions_Hot, v.Hot)
-		case schemas.RouteAllowOptions_Hov:
-			v.Hov = new(bool)
-			return d.ReadBool(schemas.RouteAllowOptions_Hov, v.Hov)
-		}
-		return nil
-	})
-}
-
 // Required attribution to display.
 type RouteAttribution struct {
 
@@ -2361,40 +1057,6 @@ type RouteAttribution struct {
 	AttributionType RouteAttributionType
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteAttribution) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAttribution)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAttribution) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributionType != "" {
-		s.WriteString(schemas.RouteAttribution_AttributionType, string(v.AttributionType))
-	}
-	if v.WebLink != nil {
-		s.WriteStruct(schemas.RouteAttribution_WebLink)
-		v.WebLink.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteAttribution) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAttribution, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAttribution_AttributionType:
-			var ev string
-			if err := d.ReadString(schemas.RouteAttribution_AttributionType, &ev); err != nil {
-				return err
-			}
-			v.AttributionType = RouteAttributionType(ev)
-			return nil
-		case schemas.RouteAttribution_WebLink:
-			v.WebLink = &RouteWebLink{}
-			return v.WebLink.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Areas to be avoided.
@@ -2410,33 +1072,6 @@ type RouteAvoidanceArea struct {
 	Except []RouteAvoidanceAreaGeometry
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAvoidanceArea)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAvoidanceAreaGeometryList(s, schemas.RouteAvoidanceArea_Except, v.Except)
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.RouteAvoidanceArea_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteAvoidanceArea) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAvoidanceArea, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAvoidanceArea_Except:
-			return deserializeRouteAvoidanceAreaGeometryList(d, schemas.RouteAvoidanceArea_Except, &v.Except)
-		case schemas.RouteAvoidanceArea_Geometry:
-			v.Geometry = &RouteAvoidanceAreaGeometry{}
-			return v.Geometry.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Geometry of the area to be avoided.
@@ -2468,47 +1103,6 @@ type RouteAvoidanceAreaGeometry struct {
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAvoidanceAreaGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.RouteAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
-	if v.Corridor != nil {
-		s.WriteStruct(schemas.RouteAvoidanceAreaGeometry_Corridor)
-		v.Corridor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeLinearRings(s, schemas.RouteAvoidanceAreaGeometry_Polygon, v.Polygon)
-	if v.PolylineCorridor != nil {
-		s.WriteStruct(schemas.RouteAvoidanceAreaGeometry_PolylineCorridor)
-		v.PolylineCorridor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePolylineRingList(s, schemas.RouteAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
-}
-func (v *RouteAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAvoidanceAreaGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAvoidanceAreaGeometry_BoundingBox:
-			return deserializeBoundingBox(d, schemas.RouteAvoidanceAreaGeometry_BoundingBox, &v.BoundingBox)
-		case schemas.RouteAvoidanceAreaGeometry_Corridor:
-			v.Corridor = &Corridor{}
-			return v.Corridor.Deserialize(d)
-		case schemas.RouteAvoidanceAreaGeometry_Polygon:
-			return deserializeLinearRings(d, schemas.RouteAvoidanceAreaGeometry_Polygon, &v.Polygon)
-		case schemas.RouteAvoidanceAreaGeometry_PolylineCorridor:
-			v.PolylineCorridor = &PolylineCorridor{}
-			return v.PolylineCorridor.Deserialize(d)
-		case schemas.RouteAvoidanceAreaGeometry_PolylinePolygon:
-			return deserializePolylineRingList(d, schemas.RouteAvoidanceAreaGeometry_PolylinePolygon, &v.PolylinePolygon)
-		}
-		return nil
-	})
 }
 
 // Specifies options for areas to avoid when calculating the route. This is a
@@ -2588,85 +1182,6 @@ type RouteAvoidanceOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAvoidanceOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAvoidanceAreaList(s, schemas.RouteAvoidanceOptions_Areas, v.Areas)
-	if v.CarShuttleTrains != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
-	}
-	if v.ControlledAccessHighways != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_ControlledAccessHighways, *v.ControlledAccessHighways)
-	}
-	if v.DirtRoads != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_DirtRoads, *v.DirtRoads)
-	}
-	if v.Ferries != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_Ferries, *v.Ferries)
-	}
-	if v.SeasonalClosure != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_SeasonalClosure, *v.SeasonalClosure)
-	}
-	if v.TollRoads != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_TollRoads, *v.TollRoads)
-	}
-	if v.TollTransponders != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_TollTransponders, *v.TollTransponders)
-	}
-	serializeTruckRoadTypeList(s, schemas.RouteAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
-	if v.Tunnels != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_Tunnels, *v.Tunnels)
-	}
-	if v.UTurns != nil {
-		s.WriteBool(schemas.RouteAvoidanceOptions_UTurns, *v.UTurns)
-	}
-	serializeRouteAvoidanceZoneCategoryList(s, schemas.RouteAvoidanceOptions_ZoneCategories, v.ZoneCategories)
-}
-func (v *RouteAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAvoidanceOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAvoidanceOptions_Areas:
-			return deserializeRouteAvoidanceAreaList(d, schemas.RouteAvoidanceOptions_Areas, &v.Areas)
-		case schemas.RouteAvoidanceOptions_CarShuttleTrains:
-			v.CarShuttleTrains = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_CarShuttleTrains, v.CarShuttleTrains)
-		case schemas.RouteAvoidanceOptions_ControlledAccessHighways:
-			v.ControlledAccessHighways = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_ControlledAccessHighways, v.ControlledAccessHighways)
-		case schemas.RouteAvoidanceOptions_DirtRoads:
-			v.DirtRoads = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_DirtRoads, v.DirtRoads)
-		case schemas.RouteAvoidanceOptions_Ferries:
-			v.Ferries = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_Ferries, v.Ferries)
-		case schemas.RouteAvoidanceOptions_SeasonalClosure:
-			v.SeasonalClosure = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_SeasonalClosure, v.SeasonalClosure)
-		case schemas.RouteAvoidanceOptions_TollRoads:
-			v.TollRoads = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_TollRoads, v.TollRoads)
-		case schemas.RouteAvoidanceOptions_TollTransponders:
-			v.TollTransponders = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_TollTransponders, v.TollTransponders)
-		case schemas.RouteAvoidanceOptions_TruckRoadTypes:
-			return deserializeTruckRoadTypeList(d, schemas.RouteAvoidanceOptions_TruckRoadTypes, &v.TruckRoadTypes)
-		case schemas.RouteAvoidanceOptions_Tunnels:
-			v.Tunnels = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_Tunnels, v.Tunnels)
-		case schemas.RouteAvoidanceOptions_UTurns:
-			v.UTurns = new(bool)
-			return d.ReadBool(schemas.RouteAvoidanceOptions_UTurns, v.UTurns)
-		case schemas.RouteAvoidanceOptions_ZoneCategories:
-			return deserializeRouteAvoidanceZoneCategoryList(d, schemas.RouteAvoidanceOptions_ZoneCategories, &v.ZoneCategories)
-		}
-		return nil
-	})
-}
-
 //	Zone categories to be avoided. Not supported in ap-southeast-1 and
 //
 // ap-southeast-5 regions for [GrabMaps] customers.
@@ -2680,32 +1195,6 @@ type RouteAvoidanceZoneCategory struct {
 	Category RouteZoneCategory
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteAvoidanceZoneCategory) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteAvoidanceZoneCategory)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteAvoidanceZoneCategory) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.RouteAvoidanceZoneCategory_Category, string(v.Category))
-	}
-}
-func (v *RouteAvoidanceZoneCategory) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteAvoidanceZoneCategory, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteAvoidanceZoneCategory_Category:
-			var ev string
-			if err := d.ReadString(schemas.RouteAvoidanceZoneCategory_Category, &ev); err != nil {
-				return err
-			}
-			v.Category = RouteZoneCategory(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Travel mode options when the provided travel mode is Car . For [GrabMaps] customers,
@@ -2743,52 +1232,6 @@ type RouteCarOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteCarOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteCarOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteCarOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngineType != "" {
-		s.WriteString(schemas.RouteCarOptions_EngineType, string(v.EngineType))
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteCarOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteCarOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteCarOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *RouteCarOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteCarOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteCarOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.RouteCarOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = RouteEngineType(ev)
-			return nil
-		case schemas.RouteCarOptions_LicensePlate:
-			v.LicensePlate = &RouteVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteCarOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteCarOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteCarOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteCarOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // Details about the EV charge at the current step.
 type RouteChargeStepDetails struct {
 
@@ -2806,40 +1249,6 @@ type RouteChargeStepDetails struct {
 	DesiredCharge *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteChargeStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteChargeStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteChargeStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArrivalCharge != nil {
-		s.WriteFloat64(schemas.RouteChargeStepDetails_ArrivalCharge, *v.ArrivalCharge)
-	}
-	if v.ConsumablePower != nil {
-		s.WriteFloat64(schemas.RouteChargeStepDetails_ConsumablePower, *v.ConsumablePower)
-	}
-	if v.DesiredCharge != nil {
-		s.WriteFloat64(schemas.RouteChargeStepDetails_DesiredCharge, *v.DesiredCharge)
-	}
-}
-func (v *RouteChargeStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteChargeStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteChargeStepDetails_ArrivalCharge:
-			v.ArrivalCharge = new(float64)
-			return d.ReadFloat64(schemas.RouteChargeStepDetails_ArrivalCharge, v.ArrivalCharge)
-		case schemas.RouteChargeStepDetails_ConsumablePower:
-			v.ConsumablePower = new(float64)
-			return d.ReadFloat64(schemas.RouteChargeStepDetails_ConsumablePower, v.ConsumablePower)
-		case schemas.RouteChargeStepDetails_DesiredCharge:
-			v.DesiredCharge = new(float64)
-			return d.ReadFloat64(schemas.RouteChargeStepDetails_DesiredCharge, v.DesiredCharge)
-		}
-		return nil
-	})
 }
 
 // Details related to the continue highway step.
@@ -2862,50 +1271,6 @@ type RouteContinueHighwayStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteContinueHighwayStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteContinueHighwayStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteContinueHighwayStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteContinueHighwayStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteContinueHighwayStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteContinueHighwayStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteContinueHighwayStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteContinueHighwayStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteContinueHighwayStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteContinueHighwayStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteContinueHighwayStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteContinueHighwayStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteContinueHighwayStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteContinueHighwayStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteContinueHighwayStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteContinueHighwayStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteContinueHighwayStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details related to the continue step.
 type RouteContinueStepDetails struct {
 
@@ -2915,25 +1280,6 @@ type RouteContinueStepDetails struct {
 	Intersection []LocalizedString
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteContinueStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteContinueStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteContinueStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteContinueStepDetails_Intersection, v.Intersection)
-}
-func (v *RouteContinueStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteContinueStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteContinueStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteContinueStepDetails_Intersection, &v.Intersection)
-		}
-		return nil
-	})
 }
 
 // Options related to the destination.
@@ -2965,59 +1311,6 @@ type RouteDestinationOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteDestinationOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteDestinationOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteDestinationOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.RouteDestinationOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.AvoidUTurns != nil {
-		s.WriteBool(schemas.RouteDestinationOptions_AvoidUTurns, *v.AvoidUTurns)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RouteDestinationOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.RouteDestinationOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.RouteDestinationOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StopDuration != 0 {
-		s.WriteInt64(schemas.RouteDestinationOptions_StopDuration, v.StopDuration)
-	}
-}
-func (v *RouteDestinationOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteDestinationOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteDestinationOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.RouteDestinationOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.RouteDestinationOptions_AvoidUTurns:
-			v.AvoidUTurns = new(bool)
-			return d.ReadBool(schemas.RouteDestinationOptions_AvoidUTurns, v.AvoidUTurns)
-		case schemas.RouteDestinationOptions_Heading:
-			return d.ReadFloat64(schemas.RouteDestinationOptions_Heading, &v.Heading)
-		case schemas.RouteDestinationOptions_Matching:
-			v.Matching = &RouteMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.RouteDestinationOptions_SideOfStreet:
-			v.SideOfStreet = &RouteSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		case schemas.RouteDestinationOptions_StopDuration:
-			return d.ReadInt64(schemas.RouteDestinationOptions_StopDuration, &v.StopDuration)
-		}
-		return nil
-	})
-}
-
 // Driver related options.
 type RouteDriverOptions struct {
 
@@ -3025,25 +1318,6 @@ type RouteDriverOptions struct {
 	Schedule []RouteDriverScheduleInterval
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteDriverOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteDriverOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteDriverOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteDriverScheduleIntervalList(s, schemas.RouteDriverOptions_Schedule, v.Schedule)
-}
-func (v *RouteDriverOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteDriverOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteDriverOptions_Schedule:
-			return deserializeRouteDriverScheduleIntervalList(d, schemas.RouteDriverOptions_Schedule, &v.Schedule)
-		}
-		return nil
-	})
 }
 
 // Interval of the driver work-rest schedule. Stops are added to fulfil the
@@ -3067,28 +1341,6 @@ type RouteDriverScheduleInterval struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteDriverScheduleInterval) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteDriverScheduleInterval)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteDriverScheduleInterval) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteDriverScheduleInterval_DriveDuration, v.DriveDuration)
-	s.WriteInt64(schemas.RouteDriverScheduleInterval_RestDuration, v.RestDuration)
-}
-func (v *RouteDriverScheduleInterval) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteDriverScheduleInterval, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteDriverScheduleInterval_DriveDuration:
-			return d.ReadInt64(schemas.RouteDriverScheduleInterval_DriveDuration, &v.DriveDuration)
-		case schemas.RouteDriverScheduleInterval_RestDuration:
-			return d.ReadInt64(schemas.RouteDriverScheduleInterval_RestDuration, &v.RestDuration)
-		}
-		return nil
-	})
-}
-
 // Type of the emission.
 //
 // Valid values: Euro1, Euro2, Euro3, Euro4, Euro5, Euro6, EuroEev
@@ -3105,34 +1357,6 @@ type RouteEmissionType struct {
 	Co2EmissionClass *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteEmissionType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteEmissionType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteEmissionType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Co2EmissionClass != nil {
-		s.WriteString(schemas.RouteEmissionType_Co2EmissionClass, *v.Co2EmissionClass)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.RouteEmissionType_Type, *v.Type)
-	}
-}
-func (v *RouteEmissionType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteEmissionType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteEmissionType_Co2EmissionClass:
-			v.Co2EmissionClass = new(string)
-			return d.ReadString(schemas.RouteEmissionType_Co2EmissionClass, v.Co2EmissionClass)
-		case schemas.RouteEmissionType_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.RouteEmissionType_Type, v.Type)
-		}
-		return nil
-	})
 }
 
 // Details related to the enter highway step.
@@ -3155,50 +1379,6 @@ type RouteEnterHighwayStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteEnterHighwayStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteEnterHighwayStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteEnterHighwayStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteEnterHighwayStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteEnterHighwayStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteEnterHighwayStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteEnterHighwayStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteEnterHighwayStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteEnterHighwayStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteEnterHighwayStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteEnterHighwayStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteEnterHighwayStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteEnterHighwayStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteEnterHighwayStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteEnterHighwayStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteEnterHighwayStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteEnterHighwayStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies strict exclusion options for the route calculation. This setting
 // mandates that the router will avoid any routes that include the specified
 // options, rather than merely attempting to minimize them.
@@ -3211,25 +1391,6 @@ type RouteExclusionOptions struct {
 	Countries []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteExclusionOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteExclusionOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.RouteExclusionOptions_Countries, v.Countries)
-}
-func (v *RouteExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteExclusionOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteExclusionOptions_Countries:
-			return deserializeCountryCodeList(d, schemas.RouteExclusionOptions_Countries, &v.Countries)
-		}
-		return nil
-	})
 }
 
 // Details related to the exit step.
@@ -3255,56 +1416,6 @@ type RouteExitStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteExitStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteExitStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteExitStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteExitStepDetails_Intersection, v.Intersection)
-	if v.RelativeExit != nil {
-		s.WriteInt32(schemas.RouteExitStepDetails_RelativeExit, *v.RelativeExit)
-	}
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteExitStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteExitStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteExitStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteExitStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteExitStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteExitStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteExitStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteExitStepDetails_RelativeExit:
-			v.RelativeExit = new(int32)
-			return d.ReadInt32(schemas.RouteExitStepDetails_RelativeExit, v.RelativeExit)
-		case schemas.RouteExitStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteExitStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteExitStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteExitStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteExitStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteExitStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Steps of a leg that must be performed after the travel portion of the leg.
 type RouteFerryAfterTravelStep struct {
 
@@ -3328,41 +1439,6 @@ type RouteFerryAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerryAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteFerryAfterTravelStep_Duration, v.Duration)
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteFerryAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteFerryAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteFerryAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryAfterTravelStep_Duration:
-			return d.ReadInt64(schemas.RouteFerryAfterTravelStep_Duration, &v.Duration)
-		case schemas.RouteFerryAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteFerryAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RouteFerryAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteFerryAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteFerryAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the arrival for the leg.
 type RouteFerryArrival struct {
 
@@ -3375,36 +1451,6 @@ type RouteFerryArrival struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteFerryArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteFerryArrival_Time, *v.Time)
-	}
-}
-func (v *RouteFerryArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryArrival_Place:
-			v.Place = &RouteFerryPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteFerryArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteFerryArrival_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that must be performed before the travel portion of the leg.
@@ -3430,41 +1476,6 @@ type RouteFerryBeforeTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerryBeforeTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryBeforeTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryBeforeTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteFerryBeforeTravelStep_Duration, v.Duration)
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteFerryBeforeTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteFerryBeforeTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteFerryBeforeTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryBeforeTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryBeforeTravelStep_Duration:
-			return d.ReadInt64(schemas.RouteFerryBeforeTravelStep_Duration, &v.Duration)
-		case schemas.RouteFerryBeforeTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteFerryBeforeTravelStep_Instruction, v.Instruction)
-		case schemas.RouteFerryBeforeTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteFerryBeforeTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteFerryBeforeTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the departure for the leg.
 type RouteFerryDeparture struct {
 
@@ -3477,36 +1488,6 @@ type RouteFerryDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteFerryDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteFerryDeparture_Time, *v.Time)
-	}
-}
-func (v *RouteFerryDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryDeparture_Place:
-			v.Place = &RouteFerryPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteFerryDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteFerryDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 //	FerryLegDetails is populated when the Leg type is Ferry, and provides
@@ -3565,70 +1546,6 @@ type RouteFerryLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerryLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFerryAfterTravelStepList(s, schemas.RouteFerryLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RouteFerryLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteFerryBeforeTravelStepList(s, schemas.RouteFerryLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteFerryLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteFerryNoticeList(s, schemas.RouteFerryLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteFerryLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	if v.RouteName != nil {
-		s.WriteString(schemas.RouteFerryLegDetails_RouteName, *v.RouteName)
-	}
-	serializeRouteFerrySpanList(s, schemas.RouteFerryLegDetails_Spans, v.Spans)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RouteFerryLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteFerryTravelStepList(s, schemas.RouteFerryLegDetails_TravelSteps, v.TravelSteps)
-}
-func (v *RouteFerryLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryLegDetails_AfterTravelSteps:
-			return deserializeRouteFerryAfterTravelStepList(d, schemas.RouteFerryLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RouteFerryLegDetails_Arrival:
-			v.Arrival = &RouteFerryArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RouteFerryLegDetails_BeforeTravelSteps:
-			return deserializeRouteFerryBeforeTravelStepList(d, schemas.RouteFerryLegDetails_BeforeTravelSteps, &v.BeforeTravelSteps)
-		case schemas.RouteFerryLegDetails_Departure:
-			v.Departure = &RouteFerryDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteFerryLegDetails_Notices:
-			return deserializeRouteFerryNoticeList(d, schemas.RouteFerryLegDetails_Notices, &v.Notices)
-		case schemas.RouteFerryLegDetails_PassThroughWaypoints:
-			return deserializeRoutePassThroughWaypointList(d, schemas.RouteFerryLegDetails_PassThroughWaypoints, &v.PassThroughWaypoints)
-		case schemas.RouteFerryLegDetails_RouteName:
-			v.RouteName = new(string)
-			return d.ReadString(schemas.RouteFerryLegDetails_RouteName, v.RouteName)
-		case schemas.RouteFerryLegDetails_Spans:
-			return deserializeRouteFerrySpanList(d, schemas.RouteFerryLegDetails_Spans, &v.Spans)
-		case schemas.RouteFerryLegDetails_Summary:
-			v.Summary = &RouteFerrySummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RouteFerryLegDetails_TravelSteps:
-			return deserializeRouteFerryTravelStepList(d, schemas.RouteFerryLegDetails_TravelSteps, &v.TravelSteps)
-		}
-		return nil
-	})
-}
-
 // Notices are additional information returned that indicate issues that occurred
 // during route calculation.
 type RouteFerryNotice struct {
@@ -3643,42 +1560,6 @@ type RouteFerryNotice struct {
 	Impact RouteNoticeImpact
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RouteFerryNotice_Code, string(v.Code))
-	}
-	if v.Impact != "" {
-		s.WriteString(schemas.RouteFerryNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RouteFerryNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RouteFerryNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RouteFerryNoticeCode(ev)
-			return nil
-		case schemas.RouteFerryNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RouteFerryNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary including duration and distance for the entire leg.
@@ -3701,28 +1582,6 @@ type RouteFerryOverviewSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerryOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteFerryOverviewSummary_Distance, v.Distance)
-	s.WriteInt64(schemas.RouteFerryOverviewSummary_Duration, v.Duration)
-}
-func (v *RouteFerryOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryOverviewSummary_Distance:
-			return d.ReadInt64(schemas.RouteFerryOverviewSummary_Distance, &v.Distance)
-		case schemas.RouteFerryOverviewSummary_Duration:
-			return d.ReadInt64(schemas.RouteFerryOverviewSummary_Duration, &v.Duration)
-		}
-		return nil
-	})
-}
-
 // Position provided in the request.
 type RouteFerryPlace struct {
 
@@ -3741,40 +1600,6 @@ type RouteFerryPlace struct {
 	WaypointIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteFerryPlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteFerryPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteFerryPlace_Position, v.Position)
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RouteFerryPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RouteFerryPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryPlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteFerryPlace_Name, v.Name)
-		case schemas.RouteFerryPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RouteFerryPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RouteFerryPlace_Position:
-			return deserializePosition23(d, schemas.RouteFerryPlace_Position, &v.Position)
-		case schemas.RouteFerryPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RouteFerryPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
 }
 
 // Span computed for the requested SpanAdditionalFeatures.
@@ -3808,53 +1633,6 @@ type RouteFerrySpan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerrySpan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerrySpan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerrySpan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Country != nil {
-		s.WriteString(schemas.RouteFerrySpan_Country, *v.Country)
-	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteFerrySpan_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerrySpan_Duration, v.Duration)
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteFerrySpan_GeometryOffset, *v.GeometryOffset)
-	}
-	serializeLocalizedStringList(s, schemas.RouteFerrySpan_Names, v.Names)
-	if v.Region != nil {
-		s.WriteString(schemas.RouteFerrySpan_Region, *v.Region)
-	}
-}
-func (v *RouteFerrySpan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerrySpan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerrySpan_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.RouteFerrySpan_Country, v.Country)
-		case schemas.RouteFerrySpan_Distance:
-			return d.ReadInt64(schemas.RouteFerrySpan_Distance, &v.Distance)
-		case schemas.RouteFerrySpan_Duration:
-			return d.ReadInt64(schemas.RouteFerrySpan_Duration, &v.Duration)
-		case schemas.RouteFerrySpan_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteFerrySpan_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteFerrySpan_Names:
-			return deserializeLocalizedStringList(d, schemas.RouteFerrySpan_Names, &v.Names)
-		case schemas.RouteFerrySpan_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.RouteFerrySpan_Region, v.Region)
-		}
-		return nil
-	})
-}
-
 // Summarized details for the leg including travel steps only. The Distance for
 // the travel only portion of the journey is the same as the Distance within the
 // Overview summary.
@@ -3871,38 +1649,6 @@ type RouteFerrySummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteFerrySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerrySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerrySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RouteFerrySummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RouteFerrySummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteFerrySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerrySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerrySummary_Overview:
-			v.Overview = &RouteFerryOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RouteFerrySummary_TravelOnly:
-			v.TravelOnly = &RouteFerryTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summarized details for the leg including travel steps only. The Distance for
 // the travel only portion of the journey is the same as the Distance within the
 // Overview summary.
@@ -3917,25 +1663,6 @@ type RouteFerryTravelOnlySummary struct {
 	Duration int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteFerryTravelOnlySummary_Duration, v.Duration)
-}
-func (v *RouteFerryTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryTravelOnlySummary_Duration:
-			return d.ReadInt64(schemas.RouteFerryTravelOnlySummary_Duration, &v.Duration)
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that must be performed during the travel portion of the leg.
@@ -3965,52 +1692,6 @@ type RouteFerryTravelStep struct {
 	Instruction *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteFerryTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteFerryTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteFerryTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteFerryTravelStep_Distance, v.Distance)
-	}
-	s.WriteInt64(schemas.RouteFerryTravelStep_Duration, v.Duration)
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteFerryTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteFerryTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteFerryTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteFerryTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteFerryTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteFerryTravelStep_Distance:
-			return d.ReadInt64(schemas.RouteFerryTravelStep_Distance, &v.Distance)
-		case schemas.RouteFerryTravelStep_Duration:
-			return d.ReadInt64(schemas.RouteFerryTravelStep_Duration, &v.Duration)
-		case schemas.RouteFerryTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteFerryTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteFerryTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteFerryTravelStep_Instruction, v.Instruction)
-		case schemas.RouteFerryTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteFerryTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteFerryTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Options related to intermodal routing.
@@ -4044,71 +1725,6 @@ type RouteIntermodalOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteIntermodalOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAccessibilityAttributeList(s, schemas.RouteIntermodalOptions_AccessibilityAttributes, v.AccessibilityAttributes)
-	if v.MaxTransfers != nil {
-		s.WriteInt32(schemas.RouteIntermodalOptions_MaxTransfers, *v.MaxTransfers)
-	}
-	if v.Pedestrian != nil {
-		s.WriteStruct(schemas.RouteIntermodalOptions_Pedestrian)
-		v.Pedestrian.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Rental != nil {
-		s.WriteStruct(schemas.RouteIntermodalOptions_Rental)
-		v.Rental.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Taxi != nil {
-		s.WriteStruct(schemas.RouteIntermodalOptions_Taxi)
-		v.Taxi.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transit != nil {
-		s.WriteStruct(schemas.RouteIntermodalOptions_Transit)
-		v.Transit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Vehicle != nil {
-		s.WriteStruct(schemas.RouteIntermodalOptions_Vehicle)
-		v.Vehicle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteIntermodalOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalOptions_AccessibilityAttributes:
-			return deserializeRouteAccessibilityAttributeList(d, schemas.RouteIntermodalOptions_AccessibilityAttributes, &v.AccessibilityAttributes)
-		case schemas.RouteIntermodalOptions_MaxTransfers:
-			v.MaxTransfers = new(int32)
-			return d.ReadInt32(schemas.RouteIntermodalOptions_MaxTransfers, v.MaxTransfers)
-		case schemas.RouteIntermodalOptions_Pedestrian:
-			v.Pedestrian = &RouteIntermodalPedestrianOptions{}
-			return v.Pedestrian.Deserialize(d)
-		case schemas.RouteIntermodalOptions_Rental:
-			v.Rental = &RouteIntermodalRentalOptions{}
-			return v.Rental.Deserialize(d)
-		case schemas.RouteIntermodalOptions_Taxi:
-			v.Taxi = &RouteIntermodalTaxiOptions{}
-			return v.Taxi.Deserialize(d)
-		case schemas.RouteIntermodalOptions_Transit:
-			v.Transit = &RouteIntermodalTransitOptions{}
-			return v.Transit.Deserialize(d)
-		case schemas.RouteIntermodalOptions_Vehicle:
-			v.Vehicle = &RouteIntermodalVehicleOptions{}
-			return v.Vehicle.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Options for the pedestrian leg of the intermodal route.
 type RouteIntermodalPedestrianOptions struct {
 
@@ -4123,34 +1739,6 @@ type RouteIntermodalPedestrianOptions struct {
 	Speed *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteIntermodalPedestrianOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalPedestrianOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalPedestrianOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxDistance != nil {
-		s.WriteInt64(schemas.RouteIntermodalPedestrianOptions_MaxDistance, *v.MaxDistance)
-	}
-	if v.Speed != nil {
-		s.WriteFloat64(schemas.RouteIntermodalPedestrianOptions_Speed, *v.Speed)
-	}
-}
-func (v *RouteIntermodalPedestrianOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalPedestrianOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalPedestrianOptions_MaxDistance:
-			v.MaxDistance = new(int64)
-			return d.ReadInt64(schemas.RouteIntermodalPedestrianOptions_MaxDistance, v.MaxDistance)
-		case schemas.RouteIntermodalPedestrianOptions_Speed:
-			v.Speed = new(float64)
-			return d.ReadFloat64(schemas.RouteIntermodalPedestrianOptions_Speed, v.Speed)
-		}
-		return nil
-	})
 }
 
 // Options for the rental leg of the intermodal route.
@@ -4180,31 +1768,6 @@ type RouteIntermodalRentalOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteIntermodalRentalOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalRentalOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalRentalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalRentalOptions_EnabledFor, v.EnabledFor)
-	serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_ExcludedModes, v.ExcludedModes)
-}
-func (v *RouteIntermodalRentalOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalRentalOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalRentalOptions_AllowedModes:
-			return deserializeRouteRentalModeList(d, schemas.RouteIntermodalRentalOptions_AllowedModes, &v.AllowedModes)
-		case schemas.RouteIntermodalRentalOptions_EnabledFor:
-			return deserializeRouteIntermodalEnabledLegsList(d, schemas.RouteIntermodalRentalOptions_EnabledFor, &v.EnabledFor)
-		case schemas.RouteIntermodalRentalOptions_ExcludedModes:
-			return deserializeRouteRentalModeList(d, schemas.RouteIntermodalRentalOptions_ExcludedModes, &v.ExcludedModes)
-		}
-		return nil
-	})
-}
-
 // Options for the taxi leg of the intermodal route.
 type RouteIntermodalTaxiOptions struct {
 
@@ -4230,31 +1793,6 @@ type RouteIntermodalTaxiOptions struct {
 	ExcludedModes []RouteTaxiMode
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteIntermodalTaxiOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalTaxiOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalTaxiOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTaxiOptions_EnabledFor, v.EnabledFor)
-	serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_ExcludedModes, v.ExcludedModes)
-}
-func (v *RouteIntermodalTaxiOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalTaxiOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalTaxiOptions_AllowedModes:
-			return deserializeRouteTaxiModeList(d, schemas.RouteIntermodalTaxiOptions_AllowedModes, &v.AllowedModes)
-		case schemas.RouteIntermodalTaxiOptions_EnabledFor:
-			return deserializeRouteIntermodalEnabledLegsList(d, schemas.RouteIntermodalTaxiOptions_EnabledFor, &v.EnabledFor)
-		case schemas.RouteIntermodalTaxiOptions_ExcludedModes:
-			return deserializeRouteTaxiModeList(d, schemas.RouteIntermodalTaxiOptions_ExcludedModes, &v.ExcludedModes)
-		}
-		return nil
-	})
 }
 
 // Options for the transit leg of the intermodal route.
@@ -4284,31 +1822,6 @@ type RouteIntermodalTransitOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteIntermodalTransitOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalTransitOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalTransitOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTransitOptions_EnabledFor, v.EnabledFor)
-	serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_ExcludedModes, v.ExcludedModes)
-}
-func (v *RouteIntermodalTransitOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalTransitOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalTransitOptions_AllowedModes:
-			return deserializeRouteTransitModeList(d, schemas.RouteIntermodalTransitOptions_AllowedModes, &v.AllowedModes)
-		case schemas.RouteIntermodalTransitOptions_EnabledFor:
-			return deserializeRouteIntermodalEnabledLegsList(d, schemas.RouteIntermodalTransitOptions_EnabledFor, &v.EnabledFor)
-		case schemas.RouteIntermodalTransitOptions_ExcludedModes:
-			return deserializeRouteTransitModeList(d, schemas.RouteIntermodalTransitOptions_ExcludedModes, &v.ExcludedModes)
-		}
-		return nil
-	})
-}
-
 // Options for the vehicle leg of the intermodal route.
 type RouteIntermodalVehicleOptions struct {
 
@@ -4336,31 +1849,6 @@ type RouteIntermodalVehicleOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteIntermodalVehicleOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteIntermodalVehicleOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteIntermodalVehicleOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalVehicleOptions_EnabledFor, v.EnabledFor)
-	serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_ExcludedModes, v.ExcludedModes)
-}
-func (v *RouteIntermodalVehicleOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteIntermodalVehicleOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteIntermodalVehicleOptions_AllowedModes:
-			return deserializeRouteVehicleModeList(d, schemas.RouteIntermodalVehicleOptions_AllowedModes, &v.AllowedModes)
-		case schemas.RouteIntermodalVehicleOptions_EnabledFor:
-			return deserializeRouteIntermodalEnabledLegsList(d, schemas.RouteIntermodalVehicleOptions_EnabledFor, &v.EnabledFor)
-		case schemas.RouteIntermodalVehicleOptions_ExcludedModes:
-			return deserializeRouteVehicleModeList(d, schemas.RouteIntermodalVehicleOptions_ExcludedModes, &v.ExcludedModes)
-		}
-		return nil
-	})
-}
-
 // Details that are specific to a Keep step.
 type RouteKeepStepDetails struct {
 
@@ -4379,50 +1867,6 @@ type RouteKeepStepDetails struct {
 	TurnIntensity RouteTurnIntensity
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteKeepStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteKeepStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteKeepStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteKeepStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteKeepStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteKeepStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteKeepStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteKeepStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteKeepStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteKeepStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteKeepStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteKeepStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteKeepStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteKeepStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteKeepStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteKeepStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteKeepStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A leg is a section of a route from one waypoint to the next. A leg could be of
@@ -4489,104 +1933,6 @@ type RouteLeg struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteLeg) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteLeg)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteLeg) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FerryLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_FerryLegDetails)
-		v.FerryLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.RouteLeg_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.RouteLeg_Language, *v.Language)
-	}
-	if v.PedestrianLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_PedestrianLegDetails)
-		v.PedestrianLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RentalLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_RentalLegDetails)
-		v.RentalLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaxiLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_TaxiLegDetails)
-		v.TaxiLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TransitLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_TransitLegDetails)
-		v.TransitLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelMode != "" {
-		s.WriteString(schemas.RouteLeg_TravelMode, string(v.TravelMode))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteLeg_Type, string(v.Type))
-	}
-	if v.VehicleLegDetails != nil {
-		s.WriteStruct(schemas.RouteLeg_VehicleLegDetails)
-		v.VehicleLegDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteLeg) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteLeg, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteLeg_FerryLegDetails:
-			v.FerryLegDetails = &RouteFerryLegDetails{}
-			return v.FerryLegDetails.Deserialize(d)
-		case schemas.RouteLeg_Geometry:
-			v.Geometry = &RouteLegGeometry{}
-			return v.Geometry.Deserialize(d)
-		case schemas.RouteLeg_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.RouteLeg_Language, v.Language)
-		case schemas.RouteLeg_PedestrianLegDetails:
-			v.PedestrianLegDetails = &RoutePedestrianLegDetails{}
-			return v.PedestrianLegDetails.Deserialize(d)
-		case schemas.RouteLeg_RentalLegDetails:
-			v.RentalLegDetails = &RouteRentalLegDetails{}
-			return v.RentalLegDetails.Deserialize(d)
-		case schemas.RouteLeg_TaxiLegDetails:
-			v.TaxiLegDetails = &RouteTaxiLegDetails{}
-			return v.TaxiLegDetails.Deserialize(d)
-		case schemas.RouteLeg_TransitLegDetails:
-			v.TransitLegDetails = &RouteTransitLegDetails{}
-			return v.TransitLegDetails.Deserialize(d)
-		case schemas.RouteLeg_TravelMode:
-			var ev string
-			if err := d.ReadString(schemas.RouteLeg_TravelMode, &ev); err != nil {
-				return err
-			}
-			v.TravelMode = RouteLegTravelMode(ev)
-			return nil
-		case schemas.RouteLeg_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteLeg_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteLegType(ev)
-			return nil
-		case schemas.RouteLeg_VehicleLegDetails:
-			v.VehicleLegDetails = &RouteVehicleLegDetails{}
-			return v.VehicleLegDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The returned Route leg geometry.
 type RouteLegGeometry struct {
 
@@ -4604,31 +1950,6 @@ type RouteLegGeometry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteLegGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteLegGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteLegGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.RouteLegGeometry_LineString, v.LineString)
-	if v.Polyline != nil {
-		s.WriteString(schemas.RouteLegGeometry_Polyline, *v.Polyline)
-	}
-}
-func (v *RouteLegGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteLegGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteLegGeometry_LineString:
-			return deserializeLineString(d, schemas.RouteLegGeometry_LineString, &v.LineString)
-		case schemas.RouteLegGeometry_Polyline:
-			v.Polyline = new(string)
-			return d.ReadString(schemas.RouteLegGeometry_Polyline, v.Polyline)
-		}
-		return nil
-	})
-}
-
 // Important labels including names and route numbers that differentiate the
 // current route from the alternatives presented.
 type RouteMajorRoadLabel struct {
@@ -4640,38 +1961,6 @@ type RouteMajorRoadLabel struct {
 	RouteNumber *RouteNumber
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMajorRoadLabel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMajorRoadLabel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMajorRoadLabel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RoadName != nil {
-		s.WriteStruct(schemas.RouteMajorRoadLabel_RoadName)
-		v.RoadName.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RouteNumber != nil {
-		s.WriteStruct(schemas.RouteMajorRoadLabel_RouteNumber)
-		v.RouteNumber.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteMajorRoadLabel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMajorRoadLabel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMajorRoadLabel_RoadName:
-			v.RoadName = &LocalizedString{}
-			return v.RoadName.Deserialize(d)
-		case schemas.RouteMajorRoadLabel_RouteNumber:
-			v.RouteNumber = &RouteNumber{}
-			return v.RouteNumber.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Options related to route matching.
@@ -4701,48 +1990,6 @@ type RouteMatchingOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatchingOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatchingOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatchingOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NameHint != nil {
-		s.WriteString(schemas.RouteMatchingOptions_NameHint, *v.NameHint)
-	}
-	if v.OnRoadThreshold != 0 {
-		s.WriteInt64(schemas.RouteMatchingOptions_OnRoadThreshold, v.OnRoadThreshold)
-	}
-	if v.Radius != 0 {
-		s.WriteInt64(schemas.RouteMatchingOptions_Radius, v.Radius)
-	}
-	if v.Strategy != "" {
-		s.WriteString(schemas.RouteMatchingOptions_Strategy, string(v.Strategy))
-	}
-}
-func (v *RouteMatchingOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatchingOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatchingOptions_NameHint:
-			v.NameHint = new(string)
-			return d.ReadString(schemas.RouteMatchingOptions_NameHint, v.NameHint)
-		case schemas.RouteMatchingOptions_OnRoadThreshold:
-			return d.ReadInt64(schemas.RouteMatchingOptions_OnRoadThreshold, &v.OnRoadThreshold)
-		case schemas.RouteMatchingOptions_Radius:
-			return d.ReadInt64(schemas.RouteMatchingOptions_Radius, &v.Radius)
-		case schemas.RouteMatchingOptions_Strategy:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatchingOptions_Strategy, &ev); err != nil {
-				return err
-			}
-			v.Strategy = MatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Allow Options related to the route matrix.
 type RouteMatrixAllowOptions struct {
 
@@ -4757,34 +2004,6 @@ type RouteMatrixAllowOptions struct {
 	Hov *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixAllowOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAllowOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAllowOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hot != nil {
-		s.WriteBool(schemas.RouteMatrixAllowOptions_Hot, *v.Hot)
-	}
-	if v.Hov != nil {
-		s.WriteBool(schemas.RouteMatrixAllowOptions_Hov, *v.Hov)
-	}
-}
-func (v *RouteMatrixAllowOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAllowOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAllowOptions_Hot:
-			v.Hot = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAllowOptions_Hot, v.Hot)
-		case schemas.RouteMatrixAllowOptions_Hov:
-			v.Hov = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAllowOptions_Hov, v.Hov)
-		}
-		return nil
-	})
 }
 
 // AutoCircle requests the route matrix service to define a Circle boundary that
@@ -4814,32 +2033,6 @@ type RouteMatrixAutoCircle struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixAutoCircle) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAutoCircle)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAutoCircle) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Margin != 0 {
-		s.WriteInt64(schemas.RouteMatrixAutoCircle_Margin, v.Margin)
-	}
-	if v.MaxRadius != 0 {
-		s.WriteInt64(schemas.RouteMatrixAutoCircle_MaxRadius, v.MaxRadius)
-	}
-}
-func (v *RouteMatrixAutoCircle) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAutoCircle, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAutoCircle_Margin:
-			return d.ReadInt64(schemas.RouteMatrixAutoCircle_Margin, &v.Margin)
-		case schemas.RouteMatrixAutoCircle_MaxRadius:
-			return d.ReadInt64(schemas.RouteMatrixAutoCircle_MaxRadius, &v.MaxRadius)
-		}
-		return nil
-	})
-}
-
 // Area to be avoided.
 type RouteMatrixAvoidanceArea struct {
 
@@ -4849,30 +2042,6 @@ type RouteMatrixAvoidanceArea struct {
 	Geometry *RouteMatrixAvoidanceAreaGeometry
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAvoidanceArea)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.RouteMatrixAvoidanceArea_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteMatrixAvoidanceArea) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceArea, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAvoidanceArea_Geometry:
-			v.Geometry = &RouteMatrixAvoidanceAreaGeometry{}
-			return v.Geometry.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Geometry of the area to be avoided.
@@ -4896,31 +2065,6 @@ type RouteMatrixAvoidanceAreaGeometry struct {
 	PolylinePolygon []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAvoidanceAreaGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.RouteMatrixAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
-	serializeLinearRings(s, schemas.RouteMatrixAvoidanceAreaGeometry_Polygon, v.Polygon)
-	serializePolylineRingList(s, schemas.RouteMatrixAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
-}
-func (v *RouteMatrixAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceAreaGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAvoidanceAreaGeometry_BoundingBox:
-			return deserializeBoundingBox(d, schemas.RouteMatrixAvoidanceAreaGeometry_BoundingBox, &v.BoundingBox)
-		case schemas.RouteMatrixAvoidanceAreaGeometry_Polygon:
-			return deserializeLinearRings(d, schemas.RouteMatrixAvoidanceAreaGeometry_Polygon, &v.Polygon)
-		case schemas.RouteMatrixAvoidanceAreaGeometry_PolylinePolygon:
-			return deserializePolylineRingList(d, schemas.RouteMatrixAvoidanceAreaGeometry_PolylinePolygon, &v.PolylinePolygon)
-		}
-		return nil
-	})
 }
 
 // Specifies options for areas to avoid when calculating the route. This is a
@@ -4969,79 +2113,6 @@ type RouteMatrixAvoidanceOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAvoidanceOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteMatrixAvoidanceAreaList(s, schemas.RouteMatrixAvoidanceOptions_Areas, v.Areas)
-	if v.CarShuttleTrains != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
-	}
-	if v.ControlledAccessHighways != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_ControlledAccessHighways, *v.ControlledAccessHighways)
-	}
-	if v.DirtRoads != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_DirtRoads, *v.DirtRoads)
-	}
-	if v.Ferries != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_Ferries, *v.Ferries)
-	}
-	if v.TollRoads != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_TollRoads, *v.TollRoads)
-	}
-	if v.TollTransponders != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_TollTransponders, *v.TollTransponders)
-	}
-	serializeTruckRoadTypeList(s, schemas.RouteMatrixAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
-	if v.Tunnels != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_Tunnels, *v.Tunnels)
-	}
-	if v.UTurns != nil {
-		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_UTurns, *v.UTurns)
-	}
-	serializeRouteMatrixAvoidanceZoneCategoryList(s, schemas.RouteMatrixAvoidanceOptions_ZoneCategories, v.ZoneCategories)
-}
-func (v *RouteMatrixAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAvoidanceOptions_Areas:
-			return deserializeRouteMatrixAvoidanceAreaList(d, schemas.RouteMatrixAvoidanceOptions_Areas, &v.Areas)
-		case schemas.RouteMatrixAvoidanceOptions_CarShuttleTrains:
-			v.CarShuttleTrains = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_CarShuttleTrains, v.CarShuttleTrains)
-		case schemas.RouteMatrixAvoidanceOptions_ControlledAccessHighways:
-			v.ControlledAccessHighways = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_ControlledAccessHighways, v.ControlledAccessHighways)
-		case schemas.RouteMatrixAvoidanceOptions_DirtRoads:
-			v.DirtRoads = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_DirtRoads, v.DirtRoads)
-		case schemas.RouteMatrixAvoidanceOptions_Ferries:
-			v.Ferries = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_Ferries, v.Ferries)
-		case schemas.RouteMatrixAvoidanceOptions_TollRoads:
-			v.TollRoads = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_TollRoads, v.TollRoads)
-		case schemas.RouteMatrixAvoidanceOptions_TollTransponders:
-			v.TollTransponders = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_TollTransponders, v.TollTransponders)
-		case schemas.RouteMatrixAvoidanceOptions_TruckRoadTypes:
-			return deserializeTruckRoadTypeList(d, schemas.RouteMatrixAvoidanceOptions_TruckRoadTypes, &v.TruckRoadTypes)
-		case schemas.RouteMatrixAvoidanceOptions_Tunnels:
-			v.Tunnels = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_Tunnels, v.Tunnels)
-		case schemas.RouteMatrixAvoidanceOptions_UTurns:
-			v.UTurns = new(bool)
-			return d.ReadBool(schemas.RouteMatrixAvoidanceOptions_UTurns, v.UTurns)
-		case schemas.RouteMatrixAvoidanceOptions_ZoneCategories:
-			return deserializeRouteMatrixAvoidanceZoneCategoryList(d, schemas.RouteMatrixAvoidanceOptions_ZoneCategories, &v.ZoneCategories)
-		}
-		return nil
-	})
-}
-
 // Zone categories to be avoided.
 type RouteMatrixAvoidanceZoneCategory struct {
 
@@ -5049,32 +2120,6 @@ type RouteMatrixAvoidanceZoneCategory struct {
 	Category RouteMatrixZoneCategory
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixAvoidanceZoneCategory) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixAvoidanceZoneCategory)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixAvoidanceZoneCategory) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.RouteMatrixAvoidanceZoneCategory_Category, string(v.Category))
-	}
-}
-func (v *RouteMatrixAvoidanceZoneCategory) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceZoneCategory, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixAvoidanceZoneCategory_Category:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixAvoidanceZoneCategory_Category, &ev); err != nil {
-				return err
-			}
-			v.Category = RouteMatrixZoneCategory(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Boundary within which the matrix is to be calculated. All data, origins and
@@ -5089,36 +2134,6 @@ type RouteMatrixBoundary struct {
 	Unbounded *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixBoundary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixBoundary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixBoundary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.RouteMatrixBoundary_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Unbounded != nil {
-		s.WriteBool(schemas.RouteMatrixBoundary_Unbounded, *v.Unbounded)
-	}
-}
-func (v *RouteMatrixBoundary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixBoundary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixBoundary_Geometry:
-			v.Geometry = &RouteMatrixBoundaryGeometry{}
-			return v.Geometry.Deserialize(d)
-		case schemas.RouteMatrixBoundary_Unbounded:
-			v.Unbounded = new(bool)
-			return d.ReadBool(schemas.RouteMatrixBoundary_Unbounded, v.Unbounded)
-		}
-		return nil
-	})
 }
 
 // Geometry of the routing boundary.
@@ -5167,44 +2182,6 @@ type RouteMatrixBoundaryGeometry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixBoundaryGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixBoundaryGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixBoundaryGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoCircle != nil {
-		s.WriteStruct(schemas.RouteMatrixBoundaryGeometry_AutoCircle)
-		v.AutoCircle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeBoundingBox(s, schemas.RouteMatrixBoundaryGeometry_BoundingBox, v.BoundingBox)
-	if v.Circle != nil {
-		s.WriteStruct(schemas.RouteMatrixBoundaryGeometry_Circle)
-		v.Circle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeLinearRings(s, schemas.RouteMatrixBoundaryGeometry_Polygon, v.Polygon)
-}
-func (v *RouteMatrixBoundaryGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixBoundaryGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixBoundaryGeometry_AutoCircle:
-			v.AutoCircle = &RouteMatrixAutoCircle{}
-			return v.AutoCircle.Deserialize(d)
-		case schemas.RouteMatrixBoundaryGeometry_BoundingBox:
-			return deserializeBoundingBox(d, schemas.RouteMatrixBoundaryGeometry_BoundingBox, &v.BoundingBox)
-		case schemas.RouteMatrixBoundaryGeometry_Circle:
-			v.Circle = &Circle{}
-			return v.Circle.Deserialize(d)
-		case schemas.RouteMatrixBoundaryGeometry_Polygon:
-			return deserializeLinearRings(d, schemas.RouteMatrixBoundaryGeometry_Polygon, &v.Polygon)
-		}
-		return nil
-	})
-}
-
 // Travel mode options when the provided travel mode is Car .
 type RouteMatrixCarOptions struct {
 
@@ -5224,42 +2201,6 @@ type RouteMatrixCarOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixCarOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixCarOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixCarOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteMatrixCarOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteMatrixCarOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteMatrixCarOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *RouteMatrixCarOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixCarOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixCarOptions_LicensePlate:
-			v.LicensePlate = &RouteMatrixVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteMatrixCarOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteMatrixCarOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteMatrixCarOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteMatrixCarOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // The route destination.
 type RouteMatrixDestination struct {
 
@@ -5275,33 +2216,6 @@ type RouteMatrixDestination struct {
 	Options *RouteMatrixDestinationOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Options != nil {
-		s.WriteStruct(schemas.RouteMatrixDestination_Options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePosition(s, schemas.RouteMatrixDestination_Position, v.Position)
-}
-func (v *RouteMatrixDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixDestination_Options:
-			v.Options = &RouteMatrixDestinationOptions{}
-			return v.Options.Deserialize(d)
-		case schemas.RouteMatrixDestination_Position:
-			return deserializePosition(d, schemas.RouteMatrixDestination_Position, &v.Position)
-		}
-		return nil
-	})
 }
 
 // Options related to the destination.
@@ -5322,48 +2236,6 @@ type RouteMatrixDestinationOptions struct {
 	SideOfStreet *RouteMatrixSideOfStreetOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixDestinationOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixDestinationOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixDestinationOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.RouteMatrixDestinationOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RouteMatrixDestinationOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.RouteMatrixDestinationOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.RouteMatrixDestinationOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteMatrixDestinationOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixDestinationOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixDestinationOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.RouteMatrixDestinationOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.RouteMatrixDestinationOptions_Heading:
-			return d.ReadFloat64(schemas.RouteMatrixDestinationOptions_Heading, &v.Heading)
-		case schemas.RouteMatrixDestinationOptions_Matching:
-			v.Matching = &RouteMatrixMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.RouteMatrixDestinationOptions_SideOfStreet:
-			v.SideOfStreet = &RouteMatrixSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The calculated route matrix containing the results for all pairs of Origins to
@@ -5390,38 +2262,6 @@ type RouteMatrixEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RouteMatrixEntry_Distance, v.Distance)
-	s.WriteInt64(schemas.RouteMatrixEntry_Duration, v.Duration)
-	if v.Error != "" {
-		s.WriteString(schemas.RouteMatrixEntry_Error, string(v.Error))
-	}
-}
-func (v *RouteMatrixEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixEntry_Distance:
-			return d.ReadInt64(schemas.RouteMatrixEntry_Distance, &v.Distance)
-		case schemas.RouteMatrixEntry_Duration:
-			return d.ReadInt64(schemas.RouteMatrixEntry_Duration, &v.Duration)
-		case schemas.RouteMatrixEntry_Error:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixEntry_Error, &ev); err != nil {
-				return err
-			}
-			v.Error = RouteMatrixErrorCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies strict exclusion options for the route calculation. This setting
 // mandates that the router will avoid any routes that include the specified
 // options, rather than merely attempting to minimize them.
@@ -5434,25 +2274,6 @@ type RouteMatrixExclusionOptions struct {
 	Countries []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixExclusionOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixExclusionOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.RouteMatrixExclusionOptions_Countries, v.Countries)
-}
-func (v *RouteMatrixExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixExclusionOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixExclusionOptions_Countries:
-			return deserializeCountryCodeList(d, schemas.RouteMatrixExclusionOptions_Countries, &v.Countries)
-		}
-		return nil
-	})
 }
 
 // Matching options.
@@ -5482,48 +2303,6 @@ type RouteMatrixMatchingOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixMatchingOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixMatchingOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixMatchingOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NameHint != nil {
-		s.WriteString(schemas.RouteMatrixMatchingOptions_NameHint, *v.NameHint)
-	}
-	if v.OnRoadThreshold != 0 {
-		s.WriteInt64(schemas.RouteMatrixMatchingOptions_OnRoadThreshold, v.OnRoadThreshold)
-	}
-	if v.Radius != 0 {
-		s.WriteInt64(schemas.RouteMatrixMatchingOptions_Radius, v.Radius)
-	}
-	if v.Strategy != "" {
-		s.WriteString(schemas.RouteMatrixMatchingOptions_Strategy, string(v.Strategy))
-	}
-}
-func (v *RouteMatrixMatchingOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixMatchingOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixMatchingOptions_NameHint:
-			v.NameHint = new(string)
-			return d.ReadString(schemas.RouteMatrixMatchingOptions_NameHint, v.NameHint)
-		case schemas.RouteMatrixMatchingOptions_OnRoadThreshold:
-			return d.ReadInt64(schemas.RouteMatrixMatchingOptions_OnRoadThreshold, &v.OnRoadThreshold)
-		case schemas.RouteMatrixMatchingOptions_Radius:
-			return d.ReadInt64(schemas.RouteMatrixMatchingOptions_Radius, &v.Radius)
-		case schemas.RouteMatrixMatchingOptions_Strategy:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixMatchingOptions_Strategy, &ev); err != nil {
-				return err
-			}
-			v.Strategy = MatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The start position for the route in World Geodetic System (WGS 84) format:
 // [longitude, latitude].
 type RouteMatrixOrigin struct {
@@ -5540,33 +2319,6 @@ type RouteMatrixOrigin struct {
 	Options *RouteMatrixOriginOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixOrigin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixOrigin)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixOrigin) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Options != nil {
-		s.WriteStruct(schemas.RouteMatrixOrigin_Options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePosition(s, schemas.RouteMatrixOrigin_Position, v.Position)
-}
-func (v *RouteMatrixOrigin) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixOrigin, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixOrigin_Options:
-			v.Options = &RouteMatrixOriginOptions{}
-			return v.Options.Deserialize(d)
-		case schemas.RouteMatrixOrigin_Position:
-			return deserializePosition(d, schemas.RouteMatrixOrigin_Position, &v.Position)
-		}
-		return nil
-	})
 }
 
 // Origin related options.
@@ -5589,48 +2341,6 @@ type RouteMatrixOriginOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixOriginOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixOriginOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixOriginOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.RouteMatrixOriginOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RouteMatrixOriginOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.RouteMatrixOriginOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.RouteMatrixOriginOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteMatrixOriginOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixOriginOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixOriginOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.RouteMatrixOriginOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.RouteMatrixOriginOptions_Heading:
-			return d.ReadFloat64(schemas.RouteMatrixOriginOptions_Heading, &v.Heading)
-		case schemas.RouteMatrixOriginOptions_Matching:
-			v.Matching = &RouteMatrixMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.RouteMatrixOriginOptions_SideOfStreet:
-			v.SideOfStreet = &RouteMatrixSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Travel mode options when the provided travel mode is Scooter .
 type RouteMatrixScooterOptions struct {
 
@@ -5650,42 +2360,6 @@ type RouteMatrixScooterOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixScooterOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixScooterOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixScooterOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteMatrixScooterOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteMatrixScooterOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteMatrixScooterOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *RouteMatrixScooterOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixScooterOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixScooterOptions_LicensePlate:
-			v.LicensePlate = &RouteMatrixVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteMatrixScooterOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteMatrixScooterOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteMatrixScooterOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteMatrixScooterOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // Options to configure matching the provided position to a side of the street.
 type RouteMatrixSideOfStreetOptions struct {
 
@@ -5701,35 +2375,6 @@ type RouteMatrixSideOfStreetOptions struct {
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixSideOfStreetOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.RouteMatrixSideOfStreetOptions_Position, v.Position)
-	if v.UseWith != "" {
-		s.WriteString(schemas.RouteMatrixSideOfStreetOptions_UseWith, string(v.UseWith))
-	}
-}
-func (v *RouteMatrixSideOfStreetOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixSideOfStreetOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixSideOfStreetOptions_Position:
-			return deserializePosition(d, schemas.RouteMatrixSideOfStreetOptions_Position, &v.Position)
-		case schemas.RouteMatrixSideOfStreetOptions_UseWith:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixSideOfStreetOptions_UseWith, &ev); err != nil {
-				return err
-			}
-			v.UseWith = SideOfStreetMatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Traffic related options.
@@ -5750,37 +2395,6 @@ type RouteMatrixTrafficOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixTrafficOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixTrafficOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixTrafficOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FlowEventThresholdOverride != 0 {
-		s.WriteInt64(schemas.RouteMatrixTrafficOptions_FlowEventThresholdOverride, v.FlowEventThresholdOverride)
-	}
-	if v.Usage != "" {
-		s.WriteString(schemas.RouteMatrixTrafficOptions_Usage, string(v.Usage))
-	}
-}
-func (v *RouteMatrixTrafficOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixTrafficOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixTrafficOptions_FlowEventThresholdOverride:
-			return d.ReadInt64(schemas.RouteMatrixTrafficOptions_FlowEventThresholdOverride, &v.FlowEventThresholdOverride)
-		case schemas.RouteMatrixTrafficOptions_Usage:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixTrafficOptions_Usage, &ev); err != nil {
-				return err
-			}
-			v.Usage = TrafficUsage(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Trailer options corresponding to the vehicle.
 type RouteMatrixTrailerOptions struct {
 
@@ -5790,28 +2404,6 @@ type RouteMatrixTrailerOptions struct {
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixTrailerOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixTrailerOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixTrailerOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrailerCount != nil {
-		s.WriteInt32(schemas.RouteMatrixTrailerOptions_TrailerCount, *v.TrailerCount)
-	}
-}
-func (v *RouteMatrixTrailerOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixTrailerOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixTrailerOptions_TrailerCount:
-			v.TrailerCount = new(int32)
-			return d.ReadInt32(schemas.RouteMatrixTrailerOptions_TrailerCount, v.TrailerCount)
-		}
-		return nil
-	})
 }
 
 // Travel mode related options for the provided travel mode.
@@ -5830,46 +2422,6 @@ type RouteMatrixTravelModeOptions struct {
 	Truck *RouteMatrixTruckOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixTravelModeOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixTravelModeOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixTravelModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Car != nil {
-		s.WriteStruct(schemas.RouteMatrixTravelModeOptions_Car)
-		v.Car.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Scooter != nil {
-		s.WriteStruct(schemas.RouteMatrixTravelModeOptions_Scooter)
-		v.Scooter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Truck != nil {
-		s.WriteStruct(schemas.RouteMatrixTravelModeOptions_Truck)
-		v.Truck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteMatrixTravelModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixTravelModeOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixTravelModeOptions_Car:
-			v.Car = &RouteMatrixCarOptions{}
-			return v.Car.Deserialize(d)
-		case schemas.RouteMatrixTravelModeOptions_Scooter:
-			v.Scooter = &RouteMatrixScooterOptions{}
-			return v.Scooter.Deserialize(d)
-		case schemas.RouteMatrixTravelModeOptions_Truck:
-			v.Truck = &RouteMatrixTruckOptions{}
-			return v.Truck.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Travel mode options when the provided travel mode is Truck .
@@ -5976,118 +2528,6 @@ type RouteMatrixTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteMatrixTruckOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixTruckOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AxleCount != nil {
-		s.WriteInt32(schemas.RouteMatrixTruckOptions_AxleCount, *v.AxleCount)
-	}
-	if v.GrossWeight != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_GrossWeight, v.GrossWeight)
-	}
-	serializeRouteMatrixHazardousCargoTypeList(s, schemas.RouteMatrixTruckOptions_HazardousCargos, v.HazardousCargos)
-	if v.Height != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_Height, v.Height)
-	}
-	if v.KpraLength != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_KpraLength, v.KpraLength)
-	}
-	if v.Length != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_Length, v.Length)
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteMatrixTruckOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteMatrixTruckOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteMatrixTruckOptions_Occupancy, *v.Occupancy)
-	}
-	if v.PayloadCapacity != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_PayloadCapacity, v.PayloadCapacity)
-	}
-	if v.Trailer != nil {
-		s.WriteStruct(schemas.RouteMatrixTruckOptions_Trailer)
-		v.Trailer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TruckType != "" {
-		s.WriteString(schemas.RouteMatrixTruckOptions_TruckType, string(v.TruckType))
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.RouteMatrixTruckOptions_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-	if v.WeightPerAxle != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_WeightPerAxle, v.WeightPerAxle)
-	}
-	if v.WeightPerAxleGroup != nil {
-		s.WriteStruct(schemas.RouteMatrixTruckOptions_WeightPerAxleGroup)
-		v.WeightPerAxleGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Width != 0 {
-		s.WriteInt64(schemas.RouteMatrixTruckOptions_Width, v.Width)
-	}
-}
-func (v *RouteMatrixTruckOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixTruckOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixTruckOptions_AxleCount:
-			v.AxleCount = new(int32)
-			return d.ReadInt32(schemas.RouteMatrixTruckOptions_AxleCount, v.AxleCount)
-		case schemas.RouteMatrixTruckOptions_GrossWeight:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_GrossWeight, &v.GrossWeight)
-		case schemas.RouteMatrixTruckOptions_HazardousCargos:
-			return deserializeRouteMatrixHazardousCargoTypeList(d, schemas.RouteMatrixTruckOptions_HazardousCargos, &v.HazardousCargos)
-		case schemas.RouteMatrixTruckOptions_Height:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_Height, &v.Height)
-		case schemas.RouteMatrixTruckOptions_KpraLength:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_KpraLength, &v.KpraLength)
-		case schemas.RouteMatrixTruckOptions_Length:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_Length, &v.Length)
-		case schemas.RouteMatrixTruckOptions_LicensePlate:
-			v.LicensePlate = &RouteMatrixVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteMatrixTruckOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteMatrixTruckOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteMatrixTruckOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteMatrixTruckOptions_Occupancy, v.Occupancy)
-		case schemas.RouteMatrixTruckOptions_PayloadCapacity:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_PayloadCapacity, &v.PayloadCapacity)
-		case schemas.RouteMatrixTruckOptions_Trailer:
-			v.Trailer = &RouteMatrixTrailerOptions{}
-			return v.Trailer.Deserialize(d)
-		case schemas.RouteMatrixTruckOptions_TruckType:
-			var ev string
-			if err := d.ReadString(schemas.RouteMatrixTruckOptions_TruckType, &ev); err != nil {
-				return err
-			}
-			v.TruckType = RouteMatrixTruckType(ev)
-			return nil
-		case schemas.RouteMatrixTruckOptions_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.RouteMatrixTruckOptions_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		case schemas.RouteMatrixTruckOptions_WeightPerAxle:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_WeightPerAxle, &v.WeightPerAxle)
-		case schemas.RouteMatrixTruckOptions_WeightPerAxleGroup:
-			v.WeightPerAxleGroup = &WeightPerAxleGroup{}
-			return v.WeightPerAxleGroup.Deserialize(d)
-		case schemas.RouteMatrixTruckOptions_Width:
-			return d.ReadInt64(schemas.RouteMatrixTruckOptions_Width, &v.Width)
-		}
-		return nil
-	})
-}
-
 // The vehicle License Plate.
 type RouteMatrixVehicleLicensePlate struct {
 
@@ -6095,28 +2535,6 @@ type RouteMatrixVehicleLicensePlate struct {
 	LastCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteMatrixVehicleLicensePlate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteMatrixVehicleLicensePlate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteMatrixVehicleLicensePlate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastCharacter != nil {
-		s.WriteString(schemas.RouteMatrixVehicleLicensePlate_LastCharacter, *v.LastCharacter)
-	}
-}
-func (v *RouteMatrixVehicleLicensePlate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteMatrixVehicleLicensePlate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteMatrixVehicleLicensePlate_LastCharacter:
-			v.LastCharacter = new(string)
-			return d.ReadString(schemas.RouteMatrixVehicleLicensePlate_LastCharacter, v.LastCharacter)
-		}
-		return nil
-	})
 }
 
 // Notice Detail that is a range.
@@ -6129,34 +2547,6 @@ type RouteNoticeDetailRange struct {
 	Min *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteNoticeDetailRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteNoticeDetailRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteNoticeDetailRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Max != nil {
-		s.WriteInt32(schemas.RouteNoticeDetailRange_Max, *v.Max)
-	}
-	if v.Min != nil {
-		s.WriteInt32(schemas.RouteNoticeDetailRange_Min, *v.Min)
-	}
-}
-func (v *RouteNoticeDetailRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteNoticeDetailRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteNoticeDetailRange_Max:
-			v.Max = new(int32)
-			return d.ReadInt32(schemas.RouteNoticeDetailRange_Max, v.Max)
-		case schemas.RouteNoticeDetailRange_Min:
-			v.Min = new(int32)
-			return d.ReadInt32(schemas.RouteNoticeDetailRange_Min, v.Min)
-		}
-		return nil
-	})
 }
 
 // The route number.
@@ -6174,44 +2564,6 @@ type RouteNumber struct {
 	Language *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteNumber) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteNumber)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteNumber) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Direction != "" {
-		s.WriteString(schemas.RouteNumber_Direction, string(v.Direction))
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.RouteNumber_Language, *v.Language)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.RouteNumber_Value, *v.Value)
-	}
-}
-func (v *RouteNumber) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteNumber, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteNumber_Direction:
-			var ev string
-			if err := d.ReadString(schemas.RouteNumber_Direction, &ev); err != nil {
-				return err
-			}
-			v.Direction = RouteDirection(ev)
-			return nil
-		case schemas.RouteNumber_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.RouteNumber_Language, v.Language)
-		case schemas.RouteNumber_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.RouteNumber_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Origin related options.
@@ -6237,54 +2589,6 @@ type RouteOriginOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteOriginOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteOriginOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteOriginOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.RouteOriginOptions_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.AvoidUTurns != nil {
-		s.WriteBool(schemas.RouteOriginOptions_AvoidUTurns, *v.AvoidUTurns)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RouteOriginOptions_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.RouteOriginOptions_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.RouteOriginOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteOriginOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteOriginOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteOriginOptions_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.RouteOriginOptions_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.RouteOriginOptions_AvoidUTurns:
-			v.AvoidUTurns = new(bool)
-			return d.ReadBool(schemas.RouteOriginOptions_AvoidUTurns, v.AvoidUTurns)
-		case schemas.RouteOriginOptions_Heading:
-			return d.ReadFloat64(schemas.RouteOriginOptions_Heading, &v.Heading)
-		case schemas.RouteOriginOptions_Matching:
-			v.Matching = &RouteMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.RouteOriginOptions_SideOfStreet:
-			v.SideOfStreet = &RouteSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The place where the waypoint is passed through and not treated as a stop.
 type RoutePassThroughPlace struct {
 
@@ -6302,34 +2606,6 @@ type RoutePassThroughPlace struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePassThroughPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePassThroughPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePassThroughPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition23(s, schemas.RoutePassThroughPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RoutePassThroughPlace_Position, v.Position)
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RoutePassThroughPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RoutePassThroughPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePassThroughPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePassThroughPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RoutePassThroughPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RoutePassThroughPlace_Position:
-			return deserializePosition23(d, schemas.RoutePassThroughPlace_Position, &v.Position)
-		case schemas.RoutePassThroughPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RoutePassThroughPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
-}
-
 // If the waypoint should be treated as a stop. If yes, the route is split up into
 // different legs around the stop.
 type RoutePassThroughWaypoint struct {
@@ -6343,36 +2619,6 @@ type RoutePassThroughWaypoint struct {
 	GeometryOffset *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePassThroughWaypoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePassThroughWaypoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePassThroughWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RoutePassThroughWaypoint_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Place != nil {
-		s.WriteStruct(schemas.RoutePassThroughWaypoint_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RoutePassThroughWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePassThroughWaypoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePassThroughWaypoint_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RoutePassThroughWaypoint_GeometryOffset, v.GeometryOffset)
-		case schemas.RoutePassThroughWaypoint_Place:
-			v.Place = &RoutePassThroughPlace{}
-			return v.Place.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that must be performed after the travel portion of the leg.
@@ -6398,44 +2644,6 @@ type RoutePedestrianAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RoutePedestrianAfterTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RoutePedestrianAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RoutePedestrianAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RoutePedestrianAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianAfterTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RoutePedestrianAfterTravelStep_Duration, v.Duration)
-		case schemas.RoutePedestrianAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RoutePedestrianAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RoutePedestrianAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RoutePedestrianAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the arrival for a leg.
 //
 // Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
@@ -6458,36 +2666,6 @@ type RoutePedestrianArrival struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RoutePedestrianArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RoutePedestrianArrival_Time, *v.Time)
-	}
-}
-func (v *RoutePedestrianArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianArrival_Place:
-			v.Place = &RoutePedestrianPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RoutePedestrianArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RoutePedestrianArrival_Time, v.Time)
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the departure for a leg.
 //
 // Time format: YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm
@@ -6508,36 +2686,6 @@ type RoutePedestrianDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePedestrianDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RoutePedestrianDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RoutePedestrianDeparture_Time, *v.Time)
-	}
-}
-func (v *RoutePedestrianDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianDeparture_Place:
-			v.Place = &RoutePedestrianPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RoutePedestrianDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RoutePedestrianDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // Details that are specific to a pedestrian leg.
@@ -6592,61 +2740,6 @@ type RoutePedestrianLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRoutePedestrianAfterTravelStepList(s, schemas.RoutePedestrianLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RoutePedestrianLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RoutePedestrianLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRoutePedestrianNoticeList(s, schemas.RoutePedestrianLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RoutePedestrianLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRoutePedestrianSpanList(s, schemas.RoutePedestrianLegDetails_Spans, v.Spans)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RoutePedestrianLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRoutePedestrianTravelStepList(s, schemas.RoutePedestrianLegDetails_TravelSteps, v.TravelSteps)
-}
-func (v *RoutePedestrianLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianLegDetails_AfterTravelSteps:
-			return deserializeRoutePedestrianAfterTravelStepList(d, schemas.RoutePedestrianLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RoutePedestrianLegDetails_Arrival:
-			v.Arrival = &RoutePedestrianArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RoutePedestrianLegDetails_Departure:
-			v.Departure = &RoutePedestrianDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RoutePedestrianLegDetails_Notices:
-			return deserializeRoutePedestrianNoticeList(d, schemas.RoutePedestrianLegDetails_Notices, &v.Notices)
-		case schemas.RoutePedestrianLegDetails_PassThroughWaypoints:
-			return deserializeRoutePassThroughWaypointList(d, schemas.RoutePedestrianLegDetails_PassThroughWaypoints, &v.PassThroughWaypoints)
-		case schemas.RoutePedestrianLegDetails_Spans:
-			return deserializeRoutePedestrianSpanList(d, schemas.RoutePedestrianLegDetails_Spans, &v.Spans)
-		case schemas.RoutePedestrianLegDetails_Summary:
-			v.Summary = &RoutePedestrianSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RoutePedestrianLegDetails_TravelSteps:
-			return deserializeRoutePedestrianTravelStepList(d, schemas.RoutePedestrianLegDetails_TravelSteps, &v.TravelSteps)
-		}
-		return nil
-	})
-}
-
 // Notices are additional information returned that indicate issues that occurred
 // during route calculation.
 type RoutePedestrianNotice struct {
@@ -6663,42 +2756,6 @@ type RoutePedestrianNotice struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RoutePedestrianNotice_Code, string(v.Code))
-	}
-	if v.Impact != "" {
-		s.WriteString(schemas.RoutePedestrianNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RoutePedestrianNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RoutePedestrianNoticeCode(ev)
-			return nil
-		case schemas.RoutePedestrianNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	Options related to the pedestrian. Not supported in ap-southeast-1 and
 //
 // ap-southeast-5 regions for [GrabMaps] customers.
@@ -6710,28 +2767,6 @@ type RoutePedestrianOptions struct {
 	Speed *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePedestrianOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Speed != nil {
-		s.WriteFloat64(schemas.RoutePedestrianOptions_Speed, *v.Speed)
-	}
-}
-func (v *RoutePedestrianOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianOptions_Speed:
-			v.Speed = new(float64)
-			return d.ReadFloat64(schemas.RoutePedestrianOptions_Speed, v.Speed)
-		}
-		return nil
-	})
 }
 
 // Summary including duration and distance for the entire leg.
@@ -6752,28 +2787,6 @@ type RoutePedestrianOverviewSummary struct {
 	Duration int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePedestrianOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Distance, v.Distance)
-	s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Duration, v.Duration)
-}
-func (v *RoutePedestrianOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianOverviewSummary_Distance:
-			return d.ReadInt64(schemas.RoutePedestrianOverviewSummary_Distance, &v.Distance)
-		case schemas.RoutePedestrianOverviewSummary_Duration:
-			return d.ReadInt64(schemas.RoutePedestrianOverviewSummary_Duration, &v.Duration)
-		}
-		return nil
-	})
 }
 
 // Place details corresponding to the arrival or departure.
@@ -6806,76 +2819,6 @@ type RoutePedestrianPlace struct {
 	WaypointIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePedestrianPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPointDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianPlace_AccessPointDetails)
-		v.AccessPointDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RoutePedestrianPlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RoutePedestrianPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RoutePedestrianPlace_Position, v.Position)
-	if v.SideOfStreet != "" {
-		s.WriteString(schemas.RoutePedestrianPlace_SideOfStreet, string(v.SideOfStreet))
-	}
-	if v.StationDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianPlace_StationDetails)
-		v.StationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RoutePedestrianPlace_Type, string(v.Type))
-	}
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RoutePedestrianPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RoutePedestrianPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianPlace_AccessPointDetails:
-			v.AccessPointDetails = &RouteAccessPointDetails{}
-			return v.AccessPointDetails.Deserialize(d)
-		case schemas.RoutePedestrianPlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RoutePedestrianPlace_Name, v.Name)
-		case schemas.RoutePedestrianPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RoutePedestrianPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RoutePedestrianPlace_Position:
-			return deserializePosition23(d, schemas.RoutePedestrianPlace_Position, &v.Position)
-		case schemas.RoutePedestrianPlace_SideOfStreet:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianPlace_SideOfStreet, &ev); err != nil {
-				return err
-			}
-			v.SideOfStreet = RouteSideOfStreet(ev)
-			return nil
-		case schemas.RoutePedestrianPlace_StationDetails:
-			v.StationDetails = &RouteStationDetails{}
-			return v.StationDetails.Deserialize(d)
-		case schemas.RoutePedestrianPlace_Type:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianPlace_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RoutePedestrianPlaceType(ev)
-			return nil
-		case schemas.RoutePedestrianPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RoutePedestrianPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
 }
 
 // Span computed for the requested SpanAdditionalFeatures.
@@ -6962,97 +2905,6 @@ type RoutePedestrianSpan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianSpan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianSpan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianSpan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BestCaseDuration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianSpan_BestCaseDuration, v.BestCaseDuration)
-	}
-	if v.Country != nil {
-		s.WriteString(schemas.RoutePedestrianSpan_Country, *v.Country)
-	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RoutePedestrianSpan_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianSpan_Duration, v.Duration)
-	}
-	if v.DynamicSpeed != nil {
-		s.WriteStruct(schemas.RoutePedestrianSpan_DynamicSpeed)
-		v.DynamicSpeed.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FunctionalClassification != nil {
-		s.WriteInt32(schemas.RoutePedestrianSpan_FunctionalClassification, *v.FunctionalClassification)
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RoutePedestrianSpan_GeometryOffset, *v.GeometryOffset)
-	}
-	serializeIndexList(s, schemas.RoutePedestrianSpan_Incidents, v.Incidents)
-	serializeLocalizedStringList(s, schemas.RoutePedestrianSpan_Names, v.Names)
-	serializeRouteSpanPedestrianAccessAttributeList(s, schemas.RoutePedestrianSpan_PedestrianAccess, v.PedestrianAccess)
-	if v.Region != nil {
-		s.WriteString(schemas.RoutePedestrianSpan_Region, *v.Region)
-	}
-	serializeRouteSpanRoadAttributeList(s, schemas.RoutePedestrianSpan_RoadAttributes, v.RoadAttributes)
-	serializeRouteNumberList(s, schemas.RoutePedestrianSpan_RouteNumbers, v.RouteNumbers)
-	if v.SpeedLimit != nil {
-		s.WriteStruct(schemas.RoutePedestrianSpan_SpeedLimit)
-		v.SpeedLimit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TypicalDuration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianSpan_TypicalDuration, v.TypicalDuration)
-	}
-}
-func (v *RoutePedestrianSpan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianSpan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianSpan_BestCaseDuration:
-			return d.ReadInt64(schemas.RoutePedestrianSpan_BestCaseDuration, &v.BestCaseDuration)
-		case schemas.RoutePedestrianSpan_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.RoutePedestrianSpan_Country, v.Country)
-		case schemas.RoutePedestrianSpan_Distance:
-			return d.ReadInt64(schemas.RoutePedestrianSpan_Distance, &v.Distance)
-		case schemas.RoutePedestrianSpan_Duration:
-			return d.ReadInt64(schemas.RoutePedestrianSpan_Duration, &v.Duration)
-		case schemas.RoutePedestrianSpan_DynamicSpeed:
-			v.DynamicSpeed = &RouteSpanDynamicSpeedDetails{}
-			return v.DynamicSpeed.Deserialize(d)
-		case schemas.RoutePedestrianSpan_FunctionalClassification:
-			v.FunctionalClassification = new(int32)
-			return d.ReadInt32(schemas.RoutePedestrianSpan_FunctionalClassification, v.FunctionalClassification)
-		case schemas.RoutePedestrianSpan_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RoutePedestrianSpan_GeometryOffset, v.GeometryOffset)
-		case schemas.RoutePedestrianSpan_Incidents:
-			return deserializeIndexList(d, schemas.RoutePedestrianSpan_Incidents, &v.Incidents)
-		case schemas.RoutePedestrianSpan_Names:
-			return deserializeLocalizedStringList(d, schemas.RoutePedestrianSpan_Names, &v.Names)
-		case schemas.RoutePedestrianSpan_PedestrianAccess:
-			return deserializeRouteSpanPedestrianAccessAttributeList(d, schemas.RoutePedestrianSpan_PedestrianAccess, &v.PedestrianAccess)
-		case schemas.RoutePedestrianSpan_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.RoutePedestrianSpan_Region, v.Region)
-		case schemas.RoutePedestrianSpan_RoadAttributes:
-			return deserializeRouteSpanRoadAttributeList(d, schemas.RoutePedestrianSpan_RoadAttributes, &v.RoadAttributes)
-		case schemas.RoutePedestrianSpan_RouteNumbers:
-			return deserializeRouteNumberList(d, schemas.RoutePedestrianSpan_RouteNumbers, &v.RouteNumbers)
-		case schemas.RoutePedestrianSpan_SpeedLimit:
-			v.SpeedLimit = &RouteSpanSpeedLimitDetails{}
-			return v.SpeedLimit.Deserialize(d)
-		case schemas.RoutePedestrianSpan_TypicalDuration:
-			return d.ReadInt64(schemas.RoutePedestrianSpan_TypicalDuration, &v.TypicalDuration)
-		}
-		return nil
-	})
-}
-
 // Summarized details for the leg including before travel, travel and after travel
 // steps.
 type RoutePedestrianSummary struct {
@@ -7068,38 +2920,6 @@ type RoutePedestrianSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RoutePedestrianSummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RoutePedestrianSummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RoutePedestrianSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianSummary_Overview:
-			v.Overview = &RoutePedestrianOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RoutePedestrianSummary_TravelOnly:
-			v.TravelOnly = &RoutePedestrianTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summarized details for the leg including travel steps.
 type RoutePedestrianTravelOnlySummary struct {
 
@@ -7111,25 +2931,6 @@ type RoutePedestrianTravelOnlySummary struct {
 	Duration int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RoutePedestrianTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.RoutePedestrianTravelOnlySummary_Duration, v.Duration)
-}
-func (v *RoutePedestrianTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianTravelOnlySummary_Duration:
-			return d.ReadInt64(schemas.RoutePedestrianTravelOnlySummary_Duration, &v.Duration)
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that must be performed during the travel portion of the leg.
@@ -7192,127 +2993,6 @@ type RoutePedestrianTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoutePedestrianTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoutePedestrianTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoutePedestrianTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContinueStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_ContinueStepDetails)
-		v.ContinueStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CurrentRoad != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_CurrentRoad)
-		v.CurrentRoad.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RoutePedestrianTravelStep_Distance, v.Distance)
-	}
-	s.WriteInt64(schemas.RoutePedestrianTravelStep_Duration, v.Duration)
-	serializeLocalizedStringList(s, schemas.RoutePedestrianTravelStep_ExitNumber, v.ExitNumber)
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RoutePedestrianTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RoutePedestrianTravelStep_Instruction, *v.Instruction)
-	}
-	if v.KeepStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_KeepStepDetails)
-		v.KeepStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NextRoad != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_NextRoad)
-		v.NextRoad.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutEnterStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_RoundaboutEnterStepDetails)
-		v.RoundaboutEnterStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutExitStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_RoundaboutExitStepDetails)
-		v.RoundaboutExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutPassStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_RoundaboutPassStepDetails)
-		v.RoundaboutPassStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Signpost != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_Signpost)
-		v.Signpost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TurnStepDetails != nil {
-		s.WriteStruct(schemas.RoutePedestrianTravelStep_TurnStepDetails)
-		v.TurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RoutePedestrianTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RoutePedestrianTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoutePedestrianTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoutePedestrianTravelStep_ContinueStepDetails:
-			v.ContinueStepDetails = &RouteContinueStepDetails{}
-			return v.ContinueStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_CurrentRoad:
-			v.CurrentRoad = &RouteRoad{}
-			return v.CurrentRoad.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_Distance:
-			return d.ReadInt64(schemas.RoutePedestrianTravelStep_Distance, &v.Distance)
-		case schemas.RoutePedestrianTravelStep_Duration:
-			return d.ReadInt64(schemas.RoutePedestrianTravelStep_Duration, &v.Duration)
-		case schemas.RoutePedestrianTravelStep_ExitNumber:
-			return deserializeLocalizedStringList(d, schemas.RoutePedestrianTravelStep_ExitNumber, &v.ExitNumber)
-		case schemas.RoutePedestrianTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RoutePedestrianTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RoutePedestrianTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RoutePedestrianTravelStep_Instruction, v.Instruction)
-		case schemas.RoutePedestrianTravelStep_KeepStepDetails:
-			v.KeepStepDetails = &RouteKeepStepDetails{}
-			return v.KeepStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_NextRoad:
-			v.NextRoad = &RouteRoad{}
-			return v.NextRoad.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_RoundaboutEnterStepDetails:
-			v.RoundaboutEnterStepDetails = &RouteRoundaboutEnterStepDetails{}
-			return v.RoundaboutEnterStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_RoundaboutExitStepDetails:
-			v.RoundaboutExitStepDetails = &RouteRoundaboutExitStepDetails{}
-			return v.RoundaboutExitStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_RoundaboutPassStepDetails:
-			v.RoundaboutPassStepDetails = &RouteRoundaboutPassStepDetails{}
-			return v.RoundaboutPassStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_Signpost:
-			v.Signpost = &RouteSignpost{}
-			return v.Signpost.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_TurnStepDetails:
-			v.TurnStepDetails = &RouteTurnStepDetails{}
-			return v.TurnStepDetails.Deserialize(d)
-		case schemas.RoutePedestrianTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RoutePedestrianTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RoutePedestrianTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details that are specific to a ramp step.
 type RouteRampStepDetails struct {
 
@@ -7331,50 +3011,6 @@ type RouteRampStepDetails struct {
 	TurnIntensity RouteTurnIntensity
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRampStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRampStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRampStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRampStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteRampStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteRampStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteRampStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteRampStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRampStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRampStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteRampStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteRampStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteRampStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteRampStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteRampStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteRampStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteRampStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A step that must be performed after the travel portion of the leg.
@@ -7398,44 +3034,6 @@ type RouteRentalAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteRentalAfterTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteRentalAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteRentalAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteRentalAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalAfterTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteRentalAfterTravelStep_Duration, v.Duration)
-		case schemas.RouteRentalAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteRentalAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RouteRentalAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteRentalAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about the rental agency.
 type RouteRentalAgency struct {
 
@@ -7450,34 +3048,6 @@ type RouteRentalAgency struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalAgency) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalAgency)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalAgency) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteRentalAgency_Name, *v.Name)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.RouteRentalAgency_Url, *v.Url)
-	}
-}
-func (v *RouteRentalAgency) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalAgency, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalAgency_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteRentalAgency_Name, v.Name)
-		case schemas.RouteRentalAgency_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.RouteRentalAgency_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the arrival for the leg.
 type RouteRentalArrival struct {
 
@@ -7490,36 +3060,6 @@ type RouteRentalArrival struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRentalArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteRentalArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteRentalArrival_Time, *v.Time)
-	}
-}
-func (v *RouteRentalArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalArrival_Place:
-			v.Place = &RouteRentalPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteRentalArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteRentalArrival_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed before the travel portion of the leg.
@@ -7543,44 +3083,6 @@ type RouteRentalBeforeTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalBeforeTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalBeforeTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalBeforeTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteRentalBeforeTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteRentalBeforeTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteRentalBeforeTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteRentalBeforeTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalBeforeTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalBeforeTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteRentalBeforeTravelStep_Duration, v.Duration)
-		case schemas.RouteRentalBeforeTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteRentalBeforeTravelStep_Instruction, v.Instruction)
-		case schemas.RouteRentalBeforeTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalBeforeTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteRentalBeforeTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the departure for the leg.
 type RouteRentalDeparture struct {
 
@@ -7593,36 +3095,6 @@ type RouteRentalDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRentalDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteRentalDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteRentalDeparture_Time, *v.Time)
-	}
-}
-func (v *RouteRentalDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalDeparture_Place:
-			v.Place = &RouteRentalPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteRentalDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteRentalDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // Populated when the Leg type is Rental, and provides additional information that
@@ -7680,77 +3152,6 @@ type RouteRentalLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteRentalAfterTravelStepList(s, schemas.RouteRentalLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Agency != nil {
-		s.WriteStruct(schemas.RouteRentalLegDetails_Agency)
-		v.Agency.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RouteRentalLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteAttributionList(s, schemas.RouteRentalLegDetails_Attributions, v.Attributions)
-	serializeRouteRentalBeforeTravelStepList(s, schemas.RouteRentalLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteRentalLegDetails_BookingWebLinks, v.BookingWebLinks)
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteRentalLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RouteRentalLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transport != nil {
-		s.WriteStruct(schemas.RouteRentalLegDetails_Transport)
-		v.Transport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteRentalTravelStepList(s, schemas.RouteRentalLegDetails_TravelSteps, v.TravelSteps)
-}
-func (v *RouteRentalLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalLegDetails_AfterTravelSteps:
-			return deserializeRouteRentalAfterTravelStepList(d, schemas.RouteRentalLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RouteRentalLegDetails_Agency:
-			v.Agency = &RouteRentalAgency{}
-			return v.Agency.Deserialize(d)
-		case schemas.RouteRentalLegDetails_Arrival:
-			v.Arrival = &RouteRentalArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RouteRentalLegDetails_Attributions:
-			return deserializeRouteAttributionList(d, schemas.RouteRentalLegDetails_Attributions, &v.Attributions)
-		case schemas.RouteRentalLegDetails_BeforeTravelSteps:
-			return deserializeRouteRentalBeforeTravelStepList(d, schemas.RouteRentalLegDetails_BeforeTravelSteps, &v.BeforeTravelSteps)
-		case schemas.RouteRentalLegDetails_BookingWebLinks:
-			return deserializeRouteWebLinkList(d, schemas.RouteRentalLegDetails_BookingWebLinks, &v.BookingWebLinks)
-		case schemas.RouteRentalLegDetails_Departure:
-			v.Departure = &RouteRentalDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteRentalLegDetails_Summary:
-			v.Summary = &RouteRentalSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RouteRentalLegDetails_Transport:
-			v.Transport = &RouteRentalTransportModeDetails{}
-			return v.Transport.Deserialize(d)
-		case schemas.RouteRentalLegDetails_TravelSteps:
-			return deserializeRouteRentalTravelStepList(d, schemas.RouteRentalLegDetails_TravelSteps, &v.TravelSteps)
-		}
-		return nil
-	})
-}
-
 // Summary including duration and distance for the entire leg.
 type RouteRentalOverviewSummary struct {
 
@@ -7769,34 +3170,6 @@ type RouteRentalOverviewSummary struct {
 	Duration *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRentalOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteRentalOverviewSummary_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteRentalOverviewSummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteRentalOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalOverviewSummary_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteRentalOverviewSummary_Distance, v.Distance)
-		case schemas.RouteRentalOverviewSummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteRentalOverviewSummary_Duration, v.Duration)
-		}
-		return nil
-	})
 }
 
 // Place details corresponding to the arrival or departure.
@@ -7828,66 +3201,6 @@ type RouteRentalPlace struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPointDetails != nil {
-		s.WriteStruct(schemas.RouteRentalPlace_AccessPointDetails)
-		v.AccessPointDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteRentalPlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteRentalPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteRentalPlace_Position, v.Position)
-	if v.StationDetails != nil {
-		s.WriteStruct(schemas.RouteRentalPlace_StationDetails)
-		v.StationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteRentalPlace_Type, string(v.Type))
-	}
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RouteRentalPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RouteRentalPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalPlace_AccessPointDetails:
-			v.AccessPointDetails = &RouteAccessPointDetails{}
-			return v.AccessPointDetails.Deserialize(d)
-		case schemas.RouteRentalPlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteRentalPlace_Name, v.Name)
-		case schemas.RouteRentalPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RouteRentalPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RouteRentalPlace_Position:
-			return deserializePosition23(d, schemas.RouteRentalPlace_Position, &v.Position)
-		case schemas.RouteRentalPlace_StationDetails:
-			v.StationDetails = &RouteStationDetails{}
-			return v.StationDetails.Deserialize(d)
-		case schemas.RouteRentalPlace_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalPlace_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteRentalPlaceType(ev)
-			return nil
-		case schemas.RouteRentalPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RouteRentalPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
-}
-
 // Summary of the rental leg.
 type RouteRentalSummary struct {
 
@@ -7898,38 +3211,6 @@ type RouteRentalSummary struct {
 	TravelOnly *RouteRentalTravelOnlySummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRentalSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RouteRentalSummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RouteRentalSummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteRentalSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalSummary_Overview:
-			v.Overview = &RouteRentalOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RouteRentalSummary_TravelOnly:
-			v.TravelOnly = &RouteRentalTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Transport mode details for the rental leg.
@@ -7967,84 +3248,6 @@ type RouteRentalTransportModeDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalTransportModeDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalTransportModeDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalTransportModeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailableSeats != nil {
-		s.WriteInt32(schemas.RouteRentalTransportModeDetails_AvailableSeats, *v.AvailableSeats)
-	}
-	if v.Category != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Category, *v.Category)
-	}
-	if v.Color != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Color, *v.Color)
-	}
-	if v.Engine != "" {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Engine, string(v.Engine))
-	}
-	if v.LicensePlate != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_LicensePlate, *v.LicensePlate)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Mode, string(v.Mode))
-	}
-	if v.Model != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Model, *v.Model)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_Name, *v.Name)
-	}
-	if v.TextColor != nil {
-		s.WriteString(schemas.RouteRentalTransportModeDetails_TextColor, *v.TextColor)
-	}
-}
-func (v *RouteRentalTransportModeDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalTransportModeDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalTransportModeDetails_AvailableSeats:
-			v.AvailableSeats = new(int32)
-			return d.ReadInt32(schemas.RouteRentalTransportModeDetails_AvailableSeats, v.AvailableSeats)
-		case schemas.RouteRentalTransportModeDetails_Category:
-			v.Category = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_Category, v.Category)
-		case schemas.RouteRentalTransportModeDetails_Color:
-			v.Color = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_Color, v.Color)
-		case schemas.RouteRentalTransportModeDetails_Engine:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalTransportModeDetails_Engine, &ev); err != nil {
-				return err
-			}
-			v.Engine = RouteEngineType(ev)
-			return nil
-		case schemas.RouteRentalTransportModeDetails_LicensePlate:
-			v.LicensePlate = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_LicensePlate, v.LicensePlate)
-		case schemas.RouteRentalTransportModeDetails_Mode:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalTransportModeDetails_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = RouteRentalMode(ev)
-			return nil
-		case schemas.RouteRentalTransportModeDetails_Model:
-			v.Model = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_Model, v.Model)
-		case schemas.RouteRentalTransportModeDetails_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_Name, v.Name)
-		case schemas.RouteRentalTransportModeDetails_TextColor:
-			v.TextColor = new(string)
-			return d.ReadString(schemas.RouteRentalTransportModeDetails_TextColor, v.TextColor)
-		}
-		return nil
-	})
-}
-
 // Summary including duration and distance for the travel portion of the leg only.
 type RouteRentalTravelOnlySummary struct {
 
@@ -8056,28 +3259,6 @@ type RouteRentalTravelOnlySummary struct {
 	Duration *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRentalTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteRentalTravelOnlySummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteRentalTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalTravelOnlySummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteRentalTravelOnlySummary_Duration, v.Duration)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed during the travel portion of the leg.
@@ -8136,128 +3317,6 @@ type RouteRentalTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRentalTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRentalTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRentalTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContinueStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_ContinueStepDetails)
-		v.ContinueStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteRentalTravelStep_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteRentalTravelStep_Duration, *v.Duration)
-	}
-	if v.ExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_ExitStepDetails)
-		v.ExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteRentalTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteRentalTravelStep_Instruction, *v.Instruction)
-	}
-	if v.KeepStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_KeepStepDetails)
-		v.KeepStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RampStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_RampStepDetails)
-		v.RampStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutEnterStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_RoundaboutEnterStepDetails)
-		v.RoundaboutEnterStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_RoundaboutExitStepDetails)
-		v.RoundaboutExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutPassStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_RoundaboutPassStepDetails)
-		v.RoundaboutPassStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_TurnStepDetails)
-		v.TurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteRentalTravelStep_Type, string(v.Type))
-	}
-	if v.UTurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteRentalTravelStep_UTurnStepDetails)
-		v.UTurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteRentalTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRentalTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRentalTravelStep_ContinueStepDetails:
-			v.ContinueStepDetails = &RouteContinueStepDetails{}
-			return v.ContinueStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteRentalTravelStep_Distance, v.Distance)
-		case schemas.RouteRentalTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteRentalTravelStep_Duration, v.Duration)
-		case schemas.RouteRentalTravelStep_ExitStepDetails:
-			v.ExitStepDetails = &RouteExitStepDetails{}
-			return v.ExitStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteRentalTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteRentalTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteRentalTravelStep_Instruction, v.Instruction)
-		case schemas.RouteRentalTravelStep_KeepStepDetails:
-			v.KeepStepDetails = &RouteKeepStepDetails{}
-			return v.KeepStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_RampStepDetails:
-			v.RampStepDetails = &RouteRampStepDetails{}
-			return v.RampStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_RoundaboutEnterStepDetails:
-			v.RoundaboutEnterStepDetails = &RouteRoundaboutEnterStepDetails{}
-			return v.RoundaboutEnterStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_RoundaboutExitStepDetails:
-			v.RoundaboutExitStepDetails = &RouteRoundaboutExitStepDetails{}
-			return v.RoundaboutExitStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_RoundaboutPassStepDetails:
-			v.RoundaboutPassStepDetails = &RouteRoundaboutPassStepDetails{}
-			return v.RoundaboutPassStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_TurnStepDetails:
-			v.TurnStepDetails = &RouteTurnStepDetails{}
-			return v.TurnStepDetails.Deserialize(d)
-		case schemas.RouteRentalTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteRentalTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteRentalTravelStepType(ev)
-			return nil
-		case schemas.RouteRentalTravelStep_UTurnStepDetails:
-			v.UTurnStepDetails = &RouteUTurnStepDetails{}
-			return v.UTurnStepDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Notices are additional information returned that indicate issues that occurred
 // during route calculation.
 type RouteResponseNotice struct {
@@ -8272,42 +3331,6 @@ type RouteResponseNotice struct {
 	Impact RouteNoticeImpact
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteResponseNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteResponseNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteResponseNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RouteResponseNotice_Code, string(v.Code))
-	}
-	if v.Impact != "" {
-		s.WriteString(schemas.RouteResponseNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RouteResponseNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteResponseNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteResponseNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RouteResponseNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RouteResponseNoticeCode(ev)
-			return nil
-		case schemas.RouteResponseNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RouteResponseNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The road on the route.
@@ -8334,41 +3357,6 @@ type RouteRoad struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRoad) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRoad)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRoad) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoad_RoadName, v.RoadName)
-	serializeRouteNumberList(s, schemas.RouteRoad_RouteNumber, v.RouteNumber)
-	serializeLocalizedStringList(s, schemas.RouteRoad_Towards, v.Towards)
-	if v.Type != "" {
-		s.WriteString(schemas.RouteRoad_Type, string(v.Type))
-	}
-}
-func (v *RouteRoad) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRoad, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRoad_RoadName:
-			return deserializeLocalizedStringList(d, schemas.RouteRoad_RoadName, &v.RoadName)
-		case schemas.RouteRoad_RouteNumber:
-			return deserializeRouteNumberList(d, schemas.RouteRoad_RouteNumber, &v.RouteNumber)
-		case schemas.RouteRoad_Towards:
-			return deserializeLocalizedStringList(d, schemas.RouteRoad_Towards, &v.Towards)
-		case schemas.RouteRoad_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoad_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteRoadType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about the roundabout leg.
 type RouteRoundaboutEnterStepDetails struct {
 
@@ -8387,50 +3375,6 @@ type RouteRoundaboutEnterStepDetails struct {
 	TurnIntensity RouteTurnIntensity
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRoundaboutEnterStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRoundaboutEnterStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRoundaboutEnterStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutEnterStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteRoundaboutEnterStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteRoundaboutEnterStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteRoundaboutEnterStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteRoundaboutEnterStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRoundaboutEnterStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRoundaboutEnterStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteRoundaboutEnterStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteRoundaboutEnterStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoundaboutEnterStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteRoundaboutEnterStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteRoundaboutEnterStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteRoundaboutEnterStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoundaboutEnterStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details about the roundabout step.
@@ -8453,46 +3397,6 @@ type RouteRoundaboutExitStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteRoundaboutExitStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRoundaboutExitStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRoundaboutExitStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutExitStepDetails_Intersection, v.Intersection)
-	if v.RelativeExit != nil {
-		s.WriteInt32(schemas.RouteRoundaboutExitStepDetails_RelativeExit, *v.RelativeExit)
-	}
-	if v.RoundaboutAngle != 0 {
-		s.WriteFloat64(schemas.RouteRoundaboutExitStepDetails_RoundaboutAngle, v.RoundaboutAngle)
-	}
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteRoundaboutExitStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-}
-func (v *RouteRoundaboutExitStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRoundaboutExitStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRoundaboutExitStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteRoundaboutExitStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteRoundaboutExitStepDetails_RelativeExit:
-			v.RelativeExit = new(int32)
-			return d.ReadInt32(schemas.RouteRoundaboutExitStepDetails_RelativeExit, v.RelativeExit)
-		case schemas.RouteRoundaboutExitStepDetails_RoundaboutAngle:
-			return d.ReadFloat64(schemas.RouteRoundaboutExitStepDetails_RoundaboutAngle, &v.RoundaboutAngle)
-		case schemas.RouteRoundaboutExitStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoundaboutExitStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about the step.
 type RouteRoundaboutPassStepDetails struct {
 
@@ -8511,50 +3415,6 @@ type RouteRoundaboutPassStepDetails struct {
 	TurnIntensity RouteTurnIntensity
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteRoundaboutPassStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteRoundaboutPassStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteRoundaboutPassStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutPassStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteRoundaboutPassStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteRoundaboutPassStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteRoundaboutPassStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteRoundaboutPassStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteRoundaboutPassStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteRoundaboutPassStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteRoundaboutPassStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteRoundaboutPassStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoundaboutPassStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteRoundaboutPassStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteRoundaboutPassStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteRoundaboutPassStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteRoundaboutPassStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Travel mode options when the provided travel mode is Scooter . For [GrabMaps] customers,
@@ -8592,52 +3452,6 @@ type RouteScooterOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteScooterOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteScooterOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteScooterOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngineType != "" {
-		s.WriteString(schemas.RouteScooterOptions_EngineType, string(v.EngineType))
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteScooterOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteScooterOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteScooterOptions_Occupancy, *v.Occupancy)
-	}
-}
-func (v *RouteScooterOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteScooterOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteScooterOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.RouteScooterOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = RouteEngineType(ev)
-			return nil
-		case schemas.RouteScooterOptions_LicensePlate:
-			v.LicensePlate = &RouteVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteScooterOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteScooterOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteScooterOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteScooterOptions_Occupancy, v.Occupancy)
-		}
-		return nil
-	})
-}
-
 // Options to configure matching the provided position to a side of the street.
 type RouteSideOfStreetOptions struct {
 
@@ -8654,35 +3468,6 @@ type RouteSideOfStreetOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSideOfStreetOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.RouteSideOfStreetOptions_Position, v.Position)
-	if v.UseWith != "" {
-		s.WriteString(schemas.RouteSideOfStreetOptions_UseWith, string(v.UseWith))
-	}
-}
-func (v *RouteSideOfStreetOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSideOfStreetOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSideOfStreetOptions_Position:
-			return deserializePosition(d, schemas.RouteSideOfStreetOptions_Position, &v.Position)
-		case schemas.RouteSideOfStreetOptions_UseWith:
-			var ev string
-			if err := d.ReadString(schemas.RouteSideOfStreetOptions_UseWith, &ev); err != nil {
-				return err
-			}
-			v.UseWith = SideOfStreetMatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Sign post information of the action, applicable only for TurnByTurn steps. See
 // RouteSignpost for details of sub-attributes.
 type RouteSignpost struct {
@@ -8695,25 +3480,6 @@ type RouteSignpost struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteSignpost) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSignpost)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSignpost) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteSignpostLabelList(s, schemas.RouteSignpost_Labels, v.Labels)
-}
-func (v *RouteSignpost) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSignpost, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSignpost_Labels:
-			return deserializeRouteSignpostLabelList(d, schemas.RouteSignpost_Labels, &v.Labels)
-		}
-		return nil
-	})
-}
-
 // Labels presented on the sign post.
 type RouteSignpostLabel struct {
 
@@ -8724,38 +3490,6 @@ type RouteSignpostLabel struct {
 	Text *LocalizedString
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteSignpostLabel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSignpostLabel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSignpostLabel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RouteNumber != nil {
-		s.WriteStruct(schemas.RouteSignpostLabel_RouteNumber)
-		v.RouteNumber.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Text != nil {
-		s.WriteStruct(schemas.RouteSignpostLabel_Text)
-		v.Text.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteSignpostLabel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSignpostLabel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSignpostLabel_RouteNumber:
-			v.RouteNumber = &RouteNumber{}
-			return v.RouteNumber.Deserialize(d)
-		case schemas.RouteSignpostLabel_Text:
-			v.Text = &LocalizedString{}
-			return v.Text.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Details about the dynamic speed.
@@ -8781,37 +3515,6 @@ type RouteSpanDynamicSpeedDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteSpanDynamicSpeedDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSpanDynamicSpeedDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSpanDynamicSpeedDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BestCaseSpeed != 0 {
-		s.WriteFloat64(schemas.RouteSpanDynamicSpeedDetails_BestCaseSpeed, v.BestCaseSpeed)
-	}
-	if v.TurnDuration != 0 {
-		s.WriteInt64(schemas.RouteSpanDynamicSpeedDetails_TurnDuration, v.TurnDuration)
-	}
-	if v.TypicalSpeed != 0 {
-		s.WriteFloat64(schemas.RouteSpanDynamicSpeedDetails_TypicalSpeed, v.TypicalSpeed)
-	}
-}
-func (v *RouteSpanDynamicSpeedDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSpanDynamicSpeedDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSpanDynamicSpeedDetails_BestCaseSpeed:
-			return d.ReadFloat64(schemas.RouteSpanDynamicSpeedDetails_BestCaseSpeed, &v.BestCaseSpeed)
-		case schemas.RouteSpanDynamicSpeedDetails_TurnDuration:
-			return d.ReadInt64(schemas.RouteSpanDynamicSpeedDetails_TurnDuration, &v.TurnDuration)
-		case schemas.RouteSpanDynamicSpeedDetails_TypicalSpeed:
-			return d.ReadFloat64(schemas.RouteSpanDynamicSpeedDetails_TypicalSpeed, &v.TypicalSpeed)
-		}
-		return nil
-	})
-}
-
 // Details about the speed limit corresponding to the span.
 //
 // Unit: kilometers per hour
@@ -8828,33 +3531,6 @@ type RouteSpanSpeedLimitDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteSpanSpeedLimitDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSpanSpeedLimitDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSpanSpeedLimitDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxSpeed != 0 {
-		s.WriteFloat64(schemas.RouteSpanSpeedLimitDetails_MaxSpeed, v.MaxSpeed)
-	}
-	if v.Unlimited != nil {
-		s.WriteBool(schemas.RouteSpanSpeedLimitDetails_Unlimited, *v.Unlimited)
-	}
-}
-func (v *RouteSpanSpeedLimitDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSpanSpeedLimitDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSpanSpeedLimitDetails_MaxSpeed:
-			return d.ReadFloat64(schemas.RouteSpanSpeedLimitDetails_MaxSpeed, &v.MaxSpeed)
-		case schemas.RouteSpanSpeedLimitDetails_Unlimited:
-			v.Unlimited = new(bool)
-			return d.ReadBool(schemas.RouteSpanSpeedLimitDetails_Unlimited, v.Unlimited)
-		}
-		return nil
-	})
-}
-
 // Details about the station.
 type RouteStationDetails struct {
 
@@ -8868,42 +3544,6 @@ type RouteStationDetails struct {
 	ShortName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteStationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteStationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteStationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accessibility != nil {
-		s.WriteStruct(schemas.RouteStationDetails_Accessibility)
-		v.Accessibility.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PlatformName != nil {
-		s.WriteString(schemas.RouteStationDetails_PlatformName, *v.PlatformName)
-	}
-	if v.ShortName != nil {
-		s.WriteString(schemas.RouteStationDetails_ShortName, *v.ShortName)
-	}
-}
-func (v *RouteStationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteStationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteStationDetails_Accessibility:
-			v.Accessibility = &RouteAccessibilityAvailabilityDetails{}
-			return v.Accessibility.Deserialize(d)
-		case schemas.RouteStationDetails_PlatformName:
-			v.PlatformName = new(string)
-			return d.ReadString(schemas.RouteStationDetails_PlatformName, v.PlatformName)
-		case schemas.RouteStationDetails_ShortName:
-			v.ShortName = new(string)
-			return d.ReadString(schemas.RouteStationDetails_ShortName, v.ShortName)
-		}
-		return nil
-	})
 }
 
 // Summarized details for the leg including travel steps only. The Distance for
@@ -8923,40 +3563,6 @@ type RouteSummary struct {
 	Tolls *RouteTollSummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteSummary_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteSummary_Duration, v.Duration)
-	}
-	if v.Tolls != nil {
-		s.WriteStruct(schemas.RouteSummary_Tolls)
-		v.Tolls.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSummary_Distance:
-			return d.ReadInt64(schemas.RouteSummary_Distance, &v.Distance)
-		case schemas.RouteSummary_Duration:
-			return d.ReadInt64(schemas.RouteSummary_Duration, &v.Duration)
-		case schemas.RouteSummary_Tolls:
-			v.Tolls = &RouteTollSummary{}
-			return v.Tolls.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed after the travel portion of the leg.
@@ -8980,44 +3586,6 @@ type RouteTaxiAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTaxiAfterTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTaxiAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTaxiAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteTaxiAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiAfterTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiAfterTravelStep_Duration, v.Duration)
-		case schemas.RouteTaxiAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTaxiAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTaxiAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTaxiAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about the taxi agency.
 type RouteTaxiAgency struct {
 
@@ -9032,34 +3600,6 @@ type RouteTaxiAgency struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiAgency) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiAgency)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiAgency) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTaxiAgency_Name, *v.Name)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.RouteTaxiAgency_Url, *v.Url)
-	}
-}
-func (v *RouteTaxiAgency) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiAgency, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiAgency_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTaxiAgency_Name, v.Name)
-		case schemas.RouteTaxiAgency_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.RouteTaxiAgency_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the arrival for the leg.
 type RouteTaxiArrival struct {
 
@@ -9072,36 +3612,6 @@ type RouteTaxiArrival struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteTaxiArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteTaxiArrival_Time, *v.Time)
-	}
-}
-func (v *RouteTaxiArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiArrival_Place:
-			v.Place = &RouteTaxiPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteTaxiArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteTaxiArrival_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed before the travel portion of the leg.
@@ -9125,44 +3635,6 @@ type RouteTaxiBeforeTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiBeforeTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiBeforeTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiBeforeTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTaxiBeforeTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTaxiBeforeTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTaxiBeforeTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteTaxiBeforeTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiBeforeTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiBeforeTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiBeforeTravelStep_Duration, v.Duration)
-		case schemas.RouteTaxiBeforeTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTaxiBeforeTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTaxiBeforeTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiBeforeTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTaxiBeforeTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the departure for the leg.
 type RouteTaxiDeparture struct {
 
@@ -9175,36 +3647,6 @@ type RouteTaxiDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteTaxiDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteTaxiDeparture_Time, *v.Time)
-	}
-}
-func (v *RouteTaxiDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiDeparture_Place:
-			v.Place = &RouteTaxiPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteTaxiDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteTaxiDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // Populated when the Leg type is Taxi, and provides additional information that
@@ -9267,80 +3709,6 @@ type RouteTaxiLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTaxiAfterTravelStepList(s, schemas.RouteTaxiLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Agency != nil {
-		s.WriteStruct(schemas.RouteTaxiLegDetails_Agency)
-		v.Agency.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RouteTaxiLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteAttributionList(s, schemas.RouteTaxiLegDetails_Attributions, v.Attributions)
-	serializeRouteTaxiBeforeTravelStepList(s, schemas.RouteTaxiLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteTaxiLegDetails_BookingWebLinks, v.BookingWebLinks)
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteTaxiLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTaxiNoticeList(s, schemas.RouteTaxiLegDetails_Notices, v.Notices)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RouteTaxiLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transport != nil {
-		s.WriteStruct(schemas.RouteTaxiLegDetails_Transport)
-		v.Transport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTaxiTravelStepList(s, schemas.RouteTaxiLegDetails_TravelSteps, v.TravelSteps)
-}
-func (v *RouteTaxiLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiLegDetails_AfterTravelSteps:
-			return deserializeRouteTaxiAfterTravelStepList(d, schemas.RouteTaxiLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RouteTaxiLegDetails_Agency:
-			v.Agency = &RouteTaxiAgency{}
-			return v.Agency.Deserialize(d)
-		case schemas.RouteTaxiLegDetails_Arrival:
-			v.Arrival = &RouteTaxiArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RouteTaxiLegDetails_Attributions:
-			return deserializeRouteAttributionList(d, schemas.RouteTaxiLegDetails_Attributions, &v.Attributions)
-		case schemas.RouteTaxiLegDetails_BeforeTravelSteps:
-			return deserializeRouteTaxiBeforeTravelStepList(d, schemas.RouteTaxiLegDetails_BeforeTravelSteps, &v.BeforeTravelSteps)
-		case schemas.RouteTaxiLegDetails_BookingWebLinks:
-			return deserializeRouteWebLinkList(d, schemas.RouteTaxiLegDetails_BookingWebLinks, &v.BookingWebLinks)
-		case schemas.RouteTaxiLegDetails_Departure:
-			v.Departure = &RouteTaxiDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteTaxiLegDetails_Notices:
-			return deserializeRouteTaxiNoticeList(d, schemas.RouteTaxiLegDetails_Notices, &v.Notices)
-		case schemas.RouteTaxiLegDetails_Summary:
-			v.Summary = &RouteTaxiSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RouteTaxiLegDetails_Transport:
-			v.Transport = &RouteTaxiTransportModeDetails{}
-			return v.Transport.Deserialize(d)
-		case schemas.RouteTaxiLegDetails_TravelSteps:
-			return deserializeRouteTaxiTravelStepList(d, schemas.RouteTaxiLegDetails_TravelSteps, &v.TravelSteps)
-		}
-		return nil
-	})
-}
-
 // A notice that indicates an issue that occurred during route calculation.
 type RouteTaxiNotice struct {
 
@@ -9354,42 +3722,6 @@ type RouteTaxiNotice struct {
 	Impact RouteNoticeImpact
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RouteTaxiNotice_Code, string(v.Code))
-	}
-	if v.Impact != "" {
-		s.WriteString(schemas.RouteTaxiNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RouteTaxiNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RouteTaxiNoticeCode(ev)
-			return nil
-		case schemas.RouteTaxiNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary including duration and distance for the entire leg.
@@ -9410,34 +3742,6 @@ type RouteTaxiOverviewSummary struct {
 	Duration *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteTaxiOverviewSummary_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTaxiOverviewSummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteTaxiOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiOverviewSummary_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiOverviewSummary_Distance, v.Distance)
-		case schemas.RouteTaxiOverviewSummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiOverviewSummary_Duration, v.Duration)
-		}
-		return nil
-	})
 }
 
 // Place details corresponding to the arrival or departure.
@@ -9469,66 +3773,6 @@ type RouteTaxiPlace struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPointDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiPlace_AccessPointDetails)
-		v.AccessPointDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTaxiPlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteTaxiPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteTaxiPlace_Position, v.Position)
-	if v.StationDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiPlace_StationDetails)
-		v.StationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTaxiPlace_Type, string(v.Type))
-	}
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RouteTaxiPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RouteTaxiPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiPlace_AccessPointDetails:
-			v.AccessPointDetails = &RouteAccessPointDetails{}
-			return v.AccessPointDetails.Deserialize(d)
-		case schemas.RouteTaxiPlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTaxiPlace_Name, v.Name)
-		case schemas.RouteTaxiPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RouteTaxiPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RouteTaxiPlace_Position:
-			return deserializePosition23(d, schemas.RouteTaxiPlace_Position, &v.Position)
-		case schemas.RouteTaxiPlace_StationDetails:
-			v.StationDetails = &RouteStationDetails{}
-			return v.StationDetails.Deserialize(d)
-		case schemas.RouteTaxiPlace_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiPlace_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTaxiPlaceType(ev)
-			return nil
-		case schemas.RouteTaxiPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RouteTaxiPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
-}
-
 // Summary of the taxi leg.
 type RouteTaxiSummary struct {
 
@@ -9539,38 +3783,6 @@ type RouteTaxiSummary struct {
 	TravelOnly *RouteTaxiTravelOnlySummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RouteTaxiSummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RouteTaxiSummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTaxiSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiSummary_Overview:
-			v.Overview = &RouteTaxiOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RouteTaxiSummary_TravelOnly:
-			v.TravelOnly = &RouteTaxiTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Transport mode details for the taxi leg.
@@ -9608,84 +3820,6 @@ type RouteTaxiTransportModeDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiTransportModeDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiTransportModeDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiTransportModeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailableSeats != nil {
-		s.WriteInt32(schemas.RouteTaxiTransportModeDetails_AvailableSeats, *v.AvailableSeats)
-	}
-	if v.Category != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Category, *v.Category)
-	}
-	if v.Color != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Color, *v.Color)
-	}
-	if v.Engine != "" {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Engine, string(v.Engine))
-	}
-	if v.LicensePlate != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_LicensePlate, *v.LicensePlate)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Mode, string(v.Mode))
-	}
-	if v.Model != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Model, *v.Model)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_Name, *v.Name)
-	}
-	if v.TextColor != nil {
-		s.WriteString(schemas.RouteTaxiTransportModeDetails_TextColor, *v.TextColor)
-	}
-}
-func (v *RouteTaxiTransportModeDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiTransportModeDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiTransportModeDetails_AvailableSeats:
-			v.AvailableSeats = new(int32)
-			return d.ReadInt32(schemas.RouteTaxiTransportModeDetails_AvailableSeats, v.AvailableSeats)
-		case schemas.RouteTaxiTransportModeDetails_Category:
-			v.Category = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_Category, v.Category)
-		case schemas.RouteTaxiTransportModeDetails_Color:
-			v.Color = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_Color, v.Color)
-		case schemas.RouteTaxiTransportModeDetails_Engine:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiTransportModeDetails_Engine, &ev); err != nil {
-				return err
-			}
-			v.Engine = RouteEngineType(ev)
-			return nil
-		case schemas.RouteTaxiTransportModeDetails_LicensePlate:
-			v.LicensePlate = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_LicensePlate, v.LicensePlate)
-		case schemas.RouteTaxiTransportModeDetails_Mode:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiTransportModeDetails_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = RouteTaxiMode(ev)
-			return nil
-		case schemas.RouteTaxiTransportModeDetails_Model:
-			v.Model = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_Model, v.Model)
-		case schemas.RouteTaxiTransportModeDetails_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_Name, v.Name)
-		case schemas.RouteTaxiTransportModeDetails_TextColor:
-			v.TextColor = new(string)
-			return d.ReadString(schemas.RouteTaxiTransportModeDetails_TextColor, v.TextColor)
-		}
-		return nil
-	})
-}
-
 // Summary including duration and distance for the travel portion of the leg only.
 type RouteTaxiTravelOnlySummary struct {
 
@@ -9697,28 +3831,6 @@ type RouteTaxiTravelOnlySummary struct {
 	Duration *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTaxiTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTaxiTravelOnlySummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteTaxiTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiTravelOnlySummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiTravelOnlySummary_Duration, v.Duration)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed during the travel portion of the leg.
@@ -9777,128 +3889,6 @@ type RouteTaxiTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTaxiTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTaxiTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTaxiTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContinueStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_ContinueStepDetails)
-		v.ContinueStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteTaxiTravelStep_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTaxiTravelStep_Duration, *v.Duration)
-	}
-	if v.ExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_ExitStepDetails)
-		v.ExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteTaxiTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTaxiTravelStep_Instruction, *v.Instruction)
-	}
-	if v.KeepStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_KeepStepDetails)
-		v.KeepStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RampStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_RampStepDetails)
-		v.RampStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutEnterStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_RoundaboutEnterStepDetails)
-		v.RoundaboutEnterStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_RoundaboutExitStepDetails)
-		v.RoundaboutExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutPassStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_RoundaboutPassStepDetails)
-		v.RoundaboutPassStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_TurnStepDetails)
-		v.TurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTaxiTravelStep_Type, string(v.Type))
-	}
-	if v.UTurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteTaxiTravelStep_UTurnStepDetails)
-		v.UTurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTaxiTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTaxiTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTaxiTravelStep_ContinueStepDetails:
-			v.ContinueStepDetails = &RouteContinueStepDetails{}
-			return v.ContinueStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiTravelStep_Distance, v.Distance)
-		case schemas.RouteTaxiTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTaxiTravelStep_Duration, v.Duration)
-		case schemas.RouteTaxiTravelStep_ExitStepDetails:
-			v.ExitStepDetails = &RouteExitStepDetails{}
-			return v.ExitStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteTaxiTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteTaxiTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTaxiTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTaxiTravelStep_KeepStepDetails:
-			v.KeepStepDetails = &RouteKeepStepDetails{}
-			return v.KeepStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_RampStepDetails:
-			v.RampStepDetails = &RouteRampStepDetails{}
-			return v.RampStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_RoundaboutEnterStepDetails:
-			v.RoundaboutEnterStepDetails = &RouteRoundaboutEnterStepDetails{}
-			return v.RoundaboutEnterStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_RoundaboutExitStepDetails:
-			v.RoundaboutExitStepDetails = &RouteRoundaboutExitStepDetails{}
-			return v.RoundaboutExitStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_RoundaboutPassStepDetails:
-			v.RoundaboutPassStepDetails = &RouteRoundaboutPassStepDetails{}
-			return v.RoundaboutPassStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_TurnStepDetails:
-			v.TurnStepDetails = &RouteTurnStepDetails{}
-			return v.TurnStepDetails.Deserialize(d)
-		case schemas.RouteTaxiTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTaxiTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTaxiTravelStepType(ev)
-			return nil
-		case schemas.RouteTaxiTravelStep_UTurnStepDetails:
-			v.UTurnStepDetails = &RouteUTurnStepDetails{}
-			return v.UTurnStepDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides details about toll information along a route, including the payment
 // sites, applicable toll rates, toll systems, and the country associated with the
 // toll collection.
@@ -9923,37 +3913,6 @@ type RouteToll struct {
 	Country *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteToll) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteToll)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteToll) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Country != nil {
-		s.WriteString(schemas.RouteToll_Country, *v.Country)
-	}
-	serializeRouteTollPaymentSiteList(s, schemas.RouteToll_PaymentSites, v.PaymentSites)
-	serializeRouteTollRateList(s, schemas.RouteToll_Rates, v.Rates)
-	serializeIndexList(s, schemas.RouteToll_Systems, v.Systems)
-}
-func (v *RouteToll) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteToll, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteToll_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.RouteToll_Country, v.Country)
-		case schemas.RouteToll_PaymentSites:
-			return deserializeRouteTollPaymentSiteList(d, schemas.RouteToll_PaymentSites, &v.PaymentSites)
-		case schemas.RouteToll_Rates:
-			return deserializeRouteTollRateList(d, schemas.RouteToll_Rates, &v.Rates)
-		case schemas.RouteToll_Systems:
-			return deserializeIndexList(d, schemas.RouteToll_Systems, &v.Systems)
-		}
-		return nil
-	})
 }
 
 // Options related to Tolls on a route.
@@ -9983,58 +3942,6 @@ type RouteTollOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllTransponders != nil {
-		s.WriteBool(schemas.RouteTollOptions_AllTransponders, *v.AllTransponders)
-	}
-	if v.AllVignettes != nil {
-		s.WriteBool(schemas.RouteTollOptions_AllVignettes, *v.AllVignettes)
-	}
-	if v.Currency != nil {
-		s.WriteString(schemas.RouteTollOptions_Currency, *v.Currency)
-	}
-	if v.EmissionType != nil {
-		s.WriteStruct(schemas.RouteTollOptions_EmissionType)
-		v.EmissionType.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VehicleCategory != "" {
-		s.WriteString(schemas.RouteTollOptions_VehicleCategory, string(v.VehicleCategory))
-	}
-}
-func (v *RouteTollOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollOptions_AllTransponders:
-			v.AllTransponders = new(bool)
-			return d.ReadBool(schemas.RouteTollOptions_AllTransponders, v.AllTransponders)
-		case schemas.RouteTollOptions_AllVignettes:
-			v.AllVignettes = new(bool)
-			return d.ReadBool(schemas.RouteTollOptions_AllVignettes, v.AllVignettes)
-		case schemas.RouteTollOptions_Currency:
-			v.Currency = new(string)
-			return d.ReadString(schemas.RouteTollOptions_Currency, v.Currency)
-		case schemas.RouteTollOptions_EmissionType:
-			v.EmissionType = &RouteEmissionType{}
-			return v.EmissionType.Deserialize(d)
-		case schemas.RouteTollOptions_VehicleCategory:
-			var ev string
-			if err := d.ReadString(schemas.RouteTollOptions_VehicleCategory, &ev); err != nil {
-				return err
-			}
-			v.VehicleCategory = RouteTollVehicleCategory(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details if the toll rate can be a pass that supports multiple trips.
 type RouteTollPass struct {
 
@@ -10056,54 +3963,6 @@ type RouteTollPass struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollPass) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPass)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPass) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncludesReturnTrip != nil {
-		s.WriteBool(schemas.RouteTollPass_IncludesReturnTrip, *v.IncludesReturnTrip)
-	}
-	if v.SeniorPass != nil {
-		s.WriteBool(schemas.RouteTollPass_SeniorPass, *v.SeniorPass)
-	}
-	if v.TransferCount != nil {
-		s.WriteInt32(schemas.RouteTollPass_TransferCount, *v.TransferCount)
-	}
-	if v.TripCount != nil {
-		s.WriteInt32(schemas.RouteTollPass_TripCount, *v.TripCount)
-	}
-	if v.ValidityPeriod != nil {
-		s.WriteStruct(schemas.RouteTollPass_ValidityPeriod)
-		v.ValidityPeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTollPass) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPass, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPass_IncludesReturnTrip:
-			v.IncludesReturnTrip = new(bool)
-			return d.ReadBool(schemas.RouteTollPass_IncludesReturnTrip, v.IncludesReturnTrip)
-		case schemas.RouteTollPass_SeniorPass:
-			v.SeniorPass = new(bool)
-			return d.ReadBool(schemas.RouteTollPass_SeniorPass, v.SeniorPass)
-		case schemas.RouteTollPass_TransferCount:
-			v.TransferCount = new(int32)
-			return d.ReadInt32(schemas.RouteTollPass_TransferCount, v.TransferCount)
-		case schemas.RouteTollPass_TripCount:
-			v.TripCount = new(int32)
-			return d.ReadInt32(schemas.RouteTollPass_TripCount, v.TripCount)
-		case schemas.RouteTollPass_ValidityPeriod:
-			v.ValidityPeriod = &RouteTollPassValidityPeriod{}
-			return v.ValidityPeriod.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Period for which the pass is valid.
 type RouteTollPassValidityPeriod struct {
 
@@ -10118,38 +3977,6 @@ type RouteTollPassValidityPeriod struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollPassValidityPeriod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPassValidityPeriod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPassValidityPeriod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Period != "" {
-		s.WriteString(schemas.RouteTollPassValidityPeriod_Period, string(v.Period))
-	}
-	if v.PeriodCount != nil {
-		s.WriteInt32(schemas.RouteTollPassValidityPeriod_PeriodCount, *v.PeriodCount)
-	}
-}
-func (v *RouteTollPassValidityPeriod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPassValidityPeriod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPassValidityPeriod_Period:
-			var ev string
-			if err := d.ReadString(schemas.RouteTollPassValidityPeriod_Period, &ev); err != nil {
-				return err
-			}
-			v.Period = RouteTollPassValidityPeriodType(ev)
-			return nil
-		case schemas.RouteTollPassValidityPeriod_PeriodCount:
-			v.PeriodCount = new(int32)
-			return d.ReadInt32(schemas.RouteTollPassValidityPeriod_PeriodCount, v.PeriodCount)
-		}
-		return nil
-	})
-}
-
 // Locations or sites where the toll fare is collected.
 type RouteTollPaymentSite struct {
 
@@ -10162,31 +3989,6 @@ type RouteTollPaymentSite struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTollPaymentSite) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPaymentSite)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPaymentSite) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTollPaymentSite_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteTollPaymentSite_Position, v.Position)
-}
-func (v *RouteTollPaymentSite) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPaymentSite, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPaymentSite_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTollPaymentSite_Name, v.Name)
-		case schemas.RouteTollPaymentSite_Position:
-			return deserializePosition23(d, schemas.RouteTollPaymentSite_Position, &v.Position)
-		}
-		return nil
-	})
 }
 
 // The toll price.
@@ -10225,59 +4027,6 @@ type RouteTollPrice struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollPrice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPrice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPrice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != nil {
-		s.WriteString(schemas.RouteTollPrice_Currency, *v.Currency)
-	}
-	if v.Estimate != nil {
-		s.WriteBool(schemas.RouteTollPrice_Estimate, *v.Estimate)
-	}
-	if v.PerDuration != 0 {
-		s.WriteInt64(schemas.RouteTollPrice_PerDuration, v.PerDuration)
-	}
-	if v.Range != nil {
-		s.WriteBool(schemas.RouteTollPrice_Range, *v.Range)
-	}
-	if v.RangeValue != nil {
-		s.WriteStruct(schemas.RouteTollPrice_RangeValue)
-		v.RangeValue.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.RouteTollPrice_Value, *v.Value)
-	}
-}
-func (v *RouteTollPrice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPrice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPrice_Currency:
-			v.Currency = new(string)
-			return d.ReadString(schemas.RouteTollPrice_Currency, v.Currency)
-		case schemas.RouteTollPrice_Estimate:
-			v.Estimate = new(bool)
-			return d.ReadBool(schemas.RouteTollPrice_Estimate, v.Estimate)
-		case schemas.RouteTollPrice_PerDuration:
-			return d.ReadInt64(schemas.RouteTollPrice_PerDuration, &v.PerDuration)
-		case schemas.RouteTollPrice_Range:
-			v.Range = new(bool)
-			return d.ReadBool(schemas.RouteTollPrice_Range, v.Range)
-		case schemas.RouteTollPrice_RangeValue:
-			v.RangeValue = &RouteTollPriceValueRange{}
-			return v.RangeValue.Deserialize(d)
-		case schemas.RouteTollPrice_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.RouteTollPrice_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Summary of the route and toll price.
 type RouteTollPriceSummary struct {
 
@@ -10309,54 +4058,6 @@ type RouteTollPriceSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollPriceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPriceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPriceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != nil {
-		s.WriteString(schemas.RouteTollPriceSummary_Currency, *v.Currency)
-	}
-	if v.Estimate != nil {
-		s.WriteBool(schemas.RouteTollPriceSummary_Estimate, *v.Estimate)
-	}
-	if v.Range != nil {
-		s.WriteBool(schemas.RouteTollPriceSummary_Range, *v.Range)
-	}
-	if v.RangeValue != nil {
-		s.WriteStruct(schemas.RouteTollPriceSummary_RangeValue)
-		v.RangeValue.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.RouteTollPriceSummary_Value, *v.Value)
-	}
-}
-func (v *RouteTollPriceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPriceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPriceSummary_Currency:
-			v.Currency = new(string)
-			return d.ReadString(schemas.RouteTollPriceSummary_Currency, v.Currency)
-		case schemas.RouteTollPriceSummary_Estimate:
-			v.Estimate = new(bool)
-			return d.ReadBool(schemas.RouteTollPriceSummary_Estimate, v.Estimate)
-		case schemas.RouteTollPriceSummary_Range:
-			v.Range = new(bool)
-			return d.ReadBool(schemas.RouteTollPriceSummary_Range, v.Range)
-		case schemas.RouteTollPriceSummary_RangeValue:
-			v.RangeValue = &RouteTollPriceValueRange{}
-			return v.RangeValue.Deserialize(d)
-		case schemas.RouteTollPriceSummary_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.RouteTollPriceSummary_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Price range with a minimum and maximum value, if a range.
 type RouteTollPriceValueRange struct {
 
@@ -10371,34 +4072,6 @@ type RouteTollPriceValueRange struct {
 	Min *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTollPriceValueRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollPriceValueRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollPriceValueRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Max != nil {
-		s.WriteFloat64(schemas.RouteTollPriceValueRange_Max, *v.Max)
-	}
-	if v.Min != nil {
-		s.WriteFloat64(schemas.RouteTollPriceValueRange_Min, *v.Min)
-	}
-}
-func (v *RouteTollPriceValueRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollPriceValueRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollPriceValueRange_Max:
-			v.Max = new(float64)
-			return d.ReadFloat64(schemas.RouteTollPriceValueRange_Max, v.Max)
-		case schemas.RouteTollPriceValueRange_Min:
-			v.Min = new(float64)
-			return d.ReadFloat64(schemas.RouteTollPriceValueRange_Min, v.Min)
-		}
-		return nil
-	})
 }
 
 // The toll rate.
@@ -10441,70 +4114,6 @@ type RouteTollRate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollRate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollRate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollRate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicableTimes != nil {
-		s.WriteString(schemas.RouteTollRate_ApplicableTimes, *v.ApplicableTimes)
-	}
-	if v.ConvertedPrice != nil {
-		s.WriteStruct(schemas.RouteTollRate_ConvertedPrice)
-		v.ConvertedPrice.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RouteTollRate_Id, *v.Id)
-	}
-	if v.LocalPrice != nil {
-		s.WriteStruct(schemas.RouteTollRate_LocalPrice)
-		v.LocalPrice.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTollRate_Name, *v.Name)
-	}
-	if v.Pass != nil {
-		s.WriteStruct(schemas.RouteTollRate_Pass)
-		v.Pass.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTollPaymentMethodList(s, schemas.RouteTollRate_PaymentMethods, v.PaymentMethods)
-	serializeRouteTransponderList(s, schemas.RouteTollRate_Transponders, v.Transponders)
-}
-func (v *RouteTollRate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollRate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollRate_ApplicableTimes:
-			v.ApplicableTimes = new(string)
-			return d.ReadString(schemas.RouteTollRate_ApplicableTimes, v.ApplicableTimes)
-		case schemas.RouteTollRate_ConvertedPrice:
-			v.ConvertedPrice = &RouteTollPrice{}
-			return v.ConvertedPrice.Deserialize(d)
-		case schemas.RouteTollRate_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RouteTollRate_Id, v.Id)
-		case schemas.RouteTollRate_LocalPrice:
-			v.LocalPrice = &RouteTollPrice{}
-			return v.LocalPrice.Deserialize(d)
-		case schemas.RouteTollRate_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTollRate_Name, v.Name)
-		case schemas.RouteTollRate_Pass:
-			v.Pass = &RouteTollPass{}
-			return v.Pass.Deserialize(d)
-		case schemas.RouteTollRate_PaymentMethods:
-			return deserializeRouteTollPaymentMethodList(d, schemas.RouteTollRate_PaymentMethods, &v.PaymentMethods)
-		case schemas.RouteTollRate_Transponders:
-			return deserializeRouteTransponderList(d, schemas.RouteTollRate_Transponders, &v.Transponders)
-		}
-		return nil
-	})
-}
-
 // The toll summary for the complete route.
 type RouteTollSummary struct {
 
@@ -10515,30 +4124,6 @@ type RouteTollSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTollSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Total != nil {
-		s.WriteStruct(schemas.RouteTollSummary_Total)
-		v.Total.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTollSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollSummary_Total:
-			v.Total = &RouteTollPriceSummary{}
-			return v.Total.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Toll systems are authorities that collect payments for the toll.
 type RouteTollSystem struct {
 
@@ -10546,28 +4131,6 @@ type RouteTollSystem struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTollSystem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTollSystem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTollSystem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTollSystem_Name, *v.Name)
-	}
-}
-func (v *RouteTollSystem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTollSystem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTollSystem_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTollSystem_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Traffic options for the route.
@@ -10601,37 +4164,6 @@ type RouteTrafficOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTrafficOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTrafficOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTrafficOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FlowEventThresholdOverride != 0 {
-		s.WriteInt64(schemas.RouteTrafficOptions_FlowEventThresholdOverride, v.FlowEventThresholdOverride)
-	}
-	if v.Usage != "" {
-		s.WriteString(schemas.RouteTrafficOptions_Usage, string(v.Usage))
-	}
-}
-func (v *RouteTrafficOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTrafficOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTrafficOptions_FlowEventThresholdOverride:
-			return d.ReadInt64(schemas.RouteTrafficOptions_FlowEventThresholdOverride, &v.FlowEventThresholdOverride)
-		case schemas.RouteTrafficOptions_Usage:
-			var ev string
-			if err := d.ReadString(schemas.RouteTrafficOptions_Usage, &ev); err != nil {
-				return err
-			}
-			v.Usage = TrafficUsage(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Trailer options corresponding to the vehicle.
 type RouteTrailerOptions struct {
 
@@ -10644,34 +4176,6 @@ type RouteTrailerOptions struct {
 	TrailerCount *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTrailerOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTrailerOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTrailerOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AxleCount != nil {
-		s.WriteInt32(schemas.RouteTrailerOptions_AxleCount, *v.AxleCount)
-	}
-	if v.TrailerCount != nil {
-		s.WriteInt32(schemas.RouteTrailerOptions_TrailerCount, *v.TrailerCount)
-	}
-}
-func (v *RouteTrailerOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTrailerOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTrailerOptions_AxleCount:
-			v.AxleCount = new(int32)
-			return d.ReadInt32(schemas.RouteTrailerOptions_AxleCount, v.AxleCount)
-		case schemas.RouteTrailerOptions_TrailerCount:
-			v.TrailerCount = new(int32)
-			return d.ReadInt32(schemas.RouteTrailerOptions_TrailerCount, v.TrailerCount)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed after the travel portion of the leg.
@@ -10695,44 +4199,6 @@ type RouteTransitAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitAfterTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTransitAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTransitAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteTransitAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitAfterTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitAfterTravelStep_Duration, v.Duration)
-		case schemas.RouteTransitAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTransitAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTransitAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTransitAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about the transit agency.
 type RouteTransitAgency struct {
 
@@ -10745,34 +4211,6 @@ type RouteTransitAgency struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitAgency) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitAgency)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitAgency) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTransitAgency_Name, *v.Name)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.RouteTransitAgency_Url, *v.Url)
-	}
-}
-func (v *RouteTransitAgency) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitAgency, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitAgency_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTransitAgency_Name, v.Name)
-		case schemas.RouteTransitAgency_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.RouteTransitAgency_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // Details corresponding to the arrival for the leg.
@@ -10797,52 +4235,6 @@ type RouteTransitArrival struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Delay != nil {
-		s.WriteInt64(schemas.RouteTransitArrival_Delay, *v.Delay)
-	}
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteTransitArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RouteTransitArrival_Status, string(v.Status))
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteTransitArrival_Time, *v.Time)
-	}
-}
-func (v *RouteTransitArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitArrival_Delay:
-			v.Delay = new(int64)
-			return d.ReadInt64(schemas.RouteTransitArrival_Delay, v.Delay)
-		case schemas.RouteTransitArrival_Place:
-			v.Place = &RouteTransitPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteTransitArrival_Status:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitArrival_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = RouteTransitTripStatus(ev)
-			return nil
-		case schemas.RouteTransitArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteTransitArrival_Time, v.Time)
-		}
-		return nil
-	})
-}
-
 // A step that must be performed before the travel portion of the leg.
 type RouteTransitBeforeTravelStep struct {
 
@@ -10862,44 +4254,6 @@ type RouteTransitBeforeTravelStep struct {
 	Instruction *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitBeforeTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitBeforeTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitBeforeTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitBeforeTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTransitBeforeTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTransitBeforeTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteTransitBeforeTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitBeforeTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitBeforeTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitBeforeTravelStep_Duration, v.Duration)
-		case schemas.RouteTransitBeforeTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTransitBeforeTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTransitBeforeTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitBeforeTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTransitBeforeTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details corresponding to the departure for the leg.
@@ -10922,52 +4276,6 @@ type RouteTransitDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Delay != nil {
-		s.WriteInt64(schemas.RouteTransitDeparture_Delay, *v.Delay)
-	}
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteTransitDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RouteTransitDeparture_Status, string(v.Status))
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteTransitDeparture_Time, *v.Time)
-	}
-}
-func (v *RouteTransitDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitDeparture_Delay:
-			v.Delay = new(int64)
-			return d.ReadInt64(schemas.RouteTransitDeparture_Delay, v.Delay)
-		case schemas.RouteTransitDeparture_Place:
-			v.Place = &RouteTransitPlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteTransitDeparture_Status:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitDeparture_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = RouteTransitTripStatus(ev)
-			return nil
-		case schemas.RouteTransitDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteTransitDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // An incident describes disruptions on the transit route.
@@ -10998,66 +4306,6 @@ type RouteTransitIncident struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitIncident) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitIncident)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitIncident) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.RouteTransitIncident_Description, *v.Description)
-	}
-	if v.Effect != "" {
-		s.WriteString(schemas.RouteTransitIncident_Effect, string(v.Effect))
-	}
-	if v.EndTime != nil {
-		s.WriteString(schemas.RouteTransitIncident_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteString(schemas.RouteTransitIncident_StartTime, *v.StartTime)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTransitIncident_Type, string(v.Type))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.RouteTransitIncident_Url, *v.Url)
-	}
-}
-func (v *RouteTransitIncident) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitIncident, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitIncident_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.RouteTransitIncident_Description, v.Description)
-		case schemas.RouteTransitIncident_Effect:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitIncident_Effect, &ev); err != nil {
-				return err
-			}
-			v.Effect = RouteTransitIncidentEffect(ev)
-			return nil
-		case schemas.RouteTransitIncident_EndTime:
-			v.EndTime = new(string)
-			return d.ReadString(schemas.RouteTransitIncident_EndTime, v.EndTime)
-		case schemas.RouteTransitIncident_StartTime:
-			v.StartTime = new(string)
-			return d.ReadString(schemas.RouteTransitIncident_StartTime, v.StartTime)
-		case schemas.RouteTransitIncident_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitIncident_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTransitIncidentType(ev)
-			return nil
-		case schemas.RouteTransitIncident_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.RouteTransitIncident_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // An intermediate stop between departure and destination of the transit route.
 type RouteTransitIntermediateStop struct {
 
@@ -11083,53 +4331,6 @@ type RouteTransitIntermediateStop struct {
 	Transport *RouteTransitTransportModeDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitIntermediateStop) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitIntermediateStop)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitIntermediateStop) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitIntermediateStopAttributeList(s, schemas.RouteTransitIntermediateStop_Attributes, v.Attributes)
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteTransitIntermediateStop_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitIntermediateStop_Duration, *v.Duration)
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteTransitIntermediateStop_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Transport != nil {
-		s.WriteStruct(schemas.RouteTransitIntermediateStop_Transport)
-		v.Transport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTransitIntermediateStop) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitIntermediateStop, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitIntermediateStop_Attributes:
-			return deserializeRouteTransitIntermediateStopAttributeList(d, schemas.RouteTransitIntermediateStop_Attributes, &v.Attributes)
-		case schemas.RouteTransitIntermediateStop_Departure:
-			v.Departure = &RouteTransitDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteTransitIntermediateStop_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitIntermediateStop_Duration, v.Duration)
-		case schemas.RouteTransitIntermediateStop_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteTransitIntermediateStop_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteTransitIntermediateStop_Transport:
-			v.Transport = &RouteTransitTransportModeDetails{}
-			return v.Transport.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Populated when the Leg type is Transit, and provides additional information
@@ -11218,95 +4419,6 @@ type RouteTransitLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitAfterTravelStepList(s, schemas.RouteTransitLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Agency != nil {
-		s.WriteStruct(schemas.RouteTransitLegDetails_Agency)
-		v.Agency.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RouteTransitLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteAttributionList(s, schemas.RouteTransitLegDetails_Attributions, v.Attributions)
-	serializeRouteTransitBeforeTravelStepList(s, schemas.RouteTransitLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteTransitLegDetails_BookingWebLinks, v.BookingWebLinks)
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteTransitLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTransitIncidentList(s, schemas.RouteTransitLegDetails_Incidents, v.Incidents)
-	serializeRouteTransitIntermediateStopList(s, schemas.RouteTransitLegDetails_IntermediateStops, v.IntermediateStops)
-	serializeRouteTransitNextDepartureList(s, schemas.RouteTransitLegDetails_NextDepartures, v.NextDepartures)
-	serializeRouteTransitNoticeList(s, schemas.RouteTransitLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteTransitLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRouteTransitSpanList(s, schemas.RouteTransitLegDetails_Spans, v.Spans)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RouteTransitLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transport != nil {
-		s.WriteStruct(schemas.RouteTransitLegDetails_Transport)
-		v.Transport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTransitTravelStepList(s, schemas.RouteTransitLegDetails_TravelSteps, v.TravelSteps)
-}
-func (v *RouteTransitLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitLegDetails_AfterTravelSteps:
-			return deserializeRouteTransitAfterTravelStepList(d, schemas.RouteTransitLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RouteTransitLegDetails_Agency:
-			v.Agency = &RouteTransitAgency{}
-			return v.Agency.Deserialize(d)
-		case schemas.RouteTransitLegDetails_Arrival:
-			v.Arrival = &RouteTransitArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RouteTransitLegDetails_Attributions:
-			return deserializeRouteAttributionList(d, schemas.RouteTransitLegDetails_Attributions, &v.Attributions)
-		case schemas.RouteTransitLegDetails_BeforeTravelSteps:
-			return deserializeRouteTransitBeforeTravelStepList(d, schemas.RouteTransitLegDetails_BeforeTravelSteps, &v.BeforeTravelSteps)
-		case schemas.RouteTransitLegDetails_BookingWebLinks:
-			return deserializeRouteWebLinkList(d, schemas.RouteTransitLegDetails_BookingWebLinks, &v.BookingWebLinks)
-		case schemas.RouteTransitLegDetails_Departure:
-			v.Departure = &RouteTransitDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteTransitLegDetails_Incidents:
-			return deserializeRouteTransitIncidentList(d, schemas.RouteTransitLegDetails_Incidents, &v.Incidents)
-		case schemas.RouteTransitLegDetails_IntermediateStops:
-			return deserializeRouteTransitIntermediateStopList(d, schemas.RouteTransitLegDetails_IntermediateStops, &v.IntermediateStops)
-		case schemas.RouteTransitLegDetails_NextDepartures:
-			return deserializeRouteTransitNextDepartureList(d, schemas.RouteTransitLegDetails_NextDepartures, &v.NextDepartures)
-		case schemas.RouteTransitLegDetails_Notices:
-			return deserializeRouteTransitNoticeList(d, schemas.RouteTransitLegDetails_Notices, &v.Notices)
-		case schemas.RouteTransitLegDetails_PassThroughWaypoints:
-			return deserializeRoutePassThroughWaypointList(d, schemas.RouteTransitLegDetails_PassThroughWaypoints, &v.PassThroughWaypoints)
-		case schemas.RouteTransitLegDetails_Spans:
-			return deserializeRouteTransitSpanList(d, schemas.RouteTransitLegDetails_Spans, &v.Spans)
-		case schemas.RouteTransitLegDetails_Summary:
-			v.Summary = &RouteTransitSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RouteTransitLegDetails_Transport:
-			v.Transport = &RouteTransitTransportModeDetails{}
-			return v.Transport.Deserialize(d)
-		case schemas.RouteTransitLegDetails_TravelSteps:
-			return deserializeRouteTransitTravelStepList(d, schemas.RouteTransitLegDetails_TravelSteps, &v.TravelSteps)
-		}
-		return nil
-	})
-}
-
 // Details about the next available departure for the transit service.
 type RouteTransitNextDeparture struct {
 
@@ -11332,58 +4444,6 @@ type RouteTransitNextDeparture struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitNextDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitNextDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitNextDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Delay != nil {
-		s.WriteInt64(schemas.RouteTransitNextDeparture_Delay, *v.Delay)
-	}
-	if v.PlatformName != nil {
-		s.WriteString(schemas.RouteTransitNextDeparture_PlatformName, *v.PlatformName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RouteTransitNextDeparture_Status, string(v.Status))
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteTransitNextDeparture_Time, *v.Time)
-	}
-	if v.Transport != nil {
-		s.WriteStruct(schemas.RouteTransitNextDeparture_Transport)
-		v.Transport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTransitNextDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitNextDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitNextDeparture_Delay:
-			v.Delay = new(int64)
-			return d.ReadInt64(schemas.RouteTransitNextDeparture_Delay, v.Delay)
-		case schemas.RouteTransitNextDeparture_PlatformName:
-			v.PlatformName = new(string)
-			return d.ReadString(schemas.RouteTransitNextDeparture_PlatformName, v.PlatformName)
-		case schemas.RouteTransitNextDeparture_Status:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitNextDeparture_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = RouteTransitTripStatus(ev)
-			return nil
-		case schemas.RouteTransitNextDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteTransitNextDeparture_Time, v.Time)
-		case schemas.RouteTransitNextDeparture_Transport:
-			v.Transport = &RouteTransitTransportModeDetails{}
-			return v.Transport.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A notice that indicates an issue that occurred during route calculation.
 type RouteTransitNotice struct {
 
@@ -11397,42 +4457,6 @@ type RouteTransitNotice struct {
 	Impact RouteNoticeImpact
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RouteTransitNotice_Code, string(v.Code))
-	}
-	if v.Impact != "" {
-		s.WriteString(schemas.RouteTransitNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RouteTransitNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RouteTransitNoticeCode(ev)
-			return nil
-		case schemas.RouteTransitNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Options related to transit routing.
@@ -11462,45 +4486,6 @@ type RouteTransitOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAccessibilityAttributeList(s, schemas.RouteTransitOptions_AccessibilityAttributes, v.AccessibilityAttributes)
-	serializeRouteTransitModeList(s, schemas.RouteTransitOptions_AllowedModes, v.AllowedModes)
-	serializeRouteTransitModeList(s, schemas.RouteTransitOptions_ExcludedModes, v.ExcludedModes)
-	if v.MaxTransfers != nil {
-		s.WriteInt32(schemas.RouteTransitOptions_MaxTransfers, *v.MaxTransfers)
-	}
-	if v.Pedestrian != nil {
-		s.WriteStruct(schemas.RouteTransitOptions_Pedestrian)
-		v.Pedestrian.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTransitOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitOptions_AccessibilityAttributes:
-			return deserializeRouteAccessibilityAttributeList(d, schemas.RouteTransitOptions_AccessibilityAttributes, &v.AccessibilityAttributes)
-		case schemas.RouteTransitOptions_AllowedModes:
-			return deserializeRouteTransitModeList(d, schemas.RouteTransitOptions_AllowedModes, &v.AllowedModes)
-		case schemas.RouteTransitOptions_ExcludedModes:
-			return deserializeRouteTransitModeList(d, schemas.RouteTransitOptions_ExcludedModes, &v.ExcludedModes)
-		case schemas.RouteTransitOptions_MaxTransfers:
-			v.MaxTransfers = new(int32)
-			return d.ReadInt32(schemas.RouteTransitOptions_MaxTransfers, v.MaxTransfers)
-		case schemas.RouteTransitOptions_Pedestrian:
-			v.Pedestrian = &RouteTransitPedestrianOptions{}
-			return v.Pedestrian.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summary including duration and distance for the entire leg.
 type RouteTransitOverviewSummary struct {
 
@@ -11521,34 +4506,6 @@ type RouteTransitOverviewSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteTransitOverviewSummary_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitOverviewSummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteTransitOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitOverviewSummary_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteTransitOverviewSummary_Distance, v.Distance)
-		case schemas.RouteTransitOverviewSummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitOverviewSummary_Duration, v.Duration)
-		}
-		return nil
-	})
-}
-
 // Options for the pedestrian leg of the transit route.
 type RouteTransitPedestrianOptions struct {
 
@@ -11563,34 +4520,6 @@ type RouteTransitPedestrianOptions struct {
 	Speed *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitPedestrianOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitPedestrianOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitPedestrianOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxDistance != nil {
-		s.WriteInt64(schemas.RouteTransitPedestrianOptions_MaxDistance, *v.MaxDistance)
-	}
-	if v.Speed != nil {
-		s.WriteFloat64(schemas.RouteTransitPedestrianOptions_Speed, *v.Speed)
-	}
-}
-func (v *RouteTransitPedestrianOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitPedestrianOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitPedestrianOptions_MaxDistance:
-			v.MaxDistance = new(int64)
-			return d.ReadInt64(schemas.RouteTransitPedestrianOptions_MaxDistance, v.MaxDistance)
-		case schemas.RouteTransitPedestrianOptions_Speed:
-			v.Speed = new(float64)
-			return d.ReadFloat64(schemas.RouteTransitPedestrianOptions_Speed, v.Speed)
-		}
-		return nil
-	})
 }
 
 // Place details corresponding to the arrival or departure.
@@ -11617,58 +4546,6 @@ type RouteTransitPlace struct {
 	WaypointIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitPlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitPlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RouteTransitPlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteTransitPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteTransitPlace_Position, v.Position)
-	if v.StationDetails != nil {
-		s.WriteStruct(schemas.RouteTransitPlace_StationDetails)
-		v.StationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTransitPlace_Type, string(v.Type))
-	}
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RouteTransitPlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RouteTransitPlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitPlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitPlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteTransitPlace_Name, v.Name)
-		case schemas.RouteTransitPlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RouteTransitPlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RouteTransitPlace_Position:
-			return deserializePosition23(d, schemas.RouteTransitPlace_Position, &v.Position)
-		case schemas.RouteTransitPlace_StationDetails:
-			v.StationDetails = &RouteStationDetails{}
-			return v.StationDetails.Deserialize(d)
-		case schemas.RouteTransitPlace_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitPlace_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTransitPlaceType(ev)
-			return nil
-		case schemas.RouteTransitPlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RouteTransitPlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
 }
 
 // Span computed for the requested SpanAdditionalFeatures.
@@ -11702,55 +4579,6 @@ type RouteTransitSpan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitSpan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitSpan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitSpan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Country != nil {
-		s.WriteString(schemas.RouteTransitSpan_Country, *v.Country)
-	}
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteTransitSpan_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitSpan_Duration, *v.Duration)
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteTransitSpan_GeometryOffset, *v.GeometryOffset)
-	}
-	serializeLocalizedStringList(s, schemas.RouteTransitSpan_Names, v.Names)
-	if v.Region != nil {
-		s.WriteString(schemas.RouteTransitSpan_Region, *v.Region)
-	}
-}
-func (v *RouteTransitSpan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitSpan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitSpan_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.RouteTransitSpan_Country, v.Country)
-		case schemas.RouteTransitSpan_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteTransitSpan_Distance, v.Distance)
-		case schemas.RouteTransitSpan_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitSpan_Duration, v.Duration)
-		case schemas.RouteTransitSpan_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteTransitSpan_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteTransitSpan_Names:
-			return deserializeLocalizedStringList(d, schemas.RouteTransitSpan_Names, &v.Names)
-		case schemas.RouteTransitSpan_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.RouteTransitSpan_Region, v.Region)
-		}
-		return nil
-	})
-}
-
 // Summary of the transit leg.
 type RouteTransitSummary struct {
 
@@ -11761,38 +4589,6 @@ type RouteTransitSummary struct {
 	TravelOnly *RouteTransitTravelOnlySummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RouteTransitSummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RouteTransitSummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTransitSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitSummary_Overview:
-			v.Overview = &RouteTransitOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RouteTransitSummary_TravelOnly:
-			v.TravelOnly = &RouteTransitTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Transport mode details for the transit leg.
@@ -11827,76 +4623,6 @@ type RouteTransitTransportModeDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitTransportModeDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitTransportModeDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitTransportModeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accessibility != nil {
-		s.WriteStruct(schemas.RouteTransitTransportModeDetails_Accessibility)
-		v.Accessibility.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Color != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_Color, *v.Color)
-	}
-	if v.Headsign != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_Headsign, *v.Headsign)
-	}
-	if v.LongRouteName != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_LongRouteName, *v.LongRouteName)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_Mode, string(v.Mode))
-	}
-	if v.RouteName != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_RouteName, *v.RouteName)
-	}
-	if v.ShortRouteName != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_ShortRouteName, *v.ShortRouteName)
-	}
-	if v.TextColor != nil {
-		s.WriteString(schemas.RouteTransitTransportModeDetails_TextColor, *v.TextColor)
-	}
-}
-func (v *RouteTransitTransportModeDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitTransportModeDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitTransportModeDetails_Accessibility:
-			v.Accessibility = &RouteAccessibilityAvailabilityDetails{}
-			return v.Accessibility.Deserialize(d)
-		case schemas.RouteTransitTransportModeDetails_Color:
-			v.Color = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_Color, v.Color)
-		case schemas.RouteTransitTransportModeDetails_Headsign:
-			v.Headsign = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_Headsign, v.Headsign)
-		case schemas.RouteTransitTransportModeDetails_LongRouteName:
-			v.LongRouteName = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_LongRouteName, v.LongRouteName)
-		case schemas.RouteTransitTransportModeDetails_Mode:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitTransportModeDetails_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = RouteTransitMode(ev)
-			return nil
-		case schemas.RouteTransitTransportModeDetails_RouteName:
-			v.RouteName = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_RouteName, v.RouteName)
-		case schemas.RouteTransitTransportModeDetails_ShortRouteName:
-			v.ShortRouteName = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_ShortRouteName, v.ShortRouteName)
-		case schemas.RouteTransitTransportModeDetails_TextColor:
-			v.TextColor = new(string)
-			return d.ReadString(schemas.RouteTransitTransportModeDetails_TextColor, v.TextColor)
-		}
-		return nil
-	})
-}
-
 // Summary including duration and distance for the travel portion of the leg only.
 type RouteTransitTravelOnlySummary struct {
 
@@ -11908,28 +4634,6 @@ type RouteTransitTravelOnlySummary struct {
 	Duration *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransitTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitTravelOnlySummary_Duration, *v.Duration)
-	}
-}
-func (v *RouteTransitTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitTravelOnlySummary_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitTravelOnlySummary_Duration, v.Duration)
-		}
-		return nil
-	})
 }
 
 // A step that must be performed during the travel portion of the leg.
@@ -11961,56 +4665,6 @@ type RouteTransitTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTransitTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransitTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransitTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != nil {
-		s.WriteInt64(schemas.RouteTransitTravelStep_Distance, *v.Distance)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteTransitTravelStep_Duration, *v.Duration)
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteTransitTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteTransitTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteTransitTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteTransitTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransitTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransitTravelStep_Distance:
-			v.Distance = new(int64)
-			return d.ReadInt64(schemas.RouteTransitTravelStep_Distance, v.Distance)
-		case schemas.RouteTransitTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteTransitTravelStep_Duration, v.Duration)
-		case schemas.RouteTransitTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteTransitTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteTransitTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteTransitTravelStep_Instruction, v.Instruction)
-		case schemas.RouteTransitTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteTransitTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteTransitTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Transponders for which this toll can be applied.
 type RouteTransponder struct {
 
@@ -12018,28 +4672,6 @@ type RouteTransponder struct {
 	SystemName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTransponder) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTransponder)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTransponder) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SystemName != nil {
-		s.WriteString(schemas.RouteTransponder_SystemName, *v.SystemName)
-	}
-}
-func (v *RouteTransponder) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTransponder, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTransponder_SystemName:
-			v.SystemName = new(string)
-			return d.ReadString(schemas.RouteTransponder_SystemName, v.SystemName)
-		}
-		return nil
-	})
 }
 
 // Travel mode related options for the provided travel mode.
@@ -12075,70 +4707,6 @@ type RouteTravelModeOptions struct {
 	Truck *RouteTruckOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteTravelModeOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTravelModeOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTravelModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Car != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Car)
-		v.Car.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Intermodal != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Intermodal)
-		v.Intermodal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Pedestrian != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Pedestrian)
-		v.Pedestrian.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Scooter != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Scooter)
-		v.Scooter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transit != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Transit)
-		v.Transit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Truck != nil {
-		s.WriteStruct(schemas.RouteTravelModeOptions_Truck)
-		v.Truck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteTravelModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTravelModeOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTravelModeOptions_Car:
-			v.Car = &RouteCarOptions{}
-			return v.Car.Deserialize(d)
-		case schemas.RouteTravelModeOptions_Intermodal:
-			v.Intermodal = &RouteIntermodalOptions{}
-			return v.Intermodal.Deserialize(d)
-		case schemas.RouteTravelModeOptions_Pedestrian:
-			v.Pedestrian = &RoutePedestrianOptions{}
-			return v.Pedestrian.Deserialize(d)
-		case schemas.RouteTravelModeOptions_Scooter:
-			v.Scooter = &RouteScooterOptions{}
-			return v.Scooter.Deserialize(d)
-		case schemas.RouteTravelModeOptions_Transit:
-			v.Transit = &RouteTransitOptions{}
-			return v.Transit.Deserialize(d)
-		case schemas.RouteTravelModeOptions_Truck:
-			v.Truck = &RouteTruckOptions{}
-			return v.Truck.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	Travel mode options when the provided travel mode is Truck . Not supported in
@@ -12262,139 +4830,6 @@ type RouteTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTruckOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTruckOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AxleCount != nil {
-		s.WriteInt32(schemas.RouteTruckOptions_AxleCount, *v.AxleCount)
-	}
-	if v.EngineType != "" {
-		s.WriteString(schemas.RouteTruckOptions_EngineType, string(v.EngineType))
-	}
-	if v.GrossWeight != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_GrossWeight, v.GrossWeight)
-	}
-	serializeRouteHazardousCargoTypeList(s, schemas.RouteTruckOptions_HazardousCargos, v.HazardousCargos)
-	if v.Height != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_Height, v.Height)
-	}
-	if v.HeightAboveFirstAxle != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_HeightAboveFirstAxle, v.HeightAboveFirstAxle)
-	}
-	if v.KpraLength != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_KpraLength, v.KpraLength)
-	}
-	if v.Length != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_Length, v.Length)
-	}
-	if v.LicensePlate != nil {
-		s.WriteStruct(schemas.RouteTruckOptions_LicensePlate)
-		v.LicensePlate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxSpeed != nil {
-		s.WriteFloat64(schemas.RouteTruckOptions_MaxSpeed, *v.MaxSpeed)
-	}
-	if v.Occupancy != nil {
-		s.WriteInt32(schemas.RouteTruckOptions_Occupancy, *v.Occupancy)
-	}
-	if v.PayloadCapacity != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_PayloadCapacity, v.PayloadCapacity)
-	}
-	if v.TireCount != nil {
-		s.WriteInt32(schemas.RouteTruckOptions_TireCount, *v.TireCount)
-	}
-	if v.Trailer != nil {
-		s.WriteStruct(schemas.RouteTruckOptions_Trailer)
-		v.Trailer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TruckType != "" {
-		s.WriteString(schemas.RouteTruckOptions_TruckType, string(v.TruckType))
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.RouteTruckOptions_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-	if v.WeightPerAxle != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_WeightPerAxle, v.WeightPerAxle)
-	}
-	if v.WeightPerAxleGroup != nil {
-		s.WriteStruct(schemas.RouteTruckOptions_WeightPerAxleGroup)
-		v.WeightPerAxleGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Width != 0 {
-		s.WriteInt64(schemas.RouteTruckOptions_Width, v.Width)
-	}
-}
-func (v *RouteTruckOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTruckOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTruckOptions_AxleCount:
-			v.AxleCount = new(int32)
-			return d.ReadInt32(schemas.RouteTruckOptions_AxleCount, v.AxleCount)
-		case schemas.RouteTruckOptions_EngineType:
-			var ev string
-			if err := d.ReadString(schemas.RouteTruckOptions_EngineType, &ev); err != nil {
-				return err
-			}
-			v.EngineType = RouteEngineType(ev)
-			return nil
-		case schemas.RouteTruckOptions_GrossWeight:
-			return d.ReadInt64(schemas.RouteTruckOptions_GrossWeight, &v.GrossWeight)
-		case schemas.RouteTruckOptions_HazardousCargos:
-			return deserializeRouteHazardousCargoTypeList(d, schemas.RouteTruckOptions_HazardousCargos, &v.HazardousCargos)
-		case schemas.RouteTruckOptions_Height:
-			return d.ReadInt64(schemas.RouteTruckOptions_Height, &v.Height)
-		case schemas.RouteTruckOptions_HeightAboveFirstAxle:
-			return d.ReadInt64(schemas.RouteTruckOptions_HeightAboveFirstAxle, &v.HeightAboveFirstAxle)
-		case schemas.RouteTruckOptions_KpraLength:
-			return d.ReadInt64(schemas.RouteTruckOptions_KpraLength, &v.KpraLength)
-		case schemas.RouteTruckOptions_Length:
-			return d.ReadInt64(schemas.RouteTruckOptions_Length, &v.Length)
-		case schemas.RouteTruckOptions_LicensePlate:
-			v.LicensePlate = &RouteVehicleLicensePlate{}
-			return v.LicensePlate.Deserialize(d)
-		case schemas.RouteTruckOptions_MaxSpeed:
-			v.MaxSpeed = new(float64)
-			return d.ReadFloat64(schemas.RouteTruckOptions_MaxSpeed, v.MaxSpeed)
-		case schemas.RouteTruckOptions_Occupancy:
-			v.Occupancy = new(int32)
-			return d.ReadInt32(schemas.RouteTruckOptions_Occupancy, v.Occupancy)
-		case schemas.RouteTruckOptions_PayloadCapacity:
-			return d.ReadInt64(schemas.RouteTruckOptions_PayloadCapacity, &v.PayloadCapacity)
-		case schemas.RouteTruckOptions_TireCount:
-			v.TireCount = new(int32)
-			return d.ReadInt32(schemas.RouteTruckOptions_TireCount, v.TireCount)
-		case schemas.RouteTruckOptions_Trailer:
-			v.Trailer = &RouteTrailerOptions{}
-			return v.Trailer.Deserialize(d)
-		case schemas.RouteTruckOptions_TruckType:
-			var ev string
-			if err := d.ReadString(schemas.RouteTruckOptions_TruckType, &ev); err != nil {
-				return err
-			}
-			v.TruckType = RouteTruckType(ev)
-			return nil
-		case schemas.RouteTruckOptions_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.RouteTruckOptions_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		case schemas.RouteTruckOptions_WeightPerAxle:
-			return d.ReadInt64(schemas.RouteTruckOptions_WeightPerAxle, &v.WeightPerAxle)
-		case schemas.RouteTruckOptions_WeightPerAxleGroup:
-			v.WeightPerAxleGroup = &WeightPerAxleGroup{}
-			return v.WeightPerAxleGroup.Deserialize(d)
-		case schemas.RouteTruckOptions_Width:
-			return d.ReadInt64(schemas.RouteTruckOptions_Width, &v.Width)
-		}
-		return nil
-	})
-}
-
 // Details related to the turn step.
 type RouteTurnStepDetails struct {
 
@@ -12415,50 +4850,6 @@ type RouteTurnStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteTurnStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteTurnStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteTurnStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteTurnStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteTurnStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteTurnStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteTurnStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteTurnStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteTurnStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteTurnStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteTurnStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteTurnStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteTurnStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteTurnStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteTurnStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteTurnStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteTurnStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details related to the U-turn step.
 type RouteUTurnStepDetails struct {
 
@@ -12477,50 +4868,6 @@ type RouteUTurnStepDetails struct {
 	TurnIntensity RouteTurnIntensity
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteUTurnStepDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteUTurnStepDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteUTurnStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteUTurnStepDetails_Intersection, v.Intersection)
-	if v.SteeringDirection != "" {
-		s.WriteString(schemas.RouteUTurnStepDetails_SteeringDirection, string(v.SteeringDirection))
-	}
-	if v.TurnAngle != 0 {
-		s.WriteFloat64(schemas.RouteUTurnStepDetails_TurnAngle, v.TurnAngle)
-	}
-	if v.TurnIntensity != "" {
-		s.WriteString(schemas.RouteUTurnStepDetails_TurnIntensity, string(v.TurnIntensity))
-	}
-}
-func (v *RouteUTurnStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteUTurnStepDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteUTurnStepDetails_Intersection:
-			return deserializeLocalizedStringList(d, schemas.RouteUTurnStepDetails_Intersection, &v.Intersection)
-		case schemas.RouteUTurnStepDetails_SteeringDirection:
-			var ev string
-			if err := d.ReadString(schemas.RouteUTurnStepDetails_SteeringDirection, &ev); err != nil {
-				return err
-			}
-			v.SteeringDirection = RouteSteeringDirection(ev)
-			return nil
-		case schemas.RouteUTurnStepDetails_TurnAngle:
-			return d.ReadFloat64(schemas.RouteUTurnStepDetails_TurnAngle, &v.TurnAngle)
-		case schemas.RouteUTurnStepDetails_TurnIntensity:
-			var ev string
-			if err := d.ReadString(schemas.RouteUTurnStepDetails_TurnIntensity, &ev); err != nil {
-				return err
-			}
-			v.TurnIntensity = RouteTurnIntensity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that must be performed after the travel portion of the leg.
@@ -12551,52 +4898,6 @@ type RouteVehicleAfterTravelStep struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleAfterTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChargeStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleAfterTravelStep_ChargeStepDetails)
-		v.ChargeStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.RouteVehicleAfterTravelStep_Duration, *v.Duration)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteVehicleAfterTravelStep_Instruction, *v.Instruction)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteVehicleAfterTravelStep_Type, string(v.Type))
-	}
-}
-func (v *RouteVehicleAfterTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleAfterTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleAfterTravelStep_ChargeStepDetails:
-			v.ChargeStepDetails = &RouteChargeStepDetails{}
-			return v.ChargeStepDetails.Deserialize(d)
-		case schemas.RouteVehicleAfterTravelStep_Duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.RouteVehicleAfterTravelStep_Duration, v.Duration)
-		case schemas.RouteVehicleAfterTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteVehicleAfterTravelStep_Instruction, v.Instruction)
-		case schemas.RouteVehicleAfterTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleAfterTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteVehicleAfterTravelStepType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the arrival for a leg.
 type RouteVehicleArrival struct {
 
@@ -12611,36 +4912,6 @@ type RouteVehicleArrival struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleArrival) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleArrival)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleArrival) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteVehicleArrival_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteVehicleArrival_Time, *v.Time)
-	}
-}
-func (v *RouteVehicleArrival) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleArrival, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleArrival_Place:
-			v.Place = &RouteVehiclePlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteVehicleArrival_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteVehicleArrival_Time, v.Time)
-		}
-		return nil
-	})
-}
-
 // Details corresponding to the departure for the leg.
 type RouteVehicleDeparture struct {
 
@@ -12653,36 +4924,6 @@ type RouteVehicleDeparture struct {
 	Time *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleDeparture) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleDeparture)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleDeparture) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.RouteVehicleDeparture_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Time != nil {
-		s.WriteString(schemas.RouteVehicleDeparture_Time, *v.Time)
-	}
-}
-func (v *RouteVehicleDeparture) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleDeparture, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleDeparture_Place:
-			v.Place = &RouteVehiclePlace{}
-			return v.Place.Deserialize(d)
-		case schemas.RouteVehicleDeparture_Time:
-			v.Time = new(string)
-			return d.ReadString(schemas.RouteVehicleDeparture_Time, v.Time)
-		}
-		return nil
-	})
 }
 
 // Incidents corresponding to this leg of the route.
@@ -12707,60 +4948,6 @@ type RouteVehicleIncident struct {
 	Type RouteVehicleIncidentType
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleIncident) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleIncident)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleIncident) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.RouteVehicleIncident_Description, *v.Description)
-	}
-	if v.EndTime != nil {
-		s.WriteString(schemas.RouteVehicleIncident_EndTime, *v.EndTime)
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.RouteVehicleIncident_Severity, string(v.Severity))
-	}
-	if v.StartTime != nil {
-		s.WriteString(schemas.RouteVehicleIncident_StartTime, *v.StartTime)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteVehicleIncident_Type, string(v.Type))
-	}
-}
-func (v *RouteVehicleIncident) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleIncident, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleIncident_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.RouteVehicleIncident_Description, v.Description)
-		case schemas.RouteVehicleIncident_EndTime:
-			v.EndTime = new(string)
-			return d.ReadString(schemas.RouteVehicleIncident_EndTime, v.EndTime)
-		case schemas.RouteVehicleIncident_Severity:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleIncident_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = RouteVehicleIncidentSeverity(ev)
-			return nil
-		case schemas.RouteVehicleIncident_StartTime:
-			v.StartTime = new(string)
-			return d.ReadString(schemas.RouteVehicleIncident_StartTime, v.StartTime)
-		case schemas.RouteVehicleIncident_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleIncident_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteVehicleIncidentType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that correspond to the travel portion of the leg.
@@ -12858,76 +5045,6 @@ type RouteVehicleLegDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleLegDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleLegDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteVehicleAfterTravelStepList(s, schemas.RouteVehicleLegDetails_AfterTravelSteps, v.AfterTravelSteps)
-	if v.Arrival != nil {
-		s.WriteStruct(schemas.RouteVehicleLegDetails_Arrival)
-		v.Arrival.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Departure != nil {
-		s.WriteStruct(schemas.RouteVehicleLegDetails_Departure)
-		v.Departure.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteVehicleIncidentList(s, schemas.RouteVehicleLegDetails_Incidents, v.Incidents)
-	serializeRouteVehicleNoticeList(s, schemas.RouteVehicleLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteVehicleLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRouteVehicleSpanList(s, schemas.RouteVehicleLegDetails_Spans, v.Spans)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.RouteVehicleLegDetails_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteTollSystemList(s, schemas.RouteVehicleLegDetails_TollSystems, v.TollSystems)
-	serializeRouteTollList(s, schemas.RouteVehicleLegDetails_Tolls, v.Tolls)
-	serializeRouteVehicleTravelStepList(s, schemas.RouteVehicleLegDetails_TravelSteps, v.TravelSteps)
-	serializeTruckRoadTypeList(s, schemas.RouteVehicleLegDetails_TruckRoadTypes, v.TruckRoadTypes)
-	serializeRouteZoneList(s, schemas.RouteVehicleLegDetails_Zones, v.Zones)
-}
-func (v *RouteVehicleLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleLegDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleLegDetails_AfterTravelSteps:
-			return deserializeRouteVehicleAfterTravelStepList(d, schemas.RouteVehicleLegDetails_AfterTravelSteps, &v.AfterTravelSteps)
-		case schemas.RouteVehicleLegDetails_Arrival:
-			v.Arrival = &RouteVehicleArrival{}
-			return v.Arrival.Deserialize(d)
-		case schemas.RouteVehicleLegDetails_Departure:
-			v.Departure = &RouteVehicleDeparture{}
-			return v.Departure.Deserialize(d)
-		case schemas.RouteVehicleLegDetails_Incidents:
-			return deserializeRouteVehicleIncidentList(d, schemas.RouteVehicleLegDetails_Incidents, &v.Incidents)
-		case schemas.RouteVehicleLegDetails_Notices:
-			return deserializeRouteVehicleNoticeList(d, schemas.RouteVehicleLegDetails_Notices, &v.Notices)
-		case schemas.RouteVehicleLegDetails_PassThroughWaypoints:
-			return deserializeRoutePassThroughWaypointList(d, schemas.RouteVehicleLegDetails_PassThroughWaypoints, &v.PassThroughWaypoints)
-		case schemas.RouteVehicleLegDetails_Spans:
-			return deserializeRouteVehicleSpanList(d, schemas.RouteVehicleLegDetails_Spans, &v.Spans)
-		case schemas.RouteVehicleLegDetails_Summary:
-			v.Summary = &RouteVehicleSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.RouteVehicleLegDetails_TollSystems:
-			return deserializeRouteTollSystemList(d, schemas.RouteVehicleLegDetails_TollSystems, &v.TollSystems)
-		case schemas.RouteVehicleLegDetails_Tolls:
-			return deserializeRouteTollList(d, schemas.RouteVehicleLegDetails_Tolls, &v.Tolls)
-		case schemas.RouteVehicleLegDetails_TravelSteps:
-			return deserializeRouteVehicleTravelStepList(d, schemas.RouteVehicleLegDetails_TravelSteps, &v.TravelSteps)
-		case schemas.RouteVehicleLegDetails_TruckRoadTypes:
-			return deserializeTruckRoadTypeList(d, schemas.RouteVehicleLegDetails_TruckRoadTypes, &v.TruckRoadTypes)
-		case schemas.RouteVehicleLegDetails_Zones:
-			return deserializeRouteZoneList(d, schemas.RouteVehicleLegDetails_Zones, &v.Zones)
-		}
-		return nil
-	})
-}
-
 // License plate information of the vehicle. Currently, only the last character is
 // used where license plate based controlled access is enforced.
 type RouteVehicleLicensePlate struct {
@@ -12936,28 +5053,6 @@ type RouteVehicleLicensePlate struct {
 	LastCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleLicensePlate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleLicensePlate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleLicensePlate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastCharacter != nil {
-		s.WriteString(schemas.RouteVehicleLicensePlate_LastCharacter, *v.LastCharacter)
-	}
-}
-func (v *RouteVehicleLicensePlate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleLicensePlate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleLicensePlate_LastCharacter:
-			v.LastCharacter = new(string)
-			return d.ReadString(schemas.RouteVehicleLicensePlate_LastCharacter, v.LastCharacter)
-		}
-		return nil
-	})
 }
 
 // Notices are additional information returned that indicate issues that occurred
@@ -12981,45 +5076,6 @@ type RouteVehicleNotice struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleNotice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleNotice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleNotice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.RouteVehicleNotice_Code, string(v.Code))
-	}
-	serializeRouteVehicleNoticeDetailList(s, schemas.RouteVehicleNotice_Details, v.Details)
-	if v.Impact != "" {
-		s.WriteString(schemas.RouteVehicleNotice_Impact, string(v.Impact))
-	}
-}
-func (v *RouteVehicleNotice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleNotice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleNotice_Code:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleNotice_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = RouteVehicleNoticeCode(ev)
-			return nil
-		case schemas.RouteVehicleNotice_Details:
-			return deserializeRouteVehicleNoticeDetailList(d, schemas.RouteVehicleNotice_Details, &v.Details)
-		case schemas.RouteVehicleNotice_Impact:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleNotice_Impact, &ev); err != nil {
-				return err
-			}
-			v.Impact = RouteNoticeImpact(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Additional details of the notice.
 type RouteVehicleNoticeDetail struct {
 
@@ -13030,36 +5086,6 @@ type RouteVehicleNoticeDetail struct {
 	ViolatedConstraints *RouteViolatedConstraints
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleNoticeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleNoticeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleNoticeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Title != nil {
-		s.WriteString(schemas.RouteVehicleNoticeDetail_Title, *v.Title)
-	}
-	if v.ViolatedConstraints != nil {
-		s.WriteStruct(schemas.RouteVehicleNoticeDetail_ViolatedConstraints)
-		v.ViolatedConstraints.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteVehicleNoticeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleNoticeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleNoticeDetail_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.RouteVehicleNoticeDetail_Title, v.Title)
-		case schemas.RouteVehicleNoticeDetail_ViolatedConstraints:
-			v.ViolatedConstraints = &RouteViolatedConstraints{}
-			return v.ViolatedConstraints.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Summary including duration and distance for the entire leg.
@@ -13093,38 +5119,6 @@ type RouteVehicleOverviewSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleOverviewSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleOverviewSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BestCaseDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleOverviewSummary_BestCaseDuration, v.BestCaseDuration)
-	}
-	s.WriteInt64(schemas.RouteVehicleOverviewSummary_Distance, v.Distance)
-	s.WriteInt64(schemas.RouteVehicleOverviewSummary_Duration, v.Duration)
-	if v.TypicalDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleOverviewSummary_TypicalDuration, v.TypicalDuration)
-	}
-}
-func (v *RouteVehicleOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleOverviewSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleOverviewSummary_BestCaseDuration:
-			return d.ReadInt64(schemas.RouteVehicleOverviewSummary_BestCaseDuration, &v.BestCaseDuration)
-		case schemas.RouteVehicleOverviewSummary_Distance:
-			return d.ReadInt64(schemas.RouteVehicleOverviewSummary_Distance, &v.Distance)
-		case schemas.RouteVehicleOverviewSummary_Duration:
-			return d.ReadInt64(schemas.RouteVehicleOverviewSummary_Duration, &v.Duration)
-		case schemas.RouteVehicleOverviewSummary_TypicalDuration:
-			return d.ReadInt64(schemas.RouteVehicleOverviewSummary_TypicalDuration, &v.TypicalDuration)
-		}
-		return nil
-	})
-}
-
 // Place details corresponding to the arrival or departure.
 type RouteVehiclePlace struct {
 
@@ -13155,76 +5149,6 @@ type RouteVehiclePlace struct {
 	WaypointIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehiclePlace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehiclePlace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehiclePlace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPointDetails != nil {
-		s.WriteStruct(schemas.RouteVehiclePlace_AccessPointDetails)
-		v.AccessPointDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteVehiclePlace_Name, *v.Name)
-	}
-	serializePosition23(s, schemas.RouteVehiclePlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteVehiclePlace_Position, v.Position)
-	if v.SideOfStreet != "" {
-		s.WriteString(schemas.RouteVehiclePlace_SideOfStreet, string(v.SideOfStreet))
-	}
-	if v.StationDetails != nil {
-		s.WriteStruct(schemas.RouteVehiclePlace_StationDetails)
-		v.StationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteVehiclePlace_Type, string(v.Type))
-	}
-	if v.WaypointIndex != nil {
-		s.WriteInt32(schemas.RouteVehiclePlace_WaypointIndex, *v.WaypointIndex)
-	}
-}
-func (v *RouteVehiclePlace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehiclePlace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehiclePlace_AccessPointDetails:
-			v.AccessPointDetails = &RouteAccessPointDetails{}
-			return v.AccessPointDetails.Deserialize(d)
-		case schemas.RouteVehiclePlace_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteVehiclePlace_Name, v.Name)
-		case schemas.RouteVehiclePlace_OriginalPosition:
-			return deserializePosition23(d, schemas.RouteVehiclePlace_OriginalPosition, &v.OriginalPosition)
-		case schemas.RouteVehiclePlace_Position:
-			return deserializePosition23(d, schemas.RouteVehiclePlace_Position, &v.Position)
-		case schemas.RouteVehiclePlace_SideOfStreet:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehiclePlace_SideOfStreet, &ev); err != nil {
-				return err
-			}
-			v.SideOfStreet = RouteSideOfStreet(ev)
-			return nil
-		case schemas.RouteVehiclePlace_StationDetails:
-			v.StationDetails = &RouteStationDetails{}
-			return v.StationDetails.Deserialize(d)
-		case schemas.RouteVehiclePlace_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehiclePlace_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteVehiclePlaceType(ev)
-			return nil
-		case schemas.RouteVehiclePlace_WaypointIndex:
-			v.WaypointIndex = new(int32)
-			return d.ReadInt32(schemas.RouteVehiclePlace_WaypointIndex, v.WaypointIndex)
-		}
-		return nil
-	})
 }
 
 // Span computed for the requested SpanAdditionalFeatures.
@@ -13341,135 +5265,6 @@ type RouteVehicleSpan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteVehicleSpan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleSpan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleSpan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BestCaseDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleSpan_BestCaseDuration, v.BestCaseDuration)
-	}
-	serializeRouteSpanCarAccessAttributeList(s, schemas.RouteVehicleSpan_CarAccess, v.CarAccess)
-	if v.Country != nil {
-		s.WriteString(schemas.RouteVehicleSpan_Country, *v.Country)
-	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteVehicleSpan_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteVehicleSpan_Duration, v.Duration)
-	}
-	if v.DynamicSpeed != nil {
-		s.WriteStruct(schemas.RouteVehicleSpan_DynamicSpeed)
-		v.DynamicSpeed.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FunctionalClassification != nil {
-		s.WriteInt32(schemas.RouteVehicleSpan_FunctionalClassification, *v.FunctionalClassification)
-	}
-	if v.Gate != "" {
-		s.WriteString(schemas.RouteVehicleSpan_Gate, string(v.Gate))
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteVehicleSpan_GeometryOffset, *v.GeometryOffset)
-	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_Incidents, v.Incidents)
-	serializeLocalizedStringList(s, schemas.RouteVehicleSpan_Names, v.Names)
-	serializeIndexList(s, schemas.RouteVehicleSpan_Notices, v.Notices)
-	if v.RailwayCrossing != "" {
-		s.WriteString(schemas.RouteVehicleSpan_RailwayCrossing, string(v.RailwayCrossing))
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.RouteVehicleSpan_Region, *v.Region)
-	}
-	serializeRouteSpanRoadAttributeList(s, schemas.RouteVehicleSpan_RoadAttributes, v.RoadAttributes)
-	serializeRouteNumberList(s, schemas.RouteVehicleSpan_RouteNumbers, v.RouteNumbers)
-	serializeRouteSpanScooterAccessAttributeList(s, schemas.RouteVehicleSpan_ScooterAccess, v.ScooterAccess)
-	if v.SpeedLimit != nil {
-		s.WriteStruct(schemas.RouteVehicleSpan_SpeedLimit)
-		v.SpeedLimit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_TollSystems, v.TollSystems)
-	serializeRouteSpanTruckAccessAttributeList(s, schemas.RouteVehicleSpan_TruckAccess, v.TruckAccess)
-	serializeIndexList(s, schemas.RouteVehicleSpan_TruckRoadTypes, v.TruckRoadTypes)
-	if v.TypicalDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleSpan_TypicalDuration, v.TypicalDuration)
-	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_Zones, v.Zones)
-}
-func (v *RouteVehicleSpan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleSpan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleSpan_BestCaseDuration:
-			return d.ReadInt64(schemas.RouteVehicleSpan_BestCaseDuration, &v.BestCaseDuration)
-		case schemas.RouteVehicleSpan_CarAccess:
-			return deserializeRouteSpanCarAccessAttributeList(d, schemas.RouteVehicleSpan_CarAccess, &v.CarAccess)
-		case schemas.RouteVehicleSpan_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.RouteVehicleSpan_Country, v.Country)
-		case schemas.RouteVehicleSpan_Distance:
-			return d.ReadInt64(schemas.RouteVehicleSpan_Distance, &v.Distance)
-		case schemas.RouteVehicleSpan_Duration:
-			return d.ReadInt64(schemas.RouteVehicleSpan_Duration, &v.Duration)
-		case schemas.RouteVehicleSpan_DynamicSpeed:
-			v.DynamicSpeed = &RouteSpanDynamicSpeedDetails{}
-			return v.DynamicSpeed.Deserialize(d)
-		case schemas.RouteVehicleSpan_FunctionalClassification:
-			v.FunctionalClassification = new(int32)
-			return d.ReadInt32(schemas.RouteVehicleSpan_FunctionalClassification, v.FunctionalClassification)
-		case schemas.RouteVehicleSpan_Gate:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleSpan_Gate, &ev); err != nil {
-				return err
-			}
-			v.Gate = RouteSpanGateAttribute(ev)
-			return nil
-		case schemas.RouteVehicleSpan_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteVehicleSpan_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteVehicleSpan_Incidents:
-			return deserializeIndexList(d, schemas.RouteVehicleSpan_Incidents, &v.Incidents)
-		case schemas.RouteVehicleSpan_Names:
-			return deserializeLocalizedStringList(d, schemas.RouteVehicleSpan_Names, &v.Names)
-		case schemas.RouteVehicleSpan_Notices:
-			return deserializeIndexList(d, schemas.RouteVehicleSpan_Notices, &v.Notices)
-		case schemas.RouteVehicleSpan_RailwayCrossing:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleSpan_RailwayCrossing, &ev); err != nil {
-				return err
-			}
-			v.RailwayCrossing = RouteSpanRailwayCrossingAttribute(ev)
-			return nil
-		case schemas.RouteVehicleSpan_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.RouteVehicleSpan_Region, v.Region)
-		case schemas.RouteVehicleSpan_RoadAttributes:
-			return deserializeRouteSpanRoadAttributeList(d, schemas.RouteVehicleSpan_RoadAttributes, &v.RoadAttributes)
-		case schemas.RouteVehicleSpan_RouteNumbers:
-			return deserializeRouteNumberList(d, schemas.RouteVehicleSpan_RouteNumbers, &v.RouteNumbers)
-		case schemas.RouteVehicleSpan_ScooterAccess:
-			return deserializeRouteSpanScooterAccessAttributeList(d, schemas.RouteVehicleSpan_ScooterAccess, &v.ScooterAccess)
-		case schemas.RouteVehicleSpan_SpeedLimit:
-			v.SpeedLimit = &RouteSpanSpeedLimitDetails{}
-			return v.SpeedLimit.Deserialize(d)
-		case schemas.RouteVehicleSpan_TollSystems:
-			return deserializeIndexList(d, schemas.RouteVehicleSpan_TollSystems, &v.TollSystems)
-		case schemas.RouteVehicleSpan_TruckAccess:
-			return deserializeRouteSpanTruckAccessAttributeList(d, schemas.RouteVehicleSpan_TruckAccess, &v.TruckAccess)
-		case schemas.RouteVehicleSpan_TruckRoadTypes:
-			return deserializeIndexList(d, schemas.RouteVehicleSpan_TruckRoadTypes, &v.TruckRoadTypes)
-		case schemas.RouteVehicleSpan_TypicalDuration:
-			return d.ReadInt64(schemas.RouteVehicleSpan_TypicalDuration, &v.TypicalDuration)
-		case schemas.RouteVehicleSpan_Zones:
-			return deserializeIndexList(d, schemas.RouteVehicleSpan_Zones, &v.Zones)
-		}
-		return nil
-	})
-}
-
 // Summarized details of the route.
 type RouteVehicleSummary struct {
 
@@ -13482,38 +5277,6 @@ type RouteVehicleSummary struct {
 	TravelOnly *RouteVehicleTravelOnlySummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Overview != nil {
-		s.WriteStruct(schemas.RouteVehicleSummary_Overview)
-		v.Overview.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelOnly != nil {
-		s.WriteStruct(schemas.RouteVehicleSummary_TravelOnly)
-		v.TravelOnly.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteVehicleSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleSummary_Overview:
-			v.Overview = &RouteVehicleOverviewSummary{}
-			return v.Overview.Deserialize(d)
-		case schemas.RouteVehicleSummary_TravelOnly:
-			v.TravelOnly = &RouteVehicleTravelOnlySummary{}
-			return v.TravelOnly.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Summarized details of the route.
@@ -13538,35 +5301,6 @@ type RouteVehicleTravelOnlySummary struct {
 	TypicalDuration int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleTravelOnlySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BestCaseDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_BestCaseDuration, v.BestCaseDuration)
-	}
-	s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_Duration, v.Duration)
-	if v.TypicalDuration != 0 {
-		s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_TypicalDuration, v.TypicalDuration)
-	}
-}
-func (v *RouteVehicleTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleTravelOnlySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleTravelOnlySummary_BestCaseDuration:
-			return d.ReadInt64(schemas.RouteVehicleTravelOnlySummary_BestCaseDuration, &v.BestCaseDuration)
-		case schemas.RouteVehicleTravelOnlySummary_Duration:
-			return d.ReadInt64(schemas.RouteVehicleTravelOnlySummary_Duration, &v.Duration)
-		case schemas.RouteVehicleTravelOnlySummary_TypicalDuration:
-			return d.ReadInt64(schemas.RouteVehicleTravelOnlySummary_TypicalDuration, &v.TypicalDuration)
-		}
-		return nil
-	})
 }
 
 // Steps of a leg that correspond to the travel portion of the leg.
@@ -13642,167 +5376,6 @@ type RouteVehicleTravelStep struct {
 	UTurnStepDetails *RouteUTurnStepDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteVehicleTravelStep) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteVehicleTravelStep)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteVehicleTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContinueHighwayStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_ContinueHighwayStepDetails)
-		v.ContinueHighwayStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ContinueStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_ContinueStepDetails)
-		v.ContinueStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CurrentRoad != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_CurrentRoad)
-		v.CurrentRoad.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteVehicleTravelStep_Distance, v.Distance)
-	}
-	s.WriteInt64(schemas.RouteVehicleTravelStep_Duration, v.Duration)
-	if v.EnterHighwayStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_EnterHighwayStepDetails)
-		v.EnterHighwayStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeLocalizedStringList(s, schemas.RouteVehicleTravelStep_ExitNumber, v.ExitNumber)
-	if v.ExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_ExitStepDetails)
-		v.ExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GeometryOffset != nil {
-		s.WriteInt32(schemas.RouteVehicleTravelStep_GeometryOffset, *v.GeometryOffset)
-	}
-	if v.Instruction != nil {
-		s.WriteString(schemas.RouteVehicleTravelStep_Instruction, *v.Instruction)
-	}
-	if v.KeepStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_KeepStepDetails)
-		v.KeepStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NextRoad != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_NextRoad)
-		v.NextRoad.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RampStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_RampStepDetails)
-		v.RampStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutEnterStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_RoundaboutEnterStepDetails)
-		v.RoundaboutEnterStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutExitStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_RoundaboutExitStepDetails)
-		v.RoundaboutExitStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoundaboutPassStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_RoundaboutPassStepDetails)
-		v.RoundaboutPassStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Signpost != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_Signpost)
-		v.Signpost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_TurnStepDetails)
-		v.TurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.RouteVehicleTravelStep_Type, string(v.Type))
-	}
-	if v.UTurnStepDetails != nil {
-		s.WriteStruct(schemas.RouteVehicleTravelStep_UTurnStepDetails)
-		v.UTurnStepDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RouteVehicleTravelStep) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteVehicleTravelStep, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteVehicleTravelStep_ContinueHighwayStepDetails:
-			v.ContinueHighwayStepDetails = &RouteContinueHighwayStepDetails{}
-			return v.ContinueHighwayStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_ContinueStepDetails:
-			v.ContinueStepDetails = &RouteContinueStepDetails{}
-			return v.ContinueStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_CurrentRoad:
-			v.CurrentRoad = &RouteRoad{}
-			return v.CurrentRoad.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_Distance:
-			return d.ReadInt64(schemas.RouteVehicleTravelStep_Distance, &v.Distance)
-		case schemas.RouteVehicleTravelStep_Duration:
-			return d.ReadInt64(schemas.RouteVehicleTravelStep_Duration, &v.Duration)
-		case schemas.RouteVehicleTravelStep_EnterHighwayStepDetails:
-			v.EnterHighwayStepDetails = &RouteEnterHighwayStepDetails{}
-			return v.EnterHighwayStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_ExitNumber:
-			return deserializeLocalizedStringList(d, schemas.RouteVehicleTravelStep_ExitNumber, &v.ExitNumber)
-		case schemas.RouteVehicleTravelStep_ExitStepDetails:
-			v.ExitStepDetails = &RouteExitStepDetails{}
-			return v.ExitStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_GeometryOffset:
-			v.GeometryOffset = new(int32)
-			return d.ReadInt32(schemas.RouteVehicleTravelStep_GeometryOffset, v.GeometryOffset)
-		case schemas.RouteVehicleTravelStep_Instruction:
-			v.Instruction = new(string)
-			return d.ReadString(schemas.RouteVehicleTravelStep_Instruction, v.Instruction)
-		case schemas.RouteVehicleTravelStep_KeepStepDetails:
-			v.KeepStepDetails = &RouteKeepStepDetails{}
-			return v.KeepStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_NextRoad:
-			v.NextRoad = &RouteRoad{}
-			return v.NextRoad.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_RampStepDetails:
-			v.RampStepDetails = &RouteRampStepDetails{}
-			return v.RampStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_RoundaboutEnterStepDetails:
-			v.RoundaboutEnterStepDetails = &RouteRoundaboutEnterStepDetails{}
-			return v.RoundaboutEnterStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_RoundaboutExitStepDetails:
-			v.RoundaboutExitStepDetails = &RouteRoundaboutExitStepDetails{}
-			return v.RoundaboutExitStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_RoundaboutPassStepDetails:
-			v.RoundaboutPassStepDetails = &RouteRoundaboutPassStepDetails{}
-			return v.RoundaboutPassStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_Signpost:
-			v.Signpost = &RouteSignpost{}
-			return v.Signpost.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_TurnStepDetails:
-			v.TurnStepDetails = &RouteTurnStepDetails{}
-			return v.TurnStepDetails.Deserialize(d)
-		case schemas.RouteVehicleTravelStep_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteVehicleTravelStep_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteVehicleTravelStepType(ev)
-			return nil
-		case schemas.RouteVehicleTravelStep_UTurnStepDetails:
-			v.UTurnStepDetails = &RouteUTurnStepDetails{}
-			return v.UTurnStepDetails.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // This property contains a summary of violated constraints.
@@ -13917,141 +5490,6 @@ type RouteViolatedConstraints struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteViolatedConstraints) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteViolatedConstraints)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteViolatedConstraints) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllHazardsRestricted != nil {
-		s.WriteBool(schemas.RouteViolatedConstraints_AllHazardsRestricted, *v.AllHazardsRestricted)
-	}
-	if v.AxleCount != nil {
-		s.WriteStruct(schemas.RouteViolatedConstraints_AxleCount)
-		v.AxleCount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRouteHazardousCargoTypeList(s, schemas.RouteViolatedConstraints_HazardousCargos, v.HazardousCargos)
-	if v.MaxHeight != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxHeight, v.MaxHeight)
-	}
-	if v.MaxKpraLength != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxKpraLength, v.MaxKpraLength)
-	}
-	if v.MaxLength != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxLength, v.MaxLength)
-	}
-	if v.MaxPayloadCapacity != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxPayloadCapacity, v.MaxPayloadCapacity)
-	}
-	if v.MaxWeight != nil {
-		s.WriteStruct(schemas.RouteViolatedConstraints_MaxWeight)
-		v.MaxWeight.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxWeightPerAxle != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxWeightPerAxle, v.MaxWeightPerAxle)
-	}
-	if v.MaxWeightPerAxleGroup != nil {
-		s.WriteStruct(schemas.RouteViolatedConstraints_MaxWeightPerAxleGroup)
-		v.MaxWeightPerAxleGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxWidth != 0 {
-		s.WriteInt64(schemas.RouteViolatedConstraints_MaxWidth, v.MaxWidth)
-	}
-	if v.Occupancy != nil {
-		s.WriteStruct(schemas.RouteViolatedConstraints_Occupancy)
-		v.Occupancy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RestrictedTimes != nil {
-		s.WriteString(schemas.RouteViolatedConstraints_RestrictedTimes, *v.RestrictedTimes)
-	}
-	if v.TimeDependent != nil {
-		s.WriteBool(schemas.RouteViolatedConstraints_TimeDependent, *v.TimeDependent)
-	}
-	if v.TrailerCount != nil {
-		s.WriteStruct(schemas.RouteViolatedConstraints_TrailerCount)
-		v.TrailerCount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelMode != nil {
-		s.WriteBool(schemas.RouteViolatedConstraints_TravelMode, *v.TravelMode)
-	}
-	if v.TruckRoadType != nil {
-		s.WriteString(schemas.RouteViolatedConstraints_TruckRoadType, *v.TruckRoadType)
-	}
-	if v.TruckType != "" {
-		s.WriteString(schemas.RouteViolatedConstraints_TruckType, string(v.TruckType))
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.RouteViolatedConstraints_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-}
-func (v *RouteViolatedConstraints) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteViolatedConstraints, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteViolatedConstraints_AllHazardsRestricted:
-			v.AllHazardsRestricted = new(bool)
-			return d.ReadBool(schemas.RouteViolatedConstraints_AllHazardsRestricted, v.AllHazardsRestricted)
-		case schemas.RouteViolatedConstraints_AxleCount:
-			v.AxleCount = &RouteNoticeDetailRange{}
-			return v.AxleCount.Deserialize(d)
-		case schemas.RouteViolatedConstraints_HazardousCargos:
-			return deserializeRouteHazardousCargoTypeList(d, schemas.RouteViolatedConstraints_HazardousCargos, &v.HazardousCargos)
-		case schemas.RouteViolatedConstraints_MaxHeight:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxHeight, &v.MaxHeight)
-		case schemas.RouteViolatedConstraints_MaxKpraLength:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxKpraLength, &v.MaxKpraLength)
-		case schemas.RouteViolatedConstraints_MaxLength:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxLength, &v.MaxLength)
-		case schemas.RouteViolatedConstraints_MaxPayloadCapacity:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxPayloadCapacity, &v.MaxPayloadCapacity)
-		case schemas.RouteViolatedConstraints_MaxWeight:
-			v.MaxWeight = &RouteWeightConstraint{}
-			return v.MaxWeight.Deserialize(d)
-		case schemas.RouteViolatedConstraints_MaxWeightPerAxle:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxWeightPerAxle, &v.MaxWeightPerAxle)
-		case schemas.RouteViolatedConstraints_MaxWeightPerAxleGroup:
-			v.MaxWeightPerAxleGroup = &WeightPerAxleGroup{}
-			return v.MaxWeightPerAxleGroup.Deserialize(d)
-		case schemas.RouteViolatedConstraints_MaxWidth:
-			return d.ReadInt64(schemas.RouteViolatedConstraints_MaxWidth, &v.MaxWidth)
-		case schemas.RouteViolatedConstraints_Occupancy:
-			v.Occupancy = &RouteNoticeDetailRange{}
-			return v.Occupancy.Deserialize(d)
-		case schemas.RouteViolatedConstraints_RestrictedTimes:
-			v.RestrictedTimes = new(string)
-			return d.ReadString(schemas.RouteViolatedConstraints_RestrictedTimes, v.RestrictedTimes)
-		case schemas.RouteViolatedConstraints_TimeDependent:
-			v.TimeDependent = new(bool)
-			return d.ReadBool(schemas.RouteViolatedConstraints_TimeDependent, v.TimeDependent)
-		case schemas.RouteViolatedConstraints_TrailerCount:
-			v.TrailerCount = &RouteNoticeDetailRange{}
-			return v.TrailerCount.Deserialize(d)
-		case schemas.RouteViolatedConstraints_TravelMode:
-			v.TravelMode = new(bool)
-			return d.ReadBool(schemas.RouteViolatedConstraints_TravelMode, v.TravelMode)
-		case schemas.RouteViolatedConstraints_TruckRoadType:
-			v.TruckRoadType = new(string)
-			return d.ReadString(schemas.RouteViolatedConstraints_TruckRoadType, v.TruckRoadType)
-		case schemas.RouteViolatedConstraints_TruckType:
-			var ev string
-			if err := d.ReadString(schemas.RouteViolatedConstraints_TruckType, &ev); err != nil {
-				return err
-			}
-			v.TruckType = RouteTruckType(ev)
-			return nil
-		case schemas.RouteViolatedConstraints_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.RouteViolatedConstraints_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		}
-		return nil
-	})
-}
-
 // Waypoint between the Origin and Destination.
 type RouteWaypoint struct {
 
@@ -14110,68 +5548,6 @@ type RouteWaypoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteWaypoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteWaypoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvoidActionsForDistance != 0 {
-		s.WriteInt64(schemas.RouteWaypoint_AvoidActionsForDistance, v.AvoidActionsForDistance)
-	}
-	if v.AvoidUTurns != nil {
-		s.WriteBool(schemas.RouteWaypoint_AvoidUTurns, *v.AvoidUTurns)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.RouteWaypoint_Heading, v.Heading)
-	}
-	if v.Matching != nil {
-		s.WriteStruct(schemas.RouteWaypoint_Matching)
-		v.Matching.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PassThrough != nil {
-		s.WriteBool(schemas.RouteWaypoint_PassThrough, *v.PassThrough)
-	}
-	serializePosition(s, schemas.RouteWaypoint_Position, v.Position)
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.RouteWaypoint_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StopDuration != 0 {
-		s.WriteInt64(schemas.RouteWaypoint_StopDuration, v.StopDuration)
-	}
-}
-func (v *RouteWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteWaypoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteWaypoint_AvoidActionsForDistance:
-			return d.ReadInt64(schemas.RouteWaypoint_AvoidActionsForDistance, &v.AvoidActionsForDistance)
-		case schemas.RouteWaypoint_AvoidUTurns:
-			v.AvoidUTurns = new(bool)
-			return d.ReadBool(schemas.RouteWaypoint_AvoidUTurns, v.AvoidUTurns)
-		case schemas.RouteWaypoint_Heading:
-			return d.ReadFloat64(schemas.RouteWaypoint_Heading, &v.Heading)
-		case schemas.RouteWaypoint_Matching:
-			v.Matching = &RouteMatchingOptions{}
-			return v.Matching.Deserialize(d)
-		case schemas.RouteWaypoint_PassThrough:
-			v.PassThrough = new(bool)
-			return d.ReadBool(schemas.RouteWaypoint_PassThrough, v.PassThrough)
-		case schemas.RouteWaypoint_Position:
-			return deserializePosition(d, schemas.RouteWaypoint_Position, &v.Position)
-		case schemas.RouteWaypoint_SideOfStreet:
-			v.SideOfStreet = &RouteSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		case schemas.RouteWaypoint_StopDuration:
-			return d.ReadInt64(schemas.RouteWaypoint_StopDuration, &v.StopDuration)
-		}
-		return nil
-	})
-}
-
 // The URL to an external resource.
 type RouteWebLink struct {
 
@@ -14190,50 +5566,6 @@ type RouteWebLink struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteWebLink) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteWebLink)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteWebLink) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnchorText != nil {
-		s.WriteString(schemas.RouteWebLink_AnchorText, *v.AnchorText)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.RouteWebLink_Description, *v.Description)
-	}
-	if v.DeviceType != "" {
-		s.WriteString(schemas.RouteWebLink_DeviceType, string(v.DeviceType))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.RouteWebLink_Url, *v.Url)
-	}
-}
-func (v *RouteWebLink) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteWebLink, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteWebLink_AnchorText:
-			v.AnchorText = new(string)
-			return d.ReadString(schemas.RouteWebLink_AnchorText, v.AnchorText)
-		case schemas.RouteWebLink_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.RouteWebLink_Description, v.Description)
-		case schemas.RouteWebLink_DeviceType:
-			var ev string
-			if err := d.ReadString(schemas.RouteWebLink_DeviceType, &ev); err != nil {
-				return err
-			}
-			v.DeviceType = RouteWebLinkDeviceType(ev)
-			return nil
-		case schemas.RouteWebLink_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.RouteWebLink_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The weight constraint for the route.
@@ -14256,35 +5588,6 @@ type RouteWeightConstraint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteWeightConstraint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteWeightConstraint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteWeightConstraint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != "" {
-		s.WriteString(schemas.RouteWeightConstraint_Type, string(v.Type))
-	}
-	s.WriteInt64(schemas.RouteWeightConstraint_Value, v.Value)
-}
-func (v *RouteWeightConstraint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteWeightConstraint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteWeightConstraint_Type:
-			var ev string
-			if err := d.ReadString(schemas.RouteWeightConstraint_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RouteWeightConstraintType(ev)
-			return nil
-		case schemas.RouteWeightConstraint_Value:
-			return d.ReadInt64(schemas.RouteWeightConstraint_Value, &v.Value)
-		}
-		return nil
-	})
-}
-
 // The zone.
 type RouteZone struct {
 
@@ -14295,38 +5598,6 @@ type RouteZone struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RouteZone) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteZone)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteZone) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.RouteZone_Category, string(v.Category))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RouteZone_Name, *v.Name)
-	}
-}
-func (v *RouteZone) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteZone, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteZone_Category:
-			var ev string
-			if err := d.ReadString(schemas.RouteZone_Category, &ev); err != nil {
-				return err
-			}
-			v.Category = RouteZoneCategory(ev)
-			return nil
-		case schemas.RouteZone_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RouteZone_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // The input fails to satisfy the constraints specified by the Amazon Location
@@ -14346,34 +5617,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
-		case schemas.ValidationExceptionField_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Access hours corresponding to when a destination can be visited.
 type WaypointOptimizationAccessHours struct {
 
@@ -14388,38 +5631,6 @@ type WaypointOptimizationAccessHours struct {
 	To *WaypointOptimizationAccessHoursEntry
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationAccessHours) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationAccessHours)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationAccessHours) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.From != nil {
-		s.WriteStruct(schemas.WaypointOptimizationAccessHours_From)
-		v.From.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.To != nil {
-		s.WriteStruct(schemas.WaypointOptimizationAccessHours_To)
-		v.To.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationAccessHours) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationAccessHours, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationAccessHours_From:
-			v.From = &WaypointOptimizationAccessHoursEntry{}
-			return v.From.Deserialize(d)
-		case schemas.WaypointOptimizationAccessHours_To:
-			v.To = &WaypointOptimizationAccessHoursEntry{}
-			return v.To.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Hours of entry.
@@ -14438,38 +5649,6 @@ type WaypointOptimizationAccessHoursEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationAccessHoursEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationAccessHoursEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationAccessHoursEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfWeek != "" {
-		s.WriteString(schemas.WaypointOptimizationAccessHoursEntry_DayOfWeek, string(v.DayOfWeek))
-	}
-	if v.TimeOfDay != nil {
-		s.WriteString(schemas.WaypointOptimizationAccessHoursEntry_TimeOfDay, *v.TimeOfDay)
-	}
-}
-func (v *WaypointOptimizationAccessHoursEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationAccessHoursEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationAccessHoursEntry_DayOfWeek:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationAccessHoursEntry_DayOfWeek, &ev); err != nil {
-				return err
-			}
-			v.DayOfWeek = DayOfWeek(ev)
-			return nil
-		case schemas.WaypointOptimizationAccessHoursEntry_TimeOfDay:
-			v.TimeOfDay = new(string)
-			return d.ReadString(schemas.WaypointOptimizationAccessHoursEntry_TimeOfDay, v.TimeOfDay)
-		}
-		return nil
-	})
-}
-
 // The area to be avoided.
 type WaypointOptimizationAvoidanceArea struct {
 
@@ -14479,30 +5658,6 @@ type WaypointOptimizationAvoidanceArea struct {
 	Geometry *WaypointOptimizationAvoidanceAreaGeometry
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationAvoidanceArea)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.WaypointOptimizationAvoidanceArea_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationAvoidanceArea) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationAvoidanceArea, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationAvoidanceArea_Geometry:
-			v.Geometry = &WaypointOptimizationAvoidanceAreaGeometry{}
-			return v.Geometry.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Geometry of the area to be avoided.
@@ -14515,25 +5670,6 @@ type WaypointOptimizationAvoidanceAreaGeometry struct {
 	BoundingBox []float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationAvoidanceAreaGeometry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.WaypointOptimizationAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
-}
-func (v *WaypointOptimizationAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationAvoidanceAreaGeometry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationAvoidanceAreaGeometry_BoundingBox:
-			return deserializeBoundingBox(d, schemas.WaypointOptimizationAvoidanceAreaGeometry_BoundingBox, &v.BoundingBox)
-		}
-		return nil
-	})
 }
 
 // Specifies options for areas to avoid. This is a best-effort avoidance setting,
@@ -14570,67 +5706,6 @@ type WaypointOptimizationAvoidanceOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationAvoidanceOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaypointOptimizationAvoidanceAreaList(s, schemas.WaypointOptimizationAvoidanceOptions_Areas, v.Areas)
-	if v.CarShuttleTrains != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
-	}
-	if v.ControlledAccessHighways != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_ControlledAccessHighways, *v.ControlledAccessHighways)
-	}
-	if v.DirtRoads != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_DirtRoads, *v.DirtRoads)
-	}
-	if v.Ferries != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_Ferries, *v.Ferries)
-	}
-	if v.TollRoads != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_TollRoads, *v.TollRoads)
-	}
-	if v.Tunnels != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_Tunnels, *v.Tunnels)
-	}
-	if v.UTurns != nil {
-		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_UTurns, *v.UTurns)
-	}
-}
-func (v *WaypointOptimizationAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationAvoidanceOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationAvoidanceOptions_Areas:
-			return deserializeWaypointOptimizationAvoidanceAreaList(d, schemas.WaypointOptimizationAvoidanceOptions_Areas, &v.Areas)
-		case schemas.WaypointOptimizationAvoidanceOptions_CarShuttleTrains:
-			v.CarShuttleTrains = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_CarShuttleTrains, v.CarShuttleTrains)
-		case schemas.WaypointOptimizationAvoidanceOptions_ControlledAccessHighways:
-			v.ControlledAccessHighways = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_ControlledAccessHighways, v.ControlledAccessHighways)
-		case schemas.WaypointOptimizationAvoidanceOptions_DirtRoads:
-			v.DirtRoads = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_DirtRoads, v.DirtRoads)
-		case schemas.WaypointOptimizationAvoidanceOptions_Ferries:
-			v.Ferries = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_Ferries, v.Ferries)
-		case schemas.WaypointOptimizationAvoidanceOptions_TollRoads:
-			v.TollRoads = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_TollRoads, v.TollRoads)
-		case schemas.WaypointOptimizationAvoidanceOptions_Tunnels:
-			v.Tunnels = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_Tunnels, v.Tunnels)
-		case schemas.WaypointOptimizationAvoidanceOptions_UTurns:
-			v.UTurns = new(bool)
-			return d.ReadBool(schemas.WaypointOptimizationAvoidanceOptions_UTurns, v.UTurns)
-		}
-		return nil
-	})
-}
-
 // Options for WaypointOptimizationClustering.
 type WaypointOptimizationClusteringOptions struct {
 
@@ -14648,40 +5723,6 @@ type WaypointOptimizationClusteringOptions struct {
 	DrivingDistanceOptions *WaypointOptimizationDrivingDistanceOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationClusteringOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationClusteringOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationClusteringOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Algorithm != "" {
-		s.WriteString(schemas.WaypointOptimizationClusteringOptions_Algorithm, string(v.Algorithm))
-	}
-	if v.DrivingDistanceOptions != nil {
-		s.WriteStruct(schemas.WaypointOptimizationClusteringOptions_DrivingDistanceOptions)
-		v.DrivingDistanceOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationClusteringOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationClusteringOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationClusteringOptions_Algorithm:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationClusteringOptions_Algorithm, &ev); err != nil {
-				return err
-			}
-			v.Algorithm = WaypointOptimizationClusteringAlgorithm(ev)
-			return nil
-		case schemas.WaypointOptimizationClusteringOptions_DrivingDistanceOptions:
-			v.DrivingDistanceOptions = &WaypointOptimizationDrivingDistanceOptions{}
-			return v.DrivingDistanceOptions.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // This contains information such as distance and duration from one waypoint to
@@ -14725,46 +5766,6 @@ type WaypointOptimizationConnection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationConnection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationConnection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationConnection) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.WaypointOptimizationConnection_Distance, v.Distance)
-	if v.From != nil {
-		s.WriteString(schemas.WaypointOptimizationConnection_From, *v.From)
-	}
-	s.WriteInt64(schemas.WaypointOptimizationConnection_RestDuration, v.RestDuration)
-	if v.To != nil {
-		s.WriteString(schemas.WaypointOptimizationConnection_To, *v.To)
-	}
-	s.WriteInt64(schemas.WaypointOptimizationConnection_TravelDuration, v.TravelDuration)
-	s.WriteInt64(schemas.WaypointOptimizationConnection_WaitDuration, v.WaitDuration)
-}
-func (v *WaypointOptimizationConnection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationConnection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationConnection_Distance:
-			return d.ReadInt64(schemas.WaypointOptimizationConnection_Distance, &v.Distance)
-		case schemas.WaypointOptimizationConnection_From:
-			v.From = new(string)
-			return d.ReadString(schemas.WaypointOptimizationConnection_From, v.From)
-		case schemas.WaypointOptimizationConnection_RestDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationConnection_RestDuration, &v.RestDuration)
-		case schemas.WaypointOptimizationConnection_To:
-			v.To = new(string)
-			return d.ReadString(schemas.WaypointOptimizationConnection_To, v.To)
-		case schemas.WaypointOptimizationConnection_TravelDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationConnection_TravelDuration, &v.TravelDuration)
-		case schemas.WaypointOptimizationConnection_WaitDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationConnection_WaitDuration, &v.WaitDuration)
-		}
-		return nil
-	})
-}
-
 // Destination related options.
 type WaypointOptimizationDestinationOptions struct {
 
@@ -14792,60 +5793,6 @@ type WaypointOptimizationDestinationOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationDestinationOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationDestinationOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationDestinationOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessHours != nil {
-		s.WriteStruct(schemas.WaypointOptimizationDestinationOptions_AccessHours)
-		v.AccessHours.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AppointmentTime != nil {
-		s.WriteString(schemas.WaypointOptimizationDestinationOptions_AppointmentTime, *v.AppointmentTime)
-	}
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.WaypointOptimizationDestinationOptions_Heading, v.Heading)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.WaypointOptimizationDestinationOptions_Id, *v.Id)
-	}
-	if v.ServiceDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationDestinationOptions_ServiceDuration, v.ServiceDuration)
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.WaypointOptimizationDestinationOptions_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationDestinationOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationDestinationOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationDestinationOptions_AccessHours:
-			v.AccessHours = &WaypointOptimizationAccessHours{}
-			return v.AccessHours.Deserialize(d)
-		case schemas.WaypointOptimizationDestinationOptions_AppointmentTime:
-			v.AppointmentTime = new(string)
-			return d.ReadString(schemas.WaypointOptimizationDestinationOptions_AppointmentTime, v.AppointmentTime)
-		case schemas.WaypointOptimizationDestinationOptions_Heading:
-			return d.ReadFloat64(schemas.WaypointOptimizationDestinationOptions_Heading, &v.Heading)
-		case schemas.WaypointOptimizationDestinationOptions_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WaypointOptimizationDestinationOptions_Id, v.Id)
-		case schemas.WaypointOptimizationDestinationOptions_ServiceDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationDestinationOptions_ServiceDuration, &v.ServiceDuration)
-		case schemas.WaypointOptimizationDestinationOptions_SideOfStreet:
-			v.SideOfStreet = &WaypointOptimizationSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Driver related options.
 type WaypointOptimizationDriverOptions struct {
 
@@ -14867,48 +5814,6 @@ type WaypointOptimizationDriverOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationDriverOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationDriverOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationDriverOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RestCycles != nil {
-		s.WriteStruct(schemas.WaypointOptimizationDriverOptions_RestCycles)
-		v.RestCycles.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RestProfile != nil {
-		s.WriteStruct(schemas.WaypointOptimizationDriverOptions_RestProfile)
-		v.RestProfile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TreatServiceTimeAs != "" {
-		s.WriteString(schemas.WaypointOptimizationDriverOptions_TreatServiceTimeAs, string(v.TreatServiceTimeAs))
-	}
-}
-func (v *WaypointOptimizationDriverOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationDriverOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationDriverOptions_RestCycles:
-			v.RestCycles = &WaypointOptimizationRestCycles{}
-			return v.RestCycles.Deserialize(d)
-		case schemas.WaypointOptimizationDriverOptions_RestProfile:
-			v.RestProfile = &WaypointOptimizationRestProfile{}
-			return v.RestProfile.Deserialize(d)
-		case schemas.WaypointOptimizationDriverOptions_TreatServiceTimeAs:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationDriverOptions_TreatServiceTimeAs, &ev); err != nil {
-				return err
-			}
-			v.TreatServiceTimeAs = WaypointOptimizationServiceTimeTreatment(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Driving distance related options.
 type WaypointOptimizationDrivingDistanceOptions struct {
 
@@ -14919,28 +5824,6 @@ type WaypointOptimizationDrivingDistanceOptions struct {
 	DrivingDistance *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationDrivingDistanceOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationDrivingDistanceOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationDrivingDistanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DrivingDistance != nil {
-		s.WriteInt64(schemas.WaypointOptimizationDrivingDistanceOptions_DrivingDistance, *v.DrivingDistance)
-	}
-}
-func (v *WaypointOptimizationDrivingDistanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationDrivingDistanceOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationDrivingDistanceOptions_DrivingDistance:
-			v.DrivingDistance = new(int64)
-			return d.ReadInt64(schemas.WaypointOptimizationDrivingDistanceOptions_DrivingDistance, v.DrivingDistance)
-		}
-		return nil
-	})
 }
 
 // Specifies strict exclusion options for the route calculation. This setting
@@ -14957,25 +5840,6 @@ type WaypointOptimizationExclusionOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationExclusionOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationExclusionOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.WaypointOptimizationExclusionOptions_Countries, v.Countries)
-}
-func (v *WaypointOptimizationExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationExclusionOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationExclusionOptions_Countries:
-			return deserializeCountryCodeList(d, schemas.WaypointOptimizationExclusionOptions_Countries, &v.Countries)
-		}
-		return nil
-	})
-}
-
 // The failed constraint.
 type WaypointOptimizationFailedConstraint struct {
 
@@ -14986,38 +5850,6 @@ type WaypointOptimizationFailedConstraint struct {
 	Reason *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationFailedConstraint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationFailedConstraint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationFailedConstraint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Constraint != "" {
-		s.WriteString(schemas.WaypointOptimizationFailedConstraint_Constraint, string(v.Constraint))
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.WaypointOptimizationFailedConstraint_Reason, *v.Reason)
-	}
-}
-func (v *WaypointOptimizationFailedConstraint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationFailedConstraint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationFailedConstraint_Constraint:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationFailedConstraint_Constraint, &ev); err != nil {
-				return err
-			}
-			v.Constraint = WaypointOptimizationConstraint(ev)
-			return nil
-		case schemas.WaypointOptimizationFailedConstraint_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.WaypointOptimizationFailedConstraint_Reason, v.Reason)
-		}
-		return nil
-	})
 }
 
 // The impeding waypoint.
@@ -15039,34 +5871,6 @@ type WaypointOptimizationImpedingWaypoint struct {
 	Position []float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationImpedingWaypoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationImpedingWaypoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationImpedingWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaypointOptimizationFailedConstraintList(s, schemas.WaypointOptimizationImpedingWaypoint_FailedConstraints, v.FailedConstraints)
-	if v.Id != nil {
-		s.WriteString(schemas.WaypointOptimizationImpedingWaypoint_Id, *v.Id)
-	}
-	serializePosition(s, schemas.WaypointOptimizationImpedingWaypoint_Position, v.Position)
-}
-func (v *WaypointOptimizationImpedingWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationImpedingWaypoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationImpedingWaypoint_FailedConstraints:
-			return deserializeWaypointOptimizationFailedConstraintList(d, schemas.WaypointOptimizationImpedingWaypoint_FailedConstraints, &v.FailedConstraints)
-		case schemas.WaypointOptimizationImpedingWaypoint_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WaypointOptimizationImpedingWaypoint_Id, v.Id)
-		case schemas.WaypointOptimizationImpedingWaypoint_Position:
-			return deserializePosition(d, schemas.WaypointOptimizationImpedingWaypoint_Position, &v.Position)
-		}
-		return nil
-	})
 }
 
 // The optimized waypoint.
@@ -15113,49 +5917,6 @@ type WaypointOptimizationOptimizedWaypoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationOptimizedWaypoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationOptimizedWaypoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationOptimizedWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArrivalTime != nil {
-		s.WriteString(schemas.WaypointOptimizationOptimizedWaypoint_ArrivalTime, *v.ArrivalTime)
-	}
-	if v.ClusterIndex != nil {
-		s.WriteInt32(schemas.WaypointOptimizationOptimizedWaypoint_ClusterIndex, *v.ClusterIndex)
-	}
-	if v.DepartureTime != nil {
-		s.WriteString(schemas.WaypointOptimizationOptimizedWaypoint_DepartureTime, *v.DepartureTime)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.WaypointOptimizationOptimizedWaypoint_Id, *v.Id)
-	}
-	serializePosition(s, schemas.WaypointOptimizationOptimizedWaypoint_Position, v.Position)
-}
-func (v *WaypointOptimizationOptimizedWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationOptimizedWaypoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationOptimizedWaypoint_ArrivalTime:
-			v.ArrivalTime = new(string)
-			return d.ReadString(schemas.WaypointOptimizationOptimizedWaypoint_ArrivalTime, v.ArrivalTime)
-		case schemas.WaypointOptimizationOptimizedWaypoint_ClusterIndex:
-			v.ClusterIndex = new(int32)
-			return d.ReadInt32(schemas.WaypointOptimizationOptimizedWaypoint_ClusterIndex, v.ClusterIndex)
-		case schemas.WaypointOptimizationOptimizedWaypoint_DepartureTime:
-			v.DepartureTime = new(string)
-			return d.ReadString(schemas.WaypointOptimizationOptimizedWaypoint_DepartureTime, v.DepartureTime)
-		case schemas.WaypointOptimizationOptimizedWaypoint_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WaypointOptimizationOptimizedWaypoint_Id, v.Id)
-		case schemas.WaypointOptimizationOptimizedWaypoint_Position:
-			return deserializePosition(d, schemas.WaypointOptimizationOptimizedWaypoint_Position, &v.Position)
-		}
-		return nil
-	})
-}
-
 // Origin related options.
 type WaypointOptimizationOriginOptions struct {
 
@@ -15163,28 +5924,6 @@ type WaypointOptimizationOriginOptions struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationOriginOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationOriginOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationOriginOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.WaypointOptimizationOriginOptions_Id, *v.Id)
-	}
-}
-func (v *WaypointOptimizationOriginOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationOriginOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationOriginOptions_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WaypointOptimizationOriginOptions_Id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Options related to a pedestrian.
@@ -15196,28 +5935,6 @@ type WaypointOptimizationPedestrianOptions struct {
 	Speed *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationPedestrianOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationPedestrianOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationPedestrianOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Speed != nil {
-		s.WriteFloat64(schemas.WaypointOptimizationPedestrianOptions_Speed, *v.Speed)
-	}
-}
-func (v *WaypointOptimizationPedestrianOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationPedestrianOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationPedestrianOptions_Speed:
-			v.Speed = new(float64)
-			return d.ReadFloat64(schemas.WaypointOptimizationPedestrianOptions_Speed, v.Speed)
-		}
-		return nil
-	})
 }
 
 // Driver work-rest schedules defined by a short and long cycle. A rest needs to
@@ -15245,28 +5962,6 @@ type WaypointOptimizationRestCycleDurations struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationRestCycleDurations) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationRestCycleDurations)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationRestCycleDurations) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_RestDuration, v.RestDuration)
-	s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_WorkDuration, v.WorkDuration)
-}
-func (v *WaypointOptimizationRestCycleDurations) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationRestCycleDurations, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationRestCycleDurations_RestDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationRestCycleDurations_RestDuration, &v.RestDuration)
-		case schemas.WaypointOptimizationRestCycleDurations_WorkDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationRestCycleDurations_WorkDuration, &v.WorkDuration)
-		}
-		return nil
-	})
-}
-
 // Resting phase of the cycle.
 type WaypointOptimizationRestCycles struct {
 
@@ -15283,38 +5978,6 @@ type WaypointOptimizationRestCycles struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationRestCycles) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationRestCycles)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationRestCycles) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LongCycle != nil {
-		s.WriteStruct(schemas.WaypointOptimizationRestCycles_LongCycle)
-		v.LongCycle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ShortCycle != nil {
-		s.WriteStruct(schemas.WaypointOptimizationRestCycles_ShortCycle)
-		v.ShortCycle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationRestCycles) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationRestCycles, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationRestCycles_LongCycle:
-			v.LongCycle = &WaypointOptimizationRestCycleDurations{}
-			return v.LongCycle.Deserialize(d)
-		case schemas.WaypointOptimizationRestCycles_ShortCycle:
-			v.ShortCycle = &WaypointOptimizationRestCycleDurations{}
-			return v.ShortCycle.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Pre defined rest profiles for a driver schedule. The only currently supported
 // profile is EU.
 type WaypointOptimizationRestProfile struct {
@@ -15326,28 +5989,6 @@ type WaypointOptimizationRestProfile struct {
 	Profile *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationRestProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationRestProfile)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationRestProfile) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Profile != nil {
-		s.WriteString(schemas.WaypointOptimizationRestProfile_Profile, *v.Profile)
-	}
-}
-func (v *WaypointOptimizationRestProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationRestProfile, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationRestProfile_Profile:
-			v.Profile = new(string)
-			return d.ReadString(schemas.WaypointOptimizationRestProfile_Profile, v.Profile)
-		}
-		return nil
-	})
 }
 
 // Options to configure matching the provided position to a side of the street.
@@ -15365,35 +6006,6 @@ type WaypointOptimizationSideOfStreetOptions struct {
 	UseWith SideOfStreetMatchingStrategy
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationSideOfStreetOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.WaypointOptimizationSideOfStreetOptions_Position, v.Position)
-	if v.UseWith != "" {
-		s.WriteString(schemas.WaypointOptimizationSideOfStreetOptions_UseWith, string(v.UseWith))
-	}
-}
-func (v *WaypointOptimizationSideOfStreetOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationSideOfStreetOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationSideOfStreetOptions_Position:
-			return deserializePosition(d, schemas.WaypointOptimizationSideOfStreetOptions_Position, &v.Position)
-		case schemas.WaypointOptimizationSideOfStreetOptions_UseWith:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationSideOfStreetOptions_UseWith, &ev); err != nil {
-				return err
-			}
-			v.UseWith = SideOfStreetMatchingStrategy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Time breakdown for the sequence.
@@ -15431,34 +6043,6 @@ type WaypointOptimizationTimeBreakdown struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationTimeBreakdown) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationTimeBreakdown)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationTimeBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_RestDuration, v.RestDuration)
-	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_ServiceDuration, v.ServiceDuration)
-	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_TravelDuration, v.TravelDuration)
-	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_WaitDuration, v.WaitDuration)
-}
-func (v *WaypointOptimizationTimeBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationTimeBreakdown, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationTimeBreakdown_RestDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationTimeBreakdown_RestDuration, &v.RestDuration)
-		case schemas.WaypointOptimizationTimeBreakdown_ServiceDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationTimeBreakdown_ServiceDuration, &v.ServiceDuration)
-		case schemas.WaypointOptimizationTimeBreakdown_TravelDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationTimeBreakdown_TravelDuration, &v.TravelDuration)
-		case schemas.WaypointOptimizationTimeBreakdown_WaitDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationTimeBreakdown_WaitDuration, &v.WaitDuration)
-		}
-		return nil
-	})
-}
-
 // Options related to traffic.
 type WaypointOptimizationTrafficOptions struct {
 
@@ -15468,32 +6052,6 @@ type WaypointOptimizationTrafficOptions struct {
 	Usage TrafficUsage
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationTrafficOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationTrafficOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationTrafficOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Usage != "" {
-		s.WriteString(schemas.WaypointOptimizationTrafficOptions_Usage, string(v.Usage))
-	}
-}
-func (v *WaypointOptimizationTrafficOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationTrafficOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationTrafficOptions_Usage:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationTrafficOptions_Usage, &ev); err != nil {
-				return err
-			}
-			v.Usage = TrafficUsage(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Trailer options corresponding to the vehicle.
@@ -15507,28 +6065,6 @@ type WaypointOptimizationTrailerOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationTrailerOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationTrailerOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationTrailerOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrailerCount != nil {
-		s.WriteInt32(schemas.WaypointOptimizationTrailerOptions_TrailerCount, *v.TrailerCount)
-	}
-}
-func (v *WaypointOptimizationTrailerOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationTrailerOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationTrailerOptions_TrailerCount:
-			v.TrailerCount = new(int32)
-			return d.ReadInt32(schemas.WaypointOptimizationTrailerOptions_TrailerCount, v.TrailerCount)
-		}
-		return nil
-	})
-}
-
 // Travel mode related options for the provided travel mode.
 type WaypointOptimizationTravelModeOptions struct {
 
@@ -15539,38 +6075,6 @@ type WaypointOptimizationTravelModeOptions struct {
 	Truck *WaypointOptimizationTruckOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *WaypointOptimizationTravelModeOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationTravelModeOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationTravelModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Pedestrian != nil {
-		s.WriteStruct(schemas.WaypointOptimizationTravelModeOptions_Pedestrian)
-		v.Pedestrian.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Truck != nil {
-		s.WriteStruct(schemas.WaypointOptimizationTravelModeOptions_Truck)
-		v.Truck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationTravelModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationTravelModeOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationTravelModeOptions_Pedestrian:
-			v.Pedestrian = &WaypointOptimizationPedestrianOptions{}
-			return v.Pedestrian.Deserialize(d)
-		case schemas.WaypointOptimizationTravelModeOptions_Truck:
-			v.Truck = &WaypointOptimizationTruckOptions{}
-			return v.Truck.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Travel mode options when the provided travel mode is Truck .
@@ -15647,74 +6151,6 @@ type WaypointOptimizationTruckOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationTruckOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationTruckOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GrossWeight != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_GrossWeight, v.GrossWeight)
-	}
-	serializeWaypointOptimizationHazardousCargoTypeList(s, schemas.WaypointOptimizationTruckOptions_HazardousCargos, v.HazardousCargos)
-	if v.Height != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_Height, v.Height)
-	}
-	if v.Length != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_Length, v.Length)
-	}
-	if v.Trailer != nil {
-		s.WriteStruct(schemas.WaypointOptimizationTruckOptions_Trailer)
-		v.Trailer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TruckType != "" {
-		s.WriteString(schemas.WaypointOptimizationTruckOptions_TruckType, string(v.TruckType))
-	}
-	if v.TunnelRestrictionCode != nil {
-		s.WriteString(schemas.WaypointOptimizationTruckOptions_TunnelRestrictionCode, *v.TunnelRestrictionCode)
-	}
-	if v.WeightPerAxle != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_WeightPerAxle, v.WeightPerAxle)
-	}
-	if v.Width != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_Width, v.Width)
-	}
-}
-func (v *WaypointOptimizationTruckOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationTruckOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationTruckOptions_GrossWeight:
-			return d.ReadInt64(schemas.WaypointOptimizationTruckOptions_GrossWeight, &v.GrossWeight)
-		case schemas.WaypointOptimizationTruckOptions_HazardousCargos:
-			return deserializeWaypointOptimizationHazardousCargoTypeList(d, schemas.WaypointOptimizationTruckOptions_HazardousCargos, &v.HazardousCargos)
-		case schemas.WaypointOptimizationTruckOptions_Height:
-			return d.ReadInt64(schemas.WaypointOptimizationTruckOptions_Height, &v.Height)
-		case schemas.WaypointOptimizationTruckOptions_Length:
-			return d.ReadInt64(schemas.WaypointOptimizationTruckOptions_Length, &v.Length)
-		case schemas.WaypointOptimizationTruckOptions_Trailer:
-			v.Trailer = &WaypointOptimizationTrailerOptions{}
-			return v.Trailer.Deserialize(d)
-		case schemas.WaypointOptimizationTruckOptions_TruckType:
-			var ev string
-			if err := d.ReadString(schemas.WaypointOptimizationTruckOptions_TruckType, &ev); err != nil {
-				return err
-			}
-			v.TruckType = WaypointOptimizationTruckType(ev)
-			return nil
-		case schemas.WaypointOptimizationTruckOptions_TunnelRestrictionCode:
-			v.TunnelRestrictionCode = new(string)
-			return d.ReadString(schemas.WaypointOptimizationTruckOptions_TunnelRestrictionCode, v.TunnelRestrictionCode)
-		case schemas.WaypointOptimizationTruckOptions_WeightPerAxle:
-			return d.ReadInt64(schemas.WaypointOptimizationTruckOptions_WeightPerAxle, &v.WeightPerAxle)
-		case schemas.WaypointOptimizationTruckOptions_Width:
-			return d.ReadInt64(schemas.WaypointOptimizationTruckOptions_Width, &v.Width)
-		}
-		return nil
-	})
-}
-
 // Waypoint between the Origin and Destination.
 type WaypointOptimizationWaypoint struct {
 
@@ -15750,66 +6186,6 @@ type WaypointOptimizationWaypoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WaypointOptimizationWaypoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WaypointOptimizationWaypoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WaypointOptimizationWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessHours != nil {
-		s.WriteStruct(schemas.WaypointOptimizationWaypoint_AccessHours)
-		v.AccessHours.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AppointmentTime != nil {
-		s.WriteString(schemas.WaypointOptimizationWaypoint_AppointmentTime, *v.AppointmentTime)
-	}
-	serializeBeforeWaypointsList(s, schemas.WaypointOptimizationWaypoint_Before, v.Before)
-	if v.Heading != 0 {
-		s.WriteFloat64(schemas.WaypointOptimizationWaypoint_Heading, v.Heading)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.WaypointOptimizationWaypoint_Id, *v.Id)
-	}
-	serializePosition(s, schemas.WaypointOptimizationWaypoint_Position, v.Position)
-	if v.ServiceDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationWaypoint_ServiceDuration, v.ServiceDuration)
-	}
-	if v.SideOfStreet != nil {
-		s.WriteStruct(schemas.WaypointOptimizationWaypoint_SideOfStreet)
-		v.SideOfStreet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WaypointOptimizationWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WaypointOptimizationWaypoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WaypointOptimizationWaypoint_AccessHours:
-			v.AccessHours = &WaypointOptimizationAccessHours{}
-			return v.AccessHours.Deserialize(d)
-		case schemas.WaypointOptimizationWaypoint_AppointmentTime:
-			v.AppointmentTime = new(string)
-			return d.ReadString(schemas.WaypointOptimizationWaypoint_AppointmentTime, v.AppointmentTime)
-		case schemas.WaypointOptimizationWaypoint_Before:
-			return deserializeBeforeWaypointsList(d, schemas.WaypointOptimizationWaypoint_Before, &v.Before)
-		case schemas.WaypointOptimizationWaypoint_Heading:
-			return d.ReadFloat64(schemas.WaypointOptimizationWaypoint_Heading, &v.Heading)
-		case schemas.WaypointOptimizationWaypoint_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WaypointOptimizationWaypoint_Id, v.Id)
-		case schemas.WaypointOptimizationWaypoint_Position:
-			return deserializePosition(d, schemas.WaypointOptimizationWaypoint_Position, &v.Position)
-		case schemas.WaypointOptimizationWaypoint_ServiceDuration:
-			return d.ReadInt64(schemas.WaypointOptimizationWaypoint_ServiceDuration, &v.ServiceDuration)
-		case schemas.WaypointOptimizationWaypoint_SideOfStreet:
-			v.SideOfStreet = &WaypointOptimizationSideOfStreetOptions{}
-			return v.SideOfStreet.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies the total weight for different axle group configurations. Used in
 // regions where regulations set different weight limits based on axle group types.
 //
@@ -15842,47 +6218,6 @@ type WeightPerAxleGroup struct {
 	Triple int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WeightPerAxleGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WeightPerAxleGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WeightPerAxleGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Quad != 0 {
-		s.WriteInt64(schemas.WeightPerAxleGroup_Quad, v.Quad)
-	}
-	if v.Quint != 0 {
-		s.WriteInt64(schemas.WeightPerAxleGroup_Quint, v.Quint)
-	}
-	if v.Single != 0 {
-		s.WriteInt64(schemas.WeightPerAxleGroup_Single, v.Single)
-	}
-	if v.Tandem != 0 {
-		s.WriteInt64(schemas.WeightPerAxleGroup_Tandem, v.Tandem)
-	}
-	if v.Triple != 0 {
-		s.WriteInt64(schemas.WeightPerAxleGroup_Triple, v.Triple)
-	}
-}
-func (v *WeightPerAxleGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WeightPerAxleGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WeightPerAxleGroup_Quad:
-			return d.ReadInt64(schemas.WeightPerAxleGroup_Quad, &v.Quad)
-		case schemas.WeightPerAxleGroup_Quint:
-			return d.ReadInt64(schemas.WeightPerAxleGroup_Quint, &v.Quint)
-		case schemas.WeightPerAxleGroup_Single:
-			return d.ReadInt64(schemas.WeightPerAxleGroup_Single, &v.Single)
-		case schemas.WeightPerAxleGroup_Tandem:
-			return d.ReadInt64(schemas.WeightPerAxleGroup_Tandem, &v.Tandem)
-		case schemas.WeightPerAxleGroup_Triple:
-			return d.ReadInt64(schemas.WeightPerAxleGroup_Triple, &v.Triple)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

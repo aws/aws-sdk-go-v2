@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a CA certificate with Amazon Web Services IoT Core. There is no limit
@@ -83,6 +82,36 @@ type RegisterCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCACertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCACertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCACertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAutoRegistration != false {
+		s.WriteBool(schemas.RegisterCACertificateRequest_allowAutoRegistration, v.AllowAutoRegistration)
+	}
+	if v.CaCertificate != nil {
+		s.WriteString(schemas.RegisterCACertificateRequest_caCertificate, *v.CaCertificate)
+	}
+	if v.CertificateMode != "" {
+		s.WriteString(schemas.RegisterCACertificateRequest_certificateMode, string(v.CertificateMode))
+	}
+	if v.RegistrationConfig != nil {
+		s.WriteStruct(schemas.RegisterCACertificateRequest_registrationConfig)
+		v.RegistrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SetAsActive != false {
+		s.WriteBool(schemas.RegisterCACertificateRequest_setAsActive, v.SetAsActive)
+	}
+	serializeTagList(s, schemas.RegisterCACertificateRequest_tags, v.Tags)
+	if v.VerificationCertificate != nil {
+		s.WriteString(schemas.RegisterCACertificateRequest_verificationCertificate, *v.VerificationCertificate)
+	}
+}
+
 // The output from the RegisterCACertificateResponse operation.
 type RegisterCACertificateOutput struct {
 
@@ -98,77 +127,54 @@ type RegisterCACertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCACertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCACertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCACertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RegisterCACertificateResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.RegisterCACertificateResponse_certificateId, *v.CertificateId)
+	}
+}
+func (v *RegisterCACertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCACertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCACertificateResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RegisterCACertificateResponse_certificateArn, v.CertificateArn)
+		case schemas.RegisterCACertificateResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.RegisterCACertificateResponse_certificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCACertificate, schemas.RegisterCACertificateRequest, schemas.RegisterCACertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCACertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCACertificate, schemas.RegisterCACertificateRequest, schemas.RegisterCACertificateResponse), output: &RegisterCACertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCACertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterCACertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterCACertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterCACertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +189,8 @@ func (c *Client) addOperationRegisterCACertificateMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterCACertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterCACertificate",
-	}
 }

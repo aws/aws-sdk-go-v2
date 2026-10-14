@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListBillingViews
+
+{"activeTimeRange":{"activeAfterInclusive":946684800,"activeBeforeInclusive":946684800},"arns":["__Member__","__Member__"],"billingViewTypes":["PRIMARY","PRIMARY"],"maxResults":1,"names":[{"searchOption":"STARTS_WITH","searchValue":"__SearchValue__"},{"searchOption":"STARTS_WITH","searchValue":"__SearchValue__"}],"nextToken":"__NextToken__","ownerAccountId":"__OwnerAccountId__","sourceAccountId":"__SourceAccountId__"}

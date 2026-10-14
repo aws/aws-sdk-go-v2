@@ -1,0 +1,3 @@
+GET /custom-detection-rule/association?maxResults=1&mode=LIVE&nextToken=__NextToken__&ruleId=__RuleId__
+
+

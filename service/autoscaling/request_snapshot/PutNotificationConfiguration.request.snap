@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutNotificationConfiguration&AutoScalingGroupName=__AutoScalingGroupName__&NotificationTypes.member.1=__Member__&NotificationTypes.member.2=__Member__&TopicARN=__TopicARN__&Version=2011-01-01

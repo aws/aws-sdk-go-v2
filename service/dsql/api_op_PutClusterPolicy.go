@@ -5,9 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a resource-based policy to a cluster. This policy defines access
@@ -57,6 +57,30 @@ type PutClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassPolicyLockoutSafetyCheck != false {
+		s.WriteBool(schemas.PutClusterPolicyInput_bypassPolicyLockoutSafetyCheck, v.BypassPolicyLockoutSafetyCheck)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_clientToken, *v.ClientToken)
+	}
+	if v.ExpectedPolicyVersion != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_expectedPolicyVersion, *v.ExpectedPolicyVersion)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_identifier, *v.Identifier)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_policy, *v.Policy)
+	}
+}
+
 type PutClusterPolicyOutput struct {
 
 	// The version of the policy after it has been updated or created.
@@ -70,65 +94,42 @@ type PutClusterPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.PutClusterPolicyOutput_policyVersion, *v.PolicyVersion)
+	}
+}
+func (v *PutClusterPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutClusterPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutClusterPolicyOutput_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.PutClusterPolicyOutput_policyVersion, v.PolicyVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutClusterPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterPolicy, schemas.PutClusterPolicyInput, schemas.PutClusterPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterPolicy, schemas.PutClusterPolicyInput, schemas.PutClusterPolicyOutput), output: &PutClusterPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutClusterPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutClusterPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +139,6 @@ func (c *Client) addOperationPutClusterPolicyMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpPutClusterPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutClusterPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +151,6 @@ func (c *Client) addOperationPutClusterPolicyMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +190,4 @@ func (m *idempotencyToken_initializeOpPutClusterPolicy) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opPutClusterPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutClusterPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutClusterPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutClusterPolicy",
-	}
 }

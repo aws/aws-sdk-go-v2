@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetPlan
+
+{"AdditionalPlanOptionsMap":{"key0":"__Value__"},"Language":"PYTHON","Location":{"DynamoDB":[{"Name":"__Name__","Param":true,"Value":"__Value__"},{"Name":"__Name__","Param":true,"Value":"__Value__"}],"Jdbc":[{"Name":"__Name__","Param":true,"Value":"__Value__"},{"Name":"__Name__","Param":true,"Value":"__Value__"}],"S3":[{"Name":"__Name__","Param":true,"Value":"__Value__"},{"Name":"__Name__","Param":true,"Value":"__Value__"}]},"Mapping":[{"SourcePath":"__SourcePath__","SourceTable":"__SourceTable__","SourceType":"__SourceType__","TargetPath":"__TargetPath__","TargetTable":"__TargetTable__","TargetType":"__TargetType__"},{"SourcePath":"__SourcePath__","SourceTable":"__SourceTable__","SourceType":"__SourceType__","TargetPath":"__TargetPath__","TargetTable":"__TargetTable__","TargetType":"__TargetType__"}],"Sinks":[{"DatabaseName":"__DatabaseName__","TableName":"__TableName__"},{"DatabaseName":"__DatabaseName__","TableName":"__TableName__"}],"Source":{"DatabaseName":"__DatabaseName__","TableName":"__TableName__"}}

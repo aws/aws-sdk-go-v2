@@ -1,0 +1,5 @@
+POST /jobs
+
+Content-Type: application/json
+
+{"adaptiveIngestion":true,"datasetId":"__DatasetId__","deleteFilesAfterImport":true,"errorReportLocation":{"bucket":"__Bucket__","prefix":"__Prefix__"},"files":[{"alias":"__Alias__","bucket":"__Bucket__","fileFormat":{"annotation":{},"csv":{"columnNames":["ALIAS","ALIAS"]},"mp4":{},"parquet":{}},"key":"__Key__","startTime":{"offsetInNanos":1,"timeInSeconds":1},"versionId":"__VersionId__"},{"alias":"__Alias__","bucket":"__Bucket__","fileFormat":{"annotation":{},"csv":{"columnNames":["ALIAS","ALIAS"]},"mp4":{},"parquet":{}},"key":"__Key__","startTime":{"offsetInNanos":1,"timeInSeconds":1},"versionId":"__VersionId__"}],"jobConfiguration":{"fileFormat":{"annotation":{},"csv":{"columnNames":["ALIAS","ALIAS"]},"mp4":{},"parquet":{}}},"jobName":"__JobName__","jobRoleArn":"__JobRoleArn__","workspaceName":"__WorkspaceName__"}

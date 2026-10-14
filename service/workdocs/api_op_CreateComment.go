@@ -4,13 +4,8 @@ package workdocs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a new comment to the specified document version.
@@ -68,39 +63,6 @@ type CreateCommentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCommentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCommentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCommentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.CreateCommentRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.DocumentId != nil {
-		s.WriteString(schemas.CreateCommentRequest_DocumentId, *v.DocumentId)
-	}
-	if v.NotifyCollaborators != false {
-		s.WriteBool(schemas.CreateCommentRequest_NotifyCollaborators, v.NotifyCollaborators)
-	}
-	if v.ParentId != nil {
-		s.WriteString(schemas.CreateCommentRequest_ParentId, *v.ParentId)
-	}
-	if v.Text != nil {
-		s.WriteString(schemas.CreateCommentRequest_Text, *v.Text)
-	}
-	if v.ThreadId != nil {
-		s.WriteString(schemas.CreateCommentRequest_ThreadId, *v.ThreadId)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.CreateCommentRequest_VersionId, *v.VersionId)
-	}
-	if v.Visibility != "" {
-		s.WriteString(schemas.CreateCommentRequest_Visibility, string(v.Visibility))
-	}
-}
-
 type CreateCommentOutput struct {
 
 	// The comment that has been created.
@@ -112,85 +74,29 @@ type CreateCommentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCommentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCommentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCommentResponse_Comment:
-			v.Comment = &types.Comment{}
-			return v.Comment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComment, schemas.CreateCommentRequest, schemas.CreateCommentResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComment, schemas.CreateCommentRequest, schemas.CreateCommentResponse), output: &CreateCommentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCommentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,22 +111,8 @@ func (c *Client) addOperationCreateCommentMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateComment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComment",
-	}
 }

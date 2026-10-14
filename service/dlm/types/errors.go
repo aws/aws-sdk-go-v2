@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InternalServerException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InternalServerException_Code, v.Code)
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Bad request. The request is missing required parameters or has invalid
 // parameters.
@@ -65,6 +93,39 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidRequestException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
+	}
+	serializeParameterList(s, schemas.InvalidRequestException_MutuallyExclusiveParameters, v.MutuallyExclusiveParameters)
+	serializeParameterList(s, schemas.InvalidRequestException_RequiredParameters, v.RequiredParameters)
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidRequestException_Code, v.Code)
+		case schemas.InvalidRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_Message, v.Message)
+		case schemas.InvalidRequestException_MutuallyExclusiveParameters:
+			return deserializeParameterList(d, schemas.InvalidRequestException_MutuallyExclusiveParameters, &v.MutuallyExclusiveParameters)
+		case schemas.InvalidRequestException_RequiredParameters:
+			return deserializeParameterList(d, schemas.InvalidRequestException_RequiredParameters, &v.RequiredParameters)
+		}
+		return nil
+	})
+}
 
 // The request failed because a limit was exceeded.
 type LimitExceededException struct {
@@ -94,6 +155,39 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.LimitExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.LimitExceededException_ResourceType, *v.ResourceType)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.LimitExceededException_Code, v.Code)
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		case schemas.LimitExceededException_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.LimitExceededException_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 
 // A requested resource was not found.
 type ResourceNotFoundException struct {
@@ -124,3 +218,39 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	serializePolicyIdList(s, schemas.ResourceNotFoundException_ResourceIds, v.ResourceIds)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceNotFoundException_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Code, v.Code)
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_ResourceIds:
+			return deserializePolicyIdList(d, schemas.ResourceNotFoundException_ResourceIds, &v.ResourceIds)
+		case schemas.ResourceNotFoundException_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}

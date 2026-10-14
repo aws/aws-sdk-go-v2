@@ -4,15 +4,17 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of custom and default field indexes which are discovered in log
-// data. For more information about field index policies, see [PutIndexPolicy].
+// Returns a list of field indexes discovered in log data. By default, the
+// response includes the DEFAULT , CUSTOM , and INACTIVE index categories. To
+// return indexes from other categories, use the indexCategories parameter.
+//
+// For more information about field index policies, see [PutIndexPolicy].
 //
 // [PutIndexPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
 func (c *Client) DescribeFieldIndexes(ctx context.Context, params *DescribeFieldIndexesInput, optFns ...func(*Options)) (*DescribeFieldIndexesOutput, error) {
@@ -38,10 +40,52 @@ type DescribeFieldIndexesInput struct {
 	// This member is required.
 	LogGroupIdentifiers []string
 
+	// The index categories to return. The following values are supported:
+	//
+	//   - DEFAULT : Fields that CloudWatch Logs indexes by default. Examples include
+	//   @logStream and @data_format .
+	//
+	//   - CUSTOM : Fields that you added manually to the field index policy.
+	//   CloudWatch Logs always indexes these fields. These fields count toward the quota
+	//   of 20 fields for each log group.
+	//
+	//   - AUTO : Fields that CloudWatch Logs indexes automatically based on your query
+	//   patterns and usage. These fields do not count toward the field index quota.
+	//   CloudWatch Logs might update these fields based on changes in your query
+	//   patterns. To keep a field indexed permanently, add it to an account-level or
+	//   log-group level field index policy.
+	//
+	//   - INACTIVE : Fields that CloudWatch Logs indexed before but does not index
+	//   now. This happens if you remove a field from the field index policy or if
+	//   CloudWatch Logs automatically selects a different field based on your queries.
+	//
+	// If you omit this parameter, the response includes the DEFAULT , CUSTOM , and
+	// INACTIVE categories.
+	//
+	// For more information about automatically indexed fields and using the AUTO
+	// category, see [Automatically indexed fields].
+	//
+	// [Automatically indexed fields]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Automatic.html
+	IndexCategories []types.IndexCategory
+
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFieldIndexesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFieldIndexesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFieldIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndexCategories(s, schemas.DescribeFieldIndexesRequest_indexCategories, v.IndexCategories)
+	serializeDescribeFieldIndexesLogGroupIdentifiers(s, schemas.DescribeFieldIndexesRequest_logGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFieldIndexesRequest_nextToken, *v.NextToken)
+	}
 }
 
 type DescribeFieldIndexesOutput struct {
@@ -58,77 +102,51 @@ type DescribeFieldIndexesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFieldIndexesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFieldIndexesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFieldIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldIndexes(s, schemas.DescribeFieldIndexesResponse_fieldIndexes, v.FieldIndexes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFieldIndexesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFieldIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFieldIndexesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFieldIndexesResponse_fieldIndexes:
+			return deserializeFieldIndexes(d, schemas.DescribeFieldIndexesResponse_fieldIndexes, &v.FieldIndexes)
+		case schemas.DescribeFieldIndexesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFieldIndexesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFieldIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFieldIndexes, schemas.DescribeFieldIndexesRequest, schemas.DescribeFieldIndexesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFieldIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFieldIndexes, schemas.DescribeFieldIndexesRequest, schemas.DescribeFieldIndexesResponse), output: &DescribeFieldIndexesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFieldIndexes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFieldIndexes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFieldIndexesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFieldIndexes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +161,8 @@ func (c *Client) addOperationDescribeFieldIndexesMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFieldIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFieldIndexes",
-	}
 }

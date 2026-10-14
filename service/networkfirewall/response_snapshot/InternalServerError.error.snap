@@ -1,0 +1,5 @@
+500
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.AcceptNetworkFirewallTransitGatewayAttachment
+
+{"__type":"InternalServerError","Message":"__Message__"}

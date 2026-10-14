@@ -1,0 +1,5 @@
+POST /rules
+
+Content-Type: application/json
+
+{"Description":"__Description__","ExcludeResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"LockConfiguration":{"UnlockDelay":{"UnlockDelayUnit":"DAYS","UnlockDelayValue":1}},"ResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"ResourceType":"EBS_SNAPSHOT","RetentionPeriod":{"RetentionPeriodUnit":"DAYS","RetentionPeriodValue":1},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

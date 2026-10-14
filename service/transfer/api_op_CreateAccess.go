@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used by administrators to choose which groups in the directory should have
@@ -145,6 +144,39 @@ type CreateAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.CreateAccessRequest_ExternalId, *v.ExternalId)
+	}
+	if v.HomeDirectory != nil {
+		s.WriteString(schemas.CreateAccessRequest_HomeDirectory, *v.HomeDirectory)
+	}
+	serializeHomeDirectoryMappings(s, schemas.CreateAccessRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryType != "" {
+		s.WriteString(schemas.CreateAccessRequest_HomeDirectoryType, string(v.HomeDirectoryType))
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateAccessRequest_Policy, *v.Policy)
+	}
+	if v.PosixProfile != nil {
+		s.WriteStruct(schemas.CreateAccessRequest_PosixProfile)
+		v.PosixProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateAccessRequest_Role, *v.Role)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateAccessRequest_ServerId, *v.ServerId)
+	}
+}
+
 type CreateAccessOutput struct {
 
 	// The external identifier of the group whose users have access to your Amazon S3
@@ -164,77 +196,54 @@ type CreateAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.CreateAccessResponse_ExternalId, *v.ExternalId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateAccessResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *CreateAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessResponse_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.CreateAccessResponse_ExternalId, v.ExternalId)
+		case schemas.CreateAccessResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.CreateAccessResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccess, schemas.CreateAccessRequest, schemas.CreateAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccess, schemas.CreateAccessRequest, schemas.CreateAccessResponse), output: &CreateAccessOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAccess{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccess"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAccessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccess(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +258,8 @@ func (c *Client) addOperationCreateAccessMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAccess(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccess",
-	}
 }

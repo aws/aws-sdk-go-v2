@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +54,6 @@ type ExecuteQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteQueryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_clientToken, *v.ClientToken)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ExecuteQueryRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_nextToken, *v.NextToken)
-	}
-	if v.QueryStatement != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_queryStatement, *v.QueryStatement)
-	}
-}
-
 type ExecuteQueryOutput struct {
 
 	// Represents a single column in the query results.
@@ -95,77 +71,23 @@ type ExecuteQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteQueryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteQueryResponse_columns:
-			return deserializeColumnsList(d, schemas.ExecuteQueryResponse_columns, &v.Columns)
-		case schemas.ExecuteQueryResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ExecuteQueryResponse_nextToken, v.NextToken)
-		case schemas.ExecuteQueryResponse_rows:
-			return deserializeRows(d, schemas.ExecuteQueryResponse_rows, &v.Rows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteQuery{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse), output: &ExecuteQueryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -180,12 +102,6 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = addOpExecuteQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -196,12 +112,6 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -366,12 +276,4 @@ func (m *idempotencyToken_initializeOpExecuteQuery) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opExecuteQueryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpExecuteQuery{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opExecuteQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExecuteQuery",
-	}
 }

@@ -1,0 +1,5 @@
+POST /list-vector-enrichment-jobs
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","SortBy":"__SortBy__","SortOrder":"ASCENDING","StatusEquals":"__StatusEquals__"}

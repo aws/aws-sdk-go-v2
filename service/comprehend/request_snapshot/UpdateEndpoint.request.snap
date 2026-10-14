@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.UpdateEndpoint
+
+{"DesiredDataAccessRoleArn":"__DesiredDataAccessRoleArn__","DesiredInferenceUnits":1,"DesiredModelArn":"__DesiredModelArn__","EndpointArn":"__EndpointArn__","FlywheelArn":"__FlywheelArn__"}

@@ -230,6 +230,18 @@ func TestCheckSnapshot_ListVectors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutVectorBucketDefaultIndexMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutVectorBucketDefaultIndexMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutVectorBucketDefaultIndexMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutVectorBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutVectorBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIndexMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndexMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIndexMode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -457,6 +481,18 @@ func TestUpdateSnapshot_ListVectors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutVectorBucketDefaultIndexMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutVectorBucketDefaultIndexMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutVectorBucketDefaultIndexMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutVectorBucketPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutVectorBucketPolicy(context.Background(), nil, func(o *Options) {
@@ -510,6 +546,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIndexMode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIndexMode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIndexMode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

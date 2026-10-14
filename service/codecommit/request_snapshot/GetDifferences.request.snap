@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetDifferences
+
+{"afterCommitSpecifier":"__AfterCommitSpecifier__","afterPath":"__AfterPath__","beforeCommitSpecifier":"__BeforeCommitSpecifier__","beforePath":"__BeforePath__","MaxResults":1,"NextToken":"__NextToken__","repositoryName":"__RepositoryName__"}

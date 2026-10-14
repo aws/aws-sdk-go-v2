@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/policy
+
+Content-Type: application/json
+
+{"statements":[{"actions":["__Member__","__Member__"],"principalOrgIDs":["__Member__","__Member__"],"principals":["__Member__","__Member__"],"statementId":"__StatementId__"},{"actions":["__Member__","__Member__"],"principalOrgIDs":["__Member__","__Member__"],"principals":["__Member__","__Member__"],"statementId":"__StatementId__"}]}

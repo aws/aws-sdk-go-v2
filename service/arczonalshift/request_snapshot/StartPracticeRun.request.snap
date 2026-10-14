@@ -1,0 +1,5 @@
+POST /practiceruns
+
+Content-Type: application/json
+
+{"awayFrom":"__AwayFrom__","comment":"__Comment__","resourceIdentifier":"__ResourceIdentifier__"}

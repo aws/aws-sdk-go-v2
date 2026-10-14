@@ -4,10 +4,9 @@ package sfn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,7 +49,7 @@ import (
 // if you call StartExecution with the same name and input as a running execution,
 // the call succeeds and return the same response as the original request. If the
 // execution is closed or if the input is different, it returns a 400
-// ExecutionAlreadyExists error. You can reuse names after 90 days.
+// ExecutionAlreadyExists error. You can reuse the name 90 days after it closes.
 //
 // StartExecution isn't idempotent for EXPRESS workflows.
 //
@@ -119,9 +118,11 @@ type StartExecutionInput struct {
 	// UTF-8 encoding.
 	Input *string
 
-	// Optional name of the execution. This name must be unique for your Amazon Web
-	// Services account, Region, and state machine for 90 days. For more information,
-	// see [Limits Related to State Machine Executions]in the Step Functions Developer Guide.
+	// Optional name of the execution. For STANDARD workflows, this name must be
+	// unique for your Amazon Web Services account, region, and state machine. If a
+	// previous execution with the same name exists, you can reuse the name 90 days
+	// after it closes. For EXPRESS workflows, execution names can be reused
+	// immediately. For more information, see [Limits Related to State Machine Executions]in the Step Functions Developer Guide.
 	//
 	// If you don't provide a name for the execution, Step Functions automatically
 	// generates a universally unique identifier (UUID) as the execution name.
@@ -162,6 +163,27 @@ type StartExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.StartExecutionInput_input, *v.Input)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartExecutionInput_name, *v.Name)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.StartExecutionInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.StartExecutionInput_traceHeader, *v.TraceHeader)
+	}
+}
+
 type StartExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the execution.
@@ -180,77 +202,54 @@ type StartExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StartExecutionOutput_executionArn, *v.ExecutionArn)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.StartExecutionOutput_startDate, *v.StartDate)
+	}
+}
+func (v *StartExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExecutionOutput_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.StartExecutionOutput_executionArn, v.ExecutionArn)
+		case schemas.StartExecutionOutput_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.StartExecutionOutput_startDate, v.StartDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExecution, schemas.StartExecutionInput, schemas.StartExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExecution, schemas.StartExecutionInput, schemas.StartExecutionOutput), output: &StartExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -265,22 +264,8 @@ func (c *Client) addOperationStartExecutionMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartExecution",
-	}
 }

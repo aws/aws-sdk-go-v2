@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that something is wrong with the input to the request. For example, a
 // required parameter may be missing or out of range.
@@ -61,6 +83,33 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AthenaErrorCode != nil {
+		s.WriteString(schemas.InvalidRequestException_AthenaErrorCode, *v.AthenaErrorCode)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_AthenaErrorCode:
+			v.AthenaErrorCode = new(string)
+			return d.ReadString(schemas.InvalidRequestException_AthenaErrorCode, v.AthenaErrorCode)
+		case schemas.InvalidRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An exception that Athena received when it called a custom metastore. Occurs if
 // the error is not caused by user input ( InvalidRequestException ) or from the
@@ -91,6 +140,27 @@ func (e *MetadataException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MetadataException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MetadataException_Message, *v.Message)
+	}
+}
+func (v *MetadataException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MetadataException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource, such as a workgroup, was not found.
 type ResourceNotFoundException struct {
@@ -119,6 +189,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_ResourceName, *v.ResourceName)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The specified session already exists.
 type SessionAlreadyExistsException struct {
@@ -145,6 +242,27 @@ func (e *SessionAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SessionAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SessionAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SessionAlreadyExistsException_Message, *v.Message)
+	}
+}
+func (v *SessionAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SessionAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the request was throttled.
 type TooManyRequestsException struct {
@@ -173,3 +291,34 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.TooManyRequestsException_Reason, string(v.Reason))
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		case schemas.TooManyRequestsException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.TooManyRequestsException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ThrottleReason(ev)
+			return nil
+		}
+		return nil
+	})
+}

@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/member/delete
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.DisassociateEipFromVlan
+
+{"associationId":"__AssociationId__","clientToken":"__ClientToken__","environmentId":"__EnvironmentId__","vlanName":"__VlanName__"}

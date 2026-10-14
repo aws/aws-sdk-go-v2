@@ -4,10 +4,9 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the number of reserved minutes used by account.
@@ -42,6 +41,21 @@ type GetMinuteUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMinuteUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMinuteUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMinuteUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Month != nil {
+		s.WriteInt32(schemas.GetMinuteUsageRequest_month, *v.Month)
+	}
+	if v.Year != nil {
+		s.WriteInt32(schemas.GetMinuteUsageRequest_year, *v.Year)
+	}
+}
+
 // Output for the GetMinuteUsage operation.
 type GetMinuteUsageOutput struct {
 
@@ -70,77 +84,72 @@ type GetMinuteUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMinuteUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMinuteUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMinuteUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMinutesRemaining != nil {
+		s.WriteInt32(schemas.GetMinuteUsageResponse_estimatedMinutesRemaining, *v.EstimatedMinutesRemaining)
+	}
+	if v.IsReservedMinutesCustomer != nil {
+		s.WriteBool(schemas.GetMinuteUsageResponse_isReservedMinutesCustomer, *v.IsReservedMinutesCustomer)
+	}
+	if v.TotalReservedMinuteAllocation != nil {
+		s.WriteInt32(schemas.GetMinuteUsageResponse_totalReservedMinuteAllocation, *v.TotalReservedMinuteAllocation)
+	}
+	if v.TotalScheduledMinutes != nil {
+		s.WriteInt32(schemas.GetMinuteUsageResponse_totalScheduledMinutes, *v.TotalScheduledMinutes)
+	}
+	if v.UpcomingMinutesScheduled != nil {
+		s.WriteInt32(schemas.GetMinuteUsageResponse_upcomingMinutesScheduled, *v.UpcomingMinutesScheduled)
+	}
+}
+func (v *GetMinuteUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMinuteUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMinuteUsageResponse_estimatedMinutesRemaining:
+			v.EstimatedMinutesRemaining = new(int32)
+			return d.ReadInt32(schemas.GetMinuteUsageResponse_estimatedMinutesRemaining, v.EstimatedMinutesRemaining)
+		case schemas.GetMinuteUsageResponse_isReservedMinutesCustomer:
+			v.IsReservedMinutesCustomer = new(bool)
+			return d.ReadBool(schemas.GetMinuteUsageResponse_isReservedMinutesCustomer, v.IsReservedMinutesCustomer)
+		case schemas.GetMinuteUsageResponse_totalReservedMinuteAllocation:
+			v.TotalReservedMinuteAllocation = new(int32)
+			return d.ReadInt32(schemas.GetMinuteUsageResponse_totalReservedMinuteAllocation, v.TotalReservedMinuteAllocation)
+		case schemas.GetMinuteUsageResponse_totalScheduledMinutes:
+			v.TotalScheduledMinutes = new(int32)
+			return d.ReadInt32(schemas.GetMinuteUsageResponse_totalScheduledMinutes, v.TotalScheduledMinutes)
+		case schemas.GetMinuteUsageResponse_upcomingMinutesScheduled:
+			v.UpcomingMinutesScheduled = new(int32)
+			return d.ReadInt32(schemas.GetMinuteUsageResponse_upcomingMinutesScheduled, v.UpcomingMinutesScheduled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMinuteUsage, schemas.GetMinuteUsageRequest, schemas.GetMinuteUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMinuteUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMinuteUsage, schemas.GetMinuteUsageRequest, schemas.GetMinuteUsageResponse), output: &GetMinuteUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMinuteUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMinuteUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMinuteUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMinuteUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +164,8 @@ func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMinuteUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMinuteUsage",
-	}
 }

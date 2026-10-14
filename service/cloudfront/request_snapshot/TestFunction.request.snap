@@ -1,0 +1,6 @@
+POST /2020-05-31/function/__Name__/test
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<TestFunctionRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><EventObject>YmxvYg==</EventObject><Stage>DEVELOPMENT</Stage></TestFunctionRequest>

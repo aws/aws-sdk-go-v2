@@ -1,0 +1,5 @@
+POST /phone-numbers?operation=batch-update
+
+Content-Type: application/json
+
+{"UpdatePhoneNumberRequestItems":[{"CallingName":"__CallingName__","PhoneNumberId":"__PhoneNumberId__","ProductType":"BusinessCalling"},{"CallingName":"__CallingName__","PhoneNumberId":"__PhoneNumberId__","ProductType":"BusinessCalling"}]}

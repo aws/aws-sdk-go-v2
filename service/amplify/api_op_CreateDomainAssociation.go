@@ -4,11 +4,10 @@ package amplify
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new domain association for an Amplify app. This action associates a
@@ -64,6 +63,34 @@ type CreateDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateDomainAssociationRequest_appId, *v.AppId)
+	}
+	serializeAutoSubDomainCreationPatterns(s, schemas.CreateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainIAMRole != nil {
+		s.WriteString(schemas.CreateDomainAssociationRequest_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
+	}
+	if v.CertificateSettings != nil {
+		s.WriteStruct(schemas.CreateDomainAssociationRequest_certificateSettings)
+		v.CertificateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainAssociationRequest_domainName, *v.DomainName)
+	}
+	if v.EnableAutoSubDomain != nil {
+		s.WriteBool(schemas.CreateDomainAssociationRequest_enableAutoSubDomain, *v.EnableAutoSubDomain)
+	}
+	serializeSubDomainSettings(s, schemas.CreateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+}
+
 // The result structure for the create domain association request.
 type CreateDomainAssociationOutput struct {
 
@@ -79,77 +106,50 @@ type CreateDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainAssociation != nil {
+		s.WriteStruct(schemas.CreateDomainAssociationResult_domainAssociation)
+		v.DomainAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainAssociationResult_domainAssociation:
+			v.DomainAssociation = &types.DomainAssociation{}
+			return v.DomainAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainAssociation, schemas.CreateDomainAssociationRequest, schemas.CreateDomainAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainAssociation, schemas.CreateDomainAssociationRequest, schemas.CreateDomainAssociationResult), output: &CreateDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomainAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDomainAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomainAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +164,8 @@ func (c *Client) addOperationCreateDomainAssociationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDomainAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDomainAssociation",
-	}
 }

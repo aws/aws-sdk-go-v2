@@ -1,0 +1,3 @@
+GET /assessments/__AssessmentId__/controlSets/__ControlSetId__/evidenceFolders/__EvidenceFolderId__
+
+

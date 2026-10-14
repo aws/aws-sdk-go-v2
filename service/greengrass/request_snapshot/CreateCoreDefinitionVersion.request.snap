@@ -1,0 +1,6 @@
+POST /greengrass/definition/cores/__CoreDefinitionId__/versions
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"Cores":[{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"},{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"}]}

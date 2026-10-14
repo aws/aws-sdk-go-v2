@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdateRcsAgent
+
+{"DeletionProtectionEnabled":true,"OptOutListName":"__OptOutListName__","RcsAgentId":"__RcsAgentId__","SelfManagedOptOutsEnabled":true,"TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true,"TwoWayMediaS3BucketName":"__TwoWayMediaS3BucketName__","TwoWayMediaS3KeyPrefix":"__TwoWayMediaS3KeyPrefix__","TwoWayMediaS3Role":"__TwoWayMediaS3Role__","TwoWayRcsEventsEnabled":["__Member__","__Member__"]}

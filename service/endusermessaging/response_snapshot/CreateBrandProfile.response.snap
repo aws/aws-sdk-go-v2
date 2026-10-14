@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributesCreated":1,"brandProfileArn":"__BrandProfileArn__","brandProfileId":"__BrandProfileId__","brandProfileName":"__BrandProfileName__","createdAt":946684800,"deletionProtectionEnabled":true,"status":"ACTIVE","updatedAt":946684800}

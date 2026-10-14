@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the service sync blocker by resolving it.
@@ -44,6 +43,34 @@ type UpdateServiceSyncBlockerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncBlockerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncBlockerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncBlockerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerInput_id, *v.Id)
+	}
+	if v.ResolvedReason != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerInput_resolvedReason, *v.ResolvedReason)
+	}
+}
+func (v *UpdateServiceSyncBlockerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncBlockerInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncBlockerInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerInput_id, v.Id)
+		case schemas.UpdateServiceSyncBlockerInput_resolvedReason:
+			v.ResolvedReason = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerInput_resolvedReason, v.ResolvedReason)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceSyncBlockerOutput struct {
 
 	// The name of the service that you want to update the service sync blocker for.
@@ -66,77 +93,62 @@ type UpdateServiceSyncBlockerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncBlockerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncBlockerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncBlockerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerOutput_serviceName, *v.ServiceName)
+	}
+	if v.ServiceSyncBlocker != nil {
+		s.WriteStruct(schemas.UpdateServiceSyncBlockerOutput_serviceSyncBlocker)
+		v.ServiceSyncBlocker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceSyncBlockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncBlockerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.UpdateServiceSyncBlockerOutput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerOutput_serviceName, v.ServiceName)
+		case schemas.UpdateServiceSyncBlockerOutput_serviceSyncBlocker:
+			v.ServiceSyncBlocker = &types.SyncBlocker{}
+			return v.ServiceSyncBlocker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSyncBlockerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncBlocker, schemas.UpdateServiceSyncBlockerInput, schemas.UpdateServiceSyncBlockerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceSyncBlocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncBlocker, schemas.UpdateServiceSyncBlockerInput, schemas.UpdateServiceSyncBlockerOutput), output: &UpdateServiceSyncBlockerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServiceSyncBlocker{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceSyncBlocker"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServiceSyncBlockerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceSyncBlocker(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +163,8 @@ func (c *Client) addOperationUpdateServiceSyncBlockerMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServiceSyncBlocker(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServiceSyncBlocker",
-	}
 }

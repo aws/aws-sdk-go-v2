@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuredTableAssociation":{"analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","childResources":[{"ownerAccountId":"__OwnerAccountId__","resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceStatus":"CREATED","resourceType":"INTERMEDIATE_TABLE"},{"ownerAccountId":"__OwnerAccountId__","resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceStatus":"CREATED","resourceType":"INTERMEDIATE_TABLE"}],"configuredTableArn":"__ConfiguredTableArn__","configuredTableId":"__ConfiguredTableId__","createTime":946684800,"description":"__Description__","id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","roleArn":"__RoleArn__","updateTime":946684800}}

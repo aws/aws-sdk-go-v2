@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListDatasetGroups
+
+{"DatasetGroups":[{"CreationTime":946684800,"DatasetGroupArn":"__DatasetGroupArn__","DatasetGroupName":"__DatasetGroupName__","LastModificationTime":946684800},{"CreationTime":946684800,"DatasetGroupArn":"__DatasetGroupArn__","DatasetGroupName":"__DatasetGroupName__","LastModificationTime":946684800}],"NextToken":"__NextToken__"}

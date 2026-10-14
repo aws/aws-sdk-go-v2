@@ -5,10 +5,10 @@ package comprehend
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Information about the history of a flywheel iteration. For more information
@@ -49,6 +49,29 @@ type ListFlywheelIterationHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlywheelIterationHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlywheelIterationHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlywheelIterationHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListFlywheelIterationHistoryRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.ListFlywheelIterationHistoryRequest_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlywheelIterationHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlywheelIterationHistoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFlywheelIterationHistoryOutput struct {
 
 	// List of flywheel iteration properties
@@ -63,77 +86,51 @@ type ListFlywheelIterationHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlywheelIterationHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlywheelIterationHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlywheelIterationHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlywheelIterationPropertiesList(s, schemas.ListFlywheelIterationHistoryResponse_FlywheelIterationPropertiesList, v.FlywheelIterationPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlywheelIterationHistoryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFlywheelIterationHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlywheelIterationHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlywheelIterationHistoryResponse_FlywheelIterationPropertiesList:
+			return deserializeFlywheelIterationPropertiesList(d, schemas.ListFlywheelIterationHistoryResponse_FlywheelIterationPropertiesList, &v.FlywheelIterationPropertiesList)
+		case schemas.ListFlywheelIterationHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlywheelIterationHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlywheelIterationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlywheelIterationHistory, schemas.ListFlywheelIterationHistoryRequest, schemas.ListFlywheelIterationHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFlywheelIterationHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlywheelIterationHistory, schemas.ListFlywheelIterationHistoryRequest, schemas.ListFlywheelIterationHistoryResponse), output: &ListFlywheelIterationHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFlywheelIterationHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFlywheelIterationHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFlywheelIterationHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFlywheelIterationHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +143,6 @@ func (c *Client) addOperationListFlywheelIterationHistoryMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +246,3 @@ type ListFlywheelIterationHistoryAPIClient interface {
 }
 
 var _ ListFlywheelIterationHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFlywheelIterationHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFlywheelIterationHistory",
-	}
-}

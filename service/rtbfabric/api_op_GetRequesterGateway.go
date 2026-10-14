@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -41,18 +37,6 @@ type GetRequesterGatewayInput struct {
 	GatewayId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetRequesterGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRequesterGatewayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRequesterGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.GetRequesterGatewayRequest_gatewayId, *v.GatewayId)
-	}
 }
 
 type GetRequesterGatewayOutput struct {
@@ -112,119 +96,29 @@ type GetRequesterGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRequesterGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRequesterGatewayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRequesterGatewayResponse_activeLinksCount:
-			v.ActiveLinksCount = new(int32)
-			return d.ReadInt32(schemas.GetRequesterGatewayResponse_activeLinksCount, v.ActiveLinksCount)
-		case schemas.GetRequesterGatewayResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetRequesterGatewayResponse_createdAt, v.CreatedAt)
-		case schemas.GetRequesterGatewayResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetRequesterGatewayResponse_description, v.Description)
-		case schemas.GetRequesterGatewayResponse_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.GetRequesterGatewayResponse_domainName, v.DomainName)
-		case schemas.GetRequesterGatewayResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.GetRequesterGatewayResponse_gatewayId, v.GatewayId)
-		case schemas.GetRequesterGatewayResponse_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.GetRequesterGatewayResponse_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.GetRequesterGatewayResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetRequesterGatewayResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RequesterGatewayStatus(ev)
-			return nil
-		case schemas.GetRequesterGatewayResponse_subnetIds:
-			return deserializeSubnetIdList(d, schemas.GetRequesterGatewayResponse_subnetIds, &v.SubnetIds)
-		case schemas.GetRequesterGatewayResponse_tags:
-			return deserializeTagsMap(d, schemas.GetRequesterGatewayResponse_tags, &v.Tags)
-		case schemas.GetRequesterGatewayResponse_totalLinksCount:
-			v.TotalLinksCount = new(int32)
-			return d.ReadInt32(schemas.GetRequesterGatewayResponse_totalLinksCount, v.TotalLinksCount)
-		case schemas.GetRequesterGatewayResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetRequesterGatewayResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetRequesterGatewayResponse_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.GetRequesterGatewayResponse_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRequesterGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRequesterGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequesterGateway, schemas.GetRequesterGatewayRequest, schemas.GetRequesterGatewayResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRequesterGateway{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequesterGateway, schemas.GetRequesterGatewayRequest, schemas.GetRequesterGatewayResponse), output: &GetRequesterGatewayOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRequesterGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRequesterGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRequesterGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -237,12 +131,6 @@ func (c *Client) addOperationGetRequesterGatewayMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -649,11 +537,3 @@ type GetRequesterGatewayAPIClient interface {
 }
 
 var _ GetRequesterGatewayAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetRequesterGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRequesterGateway",
-	}
-}

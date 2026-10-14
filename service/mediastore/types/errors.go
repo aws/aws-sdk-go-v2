@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *ContainerInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ContainerInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ContainerInUseException_Message, *v.Message)
+	}
+}
+func (v *ContainerInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ContainerInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The container that you specified in the request does not exist.
 type ContainerNotFoundException struct {
@@ -59,6 +81,27 @@ func (e *ContainerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ContainerNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ContainerNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ContainerNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ContainerNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The CORS policy that you specified in the request does not exist.
 type CorsPolicyNotFoundException struct {
@@ -85,6 +128,27 @@ func (e *CorsPolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CorsPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CorsPolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CorsPolicyNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CorsPolicyNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CorsPolicyNotFoundException_Message, *v.Message)
+	}
+}
+func (v *CorsPolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CorsPolicyNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CorsPolicyNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CorsPolicyNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service is temporarily unavailable.
 type InternalServerError struct {
@@ -111,6 +175,27 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_Message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A service limit has been exceeded.
 type LimitExceededException struct {
@@ -137,6 +222,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The policy that you specified in the request does not exist.
 type PolicyNotFoundException struct {
@@ -163,3 +269,24 @@ func (e *PolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyNotFoundException_Message, *v.Message)
+	}
+}
+func (v *PolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}

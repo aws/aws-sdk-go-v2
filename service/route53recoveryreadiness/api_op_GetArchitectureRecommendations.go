@@ -4,13 +4,8 @@ package route53recoveryreadiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,24 +42,6 @@ type GetArchitectureRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetArchitectureRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetArchitectureRecommendationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetArchitectureRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetArchitectureRecommendationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetArchitectureRecommendationsRequest_NextToken, *v.NextToken)
-	}
-	if v.RecoveryGroupName != nil {
-		s.WriteString(schemas.GetArchitectureRecommendationsRequest_RecoveryGroupName, *v.RecoveryGroupName)
-	}
-}
-
 type GetArchitectureRecommendationsOutput struct {
 
 	// The time that a recovery group was last assessed for recommendations, in UTC
@@ -83,90 +60,29 @@ type GetArchitectureRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetArchitectureRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetArchitectureRecommendationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetArchitectureRecommendationsResponse_LastAuditTimestamp:
-			v.LastAuditTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetArchitectureRecommendationsResponse_LastAuditTimestamp, v.LastAuditTimestamp)
-		case schemas.GetArchitectureRecommendationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetArchitectureRecommendationsResponse_NextToken, v.NextToken)
-		case schemas.GetArchitectureRecommendationsResponse_Recommendations:
-			return deserialize__listOfRecommendation(d, schemas.GetArchitectureRecommendationsResponse_Recommendations, &v.Recommendations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetArchitectureRecommendations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchitectureRecommendations, schemas.GetArchitectureRecommendationsRequest, schemas.GetArchitectureRecommendationsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetArchitectureRecommendations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchitectureRecommendations, schemas.GetArchitectureRecommendationsRequest, schemas.GetArchitectureRecommendationsResponse), output: &GetArchitectureRecommendationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchitectureRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetArchitectureRecommendationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetArchitectureRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +97,8 @@ func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetArchitectureRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetArchitectureRecommendations",
-	}
 }

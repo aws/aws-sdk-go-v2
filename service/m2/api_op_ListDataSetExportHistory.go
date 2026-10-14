@@ -5,10 +5,10 @@ package m2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the data set exports for the specified application.
@@ -45,6 +45,24 @@ type ListDataSetExportHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetExportHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetExportHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetExportHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListDataSetExportHistoryRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSetExportHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetExportHistoryRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataSetExportHistoryOutput struct {
 
 	// The data set export tasks.
@@ -62,77 +80,51 @@ type ListDataSetExportHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetExportHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetExportHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetExportHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetExportTaskList(s, schemas.ListDataSetExportHistoryResponse_dataSetExportTasks, v.DataSetExportTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetExportHistoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataSetExportHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSetExportHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSetExportHistoryResponse_dataSetExportTasks:
+			return deserializeDataSetExportTaskList(d, schemas.ListDataSetExportHistoryResponse_dataSetExportTasks, &v.DataSetExportTasks)
+		case schemas.ListDataSetExportHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSetExportHistoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSetExportHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetExportHistory, schemas.ListDataSetExportHistoryRequest, schemas.ListDataSetExportHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSetExportHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetExportHistory, schemas.ListDataSetExportHistoryRequest, schemas.ListDataSetExportHistoryResponse), output: &ListDataSetExportHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSetExportHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSetExportHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataSetExportHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSetExportHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +137,6 @@ func (c *Client) addOperationListDataSetExportHistoryMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +239,3 @@ type ListDataSetExportHistoryAPIClient interface {
 }
 
 var _ ListDataSetExportHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataSetExportHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataSetExportHistory",
-	}
-}

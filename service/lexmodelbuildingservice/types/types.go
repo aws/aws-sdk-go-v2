@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,72 +36,6 @@ type BotAliasMetadata struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BotAliasMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BotAliasMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BotAliasMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotName != nil {
-		s.WriteString(schemas.BotAliasMetadata_botName, *v.BotName)
-	}
-	if v.BotVersion != nil {
-		s.WriteString(schemas.BotAliasMetadata_botVersion, *v.BotVersion)
-	}
-	if v.Checksum != nil {
-		s.WriteString(schemas.BotAliasMetadata_checksum, *v.Checksum)
-	}
-	if v.ConversationLogs != nil {
-		s.WriteStruct(schemas.BotAliasMetadata_conversationLogs)
-		v.ConversationLogs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.BotAliasMetadata_createdDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BotAliasMetadata_description, *v.Description)
-	}
-	if v.LastUpdatedDate != nil {
-		s.WriteTime(schemas.BotAliasMetadata_lastUpdatedDate, *v.LastUpdatedDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BotAliasMetadata_name, *v.Name)
-	}
-}
-func (v *BotAliasMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BotAliasMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BotAliasMetadata_botName:
-			v.BotName = new(string)
-			return d.ReadString(schemas.BotAliasMetadata_botName, v.BotName)
-		case schemas.BotAliasMetadata_botVersion:
-			v.BotVersion = new(string)
-			return d.ReadString(schemas.BotAliasMetadata_botVersion, v.BotVersion)
-		case schemas.BotAliasMetadata_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.BotAliasMetadata_checksum, v.Checksum)
-		case schemas.BotAliasMetadata_conversationLogs:
-			v.ConversationLogs = &ConversationLogsResponse{}
-			return v.ConversationLogs.Deserialize(d)
-		case schemas.BotAliasMetadata_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.BotAliasMetadata_createdDate, v.CreatedDate)
-		case schemas.BotAliasMetadata_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BotAliasMetadata_description, v.Description)
-		case schemas.BotAliasMetadata_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.BotAliasMetadata_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.BotAliasMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BotAliasMetadata_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Represents an association between an Amazon Lex bot and an external messaging
@@ -153,81 +85,6 @@ type BotChannelAssociation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BotChannelAssociation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BotChannelAssociation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BotChannelAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotAlias != nil {
-		s.WriteString(schemas.BotChannelAssociation_botAlias, *v.BotAlias)
-	}
-	serializeChannelConfigurationMap(s, schemas.BotChannelAssociation_botConfiguration, v.BotConfiguration)
-	if v.BotName != nil {
-		s.WriteString(schemas.BotChannelAssociation_botName, *v.BotName)
-	}
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.BotChannelAssociation_createdDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BotChannelAssociation_description, *v.Description)
-	}
-	if v.FailureReason != nil {
-		s.WriteString(schemas.BotChannelAssociation_failureReason, *v.FailureReason)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BotChannelAssociation_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BotChannelAssociation_status, string(v.Status))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.BotChannelAssociation_type, string(v.Type))
-	}
-}
-func (v *BotChannelAssociation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BotChannelAssociation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BotChannelAssociation_botAlias:
-			v.BotAlias = new(string)
-			return d.ReadString(schemas.BotChannelAssociation_botAlias, v.BotAlias)
-		case schemas.BotChannelAssociation_botConfiguration:
-			return deserializeChannelConfigurationMap(d, schemas.BotChannelAssociation_botConfiguration, &v.BotConfiguration)
-		case schemas.BotChannelAssociation_botName:
-			v.BotName = new(string)
-			return d.ReadString(schemas.BotChannelAssociation_botName, v.BotName)
-		case schemas.BotChannelAssociation_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.BotChannelAssociation_createdDate, v.CreatedDate)
-		case schemas.BotChannelAssociation_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BotChannelAssociation_description, v.Description)
-		case schemas.BotChannelAssociation_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.BotChannelAssociation_failureReason, v.FailureReason)
-		case schemas.BotChannelAssociation_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BotChannelAssociation_name, v.Name)
-		case schemas.BotChannelAssociation_status:
-			var ev string
-			if err := d.ReadString(schemas.BotChannelAssociation_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ChannelStatus(ev)
-			return nil
-		case schemas.BotChannelAssociation_type:
-			var ev string
-			if err := d.ReadString(schemas.BotChannelAssociation_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about a bot. .
 type BotMetadata struct {
 
@@ -253,62 +110,6 @@ type BotMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BotMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BotMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BotMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.BotMetadata_createdDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BotMetadata_description, *v.Description)
-	}
-	if v.LastUpdatedDate != nil {
-		s.WriteTime(schemas.BotMetadata_lastUpdatedDate, *v.LastUpdatedDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BotMetadata_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BotMetadata_status, string(v.Status))
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.BotMetadata_version, *v.Version)
-	}
-}
-func (v *BotMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BotMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BotMetadata_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.BotMetadata_createdDate, v.CreatedDate)
-		case schemas.BotMetadata_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BotMetadata_description, v.Description)
-		case schemas.BotMetadata_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.BotMetadata_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.BotMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BotMetadata_name, v.Name)
-		case schemas.BotMetadata_status:
-			var ev string
-			if err := d.ReadString(schemas.BotMetadata_status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		case schemas.BotMetadata_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.BotMetadata_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Provides metadata for a built-in intent.
 type BuiltinIntentMetadata struct {
 
@@ -324,31 +125,6 @@ type BuiltinIntentMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BuiltinIntentMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BuiltinIntentMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BuiltinIntentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Signature != nil {
-		s.WriteString(schemas.BuiltinIntentMetadata_signature, *v.Signature)
-	}
-	serializeLocaleList(s, schemas.BuiltinIntentMetadata_supportedLocales, v.SupportedLocales)
-}
-func (v *BuiltinIntentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BuiltinIntentMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BuiltinIntentMetadata_signature:
-			v.Signature = new(string)
-			return d.ReadString(schemas.BuiltinIntentMetadata_signature, v.Signature)
-		case schemas.BuiltinIntentMetadata_supportedLocales:
-			return deserializeLocaleList(d, schemas.BuiltinIntentMetadata_supportedLocales, &v.SupportedLocales)
-		}
-		return nil
-	})
-}
-
 // Provides information about a slot used in a built-in intent.
 type BuiltinIntentSlot struct {
 
@@ -356,28 +132,6 @@ type BuiltinIntentSlot struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BuiltinIntentSlot) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BuiltinIntentSlot)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BuiltinIntentSlot) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.BuiltinIntentSlot_name, *v.Name)
-	}
-}
-func (v *BuiltinIntentSlot) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BuiltinIntentSlot, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BuiltinIntentSlot_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BuiltinIntentSlot_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Provides information about a built in slot type.
@@ -393,31 +147,6 @@ type BuiltinSlotTypeMetadata struct {
 	SupportedLocales []Locale
 
 	noSmithyDocumentSerde
-}
-
-func (v *BuiltinSlotTypeMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BuiltinSlotTypeMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BuiltinSlotTypeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Signature != nil {
-		s.WriteString(schemas.BuiltinSlotTypeMetadata_signature, *v.Signature)
-	}
-	serializeLocaleList(s, schemas.BuiltinSlotTypeMetadata_supportedLocales, v.SupportedLocales)
-}
-func (v *BuiltinSlotTypeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BuiltinSlotTypeMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BuiltinSlotTypeMetadata_signature:
-			v.Signature = new(string)
-			return d.ReadString(schemas.BuiltinSlotTypeMetadata_signature, v.Signature)
-		case schemas.BuiltinSlotTypeMetadata_supportedLocales:
-			return deserializeLocaleList(d, schemas.BuiltinSlotTypeMetadata_supportedLocales, &v.SupportedLocales)
-		}
-		return nil
-	})
 }
 
 // Specifies a Lambda function that verifies requests to a bot or fulfills the
@@ -436,34 +165,6 @@ type CodeHook struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeHook) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeHook)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeHook) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageVersion != nil {
-		s.WriteString(schemas.CodeHook_messageVersion, *v.MessageVersion)
-	}
-	if v.Uri != nil {
-		s.WriteString(schemas.CodeHook_uri, *v.Uri)
-	}
-}
-func (v *CodeHook) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeHook, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeHook_messageVersion:
-			v.MessageVersion = new(string)
-			return d.ReadString(schemas.CodeHook_messageVersion, v.MessageVersion)
-		case schemas.CodeHook_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.CodeHook_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Provides the settings needed for conversation logs.
@@ -488,31 +189,6 @@ type ConversationLogsRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConversationLogsRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConversationLogsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConversationLogsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.ConversationLogsRequest_iamRoleArn, *v.IamRoleArn)
-	}
-	serializeLogSettingsRequestList(s, schemas.ConversationLogsRequest_logSettings, v.LogSettings)
-}
-func (v *ConversationLogsRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConversationLogsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConversationLogsRequest_iamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.ConversationLogsRequest_iamRoleArn, v.IamRoleArn)
-		case schemas.ConversationLogsRequest_logSettings:
-			return deserializeLogSettingsRequestList(d, schemas.ConversationLogsRequest_logSettings, &v.LogSettings)
-		}
-		return nil
-	})
-}
-
 // Contains information about conversation log settings.
 type ConversationLogsResponse struct {
 
@@ -524,31 +200,6 @@ type ConversationLogsResponse struct {
 	LogSettings []LogSettingsResponse
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConversationLogsResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConversationLogsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConversationLogsResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.ConversationLogsResponse_iamRoleArn, *v.IamRoleArn)
-	}
-	serializeLogSettingsResponseList(s, schemas.ConversationLogsResponse_logSettings, v.LogSettings)
-}
-func (v *ConversationLogsResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConversationLogsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConversationLogsResponse_iamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.ConversationLogsResponse_iamRoleArn, v.IamRoleArn)
-		case schemas.ConversationLogsResponse_logSettings:
-			return deserializeLogSettingsResponseList(d, schemas.ConversationLogsResponse_logSettings, &v.LogSettings)
-		}
-		return nil
-	})
 }
 
 // Each slot type can have a set of values. Each enumeration value represents a
@@ -575,31 +226,6 @@ type EnumerationValue struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnumerationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnumerationValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnumerationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSynonymList(s, schemas.EnumerationValue_synonyms, v.Synonyms)
-	if v.Value != nil {
-		s.WriteString(schemas.EnumerationValue_value, *v.Value)
-	}
-}
-func (v *EnumerationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnumerationValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EnumerationValue_synonyms:
-			return deserializeSynonymList(d, schemas.EnumerationValue_synonyms, &v.Synonyms)
-		case schemas.EnumerationValue_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.EnumerationValue_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A prompt for additional activity after an intent is fulfilled. For example,
 // after the OrderPizza intent is fulfilled, you might prompt the user to find out
 // whether the user wants to order drinks.
@@ -617,38 +243,6 @@ type FollowUpPrompt struct {
 	RejectionStatement *Statement
 
 	noSmithyDocumentSerde
-}
-
-func (v *FollowUpPrompt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FollowUpPrompt)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FollowUpPrompt) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Prompt != nil {
-		s.WriteStruct(schemas.FollowUpPrompt_prompt)
-		v.Prompt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RejectionStatement != nil {
-		s.WriteStruct(schemas.FollowUpPrompt_rejectionStatement)
-		v.RejectionStatement.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *FollowUpPrompt) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FollowUpPrompt, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FollowUpPrompt_prompt:
-			v.Prompt = &Prompt{}
-			return v.Prompt.Deserialize(d)
-		case schemas.FollowUpPrompt_rejectionStatement:
-			v.RejectionStatement = &Statement{}
-			return v.RejectionStatement.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	Describes how the intent is fulfilled after the user provides all of the
@@ -684,40 +278,6 @@ type FulfillmentActivity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FulfillmentActivity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FulfillmentActivity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FulfillmentActivity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeHook != nil {
-		s.WriteStruct(schemas.FulfillmentActivity_codeHook)
-		v.CodeHook.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.FulfillmentActivity_type, string(v.Type))
-	}
-}
-func (v *FulfillmentActivity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FulfillmentActivity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FulfillmentActivity_codeHook:
-			v.CodeHook = &CodeHook{}
-			return v.CodeHook.Deserialize(d)
-		case schemas.FulfillmentActivity_type:
-			var ev string
-			if err := d.ReadString(schemas.FulfillmentActivity_type, &ev); err != nil {
-				return err
-			}
-			v.Type = FulfillmentActivityType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The name of a context that must be active for an intent to be selected by
 // Amazon Lex.
 type InputContext struct {
@@ -728,28 +288,6 @@ type InputContext struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InputContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InputContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InputContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.InputContext_name, *v.Name)
-	}
-}
-func (v *InputContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputContext_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.InputContext_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Identifies the specific version of an intent.
@@ -766,34 +304,6 @@ type Intent struct {
 	IntentVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Intent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Intent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Intent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IntentName != nil {
-		s.WriteString(schemas.Intent_intentName, *v.IntentName)
-	}
-	if v.IntentVersion != nil {
-		s.WriteString(schemas.Intent_intentVersion, *v.IntentVersion)
-	}
-}
-func (v *Intent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Intent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Intent_intentName:
-			v.IntentName = new(string)
-			return d.ReadString(schemas.Intent_intentName, v.IntentName)
-		case schemas.Intent_intentVersion:
-			v.IntentVersion = new(string)
-			return d.ReadString(schemas.Intent_intentVersion, v.IntentVersion)
-		}
-		return nil
-	})
 }
 
 // Provides information about an intent.
@@ -816,52 +326,6 @@ type IntentMetadata struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IntentMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntentMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.IntentMetadata_createdDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.IntentMetadata_description, *v.Description)
-	}
-	if v.LastUpdatedDate != nil {
-		s.WriteTime(schemas.IntentMetadata_lastUpdatedDate, *v.LastUpdatedDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.IntentMetadata_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.IntentMetadata_version, *v.Version)
-	}
-}
-func (v *IntentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntentMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntentMetadata_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.IntentMetadata_createdDate, v.CreatedDate)
-		case schemas.IntentMetadata_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.IntentMetadata_description, v.Description)
-		case schemas.IntentMetadata_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.IntentMetadata_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.IntentMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.IntentMetadata_name, v.Name)
-		case schemas.IntentMetadata_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.IntentMetadata_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
@@ -900,40 +364,6 @@ type KendraConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KendraConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KendraConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KendraConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KendraIndex != nil {
-		s.WriteString(schemas.KendraConfiguration_kendraIndex, *v.KendraIndex)
-	}
-	if v.QueryFilterString != nil {
-		s.WriteString(schemas.KendraConfiguration_queryFilterString, *v.QueryFilterString)
-	}
-	if v.Role != nil {
-		s.WriteString(schemas.KendraConfiguration_role, *v.Role)
-	}
-}
-func (v *KendraConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KendraConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KendraConfiguration_kendraIndex:
-			v.KendraIndex = new(string)
-			return d.ReadString(schemas.KendraConfiguration_kendraIndex, v.KendraIndex)
-		case schemas.KendraConfiguration_queryFilterString:
-			v.QueryFilterString = new(string)
-			return d.ReadString(schemas.KendraConfiguration_queryFilterString, v.QueryFilterString)
-		case schemas.KendraConfiguration_role:
-			v.Role = new(string)
-			return d.ReadString(schemas.KendraConfiguration_role, v.Role)
-		}
-		return nil
-	})
-}
-
 // Settings used to configure delivery mode and destination for conversation logs.
 type LogSettingsRequest struct {
 
@@ -963,54 +393,6 @@ type LogSettingsRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogSettingsRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogSettingsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Destination != "" {
-		s.WriteString(schemas.LogSettingsRequest_destination, string(v.Destination))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.LogSettingsRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.LogType != "" {
-		s.WriteString(schemas.LogSettingsRequest_logType, string(v.LogType))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.LogSettingsRequest_resourceArn, *v.ResourceArn)
-	}
-}
-func (v *LogSettingsRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogSettingsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogSettingsRequest_destination:
-			var ev string
-			if err := d.ReadString(schemas.LogSettingsRequest_destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = Destination(ev)
-			return nil
-		case schemas.LogSettingsRequest_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.LogSettingsRequest_kmsKeyArn, v.KmsKeyArn)
-		case schemas.LogSettingsRequest_logType:
-			var ev string
-			if err := d.ReadString(schemas.LogSettingsRequest_logType, &ev); err != nil {
-				return err
-			}
-			v.LogType = LogType(ev)
-			return nil
-		case schemas.LogSettingsRequest_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.LogSettingsRequest_resourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
-
 // The settings for conversation logs.
 type LogSettingsResponse struct {
 
@@ -1036,60 +418,6 @@ type LogSettingsResponse struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogSettingsResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogSettingsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Destination != "" {
-		s.WriteString(schemas.LogSettingsResponse_destination, string(v.Destination))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.LogSettingsResponse_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.LogType != "" {
-		s.WriteString(schemas.LogSettingsResponse_logType, string(v.LogType))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.LogSettingsResponse_resourceArn, *v.ResourceArn)
-	}
-	if v.ResourcePrefix != nil {
-		s.WriteString(schemas.LogSettingsResponse_resourcePrefix, *v.ResourcePrefix)
-	}
-}
-func (v *LogSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogSettingsResponse_destination:
-			var ev string
-			if err := d.ReadString(schemas.LogSettingsResponse_destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = Destination(ev)
-			return nil
-		case schemas.LogSettingsResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.LogSettingsResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.LogSettingsResponse_logType:
-			var ev string
-			if err := d.ReadString(schemas.LogSettingsResponse_logType, &ev); err != nil {
-				return err
-			}
-			v.LogType = LogType(ev)
-			return nil
-		case schemas.LogSettingsResponse_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.LogSettingsResponse_resourceArn, v.ResourceArn)
-		case schemas.LogSettingsResponse_resourcePrefix:
-			v.ResourcePrefix = new(string)
-			return d.ReadString(schemas.LogSettingsResponse_resourcePrefix, v.ResourcePrefix)
-		}
-		return nil
-	})
-}
-
 // The message object that provides the message text and its type.
 type Message struct {
 
@@ -1109,44 +437,6 @@ type Message struct {
 	GroupNumber *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Message) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Message)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Content != nil {
-		s.WriteString(schemas.Message_content, *v.Content)
-	}
-	if v.ContentType != "" {
-		s.WriteString(schemas.Message_contentType, string(v.ContentType))
-	}
-	if v.GroupNumber != nil {
-		s.WriteInt32(schemas.Message_groupNumber, *v.GroupNumber)
-	}
-}
-func (v *Message) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Message, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Message_content:
-			v.Content = new(string)
-			return d.ReadString(schemas.Message_content, v.Content)
-		case schemas.Message_contentType:
-			var ev string
-			if err := d.ReadString(schemas.Message_contentType, &ev); err != nil {
-				return err
-			}
-			v.ContentType = ContentType(ev)
-			return nil
-		case schemas.Message_groupNumber:
-			v.GroupNumber = new(int32)
-			return d.ReadInt32(schemas.Message_groupNumber, v.GroupNumber)
-		}
-		return nil
-	})
 }
 
 // Provides information about alerts and warnings that Amazon Lex sends during a
@@ -1172,44 +462,6 @@ type MigrationAlert struct {
 	Type MigrationAlertType
 
 	noSmithyDocumentSerde
-}
-
-func (v *MigrationAlert) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MigrationAlert)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MigrationAlert) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationAlertDetails(s, schemas.MigrationAlert_details, v.Details)
-	if v.Message != nil {
-		s.WriteString(schemas.MigrationAlert_message, *v.Message)
-	}
-	serializeMigrationAlertReferenceURLs(s, schemas.MigrationAlert_referenceURLs, v.ReferenceURLs)
-	if v.Type != "" {
-		s.WriteString(schemas.MigrationAlert_type, string(v.Type))
-	}
-}
-func (v *MigrationAlert) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MigrationAlert, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MigrationAlert_details:
-			return deserializeMigrationAlertDetails(d, schemas.MigrationAlert_details, &v.Details)
-		case schemas.MigrationAlert_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.MigrationAlert_message, v.Message)
-		case schemas.MigrationAlert_referenceURLs:
-			return deserializeMigrationAlertReferenceURLs(d, schemas.MigrationAlert_referenceURLs, &v.ReferenceURLs)
-		case schemas.MigrationAlert_type:
-			var ev string
-			if err := d.ReadString(schemas.MigrationAlert_type, &ev); err != nil {
-				return err
-			}
-			v.Type = MigrationAlertType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
@@ -1248,88 +500,6 @@ type MigrationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MigrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MigrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MigrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MigrationId != nil {
-		s.WriteString(schemas.MigrationSummary_migrationId, *v.MigrationId)
-	}
-	if v.MigrationStatus != "" {
-		s.WriteString(schemas.MigrationSummary_migrationStatus, string(v.MigrationStatus))
-	}
-	if v.MigrationStrategy != "" {
-		s.WriteString(schemas.MigrationSummary_migrationStrategy, string(v.MigrationStrategy))
-	}
-	if v.MigrationTimestamp != nil {
-		s.WriteTime(schemas.MigrationSummary_migrationTimestamp, *v.MigrationTimestamp)
-	}
-	if v.V1BotLocale != "" {
-		s.WriteString(schemas.MigrationSummary_v1BotLocale, string(v.V1BotLocale))
-	}
-	if v.V1BotName != nil {
-		s.WriteString(schemas.MigrationSummary_v1BotName, *v.V1BotName)
-	}
-	if v.V1BotVersion != nil {
-		s.WriteString(schemas.MigrationSummary_v1BotVersion, *v.V1BotVersion)
-	}
-	if v.V2BotId != nil {
-		s.WriteString(schemas.MigrationSummary_v2BotId, *v.V2BotId)
-	}
-	if v.V2BotRole != nil {
-		s.WriteString(schemas.MigrationSummary_v2BotRole, *v.V2BotRole)
-	}
-}
-func (v *MigrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MigrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MigrationSummary_migrationId:
-			v.MigrationId = new(string)
-			return d.ReadString(schemas.MigrationSummary_migrationId, v.MigrationId)
-		case schemas.MigrationSummary_migrationStatus:
-			var ev string
-			if err := d.ReadString(schemas.MigrationSummary_migrationStatus, &ev); err != nil {
-				return err
-			}
-			v.MigrationStatus = MigrationStatus(ev)
-			return nil
-		case schemas.MigrationSummary_migrationStrategy:
-			var ev string
-			if err := d.ReadString(schemas.MigrationSummary_migrationStrategy, &ev); err != nil {
-				return err
-			}
-			v.MigrationStrategy = MigrationStrategy(ev)
-			return nil
-		case schemas.MigrationSummary_migrationTimestamp:
-			v.MigrationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.MigrationSummary_migrationTimestamp, v.MigrationTimestamp)
-		case schemas.MigrationSummary_v1BotLocale:
-			var ev string
-			if err := d.ReadString(schemas.MigrationSummary_v1BotLocale, &ev); err != nil {
-				return err
-			}
-			v.V1BotLocale = Locale(ev)
-			return nil
-		case schemas.MigrationSummary_v1BotName:
-			v.V1BotName = new(string)
-			return d.ReadString(schemas.MigrationSummary_v1BotName, v.V1BotName)
-		case schemas.MigrationSummary_v1BotVersion:
-			v.V1BotVersion = new(string)
-			return d.ReadString(schemas.MigrationSummary_v1BotVersion, v.V1BotVersion)
-		case schemas.MigrationSummary_v2BotId:
-			v.V2BotId = new(string)
-			return d.ReadString(schemas.MigrationSummary_v2BotId, v.V2BotId)
-		case schemas.MigrationSummary_v2BotRole:
-			v.V2BotRole = new(string)
-			return d.ReadString(schemas.MigrationSummary_v2BotRole, v.V2BotRole)
-		}
-		return nil
-	})
-}
-
 // The specification of an output context that is set when an intent is fulfilled.
 type OutputContext struct {
 
@@ -1353,40 +523,6 @@ type OutputContext struct {
 	TurnsToLive *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *OutputContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutputContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.OutputContext_name, *v.Name)
-	}
-	if v.TimeToLiveInSeconds != nil {
-		s.WriteInt32(schemas.OutputContext_timeToLiveInSeconds, *v.TimeToLiveInSeconds)
-	}
-	if v.TurnsToLive != nil {
-		s.WriteInt32(schemas.OutputContext_turnsToLive, *v.TurnsToLive)
-	}
-}
-func (v *OutputContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutputContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutputContext_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.OutputContext_name, v.Name)
-		case schemas.OutputContext_timeToLiveInSeconds:
-			v.TimeToLiveInSeconds = new(int32)
-			return d.ReadInt32(schemas.OutputContext_timeToLiveInSeconds, v.TimeToLiveInSeconds)
-		case schemas.OutputContext_turnsToLive:
-			v.TurnsToLive = new(int32)
-			return d.ReadInt32(schemas.OutputContext_turnsToLive, v.TurnsToLive)
-		}
-		return nil
-	})
 }
 
 // Obtains information from the user. To define a prompt, provide one or more
@@ -1415,37 +551,6 @@ type Prompt struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Prompt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Prompt)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Prompt) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxAttempts != nil {
-		s.WriteInt32(schemas.Prompt_maxAttempts, *v.MaxAttempts)
-	}
-	serializeMessageList(s, schemas.Prompt_messages, v.Messages)
-	if v.ResponseCard != nil {
-		s.WriteString(schemas.Prompt_responseCard, *v.ResponseCard)
-	}
-}
-func (v *Prompt) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Prompt, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Prompt_maxAttempts:
-			v.MaxAttempts = new(int32)
-			return d.ReadInt32(schemas.Prompt_maxAttempts, v.MaxAttempts)
-		case schemas.Prompt_messages:
-			return deserializeMessageList(d, schemas.Prompt_messages, &v.Messages)
-		case schemas.Prompt_responseCard:
-			v.ResponseCard = new(string)
-			return d.ReadString(schemas.Prompt_responseCard, v.ResponseCard)
-		}
-		return nil
-	})
-}
-
 // Describes the resource that refers to the resource that you are attempting to
 // delete. This object is returned as part of the ResourceInUseException
 // exception.
@@ -1460,34 +565,6 @@ type ResourceReference struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResourceReference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceReference)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceReference) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.ResourceReference_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.ResourceReference_version, *v.Version)
-	}
-}
-func (v *ResourceReference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceReference, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceReference_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ResourceReference_name, v.Name)
-		case schemas.ResourceReference_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.ResourceReference_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // Identifies the version of a specific slot.
@@ -1550,97 +627,6 @@ type Slot struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Slot) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Slot)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Slot) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultValueSpec != nil {
-		s.WriteStruct(schemas.Slot_defaultValueSpec)
-		v.DefaultValueSpec.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Slot_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Slot_name, *v.Name)
-	}
-	if v.ObfuscationSetting != "" {
-		s.WriteString(schemas.Slot_obfuscationSetting, string(v.ObfuscationSetting))
-	}
-	if v.Priority != nil {
-		s.WriteInt32(schemas.Slot_priority, *v.Priority)
-	}
-	if v.ResponseCard != nil {
-		s.WriteString(schemas.Slot_responseCard, *v.ResponseCard)
-	}
-	serializeSlotUtteranceList(s, schemas.Slot_sampleUtterances, v.SampleUtterances)
-	if v.SlotConstraint != "" {
-		s.WriteString(schemas.Slot_slotConstraint, string(v.SlotConstraint))
-	}
-	if v.SlotType != nil {
-		s.WriteString(schemas.Slot_slotType, *v.SlotType)
-	}
-	if v.SlotTypeVersion != nil {
-		s.WriteString(schemas.Slot_slotTypeVersion, *v.SlotTypeVersion)
-	}
-	if v.ValueElicitationPrompt != nil {
-		s.WriteStruct(schemas.Slot_valueElicitationPrompt)
-		v.ValueElicitationPrompt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Slot) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Slot, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Slot_defaultValueSpec:
-			v.DefaultValueSpec = &SlotDefaultValueSpec{}
-			return v.DefaultValueSpec.Deserialize(d)
-		case schemas.Slot_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Slot_description, v.Description)
-		case schemas.Slot_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Slot_name, v.Name)
-		case schemas.Slot_obfuscationSetting:
-			var ev string
-			if err := d.ReadString(schemas.Slot_obfuscationSetting, &ev); err != nil {
-				return err
-			}
-			v.ObfuscationSetting = ObfuscationSetting(ev)
-			return nil
-		case schemas.Slot_priority:
-			v.Priority = new(int32)
-			return d.ReadInt32(schemas.Slot_priority, v.Priority)
-		case schemas.Slot_responseCard:
-			v.ResponseCard = new(string)
-			return d.ReadString(schemas.Slot_responseCard, v.ResponseCard)
-		case schemas.Slot_sampleUtterances:
-			return deserializeSlotUtteranceList(d, schemas.Slot_sampleUtterances, &v.SampleUtterances)
-		case schemas.Slot_slotConstraint:
-			var ev string
-			if err := d.ReadString(schemas.Slot_slotConstraint, &ev); err != nil {
-				return err
-			}
-			v.SlotConstraint = SlotConstraint(ev)
-			return nil
-		case schemas.Slot_slotType:
-			v.SlotType = new(string)
-			return d.ReadString(schemas.Slot_slotType, v.SlotType)
-		case schemas.Slot_slotTypeVersion:
-			v.SlotTypeVersion = new(string)
-			return d.ReadString(schemas.Slot_slotTypeVersion, v.SlotTypeVersion)
-		case schemas.Slot_valueElicitationPrompt:
-			v.ValueElicitationPrompt = &Prompt{}
-			return v.ValueElicitationPrompt.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A default value for a slot.
 type SlotDefaultValue struct {
 
@@ -1657,28 +643,6 @@ type SlotDefaultValue struct {
 	DefaultValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SlotDefaultValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlotDefaultValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlotDefaultValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultValue != nil {
-		s.WriteString(schemas.SlotDefaultValue_defaultValue, *v.DefaultValue)
-	}
-}
-func (v *SlotDefaultValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlotDefaultValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlotDefaultValue_defaultValue:
-			v.DefaultValue = new(string)
-			return d.ReadString(schemas.SlotDefaultValue_defaultValue, v.DefaultValue)
-		}
-		return nil
-	})
 }
 
 // Contains the default values for a slot. Default values are used when Amazon Lex
@@ -1700,25 +664,6 @@ type SlotDefaultValueSpec struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SlotDefaultValueSpec) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlotDefaultValueSpec)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlotDefaultValueSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlotDefaultValueList(s, schemas.SlotDefaultValueSpec_defaultValueList, v.DefaultValueList)
-}
-func (v *SlotDefaultValueSpec) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlotDefaultValueSpec, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlotDefaultValueSpec_defaultValueList:
-			return deserializeSlotDefaultValueList(d, schemas.SlotDefaultValueSpec_defaultValueList, &v.DefaultValueList)
-		}
-		return nil
-	})
-}
-
 // Provides configuration information for a slot type.
 type SlotTypeConfiguration struct {
 
@@ -1726,30 +671,6 @@ type SlotTypeConfiguration struct {
 	RegexConfiguration *SlotTypeRegexConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *SlotTypeConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlotTypeConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlotTypeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RegexConfiguration != nil {
-		s.WriteStruct(schemas.SlotTypeConfiguration_regexConfiguration)
-		v.RegexConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SlotTypeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlotTypeConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlotTypeConfiguration_regexConfiguration:
-			v.RegexConfiguration = &SlotTypeRegexConfiguration{}
-			return v.RegexConfiguration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about a slot type..
@@ -1772,52 +693,6 @@ type SlotTypeMetadata struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SlotTypeMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlotTypeMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlotTypeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.SlotTypeMetadata_createdDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.SlotTypeMetadata_description, *v.Description)
-	}
-	if v.LastUpdatedDate != nil {
-		s.WriteTime(schemas.SlotTypeMetadata_lastUpdatedDate, *v.LastUpdatedDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SlotTypeMetadata_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.SlotTypeMetadata_version, *v.Version)
-	}
-}
-func (v *SlotTypeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlotTypeMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlotTypeMetadata_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.SlotTypeMetadata_createdDate, v.CreatedDate)
-		case schemas.SlotTypeMetadata_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.SlotTypeMetadata_description, v.Description)
-		case schemas.SlotTypeMetadata_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.SlotTypeMetadata_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.SlotTypeMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SlotTypeMetadata_name, v.Name)
-		case schemas.SlotTypeMetadata_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.SlotTypeMetadata_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // Provides a regular expression used to validate the value of a slot.
@@ -1848,28 +723,6 @@ type SlotTypeRegexConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SlotTypeRegexConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlotTypeRegexConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlotTypeRegexConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Pattern != nil {
-		s.WriteString(schemas.SlotTypeRegexConfiguration_pattern, *v.Pattern)
-	}
-}
-func (v *SlotTypeRegexConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlotTypeRegexConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlotTypeRegexConfiguration_pattern:
-			v.Pattern = new(string)
-			return d.ReadString(schemas.SlotTypeRegexConfiguration_pattern, v.Pattern)
-		}
-		return nil
-	})
-}
-
 // A collection of messages that convey information to the user. At runtime,
 // Amazon Lex selects the message to convey.
 type Statement struct {
@@ -1889,31 +742,6 @@ type Statement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Statement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Statement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Statement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageList(s, schemas.Statement_messages, v.Messages)
-	if v.ResponseCard != nil {
-		s.WriteString(schemas.Statement_responseCard, *v.ResponseCard)
-	}
-}
-func (v *Statement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Statement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Statement_messages:
-			return deserializeMessageList(d, schemas.Statement_messages, &v.Messages)
-		case schemas.Statement_responseCard:
-			v.ResponseCard = new(string)
-			return d.ReadString(schemas.Statement_responseCard, v.ResponseCard)
-		}
-		return nil
-	})
-}
-
 // A list of key/value pairs that identify a bot, bot alias, or bot channel. Tag
 // keys and values can consist of Unicode letters, digits, white space, and any of
 // the following symbols: _ . : / = + - @.
@@ -1931,34 +759,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_key, v.Key)
-		case schemas.Tag_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Provides information about a single utterance that was made to your bot.
@@ -1983,52 +783,6 @@ type UtteranceData struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UtteranceData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UtteranceData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UtteranceData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt32(schemas.UtteranceData_count, *v.Count)
-	}
-	if v.DistinctUsers != nil {
-		s.WriteInt32(schemas.UtteranceData_distinctUsers, *v.DistinctUsers)
-	}
-	if v.FirstUtteredDate != nil {
-		s.WriteTime(schemas.UtteranceData_firstUtteredDate, *v.FirstUtteredDate)
-	}
-	if v.LastUtteredDate != nil {
-		s.WriteTime(schemas.UtteranceData_lastUtteredDate, *v.LastUtteredDate)
-	}
-	if v.UtteranceString != nil {
-		s.WriteString(schemas.UtteranceData_utteranceString, *v.UtteranceString)
-	}
-}
-func (v *UtteranceData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UtteranceData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UtteranceData_count:
-			v.Count = new(int32)
-			return d.ReadInt32(schemas.UtteranceData_count, v.Count)
-		case schemas.UtteranceData_distinctUsers:
-			v.DistinctUsers = new(int32)
-			return d.ReadInt32(schemas.UtteranceData_distinctUsers, v.DistinctUsers)
-		case schemas.UtteranceData_firstUtteredDate:
-			v.FirstUtteredDate = new(time.Time)
-			return d.ReadTime(schemas.UtteranceData_firstUtteredDate, v.FirstUtteredDate)
-		case schemas.UtteranceData_lastUtteredDate:
-			v.LastUtteredDate = new(time.Time)
-			return d.ReadTime(schemas.UtteranceData_lastUtteredDate, v.LastUtteredDate)
-		case schemas.UtteranceData_utteranceString:
-			v.UtteranceString = new(string)
-			return d.ReadString(schemas.UtteranceData_utteranceString, v.UtteranceString)
-		}
-		return nil
-	})
-}
-
 // Provides a list of utterances that have been made to a specific version of your
 // bot. The list contains a maximum of 100 utterances.
 type UtteranceList struct {
@@ -2041,31 +795,6 @@ type UtteranceList struct {
 	Utterances []UtteranceData
 
 	noSmithyDocumentSerde
-}
-
-func (v *UtteranceList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UtteranceList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UtteranceList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotVersion != nil {
-		s.WriteString(schemas.UtteranceList_botVersion, *v.BotVersion)
-	}
-	serializeListOfUtterance(s, schemas.UtteranceList_utterances, v.Utterances)
-}
-func (v *UtteranceList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UtteranceList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UtteranceList_botVersion:
-			v.BotVersion = new(string)
-			return d.ReadString(schemas.UtteranceList_botVersion, v.BotVersion)
-		case schemas.UtteranceList_utterances:
-			return deserializeListOfUtterance(d, schemas.UtteranceList_utterances, &v.Utterances)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

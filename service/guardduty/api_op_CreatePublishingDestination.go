@@ -5,10 +5,10 @@ package guardduty
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a publishing destination where you can export your GuardDuty findings.
@@ -61,6 +61,30 @@ type CreatePublishingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublishingDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublishingDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublishingDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePublishingDestinationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DestinationProperties != nil {
+		s.WriteStruct(schemas.CreatePublishingDestinationRequest_DestinationProperties)
+		v.DestinationProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.CreatePublishingDestinationRequest_DestinationType, string(v.DestinationType))
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreatePublishingDestinationRequest_DetectorId, *v.DetectorId)
+	}
+	serializeTagMap(s, schemas.CreatePublishingDestinationRequest_Tags, v.Tags)
+}
+
 type CreatePublishingDestinationOutput struct {
 
 	// The ID of the publishing destination that is created.
@@ -74,65 +98,42 @@ type CreatePublishingDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublishingDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublishingDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublishingDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationId != nil {
+		s.WriteString(schemas.CreatePublishingDestinationResponse_DestinationId, *v.DestinationId)
+	}
+}
+func (v *CreatePublishingDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePublishingDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePublishingDestinationResponse_DestinationId:
+			v.DestinationId = new(string)
+			return d.ReadString(schemas.CreatePublishingDestinationResponse_DestinationId, v.DestinationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublishingDestination, schemas.CreatePublishingDestinationRequest, schemas.CreatePublishingDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePublishingDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublishingDestination, schemas.CreatePublishingDestinationRequest, schemas.CreatePublishingDestinationResponse), output: &CreatePublishingDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePublishingDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePublishingDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +143,6 @@ func (c *Client) addOperationCreatePublishingDestinationMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreatePublishingDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePublishingDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +155,6 @@ func (c *Client) addOperationCreatePublishingDestinationMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +194,4 @@ func (m *idempotencyToken_initializeOpCreatePublishingDestination) HandleInitial
 }
 func addIdempotencyToken_opCreatePublishingDestinationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePublishingDestination{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePublishingDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePublishingDestination",
-	}
 }

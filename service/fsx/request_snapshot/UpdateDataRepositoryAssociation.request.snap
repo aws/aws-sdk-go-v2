@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateDataRepositoryAssociation
+
+{"AssociationId":"__AssociationId__","ClientRequestToken":"__ClientRequestToken__","ImportedFileChunkSize":1,"S3":{"AutoExportPolicy":{"Events":["NEW","NEW"]},"AutoImportPolicy":{"Events":["NEW","NEW"]}}}

@@ -5,12 +5,8 @@ package codecatalyst
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all personal access tokens (PATs) associated with the user who calls the
@@ -44,21 +40,6 @@ type ListAccessTokensInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessTokensInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccessTokensRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccessTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccessTokensRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccessTokensRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAccessTokensOutput struct {
 
 	// A list of personal access tokens (PATs) associated with the calling user
@@ -77,78 +58,20 @@ type ListAccessTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccessTokensResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccessTokensResponse_items:
-			return deserializeAccessTokenSummaries(d, schemas.ListAccessTokensResponse_items, &v.Items)
-		case schemas.ListAccessTokensResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccessTokensResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessTokens{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensRequest, schemas.ListAccessTokensResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessTokens{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensRequest, schemas.ListAccessTokensResponse), output: &ListAccessTokensOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccessTokens"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessTokens(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +84,6 @@ func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +186,3 @@ type ListAccessTokensAPIClient interface {
 }
 
 var _ ListAccessTokensAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccessTokens(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccessTokens",
-	}
-}

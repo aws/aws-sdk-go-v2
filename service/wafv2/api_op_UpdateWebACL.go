@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified WebACL. While updating a web ACL, WAF provides continuous
@@ -34,8 +33,8 @@ import (
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
 // Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, Amplify application, and Amazon Web Services Verified Access
-// instance.
+// Runner service, Amplify application, Amazon Web Services Verified Access
+// instance, and Amazon Bedrock AgentCore Gateway.
 //
 // # Temporary inconsistencies during updates
 //
@@ -190,6 +189,10 @@ type UpdateWebACLInput struct {
 	// A description of the web ACL that helps with identification.
 	Description *string
 
+	// The monetization configuration for the web ACL. Provide this when any rule in
+	// the web ACL uses the Monetize action.
+	MonetizationConfig *types.MonetizationConfig
+
 	// Specifies the type of DDoS protection to apply to web request data for a web
 	// ACL. For most scenarios, it is recommended to use the default protection level,
 	// ACTIVE_UNDER_DDOS . If a web ACL is associated with multiple Application Load
@@ -219,6 +222,78 @@ type UpdateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssociationConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_AssociationConfig)
+		v.AssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaptchaConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_CaptchaConfig)
+		v.CaptchaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_ChallengeConfig)
+		v.ChallengeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomResponseBodies(s, schemas.UpdateWebACLRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.DataProtectionConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_DataProtectionConfig)
+		v.DataProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultAction != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_DefaultAction)
+		v.DefaultAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWebACLRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWebACLRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.UpdateWebACLRequest_LockToken, *v.LockToken)
+	}
+	if v.MonetizationConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_MonetizationConfig)
+		v.MonetizationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWebACLRequest_Name, *v.Name)
+	}
+	if v.OnSourceDDoSProtectionConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_OnSourceDDoSProtectionConfig)
+		v.OnSourceDDoSProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRules(s, schemas.UpdateWebACLRequest_Rules, v.Rules)
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdateWebACLRequest_Scope, string(v.Scope))
+	}
+	serializeTokenDomains(s, schemas.UpdateWebACLRequest_TokenDomains, v.TokenDomains)
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.UpdateWebACLRequest_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateWebACLOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
@@ -231,77 +306,48 @@ type UpdateWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.UpdateWebACLResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *UpdateWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWebACLResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.UpdateWebACLResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebACL, schemas.UpdateWebACLRequest, schemas.UpdateWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebACL, schemas.UpdateWebACLRequest, schemas.UpdateWebACLResponse), output: &UpdateWebACLOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWebACL{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWebACL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWebACLValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebACL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -316,22 +362,8 @@ func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWebACL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWebACL",
-	}
 }

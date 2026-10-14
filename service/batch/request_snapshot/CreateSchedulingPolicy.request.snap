@@ -1,0 +1,5 @@
+POST /v1/createschedulingpolicy
+
+Content-Type: application/json
+
+{"fairsharePolicy":{"computeReservation":1,"shareDecaySeconds":1,"shareDistribution":[{"shareIdentifier":"__ShareIdentifier__","weightFactor":1},{"shareIdentifier":"__ShareIdentifier__","weightFactor":1}]},"name":"__Name__","quotaSharePolicy":{"idleResourceAssignmentStrategy":"FIFO"},"tags":{"key0":"__Value__"}}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,6 +36,55 @@ type ConfigurationDefinition struct {
 	TypeVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationDefinition_Id, *v.Id)
+	}
+	if v.LocalDeploymentAdministrationRoleArn != nil {
+		s.WriteString(schemas.ConfigurationDefinition_LocalDeploymentAdministrationRoleArn, *v.LocalDeploymentAdministrationRoleArn)
+	}
+	if v.LocalDeploymentExecutionRoleName != nil {
+		s.WriteString(schemas.ConfigurationDefinition_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
+	}
+	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinition_Parameters, v.Parameters)
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurationDefinition_Type, *v.Type)
+	}
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.ConfigurationDefinition_TypeVersion, *v.TypeVersion)
+	}
+}
+func (v *ConfigurationDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationDefinition_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationDefinition_Id, v.Id)
+		case schemas.ConfigurationDefinition_LocalDeploymentAdministrationRoleArn:
+			v.LocalDeploymentAdministrationRoleArn = new(string)
+			return d.ReadString(schemas.ConfigurationDefinition_LocalDeploymentAdministrationRoleArn, v.LocalDeploymentAdministrationRoleArn)
+		case schemas.ConfigurationDefinition_LocalDeploymentExecutionRoleName:
+			v.LocalDeploymentExecutionRoleName = new(string)
+			return d.ReadString(schemas.ConfigurationDefinition_LocalDeploymentExecutionRoleName, v.LocalDeploymentExecutionRoleName)
+		case schemas.ConfigurationDefinition_Parameters:
+			return deserializeConfigurationParametersMap(d, schemas.ConfigurationDefinition_Parameters, &v.Parameters)
+		case schemas.ConfigurationDefinition_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurationDefinition_Type, v.Type)
+		case schemas.ConfigurationDefinition_TypeVersion:
+			v.TypeVersion = new(string)
+			return d.ReadString(schemas.ConfigurationDefinition_TypeVersion, v.TypeVersion)
+		}
+		return nil
+	})
 }
 
 // Defines the preferences and options for a configuration definition.
@@ -628,6 +679,49 @@ type ConfigurationDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurationDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocalDeploymentAdministrationRoleArn != nil {
+		s.WriteString(schemas.ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn, *v.LocalDeploymentAdministrationRoleArn)
+	}
+	if v.LocalDeploymentExecutionRoleName != nil {
+		s.WriteString(schemas.ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
+	}
+	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionInput_Parameters, v.Parameters)
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurationDefinitionInput_Type, *v.Type)
+	}
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.ConfigurationDefinitionInput_TypeVersion, *v.TypeVersion)
+	}
+}
+func (v *ConfigurationDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationDefinitionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn:
+			v.LocalDeploymentAdministrationRoleArn = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn, v.LocalDeploymentAdministrationRoleArn)
+		case schemas.ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName:
+			v.LocalDeploymentExecutionRoleName = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, v.LocalDeploymentExecutionRoleName)
+		case schemas.ConfigurationDefinitionInput_Parameters:
+			return deserializeConfigurationParametersMap(d, schemas.ConfigurationDefinitionInput_Parameters, &v.Parameters)
+		case schemas.ConfigurationDefinitionInput_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionInput_Type, v.Type)
+		case schemas.ConfigurationDefinitionInput_TypeVersion:
+			v.TypeVersion = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionInput_TypeVersion, v.TypeVersion)
+		}
+		return nil
+	})
+}
+
 // A summarized definition of a Quick Setup configuration definition.
 type ConfigurationDefinitionSummary struct {
 
@@ -644,6 +738,43 @@ type ConfigurationDefinitionSummary struct {
 	TypeVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationDefinitionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationDefinitionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationDefinitionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationParametersMap(s, schemas.ConfigurationDefinitionSummary_FirstClassParameters, v.FirstClassParameters)
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationDefinitionSummary_Id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurationDefinitionSummary_Type, *v.Type)
+	}
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.ConfigurationDefinitionSummary_TypeVersion, *v.TypeVersion)
+	}
+}
+func (v *ConfigurationDefinitionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationDefinitionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationDefinitionSummary_FirstClassParameters:
+			return deserializeConfigurationParametersMap(d, schemas.ConfigurationDefinitionSummary_FirstClassParameters, &v.FirstClassParameters)
+		case schemas.ConfigurationDefinitionSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionSummary_Id, v.Id)
+		case schemas.ConfigurationDefinitionSummary_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionSummary_Type, v.Type)
+		case schemas.ConfigurationDefinitionSummary_TypeVersion:
+			v.TypeVersion = new(string)
+			return d.ReadString(schemas.ConfigurationDefinitionSummary_TypeVersion, v.TypeVersion)
+		}
+		return nil
+	})
 }
 
 // A summary of a Quick Setup configuration manager.
@@ -670,6 +801,46 @@ type ConfigurationManagerSummary struct {
 	StatusSummaries []StatusSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationManagerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationManagerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationManagerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationDefinitionSummariesList(s, schemas.ConfigurationManagerSummary_ConfigurationDefinitionSummaries, v.ConfigurationDefinitionSummaries)
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigurationManagerSummary_Description, *v.Description)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.ConfigurationManagerSummary_ManagerArn, *v.ManagerArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConfigurationManagerSummary_Name, *v.Name)
+	}
+	serializeStatusSummariesList(s, schemas.ConfigurationManagerSummary_StatusSummaries, v.StatusSummaries)
+}
+func (v *ConfigurationManagerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationManagerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationManagerSummary_ConfigurationDefinitionSummaries:
+			return deserializeConfigurationDefinitionSummariesList(d, schemas.ConfigurationManagerSummary_ConfigurationDefinitionSummaries, &v.ConfigurationDefinitionSummaries)
+		case schemas.ConfigurationManagerSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigurationManagerSummary_Description, v.Description)
+		case schemas.ConfigurationManagerSummary_ManagerArn:
+			v.ManagerArn = new(string)
+			return d.ReadString(schemas.ConfigurationManagerSummary_ManagerArn, v.ManagerArn)
+		case schemas.ConfigurationManagerSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConfigurationManagerSummary_Name, v.Name)
+		case schemas.ConfigurationManagerSummary_StatusSummaries:
+			return deserializeStatusSummariesList(d, schemas.ConfigurationManagerSummary_StatusSummaries, &v.StatusSummaries)
+		}
+		return nil
+	})
 }
 
 // Details for a Quick Setup configuration.
@@ -709,6 +880,76 @@ type ConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.ConfigurationSummary_Account, *v.Account)
+	}
+	if v.ConfigurationDefinitionId != nil {
+		s.WriteString(schemas.ConfigurationSummary_ConfigurationDefinitionId, *v.ConfigurationDefinitionId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConfigurationSummary_CreatedAt, *v.CreatedAt)
+	}
+	serializeConfigurationParametersMap(s, schemas.ConfigurationSummary_FirstClassParameters, v.FirstClassParameters)
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationSummary_Id, *v.Id)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.ConfigurationSummary_ManagerArn, *v.ManagerArn)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ConfigurationSummary_Region, *v.Region)
+	}
+	serializeStatusSummariesList(s, schemas.ConfigurationSummary_StatusSummaries, v.StatusSummaries)
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurationSummary_Type, *v.Type)
+	}
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.ConfigurationSummary_TypeVersion, *v.TypeVersion)
+	}
+}
+func (v *ConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationSummary_Account:
+			v.Account = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_Account, v.Account)
+		case schemas.ConfigurationSummary_ConfigurationDefinitionId:
+			v.ConfigurationDefinitionId = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_ConfigurationDefinitionId, v.ConfigurationDefinitionId)
+		case schemas.ConfigurationSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationSummary_CreatedAt, v.CreatedAt)
+		case schemas.ConfigurationSummary_FirstClassParameters:
+			return deserializeConfigurationParametersMap(d, schemas.ConfigurationSummary_FirstClassParameters, &v.FirstClassParameters)
+		case schemas.ConfigurationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_Id, v.Id)
+		case schemas.ConfigurationSummary_ManagerArn:
+			v.ManagerArn = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_ManagerArn, v.ManagerArn)
+		case schemas.ConfigurationSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_Region, v.Region)
+		case schemas.ConfigurationSummary_StatusSummaries:
+			return deserializeStatusSummariesList(d, schemas.ConfigurationSummary_StatusSummaries, &v.StatusSummaries)
+		case schemas.ConfigurationSummary_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_Type, v.Type)
+		case schemas.ConfigurationSummary_TypeVersion:
+			v.TypeVersion = new(string)
+			return d.ReadString(schemas.ConfigurationSummary_TypeVersion, v.TypeVersion)
+		}
+		return nil
+	})
+}
+
 // A key-value pair to filter results.
 type Filter struct {
 
@@ -725,6 +966,31 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Filter_Key, *v.Key)
+	}
+	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Filter_Key, v.Key)
+		case schemas.Filter_Values:
+			return deserializeFilterValues(d, schemas.Filter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Information about the Quick Setup type.
 type QuickSetupTypeOutput struct {
 
@@ -737,6 +1003,34 @@ type QuickSetupTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuickSetupTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickSetupTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickSetupTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.QuickSetupTypeOutput_LatestVersion, *v.LatestVersion)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.QuickSetupTypeOutput_Type, *v.Type)
+	}
+}
+func (v *QuickSetupTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickSetupTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickSetupTypeOutput_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.QuickSetupTypeOutput_LatestVersion, v.LatestVersion)
+		case schemas.QuickSetupTypeOutput_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.QuickSetupTypeOutput_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Settings configured for Quick Setup.
 type ServiceSettings struct {
 
@@ -744,6 +1038,28 @@ type ServiceSettings struct {
 	ExplorerEnablingRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplorerEnablingRoleArn != nil {
+		s.WriteString(schemas.ServiceSettings_ExplorerEnablingRoleArn, *v.ExplorerEnablingRoleArn)
+	}
+}
+func (v *ServiceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceSettings_ExplorerEnablingRoleArn:
+			v.ExplorerEnablingRoleArn = new(string)
+			return d.ReadString(schemas.ServiceSettings_ExplorerEnablingRoleArn, v.ExplorerEnablingRoleArn)
+		}
+		return nil
+	})
 }
 
 // A summarized description of the status.
@@ -774,6 +1090,57 @@ type StatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.StatusSummary_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StatusSummary_Status, string(v.Status))
+	}
+	serializeStatusDetails(s, schemas.StatusSummary_StatusDetails, v.StatusDetails)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.StatusSummary_StatusMessage, *v.StatusMessage)
+	}
+	if v.StatusType != "" {
+		s.WriteString(schemas.StatusSummary_StatusType, string(v.StatusType))
+	}
+}
+func (v *StatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatusSummary_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StatusSummary_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.StatusSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.StatusSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.StatusSummary_StatusDetails:
+			return deserializeStatusDetails(d, schemas.StatusSummary_StatusDetails, &v.StatusDetails)
+		case schemas.StatusSummary_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.StatusSummary_StatusMessage, v.StatusMessage)
+		case schemas.StatusSummary_StatusType:
+			var ev string
+			if err := d.ReadString(schemas.StatusSummary_StatusType, &ev); err != nil {
+				return err
+			}
+			v.StatusType = StatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Key-value pairs of metadata.
 type TagEntry struct {
 
@@ -784,6 +1151,34 @@ type TagEntry struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagEntry_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.TagEntry_Value, *v.Value)
+	}
+}
+func (v *TagEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagEntry_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagEntry_Key, v.Key)
+		case schemas.TagEntry_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.TagEntry_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

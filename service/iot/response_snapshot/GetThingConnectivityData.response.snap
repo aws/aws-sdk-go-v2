@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cleanSession":true,"clientId":"__ClientId__","connected":true,"disconnectReason":"AUTH_ERROR","keepAliveDuration":1,"sessionExpiry":1,"sourceIp":"__SourceIp__","sourcePort":1,"targetIp":"__TargetIp__","targetPort":1,"thingName":"__ThingName__","timestamp":946684800,"vpcEndpointId":"__VpcEndpointId__"}

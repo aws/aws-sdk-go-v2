@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__/messages?max-results=1&next-token=__NextToken__&not-after=2000-01-01T00%3A00%3A00Z&not-before=2000-01-01T00%3A00%3A00Z&sort-order=ASCENDING&sub-channel-id=__SubChannelId__
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DedicatedIpAutoWarmupEnabled":true,"EnforcementStatus":"__EnforcementStatus__","ProductionAccessEnabled":true,"SendQuota":{"Max24HourSend":1,"MaxSendRate":1,"SentLast24Hours":1},"SendingEnabled":true}

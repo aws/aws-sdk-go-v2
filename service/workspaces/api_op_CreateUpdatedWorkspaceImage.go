@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new updated WorkSpace image based on the specified source image. The
@@ -70,6 +69,25 @@ type CreateUpdatedWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUpdatedWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUpdatedWorkspaceImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUpdatedWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateUpdatedWorkspaceImageRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUpdatedWorkspaceImageRequest_Name, *v.Name)
+	}
+	if v.SourceImageId != nil {
+		s.WriteString(schemas.CreateUpdatedWorkspaceImageRequest_SourceImageId, *v.SourceImageId)
+	}
+	serializeTagList(s, schemas.CreateUpdatedWorkspaceImageRequest_Tags, v.Tags)
+}
+
 type CreateUpdatedWorkspaceImageOutput struct {
 
 	// The identifier of the new updated WorkSpace image.
@@ -81,77 +99,48 @@ type CreateUpdatedWorkspaceImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUpdatedWorkspaceImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUpdatedWorkspaceImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUpdatedWorkspaceImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateUpdatedWorkspaceImageResult_ImageId, *v.ImageId)
+	}
+}
+func (v *CreateUpdatedWorkspaceImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUpdatedWorkspaceImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUpdatedWorkspaceImageResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.CreateUpdatedWorkspaceImageResult_ImageId, v.ImageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUpdatedWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpdatedWorkspaceImage, schemas.CreateUpdatedWorkspaceImageRequest, schemas.CreateUpdatedWorkspaceImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUpdatedWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpdatedWorkspaceImage, schemas.CreateUpdatedWorkspaceImageRequest, schemas.CreateUpdatedWorkspaceImageResult), output: &CreateUpdatedWorkspaceImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUpdatedWorkspaceImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUpdatedWorkspaceImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateUpdatedWorkspaceImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUpdatedWorkspaceImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +155,8 @@ func (c *Client) addOperationCreateUpdatedWorkspaceImageMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateUpdatedWorkspaceImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUpdatedWorkspaceImage",
-	}
 }

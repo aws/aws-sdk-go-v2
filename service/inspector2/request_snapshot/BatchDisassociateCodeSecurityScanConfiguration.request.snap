@@ -1,0 +1,5 @@
+POST /codesecurity/scan-configuration/batch/disassociate
+
+Content-Type: application/json
+
+{"disassociateConfigurationRequests":[{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"},{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"}]}

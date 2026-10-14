@@ -4,10 +4,9 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the metrics for the specified solution version.
@@ -36,6 +35,18 @@ type GetSolutionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolutionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolutionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolutionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.GetSolutionMetricsRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type GetSolutionMetricsOutput struct {
 
 	// The metrics for the solution version. For more information, see [Evaluating a solution version with metrics].
@@ -52,77 +63,51 @@ type GetSolutionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolutionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolutionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetrics(s, schemas.GetSolutionMetricsResponse_metrics, v.Metrics)
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.GetSolutionMetricsResponse_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+func (v *GetSolutionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolutionMetricsResponse_metrics:
+			return deserializeMetrics(d, schemas.GetSolutionMetricsResponse_metrics, &v.Metrics)
+		case schemas.GetSolutionMetricsResponse_solutionVersionArn:
+			v.SolutionVersionArn = new(string)
+			return d.ReadString(schemas.GetSolutionMetricsResponse_solutionVersionArn, v.SolutionVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolutionMetrics, schemas.GetSolutionMetricsRequest, schemas.GetSolutionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSolutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolutionMetrics, schemas.GetSolutionMetricsRequest, schemas.GetSolutionMetricsResponse), output: &GetSolutionMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSolutionMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSolutionMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSolutionMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSolutionMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +122,8 @@ func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSolutionMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSolutionMetrics",
-	}
 }

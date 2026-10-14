@@ -7,6 +7,35 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeCreateDataTransformationProfileSource(s smithy.ShapeSerializer, schema *smithy.Schema, v CreateDataTransformationProfileSource) {
+	switch vv := v.(type) {
+	case *CreateDataTransformationProfileSourceMemberExistingVersionedProfileId:
+		s.WriteUnion(schema, schemas.CreateDataTransformationProfileSource_ExistingVersionedProfileId)
+		s.WriteStruct(schemas.CreateDataTransformationProfileSource_ExistingVersionedProfileId)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *CreateDataTransformationProfileSourceMemberProfileMapping:
+		s.WriteUnion(schema, schemas.CreateDataTransformationProfileSource_ProfileMapping)
+		s.WriteStruct(schemas.CreateDataTransformationProfileSource_ProfileMapping)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *CreateDataTransformationProfileSourceMemberSampleData:
+		s.WriteUnion(schema, schemas.CreateDataTransformationProfileSource_SampleData)
+		s.WriteStruct(schemas.CreateDataTransformationProfileSource_SampleData)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *CreateDataTransformationProfileSourceMemberStarterProfile:
+		s.WriteUnion(schema, schemas.CreateDataTransformationProfileSource_StarterProfile)
+		s.WriteStruct(schemas.CreateDataTransformationProfileSource_StarterProfile)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeInputDataConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v InputDataConfig) {
 	switch vv := v.(type) {
 	case *InputDataConfigMemberS3Uri:
@@ -25,6 +54,41 @@ func serializeOutputDataConfig(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.CloseStruct()
 		s.CloseUnion()
 	}
+}
+
+func serializeRestoreConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v RestoreConfiguration) {
+	switch vv := v.(type) {
+	case *RestoreConfigurationMemberContinuousBackupRestoreConfiguration:
+		s.WriteUnion(schema, schemas.RestoreConfiguration_ContinuousBackupRestoreConfiguration)
+		s.WriteStruct(schemas.RestoreConfiguration_ContinuousBackupRestoreConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeCreateDataTransformationProfileSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *CreateDataTransformationProfileSource) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.CreateDataTransformationProfileSource_ExistingVersionedProfileId:
+			vv := &CreateDataTransformationProfileSourceMemberExistingVersionedProfileId{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CreateDataTransformationProfileSource_ProfileMapping:
+			vv := &CreateDataTransformationProfileSourceMemberProfileMapping{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CreateDataTransformationProfileSource_SampleData:
+			vv := &CreateDataTransformationProfileSourceMemberSampleData{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CreateDataTransformationProfileSource_StarterProfile:
+			vv := &CreateDataTransformationProfileSourceMemberStarterProfile{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeInputDataConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *InputDataConfig) error {
@@ -51,6 +115,18 @@ func deserializeOutputDataConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeRestoreConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *RestoreConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RestoreConfiguration_ContinuousBackupRestoreConfiguration:
+			vv := &RestoreConfigurationMemberContinuousBackupRestoreConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func serializeDatastorePropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DatastoreProperties) {
 	if v == nil {
 		return
@@ -60,6 +136,54 @@ func serializeDatastorePropertiesList(s smithy.ShapeSerializer, schema *smithy.S
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDataTransformationChatOptionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDataTransformationProfileSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataTransformationProfileSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDataTransformationProfileVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataTransformationProfileVersionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDefaultProfiles(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -114,7 +238,21 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 	s.CloseList()
 }
 
+func serializeTransformationJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TransformationJobSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func deserializeDatastorePropertiesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DatastoreProperties) error {
+	*v = make([]DatastoreProperties, 0)
 	var vv DatastoreProperties
 	return smithy.ReadList(d, s, func() error {
 		vv = DatastoreProperties{}
@@ -127,7 +265,64 @@ func deserializeDatastorePropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializeDataTransformationChatOptionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataTransformationProfileSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataTransformationProfileSummary) error {
+	*v = make([]DataTransformationProfileSummary, 0)
+	var vv DataTransformationProfileSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = DataTransformationProfileSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDataTransformationProfileVersionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataTransformationProfileVersionSummary) error {
+	*v = make([]DataTransformationProfileVersionSummary, 0)
+	var vv DataTransformationProfileVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = DataTransformationProfileVersionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDefaultProfiles(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeExportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExportJobProperties) error {
+	*v = make([]ExportJobProperties, 0)
 	var vv ExportJobProperties
 	return smithy.ReadList(d, s, func() error {
 		vv = ExportJobProperties{}
@@ -141,6 +336,7 @@ func deserializeExportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeImportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ImportJobProperties) error {
+	*v = make([]ImportJobProperties, 0)
 	var vv ImportJobProperties
 	return smithy.ReadList(d, s, func() error {
 		vv = ImportJobProperties{}
@@ -154,6 +350,7 @@ func deserializeImportJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -167,6 +364,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -175,6 +373,119 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTransformationJobSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TransformationJobSummary) error {
+	*v = make([]TransformationJobSummary, 0)
+	var vv TransformationJobSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = TransformationJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func serializeProfileMapping(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func deserializeProfileMapping(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
 		return nil
 	})
 }

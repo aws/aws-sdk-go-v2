@@ -1,0 +1,3 @@
+GET /mount-targets?accessPointId=__AccessPointId__&fileSystemId=__FileSystemId__&maxResults=1&nextToken=__NextToken__
+
+

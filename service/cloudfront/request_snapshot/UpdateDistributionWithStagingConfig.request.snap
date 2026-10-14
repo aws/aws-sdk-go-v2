@@ -1,0 +1,4 @@
+PUT /2020-05-31/distribution/__Id__/promote-staging-config?StagingDistributionId=__StagingDistributionId__
+
+If-Match: __IfMatch__
+

@@ -5,9 +5,6 @@ package mwaa
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,28 +37,6 @@ type CreateWebLoginTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebLoginTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebLoginTokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebLoginTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWebLoginTokenRequest_Name, *v.Name)
-	}
-}
-func (v *CreateWebLoginTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebLoginTokenRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebLoginTokenRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateWebLoginTokenRequest_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 type CreateWebLoginTokenOutput struct {
 
 	// The user name of the Apache Airflow identity creating the web login token.
@@ -84,102 +59,23 @@ type CreateWebLoginTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebLoginTokenOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebLoginTokenResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebLoginTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AirflowIdentity != nil {
-		s.WriteString(schemas.CreateWebLoginTokenResponse_AirflowIdentity, *v.AirflowIdentity)
-	}
-	if v.IamIdentity != nil {
-		s.WriteString(schemas.CreateWebLoginTokenResponse_IamIdentity, *v.IamIdentity)
-	}
-	if v.WebServerHostname != nil {
-		s.WriteString(schemas.CreateWebLoginTokenResponse_WebServerHostname, *v.WebServerHostname)
-	}
-	if v.WebToken != nil {
-		s.WriteString(schemas.CreateWebLoginTokenResponse_WebToken, *v.WebToken)
-	}
-}
-func (v *CreateWebLoginTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebLoginTokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebLoginTokenResponse_AirflowIdentity:
-			v.AirflowIdentity = new(string)
-			return d.ReadString(schemas.CreateWebLoginTokenResponse_AirflowIdentity, v.AirflowIdentity)
-		case schemas.CreateWebLoginTokenResponse_IamIdentity:
-			v.IamIdentity = new(string)
-			return d.ReadString(schemas.CreateWebLoginTokenResponse_IamIdentity, v.IamIdentity)
-		case schemas.CreateWebLoginTokenResponse_WebServerHostname:
-			v.WebServerHostname = new(string)
-			return d.ReadString(schemas.CreateWebLoginTokenResponse_WebServerHostname, v.WebServerHostname)
-		case schemas.CreateWebLoginTokenResponse_WebToken:
-			v.WebToken = new(string)
-			return d.ReadString(schemas.CreateWebLoginTokenResponse_WebToken, v.WebToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWebLoginToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebLoginToken, schemas.CreateWebLoginTokenRequest, schemas.CreateWebLoginTokenResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWebLoginToken{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebLoginToken, schemas.CreateWebLoginTokenRequest, schemas.CreateWebLoginTokenResponse), output: &CreateWebLoginTokenOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebLoginToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -189,12 +85,6 @@ func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateWebLoginTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWebLoginToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,12 +97,6 @@ func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,12 +130,4 @@ func (m *endpointPrefix_opCreateWebLoginTokenMiddleware) HandleFinalize(ctx cont
 }
 func addEndpointPrefix_opCreateWebLoginTokenMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateWebLoginTokenMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateWebLoginToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWebLoginToken",
-	}
 }

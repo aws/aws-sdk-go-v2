@@ -1,0 +1,5 @@
+POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/documents/__DocumentId__/content
+
+Content-Type: application/json
+
+{"outputFormat":"RAW","userContext":{"userId":"__UserId__"}}

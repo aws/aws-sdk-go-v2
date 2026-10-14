@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports documentation parts
@@ -54,6 +53,27 @@ type ImportDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentationPartsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDocumentationPartsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDocumentationPartsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.ImportDocumentationPartsRequest_body, v.Body)
+	}
+	if v.FailOnWarnings != false {
+		s.WriteBool(schemas.ImportDocumentationPartsRequest_failOnWarnings, v.FailOnWarnings)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.ImportDocumentationPartsRequest_mode, string(v.Mode))
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.ImportDocumentationPartsRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A collection of the imported DocumentationPart identifiers.
 type ImportDocumentationPartsOutput struct {
 
@@ -69,77 +89,48 @@ type ImportDocumentationPartsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDocumentationPartsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationPartIds)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDocumentationPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfString(s, schemas.DocumentationPartIds_ids, v.Ids)
+	serializeListOfString(s, schemas.DocumentationPartIds_warnings, v.Warnings)
+}
+func (v *ImportDocumentationPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationPartIds, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationPartIds_ids:
+			return deserializeListOfString(d, schemas.DocumentationPartIds_ids, &v.Ids)
+		case schemas.DocumentationPartIds_warnings:
+			return deserializeListOfString(d, schemas.DocumentationPartIds_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocumentationParts, schemas.ImportDocumentationPartsRequest, schemas.DocumentationPartIds)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDocumentationParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDocumentationParts, schemas.ImportDocumentationPartsRequest, schemas.DocumentationPartIds), output: &ImportDocumentationPartsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDocumentationParts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportDocumentationParts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportDocumentationPartsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportDocumentationParts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +148,8 @@ func (c *Client) addOperationImportDocumentationPartsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportDocumentationParts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportDocumentationParts",
-	}
 }

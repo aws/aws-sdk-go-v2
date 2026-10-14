@@ -4,10 +4,9 @@ package lexruntimev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -175,6 +174,46 @@ type RecognizeUtteranceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeUtteranceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeUtteranceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeUtteranceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_botId, *v.BotId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_localeId, *v.LocaleId)
+	}
+	if v.RequestAttributes != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_requestAttributes, *v.RequestAttributes)
+	}
+	if v.RequestContentType != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_requestContentType, *v.RequestContentType)
+	}
+	if v.ResponseContentType != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_responseContentType, *v.ResponseContentType)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteString(schemas.RecognizeUtteranceRequest_sessionState, *v.SessionState)
+	}
+}
+func (v *RecognizeUtteranceInput) GetPayloadStream() io.Reader { return v.InputStream }
+
+var _ smithy.StreamingInput = (*RecognizeUtteranceInput)(nil)
+
+func (v *RecognizeUtteranceInput) SetPayloadStream(r io.ReadCloser) { v.InputStream = r }
+
+var _ smithy.StreamingOutput = (*RecognizeUtteranceInput)(nil)
+
 type RecognizeUtteranceOutput struct {
 
 	// The prompt or statement to send to the user. This is based on the bot
@@ -258,34 +297,91 @@ type RecognizeUtteranceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeUtteranceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeUtteranceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeUtteranceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_contentType, *v.ContentType)
+	}
+	if v.InputMode != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_inputMode, *v.InputMode)
+	}
+	if v.InputTranscript != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_inputTranscript, *v.InputTranscript)
+	}
+	if v.Interpretations != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_interpretations, *v.Interpretations)
+	}
+	if v.Messages != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_messages, *v.Messages)
+	}
+	if v.RecognizedBotMember != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_recognizedBotMember, *v.RecognizedBotMember)
+	}
+	if v.RequestAttributes != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_requestAttributes, *v.RequestAttributes)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteString(schemas.RecognizeUtteranceResponse_sessionState, *v.SessionState)
+	}
+}
+func (v *RecognizeUtteranceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecognizeUtteranceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecognizeUtteranceResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_contentType, v.ContentType)
+		case schemas.RecognizeUtteranceResponse_inputMode:
+			v.InputMode = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_inputMode, v.InputMode)
+		case schemas.RecognizeUtteranceResponse_inputTranscript:
+			v.InputTranscript = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_inputTranscript, v.InputTranscript)
+		case schemas.RecognizeUtteranceResponse_interpretations:
+			v.Interpretations = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_interpretations, v.Interpretations)
+		case schemas.RecognizeUtteranceResponse_messages:
+			v.Messages = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_messages, v.Messages)
+		case schemas.RecognizeUtteranceResponse_recognizedBotMember:
+			v.RecognizedBotMember = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_recognizedBotMember, v.RecognizedBotMember)
+		case schemas.RecognizeUtteranceResponse_requestAttributes:
+			v.RequestAttributes = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_requestAttributes, v.RequestAttributes)
+		case schemas.RecognizeUtteranceResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_sessionId, v.SessionId)
+		case schemas.RecognizeUtteranceResponse_sessionState:
+			v.SessionState = new(string)
+			return d.ReadString(schemas.RecognizeUtteranceResponse_sessionState, v.SessionState)
+		}
+		return nil
+	})
+}
+func (v *RecognizeUtteranceOutput) GetPayloadStream() io.Reader { return v.AudioStream }
+
+var _ smithy.StreamingInput = (*RecognizeUtteranceOutput)(nil)
+
+func (v *RecognizeUtteranceOutput) SetPayloadStream(r io.ReadCloser) { v.AudioStream = r }
+
+var _ smithy.StreamingOutput = (*RecognizeUtteranceOutput)(nil)
+
 func (c *Client) addOperationRecognizeUtteranceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeUtterance, schemas.RecognizeUtteranceRequest, schemas.RecognizeUtteranceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRecognizeUtterance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeUtterance, schemas.RecognizeUtteranceRequest, schemas.RecognizeUtteranceResponse), output: &RecognizeUtteranceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRecognizeUtterance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RecognizeUtterance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -295,40 +391,13 @@ func (c *Client) addOperationRecognizeUtteranceMiddlewares(stack *middleware.Sta
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRecognizeUtteranceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRecognizeUtterance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -343,22 +412,8 @@ func (c *Client) addOperationRecognizeUtteranceMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRecognizeUtterance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RecognizeUtterance",
-	}
 }

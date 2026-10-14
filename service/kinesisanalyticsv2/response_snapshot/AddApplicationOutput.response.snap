@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.AddApplicationOutput
+
+{"ApplicationARN":"__ApplicationARN__","ApplicationVersionId":1,"OutputDescriptions":[{"DestinationSchema":{"RecordFormatType":"JSON"},"KinesisFirehoseOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"KinesisStreamsOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"LambdaOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"Name":"__Name__","OutputId":"__OutputId__"},{"DestinationSchema":{"RecordFormatType":"JSON"},"KinesisFirehoseOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"KinesisStreamsOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"LambdaOutputDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"},"Name":"__Name__","OutputId":"__OutputId__"}]}

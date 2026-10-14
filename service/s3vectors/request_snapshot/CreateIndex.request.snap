@@ -1,0 +1,5 @@
+POST /CreateIndex
+
+Content-Type: application/json
+
+{"dataType":"float32","dimension":1,"distanceMetric":"euclidean","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseType":"AES256"},"indexName":"__IndexName__","metadataConfiguration":{"nonFilterableMetadataKeys":["__Member__","__Member__"]},"tags":{"key0":"__Value__"},"vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}

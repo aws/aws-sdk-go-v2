@@ -4,10 +4,9 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Migrates a WorkSpace from one operating system or bundle type to another, while
@@ -22,6 +21,9 @@ import (
 //
 // For available migration scenarios, details about what happens during migration,
 // and best practices, see [Migrate a WorkSpace].
+//
+// If the source WorkSpace has nested virtualization enabled and the target bundle
+// does not support nested virtualization, the migration fails.
 //
 // [Migrate a WorkSpace]: https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html
 func (c *Client) MigrateWorkspace(ctx context.Context, params *MigrateWorkspaceInput, optFns ...func(*Options)) (*MigrateWorkspaceOutput, error) {
@@ -54,6 +56,21 @@ type MigrateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.MigrateWorkspaceRequest_BundleId, *v.BundleId)
+	}
+	if v.SourceWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceRequest_SourceWorkspaceId, *v.SourceWorkspaceId)
+	}
+}
+
 type MigrateWorkspaceOutput struct {
 
 	// The original identifier of the WorkSpace that is being migrated.
@@ -70,77 +87,54 @@ type MigrateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrateWorkspaceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceResult_SourceWorkspaceId, *v.SourceWorkspaceId)
+	}
+	if v.TargetWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceResult_TargetWorkspaceId, *v.TargetWorkspaceId)
+	}
+}
+func (v *MigrateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrateWorkspaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrateWorkspaceResult_SourceWorkspaceId:
+			v.SourceWorkspaceId = new(string)
+			return d.ReadString(schemas.MigrateWorkspaceResult_SourceWorkspaceId, v.SourceWorkspaceId)
+		case schemas.MigrateWorkspaceResult_TargetWorkspaceId:
+			v.TargetWorkspaceId = new(string)
+			return d.ReadString(schemas.MigrateWorkspaceResult_TargetWorkspaceId, v.TargetWorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.MigrateWorkspaceRequest, schemas.MigrateWorkspaceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMigrateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.MigrateWorkspaceRequest, schemas.MigrateWorkspaceResult), output: &MigrateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMigrateWorkspace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MigrateWorkspace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMigrateWorkspaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMigrateWorkspace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +149,8 @@ func (c *Client) addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMigrateWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MigrateWorkspace",
-	}
 }

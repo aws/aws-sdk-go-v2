@@ -5,12 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -56,8 +52,8 @@ type CreateEventInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The content payload of the event. This can include conversational data or
-	// binary content.
+	// The content payload of the event. This can include conversational data, JSON
+	// data, or binary content.
 	//
 	// This member is required.
 	Payload []types.PayloadType
@@ -71,6 +67,16 @@ type CreateEventInput struct {
 	// the request, but does not return an error.
 	ClientToken *string
 
+	// The extraction configuration for long-term memory records. Use this parameter
+	// to specify namespace variable keys and their values for namespace substitution
+	// during extraction.
+	ExtractionConfig *types.ExtractionConfig
+
+	// Controls long-term memory extraction for this event. When set to SKIP , the
+	// event is stored in short-term memory but is excluded from long-term memory
+	// extraction. If not specified, the event is processed for extraction as usual.
+	ExtractionMode types.ExtractionMode
+
 	// The key-value metadata to attach to the event.
 	Metadata map[string]types.MetadataValue
 
@@ -79,37 +85,6 @@ type CreateEventInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEventInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActorId != nil {
-		s.WriteString(schemas.CreateEventInput_actorId, *v.ActorId)
-	}
-	if v.Branch != nil {
-		s.WriteStruct(schemas.CreateEventInput_branch)
-		v.Branch.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEventInput_clientToken, *v.ClientToken)
-	}
-	if v.EventTimestamp != nil {
-		s.WriteTime(schemas.CreateEventInput_eventTimestamp, *v.EventTimestamp)
-	}
-	if v.MemoryId != nil {
-		s.WriteString(schemas.CreateEventInput_memoryId, *v.MemoryId)
-	}
-	serializeMetadataMap(s, schemas.CreateEventInput_metadata, v.Metadata)
-	serializePayloadTypeList(s, schemas.CreateEventInput_payload, v.Payload)
-	if v.SessionId != nil {
-		s.WriteString(schemas.CreateEventInput_sessionId, *v.SessionId)
-	}
 }
 
 type CreateEventOutput struct {
@@ -125,73 +100,23 @@ type CreateEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEventOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEventOutput_event:
-			v.Event = &types.Event{}
-			return v.Event.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvent, schemas.CreateEventInput, schemas.CreateEventOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEvent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvent, schemas.CreateEventInput, schemas.CreateEventOutput), output: &CreateEventOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -201,12 +126,6 @@ func (c *Client) addOperationCreateEventMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -219,12 +138,6 @@ func (c *Client) addOperationCreateEventMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -264,12 +177,4 @@ func (m *idempotencyToken_initializeOpCreateEvent) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateEventMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEvent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEvent",
-	}
 }

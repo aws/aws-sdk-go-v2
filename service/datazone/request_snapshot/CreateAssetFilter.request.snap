@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/assets/__AssetIdentifier__/filters
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"columnConfiguration":{"includedColumnNames":["__Member__","__Member__"]}},"description":"__Description__","name":"__Name__"}

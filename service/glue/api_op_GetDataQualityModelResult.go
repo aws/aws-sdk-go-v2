@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +42,21 @@ type GetDataQualityModelResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityModelResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityModelResultRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityModelResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetDataQualityModelResultRequest_ProfileId, *v.ProfileId)
+	}
+	if v.StatisticId != nil {
+		s.WriteString(schemas.GetDataQualityModelResultRequest_StatisticId, *v.StatisticId)
+	}
+}
+
 type GetDataQualityModelResultOutput struct {
 
 	// The timestamp when the data quality model training completed.
@@ -57,77 +71,51 @@ type GetDataQualityModelResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityModelResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityModelResultResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityModelResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.GetDataQualityModelResultResponse_CompletedOn, *v.CompletedOn)
+	}
+	serializeStatisticModelResults(s, schemas.GetDataQualityModelResultResponse_Model, v.Model)
+}
+func (v *GetDataQualityModelResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataQualityModelResultResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataQualityModelResultResponse_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityModelResultResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetDataQualityModelResultResponse_Model:
+			return deserializeStatisticModelResults(d, schemas.GetDataQualityModelResultResponse_Model, &v.Model)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataQualityModelResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityModelResult, schemas.GetDataQualityModelResultRequest, schemas.GetDataQualityModelResultResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataQualityModelResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityModelResult, schemas.GetDataQualityModelResultRequest, schemas.GetDataQualityModelResultResponse), output: &GetDataQualityModelResultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataQualityModelResult{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataQualityModelResult"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDataQualityModelResultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataQualityModelResult(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +130,8 @@ func (c *Client) addOperationGetDataQualityModelResultMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataQualityModelResult(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataQualityModelResult",
-	}
 }

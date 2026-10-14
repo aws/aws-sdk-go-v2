@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Count":1,"IdentityPoolUsages":[{"DataStorage":1,"IdentityPoolId":"__IdentityPoolId__","LastModifiedDate":946684800,"SyncSessionsCount":1},{"DataStorage":1,"IdentityPoolId":"__IdentityPoolId__","LastModifiedDate":946684800,"SyncSessionsCount":1}],"MaxResults":1,"NextToken":"__NextToken__"}

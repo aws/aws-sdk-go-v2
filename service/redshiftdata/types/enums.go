@@ -2,6 +2,25 @@
 
 package types
 
+type ExecutionMode string
+
+// Enum values for ExecutionMode
+const (
+	ExecutionModeTransaction ExecutionMode = "TRANSACTION"
+	ExecutionModeAutoCommit  ExecutionMode = "AUTO_COMMIT"
+)
+
+// Values returns all known values for ExecutionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionMode) Values() []ExecutionMode {
+	return []ExecutionMode{
+		"TRANSACTION",
+		"AUTO_COMMIT",
+	}
+}
+
 type ResultFormatString string
 
 // Enum values for ResultFormatString
@@ -18,6 +37,27 @@ func (ResultFormatString) Values() []ResultFormatString {
 	return []ResultFormatString{
 		"JSON",
 		"CSV",
+	}
+}
+
+type SessionStatusString string
+
+// Enum values for SessionStatusString
+const (
+	SessionStatusStringAvailable SessionStatusString = "AVAILABLE"
+	SessionStatusStringBusy      SessionStatusString = "BUSY"
+	SessionStatusStringClosed    SessionStatusString = "CLOSED"
+)
+
+// Values returns all known values for SessionStatusString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatusString) Values() []SessionStatusString {
+	return []SessionStatusString{
+		"AVAILABLE",
+		"BUSY",
+		"CLOSED",
 	}
 }
 

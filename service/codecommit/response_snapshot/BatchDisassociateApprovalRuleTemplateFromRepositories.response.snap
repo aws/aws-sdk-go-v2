@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories
+
+{"disassociatedRepositoryNames":["__Member__","__Member__"],"errors":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","repositoryName":"__RepositoryName__"},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","repositoryName":"__RepositoryName__"}]}

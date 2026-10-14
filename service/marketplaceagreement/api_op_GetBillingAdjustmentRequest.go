@@ -4,13 +4,10 @@ package marketplaceagreement
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -124,6 +121,47 @@ type GetBillingAdjustmentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillingAdjustmentRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillingAdjustmentRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillingAdjustmentRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentAmount != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_adjustmentAmount, *v.AdjustmentAmount)
+	}
+	if v.AdjustmentReasonCode != "" {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_adjustmentReasonCode, string(v.AdjustmentReasonCode))
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_agreementId, *v.AgreementId)
+	}
+	if v.BillingAdjustmentRequestId != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_billingAdjustmentRequestId, *v.BillingAdjustmentRequestId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBillingAdjustmentRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_currencyCode, *v.CurrencyCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_description, *v.Description)
+	}
+	if v.OriginalInvoiceId != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_originalInvoiceId, *v.OriginalInvoiceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetBillingAdjustmentRequestOutput_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBillingAdjustmentRequestOutput_updatedAt, *v.UpdatedAt)
+	}
+}
 func (v *GetBillingAdjustmentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBillingAdjustmentRequestOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -173,74 +211,29 @@ func (v *GetBillingAdjustmentRequestOutput) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 func (c *Client) addOperationGetBillingAdjustmentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingAdjustmentRequest, schemas.GetBillingAdjustmentRequestInput, schemas.GetBillingAdjustmentRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingAdjustmentRequest, schemas.GetBillingAdjustmentRequestInput, schemas.GetBillingAdjustmentRequestOutput), output: &GetBillingAdjustmentRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBillingAdjustmentRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBillingAdjustmentRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBillingAdjustmentRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +248,8 @@ func (c *Client) addOperationGetBillingAdjustmentRequestMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBillingAdjustmentRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBillingAdjustmentRequest",
-	}
 }

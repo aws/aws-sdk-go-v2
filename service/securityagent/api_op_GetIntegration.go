@@ -4,13 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about an integration.
@@ -37,18 +32,6 @@ type GetIntegrationInput struct {
 	IntegrationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIntegrationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IntegrationId != nil {
-		s.WriteString(schemas.GetIntegrationInput_integrationId, *v.IntegrationId)
-	}
 }
 
 type GetIntegrationOutput struct {
@@ -80,114 +63,51 @@ type GetIntegrationOutput struct {
 	// integration.
 	KmsKeyId *string
 
+	// The name of the private connection used to reach the integration's self-hosted
+	// instance over private networking, if one is configured.
+	PrivateConnectionName *string
+
+	// The Atlassian Cloud site URL for Atlassian integrations.
+	SiteUrl *string
+
+	// The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise
+	// Server or self-managed GitLab instance. This value is absent for SaaS
+	// integrations.
+	TargetUrl *string
+
+	// The payload URL of the integration's webhook, once it has been created. The
+	// signing secret is never returned on a read.
+	WebhookUrl *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *GetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIntegrationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIntegrationOutput_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetIntegrationOutput_displayName, v.DisplayName)
-		case schemas.GetIntegrationOutput_installationId:
-			v.InstallationId = new(string)
-			return d.ReadString(schemas.GetIntegrationOutput_installationId, v.InstallationId)
-		case schemas.GetIntegrationOutput_integrationId:
-			v.IntegrationId = new(string)
-			return d.ReadString(schemas.GetIntegrationOutput_integrationId, v.IntegrationId)
-		case schemas.GetIntegrationOutput_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.GetIntegrationOutput_kmsKeyId, v.KmsKeyId)
-		case schemas.GetIntegrationOutput_provider:
-			var ev string
-			if err := d.ReadString(schemas.GetIntegrationOutput_provider, &ev); err != nil {
-				return err
-			}
-			v.Provider = types.Provider(ev)
-			return nil
-		case schemas.GetIntegrationOutput_providerType:
-			var ev string
-			if err := d.ReadString(schemas.GetIntegrationOutput_providerType, &ev); err != nil {
-				return err
-			}
-			v.ProviderType = types.ProviderType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationInput, schemas.GetIntegrationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationInput, schemas.GetIntegrationOutput), output: &GetIntegrationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +122,8 @@ func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIntegration",
-	}
 }

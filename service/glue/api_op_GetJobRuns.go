@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves metadata for all runs of a given job definition.
@@ -46,6 +46,24 @@ type GetJobRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.GetJobRunsRequest_JobName, *v.JobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetJobRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJobRunsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetJobRunsOutput struct {
 
 	// A list of job-run metadata objects.
@@ -60,77 +78,51 @@ type GetJobRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobRunList(s, schemas.GetJobRunsResponse_JobRuns, v.JobRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJobRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetJobRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobRunsResponse_JobRuns:
+			return deserializeJobRunList(d, schemas.GetJobRunsResponse_JobRuns, &v.JobRuns)
+		case schemas.GetJobRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetJobRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRuns, schemas.GetJobRunsRequest, schemas.GetJobRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRuns, schemas.GetJobRunsRequest, schemas.GetJobRunsResponse), output: &GetJobRunsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetJobRuns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJobRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetJobRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +135,6 @@ func (c *Client) addOperationGetJobRunsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type GetJobRunsAPIClient interface {
 }
 
 var _ GetJobRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetJobRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetJobRuns",
-	}
-}

@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new item, or replaces an old item with a new item. If an item that
@@ -74,6 +74,18 @@ type PutItemInput struct {
 	// If you specify any attributes that are part of an index key, then the data
 	// types for those attributes must match those of the schema in the table's
 	// attribute definition.
+	//
+	// If the table has vector indexes, the following validations apply to write
+	// operations. A violation of any of these constraints results in a
+	// ValidationException :
+	//
+	//   - The vector attribute must be a list of numbers with dimensions matching the
+	//   index configuration.
+	//
+	//   - Vector values must fit in 32-bit IEEE-754 floating point format (f32).
+	//
+	//   - Partition key and inline filter attributes defined in the search schema
+	//   must have data types matching the index schema definition.
 	//
 	// Empty String and Binary attribute values are allowed. Attribute values of type
 	// String and Binary must have a length greater than zero if the attribute is used
@@ -240,6 +252,39 @@ type PutItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionExpression != nil {
+		s.WriteString(schemas.PutItemInput_ConditionExpression, *v.ConditionExpression)
+	}
+	if v.ConditionalOperator != "" {
+		s.WriteString(schemas.PutItemInput_ConditionalOperator, string(v.ConditionalOperator))
+	}
+	serializeExpectedAttributeMap(s, schemas.PutItemInput_Expected, v.Expected)
+	serializeExpressionAttributeNameMap(s, schemas.PutItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.PutItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	serializePutItemInputAttributeMap(s, schemas.PutItemInput_Item, v.Item)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.PutItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.PutItemInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+	if v.ReturnValues != "" {
+		s.WriteString(schemas.PutItemInput_ReturnValues, string(v.ReturnValues))
+	}
+	if v.ReturnValuesOnConditionCheckFailure != "" {
+		s.WriteString(schemas.PutItemInput_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.PutItemInput_TableName, *v.TableName)
+	}
+}
 func (in *PutItemInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -259,6 +304,9 @@ type PutItemOutput struct {
 	// the table and any indexes involved in the operation. ConsumedCapacity is only
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
 	// information, see [Capacity unity consumption for write operations]in the Amazon DynamoDB Developer Guide.
+	//
+	// If the table has vector indexes, the response includes a VectorIndexes field
+	// with VectorWriteRequestBytes consumed for each affected vector index.
 	//
 	// [Capacity unity consumption for write operations]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
 	ConsumedCapacity *types.ConsumedCapacity
@@ -290,68 +338,58 @@ type PutItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMap(s, schemas.PutItemOutput_Attributes, v.Attributes)
+	if v.ConsumedCapacity != nil {
+		s.WriteStruct(schemas.PutItemOutput_ConsumedCapacity)
+		v.ConsumedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemCollectionMetrics != nil {
+		s.WriteStruct(schemas.PutItemOutput_ItemCollectionMetrics)
+		v.ItemCollectionMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutItemOutput_Attributes:
+			return deserializeAttributeMap(d, schemas.PutItemOutput_Attributes, &v.Attributes)
+		case schemas.PutItemOutput_ConsumedCapacity:
+			v.ConsumedCapacity = &types.ConsumedCapacity{}
+			return v.ConsumedCapacity.Deserialize(d)
+		case schemas.PutItemOutput_ItemCollectionMetrics:
+			v.ItemCollectionMetrics = &types.ItemCollectionMetrics{}
+			return v.ItemCollectionMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput), output: &PutItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutItemDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -361,12 +399,6 @@ func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addOpPutItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -385,12 +417,6 @@ func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -440,12 +466,4 @@ func (c *Client) fetchOpPutItemDiscoverEndpoint(ctx context.Context, region stri
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opPutItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutItem",
-	}
 }

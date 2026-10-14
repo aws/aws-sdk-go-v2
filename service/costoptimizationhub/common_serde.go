@@ -22,9 +22,21 @@ func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ResourceDetailsMemberDocumentDbCluster:
+		s.WriteUnion(schema, schemas.ResourceDetails_documentDbCluster)
+		s.WriteStruct(schemas.ResourceDetails_documentDbCluster)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ResourceDetailsMemberDynamoDbReservedCapacity:
 		s.WriteUnion(schema, schemas.ResourceDetails_dynamoDbReservedCapacity)
 		s.WriteStruct(schemas.ResourceDetails_dynamoDbReservedCapacity)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ResourceDetailsMemberDynamoDbTable:
+		s.WriteUnion(schema, schemas.ResourceDetails_dynamoDbTable)
+		s.WriteStruct(schemas.ResourceDetails_dynamoDbTable)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -64,6 +76,12 @@ func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ResourceDetailsMemberElastiCacheCluster:
+		s.WriteUnion(schema, schemas.ResourceDetails_elastiCacheCluster)
+		s.WriteStruct(schemas.ResourceDetails_elastiCacheCluster)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ResourceDetailsMemberElastiCacheReservedInstances:
 		s.WriteUnion(schema, schemas.ResourceDetails_elastiCacheReservedInstances)
 		s.WriteStruct(schemas.ResourceDetails_elastiCacheReservedInstances)
@@ -73,6 +91,12 @@ func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	case *types.ResourceDetailsMemberLambdaFunction:
 		s.WriteUnion(schema, schemas.ResourceDetails_lambdaFunction)
 		s.WriteStruct(schemas.ResourceDetails_lambdaFunction)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ResourceDetailsMemberMemoryDbCluster:
+		s.WriteUnion(schema, schemas.ResourceDetails_memoryDbCluster)
+		s.WriteStruct(schemas.ResourceDetails_memoryDbCluster)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -118,9 +142,21 @@ func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ResourceDetailsMemberSageMakerEndpoint:
+		s.WriteUnion(schema, schemas.ResourceDetails_sageMakerEndpoint)
+		s.WriteStruct(schemas.ResourceDetails_sageMakerEndpoint)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ResourceDetailsMemberSageMakerSavingsPlans:
 		s.WriteUnion(schema, schemas.ResourceDetails_sageMakerSavingsPlans)
 		s.WriteStruct(schemas.ResourceDetails_sageMakerSavingsPlans)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ResourceDetailsMemberWorkSpaces:
+		s.WriteUnion(schema, schemas.ResourceDetails_workSpaces)
+		s.WriteStruct(schemas.ResourceDetails_workSpaces)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -138,8 +174,16 @@ func deserializeResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			vv := &types.ResourceDetailsMemberComputeSavingsPlans{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ResourceDetails_documentDbCluster:
+			vv := &types.ResourceDetailsMemberDocumentDbCluster{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ResourceDetails_dynamoDbReservedCapacity:
 			vv := &types.ResourceDetailsMemberDynamoDbReservedCapacity{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ResourceDetails_dynamoDbTable:
+			vv := &types.ResourceDetailsMemberDynamoDbTable{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ResourceDetails_ebsVolume:
@@ -166,12 +210,20 @@ func deserializeResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			vv := &types.ResourceDetailsMemberEcsService{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ResourceDetails_elastiCacheCluster:
+			vv := &types.ResourceDetailsMemberElastiCacheCluster{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ResourceDetails_elastiCacheReservedInstances:
 			vv := &types.ResourceDetailsMemberElastiCacheReservedInstances{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ResourceDetails_lambdaFunction:
 			vv := &types.ResourceDetailsMemberLambdaFunction{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ResourceDetails_memoryDbCluster:
+			vv := &types.ResourceDetailsMemberMemoryDbCluster{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ResourceDetails_memoryDbReservedInstances:
@@ -202,8 +254,16 @@ func deserializeResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			vv := &types.ResourceDetailsMemberRedshiftReservedInstances{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ResourceDetails_sageMakerEndpoint:
+			vv := &types.ResourceDetailsMemberSageMakerEndpoint{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ResourceDetails_sageMakerSavingsPlans:
 			vv := &types.ResourceDetailsMemberSageMakerSavingsPlans{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ResourceDetails_workSpaces:
+			vv := &types.ResourceDetailsMemberWorkSpaces{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -428,6 +488,7 @@ func serializeValidationExceptionDetails(s smithy.ShapeSerializer, schema *smith
 }
 
 func deserializeAccountEnrollmentStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountEnrollmentStatus) error {
+	*v = make([]types.AccountEnrollmentStatus, 0)
 	var vv types.AccountEnrollmentStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AccountEnrollmentStatus{}
@@ -441,6 +502,7 @@ func deserializeAccountEnrollmentStatuses(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -454,6 +516,7 @@ func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeActionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ActionType) error {
+	*v = make([]types.ActionType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -467,6 +530,7 @@ func deserializeActionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeEfficiencyMetricsByGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EfficiencyMetricsByGroup) error {
+	*v = make([]types.EfficiencyMetricsByGroup, 0)
 	var vv types.EfficiencyMetricsByGroup
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EfficiencyMetricsByGroup{}
@@ -480,6 +544,7 @@ func deserializeEfficiencyMetricsByGroupList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeImplementationEffortList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ImplementationEffort) error {
+	*v = make([]types.ImplementationEffort, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -493,6 +558,7 @@ func deserializeImplementationEffortList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMetricsByTimeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricsByTime) error {
+	*v = make([]types.MetricsByTime, 0)
 	var vv types.MetricsByTime
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricsByTime{}
@@ -506,6 +572,7 @@ func deserializeMetricsByTimeList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeMixedInstanceConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MixedInstanceConfiguration) error {
+	*v = make([]types.MixedInstanceConfiguration, 0)
 	var vv types.MixedInstanceConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MixedInstanceConfiguration{}
@@ -519,6 +586,7 @@ func deserializeMixedInstanceConfigurationList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeRecommendationIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -532,6 +600,7 @@ func deserializeRecommendationIdList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeRecommendationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Recommendation) error {
+	*v = make([]types.Recommendation, 0)
 	var vv types.Recommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Recommendation{}
@@ -545,6 +614,7 @@ func deserializeRecommendationList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeRecommendationSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationSummary) error {
+	*v = make([]types.RecommendationSummary, 0)
 	var vv types.RecommendationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendationSummary{}
@@ -558,6 +628,7 @@ func deserializeRecommendationSummariesList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -571,6 +642,7 @@ func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -584,6 +656,7 @@ func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeResourceIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -597,6 +670,7 @@ func deserializeResourceIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeResourceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceType) error {
+	*v = make([]types.ResourceType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -610,6 +684,7 @@ func deserializeResourceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSummaryMetricsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SummaryMetrics) error {
+	*v = make([]types.SummaryMetrics, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -623,6 +698,7 @@ func deserializeSummaryMetricsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -636,6 +712,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeUsageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Usage) error {
+	*v = make([]types.Usage, 0)
 	var vv types.Usage
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Usage{}
@@ -649,6 +726,7 @@ func deserializeUsageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeValidationExceptionDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionDetail) error {
+	*v = make([]types.ValidationExceptionDetail, 0)
 	var vv types.ValidationExceptionDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionDetail{}

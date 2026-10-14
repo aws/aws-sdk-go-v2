@@ -5,10 +5,10 @@ package signer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all available signing profiles in your AWS account. Returns only profiles
@@ -57,6 +57,28 @@ type ListSigningProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeCanceled != false {
+		s.WriteBool(schemas.ListSigningProfilesRequest_includeCanceled, v.IncludeCanceled)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSigningProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.ListSigningProfilesRequest_platformId, *v.PlatformId)
+	}
+	serializeStatuses(s, schemas.ListSigningProfilesRequest_statuses, v.Statuses)
+}
+
 type ListSigningProfilesOutput struct {
 
 	// Value for specifying the next set of paginated results to return.
@@ -73,74 +95,48 @@ type ListSigningProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningProfilesResponse_nextToken, *v.NextToken)
+	}
+	serializeSigningProfiles(s, schemas.ListSigningProfilesResponse_profiles, v.Profiles)
+}
+func (v *ListSigningProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSigningProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSigningProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSigningProfilesResponse_nextToken, v.NextToken)
+		case schemas.ListSigningProfilesResponse_profiles:
+			return deserializeSigningProfiles(d, schemas.ListSigningProfilesResponse_profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningProfiles, schemas.ListSigningProfilesRequest, schemas.ListSigningProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningProfiles, schemas.ListSigningProfilesRequest, schemas.ListSigningProfilesResponse), output: &ListSigningProfilesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSigningProfiles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSigningProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSigningProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +149,6 @@ func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +250,3 @@ type ListSigningProfilesAPIClient interface {
 }
 
 var _ ListSigningProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSigningProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSigningProfiles",
-	}
-}

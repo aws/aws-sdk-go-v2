@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Updates an entitlement. You can change an entitlement's description,
@@ -65,6 +64,33 @@ type UpdateFlowEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_Description, *v.Description)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.UpdateFlowEntitlementRequest_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntitlementArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_EntitlementArn, *v.EntitlementArn)
+	}
+	if v.EntitlementStatus != "" {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_EntitlementStatus, string(v.EntitlementStatus))
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementRequest_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfString(s, schemas.UpdateFlowEntitlementRequest_Subscribers, v.Subscribers)
+}
+
 type UpdateFlowEntitlementOutput struct {
 
 	//  The new configuration of the entitlement that you updated.
@@ -79,77 +105,56 @@ type UpdateFlowEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowEntitlementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entitlement != nil {
+		s.WriteStruct(schemas.UpdateFlowEntitlementResponse_Entitlement)
+		v.Entitlement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowEntitlementResponse_FlowArn, *v.FlowArn)
+	}
+}
+func (v *UpdateFlowEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowEntitlementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowEntitlementResponse_Entitlement:
+			v.Entitlement = &types.Entitlement{}
+			return v.Entitlement.Deserialize(d)
+		case schemas.UpdateFlowEntitlementResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.UpdateFlowEntitlementResponse_FlowArn, v.FlowArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowEntitlement, schemas.UpdateFlowEntitlementRequest, schemas.UpdateFlowEntitlementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowEntitlement, schemas.UpdateFlowEntitlementRequest, schemas.UpdateFlowEntitlementResponse), output: &UpdateFlowEntitlementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowEntitlement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFlowEntitlement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFlowEntitlementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFlowEntitlement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +169,8 @@ func (c *Client) addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFlowEntitlement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFlowEntitlement",
-	}
 }

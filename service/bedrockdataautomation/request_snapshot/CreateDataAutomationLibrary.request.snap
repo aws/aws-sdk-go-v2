@@ -1,0 +1,5 @@
+PUT /data-automation-libraries/
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","encryptionConfiguration":{"kmsEncryptionContext":{"key0":"__Value__"},"kmsKeyId":"__KmsKeyId__"},"libraryDescription":"__LibraryDescription__","libraryName":"__LibraryName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

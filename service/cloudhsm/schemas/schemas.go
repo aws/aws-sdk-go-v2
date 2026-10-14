@@ -173,7 +173,7 @@ var ClientVersion_FIVE_THREE *smithy.Schema
 var CloudHsmInternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsm",
 	Name:      "CloudHsmInternalException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var CloudHsmInternalException_message *smithy.Schema
 
 var CloudHsmInternalException_retryable *smithy.Schema
@@ -191,7 +191,7 @@ var CloudHsmObjectState_DEGRADED *smithy.Schema
 var CloudHsmServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsm",
 	Name:      "CloudHsmServiceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var CloudHsmServiceException_message *smithy.Schema
 
 var CloudHsmServiceException_retryable *smithy.Schema
@@ -259,7 +259,7 @@ var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudhsm",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_message *smithy.Schema
 
 var InvalidRequestException_retryable *smithy.Schema

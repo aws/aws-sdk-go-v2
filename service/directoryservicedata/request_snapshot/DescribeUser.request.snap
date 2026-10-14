@@ -1,0 +1,5 @@
+POST /Users/DescribeUser?DirectoryId=__DirectoryId__
+
+Content-Type: application/json
+
+{"OtherAttributes":["__Member__","__Member__"],"Realm":"__Realm__","SAMAccountName":"__SAMAccountName__"}

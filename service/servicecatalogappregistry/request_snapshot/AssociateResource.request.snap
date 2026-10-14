@@ -1,0 +1,5 @@
+PUT /applications/__Application__/resources/CFN_STACK/__Resource__
+
+Content-Type: application/json
+
+{"options":["APPLY_APPLICATION_TAG","APPLY_APPLICATION_TAG"]}

@@ -23,6 +23,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.DuplicateTagKeysException,
 			New:    func() any { return &types.DuplicateTagKeysException{} },
 		},
+		"com.amazonaws.directconnect#LimitExceededException": {
+			Schema: schemas.LimitExceededException,
+			New:    func() any { return &types.LimitExceededException{} },
+		},
 		"com.amazonaws.directconnect#TooManyTagsException": {
 			Schema: schemas.TooManyTagsException,
 			New:    func() any { return &types.TooManyTagsException{} },

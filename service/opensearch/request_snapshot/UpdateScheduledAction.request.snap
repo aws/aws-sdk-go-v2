@@ -1,0 +1,5 @@
+PUT /2021-01-01/opensearch/domain/__DomainName__/scheduledAction/update
+
+Content-Type: application/json
+
+{"ActionID":"__ActionID__","ActionType":"SERVICE_SOFTWARE_UPDATE","DesiredStartTime":1,"ScheduleAt":"NOW"}

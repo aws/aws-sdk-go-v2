@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateRole&Description=__Description__&MaxSessionDuration=1&RoleName=__RoleName__&Version=2010-05-08

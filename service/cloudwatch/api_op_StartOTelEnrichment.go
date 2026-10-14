@@ -4,10 +4,11 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Enables enrichment and PromQL access for CloudWatch vended metrics for [supported Amazon Web Services resources] in the
@@ -18,7 +19,14 @@ import (
 // Before calling this operation, you must enable resource tags on telemetry for
 // your account. For more information, see [Enable resource tags on telemetry].
 //
+// Optionally, IncludeFilters and ExcludeFilters limit enrichment to a subset of
+// the account's metrics. These filters are stored only when this operation starts
+// enrichment. Calling StartOTelEnrichment for an account where enrichment is
+// already running has no effect and does not modify the filters that are applied.
+// To change them, use [UpdateOTelEnrichment].
+//
 // [supported Amazon Web Services resources]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
+// [UpdateOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
 // [Enable resource tags on telemetry]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html
 func (c *Client) StartOTelEnrichment(ctx context.Context, params *StartOTelEnrichmentInput, optFns ...func(*Options)) (*StartOTelEnrichmentOutput, error) {
 	if params == nil {
@@ -36,75 +44,108 @@ func (c *Client) StartOTelEnrichment(ctx context.Context, params *StartOTelEnric
 }
 
 type StartOTelEnrichmentInput struct {
+
+	// The metric namespaces, and the metric names, to leave unenriched. If this
+	// parameter is omitted, nothing is excluded.
+	//
+	// Amazon CloudWatch applies ExcludeFilters after IncludeFilters , so a metric that
+	// both parameters match is not enriched.
+	//
+	// A maximum of 100 filters is allowed across IncludeFilters and ExcludeFilters
+	// combined.
+	ExcludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The metric namespaces, and the metric names, to enrich. If this parameter is
+	// omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+	// scope.
+	//
+	// A maximum of 100 filters is allowed across IncludeFilters and ExcludeFilters
+	// combined.
+	IncludeFilters []types.OTelEnrichmentMetricSelector
+
 	noSmithyDocumentSerde
 }
 
+func (v *StartOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOTelEnrichmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_IncludeFilters, v.IncludeFilters)
+}
+
 type StartOTelEnrichmentOutput struct {
+
+	// The date and time that enrichment started for the account.
+	CreatedAt *time.Time
+
+	// The exclude filters that are stored for the account.
+	ExcludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The include filters that are stored for the account.
+	IncludeFilters []types.OTelEnrichmentMetricSelector
+
+	// The date and time that the enrichment configuration for the account was last
+	// stored.
+	UpdatedAt *time.Time
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartOTelEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOTelEnrichmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
+	}
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
+	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartOTelEnrichmentOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StartOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOTelEnrichmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOTelEnrichmentOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.StartOTelEnrichmentOutput_ExcludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.StartOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
+		case schemas.StartOTelEnrichmentOutput_IncludeFilters:
+			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.StartOTelEnrichmentOutput_IncludeFilters, &v.IncludeFilters)
+		case schemas.StartOTelEnrichmentOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartOTelEnrichmentOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOTelEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentInput, schemas.StartOTelEnrichmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartOTelEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentInput, schemas.StartOTelEnrichmentOutput), output: &StartOTelEnrichmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartOTelEnrichment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartOTelEnrichment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -113,10 +154,7 @@ func (c *Client) addOperationStartOTelEnrichmentMiddlewares(stack *middleware.St
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartOTelEnrichment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
+	if err = addOpStartOTelEnrichmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +169,8 @@ func (c *Client) addOperationStartOTelEnrichmentMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartOTelEnrichment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartOTelEnrichment",
-	}
 }

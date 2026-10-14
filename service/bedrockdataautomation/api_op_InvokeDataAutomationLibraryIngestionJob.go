@@ -5,12 +5,8 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Async API: Invoke data automation library ingestion job
@@ -69,43 +65,6 @@ type InvokeDataAutomationLibraryIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeDataAutomationLibraryIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeDataAutomationLibraryIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_clientToken, *v.ClientToken)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_entityType, string(v.EntityType))
-	}
-	if v.InputConfiguration != nil {
-		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_inputConfiguration)
-		v.InputConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LibraryArn != nil {
-		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_libraryArn, *v.LibraryArn)
-	}
-	if v.NotificationConfiguration != nil {
-		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_notificationConfiguration)
-		v.NotificationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OperationType != "" {
-		s.WriteString(schemas.InvokeDataAutomationLibraryIngestionJobRequest_operationType, string(v.OperationType))
-	}
-	if v.OutputConfiguration != nil {
-		s.WriteStruct(schemas.InvokeDataAutomationLibraryIngestionJobRequest_outputConfiguration)
-		v.OutputConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.InvokeDataAutomationLibraryIngestionJobRequest_tags, v.Tags)
-}
-
 // Invoke DataAutomationLibraryIngestionJob Response
 type InvokeDataAutomationLibraryIngestionJobOutput struct {
 
@@ -118,73 +77,23 @@ type InvokeDataAutomationLibraryIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeDataAutomationLibraryIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeDataAutomationLibraryIngestionJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeDataAutomationLibraryIngestionJobResponse_jobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.InvokeDataAutomationLibraryIngestionJobResponse_jobArn, v.JobArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationInvokeDataAutomationLibraryIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeDataAutomationLibraryIngestionJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomationLibraryIngestionJob, schemas.InvokeDataAutomationLibraryIngestionJobRequest, schemas.InvokeDataAutomationLibraryIngestionJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeDataAutomationLibraryIngestionJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeDataAutomationLibraryIngestionJob, schemas.InvokeDataAutomationLibraryIngestionJobRequest, schemas.InvokeDataAutomationLibraryIngestionJobResponse), output: &InvokeDataAutomationLibraryIngestionJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeDataAutomationLibraryIngestionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -194,12 +103,6 @@ func (c *Client) addOperationInvokeDataAutomationLibraryIngestionJobMiddlewares(
 		return err
 	}
 	if err = addOpInvokeDataAutomationLibraryIngestionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeDataAutomationLibraryIngestionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +115,6 @@ func (c *Client) addOperationInvokeDataAutomationLibraryIngestionJobMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,12 +154,4 @@ func (m *idempotencyToken_initializeOpInvokeDataAutomationLibraryIngestionJob) H
 }
 func addIdempotencyToken_opInvokeDataAutomationLibraryIngestionJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpInvokeDataAutomationLibraryIngestionJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opInvokeDataAutomationLibraryIngestionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeDataAutomationLibraryIngestionJob",
-	}
 }

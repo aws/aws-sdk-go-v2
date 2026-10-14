@@ -1,0 +1,3 @@
+GET /executions?actionType=__ActionType__&maxResults=1&nextToken=__NextToken__&resolveToResourceId=__ResolveToResourceId__&resolveToResourceType=ASSET&targetResourceId=__TargetResourceId__&targetResourceType=ASSET
+
+

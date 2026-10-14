@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/users?operation=add
+
+Content-Type: application/json
+
+{"UserEmailList":["__Member__","__Member__"],"UserType":"PrivateUser"}

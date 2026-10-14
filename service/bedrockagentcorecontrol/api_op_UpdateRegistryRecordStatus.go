@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,27 +54,6 @@ type UpdateRegistryRecordStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRegistryRecordStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRegistryRecordStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRegistryRecordStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RecordId != nil {
-		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_recordId, *v.RecordId)
-	}
-	if v.RegistryId != nil {
-		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_registryId, *v.RegistryId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.UpdateRegistryRecordStatusRequest_statusReason, *v.StatusReason)
-	}
-}
-
 type UpdateRegistryRecordStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registry record.
@@ -118,104 +92,29 @@ type UpdateRegistryRecordStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRegistryRecordStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRegistryRecordStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRegistryRecordStatusResponse_recordArn:
-			v.RecordArn = new(string)
-			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_recordArn, v.RecordArn)
-		case schemas.UpdateRegistryRecordStatusResponse_recordId:
-			v.RecordId = new(string)
-			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_recordId, v.RecordId)
-		case schemas.UpdateRegistryRecordStatusResponse_registryArn:
-			v.RegistryArn = new(string)
-			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_registryArn, v.RegistryArn)
-		case schemas.UpdateRegistryRecordStatusResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateRegistryRecordStatusResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RegistryRecordStatus(ev)
-			return nil
-		case schemas.UpdateRegistryRecordStatusResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.UpdateRegistryRecordStatusResponse_statusReason, v.StatusReason)
-		case schemas.UpdateRegistryRecordStatusResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateRegistryRecordStatusResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRegistryRecordStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRegistryRecordStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecordStatus, schemas.UpdateRegistryRecordStatusRequest, schemas.UpdateRegistryRecordStatusResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRegistryRecordStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegistryRecordStatus, schemas.UpdateRegistryRecordStatusRequest, schemas.UpdateRegistryRecordStatusResponse), output: &UpdateRegistryRecordStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRegistryRecordStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRegistryRecordStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRegistryRecordStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +129,8 @@ func (c *Client) addOperationUpdateRegistryRecordStatusMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRegistryRecordStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRegistryRecordStatus",
-	}
 }

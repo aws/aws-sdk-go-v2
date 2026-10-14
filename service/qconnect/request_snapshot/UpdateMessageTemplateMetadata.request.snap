@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/messageTemplates/__MessageTemplateId__/metadata
+
+Content-Type: application/json
+
+{"description":"__Description__","groupingConfiguration":{"criteria":"__Criteria__","values":["__Member__","__Member__"]},"name":"__Name__"}

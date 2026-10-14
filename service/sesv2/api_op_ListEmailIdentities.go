@@ -5,10 +5,10 @@ package sesv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all of the email identities that are associated with your
@@ -37,6 +37,11 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 // but are no longer verified.
 type ListEmailIdentitiesInput struct {
 
+	// An object that contains filters to apply when listing email identities. You can
+	// filter by a substring of the identity name, by identity type, or by verification
+	// status.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListEmailIdentities to indicate the
 	// position in the list of identities.
 	NextToken *string
@@ -50,6 +55,22 @@ type ListEmailIdentitiesInput struct {
 	PageSize *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEmailIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityFilter(s, schemas.ListEmailIdentitiesRequest_Filter, v.Filter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListEmailIdentitiesRequest_PageSize, *v.PageSize)
+	}
 }
 
 // A list of all of the identities that you've attempted to verify, regardless of
@@ -71,74 +92,48 @@ type ListEmailIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailIdentitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEmailIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailIdentitiesResponse_EmailIdentities:
+			return deserializeIdentityInfoList(d, schemas.ListEmailIdentitiesResponse_EmailIdentities, &v.EmailIdentities)
+		case schemas.ListEmailIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailIdentities, schemas.ListEmailIdentitiesRequest, schemas.ListEmailIdentitiesResponse), output: &ListEmailIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailIdentities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEmailIdentities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEmailIdentities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +146,6 @@ func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +252,3 @@ type ListEmailIdentitiesAPIClient interface {
 }
 
 var _ ListEmailIdentitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEmailIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEmailIdentities",
-	}
-}

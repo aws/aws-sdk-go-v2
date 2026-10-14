@@ -5,10 +5,10 @@ package schemas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Search the schemas
@@ -50,6 +50,27 @@ type SearchSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keywords != nil {
+		s.WriteString(schemas.SearchSchemasRequest_Keywords, *v.Keywords)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.SearchSchemasRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSchemasRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.SearchSchemasRequest_RegistryName, *v.RegistryName)
+	}
+}
+
 type SearchSchemasOutput struct {
 
 	// The token that specifies the next page of results to return. To request the
@@ -66,77 +87,51 @@ type SearchSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSchemasResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSearchSchemaSummary(s, schemas.SearchSchemasResponse_Schemas, v.Schemas)
+}
+func (v *SearchSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSchemasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSchemasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchSchemasResponse_NextToken, v.NextToken)
+		case schemas.SearchSchemasResponse_Schemas:
+			return deserialize__listOfSearchSchemaSummary(d, schemas.SearchSchemasResponse_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSchemas, schemas.SearchSchemasRequest, schemas.SearchSchemasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSchemas, schemas.SearchSchemasRequest, schemas.SearchSchemasResponse), output: &SearchSchemasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchSchemas{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchSchemas"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchSchemasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchSchemas(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +144,6 @@ func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type SearchSchemasAPIClient interface {
 }
 
 var _ SearchSchemasAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchSchemas(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchSchemas",
-	}
-}

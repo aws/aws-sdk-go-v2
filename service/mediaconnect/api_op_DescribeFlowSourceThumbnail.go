@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the thumbnail for the flow source.
@@ -37,6 +36,18 @@ type DescribeFlowSourceThumbnailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceThumbnailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceThumbnailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceThumbnailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowSourceThumbnailRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type DescribeFlowSourceThumbnailOutput struct {
 
 	// The details of the thumbnail, including thumbnail base64 string, timecode and
@@ -49,77 +60,50 @@ type DescribeFlowSourceThumbnailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceThumbnailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceThumbnailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceThumbnailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThumbnailDetails != nil {
+		s.WriteStruct(schemas.DescribeFlowSourceThumbnailResponse_ThumbnailDetails)
+		v.ThumbnailDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlowSourceThumbnailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowSourceThumbnailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowSourceThumbnailResponse_ThumbnailDetails:
+			v.ThumbnailDetails = &types.ThumbnailDetails{}
+			return v.ThumbnailDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowSourceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceThumbnail, schemas.DescribeFlowSourceThumbnailRequest, schemas.DescribeFlowSourceThumbnailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlowSourceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceThumbnail, schemas.DescribeFlowSourceThumbnailRequest, schemas.DescribeFlowSourceThumbnailResponse), output: &DescribeFlowSourceThumbnailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlowSourceThumbnail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFlowSourceThumbnail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFlowSourceThumbnailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFlowSourceThumbnail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +118,8 @@ func (c *Client) addOperationDescribeFlowSourceThumbnailMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFlowSourceThumbnail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFlowSourceThumbnail",
-	}
 }

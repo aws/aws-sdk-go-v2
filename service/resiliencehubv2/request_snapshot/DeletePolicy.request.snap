@@ -1,0 +1,5 @@
+POST /v2/delete-policy
+
+Content-Type: application/json
+
+{"policyArn":"__PolicyArn__"}

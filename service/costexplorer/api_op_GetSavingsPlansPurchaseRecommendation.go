@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the Savings Plans recommendations for your account. First use
@@ -83,6 +82,41 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansPurchaseRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansPurchaseRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_AccountScope, string(v.AccountScope))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.GetSavingsPlansPurchaseRecommendationRequest_PageSize, v.PageSize)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_PaymentOption, string(v.PaymentOption))
+	}
+	if v.SavingsPlansType != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_SavingsPlansType, string(v.SavingsPlansType))
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_TermInYears, string(v.TermInYears))
+	}
+}
+
 type GetSavingsPlansPurchaseRecommendationOutput struct {
 
 	// Information that regards this specific recommendation set.
@@ -103,77 +137,64 @@ type GetSavingsPlansPurchaseRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansPurchaseRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansPurchaseRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.SavingsPlansPurchaseRecommendation != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse_SavingsPlansPurchaseRecommendation)
+		v.SavingsPlansPurchaseRecommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSavingsPlansPurchaseRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlansPurchaseRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_Metadata:
+			v.Metadata = &types.SavingsPlansPurchaseRecommendationMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_SavingsPlansPurchaseRecommendation:
+			v.SavingsPlansPurchaseRecommendation = &types.SavingsPlansPurchaseRecommendation{}
+			return v.SavingsPlansPurchaseRecommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansPurchaseRecommendation, schemas.GetSavingsPlansPurchaseRecommendationRequest, schemas.GetSavingsPlansPurchaseRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansPurchaseRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansPurchaseRecommendation, schemas.GetSavingsPlansPurchaseRecommendationRequest, schemas.GetSavingsPlansPurchaseRecommendationResponse), output: &GetSavingsPlansPurchaseRecommendationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlansPurchaseRecommendation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSavingsPlansPurchaseRecommendation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSavingsPlansPurchaseRecommendationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansPurchaseRecommendation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +209,8 @@ func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSavingsPlansPurchaseRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSavingsPlansPurchaseRecommendation",
-	}
 }

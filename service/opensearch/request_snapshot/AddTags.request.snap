@@ -1,0 +1,5 @@
+POST /2021-01-01/tags
+
+Content-Type: application/json
+
+{"ARN":"__ARN__","TagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

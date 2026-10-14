@@ -1,0 +1,5 @@
+PUT /config/antenna-downlink/__ConfigId__
+
+Content-Type: application/json
+
+{"configData":{"antennaDownlinkConfig":{"spectrumConfig":{"bandwidth":{"units":"GHz","value":1},"centerFrequency":{"units":"GHz","value":1},"polarization":"RIGHT_HAND"}}},"name":"__Name__"}

@@ -630,6 +630,26 @@ func (m *validateOpUpdateCallAnalyticsCategory) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLanguageModel struct {
+}
+
+func (*validateOpUpdateLanguageModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLanguageModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLanguageModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLanguageModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMedicalVocabulary struct {
 }
 
@@ -814,6 +834,10 @@ func addOpUpdateCallAnalyticsCategoryValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateCallAnalyticsCategory{}, middleware.After)
 }
 
+func addOpUpdateLanguageModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLanguageModel{}, middleware.After)
+}
+
 func addOpUpdateMedicalVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMedicalVocabulary{}, middleware.After)
 }
@@ -858,6 +882,21 @@ func validateContentRedaction(v *types.ContentRedaction) error {
 	}
 	if len(v.RedactionOutput) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RedactionOutput"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if v.KMSKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KMSKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1120,6 +1159,11 @@ func validateOpCreateLanguageModelInput(v *CreateLanguageModelInput) error {
 			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1174,6 +1218,11 @@ func validateOpCreateVocabularyFilterInput(v *CreateVocabularyFilterInput) error
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1195,6 +1244,11 @@ func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1684,6 +1738,26 @@ func validateOpUpdateCallAnalyticsCategoryInput(v *UpdateCallAnalyticsCategoryIn
 	}
 }
 
+func validateOpUpdateLanguageModelInput(v *UpdateLanguageModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLanguageModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateMedicalVocabularyInput(v *UpdateMedicalVocabularyInput) error {
 	if v == nil {
 		return nil
@@ -1713,6 +1787,11 @@ func validateOpUpdateVocabularyFilterInput(v *UpdateVocabularyFilterInput) error
 	if v.VocabularyFilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFilterName"))
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1730,6 +1809,11 @@ func validateOpUpdateVocabularyInput(v *UpdateVocabularyInput) error {
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

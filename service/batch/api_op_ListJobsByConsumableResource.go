@@ -5,10 +5,10 @@ package batch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Batch jobs that require a specific consumable resource.
@@ -72,6 +72,25 @@ type ListJobsByConsumableResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsByConsumableResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsByConsumableResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsByConsumableResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResource != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceRequest_consumableResource, *v.ConsumableResource)
+	}
+	serializeListJobsByConsumableResourceFilterList(s, schemas.ListJobsByConsumableResourceRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobsByConsumableResourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListJobsByConsumableResourceOutput struct {
 
 	// The list of jobs that require the specified consumable resources.
@@ -91,77 +110,51 @@ type ListJobsByConsumableResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsByConsumableResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsByConsumableResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsByConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListJobsByConsumableResourceSummaryList(s, schemas.ListJobsByConsumableResourceResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsByConsumableResourceResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobsByConsumableResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsByConsumableResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsByConsumableResourceResponse_jobs:
+			return deserializeListJobsByConsumableResourceSummaryList(d, schemas.ListJobsByConsumableResourceResponse_jobs, &v.Jobs)
+		case schemas.ListJobsByConsumableResourceResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsByConsumableResourceResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsByConsumableResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobsByConsumableResource, schemas.ListJobsByConsumableResourceRequest, schemas.ListJobsByConsumableResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobsByConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobsByConsumableResource, schemas.ListJobsByConsumableResourceRequest, schemas.ListJobsByConsumableResourceResponse), output: &ListJobsByConsumableResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobsByConsumableResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListJobsByConsumableResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListJobsByConsumableResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobsByConsumableResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +167,6 @@ func (c *Client) addOperationListJobsByConsumableResourceMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -290,11 +277,3 @@ type ListJobsByConsumableResourceAPIClient interface {
 }
 
 var _ ListJobsByConsumableResourceAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListJobsByConsumableResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListJobsByConsumableResource",
-	}
-}

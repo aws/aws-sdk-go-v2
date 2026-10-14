@@ -1,0 +1,5 @@
+POST /configuration/account/storage
+
+Content-Type: application/json
+
+{"disallowIngestNullNaN":true,"disassociatedDataStorage":"ENABLED","multiLayerStorage":{"customerManagedS3Storage":{"roleArn":"__RoleArn__","s3ResourceArn":"__S3ResourceArn__"}},"retentionPeriod":{"numberOfDays":1,"unlimited":true},"storageType":"SITEWISE_DEFAULT_STORAGE","warmTier":"ENABLED","warmTierRetentionPeriod":{"numberOfDays":1,"unlimited":true}}

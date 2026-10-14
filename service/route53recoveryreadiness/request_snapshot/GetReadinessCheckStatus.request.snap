@@ -1,0 +1,3 @@
+GET /readinesschecks/__ReadinessCheckName__/status?maxResults=1&nextToken=__NextToken__
+
+

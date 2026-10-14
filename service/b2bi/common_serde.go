@@ -404,6 +404,7 @@ func serializeX12ValidationRules(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapabilitySummary) error {
+	*v = make([]types.CapabilitySummary, 0)
 	var vv types.CapabilitySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CapabilitySummary{}
@@ -417,6 +418,7 @@ func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -430,6 +432,7 @@ func deserializeCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]stri
 }
 
 func deserializeInstructionsDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.S3Location) error {
+	*v = make([]types.S3Location, 0)
 	var vv types.S3Location
 	return smithy.ReadList(d, s, func() error {
 		vv = types.S3Location{}
@@ -443,6 +446,7 @@ func deserializeInstructionsDocuments(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SampleDocumentKeys) error {
+	*v = make([]types.SampleDocumentKeys, 0)
 	var vv types.SampleDocumentKeys
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SampleDocumentKeys{}
@@ -456,6 +460,7 @@ func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeParsedSplitFileContentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -469,6 +474,7 @@ func deserializeParsedSplitFileContentsList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializePartnershipCapabilities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -482,6 +488,7 @@ func deserializePartnershipCapabilities(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializePartnershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PartnershipSummary) error {
+	*v = make([]types.PartnershipSummary, 0)
 	var vv types.PartnershipSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PartnershipSummary{}
@@ -495,6 +502,7 @@ func deserializePartnershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProfileSummary) error {
+	*v = make([]types.ProfileSummary, 0)
 	var vv types.ProfileSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ProfileSummary{}
@@ -508,6 +516,7 @@ func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeS3LocationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.S3Location) error {
+	*v = make([]types.S3Location, 0)
 	var vv types.S3Location
 	return smithy.ReadList(d, s, func() error {
 		vv = types.S3Location{}
@@ -521,6 +530,7 @@ func deserializeS3LocationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -534,6 +544,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -547,6 +558,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeTransformerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TransformerSummary) error {
+	*v = make([]types.TransformerSummary, 0)
 	var vv types.TransformerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TransformerSummary{}
@@ -560,6 +572,7 @@ func deserializeTransformerList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeValidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -573,6 +586,7 @@ func deserializeValidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeX12ValidationRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.X12ValidationRule) error {
+	*v = make([]types.X12ValidationRule, 0)
 	var vv types.X12ValidationRule
 	return smithy.ReadList(d, s, func() error {
 

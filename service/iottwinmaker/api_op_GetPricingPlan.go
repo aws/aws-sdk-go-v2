@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +32,22 @@ type GetPricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPricingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetPricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPricingPlanRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetPricingPlanOutput struct {
 
 	// The chosen pricing plan for the current billing cycle.
@@ -47,77 +64,58 @@ type GetPricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPricingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentPricingPlan != nil {
+		s.WriteStruct(schemas.GetPricingPlanResponse_currentPricingPlan)
+		v.CurrentPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingPricingPlan != nil {
+		s.WriteStruct(schemas.GetPricingPlanResponse_pendingPricingPlan)
+		v.PendingPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPricingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPricingPlanResponse_currentPricingPlan:
+			v.CurrentPricingPlan = &types.PricingPlan{}
+			return v.CurrentPricingPlan.Deserialize(d)
+		case schemas.GetPricingPlanResponse_pendingPricingPlan:
+			v.PendingPricingPlan = &types.PricingPlan{}
+			return v.PendingPricingPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPricingPlan, schemas.GetPricingPlanRequest, schemas.GetPricingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPricingPlan, schemas.GetPricingPlanRequest, schemas.GetPricingPlanResponse), output: &GetPricingPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPricingPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPricingPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opGetPricingPlanMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPricingPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -130,12 +128,6 @@ func (c *Client) addOperationGetPricingPlanMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -169,12 +161,4 @@ func (m *endpointPrefix_opGetPricingPlanMiddleware) HandleFinalize(ctx context.C
 }
 func addEndpointPrefix_opGetPricingPlanMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetPricingPlanMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetPricingPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPricingPlan",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AccessGroupId=__AccessGroupId__&Action=RevokeClientVpnIngress&ClientVpnEndpointId=__ClientVpnEndpointId__&DryRun=true&RevokeAllGroups=true&TargetNetworkCidr=__TargetNetworkCidr__&Version=2016-11-15

@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DeleteThemeForStack
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡iStackNamem__StackName__

@@ -27,6 +27,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshiftdata#ActiveWaitingRequestsExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.redshiftdata#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of active requests with <code>WaitTimeSeconds</code> for the same SQL statement exceeds the limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshiftdata#BatchExecuteStatement": {
             "type": "operation",
             "input": {
@@ -88,7 +101,7 @@
                 "Sqls": {
                     "target": "com.amazonaws.redshiftdata#SqlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more SQL statements to run. The SQL statements are run as a single transaction. They run serially in the order of the array. Subsequent SQL statements don't start until the previous statement in the array completes. If any SQL statement fails, then because they are run as one transaction, all work is rolled back.</p>",
+                        "smithy.api#documentation": "<p>One or more SQL statements to run. The SQL statements run serially in the order of the array. Subsequent SQL statements don't start until the previous statement in the array completes. By default, the SQL statements are run as a single transaction. If any SQL statement fails, all work is rolled back. To change this behavior, see the <code>ExecutionMode</code> parameter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -131,7 +144,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.redshiftdata#SqlParametersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the SQL statements. The parameters are shared across all SQL statements in the batch.</p>"
+                        "smithy.api#documentation": "<p>The parameters for the SQL statements. The parameters are available to all SQL statements in the batch. Each statement can reference any subset of the provided parameters. Each provided parameter must be referenced by at least one SQL statement in the batch.</p>"
                     }
                 },
                 "WorkgroupName": {
@@ -163,6 +176,18 @@
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
+                    }
+                },
+                "ExecutionMode": {
+                    "target": "com.amazonaws.redshiftdata#ExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how the SQL statements in the batch are run. If set to <code>TRANSACTION</code> (the default), all SQL statements are run as a single transaction and they are committed or rolled back together. If set to <code>AUTO_COMMIT</code>, each SQL statement is committed individually, and a failure of one statement does not affect the others.</p>"
+                    }
+                },
+                "WaitTimeSeconds": {
+                    "target": "com.amazonaws.redshiftdata#WaitTimeSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait for all SQL statements in the batch to complete execution before returning the response. If the SQL statements do not complete within the specified time, the response returns the current status. The maximum value is 30 seconds.</p>"
                     }
                 }
             },
@@ -225,6 +250,24 @@
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshiftdata#StatementStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the SQL statement. Status values are defined as follows: </p> <ul> <li> <p>ABORTED - The query run was stopped by the user. </p> </li> <li> <p>FAILED - The query run failed. </p> </li> <li> <p>FINISHED - The query has finished running. </p> </li> <li> <p>PICKED - The query has been chosen to be run. </p> </li> <li> <p>STARTED - The query run has started. </p> </li> <li> <p>SUBMITTED - The query was submitted, but not yet processed. </p> </li> </ul>"
+                    }
+                },
+                "RedshiftPid": {
+                    "target": "com.amazonaws.redshiftdata#BoxedLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process identifier from Amazon Redshift. </p>"
+                    }
+                },
+                "HasResultSet": {
+                    "target": "com.amazonaws.redshiftdata#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set. The value is true if any substatement returns a result set.</p>"
                     }
                 }
             },
@@ -464,6 +507,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#ActiveWaitingRequestsExceededException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -486,6 +532,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the SQL statement to describe. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. A suffix indicates the number of the SQL statement. For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatement</code>, and <code>ListStatements</code>. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "WaitTimeSeconds": {
+                    "target": "com.amazonaws.redshiftdata#WaitTimeSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait for the SQL statement to complete execution before returning the description. The maximum value is 30 seconds.</p>"
                     }
                 }
             },
@@ -626,6 +678,12 @@
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
+                    }
+                },
+                "ExecutionMode": {
+                    "target": "com.amazonaws.redshiftdata#ExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution mode of the batch request. <code>TRANSACTION</code> indicates all SQL statements are run as a single transaction. <code>AUTO_COMMIT</code> indicates each SQL statement is committed individually.</p>"
                     }
                 }
             },
@@ -903,6 +961,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
+                },
+                "WaitTimeSeconds": {
+                    "target": "com.amazonaws.redshiftdata#WaitTimeSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait for the SQL statement to complete execution before returning the response. If the SQL statement does not complete within the specified time, the response returns the current status. The maximum value is 30 seconds.</p>"
+                    }
                 }
             },
             "traits": {
@@ -965,10 +1029,43 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshiftdata#StatementStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the SQL statement. Status values are defined as follows: </p> <ul> <li> <p>ABORTED - The query run was stopped by the user. </p> </li> <li> <p>FAILED - The query run failed. </p> </li> <li> <p>FINISHED - The query has finished running. </p> </li> <li> <p>PICKED - The query has been chosen to be run. </p> </li> <li> <p>STARTED - The query run has started. </p> </li> <li> <p>SUBMITTED - The query was submitted, but not yet processed. </p> </li> </ul>"
+                    }
+                },
+                "RedshiftPid": {
+                    "target": "com.amazonaws.redshiftdata#BoxedLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process identifier from Amazon Redshift. </p>"
+                    }
+                },
+                "HasResultSet": {
+                    "target": "com.amazonaws.redshiftdata#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#ExecutionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "TRANSACTION",
+                        "value": "TRANSACTION"
+                    },
+                    {
+                        "name": "AUTO_COMMIT",
+                        "value": "AUTO_COMMIT"
+                    }
+                ]
             }
         },
         "com.amazonaws.redshiftdata#Field": {
@@ -1037,6 +1134,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#ActiveWaitingRequestsExceededException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -1070,6 +1170,12 @@
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>"
+                    }
+                },
+                "WaitTimeSeconds": {
+                    "target": "com.amazonaws.redshiftdata#WaitTimeSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait for the SQL statement to complete execution before returning the result. The maximum value is 30 seconds.</p>"
                     }
                 }
             },
@@ -1121,6 +1227,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.redshiftdata#ActiveWaitingRequestsExceededException"
+                },
+                {
                     "target": "com.amazonaws.redshiftdata#InternalServerException"
                 },
                 {
@@ -1154,6 +1263,12 @@
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request.</p>"
+                    }
+                },
+                "WaitTimeSeconds": {
+                    "target": "com.amazonaws.redshiftdata#WaitTimeSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait for the SQL statement to complete execution before returning the result. The maximum value is 30 seconds.</p>"
                     }
                 }
             },
@@ -1272,8 +1387,7 @@
                 "Database": {
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the database. This parameter is required when authenticating using either Secrets Manager or temporary credentials. </p>"
                     }
                 },
                 "SecretArn": {
@@ -1445,6 +1559,114 @@
                     "target": "com.amazonaws.redshiftdata#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#ListSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftdata#ListSessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftdata#ListSessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftdata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the sessions that the caller created in the last 24 hours. By default, only sessions with a status of <code>AVAILABLE</code> or <code>BUSY</code> are returned. You can filter the results by session status, compute target (cluster or serverless workgroup), or database. To retrieve the metadata for a single session, provide the <code>SessionId</code> parameter. Use <code>NextToken</code> to page through the session list.</p> <p>Returns only the sessions that the caller created. When identity-enhanced role sessions are used, you must provide either the <code>ClusterIdentifier</code> or <code>WorkgroupName</code> parameter to ensure that the IAM Identity Center user can only access the Amazon Redshift IAM Identity Center applications they are assigned. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html\"> Trusted identity propagation overview</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Sessions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#ListSessionsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.redshiftdata#ListStatementsLimit",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of sessions to return in the response. If more sessions exist than fit in one response, the operation returns <code>NextToken</code> to paginate the results.</p>"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.redshiftdata#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a specific session to return metadata for. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. When you provide <code>SessionId</code>, you can't specify <code>Status</code>, <code>ClusterIdentifier</code>, <code>WorkgroupName</code>, or <code>Database</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshiftdata#SessionStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the sessions to list. If no status is specified, sessions with a status of <code>AVAILABLE</code> or <code>BUSY</code> are returned. Status values are defined as follows:</p> <ul> <li> <p>AVAILABLE – The session is open and ready to run a SQL statement.</p> </li> <li> <p>BUSY – The session is currently running a SQL statement.</p> </li> <li> <p>CLOSED – The session is closed and can no longer run SQL statements.</p> </li> </ul>"
+                    }
+                },
+                "RoleLevel": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to return all sessions created by the caller's IAM role, including sessions from previous IAM sessions. If false, only sessions created in the current IAM session are returned. The default is true.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshiftdata#ClusterIdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier. Only sessions on this cluster are returned. When providing <code>ClusterIdentifier</code>, then <code>WorkgroupName</code> can't be specified.</p>"
+                    }
+                },
+                "WorkgroupName": {
+                    "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN). Only sessions on this workgroup are returned. When providing <code>WorkgroupName</code>, then <code>ClusterIdentifier</code> can't be specified.</p>"
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database. Only sessions connected to this database are returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#ListSessionsResponse": {
+            "type": "structure",
+            "members": {
+                "Sessions": {
+                    "target": "com.amazonaws.redshiftdata#SessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sessions that match the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request.</p>"
                     }
                 }
             },
@@ -1783,6 +2005,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftdata#ListSchemas"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#ListSessions"
                 },
                 {
                     "target": "com.amazonaws.redshiftdata#ListStatements"
@@ -2634,6 +2859,108 @@
                 }
             }
         },
+        "com.amazonaws.redshiftdata#SessionData": {
+            "type": "structure",
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.redshiftdata#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session identifier. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshiftdata#SessionStatusString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the session. Status values are defined as follows:</p> <ul> <li> <p>AVAILABLE – The session is open and ready to run a SQL statement.</p> </li> <li> <p>BUSY – The session is currently running a SQL statement.</p> </li> <li> <p>CLOSED – The session is closed and can no longer run SQL statements.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (UTC) when the session was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (UTC) that the session metadata was last updated. An example is the time the status last changed.</p>"
+                    }
+                },
+                "Database": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database that the session is connected to.</p>"
+                    }
+                },
+                "DbUser": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database user name.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier. This element is not returned when connecting to a serverless workgroup.</p>"
+                    }
+                },
+                "WorkgroupName": {
+                    "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless workgroup name or Amazon Resource Name (ARN). This element is not returned when connecting to a provisioned cluster.</p>"
+                    }
+                },
+                "SessionAliveSeconds": {
+                    "target": "com.amazonaws.redshiftdata#SessionAliveSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that the session is kept alive after a query finishes.</p>"
+                    }
+                },
+                "SessionTtl": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (UTC) when the session is set to expire and be closed.</p>"
+                    }
+                },
+                "CurrentStatementId": {
+                    "target": "com.amazonaws.redshiftdata#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement currently running in the session. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This element is returned only when the session status is <code>BUSY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metadata for a session returned by <code>ListSessions</code>, including its status, compute target, database connection, and lifecycle timestamps.</p>"
+            }
+        },
+        "com.amazonaws.redshiftdata#SessionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftdata#SessionData"
+            }
+        },
+        "com.amazonaws.redshiftdata#SessionStatusString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "AVAILABLE",
+                        "value": "AVAILABLE"
+                    },
+                    {
+                        "name": "BUSY",
+                        "value": "BUSY"
+                    },
+                    {
+                        "name": "CLOSED",
+                        "value": "CLOSED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshiftdata#SqlList": {
             "type": "list",
             "member": {
@@ -2997,6 +3324,15 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshiftdata#WaitTimeSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.redshiftdata#WorkgroupNameString": {
             "type": "string",
             "traits": {
@@ -3004,7 +3340,7 @@
                     "min": 3,
                     "max": 128
                 },
-                "smithy.api#pattern": "((^[a-z0-9-]{3,63}$)|^(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov|(-iso[a-z]?))?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"
+                "smithy.api#pattern": "^([a-z0-9-]{3,63}|arn:(aws(-[a-z]+)*):redshift-serverless:([a-z]{2}(-gov|(-iso[a-z]?))?|eusc-[a-z]+)-[a-z]+-\\d{1}:\\d{12}:workgroup/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[a-z0-9-]{1,63}/[a-z0-9-]{1,63}))$"
             }
         },
         "com.amazonaws.redshiftdata#bool": {

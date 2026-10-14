@@ -5,12 +5,8 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of scheduled actions. You can use the flags to filter the list
@@ -47,24 +43,6 @@ type ListScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduledActionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListScheduledActionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListScheduledActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListScheduledActionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.ListScheduledActionsRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListScheduledActionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListScheduledActionsOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -81,84 +59,26 @@ type ListScheduledActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListScheduledActionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListScheduledActionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListScheduledActionsResponse_nextToken, v.NextToken)
-		case schemas.ListScheduledActionsResponse_scheduledActions:
-			return deserializeScheduledActionsList(d, schemas.ListScheduledActionsResponse_scheduledActions, &v.ScheduledActions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListScheduledActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledActions, schemas.ListScheduledActionsRequest, schemas.ListScheduledActionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListScheduledActions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledActions, schemas.ListScheduledActionsRequest, schemas.ListScheduledActionsResponse), output: &ListScheduledActionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScheduledActions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScheduledActions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +91,6 @@ func (c *Client) addOperationListScheduledActionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +193,3 @@ type ListScheduledActionsAPIClient interface {
 }
 
 var _ ListScheduledActionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListScheduledActions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListScheduledActions",
-	}
-}

@@ -1,0 +1,4 @@
+POST /2020-05-31/connection-function/__Id__/publish
+
+If-Match: __IfMatch__
+

@@ -1,0 +1,3 @@
+DELETE /blueprints/__BlueprintArn__/?blueprintVersion=__BlueprintVersion__
+
+

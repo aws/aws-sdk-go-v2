@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +55,43 @@ type CreateSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncRole != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_syncRole, *v.SyncRole)
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_syncSource, *v.SyncSource)
+	}
+	serializeTagMap(s, schemas.CreateSyncJobRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateSyncJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncJobRequest_syncRole:
+			v.SyncRole = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_syncRole, v.SyncRole)
+		case schemas.CreateSyncJobRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_syncSource, v.SyncSource)
+		case schemas.CreateSyncJobRequest_tags:
+			return deserializeTagMap(d, schemas.CreateSyncJobRequest_tags, &v.Tags)
+		case schemas.CreateSyncJobRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateSyncJobOutput struct {
 
 	// The SyncJob ARN.
@@ -77,65 +115,58 @@ type CreateSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSyncJobResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateSyncJobResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateSyncJobResponse_state, string(v.State))
+	}
+}
+func (v *CreateSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSyncJobResponse_arn, v.Arn)
+		case schemas.CreateSyncJobResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSyncJobResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateSyncJobResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateSyncJobResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.SyncJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncJob, schemas.CreateSyncJobRequest, schemas.CreateSyncJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncJob, schemas.CreateSyncJobRequest, schemas.CreateSyncJobResponse), output: &CreateSyncJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSyncJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSyncJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -145,12 +176,6 @@ func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateSyncJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSyncJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +188,6 @@ func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -202,12 +221,4 @@ func (m *endpointPrefix_opCreateSyncJobMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opCreateSyncJobMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateSyncJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateSyncJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSyncJob",
-	}
 }

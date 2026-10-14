@@ -1,0 +1,5 @@
+PUT /configureLogs/playbackConfiguration
+
+Content-Type: application/json
+
+{"AdsInteractionLog":{"ExcludeEventTypes":["AD_MARKER_FOUND","AD_MARKER_FOUND"],"PublishOptInEventTypes":["RAW_ADS_RESPONSE","RAW_ADS_RESPONSE"]},"EnabledLoggingStrategies":["VENDED_LOGS","VENDED_LOGS"],"ManifestServiceInteractionLog":{"ExcludeEventTypes":["GENERATED_MANIFEST","GENERATED_MANIFEST"],"PublishOptInEventTypes":["PRE_SESSION_INIT_HOOK_SUMMARY","PRE_SESSION_INIT_HOOK_SUMMARY"]},"PercentEnabled":1,"PlaybackConfigurationName":"__PlaybackConfigurationName__"}

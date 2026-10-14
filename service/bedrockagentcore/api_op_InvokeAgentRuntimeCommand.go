@@ -5,10 +5,7 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -97,50 +94,6 @@ type InvokeAgentRuntimeCommandInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeAgentRuntimeCommandInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeAgentRuntimeCommandRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeAgentRuntimeCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accept != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_accept, *v.Accept)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_accountId, *v.AccountId)
-	}
-	if v.AgentRuntimeArn != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_agentRuntimeArn, *v.AgentRuntimeArn)
-	}
-	if v.Baggage != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_baggage, *v.Baggage)
-	}
-	if v.Body != nil {
-		s.WriteStruct(schemas.InvokeAgentRuntimeCommandRequest_body)
-		v.Body.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_contentType, *v.ContentType)
-	}
-	if v.Qualifier != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_qualifier, *v.Qualifier)
-	}
-	if v.RuntimeSessionId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_runtimeSessionId, *v.RuntimeSessionId)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceId, *v.TraceId)
-	}
-	if v.TraceParent != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceParent, *v.TraceParent)
-	}
-	if v.TraceState != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceState, *v.TraceState)
-	}
-}
-
 // Response for InvokeAgentRuntimeCommand operation.
 type InvokeAgentRuntimeCommandOutput struct {
 	eventStream *InvokeAgentRuntimeCommandEventStream
@@ -150,14 +103,6 @@ type InvokeAgentRuntimeCommandOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokeAgentRuntimeCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeAgentRuntimeCommandResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -203,35 +148,19 @@ func (o *InvokeAgentRuntimeCommandOutput) GetInitialReply() <-chan InvokeAgentRu
 }
 
 func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgentRuntimeCommand{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntimeCommand, schemas.InvokeAgentRuntimeCommandRequest, schemas.InvokeAgentRuntimeCommandResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgentRuntimeCommand{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntimeCommand, schemas.InvokeAgentRuntimeCommandRequest, schemas.InvokeAgentRuntimeCommandResponse), output: &InvokeAgentRuntimeCommandOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAgentRuntimeCommand{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAgentRuntimeCommand"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
+	if err = addEventStreamInvokeAgentRuntimeCommandMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addEventStreamBuild_opInvokeAgentRuntimeCommandMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -240,25 +169,7 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -268,12 +179,6 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpInvokeAgentRuntimeCommandValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAgentRuntimeCommand(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -286,12 +191,6 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -378,14 +277,6 @@ func (m *idempotencyToken_initializeOpInvokeAgentRuntimeCommand) HandleInitializ
 }
 func addIdempotencyToken_opInvokeAgentRuntimeCommandMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpInvokeAgentRuntimeCommand{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opInvokeAgentRuntimeCommand(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeAgentRuntimeCommand",
-	}
 }
 
 // InvokeAgentRuntimeCommandEventStream provides the event stream handling for the InvokeAgentRuntimeCommand operation.

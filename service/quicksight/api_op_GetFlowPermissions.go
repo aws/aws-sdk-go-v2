@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get permissions for a flow.
@@ -43,6 +42,21 @@ type GetFlowPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowPermissionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetFlowPermissionsInput_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowPermissionsInput_FlowId, *v.FlowId)
+	}
+}
+
 type GetFlowPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow you are getting permissions against.
@@ -72,77 +86,68 @@ type GetFlowPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowPermissionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_Arn, *v.Arn)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_FlowId, *v.FlowId)
+	}
+	serializePermissionsList(s, schemas.GetFlowPermissionsOutput_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetFlowPermissionsOutput_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetFlowPermissionsOutput_Status, v.Status)
+	}
+}
+func (v *GetFlowPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowPermissionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowPermissionsOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_Arn, v.Arn)
+		case schemas.GetFlowPermissionsOutput_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_FlowId, v.FlowId)
+		case schemas.GetFlowPermissionsOutput_Permissions:
+			return deserializePermissionsList(d, schemas.GetFlowPermissionsOutput_Permissions, &v.Permissions)
+		case schemas.GetFlowPermissionsOutput_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetFlowPermissionsOutput_RequestId, v.RequestId)
+		case schemas.GetFlowPermissionsOutput_Status:
+			return d.ReadInt32(schemas.GetFlowPermissionsOutput_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowPermissions, schemas.GetFlowPermissionsInput, schemas.GetFlowPermissionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowPermissions, schemas.GetFlowPermissionsInput, schemas.GetFlowPermissionsOutput), output: &GetFlowPermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowPermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlowPermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFlowPermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFlowPermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +162,8 @@ func (c *Client) addOperationGetFlowPermissionsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFlowPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFlowPermissions",
-	}
 }

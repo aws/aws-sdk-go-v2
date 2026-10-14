@@ -4,13 +4,8 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use the GetUtterancesView operation to get information about the utterances
@@ -78,22 +73,6 @@ type GetUtterancesViewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUtterancesViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUtterancesViewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUtterancesViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotName != nil {
-		s.WriteString(schemas.GetUtterancesViewRequest_botName, *v.BotName)
-	}
-	serializeBotVersions(s, schemas.GetUtterancesViewRequest_botVersions, v.BotVersions)
-	if v.StatusType != "" {
-		s.WriteString(schemas.GetUtterancesViewRequest_statusType, string(v.StatusType))
-	}
-}
-
 type GetUtterancesViewOutput struct {
 
 	// The name of the bot for which utterance information was returned.
@@ -111,87 +90,29 @@ type GetUtterancesViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUtterancesViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUtterancesViewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUtterancesViewResponse_botName:
-			v.BotName = new(string)
-			return d.ReadString(schemas.GetUtterancesViewResponse_botName, v.BotName)
-		case schemas.GetUtterancesViewResponse_utterances:
-			return deserializeListsOfUtterances(d, schemas.GetUtterancesViewResponse_utterances, &v.Utterances)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUtterancesView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUtterancesView, schemas.GetUtterancesViewRequest, schemas.GetUtterancesViewResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUtterancesView{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUtterancesView, schemas.GetUtterancesViewRequest, schemas.GetUtterancesViewResponse), output: &GetUtterancesViewOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUtterancesView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUtterancesViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUtterancesView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +127,8 @@ func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUtterancesView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUtterancesView",
-	}
 }

@@ -5,20 +5,20 @@ package pcs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a cluster configuration. You can modify Slurm scheduler settings,
-// accounting configuration, and security groups for an existing cluster.
+// Updates a cluster configuration. You can update the scheduler version, modify
+// scheduler settings, and update accounting configuration for an existing cluster.
+// For more information about updating the scheduler version, see [Updating the scheduler version on a cluster]in the PCS User
+// Guide.
 //
 // You can only update clusters that are in ACTIVE , UPDATE_FAILED , or SUSPENDED
 // state. All associated resources (queues and compute node groups) must be in
 // ACTIVE state before you can update the cluster.
+//
+// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -49,30 +49,16 @@ type UpdateClusterInput struct {
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
 
+	// The scheduler configuration to update for the cluster. Use this to update the
+	// scheduler version. For more information, see [Updating the scheduler version on a cluster]in the PCS User Guide.
+	//
+	// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
+	Scheduler *types.UpdateSchedulerRequest
+
 	// Additional options related to the Slurm scheduler.
 	SlurmConfiguration *types.UpdateClusterSlurmConfigurationRequest
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateClusterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateClusterRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.UpdateClusterRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.SlurmConfiguration != nil {
-		s.WriteStruct(schemas.UpdateClusterRequest_slurmConfiguration)
-		v.SlurmConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateClusterOutput struct {
@@ -86,73 +72,23 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateClusterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateClusterResponse_cluster:
-			v.Cluster = &types.Cluster{}
-			return v.Cluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +98,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpUpdateClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +110,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +149,4 @@ func (m *idempotencyToken_initializeOpUpdateCluster) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCluster",
-	}
 }

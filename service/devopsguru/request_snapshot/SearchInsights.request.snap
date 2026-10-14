@@ -1,0 +1,5 @@
+POST /insights/search
+
+Content-Type: application/json
+
+{"Filters":{"ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]},"ServiceCollection":{"ServiceNames":["API_GATEWAY","API_GATEWAY"]},"Severities":["LOW","LOW"],"Statuses":["ONGOING","ONGOING"]},"MaxResults":1,"NextToken":"__NextToken__","StartTimeRange":{"FromTime":946684800,"ToTime":946684800},"Type":"REACTIVE"}

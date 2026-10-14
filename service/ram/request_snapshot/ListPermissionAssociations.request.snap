@@ -1,0 +1,5 @@
+POST /listpermissionassociations
+
+Content-Type: application/json
+
+{"associationStatus":"ASSOCIATING","defaultVersion":true,"featureSet":"CREATED_FROM_POLICY","maxResults":1,"nextToken":"__NextToken__","permissionArn":"__PermissionArn__","permissionVersion":1,"resourceType":"__ResourceType__"}

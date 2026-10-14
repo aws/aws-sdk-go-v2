@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the log anomaly detector that you specify. The KMS
@@ -39,6 +38,18 @@ type GetLogAnomalyDetectorInput struct {
 	AnomalyDetectorArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLogAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorArn != nil {
+		s.WriteString(schemas.GetLogAnomalyDetectorRequest_anomalyDetectorArn, *v.AnomalyDetectorArn)
+	}
 }
 
 type GetLogAnomalyDetectorOutput struct {
@@ -88,77 +99,99 @@ type GetLogAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLogAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogAnomalyDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorStatus != "" {
+		s.WriteString(schemas.GetLogAnomalyDetectorResponse_anomalyDetectorStatus, string(v.AnomalyDetectorStatus))
+	}
+	if v.AnomalyVisibilityTime != nil {
+		s.WriteInt64(schemas.GetLogAnomalyDetectorResponse_anomalyVisibilityTime, *v.AnomalyVisibilityTime)
+	}
+	if v.CreationTimeStamp != 0 {
+		s.WriteInt64(schemas.GetLogAnomalyDetectorResponse_creationTimeStamp, v.CreationTimeStamp)
+	}
+	if v.DetectorName != nil {
+		s.WriteString(schemas.GetLogAnomalyDetectorResponse_detectorName, *v.DetectorName)
+	}
+	if v.EvaluationFrequency != "" {
+		s.WriteString(schemas.GetLogAnomalyDetectorResponse_evaluationFrequency, string(v.EvaluationFrequency))
+	}
+	if v.FilterPattern != nil {
+		s.WriteString(schemas.GetLogAnomalyDetectorResponse_filterPattern, *v.FilterPattern)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetLogAnomalyDetectorResponse_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedTimeStamp != 0 {
+		s.WriteInt64(schemas.GetLogAnomalyDetectorResponse_lastModifiedTimeStamp, v.LastModifiedTimeStamp)
+	}
+	serializeLogGroupArnList(s, schemas.GetLogAnomalyDetectorResponse_logGroupArnList, v.LogGroupArnList)
+}
+func (v *GetLogAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLogAnomalyDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLogAnomalyDetectorResponse_anomalyDetectorStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetLogAnomalyDetectorResponse_anomalyDetectorStatus, &ev); err != nil {
+				return err
+			}
+			v.AnomalyDetectorStatus = types.AnomalyDetectorStatus(ev)
+			return nil
+		case schemas.GetLogAnomalyDetectorResponse_anomalyVisibilityTime:
+			v.AnomalyVisibilityTime = new(int64)
+			return d.ReadInt64(schemas.GetLogAnomalyDetectorResponse_anomalyVisibilityTime, v.AnomalyVisibilityTime)
+		case schemas.GetLogAnomalyDetectorResponse_creationTimeStamp:
+			return d.ReadInt64(schemas.GetLogAnomalyDetectorResponse_creationTimeStamp, &v.CreationTimeStamp)
+		case schemas.GetLogAnomalyDetectorResponse_detectorName:
+			v.DetectorName = new(string)
+			return d.ReadString(schemas.GetLogAnomalyDetectorResponse_detectorName, v.DetectorName)
+		case schemas.GetLogAnomalyDetectorResponse_evaluationFrequency:
+			var ev string
+			if err := d.ReadString(schemas.GetLogAnomalyDetectorResponse_evaluationFrequency, &ev); err != nil {
+				return err
+			}
+			v.EvaluationFrequency = types.EvaluationFrequency(ev)
+			return nil
+		case schemas.GetLogAnomalyDetectorResponse_filterPattern:
+			v.FilterPattern = new(string)
+			return d.ReadString(schemas.GetLogAnomalyDetectorResponse_filterPattern, v.FilterPattern)
+		case schemas.GetLogAnomalyDetectorResponse_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetLogAnomalyDetectorResponse_kmsKeyId, v.KmsKeyId)
+		case schemas.GetLogAnomalyDetectorResponse_lastModifiedTimeStamp:
+			return d.ReadInt64(schemas.GetLogAnomalyDetectorResponse_lastModifiedTimeStamp, &v.LastModifiedTimeStamp)
+		case schemas.GetLogAnomalyDetectorResponse_logGroupArnList:
+			return deserializeLogGroupArnList(d, schemas.GetLogAnomalyDetectorResponse_logGroupArnList, &v.LogGroupArnList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLogAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogAnomalyDetector, schemas.GetLogAnomalyDetectorRequest, schemas.GetLogAnomalyDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLogAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogAnomalyDetector, schemas.GetLogAnomalyDetectorRequest, schemas.GetLogAnomalyDetectorResponse), output: &GetLogAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLogAnomalyDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLogAnomalyDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLogAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLogAnomalyDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +206,8 @@ func (c *Client) addOperationGetLogAnomalyDetectorMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLogAnomalyDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLogAnomalyDetector",
-	}
 }

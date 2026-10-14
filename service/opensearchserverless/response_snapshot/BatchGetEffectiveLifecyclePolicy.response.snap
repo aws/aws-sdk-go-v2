@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.BatchGetEffectiveLifecyclePolicy
+
+{"effectiveLifecyclePolicyDetails":[{"noMinRetentionPeriod":true,"policyName":"__PolicyName__","resource":"__Resource__","resourceType":"index","retentionPeriod":"__RetentionPeriod__","type":"retention"},{"noMinRetentionPeriod":true,"policyName":"__PolicyName__","resource":"__Resource__","resourceType":"index","retentionPeriod":"__RetentionPeriod__","type":"retention"}],"effectiveLifecyclePolicyErrorDetails":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","resource":"__Resource__","type":"retention"},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","resource":"__Resource__","type":"retention"}]}

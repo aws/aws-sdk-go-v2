@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeScalingParameters&DomainName=__DomainName__&Version=2013-01-01

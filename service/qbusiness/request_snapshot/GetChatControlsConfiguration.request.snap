@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/chatcontrols?maxResults=1&nextToken=__NextToken__
+
+

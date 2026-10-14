@@ -5,10 +5,10 @@ package apigateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the current ApiKeys resource.
@@ -51,6 +51,30 @@ type GetApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerId != nil {
+		s.WriteString(schemas.GetApiKeysRequest_customerId, *v.CustomerId)
+	}
+	if v.IncludeValues != nil {
+		s.WriteBool(schemas.GetApiKeysRequest_includeValues, *v.IncludeValues)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetApiKeysRequest_limit, *v.Limit)
+	}
+	if v.NameQuery != nil {
+		s.WriteString(schemas.GetApiKeysRequest_nameQuery, *v.NameQuery)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetApiKeysRequest_position, *v.Position)
+	}
+}
+
 // Represents a collection of API keys as represented by an ApiKeys resource.
 type GetApiKeysOutput struct {
 
@@ -70,74 +94,51 @@ type GetApiKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKeys)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfApiKey(s, schemas.ApiKeys_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.ApiKeys_position, *v.Position)
+	}
+	serializeListOfString(s, schemas.ApiKeys_warnings, v.Warnings)
+}
+func (v *GetApiKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKeys, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKeys_items:
+			return deserializeListOfApiKey(d, schemas.ApiKeys_items, &v.Items)
+		case schemas.ApiKeys_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.ApiKeys_position, v.Position)
+		case schemas.ApiKeys_warnings:
+			return deserializeListOfString(d, schemas.ApiKeys_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiKeys, schemas.GetApiKeysRequest, schemas.ApiKeys)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiKeys, schemas.GetApiKeysRequest, schemas.ApiKeys), output: &GetApiKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApiKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApiKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApiKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +154,6 @@ func (c *Client) addOperationGetApiKeysMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +254,3 @@ type GetApiKeysAPIClient interface {
 }
 
 var _ GetApiKeysAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetApiKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetApiKeys",
-	}
-}

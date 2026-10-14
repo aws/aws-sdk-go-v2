@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.StartSegmentDetection
+
+{"ClientRequestToken":"__ClientRequestToken__","Filters":{"ShotFilter":{"MinSegmentConfidence":1},"TechnicalCueFilter":{"BlackFrame":{"MaxPixelThreshold":1,"MinCoveragePercentage":1},"MinSegmentConfidence":1}},"JobTag":"__JobTag__","NotificationChannel":{"RoleArn":"__RoleArn__","SNSTopicArn":"__SNSTopicArn__"},"SegmentTypes":["TECHNICAL_CUE","TECHNICAL_CUE"],"Video":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}}

@@ -4,13 +4,8 @@ package marketplacediscovery
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,19 +33,13 @@ type GetOfferInput struct {
 	// This member is required.
 	OfferId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *GetOfferInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOfferInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOfferInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OfferId != nil {
-		s.WriteString(schemas.GetOfferInput_offerId, *v.OfferId)
-	}
 }
 
 type GetOfferOutput struct {
@@ -100,6 +89,11 @@ type GetOfferOutput struct {
 	// offers that never expire.
 	ExpirationTime *time.Time
 
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
+
 	// The display name of the offer. This is free-form text provided by the seller.
 	OfferName *string
 
@@ -113,113 +107,29 @@ type GetOfferOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOfferOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOfferOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOfferOutput_agreementProposalId:
-			v.AgreementProposalId = new(string)
-			return d.ReadString(schemas.GetOfferOutput_agreementProposalId, v.AgreementProposalId)
-		case schemas.GetOfferOutput_associatedEntities:
-			return deserializeOfferAssociatedEntityList(d, schemas.GetOfferOutput_associatedEntities, &v.AssociatedEntities)
-		case schemas.GetOfferOutput_availableFromTime:
-			v.AvailableFromTime = new(time.Time)
-			return d.ReadTime(schemas.GetOfferOutput_availableFromTime, v.AvailableFromTime)
-		case schemas.GetOfferOutput_badges:
-			return deserializePurchaseOptionBadgeList(d, schemas.GetOfferOutput_badges, &v.Badges)
-		case schemas.GetOfferOutput_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.GetOfferOutput_catalog, v.Catalog)
-		case schemas.GetOfferOutput_expirationTime:
-			v.ExpirationTime = new(time.Time)
-			return d.ReadTime(schemas.GetOfferOutput_expirationTime, v.ExpirationTime)
-		case schemas.GetOfferOutput_offerId:
-			v.OfferId = new(string)
-			return d.ReadString(schemas.GetOfferOutput_offerId, v.OfferId)
-		case schemas.GetOfferOutput_offerName:
-			v.OfferName = new(string)
-			return d.ReadString(schemas.GetOfferOutput_offerName, v.OfferName)
-		case schemas.GetOfferOutput_pricingModel:
-			v.PricingModel = &types.PricingModel{}
-			return v.PricingModel.Deserialize(d)
-		case schemas.GetOfferOutput_replacementAgreementId:
-			v.ReplacementAgreementId = new(string)
-			return d.ReadString(schemas.GetOfferOutput_replacementAgreementId, v.ReplacementAgreementId)
-		case schemas.GetOfferOutput_sellerOfRecord:
-			v.SellerOfRecord = &types.SellerInformation{}
-			return v.SellerOfRecord.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOfferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOffer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOffer, schemas.GetOfferInput, schemas.GetOfferOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOffer{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOffer, schemas.GetOfferInput, schemas.GetOfferOutput), output: &GetOfferOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOffer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOfferValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOffer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +144,8 @@ func (c *Client) addOperationGetOfferMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOffer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOffer",
-	}
 }

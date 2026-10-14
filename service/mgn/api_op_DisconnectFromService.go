@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disconnects specific Source Servers from Application Migration Service. Data
@@ -16,9 +15,9 @@ import (
 // Migration Service for enabling the replication of these source servers will be
 // terminated / deleted within 90 minutes. Launched Test or Cutover instances will
 // NOT be terminated. If the agent on the source server has not been prevented from
-// communicating with the Application Migration Service service, then it will
-// receive a command to uninstall itself (within approximately 10 minutes). The
-// following properties of the SourceServer will be changed immediately:
+// communicating with Application Migration Service, then it will receive a command
+// to uninstall itself (within approximately 10 minutes). The following properties
+// of the SourceServer will be changed immediately:
 // dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The
 // totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will
 // be set to zero; dataReplicationInfo.lagDuration and
@@ -49,6 +48,34 @@ type DisconnectFromServiceInput struct {
 	AccountID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisconnectFromServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectFromServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectFromServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DisconnectFromServiceRequest_accountID, *v.AccountID)
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.DisconnectFromServiceRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *DisconnectFromServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectFromServiceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisconnectFromServiceRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DisconnectFromServiceRequest_accountID, v.AccountID)
+		case schemas.DisconnectFromServiceRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.DisconnectFromServiceRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type DisconnectFromServiceOutput struct {
@@ -101,77 +128,137 @@ type DisconnectFromServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectFromServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectFromServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.SourceServer_applicationID, *v.ApplicationID)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SourceServer_arn, *v.Arn)
+	}
+	if v.ConnectorAction != nil {
+		s.WriteStruct(schemas.SourceServer_connectorAction)
+		v.ConnectorAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationInfo != nil {
+		s.WriteStruct(schemas.SourceServer_dataReplicationInfo)
+		v.DataReplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FqdnForActionFramework != nil {
+		s.WriteString(schemas.SourceServer_fqdnForActionFramework, *v.FqdnForActionFramework)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.SourceServer_isArchived, *v.IsArchived)
+	}
+	if v.LaunchedInstance != nil {
+		s.WriteStruct(schemas.SourceServer_launchedInstance)
+		v.LaunchedInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.SourceServer_lifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationType != "" {
+		s.WriteString(schemas.SourceServer_replicationType, string(v.ReplicationType))
+	}
+	if v.SourceProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceProperties)
+		v.SourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
+	}
+	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.UserProvidedID != nil {
+		s.WriteString(schemas.SourceServer_userProvidedID, *v.UserProvidedID)
+	}
+	if v.VcenterClientID != nil {
+		s.WriteString(schemas.SourceServer_vcenterClientID, *v.VcenterClientID)
+	}
+}
+func (v *DisconnectFromServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServer_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.SourceServer_applicationID, v.ApplicationID)
+		case schemas.SourceServer_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SourceServer_arn, v.Arn)
+		case schemas.SourceServer_connectorAction:
+			v.ConnectorAction = &types.SourceServerConnectorAction{}
+			return v.ConnectorAction.Deserialize(d)
+		case schemas.SourceServer_dataReplicationInfo:
+			v.DataReplicationInfo = &types.DataReplicationInfo{}
+			return v.DataReplicationInfo.Deserialize(d)
+		case schemas.SourceServer_fqdnForActionFramework:
+			v.FqdnForActionFramework = new(string)
+			return d.ReadString(schemas.SourceServer_fqdnForActionFramework, v.FqdnForActionFramework)
+		case schemas.SourceServer_isArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.SourceServer_isArchived, v.IsArchived)
+		case schemas.SourceServer_launchedInstance:
+			v.LaunchedInstance = &types.LaunchedInstance{}
+			return v.LaunchedInstance.Deserialize(d)
+		case schemas.SourceServer_lifeCycle:
+			v.LifeCycle = &types.LifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.SourceServer_replicationType:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_replicationType, &ev); err != nil {
+				return err
+			}
+			v.ReplicationType = types.ReplicationType(ev)
+			return nil
+		case schemas.SourceServer_sourceProperties:
+			v.SourceProperties = &types.SourceProperties{}
+			return v.SourceProperties.Deserialize(d)
+		case schemas.SourceServer_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceServerID, v.SourceServerID)
+		case schemas.SourceServer_tags:
+			return deserializeTagsMap(d, schemas.SourceServer_tags, &v.Tags)
+		case schemas.SourceServer_userProvidedID:
+			v.UserProvidedID = new(string)
+			return d.ReadString(schemas.SourceServer_userProvidedID, v.UserProvidedID)
+		case schemas.SourceServer_vcenterClientID:
+			v.VcenterClientID = new(string)
+			return d.ReadString(schemas.SourceServer_vcenterClientID, v.VcenterClientID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisconnectFromServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectFromService, schemas.DisconnectFromServiceRequest, schemas.SourceServer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectFromService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectFromService, schemas.DisconnectFromServiceRequest, schemas.SourceServer), output: &DisconnectFromServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisconnectFromService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisconnectFromService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisconnectFromServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisconnectFromService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +273,8 @@ func (c *Client) addOperationDisconnectFromServiceMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisconnectFromService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisconnectFromService",
-	}
 }

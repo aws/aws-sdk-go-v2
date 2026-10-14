@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"caseRules":[{"caseRuleArn":"__CaseRuleArn__","caseRuleId":"__CaseRuleId__","description":"__Description__","name":"__Name__","ruleType":"Required"},{"caseRuleArn":"__CaseRuleArn__","caseRuleId":"__CaseRuleId__","description":"__Description__","name":"__Name__","ruleType":"Required"}],"nextToken":"__NextToken__"}

@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about multiple router outputs in AWS Elemental
@@ -39,6 +38,16 @@ type BatchGetRouterOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterOutputArnList(s, schemas.BatchGetRouterOutputRequest_Arns, v.Arns)
+}
+
 type BatchGetRouterOutputOutput struct {
 
 	// An array of errors that occurred when retrieving the requested router outputs.
@@ -57,77 +66,48 @@ type BatchGetRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRouterOutputErrorList(s, schemas.BatchGetRouterOutputResponse_Errors, v.Errors)
+	serializeRouterOutputList(s, schemas.BatchGetRouterOutputResponse_RouterOutputs, v.RouterOutputs)
+}
+func (v *BatchGetRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRouterOutputResponse_Errors:
+			return deserializeBatchGetRouterOutputErrorList(d, schemas.BatchGetRouterOutputResponse_Errors, &v.Errors)
+		case schemas.BatchGetRouterOutputResponse_RouterOutputs:
+			return deserializeRouterOutputList(d, schemas.BatchGetRouterOutputResponse_RouterOutputs, &v.RouterOutputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterOutput, schemas.BatchGetRouterOutputRequest, schemas.BatchGetRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterOutput, schemas.BatchGetRouterOutputRequest, schemas.BatchGetRouterOutputResponse), output: &BatchGetRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetRouterOutput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetRouterOutput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetRouterOutputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetRouterOutput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +122,8 @@ func (c *Client) addOperationBatchGetRouterOutputMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetRouterOutput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetRouterOutput",
-	}
 }

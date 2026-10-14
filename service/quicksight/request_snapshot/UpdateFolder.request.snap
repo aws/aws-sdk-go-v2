@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/folders/__FolderId__
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

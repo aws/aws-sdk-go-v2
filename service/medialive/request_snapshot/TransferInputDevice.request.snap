@@ -1,0 +1,5 @@
+POST /prod/inputDevices/__InputDeviceId__/transfer
+
+Content-Type: application/json
+
+{"targetCustomerId":"__TargetCustomerId__","targetRegion":"__TargetRegion__","transferMessage":"__TransferMessage__"}

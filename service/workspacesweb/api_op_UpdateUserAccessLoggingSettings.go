@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the user access logging settings.
@@ -52,24 +48,6 @@ type UpdateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateUserAccessLoggingSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateUserAccessLoggingSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.KinesisStreamArn != nil {
-		s.WriteString(schemas.UpdateUserAccessLoggingSettingsRequest_kinesisStreamArn, *v.KinesisStreamArn)
-	}
-	if v.UserAccessLoggingSettingsArn != nil {
-		s.WriteString(schemas.UpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn, *v.UserAccessLoggingSettingsArn)
-	}
-}
-
 type UpdateUserAccessLoggingSettingsOutput struct {
 
 	// The user access logging settings.
@@ -83,73 +61,23 @@ type UpdateUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings:
-			v.UserAccessLoggingSettings = &types.UserAccessLoggingSettings{}
-			return v.UserAccessLoggingSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserAccessLoggingSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserAccessLoggingSettings, schemas.UpdateUserAccessLoggingSettingsRequest, schemas.UpdateUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserAccessLoggingSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserAccessLoggingSettings, schemas.UpdateUserAccessLoggingSettingsRequest, schemas.UpdateUserAccessLoggingSettingsResponse), output: &UpdateUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUserAccessLoggingSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +87,6 @@ func (c *Client) addOperationUpdateUserAccessLoggingSettingsMiddlewares(stack *m
 		return err
 	}
 	if err = addOpUpdateUserAccessLoggingSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserAccessLoggingSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +99,6 @@ func (c *Client) addOperationUpdateUserAccessLoggingSettingsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +138,4 @@ func (m *idempotencyToken_initializeOpUpdateUserAccessLoggingSettings) HandleIni
 }
 func addIdempotencyToken_opUpdateUserAccessLoggingSettingsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateUserAccessLoggingSettings{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateUserAccessLoggingSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateUserAccessLoggingSettings",
-	}
 }

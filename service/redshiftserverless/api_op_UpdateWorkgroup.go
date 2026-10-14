@@ -4,13 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a workgroup with the specified configuration settings. You can't update
@@ -117,50 +112,6 @@ type UpdateWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWorkgroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateWorkgroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BaseCapacity != nil {
-		s.WriteInt32(schemas.UpdateWorkgroupRequest_baseCapacity, *v.BaseCapacity)
-	}
-	serializeConfigParameterList(s, schemas.UpdateWorkgroupRequest_configParameters, v.ConfigParameters)
-	if v.EnhancedVpcRouting != nil {
-		s.WriteBool(schemas.UpdateWorkgroupRequest_enhancedVpcRouting, *v.EnhancedVpcRouting)
-	}
-	if v.ExtraComputeForAutomaticOptimization != nil {
-		s.WriteBool(schemas.UpdateWorkgroupRequest_extraComputeForAutomaticOptimization, *v.ExtraComputeForAutomaticOptimization)
-	}
-	if v.IpAddressType != nil {
-		s.WriteString(schemas.UpdateWorkgroupRequest_ipAddressType, *v.IpAddressType)
-	}
-	if v.MaxCapacity != nil {
-		s.WriteInt32(schemas.UpdateWorkgroupRequest_maxCapacity, *v.MaxCapacity)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.UpdateWorkgroupRequest_port, *v.Port)
-	}
-	if v.PricePerformanceTarget != nil {
-		s.WriteStruct(schemas.UpdateWorkgroupRequest_pricePerformanceTarget)
-		v.PricePerformanceTarget.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PubliclyAccessible != nil {
-		s.WriteBool(schemas.UpdateWorkgroupRequest_publiclyAccessible, *v.PubliclyAccessible)
-	}
-	serializeSecurityGroupIdList(s, schemas.UpdateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.UpdateWorkgroupRequest_subnetIds, v.SubnetIds)
-	if v.TrackName != nil {
-		s.WriteString(schemas.UpdateWorkgroupRequest_trackName, *v.TrackName)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.UpdateWorkgroupRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type UpdateWorkgroupOutput struct {
 
 	// The updated workgroup object.
@@ -174,85 +125,29 @@ type UpdateWorkgroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWorkgroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateWorkgroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateWorkgroupResponse_workgroup:
-			v.Workgroup = &types.Workgroup{}
-			return v.Workgroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateWorkgroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkgroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkgroup, schemas.UpdateWorkgroupRequest, schemas.UpdateWorkgroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkgroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkgroup, schemas.UpdateWorkgroupRequest, schemas.UpdateWorkgroupResponse), output: &UpdateWorkgroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkgroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWorkgroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkgroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -267,22 +162,8 @@ func (c *Client) addOperationUpdateWorkgroupMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkgroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkgroup",
-	}
 }

@@ -4,13 +4,8 @@ package elementalinference
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the name and/or outputs in a feed.
@@ -58,23 +53,12 @@ type UpdateFeedInput struct {
 	// This member is required.
 	Outputs []types.UpdateOutput
 
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. You can specify the existing role (to leave it
+	// unchanged) or a new role. You specify one access role for each feed.
+	AccessRoleArn *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateFeedRequest_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateFeedRequest_name, *v.Name)
-	}
-	serializeUpdateOutputList(s, schemas.UpdateFeedRequest_outputs, v.Outputs)
 }
 
 type UpdateFeedOutput struct {
@@ -110,6 +94,11 @@ type UpdateFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role for the feed, after the update. This property is absent if the feed doesn't
+	// have an IAM role.
+	AccessRoleArn *string
+
 	// Information about the resource that is associated with the feed, if any.
 	Association *types.FeedAssociation
 
@@ -122,107 +111,29 @@ type UpdateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateFeedResponse_arn, v.Arn)
-		case schemas.UpdateFeedResponse_association:
-			v.Association = &types.FeedAssociation{}
-			return v.Association.Deserialize(d)
-		case schemas.UpdateFeedResponse_dataEndpoints:
-			return deserializeStringList(d, schemas.UpdateFeedResponse_dataEndpoints, &v.DataEndpoints)
-		case schemas.UpdateFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateFeedResponse_id, v.Id)
-		case schemas.UpdateFeedResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateFeedResponse_name, v.Name)
-		case schemas.UpdateFeedResponse_outputs:
-			return deserializeGetOutputList(d, schemas.UpdateFeedResponse_outputs, &v.Outputs)
-		case schemas.UpdateFeedResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFeedResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FeedStatus(ev)
-			return nil
-		case schemas.UpdateFeedResponse_tags:
-			return deserializeTagMap(d, schemas.UpdateFeedResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeed, schemas.UpdateFeedRequest, schemas.UpdateFeedResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFeed{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeed, schemas.UpdateFeedRequest, schemas.UpdateFeedResponse), output: &UpdateFeedOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFeed"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFeed(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -237,22 +148,8 @@ func (c *Client) addOperationUpdateFeedMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFeed(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFeed",
-	}
 }

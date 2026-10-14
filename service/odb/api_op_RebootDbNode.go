@@ -4,13 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Reboots the specified DB node in a VM cluster.
@@ -31,15 +28,18 @@ func (c *Client) RebootDbNode(ctx context.Context, params *RebootDbNodeInput, op
 
 type RebootDbNodeInput struct {
 
-	// The unique identifier of the VM cluster that contains the DB node to reboot.
-	//
-	// This member is required.
-	CloudVmClusterId *string
-
 	// The unique identifier of the DB node to reboot.
 	//
 	// This member is required.
 	DbNodeId *string
+
+	// The unique identifier of the VM cluster that contains the DB node to reboot.
+	// You must specify either this parameter or exadbVmClusterId .
+	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster that contains the DB node to
+	// reboot. You must specify either this parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	noSmithyDocumentSerde
 }
@@ -56,6 +56,9 @@ func (v *RebootDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DbNodeId != nil {
 		s.WriteString(schemas.RebootDbNodeInput_dbNodeId, *v.DbNodeId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.RebootDbNodeInput_exadbVmClusterId, *v.ExadbVmClusterId)
 	}
 }
 
@@ -79,6 +82,23 @@ type RebootDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootDbNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootDbNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootDbNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbNodeId != nil {
+		s.WriteString(schemas.RebootDbNodeOutput_dbNodeId, *v.DbNodeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RebootDbNodeOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RebootDbNodeOutput_statusReason, *v.StatusReason)
+	}
+}
 func (v *RebootDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RebootDbNodeOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -100,74 +120,26 @@ func (v *RebootDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationRebootDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbNode, schemas.RebootDbNodeInput, schemas.RebootDbNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbNode, schemas.RebootDbNodeInput, schemas.RebootDbNodeOutput), output: &RebootDbNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RebootDbNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRebootDbNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootDbNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +154,8 @@ func (c *Client) addOperationRebootDbNodeMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRebootDbNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RebootDbNode",
-	}
 }

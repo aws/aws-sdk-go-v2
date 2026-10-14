@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/topics/__TopicId__/refresh/__RefreshId__
+
+

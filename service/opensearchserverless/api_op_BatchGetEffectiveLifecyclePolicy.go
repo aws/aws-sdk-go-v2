@@ -4,11 +4,10 @@ package opensearchserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of successful and failed retrievals for the OpenSearch
@@ -40,6 +39,16 @@ type BatchGetEffectiveLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetEffectiveLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetEffectiveLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetEffectiveLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicyResourceIdentifiers(s, schemas.BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers, v.ResourceIdentifiers)
+}
+
 type BatchGetEffectiveLifecyclePolicyOutput struct {
 
 	// A list of lifecycle policies applied to the OpenSearch Serverless indexes.
@@ -54,77 +63,48 @@ type BatchGetEffectiveLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetEffectiveLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetEffectiveLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetEffectiveLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEffectiveLifecyclePolicyDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails, v.EffectiveLifecyclePolicyDetails)
+	serializeEffectiveLifecyclePolicyErrorDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails, v.EffectiveLifecyclePolicyErrorDetails)
+}
+func (v *BatchGetEffectiveLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetEffectiveLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails:
+			return deserializeEffectiveLifecyclePolicyDetails(d, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails, &v.EffectiveLifecyclePolicyDetails)
+		case schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails:
+			return deserializeEffectiveLifecyclePolicyErrorDetails(d, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails, &v.EffectiveLifecyclePolicyErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetEffectiveLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetEffectiveLifecyclePolicy, schemas.BatchGetEffectiveLifecyclePolicyRequest, schemas.BatchGetEffectiveLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetEffectiveLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetEffectiveLifecyclePolicy, schemas.BatchGetEffectiveLifecyclePolicyRequest, schemas.BatchGetEffectiveLifecyclePolicyResponse), output: &BatchGetEffectiveLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetEffectiveLifecyclePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetEffectiveLifecyclePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetEffectiveLifecyclePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetEffectiveLifecyclePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +119,8 @@ func (c *Client) addOperationBatchGetEffectiveLifecyclePolicyMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetEffectiveLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetEffectiveLifecyclePolicy",
-	}
 }

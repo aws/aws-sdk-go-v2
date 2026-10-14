@@ -1,0 +1,3 @@
+GET /payments/managers/__PaymentManagerId__/connectors/__PaymentConnectorId__
+
+

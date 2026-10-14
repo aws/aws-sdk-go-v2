@@ -243,7 +243,13 @@ type EndpointResolverV2 interface {
 }
 
 // resolver provides the implementation for resolving endpoints.
-type resolver struct{}
+//
+// This service has no modeled endpoint rules. The resolver falls back to the
+// client's BaseEndpoint; requests fail if neither BaseEndpoint nor a custom
+// EndpointResolverV2 is configured.
+type resolver struct {
+	baseEndpoint *string
+}
 
 func NewDefaultEndpointResolverV2() EndpointResolverV2 {
 	return &resolver{}
@@ -256,7 +262,18 @@ func (r *resolver) ResolveEndpoint(
 ) (
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
-	return endpoint, fmt.Errorf("no endpoint rules defined")
+	if r.baseEndpoint == nil {
+		return endpoint, fmt.Errorf("no endpoint rules are defined for this service; " +
+			"set BaseEndpoint or a custom EndpointResolverV2 to make requests")
+	}
+
+	uri, err := url.Parse(*r.baseEndpoint)
+	if err != nil {
+		return endpoint, fmt.Errorf("parse BaseEndpoint %q: %w", *r.baseEndpoint, err)
+	}
+
+	endpoint.URI = *uri
+	return endpoint, nil
 }
 
 type endpointParamsBinder interface {

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.CreateEngagementContext
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","EngagementIdentifier":"__EngagementIdentifier__","Payload":{"CustomerProject":{"Customer":{"CompanyName":"__CompanyName__","CountryCode":"US","Industry":"Aerospace","WebsiteUrl":"__WebsiteUrl__"},"Project":{"BusinessProblem":"__BusinessProblem__","TargetCompletionDate":"__TargetCompletionDate__","Title":"__Title__"}}},"Type":"CustomerProject"}

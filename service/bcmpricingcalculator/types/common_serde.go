@@ -674,6 +674,7 @@ func serializeWorkloadEstimateUsageItems(s smithy.ShapeSerializer, schema *smith
 }
 
 func deserializeBatchCreateBillScenarioCommitmentModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioCommitmentModificationEntry) error {
+	*v = make([]BatchCreateBillScenarioCommitmentModificationEntry, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioCommitmentModificationEntry{}
@@ -687,6 +688,7 @@ func deserializeBatchCreateBillScenarioCommitmentModificationEntries(d smithy.Sh
 }
 
 func deserializeBatchCreateBillScenarioCommitmentModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioCommitmentModificationError) error {
+	*v = make([]BatchCreateBillScenarioCommitmentModificationError, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioCommitmentModificationError{}
@@ -700,6 +702,7 @@ func deserializeBatchCreateBillScenarioCommitmentModificationErrors(d smithy.Sha
 }
 
 func deserializeBatchCreateBillScenarioCommitmentModificationItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioCommitmentModificationItem) error {
+	*v = make([]BatchCreateBillScenarioCommitmentModificationItem, 0)
 	var vv BatchCreateBillScenarioCommitmentModificationItem
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioCommitmentModificationItem{}
@@ -713,6 +716,7 @@ func deserializeBatchCreateBillScenarioCommitmentModificationItems(d smithy.Shap
 }
 
 func deserializeBatchCreateBillScenarioUsageModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioUsageModificationEntry) error {
+	*v = make([]BatchCreateBillScenarioUsageModificationEntry, 0)
 	var vv BatchCreateBillScenarioUsageModificationEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioUsageModificationEntry{}
@@ -726,6 +730,7 @@ func deserializeBatchCreateBillScenarioUsageModificationEntries(d smithy.ShapeDe
 }
 
 func deserializeBatchCreateBillScenarioUsageModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioUsageModificationError) error {
+	*v = make([]BatchCreateBillScenarioUsageModificationError, 0)
 	var vv BatchCreateBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioUsageModificationError{}
@@ -739,6 +744,7 @@ func deserializeBatchCreateBillScenarioUsageModificationErrors(d smithy.ShapeDes
 }
 
 func deserializeBatchCreateBillScenarioUsageModificationItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateBillScenarioUsageModificationItem) error {
+	*v = make([]BatchCreateBillScenarioUsageModificationItem, 0)
 	var vv BatchCreateBillScenarioUsageModificationItem
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateBillScenarioUsageModificationItem{}
@@ -752,6 +758,7 @@ func deserializeBatchCreateBillScenarioUsageModificationItems(d smithy.ShapeDese
 }
 
 func deserializeBatchCreateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateWorkloadEstimateUsageEntry) error {
+	*v = make([]BatchCreateWorkloadEstimateUsageEntry, 0)
 	var vv BatchCreateWorkloadEstimateUsageEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateWorkloadEstimateUsageEntry{}
@@ -765,6 +772,7 @@ func deserializeBatchCreateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 }
 
 func deserializeBatchCreateWorkloadEstimateUsageErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateWorkloadEstimateUsageError) error {
+	*v = make([]BatchCreateWorkloadEstimateUsageError, 0)
 	var vv BatchCreateWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateWorkloadEstimateUsageError{}
@@ -778,6 +786,7 @@ func deserializeBatchCreateWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 }
 
 func deserializeBatchCreateWorkloadEstimateUsageItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateWorkloadEstimateUsageItem) error {
+	*v = make([]BatchCreateWorkloadEstimateUsageItem, 0)
 	var vv BatchCreateWorkloadEstimateUsageItem
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateWorkloadEstimateUsageItem{}
@@ -791,6 +800,7 @@ func deserializeBatchCreateWorkloadEstimateUsageItems(d smithy.ShapeDeserializer
 }
 
 func deserializeBatchDeleteBillScenarioCommitmentModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -804,6 +814,7 @@ func deserializeBatchDeleteBillScenarioCommitmentModificationEntries(d smithy.Sh
 }
 
 func deserializeBatchDeleteBillScenarioCommitmentModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchDeleteBillScenarioCommitmentModificationError) error {
+	*v = make([]BatchDeleteBillScenarioCommitmentModificationError, 0)
 	var vv BatchDeleteBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchDeleteBillScenarioCommitmentModificationError{}
@@ -817,6 +828,7 @@ func deserializeBatchDeleteBillScenarioCommitmentModificationErrors(d smithy.Sha
 }
 
 func deserializeBatchDeleteBillScenarioUsageModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -830,6 +842,7 @@ func deserializeBatchDeleteBillScenarioUsageModificationEntries(d smithy.ShapeDe
 }
 
 func deserializeBatchDeleteBillScenarioUsageModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchDeleteBillScenarioUsageModificationError) error {
+	*v = make([]BatchDeleteBillScenarioUsageModificationError, 0)
 	var vv BatchDeleteBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchDeleteBillScenarioUsageModificationError{}
@@ -843,6 +856,7 @@ func deserializeBatchDeleteBillScenarioUsageModificationErrors(d smithy.ShapeDes
 }
 
 func deserializeBatchDeleteWorkloadEstimateUsageEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -856,6 +870,7 @@ func deserializeBatchDeleteWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 }
 
 func deserializeBatchDeleteWorkloadEstimateUsageErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchDeleteWorkloadEstimateUsageError) error {
+	*v = make([]BatchDeleteWorkloadEstimateUsageError, 0)
 	var vv BatchDeleteWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchDeleteWorkloadEstimateUsageError{}
@@ -869,6 +884,7 @@ func deserializeBatchDeleteWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 }
 
 func deserializeBatchUpdateBillScenarioCommitmentModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateBillScenarioCommitmentModificationEntry) error {
+	*v = make([]BatchUpdateBillScenarioCommitmentModificationEntry, 0)
 	var vv BatchUpdateBillScenarioCommitmentModificationEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateBillScenarioCommitmentModificationEntry{}
@@ -882,6 +898,7 @@ func deserializeBatchUpdateBillScenarioCommitmentModificationEntries(d smithy.Sh
 }
 
 func deserializeBatchUpdateBillScenarioCommitmentModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateBillScenarioCommitmentModificationError) error {
+	*v = make([]BatchUpdateBillScenarioCommitmentModificationError, 0)
 	var vv BatchUpdateBillScenarioCommitmentModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateBillScenarioCommitmentModificationError{}
@@ -895,6 +912,7 @@ func deserializeBatchUpdateBillScenarioCommitmentModificationErrors(d smithy.Sha
 }
 
 func deserializeBatchUpdateBillScenarioUsageModificationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateBillScenarioUsageModificationEntry) error {
+	*v = make([]BatchUpdateBillScenarioUsageModificationEntry, 0)
 	var vv BatchUpdateBillScenarioUsageModificationEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateBillScenarioUsageModificationEntry{}
@@ -908,6 +926,7 @@ func deserializeBatchUpdateBillScenarioUsageModificationEntries(d smithy.ShapeDe
 }
 
 func deserializeBatchUpdateBillScenarioUsageModificationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateBillScenarioUsageModificationError) error {
+	*v = make([]BatchUpdateBillScenarioUsageModificationError, 0)
 	var vv BatchUpdateBillScenarioUsageModificationError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateBillScenarioUsageModificationError{}
@@ -921,6 +940,7 @@ func deserializeBatchUpdateBillScenarioUsageModificationErrors(d smithy.ShapeDes
 }
 
 func deserializeBatchUpdateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateWorkloadEstimateUsageEntry) error {
+	*v = make([]BatchUpdateWorkloadEstimateUsageEntry, 0)
 	var vv BatchUpdateWorkloadEstimateUsageEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateWorkloadEstimateUsageEntry{}
@@ -934,6 +954,7 @@ func deserializeBatchUpdateWorkloadEstimateUsageEntries(d smithy.ShapeDeserializ
 }
 
 func deserializeBatchUpdateWorkloadEstimateUsageErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchUpdateWorkloadEstimateUsageError) error {
+	*v = make([]BatchUpdateWorkloadEstimateUsageError, 0)
 	var vv BatchUpdateWorkloadEstimateUsageError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchUpdateWorkloadEstimateUsageError{}
@@ -947,6 +968,7 @@ func deserializeBatchUpdateWorkloadEstimateUsageErrors(d smithy.ShapeDeserialize
 }
 
 func deserializeBillEstimateCommitmentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillEstimateCommitmentSummary) error {
+	*v = make([]BillEstimateCommitmentSummary, 0)
 	var vv BillEstimateCommitmentSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillEstimateCommitmentSummary{}
@@ -960,6 +982,7 @@ func deserializeBillEstimateCommitmentSummaries(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeBillEstimateInputCommitmentModificationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillEstimateInputCommitmentModificationSummary) error {
+	*v = make([]BillEstimateInputCommitmentModificationSummary, 0)
 	var vv BillEstimateInputCommitmentModificationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillEstimateInputCommitmentModificationSummary{}
@@ -973,6 +996,7 @@ func deserializeBillEstimateInputCommitmentModificationSummaries(d smithy.ShapeD
 }
 
 func deserializeBillEstimateInputUsageModificationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillEstimateInputUsageModificationSummary) error {
+	*v = make([]BillEstimateInputUsageModificationSummary, 0)
 	var vv BillEstimateInputUsageModificationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillEstimateInputUsageModificationSummary{}
@@ -986,6 +1010,7 @@ func deserializeBillEstimateInputUsageModificationSummaries(d smithy.ShapeDeseri
 }
 
 func deserializeBillEstimateLineItemSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillEstimateLineItemSummary) error {
+	*v = make([]BillEstimateLineItemSummary, 0)
 	var vv BillEstimateLineItemSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillEstimateLineItemSummary{}
@@ -999,6 +1024,7 @@ func deserializeBillEstimateLineItemSummaries(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeBillEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillEstimateSummary) error {
+	*v = make([]BillEstimateSummary, 0)
 	var vv BillEstimateSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillEstimateSummary{}
@@ -1012,6 +1038,7 @@ func deserializeBillEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeBillScenarioCommitmentModificationItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillScenarioCommitmentModificationItem) error {
+	*v = make([]BillScenarioCommitmentModificationItem, 0)
 	var vv BillScenarioCommitmentModificationItem
 	return smithy.ReadList(d, s, func() error {
 		vv = BillScenarioCommitmentModificationItem{}
@@ -1025,6 +1052,7 @@ func deserializeBillScenarioCommitmentModificationItems(d smithy.ShapeDeserializ
 }
 
 func deserializeBillScenarioSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillScenarioSummary) error {
+	*v = make([]BillScenarioSummary, 0)
 	var vv BillScenarioSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BillScenarioSummary{}
@@ -1038,6 +1066,7 @@ func deserializeBillScenarioSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeBillScenarioUsageModificationItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BillScenarioUsageModificationItem) error {
+	*v = make([]BillScenarioUsageModificationItem, 0)
 	var vv BillScenarioUsageModificationItem
 	return smithy.ReadList(d, s, func() error {
 		vv = BillScenarioUsageModificationItem{}
@@ -1051,6 +1080,7 @@ func deserializeBillScenarioUsageModificationItems(d smithy.ShapeDeserializer, s
 }
 
 func deserializeExpressionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Expression) error {
+	*v = make([]Expression, 0)
 	var vv Expression
 	return smithy.ReadList(d, s, func() error {
 		vv = Expression{}
@@ -1064,6 +1094,7 @@ func deserializeExpressionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeListBillEstimateLineItemsFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListBillEstimateLineItemsFilter) error {
+	*v = make([]ListBillEstimateLineItemsFilter, 0)
 	var vv ListBillEstimateLineItemsFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ListBillEstimateLineItemsFilter{}
@@ -1077,6 +1108,7 @@ func deserializeListBillEstimateLineItemsFilters(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeListBillEstimateLineItemsFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1090,6 +1122,7 @@ func deserializeListBillEstimateLineItemsFilterValues(d smithy.ShapeDeserializer
 }
 
 func deserializeListBillEstimatesFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListBillEstimatesFilter) error {
+	*v = make([]ListBillEstimatesFilter, 0)
 	var vv ListBillEstimatesFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ListBillEstimatesFilter{}
@@ -1103,6 +1136,7 @@ func deserializeListBillEstimatesFilters(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeListBillEstimatesFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1116,6 +1150,7 @@ func deserializeListBillEstimatesFilterValues(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeListBillScenariosFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListBillScenariosFilter) error {
+	*v = make([]ListBillScenariosFilter, 0)
 	var vv ListBillScenariosFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ListBillScenariosFilter{}
@@ -1129,6 +1164,7 @@ func deserializeListBillScenariosFilters(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeListBillScenariosFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1142,6 +1178,7 @@ func deserializeListBillScenariosFilterValues(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeListUsageFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListUsageFilter) error {
+	*v = make([]ListUsageFilter, 0)
 	var vv ListUsageFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ListUsageFilter{}
@@ -1155,6 +1192,7 @@ func deserializeListUsageFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeListUsageFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1168,6 +1206,7 @@ func deserializeListUsageFilterValues(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeListWorkloadEstimatesFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListWorkloadEstimatesFilter) error {
+	*v = make([]ListWorkloadEstimatesFilter, 0)
 	var vv ListWorkloadEstimatesFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ListWorkloadEstimatesFilter{}
@@ -1181,6 +1220,7 @@ func deserializeListWorkloadEstimatesFilters(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeListWorkloadEstimatesFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1194,6 +1234,7 @@ func deserializeListWorkloadEstimatesFilterValues(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeRateTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RateType) error {
+	*v = make([]RateType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1207,6 +1248,7 @@ func deserializeRateTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Rat
 }
 
 func deserializeResourceTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1220,6 +1262,7 @@ func deserializeResourceTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSavingsPlanArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1233,6 +1276,7 @@ func deserializeSavingsPlanArns(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1246,6 +1290,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeUsageAmounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UsageAmount) error {
+	*v = make([]UsageAmount, 0)
 	var vv UsageAmount
 	return smithy.ReadList(d, s, func() error {
 		vv = UsageAmount{}
@@ -1259,6 +1304,7 @@ func deserializeUsageAmounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeUsageQuantities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UsageQuantity) error {
+	*v = make([]UsageQuantity, 0)
 	var vv UsageQuantity
 	return smithy.ReadList(d, s, func() error {
 		vv = UsageQuantity{}
@@ -1272,6 +1318,7 @@ func deserializeUsageQuantities(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -1285,6 +1332,7 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeWorkloadEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WorkloadEstimateSummary) error {
+	*v = make([]WorkloadEstimateSummary, 0)
 	var vv WorkloadEstimateSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = WorkloadEstimateSummary{}
@@ -1298,6 +1346,7 @@ func deserializeWorkloadEstimateSummaries(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeWorkloadEstimateUsageItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WorkloadEstimateUsageItem) error {
+	*v = make([]WorkloadEstimateUsageItem, 0)
 	var vv WorkloadEstimateUsageItem
 	return smithy.ReadList(d, s, func() error {
 		vv = WorkloadEstimateUsageItem{}
@@ -1340,6 +1389,14 @@ func deserializeServiceCostDifferenceMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]CostDifference)
 	var vv CostDifference
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CostDifference
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CostDifference{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -1354,6 +1411,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

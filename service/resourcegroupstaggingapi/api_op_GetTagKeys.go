@@ -5,9 +5,9 @@ package resourcegroupstaggingapi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all tag keys currently in use in the specified Amazon Web Services
@@ -44,6 +44,18 @@ type GetTagKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagKeysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagKeysInput_PaginationToken, *v.PaginationToken)
+	}
+}
+
 type GetTagKeysOutput struct {
 
 	// A string that indicates that there is more data available than this response
@@ -60,74 +72,48 @@ type GetTagKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagKeysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagKeysOutput_PaginationToken, *v.PaginationToken)
+	}
+	serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+}
+func (v *GetTagKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagKeysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagKeysOutput_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.GetTagKeysOutput_PaginationToken, v.PaginationToken)
+		case schemas.GetTagKeysOutput_TagKeys:
+			return deserializeTagKeyList(d, schemas.GetTagKeysOutput_TagKeys, &v.TagKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagKeys, schemas.GetTagKeysInput, schemas.GetTagKeysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTagKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagKeys, schemas.GetTagKeysInput, schemas.GetTagKeysOutput), output: &GetTagKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTagKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTagKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTagKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +126,6 @@ func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,11 +213,3 @@ type GetTagKeysAPIClient interface {
 }
 
 var _ GetTagKeysAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTagKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTagKeys",
-	}
-}

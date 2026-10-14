@@ -4,13 +4,8 @@ package route53globalresolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,18 +39,6 @@ type GetGlobalResolverInput struct {
 	GlobalResolverId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetGlobalResolverInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGlobalResolverInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GlobalResolverId != nil {
-		s.WriteString(schemas.GetGlobalResolverInput_globalResolverId, *v.GlobalResolverId)
-	}
 }
 
 type GetGlobalResolverOutput struct {
@@ -132,129 +115,29 @@ type GetGlobalResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlobalResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGlobalResolverOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGlobalResolverOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_arn, v.Arn)
-		case schemas.GetGlobalResolverOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_clientToken, v.ClientToken)
-		case schemas.GetGlobalResolverOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetGlobalResolverOutput_createdAt, v.CreatedAt)
-		case schemas.GetGlobalResolverOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_description, v.Description)
-		case schemas.GetGlobalResolverOutput_dnsName:
-			v.DnsName = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_dnsName, v.DnsName)
-		case schemas.GetGlobalResolverOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_id, v.Id)
-		case schemas.GetGlobalResolverOutput_ipAddressType:
-			var ev string
-			if err := d.ReadString(schemas.GetGlobalResolverOutput_ipAddressType, &ev); err != nil {
-				return err
-			}
-			v.IpAddressType = types.GlobalResolverIpAddressType(ev)
-			return nil
-		case schemas.GetGlobalResolverOutput_ipv4Addresses:
-			return deserializeIPv4Addresses(d, schemas.GetGlobalResolverOutput_ipv4Addresses, &v.Ipv4Addresses)
-		case schemas.GetGlobalResolverOutput_ipv6Addresses:
-			return deserializeIPv6Addresses(d, schemas.GetGlobalResolverOutput_ipv6Addresses, &v.Ipv6Addresses)
-		case schemas.GetGlobalResolverOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_name, v.Name)
-		case schemas.GetGlobalResolverOutput_observabilityRegion:
-			v.ObservabilityRegion = new(string)
-			return d.ReadString(schemas.GetGlobalResolverOutput_observabilityRegion, v.ObservabilityRegion)
-		case schemas.GetGlobalResolverOutput_regions:
-			return deserializeRegions(d, schemas.GetGlobalResolverOutput_regions, &v.Regions)
-		case schemas.GetGlobalResolverOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetGlobalResolverOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CRResourceStatus(ev)
-			return nil
-		case schemas.GetGlobalResolverOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetGlobalResolverOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGlobalResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlobalResolver{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalResolver, schemas.GetGlobalResolverInput, schemas.GetGlobalResolverOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlobalResolver{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalResolver, schemas.GetGlobalResolverInput, schemas.GetGlobalResolverOutput), output: &GetGlobalResolverOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGlobalResolver"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGlobalResolverValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGlobalResolver(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -269,22 +152,8 @@ func (c *Client) addOperationGetGlobalResolverMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGlobalResolver(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGlobalResolver",
-	}
 }

@@ -4,13 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,43 +60,18 @@ type UpdateChannelInput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
+	// The multiview configuration for the channel. This setting is required when the
+	// channel's InputType is MULTIVIEW , and can't be set for any other input type.
+	// Because InputType is immutable, you can change a multiview channel's sources
+	// and layouts. You can't add or remove the multiview configuration itself.
+	MultiviewConfiguration *types.MultiviewConfiguration
+
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when
 	// InputType is CMAF .
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateChannelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.UpdateChannelRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.UpdateChannelRequest_ChannelName, *v.ChannelName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateChannelRequest_Description, *v.Description)
-	}
-	if v.ETag != nil {
-		s.WriteString(schemas.UpdateChannelRequest_ETag, *v.ETag)
-	}
-	if v.InputSwitchConfiguration != nil {
-		s.WriteStruct(schemas.UpdateChannelRequest_InputSwitchConfiguration)
-		v.InputSwitchConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutputHeaderConfiguration != nil {
-		s.WriteStruct(schemas.UpdateChannelRequest_OutputHeaderConfiguration)
-		v.OutputHeaderConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateChannelOutput struct {
@@ -134,6 +104,12 @@ type UpdateChannelOutput struct {
 	// This member is required.
 	ModifiedAt *time.Time
 
+	// The multiview channels, in the same channel group, that list this channel as an
+	// available source. This is a read-only field. You can't delete a channel while
+	// any multiview channel still lists it as a source. Use this field to find the
+	// multiview channels that you need to update first.
+	AttachedMultiviewChannels []string
+
 	// The description for your channel.
 	Description *string
 
@@ -149,9 +125,9 @@ type UpdateChannelOutput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -160,12 +136,33 @@ type UpdateChannelOutput struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType types.InputType
+
+	// The multiview configuration for the channel. This is present only when InputType
+	// is MULTIVIEW .
+	MultiviewConfiguration *types.MultiviewConfiguration
 
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when
 	// InputType is CMAF .
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
+
+	// The output locking mode configured for the channel. This value is immutable
+	// after channel creation.
+	//
+	// The allowed values are:
+	//
+	//   - EPOCH_LOCKED - The channel uses epoch-locked behavior with deterministic
+	//   sequence numbering and fixed segment boundaries aligned to epoch time.
+	//
+	//   - NON_EPOCH_LOCKED - The channel uses non-epoch-locked behavior with
+	//   duration-based segment combining and monotonically increasing sequence numbers
+	//   starting from 0.
+	OutputLockingMode types.OutputLockingMode
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string
@@ -176,120 +173,29 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateChannelResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateChannelResponse_Arn, v.Arn)
-		case schemas.UpdateChannelResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.UpdateChannelResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.UpdateChannelResponse_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.UpdateChannelResponse_ChannelName, v.ChannelName)
-		case schemas.UpdateChannelResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateChannelResponse_CreatedAt, v.CreatedAt)
-		case schemas.UpdateChannelResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateChannelResponse_Description, v.Description)
-		case schemas.UpdateChannelResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.UpdateChannelResponse_ETag, v.ETag)
-		case schemas.UpdateChannelResponse_IngestEndpoints:
-			return deserializeIngestEndpointList(d, schemas.UpdateChannelResponse_IngestEndpoints, &v.IngestEndpoints)
-		case schemas.UpdateChannelResponse_InputSwitchConfiguration:
-			v.InputSwitchConfiguration = &types.InputSwitchConfiguration{}
-			return v.InputSwitchConfiguration.Deserialize(d)
-		case schemas.UpdateChannelResponse_InputType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateChannelResponse_InputType, &ev); err != nil {
-				return err
-			}
-			v.InputType = types.InputType(ev)
-			return nil
-		case schemas.UpdateChannelResponse_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateChannelResponse_ModifiedAt, v.ModifiedAt)
-		case schemas.UpdateChannelResponse_OutputHeaderConfiguration:
-			v.OutputHeaderConfiguration = &types.OutputHeaderConfiguration{}
-			return v.OutputHeaderConfiguration.Deserialize(d)
-		case schemas.UpdateChannelResponse_Tags:
-			return deserializeTagMap(d, schemas.UpdateChannelResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -304,22 +210,8 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateChannel",
-	}
 }

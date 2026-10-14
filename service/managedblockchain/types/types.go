@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -50,6 +52,79 @@ type Accessor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Accessor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Accessor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Accessor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Accessor_Arn, *v.Arn)
+	}
+	if v.BillingToken != nil {
+		s.WriteString(schemas.Accessor_BillingToken, *v.BillingToken)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Accessor_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Accessor_Id, *v.Id)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.Accessor_NetworkType, string(v.NetworkType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Accessor_Status, string(v.Status))
+	}
+	serializeOutputTagMap(s, schemas.Accessor_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.Accessor_Type, string(v.Type))
+	}
+}
+func (v *Accessor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Accessor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Accessor_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Accessor_Arn, v.Arn)
+		case schemas.Accessor_BillingToken:
+			v.BillingToken = new(string)
+			return d.ReadString(schemas.Accessor_BillingToken, v.BillingToken)
+		case schemas.Accessor_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Accessor_CreationDate, v.CreationDate)
+		case schemas.Accessor_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Accessor_Id, v.Id)
+		case schemas.Accessor_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.Accessor_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = AccessorNetworkType(ev)
+			return nil
+		case schemas.Accessor_Status:
+			var ev string
+			if err := d.ReadString(schemas.Accessor_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AccessorStatus(ev)
+			return nil
+		case schemas.Accessor_Tags:
+			return deserializeOutputTagMap(d, schemas.Accessor_Tags, &v.Tags)
+		case schemas.Accessor_Type:
+			var ev string
+			if err := d.ReadString(schemas.Accessor_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AccessorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A summary of accessor properties.
 type AccessorSummary struct {
 
@@ -77,6 +152,70 @@ type AccessorSummary struct {
 	Type AccessorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AccessorSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.AccessorSummary_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AccessorSummary_Id, *v.Id)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.AccessorSummary_NetworkType, string(v.NetworkType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AccessorSummary_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AccessorSummary_Type, string(v.Type))
+	}
+}
+func (v *AccessorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AccessorSummary_Arn, v.Arn)
+		case schemas.AccessorSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.AccessorSummary_CreationDate, v.CreationDate)
+		case schemas.AccessorSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AccessorSummary_Id, v.Id)
+		case schemas.AccessorSummary_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.AccessorSummary_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = AccessorNetworkType(ev)
+			return nil
+		case schemas.AccessorSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AccessorSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AccessorStatus(ev)
+			return nil
+		case schemas.AccessorSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.AccessorSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AccessorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A policy type that defines the voting rules for the network. The rules decide
@@ -107,6 +246,44 @@ type ApprovalThresholdPolicy struct {
 	ThresholdPercentage *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApprovalThresholdPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalThresholdPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalThresholdPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProposalDurationInHours != nil {
+		s.WriteInt32(schemas.ApprovalThresholdPolicy_ProposalDurationInHours, *v.ProposalDurationInHours)
+	}
+	if v.ThresholdComparator != "" {
+		s.WriteString(schemas.ApprovalThresholdPolicy_ThresholdComparator, string(v.ThresholdComparator))
+	}
+	if v.ThresholdPercentage != nil {
+		s.WriteInt32(schemas.ApprovalThresholdPolicy_ThresholdPercentage, *v.ThresholdPercentage)
+	}
+}
+func (v *ApprovalThresholdPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalThresholdPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalThresholdPolicy_ProposalDurationInHours:
+			v.ProposalDurationInHours = new(int32)
+			return d.ReadInt32(schemas.ApprovalThresholdPolicy_ProposalDurationInHours, v.ProposalDurationInHours)
+		case schemas.ApprovalThresholdPolicy_ThresholdComparator:
+			var ev string
+			if err := d.ReadString(schemas.ApprovalThresholdPolicy_ThresholdComparator, &ev); err != nil {
+				return err
+			}
+			v.ThresholdComparator = ThresholdComparator(ev)
+			return nil
+		case schemas.ApprovalThresholdPolicy_ThresholdPercentage:
+			v.ThresholdPercentage = new(int32)
+			return d.ReadInt32(schemas.ApprovalThresholdPolicy_ThresholdPercentage, v.ThresholdPercentage)
+		}
+		return nil
+	})
 }
 
 // An invitation to an Amazon Web Services account to create a member and join the
@@ -156,6 +333,64 @@ type Invitation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Invitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Invitation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Invitation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Invitation_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Invitation_CreationDate, *v.CreationDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.Invitation_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.InvitationId != nil {
+		s.WriteString(schemas.Invitation_InvitationId, *v.InvitationId)
+	}
+	if v.NetworkSummary != nil {
+		s.WriteStruct(schemas.Invitation_NetworkSummary)
+		v.NetworkSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Invitation_Status, string(v.Status))
+	}
+}
+func (v *Invitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Invitation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Invitation_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Invitation_Arn, v.Arn)
+		case schemas.Invitation_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Invitation_CreationDate, v.CreationDate)
+		case schemas.Invitation_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.Invitation_ExpirationDate, v.ExpirationDate)
+		case schemas.Invitation_InvitationId:
+			v.InvitationId = new(string)
+			return d.ReadString(schemas.Invitation_InvitationId, v.InvitationId)
+		case schemas.Invitation_NetworkSummary:
+			v.NetworkSummary = &NetworkSummary{}
+			return v.NetworkSummary.Deserialize(d)
+		case schemas.Invitation_Status:
+			var ev string
+			if err := d.ReadString(schemas.Invitation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InvitationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An action to invite a specific Amazon Web Services account to create a member
 // and join the network. The InviteAction is carried out when a Proposal is
 // APPROVED .
@@ -171,6 +406,28 @@ type InviteAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Principal != nil {
+		s.WriteString(schemas.InviteAction_Principal, *v.Principal)
+	}
+}
+func (v *InviteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteAction_Principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.InviteAction_Principal, v.Principal)
+		}
+		return nil
+	})
+}
+
 // A configuration for logging events.
 type LogConfiguration struct {
 
@@ -180,6 +437,28 @@ type LogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.LogConfiguration_Enabled, *v.Enabled)
+	}
+}
+func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.LogConfiguration_Enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
 // A collection of log configurations.
 type LogConfigurations struct {
 
@@ -187,6 +466,30 @@ type LogConfigurations struct {
 	Cloudwatch *LogConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cloudwatch != nil {
+		s.WriteStruct(schemas.LogConfigurations_Cloudwatch)
+		v.Cloudwatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LogConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogConfigurations_Cloudwatch:
+			v.Cloudwatch = &LogConfiguration{}
+			return v.Cloudwatch.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Member configuration properties.
@@ -279,6 +582,93 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Member) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Member)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Member_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Member_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Member_Description, *v.Description)
+	}
+	if v.FrameworkAttributes != nil {
+		s.WriteStruct(schemas.Member_FrameworkAttributes)
+		v.FrameworkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Member_Id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Member_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LogPublishingConfiguration != nil {
+		s.WriteStruct(schemas.Member_LogPublishingConfiguration)
+		v.LogPublishingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Member_Name, *v.Name)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.Member_NetworkId, *v.NetworkId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Member_Status, string(v.Status))
+	}
+	serializeOutputTagMap(s, schemas.Member_Tags, v.Tags)
+}
+func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Member_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Member_Arn, v.Arn)
+		case schemas.Member_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Member_CreationDate, v.CreationDate)
+		case schemas.Member_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Member_Description, v.Description)
+		case schemas.Member_FrameworkAttributes:
+			v.FrameworkAttributes = &MemberFrameworkAttributes{}
+			return v.FrameworkAttributes.Deserialize(d)
+		case schemas.Member_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Member_Id, v.Id)
+		case schemas.Member_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Member_KmsKeyArn, v.KmsKeyArn)
+		case schemas.Member_LogPublishingConfiguration:
+			v.LogPublishingConfiguration = &MemberLogPublishingConfiguration{}
+			return v.LogPublishingConfiguration.Deserialize(d)
+		case schemas.Member_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Member_Name, v.Name)
+		case schemas.Member_NetworkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.Member_NetworkId, v.NetworkId)
+		case schemas.Member_Status:
+			var ev string
+			if err := d.ReadString(schemas.Member_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MemberStatus(ev)
+			return nil
+		case schemas.Member_Tags:
+			return deserializeOutputTagMap(d, schemas.Member_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Configuration properties of the member.
 //
 // Applies only to Hyperledger Fabric.
@@ -339,6 +729,59 @@ type MemberConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.MemberConfiguration_Description, *v.Description)
+	}
+	if v.FrameworkConfiguration != nil {
+		s.WriteStruct(schemas.MemberConfiguration_FrameworkConfiguration)
+		v.FrameworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.MemberConfiguration_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LogPublishingConfiguration != nil {
+		s.WriteStruct(schemas.MemberConfiguration_LogPublishingConfiguration)
+		v.LogPublishingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MemberConfiguration_Name, *v.Name)
+	}
+	serializeInputTagMap(s, schemas.MemberConfiguration_Tags, v.Tags)
+}
+func (v *MemberConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MemberConfiguration_Description, v.Description)
+		case schemas.MemberConfiguration_FrameworkConfiguration:
+			v.FrameworkConfiguration = &MemberFrameworkConfiguration{}
+			return v.FrameworkConfiguration.Deserialize(d)
+		case schemas.MemberConfiguration_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.MemberConfiguration_KmsKeyArn, v.KmsKeyArn)
+		case schemas.MemberConfiguration_LogPublishingConfiguration:
+			v.LogPublishingConfiguration = &MemberLogPublishingConfiguration{}
+			return v.LogPublishingConfiguration.Deserialize(d)
+		case schemas.MemberConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MemberConfiguration_Name, v.Name)
+		case schemas.MemberConfiguration_Tags:
+			return deserializeInputTagMap(d, schemas.MemberConfiguration_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Attributes of Hyperledger Fabric for a member in a Managed Blockchain network
 // using the Hyperledger Fabric framework.
 type MemberFabricAttributes struct {
@@ -350,6 +793,34 @@ type MemberFabricAttributes struct {
 	CaEndpoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemberFabricAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberFabricAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberFabricAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminUsername != nil {
+		s.WriteString(schemas.MemberFabricAttributes_AdminUsername, *v.AdminUsername)
+	}
+	if v.CaEndpoint != nil {
+		s.WriteString(schemas.MemberFabricAttributes_CaEndpoint, *v.CaEndpoint)
+	}
+}
+func (v *MemberFabricAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberFabricAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberFabricAttributes_AdminUsername:
+			v.AdminUsername = new(string)
+			return d.ReadString(schemas.MemberFabricAttributes_AdminUsername, v.AdminUsername)
+		case schemas.MemberFabricAttributes_CaEndpoint:
+			v.CaEndpoint = new(string)
+			return d.ReadString(schemas.MemberFabricAttributes_CaEndpoint, v.CaEndpoint)
+		}
+		return nil
+	})
 }
 
 // Configuration properties for Hyperledger Fabric for a member in a Managed
@@ -373,6 +844,34 @@ type MemberFabricConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberFabricConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberFabricConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberFabricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPassword != nil {
+		s.WriteString(schemas.MemberFabricConfiguration_AdminPassword, *v.AdminPassword)
+	}
+	if v.AdminUsername != nil {
+		s.WriteString(schemas.MemberFabricConfiguration_AdminUsername, *v.AdminUsername)
+	}
+}
+func (v *MemberFabricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberFabricConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberFabricConfiguration_AdminPassword:
+			v.AdminPassword = new(string)
+			return d.ReadString(schemas.MemberFabricConfiguration_AdminPassword, v.AdminPassword)
+		case schemas.MemberFabricConfiguration_AdminUsername:
+			v.AdminUsername = new(string)
+			return d.ReadString(schemas.MemberFabricConfiguration_AdminUsername, v.AdminUsername)
+		}
+		return nil
+	})
+}
+
 // Configuration properties for logging events associated with a member of a
 // Managed Blockchain network using the Hyperledger Fabric framework.
 type MemberFabricLogPublishingConfiguration struct {
@@ -383,6 +882,30 @@ type MemberFabricLogPublishingConfiguration struct {
 	CaLogs *LogConfigurations
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemberFabricLogPublishingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberFabricLogPublishingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberFabricLogPublishingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaLogs != nil {
+		s.WriteStruct(schemas.MemberFabricLogPublishingConfiguration_CaLogs)
+		v.CaLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MemberFabricLogPublishingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberFabricLogPublishingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberFabricLogPublishingConfiguration_CaLogs:
+			v.CaLogs = &LogConfigurations{}
+			return v.CaLogs.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Attributes relevant to a member for the blockchain framework that the Managed
@@ -396,6 +919,30 @@ type MemberFrameworkAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberFrameworkAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberFrameworkAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberFrameworkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.MemberFrameworkAttributes_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MemberFrameworkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberFrameworkAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberFrameworkAttributes_Fabric:
+			v.Fabric = &MemberFabricAttributes{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration properties relevant to a member for the blockchain framework that
 // the Managed Blockchain network uses.
 type MemberFrameworkConfiguration struct {
@@ -407,6 +954,30 @@ type MemberFrameworkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberFrameworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberFrameworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberFrameworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.MemberFrameworkConfiguration_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MemberFrameworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberFrameworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberFrameworkConfiguration_Fabric:
+			v.Fabric = &MemberFabricConfiguration{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration properties for logging events associated with a member of a
 // Managed Blockchain network.
 type MemberLogPublishingConfiguration struct {
@@ -416,6 +987,30 @@ type MemberLogPublishingConfiguration struct {
 	Fabric *MemberFabricLogPublishingConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *MemberLogPublishingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberLogPublishingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberLogPublishingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.MemberLogPublishingConfiguration_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MemberLogPublishingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberLogPublishingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberLogPublishingConfiguration_Fabric:
+			v.Fabric = &MemberFabricLogPublishingConfiguration{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A summary of configuration properties for a member.
@@ -481,6 +1076,68 @@ type MemberSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.MemberSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.MemberSummary_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MemberSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MemberSummary_Id, *v.Id)
+	}
+	if v.IsOwned != nil {
+		s.WriteBool(schemas.MemberSummary_IsOwned, *v.IsOwned)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MemberSummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MemberSummary_Status, string(v.Status))
+	}
+}
+func (v *MemberSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.MemberSummary_Arn, v.Arn)
+		case schemas.MemberSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.MemberSummary_CreationDate, v.CreationDate)
+		case schemas.MemberSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MemberSummary_Description, v.Description)
+		case schemas.MemberSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MemberSummary_Id, v.Id)
+		case schemas.MemberSummary_IsOwned:
+			v.IsOwned = new(bool)
+			return d.ReadBool(schemas.MemberSummary_IsOwned, v.IsOwned)
+		case schemas.MemberSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MemberSummary_Name, v.Name)
+		case schemas.MemberSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.MemberSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MemberStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Network configuration properties.
 type Network struct {
 
@@ -534,6 +1191,103 @@ type Network struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Network) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Network)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Network) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Network_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Network_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Network_Description, *v.Description)
+	}
+	if v.Framework != "" {
+		s.WriteString(schemas.Network_Framework, string(v.Framework))
+	}
+	if v.FrameworkAttributes != nil {
+		s.WriteStruct(schemas.Network_FrameworkAttributes)
+		v.FrameworkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameworkVersion != nil {
+		s.WriteString(schemas.Network_FrameworkVersion, *v.FrameworkVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Network_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Network_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Network_Status, string(v.Status))
+	}
+	serializeOutputTagMap(s, schemas.Network_Tags, v.Tags)
+	if v.VotingPolicy != nil {
+		s.WriteStruct(schemas.Network_VotingPolicy)
+		v.VotingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcEndpointServiceName != nil {
+		s.WriteString(schemas.Network_VpcEndpointServiceName, *v.VpcEndpointServiceName)
+	}
+}
+func (v *Network) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Network, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Network_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Network_Arn, v.Arn)
+		case schemas.Network_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Network_CreationDate, v.CreationDate)
+		case schemas.Network_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Network_Description, v.Description)
+		case schemas.Network_Framework:
+			var ev string
+			if err := d.ReadString(schemas.Network_Framework, &ev); err != nil {
+				return err
+			}
+			v.Framework = Framework(ev)
+			return nil
+		case schemas.Network_FrameworkAttributes:
+			v.FrameworkAttributes = &NetworkFrameworkAttributes{}
+			return v.FrameworkAttributes.Deserialize(d)
+		case schemas.Network_FrameworkVersion:
+			v.FrameworkVersion = new(string)
+			return d.ReadString(schemas.Network_FrameworkVersion, v.FrameworkVersion)
+		case schemas.Network_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Network_Id, v.Id)
+		case schemas.Network_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Network_Name, v.Name)
+		case schemas.Network_Status:
+			var ev string
+			if err := d.ReadString(schemas.Network_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NetworkStatus(ev)
+			return nil
+		case schemas.Network_Tags:
+			return deserializeOutputTagMap(d, schemas.Network_Tags, &v.Tags)
+		case schemas.Network_VotingPolicy:
+			v.VotingPolicy = &VotingPolicy{}
+			return v.VotingPolicy.Deserialize(d)
+		case schemas.Network_VpcEndpointServiceName:
+			v.VpcEndpointServiceName = new(string)
+			return d.ReadString(schemas.Network_VpcEndpointServiceName, v.VpcEndpointServiceName)
+		}
+		return nil
+	})
+}
+
 // Attributes of Ethereum for a network.
 type NetworkEthereumAttributes struct {
 
@@ -544,6 +1298,28 @@ type NetworkEthereumAttributes struct {
 	ChainId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkEthereumAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkEthereumAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkEthereumAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChainId != nil {
+		s.WriteString(schemas.NetworkEthereumAttributes_ChainId, *v.ChainId)
+	}
+}
+func (v *NetworkEthereumAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkEthereumAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkEthereumAttributes_ChainId:
+			v.ChainId = new(string)
+			return d.ReadString(schemas.NetworkEthereumAttributes_ChainId, v.ChainId)
+		}
+		return nil
+	})
 }
 
 // Attributes of Hyperledger Fabric for a network.
@@ -561,6 +1337,38 @@ type NetworkFabricAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFabricAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFabricAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFabricAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Edition != "" {
+		s.WriteString(schemas.NetworkFabricAttributes_Edition, string(v.Edition))
+	}
+	if v.OrderingServiceEndpoint != nil {
+		s.WriteString(schemas.NetworkFabricAttributes_OrderingServiceEndpoint, *v.OrderingServiceEndpoint)
+	}
+}
+func (v *NetworkFabricAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFabricAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFabricAttributes_Edition:
+			var ev string
+			if err := d.ReadString(schemas.NetworkFabricAttributes_Edition, &ev); err != nil {
+				return err
+			}
+			v.Edition = Edition(ev)
+			return nil
+		case schemas.NetworkFabricAttributes_OrderingServiceEndpoint:
+			v.OrderingServiceEndpoint = new(string)
+			return d.ReadString(schemas.NetworkFabricAttributes_OrderingServiceEndpoint, v.OrderingServiceEndpoint)
+		}
+		return nil
+	})
+}
+
 // Hyperledger Fabric configuration properties for the network.
 type NetworkFabricConfiguration struct {
 
@@ -573,6 +1381,32 @@ type NetworkFabricConfiguration struct {
 	Edition Edition
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFabricConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFabricConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFabricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Edition != "" {
+		s.WriteString(schemas.NetworkFabricConfiguration_Edition, string(v.Edition))
+	}
+}
+func (v *NetworkFabricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFabricConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFabricConfiguration_Edition:
+			var ev string
+			if err := d.ReadString(schemas.NetworkFabricConfiguration_Edition, &ev); err != nil {
+				return err
+			}
+			v.Edition = Edition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Attributes relevant to the network for the blockchain framework that the
@@ -590,6 +1424,38 @@ type NetworkFrameworkAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFrameworkAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFrameworkAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFrameworkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ethereum != nil {
+		s.WriteStruct(schemas.NetworkFrameworkAttributes_Ethereum)
+		v.Ethereum.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.NetworkFrameworkAttributes_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkFrameworkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFrameworkAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFrameworkAttributes_Ethereum:
+			v.Ethereum = &NetworkEthereumAttributes{}
+			return v.Ethereum.Deserialize(d)
+		case schemas.NetworkFrameworkAttributes_Fabric:
+			v.Fabric = &NetworkFabricAttributes{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Configuration properties relevant to the network for the blockchain framework
 //
 // that the network uses.
@@ -600,6 +1466,30 @@ type NetworkFrameworkConfiguration struct {
 	Fabric *NetworkFabricConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFrameworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFrameworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFrameworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.NetworkFrameworkConfiguration_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkFrameworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFrameworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFrameworkConfiguration_Fabric:
+			v.Fabric = &NetworkFabricConfiguration{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A summary of network configuration properties.
@@ -633,6 +1523,78 @@ type NetworkSummary struct {
 	Status NetworkStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.NetworkSummary_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NetworkSummary_Description, *v.Description)
+	}
+	if v.Framework != "" {
+		s.WriteString(schemas.NetworkSummary_Framework, string(v.Framework))
+	}
+	if v.FrameworkVersion != nil {
+		s.WriteString(schemas.NetworkSummary_FrameworkVersion, *v.FrameworkVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NetworkSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkSummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NetworkSummary_Status, string(v.Status))
+	}
+}
+func (v *NetworkSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkSummary_Arn, v.Arn)
+		case schemas.NetworkSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.NetworkSummary_CreationDate, v.CreationDate)
+		case schemas.NetworkSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NetworkSummary_Description, v.Description)
+		case schemas.NetworkSummary_Framework:
+			var ev string
+			if err := d.ReadString(schemas.NetworkSummary_Framework, &ev); err != nil {
+				return err
+			}
+			v.Framework = Framework(ev)
+			return nil
+		case schemas.NetworkSummary_FrameworkVersion:
+			v.FrameworkVersion = new(string)
+			return d.ReadString(schemas.NetworkSummary_FrameworkVersion, v.FrameworkVersion)
+		case schemas.NetworkSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetworkSummary_Id, v.Id)
+		case schemas.NetworkSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkSummary_Name, v.Name)
+		case schemas.NetworkSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.NetworkSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NetworkStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Configuration properties of a node.
@@ -737,6 +1699,109 @@ type Node struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Node) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Node)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Node_Arn, *v.Arn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Node_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Node_CreationDate, *v.CreationDate)
+	}
+	if v.FrameworkAttributes != nil {
+		s.WriteStruct(schemas.Node_FrameworkAttributes)
+		v.FrameworkAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Node_Id, *v.Id)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.Node_InstanceType, *v.InstanceType)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Node_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LogPublishingConfiguration != nil {
+		s.WriteStruct(schemas.Node_LogPublishingConfiguration)
+		v.LogPublishingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.Node_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.Node_NetworkId, *v.NetworkId)
+	}
+	if v.StateDB != "" {
+		s.WriteString(schemas.Node_StateDB, string(v.StateDB))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Node_Status, string(v.Status))
+	}
+	serializeOutputTagMap(s, schemas.Node_Tags, v.Tags)
+}
+func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Node_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Node_Arn, v.Arn)
+		case schemas.Node_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Node_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Node_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Node_CreationDate, v.CreationDate)
+		case schemas.Node_FrameworkAttributes:
+			v.FrameworkAttributes = &NodeFrameworkAttributes{}
+			return v.FrameworkAttributes.Deserialize(d)
+		case schemas.Node_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Node_Id, v.Id)
+		case schemas.Node_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.Node_InstanceType, v.InstanceType)
+		case schemas.Node_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Node_KmsKeyArn, v.KmsKeyArn)
+		case schemas.Node_LogPublishingConfiguration:
+			v.LogPublishingConfiguration = &NodeLogPublishingConfiguration{}
+			return v.LogPublishingConfiguration.Deserialize(d)
+		case schemas.Node_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.Node_MemberId, v.MemberId)
+		case schemas.Node_NetworkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.Node_NetworkId, v.NetworkId)
+		case schemas.Node_StateDB:
+			var ev string
+			if err := d.ReadString(schemas.Node_StateDB, &ev); err != nil {
+				return err
+			}
+			v.StateDB = StateDBType(ev)
+			return nil
+		case schemas.Node_Status:
+			var ev string
+			if err := d.ReadString(schemas.Node_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NodeStatus(ev)
+			return nil
+		case schemas.Node_Tags:
+			return deserializeOutputTagMap(d, schemas.Node_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Configuration properties of a node.
 type NodeConfiguration struct {
 
@@ -762,6 +1827,52 @@ type NodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NodeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.NodeConfiguration_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.NodeConfiguration_InstanceType, *v.InstanceType)
+	}
+	if v.LogPublishingConfiguration != nil {
+		s.WriteStruct(schemas.NodeConfiguration_LogPublishingConfiguration)
+		v.LogPublishingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateDB != "" {
+		s.WriteString(schemas.NodeConfiguration_StateDB, string(v.StateDB))
+	}
+}
+func (v *NodeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeConfiguration_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.NodeConfiguration_AvailabilityZone, v.AvailabilityZone)
+		case schemas.NodeConfiguration_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.NodeConfiguration_InstanceType, v.InstanceType)
+		case schemas.NodeConfiguration_LogPublishingConfiguration:
+			v.LogPublishingConfiguration = &NodeLogPublishingConfiguration{}
+			return v.LogPublishingConfiguration.Deserialize(d)
+		case schemas.NodeConfiguration_StateDB:
+			var ev string
+			if err := d.ReadString(schemas.NodeConfiguration_StateDB, &ev); err != nil {
+				return err
+			}
+			v.StateDB = StateDBType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Attributes of an Ethereum node.
 type NodeEthereumAttributes struct {
 
@@ -784,6 +1895,34 @@ type NodeEthereumAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NodeEthereumAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeEthereumAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeEthereumAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpoint != nil {
+		s.WriteString(schemas.NodeEthereumAttributes_HttpEndpoint, *v.HttpEndpoint)
+	}
+	if v.WebSocketEndpoint != nil {
+		s.WriteString(schemas.NodeEthereumAttributes_WebSocketEndpoint, *v.WebSocketEndpoint)
+	}
+}
+func (v *NodeEthereumAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeEthereumAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeEthereumAttributes_HttpEndpoint:
+			v.HttpEndpoint = new(string)
+			return d.ReadString(schemas.NodeEthereumAttributes_HttpEndpoint, v.HttpEndpoint)
+		case schemas.NodeEthereumAttributes_WebSocketEndpoint:
+			v.WebSocketEndpoint = new(string)
+			return d.ReadString(schemas.NodeEthereumAttributes_WebSocketEndpoint, v.WebSocketEndpoint)
+		}
+		return nil
+	})
+}
+
 // Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric
 // network on Managed Blockchain.
 type NodeFabricAttributes struct {
@@ -797,6 +1936,34 @@ type NodeFabricAttributes struct {
 	PeerEventEndpoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NodeFabricAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeFabricAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeFabricAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeerEndpoint != nil {
+		s.WriteString(schemas.NodeFabricAttributes_PeerEndpoint, *v.PeerEndpoint)
+	}
+	if v.PeerEventEndpoint != nil {
+		s.WriteString(schemas.NodeFabricAttributes_PeerEventEndpoint, *v.PeerEventEndpoint)
+	}
+}
+func (v *NodeFabricAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeFabricAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeFabricAttributes_PeerEndpoint:
+			v.PeerEndpoint = new(string)
+			return d.ReadString(schemas.NodeFabricAttributes_PeerEndpoint, v.PeerEndpoint)
+		case schemas.NodeFabricAttributes_PeerEventEndpoint:
+			v.PeerEventEndpoint = new(string)
+			return d.ReadString(schemas.NodeFabricAttributes_PeerEventEndpoint, v.PeerEventEndpoint)
+		}
+		return nil
+	})
 }
 
 // Configuration properties for logging events associated with a peer node owned
@@ -819,6 +1986,38 @@ type NodeFabricLogPublishingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NodeFabricLogPublishingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeFabricLogPublishingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeFabricLogPublishingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChaincodeLogs != nil {
+		s.WriteStruct(schemas.NodeFabricLogPublishingConfiguration_ChaincodeLogs)
+		v.ChaincodeLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PeerLogs != nil {
+		s.WriteStruct(schemas.NodeFabricLogPublishingConfiguration_PeerLogs)
+		v.PeerLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NodeFabricLogPublishingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeFabricLogPublishingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeFabricLogPublishingConfiguration_ChaincodeLogs:
+			v.ChaincodeLogs = &LogConfigurations{}
+			return v.ChaincodeLogs.Deserialize(d)
+		case schemas.NodeFabricLogPublishingConfiguration_PeerLogs:
+			v.PeerLogs = &LogConfigurations{}
+			return v.PeerLogs.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Attributes relevant to a node on a Managed Blockchain network for the
 // blockchain framework that the network uses.
 type NodeFrameworkAttributes struct {
@@ -834,6 +2033,38 @@ type NodeFrameworkAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NodeFrameworkAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeFrameworkAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeFrameworkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ethereum != nil {
+		s.WriteStruct(schemas.NodeFrameworkAttributes_Ethereum)
+		v.Ethereum.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.NodeFrameworkAttributes_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NodeFrameworkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeFrameworkAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeFrameworkAttributes_Ethereum:
+			v.Ethereum = &NodeEthereumAttributes{}
+			return v.Ethereum.Deserialize(d)
+		case schemas.NodeFrameworkAttributes_Fabric:
+			v.Fabric = &NodeFabricAttributes{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration properties for logging events associated with a peer node on a
 // Hyperledger Fabric network on Managed Blockchain.
 type NodeLogPublishingConfiguration struct {
@@ -844,6 +2075,30 @@ type NodeLogPublishingConfiguration struct {
 	Fabric *NodeFabricLogPublishingConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NodeLogPublishingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeLogPublishingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeLogPublishingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fabric != nil {
+		s.WriteStruct(schemas.NodeLogPublishingConfiguration_Fabric)
+		v.Fabric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NodeLogPublishingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeLogPublishingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeLogPublishingConfiguration_Fabric:
+			v.Fabric = &NodeFabricLogPublishingConfiguration{}
+			return v.Fabric.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A summary of configuration properties for a node.
@@ -871,6 +2126,62 @@ type NodeSummary struct {
 	Status NodeStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *NodeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NodeSummary_Arn, *v.Arn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.NodeSummary_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.NodeSummary_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NodeSummary_Id, *v.Id)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.NodeSummary_InstanceType, *v.InstanceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NodeSummary_Status, string(v.Status))
+	}
+}
+func (v *NodeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NodeSummary_Arn, v.Arn)
+		case schemas.NodeSummary_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.NodeSummary_AvailabilityZone, v.AvailabilityZone)
+		case schemas.NodeSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.NodeSummary_CreationDate, v.CreationDate)
+		case schemas.NodeSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NodeSummary_Id, v.Id)
+		case schemas.NodeSummary_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.NodeSummary_InstanceType, v.InstanceType)
+		case schemas.NodeSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.NodeSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NodeStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Properties of a proposal on a Managed Blockchain network.
@@ -956,6 +2267,109 @@ type Proposal struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Proposal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Proposal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Proposal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		s.WriteStruct(schemas.Proposal_Actions)
+		v.Actions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Proposal_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Proposal_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Proposal_Description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.Proposal_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.Proposal_NetworkId, *v.NetworkId)
+	}
+	if v.NoVoteCount != nil {
+		s.WriteInt32(schemas.Proposal_NoVoteCount, *v.NoVoteCount)
+	}
+	if v.OutstandingVoteCount != nil {
+		s.WriteInt32(schemas.Proposal_OutstandingVoteCount, *v.OutstandingVoteCount)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.Proposal_ProposalId, *v.ProposalId)
+	}
+	if v.ProposedByMemberId != nil {
+		s.WriteString(schemas.Proposal_ProposedByMemberId, *v.ProposedByMemberId)
+	}
+	if v.ProposedByMemberName != nil {
+		s.WriteString(schemas.Proposal_ProposedByMemberName, *v.ProposedByMemberName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Proposal_Status, string(v.Status))
+	}
+	serializeOutputTagMap(s, schemas.Proposal_Tags, v.Tags)
+	if v.YesVoteCount != nil {
+		s.WriteInt32(schemas.Proposal_YesVoteCount, *v.YesVoteCount)
+	}
+}
+func (v *Proposal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Proposal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Proposal_Actions:
+			v.Actions = &ProposalActions{}
+			return v.Actions.Deserialize(d)
+		case schemas.Proposal_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Proposal_Arn, v.Arn)
+		case schemas.Proposal_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Proposal_CreationDate, v.CreationDate)
+		case schemas.Proposal_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Proposal_Description, v.Description)
+		case schemas.Proposal_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.Proposal_ExpirationDate, v.ExpirationDate)
+		case schemas.Proposal_NetworkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.Proposal_NetworkId, v.NetworkId)
+		case schemas.Proposal_NoVoteCount:
+			v.NoVoteCount = new(int32)
+			return d.ReadInt32(schemas.Proposal_NoVoteCount, v.NoVoteCount)
+		case schemas.Proposal_OutstandingVoteCount:
+			v.OutstandingVoteCount = new(int32)
+			return d.ReadInt32(schemas.Proposal_OutstandingVoteCount, v.OutstandingVoteCount)
+		case schemas.Proposal_ProposalId:
+			v.ProposalId = new(string)
+			return d.ReadString(schemas.Proposal_ProposalId, v.ProposalId)
+		case schemas.Proposal_ProposedByMemberId:
+			v.ProposedByMemberId = new(string)
+			return d.ReadString(schemas.Proposal_ProposedByMemberId, v.ProposedByMemberId)
+		case schemas.Proposal_ProposedByMemberName:
+			v.ProposedByMemberName = new(string)
+			return d.ReadString(schemas.Proposal_ProposedByMemberName, v.ProposedByMemberName)
+		case schemas.Proposal_Status:
+			var ev string
+			if err := d.ReadString(schemas.Proposal_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProposalStatus(ev)
+			return nil
+		case schemas.Proposal_Tags:
+			return deserializeOutputTagMap(d, schemas.Proposal_Tags, &v.Tags)
+		case schemas.Proposal_YesVoteCount:
+			v.YesVoteCount = new(int32)
+			return d.ReadInt32(schemas.Proposal_YesVoteCount, v.YesVoteCount)
+		}
+		return nil
+	})
+}
+
 //	The actions to carry out if a proposal is APPROVED .
 //
 // Applies only to Hyperledger Fabric.
@@ -971,6 +2385,28 @@ type ProposalActions struct {
 	Removals []RemoveAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProposalActions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProposalActions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProposalActions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInviteActionList(s, schemas.ProposalActions_Invitations, v.Invitations)
+	serializeRemoveActionList(s, schemas.ProposalActions_Removals, v.Removals)
+}
+func (v *ProposalActions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProposalActions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProposalActions_Invitations:
+			return deserializeInviteActionList(d, schemas.ProposalActions_Invitations, &v.Invitations)
+		case schemas.ProposalActions_Removals:
+			return deserializeRemoveActionList(d, schemas.ProposalActions_Removals, &v.Removals)
+		}
+		return nil
+	})
 }
 
 // Properties of a proposal.
@@ -1029,6 +2465,74 @@ type ProposalSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProposalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProposalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProposalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ProposalSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ProposalSummary_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ProposalSummary_Description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.ProposalSummary_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.ProposalSummary_ProposalId, *v.ProposalId)
+	}
+	if v.ProposedByMemberId != nil {
+		s.WriteString(schemas.ProposalSummary_ProposedByMemberId, *v.ProposedByMemberId)
+	}
+	if v.ProposedByMemberName != nil {
+		s.WriteString(schemas.ProposalSummary_ProposedByMemberName, *v.ProposedByMemberName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProposalSummary_Status, string(v.Status))
+	}
+}
+func (v *ProposalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProposalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProposalSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ProposalSummary_Arn, v.Arn)
+		case schemas.ProposalSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ProposalSummary_CreationDate, v.CreationDate)
+		case schemas.ProposalSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ProposalSummary_Description, v.Description)
+		case schemas.ProposalSummary_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.ProposalSummary_ExpirationDate, v.ExpirationDate)
+		case schemas.ProposalSummary_ProposalId:
+			v.ProposalId = new(string)
+			return d.ReadString(schemas.ProposalSummary_ProposalId, v.ProposalId)
+		case schemas.ProposalSummary_ProposedByMemberId:
+			v.ProposedByMemberId = new(string)
+			return d.ReadString(schemas.ProposalSummary_ProposedByMemberId, v.ProposedByMemberId)
+		case schemas.ProposalSummary_ProposedByMemberName:
+			v.ProposedByMemberName = new(string)
+			return d.ReadString(schemas.ProposalSummary_ProposedByMemberName, v.ProposedByMemberName)
+		case schemas.ProposalSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ProposalSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProposalStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An action to remove a member from a Managed Blockchain network as the result of
 // a removal proposal that is APPROVED . The member and all associated resources
 // are deleted from the network.
@@ -1042,6 +2546,28 @@ type RemoveAction struct {
 	MemberId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RemoveAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.RemoveAction_MemberId, *v.MemberId)
+	}
+}
+func (v *RemoveAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveAction_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.RemoveAction_MemberId, v.MemberId)
+		}
+		return nil
+	})
 }
 
 //	Properties of an individual vote that a member cast for a proposal.
@@ -1061,6 +2587,44 @@ type VoteSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoteSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoteSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoteSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.VoteSummary_MemberId, *v.MemberId)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.VoteSummary_MemberName, *v.MemberName)
+	}
+	if v.Vote != "" {
+		s.WriteString(schemas.VoteSummary_Vote, string(v.Vote))
+	}
+}
+func (v *VoteSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoteSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoteSummary_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.VoteSummary_MemberId, v.MemberId)
+		case schemas.VoteSummary_MemberName:
+			v.MemberName = new(string)
+			return d.ReadString(schemas.VoteSummary_MemberName, v.MemberName)
+		case schemas.VoteSummary_Vote:
+			var ev string
+			if err := d.ReadString(schemas.VoteSummary_Vote, &ev); err != nil {
+				return err
+			}
+			v.Vote = VoteValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The voting rules for the network to decide if a proposal is accepted
 //
 // Applies only to Hyperledger Fabric.
@@ -1073,6 +2637,30 @@ type VotingPolicy struct {
 	ApprovalThresholdPolicy *ApprovalThresholdPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *VotingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VotingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VotingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalThresholdPolicy != nil {
+		s.WriteStruct(schemas.VotingPolicy_ApprovalThresholdPolicy)
+		v.ApprovalThresholdPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VotingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VotingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VotingPolicy_ApprovalThresholdPolicy:
+			v.ApprovalThresholdPolicy = &ApprovalThresholdPolicy{}
+			return v.ApprovalThresholdPolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

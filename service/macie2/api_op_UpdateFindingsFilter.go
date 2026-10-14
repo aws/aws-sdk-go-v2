@@ -5,12 +5,8 @@ package macie2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the criteria and other settings for a findings filter.
@@ -73,38 +69,6 @@ type UpdateFindingsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFindingsFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFindingsFilterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFindingsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.UpdateFindingsFilterRequest_action, string(v.Action))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateFindingsFilterRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateFindingsFilterRequest_description, *v.Description)
-	}
-	if v.FindingCriteria != nil {
-		s.WriteStruct(schemas.UpdateFindingsFilterRequest_findingCriteria)
-		v.FindingCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateFindingsFilterRequest_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateFindingsFilterRequest_name, *v.Name)
-	}
-	if v.Position != nil {
-		s.WriteInt32(schemas.UpdateFindingsFilterRequest_position, *v.Position)
-	}
-}
-
 type UpdateFindingsFilterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the filter that was updated.
@@ -119,76 +83,23 @@ type UpdateFindingsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFindingsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFindingsFilterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateFindingsFilterResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateFindingsFilterResponse_arn, v.Arn)
-		case schemas.UpdateFindingsFilterResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateFindingsFilterResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFindingsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFindingsFilter, schemas.UpdateFindingsFilterRequest, schemas.UpdateFindingsFilterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFindingsFilter{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFindingsFilter, schemas.UpdateFindingsFilterRequest, schemas.UpdateFindingsFilterResponse), output: &UpdateFindingsFilterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFindingsFilter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -198,12 +109,6 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpUpdateFindingsFilterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFindingsFilter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +121,6 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +160,4 @@ func (m *idempotencyToken_initializeOpUpdateFindingsFilter) HandleInitialize(ctx
 }
 func addIdempotencyToken_opUpdateFindingsFilterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFindingsFilter{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateFindingsFilter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFindingsFilter",
-	}
 }

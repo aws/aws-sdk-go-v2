@@ -1,0 +1,5 @@
+PUT /workloads/__WorkloadId__/lensReviews/__LensAlias__/upgrade
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","MilestoneName":"__MilestoneName__"}

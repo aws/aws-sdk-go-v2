@@ -2,6 +2,25 @@
 
 package types
 
+type DataSourceSport string
+
+// Enum values for DataSourceSport
+const (
+	DataSourceSportBasketball       DataSourceSport = "basketball"
+	DataSourceSportAmericanFootball DataSourceSport = "american-football"
+)
+
+// Values returns all known values for DataSourceSport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceSport) Values() []DataSourceSport {
+	return []DataSourceSport{
+		"basketball",
+		"american-football",
+	}
+}
+
 type DictionaryLanguage string
 
 // Enum values for DictionaryLanguage
@@ -54,6 +73,25 @@ func (DictionaryStatus) Values() []DictionaryStatus {
 	}
 }
 
+type ExtendedAnalysisMode string
+
+// Enum values for ExtendedAnalysisMode
+const (
+	ExtendedAnalysisModeEnabled  ExtendedAnalysisMode = "ENABLED"
+	ExtendedAnalysisModeDisabled ExtendedAnalysisMode = "DISABLED"
+)
+
+// Values returns all known values for ExtendedAnalysisMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtendedAnalysisMode) Values() []ExtendedAnalysisMode {
+	return []ExtendedAnalysisMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FeedStatus string
 
 // Enum values for FeedStatus
@@ -80,6 +118,23 @@ func (FeedStatus) Values() []FeedStatus {
 		"DELETING",
 		"DELETED",
 		"ARCHIVED",
+	}
+}
+
+type FilterName string
+
+// Enum values for FilterName
+const (
+	FilterNameCompetitor FilterName = "COMPETITOR"
+)
+
+// Values returns all known values for FilterName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterName) Values() []FilterName {
+	return []FilterName{
+		"COMPETITOR",
 	}
 }
 
@@ -120,6 +175,25 @@ func (ProfanityFilterMode) Values() []ProfanityFilterMode {
 		"DISABLED",
 		"CENSOR",
 		"DROP",
+	}
+}
+
+type SummaryGenerationMode string
+
+// Enum values for SummaryGenerationMode
+const (
+	SummaryGenerationModeEnabled  SummaryGenerationMode = "ENABLED"
+	SummaryGenerationModeDisabled SummaryGenerationMode = "DISABLED"
+)
+
+// Values returns all known values for SummaryGenerationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryGenerationMode) Values() []SummaryGenerationMode {
+	return []SummaryGenerationMode{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

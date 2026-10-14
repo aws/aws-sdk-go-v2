@@ -354,6 +354,29 @@ func (ImportStatus) Values() []ImportStatus {
 	}
 }
 
+type IndexCategory string
+
+// Enum values for IndexCategory
+const (
+	IndexCategoryDefault  IndexCategory = "DEFAULT"
+	IndexCategoryCustom   IndexCategory = "CUSTOM"
+	IndexCategoryAuto     IndexCategory = "AUTO"
+	IndexCategoryInactive IndexCategory = "INACTIVE"
+)
+
+// Values returns all known values for IndexCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IndexCategory) Values() []IndexCategory {
+	return []IndexCategory{
+		"DEFAULT",
+		"CUSTOM",
+		"AUTO",
+		"INACTIVE",
+	}
+}
+
 type IndexSource string
 
 // Enum values for IndexSource
@@ -695,7 +718,8 @@ type ScheduledQueryDestinationType string
 
 // Enum values for ScheduledQueryDestinationType
 const (
-	ScheduledQueryDestinationTypeS3 ScheduledQueryDestinationType = "S3"
+	ScheduledQueryDestinationTypeS3          ScheduledQueryDestinationType = "S3"
+	ScheduledQueryDestinationTypeLookupTable ScheduledQueryDestinationType = "LOOKUP_TABLE"
 )
 
 // Values returns all known values for ScheduledQueryDestinationType. Note that
@@ -706,6 +730,7 @@ const (
 func (ScheduledQueryDestinationType) Values() []ScheduledQueryDestinationType {
 	return []ScheduledQueryDestinationType{
 		"S3",
+		"LOOKUP_TABLE",
 	}
 }
 
@@ -725,6 +750,25 @@ func (ScheduledQueryState) Values() []ScheduledQueryState {
 	return []ScheduledQueryState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ScheduleType string
+
+// Enum values for ScheduleType
+const (
+	ScheduleTypeCustomerManaged ScheduleType = "CUSTOMER_MANAGED"
+	ScheduleTypeAwsManaged      ScheduleType = "AWS_MANAGED"
+)
+
+// Values returns all known values for ScheduleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleType) Values() []ScheduleType {
+	return []ScheduleType{
+		"CUSTOMER_MANAGED",
+		"AWS_MANAGED",
 	}
 }
 
@@ -835,6 +879,25 @@ func (State) Values() []State {
 	}
 }
 
+type StorageTier string
+
+// Enum values for StorageTier
+const (
+	StorageTierStandard           StorageTier = "STANDARD"
+	StorageTierIntelligentTiering StorageTier = "INTELLIGENT_TIERING"
+)
+
+// Values returns all known values for StorageTier. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageTier) Values() []StorageTier {
+	return []StorageTier{
+		"STANDARD",
+		"INTELLIGENT_TIERING",
+	}
+}
+
 type SuppressionState string
 
 // Enum values for SuppressionState
@@ -891,6 +954,23 @@ func (SuppressionUnit) Values() []SuppressionUnit {
 		"SECONDS",
 		"MINUTES",
 		"HOURS",
+	}
+}
+
+type SyslogSourceType string
+
+// Enum values for SyslogSourceType
+const (
+	SyslogSourceTypeVpce SyslogSourceType = "VPCE"
+)
+
+// Values returns all known values for SyslogSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyslogSourceType) Values() []SyslogSourceType {
+	return []SyslogSourceType{
+		"VPCE",
 	}
 }
 

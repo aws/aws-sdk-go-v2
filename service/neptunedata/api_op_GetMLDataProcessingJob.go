@@ -4,13 +4,8 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a specified data processing job. See [The dataprocessing command]dataprocessing .
@@ -51,21 +46,6 @@ type GetMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMLDataProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMLDataProcessingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMLDataProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetMLDataProcessingJobInput_id, *v.Id)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.GetMLDataProcessingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-}
-
 type GetMLDataProcessingJobOutput struct {
 
 	// The unique identifier of this data-processing job.
@@ -83,91 +63,29 @@ type GetMLDataProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMLDataProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMLDataProcessingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMLDataProcessingJobOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetMLDataProcessingJobOutput_id, v.Id)
-		case schemas.GetMLDataProcessingJobOutput_processingJob:
-			v.ProcessingJob = &types.MlResourceDefinition{}
-			return v.ProcessingJob.Deserialize(d)
-		case schemas.GetMLDataProcessingJobOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.GetMLDataProcessingJobOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMLDataProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLDataProcessingJob, schemas.GetMLDataProcessingJobInput, schemas.GetMLDataProcessingJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLDataProcessingJob, schemas.GetMLDataProcessingJobInput, schemas.GetMLDataProcessingJobOutput), output: &GetMLDataProcessingJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMLDataProcessingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMLDataProcessingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMLDataProcessingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +100,8 @@ func (c *Client) addOperationGetMLDataProcessingJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMLDataProcessingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMLDataProcessingJob",
-	}
 }

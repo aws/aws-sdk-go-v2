@@ -221,6 +221,12 @@ const (
 	ResourceTypeDynamoDbReservedCapacity     ResourceType = "DynamoDbReservedCapacity"
 	ResourceTypeMemoryDbReservedInstances    ResourceType = "MemoryDbReservedInstances"
 	ResourceTypeNatGateway                   ResourceType = "NatGateway"
+	ResourceTypeDynamoDbTable                ResourceType = "DynamoDBTable"
+	ResourceTypeElastiCacheCluster           ResourceType = "ElastiCacheCluster"
+	ResourceTypeMemoryDbCluster              ResourceType = "MemoryDBCluster"
+	ResourceTypeDocumentDbCluster            ResourceType = "DocumentDBCluster"
+	ResourceTypeWorkSpaces                   ResourceType = "WorkSpaces"
+	ResourceTypeSageMakerEndpoint            ResourceType = "SageMakerEndpoint"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -248,6 +254,12 @@ func (ResourceType) Values() []ResourceType {
 		"DynamoDbReservedCapacity",
 		"MemoryDbReservedInstances",
 		"NatGateway",
+		"DynamoDBTable",
+		"ElastiCacheCluster",
+		"MemoryDBCluster",
+		"DocumentDBCluster",
+		"WorkSpaces",
+		"SageMakerEndpoint",
 	}
 }
 

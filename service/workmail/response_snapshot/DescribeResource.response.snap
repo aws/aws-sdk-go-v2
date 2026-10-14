@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.DescribeResource
+
+{"BookingOptions":{"AutoAcceptRequests":true,"AutoDeclineConflictingRequests":true,"AutoDeclineRecurringRequests":true},"Description":"__Description__","DisabledDate":946684800,"Email":"__Email__","EnabledDate":946684800,"HiddenFromGlobalAddressList":true,"Name":"__Name__","ResourceId":"__ResourceId__","State":"ENABLED","Type":"ROOM"}

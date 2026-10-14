@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,21 +45,6 @@ type GetPolicyGenerationSummaryInput struct {
 	PolicyGenerationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPolicyGenerationSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPolicyGenerationSummaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPolicyGenerationSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyEngineId != nil {
-		s.WriteString(schemas.GetPolicyGenerationSummaryRequest_policyEngineId, *v.PolicyEngineId)
-	}
-	if v.PolicyGenerationId != nil {
-		s.WriteString(schemas.GetPolicyGenerationSummaryRequest_policyGenerationId, *v.PolicyGenerationId)
-	}
 }
 
 type GetPolicyGenerationSummaryOutput struct {
@@ -118,112 +98,29 @@ type GetPolicyGenerationSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPolicyGenerationSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPolicyGenerationSummaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPolicyGenerationSummaryResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPolicyGenerationSummaryResponse_createdAt, v.CreatedAt)
-		case schemas.GetPolicyGenerationSummaryResponse_findings:
-			v.Findings = new(string)
-			return d.ReadString(schemas.GetPolicyGenerationSummaryResponse_findings, v.Findings)
-		case schemas.GetPolicyGenerationSummaryResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetPolicyGenerationSummaryResponse_name, v.Name)
-		case schemas.GetPolicyGenerationSummaryResponse_policyEngineId:
-			v.PolicyEngineId = new(string)
-			return d.ReadString(schemas.GetPolicyGenerationSummaryResponse_policyEngineId, v.PolicyEngineId)
-		case schemas.GetPolicyGenerationSummaryResponse_policyGenerationArn:
-			v.PolicyGenerationArn = new(string)
-			return d.ReadString(schemas.GetPolicyGenerationSummaryResponse_policyGenerationArn, v.PolicyGenerationArn)
-		case schemas.GetPolicyGenerationSummaryResponse_policyGenerationId:
-			v.PolicyGenerationId = new(string)
-			return d.ReadString(schemas.GetPolicyGenerationSummaryResponse_policyGenerationId, v.PolicyGenerationId)
-		case schemas.GetPolicyGenerationSummaryResponse_resource:
-			return deserializeResource(d, schemas.GetPolicyGenerationSummaryResponse_resource, &v.Resource)
-		case schemas.GetPolicyGenerationSummaryResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetPolicyGenerationSummaryResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PolicyGenerationStatus(ev)
-			return nil
-		case schemas.GetPolicyGenerationSummaryResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPolicyGenerationSummaryResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPolicyGenerationSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicyGenerationSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyGenerationSummary, schemas.GetPolicyGenerationSummaryRequest, schemas.GetPolicyGenerationSummaryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicyGenerationSummary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyGenerationSummary, schemas.GetPolicyGenerationSummaryRequest, schemas.GetPolicyGenerationSummaryResponse), output: &GetPolicyGenerationSummaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyGenerationSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPolicyGenerationSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyGenerationSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,22 +135,8 @@ func (c *Client) addOperationGetPolicyGenerationSummaryMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPolicyGenerationSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPolicyGenerationSummary",
-	}
 }

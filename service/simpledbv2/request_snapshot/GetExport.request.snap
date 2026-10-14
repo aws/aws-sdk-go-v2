@@ -1,0 +1,5 @@
+POST /v2/GetExport
+
+Content-Type: application/json
+
+{"exportArn":"__ExportArn__"}

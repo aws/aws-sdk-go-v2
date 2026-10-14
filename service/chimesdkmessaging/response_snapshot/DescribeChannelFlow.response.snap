@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelFlow":{"ChannelFlowArn":"__ChannelFlowArn__","CreatedTimestamp":946684800,"LastUpdatedTimestamp":946684800,"Name":"__Name__","Processors":[{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"},{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"}]}}

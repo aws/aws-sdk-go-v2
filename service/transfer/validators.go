@@ -1712,6 +1712,23 @@ func validatePosixProfile(v *types.PosixProfile) error {
 	}
 }
 
+func validateProtocolDetails(v *types.ProtocolDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtocolDetails"}
+	if v.SftpPorts != nil {
+		if err := validateSftpPorts(v.SftpPorts); err != nil {
+			invalidParams.AddNested("SftpPorts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Tag(v *types.S3Tag) error {
 	if v == nil {
 		return nil
@@ -1739,6 +1756,38 @@ func validateS3Tags(v []types.S3Tag) error {
 		if err := validateS3Tag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSftpPorts(v []types.SftpPortWithOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SftpPorts"}
+	for i := range v {
+		if err := validateSftpPortWithOptions(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSftpPortWithOptions(v *types.SftpPortWithOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SftpPortWithOptions"}
+	if v.SftpPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SftpPort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1996,6 +2045,11 @@ func validateOpCreateServerInput(v *CreateServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateServerInput"}
+	if v.ProtocolDetails != nil {
+		if err := validateProtocolDetails(v.ProtocolDetails); err != nil {
+			invalidParams.AddNested("ProtocolDetails", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -3005,6 +3059,11 @@ func validateOpUpdateServerInput(v *UpdateServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServerInput"}
+	if v.ProtocolDetails != nil {
+		if err := validateProtocolDetails(v.ProtocolDetails); err != nil {
+			invalidParams.AddNested("ProtocolDetails", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}

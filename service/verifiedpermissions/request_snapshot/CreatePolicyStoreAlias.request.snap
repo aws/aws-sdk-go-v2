@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.CreatePolicyStoreAlias
+
+{"aliasName":"__AliasName__","policyStoreId":"__PolicyStoreId__"}

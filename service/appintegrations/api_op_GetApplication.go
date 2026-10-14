@@ -4,13 +4,10 @@ package appintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,6 +63,10 @@ type GetApplicationOutput struct {
 	// The Amazon Resource Name (ARN) of the Application.
 	Arn *string
 
+	// The authentication settings that Connect Customer uses when calling the
+	// external application.
+	AuthConfig *types.AuthConfig
+
 	// The created time of the Application.
 	CreatedTime *time.Time
 
@@ -119,6 +120,68 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSourceConfig != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_ApplicationSourceConfig)
+		v.ApplicationSourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.GetApplicationResponse_ApplicationType, string(v.ApplicationType))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetApplicationResponse_Arn, *v.Arn)
+	}
+	if v.AuthConfig != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_AuthConfig)
+		v.AuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetApplicationResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetApplicationResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetApplicationResponse_Id, *v.Id)
+	}
+	if v.IframeConfig != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_IframeConfig)
+		v.IframeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitializationTimeout != nil {
+		s.WriteInt32(schemas.GetApplicationResponse_InitializationTimeout, *v.InitializationTimeout)
+	}
+	if v.IsService != false {
+		s.WriteBool(schemas.GetApplicationResponse_IsService, v.IsService)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetApplicationResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApplicationResponse_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetApplicationResponse_Namespace, *v.Namespace)
+	}
+	serializePermissionList(s, schemas.GetApplicationResponse_Permissions, v.Permissions)
+	serializePublicationList(s, schemas.GetApplicationResponse_Publications, v.Publications)
+	serializeSubscriptionList(s, schemas.GetApplicationResponse_Subscriptions, v.Subscriptions)
+	serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+}
 func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -138,6 +201,9 @@ func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetApplicationResponse_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.GetApplicationResponse_Arn, v.Arn)
+		case schemas.GetApplicationResponse_AuthConfig:
+			v.AuthConfig = &types.AuthConfig{}
+			return v.AuthConfig.Deserialize(d)
 		case schemas.GetApplicationResponse_CreatedTime:
 			v.CreatedTime = new(time.Time)
 			return d.ReadTime(schemas.GetApplicationResponse_CreatedTime, v.CreatedTime)
@@ -177,74 +243,26 @@ func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -259,22 +277,8 @@ func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetApplication",
-	}
 }

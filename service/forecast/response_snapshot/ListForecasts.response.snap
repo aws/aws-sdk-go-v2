@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListForecasts
+
+{"Forecasts":[{"CreatedUsingAutoPredictor":true,"CreationTime":946684800,"DatasetGroupArn":"__DatasetGroupArn__","ForecastArn":"__ForecastArn__","ForecastName":"__ForecastName__","LastModificationTime":946684800,"Message":"__Message__","PredictorArn":"__PredictorArn__","Status":"__Status__"},{"CreatedUsingAutoPredictor":true,"CreationTime":946684800,"DatasetGroupArn":"__DatasetGroupArn__","ForecastArn":"__ForecastArn__","ForecastName":"__ForecastName__","LastModificationTime":946684800,"Message":"__Message__","PredictorArn":"__PredictorArn__","Status":"__Status__"}],"NextToken":"__NextToken__"}

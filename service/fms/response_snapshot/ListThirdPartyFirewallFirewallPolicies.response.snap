@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿iNextTokenm__NextToken__x"ThirdPartyFirewallFirewallPoliciesŸ¿pFirewallPolicyIdt__FirewallPolicyId__rFirewallPolicyNamev__FirewallPolicyName__ÿ¿pFirewallPolicyIdt__FirewallPolicyId__rFirewallPolicyNamev__FirewallPolicyName__ÿÿÿ

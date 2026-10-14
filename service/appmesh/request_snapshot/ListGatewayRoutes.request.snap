@@ -1,0 +1,3 @@
+GET /v20190125/meshes/__MeshName__/virtualGateway/__VirtualGatewayName__/gatewayRoutes?limit=1&meshOwner=__MeshOwner__&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+PUT /users/__InstanceId__/__UserId__/status
+
+Content-Type: application/json
+
+{"AgentStatusId":"__AgentStatusId__"}

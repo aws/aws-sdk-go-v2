@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists timeline events for the specified incident record.
@@ -72,63 +68,6 @@ type ListTimelineEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimelineEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTimelineEventsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTimelineEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListTimelineEventsInput_filters, v.Filters)
-	if v.IncidentRecordArn != nil {
-		s.WriteString(schemas.ListTimelineEventsInput_incidentRecordArn, *v.IncidentRecordArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTimelineEventsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTimelineEventsInput_nextToken, *v.NextToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListTimelineEventsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListTimelineEventsInput_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ListTimelineEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTimelineEventsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTimelineEventsInput_filters:
-			return deserializeFilterList(d, schemas.ListTimelineEventsInput_filters, &v.Filters)
-		case schemas.ListTimelineEventsInput_incidentRecordArn:
-			v.IncidentRecordArn = new(string)
-			return d.ReadString(schemas.ListTimelineEventsInput_incidentRecordArn, v.IncidentRecordArn)
-		case schemas.ListTimelineEventsInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListTimelineEventsInput_maxResults, v.MaxResults)
-		case schemas.ListTimelineEventsInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTimelineEventsInput_nextToken, v.NextToken)
-		case schemas.ListTimelineEventsInput_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ListTimelineEventsInput_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = types.TimelineEventSort(ev)
-			return nil
-		case schemas.ListTimelineEventsInput_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ListTimelineEventsInput_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = types.SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type ListTimelineEventsOutput struct {
 
 	// Details about each event that occurred during the incident.
@@ -146,99 +85,29 @@ type ListTimelineEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimelineEventsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTimelineEventsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTimelineEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSummaryList(s, schemas.ListTimelineEventsOutput_eventSummaries, v.EventSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTimelineEventsOutput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListTimelineEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTimelineEventsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTimelineEventsOutput_eventSummaries:
-			return deserializeEventSummaryList(d, schemas.ListTimelineEventsOutput_eventSummaries, &v.EventSummaries)
-		case schemas.ListTimelineEventsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTimelineEventsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTimelineEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimelineEvents, schemas.ListTimelineEventsInput, schemas.ListTimelineEventsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTimelineEvents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimelineEvents, schemas.ListTimelineEventsInput, schemas.ListTimelineEventsOutput), output: &ListTimelineEventsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTimelineEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTimelineEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTimelineEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -251,12 +120,6 @@ func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -358,11 +221,3 @@ type ListTimelineEventsAPIClient interface {
 }
 
 var _ ListTimelineEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTimelineEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTimelineEvents",
-	}
-}

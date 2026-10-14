@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the IP address ranges that were specified in calls to [ProvisionByoipCidr], including the
@@ -42,6 +42,21 @@ type ListByoipCidrsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListByoipCidrsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListByoipCidrsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListByoipCidrsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListByoipCidrsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListByoipCidrsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListByoipCidrsOutput struct {
 
 	// Information about your address ranges.
@@ -56,74 +71,48 @@ type ListByoipCidrsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListByoipCidrsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListByoipCidrsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListByoipCidrsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeByoipCidrs(s, schemas.ListByoipCidrsResponse_ByoipCidrs, v.ByoipCidrs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListByoipCidrsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListByoipCidrsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListByoipCidrsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListByoipCidrsResponse_ByoipCidrs:
+			return deserializeByoipCidrs(d, schemas.ListByoipCidrsResponse_ByoipCidrs, &v.ByoipCidrs)
+		case schemas.ListByoipCidrsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListByoipCidrsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListByoipCidrs, schemas.ListByoipCidrsRequest, schemas.ListByoipCidrsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListByoipCidrs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListByoipCidrs, schemas.ListByoipCidrsRequest, schemas.ListByoipCidrsResponse), output: &ListByoipCidrsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListByoipCidrs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListByoipCidrs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListByoipCidrs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +125,6 @@ func (c *Client) addOperationListByoipCidrsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +226,3 @@ type ListByoipCidrsAPIClient interface {
 }
 
 var _ ListByoipCidrsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListByoipCidrs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListByoipCidrs",
-	}
-}

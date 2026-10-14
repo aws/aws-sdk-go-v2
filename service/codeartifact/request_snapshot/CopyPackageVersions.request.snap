@@ -1,0 +1,5 @@
+POST /v1/package/versions/copy?destination-repository=__DestinationRepository__&domain=__Domain__&domain-owner=__DomainOwner__&format=npm&namespace=__Namespace__&package=__Package__&source-repository=__SourceRepository__
+
+Content-Type: application/json
+
+{"allowOverwrite":true,"includeFromUpstream":true,"versionRevisions":{"key0":"__Value__"},"versions":["__Member__","__Member__"]}

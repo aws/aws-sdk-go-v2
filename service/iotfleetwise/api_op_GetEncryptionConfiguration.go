@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -31,6 +30,15 @@ func (c *Client) GetEncryptionConfiguration(ctx context.Context, params *GetEncr
 
 type GetEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetEncryptionConfigurationOutput struct {
@@ -69,74 +77,83 @@ type GetEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEncryptionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetEncryptionConfigurationResponse_creationTime, *v.CreationTime)
+	}
+	if v.EncryptionStatus != "" {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_encryptionStatus, string(v.EncryptionStatus))
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_encryptionType, string(v.EncryptionType))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetEncryptionConfigurationResponse_lastModificationTime, *v.LastModificationTime)
+	}
+}
+func (v *GetEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEncryptionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEncryptionConfigurationResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEncryptionConfigurationResponse_creationTime, v.CreationTime)
+		case schemas.GetEncryptionConfigurationResponse_encryptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetEncryptionConfigurationResponse_encryptionStatus, &ev); err != nil {
+				return err
+			}
+			v.EncryptionStatus = types.EncryptionStatus(ev)
+			return nil
+		case schemas.GetEncryptionConfigurationResponse_encryptionType:
+			var ev string
+			if err := d.ReadString(schemas.GetEncryptionConfigurationResponse_encryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = types.EncryptionType(ev)
+			return nil
+		case schemas.GetEncryptionConfigurationResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetEncryptionConfigurationResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetEncryptionConfigurationResponse_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetEncryptionConfigurationResponse_kmsKeyId, v.KmsKeyId)
+		case schemas.GetEncryptionConfigurationResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEncryptionConfigurationResponse_lastModificationTime, v.LastModificationTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfiguration, schemas.GetEncryptionConfigurationRequest, schemas.GetEncryptionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfiguration, schemas.GetEncryptionConfigurationRequest, schemas.GetEncryptionConfigurationResponse), output: &GetEncryptionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEncryptionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEncryptionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEncryptionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +168,8 @@ func (c *Client) addOperationGetEncryptionConfigurationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEncryptionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEncryptionConfiguration",
-	}
 }

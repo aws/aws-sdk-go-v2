@@ -5,12 +5,8 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all devices discovered during a specific device discovery task.
@@ -45,24 +41,6 @@ type ListDiscoveredDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDiscoveredDevicesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDiscoveredDevicesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDiscoveredDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.ListDiscoveredDevicesRequest_Identifier, *v.Identifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDiscoveredDevicesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDiscoveredDevicesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDiscoveredDevicesOutput struct {
 
 	// The list of discovered devices that match the specified criteria.
@@ -78,87 +56,29 @@ type ListDiscoveredDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDiscoveredDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDiscoveredDevicesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDiscoveredDevicesResponse_Items:
-			return deserializeDiscoveredDeviceListDefinition(d, schemas.ListDiscoveredDevicesResponse_Items, &v.Items)
-		case schemas.ListDiscoveredDevicesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDiscoveredDevicesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDiscoveredDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoveredDevices{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredDevices, schemas.ListDiscoveredDevicesRequest, schemas.ListDiscoveredDevicesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDiscoveredDevices{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredDevices, schemas.ListDiscoveredDevicesRequest, schemas.ListDiscoveredDevicesResponse), output: &ListDiscoveredDevicesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDiscoveredDevices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDiscoveredDevicesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoveredDevices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +91,6 @@ func (c *Client) addOperationListDiscoveredDevicesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +192,3 @@ type ListDiscoveredDevicesAPIClient interface {
 }
 
 var _ ListDiscoveredDevicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDiscoveredDevices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDiscoveredDevices",
-	}
-}

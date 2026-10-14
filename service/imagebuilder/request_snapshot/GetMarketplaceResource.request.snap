@@ -1,0 +1,5 @@
+POST /GetMarketplaceResource
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__","resourceLocation":"__ResourceLocation__","resourceType":"COMPONENT_DATA"}

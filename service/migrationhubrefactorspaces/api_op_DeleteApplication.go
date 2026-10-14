@@ -4,13 +4,8 @@ package migrationhubrefactorspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,34 +42,6 @@ type DeleteApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.DeleteApplicationRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.DeleteApplicationRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-}
-func (v *DeleteApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteApplicationRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteApplicationRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.DeleteApplicationRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.DeleteApplicationRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.DeleteApplicationRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		}
-		return nil
-	})
-}
-
 type DeleteApplicationOutput struct {
 
 	// The ID of the application.
@@ -101,130 +68,29 @@ type DeleteApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteApplicationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteApplicationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.DeleteApplicationResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.DeleteApplicationResponse_Arn, *v.Arn)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.DeleteApplicationResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.DeleteApplicationResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteApplicationResponse_Name, *v.Name)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.DeleteApplicationResponse_State, string(v.State))
-	}
-}
-func (v *DeleteApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteApplicationResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.DeleteApplicationResponse_ApplicationId, v.ApplicationId)
-		case schemas.DeleteApplicationResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeleteApplicationResponse_Arn, v.Arn)
-		case schemas.DeleteApplicationResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.DeleteApplicationResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.DeleteApplicationResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.DeleteApplicationResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.DeleteApplicationResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteApplicationResponse_Name, v.Name)
-		case schemas.DeleteApplicationResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.DeleteApplicationResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ApplicationState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplication, schemas.DeleteApplicationRequest, schemas.DeleteApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApplication{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplication, schemas.DeleteApplicationRequest, schemas.DeleteApplicationResponse), output: &DeleteApplicationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,22 +105,8 @@ func (c *Client) addOperationDeleteApplicationMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteApplication",
-	}
 }

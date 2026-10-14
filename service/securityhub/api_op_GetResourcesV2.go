@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of resources.
@@ -22,6 +22,16 @@ import (
 // attributes. You can use Scopes and Filters independently or together. When both
 // are provided, Scopes narrows the data set first, and then Filters refines
 // results within that scoped data set.
+//
+// For AI/ML resources, the response includes the ResourceSubCategory field. For
+// self-hosted AI resources and their host resources, the response also includes
+// ResourceInfo with AI-specific details. Self-hosted AI resources use a
+// ResourceType with the SelfHosted::AI:: prefix, such as SelfHosted::AI::Model ,
+// SelfHosted::AI::Agent , SelfHosted::AI::InferenceEndpoint , and
+// SelfHosted::AI::ExternalEndpoint .
+//
+// If you filter by ResourceSubCategory , you must also include a ResourceCategory
+// string filter with comparison set to EQUALS and value AI/ML in the same request.
 func (c *Client) GetResourcesV2(ctx context.Context, params *GetResourcesV2Input, optFns ...func(*Options)) (*GetResourcesV2Output, error) {
 	if params == nil {
 		params = &GetResourcesV2Input{}
@@ -68,6 +78,32 @@ type GetResourcesV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetResourcesV2Request_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourcesV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesV2Request_NextToken, *v.NextToken)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetResourcesV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSortCriteria(s, schemas.GetResourcesV2Request_SortCriteria, v.SortCriteria)
+}
+
 type GetResourcesV2Output struct {
 
 	// An array of resources returned by the operation.
@@ -85,74 +121,48 @@ type GetResourcesV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesV2Response_NextToken, *v.NextToken)
+	}
+	serializeResources(s, schemas.GetResourcesV2Response_Resources, v.Resources)
+}
+func (v *GetResourcesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcesV2Response_NextToken, v.NextToken)
+		case schemas.GetResourcesV2Response_Resources:
+			return deserializeResources(d, schemas.GetResourcesV2Response_Resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesV2, schemas.GetResourcesV2Request, schemas.GetResourcesV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesV2, schemas.GetResourcesV2Request, schemas.GetResourcesV2Response), output: &GetResourcesV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcesV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourcesV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourcesV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +175,6 @@ func (c *Client) addOperationGetResourcesV2Middlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +275,3 @@ type GetResourcesV2APIClient interface {
 }
 
 var _ GetResourcesV2APIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetResourcesV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourcesV2",
-	}
-}

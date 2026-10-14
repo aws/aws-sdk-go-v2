@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a pipeline.
@@ -56,6 +55,40 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePipelineRequest_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineDefinition != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineDefinition, *v.PipelineDefinition)
+	}
+	if v.PipelineDefinitionS3Location != nil {
+		s.WriteStruct(schemas.UpdatePipelineRequest_PipelineDefinitionS3Location)
+		v.PipelineDefinitionS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineDescription != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineDescription, *v.PipelineDescription)
+	}
+	if v.PipelineDisplayName != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineDisplayName, *v.PipelineDisplayName)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdatePipelineRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdatePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated pipeline.
@@ -70,77 +103,54 @@ type UpdatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.UpdatePipelineResponse_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineVersionId != nil {
+		s.WriteInt64(schemas.UpdatePipelineResponse_PipelineVersionId, *v.PipelineVersionId)
+	}
+}
+func (v *UpdatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.UpdatePipelineResponse_PipelineArn, v.PipelineArn)
+		case schemas.UpdatePipelineResponse_PipelineVersionId:
+			v.PipelineVersionId = new(int64)
+			return d.ReadInt64(schemas.UpdatePipelineResponse_PipelineVersionId, v.PipelineVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineRequest, schemas.UpdatePipelineResponse), output: &UpdatePipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +165,8 @@ func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePipeline",
-	}
 }

@@ -1,0 +1,5 @@
+POST /UpdateLoggingConfiguration
+
+Content-Type: application/json
+
+{"destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"identifier":"__Identifier__","name":"__Name__"}

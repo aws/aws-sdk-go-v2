@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends a password-reset confirmation code to the email address or phone number
@@ -136,6 +135,35 @@ type ForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgotPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForgotPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ForgotPasswordRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_SecretHash, *v.SecretHash)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ForgotPasswordRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_Username, *v.Username)
+	}
+}
+
 // The response from Amazon Cognito to a request to reset a password.
 type ForgotPasswordOutput struct {
 
@@ -149,74 +177,47 @@ type ForgotPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgotPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForgotPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgotPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeDeliveryDetails != nil {
+		s.WriteStruct(schemas.ForgotPasswordResponse_CodeDeliveryDetails)
+		v.CodeDeliveryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ForgotPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForgotPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForgotPasswordResponse_CodeDeliveryDetails:
+			v.CodeDeliveryDetails = &types.CodeDeliveryDetailsType{}
+			return v.CodeDeliveryDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgotPassword, schemas.ForgotPasswordRequest, schemas.ForgotPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgotPassword, schemas.ForgotPasswordRequest, schemas.ForgotPasswordResponse), output: &ForgotPasswordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpForgotPassword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ForgotPassword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpForgotPasswordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opForgotPassword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -231,22 +232,8 @@ func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opForgotPassword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ForgotPassword",
-	}
 }

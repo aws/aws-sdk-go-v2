@@ -61,16 +61,17 @@ type BatchStatus string
 
 // Enum values for BatchStatus
 const (
-	BatchStatusCreating     BatchStatus = "CREATING"
-	BatchStatusPending      BatchStatus = "PENDING"
-	BatchStatusSubmitting   BatchStatus = "SUBMITTING"
-	BatchStatusInprogress   BatchStatus = "INPROGRESS"
-	BatchStatusStopping     BatchStatus = "STOPPING"
-	BatchStatusCancelled    BatchStatus = "CANCELLED"
-	BatchStatusFailed       BatchStatus = "FAILED"
-	BatchStatusProcessed    BatchStatus = "PROCESSED"
-	BatchStatusRunsDeleting BatchStatus = "RUNS_DELETING"
-	BatchStatusRunsDeleted  BatchStatus = "RUNS_DELETED"
+	BatchStatusCreating         BatchStatus = "CREATING"
+	BatchStatusPending          BatchStatus = "PENDING"
+	BatchStatusSubmitting       BatchStatus = "SUBMITTING"
+	BatchStatusInprogress       BatchStatus = "INPROGRESS"
+	BatchStatusStopping         BatchStatus = "STOPPING"
+	BatchStatusCancelled        BatchStatus = "CANCELLED"
+	BatchStatusFailed           BatchStatus = "FAILED"
+	BatchStatusProcessed        BatchStatus = "PROCESSED"
+	BatchStatusRunsDeleting     BatchStatus = "RUNS_DELETING"
+	BatchStatusRunsDeleteFailed BatchStatus = "RUNS_DELETE_FAILED"
+	BatchStatusRunsDeleted      BatchStatus = "RUNS_DELETED"
 )
 
 // Values returns all known values for BatchStatus. Note that this can be expanded
@@ -88,6 +89,7 @@ func (BatchStatus) Values() []BatchStatus {
 		"FAILED",
 		"PROCESSED",
 		"RUNS_DELETING",
+		"RUNS_DELETE_FAILED",
 		"RUNS_DELETED",
 	}
 }
@@ -829,6 +831,25 @@ func (SchemaValueType) Values() []SchemaValueType {
 		"FLOAT",
 		"DOUBLE",
 		"BOOLEAN",
+	}
+}
+
+type ScratchStorageMode string
+
+// Enum values for ScratchStorageMode
+const (
+	ScratchStorageModeLocal  ScratchStorageMode = "LOCAL"
+	ScratchStorageModeShared ScratchStorageMode = "SHARED"
+)
+
+// Values returns all known values for ScratchStorageMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScratchStorageMode) Values() []ScratchStorageMode {
+	return []ScratchStorageMode{
+		"LOCAL",
+		"SHARED",
 	}
 }
 

@@ -5,12 +5,10 @@ package invoicing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This feature API is subject to changing at any time. For more information, see
@@ -90,6 +88,12 @@ type CreateProcurementPortalPreferenceInput struct {
 	// attachment types, and customization settings for the portal.
 	EinvoiceDeliveryPreference *types.EinvoiceDeliveryPreference
 
+	// Defaults to false if not provided.
+	MarketplacePunchOutEnabled *bool
+
+	// Required for Coupa when MarketplacePunchOutEnabled is true.
+	MarketplacePunchOutPreference *types.MarketplacePunchOutPreference
+
 	// The endpoint URL where e-invoices will be delivered to the procurement portal.
 	// Must be a valid HTTPS URL.
 	ProcurementPortalInstanceEndpoint *string
@@ -139,6 +143,14 @@ func (v *CreateProcurementPortalPreferenceInput) SerializeMembers(s smithy.Shape
 		v.EinvoiceDeliveryPreference.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MarketplacePunchOutEnabled != nil {
+		s.WriteBool(schemas.CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled, *v.MarketplacePunchOutEnabled)
+	}
+	if v.MarketplacePunchOutPreference != nil {
+		s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference)
+		v.MarketplacePunchOutPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ProcurementPortalInstanceEndpoint != nil {
 		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
 	}
@@ -183,6 +195,17 @@ type CreateProcurementPortalPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcurementPortalPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcurementPortalPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcurementPortalPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
 func (v *CreateProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProcurementPortalPreferenceResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -194,62 +217,20 @@ func (v *CreateProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDese
 	})
 }
 func (c *Client) addOperationCreateProcurementPortalPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcurementPortalPreference, schemas.CreateProcurementPortalPreferenceRequest, schemas.CreateProcurementPortalPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcurementPortalPreference, schemas.CreateProcurementPortalPreferenceRequest, schemas.CreateProcurementPortalPreferenceResponse), output: &CreateProcurementPortalPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProcurementPortalPreference"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -259,12 +240,6 @@ func (c *Client) addOperationCreateProcurementPortalPreferenceMiddlewares(stack 
 		return err
 	}
 	if err = addOpCreateProcurementPortalPreferenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProcurementPortalPreference(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -277,12 +252,6 @@ func (c *Client) addOperationCreateProcurementPortalPreferenceMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -322,12 +291,4 @@ func (m *idempotencyToken_initializeOpCreateProcurementPortalPreference) HandleI
 }
 func addIdempotencyToken_opCreateProcurementPortalPreferenceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProcurementPortalPreference{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProcurementPortalPreference(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProcurementPortalPreference",
-	}
 }

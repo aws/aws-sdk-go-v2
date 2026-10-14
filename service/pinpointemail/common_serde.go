@@ -287,6 +287,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func deserializeBlacklistEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BlacklistEntry) error {
+	*v = make([]types.BlacklistEntry, 0)
 	var vv types.BlacklistEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BlacklistEntry{}
@@ -300,6 +301,7 @@ func deserializeBlacklistEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeBlacklistItemNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -313,6 +315,7 @@ func deserializeBlacklistItemNames(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeCloudWatchDimensionConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CloudWatchDimensionConfiguration) error {
+	*v = make([]types.CloudWatchDimensionConfiguration, 0)
 	var vv types.CloudWatchDimensionConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CloudWatchDimensionConfiguration{}
@@ -326,6 +329,7 @@ func deserializeCloudWatchDimensionConfigurations(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeConfigurationSetNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -339,6 +343,7 @@ func deserializeConfigurationSetNameList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeDailyVolumes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DailyVolume) error {
+	*v = make([]types.DailyVolume, 0)
 	var vv types.DailyVolume
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DailyVolume{}
@@ -352,6 +357,7 @@ func deserializeDailyVolumes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeDedicatedIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DedicatedIp) error {
+	*v = make([]types.DedicatedIp, 0)
 	var vv types.DedicatedIp
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DedicatedIp{}
@@ -365,6 +371,7 @@ func deserializeDedicatedIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeDeliverabilityTestReports(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DeliverabilityTestReport) error {
+	*v = make([]types.DeliverabilityTestReport, 0)
 	var vv types.DeliverabilityTestReport
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DeliverabilityTestReport{}
@@ -378,6 +385,7 @@ func deserializeDeliverabilityTestReports(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeDnsTokenList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -391,6 +399,7 @@ func deserializeDnsTokenList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeDomainDeliverabilityCampaignList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainDeliverabilityCampaign) error {
+	*v = make([]types.DomainDeliverabilityCampaign, 0)
 	var vv types.DomainDeliverabilityCampaign
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainDeliverabilityCampaign{}
@@ -404,6 +413,7 @@ func deserializeDomainDeliverabilityCampaignList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeDomainDeliverabilityTrackingOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainDeliverabilityTrackingOption) error {
+	*v = make([]types.DomainDeliverabilityTrackingOption, 0)
 	var vv types.DomainDeliverabilityTrackingOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainDeliverabilityTrackingOption{}
@@ -417,6 +427,7 @@ func deserializeDomainDeliverabilityTrackingOptions(d smithy.ShapeDeserializer, 
 }
 
 func deserializeDomainIspPlacements(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainIspPlacement) error {
+	*v = make([]types.DomainIspPlacement, 0)
 	var vv types.DomainIspPlacement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainIspPlacement{}
@@ -430,6 +441,7 @@ func deserializeDomainIspPlacements(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeEmailAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -443,6 +455,7 @@ func deserializeEmailAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeEsps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -456,6 +469,7 @@ func deserializeEsps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) 
 }
 
 func deserializeEventDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventDestination) error {
+	*v = make([]types.EventDestination, 0)
 	var vv types.EventDestination
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EventDestination{}
@@ -469,6 +483,7 @@ func deserializeEventDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeEventTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventType) error {
+	*v = make([]types.EventType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -482,6 +497,7 @@ func deserializeEventTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeIdentityInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdentityInfo) error {
+	*v = make([]types.IdentityInfo, 0)
 	var vv types.IdentityInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdentityInfo{}
@@ -495,6 +511,7 @@ func deserializeIdentityInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -508,6 +525,7 @@ func deserializeIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func deserializeIspNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -521,6 +539,7 @@ func deserializeIspNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeIspPlacements(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IspPlacement) error {
+	*v = make([]types.IspPlacement, 0)
 	var vv types.IspPlacement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IspPlacement{}
@@ -534,6 +553,7 @@ func deserializeIspPlacements(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeListOfDedicatedIpPools(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -547,6 +567,7 @@ func deserializeListOfDedicatedIpPools(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeMessageTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MessageTag) error {
+	*v = make([]types.MessageTag, 0)
 	var vv types.MessageTag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MessageTag{}
@@ -560,6 +581,7 @@ func deserializeMessageTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -573,6 +595,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -601,6 +624,14 @@ func deserializeBlacklistReport(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string][]types.BlacklistEntry)
 	var vv []types.BlacklistEntry
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []types.BlacklistEntry
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeBlacklistEntries(d, s.MapValue(), &vv); err != nil {
 			return err

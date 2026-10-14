@@ -1,0 +1,5 @@
+POST /policies/__PolicyName__/version?setAsDefault=true
+
+Content-Type: application/json
+
+{"policyDocument":"__PolicyDocument__"}

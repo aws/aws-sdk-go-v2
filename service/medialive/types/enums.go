@@ -147,6 +147,52 @@ func (AacVbrQuality) Values() []AacVbrQuality {
 	}
 }
 
+type AbWatermarkerIdLength string
+
+// Enum values for AbWatermarkerIdLength
+const (
+	AbWatermarkerIdLengthId2048 AbWatermarkerIdLength = "ID_2048"
+	AbWatermarkerIdLengthId512  AbWatermarkerIdLength = "ID_512"
+)
+
+// Values returns all known values for AbWatermarkerIdLength. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AbWatermarkerIdLength) Values() []AbWatermarkerIdLength {
+	return []AbWatermarkerIdLength{
+		"ID_2048",
+		"ID_512",
+	}
+}
+
+type AbWatermarkingProfile string
+
+// Enum values for AbWatermarkingProfile
+const (
+	AbWatermarkingProfileCamcording AbWatermarkingProfile = "CAMCORDING"
+	AbWatermarkingProfileCustom     AbWatermarkingProfile = "CUSTOM"
+	AbWatermarkingProfileDefault    AbWatermarkingProfile = "DEFAULT"
+	AbWatermarkingProfileHq         AbWatermarkingProfile = "HQ"
+	AbWatermarkingProfileMezzanine  AbWatermarkingProfile = "MEZZANINE"
+	AbWatermarkingProfileRobust     AbWatermarkingProfile = "ROBUST"
+)
+
+// Values returns all known values for AbWatermarkingProfile. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AbWatermarkingProfile) Values() []AbWatermarkingProfile {
+	return []AbWatermarkingProfile{
+		"CAMCORDING",
+		"CUSTOM",
+		"DEFAULT",
+		"HQ",
+		"MEZZANINE",
+		"ROBUST",
+	}
+}
+
 type Ac3AttenuationControl string
 
 // Enum values for Ac3AttenuationControl
@@ -421,6 +467,8 @@ type AudioNormalizationAlgorithm string
 const (
 	AudioNormalizationAlgorithmItu17701 AudioNormalizationAlgorithm = "ITU_1770_1"
 	AudioNormalizationAlgorithmItu17702 AudioNormalizationAlgorithm = "ITU_1770_2"
+	AudioNormalizationAlgorithmItu17703 AudioNormalizationAlgorithm = "ITU_1770_3"
+	AudioNormalizationAlgorithmItu17704 AudioNormalizationAlgorithm = "ITU_1770_4"
 )
 
 // Values returns all known values for AudioNormalizationAlgorithm. Note that this
@@ -431,6 +479,8 @@ func (AudioNormalizationAlgorithm) Values() []AudioNormalizationAlgorithm {
 	return []AudioNormalizationAlgorithm{
 		"ITU_1770_1",
 		"ITU_1770_2",
+		"ITU_1770_3",
+		"ITU_1770_4",
 	}
 }
 
@@ -449,6 +499,26 @@ const (
 func (AudioNormalizationAlgorithmControl) Values() []AudioNormalizationAlgorithmControl {
 	return []AudioNormalizationAlgorithmControl{
 		"CORRECT_AUDIO",
+	}
+}
+
+type AudioNormalizationPeakCalculation string
+
+// Enum values for AudioNormalizationPeakCalculation
+const (
+	AudioNormalizationPeakCalculationNone     AudioNormalizationPeakCalculation = "NONE"
+	AudioNormalizationPeakCalculationTruePeak AudioNormalizationPeakCalculation = "TRUE_PEAK"
+)
+
+// Values returns all known values for AudioNormalizationPeakCalculation. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioNormalizationPeakCalculation) Values() []AudioNormalizationPeakCalculation {
+	return []AudioNormalizationPeakCalculation{
+		"NONE",
+		"TRUE_PEAK",
 	}
 }
 
@@ -1230,6 +1300,7 @@ const (
 	CloudWatchAlarmTemplateTargetResourceTypeMediaconnectFlow                 CloudWatchAlarmTemplateTargetResourceType = "MEDIACONNECT_FLOW"
 	CloudWatchAlarmTemplateTargetResourceTypeS3Bucket                         CloudWatchAlarmTemplateTargetResourceType = "S3_BUCKET"
 	CloudWatchAlarmTemplateTargetResourceTypeMediatailorPlaybackConfiguration CloudWatchAlarmTemplateTargetResourceType = "MEDIATAILOR_PLAYBACK_CONFIGURATION"
+	CloudWatchAlarmTemplateTargetResourceTypeElementalInferenceFeed           CloudWatchAlarmTemplateTargetResourceType = "ELEMENTAL_INFERENCE_FEED"
 )
 
 // Values returns all known values for CloudWatchAlarmTemplateTargetResourceType.
@@ -1248,6 +1319,7 @@ func (CloudWatchAlarmTemplateTargetResourceType) Values() []CloudWatchAlarmTempl
 		"MEDIACONNECT_FLOW",
 		"S3_BUCKET",
 		"MEDIATAILOR_PLAYBACK_CONFIGURATION",
+		"ELEMENTAL_INFERENCE_FEED",
 	}
 }
 
@@ -2334,6 +2406,26 @@ func (EmbeddedConvert608To708) Values() []EmbeddedConvert608To708 {
 	}
 }
 
+type EmbeddedDestinationStyleControl string
+
+// Enum values for EmbeddedDestinationStyleControl
+const (
+	EmbeddedDestinationStyleControlManual      EmbeddedDestinationStyleControl = "MANUAL"
+	EmbeddedDestinationStyleControlPassthrough EmbeddedDestinationStyleControl = "PASSTHROUGH"
+)
+
+// Values returns all known values for EmbeddedDestinationStyleControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedDestinationStyleControl) Values() []EmbeddedDestinationStyleControl {
+	return []EmbeddedDestinationStyleControl{
+		"MANUAL",
+		"PASSTHROUGH",
+	}
+}
+
 type EmbeddedScte20Detection string
 
 // Enum values for EmbeddedScte20Detection
@@ -2350,6 +2442,23 @@ func (EmbeddedScte20Detection) Values() []EmbeddedScte20Detection {
 	return []EmbeddedScte20Detection{
 		"AUTO",
 		"OFF",
+	}
+}
+
+type EnrichmentMethod string
+
+// Enum values for EnrichmentMethod
+const (
+	EnrichmentMethodScte35ElementalInferenceQueryParams EnrichmentMethod = "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"
+)
+
+// Values returns all known values for EnrichmentMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentMethod) Values() []EnrichmentMethod {
+	return []EnrichmentMethod{
+		"SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS",
 	}
 }
 
@@ -5165,8 +5274,9 @@ type M2tsScte35Control string
 
 // Enum values for M2tsScte35Control
 const (
-	M2tsScte35ControlNone        M2tsScte35Control = "NONE"
-	M2tsScte35ControlPassthrough M2tsScte35Control = "PASSTHROUGH"
+	M2tsScte35ControlNone             M2tsScte35Control = "NONE"
+	M2tsScte35ControlPassthrough      M2tsScte35Control = "PASSTHROUGH"
+	M2tsScte35ControlScte35WithoutIdr M2tsScte35Control = "SCTE_35_WITHOUT_IDR"
 )
 
 // Values returns all known values for M2tsScte35Control. Note that this can be
@@ -5177,6 +5287,7 @@ func (M2tsScte35Control) Values() []M2tsScte35Control {
 	return []M2tsScte35Control{
 		"NONE",
 		"PASSTHROUGH",
+		"SCTE_35_WITHOUT_IDR",
 	}
 }
 
@@ -5934,6 +6045,27 @@ func (OfferingType) Values() []OfferingType {
 	}
 }
 
+type OutputUsage string
+
+// Enum values for OutputUsage
+const (
+	OutputUsageMultiviewEqualSizeView OutputUsage = "MULTIVIEW_EQUAL_SIZE_VIEW"
+	OutputUsageMultiviewPrimaryView   OutputUsage = "MULTIVIEW_PRIMARY_VIEW"
+	OutputUsageMultiviewSecondaryView OutputUsage = "MULTIVIEW_SECONDARY_VIEW"
+)
+
+// Values returns all known values for OutputUsage. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputUsage) Values() []OutputUsage {
+	return []OutputUsage{
+		"MULTIVIEW_EQUAL_SIZE_VIEW",
+		"MULTIVIEW_PRIMARY_VIEW",
+		"MULTIVIEW_SECONDARY_VIEW",
+	}
+}
+
 type PipelineId string
 
 // Enum values for PipelineId
@@ -6583,6 +6715,7 @@ type Scte35Type string
 const (
 	Scte35TypeNone                      Scte35Type = "NONE"
 	Scte35TypeScte35WithoutSegmentation Scte35Type = "SCTE_35_WITHOUT_SEGMENTATION"
+	Scte35TypeScte35WithoutIdr          Scte35Type = "SCTE_35_WITHOUT_IDR"
 )
 
 // Values returns all known values for Scte35Type. Note that this can be expanded
@@ -6593,6 +6726,7 @@ func (Scte35Type) Values() []Scte35Type {
 	return []Scte35Type{
 		"NONE",
 		"SCTE_35_WITHOUT_SEGMENTATION",
+		"SCTE_35_WITHOUT_IDR",
 	}
 }
 
@@ -7136,6 +7270,7 @@ type TtmlDestinationStyleControl string
 const (
 	TtmlDestinationStyleControlPassthrough   TtmlDestinationStyleControl = "PASSTHROUGH"
 	TtmlDestinationStyleControlUseConfigured TtmlDestinationStyleControl = "USE_CONFIGURED"
+	TtmlDestinationStyleControlManual        TtmlDestinationStyleControl = "MANUAL"
 )
 
 // Values returns all known values for TtmlDestinationStyleControl. Note that this
@@ -7146,6 +7281,7 @@ func (TtmlDestinationStyleControl) Values() []TtmlDestinationStyleControl {
 	return []TtmlDestinationStyleControl{
 		"PASSTHROUGH",
 		"USE_CONFIGURED",
+		"MANUAL",
 	}
 }
 
@@ -7307,6 +7443,7 @@ type WebvttDestinationStyleControl string
 const (
 	WebvttDestinationStyleControlNoStyleData WebvttDestinationStyleControl = "NO_STYLE_DATA"
 	WebvttDestinationStyleControlPassthrough WebvttDestinationStyleControl = "PASSTHROUGH"
+	WebvttDestinationStyleControlManual      WebvttDestinationStyleControl = "MANUAL"
 )
 
 // Values returns all known values for WebvttDestinationStyleControl. Note that
@@ -7318,5 +7455,6 @@ func (WebvttDestinationStyleControl) Values() []WebvttDestinationStyleControl {
 	return []WebvttDestinationStyleControl{
 		"NO_STYLE_DATA",
 		"PASSTHROUGH",
+		"MANUAL",
 	}
 }

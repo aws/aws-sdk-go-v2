@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListBusinessSupportSubscriptionHistory
+
+{"nextToken":"__NextToken__","subscriptionContracts":[{"accountId":"__AccountId__","contractEndDate":946684800,"contractStartDate":946684800,"planName":"__PlanName__"},{"accountId":"__AccountId__","contractEndDate":946684800,"contractStartDate":946684800,"planName":"__PlanName__"}]}

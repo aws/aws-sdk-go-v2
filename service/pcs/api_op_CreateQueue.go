@@ -5,12 +5,8 @@ package pcs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a job queue. You must associate 1 or more compute node groups with the
@@ -64,31 +60,6 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQueueInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateQueueRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateQueueRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.CreateQueueRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-	serializeComputeNodeGroupConfigurationList(s, schemas.CreateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
-	if v.QueueName != nil {
-		s.WriteString(schemas.CreateQueueRequest_queueName, *v.QueueName)
-	}
-	if v.SlurmConfiguration != nil {
-		s.WriteStruct(schemas.CreateQueueRequest_slurmConfiguration)
-		v.SlurmConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRequestTagMap(s, schemas.CreateQueueRequest_tags, v.Tags)
-}
-
 type CreateQueueOutput struct {
 
 	// A queue resource.
@@ -100,73 +71,23 @@ type CreateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateQueueResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateQueueResponse_queue:
-			v.Queue = &types.Queue{}
-			return v.Queue.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateQueue{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateQueue{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse), output: &CreateQueueOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQueue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -176,12 +97,6 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateQueueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQueue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +109,6 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,12 +148,4 @@ func (m *idempotencyToken_initializeOpCreateQueue) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateQueueMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateQueue{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateQueue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateQueue",
-	}
 }

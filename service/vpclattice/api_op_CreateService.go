@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a service. A service is any software application that can run on
@@ -62,10 +62,76 @@ type CreateServiceInput struct {
 	// The custom domain name of the service.
 	CustomDomainName *string
 
+	// The amount of time, in seconds, that a connection can remain idle (no data
+	// sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If you
+	// don't specify a value, the default is 60 seconds. This setting does not change
+	// the maximum connection duration of 10 minutes; connections are still closed when
+	// they reach that limit.
+	IdleTimeoutSeconds *int32
+
 	// The tags for the service.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateServiceRequest_authType, string(v.AuthType))
+	}
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateServiceRequest_certificateArn, *v.CertificateArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateServiceRequest_customDomainName, *v.CustomDomainName)
+	}
+	if v.IdleTimeoutSeconds != nil {
+		s.WriteInt32(schemas.CreateServiceRequest_idleTimeoutSeconds, *v.IdleTimeoutSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
+}
+func (v *CreateServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceRequest_authType:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceRequest_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.CreateServiceRequest_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CreateServiceRequest_certificateArn, v.CertificateArn)
+		case schemas.CreateServiceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateServiceRequest_clientToken, v.ClientToken)
+		case schemas.CreateServiceRequest_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.CreateServiceRequest_customDomainName, v.CustomDomainName)
+		case schemas.CreateServiceRequest_idleTimeoutSeconds:
+			v.IdleTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.CreateServiceRequest_idleTimeoutSeconds, v.IdleTimeoutSeconds)
+		case schemas.CreateServiceRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceRequest_name, v.Name)
+		case schemas.CreateServiceRequest_tags:
+			return deserializeTagMap(d, schemas.CreateServiceRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 type CreateServiceOutput struct {
@@ -88,6 +154,10 @@ type CreateServiceOutput struct {
 	// The ID of the service.
 	Id *string
 
+	// The amount of time, in seconds, that a connection can remain idle before VPC
+	// Lattice closes it.
+	IdleTimeoutSeconds *int32
+
 	// The name of the service.
 	Name *string
 
@@ -101,65 +171,100 @@ type CreateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateServiceResponse_arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateServiceResponse_authType, string(v.AuthType))
+	}
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateServiceResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateServiceResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.DnsEntry != nil {
+		s.WriteStruct(schemas.CreateServiceResponse_dnsEntry)
+		v.DnsEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateServiceResponse_id, *v.Id)
+	}
+	if v.IdleTimeoutSeconds != nil {
+		s.WriteInt32(schemas.CreateServiceResponse_idleTimeoutSeconds, *v.IdleTimeoutSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateServiceResponse_status, string(v.Status))
+	}
+}
+func (v *CreateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateServiceResponse_arn, v.Arn)
+		case schemas.CreateServiceResponse_authType:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceResponse_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.CreateServiceResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CreateServiceResponse_certificateArn, v.CertificateArn)
+		case schemas.CreateServiceResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.CreateServiceResponse_customDomainName, v.CustomDomainName)
+		case schemas.CreateServiceResponse_dnsEntry:
+			v.DnsEntry = &types.DnsEntry{}
+			return v.DnsEntry.Deserialize(d)
+		case schemas.CreateServiceResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateServiceResponse_id, v.Id)
+		case schemas.CreateServiceResponse_idleTimeoutSeconds:
+			v.IdleTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.CreateServiceResponse_idleTimeoutSeconds, v.IdleTimeoutSeconds)
+		case schemas.CreateServiceResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceResponse_name, v.Name)
+		case schemas.CreateServiceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse), output: &CreateServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -169,12 +274,6 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +286,6 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -232,12 +325,4 @@ func (m *idempotencyToken_initializeOpCreateService) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateServiceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateService{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateService",
-	}
 }

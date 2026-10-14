@@ -4,11 +4,10 @@ package marketplacecommerceanalytics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -169,6 +168,34 @@ type GenerateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDefinedValues(s, schemas.GenerateDataSetRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.DataSetPublicationDate != nil {
+		s.WriteTime(schemas.GenerateDataSetRequest_dataSetPublicationDate, *v.DataSetPublicationDate)
+	}
+	if v.DataSetType != "" {
+		s.WriteString(schemas.GenerateDataSetRequest_dataSetType, string(v.DataSetType))
+	}
+	if v.DestinationS3BucketName != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_destinationS3BucketName, *v.DestinationS3BucketName)
+	}
+	if v.DestinationS3Prefix != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_destinationS3Prefix, *v.DestinationS3Prefix)
+	}
+	if v.RoleNameArn != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_roleNameArn, *v.RoleNameArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 // Container for the result of the GenerateDataSet operation.
 type GenerateDataSetOutput struct {
 
@@ -183,77 +210,48 @@ type GenerateDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateDataSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetRequestId != nil {
+		s.WriteString(schemas.GenerateDataSetResult_dataSetRequestId, *v.DataSetRequestId)
+	}
+}
+func (v *GenerateDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateDataSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateDataSetResult_dataSetRequestId:
+			v.DataSetRequestId = new(string)
+			return d.ReadString(schemas.GenerateDataSetResult_dataSetRequestId, v.DataSetRequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateDataSet, schemas.GenerateDataSetRequest, schemas.GenerateDataSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateDataSet, schemas.GenerateDataSetRequest, schemas.GenerateDataSetResult), output: &GenerateDataSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGenerateDataSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateDataSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateDataSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateDataSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -268,22 +266,8 @@ func (c *Client) addOperationGenerateDataSetMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateDataSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateDataSet",
-	}
 }

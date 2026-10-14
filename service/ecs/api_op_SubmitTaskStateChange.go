@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -67,6 +66,39 @@ type SubmitTaskStateChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitTaskStateChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitTaskStateChangeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitTaskStateChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentStateChanges(s, schemas.SubmitTaskStateChangeRequest_attachments, v.Attachments)
+	if v.Cluster != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_cluster, *v.Cluster)
+	}
+	serializeContainerStateChanges(s, schemas.SubmitTaskStateChangeRequest_containers, v.Containers)
+	if v.ExecutionStoppedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_executionStoppedAt, *v.ExecutionStoppedAt)
+	}
+	serializeManagedAgentStateChanges(s, schemas.SubmitTaskStateChangeRequest_managedAgents, v.ManagedAgents)
+	if v.PullStartedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_pullStartedAt, *v.PullStartedAt)
+	}
+	if v.PullStoppedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_pullStoppedAt, *v.PullStoppedAt)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_reason, *v.Reason)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_status, *v.Status)
+	}
+	if v.Task != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_task, *v.Task)
+	}
+}
+
 type SubmitTaskStateChangeOutput struct {
 
 	// Acknowledgement of the state change.
@@ -78,77 +110,48 @@ type SubmitTaskStateChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitTaskStateChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitTaskStateChangeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitTaskStateChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Acknowledgment != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeResponse_acknowledgment, *v.Acknowledgment)
+	}
+}
+func (v *SubmitTaskStateChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitTaskStateChangeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitTaskStateChangeResponse_acknowledgment:
+			v.Acknowledgment = new(string)
+			return d.ReadString(schemas.SubmitTaskStateChangeResponse_acknowledgment, v.Acknowledgment)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitTaskStateChange, schemas.SubmitTaskStateChangeRequest, schemas.SubmitTaskStateChangeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitTaskStateChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitTaskStateChange, schemas.SubmitTaskStateChangeRequest, schemas.SubmitTaskStateChangeResponse), output: &SubmitTaskStateChangeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubmitTaskStateChange{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitTaskStateChange"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSubmitTaskStateChangeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitTaskStateChange(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +166,8 @@ func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSubmitTaskStateChange(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitTaskStateChange",
-	}
 }

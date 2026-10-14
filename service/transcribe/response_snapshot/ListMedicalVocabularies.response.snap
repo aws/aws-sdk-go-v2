@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.ListMedicalVocabularies
+
+{"NextToken":"__NextToken__","Status":"PENDING","Vocabularies":[{"LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyName":"__VocabularyName__","VocabularyState":"PENDING"},{"LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyName":"__VocabularyName__","VocabularyState":"PENDING"}]}

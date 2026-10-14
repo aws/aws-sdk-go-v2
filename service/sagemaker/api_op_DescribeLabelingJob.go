@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeLabelingJobInput struct {
 	LabelingJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLabelingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLabelingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLabelingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelingJobName != nil {
+		s.WriteString(schemas.DescribeLabelingJobRequest_LabelingJobName, *v.LabelingJobName)
+	}
 }
 
 type DescribeLabelingJobOutput struct {
@@ -171,77 +182,165 @@ type DescribeLabelingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLabelingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLabelingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLabelingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLabelingJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HumanTaskConfig != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_HumanTaskConfig)
+		v.HumanTaskConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputConfig != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_InputConfig)
+		v.InputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobReferenceCode != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_JobReferenceCode, *v.JobReferenceCode)
+	}
+	if v.LabelAttributeName != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_LabelAttributeName, *v.LabelAttributeName)
+	}
+	if v.LabelCategoryConfigS3Uri != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_LabelCategoryConfigS3Uri, *v.LabelCategoryConfigS3Uri)
+	}
+	if v.LabelCounters != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_LabelCounters)
+		v.LabelCounters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelingJobAlgorithmsConfig != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_LabelingJobAlgorithmsConfig)
+		v.LabelingJobAlgorithmsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelingJobArn != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_LabelingJobArn, *v.LabelingJobArn)
+	}
+	if v.LabelingJobName != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_LabelingJobName, *v.LabelingJobName)
+	}
+	if v.LabelingJobOutput != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_LabelingJobOutput)
+		v.LabelingJobOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelingJobStatus != "" {
+		s.WriteString(schemas.DescribeLabelingJobResponse_LabelingJobStatus, string(v.LabelingJobStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeLabelingJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeLabelingJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingConditions != nil {
+		s.WriteStruct(schemas.DescribeLabelingJobResponse_StoppingConditions)
+		v.StoppingConditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.DescribeLabelingJobResponse_Tags, v.Tags)
+}
+func (v *DescribeLabelingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLabelingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLabelingJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLabelingJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLabelingJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeLabelingJobResponse_HumanTaskConfig:
+			v.HumanTaskConfig = &types.HumanTaskConfig{}
+			return v.HumanTaskConfig.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_InputConfig:
+			v.InputConfig = &types.LabelingJobInputConfig{}
+			return v.InputConfig.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_JobReferenceCode:
+			v.JobReferenceCode = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_JobReferenceCode, v.JobReferenceCode)
+		case schemas.DescribeLabelingJobResponse_LabelAttributeName:
+			v.LabelAttributeName = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_LabelAttributeName, v.LabelAttributeName)
+		case schemas.DescribeLabelingJobResponse_LabelCategoryConfigS3Uri:
+			v.LabelCategoryConfigS3Uri = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_LabelCategoryConfigS3Uri, v.LabelCategoryConfigS3Uri)
+		case schemas.DescribeLabelingJobResponse_LabelCounters:
+			v.LabelCounters = &types.LabelCounters{}
+			return v.LabelCounters.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_LabelingJobAlgorithmsConfig:
+			v.LabelingJobAlgorithmsConfig = &types.LabelingJobAlgorithmsConfig{}
+			return v.LabelingJobAlgorithmsConfig.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_LabelingJobArn:
+			v.LabelingJobArn = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_LabelingJobArn, v.LabelingJobArn)
+		case schemas.DescribeLabelingJobResponse_LabelingJobName:
+			v.LabelingJobName = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_LabelingJobName, v.LabelingJobName)
+		case schemas.DescribeLabelingJobResponse_LabelingJobOutput:
+			v.LabelingJobOutput = &types.LabelingJobOutput{}
+			return v.LabelingJobOutput.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_LabelingJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLabelingJobResponse_LabelingJobStatus, &ev); err != nil {
+				return err
+			}
+			v.LabelingJobStatus = types.LabelingJobStatus(ev)
+			return nil
+		case schemas.DescribeLabelingJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLabelingJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeLabelingJobResponse_OutputConfig:
+			v.OutputConfig = &types.LabelingJobOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeLabelingJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeLabelingJobResponse_StoppingConditions:
+			v.StoppingConditions = &types.LabelingJobStoppingConditions{}
+			return v.StoppingConditions.Deserialize(d)
+		case schemas.DescribeLabelingJobResponse_Tags:
+			return deserializeTagList(d, schemas.DescribeLabelingJobResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLabelingJob, schemas.DescribeLabelingJobRequest, schemas.DescribeLabelingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLabelingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLabelingJob, schemas.DescribeLabelingJobRequest, schemas.DescribeLabelingJobResponse), output: &DescribeLabelingJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLabelingJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLabelingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLabelingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLabelingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -256,22 +355,8 @@ func (c *Client) addOperationDescribeLabelingJobMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLabelingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLabelingJob",
-	}
 }

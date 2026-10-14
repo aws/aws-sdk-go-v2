@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateVpcEndpointConnectionNotification&ClientToken=__ClientToken__&ConnectionEvents.1=__Member__&ConnectionEvents.2=__Member__&ConnectionNotificationArn=__ConnectionNotificationArn__&DryRun=true&ServiceId=__ServiceId__&Version=2016-11-15&VpcEndpointId=__VpcEndpointId__

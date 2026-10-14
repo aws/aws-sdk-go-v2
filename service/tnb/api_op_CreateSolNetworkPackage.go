@@ -4,13 +4,8 @@ package tnb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a network package.
@@ -56,16 +51,6 @@ type CreateSolNetworkPackageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSolNetworkPackageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSolNetworkPackageInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSolNetworkPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.CreateSolNetworkPackageInput_tags, v.Tags)
-}
-
 type CreateSolNetworkPackageOutput struct {
 
 	// Network package ARN.
@@ -104,108 +89,26 @@ type CreateSolNetworkPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSolNetworkPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSolNetworkPackageOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSolNetworkPackageOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateSolNetworkPackageOutput_arn, v.Arn)
-		case schemas.CreateSolNetworkPackageOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateSolNetworkPackageOutput_id, v.Id)
-		case schemas.CreateSolNetworkPackageOutput_nsdOnboardingState:
-			var ev string
-			if err := d.ReadString(schemas.CreateSolNetworkPackageOutput_nsdOnboardingState, &ev); err != nil {
-				return err
-			}
-			v.NsdOnboardingState = types.NsdOnboardingState(ev)
-			return nil
-		case schemas.CreateSolNetworkPackageOutput_nsdOperationalState:
-			var ev string
-			if err := d.ReadString(schemas.CreateSolNetworkPackageOutput_nsdOperationalState, &ev); err != nil {
-				return err
-			}
-			v.NsdOperationalState = types.NsdOperationalState(ev)
-			return nil
-		case schemas.CreateSolNetworkPackageOutput_nsdUsageState:
-			var ev string
-			if err := d.ReadString(schemas.CreateSolNetworkPackageOutput_nsdUsageState, &ev); err != nil {
-				return err
-			}
-			v.NsdUsageState = types.NsdUsageState(ev)
-			return nil
-		case schemas.CreateSolNetworkPackageOutput_tags:
-			return deserializeTagMap(d, schemas.CreateSolNetworkPackageOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSolNetworkPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSolNetworkPackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolNetworkPackage, schemas.CreateSolNetworkPackageInput, schemas.CreateSolNetworkPackageOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSolNetworkPackage{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolNetworkPackage, schemas.CreateSolNetworkPackageInput, schemas.CreateSolNetworkPackageOutput), output: &CreateSolNetworkPackageOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSolNetworkPackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSolNetworkPackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +123,8 @@ func (c *Client) addOperationCreateSolNetworkPackageMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSolNetworkPackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSolNetworkPackage",
-	}
 }

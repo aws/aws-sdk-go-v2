@@ -1,0 +1,5 @@
+POST /2013-04-01/trafficpolicyinstance
+
+Content-Type: application/xml
+
+<CreateTrafficPolicyInstanceRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><HostedZoneId>__HostedZoneId__</HostedZoneId><Name>__Name__</Name><TrafficPolicyId>__TrafficPolicyId__</TrafficPolicyId><TrafficPolicyVersion>1</TrafficPolicyVersion><TTL>1</TTL></CreateTrafficPolicyInstanceRequest>

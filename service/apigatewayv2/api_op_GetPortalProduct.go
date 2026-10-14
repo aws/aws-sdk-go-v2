@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,21 @@ type GetPortalProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortalProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalProductRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.GetPortalProductRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.GetPortalProductRequest_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+}
+
 type GetPortalProductOutput struct {
 
 	// The description of a portal product.
@@ -70,77 +84,83 @@ type GetPortalProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortalProductOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalProductResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetPortalProductResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetPortalProductResponse_DisplayName, *v.DisplayName)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteStruct(schemas.GetPortalProductResponse_DisplayOrder)
+		v.DisplayOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetPortalProductResponse_LastModified, *v.LastModified)
+	}
+	if v.PortalProductArn != nil {
+		s.WriteString(schemas.GetPortalProductResponse_PortalProductArn, *v.PortalProductArn)
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.GetPortalProductResponse_PortalProductId, *v.PortalProductId)
+	}
+	serializeTags(s, schemas.GetPortalProductResponse_Tags, v.Tags)
+}
+func (v *GetPortalProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPortalProductResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPortalProductResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_Description, v.Description)
+		case schemas.GetPortalProductResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_DisplayName, v.DisplayName)
+		case schemas.GetPortalProductResponse_DisplayOrder:
+			v.DisplayOrder = &types.DisplayOrder{}
+			return v.DisplayOrder.Deserialize(d)
+		case schemas.GetPortalProductResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetPortalProductResponse_LastModified, v.LastModified)
+		case schemas.GetPortalProductResponse_PortalProductArn:
+			v.PortalProductArn = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_PortalProductArn, v.PortalProductArn)
+		case schemas.GetPortalProductResponse_PortalProductId:
+			v.PortalProductId = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_PortalProductId, v.PortalProductId)
+		case schemas.GetPortalProductResponse_Tags:
+			return deserializeTags(d, schemas.GetPortalProductResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPortalProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalProduct, schemas.GetPortalProductRequest, schemas.GetPortalProductResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortalProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalProduct, schemas.GetPortalProductRequest, schemas.GetPortalProductResponse), output: &GetPortalProductOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortalProduct{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPortalProduct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPortalProductValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPortalProduct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +175,8 @@ func (c *Client) addOperationGetPortalProductMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPortalProduct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPortalProduct",
-	}
 }

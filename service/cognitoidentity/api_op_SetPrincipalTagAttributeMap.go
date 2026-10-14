@@ -4,10 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // You can use this operation to use default (username and clientID) attribute or
@@ -49,6 +48,25 @@ type SetPrincipalTagAttributeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPrincipalTagAttributeMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetPrincipalTagAttributeMapInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPrincipalTagAttributeMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapInput_IdentityProviderName, *v.IdentityProviderName)
+	}
+	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapInput_PrincipalTags, v.PrincipalTags)
+	if v.UseDefaults != nil {
+		s.WriteBool(schemas.SetPrincipalTagAttributeMapInput_UseDefaults, *v.UseDefaults)
+	}
+}
+
 type SetPrincipalTagAttributeMapOutput struct {
 
 	// The ID of the Identity Pool you want to set attribute mappings for.
@@ -71,77 +89,63 @@ type SetPrincipalTagAttributeMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPrincipalTagAttributeMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetPrincipalTagAttributeMapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPrincipalTagAttributeMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName, *v.IdentityProviderName)
+	}
+	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, v.PrincipalTags)
+	if v.UseDefaults != nil {
+		s.WriteBool(schemas.SetPrincipalTagAttributeMapResponse_UseDefaults, *v.UseDefaults)
+	}
+}
+func (v *SetPrincipalTagAttributeMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetPrincipalTagAttributeMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName:
+			v.IdentityProviderName = new(string)
+			return d.ReadString(schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName, v.IdentityProviderName)
+		case schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags:
+			return deserializePrincipalTags(d, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, &v.PrincipalTags)
+		case schemas.SetPrincipalTagAttributeMapResponse_UseDefaults:
+			v.UseDefaults = new(bool)
+			return d.ReadBool(schemas.SetPrincipalTagAttributeMapResponse_UseDefaults, v.UseDefaults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPrincipalTagAttributeMap, schemas.SetPrincipalTagAttributeMapInput, schemas.SetPrincipalTagAttributeMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPrincipalTagAttributeMap, schemas.SetPrincipalTagAttributeMapInput, schemas.SetPrincipalTagAttributeMapResponse), output: &SetPrincipalTagAttributeMapOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetPrincipalTagAttributeMap"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetPrincipalTagAttributeMapValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetPrincipalTagAttributeMap(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +160,8 @@ func (c *Client) addOperationSetPrincipalTagAttributeMapMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetPrincipalTagAttributeMap(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetPrincipalTagAttributeMap",
-	}
 }

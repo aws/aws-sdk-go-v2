@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/projects/__ProjectIdentifier__/memberships?maxResults=1&nextToken=__NextToken__&sortBy=NAME&sortOrder=ASCENDING
+
+

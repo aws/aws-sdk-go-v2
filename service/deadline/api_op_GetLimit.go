@@ -5,7 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +41,21 @@ type GetLimitInput struct {
 	LimitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetLimitRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.GetLimitRequest_limitId, *v.LimitId)
+	}
 }
 
 // Domain fields for Limit summary/response shapes, ordered before timestamps.
@@ -115,65 +131,102 @@ type GetLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmountRequirementName != nil {
+		s.WriteString(schemas.GetLimitResponse_amountRequirementName, *v.AmountRequirementName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetLimitResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetLimitResponse_createdBy, *v.CreatedBy)
+	}
+	if v.CurrentCount != nil {
+		s.WriteInt32(schemas.GetLimitResponse_currentCount, *v.CurrentCount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetLimitResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetLimitResponse_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetLimitResponse_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.GetLimitResponse_limitId, *v.LimitId)
+	}
+	if v.MaxCount != nil {
+		s.WriteInt32(schemas.GetLimitResponse_maxCount, *v.MaxCount)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetLimitResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetLimitResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLimitResponse_amountRequirementName:
+			v.AmountRequirementName = new(string)
+			return d.ReadString(schemas.GetLimitResponse_amountRequirementName, v.AmountRequirementName)
+		case schemas.GetLimitResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetLimitResponse_createdAt, v.CreatedAt)
+		case schemas.GetLimitResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetLimitResponse_createdBy, v.CreatedBy)
+		case schemas.GetLimitResponse_currentCount:
+			v.CurrentCount = new(int32)
+			return d.ReadInt32(schemas.GetLimitResponse_currentCount, v.CurrentCount)
+		case schemas.GetLimitResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLimitResponse_description, v.Description)
+		case schemas.GetLimitResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetLimitResponse_displayName, v.DisplayName)
+		case schemas.GetLimitResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetLimitResponse_farmId, v.FarmId)
+		case schemas.GetLimitResponse_limitId:
+			v.LimitId = new(string)
+			return d.ReadString(schemas.GetLimitResponse_limitId, v.LimitId)
+		case schemas.GetLimitResponse_maxCount:
+			v.MaxCount = new(int32)
+			return d.ReadInt32(schemas.GetLimitResponse_maxCount, v.MaxCount)
+		case schemas.GetLimitResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetLimitResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetLimitResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetLimitResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLimit, schemas.GetLimitRequest, schemas.GetLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLimit, schemas.GetLimitRequest, schemas.GetLimitResponse), output: &GetLimitOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLimit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLimit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -183,12 +236,6 @@ func (c *Client) addOperationGetLimitMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addOpGetLimitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLimit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,12 +248,6 @@ func (c *Client) addOperationGetLimitMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,12 +281,4 @@ func (m *endpointPrefix_opGetLimitMiddleware) HandleFinalize(ctx context.Context
 }
 func addEndpointPrefix_opGetLimitMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetLimitMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetLimit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLimit",
-	}
 }

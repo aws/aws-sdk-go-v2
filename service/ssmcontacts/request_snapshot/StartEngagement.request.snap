@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.StartEngagement
+
+{"ContactId":"__ContactId__","Content":"__Content__","IdempotencyToken":"__IdempotencyToken__","IncidentId":"__IncidentId__","PublicContent":"__PublicContent__","PublicSubject":"__PublicSubject__","Sender":"__Sender__","Subject":"__Subject__"}

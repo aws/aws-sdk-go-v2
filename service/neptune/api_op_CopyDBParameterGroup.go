@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies the specified DB parameter group.
@@ -40,6 +35,9 @@ type CopyDBParameterGroupInput struct {
 	//
 	//   - Must specify a valid DB parameter group identifier, for example
 	//   my-db-param-group , or a valid ARN.
+	//
+	//   - The source DB parameter group must be in the same Amazon Region as the
+	//   copy. Neptune does not support cross-Region copying of parameter groups.
 	//
 	// [Constructing an Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
 	//
@@ -74,25 +72,6 @@ type CopyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyDBParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceDBParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CopyDBParameterGroupMessage_SourceDBParameterGroupIdentifier, *v.SourceDBParameterGroupIdentifier)
-	}
-	serializeTagList(s, schemas.CopyDBParameterGroupMessage_Tags, v.Tags)
-	if v.TargetDBParameterGroupDescription != nil {
-		s.WriteString(schemas.CopyDBParameterGroupMessage_TargetDBParameterGroupDescription, *v.TargetDBParameterGroupDescription)
-	}
-	if v.TargetDBParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CopyDBParameterGroupMessage_TargetDBParameterGroupIdentifier, *v.TargetDBParameterGroupIdentifier)
-	}
-}
-
 type CopyDBParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB parameter group.
@@ -106,85 +85,29 @@ type CopyDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyDBParameterGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyDBParameterGroupResult_DBParameterGroup:
-			v.DBParameterGroup = &types.DBParameterGroup{}
-			return v.DBParameterGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBParameterGroup, schemas.CopyDBParameterGroupMessage, schemas.CopyDBParameterGroupResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyDBParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBParameterGroup, schemas.CopyDBParameterGroupMessage, schemas.CopyDBParameterGroupResult), output: &CopyDBParameterGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyDBParameterGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCopyDBParameterGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBParameterGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +122,8 @@ func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCopyDBParameterGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyDBParameterGroup",
-	}
 }

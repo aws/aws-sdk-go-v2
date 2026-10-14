@@ -4,10 +4,9 @@ package billingconductor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This updates an existing pricing plan.
@@ -42,6 +41,40 @@ type UpdatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Name, *v.Name)
+	}
+}
+func (v *UpdatePricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Arn, v.Arn)
+		case schemas.UpdatePricingPlanInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Description, v.Description)
+		case schemas.UpdatePricingPlanInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdatePricingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated pricing plan.
@@ -66,77 +99,70 @@ type UpdatePricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.UpdatePricingPlanOutput_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Name, *v.Name)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.UpdatePricingPlanOutput_Size, v.Size)
+	}
+}
+func (v *UpdatePricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Arn, v.Arn)
+		case schemas.UpdatePricingPlanOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Description, v.Description)
+		case schemas.UpdatePricingPlanOutput_LastModifiedTime:
+			return d.ReadInt64(schemas.UpdatePricingPlanOutput_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.UpdatePricingPlanOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Name, v.Name)
+		case schemas.UpdatePricingPlanOutput_Size:
+			return d.ReadInt64(schemas.UpdatePricingPlanOutput_Size, &v.Size)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanInput, schemas.UpdatePricingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanInput, schemas.UpdatePricingPlanOutput), output: &UpdatePricingPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePricingPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePricingPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePricingPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +177,8 @@ func (c *Client) addOperationUpdatePricingPlanMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePricingPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePricingPlan",
-	}
 }

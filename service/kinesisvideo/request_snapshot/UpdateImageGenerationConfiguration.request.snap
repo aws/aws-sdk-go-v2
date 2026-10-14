@@ -1,0 +1,5 @@
+POST /updateImageGenerationConfiguration
+
+Content-Type: application/json
+
+{"ImageGenerationConfiguration":{"DestinationConfig":{"DestinationRegion":"__DestinationRegion__","Uri":"__Uri__"},"Format":"JPEG","FormatConfig":{"key0":"__Value__"},"HeightPixels":1,"ImageSelectorType":"SERVER_TIMESTAMP","SamplingInterval":1,"Status":"ENABLED","WidthPixels":1},"StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

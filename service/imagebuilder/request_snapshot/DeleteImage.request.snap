@@ -1,0 +1,3 @@
+DELETE /DeleteImage?imageBuildVersionArn=__ImageBuildVersionArn__
+
+

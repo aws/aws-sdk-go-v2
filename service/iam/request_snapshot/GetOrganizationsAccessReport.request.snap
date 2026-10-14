@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetOrganizationsAccessReport&JobId=__JobId__&Marker=__Marker__&MaxItems=1&SortKey=SERVICE_NAMESPACE_ASCENDING&Version=2010-05-08

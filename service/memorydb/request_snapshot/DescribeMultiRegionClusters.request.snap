@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeMultiRegionClusters
+
+{"MaxResults":1,"MultiRegionClusterName":"__MultiRegionClusterName__","NextToken":"__NextToken__","ShowClusterDetails":true}

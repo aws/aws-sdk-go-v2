@@ -4,11 +4,10 @@ package grafana
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to define the identity provider (IdP) that this workspace
@@ -57,6 +56,39 @@ type UpdateWorkspaceAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceAuthenticationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceAuthenticationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthenticationProviders(s, schemas.UpdateWorkspaceAuthenticationRequest_authenticationProviders, v.AuthenticationProviders)
+	if v.SamlConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceAuthenticationRequest_samlConfiguration)
+		v.SamlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceAuthenticationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateWorkspaceAuthenticationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceAuthenticationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceAuthenticationRequest_authenticationProviders:
+			return deserializeAuthenticationProviders(d, schemas.UpdateWorkspaceAuthenticationRequest_authenticationProviders, &v.AuthenticationProviders)
+		case schemas.UpdateWorkspaceAuthenticationRequest_samlConfiguration:
+			v.SamlConfiguration = &types.SamlConfiguration{}
+			return v.SamlConfiguration.Deserialize(d)
+		case schemas.UpdateWorkspaceAuthenticationRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceAuthenticationRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateWorkspaceAuthenticationOutput struct {
 
 	// A structure that describes the user authentication for this workspace after the
@@ -71,77 +103,50 @@ type UpdateWorkspaceAuthenticationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceAuthenticationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceAuthenticationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceAuthenticationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceAuthenticationResponse_authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkspaceAuthenticationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceAuthenticationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceAuthenticationResponse_authentication:
+			v.Authentication = &types.AuthenticationDescription{}
+			return v.Authentication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceAuthentication, schemas.UpdateWorkspaceAuthenticationRequest, schemas.UpdateWorkspaceAuthenticationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceAuthentication, schemas.UpdateWorkspaceAuthenticationRequest, schemas.UpdateWorkspaceAuthenticationResponse), output: &UpdateWorkspaceAuthenticationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceAuthentication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkspaceAuthentication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWorkspaceAuthenticationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceAuthentication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +161,8 @@ func (c *Client) addOperationUpdateWorkspaceAuthenticationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkspaceAuthentication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkspaceAuthentication",
-	}
 }

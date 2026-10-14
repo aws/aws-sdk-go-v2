@@ -5,12 +5,8 @@ package controlcatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of control mappings from the Control Catalog. Control
@@ -46,26 +42,6 @@ type ListControlMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListControlMappingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListControlMappingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListControlMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListControlMappingsRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListControlMappingsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListControlMappingsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListControlMappingsOutput struct {
 
 	// The list of control mappings that the ListControlMappings API returns.
@@ -82,84 +58,26 @@ type ListControlMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListControlMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListControlMappingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListControlMappingsResponse_ControlMappings:
-			return deserializeControlMappings(d, schemas.ListControlMappingsResponse_ControlMappings, &v.ControlMappings)
-		case schemas.ListControlMappingsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListControlMappingsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListControlMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlMappings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlMappings, schemas.ListControlMappingsRequest, schemas.ListControlMappingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlMappings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlMappings, schemas.ListControlMappingsRequest, schemas.ListControlMappingsResponse), output: &ListControlMappingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlMappings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlMappings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +90,6 @@ func (c *Client) addOperationListControlMappingsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +191,3 @@ type ListControlMappingsAPIClient interface {
 }
 
 var _ ListControlMappingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListControlMappings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListControlMappings",
-	}
-}

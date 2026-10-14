@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an Integration.
@@ -40,6 +39,21 @@ type GetIntegrationInput struct {
 	IntegrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetIntegrationRequest_ApiId, *v.ApiId)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.GetIntegrationRequest_IntegrationId, *v.IntegrationId)
+	}
 }
 
 type GetIntegrationOutput struct {
@@ -232,77 +246,171 @@ type GetIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.GetIntegrationResult_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.GetIntegrationResult_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.GetIntegrationResult_ConnectionType, string(v.ConnectionType))
+	}
+	if v.ContentHandlingStrategy != "" {
+		s.WriteString(schemas.GetIntegrationResult_ContentHandlingStrategy, string(v.ContentHandlingStrategy))
+	}
+	if v.CredentialsArn != nil {
+		s.WriteString(schemas.GetIntegrationResult_CredentialsArn, *v.CredentialsArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetIntegrationResult_Description, *v.Description)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationId, *v.IntegrationId)
+	}
+	if v.IntegrationMethod != nil {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationMethod, *v.IntegrationMethod)
+	}
+	if v.IntegrationResponseSelectionExpression != nil {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationResponseSelectionExpression, *v.IntegrationResponseSelectionExpression)
+	}
+	if v.IntegrationSubtype != nil {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationSubtype, *v.IntegrationSubtype)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationType, string(v.IntegrationType))
+	}
+	if v.IntegrationUri != nil {
+		s.WriteString(schemas.GetIntegrationResult_IntegrationUri, *v.IntegrationUri)
+	}
+	if v.PassthroughBehavior != "" {
+		s.WriteString(schemas.GetIntegrationResult_PassthroughBehavior, string(v.PassthroughBehavior))
+	}
+	if v.PayloadFormatVersion != nil {
+		s.WriteString(schemas.GetIntegrationResult_PayloadFormatVersion, *v.PayloadFormatVersion)
+	}
+	serializeIntegrationParameters(s, schemas.GetIntegrationResult_RequestParameters, v.RequestParameters)
+	serializeTemplateMap(s, schemas.GetIntegrationResult_RequestTemplates, v.RequestTemplates)
+	serializeResponseParameters(s, schemas.GetIntegrationResult_ResponseParameters, v.ResponseParameters)
+	if v.TemplateSelectionExpression != nil {
+		s.WriteString(schemas.GetIntegrationResult_TemplateSelectionExpression, *v.TemplateSelectionExpression)
+	}
+	if v.TimeoutInMillis != nil {
+		s.WriteInt32(schemas.GetIntegrationResult_TimeoutInMillis, *v.TimeoutInMillis)
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.GetIntegrationResult_TlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationResult_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.GetIntegrationResult_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.GetIntegrationResult_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_ConnectionId, v.ConnectionId)
+		case schemas.GetIntegrationResult_ConnectionType:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationResult_ConnectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = types.ConnectionType(ev)
+			return nil
+		case schemas.GetIntegrationResult_ContentHandlingStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationResult_ContentHandlingStrategy, &ev); err != nil {
+				return err
+			}
+			v.ContentHandlingStrategy = types.ContentHandlingStrategy(ev)
+			return nil
+		case schemas.GetIntegrationResult_CredentialsArn:
+			v.CredentialsArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_CredentialsArn, v.CredentialsArn)
+		case schemas.GetIntegrationResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_Description, v.Description)
+		case schemas.GetIntegrationResult_IntegrationId:
+			v.IntegrationId = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_IntegrationId, v.IntegrationId)
+		case schemas.GetIntegrationResult_IntegrationMethod:
+			v.IntegrationMethod = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_IntegrationMethod, v.IntegrationMethod)
+		case schemas.GetIntegrationResult_IntegrationResponseSelectionExpression:
+			v.IntegrationResponseSelectionExpression = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_IntegrationResponseSelectionExpression, v.IntegrationResponseSelectionExpression)
+		case schemas.GetIntegrationResult_IntegrationSubtype:
+			v.IntegrationSubtype = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_IntegrationSubtype, v.IntegrationSubtype)
+		case schemas.GetIntegrationResult_IntegrationType:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationResult_IntegrationType, &ev); err != nil {
+				return err
+			}
+			v.IntegrationType = types.IntegrationType(ev)
+			return nil
+		case schemas.GetIntegrationResult_IntegrationUri:
+			v.IntegrationUri = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_IntegrationUri, v.IntegrationUri)
+		case schemas.GetIntegrationResult_PassthroughBehavior:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationResult_PassthroughBehavior, &ev); err != nil {
+				return err
+			}
+			v.PassthroughBehavior = types.PassthroughBehavior(ev)
+			return nil
+		case schemas.GetIntegrationResult_PayloadFormatVersion:
+			v.PayloadFormatVersion = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_PayloadFormatVersion, v.PayloadFormatVersion)
+		case schemas.GetIntegrationResult_RequestParameters:
+			return deserializeIntegrationParameters(d, schemas.GetIntegrationResult_RequestParameters, &v.RequestParameters)
+		case schemas.GetIntegrationResult_RequestTemplates:
+			return deserializeTemplateMap(d, schemas.GetIntegrationResult_RequestTemplates, &v.RequestTemplates)
+		case schemas.GetIntegrationResult_ResponseParameters:
+			return deserializeResponseParameters(d, schemas.GetIntegrationResult_ResponseParameters, &v.ResponseParameters)
+		case schemas.GetIntegrationResult_TemplateSelectionExpression:
+			v.TemplateSelectionExpression = new(string)
+			return d.ReadString(schemas.GetIntegrationResult_TemplateSelectionExpression, v.TemplateSelectionExpression)
+		case schemas.GetIntegrationResult_TimeoutInMillis:
+			v.TimeoutInMillis = new(int32)
+			return d.ReadInt32(schemas.GetIntegrationResult_TimeoutInMillis, v.TimeoutInMillis)
+		case schemas.GetIntegrationResult_TlsConfig:
+			v.TlsConfig = &types.TlsConfig{}
+			return v.TlsConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.GetIntegrationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.GetIntegrationResult), output: &GetIntegrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -317,22 +425,8 @@ func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIntegration",
-	}
 }

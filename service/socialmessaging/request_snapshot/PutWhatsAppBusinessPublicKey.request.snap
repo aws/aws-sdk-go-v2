@@ -1,0 +1,5 @@
+PUT /v1/whatsapp/business-public-key
+
+Content-Type: application/json
+
+{"businessPublicKey":"__BusinessPublicKey__","kmsKeyArn":"__KmsKeyArn__","originationPhoneNumberId":"__OriginationPhoneNumberId__"}

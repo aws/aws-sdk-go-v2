@@ -821,7 +821,9 @@ var ClientOptionalDefaults_member *smithy.Schema
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 403})
 var ComplexError_Header *smithy.Schema
 
 var ComplexError_TopLevel *smithy.Schema
@@ -974,7 +976,7 @@ var _DocumentValuedMap_value *smithy.Schema
 var ErrorEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ErrorEvent",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ErrorEvent_message *smithy.Schema
 
 var EventStream = smithy.NewSchema(smithy.ShapeID{
@@ -1011,7 +1013,9 @@ var _FiniteStreamingBlob = smithy.NewSchema(smithy.ShapeID{
 var FooError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "FooError",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
+
+	&smithytraits.HTTPError{Code: 500})
 
 var HeadersAndExplicitPayloadEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
@@ -1052,7 +1056,9 @@ var HeadersEvent_timestampHeader *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 400})
 var InvalidGreeting_Message *smithy.Schema
 
 var _JsonHeaderString = smithy.NewSchema(smithy.ShapeID{
@@ -1068,7 +1074,7 @@ var _JsonValue = smithy.NewSchema(smithy.ShapeID{
 var MyUnion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "MyUnion",
-}, smithy.ShapeTypeUnion, 10)
+}, smithy.ShapeTypeUnion, 11)
 var MyUnion_stringValue *smithy.Schema
 
 var MyUnion_booleanValue *smithy.Schema
@@ -1089,6 +1095,8 @@ var MyUnion_structureValue *smithy.Schema
 
 var MyUnion_renamedStructureValue *smithy.Schema
 
+var MyUnion_unionValue *smithy.Schema
+
 var NestedPayload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "NestedPayload",
@@ -1096,6 +1104,12 @@ var NestedPayload = smithy.NewSchema(smithy.ShapeID{
 var NestedPayload_greeting *smithy.Schema
 
 var NestedPayload_name *smithy.Schema
+
+var NestedUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.protocoltests.restjson",
+	Name:      "NestedUnion",
+}, smithy.ShapeTypeUnion, 1)
+var NestedUnion_stringValue *smithy.Schema
 
 var PayloadConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
@@ -1148,7 +1162,8 @@ var RecursiveShapesInputOutputNested2_recursiveMember *smithy.Schema
 var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceUnavailableError_message *smithy.Schema
 
 var _SimpleList = smithy.NewSchema(smithy.ShapeID{
@@ -1225,8 +1240,8 @@ var _StreamingBlob = smithy.NewSchema(smithy.ShapeID{
 var _StreamingTextPlainBlob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
 	Name:      "StreamingTextPlainBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "text/plain"},
-	&smithytraits.Streaming{})
+}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{},
+	&smithytraits.MediaType{Type: "text/plain"})
 
 var StringEnum = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restjson",
@@ -2768,6 +2783,8 @@ func init() {
 
 	RenamedGreeting_salutation = RenamedGreeting.AddMember("salutation", smithyprelude.String)
 
+	NestedUnion_stringValue = NestedUnion.AddMember("stringValue", smithyprelude.String)
+
 	MyUnion_stringValue = MyUnion.AddMember("stringValue", smithyprelude.String)
 
 	MyUnion_booleanValue = MyUnion.AddMember("booleanValue", smithyprelude.Boolean)
@@ -2787,6 +2804,8 @@ func init() {
 	MyUnion_structureValue = MyUnion.AddMember("structureValue", GreetingStruct)
 
 	MyUnion_renamedStructureValue = MyUnion.AddMember("renamedStructureValue", RenamedGreeting)
+
+	MyUnion_unionValue = MyUnion.AddMember("unionValue", NestedUnion)
 
 	NestedPayload_greeting = NestedPayload.AddMember("greeting", smithyprelude.String)
 
@@ -3277,13 +3296,11 @@ func init() {
 	MalformedTimestampBodyHttpDateInput_timestamp = MalformedTimestampBodyHttpDateInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"})
 
 	MalformedTimestampHeaderDateTimeInput_timestamp = MalformedTimestampHeaderDateTimeInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
-
 		&smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampHeaderDefaultInput_timestamp = MalformedTimestampHeaderDefaultInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampHeaderEpochInput_timestamp = MalformedTimestampHeaderEpochInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
-
 		&smithytraits.HTTPHeader{Name: "timestamp"})
 
 	MalformedTimestampPathDefaultInput_timestamp = MalformedTimestampPathDefaultInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.HTTPLabel{})

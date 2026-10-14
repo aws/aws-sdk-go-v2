@@ -4,12 +4,7 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of model transform job IDs. See [Use a trained model to generate new model artifacts].
@@ -48,21 +43,6 @@ type ListMLModelTransformJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMLModelTransformJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMLModelTransformJobsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMLModelTransformJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxItems != nil {
-		s.WriteInt32(schemas.ListMLModelTransformJobsInput_maxItems, *v.MaxItems)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.ListMLModelTransformJobsInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-}
-
 type ListMLModelTransformJobsOutput struct {
 
 	// A page from the list of model transform IDs.
@@ -74,81 +54,26 @@ type ListMLModelTransformJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMLModelTransformJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMLModelTransformJobsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMLModelTransformJobsOutput_ids:
-			return deserializeStringList(d, schemas.ListMLModelTransformJobsOutput_ids, &v.Ids)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMLModelTransformJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMLModelTransformJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLModelTransformJobs, schemas.ListMLModelTransformJobsInput, schemas.ListMLModelTransformJobsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMLModelTransformJobs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLModelTransformJobs, schemas.ListMLModelTransformJobsInput, schemas.ListMLModelTransformJobsOutput), output: &ListMLModelTransformJobsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMLModelTransformJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMLModelTransformJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +88,8 @@ func (c *Client) addOperationListMLModelTransformJobsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListMLModelTransformJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMLModelTransformJobs",
-	}
 }

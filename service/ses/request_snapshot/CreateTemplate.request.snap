@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateTemplate&Template.HtmlPart=__HtmlPart__&Template.SubjectPart=__SubjectPart__&Template.TemplateName=__TemplateName__&Template.TextPart=__TextPart__&Version=2010-12-01

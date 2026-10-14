@@ -235,14 +235,6 @@ var _ = rulesfn.StringSlice(nil)
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
-	// The AWS region used to dispatch the request.
-	//
-	// Parameter is
-	// required.
-	//
-	// AWS::Region
-	Region *string
-
 	// When true, use the dual-stack endpoint. If the configured endpoint does not
 	// support dual-stack, dispatching the request MAY return an error.
 	//
@@ -269,6 +261,14 @@ type EndpointParameters struct {
 	//
 	// SDK::Endpoint
 	Endpoint *string
+
+	// The AWS region used to dispatch the request.
+	//
+	// Parameter is
+	// required.
+	//
+	// AWS::Region
+	Region *string
 }
 
 // ValidateRequired validates required parameters are set.
@@ -299,8 +299,8 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 
 const bddRoot int32 = 2
 
-var bddNodes = [48]int32{
-	-1, 1, -1, 0, 15, 3, 1, 4, 100000013, 2, 5, 100000013, 3, 11, 6, 4, 7, 100000012, 5, 8, 100000011, 7, 100000008, 9, 8, 100000009, 10, 9, 100000008, 100000010, 4, 13, 12, 6, 100000006, 100000007, 5, 14, 100000005, 6, 100000004, 100000005, 3, 100000001, 16, 4, 100000002, 100000003}
+var bddNodes = [39]int32{
+	-1, 1, -1, 0, 12, 3, 1, 4, 100000011, 2, 5, 100000011, 3, 8, 6, 4, 7, 100000010, 5, 100000008, 100000009, 4, 10, 9, 6, 100000006, 100000007, 5, 11, 100000005, 6, 100000004, 100000005, 3, 100000001, 13, 4, 100000002, 100000003}
 
 type conditionContext struct {
 	PartitionResult *awsrulesfn.PartitionConfig
@@ -326,12 +326,6 @@ func evalCondition(idx int, params *EndpointParameters, c *conditionContext) boo
 		return c.PartitionResult.SupportsDualStack == true
 	case 6:
 		return c.PartitionResult.SupportsFIPS == true
-	case 7:
-		return c.PartitionResult.Name == "aws"
-	case 8:
-		return c.PartitionResult.Name == "aws-cn"
-	case 9:
-		return c.PartitionResult.Name == "aws-us-gov"
 	}
 	return false
 }
@@ -397,38 +391,6 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			var out strings.Builder
 			out.WriteString("https://servicediscovery.")
 			out.WriteString(*params.Region)
-			out.WriteString(".amazonaws.com")
-			return out.String()
-		}()
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	case 9:
-		uriString := func() string {
-			var out strings.Builder
-			out.WriteString("https://servicediscovery.")
-			out.WriteString(*params.Region)
-			out.WriteString(".amazonaws.com.cn")
-			return out.String()
-		}()
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	case 10:
-		uriString := func() string {
-			var out strings.Builder
-			out.WriteString("https://servicediscovery.")
-			out.WriteString(*params.Region)
 			out.WriteString(".")
 			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
 			return out.String()
@@ -441,9 +403,9 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 11:
+	case 9:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-	case 12:
+	case 10:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://servicediscovery.")
@@ -460,7 +422,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 13:
+	case 11:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 	}
 	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
@@ -506,15 +468,14 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
 	params := &EndpointParameters{}
 
+	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
 	region, err := bindRegion(options.Region)
 	if err != nil {
 		return nil, err
 	}
 	params.Region = region
-
-	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
-	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
-	params.Endpoint = options.BaseEndpoint
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)

@@ -23,7 +23,8 @@ var AWSBillingAndCostManagementRecommendedActions = smithy.NewServiceSchema(_AWS
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmrecommendedactions",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -149,7 +150,8 @@ var _FilterValues_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmrecommendedactions",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsInternalServer",
 		StatusCode: 500})
 var InternalServerException_message *smithy.Schema
@@ -228,7 +230,8 @@ var Severity_CRITICAL *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmrecommendedactions",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsThrottling",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
@@ -236,7 +239,8 @@ var ThrottlingException_message *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmrecommendedactions",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsValidation",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema

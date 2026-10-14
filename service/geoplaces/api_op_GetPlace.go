@@ -4,13 +4,8 @@ package geoplaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // GetPlace finds a place by its unique ID. A PlaceId is returned by other place
@@ -48,6 +43,11 @@ type GetPlaceInput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.GetPlaceAdditionalFeature
 
+	// Specifies how address names are returned. When set to Administrative , the
+	// service returns the official administrative names for address components.
+	// Administrative currently applies only to addresses in the United States.
+	AddressNamesMode types.GetPlaceAddressNamesMode
+
 	//  Indicates if the query results will be persisted in customer infrastructure.
 	// Defaults to SingleUse (not stored). Not supported in ap-southeast-1 and
 	// ap-southeast-5 regions for [GrabMaps] customers.
@@ -71,7 +71,7 @@ type GetPlaceInput struct {
 	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
 	// my, pt, th, tl, vi, zh
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
@@ -84,31 +84,6 @@ type GetPlaceInput struct {
 	PoliticalView *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlaceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetPlaceAdditionalFeatureList(s, schemas.GetPlaceRequest_AdditionalFeatures, v.AdditionalFeatures)
-	if v.IntendedUse != "" {
-		s.WriteString(schemas.GetPlaceRequest_IntendedUse, string(v.IntendedUse))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetPlaceRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.GetPlaceRequest_Language, *v.Language)
-	}
-	if v.PlaceId != nil {
-		s.WriteString(schemas.GetPlaceRequest_PlaceId, *v.PlaceId)
-	}
-	if v.PoliticalView != nil {
-		s.WriteString(schemas.GetPlaceRequest_PoliticalView, *v.PoliticalView)
-	}
 }
 
 type GetPlaceOutput struct {
@@ -174,6 +149,14 @@ type GetPlaceOutput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Contacts *types.Contacts
 
+	// The list of supplier references available for this place. Requires the
+	// CrossReferences additional feature to be enabled.
+	CrossReferences []types.CrossReference
+
+	// If true , indicates that the coordinates of the position and access points of
+	// the point address are estimated.
+	EstimatedPointAddress *bool
+
 	//  List of food types offered by this result. Not available in ap-southeast-1 and
 	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
@@ -205,6 +188,10 @@ type GetPlaceOutput struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Phonemes *types.PhonemeDetails
+
+	// A list of place attributes for the result, such as whether the business offers
+	// drive-through service.
+	PlaceAttributes []types.PlaceAttribute
 
 	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
@@ -243,139 +230,29 @@ type GetPlaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlaceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlaceResponse_AccessPoints:
-			return deserializeAccessPointList(d, schemas.GetPlaceResponse_AccessPoints, &v.AccessPoints)
-		case schemas.GetPlaceResponse_AccessRestrictions:
-			return deserializeAccessRestrictionList(d, schemas.GetPlaceResponse_AccessRestrictions, &v.AccessRestrictions)
-		case schemas.GetPlaceResponse_Address:
-			v.Address = &types.Address{}
-			return v.Address.Deserialize(d)
-		case schemas.GetPlaceResponse_AddressNumberCorrected:
-			v.AddressNumberCorrected = new(bool)
-			return d.ReadBool(schemas.GetPlaceResponse_AddressNumberCorrected, v.AddressNumberCorrected)
-		case schemas.GetPlaceResponse_BusinessChains:
-			return deserializeBusinessChainList(d, schemas.GetPlaceResponse_BusinessChains, &v.BusinessChains)
-		case schemas.GetPlaceResponse_Categories:
-			return deserializeCategoryList(d, schemas.GetPlaceResponse_Categories, &v.Categories)
-		case schemas.GetPlaceResponse_Contacts:
-			v.Contacts = &types.Contacts{}
-			return v.Contacts.Deserialize(d)
-		case schemas.GetPlaceResponse_FoodTypes:
-			return deserializeFoodTypeList(d, schemas.GetPlaceResponse_FoodTypes, &v.FoodTypes)
-		case schemas.GetPlaceResponse_MainAddress:
-			v.MainAddress = &types.RelatedPlace{}
-			return v.MainAddress.Deserialize(d)
-		case schemas.GetPlaceResponse_MapView:
-			return deserializeBoundingBox(d, schemas.GetPlaceResponse_MapView, &v.MapView)
-		case schemas.GetPlaceResponse_OpeningHours:
-			return deserializeOpeningHoursList(d, schemas.GetPlaceResponse_OpeningHours, &v.OpeningHours)
-		case schemas.GetPlaceResponse_Phonemes:
-			v.Phonemes = &types.PhonemeDetails{}
-			return v.Phonemes.Deserialize(d)
-		case schemas.GetPlaceResponse_PlaceId:
-			v.PlaceId = new(string)
-			return d.ReadString(schemas.GetPlaceResponse_PlaceId, v.PlaceId)
-		case schemas.GetPlaceResponse_PlaceType:
-			var ev string
-			if err := d.ReadString(schemas.GetPlaceResponse_PlaceType, &ev); err != nil {
-				return err
-			}
-			v.PlaceType = types.PlaceType(ev)
-			return nil
-		case schemas.GetPlaceResponse_PoliticalView:
-			v.PoliticalView = new(string)
-			return d.ReadString(schemas.GetPlaceResponse_PoliticalView, v.PoliticalView)
-		case schemas.GetPlaceResponse_Position:
-			return deserializePosition(d, schemas.GetPlaceResponse_Position, &v.Position)
-		case schemas.GetPlaceResponse_PostalCodeDetails:
-			return deserializePostalCodeDetailsList(d, schemas.GetPlaceResponse_PostalCodeDetails, &v.PostalCodeDetails)
-		case schemas.GetPlaceResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.GetPlaceResponse_PricingBucket, v.PricingBucket)
-		case schemas.GetPlaceResponse_SecondaryAddresses:
-			return deserializeRelatedPlaceList(d, schemas.GetPlaceResponse_SecondaryAddresses, &v.SecondaryAddresses)
-		case schemas.GetPlaceResponse_TimeZone:
-			v.TimeZone = &types.TimeZone{}
-			return v.TimeZone.Deserialize(d)
-		case schemas.GetPlaceResponse_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.GetPlaceResponse_Title, v.Title)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse), output: &GetPlaceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPlaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -390,22 +267,8 @@ func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlace",
-	}
 }

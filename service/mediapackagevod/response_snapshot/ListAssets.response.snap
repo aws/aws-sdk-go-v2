@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assets":[{"arn":"__Arn__","createdAt":"__CreatedAt__","id":"__Id__","packagingGroupId":"__PackagingGroupId__","resourceId":"__ResourceId__","sourceArn":"__SourceArn__","sourceRoleArn":"__SourceRoleArn__","tags":{"key0":"__Value__"}},{"arn":"__Arn__","createdAt":"__CreatedAt__","id":"__Id__","packagingGroupId":"__PackagingGroupId__","resourceId":"__ResourceId__","sourceArn":"__SourceArn__","sourceRoleArn":"__SourceRoleArn__","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

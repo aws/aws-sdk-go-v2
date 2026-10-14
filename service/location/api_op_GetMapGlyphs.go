@@ -5,9 +5,6 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -128,46 +125,6 @@ type GetMapGlyphsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapGlyphsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapGlyphsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapGlyphsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FontStack != nil {
-		s.WriteString(schemas.GetMapGlyphsRequest_FontStack, *v.FontStack)
-	}
-	if v.FontUnicodeRange != nil {
-		s.WriteString(schemas.GetMapGlyphsRequest_FontUnicodeRange, *v.FontUnicodeRange)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetMapGlyphsRequest_Key, *v.Key)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.GetMapGlyphsRequest_MapName, *v.MapName)
-	}
-}
-func (v *GetMapGlyphsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapGlyphsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapGlyphsRequest_FontStack:
-			v.FontStack = new(string)
-			return d.ReadString(schemas.GetMapGlyphsRequest_FontStack, v.FontStack)
-		case schemas.GetMapGlyphsRequest_FontUnicodeRange:
-			v.FontUnicodeRange = new(string)
-			return d.ReadString(schemas.GetMapGlyphsRequest_FontUnicodeRange, v.FontUnicodeRange)
-		case schemas.GetMapGlyphsRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetMapGlyphsRequest_Key, v.Key)
-		case schemas.GetMapGlyphsRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.GetMapGlyphsRequest_MapName, v.MapName)
-		}
-		return nil
-	})
-}
-
 type GetMapGlyphsOutput struct {
 
 	// The glyph, as binary blob.
@@ -185,95 +142,23 @@ type GetMapGlyphsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapGlyphsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapGlyphsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapGlyphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Blob != nil {
-		s.WriteBlob(schemas.GetMapGlyphsResponse_Blob, v.Blob)
-	}
-	if v.CacheControl != nil {
-		s.WriteString(schemas.GetMapGlyphsResponse_CacheControl, *v.CacheControl)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.GetMapGlyphsResponse_ContentType, *v.ContentType)
-	}
-}
-func (v *GetMapGlyphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapGlyphsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapGlyphsResponse_Blob:
-			return d.ReadBlob(schemas.GetMapGlyphsResponse_Blob, &v.Blob)
-		case schemas.GetMapGlyphsResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetMapGlyphsResponse_CacheControl, v.CacheControl)
-		case schemas.GetMapGlyphsResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetMapGlyphsResponse_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapGlyphs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapGlyphs, schemas.GetMapGlyphsRequest, schemas.GetMapGlyphsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMapGlyphs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapGlyphs, schemas.GetMapGlyphsRequest, schemas.GetMapGlyphsResponse), output: &GetMapGlyphsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMapGlyphs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -283,12 +168,6 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpGetMapGlyphsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapGlyphs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -301,12 +180,6 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -340,12 +213,4 @@ func (m *endpointPrefix_opGetMapGlyphsMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opGetMapGlyphsMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetMapGlyphsMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetMapGlyphs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMapGlyphs",
-	}
 }

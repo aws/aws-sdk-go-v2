@@ -5,12 +5,8 @@ package managedblockchainquery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the transaction events for an address on the blockchain.
@@ -81,49 +77,6 @@ type ListFilteredTransactionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFilteredTransactionEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFilteredTransactionEventsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFilteredTransactionEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AddressIdentifierFilter != nil {
-		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_addressIdentifierFilter)
-		v.AddressIdentifierFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfirmationStatusFilter != nil {
-		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_confirmationStatusFilter)
-		v.ConfirmationStatusFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListFilteredTransactionEventsInput_maxResults, *v.MaxResults)
-	}
-	if v.Network != nil {
-		s.WriteString(schemas.ListFilteredTransactionEventsInput_network, *v.Network)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFilteredTransactionEventsInput_nextToken, *v.NextToken)
-	}
-	if v.Sort != nil {
-		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_sort)
-		v.Sort.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TimeFilter != nil {
-		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_timeFilter)
-		v.TimeFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VoutFilter != nil {
-		s.WriteStruct(schemas.ListFilteredTransactionEventsInput_voutFilter)
-		v.VoutFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListFilteredTransactionEventsOutput struct {
 
 	// The transaction events returned by the request.
@@ -140,87 +93,29 @@ type ListFilteredTransactionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFilteredTransactionEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFilteredTransactionEventsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFilteredTransactionEventsOutput_events:
-			return deserializeTransactionEventList(d, schemas.ListFilteredTransactionEventsOutput_events, &v.Events)
-		case schemas.ListFilteredTransactionEventsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFilteredTransactionEventsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFilteredTransactionEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilteredTransactionEvents, schemas.ListFilteredTransactionEventsInput, schemas.ListFilteredTransactionEventsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFilteredTransactionEvents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFilteredTransactionEvents, schemas.ListFilteredTransactionEventsInput, schemas.ListFilteredTransactionEventsOutput), output: &ListFilteredTransactionEventsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFilteredTransactionEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFilteredTransactionEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFilteredTransactionEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,12 +128,6 @@ func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -351,11 +240,3 @@ type ListFilteredTransactionEventsAPIClient interface {
 }
 
 var _ ListFilteredTransactionEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFilteredTransactionEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFilteredTransactionEvents",
-	}
-}

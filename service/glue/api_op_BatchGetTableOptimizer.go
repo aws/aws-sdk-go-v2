@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the configuration for the specified table optimizers.
@@ -38,6 +37,16 @@ type BatchGetTableOptimizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTableOptimizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTableOptimizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTableOptimizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTableOptimizerEntries(s, schemas.BatchGetTableOptimizerRequest_Entries, v.Entries)
+}
+
 type BatchGetTableOptimizerOutput struct {
 
 	// A list of errors from the operation.
@@ -52,77 +61,48 @@ type BatchGetTableOptimizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTableOptimizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTableOptimizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTableOptimizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTableOptimizerErrors(s, schemas.BatchGetTableOptimizerResponse_Failures, v.Failures)
+	serializeBatchTableOptimizers(s, schemas.BatchGetTableOptimizerResponse_TableOptimizers, v.TableOptimizers)
+}
+func (v *BatchGetTableOptimizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTableOptimizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTableOptimizerResponse_Failures:
+			return deserializeBatchGetTableOptimizerErrors(d, schemas.BatchGetTableOptimizerResponse_Failures, &v.Failures)
+		case schemas.BatchGetTableOptimizerResponse_TableOptimizers:
+			return deserializeBatchTableOptimizers(d, schemas.BatchGetTableOptimizerResponse_TableOptimizers, &v.TableOptimizers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTableOptimizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTableOptimizer, schemas.BatchGetTableOptimizerRequest, schemas.BatchGetTableOptimizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetTableOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTableOptimizer, schemas.BatchGetTableOptimizerRequest, schemas.BatchGetTableOptimizerResponse), output: &BatchGetTableOptimizerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetTableOptimizer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetTableOptimizer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetTableOptimizerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetTableOptimizer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +117,8 @@ func (c *Client) addOperationBatchGetTableOptimizerMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetTableOptimizer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetTableOptimizer",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","subscriptionSummaries":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","eTag":"__ETag__","planFamily":"__PlanFamily__","planTier":"__PlanTier__","resourceArns":["__Member__","__Member__"],"scheduledChange":{"changeType":"DOWNGRADE","effectiveDate":"2000-01-01T00:00:00Z","planTier":"__PlanTier__","usageLevel":"__UsageLevel__"},"status":"PENDING_APPROVAL","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z","usageLevel":"__UsageLevel__"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","eTag":"__ETag__","planFamily":"__PlanFamily__","planTier":"__PlanTier__","resourceArns":["__Member__","__Member__"],"scheduledChange":{"changeType":"DOWNGRADE","effectiveDate":"2000-01-01T00:00:00Z","planTier":"__PlanTier__","usageLevel":"__UsageLevel__"},"status":"PENDING_APPROVAL","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z","usageLevel":"__UsageLevel__"}]}

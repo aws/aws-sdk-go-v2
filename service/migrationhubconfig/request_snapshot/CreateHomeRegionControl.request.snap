@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHubMultiAccountService.CreateHomeRegionControl
+
+{"DryRun":true,"HomeRegion":"__HomeRegion__","Target":{"Id":"__Id__","Type":"ACCOUNT"}}

@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to either upgrade your domain or perform an Upgrade eligibility
@@ -51,6 +50,24 @@ type UpgradeElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeElasticsearchDomainRequest_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainRequest_TargetVersion, *v.TargetVersion)
+	}
+}
+
 // Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
 
@@ -76,77 +93,68 @@ type UpgradeElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeProgressDetails != nil {
+		s.WriteStruct(schemas.UpgradeElasticsearchDomainResponse_ChangeProgressDetails)
+		v.ChangeProgressDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainResponse_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainResponse_TargetVersion, *v.TargetVersion)
+	}
+}
+func (v *UpgradeElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradeElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradeElasticsearchDomainResponse_ChangeProgressDetails:
+			v.ChangeProgressDetails = &types.ChangeProgressDetails{}
+			return v.ChangeProgressDetails.Deserialize(d)
+		case schemas.UpgradeElasticsearchDomainResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpgradeElasticsearchDomainResponse_DomainName, v.DomainName)
+		case schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly:
+			v.PerformCheckOnly = new(bool)
+			return d.ReadBool(schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly, v.PerformCheckOnly)
+		case schemas.UpgradeElasticsearchDomainResponse_TargetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.UpgradeElasticsearchDomainResponse_TargetVersion, v.TargetVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeElasticsearchDomain, schemas.UpgradeElasticsearchDomainRequest, schemas.UpgradeElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradeElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeElasticsearchDomain, schemas.UpgradeElasticsearchDomainRequest, schemas.UpgradeElasticsearchDomainResponse), output: &UpgradeElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradeElasticsearchDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpgradeElasticsearchDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpgradeElasticsearchDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpgradeElasticsearchDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +169,8 @@ func (c *Client) addOperationUpgradeElasticsearchDomainMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpgradeElasticsearchDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpgradeElasticsearchDomain",
-	}
 }

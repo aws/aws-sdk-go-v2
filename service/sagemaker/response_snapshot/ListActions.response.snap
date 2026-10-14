@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListActions
+
+{"ActionSummaries":[{"ActionArn":"__ActionArn__","ActionName":"__ActionName__","ActionType":"__ActionType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Status":"Unknown"},{"ActionArn":"__ActionArn__","ActionName":"__ActionName__","ActionType":"__ActionType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"},"Status":"Unknown"}],"NextToken":"__NextToken__"}

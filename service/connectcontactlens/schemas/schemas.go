@@ -25,7 +25,8 @@ var AmazonConnectContactLens = smithy.NewServiceSchema(_AmazonConnectContactLens
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var Categories = smithy.NewSchema(smithy.ShapeID{
@@ -65,6 +66,68 @@ var _ContactId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ContactId",
 }, smithy.ShapeTypeString, 0)
 
+var ExtractedInformation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractedInformation",
+}, smithy.ShapeTypeStructure, 5)
+var ExtractedInformation_ExtractionDefinitionId *smithy.Schema
+
+var ExtractedInformation_ExtractionDefinitionName *smithy.Schema
+
+var ExtractedInformation_ExtractionDefinitionDisplayLabel *smithy.Schema
+
+var ExtractedInformation_ExtractedValues *smithy.Schema
+
+var ExtractedInformation_FailureCode *smithy.Schema
+
+var _ExtractedInformationContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractedInformationContent",
+}, smithy.ShapeTypeString, 0)
+
+var ExtractedInformationFailureCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractedInformationFailureCode",
+}, smithy.ShapeTypeEnum, 5)
+var ExtractedInformationFailureCode_QUOTA_EXCEEDED *smithy.Schema
+
+var ExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT *smithy.Schema
+
+var ExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES *smithy.Schema
+
+var ExtractedInformationFailureCode_INTERNAL_ERROR *smithy.Schema
+
+var ExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY *smithy.Schema
+
+var ExtractedInformationValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractedInformationValue",
+}, smithy.ShapeTypeStructure, 2)
+var ExtractedInformationValue_Content *smithy.Schema
+
+var ExtractedInformationValue_PointsOfInterest *smithy.Schema
+
+var _ExtractedInformationValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractedInformationValues",
+}, smithy.ShapeTypeList, 1)
+var _ExtractedInformationValues_member *smithy.Schema
+
+var _ExtractionDefinitionDisplayLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractionDefinitionDisplayLabel",
+}, smithy.ShapeTypeString, 0)
+
+var _ExtractionDefinitionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractionDefinitionId",
+}, smithy.ShapeTypeString, 0)
+
+var _ExtractionDefinitionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "ExtractionDefinitionName",
+}, smithy.ShapeTypeString, 0)
+
 var _InstanceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "InstanceId",
@@ -73,13 +136,15 @@ var _InstanceId = smithy.NewSchema(smithy.ShapeID{
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidRequestException_Message *smithy.Schema
 
 var IssueDetected = smithy.NewSchema(smithy.ShapeID{
@@ -192,12 +257,14 @@ var PostContactSummaryStatus_COMPLETED *smithy.Schema
 var RealtimeContactAnalysisSegment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "RealtimeContactAnalysisSegment",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var RealtimeContactAnalysisSegment_Transcript *smithy.Schema
 
 var RealtimeContactAnalysisSegment_Categories *smithy.Schema
 
 var RealtimeContactAnalysisSegment_PostContactSummary *smithy.Schema
+
+var RealtimeContactAnalysisSegment_ExtractedInformation *smithy.Schema
 
 var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -208,7 +275,8 @@ var _RealtimeContactAnalysisSegments_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var SentimentValue = smithy.NewSchema(smithy.ShapeID{
@@ -224,7 +292,8 @@ var SentimentValue_NEGATIVE *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var Transcript = smithy.NewSchema(smithy.ShapeID{
@@ -304,6 +373,32 @@ func init() {
 
 	CharacterOffsets_EndOffsetChar = CharacterOffsets.AddMember("EndOffsetChar", _CharacterOffset)
 
+	ExtractedInformationValue_Content = ExtractedInformationValue.AddMember("Content", _ExtractedInformationContent)
+
+	ExtractedInformationValue_PointsOfInterest = ExtractedInformationValue.AddMember("PointsOfInterest", _PointsOfInterest)
+
+	_ExtractedInformationValues_member = _ExtractedInformationValues.AddMember("member", ExtractedInformationValue)
+
+	ExtractedInformationFailureCode_QUOTA_EXCEEDED = ExtractedInformationFailureCode.AddMember("QUOTA_EXCEEDED", smithyprelude.Unit)
+
+	ExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = ExtractedInformationFailureCode.AddMember("INSUFFICIENT_CONVERSATION_CONTENT", smithyprelude.Unit)
+
+	ExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES = ExtractedInformationFailureCode.AddMember("FAILED_SAFETY_GUIDELINES", smithyprelude.Unit)
+
+	ExtractedInformationFailureCode_INTERNAL_ERROR = ExtractedInformationFailureCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	ExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY = ExtractedInformationFailureCode.AddMember("MAX_PACKAGE_FEATURE_ONLY", smithyprelude.Unit)
+
+	ExtractedInformation_ExtractionDefinitionId = ExtractedInformation.AddMember("ExtractionDefinitionId", _ExtractionDefinitionId)
+
+	ExtractedInformation_ExtractionDefinitionName = ExtractedInformation.AddMember("ExtractionDefinitionName", _ExtractionDefinitionName)
+
+	ExtractedInformation_ExtractionDefinitionDisplayLabel = ExtractedInformation.AddMember("ExtractionDefinitionDisplayLabel", _ExtractionDefinitionDisplayLabel)
+
+	ExtractedInformation_ExtractedValues = ExtractedInformation.AddMember("ExtractedValues", _ExtractedInformationValues)
+
+	ExtractedInformation_FailureCode = ExtractedInformation.AddMember("FailureCode", ExtractedInformationFailureCode)
+
 	InternalServiceException_Message = InternalServiceException.AddMember("Message", _Message)
 
 	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _Message)
@@ -359,6 +454,8 @@ func init() {
 	RealtimeContactAnalysisSegment_Categories = RealtimeContactAnalysisSegment.AddMember("Categories", Categories)
 
 	RealtimeContactAnalysisSegment_PostContactSummary = RealtimeContactAnalysisSegment.AddMember("PostContactSummary", PostContactSummary)
+
+	RealtimeContactAnalysisSegment_ExtractedInformation = RealtimeContactAnalysisSegment.AddMember("ExtractedInformation", ExtractedInformation)
 
 	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
 

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RejectTransitGatewayClientVpnAttachment&DryRun=true&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&Version=2016-11-15

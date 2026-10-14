@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","availabilityZones":["__Member__","__Member__"],"destinations":[{"mediaConnectSettings":{"entitlementArn":"__EntitlementArn__"}},{"mediaConnectSettings":{"entitlementArn":"__EntitlementArn__"}}],"id":"__Id__","multiplexSettings":{"maximumVideoBufferDelayMilliseconds":1,"transportStreamBitrate":1,"transportStreamId":1,"transportStreamReservedBitrate":1},"name":"__Name__","pipelinesRunningCount":1,"programCount":1,"state":"CREATING","tags":{"key0":"__Value__"}}

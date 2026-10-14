@@ -4,12 +4,11 @@ package glacier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation lists the provisioned capacity units for the specified AWS
@@ -42,6 +41,18 @@ type ListProvisionedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedCapacityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListProvisionedCapacityInput_accountId, *v.AccountId)
+	}
+}
+
 type ListProvisionedCapacityOutput struct {
 
 	// The response body contains the following JSON fields.
@@ -53,77 +64,45 @@ type ListProvisionedCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedCapacityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProvisionedCapacityList(s, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, v.ProvisionedCapacityList)
+}
+func (v *ListProvisionedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisionedCapacityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList:
+			return deserializeProvisionedCapacityList(d, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, &v.ProvisionedCapacityList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedCapacity, schemas.ListProvisionedCapacityInput, schemas.ListProvisionedCapacityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedCapacity, schemas.ListProvisionedCapacityInput, schemas.ListProvisionedCapacityOutput), output: &ListProvisionedCapacityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedCapacity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProvisionedCapacity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListProvisionedCapacityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisionedCapacity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +126,8 @@ func (c *Client) addOperationListProvisionedCapacityMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListProvisionedCapacity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProvisionedCapacity",
-	}
 }

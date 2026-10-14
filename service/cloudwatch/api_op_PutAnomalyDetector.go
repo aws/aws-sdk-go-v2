@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an anomaly detection model for a CloudWatch metric. You can use the
@@ -112,72 +111,92 @@ type PutAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDimensions(s, schemas.PutAnomalyDetectorInput_Dimensions, v.Dimensions)
+	if v.MetricCharacteristics != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_MetricCharacteristics)
+		v.MetricCharacteristics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricMathAnomalyDetector != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_MetricMathAnomalyDetector)
+		v.MetricMathAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_Namespace, *v.Namespace)
+	}
+	if v.SingleMetricAnomalyDetector != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_SingleMetricAnomalyDetector)
+		v.SingleMetricAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_Stat, *v.Stat)
+	}
+}
+
 type PutAnomalyDetectorOutput struct {
+
+	// The unique identifier of the anomaly detector that you created or updated.
+	AnomalyDetectorId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.PutAnomalyDetectorOutput_AnomalyDetectorId, *v.AnomalyDetectorId)
+	}
+}
+func (v *PutAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAnomalyDetectorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAnomalyDetectorOutput_AnomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.PutAnomalyDetectorOutput_AnomalyDetectorId, v.AnomalyDetectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorInput, schemas.PutAnomalyDetectorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorInput, schemas.PutAnomalyDetectorOutput), output: &PutAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAnomalyDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -187,12 +206,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpPutAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAnomalyDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +220,8 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAnomalyDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAnomalyDetector",
-	}
 }

@@ -103,6 +103,27 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type ContentKeyPeriodTiming string
+
+// Enum values for ContentKeyPeriodTiming
+const (
+	ContentKeyPeriodTimingIndexOnly         ContentKeyPeriodTiming = "INDEX_ONLY"
+	ContentKeyPeriodTimingStartEndOnly      ContentKeyPeriodTiming = "START_END_ONLY"
+	ContentKeyPeriodTimingIndexWithStartEnd ContentKeyPeriodTiming = "INDEX_WITH_START_END"
+)
+
+// Values returns all known values for ContentKeyPeriodTiming. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentKeyPeriodTiming) Values() []ContentKeyPeriodTiming {
+	return []ContentKeyPeriodTiming{
+		"INDEX_ONLY",
+		"START_END_ONLY",
+		"INDEX_WITH_START_END",
+	}
+}
+
 type CustomAdType string
 
 // Enum values for CustomAdType
@@ -125,6 +146,25 @@ func (CustomAdType) Values() []CustomAdType {
 		"UNSCHEDULED_EVENT",
 		"ALTERNATE_CONTENT_OPPORTUNITY",
 		"NETWORK",
+	}
+}
+
+type DashAudioTimelinePattern string
+
+// Enum values for DashAudioTimelinePattern
+const (
+	DashAudioTimelinePatternNone      DashAudioTimelinePattern = "NONE"
+	DashAudioTimelinePatternPatterned DashAudioTimelinePattern = "PATTERNED"
+)
+
+// Values returns all known values for DashAudioTimelinePattern. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashAudioTimelinePattern) Values() []DashAudioTimelinePattern {
+	return []DashAudioTimelinePattern{
+		"NONE",
+		"PATTERNED",
 	}
 }
 
@@ -344,8 +384,9 @@ type InputType string
 
 // Enum values for InputType
 const (
-	InputTypeHls  InputType = "HLS"
-	InputTypeCmaf InputType = "CMAF"
+	InputTypeHls       InputType = "HLS"
+	InputTypeCmaf      InputType = "CMAF"
+	InputTypeMultiview InputType = "MULTIVIEW"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -356,6 +397,7 @@ func (InputType) Values() []InputType {
 	return []InputType{
 		"HLS",
 		"CMAF",
+		"MULTIVIEW",
 	}
 }
 
@@ -392,6 +434,71 @@ func (MssManifestLayout) Values() []MssManifestLayout {
 	return []MssManifestLayout{
 		"FULL",
 		"COMPACT",
+	}
+}
+
+type MultiviewLayoutType string
+
+// Enum values for MultiviewLayoutType
+const (
+	MultiviewLayoutTypeLayout2eh MultiviewLayoutType = "LAYOUT_2EH"
+	MultiviewLayoutTypeLayout2pl MultiviewLayoutType = "LAYOUT_2PL"
+	MultiviewLayoutTypeLayout3el MultiviewLayoutType = "LAYOUT_3EL"
+	MultiviewLayoutTypeLayout3pl MultiviewLayoutType = "LAYOUT_3PL"
+	MultiviewLayoutTypeLayout4e  MultiviewLayoutType = "LAYOUT_4E"
+	MultiviewLayoutTypeLayout4pl MultiviewLayoutType = "LAYOUT_4PL"
+)
+
+// Values returns all known values for MultiviewLayoutType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiviewLayoutType) Values() []MultiviewLayoutType {
+	return []MultiviewLayoutType{
+		"LAYOUT_2EH",
+		"LAYOUT_2PL",
+		"LAYOUT_3EL",
+		"LAYOUT_3PL",
+		"LAYOUT_4E",
+		"LAYOUT_4PL",
+	}
+}
+
+type OutputLockingMode string
+
+// Enum values for OutputLockingMode
+const (
+	OutputLockingModeEpochLocked    OutputLockingMode = "EPOCH_LOCKED"
+	OutputLockingModeNonEpochLocked OutputLockingMode = "NON_EPOCH_LOCKED"
+)
+
+// Values returns all known values for OutputLockingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputLockingMode) Values() []OutputLockingMode {
+	return []OutputLockingMode{
+		"EPOCH_LOCKED",
+		"NON_EPOCH_LOCKED",
+	}
+}
+
+type OutputTimestampMode string
+
+// Enum values for OutputTimestampMode
+const (
+	OutputTimestampModePassthrough           OutputTimestampMode = "PASSTHROUGH"
+	OutputTimestampModeRebasedToChannelStart OutputTimestampMode = "REBASED_TO_CHANNEL_START"
+)
+
+// Values returns all known values for OutputTimestampMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputTimestampMode) Values() []OutputTimestampMode {
+	return []OutputTimestampMode{
+		"PASSTHROUGH",
+		"REBASED_TO_CHANNEL_START",
 	}
 }
 
@@ -499,6 +606,8 @@ const (
 	ScteFilterDistributorPromo                       ScteFilter = "DISTRIBUTOR_PROMO"
 	ScteFilterProviderAdBlock                        ScteFilter = "PROVIDER_AD_BLOCK"
 	ScteFilterDistributorAdBlock                     ScteFilter = "DISTRIBUTOR_AD_BLOCK"
+	ScteFilterContentIdentification                  ScteFilter = "CONTENT_IDENTIFICATION"
+	ScteFilterCallAdServer                           ScteFilter = "CALL_AD_SERVER"
 )
 
 // Values returns all known values for ScteFilter. Note that this can be expanded
@@ -524,6 +633,8 @@ func (ScteFilter) Values() []ScteFilter {
 		"DISTRIBUTOR_PROMO",
 		"PROVIDER_AD_BLOCK",
 		"DISTRIBUTOR_AD_BLOCK",
+		"CONTENT_IDENTIFICATION",
+		"CALL_AD_SERVER",
 	}
 }
 
@@ -564,6 +675,44 @@ func (ScteInSegments) Values() []ScteInSegments {
 		"NONE",
 		"ALL",
 		"MATCHES_FILTER",
+	}
+}
+
+type SpekeVersion string
+
+// Enum values for SpekeVersion
+const (
+	SpekeVersionV20 SpekeVersion = "V2_0"
+	SpekeVersionV21 SpekeVersion = "V2_1"
+)
+
+// Values returns all known values for SpekeVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpekeVersion) Values() []SpekeVersion {
+	return []SpekeVersion{
+		"V2_0",
+		"V2_1",
+	}
+}
+
+type StreamNameOutputMode string
+
+// Enum values for StreamNameOutputMode
+const (
+	StreamNameOutputModeIndex           StreamNameOutputMode = "INDEX"
+	StreamNameOutputModePassthroughName StreamNameOutputMode = "PASSTHROUGH_NAME"
+)
+
+// Values returns all known values for StreamNameOutputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamNameOutputMode) Values() []StreamNameOutputMode {
+	return []StreamNameOutputMode{
+		"INDEX",
+		"PASSTHROUGH_NAME",
 	}
 }
 
@@ -728,6 +877,44 @@ const (
 	ValidationExceptionTypeInvalidArn                                             ValidationExceptionType = "INVALID_ARN"
 	ValidationExceptionTypeScteInManifestsInvalidConfiguration                    ValidationExceptionType = "SCTE_IN_MANIFESTS_INVALID_CONFIGURATION"
 	ValidationExceptionTypeCustomAdTypesInvalidConfiguration                      ValidationExceptionType = "CUSTOM_AD_TYPES_INVALID_CONFIGURATION"
+	ValidationExceptionTypeOnlyCmafInputTypeAllowOutputLockingMode                ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE"
+	ValidationExceptionTypeOnlyNonEpochLockedAllowOutputTimestampMode             ValidationExceptionType = "ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE"
+	ValidationExceptionTypeOutputTimestampModeImmutable                           ValidationExceptionType = "OUTPUT_TIMESTAMP_MODE_IMMUTABLE"
+	ValidationExceptionTypeNonEpochLockedWithForceEndpointErrorConfiguration      ValidationExceptionType = "NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION"
+	ValidationExceptionTypeOnlyHlsInputTypeAllowStreamNameOutputMode              ValidationExceptionType = "ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE"
+	ValidationExceptionTypeStreamNameOutputModeImmutable                          ValidationExceptionType = "STREAM_NAME_OUTPUT_MODE_IMMUTABLE"
+	ValidationExceptionTypeMultiviewConfigurationRequired                         ValidationExceptionType = "MULTIVIEW_CONFIGURATION_REQUIRED"
+	ValidationExceptionTypeMultiviewConfigurationNotAllowed                       ValidationExceptionType = "MULTIVIEW_CONFIGURATION_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewSourceNotFound                                ValidationExceptionType = "MULTIVIEW_SOURCE_NOT_FOUND"
+	ValidationExceptionTypeMultiviewSourceInvalidInputType                        ValidationExceptionType = "MULTIVIEW_SOURCE_INVALID_INPUT_TYPE"
+	ValidationExceptionTypeMultiviewChannelPolicyNotAllowed                       ValidationExceptionType = "MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewInputTypeWithLlHlsManifest                    ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST"
+	ValidationExceptionTypeMultiviewInputTypeWithMssManifest                      ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST"
+	ValidationExceptionTypeMultiviewInputTypeWithIsmContainer                     ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER"
+	ValidationExceptionTypeMultiviewInputTypeWithFilterConfiguration              ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION"
+	ValidationExceptionTypeMultiviewInputTypeWithStartTag                         ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_START_TAG"
+	ValidationExceptionTypeMultiviewInputTypeWithHarvestJob                       ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB"
+	ValidationExceptionTypeMultiviewResetNotAllowed                               ValidationExceptionType = "MULTIVIEW_RESET_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewDuplicateSource                               ValidationExceptionType = "MULTIVIEW_DUPLICATE_SOURCE"
+	ValidationExceptionTypeMultiviewDuplicateLayout                               ValidationExceptionType = "MULTIVIEW_DUPLICATE_LAYOUT"
+	ValidationExceptionTypeMultiviewInputSwitchNotAllowed                         ValidationExceptionType = "MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewOutputHeaderNotAllowed                        ValidationExceptionType = "MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewStartoverWindowNotAllowed                     ValidationExceptionType = "MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewInvalidTimeDelaySeconds                       ValidationExceptionType = "MULTIVIEW_INVALID_TIME_DELAY_SECONDS"
+	ValidationExceptionTypeMultiviewManifestWindowTooLong                         ValidationExceptionType = "MULTIVIEW_MANIFEST_WINDOW_TOO_LONG"
+	ValidationExceptionTypeMultiviewInputTypeWithIframeOnlyStreams                ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS"
+	ValidationExceptionTypeMultiviewInputTypeWithNonEpochLocked                   ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED"
+	ValidationExceptionTypeMultiviewInputTypeWithSegmentDuration                  ValidationExceptionType = "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION"
+	ValidationExceptionTypeMultiviewSourceNonEpochLocked                          ValidationExceptionType = "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED"
+	ValidationExceptionTypeMultiviewScteRequiresAvailsPeriodTrigger               ValidationExceptionType = "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
+	ValidationExceptionTypeContentKeyPeriodTimingWithoutKeyRotation               ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION"
+	ValidationExceptionTypeContentKeyPeriodTimingRequiresSpekeV21                 ValidationExceptionType = "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1"
+	ValidationExceptionTypeMultiviewFilterConfigurationNotAllowed                 ValidationExceptionType = "MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED"
+	ValidationExceptionTypeMultiviewFilterLayoutNotAvailable                      ValidationExceptionType = "MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE"
+	ValidationExceptionTypeMultiviewFilterSourceNotAvailable                      ValidationExceptionType = "MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE"
+	ValidationExceptionTypeMultiviewFilterSourceCountMismatch                     ValidationExceptionType = "MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH"
+	ValidationExceptionTypeMultiviewSourceChannelLimitExceeded                    ValidationExceptionType = "MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED"
+	ValidationExceptionTypeMultiviewTsUseAudioRenditionGroupDisabled              ValidationExceptionType = "MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -836,5 +1023,43 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"INVALID_ARN",
 		"SCTE_IN_MANIFESTS_INVALID_CONFIGURATION",
 		"CUSTOM_AD_TYPES_INVALID_CONFIGURATION",
+		"ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE",
+		"ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE",
+		"OUTPUT_TIMESTAMP_MODE_IMMUTABLE",
+		"NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION",
+		"ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE",
+		"STREAM_NAME_OUTPUT_MODE_IMMUTABLE",
+		"MULTIVIEW_CONFIGURATION_REQUIRED",
+		"MULTIVIEW_CONFIGURATION_NOT_ALLOWED",
+		"MULTIVIEW_SOURCE_NOT_FOUND",
+		"MULTIVIEW_SOURCE_INVALID_INPUT_TYPE",
+		"MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED",
+		"MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST",
+		"MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST",
+		"MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER",
+		"MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION",
+		"MULTIVIEW_INPUT_TYPE_WITH_START_TAG",
+		"MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB",
+		"MULTIVIEW_RESET_NOT_ALLOWED",
+		"MULTIVIEW_DUPLICATE_SOURCE",
+		"MULTIVIEW_DUPLICATE_LAYOUT",
+		"MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED",
+		"MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED",
+		"MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED",
+		"MULTIVIEW_INVALID_TIME_DELAY_SECONDS",
+		"MULTIVIEW_MANIFEST_WINDOW_TOO_LONG",
+		"MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS",
+		"MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED",
+		"MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION",
+		"MULTIVIEW_SOURCE_NON_EPOCH_LOCKED",
+		"MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER",
+		"CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION",
+		"CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1",
+		"MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED",
+		"MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE",
+		"MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE",
+		"MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH",
+		"MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED",
+		"MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED",
 	}
 }

@@ -1,0 +1,5 @@
+PUT /analyzer/__AnalyzerName__/archive-rule
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","filter":{"key0":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]}},"ruleName":"__RuleName__"}

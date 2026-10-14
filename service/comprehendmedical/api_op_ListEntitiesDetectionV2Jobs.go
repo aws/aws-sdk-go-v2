@@ -4,11 +4,10 @@ package comprehendmedical
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of medical entity detection jobs that you have submitted.
@@ -43,6 +42,26 @@ type ListEntitiesDetectionV2JobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesDetectionV2JobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesDetectionV2JobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesDetectionV2JobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEntitiesDetectionV2JobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitiesDetectionV2JobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesDetectionV2JobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntitiesDetectionV2JobsOutput struct {
 
 	// A list containing the properties of each job returned.
@@ -57,77 +76,51 @@ type ListEntitiesDetectionV2JobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesDetectionV2JobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesDetectionV2JobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesDetectionV2JobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesDetectionV2JobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitiesDetectionV2JobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitiesDetectionV2JobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList:
+			return deserializeComprehendMedicalAsyncJobPropertiesList(d, schemas.ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList, &v.ComprehendMedicalAsyncJobPropertiesList)
+		case schemas.ListEntitiesDetectionV2JobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitiesDetectionV2JobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitiesDetectionV2JobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitiesDetectionV2Jobs, schemas.ListEntitiesDetectionV2JobsRequest, schemas.ListEntitiesDetectionV2JobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListEntitiesDetectionV2Jobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitiesDetectionV2Jobs, schemas.ListEntitiesDetectionV2JobsRequest, schemas.ListEntitiesDetectionV2JobsResponse), output: &ListEntitiesDetectionV2JobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListEntitiesDetectionV2Jobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntitiesDetectionV2Jobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitiesDetectionV2Jobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +135,8 @@ func (c *Client) addOperationListEntitiesDetectionV2JobsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListEntitiesDetectionV2Jobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEntitiesDetectionV2Jobs",
-	}
 }

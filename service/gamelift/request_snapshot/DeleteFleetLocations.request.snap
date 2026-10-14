@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DeleteFleetLocations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢gFleetIdk__FleetId__iLocations‚j__Member__j__Member__

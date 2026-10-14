@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetMetricStreamInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMetricStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetMetricStreamInput_Name, *v.Name)
+	}
 }
 
 type GetMetricStreamOutput struct {
@@ -88,7 +99,7 @@ type GetMetricStreamOutput struct {
 	// include additional statistics in the metric stream. For more information about
 	// the additional statistics, see [CloudWatch statistics definitions].
 	//
-	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -97,65 +108,103 @@ type GetMetricStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetMetricStreamOutput_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetMetricStreamOutput_CreationDate, *v.CreationDate)
+	}
+	serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_ExcludeFilters, v.ExcludeFilters)
+	if v.FirehoseArn != nil {
+		s.WriteString(schemas.GetMetricStreamOutput_FirehoseArn, *v.FirehoseArn)
+	}
+	serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_IncludeFilters, v.IncludeFilters)
+	if v.IncludeLinkedAccountsMetrics != nil {
+		s.WriteBool(schemas.GetMetricStreamOutput_IncludeLinkedAccountsMetrics, *v.IncludeLinkedAccountsMetrics)
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.GetMetricStreamOutput_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetMetricStreamOutput_Name, *v.Name)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.GetMetricStreamOutput_OutputFormat, string(v.OutputFormat))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetMetricStreamOutput_RoleArn, *v.RoleArn)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.GetMetricStreamOutput_State, *v.State)
+	}
+	serializeMetricStreamStatisticsConfigurations(s, schemas.GetMetricStreamOutput_StatisticsConfigurations, v.StatisticsConfigurations)
+}
+func (v *GetMetricStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricStreamOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetMetricStreamOutput_Arn, v.Arn)
+		case schemas.GetMetricStreamOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetMetricStreamOutput_CreationDate, v.CreationDate)
+		case schemas.GetMetricStreamOutput_ExcludeFilters:
+			return deserializeMetricStreamFilters(d, schemas.GetMetricStreamOutput_ExcludeFilters, &v.ExcludeFilters)
+		case schemas.GetMetricStreamOutput_FirehoseArn:
+			v.FirehoseArn = new(string)
+			return d.ReadString(schemas.GetMetricStreamOutput_FirehoseArn, v.FirehoseArn)
+		case schemas.GetMetricStreamOutput_IncludeFilters:
+			return deserializeMetricStreamFilters(d, schemas.GetMetricStreamOutput_IncludeFilters, &v.IncludeFilters)
+		case schemas.GetMetricStreamOutput_IncludeLinkedAccountsMetrics:
+			v.IncludeLinkedAccountsMetrics = new(bool)
+			return d.ReadBool(schemas.GetMetricStreamOutput_IncludeLinkedAccountsMetrics, v.IncludeLinkedAccountsMetrics)
+		case schemas.GetMetricStreamOutput_LastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.GetMetricStreamOutput_LastUpdateDate, v.LastUpdateDate)
+		case schemas.GetMetricStreamOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMetricStreamOutput_Name, v.Name)
+		case schemas.GetMetricStreamOutput_OutputFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetMetricStreamOutput_OutputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = types.MetricStreamOutputFormat(ev)
+			return nil
+		case schemas.GetMetricStreamOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetMetricStreamOutput_RoleArn, v.RoleArn)
+		case schemas.GetMetricStreamOutput_State:
+			v.State = new(string)
+			return d.ReadString(schemas.GetMetricStreamOutput_State, v.State)
+		case schemas.GetMetricStreamOutput_StatisticsConfigurations:
+			return deserializeMetricStreamStatisticsConfigurations(d, schemas.GetMetricStreamOutput_StatisticsConfigurations, &v.StatisticsConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricStream, schemas.GetMetricStreamInput, schemas.GetMetricStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetMetricStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricStream, schemas.GetMetricStreamInput, schemas.GetMetricStreamOutput), output: &GetMetricStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetMetricStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMetricStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -165,12 +214,6 @@ func (c *Client) addOperationGetMetricStreamMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpGetMetricStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +228,8 @@ func (c *Client) addOperationGetMetricStreamMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMetricStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMetricStream",
-	}
 }

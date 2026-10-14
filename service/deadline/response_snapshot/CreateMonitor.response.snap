@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"identityCenterApplicationArn":"__IdentityCenterApplicationArn__","monitorId":"__MonitorId__"}

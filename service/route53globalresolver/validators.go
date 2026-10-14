@@ -650,26 +650,6 @@ func (m *validateOpListFirewallRules) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListHostedZoneAssociations struct {
-}
-
-func (*validateOpListHostedZoneAssociations) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListHostedZoneAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListHostedZoneAssociationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListHostedZoneAssociationsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListManagedFirewallDomainLists struct {
 }
 
@@ -1016,10 +996,6 @@ func addOpListFirewallDomainsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListFirewallRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFirewallRules{}, middleware.After)
-}
-
-func addOpListHostedZoneAssociationsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListHostedZoneAssociations{}, middleware.After)
 }
 
 func addOpListManagedFirewallDomainListsValidationMiddleware(stack *middleware.Stack) error {
@@ -1691,21 +1667,6 @@ func validateOpListFirewallRulesInput(v *ListFirewallRulesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListFirewallRulesInput"}
 	if v.DnsViewId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsViewId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListHostedZoneAssociationsInput(v *ListHostedZoneAssociationsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListHostedZoneAssociationsInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

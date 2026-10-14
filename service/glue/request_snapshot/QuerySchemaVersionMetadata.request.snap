@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.QuerySchemaVersionMetadata
+
+{"MaxResults":1,"MetadataList":[{"MetadataKey":"__MetadataKey__","MetadataValue":"__MetadataValue__"},{"MetadataKey":"__MetadataKey__","MetadataValue":"__MetadataValue__"}],"NextToken":"__NextToken__","SchemaId":{"RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__"},"SchemaVersionId":"__SchemaVersionId__","SchemaVersionNumber":{"LatestVersion":true,"VersionNumber":1}}

@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/generate
+
+Content-Type: application/json
+
+{"intentId":"__IntentId__"}

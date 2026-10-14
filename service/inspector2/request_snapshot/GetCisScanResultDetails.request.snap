@@ -1,0 +1,5 @@
+POST /cis/scan-result/details/get
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__","filterCriteria":{"checkIdFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"findingArnFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"findingStatusFilters":[{"comparison":"EQUALS","value":"PASSED"},{"comparison":"EQUALS","value":"PASSED"}],"securityLevelFilters":[{"comparison":"EQUALS","value":"LEVEL_1"},{"comparison":"EQUALS","value":"LEVEL_1"}],"titleFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}]},"maxResults":1,"nextToken":"__NextToken__","scanArn":"__ScanArn__","sortBy":"CHECK_ID","sortOrder":"ASC","targetResourceId":"__TargetResourceId__"}

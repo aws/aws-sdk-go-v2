@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of a SageMaker AI image version.
@@ -93,6 +92,47 @@ type UpdateImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_Alias, *v.Alias)
+	}
+	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToAdd, v.AliasesToAdd)
+	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToDelete, v.AliasesToDelete)
+	if v.Horovod != nil {
+		s.WriteBool(schemas.UpdateImageVersionRequest_Horovod, *v.Horovod)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ImageName, *v.ImageName)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_JobType, string(v.JobType))
+	}
+	if v.MLFramework != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_MLFramework, *v.MLFramework)
+	}
+	if v.Processor != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_Processor, string(v.Processor))
+	}
+	if v.ProgrammingLang != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ProgrammingLang, *v.ProgrammingLang)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.VendorGuidance != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_VendorGuidance, string(v.VendorGuidance))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.UpdateImageVersionRequest_Version, *v.Version)
+	}
+}
+
 type UpdateImageVersionOutput struct {
 
 	// The ARN of the image version.
@@ -104,77 +144,48 @@ type UpdateImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageVersionArn != nil {
+		s.WriteString(schemas.UpdateImageVersionResponse_ImageVersionArn, *v.ImageVersionArn)
+	}
+}
+func (v *UpdateImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateImageVersionResponse_ImageVersionArn:
+			v.ImageVersionArn = new(string)
+			return d.ReadString(schemas.UpdateImageVersionResponse_ImageVersionArn, v.ImageVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageVersion, schemas.UpdateImageVersionRequest, schemas.UpdateImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageVersion, schemas.UpdateImageVersionRequest, schemas.UpdateImageVersionResponse), output: &UpdateImageVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateImageVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateImageVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateImageVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateImageVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +200,8 @@ func (c *Client) addOperationUpdateImageVersionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateImageVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateImageVersion",
-	}
 }

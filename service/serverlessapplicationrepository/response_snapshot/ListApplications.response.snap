@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applications":[{"applicationId":"__ApplicationId__","author":"__Author__","creationTime":"__CreationTime__","description":"__Description__","homePageUrl":"__HomePageUrl__","labels":["__Member__","__Member__"],"name":"__Name__","spdxLicenseId":"__SpdxLicenseId__"},{"applicationId":"__ApplicationId__","author":"__Author__","creationTime":"__CreationTime__","description":"__Description__","homePageUrl":"__HomePageUrl__","labels":["__Member__","__Member__"],"name":"__Name__","spdxLicenseId":"__SpdxLicenseId__"}],"nextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the details of one or more configuration aggregators. If the
@@ -45,6 +45,22 @@ type DescribeConfigurationAggregatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationAggregatorNameList(s, schemas.DescribeConfigurationAggregatorsRequest_ConfigurationAggregatorNames, v.ConfigurationAggregatorNames)
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConfigurationAggregatorsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeConfigurationAggregatorsOutput struct {
 
 	// Returns a ConfigurationAggregators object.
@@ -60,74 +76,48 @@ type DescribeConfigurationAggregatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationAggregatorList(s, schemas.DescribeConfigurationAggregatorsResponse_ConfigurationAggregators, v.ConfigurationAggregators)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConfigurationAggregatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationAggregatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationAggregatorsResponse_ConfigurationAggregators:
+			return deserializeConfigurationAggregatorList(d, schemas.DescribeConfigurationAggregatorsResponse_ConfigurationAggregators, &v.ConfigurationAggregators)
+		case schemas.DescribeConfigurationAggregatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConfigurationAggregatorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationAggregatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregators, schemas.DescribeConfigurationAggregatorsRequest, schemas.DescribeConfigurationAggregatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationAggregators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregators, schemas.DescribeConfigurationAggregatorsRequest, schemas.DescribeConfigurationAggregatorsResponse), output: &DescribeConfigurationAggregatorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurationAggregators{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationAggregators"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationAggregators(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +130,6 @@ func (c *Client) addOperationDescribeConfigurationAggregatorsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +230,3 @@ type DescribeConfigurationAggregatorsAPIClient interface {
 }
 
 var _ DescribeConfigurationAggregatorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeConfigurationAggregators(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConfigurationAggregators",
-	}
-}

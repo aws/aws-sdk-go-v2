@@ -4,17 +4,18 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates setting configurations for your Amazon Inspector account. When you use
-// this API as an Amazon Inspector delegated administrator this updates the setting
-// for all accounts you manage. Member accounts in an organization cannot update
-// this setting.
+// Updates the scan configuration for your Amazon Inspector account. If you don't
+// specify an accountId , this operation updates the delegated administrator's
+// configuration and propagates it to member accounts that have not been
+// individually configured. If you specify an accountId , this operation updates
+// that member account's configuration. Only the delegated administrator can
+// specify an accountId ; member accounts cannot call this operation.
 func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigurationInput, optFns ...func(*Options)) (*UpdateConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationInput{}
@@ -32,6 +33,13 @@ func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigur
 
 type UpdateConfigurationInput struct {
 
+	// The 12-digit Amazon Web Services account ID of the member account whose scan
+	// configuration you want to update. When specified, you must be the delegated
+	// administrator for this member account. If not specified, the operation updates
+	// your own configuration and propagates changes to any member accounts that have
+	// not been individually configured.
+	AccountId *string
+
 	// Specifies how the Amazon EC2 automated scan will be updated for your
 	// environment.
 	Ec2Configuration *types.Ec2Configuration
@@ -39,7 +47,61 @@ type UpdateConfigurationInput struct {
 	// Specifies how the ECR automated re-scan will be updated for your environment.
 	EcrConfiguration *types.EcrConfiguration
 
+	// Specifies which scan-type configurations to reset to the delegated
+	// administrator's inherited values for the targeted member account. Each member of
+	// this structure is independently optional. When specified, ec2Configuration and
+	// ecrConfiguration must be absent, and accountId must also be present. Only
+	// INHERIT_FROM_ADMIN is valid for each member. If not specified, the operation
+	// uses the ec2Configuration and ecrConfiguration parameters instead.
+	UpdateConfigurationInheritance *types.UpdateConfigurationInheritance
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateConfigurationRequest_accountId, *v.AccountId)
+	}
+	if v.Ec2Configuration != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_ec2Configuration)
+		v.Ec2Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcrConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_ecrConfiguration)
+		v.EcrConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateConfigurationInheritance != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_updateConfigurationInheritance)
+		v.UpdateConfigurationInheritance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfigurationRequest_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UpdateConfigurationRequest_accountId, v.AccountId)
+		case schemas.UpdateConfigurationRequest_ec2Configuration:
+			v.Ec2Configuration = &types.Ec2Configuration{}
+			return v.Ec2Configuration.Deserialize(d)
+		case schemas.UpdateConfigurationRequest_ecrConfiguration:
+			v.EcrConfiguration = &types.EcrConfiguration{}
+			return v.EcrConfiguration.Deserialize(d)
+		case schemas.UpdateConfigurationRequest_updateConfigurationInheritance:
+			v.UpdateConfigurationInheritance = &types.UpdateConfigurationInheritance{}
+			return v.UpdateConfigurationInheritance.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type UpdateConfigurationOutput struct {
@@ -49,77 +111,42 @@ type UpdateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse), output: &UpdateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +161,8 @@ func (c *Client) addOperationUpdateConfigurationMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConfiguration",
-	}
 }

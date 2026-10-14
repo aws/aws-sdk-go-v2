@@ -5,10 +5,10 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the secrets that are stored by Secrets Manager in the Amazon Web Services
@@ -81,6 +81,31 @@ type ListSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecretsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecretsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFiltersListType(s, schemas.ListSecretsRequest_Filters, v.Filters)
+	if v.IncludePlannedDeletion != nil {
+		s.WriteBool(schemas.ListSecretsRequest_IncludePlannedDeletion, *v.IncludePlannedDeletion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecretsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecretsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSecretsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSecretsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListSecretsOutput struct {
 
 	// Secrets Manager includes this value if there's more output available than what
@@ -98,74 +123,48 @@ type ListSecretsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecretsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecretsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecretsResponse_NextToken, *v.NextToken)
+	}
+	serializeSecretListType(s, schemas.ListSecretsResponse_SecretList, v.SecretList)
+}
+func (v *ListSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecretsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecretsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecretsResponse_NextToken, v.NextToken)
+		case schemas.ListSecretsResponse_SecretList:
+			return deserializeSecretListType(d, schemas.ListSecretsResponse_SecretList, &v.SecretList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecrets, schemas.ListSecretsRequest, schemas.ListSecretsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecrets, schemas.ListSecretsRequest, schemas.ListSecretsResponse), output: &ListSecretsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSecrets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSecrets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSecrets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,12 +177,6 @@ func (c *Client) addOperationListSecretsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -287,11 +280,3 @@ type ListSecretsAPIClient interface {
 }
 
 var _ ListSecretsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSecrets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSecrets",
-	}
-}

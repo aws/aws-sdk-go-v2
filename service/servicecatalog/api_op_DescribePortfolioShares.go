@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a summary of each of the portfolio shares that were created for the
@@ -69,27 +65,6 @@ type DescribePortfolioSharesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioSharesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePortfolioSharesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePortfolioSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.DescribePortfolioSharesInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.DescribePortfolioSharesInput_PageToken, *v.PageToken)
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.DescribePortfolioSharesInput_PortfolioId, *v.PortfolioId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DescribePortfolioSharesInput_Type, string(v.Type))
-	}
-}
-
 type DescribePortfolioSharesOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -105,87 +80,29 @@ type DescribePortfolioSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePortfolioSharesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePortfolioSharesOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.DescribePortfolioSharesOutput_NextPageToken, v.NextPageToken)
-		case schemas.DescribePortfolioSharesOutput_PortfolioShareDetails:
-			return deserializePortfolioShareDetails(d, schemas.DescribePortfolioSharesOutput_PortfolioShareDetails, &v.PortfolioShareDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolioShares{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShares, schemas.DescribePortfolioSharesInput, schemas.DescribePortfolioSharesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePortfolioShares{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShares, schemas.DescribePortfolioSharesInput, schemas.DescribePortfolioSharesOutput), output: &DescribePortfolioSharesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePortfolioShares"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePortfolioSharesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePortfolioShares(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +115,6 @@ func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +213,3 @@ type DescribePortfolioSharesAPIClient interface {
 }
 
 var _ DescribePortfolioSharesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribePortfolioShares(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePortfolioShares",
-	}
-}

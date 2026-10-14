@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the parameters of a model monitor alert.
@@ -52,6 +51,27 @@ type UpdateMonitoringAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringAlertInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringAlertRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringAlertInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatapointsToAlert != nil {
+		s.WriteInt32(schemas.UpdateMonitoringAlertRequest_DatapointsToAlert, *v.DatapointsToAlert)
+	}
+	if v.EvaluationPeriod != nil {
+		s.WriteInt32(schemas.UpdateMonitoringAlertRequest_EvaluationPeriod, *v.EvaluationPeriod)
+	}
+	if v.MonitoringAlertName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertRequest_MonitoringAlertName, *v.MonitoringAlertName)
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+}
+
 type UpdateMonitoringAlertOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
@@ -68,77 +88,54 @@ type UpdateMonitoringAlertOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringAlertOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringAlertResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringAlertOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringAlertName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertResponse_MonitoringAlertName, *v.MonitoringAlertName)
+	}
+	if v.MonitoringScheduleArn != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn, *v.MonitoringScheduleArn)
+	}
+}
+func (v *UpdateMonitoringAlertOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitoringAlertResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMonitoringAlertResponse_MonitoringAlertName:
+			v.MonitoringAlertName = new(string)
+			return d.ReadString(schemas.UpdateMonitoringAlertResponse_MonitoringAlertName, v.MonitoringAlertName)
+		case schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn:
+			v.MonitoringScheduleArn = new(string)
+			return d.ReadString(schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn, v.MonitoringScheduleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitoringAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoringAlert, schemas.UpdateMonitoringAlertRequest, schemas.UpdateMonitoringAlertResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMonitoringAlert{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoringAlert, schemas.UpdateMonitoringAlertRequest, schemas.UpdateMonitoringAlertResponse), output: &UpdateMonitoringAlertOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMonitoringAlert{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMonitoringAlert"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMonitoringAlertValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMonitoringAlert(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +150,8 @@ func (c *Client) addOperationUpdateMonitoringAlertMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMonitoringAlert(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMonitoringAlert",
-	}
 }

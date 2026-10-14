@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,6 +50,27 @@ type ListHoursOfOperationOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationOverridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationOverridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.ListHoursOfOperationOverridesRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListHoursOfOperationOverridesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHoursOfOperationOverridesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationOverridesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHoursOfOperationOverridesOutput struct {
 
 	// Information about the hours of operation override.
@@ -71,77 +92,63 @@ type ListHoursOfOperationOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationOverridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationOverridesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHoursOfOperationOverrideList(s, schemas.ListHoursOfOperationOverridesResponse_HoursOfOperationOverrideList, v.HoursOfOperationOverrideList)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListHoursOfOperationOverridesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListHoursOfOperationOverridesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationOverridesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHoursOfOperationOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHoursOfOperationOverridesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHoursOfOperationOverridesResponse_HoursOfOperationOverrideList:
+			return deserializeHoursOfOperationOverrideList(d, schemas.ListHoursOfOperationOverridesResponse_HoursOfOperationOverrideList, &v.HoursOfOperationOverrideList)
+		case schemas.ListHoursOfOperationOverridesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListHoursOfOperationOverridesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListHoursOfOperationOverridesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListHoursOfOperationOverridesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListHoursOfOperationOverridesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHoursOfOperationOverridesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHoursOfOperationOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperationOverrides, schemas.ListHoursOfOperationOverridesRequest, schemas.ListHoursOfOperationOverridesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHoursOfOperationOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperationOverrides, schemas.ListHoursOfOperationOverridesRequest, schemas.ListHoursOfOperationOverridesResponse), output: &ListHoursOfOperationOverridesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHoursOfOperationOverrides{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHoursOfOperationOverrides"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHoursOfOperationOverridesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHoursOfOperationOverrides(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +161,6 @@ func (c *Client) addOperationListHoursOfOperationOverridesMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +264,3 @@ type ListHoursOfOperationOverridesAPIClient interface {
 }
 
 var _ ListHoursOfOperationOverridesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHoursOfOperationOverrides(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHoursOfOperationOverrides",
-	}
-}

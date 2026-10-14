@@ -4,9 +4,12 @@ package transfermanager
 
 import (
 	"bytes"
+	"context"
+	"io"
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
@@ -59,4 +62,65 @@ func TestInteg_GetObject(t *testing.T) {
 			testGetObject(t, setupMetadata.Buckets.Source.Name, c)
 		})
 	}
+}
+
+// TestInteg_GetObject_UnequalSize verifies that streaming a multipart object
+// whose parts have unequal sizes returns exactly the uploaded content, in both
+// parts and ranges modes (#3526).
+func TestInteg_GetObject_UnequalSize(t *testing.T) {
+	const mib = 1024 * 1024
+	// Distinct byte patterns per part so any misplacement corrupts the result.
+	// All parts but the last are >= 5MB to satisfy the S3 minimum part size.
+	partA := bytes.Repeat([]byte{'A'}, 6*mib)
+	partB := bytes.Repeat([]byte{'B'}, 5*mib)
+	partC := bytes.Repeat([]byte{'C'}, 1*mib)
+	body := bytes.Join([][]byte{partA, partB, partC}, nil)
+	partSizes := []int64{6 * mib, 5 * mib, 1 * mib}
+
+	cases := map[string]getObjectTestData{
+		"parts get unequal part sizes": {
+			Body:       bytes.NewReader(body),
+			ExpectBody: body,
+			PartSizes:  partSizes,
+		},
+		"ranges get unequal part sizes": {
+			Body:       bytes.NewReader(body),
+			ExpectBody: body,
+			PartSizes:  partSizes,
+			OptFns: []func(*Options){
+				func(opt *Options) {
+					opt.GetObjectType = types.GetObjectRanges
+				},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			testGetObjectWithChangingPartSize(t, setupMetadata.Buckets.Source.Name, c)
+		})
+	}
+}
+
+// TestInteg_GetObject_RandomizedReassembly is the property-based durability
+// test for https://github.com/aws/aws-sdk-go-v2/issues/3526, driving the GetObject (streaming reader) path.
+// It uploads randomized multipart layouts and asserts the streamed bytes equal
+// the uploaded bytes byte for byte. See runRandomizedReassembly in
+// setup_integ_test.go. Reproduce a failure with TM_REASSEMBLY_SEED.
+func TestInteg_GetObject_RandomizedReassembly(t *testing.T) {
+	runRandomizedReassembly(t, "GetObject", func(t *testing.T, ctx context.Context, bucket, key string, c reassemblyCase) []byte {
+		out, err := s3TransferManagerClient.GetObject(ctx, &GetObjectInput{
+			Bucket: aws.String(bucket),
+			Key:    aws.String(key),
+			Range:  c.rangePtr(),
+		}, c.optFns()...)
+		if err != nil {
+			t.Fatalf("GetObject: %v", err)
+		}
+		got, err := io.ReadAll(out.Body)
+		if err != nil {
+			t.Fatalf("read GetObject body: %v", err)
+		}
+		return got
+	})
 }

@@ -5,12 +5,8 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation allows a search on DATABASE resources by TagCondition . This
@@ -55,25 +51,6 @@ type SearchDatabasesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchDatabasesByLFTagsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchDatabasesByLFTagsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchDatabasesByLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.SearchDatabasesByLFTagsRequest_CatalogId, *v.CatalogId)
-	}
-	serializeExpression(s, schemas.SearchDatabasesByLFTagsRequest_Expression, v.Expression)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchDatabasesByLFTagsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchDatabasesByLFTagsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type SearchDatabasesByLFTagsOutput struct {
 
 	// A list of databases that meet the LF-tag conditions.
@@ -88,87 +65,29 @@ type SearchDatabasesByLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchDatabasesByLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchDatabasesByLFTagsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchDatabasesByLFTagsResponse_DatabaseList:
-			return deserializeDatabaseLFTagsList(d, schemas.SearchDatabasesByLFTagsResponse_DatabaseList, &v.DatabaseList)
-		case schemas.SearchDatabasesByLFTagsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchDatabasesByLFTagsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchDatabasesByLFTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDatabasesByLFTags, schemas.SearchDatabasesByLFTagsRequest, schemas.SearchDatabasesByLFTagsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchDatabasesByLFTags{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchDatabasesByLFTags, schemas.SearchDatabasesByLFTagsRequest, schemas.SearchDatabasesByLFTagsResponse), output: &SearchDatabasesByLFTagsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchDatabasesByLFTags"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchDatabasesByLFTagsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchDatabasesByLFTags(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,12 +100,6 @@ func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +202,3 @@ type SearchDatabasesByLFTagsAPIClient interface {
 }
 
 var _ SearchDatabasesByLFTagsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchDatabasesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchDatabasesByLFTags",
-	}
-}

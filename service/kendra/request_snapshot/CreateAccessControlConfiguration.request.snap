@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.CreateAccessControlConfiguration
+
+{"AccessControlList":[{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"},{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"}],"ClientToken":"__ClientToken__","Description":"__Description__","HierarchicalAccessControlList":[{"PrincipalList":[{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"},{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"}]},{"PrincipalList":[{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"},{"Access":"ALLOW","DataSourceId":"__DataSourceId__","Name":"__Name__","Type":"USER"}]}],"IndexId":"__IndexId__","Name":"__Name__"}

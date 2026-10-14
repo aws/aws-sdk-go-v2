@@ -4,13 +4,8 @@ package rolesanywhere
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a trust anchor to establish trust between IAM Roles Anywhere and your
@@ -60,48 +55,6 @@ type CreateTrustAnchorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTrustAnchorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTrustAnchorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.CreateTrustAnchorRequest_enabled, *v.Enabled)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateTrustAnchorRequest_name, *v.Name)
-	}
-	serializeNotificationSettings(s, schemas.CreateTrustAnchorRequest_notificationSettings, v.NotificationSettings)
-	if v.Source != nil {
-		s.WriteStruct(schemas.CreateTrustAnchorRequest_source)
-		v.Source.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateTrustAnchorRequest_tags, v.Tags)
-}
-func (v *CreateTrustAnchorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateTrustAnchorRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateTrustAnchorRequest_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.CreateTrustAnchorRequest_enabled, v.Enabled)
-		case schemas.CreateTrustAnchorRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateTrustAnchorRequest_name, v.Name)
-		case schemas.CreateTrustAnchorRequest_notificationSettings:
-			return deserializeNotificationSettings(d, schemas.CreateTrustAnchorRequest_notificationSettings, &v.NotificationSettings)
-		case schemas.CreateTrustAnchorRequest_source:
-			v.Source = &types.Source{}
-			return v.Source.Deserialize(d)
-		case schemas.CreateTrustAnchorRequest_tags:
-			return deserializeTagList(d, schemas.CreateTrustAnchorRequest_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateTrustAnchorOutput struct {
 
 	// The state of the trust anchor after a read or write operation.
@@ -115,98 +68,29 @@ type CreateTrustAnchorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTrustAnchorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrustAnchorDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTrustAnchorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrustAnchor != nil {
-		s.WriteStruct(schemas.TrustAnchorDetailResponse_trustAnchor)
-		v.TrustAnchor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateTrustAnchorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TrustAnchorDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TrustAnchorDetailResponse_trustAnchor:
-			v.TrustAnchor = &types.TrustAnchorDetail{}
-			return v.TrustAnchor.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateTrustAnchorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTrustAnchor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustAnchor, schemas.CreateTrustAnchorRequest, schemas.TrustAnchorDetailResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTrustAnchor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrustAnchor, schemas.CreateTrustAnchorRequest, schemas.TrustAnchorDetailResponse), output: &CreateTrustAnchorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTrustAnchor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTrustAnchorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrustAnchor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +105,8 @@ func (c *Client) addOperationCreateTrustAnchorMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTrustAnchor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTrustAnchor",
-	}
 }

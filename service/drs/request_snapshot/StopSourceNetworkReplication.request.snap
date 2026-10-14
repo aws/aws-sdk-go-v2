@@ -1,0 +1,5 @@
+POST /StopSourceNetworkReplication
+
+Content-Type: application/json
+
+{"sourceNetworkID":"__SourceNetworkID__"}

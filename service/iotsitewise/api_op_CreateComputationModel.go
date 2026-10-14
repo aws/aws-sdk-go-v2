@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,31 +62,6 @@ type CreateComputationModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputationModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComputationModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComputationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateComputationModelRequest_clientToken, *v.ClientToken)
-	}
-	if v.ComputationModelConfiguration != nil {
-		s.WriteStruct(schemas.CreateComputationModelRequest_computationModelConfiguration)
-		v.ComputationModelConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeComputationModelDataBinding(s, schemas.CreateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
-	if v.ComputationModelDescription != nil {
-		s.WriteString(schemas.CreateComputationModelRequest_computationModelDescription, *v.ComputationModelDescription)
-	}
-	if v.ComputationModelName != nil {
-		s.WriteString(schemas.CreateComputationModelRequest_computationModelName, *v.ComputationModelName)
-	}
-	serializeTagMap(s, schemas.CreateComputationModelRequest_tags, v.Tags)
-}
-
 type CreateComputationModelOutput struct {
 
 	// The [ARN] of the computation model, which has the following format.
@@ -118,79 +90,23 @@ type CreateComputationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComputationModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateComputationModelResponse_computationModelArn:
-			v.ComputationModelArn = new(string)
-			return d.ReadString(schemas.CreateComputationModelResponse_computationModelArn, v.ComputationModelArn)
-		case schemas.CreateComputationModelResponse_computationModelId:
-			v.ComputationModelId = new(string)
-			return d.ReadString(schemas.CreateComputationModelResponse_computationModelId, v.ComputationModelId)
-		case schemas.CreateComputationModelResponse_computationModelStatus:
-			v.ComputationModelStatus = &types.ComputationModelStatus{}
-			return v.ComputationModelStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateComputationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComputationModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputationModel, schemas.CreateComputationModelRequest, schemas.CreateComputationModelResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComputationModel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputationModel, schemas.CreateComputationModelRequest, schemas.CreateComputationModelResponse), output: &CreateComputationModelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComputationModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -205,12 +121,6 @@ func (c *Client) addOperationCreateComputationModelMiddlewares(stack *middleware
 	if err = addOpCreateComputationModelValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputationModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -221,12 +131,6 @@ func (c *Client) addOperationCreateComputationModelMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,12 +197,4 @@ func (m *idempotencyToken_initializeOpCreateComputationModel) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateComputationModelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateComputationModel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateComputationModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComputationModel",
-	}
 }

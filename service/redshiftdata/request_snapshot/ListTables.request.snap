@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.ListTables
+
+{"ClusterIdentifier":"__ClusterIdentifier__","ConnectedDatabase":"__ConnectedDatabase__","Database":"__Database__","DbUser":"__DbUser__","MaxResults":1,"NextToken":"__NextToken__","SchemaPattern":"__SchemaPattern__","SecretArn":"__SecretArn__","TablePattern":"__TablePattern__","WorkgroupName":"__WorkgroupName__"}

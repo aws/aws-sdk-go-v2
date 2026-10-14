@@ -4,13 +4,8 @@ package databrew
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type DescribeRulesetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeRulesetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRulesetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeRulesetRequest_Name, *v.Name)
-	}
 }
 
 type DescribeRulesetOutput struct {
@@ -94,110 +77,29 @@ type DescribeRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRulesetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRulesetResponse_CreateDate:
-			v.CreateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeRulesetResponse_CreateDate, v.CreateDate)
-		case schemas.DescribeRulesetResponse_CreatedBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_CreatedBy, v.CreatedBy)
-		case schemas.DescribeRulesetResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_Description, v.Description)
-		case schemas.DescribeRulesetResponse_LastModifiedBy:
-			v.LastModifiedBy = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_LastModifiedBy, v.LastModifiedBy)
-		case schemas.DescribeRulesetResponse_LastModifiedDate:
-			v.LastModifiedDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeRulesetResponse_LastModifiedDate, v.LastModifiedDate)
-		case schemas.DescribeRulesetResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_Name, v.Name)
-		case schemas.DescribeRulesetResponse_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_ResourceArn, v.ResourceArn)
-		case schemas.DescribeRulesetResponse_Rules:
-			return deserializeRuleList(d, schemas.DescribeRulesetResponse_Rules, &v.Rules)
-		case schemas.DescribeRulesetResponse_Tags:
-			return deserializeTagMap(d, schemas.DescribeRulesetResponse_Tags, &v.Tags)
-		case schemas.DescribeRulesetResponse_TargetArn:
-			v.TargetArn = new(string)
-			return d.ReadString(schemas.DescribeRulesetResponse_TargetArn, v.TargetArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRuleset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleset, schemas.DescribeRulesetRequest, schemas.DescribeRulesetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRuleset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleset, schemas.DescribeRulesetRequest, schemas.DescribeRulesetResponse), output: &DescribeRulesetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRuleset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRulesetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRuleset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +114,8 @@ func (c *Client) addOperationDescribeRulesetMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRuleset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRuleset",
-	}
 }

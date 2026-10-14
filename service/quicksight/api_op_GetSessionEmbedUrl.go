@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a session URL and authorization code that you can use to embed the
@@ -92,6 +91,27 @@ type GetSessionEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEmbedUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEmbedUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEmbedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.EntryPoint != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_EntryPoint, *v.EntryPoint)
+	}
+	if v.SessionLifetimeInMinutes != nil {
+		s.WriteInt64(schemas.GetSessionEmbedUrlRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_UserArn, *v.UserArn)
+	}
+}
+
 type GetSessionEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side web page to embed your
@@ -112,77 +132,59 @@ type GetSessionEmbedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEmbedUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEmbedUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEmbedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlResponse_EmbedUrl, *v.EmbedUrl)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetSessionEmbedUrlResponse_Status, v.Status)
+	}
+}
+func (v *GetSessionEmbedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionEmbedUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionEmbedUrlResponse_EmbedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GetSessionEmbedUrlResponse_EmbedUrl, v.EmbedUrl)
+		case schemas.GetSessionEmbedUrlResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetSessionEmbedUrlResponse_RequestId, v.RequestId)
+		case schemas.GetSessionEmbedUrlResponse_Status:
+			return d.ReadInt32(schemas.GetSessionEmbedUrlResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEmbedUrl, schemas.GetSessionEmbedUrlRequest, schemas.GetSessionEmbedUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionEmbedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEmbedUrl, schemas.GetSessionEmbedUrlRequest, schemas.GetSessionEmbedUrlResponse), output: &GetSessionEmbedUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionEmbedUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionEmbedUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSessionEmbedUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionEmbedUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +199,8 @@ func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSessionEmbedUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSessionEmbedUrl",
-	}
 }

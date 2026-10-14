@@ -1,0 +1,3 @@
+GET /properties/history?assetId=__AssetId__&endDate=2000-01-01T00%3A00%3A00Z&maxResults=1&nextToken=__NextToken__&propertyAlias=__PropertyAlias__&propertyId=__PropertyId__&qualities=GOOD&qualities=GOOD&startDate=2000-01-01T00%3A00%3A00Z&timeOrdering=ASCENDING
+
+

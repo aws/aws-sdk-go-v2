@@ -4,18 +4,42 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates source metadata model of the given type with the specified properties
-// for schema conversion operations.
+// Queues the creation of a metadata model in the source metadata tree. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the creation begins after they complete.
 //
-// This action supports only these directions: from SQL Server to Aurora
-// PostgreSQL, or from SQL Server to RDS for PostgreSQL.
+// This operation supports only Microsoft SQL Server to Aurora PostgreSQL and
+// Microsoft SQL Server to Amazon RDS for PostgreSQL conversion paths.
+//
+// To check the status of the creation request, call [DescribeMetadataModelCreations] using the returned
+// RequestIdentifier as a filter.
+//
+// To cancel a queued or in-progress request, call [CancelMetadataModelCreation] with the returned
+// RequestIdentifier .
+//
+// Calling [StartMetadataModelImport] with Refresh deletes metadata models created by this operation.
+//
+// After the creation completes successfully:
+//
+//   - To evaluate conversion complexity, call [StartMetadataModelAssessment].
+//
+//   - To convert to the target database format, call [StartMetadataModelConversion].
+//
+// Required permissions: dms:StartMetadataModelCreation . For more information, see [Actions, resources, and condition keys for Database Migration Service]
+// .
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [CancelMetadataModelCreation]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelCreations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelCreations.html
+// [StartMetadataModelConversion]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html
+// [StartMetadataModelAssessment]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html
 func (c *Client) StartMetadataModelCreation(ctx context.Context, params *StartMetadataModelCreationInput, optFns ...func(*Options)) (*StartMetadataModelCreationOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelCreationInput{}
@@ -33,7 +57,7 @@ func (c *Client) StartMetadataModelCreation(ctx context.Context, params *StartMe
 
 type StartMetadataModelCreationInput struct {
 
-	// The name of the metadata model.
+	// The name for the metadata model to use in subsequent operations.
 	//
 	// This member is required.
 	MetadataModelName *string
@@ -43,15 +67,24 @@ type StartMetadataModelCreationInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// The properties of metadata model in JSON format. This object is a Union. Only
-	// one member of this object can be specified or returned.
+	// The properties of the metadata model.
 	//
 	// This member is required.
 	Properties types.MetadataModelProperties
 
-	// The JSON string that specifies the location where the metadata model will be
-	// created. Selection rules must specify a single schema. For more information, see
-	// Selection Rules in the DMS User Guide.
+	// A JSON string that identifies the source schema for the metadata model. For the
+	// selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	//   - Exactly one rule is allowed.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
@@ -59,9 +92,28 @@ type StartMetadataModelCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelCreationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataModelName != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_MetadataModelName, *v.MetadataModelName)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	serializeMetadataModelProperties(s, schemas.StartMetadataModelCreationMessage_Properties, v.Properties)
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelCreationMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelCreationOutput struct {
 
-	// The identifier for the metadata model creation operation.
+	// The identifier for the creation request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -70,77 +122,48 @@ type StartMetadataModelCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelCreationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelCreationResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelCreationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelCreationResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelCreationResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelCreation, schemas.StartMetadataModelCreationMessage, schemas.StartMetadataModelCreationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelCreation, schemas.StartMetadataModelCreationMessage, schemas.StartMetadataModelCreationResponse), output: &StartMetadataModelCreationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelCreation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataModelCreation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMetadataModelCreationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataModelCreation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +178,8 @@ func (c *Client) addOperationStartMetadataModelCreationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMetadataModelCreation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataModelCreation",
-	}
 }

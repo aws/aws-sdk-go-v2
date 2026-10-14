@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateDomainAccessGrantForOrganization
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kclientTokeno__ClientToken__hdomainIdl__DomainId__dnameh__Name__jpermissioneADMINiprincipal¿sprincipalAttributesŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿkprincipalIdo__PrincipalId__mprincipalTypehIDC_USERÿdtags¿dkey0i__Value__ÿÿ

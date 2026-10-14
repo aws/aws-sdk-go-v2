@@ -1,0 +1,4 @@
+DELETE /networks/__NetworkId__
+
+X-Client-Token: __ClientToken__
+

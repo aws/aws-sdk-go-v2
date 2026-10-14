@@ -1,0 +1,5 @@
+PUT /grouping-configuration
+
+Content-Type: application/json
+
+{"GroupingAttributeDefinitions":[{"DefaultGroupingValue":"__DefaultGroupingValue__","GroupingName":"__GroupingName__","GroupingSourceKeys":["__Member__","__Member__"]},{"DefaultGroupingValue":"__DefaultGroupingValue__","GroupingName":"__GroupingName__","GroupingSourceKeys":["__Member__","__Member__"]}]}

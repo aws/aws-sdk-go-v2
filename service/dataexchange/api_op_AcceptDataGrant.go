@@ -4,11 +4,10 @@ package dataexchange
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type AcceptDataGrantInput struct {
 	DataGrantArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AcceptDataGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptDataGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptDataGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataGrantArn != nil {
+		s.WriteString(schemas.AcceptDataGrantRequest_DataGrantArn, *v.DataGrantArn)
+	}
 }
 
 type AcceptDataGrantOutput struct {
@@ -103,77 +114,128 @@ type AcceptDataGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptDataGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptDataGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptDataGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceState != "" {
+		s.WriteString(schemas.AcceptDataGrantResponse_AcceptanceState, string(v.AcceptanceState))
+	}
+	if v.AcceptedAt != nil {
+		s.WriteTime(schemas.AcceptDataGrantResponse_AcceptedAt, *v.AcceptedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcceptDataGrantResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_Description, *v.Description)
+	}
+	if v.EndsAt != nil {
+		s.WriteTime(schemas.AcceptDataGrantResponse_EndsAt, *v.EndsAt)
+	}
+	if v.GrantDistributionScope != "" {
+		s.WriteString(schemas.AcceptDataGrantResponse_GrantDistributionScope, string(v.GrantDistributionScope))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_Name, *v.Name)
+	}
+	if v.ReceiverPrincipal != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_ReceiverPrincipal, *v.ReceiverPrincipal)
+	}
+	if v.SenderPrincipal != nil {
+		s.WriteString(schemas.AcceptDataGrantResponse_SenderPrincipal, *v.SenderPrincipal)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcceptDataGrantResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcceptDataGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptDataGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptDataGrantResponse_AcceptanceState:
+			var ev string
+			if err := d.ReadString(schemas.AcceptDataGrantResponse_AcceptanceState, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceState = types.DataGrantAcceptanceState(ev)
+			return nil
+		case schemas.AcceptDataGrantResponse_AcceptedAt:
+			v.AcceptedAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptDataGrantResponse_AcceptedAt, v.AcceptedAt)
+		case schemas.AcceptDataGrantResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_Arn, v.Arn)
+		case schemas.AcceptDataGrantResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptDataGrantResponse_CreatedAt, v.CreatedAt)
+		case schemas.AcceptDataGrantResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_DataSetId, v.DataSetId)
+		case schemas.AcceptDataGrantResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_Description, v.Description)
+		case schemas.AcceptDataGrantResponse_EndsAt:
+			v.EndsAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptDataGrantResponse_EndsAt, v.EndsAt)
+		case schemas.AcceptDataGrantResponse_GrantDistributionScope:
+			var ev string
+			if err := d.ReadString(schemas.AcceptDataGrantResponse_GrantDistributionScope, &ev); err != nil {
+				return err
+			}
+			v.GrantDistributionScope = types.GrantDistributionScope(ev)
+			return nil
+		case schemas.AcceptDataGrantResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_Id, v.Id)
+		case schemas.AcceptDataGrantResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_Name, v.Name)
+		case schemas.AcceptDataGrantResponse_ReceiverPrincipal:
+			v.ReceiverPrincipal = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_ReceiverPrincipal, v.ReceiverPrincipal)
+		case schemas.AcceptDataGrantResponse_SenderPrincipal:
+			v.SenderPrincipal = new(string)
+			return d.ReadString(schemas.AcceptDataGrantResponse_SenderPrincipal, v.SenderPrincipal)
+		case schemas.AcceptDataGrantResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptDataGrantResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptDataGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptDataGrant, schemas.AcceptDataGrantRequest, schemas.AcceptDataGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptDataGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptDataGrant, schemas.AcceptDataGrantRequest, schemas.AcceptDataGrantResponse), output: &AcceptDataGrantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptDataGrant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptDataGrant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptDataGrantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptDataGrant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +250,8 @@ func (c *Client) addOperationAcceptDataGrantMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAcceptDataGrant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptDataGrant",
-	}
 }

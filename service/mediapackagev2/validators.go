@@ -732,6 +732,11 @@ func validateCreateDashManifestConfiguration(v *types.CreateDashManifestConfigur
 	if v.ManifestName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
 	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.BaseUrls != nil {
 		if err := validateDashBaseUrls(v.BaseUrls); err != nil {
 			invalidParams.AddNested("BaseUrls", err.(smithy.InvalidParamsError))
@@ -784,6 +789,11 @@ func validateCreateHlsManifestConfiguration(v *types.CreateHlsManifestConfigurat
 			invalidParams.AddNested("StartTag", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -821,6 +831,11 @@ func validateCreateLowLatencyHlsManifestConfiguration(v *types.CreateLowLatencyH
 			invalidParams.AddNested("StartTag", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -852,6 +867,11 @@ func validateCreateMssManifestConfiguration(v *types.CreateMssManifestConfigurat
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMssManifestConfiguration"}
 	if v.ManifestName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1049,6 +1069,23 @@ func validateEncryptionContractConfiguration(v *types.EncryptionContractConfigur
 	}
 }
 
+func validateFilterConfiguration(v *types.FilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterConfiguration"}
+	if v.Multiview != nil {
+		if err := validateMultiviewFilterConfiguration(v.Multiview); err != nil {
+			invalidParams.AddNested("Multiview", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHarvestedDashManifest(v *types.HarvestedDashManifest) error {
 	if v == nil {
 		return nil
@@ -1190,6 +1227,42 @@ func validateHarvesterScheduleConfiguration(v *types.HarvesterScheduleConfigurat
 	}
 }
 
+func validateMultiviewConfiguration(v *types.MultiviewConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiviewConfiguration"}
+	if v.AvailableSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailableSources"))
+	}
+	if v.AvailableLayouts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailableLayouts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiviewFilterConfiguration(v *types.MultiviewFilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiviewFilterConfiguration"}
+	if len(v.Layout) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Layout"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DestinationConfig(v *types.S3DestinationConfig) error {
 	if v == nil {
 		return nil
@@ -1320,6 +1393,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.MultiviewConfiguration != nil {
+		if err := validateMultiviewConfiguration(v.MultiviewConfiguration); err != nil {
+			invalidParams.AddNested("MultiviewConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1842,6 +1920,11 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.MultiviewConfiguration != nil {
+		if err := validateMultiviewConfiguration(v.MultiviewConfiguration); err != nil {
+			invalidParams.AddNested("MultiviewConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

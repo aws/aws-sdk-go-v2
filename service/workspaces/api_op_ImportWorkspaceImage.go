@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into
@@ -87,6 +86,29 @@ type ImportWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportWorkspaceImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationList(s, schemas.ImportWorkspaceImageRequest_Applications, v.Applications)
+	if v.Ec2ImageId != nil {
+		s.WriteString(schemas.ImportWorkspaceImageRequest_Ec2ImageId, *v.Ec2ImageId)
+	}
+	if v.ImageDescription != nil {
+		s.WriteString(schemas.ImportWorkspaceImageRequest_ImageDescription, *v.ImageDescription)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.ImportWorkspaceImageRequest_ImageName, *v.ImageName)
+	}
+	if v.IngestionProcess != "" {
+		s.WriteString(schemas.ImportWorkspaceImageRequest_IngestionProcess, string(v.IngestionProcess))
+	}
+	serializeTagList(s, schemas.ImportWorkspaceImageRequest_Tags, v.Tags)
+}
+
 type ImportWorkspaceImageOutput struct {
 
 	// The identifier of the WorkSpace image.
@@ -98,77 +120,48 @@ type ImportWorkspaceImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportWorkspaceImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportWorkspaceImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportWorkspaceImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.ImportWorkspaceImageResult_ImageId, *v.ImageId)
+	}
+}
+func (v *ImportWorkspaceImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportWorkspaceImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportWorkspaceImageResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.ImportWorkspaceImageResult_ImageId, v.ImageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportWorkspaceImage, schemas.ImportWorkspaceImageRequest, schemas.ImportWorkspaceImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportWorkspaceImage, schemas.ImportWorkspaceImageRequest, schemas.ImportWorkspaceImageResult), output: &ImportWorkspaceImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportWorkspaceImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportWorkspaceImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportWorkspaceImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportWorkspaceImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +176,8 @@ func (c *Client) addOperationImportWorkspaceImageMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportWorkspaceImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportWorkspaceImage",
-	}
 }

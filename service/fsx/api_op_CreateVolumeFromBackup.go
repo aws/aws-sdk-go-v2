@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon FSx for NetApp ONTAP volume from an existing Amazon FSx
@@ -54,6 +54,30 @@ type CreateVolumeFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeFromBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeFromBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeFromBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_BackupId, *v.BackupId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateVolumeFromBackupRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateVolumeFromBackupRequest_Tags, v.Tags)
+}
+
 type CreateVolumeFromBackupOutput struct {
 
 	// Returned after a successful CreateVolumeFromBackup API operation, describing
@@ -66,65 +90,44 @@ type CreateVolumeFromBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeFromBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeFromBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeFromBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Volume != nil {
+		s.WriteStruct(schemas.CreateVolumeFromBackupResponse_Volume)
+		v.Volume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVolumeFromBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVolumeFromBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVolumeFromBackupResponse_Volume:
+			v.Volume = &types.Volume{}
+			return v.Volume.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolumeFromBackup, schemas.CreateVolumeFromBackupRequest, schemas.CreateVolumeFromBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVolumeFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolumeFromBackup, schemas.CreateVolumeFromBackupRequest, schemas.CreateVolumeFromBackupResponse), output: &CreateVolumeFromBackupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVolumeFromBackup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVolumeFromBackup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +137,6 @@ func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateVolumeFromBackupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVolumeFromBackup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +149,6 @@ func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +188,4 @@ func (m *idempotencyToken_initializeOpCreateVolumeFromBackup) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateVolumeFromBackupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVolumeFromBackup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateVolumeFromBackup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVolumeFromBackup",
-	}
 }

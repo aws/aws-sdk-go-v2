@@ -1,0 +1,5 @@
+POST /findingHistory/get
+
+Content-Type: application/json
+
+{"EndTime":"2000-01-01T00:00:00Z","FindingIdentifier":{"Id":"__Id__","ProductArn":"__ProductArn__"},"MaxResults":1,"NextToken":"__NextToken__","StartTime":"2000-01-01T00:00:00Z"}

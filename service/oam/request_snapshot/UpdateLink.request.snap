@@ -1,0 +1,5 @@
+POST /UpdateLink
+
+Content-Type: application/json
+
+{"Identifier":"__Identifier__","IncludeTags":true,"LinkConfiguration":{"LogGroupConfiguration":{"Filter":"__Filter__"},"MetricConfiguration":{"Filter":"__Filter__"}},"ResourceTypes":["AWS::CloudWatch::Metric","AWS::CloudWatch::Metric"]}

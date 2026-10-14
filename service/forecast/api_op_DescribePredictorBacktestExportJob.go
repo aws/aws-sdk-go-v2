@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,6 +47,18 @@ type DescribePredictorBacktestExportJobInput struct {
 	PredictorBacktestExportJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePredictorBacktestExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePredictorBacktestExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePredictorBacktestExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorBacktestExportJobArn != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn, *v.PredictorBacktestExportJobArn)
+	}
 }
 
 type DescribePredictorBacktestExportJobOutput struct {
@@ -106,77 +117,98 @@ type DescribePredictorBacktestExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePredictorBacktestExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePredictorBacktestExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePredictorBacktestExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePredictorBacktestExportJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.DescribePredictorBacktestExportJobResponse_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_Format, *v.Format)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribePredictorBacktestExportJobResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_Message, *v.Message)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_PredictorArn, *v.PredictorArn)
+	}
+	if v.PredictorBacktestExportJobArn != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn, *v.PredictorBacktestExportJobArn)
+	}
+	if v.PredictorBacktestExportJobName != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName, *v.PredictorBacktestExportJobName)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribePredictorBacktestExportJobResponse_Status, *v.Status)
+	}
+}
+func (v *DescribePredictorBacktestExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePredictorBacktestExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePredictorBacktestExportJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePredictorBacktestExportJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePredictorBacktestExportJobResponse_Destination:
+			v.Destination = &types.DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.DescribePredictorBacktestExportJobResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_Format, v.Format)
+		case schemas.DescribePredictorBacktestExportJobResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePredictorBacktestExportJobResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribePredictorBacktestExportJobResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_Message, v.Message)
+		case schemas.DescribePredictorBacktestExportJobResponse_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_PredictorArn, v.PredictorArn)
+		case schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn:
+			v.PredictorBacktestExportJobArn = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn, v.PredictorBacktestExportJobArn)
+		case schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName:
+			v.PredictorBacktestExportJobName = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_PredictorBacktestExportJobName, v.PredictorBacktestExportJobName)
+		case schemas.DescribePredictorBacktestExportJobResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribePredictorBacktestExportJobResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePredictorBacktestExportJob, schemas.DescribePredictorBacktestExportJobRequest, schemas.DescribePredictorBacktestExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePredictorBacktestExportJob, schemas.DescribePredictorBacktestExportJobRequest, schemas.DescribePredictorBacktestExportJobResponse), output: &DescribePredictorBacktestExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePredictorBacktestExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePredictorBacktestExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePredictorBacktestExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +223,8 @@ func (c *Client) addOperationDescribePredictorBacktestExportJobMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePredictorBacktestExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePredictorBacktestExportJob",
-	}
 }

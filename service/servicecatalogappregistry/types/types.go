@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -40,6 +42,64 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Application) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Application)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationTagDefinition(s, schemas.Application_applicationTag, v.ApplicationTag)
+	if v.Arn != nil {
+		s.WriteString(schemas.Application_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Application_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Application_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Application_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.Application_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Application_name, *v.Name)
+	}
+	serializeTags(s, schemas.Application_tags, v.Tags)
+}
+func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Application_applicationTag:
+			return deserializeApplicationTagDefinition(d, schemas.Application_applicationTag, &v.ApplicationTag)
+		case schemas.Application_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Application_arn, v.Arn)
+		case schemas.Application_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Application_creationTime, v.CreationTime)
+		case schemas.Application_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Application_description, v.Description)
+		case schemas.Application_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Application_id, v.Id)
+		case schemas.Application_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.Application_lastUpdateTime, v.LastUpdateTime)
+		case schemas.Application_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Application_name, v.Name)
+		case schemas.Application_tags:
+			return deserializeTags(d, schemas.Application_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Summary of a Amazon Web Services Service Catalog AppRegistry application.
 type ApplicationSummary struct {
 
@@ -66,6 +126,58 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ApplicationSummary_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ApplicationSummary_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ApplicationSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApplicationSummary_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ApplicationSummary_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApplicationSummary_name, *v.Name)
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ApplicationSummary_arn, v.Arn)
+		case schemas.ApplicationSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationSummary_creationTime, v.CreationTime)
+		case schemas.ApplicationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ApplicationSummary_description, v.Description)
+		case schemas.ApplicationSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApplicationSummary_id, v.Id)
+		case schemas.ApplicationSummary_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationSummary_lastUpdateTime, v.LastUpdateTime)
+		case schemas.ApplicationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApplicationSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The result of the application tag that's applied to a resource.
 type ApplicationTagResult struct {
 
@@ -86,6 +198,47 @@ type ApplicationTagResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationTagResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationTagResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationTagResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationTagStatus != "" {
+		s.WriteString(schemas.ApplicationTagResult_applicationTagStatus, string(v.ApplicationTagStatus))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ApplicationTagResult_errorMessage, *v.ErrorMessage)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ApplicationTagResult_nextToken, *v.NextToken)
+	}
+	serializeResourcesList(s, schemas.ApplicationTagResult_resources, v.Resources)
+}
+func (v *ApplicationTagResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationTagResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationTagResult_applicationTagStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationTagResult_applicationTagStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationTagStatus = ApplicationTagStatus(ev)
+			return nil
+		case schemas.ApplicationTagResult_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ApplicationTagResult_errorMessage, v.ErrorMessage)
+		case schemas.ApplicationTagResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ApplicationTagResult_nextToken, v.NextToken)
+		case schemas.ApplicationTagResult_resources:
+			return deserializeResourcesList(d, schemas.ApplicationTagResult_resources, &v.Resources)
+		}
+		return nil
+	})
+}
+
 // Includes all of the AppRegistry settings.
 type AppRegistryConfiguration struct {
 
@@ -93,6 +246,30 @@ type AppRegistryConfiguration struct {
 	TagQueryConfiguration *TagQueryConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *AppRegistryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppRegistryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppRegistryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagQueryConfiguration != nil {
+		s.WriteStruct(schemas.AppRegistryConfiguration_tagQueryConfiguration)
+		v.TagQueryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AppRegistryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppRegistryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppRegistryConfiguration_tagQueryConfiguration:
+			v.TagQueryConfiguration = &TagQueryConfiguration{}
+			return v.TagQueryConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a Amazon Web Services Service Catalog AppRegistry attribute group
@@ -126,6 +303,61 @@ type AttributeGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AttributeGroup_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AttributeGroup_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AttributeGroup_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AttributeGroup_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.AttributeGroup_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AttributeGroup_name, *v.Name)
+	}
+	serializeTags(s, schemas.AttributeGroup_tags, v.Tags)
+}
+func (v *AttributeGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeGroup_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AttributeGroup_arn, v.Arn)
+		case schemas.AttributeGroup_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AttributeGroup_creationTime, v.CreationTime)
+		case schemas.AttributeGroup_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AttributeGroup_description, v.Description)
+		case schemas.AttributeGroup_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AttributeGroup_id, v.Id)
+		case schemas.AttributeGroup_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.AttributeGroup_lastUpdateTime, v.LastUpdateTime)
+		case schemas.AttributeGroup_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AttributeGroup_name, v.Name)
+		case schemas.AttributeGroup_tags:
+			return deserializeTags(d, schemas.AttributeGroup_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The details related to a specific AttributeGroup.
 type AttributeGroupDetails struct {
 
@@ -145,6 +377,46 @@ type AttributeGroupDetails struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeGroupDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeGroupDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeGroupDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AttributeGroupDetails_arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.AttributeGroupDetails_createdBy, *v.CreatedBy)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AttributeGroupDetails_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AttributeGroupDetails_name, *v.Name)
+	}
+}
+func (v *AttributeGroupDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeGroupDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeGroupDetails_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AttributeGroupDetails_arn, v.Arn)
+		case schemas.AttributeGroupDetails_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.AttributeGroupDetails_createdBy, v.CreatedBy)
+		case schemas.AttributeGroupDetails_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AttributeGroupDetails_id, v.Id)
+		case schemas.AttributeGroupDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AttributeGroupDetails_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
@@ -177,6 +449,64 @@ type AttributeGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AttributeGroupSummary_arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.AttributeGroupSummary_createdBy, *v.CreatedBy)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AttributeGroupSummary_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AttributeGroupSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AttributeGroupSummary_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.AttributeGroupSummary_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AttributeGroupSummary_name, *v.Name)
+	}
+}
+func (v *AttributeGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeGroupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AttributeGroupSummary_arn, v.Arn)
+		case schemas.AttributeGroupSummary_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.AttributeGroupSummary_createdBy, v.CreatedBy)
+		case schemas.AttributeGroupSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AttributeGroupSummary_creationTime, v.CreationTime)
+		case schemas.AttributeGroupSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AttributeGroupSummary_description, v.Description)
+		case schemas.AttributeGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AttributeGroupSummary_id, v.Id)
+		case schemas.AttributeGroupSummary_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.AttributeGroupSummary_lastUpdateTime, v.LastUpdateTime)
+		case schemas.AttributeGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AttributeGroupSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The information about the service integration.
 type Integrations struct {
 
@@ -187,6 +517,38 @@ type Integrations struct {
 	ResourceGroup *ResourceGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *Integrations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Integrations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Integrations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationTagResourceGroup != nil {
+		s.WriteStruct(schemas.Integrations_applicationTagResourceGroup)
+		v.ApplicationTagResourceGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceGroup != nil {
+		s.WriteStruct(schemas.Integrations_resourceGroup)
+		v.ResourceGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Integrations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Integrations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Integrations_applicationTagResourceGroup:
+			v.ApplicationTagResourceGroup = &ResourceGroup{}
+			return v.ApplicationTagResourceGroup.Deserialize(d)
+		case schemas.Integrations_resourceGroup:
+			v.ResourceGroup = &ResourceGroup{}
+			return v.ResourceGroup.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The information about the resource.
@@ -207,6 +569,48 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Resource_arn, *v.Arn)
+	}
+	if v.AssociationTime != nil {
+		s.WriteTime(schemas.Resource_associationTime, *v.AssociationTime)
+	}
+	if v.Integrations != nil {
+		s.WriteStruct(schemas.Resource_integrations)
+		v.Integrations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Resource_name, *v.Name)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Resource_arn, v.Arn)
+		case schemas.Resource_associationTime:
+			v.AssociationTime = new(time.Time)
+			return d.ReadTime(schemas.Resource_associationTime, v.AssociationTime)
+		case schemas.Resource_integrations:
+			v.Integrations = &ResourceIntegrations{}
+			return v.Integrations.Deserialize(d)
+		case schemas.Resource_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Resource_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The details related to the resource.
 type ResourceDetails struct {
 
@@ -214,6 +618,28 @@ type ResourceDetails struct {
 	TagValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagValue != nil {
+		s.WriteString(schemas.ResourceDetails_tagValue, *v.TagValue)
+	}
+}
+func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceDetails_tagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.ResourceDetails_tagValue, v.TagValue)
+		}
+		return nil
+	})
 }
 
 // The information about the resource group integration.
@@ -245,6 +671,44 @@ type ResourceGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceGroup_arn, *v.Arn)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ResourceGroup_errorMessage, *v.ErrorMessage)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ResourceGroup_state, string(v.State))
+	}
+}
+func (v *ResourceGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceGroup_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceGroup_arn, v.Arn)
+		case schemas.ResourceGroup_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ResourceGroup_errorMessage, v.ErrorMessage)
+		case schemas.ResourceGroup_state:
+			var ev string
+			if err := d.ReadString(schemas.ResourceGroup_state, &ev); err != nil {
+				return err
+			}
+			v.State = ResourceGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The information about the resource.
 type ResourceInfo struct {
 
@@ -266,6 +730,55 @@ type ResourceInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceInfo_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceInfo_name, *v.Name)
+	}
+	serializeOptions(s, schemas.ResourceInfo_options, v.Options)
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.ResourceInfo_resourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResourceInfo_resourceType, string(v.ResourceType))
+	}
+}
+func (v *ResourceInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceInfo_arn, v.Arn)
+		case schemas.ResourceInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceInfo_name, v.Name)
+		case schemas.ResourceInfo_options:
+			return deserializeOptions(d, schemas.ResourceInfo_options, &v.Options)
+		case schemas.ResourceInfo_resourceDetails:
+			v.ResourceDetails = &ResourceDetails{}
+			return v.ResourceDetails.Deserialize(d)
+		case schemas.ResourceInfo_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceInfo_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The service integration information about the resource.
 type ResourceIntegrations struct {
 
@@ -273,6 +786,30 @@ type ResourceIntegrations struct {
 	ResourceGroup *ResourceGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceIntegrations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceIntegrations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceIntegrations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceGroup != nil {
+		s.WriteStruct(schemas.ResourceIntegrations_resourceGroup)
+		v.ResourceGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResourceIntegrations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceIntegrations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceIntegrations_resourceGroup:
+			v.ResourceGroup = &ResourceGroup{}
+			return v.ResourceGroup.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The resource in a list of resources.
@@ -293,6 +830,46 @@ type ResourcesListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourcesListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcesListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcesListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ResourcesListItem_errorMessage, *v.ErrorMessage)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourcesListItem_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourcesListItem_resourceType, *v.ResourceType)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResourcesListItem_status, *v.Status)
+	}
+}
+func (v *ResourcesListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcesListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcesListItem_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ResourcesListItem_errorMessage, v.ErrorMessage)
+		case schemas.ResourcesListItem_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourcesListItem_resourceArn, v.ResourceArn)
+		case schemas.ResourcesListItem_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourcesListItem_resourceType, v.ResourceType)
+		case schemas.ResourcesListItem_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResourcesListItem_status, v.Status)
+		}
+		return nil
+	})
+}
+
 //	The definition of tagQuery . Specifies which resources are associated with an
 //
 // application.
@@ -302,6 +879,28 @@ type TagQueryConfiguration struct {
 	TagKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagQueryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagQueryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagQueryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagKey != nil {
+		s.WriteString(schemas.TagQueryConfiguration_tagKey, *v.TagKey)
+	}
+}
+func (v *TagQueryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagQueryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagQueryConfiguration_tagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.TagQueryConfiguration_tagKey, v.TagKey)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

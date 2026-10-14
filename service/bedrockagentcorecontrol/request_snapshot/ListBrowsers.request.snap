@@ -1,0 +1,3 @@
+POST /browsers?maxResults=1&nextToken=__NextToken__&type=SYSTEM
+
+

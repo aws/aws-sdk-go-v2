@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channel":"VOICE","NextToken":"__NextToken__","Segments":[{"Transcript":{"Content":"__Content__","ContentType":"__ContentType__","DisplayName":"__DisplayName__","Id":"__Id__","ParticipantId":"__ParticipantId__","ParticipantRole":"AGENT","Redaction":{"CharacterOffsets":[{"BeginOffsetChar":1,"EndOffsetChar":1},{"BeginOffsetChar":1,"EndOffsetChar":1}]},"Sentiment":"POSITIVE","Time":{"AbsoluteTime":"2000-01-01T00:00:00Z"}}},{"Transcript":{"Content":"__Content__","ContentType":"__ContentType__","DisplayName":"__DisplayName__","Id":"__Id__","ParticipantId":"__ParticipantId__","ParticipantRole":"AGENT","Redaction":{"CharacterOffsets":[{"BeginOffsetChar":1,"EndOffsetChar":1},{"BeginOffsetChar":1,"EndOffsetChar":1}]},"Sentiment":"POSITIVE","Time":{"AbsoluteTime":"2000-01-01T00:00:00Z"}}}],"Status":"IN_PROGRESS"}

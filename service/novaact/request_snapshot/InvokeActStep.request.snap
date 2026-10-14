@@ -1,0 +1,5 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRunId__/sessions/__SessionId__/acts/__ActId__/invoke-step/
+
+Content-Type: application/json
+
+{"callResults":[{"callId":"__CallId__","content":[{"text":"__CallResultContentMemberText__"},{"text":"__CallResultContentMemberText__"}]},{"callId":"__CallId__","content":[{"text":"__CallResultContentMemberText__"},{"text":"__CallResultContentMemberText__"}]}],"previousStepId":"__PreviousStepId__"}

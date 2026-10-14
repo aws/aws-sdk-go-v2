@@ -1,0 +1,5 @@
+POST /list-ms-teams-channel-configurations
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","TeamId":"__TeamId__"}

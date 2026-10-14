@@ -1,0 +1,3 @@
+GET /v1/accounts/__AwsAccountId__/knowledge-bases/__KnowledgeBaseId__
+
+

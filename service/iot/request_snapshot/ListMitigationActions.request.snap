@@ -1,0 +1,3 @@
+GET /mitigationactions/actions?actionType=UPDATE_DEVICE_CERTIFICATE&maxResults=1&nextToken=__NextToken__
+
+

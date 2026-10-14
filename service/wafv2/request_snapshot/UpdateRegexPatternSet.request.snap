@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.UpdateRegexPatternSet
+
+{"Description":"__Description__","Id":"__Id__","LockToken":"__LockToken__","Name":"__Name__","RegularExpressionList":[{"RegexString":"__RegexString__"},{"RegexString":"__RegexString__"}],"Scope":"CLOUDFRONT"}

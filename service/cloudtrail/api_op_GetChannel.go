@@ -4,14 +4,19 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns information about a specific channel.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns ...func(*Options)) (*GetChannelOutput, error) {
 	if params == nil {
 		params = &GetChannelInput{}
@@ -35,6 +40,18 @@ type GetChannelInput struct {
 	Channel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteString(schemas.GetChannelRequest_Channel, *v.Channel)
+	}
 }
 
 type GetChannelOutput struct {
@@ -72,77 +89,79 @@ type GetChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.GetChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	serializeDestinations(s, schemas.GetChannelResponse_Destinations, v.Destinations)
+	if v.IngestionStatus != nil {
+		s.WriteStruct(schemas.GetChannelResponse_IngestionStatus)
+		v.IngestionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetChannelResponse_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.GetChannelResponse_Source, *v.Source)
+	}
+	if v.SourceConfig != nil {
+		s.WriteStruct(schemas.GetChannelResponse_SourceConfig)
+		v.SourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.GetChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.GetChannelResponse_Destinations:
+			return deserializeDestinations(d, schemas.GetChannelResponse_Destinations, &v.Destinations)
+		case schemas.GetChannelResponse_IngestionStatus:
+			v.IngestionStatus = &types.IngestionStatus{}
+			return v.IngestionStatus.Deserialize(d)
+		case schemas.GetChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Name, v.Name)
+		case schemas.GetChannelResponse_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Source, v.Source)
+		case schemas.GetChannelResponse_SourceConfig:
+			v.SourceConfig = &types.SourceConfig{}
+			return v.SourceConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse), output: &GetChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +176,8 @@ func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetChannel",
-	}
 }

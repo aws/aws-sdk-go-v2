@@ -1,0 +1,5 @@
+POST /ChangeServerLifeCycleState
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","lifeCycle":{"state":"READY_FOR_TEST"},"sourceServerID":"__SourceServerID__"}

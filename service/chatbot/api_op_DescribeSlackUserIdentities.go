@@ -5,12 +5,8 @@ package chatbot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Slack user identities with a mapped role.
@@ -48,24 +44,6 @@ type DescribeSlackUserIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSlackUserIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeSlackUserIdentitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeSlackUserIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.DescribeSlackUserIdentitiesRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeSlackUserIdentitiesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeSlackUserIdentitiesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeSlackUserIdentitiesOutput struct {
 
 	//  An optional token returned from a prior request. Use this token for pagination
@@ -82,84 +60,26 @@ type DescribeSlackUserIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSlackUserIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeSlackUserIdentitiesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeSlackUserIdentitiesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeSlackUserIdentitiesResult_NextToken, v.NextToken)
-		case schemas.DescribeSlackUserIdentitiesResult_SlackUserIdentities:
-			return deserializeSlackUserIdentitiesList(d, schemas.DescribeSlackUserIdentitiesResult_SlackUserIdentities, &v.SlackUserIdentities)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeSlackUserIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSlackUserIdentities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackUserIdentities, schemas.DescribeSlackUserIdentitiesRequest, schemas.DescribeSlackUserIdentitiesResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSlackUserIdentities{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSlackUserIdentities, schemas.DescribeSlackUserIdentitiesRequest, schemas.DescribeSlackUserIdentitiesResult), output: &DescribeSlackUserIdentitiesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSlackUserIdentities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSlackUserIdentities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +92,6 @@ func (c *Client) addOperationDescribeSlackUserIdentitiesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +197,3 @@ type DescribeSlackUserIdentitiesAPIClient interface {
 }
 
 var _ DescribeSlackUserIdentitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeSlackUserIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSlackUserIdentities",
-	}
-}

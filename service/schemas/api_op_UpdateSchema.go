@@ -5,10 +5,10 @@ package schemas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,6 +57,33 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTokenId != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_ClientTokenId, *v.ClientTokenId)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_Description, *v.Description)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_SchemaName, *v.SchemaName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSchemaRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateSchemaOutput struct {
 
 	// The description of the schema.
@@ -89,65 +116,81 @@ type UpdateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_Description, *v.Description)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.UpdateSchemaResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	serializeTags(s, schemas.UpdateSchemaResponse_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_Type, *v.Type)
+	}
+	if v.VersionCreatedDate != nil {
+		s.WriteTime(schemas.UpdateSchemaResponse_VersionCreatedDate, *v.VersionCreatedDate)
+	}
+}
+func (v *UpdateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSchemaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_Description, v.Description)
+		case schemas.UpdateSchemaResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.UpdateSchemaResponse_LastModified, v.LastModified)
+		case schemas.UpdateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.UpdateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.UpdateSchemaResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.UpdateSchemaResponse_Tags:
+			return deserializeTags(d, schemas.UpdateSchemaResponse_Tags, &v.Tags)
+		case schemas.UpdateSchemaResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_Type, v.Type)
+		case schemas.UpdateSchemaResponse_VersionCreatedDate:
+			v.VersionCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateSchemaResponse_VersionCreatedDate, v.VersionCreatedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse), output: &UpdateSchemaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSchema"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -157,12 +200,6 @@ func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpUpdateSchemaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSchema(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +212,6 @@ func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -220,12 +251,4 @@ func (m *idempotencyToken_initializeOpUpdateSchema) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opUpdateSchemaMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateSchema{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateSchema(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSchema",
-	}
 }

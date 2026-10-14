@@ -5,12 +5,8 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation allows a search on TABLE resources by LFTag s. This will be used
@@ -54,25 +50,6 @@ type SearchTablesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchTablesByLFTagsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchTablesByLFTagsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchTablesByLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.SearchTablesByLFTagsRequest_CatalogId, *v.CatalogId)
-	}
-	serializeExpression(s, schemas.SearchTablesByLFTagsRequest_Expression, v.Expression)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchTablesByLFTagsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchTablesByLFTagsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type SearchTablesByLFTagsOutput struct {
 
 	// A continuation token, present if the current list segment is not the last. On
@@ -89,87 +66,29 @@ type SearchTablesByLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchTablesByLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchTablesByLFTagsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchTablesByLFTagsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchTablesByLFTagsResponse_NextToken, v.NextToken)
-		case schemas.SearchTablesByLFTagsResponse_TableList:
-			return deserializeTableLFTagsList(d, schemas.SearchTablesByLFTagsResponse_TableList, &v.TableList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTablesByLFTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTablesByLFTags, schemas.SearchTablesByLFTagsRequest, schemas.SearchTablesByLFTagsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTablesByLFTags{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTablesByLFTags, schemas.SearchTablesByLFTagsRequest, schemas.SearchTablesByLFTagsResponse), output: &SearchTablesByLFTagsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchTablesByLFTags"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchTablesByLFTagsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchTablesByLFTags(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +101,6 @@ func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +202,3 @@ type SearchTablesByLFTagsAPIClient interface {
 }
 
 var _ SearchTablesByLFTagsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchTablesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchTablesByLFTags",
-	}
-}

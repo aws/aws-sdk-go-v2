@@ -5,10 +5,10 @@ package codepipeline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a summary of all CodePipeline action types associated with your account.
@@ -43,6 +43,24 @@ type ListActionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionOwnerFilter != "" {
+		s.WriteString(schemas.ListActionTypesInput_actionOwnerFilter, string(v.ActionOwnerFilter))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionTypesInput_nextToken, *v.NextToken)
+	}
+	if v.RegionFilter != nil {
+		s.WriteString(schemas.ListActionTypesInput_regionFilter, *v.RegionFilter)
+	}
+}
+
 // Represents the output of a ListActionTypes action.
 type ListActionTypesOutput struct {
 
@@ -62,74 +80,48 @@ type ListActionTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionTypeList(s, schemas.ListActionTypesOutput_actionTypes, v.ActionTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionTypesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActionTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActionTypesOutput_actionTypes:
+			return deserializeActionTypeList(d, schemas.ListActionTypesOutput_actionTypes, &v.ActionTypes)
+		case schemas.ListActionTypesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActionTypesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionTypes, schemas.ListActionTypesInput, schemas.ListActionTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListActionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionTypes, schemas.ListActionTypesInput, schemas.ListActionTypesOutput), output: &ListActionTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListActionTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListActionTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListActionTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +134,6 @@ func (c *Client) addOperationListActionTypesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,11 +222,3 @@ type ListActionTypesAPIClient interface {
 }
 
 var _ ListActionTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListActionTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListActionTypes",
-	}
-}

@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the wireless gateway tasks definitions registered to your AWS account.
@@ -45,24 +40,6 @@ type ListWirelessGatewayTaskDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWirelessGatewayTaskDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWirelessGatewayTaskDefinitionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWirelessGatewayTaskDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListWirelessGatewayTaskDefinitionsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWirelessGatewayTaskDefinitionsRequest_NextToken, *v.NextToken)
-	}
-	if v.TaskDefinitionType != "" {
-		s.WriteString(schemas.ListWirelessGatewayTaskDefinitionsRequest_TaskDefinitionType, string(v.TaskDefinitionType))
-	}
-}
-
 type ListWirelessGatewayTaskDefinitionsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -78,84 +55,26 @@ type ListWirelessGatewayTaskDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWirelessGatewayTaskDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWirelessGatewayTaskDefinitionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWirelessGatewayTaskDefinitionsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWirelessGatewayTaskDefinitionsResponse_NextToken, v.NextToken)
-		case schemas.ListWirelessGatewayTaskDefinitionsResponse_TaskDefinitions:
-			return deserializeWirelessGatewayTaskDefinitionList(d, schemas.ListWirelessGatewayTaskDefinitionsResponse_TaskDefinitions, &v.TaskDefinitions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWirelessGatewayTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWirelessGatewayTaskDefinitions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessGatewayTaskDefinitions, schemas.ListWirelessGatewayTaskDefinitionsRequest, schemas.ListWirelessGatewayTaskDefinitionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWirelessGatewayTaskDefinitions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessGatewayTaskDefinitions, schemas.ListWirelessGatewayTaskDefinitionsRequest, schemas.ListWirelessGatewayTaskDefinitionsResponse), output: &ListWirelessGatewayTaskDefinitionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWirelessGatewayTaskDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWirelessGatewayTaskDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +89,8 @@ func (c *Client) addOperationListWirelessGatewayTaskDefinitionsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListWirelessGatewayTaskDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListWirelessGatewayTaskDefinitions",
-	}
 }

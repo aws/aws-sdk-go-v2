@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.UpdateProfile
+
+{"businessName":"__BusinessName__","email":"__Email__","name":"__Name__","phone":"__Phone__","profileId":"__ProfileId__"}

@@ -1,0 +1,5 @@
+POST /StopStream
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__"}

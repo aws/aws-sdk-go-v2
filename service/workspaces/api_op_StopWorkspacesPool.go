@@ -4,16 +4,22 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On December 31, 2027, Amazon Web Services will end
+// support for Amazon WorkSpaces Pools. After December 31, 2027, you will no longer
+// be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools
+// resources. For more information, see [Amazon WorkSpaces Pools end of support].
+//
 // Stops the specified pool.
 //
 // You cannot stop a WorkSpace pool unless it has a running mode of AutoStop and a
 // state of AVAILABLE , IMPAIRED , UNHEALTHY , or ERROR .
+//
+// [Amazon WorkSpaces Pools end of support]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
 func (c *Client) StopWorkspacesPool(ctx context.Context, params *StopWorkspacesPoolInput, optFns ...func(*Options)) (*StopWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &StopWorkspacesPoolInput{}
@@ -39,6 +45,18 @@ type StopWorkspacesPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkspacesPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopWorkspacesPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolId != nil {
+		s.WriteString(schemas.StopWorkspacesPoolRequest_PoolId, *v.PoolId)
+	}
+}
+
 type StopWorkspacesPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,77 +64,42 @@ type StopWorkspacesPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkspacesPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopWorkspacesPoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkspacesPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopWorkspacesPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopWorkspacesPoolResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopWorkspacesPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkspacesPool, schemas.StopWorkspacesPoolRequest, schemas.StopWorkspacesPoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkspacesPool, schemas.StopWorkspacesPoolRequest, schemas.StopWorkspacesPoolResult), output: &StopWorkspacesPoolOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopWorkspacesPool{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopWorkspacesPool"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopWorkspacesPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopWorkspacesPool(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +114,8 @@ func (c *Client) addOperationStopWorkspacesPoolMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopWorkspacesPool(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopWorkspacesPool",
-	}
 }

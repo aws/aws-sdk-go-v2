@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an OAuthClientApplication.
@@ -41,6 +40,21 @@ type DeleteOAuthClientApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOAuthClientApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOAuthClientApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOAuthClientApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteOAuthClientApplicationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.OAuthClientApplicationId != nil {
+		s.WriteString(schemas.DeleteOAuthClientApplicationRequest_OAuthClientApplicationId, *v.OAuthClientApplicationId)
+	}
+}
+
 type DeleteOAuthClientApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the OAuthClientApplication that you deleted.
@@ -62,77 +76,65 @@ type DeleteOAuthClientApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOAuthClientApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOAuthClientApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOAuthClientApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteOAuthClientApplicationResponse_Arn, *v.Arn)
+	}
+	if v.OAuthClientApplicationId != nil {
+		s.WriteString(schemas.DeleteOAuthClientApplicationResponse_OAuthClientApplicationId, *v.OAuthClientApplicationId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteOAuthClientApplicationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteOAuthClientApplicationResponse_Status, v.Status)
+	}
+}
+func (v *DeleteOAuthClientApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOAuthClientApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOAuthClientApplicationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteOAuthClientApplicationResponse_Arn, v.Arn)
+		case schemas.DeleteOAuthClientApplicationResponse_OAuthClientApplicationId:
+			v.OAuthClientApplicationId = new(string)
+			return d.ReadString(schemas.DeleteOAuthClientApplicationResponse_OAuthClientApplicationId, v.OAuthClientApplicationId)
+		case schemas.DeleteOAuthClientApplicationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteOAuthClientApplicationResponse_RequestId, v.RequestId)
+		case schemas.DeleteOAuthClientApplicationResponse_Status:
+			return d.ReadInt32(schemas.DeleteOAuthClientApplicationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOAuthClientApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOAuthClientApplication, schemas.DeleteOAuthClientApplicationRequest, schemas.DeleteOAuthClientApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOAuthClientApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOAuthClientApplication, schemas.DeleteOAuthClientApplicationRequest, schemas.DeleteOAuthClientApplicationResponse), output: &DeleteOAuthClientApplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOAuthClientApplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOAuthClientApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteOAuthClientApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOAuthClientApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +149,8 @@ func (c *Client) addOperationDeleteOAuthClientApplicationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteOAuthClientApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteOAuthClientApplication",
-	}
 }

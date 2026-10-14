@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/documentation/parts
+
+Accept: application/json
+Content-Type: application/json
+
+{"location":{"method":"__Method__","name":"__Name__","path":"__Path__","statusCode":"__StatusCode__","type":"API"},"properties":"__Properties__"}

@@ -5,10 +5,10 @@ package outposts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A list of Amazon EC2 instances, belonging to all accounts, running on the
@@ -56,6 +56,28 @@ type ListAssetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.ListAssetInstancesInput_AccountIdFilter, v.AccountIdFilter)
+	serializeAssetIdList(s, schemas.ListAssetInstancesInput_AssetIdFilter, v.AssetIdFilter)
+	serializeAWSServiceNameList(s, schemas.ListAssetInstancesInput_AwsServiceFilter, v.AwsServiceFilter)
+	serializeOutpostInstanceTypeList(s, schemas.ListAssetInstancesInput_InstanceTypeFilter, v.InstanceTypeFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetInstancesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetInstancesInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.ListAssetInstancesInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type ListAssetInstancesOutput struct {
 
 	// List of instances owned by all accounts on the Outpost. Does not include Amazon
@@ -71,77 +93,51 @@ type ListAssetInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetInstanceList(s, schemas.ListAssetInstancesOutput_AssetInstances, v.AssetInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetInstancesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetInstancesOutput_AssetInstances:
+			return deserializeAssetInstanceList(d, schemas.ListAssetInstancesOutput_AssetInstances, &v.AssetInstances)
+		case schemas.ListAssetInstancesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetInstancesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetInstances, schemas.ListAssetInstancesInput, schemas.ListAssetInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetInstances, schemas.ListAssetInstancesInput, schemas.ListAssetInstancesOutput), output: &ListAssetInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssetInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssetInstancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssetInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +150,6 @@ func (c *Client) addOperationListAssetInstancesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +251,3 @@ type ListAssetInstancesAPIClient interface {
 }
 
 var _ ListAssetInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAssetInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssetInstances",
-	}
-}

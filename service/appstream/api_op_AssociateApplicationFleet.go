@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the specified application with the specified fleet. This is only
@@ -43,6 +42,21 @@ type AssociateApplicationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.AssociateApplicationFleetRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.AssociateApplicationFleetRequest_FleetName, *v.FleetName)
+	}
+}
+
 type AssociateApplicationFleetOutput struct {
 
 	// If fleet name is specified, this returns the list of applications that are
@@ -56,77 +70,53 @@ type AssociateApplicationFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationFleetAssociation != nil {
+		s.WriteStruct(schemas.AssociateApplicationFleetResult_ApplicationFleetAssociation)
+		v.ApplicationFleetAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateApplicationFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateApplicationFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateApplicationFleetResult_ApplicationFleetAssociation:
+			v.ApplicationFleetAssociation = &types.ApplicationFleetAssociation{}
+			return v.ApplicationFleetAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateApplicationFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplicationFleet, schemas.AssociateApplicationFleetRequest, schemas.AssociateApplicationFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateApplicationFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplicationFleet, schemas.AssociateApplicationFleetRequest, schemas.AssociateApplicationFleetResult), output: &AssociateApplicationFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateApplicationFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateApplicationFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateApplicationFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateApplicationFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +131,8 @@ func (c *Client) addOperationAssociateApplicationFleetMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateApplicationFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateApplicationFleet",
-	}
 }

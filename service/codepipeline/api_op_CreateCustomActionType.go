@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new custom action that can be used in all pipelines associated with
@@ -75,6 +74,41 @@ type CreateCustomActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomActionTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomActionTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomActionTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.CreateCustomActionTypeInput_category, string(v.Category))
+	}
+	serializeActionConfigurationPropertyList(s, schemas.CreateCustomActionTypeInput_configurationProperties, v.ConfigurationProperties)
+	if v.InputArtifactDetails != nil {
+		s.WriteStruct(schemas.CreateCustomActionTypeInput_inputArtifactDetails)
+		v.InputArtifactDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputArtifactDetails != nil {
+		s.WriteStruct(schemas.CreateCustomActionTypeInput_outputArtifactDetails)
+		v.OutputArtifactDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.CreateCustomActionTypeInput_provider, *v.Provider)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.CreateCustomActionTypeInput_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCustomActionTypeInput_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateCustomActionTypeInput_version, *v.Version)
+	}
+}
+
 // Represents the output of a CreateCustomActionType operation.
 type CreateCustomActionTypeOutput struct {
 
@@ -92,77 +126,53 @@ type CreateCustomActionTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomActionTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomActionTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomActionTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != nil {
+		s.WriteStruct(schemas.CreateCustomActionTypeOutput_actionType)
+		v.ActionType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCustomActionTypeOutput_tags, v.Tags)
+}
+func (v *CreateCustomActionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomActionTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomActionTypeOutput_actionType:
+			v.ActionType = &types.ActionType{}
+			return v.ActionType.Deserialize(d)
+		case schemas.CreateCustomActionTypeOutput_tags:
+			return deserializeTagList(d, schemas.CreateCustomActionTypeOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomActionType, schemas.CreateCustomActionTypeInput, schemas.CreateCustomActionTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomActionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomActionType, schemas.CreateCustomActionTypeInput, schemas.CreateCustomActionTypeOutput), output: &CreateCustomActionTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomActionType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomActionType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCustomActionTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomActionType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +187,8 @@ func (c *Client) addOperationCreateCustomActionTypeMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCustomActionType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomActionType",
-	}
 }

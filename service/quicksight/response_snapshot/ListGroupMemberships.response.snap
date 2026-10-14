@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupMemberList":[{"Arn":"__Arn__","MemberName":"__MemberName__"},{"Arn":"__Arn__","MemberName":"__MemberName__"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

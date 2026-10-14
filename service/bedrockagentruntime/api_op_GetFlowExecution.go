@@ -4,11 +4,10 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +46,24 @@ type GetFlowExecutionInput struct {
 	FlowIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFlowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionIdentifier != nil {
+		s.WriteString(schemas.GetFlowExecutionRequest_executionIdentifier, *v.ExecutionIdentifier)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.GetFlowExecutionRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetFlowExecutionRequest_flowIdentifier, *v.FlowIdentifier)
+	}
 }
 
 type GetFlowExecutionOutput struct {
@@ -97,77 +114,91 @@ type GetFlowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetFlowExecutionResponse_endedAt, *v.EndedAt)
+	}
+	serializeFlowExecutionErrors(s, schemas.GetFlowExecutionResponse_errors, v.Errors)
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.GetFlowExecutionResponse_executionArn, *v.ExecutionArn)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.GetFlowExecutionResponse_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetFlowExecutionResponse_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.FlowVersion != nil {
+		s.WriteString(schemas.GetFlowExecutionResponse_flowVersion, *v.FlowVersion)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetFlowExecutionResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFlowExecutionResponse_status, string(v.Status))
+	}
+}
+func (v *GetFlowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowExecutionResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowExecutionResponse_endedAt, v.EndedAt)
+		case schemas.GetFlowExecutionResponse_errors:
+			return deserializeFlowExecutionErrors(d, schemas.GetFlowExecutionResponse_errors, &v.Errors)
+		case schemas.GetFlowExecutionResponse_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.GetFlowExecutionResponse_executionArn, v.ExecutionArn)
+		case schemas.GetFlowExecutionResponse_flowAliasIdentifier:
+			v.FlowAliasIdentifier = new(string)
+			return d.ReadString(schemas.GetFlowExecutionResponse_flowAliasIdentifier, v.FlowAliasIdentifier)
+		case schemas.GetFlowExecutionResponse_flowIdentifier:
+			v.FlowIdentifier = new(string)
+			return d.ReadString(schemas.GetFlowExecutionResponse_flowIdentifier, v.FlowIdentifier)
+		case schemas.GetFlowExecutionResponse_flowVersion:
+			v.FlowVersion = new(string)
+			return d.ReadString(schemas.GetFlowExecutionResponse_flowVersion, v.FlowVersion)
+		case schemas.GetFlowExecutionResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowExecutionResponse_startedAt, v.StartedAt)
+		case schemas.GetFlowExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFlowExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowExecution, schemas.GetFlowExecutionRequest, schemas.GetFlowExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowExecution, schemas.GetFlowExecutionRequest, schemas.GetFlowExecutionResponse), output: &GetFlowExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlowExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFlowExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFlowExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +213,8 @@ func (c *Client) addOperationGetFlowExecutionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFlowExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFlowExecution",
-	}
 }

@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an EKS Anywhere subscription. When a subscription is created, it is a
@@ -76,6 +76,36 @@ type CreateEksAnywhereSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEksAnywhereSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEksAnywhereSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEksAnywhereSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRenew != false {
+		s.WriteBool(schemas.CreateEksAnywhereSubscriptionRequest_autoRenew, v.AutoRenew)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LicenseQuantity != 0 {
+		s.WriteInt32(schemas.CreateEksAnywhereSubscriptionRequest_licenseQuantity, v.LicenseQuantity)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_licenseType, string(v.LicenseType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateEksAnywhereSubscriptionRequest_tags, v.Tags)
+	if v.Term != nil {
+		s.WriteStruct(schemas.CreateEksAnywhereSubscriptionRequest_term)
+		v.Term.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEksAnywhereSubscriptionOutput struct {
 
 	// The full description of the subscription.
@@ -87,65 +117,44 @@ type CreateEksAnywhereSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEksAnywhereSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEksAnywhereSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEksAnywhereSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscription != nil {
+		s.WriteStruct(schemas.CreateEksAnywhereSubscriptionResponse_subscription)
+		v.Subscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEksAnywhereSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEksAnywhereSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEksAnywhereSubscriptionResponse_subscription:
+			v.Subscription = &types.EksAnywhereSubscription{}
+			return v.Subscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEksAnywhereSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEksAnywhereSubscription, schemas.CreateEksAnywhereSubscriptionRequest, schemas.CreateEksAnywhereSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEksAnywhereSubscription, schemas.CreateEksAnywhereSubscriptionRequest, schemas.CreateEksAnywhereSubscriptionResponse), output: &CreateEksAnywhereSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEksAnywhereSubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEksAnywhereSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -155,12 +164,6 @@ func (c *Client) addOperationCreateEksAnywhereSubscriptionMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpCreateEksAnywhereSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEksAnywhereSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +176,6 @@ func (c *Client) addOperationCreateEksAnywhereSubscriptionMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +215,4 @@ func (m *idempotencyToken_initializeOpCreateEksAnywhereSubscription) HandleIniti
 }
 func addIdempotencyToken_opCreateEksAnywhereSubscriptionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEksAnywhereSubscription{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEksAnywhereSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEksAnywhereSubscription",
-	}
 }

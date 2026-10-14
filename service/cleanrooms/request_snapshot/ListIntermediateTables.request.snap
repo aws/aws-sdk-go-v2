@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/intermediateTables?maxResults=1&nextToken=__NextToken__
+
+

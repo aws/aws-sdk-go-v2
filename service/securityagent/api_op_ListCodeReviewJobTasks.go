@@ -5,12 +5,8 @@ package securityagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of task summaries for the specified code review job,
@@ -58,33 +54,6 @@ type ListCodeReviewJobTasksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeReviewJobTasksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCodeReviewJobTasksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCodeReviewJobTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListCodeReviewJobTasksInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.CategoryName != nil {
-		s.WriteString(schemas.ListCodeReviewJobTasksInput_categoryName, *v.CategoryName)
-	}
-	if v.CodeReviewJobId != nil {
-		s.WriteString(schemas.ListCodeReviewJobTasksInput_codeReviewJobId, *v.CodeReviewJobId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCodeReviewJobTasksInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCodeReviewJobTasksInput_nextToken, *v.NextToken)
-	}
-	if v.StepName != "" {
-		s.WriteString(schemas.ListCodeReviewJobTasksInput_stepName, string(v.StepName))
-	}
-}
-
 // Output for the ListCodeReviewJobTasks operation.
 type ListCodeReviewJobTasksOutput struct {
 
@@ -102,87 +71,29 @@ type ListCodeReviewJobTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeReviewJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCodeReviewJobTasksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries:
-			return deserializeCodeReviewJobTaskSummaryList(d, schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries, &v.CodeReviewJobTaskSummaries)
-		case schemas.ListCodeReviewJobTasksOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCodeReviewJobTasksOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCodeReviewJobTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeReviewJobTasks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviewJobTasks, schemas.ListCodeReviewJobTasksInput, schemas.ListCodeReviewJobTasksOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeReviewJobTasks{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviewJobTasks, schemas.ListCodeReviewJobTasksInput, schemas.ListCodeReviewJobTasksOutput), output: &ListCodeReviewJobTasksOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodeReviewJobTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCodeReviewJobTasksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCodeReviewJobTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +106,6 @@ func (c *Client) addOperationListCodeReviewJobTasksMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +207,3 @@ type ListCodeReviewJobTasksAPIClient interface {
 }
 
 var _ ListCodeReviewJobTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCodeReviewJobTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCodeReviewJobTasks",
-	}
-}

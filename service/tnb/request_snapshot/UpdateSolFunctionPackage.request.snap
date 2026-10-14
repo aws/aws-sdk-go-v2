@@ -1,0 +1,5 @@
+PATCH /sol/vnfpkgm/v1/vnf_packages/__VnfPkgId__
+
+Content-Type: application/json
+
+{"operationalState":"ENABLED"}

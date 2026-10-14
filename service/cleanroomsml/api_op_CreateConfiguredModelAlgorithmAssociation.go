@@ -4,13 +4,8 @@ package cleanroomsml
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a configured model algorithm to a collaboration for use by any
@@ -90,33 +85,6 @@ type CreateConfiguredModelAlgorithmAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConfiguredModelAlgorithmAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateConfiguredModelAlgorithmAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateConfiguredModelAlgorithmAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfiguredModelAlgorithmArn != nil {
-		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn, *v.ConfiguredModelAlgorithmArn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_description, *v.Description)
-	}
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_name, *v.Name)
-	}
-	if v.PrivacyConfiguration != nil {
-		s.WriteStruct(schemas.CreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration)
-		v.PrivacyConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmAssociationRequest_tags, v.Tags)
-}
-
 type CreateConfiguredModelAlgorithmAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configured model algorithm association.
@@ -130,85 +98,29 @@ type CreateConfiguredModelAlgorithmAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConfiguredModelAlgorithmAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateConfiguredModelAlgorithmAssociationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn:
-			v.ConfiguredModelAlgorithmAssociationArn = new(string)
-			return d.ReadString(schemas.CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateConfiguredModelAlgorithmAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguredModelAlgorithmAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredModelAlgorithmAssociation, schemas.CreateConfiguredModelAlgorithmAssociationRequest, schemas.CreateConfiguredModelAlgorithmAssociationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguredModelAlgorithmAssociation{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredModelAlgorithmAssociation, schemas.CreateConfiguredModelAlgorithmAssociationRequest, schemas.CreateConfiguredModelAlgorithmAssociationResponse), output: &CreateConfiguredModelAlgorithmAssociationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfiguredModelAlgorithmAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConfiguredModelAlgorithmAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguredModelAlgorithmAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,22 +135,8 @@ func (c *Client) addOperationCreateConfiguredModelAlgorithmAssociationMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConfiguredModelAlgorithmAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConfiguredModelAlgorithmAssociation",
-	}
 }

@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,21 +51,6 @@ type DescribeAssetCompositeModelInput struct {
 	AssetId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeAssetCompositeModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAssetCompositeModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAssetCompositeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetCompositeModelId != nil {
-		s.WriteString(schemas.DescribeAssetCompositeModelRequest_assetCompositeModelId, *v.AssetCompositeModelId)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.DescribeAssetCompositeModelRequest_assetId, *v.AssetId)
-	}
 }
 
 type DescribeAssetCompositeModelOutput struct {
@@ -133,96 +115,23 @@ type DescribeAssetCompositeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAssetCompositeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAssetCompositeModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAssetCompositeModelResponse_actionDefinitions:
-			return deserializeActionDefinitions(d, schemas.DescribeAssetCompositeModelResponse_actionDefinitions, &v.ActionDefinitions)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelDescription:
-			v.AssetCompositeModelDescription = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelDescription, v.AssetCompositeModelDescription)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelExternalId:
-			v.AssetCompositeModelExternalId = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelExternalId, v.AssetCompositeModelExternalId)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelId:
-			v.AssetCompositeModelId = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelId, v.AssetCompositeModelId)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelName:
-			v.AssetCompositeModelName = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelName, v.AssetCompositeModelName)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelPath:
-			return deserializeAssetCompositeModelPath(d, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelPath, &v.AssetCompositeModelPath)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelProperties:
-			return deserializeAssetProperties(d, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelProperties, &v.AssetCompositeModelProperties)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelSummaries:
-			return deserializeAssetCompositeModelSummaries(d, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelSummaries, &v.AssetCompositeModelSummaries)
-		case schemas.DescribeAssetCompositeModelResponse_assetCompositeModelType:
-			v.AssetCompositeModelType = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelType, v.AssetCompositeModelType)
-		case schemas.DescribeAssetCompositeModelResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.DescribeAssetCompositeModelResponse_assetId, v.AssetId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAssetCompositeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetCompositeModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetCompositeModel, schemas.DescribeAssetCompositeModelRequest, schemas.DescribeAssetCompositeModelResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetCompositeModel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetCompositeModel, schemas.DescribeAssetCompositeModelRequest, schemas.DescribeAssetCompositeModelResponse), output: &DescribeAssetCompositeModelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetCompositeModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -232,12 +141,6 @@ func (c *Client) addOperationDescribeAssetCompositeModelMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpDescribeAssetCompositeModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetCompositeModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,12 +153,6 @@ func (c *Client) addOperationDescribeAssetCompositeModelMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,12 +186,4 @@ func (m *endpointPrefix_opDescribeAssetCompositeModelMiddleware) HandleFinalize(
 }
 func addEndpointPrefix_opDescribeAssetCompositeModelMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetCompositeModelMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeAssetCompositeModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAssetCompositeModel",
-	}
 }

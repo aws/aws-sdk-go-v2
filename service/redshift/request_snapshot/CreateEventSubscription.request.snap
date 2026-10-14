@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateEventSubscription&Enabled=true&EventCategories.EventCategory.1=__Member__&EventCategories.EventCategory.2=__Member__&Severity=__Severity__&SnsTopicArn=__SnsTopicArn__&SourceIds.SourceId.1=__Member__&SourceIds.SourceId.2=__Member__&SourceType=__SourceType__&SubscriptionName=__SubscriptionName__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&Version=2012-12-01

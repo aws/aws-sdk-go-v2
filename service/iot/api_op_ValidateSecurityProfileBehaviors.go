@@ -4,13 +4,19 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
+//
 // Validates a Device Defender security profile behaviors specification.
 //
 // Requires permission to access the [ValidateSecurityProfileBehaviors] action.
@@ -41,6 +47,16 @@ type ValidateSecurityProfileBehaviorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSecurityProfileBehaviorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSecurityProfileBehaviorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSecurityProfileBehaviorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBehaviors(s, schemas.ValidateSecurityProfileBehaviorsRequest_behaviors, v.Behaviors)
+}
+
 type ValidateSecurityProfileBehaviorsOutput struct {
 
 	// True if the behaviors were valid.
@@ -55,77 +71,50 @@ type ValidateSecurityProfileBehaviorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSecurityProfileBehaviorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSecurityProfileBehaviorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSecurityProfileBehaviorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Valid != false {
+		s.WriteBool(schemas.ValidateSecurityProfileBehaviorsResponse_valid, v.Valid)
+	}
+	serializeValidationErrors(s, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, v.ValidationErrors)
+}
+func (v *ValidateSecurityProfileBehaviorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateSecurityProfileBehaviorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateSecurityProfileBehaviorsResponse_valid:
+			return d.ReadBool(schemas.ValidateSecurityProfileBehaviorsResponse_valid, &v.Valid)
+		case schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors:
+			return deserializeValidationErrors(d, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSecurityProfileBehaviors, schemas.ValidateSecurityProfileBehaviorsRequest, schemas.ValidateSecurityProfileBehaviorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateSecurityProfileBehaviors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSecurityProfileBehaviors, schemas.ValidateSecurityProfileBehaviorsRequest, schemas.ValidateSecurityProfileBehaviorsResponse), output: &ValidateSecurityProfileBehaviorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateSecurityProfileBehaviors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateSecurityProfileBehaviors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpValidateSecurityProfileBehaviorsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateSecurityProfileBehaviors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +129,8 @@ func (c *Client) addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opValidateSecurityProfileBehaviors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ValidateSecurityProfileBehaviors",
-	}
 }

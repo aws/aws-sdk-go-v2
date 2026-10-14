@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchUpdateWorkloadEstimateUsage
+
+{"usage":[{"amount":1,"group":"__Group__","id":"__Id__"},{"amount":1,"group":"__Group__","id":"__Id__"}],"workloadEstimateId":"__WorkloadEstimateId__"}

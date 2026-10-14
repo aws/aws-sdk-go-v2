@@ -1,0 +1,5 @@
+POST /describe-app-version-app-component
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","id":"__Id__"}

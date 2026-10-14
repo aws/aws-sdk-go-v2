@@ -435,19 +435,21 @@ func (nonSeeker) Read(p []byte) (n int, err error) {
 	return 0, io.EOF
 }
 
+// semiSeekable is a stream whose seeks succeed until its body has been read,
+// then fail, to exercise a rewind failure while computing the payload hash.
 type semiSeekable struct {
-	hasSeeked bool
+	read bool
 }
 
 func (s *semiSeekable) Seek(offset int64, whence int) (int64, error) {
-	if !s.hasSeeked {
-		s.hasSeeked = true
-		return 0, nil
+	if s.read {
+		return 0, fmt.Errorf("io seek error")
 	}
-	return 0, fmt.Errorf("io seek error")
+	return 0, nil
 }
 
-func (*semiSeekable) Read(p []byte) (n int, err error) {
+func (s *semiSeekable) Read(p []byte) (n int, err error) {
+	s.read = true
 	return 0, io.EOF
 }
 

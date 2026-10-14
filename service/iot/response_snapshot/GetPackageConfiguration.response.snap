@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"versionUpdateByJobsConfig":{"enabled":true,"roleArn":"__RoleArn__"}}

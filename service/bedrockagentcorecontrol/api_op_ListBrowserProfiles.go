@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all browser profiles in your account.
@@ -43,24 +39,6 @@ type ListBrowserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBrowserProfilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBrowserProfilesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBrowserProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListBrowserProfilesRequest_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListBrowserProfilesRequest_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListBrowserProfilesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListBrowserProfilesOutput struct {
 
 	// The list of browser profile summaries.
@@ -77,84 +55,26 @@ type ListBrowserProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBrowserProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBrowserProfilesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBrowserProfilesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListBrowserProfilesResponse_nextToken, v.NextToken)
-		case schemas.ListBrowserProfilesResponse_profileSummaries:
-			return deserializeBrowserProfileSummaries(d, schemas.ListBrowserProfilesResponse_profileSummaries, &v.ProfileSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListBrowserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrowserProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserProfiles, schemas.ListBrowserProfilesRequest, schemas.ListBrowserProfilesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrowserProfiles{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserProfiles, schemas.ListBrowserProfilesRequest, schemas.ListBrowserProfilesResponse), output: &ListBrowserProfilesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBrowserProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBrowserProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +87,6 @@ func (c *Client) addOperationListBrowserProfilesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +188,3 @@ type ListBrowserProfilesAPIClient interface {
 }
 
 var _ ListBrowserProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBrowserProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBrowserProfiles",
-	}
-}

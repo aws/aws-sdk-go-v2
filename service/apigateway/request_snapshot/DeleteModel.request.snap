@@ -1,0 +1,4 @@
+DELETE /restapis/__RestApiId__/models/__ModelName__
+
+Accept: application/json
+

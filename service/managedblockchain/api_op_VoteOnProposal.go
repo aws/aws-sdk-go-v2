@@ -4,11 +4,10 @@ package managedblockchain
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Casts a vote for a specified ProposalId on behalf of a member. The member to
@@ -56,6 +55,27 @@ type VoteOnProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoteOnProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoteOnProposalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoteOnProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_NetworkId, *v.NetworkId)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_ProposalId, *v.ProposalId)
+	}
+	if v.Vote != "" {
+		s.WriteString(schemas.VoteOnProposalInput_Vote, string(v.Vote))
+	}
+	if v.VoterMemberId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_VoterMemberId, *v.VoterMemberId)
+	}
+}
+
 type VoteOnProposalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,77 +83,42 @@ type VoteOnProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoteOnProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoteOnProposalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoteOnProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VoteOnProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoteOnProposalOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VoteOnProposal, schemas.VoteOnProposalInput, schemas.VoteOnProposalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVoteOnProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VoteOnProposal, schemas.VoteOnProposalInput, schemas.VoteOnProposalOutput), output: &VoteOnProposalOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVoteOnProposal{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VoteOnProposal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVoteOnProposalValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVoteOnProposal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +133,8 @@ func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVoteOnProposal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VoteOnProposal",
-	}
 }

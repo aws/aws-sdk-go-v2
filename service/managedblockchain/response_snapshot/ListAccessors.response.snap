@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Accessors":[{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Id":"__Id__","NetworkType":"ETHEREUM_GOERLI","Status":"AVAILABLE","Type":"BILLING_TOKEN"},{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Id":"__Id__","NetworkType":"ETHEREUM_GOERLI","Status":"AVAILABLE","Type":"BILLING_TOKEN"}],"NextToken":"__NextToken__"}

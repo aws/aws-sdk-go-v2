@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transfer location for an Amazon FSx for Windows File Server file
@@ -129,6 +128,42 @@ type CreateLocationFsxWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxWindowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxWindowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationFsxWindowsRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationFsxWindowsRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsRequest_Domain, *v.Domain)
+	}
+	if v.FsxFilesystemArn != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsRequest_FsxFilesystemArn, *v.FsxFilesystemArn)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsRequest_Password, *v.Password)
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxWindowsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationFsxWindowsRequest_Tags, v.Tags)
+	if v.User != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsRequest_User, *v.User)
+	}
+}
+
 type CreateLocationFsxWindowsOutput struct {
 
 	// The ARN of the FSx for Windows File Server file system location you created.
@@ -140,77 +175,48 @@ type CreateLocationFsxWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxWindowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxWindowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationFsxWindowsResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationFsxWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationFsxWindowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationFsxWindowsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationFsxWindowsResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxWindows, schemas.CreateLocationFsxWindowsRequest, schemas.CreateLocationFsxWindowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxWindows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxWindows, schemas.CreateLocationFsxWindowsRequest, schemas.CreateLocationFsxWindowsResponse), output: &CreateLocationFsxWindowsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxWindows{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLocationFsxWindows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLocationFsxWindowsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationFsxWindows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,22 +231,8 @@ func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLocationFsxWindows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLocationFsxWindows",
-	}
 }

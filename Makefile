@@ -9,6 +9,9 @@ LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
+REQUEST_SNAPSHOT_TAGS=-tags "request_snapshot"
+RESPONSE_SNAPSHOT_TAGS=-tags "response_snapshot"
+SERDEBENCHMARK_TAGS=-tags "serdebenchmark"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
@@ -252,7 +255,8 @@ update-module-metadata:
 # Unit Testing #
 ################
 .PHONY: unit unit-race unit-test unit-race-test unit-race-modules-% unit-modules-% build build-modules-% \
-go-build-modules-% test test-race-modules-% test-modules-% cachedep cachedep-modules-% api-diff-modules-%
+go-build-modules-% test test-race-modules-% test-modules-% cachedep cachedep-modules-% api-diff-modules-% \
+test-serdebenchmark test-serdebenchmark-modules-%
 
 unit: lint unit-modules-.
 unit-race: lint unit-race-modules-.
@@ -321,6 +325,44 @@ test-ci-check-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
+
+test-update-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestUpdateRequestSnapshot ."
+
+test-check-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot ."
+
+test-ci-check-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot -failfast ."
+
+test-update-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestUpdateResponseSnapshot ."
+
+test-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot ."
+
+test-ci-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot -failfast ."
+
+test-serdebenchmark: test-serdebenchmark-modules-service_internal_serdebenchmark
+
+test-serdebenchmark-modules-%:
+	@# See suffix-to-path pattern. Runs `go test` on modules with the `serdebenchmark` tag
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-serdebenchmark-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SERDEBENCHMARK_TAGS} ./..."
 
 cachedep: cachedep-modules-.
 
@@ -419,14 +461,6 @@ set-smithy-go-version:
 		echo "SMITHY_GO_VERSION is required to update SDK's smithy-go module dependency version" && false; \
 	fi
 	go run ${REPOTOOLS_CMD_EDIT_MODULE_DEPENDENCY} -s "github.com/aws/smithy-go" -v "${SMITHY_GO_VERSION}"
-
-external-changelog:
-	mkdir -p .changelog
-	cp changelog-template.json .changelog/00000000-0000-0000-0000-000000000000.json
-	@echo "Generate a new UUID and update the file at .changelog/00000000-0000-0000-0000-000000000000.json"
-	@echo "Make sure to rename the file with your new id, like .changelog/12345678-1234-1234-1234-123456789012.json"
-	@echo "See CONTRIBUTING.md 'Changelog Documents' and an example at https://github.com/aws/aws-sdk-go-v2/pull/2934/files"
-
 
 ##################
 # Linting/Verify #

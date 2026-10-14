@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an agent in Amazon QuickSight.
@@ -74,6 +73,40 @@ type CreateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateAgentRequestActionConnectorsList(s, schemas.CreateAgentRequest_ActionConnectors, v.ActionConnectors)
+	if v.AgentId != nil {
+		s.WriteString(schemas.CreateAgentRequest_AgentId, *v.AgentId)
+	}
+	if v.AgentLifecycle != "" {
+		s.WriteString(schemas.CreateAgentRequest_AgentLifecycle, string(v.AgentLifecycle))
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateAgentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeCustomPromptInput(s, schemas.CreateAgentRequest_CustomPromptInput, v.CustomPromptInput)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentRequest_Description, *v.Description)
+	}
+	if v.IconId != nil {
+		s.WriteString(schemas.CreateAgentRequest_IconId, *v.IconId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAgentRequest_Name, *v.Name)
+	}
+	serializeCreateAgentRequestSpacesList(s, schemas.CreateAgentRequest_Spaces, v.Spaces)
+	serializeStarterPromptList(s, schemas.CreateAgentRequest_StarterPrompts, v.StarterPrompts)
+	if v.WelcomeMessage != nil {
+		s.WriteString(schemas.CreateAgentRequest_WelcomeMessage, *v.WelcomeMessage)
+	}
+}
+
 type CreateAgentOutput struct {
 
 	// The unique identifier for the agent.
@@ -105,77 +138,76 @@ type CreateAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.CreateAgentResponse_AgentId, *v.AgentId)
+	}
+	if v.AgentName != nil {
+		s.WriteString(schemas.CreateAgentResponse_AgentName, *v.AgentName)
+	}
+	if v.AgentStatus != "" {
+		s.WriteString(schemas.CreateAgentResponse_AgentStatus, string(v.AgentStatus))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAgentResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateAgentResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *CreateAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentResponse_AgentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.CreateAgentResponse_AgentId, v.AgentId)
+		case schemas.CreateAgentResponse_AgentName:
+			v.AgentName = new(string)
+			return d.ReadString(schemas.CreateAgentResponse_AgentName, v.AgentName)
+		case schemas.CreateAgentResponse_AgentStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateAgentResponse_AgentStatus, &ev); err != nil {
+				return err
+			}
+			v.AgentStatus = types.AgentStatus(ev)
+			return nil
+		case schemas.CreateAgentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAgentResponse_Arn, v.Arn)
+		case schemas.CreateAgentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateAgentResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgent, schemas.CreateAgentRequest, schemas.CreateAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgent, schemas.CreateAgentRequest, schemas.CreateAgentResponse), output: &CreateAgentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAgentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +222,8 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAgent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAgent",
-	}
 }

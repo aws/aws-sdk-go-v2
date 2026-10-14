@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +38,9 @@ type UpdateEnvironmentBlueprintInput struct {
 	// This member is required.
 	Identifier *string
 
+	// The category to update. The only valid value is TOOLING .
+	BlueprintCategory types.BlueprintCategory
+
 	// The description to be updated as part of the UpdateEnvironmentBlueprint action.
 	Description *string
 
@@ -55,26 +53,6 @@ type UpdateEnvironmentBlueprintInput struct {
 	UserParameters []types.CustomParameter
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateEnvironmentBlueprintInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateEnvironmentBlueprintInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateEnvironmentBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateEnvironmentBlueprintInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.UpdateEnvironmentBlueprintInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateEnvironmentBlueprintInput_identifier, *v.Identifier)
-	}
-	serializeProvisioningProperties(s, schemas.UpdateEnvironmentBlueprintInput_provisioningProperties, v.ProvisioningProperties)
-	serializeCustomParameterList(s, schemas.UpdateEnvironmentBlueprintInput_userParameters, v.UserParameters)
 }
 
 type UpdateEnvironmentBlueprintOutput struct {
@@ -99,6 +77,9 @@ type UpdateEnvironmentBlueprintOutput struct {
 	//
 	// This member is required.
 	ProvisioningProperties types.ProvisioningProperties
+
+	// The category of the environment blueprint. The only valid value is TOOLING .
+	BlueprintCategory types.BlueprintCategory
 
 	// The timestamp of when the environment blueprint was created.
 	CreatedAt *time.Time
@@ -127,109 +108,29 @@ type UpdateEnvironmentBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateEnvironmentBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateEnvironmentBlueprintOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateEnvironmentBlueprintOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateEnvironmentBlueprintOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateEnvironmentBlueprintOutput_deploymentProperties:
-			v.DeploymentProperties = &types.DeploymentProperties{}
-			return v.DeploymentProperties.Deserialize(d)
-		case schemas.UpdateEnvironmentBlueprintOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateEnvironmentBlueprintOutput_description, v.Description)
-		case schemas.UpdateEnvironmentBlueprintOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.UpdateEnvironmentBlueprintOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.UpdateEnvironmentBlueprintOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateEnvironmentBlueprintOutput_id, v.Id)
-		case schemas.UpdateEnvironmentBlueprintOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateEnvironmentBlueprintOutput_name, v.Name)
-		case schemas.UpdateEnvironmentBlueprintOutput_provider:
-			v.Provider = new(string)
-			return d.ReadString(schemas.UpdateEnvironmentBlueprintOutput_provider, v.Provider)
-		case schemas.UpdateEnvironmentBlueprintOutput_provisioningProperties:
-			return deserializeProvisioningProperties(d, schemas.UpdateEnvironmentBlueprintOutput_provisioningProperties, &v.ProvisioningProperties)
-		case schemas.UpdateEnvironmentBlueprintOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateEnvironmentBlueprintOutput_updatedAt, v.UpdatedAt)
-		case schemas.UpdateEnvironmentBlueprintOutput_userParameters:
-			return deserializeCustomParameterList(d, schemas.UpdateEnvironmentBlueprintOutput_userParameters, &v.UserParameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateEnvironmentBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironmentBlueprint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentBlueprint, schemas.UpdateEnvironmentBlueprintInput, schemas.UpdateEnvironmentBlueprintOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironmentBlueprint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentBlueprint, schemas.UpdateEnvironmentBlueprintInput, schemas.UpdateEnvironmentBlueprintOutput), output: &UpdateEnvironmentBlueprintOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironmentBlueprint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEnvironmentBlueprintValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnvironmentBlueprint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +145,8 @@ func (c *Client) addOperationUpdateEnvironmentBlueprintMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEnvironmentBlueprint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEnvironmentBlueprint",
-	}
 }

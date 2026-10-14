@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.CreateVpcEndpointAssociation
+
+{"Description":"__Description__","FirewallArn":"__FirewallArn__","SubnetMapping":{"IPAddressType":"DUALSTACK","SubnetId":"__SubnetId__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcId":"__VpcId__"}

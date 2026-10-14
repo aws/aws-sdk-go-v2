@@ -1,0 +1,5 @@
+POST /service/states
+
+Content-Type: application/json
+
+{"AttributeFilters":[{"AttributeFilterName":"__AttributeFilterName__","AttributeFilterValues":["__Member__","__Member__"]},{"AttributeFilterName":"__AttributeFilterName__","AttributeFilterValues":["__Member__","__Member__"]}],"AwsAccountId":"__AwsAccountId__","EndTime":946684800,"IncludeLinkedAccounts":true,"MaxResults":1,"NextToken":"__NextToken__","StartTime":946684800}

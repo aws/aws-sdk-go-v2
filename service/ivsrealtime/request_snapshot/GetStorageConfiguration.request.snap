@@ -1,0 +1,5 @@
+POST /GetStorageConfiguration
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

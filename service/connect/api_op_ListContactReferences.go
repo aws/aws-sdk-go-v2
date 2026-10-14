@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is in preview release for Connect Customer and is subject to change.
@@ -61,6 +61,25 @@ type ListContactReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactReferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactReferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactReferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_NextToken, *v.NextToken)
+	}
+	serializeReferenceTypes(s, schemas.ListContactReferencesRequest_ReferenceTypes, v.ReferenceTypes)
+}
+
 type ListContactReferencesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -77,77 +96,51 @@ type ListContactReferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactReferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactReferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactReferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactReferencesResponse_NextToken, *v.NextToken)
+	}
+	serializeReferenceSummaryList(s, schemas.ListContactReferencesResponse_ReferenceSummaryList, v.ReferenceSummaryList)
+}
+func (v *ListContactReferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactReferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactReferencesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactReferencesResponse_NextToken, v.NextToken)
+		case schemas.ListContactReferencesResponse_ReferenceSummaryList:
+			return deserializeReferenceSummaryList(d, schemas.ListContactReferencesResponse_ReferenceSummaryList, &v.ReferenceSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactReferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactReferences, schemas.ListContactReferencesRequest, schemas.ListContactReferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactReferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactReferences, schemas.ListContactReferencesRequest, schemas.ListContactReferencesResponse), output: &ListContactReferencesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactReferences{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContactReferences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListContactReferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContactReferences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +153,6 @@ func (c *Client) addOperationListContactReferencesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +242,3 @@ type ListContactReferencesAPIClient interface {
 }
 
 var _ ListContactReferencesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContactReferences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContactReferences",
-	}
-}

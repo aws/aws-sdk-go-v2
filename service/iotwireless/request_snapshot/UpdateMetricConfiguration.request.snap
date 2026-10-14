@@ -1,0 +1,5 @@
+PUT /metric-configuration
+
+Content-Type: application/json
+
+{"SummaryMetric":{"Status":"Enabled"}}

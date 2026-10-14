@@ -5,10 +5,34 @@ package mwaaserverless
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/document"
 	internaldocument "github.com/aws/aws-sdk-go-v2/service/mwaaserverless/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
+
+func serializeCode(s smithy.ShapeSerializer, schema *smithy.Schema, v types.Code) {
+	switch vv := v.(type) {
+	case *types.CodeMemberS3Location:
+		s.WriteUnion(schema, schemas.Code_S3Location)
+		s.WriteStruct(schemas.Code_S3Location)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeCode(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.Code) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Code_S3Location:
+			vv := &types.CodeMemberS3Location{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
@@ -131,6 +155,7 @@ func serializeWorkflowVersionSummaries(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -144,6 +169,7 @@ func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSubnetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -157,6 +183,7 @@ func deserializeSubnetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -170,6 +197,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTaskInstanceIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -183,6 +211,7 @@ func deserializeTaskInstanceIds(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTaskInstanceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaskInstanceSummary) error {
+	*v = make([]types.TaskInstanceSummary, 0)
 	var vv types.TaskInstanceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaskInstanceSummary{}
@@ -196,6 +225,7 @@ func deserializeTaskInstanceSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeValidationExceptionFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}
@@ -209,6 +239,7 @@ func deserializeValidationExceptionFields(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeWarningMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -222,6 +253,7 @@ func deserializeWarningMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeWorkflowRunSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WorkflowRunSummary) error {
+	*v = make([]types.WorkflowRunSummary, 0)
 	var vv types.WorkflowRunSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.WorkflowRunSummary{}
@@ -235,6 +267,7 @@ func deserializeWorkflowRunSummaries(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeWorkflowSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WorkflowSummary) error {
+	*v = make([]types.WorkflowSummary, 0)
 	var vv types.WorkflowSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.WorkflowSummary{}
@@ -248,6 +281,7 @@ func deserializeWorkflowSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeWorkflowVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WorkflowVersionSummary) error {
+	*v = make([]types.WorkflowVersionSummary, 0)
 	var vv types.WorkflowVersionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.WorkflowVersionSummary{}
@@ -300,6 +334,13 @@ func deserializeGenericMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -314,6 +355,13 @@ func deserializeObjectMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]document.Interface)
 	var vv smithydocument.Value
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero document.Interface
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadDocument(s.MapValue(), &vv); err != nil {
 			return err
@@ -333,6 +381,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

@@ -17,6 +17,9 @@ func ExampleEngagementContextPayload_outputUsage() {
 	case *types.EngagementContextPayloadMemberLead:
 		_ = v.Value // Value is types.LeadContext
 
+	case *types.EngagementContextPayloadMemberProspectingResult:
+		_ = v.Value // Value is types.ProspectingResult
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -27,6 +30,7 @@ func ExampleEngagementContextPayload_outputUsage() {
 }
 
 var _ *types.CustomerProjectsContext
+var _ *types.ProspectingResult
 var _ *types.LeadContext
 
 func ExamplePayload_outputUsage() {
@@ -101,6 +105,9 @@ func ExampleUpdateEngagementContextPayload_outputUsage() {
 	case *types.UpdateEngagementContextPayloadMemberLead:
 		_ = v.Value // Value is types.UpdateLeadContext
 
+	case *types.UpdateEngagementContextPayloadMemberProspectingResult:
+		_ = v.Value // Value is types.ProspectingResult
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -112,3 +119,4 @@ func ExampleUpdateEngagementContextPayload_outputUsage() {
 
 var _ *types.UpdateLeadContext
 var _ *types.CustomerProjectsContext
+var _ *types.ProspectingResult

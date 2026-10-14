@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.GetAutonomousDatabaseBackup
+
+{"autonomousDatabaseBackup":{"autonomousDatabaseBackupArn":"__AutonomousDatabaseBackupArn__","autonomousDatabaseBackupId":"__AutonomousDatabaseBackupId__","autonomousDatabaseId":"__AutonomousDatabaseId__","dbVersion":"__DbVersion__","displayName":"__DisplayName__","isAutomatic":true,"ocid":"__Ocid__","retentionPeriodInDays":1,"sizeInTBs":1,"status":"ACTIVE","statusReason":"__StatusReason__","timeAvailableTill":"2000-01-01T00:00:00Z","timeEnded":"2000-01-01T00:00:00Z","timeStarted":"2000-01-01T00:00:00Z","type":"INCREMENTAL"}}

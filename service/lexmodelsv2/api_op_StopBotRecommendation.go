@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stop an already running Bot Recommendation request.
@@ -56,6 +55,27 @@ type StopBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type StopBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation that is
@@ -84,77 +104,76 @@ type StopBotRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotRecommendationStatus != "" {
+		s.WriteString(schemas.StopBotRecommendationResponse_botRecommendationStatus, string(v.BotRecommendationStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *StopBotRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBotRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBotRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botId, v.BotId)
+		case schemas.StopBotRecommendationResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.StopBotRecommendationResponse_botRecommendationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopBotRecommendationResponse_botRecommendationStatus, &ev); err != nil {
+				return err
+			}
+			v.BotRecommendationStatus = types.BotRecommendationStatus(ev)
+			return nil
+		case schemas.StopBotRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.StopBotRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBotRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotRecommendation, schemas.StopBotRecommendationRequest, schemas.StopBotRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotRecommendation, schemas.StopBotRecommendationRequest, schemas.StopBotRecommendationResponse), output: &StopBotRecommendationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBotRecommendation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopBotRecommendation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopBotRecommendationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopBotRecommendation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +188,8 @@ func (c *Client) addOperationStopBotRecommendationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopBotRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopBotRecommendation",
-	}
 }

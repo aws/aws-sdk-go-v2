@@ -5,9 +5,9 @@ package resourcegroupstaggingapi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all tag values for the specified key that are used in the specified
@@ -51,6 +51,21 @@ type GetTagValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagValuesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GetTagValuesInput_Key, *v.Key)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagValuesInput_PaginationToken, *v.PaginationToken)
+	}
+}
+
 type GetTagValuesOutput struct {
 
 	// A string that indicates that there is more data available than this response
@@ -68,77 +83,51 @@ type GetTagValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagValuesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagValuesOutput_PaginationToken, *v.PaginationToken)
+	}
+	serializeTagValuesOutputList(s, schemas.GetTagValuesOutput_TagValues, v.TagValues)
+}
+func (v *GetTagValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagValuesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagValuesOutput_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.GetTagValuesOutput_PaginationToken, v.PaginationToken)
+		case schemas.GetTagValuesOutput_TagValues:
+			return deserializeTagValuesOutputList(d, schemas.GetTagValuesOutput_TagValues, &v.TagValues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagValues, schemas.GetTagValuesInput, schemas.GetTagValuesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTagValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagValues, schemas.GetTagValuesInput, schemas.GetTagValuesOutput), output: &GetTagValuesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTagValues{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTagValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTagValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTagValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +140,6 @@ func (c *Client) addOperationGetTagValuesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -244,11 +227,3 @@ type GetTagValuesAPIClient interface {
 }
 
 var _ GetTagValuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTagValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTagValues",
-	}
-}

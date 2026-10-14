@@ -1,0 +1,3 @@
+GET /get-table?name=__Name__&namespace=__Namespace__&tableArn=__TableArn__&tableBucketARN=__TableBucketARN__
+
+

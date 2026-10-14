@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListOfferings
+
+{"nextToken":"__NextToken__","offerings":[{"description":"__Description__","id":"__Id__","platform":"ANDROID","recurringCharges":[{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"},{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"}],"type":"RECURRING"},{"description":"__Description__","id":"__Id__","platform":"ANDROID","recurringCharges":[{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"},{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"}],"type":"RECURRING"}]}

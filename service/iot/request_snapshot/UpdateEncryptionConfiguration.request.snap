@@ -1,0 +1,5 @@
+PATCH /encryption-configuration
+
+Content-Type: application/json
+
+{"encryptionType":"CUSTOMER_MANAGED_KMS_KEY","kmsAccessRoleArn":"__KmsAccessRoleArn__","kmsKeyArn":"__KmsKeyArn__"}

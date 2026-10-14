@@ -1,0 +1,4 @@
+DELETE /v20180820/accessgrantsinstance/identitycenter
+
+X-Amz-Account-Id: AccountId-value
+

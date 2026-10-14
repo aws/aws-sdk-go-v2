@@ -4,11 +4,10 @@ package resiliencehub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Application Component in the Resilience Hub application.
@@ -64,6 +63,49 @@ type UpdateAppVersionAppComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppVersionAppComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppVersionAppComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppVersionAppComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInfoMap(s, schemas.UpdateAppVersionAppComponentRequest_additionalInfo, v.AdditionalInfo)
+	if v.AppArn != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentRequest_appArn, *v.AppArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentRequest_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentRequest_type, *v.Type)
+	}
+}
+func (v *UpdateAppVersionAppComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppVersionAppComponentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppVersionAppComponentRequest_additionalInfo:
+			return deserializeAdditionalInfoMap(d, schemas.UpdateAppVersionAppComponentRequest_additionalInfo, &v.AdditionalInfo)
+		case schemas.UpdateAppVersionAppComponentRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentRequest_appArn, v.AppArn)
+		case schemas.UpdateAppVersionAppComponentRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentRequest_id, v.Id)
+		case schemas.UpdateAppVersionAppComponentRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentRequest_name, v.Name)
+		case schemas.UpdateAppVersionAppComponentRequest_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentRequest_type, v.Type)
+		}
+		return nil
+	})
+}
+
 type UpdateAppVersionAppComponentOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -90,77 +132,62 @@ type UpdateAppVersionAppComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppVersionAppComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppVersionAppComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppVersionAppComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentResponse_appArn, *v.AppArn)
+	}
+	if v.AppComponent != nil {
+		s.WriteStruct(schemas.UpdateAppVersionAppComponentResponse_appComponent)
+		v.AppComponent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.UpdateAppVersionAppComponentResponse_appVersion, *v.AppVersion)
+	}
+}
+func (v *UpdateAppVersionAppComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppVersionAppComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppVersionAppComponentResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentResponse_appArn, v.AppArn)
+		case schemas.UpdateAppVersionAppComponentResponse_appComponent:
+			v.AppComponent = &types.AppComponent{}
+			return v.AppComponent.Deserialize(d)
+		case schemas.UpdateAppVersionAppComponentResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.UpdateAppVersionAppComponentResponse_appVersion, v.AppVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppVersionAppComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppVersionAppComponent, schemas.UpdateAppVersionAppComponentRequest, schemas.UpdateAppVersionAppComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppVersionAppComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppVersionAppComponent, schemas.UpdateAppVersionAppComponentRequest, schemas.UpdateAppVersionAppComponentResponse), output: &UpdateAppVersionAppComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppVersionAppComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppVersionAppComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAppVersionAppComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAppVersionAppComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +202,8 @@ func (c *Client) addOperationUpdateAppVersionAppComponentMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAppVersionAppComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAppVersionAppComponent",
-	}
 }

@@ -4,11 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -72,8 +71,10 @@ type CreateVocabularyFilterInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
-	// vocabulary filter). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails.
+	// vocabulary filter). If you include EncryptionConfiguration in your request,
+	// this role must also have permissions to access the specified KMS key. If the
+	// role that you specify doesn’t have the appropriate permissions, your request
+	// fails.
 	//
 	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
@@ -83,6 +84,11 @@ type CreateVocabularyFilterInput struct {
 	//
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
+
+	// Specifies the encryption configuration for your custom vocabulary filter. Your
+	// vocabulary filter artifacts are encrypted with the specified KMS key or with an
+	// AWS-owned key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new
 	// custom vocabulary filter at the time you create this new vocabulary filter.
@@ -121,6 +127,34 @@ type CreateVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateVocabularyFilterRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateVocabularyFilterRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateVocabularyFilterRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeTagList(s, schemas.CreateVocabularyFilterRequest_Tags, v.Tags)
+	if v.VocabularyFilterFileUri != nil {
+		s.WriteString(schemas.CreateVocabularyFilterRequest_VocabularyFilterFileUri, *v.VocabularyFilterFileUri)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.CreateVocabularyFilterRequest_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	serializeWords(s, schemas.CreateVocabularyFilterRequest_Words, v.Words)
+}
+
 type CreateVocabularyFilterOutput struct {
 
 	// The language code you selected for your custom vocabulary filter.
@@ -141,77 +175,64 @@ type CreateVocabularyFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateVocabularyFilterResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateVocabularyFilterResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.CreateVocabularyFilterResponse_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+}
+func (v *CreateVocabularyFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVocabularyFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVocabularyFilterResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CreateVocabularyFilterResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.CreateVocabularyFilterResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVocabularyFilterResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CreateVocabularyFilterResponse_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.CreateVocabularyFilterResponse_VocabularyFilterName, v.VocabularyFilterName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabularyFilter, schemas.CreateVocabularyFilterRequest, schemas.CreateVocabularyFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVocabularyFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabularyFilter, schemas.CreateVocabularyFilterRequest, schemas.CreateVocabularyFilterResponse), output: &CreateVocabularyFilterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVocabularyFilter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVocabularyFilter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVocabularyFilterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVocabularyFilter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,22 +247,8 @@ func (c *Client) addOperationCreateVocabularyFilterMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVocabularyFilter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVocabularyFilter",
-	}
 }

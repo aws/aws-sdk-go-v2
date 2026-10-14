@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.GetRecords
+
+{"Limit":1,"ShardIterator":"__ShardIterator__"}

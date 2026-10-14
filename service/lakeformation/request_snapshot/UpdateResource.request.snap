@@ -1,0 +1,5 @@
+POST /UpdateResource
+
+Content-Type: application/json
+
+{"ExpectedResourceOwnerAccount":"__ExpectedResourceOwnerAccount__","HybridAccessEnabled":true,"ResourceArn":"__ResourceArn__","RoleArn":"__RoleArn__","WithFederation":true}

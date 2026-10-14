@@ -1,0 +1,5 @@
+POST /v1/updateschedulingpolicy
+
+Content-Type: application/json
+
+{"arn":"__Arn__","fairsharePolicy":{"computeReservation":1,"shareDecaySeconds":1,"shareDistribution":[{"shareIdentifier":"__ShareIdentifier__","weightFactor":1},{"shareIdentifier":"__ShareIdentifier__","weightFactor":1}]},"quotaSharePolicy":{"idleResourceAssignmentStrategy":"FIFO"}}

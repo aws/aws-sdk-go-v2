@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -78,6 +78,45 @@ type ListModelPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelPackagesInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelPackagesInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelPackagesInput_MaxResults, *v.MaxResults)
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.ListModelPackagesInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.ListModelPackagesInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageType != "" {
+		s.WriteString(schemas.ListModelPackagesInput_ModelPackageType, string(v.ModelPackageType))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelPackagesInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackagesInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelPackagesInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelPackagesInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelPackagesOutput struct {
 
 	// An array of ModelPackageSummary objects, each of which lists a model package.
@@ -95,74 +134,48 @@ type ListModelPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelPackageSummaryList(s, schemas.ListModelPackagesOutput_ModelPackageSummaryList, v.ModelPackageSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackagesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelPackagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelPackagesOutput_ModelPackageSummaryList:
+			return deserializeModelPackageSummaryList(d, schemas.ListModelPackagesOutput_ModelPackageSummaryList, &v.ModelPackageSummaryList)
+		case schemas.ListModelPackagesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelPackagesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackages, schemas.ListModelPackagesInput, schemas.ListModelPackagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackages, schemas.ListModelPackagesInput, schemas.ListModelPackagesOutput), output: &ListModelPackagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelPackages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListModelPackages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelPackages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +188,6 @@ func (c *Client) addOperationListModelPackagesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +288,3 @@ type ListModelPackagesAPIClient interface {
 }
 
 var _ ListModelPackagesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListModelPackages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListModelPackages",
-	}
-}

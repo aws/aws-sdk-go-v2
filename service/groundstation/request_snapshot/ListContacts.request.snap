@@ -1,0 +1,5 @@
+POST /contacts
+
+Content-Type: application/json
+
+{"endTime":946684800,"ephemeris":{"azEl":{"id":"__Id__"}},"groundStation":"__GroundStation__","maxResults":1,"missionProfileArn":"__MissionProfileArn__","nextToken":"__NextToken__","satelliteArn":"__SatelliteArn__","startTime":946684800,"statusList":["SCHEDULING","SCHEDULING"]}

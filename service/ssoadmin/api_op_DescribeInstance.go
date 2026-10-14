@@ -4,13 +4,8 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -52,18 +47,6 @@ type DescribeInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.DescribeInstanceRequest_InstanceArn, *v.InstanceArn)
-	}
-}
-
 type DescribeInstanceOutput struct {
 
 	// The date the instance was created.
@@ -72,6 +55,10 @@ type DescribeInstanceOutput struct {
 	// Contains the encryption configuration for your IAM Identity Center instance,
 	// including the encryption status, KMS key type, and KMS key ARN.
 	EncryptionConfigurationDetails *types.EncryptionConfigurationDetails
+
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
 
 	// The identifier of the identity store that is connected to the instance of IAM
 	// Identity Center.
@@ -88,6 +75,17 @@ type DescribeInstanceOutput struct {
 	// The identifier of the Amazon Web Services account for which the instance was
 	// created.
 	OwnerAccountId *string
+
+	// Indicates whether permission sets are enabled for this Identity Center instance.
+	PermissionSetsEnabled *bool
+
+	// The primary Region where the IAM Identity Center instance was originally
+	// enabled. The primary Region cannot be removed.
+	PrimaryRegion *string
+
+	// The list of Regions enabled in the IAM Identity Center instance, including
+	// Regions with ACTIVE, ADDING, or REMOVING status.
+	Regions []types.RegionMetadata
 
 	// The status of the instance.
 	Status types.InstanceStatus
@@ -106,110 +104,29 @@ type DescribeInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeInstanceResponse_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeInstanceResponse_CreatedDate, v.CreatedDate)
-		case schemas.DescribeInstanceResponse_EncryptionConfigurationDetails:
-			v.EncryptionConfigurationDetails = &types.EncryptionConfigurationDetails{}
-			return v.EncryptionConfigurationDetails.Deserialize(d)
-		case schemas.DescribeInstanceResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeInstanceResponse_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_InstanceArn, v.InstanceArn)
-		case schemas.DescribeInstanceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_Name, v.Name)
-		case schemas.DescribeInstanceResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.DescribeInstanceResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeInstanceResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.InstanceStatus(ev)
-			return nil
-		case schemas.DescribeInstanceResponse_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse), output: &DescribeInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +141,8 @@ func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInstance",
-	}
 }

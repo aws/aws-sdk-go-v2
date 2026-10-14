@@ -4,12 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate the registration with an origination identity such as a phone number
@@ -107,6 +104,38 @@ type CreateRegistrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationType, *v.RegistrationType)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceType, *v.ResourceType)
+	}
+}
 func (v *CreateRegistrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRegistrationAssociationResult, func(s *smithy.Schema) error {
 		switch s {
@@ -139,74 +168,26 @@ func (v *CreateRegistrationAssociationOutput) Deserialize(d smithy.ShapeDeserial
 	})
 }
 func (c *Client) addOperationCreateRegistrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAssociation, schemas.CreateRegistrationAssociationRequest, schemas.CreateRegistrationAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAssociation, schemas.CreateRegistrationAssociationRequest, schemas.CreateRegistrationAssociationResult), output: &CreateRegistrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRegistrationAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRegistrationAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegistrationAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +202,8 @@ func (c *Client) addOperationCreateRegistrationAssociationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRegistrationAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRegistrationAssociation",
-	}
 }

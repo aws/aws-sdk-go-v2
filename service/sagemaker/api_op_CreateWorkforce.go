@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to create a workforce. This operation will return an error
@@ -91,6 +90,42 @@ type CreateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkforceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkforceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkforceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CognitoConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_CognitoConfig)
+		v.CognitoConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateWorkforceRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.OidcConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_OidcConfig)
+		v.OidcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceIpConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_SourceIpConfig)
+		v.SourceIpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWorkforceRequest_Tags, v.Tags)
+	if v.WorkforceName != nil {
+		s.WriteString(schemas.CreateWorkforceRequest_WorkforceName, *v.WorkforceName)
+	}
+	if v.WorkforceVpcConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_WorkforceVpcConfig)
+		v.WorkforceVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWorkforceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the workforce.
@@ -104,77 +139,48 @@ type CreateWorkforceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkforceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkforceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkforceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkforceArn != nil {
+		s.WriteString(schemas.CreateWorkforceResponse_WorkforceArn, *v.WorkforceArn)
+	}
+}
+func (v *CreateWorkforceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkforceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkforceResponse_WorkforceArn:
+			v.WorkforceArn = new(string)
+			return d.ReadString(schemas.CreateWorkforceResponse_WorkforceArn, v.WorkforceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkforce, schemas.CreateWorkforceRequest, schemas.CreateWorkforceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkforce, schemas.CreateWorkforceRequest, schemas.CreateWorkforceResponse), output: &CreateWorkforceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkforce{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkforce"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWorkforceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkforce(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +195,8 @@ func (c *Client) addOperationCreateWorkforceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWorkforce(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkforce",
-	}
 }

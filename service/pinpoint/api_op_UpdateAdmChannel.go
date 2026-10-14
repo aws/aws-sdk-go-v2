@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables the ADM channel for an application or updates the status and settings
@@ -45,6 +44,23 @@ type UpdateAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdmChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdmChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdmChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMChannelRequest != nil {
+		s.WriteStruct(schemas.UpdateAdmChannelRequest_ADMChannelRequest)
+		v.ADMChannelRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateAdmChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type UpdateAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device
@@ -59,77 +75,50 @@ type UpdateAdmChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdmChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdmChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdmChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMChannelResponse != nil {
+		s.WriteStruct(schemas.UpdateAdmChannelResponse_ADMChannelResponse)
+		v.ADMChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAdmChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAdmChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAdmChannelResponse_ADMChannelResponse:
+			v.ADMChannelResponse = &types.ADMChannelResponse{}
+			return v.ADMChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdmChannel, schemas.UpdateAdmChannelRequest, schemas.UpdateAdmChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAdmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdmChannel, schemas.UpdateAdmChannelRequest, schemas.UpdateAdmChannelResponse), output: &UpdateAdmChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAdmChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAdmChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAdmChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAdmChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +133,8 @@ func (c *Client) addOperationUpdateAdmChannelMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAdmChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAdmChannel",
-	}
 }

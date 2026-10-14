@@ -1,0 +1,5 @@
+POST /findings/sample
+
+Content-Type: application/json
+
+{"findingTypes":["SensitiveData:S3Object/Multiple","SensitiveData:S3Object/Multiple"]}

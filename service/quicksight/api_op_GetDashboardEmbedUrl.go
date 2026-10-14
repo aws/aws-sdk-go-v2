@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a temporary session URL and authorization code(bearer token) that you
@@ -123,6 +122,43 @@ type GetDashboardEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardEmbedUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardEmbedUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardEmbedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalDashboardIdList(s, schemas.GetDashboardEmbedUrlRequest_AdditionalDashboardIds, v.AdditionalDashboardIds)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlRequest_DashboardId, *v.DashboardId)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.GetDashboardEmbedUrlRequest_IdentityType, string(v.IdentityType))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlRequest_Namespace, *v.Namespace)
+	}
+	if v.ResetDisabled != false {
+		s.WriteBool(schemas.GetDashboardEmbedUrlRequest_ResetDisabled, v.ResetDisabled)
+	}
+	if v.SessionLifetimeInMinutes != nil {
+		s.WriteInt64(schemas.GetDashboardEmbedUrlRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
+	}
+	if v.StatePersistenceEnabled != false {
+		s.WriteBool(schemas.GetDashboardEmbedUrlRequest_StatePersistenceEnabled, v.StatePersistenceEnabled)
+	}
+	if v.UndoRedoDisabled != false {
+		s.WriteBool(schemas.GetDashboardEmbedUrlRequest_UndoRedoDisabled, v.UndoRedoDisabled)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlRequest_UserArn, *v.UserArn)
+	}
+}
+
 // Output returned from the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlOutput struct {
 
@@ -144,77 +180,59 @@ type GetDashboardEmbedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardEmbedUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardEmbedUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardEmbedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlResponse_EmbedUrl, *v.EmbedUrl)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetDashboardEmbedUrlResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetDashboardEmbedUrlResponse_Status, v.Status)
+	}
+}
+func (v *GetDashboardEmbedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDashboardEmbedUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDashboardEmbedUrlResponse_EmbedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GetDashboardEmbedUrlResponse_EmbedUrl, v.EmbedUrl)
+		case schemas.GetDashboardEmbedUrlResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetDashboardEmbedUrlResponse_RequestId, v.RequestId)
+		case schemas.GetDashboardEmbedUrlResponse_Status:
+			return d.ReadInt32(schemas.GetDashboardEmbedUrlResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardEmbedUrl, schemas.GetDashboardEmbedUrlRequest, schemas.GetDashboardEmbedUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDashboardEmbedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardEmbedUrl, schemas.GetDashboardEmbedUrlRequest, schemas.GetDashboardEmbedUrlResponse), output: &GetDashboardEmbedUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDashboardEmbedUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboardEmbedUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDashboardEmbedUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboardEmbedUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,22 +247,8 @@ func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDashboardEmbedUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDashboardEmbedUrl",
-	}
 }

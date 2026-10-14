@@ -4,9 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -69,6 +69,33 @@ type InvokeFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableTrace != nil {
+		s.WriteBool(schemas.InvokeFlowRequest_enableTrace, *v.EnableTrace)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.InvokeFlowRequest_executionId, *v.ExecutionId)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.InvokeFlowRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.InvokeFlowRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	serializeFlowInputs(s, schemas.InvokeFlowRequest_inputs, v.Inputs)
+	if v.ModelPerformanceConfiguration != nil {
+		s.WriteStruct(schemas.InvokeFlowRequest_modelPerformanceConfiguration)
+		v.ModelPerformanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InvokeFlowOutput struct {
 
 	// The unique identifier for the current flow execution.
@@ -82,79 +109,57 @@ type InvokeFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.InvokeFlowResponse_executionId, *v.ExecutionId)
+	}
+}
+func (v *InvokeFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeFlowResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.InvokeFlowResponse_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeFlowOutput) GetStream() *InvokeFlowEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeFlow, schemas.InvokeFlowRequest, schemas.InvokeFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeFlow, schemas.InvokeFlowRequest, schemas.InvokeFlowResponse), output: &InvokeFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeFlow{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamInvokeFlowMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,24 +174,10 @@ func (c *Client) addOperationInvokeFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeFlow",
-	}
 }
 
 // InvokeFlowEventStream provides the event stream handling for the InvokeFlow operation.

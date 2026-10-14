@@ -470,6 +470,26 @@ func (m *validateOpCreateIntegration) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQev2IdcApplication struct {
+}
+
+func (*validateOpCreateQev2IdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQev2IdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQev2IdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQev2IdcApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRedshiftIdcApplication struct {
 }
 
@@ -845,6 +865,26 @@ func (m *validateOpDeletePartner) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePartnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQev2IdcApplication struct {
+}
+
+func (*validateOpDeleteQev2IdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQev2IdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQev2IdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQev2IdcApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1710,6 +1750,26 @@ func (m *validateOpModifyLakehouseConfiguration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyQev2IdcApplication struct {
+}
+
+func (*validateOpModifyQev2IdcApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyQev2IdcApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyQev2IdcApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyQev2IdcApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyRedshiftIdcApplication struct {
 }
 
@@ -2202,6 +2262,10 @@ func addOpCreateIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIntegration{}, middleware.After)
 }
 
+func addOpCreateQev2IdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQev2IdcApplication{}, middleware.After)
+}
+
 func addOpCreateRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRedshiftIdcApplication{}, middleware.After)
 }
@@ -2276,6 +2340,10 @@ func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeletePartnerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePartner{}, middleware.After)
+}
+
+func addOpDeleteQev2IdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQev2IdcApplication{}, middleware.After)
 }
 
 func addOpDeleteRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -2448,6 +2516,10 @@ func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpModifyLakehouseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyLakehouseConfiguration{}, middleware.After)
+}
+
+func addOpModifyQev2IdcApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyQev2IdcApplication{}, middleware.After)
 }
 
 func addOpModifyRedshiftIdcApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -3419,6 +3491,27 @@ func validateOpCreateIntegrationInput(v *CreateIntegrationInput) error {
 	}
 }
 
+func validateOpCreateQev2IdcApplicationInput(v *CreateQev2IdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQev2IdcApplicationInput"}
+	if v.IdcInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcInstanceArn"))
+	}
+	if v.Qev2IdcApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Qev2IdcApplicationName"))
+	}
+	if v.IdcDisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdcDisplayName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput) error {
 	if v == nil {
 		return nil
@@ -3750,6 +3843,21 @@ func validateOpDeletePartnerInput(v *DeletePartnerInput) error {
 	}
 	if v.PartnerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQev2IdcApplicationInput(v *DeleteQev2IdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQev2IdcApplicationInput"}
+	if v.Qev2IdcApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Qev2IdcApplicationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4435,6 +4543,21 @@ func validateOpModifyLakehouseConfigurationInput(v *ModifyLakehouseConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyLakehouseConfigurationInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyQev2IdcApplicationInput(v *ModifyQev2IdcApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyQev2IdcApplicationInput"}
+	if v.Qev2IdcApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Qev2IdcApplicationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

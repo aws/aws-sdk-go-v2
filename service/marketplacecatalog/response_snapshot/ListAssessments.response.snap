@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AssessmentSummaryList":[{"AssessmentArn":"__AssessmentArn__","AssessmentId":"__AssessmentId__","AssessmentResult":"PASS","AssessmentTargetSummary":{"ChangeSetId":"__ChangeSetId__","EntityId":"__EntityId__"},"CreatedAt":"__CreatedAt__","ExpiresAt":"__ExpiresAt__","FrameworkId":"__FrameworkId__","FrameworkSummary":{"AMISecuritySummary":{"DeliveryOptionId":"__DeliveryOptionId__"}}},{"AssessmentArn":"__AssessmentArn__","AssessmentId":"__AssessmentId__","AssessmentResult":"PASS","AssessmentTargetSummary":{"ChangeSetId":"__ChangeSetId__","EntityId":"__EntityId__"},"CreatedAt":"__CreatedAt__","ExpiresAt":"__ExpiresAt__","FrameworkId":"__FrameworkId__","FrameworkSummary":{"AMISecuritySummary":{"DeliveryOptionId":"__DeliveryOptionId__"}}}],"NextToken":"__NextToken__"}

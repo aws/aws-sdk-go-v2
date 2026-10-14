@@ -4,11 +4,10 @@ package acmpca
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a root or subordinate private certificate authority (CA). You must
@@ -134,6 +133,38 @@ type CreateCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityConfiguration != nil {
+		s.WriteStruct(schemas.CreateCertificateAuthorityRequest_CertificateAuthorityConfiguration)
+		v.CertificateAuthorityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertificateAuthorityType != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_CertificateAuthorityType, string(v.CertificateAuthorityType))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.KeyStorageSecurityStandard != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_KeyStorageSecurityStandard, string(v.KeyStorageSecurityStandard))
+	}
+	if v.RevocationConfiguration != nil {
+		s.WriteStruct(schemas.CreateCertificateAuthorityRequest_RevocationConfiguration)
+		v.RevocationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCertificateAuthorityRequest_Tags, v.Tags)
+	if v.UsageMode != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_UsageMode, string(v.UsageMode))
+	}
+}
+
 type CreateCertificateAuthorityOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority
@@ -149,77 +180,48 @@ type CreateCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+func (v *CreateCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateAuthorityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.CreateCertificateAuthorityRequest, schemas.CreateCertificateAuthorityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.CreateCertificateAuthorityRequest, schemas.CreateCertificateAuthorityResponse), output: &CreateCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCertificateAuthority{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCertificateAuthority"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCertificateAuthorityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificateAuthority(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +236,8 @@ func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCertificateAuthority(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCertificateAuthority",
-	}
 }

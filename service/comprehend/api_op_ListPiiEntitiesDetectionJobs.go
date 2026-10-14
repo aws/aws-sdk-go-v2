@@ -5,10 +5,10 @@ package comprehend
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of the PII entity detection jobs that you have submitted.
@@ -43,6 +43,26 @@ type ListPiiEntitiesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPiiEntitiesDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPiiEntitiesDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPiiEntitiesDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPiiEntitiesDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPiiEntitiesDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.
@@ -57,74 +77,48 @@ type ListPiiEntitiesDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPiiEntitiesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPiiEntitiesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPiiEntitiesDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+	serializePiiEntitiesDetectionJobPropertiesList(s, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, v.PiiEntitiesDetectionJobPropertiesList)
+}
+func (v *ListPiiEntitiesDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPiiEntitiesDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPiiEntitiesDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPiiEntitiesDetectionJobsResponse_NextToken, v.NextToken)
+		case schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList:
+			return deserializePiiEntitiesDetectionJobPropertiesList(d, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, &v.PiiEntitiesDetectionJobPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPiiEntitiesDetectionJobs, schemas.ListPiiEntitiesDetectionJobsRequest, schemas.ListPiiEntitiesDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPiiEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPiiEntitiesDetectionJobs, schemas.ListPiiEntitiesDetectionJobsRequest, schemas.ListPiiEntitiesDetectionJobsResponse), output: &ListPiiEntitiesDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPiiEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPiiEntitiesDetectionJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPiiEntitiesDetectionJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,12 +131,6 @@ func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +234,3 @@ type ListPiiEntitiesDetectionJobsAPIClient interface {
 }
 
 var _ ListPiiEntitiesDetectionJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPiiEntitiesDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPiiEntitiesDetectionJobs",
-	}
-}

@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/ListDomainAccessGrantsForOrganization
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hdomainIdl__DomainId__jmaxResultsinextTokenm__NextToken__jpermissioneADMINkprincipalIdo__PrincipalId__mprincipalTypehIDC_USERÿ

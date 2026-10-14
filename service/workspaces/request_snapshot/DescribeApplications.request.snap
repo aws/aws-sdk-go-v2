@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeApplications
+
+{"ApplicationIds":["__Member__","__Member__"],"ComputeTypeNames":["VALUE","VALUE"],"LicenseType":"LICENSED","MaxResults":1,"NextToken":"__NextToken__","OperatingSystemNames":["AMAZON_LINUX_2","AMAZON_LINUX_2"],"Owner":"__Owner__"}

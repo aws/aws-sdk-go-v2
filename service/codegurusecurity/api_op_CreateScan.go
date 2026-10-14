@@ -5,12 +5,8 @@ package codegurusecurity
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use to create a scan using code uploaded to an Amazon S3 bucket.
@@ -75,29 +71,6 @@ type CreateScanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalysisType != "" {
-		s.WriteString(schemas.CreateScanRequest_analysisType, string(v.AnalysisType))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateScanRequest_clientToken, *v.ClientToken)
-	}
-	serializeResourceId(s, schemas.CreateScanRequest_resourceId, v.ResourceId)
-	if v.ScanName != nil {
-		s.WriteString(schemas.CreateScanRequest_scanName, *v.ScanName)
-	}
-	if v.ScanType != "" {
-		s.WriteString(schemas.CreateScanRequest_scanType, string(v.ScanType))
-	}
-	serializeTagMap(s, schemas.CreateScanRequest_tags, v.Tags)
-}
-
 type CreateScanOutput struct {
 
 	// The identifier for the resource object that contains resources that were
@@ -131,88 +104,23 @@ type CreateScanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScanResponse_resourceId:
-			return deserializeResourceId(d, schemas.CreateScanResponse_resourceId, &v.ResourceId)
-		case schemas.CreateScanResponse_runId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.CreateScanResponse_runId, v.RunId)
-		case schemas.CreateScanResponse_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.CreateScanResponse_scanName, v.ScanName)
-		case schemas.CreateScanResponse_scanNameArn:
-			v.ScanNameArn = new(string)
-			return d.ReadString(schemas.CreateScanResponse_scanNameArn, v.ScanNameArn)
-		case schemas.CreateScanResponse_scanState:
-			var ev string
-			if err := d.ReadString(schemas.CreateScanResponse_scanState, &ev); err != nil {
-				return err
-			}
-			v.ScanState = types.ScanState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScan, schemas.CreateScanRequest, schemas.CreateScanResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScan{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScan, schemas.CreateScanRequest, schemas.CreateScanResponse), output: &CreateScanOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -222,12 +130,6 @@ func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCreateScanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,12 +142,6 @@ func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,12 +181,4 @@ func (m *idempotencyToken_initializeOpCreateScan) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCreateScanMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateScan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateScan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScan",
-	}
 }

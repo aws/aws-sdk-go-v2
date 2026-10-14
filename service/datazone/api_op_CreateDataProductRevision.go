@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,33 +72,6 @@ type CreateDataProductRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataProductRevisionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataProductRevisionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataProductRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataProductRevisionInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDataProductRevisionInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateDataProductRevisionInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeFormInputList(s, schemas.CreateDataProductRevisionInput_formsInput, v.FormsInput)
-	serializeGlossaryTerms(s, schemas.CreateDataProductRevisionInput_glossaryTerms, v.GlossaryTerms)
-	if v.Identifier != nil {
-		s.WriteString(schemas.CreateDataProductRevisionInput_identifier, *v.Identifier)
-	}
-	serializeDataProductItems(s, schemas.CreateDataProductRevisionInput_items, v.Items)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDataProductRevisionInput_name, *v.Name)
-	}
-}
-
 type CreateDataProductRevisionOutput struct {
 
 	// The ID of the domain where data product revision is created.
@@ -165,113 +134,23 @@ type CreateDataProductRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataProductRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataProductRevisionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataProductRevisionOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateDataProductRevisionOutput_createdAt, v.CreatedAt)
-		case schemas.CreateDataProductRevisionOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_createdBy, v.CreatedBy)
-		case schemas.CreateDataProductRevisionOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_description, v.Description)
-		case schemas.CreateDataProductRevisionOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_domainId, v.DomainId)
-		case schemas.CreateDataProductRevisionOutput_firstRevisionCreatedAt:
-			v.FirstRevisionCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateDataProductRevisionOutput_firstRevisionCreatedAt, v.FirstRevisionCreatedAt)
-		case schemas.CreateDataProductRevisionOutput_firstRevisionCreatedBy:
-			v.FirstRevisionCreatedBy = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_firstRevisionCreatedBy, v.FirstRevisionCreatedBy)
-		case schemas.CreateDataProductRevisionOutput_formsOutput:
-			return deserializeFormOutputList(d, schemas.CreateDataProductRevisionOutput_formsOutput, &v.FormsOutput)
-		case schemas.CreateDataProductRevisionOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.CreateDataProductRevisionOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.CreateDataProductRevisionOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_id, v.Id)
-		case schemas.CreateDataProductRevisionOutput_items:
-			return deserializeDataProductItems(d, schemas.CreateDataProductRevisionOutput_items, &v.Items)
-		case schemas.CreateDataProductRevisionOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_name, v.Name)
-		case schemas.CreateDataProductRevisionOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_owningProjectId, v.OwningProjectId)
-		case schemas.CreateDataProductRevisionOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.CreateDataProductRevisionOutput_revision, v.Revision)
-		case schemas.CreateDataProductRevisionOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDataProductRevisionOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataProductStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataProductRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataProductRevision{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataProductRevision, schemas.CreateDataProductRevisionInput, schemas.CreateDataProductRevisionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataProductRevision{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataProductRevision, schemas.CreateDataProductRevisionInput, schemas.CreateDataProductRevisionOutput), output: &CreateDataProductRevisionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataProductRevision"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -281,12 +160,6 @@ func (c *Client) addOperationCreateDataProductRevisionMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCreateDataProductRevisionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataProductRevision(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -299,12 +172,6 @@ func (c *Client) addOperationCreateDataProductRevisionMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -344,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateDataProductRevision) HandleInitializ
 }
 func addIdempotencyToken_opCreateDataProductRevisionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataProductRevision{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataProductRevision(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataProductRevision",
-	}
 }

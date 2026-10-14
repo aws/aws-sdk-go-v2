@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.DisassociateMpaTeam
+
+{"Action":"IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE","RequesterComment":"__RequesterComment__"}

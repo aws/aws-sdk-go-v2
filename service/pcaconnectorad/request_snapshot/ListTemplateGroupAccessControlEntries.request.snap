@@ -1,0 +1,3 @@
+GET /templates/__TemplateArn__/accessControlEntries?MaxResults=1&NextToken=__NextToken__
+
+

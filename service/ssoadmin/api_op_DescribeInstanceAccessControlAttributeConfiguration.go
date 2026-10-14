@@ -4,13 +4,8 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of IAM Identity Center identity store attributes that have
@@ -44,18 +39,6 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceAccessControlAttributeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInstanceAccessControlAttributeConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInstanceAccessControlAttributeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.DescribeInstanceAccessControlAttributeConfigurationRequest_InstanceArn, *v.InstanceArn)
-	}
-}
-
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
 	// Gets the list of IAM Identity Center identity store attributes that have been
@@ -74,95 +57,29 @@ type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceAccessControlAttributeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_InstanceAccessControlAttributeConfiguration:
-			v.InstanceAccessControlAttributeConfiguration = &types.InstanceAccessControlAttributeConfiguration{}
-			return v.InstanceAccessControlAttributeConfiguration.Deserialize(d)
-		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.InstanceAccessControlAttributeConfigurationStatus(ev)
-			return nil
-		case schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.DescribeInstanceAccessControlAttributeConfigurationResponse_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstanceAccessControlAttributeConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAccessControlAttributeConfiguration, schemas.DescribeInstanceAccessControlAttributeConfigurationRequest, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstanceAccessControlAttributeConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAccessControlAttributeConfiguration, schemas.DescribeInstanceAccessControlAttributeConfigurationRequest, schemas.DescribeInstanceAccessControlAttributeConfigurationResponse), output: &DescribeInstanceAccessControlAttributeConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInstanceAccessControlAttributeConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInstanceAccessControlAttributeConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstanceAccessControlAttributeConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +94,8 @@ func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfiguration
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInstanceAccessControlAttributeConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInstanceAccessControlAttributeConfiguration",
-	}
 }

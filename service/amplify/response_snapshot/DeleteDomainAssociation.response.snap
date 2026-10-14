@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainAssociation":{"autoSubDomainCreationPatterns":["__Member__","__Member__"],"autoSubDomainIAMRole":"__AutoSubDomainIAMRole__","certificate":{"certificateVerificationDNSRecord":"__CertificateVerificationDNSRecord__","customCertificateArn":"__CustomCertificateArn__","type":"AMPLIFY_MANAGED"},"certificateVerificationDNSRecord":"__CertificateVerificationDNSRecord__","domainAssociationArn":"__DomainAssociationArn__","domainName":"__DomainName__","domainStatus":"PENDING_VERIFICATION","enableAutoSubDomain":true,"statusReason":"__StatusReason__","subDomains":[{"dnsRecord":"__DnsRecord__","subDomainSetting":{"branchName":"__BranchName__","prefix":"__Prefix__"},"verified":true},{"dnsRecord":"__DnsRecord__","subDomainSetting":{"branchName":"__BranchName__","prefix":"__Prefix__"},"verified":true}],"updateStatus":"REQUESTING_CERTIFICATE"}}

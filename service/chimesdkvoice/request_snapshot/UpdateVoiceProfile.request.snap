@@ -1,0 +1,5 @@
+PUT /voice-profiles/__VoiceProfileId__
+
+Content-Type: application/json
+
+{"SpeakerSearchTaskId":"__SpeakerSearchTaskId__"}

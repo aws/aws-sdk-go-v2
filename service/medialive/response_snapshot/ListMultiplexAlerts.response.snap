@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"alerts":[{"alertType":"__AlertType__","clearedTimestamp":"2000-01-01T00:00:00Z","id":"__Id__","message":"__Message__","pipelineId":"__PipelineId__","setTimestamp":"2000-01-01T00:00:00Z","state":"SET"},{"alertType":"__AlertType__","clearedTimestamp":"2000-01-01T00:00:00Z","id":"__Id__","message":"__Message__","pipelineId":"__PipelineId__","setTimestamp":"2000-01-01T00:00:00Z","state":"SET"}],"nextToken":"__NextToken__"}

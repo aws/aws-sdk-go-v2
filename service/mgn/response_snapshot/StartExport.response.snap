@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"exportTask":{"arn":"__Arn__","creationDateTime":"__CreationDateTime__","endDateTime":"__EndDateTime__","exportID":"__ExportID__","progressPercentage":1,"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__","status":"PENDING","summary":{"applicationsCount":1,"serversCount":1,"wavesCount":1},"tags":{"key0":"__Value__"}}}

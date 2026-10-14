@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.UpdateAnomaly
+
+{"anomalyDetectorArn":"__AnomalyDetectorArn__","anomalyId":"__AnomalyId__","baseline":true,"patternId":"__PatternId__","suppressionPeriod":{"suppressionUnit":"SECONDS","value":1},"suppressionType":"LIMITED"}

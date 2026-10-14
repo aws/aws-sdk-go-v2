@@ -45,7 +45,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a backup gateway with your server. After you complete the association process,\n      you can back up and restore your VMs through the gateway.</p>"
+                "smithy.api#documentation": "<p>Associates a backup gateway with your server. After you complete the association process, you can back up and restore your VMs through the gateway.</p>"
             }
         },
         "com.amazonaws.backupgateway#AssociateGatewayToServerInput": {
@@ -54,7 +54,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation\n      to return a list of gateways for your account and Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -135,13 +135,14 @@
                     "name": "backup-gateway"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>Backup gateway</fullname>\n         <p>Backup gateway connects Backup to your hypervisor, so you can\n      create, store, and restore backups of your virtual machines (VMs) anywhere, whether\n      on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p>\n         <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p>\n         <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run\n      on-demand backups. Once you have backed up your resources, you can view them and restore them\n      like any resource supported by Backup.</p>\n         <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>",
+                "smithy.api#documentation": "<fullname>Backup gateway</fullname> <p>Backup gateway connects Backup to your hypervisor, so you can create, store, and restore backups of your virtual machines (VMs) anywhere, whether on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p> <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p> <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run on-demand backups. Once you have backed up your resources, you can view them and restore them like any resource supported by Backup.</p> <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
                 },
                 "smithy.api#title": "AWS Backup Gateway",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {
@@ -1195,7 +1196,7 @@
                 "AverageUploadRateLimitInBitsPerSec": {
                     "target": "com.amazonaws.backupgateway#AverageUploadRateLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average upload rate limit component of the bandwidth rate limit \n      interval, in bits per second. This field does not appear in the response if \n      the upload rate limit is not set.</p>"
+                        "smithy.api#documentation": "<p>The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.</p>"
                     }
                 },
                 "StartHourOfDay": {
@@ -1215,27 +1216,27 @@
                 "StartMinuteOfHour": {
                     "target": "com.amazonaws.backupgateway#MinuteOfHour",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minute of the hour to start the bandwidth rate limit interval. The \n      interval begins at the start of that minute. To begin an interval exactly at \n      the start of the hour, use the value <code>0</code>.</p>",
+                        "smithy.api#documentation": "<p>The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EndMinuteOfHour": {
                     "target": "com.amazonaws.backupgateway#MinuteOfHour",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minute of the hour to end the bandwidth rate limit interval.</p>\n         <important>\n            <p>The bandwidth rate limit interval ends at the end of the minute. \n      To end an interval at the end of an hour, use the value <code>59</code>.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The minute of the hour to end the bandwidth rate limit interval.</p> <important> <p>The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>.</p> </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "DaysOfWeek": {
                     "target": "com.amazonaws.backupgateway#DaysOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>The days of the week component of the bandwidth rate limit interval, \n      represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents \n      Saturday.</p>",
+                        "smithy.api#documentation": "<p>The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a bandwidth rate limit interval for a gateway. A bandwidth \n      rate limit schedule consists of one or more bandwidth rate limit intervals. \n      A bandwidth rate limit interval defines a period of time on one or more days \n      of the week, during which bandwidth rate limits are specified for uploading, \n      downloading, or both.</p>"
+                "smithy.api#documentation": "<p>Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.</p>"
             }
         },
         "com.amazonaws.backupgateway#BandwidthRateLimitIntervals": {
@@ -1293,7 +1294,7 @@
                 "target": "com.amazonaws.backupgateway#CreateGatewayOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a backup gateway. After you create a gateway, you can associate it with a server\n      using the <code>AssociateGatewayToServer</code> operation.</p>"
+                "smithy.api#documentation": "<p>Creates a backup gateway. After you create a gateway, you can associate it with a server using the <code>AssociateGatewayToServer</code> operation.</p>"
             }
         },
         "com.amazonaws.backupgateway#CreateGatewayInput": {
@@ -1474,7 +1475,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates a backup gateway from the specified server. After the disassociation process\n      finishes, the gateway can no longer access the virtual machines on the server.</p>"
+                "smithy.api#documentation": "<p>Disassociates a backup gateway from the specified server. After the disassociation process finishes, the gateway can no longer access the virtual machines on the server.</p>"
             }
         },
         "com.amazonaws.backupgateway#DisassociateGatewayFromServerInput": {
@@ -1506,7 +1507,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation\n      to return a list of gateways for your account and Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
                     }
                 },
                 "GatewayDisplayName": {
@@ -1530,12 +1531,12 @@
                 "LastSeenTime": {
                     "target": "com.amazonaws.backupgateway#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time Backup gateway communicated with the gateway, in Unix format and\n      UTC time.</p>"
+                        "smithy.api#documentation": "<p>The last time Backup gateway communicated with the gateway, in Unix format and UTC time.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A gateway is an Backup Gateway appliance that runs on the customer's network\n      to provide seamless connectivity to backup storage in the Amazon Web Services Cloud.</p>"
+                "smithy.api#documentation": "<p>A gateway is an Backup Gateway appliance that runs on the customer's network to provide seamless connectivity to backup storage in the Amazon Web Services Cloud.</p>"
             }
         },
         "com.amazonaws.backupgateway#GatewayArn": {
@@ -1554,7 +1555,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the \n      gateway. Use the <code>ListGateways</code> operation\n      to return a list of gateways for your account and \n      Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
                     }
                 },
                 "GatewayDisplayName": {
@@ -1578,25 +1579,25 @@
                 "LastSeenTime": {
                     "target": "com.amazonaws.backupgateway#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details showing the last time Backup gateway communicated\n      with the cloud, in Unix format and UTC time.</p>"
+                        "smithy.api#documentation": "<p>Details showing the last time Backup gateway communicated with the cloud, in Unix format and UTC time.</p>"
                     }
                 },
                 "MaintenanceStartTime": {
                     "target": "com.amazonaws.backupgateway#MaintenanceStartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns your gateway's weekly maintenance start time including the day and time of the week. \n      Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>"
+                        "smithy.api#documentation": "<p>Returns your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>"
                     }
                 },
                 "NextUpdateAvailabilityTime": {
                     "target": "com.amazonaws.backupgateway#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details showing the next update availability time of the \n      gateway.</p>"
+                        "smithy.api#documentation": "<p>Details showing the next update availability time of the gateway.</p>"
                     }
                 },
                 "VpcEndpoint": {
                     "target": "com.amazonaws.backupgateway#VpcEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS name for the virtual private cloud (VPC) endpoint the gateway \n      uses to connect to the cloud for backup gateway.</p>"
+                        "smithy.api#documentation": "<p>The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to connect to the cloud for backup gateway.</p>"
                     }
                 },
                 "DeprecationDate": {
@@ -1697,7 +1698,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the bandwidth rate limit schedule for a specified gateway. \n      By default, gateways do not have bandwidth rate limit schedules, which means \n      no bandwidth rate limiting is in effect. Use this to get a gateway's \n      bandwidth rate limit schedule.</p>",
+                "smithy.api#documentation": "<p>Retrieves the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth rate limit schedule.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1707,7 +1708,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the \n      <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\">\n               <code>ListGateways</code>\n            </a> operation to return a list of gateways \n      for your account and Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1719,13 +1720,13 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the \n      <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\">\n               <code>ListGateways</code>\n            </a> operation to return a list of gateways \n      for your account and Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
                     }
                 },
                 "BandwidthRateLimitIntervals": {
                     "target": "com.amazonaws.backupgateway#BandwidthRateLimitIntervals",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing bandwidth rate limit schedule intervals for a gateway. \n      When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>"
+                        "smithy.api#documentation": "<p>An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>"
                     }
                 }
             }
@@ -1744,7 +1745,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this\n      API returns the gateway.</p>",
+                "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this API returns the gateway.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1766,7 +1767,7 @@
                 "Gateway": {
                     "target": "com.amazonaws.backupgateway#GatewayDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this\n      API returns the gateway.</p>"
+                        "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this API returns the gateway.</p>"
                     }
                 }
             }
@@ -1785,7 +1786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action requests information about the specified hypervisor to which the gateway will connect. \n      A hypervisor is hardware, software, or firmware that creates and manages virtual machines, \n      and allocates resources to them.</p>",
+                "smithy.api#documentation": "<p>This action requests information about the specified hypervisor to which the gateway will connect. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1826,7 +1827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action retrieves the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the hypervisor to the properties available in Amazon Web Services.</p>",
+                "smithy.api#documentation": "<p>This action retrieves the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the hypervisor to the properties available in Amazon Web Services.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1854,7 +1855,7 @@
                 "VmwareToAwsTagMappings": {
                     "target": "com.amazonaws.backupgateway#VmwareToAwsTagMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a display of the mappings of VMware tags to the \n      Amazon Web Services tags.</p>"
+                        "smithy.api#documentation": "<p>This is a display of the mappings of VMware tags to the Amazon Web Services tags.</p>"
                     }
                 },
                 "IamRoleArn": {
@@ -1901,7 +1902,7 @@
                 "VirtualMachine": {
                     "target": "com.amazonaws.backupgateway#VirtualMachineDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>This object contains the basic attributes of <code>VirtualMachine</code> contained by the output of \n      <code>GetVirtualMachine</code>\n         </p>"
+                        "smithy.api#documentation": "<p>This object contains the basic attributes of <code>VirtualMachine</code> contained by the output of <code>GetVirtualMachine</code> </p>"
                     }
                 }
             }
@@ -1931,7 +1932,7 @@
                 "Host": {
                     "target": "com.amazonaws.backupgateway#Host",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified\n      domain name (FQDN).</p>"
+                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>"
                     }
                 },
                 "HypervisorArn": {
@@ -1943,7 +1944,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.backupgateway#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the\n      hypervisor.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the hypervisor.</p>"
                     }
                 },
                 "Name": {
@@ -1960,7 +1961,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the hypervisor's permissions to which the gateway will connect.</p>\n         <p>A hypervisor is hardware, software, or firmware that creates and manages virtual machines,\n      and allocates resources to them.</p>"
+                "smithy.api#documentation": "<p>Represents the hypervisor's permissions to which the gateway will connect.</p> <p>A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>"
             }
         },
         "com.amazonaws.backupgateway#HypervisorDetails": {
@@ -1969,7 +1970,7 @@
                 "Host": {
                     "target": "com.amazonaws.backupgateway#Host",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or \n      a fully-qualified domain name (FQDN).</p>"
+                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>"
                     }
                 },
                 "HypervisorArn": {
@@ -1981,7 +1982,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.backupgateway#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS  \n      used to encrypt the hypervisor.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS used to encrypt the hypervisor.</p>"
                     }
                 },
                 "Name": {
@@ -1993,19 +1994,19 @@
                 "LogGroupArn": {
                     "target": "com.amazonaws.backupgateway#LogGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group of gateways within \n      the requested log.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the group of gateways within the requested log.</p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.backupgateway#HypervisorState",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the current state of the specified hypervisor.</p>\n         <p>The possible states are <code>PENDING</code>, <code>ONLINE</code>, \n      <code>OFFLINE</code>, or <code>ERROR</code>.</p>"
+                        "smithy.api#documentation": "<p>This is the current state of the specified hypervisor.</p> <p>The possible states are <code>PENDING</code>, <code>ONLINE</code>, <code>OFFLINE</code>, or <code>ERROR</code>.</p>"
                     }
                 },
                 "LastSuccessfulMetadataSyncTime": {
                     "target": "com.amazonaws.backupgateway#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is the time when the most recent successful sync \n      of metadata occurred.</p>"
+                        "smithy.api#documentation": "<p>This is the time when the most recent successful sync of metadata occurred.</p>"
                     }
                 },
                 "LatestMetadataSyncStatusMessage": {
@@ -2022,7 +2023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are the details of the specified hypervisor. A hypervisor is hardware, \n      software, or firmware that creates and manages virtual machines, and allocates \n      resources to them.</p>"
+                "smithy.api#documentation": "<p>These are the details of the specified hypervisor. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>"
             }
         },
         "com.amazonaws.backupgateway#HypervisorId": {
@@ -2158,7 +2159,7 @@
                 "Host": {
                     "target": "com.amazonaws.backupgateway#Host",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified\n      domain name (FQDN).</p>",
+                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2256,7 +2257,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2273,7 +2274,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2306,7 +2307,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2317,13 +2318,13 @@
                 "Hypervisors": {
                     "target": "com.amazonaws.backupgateway#Hypervisors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of your <code>Hypervisor</code> objects, ordered by their Amazon Resource Names\n      (ARNs).</p>"
+                        "smithy.api#documentation": "<p>A list of your <code>Hypervisor</code> objects, ordered by their Amazon Resource Names (ARNs).</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2342,7 +2343,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags applied to the resource identified by its Amazon Resource Name\n      (ARN).</p>"
+                "smithy.api#documentation": "<p>Lists the tags applied to the resource identified by its Amazon Resource Name (ARN).</p>"
             }
         },
         "com.amazonaws.backupgateway#ListTagsForResourceInput": {
@@ -2408,7 +2409,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2419,13 +2420,13 @@
                 "VirtualMachines": {
                     "target": "com.amazonaws.backupgateway#VirtualMachines",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names\n      (ARNs).</p>"
+                        "smithy.api#documentation": "<p>A list of your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names (ARNs).</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.backupgateway#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is\n      made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you\n      to return more items in your list starting at the location pointed to by the next\n      token.</p>"
+                        "smithy.api#documentation": "<p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>"
                     }
                 }
             }
@@ -2446,32 +2447,32 @@
                 "DayOfMonth": {
                     "target": "com.amazonaws.backupgateway#DayOfMonth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the month component of the maintenance start time represented as an ordinal number from \n      1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.</p>"
+                        "smithy.api#documentation": "<p>The day of the month component of the maintenance start time represented as an ordinal number from 1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.</p>"
                     }
                 },
                 "DayOfWeek": {
                     "target": "com.amazonaws.backupgateway#DayOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday \n      and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>"
+                        "smithy.api#documentation": "<p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>"
                     }
                 },
                 "HourOfDay": {
                     "target": "com.amazonaws.backupgateway#HourOfDay",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hour component of the maintenance start time represented as <i>hh</i>, \n      where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>",
+                        "smithy.api#documentation": "<p>The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MinuteOfHour": {
                     "target": "com.amazonaws.backupgateway#MinuteOfHour",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minute component of the maintenance start time represented as <i>mm</i>, where \n      <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>",
+                        "smithy.api#documentation": "<p>The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This is your gateway's weekly maintenance start time including the day and time of the week. \n      Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>"
+                "smithy.api#documentation": "<p>This is your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.</p>"
             }
         },
         "com.amazonaws.backupgateway#MaxResults": {
@@ -2546,7 +2547,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action sets the bandwidth rate limit schedule for a specified gateway. \n      By default, gateways do not have a bandwidth rate limit schedule, which means \n      no bandwidth rate limiting is in effect. Use this to initiate a  \n      gateway's bandwidth rate limit schedule.</p>",
+                "smithy.api#documentation": "<p>This action sets the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have a bandwidth rate limit schedule, which means no bandwidth rate limiting is in effect. Use this to initiate a gateway's bandwidth rate limit schedule.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2556,14 +2557,14 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the \n      <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\">\n               <code>ListGateways</code>\n            </a> operation to return a list of gateways \n      for your account and Amazon Web Services Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BandwidthRateLimitIntervals": {
                     "target": "com.amazonaws.backupgateway#BandwidthRateLimitIntervals",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing bandwidth rate limit schedule intervals for a gateway. \n      When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>",
+                        "smithy.api#documentation": "<p>An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2575,7 +2576,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the \n      <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\">\n               <code>ListGateways</code>\n            </a> operation to return a list of gateways \n      for your account and Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html\"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>"
                     }
                 }
             }
@@ -2600,7 +2601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action sets the property mappings for the specified hypervisor. \n      A hypervisor property mapping displays the relationship of entity properties \n      available from the hypervisor to the properties available in Amazon Web Services.</p>",
+                "smithy.api#documentation": "<p>This action sets the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the hypervisor to the properties available in Amazon Web Services.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2617,7 +2618,7 @@
                 "VmwareToAwsTagMappings": {
                     "target": "com.amazonaws.backupgateway#VmwareToAwsTagMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>This action requests the mappings of VMware tags to the \n      Amazon Web Services tags.</p>",
+                        "smithy.api#documentation": "<p>This action requests the mappings of VMware tags to the Amazon Web Services tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2667,7 +2668,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start\n      time.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start time.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2694,7 +2695,7 @@
                 "DayOfMonth": {
                     "target": "com.amazonaws.backupgateway#DayOfMonth",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day of the month start maintenance on a gateway.</p>\n         <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>"
+                        "smithy.api#documentation": "<p>The day of the month start maintenance on a gateway.</p> <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>"
                     }
                 }
             }
@@ -2705,7 +2706,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a gateway for which you set the maintenance start\n      time.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a gateway for which you set the maintenance start time.</p>"
                     }
                 }
             }
@@ -2838,7 +2839,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value pair you can use to manage, filter, and search for your resources. Allowed\n      characters include UTF-8 letters, numbers, and the following characters: + - = . _ :\n      /. Spaces are not allowed in tag values.</p>"
+                "smithy.api#documentation": "<p>A key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, and the following characters: + - = . _ : /. Spaces are not allowed in tag values.</p>"
             }
         },
         "com.amazonaws.backupgateway#TagKey": {
@@ -2937,7 +2938,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tests your hypervisor configuration to validate that backup gateway can connect with the\n      hypervisor and its resources.</p>"
+                "smithy.api#documentation": "<p>Tests your hypervisor configuration to validate that backup gateway can connect with the hypervisor and its resources.</p>"
             }
         },
         "com.amazonaws.backupgateway#TestHypervisorConfigurationInput": {
@@ -2953,7 +2954,7 @@
                 "Host": {
                     "target": "com.amazonaws.backupgateway#Host",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified\n      domain name (FQDN).</p>",
+                        "smithy.api#documentation": "<p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2981,7 +2982,7 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.backupgateway#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Error: TPS has been limited to protect against intentional or unintentional \n      high request volumes.</p>",
+                        "smithy.api#documentation": "<p>Error: TPS has been limited to protect against intentional or unintentional high request volumes.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2990,7 +2991,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>TPS has been limited to protect against intentional or unintentional \n    high request volumes.</p>",
+                "smithy.api#documentation": "<p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -3062,7 +3063,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name\n      (ARN) of the gateway in your request.</p>"
+                "smithy.api#documentation": "<p>Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name (ARN) of the gateway in your request.</p>"
             }
         },
         "com.amazonaws.backupgateway#UpdateGatewayInformationInput": {
@@ -3108,7 +3109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the gateway virtual machine (VM) software. \n      The request immediately triggers the software update.</p>\n         <note>\n            <p>When you make this request, you get a <code>200 OK</code>\n        success response immediately. However, it might take some \n        time for the update to complete.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete.</p> </note>"
             }
         },
         "com.amazonaws.backupgateway#UpdateGatewaySoftwareNowInput": {
@@ -3117,7 +3118,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway\n      to be updated.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway to be updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3129,7 +3130,7 @@
                 "GatewayArn": {
                     "target": "com.amazonaws.backupgateway#GatewayArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway\n      you updated.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway you updated.</p>"
                     }
                 }
             }
@@ -3154,7 +3155,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a hypervisor metadata, including its host, username, and password. Specify which\n      hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your\n      request.</p>"
+                "smithy.api#documentation": "<p>Updates a hypervisor metadata, including its host, username, and password. Specify which hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your request.</p>"
             }
         },
         "com.amazonaws.backupgateway#UpdateHypervisorInput": {
@@ -3170,7 +3171,7 @@
                 "Host": {
                     "target": "com.amazonaws.backupgateway#Host",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified\n      domain name (FQDN).</p>"
+                        "smithy.api#documentation": "<p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>"
                     }
                 },
                 "Username": {
@@ -3270,7 +3271,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.backupgateway#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine. For example,\n        <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>"
                     }
                 },
                 "LastBackupDate": {
@@ -3314,7 +3315,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.backupgateway#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine. For example, \n      <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>"
                     }
                 },
                 "LastBackupDate": {
@@ -3326,7 +3327,7 @@
                 "VmwareTags": {
                     "target": "com.amazonaws.backupgateway#VmwareTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>These are the details of the VMware tags associated with the specified \n      virtual machine.</p>"
+                        "smithy.api#documentation": "<p>These are the details of the VMware tags associated with the specified virtual machine.</p>"
                     }
                 }
             },
@@ -3391,7 +3392,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A VMware tag is a tag attached to a specific virtual machine.\n      A <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html\">tag</a> \n      is a key-value pair you can use to manage, filter, and search for your resources.</p>\n         <p>The content of VMware tags can be matched to Amazon Web Services tags.</p>"
+                "smithy.api#documentation": "<p>A VMware tag is a tag attached to a specific virtual machine. A <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html\">tag</a> is a key-value pair you can use to manage, filter, and search for your resources.</p> <p>The content of VMware tags can be matched to Amazon Web Services tags.</p>"
             }
         },
         "com.amazonaws.backupgateway#VmwareTagName": {
@@ -3442,7 +3443,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This displays the mapping of VMware tags to the \n      corresponding Amazon Web Services tags.</p>"
+                "smithy.api#documentation": "<p>This displays the mapping of VMware tags to the corresponding Amazon Web Services tags.</p>"
             }
         },
         "com.amazonaws.backupgateway#VmwareToAwsTagMappings": {

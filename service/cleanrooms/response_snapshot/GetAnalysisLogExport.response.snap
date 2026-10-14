@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analysisLogExport":{"analysisId":"__AnalysisId__","analysisLogExportId":"__AnalysisLogExportId__","analysisType":"PROTECTED_QUERY","createTime":946684800,"error":{"code":"__Code__","message":"__Message__"},"membershipId":"__MembershipId__","resultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__"}}},"status":"IN_PROGRESS","updateTime":946684800}}

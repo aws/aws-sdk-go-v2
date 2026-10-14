@@ -4,13 +4,8 @@ package migrationhubrefactorspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,28 +33,6 @@ type GetEnvironmentInput struct {
 	EnvironmentIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-}
-func (v *GetEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.GetEnvironmentRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		}
-		return nil
-	})
 }
 
 type GetEnvironmentOutput struct {
@@ -107,169 +80,29 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_Arn, *v.Arn)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.GetEnvironmentResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_Description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.GetEnvironmentResponse_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.GetEnvironmentResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_Name, *v.Name)
-	}
-	if v.NetworkFabricType != "" {
-		s.WriteString(schemas.GetEnvironmentResponse_NetworkFabricType, string(v.NetworkFabricType))
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.GetEnvironmentResponse_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.GetEnvironmentResponse_Tags, v.Tags)
-	if v.TransitGatewayId != nil {
-		s.WriteString(schemas.GetEnvironmentResponse_TransitGatewayId, *v.TransitGatewayId)
-	}
-}
-func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_Arn, v.Arn)
-		case schemas.GetEnvironmentResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentResponse_CreatedTime, v.CreatedTime)
-		case schemas.GetEnvironmentResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_Description, v.Description)
-		case schemas.GetEnvironmentResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.GetEnvironmentResponse_Error:
-			v.Error = &types.ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.GetEnvironmentResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.GetEnvironmentResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_Name, v.Name)
-		case schemas.GetEnvironmentResponse_NetworkFabricType:
-			var ev string
-			if err := d.ReadString(schemas.GetEnvironmentResponse_NetworkFabricType, &ev); err != nil {
-				return err
-			}
-			v.NetworkFabricType = types.NetworkFabricType(ev)
-			return nil
-		case schemas.GetEnvironmentResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.GetEnvironmentResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetEnvironmentResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.EnvironmentState(ev)
-			return nil
-		case schemas.GetEnvironmentResponse_Tags:
-			return deserializeTagMap(d, schemas.GetEnvironmentResponse_Tags, &v.Tags)
-		case schemas.GetEnvironmentResponse_TransitGatewayId:
-			v.TransitGatewayId = new(string)
-			return d.ReadString(schemas.GetEnvironmentResponse_TransitGatewayId, v.TransitGatewayId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentRequest, schemas.GetEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentRequest, schemas.GetEnvironmentResponse), output: &GetEnvironmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -284,22 +117,8 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnvironment",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.GetDefaultRetentionPolicy
+
+{"Description":"__Description__","FolderConfigurations":[{"Action":"NONE","Name":"INBOX","Period":1},{"Action":"NONE","Name":"INBOX","Period":1}],"Id":"__Id__","Name":"__Name__"}

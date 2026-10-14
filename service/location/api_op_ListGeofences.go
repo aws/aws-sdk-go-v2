@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,40 +47,6 @@ type ListGeofencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGeofencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGeofencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGeofencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.ListGeofencesRequest_CollectionName, *v.CollectionName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListGeofencesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGeofencesRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListGeofencesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGeofencesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGeofencesRequest_CollectionName:
-			v.CollectionName = new(string)
-			return d.ReadString(schemas.ListGeofencesRequest_CollectionName, v.CollectionName)
-		case schemas.ListGeofencesRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListGeofencesRequest_MaxResults, v.MaxResults)
-		case schemas.ListGeofencesRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGeofencesRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListGeofencesOutput struct {
 
 	// Contains a list of geofences stored in the geofence collection.
@@ -101,87 +64,23 @@ type ListGeofencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGeofencesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGeofencesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGeofencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListGeofenceResponseEntryList(s, schemas.ListGeofencesResponse_Entries, v.Entries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGeofencesResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListGeofencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGeofencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGeofencesResponse_Entries:
-			return deserializeListGeofenceResponseEntryList(d, schemas.ListGeofencesResponse_Entries, &v.Entries)
-		case schemas.ListGeofencesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGeofencesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGeofences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeofences, schemas.ListGeofencesRequest, schemas.ListGeofencesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGeofences{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeofences, schemas.ListGeofencesRequest, schemas.ListGeofencesResponse), output: &ListGeofencesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGeofences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +90,6 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpListGeofencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGeofences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +102,6 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -343,11 +230,3 @@ type ListGeofencesAPIClient interface {
 }
 
 var _ ListGeofencesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGeofences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGeofences",
-	}
-}

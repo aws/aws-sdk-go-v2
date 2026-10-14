@@ -1,0 +1,3 @@
+GET /v1/compliance-inquiry/getMetadata?complianceInquiryId=__ComplianceInquiryId__
+
+

@@ -5,12 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the terms attached to an offer, such as pricing terms (usage-based,
@@ -38,6 +34,12 @@ type GetOfferTermsInput struct {
 	// This member is required.
 	OfferId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -49,30 +51,17 @@ type GetOfferTermsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOfferTermsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOfferTermsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOfferTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetOfferTermsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetOfferTermsInput_nextToken, *v.NextToken)
-	}
-	if v.OfferId != nil {
-		s.WriteString(schemas.GetOfferTermsInput_offerId, *v.OfferId)
-	}
-}
-
 type GetOfferTermsOutput struct {
 
 	// The terms attached to the offer. Each element contains exactly one term type.
 	//
 	// This member is required.
 	OfferTerms []types.OfferTerm
+
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
 
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.
@@ -84,87 +73,29 @@ type GetOfferTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOfferTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOfferTermsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOfferTermsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetOfferTermsOutput_nextToken, v.NextToken)
-		case schemas.GetOfferTermsOutput_offerTerms:
-			return deserializeOfferTermsList(d, schemas.GetOfferTermsOutput_offerTerms, &v.OfferTerms)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOfferTerms{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferTerms, schemas.GetOfferTermsInput, schemas.GetOfferTermsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOfferTerms{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferTerms, schemas.GetOfferTermsInput, schemas.GetOfferTermsOutput), output: &GetOfferTermsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOfferTerms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOfferTermsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOfferTerms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +110,6 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -193,6 +118,10 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 
 // GetOfferTermsPaginatorOptions is the paginator options for GetOfferTerms
 type GetOfferTermsPaginatorOptions struct {
+	// The maximum number of results that are returned per call. You can use nextToken
+	// to get more results.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -214,6 +143,9 @@ func NewGetOfferTermsPaginator(client GetOfferTermsAPIClient, params *GetOfferTe
 	}
 
 	options := GetOfferTermsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -241,6 +173,12 @@ func (p *GetOfferTermsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
@@ -270,11 +208,3 @@ type GetOfferTermsAPIClient interface {
 }
 
 var _ GetOfferTermsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetOfferTerms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOfferTerms",
-	}
-}

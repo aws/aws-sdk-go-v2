@@ -5,12 +5,8 @@ package migrationhubstrategy
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of all the imports performed.
@@ -43,34 +39,6 @@ type ListImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListImportFileTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListImportFileTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListImportFileTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListImportFileTaskRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListImportFileTaskRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListImportFileTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListImportFileTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListImportFileTaskRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListImportFileTaskRequest_maxResults, v.MaxResults)
-		case schemas.ListImportFileTaskRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListImportFileTaskRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListImportFileTaskOutput struct {
 
 	//  The token you use to retrieve the next set of results, or null if there are no
@@ -86,96 +54,26 @@ type ListImportFileTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListImportFileTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListImportFileTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListImportFileTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListImportFileTaskResponse_nextToken, *v.NextToken)
-	}
-	serializeListImportFileTaskInformation(s, schemas.ListImportFileTaskResponse_taskInfos, v.TaskInfos)
-}
-func (v *ListImportFileTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListImportFileTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListImportFileTaskResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListImportFileTaskResponse_nextToken, v.NextToken)
-		case schemas.ListImportFileTaskResponse_taskInfos:
-			return deserializeListImportFileTaskInformation(d, schemas.ListImportFileTaskResponse_taskInfos, &v.TaskInfos)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListImportFileTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImportFileTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileTask, schemas.ListImportFileTaskRequest, schemas.ListImportFileTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImportFileTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileTask, schemas.ListImportFileTaskRequest, schemas.ListImportFileTaskResponse), output: &ListImportFileTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImportFileTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportFileTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +86,6 @@ func (c *Client) addOperationListImportFileTaskMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +187,3 @@ type ListImportFileTaskAPIClient interface {
 }
 
 var _ ListImportFileTaskAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImportFileTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImportFileTask",
-	}
-}

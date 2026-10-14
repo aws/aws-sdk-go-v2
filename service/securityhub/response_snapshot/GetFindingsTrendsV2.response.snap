@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Granularity":"Daily","NextToken":"__NextToken__","TrendsMetrics":[{"Timestamp":"2000-01-01T00:00:00Z","TrendsValues":{"SeverityTrends":{"Critical":1,"Fatal":1,"High":1,"Informational":1,"Low":1,"Medium":1,"Other":1,"Unknown":1}}},{"Timestamp":"2000-01-01T00:00:00Z","TrendsValues":{"SeverityTrends":{"Critical":1,"Fatal":1,"High":1,"Informational":1,"Low":1,"Medium":1,"Other":1,"Unknown":1}}}]}

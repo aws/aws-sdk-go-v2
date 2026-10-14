@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.UpdateRulesOfIpGroup
+
+{"GroupId":"__GroupId__","UserRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}

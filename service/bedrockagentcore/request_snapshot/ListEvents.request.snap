@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/actor/__ActorId__/sessions/__SessionId__
+
+Content-Type: application/json
+
+{"filter":{"branch":{"includeParentBranches":true,"name":"__Name__"},"eventMetadata":[{"left":{"metadataKey":"__LeftExpressionMemberMetadataKey__"},"operator":"EQUALS_TO","right":{"metadataValue":{"stringValue":"__MetadataValueMemberStringValue__"}}},{"left":{"metadataKey":"__LeftExpressionMemberMetadataKey__"},"operator":"EQUALS_TO","right":{"metadataValue":{"stringValue":"__MetadataValueMemberStringValue__"}}}]},"includePayloads":true,"maxResults":1,"nextToken":"__NextToken__"}

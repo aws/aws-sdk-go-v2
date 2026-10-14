@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified request operation.
@@ -61,27 +56,6 @@ type DescribeRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeRecordInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeRecordInput_Id, *v.Id)
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.DescribeRecordInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.DescribeRecordInput_PageToken, *v.PageToken)
-	}
-}
-
 type DescribeRecordOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -102,90 +76,29 @@ type DescribeRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRecordOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.DescribeRecordOutput_NextPageToken, v.NextPageToken)
-		case schemas.DescribeRecordOutput_RecordDetail:
-			v.RecordDetail = &types.RecordDetail{}
-			return v.RecordDetail.Deserialize(d)
-		case schemas.DescribeRecordOutput_RecordOutputs:
-			return deserializeRecordOutputs(d, schemas.DescribeRecordOutput_RecordOutputs, &v.RecordOutputs)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecord, schemas.DescribeRecordInput, schemas.DescribeRecordOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRecord{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecord, schemas.DescribeRecordInput, schemas.DescribeRecordOutput), output: &DescribeRecordOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRecord"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRecordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecord(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +113,8 @@ func (c *Client) addOperationDescribeRecordMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRecord(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRecord",
-	}
 }

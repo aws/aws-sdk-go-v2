@@ -1,0 +1,5 @@
+POST /BatchGetCodeReviews
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewIds":["__Member__","__Member__"]}

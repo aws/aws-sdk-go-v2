@@ -218,6 +218,30 @@ func TestCheckSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembership(context.Background(), nil, func(o *Options) {
@@ -350,6 +374,30 @@ func TestCheckSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMember(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMember(context.Background(), nil, func(o *Options) {
@@ -379,6 +427,30 @@ func TestCheckSnapshot_DeletePrivacyBudgetTemplate(t *testing.T) {
 	_, err := svc.DeletePrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePrivacyBudgetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisallowIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisallowIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisallowIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +626,30 @@ func TestCheckSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMembership(context.Background(), nil, func(o *Options) {
@@ -619,6 +715,18 @@ func TestCheckSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 	_, err := svc.GetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSchemaAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAnalysisLogExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisLogExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAnalysisLogExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -782,6 +890,30 @@ func TestCheckSnapshot_ListIdNamespaceAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListIntermediateTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntermediateTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntermediateTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIntermediateTableVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntermediateTableVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntermediateTableVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMembers(context.Background(), nil, func(o *Options) {
@@ -890,11 +1022,35 @@ func TestCheckSnapshot_PopulateIdMappingTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PopulateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PopulateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PopulateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1063,6 +1219,30 @@ func TestCheckSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 	_, err := svc.UpdateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIntermediateTableAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1273,6 +1453,30 @@ func TestUpdateSnapshot_CreateIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateMembership(context.Background(), nil, func(o *Options) {
@@ -1405,6 +1609,30 @@ func TestUpdateSnapshot_DeleteIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteMember(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMember(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1662,30 @@ func TestUpdateSnapshot_DeletePrivacyBudgetTemplate(t *testing.T) {
 	_, err := svc.DeletePrivacyBudgetTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePrivacyBudgetTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisallowIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisallowIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisallowIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1609,6 +1861,30 @@ func TestUpdateSnapshot_GetIdNamespaceAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIntermediateTableAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMembership(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMembership(context.Background(), nil, func(o *Options) {
@@ -1674,6 +1950,18 @@ func TestUpdateSnapshot_GetSchemaAnalysisRule(t *testing.T) {
 	_, err := svc.GetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSchemaAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAnalysisLogExports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAnalysisLogExports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAnalysisLogExports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1837,6 +2125,30 @@ func TestUpdateSnapshot_ListIdNamespaceAssociations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListIntermediateTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntermediateTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntermediateTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIntermediateTableVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntermediateTableVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntermediateTableVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListMembers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListMembers(context.Background(), nil, func(o *Options) {
@@ -1945,11 +2257,35 @@ func TestUpdateSnapshot_PopulateIdMappingTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PopulateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PopulateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PopulateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PreviewPrivacyImpact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PreviewPrivacyImpact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PreviewPrivacyImpact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAnalysisLogExport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAnalysisLogExport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAnalysisLogExport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2118,6 +2454,30 @@ func TestUpdateSnapshot_UpdateIdNamespaceAssociation(t *testing.T) {
 	_, err := svc.UpdateIdNamespaceAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIdNamespaceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIntermediateTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntermediateTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIntermediateTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntermediateTableAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIntermediateTableAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -16,28 +14,6 @@ type AttributeValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AttributeValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttributeValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Value != nil {
-		s.WriteString(schemas.AttributeValue_Value, *v.Value)
-	}
-}
-func (v *AttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttributeValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttributeValue_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.AttributeValue_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The constraints that you want all returned products to match.
@@ -90,44 +66,6 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Filter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Filter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Field != nil {
-		s.WriteString(schemas.Filter_Field, *v.Field)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Filter_Type, string(v.Type))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Filter_Value, *v.Value)
-	}
-}
-func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Filter_Field:
-			v.Field = new(string)
-			return d.ReadString(schemas.Filter_Field, v.Field)
-		case schemas.Filter_Type:
-			var ev string
-			if err := d.ReadString(schemas.Filter_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = FilterType(ev)
-			return nil
-		case schemas.Filter_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Filter_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 //	This feature is in preview release and is subject to change. Your use of
 //
 // Amazon Web Services Price List API is subject to the Beta Service Participation
@@ -166,43 +104,6 @@ type PriceList struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PriceList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PriceList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PriceList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CurrencyCode != nil {
-		s.WriteString(schemas.PriceList_CurrencyCode, *v.CurrencyCode)
-	}
-	serializeFileFormats(s, schemas.PriceList_FileFormats, v.FileFormats)
-	if v.PriceListArn != nil {
-		s.WriteString(schemas.PriceList_PriceListArn, *v.PriceListArn)
-	}
-	if v.RegionCode != nil {
-		s.WriteString(schemas.PriceList_RegionCode, *v.RegionCode)
-	}
-}
-func (v *PriceList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PriceList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PriceList_CurrencyCode:
-			v.CurrencyCode = new(string)
-			return d.ReadString(schemas.PriceList_CurrencyCode, v.CurrencyCode)
-		case schemas.PriceList_FileFormats:
-			return deserializeFileFormats(d, schemas.PriceList_FileFormats, &v.FileFormats)
-		case schemas.PriceList_PriceListArn:
-			v.PriceListArn = new(string)
-			return d.ReadString(schemas.PriceList_PriceListArn, v.PriceListArn)
-		case schemas.PriceList_RegionCode:
-			v.RegionCode = new(string)
-			return d.ReadString(schemas.PriceList_RegionCode, v.RegionCode)
-		}
-		return nil
-	})
-}
-
 // The metadata for a service, such as the service code and available attribute
 // names.
 type Service struct {
@@ -216,31 +117,6 @@ type Service struct {
 	AttributeNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Service) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Service)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.Service_AttributeNames, v.AttributeNames)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.Service_ServiceCode, *v.ServiceCode)
-	}
-}
-func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Service_AttributeNames:
-			return deserializeAttributeNameList(d, schemas.Service_AttributeNames, &v.AttributeNames)
-		case schemas.Service_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.Service_ServiceCode, v.ServiceCode)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

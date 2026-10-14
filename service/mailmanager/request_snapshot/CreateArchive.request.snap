@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/CreateArchive
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥iRetention¡oRetentionPeriodlTHREE_MONTHSiKmsKeyArnm__KmsKeyArn__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__kClientTokeno__ClientToken__kArchiveNameo__ArchiveName__

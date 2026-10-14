@@ -1,0 +1,5 @@
+PATCH /v1/event-actions/__EventActionId__
+
+Content-Type: application/json
+
+{"Action":{"ExportRevisionToS3":{"Encryption":{"KmsKeyArn":"__KmsKeyArn__","Type":"aws:kms"},"RevisionDestination":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__"}}}}

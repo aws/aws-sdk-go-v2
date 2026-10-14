@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/dataset-export-task
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","exportConfig":{"s3Location":"__DataSetExportConfigMemberS3Location__"},"kmsKeyId":"__KmsKeyId__"}

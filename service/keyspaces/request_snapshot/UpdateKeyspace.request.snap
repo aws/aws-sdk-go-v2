@@ -1,0 +1,7 @@
+POST /service/KeyspacesService/operation/UpdateKeyspace
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿tclientSideTimestamps¿fstatusgENABLEDÿlkeyspaceNamep__KeyspaceName__xreplicationSpecification¿jregionListŸj__Member__j__Member__ÿsreplicationStrategymSINGLE_REGIONÿÿ

@@ -1,0 +1,3 @@
+GET /prod/offerings?channelClass=__ChannelClass__&channelConfiguration=__ChannelConfiguration__&codec=__Codec__&duration=__Duration__&maxResults=1&maximumBitrate=__MaximumBitrate__&maximumFramerate=__MaximumFramerate__&nextToken=__NextToken__&resolution=__Resolution__&resourceType=__ResourceType__&specialFeature=__SpecialFeature__&videoQuality=__VideoQuality__
+
+

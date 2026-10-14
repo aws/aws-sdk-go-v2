@@ -1,0 +1,5 @@
+PUT /signing-profiles/__ProfileName__/revoke
+
+Content-Type: application/json
+
+{"effectiveTime":946684800,"profileVersion":"__ProfileVersion__","reason":"__Reason__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.CreateDataset
+
+{"ClientRequestToken":"__ClientRequestToken__","DatasetName":"__DatasetName__","DatasetType":"TRAIN","Description":"__Description__","FlywheelArn":"__FlywheelArn__","InputDataConfig":{"AugmentedManifests":[{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__"},{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__"}],"DataFormat":"COMPREHEND_CSV","DocumentClassifierInputDataConfig":{"LabelDelimiter":"__LabelDelimiter__","S3Uri":"__S3Uri__"},"EntityRecognizerInputDataConfig":{"Annotations":{"S3Uri":"__S3Uri__"},"Documents":{"InputFormat":"ONE_DOC_PER_FILE","S3Uri":"__S3Uri__"},"EntityList":{"S3Uri":"__S3Uri__"}}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

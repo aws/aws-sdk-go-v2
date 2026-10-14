@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.BatchGetNamedQuery
+
+{"NamedQueries":[{"Database":"__Database__","Description":"__Description__","Name":"__Name__","NamedQueryId":"__NamedQueryId__","QueryString":"__QueryString__","WorkGroup":"__WorkGroup__"},{"Database":"__Database__","Description":"__Description__","Name":"__Name__","NamedQueryId":"__NamedQueryId__","QueryString":"__QueryString__","WorkGroup":"__WorkGroup__"}],"UnprocessedNamedQueryIds":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","NamedQueryId":"__NamedQueryId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","NamedQueryId":"__NamedQueryId__"}]}

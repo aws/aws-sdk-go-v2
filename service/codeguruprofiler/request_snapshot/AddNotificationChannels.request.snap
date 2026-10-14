@@ -1,0 +1,5 @@
+POST /profilingGroups/__ProfilingGroupName__/notificationConfiguration
+
+Content-Type: application/json
+
+{"channels":[{"eventPublishers":["AnomalyDetection","AnomalyDetection"],"id":"__Id__","uri":"__Uri__"},{"eventPublishers":["AnomalyDetection","AnomalyDetection"],"id":"__Id__","uri":"__Uri__"}]}

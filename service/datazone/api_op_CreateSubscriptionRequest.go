@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -67,29 +63,6 @@ type CreateSubscriptionRequestInput struct {
 	MetadataForms []types.FormInput
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateSubscriptionRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSubscriptionRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSubscriptionRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetPermissions(s, schemas.CreateSubscriptionRequestInput_assetPermissions, v.AssetPermissions)
-	serializeAcceptedAssetScopes(s, schemas.CreateSubscriptionRequestInput_assetScopes, v.AssetScopes)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSubscriptionRequestInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateSubscriptionRequestInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeMetadataFormInputs(s, schemas.CreateSubscriptionRequestInput_metadataForms, v.MetadataForms)
-	if v.RequestReason != nil {
-		s.WriteString(schemas.CreateSubscriptionRequestInput_requestReason, *v.RequestReason)
-	}
-	serializeSubscribedListingInputs(s, schemas.CreateSubscriptionRequestInput_subscribedListings, v.SubscribedListings)
-	serializeSubscribedPrincipalInputs(s, schemas.CreateSubscriptionRequestInput_subscribedPrincipals, v.SubscribedPrincipals)
 }
 
 type CreateSubscriptionRequestOutput struct {
@@ -161,113 +134,23 @@ type CreateSubscriptionRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSubscriptionRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSubscriptionRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSubscriptionRequestOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateSubscriptionRequestOutput_createdAt, v.CreatedAt)
-		case schemas.CreateSubscriptionRequestOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_createdBy, v.CreatedBy)
-		case schemas.CreateSubscriptionRequestOutput_decisionComment:
-			v.DecisionComment = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_decisionComment, v.DecisionComment)
-		case schemas.CreateSubscriptionRequestOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_domainId, v.DomainId)
-		case schemas.CreateSubscriptionRequestOutput_existingSubscriptionId:
-			v.ExistingSubscriptionId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_existingSubscriptionId, v.ExistingSubscriptionId)
-		case schemas.CreateSubscriptionRequestOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_id, v.Id)
-		case schemas.CreateSubscriptionRequestOutput_metadataForms:
-			return deserializeMetadataForms(d, schemas.CreateSubscriptionRequestOutput_metadataForms, &v.MetadataForms)
-		case schemas.CreateSubscriptionRequestOutput_requestReason:
-			v.RequestReason = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_requestReason, v.RequestReason)
-		case schemas.CreateSubscriptionRequestOutput_reviewerId:
-			v.ReviewerId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_reviewerId, v.ReviewerId)
-		case schemas.CreateSubscriptionRequestOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateSubscriptionRequestOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.SubscriptionRequestStatus(ev)
-			return nil
-		case schemas.CreateSubscriptionRequestOutput_subscribedListings:
-			return deserializeSubscribedListings(d, schemas.CreateSubscriptionRequestOutput_subscribedListings, &v.SubscribedListings)
-		case schemas.CreateSubscriptionRequestOutput_subscribedPrincipals:
-			return deserializeSubscribedPrincipals(d, schemas.CreateSubscriptionRequestOutput_subscribedPrincipals, &v.SubscribedPrincipals)
-		case schemas.CreateSubscriptionRequestOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateSubscriptionRequestOutput_updatedAt, v.UpdatedAt)
-		case schemas.CreateSubscriptionRequestOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.CreateSubscriptionRequestOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSubscriptionRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionRequest, schemas.CreateSubscriptionRequestInput, schemas.CreateSubscriptionRequestOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriptionRequest{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionRequest, schemas.CreateSubscriptionRequestInput, schemas.CreateSubscriptionRequestOutput), output: &CreateSubscriptionRequestOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubscriptionRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -277,12 +160,6 @@ func (c *Client) addOperationCreateSubscriptionRequestMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCreateSubscriptionRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriptionRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -295,12 +172,6 @@ func (c *Client) addOperationCreateSubscriptionRequestMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -340,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateSubscriptionRequest) HandleInitializ
 }
 func addIdempotencyToken_opCreateSubscriptionRequestMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSubscriptionRequest{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSubscriptionRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSubscriptionRequest",
-	}
 }

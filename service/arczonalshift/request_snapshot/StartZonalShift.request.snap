@@ -1,0 +1,5 @@
+POST /zonalshifts
+
+Content-Type: application/json
+
+{"awayFrom":"__AwayFrom__","comment":"__Comment__","expiresIn":"__ExpiresIn__","resourceIdentifier":"__ResourceIdentifier__"}

@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,21 @@ type DescribeBackupVaultInput struct {
 	BackupVaultAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.DescribeBackupVaultInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
 }
 
 type DescribeBackupVaultOutput struct {
@@ -152,77 +166,157 @@ type DescribeBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeBackupVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyType != "" {
+		s.WriteString(schemas.DescribeBackupVaultOutput_EncryptionKeyType, string(v.EncryptionKeyType))
+	}
+	if v.LatestMpaApprovalTeamUpdate != nil {
+		s.WriteStruct(schemas.DescribeBackupVaultOutput_LatestMpaApprovalTeamUpdate)
+		v.LatestMpaApprovalTeamUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LockDate != nil {
+		s.WriteTime(schemas.DescribeBackupVaultOutput_LockDate, *v.LockDate)
+	}
+	if v.Locked != nil {
+		s.WriteBool(schemas.DescribeBackupVaultOutput_Locked, *v.Locked)
+	}
+	if v.MaxRetentionDays != nil {
+		s.WriteInt64(schemas.DescribeBackupVaultOutput_MaxRetentionDays, *v.MaxRetentionDays)
+	}
+	if v.MinRetentionDays != nil {
+		s.WriteInt64(schemas.DescribeBackupVaultOutput_MinRetentionDays, *v.MinRetentionDays)
+	}
+	if v.MpaApprovalTeamArn != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_MpaApprovalTeamArn, *v.MpaApprovalTeamArn)
+	}
+	if v.MpaSessionArn != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_MpaSessionArn, *v.MpaSessionArn)
+	}
+	if v.NumberOfRecoveryPoints != 0 {
+		s.WriteInt64(schemas.DescribeBackupVaultOutput_NumberOfRecoveryPoints, v.NumberOfRecoveryPoints)
+	}
+	if v.SourceBackupVaultArn != nil {
+		s.WriteString(schemas.DescribeBackupVaultOutput_SourceBackupVaultArn, *v.SourceBackupVaultArn)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.DescribeBackupVaultOutput_VaultState, string(v.VaultState))
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.DescribeBackupVaultOutput_VaultType, string(v.VaultType))
+	}
+}
+func (v *DescribeBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBackupVaultOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeBackupVaultOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.DescribeBackupVaultOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupVaultOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeBackupVaultOutput_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_CreatorRequestId, v.CreatorRequestId)
+		case schemas.DescribeBackupVaultOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.DescribeBackupVaultOutput_EncryptionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBackupVaultOutput_EncryptionKeyType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyType = types.EncryptionKeyType(ev)
+			return nil
+		case schemas.DescribeBackupVaultOutput_LatestMpaApprovalTeamUpdate:
+			v.LatestMpaApprovalTeamUpdate = &types.LatestMpaApprovalTeamUpdate{}
+			return v.LatestMpaApprovalTeamUpdate.Deserialize(d)
+		case schemas.DescribeBackupVaultOutput_LockDate:
+			v.LockDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeBackupVaultOutput_LockDate, v.LockDate)
+		case schemas.DescribeBackupVaultOutput_Locked:
+			v.Locked = new(bool)
+			return d.ReadBool(schemas.DescribeBackupVaultOutput_Locked, v.Locked)
+		case schemas.DescribeBackupVaultOutput_MaxRetentionDays:
+			v.MaxRetentionDays = new(int64)
+			return d.ReadInt64(schemas.DescribeBackupVaultOutput_MaxRetentionDays, v.MaxRetentionDays)
+		case schemas.DescribeBackupVaultOutput_MinRetentionDays:
+			v.MinRetentionDays = new(int64)
+			return d.ReadInt64(schemas.DescribeBackupVaultOutput_MinRetentionDays, v.MinRetentionDays)
+		case schemas.DescribeBackupVaultOutput_MpaApprovalTeamArn:
+			v.MpaApprovalTeamArn = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_MpaApprovalTeamArn, v.MpaApprovalTeamArn)
+		case schemas.DescribeBackupVaultOutput_MpaSessionArn:
+			v.MpaSessionArn = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_MpaSessionArn, v.MpaSessionArn)
+		case schemas.DescribeBackupVaultOutput_NumberOfRecoveryPoints:
+			return d.ReadInt64(schemas.DescribeBackupVaultOutput_NumberOfRecoveryPoints, &v.NumberOfRecoveryPoints)
+		case schemas.DescribeBackupVaultOutput_SourceBackupVaultArn:
+			v.SourceBackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeBackupVaultOutput_SourceBackupVaultArn, v.SourceBackupVaultArn)
+		case schemas.DescribeBackupVaultOutput_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBackupVaultOutput_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = types.VaultState(ev)
+			return nil
+		case schemas.DescribeBackupVaultOutput_VaultType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBackupVaultOutput_VaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = types.VaultType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupVault, schemas.DescribeBackupVaultInput, schemas.DescribeBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBackupVault, schemas.DescribeBackupVaultInput, schemas.DescribeBackupVaultOutput), output: &DescribeBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBackupVault{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBackupVault"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeBackupVaultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackupVault(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -237,22 +331,8 @@ func (c *Client) addOperationDescribeBackupVaultMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeBackupVault",
-	}
 }

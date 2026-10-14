@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"codeGenerationOutputFormatStatusDetailsMap":{"key0":{"status":"SUCCEEDED","statusDetailList":"__StatusDetailList__"}},"createdAt":946684800,"endedAt":946684800,"jobID":"__JobID__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","status":"PENDING","statusDetails":"__StatusDetails__"},{"codeGenerationOutputFormatStatusDetailsMap":{"key0":{"status":"SUCCEEDED","statusDetailList":"__StatusDetailList__"}},"createdAt":946684800,"endedAt":946684800,"jobID":"__JobID__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","status":"PENDING","statusDetails":"__StatusDetails__"}],"nextToken":"__NextToken__"}

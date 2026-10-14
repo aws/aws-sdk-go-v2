@@ -784,6 +784,8 @@ type PhoneNumber struct {
 	// The phone number's order ID.
 	OrderId *string
 
+	PhoneNumberArn *string
+
 	// The phone number's ID.
 	PhoneNumberId *string
 
@@ -839,6 +841,9 @@ func (v *PhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OrderId != nil {
 		s.WriteString(schemas.PhoneNumber_OrderId, *v.OrderId)
 	}
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.PhoneNumber_PhoneNumberArn, *v.PhoneNumberArn)
+	}
 	if v.PhoneNumberId != nil {
 		s.WriteString(schemas.PhoneNumber_PhoneNumberId, *v.PhoneNumberId)
 	}
@@ -891,6 +896,9 @@ func (v *PhoneNumber) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PhoneNumber_OrderId:
 			v.OrderId = new(string)
 			return d.ReadString(schemas.PhoneNumber_OrderId, v.OrderId)
+		case schemas.PhoneNumber_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.PhoneNumber_PhoneNumberArn, v.PhoneNumberArn)
 		case schemas.PhoneNumber_PhoneNumberId:
 			v.PhoneNumberId = new(string)
 			return d.ReadString(schemas.PhoneNumber_PhoneNumberId, v.PhoneNumberId)
@@ -1155,7 +1163,7 @@ type PhoneNumberOrder struct {
 
 	// The Firm Order Commitment (FOC) date for phone number porting orders. This
 	// field is null if a phone number order is not a porting order.
-	FocDate *time.Time
+	FocDate *string
 
 	// The type of phone number being ordered, local or toll-free.
 	OrderType PhoneNumberOrderType
@@ -1190,7 +1198,7 @@ func (v *PhoneNumberOrder) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteTime(schemas.PhoneNumberOrder_CreatedTimestamp, *v.CreatedTimestamp)
 	}
 	if v.FocDate != nil {
-		s.WriteTime(schemas.PhoneNumberOrder_FocDate, *v.FocDate)
+		s.WriteString(schemas.PhoneNumberOrder_FocDate, *v.FocDate)
 	}
 	if v.OrderType != "" {
 		s.WriteString(schemas.PhoneNumberOrder_OrderType, string(v.OrderType))
@@ -1216,8 +1224,8 @@ func (v *PhoneNumberOrder) Deserialize(d smithy.ShapeDeserializer) error {
 			v.CreatedTimestamp = new(time.Time)
 			return d.ReadTime(schemas.PhoneNumberOrder_CreatedTimestamp, v.CreatedTimestamp)
 		case schemas.PhoneNumberOrder_FocDate:
-			v.FocDate = new(time.Time)
-			return d.ReadTime(schemas.PhoneNumberOrder_FocDate, v.FocDate)
+			v.FocDate = new(string)
+			return d.ReadString(schemas.PhoneNumberOrder_FocDate, v.FocDate)
 		case schemas.PhoneNumberOrder_OrderType:
 			var ev string
 			if err := d.ReadString(schemas.PhoneNumberOrder_OrderType, &ev); err != nil {
@@ -2379,8 +2387,7 @@ type VoiceConnector struct {
 	// The Voice Connector's name.
 	Name *string
 
-	// The type of network of the Voice Connector. Either IPv4 only or dual-stack
-	// (IPv4 and IPv6).
+	// The type of network for the Voice Connector.
 	NetworkType NetworkType
 
 	// The outbound host name for the Voice Connector.
@@ -2494,6 +2501,7 @@ func (v *VoiceConnector) Deserialize(d smithy.ShapeDeserializer) error {
 // a group. This creates a fault tolerant mechanism for fallback in case of
 // availability events.
 type VoiceConnectorGroup struct {
+	CallDistributionType CallDistributionType
 
 	// The Voice Connector group's creation time stamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
@@ -2523,6 +2531,9 @@ func (v *VoiceConnectorGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VoiceConnectorGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallDistributionType != "" {
+		s.WriteString(schemas.VoiceConnectorGroup_CallDistributionType, string(v.CallDistributionType))
+	}
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.VoiceConnectorGroup_CreatedTimestamp, *v.CreatedTimestamp)
 	}
@@ -2543,6 +2554,13 @@ func (v *VoiceConnectorGroup) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *VoiceConnectorGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VoiceConnectorGroup, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.VoiceConnectorGroup_CallDistributionType:
+			var ev string
+			if err := d.ReadString(schemas.VoiceConnectorGroup_CallDistributionType, &ev); err != nil {
+				return err
+			}
+			v.CallDistributionType = CallDistributionType(ev)
+			return nil
 		case schemas.VoiceConnectorGroup_CreatedTimestamp:
 			v.CreatedTimestamp = new(time.Time)
 			return d.ReadTime(schemas.VoiceConnectorGroup_CreatedTimestamp, v.CreatedTimestamp)
@@ -2570,17 +2588,15 @@ func (v *VoiceConnectorGroup) Deserialize(d smithy.ShapeDeserializer) error {
 // settings. Limit: 3 VoiceConnectorItems per Voice Connector group.
 type VoiceConnectorItem struct {
 
-	// The priority setting of a Voice Connector item. Calls are routed to hosts in
-	// priority order, with 1 as the highest priority. When hosts have equal priority,
-	// the system distributes calls among them based on their relative weight.
-	//
-	// This member is required.
-	Priority *int32
-
 	// The Voice Connector ID.
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	// The priority setting of a Voice Connector item. Calls are routed to hosts in
+	// priority order, with 1 as the highest priority. When hosts have equal priority,
+	// the system distributes calls among them based on their relative weight.
+	Priority *int32
 
 	noSmithyDocumentSerde
 }

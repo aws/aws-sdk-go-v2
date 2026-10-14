@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DisassociateAppBlockBuilderAppBlock
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢kAppBlockArno__AppBlockArn__sAppBlockBuilderNamew__AppBlockBuilderName__

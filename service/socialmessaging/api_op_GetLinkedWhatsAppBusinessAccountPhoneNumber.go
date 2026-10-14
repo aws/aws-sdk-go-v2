@@ -4,13 +4,8 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the WABA account id and phone number details of a WhatsApp business
@@ -44,19 +39,11 @@ type GetLinkedWhatsAppBusinessAccountPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id, *v.Id)
-	}
-}
-
 type GetLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
+
+	// The calling settings configured for the phone number. This value is absent when
+	// calling is not configured.
+	CallSettings *types.WhatsAppCallSettings
 
 	// The WABA identifier linked to the phone number, formatted as
 	// waba-01234567890123456789012345678901 .
@@ -71,88 +58,29 @@ type GetLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkedWhatsAppBusinessAccountPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId:
-			v.LinkedWhatsAppBusinessAccountId = new(string)
-			return d.ReadString(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId, v.LinkedWhatsAppBusinessAccountId)
-		case schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber:
-			v.PhoneNumber = &types.WhatsAppPhoneNumberDetail{}
-			return v.PhoneNumber.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLinkedWhatsAppBusinessAccountPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumber, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccountPhoneNumber, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.GetLinkedWhatsAppBusinessAccountPhoneNumberOutput), output: &GetLinkedWhatsAppBusinessAccountPhoneNumberOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLinkedWhatsAppBusinessAccountPhoneNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLinkedWhatsAppBusinessAccountPhoneNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLinkedWhatsAppBusinessAccountPhoneNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +95,8 @@ func (c *Client) addOperationGetLinkedWhatsAppBusinessAccountPhoneNumberMiddlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLinkedWhatsAppBusinessAccountPhoneNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLinkedWhatsAppBusinessAccountPhoneNumber",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DeleteRemediationExceptions
+
+{"ConfigRuleName":"__ConfigRuleName__","ResourceKeys":[{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}]}

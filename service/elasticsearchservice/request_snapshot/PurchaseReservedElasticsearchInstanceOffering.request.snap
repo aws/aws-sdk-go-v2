@@ -1,0 +1,5 @@
+POST /2015-01-01/es/purchaseReservedInstanceOffering
+
+Content-Type: application/json
+
+{"InstanceCount":1,"ReservationName":"__ReservationName__","ReservedElasticsearchInstanceOfferingId":"__ReservedElasticsearchInstanceOfferingId__"}

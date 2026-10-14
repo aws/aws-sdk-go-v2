@@ -5,14 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a data source connector for an Amazon Q Business application.
@@ -131,53 +126,6 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_applicationId, *v.ApplicationId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_clientToken, *v.ClientToken)
-	}
-	s.WriteDocument(schemas.CreateDataSourceRequest_configuration, &smithydocument.Opaque{Value: v.Configuration})
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_displayName, *v.DisplayName)
-	}
-	if v.DocumentEnrichmentConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_documentEnrichmentConfiguration)
-		v.DocumentEnrichmentConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_indexId, *v.IndexId)
-	}
-	if v.MediaExtractionConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_mediaExtractionConfiguration)
-		v.MediaExtractionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_roleArn, *v.RoleArn)
-	}
-	if v.SyncSchedule != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_syncSchedule, *v.SyncSchedule)
-	}
-	serializeTags(s, schemas.CreateDataSourceRequest_tags, v.Tags)
-	if v.VpcConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_vpcConfiguration)
-		v.VpcConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateDataSourceOutput struct {
 
 	//  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business
@@ -193,76 +141,23 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataSourceResponse_dataSourceArn:
-			v.DataSourceArn = new(string)
-			return d.ReadString(schemas.CreateDataSourceResponse_dataSourceArn, v.DataSourceArn)
-		case schemas.CreateDataSourceResponse_dataSourceId:
-			v.DataSourceId = new(string)
-			return d.ReadString(schemas.CreateDataSourceResponse_dataSourceId, v.DataSourceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSource{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -272,12 +167,6 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateDataSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -290,12 +179,6 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -335,12 +218,4 @@ func (m *idempotencyToken_initializeOpCreateDataSource) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateDataSourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataSource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataSource",
-	}
 }

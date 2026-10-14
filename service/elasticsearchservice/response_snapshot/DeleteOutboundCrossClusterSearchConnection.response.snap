@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CrossClusterSearchConnection":{"ConnectionAlias":"__ConnectionAlias__","ConnectionStatus":{"Message":"__Message__","StatusCode":"PENDING_ACCEPTANCE"},"CrossClusterSearchConnectionId":"__CrossClusterSearchConnectionId__","DestinationDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"},"SourceDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}}}

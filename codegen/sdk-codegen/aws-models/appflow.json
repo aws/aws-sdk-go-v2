@@ -641,6 +641,17 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.appflow#CodeVerifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 43,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-._~]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.appflow#ConflictException": {
             "type": "structure",
             "members": {
@@ -1281,6 +1292,12 @@
                     "target": "com.amazonaws.appflow#RedirectUri",
                     "traits": {
                         "smithy.api#documentation": "<p> The URL to which the authentication server redirects the browser after authorization has\n      been granted. </p>"
+                    }
+                },
+                "codeVerifier": {
+                    "target": "com.amazonaws.appflow#CodeVerifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The code verifier used in the PKCE (Proof Key for Code Exchange) OAuth flow. </p>"
                     }
                 }
             },
@@ -6689,6 +6706,17 @@
                 }
             }
         },
+        "com.amazonaws.appflow#PrivateKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": ".*",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.appflow#PrivateLinkServiceName": {
             "type": "string",
             "traits": {
@@ -9806,8 +9834,13 @@
                 "password": {
                     "target": "com.amazonaws.appflow#Password",
                     "traits": {
-                        "smithy.api#documentation": "<p> The password that corresponds to the user name. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The password that corresponds to the user name. </p>"
+                    }
+                },
+                "privateKey": {
+                    "target": "com.amazonaws.appflow#PrivateKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The RSA private key used for key pair authentication with Snowflake. Provide this\n      instead of a password when your Snowflake account uses key pair authentication. </p>"
                     }
                 }
             },

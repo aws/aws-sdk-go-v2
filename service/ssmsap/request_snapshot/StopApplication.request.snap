@@ -1,0 +1,5 @@
+POST /stop-application
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","IncludeEc2InstanceShutdown":true,"StopConnectedEntity":"DBMS"}

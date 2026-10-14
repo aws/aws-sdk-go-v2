@@ -1,0 +1,5 @@
+POST /DeleteConnector
+
+Content-Type: application/json
+
+{"connectorID":"__ConnectorID__"}

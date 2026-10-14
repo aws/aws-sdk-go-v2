@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a layout in the Cases domain. Layouts define the following
@@ -56,6 +55,37 @@ type CreateLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLayoutContent(s, schemas.CreateLayoutRequest_content, v.Content)
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateLayoutRequest_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLayoutRequest_name, *v.Name)
+	}
+}
+func (v *CreateLayoutInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLayoutRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLayoutRequest_content:
+			return deserializeLayoutContent(d, schemas.CreateLayoutRequest_content, &v.Content)
+		case schemas.CreateLayoutRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateLayoutRequest_domainId, v.DomainId)
+		case schemas.CreateLayoutRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateLayoutRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateLayoutOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created layout.
@@ -74,77 +104,54 @@ type CreateLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayoutArn != nil {
+		s.WriteString(schemas.CreateLayoutResponse_layoutArn, *v.LayoutArn)
+	}
+	if v.LayoutId != nil {
+		s.WriteString(schemas.CreateLayoutResponse_layoutId, *v.LayoutId)
+	}
+}
+func (v *CreateLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLayoutResponse_layoutArn:
+			v.LayoutArn = new(string)
+			return d.ReadString(schemas.CreateLayoutResponse_layoutArn, v.LayoutArn)
+		case schemas.CreateLayoutResponse_layoutId:
+			v.LayoutId = new(string)
+			return d.ReadString(schemas.CreateLayoutResponse_layoutId, v.LayoutId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLayout, schemas.CreateLayoutRequest, schemas.CreateLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLayout, schemas.CreateLayoutRequest, schemas.CreateLayoutResponse), output: &CreateLayoutOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLayout{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLayout"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLayoutValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLayout(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +166,8 @@ func (c *Client) addOperationCreateLayoutMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLayout(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLayout",
-	}
 }

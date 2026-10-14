@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // (Enterprise edition only) Creates a new namespace for you to use with Amazon
@@ -62,6 +61,25 @@ type CreateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.IdentityStore != "" {
+		s.WriteString(schemas.CreateNamespaceRequest_IdentityStore, string(v.IdentityStore))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_Namespace, *v.Namespace)
+	}
+	serializeTagList(s, schemas.CreateNamespaceRequest_Tags, v.Tags)
+}
+
 type CreateNamespaceOutput struct {
 
 	// The ARN of the Quick Sight namespace you created.
@@ -97,77 +115,91 @@ type CreateNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNamespaceResponse_Arn, *v.Arn)
+	}
+	if v.CapacityRegion != nil {
+		s.WriteString(schemas.CreateNamespaceResponse_CapacityRegion, *v.CapacityRegion)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateNamespaceResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.IdentityStore != "" {
+		s.WriteString(schemas.CreateNamespaceResponse_IdentityStore, string(v.IdentityStore))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNamespaceResponse_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateNamespaceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateNamespaceResponse_Status, v.Status)
+	}
+}
+func (v *CreateNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNamespaceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNamespaceResponse_Arn, v.Arn)
+		case schemas.CreateNamespaceResponse_CapacityRegion:
+			v.CapacityRegion = new(string)
+			return d.ReadString(schemas.CreateNamespaceResponse_CapacityRegion, v.CapacityRegion)
+		case schemas.CreateNamespaceResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateNamespaceResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.NamespaceStatus(ev)
+			return nil
+		case schemas.CreateNamespaceResponse_IdentityStore:
+			var ev string
+			if err := d.ReadString(schemas.CreateNamespaceResponse_IdentityStore, &ev); err != nil {
+				return err
+			}
+			v.IdentityStore = types.IdentityStore(ev)
+			return nil
+		case schemas.CreateNamespaceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNamespaceResponse_Name, v.Name)
+		case schemas.CreateNamespaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateNamespaceResponse_RequestId, v.RequestId)
+		case schemas.CreateNamespaceResponse_Status:
+			return d.ReadInt32(schemas.CreateNamespaceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse), output: &CreateNamespaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +214,8 @@ func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNamespace",
-	}
 }

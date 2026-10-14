@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.PutFirewallRuleGroupPolicy
+
+{"Arn":"__Arn__","FirewallRuleGroupPolicy":"__FirewallRuleGroupPolicy__"}

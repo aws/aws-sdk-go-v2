@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.CreateMaintenanceWindow
+
+{"AllowUnassociatedTargets":true,"ClientToken":"__ClientToken__","Cutoff":1,"Description":"__Description__","Duration":1,"EndDate":"__EndDate__","Name":"__Name__","Schedule":"__Schedule__","ScheduleOffset":1,"ScheduleTimezone":"__ScheduleTimezone__","StartDate":"__StartDate__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

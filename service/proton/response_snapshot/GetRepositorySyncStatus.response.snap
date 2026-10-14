@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.GetRepositorySyncStatus
+
+{"latestSync":{"events":[{"event":"__Event__","externalId":"__ExternalId__","time":946684800,"type":"__Type__"},{"event":"__Event__","externalId":"__ExternalId__","time":946684800,"type":"__Type__"}],"startedAt":946684800,"status":"INITIATED"}}

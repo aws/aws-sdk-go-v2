@@ -4,13 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -89,6 +86,36 @@ type GetTrafficPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrafficPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrafficPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrafficPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetTrafficPolicyResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DefaultAction != "" {
+		s.WriteString(schemas.GetTrafficPolicyResponse_DefaultAction, string(v.DefaultAction))
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetTrafficPolicyResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.MaxMessageSizeBytes != nil {
+		s.WriteInt32(schemas.GetTrafficPolicyResponse_MaxMessageSizeBytes, *v.MaxMessageSizeBytes)
+	}
+	serializePolicyStatementList(s, schemas.GetTrafficPolicyResponse_PolicyStatements, v.PolicyStatements)
+	if v.TrafficPolicyArn != nil {
+		s.WriteString(schemas.GetTrafficPolicyResponse_TrafficPolicyArn, *v.TrafficPolicyArn)
+	}
+	if v.TrafficPolicyId != nil {
+		s.WriteString(schemas.GetTrafficPolicyResponse_TrafficPolicyId, *v.TrafficPolicyId)
+	}
+	if v.TrafficPolicyName != nil {
+		s.WriteString(schemas.GetTrafficPolicyResponse_TrafficPolicyName, *v.TrafficPolicyName)
+	}
+}
 func (v *GetTrafficPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTrafficPolicyResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -124,74 +151,29 @@ func (v *GetTrafficPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficPolicy, schemas.GetTrafficPolicyRequest, schemas.GetTrafficPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficPolicy, schemas.GetTrafficPolicyRequest, schemas.GetTrafficPolicyResponse), output: &GetTrafficPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrafficPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTrafficPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTrafficPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +188,8 @@ func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTrafficPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTrafficPolicy",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v1/brokers/__BrokerId__/promote
+
+Content-Type: application/json
+
+{"mode":"SWITCHOVER"}

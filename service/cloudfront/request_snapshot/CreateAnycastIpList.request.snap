@@ -1,0 +1,5 @@
+POST /2020-05-31/anycast-ip-list
+
+Content-Type: application/xml
+
+<CreateAnycastIpListRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IpAddressType>ipv4</IpAddressType><IpamCidrConfigs><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig></IpamCidrConfigs><IpCount>1</IpCount><Name>__Name__</Name><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags></CreateAnycastIpListRequest>

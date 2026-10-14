@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get review template answer.
@@ -59,6 +58,24 @@ type GetReviewTemplateAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateAnswerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetReviewTemplateAnswerInput_LensAlias, *v.LensAlias)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.GetReviewTemplateAnswerInput_QuestionId, *v.QuestionId)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetReviewTemplateAnswerInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type GetReviewTemplateAnswerOutput struct {
 
 	// An answer of the question.
@@ -88,77 +105,62 @@ type GetReviewTemplateAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateAnswerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Answer != nil {
+		s.WriteStruct(schemas.GetReviewTemplateAnswerOutput_Answer)
+		v.Answer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetReviewTemplateAnswerOutput_LensAlias, *v.LensAlias)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetReviewTemplateAnswerOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *GetReviewTemplateAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReviewTemplateAnswerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReviewTemplateAnswerOutput_Answer:
+			v.Answer = &types.ReviewTemplateAnswer{}
+			return v.Answer.Deserialize(d)
+		case schemas.GetReviewTemplateAnswerOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.GetReviewTemplateAnswerOutput_LensAlias, v.LensAlias)
+		case schemas.GetReviewTemplateAnswerOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.GetReviewTemplateAnswerOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReviewTemplateAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplateAnswer, schemas.GetReviewTemplateAnswerInput, schemas.GetReviewTemplateAnswerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReviewTemplateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplateAnswer, schemas.GetReviewTemplateAnswerInput, schemas.GetReviewTemplateAnswerOutput), output: &GetReviewTemplateAnswerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReviewTemplateAnswer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReviewTemplateAnswer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetReviewTemplateAnswerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReviewTemplateAnswer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +175,8 @@ func (c *Client) addOperationGetReviewTemplateAnswerMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetReviewTemplateAnswer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetReviewTemplateAnswer",
-	}
 }

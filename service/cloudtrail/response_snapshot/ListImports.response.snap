@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListImports
+
+{"Imports":[{"CreatedTimestamp":946684800,"Destinations":["__Member__","__Member__"],"ImportId":"__ImportId__","ImportStatus":"INITIALIZING","UpdatedTimestamp":946684800},{"CreatedTimestamp":946684800,"Destinations":["__Member__","__Member__"],"ImportId":"__ImportId__","ImportStatus":"INITIALIZING","UpdatedTimestamp":946684800}],"NextToken":"__NextToken__"}

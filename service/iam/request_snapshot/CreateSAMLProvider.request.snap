@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateSAMLProvider&AddPrivateKey=__AddPrivateKey__&AssertionEncryptionMode=Required&Name=__Name__&SAMLMetadataDocument=__SAMLMetadataDocument__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2010-05-08

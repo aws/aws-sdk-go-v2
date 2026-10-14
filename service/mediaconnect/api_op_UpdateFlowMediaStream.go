@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing media stream.
@@ -59,6 +58,38 @@ type UpdateFlowMediaStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowMediaStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowMediaStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowMediaStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.UpdateFlowMediaStreamRequest_Attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClockRate != nil {
+		s.WriteInt32(schemas.UpdateFlowMediaStreamRequest_ClockRate, *v.ClockRate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowMediaStreamRequest_Description, *v.Description)
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowMediaStreamRequest_FlowArn, *v.FlowArn)
+	}
+	if v.MediaStreamName != nil {
+		s.WriteString(schemas.UpdateFlowMediaStreamRequest_MediaStreamName, *v.MediaStreamName)
+	}
+	if v.MediaStreamType != "" {
+		s.WriteString(schemas.UpdateFlowMediaStreamRequest_MediaStreamType, string(v.MediaStreamType))
+	}
+	if v.VideoFormat != nil {
+		s.WriteString(schemas.UpdateFlowMediaStreamRequest_VideoFormat, *v.VideoFormat)
+	}
+}
+
 type UpdateFlowMediaStreamOutput struct {
 
 	// The ARN of the flow that is associated with the media stream that you updated.
@@ -73,77 +104,56 @@ type UpdateFlowMediaStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowMediaStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowMediaStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowMediaStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowMediaStreamResponse_FlowArn, *v.FlowArn)
+	}
+	if v.MediaStream != nil {
+		s.WriteStruct(schemas.UpdateFlowMediaStreamResponse_MediaStream)
+		v.MediaStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFlowMediaStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowMediaStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowMediaStreamResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.UpdateFlowMediaStreamResponse_FlowArn, v.FlowArn)
+		case schemas.UpdateFlowMediaStreamResponse_MediaStream:
+			v.MediaStream = &types.MediaStream{}
+			return v.MediaStream.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowMediaStream, schemas.UpdateFlowMediaStreamRequest, schemas.UpdateFlowMediaStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowMediaStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowMediaStream, schemas.UpdateFlowMediaStreamRequest, schemas.UpdateFlowMediaStreamResponse), output: &UpdateFlowMediaStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowMediaStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFlowMediaStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFlowMediaStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFlowMediaStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +168,8 @@ func (c *Client) addOperationUpdateFlowMediaStreamMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFlowMediaStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFlowMediaStream",
-	}
 }

@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You
@@ -40,18 +35,6 @@ type DescribeValidDBInstanceModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeValidDBInstanceModificationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeValidDBInstanceModificationsMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeValidDBInstanceModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-}
-
 type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Information about valid modifications that you can make to your DB instance.
@@ -65,85 +48,29 @@ type DescribeValidDBInstanceModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeValidDBInstanceModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeValidDBInstanceModificationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage:
-			v.ValidDBInstanceModificationsMessage = &types.ValidDBInstanceModificationsMessage{}
-			return v.ValidDBInstanceModificationsMessage.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeValidDBInstanceModifications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeValidDBInstanceModifications, schemas.DescribeValidDBInstanceModificationsMessage, schemas.DescribeValidDBInstanceModificationsResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeValidDBInstanceModifications{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeValidDBInstanceModifications, schemas.DescribeValidDBInstanceModificationsMessage, schemas.DescribeValidDBInstanceModificationsResult), output: &DescribeValidDBInstanceModificationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeValidDBInstanceModifications"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeValidDBInstanceModificationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeValidDBInstanceModifications(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +85,8 @@ func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeValidDBInstanceModifications(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeValidDBInstanceModifications",
-	}
 }

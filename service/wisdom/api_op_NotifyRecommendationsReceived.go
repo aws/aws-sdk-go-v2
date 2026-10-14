@@ -4,11 +4,10 @@ package wisdom
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified recommendations from the specified assistant's queue of
@@ -54,6 +53,37 @@ type NotifyRecommendationsReceivedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyRecommendationsReceivedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyRecommendationsReceivedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyRecommendationsReceivedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_assistantId, *v.AssistantId)
+	}
+	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, v.RecommendationIds)
+	if v.SessionId != nil {
+		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_sessionId, *v.SessionId)
+	}
+}
+func (v *NotifyRecommendationsReceivedInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyRecommendationsReceivedRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyRecommendationsReceivedRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.NotifyRecommendationsReceivedRequest_assistantId, v.AssistantId)
+		case schemas.NotifyRecommendationsReceivedRequest_recommendationIds:
+			return deserializeRecommendationIdList(d, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, &v.RecommendationIds)
+		case schemas.NotifyRecommendationsReceivedRequest_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.NotifyRecommendationsReceivedRequest_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 type NotifyRecommendationsReceivedOutput struct {
 
 	// The identifiers of recommendations that are causing errors.
@@ -68,77 +98,48 @@ type NotifyRecommendationsReceivedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyRecommendationsReceivedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyRecommendationsReceivedResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyRecommendationsReceivedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotifyRecommendationsReceivedErrorList(s, schemas.NotifyRecommendationsReceivedResponse_errors, v.Errors)
+	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, v.RecommendationIds)
+}
+func (v *NotifyRecommendationsReceivedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyRecommendationsReceivedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyRecommendationsReceivedResponse_errors:
+			return deserializeNotifyRecommendationsReceivedErrorList(d, schemas.NotifyRecommendationsReceivedResponse_errors, &v.Errors)
+		case schemas.NotifyRecommendationsReceivedResponse_recommendationIds:
+			return deserializeRecommendationIdList(d, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, &v.RecommendationIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyRecommendationsReceivedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyRecommendationsReceived, schemas.NotifyRecommendationsReceivedRequest, schemas.NotifyRecommendationsReceivedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpNotifyRecommendationsReceived{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyRecommendationsReceived, schemas.NotifyRecommendationsReceivedRequest, schemas.NotifyRecommendationsReceivedResponse), output: &NotifyRecommendationsReceivedOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpNotifyRecommendationsReceived{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "NotifyRecommendationsReceived"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpNotifyRecommendationsReceivedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyRecommendationsReceived(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +154,8 @@ func (c *Client) addOperationNotifyRecommendationsReceivedMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opNotifyRecommendationsReceived(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "NotifyRecommendationsReceived",
-	}
 }

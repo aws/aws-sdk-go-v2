@@ -1,0 +1,38 @@
+200
+Accept-Ranges: __AcceptRanges__
+Cache-Control: __CacheControl__
+Content-Disposition: __ContentDisposition__
+Content-Encoding: __ContentEncoding__
+Content-Language: __ContentLanguage__
+Content-Range: __ContentRange__
+Content-Type: __ContentType__
+Etag: __ETag__
+Expires: Sat, 01 Jan 2000 00:00:00 GMT
+Last-Modified: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Archive-Status: __ArchiveStatus__
+X-Amz-Checksum-Crc32: __ChecksumCRC32__
+X-Amz-Checksum-Crc32c: __ChecksumCRC32C__
+X-Amz-Checksum-Crc64nvme: __ChecksumCRC64NVME__
+X-Amz-Checksum-Sha1: __ChecksumSHA1__
+X-Amz-Checksum-Sha256: __ChecksumSHA256__
+X-Amz-Checksum-Type: __ChecksumType__
+X-Amz-Delete-Marker: true
+X-Amz-Expiration: __Expiration__
+X-Amz-Missing-Meta: 1
+X-Amz-Mp-Parts-Count: 1
+X-Amz-Object-Lock-Legal-Hold: __ObjectLockLegalHoldStatus__
+X-Amz-Object-Lock-Mode: __ObjectLockMode__
+X-Amz-Object-Lock-Retain-Until-Date: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Replication-Status: __ReplicationStatus__
+X-Amz-Request-Charged: __RequestCharged__
+X-Amz-Restore: __Restore__
+X-Amz-Server-Side-Encryption: __ServerSideEncryption__
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Storage-Class: __StorageClass__
+X-Amz-Tagging-Count: 1
+X-Amz-Version-Id: __VersionId__
+X-Amz-Website-Redirect-Location: __WebsiteRedirectLocation__
+

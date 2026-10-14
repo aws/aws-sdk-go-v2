@@ -1,0 +1,3 @@
+GET /prod/eventbridge-rule-templates?groupIdentifier=__GroupIdentifier__&maxResults=1&nextToken=__NextToken__&signalMapIdentifier=__SignalMapIdentifier__
+
+

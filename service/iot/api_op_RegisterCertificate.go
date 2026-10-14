@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a device certificate with IoT in the same [certificate mode] as the signing CA. If you
@@ -60,6 +59,27 @@ type RegisterCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaCertificatePem != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_caCertificatePem, *v.CaCertificatePem)
+	}
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_certificatePem, *v.CertificatePem)
+	}
+	if v.SetAsActive != nil {
+		s.WriteBool(schemas.RegisterCertificateRequest_setAsActive, *v.SetAsActive)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterCertificateRequest_status, string(v.Status))
+	}
+}
+
 // The output from the RegisterCertificate operation.
 type RegisterCertificateOutput struct {
 
@@ -75,77 +95,54 @@ type RegisterCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RegisterCertificateResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.RegisterCertificateResponse_certificateId, *v.CertificateId)
+	}
+}
+func (v *RegisterCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCertificateResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RegisterCertificateResponse_certificateArn, v.CertificateArn)
+		case schemas.RegisterCertificateResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.RegisterCertificateResponse_certificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResponse), output: &RegisterCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +157,8 @@ func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterCertificate",
-	}
 }

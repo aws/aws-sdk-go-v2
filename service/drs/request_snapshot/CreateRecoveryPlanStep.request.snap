@@ -1,0 +1,5 @@
+POST /CreateRecoveryPlanStep
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"serverStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"}]}},"recoveryPlanArn":"__RecoveryPlanArn__","stepName":"__StepName__","stepOrder":1}

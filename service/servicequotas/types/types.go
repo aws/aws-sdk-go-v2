@@ -131,6 +131,16 @@ func (v *MetricInfo) Deserialize(d smithy.ShapeDeserializer) error {
 // understand how to use them.
 type QuotaContextInfo struct {
 
+	// Specifies the level at which you can request an increase for this quota:
+	//
+	//   - ACCOUNT – You can request an increase only at the account level.
+	//
+	//   - PER_RESOURCE – You can request an increase only for an individual resource.
+	//
+	//   - ALL – You can request an increase at either the account level or for an
+	//   individual resource.
+	AdjustableAtLevel AdjustableAtLevelEnum
+
 	// Specifies the resource, or resources, to which the quota applies. The value for
 	// this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN,
 	// the quota value applies to that resource. If the value is *, then the quota
@@ -158,6 +168,9 @@ func (v *QuotaContextInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuotaContextInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustableAtLevel != "" {
+		s.WriteString(schemas.QuotaContextInfo_AdjustableAtLevel, string(v.AdjustableAtLevel))
+	}
 	if v.ContextId != nil {
 		s.WriteString(schemas.QuotaContextInfo_ContextId, *v.ContextId)
 	}
@@ -171,6 +184,13 @@ func (v *QuotaContextInfo) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *QuotaContextInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuotaContextInfo, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.QuotaContextInfo_AdjustableAtLevel:
+			var ev string
+			if err := d.ReadString(schemas.QuotaContextInfo_AdjustableAtLevel, &ev); err != nil {
+				return err
+			}
+			v.AdjustableAtLevel = AdjustableAtLevelEnum(ev)
+			return nil
 		case schemas.QuotaContextInfo_ContextId:
 			v.ContextId = new(string)
 			return d.ReadString(schemas.QuotaContextInfo_ContextId, v.ContextId)

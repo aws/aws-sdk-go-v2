@@ -4,13 +4,8 @@ package rolesanywhere
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a subject, which associates a certificate identity with authentication
@@ -44,28 +39,6 @@ type GetSubjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSubjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalarSubjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSubjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SubjectId != nil {
-		s.WriteString(schemas.ScalarSubjectRequest_subjectId, *v.SubjectId)
-	}
-}
-func (v *GetSubjectInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalarSubjectRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalarSubjectRequest_subjectId:
-			v.SubjectId = new(string)
-			return d.ReadString(schemas.ScalarSubjectRequest_subjectId, v.SubjectId)
-		}
-		return nil
-	})
-}
-
 type GetSubjectOutput struct {
 
 	// The state of the subject after a read or write operation.
@@ -77,98 +50,29 @@ type GetSubjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSubjectOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubjectDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSubjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Subject != nil {
-		s.WriteStruct(schemas.SubjectDetailResponse_subject)
-		v.Subject.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetSubjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubjectDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubjectDetailResponse_subject:
-			v.Subject = &types.SubjectDetail{}
-			return v.Subject.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSubjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubject, schemas.ScalarSubjectRequest, schemas.SubjectDetailResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubject{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubject, schemas.ScalarSubjectRequest, schemas.SubjectDetailResponse), output: &GetSubjectOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSubjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSubject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +87,8 @@ func (c *Client) addOperationGetSubjectMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSubject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSubject",
-	}
 }

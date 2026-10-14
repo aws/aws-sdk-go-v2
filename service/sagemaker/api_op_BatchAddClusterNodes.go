@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds nodes to a HyperPod cluster by incrementing the target count for one or
@@ -57,6 +57,22 @@ type BatchAddClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchAddClusterNodesRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchAddClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeAddClusterNodeSpecificationList(s, schemas.BatchAddClusterNodesRequest_NodesToAdd, v.NodesToAdd)
+}
+
 type BatchAddClusterNodesOutput struct {
 
 	// A list of errors that occurred during the node addition operation. Each entry
@@ -81,65 +97,42 @@ type BatchAddClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchAddClusterNodesErrorList(s, schemas.BatchAddClusterNodesResponse_Failed, v.Failed)
+	serializeNodeAdditionResultList(s, schemas.BatchAddClusterNodesResponse_Successful, v.Successful)
+}
+func (v *BatchAddClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAddClusterNodesResponse_Failed:
+			return deserializeBatchAddClusterNodesErrorList(d, schemas.BatchAddClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchAddClusterNodesResponse_Successful:
+			return deserializeNodeAdditionResultList(d, schemas.BatchAddClusterNodesResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAddClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddClusterNodes, schemas.BatchAddClusterNodesRequest, schemas.BatchAddClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAddClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddClusterNodes, schemas.BatchAddClusterNodesRequest, schemas.BatchAddClusterNodesResponse), output: &BatchAddClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAddClusterNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAddClusterNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -149,12 +142,6 @@ func (c *Client) addOperationBatchAddClusterNodesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpBatchAddClusterNodesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAddClusterNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +154,6 @@ func (c *Client) addOperationBatchAddClusterNodesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -212,12 +193,4 @@ func (m *idempotencyToken_initializeOpBatchAddClusterNodes) HandleInitialize(ctx
 }
 func addIdempotencyToken_opBatchAddClusterNodesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchAddClusterNodes{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchAddClusterNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAddClusterNodes",
-	}
 }

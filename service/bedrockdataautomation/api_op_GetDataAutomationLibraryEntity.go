@@ -4,13 +4,8 @@ package bedrockdataautomation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an existing entity based on entity type from the library
@@ -50,24 +45,6 @@ type GetDataAutomationLibraryEntityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataAutomationLibraryEntityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDataAutomationLibraryEntityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDataAutomationLibraryEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EntityId != nil {
-		s.WriteString(schemas.GetDataAutomationLibraryEntityRequest_entityId, *v.EntityId)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.GetDataAutomationLibraryEntityRequest_entityType, string(v.EntityType))
-	}
-	if v.LibraryArn != nil {
-		s.WriteString(schemas.GetDataAutomationLibraryEntityRequest_libraryArn, *v.LibraryArn)
-	}
-}
-
 // Get DataAutomationLibraryEntity Response
 type GetDataAutomationLibraryEntityOutput struct {
 
@@ -80,84 +57,29 @@ type GetDataAutomationLibraryEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataAutomationLibraryEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDataAutomationLibraryEntityResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDataAutomationLibraryEntityResponse_entity:
-			return deserializeEntityDetails(d, schemas.GetDataAutomationLibraryEntityResponse_entity, &v.Entity)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDataAutomationLibraryEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataAutomationLibraryEntity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationLibraryEntity, schemas.GetDataAutomationLibraryEntityRequest, schemas.GetDataAutomationLibraryEntityResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataAutomationLibraryEntity{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationLibraryEntity, schemas.GetDataAutomationLibraryEntityRequest, schemas.GetDataAutomationLibraryEntityResponse), output: &GetDataAutomationLibraryEntityOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataAutomationLibraryEntity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDataAutomationLibraryEntityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataAutomationLibraryEntity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +94,8 @@ func (c *Client) addOperationGetDataAutomationLibraryEntityMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataAutomationLibraryEntity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataAutomationLibraryEntity",
-	}
 }

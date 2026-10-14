@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/dlm/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,31 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Action) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Action)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrossRegionCopyActionList(s, schemas.Action_CrossRegionCopy, v.CrossRegionCopy)
+	if v.Name != nil {
+		s.WriteString(schemas.Action_Name, *v.Name)
+	}
+}
+func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Action_CrossRegionCopy:
+			return deserializeCrossRegionCopyActionList(d, schemas.Action_CrossRegionCopy, &v.CrossRegionCopy)
+		case schemas.Action_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Action_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot policies only] Specifies information about the archive
 //
 // storage tier retention period.
@@ -39,6 +66,30 @@ type ArchiveRetainRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArchiveRetainRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveRetainRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveRetainRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionArchiveTier != nil {
+		s.WriteStruct(schemas.ArchiveRetainRule_RetentionArchiveTier)
+		v.RetentionArchiveTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArchiveRetainRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveRetainRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveRetainRule_RetentionArchiveTier:
+			v.RetentionArchiveTier = &RetentionArchiveTier{}
+			return v.RetentionArchiveTier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot policies only] Specifies a snapshot archiving rule for a
 //
 // schedule.
@@ -50,6 +101,30 @@ type ArchiveRule struct {
 	RetainRule *ArchiveRetainRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *ArchiveRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetainRule != nil {
+		s.WriteStruct(schemas.ArchiveRule_RetainRule)
+		v.RetainRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ArchiveRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveRule_RetainRule:
+			v.RetainRule = &ArchiveRetainRule{}
+			return v.RetainRule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	[Custom snapshot and AMI policies only] Specifies when the policy should
@@ -127,6 +202,60 @@ type CreateRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CronExpression != nil {
+		s.WriteString(schemas.CreateRule_CronExpression, *v.CronExpression)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.CreateRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.CreateRule_IntervalUnit, string(v.IntervalUnit))
+	}
+	if v.Location != "" {
+		s.WriteString(schemas.CreateRule_Location, string(v.Location))
+	}
+	serializeScriptsList(s, schemas.CreateRule_Scripts, v.Scripts)
+	serializeTimesList(s, schemas.CreateRule_Times, v.Times)
+}
+func (v *CreateRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRule_CronExpression:
+			v.CronExpression = new(string)
+			return d.ReadString(schemas.CreateRule_CronExpression, v.CronExpression)
+		case schemas.CreateRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.CreateRule_Interval, v.Interval)
+		case schemas.CreateRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.CreateRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = IntervalUnitValues(ev)
+			return nil
+		case schemas.CreateRule_Location:
+			var ev string
+			if err := d.ReadString(schemas.CreateRule_Location, &ev); err != nil {
+				return err
+			}
+			v.Location = LocationValues(ev)
+			return nil
+		case schemas.CreateRule_Scripts:
+			return deserializeScriptsList(d, schemas.CreateRule_Scripts, &v.Scripts)
+		case schemas.CreateRule_Times:
+			return deserializeTimesList(d, schemas.CreateRule_Times, &v.Times)
+		}
+		return nil
+	})
+}
+
 //	[Event-based policies only] Specifies a cross-Region copy action for
 //
 // event-based policies.
@@ -154,6 +283,44 @@ type CrossRegionCopyAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrossRegionCopyAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionCopyAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionCopyAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CrossRegionCopyAction_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetainRule != nil {
+		s.WriteStruct(schemas.CrossRegionCopyAction_RetainRule)
+		v.RetainRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.CrossRegionCopyAction_Target, *v.Target)
+	}
+}
+func (v *CrossRegionCopyAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionCopyAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionCopyAction_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.CrossRegionCopyAction_RetainRule:
+			v.RetainRule = &CrossRegionCopyRetainRule{}
+			return v.RetainRule.Deserialize(d)
+		case schemas.CrossRegionCopyAction_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.CrossRegionCopyAction_Target, v.Target)
+		}
+		return nil
+	})
+}
+
 //	[Custom AMI policies only] Specifies an AMI deprecation rule for cross-Region
 //
 // AMI copies created by an AMI policy.
@@ -173,6 +340,38 @@ type CrossRegionCopyDeprecateRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrossRegionCopyDeprecateRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionCopyDeprecateRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionCopyDeprecateRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Interval != nil {
+		s.WriteInt32(schemas.CrossRegionCopyDeprecateRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.CrossRegionCopyDeprecateRule_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *CrossRegionCopyDeprecateRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionCopyDeprecateRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionCopyDeprecateRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.CrossRegionCopyDeprecateRule_Interval, v.Interval)
+		case schemas.CrossRegionCopyDeprecateRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.CrossRegionCopyDeprecateRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a retention rule for cross-Region snapshot copies created by snapshot
 // or event-based policies, or cross-Region AMI copies created by AMI policies.
 // After the retention period expires, the cross-Region copy is deleted.
@@ -187,6 +386,38 @@ type CrossRegionCopyRetainRule struct {
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
+}
+
+func (v *CrossRegionCopyRetainRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionCopyRetainRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionCopyRetainRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Interval != nil {
+		s.WriteInt32(schemas.CrossRegionCopyRetainRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.CrossRegionCopyRetainRule_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *CrossRegionCopyRetainRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionCopyRetainRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionCopyRetainRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.CrossRegionCopyRetainRule_Interval, v.Interval)
+		case schemas.CrossRegionCopyRetainRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.CrossRegionCopyRetainRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	[Custom snapshot and AMI policies only] Specifies a cross-Region copy rule for
@@ -240,6 +471,68 @@ type CrossRegionCopyRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrossRegionCopyRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionCopyRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionCopyRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkArn != nil {
+		s.WriteString(schemas.CrossRegionCopyRule_CmkArn, *v.CmkArn)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CrossRegionCopyRule_CopyTags, *v.CopyTags)
+	}
+	if v.DeprecateRule != nil {
+		s.WriteStruct(schemas.CrossRegionCopyRule_DeprecateRule)
+		v.DeprecateRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.CrossRegionCopyRule_Encrypted, *v.Encrypted)
+	}
+	if v.RetainRule != nil {
+		s.WriteStruct(schemas.CrossRegionCopyRule_RetainRule)
+		v.RetainRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.CrossRegionCopyRule_Target, *v.Target)
+	}
+	if v.TargetRegion != nil {
+		s.WriteString(schemas.CrossRegionCopyRule_TargetRegion, *v.TargetRegion)
+	}
+}
+func (v *CrossRegionCopyRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionCopyRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionCopyRule_CmkArn:
+			v.CmkArn = new(string)
+			return d.ReadString(schemas.CrossRegionCopyRule_CmkArn, v.CmkArn)
+		case schemas.CrossRegionCopyRule_CopyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.CrossRegionCopyRule_CopyTags, v.CopyTags)
+		case schemas.CrossRegionCopyRule_DeprecateRule:
+			v.DeprecateRule = &CrossRegionCopyDeprecateRule{}
+			return v.DeprecateRule.Deserialize(d)
+		case schemas.CrossRegionCopyRule_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.CrossRegionCopyRule_Encrypted, v.Encrypted)
+		case schemas.CrossRegionCopyRule_RetainRule:
+			v.RetainRule = &CrossRegionCopyRetainRule{}
+			return v.RetainRule.Deserialize(d)
+		case schemas.CrossRegionCopyRule_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.CrossRegionCopyRule_Target, v.Target)
+		case schemas.CrossRegionCopyRule_TargetRegion:
+			v.TargetRegion = new(string)
+			return d.ReadString(schemas.CrossRegionCopyRule_TargetRegion, v.TargetRegion)
+		}
+		return nil
+	})
+}
+
 //	[Default policies only] Specifies a destination Region for cross-Region copy
 //
 // actions.
@@ -249,6 +542,28 @@ type CrossRegionCopyTarget struct {
 	TargetRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CrossRegionCopyTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionCopyTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionCopyTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetRegion != nil {
+		s.WriteString(schemas.CrossRegionCopyTarget_TargetRegion, *v.TargetRegion)
+	}
+}
+func (v *CrossRegionCopyTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionCopyTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionCopyTarget_TargetRegion:
+			v.TargetRegion = new(string)
+			return d.ReadString(schemas.CrossRegionCopyTarget_TargetRegion, v.TargetRegion)
+		}
+		return nil
+	})
 }
 
 //	[Custom AMI policies only] Specifies an AMI deprecation rule for AMIs created
@@ -276,6 +591,44 @@ type DeprecateRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.DeprecateRule_Count, *v.Count)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.DeprecateRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.DeprecateRule_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *DeprecateRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeprecateRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeprecateRule_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.DeprecateRule_Count, v.Count)
+		case schemas.DeprecateRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.DeprecateRule_Interval, v.Interval)
+		case schemas.DeprecateRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.DeprecateRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	[Event-based policies only] Specifies the encryption settings for cross-Region
 //
 // snapshot copies created by event-based policies.
@@ -294,6 +647,34 @@ type EncryptionConfiguration struct {
 	CmkArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkArn != nil {
+		s.WriteString(schemas.EncryptionConfiguration_CmkArn, *v.CmkArn)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.EncryptionConfiguration_Encrypted, *v.Encrypted)
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_CmkArn:
+			v.CmkArn = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_CmkArn, v.CmkArn)
+		case schemas.EncryptionConfiguration_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.EncryptionConfiguration_Encrypted, v.Encrypted)
+		}
+		return nil
+	})
 }
 
 //	[Event-based policies only] Specifies an event that activates an event-based
@@ -327,6 +708,41 @@ type EventParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DescriptionRegex != nil {
+		s.WriteString(schemas.EventParameters_DescriptionRegex, *v.DescriptionRegex)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.EventParameters_EventType, string(v.EventType))
+	}
+	serializeSnapshotOwnerList(s, schemas.EventParameters_SnapshotOwner, v.SnapshotOwner)
+}
+func (v *EventParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventParameters_DescriptionRegex:
+			v.DescriptionRegex = new(string)
+			return d.ReadString(schemas.EventParameters_DescriptionRegex, v.DescriptionRegex)
+		case schemas.EventParameters_EventType:
+			var ev string
+			if err := d.ReadString(schemas.EventParameters_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = EventTypeValues(ev)
+			return nil
+		case schemas.EventParameters_SnapshotOwner:
+			return deserializeSnapshotOwnerList(d, schemas.EventParameters_SnapshotOwner, &v.SnapshotOwner)
+		}
+		return nil
+	})
+}
+
 //	[Event-based policies only] Specifies an event that activates an event-based
 //
 // policy.
@@ -342,6 +758,40 @@ type EventSource struct {
 	Parameters *EventParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.EventSource_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EventSource_Type, string(v.Type))
+	}
+}
+func (v *EventSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventSource_Parameters:
+			v.Parameters = &EventParameters{}
+			return v.Parameters.Deserialize(d)
+		case schemas.EventSource_Type:
+			var ev string
+			if err := d.ReadString(schemas.EventSource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EventSourceValues(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	[Default policies only] Specifies exclusion parameters for volumes or
@@ -368,6 +818,34 @@ type Exclusions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Exclusions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Exclusions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Exclusions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeBootVolumes != nil {
+		s.WriteBool(schemas.Exclusions_ExcludeBootVolumes, *v.ExcludeBootVolumes)
+	}
+	serializeExcludeTagsList(s, schemas.Exclusions_ExcludeTags, v.ExcludeTags)
+	serializeExcludeVolumeTypesList(s, schemas.Exclusions_ExcludeVolumeTypes, v.ExcludeVolumeTypes)
+}
+func (v *Exclusions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Exclusions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Exclusions_ExcludeBootVolumes:
+			v.ExcludeBootVolumes = new(bool)
+			return d.ReadBool(schemas.Exclusions_ExcludeBootVolumes, v.ExcludeBootVolumes)
+		case schemas.Exclusions_ExcludeTags:
+			return deserializeExcludeTagsList(d, schemas.Exclusions_ExcludeTags, &v.ExcludeTags)
+		case schemas.Exclusions_ExcludeVolumeTypes:
+			return deserializeExcludeVolumeTypesList(d, schemas.Exclusions_ExcludeVolumeTypes, &v.ExcludeVolumeTypes)
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot policies only] Specifies a rule for enabling fast snapshot
 //
 // restore for snapshots created by snapshot policies. You can enable fast snapshot
@@ -391,6 +869,50 @@ type FastRestoreRule struct {
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
+}
+
+func (v *FastRestoreRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FastRestoreRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FastRestoreRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneIdList(s, schemas.FastRestoreRule_AvailabilityZoneIds, v.AvailabilityZoneIds)
+	serializeAvailabilityZoneList(s, schemas.FastRestoreRule_AvailabilityZones, v.AvailabilityZones)
+	if v.Count != nil {
+		s.WriteInt32(schemas.FastRestoreRule_Count, *v.Count)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.FastRestoreRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.FastRestoreRule_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *FastRestoreRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FastRestoreRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FastRestoreRule_AvailabilityZoneIds:
+			return deserializeAvailabilityZoneIdList(d, schemas.FastRestoreRule_AvailabilityZoneIds, &v.AvailabilityZoneIds)
+		case schemas.FastRestoreRule_AvailabilityZones:
+			return deserializeAvailabilityZoneList(d, schemas.FastRestoreRule_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.FastRestoreRule_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.FastRestoreRule_Count, v.Count)
+		case schemas.FastRestoreRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.FastRestoreRule_Interval, v.Interval)
+		case schemas.FastRestoreRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.FastRestoreRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a lifecycle policy.
@@ -438,6 +960,91 @@ type LifecyclePolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecyclePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.LifecyclePolicy_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.LifecyclePolicy_DateModified, *v.DateModified)
+	}
+	if v.DefaultPolicy != nil {
+		s.WriteBool(schemas.LifecyclePolicy_DefaultPolicy, *v.DefaultPolicy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LifecyclePolicy_Description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.LifecyclePolicy_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.LifecyclePolicy_PolicyArn, *v.PolicyArn)
+	}
+	if v.PolicyDetails != nil {
+		s.WriteStruct(schemas.LifecyclePolicy_PolicyDetails)
+		v.PolicyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.LifecyclePolicy_PolicyId, *v.PolicyId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.LifecyclePolicy_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LifecyclePolicy_StatusMessage, *v.StatusMessage)
+	}
+	serializeTagMap(s, schemas.LifecyclePolicy_Tags, v.Tags)
+}
+func (v *LifecyclePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicy_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.LifecyclePolicy_DateCreated, v.DateCreated)
+		case schemas.LifecyclePolicy_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.LifecyclePolicy_DateModified, v.DateModified)
+		case schemas.LifecyclePolicy_DefaultPolicy:
+			v.DefaultPolicy = new(bool)
+			return d.ReadBool(schemas.LifecyclePolicy_DefaultPolicy, v.DefaultPolicy)
+		case schemas.LifecyclePolicy_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LifecyclePolicy_Description, v.Description)
+		case schemas.LifecyclePolicy_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.LifecyclePolicy_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.LifecyclePolicy_PolicyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.LifecyclePolicy_PolicyArn, v.PolicyArn)
+		case schemas.LifecyclePolicy_PolicyDetails:
+			v.PolicyDetails = &PolicyDetails{}
+			return v.PolicyDetails.Deserialize(d)
+		case schemas.LifecyclePolicy_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.LifecyclePolicy_PolicyId, v.PolicyId)
+		case schemas.LifecyclePolicy_State:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicy_State, &ev); err != nil {
+				return err
+			}
+			v.State = GettablePolicyStateValues(ev)
+			return nil
+		case schemas.LifecyclePolicy_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LifecyclePolicy_StatusMessage, v.StatusMessage)
+		case schemas.LifecyclePolicy_Tags:
+			return deserializeTagMap(d, schemas.LifecyclePolicy_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Summary information about a lifecycle policy.
 type LifecyclePolicySummary struct {
 
@@ -468,6 +1075,63 @@ type LifecyclePolicySummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecyclePolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultPolicy != nil {
+		s.WriteBool(schemas.LifecyclePolicySummary_DefaultPolicy, *v.DefaultPolicy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LifecyclePolicySummary_Description, *v.Description)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.LifecyclePolicySummary_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.LifecyclePolicySummary_PolicyType, string(v.PolicyType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.LifecyclePolicySummary_State, string(v.State))
+	}
+	serializeTagMap(s, schemas.LifecyclePolicySummary_Tags, v.Tags)
+}
+func (v *LifecyclePolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicySummary_DefaultPolicy:
+			v.DefaultPolicy = new(bool)
+			return d.ReadBool(schemas.LifecyclePolicySummary_DefaultPolicy, v.DefaultPolicy)
+		case schemas.LifecyclePolicySummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LifecyclePolicySummary_Description, v.Description)
+		case schemas.LifecyclePolicySummary_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.LifecyclePolicySummary_PolicyId, v.PolicyId)
+		case schemas.LifecyclePolicySummary_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicySummary_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyTypeValues(ev)
+			return nil
+		case schemas.LifecyclePolicySummary_State:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicySummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = GettablePolicyStateValues(ev)
+			return nil
+		case schemas.LifecyclePolicySummary_Tags:
+			return deserializeTagMap(d, schemas.LifecyclePolicySummary_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 //	[Custom snapshot and AMI policies only] Specifies optional parameters for
@@ -506,6 +1170,37 @@ type Parameters struct {
 	NoReboot *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Parameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Parameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeBootVolume != nil {
+		s.WriteBool(schemas.Parameters_ExcludeBootVolume, *v.ExcludeBootVolume)
+	}
+	serializeExcludeDataVolumeTagList(s, schemas.Parameters_ExcludeDataVolumeTags, v.ExcludeDataVolumeTags)
+	if v.NoReboot != nil {
+		s.WriteBool(schemas.Parameters_NoReboot, *v.NoReboot)
+	}
+}
+func (v *Parameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Parameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Parameters_ExcludeBootVolume:
+			v.ExcludeBootVolume = new(bool)
+			return d.ReadBool(schemas.Parameters_ExcludeBootVolume, v.ExcludeBootVolume)
+		case schemas.Parameters_ExcludeDataVolumeTags:
+			return deserializeExcludeDataVolumeTagList(d, schemas.Parameters_ExcludeDataVolumeTags, &v.ExcludeDataVolumeTags)
+		case schemas.Parameters_NoReboot:
+			v.NoReboot = new(bool)
+			return d.ReadBool(schemas.Parameters_NoReboot, v.NoReboot)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration of a lifecycle policy.
@@ -647,6 +1342,118 @@ type PolicyDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionList(s, schemas.PolicyDetails_Actions, v.Actions)
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.PolicyDetails_CopyTags, *v.CopyTags)
+	}
+	if v.CreateInterval != nil {
+		s.WriteInt32(schemas.PolicyDetails_CreateInterval, *v.CreateInterval)
+	}
+	serializeCrossRegionCopyTargetList(s, schemas.PolicyDetails_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.EventSource != nil {
+		s.WriteStruct(schemas.PolicyDetails_EventSource)
+		v.EventSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Exclusions != nil {
+		s.WriteStruct(schemas.PolicyDetails_Exclusions)
+		v.Exclusions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendDeletion != nil {
+		s.WriteBool(schemas.PolicyDetails_ExtendDeletion, *v.ExtendDeletion)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.PolicyDetails_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyLanguage != "" {
+		s.WriteString(schemas.PolicyDetails_PolicyLanguage, string(v.PolicyLanguage))
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PolicyDetails_PolicyType, string(v.PolicyType))
+	}
+	serializeResourceLocationList(s, schemas.PolicyDetails_ResourceLocations, v.ResourceLocations)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.PolicyDetails_ResourceType, string(v.ResourceType))
+	}
+	serializeResourceTypeValuesList(s, schemas.PolicyDetails_ResourceTypes, v.ResourceTypes)
+	if v.RetainInterval != nil {
+		s.WriteInt32(schemas.PolicyDetails_RetainInterval, *v.RetainInterval)
+	}
+	serializeScheduleList(s, schemas.PolicyDetails_Schedules, v.Schedules)
+	serializeTargetTagList(s, schemas.PolicyDetails_TargetTags, v.TargetTags)
+}
+func (v *PolicyDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyDetails_Actions:
+			return deserializeActionList(d, schemas.PolicyDetails_Actions, &v.Actions)
+		case schemas.PolicyDetails_CopyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.PolicyDetails_CopyTags, v.CopyTags)
+		case schemas.PolicyDetails_CreateInterval:
+			v.CreateInterval = new(int32)
+			return d.ReadInt32(schemas.PolicyDetails_CreateInterval, v.CreateInterval)
+		case schemas.PolicyDetails_CrossRegionCopyTargets:
+			return deserializeCrossRegionCopyTargetList(d, schemas.PolicyDetails_CrossRegionCopyTargets, &v.CrossRegionCopyTargets)
+		case schemas.PolicyDetails_EventSource:
+			v.EventSource = &EventSource{}
+			return v.EventSource.Deserialize(d)
+		case schemas.PolicyDetails_Exclusions:
+			v.Exclusions = &Exclusions{}
+			return v.Exclusions.Deserialize(d)
+		case schemas.PolicyDetails_ExtendDeletion:
+			v.ExtendDeletion = new(bool)
+			return d.ReadBool(schemas.PolicyDetails_ExtendDeletion, v.ExtendDeletion)
+		case schemas.PolicyDetails_Parameters:
+			v.Parameters = &Parameters{}
+			return v.Parameters.Deserialize(d)
+		case schemas.PolicyDetails_PolicyLanguage:
+			var ev string
+			if err := d.ReadString(schemas.PolicyDetails_PolicyLanguage, &ev); err != nil {
+				return err
+			}
+			v.PolicyLanguage = PolicyLanguageValues(ev)
+			return nil
+		case schemas.PolicyDetails_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyDetails_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyTypeValues(ev)
+			return nil
+		case schemas.PolicyDetails_ResourceLocations:
+			return deserializeResourceLocationList(d, schemas.PolicyDetails_ResourceLocations, &v.ResourceLocations)
+		case schemas.PolicyDetails_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyDetails_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceTypeValues(ev)
+			return nil
+		case schemas.PolicyDetails_ResourceTypes:
+			return deserializeResourceTypeValuesList(d, schemas.PolicyDetails_ResourceTypes, &v.ResourceTypes)
+		case schemas.PolicyDetails_RetainInterval:
+			v.RetainInterval = new(int32)
+			return d.ReadInt32(schemas.PolicyDetails_RetainInterval, v.RetainInterval)
+		case schemas.PolicyDetails_Schedules:
+			return deserializeScheduleList(d, schemas.PolicyDetails_Schedules, &v.Schedules)
+		case schemas.PolicyDetails_TargetTags:
+			return deserializeTargetTagList(d, schemas.PolicyDetails_TargetTags, &v.TargetTags)
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot and AMI policies only] Specifies a retention rule for
 //
 // snapshots created by snapshot policies, or for AMIs created by AMI policies.
@@ -706,6 +1513,44 @@ type RetainRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetainRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetainRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetainRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.RetainRule_Count, *v.Count)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.RetainRule_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.RetainRule_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *RetainRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetainRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetainRule_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.RetainRule_Count, v.Count)
+		case schemas.RetainRule_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.RetainRule_Interval, v.Interval)
+		case schemas.RetainRule_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.RetainRule_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot policies only] Describes the retention rule for archived
 //
 // snapshots. Once the archive retention threshold is met, the snapshots are
@@ -739,6 +1584,44 @@ type RetentionArchiveTier struct {
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetentionArchiveTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetentionArchiveTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetentionArchiveTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.RetentionArchiveTier_Count, *v.Count)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.RetentionArchiveTier_Interval, *v.Interval)
+	}
+	if v.IntervalUnit != "" {
+		s.WriteString(schemas.RetentionArchiveTier_IntervalUnit, string(v.IntervalUnit))
+	}
+}
+func (v *RetentionArchiveTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetentionArchiveTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetentionArchiveTier_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.RetentionArchiveTier_Count, v.Count)
+		case schemas.RetentionArchiveTier_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.RetentionArchiveTier_Interval, v.Interval)
+		case schemas.RetentionArchiveTier_IntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.RetentionArchiveTier_IntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.IntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	[Custom snapshot and AMI policies only] Specifies a schedule for a snapshot or
@@ -799,6 +1682,86 @@ type Schedule struct {
 	VariableTags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *Schedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Schedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveRule != nil {
+		s.WriteStruct(schemas.Schedule_ArchiveRule)
+		v.ArchiveRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.Schedule_CopyTags, *v.CopyTags)
+	}
+	if v.CreateRule != nil {
+		s.WriteStruct(schemas.Schedule_CreateRule)
+		v.CreateRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCrossRegionCopyRules(s, schemas.Schedule_CrossRegionCopyRules, v.CrossRegionCopyRules)
+	if v.DeprecateRule != nil {
+		s.WriteStruct(schemas.Schedule_DeprecateRule)
+		v.DeprecateRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FastRestoreRule != nil {
+		s.WriteStruct(schemas.Schedule_FastRestoreRule)
+		v.FastRestoreRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Schedule_Name, *v.Name)
+	}
+	if v.RetainRule != nil {
+		s.WriteStruct(schemas.Schedule_RetainRule)
+		v.RetainRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeShareRules(s, schemas.Schedule_ShareRules, v.ShareRules)
+	serializeTagsToAddList(s, schemas.Schedule_TagsToAdd, v.TagsToAdd)
+	serializeVariableTagsList(s, schemas.Schedule_VariableTags, v.VariableTags)
+}
+func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Schedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Schedule_ArchiveRule:
+			v.ArchiveRule = &ArchiveRule{}
+			return v.ArchiveRule.Deserialize(d)
+		case schemas.Schedule_CopyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.Schedule_CopyTags, v.CopyTags)
+		case schemas.Schedule_CreateRule:
+			v.CreateRule = &CreateRule{}
+			return v.CreateRule.Deserialize(d)
+		case schemas.Schedule_CrossRegionCopyRules:
+			return deserializeCrossRegionCopyRules(d, schemas.Schedule_CrossRegionCopyRules, &v.CrossRegionCopyRules)
+		case schemas.Schedule_DeprecateRule:
+			v.DeprecateRule = &DeprecateRule{}
+			return v.DeprecateRule.Deserialize(d)
+		case schemas.Schedule_FastRestoreRule:
+			v.FastRestoreRule = &FastRestoreRule{}
+			return v.FastRestoreRule.Deserialize(d)
+		case schemas.Schedule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Schedule_Name, v.Name)
+		case schemas.Schedule_RetainRule:
+			v.RetainRule = &RetainRule{}
+			return v.RetainRule.Deserialize(d)
+		case schemas.Schedule_ShareRules:
+			return deserializeShareRules(d, schemas.Schedule_ShareRules, &v.ShareRules)
+		case schemas.Schedule_TagsToAdd:
+			return deserializeTagsToAddList(d, schemas.Schedule_TagsToAdd, &v.TagsToAdd)
+		case schemas.Schedule_VariableTags:
+			return deserializeVariableTagsList(d, schemas.Schedule_VariableTags, &v.VariableTags)
+		}
+		return nil
+	})
 }
 
 //	[Custom snapshot policies that target instances only] Information about pre
@@ -903,6 +1866,59 @@ type Script struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Script) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Script)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Script) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecuteOperationOnScriptFailure != nil {
+		s.WriteBool(schemas.Script_ExecuteOperationOnScriptFailure, *v.ExecuteOperationOnScriptFailure)
+	}
+	if v.ExecutionHandler != nil {
+		s.WriteString(schemas.Script_ExecutionHandler, *v.ExecutionHandler)
+	}
+	if v.ExecutionHandlerService != "" {
+		s.WriteString(schemas.Script_ExecutionHandlerService, string(v.ExecutionHandlerService))
+	}
+	if v.ExecutionTimeout != nil {
+		s.WriteInt32(schemas.Script_ExecutionTimeout, *v.ExecutionTimeout)
+	}
+	if v.MaximumRetryCount != nil {
+		s.WriteInt32(schemas.Script_MaximumRetryCount, *v.MaximumRetryCount)
+	}
+	serializeStagesList(s, schemas.Script_Stages, v.Stages)
+}
+func (v *Script) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Script, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Script_ExecuteOperationOnScriptFailure:
+			v.ExecuteOperationOnScriptFailure = new(bool)
+			return d.ReadBool(schemas.Script_ExecuteOperationOnScriptFailure, v.ExecuteOperationOnScriptFailure)
+		case schemas.Script_ExecutionHandler:
+			v.ExecutionHandler = new(string)
+			return d.ReadString(schemas.Script_ExecutionHandler, v.ExecutionHandler)
+		case schemas.Script_ExecutionHandlerService:
+			var ev string
+			if err := d.ReadString(schemas.Script_ExecutionHandlerService, &ev); err != nil {
+				return err
+			}
+			v.ExecutionHandlerService = ExecutionHandlerServiceValues(ev)
+			return nil
+		case schemas.Script_ExecutionTimeout:
+			v.ExecutionTimeout = new(int32)
+			return d.ReadInt32(schemas.Script_ExecutionTimeout, v.ExecutionTimeout)
+		case schemas.Script_MaximumRetryCount:
+			v.MaximumRetryCount = new(int32)
+			return d.ReadInt32(schemas.Script_MaximumRetryCount, v.MaximumRetryCount)
+		case schemas.Script_Stages:
+			return deserializeStagesList(d, schemas.Script_Stages, &v.Stages)
+		}
+		return nil
+	})
+}
+
 //	[Custom snapshot policies only] Specifies a rule for sharing snapshots across
 //
 // Amazon Web Services accounts.
@@ -923,6 +1939,41 @@ type ShareRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShareRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShareRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShareRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeShareTargetAccountList(s, schemas.ShareRule_TargetAccounts, v.TargetAccounts)
+	if v.UnshareInterval != nil {
+		s.WriteInt32(schemas.ShareRule_UnshareInterval, *v.UnshareInterval)
+	}
+	if v.UnshareIntervalUnit != "" {
+		s.WriteString(schemas.ShareRule_UnshareIntervalUnit, string(v.UnshareIntervalUnit))
+	}
+}
+func (v *ShareRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShareRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShareRule_TargetAccounts:
+			return deserializeShareTargetAccountList(d, schemas.ShareRule_TargetAccounts, &v.TargetAccounts)
+		case schemas.ShareRule_UnshareInterval:
+			v.UnshareInterval = new(int32)
+			return d.ReadInt32(schemas.ShareRule_UnshareInterval, v.UnshareInterval)
+		case schemas.ShareRule_UnshareIntervalUnit:
+			var ev string
+			if err := d.ReadString(schemas.ShareRule_UnshareIntervalUnit, &ev); err != nil {
+				return err
+			}
+			v.UnshareIntervalUnit = RetentionIntervalUnitValues(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a tag for a resource.
 type Tag struct {
 
@@ -937,6 +1988,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

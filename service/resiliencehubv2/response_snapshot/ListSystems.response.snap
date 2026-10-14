@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","systemSummaries":[{"createdAt":946684800,"name":"__Name__","organizationId":"__OrganizationId__","ouId":"__OuId__","servicesCount":1,"systemArn":"__SystemArn__","systemId":"__SystemId__","updatedAt":946684800,"userJourneysCount":1},{"createdAt":946684800,"name":"__Name__","organizationId":"__OrganizationId__","ouId":"__OuId__","servicesCount":1,"systemArn":"__SystemArn__","systemId":"__SystemId__","updatedAt":946684800,"userJourneysCount":1}]}

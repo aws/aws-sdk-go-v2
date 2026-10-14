@@ -91,6 +91,25 @@ func (AacLoudnessMeasurementMode) Values() []AacLoudnessMeasurementMode {
 	}
 }
 
+type AacPassthroughControl string
+
+// Enum values for AacPassthroughControl
+const (
+	AacPassthroughControlWhenPossible  AacPassthroughControl = "WHEN_POSSIBLE"
+	AacPassthroughControlNoPassthrough AacPassthroughControl = "NO_PASSTHROUGH"
+)
+
+// Values returns all known values for AacPassthroughControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AacPassthroughControl) Values() []AacPassthroughControl {
+	return []AacPassthroughControl{
+		"WHEN_POSSIBLE",
+		"NO_PASSTHROUGH",
+	}
+}
+
 type AacRateControlMode string
 
 // Enum values for AacRateControlMode
@@ -915,6 +934,25 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 		"HLS_RENDITION_GROUP",
 		"ALL_PCM",
 		"STREAM",
+	}
+}
+
+type AudioSmpte337Passthrough string
+
+// Enum values for AudioSmpte337Passthrough
+const (
+	AudioSmpte337PassthroughEnabled  AudioSmpte337Passthrough = "ENABLED"
+	AudioSmpte337PassthroughDisabled AudioSmpte337Passthrough = "DISABLED"
+)
+
+// Values returns all known values for AudioSmpte337Passthrough. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioSmpte337Passthrough) Values() []AudioSmpte337Passthrough {
+	return []AudioSmpte337Passthrough{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -2260,8 +2298,9 @@ type CmfcScte35Source string
 
 // Enum values for CmfcScte35Source
 const (
-	CmfcScte35SourcePassthrough CmfcScte35Source = "PASSTHROUGH"
-	CmfcScte35SourceNone        CmfcScte35Source = "NONE"
+	CmfcScte35SourcePassthrough  CmfcScte35Source = "PASSTHROUGH"
+	CmfcScte35SourceNone         CmfcScte35Source = "NONE"
+	CmfcScte35SourceManifestCues CmfcScte35Source = "MANIFEST_CUES"
 )
 
 // Values returns all known values for CmfcScte35Source. Note that this can be
@@ -2272,6 +2311,7 @@ func (CmfcScte35Source) Values() []CmfcScte35Source {
 	return []CmfcScte35Source{
 		"PASSTHROUGH",
 		"NONE",
+		"MANIFEST_CUES",
 	}
 }
 
@@ -2320,6 +2360,7 @@ const (
 	CodecUnknown      Codec = "UNKNOWN"
 	CodecAac          Codec = "AAC"
 	CodecAc3          Codec = "AC3"
+	CodecAmr          Codec = "AMR"
 	CodecEac3         Codec = "EAC3"
 	CodecFlac         Codec = "FLAC"
 	CodecMp2          Codec = "MP2"
@@ -2327,8 +2368,13 @@ const (
 	CodecOpus         Codec = "OPUS"
 	CodecPcm          Codec = "PCM"
 	CodecVorbis       Codec = "VORBIS"
+	CodecWma          Codec = "WMA"
+	CodecWma2         Codec = "WMA2"
+	CodecWmapro       Codec = "WMAPRO"
 	CodecAv1          Codec = "AV1"
 	CodecAvc          Codec = "AVC"
+	CodecDv           Codec = "DV"
+	CodecH263         Codec = "H263"
 	CodecHevc         Codec = "HEVC"
 	CodecJpeg2000     Codec = "JPEG2000"
 	CodecMjpeg        Codec = "MJPEG"
@@ -2339,6 +2385,8 @@ const (
 	CodecQtrle        Codec = "QTRLE"
 	CodecTheora       Codec = "THEORA"
 	CodecUncompressed Codec = "UNCOMPRESSED"
+	CodecVc1          Codec = "VC1"
+	CodecVc3          Codec = "VC3"
 	CodecVfw          Codec = "VFW"
 	CodecVp8          Codec = "VP8"
 	CodecVp9          Codec = "VP9"
@@ -2356,6 +2404,7 @@ func (Codec) Values() []Codec {
 		"UNKNOWN",
 		"AAC",
 		"AC3",
+		"AMR",
 		"EAC3",
 		"FLAC",
 		"MP2",
@@ -2363,8 +2412,13 @@ func (Codec) Values() []Codec {
 		"OPUS",
 		"PCM",
 		"VORBIS",
+		"WMA",
+		"WMA2",
+		"WMAPRO",
 		"AV1",
 		"AVC",
+		"DV",
+		"H263",
 		"HEVC",
 		"JPEG2000",
 		"MJPEG",
@@ -2375,6 +2429,8 @@ func (Codec) Values() []Codec {
 		"QTRLE",
 		"THEORA",
 		"UNCOMPRESSED",
+		"VC1",
+		"VC3",
 		"VFW",
 		"VP8",
 		"VP9",
@@ -2738,8 +2794,9 @@ type DashIsoPlaybackDeviceCompatibility string
 
 // Enum values for DashIsoPlaybackDeviceCompatibility
 const (
-	DashIsoPlaybackDeviceCompatibilityCencV1         DashIsoPlaybackDeviceCompatibility = "CENC_V1"
-	DashIsoPlaybackDeviceCompatibilityUnencryptedSei DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
+	DashIsoPlaybackDeviceCompatibilityCencV1                   DashIsoPlaybackDeviceCompatibility = "CENC_V1"
+	DashIsoPlaybackDeviceCompatibilityUnencryptedSei           DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
+	DashIsoPlaybackDeviceCompatibilityCencV1UnencryptedHeaders DashIsoPlaybackDeviceCompatibility = "CENC_V1_UNENCRYPTED_HEADERS"
 )
 
 // Values returns all known values for DashIsoPlaybackDeviceCompatibility. Note
@@ -2751,6 +2808,7 @@ func (DashIsoPlaybackDeviceCompatibility) Values() []DashIsoPlaybackDeviceCompat
 	return []DashIsoPlaybackDeviceCompatibility{
 		"CENC_V1",
 		"UNENCRYPTED_SEI",
+		"CENC_V1_UNENCRYPTED_HEADERS",
 	}
 }
 
@@ -3038,6 +3096,25 @@ func (DolbyVisionMapping) Values() []DolbyVisionMapping {
 	return []DolbyVisionMapping{
 		"HDR10_NOMAP",
 		"HDR10_1000",
+	}
+}
+
+type DolbyVisionPresence string
+
+// Enum values for DolbyVisionPresence
+const (
+	DolbyVisionPresencePresent DolbyVisionPresence = "PRESENT"
+	DolbyVisionPresenceAbsent  DolbyVisionPresence = "ABSENT"
+)
+
+// Values returns all known values for DolbyVisionPresence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionPresence) Values() []DolbyVisionPresence {
+	return []DolbyVisionPresence{
+		"PRESENT",
+		"ABSENT",
 	}
 }
 
@@ -4066,6 +4143,15 @@ const (
 	FormatAvi       Format = "avi"
 	FormatMpegts    Format = "mpegts"
 	FormatMpegps    Format = "mpegps"
+	FormatMp3       Format = "mp3"
+	FormatFlac      Format = "flac"
+	FormatAsf       Format = "asf"
+	FormatOgg       Format = "ogg"
+	FormatThreeGp   Format = "three_gp"
+	FormatThreeG2   Format = "three_g2"
+	FormatAac       Format = "aac"
+	FormatAc3       Format = "ac3"
+	FormatEac3      Format = "eac3"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4083,6 +4169,15 @@ func (Format) Values() []Format {
 		"avi",
 		"mpegts",
 		"mpegps",
+		"mp3",
+		"flac",
+		"asf",
+		"ogg",
+		"three_gp",
+		"three_g2",
+		"aac",
+		"ac3",
+		"eac3",
 	}
 }
 
@@ -4332,6 +4427,26 @@ func (H264EntropyEncoding) Values() []H264EntropyEncoding {
 	return []H264EntropyEncoding{
 		"CABAC",
 		"CAVLC",
+	}
+}
+
+type H264ExplicitWeightedPrediction string
+
+// Enum values for H264ExplicitWeightedPrediction
+const (
+	H264ExplicitWeightedPredictionDisabled H264ExplicitWeightedPrediction = "DISABLED"
+	H264ExplicitWeightedPredictionEnabled  H264ExplicitWeightedPrediction = "ENABLED"
+)
+
+// Values returns all known values for H264ExplicitWeightedPrediction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264ExplicitWeightedPrediction) Values() []H264ExplicitWeightedPrediction {
+	return []H264ExplicitWeightedPrediction{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 
@@ -5423,6 +5538,23 @@ func (H265WriteMp4PackagingType) Values() []H265WriteMp4PackagingType {
 	}
 }
 
+type Hdr10PlusPresence string
+
+// Enum values for Hdr10PlusPresence
+const (
+	Hdr10PlusPresencePresent Hdr10PlusPresence = "PRESENT"
+)
+
+// Values returns all known values for Hdr10PlusPresence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Hdr10PlusPresence) Values() []Hdr10PlusPresence {
+	return []Hdr10PlusPresence{
+		"PRESENT",
+	}
+}
+
 type HDRToSDRToneMapper string
 
 // Enum values for HDRToSDRToneMapper
@@ -6233,6 +6365,7 @@ const (
 	JobsQueryFilterKeyJobEngineVersionUsed      JobsQueryFilterKey = "jobEngineVersionUsed"
 	JobsQueryFilterKeyAudioCodec                JobsQueryFilterKey = "audioCodec"
 	JobsQueryFilterKeyVideoCodec                JobsQueryFilterKey = "videoCodec"
+	JobsQueryFilterKeyErrorCode                 JobsQueryFilterKey = "errorCode"
 )
 
 // Values returns all known values for JobsQueryFilterKey. Note that this can be
@@ -6248,6 +6381,7 @@ func (JobsQueryFilterKey) Values() []JobsQueryFilterKey {
 		"jobEngineVersionUsed",
 		"audioCodec",
 		"videoCodec",
+		"errorCode",
 	}
 }
 
@@ -6970,8 +7104,9 @@ type M2tsScte35Source string
 
 // Enum values for M2tsScte35Source
 const (
-	M2tsScte35SourcePassthrough M2tsScte35Source = "PASSTHROUGH"
-	M2tsScte35SourceNone        M2tsScte35Source = "NONE"
+	M2tsScte35SourcePassthrough  M2tsScte35Source = "PASSTHROUGH"
+	M2tsScte35SourceNone         M2tsScte35Source = "NONE"
+	M2tsScte35SourceManifestCues M2tsScte35Source = "MANIFEST_CUES"
 )
 
 // Values returns all known values for M2tsScte35Source. Note that this can be
@@ -6982,6 +7117,7 @@ func (M2tsScte35Source) Values() []M2tsScte35Source {
 	return []M2tsScte35Source{
 		"PASSTHROUGH",
 		"NONE",
+		"MANIFEST_CUES",
 	}
 }
 
@@ -7111,8 +7247,9 @@ type M3u8Scte35Source string
 
 // Enum values for M3u8Scte35Source
 const (
-	M3u8Scte35SourcePassthrough M3u8Scte35Source = "PASSTHROUGH"
-	M3u8Scte35SourceNone        M3u8Scte35Source = "NONE"
+	M3u8Scte35SourcePassthrough  M3u8Scte35Source = "PASSTHROUGH"
+	M3u8Scte35SourceNone         M3u8Scte35Source = "NONE"
+	M3u8Scte35SourceManifestCues M3u8Scte35Source = "MANIFEST_CUES"
 )
 
 // Values returns all known values for M3u8Scte35Source. Note that this can be
@@ -7123,6 +7260,7 @@ func (M3u8Scte35Source) Values() []M3u8Scte35Source {
 	return []M3u8Scte35Source{
 		"PASSTHROUGH",
 		"NONE",
+		"MANIFEST_CUES",
 	}
 }
 
@@ -7563,8 +7701,9 @@ type MpdScte35Source string
 
 // Enum values for MpdScte35Source
 const (
-	MpdScte35SourcePassthrough MpdScte35Source = "PASSTHROUGH"
-	MpdScte35SourceNone        MpdScte35Source = "NONE"
+	MpdScte35SourcePassthrough  MpdScte35Source = "PASSTHROUGH"
+	MpdScte35SourceNone         MpdScte35Source = "NONE"
+	MpdScte35SourceManifestCues MpdScte35Source = "MANIFEST_CUES"
 )
 
 // Values returns all known values for MpdScte35Source. Note that this can be
@@ -7575,6 +7714,7 @@ func (MpdScte35Source) Values() []MpdScte35Source {
 	return []MpdScte35Source{
 		"PASSTHROUGH",
 		"NONE",
+		"MANIFEST_CUES",
 	}
 }
 
@@ -8372,6 +8512,27 @@ func (PadVideo) Values() []PadVideo {
 	}
 }
 
+type PassthroughSegmentationMode string
+
+// Enum values for PassthroughSegmentationMode
+const (
+	PassthroughSegmentationModeAuto          PassthroughSegmentationMode = "AUTO"
+	PassthroughSegmentationModeDurationBased PassthroughSegmentationMode = "DURATION_BASED"
+	PassthroughSegmentationModeGopCount      PassthroughSegmentationMode = "GOP_COUNT"
+)
+
+// Values returns all known values for PassthroughSegmentationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughSegmentationMode) Values() []PassthroughSegmentationMode {
+	return []PassthroughSegmentationMode{
+		"AUTO",
+		"DURATION_BASED",
+		"GOP_COUNT",
+	}
+}
+
 type PresetListBy string
 
 // Enum values for PresetListBy
@@ -8874,6 +9035,7 @@ const (
 	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
 	S3StorageClassGlacier            S3StorageClass = "GLACIER"
 	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassGlacierIr          S3StorageClass = "GLACIER_IR"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -8889,6 +9051,7 @@ func (S3StorageClass) Values() []S3StorageClass {
 		"INTELLIGENT_TIERING",
 		"GLACIER",
 		"DEEP_ARCHIVE",
+		"GLACIER_IR",
 	}
 }
 
@@ -9321,6 +9484,96 @@ func (TsPtsOffset) Values() []TsPtsOffset {
 	}
 }
 
+type TtmlBackgroundColor string
+
+// Enum values for TtmlBackgroundColor
+const (
+	TtmlBackgroundColorNone  TtmlBackgroundColor = "NONE"
+	TtmlBackgroundColorBlack TtmlBackgroundColor = "BLACK"
+	TtmlBackgroundColorWhite TtmlBackgroundColor = "WHITE"
+	TtmlBackgroundColorAuto  TtmlBackgroundColor = "AUTO"
+)
+
+// Values returns all known values for TtmlBackgroundColor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlBackgroundColor) Values() []TtmlBackgroundColor {
+	return []TtmlBackgroundColor{
+		"NONE",
+		"BLACK",
+		"WHITE",
+		"AUTO",
+	}
+}
+
+type TtmlFontColor string
+
+// Enum values for TtmlFontColor
+const (
+	TtmlFontColorWhite  TtmlFontColor = "WHITE"
+	TtmlFontColorBlack  TtmlFontColor = "BLACK"
+	TtmlFontColorYellow TtmlFontColor = "YELLOW"
+	TtmlFontColorRed    TtmlFontColor = "RED"
+	TtmlFontColorGreen  TtmlFontColor = "GREEN"
+	TtmlFontColorBlue   TtmlFontColor = "BLUE"
+	TtmlFontColorAuto   TtmlFontColor = "AUTO"
+)
+
+// Values returns all known values for TtmlFontColor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlFontColor) Values() []TtmlFontColor {
+	return []TtmlFontColor{
+		"WHITE",
+		"BLACK",
+		"YELLOW",
+		"RED",
+		"GREEN",
+		"BLUE",
+		"AUTO",
+	}
+}
+
+type TtmlFontStyle string
+
+// Enum values for TtmlFontStyle
+const (
+	TtmlFontStyleNormal TtmlFontStyle = "NORMAL"
+	TtmlFontStyleItalic TtmlFontStyle = "ITALIC"
+)
+
+// Values returns all known values for TtmlFontStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlFontStyle) Values() []TtmlFontStyle {
+	return []TtmlFontStyle{
+		"NORMAL",
+		"ITALIC",
+	}
+}
+
+type TtmlFontWeight string
+
+// Enum values for TtmlFontWeight
+const (
+	TtmlFontWeightNormal TtmlFontWeight = "NORMAL"
+	TtmlFontWeightBold   TtmlFontWeight = "BOLD"
+)
+
+// Values returns all known values for TtmlFontWeight. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlFontWeight) Values() []TtmlFontWeight {
+	return []TtmlFontWeight{
+		"NORMAL",
+		"BOLD",
+	}
+}
+
 type TtmlStylePassthrough string
 
 // Enum values for TtmlStylePassthrough
@@ -9337,6 +9590,25 @@ func (TtmlStylePassthrough) Values() []TtmlStylePassthrough {
 	return []TtmlStylePassthrough{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type TtmlTextDecoration string
+
+// Enum values for TtmlTextDecoration
+const (
+	TtmlTextDecorationNone      TtmlTextDecoration = "NONE"
+	TtmlTextDecorationUnderline TtmlTextDecoration = "UNDERLINE"
+)
+
+// Values returns all known values for TtmlTextDecoration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TtmlTextDecoration) Values() []TtmlTextDecoration {
+	return []TtmlTextDecoration{
+		"NONE",
+		"UNDERLINE",
 	}
 }
 

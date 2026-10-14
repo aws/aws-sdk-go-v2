@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a job that optimizes a model for inference performance. To create the
@@ -120,10 +119,68 @@ type CreateOptimizationJobInput struct {
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
+	// The Amazon Resource Name (ARN) of the training plan to use for this
+	// optimization job.
+	//
+	// When you use reserved capacity from a training plan, the optimization job runs
+	// on that reserved capacity instead of on-demand capacity. If you omit this field,
+	// the job uses on-demand capacity. You can specify at most one training plan.
+	//
+	// For more information about how to reserve GPU capacity for your optimization
+	// jobs using Amazon SageMaker Training Plans, see [Reserve capacity with training plans].
+	//
+	// [Reserve capacity with training plans]: https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html
+	TrainingPlanArns []string
+
 	// A VPC in Amazon VPC that your optimized model has access to.
 	VpcConfig *types.OptimizationVpcConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentInstanceType != "" {
+		s.WriteString(schemas.CreateOptimizationJobRequest_DeploymentInstanceType, string(v.DeploymentInstanceType))
+	}
+	if v.MaxInstanceCount != nil {
+		s.WriteInt32(schemas.CreateOptimizationJobRequest_MaxInstanceCount, *v.MaxInstanceCount)
+	}
+	if v.ModelSource != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_ModelSource)
+		v.ModelSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOptimizationConfigs(s, schemas.CreateOptimizationJobRequest_OptimizationConfigs, v.OptimizationConfigs)
+	serializeOptimizationJobEnvironmentVariables(s, schemas.CreateOptimizationJobRequest_OptimizationEnvironment, v.OptimizationEnvironment)
+	if v.OptimizationJobName != nil {
+		s.WriteString(schemas.CreateOptimizationJobRequest_OptimizationJobName, *v.OptimizationJobName)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateOptimizationJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateOptimizationJobRequest_Tags, v.Tags)
+	serializeOptimizationJobTrainingPlanArns(s, schemas.CreateOptimizationJobRequest_TrainingPlanArns, v.TrainingPlanArns)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateOptimizationJobOutput struct {
@@ -139,77 +196,48 @@ type CreateOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptimizationJobArn != nil {
+		s.WriteString(schemas.CreateOptimizationJobResponse_OptimizationJobArn, *v.OptimizationJobArn)
+	}
+}
+func (v *CreateOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOptimizationJobResponse_OptimizationJobArn:
+			v.OptimizationJobArn = new(string)
+			return d.ReadString(schemas.CreateOptimizationJobResponse_OptimizationJobArn, v.OptimizationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptimizationJob, schemas.CreateOptimizationJobRequest, schemas.CreateOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptimizationJob, schemas.CreateOptimizationJobRequest, schemas.CreateOptimizationJobResponse), output: &CreateOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOptimizationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOptimizationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOptimizationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOptimizationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +252,8 @@ func (c *Client) addOperationCreateOptimizationJobMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOptimizationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOptimizationJob",
-	}
 }

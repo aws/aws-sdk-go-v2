@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Item":[{"ApplicationId":"__ApplicationId__","CampaignId":"__CampaignId__","End":"__End__","ExecutionMetrics":{"key0":"__Value__"},"Id":"__Id__","Result":"__Result__","ScheduledStart":"__ScheduledStart__","Start":"__Start__","State":"__State__","SuccessfulEndpointCount":1,"TimezonesCompletedCount":1,"TimezonesTotalCount":1,"TotalEndpointCount":1,"TreatmentId":"__TreatmentId__"},{"ApplicationId":"__ApplicationId__","CampaignId":"__CampaignId__","End":"__End__","ExecutionMetrics":{"key0":"__Value__"},"Id":"__Id__","Result":"__Result__","ScheduledStart":"__ScheduledStart__","Start":"__Start__","State":"__State__","SuccessfulEndpointCount":1,"TimezonesCompletedCount":1,"TimezonesTotalCount":1,"TotalEndpointCount":1,"TreatmentId":"__TreatmentId__"}],"NextToken":"__NextToken__"}

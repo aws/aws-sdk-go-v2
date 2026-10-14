@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.RestoreKey
+
+{"Key":{"CreateTimestamp":946684800,"DeletePendingTimestamp":946684800,"DeleteTimestamp":946684800,"DeriveKeyUsage":"TR31_B0_BASE_DERIVATION_KEY","Enabled":true,"Exportable":true,"KeyArn":"__KeyArn__","KeyAttributes":{"KeyAlgorithm":"TDES_2KEY","KeyClass":"SYMMETRIC_KEY","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyUsage":"TR31_B0_BASE_DERIVATION_KEY"},"KeyCheckValue":"__KeyCheckValue__","KeyCheckValueAlgorithm":"CMAC","KeyOrigin":"EXTERNAL","KeyState":"CREATE_IN_PROGRESS","MpaStatus":{"InitiationDate":946684800,"MpaSessionArn":"__MpaSessionArn__","Status":"PENDING","StatusMessage":"__StatusMessage__"},"MultiRegionKeyType":"PRIMARY","PrimaryRegion":"__PrimaryRegion__","ReplicationStatus":{"key0":{"Status":"IN_PROGRESS","StatusMessage":"__StatusMessage__"}},"UsageStartTimestamp":946684800,"UsageStopTimestamp":946684800,"UsingDefaultReplicationRegions":true}}

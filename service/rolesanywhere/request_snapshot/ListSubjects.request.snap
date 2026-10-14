@@ -1,0 +1,3 @@
+GET /subjects?nextToken=__NextToken__&pageSize=1
+
+

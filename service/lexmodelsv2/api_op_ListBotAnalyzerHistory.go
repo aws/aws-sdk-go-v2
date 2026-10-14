@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of historical bot analysis executions for a specific bot. You
@@ -56,6 +56,30 @@ type ListBotAnalyzerHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAnalyzerHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAnalyzerHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAnalyzerHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotAnalyzerHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBotAnalyzerHistoryOutput struct {
 
 	// A list of historical analysis executions, ordered by creation date with the
@@ -81,77 +105,69 @@ type ListBotAnalyzerHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAnalyzerHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAnalyzerHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAnalyzerHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAnalyzerHistoryList(s, schemas.ListBotAnalyzerHistoryResponse_botAnalyzerHistoryList, v.BotAnalyzerHistoryList)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAnalyzerHistoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotAnalyzerHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotAnalyzerHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotAnalyzerHistoryResponse_botAnalyzerHistoryList:
+			return deserializeBotAnalyzerHistoryList(d, schemas.ListBotAnalyzerHistoryResponse_botAnalyzerHistoryList, &v.BotAnalyzerHistoryList)
+		case schemas.ListBotAnalyzerHistoryResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotAnalyzerHistoryResponse_botId, v.BotId)
+		case schemas.ListBotAnalyzerHistoryResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListBotAnalyzerHistoryResponse_botVersion, v.BotVersion)
+		case schemas.ListBotAnalyzerHistoryResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListBotAnalyzerHistoryResponse_localeId, v.LocaleId)
+		case schemas.ListBotAnalyzerHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotAnalyzerHistoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotAnalyzerHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAnalyzerHistory, schemas.ListBotAnalyzerHistoryRequest, schemas.ListBotAnalyzerHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotAnalyzerHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAnalyzerHistory, schemas.ListBotAnalyzerHistoryRequest, schemas.ListBotAnalyzerHistoryResponse), output: &ListBotAnalyzerHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotAnalyzerHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBotAnalyzerHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBotAnalyzerHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBotAnalyzerHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +180,6 @@ func (c *Client) addOperationListBotAnalyzerHistoryMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +282,3 @@ type ListBotAnalyzerHistoryAPIClient interface {
 }
 
 var _ ListBotAnalyzerHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBotAnalyzerHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBotAnalyzerHistory",
-	}
-}

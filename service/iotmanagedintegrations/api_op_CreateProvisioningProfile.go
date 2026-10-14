@@ -5,12 +5,8 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a provisioning profile for executing device provisioning flows. The
@@ -61,31 +57,6 @@ type CreateProvisioningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProvisioningProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProvisioningProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProvisioningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaCertificate != nil {
-		s.WriteString(schemas.CreateProvisioningProfileRequest_CaCertificate, *v.CaCertificate)
-	}
-	if v.ClaimCertificate != nil {
-		s.WriteString(schemas.CreateProvisioningProfileRequest_ClaimCertificate, *v.ClaimCertificate)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateProvisioningProfileRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProvisioningProfileRequest_Name, *v.Name)
-	}
-	if v.ProvisioningType != "" {
-		s.WriteString(schemas.CreateProvisioningProfileRequest_ProvisioningType, string(v.ProvisioningType))
-	}
-	serializeTagsMap(s, schemas.CreateProvisioningProfileRequest_Tags, v.Tags)
-}
-
 type CreateProvisioningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the provisioning profile.
@@ -118,99 +89,23 @@ type CreateProvisioningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProvisioningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProvisioningProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProvisioningProfileResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateProvisioningProfileResponse_Arn, v.Arn)
-		case schemas.CreateProvisioningProfileResponse_ClaimCertificate:
-			v.ClaimCertificate = new(string)
-			return d.ReadString(schemas.CreateProvisioningProfileResponse_ClaimCertificate, v.ClaimCertificate)
-		case schemas.CreateProvisioningProfileResponse_ClaimCertificatePrivateKey:
-			v.ClaimCertificatePrivateKey = new(string)
-			return d.ReadString(schemas.CreateProvisioningProfileResponse_ClaimCertificatePrivateKey, v.ClaimCertificatePrivateKey)
-		case schemas.CreateProvisioningProfileResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateProvisioningProfileResponse_Id, v.Id)
-		case schemas.CreateProvisioningProfileResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateProvisioningProfileResponse_Name, v.Name)
-		case schemas.CreateProvisioningProfileResponse_ProvisioningType:
-			var ev string
-			if err := d.ReadString(schemas.CreateProvisioningProfileResponse_ProvisioningType, &ev); err != nil {
-				return err
-			}
-			v.ProvisioningType = types.ProvisioningType(ev)
-			return nil
-		case schemas.CreateProvisioningProfileResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.CreateProvisioningProfileResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ProvisioningProfileStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningProfile, schemas.CreateProvisioningProfileRequest, schemas.CreateProvisioningProfileResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisioningProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningProfile, schemas.CreateProvisioningProfileRequest, schemas.CreateProvisioningProfileResponse), output: &CreateProvisioningProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProvisioningProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -220,12 +115,6 @@ func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpCreateProvisioningProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,12 +127,6 @@ func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,12 +166,4 @@ func (m *idempotencyToken_initializeOpCreateProvisioningProfile) HandleInitializ
 }
 func addIdempotencyToken_opCreateProvisioningProfileMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProvisioningProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProvisioningProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProvisioningProfile",
-	}
 }

@@ -20,6 +20,7 @@ func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item
 }
 
 func deserializeItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Item) error {
+	*v = make([]Item, 0)
 	var vv Item
 	return smithy.ReadList(d, s, func() error {
 		vv = Item{}

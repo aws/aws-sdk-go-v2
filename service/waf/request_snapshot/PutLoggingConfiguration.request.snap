@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.PutLoggingConfiguration
+
+{"LoggingConfiguration":{"LogDestinationConfigs":["__Member__","__Member__"],"RedactedFields":[{"Data":"__Data__","Type":"URI"},{"Data":"__Data__","Type":"URI"}],"ResourceArn":"__ResourceArn__"}}

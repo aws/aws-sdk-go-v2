@@ -4,11 +4,10 @@ package sfn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,8 +45,7 @@ func (c *Client) CreateActivity(ctx context.Context, params *CreateActivityInput
 type CreateActivityInput struct {
 
 	// The name of the activity to create. This name must be unique for your Amazon
-	// Web Services account and region for 90 days. For more information, see [Limits Related to State Machine Executions]in the
-	// Step Functions Developer Guide.
+	// Web Services account and region.
 	//
 	// A name must not contain:
 	//
@@ -67,8 +65,6 @@ type CreateActivityInput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.
-	//
-	// [Limits Related to State Machine Executions]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
 	//
 	// This member is required.
 	Name *string
@@ -91,6 +87,24 @@ type CreateActivityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActivityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActivityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateActivityInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateActivityInput_name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateActivityInput_tags, v.Tags)
+}
+
 type CreateActivityOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the created activity.
@@ -109,77 +123,54 @@ type CreateActivityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActivityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActivityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActivityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.CreateActivityOutput_activityArn, *v.ActivityArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateActivityOutput_creationDate, *v.CreationDate)
+	}
+}
+func (v *CreateActivityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActivityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActivityOutput_activityArn:
+			v.ActivityArn = new(string)
+			return d.ReadString(schemas.CreateActivityOutput_activityArn, v.ActivityArn)
+		case schemas.CreateActivityOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateActivityOutput_creationDate, v.CreationDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActivity, schemas.CreateActivityInput, schemas.CreateActivityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActivity, schemas.CreateActivityInput, schemas.CreateActivityOutput), output: &CreateActivityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateActivity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateActivity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateActivityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateActivity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +185,8 @@ func (c *Client) addOperationCreateActivityMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateActivity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateActivity",
-	}
 }

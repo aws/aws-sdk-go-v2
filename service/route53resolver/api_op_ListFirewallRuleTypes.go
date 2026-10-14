@@ -5,13 +5,24 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the available rule types that can be used in DNS Firewall rules.
+// Retrieves the rule-type variants that can be used in the FirewallRuleType field
+// of CreateFirewallRuleand UpdateFirewallRule. Each returned FirewallRuleTypeDefinition identifies one variant + value combination — for
+// example, FirewallAdvancedContentCategory + VIOLENCE_AND_HATE_SPEECH , or
+// PartnerThreatProtection + a partner-managed feed.
+//
+// The supported RuleType filter values are FirewallAdvancedContentCategory ,
+// FirewallAdvancedThreatCategory , DnsThreatProtection , and
+// PartnerThreatProtection . When a returned definition's variant requires an
+// external subscription (currently only PartnerThreatProtection ), the response
+// also includes a SubscriptionInfoidentifying the Amazon Web Services Marketplace product that
+// backs it; absence of SubscriptionInfo means the variant is fully managed by
+// Amazon Web Services and requires no separate subscription.
 func (c *Client) ListFirewallRuleTypes(ctx context.Context, params *ListFirewallRuleTypesInput, optFns ...func(*Options)) (*ListFirewallRuleTypesOutput, error) {
 	if params == nil {
 		params = &ListFirewallRuleTypesInput{}
@@ -42,11 +53,31 @@ type ListFirewallRuleTypesInput struct {
 	// token that was returned for the prior request in your next request.
 	NextToken *string
 
-	// The rule type to filter by. If specified, only rule types matching this value
-	// are returned.
+	// An optional filter that restricts the response to a single FirewallRuleType variant. Supported
+	// values: FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
+	// DnsThreatProtection , and PartnerThreatProtection . If omitted, definitions
+	// across all variants are returned.
 	RuleType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListFirewallRuleTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallRuleTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallRuleTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFirewallRuleTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallRuleTypesRequest_NextToken, *v.NextToken)
+	}
+	if v.RuleType != nil {
+		s.WriteString(schemas.ListFirewallRuleTypesRequest_RuleType, *v.RuleType)
+	}
 }
 
 type ListFirewallRuleTypesOutput struct {
@@ -65,74 +96,48 @@ type ListFirewallRuleTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallRuleTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallRuleTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallRuleTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFirewallRuleTypeDefinitions(s, schemas.ListFirewallRuleTypesResponse_FirewallRuleTypes, v.FirewallRuleTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallRuleTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFirewallRuleTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallRuleTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallRuleTypesResponse_FirewallRuleTypes:
+			return deserializeFirewallRuleTypeDefinitions(d, schemas.ListFirewallRuleTypesResponse_FirewallRuleTypes, &v.FirewallRuleTypes)
+		case schemas.ListFirewallRuleTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFirewallRuleTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFirewallRuleTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallRuleTypes, schemas.ListFirewallRuleTypesRequest, schemas.ListFirewallRuleTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFirewallRuleTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallRuleTypes, schemas.ListFirewallRuleTypesRequest, schemas.ListFirewallRuleTypesResponse), output: &ListFirewallRuleTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFirewallRuleTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFirewallRuleTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFirewallRuleTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +150,6 @@ func (c *Client) addOperationListFirewallRuleTypesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +254,3 @@ type ListFirewallRuleTypesAPIClient interface {
 }
 
 var _ ListFirewallRuleTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFirewallRuleTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFirewallRuleTypes",
-	}
-}

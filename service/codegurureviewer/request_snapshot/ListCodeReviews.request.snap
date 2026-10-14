@@ -1,0 +1,3 @@
+GET /codereviews?MaxResults=1&NextToken=__NextToken__&ProviderTypes=CodeCommit&ProviderTypes=CodeCommit&RepositoryNames=__Member__&RepositoryNames=__Member__&States=Completed&States=Completed&Type=PullRequest
+
+

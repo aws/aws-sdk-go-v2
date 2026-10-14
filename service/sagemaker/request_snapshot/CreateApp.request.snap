@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateApp
+
+{"AppName":"__AppName__","AppType":"JupyterServer","DomainId":"__DomainId__","RecoveryMode":true,"ResourceSpec":{"InstanceType":"system","LifecycleConfigArn":"__LifecycleConfigArn__","SageMakerImageArn":"__SageMakerImageArn__","SageMakerImageVersionAlias":"__SageMakerImageVersionAlias__","SageMakerImageVersionArn":"__SageMakerImageVersionArn__","TrainingPlanArn":"__TrainingPlanArn__"},"SpaceName":"__SpaceName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserProfileName":"__UserProfileName__"}

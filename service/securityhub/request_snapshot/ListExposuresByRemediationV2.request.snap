@@ -1,0 +1,5 @@
+POST /ListExposuresByRemediationV2
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","TargetUid":"__TargetUid__"}

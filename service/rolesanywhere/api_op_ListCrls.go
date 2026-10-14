@@ -5,12 +5,8 @@ package rolesanywhere
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all certificate revocation lists (CRL) in the authenticated account and
@@ -45,34 +41,6 @@ type ListCrlsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCrlsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCrlsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRequest_nextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListRequest_pageSize, *v.PageSize)
-	}
-}
-func (v *ListCrlsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRequest_nextToken, v.NextToken)
-		case schemas.ListRequest_pageSize:
-			v.PageSize = new(int32)
-			return d.ReadInt32(schemas.ListRequest_pageSize, v.PageSize)
-		}
-		return nil
-	})
-}
-
 type ListCrlsOutput struct {
 
 	// A list of certificate revocation lists (CRL).
@@ -89,96 +57,26 @@ type ListCrlsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCrlsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCrlsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrlDetails(s, schemas.ListCrlsResponse_crls, v.Crls)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCrlsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListCrlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCrlsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCrlsResponse_crls:
-			return deserializeCrlDetails(d, schemas.ListCrlsResponse_crls, &v.Crls)
-		case schemas.ListCrlsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCrlsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCrlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCrls{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrls, schemas.ListRequest, schemas.ListCrlsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCrls{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrls, schemas.ListRequest, schemas.ListCrlsResponse), output: &ListCrlsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCrls"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrls(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +89,6 @@ func (c *Client) addOperationListCrlsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +176,3 @@ type ListCrlsAPIClient interface {
 }
 
 var _ ListCrlsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCrls(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCrls",
-	}
-}

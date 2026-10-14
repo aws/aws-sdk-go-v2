@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type DescribeAutoMLJobV2Input struct {
 	AutoMLJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAutoMLJobV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoMLJobV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.DescribeAutoMLJobV2Request_AutoMLJobName, *v.AutoMLJobName)
+	}
 }
 
 type DescribeAutoMLJobV2Output struct {
@@ -143,77 +154,203 @@ type DescribeAutoMLJobV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoMLJobV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoMLJobV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLComputeConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_AutoMLComputeConfig)
+		v.AutoMLComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+	if v.AutoMLJobArtifacts != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_AutoMLJobArtifacts)
+		v.AutoMLJobArtifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLJobInputDataConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobName, *v.AutoMLJobName)
+	}
+	if v.AutoMLJobObjective != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_AutoMLJobObjective)
+		v.AutoMLJobObjective.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoMLJobSecondaryStatus != "" {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobSecondaryStatus, string(v.AutoMLJobSecondaryStatus))
+	}
+	if v.AutoMLJobStatus != "" {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobStatus, string(v.AutoMLJobStatus))
+	}
+	serializeAutoMLProblemTypeConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	if v.AutoMLProblemTypeConfigName != "" {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfigName, string(v.AutoMLProblemTypeConfigName))
+	}
+	if v.BestCandidate != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_BestCandidate)
+		v.BestCandidate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAutoMLJobV2Response_CreationTime, *v.CreationTime)
+	}
+	if v.DataSplitConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_DataSplitConfig)
+		v.DataSplitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeAutoMLJobV2Response_EndTime, *v.EndTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeAutoMLJobV2Response_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelDeployConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_ModelDeployConfig)
+		v.ModelDeployConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelDeployResult != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_ModelDeployResult)
+		v.ModelDeployResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLPartialFailureReasons(s, schemas.DescribeAutoMLJobV2Response_PartialFailureReasons, v.PartialFailureReasons)
+	if v.ResolvedAttributes != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_ResolvedAttributes)
+		v.ResolvedAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeAutoMLJobV2Response_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAutoMLJobV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoMLJobV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoMLJobV2Response_AutoMLComputeConfig:
+			v.AutoMLComputeConfig = &types.AutoMLComputeConfig{}
+			return v.AutoMLComputeConfig.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.DescribeAutoMLJobV2Response_AutoMLJobArn, v.AutoMLJobArn)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobArtifacts:
+			v.AutoMLJobArtifacts = &types.AutoMLJobArtifacts{}
+			return v.AutoMLJobArtifacts.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobInputDataConfig:
+			return deserializeAutoMLJobInputDataConfig(d, schemas.DescribeAutoMLJobV2Response_AutoMLJobInputDataConfig, &v.AutoMLJobInputDataConfig)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobName:
+			v.AutoMLJobName = new(string)
+			return d.ReadString(schemas.DescribeAutoMLJobV2Response_AutoMLJobName, v.AutoMLJobName)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobObjective:
+			v.AutoMLJobObjective = &types.AutoMLJobObjective{}
+			return v.AutoMLJobObjective.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobSecondaryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAutoMLJobV2Response_AutoMLJobSecondaryStatus, &ev); err != nil {
+				return err
+			}
+			v.AutoMLJobSecondaryStatus = types.AutoMLJobSecondaryStatus(ev)
+			return nil
+		case schemas.DescribeAutoMLJobV2Response_AutoMLJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAutoMLJobV2Response_AutoMLJobStatus, &ev); err != nil {
+				return err
+			}
+			v.AutoMLJobStatus = types.AutoMLJobStatus(ev)
+			return nil
+		case schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfig:
+			return deserializeAutoMLProblemTypeConfig(d, schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfig, &v.AutoMLProblemTypeConfig)
+		case schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfigName:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfigName, &ev); err != nil {
+				return err
+			}
+			v.AutoMLProblemTypeConfigName = types.AutoMLProblemTypeConfigName(ev)
+			return nil
+		case schemas.DescribeAutoMLJobV2Response_BestCandidate:
+			v.BestCandidate = &types.AutoMLCandidate{}
+			return v.BestCandidate.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutoMLJobV2Response_CreationTime, v.CreationTime)
+		case schemas.DescribeAutoMLJobV2Response_DataSplitConfig:
+			v.DataSplitConfig = &types.AutoMLDataSplitConfig{}
+			return v.DataSplitConfig.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutoMLJobV2Response_EndTime, v.EndTime)
+		case schemas.DescribeAutoMLJobV2Response_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeAutoMLJobV2Response_FailureReason, v.FailureReason)
+		case schemas.DescribeAutoMLJobV2Response_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutoMLJobV2Response_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeAutoMLJobV2Response_ModelDeployConfig:
+			v.ModelDeployConfig = &types.ModelDeployConfig{}
+			return v.ModelDeployConfig.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_ModelDeployResult:
+			v.ModelDeployResult = &types.ModelDeployResult{}
+			return v.ModelDeployResult.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_OutputDataConfig:
+			v.OutputDataConfig = &types.AutoMLOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_PartialFailureReasons:
+			return deserializeAutoMLPartialFailureReasons(d, schemas.DescribeAutoMLJobV2Response_PartialFailureReasons, &v.PartialFailureReasons)
+		case schemas.DescribeAutoMLJobV2Response_ResolvedAttributes:
+			v.ResolvedAttributes = &types.AutoMLResolvedAttributes{}
+			return v.ResolvedAttributes.Deserialize(d)
+		case schemas.DescribeAutoMLJobV2Response_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeAutoMLJobV2Response_RoleArn, v.RoleArn)
+		case schemas.DescribeAutoMLJobV2Response_SecurityConfig:
+			v.SecurityConfig = &types.AutoMLSecurityConfig{}
+			return v.SecurityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoMLJobV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoMLJobV2, schemas.DescribeAutoMLJobV2Request, schemas.DescribeAutoMLJobV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAutoMLJobV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoMLJobV2, schemas.DescribeAutoMLJobV2Request, schemas.DescribeAutoMLJobV2Response), output: &DescribeAutoMLJobV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAutoMLJobV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAutoMLJobV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAutoMLJobV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAutoMLJobV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +365,8 @@ func (c *Client) addOperationDescribeAutoMLJobV2Middlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAutoMLJobV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAutoMLJobV2",
-	}
 }

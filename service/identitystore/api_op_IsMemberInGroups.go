@@ -4,13 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Checks the user's membership in all requested groups and returns if the member
@@ -39,10 +36,18 @@ type IsMemberInGroupsInput struct {
 
 	// A list of identifiers for groups in the identity store.
 	//
+	// You can specify each group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupIds []string
 
 	// The globally unique identifier for the identity store.
+	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
 	//
 	// This member is required.
 	IdentityStoreId *string
@@ -67,20 +72,6 @@ func (v *IsMemberInGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.IsMemberInGroupsRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeMemberId(s, schemas.IsMemberInGroupsRequest_MemberId, v.MemberId)
-}
-func (v *IsMemberInGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IsMemberInGroupsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IsMemberInGroupsRequest_GroupIds:
-			return deserializeGroupIds(d, schemas.IsMemberInGroupsRequest_GroupIds, &v.GroupIds)
-		case schemas.IsMemberInGroupsRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.IsMemberInGroupsRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.IsMemberInGroupsRequest_MemberId:
-			return deserializeMemberId(d, schemas.IsMemberInGroupsRequest_MemberId, &v.MemberId)
-		}
-		return nil
-	})
 }
 
 type IsMemberInGroupsOutput struct {
@@ -115,74 +106,26 @@ func (v *IsMemberInGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationIsMemberInGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsMemberInGroups, schemas.IsMemberInGroupsRequest, schemas.IsMemberInGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsMemberInGroups, schemas.IsMemberInGroupsRequest, schemas.IsMemberInGroupsResponse), output: &IsMemberInGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "IsMemberInGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpIsMemberInGroupsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opIsMemberInGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +140,8 @@ func (c *Client) addOperationIsMemberInGroupsMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opIsMemberInGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "IsMemberInGroups",
-	}
 }

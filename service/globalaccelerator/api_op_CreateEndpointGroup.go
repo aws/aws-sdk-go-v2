@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an endpoint group for the specified listener. An endpoint group is a
@@ -104,6 +104,44 @@ type CreateEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointConfigurations(s, schemas.CreateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+	if v.HealthCheckIntervalSeconds != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_HealthCheckIntervalSeconds, *v.HealthCheckIntervalSeconds)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_HealthCheckPath, *v.HealthCheckPath)
+	}
+	if v.HealthCheckPort != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_HealthCheckPort, *v.HealthCheckPort)
+	}
+	if v.HealthCheckProtocol != "" {
+		s.WriteString(schemas.CreateEndpointGroupRequest_HealthCheckProtocol, string(v.HealthCheckProtocol))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_ListenerArn, *v.ListenerArn)
+	}
+	serializePortOverrides(s, schemas.CreateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	if v.ThresholdCount != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_ThresholdCount, *v.ThresholdCount)
+	}
+	if v.TrafficDialPercentage != nil {
+		s.WriteFloat32(schemas.CreateEndpointGroupRequest_TrafficDialPercentage, *v.TrafficDialPercentage)
+	}
+}
+
 type CreateEndpointGroupOutput struct {
 
 	// The information about the endpoint group that was created.
@@ -115,65 +153,44 @@ type CreateEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroup != nil {
+		s.WriteStruct(schemas.CreateEndpointGroupResponse_EndpointGroup)
+		v.EndpointGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointGroupResponse_EndpointGroup:
+			v.EndpointGroup = &types.EndpointGroup{}
+			return v.EndpointGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointGroup, schemas.CreateEndpointGroupRequest, schemas.CreateEndpointGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointGroup, schemas.CreateEndpointGroupRequest, schemas.CreateEndpointGroupResponse), output: &CreateEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpointGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEndpointGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -183,12 +200,6 @@ func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateEndpointGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEndpointGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,12 +212,6 @@ func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,12 +251,4 @@ func (m *idempotencyToken_initializeOpCreateEndpointGroup) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateEndpointGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEndpointGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEndpointGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEndpointGroup",
-	}
 }

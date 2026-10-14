@@ -1,0 +1,3 @@
+GET /thing-registration-tasks?maxResults=1&nextToken=__NextToken__&status=InProgress
+
+

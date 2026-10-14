@@ -5,12 +5,8 @@ package mpa
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -88,28 +84,6 @@ type CreateApprovalTeamInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateApprovalTeamRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategy(s, schemas.CreateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
-	serializeApprovalTeamRequestApprovers(s, schemas.CreateApprovalTeamRequest_Approvers, v.Approvers)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateApprovalTeamRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateApprovalTeamRequest_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateApprovalTeamRequest_Name, *v.Name)
-	}
-	serializePoliciesReferences(s, schemas.CreateApprovalTeamRequest_Policies, v.Policies)
-	serializeTags(s, schemas.CreateApprovalTeamRequest_Tags, v.Tags)
-}
-
 type CreateApprovalTeamOutput struct {
 
 	// Amazon Resource Name (ARN) for the team that was created.
@@ -131,82 +105,23 @@ type CreateApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateApprovalTeamResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateApprovalTeamResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateApprovalTeamResponse_Arn, v.Arn)
-		case schemas.CreateApprovalTeamResponse_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.CreateApprovalTeamResponse_CreationTime, v.CreationTime)
-		case schemas.CreateApprovalTeamResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateApprovalTeamResponse_Name, v.Name)
-		case schemas.CreateApprovalTeamResponse_VersionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.CreateApprovalTeamResponse_VersionId, v.VersionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApprovalTeam{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalTeam, schemas.CreateApprovalTeamRequest, schemas.CreateApprovalTeamResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApprovalTeam{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalTeam, schemas.CreateApprovalTeamRequest, schemas.CreateApprovalTeamResponse), output: &CreateApprovalTeamOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApprovalTeam"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -216,12 +131,6 @@ func (c *Client) addOperationCreateApprovalTeamMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateApprovalTeamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApprovalTeam(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,12 +143,6 @@ func (c *Client) addOperationCreateApprovalTeamMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,12 +182,4 @@ func (m *idempotencyToken_initializeOpCreateApprovalTeam) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateApprovalTeamMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateApprovalTeam{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateApprovalTeam(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateApprovalTeam",
-	}
 }

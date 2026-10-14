@@ -4,13 +4,8 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a permission set within a specified IAM Identity Center instance.
@@ -62,31 +57,6 @@ type CreatePermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePermissionSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePermissionSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePermissionSetRequest_Description, *v.Description)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.CreatePermissionSetRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreatePermissionSetRequest_Name, *v.Name)
-	}
-	if v.RelayState != nil {
-		s.WriteString(schemas.CreatePermissionSetRequest_RelayState, *v.RelayState)
-	}
-	if v.SessionDuration != nil {
-		s.WriteString(schemas.CreatePermissionSetRequest_SessionDuration, *v.SessionDuration)
-	}
-	serializeTagList(s, schemas.CreatePermissionSetRequest_Tags, v.Tags)
-}
-
 type CreatePermissionSetOutput struct {
 
 	// Defines the level of access on an Amazon Web Services account.
@@ -98,85 +68,29 @@ type CreatePermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePermissionSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePermissionSetResponse_PermissionSet:
-			v.PermissionSet = &types.PermissionSet{}
-			return v.PermissionSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermissionSet, schemas.CreatePermissionSetRequest, schemas.CreatePermissionSetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePermissionSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermissionSet, schemas.CreatePermissionSetRequest, schemas.CreatePermissionSetResponse), output: &CreatePermissionSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePermissionSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePermissionSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePermissionSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +105,8 @@ func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePermissionSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePermissionSet",
-	}
 }

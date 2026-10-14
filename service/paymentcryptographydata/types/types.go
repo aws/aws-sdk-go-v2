@@ -3111,13 +3111,32 @@ func (v *PinVerificationAttributesMemberVisaPin) Deserialize(d smithy.ShapeDeser
 //
 // The following types satisfy this interface:
 //
+//	ReEncryptionAttributesMemberAsymmetric
 //	ReEncryptionAttributesMemberDukpt
 //	ReEncryptionAttributesMemberSymmetric
 type ReEncryptionAttributes interface {
 	isReEncryptionAttributes()
 }
 
-// Parameters that are required to encrypt plaintext data using DUKPT.
+// Specifies the parameters required to encrypt data using an asymmetric key pair.
+// You must specify a PaddingType .
+type ReEncryptionAttributesMemberAsymmetric struct {
+	Value AsymmetricEncryptionAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*ReEncryptionAttributesMemberAsymmetric) isReEncryptionAttributes() {}
+func (v *ReEncryptionAttributesMemberAsymmetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptionAttributes_Asymmetric)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReEncryptionAttributesMemberAsymmetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies the parameters required to encrypt data using DUKPT.
 type ReEncryptionAttributesMemberDukpt struct {
 	Value DukptEncryptionAttributes
 
@@ -3134,7 +3153,7 @@ func (v *ReEncryptionAttributesMemberDukpt) Deserialize(d smithy.ShapeDeserializ
 	return v.Value.Deserialize(d)
 }
 
-// Parameters that are required to encrypt data using symmetric keys.
+// Specifies the parameters required to encrypt data using symmetric keys.
 type ReEncryptionAttributesMemberSymmetric struct {
 	Value SymmetricEncryptionAttributes
 
@@ -3207,6 +3226,7 @@ func (v *SessionKeyAmex) Deserialize(d smithy.ShapeDeserializer) error {
 //	SessionKeyDerivationMemberEmv2000
 //	SessionKeyDerivationMemberEmvCommon
 //	SessionKeyDerivationMemberMastercard
+//	SessionKeyDerivationMemberUnionPay
 //	SessionKeyDerivationMemberVisa
 type SessionKeyDerivation interface {
 	isSessionKeyDerivation()
@@ -3280,6 +3300,24 @@ func (v *SessionKeyDerivationMemberMastercard) Serialize(s smithy.ShapeSerialize
 	s.CloseStruct()
 }
 func (v *SessionKeyDerivationMemberMastercard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Parameters to derive session key for a UnionPay payment card for Authorization
+// Request Cryptogram (ARQC) generation and verification.
+type SessionKeyDerivationMemberUnionPay struct {
+	Value SessionKeyUnionPay
+
+	noSmithyDocumentSerde
+}
+
+func (*SessionKeyDerivationMemberUnionPay) isSessionKeyDerivation() {}
+func (v *SessionKeyDerivationMemberUnionPay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionKeyDerivation_UnionPay)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SessionKeyDerivationMemberUnionPay) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3527,6 +3565,67 @@ func (v *SessionKeyMastercard) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SessionKeyMastercard_UnpredictableNumber:
 			v.UnpredictableNumber = new(string)
 			return d.ReadString(schemas.SessionKeyMastercard_UnpredictableNumber, v.UnpredictableNumber)
+		}
+		return nil
+	})
+}
+
+// Parameters to derive session key for a UnionPay payment card for Authorization
+// Request Cryptogram (ARQC) generation and verification.
+type SessionKeyUnionPay struct {
+
+	// The transaction counter that the terminal provides during transaction
+	// processing. This value is in hexadecimal format. For example, enter a decimal
+	// counter of 109 as 006D .
+	//
+	// This member is required.
+	ApplicationTransactionCounter *string
+
+	// A number that identifies and differentiates payment cards with the same Primary
+	// Account Number (PAN). If not used, enter 00 .
+	//
+	// This member is required.
+	PanSequenceNumber *string
+
+	// The Primary Account Number (PAN) of the cardholder. A PAN is a unique
+	// identifier for a payment credit or debit card and associates the card to a
+	// specific account holder.
+	//
+	// This member is required.
+	PrimaryAccountNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SessionKeyUnionPay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionKeyUnionPay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionKeyUnionPay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationTransactionCounter != nil {
+		s.WriteString(schemas.SessionKeyUnionPay_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
+	}
+	if v.PanSequenceNumber != nil {
+		s.WriteString(schemas.SessionKeyUnionPay_PanSequenceNumber, *v.PanSequenceNumber)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.SessionKeyUnionPay_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+}
+func (v *SessionKeyUnionPay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionKeyUnionPay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionKeyUnionPay_ApplicationTransactionCounter:
+			v.ApplicationTransactionCounter = new(string)
+			return d.ReadString(schemas.SessionKeyUnionPay_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
+		case schemas.SessionKeyUnionPay_PanSequenceNumber:
+			v.PanSequenceNumber = new(string)
+			return d.ReadString(schemas.SessionKeyUnionPay_PanSequenceNumber, v.PanSequenceNumber)
+		case schemas.SessionKeyUnionPay_PrimaryAccountNumber:
+			v.PrimaryAccountNumber = new(string)
+			return d.ReadString(schemas.SessionKeyUnionPay_PrimaryAccountNumber, v.PrimaryAccountNumber)
 		}
 		return nil
 	})

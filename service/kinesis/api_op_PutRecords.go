@@ -4,12 +4,11 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Writes multiple data records into a Kinesis data stream in a single call (also
@@ -105,6 +104,9 @@ type PutRecordsInput struct {
 	// This member is required.
 	Records []types.PutRecordsRequestEntry
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// The ARN of the stream.
 	StreamARN *string
 
@@ -117,6 +119,27 @@ type PutRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.PutRecordsInput_DryRun, *v.DryRun)
+	}
+	serializePutRecordsRequestEntryList(s, schemas.PutRecordsInput_Records, v.Records)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.PutRecordsInput_StreamName, *v.StreamName)
+	}
+}
 func (in *PutRecordsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -153,77 +176,64 @@ type PutRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.PutRecordsOutput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FailedRecordCount != nil {
+		s.WriteInt32(schemas.PutRecordsOutput_FailedRecordCount, *v.FailedRecordCount)
+	}
+	serializePutRecordsResultEntryList(s, schemas.PutRecordsOutput_Records, v.Records)
+}
+func (v *PutRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordsOutput_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.PutRecordsOutput_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = types.EncryptionType(ev)
+			return nil
+		case schemas.PutRecordsOutput_FailedRecordCount:
+			v.FailedRecordCount = new(int32)
+			return d.ReadInt32(schemas.PutRecordsOutput_FailedRecordCount, v.FailedRecordCount)
+		case schemas.PutRecordsOutput_Records:
+			return deserializePutRecordsResultEntryList(d, schemas.PutRecordsOutput_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecords, schemas.PutRecordsInput, schemas.PutRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecords, schemas.PutRecordsInput, schemas.PutRecordsOutput), output: &PutRecordsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRecords{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,22 +248,8 @@ func (c *Client) addOperationPutRecordsMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutRecords",
-	}
 }

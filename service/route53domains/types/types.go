@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -36,20 +38,96 @@ type BillingRecord struct {
 	noSmithyDocumentSerde
 }
 
-// Customer's consent for the owner change request.
+func (v *BillingRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillDate != nil {
+		s.WriteTime(schemas.BillingRecord_BillDate, *v.BillDate)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.BillingRecord_DomainName, *v.DomainName)
+	}
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.BillingRecord_InvoiceId, *v.InvoiceId)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.BillingRecord_Operation, string(v.Operation))
+	}
+	if v.Price != 0 {
+		s.WriteFloat64(schemas.BillingRecord_Price, v.Price)
+	}
+}
+func (v *BillingRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingRecord_BillDate:
+			v.BillDate = new(time.Time)
+			return d.ReadTime(schemas.BillingRecord_BillDate, v.BillDate)
+		case schemas.BillingRecord_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.BillingRecord_DomainName, v.DomainName)
+		case schemas.BillingRecord_InvoiceId:
+			v.InvoiceId = new(string)
+			return d.ReadString(schemas.BillingRecord_InvoiceId, v.InvoiceId)
+		case schemas.BillingRecord_Operation:
+			var ev string
+			if err := d.ReadString(schemas.BillingRecord_Operation, &ev); err != nil {
+				return err
+			}
+			v.Operation = OperationType(ev)
+			return nil
+		case schemas.BillingRecord_Price:
+			return d.ReadFloat64(schemas.BillingRecord_Price, &v.Price)
+		}
+		return nil
+	})
+}
+
+//	The maximum amount that you agree to pay for an operation, and the currency
+//
+// for that amount.
 type Consent struct {
 
-	//  Currency for the MaxPrice .
+	//  The currency for the MaxPrice .
 	//
 	// This member is required.
 	Currency *string
 
-	//  Maximum amount the customer agreed to accept.
+	//  The maximum amount that you agree to accept.
 	//
 	// This member is required.
 	MaxPrice float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Consent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Consent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Consent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != nil {
+		s.WriteString(schemas.Consent_Currency, *v.Currency)
+	}
+	s.WriteFloat64(schemas.Consent_MaxPrice, v.MaxPrice)
+}
+func (v *Consent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Consent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Consent_Currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.Consent_Currency, v.Currency)
+		case schemas.Consent_MaxPrice:
+			return d.ReadFloat64(schemas.Consent_MaxPrice, &v.MaxPrice)
+		}
+		return nil
+	})
 }
 
 // ContactDetail includes the following elements.
@@ -121,6 +199,111 @@ type ContactDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContactDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine1 != nil {
+		s.WriteString(schemas.ContactDetail_AddressLine1, *v.AddressLine1)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.ContactDetail_AddressLine2, *v.AddressLine2)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ContactDetail_City, *v.City)
+	}
+	if v.ContactType != "" {
+		s.WriteString(schemas.ContactDetail_ContactType, string(v.ContactType))
+	}
+	if v.CountryCode != "" {
+		s.WriteString(schemas.ContactDetail_CountryCode, string(v.CountryCode))
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.ContactDetail_Email, *v.Email)
+	}
+	serializeExtraParamList(s, schemas.ContactDetail_ExtraParams, v.ExtraParams)
+	if v.Fax != nil {
+		s.WriteString(schemas.ContactDetail_Fax, *v.Fax)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.ContactDetail_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.ContactDetail_LastName, *v.LastName)
+	}
+	if v.OrganizationName != nil {
+		s.WriteString(schemas.ContactDetail_OrganizationName, *v.OrganizationName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.ContactDetail_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ContactDetail_State, *v.State)
+	}
+	if v.ZipCode != nil {
+		s.WriteString(schemas.ContactDetail_ZipCode, *v.ZipCode)
+	}
+}
+func (v *ContactDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactDetail_AddressLine1:
+			v.AddressLine1 = new(string)
+			return d.ReadString(schemas.ContactDetail_AddressLine1, v.AddressLine1)
+		case schemas.ContactDetail_AddressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.ContactDetail_AddressLine2, v.AddressLine2)
+		case schemas.ContactDetail_City:
+			v.City = new(string)
+			return d.ReadString(schemas.ContactDetail_City, v.City)
+		case schemas.ContactDetail_ContactType:
+			var ev string
+			if err := d.ReadString(schemas.ContactDetail_ContactType, &ev); err != nil {
+				return err
+			}
+			v.ContactType = ContactType(ev)
+			return nil
+		case schemas.ContactDetail_CountryCode:
+			var ev string
+			if err := d.ReadString(schemas.ContactDetail_CountryCode, &ev); err != nil {
+				return err
+			}
+			v.CountryCode = CountryCode(ev)
+			return nil
+		case schemas.ContactDetail_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.ContactDetail_Email, v.Email)
+		case schemas.ContactDetail_ExtraParams:
+			return deserializeExtraParamList(d, schemas.ContactDetail_ExtraParams, &v.ExtraParams)
+		case schemas.ContactDetail_Fax:
+			v.Fax = new(string)
+			return d.ReadString(schemas.ContactDetail_Fax, v.Fax)
+		case schemas.ContactDetail_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.ContactDetail_FirstName, v.FirstName)
+		case schemas.ContactDetail_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.ContactDetail_LastName, v.LastName)
+		case schemas.ContactDetail_OrganizationName:
+			v.OrganizationName = new(string)
+			return d.ReadString(schemas.ContactDetail_OrganizationName, v.OrganizationName)
+		case schemas.ContactDetail_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.ContactDetail_PhoneNumber, v.PhoneNumber)
+		case schemas.ContactDetail_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ContactDetail_State, v.State)
+		case schemas.ContactDetail_ZipCode:
+			v.ZipCode = new(string)
+			return d.ReadString(schemas.ContactDetail_ZipCode, v.ZipCode)
+		}
+		return nil
+	})
+}
+
 // Information about the DNSSEC key.
 //
 // You get this from your DNS provider and then give it to Route 53 (by using [AssociateDelegationSignerToDomain]) to
@@ -155,12 +338,10 @@ type DnssecKey struct {
 	// [IANA]: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml
 	DigestType *int32
 
-	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
-	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
-	// if your DNS provider isn't Route 53 and you don’t have KSK available.
+	// The DNSKEY flags that indicate the key type. This field is deprecated; the
+	// DnssecKey response no longer returns the flags.
 	//
-	// If you have KSK and ZSK keys, always use KSK to create a delegations signer
-	// (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+	// Deprecated: The DnssecKey response no longer returns the flags.
 	Flags *int32
 
 	//  An ID assigned to each DS record created by [AssociateDelegationSignerToDomain].
@@ -171,11 +352,71 @@ type DnssecKey struct {
 	//  A numeric identification of the DNSKEY record referred to by this DS record.
 	KeyTag *int32
 
-	// The base64-encoded public key part of the key pair that is passed to the
-	// registry .
+	// The base64-encoded public key of the key pair. This field is deprecated; the
+	// DnssecKey response no longer returns the public key.
+	//
+	// Deprecated: The DnssecKey response no longer returns the public key.
 	PublicKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnssecKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnssecKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnssecKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != nil {
+		s.WriteInt32(schemas.DnssecKey_Algorithm, *v.Algorithm)
+	}
+	if v.Digest != nil {
+		s.WriteString(schemas.DnssecKey_Digest, *v.Digest)
+	}
+	if v.DigestType != nil {
+		s.WriteInt32(schemas.DnssecKey_DigestType, *v.DigestType)
+	}
+	if v.Flags != nil {
+		s.WriteInt32(schemas.DnssecKey_Flags, *v.Flags)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DnssecKey_Id, *v.Id)
+	}
+	if v.KeyTag != nil {
+		s.WriteInt32(schemas.DnssecKey_KeyTag, *v.KeyTag)
+	}
+	if v.PublicKey != nil {
+		s.WriteString(schemas.DnssecKey_PublicKey, *v.PublicKey)
+	}
+}
+func (v *DnssecKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnssecKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnssecKey_Algorithm:
+			v.Algorithm = new(int32)
+			return d.ReadInt32(schemas.DnssecKey_Algorithm, v.Algorithm)
+		case schemas.DnssecKey_Digest:
+			v.Digest = new(string)
+			return d.ReadString(schemas.DnssecKey_Digest, v.Digest)
+		case schemas.DnssecKey_DigestType:
+			v.DigestType = new(int32)
+			return d.ReadInt32(schemas.DnssecKey_DigestType, v.DigestType)
+		case schemas.DnssecKey_Flags:
+			v.Flags = new(int32)
+			return d.ReadInt32(schemas.DnssecKey_Flags, v.Flags)
+		case schemas.DnssecKey_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DnssecKey_Id, v.Id)
+		case schemas.DnssecKey_KeyTag:
+			v.KeyTag = new(int32)
+			return d.ReadInt32(schemas.DnssecKey_KeyTag, v.KeyTag)
+		case schemas.DnssecKey_PublicKey:
+			v.PublicKey = new(string)
+			return d.ReadString(schemas.DnssecKey_PublicKey, v.PublicKey)
+		}
+		return nil
+	})
 }
 
 // Information about a delegation signer (DS) record that was created in the
@@ -202,13 +443,47 @@ type DnssecSigningAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the domain price associated with a TLD.
+func (v *DnssecSigningAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnssecSigningAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnssecSigningAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != nil {
+		s.WriteInt32(schemas.DnssecSigningAttributes_Algorithm, *v.Algorithm)
+	}
+	if v.Flags != nil {
+		s.WriteInt32(schemas.DnssecSigningAttributes_Flags, *v.Flags)
+	}
+	if v.PublicKey != nil {
+		s.WriteString(schemas.DnssecSigningAttributes_PublicKey, *v.PublicKey)
+	}
+}
+func (v *DnssecSigningAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnssecSigningAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnssecSigningAttributes_Algorithm:
+			v.Algorithm = new(int32)
+			return d.ReadInt32(schemas.DnssecSigningAttributes_Algorithm, v.Algorithm)
+		case schemas.DnssecSigningAttributes_Flags:
+			v.Flags = new(int32)
+			return d.ReadInt32(schemas.DnssecSigningAttributes_Flags, v.Flags)
+		case schemas.DnssecSigningAttributes_PublicKey:
+			v.PublicKey = new(string)
+			return d.ReadString(schemas.DnssecSigningAttributes_PublicKey, v.PublicKey)
+		}
+		return nil
+	})
+}
+
+// Information about the prices associated with a TLD or a domain name.
 type DomainPrice struct {
 
 	// The price for changing domain ownership.
 	ChangeOwnershipPrice *PriceWithCurrency
 
-	// The name of the TLD for which the prices apply.
+	// The TLD or domain name that the prices apply to.
 	Name *string
 
 	// The price for domain registration with Route 53.
@@ -226,10 +501,73 @@ type DomainPrice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainPrice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainPrice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainPrice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeOwnershipPrice != nil {
+		s.WriteStruct(schemas.DomainPrice_ChangeOwnershipPrice)
+		v.ChangeOwnershipPrice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DomainPrice_Name, *v.Name)
+	}
+	if v.RegistrationPrice != nil {
+		s.WriteStruct(schemas.DomainPrice_RegistrationPrice)
+		v.RegistrationPrice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RenewalPrice != nil {
+		s.WriteStruct(schemas.DomainPrice_RenewalPrice)
+		v.RenewalPrice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RestorationPrice != nil {
+		s.WriteStruct(schemas.DomainPrice_RestorationPrice)
+		v.RestorationPrice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransferPrice != nil {
+		s.WriteStruct(schemas.DomainPrice_TransferPrice)
+		v.TransferPrice.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainPrice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainPrice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainPrice_ChangeOwnershipPrice:
+			v.ChangeOwnershipPrice = &PriceWithCurrency{}
+			return v.ChangeOwnershipPrice.Deserialize(d)
+		case schemas.DomainPrice_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DomainPrice_Name, v.Name)
+		case schemas.DomainPrice_RegistrationPrice:
+			v.RegistrationPrice = &PriceWithCurrency{}
+			return v.RegistrationPrice.Deserialize(d)
+		case schemas.DomainPrice_RenewalPrice:
+			v.RenewalPrice = &PriceWithCurrency{}
+			return v.RenewalPrice.Deserialize(d)
+		case schemas.DomainPrice_RestorationPrice:
+			v.RestorationPrice = &PriceWithCurrency{}
+			return v.RestorationPrice.Deserialize(d)
+		case schemas.DomainPrice_TransferPrice:
+			v.TransferPrice = &PriceWithCurrency{}
+			return v.TransferPrice.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about one suggested domain name.
 type DomainSuggestion struct {
 
-	// Whether the domain name is available for registering.
+	// Specifies whether the domain name is available for registering. This element is
+	// populated only if you specified true for OnlyAvailable in the request.
 	//
 	// You can register only the domains that are designated as AVAILABLE .
 	//
@@ -261,7 +599,48 @@ type DomainSuggestion struct {
 	// A suggested domain name.
 	DomainName *string
 
+	// The price to register the suggested domain name, in the currency that Currency
+	// specifies. This element is populated only if you specified true for
+	// OnlyAvailable in the request.
+	Price *PriceWithCurrency
+
 	noSmithyDocumentSerde
+}
+
+func (v *DomainSuggestion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainSuggestion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainSuggestion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Availability != nil {
+		s.WriteString(schemas.DomainSuggestion_Availability, *v.Availability)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainSuggestion_DomainName, *v.DomainName)
+	}
+	if v.Price != nil {
+		s.WriteStruct(schemas.DomainSuggestion_Price)
+		v.Price.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainSuggestion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainSuggestion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainSuggestion_Availability:
+			v.Availability = new(string)
+			return d.ReadString(schemas.DomainSuggestion_Availability, v.Availability)
+		case schemas.DomainSuggestion_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainSuggestion_DomainName, v.DomainName)
+		case schemas.DomainSuggestion_Price:
+			v.Price = &PriceWithCurrency{}
+			return v.Price.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Summary information about one domain.
@@ -284,6 +663,46 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRenew != nil {
+		s.WriteBool(schemas.DomainSummary_AutoRenew, *v.AutoRenew)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainSummary_DomainName, *v.DomainName)
+	}
+	if v.Expiry != nil {
+		s.WriteTime(schemas.DomainSummary_Expiry, *v.Expiry)
+	}
+	if v.TransferLock != nil {
+		s.WriteBool(schemas.DomainSummary_TransferLock, *v.TransferLock)
+	}
+}
+func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainSummary_AutoRenew:
+			v.AutoRenew = new(bool)
+			return d.ReadBool(schemas.DomainSummary_AutoRenew, v.AutoRenew)
+		case schemas.DomainSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainSummary_DomainName, v.DomainName)
+		case schemas.DomainSummary_Expiry:
+			v.Expiry = new(time.Time)
+			return d.ReadTime(schemas.DomainSummary_Expiry, v.Expiry)
+		case schemas.DomainSummary_TransferLock:
+			v.TransferLock = new(bool)
+			return d.ReadBool(schemas.DomainSummary_TransferLock, v.TransferLock)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about whether the specified domain can
 // be transferred to Route 53.
 type DomainTransferability struct {
@@ -298,9 +717,14 @@ type DomainTransferability struct {
 	//
 	// UNTRANSFERRABLE The domain name can't be transferred to Route 53.
 	//
-	// DONT_KNOW The TLD registry didn't respond in time or didn't provide a
-	// definitive answer about domain transferability, which can occur due to registry
-	// maintenance or temporary delays.
+	// DONT_KNOW The TLD registry didn't reply with a definitive answer about whether
+	// the domain name can be transferred. Route 53 can return this response for a
+	// variety of reasons, for example, the registry is performing maintenance. Try
+	// again later.
+	//
+	// PENDING The TLD registry didn't return a response in the expected amount of
+	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// You can resubmit the request immediately.
 	//
 	// DOMAIN_IN_OWN_ACCOUNT The domain already exists in the current Amazon Web
 	// Services account.
@@ -312,6 +736,32 @@ type DomainTransferability struct {
 	Transferable Transferable
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainTransferability) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainTransferability)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainTransferability) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Transferable != "" {
+		s.WriteString(schemas.DomainTransferability_Transferable, string(v.Transferable))
+	}
+}
+func (v *DomainTransferability) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainTransferability, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainTransferability_Transferable:
+			var ev string
+			if err := d.ReadString(schemas.DomainTransferability_Transferable, &ev); err != nil {
+				return err
+			}
+			v.Transferable = Transferable(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // ExtraParam includes the following elements.
@@ -782,6 +1232,38 @@ type ExtraParam struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtraParam) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtraParam)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtraParam) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ExtraParam_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ExtraParam_Value, *v.Value)
+	}
+}
+func (v *ExtraParam) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtraParam, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtraParam_Name:
+			var ev string
+			if err := d.ReadString(schemas.ExtraParam_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ExtraParamName(ev)
+			return nil
+		case schemas.ExtraParam_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ExtraParam_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Information for the filtering of a list of domains returned by [ListDomains].
 //
 // [ListDomains]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html
@@ -812,6 +1294,45 @@ type FilterCondition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FilterCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.FilterCondition_Name, string(v.Name))
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.FilterCondition_Operator, string(v.Operator))
+	}
+	serializeValues(s, schemas.FilterCondition_Values, v.Values)
+}
+func (v *FilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterCondition_Name:
+			var ev string
+			if err := d.ReadString(schemas.FilterCondition_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListDomainsAttributeName(ev)
+			return nil
+		case schemas.FilterCondition_Operator:
+			var ev string
+			if err := d.ReadString(schemas.FilterCondition_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = Operator(ev)
+			return nil
+		case schemas.FilterCondition_Values:
+			return deserializeValues(d, schemas.FilterCondition_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Name server includes the following elements.
 type Nameserver struct {
 
@@ -831,6 +1352,31 @@ type Nameserver struct {
 	GlueIps []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Nameserver) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Nameserver)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Nameserver) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlueIpList(s, schemas.Nameserver_GlueIps, v.GlueIps)
+	if v.Name != nil {
+		s.WriteString(schemas.Nameserver_Name, *v.Name)
+	}
+}
+func (v *Nameserver) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Nameserver, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Nameserver_GlueIps:
+			return deserializeGlueIpList(d, schemas.Nameserver_GlueIps, &v.GlueIps)
+		case schemas.Nameserver_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Nameserver_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // OperationSummary includes the following elements.
@@ -884,6 +1430,82 @@ type OperationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.OperationSummary_DomainName, *v.DomainName)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.OperationSummary_LastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OperationSummary_Message, *v.Message)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.OperationSummary_OperationId, *v.OperationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OperationSummary_Status, string(v.Status))
+	}
+	if v.StatusFlag != "" {
+		s.WriteString(schemas.OperationSummary_StatusFlag, string(v.StatusFlag))
+	}
+	if v.SubmittedDate != nil {
+		s.WriteTime(schemas.OperationSummary_SubmittedDate, *v.SubmittedDate)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OperationSummary_Type, string(v.Type))
+	}
+}
+func (v *OperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.OperationSummary_DomainName, v.DomainName)
+		case schemas.OperationSummary_LastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.OperationSummary_LastUpdatedDate, v.LastUpdatedDate)
+		case schemas.OperationSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationSummary_Message, v.Message)
+		case schemas.OperationSummary_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.OperationSummary_OperationId, v.OperationId)
+		case schemas.OperationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.OperationSummary_StatusFlag:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_StatusFlag, &ev); err != nil {
+				return err
+			}
+			v.StatusFlag = StatusFlag(ev)
+			return nil
+		case schemas.OperationSummary_SubmittedDate:
+			v.SubmittedDate = new(time.Time)
+			return d.ReadTime(schemas.OperationSummary_SubmittedDate, v.SubmittedDate)
+		case schemas.OperationSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Currency-specific price information.
 type PriceWithCurrency struct {
 
@@ -897,7 +1519,48 @@ type PriceWithCurrency struct {
 	// This member is required.
 	Price float64
 
+	// Indicates whether the domain has standard or premium pricing. A value of
+	// STANDARD means the domain is priced at the regular rate for its TLD. A value of
+	// REGISTRY_PREMIUM means the domain has registry premium pricing, which may be
+	// different than the standard rate.
+	PriceType PriceType
+
 	noSmithyDocumentSerde
+}
+
+func (v *PriceWithCurrency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceWithCurrency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PriceWithCurrency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != nil {
+		s.WriteString(schemas.PriceWithCurrency_Currency, *v.Currency)
+	}
+	s.WriteFloat64(schemas.PriceWithCurrency_Price, v.Price)
+	if v.PriceType != "" {
+		s.WriteString(schemas.PriceWithCurrency_PriceType, string(v.PriceType))
+	}
+}
+func (v *PriceWithCurrency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PriceWithCurrency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PriceWithCurrency_Currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.PriceWithCurrency_Currency, v.Currency)
+		case schemas.PriceWithCurrency_Price:
+			return d.ReadFloat64(schemas.PriceWithCurrency_Price, &v.Price)
+		case schemas.PriceWithCurrency_PriceType:
+			var ev string
+			if err := d.ReadString(schemas.PriceWithCurrency_PriceType, &ev); err != nil {
+				return err
+			}
+			v.PriceType = PriceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information for sorting a list of domains.
@@ -922,6 +1585,42 @@ type SortCondition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SortCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SortCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SortCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SortCondition_Name, string(v.Name))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SortCondition_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SortCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SortCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SortCondition_Name:
+			var ev string
+			if err := d.ReadString(schemas.SortCondition_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListDomainsAttributeName(ev)
+			return nil
+		case schemas.SortCondition_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SortCondition_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Each tag includes the following elements.
 type Tag struct {
 
@@ -940,6 +1639,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

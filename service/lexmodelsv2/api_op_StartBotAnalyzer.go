@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,6 +57,27 @@ type StartBotAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisScope != "" {
+		s.WriteString(schemas.StartBotAnalyzerRequest_analysisScope, string(v.AnalysisScope))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotAnalyzerRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotAnalyzerRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotAnalyzerRequest_localeId, *v.LocaleId)
+	}
+}
+
 type StartBotAnalyzerOutput struct {
 
 	// A unique identifier for this analysis request. Use this identifier to check the
@@ -87,77 +107,82 @@ type StartBotAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAnalyzerRequestId != nil {
+		s.WriteString(schemas.StartBotAnalyzerResponse_botAnalyzerRequestId, *v.BotAnalyzerRequestId)
+	}
+	if v.BotAnalyzerStatus != "" {
+		s.WriteString(schemas.StartBotAnalyzerResponse_botAnalyzerStatus, string(v.BotAnalyzerStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotAnalyzerResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotAnalyzerResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StartBotAnalyzerResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotAnalyzerResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *StartBotAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBotAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBotAnalyzerResponse_botAnalyzerRequestId:
+			v.BotAnalyzerRequestId = new(string)
+			return d.ReadString(schemas.StartBotAnalyzerResponse_botAnalyzerRequestId, v.BotAnalyzerRequestId)
+		case schemas.StartBotAnalyzerResponse_botAnalyzerStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartBotAnalyzerResponse_botAnalyzerStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAnalyzerStatus = types.BotAnalyzerStatus(ev)
+			return nil
+		case schemas.StartBotAnalyzerResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StartBotAnalyzerResponse_botId, v.BotId)
+		case schemas.StartBotAnalyzerResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StartBotAnalyzerResponse_botVersion, v.BotVersion)
+		case schemas.StartBotAnalyzerResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StartBotAnalyzerResponse_creationDateTime, v.CreationDateTime)
+		case schemas.StartBotAnalyzerResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StartBotAnalyzerResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBotAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotAnalyzer, schemas.StartBotAnalyzerRequest, schemas.StartBotAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBotAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotAnalyzer, schemas.StartBotAnalyzerRequest, schemas.StartBotAnalyzerResponse), output: &StartBotAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBotAnalyzer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartBotAnalyzer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartBotAnalyzerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBotAnalyzer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +197,8 @@ func (c *Client) addOperationStartBotAnalyzerMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartBotAnalyzer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartBotAnalyzer",
-	}
 }

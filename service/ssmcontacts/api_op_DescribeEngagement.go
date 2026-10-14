@@ -4,12 +4,7 @@ package ssmcontacts
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type DescribeEngagementInput struct {
 	EngagementId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeEngagementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEngagementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngagementId != nil {
-		s.WriteString(schemas.DescribeEngagementRequest_EngagementId, *v.EngagementId)
-	}
 }
 
 type DescribeEngagementOutput struct {
@@ -105,112 +88,29 @@ type DescribeEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEngagementResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEngagementResult_ContactArn:
-			v.ContactArn = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_ContactArn, v.ContactArn)
-		case schemas.DescribeEngagementResult_Content:
-			v.Content = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_Content, v.Content)
-		case schemas.DescribeEngagementResult_EngagementArn:
-			v.EngagementArn = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_EngagementArn, v.EngagementArn)
-		case schemas.DescribeEngagementResult_IncidentId:
-			v.IncidentId = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_IncidentId, v.IncidentId)
-		case schemas.DescribeEngagementResult_PublicContent:
-			v.PublicContent = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_PublicContent, v.PublicContent)
-		case schemas.DescribeEngagementResult_PublicSubject:
-			v.PublicSubject = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_PublicSubject, v.PublicSubject)
-		case schemas.DescribeEngagementResult_Sender:
-			v.Sender = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_Sender, v.Sender)
-		case schemas.DescribeEngagementResult_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeEngagementResult_StartTime, v.StartTime)
-		case schemas.DescribeEngagementResult_StopTime:
-			v.StopTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeEngagementResult_StopTime, v.StopTime)
-		case schemas.DescribeEngagementResult_Subject:
-			v.Subject = new(string)
-			return d.ReadString(schemas.DescribeEngagementResult_Subject, v.Subject)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEngagement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngagement, schemas.DescribeEngagementRequest, schemas.DescribeEngagementResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEngagement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngagement, schemas.DescribeEngagementRequest, schemas.DescribeEngagementResult), output: &DescribeEngagementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEngagement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeEngagementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEngagement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,22 +125,8 @@ func (c *Client) addOperationDescribeEngagementMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEngagement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEngagement",
-	}
 }

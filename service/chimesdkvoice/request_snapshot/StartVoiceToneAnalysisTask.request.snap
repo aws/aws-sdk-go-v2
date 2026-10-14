@@ -1,0 +1,5 @@
+POST /voice-connectors/__VoiceConnectorId__/voice-tone-analysis-tasks
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","LanguageCode":"en-US","TransactionId":"__TransactionId__"}

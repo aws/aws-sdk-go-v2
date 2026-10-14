@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,60 +27,6 @@ type AccountFindingsMetric struct {
 	OpenFindings *FindingMetricsValuePerSeverity
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountFindingsMetric) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountFindingsMetric)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountFindingsMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClosedFindings != nil {
-		s.WriteStruct(schemas.AccountFindingsMetric_closedFindings)
-		v.ClosedFindings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Date != nil {
-		s.WriteTime(schemas.AccountFindingsMetric_date, *v.Date)
-	}
-	if v.MeanTimeToClose != nil {
-		s.WriteStruct(schemas.AccountFindingsMetric_meanTimeToClose)
-		v.MeanTimeToClose.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NewFindings != nil {
-		s.WriteStruct(schemas.AccountFindingsMetric_newFindings)
-		v.NewFindings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OpenFindings != nil {
-		s.WriteStruct(schemas.AccountFindingsMetric_openFindings)
-		v.OpenFindings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AccountFindingsMetric) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountFindingsMetric, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountFindingsMetric_closedFindings:
-			v.ClosedFindings = &FindingMetricsValuePerSeverity{}
-			return v.ClosedFindings.Deserialize(d)
-		case schemas.AccountFindingsMetric_date:
-			v.Date = new(time.Time)
-			return d.ReadTime(schemas.AccountFindingsMetric_date, v.Date)
-		case schemas.AccountFindingsMetric_meanTimeToClose:
-			v.MeanTimeToClose = &FindingMetricsValuePerSeverity{}
-			return v.MeanTimeToClose.Deserialize(d)
-		case schemas.AccountFindingsMetric_newFindings:
-			v.NewFindings = &FindingMetricsValuePerSeverity{}
-			return v.NewFindings.Deserialize(d)
-		case schemas.AccountFindingsMetric_openFindings:
-			v.OpenFindings = &FindingMetricsValuePerSeverity{}
-			return v.OpenFindings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains information about the error that caused a finding to fail to be
@@ -112,50 +56,6 @@ type BatchGetFindingsError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetFindingsError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetFindingsError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetFindingsError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchGetFindingsError_errorCode, string(v.ErrorCode))
-	}
-	if v.FindingId != nil {
-		s.WriteString(schemas.BatchGetFindingsError_findingId, *v.FindingId)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.BatchGetFindingsError_message, *v.Message)
-	}
-	if v.ScanName != nil {
-		s.WriteString(schemas.BatchGetFindingsError_scanName, *v.ScanName)
-	}
-}
-func (v *BatchGetFindingsError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetFindingsError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetFindingsError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchGetFindingsError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = ErrorCode(ev)
-			return nil
-		case schemas.BatchGetFindingsError_findingId:
-			v.FindingId = new(string)
-			return d.ReadString(schemas.BatchGetFindingsError_findingId, v.FindingId)
-		case schemas.BatchGetFindingsError_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BatchGetFindingsError_message, v.Message)
-		case schemas.BatchGetFindingsError_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.BatchGetFindingsError_scanName, v.ScanName)
-		}
-		return nil
-	})
-}
-
 // Information about a finding category with open findings.
 type CategoryWithFindingNum struct {
 
@@ -167,34 +67,6 @@ type CategoryWithFindingNum struct {
 	FindingNumber *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *CategoryWithFindingNum) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CategoryWithFindingNum)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CategoryWithFindingNum) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CategoryName != nil {
-		s.WriteString(schemas.CategoryWithFindingNum_categoryName, *v.CategoryName)
-	}
-	if v.FindingNumber != nil {
-		s.WriteInt32(schemas.CategoryWithFindingNum_findingNumber, *v.FindingNumber)
-	}
-}
-func (v *CategoryWithFindingNum) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CategoryWithFindingNum, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CategoryWithFindingNum_categoryName:
-			v.CategoryName = new(string)
-			return d.ReadString(schemas.CategoryWithFindingNum_categoryName, v.CategoryName)
-		case schemas.CategoryWithFindingNum_findingNumber:
-			v.FindingNumber = new(int32)
-			return d.ReadInt32(schemas.CategoryWithFindingNum_findingNumber, v.FindingNumber)
-		}
-		return nil
-	})
 }
 
 // The line of code where a finding was detected.
@@ -209,34 +81,6 @@ type CodeLine struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CodeLine) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeLine)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeLine) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Content != nil {
-		s.WriteString(schemas.CodeLine_content, *v.Content)
-	}
-	if v.Number != nil {
-		s.WriteInt32(schemas.CodeLine_number, *v.Number)
-	}
-}
-func (v *CodeLine) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeLine, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeLine_content:
-			v.Content = new(string)
-			return d.ReadString(schemas.CodeLine_content, v.Content)
-		case schemas.CodeLine_number:
-			v.Number = new(int32)
-			return d.ReadInt32(schemas.CodeLine_number, v.Number)
-		}
-		return nil
-	})
-}
-
 // Information about the encryption configuration for an account. Required to call
 // UpdateAccountConfiguration .
 type EncryptionConfig struct {
@@ -246,28 +90,6 @@ type EncryptionConfig struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.EncryptionConfig_kmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfig_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.EncryptionConfig_kmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
 }
 
 // Information about the location of security vulnerabilities that Amazon CodeGuru
@@ -293,49 +115,6 @@ type FilePath struct {
 	StartLine *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *FilePath) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FilePath)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FilePath) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSnippet(s, schemas.FilePath_codeSnippet, v.CodeSnippet)
-	if v.EndLine != nil {
-		s.WriteInt32(schemas.FilePath_endLine, *v.EndLine)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FilePath_name, *v.Name)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.FilePath_path, *v.Path)
-	}
-	if v.StartLine != nil {
-		s.WriteInt32(schemas.FilePath_startLine, *v.StartLine)
-	}
-}
-func (v *FilePath) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FilePath, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FilePath_codeSnippet:
-			return deserializeCodeSnippet(d, schemas.FilePath_codeSnippet, &v.CodeSnippet)
-		case schemas.FilePath_endLine:
-			v.EndLine = new(int32)
-			return d.ReadInt32(schemas.FilePath_endLine, v.EndLine)
-		case schemas.FilePath_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FilePath_name, v.Name)
-		case schemas.FilePath_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.FilePath_path, v.Path)
-		case schemas.FilePath_startLine:
-			v.StartLine = new(int32)
-			return d.ReadInt32(schemas.FilePath_startLine, v.StartLine)
-		}
-		return nil
-	})
 }
 
 // Information about a finding that was detected in your code.
@@ -402,129 +181,6 @@ type Finding struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Finding) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Finding)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Finding_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Finding_description, *v.Description)
-	}
-	if v.DetectorId != nil {
-		s.WriteString(schemas.Finding_detectorId, *v.DetectorId)
-	}
-	if v.DetectorName != nil {
-		s.WriteString(schemas.Finding_detectorName, *v.DetectorName)
-	}
-	serializeDetectorTags(s, schemas.Finding_detectorTags, v.DetectorTags)
-	if v.GeneratorId != nil {
-		s.WriteString(schemas.Finding_generatorId, *v.GeneratorId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Finding_id, *v.Id)
-	}
-	if v.Remediation != nil {
-		s.WriteStruct(schemas.Finding_remediation)
-		v.Remediation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.Finding_resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuleId != nil {
-		s.WriteString(schemas.Finding_ruleId, *v.RuleId)
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.Finding_severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Finding_status, string(v.Status))
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.Finding_title, *v.Title)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.Finding_type, *v.Type)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Finding_updatedAt, *v.UpdatedAt)
-	}
-	if v.Vulnerability != nil {
-		s.WriteStruct(schemas.Finding_vulnerability)
-		v.Vulnerability.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Finding, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Finding_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_createdAt, v.CreatedAt)
-		case schemas.Finding_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Finding_description, v.Description)
-		case schemas.Finding_detectorId:
-			v.DetectorId = new(string)
-			return d.ReadString(schemas.Finding_detectorId, v.DetectorId)
-		case schemas.Finding_detectorName:
-			v.DetectorName = new(string)
-			return d.ReadString(schemas.Finding_detectorName, v.DetectorName)
-		case schemas.Finding_detectorTags:
-			return deserializeDetectorTags(d, schemas.Finding_detectorTags, &v.DetectorTags)
-		case schemas.Finding_generatorId:
-			v.GeneratorId = new(string)
-			return d.ReadString(schemas.Finding_generatorId, v.GeneratorId)
-		case schemas.Finding_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Finding_id, v.Id)
-		case schemas.Finding_remediation:
-			v.Remediation = &Remediation{}
-			return v.Remediation.Deserialize(d)
-		case schemas.Finding_resource:
-			v.Resource = &Resource{}
-			return v.Resource.Deserialize(d)
-		case schemas.Finding_ruleId:
-			v.RuleId = new(string)
-			return d.ReadString(schemas.Finding_ruleId, v.RuleId)
-		case schemas.Finding_severity:
-			var ev string
-			if err := d.ReadString(schemas.Finding_severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = Severity(ev)
-			return nil
-		case schemas.Finding_status:
-			var ev string
-			if err := d.ReadString(schemas.Finding_status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		case schemas.Finding_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.Finding_title, v.Title)
-		case schemas.Finding_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Finding_type, v.Type)
-		case schemas.Finding_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_updatedAt, v.UpdatedAt)
-		case schemas.Finding_vulnerability:
-			v.Vulnerability = &Vulnerability{}
-			return v.Vulnerability.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // An object that contains information about a finding and the scan that generated
 // it.
 type FindingIdentifier struct {
@@ -540,34 +196,6 @@ type FindingIdentifier struct {
 	ScanName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FindingIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FindingId != nil {
-		s.WriteString(schemas.FindingIdentifier_findingId, *v.FindingId)
-	}
-	if v.ScanName != nil {
-		s.WriteString(schemas.FindingIdentifier_scanName, *v.ScanName)
-	}
-}
-func (v *FindingIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingIdentifier_findingId:
-			v.FindingId = new(string)
-			return d.ReadString(schemas.FindingIdentifier_findingId, v.FindingId)
-		case schemas.FindingIdentifier_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.FindingIdentifier_scanName, v.ScanName)
-		}
-		return nil
-	})
 }
 
 // A numeric value corresponding to the severity of a finding, such as the number
@@ -591,52 +219,6 @@ type FindingMetricsValuePerSeverity struct {
 	Medium *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *FindingMetricsValuePerSeverity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingMetricsValuePerSeverity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingMetricsValuePerSeverity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Critical != nil {
-		s.WriteFloat64(schemas.FindingMetricsValuePerSeverity_critical, *v.Critical)
-	}
-	if v.High != nil {
-		s.WriteFloat64(schemas.FindingMetricsValuePerSeverity_high, *v.High)
-	}
-	if v.Info != nil {
-		s.WriteFloat64(schemas.FindingMetricsValuePerSeverity_info, *v.Info)
-	}
-	if v.Low != nil {
-		s.WriteFloat64(schemas.FindingMetricsValuePerSeverity_low, *v.Low)
-	}
-	if v.Medium != nil {
-		s.WriteFloat64(schemas.FindingMetricsValuePerSeverity_medium, *v.Medium)
-	}
-}
-func (v *FindingMetricsValuePerSeverity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingMetricsValuePerSeverity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingMetricsValuePerSeverity_critical:
-			v.Critical = new(float64)
-			return d.ReadFloat64(schemas.FindingMetricsValuePerSeverity_critical, v.Critical)
-		case schemas.FindingMetricsValuePerSeverity_high:
-			v.High = new(float64)
-			return d.ReadFloat64(schemas.FindingMetricsValuePerSeverity_high, v.High)
-		case schemas.FindingMetricsValuePerSeverity_info:
-			v.Info = new(float64)
-			return d.ReadFloat64(schemas.FindingMetricsValuePerSeverity_info, v.Info)
-		case schemas.FindingMetricsValuePerSeverity_low:
-			v.Low = new(float64)
-			return d.ReadFloat64(schemas.FindingMetricsValuePerSeverity_low, v.Low)
-		case schemas.FindingMetricsValuePerSeverity_medium:
-			v.Medium = new(float64)
-			return d.ReadFloat64(schemas.FindingMetricsValuePerSeverity_medium, v.Medium)
-		}
-		return nil
-	})
 }
 
 // A summary of metrics for an account as of a specified date.
@@ -663,45 +245,6 @@ type MetricsSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MetricsSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricsSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricsSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoriesWithMostFindings(s, schemas.MetricsSummary_categoriesWithMostFindings, v.CategoriesWithMostFindings)
-	if v.Date != nil {
-		s.WriteTime(schemas.MetricsSummary_date, *v.Date)
-	}
-	if v.OpenFindings != nil {
-		s.WriteStruct(schemas.MetricsSummary_openFindings)
-		v.OpenFindings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeScansWithMostOpenCriticalFindings(s, schemas.MetricsSummary_scansWithMostOpenCriticalFindings, v.ScansWithMostOpenCriticalFindings)
-	serializeScansWithMostOpenFindings(s, schemas.MetricsSummary_scansWithMostOpenFindings, v.ScansWithMostOpenFindings)
-}
-func (v *MetricsSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricsSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricsSummary_categoriesWithMostFindings:
-			return deserializeCategoriesWithMostFindings(d, schemas.MetricsSummary_categoriesWithMostFindings, &v.CategoriesWithMostFindings)
-		case schemas.MetricsSummary_date:
-			v.Date = new(time.Time)
-			return d.ReadTime(schemas.MetricsSummary_date, v.Date)
-		case schemas.MetricsSummary_openFindings:
-			v.OpenFindings = &FindingMetricsValuePerSeverity{}
-			return v.OpenFindings.Deserialize(d)
-		case schemas.MetricsSummary_scansWithMostOpenCriticalFindings:
-			return deserializeScansWithMostOpenCriticalFindings(d, schemas.MetricsSummary_scansWithMostOpenCriticalFindings, &v.ScansWithMostOpenCriticalFindings)
-		case schemas.MetricsSummary_scansWithMostOpenFindings:
-			return deserializeScansWithMostOpenFindings(d, schemas.MetricsSummary_scansWithMostOpenFindings, &v.ScansWithMostOpenFindings)
-		}
-		return nil
-	})
-}
-
 // Information about the recommended course of action to remediate a finding.
 type Recommendation struct {
 
@@ -712,34 +255,6 @@ type Recommendation struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Recommendation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Text != nil {
-		s.WriteString(schemas.Recommendation_text, *v.Text)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.Recommendation_url, *v.Url)
-	}
-}
-func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Recommendation_text:
-			v.Text = new(string)
-			return d.ReadString(schemas.Recommendation_text, v.Text)
-		case schemas.Recommendation_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.Recommendation_url, v.Url)
-		}
-		return nil
-	})
 }
 
 // Information about how to remediate a finding.
@@ -756,33 +271,6 @@ type Remediation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Remediation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Remediation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Remediation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Recommendation != nil {
-		s.WriteStruct(schemas.Remediation_recommendation)
-		v.Recommendation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSuggestedFixes(s, schemas.Remediation_suggestedFixes, v.SuggestedFixes)
-}
-func (v *Remediation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Remediation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Remediation_recommendation:
-			v.Recommendation = &Recommendation{}
-			return v.Recommendation.Deserialize(d)
-		case schemas.Remediation_suggestedFixes:
-			return deserializeSuggestedFixes(d, schemas.Remediation_suggestedFixes, &v.SuggestedFixes)
-		}
-		return nil
-	})
-}
-
 // Information about a resource that contains a finding.
 type Resource struct {
 
@@ -793,34 +281,6 @@ type Resource struct {
 	SubResourceId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Resource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Resource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.Resource_id, *v.Id)
-	}
-	if v.SubResourceId != nil {
-		s.WriteString(schemas.Resource_subResourceId, *v.SubResourceId)
-	}
-}
-func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Resource_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Resource_id, v.Id)
-		case schemas.Resource_subResourceId:
-			v.SubResourceId = new(string)
-			return d.ReadString(schemas.Resource_subResourceId, v.SubResourceId)
-		}
-		return nil
-	})
 }
 
 // The identifier for a resource object that contains resources to scan.
@@ -842,12 +302,6 @@ type ResourceIdMemberCodeArtifactId struct {
 }
 
 func (*ResourceIdMemberCodeArtifactId) isResourceId() {}
-func (v *ResourceIdMemberCodeArtifactId) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.ResourceId_codeArtifactId, v.Value)
-}
-func (v *ResourceIdMemberCodeArtifactId) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.ResourceId_codeArtifactId, &v.Value)
-}
 
 // Information about the number of findings generated by a scan.
 type ScanNameWithFindingNum struct {
@@ -859,34 +313,6 @@ type ScanNameWithFindingNum struct {
 	ScanName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScanNameWithFindingNum) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScanNameWithFindingNum)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScanNameWithFindingNum) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FindingNumber != nil {
-		s.WriteInt32(schemas.ScanNameWithFindingNum_findingNumber, *v.FindingNumber)
-	}
-	if v.ScanName != nil {
-		s.WriteString(schemas.ScanNameWithFindingNum_scanName, *v.ScanName)
-	}
-}
-func (v *ScanNameWithFindingNum) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScanNameWithFindingNum, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScanNameWithFindingNum_findingNumber:
-			v.FindingNumber = new(int32)
-			return d.ReadInt32(schemas.ScanNameWithFindingNum_findingNumber, v.FindingNumber)
-		case schemas.ScanNameWithFindingNum_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.ScanNameWithFindingNum_scanName, v.ScanName)
-		}
-		return nil
-	})
 }
 
 // Information about a scan.
@@ -921,62 +347,6 @@ type ScanSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScanSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScanSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScanSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ScanSummary_createdAt, *v.CreatedAt)
-	}
-	if v.RunId != nil {
-		s.WriteString(schemas.ScanSummary_runId, *v.RunId)
-	}
-	if v.ScanName != nil {
-		s.WriteString(schemas.ScanSummary_scanName, *v.ScanName)
-	}
-	if v.ScanNameArn != nil {
-		s.WriteString(schemas.ScanSummary_scanNameArn, *v.ScanNameArn)
-	}
-	if v.ScanState != "" {
-		s.WriteString(schemas.ScanSummary_scanState, string(v.ScanState))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ScanSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ScanSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScanSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScanSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ScanSummary_createdAt, v.CreatedAt)
-		case schemas.ScanSummary_runId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.ScanSummary_runId, v.RunId)
-		case schemas.ScanSummary_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.ScanSummary_scanName, v.ScanName)
-		case schemas.ScanSummary_scanNameArn:
-			v.ScanNameArn = new(string)
-			return d.ReadString(schemas.ScanSummary_scanNameArn, v.ScanNameArn)
-		case schemas.ScanSummary_scanState:
-			var ev string
-			if err := d.ReadString(schemas.ScanSummary_scanState, &ev); err != nil {
-				return err
-			}
-			v.ScanState = ScanState(ev)
-			return nil
-		case schemas.ScanSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ScanSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Information about the suggested code fix to remediate a finding.
 type SuggestedFix struct {
 
@@ -988,34 +358,6 @@ type SuggestedFix struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SuggestedFix) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuggestedFix)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuggestedFix) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.SuggestedFix_code, *v.Code)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.SuggestedFix_description, *v.Description)
-	}
-}
-func (v *SuggestedFix) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuggestedFix, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuggestedFix_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.SuggestedFix_code, v.Code)
-		case schemas.SuggestedFix_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.SuggestedFix_description, v.Description)
-		}
-		return nil
-	})
 }
 
 // Information about a validation exception.
@@ -1032,34 +374,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Information about a security vulnerability that Amazon CodeGuru Security
@@ -1086,48 +400,6 @@ type Vulnerability struct {
 	RelatedVulnerabilities []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Vulnerability) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Vulnerability)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Vulnerability) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilePath != nil {
-		s.WriteStruct(schemas.Vulnerability_filePath)
-		v.FilePath.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Vulnerability_id, *v.Id)
-	}
-	if v.ItemCount != nil {
-		s.WriteInt32(schemas.Vulnerability_itemCount, *v.ItemCount)
-	}
-	serializeReferenceUrls(s, schemas.Vulnerability_referenceUrls, v.ReferenceUrls)
-	serializeRelatedVulnerabilities(s, schemas.Vulnerability_relatedVulnerabilities, v.RelatedVulnerabilities)
-}
-func (v *Vulnerability) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Vulnerability, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Vulnerability_filePath:
-			v.FilePath = &FilePath{}
-			return v.FilePath.Deserialize(d)
-		case schemas.Vulnerability_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Vulnerability_id, v.Id)
-		case schemas.Vulnerability_itemCount:
-			v.ItemCount = new(int32)
-			return d.ReadInt32(schemas.Vulnerability_itemCount, v.ItemCount)
-		case schemas.Vulnerability_referenceUrls:
-			return deserializeReferenceUrls(d, schemas.Vulnerability_referenceUrls, &v.ReferenceUrls)
-		case schemas.Vulnerability_relatedVulnerabilities:
-			return deserializeRelatedVulnerabilities(d, schemas.Vulnerability_relatedVulnerabilities, &v.RelatedVulnerabilities)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+POST /appbundles/__AppBundleIdentifier__/ingestions
+
+Content-Type: application/json
+
+{"app":"__App__","clientToken":"__ClientToken__","ingestionType":"auditLog","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"tenantId":"__TenantId__"}

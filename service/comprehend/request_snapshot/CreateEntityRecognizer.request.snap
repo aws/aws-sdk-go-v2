@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.CreateEntityRecognizer
+
+{"ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","InputDataConfig":{"Annotations":{"S3Uri":"__S3Uri__","TestS3Uri":"__TestS3Uri__"},"AugmentedManifests":[{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__","Split":"TRAIN"},{"AnnotationDataS3Uri":"__AnnotationDataS3Uri__","AttributeNames":["__Member__","__Member__"],"DocumentType":"PLAIN_TEXT_DOCUMENT","S3Uri":"__S3Uri__","SourceDocumentsS3Uri":"__SourceDocumentsS3Uri__","Split":"TRAIN"}],"DataFormat":"COMPREHEND_CSV","Documents":{"InputFormat":"ONE_DOC_PER_FILE","S3Uri":"__S3Uri__","TestS3Uri":"__TestS3Uri__"},"EntityList":{"S3Uri":"__S3Uri__"},"EntityTypes":[{"Type":"__Type__"},{"Type":"__Type__"}]},"LanguageCode":"en","ModelKmsKeyId":"__ModelKmsKeyId__","ModelPolicy":"__ModelPolicy__","RecognizerName":"__RecognizerName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VersionName":"__VersionName__","VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}}

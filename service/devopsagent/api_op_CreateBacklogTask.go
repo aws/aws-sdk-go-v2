@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,38 +61,6 @@ type CreateBacklogTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBacklogTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBacklogTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBacklogTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.CreateBacklogTaskRequest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateBacklogTaskRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateBacklogTaskRequest_description, *v.Description)
-	}
-	if v.Priority != "" {
-		s.WriteString(schemas.CreateBacklogTaskRequest_priority, string(v.Priority))
-	}
-	if v.Reference != nil {
-		s.WriteStruct(schemas.CreateBacklogTaskRequest_reference)
-		v.Reference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaskType != "" {
-		s.WriteString(schemas.CreateBacklogTaskRequest_taskType, string(v.TaskType))
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.CreateBacklogTaskRequest_title, *v.Title)
-	}
-}
-
 // Response structure containing the created backlog task
 type CreateBacklogTaskOutput struct {
 
@@ -110,73 +75,23 @@ type CreateBacklogTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBacklogTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBacklogTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBacklogTaskResponse_task:
-			v.Task = &types.Task{}
-			return v.Task.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBacklogTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBacklogTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBacklogTask, schemas.CreateBacklogTaskRequest, schemas.CreateBacklogTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBacklogTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBacklogTask, schemas.CreateBacklogTaskRequest, schemas.CreateBacklogTaskResponse), output: &CreateBacklogTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBacklogTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +106,6 @@ func (c *Client) addOperationCreateBacklogTaskMiddlewares(stack *middleware.Stac
 	if err = addOpCreateBacklogTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBacklogTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -207,12 +116,6 @@ func (c *Client) addOperationCreateBacklogTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,12 +182,4 @@ func (m *idempotencyToken_initializeOpCreateBacklogTask) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateBacklogTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateBacklogTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateBacklogTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBacklogTask",
-	}
 }

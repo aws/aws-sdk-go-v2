@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all response plans in your account.
@@ -41,34 +37,6 @@ type ListResponsePlansInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResponsePlansInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResponsePlansInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResponsePlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListResponsePlansInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResponsePlansInput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListResponsePlansInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResponsePlansInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResponsePlansInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListResponsePlansInput_maxResults, v.MaxResults)
-		case schemas.ListResponsePlansInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResponsePlansInput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListResponsePlansOutput struct {
 
 	// Details of each response plan.
@@ -86,96 +54,26 @@ type ListResponsePlansOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResponsePlansOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResponsePlansOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResponsePlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResponsePlansOutput_nextToken, *v.NextToken)
-	}
-	serializeResponsePlanSummaryList(s, schemas.ListResponsePlansOutput_responsePlanSummaries, v.ResponsePlanSummaries)
-}
-func (v *ListResponsePlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResponsePlansOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResponsePlansOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResponsePlansOutput_nextToken, v.NextToken)
-		case schemas.ListResponsePlansOutput_responsePlanSummaries:
-			return deserializeResponsePlanSummaryList(d, schemas.ListResponsePlansOutput_responsePlanSummaries, &v.ResponsePlanSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResponsePlans{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponsePlans, schemas.ListResponsePlansInput, schemas.ListResponsePlansOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResponsePlans{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponsePlans, schemas.ListResponsePlansInput, schemas.ListResponsePlansOutput), output: &ListResponsePlansOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResponsePlans"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResponsePlans(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +86,6 @@ func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -294,11 +186,3 @@ type ListResponsePlansAPIClient interface {
 }
 
 var _ ListResponsePlansAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResponsePlans(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResponsePlans",
-	}
-}

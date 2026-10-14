@@ -4,13 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the OAuth 2.0 token of the provided resource.
@@ -88,40 +83,6 @@ type GetResourceOauth2TokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceOauth2TokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourceOauth2TokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourceOauth2TokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiencesListType(s, schemas.GetResourceOauth2TokenRequest_audiences, v.Audiences)
-	serializeCustomRequestParametersType(s, schemas.GetResourceOauth2TokenRequest_customParameters, v.CustomParameters)
-	if v.CustomState != nil {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_customState, *v.CustomState)
-	}
-	if v.ForceAuthentication != nil {
-		s.WriteBool(schemas.GetResourceOauth2TokenRequest_forceAuthentication, *v.ForceAuthentication)
-	}
-	if v.Oauth2Flow != "" {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_oauth2Flow, string(v.Oauth2Flow))
-	}
-	if v.ResourceCredentialProviderName != nil {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_resourceCredentialProviderName, *v.ResourceCredentialProviderName)
-	}
-	if v.ResourceOauth2ReturnUrl != nil {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_resourceOauth2ReturnUrl, *v.ResourceOauth2ReturnUrl)
-	}
-	serializeResourcesListType(s, schemas.GetResourceOauth2TokenRequest_resources, v.Resources)
-	serializeScopesListType(s, schemas.GetResourceOauth2TokenRequest_scopes, v.Scopes)
-	if v.SessionUri != nil {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_sessionUri, *v.SessionUri)
-	}
-	if v.WorkloadIdentityToken != nil {
-		s.WriteString(schemas.GetResourceOauth2TokenRequest_workloadIdentityToken, *v.WorkloadIdentityToken)
-	}
-}
-
 type GetResourceOauth2TokenOutput struct {
 
 	// The OAuth 2.0 access token to use.
@@ -147,98 +108,29 @@ type GetResourceOauth2TokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceOauth2TokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourceOauth2TokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourceOauth2TokenResponse_accessToken:
-			v.AccessToken = new(string)
-			return d.ReadString(schemas.GetResourceOauth2TokenResponse_accessToken, v.AccessToken)
-		case schemas.GetResourceOauth2TokenResponse_authorizationUrl:
-			v.AuthorizationUrl = new(string)
-			return d.ReadString(schemas.GetResourceOauth2TokenResponse_authorizationUrl, v.AuthorizationUrl)
-		case schemas.GetResourceOauth2TokenResponse_sessionStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetResourceOauth2TokenResponse_sessionStatus, &ev); err != nil {
-				return err
-			}
-			v.SessionStatus = types.SessionStatus(ev)
-			return nil
-		case schemas.GetResourceOauth2TokenResponse_sessionUri:
-			v.SessionUri = new(string)
-			return d.ReadString(schemas.GetResourceOauth2TokenResponse_sessionUri, v.SessionUri)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourceOauth2TokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceOauth2Token{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceOauth2Token, schemas.GetResourceOauth2TokenRequest, schemas.GetResourceOauth2TokenResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceOauth2Token{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceOauth2Token, schemas.GetResourceOauth2TokenRequest, schemas.GetResourceOauth2TokenResponse), output: &GetResourceOauth2TokenOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceOauth2Token"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceOauth2TokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceOauth2Token(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -253,22 +145,8 @@ func (c *Client) addOperationGetResourceOauth2TokenMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourceOauth2Token(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceOauth2Token",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateLabel
+
+{"ClientToken":"__ClientToken__","EndTime":946684800,"Equipment":"__Equipment__","FaultCode":"__FaultCode__","LabelGroupName":"__LabelGroupName__","Notes":"__Notes__","Rating":"ANOMALY","StartTime":946684800}

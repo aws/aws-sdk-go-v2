@@ -1,0 +1,3 @@
+GET /2015-03-31/functions/__FunctionName__/aliases?FunctionVersion=__FunctionVersion__&Marker=__Marker__&MaxItems=1
+
+

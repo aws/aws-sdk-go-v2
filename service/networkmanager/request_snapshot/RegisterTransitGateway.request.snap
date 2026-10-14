@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/transit-gateway-registrations
+
+Content-Type: application/json
+
+{"TransitGatewayArn":"__TransitGatewayArn__"}

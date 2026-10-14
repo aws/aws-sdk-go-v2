@@ -1,0 +1,5 @@
+PUT /2021-01-01/opensearch/defaultApplicationSetting
+
+Content-Type: application/json
+
+{"applicationArn":"__ApplicationArn__","setAsDefault":true}

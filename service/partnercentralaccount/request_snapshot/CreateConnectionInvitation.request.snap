@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.CreateConnectionInvitation
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","ConnectionType":"OPPORTUNITY_COLLABORATION","Email":"__Email__","Message":"__Message__","Name":"__Name__","ReceiverIdentifier":"__ReceiverIdentifier__"}

@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/usage/statistics
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","unit":"__Unit__","usageCriteria":{"accountIds":["__Member__","__Member__"],"dataSources":["FLOW_LOGS","FLOW_LOGS"],"features":["FLOW_LOGS","FLOW_LOGS"],"resources":["__Member__","__Member__"]},"usageStatisticsType":"SUM_BY_ACCOUNT"}

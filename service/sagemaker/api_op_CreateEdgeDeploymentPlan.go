@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an edge deployment plan, consisting of multiple stages. Each stage may
@@ -55,6 +54,24 @@ type CreateEdgeDeploymentPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgeDeploymentPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	serializeEdgeDeploymentModelConfigs(s, schemas.CreateEdgeDeploymentPlanRequest_ModelConfigs, v.ModelConfigs)
+	serializeDeploymentStages(s, schemas.CreateEdgeDeploymentPlanRequest_Stages, v.Stages)
+	serializeTagList(s, schemas.CreateEdgeDeploymentPlanRequest_Tags, v.Tags)
+}
+
 type CreateEdgeDeploymentPlanOutput struct {
 
 	// The ARN of the edge deployment plan.
@@ -68,77 +85,48 @@ type CreateEdgeDeploymentPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgeDeploymentPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanArn != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, *v.EdgeDeploymentPlanArn)
+	}
+}
+func (v *CreateEdgeDeploymentPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEdgeDeploymentPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn:
+			v.EdgeDeploymentPlanArn = new(string)
+			return d.ReadString(schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, v.EdgeDeploymentPlanArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEdgeDeploymentPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentPlan, schemas.CreateEdgeDeploymentPlanRequest, schemas.CreateEdgeDeploymentPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentPlan, schemas.CreateEdgeDeploymentPlanRequest, schemas.CreateEdgeDeploymentPlanResponse), output: &CreateEdgeDeploymentPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEdgeDeploymentPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEdgeDeploymentPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEdgeDeploymentPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +141,8 @@ func (c *Client) addOperationCreateEdgeDeploymentPlanMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEdgeDeploymentPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEdgeDeploymentPlan",
-	}
 }

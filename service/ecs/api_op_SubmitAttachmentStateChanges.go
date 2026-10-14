@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action is only used by the Amazon ECS agent, and it is not intended for
@@ -44,6 +43,19 @@ type SubmitAttachmentStateChangesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitAttachmentStateChangesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitAttachmentStateChangesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitAttachmentStateChangesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentStateChanges(s, schemas.SubmitAttachmentStateChangesRequest_attachments, v.Attachments)
+	if v.Cluster != nil {
+		s.WriteString(schemas.SubmitAttachmentStateChangesRequest_cluster, *v.Cluster)
+	}
+}
+
 type SubmitAttachmentStateChangesOutput struct {
 
 	// Acknowledgement of the state change.
@@ -55,77 +67,48 @@ type SubmitAttachmentStateChangesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitAttachmentStateChangesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitAttachmentStateChangesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitAttachmentStateChangesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Acknowledgment != nil {
+		s.WriteString(schemas.SubmitAttachmentStateChangesResponse_acknowledgment, *v.Acknowledgment)
+	}
+}
+func (v *SubmitAttachmentStateChangesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitAttachmentStateChangesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitAttachmentStateChangesResponse_acknowledgment:
+			v.Acknowledgment = new(string)
+			return d.ReadString(schemas.SubmitAttachmentStateChangesResponse_acknowledgment, v.Acknowledgment)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitAttachmentStateChangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitAttachmentStateChanges, schemas.SubmitAttachmentStateChangesRequest, schemas.SubmitAttachmentStateChangesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitAttachmentStateChanges{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitAttachmentStateChanges, schemas.SubmitAttachmentStateChangesRequest, schemas.SubmitAttachmentStateChangesResponse), output: &SubmitAttachmentStateChangesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubmitAttachmentStateChanges{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitAttachmentStateChanges"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSubmitAttachmentStateChangesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitAttachmentStateChanges(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +123,8 @@ func (c *Client) addOperationSubmitAttachmentStateChangesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSubmitAttachmentStateChanges(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitAttachmentStateChanges",
-	}
 }

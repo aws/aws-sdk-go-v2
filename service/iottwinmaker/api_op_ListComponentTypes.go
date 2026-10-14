@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +49,43 @@ type ListComponentTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListComponentTypesFilters(s, schemas.ListComponentTypesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComponentTypesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentTypesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListComponentTypesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListComponentTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentTypesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentTypesRequest_filters:
+			return deserializeListComponentTypesFilters(d, schemas.ListComponentTypesRequest_filters, &v.Filters)
+		case schemas.ListComponentTypesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListComponentTypesRequest_maxResults, v.MaxResults)
+		case schemas.ListComponentTypesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentTypesRequest_nextToken, v.NextToken)
+		case schemas.ListComponentTypesRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListComponentTypesRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListComponentTypesOutput struct {
 
 	// A list of objects that contain information about the component types.
@@ -72,65 +110,57 @@ type ListComponentTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentTypeSummaries(s, schemas.ListComponentTypesResponse_componentTypeSummaries, v.ComponentTypeSummaries)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComponentTypesResponse_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentTypesResponse_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListComponentTypesResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListComponentTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentTypesResponse_componentTypeSummaries:
+			return deserializeComponentTypeSummaries(d, schemas.ListComponentTypesResponse_componentTypeSummaries, &v.ComponentTypeSummaries)
+		case schemas.ListComponentTypesResponse_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListComponentTypesResponse_maxResults, v.MaxResults)
+		case schemas.ListComponentTypesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentTypesResponse_nextToken, v.NextToken)
+		case schemas.ListComponentTypesResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListComponentTypesResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentTypes, schemas.ListComponentTypesRequest, schemas.ListComponentTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponentTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentTypes, schemas.ListComponentTypesRequest, schemas.ListComponentTypesResponse), output: &ListComponentTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponentTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponentTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +170,6 @@ func (c *Client) addOperationListComponentTypesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpListComponentTypesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponentTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +182,6 @@ func (c *Client) addOperationListComponentTypesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -294,11 +312,3 @@ type ListComponentTypesAPIClient interface {
 }
 
 var _ ListComponentTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListComponentTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListComponentTypes",
-	}
-}

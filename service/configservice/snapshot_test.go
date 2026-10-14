@@ -158,6 +158,18 @@ func TestCheckSnapshot_DeleteConformancePack(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDeliveryChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDeliveryChannel(context.Background(), nil, func(o *Options) {
@@ -746,6 +758,18 @@ func TestCheckSnapshot_GetConformancePackComplianceSummary(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCustomRulePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCustomRulePolicy(context.Background(), nil, func(o *Options) {
@@ -878,6 +902,18 @@ func TestCheckSnapshot_ListConformancePackComplianceScores(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDiscoveredResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDiscoveredResources(context.Background(), nil, func(o *Options) {
@@ -979,6 +1015,18 @@ func TestCheckSnapshot_PutConformancePack(t *testing.T) {
 	_, err := svc.PutConformancePack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutConformancePack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1111,6 +1159,18 @@ func TestCheckSnapshot_PutStoredQuery(t *testing.T) {
 	_, err := svc.PutStoredQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutStoredQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutThirdPartyServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutThirdPartyServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutThirdPartyServiceLinkedConfigurationRecorder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1314,6 +1374,18 @@ func TestUpdateSnapshot_DeleteConformancePack(t *testing.T) {
 	_, err := svc.DeleteConformancePack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConformancePack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1909,6 +1981,18 @@ func TestUpdateSnapshot_GetConformancePackComplianceSummary(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCustomRulePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCustomRulePolicy(context.Background(), nil, func(o *Options) {
@@ -2041,6 +2125,18 @@ func TestUpdateSnapshot_ListConformancePackComplianceScores(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDiscoveredResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDiscoveredResources(context.Background(), nil, func(o *Options) {
@@ -2142,6 +2238,18 @@ func TestUpdateSnapshot_PutConformancePack(t *testing.T) {
 	_, err := svc.PutConformancePack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutConformancePack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2274,6 +2382,18 @@ func TestUpdateSnapshot_PutStoredQuery(t *testing.T) {
 	_, err := svc.PutStoredQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutStoredQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutThirdPartyServiceLinkedConfigurationRecorder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutThirdPartyServiceLinkedConfigurationRecorder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutThirdPartyServiceLinkedConfigurationRecorder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

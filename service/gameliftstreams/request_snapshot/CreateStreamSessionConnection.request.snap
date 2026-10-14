@@ -1,0 +1,5 @@
+POST /streamgroups/__Identifier__/streamsessions/__StreamSessionIdentifier__/connections
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","SignalRequest":"__SignalRequest__"}

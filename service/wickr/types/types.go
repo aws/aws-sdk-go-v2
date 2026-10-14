@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -34,58 +32,6 @@ type BasicDeviceObject struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BasicDeviceObject) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BasicDeviceObject)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BasicDeviceObject) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.BasicDeviceObject_appId, *v.AppId)
-	}
-	if v.Created != nil {
-		s.WriteString(schemas.BasicDeviceObject_created, *v.Created)
-	}
-	if v.LastLogin != nil {
-		s.WriteString(schemas.BasicDeviceObject_lastLogin, *v.LastLogin)
-	}
-	if v.StatusText != nil {
-		s.WriteString(schemas.BasicDeviceObject_statusText, *v.StatusText)
-	}
-	if v.Suspend != nil {
-		s.WriteBool(schemas.BasicDeviceObject_suspend, *v.Suspend)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.BasicDeviceObject_type, *v.Type)
-	}
-}
-func (v *BasicDeviceObject) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BasicDeviceObject, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BasicDeviceObject_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.BasicDeviceObject_appId, v.AppId)
-		case schemas.BasicDeviceObject_created:
-			v.Created = new(string)
-			return d.ReadString(schemas.BasicDeviceObject_created, v.Created)
-		case schemas.BasicDeviceObject_lastLogin:
-			v.LastLogin = new(string)
-			return d.ReadString(schemas.BasicDeviceObject_lastLogin, v.LastLogin)
-		case schemas.BasicDeviceObject_statusText:
-			v.StatusText = new(string)
-			return d.ReadString(schemas.BasicDeviceObject_statusText, v.StatusText)
-		case schemas.BasicDeviceObject_suspend:
-			v.Suspend = new(bool)
-			return d.ReadBool(schemas.BasicDeviceObject_suspend, v.Suspend)
-		case schemas.BasicDeviceObject_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.BasicDeviceObject_type, v.Type)
-		}
-		return nil
-	})
 }
 
 // Contains the details for a single user to be created in a batch user creation
@@ -128,61 +74,6 @@ type BatchCreateUserRequestItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateUserRequestItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateUserRequestItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateUserRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeValidation != nil {
-		s.WriteBool(schemas.BatchCreateUserRequestItem_codeValidation, *v.CodeValidation)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.BatchCreateUserRequestItem_firstName, *v.FirstName)
-	}
-	if v.InviteCode != nil {
-		s.WriteString(schemas.BatchCreateUserRequestItem_inviteCode, *v.InviteCode)
-	}
-	if v.InviteCodeTtl != nil {
-		s.WriteInt32(schemas.BatchCreateUserRequestItem_inviteCodeTtl, *v.InviteCodeTtl)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.BatchCreateUserRequestItem_lastName, *v.LastName)
-	}
-	serializeSecurityGroupIdList(s, schemas.BatchCreateUserRequestItem_securityGroupIds, v.SecurityGroupIds)
-	if v.Username != nil {
-		s.WriteString(schemas.BatchCreateUserRequestItem_username, *v.Username)
-	}
-}
-func (v *BatchCreateUserRequestItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateUserRequestItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateUserRequestItem_codeValidation:
-			v.CodeValidation = new(bool)
-			return d.ReadBool(schemas.BatchCreateUserRequestItem_codeValidation, v.CodeValidation)
-		case schemas.BatchCreateUserRequestItem_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.BatchCreateUserRequestItem_firstName, v.FirstName)
-		case schemas.BatchCreateUserRequestItem_inviteCode:
-			v.InviteCode = new(string)
-			return d.ReadString(schemas.BatchCreateUserRequestItem_inviteCode, v.InviteCode)
-		case schemas.BatchCreateUserRequestItem_inviteCodeTtl:
-			v.InviteCodeTtl = new(int32)
-			return d.ReadInt32(schemas.BatchCreateUserRequestItem_inviteCodeTtl, v.InviteCodeTtl)
-		case schemas.BatchCreateUserRequestItem_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.BatchCreateUserRequestItem_lastName, v.LastName)
-		case schemas.BatchCreateUserRequestItem_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.BatchCreateUserRequestItem_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.BatchCreateUserRequestItem_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.BatchCreateUserRequestItem_username, v.Username)
-		}
-		return nil
-	})
-}
-
 // Contains error information for a device operation that failed in a batch device
 // request.
 type BatchDeviceErrorResponseItem struct {
@@ -201,40 +92,6 @@ type BatchDeviceErrorResponseItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeviceErrorResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeviceErrorResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeviceErrorResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.BatchDeviceErrorResponseItem_appId, *v.AppId)
-	}
-	if v.Field != nil {
-		s.WriteString(schemas.BatchDeviceErrorResponseItem_field, *v.Field)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.BatchDeviceErrorResponseItem_reason, *v.Reason)
-	}
-}
-func (v *BatchDeviceErrorResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeviceErrorResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeviceErrorResponseItem_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.BatchDeviceErrorResponseItem_appId, v.AppId)
-		case schemas.BatchDeviceErrorResponseItem_field:
-			v.Field = new(string)
-			return d.ReadString(schemas.BatchDeviceErrorResponseItem_field, v.Field)
-		case schemas.BatchDeviceErrorResponseItem_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.BatchDeviceErrorResponseItem_reason, v.Reason)
-		}
-		return nil
-	})
-}
-
 // Contains information about a device that was successfully processed in a batch
 // device operation.
 type BatchDeviceSuccessResponseItem struct {
@@ -245,28 +102,6 @@ type BatchDeviceSuccessResponseItem struct {
 	AppId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchDeviceSuccessResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeviceSuccessResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeviceSuccessResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.BatchDeviceSuccessResponseItem_appId, *v.AppId)
-	}
-}
-func (v *BatchDeviceSuccessResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeviceSuccessResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeviceSuccessResponseItem_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.BatchDeviceSuccessResponseItem_appId, v.AppId)
-		}
-		return nil
-	})
 }
 
 // Contains error information for a username hash lookup that failed in a batch
@@ -287,40 +122,6 @@ type BatchUnameErrorResponseItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUnameErrorResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUnameErrorResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUnameErrorResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Field != nil {
-		s.WriteString(schemas.BatchUnameErrorResponseItem_field, *v.Field)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.BatchUnameErrorResponseItem_reason, *v.Reason)
-	}
-	if v.Uname != nil {
-		s.WriteString(schemas.BatchUnameErrorResponseItem_uname, *v.Uname)
-	}
-}
-func (v *BatchUnameErrorResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUnameErrorResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUnameErrorResponseItem_field:
-			v.Field = new(string)
-			return d.ReadString(schemas.BatchUnameErrorResponseItem_field, v.Field)
-		case schemas.BatchUnameErrorResponseItem_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.BatchUnameErrorResponseItem_reason, v.Reason)
-		case schemas.BatchUnameErrorResponseItem_uname:
-			v.Uname = new(string)
-			return d.ReadString(schemas.BatchUnameErrorResponseItem_uname, v.Uname)
-		}
-		return nil
-	})
-}
-
 // Contains information about a username hash that was successfully resolved in a
 // batch uname lookup operation.
 type BatchUnameSuccessResponseItem struct {
@@ -336,34 +137,6 @@ type BatchUnameSuccessResponseItem struct {
 	Username *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUnameSuccessResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUnameSuccessResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUnameSuccessResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uname != nil {
-		s.WriteString(schemas.BatchUnameSuccessResponseItem_uname, *v.Uname)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.BatchUnameSuccessResponseItem_username, *v.Username)
-	}
-}
-func (v *BatchUnameSuccessResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUnameSuccessResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUnameSuccessResponseItem_uname:
-			v.Uname = new(string)
-			return d.ReadString(schemas.BatchUnameSuccessResponseItem_uname, v.Uname)
-		case schemas.BatchUnameSuccessResponseItem_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.BatchUnameSuccessResponseItem_username, v.Username)
-		}
-		return nil
-	})
 }
 
 // Contains error information for a user operation that failed in a batch user
@@ -384,40 +157,6 @@ type BatchUserErrorResponseItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUserErrorResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUserErrorResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUserErrorResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Field != nil {
-		s.WriteString(schemas.BatchUserErrorResponseItem_field, *v.Field)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.BatchUserErrorResponseItem_reason, *v.Reason)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.BatchUserErrorResponseItem_userId, *v.UserId)
-	}
-}
-func (v *BatchUserErrorResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUserErrorResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUserErrorResponseItem_field:
-			v.Field = new(string)
-			return d.ReadString(schemas.BatchUserErrorResponseItem_field, v.Field)
-		case schemas.BatchUserErrorResponseItem_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.BatchUserErrorResponseItem_reason, v.Reason)
-		case schemas.BatchUserErrorResponseItem_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.BatchUserErrorResponseItem_userId, v.UserId)
-		}
-		return nil
-	})
-}
-
 // Contains information about a user that was successfully processed in a batch
 // user operation.
 type BatchUserSuccessResponseItem struct {
@@ -428,28 +167,6 @@ type BatchUserSuccessResponseItem struct {
 	UserId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUserSuccessResponseItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUserSuccessResponseItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUserSuccessResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.UserId != nil {
-		s.WriteString(schemas.BatchUserSuccessResponseItem_userId, *v.UserId)
-	}
-}
-func (v *BatchUserSuccessResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUserSuccessResponseItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUserSuccessResponseItem_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.BatchUserSuccessResponseItem_userId, v.UserId)
-		}
-		return nil
-	})
 }
 
 // Represents a guest user who has been blocked from accessing a Wickr network.
@@ -476,46 +193,6 @@ type BlockedGuestUser struct {
 	UsernameHash *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BlockedGuestUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BlockedGuestUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BlockedGuestUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Admin != nil {
-		s.WriteString(schemas.BlockedGuestUser_admin, *v.Admin)
-	}
-	if v.Modified != nil {
-		s.WriteString(schemas.BlockedGuestUser_modified, *v.Modified)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.BlockedGuestUser_username, *v.Username)
-	}
-	if v.UsernameHash != nil {
-		s.WriteString(schemas.BlockedGuestUser_usernameHash, *v.UsernameHash)
-	}
-}
-func (v *BlockedGuestUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BlockedGuestUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BlockedGuestUser_admin:
-			v.Admin = new(string)
-			return d.ReadString(schemas.BlockedGuestUser_admin, v.Admin)
-		case schemas.BlockedGuestUser_modified:
-			v.Modified = new(string)
-			return d.ReadString(schemas.BlockedGuestUser_modified, v.Modified)
-		case schemas.BlockedGuestUser_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.BlockedGuestUser_username, v.Username)
-		case schemas.BlockedGuestUser_usernameHash:
-			v.UsernameHash = new(string)
-			return d.ReadString(schemas.BlockedGuestUser_usernameHash, v.UsernameHash)
-		}
-		return nil
-	})
 }
 
 // Represents a bot account in a Wickr network with all its informational fields.
@@ -554,86 +231,6 @@ type Bot struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Bot) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Bot)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Bot) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotId != nil {
-		s.WriteString(schemas.Bot_botId, *v.BotId)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.Bot_displayName, *v.DisplayName)
-	}
-	if v.GroupId != nil {
-		s.WriteString(schemas.Bot_groupId, *v.GroupId)
-	}
-	if v.HasChallenge != nil {
-		s.WriteBool(schemas.Bot_hasChallenge, *v.HasChallenge)
-	}
-	if v.LastLogin != nil {
-		s.WriteString(schemas.Bot_lastLogin, *v.LastLogin)
-	}
-	if v.Pubkey != nil {
-		s.WriteString(schemas.Bot_pubkey, *v.Pubkey)
-	}
-	if v.Status != 0 {
-		s.WriteInt32(schemas.Bot_status, int32(v.Status))
-	}
-	if v.Suspended != nil {
-		s.WriteBool(schemas.Bot_suspended, *v.Suspended)
-	}
-	if v.Uname != nil {
-		s.WriteString(schemas.Bot_uname, *v.Uname)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.Bot_username, *v.Username)
-	}
-}
-func (v *Bot) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Bot, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Bot_botId:
-			v.BotId = new(string)
-			return d.ReadString(schemas.Bot_botId, v.BotId)
-		case schemas.Bot_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.Bot_displayName, v.DisplayName)
-		case schemas.Bot_groupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.Bot_groupId, v.GroupId)
-		case schemas.Bot_hasChallenge:
-			v.HasChallenge = new(bool)
-			return d.ReadBool(schemas.Bot_hasChallenge, v.HasChallenge)
-		case schemas.Bot_lastLogin:
-			v.LastLogin = new(string)
-			return d.ReadString(schemas.Bot_lastLogin, v.LastLogin)
-		case schemas.Bot_pubkey:
-			v.Pubkey = new(string)
-			return d.ReadString(schemas.Bot_pubkey, v.Pubkey)
-		case schemas.Bot_status:
-			var ev int32
-			if err := d.ReadInt32(schemas.Bot_status, &ev); err != nil {
-				return err
-			}
-			v.Status = BotStatus(ev)
-			return nil
-		case schemas.Bot_suspended:
-			v.Suspended = new(bool)
-			return d.ReadBool(schemas.Bot_suspended, v.Suspended)
-		case schemas.Bot_uname:
-			v.Uname = new(string)
-			return d.ReadString(schemas.Bot_uname, v.Uname)
-		case schemas.Bot_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.Bot_username, v.Username)
-		}
-		return nil
-	})
-}
-
 // Defines the calling feature permissions and settings for users in a security
 // group, controlling what types of calls users can initiate and participate in.
 type CallingSettings struct {
@@ -650,40 +247,6 @@ type CallingSettings struct {
 	ForceTcpCall *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *CallingSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CallingSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CallingSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CanStart11Call != nil {
-		s.WriteBool(schemas.CallingSettings_canStart11Call, *v.CanStart11Call)
-	}
-	if v.CanVideoCall != nil {
-		s.WriteBool(schemas.CallingSettings_canVideoCall, *v.CanVideoCall)
-	}
-	if v.ForceTcpCall != nil {
-		s.WriteBool(schemas.CallingSettings_forceTcpCall, *v.ForceTcpCall)
-	}
-}
-func (v *CallingSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CallingSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CallingSettings_canStart11Call:
-			v.CanStart11Call = new(bool)
-			return d.ReadBool(schemas.CallingSettings_canStart11Call, v.CanStart11Call)
-		case schemas.CallingSettings_canVideoCall:
-			v.CanVideoCall = new(bool)
-			return d.ReadBool(schemas.CallingSettings_canVideoCall, v.CanVideoCall)
-		case schemas.CallingSettings_forceTcpCall:
-			v.ForceTcpCall = new(bool)
-			return d.ReadBool(schemas.CallingSettings_forceTcpCall, v.ForceTcpCall)
-		}
-		return nil
-	})
 }
 
 // Consent popup configuration displayed to users on login.
@@ -708,46 +271,6 @@ type ConsentPopupConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConsentPopupConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConsentPopupConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConsentPopupConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloseButtonLabel != nil {
-		s.WriteString(schemas.ConsentPopupConfig_closeButtonLabel, *v.CloseButtonLabel)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.ConsentPopupConfig_content, *v.Content)
-	}
-	if v.Enabled != nil {
-		s.WriteBool(schemas.ConsentPopupConfig_enabled, *v.Enabled)
-	}
-	if v.Header != nil {
-		s.WriteString(schemas.ConsentPopupConfig_header, *v.Header)
-	}
-}
-func (v *ConsentPopupConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConsentPopupConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConsentPopupConfig_closeButtonLabel:
-			v.CloseButtonLabel = new(string)
-			return d.ReadString(schemas.ConsentPopupConfig_closeButtonLabel, v.CloseButtonLabel)
-		case schemas.ConsentPopupConfig_content:
-			v.Content = new(string)
-			return d.ReadString(schemas.ConsentPopupConfig_content, v.Content)
-		case schemas.ConsentPopupConfig_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.ConsentPopupConfig_enabled, v.Enabled)
-		case schemas.ConsentPopupConfig_header:
-			v.Header = new(string)
-			return d.ReadString(schemas.ConsentPopupConfig_header, v.Header)
-		}
-		return nil
-	})
-}
-
 // Contains detailed error information explaining why an operation failed,
 // including which field caused the error and the reason for the failure.
 type ErrorDetail struct {
@@ -759,34 +282,6 @@ type ErrorDetail struct {
 	Reason *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Field != nil {
-		s.WriteString(schemas.ErrorDetail_field, *v.Field)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.ErrorDetail_reason, *v.Reason)
-	}
-}
-func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorDetail_field:
-			v.Field = new(string)
-			return d.ReadString(schemas.ErrorDetail_field, v.Field)
-		case schemas.ErrorDetail_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.ErrorDetail_reason, v.Reason)
-		}
-		return nil
-	})
 }
 
 // Represents a guest user who has accessed the network from a federated Wickr
@@ -811,40 +306,6 @@ type GuestUser struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GuestUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GuestUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GuestUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillingPeriod != nil {
-		s.WriteString(schemas.GuestUser_billingPeriod, *v.BillingPeriod)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.GuestUser_username, *v.Username)
-	}
-	if v.UsernameHash != nil {
-		s.WriteString(schemas.GuestUser_usernameHash, *v.UsernameHash)
-	}
-}
-func (v *GuestUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GuestUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GuestUser_billingPeriod:
-			v.BillingPeriod = new(string)
-			return d.ReadString(schemas.GuestUser_billingPeriod, v.BillingPeriod)
-		case schemas.GuestUser_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.GuestUser_username, v.Username)
-		case schemas.GuestUser_usernameHash:
-			v.UsernameHash = new(string)
-			return d.ReadString(schemas.GuestUser_usernameHash, v.UsernameHash)
-		}
-		return nil
-	})
-}
-
 // Contains the count of guest users for a specific billing period, used for
 // tracking historical guest user activity.
 type GuestUserHistoryCount struct {
@@ -861,34 +322,6 @@ type GuestUserHistoryCount struct {
 	Month *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GuestUserHistoryCount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GuestUserHistoryCount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GuestUserHistoryCount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteString(schemas.GuestUserHistoryCount_count, *v.Count)
-	}
-	if v.Month != nil {
-		s.WriteString(schemas.GuestUserHistoryCount_month, *v.Month)
-	}
-}
-func (v *GuestUserHistoryCount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GuestUserHistoryCount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GuestUserHistoryCount_count:
-			v.Count = new(string)
-			return d.ReadString(schemas.GuestUserHistoryCount_count, v.Count)
-		case schemas.GuestUserHistoryCount_month:
-			v.Month = new(string)
-			return d.ReadString(schemas.GuestUserHistoryCount_month, v.Month)
-		}
-		return nil
-	})
 }
 
 // Represents a Wickr network with all its configuration and status information.
@@ -937,80 +370,6 @@ type Network struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Network) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Network)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Network) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessLevel != "" {
-		s.WriteString(schemas.Network_accessLevel, string(v.AccessLevel))
-	}
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.Network_awsAccountId, *v.AwsAccountId)
-	}
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.Network_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.FreeTrialExpiration != nil {
-		s.WriteString(schemas.Network_freeTrialExpiration, *v.FreeTrialExpiration)
-	}
-	if v.MigrationState != nil {
-		s.WriteInt32(schemas.Network_migrationState, *v.MigrationState)
-	}
-	if v.NetworkArn != nil {
-		s.WriteString(schemas.Network_networkArn, *v.NetworkArn)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.Network_networkId, *v.NetworkId)
-	}
-	if v.NetworkName != nil {
-		s.WriteString(schemas.Network_networkName, *v.NetworkName)
-	}
-	if v.Standing != nil {
-		s.WriteInt32(schemas.Network_standing, *v.Standing)
-	}
-}
-func (v *Network) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Network, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Network_accessLevel:
-			var ev string
-			if err := d.ReadString(schemas.Network_accessLevel, &ev); err != nil {
-				return err
-			}
-			v.AccessLevel = AccessLevel(ev)
-			return nil
-		case schemas.Network_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.Network_awsAccountId, v.AwsAccountId)
-		case schemas.Network_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.Network_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.Network_freeTrialExpiration:
-			v.FreeTrialExpiration = new(string)
-			return d.ReadString(schemas.Network_freeTrialExpiration, v.FreeTrialExpiration)
-		case schemas.Network_migrationState:
-			v.MigrationState = new(int32)
-			return d.ReadInt32(schemas.Network_migrationState, v.MigrationState)
-		case schemas.Network_networkArn:
-			v.NetworkArn = new(string)
-			return d.ReadString(schemas.Network_networkArn, v.NetworkArn)
-		case schemas.Network_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.Network_networkId, v.NetworkId)
-		case schemas.Network_networkName:
-			v.NetworkName = new(string)
-			return d.ReadString(schemas.Network_networkName, v.NetworkName)
-		case schemas.Network_standing:
-			v.Standing = new(int32)
-			return d.ReadInt32(schemas.Network_standing, v.Standing)
-		}
-		return nil
-	})
-}
-
 // Contains network-level configuration settings that apply to all users and
 // security groups within a Wickr network.
 type NetworkSettings struct {
@@ -1036,56 +395,6 @@ type NetworkSettings struct {
 	ReadReceiptConfig *ReadReceiptConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *NetworkSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsentPopup != nil {
-		s.WriteStruct(schemas.NetworkSettings_consentPopup)
-		v.ConsentPopup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataRetention != nil {
-		s.WriteBool(schemas.NetworkSettings_dataRetention, *v.DataRetention)
-	}
-	if v.EnableClientMetrics != nil {
-		s.WriteBool(schemas.NetworkSettings_enableClientMetrics, *v.EnableClientMetrics)
-	}
-	if v.EnableTrustedDataFormat != nil {
-		s.WriteBool(schemas.NetworkSettings_enableTrustedDataFormat, *v.EnableTrustedDataFormat)
-	}
-	if v.ReadReceiptConfig != nil {
-		s.WriteStruct(schemas.NetworkSettings_readReceiptConfig)
-		v.ReadReceiptConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *NetworkSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkSettings_consentPopup:
-			v.ConsentPopup = &ConsentPopupConfig{}
-			return v.ConsentPopup.Deserialize(d)
-		case schemas.NetworkSettings_dataRetention:
-			v.DataRetention = new(bool)
-			return d.ReadBool(schemas.NetworkSettings_dataRetention, v.DataRetention)
-		case schemas.NetworkSettings_enableClientMetrics:
-			v.EnableClientMetrics = new(bool)
-			return d.ReadBool(schemas.NetworkSettings_enableClientMetrics, v.EnableClientMetrics)
-		case schemas.NetworkSettings_enableTrustedDataFormat:
-			v.EnableTrustedDataFormat = new(bool)
-			return d.ReadBool(schemas.NetworkSettings_enableTrustedDataFormat, v.EnableTrustedDataFormat)
-		case schemas.NetworkSettings_readReceiptConfig:
-			v.ReadReceiptConfig = &ReadReceiptConfig{}
-			return v.ReadReceiptConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains the OpenID Connect (OIDC) configuration information for Single Sign-On
@@ -1155,106 +464,6 @@ type OidcConfigInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OidcConfigInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OidcConfigInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OidcConfigInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteInt32(schemas.OidcConfigInfo_applicationId, *v.ApplicationId)
-	}
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.OidcConfigInfo_applicationName, *v.ApplicationName)
-	}
-	if v.CaCertificate != nil {
-		s.WriteString(schemas.OidcConfigInfo_caCertificate, *v.CaCertificate)
-	}
-	if v.ClientId != nil {
-		s.WriteString(schemas.OidcConfigInfo_clientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.OidcConfigInfo_clientSecret, *v.ClientSecret)
-	}
-	if v.CompanyId != nil {
-		s.WriteString(schemas.OidcConfigInfo_companyId, *v.CompanyId)
-	}
-	if v.CustomUsername != nil {
-		s.WriteString(schemas.OidcConfigInfo_customUsername, *v.CustomUsername)
-	}
-	if v.ExtraAuthParams != nil {
-		s.WriteString(schemas.OidcConfigInfo_extraAuthParams, *v.ExtraAuthParams)
-	}
-	if v.Issuer != nil {
-		s.WriteString(schemas.OidcConfigInfo_issuer, *v.Issuer)
-	}
-	if v.RedirectUrl != nil {
-		s.WriteString(schemas.OidcConfigInfo_redirectUrl, *v.RedirectUrl)
-	}
-	if v.Scopes != nil {
-		s.WriteString(schemas.OidcConfigInfo_scopes, *v.Scopes)
-	}
-	if v.Secret != nil {
-		s.WriteString(schemas.OidcConfigInfo_secret, *v.Secret)
-	}
-	if v.SsoTokenBufferMinutes != nil {
-		s.WriteInt32(schemas.OidcConfigInfo_ssoTokenBufferMinutes, *v.SsoTokenBufferMinutes)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.OidcConfigInfo_userId, *v.UserId)
-	}
-}
-func (v *OidcConfigInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OidcConfigInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OidcConfigInfo_applicationId:
-			v.ApplicationId = new(int32)
-			return d.ReadInt32(schemas.OidcConfigInfo_applicationId, v.ApplicationId)
-		case schemas.OidcConfigInfo_applicationName:
-			v.ApplicationName = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_applicationName, v.ApplicationName)
-		case schemas.OidcConfigInfo_caCertificate:
-			v.CaCertificate = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_caCertificate, v.CaCertificate)
-		case schemas.OidcConfigInfo_clientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_clientId, v.ClientId)
-		case schemas.OidcConfigInfo_clientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_clientSecret, v.ClientSecret)
-		case schemas.OidcConfigInfo_companyId:
-			v.CompanyId = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_companyId, v.CompanyId)
-		case schemas.OidcConfigInfo_customUsername:
-			v.CustomUsername = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_customUsername, v.CustomUsername)
-		case schemas.OidcConfigInfo_extraAuthParams:
-			v.ExtraAuthParams = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_extraAuthParams, v.ExtraAuthParams)
-		case schemas.OidcConfigInfo_issuer:
-			v.Issuer = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_issuer, v.Issuer)
-		case schemas.OidcConfigInfo_redirectUrl:
-			v.RedirectUrl = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_redirectUrl, v.RedirectUrl)
-		case schemas.OidcConfigInfo_scopes:
-			v.Scopes = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_scopes, v.Scopes)
-		case schemas.OidcConfigInfo_secret:
-			v.Secret = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_secret, v.Secret)
-		case schemas.OidcConfigInfo_ssoTokenBufferMinutes:
-			v.SsoTokenBufferMinutes = new(int32)
-			return d.ReadInt32(schemas.OidcConfigInfo_ssoTokenBufferMinutes, v.SsoTokenBufferMinutes)
-		case schemas.OidcConfigInfo_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.OidcConfigInfo_userId, v.UserId)
-		}
-		return nil
-	})
-}
-
 // Contains OAuth token information returned from the identity provider, including
 // access tokens, ID tokens, and PKCE parameters used for secure authentication.
 type OidcTokenInfo struct {
@@ -1290,64 +499,6 @@ type OidcTokenInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OidcTokenInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OidcTokenInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OidcTokenInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessToken != nil {
-		s.WriteString(schemas.OidcTokenInfo_accessToken, *v.AccessToken)
-	}
-	if v.CodeChallenge != nil {
-		s.WriteString(schemas.OidcTokenInfo_codeChallenge, *v.CodeChallenge)
-	}
-	if v.CodeVerifier != nil {
-		s.WriteString(schemas.OidcTokenInfo_codeVerifier, *v.CodeVerifier)
-	}
-	if v.ExpiresIn != nil {
-		s.WriteInt64(schemas.OidcTokenInfo_expiresIn, *v.ExpiresIn)
-	}
-	if v.IdToken != nil {
-		s.WriteString(schemas.OidcTokenInfo_idToken, *v.IdToken)
-	}
-	if v.RefreshToken != nil {
-		s.WriteString(schemas.OidcTokenInfo_refreshToken, *v.RefreshToken)
-	}
-	if v.TokenType != nil {
-		s.WriteString(schemas.OidcTokenInfo_tokenType, *v.TokenType)
-	}
-}
-func (v *OidcTokenInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OidcTokenInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OidcTokenInfo_accessToken:
-			v.AccessToken = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_accessToken, v.AccessToken)
-		case schemas.OidcTokenInfo_codeChallenge:
-			v.CodeChallenge = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_codeChallenge, v.CodeChallenge)
-		case schemas.OidcTokenInfo_codeVerifier:
-			v.CodeVerifier = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_codeVerifier, v.CodeVerifier)
-		case schemas.OidcTokenInfo_expiresIn:
-			v.ExpiresIn = new(int64)
-			return d.ReadInt64(schemas.OidcTokenInfo_expiresIn, v.ExpiresIn)
-		case schemas.OidcTokenInfo_idToken:
-			v.IdToken = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_idToken, v.IdToken)
-		case schemas.OidcTokenInfo_refreshToken:
-			v.RefreshToken = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_refreshToken, v.RefreshToken)
-		case schemas.OidcTokenInfo_tokenType:
-			v.TokenType = new(string)
-			return d.ReadString(schemas.OidcTokenInfo_tokenType, v.TokenType)
-		}
-		return nil
-	})
-}
-
 // Defines password complexity requirements for users in a security group,
 // including minimum length and character type requirements.
 type PasswordRequirements struct {
@@ -1370,52 +521,6 @@ type PasswordRequirements struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PasswordRequirements) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PasswordRequirements)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PasswordRequirements) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Lowercase != nil {
-		s.WriteInt32(schemas.PasswordRequirements_lowercase, *v.Lowercase)
-	}
-	if v.MinLength != nil {
-		s.WriteInt32(schemas.PasswordRequirements_minLength, *v.MinLength)
-	}
-	if v.Numbers != nil {
-		s.WriteInt32(schemas.PasswordRequirements_numbers, *v.Numbers)
-	}
-	if v.Symbols != nil {
-		s.WriteInt32(schemas.PasswordRequirements_symbols, *v.Symbols)
-	}
-	if v.Uppercase != nil {
-		s.WriteInt32(schemas.PasswordRequirements_uppercase, *v.Uppercase)
-	}
-}
-func (v *PasswordRequirements) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PasswordRequirements, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PasswordRequirements_lowercase:
-			v.Lowercase = new(int32)
-			return d.ReadInt32(schemas.PasswordRequirements_lowercase, v.Lowercase)
-		case schemas.PasswordRequirements_minLength:
-			v.MinLength = new(int32)
-			return d.ReadInt32(schemas.PasswordRequirements_minLength, v.MinLength)
-		case schemas.PasswordRequirements_numbers:
-			v.Numbers = new(int32)
-			return d.ReadInt32(schemas.PasswordRequirements_numbers, v.Numbers)
-		case schemas.PasswordRequirements_symbols:
-			v.Symbols = new(int32)
-			return d.ReadInt32(schemas.PasswordRequirements_symbols, v.Symbols)
-		case schemas.PasswordRequirements_uppercase:
-			v.Uppercase = new(int32)
-			return d.ReadInt32(schemas.PasswordRequirements_uppercase, v.Uppercase)
-		}
-		return nil
-	})
-}
-
 // Identifies a Wickr enterprise network that is permitted for global federation,
 // allowing users to communicate with members of the specified network.
 type PermittedWickrEnterpriseNetwork struct {
@@ -1433,34 +538,6 @@ type PermittedWickrEnterpriseNetwork struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PermittedWickrEnterpriseNetwork) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PermittedWickrEnterpriseNetwork)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PermittedWickrEnterpriseNetwork) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.PermittedWickrEnterpriseNetwork_domain, *v.Domain)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.PermittedWickrEnterpriseNetwork_networkId, *v.NetworkId)
-	}
-}
-func (v *PermittedWickrEnterpriseNetwork) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PermittedWickrEnterpriseNetwork, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PermittedWickrEnterpriseNetwork_domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.PermittedWickrEnterpriseNetwork_domain, v.Domain)
-		case schemas.PermittedWickrEnterpriseNetwork_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.PermittedWickrEnterpriseNetwork_networkId, v.NetworkId)
-		}
-		return nil
-	})
-}
-
 // Configuration for read receipts at the network level, controlling whether
 // senders can see when their messages have been read.
 type ReadReceiptConfig struct {
@@ -1469,32 +546,6 @@ type ReadReceiptConfig struct {
 	Status Status
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReadReceiptConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReadReceiptConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReadReceiptConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.ReadReceiptConfig_status, string(v.Status))
-	}
-}
-func (v *ReadReceiptConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReadReceiptConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReadReceiptConfig_status:
-			var ev string
-			if err := d.ReadString(schemas.ReadReceiptConfig_status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents a security group in a Wickr network, containing membership
@@ -1545,72 +596,6 @@ type SecurityGroup struct {
 	ActiveDirectoryGuid *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SecurityGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SecurityGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActiveDirectoryGuid != nil {
-		s.WriteString(schemas.SecurityGroup_activeDirectoryGuid, *v.ActiveDirectoryGuid)
-	}
-	if v.ActiveMembers != nil {
-		s.WriteInt32(schemas.SecurityGroup_activeMembers, *v.ActiveMembers)
-	}
-	if v.BotMembers != nil {
-		s.WriteInt32(schemas.SecurityGroup_botMembers, *v.BotMembers)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SecurityGroup_id, *v.Id)
-	}
-	if v.IsDefault != nil {
-		s.WriteBool(schemas.SecurityGroup_isDefault, *v.IsDefault)
-	}
-	if v.Modified != nil {
-		s.WriteInt32(schemas.SecurityGroup_modified, *v.Modified)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SecurityGroup_name, *v.Name)
-	}
-	if v.SecurityGroupSettings != nil {
-		s.WriteStruct(schemas.SecurityGroup_securityGroupSettings)
-		v.SecurityGroupSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SecurityGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SecurityGroup_activeDirectoryGuid:
-			v.ActiveDirectoryGuid = new(string)
-			return d.ReadString(schemas.SecurityGroup_activeDirectoryGuid, v.ActiveDirectoryGuid)
-		case schemas.SecurityGroup_activeMembers:
-			v.ActiveMembers = new(int32)
-			return d.ReadInt32(schemas.SecurityGroup_activeMembers, v.ActiveMembers)
-		case schemas.SecurityGroup_botMembers:
-			v.BotMembers = new(int32)
-			return d.ReadInt32(schemas.SecurityGroup_botMembers, v.BotMembers)
-		case schemas.SecurityGroup_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SecurityGroup_id, v.Id)
-		case schemas.SecurityGroup_isDefault:
-			v.IsDefault = new(bool)
-			return d.ReadBool(schemas.SecurityGroup_isDefault, v.IsDefault)
-		case schemas.SecurityGroup_modified:
-			v.Modified = new(int32)
-			return d.ReadInt32(schemas.SecurityGroup_modified, v.Modified)
-		case schemas.SecurityGroup_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SecurityGroup_name, v.Name)
-		case schemas.SecurityGroup_securityGroupSettings:
-			v.SecurityGroupSettings = &SecurityGroupSettings{}
-			return v.SecurityGroupSettings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Comprehensive configuration settings that define all user capabilities,
@@ -1765,229 +750,6 @@ type SecurityGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SecurityGroupSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SecurityGroupSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SecurityGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AlwaysReauthenticate != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_alwaysReauthenticate, *v.AlwaysReauthenticate)
-	}
-	serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_atakPackageValues, v.AtakPackageValues)
-	if v.Calling != nil {
-		s.WriteStruct(schemas.SecurityGroupSettings_calling)
-		v.Calling.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CheckForUpdates != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_checkForUpdates, *v.CheckForUpdates)
-	}
-	if v.EnableAtak != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableAtak, *v.EnableAtak)
-	}
-	if v.EnableCrashReports != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableCrashReports, *v.EnableCrashReports)
-	}
-	if v.EnableFileDownload != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableFileDownload, *v.EnableFileDownload)
-	}
-	if v.EnableGuestFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableGuestFederation, *v.EnableGuestFederation)
-	}
-	if v.EnableNotificationPreview != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableNotificationPreview, *v.EnableNotificationPreview)
-	}
-	if v.EnableOpenAccessOption != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableOpenAccessOption, *v.EnableOpenAccessOption)
-	}
-	if v.EnableRestrictedGlobalFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_enableRestrictedGlobalFederation, *v.EnableRestrictedGlobalFederation)
-	}
-	if v.FederationMode != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_federationMode, *v.FederationMode)
-	}
-	if v.FilesEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_filesEnabled, *v.FilesEnabled)
-	}
-	if v.ForceDeviceLockout != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_forceDeviceLockout, *v.ForceDeviceLockout)
-	}
-	if v.ForceOpenAccess != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_forceOpenAccess, *v.ForceOpenAccess)
-	}
-	if v.ForceReadReceipts != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_forceReadReceipts, *v.ForceReadReceipts)
-	}
-	if v.GlobalFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_globalFederation, *v.GlobalFederation)
-	}
-	if v.IsAtoEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_isAtoEnabled, *v.IsAtoEnabled)
-	}
-	if v.IsLinkPreviewEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_isLinkPreviewEnabled, *v.IsLinkPreviewEnabled)
-	}
-	if v.LocationAllowMaps != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_locationAllowMaps, *v.LocationAllowMaps)
-	}
-	if v.LocationEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_locationEnabled, *v.LocationEnabled)
-	}
-	if v.LockoutThreshold != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_lockoutThreshold, *v.LockoutThreshold)
-	}
-	if v.MaxAutoDownloadSize != nil {
-		s.WriteInt64(schemas.SecurityGroupSettings_maxAutoDownloadSize, *v.MaxAutoDownloadSize)
-	}
-	if v.MaxBor != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_maxBor, *v.MaxBor)
-	}
-	if v.MaxNonSsoSessionMinutes != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_maxNonSsoSessionMinutes, *v.MaxNonSsoSessionMinutes)
-	}
-	if v.MaxTtl != nil {
-		s.WriteInt64(schemas.SecurityGroupSettings_maxTtl, *v.MaxTtl)
-	}
-	if v.MessageForwardingEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_messageForwardingEnabled, *v.MessageForwardingEnabled)
-	}
-	if v.PasswordRequirements != nil {
-		s.WriteStruct(schemas.SecurityGroupSettings_passwordRequirements)
-		v.PasswordRequirements.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePermittedNetworksList(s, schemas.SecurityGroupSettings_permittedNetworks, v.PermittedNetworks)
-	serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettings_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
-	serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettings_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
-	if v.PresenceEnabled != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_presenceEnabled, *v.PresenceEnabled)
-	}
-	serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_quickResponses, v.QuickResponses)
-	if v.ShowMasterRecoveryKey != nil {
-		s.WriteBool(schemas.SecurityGroupSettings_showMasterRecoveryKey, *v.ShowMasterRecoveryKey)
-	}
-	if v.Shredder != nil {
-		s.WriteStruct(schemas.SecurityGroupSettings_shredder)
-		v.Shredder.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SsoMaxIdleMinutes != nil {
-		s.WriteInt32(schemas.SecurityGroupSettings_ssoMaxIdleMinutes, *v.SsoMaxIdleMinutes)
-	}
-}
-func (v *SecurityGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SecurityGroupSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SecurityGroupSettings_alwaysReauthenticate:
-			v.AlwaysReauthenticate = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_alwaysReauthenticate, v.AlwaysReauthenticate)
-		case schemas.SecurityGroupSettings_atakPackageValues:
-			return deserializeSecurityGroupStringList(d, schemas.SecurityGroupSettings_atakPackageValues, &v.AtakPackageValues)
-		case schemas.SecurityGroupSettings_calling:
-			v.Calling = &CallingSettings{}
-			return v.Calling.Deserialize(d)
-		case schemas.SecurityGroupSettings_checkForUpdates:
-			v.CheckForUpdates = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_checkForUpdates, v.CheckForUpdates)
-		case schemas.SecurityGroupSettings_enableAtak:
-			v.EnableAtak = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableAtak, v.EnableAtak)
-		case schemas.SecurityGroupSettings_enableCrashReports:
-			v.EnableCrashReports = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableCrashReports, v.EnableCrashReports)
-		case schemas.SecurityGroupSettings_enableFileDownload:
-			v.EnableFileDownload = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableFileDownload, v.EnableFileDownload)
-		case schemas.SecurityGroupSettings_enableGuestFederation:
-			v.EnableGuestFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableGuestFederation, v.EnableGuestFederation)
-		case schemas.SecurityGroupSettings_enableNotificationPreview:
-			v.EnableNotificationPreview = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableNotificationPreview, v.EnableNotificationPreview)
-		case schemas.SecurityGroupSettings_enableOpenAccessOption:
-			v.EnableOpenAccessOption = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableOpenAccessOption, v.EnableOpenAccessOption)
-		case schemas.SecurityGroupSettings_enableRestrictedGlobalFederation:
-			v.EnableRestrictedGlobalFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_enableRestrictedGlobalFederation, v.EnableRestrictedGlobalFederation)
-		case schemas.SecurityGroupSettings_federationMode:
-			v.FederationMode = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_federationMode, v.FederationMode)
-		case schemas.SecurityGroupSettings_filesEnabled:
-			v.FilesEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_filesEnabled, v.FilesEnabled)
-		case schemas.SecurityGroupSettings_forceDeviceLockout:
-			v.ForceDeviceLockout = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_forceDeviceLockout, v.ForceDeviceLockout)
-		case schemas.SecurityGroupSettings_forceOpenAccess:
-			v.ForceOpenAccess = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_forceOpenAccess, v.ForceOpenAccess)
-		case schemas.SecurityGroupSettings_forceReadReceipts:
-			v.ForceReadReceipts = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_forceReadReceipts, v.ForceReadReceipts)
-		case schemas.SecurityGroupSettings_globalFederation:
-			v.GlobalFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_globalFederation, v.GlobalFederation)
-		case schemas.SecurityGroupSettings_isAtoEnabled:
-			v.IsAtoEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_isAtoEnabled, v.IsAtoEnabled)
-		case schemas.SecurityGroupSettings_isLinkPreviewEnabled:
-			v.IsLinkPreviewEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_isLinkPreviewEnabled, v.IsLinkPreviewEnabled)
-		case schemas.SecurityGroupSettings_locationAllowMaps:
-			v.LocationAllowMaps = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_locationAllowMaps, v.LocationAllowMaps)
-		case schemas.SecurityGroupSettings_locationEnabled:
-			v.LocationEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_locationEnabled, v.LocationEnabled)
-		case schemas.SecurityGroupSettings_lockoutThreshold:
-			v.LockoutThreshold = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_lockoutThreshold, v.LockoutThreshold)
-		case schemas.SecurityGroupSettings_maxAutoDownloadSize:
-			v.MaxAutoDownloadSize = new(int64)
-			return d.ReadInt64(schemas.SecurityGroupSettings_maxAutoDownloadSize, v.MaxAutoDownloadSize)
-		case schemas.SecurityGroupSettings_maxBor:
-			v.MaxBor = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_maxBor, v.MaxBor)
-		case schemas.SecurityGroupSettings_maxNonSsoSessionMinutes:
-			v.MaxNonSsoSessionMinutes = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_maxNonSsoSessionMinutes, v.MaxNonSsoSessionMinutes)
-		case schemas.SecurityGroupSettings_maxTtl:
-			v.MaxTtl = new(int64)
-			return d.ReadInt64(schemas.SecurityGroupSettings_maxTtl, v.MaxTtl)
-		case schemas.SecurityGroupSettings_messageForwardingEnabled:
-			v.MessageForwardingEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_messageForwardingEnabled, v.MessageForwardingEnabled)
-		case schemas.SecurityGroupSettings_passwordRequirements:
-			v.PasswordRequirements = &PasswordRequirements{}
-			return v.PasswordRequirements.Deserialize(d)
-		case schemas.SecurityGroupSettings_permittedNetworks:
-			return deserializePermittedNetworksList(d, schemas.SecurityGroupSettings_permittedNetworks, &v.PermittedNetworks)
-		case schemas.SecurityGroupSettings_permittedWickrAwsNetworks:
-			return deserializeWickrAwsNetworksList(d, schemas.SecurityGroupSettings_permittedWickrAwsNetworks, &v.PermittedWickrAwsNetworks)
-		case schemas.SecurityGroupSettings_permittedWickrEnterpriseNetworks:
-			return deserializePermittedWickrEnterpriseNetworksList(d, schemas.SecurityGroupSettings_permittedWickrEnterpriseNetworks, &v.PermittedWickrEnterpriseNetworks)
-		case schemas.SecurityGroupSettings_presenceEnabled:
-			v.PresenceEnabled = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_presenceEnabled, v.PresenceEnabled)
-		case schemas.SecurityGroupSettings_quickResponses:
-			return deserializeSecurityGroupStringList(d, schemas.SecurityGroupSettings_quickResponses, &v.QuickResponses)
-		case schemas.SecurityGroupSettings_showMasterRecoveryKey:
-			v.ShowMasterRecoveryKey = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettings_showMasterRecoveryKey, v.ShowMasterRecoveryKey)
-		case schemas.SecurityGroupSettings_shredder:
-			v.Shredder = &ShredderSettings{}
-			return v.Shredder.Deserialize(d)
-		case schemas.SecurityGroupSettings_ssoMaxIdleMinutes:
-			v.SsoMaxIdleMinutes = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettings_ssoMaxIdleMinutes, v.SsoMaxIdleMinutes)
-		}
-		return nil
-	})
-}
-
 // Contains the security group configuration settings that can be specified when
 // creating or updating a security group. This is a subset of SecurityGroupSettings
 // containing only the modifiable federation and security settings.
@@ -2026,61 +788,6 @@ type SecurityGroupSettingsRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SecurityGroupSettingsRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SecurityGroupSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SecurityGroupSettingsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnableGuestFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettingsRequest_enableGuestFederation, *v.EnableGuestFederation)
-	}
-	if v.EnableRestrictedGlobalFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettingsRequest_enableRestrictedGlobalFederation, *v.EnableRestrictedGlobalFederation)
-	}
-	if v.FederationMode != nil {
-		s.WriteInt32(schemas.SecurityGroupSettingsRequest_federationMode, *v.FederationMode)
-	}
-	if v.GlobalFederation != nil {
-		s.WriteBool(schemas.SecurityGroupSettingsRequest_globalFederation, *v.GlobalFederation)
-	}
-	if v.LockoutThreshold != nil {
-		s.WriteInt32(schemas.SecurityGroupSettingsRequest_lockoutThreshold, *v.LockoutThreshold)
-	}
-	serializePermittedNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedNetworks, v.PermittedNetworks)
-	serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
-	serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
-}
-func (v *SecurityGroupSettingsRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SecurityGroupSettingsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SecurityGroupSettingsRequest_enableGuestFederation:
-			v.EnableGuestFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettingsRequest_enableGuestFederation, v.EnableGuestFederation)
-		case schemas.SecurityGroupSettingsRequest_enableRestrictedGlobalFederation:
-			v.EnableRestrictedGlobalFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettingsRequest_enableRestrictedGlobalFederation, v.EnableRestrictedGlobalFederation)
-		case schemas.SecurityGroupSettingsRequest_federationMode:
-			v.FederationMode = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettingsRequest_federationMode, v.FederationMode)
-		case schemas.SecurityGroupSettingsRequest_globalFederation:
-			v.GlobalFederation = new(bool)
-			return d.ReadBool(schemas.SecurityGroupSettingsRequest_globalFederation, v.GlobalFederation)
-		case schemas.SecurityGroupSettingsRequest_lockoutThreshold:
-			v.LockoutThreshold = new(int32)
-			return d.ReadInt32(schemas.SecurityGroupSettingsRequest_lockoutThreshold, v.LockoutThreshold)
-		case schemas.SecurityGroupSettingsRequest_permittedNetworks:
-			return deserializePermittedNetworksList(d, schemas.SecurityGroupSettingsRequest_permittedNetworks, &v.PermittedNetworks)
-		case schemas.SecurityGroupSettingsRequest_permittedWickrAwsNetworks:
-			return deserializeWickrAwsNetworksList(d, schemas.SecurityGroupSettingsRequest_permittedWickrAwsNetworks, &v.PermittedWickrAwsNetworks)
-		case schemas.SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks:
-			return deserializePermittedWickrEnterpriseNetworksList(d, schemas.SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks, &v.PermittedWickrEnterpriseNetworks)
-		}
-		return nil
-	})
-}
-
 // Represents a single network-level configuration setting with its name, value,
 // and data type. Settings control network-wide behaviors and features.
 type Setting struct {
@@ -2104,40 +811,6 @@ type Setting struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Setting) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Setting)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Setting) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OptionName != nil {
-		s.WriteString(schemas.Setting_optionName, *v.OptionName)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.Setting_type, *v.Type)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Setting_value, *v.Value)
-	}
-}
-func (v *Setting) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Setting, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Setting_optionName:
-			v.OptionName = new(string)
-			return d.ReadString(schemas.Setting_optionName, v.OptionName)
-		case schemas.Setting_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Setting_type, v.Type)
-		case schemas.Setting_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Setting_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Configuration for the Wickr shredder feature, which writes random data over
 // free memory and disk space on client devices. You can configure your Wickr
 // shredder intensity using the parameters below.
@@ -2157,34 +830,6 @@ type ShredderSettings struct {
 	Intensity *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ShredderSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ShredderSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ShredderSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CanProcessManually != nil {
-		s.WriteBool(schemas.ShredderSettings_canProcessManually, *v.CanProcessManually)
-	}
-	if v.Intensity != nil {
-		s.WriteInt32(schemas.ShredderSettings_intensity, *v.Intensity)
-	}
-}
-func (v *ShredderSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ShredderSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ShredderSettings_canProcessManually:
-			v.CanProcessManually = new(bool)
-			return d.ReadBool(schemas.ShredderSettings_canProcessManually, v.CanProcessManually)
-		case schemas.ShredderSettings_intensity:
-			v.Intensity = new(int32)
-			return d.ReadInt32(schemas.ShredderSettings_intensity, v.Intensity)
-		}
-		return nil
-	})
 }
 
 // Contains the modifiable details for updating an existing user, including name,
@@ -2216,61 +861,6 @@ type UpdateUserDetails struct {
 	Username *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateUserDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateUserDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateUserDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeValidation != nil {
-		s.WriteBool(schemas.UpdateUserDetails_codeValidation, *v.CodeValidation)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.UpdateUserDetails_firstName, *v.FirstName)
-	}
-	if v.InviteCode != nil {
-		s.WriteString(schemas.UpdateUserDetails_inviteCode, *v.InviteCode)
-	}
-	if v.InviteCodeTtl != nil {
-		s.WriteInt32(schemas.UpdateUserDetails_inviteCodeTtl, *v.InviteCodeTtl)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.UpdateUserDetails_lastName, *v.LastName)
-	}
-	serializeSecurityGroupIdList(s, schemas.UpdateUserDetails_securityGroupIds, v.SecurityGroupIds)
-	if v.Username != nil {
-		s.WriteString(schemas.UpdateUserDetails_username, *v.Username)
-	}
-}
-func (v *UpdateUserDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserDetails_codeValidation:
-			v.CodeValidation = new(bool)
-			return d.ReadBool(schemas.UpdateUserDetails_codeValidation, v.CodeValidation)
-		case schemas.UpdateUserDetails_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.UpdateUserDetails_firstName, v.FirstName)
-		case schemas.UpdateUserDetails_inviteCode:
-			v.InviteCode = new(string)
-			return d.ReadString(schemas.UpdateUserDetails_inviteCode, v.InviteCode)
-		case schemas.UpdateUserDetails_inviteCodeTtl:
-			v.InviteCodeTtl = new(int32)
-			return d.ReadInt32(schemas.UpdateUserDetails_inviteCodeTtl, v.InviteCodeTtl)
-		case schemas.UpdateUserDetails_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.UpdateUserDetails_lastName, v.LastName)
-		case schemas.UpdateUserDetails_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.UpdateUserDetails_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.UpdateUserDetails_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.UpdateUserDetails_username, v.Username)
-		}
-		return nil
-	})
 }
 
 // Represents a user account in a Wickr network with detailed profile information,
@@ -2347,133 +937,6 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
-func (v *User) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.User)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cell != nil {
-		s.WriteString(schemas.User_cell, *v.Cell)
-	}
-	if v.ChallengeFailures != nil {
-		s.WriteInt32(schemas.User_challengeFailures, *v.ChallengeFailures)
-	}
-	if v.CodeValidation != nil {
-		s.WriteBool(schemas.User_codeValidation, *v.CodeValidation)
-	}
-	if v.CountryCode != nil {
-		s.WriteString(schemas.User_countryCode, *v.CountryCode)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.User_firstName, *v.FirstName)
-	}
-	if v.InviteCode != nil {
-		s.WriteString(schemas.User_inviteCode, *v.InviteCode)
-	}
-	if v.IsAdmin != nil {
-		s.WriteBool(schemas.User_isAdmin, *v.IsAdmin)
-	}
-	if v.IsInviteExpired != nil {
-		s.WriteBool(schemas.User_isInviteExpired, *v.IsInviteExpired)
-	}
-	if v.IsUser != nil {
-		s.WriteBool(schemas.User_isUser, *v.IsUser)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.User_lastName, *v.LastName)
-	}
-	if v.OtpEnabled != nil {
-		s.WriteBool(schemas.User_otpEnabled, *v.OtpEnabled)
-	}
-	if v.ScimId != nil {
-		s.WriteString(schemas.User_scimId, *v.ScimId)
-	}
-	serializeSecurityGroupIdList(s, schemas.User_securityGroups, v.SecurityGroups)
-	if v.Status != nil {
-		s.WriteInt32(schemas.User_status, *v.Status)
-	}
-	if v.Suspended != nil {
-		s.WriteBool(schemas.User_suspended, *v.Suspended)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.User_type, *v.Type)
-	}
-	if v.Uname != nil {
-		s.WriteString(schemas.User_uname, *v.Uname)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.User_userId, *v.UserId)
-	}
-	if v.Username != nil {
-		s.WriteString(schemas.User_username, *v.Username)
-	}
-}
-func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.User_cell:
-			v.Cell = new(string)
-			return d.ReadString(schemas.User_cell, v.Cell)
-		case schemas.User_challengeFailures:
-			v.ChallengeFailures = new(int32)
-			return d.ReadInt32(schemas.User_challengeFailures, v.ChallengeFailures)
-		case schemas.User_codeValidation:
-			v.CodeValidation = new(bool)
-			return d.ReadBool(schemas.User_codeValidation, v.CodeValidation)
-		case schemas.User_countryCode:
-			v.CountryCode = new(string)
-			return d.ReadString(schemas.User_countryCode, v.CountryCode)
-		case schemas.User_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.User_firstName, v.FirstName)
-		case schemas.User_inviteCode:
-			v.InviteCode = new(string)
-			return d.ReadString(schemas.User_inviteCode, v.InviteCode)
-		case schemas.User_isAdmin:
-			v.IsAdmin = new(bool)
-			return d.ReadBool(schemas.User_isAdmin, v.IsAdmin)
-		case schemas.User_isInviteExpired:
-			v.IsInviteExpired = new(bool)
-			return d.ReadBool(schemas.User_isInviteExpired, v.IsInviteExpired)
-		case schemas.User_isUser:
-			v.IsUser = new(bool)
-			return d.ReadBool(schemas.User_isUser, v.IsUser)
-		case schemas.User_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.User_lastName, v.LastName)
-		case schemas.User_otpEnabled:
-			v.OtpEnabled = new(bool)
-			return d.ReadBool(schemas.User_otpEnabled, v.OtpEnabled)
-		case schemas.User_scimId:
-			v.ScimId = new(string)
-			return d.ReadString(schemas.User_scimId, v.ScimId)
-		case schemas.User_securityGroups:
-			return deserializeSecurityGroupIdList(d, schemas.User_securityGroups, &v.SecurityGroups)
-		case schemas.User_status:
-			v.Status = new(int32)
-			return d.ReadInt32(schemas.User_status, v.Status)
-		case schemas.User_suspended:
-			v.Suspended = new(bool)
-			return d.ReadBool(schemas.User_suspended, v.Suspended)
-		case schemas.User_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.User_type, v.Type)
-		case schemas.User_uname:
-			v.Uname = new(string)
-			return d.ReadString(schemas.User_uname, v.Uname)
-		case schemas.User_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.User_userId, v.UserId)
-		case schemas.User_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.User_username, v.Username)
-		}
-		return nil
-	})
-}
-
 // Identifies a Amazon Web Services Wickr network by region and network ID, used
 // for configuring permitted networks for global federation.
 type WickrAwsNetworks struct {
@@ -2490,34 +953,6 @@ type WickrAwsNetworks struct {
 	Region *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WickrAwsNetworks) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WickrAwsNetworks)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WickrAwsNetworks) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.WickrAwsNetworks_networkId, *v.NetworkId)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.WickrAwsNetworks_region, *v.Region)
-	}
-}
-func (v *WickrAwsNetworks) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WickrAwsNetworks, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WickrAwsNetworks_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.WickrAwsNetworks_networkId, v.NetworkId)
-		case schemas.WickrAwsNetworks_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.WickrAwsNetworks_region, v.Region)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

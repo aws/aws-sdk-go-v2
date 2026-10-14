@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/previewprivacyimpact
+
+Content-Type: application/json
+
+{"parameters":{"differentialPrivacy":{"epsilon":1,"usersNoisePerQuery":1}}}

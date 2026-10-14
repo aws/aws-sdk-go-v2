@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Import a new custom lens or update an existing custom lens.
@@ -94,6 +94,25 @@ type ImportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportLensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportLensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportLensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ImportLensInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.JSONString != nil {
+		s.WriteString(schemas.ImportLensInput_JSONString, *v.JSONString)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ImportLensInput_LensAlias, *v.LensAlias)
+	}
+	serializeTagMap(s, schemas.ImportLensInput_Tags, v.Tags)
+}
+
 type ImportLensOutput struct {
 
 	// The ARN for the lens that was created or updated.
@@ -108,65 +127,52 @@ type ImportLensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportLensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportLensOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportLensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensArn != nil {
+		s.WriteString(schemas.ImportLensOutput_LensArn, *v.LensArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportLensOutput_Status, string(v.Status))
+	}
+}
+func (v *ImportLensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportLensOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportLensOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.ImportLensOutput_LensArn, v.LensArn)
+		case schemas.ImportLensOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportLensOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ImportLensStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportLens, schemas.ImportLensInput, schemas.ImportLensOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportLens, schemas.ImportLensInput, schemas.ImportLensOutput), output: &ImportLensOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportLens{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportLens"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -176,12 +182,6 @@ func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpImportLensValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportLens(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +194,6 @@ func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,12 +233,4 @@ func (m *idempotencyToken_initializeOpImportLens) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opImportLensMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportLens{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportLens(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportLens",
-	}
 }

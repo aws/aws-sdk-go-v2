@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon EKS control plane.
@@ -134,6 +134,15 @@ type CreateClusterInput struct {
 	// The encryption configuration for the cluster.
 	EncryptionConfig []types.EncryptionConfig
 
+	// The Kubernetes API server configuration for the new cluster.
+	KubeApiServerConfig *types.KubeApiServerConfigRequest
+
+	// The Kubernetes controller manager configuration for the new cluster.
+	KubeControllerManagerConfig *types.KubeControllerManagerConfigRequest
+
+	// The Kubernetes scheduler configuration for the new cluster.
+	KubeSchedulerConfig *types.KubeSchedulerConfigRequest
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 
@@ -202,6 +211,105 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_accessConfig)
+		v.AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BootstrapSelfManagedAddons != nil {
+		s.WriteBool(schemas.CreateClusterRequest_bootstrapSelfManagedAddons, *v.BootstrapSelfManagedAddons)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateClusterRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ComputeConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_computeConfig)
+		v.ComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ControlPlaneScalingConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_controlPlaneScalingConfig)
+		v.ControlPlaneScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.CreateClusterRequest_deletionProtection, *v.DeletionProtection)
+	}
+	serializeEncryptionConfigList(s, schemas.CreateClusterRequest_encryptionConfig, v.EncryptionConfig)
+	if v.KubeApiServerConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_kubeApiServerConfig)
+		v.KubeApiServerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeControllerManagerConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_kubeControllerManagerConfig)
+		v.KubeControllerManagerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeSchedulerConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_kubeSchedulerConfig)
+		v.KubeSchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubernetesNetworkConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_kubernetesNetworkConfig)
+		v.KubernetesNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateClusterRequest_name, *v.Name)
+	}
+	if v.OutpostConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_outpostConfig)
+		v.OutpostConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteNetworkConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_remoteNetworkConfig)
+		v.RemoteNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcesVpcConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_resourcesVpcConfig)
+		v.ResourcesVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateClusterRequest_roleArn, *v.RoleArn)
+	}
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_storageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	if v.UpgradePolicy != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_upgradePolicy)
+		v.UpgradePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateClusterRequest_version, *v.Version)
+	}
+	if v.ZonalShiftConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_zonalShiftConfig)
+		v.ZonalShiftConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateClusterOutput struct {
 
 	// The full description of your new cluster.
@@ -213,65 +321,44 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.CreateClusterResponse_cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResponse_cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -281,12 +368,6 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -299,12 +380,6 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -344,12 +419,4 @@ func (m *idempotencyToken_initializeOpCreateCluster) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCluster",
-	}
 }

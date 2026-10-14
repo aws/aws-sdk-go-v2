@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the standards that are currently enabled.
@@ -39,10 +39,31 @@ type GetEnabledStandardsInput struct {
 	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
+	// A list of cloud providers to filter the enabled standards by. For example,
+	// specify Azure to return only enabled standards that evaluate Azure resources.
+	Providers []types.StandardsProvider
+
 	// The list of the standards subscription ARNs for the standards to retrieve.
 	StandardsSubscriptionArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnabledStandardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledStandardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEnabledStandardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEnabledStandardsRequest_NextToken, *v.NextToken)
+	}
+	serializeStandardsProviders(s, schemas.GetEnabledStandardsRequest_Providers, v.Providers)
+	serializeStandardsSubscriptionArns(s, schemas.GetEnabledStandardsRequest_StandardsSubscriptionArns, v.StandardsSubscriptionArns)
 }
 
 type GetEnabledStandardsOutput struct {
@@ -60,74 +81,48 @@ type GetEnabledStandardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledStandardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledStandardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEnabledStandardsResponse_NextToken, *v.NextToken)
+	}
+	serializeStandardsSubscriptions(s, schemas.GetEnabledStandardsResponse_StandardsSubscriptions, v.StandardsSubscriptions)
+}
+func (v *GetEnabledStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnabledStandardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnabledStandardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEnabledStandardsResponse_NextToken, v.NextToken)
+		case schemas.GetEnabledStandardsResponse_StandardsSubscriptions:
+			return deserializeStandardsSubscriptions(d, schemas.GetEnabledStandardsResponse_StandardsSubscriptions, &v.StandardsSubscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledStandards, schemas.GetEnabledStandardsRequest, schemas.GetEnabledStandardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnabledStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledStandards, schemas.GetEnabledStandardsRequest, schemas.GetEnabledStandardsResponse), output: &GetEnabledStandardsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnabledStandards{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnabledStandards"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnabledStandards(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +135,6 @@ func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +236,3 @@ type GetEnabledStandardsAPIClient interface {
 }
 
 var _ GetEnabledStandardsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetEnabledStandards(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnabledStandards",
-	}
-}

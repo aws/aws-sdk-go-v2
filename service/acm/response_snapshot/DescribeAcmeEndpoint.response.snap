@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.DescribeAcmeEndpoint
+
+{"AcmeEndpoint":{"AcmeEndpointArn":"__AcmeEndpointArn__","AuthorizationBehavior":"PRE_APPROVED","CertificateAuthority":{"PublicCertificateAuthority":{"AllowedKeyAlgorithms":["RSA_2048","RSA_2048"]}},"CertificateTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Contact":"REQUIRED","CreatedAt":946684800,"EndpointUrl":"__EndpointUrl__","FailureReason":"__FailureReason__","Status":"CREATING","UpdatedAt":946684800}}

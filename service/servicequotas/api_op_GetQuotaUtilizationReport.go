@@ -4,13 +4,10 @@ package servicequotas
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -132,6 +129,36 @@ type GetQuotaUtilizationReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuotaUtilizationReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuotaUtilizationReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuotaUtilizationReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.GetQuotaUtilizationReportResponse_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetQuotaUtilizationReportResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.GeneratedAt != nil {
+		s.WriteTime(schemas.GetQuotaUtilizationReportResponse_GeneratedAt, *v.GeneratedAt)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQuotaUtilizationReportResponse_NextToken, *v.NextToken)
+	}
+	serializeQuotaUtilizationInfoList(s, schemas.GetQuotaUtilizationReportResponse_Quotas, v.Quotas)
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetQuotaUtilizationReportResponse_ReportId, *v.ReportId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetQuotaUtilizationReportResponse_Status, string(v.Status))
+	}
+	if v.TotalCount != nil {
+		s.WriteInt32(schemas.GetQuotaUtilizationReportResponse_TotalCount, *v.TotalCount)
+	}
+}
 func (v *GetQuotaUtilizationReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQuotaUtilizationReportResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -167,74 +194,26 @@ func (v *GetQuotaUtilizationReportOutput) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 func (c *Client) addOperationGetQuotaUtilizationReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuotaUtilizationReport, schemas.GetQuotaUtilizationReportRequest, schemas.GetQuotaUtilizationReportResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuotaUtilizationReport, schemas.GetQuotaUtilizationReportRequest, schemas.GetQuotaUtilizationReportResponse), output: &GetQuotaUtilizationReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQuotaUtilizationReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetQuotaUtilizationReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQuotaUtilizationReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +228,8 @@ func (c *Client) addOperationGetQuotaUtilizationReportMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetQuotaUtilizationReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetQuotaUtilizationReport",
-	}
 }

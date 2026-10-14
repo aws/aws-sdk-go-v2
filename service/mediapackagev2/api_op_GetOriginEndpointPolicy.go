@@ -4,13 +4,8 @@ package mediapackagev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified origin endpoint policy that's configured in AWS
@@ -55,24 +50,6 @@ type GetOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOriginEndpointPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOriginEndpointPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOriginEndpointPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.GetOriginEndpointPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.GetOriginEndpointPolicyRequest_ChannelName, *v.ChannelName)
-	}
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.GetOriginEndpointPolicyRequest_OriginEndpointName, *v.OriginEndpointName)
-	}
-}
-
 type GetOriginEndpointPolicyOutput struct {
 
 	// The name that describes the channel group. The name is the primary identifier
@@ -114,97 +91,29 @@ type GetOriginEndpointPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOriginEndpointPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOriginEndpointPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOriginEndpointPolicyResponse_CdnAuthConfiguration:
-			v.CdnAuthConfiguration = &types.CdnAuthConfiguration{}
-			return v.CdnAuthConfiguration.Deserialize(d)
-		case schemas.GetOriginEndpointPolicyResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.GetOriginEndpointPolicyResponse_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_ChannelName, v.ChannelName)
-		case schemas.GetOriginEndpointPolicyResponse_OriginEndpointName:
-			v.OriginEndpointName = new(string)
-			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_OriginEndpointName, v.OriginEndpointName)
-		case schemas.GetOriginEndpointPolicyResponse_Policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.GetOriginEndpointPolicyResponse_Policy, v.Policy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOriginEndpointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOriginEndpointPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOriginEndpointPolicy, schemas.GetOriginEndpointPolicyRequest, schemas.GetOriginEndpointPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOriginEndpointPolicy{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOriginEndpointPolicy, schemas.GetOriginEndpointPolicyRequest, schemas.GetOriginEndpointPolicyResponse), output: &GetOriginEndpointPolicyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOriginEndpointPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOriginEndpointPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOriginEndpointPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -219,22 +128,8 @@ func (c *Client) addOperationGetOriginEndpointPolicyMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOriginEndpointPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOriginEndpointPolicy",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"}}

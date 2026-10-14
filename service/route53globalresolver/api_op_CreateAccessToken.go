@@ -5,12 +5,8 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,28 +60,6 @@ type CreateAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAccessTokenInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAccessTokenInput_clientToken, *v.ClientToken)
-	}
-	if v.DnsViewId != nil {
-		s.WriteString(schemas.CreateAccessTokenInput_dnsViewId, *v.DnsViewId)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.CreateAccessTokenInput_expiresAt, *v.ExpiresAt)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAccessTokenInput_name, *v.Name)
-	}
-	serializeTags(s, schemas.CreateAccessTokenInput_tags, v.Tags)
-}
-
 type CreateAccessTokenOutput struct {
 
 	// The Amazon Resource Name (ARN) of the access token.
@@ -137,101 +111,23 @@ type CreateAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAccessTokenOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAccessTokenOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_arn, v.Arn)
-		case schemas.CreateAccessTokenOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_clientToken, v.ClientToken)
-		case schemas.CreateAccessTokenOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateAccessTokenOutput_createdAt, v.CreatedAt)
-		case schemas.CreateAccessTokenOutput_dnsViewId:
-			v.DnsViewId = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_dnsViewId, v.DnsViewId)
-		case schemas.CreateAccessTokenOutput_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.CreateAccessTokenOutput_expiresAt, v.ExpiresAt)
-		case schemas.CreateAccessTokenOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_id, v.Id)
-		case schemas.CreateAccessTokenOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_name, v.Name)
-		case schemas.CreateAccessTokenOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateAccessTokenOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TokenStatus(ev)
-			return nil
-		case schemas.CreateAccessTokenOutput_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.CreateAccessTokenOutput_value, v.Value)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessToken, schemas.CreateAccessTokenInput, schemas.CreateAccessTokenOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessToken{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessToken, schemas.CreateAccessTokenInput, schemas.CreateAccessTokenOutput), output: &CreateAccessTokenOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccessToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -241,12 +137,6 @@ func (c *Client) addOperationCreateAccessTokenMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateAccessTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -259,12 +149,6 @@ func (c *Client) addOperationCreateAccessTokenMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -304,12 +188,4 @@ func (m *idempotencyToken_initializeOpCreateAccessToken) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateAccessTokenMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAccessToken{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAccessToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccessToken",
-	}
 }

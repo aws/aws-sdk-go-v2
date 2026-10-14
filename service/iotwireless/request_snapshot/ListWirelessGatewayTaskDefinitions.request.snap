@@ -1,0 +1,3 @@
+GET /wireless-gateway-task-definitions?maxResults=1&nextToken=__NextToken__&taskDefinitionType=UPDATE
+
+

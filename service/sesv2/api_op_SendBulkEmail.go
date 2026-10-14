@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Composes an email message to multiple destinations.
@@ -43,6 +42,12 @@ type SendBulkEmailInput struct {
 	//
 	// This member is required.
 	DefaultContent *types.BulkEmailContent
+
+	// An object that overrides, for the messages in this request only, settings that
+	// would otherwise apply to them. The overrides apply to every message in the
+	// request. Each setting that you don't override keeps the value that already
+	// applies.
+	ConfigurationOverrides *types.ConfigurationOverrides
 
 	// The name of the configuration set to use when sending the email.
 	ConfigurationSetName *string
@@ -108,6 +113,48 @@ type SendBulkEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBulkEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBulkEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBulkEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkEmailEntryList(s, schemas.SendBulkEmailRequest_BulkEmailEntries, v.BulkEmailEntries)
+	if v.ConfigurationOverrides != nil {
+		s.WriteStruct(schemas.SendBulkEmailRequest_ConfigurationOverrides)
+		v.ConfigurationOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.DefaultContent != nil {
+		s.WriteStruct(schemas.SendBulkEmailRequest_DefaultContent)
+		v.DefaultContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessageTagList(s, schemas.SendBulkEmailRequest_DefaultEmailTags, v.DefaultEmailTags)
+	if v.EndpointId != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_EndpointId, *v.EndpointId)
+	}
+	if v.FeedbackForwardingEmailAddress != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FeedbackForwardingEmailAddress, *v.FeedbackForwardingEmailAddress)
+	}
+	if v.FeedbackForwardingEmailAddressIdentityArn != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FeedbackForwardingEmailAddressIdentityArn, *v.FeedbackForwardingEmailAddressIdentityArn)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.FromEmailAddressIdentityArn != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_FromEmailAddressIdentityArn, *v.FromEmailAddressIdentityArn)
+	}
+	serializeEmailAddressList(s, schemas.SendBulkEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	if v.TenantName != nil {
+		s.WriteString(schemas.SendBulkEmailRequest_TenantName, *v.TenantName)
+	}
+}
 func (in *SendBulkEmailInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.EndpointId = in.EndpointId
@@ -129,77 +176,45 @@ type SendBulkEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendBulkEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendBulkEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendBulkEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkEmailEntryResultList(s, schemas.SendBulkEmailResponse_BulkEmailEntryResults, v.BulkEmailEntryResults)
+}
+func (v *SendBulkEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendBulkEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendBulkEmailResponse_BulkEmailEntryResults:
+			return deserializeBulkEmailEntryResultList(d, schemas.SendBulkEmailResponse_BulkEmailEntryResults, &v.BulkEmailEntryResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBulkEmail, schemas.SendBulkEmailRequest, schemas.SendBulkEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendBulkEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendBulkEmail, schemas.SendBulkEmailRequest, schemas.SendBulkEmailResponse), output: &SendBulkEmailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendBulkEmail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendBulkEmail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendBulkEmailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendBulkEmail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +229,8 @@ func (c *Client) addOperationSendBulkEmailMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendBulkEmail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendBulkEmail",
-	}
 }

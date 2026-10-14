@@ -5,10 +5,10 @@ package comprehend
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of summaries of the document classifiers that you have created
@@ -38,6 +38,21 @@ type ListDocumentClassifierSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifierSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifierSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifierSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDocumentClassifierSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifierSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDocumentClassifierSummariesOutput struct {
 
 	// The list of summaries of document classifiers.
@@ -52,74 +67,48 @@ type ListDocumentClassifierSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifierSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifierSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifierSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentClassifierSummariesList(s, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, v.DocumentClassifierSummariesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifierSummariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDocumentClassifierSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDocumentClassifierSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList:
+			return deserializeDocumentClassifierSummariesList(d, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, &v.DocumentClassifierSummariesList)
+		case schemas.ListDocumentClassifierSummariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDocumentClassifierSummariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDocumentClassifierSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifierSummaries, schemas.ListDocumentClassifierSummariesRequest, schemas.ListDocumentClassifierSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocumentClassifierSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifierSummaries, schemas.ListDocumentClassifierSummariesRequest, schemas.ListDocumentClassifierSummariesResponse), output: &ListDocumentClassifierSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDocumentClassifierSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDocumentClassifierSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDocumentClassifierSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,12 +121,6 @@ func (c *Client) addOperationListDocumentClassifierSummariesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +224,3 @@ type ListDocumentClassifierSummariesAPIClient interface {
 }
 
 var _ ListDocumentClassifierSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDocumentClassifierSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDocumentClassifierSummaries",
-	}
-}

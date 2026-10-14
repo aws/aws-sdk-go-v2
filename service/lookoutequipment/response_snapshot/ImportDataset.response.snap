@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ImportDataset
+
+{"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","JobId":"__JobId__","Status":"CREATED"}

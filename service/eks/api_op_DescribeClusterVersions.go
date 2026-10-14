@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists available Kubernetes versions for Amazon EKS clusters.
@@ -61,6 +61,37 @@ type DescribeClusterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterType != nil {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_clusterType, *v.ClusterType)
+	}
+	serializeStringList(s, schemas.DescribeClusterVersionsRequest_clusterVersions, v.ClusterVersions)
+	if v.DefaultOnly != nil {
+		s.WriteBool(schemas.DescribeClusterVersionsRequest_defaultOnly, *v.DefaultOnly)
+	}
+	if v.IncludeAll != nil {
+		s.WriteBool(schemas.DescribeClusterVersionsRequest_includeAll, *v.IncludeAll)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeClusterVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_status, string(v.Status))
+	}
+	if v.VersionStatus != "" {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_versionStatus, string(v.VersionStatus))
+	}
+}
+
 type DescribeClusterVersionsOutput struct {
 
 	// List of cluster version information objects.
@@ -75,74 +106,48 @@ type DescribeClusterVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterVersionList(s, schemas.DescribeClusterVersionsResponse_clusterVersions, v.ClusterVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeClusterVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeClusterVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterVersionsResponse_clusterVersions:
+			return deserializeClusterVersionList(d, schemas.DescribeClusterVersionsResponse_clusterVersions, &v.ClusterVersions)
+		case schemas.DescribeClusterVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeClusterVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsRequest, schemas.DescribeClusterVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsRequest, schemas.DescribeClusterVersionsResponse), output: &DescribeClusterVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeClusterVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +160,6 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +262,3 @@ type DescribeClusterVersionsAPIClient interface {
 }
 
 var _ DescribeClusterVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeClusterVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeClusterVersions",
-	}
-}

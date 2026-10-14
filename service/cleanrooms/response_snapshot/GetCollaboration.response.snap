@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"collaboration":{"allowedResultRegions":["us-west-1","us-west-1"],"analyticsEngine":"SPARK","arn":"__Arn__","autoApprovedChangeTypes":["ADD_MEMBER","ADD_MEMBER"],"createTime":946684800,"creatorAccountId":"__CreatorAccountId__","creatorDisplayName":"__CreatorDisplayName__","dataEncryptionMetadata":{"allowCleartext":true,"allowDuplicates":true,"allowJoinsOnColumnsWithDifferentNames":true,"preserveNulls":true},"description":"__Description__","id":"__Id__","isMetricsEnabled":true,"jobLogStatus":"ENABLED","memberStatus":"INVITED","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","queryLogStatus":"ENABLED","updateTime":946684800}}

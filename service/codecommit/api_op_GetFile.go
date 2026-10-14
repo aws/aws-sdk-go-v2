@@ -4,11 +4,10 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the base-64 encoded contents of a specified file and its metadata.
@@ -47,6 +46,24 @@ type GetFileInput struct {
 	CommitSpecifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitSpecifier != nil {
+		s.WriteString(schemas.GetFileInput_commitSpecifier, *v.CommitSpecifier)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.GetFileInput_filePath, *v.FilePath)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetFileInput_repositoryName, *v.RepositoryName)
+	}
 }
 
 type GetFileOutput struct {
@@ -93,77 +110,78 @@ type GetFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.GetFileOutput_blobId, *v.BlobId)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.GetFileOutput_commitId, *v.CommitId)
+	}
+	if v.FileContent != nil {
+		s.WriteBlob(schemas.GetFileOutput_fileContent, v.FileContent)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.GetFileOutput_fileMode, string(v.FileMode))
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.GetFileOutput_filePath, *v.FilePath)
+	}
+	s.WriteInt64(schemas.GetFileOutput_fileSize, v.FileSize)
+}
+func (v *GetFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFileOutput_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.GetFileOutput_blobId, v.BlobId)
+		case schemas.GetFileOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.GetFileOutput_commitId, v.CommitId)
+		case schemas.GetFileOutput_fileContent:
+			return d.ReadBlob(schemas.GetFileOutput_fileContent, &v.FileContent)
+		case schemas.GetFileOutput_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.GetFileOutput_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = types.FileModeTypeEnum(ev)
+			return nil
+		case schemas.GetFileOutput_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.GetFileOutput_filePath, v.FilePath)
+		case schemas.GetFileOutput_fileSize:
+			return d.ReadInt64(schemas.GetFileOutput_fileSize, &v.FileSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFile, schemas.GetFileInput, schemas.GetFileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFile, schemas.GetFileInput, schemas.GetFileOutput), output: &GetFileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +196,8 @@ func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFile",
-	}
 }

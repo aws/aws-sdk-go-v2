@@ -1,0 +1,3 @@
+GET /recommendation/__Id__?analyzerArn=__AnalyzerArn__&maxResults=1&nextToken=__NextToken__
+
+

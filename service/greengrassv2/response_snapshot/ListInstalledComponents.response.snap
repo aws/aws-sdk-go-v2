@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"installedComponents":[{"componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","isRoot":true,"lastInstallationSource":"__LastInstallationSource__","lastReportedTimestamp":946684800,"lastStatusChangeTimestamp":946684800,"lifecycleState":"NEW","lifecycleStateDetails":"__LifecycleStateDetails__","lifecycleStatusCodes":["__Member__","__Member__"]},{"componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","isRoot":true,"lastInstallationSource":"__LastInstallationSource__","lastReportedTimestamp":946684800,"lastStatusChangeTimestamp":946684800,"lifecycleState":"NEW","lifecycleStateDetails":"__LifecycleStateDetails__","lifecycleStatusCodes":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

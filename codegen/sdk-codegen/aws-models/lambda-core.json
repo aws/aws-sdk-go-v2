@@ -1,0 +1,3092 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.lambdacore#AssociatedComputeResourceTypesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambdacore#ComputeResourceType",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ClientTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ComputeResourceType": {
+            "type": "enum",
+            "members": {
+                "MicroVm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "MicroVm compute resource type",
+                        "smithy.api#enumValue": "MicroVm",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "WebFunction": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "WebFunction compute resource type",
+                        "smithy.api#enumValue": "WebFunction",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of Lambda compute resource that can use a network connector.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#CoreTimestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:public"
+                ],
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.lambdacore#CreateNetworkConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#CreateNetworkConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#CreateNetworkConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network connector that enables Lambda compute resources to route outbound traffic through your Amazon VPC. The network connector provisions elastic network interfaces (ENIs) in the subnets you specify, providing a managed network path to private resources such as databases, caches, and internal APIs.</p> <p>This operation is asynchronous. The network connector starts in <code>PENDING</code> state while ENIs are provisioned in your VPC (provisioning typically takes up to 10 minutes). Use <code>GetNetworkConnector</code> to poll the connector state until it reaches <code>ACTIVE</code>. Once active, you can attach the connector to supported Lambda compute resources — such as MicroVMs and WebFunctions — at run time. For how to attach a connector, see the documentation for the specific compute type.</p> <p>This operation is idempotent when you provide a <code>ClientToken</code> — if you retry a request that completed successfully using the same client token, the operation returns the existing connector without creating a duplicate.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2026-04-04/network-connectors",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#CreateNetworkConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the network connector within your account and Region. You can use the name to identify the connector in subsequent API calls.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration for the connector. Specify a <code>VpcEgressConfiguration</code> to enable outbound traffic routing through your VPC.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Lambda assumes to manage elastic network interfaces in your VPC. This role must have permissions for <code>ec2:CreateNetworkInterface</code>, <code>ec2:DeleteNetworkInterface</code>, and related describe operations.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lambdacore#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request with the same client token, the API returns the existing connector without creating a duplicate.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs to associate with the network connector for organization, cost allocation, or access control.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#CreateNetworkConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the connector version created by this request, including the immutable version suffix.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number assigned to the connector. A newly created connector starts at version 1.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration of the connector, including VPC subnets and security groups.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Lambda uses to manage the underlying ENI resources for this connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the network connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#DeleteNetworkConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#DeleteNetworkConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#DeleteNetworkConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates deletion of a network connector. The connector transitions to <code>DELETING</code> state while elastic network interfaces are cleaned up asynchronously. After deletion completes, subsequent calls to <code>GetNetworkConnector</code> return <code>ResourceNotFoundException</code>.</p> <p>This operation is idempotent — calling delete on a connector that is already deleting or has been deleted succeeds without error. You can delete connectors in <code>ACTIVE</code> or <code>FAILED</code> states. Before deleting a connector, ensure that no Lambda compute resources are using it, as they will lose VPC egress connectivity immediately.</p> <p>Deleting with an unqualified identifier removes the connector and all of its versions. To remove a single historical version, supply its version-qualified ARN; the connector and its remaining versions are unaffected. You can't delete the latest version on its own — delete the connector to remove it.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2026-04-04/network-connectors/{Identifier}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#DeleteNetworkConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network connector to delete. Provide an unqualified ARN (or an ID or name) to delete the entire connector and all of its versions, or a version-qualified ARN — one that includes the immutable version suffix — to delete a specific historical version. You can't delete the latest version with a version-qualified identifier; delete the connector instead.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Id",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#DeleteNetworkConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the connector version affected by this request, including the immutable version suffix.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the connector version affected by this request.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration of the connector, including VPC subnets and security groups.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Lambda uses to manage the underlying ENI resources for this connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the network connector. The State field is typically <code>DELETING</code> after this call.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#GetNetworkConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#GetNetworkConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#GetNetworkConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current configuration, state, and metadata of a network connector. The <code>Identifier</code> parameter accepts the connector ID, name, or full ARN. Use this operation to poll connector state after creation or update, or to inspect the current VPC configuration and any failure reasons.</p> <p>The response includes the full connector configuration, current state, and — if the connector has been updated — the <code>LastUpdateStatus</code> and <code>LastUpdateStatusReasonCode</code> fields that indicate whether the most recent update succeeded or failed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2026-04-04/network-connectors/{Identifier}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#GetNetworkConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network connector to retrieve. You can specify the connector ID, name, or ARN. Provide an unqualified ARN (or an ID or name) to retrieve the connector's latest version, or a version-qualified ARN — one that includes the immutable version suffix — to retrieve a specific historical version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Id",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#GetNetworkConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the specific connector version returned by this request, including the immutable version suffix. This is populated only when you supply a version-qualified identifier. On a standard (unqualified) request, this field is not populated; the connector's latest active version is returned instead through the <code>LatestVersionArn</code> and <code>LatestVersion</code> fields described below.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the network connector. On a standard (unqualified) request, this is the connector's current version; each configuration update increments it. When you supply a version-qualified identifier, this is the specific version you requested.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LatestVersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the connector's latest active version, including the immutable version suffix. This field is returned only on a standard (unqualified) request; when you supply a version-qualified identifier it is not returned, and <code>VersionArn</code> is returned instead.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "LatestVersion": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the connector's latest active version. Each configuration update creates a new immutable version; this attribute exposes the most recent one. This field is returned only on a standard (unqualified) request.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration of the connector, including VPC subnets and security groups.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Lambda uses to manage the underlying ENI resources for this connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the network connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the current state, populated when the state is <code>FAILED</code> or <code>DELETE_FAILED</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "StateReasonCode": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorStateReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A machine-readable code indicating the reason for the current state. Use this for programmatic error handling.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastUpdateStatus": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the most recent update operation (<code>Successful</code>, <code>Failed</code>, or <code>InProgress</code>).</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastUpdateStatusReason": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the last update status.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastUpdateStatusReasonCode": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A machine-readable code indicating the reason for the last update status. Use this for programmatic error handling.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lambdacore#CoreTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connector configuration was last modified.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#InvalidParameterValueException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the parameters in the request is not valid. Check the error message for details about which parameter failed validation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#LambdaCoreApiService": {
+            "type": "service",
+            "version": "2026-04-30",
+            "resources": [
+                {
+                    "target": "com.amazonaws.lambdacore#NetworkConnector"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lambda Core",
+                    "arnNamespace": "lambda",
+                    "cloudFormationName": "Lambda",
+                    "cloudTrailEventSource": "lambda.amazonaws.com",
+                    "endpointPrefix": "lambda"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lambda"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Lambda</fullname> <p> <b>Overview</b> </p> <p>AWS Lambda Core is a set of APIs for managing shared infrastructure resources used by Lambda. The Lambda Core API provides operations for creating and managing network connectors that enable Lambda compute resources to access resources in your Amazon Virtual Private Cloud (Amazon VPC).</p> <p>Network connectors provision elastic network interfaces (ENIs) in your VPC subnets, providing a managed network path from Lambda compute environments to private resources such as Amazon RDS databases, Amazon ElastiCache clusters, and internal APIs. You create a network connector once and attach it to one or more Lambda compute resources at run time.</p> <p>The <i>Lambda Core API Reference</i> provides information about each of the API methods, including details about the parameters in each API request and response.</p> <p/> <p>You can use Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools to access the API. For installation instructions, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> <p>For a list of Region-specific endpoints that Lambda supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lambda-service.html\">Lambda endpoints and quotas</a> in the <i>Amazon Web Services General Reference.</i> </p> <p>When making the API calls, you will need to authenticate your request by providing a signature. Lambda supports signature version 4. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 signing process</a> in the <i>Amazon Web Services General Reference.</i> </p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ],
+                "smithy.api#title": "AWS Lambda Core",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lambda.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectorVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#ListNetworkConnectorVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#ListNetworkConnectorVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of the versions of a network connector. Each configuration update creates a new immutable version; this operation lists those versions for the connector you specify. You can optionally filter results by version state. Use the <code>Marker</code> parameter from a previous response to retrieve the next page of results.</p> <p>Each item in the response includes the version-qualified ARN, version number, current state, and last modified timestamp for that version. To retrieve the current (latest) configuration of the connector, use <code>GetNetworkConnector</code>; to inspect a specific version, call <code>GetNetworkConnector</code> with a version-qualified identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2026-04-04/network-connectors/{Identifier}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "pageSize": "MaxItems",
+                    "items": "NetworkConnectorVersions"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "feature:webfunction"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectorVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network connector whose versions you want to list. You can specify the connector ID, name, or full ARN. Specify an unqualified identifier — this operation lists all versions of the connector, not a specific version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Id",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to return only versions in the specified state (for example, <code>ACTIVE</code> or <code>FAILED</code>).</p>",
+                        "smithy.api#httpQuery": "State",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>ListNetworkConnectorVersions</code> response. Use this value to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "Marker",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.lambdacore#MaxHundredListItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of versions to return per page. Valid range: 1 to 100.</p>",
+                        "smithy.api#httpQuery": "MaxItems",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:webfunction"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectorVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "NetworkConnectorVersions": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of connector version summaries for the current page of results.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to include in a subsequent request to retrieve the next page. This value is null when there are no more results.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:webfunction"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#ListNetworkConnectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#ListNetworkConnectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of network connectors in your account for the current Region. You can optionally filter results by connector state. Use the <code>Marker</code> parameter from a previous response to retrieve the next page of results.</p> <p>Each item in the response includes the connector ARN, name, ID, type, current state, and last modified timestamp. To retrieve full configuration details for a specific connector, use <code>GetNetworkConnector</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2026-04-04/network-connectors",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "pageSize": "MaxItems",
+                    "items": "NetworkConnectors"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectorsRequest": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filter to return only connectors in the specified state (for example, <code>ACTIVE</code> or <code>FAILED</code>).</p>",
+                        "smithy.api#httpQuery": "State",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous <code>ListNetworkConnectors</code> response. Use this value to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "Marker",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.lambdacore#MaxHundredListItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of connectors to return per page. Valid range: 1 to 100.</p>",
+                        "smithy.api#httpQuery": "MaxItems",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ListNetworkConnectorsResponse": {
+            "type": "structure",
+            "members": {
+                "NetworkConnectors": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of network connector summaries for the current page of results.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to include in a subsequent request to retrieve the next page. This value is null when there are no more results.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#MaxHundredListItems": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnector": {
+            "type": "resource",
+            "identifiers": {
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorIdentifier"
+                }
+            },
+            "properties": {
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName"
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration"
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn"
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn"
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion"
+                },
+                "LatestVersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn"
+                },
+                "LatestVersion": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion"
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState"
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.lambdacore#String"
+                },
+                "StateReasonCode": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorStateReasonCode"
+                },
+                "LastUpdateStatus": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatus"
+                },
+                "LastUpdateStatusReason": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReason"
+                },
+                "LastUpdateStatusReasonCode": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReasonCode"
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lambdacore#CoreTimestamp"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.lambdacore#CreateNetworkConnector"
+            },
+            "read": {
+                "target": "com.amazonaws.lambdacore#GetNetworkConnector"
+            },
+            "update": {
+                "target": "com.amazonaws.lambdacore#UpdateNetworkConnector"
+            },
+            "delete": {
+                "target": "com.amazonaws.lambdacore#DeleteNetworkConnector"
+            },
+            "list": {
+                "target": "com.amazonaws.lambdacore#ListNetworkConnectors"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.lambdacore#ListNetworkConnectorVersions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "network-connector:{Id}"
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorConfiguration": {
+            "type": "union",
+            "members": {
+                "VpcEgressConfiguration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVpcEgressConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for a VPC egress network connector. Specifies the subnets, security groups, and network protocol for routing outbound traffic through your VPC.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network configuration for a network connector. Different connector types use different configuration shapes; specify the configuration that matches your connector type.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The unique identifier for a network connector, assigned by the service at creation time",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A flexible identifier that accepts a network connector ID, name, or ARN",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatus": {
+            "type": "enum",
+            "members": {
+                "Successful": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the most recent update operation on a network connector: <code>Successful</code>, <code>Failed</code>, or <code>InProgress</code>.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReasonCode": {
+            "type": "enum",
+            "members": {
+                "DisallowedByVpcEncryptionControl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DisallowedByVpcEncryptionControl",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Ec2RequestLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2RequestLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InsufficientRolePermissions": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientRolePermissions",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InternalError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalError",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InvalidSecurityGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidSecurityGroup",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InvalidSubnet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidSubnet",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "SecurityGroupsPerInterfaceLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityGroupsPerInterfaceLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "SubnetOutOfIPAddresses": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubnetOutOfIPAddresses",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A machine-readable code indicating why the last update operation reached its current status. Use this for programmatic error handling.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account has reached the maximum number of network connectors allowed.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request would exceed a network connector limit. For <code>CreateNetworkConnector</code>, the account has reached the maximum number of network connectors allowed. For <code>UpdateNetworkConnector</code>, the connector has reached the maximum number of versions allowed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:network-connector:[a-zA-Z0-9-_]+(:[1-9][0-9]*)?)|[a-zA-Z0-9_-]{1,64}$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorSecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^sg-[0-9a-zA-Z]*$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorSecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorSecurityGroupId",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorState": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Being created, resources provisioning",
+                        "smithy.api#enumValue": "PENDING",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Active and ready for use",
+                        "smithy.api#enumValue": "ACTIVE",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Temporarily inactive",
+                        "smithy.api#enumValue": "INACTIVE",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Creation or update failed",
+                        "smithy.api#enumValue": "FAILED",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Being deleted, cleaning up resources",
+                        "smithy.api#enumValue": "DELETING",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Deletion failed",
+                        "smithy.api#enumValue": "DELETE_FAILED",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle state of a network connector. A connector is <code>PENDING</code> while resources provision, <code>ACTIVE</code> when ready for use, <code>INACTIVE</code> when temporarily unavailable, <code>FAILED</code> when creation or update fails, <code>DELETING</code> while resources are cleaned up, and <code>DELETE_FAILED</code> when deletion fails.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorStateReasonCode": {
+            "type": "enum",
+            "members": {
+                "DisallowedByVpcEncryptionControl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DisallowedByVpcEncryptionControl",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Ec2RequestLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2RequestLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InsufficientRolePermissions": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientRolePermissions",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InternalError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalError",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InvalidSecurityGroup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidSecurityGroup",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "InvalidSubnet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidSubnet",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "SecurityGroupsPerInterfaceLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityGroupsPerInterfaceLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "SubnetOutOfIPAddresses": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubnetOutOfIPAddresses",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A machine-readable code indicating why the connector reached its current state. Use this for programmatic error handling.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorSubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^subnet-[0-9a-z]*$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorSubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorSubnetId",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the network connector (<code>VPC_EGRESS</code>).</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the network connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lambdacore#CoreTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connector was last modified.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LatestVersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the connector's latest version, including the immutable version suffix.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "LatestVersion": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the connector's latest version. Each configuration update creates a new immutable version; this attribute exposes the most recent one.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a network connector returned by <code>ListNetworkConnectors</code>. Contains identifying fields and current state. To retrieve full configuration details, use <code>GetNetworkConnector</code>.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorTagKey",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorTagValue",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorType": {
+            "type": "enum",
+            "members": {
+                "VPC_EGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "VPC egress connectivity",
+                        "smithy.api#enumValue": "VPC_EGRESS",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a network connector. <code>VPC_EGRESS</code> provides VPC egress connectivity.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorVersion": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorVersionSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unqualified ARN of the network connector that this version belongs to.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of this connector version, including the immutable version suffix.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of this connector version.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of this connector version.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the current state, populated when the state is <code>FAILED</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "StateReasonCode": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorStateReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A machine-readable code indicating the reason for the current state. Use this for programmatic error handling.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lambdacore#CoreTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when this connector version was last modified.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a single version of a network connector returned by <code>ListNetworkConnectorVersions</code>. Each configuration update creates a new immutable version; this shape describes one such version. To retrieve the full configuration of a version, call <code>GetNetworkConnector</code> with a version-qualified identifier.</p>",
+                "smithy.api#tags": [
+                    "feature:webfunction"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorVersionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorVersionSummary",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:webfunction"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#tags": [
+                    "feature:webfunction"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorVpcEgressConfiguration": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorSubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the VPC subnets where Lambda provisions elastic network interfaces (ENIs). Specify 1 to 16 subnets. All subnets must be in the same VPC.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorSecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the VPC security groups to attach to the ENIs. All security groups must be in the same VPC as the subnets.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "NetworkProtocol": {
+                    "target": "com.amazonaws.lambdacore#NetworkProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network protocol for the connector. Specify <code>IPv4</code> for IPv4-only networking, or <code>DualStack</code> for both IPv4 and IPv6.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "AssociatedComputeResourceTypes": {
+                    "target": "com.amazonaws.lambdacore#AssociatedComputeResourceTypesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of Lambda compute resources that can use this connector. Valid values are <code>MicroVm</code> and <code>WebFunction</code>. Specify exactly one value.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a VPC egress network connector. Specifies the VPC subnets, security groups, network protocol, and associated Lambda compute resource types.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkConnectorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambdacore#NetworkConnectorSummary",
+                "traits": {
+                    "smithy.api#tags": [
+                        "feature:public"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#NetworkProtocol": {
+            "type": "enum",
+            "members": {
+                "IPv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "IPv4",
+                        "smithy.api#enumValue": "IPv4",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "DualStack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "DualStack",
+                        "smithy.api#enumValue": "DualStack",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network protocol for a connector. <code>IPv4</code> enables IPv4-only networking; <code>DualStack</code> enables both IPv4 and IPv6.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ResourceConflictException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request could not be completed due to a conflict with the current state of the resource. For example, attempting to update a connector that is not in <code>ACTIVE</code> state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified network connector does not exist. Verify the identifier (ID, name, or ARN) and Region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ServiceException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred. Retry the request with exponential backoff.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#ThrottleReason": {
+            "type": "enum",
+            "members": {
+                "ConcurrentInvocationLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConcurrentInvocationLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "FunctionInvocationRateLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FunctionInvocationRateLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ReservedFunctionConcurrentInvocationLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReservedFunctionConcurrentInvocationLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ReservedFunctionInvocationRateLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReservedFunctionInvocationRateLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "CallerRateLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CallerRateLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ConcurrentSnapshotCreateLimitExceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConcurrentSnapshotCreateLimitExceeded",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "retryAfterSeconds": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the request.</p>",
+                        "smithy.api#httpHeader": "Retry-After",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambdacore#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambdacore#ThrottleReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the throttling.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was throttled due to exceeding the allowed request rate. Retry the request after a brief wait using exponential backoff.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#UpdateNetworkConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambdacore#UpdateNetworkConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambdacore#UpdateNetworkConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdacore#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambdacore#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the VPC configuration or operator role of an existing network connector. You can modify the subnet IDs, security group IDs, network protocol, or operator role. The connector must be in <code>ACTIVE</code> state to accept updates.</p> <p>This operation is asynchronous. The connector remains in <code>ACTIVE</code> state during the update — existing workloads that reference this connector are not disrupted. Use <code>GetNetworkConnector</code> to monitor the <code>LastUpdateStatus</code> field, which transitions through <code>InProgress</code> to <code>Successful</code> or <code>Failed</code>. If the update fails, the <code>LastUpdateStatusReasonCode</code> field provides a specific error code for troubleshooting. This operation is idempotent when you provide a <code>ClientToken</code>.</p> <p>Each successful configuration change creates a new immutable version. A connector can have a limited number of versions; once that limit is reached, further updates fail with <code>NetworkConnectorLimitExceededException</code> until you delete older versions.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2026-04-04/network-connectors/{Identifier}",
+                    "code": 202
+                },
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#UpdateNetworkConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network connector to update. You can specify the connector ID, name, or full ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Id",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated network configuration for the connector. Provide the full <code>VpcEgressConfiguration</code> including all subnet IDs and security group IDs — this replaces the existing configuration.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated ARN of the IAM role that Lambda assumes to manage ENIs. Use this to change the operator role without recreating the connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lambdacore#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the update request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#notProperty": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambdacore#UpdateNetworkConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network connector.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network connector.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "VersionArn": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The qualified ARN of the connector version resulting from this update, including the immutable version suffix.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the connector version resulting from this update. A configuration change creates a new, incremented version; a no-op update returns the current version number.</p>",
+                        "smithy.api#tags": [
+                            "feature:webfunction"
+                        ]
+                    }
+                },
+                "OperatorRole": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Lambda uses to manage the underlying ENI resources for this connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network configuration of the connector, including VPC subnets and security groups.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the network connector.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastUpdateStatus": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this update operation (typically <code>InProgress</code> immediately after the call).</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastUpdateStatusReason": {
+                    "target": "com.amazonaws.lambdacore#NetworkConnectorLastUpdateStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the update status.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                },
+                "LastModified": {
+                    "target": "com.amazonaws.lambdacore#CoreTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of this update.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        }
+    }
+}

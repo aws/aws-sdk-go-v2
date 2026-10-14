@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update a channel schedule
@@ -44,6 +43,28 @@ type BatchUpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.BatchUpdateScheduleRequest_ChannelId, *v.ChannelId)
+	}
+	if v.Creates != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleRequest_Creates)
+		v.Creates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deletes != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleRequest_Deletes)
+		v.Deletes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Placeholder documentation for BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
 
@@ -59,77 +80,58 @@ type BatchUpdateScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Creates != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleResponse_Creates)
+		v.Creates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deletes != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleResponse_Deletes)
+		v.Deletes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateScheduleResponse_Creates:
+			v.Creates = &types.BatchScheduleActionCreateResult{}
+			return v.Creates.Deserialize(d)
+		case schemas.BatchUpdateScheduleResponse_Deletes:
+			v.Deletes = &types.BatchScheduleActionDeleteResult{}
+			return v.Deletes.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateSchedule, schemas.BatchUpdateScheduleRequest, schemas.BatchUpdateScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateSchedule, schemas.BatchUpdateScheduleRequest, schemas.BatchUpdateScheduleResponse), output: &BatchUpdateScheduleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateSchedule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +146,8 @@ func (c *Client) addOperationBatchUpdateScheduleMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateSchedule",
-	}
 }

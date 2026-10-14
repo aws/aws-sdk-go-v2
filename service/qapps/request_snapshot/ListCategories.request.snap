@@ -1,0 +1,4 @@
+GET /catalog.listCategories
+
+Instance-Id: __InstanceId__
+

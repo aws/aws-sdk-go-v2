@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.ListVocabularyFilters
+
+{"NextToken":"__NextToken__","VocabularyFilters":[{"LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyFilterName":"__VocabularyFilterName__"},{"LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyFilterName":"__VocabularyFilterName__"}]}

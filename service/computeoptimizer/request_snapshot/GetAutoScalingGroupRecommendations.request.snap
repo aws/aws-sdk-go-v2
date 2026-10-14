@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/GetAutoScalingGroupRecommendations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦xrecommendationPreferences¡vcpuVendorArchitectures‚iAWS_ARM64iAWS_ARM64jaccountIds‚j__Member__j__Member__tautoScalingGroupArns‚j__Member__j__Member__inextTokenm__NextToken__jmaxResultsgfilters‚¢dnamegFindingfvalues‚j__Member__j__Member__¢dnamegFindingfvalues‚j__Member__j__Member__

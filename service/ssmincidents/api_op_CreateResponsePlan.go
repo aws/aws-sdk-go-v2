@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a response plan that automates the initial response to incidents. A
@@ -69,63 +65,6 @@ type CreateResponsePlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResponsePlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateResponsePlanInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateResponsePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.CreateResponsePlanInput_actions, v.Actions)
-	serializeChatChannel(s, schemas.CreateResponsePlanInput_chatChannel, v.ChatChannel)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateResponsePlanInput_clientToken, *v.ClientToken)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateResponsePlanInput_displayName, *v.DisplayName)
-	}
-	serializeEngagementSet(s, schemas.CreateResponsePlanInput_engagements, v.Engagements)
-	if v.IncidentTemplate != nil {
-		s.WriteStruct(schemas.CreateResponsePlanInput_incidentTemplate)
-		v.IncidentTemplate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIntegrations(s, schemas.CreateResponsePlanInput_integrations, v.Integrations)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateResponsePlanInput_name, *v.Name)
-	}
-	serializeTagMap(s, schemas.CreateResponsePlanInput_tags, v.Tags)
-}
-func (v *CreateResponsePlanInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateResponsePlanInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateResponsePlanInput_actions:
-			return deserializeActionsList(d, schemas.CreateResponsePlanInput_actions, &v.Actions)
-		case schemas.CreateResponsePlanInput_chatChannel:
-			return deserializeChatChannel(d, schemas.CreateResponsePlanInput_chatChannel, &v.ChatChannel)
-		case schemas.CreateResponsePlanInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateResponsePlanInput_clientToken, v.ClientToken)
-		case schemas.CreateResponsePlanInput_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.CreateResponsePlanInput_displayName, v.DisplayName)
-		case schemas.CreateResponsePlanInput_engagements:
-			return deserializeEngagementSet(d, schemas.CreateResponsePlanInput_engagements, &v.Engagements)
-		case schemas.CreateResponsePlanInput_incidentTemplate:
-			v.IncidentTemplate = &types.IncidentTemplate{}
-			return v.IncidentTemplate.Deserialize(d)
-		case schemas.CreateResponsePlanInput_integrations:
-			return deserializeIntegrations(d, schemas.CreateResponsePlanInput_integrations, &v.Integrations)
-		case schemas.CreateResponsePlanInput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateResponsePlanInput_name, v.Name)
-		case schemas.CreateResponsePlanInput_tags:
-			return deserializeTagMap(d, schemas.CreateResponsePlanInput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateResponsePlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the response plan.
@@ -139,84 +78,23 @@ type CreateResponsePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResponsePlanOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateResponsePlanOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateResponsePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateResponsePlanOutput_arn, *v.Arn)
-	}
-}
-func (v *CreateResponsePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateResponsePlanOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateResponsePlanOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateResponsePlanOutput_arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResponsePlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResponsePlan, schemas.CreateResponsePlanInput, schemas.CreateResponsePlanOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResponsePlan{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResponsePlan, schemas.CreateResponsePlanInput, schemas.CreateResponsePlanOutput), output: &CreateResponsePlanOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResponsePlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -226,12 +104,6 @@ func (c *Client) addOperationCreateResponsePlanMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateResponsePlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResponsePlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,12 +116,6 @@ func (c *Client) addOperationCreateResponsePlanMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,12 +155,4 @@ func (m *idempotencyToken_initializeOpCreateResponsePlan) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateResponsePlanMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateResponsePlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateResponsePlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResponsePlan",
-	}
 }

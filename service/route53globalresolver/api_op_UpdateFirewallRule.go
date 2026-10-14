@@ -5,12 +5,8 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -93,51 +89,6 @@ type UpdateFirewallRuleInput struct {
 	Priority *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFirewallRuleInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.UpdateFirewallRuleInput_action, string(v.Action))
-	}
-	if v.BlockOverrideDnsType != "" {
-		s.WriteString(schemas.UpdateFirewallRuleInput_blockOverrideDnsType, string(v.BlockOverrideDnsType))
-	}
-	if v.BlockOverrideDomain != nil {
-		s.WriteString(schemas.UpdateFirewallRuleInput_blockOverrideDomain, *v.BlockOverrideDomain)
-	}
-	if v.BlockOverrideTtl != nil {
-		s.WriteInt32(schemas.UpdateFirewallRuleInput_blockOverrideTtl, *v.BlockOverrideTtl)
-	}
-	if v.BlockResponse != "" {
-		s.WriteString(schemas.UpdateFirewallRuleInput_blockResponse, string(v.BlockResponse))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateFirewallRuleInput_clientToken, *v.ClientToken)
-	}
-	if v.ConfidenceThreshold != "" {
-		s.WriteString(schemas.UpdateFirewallRuleInput_confidenceThreshold, string(v.ConfidenceThreshold))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateFirewallRuleInput_description, *v.Description)
-	}
-	if v.DnsAdvancedProtection != "" {
-		s.WriteString(schemas.UpdateFirewallRuleInput_dnsAdvancedProtection, string(v.DnsAdvancedProtection))
-	}
-	if v.FirewallRuleId != nil {
-		s.WriteString(schemas.UpdateFirewallRuleInput_firewallRuleId, *v.FirewallRuleId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateFirewallRuleInput_name, *v.Name)
-	}
-	if v.Priority != nil {
-		s.WriteInt64(schemas.UpdateFirewallRuleInput_priority, *v.Priority)
-	}
 }
 
 type UpdateFirewallRuleOutput struct {
@@ -227,145 +178,23 @@ type UpdateFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFirewallRuleOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateFirewallRuleOutput_action:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_action, &ev); err != nil {
-				return err
-			}
-			v.Action = types.FirewallRuleAction(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_blockOverrideDnsType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_blockOverrideDnsType, &ev); err != nil {
-				return err
-			}
-			v.BlockOverrideDnsType = types.BlockOverrideDnsQueryType(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_blockOverrideDomain:
-			v.BlockOverrideDomain = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_blockOverrideDomain, v.BlockOverrideDomain)
-		case schemas.UpdateFirewallRuleOutput_blockOverrideTtl:
-			v.BlockOverrideTtl = new(int32)
-			return d.ReadInt32(schemas.UpdateFirewallRuleOutput_blockOverrideTtl, v.BlockOverrideTtl)
-		case schemas.UpdateFirewallRuleOutput_blockResponse:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_blockResponse, &ev); err != nil {
-				return err
-			}
-			v.BlockResponse = types.FirewallBlockResponse(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_confidenceThreshold:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_confidenceThreshold, &ev); err != nil {
-				return err
-			}
-			v.ConfidenceThreshold = types.ConfidenceThreshold(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateFirewallRuleOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateFirewallRuleOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_description, v.Description)
-		case schemas.UpdateFirewallRuleOutput_dnsAdvancedProtection:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_dnsAdvancedProtection, &ev); err != nil {
-				return err
-			}
-			v.DnsAdvancedProtection = types.DnsAdvancedProtection(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_dnsViewId:
-			v.DnsViewId = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_dnsViewId, v.DnsViewId)
-		case schemas.UpdateFirewallRuleOutput_firewallDomainListId:
-			v.FirewallDomainListId = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_firewallDomainListId, v.FirewallDomainListId)
-		case schemas.UpdateFirewallRuleOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_id, v.Id)
-		case schemas.UpdateFirewallRuleOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_name, v.Name)
-		case schemas.UpdateFirewallRuleOutput_priority:
-			v.Priority = new(int64)
-			return d.ReadInt64(schemas.UpdateFirewallRuleOutput_priority, v.Priority)
-		case schemas.UpdateFirewallRuleOutput_queryType:
-			v.QueryType = new(string)
-			return d.ReadString(schemas.UpdateFirewallRuleOutput_queryType, v.QueryType)
-		case schemas.UpdateFirewallRuleOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateFirewallRuleOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CRResourceStatus(ev)
-			return nil
-		case schemas.UpdateFirewallRuleOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateFirewallRuleOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallRule, schemas.UpdateFirewallRuleInput, schemas.UpdateFirewallRuleOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallRule, schemas.UpdateFirewallRuleInput, schemas.UpdateFirewallRuleOutput), output: &UpdateFirewallRuleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFirewallRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -375,12 +204,6 @@ func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpUpdateFirewallRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFirewallRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -393,12 +216,6 @@ func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -438,12 +255,4 @@ func (m *idempotencyToken_initializeOpUpdateFirewallRule) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opUpdateFirewallRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFirewallRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateFirewallRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFirewallRule",
-	}
 }

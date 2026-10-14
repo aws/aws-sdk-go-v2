@@ -4,12 +4,7 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the count of bots in a Wickr network, categorized by their status
@@ -39,18 +34,6 @@ type GetBotsCountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotsCountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBotsCountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBotsCountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetBotsCountRequest_networkId, *v.NetworkId)
-	}
-}
-
 type GetBotsCountOutput struct {
 
 	// The number of bots with active status.
@@ -74,91 +57,29 @@ type GetBotsCountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotsCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBotsCountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBotsCountResponse_active:
-			v.Active = new(int32)
-			return d.ReadInt32(schemas.GetBotsCountResponse_active, v.Active)
-		case schemas.GetBotsCountResponse_pending:
-			v.Pending = new(int32)
-			return d.ReadInt32(schemas.GetBotsCountResponse_pending, v.Pending)
-		case schemas.GetBotsCountResponse_total:
-			v.Total = new(int32)
-			return d.ReadInt32(schemas.GetBotsCountResponse_total, v.Total)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBotsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotsCount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotsCount, schemas.GetBotsCountRequest, schemas.GetBotsCountResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotsCount{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotsCount, schemas.GetBotsCountRequest, schemas.GetBotsCountResponse), output: &GetBotsCountOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBotsCount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBotsCountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotsCount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +94,8 @@ func (c *Client) addOperationGetBotsCountMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBotsCount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBotsCount",
-	}
 }

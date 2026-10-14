@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AggregationRegion":"__AggregationRegion__","AggregatorV2Arn":"__AggregatorV2Arn__","LinkedRegions":["__Member__","__Member__"],"RegionLinkingMode":"__RegionLinkingMode__"}

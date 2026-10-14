@@ -1,0 +1,5 @@
+PATCH /global-settings
+
+Content-Type: application/json
+
+{"DiscoveryIntegrationStatus":"ENABLED","JiraConfiguration":{"IntegrationStatus":"NOT_CONFIGURED","IssueManagementStatus":"ENABLED","IssueManagementType":"AUTO","JiraProjectKey":"__JiraProjectKey__"},"OrganizationSharingStatus":"ENABLED"}

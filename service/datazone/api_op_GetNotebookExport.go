@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,21 +39,6 @@ type GetNotebookExportInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetNotebookExportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetNotebookExportInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetNotebookExportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetNotebookExportInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetNotebookExportInput_identifier, *v.Identifier)
-	}
 }
 
 type GetNotebookExportOutput struct {
@@ -114,122 +94,29 @@ type GetNotebookExportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNotebookExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetNotebookExportOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetNotebookExportOutput_completedAt:
-			v.CompletedAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookExportOutput_completedAt, v.CompletedAt)
-		case schemas.GetNotebookExportOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookExportOutput_createdAt, v.CreatedAt)
-		case schemas.GetNotebookExportOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetNotebookExportOutput_createdBy, v.CreatedBy)
-		case schemas.GetNotebookExportOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetNotebookExportOutput_domainId, v.DomainId)
-		case schemas.GetNotebookExportOutput_error:
-			v.Error = &types.NotebookExportError{}
-			return v.Error.Deserialize(d)
-		case schemas.GetNotebookExportOutput_fileFormat:
-			var ev string
-			if err := d.ReadString(schemas.GetNotebookExportOutput_fileFormat, &ev); err != nil {
-				return err
-			}
-			v.FileFormat = types.FileFormat(ev)
-			return nil
-		case schemas.GetNotebookExportOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetNotebookExportOutput_id, v.Id)
-		case schemas.GetNotebookExportOutput_notebookId:
-			v.NotebookId = new(string)
-			return d.ReadString(schemas.GetNotebookExportOutput_notebookId, v.NotebookId)
-		case schemas.GetNotebookExportOutput_outputLocation:
-			return deserializeOutputLocation(d, schemas.GetNotebookExportOutput_outputLocation, &v.OutputLocation)
-		case schemas.GetNotebookExportOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetNotebookExportOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetNotebookExportOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetNotebookExportOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotebookExportStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetNotebookExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotebookExport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookExport, schemas.GetNotebookExportInput, schemas.GetNotebookExportOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotebookExport{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookExport, schemas.GetNotebookExportInput, schemas.GetNotebookExportOutput), output: &GetNotebookExportOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNotebookExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNotebookExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNotebookExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +131,8 @@ func (c *Client) addOperationGetNotebookExportMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetNotebookExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNotebookExport",
-	}
 }

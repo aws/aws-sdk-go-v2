@@ -4,13 +4,8 @@ package migrationhubstrategy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts generating a recommendation report.
@@ -41,35 +36,6 @@ type StartRecommendationReportGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRecommendationReportGenerationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartRecommendationReportGenerationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartRecommendationReportGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIds(s, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, v.GroupIdFilter)
-	if v.OutputFormat != "" {
-		s.WriteString(schemas.StartRecommendationReportGenerationRequest_outputFormat, string(v.OutputFormat))
-	}
-}
-func (v *StartRecommendationReportGenerationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartRecommendationReportGenerationRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartRecommendationReportGenerationRequest_groupIdFilter:
-			return deserializeGroupIds(d, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, &v.GroupIdFilter)
-		case schemas.StartRecommendationReportGenerationRequest_outputFormat:
-			var ev string
-			if err := d.ReadString(schemas.StartRecommendationReportGenerationRequest_outputFormat, &ev); err != nil {
-				return err
-			}
-			v.OutputFormat = types.OutputFormat(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type StartRecommendationReportGenerationOutput struct {
 
 	//  The ID of the recommendation report generation task.
@@ -81,93 +47,26 @@ type StartRecommendationReportGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRecommendationReportGenerationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartRecommendationReportGenerationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartRecommendationReportGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.StartRecommendationReportGenerationResponse_id, *v.Id)
-	}
-}
-func (v *StartRecommendationReportGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartRecommendationReportGenerationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartRecommendationReportGenerationResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartRecommendationReportGenerationResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartRecommendationReportGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecommendationReportGeneration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendationReportGeneration, schemas.StartRecommendationReportGenerationRequest, schemas.StartRecommendationReportGenerationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecommendationReportGeneration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendationReportGeneration, schemas.StartRecommendationReportGenerationRequest, schemas.StartRecommendationReportGenerationResponse), output: &StartRecommendationReportGenerationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRecommendationReportGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRecommendationReportGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +81,8 @@ func (c *Client) addOperationStartRecommendationReportGenerationMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartRecommendationReportGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRecommendationReportGeneration",
-	}
 }

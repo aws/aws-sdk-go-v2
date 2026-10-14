@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListModelVersions
+
+{"CreatedAtEndTime":946684800,"CreatedAtStartTime":946684800,"MaxModelVersion":1,"MaxResults":1,"MinModelVersion":1,"ModelName":"__ModelName__","NextToken":"__NextToken__","SourceType":"TRAINING","Status":"IN_PROGRESS"}

@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Inspects the text of a batch of documents for the syntax and part of speech of
@@ -50,6 +49,19 @@ type BatchDetectSyntaxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSyntaxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSyntaxRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSyntaxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.BatchDetectSyntaxRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCustomerInputStringList(s, schemas.BatchDetectSyntaxRequest_TextList, v.TextList)
+}
+
 type BatchDetectSyntaxOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -74,77 +86,48 @@ type BatchDetectSyntaxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSyntaxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSyntaxResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSyntaxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectSyntaxResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectSyntaxResult(s, schemas.BatchDetectSyntaxResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectSyntaxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectSyntaxResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectSyntaxResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectSyntaxResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectSyntaxResponse_ResultList:
+			return deserializeListOfDetectSyntaxResult(d, schemas.BatchDetectSyntaxResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectSyntax, schemas.BatchDetectSyntaxRequest, schemas.BatchDetectSyntaxResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectSyntax{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectSyntax, schemas.BatchDetectSyntaxRequest, schemas.BatchDetectSyntaxResponse), output: &BatchDetectSyntaxOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectSyntax{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDetectSyntax"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDetectSyntaxValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectSyntax(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +142,8 @@ func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDetectSyntax(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDetectSyntax",
-	}
 }

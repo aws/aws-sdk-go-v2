@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +44,6 @@ type DescribeAssetModelInterfaceRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAssetModelInterfaceRelationshipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAssetModelInterfaceRelationshipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAssetModelInterfaceRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetModelId != nil {
-		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipRequest_assetModelId, *v.AssetModelId)
-	}
-	if v.InterfaceAssetModelId != nil {
-		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipRequest_interfaceAssetModelId, *v.InterfaceAssetModelId)
-	}
-}
-
 type DescribeAssetModelInterfaceRelationshipOutput struct {
 
 	// The ID of the asset model.
@@ -92,80 +74,23 @@ type DescribeAssetModelInterfaceRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAssetModelInterfaceRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAssetModelInterfaceRelationshipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAssetModelInterfaceRelationshipResponse_assetModelId:
-			v.AssetModelId = new(string)
-			return d.ReadString(schemas.DescribeAssetModelInterfaceRelationshipResponse_assetModelId, v.AssetModelId)
-		case schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings:
-			return deserializeHierarchyMappings(d, schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings, &v.HierarchyMappings)
-		case schemas.DescribeAssetModelInterfaceRelationshipResponse_interfaceAssetModelId:
-			v.InterfaceAssetModelId = new(string)
-			return d.ReadString(schemas.DescribeAssetModelInterfaceRelationshipResponse_interfaceAssetModelId, v.InterfaceAssetModelId)
-		case schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings:
-			return deserializePropertyMappings(d, schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings, &v.PropertyMappings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetModelInterfaceRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelInterfaceRelationship, schemas.DescribeAssetModelInterfaceRelationshipRequest, schemas.DescribeAssetModelInterfaceRelationshipResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetModelInterfaceRelationship{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelInterfaceRelationship, schemas.DescribeAssetModelInterfaceRelationshipRequest, schemas.DescribeAssetModelInterfaceRelationshipResponse), output: &DescribeAssetModelInterfaceRelationshipOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetModelInterfaceRelationship"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +100,6 @@ func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(
 		return err
 	}
 	if err = addOpDescribeAssetModelInterfaceRelationshipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetModelInterfaceRelationship(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +112,6 @@ func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -232,12 +145,4 @@ func (m *endpointPrefix_opDescribeAssetModelInterfaceRelationshipMiddleware) Han
 }
 func addEndpointPrefix_opDescribeAssetModelInterfaceRelationshipMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetModelInterfaceRelationshipMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeAssetModelInterfaceRelationship(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAssetModelInterfaceRelationship",
-	}
 }

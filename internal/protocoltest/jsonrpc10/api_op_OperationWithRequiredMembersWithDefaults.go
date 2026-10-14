@@ -4,13 +4,10 @@ package jsonrpc10
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -99,6 +96,52 @@ type OperationWithRequiredMembersWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithRequiredMembersWithDefaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithRequiredMembersWithDefaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithRequiredMembersWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequiredBlob != nil {
+		s.WriteBlob(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBlob, v.RequiredBlob)
+	}
+	if v.RequiredBoolean != nil {
+		s.WriteBool(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBoolean, *v.RequiredBoolean)
+	}
+	if v.RequiredByte != nil {
+		s.WriteInt8(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredByte, *v.RequiredByte)
+	}
+	if v.RequiredDouble != nil {
+		s.WriteFloat64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredDouble, *v.RequiredDouble)
+	}
+	if v.RequiredEnum != "" {
+		s.WriteString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredEnum, string(v.RequiredEnum))
+	}
+	if v.RequiredFloat != nil {
+		s.WriteFloat32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredFloat, *v.RequiredFloat)
+	}
+	if v.RequiredIntEnum != 0 {
+		s.WriteInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredIntEnum, int32(v.RequiredIntEnum))
+	}
+	if v.RequiredInteger != nil {
+		s.WriteInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredInteger, *v.RequiredInteger)
+	}
+	serializeRequiredStringList(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList, v.RequiredList)
+	if v.RequiredLong != nil {
+		s.WriteInt64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredLong, *v.RequiredLong)
+	}
+	serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap, v.RequiredMap)
+	if v.RequiredShort != nil {
+		s.WriteInt16(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredShort, *v.RequiredShort)
+	}
+	if v.RequiredString != nil {
+		s.WriteString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredString, *v.RequiredString)
+	}
+	if v.RequiredTimestamp != nil {
+		s.WriteTime(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredTimestamp, *v.RequiredTimestamp)
+	}
+}
 func (v *OperationWithRequiredMembersWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithRequiredMembersWithDefaultsOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -154,71 +197,23 @@ func (v *OperationWithRequiredMembersWithDefaultsOutput) Deserialize(d smithy.Sh
 	})
 }
 func (c *Client) addOperationOperationWithRequiredMembersWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithRequiredMembersWithDefaults, nil, schemas.OperationWithRequiredMembersWithDefaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithRequiredMembersWithDefaults, nil, schemas.OperationWithRequiredMembersWithDefaultsOutput), output: &OperationWithRequiredMembersWithDefaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithRequiredMembersWithDefaults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithRequiredMembersWithDefaults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,22 +228,8 @@ func (c *Client) addOperationOperationWithRequiredMembersWithDefaultsMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opOperationWithRequiredMembersWithDefaults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "OperationWithRequiredMembersWithDefaults",
-	}
 }

@@ -1,0 +1,5 @@
+PATCH /crl/__CrlId__
+
+Content-Type: application/json
+
+{"crlData":"YmxvYg==","name":"__Name__"}

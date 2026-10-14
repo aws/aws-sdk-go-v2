@@ -5,12 +5,8 @@ package marketplacedeployment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -72,36 +68,6 @@ type PutDeploymentParameterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDeploymentParameterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutDeploymentParameterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutDeploymentParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementId != nil {
-		s.WriteString(schemas.PutDeploymentParameterRequest_agreementId, *v.AgreementId)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.PutDeploymentParameterRequest_catalog, *v.Catalog)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.PutDeploymentParameterRequest_clientToken, *v.ClientToken)
-	}
-	if v.DeploymentParameter != nil {
-		s.WriteStruct(schemas.PutDeploymentParameterRequest_deploymentParameter)
-		v.DeploymentParameter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExpirationDate != nil {
-		s.WriteTime(schemas.PutDeploymentParameterRequest_expirationDate, *v.ExpirationDate)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.PutDeploymentParameterRequest_productId, *v.ProductId)
-	}
-	serializeTagsMap(s, schemas.PutDeploymentParameterRequest_tags, v.Tags)
-}
-
 type PutDeploymentParameterOutput struct {
 
 	// The unique identifier of the agreement.
@@ -131,81 +97,23 @@ type PutDeploymentParameterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDeploymentParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutDeploymentParameterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutDeploymentParameterResponse_agreementId:
-			v.AgreementId = new(string)
-			return d.ReadString(schemas.PutDeploymentParameterResponse_agreementId, v.AgreementId)
-		case schemas.PutDeploymentParameterResponse_deploymentParameterId:
-			v.DeploymentParameterId = new(string)
-			return d.ReadString(schemas.PutDeploymentParameterResponse_deploymentParameterId, v.DeploymentParameterId)
-		case schemas.PutDeploymentParameterResponse_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.PutDeploymentParameterResponse_resourceArn, v.ResourceArn)
-		case schemas.PutDeploymentParameterResponse_tags:
-			return deserializeTagsMap(d, schemas.PutDeploymentParameterResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutDeploymentParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDeploymentParameter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeploymentParameter, schemas.PutDeploymentParameterRequest, schemas.PutDeploymentParameterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDeploymentParameter{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeploymentParameter, schemas.PutDeploymentParameterRequest, schemas.PutDeploymentParameterResponse), output: &PutDeploymentParameterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDeploymentParameter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -215,12 +123,6 @@ func (c *Client) addOperationPutDeploymentParameterMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpPutDeploymentParameterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDeploymentParameter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,12 +135,6 @@ func (c *Client) addOperationPutDeploymentParameterMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,12 +174,4 @@ func (m *idempotencyToken_initializeOpPutDeploymentParameter) HandleInitialize(c
 }
 func addIdempotencyToken_opPutDeploymentParameterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutDeploymentParameter{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutDeploymentParameter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDeploymentParameter",
-	}
 }

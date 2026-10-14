@@ -1,0 +1,5 @@
+POST /list-rules
+
+Content-Type: application/json
+
+{"ExcludeResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"LockState":"locked","MaxResults":1,"NextToken":"__NextToken__","ResourceTags":[{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"},{"ResourceTagKey":"__ResourceTagKey__","ResourceTagValue":"__ResourceTagValue__"}],"ResourceType":"EBS_SNAPSHOT"}

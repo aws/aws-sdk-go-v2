@@ -4,13 +4,8 @@ package securityir
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information on whether the supplied account IDs are associated with a
@@ -57,19 +52,6 @@ type BatchGetMemberAccountDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetMemberAccountDetailsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetMemberAccountDetailsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetMemberAccountDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAWSAccountIds(s, schemas.BatchGetMemberAccountDetailsRequest_accountIds, v.AccountIds)
-	if v.MembershipId != nil {
-		s.WriteString(schemas.BatchGetMemberAccountDetailsRequest_membershipId, *v.MembershipId)
-	}
-}
-
 type BatchGetMemberAccountDetailsOutput struct {
 
 	// The response element providing error messages for requests to
@@ -86,86 +68,29 @@ type BatchGetMemberAccountDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetMemberAccountDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetMemberAccountDetailsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetMemberAccountDetailsResponse_errors:
-			return deserializeGetMembershipAccountDetailErrors(d, schemas.BatchGetMemberAccountDetailsResponse_errors, &v.Errors)
-		case schemas.BatchGetMemberAccountDetailsResponse_items:
-			return deserializeGetMembershipAccountDetailItems(d, schemas.BatchGetMemberAccountDetailsResponse_items, &v.Items)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetMemberAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMemberAccountDetails{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMemberAccountDetails, schemas.BatchGetMemberAccountDetailsRequest, schemas.BatchGetMemberAccountDetailsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMemberAccountDetails{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMemberAccountDetails, schemas.BatchGetMemberAccountDetailsRequest, schemas.BatchGetMemberAccountDetailsResponse), output: &BatchGetMemberAccountDetailsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetMemberAccountDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetMemberAccountDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetMemberAccountDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +105,8 @@ func (c *Client) addOperationBatchGetMemberAccountDetailsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetMemberAccountDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetMemberAccountDetails",
-	}
 }

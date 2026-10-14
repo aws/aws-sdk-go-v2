@@ -1,0 +1,5 @@
+POST /UpdateFinding
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","attackScript":"__AttackScript__","customerNote":"__CustomerNote__","description":"__Description__","findingId":"__FindingId__","name":"__Name__","reasoning":"__Reasoning__","riskLevel":"UNKNOWN","riskScore":"__RiskScore__","riskType":"__RiskType__","status":"ACTIVE"}

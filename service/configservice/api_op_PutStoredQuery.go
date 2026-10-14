@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Saves a new query or updates an existing saved query. The QueryName must be
@@ -56,6 +55,21 @@ type PutStoredQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutStoredQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutStoredQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutStoredQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StoredQuery != nil {
+		s.WriteStruct(schemas.PutStoredQueryRequest_StoredQuery)
+		v.StoredQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsList(s, schemas.PutStoredQueryRequest_Tags, v.Tags)
+}
+
 type PutStoredQueryOutput struct {
 
 	// Amazon Resource Name (ARN) of the query. For example,
@@ -68,77 +82,48 @@ type PutStoredQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutStoredQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutStoredQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutStoredQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryArn != nil {
+		s.WriteString(schemas.PutStoredQueryResponse_QueryArn, *v.QueryArn)
+	}
+}
+func (v *PutStoredQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutStoredQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutStoredQueryResponse_QueryArn:
+			v.QueryArn = new(string)
+			return d.ReadString(schemas.PutStoredQueryResponse_QueryArn, v.QueryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutStoredQuery, schemas.PutStoredQueryRequest, schemas.PutStoredQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutStoredQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutStoredQuery, schemas.PutStoredQueryRequest, schemas.PutStoredQueryResponse), output: &PutStoredQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutStoredQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutStoredQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutStoredQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutStoredQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +138,8 @@ func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutStoredQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutStoredQuery",
-	}
 }

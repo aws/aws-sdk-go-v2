@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This request accepts a list of filters that retrieve opportunity subsets as
@@ -110,6 +110,48 @@ type ListOpportunitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpportunitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpportunitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpportunitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListOpportunitiesRequest_Catalog, *v.Catalog)
+	}
+	if v.CreatedDate != nil {
+		s.WriteStruct(schemas.ListOpportunitiesRequest_CreatedDate)
+		v.CreatedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.ListOpportunitiesRequest_CustomerCompanyName, v.CustomerCompanyName)
+	serializeFilterIdentifier(s, schemas.ListOpportunitiesRequest_Identifier, v.Identifier)
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.ListOpportunitiesRequest_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFilterLifeCycleReviewStatus(s, schemas.ListOpportunitiesRequest_LifeCycleReviewStatus, v.LifeCycleReviewStatus)
+	serializeFilterLifeCycleStage(s, schemas.ListOpportunitiesRequest_LifeCycleStage, v.LifeCycleStage)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOpportunitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpportunitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListOpportunitiesRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetCloseDate != nil {
+		s.WriteStruct(schemas.ListOpportunitiesRequest_TargetCloseDate)
+		v.TargetCloseDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListOpportunitiesOutput struct {
 
 	// An array that contains minimal details for opportunities that match the request
@@ -129,77 +171,51 @@ type ListOpportunitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpportunitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpportunitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpportunitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpportunitiesResponse_NextToken, *v.NextToken)
+	}
+	serializeOpportunitySummaries(s, schemas.ListOpportunitiesResponse_OpportunitySummaries, v.OpportunitySummaries)
+}
+func (v *ListOpportunitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpportunitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpportunitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOpportunitiesResponse_NextToken, v.NextToken)
+		case schemas.ListOpportunitiesResponse_OpportunitySummaries:
+			return deserializeOpportunitySummaries(d, schemas.ListOpportunitiesResponse_OpportunitySummaries, &v.OpportunitySummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpportunitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpportunities, schemas.ListOpportunitiesRequest, schemas.ListOpportunitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOpportunities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpportunities, schemas.ListOpportunitiesRequest, schemas.ListOpportunitiesResponse), output: &ListOpportunitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOpportunities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOpportunities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListOpportunitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOpportunities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +228,6 @@ func (c *Client) addOperationListOpportunitiesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -322,11 +332,3 @@ type ListOpportunitiesAPIClient interface {
 }
 
 var _ ListOpportunitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOpportunities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOpportunities",
-	}
-}

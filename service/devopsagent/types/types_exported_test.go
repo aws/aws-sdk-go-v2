@@ -45,6 +45,12 @@ func ExampleAdditionalServiceDetails_outputUsage() {
 	case *types.AdditionalServiceDetailsMemberPagerduty:
 		_ = v.Value // Value is types.RegisteredPagerDutyDetails
 
+	case *types.AdditionalServiceDetailsMemberRemoteagent:
+		_ = v.Value // Value is types.RegisteredRemoteAgentDetails
+
+	case *types.AdditionalServiceDetailsMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RegisteredRemoteAgentSigV4Details
+
 	case *types.AdditionalServiceDetailsMemberServicenow:
 		_ = v.Value // Value is types.RegisteredServiceNowDetails
 
@@ -60,13 +66,15 @@ func ExampleAdditionalServiceDetails_outputUsage() {
 	}
 }
 
-var _ *types.RegisteredMCPServerDetails
-var _ *types.RegisteredAzureDevOpsServiceDetails
+var _ *types.RegisteredRemoteAgentDetails
 var _ *types.RegisteredNewRelicDetails
-var _ *types.RegisteredAzureIdentityDetails
 var _ *types.RegisteredGithubServiceDetails
-var _ *types.RegisteredSlackServiceDetails
 var _ *types.RegisteredGitLabServiceDetails
+var _ *types.RegisteredMCPServerDetails
+var _ *types.RegisteredRemoteAgentSigV4Details
+var _ *types.RegisteredAzureDevOpsServiceDetails
+var _ *types.RegisteredAzureIdentityDetails
+var _ *types.RegisteredSlackServiceDetails
 var _ *types.RegisteredPagerDutyDetails
 var _ *types.RegisteredMCPServerSigV4Details
 var _ *types.RegisteredGrafanaServerDetails
@@ -89,6 +97,54 @@ func ExampleAdditionalServiceRegistrationStep_outputUsage() {
 }
 
 var _ *types.OAuthAdditionalStepDetails
+
+func ExampleAssetContent_outputUsage() {
+	var union types.AssetContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssetContentMemberFile:
+		_ = v.Value // Value is types.AssetFileContent
+
+	case *types.AssetContentMemberSourceUrl:
+		_ = v.Value // Value is types.AssetSourceUrlContent
+
+	case *types.AssetContentMemberZip:
+		_ = v.Value // Value is types.AssetZipContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AssetFileContent
+var _ *types.AssetZipContent
+var _ *types.AssetSourceUrlContent
+
+func ExampleAssetFileBody_outputUsage() {
+	var union types.AssetFileBody
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssetFileBodyMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.AssetFileBodyMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
 
 func ExampleAssistantMessageBlock_outputUsage() {
 	var union types.AssistantMessageBlock
@@ -161,6 +217,9 @@ func ExampleMCPServerAuthorizationConfig_outputUsage() {
 	case *types.MCPServerAuthorizationConfigMemberBearerToken:
 		_ = v.Value // Value is types.MCPServerBearerTokenConfig
 
+	case *types.MCPServerAuthorizationConfigMemberCustomHeaders:
+		_ = v.Value // Value is types.MCPServerCustomHeadersConfig
+
 	case *types.MCPServerAuthorizationConfigMemberOAuth3LO:
 		_ = v.Value // Value is types.MCPServerOAuth3LOConfig
 
@@ -178,6 +237,7 @@ func ExampleMCPServerAuthorizationConfig_outputUsage() {
 
 var _ *types.MCPServerAPIKeyConfig
 var _ *types.MCPServerOAuth3LOConfig
+var _ *types.MCPServerCustomHeadersConfig
 var _ *types.MCPServerOAuthClientCredentialsConfig
 var _ *types.MCPServerAuthorizationDiscoveryConfig
 var _ *types.MCPServerBearerTokenConfig
@@ -203,6 +263,24 @@ func ExampleMessage_outputUsage() {
 
 var _ []types.AssistantMessageBlock
 var _ []types.UserMessageBlock
+
+func ExampleNetworkAccessConfiguration_outputUsage() {
+	var union types.NetworkAccessConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NetworkAccessConfigurationMemberPrivateAccess:
+		_ = v.Value // Value is types.PrivateNetworkAccess
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PrivateNetworkAccess
 
 func ExampleNewRelicServiceAuthorizationConfig_outputUsage() {
 	var union types.NewRelicServiceAuthorizationConfig
@@ -261,6 +339,80 @@ func ExamplePrivateConnectionMode_outputUsage() {
 
 var _ *types.SelfManagedInput
 var _ *types.ServiceManagedInput
+
+func ExampleRecurrence_outputUsage() {
+	var union types.Recurrence
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecurrenceMemberDaily:
+		_ = v.Value // Value is types.DailyRecurrence
+
+	case *types.RecurrenceMemberMonthly:
+		_ = v.Value // Value is types.MonthlyRecurrence
+
+	case *types.RecurrenceMemberWeekly:
+		_ = v.Value // Value is types.WeeklyRecurrence
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MonthlyRecurrence
+var _ *types.DailyRecurrence
+var _ *types.WeeklyRecurrence
+
+func ExampleRemoteAgentAuthorizationConfig_outputUsage() {
+	var union types.RemoteAgentAuthorizationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RemoteAgentAuthorizationConfigMemberApiKey:
+		_ = v.Value // Value is types.RemoteAgentAPIKeyConfig
+
+	case *types.RemoteAgentAuthorizationConfigMemberBearerToken:
+		_ = v.Value // Value is types.RemoteAgentBearerTokenConfig
+
+	case *types.RemoteAgentAuthorizationConfigMemberOAuthClientCredentials:
+		_ = v.Value // Value is types.RemoteAgentOAuthClientCredentialsConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RemoteAgentAPIKeyConfig
+var _ *types.RemoteAgentBearerTokenConfig
+var _ *types.RemoteAgentOAuthClientCredentialsConfig
+
+func ExampleScheduleSpec_outputUsage() {
+	var union types.ScheduleSpec
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ScheduleSpecMemberCron:
+		_ = v.Value // Value is types.CronSchedule
+
+	case *types.ScheduleSpecMemberTimeRange:
+		_ = v.Value // Value is types.TimeRangeSchedule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TimeRangeSchedule
+var _ *types.CronSchedule
 
 func ExampleSendMessageContentBlockDelta_outputUsage() {
 	var union types.SendMessageContentBlockDelta
@@ -380,6 +532,15 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
 
+	case *types.ServiceConfigurationMemberReleaseManagement:
+		_ = v.Value // Value is types.ReleaseManagementConfiguration
+
+	case *types.ServiceConfigurationMemberRemoteagent:
+		_ = v.Value // Value is types.RemoteAgentConfiguration
+
+	case *types.ServiceConfigurationMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RemoteAgentSigV4Configuration
+
 	case *types.ServiceConfigurationMemberServicenow:
 		_ = v.Value // Value is types.ServiceNowConfiguration
 
@@ -399,6 +560,7 @@ func ExampleServiceConfiguration_outputUsage() {
 }
 
 var _ *types.AzureDevOpsConfiguration
+var _ *types.RemoteAgentSigV4Configuration
 var _ *types.MCPServerNewRelicConfiguration
 var _ *types.DynatraceConfiguration
 var _ *types.PagerDutyConfiguration
@@ -411,9 +573,11 @@ var _ *types.MCPServerConfiguration
 var _ *types.AzureConfiguration
 var _ *types.SlackConfiguration
 var _ *types.MCPServerDatadogConfiguration
+var _ *types.RemoteAgentConfiguration
 var _ *types.MCPServerGrafanaConfiguration
 var _ *types.SourceAwsConfiguration
 var _ *types.AWSConfiguration
+var _ *types.ReleaseManagementConfiguration
 var _ *types.GitHubConfiguration
 
 func ExampleServiceDetails_outputUsage() {
@@ -453,6 +617,12 @@ func ExampleServiceDetails_outputUsage() {
 	case *types.ServiceDetailsMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyDetails
 
+	case *types.ServiceDetailsMemberRemoteagent:
+		_ = v.Value // Value is types.RemoteAgentServiceDetails
+
+	case *types.ServiceDetailsMemberRemoteagentsigv4:
+		_ = v.Value // Value is types.RemoteAgentSigV4ServiceDetails
+
 	case *types.ServiceDetailsMemberServicenow:
 		_ = v.Value // Value is types.ServiceNowServiceDetails
 
@@ -469,13 +639,15 @@ var _ *types.GrafanaServiceDetails
 var _ *types.MCPServerSigV4ServiceDetails
 var _ *types.DynatraceServiceDetails
 var _ *types.ServiceNowServiceDetails
-var _ *types.RegisteredAzureIdentityDetails
-var _ *types.DatadogServiceDetails
-var _ *types.NewRelicServiceDetails
+var _ *types.RemoteAgentServiceDetails
 var _ *types.PagerDutyDetails
 var _ *types.MCPServerDetails
 var _ *types.EventChannelDetails
 var _ *types.GitLabDetails
+var _ *types.RegisteredAzureIdentityDetails
+var _ *types.DatadogServiceDetails
+var _ *types.RemoteAgentSigV4ServiceDetails
+var _ *types.NewRelicServiceDetails
 
 func ExampleServiceNowServiceAuthorizationConfig_outputUsage() {
 	var union types.ServiceNowServiceAuthorizationConfig
@@ -494,6 +666,24 @@ func ExampleServiceNowServiceAuthorizationConfig_outputUsage() {
 }
 
 var _ *types.ServiceNowOAuthClientCredentialsConfig
+
+func ExampleTriggerCondition_outputUsage() {
+	var union types.TriggerCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerConditionMemberSchedule:
+		_ = v.Value // Value is types.ScheduleCondition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ScheduleCondition
 
 func ExampleUserMessageBlock_outputUsage() {
 	var union types.UserMessageBlock

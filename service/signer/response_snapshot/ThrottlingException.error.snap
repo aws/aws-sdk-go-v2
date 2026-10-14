@@ -1,0 +1,4 @@
+429
+Content-Type: application/json
+
+{"__type":"ThrottlingException","code":"ThrottlingException","message":"__Message__"}

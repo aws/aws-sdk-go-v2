@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersion":"__BotVersion__","customVocabularyItems":[{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1},{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1}],"localeId":"__LocaleId__","nextToken":"__NextToken__"}

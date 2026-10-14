@@ -5,12 +5,8 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of child objects that are associated with a given
@@ -58,32 +54,6 @@ type ListObjectChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectChildrenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListObjectChildrenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListObjectChildrenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsistencyLevel != "" {
-		s.WriteString(schemas.ListObjectChildrenRequest_ConsistencyLevel, string(v.ConsistencyLevel))
-	}
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.ListObjectChildrenRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListObjectChildrenRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListObjectChildrenRequest_NextToken, *v.NextToken)
-	}
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.ListObjectChildrenRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListObjectChildrenOutput struct {
 
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
@@ -99,87 +69,29 @@ type ListObjectChildrenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectChildrenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListObjectChildrenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListObjectChildrenResponse_Children:
-			return deserializeLinkNameToObjectIdentifierMap(d, schemas.ListObjectChildrenResponse_Children, &v.Children)
-		case schemas.ListObjectChildrenResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListObjectChildrenResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListObjectChildrenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectChildren{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectChildren, schemas.ListObjectChildrenRequest, schemas.ListObjectChildrenResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectChildren{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectChildren, schemas.ListObjectChildrenRequest, schemas.ListObjectChildrenResponse), output: &ListObjectChildrenOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectChildren"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListObjectChildrenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectChildren(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +104,6 @@ func (c *Client) addOperationListObjectChildrenMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -300,11 +206,3 @@ type ListObjectChildrenAPIClient interface {
 }
 
 var _ ListObjectChildrenAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListObjectChildren(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListObjectChildren",
-	}
-}

@@ -1,0 +1,3 @@
+GET /v20190125/meshes/__MeshName__/virtualGateways/__VirtualGatewayName__?meshOwner=__MeshOwner__
+
+

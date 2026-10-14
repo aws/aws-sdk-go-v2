@@ -1,0 +1,5 @@
+POST /2025-09-09/microvms/__MicrovmIdentifier__/auth-token
+
+Content-Type: application/json
+
+{"allowedPorts":[{"port":1},{"port":1}],"expirationInMinutes":1}

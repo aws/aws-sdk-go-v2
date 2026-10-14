@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the resource permissions for a knowledge base.
@@ -42,6 +41,21 @@ type DescribeKnowledgeBasePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKnowledgeBasePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKnowledgeBasePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKnowledgeBasePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBasePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBasePermissionsRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DescribeKnowledgeBasePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the knowledge base.
@@ -69,77 +83,69 @@ type DescribeKnowledgeBasePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKnowledgeBasePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKnowledgeBasePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKnowledgeBasePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseArn != nil {
+		s.WriteString(schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseArn, *v.KnowledgeBaseArn)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeKnowledgeBasePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.DescribeKnowledgeBasePermissionsResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeKnowledgeBasePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeKnowledgeBasePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseArn:
+			v.KnowledgeBaseArn = new(string)
+			return d.ReadString(schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseArn, v.KnowledgeBaseArn)
+		case schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.DescribeKnowledgeBasePermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeKnowledgeBasePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeKnowledgeBasePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeKnowledgeBasePermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeKnowledgeBasePermissionsResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.DescribeKnowledgeBasePermissionsResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeKnowledgeBasePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKnowledgeBasePermissions, schemas.DescribeKnowledgeBasePermissionsRequest, schemas.DescribeKnowledgeBasePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeKnowledgeBasePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKnowledgeBasePermissions, schemas.DescribeKnowledgeBasePermissionsRequest, schemas.DescribeKnowledgeBasePermissionsResponse), output: &DescribeKnowledgeBasePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeKnowledgeBasePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeKnowledgeBasePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeKnowledgeBasePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKnowledgeBasePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +160,8 @@ func (c *Client) addOperationDescribeKnowledgeBasePermissionsMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeKnowledgeBasePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeKnowledgeBasePermissions",
-	}
 }

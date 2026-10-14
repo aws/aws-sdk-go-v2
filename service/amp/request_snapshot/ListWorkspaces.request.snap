@@ -1,0 +1,3 @@
+GET /workspaces?alias=__Alias__&maxResults=1&nextToken=__NextToken__
+
+

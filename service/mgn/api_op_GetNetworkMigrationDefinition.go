@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,10 +38,27 @@ type GetNetworkMigrationDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkMigrationDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.GetNetworkMigrationDefinitionRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+}
+
 type GetNetworkMigrationDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the network migration definition.
 	Arn *string
+
+	// A list of CIDR mappings that map original source CIDR ranges to updated target
+	// CIDR ranges. CIDR mappings apply only when vpcProvisioningStrategy is set to
+	// USE_EXISTING .
+	CidrMappings []types.CidrMapping
 
 	// The timestamp when the network migration definition was created.
 	CreatedAt *time.Time
@@ -77,83 +93,137 @@ type GetNetworkMigrationDefinitionOutput struct {
 	// The timestamp when the network migration definition was last updated.
 	UpdatedAt *time.Time
 
+	// Indicates whether the migration creates new target VPCs or uses existing ones.
+	// CREATE_NEW provisions new target VPCs; USE_EXISTING migrates into existing VPCs
+	// in the target account.
+	VpcProvisioningStrategy types.VpcProvisioningStrategy
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkMigrationDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_arn, *v.Arn)
+	}
+	serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_name, *v.Name)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
+	serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
+	serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	if v.TargetDeployment != "" {
+		s.WriteString(schemas.NetworkMigrationDefinition_targetDeployment, string(v.TargetDeployment))
+	}
+	if v.TargetNetwork != nil {
+		s.WriteStruct(schemas.NetworkMigrationDefinition_targetNetwork)
+		v.TargetNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetS3Configuration != nil {
+		s.WriteStruct(schemas.NetworkMigrationDefinition_targetS3Configuration)
+		v.TargetS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationDefinition_updatedAt, *v.UpdatedAt)
+	}
+	if v.VpcProvisioningStrategy != "" {
+		s.WriteString(schemas.NetworkMigrationDefinition_vpcProvisioningStrategy, string(v.VpcProvisioningStrategy))
+	}
+}
+func (v *GetNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkMigrationDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkMigrationDefinition_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_arn, v.Arn)
+		case schemas.NetworkMigrationDefinition_cidrMappings:
+			return deserializeCidrMappingsList(d, schemas.NetworkMigrationDefinition_cidrMappings, &v.CidrMappings)
+		case schemas.NetworkMigrationDefinition_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationDefinition_createdAt, v.CreatedAt)
+		case schemas.NetworkMigrationDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_description, v.Description)
+		case schemas.NetworkMigrationDefinition_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_name, v.Name)
+		case schemas.NetworkMigrationDefinition_networkMigrationDefinitionID:
+			v.NetworkMigrationDefinitionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, v.NetworkMigrationDefinitionID)
+		case schemas.NetworkMigrationDefinition_scopeTags:
+			return deserializeScopeTagsMap(d, schemas.NetworkMigrationDefinition_scopeTags, &v.ScopeTags)
+		case schemas.NetworkMigrationDefinition_sourceConfigurations:
+			return deserializeSourceConfigurationList(d, schemas.NetworkMigrationDefinition_sourceConfigurations, &v.SourceConfigurations)
+		case schemas.NetworkMigrationDefinition_tags:
+			return deserializeTagsMap(d, schemas.NetworkMigrationDefinition_tags, &v.Tags)
+		case schemas.NetworkMigrationDefinition_targetDeployment:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinition_targetDeployment, &ev); err != nil {
+				return err
+			}
+			v.TargetDeployment = types.TargetDeployment(ev)
+			return nil
+		case schemas.NetworkMigrationDefinition_targetNetwork:
+			v.TargetNetwork = &types.TargetNetwork{}
+			return v.TargetNetwork.Deserialize(d)
+		case schemas.NetworkMigrationDefinition_targetS3Configuration:
+			v.TargetS3Configuration = &types.TargetS3Configuration{}
+			return v.TargetS3Configuration.Deserialize(d)
+		case schemas.NetworkMigrationDefinition_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationDefinition_updatedAt, v.UpdatedAt)
+		case schemas.NetworkMigrationDefinition_vpcProvisioningStrategy:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinition_vpcProvisioningStrategy, &ev); err != nil {
+				return err
+			}
+			v.VpcProvisioningStrategy = types.VpcProvisioningStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkMigrationDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationDefinition, schemas.GetNetworkMigrationDefinitionRequest, schemas.NetworkMigrationDefinition)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkMigrationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationDefinition, schemas.GetNetworkMigrationDefinitionRequest, schemas.NetworkMigrationDefinition), output: &GetNetworkMigrationDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkMigrationDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNetworkMigrationDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNetworkMigrationDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetworkMigrationDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +238,8 @@ func (c *Client) addOperationGetNetworkMigrationDefinitionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetNetworkMigrationDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNetworkMigrationDefinition",
-	}
 }

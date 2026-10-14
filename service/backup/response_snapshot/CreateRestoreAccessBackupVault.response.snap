@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationDate":946684800,"RestoreAccessBackupVaultArn":"__RestoreAccessBackupVaultArn__","RestoreAccessBackupVaultName":"__RestoreAccessBackupVaultName__","VaultState":"CREATING"}

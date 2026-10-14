@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.DescribeCustomDomains
+
+{"MaxResults":1,"NextToken":"__NextToken__","ServiceArn":"__ServiceArn__"}

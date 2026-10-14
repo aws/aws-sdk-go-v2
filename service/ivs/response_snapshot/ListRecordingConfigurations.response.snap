@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","recordingConfigurations":[{"arn":"__Arn__","destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"}},{"arn":"__Arn__","destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"}}]}

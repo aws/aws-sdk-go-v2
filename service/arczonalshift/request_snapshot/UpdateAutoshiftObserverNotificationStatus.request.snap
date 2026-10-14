@@ -1,0 +1,5 @@
+PUT /autoshift-observer-notification
+
+Content-Type: application/json
+
+{"status":"ENABLED"}

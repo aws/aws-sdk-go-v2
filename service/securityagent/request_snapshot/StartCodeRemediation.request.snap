@@ -1,0 +1,5 @@
+POST /StartCodeRemediation
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewJobId":"__CodeReviewJobId__","findingIds":["__Member__","__Member__"],"pentestJobId":"__PentestJobId__"}

@@ -1,0 +1,3 @@
+GET /greengrass/definition/subscriptions/__SubscriptionDefinitionId__/versions?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

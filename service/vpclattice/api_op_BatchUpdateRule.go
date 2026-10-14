@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the listener rules in a batch. You can use this operation to change the
@@ -55,6 +54,37 @@ type BatchUpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.BatchUpdateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	serializeRuleUpdateList(s, schemas.BatchUpdateRuleRequest_rules, v.Rules)
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.BatchUpdateRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *BatchUpdateRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRuleRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.BatchUpdateRuleRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.BatchUpdateRuleRequest_rules:
+			return deserializeRuleUpdateList(d, schemas.BatchUpdateRuleRequest_rules, &v.Rules)
+		case schemas.BatchUpdateRuleRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.BatchUpdateRuleRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type BatchUpdateRuleOutput struct {
 
 	// The rules that were successfully updated.
@@ -69,77 +99,48 @@ type BatchUpdateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleUpdateSuccessList(s, schemas.BatchUpdateRuleResponse_successful, v.Successful)
+	serializeRuleUpdateFailureList(s, schemas.BatchUpdateRuleResponse_unsuccessful, v.Unsuccessful)
+}
+func (v *BatchUpdateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRuleResponse_successful:
+			return deserializeRuleUpdateSuccessList(d, schemas.BatchUpdateRuleResponse_successful, &v.Successful)
+		case schemas.BatchUpdateRuleResponse_unsuccessful:
+			return deserializeRuleUpdateFailureList(d, schemas.BatchUpdateRuleResponse_unsuccessful, &v.Unsuccessful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRule, schemas.BatchUpdateRuleRequest, schemas.BatchUpdateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRule, schemas.BatchUpdateRuleRequest, schemas.BatchUpdateRuleResponse), output: &BatchUpdateRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +155,8 @@ func (c *Client) addOperationBatchUpdateRuleMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateRule",
-	}
 }

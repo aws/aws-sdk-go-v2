@@ -4,12 +4,11 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables enhanced Kinesis data stream monitoring for shard-level metrics.
@@ -75,6 +74,24 @@ type EnableEnhancedMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableEnhancedMonitoringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableEnhancedMonitoringInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableEnhancedMonitoringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricsNameList(s, schemas.EnableEnhancedMonitoringInput_ShardLevelMetrics, v.ShardLevelMetrics)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamName, *v.StreamName)
+	}
+}
 func (in *EnableEnhancedMonitoringInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -105,77 +122,63 @@ type EnableEnhancedMonitoringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableEnhancedMonitoringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnhancedMonitoringOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableEnhancedMonitoringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, v.CurrentShardLevelMetrics)
+	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, v.DesiredShardLevelMetrics)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.EnhancedMonitoringOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.EnhancedMonitoringOutput_StreamName, *v.StreamName)
+	}
+}
+func (v *EnableEnhancedMonitoringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnhancedMonitoringOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics:
+			return deserializeMetricsNameList(d, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, &v.CurrentShardLevelMetrics)
+		case schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics:
+			return deserializeMetricsNameList(d, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, &v.DesiredShardLevelMetrics)
+		case schemas.EnhancedMonitoringOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.EnhancedMonitoringOutput_StreamARN, v.StreamARN)
+		case schemas.EnhancedMonitoringOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.EnhancedMonitoringOutput_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableEnhancedMonitoring, schemas.EnableEnhancedMonitoringInput, schemas.EnhancedMonitoringOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableEnhancedMonitoring{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableEnhancedMonitoring, schemas.EnableEnhancedMonitoringInput, schemas.EnhancedMonitoringOutput), output: &EnableEnhancedMonitoringOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableEnhancedMonitoring{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableEnhancedMonitoring"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEnableEnhancedMonitoringValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableEnhancedMonitoring(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +193,8 @@ func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEnableEnhancedMonitoring(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableEnhancedMonitoring",
-	}
 }

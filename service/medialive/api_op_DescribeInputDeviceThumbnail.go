@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"time"
 )
@@ -45,6 +44,21 @@ type DescribeInputDeviceThumbnailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputDeviceThumbnailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputDeviceThumbnailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputDeviceThumbnailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != "" {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailRequest_Accept, string(v.Accept))
+	}
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
 type DescribeInputDeviceThumbnailOutput struct {
 
@@ -70,74 +84,78 @@ type DescribeInputDeviceThumbnailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputDeviceThumbnailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputDeviceThumbnailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputDeviceThumbnailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.DescribeInputDeviceThumbnailResponse_ContentLength, *v.ContentLength)
+	}
+	if v.ContentType != "" {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailResponse_ContentType, string(v.ContentType))
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.DescribeInputDeviceThumbnailResponse_ETag, *v.ETag)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.DescribeInputDeviceThumbnailResponse_LastModified, *v.LastModified)
+	}
+}
+func (v *DescribeInputDeviceThumbnailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInputDeviceThumbnailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInputDeviceThumbnailResponse_ContentLength:
+			v.ContentLength = new(int64)
+			return d.ReadInt64(schemas.DescribeInputDeviceThumbnailResponse_ContentLength, v.ContentLength)
+		case schemas.DescribeInputDeviceThumbnailResponse_ContentType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputDeviceThumbnailResponse_ContentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = types.ContentType(ev)
+			return nil
+		case schemas.DescribeInputDeviceThumbnailResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.DescribeInputDeviceThumbnailResponse_ETag, v.ETag)
+		case schemas.DescribeInputDeviceThumbnailResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.DescribeInputDeviceThumbnailResponse_LastModified, v.LastModified)
+		}
+		return nil
+	})
+}
+func (v *DescribeInputDeviceThumbnailOutput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*DescribeInputDeviceThumbnailOutput)(nil)
+
+func (v *DescribeInputDeviceThumbnailOutput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*DescribeInputDeviceThumbnailOutput)(nil)
+
 func (c *Client) addOperationDescribeInputDeviceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputDeviceThumbnail, schemas.DescribeInputDeviceThumbnailRequest, schemas.DescribeInputDeviceThumbnailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInputDeviceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInputDeviceThumbnail, schemas.DescribeInputDeviceThumbnailRequest, schemas.DescribeInputDeviceThumbnailResponse), output: &DescribeInputDeviceThumbnailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInputDeviceThumbnail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInputDeviceThumbnail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInputDeviceThumbnailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInputDeviceThumbnail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +170,8 @@ func (c *Client) addOperationDescribeInputDeviceThumbnailMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInputDeviceThumbnail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInputDeviceThumbnail",
-	}
 }

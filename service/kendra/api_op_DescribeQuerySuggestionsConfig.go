@@ -4,13 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -127,6 +124,46 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuerySuggestionsConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuerySuggestionsConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuerySuggestionsConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeSuggestionsConfig != nil {
+		s.WriteStruct(schemas.DescribeQuerySuggestionsConfigResponse_AttributeSuggestionsConfig)
+		v.AttributeSuggestionsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeQueriesWithoutUserInformation != nil {
+		s.WriteBool(schemas.DescribeQuerySuggestionsConfigResponse_IncludeQueriesWithoutUserInformation, *v.IncludeQueriesWithoutUserInformation)
+	}
+	if v.LastClearTime != nil {
+		s.WriteTime(schemas.DescribeQuerySuggestionsConfigResponse_LastClearTime, *v.LastClearTime)
+	}
+	if v.LastSuggestionsBuildTime != nil {
+		s.WriteTime(schemas.DescribeQuerySuggestionsConfigResponse_LastSuggestionsBuildTime, *v.LastSuggestionsBuildTime)
+	}
+	if v.MinimumNumberOfQueryingUsers != nil {
+		s.WriteInt32(schemas.DescribeQuerySuggestionsConfigResponse_MinimumNumberOfQueryingUsers, *v.MinimumNumberOfQueryingUsers)
+	}
+	if v.MinimumQueryCount != nil {
+		s.WriteInt32(schemas.DescribeQuerySuggestionsConfigResponse_MinimumQueryCount, *v.MinimumQueryCount)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.DescribeQuerySuggestionsConfigResponse_Mode, string(v.Mode))
+	}
+	if v.QueryLogLookBackWindowInDays != nil {
+		s.WriteInt32(schemas.DescribeQuerySuggestionsConfigResponse_QueryLogLookBackWindowInDays, *v.QueryLogLookBackWindowInDays)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeQuerySuggestionsConfigResponse_Status, string(v.Status))
+	}
+	if v.TotalSuggestionsCount != nil {
+		s.WriteInt32(schemas.DescribeQuerySuggestionsConfigResponse_TotalSuggestionsCount, *v.TotalSuggestionsCount)
+	}
+}
 func (v *DescribeQuerySuggestionsConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeQuerySuggestionsConfigResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -173,74 +210,26 @@ func (v *DescribeQuerySuggestionsConfigOutput) Deserialize(d smithy.ShapeDeseria
 	})
 }
 func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsConfig, schemas.DescribeQuerySuggestionsConfigRequest, schemas.DescribeQuerySuggestionsConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsConfig, schemas.DescribeQuerySuggestionsConfigRequest, schemas.DescribeQuerySuggestionsConfigResponse), output: &DescribeQuerySuggestionsConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQuerySuggestionsConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeQuerySuggestionsConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQuerySuggestionsConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +244,8 @@ func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeQuerySuggestionsConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeQuerySuggestionsConfig",
-	}
 }

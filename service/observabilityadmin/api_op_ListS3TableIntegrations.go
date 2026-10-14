@@ -5,12 +5,8 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all S3 Table integrations in your account. We recommend using pagination
@@ -41,21 +37,6 @@ type ListS3TableIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListS3TableIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListS3TableIntegrationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListS3TableIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListS3TableIntegrationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListS3TableIntegrationsInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListS3TableIntegrationsOutput struct {
 
 	// A list of S3 Table integration summaries containing key information about each
@@ -71,84 +52,26 @@ type ListS3TableIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListS3TableIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListS3TableIntegrationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListS3TableIntegrationsOutput_IntegrationSummaries:
-			return deserializeIntegrationSummaries(d, schemas.ListS3TableIntegrationsOutput_IntegrationSummaries, &v.IntegrationSummaries)
-		case schemas.ListS3TableIntegrationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListS3TableIntegrationsOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListS3TableIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListS3TableIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3TableIntegrations, schemas.ListS3TableIntegrationsInput, schemas.ListS3TableIntegrationsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListS3TableIntegrations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3TableIntegrations, schemas.ListS3TableIntegrationsInput, schemas.ListS3TableIntegrationsOutput), output: &ListS3TableIntegrationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListS3TableIntegrations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListS3TableIntegrations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +84,6 @@ func (c *Client) addOperationListS3TableIntegrationsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +186,3 @@ type ListS3TableIntegrationsAPIClient interface {
 }
 
 var _ ListS3TableIntegrationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListS3TableIntegrations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListS3TableIntegrations",
-	}
-}

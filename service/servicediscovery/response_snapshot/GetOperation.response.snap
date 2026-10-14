@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53AutoNaming_v20170314.GetOperation
+
+{"Operation":{"CreateDate":946684800,"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Id":"__Id__","OwnerAccount":"__OwnerAccount__","Status":"SUBMITTED","Targets":{"key0":"__Value__"},"Type":"CREATE_NAMESPACE","UpdateDate":946684800}}

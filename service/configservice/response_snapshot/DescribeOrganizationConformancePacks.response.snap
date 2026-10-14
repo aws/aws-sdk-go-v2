@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeOrganizationConformancePacks
+
+{"NextToken":"__NextToken__","OrganizationConformancePacks":[{"ConformancePackInputParameters":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}],"DeliveryS3Bucket":"__DeliveryS3Bucket__","DeliveryS3KeyPrefix":"__DeliveryS3KeyPrefix__","ExcludedAccounts":["__Member__","__Member__"],"LastUpdateTime":946684800,"OrganizationConformancePackArn":"__OrganizationConformancePackArn__","OrganizationConformancePackName":"__OrganizationConformancePackName__"},{"ConformancePackInputParameters":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}],"DeliveryS3Bucket":"__DeliveryS3Bucket__","DeliveryS3KeyPrefix":"__DeliveryS3KeyPrefix__","ExcludedAccounts":["__Member__","__Member__"],"LastUpdateTime":946684800,"OrganizationConformancePackArn":"__OrganizationConformancePackArn__","OrganizationConformancePackName":"__OrganizationConformancePackName__"}]}

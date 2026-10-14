@@ -1,0 +1,5 @@
+POST /network-analyzer-configurations
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","MulticastGroups":["__Member__","__Member__"],"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TraceContent":{"LogLevel":"INFO","MulticastFrameInfo":"ENABLED","WirelessDeviceFrameInfo":"ENABLED"},"WirelessDevices":["__Member__","__Member__"],"WirelessGateways":["__Member__","__Member__"]}

@@ -64,6 +64,13 @@ var CreateSystem = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/create-system",
 	Code: 200})
 
+var CreateTest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "CreateTest",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/create-test",
+	Code: 200})
+
 var CreateUserJourney = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "CreateUserJourney",
@@ -120,11 +127,32 @@ var DeleteSystem = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/delete-system",
 	Code: 200})
 
+var DeleteTest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTest",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/delete-test",
+	Code: 200})
+
+var DeleteTestSources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTestSources",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/delete-test-sources",
+	Code: 200})
+
 var DeleteUserJourney = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "DeleteUserJourney",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/delete-user-journey",
+	Code: 200})
+
+var GetDependencyInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetDependencyInsights",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/get-dependency-insights",
 	Code: 200})
 
 var GetFailureModeFinding = smithy.NewSchema(smithy.ShapeID{
@@ -153,6 +181,27 @@ var GetSystem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSystem",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/get-system",
+	Code: 200})
+
+var GetTest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTest",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/get-test",
+	Code: 200})
+
+var GetTestRun = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestRun",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/get-test-run",
+	Code: 200})
+
+var GetTestTemplate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestTemplate",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/get-test-template",
 	Code: 200})
 
 var GetUserJourney = smithy.NewSchema(smithy.ShapeID{
@@ -218,11 +267,25 @@ var ListPolicies = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/list-policies",
 	Code: 200})
 
+var ListPolicyEvents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListPolicyEvents",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/list-policy-events",
+	Code: 200})
+
 var ListReports = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListReports",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/list-reports",
+	Code: 200})
+
+var ListResolvedTestRunTargetResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListResolvedTestRunTargetResources",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/test-runs/{testRunId}/resolved-target-resources",
 	Code: 200})
 
 var ListResources = smithy.NewSchema(smithy.ShapeID{
@@ -281,6 +344,62 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/tags/{resourceArn}",
 	Code: 200})
 
+var ListTestRunDependencies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunDependencies",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/test-runs/{testRunId}/dependencies",
+	Code: 200})
+
+var ListTestRunEvents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunEvents",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/test-runs/{testRunId}/events",
+	Code: 200})
+
+var ListTestRuns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRuns",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/list-test-runs",
+	Code: 200})
+
+var ListTestRunSourceEvents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSourceEvents",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/test-runs/{testRunId}/source-events",
+	Code: 200})
+
+var ListTestRunSources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSources",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/test-runs/{testRunId}/sources",
+	Code: 200})
+
+var ListTests = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTests",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/list-tests",
+	Code: 200})
+
+var ListTestSources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestSources",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/tests/{testId}/sources",
+	Code: 200})
+
+var ListTestTemplates = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestTemplates",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v2/list-test-templates",
+	Code: 200})
+
 var ListUserJourneys = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListUserJourneys",
@@ -288,11 +407,39 @@ var ListUserJourneys = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/list-user-journeys",
 	Code: 200})
 
+var PutTestSources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PutTestSources",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/put-test-sources",
+	Code: 200})
+
+var StartDependencyInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartDependencyInsights",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/start-dependency-insights",
+	Code: 202})
+
 var StartFailureModeAssessment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "StartFailureModeAssessment",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/start-failure-mode-assessment",
+	Code: 200})
+
+var StartTestRun = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartTestRun",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/start-test-run",
+	Code: 200})
+
+var StopTestRun = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopTestRun",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/stop-test-run",
 	Code: 200})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -358,6 +505,13 @@ var UpdateSystem = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/update-system",
 	Code: 200})
 
+var UpdateTest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "UpdateTest",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/update-test",
+	Code: 200})
+
 var UpdateUserJourney = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "UpdateUserJourney",
@@ -375,7 +529,8 @@ var NGRHServiceCore = smithy.NewServiceSchema(_NGRHServiceCore, "2026-02-17")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -383,15 +538,25 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccountId",
 }, smithy.ShapeTypeString, 0)
 
+var AccountTargeting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "AccountTargeting",
+}, smithy.ShapeTypeEnum, 2)
+var AccountTargeting_SINGLE_ACCOUNT *smithy.Schema
+
+var AccountTargeting_MULTI_ACCOUNT *smithy.Schema
+
 var Achievability = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Achievability",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var Achievability_availabilitySlo *smithy.Schema
 
 var Achievability_multiAzRtoRpo *smithy.Schema
 
 var Achievability_multiRegionRtoRpo *smithy.Schema
+
+var Achievability_dataRecoveryTimeBetweenBackups *smithy.Schema
 
 var AchievabilityStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -408,6 +573,26 @@ var ActorType = smithy.NewSchema(smithy.ShapeID{
 var ActorType_USER *smithy.Schema
 
 var ActorType_SYSTEM *smithy.Schema
+
+var AlarmState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "AlarmState",
+}, smithy.ShapeTypeEnum, 3)
+var AlarmState_OK *smithy.Schema
+
+var AlarmState_ALARM *smithy.Schema
+
+var AlarmState_INSUFFICIENT_DATA *smithy.Schema
+
+var AlarmStateChangeDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "AlarmStateChangeDetail",
+}, smithy.ShapeTypeStructure, 3)
+var AlarmStateChangeDetail_state *smithy.Schema
+
+var AlarmStateChangeDetail_previousState *smithy.Schema
+
+var AlarmStateChangeDetail_reason *smithy.Schema
 
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -501,6 +686,12 @@ var AssessmentErrorCode_INTERNAL_ERROR *smithy.Schema
 
 var AssessmentErrorCode_DESIGN_FILE_ACCESS_DENIED *smithy.Schema
 
+var AssessmentSortField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "AssessmentSortField",
+}, smithy.ShapeTypeEnum, 1)
+var AssessmentSortField_STARTED_AT *smithy.Schema
+
 var AssessmentStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "AssessmentStatus",
@@ -515,15 +706,33 @@ var AssessmentStatus_FAILED *smithy.Schema
 
 var AssessmentStatus_SUCCESS *smithy.Schema
 
+var _AssessmentStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "AssessmentStatusList",
+}, smithy.ShapeTypeList, 1)
+var _AssessmentStatusList_member *smithy.Schema
+
 var AssessmentStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "AssessmentStep",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 9)
+var AssessmentStep_TOPOLOGY_GENERATION *smithy.Schema
+
+var AssessmentStep_INPUT_VALIDATION *smithy.Schema
+
+var AssessmentStep_DESIGN_ANALYSIS *smithy.Schema
+
 var AssessmentStep_TOPOLOGY_ENHANCEMENT *smithy.Schema
 
 var AssessmentStep_SERVICE_FUNCTION_GENERATION *smithy.Schema
 
+var AssessmentStep_POLICY_VALIDATION *smithy.Schema
+
 var AssessmentStep_RESILIENCE_ASSESSMENT *smithy.Schema
+
+var AssessmentStep_FAILURE_MODE_FINDINGS_CONSOLIDATION *smithy.Schema
+
+var AssessmentStep_FAILURE_MODE_FINDINGS_ENRICHMENT *smithy.Schema
 
 var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -596,10 +805,16 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
 
+var _CloudWatchAlarmArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "CloudWatchAlarmArn",
+}, smithy.ShapeTypeString, 0)
+
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var CostCurrency = smithy.NewSchema(smithy.ShapeID{
@@ -641,10 +856,14 @@ var DependencyCriticality_UNKNOWN *smithy.Schema
 var DependencyDiscoveryConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "DependencyDiscoveryConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var DependencyDiscoveryConfig_status *smithy.Schema
 
 var DependencyDiscoveryConfig_updatedAt *smithy.Schema
+
+var DependencyDiscoveryConfig_eligibleResourceCount *smithy.Schema
+
+var DependencyDiscoveryConfig_message *smithy.Schema
 
 var DependencyDiscoveryInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -663,6 +882,40 @@ var DependencyDiscoveryStatus_ENABLED *smithy.Schema
 var DependencyDiscoveryStatus_INITIALIZING *smithy.Schema
 
 var DependencyDiscoveryStatus_DISABLED *smithy.Schema
+
+var DependencyInsight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DependencyInsight",
+}, smithy.ShapeTypeStructure, 2)
+var DependencyInsight_category *smithy.Schema
+
+var DependencyInsight_description *smithy.Schema
+
+var DependencyInsightsErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DependencyInsightsErrorCode",
+}, smithy.ShapeTypeEnum, 3)
+var DependencyInsightsErrorCode_INSUFFICIENT_DATA *smithy.Schema
+
+var DependencyInsightsErrorCode_LLM_GENERATION_FAILED *smithy.Schema
+
+var DependencyInsightsErrorCode_INTERNAL_ERROR *smithy.Schema
+
+var _DependencyInsightsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DependencyInsightsList",
+}, smithy.ShapeTypeList, 1)
+var _DependencyInsightsList_member *smithy.Schema
+
+var DependencyInsightsStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DependencyInsightsStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DependencyInsightsStatus_IN_PROGRESS *smithy.Schema
+
+var DependencyInsightsStatus_COMPLETED *smithy.Schema
+
+var DependencyInsightsStatus_FAILED *smithy.Schema
 
 var DependencySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -695,6 +948,105 @@ var _DependencySummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DependencySummaryList",
 }, smithy.ShapeTypeList, 1)
 var _DependencySummaryList_member *smithy.Schema
+
+var DevOpsAgentConfidence = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfidence",
+}, smithy.ShapeTypeEnum, 3)
+var DevOpsAgentConfidence_HIGH *smithy.Schema
+
+var DevOpsAgentConfidence_MEDIUM *smithy.Schema
+
+var DevOpsAgentConfidence_LOW *smithy.Schema
+
+var DevOpsAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var DevOpsAgentConfiguration_agentSpaceArn *smithy.Schema
+
+var DevOpsAgentConfigurationView = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConfigurationView",
+}, smithy.ShapeTypeStructure, 7)
+var DevOpsAgentConfigurationView_agentSpaceArn *smithy.Schema
+
+var DevOpsAgentConfigurationView_agentSpaceId *smithy.Schema
+
+var DevOpsAgentConfigurationView_region *smithy.Schema
+
+var DevOpsAgentConfigurationView_status *smithy.Schema
+
+var DevOpsAgentConfigurationView_operatorAppUrl *smithy.Schema
+
+var DevOpsAgentConfigurationView_connectedAt *smithy.Schema
+
+var DevOpsAgentConfigurationView_statusReason *smithy.Schema
+
+var DevOpsAgentConnectionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentConnectionStatus",
+}, smithy.ShapeTypeEnum, 4)
+var DevOpsAgentConnectionStatus_CONNECTING *smithy.Schema
+
+var DevOpsAgentConnectionStatus_CONNECTED *smithy.Schema
+
+var DevOpsAgentConnectionStatus_DISCONNECTED *smithy.Schema
+
+var DevOpsAgentConnectionStatus_FAILED *smithy.Schema
+
+var DevOpsAgentInvestigation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentInvestigation",
+}, smithy.ShapeTypeStructure, 5)
+var DevOpsAgentInvestigation_verdict *smithy.Schema
+
+var DevOpsAgentInvestigation_confidence *smithy.Schema
+
+var DevOpsAgentInvestigation_deepLink *smithy.Schema
+
+var DevOpsAgentInvestigation_status *smithy.Schema
+
+var DevOpsAgentInvestigation_summary *smithy.Schema
+
+var DevOpsAgentInvestigationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentInvestigationStatus",
+}, smithy.ShapeTypeEnum, 6)
+var DevOpsAgentInvestigationStatus_PENDING *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_IN_PROGRESS *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_COMPLETED *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_FAILED *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_TIMED_OUT *smithy.Schema
+
+var DevOpsAgentInvestigationStatus_CANCELED *smithy.Schema
+
+var _DevOpsAgentRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentRegion",
+}, smithy.ShapeTypeString, 0)
+
+var _DevOpsAgentSpaceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentSpaceArn",
+}, smithy.ShapeTypeString, 0)
+
+var _DevOpsAgentSpaceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentSpaceId",
+}, smithy.ShapeTypeString, 0)
+
+var DevOpsAgentVerdict = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DevOpsAgentVerdict",
+}, smithy.ShapeTypeEnum, 2)
+var DevOpsAgentVerdict_PASS *smithy.Schema
+
+var DevOpsAgentVerdict_FAIL *smithy.Schema
 
 var DisasterRecoverySource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -740,6 +1092,66 @@ var EffectivePolicyValues_multiRegionDrApproach *smithy.Schema
 
 var EffectivePolicyValues_dataRecoveryTimeBetweenBackups *smithy.Schema
 
+var _EksLabelKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelKey",
+}, smithy.ShapeTypeString, 0)
+
+var _EksLabelMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelMap",
+}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
+var _EksLabelMap_key *smithy.Schema
+
+var _EksLabelMap_value *smithy.Schema
+
+var EksLabelSelector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelSelector",
+}, smithy.ShapeTypeStructure, 2)
+var EksLabelSelector_matchLabels *smithy.Schema
+
+var EksLabelSelector_matchExpressions *smithy.Schema
+
+var EksLabelSelectorOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelSelectorOperator",
+}, smithy.ShapeTypeEnum, 4)
+var EksLabelSelectorOperator_IN *smithy.Schema
+
+var EksLabelSelectorOperator_NOT_IN *smithy.Schema
+
+var EksLabelSelectorOperator_EXISTS *smithy.Schema
+
+var EksLabelSelectorOperator_DOES_NOT_EXIST *smithy.Schema
+
+var EksLabelSelectorRequirement = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelSelectorRequirement",
+}, smithy.ShapeTypeStructure, 3)
+var EksLabelSelectorRequirement_key *smithy.Schema
+
+var EksLabelSelectorRequirement_operator *smithy.Schema
+
+var EksLabelSelectorRequirement_values *smithy.Schema
+
+var _EksLabelSelectorRequirementList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelSelectorRequirementList",
+}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
+var _EksLabelSelectorRequirementList_member *smithy.Schema
+
+var _EksLabelValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelValue",
+}, smithy.ShapeTypeString, 0)
+
+var _EksLabelValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "EksLabelValueList",
+}, smithy.ShapeTypeList, 1)
+var _EksLabelValueList_member *smithy.Schema
+
 var _EksNamespace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "EksNamespace",
@@ -754,10 +1166,12 @@ var _EksNamespaceList_member *smithy.Schema
 var EksSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "EksSource",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var EksSource_clusterArn *smithy.Schema
 
 var EksSource_namespaces *smithy.Schema
+
+var EksSource_labelSelector *smithy.Schema
 
 var _EntityDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -791,6 +1205,26 @@ var EventActor_accountId *smithy.Schema
 
 var EventActor_userName *smithy.Schema
 
+var _ExperimentArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ExperimentArnList",
+}, smithy.ShapeTypeList, 1)
+var _ExperimentArnList_member *smithy.Schema
+
+var ExperimentDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ExperimentDetails",
+}, smithy.ShapeTypeStructure, 2)
+var ExperimentDetails_experimentArn *smithy.Schema
+
+var ExperimentDetails_details *smithy.Schema
+
+var _ExperimentDetailsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ExperimentDetailsList",
+}, smithy.ShapeTypeList, 1)
+var _ExperimentDetailsList_member *smithy.Schema
+
 var FailedReportOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "FailedReportOutput",
@@ -816,7 +1250,7 @@ var FailureCategory_SINGLE_POINT_OF_FAILURE *smithy.Schema
 var Finding = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Finding",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var Finding_findingId *smithy.Schema
 
 var Finding_name *smithy.Schema
@@ -844,6 +1278,8 @@ var Finding_observabilityRecommendations *smithy.Schema
 var Finding_testingRecommendations *smithy.Schema
 
 var Finding_updatedAt *smithy.Schema
+
+var Finding_investigationDeepLink *smithy.Schema
 
 var FindingSeverity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -874,7 +1310,7 @@ var FindingStatus_IRRELEVANT *smithy.Schema
 var FindingSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "FindingSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var FindingSummary_serviceArn *smithy.Schema
 
 var FindingSummary_findingId *smithy.Schema
@@ -892,6 +1328,8 @@ var FindingSummary_status *smithy.Schema
 var FindingSummary_policyComponent *smithy.Schema
 
 var FindingSummary_updatedAt *smithy.Schema
+
+var FindingSummary_investigationDeepLink *smithy.Schema
 
 var _FunctionsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -976,16 +1414,41 @@ var InputSourceType_DESIGN_FILE *smithy.Schema
 
 var InputSourceType_MONITORING *smithy.Schema
 
+var InsightsCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "InsightsCategory",
+}, smithy.ShapeTypeEnum, 5)
+var InsightsCategory_CROSS_REGION *smithy.Schema
+
+var InsightsCategory_NEW_DEPENDENCY *smithy.Schema
+
+var InsightsCategory_THIRD_PARTY *smithy.Schema
+
+var InsightsCategory_UNEVEN_USAGE *smithy.Schema
+
+var InsightsCategory_AWS_SERVICE *smithy.Schema
+
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "KmsKeyId",
 }, smithy.ShapeTypeString, 0)
+
+var LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "LoggingConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var LoggingConfiguration_s3BucketName *smithy.Schema
+
+var LoggingConfiguration_cloudWatchLogGroupArn *smithy.Schema
+
+var LoggingConfiguration_logSchemaVersion *smithy.Schema
 
 var _LongDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1050,6 +1513,26 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
 
+var ObservabilityAlarmInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ObservabilityAlarmInput",
+}, smithy.ShapeTypeStructure, 1)
+var ObservabilityAlarmInput_alarmArn *smithy.Schema
+
+var ObservabilityAlarmSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ObservabilityAlarmSummary",
+}, smithy.ShapeTypeStructure, 5)
+var ObservabilityAlarmSummary_alarmArn *smithy.Schema
+
+var ObservabilityAlarmSummary_alarmName *smithy.Schema
+
+var ObservabilityAlarmSummary_region *smithy.Schema
+
+var ObservabilityAlarmSummary_accountId *smithy.Schema
+
+var ObservabilityAlarmSummary_createdAt *smithy.Schema
+
 var ObservabilityRecommendation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ObservabilityRecommendation",
@@ -1072,6 +1555,26 @@ var _OuId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OuId",
 }, smithy.ShapeTypeString, 0)
 
+var _ParameterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ParameterKey",
+}, smithy.ShapeTypeString, 0)
+
+var ParameterType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ParameterType",
+}, smithy.ShapeTypeEnum, 3)
+var ParameterType_STRING *smithy.Schema
+
+var ParameterType_STRING_LIST *smithy.Schema
+
+var ParameterType_INTEGER *smithy.Schema
+
+var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ParameterValue",
+}, smithy.ShapeTypeString, 0)
+
 var PermissionModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "PermissionModel",
@@ -1083,7 +1586,7 @@ var PermissionModel_crossAccountRoles *smithy.Schema
 var Policy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Policy",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var Policy_policyArn *smithy.Schema
 
 var Policy_name *smithy.Schema
@@ -1098,6 +1601,10 @@ var Policy_multiRegion *smithy.Schema
 
 var Policy_dataRecovery *smithy.Schema
 
+var Policy_sharingEnabled *smithy.Schema
+
+var Policy_organizationId *smithy.Schema
+
 var Policy_kmsKeyId *smithy.Schema
 
 var Policy_tags *smithy.Schema
@@ -1107,6 +1614,14 @@ var Policy_associatedServiceCount *smithy.Schema
 var Policy_createdAt *smithy.Schema
 
 var Policy_updatedAt *smithy.Schema
+
+var PolicyAttachedToServiceMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyAttachedToServiceMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var PolicyAttachedToServiceMetadata_serviceArn *smithy.Schema
+
+var PolicyAttachedToServiceMetadata_accountId *smithy.Schema
 
 var PolicyComponent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1120,10 +1635,102 @@ var PolicyComponent_MULTI_REGION_DISASTER_RECOVERY *smithy.Schema
 
 var PolicyComponent_DATA_RECOVERY *smithy.Schema
 
+var PolicyDeletedMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyDeletedMetadata",
+}, smithy.ShapeTypeStructure, 1)
+var PolicyDeletedMetadata_affectedServiceCount *smithy.Schema
+
+var PolicyDetachedFromServiceMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyDetachedFromServiceMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var PolicyDetachedFromServiceMetadata_serviceArn *smithy.Schema
+
+var PolicyDetachedFromServiceMetadata_accountId *smithy.Schema
+
+var PolicyDisassociationReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyDisassociationReason",
+}, smithy.ShapeTypeEnum, 3)
+var PolicyDisassociationReason_REPLACED_BY_UPDATE *smithy.Schema
+
+var PolicyDisassociationReason_SHARING_REVOKED *smithy.Schema
+
+var PolicyDisassociationReason_POLICY_DELETED *smithy.Schema
+
+var PolicyEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEvent",
+}, smithy.ShapeTypeStructure, 6)
+var PolicyEvent_eventId *smithy.Schema
+
+var PolicyEvent_timestamp *smithy.Schema
+
+var PolicyEvent_eventType *smithy.Schema
+
+var PolicyEvent_policyArn *smithy.Schema
+
+var PolicyEvent_actor *smithy.Schema
+
+var PolicyEvent_eventDetails *smithy.Schema
+
+var PolicyEventDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEventDetails",
+}, smithy.ShapeTypeStructure, 3)
+var PolicyEventDetails_title *smithy.Schema
+
+var PolicyEventDetails_description *smithy.Schema
+
+var PolicyEventDetails_eventMetadata *smithy.Schema
+
+var _PolicyEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEventList",
+}, smithy.ShapeTypeList, 1)
+var _PolicyEventList_member *smithy.Schema
+
+var PolicyEventMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEventMetadata",
+}, smithy.ShapeTypeUnion, 4)
+var PolicyEventMetadata_policyAttachedToService *smithy.Schema
+
+var PolicyEventMetadata_policyDetachedFromService *smithy.Schema
+
+var PolicyEventMetadata_policySharingRevoked *smithy.Schema
+
+var PolicyEventMetadata_policyDeleted *smithy.Schema
+
+var PolicyEventType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEventType",
+}, smithy.ShapeTypeEnum, 4)
+var PolicyEventType_POLICY_ATTACHED_TO_SERVICE *smithy.Schema
+
+var PolicyEventType_POLICY_DETACHED_FROM_SERVICE *smithy.Schema
+
+var PolicyEventType_POLICY_SHARING_REVOKED *smithy.Schema
+
+var PolicyEventType_POLICY_DELETED *smithy.Schema
+
+var _PolicyEventTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicyEventTypeList",
+}, smithy.ShapeTypeList, 1)
+var _PolicyEventTypeList_member *smithy.Schema
+
+var PolicySharingRevokedMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PolicySharingRevokedMetadata",
+}, smithy.ShapeTypeStructure, 1)
+var PolicySharingRevokedMetadata_affectedServiceCount *smithy.Schema
+
 var PolicySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "PolicySummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var PolicySummary_policyArn *smithy.Schema
 
 var PolicySummary_name *smithy.Schema
@@ -1135,6 +1742,10 @@ var PolicySummary_multiAz *smithy.Schema
 var PolicySummary_multiRegion *smithy.Schema
 
 var PolicySummary_dataRecovery *smithy.Schema
+
+var PolicySummary_sharingEnabled *smithy.Schema
+
+var PolicySummary_organizationId *smithy.Schema
 
 var PolicySummary_associatedServiceCount *smithy.Schema
 
@@ -1196,6 +1807,11 @@ var _RegionList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RegionList_member *smithy.Schema
 
+var _RegionSwitchExecutionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "RegionSwitchExecutionId",
+}, smithy.ShapeTypeString, 0)
+
 var ReportGenerationErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ReportGenerationErrorCode",
@@ -1209,7 +1825,7 @@ var ReportGenerationErrorCode_INTERNAL_ERROR *smithy.Schema
 var ReportGenerationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ReportGenerationResult",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var ReportGenerationResult_reportType *smithy.Schema
 
 var ReportGenerationResult_status *smithy.Schema
@@ -1217,6 +1833,10 @@ var ReportGenerationResult_status *smithy.Schema
 var ReportGenerationResult_serviceArn *smithy.Schema
 
 var ReportGenerationResult_assessmentId *smithy.Schema
+
+var ReportGenerationResult_testRunId *smithy.Schema
+
+var ReportGenerationResult_testTemplateArn *smithy.Schema
 
 var ReportGenerationResult_createdAt *smithy.Schema
 
@@ -1261,13 +1881,49 @@ var _ReportOutputConfigurationList_member *smithy.Schema
 var ReportType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ReportType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ReportType_FAILURE_MODE *smithy.Schema
+
+var ReportType_TESTING *smithy.Schema
+
+var _ResolvedTargetInformation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResolvedTargetInformation",
+}, smithy.ShapeTypeMap, 2)
+var _ResolvedTargetInformation_key *smithy.Schema
+
+var _ResolvedTargetInformation_value *smithy.Schema
+
+var _ResolvedTargetInformationKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResolvedTargetInformationKey",
+}, smithy.ShapeTypeString, 0)
+
+var _ResolvedTargetInformationValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResolvedTargetInformationValue",
+}, smithy.ShapeTypeString, 0)
+
+var ResolvedTargetResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResolvedTargetResource",
+}, smithy.ShapeTypeStructure, 3)
+var ResolvedTargetResource_resourceType *smithy.Schema
+
+var ResolvedTargetResource_targetName *smithy.Schema
+
+var ResolvedTargetResource_targetInformation *smithy.Schema
+
+var _ResolvedTargetResourceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResolvedTargetResourceList",
+}, smithy.ShapeTypeList, 1)
+var _ResolvedTargetResourceList_member *smithy.Schema
 
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 8)
 var Resource_identifier *smithy.Schema
 
 var Resource_awsRegion *smithy.Schema
@@ -1275,6 +1931,14 @@ var Resource_awsRegion *smithy.Schema
 var Resource_awsAccountId *smithy.Schema
 
 var Resource_resourceType *smithy.Schema
+
+var Resource_availabilityZoneId *smithy.Schema
+
+var Resource_availabilityZoneName *smithy.Schema
+
+var Resource_containmentParentId *smithy.Schema
+
+var Resource_logicalResourceGroupId *smithy.Schema
 
 var ResourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1343,7 +2007,8 @@ var _ResourceList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -1363,6 +2028,17 @@ var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceTagList",
 }, smithy.ShapeTypeList, 1)
 var _ResourceTagList_member *smithy.Schema
+
+var _ResourceTypeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResourceTypeFilter",
+}, smithy.ShapeTypeString, 0)
+
+var _ResourceTypeFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ResourceTypeFilterList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceTypeFilterList_member *smithy.Schema
 
 var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -1397,7 +2073,7 @@ var _S3Url = smithy.NewSchema(smithy.ShapeID{
 var Service = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "Service",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var Service_serviceArn *smithy.Schema
 
 var Service_name *smithy.Schema
@@ -1441,6 +2117,8 @@ var Service_organizationId *smithy.Schema
 var Service_ouId *smithy.Schema
 
 var Service_accountId *smithy.Schema
+
+var Service_devOpsAgentConfiguration *smithy.Schema
 
 var Service_createdAt *smithy.Schema
 
@@ -1687,26 +2365,42 @@ var ServiceInputSourcesUpdatedMetadata = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceInputSourcesUpdatedMetadata",
 }, smithy.ShapeTypeStructure, 0)
 
+var _ServiceOwnedArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ServiceOwnedArn",
+}, smithy.ShapeTypeString, 0)
+
 var ServicePolicyAssociatedMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServicePolicyAssociatedMetadata",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var ServicePolicyAssociatedMetadata_policyName *smithy.Schema
 
 var ServicePolicyAssociatedMetadata_policyArn *smithy.Schema
 
+var ServicePolicyAssociatedMetadata_policyOwnerAccountId *smithy.Schema
+
+var ServicePolicyAssociatedMetadata_policySource *smithy.Schema
+
 var ServicePolicyDisassociatedMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServicePolicyDisassociatedMetadata",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 5)
 var ServicePolicyDisassociatedMetadata_policyName *smithy.Schema
 
 var ServicePolicyDisassociatedMetadata_policyArn *smithy.Schema
 
+var ServicePolicyDisassociatedMetadata_policyOwnerAccountId *smithy.Schema
+
+var ServicePolicyDisassociatedMetadata_policySource *smithy.Schema
+
+var ServicePolicyDisassociatedMetadata_reason *smithy.Schema
+
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceReference = smithy.NewSchema(smithy.ShapeID{
@@ -1772,7 +2466,7 @@ var ServiceResourcesDisassociatedMetadata_resourceTypes *smithy.Schema
 var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var ServiceSummary_serviceArn *smithy.Schema
 
 var ServiceSummary_name *smithy.Schema
@@ -1784,6 +2478,10 @@ var ServiceSummary_regions *smithy.Schema
 var ServiceSummary_policyArn *smithy.Schema
 
 var ServiceSummary_assessmentStatus *smithy.Schema
+
+var ServiceSummary_devOpsAgentStatus *smithy.Schema
+
+var ServiceSummary_devOpsAgentSpaceArn *smithy.Schema
 
 var ServiceSummary_openFindingsCount *smithy.Schema
 
@@ -1830,10 +2528,18 @@ var ServiceSystemDisassociatedMetadata_systemArn *smithy.Schema
 var ServiceTopologyEdgeSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ServiceTopologyEdgeSummary",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 7)
 var ServiceTopologyEdgeSummary_sourceResourceIdentifier *smithy.Schema
 
 var ServiceTopologyEdgeSummary_destinationResourceIdentifier *smithy.Schema
+
+var ServiceTopologyEdgeSummary_sourceRegion *smithy.Schema
+
+var ServiceTopologyEdgeSummary_destinationRegion *smithy.Schema
+
+var ServiceTopologyEdgeSummary_sourceAccount *smithy.Schema
+
+var ServiceTopologyEdgeSummary_destinationAccount *smithy.Schema
 
 var ServiceTopologyEdgeSummary_properties *smithy.Schema
 
@@ -1861,6 +2567,36 @@ var SloSource_policyName *smithy.Schema
 
 var SloSource_source *smithy.Schema
 
+var SortOrder = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "SortOrder",
+}, smithy.ShapeTypeEnum, 2)
+var SortOrder_ASC *smithy.Schema
+
+var SortOrder_DESC *smithy.Schema
+
+var StopCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopCondition",
+}, smithy.ShapeTypeStructure, 2)
+var StopCondition_source *smithy.Schema
+
+var StopCondition_value *smithy.Schema
+
+var _StopConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopConditionList",
+}, smithy.ShapeTypeList, 1)
+var _StopConditionList_member *smithy.Schema
+
+var StopConditionSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopConditionSource",
+}, smithy.ShapeTypeEnum, 2)
+var StopConditionSource_AWS_CLOUDWATCH_ALARM *smithy.Schema
+
+var StopConditionSource_NONE *smithy.Schema
+
 var StringChange = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "StringChange",
@@ -1868,6 +2604,32 @@ var StringChange = smithy.NewSchema(smithy.ShapeID{
 var StringChange_oldValue *smithy.Schema
 
 var StringChange_newValue *smithy.Schema
+
+var _StringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StringList",
+}, smithy.ShapeTypeList, 1)
+var _StringList_member *smithy.Schema
+
+var SuccessCriteriaAlarmInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "SuccessCriteriaAlarmInput",
+}, smithy.ShapeTypeStructure, 1)
+var SuccessCriteriaAlarmInput_alarmArn *smithy.Schema
+
+var SuccessCriteriaAlarmSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "SuccessCriteriaAlarmSummary",
+}, smithy.ShapeTypeStructure, 5)
+var SuccessCriteriaAlarmSummary_alarmArn *smithy.Schema
+
+var SuccessCriteriaAlarmSummary_alarmName *smithy.Schema
+
+var SuccessCriteriaAlarmSummary_region *smithy.Schema
+
+var SuccessCriteriaAlarmSummary_accountId *smithy.Schema
+
+var SuccessCriteriaAlarmSummary_createdAt *smithy.Schema
 
 var _SuggestedChangesList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -2128,6 +2890,55 @@ var TargetSource_policyName *smithy.Schema
 
 var TargetSource_source *smithy.Schema
 
+var Test = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "Test",
+}, smithy.ShapeTypeStructure, 12)
+var Test_testId *smithy.Schema
+
+var Test_testTemplateArn *smithy.Schema
+
+var Test_serviceArn *smithy.Schema
+
+var Test_name *smithy.Schema
+
+var Test_actions *smithy.Schema
+
+var Test_loggingConfiguration *smithy.Schema
+
+var Test_stopConditions *smithy.Schema
+
+var Test_roleName *smithy.Schema
+
+var Test_parameters *smithy.Schema
+
+var Test_totalTestRuns *smithy.Schema
+
+var Test_successfulTestRuns *smithy.Schema
+
+var Test_creationTime *smithy.Schema
+
+var TestAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestAction",
+}, smithy.ShapeTypeStructure, 3)
+var TestAction_actionId *smithy.Schema
+
+var TestAction_description *smithy.Schema
+
+var TestAction_resourceType *smithy.Schema
+
+var _TestActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestActionList",
+}, smithy.ShapeTypeList, 1)
+var _TestActionList_member *smithy.Schema
+
+var _TestId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestId",
+}, smithy.ShapeTypeString, 0)
+
 var TestingRecommendation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "TestingRecommendation",
@@ -2140,10 +2951,435 @@ var _TestingRecommendationsList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TestingRecommendationsList_member *smithy.Schema
 
+var _TestParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestParameters",
+}, smithy.ShapeTypeMap, 2)
+var _TestParameters_key *smithy.Schema
+
+var _TestParameters_value *smithy.Schema
+
+var TestRun = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRun",
+}, smithy.ShapeTypeStructure, 23)
+var TestRun_testRunId *smithy.Schema
+
+var TestRun_testId *smithy.Schema
+
+var TestRun_status *smithy.Schema
+
+var TestRun_serviceArn *smithy.Schema
+
+var TestRun_startedAt *smithy.Schema
+
+var TestRun_endedAt *smithy.Schema
+
+var TestRun_experiments *smithy.Schema
+
+var TestRun_eventCount *smithy.Schema
+
+var TestRun_parameters *smithy.Schema
+
+var TestRun_errorMessage *smithy.Schema
+
+var TestRun_stopConditions *smithy.Schema
+
+var TestRun_loggingConfiguration *smithy.Schema
+
+var TestRun_roleName *smithy.Schema
+
+var TestRun_testTemplateArn *smithy.Schema
+
+var TestRun_reportConfiguration *smithy.Schema
+
+var TestRun_policy *smithy.Schema
+
+var TestRun_reportOutput *smithy.Schema
+
+var TestRun_regionSwitchPlanArn *smithy.Schema
+
+var TestRun_regionSwitchExecutionId *smithy.Schema
+
+var TestRun_permissionModel *smithy.Schema
+
+var TestRun_regions *smithy.Schema
+
+var TestRun_accountTargeting *smithy.Schema
+
+var TestRun_devOpsAgentInvestigation *smithy.Schema
+
+var TestRunDependencySource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunDependencySource",
+}, smithy.ShapeTypeEnum, 2)
+var TestRunDependencySource_DISCOVERED *smithy.Schema
+
+var TestRunDependencySource_MANUAL *smithy.Schema
+
+var TestRunDependencySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunDependencySummary",
+}, smithy.ShapeTypeStructure, 8)
+var TestRunDependencySummary_dependencyId *smithy.Schema
+
+var TestRunDependencySummary_dependencyName *smithy.Schema
+
+var TestRunDependencySummary_dnsName *smithy.Schema
+
+var TestRunDependencySummary_criticality *smithy.Schema
+
+var TestRunDependencySummary_source *smithy.Schema
+
+var TestRunDependencySummary_location *smithy.Schema
+
+var TestRunDependencySummary_sourceRegions *smithy.Schema
+
+var TestRunDependencySummary_provider *smithy.Schema
+
+var _TestRunDependencySummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunDependencySummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestRunDependencySummaryList_member *smithy.Schema
+
+var TestRunEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEvent",
+}, smithy.ShapeTypeStructure, 5)
+var TestRunEvent_eventId *smithy.Schema
+
+var TestRunEvent_eventType *smithy.Schema
+
+var TestRunEvent_message *smithy.Schema
+
+var TestRunEvent_timestamp *smithy.Schema
+
+var TestRunEvent_attributes *smithy.Schema
+
+var _TestRunEventAttributeKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEventAttributeKey",
+}, smithy.ShapeTypeString, 0)
+
+var _TestRunEventAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEventAttributes",
+}, smithy.ShapeTypeMap, 2)
+var _TestRunEventAttributes_key *smithy.Schema
+
+var _TestRunEventAttributes_value *smithy.Schema
+
+var _TestRunEventAttributeValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEventAttributeValue",
+}, smithy.ShapeTypeString, 0)
+
+var _TestRunEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEventList",
+}, smithy.ShapeTypeList, 1)
+var _TestRunEventList_member *smithy.Schema
+
+var _TestRunId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunId",
+}, smithy.ShapeTypeString, 0)
+
+var TestRunObservabilityAlarmSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunObservabilityAlarmSummary",
+}, smithy.ShapeTypeStructure, 4)
+var TestRunObservabilityAlarmSummary_alarmArn *smithy.Schema
+
+var TestRunObservabilityAlarmSummary_alarmName *smithy.Schema
+
+var TestRunObservabilityAlarmSummary_region *smithy.Schema
+
+var TestRunObservabilityAlarmSummary_accountId *smithy.Schema
+
+var TestRunPolicySnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunPolicySnapshot",
+}, smithy.ShapeTypeStructure, 6)
+var TestRunPolicySnapshot_policyArn *smithy.Schema
+
+var TestRunPolicySnapshot_name *smithy.Schema
+
+var TestRunPolicySnapshot_availabilitySlo *smithy.Schema
+
+var TestRunPolicySnapshot_multiAz *smithy.Schema
+
+var TestRunPolicySnapshot_multiRegion *smithy.Schema
+
+var TestRunPolicySnapshot_dataRecovery *smithy.Schema
+
+var TestRunReportConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunReportConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var TestRunReportConfiguration_reportOutput *smithy.Schema
+
+var _TestRunSourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceArn",
+}, smithy.ShapeTypeString, 0)
+
+var TestRunSourceEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEvent",
+}, smithy.ShapeTypeStructure, 4)
+var TestRunSourceEvent_timestamp *smithy.Schema
+
+var TestRunSourceEvent_sourceArn *smithy.Schema
+
+var TestRunSourceEvent_eventType *smithy.Schema
+
+var TestRunSourceEvent_detail *smithy.Schema
+
+var TestRunSourceEventDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEventDetail",
+}, smithy.ShapeTypeUnion, 2)
+var TestRunSourceEventDetail_alarmStateChange *smithy.Schema
+
+var TestRunSourceEventDetail_error *smithy.Schema
+
+var TestRunSourceEventError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEventError",
+}, smithy.ShapeTypeStructure, 2)
+var TestRunSourceEventError_errorCode *smithy.Schema
+
+var TestRunSourceEventError_errorMessage *smithy.Schema
+
+var TestRunSourceEventErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEventErrorCode",
+}, smithy.ShapeTypeEnum, 2)
+var TestRunSourceEventErrorCode_ACCESS_DENIED *smithy.Schema
+
+var TestRunSourceEventErrorCode_INTERNAL_ERROR *smithy.Schema
+
+var _TestRunSourceEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEventList",
+}, smithy.ShapeTypeList, 1)
+var _TestRunSourceEventList_member *smithy.Schema
+
+var TestRunSourceEventType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceEventType",
+}, smithy.ShapeTypeEnum, 1)
+var TestRunSourceEventType_ALARM *smithy.Schema
+
+var TestRunSourceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceSummary",
+}, smithy.ShapeTypeUnion, 2)
+var TestRunSourceSummary_successCriteriaAlarm *smithy.Schema
+
+var TestRunSourceSummary_observabilityAlarm *smithy.Schema
+
+var _TestRunSourceSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestRunSourceSummaryList_member *smithy.Schema
+
+var TestRunSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSourceType",
+}, smithy.ShapeTypeEnum, 2)
+var TestRunSourceType_SUCCESS_CRITERIA *smithy.Schema
+
+var TestRunSourceType_OBSERVABILITY *smithy.Schema
+
+var TestRunStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunStatus",
+}, smithy.ShapeTypeEnum, 7)
+var TestRunStatus_INITIALIZING *smithy.Schema
+
+var TestRunStatus_RUNNING *smithy.Schema
+
+var TestRunStatus_STOPPING *smithy.Schema
+
+var TestRunStatus_PASSED *smithy.Schema
+
+var TestRunStatus_FAILED *smithy.Schema
+
+var TestRunStatus_STOPPED *smithy.Schema
+
+var TestRunStatus_ERROR *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSuccessCriteriaAlarmSummary",
+}, smithy.ShapeTypeStructure, 6)
+var TestRunSuccessCriteriaAlarmSummary_alarmArn *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary_alarmName *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary_region *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary_accountId *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary_outcome *smithy.Schema
+
+var TestRunSuccessCriteriaAlarmSummary_outcomeReason *smithy.Schema
+
+var TestRunSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSummary",
+}, smithy.ShapeTypeStructure, 8)
+var TestRunSummary_testRunId *smithy.Schema
+
+var TestRunSummary_status *smithy.Schema
+
+var TestRunSummary_startedAt *smithy.Schema
+
+var TestRunSummary_endedAt *smithy.Schema
+
+var TestRunSummary_testTemplateArn *smithy.Schema
+
+var TestRunSummary_serviceArn *smithy.Schema
+
+var TestRunSummary_errorMessage *smithy.Schema
+
+var TestRunSummary_accountTargeting *smithy.Schema
+
+var _TestRunSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestRunSummaryList_member *smithy.Schema
+
+var TestSourceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceInput",
+}, smithy.ShapeTypeUnion, 2)
+var TestSourceInput_successCriteriaAlarm *smithy.Schema
+
+var TestSourceInput_observabilityAlarm *smithy.Schema
+
+var _TestSourceInputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceInputList",
+}, smithy.ShapeTypeList, 1)
+var _TestSourceInputList_member *smithy.Schema
+
+var TestSourceOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceOutcome",
+}, smithy.ShapeTypeEnum, 3)
+var TestSourceOutcome_PASSED *smithy.Schema
+
+var TestSourceOutcome_FAILED *smithy.Schema
+
+var TestSourceOutcome_ERROR *smithy.Schema
+
+var TestSourceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceSummary",
+}, smithy.ShapeTypeUnion, 2)
+var TestSourceSummary_successCriteriaAlarm *smithy.Schema
+
+var TestSourceSummary_observabilityAlarm *smithy.Schema
+
+var _TestSourceSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestSourceSummaryList_member *smithy.Schema
+
+var TestSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSourceType",
+}, smithy.ShapeTypeEnum, 2)
+var TestSourceType_SUCCESS_CRITERIA *smithy.Schema
+
+var TestSourceType_OBSERVABILITY *smithy.Schema
+
+var TestSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSummary",
+}, smithy.ShapeTypeStructure, 6)
+var TestSummary_testId *smithy.Schema
+
+var TestSummary_testTemplateArn *smithy.Schema
+
+var TestSummary_serviceArn *smithy.Schema
+
+var TestSummary_totalTestRuns *smithy.Schema
+
+var TestSummary_successfulTestRuns *smithy.Schema
+
+var TestSummary_creationTime *smithy.Schema
+
+var _TestSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestSummaryList_member *smithy.Schema
+
+var TestTemplate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestTemplate",
+}, smithy.ShapeTypeStructure, 5)
+var TestTemplate_testTemplateArn *smithy.Schema
+
+var TestTemplate_name *smithy.Schema
+
+var TestTemplate_description *smithy.Schema
+
+var TestTemplate_parameters *smithy.Schema
+
+var TestTemplate_actions *smithy.Schema
+
+var TestTemplateParameter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestTemplateParameter",
+}, smithy.ShapeTypeStructure, 6)
+var TestTemplateParameter_name *smithy.Schema
+
+var TestTemplateParameter_description *smithy.Schema
+
+var TestTemplateParameter_type *smithy.Schema
+
+var TestTemplateParameter_required *smithy.Schema
+
+var TestTemplateParameter_defaultValue *smithy.Schema
+
+var TestTemplateParameter_maxValues *smithy.Schema
+
+var _TestTemplateParameterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestTemplateParameterList",
+}, smithy.ShapeTypeList, 1)
+var _TestTemplateParameterList_member *smithy.Schema
+
+var TestTemplateSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestTemplateSummary",
+}, smithy.ShapeTypeStructure, 3)
+var TestTemplateSummary_testTemplateArn *smithy.Schema
+
+var TestTemplateSummary_name *smithy.Schema
+
+var TestTemplateSummary_description *smithy.Schema
+
+var _TestTemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestTemplateSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TestTemplateSummaryList_member *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var ThrottlingException_retryAfterSeconds *smithy.Schema
@@ -2227,7 +3463,8 @@ var _Uuid = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -2297,7 +3534,7 @@ var CreateInputSourceResponse_inputSourceId *smithy.Schema
 var CreatePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "CreatePolicyRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreatePolicyRequest_name *smithy.Schema
 
 var CreatePolicyRequest_description *smithy.Schema
@@ -2309,6 +3546,8 @@ var CreatePolicyRequest_multiAz *smithy.Schema
 var CreatePolicyRequest_multiRegion *smithy.Schema
 
 var CreatePolicyRequest_dataRecovery *smithy.Schema
+
+var CreatePolicyRequest_sharingEnabled *smithy.Schema
 
 var CreatePolicyRequest_kmsKeyId *smithy.Schema
 
@@ -2381,7 +3620,7 @@ var CreateServiceFunctionResourcesResponse_resources *smithy.Schema
 var CreateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "CreateServiceRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateServiceRequest_name *smithy.Schema
 
 var CreateServiceRequest_description *smithy.Schema
@@ -2399,6 +3638,8 @@ var CreateServiceRequest_dependencyDiscovery *smithy.Schema
 var CreateServiceRequest_reportConfiguration *smithy.Schema
 
 var CreateServiceRequest_kmsKeyId *smithy.Schema
+
+var CreateServiceRequest_devOpsAgentConfiguration *smithy.Schema
 
 var CreateServiceRequest_tags *smithy.Schema
 
@@ -2431,6 +3672,28 @@ var CreateSystemResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateSystemResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateSystemResponse_system *smithy.Schema
+
+var CreateTestRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "CreateTestRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateTestRequest_serviceArn *smithy.Schema
+
+var CreateTestRequest_testTemplateArn *smithy.Schema
+
+var CreateTestRequest_loggingConfiguration *smithy.Schema
+
+var CreateTestRequest_stopConditions *smithy.Schema
+
+var CreateTestRequest_roleName *smithy.Schema
+
+var CreateTestRequest_parameters *smithy.Schema
+
+var CreateTestResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "CreateTestResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateTestResponse_test *smithy.Schema
 
 var CreateUserJourneyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -2552,6 +3815,35 @@ var DeleteSystemResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeleteSystemResponse_systemArn *smithy.Schema
 
+var DeleteTestRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTestRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteTestRequest_testId *smithy.Schema
+
+var DeleteTestRequest_serviceArn *smithy.Schema
+
+var DeleteTestResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTestResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteTestResponse_testId *smithy.Schema
+
+var DeleteTestSourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTestSourcesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteTestSourcesRequest_testId *smithy.Schema
+
+var DeleteTestSourcesRequest_serviceArn *smithy.Schema
+
+var DeleteTestSourcesRequest_testSources *smithy.Schema
+
+var DeleteTestSourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "DeleteTestSourcesResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteUserJourneyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "DeleteUserJourneyRequest",
@@ -2565,6 +3857,28 @@ var DeleteUserJourneyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteUserJourneyResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteUserJourneyResponse_userJourneyId *smithy.Schema
+
+var GetDependencyInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetDependencyInsightsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetDependencyInsightsRequest_serviceArn *smithy.Schema
+
+var GetDependencyInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetDependencyInsightsResponse",
+}, smithy.ShapeTypeStructure, 6)
+var GetDependencyInsightsResponse_overview *smithy.Schema
+
+var GetDependencyInsightsResponse_insights *smithy.Schema
+
+var GetDependencyInsightsResponse_status *smithy.Schema
+
+var GetDependencyInsightsResponse_createdAt *smithy.Schema
+
+var GetDependencyInsightsResponse_errorCode *smithy.Schema
+
+var GetDependencyInsightsResponse_errorMessage *smithy.Schema
 
 var GetFailureModeFindingRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -2615,6 +3929,46 @@ var GetSystemResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSystemResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetSystemResponse_system *smithy.Schema
+
+var GetTestRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetTestRequest_testId *smithy.Schema
+
+var GetTestRequest_serviceArn *smithy.Schema
+
+var GetTestResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetTestResponse_test *smithy.Schema
+
+var GetTestRunRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestRunRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetTestRunRequest_testRunId *smithy.Schema
+
+var GetTestRunRequest_serviceArn *smithy.Schema
+
+var GetTestRunResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestRunResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetTestRunResponse_testRun *smithy.Schema
+
+var GetTestTemplateRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestTemplateRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetTestTemplateRequest_testTemplateArn *smithy.Schema
+
+var GetTestTemplateResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "GetTestTemplateResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetTestTemplateResponse_testTemplate *smithy.Schema
 
 var GetUserJourneyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -2725,8 +4079,18 @@ var ListDependenciesResponse_nextToken *smithy.Schema
 var ListFailureModeAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListFailureModeAssessmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 8)
 var ListFailureModeAssessmentsRequest_serviceArn *smithy.Schema
+
+var ListFailureModeAssessmentsRequest_assessmentStatuses *smithy.Schema
+
+var ListFailureModeAssessmentsRequest_startedAfter *smithy.Schema
+
+var ListFailureModeAssessmentsRequest_endedBefore *smithy.Schema
+
+var ListFailureModeAssessmentsRequest_sortBy *smithy.Schema
+
+var ListFailureModeAssessmentsRequest_sortOrder *smithy.Schema
 
 var ListFailureModeAssessmentsRequest_maxResults *smithy.Schema
 
@@ -2787,7 +4151,9 @@ var ListInputSourcesResponse_nextToken *smithy.Schema
 var ListPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListPoliciesRequest_accountId *smithy.Schema
+
 var ListPoliciesRequest_maxResults *smithy.Schema
 
 var ListPoliciesRequest_nextToken *smithy.Schema
@@ -2800,13 +4166,39 @@ var ListPoliciesResponse_policySummaries *smithy.Schema
 
 var ListPoliciesResponse_nextToken *smithy.Schema
 
+var ListPolicyEventsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListPolicyEventsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListPolicyEventsRequest_policyArn *smithy.Schema
+
+var ListPolicyEventsRequest_eventTypes *smithy.Schema
+
+var ListPolicyEventsRequest_startTime *smithy.Schema
+
+var ListPolicyEventsRequest_endTime *smithy.Schema
+
+var ListPolicyEventsRequest_maxResults *smithy.Schema
+
+var ListPolicyEventsRequest_nextToken *smithy.Schema
+
+var ListPolicyEventsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListPolicyEventsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListPolicyEventsResponse_events *smithy.Schema
+
+var ListPolicyEventsResponse_nextToken *smithy.Schema
+
 var ListReportsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListReportsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListReportsRequest_serviceArn *smithy.Schema
 
 var ListReportsRequest_reportType *smithy.Schema
+
+var ListReportsRequest_testRunId *smithy.Schema
 
 var ListReportsRequest_maxResults *smithy.Schema
 
@@ -2820,15 +4212,39 @@ var ListReportsResponse_reportGenerationResults *smithy.Schema
 
 var ListReportsResponse_nextToken *smithy.Schema
 
+var ListResolvedTestRunTargetResourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListResolvedTestRunTargetResourcesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListResolvedTestRunTargetResourcesRequest_testRunId *smithy.Schema
+
+var ListResolvedTestRunTargetResourcesRequest_serviceArn *smithy.Schema
+
+var ListResolvedTestRunTargetResourcesRequest_maxResults *smithy.Schema
+
+var ListResolvedTestRunTargetResourcesRequest_nextToken *smithy.Schema
+
+var ListResolvedTestRunTargetResourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListResolvedTestRunTargetResourcesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListResolvedTestRunTargetResourcesResponse_resolvedTargetResources *smithy.Schema
+
+var ListResolvedTestRunTargetResourcesResponse_nextToken *smithy.Schema
+
 var ListResourcesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListResourcesRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var ListResourcesRequest_serviceArn *smithy.Schema
 
 var ListResourcesRequest_serviceFunctionId *smithy.Schema
 
 var ListResourcesRequest_awsRegion *smithy.Schema
+
+var ListResourcesRequest_resourceTypes *smithy.Schema
+
+var ListResourcesRequest_billable *smithy.Schema
 
 var ListResourcesRequest_maxResults *smithy.Schema
 
@@ -2986,6 +4402,165 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var ListTestRunDependenciesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunDependenciesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListTestRunDependenciesRequest_testRunId *smithy.Schema
+
+var ListTestRunDependenciesRequest_serviceArn *smithy.Schema
+
+var ListTestRunDependenciesRequest_maxResults *smithy.Schema
+
+var ListTestRunDependenciesRequest_nextToken *smithy.Schema
+
+var ListTestRunDependenciesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunDependenciesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestRunDependenciesResponse_dependencies *smithy.Schema
+
+var ListTestRunDependenciesResponse_nextToken *smithy.Schema
+
+var ListTestRunEventsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunEventsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListTestRunEventsRequest_testRunId *smithy.Schema
+
+var ListTestRunEventsRequest_serviceArn *smithy.Schema
+
+var ListTestRunEventsRequest_startedAt *smithy.Schema
+
+var ListTestRunEventsRequest_endedAt *smithy.Schema
+
+var ListTestRunEventsRequest_maxResults *smithy.Schema
+
+var ListTestRunEventsRequest_nextToken *smithy.Schema
+
+var ListTestRunEventsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunEventsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestRunEventsResponse_events *smithy.Schema
+
+var ListTestRunEventsResponse_nextToken *smithy.Schema
+
+var ListTestRunsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListTestRunsRequest_serviceArn *smithy.Schema
+
+var ListTestRunsRequest_testId *smithy.Schema
+
+var ListTestRunsRequest_maxResults *smithy.Schema
+
+var ListTestRunsRequest_nextToken *smithy.Schema
+
+var ListTestRunSourceEventsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSourceEventsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListTestRunSourceEventsRequest_testRunId *smithy.Schema
+
+var ListTestRunSourceEventsRequest_serviceArn *smithy.Schema
+
+var ListTestRunSourceEventsRequest_sourceArn *smithy.Schema
+
+var ListTestRunSourceEventsRequest_maxResults *smithy.Schema
+
+var ListTestRunSourceEventsRequest_nextToken *smithy.Schema
+
+var ListTestRunSourceEventsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSourceEventsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestRunSourceEventsResponse_testRunSourceEvents *smithy.Schema
+
+var ListTestRunSourceEventsResponse_nextToken *smithy.Schema
+
+var ListTestRunSourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSourcesRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListTestRunSourcesRequest_testRunId *smithy.Schema
+
+var ListTestRunSourcesRequest_serviceArn *smithy.Schema
+
+var ListTestRunSourcesRequest_type *smithy.Schema
+
+var ListTestRunSourcesRequest_maxResults *smithy.Schema
+
+var ListTestRunSourcesRequest_nextToken *smithy.Schema
+
+var ListTestRunSourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunSourcesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestRunSourcesResponse_testRunSources *smithy.Schema
+
+var ListTestRunSourcesResponse_nextToken *smithy.Schema
+
+var ListTestRunsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestRunsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestRunsResponse_testRuns *smithy.Schema
+
+var ListTestRunsResponse_nextToken *smithy.Schema
+
+var ListTestsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListTestsRequest_serviceArn *smithy.Schema
+
+var ListTestsRequest_maxResults *smithy.Schema
+
+var ListTestsRequest_nextToken *smithy.Schema
+
+var ListTestSourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestSourcesRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListTestSourcesRequest_testId *smithy.Schema
+
+var ListTestSourcesRequest_serviceArn *smithy.Schema
+
+var ListTestSourcesRequest_type *smithy.Schema
+
+var ListTestSourcesRequest_maxResults *smithy.Schema
+
+var ListTestSourcesRequest_nextToken *smithy.Schema
+
+var ListTestSourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestSourcesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestSourcesResponse_testSources *smithy.Schema
+
+var ListTestSourcesResponse_nextToken *smithy.Schema
+
+var ListTestsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTestsResponse_tests *smithy.Schema
+
+var ListTestsResponse_nextToken *smithy.Schema
+
+var ListTestTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestTemplatesRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var ListTestTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "ListTestTemplatesResponse",
+}, smithy.ShapeTypeStructure, 1)
+var ListTestTemplatesResponse_testTemplates *smithy.Schema
+
 var ListUserJourneysRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListUserJourneysRequest",
@@ -3003,6 +4578,35 @@ var ListUserJourneysResponse = smithy.NewSchema(smithy.ShapeID{
 var ListUserJourneysResponse_userJourneySummaries *smithy.Schema
 
 var ListUserJourneysResponse_nextToken *smithy.Schema
+
+var PutTestSourcesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PutTestSourcesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var PutTestSourcesRequest_testId *smithy.Schema
+
+var PutTestSourcesRequest_serviceArn *smithy.Schema
+
+var PutTestSourcesRequest_testSources *smithy.Schema
+
+var PutTestSourcesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "PutTestSourcesResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var StartDependencyInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartDependencyInsightsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StartDependencyInsightsRequest_serviceArn *smithy.Schema
+
+var StartDependencyInsightsRequest_clientToken *smithy.Schema
+
+var StartDependencyInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartDependencyInsightsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartDependencyInsightsResponse_status *smithy.Schema
 
 var StartFailureModeAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3023,6 +4627,40 @@ var StartFailureModeAssessmentResponse_serviceArn *smithy.Schema
 var StartFailureModeAssessmentResponse_assessmentStatus *smithy.Schema
 
 var StartFailureModeAssessmentResponse_startedAt *smithy.Schema
+
+var StartTestRunRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartTestRunRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StartTestRunRequest_testId *smithy.Schema
+
+var StartTestRunRequest_serviceArn *smithy.Schema
+
+var StartTestRunResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StartTestRunResponse",
+}, smithy.ShapeTypeStructure, 3)
+var StartTestRunResponse_testRunId *smithy.Schema
+
+var StartTestRunResponse_status *smithy.Schema
+
+var StartTestRunResponse_experimentArns *smithy.Schema
+
+var StopTestRunRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopTestRunRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StopTestRunRequest_testRunId *smithy.Schema
+
+var StopTestRunRequest_serviceArn *smithy.Schema
+
+var StopTestRunResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "StopTestRunResponse",
+}, smithy.ShapeTypeStructure, 2)
+var StopTestRunResponse_testRunId *smithy.Schema
+
+var StopTestRunResponse_status *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3117,7 +4755,7 @@ var UpdateFailureModeFindingResponse_finding *smithy.Schema
 var UpdatePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "UpdatePolicyRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdatePolicyRequest_policyArn *smithy.Schema
 
 var UpdatePolicyRequest_description *smithy.Schema
@@ -3129,6 +4767,8 @@ var UpdatePolicyRequest_multiAz *smithy.Schema
 var UpdatePolicyRequest_multiRegion *smithy.Schema
 
 var UpdatePolicyRequest_dataRecovery *smithy.Schema
+
+var UpdatePolicyRequest_sharingEnabled *smithy.Schema
 
 var UpdatePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3159,7 +4799,7 @@ var UpdateServiceFunctionResponse_serviceFunction *smithy.Schema
 var UpdateServiceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "UpdateServiceRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateServiceRequest_serviceArn *smithy.Schema
 
 var UpdateServiceRequest_description *smithy.Schema
@@ -3175,6 +4815,8 @@ var UpdateServiceRequest_permissionModel *smithy.Schema
 var UpdateServiceRequest_dependencyDiscovery *smithy.Schema
 
 var UpdateServiceRequest_reportConfiguration *smithy.Schema
+
+var UpdateServiceRequest_devOpsAgentConfiguration *smithy.Schema
 
 var UpdateServiceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3197,6 +4839,28 @@ var UpdateSystemResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateSystemResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateSystemResponse_system *smithy.Schema
+
+var UpdateTestRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "UpdateTestRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateTestRequest_testId *smithy.Schema
+
+var UpdateTestRequest_serviceArn *smithy.Schema
+
+var UpdateTestRequest_loggingConfiguration *smithy.Schema
+
+var UpdateTestRequest_stopConditions *smithy.Schema
+
+var UpdateTestRequest_roleName *smithy.Schema
+
+var UpdateTestRequest_parameters *smithy.Schema
+
+var UpdateTestResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "UpdateTestResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateTestResponse_test *smithy.Schema
 
 var UpdateUserJourneyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -3223,6 +4887,10 @@ var UpdateUserJourneyResponse_userJourney *smithy.Schema
 func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
+	AccountTargeting_SINGLE_ACCOUNT = AccountTargeting.AddMember("SINGLE_ACCOUNT", smithyprelude.Unit)
+
+	AccountTargeting_MULTI_ACCOUNT = AccountTargeting.AddMember("MULTI_ACCOUNT", smithyprelude.Unit)
+
 	AchievabilityStatus_ACHIEVABLE = AchievabilityStatus.AddMember("ACHIEVABLE", smithyprelude.Unit)
 
 	AchievabilityStatus_NOT_ACHIEVABLE = AchievabilityStatus.AddMember("NOT_ACHIEVABLE", smithyprelude.Unit)
@@ -3233,9 +4901,23 @@ func init() {
 
 	Achievability_multiRegionRtoRpo = Achievability.AddMember("multiRegionRtoRpo", AchievabilityStatus)
 
+	Achievability_dataRecoveryTimeBetweenBackups = Achievability.AddMember("dataRecoveryTimeBetweenBackups", AchievabilityStatus)
+
 	ActorType_USER = ActorType.AddMember("USER", smithyprelude.Unit)
 
 	ActorType_SYSTEM = ActorType.AddMember("SYSTEM", smithyprelude.Unit)
+
+	AlarmState_OK = AlarmState.AddMember("OK", smithyprelude.Unit)
+
+	AlarmState_ALARM = AlarmState.AddMember("ALARM", smithyprelude.Unit)
+
+	AlarmState_INSUFFICIENT_DATA = AlarmState.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	AlarmStateChangeDetail_state = AlarmStateChangeDetail.AddMember("state", AlarmState)
+
+	AlarmStateChangeDetail_previousState = AlarmStateChangeDetail.AddMember("previousState", AlarmState)
+
+	AlarmStateChangeDetail_reason = AlarmStateChangeDetail.AddMember("reason", smithyprelude.String)
 
 	_ArnList_member = _ArnList.AddMember("member", _Arn)
 
@@ -3285,6 +4967,8 @@ func init() {
 
 	AssessmentErrorCode_DESIGN_FILE_ACCESS_DENIED = AssessmentErrorCode.AddMember("DESIGN_FILE_ACCESS_DENIED", smithyprelude.Unit)
 
+	AssessmentSortField_STARTED_AT = AssessmentSortField.AddMember("STARTED_AT", smithyprelude.Unit)
+
 	AssessmentStatus_NOT_STARTED = AssessmentStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
 
 	AssessmentStatus_PENDING = AssessmentStatus.AddMember("PENDING", smithyprelude.Unit)
@@ -3295,11 +4979,25 @@ func init() {
 
 	AssessmentStatus_SUCCESS = AssessmentStatus.AddMember("SUCCESS", smithyprelude.Unit)
 
+	_AssessmentStatusList_member = _AssessmentStatusList.AddMember("member", AssessmentStatus)
+
+	AssessmentStep_TOPOLOGY_GENERATION = AssessmentStep.AddMember("TOPOLOGY_GENERATION", smithyprelude.Unit)
+
+	AssessmentStep_INPUT_VALIDATION = AssessmentStep.AddMember("INPUT_VALIDATION", smithyprelude.Unit)
+
+	AssessmentStep_DESIGN_ANALYSIS = AssessmentStep.AddMember("DESIGN_ANALYSIS", smithyprelude.Unit)
+
 	AssessmentStep_TOPOLOGY_ENHANCEMENT = AssessmentStep.AddMember("TOPOLOGY_ENHANCEMENT", smithyprelude.Unit)
 
 	AssessmentStep_SERVICE_FUNCTION_GENERATION = AssessmentStep.AddMember("SERVICE_FUNCTION_GENERATION", smithyprelude.Unit)
 
+	AssessmentStep_POLICY_VALIDATION = AssessmentStep.AddMember("POLICY_VALIDATION", smithyprelude.Unit)
+
 	AssessmentStep_RESILIENCE_ASSESSMENT = AssessmentStep.AddMember("RESILIENCE_ASSESSMENT", smithyprelude.Unit)
+
+	AssessmentStep_FAILURE_MODE_FINDINGS_CONSOLIDATION = AssessmentStep.AddMember("FAILURE_MODE_FINDINGS_CONSOLIDATION", smithyprelude.Unit)
+
+	AssessmentStep_FAILURE_MODE_FINDINGS_ENRICHMENT = AssessmentStep.AddMember("FAILURE_MODE_FINDINGS_ENRICHMENT", smithyprelude.Unit)
 
 	AssessmentSummary_assessmentId = AssessmentSummary.AddMember("assessmentId", _Uuid)
 
@@ -3365,9 +5063,41 @@ func init() {
 
 	DependencyDiscoveryConfig_updatedAt = DependencyDiscoveryConfig.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	DependencyDiscoveryConfig_eligibleResourceCount = DependencyDiscoveryConfig.AddMember("eligibleResourceCount", smithyprelude.Integer)
+
+	DependencyDiscoveryConfig_message = DependencyDiscoveryConfig.AddMember("message", smithyprelude.String)
+
 	DependencyDiscoveryInput_ENABLED = DependencyDiscoveryInput.AddMember("ENABLED", smithyprelude.Unit)
 
 	DependencyDiscoveryInput_DISABLED = DependencyDiscoveryInput.AddMember("DISABLED", smithyprelude.Unit)
+
+	InsightsCategory_CROSS_REGION = InsightsCategory.AddMember("CROSS_REGION", smithyprelude.Unit)
+
+	InsightsCategory_NEW_DEPENDENCY = InsightsCategory.AddMember("NEW_DEPENDENCY", smithyprelude.Unit)
+
+	InsightsCategory_THIRD_PARTY = InsightsCategory.AddMember("THIRD_PARTY", smithyprelude.Unit)
+
+	InsightsCategory_UNEVEN_USAGE = InsightsCategory.AddMember("UNEVEN_USAGE", smithyprelude.Unit)
+
+	InsightsCategory_AWS_SERVICE = InsightsCategory.AddMember("AWS_SERVICE", smithyprelude.Unit)
+
+	DependencyInsight_category = DependencyInsight.AddMember("category", InsightsCategory)
+
+	DependencyInsight_description = DependencyInsight.AddMember("description", smithyprelude.String)
+
+	DependencyInsightsErrorCode_INSUFFICIENT_DATA = DependencyInsightsErrorCode.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	DependencyInsightsErrorCode_LLM_GENERATION_FAILED = DependencyInsightsErrorCode.AddMember("LLM_GENERATION_FAILED", smithyprelude.Unit)
+
+	DependencyInsightsErrorCode_INTERNAL_ERROR = DependencyInsightsErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	_DependencyInsightsList_member = _DependencyInsightsList.AddMember("member", DependencyInsight)
+
+	DependencyInsightsStatus_IN_PROGRESS = DependencyInsightsStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	DependencyInsightsStatus_COMPLETED = DependencyInsightsStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	DependencyInsightsStatus_FAILED = DependencyInsightsStatus.AddMember("FAILED", smithyprelude.Unit)
 
 	_RegionList_member = _RegionList.AddMember("member", _AwsRegion)
 
@@ -3412,6 +5142,62 @@ func init() {
 	DependencySummary_comment = DependencySummary.AddMember("comment", smithyprelude.String)
 
 	_DependencySummaryList_member = _DependencySummaryList.AddMember("member", DependencySummary)
+
+	DevOpsAgentConfidence_HIGH = DevOpsAgentConfidence.AddMember("HIGH", smithyprelude.Unit)
+
+	DevOpsAgentConfidence_MEDIUM = DevOpsAgentConfidence.AddMember("MEDIUM", smithyprelude.Unit)
+
+	DevOpsAgentConfidence_LOW = DevOpsAgentConfidence.AddMember("LOW", smithyprelude.Unit)
+
+	DevOpsAgentConfiguration_agentSpaceArn = DevOpsAgentConfiguration.AddMember("agentSpaceArn", _DevOpsAgentSpaceArn)
+
+	DevOpsAgentConnectionStatus_CONNECTING = DevOpsAgentConnectionStatus.AddMember("CONNECTING", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_CONNECTED = DevOpsAgentConnectionStatus.AddMember("CONNECTED", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_DISCONNECTED = DevOpsAgentConnectionStatus.AddMember("DISCONNECTED", smithyprelude.Unit)
+
+	DevOpsAgentConnectionStatus_FAILED = DevOpsAgentConnectionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DevOpsAgentConfigurationView_agentSpaceArn = DevOpsAgentConfigurationView.AddMember("agentSpaceArn", _DevOpsAgentSpaceArn)
+
+	DevOpsAgentConfigurationView_agentSpaceId = DevOpsAgentConfigurationView.AddMember("agentSpaceId", _DevOpsAgentSpaceId)
+
+	DevOpsAgentConfigurationView_region = DevOpsAgentConfigurationView.AddMember("region", _DevOpsAgentRegion)
+
+	DevOpsAgentConfigurationView_status = DevOpsAgentConfigurationView.AddMember("status", DevOpsAgentConnectionStatus)
+
+	DevOpsAgentConfigurationView_operatorAppUrl = DevOpsAgentConfigurationView.AddMember("operatorAppUrl", smithyprelude.String)
+
+	DevOpsAgentConfigurationView_connectedAt = DevOpsAgentConfigurationView.AddMember("connectedAt", smithyprelude.Timestamp)
+
+	DevOpsAgentConfigurationView_statusReason = DevOpsAgentConfigurationView.AddMember("statusReason", smithyprelude.String)
+
+	DevOpsAgentVerdict_PASS = DevOpsAgentVerdict.AddMember("PASS", smithyprelude.Unit)
+
+	DevOpsAgentVerdict_FAIL = DevOpsAgentVerdict.AddMember("FAIL", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_PENDING = DevOpsAgentInvestigationStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_IN_PROGRESS = DevOpsAgentInvestigationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_COMPLETED = DevOpsAgentInvestigationStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_FAILED = DevOpsAgentInvestigationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_TIMED_OUT = DevOpsAgentInvestigationStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
+
+	DevOpsAgentInvestigationStatus_CANCELED = DevOpsAgentInvestigationStatus.AddMember("CANCELED", smithyprelude.Unit)
+
+	DevOpsAgentInvestigation_verdict = DevOpsAgentInvestigation.AddMember("verdict", DevOpsAgentVerdict)
+
+	DevOpsAgentInvestigation_confidence = DevOpsAgentInvestigation.AddMember("confidence", DevOpsAgentConfidence)
+
+	DevOpsAgentInvestigation_deepLink = DevOpsAgentInvestigation.AddMember("deepLink", smithyprelude.String)
+
+	DevOpsAgentInvestigation_status = DevOpsAgentInvestigation.AddMember("status", DevOpsAgentInvestigationStatus)
+
+	DevOpsAgentInvestigation_summary = DevOpsAgentInvestigation.AddMember("summary", smithyprelude.String)
 
 	PolicyValueSource_SELF = PolicyValueSource.AddMember("SELF", smithyprelude.Unit)
 
@@ -3465,11 +5251,39 @@ func init() {
 
 	EffectivePolicyValues_dataRecoveryTimeBetweenBackups = EffectivePolicyValues.AddMember("dataRecoveryTimeBetweenBackups", TargetSource)
 
+	_EksLabelMap_key = _EksLabelMap.AddMember("key", _EksLabelKey)
+
+	_EksLabelMap_value = _EksLabelMap.AddMember("value", _EksLabelValue)
+
+	EksLabelSelectorOperator_IN = EksLabelSelectorOperator.AddMember("IN", smithyprelude.Unit)
+
+	EksLabelSelectorOperator_NOT_IN = EksLabelSelectorOperator.AddMember("NOT_IN", smithyprelude.Unit)
+
+	EksLabelSelectorOperator_EXISTS = EksLabelSelectorOperator.AddMember("EXISTS", smithyprelude.Unit)
+
+	EksLabelSelectorOperator_DOES_NOT_EXIST = EksLabelSelectorOperator.AddMember("DOES_NOT_EXIST", smithyprelude.Unit)
+
+	_EksLabelValueList_member = _EksLabelValueList.AddMember("member", _EksLabelValue)
+
+	EksLabelSelectorRequirement_key = EksLabelSelectorRequirement.AddMember("key", _EksLabelKey)
+
+	EksLabelSelectorRequirement_operator = EksLabelSelectorRequirement.AddMember("operator", EksLabelSelectorOperator)
+
+	EksLabelSelectorRequirement_values = EksLabelSelectorRequirement.AddMember("values", _EksLabelValueList)
+
+	_EksLabelSelectorRequirementList_member = _EksLabelSelectorRequirementList.AddMember("member", EksLabelSelectorRequirement)
+
+	EksLabelSelector_matchLabels = EksLabelSelector.AddMember("matchLabels", _EksLabelMap)
+
+	EksLabelSelector_matchExpressions = EksLabelSelector.AddMember("matchExpressions", _EksLabelSelectorRequirementList)
+
 	_EksNamespaceList_member = _EksNamespaceList.AddMember("member", _EksNamespace)
 
 	EksSource_clusterArn = EksSource.AddMember("clusterArn", _Arn)
 
 	EksSource_namespaces = EksSource.AddMember("namespaces", _EksNamespaceList)
+
+	EksSource_labelSelector = EksSource.AddMember("labelSelector", EksLabelSelector)
 
 	EventActor_type = EventActor.AddMember("type", ActorType)
 
@@ -3478,6 +5292,14 @@ func init() {
 	EventActor_accountId = EventActor.AddMember("accountId", smithyprelude.String)
 
 	EventActor_userName = EventActor.AddMember("userName", smithyprelude.String)
+
+	_ExperimentArnList_member = _ExperimentArnList.AddMember("member", _Arn)
+
+	ExperimentDetails_experimentArn = ExperimentDetails.AddMember("experimentArn", _Arn)
+
+	ExperimentDetails_details = ExperimentDetails.AddMember("details", smithyprelude.String)
+
+	_ExperimentDetailsList_member = _ExperimentDetailsList.AddMember("member", ExperimentDetails)
 
 	ReportGenerationErrorCode_INSUFFICIENT_PERMISSIONS = ReportGenerationErrorCode.AddMember("INSUFFICIENT_PERMISSIONS", smithyprelude.Unit)
 
@@ -3563,6 +5385,8 @@ func init() {
 
 	Finding_updatedAt = Finding.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	Finding_investigationDeepLink = Finding.AddMember("investigationDeepLink", smithyprelude.String)
+
 	FindingSummary_serviceArn = FindingSummary.AddMember("serviceArn", _Arn)
 
 	FindingSummary_findingId = FindingSummary.AddMember("findingId", _Uuid)
@@ -3580,6 +5404,8 @@ func init() {
 	FindingSummary_policyComponent = FindingSummary.AddMember("policyComponent", PolicyComponent)
 
 	FindingSummary_updatedAt = FindingSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	FindingSummary_investigationDeepLink = FindingSummary.AddMember("investigationDeepLink", smithyprelude.String)
 
 	_FindingsList_member = _FindingsList.AddMember("member", FindingSummary)
 
@@ -3627,6 +5453,12 @@ func init() {
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
+	LoggingConfiguration_s3BucketName = LoggingConfiguration.AddMember("s3BucketName", smithyprelude.String)
+
+	LoggingConfiguration_cloudWatchLogGroupArn = LoggingConfiguration.AddMember("cloudWatchLogGroupArn", _Arn)
+
+	LoggingConfiguration_logSchemaVersion = LoggingConfiguration.AddMember("logSchemaVersion", smithyprelude.String)
+
 	MultiAzDisasterRecoveryApproach_ACTIVE_ACTIVE = MultiAzDisasterRecoveryApproach.AddMember("ACTIVE_ACTIVE", smithyprelude.Unit)
 
 	MultiAzDisasterRecoveryApproach_HOT_STANDBY = MultiAzDisasterRecoveryApproach.AddMember("HOT_STANDBY", smithyprelude.Unit)
@@ -3659,6 +5491,24 @@ func init() {
 
 	MultiRegionTargets_disasterRecoveryApproach = MultiRegionTargets.AddMember("disasterRecoveryApproach", MultiRegionDisasterRecoveryApproach)
 
+	ObservabilityAlarmInput_alarmArn = ObservabilityAlarmInput.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	ObservabilityAlarmSummary_alarmArn = ObservabilityAlarmSummary.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	ObservabilityAlarmSummary_alarmName = ObservabilityAlarmSummary.AddMember("alarmName", smithyprelude.String)
+
+	ObservabilityAlarmSummary_region = ObservabilityAlarmSummary.AddMember("region", smithyprelude.String)
+
+	ObservabilityAlarmSummary_accountId = ObservabilityAlarmSummary.AddMember("accountId", smithyprelude.String)
+
+	ObservabilityAlarmSummary_createdAt = ObservabilityAlarmSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	ParameterType_STRING = ParameterType.AddMember("STRING", smithyprelude.Unit)
+
+	ParameterType_STRING_LIST = ParameterType.AddMember("STRING_LIST", smithyprelude.Unit)
+
+	ParameterType_INTEGER = ParameterType.AddMember("INTEGER", smithyprelude.Unit)
+
 	PermissionModel_invokerRoleName = PermissionModel.AddMember("invokerRoleName", _IamRoleName)
 
 	PermissionModel_crossAccountRoles = PermissionModel.AddMember("crossAccountRoles", _CrossAccountRoleList)
@@ -3681,6 +5531,10 @@ func init() {
 
 	Policy_dataRecovery = Policy.AddMember("dataRecovery", DataRecoveryTargets)
 
+	Policy_sharingEnabled = Policy.AddMember("sharingEnabled", smithyprelude.Boolean)
+
+	Policy_organizationId = Policy.AddMember("organizationId", _OrganizationId)
+
 	Policy_kmsKeyId = Policy.AddMember("kmsKeyId", _KmsKeyId)
 
 	Policy_tags = Policy.AddMember("tags", _TagMap)
@@ -3690,6 +5544,62 @@ func init() {
 	Policy_createdAt = Policy.AddMember("createdAt", smithyprelude.Timestamp)
 
 	Policy_updatedAt = Policy.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	PolicyAttachedToServiceMetadata_serviceArn = PolicyAttachedToServiceMetadata.AddMember("serviceArn", _Arn)
+
+	PolicyAttachedToServiceMetadata_accountId = PolicyAttachedToServiceMetadata.AddMember("accountId", _AccountId)
+
+	PolicyDeletedMetadata_affectedServiceCount = PolicyDeletedMetadata.AddMember("affectedServiceCount", smithyprelude.Integer)
+
+	PolicyDetachedFromServiceMetadata_serviceArn = PolicyDetachedFromServiceMetadata.AddMember("serviceArn", _Arn)
+
+	PolicyDetachedFromServiceMetadata_accountId = PolicyDetachedFromServiceMetadata.AddMember("accountId", _AccountId)
+
+	PolicyDisassociationReason_REPLACED_BY_UPDATE = PolicyDisassociationReason.AddMember("REPLACED_BY_UPDATE", smithyprelude.Unit)
+
+	PolicyDisassociationReason_SHARING_REVOKED = PolicyDisassociationReason.AddMember("SHARING_REVOKED", smithyprelude.Unit)
+
+	PolicyDisassociationReason_POLICY_DELETED = PolicyDisassociationReason.AddMember("POLICY_DELETED", smithyprelude.Unit)
+
+	PolicyEventType_POLICY_ATTACHED_TO_SERVICE = PolicyEventType.AddMember("POLICY_ATTACHED_TO_SERVICE", smithyprelude.Unit)
+
+	PolicyEventType_POLICY_DETACHED_FROM_SERVICE = PolicyEventType.AddMember("POLICY_DETACHED_FROM_SERVICE", smithyprelude.Unit)
+
+	PolicyEventType_POLICY_SHARING_REVOKED = PolicyEventType.AddMember("POLICY_SHARING_REVOKED", smithyprelude.Unit)
+
+	PolicyEventType_POLICY_DELETED = PolicyEventType.AddMember("POLICY_DELETED", smithyprelude.Unit)
+
+	PolicySharingRevokedMetadata_affectedServiceCount = PolicySharingRevokedMetadata.AddMember("affectedServiceCount", smithyprelude.Integer)
+
+	PolicyEventMetadata_policyAttachedToService = PolicyEventMetadata.AddMember("policyAttachedToService", PolicyAttachedToServiceMetadata)
+
+	PolicyEventMetadata_policyDetachedFromService = PolicyEventMetadata.AddMember("policyDetachedFromService", PolicyDetachedFromServiceMetadata)
+
+	PolicyEventMetadata_policySharingRevoked = PolicyEventMetadata.AddMember("policySharingRevoked", PolicySharingRevokedMetadata)
+
+	PolicyEventMetadata_policyDeleted = PolicyEventMetadata.AddMember("policyDeleted", PolicyDeletedMetadata)
+
+	PolicyEventDetails_title = PolicyEventDetails.AddMember("title", smithyprelude.String)
+
+	PolicyEventDetails_description = PolicyEventDetails.AddMember("description", smithyprelude.String)
+
+	PolicyEventDetails_eventMetadata = PolicyEventDetails.AddMember("eventMetadata", PolicyEventMetadata)
+
+	PolicyEvent_eventId = PolicyEvent.AddMember("eventId", _Uuid)
+
+	PolicyEvent_timestamp = PolicyEvent.AddMember("timestamp", smithyprelude.Timestamp)
+
+	PolicyEvent_eventType = PolicyEvent.AddMember("eventType", PolicyEventType)
+
+	PolicyEvent_policyArn = PolicyEvent.AddMember("policyArn", _Arn)
+
+	PolicyEvent_actor = PolicyEvent.AddMember("actor", EventActor)
+
+	PolicyEvent_eventDetails = PolicyEvent.AddMember("eventDetails", PolicyEventDetails)
+
+	_PolicyEventList_member = _PolicyEventList.AddMember("member", PolicyEvent)
+
+	_PolicyEventTypeList_member = _PolicyEventTypeList.AddMember("member", PolicyEventType)
 
 	PolicySummary_policyArn = PolicySummary.AddMember("policyArn", _Arn)
 
@@ -3703,6 +5613,10 @@ func init() {
 
 	PolicySummary_dataRecovery = PolicySummary.AddMember("dataRecovery", DataRecoveryTargets)
 
+	PolicySummary_sharingEnabled = PolicySummary.AddMember("sharingEnabled", smithyprelude.Boolean)
+
+	PolicySummary_organizationId = PolicySummary.AddMember("organizationId", _OrganizationId)
+
 	PolicySummary_associatedServiceCount = PolicySummary.AddMember("associatedServiceCount", smithyprelude.Integer)
 
 	PolicySummary_createdAt = PolicySummary.AddMember("createdAt", smithyprelude.Timestamp)
@@ -3712,6 +5626,8 @@ func init() {
 	_PolicySummaryList_member = _PolicySummaryList.AddMember("member", PolicySummary)
 
 	ReportType_FAILURE_MODE = ReportType.AddMember("FAILURE_MODE", smithyprelude.Unit)
+
+	ReportType_TESTING = ReportType.AddMember("TESTING", smithyprelude.Unit)
 
 	ReportGenerationStatus_PENDING = ReportGenerationStatus.AddMember("PENDING", smithyprelude.Unit)
 
@@ -3733,6 +5649,10 @@ func init() {
 
 	ReportGenerationResult_assessmentId = ReportGenerationResult.AddMember("assessmentId", _Uuid)
 
+	ReportGenerationResult_testRunId = ReportGenerationResult.AddMember("testRunId", _TestRunId)
+
+	ReportGenerationResult_testTemplateArn = ReportGenerationResult.AddMember("testTemplateArn", _ServiceOwnedArn)
+
 	ReportGenerationResult_createdAt = ReportGenerationResult.AddMember("createdAt", smithyprelude.Timestamp)
 
 	ReportGenerationResult_reportOutput = ReportGenerationResult.AddMember("reportOutput", ReportOutput)
@@ -3747,6 +5667,18 @@ func init() {
 
 	_ReportOutputConfigurationList_member = _ReportOutputConfigurationList.AddMember("member", ReportOutputConfiguration)
 
+	_ResolvedTargetInformation_key = _ResolvedTargetInformation.AddMember("key", _ResolvedTargetInformationKey)
+
+	_ResolvedTargetInformation_value = _ResolvedTargetInformation.AddMember("value", _ResolvedTargetInformationValue)
+
+	ResolvedTargetResource_resourceType = ResolvedTargetResource.AddMember("resourceType", smithyprelude.String)
+
+	ResolvedTargetResource_targetName = ResolvedTargetResource.AddMember("targetName", smithyprelude.String)
+
+	ResolvedTargetResource_targetInformation = ResolvedTargetResource.AddMember("targetInformation", _ResolvedTargetInformation)
+
+	_ResolvedTargetResourceList_member = _ResolvedTargetResourceList.AddMember("member", ResolvedTargetResource)
+
 	Resource_identifier = Resource.AddMember("identifier", smithyprelude.String)
 
 	Resource_awsRegion = Resource.AddMember("awsRegion", _AwsRegion)
@@ -3754,6 +5686,14 @@ func init() {
 	Resource_awsAccountId = Resource.AddMember("awsAccountId", _AwsAccountId)
 
 	Resource_resourceType = Resource.AddMember("resourceType", smithyprelude.String)
+
+	Resource_availabilityZoneId = Resource.AddMember("availabilityZoneId", smithyprelude.String)
+
+	Resource_availabilityZoneName = Resource.AddMember("availabilityZoneName", smithyprelude.String)
+
+	Resource_containmentParentId = Resource.AddMember("containmentParentId", smithyprelude.String)
+
+	Resource_logicalResourceGroupId = Resource.AddMember("logicalResourceGroupId", smithyprelude.String)
 
 	ResourceConfiguration_resourceTags = ResourceConfiguration.AddMember("resourceTags", _ResourceTagList)
 
@@ -3805,6 +5745,8 @@ func init() {
 
 	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
 
+	_ResourceTypeFilterList_member = _ResourceTypeFilterList.AddMember("member", _ResourceTypeFilter)
+
 	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", smithyprelude.String)
 
 	ServiceReportConfiguration_reportOutputs = ServiceReportConfiguration.AddMember("reportOutputs", _ReportOutputConfigurationList)
@@ -3852,6 +5794,8 @@ func init() {
 	Service_ouId = Service.AddMember("ouId", _OuId)
 
 	Service_accountId = Service.AddMember("accountId", _AccountId)
+
+	Service_devOpsAgentConfiguration = Service.AddMember("devOpsAgentConfiguration", DevOpsAgentConfigurationView)
 
 	Service_createdAt = Service.AddMember("createdAt", smithyprelude.Timestamp)
 
@@ -3929,9 +5873,19 @@ func init() {
 
 	ServicePolicyAssociatedMetadata_policyArn = ServicePolicyAssociatedMetadata.AddMember("policyArn", _Arn)
 
+	ServicePolicyAssociatedMetadata_policyOwnerAccountId = ServicePolicyAssociatedMetadata.AddMember("policyOwnerAccountId", smithyprelude.String)
+
+	ServicePolicyAssociatedMetadata_policySource = ServicePolicyAssociatedMetadata.AddMember("policySource", PolicyValueSource)
+
 	ServicePolicyDisassociatedMetadata_policyName = ServicePolicyDisassociatedMetadata.AddMember("policyName", smithyprelude.String)
 
 	ServicePolicyDisassociatedMetadata_policyArn = ServicePolicyDisassociatedMetadata.AddMember("policyArn", _Arn)
+
+	ServicePolicyDisassociatedMetadata_policyOwnerAccountId = ServicePolicyDisassociatedMetadata.AddMember("policyOwnerAccountId", smithyprelude.String)
+
+	ServicePolicyDisassociatedMetadata_policySource = ServicePolicyDisassociatedMetadata.AddMember("policySource", PolicyValueSource)
+
+	ServicePolicyDisassociatedMetadata_reason = ServicePolicyDisassociatedMetadata.AddMember("reason", PolicyDisassociationReason)
 
 	ServiceFunctionCreatedMetadata_serviceFunctionId = ServiceFunctionCreatedMetadata.AddMember("serviceFunctionId", smithyprelude.String)
 
@@ -4081,6 +6035,10 @@ func init() {
 
 	ServiceSummary_assessmentStatus = ServiceSummary.AddMember("assessmentStatus", AssessmentStatus)
 
+	ServiceSummary_devOpsAgentStatus = ServiceSummary.AddMember("devOpsAgentStatus", DevOpsAgentConnectionStatus)
+
+	ServiceSummary_devOpsAgentSpaceArn = ServiceSummary.AddMember("devOpsAgentSpaceArn", _DevOpsAgentSpaceArn)
+
 	ServiceSummary_openFindingsCount = ServiceSummary.AddMember("openFindingsCount", smithyprelude.Integer)
 
 	ServiceSummary_resolvedFindingsCount = ServiceSummary.AddMember("resolvedFindingsCount", smithyprelude.Integer)
@@ -4105,13 +6063,49 @@ func init() {
 
 	ServiceTopologyEdgeSummary_destinationResourceIdentifier = ServiceTopologyEdgeSummary.AddMember("destinationResourceIdentifier", smithyprelude.String)
 
+	ServiceTopologyEdgeSummary_sourceRegion = ServiceTopologyEdgeSummary.AddMember("sourceRegion", _AwsRegion)
+
+	ServiceTopologyEdgeSummary_destinationRegion = ServiceTopologyEdgeSummary.AddMember("destinationRegion", _AwsRegion)
+
+	ServiceTopologyEdgeSummary_sourceAccount = ServiceTopologyEdgeSummary.AddMember("sourceAccount", _AwsAccountId)
+
+	ServiceTopologyEdgeSummary_destinationAccount = ServiceTopologyEdgeSummary.AddMember("destinationAccount", _AwsAccountId)
+
 	ServiceTopologyEdgeSummary_properties = ServiceTopologyEdgeSummary.AddMember("properties", _EdgePropertyList)
 
 	_ServiceTopologyEdgeSummaryList_member = _ServiceTopologyEdgeSummaryList.AddMember("member", ServiceTopologyEdgeSummary)
 
+	SortOrder_ASC = SortOrder.AddMember("ASC", smithyprelude.Unit)
+
+	SortOrder_DESC = SortOrder.AddMember("DESC", smithyprelude.Unit)
+
+	StopConditionSource_AWS_CLOUDWATCH_ALARM = StopConditionSource.AddMember("AWS_CLOUDWATCH_ALARM", smithyprelude.Unit)
+
+	StopConditionSource_NONE = StopConditionSource.AddMember("NONE", smithyprelude.Unit)
+
+	StopCondition_source = StopCondition.AddMember("source", StopConditionSource)
+
+	StopCondition_value = StopCondition.AddMember("value", smithyprelude.String)
+
+	_StopConditionList_member = _StopConditionList.AddMember("member", StopCondition)
+
 	StringChange_oldValue = StringChange.AddMember("oldValue", smithyprelude.String)
 
 	StringChange_newValue = StringChange.AddMember("newValue", smithyprelude.String)
+
+	_StringList_member = _StringList.AddMember("member", _ParameterValue)
+
+	SuccessCriteriaAlarmInput_alarmArn = SuccessCriteriaAlarmInput.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	SuccessCriteriaAlarmSummary_alarmArn = SuccessCriteriaAlarmSummary.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	SuccessCriteriaAlarmSummary_alarmName = SuccessCriteriaAlarmSummary.AddMember("alarmName", smithyprelude.String)
+
+	SuccessCriteriaAlarmSummary_region = SuccessCriteriaAlarmSummary.AddMember("region", smithyprelude.String)
+
+	SuccessCriteriaAlarmSummary_accountId = SuccessCriteriaAlarmSummary.AddMember("accountId", smithyprelude.String)
+
+	SuccessCriteriaAlarmSummary_createdAt = SuccessCriteriaAlarmSummary.AddMember("createdAt", smithyprelude.Timestamp)
 
 	System_systemArn = System.AddMember("systemArn", _Arn)
 
@@ -4255,6 +6249,294 @@ func init() {
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
+	TestAction_actionId = TestAction.AddMember("actionId", smithyprelude.String)
+
+	TestAction_description = TestAction.AddMember("description", smithyprelude.String)
+
+	TestAction_resourceType = TestAction.AddMember("resourceType", smithyprelude.String)
+
+	_TestActionList_member = _TestActionList.AddMember("member", TestAction)
+
+	_TestParameters_key = _TestParameters.AddMember("key", _ParameterKey)
+
+	_TestParameters_value = _TestParameters.AddMember("value", _StringList)
+
+	Test_testId = Test.AddMember("testId", _TestId)
+
+	Test_testTemplateArn = Test.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	Test_serviceArn = Test.AddMember("serviceArn", _Arn)
+
+	Test_name = Test.AddMember("name", smithyprelude.String)
+
+	Test_actions = Test.AddMember("actions", _TestActionList)
+
+	Test_loggingConfiguration = Test.AddMember("loggingConfiguration", LoggingConfiguration)
+
+	Test_stopConditions = Test.AddMember("stopConditions", _StopConditionList)
+
+	Test_roleName = Test.AddMember("roleName", _IamRoleName)
+
+	Test_parameters = Test.AddMember("parameters", _TestParameters)
+
+	Test_totalTestRuns = Test.AddMember("totalTestRuns", smithyprelude.Integer)
+
+	Test_successfulTestRuns = Test.AddMember("successfulTestRuns", smithyprelude.Integer)
+
+	Test_creationTime = Test.AddMember("creationTime", smithyprelude.Timestamp)
+
+	TestRunStatus_INITIALIZING = TestRunStatus.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	TestRunStatus_RUNNING = TestRunStatus.AddMember("RUNNING", smithyprelude.Unit)
+
+	TestRunStatus_STOPPING = TestRunStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	TestRunStatus_PASSED = TestRunStatus.AddMember("PASSED", smithyprelude.Unit)
+
+	TestRunStatus_FAILED = TestRunStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TestRunStatus_STOPPED = TestRunStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	TestRunStatus_ERROR = TestRunStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	TestRunReportConfiguration_reportOutput = TestRunReportConfiguration.AddMember("reportOutput", _ReportOutputConfigurationList)
+
+	TestRunPolicySnapshot_policyArn = TestRunPolicySnapshot.AddMember("policyArn", _Arn)
+
+	TestRunPolicySnapshot_name = TestRunPolicySnapshot.AddMember("name", _EntityName)
+
+	TestRunPolicySnapshot_availabilitySlo = TestRunPolicySnapshot.AddMember("availabilitySlo", AvailabilitySlo)
+
+	TestRunPolicySnapshot_multiAz = TestRunPolicySnapshot.AddMember("multiAz", MultiAzTargets)
+
+	TestRunPolicySnapshot_multiRegion = TestRunPolicySnapshot.AddMember("multiRegion", MultiRegionTargets)
+
+	TestRunPolicySnapshot_dataRecovery = TestRunPolicySnapshot.AddMember("dataRecovery", DataRecoveryTargets)
+
+	TestRun_testRunId = TestRun.AddMember("testRunId", _TestRunId)
+
+	TestRun_testId = TestRun.AddMember("testId", _TestId)
+
+	TestRun_status = TestRun.AddMember("status", TestRunStatus)
+
+	TestRun_serviceArn = TestRun.AddMember("serviceArn", _Arn)
+
+	TestRun_startedAt = TestRun.AddMember("startedAt", smithyprelude.Timestamp)
+
+	TestRun_endedAt = TestRun.AddMember("endedAt", smithyprelude.Timestamp)
+
+	TestRun_experiments = TestRun.AddMember("experiments", _ExperimentDetailsList)
+
+	TestRun_eventCount = TestRun.AddMember("eventCount", smithyprelude.Integer)
+
+	TestRun_parameters = TestRun.AddMember("parameters", _TestParameters)
+
+	TestRun_errorMessage = TestRun.AddMember("errorMessage", smithyprelude.String)
+
+	TestRun_stopConditions = TestRun.AddMember("stopConditions", _StopConditionList)
+
+	TestRun_loggingConfiguration = TestRun.AddMember("loggingConfiguration", LoggingConfiguration)
+
+	TestRun_roleName = TestRun.AddMember("roleName", _IamRoleName)
+
+	TestRun_testTemplateArn = TestRun.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	TestRun_reportConfiguration = TestRun.AddMember("reportConfiguration", TestRunReportConfiguration)
+
+	TestRun_policy = TestRun.AddMember("policy", TestRunPolicySnapshot)
+
+	TestRun_reportOutput = TestRun.AddMember("reportOutput", ReportGenerationResult)
+
+	TestRun_regionSwitchPlanArn = TestRun.AddMember("regionSwitchPlanArn", _Arn)
+
+	TestRun_regionSwitchExecutionId = TestRun.AddMember("regionSwitchExecutionId", _RegionSwitchExecutionId)
+
+	TestRun_permissionModel = TestRun.AddMember("permissionModel", PermissionModel)
+
+	TestRun_regions = TestRun.AddMember("regions", _RegionList)
+
+	TestRun_accountTargeting = TestRun.AddMember("accountTargeting", AccountTargeting)
+
+	TestRun_devOpsAgentInvestigation = TestRun.AddMember("devOpsAgentInvestigation", DevOpsAgentInvestigation)
+
+	TestRunDependencySource_DISCOVERED = TestRunDependencySource.AddMember("DISCOVERED", smithyprelude.Unit)
+
+	TestRunDependencySource_MANUAL = TestRunDependencySource.AddMember("MANUAL", smithyprelude.Unit)
+
+	TestRunDependencySummary_dependencyId = TestRunDependencySummary.AddMember("dependencyId", _Uuid)
+
+	TestRunDependencySummary_dependencyName = TestRunDependencySummary.AddMember("dependencyName", smithyprelude.String)
+
+	TestRunDependencySummary_dnsName = TestRunDependencySummary.AddMember("dnsName", smithyprelude.String)
+
+	TestRunDependencySummary_criticality = TestRunDependencySummary.AddMember("criticality", DependencyCriticality)
+
+	TestRunDependencySummary_source = TestRunDependencySummary.AddMember("source", TestRunDependencySource)
+
+	TestRunDependencySummary_location = TestRunDependencySummary.AddMember("location", smithyprelude.String)
+
+	TestRunDependencySummary_sourceRegions = TestRunDependencySummary.AddMember("sourceRegions", _RegionList)
+
+	TestRunDependencySummary_provider = TestRunDependencySummary.AddMember("provider", smithyprelude.String)
+
+	_TestRunDependencySummaryList_member = _TestRunDependencySummaryList.AddMember("member", TestRunDependencySummary)
+
+	_TestRunEventAttributes_key = _TestRunEventAttributes.AddMember("key", _TestRunEventAttributeKey)
+
+	_TestRunEventAttributes_value = _TestRunEventAttributes.AddMember("value", _TestRunEventAttributeValue)
+
+	TestRunEvent_eventId = TestRunEvent.AddMember("eventId", smithyprelude.String)
+
+	TestRunEvent_eventType = TestRunEvent.AddMember("eventType", smithyprelude.String)
+
+	TestRunEvent_message = TestRunEvent.AddMember("message", smithyprelude.String)
+
+	TestRunEvent_timestamp = TestRunEvent.AddMember("timestamp", smithyprelude.Timestamp)
+
+	TestRunEvent_attributes = TestRunEvent.AddMember("attributes", _TestRunEventAttributes)
+
+	_TestRunEventList_member = _TestRunEventList.AddMember("member", TestRunEvent)
+
+	TestRunObservabilityAlarmSummary_alarmArn = TestRunObservabilityAlarmSummary.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	TestRunObservabilityAlarmSummary_alarmName = TestRunObservabilityAlarmSummary.AddMember("alarmName", smithyprelude.String)
+
+	TestRunObservabilityAlarmSummary_region = TestRunObservabilityAlarmSummary.AddMember("region", smithyprelude.String)
+
+	TestRunObservabilityAlarmSummary_accountId = TestRunObservabilityAlarmSummary.AddMember("accountId", smithyprelude.String)
+
+	TestRunSourceEventType_ALARM = TestRunSourceEventType.AddMember("ALARM", smithyprelude.Unit)
+
+	TestRunSourceEventErrorCode_ACCESS_DENIED = TestRunSourceEventErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	TestRunSourceEventErrorCode_INTERNAL_ERROR = TestRunSourceEventErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	TestRunSourceEventError_errorCode = TestRunSourceEventError.AddMember("errorCode", TestRunSourceEventErrorCode)
+
+	TestRunSourceEventError_errorMessage = TestRunSourceEventError.AddMember("errorMessage", smithyprelude.String)
+
+	TestRunSourceEventDetail_alarmStateChange = TestRunSourceEventDetail.AddMember("alarmStateChange", AlarmStateChangeDetail)
+
+	TestRunSourceEventDetail_error = TestRunSourceEventDetail.AddMember("error", TestRunSourceEventError)
+
+	TestRunSourceEvent_timestamp = TestRunSourceEvent.AddMember("timestamp", smithyprelude.Timestamp)
+
+	TestRunSourceEvent_sourceArn = TestRunSourceEvent.AddMember("sourceArn", _TestRunSourceArn)
+
+	TestRunSourceEvent_eventType = TestRunSourceEvent.AddMember("eventType", TestRunSourceEventType)
+
+	TestRunSourceEvent_detail = TestRunSourceEvent.AddMember("detail", TestRunSourceEventDetail)
+
+	_TestRunSourceEventList_member = _TestRunSourceEventList.AddMember("member", TestRunSourceEvent)
+
+	TestSourceOutcome_PASSED = TestSourceOutcome.AddMember("PASSED", smithyprelude.Unit)
+
+	TestSourceOutcome_FAILED = TestSourceOutcome.AddMember("FAILED", smithyprelude.Unit)
+
+	TestSourceOutcome_ERROR = TestSourceOutcome.AddMember("ERROR", smithyprelude.Unit)
+
+	TestRunSuccessCriteriaAlarmSummary_alarmArn = TestRunSuccessCriteriaAlarmSummary.AddMember("alarmArn", _CloudWatchAlarmArn)
+
+	TestRunSuccessCriteriaAlarmSummary_alarmName = TestRunSuccessCriteriaAlarmSummary.AddMember("alarmName", smithyprelude.String)
+
+	TestRunSuccessCriteriaAlarmSummary_region = TestRunSuccessCriteriaAlarmSummary.AddMember("region", smithyprelude.String)
+
+	TestRunSuccessCriteriaAlarmSummary_accountId = TestRunSuccessCriteriaAlarmSummary.AddMember("accountId", smithyprelude.String)
+
+	TestRunSuccessCriteriaAlarmSummary_outcome = TestRunSuccessCriteriaAlarmSummary.AddMember("outcome", TestSourceOutcome)
+
+	TestRunSuccessCriteriaAlarmSummary_outcomeReason = TestRunSuccessCriteriaAlarmSummary.AddMember("outcomeReason", smithyprelude.String)
+
+	TestRunSourceSummary_successCriteriaAlarm = TestRunSourceSummary.AddMember("successCriteriaAlarm", TestRunSuccessCriteriaAlarmSummary)
+
+	TestRunSourceSummary_observabilityAlarm = TestRunSourceSummary.AddMember("observabilityAlarm", TestRunObservabilityAlarmSummary)
+
+	_TestRunSourceSummaryList_member = _TestRunSourceSummaryList.AddMember("member", TestRunSourceSummary)
+
+	TestRunSourceType_SUCCESS_CRITERIA = TestRunSourceType.AddMember("SUCCESS_CRITERIA", smithyprelude.Unit)
+
+	TestRunSourceType_OBSERVABILITY = TestRunSourceType.AddMember("OBSERVABILITY", smithyprelude.Unit)
+
+	TestRunSummary_testRunId = TestRunSummary.AddMember("testRunId", _TestRunId)
+
+	TestRunSummary_status = TestRunSummary.AddMember("status", TestRunStatus)
+
+	TestRunSummary_startedAt = TestRunSummary.AddMember("startedAt", smithyprelude.Timestamp)
+
+	TestRunSummary_endedAt = TestRunSummary.AddMember("endedAt", smithyprelude.Timestamp)
+
+	TestRunSummary_testTemplateArn = TestRunSummary.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	TestRunSummary_serviceArn = TestRunSummary.AddMember("serviceArn", _Arn)
+
+	TestRunSummary_errorMessage = TestRunSummary.AddMember("errorMessage", smithyprelude.String)
+
+	TestRunSummary_accountTargeting = TestRunSummary.AddMember("accountTargeting", AccountTargeting)
+
+	_TestRunSummaryList_member = _TestRunSummaryList.AddMember("member", TestRunSummary)
+
+	TestSourceInput_successCriteriaAlarm = TestSourceInput.AddMember("successCriteriaAlarm", SuccessCriteriaAlarmInput)
+
+	TestSourceInput_observabilityAlarm = TestSourceInput.AddMember("observabilityAlarm", ObservabilityAlarmInput)
+
+	_TestSourceInputList_member = _TestSourceInputList.AddMember("member", TestSourceInput)
+
+	TestSourceSummary_successCriteriaAlarm = TestSourceSummary.AddMember("successCriteriaAlarm", SuccessCriteriaAlarmSummary)
+
+	TestSourceSummary_observabilityAlarm = TestSourceSummary.AddMember("observabilityAlarm", ObservabilityAlarmSummary)
+
+	_TestSourceSummaryList_member = _TestSourceSummaryList.AddMember("member", TestSourceSummary)
+
+	TestSourceType_SUCCESS_CRITERIA = TestSourceType.AddMember("SUCCESS_CRITERIA", smithyprelude.Unit)
+
+	TestSourceType_OBSERVABILITY = TestSourceType.AddMember("OBSERVABILITY", smithyprelude.Unit)
+
+	TestSummary_testId = TestSummary.AddMember("testId", _TestId)
+
+	TestSummary_testTemplateArn = TestSummary.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	TestSummary_serviceArn = TestSummary.AddMember("serviceArn", _Arn)
+
+	TestSummary_totalTestRuns = TestSummary.AddMember("totalTestRuns", smithyprelude.Integer)
+
+	TestSummary_successfulTestRuns = TestSummary.AddMember("successfulTestRuns", smithyprelude.Integer)
+
+	TestSummary_creationTime = TestSummary.AddMember("creationTime", smithyprelude.Timestamp)
+
+	_TestSummaryList_member = _TestSummaryList.AddMember("member", TestSummary)
+
+	TestTemplateParameter_name = TestTemplateParameter.AddMember("name", smithyprelude.String)
+
+	TestTemplateParameter_description = TestTemplateParameter.AddMember("description", smithyprelude.String)
+
+	TestTemplateParameter_type = TestTemplateParameter.AddMember("type", ParameterType)
+
+	TestTemplateParameter_required = TestTemplateParameter.AddMember("required", smithyprelude.Boolean)
+
+	TestTemplateParameter_defaultValue = TestTemplateParameter.AddMember("defaultValue", smithyprelude.String)
+
+	TestTemplateParameter_maxValues = TestTemplateParameter.AddMember("maxValues", smithyprelude.Integer)
+
+	_TestTemplateParameterList_member = _TestTemplateParameterList.AddMember("member", TestTemplateParameter)
+
+	TestTemplate_testTemplateArn = TestTemplate.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	TestTemplate_name = TestTemplate.AddMember("name", smithyprelude.String)
+
+	TestTemplate_description = TestTemplate.AddMember("description", smithyprelude.String)
+
+	TestTemplate_parameters = TestTemplate.AddMember("parameters", _TestTemplateParameterList)
+
+	TestTemplate_actions = TestTemplate.AddMember("actions", _TestActionList)
+
+	TestTemplateSummary_testTemplateArn = TestTemplateSummary.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	TestTemplateSummary_name = TestTemplateSummary.AddMember("name", smithyprelude.String)
+
+	TestTemplateSummary_description = TestTemplateSummary.AddMember("description", smithyprelude.String)
+
+	_TestTemplateSummaryList_member = _TestTemplateSummaryList.AddMember("member", TestTemplateSummary)
+
 	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
 
 	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer)
@@ -4331,6 +6613,8 @@ func init() {
 
 	CreatePolicyRequest_dataRecovery = CreatePolicyRequest.AddMember("dataRecovery", DataRecoveryTargets)
 
+	CreatePolicyRequest_sharingEnabled = CreatePolicyRequest.AddMember("sharingEnabled", smithyprelude.Boolean)
+
 	CreatePolicyRequest_kmsKeyId = CreatePolicyRequest.AddMember("kmsKeyId", _KmsKeyId)
 
 	CreatePolicyRequest_tags = CreatePolicyRequest.AddMember("tags", _TagMap)
@@ -4389,6 +6673,8 @@ func init() {
 
 	CreateServiceRequest_kmsKeyId = CreateServiceRequest.AddMember("kmsKeyId", _KmsKeyId)
 
+	CreateServiceRequest_devOpsAgentConfiguration = CreateServiceRequest.AddMember("devOpsAgentConfiguration", DevOpsAgentConfiguration)
+
 	CreateServiceRequest_tags = CreateServiceRequest.AddMember("tags", _TagMap)
 
 	CreateServiceRequest_clientToken = CreateServiceRequest.AddMember("clientToken", _ClientToken)
@@ -4408,6 +6694,20 @@ func init() {
 	CreateSystemRequest_clientToken = CreateSystemRequest.AddMember("clientToken", _ClientToken)
 
 	CreateSystemResponse_system = CreateSystemResponse.AddMember("system", System)
+
+	CreateTestRequest_serviceArn = CreateTestRequest.AddMember("serviceArn", _Arn)
+
+	CreateTestRequest_testTemplateArn = CreateTestRequest.AddMember("testTemplateArn", _ServiceOwnedArn)
+
+	CreateTestRequest_loggingConfiguration = CreateTestRequest.AddMember("loggingConfiguration", LoggingConfiguration)
+
+	CreateTestRequest_stopConditions = CreateTestRequest.AddMember("stopConditions", _StopConditionList)
+
+	CreateTestRequest_roleName = CreateTestRequest.AddMember("roleName", _IamRoleName)
+
+	CreateTestRequest_parameters = CreateTestRequest.AddMember("parameters", _TestParameters)
+
+	CreateTestResponse_test = CreateTestResponse.AddMember("test", Test)
 
 	CreateUserJourneyRequest_systemArn = CreateUserJourneyRequest.AddMember("systemArn", _Arn)
 
@@ -4465,11 +6765,37 @@ func init() {
 
 	DeleteSystemResponse_systemArn = DeleteSystemResponse.AddMember("systemArn", _Arn)
 
+	DeleteTestRequest_testId = DeleteTestRequest.AddMember("testId", _TestId)
+
+	DeleteTestRequest_serviceArn = DeleteTestRequest.AddMember("serviceArn", _Arn)
+
+	DeleteTestResponse_testId = DeleteTestResponse.AddMember("testId", _TestId)
+
+	DeleteTestSourcesRequest_testId = DeleteTestSourcesRequest.AddMember("testId", _TestId)
+
+	DeleteTestSourcesRequest_serviceArn = DeleteTestSourcesRequest.AddMember("serviceArn", _Arn)
+
+	DeleteTestSourcesRequest_testSources = DeleteTestSourcesRequest.AddMember("testSources", _TestSourceInputList)
+
 	DeleteUserJourneyRequest_systemArn = DeleteUserJourneyRequest.AddMember("systemArn", _Arn)
 
 	DeleteUserJourneyRequest_userJourneyId = DeleteUserJourneyRequest.AddMember("userJourneyId", _UserJourneyId)
 
 	DeleteUserJourneyResponse_userJourneyId = DeleteUserJourneyResponse.AddMember("userJourneyId", _UserJourneyId)
+
+	GetDependencyInsightsRequest_serviceArn = GetDependencyInsightsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	GetDependencyInsightsResponse_overview = GetDependencyInsightsResponse.AddMember("overview", smithyprelude.String)
+
+	GetDependencyInsightsResponse_insights = GetDependencyInsightsResponse.AddMember("insights", _DependencyInsightsList)
+
+	GetDependencyInsightsResponse_status = GetDependencyInsightsResponse.AddMember("status", DependencyInsightsStatus)
+
+	GetDependencyInsightsResponse_createdAt = GetDependencyInsightsResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetDependencyInsightsResponse_errorCode = GetDependencyInsightsResponse.AddMember("errorCode", DependencyInsightsErrorCode)
+
+	GetDependencyInsightsResponse_errorMessage = GetDependencyInsightsResponse.AddMember("errorMessage", smithyprelude.String)
 
 	GetFailureModeFindingRequest_findingId = GetFailureModeFindingRequest.AddMember("findingId", _Uuid, &smithytraits.HTTPQuery{Name: "findingId"})
 
@@ -4488,6 +6814,22 @@ func init() {
 	GetSystemRequest_systemArn = GetSystemRequest.AddMember("systemArn", _Arn, &smithytraits.HTTPQuery{Name: "systemArn"})
 
 	GetSystemResponse_system = GetSystemResponse.AddMember("system", System)
+
+	GetTestRequest_testId = GetTestRequest.AddMember("testId", _TestId, &smithytraits.HTTPQuery{Name: "testId"})
+
+	GetTestRequest_serviceArn = GetTestRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	GetTestResponse_test = GetTestResponse.AddMember("test", Test)
+
+	GetTestRunRequest_testRunId = GetTestRunRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPQuery{Name: "testRunId"})
+
+	GetTestRunRequest_serviceArn = GetTestRunRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	GetTestRunResponse_testRun = GetTestRunResponse.AddMember("testRun", TestRun)
+
+	GetTestTemplateRequest_testTemplateArn = GetTestTemplateRequest.AddMember("testTemplateArn", _ServiceOwnedArn, &smithytraits.HTTPQuery{Name: "testTemplateArn"})
+
+	GetTestTemplateResponse_testTemplate = GetTestTemplateResponse.AddMember("testTemplate", TestTemplate)
 
 	GetUserJourneyRequest_systemArn = GetUserJourneyRequest.AddMember("systemArn", _Arn, &smithytraits.HTTPQuery{Name: "systemArn"})
 
@@ -4557,6 +6899,16 @@ func init() {
 
 	ListFailureModeAssessmentsRequest_serviceArn = ListFailureModeAssessmentsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
 
+	ListFailureModeAssessmentsRequest_assessmentStatuses = ListFailureModeAssessmentsRequest.AddMember("assessmentStatuses", _AssessmentStatusList, &smithytraits.HTTPQuery{Name: "assessmentStatuses"})
+
+	ListFailureModeAssessmentsRequest_startedAfter = ListFailureModeAssessmentsRequest.AddMember("startedAfter", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "startedAfter"})
+
+	ListFailureModeAssessmentsRequest_endedBefore = ListFailureModeAssessmentsRequest.AddMember("endedBefore", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "endedBefore"})
+
+	ListFailureModeAssessmentsRequest_sortBy = ListFailureModeAssessmentsRequest.AddMember("sortBy", AssessmentSortField, &smithytraits.HTTPQuery{Name: "sortBy"})
+
+	ListFailureModeAssessmentsRequest_sortOrder = ListFailureModeAssessmentsRequest.AddMember("sortOrder", SortOrder, &smithytraits.HTTPQuery{Name: "sortOrder"})
+
 	ListFailureModeAssessmentsRequest_maxResults = ListFailureModeAssessmentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListFailureModeAssessmentsRequest_nextToken = ListFailureModeAssessmentsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -4593,6 +6945,8 @@ func init() {
 
 	ListInputSourcesResponse_nextToken = ListInputSourcesResponse.AddMember("nextToken", _NextToken)
 
+	ListPoliciesRequest_accountId = ListPoliciesRequest.AddMember("accountId", _AccountId, &smithytraits.HTTPQuery{Name: "accountId"})
+
 	ListPoliciesRequest_maxResults = ListPoliciesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListPoliciesRequest_nextToken = ListPoliciesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -4601,9 +6955,27 @@ func init() {
 
 	ListPoliciesResponse_nextToken = ListPoliciesResponse.AddMember("nextToken", _NextToken)
 
+	ListPolicyEventsRequest_policyArn = ListPolicyEventsRequest.AddMember("policyArn", _Arn, &smithytraits.HTTPQuery{Name: "policyArn"})
+
+	ListPolicyEventsRequest_eventTypes = ListPolicyEventsRequest.AddMember("eventTypes", _PolicyEventTypeList, &smithytraits.HTTPQuery{Name: "eventTypes"})
+
+	ListPolicyEventsRequest_startTime = ListPolicyEventsRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "startTime"})
+
+	ListPolicyEventsRequest_endTime = ListPolicyEventsRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "endTime"})
+
+	ListPolicyEventsRequest_maxResults = ListPolicyEventsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListPolicyEventsRequest_nextToken = ListPolicyEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListPolicyEventsResponse_events = ListPolicyEventsResponse.AddMember("events", _PolicyEventList)
+
+	ListPolicyEventsResponse_nextToken = ListPolicyEventsResponse.AddMember("nextToken", _NextToken)
+
 	ListReportsRequest_serviceArn = ListReportsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
 
 	ListReportsRequest_reportType = ListReportsRequest.AddMember("reportType", ReportType, &smithytraits.HTTPQuery{Name: "reportType"})
+
+	ListReportsRequest_testRunId = ListReportsRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPQuery{Name: "testRunId"})
 
 	ListReportsRequest_maxResults = ListReportsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -4613,11 +6985,27 @@ func init() {
 
 	ListReportsResponse_nextToken = ListReportsResponse.AddMember("nextToken", _NextToken)
 
+	ListResolvedTestRunTargetResourcesRequest_testRunId = ListResolvedTestRunTargetResourcesRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPLabel{})
+
+	ListResolvedTestRunTargetResourcesRequest_serviceArn = ListResolvedTestRunTargetResourcesRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListResolvedTestRunTargetResourcesRequest_maxResults = ListResolvedTestRunTargetResourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListResolvedTestRunTargetResourcesRequest_nextToken = ListResolvedTestRunTargetResourcesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListResolvedTestRunTargetResourcesResponse_resolvedTargetResources = ListResolvedTestRunTargetResourcesResponse.AddMember("resolvedTargetResources", _ResolvedTargetResourceList)
+
+	ListResolvedTestRunTargetResourcesResponse_nextToken = ListResolvedTestRunTargetResourcesResponse.AddMember("nextToken", _NextToken)
+
 	ListResourcesRequest_serviceArn = ListResourcesRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
 
 	ListResourcesRequest_serviceFunctionId = ListResourcesRequest.AddMember("serviceFunctionId", _EntityId, &smithytraits.HTTPQuery{Name: "serviceFunctionId"})
 
 	ListResourcesRequest_awsRegion = ListResourcesRequest.AddMember("awsRegion", _AwsRegion, &smithytraits.HTTPQuery{Name: "awsRegion"})
+
+	ListResourcesRequest_resourceTypes = ListResourcesRequest.AddMember("resourceTypes", _ResourceTypeFilterList, &smithytraits.HTTPQuery{Name: "resourceTypes"})
+
+	ListResourcesRequest_billable = ListResourcesRequest.AddMember("billable", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "billable"})
 
 	ListResourcesRequest_maxResults = ListResourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -4715,6 +7103,100 @@ func init() {
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
 
+	ListTestRunDependenciesRequest_testRunId = ListTestRunDependenciesRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPLabel{})
+
+	ListTestRunDependenciesRequest_serviceArn = ListTestRunDependenciesRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestRunDependenciesRequest_maxResults = ListTestRunDependenciesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestRunDependenciesRequest_nextToken = ListTestRunDependenciesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestRunDependenciesResponse_dependencies = ListTestRunDependenciesResponse.AddMember("dependencies", _TestRunDependencySummaryList)
+
+	ListTestRunDependenciesResponse_nextToken = ListTestRunDependenciesResponse.AddMember("nextToken", _NextToken)
+
+	ListTestRunEventsRequest_testRunId = ListTestRunEventsRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPLabel{})
+
+	ListTestRunEventsRequest_serviceArn = ListTestRunEventsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestRunEventsRequest_startedAt = ListTestRunEventsRequest.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "startedAt"})
+
+	ListTestRunEventsRequest_endedAt = ListTestRunEventsRequest.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "endedAt"})
+
+	ListTestRunEventsRequest_maxResults = ListTestRunEventsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestRunEventsRequest_nextToken = ListTestRunEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestRunEventsResponse_events = ListTestRunEventsResponse.AddMember("events", _TestRunEventList)
+
+	ListTestRunEventsResponse_nextToken = ListTestRunEventsResponse.AddMember("nextToken", _NextToken)
+
+	ListTestRunsRequest_serviceArn = ListTestRunsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestRunsRequest_testId = ListTestRunsRequest.AddMember("testId", _TestId, &smithytraits.HTTPQuery{Name: "testId"})
+
+	ListTestRunsRequest_maxResults = ListTestRunsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestRunsRequest_nextToken = ListTestRunsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestRunSourceEventsRequest_testRunId = ListTestRunSourceEventsRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPLabel{})
+
+	ListTestRunSourceEventsRequest_serviceArn = ListTestRunSourceEventsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestRunSourceEventsRequest_sourceArn = ListTestRunSourceEventsRequest.AddMember("sourceArn", _TestRunSourceArn, &smithytraits.HTTPQuery{Name: "sourceArn"})
+
+	ListTestRunSourceEventsRequest_maxResults = ListTestRunSourceEventsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestRunSourceEventsRequest_nextToken = ListTestRunSourceEventsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestRunSourceEventsResponse_testRunSourceEvents = ListTestRunSourceEventsResponse.AddMember("testRunSourceEvents", _TestRunSourceEventList)
+
+	ListTestRunSourceEventsResponse_nextToken = ListTestRunSourceEventsResponse.AddMember("nextToken", _NextToken)
+
+	ListTestRunSourcesRequest_testRunId = ListTestRunSourcesRequest.AddMember("testRunId", _TestRunId, &smithytraits.HTTPLabel{})
+
+	ListTestRunSourcesRequest_serviceArn = ListTestRunSourcesRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestRunSourcesRequest_type = ListTestRunSourcesRequest.AddMember("type", TestRunSourceType, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListTestRunSourcesRequest_maxResults = ListTestRunSourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestRunSourcesRequest_nextToken = ListTestRunSourcesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestRunSourcesResponse_testRunSources = ListTestRunSourcesResponse.AddMember("testRunSources", _TestRunSourceSummaryList)
+
+	ListTestRunSourcesResponse_nextToken = ListTestRunSourcesResponse.AddMember("nextToken", _NextToken)
+
+	ListTestRunsResponse_testRuns = ListTestRunsResponse.AddMember("testRuns", _TestRunSummaryList)
+
+	ListTestRunsResponse_nextToken = ListTestRunsResponse.AddMember("nextToken", _NextToken)
+
+	ListTestsRequest_serviceArn = ListTestsRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestsRequest_maxResults = ListTestsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestsRequest_nextToken = ListTestsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestSourcesRequest_testId = ListTestSourcesRequest.AddMember("testId", _TestId, &smithytraits.HTTPLabel{})
+
+	ListTestSourcesRequest_serviceArn = ListTestSourcesRequest.AddMember("serviceArn", _Arn, &smithytraits.HTTPQuery{Name: "serviceArn"})
+
+	ListTestSourcesRequest_type = ListTestSourcesRequest.AddMember("type", TestSourceType, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListTestSourcesRequest_maxResults = ListTestSourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestSourcesRequest_nextToken = ListTestSourcesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTestSourcesResponse_testSources = ListTestSourcesResponse.AddMember("testSources", _TestSourceSummaryList)
+
+	ListTestSourcesResponse_nextToken = ListTestSourcesResponse.AddMember("nextToken", _NextToken)
+
+	ListTestsResponse_tests = ListTestsResponse.AddMember("tests", _TestSummaryList)
+
+	ListTestsResponse_nextToken = ListTestsResponse.AddMember("nextToken", _NextToken)
+
+	ListTestTemplatesResponse_testTemplates = ListTestTemplatesResponse.AddMember("testTemplates", _TestTemplateSummaryList)
+
 	ListUserJourneysRequest_systemArn = ListUserJourneysRequest.AddMember("systemArn", _Arn, &smithytraits.HTTPQuery{Name: "systemArn"})
 
 	ListUserJourneysRequest_maxResults = ListUserJourneysRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -4724,6 +7206,18 @@ func init() {
 	ListUserJourneysResponse_userJourneySummaries = ListUserJourneysResponse.AddMember("userJourneySummaries", _UserJourneySummaryList)
 
 	ListUserJourneysResponse_nextToken = ListUserJourneysResponse.AddMember("nextToken", _NextToken)
+
+	PutTestSourcesRequest_testId = PutTestSourcesRequest.AddMember("testId", _TestId)
+
+	PutTestSourcesRequest_serviceArn = PutTestSourcesRequest.AddMember("serviceArn", _Arn)
+
+	PutTestSourcesRequest_testSources = PutTestSourcesRequest.AddMember("testSources", _TestSourceInputList)
+
+	StartDependencyInsightsRequest_serviceArn = StartDependencyInsightsRequest.AddMember("serviceArn", _Arn)
+
+	StartDependencyInsightsRequest_clientToken = StartDependencyInsightsRequest.AddMember("clientToken", _ClientToken)
+
+	StartDependencyInsightsResponse_status = StartDependencyInsightsResponse.AddMember("status", DependencyInsightsStatus)
 
 	StartFailureModeAssessmentRequest_serviceArn = StartFailureModeAssessmentRequest.AddMember("serviceArn", _Arn)
 
@@ -4736,6 +7230,24 @@ func init() {
 	StartFailureModeAssessmentResponse_assessmentStatus = StartFailureModeAssessmentResponse.AddMember("assessmentStatus", AssessmentStatus)
 
 	StartFailureModeAssessmentResponse_startedAt = StartFailureModeAssessmentResponse.AddMember("startedAt", smithyprelude.Timestamp)
+
+	StartTestRunRequest_testId = StartTestRunRequest.AddMember("testId", _TestId)
+
+	StartTestRunRequest_serviceArn = StartTestRunRequest.AddMember("serviceArn", _Arn)
+
+	StartTestRunResponse_testRunId = StartTestRunResponse.AddMember("testRunId", _TestRunId)
+
+	StartTestRunResponse_status = StartTestRunResponse.AddMember("status", TestRunStatus)
+
+	StartTestRunResponse_experimentArns = StartTestRunResponse.AddMember("experimentArns", _ExperimentArnList)
+
+	StopTestRunRequest_testRunId = StopTestRunRequest.AddMember("testRunId", _TestRunId)
+
+	StopTestRunRequest_serviceArn = StopTestRunRequest.AddMember("serviceArn", _Arn)
+
+	StopTestRunResponse_testRunId = StopTestRunResponse.AddMember("testRunId", _TestRunId)
+
+	StopTestRunResponse_status = StopTestRunResponse.AddMember("status", TestRunStatus)
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
 
@@ -4797,6 +7309,8 @@ func init() {
 
 	UpdatePolicyRequest_dataRecovery = UpdatePolicyRequest.AddMember("dataRecovery", DataRecoveryTargets)
 
+	UpdatePolicyRequest_sharingEnabled = UpdatePolicyRequest.AddMember("sharingEnabled", smithyprelude.Boolean)
+
 	UpdatePolicyResponse_policy = UpdatePolicyResponse.AddMember("policy", Policy)
 
 	UpdateServiceFunctionRequest_serviceArn = UpdateServiceFunctionRequest.AddMember("serviceArn", _Arn)
@@ -4827,6 +7341,8 @@ func init() {
 
 	UpdateServiceRequest_reportConfiguration = UpdateServiceRequest.AddMember("reportConfiguration", ServiceReportConfiguration)
 
+	UpdateServiceRequest_devOpsAgentConfiguration = UpdateServiceRequest.AddMember("devOpsAgentConfiguration", DevOpsAgentConfiguration)
+
 	UpdateServiceResponse_service = UpdateServiceResponse.AddMember("service", Service)
 
 	UpdateSystemRequest_systemArn = UpdateSystemRequest.AddMember("systemArn", _Arn)
@@ -4836,6 +7352,20 @@ func init() {
 	UpdateSystemRequest_sharingEnabled = UpdateSystemRequest.AddMember("sharingEnabled", smithyprelude.Boolean)
 
 	UpdateSystemResponse_system = UpdateSystemResponse.AddMember("system", System)
+
+	UpdateTestRequest_testId = UpdateTestRequest.AddMember("testId", _TestId)
+
+	UpdateTestRequest_serviceArn = UpdateTestRequest.AddMember("serviceArn", _Arn)
+
+	UpdateTestRequest_loggingConfiguration = UpdateTestRequest.AddMember("loggingConfiguration", LoggingConfiguration)
+
+	UpdateTestRequest_stopConditions = UpdateTestRequest.AddMember("stopConditions", _StopConditionList)
+
+	UpdateTestRequest_roleName = UpdateTestRequest.AddMember("roleName", _IamRoleName)
+
+	UpdateTestRequest_parameters = UpdateTestRequest.AddMember("parameters", _TestParameters)
+
+	UpdateTestResponse_test = UpdateTestResponse.AddMember("test", Test)
 
 	UpdateUserJourneyRequest_systemArn = UpdateUserJourneyRequest.AddMember("systemArn", _Arn)
 

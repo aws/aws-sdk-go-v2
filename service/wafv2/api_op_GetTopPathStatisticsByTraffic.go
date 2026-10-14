@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves aggregated statistics about the top URI paths accessed by bot traffic
@@ -98,6 +97,47 @@ type GetTopPathStatisticsByTrafficInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTopPathStatisticsByTrafficInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTopPathStatisticsByTrafficRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTopPathStatisticsByTrafficInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotCategory != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_BotCategory, *v.BotCategory)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_BotName, *v.BotName)
+	}
+	if v.BotOrganization != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_BotOrganization, *v.BotOrganization)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetTopPathStatisticsByTrafficRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_NextMarker, *v.NextMarker)
+	}
+	if v.NumberOfTopTrafficBotsPerPath != nil {
+		s.WriteInt32(schemas.GetTopPathStatisticsByTrafficRequest_NumberOfTopTrafficBotsPerPath, *v.NumberOfTopTrafficBotsPerPath)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_Scope, string(v.Scope))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetTopPathStatisticsByTrafficRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UriPathPrefix != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_UriPathPrefix, *v.UriPathPrefix)
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficRequest_WebAclArn, *v.WebAclArn)
+	}
+}
+
 type GetTopPathStatisticsByTrafficOutput struct {
 
 	// The list of path statistics, ordered by request count. Each entry includes the
@@ -131,77 +171,57 @@ type GetTopPathStatisticsByTrafficOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTopPathStatisticsByTrafficOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTopPathStatisticsByTrafficResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTopPathStatisticsByTrafficOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetTopPathStatisticsByTrafficResponse_NextMarker, *v.NextMarker)
+	}
+	serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_PathStatistics, v.PathStatistics)
+	serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_TopCategories, v.TopCategories)
+	s.WriteInt64(schemas.GetTopPathStatisticsByTrafficResponse_TotalRequestCount, v.TotalRequestCount)
+}
+func (v *GetTopPathStatisticsByTrafficOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTopPathStatisticsByTrafficResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTopPathStatisticsByTrafficResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.GetTopPathStatisticsByTrafficResponse_NextMarker, v.NextMarker)
+		case schemas.GetTopPathStatisticsByTrafficResponse_PathStatistics:
+			return deserializePathStatisticsList(d, schemas.GetTopPathStatisticsByTrafficResponse_PathStatistics, &v.PathStatistics)
+		case schemas.GetTopPathStatisticsByTrafficResponse_TopCategories:
+			return deserializePathStatisticsList(d, schemas.GetTopPathStatisticsByTrafficResponse_TopCategories, &v.TopCategories)
+		case schemas.GetTopPathStatisticsByTrafficResponse_TotalRequestCount:
+			return d.ReadInt64(schemas.GetTopPathStatisticsByTrafficResponse_TotalRequestCount, &v.TotalRequestCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTopPathStatisticsByTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTopPathStatisticsByTraffic, schemas.GetTopPathStatisticsByTrafficRequest, schemas.GetTopPathStatisticsByTrafficResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTopPathStatisticsByTraffic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTopPathStatisticsByTraffic, schemas.GetTopPathStatisticsByTrafficRequest, schemas.GetTopPathStatisticsByTrafficResponse), output: &GetTopPathStatisticsByTrafficOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTopPathStatisticsByTraffic{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTopPathStatisticsByTraffic"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTopPathStatisticsByTrafficValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTopPathStatisticsByTraffic(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +236,8 @@ func (c *Client) addOperationGetTopPathStatisticsByTrafficMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTopPathStatisticsByTraffic(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTopPathStatisticsByTraffic",
-	}
 }

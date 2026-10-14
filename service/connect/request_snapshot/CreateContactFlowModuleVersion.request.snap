@@ -1,0 +1,5 @@
+PUT /contact-flow-modules/__InstanceId__/__ContactFlowModuleId__/version
+
+Content-Type: application/json
+
+{"Description":"__Description__","FlowModuleContentSha256":"__FlowModuleContentSha256__"}

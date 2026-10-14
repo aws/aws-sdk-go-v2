@@ -1,0 +1,5 @@
+PUT /dashboards/__DashboardId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","dashboardDefinition":"__DashboardDefinition__","dashboardDescription":"__DashboardDescription__","dashboardName":"__DashboardName__"}

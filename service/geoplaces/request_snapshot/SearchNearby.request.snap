@@ -1,0 +1,5 @@
+POST /v2/search-nearby?key=__Key__
+
+Content-Type: application/json
+
+{"AdditionalFeatures":["TimeZone","TimeZone"],"Filter":{"BoundingBox":[1,1],"ExcludeBusinessChains":["__Member__","__Member__"],"ExcludeCategories":["__Member__","__Member__"],"ExcludeFoodTypes":["__Member__","__Member__"],"IncludeBusinessChains":["__Member__","__Member__"],"IncludeCategories":["__Member__","__Member__"],"IncludeCountries":["__Member__","__Member__"],"IncludeFoodTypes":["__Member__","__Member__"]},"IntendedUse":"SingleUse","Language":"__Language__","MaxResults":1,"NextToken":"__NextToken__","PoliticalView":"__PoliticalView__","QueryPosition":[1,1],"QueryRadius":1}

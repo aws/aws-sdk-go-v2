@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"fields":[{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"nextToken":"__NextToken__","tags":{"key0":"__Value__"},"templateId":"__TemplateId__"}

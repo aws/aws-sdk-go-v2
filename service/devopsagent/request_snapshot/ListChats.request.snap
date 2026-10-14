@@ -1,0 +1,3 @@
+GET /agents/agent-space/__AgentSpaceId__/chat/list?maxResults=1&nextToken=__NextToken__&userId=__UserId__
+
+

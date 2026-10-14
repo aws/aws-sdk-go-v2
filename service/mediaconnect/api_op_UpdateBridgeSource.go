@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing bridge source.
@@ -48,6 +47,31 @@ type UpdateBridgeSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.UpdateBridgeSourceRequest_BridgeArn, *v.BridgeArn)
+	}
+	if v.FlowSource != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceRequest_FlowSource)
+		v.FlowSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkSource != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceRequest_NetworkSource)
+		v.NetworkSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.UpdateBridgeSourceRequest_SourceName, *v.SourceName)
+	}
+}
+
 type UpdateBridgeSourceOutput struct {
 
 	//  The ARN of the updated bridge source.
@@ -62,77 +86,56 @@ type UpdateBridgeSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.UpdateBridgeSourceResponse_BridgeArn, *v.BridgeArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBridgeSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBridgeSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBridgeSourceResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.UpdateBridgeSourceResponse_BridgeArn, v.BridgeArn)
+		case schemas.UpdateBridgeSourceResponse_Source:
+			v.Source = &types.BridgeSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBridgeSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridgeSource, schemas.UpdateBridgeSourceRequest, schemas.UpdateBridgeSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBridgeSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridgeSource, schemas.UpdateBridgeSourceRequest, schemas.UpdateBridgeSourceResponse), output: &UpdateBridgeSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBridgeSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBridgeSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBridgeSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBridgeSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +150,8 @@ func (c *Client) addOperationUpdateBridgeSourceMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBridgeSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBridgeSource",
-	}
 }

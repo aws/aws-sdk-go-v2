@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of slots that match the specified criteria.
@@ -75,6 +75,39 @@ type ListSlotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSlotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSlotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSlotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSlotsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListSlotsRequest_botVersion, *v.BotVersion)
+	}
+	serializeSlotFilters(s, schemas.ListSlotsRequest_filters, v.Filters)
+	if v.IntentId != nil {
+		s.WriteString(schemas.ListSlotsRequest_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListSlotsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSlotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSlotsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListSlotsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListSlotsOutput struct {
 
 	// The identifier of the bot that contains the slots.
@@ -107,77 +140,75 @@ type ListSlotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSlotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSlotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSlotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSlotsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListSlotsResponse_botVersion, *v.BotVersion)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.ListSlotsResponse_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListSlotsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSlotsResponse_nextToken, *v.NextToken)
+	}
+	serializeSlotSummaryList(s, schemas.ListSlotsResponse_slotSummaries, v.SlotSummaries)
+}
+func (v *ListSlotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSlotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSlotsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_botId, v.BotId)
+		case schemas.ListSlotsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_botVersion, v.BotVersion)
+		case schemas.ListSlotsResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_intentId, v.IntentId)
+		case schemas.ListSlotsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_localeId, v.LocaleId)
+		case schemas.ListSlotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_nextToken, v.NextToken)
+		case schemas.ListSlotsResponse_slotSummaries:
+			return deserializeSlotSummaryList(d, schemas.ListSlotsResponse_slotSummaries, &v.SlotSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlots, schemas.ListSlotsRequest, schemas.ListSlotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSlots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlots, schemas.ListSlotsRequest, schemas.ListSlotsResponse), output: &ListSlotsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSlots{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSlots"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSlotsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSlots(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +221,6 @@ func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -297,11 +322,3 @@ type ListSlotsAPIClient interface {
 }
 
 var _ ListSlotsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSlots(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSlots",
-	}
-}

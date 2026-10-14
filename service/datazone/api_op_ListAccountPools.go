@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists existing account pools.
@@ -62,33 +58,6 @@ type ListAccountPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountPoolsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountPoolsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccountPoolsInput_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_nextToken, *v.NextToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListAccountPoolsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListAccountPoolsInput_sortOrder, string(v.SortOrder))
-	}
-}
-
 type ListAccountPoolsOutput struct {
 
 	// The results of the ListAccountPools operation.
@@ -107,87 +76,29 @@ type ListAccountPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountPoolsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountPoolsOutput_items:
-			return deserializeAccountPoolSummaries(d, schemas.ListAccountPoolsOutput_items, &v.Items)
-		case schemas.ListAccountPoolsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccountPoolsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccountPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountPools{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPools, schemas.ListAccountPoolsInput, schemas.ListAccountPoolsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountPools{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPools, schemas.ListAccountPoolsInput, schemas.ListAccountPoolsOutput), output: &ListAccountPoolsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountPools"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAccountPoolsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountPools(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +111,6 @@ func (c *Client) addOperationListAccountPoolsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -310,11 +215,3 @@ type ListAccountPoolsAPIClient interface {
 }
 
 var _ ListAccountPoolsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccountPools(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccountPools",
-	}
-}

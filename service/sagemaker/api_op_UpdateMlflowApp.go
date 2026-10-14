@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an MLflow App.
@@ -62,6 +61,34 @@ type UpdateMlflowAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMlflowAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMlflowAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountDefaultStatus != "" {
+		s.WriteString(schemas.UpdateMlflowAppRequest_AccountDefaultStatus, string(v.AccountDefaultStatus))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateMlflowAppRequest_Arn, *v.Arn)
+	}
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.UpdateMlflowAppRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	serializeDefaultDomainIdList(s, schemas.UpdateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.ModelRegistrationMode != "" {
+		s.WriteString(schemas.UpdateMlflowAppRequest_ModelRegistrationMode, string(v.ModelRegistrationMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateMlflowAppRequest_Name, *v.Name)
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.UpdateMlflowAppRequest_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+
 type UpdateMlflowAppOutput struct {
 
 	// The ARN of the updated MLflow App.
@@ -73,77 +100,48 @@ type UpdateMlflowAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMlflowAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMlflowAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMlflowAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateMlflowAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *UpdateMlflowAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMlflowAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMlflowAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateMlflowAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMlflowAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMlflowApp, schemas.UpdateMlflowAppRequest, schemas.UpdateMlflowAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMlflowApp, schemas.UpdateMlflowAppRequest, schemas.UpdateMlflowAppResponse), output: &UpdateMlflowAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMlflowApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMlflowApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMlflowAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMlflowApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +156,8 @@ func (c *Client) addOperationUpdateMlflowAppMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMlflowApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMlflowApp",
-	}
 }

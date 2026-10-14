@@ -1,0 +1,6 @@
+POST /participant/connection
+
+Content-Type: application/json
+X-Amz-Bearer: __ParticipantToken__
+
+{"ConnectParticipant":true,"Type":["WEBSOCKET","WEBSOCKET"]}

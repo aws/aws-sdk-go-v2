@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates an email address alias with an existing email address in an Connect
@@ -128,6 +128,29 @@ type AssociateEmailAddressAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEmailAddressAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEmailAddressAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEmailAddressAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasConfiguration != nil {
+		s.WriteStruct(schemas.AssociateEmailAddressAliasRequest_AliasConfiguration)
+		v.AliasConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type AssociateEmailAddressAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -135,65 +158,36 @@ type AssociateEmailAddressAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEmailAddressAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEmailAddressAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEmailAddressAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateEmailAddressAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEmailAddressAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEmailAddressAlias, schemas.AssociateEmailAddressAliasRequest, schemas.AssociateEmailAddressAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEmailAddressAlias, schemas.AssociateEmailAddressAliasRequest, schemas.AssociateEmailAddressAliasResponse), output: &AssociateEmailAddressAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateEmailAddressAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -203,12 +197,6 @@ func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpAssociateEmailAddressAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEmailAddressAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,12 +209,6 @@ func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,12 +248,4 @@ func (m *idempotencyToken_initializeOpAssociateEmailAddressAlias) HandleInitiali
 }
 func addIdempotencyToken_opAssociateEmailAddressAliasMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateEmailAddressAlias{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateEmailAddressAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateEmailAddressAlias",
-	}
 }

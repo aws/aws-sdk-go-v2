@@ -1,0 +1,5 @@
+POST /matchingworkflows/__WorkflowName__/matches
+
+Content-Type: application/json
+
+{"applyNormalization":true,"record":{"key0":"__Value__"}}

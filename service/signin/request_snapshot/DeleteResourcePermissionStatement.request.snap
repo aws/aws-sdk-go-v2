@@ -1,0 +1,5 @@
+POST /delete-resource-permission-statement
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","statementId":"__StatementId__"}

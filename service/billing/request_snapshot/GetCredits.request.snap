@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.GetCredits
+
+{"accountId":"__AccountId__","endDate":946684800,"payerAccountFlag":true,"startDate":946684800}

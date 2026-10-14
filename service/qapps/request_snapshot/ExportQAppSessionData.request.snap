@@ -1,0 +1,6 @@
+POST /runtime.exportQAppSessionData
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"sessionId":"__SessionId__"}

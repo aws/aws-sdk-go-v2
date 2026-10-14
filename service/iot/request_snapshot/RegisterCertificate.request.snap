@@ -1,0 +1,5 @@
+POST /certificate/register?setAsActive=true
+
+Content-Type: application/json
+
+{"caCertificatePem":"__CaCertificatePem__","certificatePem":"__CertificatePem__","status":"ACTIVE"}

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,21 @@ type DescribePipelineInput struct {
 	PipelineVersionId *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DescribePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersionId != nil {
+		s.WriteInt64(schemas.DescribePipelineRequest_PipelineVersionId, *v.PipelineVersionId)
+	}
 }
 
 type DescribePipelineOutput struct {
@@ -94,77 +108,142 @@ type DescribePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribePipelineResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePipelineResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribePipelineResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribePipelineResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastRunTime != nil {
+		s.WriteTime(schemas.DescribePipelineResponse_LastRunTime, *v.LastRunTime)
+	}
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.DescribePipelineResponse_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineDefinition != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineDefinition, *v.PipelineDefinition)
+	}
+	if v.PipelineDescription != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineDescription, *v.PipelineDescription)
+	}
+	if v.PipelineDisplayName != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineDisplayName, *v.PipelineDisplayName)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineStatus != "" {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineStatus, string(v.PipelineStatus))
+	}
+	if v.PipelineVersionDescription != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineVersionDescription, *v.PipelineVersionDescription)
+	}
+	if v.PipelineVersionDisplayName != nil {
+		s.WriteString(schemas.DescribePipelineResponse_PipelineVersionDisplayName, *v.PipelineVersionDisplayName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribePipelineResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipelineResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribePipelineResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePipelineResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribePipelineResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribePipelineResponse_LastRunTime:
+			v.LastRunTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineResponse_LastRunTime, v.LastRunTime)
+		case schemas.DescribePipelineResponse_ParallelismConfiguration:
+			v.ParallelismConfiguration = &types.ParallelismConfiguration{}
+			return v.ParallelismConfiguration.Deserialize(d)
+		case schemas.DescribePipelineResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineArn, v.PipelineArn)
+		case schemas.DescribePipelineResponse_PipelineDefinition:
+			v.PipelineDefinition = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineDefinition, v.PipelineDefinition)
+		case schemas.DescribePipelineResponse_PipelineDescription:
+			v.PipelineDescription = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineDescription, v.PipelineDescription)
+		case schemas.DescribePipelineResponse_PipelineDisplayName:
+			v.PipelineDisplayName = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineDisplayName, v.PipelineDisplayName)
+		case schemas.DescribePipelineResponse_PipelineName:
+			v.PipelineName = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineName, v.PipelineName)
+		case schemas.DescribePipelineResponse_PipelineStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribePipelineResponse_PipelineStatus, &ev); err != nil {
+				return err
+			}
+			v.PipelineStatus = types.PipelineStatus(ev)
+			return nil
+		case schemas.DescribePipelineResponse_PipelineVersionDescription:
+			v.PipelineVersionDescription = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineVersionDescription, v.PipelineVersionDescription)
+		case schemas.DescribePipelineResponse_PipelineVersionDisplayName:
+			v.PipelineVersionDisplayName = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_PipelineVersionDisplayName, v.PipelineVersionDisplayName)
+		case schemas.DescribePipelineResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribePipelineResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipeline, schemas.DescribePipelineRequest, schemas.DescribePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipeline, schemas.DescribePipelineRequest, schemas.DescribePipelineResponse), output: &DescribePipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +258,8 @@ func (c *Client) addOperationDescribePipelineMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePipeline",
-	}
 }

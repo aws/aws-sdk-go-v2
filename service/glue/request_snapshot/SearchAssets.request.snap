@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.SearchAssets
+
+{"FilterClause":{"AndAllFilters":[{"AttributeFilter":{"Attribute":"__Attribute__","Operator":"equals","Value":{"StringValue":"__SearchFilterValueMemberStringValue__"}}},{"AttributeFilter":{"Attribute":"__Attribute__","Operator":"equals","Value":{"StringValue":"__SearchFilterValueMemberStringValue__"}}}]},"MaxResults":1,"NextToken":"__NextToken__","SearchText":"__SearchText__","Sort":{"Attribute":"__Attribute__","Order":"ASCENDING"}}

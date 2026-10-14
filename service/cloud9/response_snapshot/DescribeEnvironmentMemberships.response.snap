@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships
+
+{"memberships":[{"environmentId":"__EnvironmentId__","lastAccess":946684800,"permissions":"owner","userArn":"__UserArn__","userId":"__UserId__"},{"environmentId":"__EnvironmentId__","lastAccess":946684800,"permissions":"owner","userArn":"__UserArn__","userId":"__UserId__"}],"nextToken":"__NextToken__"}

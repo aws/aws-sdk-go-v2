@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/automation-groups/__AutomationGroupId__/automations/__AutomationId__/jobs
+
+Content-Type: application/json
+
+{"InputPayload":"__InputPayload__"}

@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for
@@ -84,6 +84,39 @@ type CreateAndAttachS3AccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3AccessPoint != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_S3AccessPoint)
+		v.S3AccessPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_Type, string(v.Type))
+	}
+}
+
 type CreateAndAttachS3AccessPointOutput struct {
 
 	// Describes the configuration of the S3 access point created.
@@ -95,65 +128,44 @@ type CreateAndAttachS3AccessPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointAttachment != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment)
+		v.S3AccessPointAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAndAttachS3AccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAndAttachS3AccessPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment:
+			v.S3AccessPointAttachment = &types.S3AccessPointAttachment{}
+			return v.S3AccessPointAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAndAttachS3AccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAndAttachS3AccessPoint, schemas.CreateAndAttachS3AccessPointRequest, schemas.CreateAndAttachS3AccessPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAndAttachS3AccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAndAttachS3AccessPoint, schemas.CreateAndAttachS3AccessPointRequest, schemas.CreateAndAttachS3AccessPointResponse), output: &CreateAndAttachS3AccessPointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAndAttachS3AccessPoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAndAttachS3AccessPoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -163,12 +175,6 @@ func (c *Client) addOperationCreateAndAttachS3AccessPointMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateAndAttachS3AccessPointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAndAttachS3AccessPoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,12 +187,6 @@ func (c *Client) addOperationCreateAndAttachS3AccessPointMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -226,12 +226,4 @@ func (m *idempotencyToken_initializeOpCreateAndAttachS3AccessPoint) HandleInitia
 }
 func addIdempotencyToken_opCreateAndAttachS3AccessPointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAndAttachS3AccessPoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAndAttachS3AccessPoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAndAttachS3AccessPoint",
-	}
 }

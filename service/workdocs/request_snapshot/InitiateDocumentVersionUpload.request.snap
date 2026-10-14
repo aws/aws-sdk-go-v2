@@ -1,0 +1,6 @@
+POST /api/v1/documents
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"ContentCreatedTimestamp":946684800,"ContentModifiedTimestamp":946684800,"ContentType":"__ContentType__","DocumentSizeInBytes":1,"Id":"__Id__","Name":"__Name__","ParentFolderId":"__ParentFolderId__"}

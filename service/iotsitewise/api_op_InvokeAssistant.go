@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -51,24 +48,6 @@ type InvokeAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeAssistantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeAssistantRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConversationId != nil {
-		s.WriteString(schemas.InvokeAssistantRequest_conversationId, *v.ConversationId)
-	}
-	if v.EnableTrace != false {
-		s.WriteBool(schemas.InvokeAssistantRequest_enableTrace, v.EnableTrace)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.InvokeAssistantRequest_message, *v.Message)
-	}
-}
-
 type InvokeAssistantOutput struct {
 
 	// The ID of the conversation, in UUID format. This ID uniquely identifies the
@@ -85,49 +64,22 @@ type InvokeAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeAssistantResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeAssistantResponse_conversationId:
-			v.ConversationId = new(string)
-			return d.ReadString(schemas.InvokeAssistantResponse_conversationId, v.ConversationId)
-		}
-		return nil
-	})
-}
-
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeAssistantOutput) GetStream() *InvokeAssistantEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAssistant, schemas.InvokeAssistantRequest, schemas.InvokeAssistantResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAssistant{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAssistant, schemas.InvokeAssistantRequest, schemas.InvokeAssistantResponse), output: &InvokeAssistantOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAssistant{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAssistant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
+	if err = addEventStreamInvokeAssistantMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -136,25 +88,7 @@ func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -164,12 +98,6 @@ func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpInvokeAssistantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAssistant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +110,6 @@ func (c *Client) addOperationInvokeAssistantMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -221,14 +143,6 @@ func (m *endpointPrefix_opInvokeAssistantMiddleware) HandleFinalize(ctx context.
 }
 func addEndpointPrefix_opInvokeAssistantMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opInvokeAssistantMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opInvokeAssistant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeAssistant",
-	}
 }
 
 // InvokeAssistantEventStream provides the event stream handling for the InvokeAssistant operation.

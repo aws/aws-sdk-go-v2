@@ -1,0 +1,5 @@
+POST /UpdateView
+
+Content-Type: application/json
+
+{"Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"ViewArn":"__ViewArn__"}

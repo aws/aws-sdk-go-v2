@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channels":[{"ChannelArn":"__ChannelArn__","Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"},{"ChannelArn":"__ChannelArn__","Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"}],"NextToken":"__NextToken__"}

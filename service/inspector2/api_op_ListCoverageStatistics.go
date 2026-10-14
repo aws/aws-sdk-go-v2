@@ -5,10 +5,10 @@ package inspector2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists Amazon Inspector coverage statistics for your environment.
@@ -45,6 +45,46 @@ type ListCoverageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCoverageStatisticsRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupBy != "" {
+		s.WriteString(schemas.ListCoverageStatisticsRequest_groupBy, string(v.GroupBy))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageStatisticsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoverageStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageStatisticsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageStatisticsRequest_filterCriteria:
+			v.FilterCriteria = &types.CoverageFilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.ListCoverageStatisticsRequest_groupBy:
+			var ev string
+			if err := d.ReadString(schemas.ListCoverageStatisticsRequest_groupBy, &ev); err != nil {
+				return err
+			}
+			v.GroupBy = types.GroupKey(ev)
+			return nil
+		case schemas.ListCoverageStatisticsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageStatisticsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCoverageStatisticsOutput struct {
 
 	// The total number for all groups.
@@ -67,77 +107,57 @@ type ListCoverageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoverageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoverageStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoverageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountsList(s, schemas.ListCoverageStatisticsResponse_countsByGroup, v.CountsByGroup)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoverageStatisticsResponse_nextToken, *v.NextToken)
+	}
+	if v.TotalCounts != nil {
+		s.WriteInt64(schemas.ListCoverageStatisticsResponse_totalCounts, *v.TotalCounts)
+	}
+}
+func (v *ListCoverageStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoverageStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoverageStatisticsResponse_countsByGroup:
+			return deserializeCountsList(d, schemas.ListCoverageStatisticsResponse_countsByGroup, &v.CountsByGroup)
+		case schemas.ListCoverageStatisticsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoverageStatisticsResponse_nextToken, v.NextToken)
+		case schemas.ListCoverageStatisticsResponse_totalCounts:
+			v.TotalCounts = new(int64)
+			return d.ReadInt64(schemas.ListCoverageStatisticsResponse_totalCounts, v.TotalCounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoverageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverageStatistics, schemas.ListCoverageStatisticsRequest, schemas.ListCoverageStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoverageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoverageStatistics, schemas.ListCoverageStatisticsRequest, schemas.ListCoverageStatisticsResponse), output: &ListCoverageStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoverageStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCoverageStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCoverageStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCoverageStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +170,6 @@ func (c *Client) addOperationListCoverageStatisticsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +259,3 @@ type ListCoverageStatisticsAPIClient interface {
 }
 
 var _ ListCoverageStatisticsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCoverageStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCoverageStatistics",
-	}
-}

@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resets a group's deployments.
@@ -43,6 +42,24 @@ type ResetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.ResetDeploymentsRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.ResetDeploymentsRequest_Force, *v.Force)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.ResetDeploymentsRequest_GroupId, *v.GroupId)
+	}
+}
+
 type ResetDeploymentsOutput struct {
 
 	// The ARN of the deployment.
@@ -57,77 +74,54 @@ type ResetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.ResetDeploymentsResponse_DeploymentArn, *v.DeploymentArn)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ResetDeploymentsResponse_DeploymentId, *v.DeploymentId)
+	}
+}
+func (v *ResetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetDeploymentsResponse_DeploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.ResetDeploymentsResponse_DeploymentArn, v.DeploymentArn)
+		case schemas.ResetDeploymentsResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ResetDeploymentsResponse_DeploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDeployments, schemas.ResetDeploymentsRequest, schemas.ResetDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDeployments, schemas.ResetDeploymentsRequest, schemas.ResetDeploymentsResponse), output: &ResetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetDeployments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetDeployments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpResetDeploymentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetDeployments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +136,8 @@ func (c *Client) addOperationResetDeploymentsMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResetDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResetDeployments",
-	}
 }

@@ -1,0 +1,5 @@
+POST /UpdateThreat
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","anchor":{"id":"__Id__","kind":"__Kind__","packageId":"__PackageId__"},"comments":"__Comments__","evidence":[{"packageId":"__PackageId__","path":"__Path__"},{"packageId":"__PackageId__","path":"__Path__"}],"impactedAssets":["__Member__","__Member__"],"impactedGoal":["__Member__","__Member__"],"prerequisites":"__Prerequisites__","recommendation":"__Recommendation__","severity":"CRITICAL","statement":"__Statement__","status":"OPEN","threatAction":"__ThreatAction__","threatId":"__ThreatId__","threatImpact":"__ThreatImpact__","threatSource":"__ThreatSource__","title":"__Title__"}

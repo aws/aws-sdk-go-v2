@@ -1,0 +1,3 @@
+GET /rules/__InstanceId__?eventSourceName=OnPostCallAnalysisAvailable&maxResults=1&nextToken=__NextToken__&publishStatus=DRAFT
+
+

@@ -1,0 +1,5 @@
+POST /2015-02-01/mount-targets
+
+Content-Type: application/json
+
+{"FileSystemId":"__FileSystemId__","IpAddress":"__IpAddress__","IpAddressType":"IPV4_ONLY","Ipv6Address":"__Ipv6Address__","SecurityGroups":["__Member__","__Member__"],"SubnetId":"__SubnetId__"}

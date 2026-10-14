@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -95,45 +90,6 @@ type StartDeviceDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDeviceDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDeviceDiscoveryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountAssociationId != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_AccountAssociationId, *v.AccountAssociationId)
-	}
-	if v.AuthenticationMaterial != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_AuthenticationMaterial, *v.AuthenticationMaterial)
-	}
-	if v.AuthenticationMaterialType != "" {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_AuthenticationMaterialType, string(v.AuthenticationMaterialType))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_ClientToken, *v.ClientToken)
-	}
-	if v.ConnectorAssociationIdentifier != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_ConnectorAssociationIdentifier, *v.ConnectorAssociationIdentifier)
-	}
-	serializeConnectorDeviceIdList(s, schemas.StartDeviceDiscoveryRequest_ConnectorDeviceIdList, v.ConnectorDeviceIdList)
-	if v.ControllerIdentifier != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_ControllerIdentifier, *v.ControllerIdentifier)
-	}
-	serializeCustomProtocolDetail(s, schemas.StartDeviceDiscoveryRequest_CustomProtocolDetail, v.CustomProtocolDetail)
-	if v.DiscoveryType != "" {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_DiscoveryType, string(v.DiscoveryType))
-	}
-	if v.EndDeviceIdentifier != nil {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_EndDeviceIdentifier, *v.EndDeviceIdentifier)
-	}
-	if v.Protocol != "" {
-		s.WriteString(schemas.StartDeviceDiscoveryRequest_Protocol, string(v.Protocol))
-	}
-	serializeTagsMap(s, schemas.StartDeviceDiscoveryRequest_Tags, v.Tags)
-}
-
 type StartDeviceDiscoveryOutput struct {
 
 	// The id of the device discovery job request.
@@ -148,88 +104,29 @@ type StartDeviceDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDeviceDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDeviceDiscoveryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartDeviceDiscoveryResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartDeviceDiscoveryResponse_Id, v.Id)
-		case schemas.StartDeviceDiscoveryResponse_StartedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.StartDeviceDiscoveryResponse_StartedAt, v.StartedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDeviceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDeviceDiscovery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeviceDiscovery, schemas.StartDeviceDiscoveryRequest, schemas.StartDeviceDiscoveryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDeviceDiscovery{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeviceDiscovery, schemas.StartDeviceDiscoveryRequest, schemas.StartDeviceDiscoveryResponse), output: &StartDeviceDiscoveryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDeviceDiscovery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDeviceDiscoveryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeviceDiscovery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +141,8 @@ func (c *Client) addOperationStartDeviceDiscoveryMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDeviceDiscovery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDeviceDiscovery",
-	}
 }

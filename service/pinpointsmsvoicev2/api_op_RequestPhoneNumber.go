@@ -5,12 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +74,12 @@ type RequestPhoneNumberInput struct {
 	// phone number is Enabled.
 	InternationalSendingEnabled *bool
 
+	// An optional selection preference used to request a specific phone number, such
+	// as a number that starts with, ends with, or contains a particular digit pattern.
+	// You can specify at most one preference. Number preferences apply only to TEN_DLC
+	// requests in the US .
+	NumberPreference []types.NumberPreferenceItem
+
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
 	//
@@ -123,6 +127,7 @@ func (v *RequestPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.RequestPhoneNumberRequest_MessageType, string(v.MessageType))
 	}
 	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberRequest_NumberCapabilities, v.NumberCapabilities)
+	serializeNumberPreferenceList(s, schemas.RequestPhoneNumberRequest_NumberPreference, v.NumberPreference)
 	if v.NumberType != "" {
 		s.WriteString(schemas.RequestPhoneNumberRequest_NumberType, string(v.NumberType))
 	}
@@ -221,6 +226,70 @@ type RequestPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestPhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.RequestPhoneNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DeletionProtectionEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	}
+	if v.InternationalSendingEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_InternationalSendingEnabled, v.InternationalSendingEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_MessageType, string(v.MessageType))
+	}
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberType != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_NumberType, string(v.NumberType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PoolId, *v.PoolId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.SelfManagedOptOutsEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.RequestPhoneNumberResult_Tags, v.Tags)
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_TwoWayEnabled, v.TwoWayEnabled)
+	}
+}
 func (v *RequestPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestPhoneNumberResult, func(s *smithy.Schema) error {
 		switch s {
@@ -295,62 +364,20 @@ func (v *RequestPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestPhoneNumber, schemas.RequestPhoneNumberRequest, schemas.RequestPhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestPhoneNumber, schemas.RequestPhoneNumberRequest, schemas.RequestPhoneNumberResult), output: &RequestPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestPhoneNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -360,12 +387,6 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpRequestPhoneNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestPhoneNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -378,12 +399,6 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -423,12 +438,4 @@ func (m *idempotencyToken_initializeOpRequestPhoneNumber) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opRequestPhoneNumberMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRequestPhoneNumber{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRequestPhoneNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RequestPhoneNumber",
-	}
 }

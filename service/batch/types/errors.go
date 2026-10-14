@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,27 @@ func (e *ClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClientException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClientException_message, *v.Message)
+	}
+}
+func (v *ClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClientException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // These errors are usually caused by a server issue.
 type ServerException struct {
@@ -61,3 +83,24 @@ func (e *ServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServerException_message, *v.Message)
+	}
+}
+func (v *ServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServerException_message, v.Message)
+		}
+		return nil
+	})
+}

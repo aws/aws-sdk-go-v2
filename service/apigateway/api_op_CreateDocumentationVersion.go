@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +48,27 @@ type CreateDocumentationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDocumentationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDocumentationVersionRequest_description, *v.Description)
+	}
+	if v.DocumentationVersion != nil {
+		s.WriteString(schemas.CreateDocumentationVersionRequest_documentationVersion, *v.DocumentationVersion)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.CreateDocumentationVersionRequest_restApiId, *v.RestApiId)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.CreateDocumentationVersionRequest_stageName, *v.StageName)
+	}
+}
+
 // A snapshot of the documentation of an API.
 type CreateDocumentationVersionOutput struct {
 
@@ -67,77 +87,60 @@ type CreateDocumentationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.DocumentationVersion_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DocumentationVersion_description, *v.Description)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DocumentationVersion_version, *v.Version)
+	}
+}
+func (v *CreateDocumentationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationVersion_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.DocumentationVersion_createdDate, v.CreatedDate)
+		case schemas.DocumentationVersion_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DocumentationVersion_description, v.Description)
+		case schemas.DocumentationVersion_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DocumentationVersion_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentationVersion, schemas.CreateDocumentationVersionRequest, schemas.DocumentationVersion)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDocumentationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentationVersion, schemas.CreateDocumentationVersionRequest, schemas.DocumentationVersion), output: &CreateDocumentationVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDocumentationVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDocumentationVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDocumentationVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDocumentationVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +158,8 @@ func (c *Client) addOperationCreateDocumentationVersionMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDocumentationVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDocumentationVersion",
-	}
 }

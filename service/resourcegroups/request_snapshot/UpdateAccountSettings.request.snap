@@ -1,0 +1,5 @@
+POST /update-account-settings
+
+Content-Type: application/json
+
+{"GroupLifecycleEventsDesiredStatus":"ACTIVE"}

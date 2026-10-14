@@ -1,0 +1,5 @@
+POST /2017-08-29/probe
+
+Content-Type: application/json
+
+{"inputFiles":[{"fileUrl":"__FileUrl__"},{"fileUrl":"__FileUrl__"}]}

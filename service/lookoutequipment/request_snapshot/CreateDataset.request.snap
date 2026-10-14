@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateDataset
+
+{"ClientToken":"__ClientToken__","DatasetName":"__DatasetName__","DatasetSchema":{"InlineDataSchema":"__InlineDataSchema__"},"ServerSideKmsKeyId":"__ServerSideKmsKeyId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

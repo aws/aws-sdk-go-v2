@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botRecommendationSummaries":[{"botRecommendationId":"__BotRecommendationId__","botRecommendationStatus":"Processing","creationDateTime":946684800,"lastUpdatedDateTime":946684800},{"botRecommendationId":"__BotRecommendationId__","botRecommendationStatus":"Processing","creationDateTime":946684800,"lastUpdatedDateTime":946684800}],"botVersion":"__BotVersion__","localeId":"__LocaleId__","nextToken":"__NextToken__"}

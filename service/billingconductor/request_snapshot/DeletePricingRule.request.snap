@@ -1,0 +1,5 @@
+POST /delete-pricing-rule
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

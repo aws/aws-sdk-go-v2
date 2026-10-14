@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeTrial
+
+{"CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"DisplayName":"__DisplayName__","ExperimentName":"__ExperimentName__","LastModifiedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"LastModifiedTime":946684800,"MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Source":{"SourceArn":"__SourceArn__","SourceType":"__SourceType__"},"TrialArn":"__TrialArn__","TrialName":"__TrialName__"}

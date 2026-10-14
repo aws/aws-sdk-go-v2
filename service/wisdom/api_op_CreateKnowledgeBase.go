@@ -5,10 +5,10 @@ package wisdom
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a knowledge base.
@@ -96,6 +96,72 @@ type CreateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseType != "" {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_knowledgeBaseType, string(v.KnowledgeBaseType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_name, *v.Name)
+	}
+	if v.RenderingConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_renderingConfiguration)
+		v.RenderingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_serverSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSourceConfiguration(s, schemas.CreateKnowledgeBaseRequest_sourceConfiguration, v.SourceConfiguration)
+	serializeTags(s, schemas.CreateKnowledgeBaseRequest_tags, v.Tags)
+}
+func (v *CreateKnowledgeBaseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKnowledgeBaseRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseRequest_clientToken, v.ClientToken)
+		case schemas.CreateKnowledgeBaseRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseRequest_description, v.Description)
+		case schemas.CreateKnowledgeBaseRequest_knowledgeBaseType:
+			var ev string
+			if err := d.ReadString(schemas.CreateKnowledgeBaseRequest_knowledgeBaseType, &ev); err != nil {
+				return err
+			}
+			v.KnowledgeBaseType = types.KnowledgeBaseType(ev)
+			return nil
+		case schemas.CreateKnowledgeBaseRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateKnowledgeBaseRequest_name, v.Name)
+		case schemas.CreateKnowledgeBaseRequest_renderingConfiguration:
+			v.RenderingConfiguration = &types.RenderingConfiguration{}
+			return v.RenderingConfiguration.Deserialize(d)
+		case schemas.CreateKnowledgeBaseRequest_serverSideEncryptionConfiguration:
+			v.ServerSideEncryptionConfiguration = &types.ServerSideEncryptionConfiguration{}
+			return v.ServerSideEncryptionConfiguration.Deserialize(d)
+		case schemas.CreateKnowledgeBaseRequest_sourceConfiguration:
+			return deserializeSourceConfiguration(d, schemas.CreateKnowledgeBaseRequest_sourceConfiguration, &v.SourceConfiguration)
+		case schemas.CreateKnowledgeBaseRequest_tags:
+			return deserializeTags(d, schemas.CreateKnowledgeBaseRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateKnowledgeBaseOutput struct {
 
 	// The knowledge base.
@@ -107,65 +173,44 @@ type CreateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseResponse_knowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKnowledgeBaseResponse_knowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBaseData{}
+			return v.KnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse), output: &CreateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKnowledgeBase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +220,6 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateKnowledgeBaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKnowledgeBase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +232,6 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +271,4 @@ func (m *idempotencyToken_initializeOpCreateKnowledgeBase) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateKnowledgeBaseMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKnowledgeBase{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKnowledgeBase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKnowledgeBase",
-	}
 }

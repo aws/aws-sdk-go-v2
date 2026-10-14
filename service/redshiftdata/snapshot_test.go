@@ -170,6 +170,18 @@ func TestCheckSnapshot_ListSchemas(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListStatements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListStatements(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_ListSchemas(t *testing.T) {
 	_, err := svc.ListSchemas(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSchemas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.StartFraudsterRegistrationJob
+
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DomainId":"__DomainId__","InputDataConfig":{"S3Uri":"__S3Uri__"},"JobName":"__JobName__","OutputDataConfig":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"},"RegistrationConfig":{"DuplicateRegistrationAction":"SKIP","FraudsterSimilarityThreshold":1,"WatchlistIds":["__Member__","__Member__"]}}

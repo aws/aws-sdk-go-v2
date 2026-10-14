@@ -4,13 +4,8 @@ package codeartifact
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -117,52 +112,6 @@ type PublishPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishPackageVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetName != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_assetName, *v.AssetName)
-	}
-	if v.AssetSHA256 != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_assetSHA256, *v.AssetSHA256)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.PublishPackageVersionRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_package, *v.Package)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_packageVersion, *v.PackageVersion)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.PublishPackageVersionRequest_repository, *v.Repository)
-	}
-	if v.Unfinished != nil {
-		s.WriteBool(schemas.PublishPackageVersionRequest_unfinished, *v.Unfinished)
-	}
-}
-func (v *PublishPackageVersionInput) GetPayloadStream() io.Reader { return v.AssetContent }
-
-var _ smithy.StreamingInput = (*PublishPackageVersionInput)(nil)
-
-func (v *PublishPackageVersionInput) SetPayloadStream(r io.ReadCloser) { v.AssetContent = r }
-
-var _ smithy.StreamingOutput = (*PublishPackageVersionInput)(nil)
-
 type PublishPackageVersionOutput struct {
 
 	// An [AssetSummary] for the published asset.
@@ -197,111 +146,29 @@ type PublishPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishPackageVersionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PublishPackageVersionResult_asset:
-			v.Asset = &types.AssetSummary{}
-			return v.Asset.Deserialize(d)
-		case schemas.PublishPackageVersionResult_format:
-			var ev string
-			if err := d.ReadString(schemas.PublishPackageVersionResult_format, &ev); err != nil {
-				return err
-			}
-			v.Format = types.PackageFormat(ev)
-			return nil
-		case schemas.PublishPackageVersionResult_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.PublishPackageVersionResult_namespace, v.Namespace)
-		case schemas.PublishPackageVersionResult_package:
-			v.Package = new(string)
-			return d.ReadString(schemas.PublishPackageVersionResult_package, v.Package)
-		case schemas.PublishPackageVersionResult_status:
-			var ev string
-			if err := d.ReadString(schemas.PublishPackageVersionResult_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PackageVersionStatus(ev)
-			return nil
-		case schemas.PublishPackageVersionResult_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.PublishPackageVersionResult_version, v.Version)
-		case schemas.PublishPackageVersionResult_versionRevision:
-			v.VersionRevision = new(string)
-			return d.ReadString(schemas.PublishPackageVersionResult_versionRevision, v.VersionRevision)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishPackageVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishPackageVersion, schemas.PublishPackageVersionRequest, schemas.PublishPackageVersionResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishPackageVersion{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishPackageVersion, schemas.PublishPackageVersionRequest, schemas.PublishPackageVersionResult), output: &PublishPackageVersionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishPackageVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPublishPackageVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishPackageVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -316,22 +183,8 @@ func (c *Client) addOperationPublishPackageVersionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPublishPackageVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PublishPackageVersion",
-	}
 }

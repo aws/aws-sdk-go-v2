@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for Amazon QuickSight spaces that match the specified filters.
@@ -48,6 +47,25 @@ type SearchSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSpacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSpacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.SearchSpacesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeSpaceQuicksightSearchFilters(s, schemas.SearchSpacesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchSpacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSpacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchSpacesOutput struct {
 
 	// The ID of the space.
@@ -75,77 +93,69 @@ type SearchSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSpacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSpacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSpacesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SearchSpacesResponse_RequestId, *v.RequestId)
+	}
+	serializeSpaceSummaries(s, schemas.SearchSpacesResponse_SpaceSummaries, v.SpaceSummaries)
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.SearchSpacesResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.SearchSpacesResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *SearchSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSpacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSpacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchSpacesResponse_NextToken, v.NextToken)
+		case schemas.SearchSpacesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SearchSpacesResponse_RequestId, v.RequestId)
+		case schemas.SearchSpacesResponse_SpaceSummaries:
+			return deserializeSpaceSummaries(d, schemas.SearchSpacesResponse_SpaceSummaries, &v.SpaceSummaries)
+		case schemas.SearchSpacesResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.SearchSpacesResponse_spaceArn, v.SpaceArn)
+		case schemas.SearchSpacesResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.SearchSpacesResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSpaces, schemas.SearchSpacesRequest, schemas.SearchSpacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchSpaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSpaces, schemas.SearchSpacesRequest, schemas.SearchSpacesResponse), output: &SearchSpacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchSpaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchSpaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchSpacesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchSpaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +170,8 @@ func (c *Client) addOperationSearchSpacesMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSearchSpaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchSpaces",
-	}
 }

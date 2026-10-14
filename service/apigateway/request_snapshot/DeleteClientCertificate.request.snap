@@ -1,0 +1,4 @@
+DELETE /clientcertificates/__ClientCertificateId__
+
+Accept: application/json
+

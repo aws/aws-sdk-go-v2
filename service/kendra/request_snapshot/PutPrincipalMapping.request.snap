@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.PutPrincipalMapping
+
+{"DataSourceId":"__DataSourceId__","GroupId":"__GroupId__","GroupMembers":{"MemberGroups":[{"DataSourceId":"__DataSourceId__","GroupId":"__GroupId__"},{"DataSourceId":"__DataSourceId__","GroupId":"__GroupId__"}],"MemberUsers":[{"UserId":"__UserId__"},{"UserId":"__UserId__"}],"S3PathforGroupMembers":{"Bucket":"__Bucket__","Key":"__Key__"}},"IndexId":"__IndexId__","OrderingId":1,"RoleArn":"__RoleArn__"}

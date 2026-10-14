@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves cost and usage comparisons for your account between two periods
@@ -69,8 +69,8 @@ type GetCostAndUsageComparisonsInput struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -79,6 +79,13 @@ type GetCostAndUsageComparisonsInput struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -135,6 +142,7 @@ type GetCostAndUsageComparisonsInput struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// You can group results using the attributes DIMENSION , TAG , and COST_CATEGORY .
@@ -147,6 +155,43 @@ type GetCostAndUsageComparisonsInput struct {
 	NextPageToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCostAndUsageComparisonsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageComparisonsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_BaselineTimePeriod)
+		v.BaselineTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.ComparisonTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_ComparisonTimePeriod)
+		v.ComparisonTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageComparisonsRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCostAndUsageComparisonsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MetricForComparison != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_MetricForComparison, *v.MetricForComparison)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_NextPageToken, *v.NextPageToken)
+	}
 }
 
 type GetCostAndUsageComparisonsOutput struct {
@@ -170,77 +215,54 @@ type GetCostAndUsageComparisonsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageComparisonsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageComparisonsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageComparisonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAndUsageComparisons(s, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, v.CostAndUsageComparisons)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeComparisonMetrics(s, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, v.TotalCostAndUsage)
+}
+func (v *GetCostAndUsageComparisonsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostAndUsageComparisonsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons:
+			return deserializeCostAndUsageComparisons(d, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, &v.CostAndUsageComparisons)
+		case schemas.GetCostAndUsageComparisonsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostAndUsageComparisonsResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage:
+			return deserializeComparisonMetrics(d, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, &v.TotalCostAndUsage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostAndUsageComparisonsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageComparisons, schemas.GetCostAndUsageComparisonsRequest, schemas.GetCostAndUsageComparisonsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsageComparisons{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageComparisons, schemas.GetCostAndUsageComparisonsRequest, schemas.GetCostAndUsageComparisonsResponse), output: &GetCostAndUsageComparisonsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostAndUsageComparisons{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCostAndUsageComparisons"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCostAndUsageComparisonsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostAndUsageComparisons(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -253,12 +275,6 @@ func (c *Client) addOperationGetCostAndUsageComparisonsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -362,11 +378,3 @@ type GetCostAndUsageComparisonsAPIClient interface {
 }
 
 var _ GetCostAndUsageComparisonsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetCostAndUsageComparisons(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCostAndUsageComparisons",
-	}
-}

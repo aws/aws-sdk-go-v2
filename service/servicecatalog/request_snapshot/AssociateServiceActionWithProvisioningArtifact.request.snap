@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact
+
+{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"}

@@ -1,0 +1,5 @@
+PUT /analytics-data/instance/__InstanceId__/association
+
+Content-Type: application/json
+
+{"DataSetId":"__DataSetId__","TargetAccountId":"__TargetAccountId__"}

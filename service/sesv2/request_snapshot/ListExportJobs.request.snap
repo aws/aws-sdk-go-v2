@@ -1,0 +1,5 @@
+POST /v2/email/list-export-jobs
+
+Content-Type: application/json
+
+{"ExportSourceType":"METRICS_DATA","JobStatus":"CREATED","NextToken":"__NextToken__","PageSize":1}

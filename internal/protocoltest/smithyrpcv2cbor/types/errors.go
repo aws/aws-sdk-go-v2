@@ -37,6 +37,18 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_message, *v.Message)
+	}
+}
 func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
 		switch s {
@@ -78,6 +90,22 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ComplexError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplexError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplexError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.ComplexError_Nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopLevel != nil {
+		s.WriteString(schemas.ComplexError_TopLevel, *v.TopLevel)
+	}
+}
 func (v *ComplexError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComplexError, func(s *smithy.Schema) error {
 		switch s {
@@ -117,6 +145,17 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGreeting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidGreeting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidGreeting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidGreeting_Message, *v.Message)
+	}
+}
 func (v *InvalidGreeting) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidGreeting, func(s *smithy.Schema) error {
 		switch s {

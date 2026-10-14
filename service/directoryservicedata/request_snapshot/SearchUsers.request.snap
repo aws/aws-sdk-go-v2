@@ -1,0 +1,5 @@
+POST /Users/SearchUsers?DirectoryId=__DirectoryId__
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","Realm":"__Realm__","SearchAttributes":["__Member__","__Member__"],"SearchString":"__SearchString__"}

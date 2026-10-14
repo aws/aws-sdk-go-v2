@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +46,21 @@ type GetPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetPolicyVersionRequest_policyName, *v.PolicyName)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteString(schemas.GetPolicyVersionRequest_policyVersionId, *v.PolicyVersionId)
+	}
+}
+
 // The output from the GetPolicyVersion operation.
 type GetPolicyVersionOutput struct {
 
@@ -80,77 +94,89 @@ type GetPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetPolicyVersionResponse_creationDate, *v.CreationDate)
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.GetPolicyVersionResponse_generationId, *v.GenerationId)
+	}
+	if v.IsDefaultVersion != false {
+		s.WriteBool(schemas.GetPolicyVersionResponse_isDefaultVersion, v.IsDefaultVersion)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetPolicyVersionResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetPolicyVersionResponse_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.GetPolicyVersionResponse_policyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.GetPolicyVersionResponse_policyName, *v.PolicyName)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteString(schemas.GetPolicyVersionResponse_policyVersionId, *v.PolicyVersionId)
+	}
+}
+func (v *GetPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyVersionResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyVersionResponse_creationDate, v.CreationDate)
+		case schemas.GetPolicyVersionResponse_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.GetPolicyVersionResponse_generationId, v.GenerationId)
+		case schemas.GetPolicyVersionResponse_isDefaultVersion:
+			return d.ReadBool(schemas.GetPolicyVersionResponse_isDefaultVersion, &v.IsDefaultVersion)
+		case schemas.GetPolicyVersionResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyVersionResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.GetPolicyVersionResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetPolicyVersionResponse_policyArn, v.PolicyArn)
+		case schemas.GetPolicyVersionResponse_policyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.GetPolicyVersionResponse_policyDocument, v.PolicyDocument)
+		case schemas.GetPolicyVersionResponse_policyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.GetPolicyVersionResponse_policyName, v.PolicyName)
+		case schemas.GetPolicyVersionResponse_policyVersionId:
+			v.PolicyVersionId = new(string)
+			return d.ReadString(schemas.GetPolicyVersionResponse_policyVersionId, v.PolicyVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyVersion, schemas.GetPolicyVersionRequest, schemas.GetPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyVersion, schemas.GetPolicyVersionRequest, schemas.GetPolicyVersionResponse), output: &GetPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicyVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPolicyVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +191,8 @@ func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPolicyVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPolicyVersion",
-	}
 }

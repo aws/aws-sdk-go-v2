@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceArn":"__AppInstanceArn__","AppInstanceUsers":[{"AppInstanceUserArn":"__AppInstanceUserArn__","Metadata":"__Metadata__","Name":"__Name__"},{"AppInstanceUserArn":"__AppInstanceUserArn__","Metadata":"__Metadata__","Name":"__Name__"}],"NextToken":"__NextToken__"}

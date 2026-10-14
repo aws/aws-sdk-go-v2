@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.CreateWhatIfForecast
+
+{"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeSeriesReplacementsDataSource":{"Format":"__Format__","S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"},"Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]},"TimestampFormat":"__TimestampFormat__"},"TimeSeriesTransformations":[{"Action":{"AttributeName":"__AttributeName__","Operation":"ADD","Value":1},"TimeSeriesConditions":[{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Condition":"EQUALS"},{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Condition":"EQUALS"}]},{"Action":{"AttributeName":"__AttributeName__","Operation":"ADD","Value":1},"TimeSeriesConditions":[{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Condition":"EQUALS"},{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Condition":"EQUALS"}]}],"WhatIfAnalysisArn":"__WhatIfAnalysisArn__","WhatIfForecastName":"__WhatIfForecastName__"}

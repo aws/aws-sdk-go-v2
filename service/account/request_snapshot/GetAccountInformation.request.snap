@@ -1,0 +1,5 @@
+POST /getAccountInformation
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__"}

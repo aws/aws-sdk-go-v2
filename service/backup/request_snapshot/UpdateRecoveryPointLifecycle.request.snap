@@ -1,0 +1,5 @@
+POST /backup-vaults/__BackupVaultName__/recovery-points/__RecoveryPointArn__
+
+Content-Type: application/json
+
+{"Lifecycle":{"DeleteAfterDays":1,"DeleteAfterEvent":"DELETE_AFTER_COPY","MoveToColdStorageAfterDays":1,"OptInToArchiveForSupportedResources":true}}

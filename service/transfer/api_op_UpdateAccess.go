@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to update parameters for the access specified in the ServerID and
@@ -140,6 +139,39 @@ type UpdateAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.UpdateAccessRequest_ExternalId, *v.ExternalId)
+	}
+	if v.HomeDirectory != nil {
+		s.WriteString(schemas.UpdateAccessRequest_HomeDirectory, *v.HomeDirectory)
+	}
+	serializeHomeDirectoryMappings(s, schemas.UpdateAccessRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryType != "" {
+		s.WriteString(schemas.UpdateAccessRequest_HomeDirectoryType, string(v.HomeDirectoryType))
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateAccessRequest_Policy, *v.Policy)
+	}
+	if v.PosixProfile != nil {
+		s.WriteStruct(schemas.UpdateAccessRequest_PosixProfile)
+		v.PosixProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateAccessRequest_Role, *v.Role)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateAccessRequest_ServerId, *v.ServerId)
+	}
+}
+
 type UpdateAccessOutput struct {
 
 	// The external identifier of the group whose users have access to your Amazon S3
@@ -160,77 +192,54 @@ type UpdateAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.UpdateAccessResponse_ExternalId, *v.ExternalId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateAccessResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *UpdateAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessResponse_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.UpdateAccessResponse_ExternalId, v.ExternalId)
+		case schemas.UpdateAccessResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.UpdateAccessResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccess, schemas.UpdateAccessRequest, schemas.UpdateAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccess, schemas.UpdateAccessRequest, schemas.UpdateAccessResponse), output: &UpdateAccessOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAccess{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccess"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAccessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccess(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -245,22 +254,8 @@ func (c *Client) addOperationUpdateAccessMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccess(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccess",
-	}
 }

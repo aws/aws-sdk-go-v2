@@ -5,12 +5,8 @@ package workdocs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all the comments for the specified document version.
@@ -55,30 +51,6 @@ type DescribeCommentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCommentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeCommentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeCommentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.DescribeCommentsRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.DocumentId != nil {
-		s.WriteString(schemas.DescribeCommentsRequest_DocumentId, *v.DocumentId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.DescribeCommentsRequest_Limit, *v.Limit)
-	}
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribeCommentsRequest_Marker, *v.Marker)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.DescribeCommentsRequest_VersionId, *v.VersionId)
-	}
-}
-
 type DescribeCommentsOutput struct {
 
 	// The list of comments for the specified document version.
@@ -94,87 +66,29 @@ type DescribeCommentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCommentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeCommentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeCommentsResponse_Comments:
-			return deserializeCommentList(d, schemas.DescribeCommentsResponse_Comments, &v.Comments)
-		case schemas.DescribeCommentsResponse_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.DescribeCommentsResponse_Marker, v.Marker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComments, schemas.DescribeCommentsRequest, schemas.DescribeCommentsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComments{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComments, schemas.DescribeCommentsRequest, schemas.DescribeCommentsResponse), output: &DescribeCommentsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCommentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +101,6 @@ func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,11 +201,3 @@ type DescribeCommentsAPIClient interface {
 }
 
 var _ DescribeCommentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeComments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeComments",
-	}
-}

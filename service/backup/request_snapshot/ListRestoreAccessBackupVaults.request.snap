@@ -1,0 +1,3 @@
+GET /logically-air-gapped-backup-vaults/__BackupVaultName__/restore-access-backup-vaults?maxResults=1&nextToken=__NextToken__
+
+

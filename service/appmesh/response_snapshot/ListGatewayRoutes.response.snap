@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"gatewayRoutes":[{"arn":"__Arn__","createdAt":946684800,"gatewayRouteName":"__GatewayRouteName__","lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1,"virtualGatewayName":"__VirtualGatewayName__"},{"arn":"__Arn__","createdAt":946684800,"gatewayRouteName":"__GatewayRouteName__","lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1,"virtualGatewayName":"__VirtualGatewayName__"}],"nextToken":"__NextToken__"}

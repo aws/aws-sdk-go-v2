@@ -1,0 +1,5 @@
+POST /DisconnectUser
+
+Content-Type: application/json
+
+{"reason":"__Reason__","roomIdentifier":"__RoomIdentifier__","userId":"__UserId__"}

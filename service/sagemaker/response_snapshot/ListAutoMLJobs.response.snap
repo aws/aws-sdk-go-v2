@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListAutoMLJobs
+
+{"AutoMLJobSummaries":[{"AutoMLJobArn":"__AutoMLJobArn__","AutoMLJobName":"__AutoMLJobName__","AutoMLJobSecondaryStatus":"Starting","AutoMLJobStatus":"Completed","CreationTime":946684800,"EndTime":946684800,"FailureReason":"__FailureReason__","LastModifiedTime":946684800,"PartialFailureReasons":[{"PartialFailureMessage":"__PartialFailureMessage__"},{"PartialFailureMessage":"__PartialFailureMessage__"}]},{"AutoMLJobArn":"__AutoMLJobArn__","AutoMLJobName":"__AutoMLJobName__","AutoMLJobSecondaryStatus":"Starting","AutoMLJobStatus":"Completed","CreationTime":946684800,"EndTime":946684800,"FailureReason":"__FailureReason__","LastModifiedTime":946684800,"PartialFailureReasons":[{"PartialFailureMessage":"__PartialFailureMessage__"},{"PartialFailureMessage":"__PartialFailureMessage__"}]}],"NextToken":"__NextToken__"}

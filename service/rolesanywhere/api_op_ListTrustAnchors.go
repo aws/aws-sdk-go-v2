@@ -5,12 +5,8 @@ package rolesanywhere
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the trust anchors in the authenticated account and Amazon Web Services
@@ -45,34 +41,6 @@ type ListTrustAnchorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrustAnchorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrustAnchorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRequest_nextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListRequest_pageSize, *v.PageSize)
-	}
-}
-func (v *ListTrustAnchorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRequest_nextToken, v.NextToken)
-		case schemas.ListRequest_pageSize:
-			v.PageSize = new(int32)
-			return d.ReadInt32(schemas.ListRequest_pageSize, v.PageSize)
-		}
-		return nil
-	})
-}
-
 type ListTrustAnchorsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous
@@ -89,96 +57,26 @@ type ListTrustAnchorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrustAnchorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrustAnchorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrustAnchorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrustAnchorsResponse_nextToken, *v.NextToken)
-	}
-	serializeTrustAnchorDetails(s, schemas.ListTrustAnchorsResponse_trustAnchors, v.TrustAnchors)
-}
-func (v *ListTrustAnchorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrustAnchorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrustAnchorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrustAnchorsResponse_nextToken, v.NextToken)
-		case schemas.ListTrustAnchorsResponse_trustAnchors:
-			return deserializeTrustAnchorDetails(d, schemas.ListTrustAnchorsResponse_trustAnchors, &v.TrustAnchors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrustAnchorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrustAnchors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustAnchors, schemas.ListRequest, schemas.ListTrustAnchorsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrustAnchors{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustAnchors, schemas.ListRequest, schemas.ListTrustAnchorsResponse), output: &ListTrustAnchorsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrustAnchors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrustAnchors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +89,6 @@ func (c *Client) addOperationListTrustAnchorsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,11 +177,3 @@ type ListTrustAnchorsAPIClient interface {
 }
 
 var _ ListTrustAnchorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTrustAnchors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTrustAnchors",
-	}
-}

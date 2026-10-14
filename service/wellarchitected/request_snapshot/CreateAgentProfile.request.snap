@@ -1,0 +1,5 @@
+POST /api/v1/agent-profiles
+
+Content-Type: application/json
+
+{"aggregationConfiguration":[{"accessRoleArn":"__AccessRoleArn__","accountId":"__AccountId__","regions":["__Member__","__Member__"]},{"accessRoleArn":"__AccessRoleArn__","accountId":"__AccountId__","regions":["__Member__","__Member__"]}],"businessOverview":"__BusinessOverview__","clientToken":"__ClientToken__","deletionProtection":true,"description":"__Description__","displayName":"__DisplayName__","executionRoleArn":"__ExecutionRoleArn__","name":"__Name__","pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

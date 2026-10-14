@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"PromptARN":"__PromptARN__","PromptId":"__PromptId__"}

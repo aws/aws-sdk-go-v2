@@ -5,9 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of IDs for all fleets that the vehicle is associated with.
@@ -51,6 +51,40 @@ type ListFleetsForVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetsForVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetsForVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetsForVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFleetsForVehicleRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetsForVehicleRequest_nextToken, *v.NextToken)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.ListFleetsForVehicleRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *ListFleetsForVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetsForVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetsForVehicleRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFleetsForVehicleRequest_maxResults, v.MaxResults)
+		case schemas.ListFleetsForVehicleRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetsForVehicleRequest_nextToken, v.NextToken)
+		case schemas.ListFleetsForVehicleRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.ListFleetsForVehicleRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type ListFleetsForVehicleOutput struct {
 
 	//  A list of fleet IDs that the vehicle is associated with.
@@ -66,77 +100,51 @@ type ListFleetsForVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetsForVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetsForVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetsForVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializefleets(s, schemas.ListFleetsForVehicleResponse_fleets, v.Fleets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetsForVehicleResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFleetsForVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetsForVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetsForVehicleResponse_fleets:
+			return deserializefleets(d, schemas.ListFleetsForVehicleResponse_fleets, &v.Fleets)
+		case schemas.ListFleetsForVehicleResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetsForVehicleResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFleetsForVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetsForVehicle, schemas.ListFleetsForVehicleRequest, schemas.ListFleetsForVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFleetsForVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetsForVehicle, schemas.ListFleetsForVehicleRequest, schemas.ListFleetsForVehicleResponse), output: &ListFleetsForVehicleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFleetsForVehicle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFleetsForVehicle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFleetsForVehicleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleetsForVehicle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +157,6 @@ func (c *Client) addOperationListFleetsForVehicleMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +258,3 @@ type ListFleetsForVehicleAPIClient interface {
 }
 
 var _ ListFleetsForVehicleAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFleetsForVehicle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFleetsForVehicle",
-	}
-}

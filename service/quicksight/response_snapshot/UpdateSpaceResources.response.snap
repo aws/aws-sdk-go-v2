@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FailedResourceOperations":[{"ErrorMessage":"__ErrorMessage__","ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"},{"ErrorMessage":"__ErrorMessage__","ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"}],"RequestId":"__RequestId__","spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

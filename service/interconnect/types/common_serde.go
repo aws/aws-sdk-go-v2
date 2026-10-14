@@ -148,6 +148,7 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeAttachPointDescriptorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttachPointDescriptor) error {
+	*v = make([]AttachPointDescriptor, 0)
 	var vv AttachPointDescriptor
 	return smithy.ReadList(d, s, func() error {
 		vv = AttachPointDescriptor{}
@@ -161,6 +162,7 @@ func deserializeAttachPointDescriptorList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeBandwidthList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -174,6 +176,7 @@ func deserializeBandwidthList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeConnectionSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConnectionSummary) error {
+	*v = make([]ConnectionSummary, 0)
 	var vv ConnectionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ConnectionSummary{}
@@ -187,6 +190,7 @@ func deserializeConnectionSummariesList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Environment) error {
+	*v = make([]Environment, 0)
 	var vv Environment
 	return smithy.ReadList(d, s, func() error {
 		vv = Environment{}
@@ -200,6 +204,7 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -228,6 +233,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

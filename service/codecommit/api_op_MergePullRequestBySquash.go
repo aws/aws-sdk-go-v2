@@ -4,11 +4,10 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attempts to merge the source commit of a pull request into the specified
@@ -81,6 +80,47 @@ type MergePullRequestBySquashInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestBySquashInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestBySquashInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestBySquashInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_authorName, *v.AuthorName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_commitMessage, *v.CommitMessage)
+	}
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.MergePullRequestBySquashInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.MergePullRequestBySquashInput_conflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.MergePullRequestBySquashInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.MergePullRequestBySquashInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+
 type MergePullRequestBySquashOutput struct {
 
 	// Returns information about a pull request.
@@ -92,77 +132,50 @@ type MergePullRequestBySquashOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestBySquashOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestBySquashOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestBySquashOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequest != nil {
+		s.WriteStruct(schemas.MergePullRequestBySquashOutput_pullRequest)
+		v.PullRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MergePullRequestBySquashOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergePullRequestBySquashOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergePullRequestBySquashOutput_pullRequest:
+			v.PullRequest = &types.PullRequest{}
+			return v.PullRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergePullRequestBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestBySquash, schemas.MergePullRequestBySquashInput, schemas.MergePullRequestBySquashOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestBySquash{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestBySquash, schemas.MergePullRequestBySquashInput, schemas.MergePullRequestBySquashOutput), output: &MergePullRequestBySquashOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergePullRequestBySquash{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MergePullRequestBySquash"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMergePullRequestBySquashValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestBySquash(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +190,8 @@ func (c *Client) addOperationMergePullRequestBySquashMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMergePullRequestBySquash(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MergePullRequestBySquash",
-	}
 }

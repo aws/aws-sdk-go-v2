@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,18 +42,6 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.CancelJobRequest_JobId, *v.JobId)
-	}
-}
-
 type CancelJobOutput struct {
 
 	// Amazon Resource Name (ARN) of the cancelled job.
@@ -80,83 +65,23 @@ type CancelJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelJobResponse_JobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.CancelJobResponse_JobArn, v.JobArn)
-		case schemas.CancelJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CancelJobResponse_JobId, v.JobId)
-		case schemas.CancelJobResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.CancelJobResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.JobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResponse), output: &CancelJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +91,6 @@ func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpCancelJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +103,6 @@ func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -223,12 +136,4 @@ func (m *endpointPrefix_opCancelJobMiddleware) HandleFinalize(ctx context.Contex
 }
 func addEndpointPrefix_opCancelJobMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCancelJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCancelJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelJob",
-	}
 }

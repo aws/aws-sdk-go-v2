@@ -5,12 +5,8 @@ package launchwizard
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the events of a deployment.
@@ -47,24 +43,6 @@ type ListDeploymentEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeploymentEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDeploymentEventsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDeploymentEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeploymentId != nil {
-		s.WriteString(schemas.ListDeploymentEventsInput_deploymentId, *v.DeploymentId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDeploymentEventsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDeploymentEventsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDeploymentEventsOutput struct {
 
 	// Lists the deployment events.
@@ -80,87 +58,29 @@ type ListDeploymentEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeploymentEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDeploymentEventsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDeploymentEventsOutput_deploymentEvents:
-			return deserializeDeploymentEventDataSummaryList(d, schemas.ListDeploymentEventsOutput_deploymentEvents, &v.DeploymentEvents)
-		case schemas.ListDeploymentEventsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDeploymentEventsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDeploymentEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeploymentEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentEvents, schemas.ListDeploymentEventsInput, schemas.ListDeploymentEventsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeploymentEvents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentEvents, schemas.ListDeploymentEventsInput, schemas.ListDeploymentEventsOutput), output: &ListDeploymentEventsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeploymentEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDeploymentEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeploymentEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +93,6 @@ func (c *Client) addOperationListDeploymentEventsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +195,3 @@ type ListDeploymentEventsAPIClient interface {
 }
 
 var _ ListDeploymentEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDeploymentEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDeploymentEvents",
-	}
-}

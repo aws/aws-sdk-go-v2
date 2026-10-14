@@ -5,11 +5,7 @@ package savingsplans
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,31 +57,6 @@ type CreateSavingsPlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSavingsPlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSavingsPlanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSavingsPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSavingsPlanRequest_clientToken, *v.ClientToken)
-	}
-	if v.Commitment != nil {
-		s.WriteString(schemas.CreateSavingsPlanRequest_commitment, *v.Commitment)
-	}
-	if v.PurchaseTime != nil {
-		s.WriteTime(schemas.CreateSavingsPlanRequest_purchaseTime, *v.PurchaseTime)
-	}
-	if v.SavingsPlanOfferingId != nil {
-		s.WriteString(schemas.CreateSavingsPlanRequest_savingsPlanOfferingId, *v.SavingsPlanOfferingId)
-	}
-	serializeTagMap(s, schemas.CreateSavingsPlanRequest_tags, v.Tags)
-	if v.UpfrontPaymentAmount != nil {
-		s.WriteString(schemas.CreateSavingsPlanRequest_upfrontPaymentAmount, *v.UpfrontPaymentAmount)
-	}
-}
-
 type CreateSavingsPlanOutput struct {
 
 	// The ID of the Savings Plan.
@@ -97,73 +68,23 @@ type CreateSavingsPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSavingsPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSavingsPlanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSavingsPlanResponse_savingsPlanId:
-			v.SavingsPlanId = new(string)
-			return d.ReadString(schemas.CreateSavingsPlanResponse_savingsPlanId, v.SavingsPlanId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSavingsPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSavingsPlan, schemas.CreateSavingsPlanRequest, schemas.CreateSavingsPlanResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSavingsPlan{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSavingsPlan, schemas.CreateSavingsPlanRequest, schemas.CreateSavingsPlanResponse), output: &CreateSavingsPlanOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSavingsPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +94,6 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateSavingsPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSavingsPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +106,6 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,12 +145,4 @@ func (m *idempotencyToken_initializeOpCreateSavingsPlan) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateSavingsPlanMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSavingsPlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSavingsPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSavingsPlan",
-	}
 }

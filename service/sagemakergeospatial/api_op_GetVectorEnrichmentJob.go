@@ -4,13 +4,8 @@ package sagemakergeospatial
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetVectorEnrichmentJobInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetVectorEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetVectorEnrichmentJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetVectorEnrichmentJobInput_Arn, *v.Arn)
-	}
 }
 
 type GetVectorEnrichmentJobOutput struct {
@@ -121,134 +104,29 @@ type GetVectorEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetVectorEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetVectorEnrichmentJobOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetVectorEnrichmentJobOutput_Arn, v.Arn)
-		case schemas.GetVectorEnrichmentJobOutput_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.GetVectorEnrichmentJobOutput_CreationTime, v.CreationTime)
-		case schemas.GetVectorEnrichmentJobOutput_DurationInSeconds:
-			v.DurationInSeconds = new(int32)
-			return d.ReadInt32(schemas.GetVectorEnrichmentJobOutput_DurationInSeconds, v.DurationInSeconds)
-		case schemas.GetVectorEnrichmentJobOutput_ErrorDetails:
-			v.ErrorDetails = &types.VectorEnrichmentJobErrorDetails{}
-			return v.ErrorDetails.Deserialize(d)
-		case schemas.GetVectorEnrichmentJobOutput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.GetVectorEnrichmentJobOutput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.GetVectorEnrichmentJobOutput_ExportErrorDetails:
-			v.ExportErrorDetails = &types.VectorEnrichmentJobExportErrorDetails{}
-			return v.ExportErrorDetails.Deserialize(d)
-		case schemas.GetVectorEnrichmentJobOutput_ExportStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetVectorEnrichmentJobOutput_ExportStatus, &ev); err != nil {
-				return err
-			}
-			v.ExportStatus = types.VectorEnrichmentJobExportStatus(ev)
-			return nil
-		case schemas.GetVectorEnrichmentJobOutput_InputConfig:
-			v.InputConfig = &types.VectorEnrichmentJobInputConfig{}
-			return v.InputConfig.Deserialize(d)
-		case schemas.GetVectorEnrichmentJobOutput_JobConfig:
-			return deserializeVectorEnrichmentJobConfig(d, schemas.GetVectorEnrichmentJobOutput_JobConfig, &v.JobConfig)
-		case schemas.GetVectorEnrichmentJobOutput_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.GetVectorEnrichmentJobOutput_KmsKeyId, v.KmsKeyId)
-		case schemas.GetVectorEnrichmentJobOutput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetVectorEnrichmentJobOutput_Name, v.Name)
-		case schemas.GetVectorEnrichmentJobOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetVectorEnrichmentJobOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.VectorEnrichmentJobStatus(ev)
-			return nil
-		case schemas.GetVectorEnrichmentJobOutput_Tags:
-			return deserializeTags(d, schemas.GetVectorEnrichmentJobOutput_Tags, &v.Tags)
-		case schemas.GetVectorEnrichmentJobOutput_Type:
-			var ev string
-			if err := d.ReadString(schemas.GetVectorEnrichmentJobOutput_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.VectorEnrichmentJobType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetVectorEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectorEnrichmentJob, schemas.GetVectorEnrichmentJobInput, schemas.GetVectorEnrichmentJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectorEnrichmentJob, schemas.GetVectorEnrichmentJobInput, schemas.GetVectorEnrichmentJobOutput), output: &GetVectorEnrichmentJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVectorEnrichmentJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetVectorEnrichmentJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVectorEnrichmentJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -263,22 +141,8 @@ func (c *Client) addOperationGetVectorEnrichmentJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetVectorEnrichmentJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVectorEnrichmentJob",
-	}
 }

@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns Auto Scaling group recommendations.
@@ -70,6 +69,29 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoScalingGroupRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoScalingGroupRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
+	serializeAutoScalingGroupArns(s, schemas.GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns, v.AutoScalingGroupArns)
+	serializeFilters(s, schemas.GetAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAutoScalingGroupRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAutoScalingGroupRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAutoScalingGroupRecommendationsOutput struct {
 
 	// An array of objects that describe Auto Scaling group recommendations.
@@ -94,77 +116,54 @@ type GetAutoScalingGroupRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoScalingGroupRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoScalingGroupRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoScalingGroupRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingGroupRecommendations(s, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, v.AutoScalingGroupRecommendations)
+	serializeGetRecommendationErrors(s, schemas.GetAutoScalingGroupRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAutoScalingGroupRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAutoScalingGroupRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutoScalingGroupRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations:
+			return deserializeAutoScalingGroupRecommendations(d, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, &v.AutoScalingGroupRecommendations)
+		case schemas.GetAutoScalingGroupRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetAutoScalingGroupRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetAutoScalingGroupRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAutoScalingGroupRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoScalingGroupRecommendations, schemas.GetAutoScalingGroupRecommendationsRequest, schemas.GetAutoScalingGroupRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAutoScalingGroupRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoScalingGroupRecommendations, schemas.GetAutoScalingGroupRecommendationsRequest, schemas.GetAutoScalingGroupRecommendationsResponse), output: &GetAutoScalingGroupRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAutoScalingGroupRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAutoScalingGroupRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAutoScalingGroupRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +178,8 @@ func (c *Client) addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAutoScalingGroupRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAutoScalingGroupRecommendations",
-	}
 }

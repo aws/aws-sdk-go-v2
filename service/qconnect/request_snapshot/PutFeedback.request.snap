@@ -1,0 +1,5 @@
+PUT /assistants/__AssistantId__/feedback
+
+Content-Type: application/json
+
+{"contentFeedback":{"generativeContentFeedbackData":{"relevance":"HELPFUL"}},"targetId":"__TargetId__","targetType":"RECOMMENDATION"}

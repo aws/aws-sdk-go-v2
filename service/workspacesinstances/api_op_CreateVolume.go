@@ -5,12 +5,8 @@ package workspacesinstances
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new volume for WorkSpace Instances.
@@ -67,43 +63,6 @@ type CreateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateVolumeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateVolumeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.CreateVolumeRequest_AvailabilityZone, *v.AvailabilityZone)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateVolumeRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Encrypted != nil {
-		s.WriteBool(schemas.CreateVolumeRequest_Encrypted, *v.Encrypted)
-	}
-	if v.Iops != nil {
-		s.WriteInt32(schemas.CreateVolumeRequest_Iops, *v.Iops)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateVolumeRequest_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.SizeInGB != nil {
-		s.WriteInt32(schemas.CreateVolumeRequest_SizeInGB, *v.SizeInGB)
-	}
-	if v.SnapshotId != nil {
-		s.WriteString(schemas.CreateVolumeRequest_SnapshotId, *v.SnapshotId)
-	}
-	serializeTagSpecifications(s, schemas.CreateVolumeRequest_TagSpecifications, v.TagSpecifications)
-	if v.Throughput != nil {
-		s.WriteInt32(schemas.CreateVolumeRequest_Throughput, *v.Throughput)
-	}
-	if v.VolumeType != "" {
-		s.WriteString(schemas.CreateVolumeRequest_VolumeType, string(v.VolumeType))
-	}
-}
-
 // Returns the created volume identifier.
 type CreateVolumeOutput struct {
 
@@ -116,73 +75,26 @@ type CreateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateVolumeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateVolumeResponse_VolumeId:
-			v.VolumeId = new(string)
-			return d.ReadString(schemas.CreateVolumeResponse_VolumeId, v.VolumeId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateVolume{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateVolume{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse), output: &CreateVolumeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -192,12 +104,6 @@ func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCreateVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,12 +116,6 @@ func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,12 +155,4 @@ func (m *idempotencyToken_initializeOpCreateVolume) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreateVolumeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVolume{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVolume",
-	}
 }

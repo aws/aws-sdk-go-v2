@@ -4,12 +4,7 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetCredentialLockerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCredentialLockerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCredentialLockerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCredentialLockerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetCredentialLockerRequest_Identifier, *v.Identifier)
-	}
-}
-
 type GetCredentialLockerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the credential locker.
@@ -74,96 +57,29 @@ type GetCredentialLockerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCredentialLockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCredentialLockerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCredentialLockerResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetCredentialLockerResponse_Arn, v.Arn)
-		case schemas.GetCredentialLockerResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCredentialLockerResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetCredentialLockerResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetCredentialLockerResponse_Id, v.Id)
-		case schemas.GetCredentialLockerResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetCredentialLockerResponse_Name, v.Name)
-		case schemas.GetCredentialLockerResponse_Tags:
-			return deserializeTagsMap(d, schemas.GetCredentialLockerResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCredentialLockerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCredentialLocker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentialLocker, schemas.GetCredentialLockerRequest, schemas.GetCredentialLockerResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCredentialLocker{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentialLocker, schemas.GetCredentialLockerRequest, schemas.GetCredentialLockerResponse), output: &GetCredentialLockerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCredentialLocker"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCredentialLockerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCredentialLocker(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +94,8 @@ func (c *Client) addOperationGetCredentialLockerMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCredentialLocker(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCredentialLocker",
-	}
 }

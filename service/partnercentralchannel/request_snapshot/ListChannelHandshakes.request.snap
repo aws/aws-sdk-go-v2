@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.ListChannelHandshakes
+
+{"associatedResourceIdentifiers":["__Member__","__Member__"],"catalog":"__Catalog__","handshakeType":"START_SERVICE_PERIOD","handshakeTypeFilters":{"startServicePeriodTypeFilters":{"servicePeriodTypes":["MINIMUM_NOTICE_PERIOD","MINIMUM_NOTICE_PERIOD"]}},"handshakeTypeSort":{"startServicePeriodTypeSort":{"sortBy":"UpdatedAt","sortOrder":"Ascending"}},"maxResults":1,"nextToken":"__NextToken__","participantType":"SENDER","statuses":["PENDING","PENDING"]}

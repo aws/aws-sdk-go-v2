@@ -1,0 +1,6 @@
+402
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿f__typexServiceQuotaExceededExceptiongmessagek__Message__iquotaCodem__QuotaCode__irequestIdm__RequestId__jresourceIdn__ResourceId__lresourceTypep__ResourceType__kserviceCodeo__ServiceCode__ÿ

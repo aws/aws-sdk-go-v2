@@ -6,6 +6,19 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExtractedInformationValue) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v []IssueDetected) {
 	if v == nil {
 		return
@@ -56,7 +69,22 @@ func serializeRealtimeContactAnalysisSegments(s smithy.ShapeSerializer, schema *
 	s.CloseList()
 }
 
+func deserializeExtractedInformationValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExtractedInformationValue) error {
+	*v = make([]ExtractedInformationValue, 0)
+	var vv ExtractedInformationValue
+	return smithy.ReadList(d, s, func() error {
+		vv = ExtractedInformationValue{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeIssuesDetected(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IssueDetected) error {
+	*v = make([]IssueDetected, 0)
 	var vv IssueDetected
 	return smithy.ReadList(d, s, func() error {
 		vv = IssueDetected{}
@@ -70,6 +98,7 @@ func deserializeIssuesDetected(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeMatchedCategories(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -83,6 +112,7 @@ func deserializeMatchedCategories(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializePointsOfInterest(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PointOfInterest) error {
+	*v = make([]PointOfInterest, 0)
 	var vv PointOfInterest
 	return smithy.ReadList(d, s, func() error {
 		vv = PointOfInterest{}
@@ -96,6 +126,7 @@ func deserializePointsOfInterest(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRealtimeContactAnalysisSegments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RealtimeContactAnalysisSegment) error {
+	*v = make([]RealtimeContactAnalysisSegment, 0)
 	var vv RealtimeContactAnalysisSegment
 	return smithy.ReadList(d, s, func() error {
 		vv = RealtimeContactAnalysisSegment{}
@@ -126,6 +157,14 @@ func deserializeMatchedDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]CategoryDetails)
 	var vv CategoryDetails
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero CategoryDetails
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = CategoryDetails{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

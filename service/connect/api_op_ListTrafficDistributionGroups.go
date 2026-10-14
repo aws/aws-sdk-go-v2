@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists traffic distribution groups.
@@ -45,6 +45,24 @@ type ListTrafficDistributionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficDistributionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrafficDistributionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrafficDistributionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrafficDistributionGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTrafficDistributionGroupsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -59,74 +77,48 @@ type ListTrafficDistributionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficDistributionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrafficDistributionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrafficDistributionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeTrafficDistributionGroupSummaryList(s, schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList, v.TrafficDistributionGroupSummaryList)
+}
+func (v *ListTrafficDistributionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrafficDistributionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrafficDistributionGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrafficDistributionGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList:
+			return deserializeTrafficDistributionGroupSummaryList(d, schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList, &v.TrafficDistributionGroupSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrafficDistributionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficDistributionGroups, schemas.ListTrafficDistributionGroupsRequest, schemas.ListTrafficDistributionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrafficDistributionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficDistributionGroups, schemas.ListTrafficDistributionGroupsRequest, schemas.ListTrafficDistributionGroupsResponse), output: &ListTrafficDistributionGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrafficDistributionGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrafficDistributionGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficDistributionGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +131,6 @@ func (c *Client) addOperationListTrafficDistributionGroupsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type ListTrafficDistributionGroupsAPIClient interface {
 }
 
 var _ ListTrafficDistributionGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTrafficDistributionGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTrafficDistributionGroups",
-	}
-}

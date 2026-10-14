@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Only the VOICE, EMAIL, and TASK channels are supported.
@@ -145,6 +145,53 @@ type CreateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.CreateContactRequest_Attributes, v.Attributes)
+	if v.Channel != "" {
+		s.WriteString(schemas.CreateContactRequest_Channel, string(v.Channel))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContactRequest_Description, *v.Description)
+	}
+	if v.ExpiryDurationInMinutes != nil {
+		s.WriteInt32(schemas.CreateContactRequest_ExpiryDurationInMinutes, *v.ExpiryDurationInMinutes)
+	}
+	if v.InitiateAs != "" {
+		s.WriteString(schemas.CreateContactRequest_InitiateAs, string(v.InitiateAs))
+	}
+	if v.InitiationMethod != "" {
+		s.WriteString(schemas.CreateContactRequest_InitiationMethod, string(v.InitiationMethod))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContactRequest_Name, *v.Name)
+	}
+	if v.PreviousContactId != nil {
+		s.WriteString(schemas.CreateContactRequest_PreviousContactId, *v.PreviousContactId)
+	}
+	serializeContactReferences(s, schemas.CreateContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.CreateContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.CreateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.UserInfo != nil {
+		s.WriteStruct(schemas.CreateContactRequest_UserInfo)
+		v.UserInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateContactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created contact.
@@ -159,65 +206,48 @@ type CreateContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.CreateContactResponse_ContactArn, *v.ContactArn)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.CreateContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *CreateContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContactResponse_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.CreateContactResponse_ContactArn, v.ContactArn)
+		case schemas.CreateContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.CreateContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContact, schemas.CreateContactRequest, schemas.CreateContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContact, schemas.CreateContactRequest, schemas.CreateContactResponse), output: &CreateContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -227,12 +257,6 @@ func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -245,12 +269,6 @@ func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -290,12 +308,4 @@ func (m *idempotencyToken_initializeOpCreateContact) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContact",
-	}
 }

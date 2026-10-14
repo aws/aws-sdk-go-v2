@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchUpdateBillScenarioUsageModification
+
+{"billScenarioId":"__BillScenarioId__","usageModifications":[{"amounts":[{"amount":1,"startHour":946684800},{"amount":1,"startHour":946684800}],"group":"__Group__","id":"__Id__"},{"amounts":[{"amount":1,"startHour":946684800},{"amount":1,"startHour":946684800}],"group":"__Group__","id":"__Id__"}]}

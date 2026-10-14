@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about one or more of your devices in a global network.
@@ -49,6 +49,28 @@ type GetDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceIdList(s, schemas.GetDevicesRequest_DeviceIds, v.DeviceIds)
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetDevicesRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDevicesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDevicesRequest_NextToken, *v.NextToken)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.GetDevicesRequest_SiteId, *v.SiteId)
+	}
+}
+
 type GetDevicesOutput struct {
 
 	// The devices.
@@ -63,77 +85,51 @@ type GetDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceList(s, schemas.GetDevicesResponse_Devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDevicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicesResponse_Devices:
+			return deserializeDeviceList(d, schemas.GetDevicesResponse_Devices, &v.Devices)
+		case schemas.GetDevicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDevicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevices, schemas.GetDevicesRequest, schemas.GetDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevices, schemas.GetDevicesRequest, schemas.GetDevicesResponse), output: &GetDevicesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevices{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDevicesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +142,6 @@ func (c *Client) addOperationGetDevicesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +241,3 @@ type GetDevicesAPIClient interface {
 }
 
 var _ GetDevicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetDevices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDevices",
-	}
-}

@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a secondary replica user pool. You can only delete replicas that are in
@@ -57,6 +56,21 @@ type DeleteUserPoolReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.DeleteUserPoolReplicaRequest_RegionName, *v.RegionName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DeleteUserPoolReplicaRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type DeleteUserPoolReplicaOutput struct {
 
 	// Information about the deleted user pool replica.
@@ -68,77 +82,50 @@ type DeleteUserPoolReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolReplica != nil {
+		s.WriteStruct(schemas.DeleteUserPoolReplicaResponse_UserPoolReplica)
+		v.UserPoolReplica.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteUserPoolReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserPoolReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteUserPoolReplicaResponse_UserPoolReplica:
+			v.UserPoolReplica = &types.UserPoolReplicaType{}
+			return v.UserPoolReplica.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserPoolReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolReplica, schemas.DeleteUserPoolReplicaRequest, schemas.DeleteUserPoolReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUserPoolReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolReplica, schemas.DeleteUserPoolReplicaRequest, schemas.DeleteUserPoolReplicaResponse), output: &DeleteUserPoolReplicaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteUserPoolReplica{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteUserPoolReplica"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteUserPoolReplicaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserPoolReplica(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +140,8 @@ func (c *Client) addOperationDeleteUserPoolReplicaMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteUserPoolReplica(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteUserPoolReplica",
-	}
 }

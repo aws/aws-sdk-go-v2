@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,33 +55,6 @@ type ListJournalRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListJournalRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListJournalRecordsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListJournalRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListJournalRecordsRequest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.ListJournalRecordsRequest_executionId, *v.ExecutionId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListJournalRecordsRequest_limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListJournalRecordsRequest_nextToken, *v.NextToken)
-	}
-	if v.Order != "" {
-		s.WriteString(schemas.ListJournalRecordsRequest_order, string(v.Order))
-	}
-	if v.RecordType != nil {
-		s.WriteString(schemas.ListJournalRecordsRequest_recordType, *v.RecordType)
-	}
-}
-
 // Response structure containing a list of journal records
 type ListJournalRecordsOutput struct {
 
@@ -102,75 +72,23 @@ type ListJournalRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListJournalRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListJournalRecordsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListJournalRecordsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListJournalRecordsResponse_nextToken, v.NextToken)
-		case schemas.ListJournalRecordsResponse_records:
-			return deserializeJournalRecordList(d, schemas.ListJournalRecordsResponse_records, &v.Records)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListJournalRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJournalRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJournalRecords, schemas.ListJournalRecordsRequest, schemas.ListJournalRecordsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJournalRecords{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJournalRecords, schemas.ListJournalRecordsRequest, schemas.ListJournalRecordsResponse), output: &ListJournalRecordsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListJournalRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -180,12 +98,6 @@ func (c *Client) addOperationListJournalRecordsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpListJournalRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJournalRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +110,6 @@ func (c *Client) addOperationListJournalRecordsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -332,11 +238,3 @@ type ListJournalRecordsAPIClient interface {
 }
 
 var _ ListJournalRecordsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListJournalRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListJournalRecords",
-	}
-}

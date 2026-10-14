@@ -1,0 +1,5 @@
+PUT /file-systems/__FileSystemId__/synchronization-configuration
+
+Content-Type: application/json
+
+{"expirationDataRules":[{"daysAfterLastAccess":1},{"daysAfterLastAccess":1}],"importDataRules":[{"prefix":"__Prefix__","sizeLessThan":1,"trigger":"ON_DIRECTORY_FIRST_ACCESS"},{"prefix":"__Prefix__","sizeLessThan":1,"trigger":"ON_DIRECTORY_FIRST_ACCESS"}],"latestVersionNumber":1}

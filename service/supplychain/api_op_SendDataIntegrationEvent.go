@@ -5,12 +5,8 @@ package supplychain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -129,38 +125,6 @@ type SendDataIntegrationEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataIntegrationEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendDataIntegrationEventRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendDataIntegrationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.SendDataIntegrationEventRequest_clientToken, *v.ClientToken)
-	}
-	if v.Data != nil {
-		s.WriteString(schemas.SendDataIntegrationEventRequest_data, *v.Data)
-	}
-	if v.DatasetTarget != nil {
-		s.WriteStruct(schemas.SendDataIntegrationEventRequest_datasetTarget)
-		v.DatasetTarget.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EventGroupId != nil {
-		s.WriteString(schemas.SendDataIntegrationEventRequest_eventGroupId, *v.EventGroupId)
-	}
-	if v.EventTimestamp != nil {
-		s.WriteTime(schemas.SendDataIntegrationEventRequest_eventTimestamp, *v.EventTimestamp)
-	}
-	if v.EventType != "" {
-		s.WriteString(schemas.SendDataIntegrationEventRequest_eventType, string(v.EventType))
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.SendDataIntegrationEventRequest_instanceId, *v.InstanceId)
-	}
-}
-
 // The response parameters for SendDataIntegrationEvent.
 type SendDataIntegrationEventOutput struct {
 
@@ -175,73 +139,23 @@ type SendDataIntegrationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataIntegrationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendDataIntegrationEventResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendDataIntegrationEventResponse_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.SendDataIntegrationEventResponse_eventId, v.EventId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendDataIntegrationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDataIntegrationEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataIntegrationEvent, schemas.SendDataIntegrationEventRequest, schemas.SendDataIntegrationEventResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDataIntegrationEvent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataIntegrationEvent, schemas.SendDataIntegrationEventRequest, schemas.SendDataIntegrationEventResponse), output: &SendDataIntegrationEventOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendDataIntegrationEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -251,12 +165,6 @@ func (c *Client) addOperationSendDataIntegrationEventMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpSendDataIntegrationEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendDataIntegrationEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -269,12 +177,6 @@ func (c *Client) addOperationSendDataIntegrationEventMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -314,12 +216,4 @@ func (m *idempotencyToken_initializeOpSendDataIntegrationEvent) HandleInitialize
 }
 func addIdempotencyToken_opSendDataIntegrationEventMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpSendDataIntegrationEvent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opSendDataIntegrationEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendDataIntegrationEvent",
-	}
 }

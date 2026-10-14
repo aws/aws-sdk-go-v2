@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an evidence folder from a specified assessment in Audit Manager.
@@ -47,6 +46,24 @@ type GetEvidenceFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.GetEvidenceFolderRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.GetEvidenceFolderRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.GetEvidenceFolderRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+}
+
 type GetEvidenceFolderOutput struct {
 
 	//  The folder that the evidence is stored in.
@@ -58,77 +75,50 @@ type GetEvidenceFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvidenceFolder != nil {
+		s.WriteStruct(schemas.GetEvidenceFolderResponse_evidenceFolder)
+		v.EvidenceFolder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEvidenceFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvidenceFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvidenceFolderResponse_evidenceFolder:
+			v.EvidenceFolder = &types.AssessmentEvidenceFolder{}
+			return v.EvidenceFolder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceFolder, schemas.GetEvidenceFolderRequest, schemas.GetEvidenceFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvidenceFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceFolder, schemas.GetEvidenceFolderRequest, schemas.GetEvidenceFolderResponse), output: &GetEvidenceFolderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvidenceFolder{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEvidenceFolder"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEvidenceFolderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvidenceFolder(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +133,8 @@ func (c *Client) addOperationGetEvidenceFolderMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEvidenceFolder(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEvidenceFolder",
-	}
 }

@@ -1,0 +1,3 @@
+PUT /v2/email/export-jobs/__JobId__/cancel
+
+

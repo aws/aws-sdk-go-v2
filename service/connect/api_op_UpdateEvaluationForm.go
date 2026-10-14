@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates details about a specific evaluation form version in the specified
@@ -63,6 +63,10 @@ type UpdateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// The AI version to use for the evaluation form. This specifies which AI model
+	// version is used for automated evaluations.
+	AIVersion *string
+
 	// A boolean flag indicating whether to update evaluation form to draft state.
 	AsDraft bool
 
@@ -97,6 +101,66 @@ type UpdateEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersion != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_AIVersion, *v.AIVersion)
+	}
+	if v.AsDraft != false {
+		s.WriteBool(schemas.UpdateEvaluationFormRequest_AsDraft, v.AsDraft)
+	}
+	if v.AutoEvaluationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEvaluationFormRequest_AutoEvaluationConfiguration)
+		v.AutoEvaluationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CreateNewVersion != nil {
+		s.WriteBool(schemas.UpdateEvaluationFormRequest_CreateNewVersion, *v.CreateNewVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_Description, *v.Description)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.UpdateEvaluationFormRequest_EvaluationFormVersion, v.EvaluationFormVersion)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+	serializeEvaluationFormItemsList(s, schemas.UpdateEvaluationFormRequest_Items, v.Items)
+	if v.LanguageConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEvaluationFormRequest_LanguageConfiguration)
+		v.LanguageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReviewConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEvaluationFormRequest_ReviewConfiguration)
+		v.ReviewConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScoringStrategy != nil {
+		s.WriteStruct(schemas.UpdateEvaluationFormRequest_ScoringStrategy)
+		v.ScoringStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEvaluationFormRequest_TargetConfiguration)
+		v.TargetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateEvaluationFormRequest_Title, *v.Title)
+	}
+}
+
 type UpdateEvaluationFormOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -120,65 +184,51 @@ type UpdateEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormArn != nil {
+		s.WriteString(schemas.UpdateEvaluationFormResponse_EvaluationFormArn, *v.EvaluationFormArn)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.UpdateEvaluationFormResponse_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.UpdateEvaluationFormResponse_EvaluationFormVersion, v.EvaluationFormVersion)
+}
+func (v *UpdateEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEvaluationFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEvaluationFormResponse_EvaluationFormArn:
+			v.EvaluationFormArn = new(string)
+			return d.ReadString(schemas.UpdateEvaluationFormResponse_EvaluationFormArn, v.EvaluationFormArn)
+		case schemas.UpdateEvaluationFormResponse_EvaluationFormId:
+			v.EvaluationFormId = new(string)
+			return d.ReadString(schemas.UpdateEvaluationFormResponse_EvaluationFormId, v.EvaluationFormId)
+		case schemas.UpdateEvaluationFormResponse_EvaluationFormVersion:
+			return d.ReadInt32(schemas.UpdateEvaluationFormResponse_EvaluationFormVersion, &v.EvaluationFormVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluationForm, schemas.UpdateEvaluationFormRequest, schemas.UpdateEvaluationFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluationForm, schemas.UpdateEvaluationFormRequest, schemas.UpdateEvaluationFormResponse), output: &UpdateEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEvaluationForm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEvaluationForm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -188,12 +238,6 @@ func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpUpdateEvaluationFormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEvaluationForm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +250,6 @@ func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +289,4 @@ func (m *idempotencyToken_initializeOpUpdateEvaluationForm) HandleInitialize(ctx
 }
 func addIdempotencyToken_opUpdateEvaluationFormMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateEvaluationForm{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateEvaluationForm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEvaluationForm",
-	}
 }

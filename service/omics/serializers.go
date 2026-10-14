@@ -8513,6 +8513,16 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(*v.RunId)
 	}
 
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
+	}
+
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
+	}
+
 	if v.StorageCapacity != nil {
 		ok := object.Key("storageCapacity")
 		ok.Integer(*v.StorageCapacity)
@@ -10068,6 +10078,13 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		ok.String(*v.ConfigurationName)
 	}
 
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -10125,6 +10142,16 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		if err := awsRestjson1_serializeDocumentTagMap(v.RunTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
+	}
+
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
 	}
 
 	if v.StorageCapacity != nil {
@@ -10415,6 +10442,13 @@ func awsRestjson1_serializeDocumentImportReferenceFilter(v *types.ImportReferenc
 func awsRestjson1_serializeDocumentInlineSetting(v *types.InlineSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Name != nil {
 		ok := object.Key("name")
@@ -10752,6 +10786,11 @@ func awsRestjson1_serializeDocumentReferenceStoreFilter(v *types.ReferenceStoreF
 func awsRestjson1_serializeDocumentRegistryMapping(v *types.RegistryMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CredentialArn != nil {
+		ok := object.Key("credentialArn")
+		ok.String(*v.CredentialArn)
+	}
 
 	if v.EcrAccountId != nil {
 		ok := object.Key("ecrAccountId")
@@ -11307,6 +11346,11 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VpcOwnerAccountId != nil {
+		ok := object.Key("vpcOwnerAccountId")
+		ok.String(*v.VpcOwnerAccountId)
 	}
 
 	return nil

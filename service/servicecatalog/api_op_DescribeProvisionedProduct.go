@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified provisioned product.
@@ -63,24 +58,6 @@ type DescribeProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisionedProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProvisionedProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProvisionedProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeProvisionedProductInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeProvisionedProductInput_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeProvisionedProductInput_Name, *v.Name)
-	}
-}
-
 type DescribeProvisionedProductOutput struct {
 
 	// Any CloudWatch dashboards that were created when provisioning the product.
@@ -95,84 +72,26 @@ type DescribeProvisionedProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProvisionedProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProvisionedProductOutput_CloudWatchDashboards:
-			return deserializeCloudWatchDashboards(d, schemas.DescribeProvisionedProductOutput_CloudWatchDashboards, &v.CloudWatchDashboards)
-		case schemas.DescribeProvisionedProductOutput_ProvisionedProductDetail:
-			v.ProvisionedProductDetail = &types.ProvisionedProductDetail{}
-			return v.ProvisionedProductDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisionedProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisionedProduct, schemas.DescribeProvisionedProductInput, schemas.DescribeProvisionedProductOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProvisionedProduct{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisionedProduct, schemas.DescribeProvisionedProductInput, schemas.DescribeProvisionedProductOutput), output: &DescribeProvisionedProductOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisionedProduct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisionedProduct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +106,8 @@ func (c *Client) addOperationDescribeProvisionedProductMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeProvisionedProduct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeProvisionedProduct",
-	}
 }

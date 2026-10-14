@@ -4,11 +4,10 @@ package codeguruprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Used by profiler agents to report their current state and to receive remote
@@ -74,6 +73,37 @@ type ConfigureAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetInstanceId != nil {
+		s.WriteString(schemas.ConfigureAgentRequest_fleetInstanceId, *v.FleetInstanceId)
+	}
+	serializeMetadata(s, schemas.ConfigureAgentRequest_metadata, v.Metadata)
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.ConfigureAgentRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *ConfigureAgentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureAgentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureAgentRequest_fleetInstanceId:
+			v.FleetInstanceId = new(string)
+			return d.ReadString(schemas.ConfigureAgentRequest_fleetInstanceId, v.FleetInstanceId)
+		case schemas.ConfigureAgentRequest_metadata:
+			return deserializeMetadata(d, schemas.ConfigureAgentRequest_metadata, &v.Metadata)
+		case schemas.ConfigureAgentRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.ConfigureAgentRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the configureAgentResponse.
 type ConfigureAgentOutput struct {
 
@@ -91,77 +121,50 @@ type ConfigureAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ConfigureAgentResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConfigureAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureAgentResponse_configuration:
+			v.Configuration = &types.AgentConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureAgent, schemas.ConfigureAgentRequest, schemas.ConfigureAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureAgent, schemas.ConfigureAgentRequest, schemas.ConfigureAgentResponse), output: &ConfigureAgentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureAgent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfigureAgent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfigureAgentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfigureAgent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +179,8 @@ func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfigureAgent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfigureAgent",
-	}
 }

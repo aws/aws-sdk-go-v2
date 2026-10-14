@@ -94,3 +94,22 @@ func (OperationStatus) Values() []OperationStatus {
 		"SKIPPED",
 	}
 }
+
+type RecorderType string
+
+// Enum values for RecorderType
+const (
+	RecorderTypeAws        RecorderType = "AWS"
+	RecorderTypeThirdParty RecorderType = "THIRD_PARTY"
+)
+
+// Values returns all known values for RecorderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecorderType) Values() []RecorderType {
+	return []RecorderType{
+		"AWS",
+		"THIRD_PARTY",
+	}
+}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttributeId":"__AttributeId__","LockVersion":{"Attribute":"__Attribute__","DataTable":"__DataTable__","PrimaryValues":"__PrimaryValues__","Value":"__Value__"},"Name":"__Name__"}

@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates a trial component from a trial. This doesn't effect other trials
@@ -51,6 +50,21 @@ type DisassociateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateTrialComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateTrialComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.DisassociateTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
+	}
+	if v.TrialName != nil {
+		s.WriteString(schemas.DisassociateTrialComponentRequest_TrialName, *v.TrialName)
+	}
+}
+
 type DisassociateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.
@@ -65,77 +79,54 @@ type DisassociateTrialComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateTrialComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateTrialComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.DisassociateTrialComponentResponse_TrialArn, *v.TrialArn)
+	}
+	if v.TrialComponentArn != nil {
+		s.WriteString(schemas.DisassociateTrialComponentResponse_TrialComponentArn, *v.TrialComponentArn)
+	}
+}
+func (v *DisassociateTrialComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateTrialComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateTrialComponentResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.DisassociateTrialComponentResponse_TrialArn, v.TrialArn)
+		case schemas.DisassociateTrialComponentResponse_TrialComponentArn:
+			v.TrialComponentArn = new(string)
+			return d.ReadString(schemas.DisassociateTrialComponentResponse_TrialComponentArn, v.TrialComponentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTrialComponent, schemas.DisassociateTrialComponentRequest, schemas.DisassociateTrialComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTrialComponent, schemas.DisassociateTrialComponentRequest, schemas.DisassociateTrialComponentResponse), output: &DisassociateTrialComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateTrialComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateTrialComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateTrialComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateTrialComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +141,8 @@ func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateTrialComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateTrialComponent",
-	}
 }

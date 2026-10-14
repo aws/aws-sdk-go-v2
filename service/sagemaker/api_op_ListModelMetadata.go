@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the domain, framework, task, and model name of standard machine learning
@@ -47,6 +47,26 @@ type ListModelMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelMetadataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelMetadataRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchExpression != nil {
+		s.WriteStruct(schemas.ListModelMetadataRequest_SearchExpression)
+		v.SearchExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListModelMetadataOutput struct {
 
 	// A structure that holds model metadata.
@@ -63,77 +83,51 @@ type ListModelMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelMetadataSummaries(s, schemas.ListModelMetadataResponse_ModelMetadataSummaries, v.ModelMetadataSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelMetadataResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelMetadataResponse_ModelMetadataSummaries:
+			return deserializeModelMetadataSummaries(d, schemas.ListModelMetadataResponse_ModelMetadataSummaries, &v.ModelMetadataSummaries)
+		case schemas.ListModelMetadataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelMetadataResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelMetadata, schemas.ListModelMetadataRequest, schemas.ListModelMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelMetadata, schemas.ListModelMetadataRequest, schemas.ListModelMetadataResponse), output: &ListModelMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListModelMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListModelMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +140,6 @@ func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +240,3 @@ type ListModelMetadataAPIClient interface {
 }
 
 var _ ListModelMetadataAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListModelMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListModelMetadata",
-	}
-}

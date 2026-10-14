@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the resources in an Amazon QuickSight space.
@@ -42,6 +41,21 @@ type ListSpaceResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpaceResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpaceResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpaceResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListSpaceResourcesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ListSpaceResourcesRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type ListSpaceResourcesOutput struct {
 
 	// The ID of the space.
@@ -66,77 +80,63 @@ type ListSpaceResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpaceResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpaceResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpaceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_RequestId, *v.RequestId)
+	}
+	serializeSpaceResourceSummaries(s, schemas.ListSpaceResourcesResponse_SpaceResources, v.SpaceResources)
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ListSpaceResourcesResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *ListSpaceResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpaceResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpaceResourcesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_RequestId, v.RequestId)
+		case schemas.ListSpaceResourcesResponse_SpaceResources:
+			return deserializeSpaceResourceSummaries(d, schemas.ListSpaceResourcesResponse_SpaceResources, &v.SpaceResources)
+		case schemas.ListSpaceResourcesResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_spaceArn, v.SpaceArn)
+		case schemas.ListSpaceResourcesResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.ListSpaceResourcesResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSpaceResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaceResources, schemas.ListSpaceResourcesRequest, schemas.ListSpaceResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpaceResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaceResources, schemas.ListSpaceResourcesRequest, schemas.ListSpaceResourcesResponse), output: &ListSpaceResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSpaceResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSpaceResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSpaceResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSpaceResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +151,8 @@ func (c *Client) addOperationListSpaceResourcesMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListSpaceResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSpaceResources",
-	}
 }

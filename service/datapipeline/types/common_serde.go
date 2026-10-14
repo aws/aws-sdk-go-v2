@@ -183,6 +183,7 @@ func serializeValidationWarnings(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializefieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Field) error {
+	*v = make([]Field, 0)
 	var vv Field
 	return smithy.ReadList(d, s, func() error {
 		vv = Field{}
@@ -196,6 +197,7 @@ func deserializefieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fie
 }
 
 func deserializeidList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -209,6 +211,7 @@ func deserializeidList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func deserializeParameterAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ParameterAttribute) error {
+	*v = make([]ParameterAttribute, 0)
 	var vv ParameterAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = ParameterAttribute{}
@@ -222,6 +225,7 @@ func deserializeParameterAttributeList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeParameterObjectList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ParameterObject) error {
+	*v = make([]ParameterObject, 0)
 	var vv ParameterObject
 	return smithy.ReadList(d, s, func() error {
 		vv = ParameterObject{}
@@ -235,6 +239,7 @@ func deserializeParameterObjectList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeParameterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ParameterValue) error {
+	*v = make([]ParameterValue, 0)
 	var vv ParameterValue
 	return smithy.ReadList(d, s, func() error {
 		vv = ParameterValue{}
@@ -248,6 +253,7 @@ func deserializeParameterValueList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializePipelineDescriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PipelineDescription) error {
+	*v = make([]PipelineDescription, 0)
 	var vv PipelineDescription
 	return smithy.ReadList(d, s, func() error {
 		vv = PipelineDescription{}
@@ -261,6 +267,7 @@ func deserializePipelineDescriptionList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializepipelineList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PipelineIdName) error {
+	*v = make([]PipelineIdName, 0)
 	var vv PipelineIdName
 	return smithy.ReadList(d, s, func() error {
 		vv = PipelineIdName{}
@@ -274,6 +281,7 @@ func deserializepipelineList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializePipelineObjectList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PipelineObject) error {
+	*v = make([]PipelineObject, 0)
 	var vv PipelineObject
 	return smithy.ReadList(d, s, func() error {
 		vv = PipelineObject{}
@@ -287,6 +295,7 @@ func deserializePipelineObjectList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeSelectorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Selector) error {
+	*v = make([]Selector, 0)
 	var vv Selector
 	return smithy.ReadList(d, s, func() error {
 		vv = Selector{}
@@ -300,6 +309,7 @@ func deserializeSelectorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializestringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -313,6 +323,7 @@ func deserializestringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializetagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -326,6 +337,7 @@ func deserializetagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeValidationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationError) error {
+	*v = make([]ValidationError, 0)
 	var vv ValidationError
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationError{}
@@ -339,6 +351,7 @@ func deserializeValidationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializevalidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -352,6 +365,7 @@ func deserializevalidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeValidationWarnings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationWarning) error {
+	*v = make([]ValidationWarning, 0)
 	var vv ValidationWarning
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationWarning{}
@@ -382,6 +396,14 @@ func deserializePipelineObjectMap(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	*v = make(map[string]PipelineObject)
 	var vv PipelineObject
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero PipelineObject
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = PipelineObject{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

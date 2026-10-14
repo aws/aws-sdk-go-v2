@@ -1,0 +1,3 @@
+GET /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__
+
+

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.PutDestination
+
+{"destination":{"accessPolicy":"__AccessPolicy__","arn":"__Arn__","creationTime":1,"destinationName":"__DestinationName__","roleArn":"__RoleArn__","targetArn":"__TargetArn__"}}

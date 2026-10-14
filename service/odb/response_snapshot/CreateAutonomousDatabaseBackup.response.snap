@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateAutonomousDatabaseBackup
+
+{"autonomousDatabaseBackupId":"__AutonomousDatabaseBackupId__","displayName":"__DisplayName__","status":"AVAILABLE","statusReason":"__StatusReason__"}

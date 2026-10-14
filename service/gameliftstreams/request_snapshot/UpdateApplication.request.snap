@@ -1,0 +1,5 @@
+PATCH /applications/__Identifier__
+
+Content-Type: application/json
+
+{"ApplicationLogOutputUri":"__ApplicationLogOutputUri__","ApplicationLogPaths":["__Member__","__Member__"],"Description":"__Description__"}

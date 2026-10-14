@@ -1,0 +1,5 @@
+PATCH /attribute-groups/__AttributeGroup__
+
+Content-Type: application/json
+
+{"attributes":"__Attributes__","description":"__Description__","name":"__Name__"}

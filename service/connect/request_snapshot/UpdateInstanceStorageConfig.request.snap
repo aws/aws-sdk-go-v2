@@ -1,0 +1,5 @@
+POST /instance/__InstanceId__/storage-config/__AssociationId__?resourceType=CHAT_TRANSCRIPTS
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","StorageConfig":{"AssociationId":"__AssociationId__","KinesisFirehoseConfig":{"FirehoseArn":"__FirehoseArn__"},"KinesisStreamConfig":{"StreamArn":"__StreamArn__"},"KinesisVideoStreamConfig":{"EncryptionConfig":{"EncryptionType":"KMS","KeyId":"__KeyId__"},"Prefix":"__Prefix__","RetentionPeriodHours":1},"S3Config":{"BucketName":"__BucketName__","BucketPrefix":"__BucketPrefix__","EncryptionConfig":{"EncryptionType":"KMS","KeyId":"__KeyId__"}},"StorageType":"S3"}}

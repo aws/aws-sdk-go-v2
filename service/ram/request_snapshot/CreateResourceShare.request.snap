@@ -1,0 +1,5 @@
+POST /createresourceshare
+
+Content-Type: application/json
+
+{"allowExternalPrincipals":true,"clientToken":"__ClientToken__","name":"__Name__","permissionArns":["__Member__","__Member__"],"principals":["__Member__","__Member__"],"resourceArns":["__Member__","__Member__"],"resourceShareConfiguration":{"retainSharingOnAccountLeaveOrganization":true},"sources":["__Member__","__Member__"],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /UpdateConnectionRecordingPreferences
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ConnectionRecordingPreferences":{"KMSKeyArn":"__KMSKeyArn__","RecordingDestinations":{"S3Buckets":[{"BucketName":"__BucketName__","BucketOwner":"__BucketOwner__"},{"BucketName":"__BucketName__","BucketOwner":"__BucketOwner__"}]}}}

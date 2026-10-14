@@ -4,11 +4,10 @@ package taxsettings
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds or updates tax registration for a single account. You can't set a TRN if
@@ -63,8 +62,9 @@ import (
 //
 //	either 01 , 07 , or 08 .
 //
-//	- If ppnExceptionDesignationCode is 07 , you must specify the decisionNumber
-//	in the indonesiaAdditionalInfo field of the additionalTaxInformation object.
+//	- If ppnExceptionDesignationCode is 07 or 08 , you must specify the
+//	decisionNumber in the indonesiaAdditionalInfo field of the
+//	additionalTaxInformation object.
 //
 // Kenya
 //
@@ -116,6 +116,14 @@ import (
 // # IT service - 9907101676
 //
 // # Digital services and electronic medium - 9907121690
+//
+// Mexico
+//
+//   - You must provide a Constancia de Situación fiscal (CSF) document in the
+//     verificationDetails field.
+//
+//   - You do not need to provide address and legal name. These will be populated
+//     based on your tax registration number.
 //
 // Nepal
 //
@@ -173,6 +181,42 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// Philippines
+//
+//   - You can optionally specify the isVatRegistered in the
+//     philippinesAdditionalInfo field of the additionalTaxInformation object to
+//     indicate your VAT registration status with the Bureau of Internal Revenue (BIR).
+//
+// Belgium
+//
+//   - You can optionally specify the peppolId in the belgiumAdditionalInfo field
+//     of the additionalTaxInformation object.
+//
+// Chile
+//
+//   - You can optionally specify the documentType and businessActivity in the
+//     chileAdditionalInfo field of the additionalTaxInformation object.
+//
+// France
+//
+//   - You must specify the sirenNumber in the franceAdditionalInfo field of the
+//     additionalTaxInformation object.
+//
+//   - You can optionally specify the eInvoiceRoutingCode in the
+//     franceAdditionalInfo field of the additionalTaxInformation object.
+//
+// Monaco
+//
+//   - You must specify the businessNumber in the monacoAdditionalInfo field of the
+//     additionalTaxInformation object.
+//
+// Poland
+//
+//   - You can optionally specify the taxRegistrationNumberType in the
+//     polandAdditionalInfo field of the additionalTaxInformation object. Valid
+//     values are EUTaxRegistrationNumber , LocalTaxRegistrationNumber , or
+//     LocalRegistrationNumber .
+//
 // [Amazon Web Services service terms]: http://aws.amazon.com/service-terms/
 // [Payment preferences]: https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods
 func (c *Client) PutTaxRegistration(ctx context.Context, params *PutTaxRegistrationInput, optFns ...func(*Options)) (*PutTaxRegistrationOutput, error) {
@@ -204,6 +248,23 @@ type PutTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutTaxRegistrationRequest_accountId, *v.AccountId)
+	}
+	if v.TaxRegistrationEntry != nil {
+		s.WriteStruct(schemas.PutTaxRegistrationRequest_taxRegistrationEntry)
+		v.TaxRegistrationEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutTaxRegistrationOutput struct {
 
 	// The status of your TRN stored in the system after processing. Based on the
@@ -217,77 +278,52 @@ type PutTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.PutTaxRegistrationResponse_status, string(v.Status))
+	}
+}
+func (v *PutTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTaxRegistrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.PutTaxRegistrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaxRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxRegistration, schemas.PutTaxRegistrationRequest, schemas.PutTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxRegistration, schemas.PutTaxRegistrationRequest, schemas.PutTaxRegistrationResponse), output: &PutTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTaxRegistration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutTaxRegistration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutTaxRegistrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutTaxRegistration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -302,22 +338,8 @@ func (c *Client) addOperationPutTaxRegistrationMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutTaxRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutTaxRegistration",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.GetTopPathStatisticsByTraffic
+
+{"BotCategory":"__BotCategory__","BotName":"__BotName__","BotOrganization":"__BotOrganization__","Limit":1,"NextMarker":"__NextMarker__","NumberOfTopTrafficBotsPerPath":1,"Scope":"CLOUDFRONT","TimeWindow":{"EndTime":946684800,"StartTime":946684800},"UriPathPrefix":"__UriPathPrefix__","WebAclArn":"__WebAclArn__"}

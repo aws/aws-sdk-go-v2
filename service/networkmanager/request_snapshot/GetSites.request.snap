@@ -1,0 +1,3 @@
+GET /global-networks/__GlobalNetworkId__/sites?maxResults=1&nextToken=__NextToken__&siteIds=__Member__&siteIds=__Member__
+
+

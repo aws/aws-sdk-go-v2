@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,6 +40,58 @@ type AssertionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssertionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssertionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssertionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.AssertionAttributes_email, *v.Email)
+	}
+	if v.Groups != nil {
+		s.WriteString(schemas.AssertionAttributes_groups, *v.Groups)
+	}
+	if v.Login != nil {
+		s.WriteString(schemas.AssertionAttributes_login, *v.Login)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssertionAttributes_name, *v.Name)
+	}
+	if v.Org != nil {
+		s.WriteString(schemas.AssertionAttributes_org, *v.Org)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.AssertionAttributes_role, *v.Role)
+	}
+}
+func (v *AssertionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssertionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssertionAttributes_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.AssertionAttributes_email, v.Email)
+		case schemas.AssertionAttributes_groups:
+			v.Groups = new(string)
+			return d.ReadString(schemas.AssertionAttributes_groups, v.Groups)
+		case schemas.AssertionAttributes_login:
+			v.Login = new(string)
+			return d.ReadString(schemas.AssertionAttributes_login, v.Login)
+		case schemas.AssertionAttributes_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssertionAttributes_name, v.Name)
+		case schemas.AssertionAttributes_org:
+			v.Org = new(string)
+			return d.ReadString(schemas.AssertionAttributes_org, v.Org)
+		case schemas.AssertionAttributes_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.AssertionAttributes_role, v.Role)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about the user authentication methods used
 // by the workspace.
 type AuthenticationDescription struct {
@@ -61,6 +115,41 @@ type AuthenticationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthenticationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsSso != nil {
+		s.WriteStruct(schemas.AuthenticationDescription_awsSso)
+		v.AwsSso.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAuthenticationProviders(s, schemas.AuthenticationDescription_providers, v.Providers)
+	if v.Saml != nil {
+		s.WriteStruct(schemas.AuthenticationDescription_saml)
+		v.Saml.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AuthenticationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationDescription_awsSso:
+			v.AwsSso = &AwsSsoAuthentication{}
+			return v.AwsSso.Deserialize(d)
+		case schemas.AuthenticationDescription_providers:
+			return deserializeAuthenticationProviders(d, schemas.AuthenticationDescription_providers, &v.Providers)
+		case schemas.AuthenticationDescription_saml:
+			v.Saml = &SamlAuthentication{}
+			return v.Saml.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that describes whether the workspace uses SAML, IAM Identity
 // Center, or both methods for user authentication, and whether that authentication
 // is fully configured.
@@ -79,6 +168,35 @@ type AuthenticationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthenticationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthenticationProviders(s, schemas.AuthenticationSummary_providers, v.Providers)
+	if v.SamlConfigurationStatus != "" {
+		s.WriteString(schemas.AuthenticationSummary_samlConfigurationStatus, string(v.SamlConfigurationStatus))
+	}
+}
+func (v *AuthenticationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationSummary_providers:
+			return deserializeAuthenticationProviders(d, schemas.AuthenticationSummary_providers, &v.Providers)
+		case schemas.AuthenticationSummary_samlConfigurationStatus:
+			var ev string
+			if err := d.ReadString(schemas.AuthenticationSummary_samlConfigurationStatus, &ev); err != nil {
+				return err
+			}
+			v.SamlConfigurationStatus = SamlConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure containing information about how this workspace works with IAM
 // Identity Center.
 type AwsSsoAuthentication struct {
@@ -88,6 +206,28 @@ type AwsSsoAuthentication struct {
 	SsoClientId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsSsoAuthentication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsSsoAuthentication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsSsoAuthentication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SsoClientId != nil {
+		s.WriteString(schemas.AwsSsoAuthentication_ssoClientId, *v.SsoClientId)
+	}
+}
+func (v *AwsSsoAuthentication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsSsoAuthentication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsSsoAuthentication_ssoClientId:
+			v.SsoClientId = new(string)
+			return d.ReadString(schemas.AwsSsoAuthentication_ssoClientId, v.SsoClientId)
+		}
+		return nil
+	})
 }
 
 // A structure containing the identity provider (IdP) metadata used to integrate
@@ -112,6 +252,12 @@ type IdpMetadataMemberUrl struct {
 }
 
 func (*IdpMetadataMemberUrl) isIdpMetadata() {}
+func (v *IdpMetadataMemberUrl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.IdpMetadata_url, v.Value)
+}
+func (v *IdpMetadataMemberUrl) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.IdpMetadata_url, &v.Value)
+}
 
 // The full IdP metadata, in XML format.
 type IdpMetadataMemberXml struct {
@@ -121,6 +267,12 @@ type IdpMetadataMemberXml struct {
 }
 
 func (*IdpMetadataMemberXml) isIdpMetadata() {}
+func (v *IdpMetadataMemberXml) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.IdpMetadata_xml, v.Value)
+}
+func (v *IdpMetadataMemberXml) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.IdpMetadata_xml, &v.Value)
+}
 
 // The configuration settings for in-bound network access to your workspace.
 //
@@ -182,6 +334,28 @@ type NetworkAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkAccessConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAccessConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrefixListIds(s, schemas.NetworkAccessConfiguration_prefixListIds, v.PrefixListIds)
+	serializeVpceIds(s, schemas.NetworkAccessConfiguration_vpceIds, v.VpceIds)
+}
+func (v *NetworkAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAccessConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAccessConfiguration_prefixListIds:
+			return deserializePrefixListIds(d, schemas.NetworkAccessConfiguration_prefixListIds, &v.PrefixListIds)
+		case schemas.NetworkAccessConfiguration_vpceIds:
+			return deserializeVpceIds(d, schemas.NetworkAccessConfiguration_vpceIds, &v.VpceIds)
+		}
+		return nil
+	})
+}
+
 // A structure containing the identity of one user or group and the Admin , Editor
 // , or Viewer role that they have.
 type PermissionEntry struct {
@@ -197,6 +371,40 @@ type PermissionEntry struct {
 	User *User
 
 	noSmithyDocumentSerde
+}
+
+func (v *PermissionEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != "" {
+		s.WriteString(schemas.PermissionEntry_role, string(v.Role))
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.PermissionEntry_user)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PermissionEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionEntry_role:
+			var ev string
+			if err := d.ReadString(schemas.PermissionEntry_role, &ev); err != nil {
+				return err
+			}
+			v.Role = Role(ev)
+			return nil
+		case schemas.PermissionEntry_user:
+			v.User = &User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure defines which groups defined in the SAML assertion attribute are
@@ -216,6 +424,28 @@ type RoleValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoleValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleValues) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRoleValueList(s, schemas.RoleValues_admin, v.Admin)
+	serializeRoleValueList(s, schemas.RoleValues_editor, v.Editor)
+}
+func (v *RoleValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleValues_admin:
+			return deserializeRoleValueList(d, schemas.RoleValues_admin, &v.Admin)
+		case schemas.RoleValues_editor:
+			return deserializeRoleValueList(d, schemas.RoleValues_editor, &v.Editor)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about how this workspace works with SAML.
 type SamlAuthentication struct {
 
@@ -228,6 +458,40 @@ type SamlAuthentication struct {
 	Configuration *SamlConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamlAuthentication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamlAuthentication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamlAuthentication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.SamlAuthentication_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SamlAuthentication_status, string(v.Status))
+	}
+}
+func (v *SamlAuthentication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamlAuthentication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamlAuthentication_configuration:
+			v.Configuration = &SamlConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.SamlAuthentication_status:
+			var ev string
+			if err := d.ReadString(schemas.SamlAuthentication_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SamlConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A structure containing information about how this workspace works with SAML.
@@ -260,6 +524,49 @@ type SamlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamlConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamlConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedOrganizations(s, schemas.SamlConfiguration_allowedOrganizations, v.AllowedOrganizations)
+	if v.AssertionAttributes != nil {
+		s.WriteStruct(schemas.SamlConfiguration_assertionAttributes)
+		v.AssertionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdpMetadata(s, schemas.SamlConfiguration_idpMetadata, v.IdpMetadata)
+	if v.LoginValidityDuration != 0 {
+		s.WriteInt32(schemas.SamlConfiguration_loginValidityDuration, v.LoginValidityDuration)
+	}
+	if v.RoleValues != nil {
+		s.WriteStruct(schemas.SamlConfiguration_roleValues)
+		v.RoleValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SamlConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamlConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamlConfiguration_allowedOrganizations:
+			return deserializeAllowedOrganizations(d, schemas.SamlConfiguration_allowedOrganizations, &v.AllowedOrganizations)
+		case schemas.SamlConfiguration_assertionAttributes:
+			v.AssertionAttributes = &AssertionAttributes{}
+			return v.AssertionAttributes.Deserialize(d)
+		case schemas.SamlConfiguration_idpMetadata:
+			return deserializeIdpMetadata(d, schemas.SamlConfiguration_idpMetadata, &v.IdpMetadata)
+		case schemas.SamlConfiguration_loginValidityDuration:
+			return d.ReadInt32(schemas.SamlConfiguration_loginValidityDuration, &v.LoginValidityDuration)
+		case schemas.SamlConfiguration_roleValues:
+			v.RoleValues = &RoleValues{}
+			return v.RoleValues.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the information about one service account.
 type ServiceAccountSummary struct {
 
@@ -286,6 +593,50 @@ type ServiceAccountSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceAccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrafanaRole != "" {
+		s.WriteString(schemas.ServiceAccountSummary_grafanaRole, string(v.GrafanaRole))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ServiceAccountSummary_id, *v.Id)
+	}
+	if v.IsDisabled != nil {
+		s.WriteString(schemas.ServiceAccountSummary_isDisabled, *v.IsDisabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceAccountSummary_name, *v.Name)
+	}
+}
+func (v *ServiceAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccountSummary_grafanaRole:
+			var ev string
+			if err := d.ReadString(schemas.ServiceAccountSummary_grafanaRole, &ev); err != nil {
+				return err
+			}
+			v.GrafanaRole = Role(ev)
+			return nil
+		case schemas.ServiceAccountSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ServiceAccountSummary_id, v.Id)
+		case schemas.ServiceAccountSummary_isDisabled:
+			v.IsDisabled = new(string)
+			return d.ReadString(schemas.ServiceAccountSummary_isDisabled, v.IsDisabled)
+		case schemas.ServiceAccountSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceAccountSummary_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the information about a service account token.
@@ -317,6 +668,52 @@ type ServiceAccountTokenSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceAccountTokenSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccountTokenSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccountTokenSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ServiceAccountTokenSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.ServiceAccountTokenSummary_expiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ServiceAccountTokenSummary_id, *v.Id)
+	}
+	if v.LastUsedAt != nil {
+		s.WriteTime(schemas.ServiceAccountTokenSummary_lastUsedAt, *v.LastUsedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceAccountTokenSummary_name, *v.Name)
+	}
+}
+func (v *ServiceAccountTokenSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccountTokenSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccountTokenSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceAccountTokenSummary_createdAt, v.CreatedAt)
+		case schemas.ServiceAccountTokenSummary_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceAccountTokenSummary_expiresAt, v.ExpiresAt)
+		case schemas.ServiceAccountTokenSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ServiceAccountTokenSummary_id, v.Id)
+		case schemas.ServiceAccountTokenSummary_lastUsedAt:
+			v.LastUsedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceAccountTokenSummary_lastUsedAt, v.LastUsedAt)
+		case schemas.ServiceAccountTokenSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceAccountTokenSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the information about a service account token.
 //
 // This structure is returned when creating the token. It is important to store
@@ -345,6 +742,40 @@ type ServiceAccountTokenSummaryWithKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceAccountTokenSummaryWithKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccountTokenSummaryWithKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccountTokenSummaryWithKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ServiceAccountTokenSummaryWithKey_id, *v.Id)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ServiceAccountTokenSummaryWithKey_key, *v.Key)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceAccountTokenSummaryWithKey_name, *v.Name)
+	}
+}
+func (v *ServiceAccountTokenSummaryWithKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccountTokenSummaryWithKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccountTokenSummaryWithKey_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ServiceAccountTokenSummaryWithKey_id, v.Id)
+		case schemas.ServiceAccountTokenSummaryWithKey_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ServiceAccountTokenSummaryWithKey_key, v.Key)
+		case schemas.ServiceAccountTokenSummaryWithKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceAccountTokenSummaryWithKey_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about one error encountered while performing
 // an [UpdatePermissions]operation.
 //
@@ -367,6 +798,42 @@ type UpdateError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CausedBy != nil {
+		s.WriteStruct(schemas.UpdateError_causedBy)
+		v.CausedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Code != nil {
+		s.WriteInt32(schemas.UpdateError_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateError_message, *v.Message)
+	}
+}
+func (v *UpdateError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateError_causedBy:
+			v.CausedBy = &UpdateInstruction{}
+			return v.CausedBy.Deserialize(d)
+		case schemas.UpdateError_code:
+			v.Code = new(int32)
+			return d.ReadInt32(schemas.UpdateError_code, v.Code)
+		case schemas.UpdateError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateError_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Contains the instructions for one Grafana role permission update in a [UpdatePermissions]
@@ -393,6 +860,45 @@ type UpdateInstruction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstruction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstruction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstruction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateInstruction_action, string(v.Action))
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateInstruction_role, string(v.Role))
+	}
+	serializeUserList(s, schemas.UpdateInstruction_users, v.Users)
+}
+func (v *UpdateInstruction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstruction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstruction_action:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInstruction_action, &ev); err != nil {
+				return err
+			}
+			v.Action = UpdateAction(ev)
+			return nil
+		case schemas.UpdateInstruction_role:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInstruction_role, &ev); err != nil {
+				return err
+			}
+			v.Role = Role(ev)
+			return nil
+		case schemas.UpdateInstruction_users:
+			return deserializeUserList(d, schemas.UpdateInstruction_users, &v.Users)
+		}
+		return nil
+	})
+}
+
 // A structure that specifies one user or group in the workspace.
 type User struct {
 
@@ -412,6 +918,38 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.User_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.User_type, string(v.Type))
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.User_id, v.Id)
+		case schemas.User_type:
+			var ev string
+			if err := d.ReadString(schemas.User_type, &ev); err != nil {
+				return err
+			}
+			v.Type = UserType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a request parameter that caused an
 // error.
 type ValidationExceptionField struct {
@@ -427,6 +965,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The configuration settings for an Amazon VPC that contains data sources for
@@ -451,6 +1017,28 @@ type VpcConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfiguration_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfiguration_subnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfiguration_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // A structure containing information about an Amazon Managed Grafana workspace in
@@ -616,6 +1204,204 @@ type WorkspaceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAccessType != "" {
+		s.WriteString(schemas.WorkspaceDescription_accountAccessType, string(v.AccountAccessType))
+	}
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.WorkspaceDescription_authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.WorkspaceDescription_created, *v.Created)
+	}
+	serializeDataSourceTypesList(s, schemas.WorkspaceDescription_dataSources, v.DataSources)
+	if v.DegradedWorkspaceReason != nil {
+		s.WriteString(schemas.WorkspaceDescription_degradedWorkspaceReason, *v.DegradedWorkspaceReason)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkspaceDescription_description, *v.Description)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.WorkspaceDescription_endpoint, *v.Endpoint)
+	}
+	if v.FreeTrialConsumed != nil {
+		s.WriteBool(schemas.WorkspaceDescription_freeTrialConsumed, *v.FreeTrialConsumed)
+	}
+	if v.FreeTrialExpiration != nil {
+		s.WriteTime(schemas.WorkspaceDescription_freeTrialExpiration, *v.FreeTrialExpiration)
+	}
+	if v.GrafanaToken != nil {
+		s.WriteString(schemas.WorkspaceDescription_grafanaToken, *v.GrafanaToken)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.WorkspaceDescription_grafanaVersion, *v.GrafanaVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WorkspaceDescription_id, *v.Id)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.WorkspaceDescription_ipAddressType, string(v.IpAddressType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.WorkspaceDescription_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LicenseExpiration != nil {
+		s.WriteTime(schemas.WorkspaceDescription_licenseExpiration, *v.LicenseExpiration)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.WorkspaceDescription_licenseType, string(v.LicenseType))
+	}
+	if v.Modified != nil {
+		s.WriteTime(schemas.WorkspaceDescription_modified, *v.Modified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkspaceDescription_name, *v.Name)
+	}
+	if v.NetworkAccessControl != nil {
+		s.WriteStruct(schemas.WorkspaceDescription_networkAccessControl)
+		v.NetworkAccessControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNotificationDestinationsList(s, schemas.WorkspaceDescription_notificationDestinations, v.NotificationDestinations)
+	if v.OrganizationRoleName != nil {
+		s.WriteString(schemas.WorkspaceDescription_organizationRoleName, *v.OrganizationRoleName)
+	}
+	serializeOrganizationalUnitList(s, schemas.WorkspaceDescription_organizationalUnits, v.OrganizationalUnits)
+	if v.PermissionType != "" {
+		s.WriteString(schemas.WorkspaceDescription_permissionType, string(v.PermissionType))
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.WorkspaceDescription_stackSetName, *v.StackSetName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkspaceDescription_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.WorkspaceDescription_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceRoleArn != nil {
+		s.WriteString(schemas.WorkspaceDescription_workspaceRoleArn, *v.WorkspaceRoleArn)
+	}
+}
+func (v *WorkspaceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceDescription_accountAccessType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDescription_accountAccessType, &ev); err != nil {
+				return err
+			}
+			v.AccountAccessType = AccountAccessType(ev)
+			return nil
+		case schemas.WorkspaceDescription_authentication:
+			v.Authentication = &AuthenticationSummary{}
+			return v.Authentication.Deserialize(d)
+		case schemas.WorkspaceDescription_created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceDescription_created, v.Created)
+		case schemas.WorkspaceDescription_dataSources:
+			return deserializeDataSourceTypesList(d, schemas.WorkspaceDescription_dataSources, &v.DataSources)
+		case schemas.WorkspaceDescription_degradedWorkspaceReason:
+			v.DegradedWorkspaceReason = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_degradedWorkspaceReason, v.DegradedWorkspaceReason)
+		case schemas.WorkspaceDescription_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_description, v.Description)
+		case schemas.WorkspaceDescription_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_endpoint, v.Endpoint)
+		case schemas.WorkspaceDescription_freeTrialConsumed:
+			v.FreeTrialConsumed = new(bool)
+			return d.ReadBool(schemas.WorkspaceDescription_freeTrialConsumed, v.FreeTrialConsumed)
+		case schemas.WorkspaceDescription_freeTrialExpiration:
+			v.FreeTrialExpiration = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceDescription_freeTrialExpiration, v.FreeTrialExpiration)
+		case schemas.WorkspaceDescription_grafanaToken:
+			v.GrafanaToken = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_grafanaToken, v.GrafanaToken)
+		case schemas.WorkspaceDescription_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_grafanaVersion, v.GrafanaVersion)
+		case schemas.WorkspaceDescription_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_id, v.Id)
+		case schemas.WorkspaceDescription_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDescription_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IPAddressType(ev)
+			return nil
+		case schemas.WorkspaceDescription_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_kmsKeyId, v.KmsKeyId)
+		case schemas.WorkspaceDescription_licenseExpiration:
+			v.LicenseExpiration = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceDescription_licenseExpiration, v.LicenseExpiration)
+		case schemas.WorkspaceDescription_licenseType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDescription_licenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = LicenseType(ev)
+			return nil
+		case schemas.WorkspaceDescription_modified:
+			v.Modified = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceDescription_modified, v.Modified)
+		case schemas.WorkspaceDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_name, v.Name)
+		case schemas.WorkspaceDescription_networkAccessControl:
+			v.NetworkAccessControl = &NetworkAccessConfiguration{}
+			return v.NetworkAccessControl.Deserialize(d)
+		case schemas.WorkspaceDescription_notificationDestinations:
+			return deserializeNotificationDestinationsList(d, schemas.WorkspaceDescription_notificationDestinations, &v.NotificationDestinations)
+		case schemas.WorkspaceDescription_organizationRoleName:
+			v.OrganizationRoleName = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_organizationRoleName, v.OrganizationRoleName)
+		case schemas.WorkspaceDescription_organizationalUnits:
+			return deserializeOrganizationalUnitList(d, schemas.WorkspaceDescription_organizationalUnits, &v.OrganizationalUnits)
+		case schemas.WorkspaceDescription_permissionType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDescription_permissionType, &ev); err != nil {
+				return err
+			}
+			v.PermissionType = PermissionType(ev)
+			return nil
+		case schemas.WorkspaceDescription_stackSetName:
+			v.StackSetName = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_stackSetName, v.StackSetName)
+		case schemas.WorkspaceDescription_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDescription_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkspaceStatus(ev)
+			return nil
+		case schemas.WorkspaceDescription_tags:
+			return deserializeTagMap(d, schemas.WorkspaceDescription_tags, &v.Tags)
+		case schemas.WorkspaceDescription_vpcConfiguration:
+			v.VpcConfiguration = &VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		case schemas.WorkspaceDescription_workspaceRoleArn:
+			v.WorkspaceRoleArn = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_workspaceRoleArn, v.WorkspaceRoleArn)
+		}
+		return nil
+	})
+}
+
 // A structure that contains some information about one workspace in the account.
 type WorkspaceSummary struct {
 
@@ -682,6 +1468,104 @@ type WorkspaceSummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.WorkspaceSummary_authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.WorkspaceSummary_created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkspaceSummary_description, *v.Description)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.WorkspaceSummary_endpoint, *v.Endpoint)
+	}
+	if v.GrafanaToken != nil {
+		s.WriteString(schemas.WorkspaceSummary_grafanaToken, *v.GrafanaToken)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.WorkspaceSummary_grafanaVersion, *v.GrafanaVersion)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WorkspaceSummary_id, *v.Id)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.WorkspaceSummary_licenseType, string(v.LicenseType))
+	}
+	if v.Modified != nil {
+		s.WriteTime(schemas.WorkspaceSummary_modified, *v.Modified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkspaceSummary_name, *v.Name)
+	}
+	serializeNotificationDestinationsList(s, schemas.WorkspaceSummary_notificationDestinations, v.NotificationDestinations)
+	if v.Status != "" {
+		s.WriteString(schemas.WorkspaceSummary_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+}
+func (v *WorkspaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceSummary_authentication:
+			v.Authentication = &AuthenticationSummary{}
+			return v.Authentication.Deserialize(d)
+		case schemas.WorkspaceSummary_created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceSummary_created, v.Created)
+		case schemas.WorkspaceSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_description, v.Description)
+		case schemas.WorkspaceSummary_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_endpoint, v.Endpoint)
+		case schemas.WorkspaceSummary_grafanaToken:
+			v.GrafanaToken = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_grafanaToken, v.GrafanaToken)
+		case schemas.WorkspaceSummary_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_grafanaVersion, v.GrafanaVersion)
+		case schemas.WorkspaceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_id, v.Id)
+		case schemas.WorkspaceSummary_licenseType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceSummary_licenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = LicenseType(ev)
+			return nil
+		case schemas.WorkspaceSummary_modified:
+			v.Modified = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceSummary_modified, v.Modified)
+		case schemas.WorkspaceSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_name, v.Name)
+		case schemas.WorkspaceSummary_notificationDestinations:
+			return deserializeNotificationDestinationsList(d, schemas.WorkspaceSummary_notificationDestinations, &v.NotificationDestinations)
+		case schemas.WorkspaceSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WorkspaceStatus(ev)
+			return nil
+		case schemas.WorkspaceSummary_tags:
+			return deserializeTagMap(d, schemas.WorkspaceSummary_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

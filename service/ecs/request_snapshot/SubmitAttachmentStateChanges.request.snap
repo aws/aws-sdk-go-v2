@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.SubmitAttachmentStateChanges
+
+{"attachments":[{"attachmentArn":"__AttachmentArn__","status":"__Status__"},{"attachmentArn":"__AttachmentArn__","status":"__Status__"}],"cluster":"__Cluster__"}

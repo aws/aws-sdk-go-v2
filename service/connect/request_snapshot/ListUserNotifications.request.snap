@@ -1,0 +1,3 @@
+GET /users/__InstanceId__/__UserId__/notifications?maxResults=1&nextToken=__NextToken__
+
+

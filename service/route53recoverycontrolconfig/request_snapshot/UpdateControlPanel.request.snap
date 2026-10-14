@@ -1,0 +1,5 @@
+PUT /controlpanel
+
+Content-Type: application/json
+
+{"ControlPanelArn":"__ControlPanelArn__","ControlPanelName":"__ControlPanelName__"}

@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type PrepareAgentInput struct {
 	AgentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrepareAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.PrepareAgentRequest_agentId, *v.AgentId)
+	}
 }
 
 type PrepareAgentOutput struct {
@@ -66,77 +77,70 @@ type PrepareAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.PrepareAgentResponse_agentId, *v.AgentId)
+	}
+	if v.AgentStatus != "" {
+		s.WriteString(schemas.PrepareAgentResponse_agentStatus, string(v.AgentStatus))
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.PrepareAgentResponse_agentVersion, *v.AgentVersion)
+	}
+	if v.PreparedAt != nil {
+		s.WriteTime(schemas.PrepareAgentResponse_preparedAt, *v.PreparedAt)
+	}
+}
+func (v *PrepareAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrepareAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrepareAgentResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.PrepareAgentResponse_agentId, v.AgentId)
+		case schemas.PrepareAgentResponse_agentStatus:
+			var ev string
+			if err := d.ReadString(schemas.PrepareAgentResponse_agentStatus, &ev); err != nil {
+				return err
+			}
+			v.AgentStatus = types.AgentStatus(ev)
+			return nil
+		case schemas.PrepareAgentResponse_agentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.PrepareAgentResponse_agentVersion, v.AgentVersion)
+		case schemas.PrepareAgentResponse_preparedAt:
+			v.PreparedAt = new(time.Time)
+			return d.ReadTime(schemas.PrepareAgentResponse_preparedAt, v.PreparedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPrepareAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareAgent, schemas.PrepareAgentRequest, schemas.PrepareAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPrepareAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareAgent, schemas.PrepareAgentRequest, schemas.PrepareAgentResponse), output: &PrepareAgentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPrepareAgent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PrepareAgent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPrepareAgentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPrepareAgent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +155,8 @@ func (c *Client) addOperationPrepareAgentMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPrepareAgent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PrepareAgent",
-	}
 }

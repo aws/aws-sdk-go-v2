@@ -1,0 +1,4 @@
+DELETE /api/v1/resources/__ResourceId__/customMetadata?deleteAll=true&keys=__Member__&keys=__Member__&versionId=__VersionId__
+
+Authentication: __AuthenticationToken__
+

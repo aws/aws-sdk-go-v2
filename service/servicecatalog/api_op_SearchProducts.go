@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the products to which the caller has access.
@@ -58,31 +54,6 @@ type SearchProductsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchProductsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchProductsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.SearchProductsInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	serializeProductViewFilters(s, schemas.SearchProductsInput_Filters, v.Filters)
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.SearchProductsInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.SearchProductsInput_PageToken, *v.PageToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.SearchProductsInput_SortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.SearchProductsInput_SortOrder, string(v.SortOrder))
-	}
-}
-
 type SearchProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -101,86 +72,26 @@ type SearchProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchProductsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchProductsOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.SearchProductsOutput_NextPageToken, v.NextPageToken)
-		case schemas.SearchProductsOutput_ProductViewAggregations:
-			return deserializeProductViewAggregations(d, schemas.SearchProductsOutput_ProductViewAggregations, &v.ProductViewAggregations)
-		case schemas.SearchProductsOutput_ProductViewSummaries:
-			return deserializeProductViewSummaries(d, schemas.SearchProductsOutput_ProductViewSummaries, &v.ProductViewSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchProducts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProducts, schemas.SearchProductsInput, schemas.SearchProductsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchProducts{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProducts, schemas.SearchProductsInput, schemas.SearchProductsOutput), output: &SearchProductsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchProducts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProducts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +104,6 @@ func (c *Client) addOperationSearchProductsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +200,3 @@ type SearchProductsAPIClient interface {
 }
 
 var _ SearchProductsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchProducts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchProducts",
-	}
-}

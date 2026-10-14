@@ -4,10 +4,9 @@ package signer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Signs a binary payload and returns a signature envelope.
@@ -50,6 +49,27 @@ type SignPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignPayloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.SignPayloadRequest_payload, v.Payload)
+	}
+	if v.PayloadFormat != nil {
+		s.WriteString(schemas.SignPayloadRequest_payloadFormat, *v.PayloadFormat)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.SignPayloadRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileOwner != nil {
+		s.WriteString(schemas.SignPayloadRequest_profileOwner, *v.ProfileOwner)
+	}
+}
+
 type SignPayloadOutput struct {
 
 	// Unique identifier of the signing job.
@@ -70,77 +90,62 @@ type SignPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignPayloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.SignPayloadResponse_jobId, *v.JobId)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.SignPayloadResponse_jobOwner, *v.JobOwner)
+	}
+	serializeMetadata(s, schemas.SignPayloadResponse_metadata, v.Metadata)
+	if v.Signature != nil {
+		s.WriteBlob(schemas.SignPayloadResponse_signature, v.Signature)
+	}
+}
+func (v *SignPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignPayloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignPayloadResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SignPayloadResponse_jobId, v.JobId)
+		case schemas.SignPayloadResponse_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.SignPayloadResponse_jobOwner, v.JobOwner)
+		case schemas.SignPayloadResponse_metadata:
+			return deserializeMetadata(d, schemas.SignPayloadResponse_metadata, &v.Metadata)
+		case schemas.SignPayloadResponse_signature:
+			return d.ReadBlob(schemas.SignPayloadResponse_signature, &v.Signature)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignPayload, schemas.SignPayloadRequest, schemas.SignPayloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSignPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignPayload, schemas.SignPayloadRequest, schemas.SignPayloadResponse), output: &SignPayloadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSignPayload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SignPayload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSignPayloadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSignPayload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +160,8 @@ func (c *Client) addOperationSignPayloadMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSignPayload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SignPayload",
-	}
 }

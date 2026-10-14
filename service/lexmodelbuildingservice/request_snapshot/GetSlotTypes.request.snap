@@ -1,0 +1,3 @@
+GET /slottypes?maxResults=1&nameContains=__NameContains__&nextToken=__NextToken__
+
+

@@ -4,13 +4,8 @@ package ssmcontacts
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -82,34 +77,6 @@ type CreateRotationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRotationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRotationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRotationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRotationContactsArnList(s, schemas.CreateRotationRequest_ContactIds, v.ContactIds)
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.CreateRotationRequest_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateRotationRequest_Name, *v.Name)
-	}
-	if v.Recurrence != nil {
-		s.WriteStruct(schemas.CreateRotationRequest_Recurrence)
-		v.Recurrence.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.CreateRotationRequest_StartTime, *v.StartTime)
-	}
-	serializeTagsList(s, schemas.CreateRotationRequest_Tags, v.Tags)
-	if v.TimeZoneId != nil {
-		s.WriteString(schemas.CreateRotationRequest_TimeZoneId, *v.TimeZoneId)
-	}
-}
-
 type CreateRotationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created rotation.
@@ -123,85 +90,29 @@ type CreateRotationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRotationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRotationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRotationResult_RotationArn:
-			v.RotationArn = new(string)
-			return d.ReadString(schemas.CreateRotationResult_RotationArn, v.RotationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRotation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRotation, schemas.CreateRotationRequest, schemas.CreateRotationResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRotation{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRotation, schemas.CreateRotationRequest, schemas.CreateRotationResult), output: &CreateRotationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRotation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRotationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRotation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +127,8 @@ func (c *Client) addOperationCreateRotationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRotation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRotation",
-	}
 }

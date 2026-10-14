@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a flow to send an agent reply or outbound email contact (created from
@@ -69,6 +69,44 @@ type StartOutboundEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRecipients != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_AdditionalRecipients)
+		v.AdditionalRecipients.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_ContactId, *v.ContactId)
+	}
+	if v.DestinationEmailAddress != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_DestinationEmailAddress)
+		v.DestinationEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_FromEmailAddress)
+		v.FromEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartOutboundEmailContactOutput struct {
 
 	// The identifier of the contact in this instance of Connect Customer.
@@ -80,65 +118,42 @@ type StartOutboundEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartOutboundEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutboundEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutboundEmailContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartOutboundEmailContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundEmailContact, schemas.StartOutboundEmailContactRequest, schemas.StartOutboundEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundEmailContact, schemas.StartOutboundEmailContactRequest, schemas.StartOutboundEmailContactResponse), output: &StartOutboundEmailContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutboundEmailContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartOutboundEmailContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -148,12 +163,6 @@ func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpStartOutboundEmailContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartOutboundEmailContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +175,6 @@ func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -211,12 +214,4 @@ func (m *idempotencyToken_initializeOpStartOutboundEmailContact) HandleInitializ
 }
 func addIdempotencyToken_opStartOutboundEmailContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartOutboundEmailContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartOutboundEmailContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartOutboundEmailContact",
-	}
 }

@@ -4,12 +4,7 @@ package elasticloadbalancing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the specified Availability Zones to the set of Availability Zones for the
@@ -53,19 +48,6 @@ type EnableAvailabilityZonesForLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnableAvailabilityZonesForLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddAvailabilityZonesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnableAvailabilityZonesForLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.AddAvailabilityZonesInput_AvailabilityZones, v.AvailabilityZones)
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.AddAvailabilityZonesInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output of EnableAvailabilityZonesForLoadBalancer.
 type EnableAvailabilityZonesForLoadBalancerOutput struct {
 
@@ -78,84 +60,29 @@ type EnableAvailabilityZonesForLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnableAvailabilityZonesForLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddAvailabilityZonesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddAvailabilityZonesOutput_AvailabilityZones:
-			return deserializeAvailabilityZones(d, schemas.AddAvailabilityZonesOutput_AvailabilityZones, &v.AvailabilityZones)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationEnableAvailabilityZonesForLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAvailabilityZonesForLoadBalancer, schemas.AddAvailabilityZonesInput, schemas.AddAvailabilityZonesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEnableAvailabilityZonesForLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAvailabilityZonesForLoadBalancer, schemas.AddAvailabilityZonesInput, schemas.AddAvailabilityZonesOutput), output: &EnableAvailabilityZonesForLoadBalancerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableAvailabilityZonesForLoadBalancer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEnableAvailabilityZonesForLoadBalancerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableAvailabilityZonesForLoadBalancer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +97,8 @@ func (c *Client) addOperationEnableAvailabilityZonesForLoadBalancerMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEnableAvailabilityZonesForLoadBalancer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableAvailabilityZonesForLoadBalancer",
-	}
 }

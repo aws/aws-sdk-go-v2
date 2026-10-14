@@ -5,9 +5,6 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,40 +79,6 @@ type GetMapSpritesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapSpritesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapSpritesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapSpritesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FileName != nil {
-		s.WriteString(schemas.GetMapSpritesRequest_FileName, *v.FileName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetMapSpritesRequest_Key, *v.Key)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.GetMapSpritesRequest_MapName, *v.MapName)
-	}
-}
-func (v *GetMapSpritesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapSpritesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapSpritesRequest_FileName:
-			v.FileName = new(string)
-			return d.ReadString(schemas.GetMapSpritesRequest_FileName, v.FileName)
-		case schemas.GetMapSpritesRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetMapSpritesRequest_Key, v.Key)
-		case schemas.GetMapSpritesRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.GetMapSpritesRequest_MapName, v.MapName)
-		}
-		return nil
-	})
-}
-
 type GetMapSpritesOutput struct {
 
 	// Contains the body of the sprite sheet or JSON offset ﬁle.
@@ -135,95 +98,23 @@ type GetMapSpritesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapSpritesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapSpritesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapSpritesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Blob != nil {
-		s.WriteBlob(schemas.GetMapSpritesResponse_Blob, v.Blob)
-	}
-	if v.CacheControl != nil {
-		s.WriteString(schemas.GetMapSpritesResponse_CacheControl, *v.CacheControl)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.GetMapSpritesResponse_ContentType, *v.ContentType)
-	}
-}
-func (v *GetMapSpritesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapSpritesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapSpritesResponse_Blob:
-			return d.ReadBlob(schemas.GetMapSpritesResponse_Blob, &v.Blob)
-		case schemas.GetMapSpritesResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetMapSpritesResponse_CacheControl, v.CacheControl)
-		case schemas.GetMapSpritesResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetMapSpritesResponse_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapSprites{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapSprites, schemas.GetMapSpritesRequest, schemas.GetMapSpritesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMapSprites{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapSprites, schemas.GetMapSpritesRequest, schemas.GetMapSpritesResponse), output: &GetMapSpritesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMapSprites"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -233,12 +124,6 @@ func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpGetMapSpritesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapSprites(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -251,12 +136,6 @@ func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -290,12 +169,4 @@ func (m *endpointPrefix_opGetMapSpritesMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opGetMapSpritesMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetMapSpritesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetMapSprites(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMapSprites",
-	}
 }

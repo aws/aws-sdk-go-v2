@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateService
+
+{"branchName":"__BranchName__","description":"__Description__","name":"__Name__","repositoryConnectionArn":"__RepositoryConnectionArn__","repositoryId":"__RepositoryId__","spec":"__Spec__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__","templateName":"__TemplateName__"}

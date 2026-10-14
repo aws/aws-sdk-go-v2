@@ -306,6 +306,7 @@ func serializeStreamList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func deserializeKeyspacesCellList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.KeyspacesCell) error {
+	*v = make([]types.KeyspacesCell, 0)
 	var vv types.KeyspacesCell
 	return smithy.ReadList(d, s, func() error {
 		vv = types.KeyspacesCell{}
@@ -319,6 +320,7 @@ func deserializeKeyspacesCellList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeKeyspacesCellMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.KeyspacesCellMapDefinition) error {
+	*v = make([]types.KeyspacesCellMapDefinition, 0)
 	var vv types.KeyspacesCellMapDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.KeyspacesCellMapDefinition{}
@@ -332,6 +334,7 @@ func deserializeKeyspacesCellMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Record) error {
+	*v = make([]types.Record, 0)
 	var vv types.Record
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Record{}
@@ -345,6 +348,7 @@ func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeShardDescriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Shard) error {
+	*v = make([]types.Shard, 0)
 	var vv types.Shard
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Shard{}
@@ -358,6 +362,7 @@ func deserializeShardDescriptionList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeShardIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -371,6 +376,7 @@ func deserializeShardIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeStreamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Stream) error {
+	*v = make([]types.Stream, 0)
 	var vv types.Stream
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Stream{}
@@ -427,6 +433,14 @@ func deserializeKeyspacesCells(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]types.KeyspacesCell)
 	var vv types.KeyspacesCell
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KeyspacesCell
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.KeyspacesCell{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -441,6 +455,13 @@ func deserializeKeyspacesKeysMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]types.KeyspacesCellValue)
 	var vv types.KeyspacesCellValue
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KeyspacesCellValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := deserializeKeyspacesCellValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -455,6 +476,14 @@ func deserializeKeyspacesUdtMap(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string]types.KeyspacesCell)
 	var vv types.KeyspacesCell
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KeyspacesCell
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.KeyspacesCell{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

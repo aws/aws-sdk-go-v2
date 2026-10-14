@@ -5,10 +5,10 @@ package sesv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all tenants associated with your account in the current Amazon Web
@@ -35,6 +35,10 @@ func (c *Client) ListTenants(ctx context.Context, params *ListTenantsInput, optF
 // current Amazon Web Services Region.
 type ListTenantsInput struct {
 
+	// An object that contains filters to apply when listing tenants. You can filter
+	// by a substring of the tenant name or by sending status.
+	Filter map[string]string
+
 	// A token returned from a previous call to ListTenants to indicate the position
 	// in the list of tenants.
 	NextToken *string
@@ -46,6 +50,22 @@ type ListTenantsInput struct {
 	PageSize *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListTenantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTenantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTenantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListTenantsFilter(s, schemas.ListTenantsRequest_Filter, v.Filter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTenantsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListTenantsRequest_PageSize, *v.PageSize)
+	}
 }
 
 // Information about tenants associated with your account.
@@ -65,74 +85,48 @@ type ListTenantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTenantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTenantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTenantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTenantsResponse_NextToken, *v.NextToken)
+	}
+	serializeTenantInfoList(s, schemas.ListTenantsResponse_Tenants, v.Tenants)
+}
+func (v *ListTenantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTenantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTenantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTenantsResponse_NextToken, v.NextToken)
+		case schemas.ListTenantsResponse_Tenants:
+			return deserializeTenantInfoList(d, schemas.ListTenantsResponse_Tenants, &v.Tenants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTenantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTenants, schemas.ListTenantsRequest, schemas.ListTenantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTenants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTenants, schemas.ListTenantsRequest, schemas.ListTenantsResponse), output: &ListTenantsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTenants{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTenants"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTenants(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +139,6 @@ func (c *Client) addOperationListTenantsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +241,3 @@ type ListTenantsAPIClient interface {
 }
 
 var _ ListTenantsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTenants(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTenants",
-	}
-}

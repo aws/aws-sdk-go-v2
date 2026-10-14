@@ -4,13 +4,8 @@ package rum
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies the extended metrics and custom metrics that you want a CloudWatch
@@ -110,47 +105,6 @@ type BatchCreateRumMetricDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateRumMetricDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateRumMetricDefinitionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateRumMetricDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppMonitorName != nil {
-		s.WriteString(schemas.BatchCreateRumMetricDefinitionsRequest_AppMonitorName, *v.AppMonitorName)
-	}
-	if v.Destination != "" {
-		s.WriteString(schemas.BatchCreateRumMetricDefinitionsRequest_Destination, string(v.Destination))
-	}
-	if v.DestinationArn != nil {
-		s.WriteString(schemas.BatchCreateRumMetricDefinitionsRequest_DestinationArn, *v.DestinationArn)
-	}
-	serializeMetricDefinitionsRequest(s, schemas.BatchCreateRumMetricDefinitionsRequest_MetricDefinitions, v.MetricDefinitions)
-}
-func (v *BatchCreateRumMetricDefinitionsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateRumMetricDefinitionsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateRumMetricDefinitionsRequest_AppMonitorName:
-			v.AppMonitorName = new(string)
-			return d.ReadString(schemas.BatchCreateRumMetricDefinitionsRequest_AppMonitorName, v.AppMonitorName)
-		case schemas.BatchCreateRumMetricDefinitionsRequest_Destination:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateRumMetricDefinitionsRequest_Destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = types.MetricDestination(ev)
-			return nil
-		case schemas.BatchCreateRumMetricDefinitionsRequest_DestinationArn:
-			v.DestinationArn = new(string)
-			return d.ReadString(schemas.BatchCreateRumMetricDefinitionsRequest_DestinationArn, v.DestinationArn)
-		case schemas.BatchCreateRumMetricDefinitionsRequest_MetricDefinitions:
-			return deserializeMetricDefinitionsRequest(d, schemas.BatchCreateRumMetricDefinitionsRequest_MetricDefinitions, &v.MetricDefinitions)
-		}
-		return nil
-	})
-}
-
 type BatchCreateRumMetricDefinitionsOutput struct {
 
 	// An array of error objects, if the operation caused any errors.
@@ -167,96 +121,29 @@ type BatchCreateRumMetricDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateRumMetricDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateRumMetricDefinitionsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateRumMetricDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateRumMetricDefinitionsErrors(s, schemas.BatchCreateRumMetricDefinitionsResponse_Errors, v.Errors)
-	serializeMetricDefinitions(s, schemas.BatchCreateRumMetricDefinitionsResponse_MetricDefinitions, v.MetricDefinitions)
-}
-func (v *BatchCreateRumMetricDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateRumMetricDefinitionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateRumMetricDefinitionsResponse_Errors:
-			return deserializeBatchCreateRumMetricDefinitionsErrors(d, schemas.BatchCreateRumMetricDefinitionsResponse_Errors, &v.Errors)
-		case schemas.BatchCreateRumMetricDefinitionsResponse_MetricDefinitions:
-			return deserializeMetricDefinitions(d, schemas.BatchCreateRumMetricDefinitionsResponse_MetricDefinitions, &v.MetricDefinitions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchCreateRumMetricDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateRumMetricDefinitions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateRumMetricDefinitions, schemas.BatchCreateRumMetricDefinitionsRequest, schemas.BatchCreateRumMetricDefinitionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateRumMetricDefinitions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateRumMetricDefinitions, schemas.BatchCreateRumMetricDefinitionsRequest, schemas.BatchCreateRumMetricDefinitionsResponse), output: &BatchCreateRumMetricDefinitionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateRumMetricDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchCreateRumMetricDefinitionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateRumMetricDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -271,22 +158,8 @@ func (c *Client) addOperationBatchCreateRumMetricDefinitionsMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchCreateRumMetricDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateRumMetricDefinitions",
-	}
 }

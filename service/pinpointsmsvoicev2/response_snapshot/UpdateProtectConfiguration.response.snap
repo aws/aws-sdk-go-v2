@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdateProtectConfiguration
+
+{"AccountDefault":true,"CreatedTimestamp":946684800,"DeletionProtectionEnabled":true,"ProtectConfigurationArn":"__ProtectConfigurationArn__","ProtectConfigurationId":"__ProtectConfigurationId__"}

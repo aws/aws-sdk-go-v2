@@ -5,10 +5,10 @@ package dataexchange
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation lists a revision's assets sorted alphabetically in descending
@@ -50,6 +50,45 @@ type ListRevisionAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRevisionAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRevisionAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRevisionAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_DataSetId, *v.DataSetId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListRevisionAssetsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_NextToken, *v.NextToken)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ListRevisionAssetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRevisionAssetsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRevisionAssetsRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_DataSetId, v.DataSetId)
+		case schemas.ListRevisionAssetsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListRevisionAssetsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListRevisionAssetsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_NextToken, v.NextToken)
+		case schemas.ListRevisionAssetsRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type ListRevisionAssetsOutput struct {
 
 	// The asset objects listed by the request.
@@ -65,77 +104,51 @@ type ListRevisionAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRevisionAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRevisionAssetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRevisionAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetEntry(s, schemas.ListRevisionAssetsResponse_Assets, v.Assets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRevisionAssetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRevisionAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRevisionAssetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRevisionAssetsResponse_Assets:
+			return deserializeListOfAssetEntry(d, schemas.ListRevisionAssetsResponse_Assets, &v.Assets)
+		case schemas.ListRevisionAssetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRevisionAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRevisionAssets, schemas.ListRevisionAssetsRequest, schemas.ListRevisionAssetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRevisionAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRevisionAssets, schemas.ListRevisionAssetsRequest, schemas.ListRevisionAssetsResponse), output: &ListRevisionAssetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRevisionAssets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRevisionAssets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRevisionAssetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRevisionAssets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +161,6 @@ func (c *Client) addOperationListRevisionAssetsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +258,3 @@ type ListRevisionAssetsAPIClient interface {
 }
 
 var _ ListRevisionAssetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRevisionAssets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRevisionAssets",
-	}
-}

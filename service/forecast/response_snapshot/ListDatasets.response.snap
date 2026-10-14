@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListDatasets
+
+{"Datasets":[{"CreationTime":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","DatasetType":"TARGET_TIME_SERIES","Domain":"RETAIL","LastModificationTime":946684800},{"CreationTime":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","DatasetType":"TARGET_TIME_SERIES","Domain":"RETAIL","LastModificationTime":946684800}],"NextToken":"__NextToken__"}

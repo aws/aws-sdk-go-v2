@@ -4,11 +4,10 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -56,6 +55,21 @@ type GetFunctionEventInvokeConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionEventInvokeConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionEventInvokeConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionEventInvokeConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetFunctionEventInvokeConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.GetFunctionEventInvokeConfigRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type GetFunctionEventInvokeConfigOutput struct {
 
 	// A destination for events after they have been sent to a function for processing.
@@ -94,77 +108,74 @@ type GetFunctionEventInvokeConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionEventInvokeConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionEventInvokeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionEventInvokeConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.FunctionEventInvokeConfig_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.FunctionEventInvokeConfig_FunctionArn, *v.FunctionArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.FunctionEventInvokeConfig_LastModified, *v.LastModified)
+	}
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+}
+func (v *GetFunctionEventInvokeConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionEventInvokeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionEventInvokeConfig_DestinationConfig:
+			v.DestinationConfig = &types.DestinationConfig{}
+			return v.DestinationConfig.Deserialize(d)
+		case schemas.FunctionEventInvokeConfig_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.FunctionEventInvokeConfig_FunctionArn, v.FunctionArn)
+		case schemas.FunctionEventInvokeConfig_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.FunctionEventInvokeConfig_LastModified, v.LastModified)
+		case schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds:
+			v.MaximumEventAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumEventAgeInSeconds, v.MaximumEventAgeInSeconds)
+		case schemas.FunctionEventInvokeConfig_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionEventInvokeConfig, schemas.GetFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionEventInvokeConfig, schemas.GetFunctionEventInvokeConfigRequest, schemas.FunctionEventInvokeConfig), output: &GetFunctionEventInvokeConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunctionEventInvokeConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFunctionEventInvokeConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFunctionEventInvokeConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionEventInvokeConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +190,8 @@ func (c *Client) addOperationGetFunctionEventInvokeConfigMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFunctionEventInvokeConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFunctionEventInvokeConfig",
-	}
 }

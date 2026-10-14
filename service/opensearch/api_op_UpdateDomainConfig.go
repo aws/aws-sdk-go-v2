@@ -4,13 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the cluster configuration of the specified Amazon OpenSearch Service
@@ -40,6 +37,17 @@ type UpdateDomainConfigInput struct {
 
 	// Options for all machine learning features for the specified domain.
 	AIMLOptions *types.AIMLOptionsInput
+
+	// A list of advisory warning codes to accept for this configuration change. By
+	// default, any advisory warning blocks the change. Include the code of each
+	// warning you want to accept so the change can proceed. You can find warning codes
+	// in the ValidationFailures list returned by DescribeDomainChangeProgress and
+	// DescribeDryRunProgress . Critical validation failures cannot be accepted and
+	// always block the change. If you omit this parameter or pass an empty list, all
+	// warnings block the change. For more information, see [Validating a domain update].
+	//
+	// [Validating a domain update]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check
+	AcceptedWarnings []string
 
 	// Identity and Access Management (IAM) access policy as a JSON-formatted string.
 	AccessPolicies *string
@@ -119,6 +127,10 @@ type UpdateDomainConfigInput struct {
 	// Encryption at rest options for the domain.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
+	// The engine mode for the domain. The engine mode can't be changed after the
+	// domain is created. For valid values, see EngineMode .
+	EngineMode types.EngineMode
+
 	// Specify either dual stack or IPv4 as your IP address type. Dual stack allows
 	// you to share domain resources across IPv4 and IPv6 address types, and is the
 	// recommended option. If your IP address type is currently set to dual stack, you
@@ -144,6 +156,9 @@ type UpdateDomainConfigInput struct {
 	// Service software update options for the domain.
 	SoftwareUpdateOptions *types.SoftwareUpdateOptions
 
+	// The primary use case for the domain. For valid values, see DomainUseCase .
+	UseCase types.DomainUseCase
+
 	// Options to specify the subnets and security groups for a VPC endpoint. For more
 	// information, see [Launching your Amazon OpenSearch Service domains using a VPC].
 	//
@@ -165,6 +180,7 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AIMLOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeAcceptedWarningsList(s, schemas.UpdateDomainConfigRequest_AcceptedWarnings, v.AcceptedWarnings)
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.UpdateDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
 	}
@@ -223,6 +239,9 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionAtRestOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EngineMode != "" {
+		s.WriteString(schemas.UpdateDomainConfigRequest_EngineMode, string(v.EngineMode))
+	}
 	if v.IPAddressType != "" {
 		s.WriteString(schemas.UpdateDomainConfigRequest_IPAddressType, string(v.IPAddressType))
 	}
@@ -252,6 +271,9 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SoftwareUpdateOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.UseCase != "" {
+		s.WriteString(schemas.UpdateDomainConfigRequest_UseCase, string(v.UseCase))
+	}
 	if v.VPCOptions != nil {
 		s.WriteStruct(schemas.UpdateDomainConfigRequest_VPCOptions)
 		v.VPCOptions.SerializeMembers(s)
@@ -280,6 +302,29 @@ type UpdateDomainConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigResponse_DomainConfig)
+		v.DomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRunProgressStatus != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigResponse_DryRunProgressStatus)
+		v.DryRunProgressStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRunResults != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigResponse_DryRunResults)
+		v.DryRunResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *UpdateDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDomainConfigResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -297,74 +342,26 @@ func (v *UpdateDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 func (c *Client) addOperationUpdateDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfig, schemas.UpdateDomainConfigRequest, schemas.UpdateDomainConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfig, schemas.UpdateDomainConfigRequest, schemas.UpdateDomainConfigResponse), output: &UpdateDomainConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomainConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDomainConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -379,22 +376,8 @@ func (c *Client) addOperationUpdateDomainConfigMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDomainConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDomainConfig",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /v2/email/contact-lists/__ContactListName__/contacts/__EmailAddress__
+
+Content-Type: application/json
+
+{"AttributesData":"__AttributesData__","TopicPreferences":[{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"},{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"}],"UnsubscribeAll":true}

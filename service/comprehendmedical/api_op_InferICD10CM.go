@@ -4,11 +4,10 @@ package comprehendmedical
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // InferICD10CM detects medical conditions as entities listed in a patient record
@@ -40,6 +39,18 @@ type InferICD10CMInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferICD10CMInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferICD10CMRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferICD10CMInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.InferICD10CMRequest_Text, *v.Text)
+	}
+}
+
 type InferICD10CMOutput struct {
 
 	// The medical conditions detected in the text linked to ICD-10-CM concepts. If
@@ -64,65 +75,51 @@ type InferICD10CMOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferICD10CMOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferICD10CMResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferICD10CMOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeICD10CMEntityList(s, schemas.InferICD10CMResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.InferICD10CMResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.InferICD10CMResponse_PaginationToken, *v.PaginationToken)
+	}
+}
+func (v *InferICD10CMOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferICD10CMResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferICD10CMResponse_Entities:
+			return deserializeICD10CMEntityList(d, schemas.InferICD10CMResponse_Entities, &v.Entities)
+		case schemas.InferICD10CMResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.InferICD10CMResponse_ModelVersion, v.ModelVersion)
+		case schemas.InferICD10CMResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.InferICD10CMResponse_PaginationToken, v.PaginationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferICD10CM, schemas.InferICD10CMRequest, schemas.InferICD10CMResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpInferICD10CM{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferICD10CM, schemas.InferICD10CMRequest, schemas.InferICD10CMResponse), output: &InferICD10CMOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpInferICD10CM{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InferICD10CM"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -132,12 +129,6 @@ func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpInferICD10CMValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInferICD10CM(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +143,8 @@ func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInferICD10CM(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InferICD10CM",
-	}
 }

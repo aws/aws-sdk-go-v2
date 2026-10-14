@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the configurations for DNSSEC validation that are associated with the
@@ -51,6 +51,22 @@ type ListResolverDnssecConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverDnssecConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverDnssecConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverDnssecConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverDnssecConfigsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverDnssecConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverDnssecConfigsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResolverDnssecConfigsOutput struct {
 
 	// If a response includes the last of the DNSSEC configurations that are
@@ -78,74 +94,48 @@ type ListResolverDnssecConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverDnssecConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverDnssecConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverDnssecConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverDnssecConfigsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverDnssecConfigList(s, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, v.ResolverDnssecConfigs)
+}
+func (v *ListResolverDnssecConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverDnssecConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverDnssecConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverDnssecConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs:
+			return deserializeResolverDnssecConfigList(d, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, &v.ResolverDnssecConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverDnssecConfigs, schemas.ListResolverDnssecConfigsRequest, schemas.ListResolverDnssecConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverDnssecConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverDnssecConfigs, schemas.ListResolverDnssecConfigsRequest, schemas.ListResolverDnssecConfigsResponse), output: &ListResolverDnssecConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverDnssecConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResolverDnssecConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverDnssecConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +148,6 @@ func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +252,3 @@ type ListResolverDnssecConfigsAPIClient interface {
 }
 
 var _ ListResolverDnssecConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResolverDnssecConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResolverDnssecConfigs",
-	}
-}

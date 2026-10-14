@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the evaluation results for the specified Amazon Web Services resource.
@@ -60,6 +60,28 @@ type GetComplianceDetailsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceTypes(s, schemas.GetComplianceDetailsByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceEvaluationId != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceEvaluationId, *v.ResourceEvaluationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetComplianceDetailsByResourceOutput struct {
 
 	// Indicates whether the specified Amazon Web Services resource complies each
@@ -76,74 +98,48 @@ type GetComplianceDetailsByResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, v.EvaluationResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetComplianceDetailsByResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailsByResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailsByResourceResponse_EvaluationResults:
+			return deserializeEvaluationResults(d, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, &v.EvaluationResults)
+		case schemas.GetComplianceDetailsByResourceResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetComplianceDetailsByResourceResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByResource, schemas.GetComplianceDetailsByResourceRequest, schemas.GetComplianceDetailsByResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByResource, schemas.GetComplianceDetailsByResourceRequest, schemas.GetComplianceDetailsByResourceResponse), output: &GetComplianceDetailsByResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComplianceDetailsByResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetailsByResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +152,6 @@ func (c *Client) addOperationGetComplianceDetailsByResourceMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +243,3 @@ type GetComplianceDetailsByResourceAPIClient interface {
 }
 
 var _ GetComplianceDetailsByResourceAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetComplianceDetailsByResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComplianceDetailsByResource",
-	}
-}

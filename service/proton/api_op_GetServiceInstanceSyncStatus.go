@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the status of the synced service instance.
@@ -44,6 +43,34 @@ type GetServiceInstanceSyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceSyncStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceSyncStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceSyncStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceInstanceSyncStatusInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceInstanceSyncStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceSyncStatusInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.GetServiceInstanceSyncStatusInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceInstanceSyncStatusInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceInstanceSyncStatusOutput struct {
 
 	// The service instance sync desired state that's returned by Proton
@@ -61,77 +88,66 @@ type GetServiceInstanceSyncStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceSyncStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceSyncStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredState != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_desiredState)
+		v.DesiredState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSuccessfulSync != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_latestSuccessfulSync)
+		v.LatestSuccessfulSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSync != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_latestSync)
+		v.LatestSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceInstanceSyncStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceSyncStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceSyncStatusOutput_desiredState:
+			v.DesiredState = &types.Revision{}
+			return v.DesiredState.Deserialize(d)
+		case schemas.GetServiceInstanceSyncStatusOutput_latestSuccessfulSync:
+			v.LatestSuccessfulSync = &types.ResourceSyncAttempt{}
+			return v.LatestSuccessfulSync.Deserialize(d)
+		case schemas.GetServiceInstanceSyncStatusOutput_latestSync:
+			v.LatestSync = &types.ResourceSyncAttempt{}
+			return v.LatestSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceInstanceSyncStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstanceSyncStatus, schemas.GetServiceInstanceSyncStatusInput, schemas.GetServiceInstanceSyncStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceInstanceSyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstanceSyncStatus, schemas.GetServiceInstanceSyncStatusInput, schemas.GetServiceInstanceSyncStatusOutput), output: &GetServiceInstanceSyncStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceInstanceSyncStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceInstanceSyncStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetServiceInstanceSyncStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceInstanceSyncStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +162,8 @@ func (c *Client) addOperationGetServiceInstanceSyncStatusMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServiceInstanceSyncStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServiceInstanceSyncStatus",
-	}
 }

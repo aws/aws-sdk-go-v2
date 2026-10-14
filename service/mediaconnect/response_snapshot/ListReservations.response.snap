@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","reservations":[{"currencyCode":"__CurrencyCode__","duration":1,"durationUnits":"MONTHS","end":"__End__","offeringArn":"__OfferingArn__","offeringDescription":"__OfferingDescription__","pricePerUnit":"__PricePerUnit__","priceUnits":"HOURLY","reservationArn":"__ReservationArn__","reservationName":"__ReservationName__","reservationState":"ACTIVE","resourceSpecification":{"reservedBitrate":1,"resourceType":"Mbps_Outbound_Bandwidth"},"start":"__Start__"},{"currencyCode":"__CurrencyCode__","duration":1,"durationUnits":"MONTHS","end":"__End__","offeringArn":"__OfferingArn__","offeringDescription":"__OfferingDescription__","pricePerUnit":"__PricePerUnit__","priceUnits":"HOURLY","reservationArn":"__ReservationArn__","reservationName":"__ReservationName__","reservationState":"ACTIVE","resourceSpecification":{"reservedBitrate":1,"resourceType":"Mbps_Outbound_Bandwidth"},"start":"__Start__"}]}

@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // WARNING: RetryDataReplication is deprecated. Causes the data replication
@@ -41,6 +40,28 @@ type RetryDataReplicationInput struct {
 	SourceServerID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryDataReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryDataReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryDataReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.RetryDataReplicationRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *RetryDataReplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryDataReplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryDataReplicationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.RetryDataReplicationRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type RetryDataReplicationOutput struct {
@@ -95,77 +116,141 @@ type RetryDataReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryDataReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryDataReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.SourceServer_agentVersion, *v.AgentVersion)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SourceServer_arn, *v.Arn)
+	}
+	if v.DataReplicationInfo != nil {
+		s.WriteStruct(schemas.SourceServer_dataReplicationInfo)
+		v.DataReplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastLaunchResult != "" {
+		s.WriteString(schemas.SourceServer_lastLaunchResult, string(v.LastLaunchResult))
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.SourceServer_lifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryInstanceId != nil {
+		s.WriteString(schemas.SourceServer_recoveryInstanceId, *v.RecoveryInstanceId)
+	}
+	if v.ReplicationDirection != "" {
+		s.WriteString(schemas.SourceServer_replicationDirection, string(v.ReplicationDirection))
+	}
+	if v.ReversedDirectionSourceServerArn != nil {
+		s.WriteString(schemas.SourceServer_reversedDirectionSourceServerArn, *v.ReversedDirectionSourceServerArn)
+	}
+	if v.SourceCloudProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceCloudProperties)
+		v.SourceCloudProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.SourceServer_sourceNetworkID, *v.SourceNetworkID)
+	}
+	if v.SourceProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceProperties)
+		v.SourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
+	}
+	if v.StagingArea != nil {
+		s.WriteStruct(schemas.SourceServer_stagingArea)
+		v.StagingArea.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+}
+func (v *RetryDataReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServer_agentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.SourceServer_agentVersion, v.AgentVersion)
+		case schemas.SourceServer_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SourceServer_arn, v.Arn)
+		case schemas.SourceServer_dataReplicationInfo:
+			v.DataReplicationInfo = &types.DataReplicationInfo{}
+			return v.DataReplicationInfo.Deserialize(d)
+		case schemas.SourceServer_lastLaunchResult:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_lastLaunchResult, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchResult = types.LastLaunchResult(ev)
+			return nil
+		case schemas.SourceServer_lifeCycle:
+			v.LifeCycle = &types.LifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.SourceServer_recoveryInstanceId:
+			v.RecoveryInstanceId = new(string)
+			return d.ReadString(schemas.SourceServer_recoveryInstanceId, v.RecoveryInstanceId)
+		case schemas.SourceServer_replicationDirection:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_replicationDirection, &ev); err != nil {
+				return err
+			}
+			v.ReplicationDirection = types.ReplicationDirection(ev)
+			return nil
+		case schemas.SourceServer_reversedDirectionSourceServerArn:
+			v.ReversedDirectionSourceServerArn = new(string)
+			return d.ReadString(schemas.SourceServer_reversedDirectionSourceServerArn, v.ReversedDirectionSourceServerArn)
+		case schemas.SourceServer_sourceCloudProperties:
+			v.SourceCloudProperties = &types.SourceCloudProperties{}
+			return v.SourceCloudProperties.Deserialize(d)
+		case schemas.SourceServer_sourceNetworkID:
+			v.SourceNetworkID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceNetworkID, v.SourceNetworkID)
+		case schemas.SourceServer_sourceProperties:
+			v.SourceProperties = &types.SourceProperties{}
+			return v.SourceProperties.Deserialize(d)
+		case schemas.SourceServer_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceServerID, v.SourceServerID)
+		case schemas.SourceServer_stagingArea:
+			v.StagingArea = &types.StagingArea{}
+			return v.StagingArea.Deserialize(d)
+		case schemas.SourceServer_tags:
+			return deserializeTagsMap(d, schemas.SourceServer_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryDataReplication, schemas.RetryDataReplicationRequest, schemas.SourceServer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryDataReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryDataReplication, schemas.RetryDataReplicationRequest, schemas.SourceServer), output: &RetryDataReplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetryDataReplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RetryDataReplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRetryDataReplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetryDataReplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +265,8 @@ func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRetryDataReplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RetryDataReplication",
-	}
 }

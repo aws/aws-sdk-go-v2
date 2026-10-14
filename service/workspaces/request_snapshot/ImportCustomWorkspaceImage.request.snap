@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ImportCustomWorkspaceImage
+
+{"ComputeType":"BASE","ImageDescription":"__ImageDescription__","ImageName":"__ImageName__","ImageSource":{"Ec2ImportTaskId":"__ImageSourceIdentifierMemberEc2ImportTaskId__"},"InfrastructureConfigurationArn":"__InfrastructureConfigurationArn__","OsVersion":"Windows_10","Platform":"WINDOWS","Protocol":"PCOIP","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

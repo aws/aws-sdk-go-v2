@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeDevice
+
+{"AgentVersion":"__AgentVersion__","Description":"__Description__","DeviceArn":"__DeviceArn__","DeviceFleetName":"__DeviceFleetName__","DeviceName":"__DeviceName__","IotThingName":"__IotThingName__","LatestHeartbeat":946684800,"MaxModels":1,"Models":[{"LatestInference":946684800,"LatestSampleTime":946684800,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__"},{"LatestInference":946684800,"LatestSampleTime":946684800,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__"}],"NextToken":"__NextToken__","RegistrationTime":946684800}

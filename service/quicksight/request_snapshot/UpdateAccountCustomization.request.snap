@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/customizations?namespace=__Namespace__
+
+Content-Type: application/json
+
+{"AccountCustomization":{"DefaultEmailCustomizationTemplate":"__DefaultEmailCustomizationTemplate__","DefaultTheme":"__DefaultTheme__"}}

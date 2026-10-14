@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,31 +43,6 @@ type BatchPutGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutGeofenceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchPutGeofenceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchPutGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.BatchPutGeofenceRequest_CollectionName, *v.CollectionName)
-	}
-	serializeBatchPutGeofenceRequestEntryList(s, schemas.BatchPutGeofenceRequest_Entries, v.Entries)
-}
-func (v *BatchPutGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchPutGeofenceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchPutGeofenceRequest_CollectionName:
-			v.CollectionName = new(string)
-			return d.ReadString(schemas.BatchPutGeofenceRequest_CollectionName, v.CollectionName)
-		case schemas.BatchPutGeofenceRequest_Entries:
-			return deserializeBatchPutGeofenceRequestEntryList(d, schemas.BatchPutGeofenceRequest_Entries, &v.Entries)
-		}
-		return nil
-	})
-}
-
 type BatchPutGeofenceOutput struct {
 
 	// Contains additional error details for each geofence that failed to be stored in
@@ -90,84 +62,23 @@ type BatchPutGeofenceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchPutGeofenceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchPutGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutGeofenceErrorList(s, schemas.BatchPutGeofenceResponse_Errors, v.Errors)
-	serializeBatchPutGeofenceSuccessList(s, schemas.BatchPutGeofenceResponse_Successes, v.Successes)
-}
-func (v *BatchPutGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchPutGeofenceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchPutGeofenceResponse_Errors:
-			return deserializeBatchPutGeofenceErrorList(d, schemas.BatchPutGeofenceResponse_Errors, &v.Errors)
-		case schemas.BatchPutGeofenceResponse_Successes:
-			return deserializeBatchPutGeofenceSuccessList(d, schemas.BatchPutGeofenceResponse_Successes, &v.Successes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutGeofence{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGeofence, schemas.BatchPutGeofenceRequest, schemas.BatchPutGeofenceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutGeofence{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutGeofence, schemas.BatchPutGeofenceRequest, schemas.BatchPutGeofenceResponse), output: &BatchPutGeofenceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutGeofence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -177,12 +88,6 @@ func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpBatchPutGeofenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutGeofence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +100,6 @@ func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -234,12 +133,4 @@ func (m *endpointPrefix_opBatchPutGeofenceMiddleware) HandleFinalize(ctx context
 }
 func addEndpointPrefix_opBatchPutGeofenceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchPutGeofenceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchPutGeofence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchPutGeofence",
-	}
 }

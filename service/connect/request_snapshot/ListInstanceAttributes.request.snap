@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/attributes?maxResults=1&nextToken=__NextToken__
+
+

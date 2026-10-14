@@ -1,0 +1,5 @@
+PUT /packages/__PackageName__/versions/__VersionName__?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"artifact":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"attributes":{"key0":"__Value__"},"description":"__Description__","recipe":"__Recipe__","tags":{"key0":"__Value__"}}

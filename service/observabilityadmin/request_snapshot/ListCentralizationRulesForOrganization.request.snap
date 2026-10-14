@@ -1,0 +1,5 @@
+POST /ListCentralizationRulesForOrganization
+
+Content-Type: application/json
+
+{"AllRegions":true,"MaxResults":1,"NextToken":"__NextToken__","RuleNamePrefix":"__RuleNamePrefix__"}

@@ -5,10 +5,10 @@ package guardduty
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a single GuardDuty detector. A detector is a resource that represents
@@ -82,6 +82,31 @@ type CreateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDetectorRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.CreateDetectorRequest_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enable != nil {
+		s.WriteBool(schemas.CreateDetectorRequest_Enable, *v.Enable)
+	}
+	serializeDetectorFeatureConfigurations(s, schemas.CreateDetectorRequest_Features, v.Features)
+	if v.FindingPublishingFrequency != "" {
+		s.WriteString(schemas.CreateDetectorRequest_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
+	}
+	serializeTagMap(s, schemas.CreateDetectorRequest_Tags, v.Tags)
+}
+
 type CreateDetectorOutput struct {
 
 	// The unique ID of the created detector.
@@ -97,65 +122,50 @@ type CreateDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateDetectorResponse_DetectorId, *v.DetectorId)
+	}
+	if v.UnprocessedDataSources != nil {
+		s.WriteStruct(schemas.CreateDetectorResponse_UnprocessedDataSources)
+		v.UnprocessedDataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDetectorResponse_DetectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.CreateDetectorResponse_DetectorId, v.DetectorId)
+		case schemas.CreateDetectorResponse_UnprocessedDataSources:
+			v.UnprocessedDataSources = &types.UnprocessedDataSourcesResult{}
+			return v.UnprocessedDataSources.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetector, schemas.CreateDetectorRequest, schemas.CreateDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetector, schemas.CreateDetectorRequest, schemas.CreateDetectorResponse), output: &CreateDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +175,6 @@ func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +187,6 @@ func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -228,12 +226,4 @@ func (m *idempotencyToken_initializeOpCreateDetector) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateDetectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDetector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDetector",
-	}
 }

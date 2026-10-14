@@ -1,0 +1,5 @@
+POST /items
+
+Content-Type: application/json
+
+{"datasetArn":"__DatasetArn__","items":[{"itemId":"__ItemId__","properties":"__Properties__"},{"itemId":"__ItemId__","properties":"__Properties__"}]}

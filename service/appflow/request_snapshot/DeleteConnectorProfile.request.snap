@@ -1,0 +1,5 @@
+POST /delete-connector-profile
+
+Content-Type: application/json
+
+{"connectorProfileName":"__ConnectorProfileName__","forceDelete":true}

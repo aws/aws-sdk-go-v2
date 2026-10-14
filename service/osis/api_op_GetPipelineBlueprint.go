@@ -4,13 +4,8 @@ package osis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a specific blueprint for OpenSearch Ingestion.
@@ -46,21 +41,6 @@ type GetPipelineBlueprintInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPipelineBlueprintInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPipelineBlueprintRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPipelineBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlueprintName != nil {
-		s.WriteString(schemas.GetPipelineBlueprintRequest_BlueprintName, *v.BlueprintName)
-	}
-	if v.Format != nil {
-		s.WriteString(schemas.GetPipelineBlueprintRequest_Format, *v.Format)
-	}
-}
-
 type GetPipelineBlueprintOutput struct {
 
 	// The requested blueprint in YAML format.
@@ -75,88 +55,29 @@ type GetPipelineBlueprintOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPipelineBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPipelineBlueprintResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPipelineBlueprintResponse_Blueprint:
-			v.Blueprint = &types.PipelineBlueprint{}
-			return v.Blueprint.Deserialize(d)
-		case schemas.GetPipelineBlueprintResponse_Format:
-			v.Format = new(string)
-			return d.ReadString(schemas.GetPipelineBlueprintResponse_Format, v.Format)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPipelineBlueprintMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPipelineBlueprint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineBlueprint, schemas.GetPipelineBlueprintRequest, schemas.GetPipelineBlueprintResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPipelineBlueprint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineBlueprint, schemas.GetPipelineBlueprintRequest, schemas.GetPipelineBlueprintResponse), output: &GetPipelineBlueprintOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPipelineBlueprint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPipelineBlueprintValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPipelineBlueprint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +92,8 @@ func (c *Client) addOperationGetPipelineBlueprintMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPipelineBlueprint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPipelineBlueprint",
-	}
 }

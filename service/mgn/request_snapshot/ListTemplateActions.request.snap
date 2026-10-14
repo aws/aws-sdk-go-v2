@@ -1,0 +1,5 @@
+POST /ListTemplateActions
+
+Content-Type: application/json
+
+{"filters":{"actionIDs":["__Member__","__Member__"]},"launchConfigurationTemplateID":"__LaunchConfigurationTemplateID__","maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"importId":"__ImportId__","importStatus":"InProgress"}

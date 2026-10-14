@@ -1,0 +1,5 @@
+POST /update-billing-group
+
+Content-Type: application/json
+
+{"AccountGrouping":{"AutoAssociate":true,"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"Arn":"__Arn__","ComputationPreference":{"PricingPlanArn":"__PricingPlanArn__"},"Description":"__Description__","Name":"__Name__","Status":"ACTIVE"}

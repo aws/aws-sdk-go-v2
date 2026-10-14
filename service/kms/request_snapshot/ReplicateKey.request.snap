@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.ReplicateKey
+
+{"BypassPolicyLockoutSafetyCheck":true,"Description":"__Description__","KeyId":"__KeyId__","Policy":"__Policy__","ReplicaRegion":"__ReplicaRegion__","Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]}

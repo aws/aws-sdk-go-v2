@@ -1,0 +1,8 @@
+POST /applications/__ApplicationId__/configurationprofiles/__ConfigurationProfileId__/hostedconfigurationversions
+
+Content-Type: __ContentType__
+Description: __Description__
+Latest-Version-Number: 1
+Versionlabel: __VersionLabel__
+
+blob

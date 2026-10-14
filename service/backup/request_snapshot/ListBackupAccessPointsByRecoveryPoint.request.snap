@@ -1,0 +1,3 @@
+POST /backup-access-point/recovery-point/__RecoveryPointArn__?MaxResults=1&NextToken=__NextToken__
+
+

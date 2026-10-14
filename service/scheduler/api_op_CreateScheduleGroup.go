@@ -5,12 +5,8 @@ package scheduler
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the specified schedule group.
@@ -47,37 +43,6 @@ type CreateScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScheduleGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScheduleGroupInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScheduleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateScheduleGroupInput_ClientToken, *v.ClientToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateScheduleGroupInput_Name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateScheduleGroupInput_Tags, v.Tags)
-}
-func (v *CreateScheduleGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScheduleGroupInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScheduleGroupInput_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateScheduleGroupInput_ClientToken, v.ClientToken)
-		case schemas.CreateScheduleGroupInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateScheduleGroupInput_Name, v.Name)
-		case schemas.CreateScheduleGroupInput_Tags:
-			return deserializeTagList(d, schemas.CreateScheduleGroupInput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateScheduleGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule group.
@@ -91,84 +56,23 @@ type CreateScheduleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScheduleGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScheduleGroupOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScheduleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ScheduleGroupArn != nil {
-		s.WriteString(schemas.CreateScheduleGroupOutput_ScheduleGroupArn, *v.ScheduleGroupArn)
-	}
-}
-func (v *CreateScheduleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScheduleGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScheduleGroupOutput_ScheduleGroupArn:
-			v.ScheduleGroupArn = new(string)
-			return d.ReadString(schemas.CreateScheduleGroupOutput_ScheduleGroupArn, v.ScheduleGroupArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScheduleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScheduleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScheduleGroup, schemas.CreateScheduleGroupInput, schemas.CreateScheduleGroupOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScheduleGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScheduleGroup, schemas.CreateScheduleGroupInput, schemas.CreateScheduleGroupOutput), output: &CreateScheduleGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScheduleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -178,12 +82,6 @@ func (c *Client) addOperationCreateScheduleGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateScheduleGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScheduleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,12 +94,6 @@ func (c *Client) addOperationCreateScheduleGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,12 +133,4 @@ func (m *idempotencyToken_initializeOpCreateScheduleGroup) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateScheduleGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateScheduleGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateScheduleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScheduleGroup",
-	}
 }

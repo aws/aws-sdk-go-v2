@@ -1,0 +1,5 @@
+POST /cis/scan-configuration/update
+
+Content-Type: application/json
+
+{"scanConfigurationArn":"__ScanConfigurationArn__","scanName":"__ScanName__","schedule":{"oneTime":{}},"securityLevel":"LEVEL_1","targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"]}}}

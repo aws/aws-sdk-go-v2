@@ -4,12 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a cell to replace the list of nested cells with a new list of nested
@@ -45,19 +40,6 @@ type UpdateCellInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCellInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCellRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCellInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellName != nil {
-		s.WriteString(schemas.UpdateCellRequest_CellName, *v.CellName)
-	}
-	serialize__listOf__string(s, schemas.UpdateCellRequest_Cells, v.Cells)
-}
-
 type UpdateCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.
@@ -83,94 +65,29 @@ type UpdateCellOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCellResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateCellResponse_CellArn:
-			v.CellArn = new(string)
-			return d.ReadString(schemas.UpdateCellResponse_CellArn, v.CellArn)
-		case schemas.UpdateCellResponse_CellName:
-			v.CellName = new(string)
-			return d.ReadString(schemas.UpdateCellResponse_CellName, v.CellName)
-		case schemas.UpdateCellResponse_Cells:
-			return deserialize__listOf__string(d, schemas.UpdateCellResponse_Cells, &v.Cells)
-		case schemas.UpdateCellResponse_ParentReadinessScopes:
-			return deserialize__listOf__string(d, schemas.UpdateCellResponse_ParentReadinessScopes, &v.ParentReadinessScopes)
-		case schemas.UpdateCellResponse_Tags:
-			return deserializeTags(d, schemas.UpdateCellResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateCellMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCell{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCell, schemas.UpdateCellRequest, schemas.UpdateCellResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCell{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCell, schemas.UpdateCellRequest, schemas.UpdateCellResponse), output: &UpdateCellOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCell"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCellValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCell(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +102,8 @@ func (c *Client) addOperationUpdateCellMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCell(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCell",
-	}
 }

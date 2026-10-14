@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeBuild_20161006.StartSandboxConnection
+
+{"ssmSession":{"sessionId":"__SessionId__","streamUrl":"__StreamUrl__","tokenValue":"__TokenValue__"}}

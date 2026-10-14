@@ -1,0 +1,5 @@
+POST /metrics
+
+Content-Type: application/json
+
+{"SummaryMetricQueries":[{"AggregationPeriod":"OneHour","Dimensions":[{"name":"DeviceId","value":"__Value__"},{"name":"DeviceId","value":"__Value__"}],"EndTimestamp":946684800,"MetricName":"DeviceRSSI","QueryId":"__QueryId__","StartTimestamp":946684800},{"AggregationPeriod":"OneHour","Dimensions":[{"name":"DeviceId","value":"__Value__"},{"name":"DeviceId","value":"__Value__"}],"EndTimestamp":946684800,"MetricName":"DeviceRSSI","QueryId":"__QueryId__","StartTimestamp":946684800}]}

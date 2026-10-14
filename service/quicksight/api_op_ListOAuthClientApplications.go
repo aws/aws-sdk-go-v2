@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all OAuthClientApplications in the current Amazon Web Services Region
@@ -44,6 +44,24 @@ type ListOAuthClientApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOAuthClientApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOAuthClientApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOAuthClientApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListOAuthClientApplicationsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOAuthClientApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOAuthClientApplicationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOAuthClientApplicationsOutput struct {
 
 	// A pagination token that can be used in a subsequent request.
@@ -64,77 +82,62 @@ type ListOAuthClientApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOAuthClientApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOAuthClientApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOAuthClientApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOAuthClientApplicationsResponse_NextToken, *v.NextToken)
+	}
+	serializeOAuthClientApplicationSummaryList(s, schemas.ListOAuthClientApplicationsResponse_OAuthClientApplications, v.OAuthClientApplications)
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListOAuthClientApplicationsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListOAuthClientApplicationsResponse_Status, v.Status)
+	}
+}
+func (v *ListOAuthClientApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOAuthClientApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOAuthClientApplicationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOAuthClientApplicationsResponse_NextToken, v.NextToken)
+		case schemas.ListOAuthClientApplicationsResponse_OAuthClientApplications:
+			return deserializeOAuthClientApplicationSummaryList(d, schemas.ListOAuthClientApplicationsResponse_OAuthClientApplications, &v.OAuthClientApplications)
+		case schemas.ListOAuthClientApplicationsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListOAuthClientApplicationsResponse_RequestId, v.RequestId)
+		case schemas.ListOAuthClientApplicationsResponse_Status:
+			return d.ReadInt32(schemas.ListOAuthClientApplicationsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOAuthClientApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOAuthClientApplications, schemas.ListOAuthClientApplicationsRequest, schemas.ListOAuthClientApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOAuthClientApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOAuthClientApplications, schemas.ListOAuthClientApplicationsRequest, schemas.ListOAuthClientApplicationsResponse), output: &ListOAuthClientApplicationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOAuthClientApplications{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOAuthClientApplications"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListOAuthClientApplicationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOAuthClientApplications(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +150,6 @@ func (c *Client) addOperationListOAuthClientApplicationsMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +253,3 @@ type ListOAuthClientApplicationsAPIClient interface {
 }
 
 var _ ListOAuthClientApplicationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOAuthClientApplications(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOAuthClientApplications",
-	}
-}

@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/subscription-grants
+
+Content-Type: application/json
+
+{"assetTargetNames":[{"assetId":"__AssetId__","targetName":"__TargetName__"},{"assetId":"__AssetId__","targetName":"__TargetName__"}],"clientToken":"__ClientToken__","environmentIdentifier":"__EnvironmentIdentifier__","grantedEntity":{"listing":{"identifier":"__Identifier__","revision":"__Revision__"}},"subscriptionTargetIdentifier":"__SubscriptionTargetIdentifier__"}

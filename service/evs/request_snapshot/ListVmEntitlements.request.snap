@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.ListVmEntitlements
+
+{"connectorId":"__ConnectorId__","entitlementType":"WINDOWS_SERVER","environmentId":"__EnvironmentId__","maxResults":1,"nextToken":"__NextToken__"}

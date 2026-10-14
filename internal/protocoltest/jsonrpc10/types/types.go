@@ -143,10 +143,18 @@ func (v *Defaults) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultByte != nil {
 		s.WriteInt8(schemas.Defaults_defaultByte, *v.DefaultByte)
 	}
-	s.WriteDocument(schemas.Defaults_defaultDocumentBoolean, &smithydocument.Opaque{Value: v.DefaultDocumentBoolean})
-	s.WriteDocument(schemas.Defaults_defaultDocumentList, &smithydocument.Opaque{Value: v.DefaultDocumentList})
-	s.WriteDocument(schemas.Defaults_defaultDocumentMap, &smithydocument.Opaque{Value: v.DefaultDocumentMap})
-	s.WriteDocument(schemas.Defaults_defaultDocumentString, &smithydocument.Opaque{Value: v.DefaultDocumentString})
+	if v.DefaultDocumentBoolean != nil {
+		s.WriteDocument(schemas.Defaults_defaultDocumentBoolean, &smithydocument.Opaque{Value: v.DefaultDocumentBoolean})
+	}
+	if v.DefaultDocumentList != nil {
+		s.WriteDocument(schemas.Defaults_defaultDocumentList, &smithydocument.Opaque{Value: v.DefaultDocumentList})
+	}
+	if v.DefaultDocumentMap != nil {
+		s.WriteDocument(schemas.Defaults_defaultDocumentMap, &smithydocument.Opaque{Value: v.DefaultDocumentMap})
+	}
+	if v.DefaultDocumentString != nil {
+		s.WriteDocument(schemas.Defaults_defaultDocumentString, &smithydocument.Opaque{Value: v.DefaultDocumentString})
+	}
 	if v.DefaultDouble != nil {
 		s.WriteFloat64(schemas.Defaults_defaultDouble, *v.DefaultDouble)
 	}
@@ -167,7 +175,9 @@ func (v *Defaults) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt64(schemas.Defaults_defaultLong, *v.DefaultLong)
 	}
 	serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
-	s.WriteDocument(schemas.Defaults_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
+	if v.DefaultNullDocument != nil {
+		s.WriteDocument(schemas.Defaults_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
+	}
 	if v.DefaultShort != nil {
 		s.WriteInt16(schemas.Defaults_defaultShort, *v.DefaultShort)
 	}

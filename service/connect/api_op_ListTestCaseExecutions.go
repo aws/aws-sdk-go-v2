@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all test case executions and allows filtering by test case id, test case
@@ -61,6 +60,39 @@ type ListTestCaseExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestCaseExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestCaseExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestCaseExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteInt64(schemas.ListTestCaseExecutionsRequest_EndTime, *v.EndTime)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListTestCaseExecutionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestCaseExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestCaseExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteInt64(schemas.ListTestCaseExecutionsRequest_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTestCaseExecutionsRequest_Status, string(v.Status))
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.ListTestCaseExecutionsRequest_TestCaseId, *v.TestCaseId)
+	}
+	if v.TestCaseName != nil {
+		s.WriteString(schemas.ListTestCaseExecutionsRequest_TestCaseName, *v.TestCaseName)
+	}
+}
+
 type ListTestCaseExecutionsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -75,77 +107,51 @@ type ListTestCaseExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestCaseExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestCaseExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestCaseExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestCaseExecutionsResponse_NextToken, *v.NextToken)
+	}
+	serializeTestCaseExecutionList(s, schemas.ListTestCaseExecutionsResponse_TestCaseExecutions, v.TestCaseExecutions)
+}
+func (v *ListTestCaseExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestCaseExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestCaseExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestCaseExecutionsResponse_NextToken, v.NextToken)
+		case schemas.ListTestCaseExecutionsResponse_TestCaseExecutions:
+			return deserializeTestCaseExecutionList(d, schemas.ListTestCaseExecutionsResponse_TestCaseExecutions, &v.TestCaseExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestCaseExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestCaseExecutions, schemas.ListTestCaseExecutionsRequest, schemas.ListTestCaseExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestCaseExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestCaseExecutions, schemas.ListTestCaseExecutionsRequest, schemas.ListTestCaseExecutionsResponse), output: &ListTestCaseExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestCaseExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTestCaseExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTestCaseExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestCaseExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +166,8 @@ func (c *Client) addOperationListTestCaseExecutionsMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListTestCaseExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTestCaseExecutions",
-	}
 }

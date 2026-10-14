@@ -1,0 +1,5 @@
+POST /network-migration/UpdateNetworkMigrationMapperSegment
+
+Content-Type: application/json
+
+{"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","scopeTags":{"key0":"__Value__"},"segmentID":"__SegmentID__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.GetEntityTypes
+
+{"entityTypes":[{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","lastUpdatedTime":"__LastUpdatedTime__","name":"__Name__"},{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","lastUpdatedTime":"__LastUpdatedTime__","name":"__Name__"}],"nextToken":"__NextToken__"}

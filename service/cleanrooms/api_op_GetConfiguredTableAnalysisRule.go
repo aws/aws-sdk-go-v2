@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a configured table analysis rule.
@@ -44,6 +43,38 @@ type GetConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier, *v.ConfiguredTableIdentifier)
+	}
+}
+func (v *GetConfiguredTableAnalysisRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAnalysisRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType:
+			var ev string
+			if err := d.ReadString(schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisRuleType = types.ConfiguredTableAnalysisRuleType(ev)
+			return nil
+		case schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier:
+			v.ConfiguredTableIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier, v.ConfiguredTableIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire analysis rule output.
@@ -57,77 +88,50 @@ type GetConfiguredTableAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredTableAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.ConfiguredTableAnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredTableAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAnalysisRule, schemas.GetConfiguredTableAnalysisRuleInput, schemas.GetConfiguredTableAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAnalysisRule, schemas.GetConfiguredTableAnalysisRuleInput, schemas.GetConfiguredTableAnalysisRuleOutput), output: &GetConfiguredTableAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfiguredTableAnalysisRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConfiguredTableAnalysisRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfiguredTableAnalysisRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +146,8 @@ func (c *Client) addOperationGetConfiguredTableAnalysisRuleMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConfiguredTableAnalysisRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConfiguredTableAnalysisRule",
-	}
 }

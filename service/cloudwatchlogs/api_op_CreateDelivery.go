@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a delivery. A delivery is a connection between a logical delivery
@@ -98,6 +97,31 @@ type CreateDeliveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeliveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeliveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeliveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestinationArn != nil {
+		s.WriteString(schemas.CreateDeliveryRequest_deliveryDestinationArn, *v.DeliveryDestinationArn)
+	}
+	if v.DeliverySourceName != nil {
+		s.WriteString(schemas.CreateDeliveryRequest_deliverySourceName, *v.DeliverySourceName)
+	}
+	if v.FieldDelimiter != nil {
+		s.WriteString(schemas.CreateDeliveryRequest_fieldDelimiter, *v.FieldDelimiter)
+	}
+	serializeRecordFields(s, schemas.CreateDeliveryRequest_recordFields, v.RecordFields)
+	if v.S3DeliveryConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryRequest_s3DeliveryConfiguration)
+		v.S3DeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateDeliveryRequest_tags, v.Tags)
+}
+
 type CreateDeliveryOutput struct {
 
 	// A structure that contains information about the delivery that you just created.
@@ -109,77 +133,50 @@ type CreateDeliveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeliveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeliveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeliveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Delivery != nil {
+		s.WriteStruct(schemas.CreateDeliveryResponse_delivery)
+		v.Delivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDeliveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeliveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeliveryResponse_delivery:
+			v.Delivery = &types.Delivery{}
+			return v.Delivery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeliveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDelivery, schemas.CreateDeliveryRequest, schemas.CreateDeliveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDelivery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDelivery, schemas.CreateDeliveryRequest, schemas.CreateDeliveryResponse), output: &CreateDeliveryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDelivery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDelivery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDeliveryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDelivery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +191,8 @@ func (c *Client) addOperationCreateDeliveryMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDelivery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDelivery",
-	}
 }

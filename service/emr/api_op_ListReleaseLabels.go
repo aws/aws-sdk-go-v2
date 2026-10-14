@@ -5,10 +5,10 @@ package emr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves release labels of Amazon EMR services in the Region where the API is
@@ -50,6 +50,26 @@ type ListReleaseLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReleaseLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReleaseLabelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReleaseLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListReleaseLabelsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReleaseLabelsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReleaseLabelsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListReleaseLabelsOutput struct {
 
 	// Used to paginate the next page of results if specified in the next
@@ -65,74 +85,48 @@ type ListReleaseLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReleaseLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReleaseLabelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReleaseLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReleaseLabelsOutput_NextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListReleaseLabelsOutput_ReleaseLabels, v.ReleaseLabels)
+}
+func (v *ListReleaseLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReleaseLabelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReleaseLabelsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReleaseLabelsOutput_NextToken, v.NextToken)
+		case schemas.ListReleaseLabelsOutput_ReleaseLabels:
+			return deserializeStringList(d, schemas.ListReleaseLabelsOutput_ReleaseLabels, &v.ReleaseLabels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReleaseLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReleaseLabels, schemas.ListReleaseLabelsInput, schemas.ListReleaseLabelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReleaseLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReleaseLabels, schemas.ListReleaseLabelsInput, schemas.ListReleaseLabelsOutput), output: &ListReleaseLabelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReleaseLabels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReleaseLabels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReleaseLabels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +139,6 @@ func (c *Client) addOperationListReleaseLabelsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +240,3 @@ type ListReleaseLabelsAPIClient interface {
 }
 
 var _ ListReleaseLabelsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReleaseLabels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReleaseLabels",
-	}
-}

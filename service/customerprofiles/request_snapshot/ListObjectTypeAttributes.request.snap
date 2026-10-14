@@ -1,0 +1,3 @@
+GET /domains/__DomainName__/object-types/__ObjectTypeName__/attributes?max-results=1&next-token=__NextToken__
+
+

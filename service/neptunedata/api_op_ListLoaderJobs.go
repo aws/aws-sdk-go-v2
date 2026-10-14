@@ -4,13 +4,8 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of the loadIds for all active loader jobs.
@@ -49,21 +44,6 @@ type ListLoaderJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLoaderJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLoaderJobsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLoaderJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncludeQueuedLoads != nil {
-		s.WriteBool(schemas.ListLoaderJobsInput_includeQueuedLoads, *v.IncludeQueuedLoads)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListLoaderJobsInput_limit, *v.Limit)
-	}
-}
-
 type ListLoaderJobsOutput struct {
 
 	// The requested list of job IDs.
@@ -82,85 +62,26 @@ type ListLoaderJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLoaderJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLoaderJobsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLoaderJobsOutput_payload:
-			v.Payload = &types.LoaderIdResult{}
-			return v.Payload.Deserialize(d)
-		case schemas.ListLoaderJobsOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.ListLoaderJobsOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLoaderJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLoaderJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoaderJobs, schemas.ListLoaderJobsInput, schemas.ListLoaderJobsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLoaderJobs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoaderJobs, schemas.ListLoaderJobsInput, schemas.ListLoaderJobsOutput), output: &ListLoaderJobsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLoaderJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLoaderJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +96,8 @@ func (c *Client) addOperationListLoaderJobsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListLoaderJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLoaderJobs",
-	}
 }

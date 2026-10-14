@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/node-groups/__NodegroupName__/update-version
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","force":true,"launchTemplate":{"id":"__Id__","name":"__Name__","version":"__Version__"},"releaseVersion":"__ReleaseVersion__","version":"__Version__"}

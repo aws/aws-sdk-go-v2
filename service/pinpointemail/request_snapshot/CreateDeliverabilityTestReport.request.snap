@@ -1,0 +1,5 @@
+POST /v1/email/deliverability-dashboard/test
+
+Content-Type: application/json
+
+{"Content":{"Raw":{"Data":"YmxvYg=="},"Simple":{"Body":{"Html":{"Charset":"__Charset__","Data":"__Data__"},"Text":{"Charset":"__Charset__","Data":"__Data__"}},"Subject":{"Charset":"__Charset__","Data":"__Data__"}},"Template":{"TemplateArn":"__TemplateArn__","TemplateData":"__TemplateData__"}},"FromEmailAddress":"__FromEmailAddress__","ReportName":"__ReportName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

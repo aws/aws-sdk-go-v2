@@ -6443,6 +6443,13 @@ func awsAwsquery_serializeOpDocumentCreateGlobalReplicationGroupInput(v *CreateG
 		objectKey.String(*v.PrimaryReplicationGroupId)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6678,6 +6685,11 @@ func awsAwsquery_serializeOpDocumentCreateServerlessCacheInput(v *CreateServerle
 		if err := awsAwsquery_serializeDocumentCacheUsageLimits(v.CacheUsageLimits, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ConnectionType) > 0 {
+		objectKey := object.Key("ConnectionType")
+		objectKey.String(string(v.ConnectionType))
 	}
 
 	if v.DailySnapshotTime != nil {

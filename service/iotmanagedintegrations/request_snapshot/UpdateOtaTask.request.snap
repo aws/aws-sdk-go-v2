@@ -1,0 +1,5 @@
+PUT /ota-tasks/__Identifier__
+
+Content-Type: application/json
+
+{"Description":"__Description__","TaskConfigurationId":"__TaskConfigurationId__"}

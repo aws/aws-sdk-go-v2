@@ -204,6 +204,174 @@ func (v *CloudWatchLogsDestination) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The set of conditional rules that determine a field's resolved requirement
+// based on the values of other fields in the same registration form. Attached to
+// fields whose FieldRequirement is CONDITIONAL.
+//
+// Evaluation proceeds top-to-bottom through Rules. The first rule whose
+// conditions all evaluate to true wins and its behavior is returned. If no rule
+// matches, the DefaultBehavior is returned.
+type ConditionalBehavior struct {
+
+	// The field behavior that applies when no conditional rule in Rules matches.
+	// Valid values are REQUIRED, OPTIONAL, and DISALLOWED.
+	//
+	// This member is required.
+	DefaultBehavior *string
+
+	// An ordered list of conditional rules. Rules are evaluated top-to-bottom and the
+	// first rule whose conditions all evaluate to true determines the field's
+	// behavior. Rules whose conditions do not all match are skipped and evaluation
+	// continues to the next rule.
+	//
+	// This member is required.
+	Rules []ConditionalRule
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBehavior != nil {
+		s.WriteString(schemas.ConditionalBehavior_DefaultBehavior, *v.DefaultBehavior)
+	}
+	serializeConditionalRuleList(s, schemas.ConditionalBehavior_Rules, v.Rules)
+}
+func (v *ConditionalBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalBehavior_DefaultBehavior:
+			v.DefaultBehavior = new(string)
+			return d.ReadString(schemas.ConditionalBehavior_DefaultBehavior, v.DefaultBehavior)
+		case schemas.ConditionalBehavior_Rules:
+			return deserializeConditionalRuleList(d, schemas.ConditionalBehavior_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
+// A single conditional rule that resolves to a field behavior when all of its
+// conditions evaluate to true. Conditions within a rule are combined with logical
+// AND: all conditions must match for the rule to fire.
+type ConditionalRule struct {
+
+	// The conditions that must all evaluate to true for this rule to match.
+	// Conditions are combined with logical AND. Use multiple rules with the same
+	// RuleBehavior to express logical OR.
+	//
+	// This member is required.
+	Conditions []FieldCondition
+
+	// The field behavior that applies when all conditions in this rule match. Valid
+	// values are REQUIRED, OPTIONAL, and DISALLOWED.
+	//
+	// This member is required.
+	RuleBehavior *string
+
+	// Optional per-rule validation constraints (minimum length, maximum length, regex
+	// pattern, allowed select values) that override the field's default validation
+	// when this rule matches.
+	ConditionalValidation *ConditionalValidation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionalValidation != nil {
+		s.WriteStruct(schemas.ConditionalRule_ConditionalValidation)
+		v.ConditionalValidation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFieldConditionList(s, schemas.ConditionalRule_Conditions, v.Conditions)
+	if v.RuleBehavior != nil {
+		s.WriteString(schemas.ConditionalRule_RuleBehavior, *v.RuleBehavior)
+	}
+}
+func (v *ConditionalRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalRule_ConditionalValidation:
+			v.ConditionalValidation = &ConditionalValidation{}
+			return v.ConditionalValidation.Deserialize(d)
+		case schemas.ConditionalRule_Conditions:
+			return deserializeFieldConditionList(d, schemas.ConditionalRule_Conditions, &v.Conditions)
+		case schemas.ConditionalRule_RuleBehavior:
+			v.RuleBehavior = new(string)
+			return d.ReadString(schemas.ConditionalRule_RuleBehavior, v.RuleBehavior)
+		}
+		return nil
+	})
+}
+
+// Per-rule validation constraints that override the field's default validation
+// when the containing rule matches. All fields are optional; only the constraints
+// that need to differ from the field's default validation are provided.
+type ConditionalValidation struct {
+
+	// The allowed values for a select field when this rule applies. A subset of the
+	// field's full option list.
+	AllowedValues []string
+
+	// The maximum length for the field value when this rule applies.
+	MaxLength *int32
+
+	// The minimum length for the field value when this rule applies.
+	MinLength *int32
+
+	// A regular expression that the field value must match when this rule applies.
+	Pattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalValidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalValidation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalValidation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSelectChoiceList(s, schemas.ConditionalValidation_AllowedValues, v.AllowedValues)
+	if v.MaxLength != nil {
+		s.WriteInt32(schemas.ConditionalValidation_MaxLength, *v.MaxLength)
+	}
+	if v.MinLength != nil {
+		s.WriteInt32(schemas.ConditionalValidation_MinLength, *v.MinLength)
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.ConditionalValidation_Pattern, *v.Pattern)
+	}
+}
+func (v *ConditionalValidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalValidation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalValidation_AllowedValues:
+			return deserializeSelectChoiceList(d, schemas.ConditionalValidation_AllowedValues, &v.AllowedValues)
+		case schemas.ConditionalValidation_MaxLength:
+			v.MaxLength = new(int32)
+			return d.ReadInt32(schemas.ConditionalValidation_MaxLength, v.MaxLength)
+		case schemas.ConditionalValidation_MinLength:
+			v.MinLength = new(int32)
+			return d.ReadInt32(schemas.ConditionalValidation_MinLength, v.MinLength)
+		case schemas.ConditionalValidation_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.ConditionalValidation_Pattern, v.Pattern)
+		}
+		return nil
+	})
+}
+
 // The information for configuration sets that meet a specified criteria.
 type ConfigurationSetFilter struct {
 
@@ -573,6 +741,64 @@ func (v *EventDestination) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A single condition on a dependency field's value. Conditions are combined into
+// a ConditionalRule and evaluated together with logical AND.
+type FieldCondition struct {
+
+	// The path of the field whose value determines this condition, for example
+	// companyInfo.businessType.
+	//
+	// This member is required.
+	DependsOnFieldPath *string
+
+	// The comparison operator to apply between the dependency field's value and
+	// Values. Valid values are EQUALS, NOT_EQUALS, IN, NOT_IN, HAS_VALUE, and
+	// NO_VALUE. Operators not in this list are treated as evaluating to false, which
+	// causes the containing rule to be skipped. This allows forward-compatible
+	// additions of new operators without breaking older SDK clients.
+	//
+	// This member is required.
+	Operator *string
+
+	// The values to compare the dependency field's value against. Required for the
+	// EQUALS, NOT_EQUALS, IN, and NOT_IN operators. Omitted for HAS_VALUE and
+	// NO_VALUE, which test only presence.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependsOnFieldPath != nil {
+		s.WriteString(schemas.FieldCondition_DependsOnFieldPath, *v.DependsOnFieldPath)
+	}
+	if v.Operator != nil {
+		s.WriteString(schemas.FieldCondition_Operator, *v.Operator)
+	}
+	serializeConditionValueList(s, schemas.FieldCondition_Values, v.Values)
+}
+func (v *FieldCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldCondition_DependsOnFieldPath:
+			v.DependsOnFieldPath = new(string)
+			return d.ReadString(schemas.FieldCondition_DependsOnFieldPath, v.DependsOnFieldPath)
+		case schemas.FieldCondition_Operator:
+			v.Operator = new(string)
+			return d.ReadString(schemas.FieldCondition_Operator, v.Operator)
+		case schemas.FieldCondition_Values:
+			return deserializeConditionValueList(d, schemas.FieldCondition_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The information for keywords that meet a specified criteria.
 type KeywordFilter struct {
 
@@ -722,6 +948,45 @@ func (v *KinesisFirehoseDestination) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.KinesisFirehoseDestination_IamRoleArn:
 			v.IamRoleArn = new(string)
 			return d.ReadString(schemas.KinesisFirehoseDestination_IamRoleArn, v.IamRoleArn)
+		}
+		return nil
+	})
+}
+
+// The messaging limits that apply to an origination identity, such as a phone
+// number, sender ID, or RCS agent. Includes the per-capability send rates and, for
+// supported origination identities, advisory per-provider daily message caps.
+type MessagingLimits struct {
+
+	// The advisory maximum number of messages that can be sent per day, keyed by
+	// provider (for example, T-MOBILE ). Applies to 10DLC phone numbers and is omitted
+	// when no daily cap applies.
+	DailyMessageCaps map[string]int64
+
+	// The maximum send rate for each supported capability, in messages per second.
+	// The map is keyed by capability, such as SMS , MMS , VOICE , or RCS .
+	RateLimits map[string]int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *MessagingLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessagingLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessagingLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLongMap(s, schemas.MessagingLimits_DailyMessageCaps, v.DailyMessageCaps)
+	serializeLongMap(s, schemas.MessagingLimits_RateLimits, v.RateLimits)
+}
+func (v *MessagingLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessagingLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessagingLimits_DailyMessageCaps:
+			return deserializeLongMap(d, schemas.MessagingLimits_DailyMessageCaps, &v.DailyMessageCaps)
+		case schemas.MessagingLimits_RateLimits:
+			return deserializeLongMap(d, schemas.MessagingLimits_RateLimits, &v.RateLimits)
 		}
 		return nil
 	})
@@ -1211,6 +1476,54 @@ func (v *NotifyTemplateInformation) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// A single number preference that specifies how to match available phone numbers.
+// Each preference pairs a match type with one or more filter values.
+type NumberPreferenceItem struct {
+
+	// The digit pattern values to match against available phone numbers, using the
+	// specified preference type.
+	//
+	// This member is required.
+	Filter []string
+
+	// The type of match to apply to the filter values.
+	//
+	//   - StartsWith : Returns numbers that begin with the filter value.
+	//
+	//   - EndsWith : Returns numbers that end with the filter value.
+	//
+	//   - Contains : Returns numbers that contain the filter value.
+	//
+	//   - ExactMatch : Returns the number that exactly matches the filter value.
+	//
+	// This member is required.
+	PreferenceType []PreferenceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *NumberPreferenceItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberPreferenceItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberPreferenceItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNumberFilterList(s, schemas.NumberPreferenceItem_Filter, v.Filter)
+	serializePreferenceTypeList(s, schemas.NumberPreferenceItem_PreferenceType, v.PreferenceType)
+}
+func (v *NumberPreferenceItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberPreferenceItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberPreferenceItem_Filter:
+			return deserializeNumberFilterList(d, schemas.NumberPreferenceItem_Filter, &v.Filter)
+		case schemas.NumberPreferenceItem_PreferenceType:
+			return deserializePreferenceTypeList(d, schemas.NumberPreferenceItem_PreferenceType, &v.PreferenceType)
+		}
+		return nil
+	})
+}
+
 // The information for opted out numbers that meet a specified criteria.
 type OptedOutFilter struct {
 
@@ -1573,11 +1886,18 @@ type PhoneNumberInformation struct {
 	// When set to true the international sending of phone number is Enabled.
 	InternationalSendingEnabled bool
 
+	// The messaging limits that apply to the phone number, including the
+	// per-capability send rates and any advisory per-provider daily message caps.
+	MessagingLimits *MessagingLimits
+
 	// The unique identifier for the phone number.
 	PhoneNumberId *string
 
 	// The unique identifier of the pool associated with the phone number.
 	PoolId *string
+
+	// The pricing model.
+	PricingTier *string
 
 	// The unique identifier for the registration.
 	RegistrationId *string
@@ -1612,6 +1932,11 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageType != "" {
 		s.WriteString(schemas.PhoneNumberInformation_MessageType, string(v.MessageType))
 	}
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.PhoneNumberInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.PhoneNumberInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
@@ -1633,6 +1958,9 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PoolId != nil {
 		s.WriteString(schemas.PhoneNumberInformation_PoolId, *v.PoolId)
+	}
+	if v.PricingTier != nil {
+		s.WriteString(schemas.PhoneNumberInformation_PricingTier, *v.PricingTier)
 	}
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.PhoneNumberInformation_RegistrationId, *v.RegistrationId)
@@ -1669,6 +1997,9 @@ func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.MessageType = MessageType(ev)
 			return nil
+		case schemas.PhoneNumberInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.PhoneNumberInformation_MonthlyLeasingPrice:
 			v.MonthlyLeasingPrice = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
@@ -1696,6 +2027,9 @@ func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PhoneNumberInformation_PoolId:
 			v.PoolId = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_PoolId, v.PoolId)
+		case schemas.PhoneNumberInformation_PricingTier:
+			v.PricingTier = new(string)
+			return d.ReadString(schemas.PhoneNumberInformation_PricingTier, v.PricingTier)
 		case schemas.PhoneNumberInformation_RegistrationId:
 			v.RegistrationId = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_RegistrationId, v.RegistrationId)
@@ -2349,6 +2683,10 @@ type RcsAgentInformation struct {
 	// This member is required.
 	TwoWayEnabled bool
 
+	// The messaging limits that apply to the RCS agent, including the per-capability
+	// send rates.
+	MessagingLimits *MessagingLimits
+
 	// The name of the OptOutList associated with the RCS agent.
 	OptOutListName *string
 
@@ -2365,6 +2703,18 @@ type RcsAgentInformation struct {
 	// SMS messages.
 	TwoWayChannelRole *string
 
+	// The name of the S3 bucket where inbound RCS media files are stored.
+	TwoWayMediaS3BucketName *string
+
+	// The key prefix used for inbound RCS media objects in the S3 bucket.
+	TwoWayMediaS3KeyPrefix *string
+
+	// The ARN of the IAM role used to write inbound RCS media files to the S3 bucket.
+	TwoWayMediaS3Role *string
+
+	// The list of RCS event types enabled for two-way messaging on the agent.
+	TwoWayRcsEventsEnabled []string
+
 	noSmithyDocumentSerde
 }
 
@@ -2379,6 +2729,11 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteTime(schemas.RcsAgentInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
 	s.WriteBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.RcsAgentInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.RcsAgentInformation_OptOutListName, *v.OptOutListName)
 	}
@@ -2407,6 +2762,16 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.RcsAgentInformation_TwoWayChannelRole, *v.TwoWayChannelRole)
 	}
 	s.WriteBool(schemas.RcsAgentInformation_TwoWayEnabled, v.TwoWayEnabled)
+	if v.TwoWayMediaS3BucketName != nil {
+		s.WriteString(schemas.RcsAgentInformation_TwoWayMediaS3BucketName, *v.TwoWayMediaS3BucketName)
+	}
+	if v.TwoWayMediaS3KeyPrefix != nil {
+		s.WriteString(schemas.RcsAgentInformation_TwoWayMediaS3KeyPrefix, *v.TwoWayMediaS3KeyPrefix)
+	}
+	if v.TwoWayMediaS3Role != nil {
+		s.WriteString(schemas.RcsAgentInformation_TwoWayMediaS3Role, *v.TwoWayMediaS3Role)
+	}
+	serializeRcsEventTypeList(s, schemas.RcsAgentInformation_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
 }
 func (v *RcsAgentInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RcsAgentInformation, func(s *smithy.Schema) error {
@@ -2416,6 +2781,9 @@ func (v *RcsAgentInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadTime(schemas.RcsAgentInformation_CreatedTimestamp, v.CreatedTimestamp)
 		case schemas.RcsAgentInformation_DeletionProtectionEnabled:
 			return d.ReadBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.RcsAgentInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.RcsAgentInformation_OptOutListName:
 			v.OptOutListName = new(string)
 			return d.ReadString(schemas.RcsAgentInformation_OptOutListName, v.OptOutListName)
@@ -2448,6 +2816,1116 @@ func (v *RcsAgentInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.RcsAgentInformation_TwoWayChannelRole, v.TwoWayChannelRole)
 		case schemas.RcsAgentInformation_TwoWayEnabled:
 			return d.ReadBool(schemas.RcsAgentInformation_TwoWayEnabled, &v.TwoWayEnabled)
+		case schemas.RcsAgentInformation_TwoWayMediaS3BucketName:
+			v.TwoWayMediaS3BucketName = new(string)
+			return d.ReadString(schemas.RcsAgentInformation_TwoWayMediaS3BucketName, v.TwoWayMediaS3BucketName)
+		case schemas.RcsAgentInformation_TwoWayMediaS3KeyPrefix:
+			v.TwoWayMediaS3KeyPrefix = new(string)
+			return d.ReadString(schemas.RcsAgentInformation_TwoWayMediaS3KeyPrefix, v.TwoWayMediaS3KeyPrefix)
+		case schemas.RcsAgentInformation_TwoWayMediaS3Role:
+			v.TwoWayMediaS3Role = new(string)
+			return d.ReadString(schemas.RcsAgentInformation_TwoWayMediaS3Role, v.TwoWayMediaS3Role)
+		case schemas.RcsAgentInformation_TwoWayRcsEventsEnabled:
+			return deserializeRcsEventTypeList(d, schemas.RcsAgentInformation_TwoWayRcsEventsEnabled, &v.TwoWayRcsEventsEnabled)
+		}
+		return nil
+	})
+}
+
+// The content of a rich card, including title, description, media, and card-level
+// suggested actions.
+type RcsCardContent struct {
+
+	// The description text of the card. Maximum 2000 characters.
+	Description *string
+
+	// The media content of the card, including the file URL, optional thumbnail, and
+	// display height.
+	Media *RcsCardMedia
+
+	// Card-level suggested actions. Maximum 4 suggestions per card.
+	Suggestions []RcsSuggestedAction
+
+	// The title of the card. Maximum 200 characters.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCardContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCardContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCardContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RcsCardContent_Description, *v.Description)
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.RcsCardContent_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRcsCardSuggestedActionList(s, schemas.RcsCardContent_Suggestions, v.Suggestions)
+	if v.Title != nil {
+		s.WriteString(schemas.RcsCardContent_Title, *v.Title)
+	}
+}
+func (v *RcsCardContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCardContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCardContent_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RcsCardContent_Description, v.Description)
+		case schemas.RcsCardContent_Media:
+			v.Media = &RcsCardMedia{}
+			return v.Media.Deserialize(d)
+		case schemas.RcsCardContent_Suggestions:
+			return deserializeRcsCardSuggestedActionList(d, schemas.RcsCardContent_Suggestions, &v.Suggestions)
+		case schemas.RcsCardContent_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.RcsCardContent_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// The media content of a rich card, including the file URL, optional thumbnail,
+// and display height.
+type RcsCardMedia struct {
+
+	// The S3 URI of the media file for the card, in the format s3://bucket-name/key .
+	// Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The display height of the media in the card. Valid values are SHORT, MEDIUM,
+	// and TALL.
+	Height *string
+
+	// The S3 URI of an optional thumbnail image for the card media. Maximum 2000
+	// characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCardMedia) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCardMedia)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCardMedia) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileUrl != nil {
+		s.WriteString(schemas.RcsCardMedia_FileUrl, *v.FileUrl)
+	}
+	if v.Height != nil {
+		s.WriteString(schemas.RcsCardMedia_Height, *v.Height)
+	}
+	if v.ThumbnailUrl != nil {
+		s.WriteString(schemas.RcsCardMedia_ThumbnailUrl, *v.ThumbnailUrl)
+	}
+}
+func (v *RcsCardMedia) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCardMedia, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCardMedia_FileUrl:
+			v.FileUrl = new(string)
+			return d.ReadString(schemas.RcsCardMedia_FileUrl, v.FileUrl)
+		case schemas.RcsCardMedia_Height:
+			v.Height = new(string)
+			return d.ReadString(schemas.RcsCardMedia_Height, v.Height)
+		case schemas.RcsCardMedia_ThumbnailUrl:
+			v.ThumbnailUrl = new(string)
+			return d.ReadString(schemas.RcsCardMedia_ThumbnailUrl, v.ThumbnailUrl)
+		}
+		return nil
+	})
+}
+
+// A carousel of 2 to 10 scrollable rich cards.
+type RcsCarousel struct {
+
+	// The list of cards in the carousel. Minimum 2, maximum 10 cards.
+	//
+	// This member is required.
+	CardContents []RcsCarouselCardContent
+
+	// The width of cards in the carousel. Valid values are SMALL and MEDIUM.
+	//
+	// This member is required.
+	CardWidth *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCarousel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCarousel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCarousel) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRcsCarouselCardContentList(s, schemas.RcsCarousel_CardContents, v.CardContents)
+	if v.CardWidth != nil {
+		s.WriteString(schemas.RcsCarousel_CardWidth, *v.CardWidth)
+	}
+}
+func (v *RcsCarousel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCarousel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCarousel_CardContents:
+			return deserializeRcsCarouselCardContentList(d, schemas.RcsCarousel_CardContents, &v.CardContents)
+		case schemas.RcsCarousel_CardWidth:
+			v.CardWidth = new(string)
+			return d.ReadString(schemas.RcsCarousel_CardWidth, v.CardWidth)
+		}
+		return nil
+	})
+}
+
+// The content of a carousel card, including title, description, media, and
+// card-level suggested actions. Media height is restricted to SHORT or MEDIUM.
+type RcsCarouselCardContent struct {
+
+	// The description text of the carousel card. Maximum 2000 characters.
+	Description *string
+
+	// The media content of the carousel card. Media height is restricted to SHORT or
+	// MEDIUM (TALL is not supported in carousels).
+	Media *RcsCarouselCardMedia
+
+	// Card-level suggested actions for this carousel card. Maximum 4 suggestions per
+	// card.
+	Suggestions []RcsSuggestedAction
+
+	// The title of the carousel card. Maximum 200 characters.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCarouselCardContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCarouselCardContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCarouselCardContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RcsCarouselCardContent_Description, *v.Description)
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.RcsCarouselCardContent_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRcsCardSuggestedActionList(s, schemas.RcsCarouselCardContent_Suggestions, v.Suggestions)
+	if v.Title != nil {
+		s.WriteString(schemas.RcsCarouselCardContent_Title, *v.Title)
+	}
+}
+func (v *RcsCarouselCardContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCarouselCardContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCarouselCardContent_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RcsCarouselCardContent_Description, v.Description)
+		case schemas.RcsCarouselCardContent_Media:
+			v.Media = &RcsCarouselCardMedia{}
+			return v.Media.Deserialize(d)
+		case schemas.RcsCarouselCardContent_Suggestions:
+			return deserializeRcsCardSuggestedActionList(d, schemas.RcsCarouselCardContent_Suggestions, &v.Suggestions)
+		case schemas.RcsCarouselCardContent_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.RcsCarouselCardContent_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// The media content of a carousel card. Display height is restricted to SHORT or
+// MEDIUM (TALL is not supported in carousels).
+type RcsCarouselCardMedia struct {
+
+	// The S3 URI of the media file for the carousel card. Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The display height of the media in the carousel card. Valid values are SHORT
+	// and MEDIUM.
+	Height *string
+
+	// The S3 URI of an optional thumbnail image for the carousel card media. Maximum
+	// 2000 characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCarouselCardMedia) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCarouselCardMedia)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCarouselCardMedia) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileUrl != nil {
+		s.WriteString(schemas.RcsCarouselCardMedia_FileUrl, *v.FileUrl)
+	}
+	if v.Height != nil {
+		s.WriteString(schemas.RcsCarouselCardMedia_Height, *v.Height)
+	}
+	if v.ThumbnailUrl != nil {
+		s.WriteString(schemas.RcsCarouselCardMedia_ThumbnailUrl, *v.ThumbnailUrl)
+	}
+}
+func (v *RcsCarouselCardMedia) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCarouselCardMedia, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCarouselCardMedia_FileUrl:
+			v.FileUrl = new(string)
+			return d.ReadString(schemas.RcsCarouselCardMedia_FileUrl, v.FileUrl)
+		case schemas.RcsCarouselCardMedia_Height:
+			v.Height = new(string)
+			return d.ReadString(schemas.RcsCarouselCardMedia_Height, v.Height)
+		case schemas.RcsCarouselCardMedia_ThumbnailUrl:
+			v.ThumbnailUrl = new(string)
+			return d.ReadString(schemas.RcsCarouselCardMedia_ThumbnailUrl, v.ThumbnailUrl)
+		}
+		return nil
+	})
+}
+
+// The message body of an RCS message. Exactly one content type must be specified.
+//
+// The following types satisfy this interface:
+//
+//	RcsContentMemberCarousel
+//	RcsContentMemberFileMessage
+//	RcsContentMemberRichCard
+//	RcsContentMemberTextMessage
+type RcsContent interface {
+	isRcsContent()
+}
+
+// A carousel of 2 to 10 scrollable cards, each with media, title, description,
+// and suggested actions.
+type RcsContentMemberCarousel struct {
+	Value RcsCarousel
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberCarousel) isRcsContent() {}
+func (v *RcsContentMemberCarousel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsContent_Carousel)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsContentMemberCarousel) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A file message containing a media file (image, video, audio, or PDF) with an
+// optional thumbnail.
+type RcsContentMemberFileMessage struct {
+	Value RcsFileMessage
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberFileMessage) isRcsContent() {}
+func (v *RcsContentMemberFileMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsContent_FileMessage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsContentMemberFileMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A standalone rich card with media, title, description, and suggested actions.
+type RcsContentMemberRichCard struct {
+	Value RcsStandaloneCard
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberRichCard) isRcsContent() {}
+func (v *RcsContentMemberRichCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsContent_RichCard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsContentMemberRichCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A plain text RCS message.
+type RcsContentMemberTextMessage struct {
+	Value RcsTextMessage
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsContentMemberTextMessage) isRcsContent() {}
+func (v *RcsContentMemberTextMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsContent_TextMessage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsContentMemberTextMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested action that creates a calendar event on the recipient's device.
+type RcsCreateCalendarEventAction struct {
+
+	// The end time of the calendar event in ISO 8601 format.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The start time of the calendar event in ISO 8601 format.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// The title of the calendar event. Maximum 100 characters.
+	//
+	// This member is required.
+	Title *string
+
+	// An optional description for the calendar event. Maximum 500 characters.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsCreateCalendarEventAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsCreateCalendarEventAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsCreateCalendarEventAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RcsCreateCalendarEventAction_Description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.RcsCreateCalendarEventAction_EndTime, *v.EndTime)
+	}
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsCreateCalendarEventAction_PostbackData, *v.PostbackData)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.RcsCreateCalendarEventAction_StartTime, *v.StartTime)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsCreateCalendarEventAction_Text, *v.Text)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.RcsCreateCalendarEventAction_Title, *v.Title)
+	}
+}
+func (v *RcsCreateCalendarEventAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsCreateCalendarEventAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsCreateCalendarEventAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RcsCreateCalendarEventAction_Description, v.Description)
+		case schemas.RcsCreateCalendarEventAction_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.RcsCreateCalendarEventAction_EndTime, v.EndTime)
+		case schemas.RcsCreateCalendarEventAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsCreateCalendarEventAction_PostbackData, v.PostbackData)
+		case schemas.RcsCreateCalendarEventAction_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.RcsCreateCalendarEventAction_StartTime, v.StartTime)
+		case schemas.RcsCreateCalendarEventAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsCreateCalendarEventAction_Text, v.Text)
+		case schemas.RcsCreateCalendarEventAction_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.RcsCreateCalendarEventAction_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// A suggested action that initiates a phone call to a specified number when
+// tapped by the recipient.
+type RcsDialPhoneAction struct {
+
+	// The phone number to dial in E.164 format.
+	//
+	// This member is required.
+	PhoneNumber *string
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsDialPhoneAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsDialPhoneAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsDialPhoneAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.RcsDialPhoneAction_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsDialPhoneAction_PostbackData, *v.PostbackData)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsDialPhoneAction_Text, *v.Text)
+	}
+}
+func (v *RcsDialPhoneAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsDialPhoneAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsDialPhoneAction_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.RcsDialPhoneAction_PhoneNumber, v.PhoneNumber)
+		case schemas.RcsDialPhoneAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsDialPhoneAction_PostbackData, v.PostbackData)
+		case schemas.RcsDialPhoneAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsDialPhoneAction_Text, v.Text)
+		}
+		return nil
+	})
+}
+
+// Configuration for SMS or MMS fallback when RCS delivery fails or the TimeToLive
+// expires without delivery confirmation.
+type RcsFallbackConfiguration struct {
+
+	// The fallback channel to use when RCS delivery fails. Valid values are SMS and
+	// MMS. SMS and MMS are mutually exclusive.
+	//
+	// This member is required.
+	Channel RcsFallbackChannel
+
+	// An array of S3 URIs to media files for MMS fallback. Only valid when Channel is
+	// MMS.
+	MediaUrls []string
+
+	// The text body of the fallback message. Required for SMS fallback. For MMS
+	// fallback, at least one of MessageBody or MediaUrls must be provided.
+	MessageBody *string
+
+	// The origination identity to use for the fallback message. This can be a
+	// PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, or SenderIdArn. Pool IDs
+	// and pool ARNs are not accepted. If not specified and the original message was
+	// sent via a pool, the service selects a suitable number from the pool.
+	OriginationIdentity *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsFallbackConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsFallbackConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsFallbackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != "" {
+		s.WriteString(schemas.RcsFallbackConfiguration_Channel, string(v.Channel))
+	}
+	serializeMediaUrlList(s, schemas.RcsFallbackConfiguration_MediaUrls, v.MediaUrls)
+	if v.MessageBody != nil {
+		s.WriteString(schemas.RcsFallbackConfiguration_MessageBody, *v.MessageBody)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.RcsFallbackConfiguration_OriginationIdentity, *v.OriginationIdentity)
+	}
+}
+func (v *RcsFallbackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsFallbackConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsFallbackConfiguration_Channel:
+			var ev string
+			if err := d.ReadString(schemas.RcsFallbackConfiguration_Channel, &ev); err != nil {
+				return err
+			}
+			v.Channel = RcsFallbackChannel(ev)
+			return nil
+		case schemas.RcsFallbackConfiguration_MediaUrls:
+			return deserializeMediaUrlList(d, schemas.RcsFallbackConfiguration_MediaUrls, &v.MediaUrls)
+		case schemas.RcsFallbackConfiguration_MessageBody:
+			v.MessageBody = new(string)
+			return d.ReadString(schemas.RcsFallbackConfiguration_MessageBody, v.MessageBody)
+		case schemas.RcsFallbackConfiguration_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.RcsFallbackConfiguration_OriginationIdentity, v.OriginationIdentity)
+		}
+		return nil
+	})
+}
+
+// A file message containing a media file (image, video, audio, or PDF) with an
+// optional thumbnail.
+type RcsFileMessage struct {
+
+	// The S3 URI of the media file to send, in the format s3://bucket-name/key . The
+	// service downloads the file from your S3 bucket, rehosts it, and generates a
+	// presigned URL for the aggregator. Maximum 2000 characters.
+	//
+	// This member is required.
+	FileUrl *string
+
+	// The S3 URI of an optional thumbnail image for the media file, in the format
+	// s3://bucket-name/key . Maximum 2000 characters.
+	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsFileMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsFileMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsFileMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileUrl != nil {
+		s.WriteString(schemas.RcsFileMessage_FileUrl, *v.FileUrl)
+	}
+	if v.ThumbnailUrl != nil {
+		s.WriteString(schemas.RcsFileMessage_ThumbnailUrl, *v.ThumbnailUrl)
+	}
+}
+func (v *RcsFileMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsFileMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsFileMessage_FileUrl:
+			v.FileUrl = new(string)
+			return d.ReadString(schemas.RcsFileMessage_FileUrl, v.FileUrl)
+		case schemas.RcsFileMessage_ThumbnailUrl:
+			v.ThumbnailUrl = new(string)
+			return d.ReadString(schemas.RcsFileMessage_ThumbnailUrl, v.ThumbnailUrl)
+		}
+		return nil
+	})
+}
+
+// The content of an RCS message, containing the message body (text, file, rich
+// card, or carousel) and optional message-level suggested actions.
+type RcsMessageContent struct {
+
+	// The content of the RCS message. Exactly one content type must be specified:
+	// TextMessage, FileMessage, RichCard, or Carousel.
+	//
+	// This member is required.
+	Content RcsContent
+
+	// Message-level suggested actions displayed to the recipient. Maximum 11
+	// suggestions per message.
+	Suggestions []RcsSuggestedAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsMessageContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsMessageContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsMessageContent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRcsContent(s, schemas.RcsMessageContent_Content, v.Content)
+	serializeRcsSuggestedActionList(s, schemas.RcsMessageContent_Suggestions, v.Suggestions)
+}
+func (v *RcsMessageContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsMessageContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsMessageContent_Content:
+			return deserializeRcsContent(d, schemas.RcsMessageContent_Content, &v.Content)
+		case schemas.RcsMessageContent_Suggestions:
+			return deserializeRcsSuggestedActionList(d, schemas.RcsMessageContent_Suggestions, &v.Suggestions)
+		}
+		return nil
+	})
+}
+
+// A suggested action that opens a URL in the recipient's browser or an in-app
+// webview.
+type RcsOpenUrlAction struct {
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// The URL to open. Must start with https://. Maximum 2048 characters.
+	//
+	// This member is required.
+	Url *string
+
+	// How to open the URL. BROWSER opens in the device's default browser. WEBVIEW
+	// opens in an in-app webview.
+	Application *string
+
+	// The display mode of the webview. Valid values are FULL, HALF, and TALL. Only
+	// applicable when Application is WEBVIEW.
+	WebviewViewMode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsOpenUrlAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsOpenUrlAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsOpenUrlAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.RcsOpenUrlAction_Application, *v.Application)
+	}
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsOpenUrlAction_PostbackData, *v.PostbackData)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsOpenUrlAction_Text, *v.Text)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.RcsOpenUrlAction_Url, *v.Url)
+	}
+	if v.WebviewViewMode != nil {
+		s.WriteString(schemas.RcsOpenUrlAction_WebviewViewMode, *v.WebviewViewMode)
+	}
+}
+func (v *RcsOpenUrlAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsOpenUrlAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsOpenUrlAction_Application:
+			v.Application = new(string)
+			return d.ReadString(schemas.RcsOpenUrlAction_Application, v.Application)
+		case schemas.RcsOpenUrlAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsOpenUrlAction_PostbackData, v.PostbackData)
+		case schemas.RcsOpenUrlAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsOpenUrlAction_Text, v.Text)
+		case schemas.RcsOpenUrlAction_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.RcsOpenUrlAction_Url, v.Url)
+		case schemas.RcsOpenUrlAction_WebviewViewMode:
+			v.WebviewViewMode = new(string)
+			return d.ReadString(schemas.RcsOpenUrlAction_WebviewViewMode, v.WebviewViewMode)
+		}
+		return nil
+	})
+}
+
+// A suggested reply action that sends predefined text and postback data when
+// tapped by the recipient.
+type RcsReplyAction struct {
+
+	// The postback data sent to your webhook when the user taps this reply. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the suggested reply. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsReplyAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsReplyAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsReplyAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsReplyAction_PostbackData, *v.PostbackData)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsReplyAction_Text, *v.Text)
+	}
+}
+func (v *RcsReplyAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsReplyAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsReplyAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsReplyAction_PostbackData, v.PostbackData)
+		case schemas.RcsReplyAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsReplyAction_Text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A suggested action that requests the recipient's current location.
+type RcsRequestLocationAction struct {
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsRequestLocationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsRequestLocationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsRequestLocationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsRequestLocationAction_PostbackData, *v.PostbackData)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsRequestLocationAction_Text, *v.Text)
+	}
+}
+func (v *RcsRequestLocationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsRequestLocationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsRequestLocationAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsRequestLocationAction_PostbackData, v.PostbackData)
+		case schemas.RcsRequestLocationAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsRequestLocationAction_Text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A suggested action that shows a location on a map when tapped by the recipient.
+type RcsShowLocationAction struct {
+
+	// The latitude of the location. Valid values are -90 to 90.
+	//
+	// This member is required.
+	Latitude *float64
+
+	// The longitude of the location. Valid values are -180 to 180.
+	//
+	// This member is required.
+	Longitude *float64
+
+	// The postback data sent to your webhook when the user taps this action. Maximum
+	// 2048 characters.
+	//
+	// This member is required.
+	PostbackData *string
+
+	// The display text of the action. Maximum 25 characters.
+	//
+	// This member is required.
+	Text *string
+
+	// An optional label for the location pin. Maximum 100 characters.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsShowLocationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsShowLocationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsShowLocationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Label != nil {
+		s.WriteString(schemas.RcsShowLocationAction_Label, *v.Label)
+	}
+	if v.Latitude != nil {
+		s.WriteFloat64(schemas.RcsShowLocationAction_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteFloat64(schemas.RcsShowLocationAction_Longitude, *v.Longitude)
+	}
+	if v.PostbackData != nil {
+		s.WriteString(schemas.RcsShowLocationAction_PostbackData, *v.PostbackData)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RcsShowLocationAction_Text, *v.Text)
+	}
+}
+func (v *RcsShowLocationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsShowLocationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsShowLocationAction_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.RcsShowLocationAction_Label, v.Label)
+		case schemas.RcsShowLocationAction_Latitude:
+			v.Latitude = new(float64)
+			return d.ReadFloat64(schemas.RcsShowLocationAction_Latitude, v.Latitude)
+		case schemas.RcsShowLocationAction_Longitude:
+			v.Longitude = new(float64)
+			return d.ReadFloat64(schemas.RcsShowLocationAction_Longitude, v.Longitude)
+		case schemas.RcsShowLocationAction_PostbackData:
+			v.PostbackData = new(string)
+			return d.ReadString(schemas.RcsShowLocationAction_PostbackData, v.PostbackData)
+		case schemas.RcsShowLocationAction_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RcsShowLocationAction_Text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A standalone rich card with media, title, description, and suggested actions.
+type RcsStandaloneCard struct {
+
+	// The content of the rich card, including title, description, media, and
+	// card-level suggested actions.
+	//
+	// This member is required.
+	CardContent *RcsCardContent
+
+	// The orientation of the rich card. Valid values are HORIZONTAL and VERTICAL.
+	//
+	// This member is required.
+	CardOrientation *string
+
+	// The alignment of the thumbnail image in a horizontal card. Valid values are
+	// LEFT and RIGHT. Only applicable when CardOrientation is HORIZONTAL.
+	ThumbnailImageAlignment *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsStandaloneCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsStandaloneCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsStandaloneCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CardContent != nil {
+		s.WriteStruct(schemas.RcsStandaloneCard_CardContent)
+		v.CardContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CardOrientation != nil {
+		s.WriteString(schemas.RcsStandaloneCard_CardOrientation, *v.CardOrientation)
+	}
+	if v.ThumbnailImageAlignment != nil {
+		s.WriteString(schemas.RcsStandaloneCard_ThumbnailImageAlignment, *v.ThumbnailImageAlignment)
+	}
+}
+func (v *RcsStandaloneCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsStandaloneCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsStandaloneCard_CardContent:
+			v.CardContent = &RcsCardContent{}
+			return v.CardContent.Deserialize(d)
+		case schemas.RcsStandaloneCard_CardOrientation:
+			v.CardOrientation = new(string)
+			return d.ReadString(schemas.RcsStandaloneCard_CardOrientation, v.CardOrientation)
+		case schemas.RcsStandaloneCard_ThumbnailImageAlignment:
+			v.ThumbnailImageAlignment = new(string)
+			return d.ReadString(schemas.RcsStandaloneCard_ThumbnailImageAlignment, v.ThumbnailImageAlignment)
+		}
+		return nil
+	})
+}
+
+// A suggested action displayed to the RCS message recipient. Can be a reply, open
+// URL, dial phone, show location, request location, or create calendar event.
+//
+// The following types satisfy this interface:
+//
+//	RcsSuggestedActionMemberCreateCalendarEvent
+//	RcsSuggestedActionMemberDialPhone
+//	RcsSuggestedActionMemberOpenUrl
+//	RcsSuggestedActionMemberReply
+//	RcsSuggestedActionMemberRequestLocation
+//	RcsSuggestedActionMemberShowLocation
+type RcsSuggestedAction interface {
+	isRcsSuggestedAction()
+}
+
+// A suggested action that creates a calendar event on the user's device.
+type RcsSuggestedActionMemberCreateCalendarEvent struct {
+	Value RcsCreateCalendarEventAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberCreateCalendarEvent) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberCreateCalendarEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_CreateCalendarEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberCreateCalendarEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested action that initiates a phone call to the specified number.
+type RcsSuggestedActionMemberDialPhone struct {
+	Value RcsDialPhoneAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberDialPhone) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberDialPhone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_DialPhone)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberDialPhone) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested action that opens a URL in the user's browser or a webview.
+type RcsSuggestedActionMemberOpenUrl struct {
+	Value RcsOpenUrlAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberOpenUrl) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberOpenUrl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_OpenUrl)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberOpenUrl) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested reply that sends predefined text and postback data when tapped.
+type RcsSuggestedActionMemberReply struct {
+	Value RcsReplyAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberReply) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberReply) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_Reply)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested action that requests the user's current location.
+type RcsSuggestedActionMemberRequestLocation struct {
+	Value RcsRequestLocationAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberRequestLocation) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberRequestLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_RequestLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberRequestLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A suggested action that shows a location on a map.
+type RcsSuggestedActionMemberShowLocation struct {
+	Value RcsShowLocationAction
+
+	noSmithyDocumentSerde
+}
+
+func (*RcsSuggestedActionMemberShowLocation) isRcsSuggestedAction() {}
+func (v *RcsSuggestedActionMemberShowLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsSuggestedAction_ShowLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RcsSuggestedActionMemberShowLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A plain text RCS message body.
+type RcsTextMessage struct {
+
+	// The text body of the RCS message. Maximum 3072 characters.
+	//
+	// This member is required.
+	Body *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RcsTextMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RcsTextMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RcsTextMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.RcsTextMessage_Body, *v.Body)
+	}
+}
+func (v *RcsTextMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RcsTextMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RcsTextMessage_Body:
+			v.Body = new(string)
+			return d.ReadString(schemas.RcsTextMessage_Body, v.Body)
 		}
 		return nil
 	})
@@ -2822,6 +4300,12 @@ type RegistrationFieldDefinition struct {
 	// This member is required.
 	SectionPath *string
 
+	// The conditional behavior rules for this field. Only present when
+	// FieldRequirement is CONDITIONAL. Rules are evaluated in order and the first
+	// matching rule determines the field's resolved requirement. If no rule matches,
+	// the DefaultBehavior applies.
+	ConditionalBehavior *ConditionalBehavior
+
 	// The validation rules for a select field.
 	SelectValidation *SelectValidation
 
@@ -2838,6 +4322,11 @@ func (v *RegistrationFieldDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistrationFieldDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionalBehavior != nil {
+		s.WriteStruct(schemas.RegistrationFieldDefinition_ConditionalBehavior)
+		v.ConditionalBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DisplayHints != nil {
 		s.WriteStruct(schemas.RegistrationFieldDefinition_DisplayHints)
 		v.DisplayHints.SerializeMembers(s)
@@ -2869,6 +4358,9 @@ func (v *RegistrationFieldDefinition) SerializeMembers(s smithy.ShapeSerializer)
 func (v *RegistrationFieldDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistrationFieldDefinition, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RegistrationFieldDefinition_ConditionalBehavior:
+			v.ConditionalBehavior = &ConditionalBehavior{}
+			return v.ConditionalBehavior.Deserialize(d)
 		case schemas.RegistrationFieldDefinition_DisplayHints:
 			v.DisplayHints = &RegistrationFieldDisplayHints{}
 			return v.DisplayHints.Deserialize(d)
@@ -4065,6 +5557,13 @@ type SenderIdInformation struct {
 	// This member is required.
 	SenderIdArn *string
 
+	// The messaging limits that apply to the sender ID, including the per-capability
+	// send rates.
+	MessagingLimits *MessagingLimits
+
+	// The pricing model.
+	PricingTier *string
+
 	// The unique identifier for the registration.
 	RegistrationId *string
 
@@ -4083,8 +5582,16 @@ func (v *SenderIdInformation) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.SenderIdInformation_IsoCountryCode, *v.IsoCountryCode)
 	}
 	serializeMessageTypeList(s, schemas.SenderIdInformation_MessageTypes, v.MessageTypes)
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.SenderIdInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.SenderIdInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	if v.PricingTier != nil {
+		s.WriteString(schemas.SenderIdInformation_PricingTier, *v.PricingTier)
 	}
 	s.WriteBool(schemas.SenderIdInformation_Registered, v.Registered)
 	if v.RegistrationId != nil {
@@ -4107,9 +5614,15 @@ func (v *SenderIdInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.SenderIdInformation_IsoCountryCode, v.IsoCountryCode)
 		case schemas.SenderIdInformation_MessageTypes:
 			return deserializeMessageTypeList(d, schemas.SenderIdInformation_MessageTypes, &v.MessageTypes)
+		case schemas.SenderIdInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.SenderIdInformation_MonthlyLeasingPrice:
 			v.MonthlyLeasingPrice = new(string)
 			return d.ReadString(schemas.SenderIdInformation_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.SenderIdInformation_PricingTier:
+			v.PricingTier = new(string)
+			return d.ReadString(schemas.SenderIdInformation_PricingTier, v.PricingTier)
 		case schemas.SenderIdInformation_Registered:
 			return d.ReadBool(schemas.SenderIdInformation_Registered, &v.Registered)
 		case schemas.SenderIdInformation_RegistrationId:
@@ -4790,3 +6303,15 @@ func (v *VerifiedDestinationNumberInformation) Deserialize(d smithy.ShapeDeseria
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRcsContent()         {}
+func (*UnknownUnionMember) isRcsSuggestedAction() {}

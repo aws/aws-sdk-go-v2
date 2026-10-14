@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deployments":[{"creationTimestamp":946684800,"deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","deploymentStatus":"ACTIVE","isLatestForTarget":true,"parentTargetArn":"__ParentTargetArn__","revisionId":"__RevisionId__","targetArn":"__TargetArn__"},{"creationTimestamp":946684800,"deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","deploymentStatus":"ACTIVE","isLatestForTarget":true,"parentTargetArn":"__ParentTargetArn__","revisionId":"__RevisionId__","targetArn":"__TargetArn__"}],"nextToken":"__NextToken__"}

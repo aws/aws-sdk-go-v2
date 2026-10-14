@@ -4,12 +4,7 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the count of users in a Wickr network, categorized by their status
@@ -37,18 +32,6 @@ type GetUsersCountInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetUsersCountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUsersCountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUsersCountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetUsersCountRequest_networkId, *v.NetworkId)
-	}
 }
 
 type GetUsersCountOutput struct {
@@ -85,97 +68,29 @@ type GetUsersCountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUsersCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUsersCountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUsersCountResponse_active:
-			v.Active = new(int32)
-			return d.ReadInt32(schemas.GetUsersCountResponse_active, v.Active)
-		case schemas.GetUsersCountResponse_pending:
-			v.Pending = new(int32)
-			return d.ReadInt32(schemas.GetUsersCountResponse_pending, v.Pending)
-		case schemas.GetUsersCountResponse_rejected:
-			v.Rejected = new(int32)
-			return d.ReadInt32(schemas.GetUsersCountResponse_rejected, v.Rejected)
-		case schemas.GetUsersCountResponse_remaining:
-			v.Remaining = new(int32)
-			return d.ReadInt32(schemas.GetUsersCountResponse_remaining, v.Remaining)
-		case schemas.GetUsersCountResponse_total:
-			v.Total = new(int32)
-			return d.ReadInt32(schemas.GetUsersCountResponse_total, v.Total)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUsersCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsersCount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsersCount, schemas.GetUsersCountRequest, schemas.GetUsersCountResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsersCount{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsersCount, schemas.GetUsersCountRequest, schemas.GetUsersCountResponse), output: &GetUsersCountOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsersCount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUsersCountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsersCount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +105,8 @@ func (c *Client) addOperationGetUsersCountMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUsersCount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsersCount",
-	}
 }

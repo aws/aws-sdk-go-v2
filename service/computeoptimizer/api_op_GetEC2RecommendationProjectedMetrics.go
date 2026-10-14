@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -71,6 +70,33 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEC2RecommendationProjectedMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEC2RecommendationProjectedMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEC2RecommendationProjectedMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetEC2RecommendationProjectedMetricsRequest_endTime, *v.EndTime)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.GetEC2RecommendationProjectedMetricsRequest_instanceArn, *v.InstanceArn)
+	}
+	s.WriteInt32(schemas.GetEC2RecommendationProjectedMetricsRequest_period, v.Period)
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetEC2RecommendationProjectedMetricsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetEC2RecommendationProjectedMetricsRequest_startTime, *v.StartTime)
+	}
+	if v.Stat != "" {
+		s.WriteString(schemas.GetEC2RecommendationProjectedMetricsRequest_stat, string(v.Stat))
+	}
+}
+
 type GetEC2RecommendationProjectedMetricsOutput struct {
 
 	// An array of objects that describes projected metrics.
@@ -82,65 +108,39 @@ type GetEC2RecommendationProjectedMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEC2RecommendationProjectedMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEC2RecommendationProjectedMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEC2RecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendedOptionProjectedMetrics(s, schemas.GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+}
+func (v *GetEC2RecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEC2RecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics:
+			return deserializeRecommendedOptionProjectedMetrics(d, schemas.GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, &v.RecommendedOptionProjectedMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEC2RecommendationProjectedMetrics, schemas.GetEC2RecommendationProjectedMetricsRequest, schemas.GetEC2RecommendationProjectedMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEC2RecommendationProjectedMetrics, schemas.GetEC2RecommendationProjectedMetricsRequest, schemas.GetEC2RecommendationProjectedMetricsResponse), output: &GetEC2RecommendationProjectedMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEC2RecommendationProjectedMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -150,12 +150,6 @@ func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(sta
 		return err
 	}
 	if err = addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEC2RecommendationProjectedMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +164,8 @@ func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEC2RecommendationProjectedMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEC2RecommendationProjectedMetrics",
-	}
 }

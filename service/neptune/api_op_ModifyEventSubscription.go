@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies an existing event notification subscription. Note that you can't
@@ -64,28 +59,6 @@ type ModifyEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyEventSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyEventSubscriptionMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.ModifyEventSubscriptionMessage_Enabled, *v.Enabled)
-	}
-	serializeEventCategoriesList(s, schemas.ModifyEventSubscriptionMessage_EventCategories, v.EventCategories)
-	if v.SnsTopicArn != nil {
-		s.WriteString(schemas.ModifyEventSubscriptionMessage_SnsTopicArn, *v.SnsTopicArn)
-	}
-	if v.SourceType != nil {
-		s.WriteString(schemas.ModifyEventSubscriptionMessage_SourceType, *v.SourceType)
-	}
-	if v.SubscriptionName != nil {
-		s.WriteString(schemas.ModifyEventSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
-	}
-}
-
 type ModifyEventSubscriptionOutput struct {
 
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions action.
@@ -97,85 +70,29 @@ type ModifyEventSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyEventSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyEventSubscriptionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyEventSubscriptionResult_EventSubscription:
-			v.EventSubscription = &types.EventSubscription{}
-			return v.EventSubscription.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyEventSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEventSubscription, schemas.ModifyEventSubscriptionMessage, schemas.ModifyEventSubscriptionResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyEventSubscription{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEventSubscription, schemas.ModifyEventSubscriptionMessage, schemas.ModifyEventSubscriptionResult), output: &ModifyEventSubscriptionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyEventSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyEventSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyEventSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +107,8 @@ func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyEventSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyEventSubscription",
-	}
 }

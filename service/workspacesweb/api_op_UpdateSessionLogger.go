@@ -4,13 +4,8 @@ package workspacesweb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the details of a session logger.
@@ -48,27 +43,6 @@ type UpdateSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSessionLoggerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateSessionLoggerRequest_displayName, *v.DisplayName)
-	}
-	serializeEventFilter(s, schemas.UpdateSessionLoggerRequest_eventFilter, v.EventFilter)
-	if v.LogConfiguration != nil {
-		s.WriteStruct(schemas.UpdateSessionLoggerRequest_logConfiguration)
-		v.LogConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SessionLoggerArn != nil {
-		s.WriteString(schemas.UpdateSessionLoggerRequest_sessionLoggerArn, *v.SessionLoggerArn)
-	}
-}
-
 type UpdateSessionLoggerOutput struct {
 
 	// The updated details of the session logger.
@@ -82,85 +56,29 @@ type UpdateSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSessionLoggerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSessionLoggerResponse_sessionLogger:
-			v.SessionLogger = &types.SessionLogger{}
-			return v.SessionLogger.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionLogger, schemas.UpdateSessionLoggerRequest, schemas.UpdateSessionLoggerResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionLogger, schemas.UpdateSessionLoggerRequest, schemas.UpdateSessionLoggerResponse), output: &UpdateSessionLoggerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSessionLogger"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSessionLoggerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSessionLogger(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +93,8 @@ func (c *Client) addOperationUpdateSessionLoggerMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSessionLogger(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSessionLogger",
-	}
 }

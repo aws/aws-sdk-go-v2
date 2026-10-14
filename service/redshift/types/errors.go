@@ -2650,6 +2650,64 @@ func (e *PartnerNotFoundFault) ErrorCode() string {
 }
 func (e *PartnerNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Amazon Redshift Query Editor (QEV2) IAM Identity Center application already
+// exists. Use a different application name or describe existing applications to
+// find the ARN.
+type Qev2IdcApplicationAlreadyExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *Qev2IdcApplicationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *Qev2IdcApplicationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *Qev2IdcApplicationAlreadyExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "Qev2IdcApplicationAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *Qev2IdcApplicationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified Amazon Redshift Query Editor (QEV2) IAM Identity Center
+// application doesn't exist. Verify that the application ARN is correct and that
+// the application exists in this Region.
+type Qev2IdcApplicationNotExistsFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *Qev2IdcApplicationNotExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *Qev2IdcApplicationNotExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *Qev2IdcApplicationNotExistsFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "Qev2IdcApplicationNotExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *Qev2IdcApplicationNotExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The application you attempted to add already exists.
 type RedshiftIdcApplicationAlreadyExistsFault struct {
 	Message *string

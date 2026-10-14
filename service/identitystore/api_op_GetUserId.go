@@ -4,13 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the UserId in an identity store.
@@ -46,6 +43,10 @@ type GetUserIdInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -64,18 +65,6 @@ func (v *GetUserIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GetUserIdRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 }
-func (v *GetUserIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUserIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUserIdRequest_AlternateIdentifier:
-			return deserializeAlternateIdentifier(d, schemas.GetUserIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
-		case schemas.GetUserIdRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetUserIdRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 
 type GetUserIdOutput struct {
 
@@ -83,6 +72,12 @@ type GetUserIdOutput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The Amazon Resource Name (ARN) of the user in the identity store. For example,
+	// arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
+	//
+	// This member is required.
+	UserArn *string
 
 	// The identifier for a user in the identity store.
 	//
@@ -105,6 +100,9 @@ func (v *GetUserIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.GetUserIdResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetUserIdResponse_UserArn, *v.UserArn)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.GetUserIdResponse_UserId, *v.UserId)
 	}
@@ -115,6 +113,9 @@ func (v *GetUserIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetUserIdResponse_IdentityStoreId:
 			v.IdentityStoreId = new(string)
 			return d.ReadString(schemas.GetUserIdResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.GetUserIdResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.GetUserIdResponse_UserArn, v.UserArn)
 		case schemas.GetUserIdResponse_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.GetUserIdResponse_UserId, v.UserId)
@@ -123,74 +124,26 @@ func (v *GetUserIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetUserIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserId, schemas.GetUserIdRequest, schemas.GetUserIdResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserId, schemas.GetUserIdRequest, schemas.GetUserIdResponse), output: &GetUserIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUserId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUserIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,22 +158,8 @@ func (c *Client) addOperationGetUserIdMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUserId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUserId",
-	}
 }

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.
@@ -73,6 +72,26 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerTlsCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerTlsCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainNameList(s, schemas.CreateLoadBalancerTlsCertificateRequest_certificateAlternativeNames, v.CertificateAlternativeNames)
+	if v.CertificateDomainName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_certificateDomainName, *v.CertificateDomainName)
+	}
+	if v.CertificateName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_certificateName, *v.CertificateName)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+	serializeTagList(s, schemas.CreateLoadBalancerTlsCertificateRequest_tags, v.Tags)
+}
+
 type CreateLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -86,77 +105,45 @@ type CreateLoadBalancerTlsCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerTlsCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateLoadBalancerTlsCertificateResult_operations, v.Operations)
+}
+func (v *CreateLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoadBalancerTlsCertificateResult_operations:
+			return deserializeOperationList(d, schemas.CreateLoadBalancerTlsCertificateResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerTlsCertificate, schemas.CreateLoadBalancerTlsCertificateRequest, schemas.CreateLoadBalancerTlsCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerTlsCertificate, schemas.CreateLoadBalancerTlsCertificateRequest, schemas.CreateLoadBalancerTlsCertificateResult), output: &CreateLoadBalancerTlsCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLoadBalancerTlsCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLoadBalancerTlsCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLoadBalancerTlsCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +158,8 @@ func (c *Client) addOperationCreateLoadBalancerTlsCertificateMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLoadBalancerTlsCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLoadBalancerTlsCertificate",
-	}
 }

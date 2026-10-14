@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeNotifyTemplates
+
+{"Filters":[{"Name":"template-type","Values":["__Member__","__Member__"]},{"Name":"template-type","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","TemplateIds":["__Member__","__Member__"]}

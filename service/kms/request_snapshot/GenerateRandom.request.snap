@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GenerateRandom
+
+{"CustomKeyStoreId":"__CustomKeyStoreId__","NumberOfBytes":1,"Recipient":{"AttestationDocument":"YmxvYg==","KeyEncryptionAlgorithm":"RSAES_OAEP_SHA_256"}}

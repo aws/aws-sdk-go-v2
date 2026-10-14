@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findingsStatistics":[{"externalAccessFindingsStatistics":{"resourceTypeStatistics":{"key0":{"totalActiveCrossAccount":1,"totalActiveErrors":1,"totalActivePublic":1}},"totalActiveFindings":1,"totalArchivedFindings":1,"totalResolvedFindings":1}},{"externalAccessFindingsStatistics":{"resourceTypeStatistics":{"key0":{"totalActiveCrossAccount":1,"totalActiveErrors":1,"totalActivePublic":1}},"totalActiveFindings":1,"totalArchivedFindings":1,"totalResolvedFindings":1}}],"lastUpdatedAt":"2000-01-01T00:00:00Z"}

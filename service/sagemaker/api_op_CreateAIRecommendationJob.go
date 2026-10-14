@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a recommendation job that generates intelligent optimization
@@ -70,6 +69,11 @@ type CreateAIRecommendationJobInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The LoRA adapter source for the recommendation job. Specify either a list of
+	// model package ARNs or Amazon S3 URIs for your LoRA adapters. When this parameter
+	// is absent, the recommendation job runs without LoRA adapter support.
+	AdapterSource types.AIAdapterSource
+
 	// The compute resource specification for the recommendation job. You can specify
 	// up to 3 instance types to consider, and optionally provide capacity reservation
 	// configuration.
@@ -90,6 +94,50 @@ type CreateAIRecommendationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIRecommendationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIRecommendationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobName != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_AIRecommendationJobName, *v.AIRecommendationJobName)
+	}
+	if v.AIWorkloadConfigIdentifier != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
+	}
+	serializeAIAdapterSource(s, schemas.CreateAIRecommendationJobRequest_AdapterSource, v.AdapterSource)
+	if v.ComputeSpec != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_ComputeSpec)
+		v.ComputeSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAIModelSource(s, schemas.CreateAIRecommendationJobRequest_ModelSource, v.ModelSource)
+	if v.OptimizeModel != nil {
+		s.WriteBool(schemas.CreateAIRecommendationJobRequest_OptimizeModel, *v.OptimizeModel)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceTarget != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_PerformanceTarget)
+		v.PerformanceTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateAIRecommendationJobRequest_Tags, v.Tags)
+}
+
 type CreateAIRecommendationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created recommendation job.
@@ -103,77 +151,48 @@ type CreateAIRecommendationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIRecommendationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIRecommendationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobArn != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn, *v.AIRecommendationJobArn)
+	}
+}
+func (v *CreateAIRecommendationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIRecommendationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn:
+			v.AIRecommendationJobArn = new(string)
+			return d.ReadString(schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn, v.AIRecommendationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIRecommendationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIRecommendationJob, schemas.CreateAIRecommendationJobRequest, schemas.CreateAIRecommendationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIRecommendationJob, schemas.CreateAIRecommendationJobRequest, schemas.CreateAIRecommendationJobResponse), output: &CreateAIRecommendationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAIRecommendationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAIRecommendationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAIRecommendationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAIRecommendationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +207,8 @@ func (c *Client) addOperationCreateAIRecommendationJobMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAIRecommendationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAIRecommendationJob",
-	}
 }

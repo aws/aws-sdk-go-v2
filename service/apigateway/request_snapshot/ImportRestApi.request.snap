@@ -1,0 +1,6 @@
+POST /restapis?failonwarnings=true&key0=__Value__&mode=import
+
+Accept: application/json
+Content-Type: application/octet-stream
+
+blob

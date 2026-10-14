@@ -1,0 +1,5 @@
+PUT /file-systems/__FileSystemId__/policy
+
+Content-Type: application/json
+
+{"policy":"__Policy__"}

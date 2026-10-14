@@ -1,0 +1,5 @@
+PATCH /reject-certificate-transfer/__CertificateId__
+
+Content-Type: application/json
+
+{"rejectReason":"__RejectReason__"}

@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -102,6 +102,44 @@ type ListAggregatedUtterancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregatedUtterancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregatedUtterancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregatedUtterancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationDuration != nil {
+		s.WriteStruct(schemas.ListAggregatedUtterancesRequest_aggregationDuration)
+		v.AggregationDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesRequest_botVersion, *v.BotVersion)
+	}
+	serializeAggregatedUtterancesFilters(s, schemas.ListAggregatedUtterancesRequest_filters, v.Filters)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAggregatedUtterancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListAggregatedUtterancesRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListAggregatedUtterancesOutput struct {
 
 	// Summaries of the aggregated utterance data. Each response contains information
@@ -156,77 +194,101 @@ type ListAggregatedUtterancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregatedUtterancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregatedUtterancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregatedUtterancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregatedUtterancesSummaryList(s, schemas.ListAggregatedUtterancesResponse_aggregatedUtterancesSummaries, v.AggregatedUtterancesSummaries)
+	if v.AggregationDuration != nil {
+		s.WriteStruct(schemas.ListAggregatedUtterancesResponse_aggregationDuration)
+		v.AggregationDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AggregationLastRefreshedDateTime != nil {
+		s.WriteTime(schemas.ListAggregatedUtterancesResponse_aggregationLastRefreshedDateTime, *v.AggregationLastRefreshedDateTime)
+	}
+	if v.AggregationWindowEndTime != nil {
+		s.WriteTime(schemas.ListAggregatedUtterancesResponse_aggregationWindowEndTime, *v.AggregationWindowEndTime)
+	}
+	if v.AggregationWindowStartTime != nil {
+		s.WriteTime(schemas.ListAggregatedUtterancesResponse_aggregationWindowStartTime, *v.AggregationWindowStartTime)
+	}
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesResponse_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregatedUtterancesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAggregatedUtterancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAggregatedUtterancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAggregatedUtterancesResponse_aggregatedUtterancesSummaries:
+			return deserializeAggregatedUtterancesSummaryList(d, schemas.ListAggregatedUtterancesResponse_aggregatedUtterancesSummaries, &v.AggregatedUtterancesSummaries)
+		case schemas.ListAggregatedUtterancesResponse_aggregationDuration:
+			v.AggregationDuration = &types.UtteranceAggregationDuration{}
+			return v.AggregationDuration.Deserialize(d)
+		case schemas.ListAggregatedUtterancesResponse_aggregationLastRefreshedDateTime:
+			v.AggregationLastRefreshedDateTime = new(time.Time)
+			return d.ReadTime(schemas.ListAggregatedUtterancesResponse_aggregationLastRefreshedDateTime, v.AggregationLastRefreshedDateTime)
+		case schemas.ListAggregatedUtterancesResponse_aggregationWindowEndTime:
+			v.AggregationWindowEndTime = new(time.Time)
+			return d.ReadTime(schemas.ListAggregatedUtterancesResponse_aggregationWindowEndTime, v.AggregationWindowEndTime)
+		case schemas.ListAggregatedUtterancesResponse_aggregationWindowStartTime:
+			v.AggregationWindowStartTime = new(time.Time)
+			return d.ReadTime(schemas.ListAggregatedUtterancesResponse_aggregationWindowStartTime, v.AggregationWindowStartTime)
+		case schemas.ListAggregatedUtterancesResponse_botAliasId:
+			v.BotAliasId = new(string)
+			return d.ReadString(schemas.ListAggregatedUtterancesResponse_botAliasId, v.BotAliasId)
+		case schemas.ListAggregatedUtterancesResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListAggregatedUtterancesResponse_botId, v.BotId)
+		case schemas.ListAggregatedUtterancesResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListAggregatedUtterancesResponse_botVersion, v.BotVersion)
+		case schemas.ListAggregatedUtterancesResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListAggregatedUtterancesResponse_localeId, v.LocaleId)
+		case schemas.ListAggregatedUtterancesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAggregatedUtterancesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAggregatedUtterancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregatedUtterances, schemas.ListAggregatedUtterancesRequest, schemas.ListAggregatedUtterancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAggregatedUtterances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregatedUtterances, schemas.ListAggregatedUtterancesRequest, schemas.ListAggregatedUtterancesResponse), output: &ListAggregatedUtterancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAggregatedUtterances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAggregatedUtterances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAggregatedUtterancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAggregatedUtterances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,12 +301,6 @@ func (c *Client) addOperationListAggregatedUtterancesMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -350,11 +406,3 @@ type ListAggregatedUtterancesAPIClient interface {
 }
 
 var _ ListAggregatedUtterancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAggregatedUtterances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAggregatedUtterances",
-	}
-}

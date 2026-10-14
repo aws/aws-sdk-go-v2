@@ -1,0 +1,7 @@
+POST /service/ArcRegionSwitch/operation/ListRoute53HealthChecks
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥inextTokenm__NextToken__carng__Arn__lhostedZoneIdp__HostedZoneId__jrecordNamen__RecordName__jmaxResults

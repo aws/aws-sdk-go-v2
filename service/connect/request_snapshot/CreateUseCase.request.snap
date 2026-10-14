@@ -1,0 +1,5 @@
+PUT /instance/__InstanceId__/integration-associations/__IntegrationAssociationId__/use-cases
+
+Content-Type: application/json
+
+{"Tags":{"key0":"__Value__"},"UseCaseType":"RULES_EVALUATION"}

@@ -1,0 +1,5 @@
+PUT /memberships/__MembershipIdentifier__/ml-configurations
+
+Content-Type: application/json
+
+{"defaultOutputLocation":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"}}

@@ -1,0 +1,5 @@
+POST /connectorsv2/register
+
+Content-Type: application/json
+
+{"AuthCode":"__AuthCode__","AuthState":"__AuthState__"}

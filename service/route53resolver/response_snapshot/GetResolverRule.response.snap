@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.GetResolverRule
+
+{"ResolverRule":{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","DelegationRecord":"__DelegationRecord__","DomainName":"__DomainName__","Id":"__Id__","ModificationTime":"__ModificationTime__","Name":"__Name__","OwnerId":"__OwnerId__","ResolverEndpointId":"__ResolverEndpointId__","RuleType":"FORWARD","ShareStatus":"NOT_SHARED","Status":"COMPLETE","StatusMessage":"__StatusMessage__","TargetIps":[{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"},{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"}]}}

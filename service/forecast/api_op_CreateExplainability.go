@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Explainability is only available for Forecasts and Predictors generated from an
@@ -174,6 +173,46 @@ type CreateExplainabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExplainabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExplainabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExplainabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.CreateExplainabilityRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableVisualization != nil {
+		s.WriteBool(schemas.CreateExplainabilityRequest_EnableVisualization, *v.EnableVisualization)
+	}
+	if v.EndDateTime != nil {
+		s.WriteString(schemas.CreateExplainabilityRequest_EndDateTime, *v.EndDateTime)
+	}
+	if v.ExplainabilityConfig != nil {
+		s.WriteStruct(schemas.CreateExplainabilityRequest_ExplainabilityConfig)
+		v.ExplainabilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityName != nil {
+		s.WriteString(schemas.CreateExplainabilityRequest_ExplainabilityName, *v.ExplainabilityName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateExplainabilityRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.CreateExplainabilityRequest_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDateTime != nil {
+		s.WriteString(schemas.CreateExplainabilityRequest_StartDateTime, *v.StartDateTime)
+	}
+	serializeTags(s, schemas.CreateExplainabilityRequest_Tags, v.Tags)
+}
+
 type CreateExplainabilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Explainability.
@@ -185,77 +224,48 @@ type CreateExplainabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExplainabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExplainabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExplainabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.CreateExplainabilityResponse_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+}
+func (v *CreateExplainabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExplainabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExplainabilityResponse_ExplainabilityArn:
+			v.ExplainabilityArn = new(string)
+			return d.ReadString(schemas.CreateExplainabilityResponse_ExplainabilityArn, v.ExplainabilityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExplainabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExplainability, schemas.CreateExplainabilityRequest, schemas.CreateExplainabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExplainability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExplainability, schemas.CreateExplainabilityRequest, schemas.CreateExplainabilityResponse), output: &CreateExplainabilityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExplainability{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateExplainability"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateExplainabilityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExplainability(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,22 +280,8 @@ func (c *Client) addOperationCreateExplainabilityMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateExplainability(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateExplainability",
-	}
 }

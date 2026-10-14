@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/metadata-generation-runs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","owningProjectIdentifier":"__OwningProjectIdentifier__","target":{"identifier":"__Identifier__","revision":"__Revision__","type":"ASSET"},"type":"BUSINESS_DESCRIPTIONS","types":["BUSINESS_DESCRIPTIONS","BUSINESS_DESCRIPTIONS"]}

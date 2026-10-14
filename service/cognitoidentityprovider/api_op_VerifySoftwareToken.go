@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers the current user's time-based one-time password (TOTP) authenticator
@@ -59,6 +58,27 @@ type VerifySoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySoftwareTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySoftwareTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySoftwareTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_AccessToken, *v.AccessToken)
+	}
+	if v.FriendlyDeviceName != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_FriendlyDeviceName, *v.FriendlyDeviceName)
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_Session, *v.Session)
+	}
+	if v.UserCode != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_UserCode, *v.UserCode)
+	}
+}
+
 type VerifySoftwareTokenOutput struct {
 
 	// This session ID satisfies an MFA_SETUP challenge. Supply the session ID in your
@@ -77,74 +97,55 @@ type VerifySoftwareTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySoftwareTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySoftwareTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySoftwareTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteString(schemas.VerifySoftwareTokenResponse_Session, *v.Session)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VerifySoftwareTokenResponse_Status, string(v.Status))
+	}
+}
+func (v *VerifySoftwareTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifySoftwareTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifySoftwareTokenResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.VerifySoftwareTokenResponse_Session, v.Session)
+		case schemas.VerifySoftwareTokenResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.VerifySoftwareTokenResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VerifySoftwareTokenResponseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySoftwareToken, schemas.VerifySoftwareTokenRequest, schemas.VerifySoftwareTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifySoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySoftwareToken, schemas.VerifySoftwareTokenRequest, schemas.VerifySoftwareTokenResponse), output: &VerifySoftwareTokenOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpVerifySoftwareToken{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifySoftwareToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVerifySoftwareTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifySoftwareToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +160,8 @@ func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVerifySoftwareToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VerifySoftwareToken",
-	}
 }

@@ -4,11 +4,10 @@ package account
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -60,6 +59,18 @@ type GetAccountInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountInformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountInformationRequest_AccountId, *v.AccountId)
+	}
+}
+
 type GetAccountInformationOutput struct {
 
 	// The date and time the account was created.
@@ -99,74 +110,67 @@ type GetAccountInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCreatedDate != nil {
+		s.WriteTime(schemas.GetAccountInformationResponse_AccountCreatedDate, *v.AccountCreatedDate)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountId, *v.AccountId)
+	}
+	if v.AccountName != nil {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountName, *v.AccountName)
+	}
+	if v.AccountState != "" {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountState, string(v.AccountState))
+	}
+}
+func (v *GetAccountInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountInformationResponse_AccountCreatedDate:
+			v.AccountCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetAccountInformationResponse_AccountCreatedDate, v.AccountCreatedDate)
+		case schemas.GetAccountInformationResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetAccountInformationResponse_AccountId, v.AccountId)
+		case schemas.GetAccountInformationResponse_AccountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.GetAccountInformationResponse_AccountName, v.AccountName)
+		case schemas.GetAccountInformationResponse_AccountState:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountInformationResponse_AccountState, &ev); err != nil {
+				return err
+			}
+			v.AccountState = types.AccountState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountInformation, schemas.GetAccountInformationRequest, schemas.GetAccountInformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountInformation, schemas.GetAccountInformationRequest, schemas.GetAccountInformationResponse), output: &GetAccountInformationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountInformation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountInformation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccountInformation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +185,8 @@ func (c *Client) addOperationGetAccountInformationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAccountInformation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAccountInformation",
-	}
 }

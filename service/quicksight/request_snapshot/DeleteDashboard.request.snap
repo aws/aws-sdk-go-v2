@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/dashboards/__DashboardId__?version-number=1
+
+

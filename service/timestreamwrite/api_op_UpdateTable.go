@@ -5,13 +5,9 @@ package timestreamwrite
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the retention duration of the memory store and magnetic store for your
@@ -64,36 +60,6 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTableRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.UpdateTableRequest_DatabaseName, *v.DatabaseName)
-	}
-	if v.MagneticStoreWriteProperties != nil {
-		s.WriteStruct(schemas.UpdateTableRequest_MagneticStoreWriteProperties)
-		v.MagneticStoreWriteProperties.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RetentionProperties != nil {
-		s.WriteStruct(schemas.UpdateTableRequest_RetentionProperties)
-		v.RetentionProperties.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Schema != nil {
-		s.WriteStruct(schemas.UpdateTableRequest_Schema)
-		v.Schema.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.UpdateTableRequest_TableName, *v.TableName)
-	}
-}
-
 type UpdateTableOutput struct {
 
 	// The updated Timestream table.
@@ -105,88 +71,32 @@ type UpdateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTableResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTableResponse_Table:
-			v.Table = &types.Table{}
-			return v.Table.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTable{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTable{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse), output: &UpdateTableOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTableDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,12 +109,6 @@ func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,12 +167,4 @@ func (c *Client) fetchOpUpdateTableDiscoverEndpoint(ctx context.Context, region 
 		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
 	}
 	return weighted, nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTable",
-	}
 }

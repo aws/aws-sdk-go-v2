@@ -4,12 +4,7 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,18 +45,6 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSchemaInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.GetSchemaInput_policyStoreId, *v.PolicyStoreId)
-	}
-}
-
 type GetSchemaOutput struct {
 
 	// The date and time that the schema was originally created.
@@ -93,96 +76,29 @@ type GetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSchemaOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSchemaOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSchemaOutput_createdDate, v.CreatedDate)
-		case schemas.GetSchemaOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSchemaOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetSchemaOutput_namespaces:
-			return deserializeNamespaceList(d, schemas.GetSchemaOutput_namespaces, &v.Namespaces)
-		case schemas.GetSchemaOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.GetSchemaOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.GetSchemaOutput_schema:
-			v.Schema = new(string)
-			return d.ReadString(schemas.GetSchemaOutput_schema, v.Schema)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetSchema{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput), output: &GetSchemaOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchema"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSchemaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSchema(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +113,8 @@ func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSchema(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSchema",
-	}
 }

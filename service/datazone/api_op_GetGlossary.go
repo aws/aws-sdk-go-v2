@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,21 +45,6 @@ type GetGlossaryInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetGlossaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGlossaryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGlossaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetGlossaryInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetGlossaryInput_identifier, *v.Identifier)
-	}
 }
 
 type GetGlossaryOutput struct {
@@ -118,118 +98,29 @@ type GetGlossaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlossaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGlossaryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGlossaryOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetGlossaryOutput_createdAt, v.CreatedAt)
-		case schemas.GetGlossaryOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_createdBy, v.CreatedBy)
-		case schemas.GetGlossaryOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_description, v.Description)
-		case schemas.GetGlossaryOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_domainId, v.DomainId)
-		case schemas.GetGlossaryOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_id, v.Id)
-		case schemas.GetGlossaryOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_name, v.Name)
-		case schemas.GetGlossaryOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetGlossaryOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetGlossaryOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.GlossaryStatus(ev)
-			return nil
-		case schemas.GetGlossaryOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetGlossaryOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetGlossaryOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.GetGlossaryOutput_updatedBy, v.UpdatedBy)
-		case schemas.GetGlossaryOutput_usageRestrictions:
-			return deserializeGlossaryUsageRestrictions(d, schemas.GetGlossaryOutput_usageRestrictions, &v.UsageRestrictions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGlossaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlossary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossary, schemas.GetGlossaryInput, schemas.GetGlossaryOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlossary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlossary, schemas.GetGlossaryInput, schemas.GetGlossaryOutput), output: &GetGlossaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGlossary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGlossaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGlossary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +135,8 @@ func (c *Client) addOperationGetGlossaryMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGlossary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGlossary",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ACMPrivateCA.DeletePermission
+
+{"CertificateAuthorityArn":"__CertificateAuthorityArn__","Principal":"__Principal__","SourceAccount":"__SourceAccount__"}

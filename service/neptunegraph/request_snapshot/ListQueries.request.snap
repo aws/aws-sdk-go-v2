@@ -1,0 +1,4 @@
+GET /queries?maxResults=1&state=ALL
+
+Graphidentifier: GraphIdentifier-value
+

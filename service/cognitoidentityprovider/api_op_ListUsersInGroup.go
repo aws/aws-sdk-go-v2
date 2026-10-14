@@ -5,10 +5,10 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Given a user pool ID and a group name, returns a list of users in the group.
@@ -73,6 +73,27 @@ type ListUsersInGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersInGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListUsersInGroupRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type ListUsersInGroupOutput struct {
 
 	// The identifier that Amazon Cognito returned with the previous request to this
@@ -90,77 +111,51 @@ type ListUsersInGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersInGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersInGroupResponse_NextToken, *v.NextToken)
+	}
+	serializeUsersListType(s, schemas.ListUsersInGroupResponse_Users, v.Users)
+}
+func (v *ListUsersInGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersInGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersInGroupResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersInGroupResponse_NextToken, v.NextToken)
+		case schemas.ListUsersInGroupResponse_Users:
+			return deserializeUsersListType(d, schemas.ListUsersInGroupResponse_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersInGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersInGroup, schemas.ListUsersInGroupRequest, schemas.ListUsersInGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsersInGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersInGroup, schemas.ListUsersInGroupRequest, schemas.ListUsersInGroupResponse), output: &ListUsersInGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsersInGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsersInGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUsersInGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsersInGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +168,6 @@ func (c *Client) addOperationListUsersInGroupMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -282,11 +271,3 @@ type ListUsersInGroupAPIClient interface {
 }
 
 var _ ListUsersInGroupAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListUsersInGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUsersInGroup",
-	}
-}

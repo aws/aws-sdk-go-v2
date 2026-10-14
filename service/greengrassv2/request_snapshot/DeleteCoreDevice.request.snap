@@ -1,0 +1,3 @@
+DELETE /greengrass/v2/coreDevices/__CoreDeviceThingName__
+
+

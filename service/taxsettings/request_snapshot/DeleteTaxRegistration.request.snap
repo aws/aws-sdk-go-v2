@@ -1,0 +1,5 @@
+POST /DeleteTaxRegistration
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

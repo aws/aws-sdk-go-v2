@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,39 +70,6 @@ type UpdateSubscriptionTargetInput struct {
 	SubscriptionTargetConfig []types.SubscriptionTargetForm
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateSubscriptionTargetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSubscriptionTargetInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSubscriptionTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicableAssetTypes(s, schemas.UpdateSubscriptionTargetInput_applicableAssetTypes, v.ApplicableAssetTypes)
-	serializeAuthorizedPrincipalIdentifiers(s, schemas.UpdateSubscriptionTargetInput_authorizedPrincipals, v.AuthorizedPrincipals)
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_identifier, *v.Identifier)
-	}
-	if v.ManageAccessRole != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_manageAccessRole, *v.ManageAccessRole)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_name, *v.Name)
-	}
-	if v.Provider != nil {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_provider, *v.Provider)
-	}
-	if v.SubscriptionGrantCreationMode != "" {
-		s.WriteString(schemas.UpdateSubscriptionTargetInput_subscriptionGrantCreationMode, string(v.SubscriptionGrantCreationMode))
-	}
-	serializeSubscriptionTargetForms(s, schemas.UpdateSubscriptionTargetInput_subscriptionTargetConfig, v.SubscriptionTargetConfig)
 }
 
 type UpdateSubscriptionTargetOutput struct {
@@ -196,131 +158,29 @@ type UpdateSubscriptionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSubscriptionTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSubscriptionTargetOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSubscriptionTargetOutput_applicableAssetTypes:
-			return deserializeApplicableAssetTypes(d, schemas.UpdateSubscriptionTargetOutput_applicableAssetTypes, &v.ApplicableAssetTypes)
-		case schemas.UpdateSubscriptionTargetOutput_authorizedPrincipals:
-			return deserializeAuthorizedPrincipalIdentifiers(d, schemas.UpdateSubscriptionTargetOutput_authorizedPrincipals, &v.AuthorizedPrincipals)
-		case schemas.UpdateSubscriptionTargetOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateSubscriptionTargetOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateSubscriptionTargetOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_createdBy, v.CreatedBy)
-		case schemas.UpdateSubscriptionTargetOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_domainId, v.DomainId)
-		case schemas.UpdateSubscriptionTargetOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_environmentId, v.EnvironmentId)
-		case schemas.UpdateSubscriptionTargetOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_id, v.Id)
-		case schemas.UpdateSubscriptionTargetOutput_manageAccessRole:
-			v.ManageAccessRole = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_manageAccessRole, v.ManageAccessRole)
-		case schemas.UpdateSubscriptionTargetOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_name, v.Name)
-		case schemas.UpdateSubscriptionTargetOutput_projectId:
-			v.ProjectId = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_projectId, v.ProjectId)
-		case schemas.UpdateSubscriptionTargetOutput_provider:
-			v.Provider = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_provider, v.Provider)
-		case schemas.UpdateSubscriptionTargetOutput_subscriptionGrantCreationMode:
-			var ev string
-			if err := d.ReadString(schemas.UpdateSubscriptionTargetOutput_subscriptionGrantCreationMode, &ev); err != nil {
-				return err
-			}
-			v.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(ev)
-			return nil
-		case schemas.UpdateSubscriptionTargetOutput_subscriptionTargetConfig:
-			return deserializeSubscriptionTargetForms(d, schemas.UpdateSubscriptionTargetOutput_subscriptionTargetConfig, &v.SubscriptionTargetConfig)
-		case schemas.UpdateSubscriptionTargetOutput_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_type, v.Type)
-		case schemas.UpdateSubscriptionTargetOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateSubscriptionTargetOutput_updatedAt, v.UpdatedAt)
-		case schemas.UpdateSubscriptionTargetOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.UpdateSubscriptionTargetOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSubscriptionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriptionTarget{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionTarget, schemas.UpdateSubscriptionTargetInput, schemas.UpdateSubscriptionTargetOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriptionTarget{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionTarget, schemas.UpdateSubscriptionTargetInput, schemas.UpdateSubscriptionTargetOutput), output: &UpdateSubscriptionTargetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSubscriptionTarget"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSubscriptionTargetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSubscriptionTarget(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -335,22 +195,8 @@ func (c *Client) addOperationUpdateSubscriptionTargetMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSubscriptionTarget(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSubscriptionTarget",
-	}
 }

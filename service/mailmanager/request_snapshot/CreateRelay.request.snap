@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/CreateRelay
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦dTags‚¢cKeyg__Key__eValuei__Value__¢eValuei__Value__cKeyg__Key__kClientTokeno__ClientToken__iRelayNamem__RelayName__jServerNamen__ServerName__jServerPortnAuthentication¡iSecretArnx&__RelayAuthenticationMemberSecretArn__

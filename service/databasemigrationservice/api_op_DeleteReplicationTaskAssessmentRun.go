@@ -4,11 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the record of a single premigration assessment run.
@@ -41,6 +40,18 @@ type DeleteReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationTaskAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationTaskAssessmentRunMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRunArn != nil {
+		s.WriteString(schemas.DeleteReplicationTaskAssessmentRunMessage_ReplicationTaskAssessmentRunArn, *v.ReplicationTaskAssessmentRunArn)
+	}
+}
+
 type DeleteReplicationTaskAssessmentRunOutput struct {
 
 	// The ReplicationTaskAssessmentRun object for the deleted assessment run.
@@ -52,77 +63,50 @@ type DeleteReplicationTaskAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationTaskAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationTaskAssessmentRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationTaskAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRun != nil {
+		s.WriteStruct(schemas.DeleteReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun)
+		v.ReplicationTaskAssessmentRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteReplicationTaskAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicationTaskAssessmentRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun:
+			v.ReplicationTaskAssessmentRun = &types.ReplicationTaskAssessmentRun{}
+			return v.ReplicationTaskAssessmentRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationTaskAssessmentRun, schemas.DeleteReplicationTaskAssessmentRunMessage, schemas.DeleteReplicationTaskAssessmentRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationTaskAssessmentRun, schemas.DeleteReplicationTaskAssessmentRunMessage, schemas.DeleteReplicationTaskAssessmentRunResponse), output: &DeleteReplicationTaskAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteReplicationTaskAssessmentRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteReplicationTaskAssessmentRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReplicationTaskAssessmentRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +121,8 @@ func (c *Client) addOperationDeleteReplicationTaskAssessmentRunMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteReplicationTaskAssessmentRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteReplicationTaskAssessmentRun",
-	}
 }

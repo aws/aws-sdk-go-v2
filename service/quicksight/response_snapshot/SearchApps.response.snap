@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppSummaryList":[{"AppId":"__AppId__","Arn":"__Arn__","CreatedTime":946684800,"LastUpdatedTime":946684800,"Name":"__Name__","Visibility":"PRIVATE"},{"AppId":"__AppId__","Arn":"__Arn__","CreatedTime":946684800,"LastUpdatedTime":946684800,"Name":"__Name__","Visibility":"PRIVATE"}],"NextToken":"__NextToken__","RequestId":"__RequestId__"}

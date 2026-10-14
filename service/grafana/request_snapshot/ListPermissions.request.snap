@@ -1,0 +1,3 @@
+GET /workspaces/__WorkspaceId__/permissions?groupId=__GroupId__&maxResults=1&nextToken=__NextToken__&userId=__UserId__&userType=SSO_USER
+
+

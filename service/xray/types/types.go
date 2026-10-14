@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,6 +22,37 @@ type Alias struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Alias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Alias_Name, *v.Name)
+	}
+	serializeAliasNames(s, schemas.Alias_Names, v.Names)
+	if v.Type != nil {
+		s.WriteString(schemas.Alias_Type, *v.Type)
+	}
+}
+func (v *Alias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alias_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Alias_Name, v.Name)
+		case schemas.Alias_Names:
+			return deserializeAliasNames(d, schemas.Alias_Names, &v.Names)
+		case schemas.Alias_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Alias_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Value of a segment annotation. Has one of three value types: Number, Boolean,
@@ -42,6 +75,12 @@ type AnnotationValueMemberBooleanValue struct {
 }
 
 func (*AnnotationValueMemberBooleanValue) isAnnotationValue() {}
+func (v *AnnotationValueMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AnnotationValue_BooleanValue, v.Value)
+}
+func (v *AnnotationValueMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AnnotationValue_BooleanValue, &v.Value)
+}
 
 // Value for a Number annotation.
 type AnnotationValueMemberNumberValue struct {
@@ -51,6 +90,12 @@ type AnnotationValueMemberNumberValue struct {
 }
 
 func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
+func (v *AnnotationValueMemberNumberValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.AnnotationValue_NumberValue, v.Value)
+}
+func (v *AnnotationValueMemberNumberValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.AnnotationValue_NumberValue, &v.Value)
+}
 
 // Value for a String annotation.
 type AnnotationValueMemberStringValue struct {
@@ -60,6 +105,12 @@ type AnnotationValueMemberStringValue struct {
 }
 
 func (*AnnotationValueMemberStringValue) isAnnotationValue() {}
+func (v *AnnotationValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AnnotationValue_StringValue, v.Value)
+}
+func (v *AnnotationValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AnnotationValue_StringValue, &v.Value)
+}
 
 // The service within the service graph that has anomalously high fault rates.
 type AnomalousService struct {
@@ -70,6 +121,30 @@ type AnomalousService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalousService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalousService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalousService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceId != nil {
+		s.WriteStruct(schemas.AnomalousService_ServiceId)
+		v.ServiceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnomalousService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalousService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalousService_ServiceId:
+			v.ServiceId = &ServiceId{}
+			return v.ServiceId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A list of Availability Zones corresponding to the segments in a trace.
 type AvailabilityZoneDetail struct {
 
@@ -77,6 +152,28 @@ type AvailabilityZoneDetail struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvailabilityZoneDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityZoneDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityZoneDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AvailabilityZoneDetail_Name, *v.Name)
+	}
+}
+func (v *AvailabilityZoneDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityZoneDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityZoneDetail_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AvailabilityZoneDetail_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type BackendConnectionErrors struct {
@@ -100,6 +197,58 @@ type BackendConnectionErrors struct {
 	UnknownHostCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackendConnectionErrors) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackendConnectionErrors)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackendConnectionErrors) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionRefusedCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_ConnectionRefusedCount, *v.ConnectionRefusedCount)
+	}
+	if v.HTTPCode4XXCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_HTTPCode4XXCount, *v.HTTPCode4XXCount)
+	}
+	if v.HTTPCode5XXCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_HTTPCode5XXCount, *v.HTTPCode5XXCount)
+	}
+	if v.OtherCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_OtherCount, *v.OtherCount)
+	}
+	if v.TimeoutCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_TimeoutCount, *v.TimeoutCount)
+	}
+	if v.UnknownHostCount != nil {
+		s.WriteInt32(schemas.BackendConnectionErrors_UnknownHostCount, *v.UnknownHostCount)
+	}
+}
+func (v *BackendConnectionErrors) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackendConnectionErrors, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackendConnectionErrors_ConnectionRefusedCount:
+			v.ConnectionRefusedCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_ConnectionRefusedCount, v.ConnectionRefusedCount)
+		case schemas.BackendConnectionErrors_HTTPCode4XXCount:
+			v.HTTPCode4XXCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_HTTPCode4XXCount, v.HTTPCode4XXCount)
+		case schemas.BackendConnectionErrors_HTTPCode5XXCount:
+			v.HTTPCode5XXCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_HTTPCode5XXCount, v.HTTPCode5XXCount)
+		case schemas.BackendConnectionErrors_OtherCount:
+			v.OtherCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_OtherCount, v.OtherCount)
+		case schemas.BackendConnectionErrors_TimeoutCount:
+			v.TimeoutCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_TimeoutCount, v.TimeoutCount)
+		case schemas.BackendConnectionErrors_UnknownHostCount:
+			v.UnknownHostCount = new(int32)
+			return d.ReadInt32(schemas.BackendConnectionErrors_UnknownHostCount, v.UnknownHostCount)
+		}
+		return nil
+	})
 }
 
 // Information about a connection between two services. An edge can be a
@@ -138,6 +287,63 @@ type Edge struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Edge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Edge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Edge) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliasList(s, schemas.Edge_Aliases, v.Aliases)
+	if v.EdgeType != nil {
+		s.WriteString(schemas.Edge_EdgeType, *v.EdgeType)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Edge_EndTime, *v.EndTime)
+	}
+	serializeHistogram(s, schemas.Edge_ReceivedEventAgeHistogram, v.ReceivedEventAgeHistogram)
+	if v.ReferenceId != nil {
+		s.WriteInt32(schemas.Edge_ReferenceId, *v.ReferenceId)
+	}
+	serializeHistogram(s, schemas.Edge_ResponseTimeHistogram, v.ResponseTimeHistogram)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Edge_StartTime, *v.StartTime)
+	}
+	if v.SummaryStatistics != nil {
+		s.WriteStruct(schemas.Edge_SummaryStatistics)
+		v.SummaryStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Edge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Edge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Edge_Aliases:
+			return deserializeAliasList(d, schemas.Edge_Aliases, &v.Aliases)
+		case schemas.Edge_EdgeType:
+			v.EdgeType = new(string)
+			return d.ReadString(schemas.Edge_EdgeType, v.EdgeType)
+		case schemas.Edge_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Edge_EndTime, v.EndTime)
+		case schemas.Edge_ReceivedEventAgeHistogram:
+			return deserializeHistogram(d, schemas.Edge_ReceivedEventAgeHistogram, &v.ReceivedEventAgeHistogram)
+		case schemas.Edge_ReferenceId:
+			v.ReferenceId = new(int32)
+			return d.ReadInt32(schemas.Edge_ReferenceId, v.ReferenceId)
+		case schemas.Edge_ResponseTimeHistogram:
+			return deserializeHistogram(d, schemas.Edge_ResponseTimeHistogram, &v.ResponseTimeHistogram)
+		case schemas.Edge_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Edge_StartTime, v.StartTime)
+		case schemas.Edge_SummaryStatistics:
+			v.SummaryStatistics = &EdgeStatistics{}
+			return v.SummaryStatistics.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Response statistics for an edge.
 type EdgeStatistics struct {
 
@@ -159,6 +365,56 @@ type EdgeStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EdgeStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdgeStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdgeStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorStatistics != nil {
+		s.WriteStruct(schemas.EdgeStatistics_ErrorStatistics)
+		v.ErrorStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FaultStatistics != nil {
+		s.WriteStruct(schemas.EdgeStatistics_FaultStatistics)
+		v.FaultStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OkCount != nil {
+		s.WriteInt64(schemas.EdgeStatistics_OkCount, *v.OkCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.EdgeStatistics_TotalCount, *v.TotalCount)
+	}
+	if v.TotalResponseTime != nil {
+		s.WriteFloat64(schemas.EdgeStatistics_TotalResponseTime, *v.TotalResponseTime)
+	}
+}
+func (v *EdgeStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdgeStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdgeStatistics_ErrorStatistics:
+			v.ErrorStatistics = &ErrorStatistics{}
+			return v.ErrorStatistics.Deserialize(d)
+		case schemas.EdgeStatistics_FaultStatistics:
+			v.FaultStatistics = &FaultStatistics{}
+			return v.FaultStatistics.Deserialize(d)
+		case schemas.EdgeStatistics_OkCount:
+			v.OkCount = new(int64)
+			return d.ReadInt64(schemas.EdgeStatistics_OkCount, v.OkCount)
+		case schemas.EdgeStatistics_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.EdgeStatistics_TotalCount, v.TotalCount)
+		case schemas.EdgeStatistics_TotalResponseTime:
+			v.TotalResponseTime = new(float64)
+			return d.ReadFloat64(schemas.EdgeStatistics_TotalResponseTime, v.TotalResponseTime)
+		}
+		return nil
+	})
+}
+
 // A configuration document that specifies encryption configuration settings.
 type EncryptionConfig struct {
 
@@ -176,6 +432,48 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.EncryptionConfig_KeyId, *v.KeyId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EncryptionConfig_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EncryptionConfig_Type, string(v.Type))
+	}
+}
+func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfig_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.EncryptionConfig_KeyId, v.KeyId)
+		case schemas.EncryptionConfig_Status:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfig_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EncryptionStatus(ev)
+			return nil
+		case schemas.EncryptionConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The root cause of a trace summary error.
 type ErrorRootCause struct {
 
@@ -187,6 +485,31 @@ type ErrorRootCause struct {
 	Services []ErrorRootCauseService
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorRootCause) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorRootCause)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorRootCause) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientImpacting != nil {
+		s.WriteBool(schemas.ErrorRootCause_ClientImpacting, *v.ClientImpacting)
+	}
+	serializeErrorRootCauseServices(s, schemas.ErrorRootCause_Services, v.Services)
+}
+func (v *ErrorRootCause) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorRootCause, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorRootCause_ClientImpacting:
+			v.ClientImpacting = new(bool)
+			return d.ReadBool(schemas.ErrorRootCause_ClientImpacting, v.ClientImpacting)
+		case schemas.ErrorRootCause_Services:
+			return deserializeErrorRootCauseServices(d, schemas.ErrorRootCause_Services, &v.Services)
+		}
+		return nil
+	})
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -203,6 +526,37 @@ type ErrorRootCauseEntity struct {
 	Remote *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorRootCauseEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorRootCauseEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorRootCauseEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRootCauseExceptions(s, schemas.ErrorRootCauseEntity_Exceptions, v.Exceptions)
+	if v.Name != nil {
+		s.WriteString(schemas.ErrorRootCauseEntity_Name, *v.Name)
+	}
+	if v.Remote != nil {
+		s.WriteBool(schemas.ErrorRootCauseEntity_Remote, *v.Remote)
+	}
+}
+func (v *ErrorRootCauseEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorRootCauseEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorRootCauseEntity_Exceptions:
+			return deserializeRootCauseExceptions(d, schemas.ErrorRootCauseEntity_Exceptions, &v.Exceptions)
+		case schemas.ErrorRootCauseEntity_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ErrorRootCauseEntity_Name, v.Name)
+		case schemas.ErrorRootCauseEntity_Remote:
+			v.Remote = new(bool)
+			return d.ReadBool(schemas.ErrorRootCauseEntity_Remote, v.Remote)
+		}
+		return nil
+	})
 }
 
 // A collection of fields identifying the services in a trace summary error.
@@ -229,6 +583,52 @@ type ErrorRootCauseService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorRootCauseService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorRootCauseService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorRootCauseService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ErrorRootCauseService_AccountId, *v.AccountId)
+	}
+	serializeErrorRootCauseEntityPath(s, schemas.ErrorRootCauseService_EntityPath, v.EntityPath)
+	if v.Inferred != nil {
+		s.WriteBool(schemas.ErrorRootCauseService_Inferred, *v.Inferred)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ErrorRootCauseService_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.ErrorRootCauseService_Names, v.Names)
+	if v.Type != nil {
+		s.WriteString(schemas.ErrorRootCauseService_Type, *v.Type)
+	}
+}
+func (v *ErrorRootCauseService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorRootCauseService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorRootCauseService_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ErrorRootCauseService_AccountId, v.AccountId)
+		case schemas.ErrorRootCauseService_EntityPath:
+			return deserializeErrorRootCauseEntityPath(d, schemas.ErrorRootCauseService_EntityPath, &v.EntityPath)
+		case schemas.ErrorRootCauseService_Inferred:
+			v.Inferred = new(bool)
+			return d.ReadBool(schemas.ErrorRootCauseService_Inferred, v.Inferred)
+		case schemas.ErrorRootCauseService_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ErrorRootCauseService_Name, v.Name)
+		case schemas.ErrorRootCauseService_Names:
+			return deserializeServiceNames(d, schemas.ErrorRootCauseService_Names, &v.Names)
+		case schemas.ErrorRootCauseService_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ErrorRootCauseService_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Information about requests that failed with a 4xx Client Error status code.
 type ErrorStatistics struct {
 
@@ -244,6 +644,40 @@ type ErrorStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtherCount != nil {
+		s.WriteInt64(schemas.ErrorStatistics_OtherCount, *v.OtherCount)
+	}
+	if v.ThrottleCount != nil {
+		s.WriteInt64(schemas.ErrorStatistics_ThrottleCount, *v.ThrottleCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.ErrorStatistics_TotalCount, *v.TotalCount)
+	}
+}
+func (v *ErrorStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorStatistics_OtherCount:
+			v.OtherCount = new(int64)
+			return d.ReadInt64(schemas.ErrorStatistics_OtherCount, v.OtherCount)
+		case schemas.ErrorStatistics_ThrottleCount:
+			v.ThrottleCount = new(int64)
+			return d.ReadInt64(schemas.ErrorStatistics_ThrottleCount, v.ThrottleCount)
+		case schemas.ErrorStatistics_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.ErrorStatistics_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
+}
+
 // The root cause information for a trace summary fault.
 type FaultRootCause struct {
 
@@ -255,6 +689,31 @@ type FaultRootCause struct {
 	Services []FaultRootCauseService
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaultRootCause) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaultRootCause)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaultRootCause) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientImpacting != nil {
+		s.WriteBool(schemas.FaultRootCause_ClientImpacting, *v.ClientImpacting)
+	}
+	serializeFaultRootCauseServices(s, schemas.FaultRootCause_Services, v.Services)
+}
+func (v *FaultRootCause) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaultRootCause, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaultRootCause_ClientImpacting:
+			v.ClientImpacting = new(bool)
+			return d.ReadBool(schemas.FaultRootCause_ClientImpacting, v.ClientImpacting)
+		case schemas.FaultRootCause_Services:
+			return deserializeFaultRootCauseServices(d, schemas.FaultRootCause_Services, &v.Services)
+		}
+		return nil
+	})
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -271,6 +730,37 @@ type FaultRootCauseEntity struct {
 	Remote *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaultRootCauseEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaultRootCauseEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaultRootCauseEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRootCauseExceptions(s, schemas.FaultRootCauseEntity_Exceptions, v.Exceptions)
+	if v.Name != nil {
+		s.WriteString(schemas.FaultRootCauseEntity_Name, *v.Name)
+	}
+	if v.Remote != nil {
+		s.WriteBool(schemas.FaultRootCauseEntity_Remote, *v.Remote)
+	}
+}
+func (v *FaultRootCauseEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaultRootCauseEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaultRootCauseEntity_Exceptions:
+			return deserializeRootCauseExceptions(d, schemas.FaultRootCauseEntity_Exceptions, &v.Exceptions)
+		case schemas.FaultRootCauseEntity_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FaultRootCauseEntity_Name, v.Name)
+		case schemas.FaultRootCauseEntity_Remote:
+			v.Remote = new(bool)
+			return d.ReadBool(schemas.FaultRootCauseEntity_Remote, v.Remote)
+		}
+		return nil
+	})
 }
 
 // A collection of fields identifying the services in a trace summary fault.
@@ -297,6 +787,52 @@ type FaultRootCauseService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FaultRootCauseService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaultRootCauseService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaultRootCauseService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.FaultRootCauseService_AccountId, *v.AccountId)
+	}
+	serializeFaultRootCauseEntityPath(s, schemas.FaultRootCauseService_EntityPath, v.EntityPath)
+	if v.Inferred != nil {
+		s.WriteBool(schemas.FaultRootCauseService_Inferred, *v.Inferred)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FaultRootCauseService_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.FaultRootCauseService_Names, v.Names)
+	if v.Type != nil {
+		s.WriteString(schemas.FaultRootCauseService_Type, *v.Type)
+	}
+}
+func (v *FaultRootCauseService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaultRootCauseService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaultRootCauseService_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.FaultRootCauseService_AccountId, v.AccountId)
+		case schemas.FaultRootCauseService_EntityPath:
+			return deserializeFaultRootCauseEntityPath(d, schemas.FaultRootCauseService_EntityPath, &v.EntityPath)
+		case schemas.FaultRootCauseService_Inferred:
+			v.Inferred = new(bool)
+			return d.ReadBool(schemas.FaultRootCauseService_Inferred, v.Inferred)
+		case schemas.FaultRootCauseService_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FaultRootCauseService_Name, v.Name)
+		case schemas.FaultRootCauseService_Names:
+			return deserializeServiceNames(d, schemas.FaultRootCauseService_Names, &v.Names)
+		case schemas.FaultRootCauseService_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.FaultRootCauseService_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Information about requests that failed with a 5xx Server Error status code.
 type FaultStatistics struct {
 
@@ -307,6 +843,34 @@ type FaultStatistics struct {
 	TotalCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *FaultStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FaultStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FaultStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtherCount != nil {
+		s.WriteInt64(schemas.FaultStatistics_OtherCount, *v.OtherCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.FaultStatistics_TotalCount, *v.TotalCount)
+	}
+}
+func (v *FaultStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FaultStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FaultStatistics_OtherCount:
+			v.OtherCount = new(int64)
+			return d.ReadInt64(schemas.FaultStatistics_OtherCount, v.OtherCount)
+		case schemas.FaultStatistics_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.FaultStatistics_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
 }
 
 // The predicted high and low fault count. This is used to determine if a service
@@ -322,6 +886,34 @@ type ForecastStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForecastStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaultCountHigh != nil {
+		s.WriteInt64(schemas.ForecastStatistics_FaultCountHigh, *v.FaultCountHigh)
+	}
+	if v.FaultCountLow != nil {
+		s.WriteInt64(schemas.ForecastStatistics_FaultCountLow, *v.FaultCountLow)
+	}
+}
+func (v *ForecastStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastStatistics_FaultCountHigh:
+			v.FaultCountHigh = new(int64)
+			return d.ReadInt64(schemas.ForecastStatistics_FaultCountHigh, v.FaultCountHigh)
+		case schemas.ForecastStatistics_FaultCountLow:
+			v.FaultCountLow = new(int64)
+			return d.ReadInt64(schemas.ForecastStatistics_FaultCountLow, v.FaultCountLow)
+		}
+		return nil
+	})
+}
+
 // The relation between two services.
 type GraphLink struct {
 
@@ -335,6 +927,37 @@ type GraphLink struct {
 	SourceTraceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GraphLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphLink) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTraceIdList(s, schemas.GraphLink_DestinationTraceIds, v.DestinationTraceIds)
+	if v.ReferenceType != nil {
+		s.WriteString(schemas.GraphLink_ReferenceType, *v.ReferenceType)
+	}
+	if v.SourceTraceId != nil {
+		s.WriteString(schemas.GraphLink_SourceTraceId, *v.SourceTraceId)
+	}
+}
+func (v *GraphLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphLink_DestinationTraceIds:
+			return deserializeTraceIdList(d, schemas.GraphLink_DestinationTraceIds, &v.DestinationTraceIds)
+		case schemas.GraphLink_ReferenceType:
+			v.ReferenceType = new(string)
+			return d.ReadString(schemas.GraphLink_ReferenceType, v.ReferenceType)
+		case schemas.GraphLink_SourceTraceId:
+			v.SourceTraceId = new(string)
+			return d.ReadString(schemas.GraphLink_SourceTraceId, v.SourceTraceId)
+		}
+		return nil
+	})
 }
 
 // Details and metadata for a group.
@@ -359,6 +982,48 @@ type Group struct {
 	InsightsConfiguration *InsightsConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.Group_FilterExpression, *v.FilterExpression)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.Group_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.Group_GroupName, *v.GroupName)
+	}
+	if v.InsightsConfiguration != nil {
+		s.WriteStruct(schemas.Group_InsightsConfiguration)
+		v.InsightsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_FilterExpression:
+			v.FilterExpression = new(string)
+			return d.ReadString(schemas.Group_FilterExpression, v.FilterExpression)
+		case schemas.Group_GroupARN:
+			v.GroupARN = new(string)
+			return d.ReadString(schemas.Group_GroupARN, v.GroupARN)
+		case schemas.Group_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.Group_GroupName, v.GroupName)
+		case schemas.Group_InsightsConfiguration:
+			v.InsightsConfiguration = &InsightsConfiguration{}
+			return v.InsightsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details for a group without metadata.
@@ -386,6 +1051,48 @@ type GroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.GroupSummary_FilterExpression, *v.FilterExpression)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.GroupSummary_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupSummary_GroupName, *v.GroupName)
+	}
+	if v.InsightsConfiguration != nil {
+		s.WriteStruct(schemas.GroupSummary_InsightsConfiguration)
+		v.InsightsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupSummary_FilterExpression:
+			v.FilterExpression = new(string)
+			return d.ReadString(schemas.GroupSummary_FilterExpression, v.FilterExpression)
+		case schemas.GroupSummary_GroupARN:
+			v.GroupARN = new(string)
+			return d.ReadString(schemas.GroupSummary_GroupARN, v.GroupARN)
+		case schemas.GroupSummary_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupSummary_GroupName, v.GroupName)
+		case schemas.GroupSummary_InsightsConfiguration:
+			v.InsightsConfiguration = &InsightsConfiguration{}
+			return v.InsightsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An entry in a histogram for a statistic. A histogram maps the range of observed
 // values on the X axis, and the prevalence of each value on the Y axis.
 type HistogramEntry struct {
@@ -397,6 +1104,32 @@ type HistogramEntry struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *HistogramEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HistogramEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HistogramEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt32(schemas.HistogramEntry_Count, v.Count)
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.HistogramEntry_Value, v.Value)
+	}
+}
+func (v *HistogramEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HistogramEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HistogramEntry_Count:
+			return d.ReadInt32(schemas.HistogramEntry_Count, &v.Count)
+		case schemas.HistogramEntry_Value:
+			return d.ReadFloat64(schemas.HistogramEntry_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about an HTTP request.
@@ -420,6 +1153,52 @@ type Http struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Http) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Http)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Http) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIp != nil {
+		s.WriteString(schemas.Http_ClientIp, *v.ClientIp)
+	}
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.Http_HttpMethod, *v.HttpMethod)
+	}
+	if v.HttpStatus != nil {
+		s.WriteInt32(schemas.Http_HttpStatus, *v.HttpStatus)
+	}
+	if v.HttpURL != nil {
+		s.WriteString(schemas.Http_HttpURL, *v.HttpURL)
+	}
+	if v.UserAgent != nil {
+		s.WriteString(schemas.Http_UserAgent, *v.UserAgent)
+	}
+}
+func (v *Http) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Http, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Http_ClientIp:
+			v.ClientIp = new(string)
+			return d.ReadString(schemas.Http_ClientIp, v.ClientIp)
+		case schemas.Http_HttpMethod:
+			v.HttpMethod = new(string)
+			return d.ReadString(schemas.Http_HttpMethod, v.HttpMethod)
+		case schemas.Http_HttpStatus:
+			v.HttpStatus = new(int32)
+			return d.ReadInt32(schemas.Http_HttpStatus, v.HttpStatus)
+		case schemas.Http_HttpURL:
+			v.HttpURL = new(string)
+			return d.ReadString(schemas.Http_HttpURL, v.HttpURL)
+		case schemas.Http_UserAgent:
+			v.UserAgent = new(string)
+			return d.ReadString(schemas.Http_UserAgent, v.UserAgent)
+		}
+		return nil
+	})
+}
+
 //	Rule used to determine the server-side sampling rate for spans ingested
 //
 // through the CloudWatchLogs destination and indexed by X-Ray.
@@ -435,6 +1214,37 @@ type IndexingRule struct {
 	Rule IndexingRuleValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *IndexingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexingRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexingRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.IndexingRule_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IndexingRule_Name, *v.Name)
+	}
+	serializeIndexingRuleValue(s, schemas.IndexingRule_Rule, v.Rule)
+}
+func (v *IndexingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexingRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexingRule_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.IndexingRule_ModifiedAt, v.ModifiedAt)
+		case schemas.IndexingRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IndexingRule_Name, v.Name)
+		case schemas.IndexingRule_Rule:
+			return deserializeIndexingRuleValue(d, schemas.IndexingRule_Rule, &v.Rule)
+		}
+		return nil
+	})
 }
 
 //	The indexing rule configuration.
@@ -454,6 +1264,14 @@ type IndexingRuleValueMemberProbabilistic struct {
 }
 
 func (*IndexingRuleValueMemberProbabilistic) isIndexingRuleValue() {}
+func (v *IndexingRuleValueMemberProbabilistic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexingRuleValue_Probabilistic)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IndexingRuleValueMemberProbabilistic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 //	Update to an indexing rule.
 //
@@ -472,6 +1290,14 @@ type IndexingRuleValueUpdateMemberProbabilistic struct {
 }
 
 func (*IndexingRuleValueUpdateMemberProbabilistic) isIndexingRuleValueUpdate() {}
+func (v *IndexingRuleValueUpdateMemberProbabilistic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexingRuleValueUpdate_Probabilistic)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IndexingRuleValueUpdateMemberProbabilistic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // When fault rates go outside of the expected range, X-Ray creates an insight.
 // Insights tracks emergent issues within your applications.
@@ -518,6 +1344,98 @@ type Insight struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Insight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Insight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Insight) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightCategoryList(s, schemas.Insight_Categories, v.Categories)
+	if v.ClientRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.Insight_ClientRequestImpactStatistics)
+		v.ClientRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Insight_EndTime, *v.EndTime)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.Insight_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.Insight_GroupName, *v.GroupName)
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.Insight_InsightId, *v.InsightId)
+	}
+	if v.RootCauseServiceId != nil {
+		s.WriteStruct(schemas.Insight_RootCauseServiceId)
+		v.RootCauseServiceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootCauseServiceRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.Insight_RootCauseServiceRequestImpactStatistics)
+		v.RootCauseServiceRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Insight_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Insight_State, string(v.State))
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.Insight_Summary, *v.Summary)
+	}
+	serializeAnomalousServiceList(s, schemas.Insight_TopAnomalousServices, v.TopAnomalousServices)
+}
+func (v *Insight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Insight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Insight_Categories:
+			return deserializeInsightCategoryList(d, schemas.Insight_Categories, &v.Categories)
+		case schemas.Insight_ClientRequestImpactStatistics:
+			v.ClientRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.ClientRequestImpactStatistics.Deserialize(d)
+		case schemas.Insight_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Insight_EndTime, v.EndTime)
+		case schemas.Insight_GroupARN:
+			v.GroupARN = new(string)
+			return d.ReadString(schemas.Insight_GroupARN, v.GroupARN)
+		case schemas.Insight_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.Insight_GroupName, v.GroupName)
+		case schemas.Insight_InsightId:
+			v.InsightId = new(string)
+			return d.ReadString(schemas.Insight_InsightId, v.InsightId)
+		case schemas.Insight_RootCauseServiceId:
+			v.RootCauseServiceId = &ServiceId{}
+			return v.RootCauseServiceId.Deserialize(d)
+		case schemas.Insight_RootCauseServiceRequestImpactStatistics:
+			v.RootCauseServiceRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.RootCauseServiceRequestImpactStatistics.Deserialize(d)
+		case schemas.Insight_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Insight_StartTime, v.StartTime)
+		case schemas.Insight_State:
+			var ev string
+			if err := d.ReadString(schemas.Insight_State, &ev); err != nil {
+				return err
+			}
+			v.State = InsightState(ev)
+			return nil
+		case schemas.Insight_Summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.Insight_Summary, v.Summary)
+		case schemas.Insight_TopAnomalousServices:
+			return deserializeAnomalousServiceList(d, schemas.Insight_TopAnomalousServices, &v.TopAnomalousServices)
+		}
+		return nil
+	})
+}
+
 // X-Ray reevaluates insights periodically until they are resolved, and records
 // each intermediate state in an event. You can review incident events in the
 // Impact Timeline on the Inspect page in the X-Ray console.
@@ -543,6 +1461,53 @@ type InsightEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.InsightEvent_ClientRequestImpactStatistics)
+		v.ClientRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.InsightEvent_EventTime, *v.EventTime)
+	}
+	if v.RootCauseServiceRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.InsightEvent_RootCauseServiceRequestImpactStatistics)
+		v.RootCauseServiceRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.InsightEvent_Summary, *v.Summary)
+	}
+	serializeAnomalousServiceList(s, schemas.InsightEvent_TopAnomalousServices, v.TopAnomalousServices)
+}
+func (v *InsightEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightEvent_ClientRequestImpactStatistics:
+			v.ClientRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.ClientRequestImpactStatistics.Deserialize(d)
+		case schemas.InsightEvent_EventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.InsightEvent_EventTime, v.EventTime)
+		case schemas.InsightEvent_RootCauseServiceRequestImpactStatistics:
+			v.RootCauseServiceRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.RootCauseServiceRequestImpactStatistics.Deserialize(d)
+		case schemas.InsightEvent_Summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.InsightEvent_Summary, v.Summary)
+		case schemas.InsightEvent_TopAnomalousServices:
+			return deserializeAnomalousServiceList(d, schemas.InsightEvent_TopAnomalousServices, &v.TopAnomalousServices)
+		}
+		return nil
+	})
+}
+
 // The connection between two service in an insight impact graph.
 type InsightImpactGraphEdge struct {
 
@@ -550,6 +1515,28 @@ type InsightImpactGraphEdge struct {
 	ReferenceId *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InsightImpactGraphEdge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightImpactGraphEdge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightImpactGraphEdge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceId != nil {
+		s.WriteInt32(schemas.InsightImpactGraphEdge_ReferenceId, *v.ReferenceId)
+	}
+}
+func (v *InsightImpactGraphEdge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightImpactGraphEdge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightImpactGraphEdge_ReferenceId:
+			v.ReferenceId = new(int32)
+			return d.ReadInt32(schemas.InsightImpactGraphEdge_ReferenceId, v.ReferenceId)
+		}
+		return nil
+	})
 }
 
 // Information about an application that processed requests, users that made
@@ -592,6 +1579,52 @@ type InsightImpactGraphService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightImpactGraphService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightImpactGraphService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightImpactGraphService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InsightImpactGraphService_AccountId, *v.AccountId)
+	}
+	serializeInsightImpactGraphEdgeList(s, schemas.InsightImpactGraphService_Edges, v.Edges)
+	if v.Name != nil {
+		s.WriteString(schemas.InsightImpactGraphService_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.InsightImpactGraphService_Names, v.Names)
+	if v.ReferenceId != nil {
+		s.WriteInt32(schemas.InsightImpactGraphService_ReferenceId, *v.ReferenceId)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InsightImpactGraphService_Type, *v.Type)
+	}
+}
+func (v *InsightImpactGraphService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightImpactGraphService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightImpactGraphService_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.InsightImpactGraphService_AccountId, v.AccountId)
+		case schemas.InsightImpactGraphService_Edges:
+			return deserializeInsightImpactGraphEdgeList(d, schemas.InsightImpactGraphService_Edges, &v.Edges)
+		case schemas.InsightImpactGraphService_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InsightImpactGraphService_Name, v.Name)
+		case schemas.InsightImpactGraphService_Names:
+			return deserializeServiceNames(d, schemas.InsightImpactGraphService_Names, &v.Names)
+		case schemas.InsightImpactGraphService_ReferenceId:
+			v.ReferenceId = new(int32)
+			return d.ReadInt32(schemas.InsightImpactGraphService_ReferenceId, v.ReferenceId)
+		case schemas.InsightImpactGraphService_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InsightImpactGraphService_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The structure containing configurations related to insights.
 type InsightsConfiguration struct {
 
@@ -604,6 +1637,34 @@ type InsightsConfiguration struct {
 	NotificationsEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *InsightsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightsEnabled != nil {
+		s.WriteBool(schemas.InsightsConfiguration_InsightsEnabled, *v.InsightsEnabled)
+	}
+	if v.NotificationsEnabled != nil {
+		s.WriteBool(schemas.InsightsConfiguration_NotificationsEnabled, *v.NotificationsEnabled)
+	}
+}
+func (v *InsightsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightsConfiguration_InsightsEnabled:
+			v.InsightsEnabled = new(bool)
+			return d.ReadBool(schemas.InsightsConfiguration_InsightsEnabled, v.InsightsEnabled)
+		case schemas.InsightsConfiguration_NotificationsEnabled:
+			v.NotificationsEnabled = new(bool)
+			return d.ReadBool(schemas.InsightsConfiguration_NotificationsEnabled, v.NotificationsEnabled)
+		}
+		return nil
+	})
 }
 
 // Information that describes an insight.
@@ -653,6 +1714,104 @@ type InsightSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightCategoryList(s, schemas.InsightSummary_Categories, v.Categories)
+	if v.ClientRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.InsightSummary_ClientRequestImpactStatistics)
+		v.ClientRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.InsightSummary_EndTime, *v.EndTime)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.InsightSummary_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.InsightSummary_GroupName, *v.GroupName)
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.InsightSummary_InsightId, *v.InsightId)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.InsightSummary_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.RootCauseServiceId != nil {
+		s.WriteStruct(schemas.InsightSummary_RootCauseServiceId)
+		v.RootCauseServiceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootCauseServiceRequestImpactStatistics != nil {
+		s.WriteStruct(schemas.InsightSummary_RootCauseServiceRequestImpactStatistics)
+		v.RootCauseServiceRequestImpactStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.InsightSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.InsightSummary_State, string(v.State))
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.InsightSummary_Summary, *v.Summary)
+	}
+	serializeAnomalousServiceList(s, schemas.InsightSummary_TopAnomalousServices, v.TopAnomalousServices)
+}
+func (v *InsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightSummary_Categories:
+			return deserializeInsightCategoryList(d, schemas.InsightSummary_Categories, &v.Categories)
+		case schemas.InsightSummary_ClientRequestImpactStatistics:
+			v.ClientRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.ClientRequestImpactStatistics.Deserialize(d)
+		case schemas.InsightSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.InsightSummary_EndTime, v.EndTime)
+		case schemas.InsightSummary_GroupARN:
+			v.GroupARN = new(string)
+			return d.ReadString(schemas.InsightSummary_GroupARN, v.GroupARN)
+		case schemas.InsightSummary_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.InsightSummary_GroupName, v.GroupName)
+		case schemas.InsightSummary_InsightId:
+			v.InsightId = new(string)
+			return d.ReadString(schemas.InsightSummary_InsightId, v.InsightId)
+		case schemas.InsightSummary_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.InsightSummary_LastUpdateTime, v.LastUpdateTime)
+		case schemas.InsightSummary_RootCauseServiceId:
+			v.RootCauseServiceId = &ServiceId{}
+			return v.RootCauseServiceId.Deserialize(d)
+		case schemas.InsightSummary_RootCauseServiceRequestImpactStatistics:
+			v.RootCauseServiceRequestImpactStatistics = &RequestImpactStatistics{}
+			return v.RootCauseServiceRequestImpactStatistics.Deserialize(d)
+		case schemas.InsightSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.InsightSummary_StartTime, v.StartTime)
+		case schemas.InsightSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.InsightSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = InsightState(ev)
+			return nil
+		case schemas.InsightSummary_Summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.InsightSummary_Summary, v.Summary)
+		case schemas.InsightSummary_TopAnomalousServices:
+			return deserializeAnomalousServiceList(d, schemas.InsightSummary_TopAnomalousServices, &v.TopAnomalousServices)
+		}
+		return nil
+	})
+}
+
 // A list of EC2 instance IDs corresponding to the segments in a trace.
 type InstanceIdDetail struct {
 
@@ -660,6 +1819,28 @@ type InstanceIdDetail struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceIdDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceIdDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceIdDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.InstanceIdDetail_Id, *v.Id)
+	}
+}
+func (v *InstanceIdDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceIdDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceIdDetail_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InstanceIdDetail_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // The indexing rule configuration for probabilistic sampling.
@@ -677,6 +1858,34 @@ type ProbabilisticRuleValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProbabilisticRuleValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProbabilisticRuleValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProbabilisticRuleValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualSamplingPercentage != nil {
+		s.WriteFloat64(schemas.ProbabilisticRuleValue_ActualSamplingPercentage, *v.ActualSamplingPercentage)
+	}
+	if v.DesiredSamplingPercentage != nil {
+		s.WriteFloat64(schemas.ProbabilisticRuleValue_DesiredSamplingPercentage, *v.DesiredSamplingPercentage)
+	}
+}
+func (v *ProbabilisticRuleValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProbabilisticRuleValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProbabilisticRuleValue_ActualSamplingPercentage:
+			v.ActualSamplingPercentage = new(float64)
+			return d.ReadFloat64(schemas.ProbabilisticRuleValue_ActualSamplingPercentage, v.ActualSamplingPercentage)
+		case schemas.ProbabilisticRuleValue_DesiredSamplingPercentage:
+			v.DesiredSamplingPercentage = new(float64)
+			return d.ReadFloat64(schemas.ProbabilisticRuleValue_DesiredSamplingPercentage, v.DesiredSamplingPercentage)
+		}
+		return nil
+	})
+}
+
 // Update to the indexing rule configuration for probabilistic sampling.
 type ProbabilisticRuleValueUpdate struct {
 
@@ -687,6 +1896,28 @@ type ProbabilisticRuleValueUpdate struct {
 	DesiredSamplingPercentage *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProbabilisticRuleValueUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProbabilisticRuleValueUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProbabilisticRuleValueUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredSamplingPercentage != nil {
+		s.WriteFloat64(schemas.ProbabilisticRuleValueUpdate_DesiredSamplingPercentage, *v.DesiredSamplingPercentage)
+	}
+}
+func (v *ProbabilisticRuleValueUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProbabilisticRuleValueUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProbabilisticRuleValueUpdate_DesiredSamplingPercentage:
+			v.DesiredSamplingPercentage = new(float64)
+			return d.ReadFloat64(schemas.ProbabilisticRuleValueUpdate_DesiredSamplingPercentage, v.DesiredSamplingPercentage)
+		}
+		return nil
+	})
 }
 
 // Statistics that describe how the incident has impacted a service.
@@ -704,6 +1935,40 @@ type RequestImpactStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestImpactStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestImpactStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestImpactStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaultCount != nil {
+		s.WriteInt64(schemas.RequestImpactStatistics_FaultCount, *v.FaultCount)
+	}
+	if v.OkCount != nil {
+		s.WriteInt64(schemas.RequestImpactStatistics_OkCount, *v.OkCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.RequestImpactStatistics_TotalCount, *v.TotalCount)
+	}
+}
+func (v *RequestImpactStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestImpactStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestImpactStatistics_FaultCount:
+			v.FaultCount = new(int64)
+			return d.ReadInt64(schemas.RequestImpactStatistics_FaultCount, v.FaultCount)
+		case schemas.RequestImpactStatistics_OkCount:
+			v.OkCount = new(int64)
+			return d.ReadInt64(schemas.RequestImpactStatistics_OkCount, v.OkCount)
+		case schemas.RequestImpactStatistics_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.RequestImpactStatistics_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
+}
+
 // A list of resources ARNs corresponding to the segments in a trace.
 type ResourceARNDetail struct {
 
@@ -711,6 +1976,28 @@ type ResourceARNDetail struct {
 	ARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceARNDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceARNDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceARNDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ResourceARNDetail_ARN, *v.ARN)
+	}
+}
+func (v *ResourceARNDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceARNDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceARNDetail_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ResourceARNDetail_ARN, v.ARN)
+		}
+		return nil
+	})
 }
 
 // A resource policy grants one or more Amazon Web Services services and accounts
@@ -734,6 +2021,46 @@ type ResourcePolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourcePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ResourcePolicy_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.ResourcePolicy_PolicyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ResourcePolicy_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.ResourcePolicy_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+}
+func (v *ResourcePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePolicy_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ResourcePolicy_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ResourcePolicy_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.ResourcePolicy_PolicyDocument, v.PolicyDocument)
+		case schemas.ResourcePolicy_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.ResourcePolicy_PolicyName, v.PolicyName)
+		case schemas.ResourcePolicy_PolicyRevisionId:
+			v.PolicyRevisionId = new(string)
+			return d.ReadString(schemas.ResourcePolicy_PolicyRevisionId, v.PolicyRevisionId)
+		}
+		return nil
+	})
+}
+
 // The root cause information for a response time warning.
 type ResponseTimeRootCause struct {
 
@@ -745,6 +2072,31 @@ type ResponseTimeRootCause struct {
 	Services []ResponseTimeRootCauseService
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResponseTimeRootCause) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseTimeRootCause)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseTimeRootCause) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientImpacting != nil {
+		s.WriteBool(schemas.ResponseTimeRootCause_ClientImpacting, *v.ClientImpacting)
+	}
+	serializeResponseTimeRootCauseServices(s, schemas.ResponseTimeRootCause_Services, v.Services)
+}
+func (v *ResponseTimeRootCause) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseTimeRootCause, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseTimeRootCause_ClientImpacting:
+			v.ClientImpacting = new(bool)
+			return d.ReadBool(schemas.ResponseTimeRootCause_ClientImpacting, v.ClientImpacting)
+		case schemas.ResponseTimeRootCause_Services:
+			return deserializeResponseTimeRootCauseServices(d, schemas.ResponseTimeRootCause_Services, &v.Services)
+		}
+		return nil
+	})
 }
 
 // A collection of segments and corresponding subsegments associated to a response
@@ -761,6 +2113,40 @@ type ResponseTimeRootCauseEntity struct {
 	Remote *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResponseTimeRootCauseEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseTimeRootCauseEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseTimeRootCauseEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Coverage != nil {
+		s.WriteFloat64(schemas.ResponseTimeRootCauseEntity_Coverage, *v.Coverage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResponseTimeRootCauseEntity_Name, *v.Name)
+	}
+	if v.Remote != nil {
+		s.WriteBool(schemas.ResponseTimeRootCauseEntity_Remote, *v.Remote)
+	}
+}
+func (v *ResponseTimeRootCauseEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseTimeRootCauseEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseTimeRootCauseEntity_Coverage:
+			v.Coverage = new(float64)
+			return d.ReadFloat64(schemas.ResponseTimeRootCauseEntity_Coverage, v.Coverage)
+		case schemas.ResponseTimeRootCauseEntity_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResponseTimeRootCauseEntity_Name, v.Name)
+		case schemas.ResponseTimeRootCauseEntity_Remote:
+			v.Remote = new(bool)
+			return d.ReadBool(schemas.ResponseTimeRootCauseEntity_Remote, v.Remote)
+		}
+		return nil
+	})
 }
 
 // A collection of fields identifying the service in a response time warning.
@@ -787,6 +2173,52 @@ type ResponseTimeRootCauseService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseTimeRootCauseService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseTimeRootCauseService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseTimeRootCauseService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ResponseTimeRootCauseService_AccountId, *v.AccountId)
+	}
+	serializeResponseTimeRootCauseEntityPath(s, schemas.ResponseTimeRootCauseService_EntityPath, v.EntityPath)
+	if v.Inferred != nil {
+		s.WriteBool(schemas.ResponseTimeRootCauseService_Inferred, *v.Inferred)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResponseTimeRootCauseService_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.ResponseTimeRootCauseService_Names, v.Names)
+	if v.Type != nil {
+		s.WriteString(schemas.ResponseTimeRootCauseService_Type, *v.Type)
+	}
+}
+func (v *ResponseTimeRootCauseService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseTimeRootCauseService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseTimeRootCauseService_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ResponseTimeRootCauseService_AccountId, v.AccountId)
+		case schemas.ResponseTimeRootCauseService_EntityPath:
+			return deserializeResponseTimeRootCauseEntityPath(d, schemas.ResponseTimeRootCauseService_EntityPath, &v.EntityPath)
+		case schemas.ResponseTimeRootCauseService_Inferred:
+			v.Inferred = new(bool)
+			return d.ReadBool(schemas.ResponseTimeRootCauseService_Inferred, v.Inferred)
+		case schemas.ResponseTimeRootCauseService_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResponseTimeRootCauseService_Name, v.Name)
+		case schemas.ResponseTimeRootCauseService_Names:
+			return deserializeServiceNames(d, schemas.ResponseTimeRootCauseService_Names, &v.Names)
+		case schemas.ResponseTimeRootCauseService_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResponseTimeRootCauseService_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 //	Retrieved information about an application that processed requests, users that
 //
 // made requests, or downstream services, resources, and applications that an
@@ -802,6 +2234,33 @@ type RetrievedService struct {
 	Service *Service
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetrievedService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievedService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievedService) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinksList(s, schemas.RetrievedService_Links, v.Links)
+	if v.Service != nil {
+		s.WriteStruct(schemas.RetrievedService_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RetrievedService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievedService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievedService_Links:
+			return deserializeLinksList(d, schemas.RetrievedService_Links, &v.Links)
+		case schemas.RetrievedService_Service:
+			v.Service = &Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Retrieved collection of spans with matching trace IDs.
@@ -820,6 +2279,37 @@ type RetrievedTrace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrievedTrace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievedTrace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrievedTrace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.RetrievedTrace_Duration, *v.Duration)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RetrievedTrace_Id, *v.Id)
+	}
+	serializeSpanList(s, schemas.RetrievedTrace_Spans, v.Spans)
+}
+func (v *RetrievedTrace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrievedTrace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrievedTrace_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.RetrievedTrace_Duration, v.Duration)
+		case schemas.RetrievedTrace_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RetrievedTrace_Id, v.Id)
+		case schemas.RetrievedTrace_Spans:
+			return deserializeSpanList(d, schemas.RetrievedTrace_Spans, &v.Spans)
+		}
+		return nil
+	})
+}
+
 // The exception associated with a root cause.
 type RootCauseException struct {
 
@@ -830,6 +2320,34 @@ type RootCauseException struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RootCauseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootCauseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootCauseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RootCauseException_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RootCauseException_Name, *v.Name)
+	}
+}
+func (v *RootCauseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootCauseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootCauseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RootCauseException_Message, v.Message)
+		case schemas.RootCauseException_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RootCauseException_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Temporary boost sampling rate. X-Ray calculates sampling boost for each service
@@ -849,6 +2367,31 @@ type SamplingBoost struct {
 	BoostRateTTL *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamplingBoost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingBoost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingBoost) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.SamplingBoost_BoostRate, v.BoostRate)
+	if v.BoostRateTTL != nil {
+		s.WriteTime(schemas.SamplingBoost_BoostRateTTL, *v.BoostRateTTL)
+	}
+}
+func (v *SamplingBoost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingBoost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingBoost_BoostRate:
+			return d.ReadFloat64(schemas.SamplingBoost_BoostRate, &v.BoostRate)
+		case schemas.SamplingBoost_BoostRateTTL:
+			v.BoostRateTTL = new(time.Time)
+			return d.ReadTime(schemas.SamplingBoost_BoostRateTTL, v.BoostRateTTL)
+		}
+		return nil
+	})
 }
 
 // Request anomaly stats for a single rule from a service. Results are for the
@@ -891,6 +2434,49 @@ type SamplingBoostStatisticsDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingBoostStatisticsDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingBoostStatisticsDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingBoostStatisticsDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.SamplingBoostStatisticsDocument_AnomalyCount, v.AnomalyCount)
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingBoostStatisticsDocument_RuleName, *v.RuleName)
+	}
+	s.WriteInt32(schemas.SamplingBoostStatisticsDocument_SampledAnomalyCount, v.SampledAnomalyCount)
+	if v.ServiceName != nil {
+		s.WriteString(schemas.SamplingBoostStatisticsDocument_ServiceName, *v.ServiceName)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SamplingBoostStatisticsDocument_Timestamp, *v.Timestamp)
+	}
+	s.WriteInt32(schemas.SamplingBoostStatisticsDocument_TotalCount, v.TotalCount)
+}
+func (v *SamplingBoostStatisticsDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingBoostStatisticsDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingBoostStatisticsDocument_AnomalyCount:
+			return d.ReadInt32(schemas.SamplingBoostStatisticsDocument_AnomalyCount, &v.AnomalyCount)
+		case schemas.SamplingBoostStatisticsDocument_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingBoostStatisticsDocument_RuleName, v.RuleName)
+		case schemas.SamplingBoostStatisticsDocument_SampledAnomalyCount:
+			return d.ReadInt32(schemas.SamplingBoostStatisticsDocument_SampledAnomalyCount, &v.SampledAnomalyCount)
+		case schemas.SamplingBoostStatisticsDocument_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.SamplingBoostStatisticsDocument_ServiceName, v.ServiceName)
+		case schemas.SamplingBoostStatisticsDocument_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SamplingBoostStatisticsDocument_Timestamp, v.Timestamp)
+		case schemas.SamplingBoostStatisticsDocument_TotalCount:
+			return d.ReadInt32(schemas.SamplingBoostStatisticsDocument_TotalCount, &v.TotalCount)
+		}
+		return nil
+	})
+}
+
 // Enable temporary sampling rate increases when you detect anomalies to improve
 // visibility.
 type SamplingRateBoost struct {
@@ -909,6 +2495,28 @@ type SamplingRateBoost struct {
 	MaxRate float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamplingRateBoost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingRateBoost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingRateBoost) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.SamplingRateBoost_CooldownWindowMinutes, v.CooldownWindowMinutes)
+	s.WriteFloat64(schemas.SamplingRateBoost_MaxRate, v.MaxRate)
+}
+func (v *SamplingRateBoost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingRateBoost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingRateBoost_CooldownWindowMinutes:
+			return d.ReadInt32(schemas.SamplingRateBoost_CooldownWindowMinutes, &v.CooldownWindowMinutes)
+		case schemas.SamplingRateBoost_MaxRate:
+			return d.ReadFloat64(schemas.SamplingRateBoost_MaxRate, &v.MaxRate)
+		}
+		return nil
+	})
 }
 
 // A sampling rule that services use to decide whether to instrument a request.
@@ -987,6 +2595,99 @@ type SamplingRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMap(s, schemas.SamplingRule_Attributes, v.Attributes)
+	s.WriteFloat64(schemas.SamplingRule_FixedRate, v.FixedRate)
+	if v.HTTPMethod != nil {
+		s.WriteString(schemas.SamplingRule_HTTPMethod, *v.HTTPMethod)
+	}
+	if v.Host != nil {
+		s.WriteString(schemas.SamplingRule_Host, *v.Host)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.SamplingRule_Priority, *v.Priority)
+	}
+	s.WriteInt32(schemas.SamplingRule_ReservoirSize, v.ReservoirSize)
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.SamplingRule_ResourceARN, *v.ResourceARN)
+	}
+	if v.RuleARN != nil {
+		s.WriteString(schemas.SamplingRule_RuleARN, *v.RuleARN)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingRule_RuleName, *v.RuleName)
+	}
+	if v.SamplingRateBoost != nil {
+		s.WriteStruct(schemas.SamplingRule_SamplingRateBoost)
+		v.SamplingRateBoost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.SamplingRule_ServiceName, *v.ServiceName)
+	}
+	if v.ServiceType != nil {
+		s.WriteString(schemas.SamplingRule_ServiceType, *v.ServiceType)
+	}
+	if v.URLPath != nil {
+		s.WriteString(schemas.SamplingRule_URLPath, *v.URLPath)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.SamplingRule_Version, *v.Version)
+	}
+}
+func (v *SamplingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingRule_Attributes:
+			return deserializeAttributeMap(d, schemas.SamplingRule_Attributes, &v.Attributes)
+		case schemas.SamplingRule_FixedRate:
+			return d.ReadFloat64(schemas.SamplingRule_FixedRate, &v.FixedRate)
+		case schemas.SamplingRule_HTTPMethod:
+			v.HTTPMethod = new(string)
+			return d.ReadString(schemas.SamplingRule_HTTPMethod, v.HTTPMethod)
+		case schemas.SamplingRule_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.SamplingRule_Host, v.Host)
+		case schemas.SamplingRule_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.SamplingRule_Priority, v.Priority)
+		case schemas.SamplingRule_ReservoirSize:
+			return d.ReadInt32(schemas.SamplingRule_ReservoirSize, &v.ReservoirSize)
+		case schemas.SamplingRule_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.SamplingRule_ResourceARN, v.ResourceARN)
+		case schemas.SamplingRule_RuleARN:
+			v.RuleARN = new(string)
+			return d.ReadString(schemas.SamplingRule_RuleARN, v.RuleARN)
+		case schemas.SamplingRule_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingRule_RuleName, v.RuleName)
+		case schemas.SamplingRule_SamplingRateBoost:
+			v.SamplingRateBoost = &SamplingRateBoost{}
+			return v.SamplingRateBoost.Deserialize(d)
+		case schemas.SamplingRule_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.SamplingRule_ServiceName, v.ServiceName)
+		case schemas.SamplingRule_ServiceType:
+			v.ServiceType = new(string)
+			return d.ReadString(schemas.SamplingRule_ServiceType, v.ServiceType)
+		case schemas.SamplingRule_URLPath:
+			v.URLPath = new(string)
+			return d.ReadString(schemas.SamplingRule_URLPath, v.URLPath)
+		case schemas.SamplingRule_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.SamplingRule_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // A [SamplingRule] and its metadata.
 //
 // [SamplingRule]: https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html
@@ -1002,6 +2703,42 @@ type SamplingRuleRecord struct {
 	SamplingRule *SamplingRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamplingRuleRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingRuleRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingRuleRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SamplingRuleRecord_CreatedAt, *v.CreatedAt)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.SamplingRuleRecord_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.SamplingRule != nil {
+		s.WriteStruct(schemas.SamplingRuleRecord_SamplingRule)
+		v.SamplingRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SamplingRuleRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingRuleRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingRuleRecord_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SamplingRuleRecord_CreatedAt, v.CreatedAt)
+		case schemas.SamplingRuleRecord_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.SamplingRuleRecord_ModifiedAt, v.ModifiedAt)
+		case schemas.SamplingRuleRecord_SamplingRule:
+			v.SamplingRule = &SamplingRule{}
+			return v.SamplingRule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A document specifying changes to a sampling rule's configuration.
@@ -1055,6 +2792,99 @@ type SamplingRuleUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingRuleUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingRuleUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingRuleUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMap(s, schemas.SamplingRuleUpdate_Attributes, v.Attributes)
+	if v.FixedRate != nil {
+		s.WriteFloat64(schemas.SamplingRuleUpdate_FixedRate, *v.FixedRate)
+	}
+	if v.HTTPMethod != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_HTTPMethod, *v.HTTPMethod)
+	}
+	if v.Host != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_Host, *v.Host)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.SamplingRuleUpdate_Priority, *v.Priority)
+	}
+	if v.ReservoirSize != nil {
+		s.WriteInt32(schemas.SamplingRuleUpdate_ReservoirSize, *v.ReservoirSize)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_ResourceARN, *v.ResourceARN)
+	}
+	if v.RuleARN != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_RuleARN, *v.RuleARN)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_RuleName, *v.RuleName)
+	}
+	if v.SamplingRateBoost != nil {
+		s.WriteStruct(schemas.SamplingRuleUpdate_SamplingRateBoost)
+		v.SamplingRateBoost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_ServiceName, *v.ServiceName)
+	}
+	if v.ServiceType != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_ServiceType, *v.ServiceType)
+	}
+	if v.URLPath != nil {
+		s.WriteString(schemas.SamplingRuleUpdate_URLPath, *v.URLPath)
+	}
+}
+func (v *SamplingRuleUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingRuleUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingRuleUpdate_Attributes:
+			return deserializeAttributeMap(d, schemas.SamplingRuleUpdate_Attributes, &v.Attributes)
+		case schemas.SamplingRuleUpdate_FixedRate:
+			v.FixedRate = new(float64)
+			return d.ReadFloat64(schemas.SamplingRuleUpdate_FixedRate, v.FixedRate)
+		case schemas.SamplingRuleUpdate_HTTPMethod:
+			v.HTTPMethod = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_HTTPMethod, v.HTTPMethod)
+		case schemas.SamplingRuleUpdate_Host:
+			v.Host = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_Host, v.Host)
+		case schemas.SamplingRuleUpdate_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.SamplingRuleUpdate_Priority, v.Priority)
+		case schemas.SamplingRuleUpdate_ReservoirSize:
+			v.ReservoirSize = new(int32)
+			return d.ReadInt32(schemas.SamplingRuleUpdate_ReservoirSize, v.ReservoirSize)
+		case schemas.SamplingRuleUpdate_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_ResourceARN, v.ResourceARN)
+		case schemas.SamplingRuleUpdate_RuleARN:
+			v.RuleARN = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_RuleARN, v.RuleARN)
+		case schemas.SamplingRuleUpdate_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_RuleName, v.RuleName)
+		case schemas.SamplingRuleUpdate_SamplingRateBoost:
+			v.SamplingRateBoost = &SamplingRateBoost{}
+			return v.SamplingRateBoost.Deserialize(d)
+		case schemas.SamplingRuleUpdate_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_ServiceName, v.ServiceName)
+		case schemas.SamplingRuleUpdate_ServiceType:
+			v.ServiceType = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_ServiceType, v.ServiceType)
+		case schemas.SamplingRuleUpdate_URLPath:
+			v.URLPath = new(string)
+			return d.ReadString(schemas.SamplingRuleUpdate_URLPath, v.URLPath)
+		}
+		return nil
+	})
+}
+
 // Request sampling results for a single rule from a service. Results are for the
 // last 10 seconds unless the service has been assigned a longer reporting interval
 // after a previous call to [GetSamplingTargets].
@@ -1093,6 +2923,51 @@ type SamplingStatisticsDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingStatisticsDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingStatisticsDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingStatisticsDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BorrowCount != 0 {
+		s.WriteInt32(schemas.SamplingStatisticsDocument_BorrowCount, v.BorrowCount)
+	}
+	if v.ClientID != nil {
+		s.WriteString(schemas.SamplingStatisticsDocument_ClientID, *v.ClientID)
+	}
+	s.WriteInt32(schemas.SamplingStatisticsDocument_RequestCount, v.RequestCount)
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingStatisticsDocument_RuleName, *v.RuleName)
+	}
+	s.WriteInt32(schemas.SamplingStatisticsDocument_SampledCount, v.SampledCount)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SamplingStatisticsDocument_Timestamp, *v.Timestamp)
+	}
+}
+func (v *SamplingStatisticsDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingStatisticsDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingStatisticsDocument_BorrowCount:
+			return d.ReadInt32(schemas.SamplingStatisticsDocument_BorrowCount, &v.BorrowCount)
+		case schemas.SamplingStatisticsDocument_ClientID:
+			v.ClientID = new(string)
+			return d.ReadString(schemas.SamplingStatisticsDocument_ClientID, v.ClientID)
+		case schemas.SamplingStatisticsDocument_RequestCount:
+			return d.ReadInt32(schemas.SamplingStatisticsDocument_RequestCount, &v.RequestCount)
+		case schemas.SamplingStatisticsDocument_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingStatisticsDocument_RuleName, v.RuleName)
+		case schemas.SamplingStatisticsDocument_SampledCount:
+			return d.ReadInt32(schemas.SamplingStatisticsDocument_SampledCount, &v.SampledCount)
+		case schemas.SamplingStatisticsDocument_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SamplingStatisticsDocument_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Aggregated request sampling data for a sampling rule across all services for a
 // 10-second window.
 type SamplingStatisticSummary struct {
@@ -1115,6 +2990,49 @@ type SamplingStatisticSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingStatisticSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingStatisticSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingStatisticSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BorrowCount != 0 {
+		s.WriteInt32(schemas.SamplingStatisticSummary_BorrowCount, v.BorrowCount)
+	}
+	if v.RequestCount != 0 {
+		s.WriteInt32(schemas.SamplingStatisticSummary_RequestCount, v.RequestCount)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingStatisticSummary_RuleName, *v.RuleName)
+	}
+	if v.SampledCount != 0 {
+		s.WriteInt32(schemas.SamplingStatisticSummary_SampledCount, v.SampledCount)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SamplingStatisticSummary_Timestamp, *v.Timestamp)
+	}
+}
+func (v *SamplingStatisticSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingStatisticSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingStatisticSummary_BorrowCount:
+			return d.ReadInt32(schemas.SamplingStatisticSummary_BorrowCount, &v.BorrowCount)
+		case schemas.SamplingStatisticSummary_RequestCount:
+			return d.ReadInt32(schemas.SamplingStatisticSummary_RequestCount, &v.RequestCount)
+		case schemas.SamplingStatisticSummary_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingStatisticSummary_RuleName, v.RuleName)
+		case schemas.SamplingStatisticSummary_SampledCount:
+			return d.ReadInt32(schemas.SamplingStatisticSummary_SampledCount, &v.SampledCount)
+		case schemas.SamplingStatisticSummary_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SamplingStatisticSummary_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // The name and value of a sampling rule to apply to a trace summary.
 type SamplingStrategy struct {
 
@@ -1125,6 +3043,38 @@ type SamplingStrategy struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamplingStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SamplingStrategy_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.SamplingStrategy_Value, *v.Value)
+	}
+}
+func (v *SamplingStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingStrategy_Name:
+			var ev string
+			if err := d.ReadString(schemas.SamplingStrategy_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SamplingStrategyName(ev)
+			return nil
+		case schemas.SamplingStrategy_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.SamplingStrategy_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Temporary changes to a sampling rule configuration. To meet the global sampling
@@ -1157,6 +3107,59 @@ type SamplingTargetDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamplingTargetDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamplingTargetDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamplingTargetDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FixedRate != 0 {
+		s.WriteFloat64(schemas.SamplingTargetDocument_FixedRate, v.FixedRate)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.SamplingTargetDocument_Interval, *v.Interval)
+	}
+	if v.ReservoirQuota != nil {
+		s.WriteInt32(schemas.SamplingTargetDocument_ReservoirQuota, *v.ReservoirQuota)
+	}
+	if v.ReservoirQuotaTTL != nil {
+		s.WriteTime(schemas.SamplingTargetDocument_ReservoirQuotaTTL, *v.ReservoirQuotaTTL)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.SamplingTargetDocument_RuleName, *v.RuleName)
+	}
+	if v.SamplingBoost != nil {
+		s.WriteStruct(schemas.SamplingTargetDocument_SamplingBoost)
+		v.SamplingBoost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SamplingTargetDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamplingTargetDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamplingTargetDocument_FixedRate:
+			return d.ReadFloat64(schemas.SamplingTargetDocument_FixedRate, &v.FixedRate)
+		case schemas.SamplingTargetDocument_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.SamplingTargetDocument_Interval, v.Interval)
+		case schemas.SamplingTargetDocument_ReservoirQuota:
+			v.ReservoirQuota = new(int32)
+			return d.ReadInt32(schemas.SamplingTargetDocument_ReservoirQuota, v.ReservoirQuota)
+		case schemas.SamplingTargetDocument_ReservoirQuotaTTL:
+			v.ReservoirQuotaTTL = new(time.Time)
+			return d.ReadTime(schemas.SamplingTargetDocument_ReservoirQuotaTTL, v.ReservoirQuotaTTL)
+		case schemas.SamplingTargetDocument_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.SamplingTargetDocument_RuleName, v.RuleName)
+		case schemas.SamplingTargetDocument_SamplingBoost:
+			v.SamplingBoost = &SamplingBoost{}
+			return v.SamplingBoost.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A segment from a trace that has been ingested by the X-Ray service. The segment
 // can be compiled from documents uploaded with [PutTraceSegments], or an inferred segment for a
 // downstream service, generated from a subsegment sent by the service that called
@@ -1176,6 +3179,34 @@ type Segment struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Segment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Segment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Segment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteString(schemas.Segment_Document, *v.Document)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Segment_Id, *v.Id)
+	}
+}
+func (v *Segment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Segment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Segment_Document:
+			v.Document = new(string)
+			return d.ReadString(schemas.Segment_Document, v.Document)
+		case schemas.Segment_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Segment_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Information about an application that processed requests, users that made
@@ -1237,6 +3268,90 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Service) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Service)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Service_AccountId, *v.AccountId)
+	}
+	serializeHistogram(s, schemas.Service_DurationHistogram, v.DurationHistogram)
+	serializeEdgeList(s, schemas.Service_Edges, v.Edges)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Service_EndTime, *v.EndTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Service_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.Service_Names, v.Names)
+	if v.ReferenceId != nil {
+		s.WriteInt32(schemas.Service_ReferenceId, *v.ReferenceId)
+	}
+	serializeHistogram(s, schemas.Service_ResponseTimeHistogram, v.ResponseTimeHistogram)
+	if v.Root != nil {
+		s.WriteBool(schemas.Service_Root, *v.Root)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Service_StartTime, *v.StartTime)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.Service_State, *v.State)
+	}
+	if v.SummaryStatistics != nil {
+		s.WriteStruct(schemas.Service_SummaryStatistics)
+		v.SummaryStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Service_Type, *v.Type)
+	}
+}
+func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Service_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Service_AccountId, v.AccountId)
+		case schemas.Service_DurationHistogram:
+			return deserializeHistogram(d, schemas.Service_DurationHistogram, &v.DurationHistogram)
+		case schemas.Service_Edges:
+			return deserializeEdgeList(d, schemas.Service_Edges, &v.Edges)
+		case schemas.Service_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Service_EndTime, v.EndTime)
+		case schemas.Service_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Service_Name, v.Name)
+		case schemas.Service_Names:
+			return deserializeServiceNames(d, schemas.Service_Names, &v.Names)
+		case schemas.Service_ReferenceId:
+			v.ReferenceId = new(int32)
+			return d.ReadInt32(schemas.Service_ReferenceId, v.ReferenceId)
+		case schemas.Service_ResponseTimeHistogram:
+			return deserializeHistogram(d, schemas.Service_ResponseTimeHistogram, &v.ResponseTimeHistogram)
+		case schemas.Service_Root:
+			v.Root = new(bool)
+			return d.ReadBool(schemas.Service_Root, v.Root)
+		case schemas.Service_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Service_StartTime, v.StartTime)
+		case schemas.Service_State:
+			v.State = new(string)
+			return d.ReadString(schemas.Service_State, v.State)
+		case schemas.Service_SummaryStatistics:
+			v.SummaryStatistics = &ServiceStatistics{}
+			return v.SummaryStatistics.Deserialize(d)
+		case schemas.Service_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Service_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 type ServiceId struct {
 
 	//
@@ -1252,6 +3367,43 @@ type ServiceId struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ServiceId_AccountId, *v.AccountId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceId_Name, *v.Name)
+	}
+	serializeServiceNames(s, schemas.ServiceId_Names, v.Names)
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceId_Type, *v.Type)
+	}
+}
+func (v *ServiceId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceId_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ServiceId_AccountId, v.AccountId)
+		case schemas.ServiceId_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceId_Name, v.Name)
+		case schemas.ServiceId_Names:
+			return deserializeServiceNames(d, schemas.ServiceId_Names, &v.Names)
+		case schemas.ServiceId_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceId_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Response statistics for a service.
@@ -1275,6 +3427,56 @@ type ServiceStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorStatistics != nil {
+		s.WriteStruct(schemas.ServiceStatistics_ErrorStatistics)
+		v.ErrorStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FaultStatistics != nil {
+		s.WriteStruct(schemas.ServiceStatistics_FaultStatistics)
+		v.FaultStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OkCount != nil {
+		s.WriteInt64(schemas.ServiceStatistics_OkCount, *v.OkCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.ServiceStatistics_TotalCount, *v.TotalCount)
+	}
+	if v.TotalResponseTime != nil {
+		s.WriteFloat64(schemas.ServiceStatistics_TotalResponseTime, *v.TotalResponseTime)
+	}
+}
+func (v *ServiceStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceStatistics_ErrorStatistics:
+			v.ErrorStatistics = &ErrorStatistics{}
+			return v.ErrorStatistics.Deserialize(d)
+		case schemas.ServiceStatistics_FaultStatistics:
+			v.FaultStatistics = &FaultStatistics{}
+			return v.FaultStatistics.Deserialize(d)
+		case schemas.ServiceStatistics_OkCount:
+			v.OkCount = new(int64)
+			return d.ReadInt64(schemas.ServiceStatistics_OkCount, v.OkCount)
+		case schemas.ServiceStatistics_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.ServiceStatistics_TotalCount, v.TotalCount)
+		case schemas.ServiceStatistics_TotalResponseTime:
+			v.TotalResponseTime = new(float64)
+			return d.ReadFloat64(schemas.ServiceStatistics_TotalResponseTime, v.TotalResponseTime)
+		}
+		return nil
+	})
+}
+
 //	A span from a trace that has been ingested by the X-Ray service. A span
 //
 // represents a unit of work or an operation performed by a service.
@@ -1287,6 +3489,34 @@ type Span struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Span) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Span)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Span) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteString(schemas.Span_Document, *v.Document)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Span_Id, *v.Id)
+	}
+}
+func (v *Span) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Span, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Span_Document:
+			v.Document = new(string)
+			return d.ReadString(schemas.Span_Document, v.Document)
+		case schemas.Span_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Span_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // A map that contains tag keys and tag values to attach to an Amazon Web Services
@@ -1322,6 +3552,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type TelemetryRecord struct {
 
 	//
@@ -1347,6 +3605,60 @@ type TelemetryRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TelemetryRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetryRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TelemetryRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackendConnectionErrors != nil {
+		s.WriteStruct(schemas.TelemetryRecord_BackendConnectionErrors)
+		v.BackendConnectionErrors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SegmentsReceivedCount != nil {
+		s.WriteInt32(schemas.TelemetryRecord_SegmentsReceivedCount, *v.SegmentsReceivedCount)
+	}
+	if v.SegmentsRejectedCount != nil {
+		s.WriteInt32(schemas.TelemetryRecord_SegmentsRejectedCount, *v.SegmentsRejectedCount)
+	}
+	if v.SegmentsSentCount != nil {
+		s.WriteInt32(schemas.TelemetryRecord_SegmentsSentCount, *v.SegmentsSentCount)
+	}
+	if v.SegmentsSpilloverCount != nil {
+		s.WriteInt32(schemas.TelemetryRecord_SegmentsSpilloverCount, *v.SegmentsSpilloverCount)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.TelemetryRecord_Timestamp, *v.Timestamp)
+	}
+}
+func (v *TelemetryRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TelemetryRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TelemetryRecord_BackendConnectionErrors:
+			v.BackendConnectionErrors = &BackendConnectionErrors{}
+			return v.BackendConnectionErrors.Deserialize(d)
+		case schemas.TelemetryRecord_SegmentsReceivedCount:
+			v.SegmentsReceivedCount = new(int32)
+			return d.ReadInt32(schemas.TelemetryRecord_SegmentsReceivedCount, v.SegmentsReceivedCount)
+		case schemas.TelemetryRecord_SegmentsRejectedCount:
+			v.SegmentsRejectedCount = new(int32)
+			return d.ReadInt32(schemas.TelemetryRecord_SegmentsRejectedCount, v.SegmentsRejectedCount)
+		case schemas.TelemetryRecord_SegmentsSentCount:
+			v.SegmentsSentCount = new(int32)
+			return d.ReadInt32(schemas.TelemetryRecord_SegmentsSentCount, v.SegmentsSentCount)
+		case schemas.TelemetryRecord_SegmentsSpilloverCount:
+			v.SegmentsSpilloverCount = new(int32)
+			return d.ReadInt32(schemas.TelemetryRecord_SegmentsSpilloverCount, v.SegmentsSpilloverCount)
+		case schemas.TelemetryRecord_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.TelemetryRecord_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // A list of TimeSeriesStatistic structures.
 type TimeSeriesServiceStatistics struct {
 
@@ -1366,6 +3678,55 @@ type TimeSeriesServiceStatistics struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeSeriesServiceStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesServiceStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesServiceStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeSummaryStatistics != nil {
+		s.WriteStruct(schemas.TimeSeriesServiceStatistics_EdgeSummaryStatistics)
+		v.EdgeSummaryStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHistogram(s, schemas.TimeSeriesServiceStatistics_ResponseTimeHistogram, v.ResponseTimeHistogram)
+	if v.ServiceForecastStatistics != nil {
+		s.WriteStruct(schemas.TimeSeriesServiceStatistics_ServiceForecastStatistics)
+		v.ServiceForecastStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceSummaryStatistics != nil {
+		s.WriteStruct(schemas.TimeSeriesServiceStatistics_ServiceSummaryStatistics)
+		v.ServiceSummaryStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.TimeSeriesServiceStatistics_Timestamp, *v.Timestamp)
+	}
+}
+func (v *TimeSeriesServiceStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesServiceStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesServiceStatistics_EdgeSummaryStatistics:
+			v.EdgeSummaryStatistics = &EdgeStatistics{}
+			return v.EdgeSummaryStatistics.Deserialize(d)
+		case schemas.TimeSeriesServiceStatistics_ResponseTimeHistogram:
+			return deserializeHistogram(d, schemas.TimeSeriesServiceStatistics_ResponseTimeHistogram, &v.ResponseTimeHistogram)
+		case schemas.TimeSeriesServiceStatistics_ServiceForecastStatistics:
+			v.ServiceForecastStatistics = &ForecastStatistics{}
+			return v.ServiceForecastStatistics.Deserialize(d)
+		case schemas.TimeSeriesServiceStatistics_ServiceSummaryStatistics:
+			v.ServiceSummaryStatistics = &ServiceStatistics{}
+			return v.ServiceSummaryStatistics.Deserialize(d)
+		case schemas.TimeSeriesServiceStatistics_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.TimeSeriesServiceStatistics_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // A collection of segment documents with matching trace IDs.
@@ -1390,6 +3751,43 @@ type Trace struct {
 	Segments []Segment
 
 	noSmithyDocumentSerde
+}
+
+func (v *Trace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Trace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.Trace_Duration, *v.Duration)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Trace_Id, *v.Id)
+	}
+	if v.LimitExceeded != nil {
+		s.WriteBool(schemas.Trace_LimitExceeded, *v.LimitExceeded)
+	}
+	serializeSegmentList(s, schemas.Trace_Segments, v.Segments)
+}
+func (v *Trace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Trace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Trace_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.Trace_Duration, v.Duration)
+		case schemas.Trace_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Trace_Id, v.Id)
+		case schemas.Trace_LimitExceeded:
+			v.LimitExceeded = new(bool)
+			return d.ReadBool(schemas.Trace_LimitExceeded, v.LimitExceeded)
+		case schemas.Trace_Segments:
+			return deserializeSegmentList(d, schemas.Trace_Segments, &v.Segments)
+		}
+		return nil
+	})
 }
 
 // Metadata generated from the segment documents in a trace.
@@ -1467,6 +3865,124 @@ type TraceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TraceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotations(s, schemas.TraceSummary_Annotations, v.Annotations)
+	serializeTraceAvailabilityZones(s, schemas.TraceSummary_AvailabilityZones, v.AvailabilityZones)
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.TraceSummary_Duration, *v.Duration)
+	}
+	if v.EntryPoint != nil {
+		s.WriteStruct(schemas.TraceSummary_EntryPoint)
+		v.EntryPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeErrorRootCauses(s, schemas.TraceSummary_ErrorRootCauses, v.ErrorRootCauses)
+	serializeFaultRootCauses(s, schemas.TraceSummary_FaultRootCauses, v.FaultRootCauses)
+	if v.HasError != nil {
+		s.WriteBool(schemas.TraceSummary_HasError, *v.HasError)
+	}
+	if v.HasFault != nil {
+		s.WriteBool(schemas.TraceSummary_HasFault, *v.HasFault)
+	}
+	if v.HasThrottle != nil {
+		s.WriteBool(schemas.TraceSummary_HasThrottle, *v.HasThrottle)
+	}
+	if v.Http != nil {
+		s.WriteStruct(schemas.TraceSummary_Http)
+		v.Http.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TraceSummary_Id, *v.Id)
+	}
+	serializeTraceInstanceIds(s, schemas.TraceSummary_InstanceIds, v.InstanceIds)
+	if v.IsPartial != nil {
+		s.WriteBool(schemas.TraceSummary_IsPartial, *v.IsPartial)
+	}
+	if v.MatchedEventTime != nil {
+		s.WriteTime(schemas.TraceSummary_MatchedEventTime, *v.MatchedEventTime)
+	}
+	serializeTraceResourceARNs(s, schemas.TraceSummary_ResourceARNs, v.ResourceARNs)
+	if v.ResponseTime != nil {
+		s.WriteFloat64(schemas.TraceSummary_ResponseTime, *v.ResponseTime)
+	}
+	serializeResponseTimeRootCauses(s, schemas.TraceSummary_ResponseTimeRootCauses, v.ResponseTimeRootCauses)
+	if v.Revision != 0 {
+		s.WriteInt32(schemas.TraceSummary_Revision, v.Revision)
+	}
+	serializeServiceIds(s, schemas.TraceSummary_ServiceIds, v.ServiceIds)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TraceSummary_StartTime, *v.StartTime)
+	}
+	serializeTraceUsers(s, schemas.TraceSummary_Users, v.Users)
+}
+func (v *TraceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceSummary_Annotations:
+			return deserializeAnnotations(d, schemas.TraceSummary_Annotations, &v.Annotations)
+		case schemas.TraceSummary_AvailabilityZones:
+			return deserializeTraceAvailabilityZones(d, schemas.TraceSummary_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.TraceSummary_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.TraceSummary_Duration, v.Duration)
+		case schemas.TraceSummary_EntryPoint:
+			v.EntryPoint = &ServiceId{}
+			return v.EntryPoint.Deserialize(d)
+		case schemas.TraceSummary_ErrorRootCauses:
+			return deserializeErrorRootCauses(d, schemas.TraceSummary_ErrorRootCauses, &v.ErrorRootCauses)
+		case schemas.TraceSummary_FaultRootCauses:
+			return deserializeFaultRootCauses(d, schemas.TraceSummary_FaultRootCauses, &v.FaultRootCauses)
+		case schemas.TraceSummary_HasError:
+			v.HasError = new(bool)
+			return d.ReadBool(schemas.TraceSummary_HasError, v.HasError)
+		case schemas.TraceSummary_HasFault:
+			v.HasFault = new(bool)
+			return d.ReadBool(schemas.TraceSummary_HasFault, v.HasFault)
+		case schemas.TraceSummary_HasThrottle:
+			v.HasThrottle = new(bool)
+			return d.ReadBool(schemas.TraceSummary_HasThrottle, v.HasThrottle)
+		case schemas.TraceSummary_Http:
+			v.Http = &Http{}
+			return v.Http.Deserialize(d)
+		case schemas.TraceSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TraceSummary_Id, v.Id)
+		case schemas.TraceSummary_InstanceIds:
+			return deserializeTraceInstanceIds(d, schemas.TraceSummary_InstanceIds, &v.InstanceIds)
+		case schemas.TraceSummary_IsPartial:
+			v.IsPartial = new(bool)
+			return d.ReadBool(schemas.TraceSummary_IsPartial, v.IsPartial)
+		case schemas.TraceSummary_MatchedEventTime:
+			v.MatchedEventTime = new(time.Time)
+			return d.ReadTime(schemas.TraceSummary_MatchedEventTime, v.MatchedEventTime)
+		case schemas.TraceSummary_ResourceARNs:
+			return deserializeTraceResourceARNs(d, schemas.TraceSummary_ResourceARNs, &v.ResourceARNs)
+		case schemas.TraceSummary_ResponseTime:
+			v.ResponseTime = new(float64)
+			return d.ReadFloat64(schemas.TraceSummary_ResponseTime, v.ResponseTime)
+		case schemas.TraceSummary_ResponseTimeRootCauses:
+			return deserializeResponseTimeRootCauses(d, schemas.TraceSummary_ResponseTimeRootCauses, &v.ResponseTimeRootCauses)
+		case schemas.TraceSummary_Revision:
+			return d.ReadInt32(schemas.TraceSummary_Revision, &v.Revision)
+		case schemas.TraceSummary_ServiceIds:
+			return deserializeServiceIds(d, schemas.TraceSummary_ServiceIds, &v.ServiceIds)
+		case schemas.TraceSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TraceSummary_StartTime, v.StartTime)
+		case schemas.TraceSummary_Users:
+			return deserializeTraceUsers(d, schemas.TraceSummary_Users, &v.Users)
+		}
+		return nil
+	})
+}
+
 // Information about a user recorded in segment documents.
 type TraceUser struct {
 
@@ -1477,6 +3993,31 @@ type TraceUser struct {
 	UserName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TraceUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceUser) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceIds(s, schemas.TraceUser_ServiceIds, v.ServiceIds)
+	if v.UserName != nil {
+		s.WriteString(schemas.TraceUser_UserName, *v.UserName)
+	}
+}
+func (v *TraceUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceUser_ServiceIds:
+			return deserializeServiceIds(d, schemas.TraceUser_ServiceIds, &v.ServiceIds)
+		case schemas.TraceUser_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.TraceUser_UserName, v.UserName)
+		}
+		return nil
+	})
 }
 
 // Sampling statistics from a call to [GetSamplingTargets] that X-Ray could not process.
@@ -1496,6 +4037,40 @@ type UnprocessedStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnprocessedStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UnprocessedStatistics_ErrorCode, *v.ErrorCode)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnprocessedStatistics_Message, *v.Message)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.UnprocessedStatistics_RuleName, *v.RuleName)
+	}
+}
+func (v *UnprocessedStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedStatistics_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UnprocessedStatistics_ErrorCode, v.ErrorCode)
+		case schemas.UnprocessedStatistics_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnprocessedStatistics_Message, v.Message)
+		case schemas.UnprocessedStatistics_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.UnprocessedStatistics_RuleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 // Information about a segment that failed processing.
 type UnprocessedTraceSegment struct {
 
@@ -1511,6 +4086,40 @@ type UnprocessedTraceSegment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnprocessedTraceSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedTraceSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedTraceSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UnprocessedTraceSegment_ErrorCode, *v.ErrorCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UnprocessedTraceSegment_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnprocessedTraceSegment_Message, *v.Message)
+	}
+}
+func (v *UnprocessedTraceSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedTraceSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedTraceSegment_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UnprocessedTraceSegment_ErrorCode, v.ErrorCode)
+		case schemas.UnprocessedTraceSegment_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UnprocessedTraceSegment_Id, v.Id)
+		case schemas.UnprocessedTraceSegment_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnprocessedTraceSegment_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Information about a segment annotation.
 type ValueWithServiceIds struct {
 
@@ -1521,6 +4130,28 @@ type ValueWithServiceIds struct {
 	ServiceIds []ServiceId
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValueWithServiceIds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValueWithServiceIds)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValueWithServiceIds) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationValue(s, schemas.ValueWithServiceIds_AnnotationValue, v.AnnotationValue)
+	serializeServiceIds(s, schemas.ValueWithServiceIds_ServiceIds, v.ServiceIds)
+}
+func (v *ValueWithServiceIds) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValueWithServiceIds, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValueWithServiceIds_AnnotationValue:
+			return deserializeAnnotationValue(d, schemas.ValueWithServiceIds_AnnotationValue, &v.AnnotationValue)
+		case schemas.ValueWithServiceIds_ServiceIds:
+			return deserializeServiceIds(d, schemas.ValueWithServiceIds_ServiceIds, &v.ServiceIds)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

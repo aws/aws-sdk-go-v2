@@ -4,8 +4,6 @@ package partnercentralbenefits
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
 	internaldocument "github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
@@ -13,7 +11,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -134,6 +131,62 @@ type GetBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBenefitApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Arn, *v.Arn)
+	}
+	serializeArns(s, schemas.GetBenefitApplicationOutput_AssociatedResources, v.AssociatedResources)
+	if v.BenefitApplicationDetails != nil {
+		s.WriteDocument(schemas.GetBenefitApplicationOutput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
+	}
+	if v.BenefitId != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_BenefitId, *v.BenefitId)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBenefitApplicationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Description, *v.Description)
+	}
+	serializeFileDetails(s, schemas.GetBenefitApplicationOutput_FileDetails, v.FileDetails)
+	serializeFulfillmentTypes(s, schemas.GetBenefitApplicationOutput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Name, *v.Name)
+	}
+	serializeContacts(s, schemas.GetBenefitApplicationOutput_PartnerContacts, v.PartnerContacts)
+	serializePrograms(s, schemas.GetBenefitApplicationOutput_Programs, v.Programs)
+	if v.Revision != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Revision, *v.Revision)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Stage, *v.Stage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_StatusReason, *v.StatusReason)
+	}
+	if v.StatusReasonCode != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_StatusReasonCode, *v.StatusReasonCode)
+	}
+	serializeStatusReasonCodes(s, schemas.GetBenefitApplicationOutput_StatusReasonCodes, v.StatusReasonCodes)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBenefitApplicationOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
 func (v *GetBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBenefitApplicationOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -206,74 +259,26 @@ func (v *GetBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 func (c *Client) addOperationGetBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitApplication, schemas.GetBenefitApplicationInput, schemas.GetBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitApplication, schemas.GetBenefitApplicationInput, schemas.GetBenefitApplicationOutput), output: &GetBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBenefitApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBenefitApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBenefitApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -288,22 +293,8 @@ func (c *Client) addOperationGetBenefitApplicationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBenefitApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBenefitApplication",
-	}
 }

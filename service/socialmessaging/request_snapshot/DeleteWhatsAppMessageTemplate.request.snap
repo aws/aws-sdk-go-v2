@@ -1,0 +1,3 @@
+DELETE /v1/whatsapp/template?deleteAllTemplates=true&id=__Id__&metaTemplateId=__MetaTemplateId__&templateName=__TemplateName__
+
+

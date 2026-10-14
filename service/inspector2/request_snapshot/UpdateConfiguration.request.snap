@@ -1,0 +1,5 @@
+POST /configuration/update
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__","ec2Configuration":{"activateVMScanner":true,"scanMode":"EC2_SSM_AGENT_BASED"},"ecrConfiguration":{"pullDateRescanDuration":"DAYS_14","pullDateRescanMode":"LAST_PULL_DATE","rescanDuration":"LIFETIME"},"updateConfigurationInheritance":{"ec2Configuration":"INHERIT_FROM_ADMIN","ecrConfiguration":"INHERIT_FROM_ADMIN"}}

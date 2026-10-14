@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Lightsail content delivery network (CDN) distribution.
@@ -78,6 +77,30 @@ type CreateDistributionInput struct {
 	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
 	CertificateName *string
 
+	// An array of objects that describe the custom error responses for the
+	// distribution. With a custom error response, you can specify the page to return
+	// when the origin responds with a given HTTP error code. You can also specify the
+	// HTTP status code to send to the viewer.
+	CustomErrorResponses []types.DistributionCustomErrorResponse
+
+	// The object (for example, index.html ) that the distribution returns when a
+	// viewer requests the root URL of the distribution ( / ) instead of a specific
+	// object. The object that you specify must be available from the origin.
+	DefaultRootObject *string
+
+	// Specifies whether to enable private origin access for the distribution. With
+	// private origin access, the distribution can serve objects that aren't publicly
+	// accessible from a Lightsail bucket.
+	//
+	// Lightsail grants the distribution permission to read the bucket's objects.
+	// Enabling private origin access doesn't change the bucket's access settings, and
+	// you can still retrieve publicly accessible objects directly from the bucket's
+	// endpoint.
+	//
+	// You can enable private origin access only when the distribution's origin is a
+	// Lightsail bucket. If the origin is another resource type, the request fails.
+	EnablePrivateOriginAccess *bool
+
 	// The IP address type for the distribution.
 	//
 	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
@@ -96,6 +119,54 @@ type CreateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateDistributionRequest_bundleId, *v.BundleId)
+	}
+	if v.CacheBehaviorSettings != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_cacheBehaviorSettings)
+		v.CacheBehaviorSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CertificateName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
+	}
+	serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	if v.DefaultCacheBehavior != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
+		v.DefaultCacheBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultRootObject != nil {
+		s.WriteString(schemas.CreateDistributionRequest_defaultRootObject, *v.DefaultRootObject)
+	}
+	if v.DistributionName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_distributionName, *v.DistributionName)
+	}
+	if v.EnablePrivateOriginAccess != nil {
+		s.WriteBool(schemas.CreateDistributionRequest_enablePrivateOriginAccess, *v.EnablePrivateOriginAccess)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateDistributionRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Origin != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	if v.ViewerMinimumTlsProtocolVersion != "" {
+		s.WriteString(schemas.CreateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
+	}
+}
+
 type CreateDistributionOutput struct {
 
 	// An object that describes the distribution created.
@@ -112,77 +183,58 @@ type CreateDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distribution != nil {
+		s.WriteStruct(schemas.CreateDistributionResult_distribution)
+		v.Distribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Operation != nil {
+		s.WriteStruct(schemas.CreateDistributionResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDistributionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDistributionResult_distribution:
+			v.Distribution = &types.LightsailDistribution{}
+			return v.Distribution.Deserialize(d)
+		case schemas.CreateDistributionResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistribution, schemas.CreateDistributionRequest, schemas.CreateDistributionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistribution, schemas.CreateDistributionRequest, schemas.CreateDistributionResult), output: &CreateDistributionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDistribution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDistribution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDistributionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDistribution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +249,8 @@ func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDistribution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDistribution",
-	}
 }

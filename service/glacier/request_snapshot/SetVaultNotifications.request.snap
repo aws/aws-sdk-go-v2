@@ -1,0 +1,6 @@
+PUT /__AccountId__/vaults/__VaultName__/notification-configuration
+
+Content-Type: application/json
+X-Amz-Glacier-Version: 2012-06-01
+
+{"Events":["__Member__","__Member__"],"SNSTopic":"__SNSTopic__"}

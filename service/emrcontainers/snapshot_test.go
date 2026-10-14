@@ -146,6 +146,18 @@ func TestCheckSnapshot_DeleteManagedEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSecurityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteVirtualCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteVirtualCluster(context.Background(), nil, func(o *Options) {
@@ -337,6 +349,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateVirtualCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateVirtualCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateVirtualCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CancelJobRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelJobRun(context.Background(), nil, func(o *Options) {
@@ -414,6 +438,18 @@ func TestUpdateSnapshot_DeleteManagedEndpoint(t *testing.T) {
 	_, err := svc.DeleteManagedEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteManagedEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSecurityConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -606,6 +642,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateVirtualCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateVirtualCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateVirtualCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IndexingRules":[{"ModifiedAt":946684800,"Name":"__Name__","Rule":{"Probabilistic":{"ActualSamplingPercentage":1,"DesiredSamplingPercentage":1}}},{"ModifiedAt":946684800,"Name":"__Name__","Rule":{"Probabilistic":{"ActualSamplingPercentage":1,"DesiredSamplingPercentage":1}}}],"NextToken":"__NextToken__"}

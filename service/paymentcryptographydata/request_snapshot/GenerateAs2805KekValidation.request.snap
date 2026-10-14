@@ -1,0 +1,5 @@
+POST /as2805kekvalidation/generate
+
+Content-Type: application/json
+
+{"KekValidationType":{"KekValidationRequest":{"DeriveKeyAlgorithm":"TDES_2KEY","RandomKeyMaxLength":"BYTES_8"}},"KeyIdentifier":"__KeyIdentifier__","RandomKeySendVariantMask":"VARIANT_MASK_82C0"}

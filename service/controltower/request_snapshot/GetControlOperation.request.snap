@@ -1,0 +1,5 @@
+POST /get-control-operation
+
+Content-Type: application/json
+
+{"operationIdentifier":"__OperationIdentifier__"}

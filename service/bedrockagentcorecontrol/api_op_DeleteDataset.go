@@ -4,48 +4,15 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Deletes a dataset version or an entire dataset (all versions + name claim).
-// Asynchronous 202.
+//	Deletes a dataset version or an entire dataset asynchronously. If
 //
-// State transitions:
-//
-//   - If datasetVersion is absent (full delete): status transitions to DELETING
-//     immediately.
-//   - If datasetVersion is provided (version-specific delete): status transitions
-//     to UPDATING.
-//
-// State guard (full delete): Returns ConflictException (DATASET_NOT_READY) if the
-// dataset status is in {CREATING, UPDATING}. Deletion is allowed from ACTIVE,
-// CREATE_FAILED, UPDATE_FAILED, and DELETE_FAILED states.
-//
-// State guard (version-specific delete): Returns ConflictException
-// (DATASET_NOT_READY) if the dataset status is not in {ACTIVE, CREATE_FAILED,
-// UPDATE_FAILED}.
-//
-// Fails with ConflictException (REFERENCED_BY_EVAL_JOB) if referenced by an
-// active evaluation job (full delete only).
-//
-// If the delete workflow fails after retries, status is set to DELETE_FAILED
-// (full delete) or UPDATE_FAILED (version-specific delete). Calling DeleteDataset
-// on a DELETE_FAILED dataset re-triggers the delete workflow (idempotent retry
-// path).
-//
-// Version parameter:
-//
-//   - If datasetVersion is absent: deletes ALL versions and the Dataset record
-//     itself.
-//   - If datasetVersion is provided: deletes only that specific DatasetVersion.
-//     Returns ResourceNotFoundException if the specified version does not exist.
+// datasetVersion is absent, deletes all versions and the dataset record itself. If
+// provided, deletes only that specific version.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -68,26 +35,11 @@ type DeleteDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Optional version to delete. Use "DRAFT" or omit to delete the draft. Returns
-	// ResourceNotFoundException if the specified version does not exist.
+	//  Optional version to delete. If absent, deletes the entire dataset. If
+	// provided, deletes only that specific version.
 	DatasetVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetId != nil {
-		s.WriteString(schemas.DeleteDatasetRequest_datasetId, *v.DatasetId)
-	}
-	if v.DatasetVersion != nil {
-		s.WriteString(schemas.DeleteDatasetRequest_datasetVersion, *v.DatasetVersion)
-	}
 }
 
 type DeleteDatasetOutput struct {
@@ -102,7 +54,7 @@ type DeleteDatasetOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// The version deleted.
+	//  The version that was deleted.
 	//
 	// This member is required.
 	DatasetVersion *string
@@ -123,101 +75,29 @@ type DeleteDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDatasetResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetArn, v.DatasetArn)
-		case schemas.DeleteDatasetResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetId, v.DatasetId)
-		case schemas.DeleteDatasetResponse_datasetVersion:
-			v.DatasetVersion = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetVersion, v.DatasetVersion)
-		case schemas.DeleteDatasetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDatasetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.DeleteDatasetResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDatasetResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse), output: &DeleteDatasetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDatasetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -232,22 +112,8 @@ func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDataset",
-	}
 }

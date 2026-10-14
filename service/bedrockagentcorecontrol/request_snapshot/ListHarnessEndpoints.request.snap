@@ -1,0 +1,3 @@
+GET /harnesses/__HarnessId__/endpoints?maxResults=1&nextToken=__NextToken__
+
+

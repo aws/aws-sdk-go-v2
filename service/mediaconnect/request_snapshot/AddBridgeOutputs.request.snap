@@ -1,0 +1,5 @@
+POST /v1/bridges/__BridgeArn__/outputs
+
+Content-Type: application/json
+
+{"outputs":[{"networkOutput":{"ipAddress":"__IpAddress__","name":"__Name__","networkName":"__NetworkName__","port":1,"protocol":"zixi-push","ttl":1}},{"networkOutput":{"ipAddress":"__IpAddress__","name":"__Name__","networkName":"__NetworkName__","port":1,"protocol":"zixi-push","ttl":1}}]}

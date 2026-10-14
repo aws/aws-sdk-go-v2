@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetContainerLog
+
+{"containerName":"__ContainerName__","endTime":946684800,"filterPattern":"__FilterPattern__","pageToken":"__PageToken__","serviceName":"__ServiceName__","startTime":946684800}

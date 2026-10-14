@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -114,6 +114,34 @@ type ListIntentMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsBinByList(s, schemas.ListIntentMetricsRequest_binBy, v.BinBy)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentMetricsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListIntentMetricsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsIntentFilters(s, schemas.ListIntentMetricsRequest_filters, v.Filters)
+	serializeAnalyticsIntentGroupByList(s, schemas.ListIntentMetricsRequest_groupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntentMetricsRequest_maxResults, *v.MaxResults)
+	}
+	serializeAnalyticsIntentMetrics(s, schemas.ListIntentMetricsRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListIntentMetricsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListIntentMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved intent metrics.
@@ -137,77 +165,57 @@ type ListIntentMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentMetricsResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeAnalyticsIntentResults(s, schemas.ListIntentMetricsResponse_results, v.Results)
+}
+func (v *ListIntentMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentMetricsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListIntentMetricsResponse_botId, v.BotId)
+		case schemas.ListIntentMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntentMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListIntentMetricsResponse_results:
+			return deserializeAnalyticsIntentResults(d, schemas.ListIntentMetricsResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentMetrics, schemas.ListIntentMetricsRequest, schemas.ListIntentMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntentMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentMetrics, schemas.ListIntentMetricsRequest, schemas.ListIntentMetricsResponse), output: &ListIntentMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntentMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIntentMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIntentMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIntentMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +228,6 @@ func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -328,11 +330,3 @@ type ListIntentMetricsAPIClient interface {
 }
 
 var _ ListIntentMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIntentMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIntentMetrics",
-	}
-}

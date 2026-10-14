@@ -1,0 +1,5 @@
+POST /findingsTrendsv2
+
+Content-Type: application/json
+
+{"EndTime":"2000-01-01T00:00:00Z","Filters":{"CompositeFilters":[{"NestedCompositeFilters":[{},{}],"Operator":"AND","StringFilters":[{"FieldName":"account_id","Filter":{"Comparison":"EQUALS","Value":"__Value__"}},{"FieldName":"account_id","Filter":{"Comparison":"EQUALS","Value":"__Value__"}}]},{"NestedCompositeFilters":[{},{}],"Operator":"AND","StringFilters":[{"FieldName":"account_id","Filter":{"Comparison":"EQUALS","Value":"__Value__"}},{"FieldName":"account_id","Filter":{"Comparison":"EQUALS","Value":"__Value__"}}]}],"CompositeOperator":"AND"},"MaxResults":1,"NextToken":"__NextToken__","StartTime":"2000-01-01T00:00:00Z"}

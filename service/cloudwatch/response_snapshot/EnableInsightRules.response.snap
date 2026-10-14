@@ -1,0 +1,7 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¿hFailuresŸ¿mExceptionTypeq__ExceptionType__kFailureCodeo__FailureCode__rFailureDescriptionv__FailureDescription__oFailureResources__FailureResource__ÿ¿mExceptionTypeq__ExceptionType__kFailureCodeo__FailureCode__rFailureDescriptionv__FailureDescription__oFailureResources__FailureResource__ÿÿÿ

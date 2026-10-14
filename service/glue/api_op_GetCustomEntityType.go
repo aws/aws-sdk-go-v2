@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the details of a custom pattern by specifying its name.
@@ -36,6 +35,18 @@ type GetCustomEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomEntityTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetCustomEntityTypeRequest_Name, *v.Name)
+	}
+}
+
 type GetCustomEntityTypeOutput struct {
 
 	// A list of context words if specified when you created the custom pattern. If
@@ -56,77 +67,57 @@ type GetCustomEntityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomEntityTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContextWords(s, schemas.GetCustomEntityTypeResponse_ContextWords, v.ContextWords)
+	if v.Name != nil {
+		s.WriteString(schemas.GetCustomEntityTypeResponse_Name, *v.Name)
+	}
+	if v.RegexString != nil {
+		s.WriteString(schemas.GetCustomEntityTypeResponse_RegexString, *v.RegexString)
+	}
+}
+func (v *GetCustomEntityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomEntityTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomEntityTypeResponse_ContextWords:
+			return deserializeContextWords(d, schemas.GetCustomEntityTypeResponse_ContextWords, &v.ContextWords)
+		case schemas.GetCustomEntityTypeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCustomEntityTypeResponse_Name, v.Name)
+		case schemas.GetCustomEntityTypeResponse_RegexString:
+			v.RegexString = new(string)
+			return d.ReadString(schemas.GetCustomEntityTypeResponse_RegexString, v.RegexString)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomEntityType, schemas.GetCustomEntityTypeRequest, schemas.GetCustomEntityTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCustomEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomEntityType, schemas.GetCustomEntityTypeRequest, schemas.GetCustomEntityTypeResponse), output: &GetCustomEntityTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCustomEntityType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCustomEntityType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCustomEntityTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCustomEntityType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +132,8 @@ func (c *Client) addOperationGetCustomEntityTypeMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCustomEntityType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCustomEntityType",
-	}
 }

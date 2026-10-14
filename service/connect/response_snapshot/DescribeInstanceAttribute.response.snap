@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Attribute":{"AttributeType":"INBOUND_CALLS","Value":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /v1/ListSubscriptions
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__"}

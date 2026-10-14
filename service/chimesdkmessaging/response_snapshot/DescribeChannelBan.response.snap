@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelBan":{"ChannelArn":"__ChannelArn__","CreatedBy":{"Arn":"__Arn__","Name":"__Name__"},"CreatedTimestamp":946684800,"Member":{"Arn":"__Arn__","Name":"__Name__"}}}

@@ -4,12 +4,7 @@ package codecatalyst
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a Dev Environment.
@@ -49,24 +44,6 @@ type DeleteDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDevEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DeleteDevEnvironmentRequest_id, *v.Id)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.DeleteDevEnvironmentRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.DeleteDevEnvironmentRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type DeleteDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the deleted Dev Environment.
@@ -90,85 +67,23 @@ type DeleteDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDevEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDevEnvironmentResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteDevEnvironmentResponse_id, v.Id)
-		case schemas.DeleteDevEnvironmentResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.DeleteDevEnvironmentResponse_projectName, v.ProjectName)
-		case schemas.DeleteDevEnvironmentResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.DeleteDevEnvironmentResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDevEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEnvironment, schemas.DeleteDevEnvironmentRequest, schemas.DeleteDevEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDevEnvironment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDevEnvironment, schemas.DeleteDevEnvironmentRequest, schemas.DeleteDevEnvironmentResponse), output: &DeleteDevEnvironmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDevEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDevEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDevEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +98,8 @@ func (c *Client) addOperationDeleteDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDevEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDevEnvironment",
-	}
 }

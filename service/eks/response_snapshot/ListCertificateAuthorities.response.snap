@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificateAuthorities":[{"activatedAt":946684800,"activatedBy":"EKS","createdAt":946684800,"createdBy":"EKS","distributionStatus":"IN_PROGRESS","id":"__Id__","signingStatus":"NOT_USED"},{"activatedAt":946684800,"activatedBy":"EKS","createdAt":946684800,"createdBy":"EKS","distributionStatus":"IN_PROGRESS","id":"__Id__","signingStatus":"NOT_USED"}],"nextToken":"__NextToken__"}

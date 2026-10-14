@@ -1,0 +1,12 @@
+200
+Content-Type: __ContentType__
+X-Amz-Lex-Input-Mode: __InputMode__
+X-Amz-Lex-Input-Transcript: __InputTranscript__
+X-Amz-Lex-Interpretations: __Interpretations__
+X-Amz-Lex-Messages: __Messages__
+X-Amz-Lex-Recognized-Bot-Member: __RecognizedBotMember__
+X-Amz-Lex-Request-Attributes: __RequestAttributes__
+X-Amz-Lex-Session-Id: __SessionId__
+X-Amz-Lex-Session-State: __SessionState__
+
+__AudioStream__

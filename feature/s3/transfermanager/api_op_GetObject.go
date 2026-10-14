@@ -612,27 +612,36 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
-				middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey),
+				middleware.AddSDKAgentKeyValue(middleware.FeatureMetadata, userAgentKey, goModuleVersion),
 				addFeatureUserAgent,
 			)
 		}}
 
 	r := &concurrentReader{
-		ctx:      ctx,
-		buf:      make(map[int32]*outChunk),
-		partSize: 1,
-		options:  g.options.Copy(),
-		in:       g.in,
-		ch:       make(chan outChunk, g.options.Concurrency),
+		ctx:             ctx,
+		buf:             make(map[int32]*outChunk),
+		partSize:        1,
+		options:         g.options.Copy(),
+		in:              g.in,
+		ch:              make(chan outChunk, g.options.Concurrency),
+		bufferThreshold: g.options.GetObjectBufferSize,
 	}
 
 	output := &GetObjectOutput{}
 	if g.options.GetObjectType == types.GetObjectParts {
 		// must know the part size before creating stream reader
 		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
-			Bucket:     g.in.Bucket,
-			Key:        g.in.Key,
-			PartNumber: aws.Int32(1),
+			Bucket:               g.in.Bucket,
+			Key:                  g.in.Key,
+			PartNumber:           aws.Int32(1),
+			SSECustomerAlgorithm: g.in.SSECustomerAlgorithm,
+			SSECustomerKey:       g.in.SSECustomerKey,
+			SSECustomerKeyMD5:    g.in.SSECustomerKeyMD5,
+			ExpectedBucketOwner:  g.in.ExpectedBucketOwner,
+			RequestPayer:         s3types.RequestPayer(g.in.RequestPayer),
+			VersionId:            g.in.VersionID,
+			IfModifiedSince:      g.in.IfModifiedSince,
+			IfUnmodifiedSince:    g.in.IfUnmodifiedSince,
 		}, clientOptions...)
 		if err != nil {
 			return nil, err
@@ -640,7 +649,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
 		contentLength := getTotalBytes(out)
-		output.ContentRange = aws.String(fmt.Sprintf("bytes=0-%d/%d", contentLength-1, contentLength))
+		output.ContentRange = aws.String(fmt.Sprintf("bytes 0-%d/%d", contentLength-1, contentLength))
 
 		partsCount := max(aws.ToInt32(out.PartsCount), 1)
 		partSize := max(aws.ToInt64(out.ContentLength), 1)
@@ -650,10 +659,19 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		r.partSize = partSize
 		atomic.StoreInt32(&r.capacity, min(capacity, partsCount))
 		r.partsCount = partsCount
+		r.getType = types.GetObjectParts
 	} else {
 		out, err := g.options.S3.HeadObject(ctx, &s3.HeadObjectInput{
-			Bucket: g.in.Bucket,
-			Key:    g.in.Key,
+			Bucket:               g.in.Bucket,
+			Key:                  g.in.Key,
+			SSECustomerAlgorithm: g.in.SSECustomerAlgorithm,
+			SSECustomerKey:       g.in.SSECustomerKey,
+			SSECustomerKeyMD5:    g.in.SSECustomerKeyMD5,
+			ExpectedBucketOwner:  g.in.ExpectedBucketOwner,
+			RequestPayer:         s3types.RequestPayer(g.in.RequestPayer),
+			VersionId:            g.in.VersionID,
+			IfModifiedSince:      g.in.IfModifiedSince,
+			IfUnmodifiedSince:    g.in.IfUnmodifiedSince,
 		}, clientOptions...)
 		if err != nil {
 			return nil, err
@@ -675,7 +693,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
 		output.ContentLength = aws.Int64(contentLength)
-		output.ContentRange = aws.String(fmt.Sprintf("bytes=%d-%d/%d", r.pos, total-1, aws.ToInt64(out.ContentLength)))
+		output.ContentRange = aws.String(fmt.Sprintf("bytes %d-%d/%d", r.pos, total-1, aws.ToInt64(out.ContentLength)))
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
 		sectionParts := int32(max(1, g.options.GetObjectBufferSize/g.options.PartSizeBytes))
@@ -685,6 +703,7 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		r.partsCount = partsCount
 		r.sectionParts = sectionParts
 		r.totalBytes = total
+		r.getType = types.GetObjectRanges
 	}
 
 	r.etag = output.ETag

@@ -1,0 +1,5 @@
+POST /v2/autocomplete?key=__Key__
+
+Content-Type: application/json
+
+{"AdditionalFeatures":["Core","Core"],"BiasPosition":[1,1],"Filter":{"BoundingBox":[1,1],"Circle":{"Center":[1,1],"Radius":1},"IncludeCountries":["__Member__","__Member__"],"IncludePlaceTypes":["Locality","Locality"]},"IntendedUse":"SingleUse","Language":"__Language__","MaxResults":1,"PoliticalView":"__PoliticalView__","PostalCodeMode":"MergeAllSpannedLocalities","QueryText":"__QueryText__"}

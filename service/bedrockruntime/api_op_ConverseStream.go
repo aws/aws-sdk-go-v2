@@ -4,10 +4,11 @@ package bedrockruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -185,6 +186,56 @@ type ConverseStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConverseStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConverseStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConverseStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalModelRequestFields != nil {
+		s.WriteDocument(schemas.ConverseStreamRequest_additionalModelRequestFields, &smithydocument.Opaque{Value: v.AdditionalModelRequestFields})
+	}
+	serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseStreamRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	if v.GuardrailConfig != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_guardrailConfig)
+		v.GuardrailConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceConfig != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_inferenceConfig)
+		v.InferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessages(s, schemas.ConverseStreamRequest_messages, v.Messages)
+	if v.ModelId != nil {
+		s.WriteString(schemas.ConverseStreamRequest_modelId, *v.ModelId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceConfig != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_performanceConfig)
+		v.PerformanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptVariableMap(s, schemas.ConverseStreamRequest_promptVariables, v.PromptVariables)
+	serializeRequestMetadata(s, schemas.ConverseStreamRequest_requestMetadata, v.RequestMetadata)
+	if v.ServiceTier != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_serviceTier)
+		v.ServiceTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSystemContentBlocks(s, schemas.ConverseStreamRequest_system, v.System)
+	if v.ToolConfig != nil {
+		s.WriteStruct(schemas.ConverseStreamRequest_toolConfig)
+		v.ToolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ConverseStreamOutput struct {
 	eventStream *ConverseStreamEventStream
 
@@ -194,79 +245,51 @@ type ConverseStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConverseStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConverseStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConverseStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ConverseStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConverseStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *ConverseStreamOutput) GetStream() *ConverseStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationConverseStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConverseStream, schemas.ConverseStreamRequest, schemas.ConverseStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConverseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConverseStream, schemas.ConverseStreamRequest, schemas.ConverseStreamResponse), output: &ConverseStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConverseStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamConverseStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConverseStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamConverseStreamMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConverseStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConverseStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -281,24 +304,10 @@ func (c *Client) addOperationConverseStreamMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConverseStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConverseStream",
-	}
 }
 
 // ConverseStreamEventStream provides the event stream handling for the ConverseStream operation.

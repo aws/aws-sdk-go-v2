@@ -1,0 +1,5 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs/__WorkflowRunId__
+
+Content-Type: application/json
+
+{"status":"RUNNING"}

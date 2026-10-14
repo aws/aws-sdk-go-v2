@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MediaPipelines":[{"MediaPipelineArn":"__MediaPipelineArn__","MediaPipelineId":"__MediaPipelineId__"},{"MediaPipelineArn":"__MediaPipelineArn__","MediaPipelineId":"__MediaPipelineId__"}],"NextToken":"__NextToken__"}

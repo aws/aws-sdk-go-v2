@@ -4,11 +4,10 @@ package dataexchange
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +46,48 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetConfiguration != nil {
+		s.WriteStruct(schemas.CreateJobRequest_AssetConfiguration)
+		v.AssetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.CreateJobRequest_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateJobRequest_Type, string(v.Type))
+	}
+}
+func (v *CreateJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobRequest_AssetConfiguration:
+			v.AssetConfiguration = &types.AssetConfiguration{}
+			return v.AssetConfiguration.Deserialize(d)
+		case schemas.CreateJobRequest_Details:
+			v.Details = &types.RequestDetails{}
+			return v.Details.Deserialize(d)
+		case schemas.CreateJobRequest_Type:
+			var ev string
+			if err := d.ReadString(schemas.CreateJobRequest_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateJobOutput struct {
 
 	// The ARN for the job.
@@ -83,77 +124,105 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateJobResponse_Arn, *v.Arn)
+	}
+	if v.AssetConfiguration != nil {
+		s.WriteStruct(schemas.CreateJobResponse_AssetConfiguration)
+		v.AssetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateJobResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.CreateJobResponse_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfJobError(s, schemas.CreateJobResponse_Errors, v.Errors)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateJobResponse_Id, *v.Id)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateJobResponse_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateJobResponse_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateJobResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateJobResponse_Arn, v.Arn)
+		case schemas.CreateJobResponse_AssetConfiguration:
+			v.AssetConfiguration = &types.AssetConfiguration{}
+			return v.AssetConfiguration.Deserialize(d)
+		case schemas.CreateJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateJobResponse_Details:
+			v.Details = &types.ResponseDetails{}
+			return v.Details.Deserialize(d)
+		case schemas.CreateJobResponse_Errors:
+			return deserializeListOfJobError(d, schemas.CreateJobResponse_Errors, &v.Errors)
+		case schemas.CreateJobResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateJobResponse_Id, v.Id)
+		case schemas.CreateJobResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateJobResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		case schemas.CreateJobResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.CreateJobResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.Type(ev)
+			return nil
+		case schemas.CreateJobResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateJobResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +237,8 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateJob",
-	}
 }

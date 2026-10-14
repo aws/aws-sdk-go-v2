@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminListGroupsForUser
+
+{"Groups":[{"CreationDate":946684800,"Description":"__Description__","GroupName":"__GroupName__","LastModifiedDate":946684800,"Precedence":1,"RoleArn":"__RoleArn__","UserPoolId":"__UserPoolId__"},{"CreationDate":946684800,"Description":"__Description__","GroupName":"__GroupName__","LastModifiedDate":946684800,"Precedence":1,"RoleArn":"__RoleArn__","UserPoolId":"__UserPoolId__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /ListImageRecipes
+
+Content-Type: application/json
+
+{"filters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","owner":"Self"}

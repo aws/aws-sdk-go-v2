@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +45,16 @@ type BatchGetJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetJobIdentifiers(s, schemas.BatchGetJobRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetJobOutput struct {
 
 	// A list of errors for jobs that could not be retrieved.
@@ -62,65 +73,42 @@ type BatchGetJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetJobErrors(s, schemas.BatchGetJobResponse_errors, v.Errors)
+	serializeBatchGetJobItems(s, schemas.BatchGetJobResponse_jobs, v.Jobs)
+}
+func (v *BatchGetJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetJobResponse_errors:
+			return deserializeBatchGetJobErrors(d, schemas.BatchGetJobResponse_errors, &v.Errors)
+		case schemas.BatchGetJobResponse_jobs:
+			return deserializeBatchGetJobItems(d, schemas.BatchGetJobResponse_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJob, schemas.BatchGetJobRequest, schemas.BatchGetJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJob, schemas.BatchGetJobRequest, schemas.BatchGetJobResponse), output: &BatchGetJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -130,12 +118,6 @@ func (c *Client) addOperationBatchGetJobMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpBatchGetJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +130,6 @@ func (c *Client) addOperationBatchGetJobMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -187,12 +163,4 @@ func (m *endpointPrefix_opBatchGetJobMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opBatchGetJobMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchGetJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchGetJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetJob",
-	}
 }

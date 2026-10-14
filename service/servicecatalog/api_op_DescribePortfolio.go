@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified portfolio.
@@ -48,21 +43,6 @@ type DescribePortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePortfolioInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribePortfolioInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribePortfolioInput_Id, *v.Id)
-	}
-}
-
 type DescribePortfolioOutput struct {
 
 	// Information about the associated budgets.
@@ -83,91 +63,29 @@ type DescribePortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePortfolioOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePortfolioOutput_Budgets:
-			return deserializeBudgets(d, schemas.DescribePortfolioOutput_Budgets, &v.Budgets)
-		case schemas.DescribePortfolioOutput_PortfolioDetail:
-			v.PortfolioDetail = &types.PortfolioDetail{}
-			return v.PortfolioDetail.Deserialize(d)
-		case schemas.DescribePortfolioOutput_TagOptions:
-			return deserializeTagOptionDetails(d, schemas.DescribePortfolioOutput_TagOptions, &v.TagOptions)
-		case schemas.DescribePortfolioOutput_Tags:
-			return deserializeTags(d, schemas.DescribePortfolioOutput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolio{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolio, schemas.DescribePortfolioInput, schemas.DescribePortfolioOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePortfolio{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolio, schemas.DescribePortfolioInput, schemas.DescribePortfolioOutput), output: &DescribePortfolioOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePortfolio"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePortfolioValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePortfolio(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +100,8 @@ func (c *Client) addOperationDescribePortfolioMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePortfolio(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePortfolio",
-	}
 }

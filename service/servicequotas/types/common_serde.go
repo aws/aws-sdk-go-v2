@@ -133,6 +133,7 @@ func serializeServiceQuotaListDefinition(s smithy.ShapeSerializer, schema *smith
 }
 
 func deserializeExcludedQuotaList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -146,6 +147,7 @@ func deserializeExcludedQuotaList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeInputTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -159,6 +161,7 @@ func deserializeInputTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeInputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -172,6 +175,7 @@ func deserializeInputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag
 }
 
 func deserializeOutputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -185,6 +189,7 @@ func deserializeOutputTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ta
 }
 
 func deserializeQuotaInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QuotaInfo) error {
+	*v = make([]QuotaInfo, 0)
 	var vv QuotaInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = QuotaInfo{}
@@ -198,6 +203,7 @@ func deserializeQuotaInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeQuotaUtilizationInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QuotaUtilizationInfo) error {
+	*v = make([]QuotaUtilizationInfo, 0)
 	var vv QuotaUtilizationInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = QuotaUtilizationInfo{}
@@ -211,6 +217,7 @@ func deserializeQuotaUtilizationInfoList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRequestedServiceQuotaChangeHistoryListDefinition(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RequestedServiceQuotaChange) error {
+	*v = make([]RequestedServiceQuotaChange, 0)
 	var vv RequestedServiceQuotaChange
 	return smithy.ReadList(d, s, func() error {
 		vv = RequestedServiceQuotaChange{}
@@ -224,6 +231,7 @@ func deserializeRequestedServiceQuotaChangeHistoryListDefinition(d smithy.ShapeD
 }
 
 func deserializeServiceInfoListDefinition(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ServiceInfo) error {
+	*v = make([]ServiceInfo, 0)
 	var vv ServiceInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = ServiceInfo{}
@@ -237,6 +245,7 @@ func deserializeServiceInfoListDefinition(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeServiceQuotaIncreaseRequestInTemplateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ServiceQuotaIncreaseRequestInTemplate) error {
+	*v = make([]ServiceQuotaIncreaseRequestInTemplate, 0)
 	var vv ServiceQuotaIncreaseRequestInTemplate
 	return smithy.ReadList(d, s, func() error {
 		vv = ServiceQuotaIncreaseRequestInTemplate{}
@@ -250,6 +259,7 @@ func deserializeServiceQuotaIncreaseRequestInTemplateList(d smithy.ShapeDeserial
 }
 
 func deserializeServiceQuotaListDefinition(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ServiceQuota) error {
+	*v = make([]ServiceQuota, 0)
 	var vv ServiceQuota
 	return smithy.ReadList(d, s, func() error {
 		vv = ServiceQuota{}
@@ -302,6 +312,14 @@ func deserializeExclusionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *m
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeExcludedQuotaList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -316,6 +334,14 @@ func deserializeExclusionQuotaList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	*v = make(map[string][]QuotaInfo)
 	var vv []QuotaInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []QuotaInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeQuotaInfoList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -330,6 +356,13 @@ func deserializeMetricDimensionsMapDefinition(d smithy.ShapeDeserializer, s *smi
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

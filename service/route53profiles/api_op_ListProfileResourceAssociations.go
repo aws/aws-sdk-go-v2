@@ -5,12 +5,8 @@ package route53profiles
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the resource associations for the specified Route 53 Profile.
@@ -57,27 +53,6 @@ type ListProfileResourceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProfileResourceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProfileResourceAssociationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProfileResourceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProfileResourceAssociationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProfileResourceAssociationsRequest_NextToken, *v.NextToken)
-	}
-	if v.ProfileId != nil {
-		s.WriteString(schemas.ListProfileResourceAssociationsRequest_ProfileId, *v.ProfileId)
-	}
-	if v.ResourceType != nil {
-		s.WriteString(schemas.ListProfileResourceAssociationsRequest_ResourceType, *v.ResourceType)
-	}
-}
-
 type ListProfileResourceAssociationsOutput struct {
 
 	//  If more than MaxResults resource associations match the specified criteria,
@@ -96,87 +71,29 @@ type ListProfileResourceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProfileResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProfileResourceAssociationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProfileResourceAssociationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProfileResourceAssociationsResponse_NextToken, v.NextToken)
-		case schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations:
-			return deserializeProfileResourceAssociations(d, schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations, &v.ProfileResourceAssociations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProfileResourceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileResourceAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileResourceAssociations, schemas.ListProfileResourceAssociationsRequest, schemas.ListProfileResourceAssociationsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileResourceAssociations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileResourceAssociations, schemas.ListProfileResourceAssociationsRequest, schemas.ListProfileResourceAssociationsResponse), output: &ListProfileResourceAssociationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProfileResourceAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListProfileResourceAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProfileResourceAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +106,6 @@ func (c *Client) addOperationListProfileResourceAssociationsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +213,3 @@ type ListProfileResourceAssociationsAPIClient interface {
 }
 
 var _ ListProfileResourceAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProfileResourceAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProfileResourceAssociations",
-	}
-}

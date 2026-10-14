@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountState":"PENDING_ACTIVATION","GovCloudAccountId":"__GovCloudAccountId__"}

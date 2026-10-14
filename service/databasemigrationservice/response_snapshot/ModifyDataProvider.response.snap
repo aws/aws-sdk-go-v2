@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyDataProvider
+
+{"DataProvider":{"DataProviderArn":"__DataProviderArn__","DataProviderCreationTime":"2000-01-01T00:00:00Z","DataProviderName":"__DataProviderName__","Description":"__Description__","Engine":"__Engine__","Settings":{"RedshiftSettings":{"DatabaseName":"__DatabaseName__","Port":1,"S3AccessRoleArn":"__S3AccessRoleArn__","S3Path":"__S3Path__","ServerName":"__ServerName__"}},"Virtual":true}}

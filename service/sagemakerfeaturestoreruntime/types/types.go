@@ -190,6 +190,125 @@ func (v *BatchGetRecordResultDetail) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// An entry to write as part of a BatchWriteRecord request.
+type BatchWriteRecordEntry struct {
+
+	// The name or Amazon Resource Name (ARN) of the FeatureGroup to write the record
+	// to.
+	//
+	// This member is required.
+	FeatureGroupName *string
+
+	// List of FeatureValues to be inserted. This will be a full over-write.
+	//
+	// This member is required.
+	Record []FeatureValue
+
+	// A list of stores to which you're adding the record. By default, Feature Store
+	// adds the record to all of the stores that you're using for the FeatureGroup .
+	TargetStores []TargetStore
+
+	// Time to live duration for this entry, where the record is hard deleted after
+	// the expiration time is reached; ExpiresAt = EventTime + TtlDuration . This
+	// overrides the request level TtlDuration .
+	TtlDuration *TtlDuration
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchWriteRecordEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.BatchWriteRecordEntry_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeRecord(s, schemas.BatchWriteRecordEntry_Record, v.Record)
+	serializeTargetStores(s, schemas.BatchWriteRecordEntry_TargetStores, v.TargetStores)
+	if v.TtlDuration != nil {
+		s.WriteStruct(schemas.BatchWriteRecordEntry_TtlDuration)
+		v.TtlDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchWriteRecordEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteRecordEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteRecordEntry_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.BatchWriteRecordEntry_FeatureGroupName, v.FeatureGroupName)
+		case schemas.BatchWriteRecordEntry_Record:
+			return deserializeRecord(d, schemas.BatchWriteRecordEntry_Record, &v.Record)
+		case schemas.BatchWriteRecordEntry_TargetStores:
+			return deserializeTargetStores(d, schemas.BatchWriteRecordEntry_TargetStores, &v.TargetStores)
+		case schemas.BatchWriteRecordEntry_TtlDuration:
+			v.TtlDuration = &TtlDuration{}
+			return v.TtlDuration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The error that has occurred when attempting to write a record in a batch.
+type BatchWriteRecordError struct {
+
+	// The entry that failed to be written.
+	//
+	// This member is required.
+	Entry *BatchWriteRecordEntry
+
+	// The error code for the failed record write.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the failed record write.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchWriteRecordError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entry != nil {
+		s.WriteStruct(schemas.BatchWriteRecordError_Entry)
+		v.Entry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchWriteRecordError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchWriteRecordError_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchWriteRecordError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteRecordError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteRecordError_Entry:
+			v.Entry = &BatchWriteRecordEntry{}
+			return v.Entry.Deserialize(d)
+		case schemas.BatchWriteRecordError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchWriteRecordError_ErrorCode, v.ErrorCode)
+		case schemas.BatchWriteRecordError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchWriteRecordError_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
 // The value associated with a feature.
 type FeatureValue struct {
 

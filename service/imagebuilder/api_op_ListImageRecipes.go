@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of image recipes.
@@ -38,10 +38,10 @@ type ListImageRecipesInput struct {
 	//   - platform
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -52,6 +52,25 @@ type ListImageRecipesInput struct {
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListImageRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListImageRecipesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImageRecipesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageRecipesRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListImageRecipesRequest_owner, string(v.Owner))
+	}
 }
 
 type ListImageRecipesOutput struct {
@@ -75,74 +94,54 @@ type ListImageRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageRecipeSummaryList(s, schemas.ListImageRecipesResponse_imageRecipeSummaryList, v.ImageRecipeSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageRecipesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageRecipesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImageRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageRecipesResponse_imageRecipeSummaryList:
+			return deserializeImageRecipeSummaryList(d, schemas.ListImageRecipesResponse_imageRecipeSummaryList, &v.ImageRecipeSummaryList)
+		case schemas.ListImageRecipesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageRecipesResponse_nextToken, v.NextToken)
+		case schemas.ListImageRecipesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageRecipesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageRecipes, schemas.ListImageRecipesRequest, schemas.ListImageRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageRecipes, schemas.ListImageRecipesRequest, schemas.ListImageRecipesResponse), output: &ListImageRecipesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageRecipes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImageRecipes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageRecipes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +156,6 @@ func (c *Client) addOperationListImageRecipesMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -171,7 +164,7 @@ func (c *Client) addOperationListImageRecipesMiddlewares(stack *middleware.Stack
 
 // ListImageRecipesPaginatorOptions is the paginator options for ListImageRecipes
 type ListImageRecipesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -261,11 +254,3 @@ type ListImageRecipesAPIClient interface {
 }
 
 var _ ListImageRecipesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImageRecipes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImageRecipes",
-	}
-}

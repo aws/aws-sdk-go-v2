@@ -5,12 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the purchase options (offers and offer sets) available to the buyer.
@@ -41,6 +37,12 @@ type ListPurchaseOptionsInput struct {
 	// Multiple values within the same filter are combined with OR logic.
 	Filters []types.PurchaseOptionFilter
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -50,22 +52,6 @@ type ListPurchaseOptionsInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListPurchaseOptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPurchaseOptionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPurchaseOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePurchaseOptionFilterList(s, schemas.ListPurchaseOptionsInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPurchaseOptionsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPurchaseOptionsInput_nextToken, *v.NextToken)
-	}
 }
 
 type ListPurchaseOptionsOutput struct {
@@ -84,87 +70,29 @@ type ListPurchaseOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPurchaseOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPurchaseOptionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPurchaseOptionsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPurchaseOptionsOutput_nextToken, v.NextToken)
-		case schemas.ListPurchaseOptionsOutput_purchaseOptions:
-			return deserializePurchaseOptionSummaryList(d, schemas.ListPurchaseOptionsOutput_purchaseOptions, &v.PurchaseOptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPurchaseOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPurchaseOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPurchaseOptions, schemas.ListPurchaseOptionsInput, schemas.ListPurchaseOptionsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPurchaseOptions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPurchaseOptions, schemas.ListPurchaseOptionsInput, schemas.ListPurchaseOptionsOutput), output: &ListPurchaseOptionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPurchaseOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPurchaseOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPurchaseOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +105,6 @@ func (c *Client) addOperationListPurchaseOptionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +194,3 @@ type ListPurchaseOptionsAPIClient interface {
 }
 
 var _ ListPurchaseOptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPurchaseOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPurchaseOptions",
-	}
-}

@@ -1,0 +1,5 @@
+POST /things/__ThingName__/connectivity-data
+
+Content-Type: application/json
+
+{"includeSocketInformation":true}

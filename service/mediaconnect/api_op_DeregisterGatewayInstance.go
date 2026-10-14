@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Deregisters an instance. Before you deregister an instance, all bridges
@@ -45,6 +44,21 @@ type DeregisterGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGatewayInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterGatewayInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGatewayInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != nil {
+		s.WriteBool(schemas.DeregisterGatewayInstanceRequest_Force, *v.Force)
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.DeregisterGatewayInstanceRequest_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+
 type DeregisterGatewayInstanceOutput struct {
 
 	//  The ARN of the instance.
@@ -59,77 +73,58 @@ type DeregisterGatewayInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGatewayInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterGatewayInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGatewayInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+	if v.InstanceState != "" {
+		s.WriteString(schemas.DeregisterGatewayInstanceResponse_InstanceState, string(v.InstanceState))
+	}
+}
+func (v *DeregisterGatewayInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterGatewayInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn:
+			v.GatewayInstanceArn = new(string)
+			return d.ReadString(schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn, v.GatewayInstanceArn)
+		case schemas.DeregisterGatewayInstanceResponse_InstanceState:
+			var ev string
+			if err := d.ReadString(schemas.DeregisterGatewayInstanceResponse_InstanceState, &ev); err != nil {
+				return err
+			}
+			v.InstanceState = types.InstanceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGatewayInstance, schemas.DeregisterGatewayInstanceRequest, schemas.DeregisterGatewayInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGatewayInstance, schemas.DeregisterGatewayInstanceRequest, schemas.DeregisterGatewayInstanceResponse), output: &DeregisterGatewayInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterGatewayInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterGatewayInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeregisterGatewayInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterGatewayInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +139,8 @@ func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeregisterGatewayInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeregisterGatewayInstance",
-	}
 }

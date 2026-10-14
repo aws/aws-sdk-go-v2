@@ -1150,6 +1150,26 @@ func (m *validateOpDeleteGlossaryTerm) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLineageEvent struct {
+}
+
+func (*validateOpDeleteLineageEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLineageEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLineageEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLineageEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteListing struct {
 }
 
@@ -3250,6 +3270,26 @@ func (m *validateOpStartNotebookRun) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartNotebookSync struct {
+}
+
+func (*validateOpStartNotebookSync) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNotebookSync) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNotebookSyncInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNotebookSyncInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopNotebookRun struct {
 }
 
@@ -3978,6 +4018,10 @@ func addOpDeleteGlossaryTermValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteGlossaryTerm{}, middleware.After)
 }
 
+func addOpDeleteLineageEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLineageEvent{}, middleware.After)
+}
+
 func addOpDeleteListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteListing{}, middleware.After)
 }
@@ -4396,6 +4440,10 @@ func addOpStartNotebookImportValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartNotebookRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartNotebookRun{}, middleware.After)
+}
+
+func addOpStartNotebookSyncValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNotebookSync{}, middleware.After)
 }
 
 func addOpStopNotebookRunValidationMiddleware(stack *middleware.Stack) error {
@@ -4855,6 +4903,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 			invalidParams.AddNested("[amazonQProperties]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConnectionPropertiesInputMemberGitProperties:
+		if err := validateGitPropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConnectionPropertiesInputMemberHyperPodProperties:
 		if err := validateHyperPodPropertiesInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[hyperPodProperties]", err.(smithy.InvalidParamsError))
@@ -4868,6 +4921,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 	case *types.ConnectionPropertiesInputMemberS3Properties:
 		if err := validateS3PropertiesInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConnectionPropertiesInputMemberSnowflakeProperties:
+		if err := validateSnowflakePropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[snowflakeProperties]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ConnectionPropertiesInputMemberVpcProperties:
@@ -4902,6 +4960,11 @@ func validateConnectionPropertiesPatch(v types.ConnectionPropertiesPatch) error 
 	case *types.ConnectionPropertiesPatchMemberS3Properties:
 		if err := validateS3PropertiesPatch(&uv.Value); err != nil {
 			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConnectionPropertiesPatchMemberSnowflakeProperties:
+		if err := validateSnowflakePropertiesPatch(&uv.Value); err != nil {
+			invalidParams.AddNested("[snowflakeProperties]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -5446,6 +5509,51 @@ func validateFormsInputMap(v map[string]types.FormEntryInput) error {
 	}
 }
 
+func validateGitMetadata(v *types.GitMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitMetadata"}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.CommitHash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommitHash"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitPropertiesInput(v *types.GitPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitPropertiesInput"}
+	if v.CodeConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodeConnectionArn"))
+	}
+	if v.RepositoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryId"))
+	}
+	if v.DefaultBranch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultBranch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlueRunConfigurationInput(v *types.GlueRunConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -5527,6 +5635,21 @@ func validateHyperPodPropertiesInput(v *types.HyperPodPropertiesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "HyperPodPropertiesInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdentityMapping(v *types.IdentityMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityMapping"}
+	if v.UsernameAttribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsernameAttribute"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5629,6 +5752,21 @@ func validateLikeExpression(v *types.LikeExpression) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLineageSyncInput(v *types.LineageSyncInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LineageSyncInput"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5791,6 +5929,21 @@ func validateNotEqualToExpression(v *types.NotEqualToExpression) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationConfig(v *types.NotificationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfig"}
+	if v.NotifyOn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyOn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6566,6 +6719,60 @@ func validateRuleTarget(v types.RuleTarget) error {
 	}
 }
 
+func validateS3File(v *types.S3File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3File"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FileList(v []types.S3File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FileList"}
+	for i := range v {
+		if err := validateS3File(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3FilesLocation(v *types.S3FilesLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3FilesLocation"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.FileList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileList"))
+	} else if v.FileList != nil {
+		if err := validateS3FileList(v.FileList); err != nil {
+			invalidParams.AddNested("FileList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3PropertiesInput(v *types.S3PropertiesInput) error {
 	if v == nil {
 		return nil
@@ -6650,6 +6857,69 @@ func validateSearchSort(v *types.SearchSort) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SearchSort"}
 	if v.Attribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakePropertiesInput(v *types.SnowflakePropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakePropertiesInput"}
+	if v.SnowflakeRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnowflakeRole"))
+	}
+	if v.IdentityMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityMapping"))
+	} else if v.IdentityMapping != nil {
+		if err := validateIdentityMapping(v.IdentityMapping); err != nil {
+			invalidParams.AddNested("IdentityMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LineageSync != nil {
+		if err := validateLineageSyncInput(v.LineageSync); err != nil {
+			invalidParams.AddNested("LineageSync", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakePropertiesPatch(v *types.SnowflakePropertiesPatch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakePropertiesPatch"}
+	if v.LineageSync != nil {
+		if err := validateLineageSyncInput(v.LineageSync); err != nil {
+			invalidParams.AddNested("LineageSync", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceLocation(v types.SourceLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceLocation"}
+	switch uv := v.(type) {
+	case *types.SourceLocationMemberS3Files:
+		if err := validateS3FilesLocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Files]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8128,6 +8398,24 @@ func validateOpDeleteGlossaryTermInput(v *DeleteGlossaryTermInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlossaryTermInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLineageEventInput(v *DeleteLineageEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLineageEventInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -10130,6 +10418,10 @@ func validateOpStartNotebookImportInput(v *StartNotebookImportInput) error {
 	}
 	if v.SourceLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	} else if v.SourceLocation != nil {
+		if err := validateSourceLocation(v.SourceLocation); err != nil {
+			invalidParams.AddNested("SourceLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -10158,6 +10450,41 @@ func validateOpStartNotebookRunInput(v *StartNotebookRunInput) error {
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfig(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotificationConfiguration != nil {
+		if err := validateNotificationConfig(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNotebookSyncInput(v *StartNotebookSyncInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookSyncInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if v.SourceLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	} else if v.SourceLocation != nil {
+		if err := validateSourceLocation(v.SourceLocation); err != nil {
+			invalidParams.AddNested("SourceLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitMetadata != nil {
+		if err := validateGitMetadata(v.GitMetadata); err != nil {
+			invalidParams.AddNested("GitMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +50,25 @@ type UpdateNetworkMigrationMapperSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkMigrationMapperSegmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkMigrationMapperSegmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkMigrationMapperSegmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationMapperSegmentRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationMapperSegmentRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	serializeScopeTagsMap(s, schemas.UpdateNetworkMigrationMapperSegmentRequest_scopeTags, v.ScopeTags)
+	if v.SegmentID != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationMapperSegmentRequest_segmentID, *v.SegmentID)
+	}
+}
+
 type UpdateNetworkMigrationMapperSegmentOutput struct {
 
 	// The checksum of the segment data for integrity verification.
@@ -89,7 +107,9 @@ type UpdateNetworkMigrationMapperSegmentOutput struct {
 	// The unique identifier of the segment.
 	SegmentID *string
 
-	// The type of the segment, such as VPC, subnet, or security group.
+	// The category of the network migration segment. A segment groups the network
+	// constructs (such as VPCs, subnets, and security groups) that are migrated
+	// together. Valid values: WORKLOAD , APPLIANCE .
 	SegmentType types.NetworkMigrationMapperSegmentType
 
 	// The target AWS account where this segment will be deployed.
@@ -104,77 +124,134 @@ type UpdateNetworkMigrationMapperSegmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkMigrationMapperSegmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkMigrationMapperSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkMigrationMapperSegmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteStruct(schemas.NetworkMigrationMapperSegment_checksum)
+		v.Checksum.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationMapperSegment_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_description, *v.Description)
+	}
+	if v.JobID != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_jobID, *v.JobID)
+	}
+	if v.LogicalID != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_logicalID, *v.LogicalID)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_name, *v.Name)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.OutputS3Configuration != nil {
+		s.WriteStruct(schemas.NetworkMigrationMapperSegment_outputS3Configuration)
+		v.OutputS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializereferencedSegmentsList(s, schemas.NetworkMigrationMapperSegment_referencedSegments, v.ReferencedSegments)
+	serializeScopeTagsMap(s, schemas.NetworkMigrationMapperSegment_scopeTags, v.ScopeTags)
+	if v.SegmentID != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_segmentID, *v.SegmentID)
+	}
+	if v.SegmentType != "" {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_segmentType, string(v.SegmentType))
+	}
+	if v.TargetAccount != nil {
+		s.WriteString(schemas.NetworkMigrationMapperSegment_targetAccount, *v.TargetAccount)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationMapperSegment_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateNetworkMigrationMapperSegmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkMigrationMapperSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkMigrationMapperSegment_checksum:
+			v.Checksum = &types.Checksum{}
+			return v.Checksum.Deserialize(d)
+		case schemas.NetworkMigrationMapperSegment_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationMapperSegment_createdAt, v.CreatedAt)
+		case schemas.NetworkMigrationMapperSegment_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_description, v.Description)
+		case schemas.NetworkMigrationMapperSegment_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_jobID, v.JobID)
+		case schemas.NetworkMigrationMapperSegment_logicalID:
+			v.LogicalID = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_logicalID, v.LogicalID)
+		case schemas.NetworkMigrationMapperSegment_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_name, v.Name)
+		case schemas.NetworkMigrationMapperSegment_networkMigrationDefinitionID:
+			v.NetworkMigrationDefinitionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_networkMigrationDefinitionID, v.NetworkMigrationDefinitionID)
+		case schemas.NetworkMigrationMapperSegment_networkMigrationExecutionID:
+			v.NetworkMigrationExecutionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_networkMigrationExecutionID, v.NetworkMigrationExecutionID)
+		case schemas.NetworkMigrationMapperSegment_outputS3Configuration:
+			v.OutputS3Configuration = &types.S3Configuration{}
+			return v.OutputS3Configuration.Deserialize(d)
+		case schemas.NetworkMigrationMapperSegment_referencedSegments:
+			return deserializereferencedSegmentsList(d, schemas.NetworkMigrationMapperSegment_referencedSegments, &v.ReferencedSegments)
+		case schemas.NetworkMigrationMapperSegment_scopeTags:
+			return deserializeScopeTagsMap(d, schemas.NetworkMigrationMapperSegment_scopeTags, &v.ScopeTags)
+		case schemas.NetworkMigrationMapperSegment_segmentID:
+			v.SegmentID = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_segmentID, v.SegmentID)
+		case schemas.NetworkMigrationMapperSegment_segmentType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationMapperSegment_segmentType, &ev); err != nil {
+				return err
+			}
+			v.SegmentType = types.NetworkMigrationMapperSegmentType(ev)
+			return nil
+		case schemas.NetworkMigrationMapperSegment_targetAccount:
+			v.TargetAccount = new(string)
+			return d.ReadString(schemas.NetworkMigrationMapperSegment_targetAccount, v.TargetAccount)
+		case schemas.NetworkMigrationMapperSegment_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationMapperSegment_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkMigrationMapperSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkMigrationMapperSegment, schemas.UpdateNetworkMigrationMapperSegmentRequest, schemas.NetworkMigrationMapperSegment)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkMigrationMapperSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkMigrationMapperSegment, schemas.UpdateNetworkMigrationMapperSegmentRequest, schemas.NetworkMigrationMapperSegment), output: &UpdateNetworkMigrationMapperSegmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkMigrationMapperSegment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNetworkMigrationMapperSegment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNetworkMigrationMapperSegmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNetworkMigrationMapperSegment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +266,8 @@ func (c *Client) addOperationUpdateNetworkMigrationMapperSegmentMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNetworkMigrationMapperSegment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNetworkMigrationMapperSegment",
-	}
 }

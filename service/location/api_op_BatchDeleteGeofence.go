@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,31 +43,6 @@ type BatchDeleteGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteGeofenceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteGeofenceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.BatchDeleteGeofenceRequest_CollectionName, *v.CollectionName)
-	}
-	serializeIdList(s, schemas.BatchDeleteGeofenceRequest_GeofenceIds, v.GeofenceIds)
-}
-func (v *BatchDeleteGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteGeofenceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteGeofenceRequest_CollectionName:
-			v.CollectionName = new(string)
-			return d.ReadString(schemas.BatchDeleteGeofenceRequest_CollectionName, v.CollectionName)
-		case schemas.BatchDeleteGeofenceRequest_GeofenceIds:
-			return deserializeIdList(d, schemas.BatchDeleteGeofenceRequest_GeofenceIds, &v.GeofenceIds)
-		}
-		return nil
-	})
-}
-
 type BatchDeleteGeofenceOutput struct {
 
 	// Contains error details for each geofence that failed to delete.
@@ -84,81 +56,23 @@ type BatchDeleteGeofenceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteGeofenceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteGeofenceErrorList(s, schemas.BatchDeleteGeofenceResponse_Errors, v.Errors)
-}
-func (v *BatchDeleteGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteGeofenceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteGeofenceResponse_Errors:
-			return deserializeBatchDeleteGeofenceErrorList(d, schemas.BatchDeleteGeofenceResponse_Errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteGeofence{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteGeofence, schemas.BatchDeleteGeofenceRequest, schemas.BatchDeleteGeofenceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteGeofence{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteGeofence, schemas.BatchDeleteGeofenceRequest, schemas.BatchDeleteGeofenceResponse), output: &BatchDeleteGeofenceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteGeofence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +82,6 @@ func (c *Client) addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpBatchDeleteGeofenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteGeofence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +94,6 @@ func (c *Client) addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +127,4 @@ func (m *endpointPrefix_opBatchDeleteGeofenceMiddleware) HandleFinalize(ctx cont
 }
 func addEndpointPrefix_opBatchDeleteGeofenceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchDeleteGeofenceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteGeofence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteGeofence",
-	}
 }

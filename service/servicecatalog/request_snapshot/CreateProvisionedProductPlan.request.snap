@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreateProvisionedProductPlan
+
+{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","NotificationArns":["__Member__","__Member__"],"PathId":"__PathId__","PlanName":"__PlanName__","PlanType":"CLOUDFORMATION","ProductId":"__ProductId__","ProvisionedProductName":"__ProvisionedProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningParameters":[{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"},{"Key":"__Key__","UsePreviousValue":true,"Value":"__Value__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

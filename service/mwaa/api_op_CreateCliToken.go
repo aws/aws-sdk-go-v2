@@ -5,9 +5,6 @@ package mwaa
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,28 +37,6 @@ type CreateCliTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCliTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCliTokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCliTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CreateCliTokenRequest_Name, *v.Name)
-	}
-}
-func (v *CreateCliTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCliTokenRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCliTokenRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateCliTokenRequest_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 type CreateCliTokenOutput struct {
 
 	// An Airflow CLI login token.
@@ -76,90 +51,23 @@ type CreateCliTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCliTokenOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCliTokenResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCliTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CliToken != nil {
-		s.WriteString(schemas.CreateCliTokenResponse_CliToken, *v.CliToken)
-	}
-	if v.WebServerHostname != nil {
-		s.WriteString(schemas.CreateCliTokenResponse_WebServerHostname, *v.WebServerHostname)
-	}
-}
-func (v *CreateCliTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCliTokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCliTokenResponse_CliToken:
-			v.CliToken = new(string)
-			return d.ReadString(schemas.CreateCliTokenResponse_CliToken, v.CliToken)
-		case schemas.CreateCliTokenResponse_WebServerHostname:
-			v.WebServerHostname = new(string)
-			return d.ReadString(schemas.CreateCliTokenResponse_WebServerHostname, v.WebServerHostname)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCliToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCliToken, schemas.CreateCliTokenRequest, schemas.CreateCliTokenResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCliToken{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCliToken, schemas.CreateCliTokenRequest, schemas.CreateCliTokenResponse), output: &CreateCliTokenOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCliToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -169,12 +77,6 @@ func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateCliTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCliToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +89,6 @@ func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -226,12 +122,4 @@ func (m *endpointPrefix_opCreateCliTokenMiddleware) HandleFinalize(ctx context.C
 }
 func addEndpointPrefix_opCreateCliTokenMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateCliTokenMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateCliToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCliToken",
-	}
 }

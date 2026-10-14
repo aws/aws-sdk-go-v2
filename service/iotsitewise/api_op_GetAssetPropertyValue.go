@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,24 +56,6 @@ type GetAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssetPropertyValueRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetId != nil {
-		s.WriteString(schemas.GetAssetPropertyValueRequest_assetId, *v.AssetId)
-	}
-	if v.PropertyAlias != nil {
-		s.WriteString(schemas.GetAssetPropertyValueRequest_propertyAlias, *v.PropertyAlias)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.GetAssetPropertyValueRequest_propertyId, *v.PropertyId)
-	}
-}
-
 type GetAssetPropertyValueOutput struct {
 
 	// The current asset property value.
@@ -88,85 +67,29 @@ type GetAssetPropertyValueOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssetPropertyValueResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssetPropertyValueResponse_propertyValue:
-			v.PropertyValue = &types.AssetPropertyValue{}
-			return v.PropertyValue.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyValue{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValue, schemas.GetAssetPropertyValueRequest, schemas.GetAssetPropertyValueResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetPropertyValue{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyValue, schemas.GetAssetPropertyValueRequest, schemas.GetAssetPropertyValueResponse), output: &GetAssetPropertyValueOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssetPropertyValue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssetPropertyValue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +102,6 @@ func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +135,4 @@ func (m *endpointPrefix_opGetAssetPropertyValueMiddleware) HandleFinalize(ctx co
 }
 func addEndpointPrefix_opGetAssetPropertyValueMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetAssetPropertyValueMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetAssetPropertyValue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAssetPropertyValue",
-	}
 }

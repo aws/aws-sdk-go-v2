@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.ListCostAllocationTags
+
+{"MaxResults":1,"NextToken":"__NextToken__","Status":"Active","TagKeys":["__Member__","__Member__"],"Type":"AWSGenerated"}

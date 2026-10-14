@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,11 +38,6 @@ type CreateAgentRuntimeInput struct {
 	// This member is required.
 	AgentRuntimeName *string
 
-	// The network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -54,6 +45,11 @@ type CreateAgentRuntimeInput struct {
 
 	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
+
+	// The capacity provider configuration for the AgentCore Runtime. Use a capacity
+	// provider to run the AgentCore Runtime on the Instances compute type, which
+	// provisions Amazon Web Services managed compute in your account.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
 
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
@@ -72,6 +68,12 @@ type CreateAgentRuntimeInput struct {
 	// The life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
+	// The network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
+
+	// The version of the runtime platform to use for the AgentCore Runtime.
+	PlatformVersion *string
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration
@@ -86,48 +88,6 @@ type CreateAgentRuntimeInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAgentRuntimeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentRuntimeArtifact(s, schemas.CreateAgentRuntimeRequest_agentRuntimeArtifact, v.AgentRuntimeArtifact)
-	if v.AgentRuntimeName != nil {
-		s.WriteString(schemas.CreateAgentRuntimeRequest_agentRuntimeName, *v.AgentRuntimeName)
-	}
-	serializeAuthorizerConfiguration(s, schemas.CreateAgentRuntimeRequest_authorizerConfiguration, v.AuthorizerConfiguration)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAgentRuntimeRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAgentRuntimeRequest_description, *v.Description)
-	}
-	serializeEnvironmentVariablesMap(s, schemas.CreateAgentRuntimeRequest_environmentVariables, v.EnvironmentVariables)
-	serializeFilesystemConfigurations(s, schemas.CreateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
-	if v.LifecycleConfiguration != nil {
-		s.WriteStruct(schemas.CreateAgentRuntimeRequest_lifecycleConfiguration)
-		v.LifecycleConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.CreateAgentRuntimeRequest_networkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ProtocolConfiguration != nil {
-		s.WriteStruct(schemas.CreateAgentRuntimeRequest_protocolConfiguration)
-		v.ProtocolConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRequestHeaderConfiguration(s, schemas.CreateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateAgentRuntimeRequest_roleArn, *v.RoleArn)
-	}
-	serializeTagsMap(s, schemas.CreateAgentRuntimeRequest_tags, v.Tags)
 }
 
 type CreateAgentRuntimeOutput struct {
@@ -166,92 +126,23 @@ type CreateAgentRuntimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAgentRuntimeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAgentRuntimeResponse_agentRuntimeArn:
-			v.AgentRuntimeArn = new(string)
-			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeArn, v.AgentRuntimeArn)
-		case schemas.CreateAgentRuntimeResponse_agentRuntimeId:
-			v.AgentRuntimeId = new(string)
-			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeId, v.AgentRuntimeId)
-		case schemas.CreateAgentRuntimeResponse_agentRuntimeVersion:
-			v.AgentRuntimeVersion = new(string)
-			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeVersion, v.AgentRuntimeVersion)
-		case schemas.CreateAgentRuntimeResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateAgentRuntimeResponse_createdAt, v.CreatedAt)
-		case schemas.CreateAgentRuntimeResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateAgentRuntimeResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AgentRuntimeStatus(ev)
-			return nil
-		case schemas.CreateAgentRuntimeResponse_workloadIdentityDetails:
-			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
-			return v.WorkloadIdentityDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntime, schemas.CreateAgentRuntimeRequest, schemas.CreateAgentRuntimeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntime, schemas.CreateAgentRuntimeRequest, schemas.CreateAgentRuntimeResponse), output: &CreateAgentRuntimeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgentRuntime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -261,12 +152,6 @@ func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateAgentRuntimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgentRuntime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -279,12 +164,6 @@ func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -324,12 +203,4 @@ func (m *idempotencyToken_initializeOpCreateAgentRuntime) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateAgentRuntimeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAgentRuntime{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAgentRuntime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAgentRuntime",
-	}
 }

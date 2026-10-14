@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ListDatabases
+
+{"DatabaseList":[{"Description":"__Description__","Name":"__Name__","Parameters":{"key0":"__Value__"}},{"Description":"__Description__","Name":"__Name__","Parameters":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

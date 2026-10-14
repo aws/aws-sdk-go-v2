@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +34,19 @@ type UpdateConfigurationBundleInput struct {
 	// This member is required.
 	BundleId *string
 
+	// A commit message describing the changes in this version.
+	//
+	// This member is required.
+	CommitMessage *string
+
+	// A list of parent version identifiers for lineage tracking. Regular commits have
+	// a single parent. Merge commits have two parents: the target branch parent and
+	// the source branch parent. If the branch already exists, the first parent must be
+	// the latest version on that branch.
+	//
+	// This member is required.
+	ParentVersionIds []string
+
 	// The branch name for this version. If not specified, inherits the parent's
 	// branch or defaults to mainline .
 	BranchName *string
@@ -53,9 +62,6 @@ type UpdateConfigurationBundleInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// A commit message describing the changes in this version.
-	CommitMessage *string
-
 	// The updated component configurations. Creates a new version of the bundle.
 	Components map[string]types.ComponentConfiguration
 
@@ -66,47 +72,12 @@ type UpdateConfigurationBundleInput struct {
 	// The updated description for the configuration bundle.
 	Description *string
 
-	// A list of parent version identifiers for lineage tracking. Regular commits have
-	// a single parent. Merge commits have two parents: the target branch parent and
-	// the source branch parent. If the branch already exists, the first parent must be
-	// the latest version on that branch.
-	ParentVersionIds []string
+	// Optional KMS key ARN for encrypting component configurations. If provided,
+	// components will be encrypted with this key. If the bundle already has a KMS key,
+	// this rotates to the new key.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateConfigurationBundleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateConfigurationBundleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BranchName != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_branchName, *v.BranchName)
-	}
-	if v.BundleId != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_bundleId, *v.BundleId)
-	}
-	if v.BundleName != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_bundleName, *v.BundleName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_clientToken, *v.ClientToken)
-	}
-	if v.CommitMessage != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_commitMessage, *v.CommitMessage)
-	}
-	serializeComponentConfigurationMap(s, schemas.UpdateConfigurationBundleRequest_components, v.Components)
-	if v.CreatedBy != nil {
-		s.WriteStruct(schemas.UpdateConfigurationBundleRequest_createdBy)
-		v.CreatedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateConfigurationBundleRequest_description, *v.Description)
-	}
-	serializeConfigurationBundleVersionList(s, schemas.UpdateConfigurationBundleRequest_parentVersionIds, v.ParentVersionIds)
 }
 
 type UpdateConfigurationBundleOutput struct {
@@ -137,82 +108,23 @@ type UpdateConfigurationBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateConfigurationBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateConfigurationBundleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateConfigurationBundleResponse_bundleArn:
-			v.BundleArn = new(string)
-			return d.ReadString(schemas.UpdateConfigurationBundleResponse_bundleArn, v.BundleArn)
-		case schemas.UpdateConfigurationBundleResponse_bundleId:
-			v.BundleId = new(string)
-			return d.ReadString(schemas.UpdateConfigurationBundleResponse_bundleId, v.BundleId)
-		case schemas.UpdateConfigurationBundleResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateConfigurationBundleResponse_updatedAt, v.UpdatedAt)
-		case schemas.UpdateConfigurationBundleResponse_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.UpdateConfigurationBundleResponse_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateConfigurationBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationBundle{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationBundle, schemas.UpdateConfigurationBundleRequest, schemas.UpdateConfigurationBundleResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationBundle{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationBundle, schemas.UpdateConfigurationBundleRequest, schemas.UpdateConfigurationBundleResponse), output: &UpdateConfigurationBundleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConfigurationBundle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -222,12 +134,6 @@ func (c *Client) addOperationUpdateConfigurationBundleMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpUpdateConfigurationBundleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfigurationBundle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,12 +146,6 @@ func (c *Client) addOperationUpdateConfigurationBundleMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,12 +185,4 @@ func (m *idempotencyToken_initializeOpUpdateConfigurationBundle) HandleInitializ
 }
 func addIdempotencyToken_opUpdateConfigurationBundleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateConfigurationBundle{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateConfigurationBundle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConfigurationBundle",
-	}
 }

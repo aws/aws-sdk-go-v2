@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"graphs":[{"arn":"__Arn__","deletionProtection":true,"endpoint":"__Endpoint__","id":"__Id__","kmsKeyIdentifier":"__KmsKeyIdentifier__","name":"__Name__","provisionedMemory":1,"publicConnectivity":true,"replicaCount":1,"status":"CREATING"},{"arn":"__Arn__","deletionProtection":true,"endpoint":"__Endpoint__","id":"__Id__","kmsKeyIdentifier":"__KmsKeyIdentifier__","name":"__Name__","provisionedMemory":1,"publicConnectivity":true,"replicaCount":1,"status":"CREATING"}],"nextToken":"__NextToken__"}

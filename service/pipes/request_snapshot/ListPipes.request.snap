@@ -1,0 +1,3 @@
+GET /v1/pipes?CurrentState=RUNNING&DesiredState=RUNNING&Limit=1&NamePrefix=__NamePrefix__&NextToken=__NextToken__&SourcePrefix=__SourcePrefix__&TargetPrefix=__TargetPrefix__
+
+

@@ -1,0 +1,5 @@
+PUT /2019-09-30/functions/__FunctionName__/provisioned-concurrency?Qualifier=__Qualifier__
+
+Content-Type: application/json
+
+{"ProvisionedConcurrentExecutions":1}

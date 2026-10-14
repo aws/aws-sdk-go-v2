@@ -1,0 +1,5 @@
+PATCH /aggregatorv2/update/__AggregatorV2Arn__
+
+Content-Type: application/json
+
+{"LinkedRegions":["__Member__","__Member__"],"RegionLinkingMode":"__RegionLinkingMode__"}

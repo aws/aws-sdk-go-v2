@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an organizational unit (OU) within a root or parent OU. An OU is a
@@ -78,6 +77,22 @@ type CreateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationalUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationalUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOrganizationalUnitRequest_Name, *v.Name)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.CreateOrganizationalUnitRequest_ParentId, *v.ParentId)
+	}
+	serializeTags(s, schemas.CreateOrganizationalUnitRequest_Tags, v.Tags)
+}
+
 type CreateOrganizationalUnitOutput struct {
 
 	// A structure that contains details about the newly created OU.
@@ -89,77 +104,50 @@ type CreateOrganizationalUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationalUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationalUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationalUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationalUnit != nil {
+		s.WriteStruct(schemas.CreateOrganizationalUnitResponse_OrganizationalUnit)
+		v.OrganizationalUnit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrganizationalUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrganizationalUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrganizationalUnitResponse_OrganizationalUnit:
+			v.OrganizationalUnit = &types.OrganizationalUnit{}
+			return v.OrganizationalUnit.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganizationalUnit, schemas.CreateOrganizationalUnitRequest, schemas.CreateOrganizationalUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganizationalUnit, schemas.CreateOrganizationalUnitRequest, schemas.CreateOrganizationalUnitResponse), output: &CreateOrganizationalUnitOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOrganizationalUnit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOrganizationalUnit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOrganizationalUnitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOrganizationalUnit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +162,8 @@ func (c *Client) addOperationCreateOrganizationalUnitMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOrganizationalUnit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOrganizationalUnit",
-	}
 }

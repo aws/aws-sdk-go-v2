@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/search?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"AdditionalSearchKeys":[{"KeyName":"__KeyName__","Values":["__Member__","__Member__"]},{"KeyName":"__KeyName__","Values":["__Member__","__Member__"]}],"KeyName":"__KeyName__","LogicalOperator":"AND","Values":["__Member__","__Member__"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateAuthEventFeedback
+
+{"EventId":"__EventId__","FeedbackToken":"__FeedbackToken__","FeedbackValue":"Valid","Username":"__Username__","UserPoolId":"__UserPoolId__"}

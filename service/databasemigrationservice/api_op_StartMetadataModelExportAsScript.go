@@ -4,15 +4,30 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Saves your converted code to a file as a SQL script, and stores this file on
-// your Amazon S3 bucket.
+// Queues an export of metadata models (database objects such as tables, views,
+// and procedures) as a data definition language (DDL) script. The script is stored
+// as a ZIP archive in the Amazon S3 bucket associated with the migration project.
+// If other requests created by Start* operations are already in the migration
+// project's queue, the export begins after they complete.
+//
+// When exporting from the target metadata tree, the export applies only to
+// metadata models created by conversion. Metadata models imported from the
+// database are skipped.
+//
+// To check the status of the export request, call [DescribeMetadataModelExportsAsScript] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelExportAsScripts . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [DescribeMetadataModelExportsAsScript]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsAsScript.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) StartMetadataModelExportAsScript(ctx context.Context, params *StartMetadataModelExportAsScriptInput, optFns ...func(*Options)) (*StartMetadataModelExportAsScriptOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelExportAsScriptInput{}
@@ -35,25 +50,58 @@ type StartMetadataModelExportAsScriptInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Whether to export the metadata model from the source or the target.
+	// Specifies the metadata tree to export from.
 	//
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// A value that specifies the database objects to export.
+	// A JSON string that identifies the metadata models to export as a SQL script.
+	// For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// The name of the model file to create in the Amazon S3 bucket.
+	// The name for the exported file. When you omit this parameter, the service
+	// generates a name from the data provider engine name and an export timestamp.
 	FileName *string
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportAsScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportAsScriptMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportAsScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileName != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_FileName, *v.FileName)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_Origin, string(v.Origin))
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelExportAsScriptOutput struct {
 
-	// The identifier for the export operation.
+	// The identifier for the export request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -62,77 +110,48 @@ type StartMetadataModelExportAsScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportAsScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportAsScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportAsScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelExportAsScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelExportAsScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelExportAsScriptResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelExportAsScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportAsScript, schemas.StartMetadataModelExportAsScriptMessage, schemas.StartMetadataModelExportAsScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelExportAsScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportAsScript, schemas.StartMetadataModelExportAsScriptMessage, schemas.StartMetadataModelExportAsScriptResponse), output: &StartMetadataModelExportAsScriptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelExportAsScript{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataModelExportAsScript"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMetadataModelExportAsScriptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataModelExportAsScript(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +166,8 @@ func (c *Client) addOperationStartMetadataModelExportAsScriptMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMetadataModelExportAsScript(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataModelExportAsScript",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.CreateRateBasedRule
+
+{"ChangeToken":"__ChangeToken__","MetricName":"__MetricName__","Name":"__Name__","RateKey":"IP","RateLimit":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

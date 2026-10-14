@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // EventStreamWriter provides the interface for writing events to a stream.
@@ -71,10 +72,17 @@ func (w *eventStreamWriter) Err() error {
 	return w.writer.Err()
 }
 
+func (w *eventStreamWriter) ErrorSet() <-chan struct{} {
+	return w.writer.ErrorSet()
+}
+
 type eventStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.EventStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ EventStreamReader = (*eventStreamReader)(nil)
@@ -84,12 +92,14 @@ func newEventStreamReader(reader *smithyhttp.EventStreamReader) *eventStreamRead
 		reader: reader,
 		ch:     make(chan types.EventStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *eventStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.EventStream
@@ -126,7 +136,9 @@ func (r *eventStreamReader) Events() <-chan types.EventStream {
 }
 
 func (r *eventStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -134,8 +146,14 @@ func (r *eventStreamReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *eventStreamReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type deserializeOpEventStreamDuplexStream struct {
-	options *Options
+	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *DuplexStreamOutput
 }
 
 func (*deserializeOpEventStreamDuplexStream) ID() string {
@@ -151,9 +169,9 @@ func (m *deserializeOpEventStreamDuplexStream) HandleDeserialize(
 	var md middleware.Metadata
 	var err error
 
-	output := &DuplexStreamOutput{}
-	output.initialReply = make(chan DuplexStreamInitialReply, 1)
-
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
 	inputStreamWriter := smithyhttp.GetInputStreamWriter(ctx)
 	if inputStreamWriter == nil {
 		return out, md, fmt.Errorf("input stream writer not found in context")
@@ -172,23 +190,35 @@ func (m *deserializeOpEventStreamDuplexStream) HandleDeserialize(
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
 	defer func() {
-		if err != nil {
+		if err != nil && !isFirstAttempt {
 			_ = eventWriter.Close()
 		}
 	}()
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newEventStreamReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
-	)
+	if isFirstAttempt {
+		output = &DuplexStreamOutput{}
+		output.initialReply = make(chan DuplexStreamInitialReply, 1)
 
-	output.eventStream = NewDuplexStreamEventStream(func(stream *DuplexStreamEventStream) {
-		stream.Writer = eventWriter
-		stream.Reader = eventReader
-	})
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+		)
 
-	go output.eventStream.waitStreamClose()
+		output.eventStream = NewDuplexStreamEventStream(func(stream *DuplexStreamEventStream) {
+			stream.Writer = eventWriter
+			stream.Reader = eventReader
+		})
 
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
 	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
 	if prc != nil {
 		select {
@@ -292,7 +322,9 @@ func (m *deserializeOpEventStreamDuplexStreamWithDistinctStreams) HandleDeserial
 }
 
 type deserializeOpEventStreamDuplexStreamWithInitialMessages struct {
-	options *Options
+	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *DuplexStreamWithInitialMessagesOutput
 }
 
 func (*deserializeOpEventStreamDuplexStreamWithInitialMessages) ID() string {
@@ -308,9 +340,9 @@ func (m *deserializeOpEventStreamDuplexStreamWithInitialMessages) HandleDeserial
 	var md middleware.Metadata
 	var err error
 
-	output := &DuplexStreamWithInitialMessagesOutput{}
-	output.initialReply = make(chan DuplexStreamWithInitialMessagesInitialReply, 1)
-
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
 	inputStreamWriter := smithyhttp.GetInputStreamWriter(ctx)
 	if inputStreamWriter == nil {
 		return out, md, fmt.Errorf("input stream writer not found in context")
@@ -329,23 +361,35 @@ func (m *deserializeOpEventStreamDuplexStreamWithInitialMessages) HandleDeserial
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.EventStream, inputStreamWriter),
 	}
 	defer func() {
-		if err != nil {
+		if err != nil && !isFirstAttempt {
 			_ = eventWriter.Close()
 		}
 	}()
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newEventStreamReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
-	)
+	if isFirstAttempt {
+		output = &DuplexStreamWithInitialMessagesOutput{}
+		output.initialReply = make(chan DuplexStreamWithInitialMessagesInitialReply, 1)
 
-	output.eventStream = NewDuplexStreamWithInitialMessagesEventStream(func(stream *DuplexStreamWithInitialMessagesEventStream) {
-		stream.Writer = eventWriter
-		stream.Reader = eventReader
-	})
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+		)
 
-	go output.eventStream.waitStreamClose()
+		output.eventStream = NewDuplexStreamWithInitialMessagesEventStream(func(stream *DuplexStreamWithInitialMessagesEventStream) {
+			stream.Writer = eventWriter
+			stream.Reader = eventReader
+		})
 
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
 	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
 	if prc != nil {
 		select {
@@ -522,7 +566,9 @@ func (m *deserializeOpEventStreamInputStreamWithInitialRequest) HandleDeserializ
 }
 
 type deserializeOpEventStreamOutputStream struct {
-	options *Options
+	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *OutputStreamOutput
 }
 
 func (*deserializeOpEventStreamOutputStream) ID() string {
@@ -538,22 +584,35 @@ func (m *deserializeOpEventStreamOutputStream) HandleDeserialize(
 	var md middleware.Metadata
 	var err error
 
-	output := &OutputStreamOutput{}
-	output.initialReply = make(chan OutputStreamInitialReply, 1)
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
 
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newEventStreamReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
-	)
+	if isFirstAttempt {
+		output = &OutputStreamOutput{}
+		output.initialReply = make(chan OutputStreamInitialReply, 1)
 
-	output.eventStream = NewOutputStreamEventStream(func(stream *OutputStreamEventStream) {
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+		)
 
-		stream.Reader = eventReader
-	})
+		output.eventStream = NewOutputStreamEventStream(func(stream *OutputStreamEventStream) {
 
-	go output.eventStream.waitStreamClose()
+			stream.Reader = eventReader
+		})
 
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
 	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
 	if prc != nil {
 		select {
@@ -584,7 +643,9 @@ func (m *deserializeOpEventStreamOutputStream) HandleDeserialize(
 }
 
 type deserializeOpEventStreamOutputStreamWithInitialResponse struct {
-	options *Options
+	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *OutputStreamWithInitialResponseOutput
 }
 
 func (*deserializeOpEventStreamOutputStreamWithInitialResponse) ID() string {
@@ -600,22 +661,35 @@ func (m *deserializeOpEventStreamOutputStreamWithInitialResponse) HandleDeserial
 	var md middleware.Metadata
 	var err error
 
-	output := &OutputStreamWithInitialResponseOutput{}
-	output.initialReply = make(chan OutputStreamWithInitialResponseInitialReply, 1)
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
 
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newEventStreamReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
-	)
+	if isFirstAttempt {
+		output = &OutputStreamWithInitialResponseOutput{}
+		output.initialReply = make(chan OutputStreamWithInitialResponseInitialReply, 1)
 
-	output.eventStream = NewOutputStreamWithInitialResponseEventStream(func(stream *OutputStreamWithInitialResponseEventStream) {
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newEventStreamReader(
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.EventStream, TypeRegistry, asyncReader.pipeReader),
+		)
 
-		stream.Reader = eventReader
-	})
+		output.eventStream = NewOutputStreamWithInitialResponseEventStream(func(stream *OutputStreamWithInitialResponseEventStream) {
 
-	go output.eventStream.waitStreamClose()
+			stream.Reader = eventReader
+		})
 
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
 	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
 	if prc != nil {
 		select {

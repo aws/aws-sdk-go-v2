@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"elapsed":1,"id":"__Id__","queryString":"__QueryString__","state":"RUNNING","waited":1}

@@ -1,0 +1,5 @@
+PUT /app-instances/__AppInstanceArn__/retention-settings
+
+Content-Type: application/json
+
+{"AppInstanceRetentionSettings":{"ChannelRetentionSettings":{"RetentionDays":1}}}

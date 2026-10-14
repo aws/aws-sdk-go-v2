@@ -1,0 +1,3 @@
+POST /v1/packages?domain=__Domain__&domain-owner=__DomainOwner__&format=npm&max-results=1&namespace=__Namespace__&next-token=__NextToken__&package-prefix=__PackagePrefix__&publish=ALLOW&repository=__Repository__&upstream=ALLOW
+
+

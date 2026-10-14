@@ -1,0 +1,6 @@
+404
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.ChangeMessageVisibility
+X-Amzn-Query-Mode: true
+
+{"__type":"ReceiptHandleIsInvalid","message":"__Message__"}

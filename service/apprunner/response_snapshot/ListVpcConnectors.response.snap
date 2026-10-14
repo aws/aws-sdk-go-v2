@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.ListVpcConnectors
+
+{"NextToken":"__NextToken__","VpcConnectors":[{"CreatedAt":946684800,"DeletedAt":946684800,"SecurityGroups":["__Member__","__Member__"],"Status":"ACTIVE","Subnets":["__Member__","__Member__"],"VpcConnectorArn":"__VpcConnectorArn__","VpcConnectorName":"__VpcConnectorName__","VpcConnectorRevision":1},{"CreatedAt":946684800,"DeletedAt":946684800,"SecurityGroups":["__Member__","__Member__"],"Status":"ACTIVE","Subnets":["__Member__","__Member__"],"VpcConnectorArn":"__VpcConnectorArn__","VpcConnectorName":"__VpcConnectorName__","VpcConnectorRevision":1}]}

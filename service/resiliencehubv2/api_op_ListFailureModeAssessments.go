@@ -5,13 +5,11 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"strconv"
 	"time"
@@ -40,11 +38,28 @@ type ListFailureModeAssessmentsInput struct {
 	// This member is required.
 	ServiceArn *string
 
+	// Specifies the assessment statuses to include in the results.
+	AssessmentStatuses []types.AssessmentStatus
+
+	// Specifies that only assessments that ended at or before this timestamp appear
+	// in the results.
+	EndedBefore *time.Time
+
 	// Pagination page size.
 	MaxResults *int32
 
 	// Pagination token.
 	NextToken *string
+
+	// The field to use for sorting failure mode assessments.
+	SortBy types.AssessmentSortField
+
+	// The sort order for results.
+	SortOrder types.SortOrder
+
+	// Specifies that only assessments that started at or after this timestamp appear
+	// in the results.
+	StartedAfter *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -56,6 +71,10 @@ func (v *ListFailureModeAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFailureModeAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentStatusList(s, schemas.ListFailureModeAssessmentsRequest_assessmentStatuses, v.AssessmentStatuses)
+	if v.EndedBefore != nil {
+		s.WriteTime(schemas.ListFailureModeAssessmentsRequest_endedBefore, *v.EndedBefore)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFailureModeAssessmentsRequest_maxResults, *v.MaxResults)
 	}
@@ -64,6 +83,15 @@ func (v *ListFailureModeAssessmentsInput) SerializeMembers(s smithy.ShapeSeriali
 	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.ListFailureModeAssessmentsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StartedAfter != nil {
+		s.WriteTime(schemas.ListFailureModeAssessmentsRequest_startedAfter, *v.StartedAfter)
 	}
 }
 
@@ -83,6 +111,18 @@ type ListFailureModeAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailureModeAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailureModeAssessmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailureModeAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentSummaryList(s, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsResponse_nextToken, *v.NextToken)
+	}
+}
 func (v *ListFailureModeAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFailureModeAssessmentsResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -96,74 +136,26 @@ func (v *ListFailureModeAssessmentsOutput) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 func (c *Client) addOperationListFailureModeAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse), output: &ListFailureModeAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFailureModeAssessments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFailureModeAssessmentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFailureModeAssessments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +168,6 @@ func (c *Client) addOperationListFailureModeAssessmentsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -511,11 +497,3 @@ type ListFailureModeAssessmentsAPIClient interface {
 }
 
 var _ ListFailureModeAssessmentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFailureModeAssessments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFailureModeAssessments",
-	}
-}

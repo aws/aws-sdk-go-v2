@@ -81,6 +81,7 @@ func serializeXAxisValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []i
 }
 
 func deserializeBatchPutMetricsErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchPutMetricsError) error {
+	*v = make([]BatchPutMetricsError, 0)
 	var vv BatchPutMetricsError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchPutMetricsError{}
@@ -94,6 +95,7 @@ func deserializeBatchPutMetricsErrorList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMetricQueryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricQuery) error {
+	*v = make([]MetricQuery, 0)
 	var vv MetricQuery
 	return smithy.ReadList(d, s, func() error {
 		vv = MetricQuery{}
@@ -107,6 +109,7 @@ func deserializeMetricQueryList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMetricQueryResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricQueryResult) error {
+	*v = make([]MetricQueryResult, 0)
 	var vv MetricQueryResult
 	return smithy.ReadList(d, s, func() error {
 		vv = MetricQueryResult{}
@@ -120,6 +123,7 @@ func deserializeMetricQueryResultList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float64) error {
+	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
 
@@ -133,6 +137,7 @@ func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeRawMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RawMetricData) error {
+	*v = make([]RawMetricData, 0)
 	var vv RawMetricData
 	return smithy.ReadList(d, s, func() error {
 		vv = RawMetricData{}
@@ -146,6 +151,7 @@ func deserializeRawMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeXAxisValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int64) error {
+	*v = make([]int64, 0)
 	var vv int64
 	return smithy.ReadList(d, s, func() error {
 

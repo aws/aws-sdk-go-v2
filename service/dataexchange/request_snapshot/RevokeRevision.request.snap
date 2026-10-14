@@ -1,0 +1,5 @@
+POST /v1/data-sets/__DataSetId__/revisions/__RevisionId__/revoke
+
+Content-Type: application/json
+
+{"RevocationComment":"__RevocationComment__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.DeleteService
+
+{"service":{"arn":"__Arn__","branchName":"__BranchName__","createdAt":946684800,"description":"__Description__","lastModifiedAt":946684800,"name":"__Name__","pipeline":{"arn":"__Arn__","createdAt":946684800,"deploymentStatus":"IN_PROGRESS","deploymentStatusMessage":"__DeploymentStatusMessage__","lastAttemptedDeploymentId":"__LastAttemptedDeploymentId__","lastDeploymentAttemptedAt":946684800,"lastDeploymentSucceededAt":946684800,"lastSucceededDeploymentId":"__LastSucceededDeploymentId__","spec":"__Spec__","templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__","templateName":"__TemplateName__"},"repositoryConnectionArn":"__RepositoryConnectionArn__","repositoryId":"__RepositoryId__","spec":"__Spec__","status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","templateName":"__TemplateName__"}}

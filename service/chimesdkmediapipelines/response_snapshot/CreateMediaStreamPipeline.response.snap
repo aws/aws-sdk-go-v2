@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MediaStreamPipeline":{"CreatedTimestamp":"2000-01-01T00:00:00Z","MediaPipelineArn":"__MediaPipelineArn__","MediaPipelineId":"__MediaPipelineId__","Sinks":[{"MediaStreamType":"MixedAudio","ReservedStreamCapacity":1,"SinkArn":"__SinkArn__","SinkType":"KinesisVideoStreamPool"},{"MediaStreamType":"MixedAudio","ReservedStreamCapacity":1,"SinkArn":"__SinkArn__","SinkType":"KinesisVideoStreamPool"}],"Sources":[{"SourceArn":"__SourceArn__","SourceType":"ChimeSdkMeeting"},{"SourceArn":"__SourceArn__","SourceType":"ChimeSdkMeeting"}],"Status":"Initializing","UpdatedTimestamp":"2000-01-01T00:00:00Z"}}

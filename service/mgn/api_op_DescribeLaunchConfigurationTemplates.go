@@ -5,10 +5,10 @@ package mgn
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Launch Configuration Templates, filtered by Launch Configuration
@@ -43,6 +43,37 @@ type DescribeLaunchConfigurationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLaunchConfigurationTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLaunchConfigurationTemplateIDs(s, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, v.LaunchConfigurationTemplateIDs)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLaunchConfigurationTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs:
+			return deserializeLaunchConfigurationTemplateIDs(d, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, &v.LaunchConfigurationTemplateIDs)
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults, v.MaxResults)
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeLaunchConfigurationTemplatesOutput struct {
 
 	// List of items returned by DescribeLaunchConfigurationTemplates.
@@ -57,74 +88,48 @@ type DescribeLaunchConfigurationTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLaunchConfigurationTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLaunchConfigurationTemplates(s, schemas.DescribeLaunchConfigurationTemplatesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLaunchConfigurationTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLaunchConfigurationTemplatesResponse_items:
+			return deserializeLaunchConfigurationTemplates(d, schemas.DescribeLaunchConfigurationTemplatesResponse_items, &v.Items)
+		case schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLaunchConfigurationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurationTemplates, schemas.DescribeLaunchConfigurationTemplatesRequest, schemas.DescribeLaunchConfigurationTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLaunchConfigurationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurationTemplates, schemas.DescribeLaunchConfigurationTemplatesRequest, schemas.DescribeLaunchConfigurationTemplatesResponse), output: &DescribeLaunchConfigurationTemplatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLaunchConfigurationTemplates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLaunchConfigurationTemplates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLaunchConfigurationTemplates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,12 +142,6 @@ func (c *Client) addOperationDescribeLaunchConfigurationTemplatesMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +245,3 @@ type DescribeLaunchConfigurationTemplatesAPIClient interface {
 }
 
 var _ DescribeLaunchConfigurationTemplatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeLaunchConfigurationTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLaunchConfigurationTemplates",
-	}
-}

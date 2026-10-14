@@ -4,10 +4,9 @@ package billingconductor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Connects an array of PricingRuleArns to a defined PricingPlan . The maximum
@@ -42,6 +41,31 @@ type AssociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociatePricingRulesInput_Arn, *v.Arn)
+	}
+	serializePricingRuleArnsNonEmptyInput(s, schemas.AssociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *AssociatePricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePricingRulesInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociatePricingRulesInput_Arn, v.Arn)
+		case schemas.AssociatePricingRulesInput_PricingRuleArns:
+			return deserializePricingRuleArnsNonEmptyInput(d, schemas.AssociatePricingRulesInput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
+
 type AssociatePricingRulesOutput struct {
 
 	//  The PricingPlanArn that the PricingRuleArns are associated with.
@@ -53,77 +77,48 @@ type AssociatePricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociatePricingRulesOutput_Arn, *v.Arn)
+	}
+}
+func (v *AssociatePricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePricingRulesOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociatePricingRulesOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePricingRules, schemas.AssociatePricingRulesInput, schemas.AssociatePricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePricingRules, schemas.AssociatePricingRulesInput, schemas.AssociatePricingRulesOutput), output: &AssociatePricingRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePricingRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociatePricingRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociatePricingRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociatePricingRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +133,8 @@ func (c *Client) addOperationAssociatePricingRulesMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociatePricingRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociatePricingRules",
-	}
 }

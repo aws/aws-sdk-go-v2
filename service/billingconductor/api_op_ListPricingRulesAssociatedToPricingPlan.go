@@ -5,9 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the pricing rules that are associated with a pricing plan.
@@ -46,6 +46,46 @@ type ListPricingRulesAssociatedToPricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesAssociatedToPricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesAssociatedToPricingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesAssociatedToPricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken, *v.NextToken)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn, *v.PricingPlanArn)
+	}
+}
+func (v *ListPricingRulesAssociatedToPricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesAssociatedToPricingPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults, v.MaxResults)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn, v.PricingPlanArn)
+		}
+		return nil
+	})
+}
+
 type ListPricingRulesAssociatedToPricingPlanOutput struct {
 
 	//  The billing period for which the pricing rule associations are listed.
@@ -68,77 +108,63 @@ type ListPricingRulesAssociatedToPricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesAssociatedToPricingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken, *v.NextToken)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn, *v.PricingPlanArn)
+	}
+	serializePricingRuleArns(s, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesAssociatedToPricingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn, v.PricingPlanArn)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns:
+			return deserializePricingRuleArns(d, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPricingRulesAssociatedToPricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRulesAssociatedToPricingPlan, schemas.ListPricingRulesAssociatedToPricingPlanInput, schemas.ListPricingRulesAssociatedToPricingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPricingRulesAssociatedToPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRulesAssociatedToPricingPlan, schemas.ListPricingRulesAssociatedToPricingPlanInput, schemas.ListPricingRulesAssociatedToPricingPlanOutput), output: &ListPricingRulesAssociatedToPricingPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPricingRulesAssociatedToPricingPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPricingRulesAssociatedToPricingPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPricingRulesAssociatedToPricingPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPricingRulesAssociatedToPricingPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +177,6 @@ func (c *Client) addOperationListPricingRulesAssociatedToPricingPlanMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +280,3 @@ type ListPricingRulesAssociatedToPricingPlanAPIClient interface {
 }
 
 var _ ListPricingRulesAssociatedToPricingPlanAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPricingRulesAssociatedToPricingPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPricingRulesAssociatedToPricingPlan",
-	}
-}

@@ -5,12 +5,8 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of telemetry pipelines in your account. Returns up to 100
@@ -42,21 +38,6 @@ type ListTelemetryPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryPipelinesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTelemetryPipelinesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTelemetryPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTelemetryPipelinesInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTelemetryPipelinesInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListTelemetryPipelinesOutput struct {
 
 	// A token to resume pagination of results.
@@ -72,84 +53,26 @@ type ListTelemetryPipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTelemetryPipelinesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTelemetryPipelinesOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTelemetryPipelinesOutput_NextToken, v.NextToken)
-		case schemas.ListTelemetryPipelinesOutput_PipelineSummaries:
-			return deserializeTelemetryPipelineSummaries(d, schemas.ListTelemetryPipelinesOutput_PipelineSummaries, &v.PipelineSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTelemetryPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTelemetryPipelines{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryPipelines, schemas.ListTelemetryPipelinesInput, schemas.ListTelemetryPipelinesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTelemetryPipelines{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryPipelines, schemas.ListTelemetryPipelinesInput, schemas.ListTelemetryPipelinesOutput), output: &ListTelemetryPipelinesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTelemetryPipelines"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTelemetryPipelines(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +85,6 @@ func (c *Client) addOperationListTelemetryPipelinesMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +186,3 @@ type ListTelemetryPipelinesAPIClient interface {
 }
 
 var _ ListTelemetryPipelinesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTelemetryPipelines(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTelemetryPipelines",
-	}
-}

@@ -5,12 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Fetches the temporarily cached result of an SQL statement in JSON format. The
@@ -56,22 +52,11 @@ type GetStatementResultInput struct {
 	// all response records have been retrieved for the request.
 	NextToken *string
 
+	// The number of seconds to wait for the SQL statement to complete execution
+	// before returning the result. The maximum value is 30 seconds.
+	WaitTimeSeconds *int32
+
 	noSmithyDocumentSerde
-}
-
-func (v *GetStatementResultInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStatementResultRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStatementResultInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetStatementResultRequest_Id, *v.Id)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetStatementResultRequest_NextToken, *v.NextToken)
-	}
 }
 
 type GetStatementResultOutput struct {
@@ -102,91 +87,29 @@ type GetStatementResultOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStatementResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStatementResultResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStatementResultResponse_ColumnMetadata:
-			return deserializeColumnMetadataList(d, schemas.GetStatementResultResponse_ColumnMetadata, &v.ColumnMetadata)
-		case schemas.GetStatementResultResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetStatementResultResponse_NextToken, v.NextToken)
-		case schemas.GetStatementResultResponse_Records:
-			return deserializeSqlRecords(d, schemas.GetStatementResultResponse_Records, &v.Records)
-		case schemas.GetStatementResultResponse_TotalNumRows:
-			return d.ReadInt64(schemas.GetStatementResultResponse_TotalNumRows, &v.TotalNumRows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatementResult{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResult, schemas.GetStatementResultRequest, schemas.GetStatementResultResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStatementResult{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResult, schemas.GetStatementResultRequest, schemas.GetStatementResultResponse), output: &GetStatementResultOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStatementResult"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStatementResultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStatementResult(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,12 +122,6 @@ func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -294,11 +211,3 @@ type GetStatementResultAPIClient interface {
 }
 
 var _ GetStatementResultAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetStatementResult(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStatementResult",
-	}
-}

@@ -3,14 +3,15 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"reflect"
-	"runtime"
 	"sort"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -43,9 +44,6 @@ func (oc *objectkeyCallback) UpdateRequest(in *GetObjectInput) {
 }
 
 func TestDownloadDirectory(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
-
 	cases := map[string]struct {
 		destination             string
 		keyPrefix               string
@@ -486,7 +484,7 @@ func TestDownloadDirectory(t *testing.T) {
 			s3Client.PartsCount = 1
 			mgr := New(s3Client)
 
-			dstPath := filepath.Join(root, c.destination)
+			dstPath := filepath.Join("testdata", c.destination)
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
@@ -565,8 +563,6 @@ func TestDownloadDirectory(t *testing.T) {
 }
 
 func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
 	cases := map[string]struct {
 		destination        string
 		objectsLists       [][]s3types.Object
@@ -651,7 +647,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 			s3Client.PartsCount = 1
 			mgr := New(s3Client)
 
-			dstPath := filepath.Join(root, c.destination)
+			dstPath := filepath.Join("testdata", c.destination)
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
@@ -674,9 +670,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 }
 
 func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
-	dstPath := filepath.Join(root, "context-canceled")
+	dstPath := filepath.Join("testdata", "context-canceled")
 	defer os.RemoveAll(dstPath)
 	c := s3.New(s3.Options{
 		UsePathStyle: true,
@@ -698,5 +692,185 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+// createdFileCapture records map of file path corresponding to their *os.File handle that
+// DownloadDirectory creates via createFileFn, so a test can assert after the call returns that
+// each file was either closed or removed if downloaded failed. A
+// removed file path returns os.ErrNotExist from os.Stat, and isFileClosed
+// reports whether a still-present file's handle was closed, so a file that is
+// neither removed nor closed indicates the handle leaked. It is safe for concurrent
+// use by the download workers.
+type createdFileCapture struct {
+	mu    sync.Mutex
+	files map[string]*os.File
+}
+
+func (c *createdFileCapture) capture(path string, f *os.File) {
+	c.mu.Lock()
+	c.files[path] = f
+	c.mu.Unlock()
+}
+
+func (c *createdFileCapture) count() int {
+	return len(c.files)
+}
+
+// notRemovedOrStillOpen returns the names of captured files that are removed when download
+// failed or closed after download.
+func (c *createdFileCapture) removedOrClosed() (removed, closed []string) {
+	for path, file := range c.files {
+		_, err := os.Stat(path)
+		if errors.Is(err, os.ErrNotExist) {
+			removed = append(removed, path)
+		} else if isFileClosed(file) {
+			closed = append(closed, path)
+		}
+	}
+	sort.Strings(closed)
+	sort.Strings(removed)
+	return
+}
+
+// TestDownloadDirectoryClosesCreatedFiles verifies that DownloadDirectory
+// closes every file handle it creates before returning - on the success path
+// and when individual object downloads fail and are ignored. Regression test
+// for a file-handle leak analogous to aws/aws-sdk-go-v2#3512.
+func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
+	cases := map[string]struct {
+		destination        string
+		objectsLists       [][]s3types.Object
+		continuationTokens []string
+		getobjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		failurePolicy      DownloadDirectoryFailurePolicy
+		expectCreated      int
+		expectRemoved      int
+		expectClosed       int
+		expectErr          string
+	}{
+		"single object": {
+			destination: "close-single-object",
+			objectsLists: [][]s3types.Object{
+				{{Key: aws.String("foo/bar")}},
+			},
+			expectCreated: 1,
+			expectClosed:  1,
+		},
+		"multiple objects with subdirs": {
+			destination: "close-multiple-objects",
+			objectsLists: [][]s3types.Object{
+				{
+					{Key: aws.String("foo/bar")},
+					{Key: aws.String("baz")},
+					{Key: aws.String("foo/zoo/bar")},
+					{Key: aws.String("foo/zoo/oii/bababoii")},
+				},
+			},
+			expectCreated: 4,
+			expectClosed:  4,
+		},
+		"multiple objects paginated": {
+			destination: "close-multiple-objects-paginated",
+			objectsLists: [][]s3types.Object{
+				{{Key: aws.String("foo/bar")}, {Key: aws.String("baz")}},
+				{{Key: aws.String("foo/zoo/bar")}, {Key: aws.String("foo/zoo/oii/bababoii")}},
+				{{Key: aws.String("foo/zoo/baz")}, {Key: aws.String("foo/zoo/oii/yee")}},
+			},
+			continuationTokens: []string{"token1", "token2"},
+			expectCreated:      6,
+			expectClosed:       6,
+		},
+		"created files are closed when some downloads fail and are ignored": {
+			destination: "close-error-ignored",
+			objectsLists: [][]s3types.Object{
+				{
+					{Key: aws.String("foo/bar")},
+					{Key: aws.String("baz")},
+					{Key: aws.String("foo/zoo/bar")},
+					{Key: aws.String("foo/zoo/oii/bababoii")},
+				},
+			},
+			getobjectFn: func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				if key := aws.ToString(in.Key); key == "foo/zoo/bar" || key == "baz" {
+					return nil, fmt.Errorf("mocking error")
+				}
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(bytes.NewReader(c.Data)),
+					ContentLength: aws.Int64(int64(len(c.Data))),
+					PartsCount:    aws.Int32(c.PartsCount),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+			failurePolicy: IgnoreDownloadFailurePolicy{},
+			// GetObject only performs a HeadObject up front and streams the
+			// body lazily, so os.Create runs for all four objects. foo/zoo/bar
+			// and baz then fail during io.Copy (body read), so their files are
+			// created, closed, and removed; the other two download normally.
+			// Every created file must be closed regardless of the outcome.
+			expectCreated: 4,
+			expectClosed:  2,
+			expectRemoved: 2,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			capture := &createdFileCapture{
+				files: make(map[string]*os.File),
+			}
+			prev := createFileFn
+			createFileFn = func(path string) (*os.File, error) {
+				f, err := prev(path)
+				if err == nil {
+					capture.capture(path, f)
+				}
+				return f, err
+			}
+			defer func() { createFileFn = prev }()
+
+			s3Client, _ := s3testing.NewDownloadDirectoryClient()
+			s3Client.ListObjectsData = c.objectsLists
+			s3Client.ContinuationTokens = c.continuationTokens
+			if c.getobjectFn == nil {
+				s3Client.GetObjectFn = s3testing.PartGetObjectFn
+			} else {
+				s3Client.GetObjectFn = c.getobjectFn
+			}
+			s3Client.Data = make([]byte, 0)
+			s3Client.PartsCount = 1
+			mgr := New(s3Client)
+
+			dstPath := filepath.Join("testdata", c.destination)
+			defer os.RemoveAll(dstPath)
+
+			req := &DownloadDirectoryInput{
+				Bucket:        aws.String("mock-bucket"),
+				Destination:   aws.String(dstPath),
+				FailurePolicy: c.failurePolicy,
+			}
+
+			_, err := mgr.DownloadDirectory(context.Background(), req)
+			if err != nil {
+				if c.expectErr == "" {
+					t.Fatalf("expect no error, got %v", err)
+				} else if !strings.Contains(err.Error(), c.expectErr) {
+					t.Fatalf("expect %s to be contained in %v", c.expectErr, err)
+				}
+			} else if c.expectErr != "" {
+				t.Fatalf("expect error %s, got none", c.expectErr)
+			}
+
+			if e, a := c.expectCreated, capture.count(); e != a {
+				t.Errorf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
+			}
+			removed, closed := capture.removedOrClosed()
+			if e := c.expectRemoved; e != len(removed) {
+				t.Errorf("expected %d files to be removed, but removed %v", e, removed)
+			}
+			if e := c.expectClosed; e != len(closed) {
+				t.Errorf("expected %d created files under %s to be closed after DownloadDirectory returned, but only close those: %v", e, dstPath, closed)
+			}
+		})
 	}
 }

@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,24 +42,6 @@ type GetListingInput struct {
 	ListingRevision *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetListingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetListingInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetListingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetListingInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetListingInput_identifier, *v.Identifier)
-	}
-	if v.ListingRevision != nil {
-		s.WriteString(schemas.GetListingInput_listingRevision, *v.ListingRevision)
-	}
 }
 
 type GetListingOutput struct {
@@ -114,118 +91,29 @@ type GetListingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetListingOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetListingOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetListingOutput_createdAt, v.CreatedAt)
-		case schemas.GetListingOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetListingOutput_createdBy, v.CreatedBy)
-		case schemas.GetListingOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetListingOutput_description, v.Description)
-		case schemas.GetListingOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetListingOutput_domainId, v.DomainId)
-		case schemas.GetListingOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetListingOutput_id, v.Id)
-		case schemas.GetListingOutput_item:
-			return deserializeListingItem(d, schemas.GetListingOutput_item, &v.Item)
-		case schemas.GetListingOutput_listingRevision:
-			v.ListingRevision = new(string)
-			return d.ReadString(schemas.GetListingOutput_listingRevision, v.ListingRevision)
-		case schemas.GetListingOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetListingOutput_name, v.Name)
-		case schemas.GetListingOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetListingOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ListingStatus(ev)
-			return nil
-		case schemas.GetListingOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetListingOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetListingOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.GetListingOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetListing{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetListing{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput), output: &GetListingOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetListing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetListingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,22 +128,8 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetListing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetListing",
-	}
 }

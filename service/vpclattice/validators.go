@@ -2887,9 +2887,6 @@ func validateOpUpdateServiceNetworkVpcAssociationInput(v *UpdateServiceNetworkVp
 	if v.ServiceNetworkVpcAssociationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNetworkVpcAssociationIdentifier"))
 	}
-	if v.SecurityGroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

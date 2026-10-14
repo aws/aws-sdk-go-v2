@@ -144,6 +144,7 @@ func serializeWorkloadList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func deserializeApplicationComponentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApplicationComponent) error {
+	*v = make([]ApplicationComponent, 0)
 	var vv ApplicationComponent
 	return smithy.ReadList(d, s, func() error {
 		vv = ApplicationComponent{}
@@ -157,6 +158,7 @@ func deserializeApplicationComponentList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeApplicationInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApplicationInfo) error {
+	*v = make([]ApplicationInfo, 0)
 	var vv ApplicationInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = ApplicationInfo{}
@@ -170,6 +172,7 @@ func deserializeApplicationInfoList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeConfigurationEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConfigurationEvent) error {
+	*v = make([]ConfigurationEvent, 0)
 	var vv ConfigurationEvent
 	return smithy.ReadList(d, s, func() error {
 		vv = ConfigurationEvent{}
@@ -183,6 +186,7 @@ func deserializeConfigurationEventList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeLogPatternList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LogPattern) error {
+	*v = make([]LogPattern, 0)
 	var vv LogPattern
 	return smithy.ReadList(d, s, func() error {
 		vv = LogPattern{}
@@ -196,6 +200,7 @@ func deserializeLogPatternList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeLogPatternSetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -209,6 +214,7 @@ func deserializeLogPatternSetList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeObservationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Observation) error {
+	*v = make([]Observation, 0)
 	var vv Observation
 	return smithy.ReadList(d, s, func() error {
 		vv = Observation{}
@@ -222,6 +228,7 @@ func deserializeObservationList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeProblemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Problem) error {
+	*v = make([]Problem, 0)
 	var vv Problem
 	return smithy.ReadList(d, s, func() error {
 		vv = Problem{}
@@ -235,6 +242,7 @@ func deserializeProblemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]P
 }
 
 func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -248,6 +256,7 @@ func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -261,6 +270,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -274,6 +284,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeWorkloadList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Workload) error {
+	*v = make([]Workload, 0)
 	var vv Workload
 	return smithy.ReadList(d, s, func() error {
 		vv = Workload{}
@@ -326,6 +337,14 @@ func deserializeDetectedWorkload(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]map[string]string)
 	var vv map[string]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeWorkloadMetaData(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -340,6 +359,13 @@ func deserializeFeedback(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]FeedbackValue)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero FeedbackValue
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -354,6 +380,13 @@ func deserializeWorkloadMetaData(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

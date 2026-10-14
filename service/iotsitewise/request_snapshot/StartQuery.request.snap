@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/queries
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","queryStatement":"__QueryStatement__"}

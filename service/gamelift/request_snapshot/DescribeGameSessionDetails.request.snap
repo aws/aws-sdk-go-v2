@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeGameSessionDetails
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+§hLocationl__Location__lStatusFilterp__StatusFilter__eLimitiNextTokenm__NextToken__gFleetIdk__FleetId__mGameSessionIdq__GameSessionId__gAliasIdk__AliasId__

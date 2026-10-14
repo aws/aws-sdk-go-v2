@@ -1,0 +1,5 @@
+POST /cancel-tag-sync-task
+
+Content-Type: application/json
+
+{"TaskArn":"__TaskArn__"}

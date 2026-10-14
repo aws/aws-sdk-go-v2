@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AcceptNetworkFirewallTransitGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
@@ -30,6 +31,11 @@ var AssociateSubnets = smithy.NewSchema(smithy.ShapeID{
 var AttachRuleGroupsToProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "AttachRuleGroupsToProxyConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateContainerAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateContainerAssociation",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateFirewall = smithy.NewSchema(smithy.ShapeID{
@@ -75,6 +81,11 @@ var CreateTLSInspectionConfiguration = smithy.NewSchema(smithy.ShapeID{
 var CreateVpcEndpointAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateVpcEndpointAssociation",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteContainerAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteContainerAssociation",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteFirewall = smithy.NewSchema(smithy.ShapeID{
@@ -130,6 +141,11 @@ var DeleteTLSInspectionConfiguration = smithy.NewSchema(smithy.ShapeID{
 var DeleteVpcEndpointAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteVpcEndpointAssociation",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeContainerAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeContainerAssociation",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeFirewall = smithy.NewSchema(smithy.ShapeID{
@@ -232,6 +248,11 @@ var ListAnalysisReports = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAnalysisReports",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListContainerAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContainerAssociations",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListFirewallPolicies = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFirewallPolicies",
@@ -327,6 +348,11 @@ var UpdateAvailabilityZoneChangeProtection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateAvailabilityZoneChangeProtection",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateContainerAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateContainerAssociation",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateFirewallAnalysisSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateFirewallAnalysisSettings",
@@ -385,6 +411,11 @@ var UpdateProxyRuleGroupPriorities = smithy.NewSchema(smithy.ShapeID{
 var UpdateProxyRulePriorities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateProxyRulePriorities",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateProxySettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateProxySettings",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateRuleGroup = smithy.NewSchema(smithy.ShapeID{
@@ -519,7 +550,7 @@ var _AssociationSyncState_value *smithy.Schema
 var Attachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Attachment",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var Attachment_SubnetId *smithy.Schema
 
 var Attachment_EndpointId *smithy.Schema
@@ -527,6 +558,8 @@ var Attachment_EndpointId *smithy.Schema
 var Attachment_Status *smithy.Schema
 
 var Attachment_StatusMessage *smithy.Schema
+
+var Attachment_DnsName *smithy.Schema
 
 var _AttachmentId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -669,6 +702,83 @@ var ConfigurationSyncState_IN_SYNC *smithy.Schema
 
 var ConfigurationSyncState_CAPACITY_CONSTRAINED *smithy.Schema
 
+var _ContainerAssociationLastUpdatedTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAssociationLastUpdatedTime",
+}, smithy.ShapeTypeTimestamp, 0)
+
+var _ContainerAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAssociations",
+}, smithy.ShapeTypeList, 1)
+var _ContainerAssociations_member *smithy.Schema
+
+var ContainerAssociationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAssociationStatus",
+}, smithy.ShapeTypeEnum, 4)
+var ContainerAssociationStatus_ACTIVE *smithy.Schema
+
+var ContainerAssociationStatus_CREATING *smithy.Schema
+
+var ContainerAssociationStatus_DELETING *smithy.Schema
+
+var ContainerAssociationStatus_UPDATING *smithy.Schema
+
+var ContainerAssociationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAssociationSummary",
+}, smithy.ShapeTypeStructure, 2)
+var ContainerAssociationSummary_Arn *smithy.Schema
+
+var ContainerAssociationSummary_Name *smithy.Schema
+
+var ContainerAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAttribute",
+}, smithy.ShapeTypeStructure, 2)
+var ContainerAttribute_Key *smithy.Schema
+
+var ContainerAttribute_Value *smithy.Schema
+
+var _ContainerAttributeKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAttributeKey",
+}, smithy.ShapeTypeString, 0)
+
+var _ContainerAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAttributes",
+}, smithy.ShapeTypeList, 1)
+var _ContainerAttributes_member *smithy.Schema
+
+var _ContainerAttributeValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerAttributeValue",
+}, smithy.ShapeTypeString, 0)
+
+var ContainerMonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerMonitoringConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var ContainerMonitoringConfiguration_ClusterArn *smithy.Schema
+
+var ContainerMonitoringConfiguration_AttributeFilters *smithy.Schema
+
+var _ContainerMonitoringConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerMonitoringConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _ContainerMonitoringConfigurations_member *smithy.Schema
+
+var ContainerMonitoringType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContainerMonitoringType",
+}, smithy.ShapeTypeEnum, 2)
+var ContainerMonitoringType_ECS *smithy.Schema
+
+var ContainerMonitoringType_EKS *smithy.Schema
+
 var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Count",
@@ -798,6 +908,11 @@ var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DimensionValue",
 }, smithy.ShapeTypeString, 0)
 
+var _DnsName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DnsName",
+}, smithy.ShapeTypeString, 0)
+
 var _Domain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Domain",
@@ -871,7 +986,7 @@ var _FailureMessage = smithy.NewSchema(smithy.ShapeID{
 var Firewall = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Firewall",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 22)
 var Firewall_FirewallName *smithy.Schema
 
 var Firewall_FirewallArn *smithy.Schema
@@ -907,6 +1022,14 @@ var Firewall_TransitGatewayOwnerAccountId *smithy.Schema
 var Firewall_AvailabilityZoneMappings *smithy.Schema
 
 var Firewall_AvailabilityZoneChangeProtection *smithy.Schema
+
+var Firewall_NatGatewayMappings *smithy.Schema
+
+var Firewall_ProxySettings *smithy.Schema
+
+var Firewall_NoSourcePreservation *smithy.Schema
+
+var Firewall_VpcEndpoint *smithy.Schema
 
 var FirewallMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1007,12 +1130,14 @@ var FirewallStatus_TransitGatewayAttachmentSyncState *smithy.Schema
 var FirewallStatusValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallStatusValue",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var FirewallStatusValue_PROVISIONING *smithy.Schema
 
 var FirewallStatusValue_DELETING *smithy.Schema
 
 var FirewallStatusValue_READY *smithy.Schema
+
+var FirewallStatusValue_FAILED *smithy.Schema
 
 var _FirstAccessed = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1193,37 +1318,37 @@ var _InsertPosition = smithy.NewSchema(smithy.ShapeID{
 var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InsufficientCapacityException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InsufficientCapacityException_Message *smithy.Schema
 
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
 var InternalServerError_Message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var InvalidResourcePolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidResourcePolicyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidResourcePolicyException_Message *smithy.Schema
 
 var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidTokenException_Message *smithy.Schema
 
 var IPAddressType = smithy.NewSchema(smithy.ShapeID{
@@ -1311,7 +1436,7 @@ var _LastUpdateTime = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var _ListenerProperties = smithy.NewSchema(smithy.ShapeID{
@@ -1382,7 +1507,7 @@ var _LogDestinationMap_value *smithy.Schema
 var LogDestinationPermissionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "LogDestinationPermissionException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LogDestinationPermissionException_Message *smithy.Schema
 
 var LogDestinationType = smithy.NewSchema(smithy.ShapeID{
@@ -1427,10 +1552,54 @@ var MatchAttributes_Protocols *smithy.Schema
 
 var MatchAttributes_TCPFlags *smithy.Schema
 
+var NatGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayAttachment",
+}, smithy.ShapeTypeStructure, 4)
+var NatGatewayAttachment_NatGatewayId *smithy.Schema
+
+var NatGatewayAttachment_Status *smithy.Schema
+
+var NatGatewayAttachment_StatusMessage *smithy.Schema
+
+var NatGatewayAttachment_DnsName *smithy.Schema
+
+var _NatGatewayAttachmentsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayAttachmentsList",
+}, smithy.ShapeTypeList, 1)
+var _NatGatewayAttachmentsList_member *smithy.Schema
+
+var NatGatewayAttachmentStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayAttachmentStatus",
+}, smithy.ShapeTypeEnum, 5)
+var NatGatewayAttachmentStatus_CREATING *smithy.Schema
+
+var NatGatewayAttachmentStatus_READY *smithy.Schema
+
+var NatGatewayAttachmentStatus_UPDATING *smithy.Schema
+
+var NatGatewayAttachmentStatus_FAILED *smithy.Schema
+
+var NatGatewayAttachmentStatus_DELETING *smithy.Schema
+
 var _NatGatewayId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "NatGatewayId",
 }, smithy.ShapeTypeString, 0)
+
+var NatGatewayMapping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayMapping",
+}, smithy.ShapeTypeStructure, 1)
+var NatGatewayMapping_NatGatewayId *smithy.Schema
+
+var _NatGatewayMappingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayMappingsList",
+}, smithy.ShapeTypeList, 1)
+var _NatGatewayMappingsList_member *smithy.Schema
 
 var _NatGatewayPort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1859,6 +2028,12 @@ var ProxyRulesByRequestPhase_PreREQUEST *smithy.Schema
 
 var ProxyRulesByRequestPhase_PostRESPONSE *smithy.Schema
 
+var ProxySettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ProxySettings",
+}, smithy.ShapeTypeStructure, 1)
+var ProxySettings_ListenerProperties *smithy.Schema
+
 var ProxyState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ProxyState",
@@ -1942,13 +2117,13 @@ var _ResourceNameList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceOwnerCheckException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceOwnerCheckException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceOwnerCheckException_Message *smithy.Schema
 
 var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2493,10 +2668,12 @@ var _SupportedAvailabilityZones_value *smithy.Schema
 var SyncState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "SyncState",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var SyncState_Attachment *smithy.Schema
 
 var SyncState_Config *smithy.Schema
+
+var SyncState_NatGatewayAttachments *smithy.Schema
 
 var _SyncStateConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2605,7 +2782,7 @@ var _TcpIdleTimeoutRangeBound = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var TlsCertificateData = smithy.NewSchema(smithy.ShapeID{
@@ -2746,7 +2923,7 @@ var UniqueSources_Count *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var _UpdateTime = smithy.NewSchema(smithy.ShapeID{
@@ -2774,6 +2951,14 @@ var _VendorName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "VendorName",
 }, smithy.ShapeTypeString, 0)
+
+var VpcEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "VpcEndpoint",
+}, smithy.ShapeTypeStructure, 2)
+var VpcEndpoint_VpcId *smithy.Schema
+
+var VpcEndpoint_SubnetMappings *smithy.Schema
 
 var VpcEndpointAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2940,10 +3125,44 @@ var AttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration *smithy.Sche
 
 var AttachRuleGroupsToProxyConfigurationResponse_UpdateToken *smithy.Schema
 
+var CreateContainerAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateContainerAssociationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateContainerAssociationRequest_ContainerAssociationName *smithy.Schema
+
+var CreateContainerAssociationRequest_Description *smithy.Schema
+
+var CreateContainerAssociationRequest_Type *smithy.Schema
+
+var CreateContainerAssociationRequest_ContainerMonitoringConfigurations *smithy.Schema
+
+var CreateContainerAssociationRequest_Tags *smithy.Schema
+
+var CreateContainerAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateContainerAssociationResponse",
+}, smithy.ShapeTypeStructure, 8)
+var CreateContainerAssociationResponse_ContainerAssociationName *smithy.Schema
+
+var CreateContainerAssociationResponse_ContainerAssociationArn *smithy.Schema
+
+var CreateContainerAssociationResponse_Description *smithy.Schema
+
+var CreateContainerAssociationResponse_Type *smithy.Schema
+
+var CreateContainerAssociationResponse_ContainerMonitoringConfigurations *smithy.Schema
+
+var CreateContainerAssociationResponse_Status *smithy.Schema
+
+var CreateContainerAssociationResponse_Tags *smithy.Schema
+
+var CreateContainerAssociationResponse_UpdateToken *smithy.Schema
+
 var CreateFirewallRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateFirewallRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 18)
 var CreateFirewallRequest_FirewallName *smithy.Schema
 
 var CreateFirewallRequest_FirewallPolicyArn *smithy.Schema
@@ -2971,6 +3190,14 @@ var CreateFirewallRequest_TransitGatewayId *smithy.Schema
 var CreateFirewallRequest_AvailabilityZoneMappings *smithy.Schema
 
 var CreateFirewallRequest_AvailabilityZoneChangeProtection *smithy.Schema
+
+var CreateFirewallRequest_NatGatewayMappings *smithy.Schema
+
+var CreateFirewallRequest_ProxySettings *smithy.Schema
+
+var CreateFirewallRequest_NoSourcePreservation *smithy.Schema
+
+var CreateFirewallRequest_VpcEndpoint *smithy.Schema
 
 var CreateFirewallResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3172,6 +3399,24 @@ var CreateVpcEndpointAssociationResponse_VpcEndpointAssociation *smithy.Schema
 
 var CreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus *smithy.Schema
 
+var DeleteContainerAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteContainerAssociationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteContainerAssociationRequest_ContainerAssociationName *smithy.Schema
+
+var DeleteContainerAssociationRequest_ContainerAssociationArn *smithy.Schema
+
+var DeleteContainerAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteContainerAssociationResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteContainerAssociationResponse_ContainerAssociationName *smithy.Schema
+
+var DeleteContainerAssociationResponse_ContainerAssociationArn *smithy.Schema
+
+var DeleteContainerAssociationResponse_Status *smithy.Schema
+
 var DeleteFirewallRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteFirewallRequest",
@@ -3338,6 +3583,38 @@ var DeleteVpcEndpointAssociationResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteVpcEndpointAssociationResponse_VpcEndpointAssociation *smithy.Schema
 
 var DeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus *smithy.Schema
+
+var DescribeContainerAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeContainerAssociationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeContainerAssociationRequest_ContainerAssociationName *smithy.Schema
+
+var DescribeContainerAssociationRequest_ContainerAssociationArn *smithy.Schema
+
+var DescribeContainerAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeContainerAssociationResponse",
+}, smithy.ShapeTypeStructure, 10)
+var DescribeContainerAssociationResponse_ContainerAssociationName *smithy.Schema
+
+var DescribeContainerAssociationResponse_ContainerAssociationArn *smithy.Schema
+
+var DescribeContainerAssociationResponse_Description *smithy.Schema
+
+var DescribeContainerAssociationResponse_Type *smithy.Schema
+
+var DescribeContainerAssociationResponse_ContainerMonitoringConfigurations *smithy.Schema
+
+var DescribeContainerAssociationResponse_Status *smithy.Schema
+
+var DescribeContainerAssociationResponse_ResolvedCidrCount *smithy.Schema
+
+var DescribeContainerAssociationResponse_LastUpdatedTime *smithy.Schema
+
+var DescribeContainerAssociationResponse_Tags *smithy.Schema
+
+var DescribeContainerAssociationResponse_UpdateToken *smithy.Schema
 
 var DescribeFirewallRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3761,6 +4038,22 @@ var ListAnalysisReportsResponse_AnalysisReports *smithy.Schema
 
 var ListAnalysisReportsResponse_NextToken *smithy.Schema
 
+var ListContainerAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContainerAssociationsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListContainerAssociationsRequest_MaxResults *smithy.Schema
+
+var ListContainerAssociationsRequest_NextToken *smithy.Schema
+
+var ListContainerAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContainerAssociationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListContainerAssociationsResponse_ContainerAssociations *smithy.Schema
+
+var ListContainerAssociationsResponse_NextToken *smithy.Schema
+
 var ListFirewallPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFirewallPoliciesRequest",
@@ -4132,6 +4425,44 @@ var UpdateAvailabilityZoneChangeProtectionResponse_FirewallName *smithy.Schema
 
 var UpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection *smithy.Schema
 
+var UpdateContainerAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateContainerAssociationRequest",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateContainerAssociationRequest_ContainerAssociationName *smithy.Schema
+
+var UpdateContainerAssociationRequest_ContainerAssociationArn *smithy.Schema
+
+var UpdateContainerAssociationRequest_Description *smithy.Schema
+
+var UpdateContainerAssociationRequest_Type *smithy.Schema
+
+var UpdateContainerAssociationRequest_ContainerMonitoringConfigurations *smithy.Schema
+
+var UpdateContainerAssociationRequest_Tags *smithy.Schema
+
+var UpdateContainerAssociationRequest_UpdateToken *smithy.Schema
+
+var UpdateContainerAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateContainerAssociationResponse",
+}, smithy.ShapeTypeStructure, 8)
+var UpdateContainerAssociationResponse_ContainerAssociationName *smithy.Schema
+
+var UpdateContainerAssociationResponse_ContainerAssociationArn *smithy.Schema
+
+var UpdateContainerAssociationResponse_Description *smithy.Schema
+
+var UpdateContainerAssociationResponse_Type *smithy.Schema
+
+var UpdateContainerAssociationResponse_ContainerMonitoringConfigurations *smithy.Schema
+
+var UpdateContainerAssociationResponse_Status *smithy.Schema
+
+var UpdateContainerAssociationResponse_Tags *smithy.Schema
+
+var UpdateContainerAssociationResponse_UpdateToken *smithy.Schema
+
 var UpdateFirewallAnalysisSettingsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateFirewallAnalysisSettingsRequest",
@@ -4426,6 +4757,30 @@ var UpdateProxyRulePrioritiesResponse_Rules *smithy.Schema
 
 var UpdateProxyRulePrioritiesResponse_UpdateToken *smithy.Schema
 
+var UpdateProxySettingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateProxySettingsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateProxySettingsRequest_FirewallArn *smithy.Schema
+
+var UpdateProxySettingsRequest_FirewallName *smithy.Schema
+
+var UpdateProxySettingsRequest_UpdateToken *smithy.Schema
+
+var UpdateProxySettingsRequest_ProxySettings *smithy.Schema
+
+var UpdateProxySettingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateProxySettingsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateProxySettingsResponse_FirewallArn *smithy.Schema
+
+var UpdateProxySettingsResponse_FirewallName *smithy.Schema
+
+var UpdateProxySettingsResponse_UpdateToken *smithy.Schema
+
+var UpdateProxySettingsResponse_ProxySettings *smithy.Schema
+
 var UpdateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateRuleGroupRequest",
@@ -4591,6 +4946,8 @@ func init() {
 
 	Attachment_StatusMessage = Attachment.AddMember("StatusMessage", _StatusMessage)
 
+	Attachment_DnsName = Attachment.AddMember("DnsName", _DnsName)
+
 	AZSyncState_Attachment = AZSyncState.AddMember("Attachment", Attachment)
 
 	_AssociationSyncState_key = _AssociationSyncState.AddMember("key", _AvailabilityZone)
@@ -4650,6 +5007,36 @@ func init() {
 	ConfigurationSyncState_IN_SYNC = ConfigurationSyncState.AddMember("IN_SYNC", smithyprelude.Unit)
 
 	ConfigurationSyncState_CAPACITY_CONSTRAINED = ConfigurationSyncState.AddMember("CAPACITY_CONSTRAINED", smithyprelude.Unit)
+
+	ContainerAssociationSummary_Arn = ContainerAssociationSummary.AddMember("Arn", _ResourceArn)
+
+	ContainerAssociationSummary_Name = ContainerAssociationSummary.AddMember("Name", _ResourceName)
+
+	_ContainerAssociations_member = _ContainerAssociations.AddMember("member", ContainerAssociationSummary)
+
+	ContainerAssociationStatus_ACTIVE = ContainerAssociationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ContainerAssociationStatus_CREATING = ContainerAssociationStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	ContainerAssociationStatus_DELETING = ContainerAssociationStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	ContainerAssociationStatus_UPDATING = ContainerAssociationStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	ContainerAttribute_Key = ContainerAttribute.AddMember("Key", _ContainerAttributeKey)
+
+	ContainerAttribute_Value = ContainerAttribute.AddMember("Value", _ContainerAttributeValue)
+
+	_ContainerAttributes_member = _ContainerAttributes.AddMember("member", ContainerAttribute)
+
+	ContainerMonitoringConfiguration_ClusterArn = ContainerMonitoringConfiguration.AddMember("ClusterArn", _ResourceArn)
+
+	ContainerMonitoringConfiguration_AttributeFilters = ContainerMonitoringConfiguration.AddMember("AttributeFilters", _ContainerAttributes)
+
+	_ContainerMonitoringConfigurations_member = _ContainerMonitoringConfigurations.AddMember("member", ContainerMonitoringConfiguration)
+
+	ContainerMonitoringType_ECS = ContainerMonitoringType.AddMember("ECS", smithyprelude.Unit)
+
+	ContainerMonitoringType_EKS = ContainerMonitoringType.AddMember("EKS", smithyprelude.Unit)
 
 	ProxyRulePhaseAction_ALLOW = ProxyRulePhaseAction.AddMember("ALLOW", smithyprelude.Unit)
 
@@ -4783,6 +5170,16 @@ func init() {
 
 	_SubnetMappings_member = _SubnetMappings.AddMember("member", SubnetMapping)
 
+	NatGatewayMapping_NatGatewayId = NatGatewayMapping.AddMember("NatGatewayId", _NatGatewayId)
+
+	_NatGatewayMappingsList_member = _NatGatewayMappingsList.AddMember("member", NatGatewayMapping)
+
+	ProxySettings_ListenerProperties = ProxySettings.AddMember("ListenerProperties", _ListenerProperties)
+
+	VpcEndpoint_VpcId = VpcEndpoint.AddMember("VpcId", _VpcId)
+
+	VpcEndpoint_SubnetMappings = VpcEndpoint.AddMember("SubnetMappings", _SubnetMappings)
+
 	Firewall_FirewallName = Firewall.AddMember("FirewallName", _ResourceName)
 
 	Firewall_FirewallArn = Firewall.AddMember("FirewallArn", _ResourceArn)
@@ -4818,6 +5215,14 @@ func init() {
 	Firewall_AvailabilityZoneMappings = Firewall.AddMember("AvailabilityZoneMappings", _AvailabilityZoneMappings)
 
 	Firewall_AvailabilityZoneChangeProtection = Firewall.AddMember("AvailabilityZoneChangeProtection", _Boolean)
+
+	Firewall_NatGatewayMappings = Firewall.AddMember("NatGatewayMappings", _NatGatewayMappingsList)
+
+	Firewall_ProxySettings = Firewall.AddMember("ProxySettings", ProxySettings)
+
+	Firewall_NoSourcePreservation = Firewall.AddMember("NoSourcePreservation", _Boolean)
+
+	Firewall_VpcEndpoint = Firewall.AddMember("VpcEndpoint", VpcEndpoint)
 
 	FirewallMetadata_FirewallName = FirewallMetadata.AddMember("FirewallName", _ResourceName)
 
@@ -4941,6 +5346,8 @@ func init() {
 
 	FirewallStatusValue_READY = FirewallStatusValue.AddMember("READY", smithyprelude.Unit)
 
+	FirewallStatusValue_FAILED = FirewallStatusValue.AddMember("FAILED", smithyprelude.Unit)
+
 	PerObjectSyncStatus_PENDING = PerObjectSyncStatus.AddMember("PENDING", smithyprelude.Unit)
 
 	PerObjectSyncStatus_IN_SYNC = PerObjectSyncStatus.AddMember("IN_SYNC", smithyprelude.Unit)
@@ -4959,9 +5366,31 @@ func init() {
 
 	_SyncStateConfig_value = _SyncStateConfig.AddMember("value", PerObjectStatus)
 
+	NatGatewayAttachmentStatus_CREATING = NatGatewayAttachmentStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	NatGatewayAttachmentStatus_READY = NatGatewayAttachmentStatus.AddMember("READY", smithyprelude.Unit)
+
+	NatGatewayAttachmentStatus_UPDATING = NatGatewayAttachmentStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	NatGatewayAttachmentStatus_FAILED = NatGatewayAttachmentStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	NatGatewayAttachmentStatus_DELETING = NatGatewayAttachmentStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	NatGatewayAttachment_NatGatewayId = NatGatewayAttachment.AddMember("NatGatewayId", _NatGatewayId)
+
+	NatGatewayAttachment_Status = NatGatewayAttachment.AddMember("Status", NatGatewayAttachmentStatus)
+
+	NatGatewayAttachment_StatusMessage = NatGatewayAttachment.AddMember("StatusMessage", _StatusReason)
+
+	NatGatewayAttachment_DnsName = NatGatewayAttachment.AddMember("DnsName", _DnsName)
+
+	_NatGatewayAttachmentsList_member = _NatGatewayAttachmentsList.AddMember("member", NatGatewayAttachment)
+
 	SyncState_Attachment = SyncState.AddMember("Attachment", Attachment)
 
 	SyncState_Config = SyncState.AddMember("Config", _SyncStateConfig)
+
+	SyncState_NatGatewayAttachments = SyncState.AddMember("NatGatewayAttachments", _NatGatewayAttachmentsList)
 
 	_SyncStates_key = _SyncStates.AddMember("key", _AvailabilityZone)
 
@@ -5699,6 +6128,32 @@ func init() {
 
 	AttachRuleGroupsToProxyConfigurationResponse_UpdateToken = AttachRuleGroupsToProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
 
+	CreateContainerAssociationRequest_ContainerAssociationName = CreateContainerAssociationRequest.AddMember("ContainerAssociationName", _ResourceName)
+
+	CreateContainerAssociationRequest_Description = CreateContainerAssociationRequest.AddMember("Description", _Description)
+
+	CreateContainerAssociationRequest_Type = CreateContainerAssociationRequest.AddMember("Type", ContainerMonitoringType)
+
+	CreateContainerAssociationRequest_ContainerMonitoringConfigurations = CreateContainerAssociationRequest.AddMember("ContainerMonitoringConfigurations", _ContainerMonitoringConfigurations)
+
+	CreateContainerAssociationRequest_Tags = CreateContainerAssociationRequest.AddMember("Tags", _TagList)
+
+	CreateContainerAssociationResponse_ContainerAssociationName = CreateContainerAssociationResponse.AddMember("ContainerAssociationName", _ResourceName)
+
+	CreateContainerAssociationResponse_ContainerAssociationArn = CreateContainerAssociationResponse.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	CreateContainerAssociationResponse_Description = CreateContainerAssociationResponse.AddMember("Description", _Description)
+
+	CreateContainerAssociationResponse_Type = CreateContainerAssociationResponse.AddMember("Type", ContainerMonitoringType)
+
+	CreateContainerAssociationResponse_ContainerMonitoringConfigurations = CreateContainerAssociationResponse.AddMember("ContainerMonitoringConfigurations", _ContainerMonitoringConfigurations)
+
+	CreateContainerAssociationResponse_Status = CreateContainerAssociationResponse.AddMember("Status", ContainerAssociationStatus)
+
+	CreateContainerAssociationResponse_Tags = CreateContainerAssociationResponse.AddMember("Tags", _TagList)
+
+	CreateContainerAssociationResponse_UpdateToken = CreateContainerAssociationResponse.AddMember("UpdateToken", _UpdateToken)
+
 	CreateFirewallRequest_FirewallName = CreateFirewallRequest.AddMember("FirewallName", _ResourceName)
 
 	CreateFirewallRequest_FirewallPolicyArn = CreateFirewallRequest.AddMember("FirewallPolicyArn", _ResourceArn)
@@ -5726,6 +6181,14 @@ func init() {
 	CreateFirewallRequest_AvailabilityZoneMappings = CreateFirewallRequest.AddMember("AvailabilityZoneMappings", _AvailabilityZoneMappings)
 
 	CreateFirewallRequest_AvailabilityZoneChangeProtection = CreateFirewallRequest.AddMember("AvailabilityZoneChangeProtection", _Boolean)
+
+	CreateFirewallRequest_NatGatewayMappings = CreateFirewallRequest.AddMember("NatGatewayMappings", _NatGatewayMappingsList)
+
+	CreateFirewallRequest_ProxySettings = CreateFirewallRequest.AddMember("ProxySettings", ProxySettings)
+
+	CreateFirewallRequest_NoSourcePreservation = CreateFirewallRequest.AddMember("NoSourcePreservation", _Boolean)
+
+	CreateFirewallRequest_VpcEndpoint = CreateFirewallRequest.AddMember("VpcEndpoint", VpcEndpoint)
 
 	CreateFirewallResponse_Firewall = CreateFirewallResponse.AddMember("Firewall", Firewall)
 
@@ -5859,6 +6322,16 @@ func init() {
 
 	CreateVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = CreateVpcEndpointAssociationResponse.AddMember("VpcEndpointAssociationStatus", VpcEndpointAssociationStatus)
 
+	DeleteContainerAssociationRequest_ContainerAssociationName = DeleteContainerAssociationRequest.AddMember("ContainerAssociationName", _ResourceName)
+
+	DeleteContainerAssociationRequest_ContainerAssociationArn = DeleteContainerAssociationRequest.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	DeleteContainerAssociationResponse_ContainerAssociationName = DeleteContainerAssociationResponse.AddMember("ContainerAssociationName", _ResourceName)
+
+	DeleteContainerAssociationResponse_ContainerAssociationArn = DeleteContainerAssociationResponse.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	DeleteContainerAssociationResponse_Status = DeleteContainerAssociationResponse.AddMember("Status", ContainerAssociationStatus)
+
 	DeleteFirewallRequest_FirewallName = DeleteFirewallRequest.AddMember("FirewallName", _ResourceName)
 
 	DeleteFirewallRequest_FirewallArn = DeleteFirewallRequest.AddMember("FirewallArn", _ResourceArn)
@@ -5936,6 +6409,30 @@ func init() {
 	DeleteVpcEndpointAssociationResponse_VpcEndpointAssociation = DeleteVpcEndpointAssociationResponse.AddMember("VpcEndpointAssociation", VpcEndpointAssociation)
 
 	DeleteVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = DeleteVpcEndpointAssociationResponse.AddMember("VpcEndpointAssociationStatus", VpcEndpointAssociationStatus)
+
+	DescribeContainerAssociationRequest_ContainerAssociationName = DescribeContainerAssociationRequest.AddMember("ContainerAssociationName", _ResourceName)
+
+	DescribeContainerAssociationRequest_ContainerAssociationArn = DescribeContainerAssociationRequest.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	DescribeContainerAssociationResponse_ContainerAssociationName = DescribeContainerAssociationResponse.AddMember("ContainerAssociationName", _ResourceName)
+
+	DescribeContainerAssociationResponse_ContainerAssociationArn = DescribeContainerAssociationResponse.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	DescribeContainerAssociationResponse_Description = DescribeContainerAssociationResponse.AddMember("Description", _Description)
+
+	DescribeContainerAssociationResponse_Type = DescribeContainerAssociationResponse.AddMember("Type", ContainerMonitoringType)
+
+	DescribeContainerAssociationResponse_ContainerMonitoringConfigurations = DescribeContainerAssociationResponse.AddMember("ContainerMonitoringConfigurations", _ContainerMonitoringConfigurations)
+
+	DescribeContainerAssociationResponse_Status = DescribeContainerAssociationResponse.AddMember("Status", ContainerAssociationStatus)
+
+	DescribeContainerAssociationResponse_ResolvedCidrCount = DescribeContainerAssociationResponse.AddMember("ResolvedCidrCount", _CIDRCount)
+
+	DescribeContainerAssociationResponse_LastUpdatedTime = DescribeContainerAssociationResponse.AddMember("LastUpdatedTime", _ContainerAssociationLastUpdatedTime)
+
+	DescribeContainerAssociationResponse_Tags = DescribeContainerAssociationResponse.AddMember("Tags", _TagList)
+
+	DescribeContainerAssociationResponse_UpdateToken = DescribeContainerAssociationResponse.AddMember("UpdateToken", _UpdateToken)
 
 	DescribeFirewallRequest_FirewallName = DescribeFirewallRequest.AddMember("FirewallName", _ResourceName)
 
@@ -6199,6 +6696,14 @@ func init() {
 
 	ListAnalysisReportsResponse_NextToken = ListAnalysisReportsResponse.AddMember("NextToken", _PaginationToken)
 
+	ListContainerAssociationsRequest_MaxResults = ListContainerAssociationsRequest.AddMember("MaxResults", _PaginationMaxResults)
+
+	ListContainerAssociationsRequest_NextToken = ListContainerAssociationsRequest.AddMember("NextToken", _PaginationToken)
+
+	ListContainerAssociationsResponse_ContainerAssociations = ListContainerAssociationsResponse.AddMember("ContainerAssociations", _ContainerAssociations)
+
+	ListContainerAssociationsResponse_NextToken = ListContainerAssociationsResponse.AddMember("NextToken", _PaginationToken)
+
 	ListFirewallPoliciesRequest_NextToken = ListFirewallPoliciesRequest.AddMember("NextToken", _PaginationToken)
 
 	ListFirewallPoliciesRequest_MaxResults = ListFirewallPoliciesRequest.AddMember("MaxResults", _PaginationMaxResults)
@@ -6415,6 +6920,36 @@ func init() {
 
 	UpdateAvailabilityZoneChangeProtectionResponse_AvailabilityZoneChangeProtection = UpdateAvailabilityZoneChangeProtectionResponse.AddMember("AvailabilityZoneChangeProtection", _Boolean)
 
+	UpdateContainerAssociationRequest_ContainerAssociationName = UpdateContainerAssociationRequest.AddMember("ContainerAssociationName", _ResourceName)
+
+	UpdateContainerAssociationRequest_ContainerAssociationArn = UpdateContainerAssociationRequest.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	UpdateContainerAssociationRequest_Description = UpdateContainerAssociationRequest.AddMember("Description", _Description)
+
+	UpdateContainerAssociationRequest_Type = UpdateContainerAssociationRequest.AddMember("Type", ContainerMonitoringType)
+
+	UpdateContainerAssociationRequest_ContainerMonitoringConfigurations = UpdateContainerAssociationRequest.AddMember("ContainerMonitoringConfigurations", _ContainerMonitoringConfigurations)
+
+	UpdateContainerAssociationRequest_Tags = UpdateContainerAssociationRequest.AddMember("Tags", _TagList)
+
+	UpdateContainerAssociationRequest_UpdateToken = UpdateContainerAssociationRequest.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateContainerAssociationResponse_ContainerAssociationName = UpdateContainerAssociationResponse.AddMember("ContainerAssociationName", _ResourceName)
+
+	UpdateContainerAssociationResponse_ContainerAssociationArn = UpdateContainerAssociationResponse.AddMember("ContainerAssociationArn", _ResourceArn)
+
+	UpdateContainerAssociationResponse_Description = UpdateContainerAssociationResponse.AddMember("Description", _Description)
+
+	UpdateContainerAssociationResponse_Type = UpdateContainerAssociationResponse.AddMember("Type", ContainerMonitoringType)
+
+	UpdateContainerAssociationResponse_ContainerMonitoringConfigurations = UpdateContainerAssociationResponse.AddMember("ContainerMonitoringConfigurations", _ContainerMonitoringConfigurations)
+
+	UpdateContainerAssociationResponse_Status = UpdateContainerAssociationResponse.AddMember("Status", ContainerAssociationStatus)
+
+	UpdateContainerAssociationResponse_Tags = UpdateContainerAssociationResponse.AddMember("Tags", _TagList)
+
+	UpdateContainerAssociationResponse_UpdateToken = UpdateContainerAssociationResponse.AddMember("UpdateToken", _UpdateToken)
+
 	UpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes = UpdateFirewallAnalysisSettingsRequest.AddMember("EnabledAnalysisTypes", _EnabledAnalysisTypes)
 
 	UpdateFirewallAnalysisSettingsRequest_FirewallArn = UpdateFirewallAnalysisSettingsRequest.AddMember("FirewallArn", _ResourceArn)
@@ -6612,6 +7147,22 @@ func init() {
 	UpdateProxyRulePrioritiesResponse_Rules = UpdateProxyRulePrioritiesResponse.AddMember("Rules", _ProxyRulePriorityList)
 
 	UpdateProxyRulePrioritiesResponse_UpdateToken = UpdateProxyRulePrioritiesResponse.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateProxySettingsRequest_FirewallArn = UpdateProxySettingsRequest.AddMember("FirewallArn", _ResourceArn)
+
+	UpdateProxySettingsRequest_FirewallName = UpdateProxySettingsRequest.AddMember("FirewallName", _ResourceName)
+
+	UpdateProxySettingsRequest_UpdateToken = UpdateProxySettingsRequest.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateProxySettingsRequest_ProxySettings = UpdateProxySettingsRequest.AddMember("ProxySettings", ProxySettings)
+
+	UpdateProxySettingsResponse_FirewallArn = UpdateProxySettingsResponse.AddMember("FirewallArn", _ResourceArn)
+
+	UpdateProxySettingsResponse_FirewallName = UpdateProxySettingsResponse.AddMember("FirewallName", _ResourceName)
+
+	UpdateProxySettingsResponse_UpdateToken = UpdateProxySettingsResponse.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateProxySettingsResponse_ProxySettings = UpdateProxySettingsResponse.AddMember("ProxySettings", ProxySettings)
 
 	UpdateRuleGroupRequest_UpdateToken = UpdateRuleGroupRequest.AddMember("UpdateToken", _UpdateToken)
 

@@ -342,6 +342,12 @@ func serializePinVerificationAttributes(s smithy.ShapeSerializer, schema *smithy
 
 func serializeReEncryptionAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v ReEncryptionAttributes) {
 	switch vv := v.(type) {
+	case *ReEncryptionAttributesMemberAsymmetric:
+		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Asymmetric)
+		s.WriteStruct(schemas.ReEncryptionAttributes_Asymmetric)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ReEncryptionAttributesMemberDukpt:
 		s.WriteUnion(schema, schemas.ReEncryptionAttributes_Dukpt)
 		s.WriteStruct(schemas.ReEncryptionAttributes_Dukpt)
@@ -380,6 +386,12 @@ func serializeSessionKeyDerivation(s smithy.ShapeSerializer, schema *smithy.Sche
 	case *SessionKeyDerivationMemberMastercard:
 		s.WriteUnion(schema, schemas.SessionKeyDerivation_Mastercard)
 		s.WriteStruct(schemas.SessionKeyDerivation_Mastercard)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *SessionKeyDerivationMemberUnionPay:
+		s.WriteUnion(schema, schemas.SessionKeyDerivation_UnionPay)
+		s.WriteStruct(schemas.SessionKeyDerivation_UnionPay)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -746,6 +758,10 @@ func deserializePinVerificationAttributes(d smithy.ShapeDeserializer, s *smithy.
 func deserializeReEncryptionAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *ReEncryptionAttributes) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.ReEncryptionAttributes_Asymmetric:
+			vv := &ReEncryptionAttributesMemberAsymmetric{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ReEncryptionAttributes_Dukpt:
 			vv := &ReEncryptionAttributesMemberDukpt{}
 			*v = vv
@@ -776,6 +792,10 @@ func deserializeSessionKeyDerivation(d smithy.ShapeDeserializer, s *smithy.Schem
 			return vv.Deserialize(d)
 		case schemas.SessionKeyDerivation_Mastercard:
 			vv := &SessionKeyDerivationMemberMastercard{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.SessionKeyDerivation_UnionPay:
+			vv := &SessionKeyDerivationMemberUnionPay{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.SessionKeyDerivation_Visa:
@@ -861,6 +881,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}

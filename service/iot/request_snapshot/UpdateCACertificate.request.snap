@@ -1,0 +1,5 @@
+PUT /cacertificate/__CertificateId__?newAutoRegistrationStatus=ENABLE&newStatus=ACTIVE
+
+Content-Type: application/json
+
+{"registrationConfig":{"roleArn":"__RoleArn__","templateBody":"__TemplateBody__","templateName":"__TemplateName__"},"removeAutoRegistration":true}

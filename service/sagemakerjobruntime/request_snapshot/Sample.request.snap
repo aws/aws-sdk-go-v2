@@ -1,0 +1,7 @@
+POST /sample
+
+Content-Type: application/octet-stream
+X-Amzn-Sagemaker-Job-Arn: __JobArn__
+X-Amzn-Sagemaker-Trajectory-Id: __TrajectoryId__
+
+blob

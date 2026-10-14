@@ -1,0 +1,5 @@
+POST /v2/create-service-function
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","criticality":"PRIMARY","description":"__Description__","name":"__Name__","serviceArn":"__ServiceArn__"}

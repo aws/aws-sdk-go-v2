@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetSMSAttributes&Version=2010-03-31&attributes.entry.1.key=key0&attributes.entry.1.value=__Value__

@@ -5,12 +5,8 @@ package migrationhubstrategy
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of all the installed collectors.
@@ -44,34 +40,6 @@ type ListCollectorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCollectorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCollectorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCollectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCollectorsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCollectorsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListCollectorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCollectorsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCollectorsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListCollectorsRequest_maxResults, v.MaxResults)
-		case schemas.ListCollectorsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCollectorsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListCollectorsOutput struct {
 
 	//  The list of all the installed collectors.
@@ -87,96 +55,26 @@ type ListCollectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCollectorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCollectorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCollectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectors(s, schemas.ListCollectorsResponse_Collectors, v.Collectors)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCollectorsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListCollectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCollectorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCollectorsResponse_Collectors:
-			return deserializeCollectors(d, schemas.ListCollectorsResponse_Collectors, &v.Collectors)
-		case schemas.ListCollectorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCollectorsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCollectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollectors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectors, schemas.ListCollectorsRequest, schemas.ListCollectorsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollectors{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectors, schemas.ListCollectorsRequest, schemas.ListCollectorsResponse), output: &ListCollectorsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCollectors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollectors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +87,6 @@ func (c *Client) addOperationListCollectorsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -296,11 +188,3 @@ type ListCollectorsAPIClient interface {
 }
 
 var _ ListCollectorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCollectors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCollectors",
-	}
-}

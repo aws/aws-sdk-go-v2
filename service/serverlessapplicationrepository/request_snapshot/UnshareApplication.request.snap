@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/unshare
+
+Content-Type: application/json
+
+{"organizationId":"__OrganizationId__"}

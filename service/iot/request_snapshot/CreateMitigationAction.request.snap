@@ -1,0 +1,5 @@
+POST /mitigationactions/actions/__ActionName__
+
+Content-Type: application/json
+
+{"actionParams":{"addThingsToThingGroupParams":{"overrideDynamicGroups":true,"thingGroupNames":["__Member__","__Member__"]},"enableIoTLoggingParams":{"logLevel":"DEBUG","roleArnForLogging":"__RoleArnForLogging__"},"publishFindingToSnsParams":{"topicArn":"__TopicArn__"},"replaceDefaultPolicyVersionParams":{"templateName":"BLANK_POLICY"},"updateCACertificateParams":{"action":"DEACTIVATE"},"updateDeviceCertificateParams":{"action":"DEACTIVATE"}},"roleArn":"__RoleArn__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

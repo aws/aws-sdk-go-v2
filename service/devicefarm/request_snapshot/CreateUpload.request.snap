@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.CreateUpload
+
+{"contentType":"__ContentType__","name":"__Name__","projectArn":"__ProjectArn__","type":"ANDROID_APP"}

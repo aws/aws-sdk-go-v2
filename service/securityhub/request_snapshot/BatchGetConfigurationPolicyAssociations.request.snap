@@ -1,0 +1,5 @@
+POST /configurationPolicyAssociation/batchget
+
+Content-Type: application/json
+
+{"ConfigurationPolicyAssociationIdentifiers":[{"Target":{"AccountId":"__TargetMemberAccountId__"}},{"Target":{"AccountId":"__TargetMemberAccountId__"}}]}

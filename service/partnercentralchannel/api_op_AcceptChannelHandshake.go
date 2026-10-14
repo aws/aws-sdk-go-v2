@@ -4,13 +4,8 @@ package partnercentralchannel
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts a pending channel handshake request from another AWS account.
@@ -44,21 +39,6 @@ type AcceptChannelHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptChannelHandshakeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptChannelHandshakeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptChannelHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeRequest_catalog, *v.Catalog)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeRequest_identifier, *v.Identifier)
-	}
-}
-
 type AcceptChannelHandshakeOutput struct {
 
 	// Details of the accepted channel handshake.
@@ -70,85 +50,29 @@ type AcceptChannelHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptChannelHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptChannelHandshakeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptChannelHandshakeResponse_channelHandshakeDetail:
-			v.ChannelHandshakeDetail = &types.AcceptChannelHandshakeDetail{}
-			return v.ChannelHandshakeDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptChannelHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptChannelHandshake, schemas.AcceptChannelHandshakeRequest, schemas.AcceptChannelHandshakeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptChannelHandshake, schemas.AcceptChannelHandshakeRequest, schemas.AcceptChannelHandshakeResponse), output: &AcceptChannelHandshakeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptChannelHandshake"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptChannelHandshakeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptChannelHandshake(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +87,8 @@ func (c *Client) addOperationAcceptChannelHandshakeMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAcceptChannelHandshake(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptChannelHandshake",
-	}
 }

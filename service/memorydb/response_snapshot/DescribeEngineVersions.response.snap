@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeEngineVersions
+
+{"EngineVersions":[{"Engine":"__Engine__","EnginePatchVersion":"__EnginePatchVersion__","EngineVersion":"__EngineVersion__","ParameterGroupFamily":"__ParameterGroupFamily__"},{"Engine":"__Engine__","EnginePatchVersion":"__EnginePatchVersion__","EngineVersion":"__EngineVersion__","ParameterGroupFamily":"__ParameterGroupFamily__"}],"NextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the alias association between two email addresses in an Connect
@@ -129,6 +129,29 @@ type DisassociateEmailAddressAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEmailAddressAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEmailAddressAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEmailAddressAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasConfiguration != nil {
+		s.WriteStruct(schemas.DisassociateEmailAddressAliasRequest_AliasConfiguration)
+		v.AliasConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateEmailAddressAliasRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.DisassociateEmailAddressAliasRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateEmailAddressAliasRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DisassociateEmailAddressAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -136,65 +159,36 @@ type DisassociateEmailAddressAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEmailAddressAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEmailAddressAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEmailAddressAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateEmailAddressAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateEmailAddressAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateEmailAddressAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEmailAddressAlias, schemas.DisassociateEmailAddressAliasRequest, schemas.DisassociateEmailAddressAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEmailAddressAlias, schemas.DisassociateEmailAddressAliasRequest, schemas.DisassociateEmailAddressAliasResponse), output: &DisassociateEmailAddressAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateEmailAddressAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -204,12 +198,6 @@ func (c *Client) addOperationDisassociateEmailAddressAliasMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpDisassociateEmailAddressAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateEmailAddressAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,12 +210,6 @@ func (c *Client) addOperationDisassociateEmailAddressAliasMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,12 +249,4 @@ func (m *idempotencyToken_initializeOpDisassociateEmailAddressAlias) HandleIniti
 }
 func addIdempotencyToken_opDisassociateEmailAddressAliasMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDisassociateEmailAddressAlias{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDisassociateEmailAddressAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateEmailAddressAlias",
-	}
 }

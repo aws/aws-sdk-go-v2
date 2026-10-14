@@ -4,11 +4,10 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns Config information.
@@ -43,6 +42,21 @@ type GetConfigInput struct {
 	ConfigType types.ConfigCapabilityType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.GetConfigRequest_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.GetConfigRequest_configType, string(v.ConfigType))
+	}
 }
 
 // Output for the GetConfig operation.
@@ -80,77 +94,76 @@ type GetConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigArn != nil {
+		s.WriteString(schemas.GetConfigResponse_configArn, *v.ConfigArn)
+	}
+	serializeConfigTypeData(s, schemas.GetConfigResponse_configData, v.ConfigData)
+	if v.ConfigId != nil {
+		s.WriteString(schemas.GetConfigResponse_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.GetConfigResponse_configType, string(v.ConfigType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigResponse_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.GetConfigResponse_tags, v.Tags)
+}
+func (v *GetConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigResponse_configArn:
+			v.ConfigArn = new(string)
+			return d.ReadString(schemas.GetConfigResponse_configArn, v.ConfigArn)
+		case schemas.GetConfigResponse_configData:
+			return deserializeConfigTypeData(d, schemas.GetConfigResponse_configData, &v.ConfigData)
+		case schemas.GetConfigResponse_configId:
+			v.ConfigId = new(string)
+			return d.ReadString(schemas.GetConfigResponse_configId, v.ConfigId)
+		case schemas.GetConfigResponse_configType:
+			var ev string
+			if err := d.ReadString(schemas.GetConfigResponse_configType, &ev); err != nil {
+				return err
+			}
+			v.ConfigType = types.ConfigCapabilityType(ev)
+			return nil
+		case schemas.GetConfigResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfigResponse_name, v.Name)
+		case schemas.GetConfigResponse_tags:
+			return deserializeTagsMap(d, schemas.GetConfigResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse), output: &GetConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +178,8 @@ func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConfig",
-	}
 }

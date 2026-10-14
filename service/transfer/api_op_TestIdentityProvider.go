@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // If the IdentityProviderType of a file transfer protocol-enabled server is
@@ -102,6 +101,30 @@ type TestIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_ServerId, *v.ServerId)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.TestIdentityProviderRequest_ServerProtocol, string(v.ServerProtocol))
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_SourceIp, *v.SourceIp)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_UserName, *v.UserName)
+	}
+	if v.UserPassword != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_UserPassword, *v.UserPassword)
+	}
+}
+
 type TestIdentityProviderOutput struct {
 
 	// The HTTP status code that is the response from your API Gateway or your Lambda
@@ -130,77 +153,63 @@ type TestIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Message, *v.Message)
+	}
+	if v.Response != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Response, *v.Response)
+	}
+	s.WriteInt32(schemas.TestIdentityProviderResponse_StatusCode, v.StatusCode)
+	if v.Url != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Url, *v.Url)
+	}
+}
+func (v *TestIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestIdentityProviderResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Message, v.Message)
+		case schemas.TestIdentityProviderResponse_Response:
+			v.Response = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Response, v.Response)
+		case schemas.TestIdentityProviderResponse_StatusCode:
+			return d.ReadInt32(schemas.TestIdentityProviderResponse_StatusCode, &v.StatusCode)
+		case schemas.TestIdentityProviderResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestIdentityProvider, schemas.TestIdentityProviderRequest, schemas.TestIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestIdentityProvider, schemas.TestIdentityProviderRequest, schemas.TestIdentityProviderResponse), output: &TestIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestIdentityProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestIdentityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestIdentityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestIdentityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +224,8 @@ func (c *Client) addOperationTestIdentityProviderMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestIdentityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestIdentityProvider",
-	}
 }

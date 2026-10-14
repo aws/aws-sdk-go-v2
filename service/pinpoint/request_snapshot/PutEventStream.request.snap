@@ -1,0 +1,5 @@
+POST /v1/apps/__ApplicationId__/eventstream
+
+Content-Type: application/json
+
+{"DestinationStreamArn":"__DestinationStreamArn__","RoleArn":"__RoleArn__"}

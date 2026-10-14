@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/pipelines/__PipelineName__/executions/__PipelineExecutionId__/cancel
+
+Content-Type: application/json
+
+{"reason":"__Reason__"}

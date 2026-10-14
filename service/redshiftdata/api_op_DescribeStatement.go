@@ -4,13 +4,8 @@ package redshiftdata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,19 +45,11 @@ type DescribeStatementInput struct {
 	// This member is required.
 	Id *string
 
+	// The number of seconds to wait for the SQL statement to complete execution
+	// before returning the description. The maximum value is 30 seconds.
+	WaitTimeSeconds *int32
+
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeStatementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeStatementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeStatementRequest_Id, *v.Id)
-	}
 }
 
 type DescribeStatementOutput struct {
@@ -91,6 +78,11 @@ type DescribeStatementOutput struct {
 	// The error message from the cluster if the SQL statement encountered an error
 	// while running.
 	Error *string
+
+	// The execution mode of the batch request. TRANSACTION indicates all SQL
+	// statements are run as a single transaction. AUTO_COMMIT indicates each SQL
+	// statement is committed individually.
+	ExecutionMode types.ExecutionMode
 
 	// A value that indicates whether the statement has a result set. The result set
 	// can be empty. The value is true for an empty result set. The value is true if
@@ -164,146 +156,29 @@ type DescribeStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeStatementResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeStatementResponse_ClusterIdentifier:
-			v.ClusterIdentifier = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_ClusterIdentifier, v.ClusterIdentifier)
-		case schemas.DescribeStatementResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeStatementResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeStatementResponse_Database:
-			v.Database = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Database, v.Database)
-		case schemas.DescribeStatementResponse_DbUser:
-			v.DbUser = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_DbUser, v.DbUser)
-		case schemas.DescribeStatementResponse_Duration:
-			return d.ReadInt64(schemas.DescribeStatementResponse_Duration, &v.Duration)
-		case schemas.DescribeStatementResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Error, v.Error)
-		case schemas.DescribeStatementResponse_HasResultSet:
-			v.HasResultSet = new(bool)
-			return d.ReadBool(schemas.DescribeStatementResponse_HasResultSet, v.HasResultSet)
-		case schemas.DescribeStatementResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Id, v.Id)
-		case schemas.DescribeStatementResponse_QueryParameters:
-			return deserializeSqlParametersList(d, schemas.DescribeStatementResponse_QueryParameters, &v.QueryParameters)
-		case schemas.DescribeStatementResponse_QueryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_QueryString, v.QueryString)
-		case schemas.DescribeStatementResponse_RedshiftPid:
-			return d.ReadInt64(schemas.DescribeStatementResponse_RedshiftPid, &v.RedshiftPid)
-		case schemas.DescribeStatementResponse_RedshiftQueryId:
-			return d.ReadInt64(schemas.DescribeStatementResponse_RedshiftQueryId, &v.RedshiftQueryId)
-		case schemas.DescribeStatementResponse_ResultFormat:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStatementResponse_ResultFormat, &ev); err != nil {
-				return err
-			}
-			v.ResultFormat = types.ResultFormatString(ev)
-			return nil
-		case schemas.DescribeStatementResponse_ResultRows:
-			return d.ReadInt64(schemas.DescribeStatementResponse_ResultRows, &v.ResultRows)
-		case schemas.DescribeStatementResponse_ResultSize:
-			return d.ReadInt64(schemas.DescribeStatementResponse_ResultSize, &v.ResultSize)
-		case schemas.DescribeStatementResponse_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_SecretArn, v.SecretArn)
-		case schemas.DescribeStatementResponse_SessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_SessionId, v.SessionId)
-		case schemas.DescribeStatementResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStatementResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.StatusString(ev)
-			return nil
-		case schemas.DescribeStatementResponse_SubStatements:
-			return deserializeSubStatementList(d, schemas.DescribeStatementResponse_SubStatements, &v.SubStatements)
-		case schemas.DescribeStatementResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeStatementResponse_UpdatedAt, v.UpdatedAt)
-		case schemas.DescribeStatementResponse_WorkgroupName:
-			v.WorkgroupName = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_WorkgroupName, v.WorkgroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStatement, schemas.DescribeStatementRequest, schemas.DescribeStatementResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStatement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStatement, schemas.DescribeStatementRequest, schemas.DescribeStatementResponse), output: &DescribeStatementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -318,22 +193,8 @@ func (c *Client) addOperationDescribeStatementMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeStatement",
-	}
 }

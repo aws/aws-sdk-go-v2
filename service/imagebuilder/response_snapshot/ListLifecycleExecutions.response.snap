@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"lifecycleExecutions":[{"endTime":946684800,"lifecycleExecutionId":"__LifecycleExecutionId__","lifecyclePolicyArn":"__LifecyclePolicyArn__","resourcesImpactedSummary":{"hasImpactedResources":true},"startTime":946684800,"state":{"reason":"__Reason__","status":"IN_PROGRESS"}},{"endTime":946684800,"lifecycleExecutionId":"__LifecycleExecutionId__","lifecyclePolicyArn":"__LifecyclePolicyArn__","resourcesImpactedSummary":{"hasImpactedResources":true},"startTime":946684800,"state":{"reason":"__Reason__","status":"IN_PROGRESS"}}],"nextToken":"__NextToken__"}

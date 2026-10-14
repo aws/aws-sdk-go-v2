@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // What-if analysis is a scenario modeling technique where you make a hypothetical
@@ -83,6 +82,27 @@ type CreateWhatIfAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatIfAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatIfAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatIfAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.CreateWhatIfAnalysisRequest_ForecastArn, *v.ForecastArn)
+	}
+	serializeTags(s, schemas.CreateWhatIfAnalysisRequest_Tags, v.Tags)
+	if v.TimeSeriesSelector != nil {
+		s.WriteStruct(schemas.CreateWhatIfAnalysisRequest_TimeSeriesSelector)
+		v.TimeSeriesSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WhatIfAnalysisName != nil {
+		s.WriteString(schemas.CreateWhatIfAnalysisRequest_WhatIfAnalysisName, *v.WhatIfAnalysisName)
+	}
+}
+
 type CreateWhatIfAnalysisOutput struct {
 
 	// The Amazon Resource Name (ARN) of the what-if analysis.
@@ -94,77 +114,48 @@ type CreateWhatIfAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatIfAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatIfAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatIfAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.CreateWhatIfAnalysisResponse_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+}
+func (v *CreateWhatIfAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatIfAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatIfAnalysisResponse_WhatIfAnalysisArn:
+			v.WhatIfAnalysisArn = new(string)
+			return d.ReadString(schemas.CreateWhatIfAnalysisResponse_WhatIfAnalysisArn, v.WhatIfAnalysisArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatIfAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatIfAnalysis, schemas.CreateWhatIfAnalysisRequest, schemas.CreateWhatIfAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWhatIfAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatIfAnalysis, schemas.CreateWhatIfAnalysisRequest, schemas.CreateWhatIfAnalysisResponse), output: &CreateWhatIfAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWhatIfAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWhatIfAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWhatIfAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWhatIfAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +170,8 @@ func (c *Client) addOperationCreateWhatIfAnalysisMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWhatIfAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWhatIfAnalysis",
-	}
 }

@@ -4,12 +4,7 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of an existing bot in a Wickr network. This operation
@@ -58,33 +53,6 @@ type UpdateBotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotId != nil {
-		s.WriteString(schemas.UpdateBotRequest_botId, *v.BotId)
-	}
-	if v.Challenge != nil {
-		s.WriteString(schemas.UpdateBotRequest_challenge, *v.Challenge)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateBotRequest_displayName, *v.DisplayName)
-	}
-	if v.GroupId != nil {
-		s.WriteString(schemas.UpdateBotRequest_groupId, *v.GroupId)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.UpdateBotRequest_networkId, *v.NetworkId)
-	}
-	if v.Suspend != nil {
-		s.WriteBool(schemas.UpdateBotRequest_suspend, *v.Suspend)
-	}
-}
-
 type UpdateBotOutput struct {
 
 	// A message indicating the result of the bot update operation.
@@ -96,85 +64,29 @@ type UpdateBotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBotResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UpdateBotResponse_message, v.Message)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBot{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse), output: &UpdateBotOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +101,8 @@ func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBot",
-	}
 }

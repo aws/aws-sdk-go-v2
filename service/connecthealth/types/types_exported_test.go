@@ -14,6 +14,9 @@ func ExampleMedicalScribeInputStream_outputUsage() {
 	case *types.MedicalScribeInputStreamMemberAudioEvent:
 		_ = v.Value // Value is types.MedicalScribeAudioEvent
 
+	case *types.MedicalScribeInputStreamMemberBinaryAudioEvent:
+		_ = v.Value // Value is types.MedicalScribeBinaryAudioEvent
+
 	case *types.MedicalScribeInputStreamMemberConfigurationEvent:
 		_ = v.Value // Value is types.MedicalScribeConfigurationEvent
 
@@ -31,6 +34,7 @@ func ExampleMedicalScribeInputStream_outputUsage() {
 
 var _ *types.MedicalScribeAudioEvent
 var _ *types.MedicalScribeConfigurationEvent
+var _ *types.MedicalScribeBinaryAudioEvent
 var _ *types.MedicalScribeSessionControlEvent
 
 func ExampleMedicalScribeOutputStream_outputUsage() {

@@ -5,16 +5,15 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a time series (data stream). If you delete a time series that's
 // associated with an asset property, the asset property still exists, but the time
-// series will no longer be associated with this asset property.
+// series will no longer be associated with this asset property. You can't delete a
+// time series until all of its data segments have been deleted from session
+// datasets.
 //
 // To identify a time series, do one of the following:
 //
@@ -66,28 +65,10 @@ type DeleteTimeSeriesInput struct {
 	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	PropertyId *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteTimeSeriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.DeleteTimeSeriesRequest_alias, *v.Alias)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.DeleteTimeSeriesRequest_assetId, *v.AssetId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteTimeSeriesRequest_clientToken, *v.ClientToken)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.DeleteTimeSeriesRequest_propertyId, *v.PropertyId)
-	}
 }
 
 type DeleteTimeSeriesOutput struct {
@@ -97,78 +78,23 @@ type DeleteTimeSeriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTimeSeriesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTimeSeriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeries, schemas.DeleteTimeSeriesRequest, nil)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTimeSeries, schemas.DeleteTimeSeriesRequest, nil), output: &DeleteTimeSeriesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTimeSeries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -178,12 +104,6 @@ func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addIdempotencyToken_opDeleteTimeSeriesMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTimeSeries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,12 +116,6 @@ func (c *Client) addOperationDeleteTimeSeriesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,12 +182,4 @@ func (m *idempotencyToken_initializeOpDeleteTimeSeries) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opDeleteTimeSeriesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteTimeSeries{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteTimeSeries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteTimeSeries",
-	}
 }

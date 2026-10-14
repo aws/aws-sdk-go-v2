@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Timestream_20181101.UpdateTable
+
+{"DatabaseName":"__DatabaseName__","MagneticStoreWriteProperties":{"EnableMagneticStoreWrites":true,"MagneticStoreRejectedDataLocation":{"S3Configuration":{"BucketName":"__BucketName__","EncryptionOption":"SSE_S3","KmsKeyId":"__KmsKeyId__","ObjectKeyPrefix":"__ObjectKeyPrefix__"}}},"RetentionProperties":{"MagneticStoreRetentionPeriodInDays":1,"MemoryStoreRetentionPeriodInHours":1},"Schema":{"CompositePartitionKey":[{"EnforcementInRecord":"REQUIRED","Name":"__Name__","Type":"DIMENSION"},{"EnforcementInRecord":"REQUIRED","Name":"__Name__","Type":"DIMENSION"}]},"TableName":"__TableName__"}

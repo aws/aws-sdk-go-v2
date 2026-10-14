@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CognitoStreams":{"RoleArn":"__RoleArn__","StreamName":"__StreamName__","StreamingStatus":"ENABLED"},"IdentityPoolId":"__IdentityPoolId__","PushSync":{"ApplicationArns":["__Member__","__Member__"],"RoleArn":"__RoleArn__"}}

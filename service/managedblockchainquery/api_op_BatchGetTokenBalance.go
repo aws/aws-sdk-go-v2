@@ -4,13 +4,8 @@ package managedblockchainquery
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the token balance for a batch of tokens by using the BatchGetTokenBalance
@@ -42,16 +37,6 @@ type BatchGetTokenBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTokenBalanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetTokenBalanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetTokenBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetTokenBalanceInputList(s, schemas.BatchGetTokenBalanceInput_getTokenBalanceInputs, v.GetTokenBalanceInputs)
-}
-
 type BatchGetTokenBalanceOutput struct {
 
 	// An array of BatchGetTokenBalanceErrorItem objects returned from the request.
@@ -70,86 +55,29 @@ type BatchGetTokenBalanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTokenBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetTokenBalanceOutput_errors:
-			return deserializeBatchGetTokenBalanceErrors(d, schemas.BatchGetTokenBalanceOutput_errors, &v.Errors)
-		case schemas.BatchGetTokenBalanceOutput_tokenBalances:
-			return deserializeBatchGetTokenBalanceOutputList(d, schemas.BatchGetTokenBalanceOutput_tokenBalances, &v.TokenBalances)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetTokenBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTokenBalance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTokenBalance, schemas.BatchGetTokenBalanceInput, schemas.BatchGetTokenBalanceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTokenBalance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTokenBalance, schemas.BatchGetTokenBalanceInput, schemas.BatchGetTokenBalanceOutput), output: &BatchGetTokenBalanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetTokenBalance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetTokenBalanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetTokenBalance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +92,8 @@ func (c *Client) addOperationBatchGetTokenBalanceMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetTokenBalance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetTokenBalance",
-	}
 }

@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permission to create a connectorV2 based on input parameters.
@@ -55,6 +55,29 @@ type CreateConnectorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_Description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_Name, *v.Name)
+	}
+	serializeProviderConfiguration(s, schemas.CreateConnectorV2Request_Provider, v.Provider)
+	serializeTagMap(s, schemas.CreateConnectorV2Request_Tags, v.Tags)
+}
+
 type CreateConnectorV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the connectorV2.
@@ -73,71 +96,83 @@ type CreateConnectorV2Output struct {
 	// The current status of the connectorV2.
 	ConnectorStatus types.ConnectorStatus
 
+	// The enablement status of the connector after creation.
+	EnablementStatus types.EnablementStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthUrl != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_AuthUrl, *v.AuthUrl)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorId, *v.ConnectorId)
+	}
+	if v.ConnectorStatus != "" {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorStatus, string(v.ConnectorStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.CreateConnectorV2Response_EnablementStatus, string(v.EnablementStatus))
+	}
+}
+func (v *CreateConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorV2Response_AuthUrl:
+			v.AuthUrl = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_AuthUrl, v.AuthUrl)
+		case schemas.CreateConnectorV2Response_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_ConnectorArn, v.ConnectorArn)
+		case schemas.CreateConnectorV2Response_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_ConnectorId, v.ConnectorId)
+		case schemas.CreateConnectorV2Response_ConnectorStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorV2Response_ConnectorStatus, &ev); err != nil {
+				return err
+			}
+			v.ConnectorStatus = types.ConnectorStatus(ev)
+			return nil
+		case schemas.CreateConnectorV2Response_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorV2Response_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.EnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorV2, schemas.CreateConnectorV2Request, schemas.CreateConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorV2, schemas.CreateConnectorV2Request, schemas.CreateConnectorV2Response), output: &CreateConnectorV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnectorV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -147,12 +182,6 @@ func (c *Client) addOperationCreateConnectorV2Middlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateConnectorV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnectorV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +194,6 @@ func (c *Client) addOperationCreateConnectorV2Middlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -210,12 +233,4 @@ func (m *idempotencyToken_initializeOpCreateConnectorV2) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateConnectorV2Middleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateConnectorV2{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateConnectorV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConnectorV2",
-	}
 }

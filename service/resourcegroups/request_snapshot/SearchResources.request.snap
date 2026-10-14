@@ -1,0 +1,5 @@
+POST /resources/search
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"}}

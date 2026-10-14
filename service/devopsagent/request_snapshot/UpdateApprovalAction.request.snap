@@ -1,0 +1,5 @@
+POST /agents/agent-space/__AgentSpaceId__/approvals/__ApprovalId__/update-action
+
+Content-Type: application/json
+
+{"action":"APPROVED","finalPattern":{"argumentPins":{"key0":"__Value__"},"tool":"__Tool__"},"reason":"__Reason__","singleUse":true,"ttlSeconds":1}

@@ -1,0 +1,3 @@
+GET /asset-models/__AssetModelId__/composite-models/__AssetModelCompositeModelId__?assetModelVersion=__AssetModelVersion__
+
+

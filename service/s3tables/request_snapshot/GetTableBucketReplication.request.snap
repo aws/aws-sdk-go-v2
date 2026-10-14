@@ -1,0 +1,3 @@
+GET /table-bucket-replication?tableBucketARN=__TableBucketARN__
+
+

@@ -5,10 +5,10 @@ package workspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified WorkSpaces.
@@ -66,6 +66,34 @@ type DescribeWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.DescribeWorkspacesRequest_BundleId, *v.BundleId)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeWorkspacesRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeWorkspacesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesRequest_NextToken, *v.NextToken)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DescribeWorkspacesRequest_UserName, *v.UserName)
+	}
+	serializeWorkspaceIdList(s, schemas.DescribeWorkspacesRequest_WorkspaceIds, v.WorkspaceIds)
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.DescribeWorkspacesRequest_WorkspaceName, *v.WorkspaceName)
+	}
+}
+
 type DescribeWorkspacesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -84,74 +112,48 @@ type DescribeWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesResult_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceList(s, schemas.DescribeWorkspacesResult_Workspaces, v.Workspaces)
+}
+func (v *DescribeWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspacesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWorkspacesResult_NextToken, v.NextToken)
+		case schemas.DescribeWorkspacesResult_Workspaces:
+			return deserializeWorkspaceList(d, schemas.DescribeWorkspacesResult_Workspaces, &v.Workspaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaces, schemas.DescribeWorkspacesRequest, schemas.DescribeWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaces, schemas.DescribeWorkspacesRequest, schemas.DescribeWorkspacesResult), output: &DescribeWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkspaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +166,6 @@ func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +267,3 @@ type DescribeWorkspacesAPIClient interface {
 }
 
 var _ DescribeWorkspacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkspaces",
-	}
-}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.StartApplication
+
+{"ApplicationName":"__ApplicationName__","InputConfigurations":[{"Id":"__Id__","InputStartingPositionConfiguration":{"InputStartingPosition":"NOW"}},{"Id":"__Id__","InputStartingPositionConfiguration":{"InputStartingPosition":"NOW"}}]}

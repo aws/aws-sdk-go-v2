@@ -4,13 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified group metadata and attributes in the specified identity
@@ -34,10 +31,18 @@ type UpdateGroupInput struct {
 
 	// The identifier for a group in the identity store.
 	//
+	// You can specify the group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupId *string
 
 	// The globally unique identifier for the identity store.
+	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
 	//
 	// This member is required.
 	IdentityStoreId *string
@@ -50,6 +55,13 @@ type UpdateGroupInput struct {
 	//
 	// This member is required.
 	Operations []types.AttributeOperation
+
+	// The expected current revision of the group. When you provide this value, the
+	// update is applied only if it matches the current revision of the group in the
+	// identity store, which prevents you from overwriting concurrent changes. If the
+	// value doesn't match, the operation fails with a ConflictException . If you don't
+	// provide this value, the update is applied unconditionally.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -68,24 +80,34 @@ func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.UpdateGroupRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeAttributeOperations(s, schemas.UpdateGroupRequest_Operations, v.Operations)
-}
-func (v *UpdateGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateGroupRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateGroupRequest_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.UpdateGroupRequest_GroupId, v.GroupId)
-		case schemas.UpdateGroupRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.UpdateGroupRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.UpdateGroupRequest_Operations:
-			return deserializeAttributeOperations(d, schemas.UpdateGroupRequest_Operations, &v.Operations)
-		}
-		return nil
-	})
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateGroupRequest_Revision, *v.Revision)
+	}
 }
 
 type UpdateGroupOutput struct {
+
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
+
+	// The identifier for a group in the identity store.
+	//
+	// This member is required.
+	GroupId *string
+
+	// The globally unique identifier for the identity store.
+	//
+	// This member is required.
+	IdentityStoreId *string
+
+	// The revision of the group after the requested update is applied.
+	//
+	// This member is required.
+	Revision *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -99,83 +121,59 @@ func (v *UpdateGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.UpdateGroupResponse_GroupArn, *v.GroupArn)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.UpdateGroupResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateGroupResponse_Revision, *v.Revision)
+	}
 }
 func (v *UpdateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateGroupResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateGroupResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.UpdateGroupResponse_GroupArn, v.GroupArn)
+		case schemas.UpdateGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.UpdateGroupResponse_GroupId, v.GroupId)
+		case schemas.UpdateGroupResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.UpdateGroupResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.UpdateGroupResponse_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.UpdateGroupResponse_Revision, v.Revision)
 		}
 		return nil
 	})
 }
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse), output: &UpdateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +188,8 @@ func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGroup",
-	}
 }

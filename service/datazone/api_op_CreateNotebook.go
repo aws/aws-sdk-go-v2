@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -67,33 +63,10 @@ type CreateNotebookInput struct {
 	// 1024 characters.
 	Parameters map[string]string
 
+	// The type of the notebook.
+	Type types.NotebookType
+
 	noSmithyDocumentSerde
-}
-
-func (v *CreateNotebookInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateNotebookInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateNotebookInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateNotebookInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateNotebookInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeMetadata(s, schemas.CreateNotebookInput_metadata, v.Metadata)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateNotebookInput_name, *v.Name)
-	}
-	if v.OwningProjectIdentifier != nil {
-		s.WriteString(schemas.CreateNotebookInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
-	}
-	serializeParameters(s, schemas.CreateNotebookInput_parameters, v.Parameters)
 }
 
 type CreateNotebookOutput struct {
@@ -146,6 +119,9 @@ type CreateNotebookOutput struct {
 	// The error details if the notebook creation failed.
 	Error *types.NotebookError
 
+	// The Git metadata associated with the notebook.
+	GitMetadata *types.GitMetadata
+
 	// The timestamp of when the notebook lock expires.
 	LockExpiresAt *time.Time
 
@@ -161,6 +137,9 @@ type CreateNotebookOutput struct {
 	// The sensitive parameters of the notebook.
 	Parameters map[string]string
 
+	// The type of the notebook.
+	Type types.NotebookType
+
 	// The timestamp of when the notebook was last updated.
 	UpdatedAt *time.Time
 
@@ -173,128 +152,23 @@ type CreateNotebookOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNotebookOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateNotebookOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateNotebookOutput_cellOrder:
-			return deserializeCellOrder(d, schemas.CreateNotebookOutput_cellOrder, &v.CellOrder)
-		case schemas.CreateNotebookOutput_computeId:
-			v.ComputeId = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_computeId, v.ComputeId)
-		case schemas.CreateNotebookOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateNotebookOutput_createdAt, v.CreatedAt)
-		case schemas.CreateNotebookOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_createdBy, v.CreatedBy)
-		case schemas.CreateNotebookOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_description, v.Description)
-		case schemas.CreateNotebookOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_domainId, v.DomainId)
-		case schemas.CreateNotebookOutput_environmentConfiguration:
-			v.EnvironmentConfiguration = &types.EnvironmentConfig{}
-			return v.EnvironmentConfiguration.Deserialize(d)
-		case schemas.CreateNotebookOutput_error:
-			v.Error = &types.NotebookError{}
-			return v.Error.Deserialize(d)
-		case schemas.CreateNotebookOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_id, v.Id)
-		case schemas.CreateNotebookOutput_lockExpiresAt:
-			v.LockExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.CreateNotebookOutput_lockExpiresAt, v.LockExpiresAt)
-		case schemas.CreateNotebookOutput_lockedAt:
-			v.LockedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateNotebookOutput_lockedAt, v.LockedAt)
-		case schemas.CreateNotebookOutput_lockedBy:
-			v.LockedBy = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_lockedBy, v.LockedBy)
-		case schemas.CreateNotebookOutput_metadata:
-			return deserializeMetadata(d, schemas.CreateNotebookOutput_metadata, &v.Metadata)
-		case schemas.CreateNotebookOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_name, v.Name)
-		case schemas.CreateNotebookOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_owningProjectId, v.OwningProjectId)
-		case schemas.CreateNotebookOutput_parameters:
-			return deserializeParameters(d, schemas.CreateNotebookOutput_parameters, &v.Parameters)
-		case schemas.CreateNotebookOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateNotebookOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotebookStatus(ev)
-			return nil
-		case schemas.CreateNotebookOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateNotebookOutput_updatedAt, v.UpdatedAt)
-		case schemas.CreateNotebookOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.CreateNotebookOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateNotebookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNotebook{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebook, schemas.CreateNotebookInput, schemas.CreateNotebookOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNotebook{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebook, schemas.CreateNotebookInput, schemas.CreateNotebookOutput), output: &CreateNotebookOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNotebook"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -304,12 +178,6 @@ func (c *Client) addOperationCreateNotebookMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateNotebookValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotebook(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -322,12 +190,6 @@ func (c *Client) addOperationCreateNotebookMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -367,12 +229,4 @@ func (m *idempotencyToken_initializeOpCreateNotebook) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateNotebookMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNotebook{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateNotebook(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNotebook",
-	}
 }

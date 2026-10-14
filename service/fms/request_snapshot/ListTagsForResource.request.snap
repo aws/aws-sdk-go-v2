@@ -1,0 +1,7 @@
+POST /service/AWSFMS_20180101/operation/ListTagsForResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kResourceArno__ResourceArn__ÿ

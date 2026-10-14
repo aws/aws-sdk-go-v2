@@ -1,0 +1,5 @@
+POST /InsightImpactGraph
+
+Content-Type: application/json
+
+{"EndTime":946684800,"InsightId":"__InsightId__","NextToken":"__NextToken__","StartTime":946684800}

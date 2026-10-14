@@ -1,0 +1,5 @@
+POST /GetRecoveryPlanStep
+
+Content-Type: application/json
+
+{"recoveryPlanStepArn":"__RecoveryPlanStepArn__"}

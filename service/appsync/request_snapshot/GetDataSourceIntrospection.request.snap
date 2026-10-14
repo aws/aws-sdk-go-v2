@@ -1,0 +1,3 @@
+GET /v1/datasources/introspections/__IntrospectionId__?includeModelsSDL=true&maxResults=1&nextToken=__NextToken__
+
+

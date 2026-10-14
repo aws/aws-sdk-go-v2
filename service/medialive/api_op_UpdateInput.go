@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an input.
@@ -85,6 +84,50 @@ type UpdateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInputDestinationRequest(s, schemas.UpdateInputRequest_Destinations, v.Destinations)
+	serialize__listOfInputDeviceRequest(s, schemas.UpdateInputRequest_InputDevices, v.InputDevices)
+	if v.InputId != nil {
+		s.WriteString(schemas.UpdateInputRequest_InputId, *v.InputId)
+	}
+	serialize__listOf__string(s, schemas.UpdateInputRequest_InputSecurityGroups, v.InputSecurityGroups)
+	serialize__listOfMediaConnectFlowRequest(s, schemas.UpdateInputRequest_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MulticastSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_MulticastSettings)
+		v.MulticastSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInputRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateInputRequest_RoleArn, *v.RoleArn)
+	}
+	serializeInputSdiSources(s, schemas.UpdateInputRequest_SdiSources, v.SdiSources)
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_Smpte2110ReceiverGroupSettings)
+		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputSourceRequest(s, schemas.UpdateInputRequest_Sources, v.Sources)
+	if v.SpecialRouterSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_SpecialRouterSettings)
+		v.SpecialRouterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SrtSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_SrtSettings)
+		v.SrtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Placeholder documentation for UpdateInputResponse
 type UpdateInputOutput struct {
 
@@ -97,77 +140,50 @@ type UpdateInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.UpdateInputResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInputResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInput, schemas.UpdateInputRequest, schemas.UpdateInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInput, schemas.UpdateInputRequest, schemas.UpdateInputResponse), output: &UpdateInputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateInputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +198,8 @@ func (c *Client) addOperationUpdateInputMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateInput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateInput",
-	}
 }

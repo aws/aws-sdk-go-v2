@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a block storage disk from a manual or automatic snapshot of a disk. The
@@ -125,6 +124,38 @@ type CreateDiskFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskFromSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddOnRequestList(s, schemas.CreateDiskFromSnapshotRequest_addOns, v.AddOns)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateDiskFromSnapshotRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.DiskName != nil {
+		s.WriteString(schemas.CreateDiskFromSnapshotRequest_diskName, *v.DiskName)
+	}
+	if v.DiskSnapshotName != nil {
+		s.WriteString(schemas.CreateDiskFromSnapshotRequest_diskSnapshotName, *v.DiskSnapshotName)
+	}
+	if v.RestoreDate != nil {
+		s.WriteString(schemas.CreateDiskFromSnapshotRequest_restoreDate, *v.RestoreDate)
+	}
+	if v.SizeInGb != nil {
+		s.WriteInt32(schemas.CreateDiskFromSnapshotRequest_sizeInGb, *v.SizeInGb)
+	}
+	if v.SourceDiskName != nil {
+		s.WriteString(schemas.CreateDiskFromSnapshotRequest_sourceDiskName, *v.SourceDiskName)
+	}
+	serializeTagList(s, schemas.CreateDiskFromSnapshotRequest_tags, v.Tags)
+	if v.UseLatestRestorableAutoSnapshot != nil {
+		s.WriteBool(schemas.CreateDiskFromSnapshotRequest_useLatestRestorableAutoSnapshot, *v.UseLatestRestorableAutoSnapshot)
+	}
+}
+
 type CreateDiskFromSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -138,77 +169,45 @@ type CreateDiskFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskFromSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateDiskFromSnapshotResult_operations, v.Operations)
+}
+func (v *CreateDiskFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDiskFromSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDiskFromSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.CreateDiskFromSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDiskFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiskFromSnapshot, schemas.CreateDiskFromSnapshotRequest, schemas.CreateDiskFromSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDiskFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiskFromSnapshot, schemas.CreateDiskFromSnapshotRequest, schemas.CreateDiskFromSnapshotResult), output: &CreateDiskFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDiskFromSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDiskFromSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDiskFromSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDiskFromSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,22 +222,8 @@ func (c *Client) addOperationCreateDiskFromSnapshotMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDiskFromSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDiskFromSnapshot",
-	}
 }

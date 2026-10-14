@@ -33,6 +33,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
+    public static final GoDependency INTERNAL_TIMEOUTS = aws("internal/timeouts");
     public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
     public static final GoDependency SERVICE_INTERNAL_EVENTSTREAM = awsModuleDep("aws/protocol/eventstream",
             null, Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstream");

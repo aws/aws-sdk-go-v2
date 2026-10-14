@@ -1,0 +1,5 @@
+POST /metadata/v0/jobs/list-jobs
+
+Content-Type: application/json
+
+{"Filter":{"JobStatus":"Pending"},"MaxResults":1,"NextToken":"__NextToken__"}

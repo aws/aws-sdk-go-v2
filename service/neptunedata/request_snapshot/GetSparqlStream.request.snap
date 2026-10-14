@@ -1,0 +1,4 @@
+GET /sparql/stream?commitNum=1&iteratorType=AT_SEQUENCE_NUMBER&limit=1&opNum=1
+
+Accept-Encoding: gzip
+

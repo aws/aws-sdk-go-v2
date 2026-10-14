@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -45,6 +47,75 @@ type AnalysisReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalysisReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.AnalysisReport_AnalysisReportId, *v.AnalysisReportId)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.AnalysisReport_CreateTime, *v.CreateTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AnalysisReport_EndTime, *v.EndTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AnalysisReport_Identifier, *v.Identifier)
+	}
+	serializeInsightList(s, schemas.AnalysisReport_Insights, v.Insights)
+	if v.ServiceType != "" {
+		s.WriteString(schemas.AnalysisReport_ServiceType, string(v.ServiceType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AnalysisReport_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AnalysisReport_Status, string(v.Status))
+	}
+}
+func (v *AnalysisReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisReport_AnalysisReportId:
+			v.AnalysisReportId = new(string)
+			return d.ReadString(schemas.AnalysisReport_AnalysisReportId, v.AnalysisReportId)
+		case schemas.AnalysisReport_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReport_CreateTime, v.CreateTime)
+		case schemas.AnalysisReport_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReport_EndTime, v.EndTime)
+		case schemas.AnalysisReport_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AnalysisReport_Identifier, v.Identifier)
+		case schemas.AnalysisReport_Insights:
+			return deserializeInsightList(d, schemas.AnalysisReport_Insights, &v.Insights)
+		case schemas.AnalysisReport_ServiceType:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisReport_ServiceType, &ev); err != nil {
+				return err
+			}
+			v.ServiceType = ServiceType(ev)
+			return nil
+		case schemas.AnalysisReport_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReport_StartTime, v.StartTime)
+		case schemas.AnalysisReport_Status:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisReport_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AnalysisStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Retrieves the details of the performance analysis report.
 type AnalysisReportSummary struct {
 
@@ -69,6 +140,59 @@ type AnalysisReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalysisReportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisReportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.AnalysisReportSummary_AnalysisReportId, *v.AnalysisReportId)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.AnalysisReportSummary_CreateTime, *v.CreateTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AnalysisReportSummary_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AnalysisReportSummary_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AnalysisReportSummary_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.AnalysisReportSummary_Tags, v.Tags)
+}
+func (v *AnalysisReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisReportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisReportSummary_AnalysisReportId:
+			v.AnalysisReportId = new(string)
+			return d.ReadString(schemas.AnalysisReportSummary_AnalysisReportId, v.AnalysisReportId)
+		case schemas.AnalysisReportSummary_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReportSummary_CreateTime, v.CreateTime)
+		case schemas.AnalysisReportSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReportSummary_EndTime, v.EndTime)
+		case schemas.AnalysisReportSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AnalysisReportSummary_StartTime, v.StartTime)
+		case schemas.AnalysisReportSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisReportSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AnalysisStatus(ev)
+			return nil
+		case schemas.AnalysisReportSummary_Tags:
+			return deserializeTagList(d, schemas.AnalysisReportSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // List of data objects which provide details about source metrics. This field can
 // be used to determine the PI metric to render for the insight. This data type
 // also includes static values for the metrics for the Insight that were calculated
@@ -80,6 +204,30 @@ type Data struct {
 	PerformanceInsightsMetric *PerformanceInsightsMetric
 
 	noSmithyDocumentSerde
+}
+
+func (v *Data) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Data)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Data) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PerformanceInsightsMetric != nil {
+		s.WriteStruct(schemas.Data_PerformanceInsightsMetric)
+		v.PerformanceInsightsMetric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Data) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Data, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Data_PerformanceInsightsMetric:
+			v.PerformanceInsightsMetric = &PerformanceInsightsMetric{}
+			return v.PerformanceInsightsMetric.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A timestamp, and a single numerical value, which together represent a
@@ -99,6 +247,34 @@ type DataPoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.DataPoint_Timestamp, *v.Timestamp)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.DataPoint_Value, *v.Value)
+	}
+}
+func (v *DataPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataPoint_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.DataPoint_Timestamp, v.Timestamp)
+		case schemas.DataPoint_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.DataPoint_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The information about a dimension.
 type DimensionDetail struct {
 
@@ -106,6 +282,28 @@ type DimensionDetail struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DimensionDetail_Identifier, *v.Identifier)
+	}
+}
+func (v *DimensionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionDetail_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.DimensionDetail_Identifier, v.Identifier)
+		}
+		return nil
+	})
 }
 
 // A logical grouping of Performance Insights metrics for a related subject area.
@@ -319,6 +517,37 @@ type DimensionGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSanitizedStringList(s, schemas.DimensionGroup_Dimensions, v.Dimensions)
+	if v.Group != nil {
+		s.WriteString(schemas.DimensionGroup_Group, *v.Group)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DimensionGroup_Limit, *v.Limit)
+	}
+}
+func (v *DimensionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionGroup_Dimensions:
+			return deserializeSanitizedStringList(d, schemas.DimensionGroup_Dimensions, &v.Dimensions)
+		case schemas.DimensionGroup_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.DimensionGroup_Group, v.Group)
+		case schemas.DimensionGroup_Limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.DimensionGroup_Limit, v.Limit)
+		}
+		return nil
+	})
+}
+
 // Information about dimensions within a dimension group.
 type DimensionGroupDetail struct {
 
@@ -329,6 +558,31 @@ type DimensionGroupDetail struct {
 	Group *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionDetailList(s, schemas.DimensionGroupDetail_Dimensions, v.Dimensions)
+	if v.Group != nil {
+		s.WriteString(schemas.DimensionGroupDetail_Group, *v.Group)
+	}
+}
+func (v *DimensionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionGroupDetail_Dimensions:
+			return deserializeDimensionDetailList(d, schemas.DimensionGroupDetail_Dimensions, &v.Dimensions)
+		case schemas.DimensionGroupDetail_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.DimensionGroupDetail_Group, v.Group)
+		}
+		return nil
+	})
 }
 
 // An object that includes the requested dimension key values and aggregated
@@ -348,6 +602,37 @@ type DimensionKeyDescription struct {
 	Total *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionKeyDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionKeyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionKeyDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalMetricsMap(s, schemas.DimensionKeyDescription_AdditionalMetrics, v.AdditionalMetrics)
+	serializeDimensionMap(s, schemas.DimensionKeyDescription_Dimensions, v.Dimensions)
+	serializeMetricValuesList(s, schemas.DimensionKeyDescription_Partitions, v.Partitions)
+	if v.Total != nil {
+		s.WriteFloat64(schemas.DimensionKeyDescription_Total, *v.Total)
+	}
+}
+func (v *DimensionKeyDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionKeyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionKeyDescription_AdditionalMetrics:
+			return deserializeAdditionalMetricsMap(d, schemas.DimensionKeyDescription_AdditionalMetrics, &v.AdditionalMetrics)
+		case schemas.DimensionKeyDescription_Dimensions:
+			return deserializeDimensionMap(d, schemas.DimensionKeyDescription_Dimensions, &v.Dimensions)
+		case schemas.DimensionKeyDescription_Partitions:
+			return deserializeMetricValuesList(d, schemas.DimensionKeyDescription_Partitions, &v.Partitions)
+		case schemas.DimensionKeyDescription_Total:
+			v.Total = new(float64)
+			return d.ReadFloat64(schemas.DimensionKeyDescription_Total, v.Total)
+		}
+		return nil
+	})
 }
 
 // An object that describes the details for a specified dimension.
@@ -383,6 +668,44 @@ type DimensionKeyDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionKeyDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionKeyDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionKeyDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimension != nil {
+		s.WriteString(schemas.DimensionKeyDetail_Dimension, *v.Dimension)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DimensionKeyDetail_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DimensionKeyDetail_Value, *v.Value)
+	}
+}
+func (v *DimensionKeyDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionKeyDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionKeyDetail_Dimension:
+			v.Dimension = new(string)
+			return d.ReadString(schemas.DimensionKeyDetail_Dimension, v.Dimension)
+		case schemas.DimensionKeyDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.DimensionKeyDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DetailStatus(ev)
+			return nil
+		case schemas.DimensionKeyDetail_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DimensionKeyDetail_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The metadata for a feature. For example, the metadata might indicate that a
 // feature is turned on or off on a specific DB instance.
 type FeatureMetadata struct {
@@ -406,6 +729,32 @@ type FeatureMetadata struct {
 	Status FeatureStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeatureMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.FeatureMetadata_Status, string(v.Status))
+	}
+}
+func (v *FeatureMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.FeatureMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FeatureStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Retrieves the list of performance issues which are identified.
@@ -455,6 +804,84 @@ type Insight struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Insight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Insight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Insight) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataList(s, schemas.Insight_BaselineData, v.BaselineData)
+	if v.Context != "" {
+		s.WriteString(schemas.Insight_Context, string(v.Context))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Insight_Description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Insight_EndTime, *v.EndTime)
+	}
+	serializeDataList(s, schemas.Insight_InsightData, v.InsightData)
+	if v.InsightId != nil {
+		s.WriteString(schemas.Insight_InsightId, *v.InsightId)
+	}
+	if v.InsightType != nil {
+		s.WriteString(schemas.Insight_InsightType, *v.InsightType)
+	}
+	serializeRecommendationList(s, schemas.Insight_Recommendations, v.Recommendations)
+	if v.Severity != "" {
+		s.WriteString(schemas.Insight_Severity, string(v.Severity))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Insight_StartTime, *v.StartTime)
+	}
+	serializeInsightList(s, schemas.Insight_SupportingInsights, v.SupportingInsights)
+}
+func (v *Insight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Insight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Insight_BaselineData:
+			return deserializeDataList(d, schemas.Insight_BaselineData, &v.BaselineData)
+		case schemas.Insight_Context:
+			var ev string
+			if err := d.ReadString(schemas.Insight_Context, &ev); err != nil {
+				return err
+			}
+			v.Context = ContextType(ev)
+			return nil
+		case schemas.Insight_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Insight_Description, v.Description)
+		case schemas.Insight_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Insight_EndTime, v.EndTime)
+		case schemas.Insight_InsightData:
+			return deserializeDataList(d, schemas.Insight_InsightData, &v.InsightData)
+		case schemas.Insight_InsightId:
+			v.InsightId = new(string)
+			return d.ReadString(schemas.Insight_InsightId, v.InsightId)
+		case schemas.Insight_InsightType:
+			v.InsightType = new(string)
+			return d.ReadString(schemas.Insight_InsightType, v.InsightType)
+		case schemas.Insight_Recommendations:
+			return deserializeRecommendationList(d, schemas.Insight_Recommendations, &v.Recommendations)
+		case schemas.Insight_Severity:
+			var ev string
+			if err := d.ReadString(schemas.Insight_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		case schemas.Insight_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Insight_StartTime, v.StartTime)
+		case schemas.Insight_SupportingInsights:
+			return deserializeInsightList(d, schemas.Insight_SupportingInsights, &v.SupportingInsights)
+		}
+		return nil
+	})
+}
+
 // The available dimension information for a metric type.
 type MetricDimensionGroups struct {
 
@@ -465,6 +892,31 @@ type MetricDimensionGroups struct {
 	Metric *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricDimensionGroups) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDimensionGroups)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDimensionGroups) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionGroupDetailList(s, schemas.MetricDimensionGroups_Groups, v.Groups)
+	if v.Metric != nil {
+		s.WriteString(schemas.MetricDimensionGroups_Metric, *v.Metric)
+	}
+}
+func (v *MetricDimensionGroups) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDimensionGroups, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDimensionGroups_Groups:
+			return deserializeDimensionGroupDetailList(d, schemas.MetricDimensionGroups_Groups, &v.Groups)
+		case schemas.MetricDimensionGroups_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.MetricDimensionGroups_Metric, v.Metric)
+		}
+		return nil
+	})
 }
 
 // A time-ordered series of data points, corresponding to a dimension of a
@@ -479,6 +931,33 @@ type MetricKeyDataPoints struct {
 	Key *ResponseResourceMetricKey
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricKeyDataPoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricKeyDataPoints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricKeyDataPoints) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataPointsList(s, schemas.MetricKeyDataPoints_DataPoints, v.DataPoints)
+	if v.Key != nil {
+		s.WriteStruct(schemas.MetricKeyDataPoints_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MetricKeyDataPoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricKeyDataPoints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricKeyDataPoints_DataPoints:
+			return deserializeDataPointsList(d, schemas.MetricKeyDataPoints_DataPoints, &v.DataPoints)
+		case schemas.MetricKeyDataPoints_Key:
+			v.Key = &ResponseResourceMetricKey{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A single query to be processed. You must provide the metric to query and append
@@ -537,6 +1016,39 @@ type MetricQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricQueryFilterMap(s, schemas.MetricQuery_Filter, v.Filter)
+	if v.GroupBy != nil {
+		s.WriteStruct(schemas.MetricQuery_GroupBy)
+		v.GroupBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Metric != nil {
+		s.WriteString(schemas.MetricQuery_Metric, *v.Metric)
+	}
+}
+func (v *MetricQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricQuery_Filter:
+			return deserializeMetricQueryFilterMap(d, schemas.MetricQuery_Filter, &v.Filter)
+		case schemas.MetricQuery_GroupBy:
+			v.GroupBy = &DimensionGroup{}
+			return v.GroupBy.Deserialize(d)
+		case schemas.MetricQuery_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.MetricQuery_Metric, v.Metric)
+		}
+		return nil
+	})
+}
+
 // This data type helps to determine Performance Insights metric to render for the
 // insight.
 type PerformanceInsightsMetric struct {
@@ -559,6 +1071,46 @@ type PerformanceInsightsMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PerformanceInsightsMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceInsightsMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceInsightsMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Dimensions, v.Dimensions)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PerformanceInsightsMetric_DisplayName, *v.DisplayName)
+	}
+	serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Filter, v.Filter)
+	if v.Metric != nil {
+		s.WriteString(schemas.PerformanceInsightsMetric_Metric, *v.Metric)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.PerformanceInsightsMetric_Value, *v.Value)
+	}
+}
+func (v *PerformanceInsightsMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceInsightsMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceInsightsMetric_Dimensions:
+			return deserializeDescriptiveMap(d, schemas.PerformanceInsightsMetric_Dimensions, &v.Dimensions)
+		case schemas.PerformanceInsightsMetric_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.PerformanceInsightsMetric_DisplayName, v.DisplayName)
+		case schemas.PerformanceInsightsMetric_Filter:
+			return deserializeDescriptiveMap(d, schemas.PerformanceInsightsMetric_Filter, &v.Filter)
+		case schemas.PerformanceInsightsMetric_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.PerformanceInsightsMetric_Metric, v.Metric)
+		case schemas.PerformanceInsightsMetric_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.PerformanceInsightsMetric_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The list of recommendations for the insight.
 type Recommendation struct {
 
@@ -577,6 +1129,40 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationDescription != nil {
+		s.WriteString(schemas.Recommendation_RecommendationDescription, *v.RecommendationDescription)
+	}
+	if v.RecommendationDetails != nil {
+		s.WriteString(schemas.Recommendation_RecommendationDetails, *v.RecommendationDetails)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.Recommendation_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_RecommendationDescription:
+			v.RecommendationDescription = new(string)
+			return d.ReadString(schemas.Recommendation_RecommendationDescription, v.RecommendationDescription)
+		case schemas.Recommendation_RecommendationDetails:
+			v.RecommendationDetails = new(string)
+			return d.ReadString(schemas.Recommendation_RecommendationDetails, v.RecommendationDetails)
+		case schemas.Recommendation_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.Recommendation_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
+
 // If PartitionBy was specified in a DescribeDimensionKeys request, the dimensions
 // are returned in an array. Each element in the array specifies one dimension.
 type ResponsePartitionKey struct {
@@ -587,6 +1173,25 @@ type ResponsePartitionKey struct {
 	Dimensions map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResponsePartitionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponsePartitionKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponsePartitionKey) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionMap(s, schemas.ResponsePartitionKey_Dimensions, v.Dimensions)
+}
+func (v *ResponsePartitionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponsePartitionKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponsePartitionKey_Dimensions:
+			return deserializeDimensionMap(d, schemas.ResponsePartitionKey_Dimensions, &v.Dimensions)
+		}
+		return nil
+	})
 }
 
 // An object that contains the full name, description, and unit of a metric.
@@ -602,6 +1207,40 @@ type ResponseResourceMetric struct {
 	Unit *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResponseResourceMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseResourceMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseResourceMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ResponseResourceMetric_Description, *v.Description)
+	}
+	if v.Metric != nil {
+		s.WriteString(schemas.ResponseResourceMetric_Metric, *v.Metric)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.ResponseResourceMetric_Unit, *v.Unit)
+	}
+}
+func (v *ResponseResourceMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseResourceMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseResourceMetric_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ResponseResourceMetric_Description, v.Description)
+		case schemas.ResponseResourceMetric_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.ResponseResourceMetric_Metric, v.Metric)
+		case schemas.ResponseResourceMetric_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.ResponseResourceMetric_Unit, v.Unit)
+		}
+		return nil
+	})
 }
 
 // An object describing a Performance Insights metric and one or more dimensions
@@ -640,6 +1279,31 @@ type ResponseResourceMetricKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseResourceMetricKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseResourceMetricKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseResourceMetricKey) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionMap(s, schemas.ResponseResourceMetricKey_Dimensions, v.Dimensions)
+	if v.Metric != nil {
+		s.WriteString(schemas.ResponseResourceMetricKey_Metric, *v.Metric)
+	}
+}
+func (v *ResponseResourceMetricKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseResourceMetricKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseResourceMetricKey_Dimensions:
+			return deserializeDimensionMap(d, schemas.ResponseResourceMetricKey_Dimensions, &v.Dimensions)
+		case schemas.ResponseResourceMetricKey_Metric:
+			v.Metric = new(string)
+			return d.ReadString(schemas.ResponseResourceMetricKey_Metric, v.Metric)
+		}
+		return nil
+	})
+}
+
 // Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
 type Tag struct {
 
@@ -662,6 +1326,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

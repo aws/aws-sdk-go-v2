@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Activates, deactivates Amazon Inspector deep inspection, or updates custom
@@ -45,6 +44,19 @@ type UpdateEc2DeepInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEc2DeepInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEc2DeepInspectionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEc2DeepInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivateDeepInspection != nil {
+		s.WriteBool(schemas.UpdateEc2DeepInspectionConfigurationRequest_activateDeepInspection, *v.ActivateDeepInspection)
+	}
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationRequest_packagePaths, v.PackagePaths)
+}
+
 type UpdateEc2DeepInspectionConfigurationOutput struct {
 
 	// An error message explaining why new Amazon Inspector deep inspection custom
@@ -66,74 +78,61 @@ type UpdateEc2DeepInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEc2DeepInspectionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEc2DeepInspectionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEc2DeepInspectionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage, *v.ErrorMessage)
+	}
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
+	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateEc2DeepInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEc2DeepInspectionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage, v.ErrorMessage)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths:
+			return deserializePathList(d, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, &v.OrgPackagePaths)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths:
+			return deserializePathList(d, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, &v.PackagePaths)
+		case schemas.UpdateEc2DeepInspectionConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEc2DeepInspectionConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Ec2DeepInspectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEc2DeepInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEc2DeepInspectionConfiguration, schemas.UpdateEc2DeepInspectionConfigurationRequest, schemas.UpdateEc2DeepInspectionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEc2DeepInspectionConfiguration, schemas.UpdateEc2DeepInspectionConfigurationRequest, schemas.UpdateEc2DeepInspectionConfigurationResponse), output: &UpdateEc2DeepInspectionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEc2DeepInspectionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEc2DeepInspectionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +147,8 @@ func (c *Client) addOperationUpdateEc2DeepInspectionConfigurationMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEc2DeepInspectionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEc2DeepInspectionConfiguration",
-	}
 }

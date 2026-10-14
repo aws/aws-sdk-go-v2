@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *CloudHsmAccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmAccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmAccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmAccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmAccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmAccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmAccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmAccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmAccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because of an CloudHSM internal failure. The request
 // can be retried.
@@ -60,6 +82,27 @@ func (e *CloudHsmInternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *CloudHsmInternalFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmInternalFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmInternalFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmInternalFailureException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmInternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmInternalFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmInternalFailureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmInternalFailureException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it is not a valid request.
 type CloudHsmInvalidRequestException struct {
@@ -86,6 +129,27 @@ func (e *CloudHsmInvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmInvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmInvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmInvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmInvalidRequestException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmInvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmInvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmInvalidRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmInvalidRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it exceeds an CloudHSM limit.
 type CloudHsmResourceLimitExceededException struct {
@@ -114,6 +178,27 @@ func (e *CloudHsmResourceLimitExceededException) ErrorCode() string {
 func (e *CloudHsmResourceLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CloudHsmResourceLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmResourceLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmResourceLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmResourceLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmResourceLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmResourceLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmResourceLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmResourceLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it refers to a resource that cannot be found.
 type CloudHsmResourceNotFoundException struct {
@@ -140,6 +225,27 @@ func (e *CloudHsmResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because an error occurred.
 type CloudHsmServiceException struct {
@@ -166,6 +272,27 @@ func (e *CloudHsmServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmServiceException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because of a tagging failure. Verify the tag
 // conditions in all applicable policies, and then retry the request.
@@ -193,3 +320,24 @@ func (e *CloudHsmTagException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmTagException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmTagException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmTagException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmTagException_Message, *v.Message)
+	}
+}
+func (v *CloudHsmTagException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmTagException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmTagException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmTagException_Message, v.Message)
+		}
+		return nil
+	})
+}

@@ -5,12 +5,8 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,7 +41,7 @@ type CreateLinkRoutingRuleInput struct {
 	// If you don't provide this value, then Amazon Web Services generates a random
 	// one for you.
 	//
-	// If you retry the operation with the same ClientToken , but with different
+	// If you retry the operation with the same clientToken , but with different
 	// parameters, the retry fails with an IdempotentParameterMismatch error.
 	//
 	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
@@ -82,33 +78,6 @@ type CreateLinkRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLinkRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLinkRoutingRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLinkRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateLinkRoutingRuleRequest_clientToken, *v.ClientToken)
-	}
-	if v.Conditions != nil {
-		s.WriteStruct(schemas.CreateLinkRoutingRuleRequest_conditions)
-		v.Conditions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GatewayId != nil {
-		s.WriteString(schemas.CreateLinkRoutingRuleRequest_gatewayId, *v.GatewayId)
-	}
-	if v.LinkId != nil {
-		s.WriteString(schemas.CreateLinkRoutingRuleRequest_linkId, *v.LinkId)
-	}
-	if v.Priority != nil {
-		s.WriteInt32(schemas.CreateLinkRoutingRuleRequest_priority, *v.Priority)
-	}
-	serializeTagsMap(s, schemas.CreateLinkRoutingRuleRequest_tags, v.Tags)
-}
-
 type CreateLinkRoutingRuleOutput struct {
 
 	// The timestamp of when the routing rule was created.
@@ -132,83 +101,23 @@ type CreateLinkRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLinkRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLinkRoutingRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLinkRoutingRuleResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateLinkRoutingRuleResponse_createdAt, v.CreatedAt)
-		case schemas.CreateLinkRoutingRuleResponse_ruleId:
-			v.RuleId = new(string)
-			return d.ReadString(schemas.CreateLinkRoutingRuleResponse_ruleId, v.RuleId)
-		case schemas.CreateLinkRoutingRuleResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateLinkRoutingRuleResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RuleStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLinkRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLinkRoutingRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLinkRoutingRule, schemas.CreateLinkRoutingRuleRequest, schemas.CreateLinkRoutingRuleResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLinkRoutingRule{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLinkRoutingRule, schemas.CreateLinkRoutingRuleRequest, schemas.CreateLinkRoutingRuleResponse), output: &CreateLinkRoutingRuleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLinkRoutingRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -218,12 +127,6 @@ func (c *Client) addOperationCreateLinkRoutingRuleMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateLinkRoutingRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLinkRoutingRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,12 +139,6 @@ func (c *Client) addOperationCreateLinkRoutingRuleMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,12 +178,4 @@ func (m *idempotencyToken_initializeOpCreateLinkRoutingRule) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateLinkRoutingRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLinkRoutingRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateLinkRoutingRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLinkRoutingRule",
-	}
 }

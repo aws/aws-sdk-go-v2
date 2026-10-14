@@ -128,7 +128,7 @@ namespace aws.kitchensinktest
 )
 service AwsJson1KitchenSink {
     version: "2025-03-01",
-    operations: [GetItem],
+    operations: [GetItem, SubscribeEvents, PutCompressedData, GetMaps],
 }
 
 operation GetItem {
@@ -148,4 +148,87 @@ structure GetItemOutput {}
 structure Item {}
 
 @error("client")
-structure ItemNotFound {}
+structure ItemNotFound {
+    message: String,
+}
+
+// Event stream (caller-owned) operation: the response body backs an event
+// stream reader and must NOT be closed on the success path.
+operation SubscribeEvents {
+    input: SubscribeEventsInput,
+    output: SubscribeEventsOutput,
+    errors: [ItemNotFound],
+}
+
+structure SubscribeEventsInput {}
+
+structure SubscribeEventsOutput {
+    events: Events,
+}
+
+@streaming
+union Events {
+    message: MessageEvent,
+}
+
+structure MessageEvent {
+    body: String,
+}
+
+// Request-compression operation: the request body is gzip-compressed by a
+// Serialize-step middleware after serialization. Content length must be
+// computed from the compressed body, so this guards against it being computed
+// (inline in the serializer) from the uncompressed body.
+@requestCompression(encodings: ["gzip"])
+operation PutCompressedData {
+    input: PutCompressedDataInput,
+    output: PutCompressedDataOutput,
+    errors: [ItemNotFound],
+}
+
+structure PutCompressedDataInput {
+    data: String,
+}
+
+structure PutCompressedDataOutput {}
+
+// Dense maps where the server sends an explicit null value. Clients keep the
+// key with the zero value, matching legacy JSON deserializer behavior.
+operation GetMaps {
+    input: GetMapsInput,
+    output: GetMapsOutput,
+}
+
+structure GetMapsInput {}
+
+structure GetMapsOutput {
+    strings: DenseStringMap,
+    integers: DenseIntegerMap,
+    structs: DenseStructMap,
+    sparseStrings: SparseStringMap,
+}
+
+map DenseStringMap {
+    key: String,
+    value: String,
+}
+
+map DenseIntegerMap {
+    key: String,
+    value: Integer,
+}
+
+map DenseStructMap {
+    key: String,
+    value: MapValueStruct,
+}
+
+@sparse
+map SparseStringMap {
+    key: String,
+    value: String,
+}
+
+structure MapValueStruct {
+    name: String,
+}

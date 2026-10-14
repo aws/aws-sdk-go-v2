@@ -1,0 +1,5 @@
+POST /approval-teams/__ApprovalTeamArn__/sessions/?List=
+
+Content-Type: application/json
+
+{"Filters":[{"FieldName":"ActionName","Operator":"EQ","Value":"__Value__"},{"FieldName":"ActionName","Operator":"EQ","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

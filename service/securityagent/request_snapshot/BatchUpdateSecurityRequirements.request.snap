@@ -1,0 +1,5 @@
+POST /BatchUpdateSecurityRequirements
+
+Content-Type: application/json
+
+{"packId":"__PackId__","securityRequirements":[{"description":"__Description__","domain":"__Domain__","evaluation":"__Evaluation__","name":"__Name__","remediation":"__Remediation__"},{"description":"__Description__","domain":"__Domain__","evaluation":"__Evaluation__","name":"__Name__","remediation":"__Remediation__"}]}

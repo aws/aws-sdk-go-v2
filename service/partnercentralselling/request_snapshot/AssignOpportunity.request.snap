@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.AssignOpportunity
+
+{"Assignee":{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"},"Catalog":"__Catalog__","Identifier":"__Identifier__"}

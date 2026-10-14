@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeWhatIfForecastExport
+
+{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"EstimatedTimeRemainingInMinutes":1,"Format":"__Format__","LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__","WhatIfForecastArns":["__Member__","__Member__"],"WhatIfForecastExportArn":"__WhatIfForecastExportArn__","WhatIfForecastExportName":"__WhatIfForecastExportName__"}

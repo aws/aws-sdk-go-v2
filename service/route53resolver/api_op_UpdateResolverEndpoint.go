@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the name, or endpoint type for an inbound or an outbound Resolver
@@ -134,6 +133,38 @@ type UpdateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dns64Enabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_Dns64Enabled, *v.Dns64Enabled)
+	}
+	if v.Ipv6InternetAccessEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_Name, *v.Name)
+	}
+	serializeProtocolList(s, schemas.UpdateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+	if v.ResolverEndpointType != "" {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_ResolverEndpointType, string(v.ResolverEndpointType))
+	}
+	if v.RniEnhancedMetricsEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
+	}
+	if v.TargetNameServerMetricsEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
+	}
+	serializeUpdateIpAddresses(s, schemas.UpdateResolverEndpointRequest_UpdateIpAddresses, v.UpdateIpAddresses)
+}
+
 type UpdateResolverEndpointOutput struct {
 
 	// The response to an UpdateResolverEndpoint request.
@@ -145,77 +176,50 @@ type UpdateResolverEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.UpdateResolverEndpointResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResolverEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResolverEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResolverEndpointResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverEndpoint, schemas.UpdateResolverEndpointRequest, schemas.UpdateResolverEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverEndpoint, schemas.UpdateResolverEndpointRequest, schemas.UpdateResolverEndpointResponse), output: &UpdateResolverEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResolverEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResolverEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateResolverEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResolverEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +234,8 @@ func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateResolverEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateResolverEndpoint",
-	}
 }

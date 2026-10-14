@@ -1,0 +1,5 @@
+PATCH /workspaces/__WorkspaceId__/permissions
+
+Content-Type: application/json
+
+{"updateInstructionBatch":[{"action":"ADD","role":"ADMIN","users":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}]},{"action":"ADD","role":"ADMIN","users":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}]}]}

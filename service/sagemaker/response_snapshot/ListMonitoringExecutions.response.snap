@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMonitoringExecutions
+
+{"MonitoringExecutionSummaries":[{"CreationTime":946684800,"EndpointName":"__EndpointName__","FailureReason":"__FailureReason__","LastModifiedTime":946684800,"MonitoringExecutionStatus":"Pending","MonitoringJobDefinitionName":"__MonitoringJobDefinitionName__","MonitoringScheduleName":"__MonitoringScheduleName__","MonitoringType":"DataQuality","ProcessingJobArn":"__ProcessingJobArn__","ScheduledTime":946684800},{"CreationTime":946684800,"EndpointName":"__EndpointName__","FailureReason":"__FailureReason__","LastModifiedTime":946684800,"MonitoringExecutionStatus":"Pending","MonitoringJobDefinitionName":"__MonitoringJobDefinitionName__","MonitoringScheduleName":"__MonitoringScheduleName__","MonitoringType":"DataQuality","ProcessingJobArn":"__ProcessingJobArn__","ScheduledTime":946684800}],"NextToken":"__NextToken__"}

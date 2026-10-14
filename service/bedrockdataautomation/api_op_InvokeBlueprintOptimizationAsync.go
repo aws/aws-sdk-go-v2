@@ -4,13 +4,8 @@ package bedrockdataautomation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Invoke an async job to perform Blueprint Optimization
@@ -61,35 +56,6 @@ type InvokeBlueprintOptimizationAsyncInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeBlueprintOptimizationAsyncInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeBlueprintOptimizationAsyncInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Blueprint != nil {
-		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_blueprint)
-		v.Blueprint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataAutomationProfileArn != nil {
-		s.WriteString(schemas.InvokeBlueprintOptimizationAsyncRequest_dataAutomationProfileArn, *v.DataAutomationProfileArn)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutputConfiguration != nil {
-		s.WriteStruct(schemas.InvokeBlueprintOptimizationAsyncRequest_outputConfiguration)
-		v.OutputConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeBlueprintOptimizationSamples(s, schemas.InvokeBlueprintOptimizationAsyncRequest_samples, v.Samples)
-	serializeTagList(s, schemas.InvokeBlueprintOptimizationAsyncRequest_tags, v.Tags)
-}
-
 // Invoke Blueprint Optimization Async Response
 type InvokeBlueprintOptimizationAsyncOutput struct {
 
@@ -104,85 +70,29 @@ type InvokeBlueprintOptimizationAsyncOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeBlueprintOptimizationAsyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeBlueprintOptimizationAsyncResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeBlueprintOptimizationAsyncResponse_invocationArn:
-			v.InvocationArn = new(string)
-			return d.ReadString(schemas.InvokeBlueprintOptimizationAsyncResponse_invocationArn, v.InvocationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationInvokeBlueprintOptimizationAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeBlueprintOptimizationAsync{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBlueprintOptimizationAsync, schemas.InvokeBlueprintOptimizationAsyncRequest, schemas.InvokeBlueprintOptimizationAsyncResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeBlueprintOptimizationAsync{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeBlueprintOptimizationAsync, schemas.InvokeBlueprintOptimizationAsyncRequest, schemas.InvokeBlueprintOptimizationAsyncResponse), output: &InvokeBlueprintOptimizationAsyncOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeBlueprintOptimizationAsync"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeBlueprintOptimizationAsyncValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeBlueprintOptimizationAsync(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +107,8 @@ func (c *Client) addOperationInvokeBlueprintOptimizationAsyncMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeBlueprintOptimizationAsync(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeBlueprintOptimizationAsync",
-	}
 }

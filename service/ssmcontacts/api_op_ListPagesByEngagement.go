@@ -5,12 +5,8 @@ package ssmcontacts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the engagements to contact channels that occurred by engaging a contact.
@@ -46,24 +42,6 @@ type ListPagesByEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPagesByEngagementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPagesByEngagementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPagesByEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EngagementId != nil {
-		s.WriteString(schemas.ListPagesByEngagementRequest_EngagementId, *v.EngagementId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPagesByEngagementRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPagesByEngagementRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListPagesByEngagementOutput struct {
 
 	// The list of engagements to contact channels.
@@ -80,87 +58,29 @@ type ListPagesByEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPagesByEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPagesByEngagementResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPagesByEngagementResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPagesByEngagementResult_NextToken, v.NextToken)
-		case schemas.ListPagesByEngagementResult_Pages:
-			return deserializePagesList(d, schemas.ListPagesByEngagementResult_Pages, &v.Pages)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPagesByEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPagesByEngagement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPagesByEngagement, schemas.ListPagesByEngagementRequest, schemas.ListPagesByEngagementResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPagesByEngagement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPagesByEngagement, schemas.ListPagesByEngagementRequest, schemas.ListPagesByEngagementResult), output: &ListPagesByEngagementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPagesByEngagement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPagesByEngagementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPagesByEngagement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +93,6 @@ func (c *Client) addOperationListPagesByEngagementMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +195,3 @@ type ListPagesByEngagementAPIClient interface {
 }
 
 var _ ListPagesByEngagementAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPagesByEngagement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPagesByEngagement",
-	}
-}

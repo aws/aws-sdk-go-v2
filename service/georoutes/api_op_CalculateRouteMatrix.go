@@ -4,13 +4,8 @@ package georoutes
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Use CalculateRouteMatrix to compute results for all pairs of Origins to
@@ -177,62 +172,6 @@ type CalculateRouteMatrixInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CalculateRouteMatrixInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CalculateRouteMatrixRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CalculateRouteMatrixInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Allow != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_Allow)
-		v.Allow.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Avoid != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_Avoid)
-		v.Avoid.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DepartNow != nil {
-		s.WriteBool(schemas.CalculateRouteMatrixRequest_DepartNow, *v.DepartNow)
-	}
-	if v.DepartureTime != nil {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_DepartureTime, *v.DepartureTime)
-	}
-	serializeRouteMatrixDestinationList(s, schemas.CalculateRouteMatrixRequest_Destinations, v.Destinations)
-	if v.Exclude != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_Exclude)
-		v.Exclude.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_Key, *v.Key)
-	}
-	if v.OptimizeRoutingFor != "" {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_OptimizeRoutingFor, string(v.OptimizeRoutingFor))
-	}
-	serializeRouteMatrixOriginList(s, schemas.CalculateRouteMatrixRequest_Origins, v.Origins)
-	if v.RoutingBoundary != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_RoutingBoundary)
-		v.RoutingBoundary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Traffic != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_Traffic)
-		v.Traffic.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelMode != "" {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_TravelMode, string(v.TravelMode))
-	}
-	if v.TravelModeOptions != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_TravelModeOptions)
-		v.TravelModeOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CalculateRouteMatrixOutput struct {
 
 	// The count of error results in the route matrix. If this number is 0, all routes
@@ -269,93 +208,29 @@ type CalculateRouteMatrixOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CalculateRouteMatrixOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CalculateRouteMatrixResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CalculateRouteMatrixResponse_ErrorCount:
-			v.ErrorCount = new(int32)
-			return d.ReadInt32(schemas.CalculateRouteMatrixResponse_ErrorCount, v.ErrorCount)
-		case schemas.CalculateRouteMatrixResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.CalculateRouteMatrixResponse_PricingBucket, v.PricingBucket)
-		case schemas.CalculateRouteMatrixResponse_RouteMatrix:
-			return deserializeRouteMatrix(d, schemas.CalculateRouteMatrixResponse_RouteMatrix, &v.RouteMatrix)
-		case schemas.CalculateRouteMatrixResponse_RoutingBoundary:
-			v.RoutingBoundary = &types.RouteMatrixBoundary{}
-			return v.RoutingBoundary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCalculateRouteMatrix{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRouteMatrix, schemas.CalculateRouteMatrixRequest, schemas.CalculateRouteMatrixResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCalculateRouteMatrix{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRouteMatrix, schemas.CalculateRouteMatrixRequest, schemas.CalculateRouteMatrixResponse), output: &CalculateRouteMatrixOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CalculateRouteMatrix"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCalculateRouteMatrixValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCalculateRouteMatrix(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -370,22 +245,8 @@ func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCalculateRouteMatrix(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CalculateRouteMatrix",
-	}
 }

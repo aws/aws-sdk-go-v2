@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -43,28 +39,6 @@ type GetReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReplicationSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetReplicationSetInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetReplicationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetReplicationSetInput_arn, *v.Arn)
-	}
-}
-func (v *GetReplicationSetInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetReplicationSetInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetReplicationSetInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetReplicationSetInput_arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 type GetReplicationSetOutput struct {
 
 	// Details of the replication set.
@@ -78,98 +52,29 @@ type GetReplicationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReplicationSetOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetReplicationSetOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetReplicationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReplicationSet != nil {
-		s.WriteStruct(schemas.GetReplicationSetOutput_replicationSet)
-		v.ReplicationSet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetReplicationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetReplicationSetOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetReplicationSetOutput_replicationSet:
-			v.ReplicationSet = &types.ReplicationSet{}
-			return v.ReplicationSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReplicationSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReplicationSet, schemas.GetReplicationSetInput, schemas.GetReplicationSetOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReplicationSet{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReplicationSet, schemas.GetReplicationSetInput, schemas.GetReplicationSetOutput), output: &GetReplicationSetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReplicationSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetReplicationSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReplicationSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +87,6 @@ func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -638,11 +537,3 @@ type GetReplicationSetAPIClient interface {
 }
 
 var _ GetReplicationSetAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetReplicationSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetReplicationSet",
-	}
-}

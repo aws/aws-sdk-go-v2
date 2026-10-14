@@ -17,8 +17,14 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberComputeSavingsPlans:
 		_ = v.Value // Value is types.ComputeSavingsPlans
 
+	case *types.ResourceDetailsMemberDocumentDbCluster:
+		_ = v.Value // Value is types.DocumentDbCluster
+
 	case *types.ResourceDetailsMemberDynamoDbReservedCapacity:
 		_ = v.Value // Value is types.DynamoDbReservedCapacity
+
+	case *types.ResourceDetailsMemberDynamoDbTable:
+		_ = v.Value // Value is types.DynamoDbTable
 
 	case *types.ResourceDetailsMemberEbsVolume:
 		_ = v.Value // Value is types.EbsVolume
@@ -38,11 +44,17 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberEcsService:
 		_ = v.Value // Value is types.EcsService
 
+	case *types.ResourceDetailsMemberElastiCacheCluster:
+		_ = v.Value // Value is types.ElastiCacheCluster
+
 	case *types.ResourceDetailsMemberElastiCacheReservedInstances:
 		_ = v.Value // Value is types.ElastiCacheReservedInstances
 
 	case *types.ResourceDetailsMemberLambdaFunction:
 		_ = v.Value // Value is types.LambdaFunction
+
+	case *types.ResourceDetailsMemberMemoryDbCluster:
+		_ = v.Value // Value is types.MemoryDbCluster
 
 	case *types.ResourceDetailsMemberMemoryDbReservedInstances:
 		_ = v.Value // Value is types.MemoryDbReservedInstances
@@ -65,8 +77,14 @@ func ExampleResourceDetails_outputUsage() {
 	case *types.ResourceDetailsMemberRedshiftReservedInstances:
 		_ = v.Value // Value is types.RedshiftReservedInstances
 
+	case *types.ResourceDetailsMemberSageMakerEndpoint:
+		_ = v.Value // Value is types.SageMakerEndpoint
+
 	case *types.ResourceDetailsMemberSageMakerSavingsPlans:
 		_ = v.Value // Value is types.SageMakerSavingsPlans
+
+	case *types.ResourceDetailsMemberWorkSpaces:
+		_ = v.Value // Value is types.WorkSpaces
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -77,22 +95,28 @@ func ExampleResourceDetails_outputUsage() {
 	}
 }
 
-var _ *types.ComputeSavingsPlans
-var _ *types.Ec2AutoScalingGroup
-var _ *types.RdsReservedInstances
 var _ *types.OpenSearchReservedInstances
-var _ *types.DynamoDbReservedCapacity
+var _ *types.ElastiCacheCluster
+var _ *types.DynamoDbTable
 var _ *types.MemoryDbReservedInstances
-var _ *types.Ec2ReservedInstances
-var _ *types.SageMakerSavingsPlans
-var _ *types.Ec2Instance
 var _ *types.Ec2InstanceSavingsPlans
 var _ *types.RdsDbInstanceStorage
 var _ *types.EcsService
-var _ *types.NatGateway
 var _ *types.RedshiftReservedInstances
 var _ *types.RdsDbInstance
 var _ *types.ElastiCacheReservedInstances
+var _ *types.MemoryDbCluster
 var _ *types.AuroraDbClusterStorage
-var _ *types.LambdaFunction
 var _ *types.EbsVolume
+var _ *types.ComputeSavingsPlans
+var _ *types.Ec2AutoScalingGroup
+var _ *types.RdsReservedInstances
+var _ *types.DocumentDbCluster
+var _ *types.DynamoDbReservedCapacity
+var _ *types.Ec2ReservedInstances
+var _ *types.SageMakerSavingsPlans
+var _ *types.Ec2Instance
+var _ *types.NatGateway
+var _ *types.WorkSpaces
+var _ *types.LambdaFunction
+var _ *types.SageMakerEndpoint

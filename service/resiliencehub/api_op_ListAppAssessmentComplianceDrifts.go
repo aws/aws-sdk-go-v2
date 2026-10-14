@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List of compliance drifts that were detected while running an assessment.
@@ -47,6 +47,24 @@ type ListAppAssessmentComplianceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentComplianceDriftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentComplianceDriftsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentComplianceDriftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppAssessmentComplianceDriftsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppAssessmentComplianceDriftsOutput struct {
 
 	// Indicates compliance drifts (recovery time objective (RTO) and recovery point
@@ -64,77 +82,51 @@ type ListAppAssessmentComplianceDriftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentComplianceDriftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentComplianceDriftsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentComplianceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceDriftList(s, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, v.ComplianceDrifts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppAssessmentComplianceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAssessmentComplianceDriftsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts:
+			return deserializeComplianceDriftList(d, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, &v.ComplianceDrifts)
+		case schemas.ListAppAssessmentComplianceDriftsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAssessmentComplianceDriftsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppAssessmentComplianceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentComplianceDrifts, schemas.ListAppAssessmentComplianceDriftsRequest, schemas.ListAppAssessmentComplianceDriftsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppAssessmentComplianceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentComplianceDrifts, schemas.ListAppAssessmentComplianceDriftsRequest, schemas.ListAppAssessmentComplianceDriftsResponse), output: &ListAppAssessmentComplianceDriftsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppAssessmentComplianceDrifts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppAssessmentComplianceDrifts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAppAssessmentComplianceDriftsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppAssessmentComplianceDrifts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +139,6 @@ func (c *Client) addOperationListAppAssessmentComplianceDriftsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type ListAppAssessmentComplianceDriftsAPIClient interface {
 }
 
 var _ ListAppAssessmentComplianceDriftsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppAssessmentComplianceDrifts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppAssessmentComplianceDrifts",
-	}
-}

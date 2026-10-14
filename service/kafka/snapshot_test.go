@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -158,6 +170,18 @@ func TestCheckSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_DeleteVpcConnection(t *testing.T) {
 	_, err := svc.DeleteVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -379,6 +415,18 @@ func TestCheckSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	_, err := svc.GetCompatibleKafkaVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCompatibleKafkaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -650,6 +698,18 @@ func TestCheckSnapshot_UpdateBrokerType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateClusterConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateClusterConfiguration(context.Background(), nil, func(o *Options) {
@@ -793,6 +853,18 @@ func TestUpdateSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
@@ -865,6 +937,18 @@ func TestUpdateSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
@@ -930,6 +1014,18 @@ func TestUpdateSnapshot_DeleteVpcConnection(t *testing.T) {
 	_, err := svc.DeleteVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1086,6 +1182,18 @@ func TestUpdateSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	_, err := svc.GetCompatibleKafkaVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCompatibleKafkaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChannels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1350,6 +1458,18 @@ func TestUpdateSnapshot_UpdateBrokerType(t *testing.T) {
 	_, err := svc.UpdateBrokerType(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBrokerType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateChannel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChannel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

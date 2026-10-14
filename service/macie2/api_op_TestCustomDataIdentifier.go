@@ -4,12 +4,7 @@ package macie2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Tests criteria for a custom data identifier.
@@ -66,26 +61,6 @@ type TestCustomDataIdentifierInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestCustomDataIdentifierRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
-	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_keywords, v.Keywords)
-	if v.MaximumMatchDistance != nil {
-		s.WriteInt32(schemas.TestCustomDataIdentifierRequest_maximumMatchDistance, *v.MaximumMatchDistance)
-	}
-	if v.Regex != nil {
-		s.WriteString(schemas.TestCustomDataIdentifierRequest_regex, *v.Regex)
-	}
-	if v.SampleText != nil {
-		s.WriteString(schemas.TestCustomDataIdentifierRequest_sampleText, *v.SampleText)
-	}
-}
-
 type TestCustomDataIdentifierOutput struct {
 
 	// The number of occurrences of sample text that matched the criteria specified by
@@ -98,85 +73,29 @@ type TestCustomDataIdentifierOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestCustomDataIdentifierResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestCustomDataIdentifierResponse_matchCount:
-			v.MatchCount = new(int32)
-			return d.ReadInt32(schemas.TestCustomDataIdentifierResponse_matchCount, v.MatchCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationTestCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestCustomDataIdentifier{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestCustomDataIdentifier, schemas.TestCustomDataIdentifierRequest, schemas.TestCustomDataIdentifierResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestCustomDataIdentifier{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestCustomDataIdentifier, schemas.TestCustomDataIdentifierRequest, schemas.TestCustomDataIdentifierResponse), output: &TestCustomDataIdentifierOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestCustomDataIdentifier"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestCustomDataIdentifierValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestCustomDataIdentifier(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +110,8 @@ func (c *Client) addOperationTestCustomDataIdentifierMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestCustomDataIdentifier(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestCustomDataIdentifier",
-	}
 }

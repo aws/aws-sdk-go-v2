@@ -5,15 +5,20 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Begin asynchronous resource state update for lifecycle changes to the specified
-// image resources.
+// Begins an ad-hoc state change for the specified image build version. This is a
+// one-time operation - if you schedule the update, it runs only once. If the
+// request includes underlying resources, or schedules the update far enough in the
+// future, Image Builder runs the update as an asynchronous lifecycle execution and
+// returns its identifier. Otherwise, for target states other than DELETED , the
+// state change applies immediately. If a request that starts a lifecycle execution
+// arrives while the image already has one in progress, Image Builder rejects it.
 func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartResourceStateUpdateInput, optFns ...func(*Options)) (*StartResourceStateUpdateOutput, error) {
 	if params == nil {
 		params = &StartResourceStateUpdateInput{}
@@ -31,46 +36,103 @@ func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartReso
 
 type StartResourceStateUpdateInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
-	// The state update might also impact associated resources.
+	// The Amazon Resource Name (ARN) of the image build version to update. The image
+	// must be in one of these terminal states: AVAILABLE , DEPRECATED , DISABLED ,
+	// FAILED , or CANCELLED . Images with FAILED or CANCELLED status can transition
+	// only to DELETED .
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Indicates the lifecycle action to take for this request.
+	// Specifies the lifecycle action to take for this request. For AMI-based images,
+	// valid values are AVAILABLE , DEPRECATED , DISABLED , and DELETED . For
+	// container-based images, only DELETED is supported.
 	//
 	// This member is required.
 	State *types.ResourceState
 
-	// Skip action on the image resource and associated resources if specified
-	// exclusion rules are met.
+	// Rules that Image Builder evaluates against each of the image's AMIs. Matching
+	// AMIs and their snapshots are skipped. Exclusion rules only take effect when the
+	// request includes AMIs. If the target state is DELETED and any resource was
+	// skipped, the Image Builder image resource itself is also retained. For the
+	// DEPRECATED and DISABLED target states, Image Builder updates the image
+	// resource's state regardless of exclusions.
 	ExclusionRules *types.ResourceStateUpdateExclusionRules
 
-	// The name or Amazon Resource Name (ARN) of the IAM role that’s used to update
-	// image state.
+	// The name or Amazon Resource Name (ARN) of the IAM role that's used to update
+	// image state. You must provide this property together with includeResources .
+	// Neither is valid without the other.
 	ExecutionRole *string
 
-	// A list of image resources to update state for.
+	// Specifies which underlying resources to update, in addition to the Image
+	// Builder image resource itself. Snapshots and containers are only valid for the
+	// DELETED state. To set an image to DELETED , you must include its underlying
+	// resources. To delete only the Image Builder image record, use the DeleteImageoperation
+	// instead.
 	IncludeResources *types.ResourceStateUpdateIncludeResources
 
 	// The timestamp that indicates when resources are updated by a lifecycle action.
+	// This property is valid only when the target status is DEPRECATED , and the value
+	// must be a future time. If you don't specify a value, Image Builder begins the
+	// state update right away. For a scheduled deprecation, included AMIs get their
+	// EC2 deprecation time set immediately, and Image Builder schedules the image
+	// resource to transition to DEPRECATED at that time.
 	UpdateAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceStateUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExclusionRules != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_exclusionRules)
+		v.ExclusionRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.IncludeResources != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_includeResources)
+		v.IncludeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateAt != nil {
+		s.WriteTime(schemas.StartResourceStateUpdateRequest_updateAt, *v.UpdateAt)
+	}
+}
+
 type StartResourceStateUpdateOutput struct {
 
-	// Identifies the lifecycle runtime instance that started the resource state
-	// update.
+	// Identifies the lifecycle execution that performs the resource state update.
+	// Image Builder only returns this field when it started a lifecycle execution for
+	// the update. Use it with GetLifecycleExecutionto track progress.
 	LifecycleExecutionId *string
 
 	// The requested Amazon Resource Name (ARN) of the Image Builder resource for the
@@ -83,65 +145,48 @@ type StartResourceStateUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceStateUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *StartResourceStateUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceStateUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceStateUpdateResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		case schemas.StartResourceStateUpdateResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse), output: &StartResourceStateUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartResourceStateUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -151,12 +196,6 @@ func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpStartResourceStateUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartResourceStateUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +208,6 @@ func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -214,12 +247,4 @@ func (m *idempotencyToken_initializeOpStartResourceStateUpdate) HandleInitialize
 }
 func addIdempotencyToken_opStartResourceStateUpdateMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartResourceStateUpdate{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartResourceStateUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartResourceStateUpdate",
-	}
 }

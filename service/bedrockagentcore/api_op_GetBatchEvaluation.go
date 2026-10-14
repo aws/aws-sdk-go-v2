@@ -4,13 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetBatchEvaluationInput struct {
 	BatchEvaluationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetBatchEvaluationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBatchEvaluationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BatchEvaluationId != nil {
-		s.WriteString(schemas.GetBatchEvaluationRequest_batchEvaluationId, *v.BatchEvaluationId)
-	}
 }
 
 type GetBatchEvaluationOutput struct {
@@ -96,11 +79,29 @@ type GetBatchEvaluationOutput struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []types.Evaluator
 
+	// The execution summary clustering results from insights, containing grouped
+	// execution patterns across evaluated sessions.
+	ExecutionSummaryResult *types.ExecutionSummaryClusteringResultContent
+
+	// The failure analysis results from insights, containing categorized failure
+	// clusters with root causes and recommendations.
+	FailureAnalysisResult *types.FailureAnalysisResultContent
+
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []types.Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The output configuration specifying where evaluation results are written.
 	OutputConfig types.OutputConfig
 
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
+
+	// The user intent clustering results from insights, containing grouped user
+	// intents across evaluated sessions.
+	UserIntentResult *types.UserIntentClusteringResultContent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -108,118 +109,29 @@ type GetBatchEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBatchEvaluationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBatchEvaluationResponse_batchEvaluationArn:
-			v.BatchEvaluationArn = new(string)
-			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationArn, v.BatchEvaluationArn)
-		case schemas.GetBatchEvaluationResponse_batchEvaluationId:
-			v.BatchEvaluationId = new(string)
-			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationId, v.BatchEvaluationId)
-		case schemas.GetBatchEvaluationResponse_batchEvaluationName:
-			v.BatchEvaluationName = new(string)
-			return d.ReadString(schemas.GetBatchEvaluationResponse_batchEvaluationName, v.BatchEvaluationName)
-		case schemas.GetBatchEvaluationResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetBatchEvaluationResponse_createdAt, v.CreatedAt)
-		case schemas.GetBatchEvaluationResponse_dataSourceConfig:
-			return deserializeDataSourceConfig(d, schemas.GetBatchEvaluationResponse_dataSourceConfig, &v.DataSourceConfig)
-		case schemas.GetBatchEvaluationResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetBatchEvaluationResponse_description, v.Description)
-		case schemas.GetBatchEvaluationResponse_errorDetails:
-			return deserializeErrorDetailsList(d, schemas.GetBatchEvaluationResponse_errorDetails, &v.ErrorDetails)
-		case schemas.GetBatchEvaluationResponse_evaluationResults:
-			v.EvaluationResults = &types.EvaluationJobResults{}
-			return v.EvaluationResults.Deserialize(d)
-		case schemas.GetBatchEvaluationResponse_evaluators:
-			return deserializeEvaluatorList(d, schemas.GetBatchEvaluationResponse_evaluators, &v.Evaluators)
-		case schemas.GetBatchEvaluationResponse_outputConfig:
-			return deserializeOutputConfig(d, schemas.GetBatchEvaluationResponse_outputConfig, &v.OutputConfig)
-		case schemas.GetBatchEvaluationResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetBatchEvaluationResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.BatchEvaluationStatus(ev)
-			return nil
-		case schemas.GetBatchEvaluationResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetBatchEvaluationResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBatchEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatchEvaluation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBatchEvaluation{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationRequest, schemas.GetBatchEvaluationResponse), output: &GetBatchEvaluationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBatchEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBatchEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +146,8 @@ func (c *Client) addOperationGetBatchEvaluationMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBatchEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBatchEvaluation",
-	}
 }

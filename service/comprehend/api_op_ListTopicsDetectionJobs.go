@@ -5,10 +5,10 @@ package comprehend
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of the topic detection jobs that you have submitted.
@@ -43,6 +43,26 @@ type ListTopicsDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListTopicsDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTopicsDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTopicsDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.
@@ -57,74 +77,48 @@ type ListTopicsDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeTopicsDetectionJobPropertiesList(s, schemas.ListTopicsDetectionJobsResponse_TopicsDetectionJobPropertiesList, v.TopicsDetectionJobPropertiesList)
+}
+func (v *ListTopicsDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicsDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicsDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicsDetectionJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTopicsDetectionJobsResponse_TopicsDetectionJobPropertiesList:
+			return deserializeTopicsDetectionJobPropertiesList(d, schemas.ListTopicsDetectionJobsResponse_TopicsDetectionJobPropertiesList, &v.TopicsDetectionJobPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicsDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicsDetectionJobs, schemas.ListTopicsDetectionJobsRequest, schemas.ListTopicsDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTopicsDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicsDetectionJobs, schemas.ListTopicsDetectionJobsRequest, schemas.ListTopicsDetectionJobsResponse), output: &ListTopicsDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTopicsDetectionJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTopicsDetectionJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTopicsDetectionJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,12 +131,6 @@ func (c *Client) addOperationListTopicsDetectionJobsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +233,3 @@ type ListTopicsDetectionJobsAPIClient interface {
 }
 
 var _ ListTopicsDetectionJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTopicsDetectionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTopicsDetectionJobs",
-	}
-}

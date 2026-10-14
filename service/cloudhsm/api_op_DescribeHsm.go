@@ -4,13 +4,10 @@ package cloudhsm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see [AWS CloudHSM Classic FAQs], the [AWS CloudHSM Classic User Guide]
@@ -149,6 +146,75 @@ type DescribeHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHsmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHsmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHsmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DescribeHsmResponse_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.EniId != nil {
+		s.WriteString(schemas.DescribeHsmResponse_EniId, *v.EniId)
+	}
+	if v.EniIp != nil {
+		s.WriteString(schemas.DescribeHsmResponse_EniIp, *v.EniIp)
+	}
+	if v.HsmArn != nil {
+		s.WriteString(schemas.DescribeHsmResponse_HsmArn, *v.HsmArn)
+	}
+	if v.HsmType != nil {
+		s.WriteString(schemas.DescribeHsmResponse_HsmType, *v.HsmType)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.DescribeHsmResponse_IamRoleArn, *v.IamRoleArn)
+	}
+	serializePartitionList(s, schemas.DescribeHsmResponse_Partitions, v.Partitions)
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SerialNumber, *v.SerialNumber)
+	}
+	if v.ServerCertLastUpdated != nil {
+		s.WriteString(schemas.DescribeHsmResponse_ServerCertLastUpdated, *v.ServerCertLastUpdated)
+	}
+	if v.ServerCertUri != nil {
+		s.WriteString(schemas.DescribeHsmResponse_ServerCertUri, *v.ServerCertUri)
+	}
+	if v.SoftwareVersion != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SoftwareVersion, *v.SoftwareVersion)
+	}
+	if v.SshKeyLastUpdated != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SshKeyLastUpdated, *v.SshKeyLastUpdated)
+	}
+	if v.SshPublicKey != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SshPublicKey, *v.SshPublicKey)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeHsmResponse_Status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteString(schemas.DescribeHsmResponse_StatusDetails, *v.StatusDetails)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SubnetId, *v.SubnetId)
+	}
+	if v.SubscriptionEndDate != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SubscriptionEndDate, *v.SubscriptionEndDate)
+	}
+	if v.SubscriptionStartDate != nil {
+		s.WriteString(schemas.DescribeHsmResponse_SubscriptionStartDate, *v.SubscriptionStartDate)
+	}
+	if v.SubscriptionType != "" {
+		s.WriteString(schemas.DescribeHsmResponse_SubscriptionType, string(v.SubscriptionType))
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.DescribeHsmResponse_VendorName, *v.VendorName)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DescribeHsmResponse_VpcId, *v.VpcId)
+	}
+}
 func (v *DescribeHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeHsmResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -227,71 +293,23 @@ func (v *DescribeHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationDescribeHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsm, schemas.DescribeHsmRequest, schemas.DescribeHsmResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsm, schemas.DescribeHsmRequest, schemas.DescribeHsmResponse), output: &DescribeHsmOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHsm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHsm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -306,22 +324,8 @@ func (c *Client) addOperationDescribeHsmMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeHsm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeHsm",
-	}
 }

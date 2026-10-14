@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing machine learning transform. Call this operation to tune the
@@ -102,6 +101,50 @@ type UpdateMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMLTransformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMLTransformRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMLTransformRequest_Description, *v.Description)
+	}
+	if v.GlueVersion != nil {
+		s.WriteString(schemas.UpdateMLTransformRequest_GlueVersion, *v.GlueVersion)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.UpdateMLTransformRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MaxRetries != nil {
+		s.WriteInt32(schemas.UpdateMLTransformRequest_MaxRetries, *v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateMLTransformRequest_Name, *v.Name)
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.UpdateMLTransformRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.UpdateMLTransformRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateMLTransformRequest_Role, *v.Role)
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.UpdateMLTransformRequest_Timeout, *v.Timeout)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.UpdateMLTransformRequest_TransformId, *v.TransformId)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.UpdateMLTransformRequest_WorkerType, string(v.WorkerType))
+	}
+}
+
 type UpdateMLTransformOutput struct {
 
 	// The unique identifier for the transform that was updated.
@@ -113,77 +156,48 @@ type UpdateMLTransformOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMLTransformOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMLTransformResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.UpdateMLTransformResponse_TransformId, *v.TransformId)
+	}
+}
+func (v *UpdateMLTransformOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMLTransformResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMLTransformResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.UpdateMLTransformResponse_TransformId, v.TransformId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMLTransform, schemas.UpdateMLTransformRequest, schemas.UpdateMLTransformResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMLTransform, schemas.UpdateMLTransformRequest, schemas.UpdateMLTransformResponse), output: &UpdateMLTransformOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMLTransform{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMLTransform"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMLTransformValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMLTransform(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,22 +212,8 @@ func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMLTransform(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMLTransform",
-	}
 }

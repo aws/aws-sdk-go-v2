@@ -1,0 +1,5 @@
+POST /assessmentFrameworks/__FrameworkId__/shareRequests
+
+Content-Type: application/json
+
+{"comment":"__Comment__","destinationAccount":"__DestinationAccount__","destinationRegion":"__DestinationRegion__"}

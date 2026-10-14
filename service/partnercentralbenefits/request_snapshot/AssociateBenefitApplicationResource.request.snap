@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.AssociateBenefitApplicationResource
+
+{"BenefitApplicationIdentifier":"__BenefitApplicationIdentifier__","Catalog":"__Catalog__","ResourceArn":"__ResourceArn__"}

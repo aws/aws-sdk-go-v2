@@ -3098,6 +3098,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n        <important>\n            <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n                points in time when snapshots are suspended. Use this feature only for short-term\n                operational needs such as migrations or maintenance windows.</p>\n        </important>\n        <p>Maximum suspension duration: 3 days.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainEngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4998,6 +5010,26 @@
                 "smithy.api#documentation": "<p>The configured endpoint options for the domain and their current status.</p>"
             }
         },
+        "com.amazonaws.elasticsearchservice#DomainEngineMode": {
+            "type": "enum",
+            "members": {
+                "GENERAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERAL"
+                    }
+                },
+                "OPTIMIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIMIZED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The engine mode for the domain. Valid values are <code>GENERAL</code> (the standard\n          Elasticsearch/OpenSearch engine) and <code>OPTIMIZED</code> (the cost- and\n          performance-optimized engine for observability and log-analytics workloads). If you don't\n          specify an engine mode, <code>GENERAL</code> is used. <code>OPTIMIZED</code> requires\n          OpenSearch 3.5 or later, OpenSearch Optimized instance types (OR1, OR2, OM2, or OI2) for the\n          data tier, and encryption at rest, and is available only for the <code>OBSERVABILITY</code>\n          and <code>MIXED</code> use cases. The engine mode can't be changed after the domain is\n          created.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#DomainId": {
             "type": "string",
             "traits": {
@@ -5226,6 +5258,38 @@
                         "smithy.api#enumValue": "Deleting"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DomainUseCase": {
+            "type": "enum",
+            "members": {
+                "SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEARCH"
+                    }
+                },
+                "VECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VECTOR"
+                    }
+                },
+                "OBSERVABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OBSERVABILITY"
+                    }
+                },
+                "MIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIXED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The primary use case for the domain, which determines the default configuration and the\n          engine modes that are available. Valid values are <code>SEARCH</code> (full-text search,\n          e-commerce, content discovery, and hybrid and semantic search), <code>VECTOR</code> (k-NN\n          and semantic search, and retrieval-augmented generation), <code>OBSERVABILITY</code> (logs,\n          metrics, traces, and dashboards), and <code>MIXED</code> (a combination of search and\n          analytics). If you don't specify a use case, <code>MIXED</code> is used.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#Double": {
@@ -5917,6 +5981,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies <code>AutomatedSnapshotPauseOptions</code> for the domain. </p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.elasticsearchservice#UseCaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case configured for the domain.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.elasticsearchservice#EngineModeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode configured for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6100,6 +6176,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the Elasticsearch domain's automated snapshot pause options.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainEngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6216,6 +6304,28 @@
             },
             "value": {
                 "target": "com.amazonaws.elasticsearchservice#ServiceUrl"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#EngineModeStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainEngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode configured for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the engine mode for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the engine mode for the domain.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#EngineType": {
@@ -9627,6 +9737,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the automated snapshot pause options for the domain.</p>\n      <important>\n          <p>Suspending snapshots reduces data protection. You cannot restore your domain to\n              points in time when snapshots are suspended. Use this feature only for short-term\n              operational needs such as migrations or maintenance windows.</p>\n      </important>\n      <p>Maximum suspension duration: 3 days.</p>"
                     }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainEngineMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10042,6 +10164,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elasticsearchservice#UpgradeStepItem"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#UseCaseStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case configured for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the use case for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the use case for the domain.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#UserPoolId": {

@@ -1,0 +1,5 @@
+POST /orgs/updateOrganizationConfiguration
+
+Content-Type: application/json
+
+{"AutoEnable":true,"GraphArn":"__GraphArn__"}

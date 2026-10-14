@@ -4,11 +4,10 @@ package pipes
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -101,6 +100,56 @@ type UpdatePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePipeRequest_Description, *v.Description)
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.UpdatePipeRequest_DesiredState, string(v.DesiredState))
+	}
+	if v.Enrichment != nil {
+		s.WriteString(schemas.UpdatePipeRequest_Enrichment, *v.Enrichment)
+	}
+	if v.EnrichmentParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeRequest_EnrichmentParameters)
+		v.EnrichmentParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdatePipeRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePipeRequest_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePipeRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdatePipeRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SourceParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeRequest_SourceParameters)
+		v.SourceParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.UpdatePipeRequest_Target, *v.Target)
+	}
+	if v.TargetParameters != nil {
+		s.WriteStruct(schemas.UpdatePipeRequest_TargetParameters)
+		v.TargetParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdatePipeOutput struct {
 
 	// The ARN of the pipe.
@@ -129,77 +178,86 @@ type UpdatePipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePipeResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdatePipeResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentState != "" {
+		s.WriteString(schemas.UpdatePipeResponse_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.UpdatePipeResponse_DesiredState, string(v.DesiredState))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdatePipeResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePipeResponse_Name, *v.Name)
+	}
+}
+func (v *UpdatePipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePipeResponse_Arn, v.Arn)
+		case schemas.UpdatePipeResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePipeResponse_CreationTime, v.CreationTime)
+		case schemas.UpdatePipeResponse_CurrentState:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePipeResponse_CurrentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = types.PipeState(ev)
+			return nil
+		case schemas.UpdatePipeResponse_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePipeResponse_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = types.RequestedPipeState(ev)
+			return nil
+		case schemas.UpdatePipeResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdatePipeResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdatePipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePipeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipe, schemas.UpdatePipeRequest, schemas.UpdatePipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipe, schemas.UpdatePipeRequest, schemas.UpdatePipeResponse), output: &UpdatePipeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePipe{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePipe"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePipeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipe(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +272,8 @@ func (c *Client) addOperationUpdatePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePipe(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePipe",
-	}
 }

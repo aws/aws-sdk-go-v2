@@ -1156,7 +1156,7 @@
             "type": "string",
             "traits": {
                 "aws.api#arnReference": {
-                    "type": "AWS::APS::Workspace",
+                    "type": "AWS::APS::AnomalyDetector",
                     "service": "ManagedPrometheusCP",
                     "resource": "AnomalyDetector"
                 },
@@ -1424,6 +1424,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amp#AnomalyDetectorSummary"
+            }
+        },
+        "com.amazonaws.amp#CloudWatchConfiguration": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.amp#CloudWatchDatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the CloudWatch dataset. To use the default dataset, specify <code>arn:aws:cloudwatch:&lt;region&gt;:&lt;account-id&gt;:dataset/default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration identifies the CloudWatch dataset used as a scraper destination.</p>"
+            }
+        },
+        "com.amazonaws.amp#CloudWatchDatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies a dataset in CloudWatch.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cloudwatch:[-a-z0-9]+:[0-9]{12}:dataset\\/.+$"
             }
         },
         "com.amazonaws.amp#CloudWatchLogDestination": {
@@ -2025,7 +2047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateScraper</code> operation creates a scraper to collect metrics. A scraper pulls metrics from Prometheus-compatible sources and sends them to your Amazon Managed Service for Prometheus workspace. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible, and can be configured to control what metrics are collected, the frequency of collection, what transformations are applied to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
+                "smithy.api#documentation": "<p>Creates a scraper to collect metrics from Prometheus-compatible sources. The scraper sends the collected metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible. You can configure a scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateScraper with optional alias input, optional clientToken input, and one set of tags",
@@ -2139,7 +2161,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends the collected metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2160,6 +2182,12 @@
                     "target": "com.amazonaws.amp#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>(Optional) The list of tag keys and values to associate with the scraper.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>"
                     }
                 }
             },
@@ -3853,6 +3881,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
                     }
+                },
+                "cloudWatchConfiguration": {
+                    "target": "com.amazonaws.amp#CloudWatchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch dataset to send metrics to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3885,6 +3919,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The <code>EksConfiguration</code> structure describes the connection to the Amazon EKS cluster from which a scraper collects metrics.</p>"
+            }
+        },
+        "com.amazonaws.amp#ExporterConfiguration": {
+            "type": "union",
+            "members": {
+                "openSearchConfiguration": {
+                    "target": "com.amazonaws.amp#OpenSearchExporterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that the scraper uses to export metrics to an Amazon OpenSearch Service domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration for an exporter managed by the scraper.</p>"
+            }
+        },
+        "com.amazonaws.amp#ExporterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#ExporterConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of exporter configurations for a scraper. You can configure at most one Amazon OpenSearch Service domain.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.amp#FilterKey": {
@@ -4902,6 +4962,28 @@
                 "smithy.api#documentation": "<p>Filtering criteria that determine which queries are logged.</p>"
             }
         },
+        "com.amazonaws.amp#OpenSearchDomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies an Amazon OpenSearch Service domain.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:es:[-a-z0-9]+:[0-9]{12}:domain\\/.+$"
+            }
+        },
+        "com.amazonaws.amp#OpenSearchExporterConfiguration": {
+            "type": "structure",
+            "members": {
+                "domainArn": {
+                    "target": "com.amazonaws.amp#OpenSearchDomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon OpenSearch Service domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for exporting metrics to an Amazon OpenSearch Service domain.</p>"
+            }
+        },
         "com.amazonaws.amp#PaginationToken": {
             "type": "string",
             "traits": {
@@ -5878,7 +5960,7 @@
                 "aws.api#arn": {
                     "template": "scraper/{scraperId}"
                 },
-                "smithy.api#documentation": "<p>A scraper is a fully-managed agentless collector that discovers and pulls metrics automatically. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are flexible. You can configure the scraper to control what metrics are collected, the frequency of collection, what transformations are applied to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your cluster. You must configure this role with a policy that allows it to scrape metrics from your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the YAML configuration for the scraper.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>"
+                "smithy.api#documentation": "<p>A scraper is a fully-managed agentless collector that discovers and pulls metrics automatically. The scraper pulls metrics from Prometheus-compatible sources in Amazon EKS clusters or Amazon MSK clusters. It can also scrape VPC-based sources that support DNS-based service discovery. The scraper sends metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. Scrapers are flexible. You can configure the scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the YAML configuration for the scraper.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>"
             }
         },
         "com.amazonaws.amp#ScraperAlias": {
@@ -6038,7 +6120,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6046,6 +6128,12 @@
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -6319,7 +6407,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>",
+                        "smithy.api#documentation": "<p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6327,6 +6415,12 @@
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -7014,7 +7108,7 @@
                 "destination": {
                     "target": "com.amazonaws.amp#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
+                        "smithy.api#documentation": "<p>The new destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>"
                     }
                 },
                 "roleConfiguration": {
@@ -7028,6 +7122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>"
                     }
                 }
             },
@@ -7211,6 +7311,24 @@
                         "smithy.api#documentation": "<p>Specifies how many days that metrics will be retained in the workspace.</p>",
                         "smithy.api#range": {
                             "min": 1
+                        }
+                    }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time window in seconds for accepting out of order samples. Out of order samples older than this window are rejected.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the duration in seconds to offset rule evaluation queries into the past. This allows ingested samples to be available before rule evaluation.</p>",
+                        "smithy.api#range": {
+                            "min": 0
                         }
                     }
                 }
@@ -7465,6 +7583,24 @@
                         "smithy.api#documentation": "<p>This field displays how many days that metrics are retained in the workspace.</p>",
                         "smithy.api#range": {
                             "min": 1
+                        }
+                    }
+                },
+                "outOfOrderTimeWindowInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the out of order time window in seconds for accepting out of order samples.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "ruleQueryOffsetInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field displays the duration in seconds that rule evaluation queries are offset into the past.</p>",
+                        "smithy.api#range": {
+                            "min": 0
                         }
                     }
                 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.RemoveAutoScalingPolicy
+
+{"ClusterId":"__ClusterId__","InstanceGroupId":"__InstanceGroupId__"}

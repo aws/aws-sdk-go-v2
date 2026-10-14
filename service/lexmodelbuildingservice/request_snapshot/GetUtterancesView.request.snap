@@ -1,0 +1,3 @@
+GET /bots/__BotName__/utterances?bot_versions=__Member__&bot_versions=__Member__&status_type=Detected&view=aggregation
+
+

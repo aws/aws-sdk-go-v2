@@ -1,0 +1,7 @@
+POST /service/KeyspacesService/operation/ListTypes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿lkeyspaceNamep__KeyspaceName__jmaxResultsinextTokenm__NextToken__ÿ

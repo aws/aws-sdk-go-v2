@@ -4,10 +4,9 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Extends the expiration date for license consumption.
@@ -41,6 +40,21 @@ type ExtendLicenseConsumptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendLicenseConsumptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendLicenseConsumptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendLicenseConsumptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.ExtendLicenseConsumptionRequest_DryRun, v.DryRun)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionRequest_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+}
+
 type ExtendLicenseConsumptionOutput struct {
 
 	// Date and time at which the license consumption expires.
@@ -55,77 +69,54 @@ type ExtendLicenseConsumptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendLicenseConsumptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendLicenseConsumptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendLicenseConsumptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expiration != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionResponse_Expiration, *v.Expiration)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+}
+func (v *ExtendLicenseConsumptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendLicenseConsumptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendLicenseConsumptionResponse_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.ExtendLicenseConsumptionResponse_Expiration, v.Expiration)
+		case schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken:
+			v.LicenseConsumptionToken = new(string)
+			return d.ReadString(schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken, v.LicenseConsumptionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExtendLicenseConsumptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExtendLicenseConsumption, schemas.ExtendLicenseConsumptionRequest, schemas.ExtendLicenseConsumptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExtendLicenseConsumption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExtendLicenseConsumption, schemas.ExtendLicenseConsumptionRequest, schemas.ExtendLicenseConsumptionResponse), output: &ExtendLicenseConsumptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExtendLicenseConsumption{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExtendLicenseConsumption"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpExtendLicenseConsumptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExtendLicenseConsumption(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +131,8 @@ func (c *Client) addOperationExtendLicenseConsumptionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExtendLicenseConsumption(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExtendLicenseConsumption",
-	}
 }

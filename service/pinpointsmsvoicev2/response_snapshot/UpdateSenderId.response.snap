@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdateSenderId
+
+{"DeletionProtectionEnabled":true,"IsoCountryCode":"__IsoCountryCode__","MessageTypes":["TRANSACTIONAL","TRANSACTIONAL"],"MonthlyLeasingPrice":"__MonthlyLeasingPrice__","Registered":true,"RegistrationId":"__RegistrationId__","SenderId":"__SenderId__","SenderIdArn":"__SenderIdArn__"}

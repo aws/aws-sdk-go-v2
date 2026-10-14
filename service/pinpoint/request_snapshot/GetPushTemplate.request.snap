@@ -1,0 +1,3 @@
+GET /v1/templates/__TemplateName__/push?version=__Version__
+
+

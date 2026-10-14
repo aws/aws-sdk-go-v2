@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/CreateUpdatedImage
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦lnewImageTags¡dkey0i__Value__fdryRunõqexistingImageNameu__ExistingImageName__lnewImageNamep__NewImageName__snewImageDescriptionw__NewImageDescription__snewImageDisplayNamew__NewImageDisplayName__

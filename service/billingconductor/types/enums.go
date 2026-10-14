@@ -94,6 +94,7 @@ const (
 	ConflictExceptionReasonResourceNameConflict                            ConflictExceptionReason = "RESOURCE_NAME_CONFLICT"
 	ConflictExceptionReasonPricingRuleInPricingPlanConflict                ConflictExceptionReason = "PRICING_RULE_IN_PRICING_PLAN_CONFLICT"
 	ConflictExceptionReasonPricingPlanAttachedToBillingGroupDeleteConflict ConflictExceptionReason = "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT"
+	ConflictExceptionReasonPricingPlanReferencedByPreferenceDeleteConflict ConflictExceptionReason = "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT"
 	ConflictExceptionReasonPricingRuleAttachedToPricingPlanDeleteConflict  ConflictExceptionReason = "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT"
 	ConflictExceptionReasonWriteConflictRetry                              ConflictExceptionReason = "WRITE_CONFLICT_RETRY"
 )
@@ -107,6 +108,7 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"RESOURCE_NAME_CONFLICT",
 		"PRICING_RULE_IN_PRICING_PLAN_CONFLICT",
 		"PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT",
+		"PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT",
 		"PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT",
 		"WRITE_CONFLICT_RETRY",
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"imageArn":"__ImageArn__","requestId":"__RequestId__"}

@@ -4,11 +4,10 @@ package appsync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a cache for the GraphQL API.
@@ -128,6 +127,34 @@ type CreateApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiCachingBehavior != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_apiCachingBehavior, string(v.ApiCachingBehavior))
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateApiCacheRequest_apiId, *v.ApiId)
+	}
+	if v.AtRestEncryptionEnabled != false {
+		s.WriteBool(schemas.CreateApiCacheRequest_atRestEncryptionEnabled, v.AtRestEncryptionEnabled)
+	}
+	if v.HealthMetricsConfig != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_healthMetricsConfig, string(v.HealthMetricsConfig))
+	}
+	if v.TransitEncryptionEnabled != false {
+		s.WriteBool(schemas.CreateApiCacheRequest_transitEncryptionEnabled, v.TransitEncryptionEnabled)
+	}
+	s.WriteInt64(schemas.CreateApiCacheRequest_ttl, v.Ttl)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateApiCacheRequest_type, string(v.Type))
+	}
+}
+
 // Represents the output of a CreateApiCache operation.
 type CreateApiCacheOutput struct {
 
@@ -140,77 +167,50 @@ type CreateApiCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiCache != nil {
+		s.WriteStruct(schemas.CreateApiCacheResponse_apiCache)
+		v.ApiCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApiCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApiCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApiCacheResponse_apiCache:
+			v.ApiCache = &types.ApiCache{}
+			return v.ApiCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiCache, schemas.CreateApiCacheRequest, schemas.CreateApiCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiCache, schemas.CreateApiCacheRequest, schemas.CreateApiCacheResponse), output: &CreateApiCacheOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApiCache{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApiCache"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateApiCacheValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApiCache(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,22 +225,8 @@ func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateApiCache(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateApiCache",
-	}
 }

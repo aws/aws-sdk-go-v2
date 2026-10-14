@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an artifact. Either ArtifactArn or Source must be specified.
@@ -38,6 +37,23 @@ type DeleteArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DeleteArtifactRequest_ArtifactArn, *v.ArtifactArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.DeleteArtifactRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.
@@ -49,77 +65,48 @@ type DeleteArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DeleteArtifactResponse_ArtifactArn, *v.ArtifactArn)
+	}
+}
+func (v *DeleteArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteArtifactResponse_ArtifactArn:
+			v.ArtifactArn = new(string)
+			return d.ReadString(schemas.DeleteArtifactResponse_ArtifactArn, v.ArtifactArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactRequest, schemas.DeleteArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactRequest, schemas.DeleteArtifactResponse), output: &DeleteArtifactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteArtifact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteArtifactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteArtifact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +121,8 @@ func (c *Client) addOperationDeleteArtifactMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteArtifact",
-	}
 }

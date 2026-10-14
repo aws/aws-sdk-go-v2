@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/UpdateDirectoryConfig
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤xCertificateBasedAuthProperties¢fStatushDISABLEDwCertificateAuthorityArnx__CertificateAuthorityArn__mDirectoryNameq__DirectoryName__x$OrganizationalUnitDistinguishedNames‚j__Member__j__Member__xServiceAccountCredentials¢oAccountPasswords__AccountPassword__kAccountNameo__AccountName__

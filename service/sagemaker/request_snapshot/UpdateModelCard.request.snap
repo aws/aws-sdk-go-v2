@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateModelCard
+
+{"Content":"__Content__","ModelCardName":"__ModelCardName__","ModelCardStatus":"Draft"}

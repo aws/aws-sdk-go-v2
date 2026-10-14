@@ -1,0 +1,3 @@
+DELETE /packages/__PackageName__/versions/__VersionName__?clientToken=__ClientToken__
+
+

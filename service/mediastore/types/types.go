@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -45,6 +47,62 @@ type Container struct {
 	Status ContainerStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Container) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Container)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Container) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.Container_ARN, *v.ARN)
+	}
+	if v.AccessLoggingEnabled != nil {
+		s.WriteBool(schemas.Container_AccessLoggingEnabled, *v.AccessLoggingEnabled)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Container_CreationTime, *v.CreationTime)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.Container_Endpoint, *v.Endpoint)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Container_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Container_Status, string(v.Status))
+	}
+}
+func (v *Container) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Container, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Container_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.Container_ARN, v.ARN)
+		case schemas.Container_AccessLoggingEnabled:
+			v.AccessLoggingEnabled = new(bool)
+			return d.ReadBool(schemas.Container_AccessLoggingEnabled, v.AccessLoggingEnabled)
+		case schemas.Container_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Container_CreationTime, v.CreationTime)
+		case schemas.Container_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.Container_Endpoint, v.Endpoint)
+		case schemas.Container_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Container_Name, v.Name)
+		case schemas.Container_Status:
+			var ev string
+			if err := d.ReadString(schemas.Container_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ContainerStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more
@@ -94,6 +152,39 @@ type CorsRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CorsRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CorsRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CorsRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedHeaders(s, schemas.CorsRule_AllowedHeaders, v.AllowedHeaders)
+	serializeAllowedMethods(s, schemas.CorsRule_AllowedMethods, v.AllowedMethods)
+	serializeAllowedOrigins(s, schemas.CorsRule_AllowedOrigins, v.AllowedOrigins)
+	serializeExposeHeaders(s, schemas.CorsRule_ExposeHeaders, v.ExposeHeaders)
+	if v.MaxAgeSeconds != 0 {
+		s.WriteInt32(schemas.CorsRule_MaxAgeSeconds, v.MaxAgeSeconds)
+	}
+}
+func (v *CorsRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CorsRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CorsRule_AllowedHeaders:
+			return deserializeAllowedHeaders(d, schemas.CorsRule_AllowedHeaders, &v.AllowedHeaders)
+		case schemas.CorsRule_AllowedMethods:
+			return deserializeAllowedMethods(d, schemas.CorsRule_AllowedMethods, &v.AllowedMethods)
+		case schemas.CorsRule_AllowedOrigins:
+			return deserializeAllowedOrigins(d, schemas.CorsRule_AllowedOrigins, &v.AllowedOrigins)
+		case schemas.CorsRule_ExposeHeaders:
+			return deserializeExposeHeaders(d, schemas.CorsRule_ExposeHeaders, &v.ExposeHeaders)
+		case schemas.CorsRule_MaxAgeSeconds:
+			return d.ReadInt32(schemas.CorsRule_MaxAgeSeconds, &v.MaxAgeSeconds)
+		}
+		return nil
+	})
+}
+
 // The metric policy that is associated with the container. A metric policy allows
 // AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy,
 // you must indicate whether you want MediaStore to send container-level metrics.
@@ -121,6 +212,35 @@ type MetricPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerLevelMetrics != "" {
+		s.WriteString(schemas.MetricPolicy_ContainerLevelMetrics, string(v.ContainerLevelMetrics))
+	}
+	serializeMetricPolicyRules(s, schemas.MetricPolicy_MetricPolicyRules, v.MetricPolicyRules)
+}
+func (v *MetricPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricPolicy_ContainerLevelMetrics:
+			var ev string
+			if err := d.ReadString(schemas.MetricPolicy_ContainerLevelMetrics, &ev); err != nil {
+				return err
+			}
+			v.ContainerLevelMetrics = ContainerLevelMetrics(ev)
+			return nil
+		case schemas.MetricPolicy_MetricPolicyRules:
+			return deserializeMetricPolicyRules(d, schemas.MetricPolicy_MetricPolicyRules, &v.MetricPolicyRules)
+		}
+		return nil
+	})
+}
+
 // A setting that enables metrics at the object level. Each rule contains an
 // object group and an object group name. If the policy includes the
 // MetricPolicyRules parameter, you must include at least one rule. Each metric
@@ -142,6 +262,34 @@ type MetricPolicyRule struct {
 	ObjectGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricPolicyRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricPolicyRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricPolicyRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectGroup != nil {
+		s.WriteString(schemas.MetricPolicyRule_ObjectGroup, *v.ObjectGroup)
+	}
+	if v.ObjectGroupName != nil {
+		s.WriteString(schemas.MetricPolicyRule_ObjectGroupName, *v.ObjectGroupName)
+	}
+}
+func (v *MetricPolicyRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricPolicyRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricPolicyRule_ObjectGroup:
+			v.ObjectGroup = new(string)
+			return d.ReadString(schemas.MetricPolicyRule_ObjectGroup, v.ObjectGroup)
+		case schemas.MetricPolicyRule_ObjectGroupName:
+			v.ObjectGroupName = new(string)
+			return d.ReadString(schemas.MetricPolicyRule_ObjectGroupName, v.ObjectGroupName)
+		}
+		return nil
+	})
 }
 
 // A collection of tags associated with a container. Each tag consists of a
@@ -167,6 +315,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

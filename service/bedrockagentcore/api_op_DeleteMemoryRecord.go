@@ -4,12 +4,7 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a memory record from an AgentCore Memory resource. When you delete a
@@ -45,22 +40,11 @@ type DeleteMemoryRecordInput struct {
 	// This member is required.
 	MemoryRecordId *string
 
+	// The namespace of the memory record to delete. This value is used for IAM
+	// condition key authorization.
+	Namespace *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteMemoryRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMemoryRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMemoryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemoryId != nil {
-		s.WriteString(schemas.DeleteMemoryRecordInput_memoryId, *v.MemoryId)
-	}
-	if v.MemoryRecordId != nil {
-		s.WriteString(schemas.DeleteMemoryRecordInput_memoryRecordId, *v.MemoryRecordId)
-	}
 }
 
 type DeleteMemoryRecordOutput struct {
@@ -76,85 +60,29 @@ type DeleteMemoryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMemoryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteMemoryRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteMemoryRecordOutput_memoryRecordId:
-			v.MemoryRecordId = new(string)
-			return d.ReadString(schemas.DeleteMemoryRecordOutput_memoryRecordId, v.MemoryRecordId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMemoryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMemoryRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMemoryRecord, schemas.DeleteMemoryRecordInput, schemas.DeleteMemoryRecordOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMemoryRecord{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMemoryRecord, schemas.DeleteMemoryRecordInput, schemas.DeleteMemoryRecordOutput), output: &DeleteMemoryRecordOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMemoryRecord"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteMemoryRecordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMemoryRecord(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +97,8 @@ func (c *Client) addOperationDeleteMemoryRecordMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteMemoryRecord(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteMemoryRecord",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v1/compliance-inquiry/export
+
+Content-Type: application/json
+
+{"complianceInquiryId":"__ComplianceInquiryId__","includeCitations":true,"queryIdentifiers":[1,1]}

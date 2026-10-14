@@ -1,0 +1,3 @@
+GET /v1/recommendations-for-resource/__AwsResourceArn__?checkArn=__CheckArn__&language=en&maxResults=1&nextToken=__NextToken__&pillar=cost_optimizing&status=ok
+
+

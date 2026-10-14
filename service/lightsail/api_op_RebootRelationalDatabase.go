@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Restarts a specific database in Amazon Lightsail.
@@ -43,6 +42,18 @@ type RebootRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.RebootRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type RebootRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -56,77 +67,45 @@ type RebootRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.RebootRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *RebootRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.RebootRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootRelationalDatabase, schemas.RebootRelationalDatabaseRequest, schemas.RebootRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootRelationalDatabase, schemas.RebootRelationalDatabaseRequest, schemas.RebootRelationalDatabaseResult), output: &RebootRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootRelationalDatabase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RebootRelationalDatabase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRebootRelationalDatabaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootRelationalDatabase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +120,8 @@ func (c *Client) addOperationRebootRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRebootRelationalDatabase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RebootRelationalDatabase",
-	}
 }

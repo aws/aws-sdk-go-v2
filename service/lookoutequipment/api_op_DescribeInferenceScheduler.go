@@ -4,13 +4,10 @@ package lookoutequipment
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -124,6 +121,60 @@ type DescribeInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInferenceSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceSchedulerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeInferenceSchedulerResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataDelayOffsetInMinutes != nil {
+		s.WriteInt64(schemas.DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes, *v.DataDelayOffsetInMinutes)
+	}
+	if v.DataInputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeInferenceSchedulerResponse_DataInputConfiguration)
+		v.DataInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataOutputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeInferenceSchedulerResponse_DataOutputConfiguration)
+		v.DataOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataUploadFrequency != "" {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_DataUploadFrequency, string(v.DataUploadFrequency))
+	}
+	if v.InferenceSchedulerArn != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerArn, *v.InferenceSchedulerArn)
+	}
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+	if v.LatestInferenceResult != "" {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_LatestInferenceResult, string(v.LatestInferenceResult))
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_ModelName, *v.ModelName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInferenceSchedulerResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeInferenceSchedulerResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
 func (v *DescribeInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeInferenceSchedulerResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -186,74 +237,26 @@ func (v *DescribeInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 func (c *Client) addOperationDescribeInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceScheduler, schemas.DescribeInferenceSchedulerRequest, schemas.DescribeInferenceSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceScheduler, schemas.DescribeInferenceSchedulerRequest, schemas.DescribeInferenceSchedulerResponse), output: &DescribeInferenceSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInferenceScheduler"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInferenceSchedulerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInferenceScheduler(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -268,22 +271,8 @@ func (c *Client) addOperationDescribeInferenceSchedulerMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInferenceScheduler(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInferenceScheduler",
-	}
 }

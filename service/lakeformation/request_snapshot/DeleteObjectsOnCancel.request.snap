@@ -1,0 +1,5 @@
+POST /DeleteObjectsOnCancel
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","Objects":[{"ETag":"__ETag__","Uri":"__Uri__"},{"ETag":"__ETag__","Uri":"__Uri__"}],"TableName":"__TableName__","TransactionId":"__TransactionId__"}

@@ -4,12 +4,9 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete a group within an identity store given GroupId .
@@ -32,13 +29,28 @@ type DeleteGroupInput struct {
 
 	// The identifier for a group in the identity store.
 	//
+	// You can specify the group by ID or by Amazon Resource Name (ARN). For example,
+	// group ID a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 or group ARN
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
 	// This member is required.
 	GroupId *string
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
+
+	// The expected current revision of the group. When you provide this value, the
+	// group is deleted only if it matches the current revision of the group in the
+	// identity store. If the value doesn't match, the operation fails with a
+	// ConflictException . If you don't provide this value, the group is deleted
+	// regardless of its current revision.
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -56,19 +68,9 @@ func (v *DeleteGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.DeleteGroupRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-}
-func (v *DeleteGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGroupRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGroupRequest_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.DeleteGroupRequest_GroupId, v.GroupId)
-		case schemas.DeleteGroupRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DeleteGroupRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
+	if v.Revision != nil {
+		s.WriteString(schemas.DeleteGroupRequest_Revision, *v.Revision)
+	}
 }
 
 type DeleteGroupOutput struct {
@@ -94,74 +96,26 @@ func (v *DeleteGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroup, schemas.DeleteGroupRequest, schemas.DeleteGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroup, schemas.DeleteGroupRequest, schemas.DeleteGroupResponse), output: &DeleteGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +130,8 @@ func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteGroup",
-	}
 }

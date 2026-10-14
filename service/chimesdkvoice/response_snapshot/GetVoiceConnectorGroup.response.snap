@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceConnectorGroup":{"CallDistributionType":"PriorityWeightedDistribution","CreatedTimestamp":"2000-01-01T00:00:00Z","Name":"__Name__","UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceConnectorGroupArn":"__VoiceConnectorGroupArn__","VoiceConnectorGroupId":"__VoiceConnectorGroupId__","VoiceConnectorItems":[{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"},{"Priority":1,"VoiceConnectorId":"__VoiceConnectorId__"}]}}

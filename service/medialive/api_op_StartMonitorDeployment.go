@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,21 @@ type StartMonitorDeploymentInput struct {
 	DryRun *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartMonitorDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMonitorDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMonitorDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.StartMonitorDeploymentRequest_DryRun, *v.DryRun)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartMonitorDeploymentRequest_Identifier, *v.Identifier)
+	}
 }
 
 // Placeholder documentation for StartMonitorDeploymentResponse
@@ -109,77 +123,143 @@ type StartMonitorDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMonitorDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMonitorDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartMonitorDeploymentResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_Description, *v.Description)
+	}
+	if v.DiscoveryEntryPointArn != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_DiscoveryEntryPointArn, *v.DiscoveryEntryPointArn)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	serializeFailedMediaResourceMap(s, schemas.StartMonitorDeploymentResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.Id != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_Id, *v.Id)
+	}
+	if v.LastDiscoveredAt != nil {
+		s.WriteTime(schemas.StartMonitorDeploymentResponse_LastDiscoveredAt, *v.LastDiscoveredAt)
+	}
+	if v.LastSuccessfulMonitorDeployment != nil {
+		s.WriteStruct(schemas.StartMonitorDeploymentResponse_LastSuccessfulMonitorDeployment)
+		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMediaResourceMap(s, schemas.StartMonitorDeploymentResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.StartMonitorDeploymentResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.MonitorChangesPendingDeployment != nil {
+		s.WriteBool(schemas.StartMonitorDeploymentResponse_MonitorChangesPendingDeployment, *v.MonitorChangesPendingDeployment)
+	}
+	if v.MonitorDeployment != nil {
+		s.WriteStruct(schemas.StartMonitorDeploymentResponse_MonitorDeployment)
+		v.MonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartMonitorDeploymentResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.StartMonitorDeploymentResponse_Tags, v.Tags)
+}
+func (v *StartMonitorDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMonitorDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMonitorDeploymentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_Arn, v.Arn)
+		case schemas.StartMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.StartMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, &v.CloudWatchAlarmTemplateGroupIds)
+		case schemas.StartMonitorDeploymentResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartMonitorDeploymentResponse_CreatedAt, v.CreatedAt)
+		case schemas.StartMonitorDeploymentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_Description, v.Description)
+		case schemas.StartMonitorDeploymentResponse_DiscoveryEntryPointArn:
+			v.DiscoveryEntryPointArn = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_DiscoveryEntryPointArn, v.DiscoveryEntryPointArn)
+		case schemas.StartMonitorDeploymentResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.StartMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.StartMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, &v.EventBridgeRuleTemplateGroupIds)
+		case schemas.StartMonitorDeploymentResponse_FailedMediaResourceMap:
+			return deserializeFailedMediaResourceMap(d, schemas.StartMonitorDeploymentResponse_FailedMediaResourceMap, &v.FailedMediaResourceMap)
+		case schemas.StartMonitorDeploymentResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_Id, v.Id)
+		case schemas.StartMonitorDeploymentResponse_LastDiscoveredAt:
+			v.LastDiscoveredAt = new(time.Time)
+			return d.ReadTime(schemas.StartMonitorDeploymentResponse_LastDiscoveredAt, v.LastDiscoveredAt)
+		case schemas.StartMonitorDeploymentResponse_LastSuccessfulMonitorDeployment:
+			v.LastSuccessfulMonitorDeployment = &types.SuccessfulMonitorDeployment{}
+			return v.LastSuccessfulMonitorDeployment.Deserialize(d)
+		case schemas.StartMonitorDeploymentResponse_MediaResourceMap:
+			return deserializeMediaResourceMap(d, schemas.StartMonitorDeploymentResponse_MediaResourceMap, &v.MediaResourceMap)
+		case schemas.StartMonitorDeploymentResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.StartMonitorDeploymentResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.StartMonitorDeploymentResponse_MonitorChangesPendingDeployment:
+			v.MonitorChangesPendingDeployment = new(bool)
+			return d.ReadBool(schemas.StartMonitorDeploymentResponse_MonitorChangesPendingDeployment, v.MonitorChangesPendingDeployment)
+		case schemas.StartMonitorDeploymentResponse_MonitorDeployment:
+			v.MonitorDeployment = &types.MonitorDeployment{}
+			return v.MonitorDeployment.Deserialize(d)
+		case schemas.StartMonitorDeploymentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartMonitorDeploymentResponse_Name, v.Name)
+		case schemas.StartMonitorDeploymentResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartMonitorDeploymentResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SignalMapStatus(ev)
+			return nil
+		case schemas.StartMonitorDeploymentResponse_Tags:
+			return deserializeTagMap(d, schemas.StartMonitorDeploymentResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMonitorDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMonitorDeployment, schemas.StartMonitorDeploymentRequest, schemas.StartMonitorDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMonitorDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMonitorDeployment, schemas.StartMonitorDeploymentRequest, schemas.StartMonitorDeploymentResponse), output: &StartMonitorDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMonitorDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMonitorDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMonitorDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMonitorDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +274,8 @@ func (c *Client) addOperationStartMonitorDeploymentMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMonitorDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMonitorDeployment",
-	}
 }

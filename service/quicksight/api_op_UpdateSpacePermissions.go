@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the permissions for an Amazon QuickSight space.
@@ -48,6 +47,23 @@ type UpdateSpacePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpacePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpacePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpacePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateSpacePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.SpaceId != nil {
+		s.WriteString(schemas.UpdateSpacePermissionsRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type UpdateSpacePermissionsOutput struct {
 
 	// The ID of the space.
@@ -70,77 +86,63 @@ type UpdateSpacePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpacePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpacePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpacePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsResponse_permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateSpacePermissionsResponse_requestId, *v.RequestId)
+	}
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.UpdateSpacePermissionsResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.UpdateSpacePermissionsResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *UpdateSpacePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSpacePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSpacePermissionsResponse_permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateSpacePermissionsResponse_permissions, &v.Permissions)
+		case schemas.UpdateSpacePermissionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateSpacePermissionsResponse_requestId, v.RequestId)
+		case schemas.UpdateSpacePermissionsResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.UpdateSpacePermissionsResponse_spaceArn, v.SpaceArn)
+		case schemas.UpdateSpacePermissionsResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.UpdateSpacePermissionsResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSpacePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpacePermissions, schemas.UpdateSpacePermissionsRequest, schemas.UpdateSpacePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSpacePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpacePermissions, schemas.UpdateSpacePermissionsRequest, schemas.UpdateSpacePermissionsResponse), output: &UpdateSpacePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSpacePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSpacePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSpacePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSpacePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +157,8 @@ func (c *Client) addOperationUpdateSpacePermissionsMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSpacePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSpacePermissions",
-	}
 }

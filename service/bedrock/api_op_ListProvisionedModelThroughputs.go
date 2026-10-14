@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -73,6 +73,42 @@ type ListProvisionedModelThroughputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedModelThroughputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedModelThroughputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedModelThroughputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListProvisionedModelThroughputsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListProvisionedModelThroughputsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProvisionedModelThroughputsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelArnEquals != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_modelArnEquals, *v.ModelArnEquals)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListProvisionedModelThroughputsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListProvisionedModelThroughputsOutput struct {
 
 	// If there are more results than the number you specified in the maxResults
@@ -89,74 +125,48 @@ type ListProvisionedModelThroughputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedModelThroughputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedModelThroughputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedModelThroughputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisionedModelThroughputsResponse_nextToken, *v.NextToken)
+	}
+	serializeProvisionedModelSummaries(s, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, v.ProvisionedModelSummaries)
+}
+func (v *ListProvisionedModelThroughputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisionedModelThroughputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisionedModelThroughputsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProvisionedModelThroughputsResponse_nextToken, v.NextToken)
+		case schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries:
+			return deserializeProvisionedModelSummaries(d, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, &v.ProvisionedModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisionedModelThroughputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedModelThroughputs, schemas.ListProvisionedModelThroughputsRequest, schemas.ListProvisionedModelThroughputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedModelThroughputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedModelThroughputs, schemas.ListProvisionedModelThroughputsRequest, schemas.ListProvisionedModelThroughputsResponse), output: &ListProvisionedModelThroughputsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedModelThroughputs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProvisionedModelThroughputs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisionedModelThroughputs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +179,6 @@ func (c *Client) addOperationListProvisionedModelThroughputsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +285,3 @@ type ListProvisionedModelThroughputsAPIClient interface {
 }
 
 var _ ListProvisionedModelThroughputsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProvisionedModelThroughputs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProvisionedModelThroughputs",
-	}
-}

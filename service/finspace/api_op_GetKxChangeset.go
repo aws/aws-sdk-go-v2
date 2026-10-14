@@ -4,13 +4,8 @@ package finspace
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,24 +43,6 @@ type GetKxChangesetInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxChangesetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxChangesetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxChangesetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_changesetId, *v.ChangesetId)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_databaseName, *v.DatabaseName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_environmentId, *v.EnvironmentId)
-	}
 }
 
 type GetKxChangesetOutput struct {
@@ -118,115 +95,32 @@ type GetKxChangesetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxChangesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxChangesetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxChangesetResponse_activeFromTimestamp:
-			v.ActiveFromTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_activeFromTimestamp, v.ActiveFromTimestamp)
-		case schemas.GetKxChangesetResponse_changeRequests:
-			return deserializeChangeRequests(d, schemas.GetKxChangesetResponse_changeRequests, &v.ChangeRequests)
-		case schemas.GetKxChangesetResponse_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_changesetId, v.ChangesetId)
-		case schemas.GetKxChangesetResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxChangesetResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_databaseName, v.DatabaseName)
-		case schemas.GetKxChangesetResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxChangesetResponse_errorInfo:
-			v.ErrorInfo = &types.ErrorInfo{}
-			return v.ErrorInfo.Deserialize(d)
-		case schemas.GetKxChangesetResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxChangesetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxChangesetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ChangesetStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxChangeset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxChangeset, schemas.GetKxChangesetRequest, schemas.GetKxChangesetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxChangeset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxChangeset, schemas.GetKxChangesetRequest, schemas.GetKxChangesetResponse), output: &GetKxChangesetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxChangeset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKxChangesetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKxChangeset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -241,22 +135,8 @@ func (c *Client) addOperationGetKxChangesetMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKxChangeset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKxChangeset",
-	}
 }

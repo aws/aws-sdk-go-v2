@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/route-analyses
+
+Content-Type: application/json
+
+{"Destination":{"IpAddress":"__IpAddress__","TransitGatewayAttachmentArn":"__TransitGatewayAttachmentArn__"},"IncludeReturnPath":true,"Source":{"IpAddress":"__IpAddress__","TransitGatewayAttachmentArn":"__TransitGatewayAttachmentArn__"},"UseMiddleboxes":true}

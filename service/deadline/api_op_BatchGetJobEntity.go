@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +55,25 @@ type BatchGetJobEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_fleetId, *v.FleetId)
+	}
+	serializeJobEntityIdentifiers(s, schemas.BatchGetJobEntityRequest_identifiers, v.Identifiers)
+	if v.WorkerId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_workerId, *v.WorkerId)
+	}
+}
+
 type BatchGetJobEntityOutput struct {
 
 	// A list of the job entities, or details, in the batch.
@@ -72,65 +92,42 @@ type BatchGetJobEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetJobEntityList(s, schemas.BatchGetJobEntityResponse_entities, v.Entities)
+	serializeBatchGetJobEntityErrors(s, schemas.BatchGetJobEntityResponse_errors, v.Errors)
+}
+func (v *BatchGetJobEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetJobEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetJobEntityResponse_entities:
+			return deserializeBatchGetJobEntityList(d, schemas.BatchGetJobEntityResponse_entities, &v.Entities)
+		case schemas.BatchGetJobEntityResponse_errors:
+			return deserializeBatchGetJobEntityErrors(d, schemas.BatchGetJobEntityResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetJobEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobEntity, schemas.BatchGetJobEntityRequest, schemas.BatchGetJobEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetJobEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobEntity, schemas.BatchGetJobEntityRequest, schemas.BatchGetJobEntityResponse), output: &BatchGetJobEntityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetJobEntity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetJobEntity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +137,6 @@ func (c *Client) addOperationBatchGetJobEntityMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpBatchGetJobEntityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetJobEntity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +149,6 @@ func (c *Client) addOperationBatchGetJobEntityMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +182,4 @@ func (m *endpointPrefix_opBatchGetJobEntityMiddleware) HandleFinalize(ctx contex
 }
 func addEndpointPrefix_opBatchGetJobEntityMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchGetJobEntityMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchGetJobEntity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetJobEntity",
-	}
 }

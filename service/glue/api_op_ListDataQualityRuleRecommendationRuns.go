@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the recommendation runs meeting the filter criteria.
@@ -38,7 +38,31 @@ type ListDataQualityRuleRecommendationRunsInput struct {
 	// A paginated token to offset the results.
 	NextToken *string
 
+	// A list of key-value pair tags to filter recommendation runs.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
+}
+
+func (v *ListDataQualityRuleRecommendationRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRuleRecommendationRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRuleRecommendationRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDataQualityRuleRecommendationRunsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityRuleRecommendationRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRuleRecommendationRunsRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListDataQualityRuleRecommendationRunsRequest_Tags, v.Tags)
 }
 
 type ListDataQualityRuleRecommendationRunsOutput struct {
@@ -55,77 +79,51 @@ type ListDataQualityRuleRecommendationRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityRuleRecommendationRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRuleRecommendationRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRuleRecommendationRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRuleRecommendationRunsResponse_NextToken, *v.NextToken)
+	}
+	serializeDataQualityRuleRecommendationRunList(s, schemas.ListDataQualityRuleRecommendationRunsResponse_Runs, v.Runs)
+}
+func (v *ListDataQualityRuleRecommendationRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityRuleRecommendationRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityRuleRecommendationRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityRuleRecommendationRunsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityRuleRecommendationRunsResponse_Runs:
+			return deserializeDataQualityRuleRecommendationRunList(d, schemas.ListDataQualityRuleRecommendationRunsResponse_Runs, &v.Runs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityRuleRecommendationRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRuleRecommendationRuns, schemas.ListDataQualityRuleRecommendationRunsRequest, schemas.ListDataQualityRuleRecommendationRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityRuleRecommendationRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRuleRecommendationRuns, schemas.ListDataQualityRuleRecommendationRunsRequest, schemas.ListDataQualityRuleRecommendationRunsResponse), output: &ListDataQualityRuleRecommendationRunsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityRuleRecommendationRuns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataQualityRuleRecommendationRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataQualityRuleRecommendationRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataQualityRuleRecommendationRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +136,6 @@ func (c *Client) addOperationListDataQualityRuleRecommendationRunsMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +239,3 @@ type ListDataQualityRuleRecommendationRunsAPIClient interface {
 }
 
 var _ ListDataQualityRuleRecommendationRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataQualityRuleRecommendationRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataQualityRuleRecommendationRuns",
-	}
-}

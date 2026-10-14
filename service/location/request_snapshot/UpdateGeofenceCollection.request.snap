@@ -1,0 +1,5 @@
+PATCH /geofencing/v0/collections/__CollectionName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__"}

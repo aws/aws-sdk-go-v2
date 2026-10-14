@@ -5,14 +5,18 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT SiteWise Monitor feature will no longer be open to new customers
+// starting November 7, 2025. If you would like to use the IoT SiteWise Monitor
+// feature, sign up prior to that date. Existing customers can continue to use the
+// service as normal. For more information, see [IoT SiteWise Monitor availability change].
+//
 // Creates a dashboard in an IoT SiteWise Monitor project.
+//
+// [IoT SiteWise Monitor availability change]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -70,31 +74,6 @@ type CreateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDashboardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDashboardRequest_clientToken, *v.ClientToken)
-	}
-	if v.DashboardDefinition != nil {
-		s.WriteString(schemas.CreateDashboardRequest_dashboardDefinition, *v.DashboardDefinition)
-	}
-	if v.DashboardDescription != nil {
-		s.WriteString(schemas.CreateDashboardRequest_dashboardDescription, *v.DashboardDescription)
-	}
-	if v.DashboardName != nil {
-		s.WriteString(schemas.CreateDashboardRequest_dashboardName, *v.DashboardName)
-	}
-	if v.ProjectId != nil {
-		s.WriteString(schemas.CreateDashboardRequest_projectId, *v.ProjectId)
-	}
-	serializeTagMap(s, schemas.CreateDashboardRequest_tags, v.Tags)
-}
-
 type CreateDashboardOutput struct {
 
 	// The [ARN] of the dashboard, which has the following format.
@@ -117,76 +96,23 @@ type CreateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDashboardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDashboardResponse_dashboardArn:
-			v.DashboardArn = new(string)
-			return d.ReadString(schemas.CreateDashboardResponse_dashboardArn, v.DashboardArn)
-		case schemas.CreateDashboardResponse_dashboardId:
-			v.DashboardId = new(string)
-			return d.ReadString(schemas.CreateDashboardResponse_dashboardId, v.DashboardId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDashboard{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse), output: &CreateDashboardOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -201,12 +127,6 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addOpCreateDashboardValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -217,12 +137,6 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,12 +203,4 @@ func (m *idempotencyToken_initializeOpCreateDashboard) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateDashboardMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDashboard{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDashboard",
-	}
 }

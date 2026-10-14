@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This action allows you to create an immutable snapshot of a specific resource,
@@ -76,6 +76,33 @@ type CreateResourceSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceSnapshotTemplateIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier, *v.ResourceSnapshotTemplateIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CreateResourceSnapshotRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type CreateResourceSnapshotOutput struct {
 
 	//  Specifies the Amazon Resource Name (ARN) that uniquely identifies the snapshot
@@ -93,65 +120,48 @@ type CreateResourceSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateResourceSnapshotResponse_Arn, *v.Arn)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.CreateResourceSnapshotResponse_Revision, *v.Revision)
+	}
+}
+func (v *CreateResourceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceSnapshotResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateResourceSnapshotResponse_Arn, v.Arn)
+		case schemas.CreateResourceSnapshotResponse_Revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.CreateResourceSnapshotResponse_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSnapshot, schemas.CreateResourceSnapshotRequest, schemas.CreateResourceSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateResourceSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSnapshot, schemas.CreateResourceSnapshotRequest, schemas.CreateResourceSnapshotResponse), output: &CreateResourceSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateResourceSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResourceSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -161,12 +171,6 @@ func (c *Client) addOperationCreateResourceSnapshotMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateResourceSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourceSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +183,6 @@ func (c *Client) addOperationCreateResourceSnapshotMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,12 +222,4 @@ func (m *idempotencyToken_initializeOpCreateResourceSnapshot) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateResourceSnapshotMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateResourceSnapshot{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateResourceSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResourceSnapshot",
-	}
 }

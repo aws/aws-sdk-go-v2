@@ -1,0 +1,3 @@
+DELETE /connections/__ClientId__?cleanSession=true&preventWillMessage=true
+
+

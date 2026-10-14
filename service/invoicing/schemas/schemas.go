@@ -63,6 +63,16 @@ var ListProcurementPortalPreferences = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListProcurementPortalPreferences",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListProcurementPortals = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortals",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListProcurementPortalSuppliers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortalSuppliers",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ListTagsForResource",
@@ -71,6 +81,11 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 var PutProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "PutProcurementPortalPreference",
+}, smithy.ShapeTypeOperation, 0)
+
+var SendProcurementPortalValidation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "SendProcurementPortalValidation",
 }, smithy.ShapeTypeOperation, 0)
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -93,6 +108,11 @@ var UpdateProcurementPortalPreferenceStatus = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateProcurementPortalPreferenceStatus",
 }, smithy.ShapeTypeOperation, 0)
 
+var VerifyProcurementPortalValidation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "VerifyProcurementPortalValidation",
+}, smithy.ShapeTypeOperation, 0)
+
 var _Invoicing = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "Invoicing",
@@ -103,7 +123,8 @@ var Invoicing = smithy.NewServiceSchema(_Invoicing, "2024-12-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -189,7 +210,8 @@ var BuyerDomain_NetworkID *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingConflict",
 		StatusCode: 409})
 var ConflictException_message *smithy.Schema
@@ -219,6 +241,11 @@ var _Contacts = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Contacts",
 }, smithy.ShapeTypeList, 1)
 var _Contacts_member *smithy.Schema
+
+var _CountryCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "CountryCode",
+}, smithy.ShapeTypeString, 0)
 
 var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
@@ -343,6 +370,12 @@ var Entity_InvoicingEntity *smithy.Schema
 
 var Entity_BillingEntity *smithy.Schema
 
+var FeatureConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "FeatureConfigurations",
+}, smithy.ShapeTypeStructure, 1)
+var FeatureConfigurations_InvoiceConfiguration *smithy.Schema
+
 var FeesBreakdown = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "FeesBreakdown",
@@ -382,12 +415,21 @@ var Filters_BillSourceAccounts *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingInternalServer",
 		StatusCode: 500})
 var InternalServerException_retryAfterSeconds *smithy.Schema
 
 var InternalServerException_message *smithy.Schema
+
+var InvoiceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "InvoiceConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var InvoiceConfiguration_DocumentTypes *smithy.Schema
+
+var InvoiceConfiguration_AttachmentTypes *smithy.Schema
 
 var InvoiceCurrencyAmount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
@@ -591,6 +633,12 @@ var ListInvoiceSummariesResourceType_ACCOUNT_ID *smithy.Schema
 
 var ListInvoiceSummariesResourceType_INVOICE_ID *smithy.Schema
 
+var MarketplacePunchOutPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "MarketplacePunchOutPreference",
+}, smithy.ShapeTypeStructure, 1)
+var MarketplacePunchOutPreference_ApprovalRequestRedirectUrl *smithy.Schema
+
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "MaxResults",
@@ -611,6 +659,31 @@ var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NextTokenString",
 }, smithy.ShapeTypeString, 0)
 
+var ProcurementPortal = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortal",
+}, smithy.ShapeTypeStructure, 4)
+var ProcurementPortal_PortalIdentifier *smithy.Schema
+
+var ProcurementPortal_PortalName *smithy.Schema
+
+var ProcurementPortal_PortalDisplayName *smithy.Schema
+
+var ProcurementPortal_DefaultFeatureConfigurations *smithy.Schema
+
+var ProcurementPortalEnv = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortalEnv",
+}, smithy.ShapeTypeEnum, 2)
+var ProcurementPortalEnv_PROD *smithy.Schema
+
+var ProcurementPortalEnv_TEST *smithy.Schema
+
+var _ProcurementPortalIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortalIdString",
+}, smithy.ShapeTypeString, 0)
+
 var ProcurementPortalName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalName",
@@ -622,7 +695,7 @@ var ProcurementPortalName_COUPA *smithy.Schema
 var ProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalPreference",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var ProcurementPortalPreference_AwsAccountId *smithy.Schema
 
 var ProcurementPortalPreference_ProcurementPortalPreferenceArn *smithy.Schema
@@ -652,6 +725,10 @@ var ProcurementPortalPreference_EinvoiceDeliveryEnabled *smithy.Schema
 var ProcurementPortalPreference_EinvoiceDeliveryPreference *smithy.Schema
 
 var ProcurementPortalPreference_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var ProcurementPortalPreference_MarketplacePunchOutEnabled *smithy.Schema
+
+var ProcurementPortalPreference_MarketplacePunchOutPreference *smithy.Schema
 
 var ProcurementPortalPreference_Contacts *smithy.Schema
 
@@ -685,8 +762,10 @@ var ProcurementPortalPreferenceSelector_SellerOfRecords *smithy.Schema
 var ProcurementPortalPreferenceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalPreferenceStatus",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var ProcurementPortalPreferenceStatus_PENDING_VERIFICATION *smithy.Schema
+
+var ProcurementPortalPreferenceStatus_VALIDATED *smithy.Schema
 
 var ProcurementPortalPreferenceStatus_TEST_INITIALIZED *smithy.Schema
 
@@ -707,7 +786,7 @@ var _ProcurementPortalPreferenceSummaries_member *smithy.Schema
 var ProcurementPortalPreferenceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ProcurementPortalPreferenceSummary",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var ProcurementPortalPreferenceSummary_AwsAccountId *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn *smithy.Schema
@@ -728,6 +807,8 @@ var ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled *smithy.Schema
 
+var ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled *smithy.Schema
+
 var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason *smithy.Schema
@@ -741,6 +822,30 @@ var ProcurementPortalPreferenceSummary_Version *smithy.Schema
 var ProcurementPortalPreferenceSummary_CreateDate *smithy.Schema
 
 var ProcurementPortalPreferenceSummary_LastUpdateDate *smithy.Schema
+
+var _ProcurementPortals = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortals",
+}, smithy.ShapeTypeList, 1)
+var _ProcurementPortals_member *smithy.Schema
+
+var ProcurementPortalSupplier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortalSupplier",
+}, smithy.ShapeTypeStructure, 4)
+var ProcurementPortalSupplier_SupplierIdentifier *smithy.Schema
+
+var ProcurementPortalSupplier_SellerOfRecord *smithy.Schema
+
+var ProcurementPortalSupplier_CountryCode *smithy.Schema
+
+var ProcurementPortalSupplier_Environment *smithy.Schema
+
+var _ProcurementPortalSuppliers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ProcurementPortalSuppliers",
+}, smithy.ShapeTypeList, 1)
+var _ProcurementPortalSuppliers_member *smithy.Schema
 
 var _ProfileList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
@@ -811,7 +916,8 @@ var ReceiverRole_BUYER *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -868,7 +974,8 @@ var _SensitiveBasicStringWithoutSpace = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingServiceQuotaExceeded",
 		StatusCode: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -913,6 +1020,11 @@ var SupplierDomain = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SupplierDomain",
 }, smithy.ShapeTypeEnum, 1)
 var SupplierDomain_NetworkID *smithy.Schema
+
+var _SupplierIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "SupplierIdString",
+}, smithy.ShapeTypeString, 0)
 
 var _TagrisArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
@@ -993,7 +1105,8 @@ var TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingThrottling",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
@@ -1001,7 +1114,8 @@ var ThrottlingException_message *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "InvoicingValidation",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema
@@ -1102,7 +1216,7 @@ var CreateInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
 var CreateProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "CreateProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var CreateProcurementPortalPreferenceRequest_ProcurementPortalName *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_BuyerDomain *smithy.Schema
@@ -1126,6 +1240,10 @@ var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled *smithy.Sch
 var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
+
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
+
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
 
 var CreateProcurementPortalPreferenceRequest_Contacts *smithy.Schema
 
@@ -1273,6 +1391,40 @@ var ListProcurementPortalPreferencesResponse_ProcurementPortalPreferences *smith
 
 var ListProcurementPortalPreferencesResponse_NextToken *smithy.Schema
 
+var ListProcurementPortalsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortalsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListProcurementPortalsRequest_NextToken *smithy.Schema
+
+var ListProcurementPortalsRequest_MaxResults *smithy.Schema
+
+var ListProcurementPortalsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortalsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListProcurementPortalsResponse_ProcurementPortals *smithy.Schema
+
+var ListProcurementPortalsResponse_NextToken *smithy.Schema
+
+var ListProcurementPortalSuppliersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortalSuppliersRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListProcurementPortalSuppliersRequest_PortalIdentifier *smithy.Schema
+
+var ListProcurementPortalSuppliersRequest_NextToken *smithy.Schema
+
+var ListProcurementPortalSuppliersRequest_MaxResults *smithy.Schema
+
+var ListProcurementPortalSuppliersResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "ListProcurementPortalSuppliersResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers *smithy.Schema
+
+var ListProcurementPortalSuppliersResponse_NextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "ListTagsForResourceRequest",
@@ -1288,7 +1440,7 @@ var ListTagsForResourceResponse_ResourceTags *smithy.Schema
 var PutProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
 	Name:      "PutProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn *smithy.Schema
 
 var PutProcurementPortalPreferenceRequest_Selector *smithy.Schema
@@ -1305,6 +1457,10 @@ var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Sch
 
 var PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
 
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
+
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
+
 var PutProcurementPortalPreferenceRequest_Contacts *smithy.Schema
 
 var PutProcurementPortalPreferenceRequest_ClientToken *smithy.Schema
@@ -1314,6 +1470,20 @@ var PutProcurementPortalPreferenceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutProcurementPortalPreferenceResponse",
 }, smithy.ShapeTypeStructure, 1)
 var PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn *smithy.Schema
+
+var SendProcurementPortalValidationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "SendProcurementPortalValidationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn *smithy.Schema
+
+var SendProcurementPortalValidationRequest_ClientToken *smithy.Schema
+
+var SendProcurementPortalValidationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "SendProcurementPortalValidationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.invoicing",
@@ -1382,6 +1552,22 @@ var UpdateProcurementPortalPreferenceStatusResponse = smithy.NewSchema(smithy.Sh
 	Name:      "UpdateProcurementPortalPreferenceStatusResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn *smithy.Schema
+
+var VerifyProcurementPortalValidationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "VerifyProcurementPortalValidationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var VerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn *smithy.Schema
+
+var VerifyProcurementPortalValidationRequest_Code *smithy.Schema
+
+var VerifyProcurementPortalValidationRequest_ClientToken *smithy.Schema
+
+var VerifyProcurementPortalValidationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.invoicing",
+	Name:      "VerifyProcurementPortalValidationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var VerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1529,6 +1715,12 @@ func init() {
 	Entity_InvoicingEntity = Entity.AddMember("InvoicingEntity", _BasicString)
 
 	Entity_BillingEntity = Entity.AddMember("BillingEntity", BillingEntity)
+
+	InvoiceConfiguration_DocumentTypes = InvoiceConfiguration.AddMember("DocumentTypes", _EinvoiceDeliveryDocumentTypes)
+
+	InvoiceConfiguration_AttachmentTypes = InvoiceConfiguration.AddMember("AttachmentTypes", _EinvoiceDeliveryAttachmentTypes)
+
+	FeatureConfigurations_InvoiceConfiguration = FeatureConfigurations.AddMember("InvoiceConfiguration", InvoiceConfiguration)
 
 	_InvoiceUnitNames_member = _InvoiceUnitNames.AddMember("member", _InvoiceUnitName)
 
@@ -1712,9 +1904,23 @@ func init() {
 
 	_InvoiceUnits_member = _InvoiceUnits.AddMember("member", InvoiceUnit)
 
+	MarketplacePunchOutPreference_ApprovalRequestRedirectUrl = MarketplacePunchOutPreference.AddMember("ApprovalRequestRedirectUrl", _BasicStringWithoutSpace)
+
 	ProcurementPortalName_SAP_BUSINESS_NETWORK = ProcurementPortalName.AddMember("SAP_BUSINESS_NETWORK", smithyprelude.Unit)
 
 	ProcurementPortalName_COUPA = ProcurementPortalName.AddMember("COUPA", smithyprelude.Unit)
+
+	ProcurementPortal_PortalIdentifier = ProcurementPortal.AddMember("PortalIdentifier", _ProcurementPortalIdString)
+
+	ProcurementPortal_PortalName = ProcurementPortal.AddMember("PortalName", ProcurementPortalName)
+
+	ProcurementPortal_PortalDisplayName = ProcurementPortal.AddMember("PortalDisplayName", _BasicString)
+
+	ProcurementPortal_DefaultFeatureConfigurations = ProcurementPortal.AddMember("DefaultFeatureConfigurations", FeatureConfigurations)
+
+	ProcurementPortalEnv_PROD = ProcurementPortalEnv.AddMember("PROD", smithyprelude.Unit)
+
+	ProcurementPortalEnv_TEST = ProcurementPortalEnv.AddMember("TEST", smithyprelude.Unit)
 
 	SupplierDomain_NetworkID = SupplierDomain.AddMember("NetworkID", smithyprelude.Unit)
 
@@ -1739,6 +1945,8 @@ func init() {
 	TestEnvPreference_PurchaseOrderRetrievalEndpoint = TestEnvPreference.AddMember("PurchaseOrderRetrievalEndpoint", _BasicStringWithoutSpace)
 
 	ProcurementPortalPreferenceStatus_PENDING_VERIFICATION = ProcurementPortalPreferenceStatus.AddMember("PENDING_VERIFICATION", smithyprelude.Unit)
+
+	ProcurementPortalPreferenceStatus_VALIDATED = ProcurementPortalPreferenceStatus.AddMember("VALIDATED", smithyprelude.Unit)
 
 	ProcurementPortalPreferenceStatus_TEST_INITIALIZED = ProcurementPortalPreferenceStatus.AddMember("TEST_INITIALIZED", smithyprelude.Unit)
 
@@ -1780,6 +1988,10 @@ func init() {
 
 	ProcurementPortalPreference_PurchaseOrderRetrievalEnabled = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	ProcurementPortalPreference_MarketplacePunchOutEnabled = ProcurementPortalPreference.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	ProcurementPortalPreference_MarketplacePunchOutPreference = ProcurementPortalPreference.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
+
 	ProcurementPortalPreference_Contacts = ProcurementPortalPreference.AddMember("Contacts", _Contacts)
 
 	ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreference.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
@@ -1816,6 +2028,8 @@ func init() {
 
 	ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = ProcurementPortalPreferenceSummary.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = ProcurementPortalPreferenceSummary.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
 	ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
 
 	ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryPreferenceStatusReason", _BasicString)
@@ -1831,6 +2045,18 @@ func init() {
 	ProcurementPortalPreferenceSummary_LastUpdateDate = ProcurementPortalPreferenceSummary.AddMember("LastUpdateDate", smithyprelude.Timestamp)
 
 	_ProcurementPortalPreferenceSummaries_member = _ProcurementPortalPreferenceSummaries.AddMember("member", ProcurementPortalPreferenceSummary)
+
+	_ProcurementPortals_member = _ProcurementPortals.AddMember("member", ProcurementPortal)
+
+	ProcurementPortalSupplier_SupplierIdentifier = ProcurementPortalSupplier.AddMember("SupplierIdentifier", _SupplierIdString)
+
+	ProcurementPortalSupplier_SellerOfRecord = ProcurementPortalSupplier.AddMember("SellerOfRecord", _BasicStringWithoutSpace)
+
+	ProcurementPortalSupplier_CountryCode = ProcurementPortalSupplier.AddMember("CountryCode", _CountryCode)
+
+	ProcurementPortalSupplier_Environment = ProcurementPortalSupplier.AddMember("Environment", ProcurementPortalEnv)
+
+	_ProcurementPortalSuppliers_member = _ProcurementPortalSuppliers.AddMember("member", ProcurementPortalSupplier)
 
 	_ProfileList_member = _ProfileList.AddMember("member", InvoiceProfile)
 
@@ -1948,6 +2174,10 @@ func init() {
 
 	CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = CreateProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
+
 	CreateProcurementPortalPreferenceRequest_Contacts = CreateProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
 
 	CreateProcurementPortalPreferenceRequest_ResourceTags = CreateProcurementPortalPreferenceRequest.AddMember("ResourceTags", _ResourceTagList)
@@ -2026,6 +2256,24 @@ func init() {
 
 	ListProcurementPortalPreferencesResponse_NextToken = ListProcurementPortalPreferencesResponse.AddMember("NextToken", _BasicStringWithoutSpace)
 
+	ListProcurementPortalsRequest_NextToken = ListProcurementPortalsRequest.AddMember("NextToken", _BasicStringWithoutSpace)
+
+	ListProcurementPortalsRequest_MaxResults = ListProcurementPortalsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListProcurementPortalsResponse_ProcurementPortals = ListProcurementPortalsResponse.AddMember("ProcurementPortals", _ProcurementPortals)
+
+	ListProcurementPortalsResponse_NextToken = ListProcurementPortalsResponse.AddMember("NextToken", _BasicStringWithoutSpace)
+
+	ListProcurementPortalSuppliersRequest_PortalIdentifier = ListProcurementPortalSuppliersRequest.AddMember("PortalIdentifier", _ProcurementPortalIdString)
+
+	ListProcurementPortalSuppliersRequest_NextToken = ListProcurementPortalSuppliersRequest.AddMember("NextToken", _BasicStringWithoutSpace)
+
+	ListProcurementPortalSuppliersRequest_MaxResults = ListProcurementPortalSuppliersRequest.AddMember("MaxResults", _MaxResults)
+
+	ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers = ListProcurementPortalSuppliersResponse.AddMember("ProcurementPortalSuppliers", _ProcurementPortalSuppliers)
+
+	ListProcurementPortalSuppliersResponse_NextToken = ListProcurementPortalSuppliersResponse.AddMember("NextToken", _BasicStringWithoutSpace)
+
 	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TagrisArn)
 
 	ListTagsForResourceResponse_ResourceTags = ListTagsForResourceResponse.AddMember("ResourceTags", _ResourceTagList)
@@ -2046,11 +2294,21 @@ func init() {
 
 	PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = PutProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
 
+	PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
+
+	PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
+
 	PutProcurementPortalPreferenceRequest_Contacts = PutProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
 
 	PutProcurementPortalPreferenceRequest_ClientToken = PutProcurementPortalPreferenceRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
 
 	PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = PutProcurementPortalPreferenceResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
+
+	SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = SendProcurementPortalValidationRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
+
+	SendProcurementPortalValidationRequest_ClientToken = SendProcurementPortalValidationRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
+
+	SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = SendProcurementPortalValidationResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
 
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TagrisArn)
 
@@ -2085,5 +2343,13 @@ func init() {
 	UpdateProcurementPortalPreferenceStatusRequest_ClientToken = UpdateProcurementPortalPreferenceStatusRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
 
 	UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn = UpdateProcurementPortalPreferenceStatusResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
+
+	VerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = VerifyProcurementPortalValidationRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
+
+	VerifyProcurementPortalValidationRequest_Code = VerifyProcurementPortalValidationRequest.AddMember("Code", _BasicStringWithoutSpace)
+
+	VerifyProcurementPortalValidationRequest_ClientToken = VerifyProcurementPortalValidationRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
+
+	VerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = VerifyProcurementPortalValidationResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
 
 }

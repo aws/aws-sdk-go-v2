@@ -53,12 +53,14 @@ var _Data = smithy.NewSchema(smithy.ShapeID{
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigatewaymanagementapi",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 
 var GoneException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigatewaymanagementapi",
 	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 410})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 410})
 
 var Identity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigatewaymanagementapi",
@@ -71,12 +73,14 @@ var Identity_UserAgent *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigatewaymanagementapi",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 
 var PayloadTooLargeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigatewaymanagementapi",
 	Name:      "PayloadTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 413})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 413})
 var PayloadTooLargeException_Message *smithy.Schema
 
 var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{

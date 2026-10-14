@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","VocabularySummaryList":[{"Arn":"__Arn__","FailureReason":"__FailureReason__","Id":"__Id__","LanguageCode":"ar-AE","LastModifiedTime":946684800,"Name":"__Name__","State":"CREATION_IN_PROGRESS"},{"Arn":"__Arn__","FailureReason":"__FailureReason__","Id":"__Id__","LanguageCode":"ar-AE","LastModifiedTime":946684800,"Name":"__Name__","State":"CREATION_IN_PROGRESS"}]}

@@ -4,13 +4,8 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -59,21 +54,6 @@ type ListSqlInjectionMatchSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSqlInjectionMatchSetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSqlInjectionMatchSetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSqlInjectionMatchSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Limit != 0 {
-		s.WriteInt32(schemas.ListSqlInjectionMatchSetsRequest_Limit, v.Limit)
-	}
-	if v.NextMarker != nil {
-		s.WriteString(schemas.ListSqlInjectionMatchSetsRequest_NextMarker, *v.NextMarker)
-	}
-}
-
 // The response to a ListSqlInjectionMatchSets request.
 type ListSqlInjectionMatchSetsOutput struct {
 
@@ -93,84 +73,26 @@ type ListSqlInjectionMatchSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSqlInjectionMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSqlInjectionMatchSetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSqlInjectionMatchSetsResponse_NextMarker:
-			v.NextMarker = new(string)
-			return d.ReadString(schemas.ListSqlInjectionMatchSetsResponse_NextMarker, v.NextMarker)
-		case schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets:
-			return deserializeSqlInjectionMatchSetSummaries(d, schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets, &v.SqlInjectionMatchSets)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSqlInjectionMatchSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSqlInjectionMatchSets, schemas.ListSqlInjectionMatchSetsRequest, schemas.ListSqlInjectionMatchSetsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSqlInjectionMatchSets{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSqlInjectionMatchSets, schemas.ListSqlInjectionMatchSetsRequest, schemas.ListSqlInjectionMatchSetsResponse), output: &ListSqlInjectionMatchSetsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSqlInjectionMatchSets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSqlInjectionMatchSets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +107,8 @@ func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListSqlInjectionMatchSets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSqlInjectionMatchSets",
-	}
 }

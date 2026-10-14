@@ -4,12 +4,7 @@ package marketplacereporting
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacereporting/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates an embedding URL for an Amazon QuickSight dashboard for an anonymous
@@ -60,19 +55,6 @@ type GetBuyerDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBuyerDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBuyerDashboardInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBuyerDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DashboardIdentifier != nil {
-		s.WriteString(schemas.GetBuyerDashboardInput_dashboardIdentifier, *v.DashboardIdentifier)
-	}
-	serializeEmbeddingDomains(s, schemas.GetBuyerDashboardInput_embeddingDomains, v.EmbeddingDomains)
-}
-
 type GetBuyerDashboardOutput struct {
 
 	// The ARN of the returned dashboard.
@@ -100,90 +82,29 @@ type GetBuyerDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBuyerDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBuyerDashboardOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBuyerDashboardOutput_dashboardIdentifier:
-			v.DashboardIdentifier = new(string)
-			return d.ReadString(schemas.GetBuyerDashboardOutput_dashboardIdentifier, v.DashboardIdentifier)
-		case schemas.GetBuyerDashboardOutput_embedUrl:
-			v.EmbedUrl = new(string)
-			return d.ReadString(schemas.GetBuyerDashboardOutput_embedUrl, v.EmbedUrl)
-		case schemas.GetBuyerDashboardOutput_embeddingDomains:
-			return deserializeEmbeddingDomains(d, schemas.GetBuyerDashboardOutput_embeddingDomains, &v.EmbeddingDomains)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBuyerDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBuyerDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuyerDashboard, schemas.GetBuyerDashboardInput, schemas.GetBuyerDashboardOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBuyerDashboard{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuyerDashboard, schemas.GetBuyerDashboardInput, schemas.GetBuyerDashboardOutput), output: &GetBuyerDashboardOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBuyerDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBuyerDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBuyerDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,22 +119,8 @@ func (c *Client) addOperationGetBuyerDashboardMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBuyerDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBuyerDashboard",
-	}
 }

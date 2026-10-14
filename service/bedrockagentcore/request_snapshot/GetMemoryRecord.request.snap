@@ -1,0 +1,3 @@
+GET /memories/__MemoryId__/memoryRecord/__MemoryRecordId__?namespace=__Namespace__
+
+

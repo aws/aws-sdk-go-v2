@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/ListExportImageTasks
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gFilters‚¢fValues‚j__Member__j__Member__dNameh__Name__¢dNameh__Name__fValues‚j__Member__j__Member__jMaxResultsiNextTokenm__NextToken__

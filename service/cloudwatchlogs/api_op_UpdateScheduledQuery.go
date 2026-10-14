@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing scheduled query with new configuration. This operation uses
@@ -63,6 +62,10 @@ type UpdateScheduledQueryInput struct {
 	// The updated configuration for where to deliver query results.
 	DestinationConfiguration *types.DestinationConfiguration
 
+	// The updated time offset in seconds that defines the end of the lookback period
+	// for the query.
+	EndTimeOffset *int64
+
 	// The updated array of log group names or ARNs to query.
 	LogGroupIdentifiers []string
 
@@ -85,6 +88,57 @@ type UpdateScheduledQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_description, *v.Description)
+	}
+	if v.DestinationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateScheduledQueryRequest_destinationConfiguration)
+		v.DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTimeOffset != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryRequest_endTimeOffset, *v.EndTimeOffset)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_identifier, *v.Identifier)
+	}
+	serializeScheduledQueryLogGroupIdentifiers(s, schemas.UpdateScheduledQueryRequest_logGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.QueryLanguage != "" {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_queryLanguage, string(v.QueryLanguage))
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_queryString, *v.QueryString)
+	}
+	if v.ScheduleEndTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryRequest_scheduleEndTime, *v.ScheduleEndTime)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_scheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleStartTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryRequest_scheduleStartTime, *v.ScheduleStartTime)
+	}
+	if v.StartTimeOffset != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryRequest_startTimeOffset, *v.StartTimeOffset)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_state, string(v.State))
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.UpdateScheduledQueryRequest_timezone, *v.Timezone)
+	}
+}
+
 type UpdateScheduledQueryOutput struct {
 
 	// The timestamp when the scheduled query was originally created.
@@ -95,6 +149,9 @@ type UpdateScheduledQueryOutput struct {
 
 	// The destination configuration of the updated scheduled query.
 	DestinationConfiguration *types.DestinationConfiguration
+
+	// The end time offset in seconds of the updated scheduled query.
+	EndTimeOffset *int64
 
 	// The execution role ARN of the updated scheduled query.
 	ExecutionRoleArn *string
@@ -129,6 +186,9 @@ type UpdateScheduledQueryOutput struct {
 	// The start time of the updated scheduled query.
 	ScheduleStartTime *int64
 
+	// The schedule type of the updated scheduled query.
+	ScheduleType types.ScheduleType
+
 	// The ARN of the updated scheduled query.
 	ScheduledQueryArn *string
 
@@ -147,77 +207,177 @@ type UpdateScheduledQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_description, *v.Description)
+	}
+	if v.DestinationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateScheduledQueryResponse_destinationConfiguration)
+		v.DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTimeOffset != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_endTimeOffset, *v.EndTimeOffset)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LastExecutionStatus != "" {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_lastExecutionStatus, string(v.LastExecutionStatus))
+	}
+	if v.LastTriggeredTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_lastTriggeredTime, *v.LastTriggeredTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeScheduledQueryLogGroupIdentifiers(s, schemas.UpdateScheduledQueryResponse_logGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_name, *v.Name)
+	}
+	if v.QueryLanguage != "" {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_queryLanguage, string(v.QueryLanguage))
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_queryString, *v.QueryString)
+	}
+	if v.ScheduleEndTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_scheduleEndTime, *v.ScheduleEndTime)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_scheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleStartTime != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_scheduleStartTime, *v.ScheduleStartTime)
+	}
+	if v.ScheduleType != "" {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_scheduleType, string(v.ScheduleType))
+	}
+	if v.ScheduledQueryArn != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_scheduledQueryArn, *v.ScheduledQueryArn)
+	}
+	if v.StartTimeOffset != nil {
+		s.WriteInt64(schemas.UpdateScheduledQueryResponse_startTimeOffset, *v.StartTimeOffset)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_state, string(v.State))
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.UpdateScheduledQueryResponse_timezone, *v.Timezone)
+	}
+}
+func (v *UpdateScheduledQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScheduledQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScheduledQueryResponse_creationTime:
+			v.CreationTime = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_creationTime, v.CreationTime)
+		case schemas.UpdateScheduledQueryResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_description, v.Description)
+		case schemas.UpdateScheduledQueryResponse_destinationConfiguration:
+			v.DestinationConfiguration = &types.DestinationConfiguration{}
+			return v.DestinationConfiguration.Deserialize(d)
+		case schemas.UpdateScheduledQueryResponse_endTimeOffset:
+			v.EndTimeOffset = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_endTimeOffset, v.EndTimeOffset)
+		case schemas.UpdateScheduledQueryResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.UpdateScheduledQueryResponse_lastExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateScheduledQueryResponse_lastExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.LastExecutionStatus = types.ExecutionStatus(ev)
+			return nil
+		case schemas.UpdateScheduledQueryResponse_lastTriggeredTime:
+			v.LastTriggeredTime = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_lastTriggeredTime, v.LastTriggeredTime)
+		case schemas.UpdateScheduledQueryResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdateScheduledQueryResponse_logGroupIdentifiers:
+			return deserializeScheduledQueryLogGroupIdentifiers(d, schemas.UpdateScheduledQueryResponse_logGroupIdentifiers, &v.LogGroupIdentifiers)
+		case schemas.UpdateScheduledQueryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_name, v.Name)
+		case schemas.UpdateScheduledQueryResponse_queryLanguage:
+			var ev string
+			if err := d.ReadString(schemas.UpdateScheduledQueryResponse_queryLanguage, &ev); err != nil {
+				return err
+			}
+			v.QueryLanguage = types.QueryLanguage(ev)
+			return nil
+		case schemas.UpdateScheduledQueryResponse_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_queryString, v.QueryString)
+		case schemas.UpdateScheduledQueryResponse_scheduleEndTime:
+			v.ScheduleEndTime = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_scheduleEndTime, v.ScheduleEndTime)
+		case schemas.UpdateScheduledQueryResponse_scheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_scheduleExpression, v.ScheduleExpression)
+		case schemas.UpdateScheduledQueryResponse_scheduleStartTime:
+			v.ScheduleStartTime = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_scheduleStartTime, v.ScheduleStartTime)
+		case schemas.UpdateScheduledQueryResponse_scheduleType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateScheduledQueryResponse_scheduleType, &ev); err != nil {
+				return err
+			}
+			v.ScheduleType = types.ScheduleType(ev)
+			return nil
+		case schemas.UpdateScheduledQueryResponse_scheduledQueryArn:
+			v.ScheduledQueryArn = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_scheduledQueryArn, v.ScheduledQueryArn)
+		case schemas.UpdateScheduledQueryResponse_startTimeOffset:
+			v.StartTimeOffset = new(int64)
+			return d.ReadInt64(schemas.UpdateScheduledQueryResponse_startTimeOffset, v.StartTimeOffset)
+		case schemas.UpdateScheduledQueryResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.UpdateScheduledQueryResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.ScheduledQueryState(ev)
+			return nil
+		case schemas.UpdateScheduledQueryResponse_timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.UpdateScheduledQueryResponse_timezone, v.Timezone)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduledQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledQuery, schemas.UpdateScheduledQueryRequest, schemas.UpdateScheduledQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateScheduledQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledQuery, schemas.UpdateScheduledQueryRequest, schemas.UpdateScheduledQueryResponse), output: &UpdateScheduledQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateScheduledQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScheduledQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateScheduledQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScheduledQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -232,22 +392,8 @@ func (c *Client) addOperationUpdateScheduledQueryMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateScheduledQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateScheduledQuery",
-	}
 }

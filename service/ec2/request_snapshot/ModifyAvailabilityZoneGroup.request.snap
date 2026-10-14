@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyAvailabilityZoneGroup&DryRun=true&GroupName=__GroupName__&OptInStatus=opted-in&Version=2016-11-15

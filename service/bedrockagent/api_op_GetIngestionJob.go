@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a data ingestion job. Data sources are ingested into
@@ -50,6 +49,24 @@ type GetIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_ingestionJobId, *v.IngestionJobId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetIngestionJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetIngestionJobOutput struct {
 
 	// Contains details about the data ingestion job.
@@ -63,77 +80,50 @@ type GetIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngestionJob != nil {
+		s.WriteStruct(schemas.GetIngestionJobResponse_ingestionJob)
+		v.IngestionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIngestionJobResponse_ingestionJob:
+			v.IngestionJob = &types.IngestionJob{}
+			return v.IngestionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionJob, schemas.GetIngestionJobRequest, schemas.GetIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestionJob, schemas.GetIngestionJobRequest, schemas.GetIngestionJobResponse), output: &GetIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIngestionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIngestionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIngestionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIngestionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +138,8 @@ func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIngestionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIngestionJob",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateEnvironmentTemplateVersion
+
+{"clientToken":"__ClientToken__","description":"__Description__","majorVersion":"__MajorVersion__","source":{"s3":{"bucket":"__Bucket__","key":"__Key__"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateName":"__TemplateName__"}

@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Authorizer for an API.
@@ -123,6 +122,48 @@ type CreateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_ApiId, *v.ApiId)
+	}
+	if v.AuthorizerCredentialsArn != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_AuthorizerCredentialsArn, *v.AuthorizerCredentialsArn)
+	}
+	if v.AuthorizerPayloadFormatVersion != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_AuthorizerPayloadFormatVersion, *v.AuthorizerPayloadFormatVersion)
+	}
+	if v.AuthorizerResultTtlInSeconds != nil {
+		s.WriteInt32(schemas.CreateAuthorizerRequest_AuthorizerResultTtlInSeconds, *v.AuthorizerResultTtlInSeconds)
+	}
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.CreateAuthorizerRequest_AuthorizerType, string(v.AuthorizerType))
+	}
+	if v.AuthorizerUri != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_AuthorizerUri, *v.AuthorizerUri)
+	}
+	if v.EnableSimpleResponses != nil {
+		s.WriteBool(schemas.CreateAuthorizerRequest_EnableSimpleResponses, *v.EnableSimpleResponses)
+	}
+	serializeIdentitySourceList(s, schemas.CreateAuthorizerRequest_IdentitySource, v.IdentitySource)
+	if v.IdentityValidationExpression != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_IdentityValidationExpression, *v.IdentityValidationExpression)
+	}
+	if v.JwtConfiguration != nil {
+		s.WriteStruct(schemas.CreateAuthorizerRequest_JwtConfiguration)
+		v.JwtConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_Name, *v.Name)
+	}
+}
+
 type CreateAuthorizerOutput struct {
 
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
@@ -212,77 +253,111 @@ type CreateAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerCredentialsArn != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_AuthorizerCredentialsArn, *v.AuthorizerCredentialsArn)
+	}
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_AuthorizerId, *v.AuthorizerId)
+	}
+	if v.AuthorizerPayloadFormatVersion != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_AuthorizerPayloadFormatVersion, *v.AuthorizerPayloadFormatVersion)
+	}
+	if v.AuthorizerResultTtlInSeconds != nil {
+		s.WriteInt32(schemas.CreateAuthorizerResponse_AuthorizerResultTtlInSeconds, *v.AuthorizerResultTtlInSeconds)
+	}
+	if v.AuthorizerType != "" {
+		s.WriteString(schemas.CreateAuthorizerResponse_AuthorizerType, string(v.AuthorizerType))
+	}
+	if v.AuthorizerUri != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_AuthorizerUri, *v.AuthorizerUri)
+	}
+	if v.EnableSimpleResponses != nil {
+		s.WriteBool(schemas.CreateAuthorizerResponse_EnableSimpleResponses, *v.EnableSimpleResponses)
+	}
+	serializeIdentitySourceList(s, schemas.CreateAuthorizerResponse_IdentitySource, v.IdentitySource)
+	if v.IdentityValidationExpression != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_IdentityValidationExpression, *v.IdentityValidationExpression)
+	}
+	if v.JwtConfiguration != nil {
+		s.WriteStruct(schemas.CreateAuthorizerResponse_JwtConfiguration)
+		v.JwtConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_Name, *v.Name)
+	}
+}
+func (v *CreateAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAuthorizerResponse_AuthorizerCredentialsArn:
+			v.AuthorizerCredentialsArn = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_AuthorizerCredentialsArn, v.AuthorizerCredentialsArn)
+		case schemas.CreateAuthorizerResponse_AuthorizerId:
+			v.AuthorizerId = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_AuthorizerId, v.AuthorizerId)
+		case schemas.CreateAuthorizerResponse_AuthorizerPayloadFormatVersion:
+			v.AuthorizerPayloadFormatVersion = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_AuthorizerPayloadFormatVersion, v.AuthorizerPayloadFormatVersion)
+		case schemas.CreateAuthorizerResponse_AuthorizerResultTtlInSeconds:
+			v.AuthorizerResultTtlInSeconds = new(int32)
+			return d.ReadInt32(schemas.CreateAuthorizerResponse_AuthorizerResultTtlInSeconds, v.AuthorizerResultTtlInSeconds)
+		case schemas.CreateAuthorizerResponse_AuthorizerType:
+			var ev string
+			if err := d.ReadString(schemas.CreateAuthorizerResponse_AuthorizerType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizerType = types.AuthorizerType(ev)
+			return nil
+		case schemas.CreateAuthorizerResponse_AuthorizerUri:
+			v.AuthorizerUri = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_AuthorizerUri, v.AuthorizerUri)
+		case schemas.CreateAuthorizerResponse_EnableSimpleResponses:
+			v.EnableSimpleResponses = new(bool)
+			return d.ReadBool(schemas.CreateAuthorizerResponse_EnableSimpleResponses, v.EnableSimpleResponses)
+		case schemas.CreateAuthorizerResponse_IdentitySource:
+			return deserializeIdentitySourceList(d, schemas.CreateAuthorizerResponse_IdentitySource, &v.IdentitySource)
+		case schemas.CreateAuthorizerResponse_IdentityValidationExpression:
+			v.IdentityValidationExpression = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_IdentityValidationExpression, v.IdentityValidationExpression)
+		case schemas.CreateAuthorizerResponse_JwtConfiguration:
+			v.JwtConfiguration = &types.JWTConfiguration{}
+			return v.JwtConfiguration.Deserialize(d)
+		case schemas.CreateAuthorizerResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthorizer, schemas.CreateAuthorizerRequest, schemas.CreateAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthorizer, schemas.CreateAuthorizerRequest, schemas.CreateAuthorizerResponse), output: &CreateAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAuthorizer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAuthorizer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAuthorizerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAuthorizer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -297,22 +372,8 @@ func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAuthorizer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAuthorizer",
-	}
 }

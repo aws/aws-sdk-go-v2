@@ -2389,6 +2389,23 @@ func validate__listOfAudioDescription(v []types.AudioDescription) error {
 	}
 }
 
+func validate__listOfAudioPid(v []types.AudioPid) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioPid"}
+	for i := range v {
+		if err := validateAudioPid(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfAudioSelector(v []types.AudioSelector) error {
 	if v == nil {
 		return nil
@@ -2746,6 +2763,27 @@ func validate__listOfVideoDescription(v []types.VideoDescription) error {
 	}
 }
 
+func validateAbWatermarkingCustomProfile(v *types.AbWatermarkingCustomProfile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AbWatermarkingCustomProfile"}
+	if v.EmbeddingFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmbeddingFrequency"))
+	}
+	if v.SceneCut == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SceneCut"))
+	}
+	if v.TargetPsnr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetPsnr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAdditionalDestinations(v *types.AdditionalDestinations) error {
 	if v == nil {
 		return nil
@@ -2927,6 +2965,31 @@ func validateAudioOnlyHlsSettings(v *types.AudioOnlyHlsSettings) error {
 	}
 }
 
+func validateAudioPid(v *types.AudioPid) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioPid"}
+	if v.DolbyEDecode != nil {
+		if err := validateAudioDolbyEDecode(v.DolbyEDecode); err != nil {
+			invalidParams.AddNested("DolbyEDecode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Pid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pid"))
+	}
+	if v.PremixSettings != nil {
+		if err := validateAudioPreMixerSettings(v.PremixSettings); err != nil {
+			invalidParams.AddNested("PremixSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAudioPidSelection(v *types.AudioPidSelection) error {
 	if v == nil {
 		return nil
@@ -2934,6 +2997,28 @@ func validateAudioPidSelection(v *types.AudioPidSelection) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AudioPidSelection"}
 	if v.Pid == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Pid"))
+	}
+	if v.Pids != nil {
+		if err := validate__listOfAudioPid(v.Pids); err != nil {
+			invalidParams.AddNested("Pids", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioPreMixerSettings(v *types.AudioPreMixerSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioPreMixerSettings"}
+	if v.RemixSettings != nil {
+		if err := validateRemixSettings(v.RemixSettings); err != nil {
+			invalidParams.AddNested("RemixSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3016,6 +3101,11 @@ func validateAudioTrack(v *types.AudioTrack) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AudioTrack"}
 	if v.Track == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Track"))
+	}
+	if v.PremixSettings != nil {
+		if err := validateAudioPreMixerSettings(v.PremixSettings); err != nil {
+			invalidParams.AddNested("PremixSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3359,6 +3449,32 @@ func validateCaptionSelectorSettings(v *types.CaptionSelectorSettings) error {
 	}
 }
 
+func validateCmafIngestAbWatermarkerIrdetoSettings(v *types.CmafIngestAbWatermarkerIrdetoSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CmafIngestAbWatermarkerIrdetoSettings"}
+	if v.AlternateDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlternateDestination"))
+	}
+	if v.CustomProfile != nil {
+		if err := validateAbWatermarkingCustomProfile(v.CustomProfile); err != nil {
+			invalidParams.AddNested("CustomProfile", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OperatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperatorId"))
+	}
+	if len(v.Profile) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Profile"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCmafIngestCaptionLanguageMapping(v *types.CmafIngestCaptionLanguageMapping) error {
 	if v == nil {
 		return nil
@@ -3393,6 +3509,28 @@ func validateCmafIngestGroupSettings(v *types.CmafIngestGroupSettings) error {
 	if v.AdditionalDestinations != nil {
 		if err := validate__listOfAdditionalDestinations(v.AdditionalDestinations); err != nil {
 			invalidParams.AddNested("AdditionalDestinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WatermarkingSettings != nil {
+		if err := validateCmafIngestWatermarkingSettings(v.WatermarkingSettings); err != nil {
+			invalidParams.AddNested("WatermarkingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCmafIngestWatermarkingSettings(v *types.CmafIngestWatermarkingSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CmafIngestWatermarkingSettings"}
+	if v.CmafIngestAbWatermarkerIrdetoSettings != nil {
+		if err := validateCmafIngestAbWatermarkerIrdetoSettings(v.CmafIngestAbWatermarkerIrdetoSettings); err != nil {
+			invalidParams.AddNested("CmafIngestAbWatermarkerIrdetoSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4096,6 +4234,32 @@ func validateMediaPackageGroupSettings(v *types.MediaPackageGroupSettings) error
 	}
 }
 
+func validateMediaPackageV2AbWatermarkerIrdetoSettings(v *types.MediaPackageV2AbWatermarkerIrdetoSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaPackageV2AbWatermarkerIrdetoSettings"}
+	if v.AlternateDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlternateDestination"))
+	}
+	if v.CustomProfile != nil {
+		if err := validateAbWatermarkingCustomProfile(v.CustomProfile); err != nil {
+			invalidParams.AddNested("CustomProfile", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OperatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperatorId"))
+	}
+	if len(v.Profile) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Profile"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaPackageV2GroupSettings(v *types.MediaPackageV2GroupSettings) error {
 	if v == nil {
 		return nil
@@ -4109,6 +4273,28 @@ func validateMediaPackageV2GroupSettings(v *types.MediaPackageV2GroupSettings) e
 	if v.AdditionalDestinations != nil {
 		if err := validate__listOfMediaPackageAdditionalDestinations(v.AdditionalDestinations); err != nil {
 			invalidParams.AddNested("AdditionalDestinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WatermarkingSettings != nil {
+		if err := validateMediaPackageV2WatermarkingSettings(v.WatermarkingSettings); err != nil {
+			invalidParams.AddNested("WatermarkingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaPackageV2WatermarkingSettings(v *types.MediaPackageV2WatermarkingSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaPackageV2WatermarkingSettings"}
+	if v.MediaPackageV2AbWatermarkerIrdetoSettings != nil {
+		if err := validateMediaPackageV2AbWatermarkerIrdetoSettings(v.MediaPackageV2AbWatermarkerIrdetoSettings); err != nil {
+			invalidParams.AddNested("MediaPackageV2AbWatermarkerIrdetoSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4345,6 +4531,24 @@ func validateNielsenNaesIiNw(v *types.NielsenNaesIiNw) error {
 	}
 }
 
+func validateNielsenNwOnly(v *types.NielsenNwOnly) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NielsenNwOnly"}
+	if v.CheckDigitString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckDigitString"))
+	}
+	if v.Sid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNielsenWatermarksSettings(v *types.NielsenWatermarksSettings) error {
 	if v == nil {
 		return nil
@@ -4358,6 +4562,11 @@ func validateNielsenWatermarksSettings(v *types.NielsenWatermarksSettings) error
 	if v.NielsenNaesIiNwSettings != nil {
 		if err := validateNielsenNaesIiNw(v.NielsenNaesIiNwSettings); err != nil {
 			invalidParams.AddNested("NielsenNaesIiNwSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NielsenNwOnlySettings != nil {
+		if err := validateNielsenNwOnly(v.NielsenNwOnlySettings); err != nil {
+			invalidParams.AddNested("NielsenNwOnlySettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5209,6 +5418,40 @@ func validateVideoDescription(v *types.VideoDescription) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CropRectangle != nil {
+		if err := validateVideoPositionRectangle(v.CropRectangle); err != nil {
+			invalidParams.AddNested("CropRectangle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputPositionRectangle != nil {
+		if err := validateVideoPositionRectangle(v.OutputPositionRectangle); err != nil {
+			invalidParams.AddNested("OutputPositionRectangle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoPositionRectangle(v *types.VideoPositionRectangle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoPositionRectangle"}
+	if v.Height == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Height"))
+	}
+	if v.Width == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Width"))
+	}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

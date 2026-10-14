@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/dashboards/__DashboardId__/embed-url?additional-dashboard-ids=__Member__&additional-dashboard-ids=__Member__&creds-type=IAM&namespace=__Namespace__&reset-disabled=true&session-lifetime=1&state-persistence-enabled=true&undo-redo-disabled=true&user-arn=__UserArn__
+
+

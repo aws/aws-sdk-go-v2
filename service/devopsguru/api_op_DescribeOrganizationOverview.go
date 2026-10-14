@@ -4,12 +4,7 @@ package devopsguru
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,23 +48,6 @@ type DescribeOrganizationOverviewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationOverviewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeOrganizationOverviewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeOrganizationOverviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationOverviewRequest_AccountIds, v.AccountIds)
-	if v.FromTime != nil {
-		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_FromTime, *v.FromTime)
-	}
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationOverviewRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
-	if v.ToTime != nil {
-		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_ToTime, *v.ToTime)
-	}
-}
-
 type DescribeOrganizationOverviewOutput struct {
 
 	// An integer that specifies the number of open proactive insights in your Amazon
@@ -90,86 +68,29 @@ type DescribeOrganizationOverviewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationOverviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeOrganizationOverviewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeOrganizationOverviewResponse_ProactiveInsights:
-			return d.ReadInt32(schemas.DescribeOrganizationOverviewResponse_ProactiveInsights, &v.ProactiveInsights)
-		case schemas.DescribeOrganizationOverviewResponse_ReactiveInsights:
-			return d.ReadInt32(schemas.DescribeOrganizationOverviewResponse_ReactiveInsights, &v.ReactiveInsights)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeOrganizationOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationOverview{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationOverview, schemas.DescribeOrganizationOverviewRequest, schemas.DescribeOrganizationOverviewResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationOverview{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationOverview, schemas.DescribeOrganizationOverviewRequest, schemas.DescribeOrganizationOverviewResponse), output: &DescribeOrganizationOverviewOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrganizationOverview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeOrganizationOverviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationOverview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +105,8 @@ func (c *Client) addOperationDescribeOrganizationOverviewMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeOrganizationOverview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOrganizationOverview",
-	}
 }

@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +57,37 @@ type UpdateWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.UpdateWorkerRequest_capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateWorkerRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateWorkerRequest_fleetId, *v.FleetId)
+	}
+	if v.HostProperties != nil {
+		s.WriteStruct(schemas.UpdateWorkerRequest_hostProperties)
+		v.HostProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateWorkerRequest_status, string(v.Status))
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.UpdateWorkerRequest_workerId, *v.WorkerId)
+	}
+}
+
 type UpdateWorkerOutput struct {
 
 	// The script that runs as a worker is starting up that you can use to provide
@@ -71,65 +103,52 @@ type UpdateWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkerResponse_hostConfiguration)
+		v.HostConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Log != nil {
+		s.WriteStruct(schemas.UpdateWorkerResponse_log)
+		v.Log.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkerResponse_hostConfiguration:
+			v.HostConfiguration = &types.HostConfiguration{}
+			return v.HostConfiguration.Deserialize(d)
+		case schemas.UpdateWorkerResponse_log:
+			v.Log = &types.LogConfiguration{}
+			return v.Log.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorker, schemas.UpdateWorkerRequest, schemas.UpdateWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorker, schemas.UpdateWorkerRequest, schemas.UpdateWorkerResponse), output: &UpdateWorkerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorker{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorker"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -139,12 +158,6 @@ func (c *Client) addOperationUpdateWorkerMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpUpdateWorkerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorker(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +170,6 @@ func (c *Client) addOperationUpdateWorkerMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -196,12 +203,4 @@ func (m *endpointPrefix_opUpdateWorkerMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opUpdateWorkerMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateWorkerMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateWorker(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorker",
-	}
 }

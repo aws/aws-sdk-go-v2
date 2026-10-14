@@ -4,10 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -128,6 +127,58 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.GetProfileRequest_accept, *v.Accept)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetProfileRequest_endTime, *v.EndTime)
+	}
+	if v.MaxDepth != nil {
+		s.WriteInt32(schemas.GetProfileRequest_maxDepth, *v.MaxDepth)
+	}
+	if v.Period != nil {
+		s.WriteString(schemas.GetProfileRequest_period, *v.Period)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetProfileRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetProfileRequest_startTime, *v.StartTime)
+	}
+}
+func (v *GetProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileRequest_accept:
+			v.Accept = new(string)
+			return d.ReadString(schemas.GetProfileRequest_accept, v.Accept)
+		case schemas.GetProfileRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetProfileRequest_endTime, v.EndTime)
+		case schemas.GetProfileRequest_maxDepth:
+			v.MaxDepth = new(int32)
+			return d.ReadInt32(schemas.GetProfileRequest_maxDepth, v.MaxDepth)
+		case schemas.GetProfileRequest_period:
+			v.Period = new(string)
+			return d.ReadString(schemas.GetProfileRequest_period, v.Period)
+		case schemas.GetProfileRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetProfileRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.GetProfileRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetProfileRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The structure representing the getProfileResponse.
 type GetProfileOutput struct {
 
@@ -151,77 +202,59 @@ type GetProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentEncoding != nil {
+		s.WriteString(schemas.GetProfileResponse_contentEncoding, *v.ContentEncoding)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetProfileResponse_contentType, *v.ContentType)
+	}
+	if v.Profile != nil {
+		s.WriteBlob(schemas.GetProfileResponse_profile, v.Profile)
+	}
+}
+func (v *GetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileResponse_contentEncoding:
+			v.ContentEncoding = new(string)
+			return d.ReadString(schemas.GetProfileResponse_contentEncoding, v.ContentEncoding)
+		case schemas.GetProfileResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetProfileResponse_contentType, v.ContentType)
+		case schemas.GetProfileResponse_profile:
+			return d.ReadBlob(schemas.GetProfileResponse_profile, &v.Profile)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileRequest, schemas.GetProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileRequest, schemas.GetProfileResponse), output: &GetProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,22 +269,8 @@ func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProfile",
-	}
 }

@@ -1,0 +1,3 @@
+POST /backup-vaults/__BackupVaultName__/recovery-points/__RecoveryPointArn__/disassociate
+
+

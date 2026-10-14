@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a specified playback authorization key pair and returns the arn and
@@ -42,6 +41,28 @@ type GetPlaybackKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlaybackKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaybackKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaybackKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPlaybackKeyPairRequest_arn, *v.Arn)
+	}
+}
+func (v *GetPlaybackKeyPairInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaybackKeyPairRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaybackKeyPairRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetPlaybackKeyPairRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type GetPlaybackKeyPairOutput struct {
 
 	//
@@ -53,77 +74,50 @@ type GetPlaybackKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlaybackKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaybackKeyPairResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaybackKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.GetPlaybackKeyPairResponse_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPlaybackKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaybackKeyPairResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaybackKeyPairResponse_keyPair:
+			v.KeyPair = &types.PlaybackKeyPair{}
+			return v.KeyPair.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlaybackKeyPair, schemas.GetPlaybackKeyPairRequest, schemas.GetPlaybackKeyPairResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlaybackKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlaybackKeyPair, schemas.GetPlaybackKeyPairRequest, schemas.GetPlaybackKeyPairResponse), output: &GetPlaybackKeyPairOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlaybackKeyPair{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlaybackKeyPair"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPlaybackKeyPairValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlaybackKeyPair(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +132,8 @@ func (c *Client) addOperationGetPlaybackKeyPairMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlaybackKeyPair(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlaybackKeyPair",
-	}
 }

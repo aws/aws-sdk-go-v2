@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<HealthcheckOutput xmlns="https://awsrestxmldataplane.amazonaws.com"><ok>__Ok__</ok></HealthcheckOutput>

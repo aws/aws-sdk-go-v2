@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.PutDeliverySource
+
+{"deliverySourceConfiguration":{"key0":"__Value__"},"logType":"__LogType__","name":"__Name__","resourceArn":"__ResourceArn__","tags":{"key0":"__Value__"}}

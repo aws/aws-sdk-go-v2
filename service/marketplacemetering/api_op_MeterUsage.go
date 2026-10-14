@@ -5,10 +5,10 @@ package marketplacemetering
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -142,6 +142,34 @@ type MeterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.MeterUsageRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.MeterUsageRequest_DryRun, *v.DryRun)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.MeterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MeterUsageRequest_Timestamp, *v.Timestamp)
+	}
+	serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	if v.UsageDimension != nil {
+		s.WriteString(schemas.MeterUsageRequest_UsageDimension, *v.UsageDimension)
+	}
+	if v.UsageQuantity != nil {
+		s.WriteInt32(schemas.MeterUsageRequest_UsageQuantity, *v.UsageQuantity)
+	}
+}
+
 type MeterUsageOutput struct {
 
 	// Metering record id.
@@ -153,65 +181,42 @@ type MeterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeteringRecordId != nil {
+		s.WriteString(schemas.MeterUsageResult_MeteringRecordId, *v.MeteringRecordId)
+	}
+}
+func (v *MeterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeterUsageResult_MeteringRecordId:
+			v.MeteringRecordId = new(string)
+			return d.ReadString(schemas.MeterUsageResult_MeteringRecordId, v.MeteringRecordId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MeterUsage, schemas.MeterUsageRequest, schemas.MeterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MeterUsage, schemas.MeterUsageRequest, schemas.MeterUsageResult), output: &MeterUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMeterUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MeterUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -221,12 +226,6 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpMeterUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMeterUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,12 +238,6 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,12 +277,4 @@ func (m *idempotencyToken_initializeOpMeterUsage) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opMeterUsageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpMeterUsage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opMeterUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MeterUsage",
-	}
 }

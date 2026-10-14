@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.DeleteApplicationReferenceDataSource
+
+{"ApplicationName":"__ApplicationName__","CurrentApplicationVersionId":1,"ReferenceId":"__ReferenceId__"}

@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/TagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤dtags‚¢ckeyg__Key__evaluei__Value__¢ckeyg__Key__evaluei__Value__kclientTokeno__ClientToken__kresourceArno__ResourceArn__lruleRevision

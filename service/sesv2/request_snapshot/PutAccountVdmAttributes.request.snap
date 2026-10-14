@@ -1,0 +1,5 @@
+PUT /v2/email/account/vdm
+
+Content-Type: application/json
+
+{"VdmAttributes":{"DashboardAttributes":{"EngagementMetrics":"ENABLED"},"GuardianAttributes":{"OptimizedSharedDelivery":"ENABLED"},"VdmEnabled":"ENABLED"}}

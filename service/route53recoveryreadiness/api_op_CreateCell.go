@@ -4,12 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a cell in an account.
@@ -46,20 +41,6 @@ type CreateCellInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCellInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCellRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCellInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellName != nil {
-		s.WriteString(schemas.CreateCellRequest_CellName, *v.CellName)
-	}
-	serialize__listOf__string(s, schemas.CreateCellRequest_Cells, v.Cells)
-	serializeTags(s, schemas.CreateCellRequest_Tags, v.Tags)
-}
-
 type CreateCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.
@@ -85,94 +66,29 @@ type CreateCellOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCellResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCellResponse_CellArn:
-			v.CellArn = new(string)
-			return d.ReadString(schemas.CreateCellResponse_CellArn, v.CellArn)
-		case schemas.CreateCellResponse_CellName:
-			v.CellName = new(string)
-			return d.ReadString(schemas.CreateCellResponse_CellName, v.CellName)
-		case schemas.CreateCellResponse_Cells:
-			return deserialize__listOf__string(d, schemas.CreateCellResponse_Cells, &v.Cells)
-		case schemas.CreateCellResponse_ParentReadinessScopes:
-			return deserialize__listOf__string(d, schemas.CreateCellResponse_ParentReadinessScopes, &v.ParentReadinessScopes)
-		case schemas.CreateCellResponse_Tags:
-			return deserializeTags(d, schemas.CreateCellResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCellMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCell{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCell, schemas.CreateCellRequest, schemas.CreateCellResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCell{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCell, schemas.CreateCellRequest, schemas.CreateCellResponse), output: &CreateCellOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCell"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCellValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCell(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +103,8 @@ func (c *Client) addOperationCreateCellMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCell(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCell",
-	}
 }

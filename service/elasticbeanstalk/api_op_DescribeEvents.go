@@ -5,16 +5,30 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Returns list of event descriptions matching criteria up to the last 6 weeks.
 //
 // This action returns the most recent 1,000 events from the specified NextToken .
+//
+// This action only returns information about resources that the calling principle
+// has IAM permissions to access. For example, consider a case where a user only
+// has permission to access one of three resources. When the user calls the this
+// action, the response will only include the one resource that the user has
+// permission to access instead of all three resources. If the user doesn’t have
+// access to any of the resources an empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk. For more information, see [Managing Elastic Beanstalk user policies]in the Elastic
+// Beanstalk Developer Guide. For detailed instructions to attach a policy to a
+// user or group, see the section [Controlling access with managed policies]in the same topic.
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -33,20 +47,20 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 // Request to retrieve a list of events for an environment.
 type DescribeEventsInput struct {
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those associated with this application.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to include
+	// only those associated with this application.
 	ApplicationName *string
 
-	//  If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those that occur up to, but not including, the EndTime .
+	//  If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// that occur up to, but not including, the EndTime .
 	EndTime *time.Time
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those associated with this environment.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// associated with this environment.
 	EnvironmentId *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those associated with this environment.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// associated with this environment.
 	EnvironmentName *string
 
 	// Specifies the maximum number of events that can be returned, beginning with the
@@ -56,29 +70,28 @@ type DescribeEventsInput struct {
 	// Pagination token. If specified, the events return the next batch of results.
 	NextToken *string
 
-	// The ARN of a custom platform version. If specified, AWS Elastic Beanstalk
-	// restricts the returned descriptions to those associated with this custom
-	// platform version.
+	// The ARN of a custom platform version. If specified, Elastic Beanstalk restricts
+	// the returned descriptions to those associated with this custom platform version.
 	PlatformArn *string
 
-	// If specified, AWS Elastic Beanstalk restricts the described events to include
-	// only those associated with this request ID.
+	// If specified, Elastic Beanstalk restricts the described events to include only
+	// those associated with this request ID.
 	RequestId *string
 
 	// If specified, limits the events returned from this call to include only those
 	// with the specified severity or higher.
 	Severity types.EventSeverity
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those that occur on or after this time.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// that occur on or after this time.
 	StartTime *time.Time
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those that are associated with this environment configuration.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// that are associated with this environment configuration.
 	TemplateName *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// those associated with this application version.
+	// If specified, Elastic Beanstalk restricts the returned descriptions to those
+	// associated with this application version.
 	VersionLabel *string
 
 	noSmithyDocumentSerde
@@ -101,9 +114,6 @@ type DescribeEventsOutput struct {
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEvents{}, middleware.After)
 	if err != nil {
 		return err
@@ -112,62 +122,17 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +145,6 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -287,11 +246,3 @@ type DescribeEventsAPIClient interface {
 }
 
 var _ DescribeEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEvents",
-	}
-}

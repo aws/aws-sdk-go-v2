@@ -4,11 +4,10 @@ package lexruntimev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -80,6 +79,37 @@ type PutSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.PutSessionRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.PutSessionRequest_botId, *v.BotId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.PutSessionRequest_localeId, *v.LocaleId)
+	}
+	serializeMessages(s, schemas.PutSessionRequest_messages, v.Messages)
+	serializeStringMap(s, schemas.PutSessionRequest_requestAttributes, v.RequestAttributes)
+	if v.ResponseContentType != nil {
+		s.WriteString(schemas.PutSessionRequest_responseContentType, *v.ResponseContentType)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.PutSessionRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.PutSessionRequest_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutSessionOutput struct {
 
 	// If the requested content type was audio, the audio version of the message to
@@ -114,74 +144,80 @@ type PutSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.PutSessionResponse_contentType, *v.ContentType)
+	}
+	if v.Messages != nil {
+		s.WriteString(schemas.PutSessionResponse_messages, *v.Messages)
+	}
+	if v.RequestAttributes != nil {
+		s.WriteString(schemas.PutSessionResponse_requestAttributes, *v.RequestAttributes)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.PutSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteString(schemas.PutSessionResponse_sessionState, *v.SessionState)
+	}
+}
+func (v *PutSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSessionResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.PutSessionResponse_contentType, v.ContentType)
+		case schemas.PutSessionResponse_messages:
+			v.Messages = new(string)
+			return d.ReadString(schemas.PutSessionResponse_messages, v.Messages)
+		case schemas.PutSessionResponse_requestAttributes:
+			v.RequestAttributes = new(string)
+			return d.ReadString(schemas.PutSessionResponse_requestAttributes, v.RequestAttributes)
+		case schemas.PutSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.PutSessionResponse_sessionId, v.SessionId)
+		case schemas.PutSessionResponse_sessionState:
+			v.SessionState = new(string)
+			return d.ReadString(schemas.PutSessionResponse_sessionState, v.SessionState)
+		}
+		return nil
+	})
+}
+func (v *PutSessionOutput) GetPayloadStream() io.Reader { return v.AudioStream }
+
+var _ smithy.StreamingInput = (*PutSessionOutput)(nil)
+
+func (v *PutSessionOutput) SetPayloadStream(r io.ReadCloser) { v.AudioStream = r }
+
+var _ smithy.StreamingOutput = (*PutSessionOutput)(nil)
+
 func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSession, schemas.PutSessionRequest, schemas.PutSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSession, schemas.PutSessionRequest, schemas.PutSessionResponse), output: &PutSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +232,8 @@ func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutSession",
-	}
 }

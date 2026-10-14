@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/data-sources?max-results=1&next-token=__NextToken__
+
+

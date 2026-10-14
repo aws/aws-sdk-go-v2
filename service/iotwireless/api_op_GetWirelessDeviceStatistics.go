@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets operating information about a wireless device.
@@ -39,18 +34,6 @@ type GetWirelessDeviceStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessDeviceStatisticsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWirelessDeviceStatisticsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWirelessDeviceStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WirelessDeviceId != nil {
-		s.WriteString(schemas.GetWirelessDeviceStatisticsRequest_WirelessDeviceId, *v.WirelessDeviceId)
-	}
-}
-
 type GetWirelessDeviceStatisticsOutput struct {
 
 	// The date and time when the most recent uplink was received.
@@ -73,94 +56,29 @@ type GetWirelessDeviceStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessDeviceStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWirelessDeviceStatisticsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWirelessDeviceStatisticsResponse_LastUplinkReceivedAt:
-			v.LastUplinkReceivedAt = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceStatisticsResponse_LastUplinkReceivedAt, v.LastUplinkReceivedAt)
-		case schemas.GetWirelessDeviceStatisticsResponse_LoRaWAN:
-			v.LoRaWAN = &types.LoRaWANDeviceMetadata{}
-			return v.LoRaWAN.Deserialize(d)
-		case schemas.GetWirelessDeviceStatisticsResponse_Sidewalk:
-			v.Sidewalk = &types.SidewalkDeviceMetadata{}
-			return v.Sidewalk.Deserialize(d)
-		case schemas.GetWirelessDeviceStatisticsResponse_WirelessDeviceId:
-			v.WirelessDeviceId = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceStatisticsResponse_WirelessDeviceId, v.WirelessDeviceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWirelessDeviceStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessDeviceStatistics{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessDeviceStatistics, schemas.GetWirelessDeviceStatisticsRequest, schemas.GetWirelessDeviceStatisticsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessDeviceStatistics{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessDeviceStatistics, schemas.GetWirelessDeviceStatisticsRequest, schemas.GetWirelessDeviceStatisticsResponse), output: &GetWirelessDeviceStatisticsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWirelessDeviceStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWirelessDeviceStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWirelessDeviceStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +93,8 @@ func (c *Client) addOperationGetWirelessDeviceStatisticsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWirelessDeviceStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWirelessDeviceStatistics",
-	}
 }

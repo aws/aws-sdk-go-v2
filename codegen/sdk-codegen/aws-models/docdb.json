@@ -1735,7 +1735,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of the DB instance’s server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns the details of the DB instance’s server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
             }
         },
         "com.amazonaws.docdb#CertificateList": {
@@ -2175,7 +2175,7 @@
                 "EnableCloudwatchLogsExports": {
                     "target": "com.amazonaws.docdb#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of log types that need to be enabled for exporting to Amazon\n            CloudWatch Logs. You can enable audit logs or profiler logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html\">\n                Auditing Amazon DocumentDB Events</a>\n            and <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html\">\n                Profiling Amazon DocumentDB Operations</a>.\n        </p>"
+                        "smithy.api#documentation": "<p>A list of log types that need to be enabled for exporting to Amazon\n            CloudWatch Logs. You can enable audit logs or profiler logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html\">\n                Auditing Amazon DocumentDB Events</a>\n            and <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html\">\n                Profiling Amazon DocumentDB Operations</a>.\n        </p>"
                     }
                 },
                 "DeletionProtection": {
@@ -2217,7 +2217,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
+                },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>"
                     }
                 }
             },
@@ -2243,7 +2249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new cluster parameter group.</p>\n         <p>Parameters in a cluster parameter group apply to all of the\n            instances in a cluster.</p>\n         <p>A cluster parameter group is initially created with the default\n            parameters for the database engine used by instances in the cluster.\n            In Amazon DocumentDB, you cannot make modifications directly to the\n            <code>default.docdb3.6</code> cluster parameter group. If your\n            Amazon DocumentDB cluster is using the default cluster parameter group and you\n            want to modify a value in it, you must first <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html\">\n                create a new parameter group</a>\n            or <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html\">\n                copy an existing parameter group</a>,\n            modify it, and then apply the modified parameter group to your\n            cluster. For the new cluster parameter group and associated settings\n            to take effect, you must then reboot the instances in the cluster\n            without failover. For more information,\n            see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html\">\n                Modifying Amazon DocumentDB Cluster Parameter Groups</a>.\n            </p>"
+                "smithy.api#documentation": "<p>Creates a new cluster parameter group.</p>\n         <p>Parameters in a cluster parameter group apply to all of the\n            instances in a cluster.</p>\n         <p>A cluster parameter group is initially created with the default\n            parameters for the database engine used by instances in the cluster.\n            In Amazon DocumentDB, you cannot make modifications directly to the\n            <code>default.docdb3.6</code> cluster parameter group. If your\n            Amazon DocumentDB cluster is using the default cluster parameter group and you\n            want to modify a value in it, you must first <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-create.html\">\n                create a new parameter group</a>\n            or <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-copy.html\">\n                copy an existing parameter group</a>,\n            modify it, and then apply the modified parameter group to your\n            cluster. For the new cluster parameter group and associated settings\n            to take effect, you must then reboot the instances in the cluster\n            without failover. For more information,\n            see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-modify.html\">\n                Modifying Amazon DocumentDB Cluster Parameter Groups</a>.\n            </p>"
             }
         },
         "com.amazonaws.docdb#CreateDBClusterParameterGroupMessage": {
@@ -2511,7 +2517,7 @@
                 "EnablePerformanceInsights": {
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
                     }
                 },
                 "PerformanceInsightsKMSKeyId": {
@@ -2523,7 +2529,7 @@
                 "CACertificateIdentifier": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
                     }
                 }
             },
@@ -3035,7 +3041,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
+                },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>"
                     }
                 }
             },
@@ -3600,7 +3612,7 @@
                 "SupportedCACertificateIdentifiers": {
                     "target": "com.amazonaws.docdb#CACertificateIdentifiersList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the supported CA certificate identifiers.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of the supported CA certificate identifiers.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
                     }
                 },
                 "SupportsCertificateRotationWithoutRestart": {
@@ -6978,7 +6990,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
+                },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>"
                     }
                 }
             },
@@ -7229,7 +7247,7 @@
                 "EnablePerformanceInsights": {
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable Performance Insights for the DB Instance. For\n            more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html\">Using Amazon\n                Performance Insights</a>.</p>"
                     }
                 },
                 "PerformanceInsightsKMSKeyId": {
@@ -7241,7 +7259,7 @@
                 "CertificateRotationRestart": {
                     "target": "com.amazonaws.docdb#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance is restarted when you rotate your \n            SSL/TLS certificate.</p>\n         <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate \n            is not updated until the DB instance is restarted.</p>\n         <important>\n            <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>\n         </important>\n         <p>If you are using SSL/TLS to connect to the DB instance, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance is restarted when you rotate your \n            SSL/TLS certificate.</p>\n         <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate \n            is not updated until the DB instance is restarted.</p>\n         <important>\n            <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>\n         </important>\n         <p>If you are using SSL/TLS to connect to the DB instance, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html\">Updating Your Amazon DocumentDB TLS \n            Certificates</a> and \n            <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html\">\n                Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer \n                    Guide</i>.</p>"
                     }
                 }
             },
@@ -8330,7 +8348,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
+                },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
                     }
                 }
             },
@@ -8506,7 +8530,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The network type of the cluster.</p>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html\">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>\n         <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>\n         </p>"
+                    }
+                },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
                     }
                 }
             },
@@ -8758,7 +8788,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html\">Stopping and\n                Starting an Amazon DocumentDB Cluster</a>.</p>"
+                "smithy.api#documentation": "<p>Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html\">Stopping and\n                Starting an Amazon DocumentDB Cluster</a>.</p>"
             }
         },
         "com.amazonaws.docdb#StartDBClusterMessage": {
@@ -8808,7 +8838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The\n            cluster must be in the <i>available</i> state. For more information, see\n                <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html\">Stopping and\n                Starting an Amazon DocumentDB Cluster</a>.</p>"
+                "smithy.api#documentation": "<p>Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The\n            cluster must be in the <i>available</i> state. For more information, see\n                <a href=\"https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html\">Stopping and\n                Starting an Amazon DocumentDB Cluster</a>.</p>"
             }
         },
         "com.amazonaws.docdb#StopDBClusterMessage": {

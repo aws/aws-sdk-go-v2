@@ -103,6 +103,7 @@ func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string
 }
 
 func deserializeActivities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ActivitySummary) error {
+	*v = make([]ActivitySummary, 0)
 	var vv ActivitySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ActivitySummary{}
@@ -116,6 +117,7 @@ func deserializeActivities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ac
 }
 
 func deserializeExpressions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Expression) error {
+	*v = make([]Expression, 0)
 	var vv Expression
 	return smithy.ReadList(d, s, func() error {
 		vv = Expression{}
@@ -129,6 +131,7 @@ func deserializeExpressions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]E
 }
 
 func deserializeFilterActivityStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ActivityStatus) error {
+	*v = make([]ActivityStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -142,6 +145,7 @@ func deserializeFilterActivityStatuses(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeFreeTierUsages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FreeTierUsage) error {
+	*v = make([]FreeTierUsage, 0)
 	var vv FreeTierUsage
 	return smithy.ReadList(d, s, func() error {
 		vv = FreeTierUsage{}
@@ -155,6 +159,7 @@ func deserializeFreeTierUsages(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeMatchOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MatchOption) error {
+	*v = make([]MatchOption, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -168,6 +173,7 @@ func deserializeMatchOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

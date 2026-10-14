@@ -1,0 +1,5 @@
+POST /indexing/config
+
+Content-Type: application/json
+
+{"thingGroupIndexingConfiguration":{"customFields":[{"name":"__Name__","type":"Number"},{"name":"__Name__","type":"Number"}],"managedFields":[{"name":"__Name__","type":"Number"},{"name":"__Name__","type":"Number"}],"thingGroupIndexingMode":"OFF"},"thingIndexingConfiguration":{"customFields":[{"name":"__Name__","type":"Number"},{"name":"__Name__","type":"Number"}],"deviceDefenderIndexingMode":"OFF","filter":{"connectivity":{"includeSocketInformation":["GET_THING_CONNECTIVITY_DATA","GET_THING_CONNECTIVITY_DATA"]},"geoLocations":[{"name":"__Name__","order":"LatLon"},{"name":"__Name__","order":"LatLon"}],"namedShadowNames":["__Member__","__Member__"]},"managedFields":[{"name":"__Name__","type":"Number"},{"name":"__Name__","type":"Number"}],"namedShadowIndexingMode":"OFF","thingConnectivityIndexingMode":"OFF","thingIndexingMode":"OFF"}}

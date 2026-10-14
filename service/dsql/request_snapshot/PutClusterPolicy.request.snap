@@ -1,0 +1,5 @@
+POST /cluster/__Identifier__/policy
+
+Content-Type: application/json
+
+{"bypassPolicyLockoutSafetyCheck":true,"clientToken":"__ClientToken__","expectedPolicyVersion":"__ExpectedPolicyVersion__","policy":"__Policy__"}

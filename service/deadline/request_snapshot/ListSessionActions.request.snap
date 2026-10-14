@@ -1,0 +1,3 @@
+GET /2023-10-12/farms/__FarmId__/queues/__QueueId__/jobs/__JobId__/session-actions?maxResults=1&nextToken=__NextToken__&sessionId=__SessionId__&taskId=__TaskId__
+
+

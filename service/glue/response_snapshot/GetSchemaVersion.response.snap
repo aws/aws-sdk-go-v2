@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetSchemaVersion
+
+{"CreatedTime":"__CreatedTime__","DataFormat":"AVRO","SchemaArn":"__SchemaArn__","SchemaDefinition":"__SchemaDefinition__","SchemaVersionId":"__SchemaVersionId__","Status":"AVAILABLE","VersionNumber":1}

@@ -1,0 +1,6 @@
+POST /api/v1/users
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"EmailAddress":"__EmailAddress__","GivenName":"__GivenName__","OrganizationId":"__OrganizationId__","Password":"__Password__","StorageRule":{"StorageAllocatedInBytes":1,"StorageType":"UNLIMITED"},"Surname":"__Surname__","TimeZoneId":"__TimeZoneId__","Username":"__Username__"}

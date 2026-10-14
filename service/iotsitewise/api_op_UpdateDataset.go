@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,36 +48,19 @@ type UpdateDatasetInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The updated configuration for the dataset.
+	DatasetConfig *types.DatasetConfig
+
 	// A description about the dataset, and its functionality.
 	DatasetDescription *string
 
+	// The updated metadata for the dataset.
+	Metadata map[string]string
+
+	// The name of the workspace that contains the dataset.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateDatasetRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetDescription != nil {
-		s.WriteString(schemas.UpdateDatasetRequest_datasetDescription, *v.DatasetDescription)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.UpdateDatasetRequest_datasetId, *v.DatasetId)
-	}
-	if v.DatasetName != nil {
-		s.WriteString(schemas.UpdateDatasetRequest_datasetName, *v.DatasetName)
-	}
-	if v.DatasetSource != nil {
-		s.WriteStruct(schemas.UpdateDatasetRequest_datasetSource)
-		v.DatasetSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateDatasetOutput struct {
@@ -105,79 +85,23 @@ type UpdateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDatasetResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.UpdateDatasetResponse_datasetArn, v.DatasetArn)
-		case schemas.UpdateDatasetResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.UpdateDatasetResponse_datasetId, v.DatasetId)
-		case schemas.UpdateDatasetResponse_datasetStatus:
-			v.DatasetStatus = &types.DatasetStatus{}
-			return v.DatasetStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataset, schemas.UpdateDatasetRequest, schemas.UpdateDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataset, schemas.UpdateDatasetRequest, schemas.UpdateDatasetResponse), output: &UpdateDatasetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -192,12 +116,6 @@ func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addOpUpdateDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -208,12 +126,6 @@ func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,12 +192,4 @@ func (m *idempotencyToken_initializeOpUpdateDataset) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateDatasetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateDataset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataset",
-	}
 }

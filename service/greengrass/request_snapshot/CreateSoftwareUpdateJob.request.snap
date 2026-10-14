@@ -1,0 +1,6 @@
+POST /greengrass/updates
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"S3UrlSignerRole":"__S3UrlSignerRole__","SoftwareToUpdate":"core","UpdateAgentLogLevel":"NONE","UpdateTargets":["__Member__","__Member__"],"UpdateTargetsArchitecture":"armv6l","UpdateTargetsOperatingSystem":"ubuntu"}

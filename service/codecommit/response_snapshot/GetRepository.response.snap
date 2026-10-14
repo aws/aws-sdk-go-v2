@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetRepository
+
+{"repositoryMetadata":{"Arn":"__Arn__","accountId":"__AccountId__","cloneUrlHttp":"__CloneUrlHttp__","cloneUrlSsh":"__CloneUrlSsh__","creationDate":946684800,"defaultBranch":"__DefaultBranch__","kmsKeyId":"__KmsKeyId__","lastModifiedDate":946684800,"repositoryDescription":"__RepositoryDescription__","repositoryId":"__RepositoryId__","repositoryName":"__RepositoryName__"}}

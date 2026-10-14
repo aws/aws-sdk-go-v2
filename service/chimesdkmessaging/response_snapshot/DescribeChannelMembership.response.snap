@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelMembership":{"ChannelArn":"__ChannelArn__","CreatedTimestamp":946684800,"InvitedBy":{"Arn":"__Arn__","Name":"__Name__"},"LastUpdatedTimestamp":946684800,"Member":{"Arn":"__Arn__","Name":"__Name__"},"SubChannelId":"__SubChannelId__","Type":"DEFAULT"}}

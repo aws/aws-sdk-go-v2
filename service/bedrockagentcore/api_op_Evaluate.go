@@ -4,13 +4,8 @@ package bedrockagentcore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Performs on-demand evaluation of agent traces using a specified evaluator.
@@ -63,21 +58,6 @@ type EvaluateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EvaluateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EvaluateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EvaluateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationInput(s, schemas.EvaluateRequest_evaluationInput, v.EvaluationInput)
-	serializeEvaluationReferenceInputs(s, schemas.EvaluateRequest_evaluationReferenceInputs, v.EvaluationReferenceInputs)
-	serializeEvaluationTarget(s, schemas.EvaluateRequest_evaluationTarget, v.EvaluationTarget)
-	if v.EvaluatorId != nil {
-		s.WriteString(schemas.EvaluateRequest_evaluatorId, *v.EvaluatorId)
-	}
-}
-
 type EvaluateOutput struct {
 
 	//  The detailed evaluation results containing scores, explanations, and metadata.
@@ -94,84 +74,29 @@ type EvaluateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EvaluateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EvaluateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EvaluateResponse_evaluationResults:
-			return deserializeEvaluationResults(d, schemas.EvaluateResponse_evaluationResults, &v.EvaluationResults)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationEvaluateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpEvaluate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Evaluate, schemas.EvaluateRequest, schemas.EvaluateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEvaluate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Evaluate, schemas.EvaluateRequest, schemas.EvaluateResponse), output: &EvaluateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Evaluate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEvaluateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEvaluate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +111,8 @@ func (c *Client) addOperationEvaluateMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEvaluate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Evaluate",
-	}
 }

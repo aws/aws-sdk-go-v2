@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists test results for an Automated Reasoning policy, showing how the policy
@@ -52,6 +52,27 @@ type ListAutomatedReasoningPolicyTestResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyTestResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyTestResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyTestResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomatedReasoningPolicyTestResultsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type ListAutomatedReasoningPolicyTestResultsOutput struct {
 
 	// A list of test results, each containing information about how the policy
@@ -70,77 +91,51 @@ type ListAutomatedReasoningPolicyTestResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyTestResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken, *v.NextToken)
+	}
+	serializeAutomatedReasoningPolicyTestList(s, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, v.TestResults)
+}
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomatedReasoningPolicyTestResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken, v.NextToken)
+		case schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults:
+			return deserializeAutomatedReasoningPolicyTestList(d, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, &v.TestResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomatedReasoningPolicyTestResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyTestResults, schemas.ListAutomatedReasoningPolicyTestResultsRequest, schemas.ListAutomatedReasoningPolicyTestResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedReasoningPolicyTestResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyTestResults, schemas.ListAutomatedReasoningPolicyTestResultsRequest, schemas.ListAutomatedReasoningPolicyTestResultsResponse), output: &ListAutomatedReasoningPolicyTestResultsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedReasoningPolicyTestResults{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomatedReasoningPolicyTestResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAutomatedReasoningPolicyTestResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomatedReasoningPolicyTestResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +148,6 @@ func (c *Client) addOperationListAutomatedReasoningPolicyTestResultsMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +252,3 @@ type ListAutomatedReasoningPolicyTestResultsAPIClient interface {
 }
 
 var _ ListAutomatedReasoningPolicyTestResultsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAutomatedReasoningPolicyTestResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutomatedReasoningPolicyTestResults",
-	}
-}

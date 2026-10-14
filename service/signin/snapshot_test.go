@@ -73,11 +73,251 @@ func TestCheckSnapshot_CreateOAuth2Token(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourcePermissionStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePermissionStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePermissionStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "IntrospectOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourcePermissionStatements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourcePermissionStatements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePermissionStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePermissionStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePermissionStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateOAuth2Token(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateOAuth2Token(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateOAuth2Token")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourcePermissionStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePermissionStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePermissionStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "IntrospectOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourcePermissionStatements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourcePermissionStatements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutConsoleAuthorizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutConsoleAuthorizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePermissionStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePermissionStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePermissionStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeOAuth2TokenWithIAM")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

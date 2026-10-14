@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateResourceMetricsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
@@ -127,6 +151,18 @@ func TestCheckSnapshot_DeleteMetricStream(t *testing.T) {
 	_, err := svc.DeleteMetricStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteMetricStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourceMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +266,18 @@ func TestCheckSnapshot_DisableInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableAlarmActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAlarmActions(context.Background(), nil, func(o *Options) {
@@ -271,6 +319,18 @@ func TestCheckSnapshot_GetDashboard(t *testing.T) {
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -343,6 +403,18 @@ func TestCheckSnapshot_GetOTelEnrichment(t *testing.T) {
 	_, err := svc.GetOTelEnrichment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -482,6 +554,18 @@ func TestCheckSnapshot_PutInsightRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutLogAlarm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogAlarm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutLogAlarm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutManagedInsightRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutManagedInsightRules(context.Background(), nil, func(o *Options) {
@@ -613,6 +697,54 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateResourceMetricsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_AssociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateResourceMetricsConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlarmMuteRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarmMuteRule(context.Background(), nil, func(o *Options) {
@@ -678,6 +810,18 @@ func TestUpdateSnapshot_DeleteMetricStream(t *testing.T) {
 	_, err := svc.DeleteMetricStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMetricStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourceMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +925,18 @@ func TestUpdateSnapshot_DisableInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateDatasetKmsKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateDatasetKmsKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateDatasetKmsKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableAlarmActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAlarmActions(context.Background(), nil, func(o *Options) {
@@ -822,6 +978,18 @@ func TestUpdateSnapshot_GetDashboard(t *testing.T) {
 	_, err := svc.GetDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -894,6 +1062,18 @@ func TestUpdateSnapshot_GetOTelEnrichment(t *testing.T) {
 	_, err := svc.GetOTelEnrichment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1033,6 +1213,18 @@ func TestUpdateSnapshot_PutInsightRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutLogAlarm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLogAlarm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutLogAlarm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutManagedInsightRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutManagedInsightRules(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1350,30 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateOTelEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOTelEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateOTelEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateResourceMetricsConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateResourceMetricsConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateResourceMetricsConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

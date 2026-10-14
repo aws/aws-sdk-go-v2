@@ -1,0 +1,5 @@
+POST /referencestores?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"createdAfter":"2000-01-01T00:00:00Z","createdBefore":"2000-01-01T00:00:00Z","name":"__Name__"}}

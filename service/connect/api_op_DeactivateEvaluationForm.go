@@ -4,10 +4,9 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deactivates an evaluation form in the specified Connect Customer instance.
@@ -52,6 +51,22 @@ type DeactivateEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.DeactivateEvaluationFormRequest_EvaluationFormVersion, v.EvaluationFormVersion)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeactivateEvaluationFormOutput struct {
 
 	// The Amazon Resource Name (ARN) for the evaluation form resource.
@@ -75,77 +90,57 @@ type DeactivateEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateEvaluationFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormArn != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormResponse_EvaluationFormArn, *v.EvaluationFormArn)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormResponse_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion, v.EvaluationFormVersion)
+}
+func (v *DeactivateEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeactivateEvaluationFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormArn:
+			v.EvaluationFormArn = new(string)
+			return d.ReadString(schemas.DeactivateEvaluationFormResponse_EvaluationFormArn, v.EvaluationFormArn)
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormId:
+			v.EvaluationFormId = new(string)
+			return d.ReadString(schemas.DeactivateEvaluationFormResponse_EvaluationFormId, v.EvaluationFormId)
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion:
+			return d.ReadInt32(schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion, &v.EvaluationFormVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeactivateEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateEvaluationForm, schemas.DeactivateEvaluationFormRequest, schemas.DeactivateEvaluationFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeactivateEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateEvaluationForm, schemas.DeactivateEvaluationFormRequest, schemas.DeactivateEvaluationFormResponse), output: &DeactivateEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeactivateEvaluationForm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeactivateEvaluationForm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeactivateEvaluationFormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeactivateEvaluationForm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +155,8 @@ func (c *Client) addOperationDeactivateEvaluationFormMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeactivateEvaluationForm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeactivateEvaluationForm",
-	}
 }

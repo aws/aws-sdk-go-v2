@@ -91,7 +91,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -128,7 +134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p> For example, you can use cost-allocation tags to your ElastiCache resources, Amazon\n            generates a cost allocation report as a comma-separated value (CSV) file with your usage\n            and costs aggregated by your tags. You can apply tags that represent business categories\n            (such as cost centers, application names, or owners) to organize your costs across\n            multiple services.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Tagging.html\">Using Cost Allocation Tags in\n                Amazon ElastiCache</a> in the <i>ElastiCache User\n            Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "AddTagsToResource",
@@ -3306,6 +3312,23 @@
                 "smithy.api#documentation": "<p>Node group (shard) configuration options when adding or removing replicas. Each\n            node group (shard) configuration has the following members: NodeGroupId,\n            NewReplicaCount, and PreferredAvailabilityZones. </p>"
             }
         },
+        "com.amazonaws.elasticache#ConnectionType": {
+            "type": "enum",
+            "members": {
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc"
+                    }
+                },
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticache#CopyServerlessCacheSnapshot": {
             "type": "operation",
             "input": {
@@ -4188,6 +4211,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#ServiceLinkedRoleNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -4217,6 +4243,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the primary cluster that accepts writes and will replicate updates to the\n            secondary cluster. This value is stored as a lowercase string.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must\n            be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -4633,7 +4665,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            When set to <code>default</code>, the service determines the effective durability based on\n            the engine version, cluster mode, and other parameters. The resolved setting is reflected\n            in the <code>EffectiveDurability</code> property of the replication group. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            When set to <code>default</code>, the service determines the effective durability based on\n            the engine version, cluster mode, and other parameters. The resolved setting is reflected\n            in the <code>EffectiveDurability</code> property of the replication group. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -4789,6 +4821,12 @@
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP protocol version used by the serverless cache.\n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets.\n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.\n           </p>"
+                    }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           Use <code>vpc</code> to access the cache through a VPC endpoint, or <code>public</code> to access the cache over the internet.\n           If not specified, defaults to <code>vpc</code>.\n           This value cannot be changed after the serverless cache is created.\n           Setting this to <code>public</code> requires Valkey 9 or above.</p>"
                     }
                 }
             },
@@ -11172,7 +11210,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -11206,7 +11250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources, with the exception of\n            global replication group. When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.</p>\n         <p> A tag is a key-value pair where the key and value are case-sensitive. You can use\n            tags to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those\n            actions will be replicated to all nodes in the replication group. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         <p>If the cluster is not in the <i>available</i> state,\n                <code>ListTagsForResource</code> returns an error.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListTagsForResource",
@@ -11573,7 +11617,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the cluster.</p>\n         <p>If <code>false</code>, changes to the cluster are applied on the next maintenance\n            reboot, or the next failure reboot, whichever occurs first.</p>\n         <important>\n            <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is\n                applied, the pending modification is replaced by the newer modification.</p>\n         </important>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, this parameter causes the modifications in this request and any\n            pending modifications to be applied, asynchronously and as soon as possible, regardless\n            of the <code>PreferredMaintenanceWindow</code> setting for the cluster.</p>\n         <p>If <code>false</code>, changes to the cluster are applied on the next maintenance\n            reboot, or the next failure reboot, whichever occurs first.</p>\n         <important>\n            <p>If you perform a <code>ModifyCacheCluster</code> before a pending modification is\n                applied, the pending modification is replaced by the newer modification. However, \n                a pending node-count increase on Memcached clusters cannot be superseded by a request \n                to add fewer nodes. To change a pending node addition, first cancel it by setting \n                <code>NumCacheNodes</code> equal to the current number of nodes in the cluster, then \n                submit the new request. See the <code>NumCacheNodes</code> parameter for details on \n                node scaling behavior.</p>\n         </important>\n         <p>Valid values: <code>true</code> | <code>false</code>\n         </p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
                 "Engine": {
@@ -12270,7 +12314,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            Use this parameter to change the durability mode of an existing replication group,\n            for example from <code>sync</code> to <code>async</code> or vice versa. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            Use this parameter to change the durability mode of an existing replication group,\n            for example from <code>sync</code> to <code>async</code> or vice versa. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -13880,7 +13924,13 @@
                     "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#GlobalReplicationGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
@@ -13917,7 +13967,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources, with the exception of global\n            replication group. When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
+                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> list from the named resource.\n            A tag is a key-value pair where the key and value are case-sensitive. You can use tags\n            to categorize and track all your ElastiCache resources.\n            When you add or remove tags on replication groups, those actions will\n            be replicated to all nodes in the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "RemoveTagsFromResource",
@@ -14196,13 +14246,13 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The durability setting of the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The durability setting of the replication group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 },
                 "EffectiveDurability": {
                     "target": "com.amazonaws.elasticache#EffectiveDurability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective durability of the replication group. When <code>Durability</code> is set to\n            <code>default</code>, the service resolves the actual durability based on the engine version,\n            cluster mode, and other parameters. This field reflects the resolved value. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ConfiguringDurability.html\">Configuring Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The effective durability of the replication group. When <code>Durability</code> is set to\n            <code>default</code>, the service resolves the actual durability based on the engine version,\n            cluster mode, and other parameters. This field reflects the resolved value. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.Configuring.html\">Configuring Durability</a>.</p>"
                     }
                 }
             },
@@ -15024,6 +15074,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of IP address protocol used by the serverless cache. \n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets. \n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.</p>"
                     }
+                },
+                "ConnectionType": {
+                    "target": "com.amazonaws.elasticache#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           If not specified, defaults to <code>vpc</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15664,7 +15720,7 @@
                 "Durability": {
                     "target": "com.amazonaws.elasticache#Durability",
                     "traits": {
-                        "smithy.api#documentation": "<p>The durability setting of the cluster when the snapshot was taken. When restoring from this snapshot,\n            the cluster uses this durability setting unless overridden in the restore request. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                        "smithy.api#documentation": "<p>The durability setting of the cluster when the snapshot was taken. When restoring from this snapshot,\n            the cluster uses this durability setting unless overridden in the restore request. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -16031,7 +16087,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources, with the exception of global replication group. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
+                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. Tags are\n            composed of a Key/Value pair. You can use tags to categorize and track all your\n            ElastiCache resources. When you add or\n            remove tags on replication groups, those actions will be replicated to all nodes in the\n            replication group. A tag with a null Value is permitted.</p>"
             }
         },
         "com.amazonaws.elasticache#TagList": {

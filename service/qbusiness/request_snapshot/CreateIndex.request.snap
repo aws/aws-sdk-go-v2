@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/indices
+
+Content-Type: application/json
+
+{"capacityConfiguration":{"units":1},"clientToken":"__ClientToken__","description":"__Description__","displayName":"__DisplayName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"ENTERPRISE"}

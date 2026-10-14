@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeReservedCapacity
+
+{"AvailabilityZone":"__AvailabilityZone__","AvailableInstanceCount":1,"DurationHours":1,"DurationMinutes":1,"EndTime":946684800,"InUseInstanceCount":1,"InstanceType":"ml.p4d.24xlarge","ReservedCapacityArn":"__ReservedCapacityArn__","ReservedCapacityType":"UltraServer","StartTime":946684800,"Status":"Pending","TotalInstanceCount":1,"UltraServerSummary":{"AvailableSpareInstanceCount":1,"InstanceType":"ml.p4d.24xlarge","UltraServerCount":1,"UltraServerType":"__UltraServerType__","UnhealthyInstanceCount":1}}

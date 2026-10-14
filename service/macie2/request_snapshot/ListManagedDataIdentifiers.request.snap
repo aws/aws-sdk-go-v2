@@ -1,0 +1,5 @@
+POST /managed-data-identifiers/list
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__"}

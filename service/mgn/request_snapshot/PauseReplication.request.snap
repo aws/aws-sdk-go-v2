@@ -1,0 +1,5 @@
+POST /PauseReplication
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","sourceServerID":"__SourceServerID__"}

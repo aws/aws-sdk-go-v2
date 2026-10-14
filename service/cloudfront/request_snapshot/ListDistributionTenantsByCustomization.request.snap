@@ -1,0 +1,5 @@
+POST /2020-05-31/distribution-tenants-by-customization
+
+Content-Type: application/xml
+
+<ListDistributionTenantsByCustomizationRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CertificateArn>__CertificateArn__</CertificateArn><Marker>__Marker__</Marker><MaxItems>1</MaxItems><WebACLArn>__WebACLArn__</WebACLArn></ListDistributionTenantsByCustomizationRequest>

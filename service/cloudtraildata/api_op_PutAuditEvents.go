@@ -4,13 +4,8 @@ package cloudtraildata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Ingests your application events into CloudTrail Lake. A required parameter,
@@ -53,37 +48,6 @@ type PutAuditEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAuditEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutAuditEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutAuditEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditEvents(s, schemas.PutAuditEventsRequest_auditEvents, v.AuditEvents)
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.PutAuditEventsRequest_channelArn, *v.ChannelArn)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.PutAuditEventsRequest_externalId, *v.ExternalId)
-	}
-}
-func (v *PutAuditEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutAuditEventsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutAuditEventsRequest_auditEvents:
-			return deserializeAuditEvents(d, schemas.PutAuditEventsRequest_auditEvents, &v.AuditEvents)
-		case schemas.PutAuditEventsRequest_channelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.PutAuditEventsRequest_channelArn, v.ChannelArn)
-		case schemas.PutAuditEventsRequest_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.PutAuditEventsRequest_externalId, v.ExternalId)
-		}
-		return nil
-	})
-}
-
 type PutAuditEventsOutput struct {
 
 	// Lists events in the provided event payload that could not be ingested into
@@ -105,96 +69,29 @@ type PutAuditEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutAuditEventsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultErrorEntries(s, schemas.PutAuditEventsResponse_failed, v.Failed)
-	serializeAuditEventResultEntries(s, schemas.PutAuditEventsResponse_successful, v.Successful)
-}
-func (v *PutAuditEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutAuditEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutAuditEventsResponse_failed:
-			return deserializeResultErrorEntries(d, schemas.PutAuditEventsResponse_failed, &v.Failed)
-		case schemas.PutAuditEventsResponse_successful:
-			return deserializeAuditEventResultEntries(d, schemas.PutAuditEventsResponse_successful, &v.Successful)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutAuditEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAuditEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuditEvents, schemas.PutAuditEventsRequest, schemas.PutAuditEventsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAuditEvents{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuditEvents, schemas.PutAuditEventsRequest, schemas.PutAuditEventsResponse), output: &PutAuditEventsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAuditEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAuditEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAuditEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,22 +106,8 @@ func (c *Client) addOperationPutAuditEventsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAuditEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAuditEvents",
-	}
 }

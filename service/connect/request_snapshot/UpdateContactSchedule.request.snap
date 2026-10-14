@@ -1,0 +1,5 @@
+POST /contact/schedule
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","ScheduledTime":946684800}

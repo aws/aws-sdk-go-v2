@@ -1,0 +1,3 @@
+GET /analytics-data/instance/__InstanceId__/association?DataSetId=__DataSetId__&maxResults=1&nextToken=__NextToken__
+
+

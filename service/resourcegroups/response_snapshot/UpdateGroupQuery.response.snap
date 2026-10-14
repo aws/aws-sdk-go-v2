@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupQuery":{"GroupName":"__GroupName__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"}}}

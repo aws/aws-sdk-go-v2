@@ -5,6 +5,7 @@ package schemas
 import (
 	smithy "github.com/aws/smithy-go"
 	smithyprelude "github.com/aws/smithy-go/prelude"
+	smithytraits "github.com/aws/smithy-go/traits"
 )
 
 var AssociateOriginationIdentity = smithy.NewSchema(smithy.ShapeID{
@@ -155,6 +156,11 @@ var DeleteProtectConfigurationRuleSetNumberOverride = smithy.NewSchema(smithy.Sh
 var DeleteRcsAgent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "DeleteRcsAgent",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteRcsMessageSpendLimitOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "DeleteRcsMessageSpendLimitOverride",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteRegistration = smithy.NewSchema(smithy.ShapeID{
@@ -332,6 +338,11 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetResourcePolicy",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListAvailablePhoneNumbers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbers",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListNotifyCountries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListNotifyCountries",
@@ -427,6 +438,11 @@ var SendNotifyVoiceMessage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SendNotifyVoiceMessage",
 }, smithy.ShapeTypeOperation, 0)
 
+var SendRcsMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SendRcsMessage",
+}, smithy.ShapeTypeOperation, 0)
+
 var SendTextMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SendTextMessage",
@@ -465,6 +481,11 @@ var SetMediaMessageSpendLimitOverride = smithy.NewSchema(smithy.ShapeID{
 var SetNotifyMessageSpendLimitOverride = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SetNotifyMessageSpendLimitOverride",
+}, smithy.ShapeTypeOperation, 0)
+
+var SetRcsMessageSpendLimitOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SetRcsMessageSpendLimitOverride",
 }, smithy.ShapeTypeOperation, 0)
 
 var SetTextMessageSpendLimitOverride = smithy.NewSchema(smithy.ShapeID{
@@ -547,7 +568,7 @@ var PinpointSMSVoiceV2 = smithy.NewServiceSchema(_PinpointSMSVoiceV2, "2022-03-3
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Reason *smithy.Schema
@@ -622,6 +643,12 @@ var _AttachmentUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AttachmentUrl",
 }, smithy.ShapeTypeString, 0)
 
+var _AvailablePhoneNumberList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "AvailablePhoneNumberList",
+}, smithy.ShapeTypeList, 1)
+var _AvailablePhoneNumberList_member *smithy.Schema
+
 var _CarrierLookupInputPhoneNumberType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupInputPhoneNumberType",
@@ -658,6 +685,63 @@ var CloudWatchLogsDestination = smithy.NewSchema(smithy.ShapeID{
 var CloudWatchLogsDestination_IamRoleArn *smithy.Schema
 
 var CloudWatchLogsDestination_LogGroupArn *smithy.Schema
+
+var ConditionalBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalBehavior",
+}, smithy.ShapeTypeStructure, 2)
+var ConditionalBehavior_Rules *smithy.Schema
+
+var ConditionalBehavior_DefaultBehavior *smithy.Schema
+
+var _ConditionalFieldBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalFieldBehavior",
+}, smithy.ShapeTypeString, 0)
+
+var ConditionalRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalRule",
+}, smithy.ShapeTypeStructure, 3)
+var ConditionalRule_Conditions *smithy.Schema
+
+var ConditionalRule_RuleBehavior *smithy.Schema
+
+var ConditionalRule_ConditionalValidation *smithy.Schema
+
+var _ConditionalRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalRuleList",
+}, smithy.ShapeTypeList, 1)
+var _ConditionalRuleList_member *smithy.Schema
+
+var ConditionalValidation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalValidation",
+}, smithy.ShapeTypeStructure, 4)
+var ConditionalValidation_MinLength *smithy.Schema
+
+var ConditionalValidation_MaxLength *smithy.Schema
+
+var ConditionalValidation_Pattern *smithy.Schema
+
+var ConditionalValidation_AllowedValues *smithy.Schema
+
+var _ConditionOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionOperator",
+}, smithy.ShapeTypeString, 0)
+
+var _ConditionValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionValue",
+}, smithy.ShapeTypeString, 0)
+
+var _ConditionValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionValueList",
+}, smithy.ShapeTypeList, 1)
+var _ConditionValueList_member *smithy.Schema
 
 var ConfigurationSetFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -723,7 +807,7 @@ var _ConfigurationSetNameOrArn = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Reason *smithy.Schema
@@ -876,6 +960,22 @@ var _EventTypeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EventTypeList_member *smithy.Schema
 
+var FieldCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "FieldCondition",
+}, smithy.ShapeTypeStructure, 3)
+var FieldCondition_DependsOnFieldPath *smithy.Schema
+
+var FieldCondition_Operator *smithy.Schema
+
+var FieldCondition_Values *smithy.Schema
+
+var _FieldConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "FieldConditionList",
+}, smithy.ShapeTypeList, 1)
+var _FieldConditionList_member *smithy.Schema
+
 var _FieldPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "FieldPath",
@@ -913,10 +1013,15 @@ var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IamRoleArn",
 }, smithy.ShapeTypeString, 0)
 
+var _IamRoleArnOrUnset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "IamRoleArnOrUnset",
+}, smithy.ShapeTypeString, 0)
+
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RequestId *smithy.Schema
@@ -1001,6 +1106,11 @@ var _LanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "LanguageCode",
 }, smithy.ShapeTypeString, 0)
 
+var _ListAvailablePhoneNumbersMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListProtectConfigurationRuleSetNumberOverrideFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListProtectConfigurationRuleSetNumberOverrideFilter",
@@ -1011,6 +1121,14 @@ var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "LogGroupArn",
 }, smithy.ShapeTypeString, 0)
+
+var _LongMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "LongMap",
+}, smithy.ShapeTypeMap, 2)
+var _LongMap_key *smithy.Schema
+
+var _LongMap_value *smithy.Schema
 
 var _MaxPrice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1063,6 +1181,14 @@ var _MessageTypeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MessageTypeList",
 }, smithy.ShapeTypeList, 1)
 var _MessageTypeList_member *smithy.Schema
+
+var MessagingLimits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "MessagingLimits",
+}, smithy.ShapeTypeStructure, 2)
+var MessagingLimits_RateLimits *smithy.Schema
+
+var MessagingLimits_DailyMessageCaps *smithy.Schema
 
 var _MNCType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1329,6 +1455,31 @@ var _NumberCapabilityList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _NumberCapabilityList_member *smithy.Schema
 
+var _NumberFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberFilterList",
+}, smithy.ShapeTypeList, 1)
+var _NumberFilterList_member *smithy.Schema
+
+var _NumberFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var NumberPreferenceItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberPreferenceItem",
+}, smithy.ShapeTypeStructure, 2)
+var NumberPreferenceItem_PreferenceType *smithy.Schema
+
+var NumberPreferenceItem_Filter *smithy.Schema
+
+var _NumberPreferenceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberPreferenceList",
+}, smithy.ShapeTypeList, 1)
+var _NumberPreferenceList_member *smithy.Schema
+
 var _NumberStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "NumberStatus",
@@ -1475,7 +1626,7 @@ var _PhoneNumberIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var PhoneNumberInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PhoneNumberInformation",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 21)
 var PhoneNumberInformation_PhoneNumberArn *smithy.Schema
 
 var PhoneNumberInformation_PhoneNumberId *smithy.Schema
@@ -1511,6 +1662,10 @@ var PhoneNumberInformation_DeletionProtectionEnabled *smithy.Schema
 var PhoneNumberInformation_PoolId *smithy.Schema
 
 var PhoneNumberInformation_RegistrationId *smithy.Schema
+
+var PhoneNumberInformation_MessagingLimits *smithy.Schema
+
+var PhoneNumberInformation_PricingTier *smithy.Schema
 
 var PhoneNumberInformation_CreatedTimestamp *smithy.Schema
 
@@ -1622,6 +1777,17 @@ var _PoolStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PoolStatus",
 }, smithy.ShapeTypeString, 0)
+
+var _PreferenceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "PreferenceType",
+}, smithy.ShapeTypeString, 0)
+
+var _PreferenceTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "PreferenceTypeList",
+}, smithy.ShapeTypeList, 1)
+var _PreferenceTypeList_member *smithy.Schema
 
 var _ProtectConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1773,7 +1939,7 @@ var _RcsAgentIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var RcsAgentInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RcsAgentInformation",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 17)
 var RcsAgentInformation_RcsAgentArn *smithy.Schema
 
 var RcsAgentInformation_RcsAgentId *smithy.Schema
@@ -1796,7 +1962,17 @@ var RcsAgentInformation_TwoWayEnabled *smithy.Schema
 
 var RcsAgentInformation_PoolId *smithy.Schema
 
+var RcsAgentInformation_TwoWayMediaS3BucketName *smithy.Schema
+
+var RcsAgentInformation_TwoWayMediaS3KeyPrefix *smithy.Schema
+
+var RcsAgentInformation_TwoWayMediaS3Role *smithy.Schema
+
+var RcsAgentInformation_TwoWayRcsEventsEnabled *smithy.Schema
+
 var RcsAgentInformation_TestingAgent *smithy.Schema
+
+var RcsAgentInformation_MessagingLimits *smithy.Schema
 
 var _RcsAgentInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1808,6 +1984,309 @@ var _RcsAgentStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RcsAgentStatus",
 }, smithy.ShapeTypeString, 0)
+
+var _RcsCalendarEventDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCalendarEventDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsCalendarEventTitle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCalendarEventTitle",
+}, smithy.ShapeTypeString, 0)
+
+var RcsCardContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCardContent",
+}, smithy.ShapeTypeStructure, 4)
+var RcsCardContent_Title *smithy.Schema
+
+var RcsCardContent_Description *smithy.Schema
+
+var RcsCardContent_Media *smithy.Schema
+
+var RcsCardContent_Suggestions *smithy.Schema
+
+var _RcsCardDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCardDescription",
+}, smithy.ShapeTypeString, 0)
+
+var RcsCardMedia = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCardMedia",
+}, smithy.ShapeTypeStructure, 3)
+var RcsCardMedia_FileUrl *smithy.Schema
+
+var RcsCardMedia_ThumbnailUrl *smithy.Schema
+
+var RcsCardMedia_Height *smithy.Schema
+
+var _RcsCardSuggestedActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCardSuggestedActionList",
+}, smithy.ShapeTypeList, 1)
+var _RcsCardSuggestedActionList_member *smithy.Schema
+
+var _RcsCardTitle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCardTitle",
+}, smithy.ShapeTypeString, 0)
+
+var RcsCarousel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCarousel",
+}, smithy.ShapeTypeStructure, 2)
+var RcsCarousel_CardWidth *smithy.Schema
+
+var RcsCarousel_CardContents *smithy.Schema
+
+var RcsCarouselCardContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCarouselCardContent",
+}, smithy.ShapeTypeStructure, 4)
+var RcsCarouselCardContent_Title *smithy.Schema
+
+var RcsCarouselCardContent_Description *smithy.Schema
+
+var RcsCarouselCardContent_Media *smithy.Schema
+
+var RcsCarouselCardContent_Suggestions *smithy.Schema
+
+var _RcsCarouselCardContentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCarouselCardContentList",
+}, smithy.ShapeTypeList, 1)
+var _RcsCarouselCardContentList_member *smithy.Schema
+
+var RcsCarouselCardMedia = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCarouselCardMedia",
+}, smithy.ShapeTypeStructure, 3)
+var RcsCarouselCardMedia_FileUrl *smithy.Schema
+
+var RcsCarouselCardMedia_ThumbnailUrl *smithy.Schema
+
+var RcsCarouselCardMedia_Height *smithy.Schema
+
+var RcsContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsContent",
+}, smithy.ShapeTypeUnion, 4)
+var RcsContent_TextMessage *smithy.Schema
+
+var RcsContent_FileMessage *smithy.Schema
+
+var RcsContent_RichCard *smithy.Schema
+
+var RcsContent_Carousel *smithy.Schema
+
+var RcsCreateCalendarEventAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsCreateCalendarEventAction",
+}, smithy.ShapeTypeStructure, 6)
+var RcsCreateCalendarEventAction_Text *smithy.Schema
+
+var RcsCreateCalendarEventAction_PostbackData *smithy.Schema
+
+var RcsCreateCalendarEventAction_Title *smithy.Schema
+
+var RcsCreateCalendarEventAction_StartTime *smithy.Schema
+
+var RcsCreateCalendarEventAction_EndTime *smithy.Schema
+
+var RcsCreateCalendarEventAction_Description *smithy.Schema
+
+var RcsDialPhoneAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsDialPhoneAction",
+}, smithy.ShapeTypeStructure, 3)
+var RcsDialPhoneAction_Text *smithy.Schema
+
+var RcsDialPhoneAction_PostbackData *smithy.Schema
+
+var RcsDialPhoneAction_PhoneNumber *smithy.Schema
+
+var _RcsEventType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsEventType",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsEventTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsEventTypeList",
+}, smithy.ShapeTypeList, 1)
+var _RcsEventTypeList_member *smithy.Schema
+
+var _RcsFallbackChannel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsFallbackChannel",
+}, smithy.ShapeTypeString, 0)
+
+var RcsFallbackConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsFallbackConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var RcsFallbackConfiguration_Channel *smithy.Schema
+
+var RcsFallbackConfiguration_MessageBody *smithy.Schema
+
+var RcsFallbackConfiguration_MediaUrls *smithy.Schema
+
+var RcsFallbackConfiguration_OriginationIdentity *smithy.Schema
+
+var _RcsFallbackMessageBody = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsFallbackMessageBody",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsFallbackOriginationIdentity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsFallbackOriginationIdentity",
+}, smithy.ShapeTypeString, 0)
+
+var RcsFileMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsFileMessage",
+}, smithy.ShapeTypeStructure, 2)
+var RcsFileMessage_FileUrl *smithy.Schema
+
+var RcsFileMessage_ThumbnailUrl *smithy.Schema
+
+var _RcsLocationLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsLocationLabel",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsMediaUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsMediaUrl",
+}, smithy.ShapeTypeString, 0)
+
+var RcsMessageContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsMessageContent",
+}, smithy.ShapeTypeStructure, 2)
+var RcsMessageContent_Content *smithy.Schema
+
+var RcsMessageContent_Suggestions *smithy.Schema
+
+var _RcsMessageOriginationIdentity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsMessageOriginationIdentity",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsMessageTrafficType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsMessageTrafficType",
+}, smithy.ShapeTypeString, 0)
+
+var RcsOpenUrlAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsOpenUrlAction",
+}, smithy.ShapeTypeStructure, 5)
+var RcsOpenUrlAction_Text *smithy.Schema
+
+var RcsOpenUrlAction_PostbackData *smithy.Schema
+
+var RcsOpenUrlAction_Url *smithy.Schema
+
+var RcsOpenUrlAction_Application *smithy.Schema
+
+var RcsOpenUrlAction_WebviewViewMode *smithy.Schema
+
+var _RcsOpenUrlValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsOpenUrlValue",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsPostbackData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsPostbackData",
+}, smithy.ShapeTypeString, 0)
+
+var RcsReplyAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsReplyAction",
+}, smithy.ShapeTypeStructure, 2)
+var RcsReplyAction_Text *smithy.Schema
+
+var RcsReplyAction_PostbackData *smithy.Schema
+
+var RcsRequestLocationAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsRequestLocationAction",
+}, smithy.ShapeTypeStructure, 2)
+var RcsRequestLocationAction_Text *smithy.Schema
+
+var RcsRequestLocationAction_PostbackData *smithy.Schema
+
+var RcsShowLocationAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsShowLocationAction",
+}, smithy.ShapeTypeStructure, 5)
+var RcsShowLocationAction_Text *smithy.Schema
+
+var RcsShowLocationAction_PostbackData *smithy.Schema
+
+var RcsShowLocationAction_Latitude *smithy.Schema
+
+var RcsShowLocationAction_Longitude *smithy.Schema
+
+var RcsShowLocationAction_Label *smithy.Schema
+
+var RcsStandaloneCard = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsStandaloneCard",
+}, smithy.ShapeTypeStructure, 3)
+var RcsStandaloneCard_CardOrientation *smithy.Schema
+
+var RcsStandaloneCard_ThumbnailImageAlignment *smithy.Schema
+
+var RcsStandaloneCard_CardContent *smithy.Schema
+
+var RcsSuggestedAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsSuggestedAction",
+}, smithy.ShapeTypeUnion, 6)
+var RcsSuggestedAction_Reply *smithy.Schema
+
+var RcsSuggestedAction_OpenUrl *smithy.Schema
+
+var RcsSuggestedAction_DialPhone *smithy.Schema
+
+var RcsSuggestedAction_ShowLocation *smithy.Schema
+
+var RcsSuggestedAction_RequestLocation *smithy.Schema
+
+var RcsSuggestedAction_CreateCalendarEvent *smithy.Schema
+
+var _RcsSuggestedActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsSuggestedActionList",
+}, smithy.ShapeTypeList, 1)
+var _RcsSuggestedActionList_member *smithy.Schema
+
+var _RcsSuggestedActionText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsSuggestedActionText",
+}, smithy.ShapeTypeString, 0)
+
+var _RcsTextBody = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsTextBody",
+}, smithy.ShapeTypeString, 0)
+
+var RcsTextMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsTextMessage",
+}, smithy.ShapeTypeStructure, 1)
+var RcsTextMessage_Body *smithy.Schema
+
+var _RcsTimeToLive = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "RcsTimeToLive",
+}, smithy.ShapeTypeInteger, 0)
 
 var _RegistrationAssociationBehavior = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1933,7 +2412,7 @@ var _RegistrationDisassociationBehavior = smithy.NewSchema(smithy.ShapeID{
 var RegistrationFieldDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RegistrationFieldDefinition",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var RegistrationFieldDefinition_SectionPath *smithy.Schema
 
 var RegistrationFieldDefinition_FieldPath *smithy.Schema
@@ -1947,6 +2426,8 @@ var RegistrationFieldDefinition_SelectValidation *smithy.Schema
 var RegistrationFieldDefinition_TextValidation *smithy.Schema
 
 var RegistrationFieldDefinition_DisplayHints *smithy.Schema
+
+var RegistrationFieldDefinition_ConditionalBehavior *smithy.Schema
 
 var _RegistrationFieldDefinitionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -2239,7 +2720,7 @@ var _ResourceIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
@@ -2254,6 +2735,11 @@ var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 var _ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ResourceType",
+}, smithy.ShapeTypeString, 0)
+
+var _SearchableNumberType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SearchableNumberType",
 }, smithy.ShapeTypeString, 0)
 
 var _SectionPath = smithy.NewSchema(smithy.ShapeID{
@@ -2339,7 +2825,7 @@ var _SenderIdFilterName = smithy.NewSchema(smithy.ShapeID{
 var SenderIdInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SenderIdInformation",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var SenderIdInformation_SenderIdArn *smithy.Schema
 
 var SenderIdInformation_SenderId *smithy.Schema
@@ -2355,6 +2841,10 @@ var SenderIdInformation_DeletionProtectionEnabled *smithy.Schema
 var SenderIdInformation_Registered *smithy.Schema
 
 var SenderIdInformation_RegistrationId *smithy.Schema
+
+var SenderIdInformation_MessagingLimits *smithy.Schema
+
+var SenderIdInformation_PricingTier *smithy.Schema
 
 var _SenderIdInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -2376,7 +2866,7 @@ var _SenderIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Reason *smithy.Schema
@@ -2590,7 +3080,7 @@ var _TextValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ThrottlingException_Message *smithy.Schema
 
 var _TierUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
@@ -2608,10 +3098,25 @@ var _TwoWayChannelArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TwoWayChannelArn",
 }, smithy.ShapeTypeString, 0)
 
+var _TwoWayMediaS3BucketName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "TwoWayMediaS3BucketName",
+}, smithy.ShapeTypeString, 0)
+
+var _TwoWayMediaS3BucketNameOrUnset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "TwoWayMediaS3BucketNameOrUnset",
+}, smithy.ShapeTypeString, 0)
+
+var _TwoWayMediaS3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "TwoWayMediaS3KeyPrefix",
+}, smithy.ShapeTypeString, 0)
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -2784,13 +3289,15 @@ var AssociateProtectConfigurationResult_ProtectConfigurationId *smithy.Schema
 var CarrierLookupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CarrierLookupRequest_PhoneNumber *smithy.Schema
+
+var CarrierLookupRequest_EnableCleansing *smithy.Schema
 
 var CarrierLookupResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CarrierLookupResult",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CarrierLookupResult_E164PhoneNumber *smithy.Schema
 
 var CarrierLookupResult_DialingCountryCode *smithy.Schema
@@ -2806,6 +3313,8 @@ var CarrierLookupResult_MNC *smithy.Schema
 var CarrierLookupResult_Carrier *smithy.Schema
 
 var CarrierLookupResult_PhoneNumberType *smithy.Schema
+
+var CarrierLookupResult_OriginalPhoneNumber *smithy.Schema
 
 var CreateConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -3022,7 +3531,7 @@ var CreateRcsAgentRequest_ClientToken *smithy.Schema
 var CreateRcsAgentResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "CreateRcsAgentResult",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 15)
 var CreateRcsAgentResult_RcsAgentArn *smithy.Schema
 
 var CreateRcsAgentResult_RcsAgentId *smithy.Schema
@@ -3042,6 +3551,14 @@ var CreateRcsAgentResult_TwoWayChannelArn *smithy.Schema
 var CreateRcsAgentResult_TwoWayChannelRole *smithy.Schema
 
 var CreateRcsAgentResult_TwoWayEnabled *smithy.Schema
+
+var CreateRcsAgentResult_TwoWayMediaS3BucketName *smithy.Schema
+
+var CreateRcsAgentResult_TwoWayMediaS3KeyPrefix *smithy.Schema
+
+var CreateRcsAgentResult_TwoWayMediaS3Role *smithy.Schema
+
+var CreateRcsAgentResult_TwoWayRcsEventsEnabled *smithy.Schema
 
 var CreateRcsAgentResult_Tags *smithy.Schema
 
@@ -3473,7 +3990,7 @@ var DeleteRcsAgentRequest_RcsAgentId *smithy.Schema
 var DeleteRcsAgentResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "DeleteRcsAgentResult",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var DeleteRcsAgentResult_RcsAgentArn *smithy.Schema
 
 var DeleteRcsAgentResult_RcsAgentId *smithy.Schema
@@ -3493,6 +4010,19 @@ var DeleteRcsAgentResult_TwoWayChannelArn *smithy.Schema
 var DeleteRcsAgentResult_TwoWayChannelRole *smithy.Schema
 
 var DeleteRcsAgentResult_TwoWayEnabled *smithy.Schema
+
+var DeleteRcsAgentResult_TwoWayRcsEventsEnabled *smithy.Schema
+
+var DeleteRcsMessageSpendLimitOverrideRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "DeleteRcsMessageSpendLimitOverrideRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteRcsMessageSpendLimitOverrideResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "DeleteRcsMessageSpendLimitOverrideResult",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteRcsMessageSpendLimitOverrideResult_MonthlyLimit *smithy.Schema
 
 var DeleteRegistrationAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -4224,6 +4754,32 @@ var GetResourcePolicyResult_Policy *smithy.Schema
 
 var GetResourcePolicyResult_CreatedTimestamp *smithy.Schema
 
+var ListAvailablePhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersRequest",
+}, smithy.ShapeTypeStructure, 7)
+var ListAvailablePhoneNumbersRequest_IsoCountryCode *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberCapabilities *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberType *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_RegistrationId *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberPreference *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NextToken *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_MaxResults *smithy.Schema
+
+var ListAvailablePhoneNumbersResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersResult",
+}, smithy.ShapeTypeStructure, 2)
+var ListAvailablePhoneNumbersResult_AvailablePhoneNumbers *smithy.Schema
+
+var ListAvailablePhoneNumbersResult_NextToken *smithy.Schema
+
 var ListNotifyCountriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListNotifyCountriesRequest",
@@ -4551,7 +5107,7 @@ var ReleaseSenderIdResult_RegistrationId *smithy.Schema
 var RequestPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RequestPhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var RequestPhoneNumberRequest_IsoCountryCode *smithy.Schema
 
 var RequestPhoneNumberRequest_MessageType *smithy.Schema
@@ -4565,6 +5121,8 @@ var RequestPhoneNumberRequest_OptOutListName *smithy.Schema
 var RequestPhoneNumberRequest_PoolId *smithy.Schema
 
 var RequestPhoneNumberRequest_RegistrationId *smithy.Schema
+
+var RequestPhoneNumberRequest_NumberPreference *smithy.Schema
 
 var RequestPhoneNumberRequest_InternationalSendingEnabled *smithy.Schema
 
@@ -4776,6 +5334,40 @@ var SendNotifyVoiceMessageResult_TemplateId *smithy.Schema
 
 var SendNotifyVoiceMessageResult_ResolvedMessageBody *smithy.Schema
 
+var SendRcsMessageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SendRcsMessageRequest",
+}, smithy.ShapeTypeStructure, 12)
+var SendRcsMessageRequest_DestinationPhoneNumber *smithy.Schema
+
+var SendRcsMessageRequest_OriginationIdentity *smithy.Schema
+
+var SendRcsMessageRequest_RcsMessageContent *smithy.Schema
+
+var SendRcsMessageRequest_TimeToLive *smithy.Schema
+
+var SendRcsMessageRequest_MessageTrafficType *smithy.Schema
+
+var SendRcsMessageRequest_FallbackConfiguration *smithy.Schema
+
+var SendRcsMessageRequest_ProtectConfigurationId *smithy.Schema
+
+var SendRcsMessageRequest_ConfigurationSetName *smithy.Schema
+
+var SendRcsMessageRequest_MaxPrice *smithy.Schema
+
+var SendRcsMessageRequest_DryRun *smithy.Schema
+
+var SendRcsMessageRequest_Context *smithy.Schema
+
+var SendRcsMessageRequest_MessageFeedbackEnabled *smithy.Schema
+
+var SendRcsMessageResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SendRcsMessageResult",
+}, smithy.ShapeTypeStructure, 1)
+var SendRcsMessageResult_MessageId *smithy.Schema
+
 var SendTextMessageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SendTextMessageRequest",
@@ -4937,6 +5529,18 @@ var SetNotifyMessageSpendLimitOverrideResult = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SetNotifyMessageSpendLimitOverrideResult",
 }, smithy.ShapeTypeStructure, 1)
 var SetNotifyMessageSpendLimitOverrideResult_MonthlyLimit *smithy.Schema
+
+var SetRcsMessageSpendLimitOverrideRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SetRcsMessageSpendLimitOverrideRequest",
+}, smithy.ShapeTypeStructure, 1)
+var SetRcsMessageSpendLimitOverrideRequest_MonthlyLimit *smithy.Schema
+
+var SetRcsMessageSpendLimitOverrideResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SetRcsMessageSpendLimitOverrideResult",
+}, smithy.ShapeTypeStructure, 1)
+var SetRcsMessageSpendLimitOverrideResult_MonthlyLimit *smithy.Schema
 
 var SetTextMessageSpendLimitOverrideRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -5243,7 +5847,7 @@ var UpdateProtectConfigurationResult_DeletionProtectionEnabled *smithy.Schema
 var UpdateRcsAgentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "UpdateRcsAgentRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateRcsAgentRequest_RcsAgentId *smithy.Schema
 
 var UpdateRcsAgentRequest_DeletionProtectionEnabled *smithy.Schema
@@ -5258,10 +5862,18 @@ var UpdateRcsAgentRequest_TwoWayChannelRole *smithy.Schema
 
 var UpdateRcsAgentRequest_TwoWayEnabled *smithy.Schema
 
+var UpdateRcsAgentRequest_TwoWayMediaS3BucketName *smithy.Schema
+
+var UpdateRcsAgentRequest_TwoWayMediaS3KeyPrefix *smithy.Schema
+
+var UpdateRcsAgentRequest_TwoWayMediaS3Role *smithy.Schema
+
+var UpdateRcsAgentRequest_TwoWayRcsEventsEnabled *smithy.Schema
+
 var UpdateRcsAgentResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "UpdateRcsAgentResult",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateRcsAgentResult_RcsAgentArn *smithy.Schema
 
 var UpdateRcsAgentResult_RcsAgentId *smithy.Schema
@@ -5281,6 +5893,14 @@ var UpdateRcsAgentResult_TwoWayChannelArn *smithy.Schema
 var UpdateRcsAgentResult_TwoWayChannelRole *smithy.Schema
 
 var UpdateRcsAgentResult_TwoWayEnabled *smithy.Schema
+
+var UpdateRcsAgentResult_TwoWayMediaS3BucketName *smithy.Schema
+
+var UpdateRcsAgentResult_TwoWayMediaS3KeyPrefix *smithy.Schema
+
+var UpdateRcsAgentResult_TwoWayMediaS3Role *smithy.Schema
+
+var UpdateRcsAgentResult_TwoWayRcsEventsEnabled *smithy.Schema
 
 var UpdateSenderIdRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -5355,6 +5975,8 @@ func init() {
 
 	_AccountLimitList_member = _AccountLimitList.AddMember("member", AccountLimit)
 
+	_AvailablePhoneNumberList_member = _AvailablePhoneNumberList.AddMember("member", _PhoneNumber)
+
 	CarrierStatusInformation_CarrierName = CarrierStatusInformation.AddMember("CarrierName", smithyprelude.String)
 
 	CarrierStatusInformation_Status = CarrierStatusInformation.AddMember("Status", _CarrierStatus)
@@ -5364,6 +5986,38 @@ func init() {
 	CloudWatchLogsDestination_IamRoleArn = CloudWatchLogsDestination.AddMember("IamRoleArn", _IamRoleArn)
 
 	CloudWatchLogsDestination_LogGroupArn = CloudWatchLogsDestination.AddMember("LogGroupArn", _LogGroupArn)
+
+	_ConditionValueList_member = _ConditionValueList.AddMember("member", _ConditionValue)
+
+	FieldCondition_DependsOnFieldPath = FieldCondition.AddMember("DependsOnFieldPath", _FieldPath)
+
+	FieldCondition_Operator = FieldCondition.AddMember("Operator", _ConditionOperator)
+
+	FieldCondition_Values = FieldCondition.AddMember("Values", _ConditionValueList)
+
+	_FieldConditionList_member = _FieldConditionList.AddMember("member", FieldCondition)
+
+	_SelectChoiceList_member = _SelectChoiceList.AddMember("member", _SelectChoice)
+
+	ConditionalValidation_MinLength = ConditionalValidation.AddMember("MinLength", smithyprelude.Integer)
+
+	ConditionalValidation_MaxLength = ConditionalValidation.AddMember("MaxLength", smithyprelude.Integer)
+
+	ConditionalValidation_Pattern = ConditionalValidation.AddMember("Pattern", smithyprelude.String)
+
+	ConditionalValidation_AllowedValues = ConditionalValidation.AddMember("AllowedValues", _SelectChoiceList)
+
+	ConditionalRule_Conditions = ConditionalRule.AddMember("Conditions", _FieldConditionList)
+
+	ConditionalRule_RuleBehavior = ConditionalRule.AddMember("RuleBehavior", _ConditionalFieldBehavior)
+
+	ConditionalRule_ConditionalValidation = ConditionalRule.AddMember("ConditionalValidation", ConditionalValidation)
+
+	_ConditionalRuleList_member = _ConditionalRuleList.AddMember("member", ConditionalRule)
+
+	ConditionalBehavior_Rules = ConditionalBehavior.AddMember("Rules", _ConditionalRuleList)
+
+	ConditionalBehavior_DefaultBehavior = ConditionalBehavior.AddMember("DefaultBehavior", _ConditionalFieldBehavior)
 
 	_FilterValueList_member = _FilterValueList.AddMember("member", _FilterValue)
 
@@ -5481,9 +6135,17 @@ func init() {
 
 	_ListProtectConfigurationRuleSetNumberOverrideFilter_member = _ListProtectConfigurationRuleSetNumberOverrideFilter.AddMember("member", ProtectConfigurationRuleSetNumberOverrideFilterItem)
 
+	_LongMap_key = _LongMap.AddMember("key", smithyprelude.String)
+
+	_LongMap_value = _LongMap.AddMember("value", smithyprelude.PrimitiveLong)
+
 	_MediaUrlList_member = _MediaUrlList.AddMember("member", _MediaUrlValue)
 
 	_MessageTypeList_member = _MessageTypeList.AddMember("member", _MessageType)
+
+	MessagingLimits_RateLimits = MessagingLimits.AddMember("RateLimits", _LongMap)
+
+	MessagingLimits_DailyMessageCaps = MessagingLimits.AddMember("DailyMessageCaps", _LongMap)
 
 	Tag_Key = Tag.AddMember("Key", _TagKey)
 
@@ -5613,6 +6275,16 @@ func init() {
 
 	_NotifyTemplateInformationList_member = _NotifyTemplateInformationList.AddMember("member", NotifyTemplateInformation)
 
+	_NumberFilterList_member = _NumberFilterList.AddMember("member", _NumberFilterValue)
+
+	_PreferenceTypeList_member = _PreferenceTypeList.AddMember("member", _PreferenceType)
+
+	NumberPreferenceItem_PreferenceType = NumberPreferenceItem.AddMember("PreferenceType", _PreferenceTypeList)
+
+	NumberPreferenceItem_Filter = NumberPreferenceItem.AddMember("Filter", _NumberFilterList)
+
+	_NumberPreferenceList_member = _NumberPreferenceList.AddMember("member", NumberPreferenceItem)
+
 	OptedOutFilter_Name = OptedOutFilter.AddMember("Name", _OptedOutFilterName)
 
 	OptedOutFilter_Values = OptedOutFilter.AddMember("Values", _FilterValueList)
@@ -5694,6 +6366,10 @@ func init() {
 	PhoneNumberInformation_PoolId = PhoneNumberInformation.AddMember("PoolId", smithyprelude.String)
 
 	PhoneNumberInformation_RegistrationId = PhoneNumberInformation.AddMember("RegistrationId", smithyprelude.String)
+
+	PhoneNumberInformation_MessagingLimits = PhoneNumberInformation.AddMember("MessagingLimits", MessagingLimits)
+
+	PhoneNumberInformation_PricingTier = PhoneNumberInformation.AddMember("PricingTier", smithyprelude.String)
 
 	PhoneNumberInformation_CreatedTimestamp = PhoneNumberInformation.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
@@ -5785,6 +6461,8 @@ func init() {
 
 	_RcsAgentIdList_member = _RcsAgentIdList.AddMember("member", _RcsAgentIdOrArn)
 
+	_RcsEventTypeList_member = _RcsEventTypeList.AddMember("member", _RcsEventType)
+
 	TestingAgentInformation_Status = TestingAgentInformation.AddMember("Status", _TestingAgentStatus)
 
 	TestingAgentInformation_TestingAgentId = TestingAgentInformation.AddMember("TestingAgentId", smithyprelude.String)
@@ -5813,9 +6491,147 @@ func init() {
 
 	RcsAgentInformation_PoolId = RcsAgentInformation.AddMember("PoolId", smithyprelude.String)
 
+	RcsAgentInformation_TwoWayMediaS3BucketName = RcsAgentInformation.AddMember("TwoWayMediaS3BucketName", _TwoWayMediaS3BucketName)
+
+	RcsAgentInformation_TwoWayMediaS3KeyPrefix = RcsAgentInformation.AddMember("TwoWayMediaS3KeyPrefix", _TwoWayMediaS3KeyPrefix)
+
+	RcsAgentInformation_TwoWayMediaS3Role = RcsAgentInformation.AddMember("TwoWayMediaS3Role", _IamRoleArn)
+
+	RcsAgentInformation_TwoWayRcsEventsEnabled = RcsAgentInformation.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
+
 	RcsAgentInformation_TestingAgent = RcsAgentInformation.AddMember("TestingAgent", TestingAgentInformation)
 
+	RcsAgentInformation_MessagingLimits = RcsAgentInformation.AddMember("MessagingLimits", MessagingLimits)
+
 	_RcsAgentInformationList_member = _RcsAgentInformationList.AddMember("member", RcsAgentInformation)
+
+	RcsCardMedia_FileUrl = RcsCardMedia.AddMember("FileUrl", _RcsMediaUrl)
+
+	RcsCardMedia_ThumbnailUrl = RcsCardMedia.AddMember("ThumbnailUrl", _RcsMediaUrl)
+
+	RcsCardMedia_Height = RcsCardMedia.AddMember("Height", smithyprelude.String)
+
+	RcsReplyAction_Text = RcsReplyAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsReplyAction_PostbackData = RcsReplyAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsOpenUrlAction_Text = RcsOpenUrlAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsOpenUrlAction_PostbackData = RcsOpenUrlAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsOpenUrlAction_Url = RcsOpenUrlAction.AddMember("Url", _RcsOpenUrlValue)
+
+	RcsOpenUrlAction_Application = RcsOpenUrlAction.AddMember("Application", smithyprelude.String)
+
+	RcsOpenUrlAction_WebviewViewMode = RcsOpenUrlAction.AddMember("WebviewViewMode", smithyprelude.String)
+
+	RcsDialPhoneAction_Text = RcsDialPhoneAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsDialPhoneAction_PostbackData = RcsDialPhoneAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsDialPhoneAction_PhoneNumber = RcsDialPhoneAction.AddMember("PhoneNumber", _PhoneNumber)
+
+	RcsShowLocationAction_Text = RcsShowLocationAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsShowLocationAction_PostbackData = RcsShowLocationAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsShowLocationAction_Latitude = RcsShowLocationAction.AddMember("Latitude", smithyprelude.Double)
+
+	RcsShowLocationAction_Longitude = RcsShowLocationAction.AddMember("Longitude", smithyprelude.Double)
+
+	RcsShowLocationAction_Label = RcsShowLocationAction.AddMember("Label", _RcsLocationLabel)
+
+	RcsRequestLocationAction_Text = RcsRequestLocationAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsRequestLocationAction_PostbackData = RcsRequestLocationAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsCreateCalendarEventAction_Text = RcsCreateCalendarEventAction.AddMember("Text", _RcsSuggestedActionText)
+
+	RcsCreateCalendarEventAction_PostbackData = RcsCreateCalendarEventAction.AddMember("PostbackData", _RcsPostbackData)
+
+	RcsCreateCalendarEventAction_Title = RcsCreateCalendarEventAction.AddMember("Title", _RcsCalendarEventTitle)
+
+	RcsCreateCalendarEventAction_StartTime = RcsCreateCalendarEventAction.AddMember("StartTime", smithyprelude.Timestamp)
+
+	RcsCreateCalendarEventAction_EndTime = RcsCreateCalendarEventAction.AddMember("EndTime", smithyprelude.Timestamp)
+
+	RcsCreateCalendarEventAction_Description = RcsCreateCalendarEventAction.AddMember("Description", _RcsCalendarEventDescription)
+
+	RcsSuggestedAction_Reply = RcsSuggestedAction.AddMember("Reply", RcsReplyAction)
+
+	RcsSuggestedAction_OpenUrl = RcsSuggestedAction.AddMember("OpenUrl", RcsOpenUrlAction)
+
+	RcsSuggestedAction_DialPhone = RcsSuggestedAction.AddMember("DialPhone", RcsDialPhoneAction)
+
+	RcsSuggestedAction_ShowLocation = RcsSuggestedAction.AddMember("ShowLocation", RcsShowLocationAction)
+
+	RcsSuggestedAction_RequestLocation = RcsSuggestedAction.AddMember("RequestLocation", RcsRequestLocationAction)
+
+	RcsSuggestedAction_CreateCalendarEvent = RcsSuggestedAction.AddMember("CreateCalendarEvent", RcsCreateCalendarEventAction)
+
+	_RcsCardSuggestedActionList_member = _RcsCardSuggestedActionList.AddMember("member", RcsSuggestedAction)
+
+	RcsCardContent_Title = RcsCardContent.AddMember("Title", _RcsCardTitle)
+
+	RcsCardContent_Description = RcsCardContent.AddMember("Description", _RcsCardDescription)
+
+	RcsCardContent_Media = RcsCardContent.AddMember("Media", RcsCardMedia)
+
+	RcsCardContent_Suggestions = RcsCardContent.AddMember("Suggestions", _RcsCardSuggestedActionList)
+
+	RcsCarouselCardMedia_FileUrl = RcsCarouselCardMedia.AddMember("FileUrl", _RcsMediaUrl)
+
+	RcsCarouselCardMedia_ThumbnailUrl = RcsCarouselCardMedia.AddMember("ThumbnailUrl", _RcsMediaUrl)
+
+	RcsCarouselCardMedia_Height = RcsCarouselCardMedia.AddMember("Height", smithyprelude.String)
+
+	RcsCarouselCardContent_Title = RcsCarouselCardContent.AddMember("Title", _RcsCardTitle)
+
+	RcsCarouselCardContent_Description = RcsCarouselCardContent.AddMember("Description", _RcsCardDescription)
+
+	RcsCarouselCardContent_Media = RcsCarouselCardContent.AddMember("Media", RcsCarouselCardMedia)
+
+	RcsCarouselCardContent_Suggestions = RcsCarouselCardContent.AddMember("Suggestions", _RcsCardSuggestedActionList)
+
+	_RcsCarouselCardContentList_member = _RcsCarouselCardContentList.AddMember("member", RcsCarouselCardContent)
+
+	RcsCarousel_CardWidth = RcsCarousel.AddMember("CardWidth", smithyprelude.String)
+
+	RcsCarousel_CardContents = RcsCarousel.AddMember("CardContents", _RcsCarouselCardContentList)
+
+	RcsTextMessage_Body = RcsTextMessage.AddMember("Body", _RcsTextBody)
+
+	RcsFileMessage_FileUrl = RcsFileMessage.AddMember("FileUrl", _RcsMediaUrl)
+
+	RcsFileMessage_ThumbnailUrl = RcsFileMessage.AddMember("ThumbnailUrl", _RcsMediaUrl)
+
+	RcsStandaloneCard_CardOrientation = RcsStandaloneCard.AddMember("CardOrientation", smithyprelude.String)
+
+	RcsStandaloneCard_ThumbnailImageAlignment = RcsStandaloneCard.AddMember("ThumbnailImageAlignment", smithyprelude.String)
+
+	RcsStandaloneCard_CardContent = RcsStandaloneCard.AddMember("CardContent", RcsCardContent)
+
+	RcsContent_TextMessage = RcsContent.AddMember("TextMessage", RcsTextMessage)
+
+	RcsContent_FileMessage = RcsContent.AddMember("FileMessage", RcsFileMessage)
+
+	RcsContent_RichCard = RcsContent.AddMember("RichCard", RcsStandaloneCard)
+
+	RcsContent_Carousel = RcsContent.AddMember("Carousel", RcsCarousel)
+
+	RcsFallbackConfiguration_Channel = RcsFallbackConfiguration.AddMember("Channel", _RcsFallbackChannel)
+
+	RcsFallbackConfiguration_MessageBody = RcsFallbackConfiguration.AddMember("MessageBody", _RcsFallbackMessageBody)
+
+	RcsFallbackConfiguration_MediaUrls = RcsFallbackConfiguration.AddMember("MediaUrls", _MediaUrlList)
+
+	RcsFallbackConfiguration_OriginationIdentity = RcsFallbackConfiguration.AddMember("OriginationIdentity", _RcsFallbackOriginationIdentity)
+
+	_RcsSuggestedActionList_member = _RcsSuggestedActionList.AddMember("member", RcsSuggestedAction)
+
+	RcsMessageContent_Content = RcsMessageContent.AddMember("Content", RcsContent)
+
+	RcsMessageContent_Suggestions = RcsMessageContent.AddMember("Suggestions", _RcsSuggestedActionList)
 
 	RegistrationAssociationFilter_Name = RegistrationAssociationFilter.AddMember("Name", _RegistrationAssociationFilterName)
 
@@ -5921,9 +6737,9 @@ func init() {
 
 	RegistrationFieldDefinition_DisplayHints = RegistrationFieldDefinition.AddMember("DisplayHints", RegistrationFieldDisplayHints)
 
-	_RegistrationFieldDefinitionList_member = _RegistrationFieldDefinitionList.AddMember("member", RegistrationFieldDefinition)
+	RegistrationFieldDefinition_ConditionalBehavior = RegistrationFieldDefinition.AddMember("ConditionalBehavior", ConditionalBehavior)
 
-	_SelectChoiceList_member = _SelectChoiceList.AddMember("member", _SelectChoice)
+	_RegistrationFieldDefinitionList_member = _RegistrationFieldDefinitionList.AddMember("member", RegistrationFieldDefinition)
 
 	RegistrationFieldValueInformation_FieldPath = RegistrationFieldValueInformation.AddMember("FieldPath", _FieldPath)
 
@@ -6097,6 +6913,10 @@ func init() {
 
 	SenderIdInformation_RegistrationId = SenderIdInformation.AddMember("RegistrationId", smithyprelude.String)
 
+	SenderIdInformation_MessagingLimits = SenderIdInformation.AddMember("MessagingLimits", MessagingLimits)
+
+	SenderIdInformation_PricingTier = SenderIdInformation.AddMember("PricingTier", smithyprelude.String)
+
 	_SenderIdInformationList_member = _SenderIdInformationList.AddMember("member", SenderIdInformation)
 
 	_SenderIdList_member = _SenderIdList.AddMember("member", SenderIdAndCountry)
@@ -6191,6 +7011,8 @@ func init() {
 
 	CarrierLookupRequest_PhoneNumber = CarrierLookupRequest.AddMember("PhoneNumber", _CarrierLookupInputPhoneNumberType)
 
+	CarrierLookupRequest_EnableCleansing = CarrierLookupRequest.AddMember("EnableCleansing", smithyprelude.Boolean)
+
 	CarrierLookupResult_E164PhoneNumber = CarrierLookupResult.AddMember("E164PhoneNumber", _E164PhoneNumberType)
 
 	CarrierLookupResult_DialingCountryCode = CarrierLookupResult.AddMember("DialingCountryCode", _DialingCountryCodeType)
@@ -6206,6 +7028,8 @@ func init() {
 	CarrierLookupResult_Carrier = CarrierLookupResult.AddMember("Carrier", smithyprelude.String)
 
 	CarrierLookupResult_PhoneNumberType = CarrierLookupResult.AddMember("PhoneNumberType", _PhoneNumberType)
+
+	CarrierLookupResult_OriginalPhoneNumber = CarrierLookupResult.AddMember("OriginalPhoneNumber", _CarrierLookupInputPhoneNumberType)
 
 	CreateConfigurationSetRequest_ConfigurationSetName = CreateConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName)
 
@@ -6386,6 +7210,14 @@ func init() {
 	CreateRcsAgentResult_TwoWayChannelRole = CreateRcsAgentResult.AddMember("TwoWayChannelRole", _IamRoleArn)
 
 	CreateRcsAgentResult_TwoWayEnabled = CreateRcsAgentResult.AddMember("TwoWayEnabled", smithyprelude.PrimitiveBoolean)
+
+	CreateRcsAgentResult_TwoWayMediaS3BucketName = CreateRcsAgentResult.AddMember("TwoWayMediaS3BucketName", _TwoWayMediaS3BucketName)
+
+	CreateRcsAgentResult_TwoWayMediaS3KeyPrefix = CreateRcsAgentResult.AddMember("TwoWayMediaS3KeyPrefix", _TwoWayMediaS3KeyPrefix)
+
+	CreateRcsAgentResult_TwoWayMediaS3Role = CreateRcsAgentResult.AddMember("TwoWayMediaS3Role", _IamRoleArn)
+
+	CreateRcsAgentResult_TwoWayRcsEventsEnabled = CreateRcsAgentResult.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
 
 	CreateRcsAgentResult_Tags = CreateRcsAgentResult.AddMember("Tags", _TagList)
 
@@ -6674,6 +7506,10 @@ func init() {
 	DeleteRcsAgentResult_TwoWayChannelRole = DeleteRcsAgentResult.AddMember("TwoWayChannelRole", _IamRoleArn)
 
 	DeleteRcsAgentResult_TwoWayEnabled = DeleteRcsAgentResult.AddMember("TwoWayEnabled", smithyprelude.PrimitiveBoolean)
+
+	DeleteRcsAgentResult_TwoWayRcsEventsEnabled = DeleteRcsAgentResult.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
+
+	DeleteRcsMessageSpendLimitOverrideResult_MonthlyLimit = DeleteRcsMessageSpendLimitOverrideResult.AddMember("MonthlyLimit", _MonthlyLimit)
 
 	DeleteRegistrationAttachmentRequest_RegistrationAttachmentId = DeleteRegistrationAttachmentRequest.AddMember("RegistrationAttachmentId", _RegistrationAttachmentIdOrArn)
 
@@ -7123,6 +7959,24 @@ func init() {
 
 	GetResourcePolicyResult_CreatedTimestamp = GetResourcePolicyResult.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
+	ListAvailablePhoneNumbersRequest_IsoCountryCode = ListAvailablePhoneNumbersRequest.AddMember("IsoCountryCode", _IsoCountryCode)
+
+	ListAvailablePhoneNumbersRequest_NumberCapabilities = ListAvailablePhoneNumbersRequest.AddMember("NumberCapabilities", _NumberCapabilityList)
+
+	ListAvailablePhoneNumbersRequest_NumberType = ListAvailablePhoneNumbersRequest.AddMember("NumberType", _SearchableNumberType)
+
+	ListAvailablePhoneNumbersRequest_RegistrationId = ListAvailablePhoneNumbersRequest.AddMember("RegistrationId", _RegistrationIdOrArn)
+
+	ListAvailablePhoneNumbersRequest_NumberPreference = ListAvailablePhoneNumbersRequest.AddMember("NumberPreference", _NumberPreferenceList)
+
+	ListAvailablePhoneNumbersRequest_NextToken = ListAvailablePhoneNumbersRequest.AddMember("NextToken", _NextToken)
+
+	ListAvailablePhoneNumbersRequest_MaxResults = ListAvailablePhoneNumbersRequest.AddMember("MaxResults", _ListAvailablePhoneNumbersMaxResults)
+
+	ListAvailablePhoneNumbersResult_AvailablePhoneNumbers = ListAvailablePhoneNumbersResult.AddMember("AvailablePhoneNumbers", _AvailablePhoneNumberList)
+
+	ListAvailablePhoneNumbersResult_NextToken = ListAvailablePhoneNumbersResult.AddMember("NextToken", _NextToken)
+
 	ListNotifyCountriesRequest_Channels = ListNotifyCountriesRequest.AddMember("Channels", _NotifyEnabledChannelsList)
 
 	ListNotifyCountriesRequest_UseCases = ListNotifyCountriesRequest.AddMember("UseCases", _NotifyUseCaseList)
@@ -7357,6 +8211,8 @@ func init() {
 
 	RequestPhoneNumberRequest_RegistrationId = RequestPhoneNumberRequest.AddMember("RegistrationId", _RegistrationIdOrArn)
 
+	RequestPhoneNumberRequest_NumberPreference = RequestPhoneNumberRequest.AddMember("NumberPreference", _NumberPreferenceList)
+
 	RequestPhoneNumberRequest_InternationalSendingEnabled = RequestPhoneNumberRequest.AddMember("InternationalSendingEnabled", smithyprelude.Boolean)
 
 	RequestPhoneNumberRequest_DeletionProtectionEnabled = RequestPhoneNumberRequest.AddMember("DeletionProtectionEnabled", smithyprelude.Boolean)
@@ -7523,6 +8379,32 @@ func init() {
 
 	SendNotifyVoiceMessageResult_ResolvedMessageBody = SendNotifyVoiceMessageResult.AddMember("ResolvedMessageBody", smithyprelude.String)
 
+	SendRcsMessageRequest_DestinationPhoneNumber = SendRcsMessageRequest.AddMember("DestinationPhoneNumber", _PhoneNumber)
+
+	SendRcsMessageRequest_OriginationIdentity = SendRcsMessageRequest.AddMember("OriginationIdentity", _RcsMessageOriginationIdentity)
+
+	SendRcsMessageRequest_RcsMessageContent = SendRcsMessageRequest.AddMember("RcsMessageContent", RcsMessageContent)
+
+	SendRcsMessageRequest_TimeToLive = SendRcsMessageRequest.AddMember("TimeToLive", _RcsTimeToLive)
+
+	SendRcsMessageRequest_MessageTrafficType = SendRcsMessageRequest.AddMember("MessageTrafficType", _RcsMessageTrafficType)
+
+	SendRcsMessageRequest_FallbackConfiguration = SendRcsMessageRequest.AddMember("FallbackConfiguration", RcsFallbackConfiguration)
+
+	SendRcsMessageRequest_ProtectConfigurationId = SendRcsMessageRequest.AddMember("ProtectConfigurationId", _ProtectConfigurationIdOrArn)
+
+	SendRcsMessageRequest_ConfigurationSetName = SendRcsMessageRequest.AddMember("ConfigurationSetName", _ConfigurationSetNameOrArn)
+
+	SendRcsMessageRequest_MaxPrice = SendRcsMessageRequest.AddMember("MaxPrice", _MaxPrice)
+
+	SendRcsMessageRequest_DryRun = SendRcsMessageRequest.AddMember("DryRun", smithyprelude.PrimitiveBoolean)
+
+	SendRcsMessageRequest_Context = SendRcsMessageRequest.AddMember("Context", _ContextMap)
+
+	SendRcsMessageRequest_MessageFeedbackEnabled = SendRcsMessageRequest.AddMember("MessageFeedbackEnabled", smithyprelude.Boolean)
+
+	SendRcsMessageResult_MessageId = SendRcsMessageResult.AddMember("MessageId", smithyprelude.String)
+
 	SendTextMessageRequest_DestinationPhoneNumber = SendTextMessageRequest.AddMember("DestinationPhoneNumber", _PhoneNumber)
 
 	SendTextMessageRequest_OriginationIdentity = SendTextMessageRequest.AddMember("OriginationIdentity", _TextMessageOriginationIdentity)
@@ -7620,6 +8502,10 @@ func init() {
 	SetNotifyMessageSpendLimitOverrideRequest_MonthlyLimit = SetNotifyMessageSpendLimitOverrideRequest.AddMember("MonthlyLimit", _MonthlyLimit)
 
 	SetNotifyMessageSpendLimitOverrideResult_MonthlyLimit = SetNotifyMessageSpendLimitOverrideResult.AddMember("MonthlyLimit", _MonthlyLimit)
+
+	SetRcsMessageSpendLimitOverrideRequest_MonthlyLimit = SetRcsMessageSpendLimitOverrideRequest.AddMember("MonthlyLimit", _MonthlyLimit)
+
+	SetRcsMessageSpendLimitOverrideResult_MonthlyLimit = SetRcsMessageSpendLimitOverrideResult.AddMember("MonthlyLimit", _MonthlyLimit)
 
 	SetTextMessageSpendLimitOverrideRequest_MonthlyLimit = SetTextMessageSpendLimitOverrideRequest.AddMember("MonthlyLimit", _MonthlyLimit)
 
@@ -7847,6 +8733,14 @@ func init() {
 
 	UpdateRcsAgentRequest_TwoWayEnabled = UpdateRcsAgentRequest.AddMember("TwoWayEnabled", smithyprelude.Boolean)
 
+	UpdateRcsAgentRequest_TwoWayMediaS3BucketName = UpdateRcsAgentRequest.AddMember("TwoWayMediaS3BucketName", _TwoWayMediaS3BucketNameOrUnset)
+
+	UpdateRcsAgentRequest_TwoWayMediaS3KeyPrefix = UpdateRcsAgentRequest.AddMember("TwoWayMediaS3KeyPrefix", _TwoWayMediaS3KeyPrefix)
+
+	UpdateRcsAgentRequest_TwoWayMediaS3Role = UpdateRcsAgentRequest.AddMember("TwoWayMediaS3Role", _IamRoleArnOrUnset)
+
+	UpdateRcsAgentRequest_TwoWayRcsEventsEnabled = UpdateRcsAgentRequest.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
+
 	UpdateRcsAgentResult_RcsAgentArn = UpdateRcsAgentResult.AddMember("RcsAgentArn", smithyprelude.String)
 
 	UpdateRcsAgentResult_RcsAgentId = UpdateRcsAgentResult.AddMember("RcsAgentId", smithyprelude.String)
@@ -7866,6 +8760,14 @@ func init() {
 	UpdateRcsAgentResult_TwoWayChannelRole = UpdateRcsAgentResult.AddMember("TwoWayChannelRole", _IamRoleArn)
 
 	UpdateRcsAgentResult_TwoWayEnabled = UpdateRcsAgentResult.AddMember("TwoWayEnabled", smithyprelude.PrimitiveBoolean)
+
+	UpdateRcsAgentResult_TwoWayMediaS3BucketName = UpdateRcsAgentResult.AddMember("TwoWayMediaS3BucketName", _TwoWayMediaS3BucketName)
+
+	UpdateRcsAgentResult_TwoWayMediaS3KeyPrefix = UpdateRcsAgentResult.AddMember("TwoWayMediaS3KeyPrefix", _TwoWayMediaS3KeyPrefix)
+
+	UpdateRcsAgentResult_TwoWayMediaS3Role = UpdateRcsAgentResult.AddMember("TwoWayMediaS3Role", _IamRoleArn)
+
+	UpdateRcsAgentResult_TwoWayRcsEventsEnabled = UpdateRcsAgentResult.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
 
 	UpdateSenderIdRequest_SenderId = UpdateSenderIdRequest.AddMember("SenderId", _SenderIdOrArn)
 

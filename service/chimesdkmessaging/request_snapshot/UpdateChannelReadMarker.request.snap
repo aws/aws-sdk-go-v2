@@ -1,0 +1,4 @@
+PUT /channels/__ChannelArn__/readMarker
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

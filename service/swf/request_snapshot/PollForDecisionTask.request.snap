@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.PollForDecisionTask
+
+{"domain":"__Domain__","identity":"__Identity__","maximumPageSize":1,"nextPageToken":"__NextPageToken__","reverseOrder":true,"startAtPreviousStartedEvent":true,"taskList":{"name":"__Name__"}}

@@ -5,10 +5,10 @@ package fis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the resolved targets information of the specified experiment.
@@ -47,6 +47,27 @@ type ListExperimentResolvedTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentResolvedTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentResolvedTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentResolvedTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentId != nil {
+		s.WriteString(schemas.ListExperimentResolvedTargetsRequest_experimentId, *v.ExperimentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExperimentResolvedTargetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentResolvedTargetsRequest_nextToken, *v.NextToken)
+	}
+	if v.TargetName != nil {
+		s.WriteString(schemas.ListExperimentResolvedTargetsRequest_targetName, *v.TargetName)
+	}
+}
+
 type ListExperimentResolvedTargetsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -62,77 +83,51 @@ type ListExperimentResolvedTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentResolvedTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentResolvedTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentResolvedTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentResolvedTargetsResponse_nextToken, *v.NextToken)
+	}
+	serializeResolvedTargetList(s, schemas.ListExperimentResolvedTargetsResponse_resolvedTargets, v.ResolvedTargets)
+}
+func (v *ListExperimentResolvedTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExperimentResolvedTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExperimentResolvedTargetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExperimentResolvedTargetsResponse_nextToken, v.NextToken)
+		case schemas.ListExperimentResolvedTargetsResponse_resolvedTargets:
+			return deserializeResolvedTargetList(d, schemas.ListExperimentResolvedTargetsResponse_resolvedTargets, &v.ResolvedTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperimentResolvedTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentResolvedTargets, schemas.ListExperimentResolvedTargetsRequest, schemas.ListExperimentResolvedTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExperimentResolvedTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentResolvedTargets, schemas.ListExperimentResolvedTargetsRequest, schemas.ListExperimentResolvedTargetsResponse), output: &ListExperimentResolvedTargetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExperimentResolvedTargets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExperimentResolvedTargets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListExperimentResolvedTargetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExperimentResolvedTargets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +140,6 @@ func (c *Client) addOperationListExperimentResolvedTargetsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +244,3 @@ type ListExperimentResolvedTargetsAPIClient interface {
 }
 
 var _ ListExperimentResolvedTargetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListExperimentResolvedTargets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListExperimentResolvedTargets",
-	}
-}

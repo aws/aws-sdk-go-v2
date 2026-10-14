@@ -4,13 +4,8 @@ package workspacesweb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the trust store certificate.
@@ -44,21 +39,6 @@ type GetTrustStoreCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTrustStoreCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTrustStoreCertificateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTrustStoreCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Thumbprint != nil {
-		s.WriteString(schemas.GetTrustStoreCertificateRequest_thumbprint, *v.Thumbprint)
-	}
-	if v.TrustStoreArn != nil {
-		s.WriteString(schemas.GetTrustStoreCertificateRequest_trustStoreArn, *v.TrustStoreArn)
-	}
-}
-
 type GetTrustStoreCertificateOutput struct {
 
 	// The ARN of the trust store certificate.
@@ -75,88 +55,29 @@ type GetTrustStoreCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTrustStoreCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTrustStoreCertificateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTrustStoreCertificateResponse_certificate:
-			v.Certificate = &types.Certificate{}
-			return v.Certificate.Deserialize(d)
-		case schemas.GetTrustStoreCertificateResponse_trustStoreArn:
-			v.TrustStoreArn = new(string)
-			return d.ReadString(schemas.GetTrustStoreCertificateResponse_trustStoreArn, v.TrustStoreArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTrustStoreCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrustStoreCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreCertificate, schemas.GetTrustStoreCertificateRequest, schemas.GetTrustStoreCertificateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrustStoreCertificate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustStoreCertificate, schemas.GetTrustStoreCertificateRequest, schemas.GetTrustStoreCertificateResponse), output: &GetTrustStoreCertificateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrustStoreCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTrustStoreCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTrustStoreCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +92,8 @@ func (c *Client) addOperationGetTrustStoreCertificateMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTrustStoreCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTrustStoreCertificate",
-	}
 }

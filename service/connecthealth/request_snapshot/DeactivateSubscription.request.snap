@@ -1,0 +1,3 @@
+POST /domains/__DomainId__/subscriptions/__SubscriptionId__/deactivate
+
+

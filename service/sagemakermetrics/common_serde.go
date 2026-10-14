@@ -82,6 +82,7 @@ func serializeXAxisValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []i
 }
 
 func deserializeBatchPutMetricsErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchPutMetricsError) error {
+	*v = make([]types.BatchPutMetricsError, 0)
 	var vv types.BatchPutMetricsError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchPutMetricsError{}
@@ -95,6 +96,7 @@ func deserializeBatchPutMetricsErrorList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMetricQueryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricQuery) error {
+	*v = make([]types.MetricQuery, 0)
 	var vv types.MetricQuery
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricQuery{}
@@ -108,6 +110,7 @@ func deserializeMetricQueryList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMetricQueryResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricQueryResult) error {
+	*v = make([]types.MetricQueryResult, 0)
 	var vv types.MetricQueryResult
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricQueryResult{}
@@ -121,6 +124,7 @@ func deserializeMetricQueryResultList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float64) error {
+	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
 
@@ -134,6 +138,7 @@ func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeRawMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RawMetricData) error {
+	*v = make([]types.RawMetricData, 0)
 	var vv types.RawMetricData
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RawMetricData{}
@@ -147,6 +152,7 @@ func deserializeRawMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeXAxisValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int64) error {
+	*v = make([]int64, 0)
 	var vv int64
 	return smithy.ReadList(d, s, func() error {
 

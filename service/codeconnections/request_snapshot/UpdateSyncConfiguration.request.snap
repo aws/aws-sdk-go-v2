@@ -1,0 +1,7 @@
+POST /service/CodeConnections_20231201/operation/UpdateSyncConfiguration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿fBranchj__Branch__jConfigFilen__ConfigFile__wPublishDeploymentStatusgENABLEDrPullRequestCommentgENABLEDpRepositoryLinkIdt__RepositoryLinkId__lResourceNamep__ResourceName__gRoleArnk__RoleArn__hSyncTypenCFN_STACK_SYNCwTriggerResourceUpdateOnjANY_CHANGEÿ

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.DescribeAcmeDomainValidation
+
+{"AcmeDomainValidation":{"AcmeDomainValidationArn":"__AcmeDomainValidationArn__","AcmeEndpointArn":"__AcmeEndpointArn__","CreatedAt":946684800,"DomainName":"__DomainName__","FailureDetails":{"Message":"__Message__","Reason":"ACCESS_DENIED"},"PrevalidationDetails":{"DnsPrevalidation":{"DomainScope":{"ExactDomain":"ENABLED","Subdomains":"ENABLED","Wildcards":"ENABLED"},"HostedZoneId":"__HostedZoneId__","ResourceRecord":{"Name":"__Name__","Type":"CNAME","Value":"__Value__"}}},"PrevalidationType":"DNS_PREVALIDATION","Status":"VALIDATING","UpdatedAt":946684800}}

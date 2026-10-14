@@ -4,12 +4,7 @@ package mediapackagev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetChannelGroupInput struct {
 	ChannelGroupName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetChannelGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetChannelGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetChannelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.GetChannelGroupRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
 }
 
 type GetChannelGroupOutput struct {
@@ -98,105 +81,29 @@ type GetChannelGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChannelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetChannelGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetChannelGroupResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetChannelGroupResponse_Arn, v.Arn)
-		case schemas.GetChannelGroupResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.GetChannelGroupResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.GetChannelGroupResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetChannelGroupResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetChannelGroupResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetChannelGroupResponse_Description, v.Description)
-		case schemas.GetChannelGroupResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.GetChannelGroupResponse_ETag, v.ETag)
-		case schemas.GetChannelGroupResponse_EgressDomain:
-			v.EgressDomain = new(string)
-			return d.ReadString(schemas.GetChannelGroupResponse_EgressDomain, v.EgressDomain)
-		case schemas.GetChannelGroupResponse_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetChannelGroupResponse_ModifiedAt, v.ModifiedAt)
-		case schemas.GetChannelGroupResponse_Tags:
-			return deserializeTagMap(d, schemas.GetChannelGroupResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetChannelGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelGroup, schemas.GetChannelGroupRequest, schemas.GetChannelGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelGroup, schemas.GetChannelGroupRequest, schemas.GetChannelGroupResponse), output: &GetChannelGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChannelGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetChannelGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChannelGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,22 +118,8 @@ func (c *Client) addOperationGetChannelGroupMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetChannelGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetChannelGroup",
-	}
 }

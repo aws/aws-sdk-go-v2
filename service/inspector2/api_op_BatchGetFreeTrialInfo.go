@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets free trial status for multiple Amazon Web Services accounts.
@@ -37,6 +36,25 @@ type BatchGetFreeTrialInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFreeTrialInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFreeTrialInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFreeTrialInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMeteringAccountIdList(s, schemas.BatchGetFreeTrialInfoRequest_accountIds, v.AccountIds)
+}
+func (v *BatchGetFreeTrialInfoInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFreeTrialInfoRequest_accountIds:
+			return deserializeMeteringAccountIdList(d, schemas.BatchGetFreeTrialInfoRequest_accountIds, &v.AccountIds)
+		}
+		return nil
+	})
+}
+
 type BatchGetFreeTrialInfoOutput struct {
 
 	// An array of objects that provide Amazon Inspector free trial details for each
@@ -57,77 +75,48 @@ type BatchGetFreeTrialInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFreeTrialInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFreeTrialInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFreeTrialInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFreeTrialAccountInfoList(s, schemas.BatchGetFreeTrialInfoResponse_accounts, v.Accounts)
+	serializeFreeTrialInfoErrorList(s, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *BatchGetFreeTrialInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFreeTrialInfoResponse_accounts:
+			return deserializeFreeTrialAccountInfoList(d, schemas.BatchGetFreeTrialInfoResponse_accounts, &v.Accounts)
+		case schemas.BatchGetFreeTrialInfoResponse_failedAccounts:
+			return deserializeFreeTrialInfoErrorList(d, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFreeTrialInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFreeTrialInfo, schemas.BatchGetFreeTrialInfoRequest, schemas.BatchGetFreeTrialInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFreeTrialInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFreeTrialInfo, schemas.BatchGetFreeTrialInfoRequest, schemas.BatchGetFreeTrialInfoResponse), output: &BatchGetFreeTrialInfoOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFreeTrialInfo{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetFreeTrialInfo"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetFreeTrialInfoValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetFreeTrialInfo(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +131,8 @@ func (c *Client) addOperationBatchGetFreeTrialInfoMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetFreeTrialInfo(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetFreeTrialInfo",
-	}
 }

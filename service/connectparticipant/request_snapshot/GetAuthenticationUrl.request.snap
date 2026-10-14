@@ -1,0 +1,6 @@
+POST /participant/authentication-url
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"RedirectUri":"__RedirectUri__","SessionId":"__SessionId__"}

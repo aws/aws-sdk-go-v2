@@ -4,11 +4,10 @@ package codedeploy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deploys an application revision through the specified deployment group.
@@ -50,6 +49,28 @@ type CreateDeploymentInput struct {
 
 	// The name of the deployment group.
 	DeploymentGroupName *string
+
+	// The type of deployment to create. Valid values are:
+	//
+	//   - STANDARD : Deploys the specified revision. This is the default behavior if
+	//   deploymentMode is not specified.
+	//
+	//   - RESTART : Restarts the application on the target instances using the
+	//   revision from the deployment group's last successful deployment, without
+	//   downloading a new revision. RESTART is supported only for EC2/On-premises
+	//   in-place deployments.
+	//
+	// When deploymentMode is RESTART , the following apply:
+	//
+	//   - The call is rejected for Amazon ECS and Lambda deployments.
+	//
+	//   - The revision parameter (including its s3Location and gitHubLocation ) must
+	//   not be specified, and is rejected if provided. The revision is resolved by the
+	//   service from the deployment group's last successful deployment.
+	//
+	//   - The updateOutdatedInstancesOnly parameter must not be set to true , and is
+	//   rejected if provided.
+	DeploymentMode types.DeploymentMode
 
 	// A comment about the deployment.
 	Description *string
@@ -123,6 +144,59 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_applicationName, *v.ApplicationName)
+	}
+	if v.AutoRollbackConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_autoRollbackConfiguration)
+		v.AutoRollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentConfigName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentConfigName, *v.DeploymentConfigName)
+	}
+	if v.DeploymentGroupName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentGroupName, *v.DeploymentGroupName)
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentMode, string(v.DeploymentMode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeploymentInput_description, *v.Description)
+	}
+	if v.FileExistsBehavior != "" {
+		s.WriteString(schemas.CreateDeploymentInput_fileExistsBehavior, string(v.FileExistsBehavior))
+	}
+	if v.IgnoreApplicationStopFailures != false {
+		s.WriteBool(schemas.CreateDeploymentInput_ignoreApplicationStopFailures, v.IgnoreApplicationStopFailures)
+	}
+	if v.OverrideAlarmConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_overrideAlarmConfiguration)
+		v.OverrideAlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Revision != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_revision)
+		v.Revision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetInstances != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_targetInstances)
+		v.TargetInstances.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateOutdatedInstancesOnly != false {
+		s.WriteBool(schemas.CreateDeploymentInput_updateOutdatedInstancesOnly, v.UpdateOutdatedInstancesOnly)
+	}
+}
+
 // Represents the output of a CreateDeployment operation.
 type CreateDeploymentOutput struct {
 
@@ -135,77 +209,48 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentOutput_deploymentId, *v.DeploymentId)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentOutput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentOutput_deploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +265,8 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDeployment",
-	}
 }

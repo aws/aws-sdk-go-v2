@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListInferenceEvents
+
+{"InferenceSchedulerName":"__InferenceSchedulerName__","IntervalEndTime":946684800,"IntervalStartTime":946684800,"MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /DeleteWave
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","waveID":"__WaveID__"}

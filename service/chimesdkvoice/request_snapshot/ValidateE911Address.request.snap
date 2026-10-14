@@ -1,0 +1,5 @@
+POST /emergency-calling/address
+
+Content-Type: application/json
+
+{"AwsAccountId":"__AwsAccountId__","City":"__City__","Country":"__Country__","PostalCode":"__PostalCode__","State":"__State__","StreetInfo":"__StreetInfo__","StreetNumber":"__StreetNumber__"}

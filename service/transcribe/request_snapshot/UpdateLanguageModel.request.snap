@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.UpdateLanguageModel
+
+{"DataAccessRoleArn":"__DataAccessRoleArn__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"ModelName":"__ModelName__"}

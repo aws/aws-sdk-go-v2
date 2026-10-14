@@ -1,0 +1,5 @@
+POST /backup-vaults/__BackupVaultName__/recovery-points/__RecoveryPointArn__/index
+
+Content-Type: application/json
+
+{"IamRoleArn":"__IamRoleArn__","Index":"ENABLED"}

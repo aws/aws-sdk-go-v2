@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the offers associated with the specified model.
@@ -40,6 +39,21 @@ type ListFoundationModelAgreementOffersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelAgreementOffersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelAgreementOffersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelAgreementOffersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersRequest_modelId, *v.ModelId)
+	}
+	if v.OfferType != "" {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersRequest_offerType, string(v.OfferType))
+	}
+}
+
 type ListFoundationModelAgreementOffersOutput struct {
 
 	// Model Id of the foundation model.
@@ -58,77 +72,51 @@ type ListFoundationModelAgreementOffersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelAgreementOffersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelAgreementOffersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelAgreementOffersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.ListFoundationModelAgreementOffersResponse_modelId, *v.ModelId)
+	}
+	serializeOffers(s, schemas.ListFoundationModelAgreementOffersResponse_offers, v.Offers)
+}
+func (v *ListFoundationModelAgreementOffersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFoundationModelAgreementOffersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFoundationModelAgreementOffersResponse_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.ListFoundationModelAgreementOffersResponse_modelId, v.ModelId)
+		case schemas.ListFoundationModelAgreementOffersResponse_offers:
+			return deserializeOffers(d, schemas.ListFoundationModelAgreementOffersResponse_offers, &v.Offers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFoundationModelAgreementOffersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModelAgreementOffers, schemas.ListFoundationModelAgreementOffersRequest, schemas.ListFoundationModelAgreementOffersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFoundationModelAgreementOffers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModelAgreementOffers, schemas.ListFoundationModelAgreementOffersRequest, schemas.ListFoundationModelAgreementOffersResponse), output: &ListFoundationModelAgreementOffersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFoundationModelAgreementOffers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFoundationModelAgreementOffers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFoundationModelAgreementOffersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFoundationModelAgreementOffers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +131,8 @@ func (c *Client) addOperationListFoundationModelAgreementOffersMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListFoundationModelAgreementOffers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFoundationModelAgreementOffers",
-	}
 }

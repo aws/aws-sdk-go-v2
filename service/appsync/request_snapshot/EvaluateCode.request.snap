@@ -1,0 +1,5 @@
+POST /v1/dataplane-evaluatecode
+
+Content-Type: application/json
+
+{"code":"__Code__","context":"__Context__","function":"__Function__","runtime":{"name":"APPSYNC_JS","runtimeVersion":"__RuntimeVersion__"}}

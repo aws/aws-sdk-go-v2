@@ -1,0 +1,5 @@
+POST /GetS3TableIntegration
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

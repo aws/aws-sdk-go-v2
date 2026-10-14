@@ -4,13 +4,8 @@ package finspace
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,21 +39,6 @@ type GetKxVolumeInput struct {
 	VolumeName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxVolumeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxVolumeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxVolumeRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.VolumeName != nil {
-		s.WriteString(schemas.GetKxVolumeRequest_volumeName, *v.VolumeName)
-	}
 }
 
 type GetKxVolumeOutput struct {
@@ -134,134 +114,32 @@ type GetKxVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxVolumeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxVolumeResponse_attachedClusters:
-			return deserializeKxAttachedClusters(d, schemas.GetKxVolumeResponse_attachedClusters, &v.AttachedClusters)
-		case schemas.GetKxVolumeResponse_availabilityZoneIds:
-			return deserializeAvailabilityZoneIds(d, schemas.GetKxVolumeResponse_availabilityZoneIds, &v.AvailabilityZoneIds)
-		case schemas.GetKxVolumeResponse_azMode:
-			var ev string
-			if err := d.ReadString(schemas.GetKxVolumeResponse_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = types.KxAzMode(ev)
-			return nil
-		case schemas.GetKxVolumeResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxVolumeResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxVolumeResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetKxVolumeResponse_description, v.Description)
-		case schemas.GetKxVolumeResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxVolumeResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxVolumeResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxVolumeResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxVolumeResponse_nas1Configuration:
-			v.Nas1Configuration = &types.KxNAS1Configuration{}
-			return v.Nas1Configuration.Deserialize(d)
-		case schemas.GetKxVolumeResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxVolumeResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxVolumeStatus(ev)
-			return nil
-		case schemas.GetKxVolumeResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.GetKxVolumeResponse_statusReason, v.StatusReason)
-		case schemas.GetKxVolumeResponse_volumeArn:
-			v.VolumeArn = new(string)
-			return d.ReadString(schemas.GetKxVolumeResponse_volumeArn, v.VolumeArn)
-		case schemas.GetKxVolumeResponse_volumeName:
-			v.VolumeName = new(string)
-			return d.ReadString(schemas.GetKxVolumeResponse_volumeName, v.VolumeName)
-		case schemas.GetKxVolumeResponse_volumeType:
-			var ev string
-			if err := d.ReadString(schemas.GetKxVolumeResponse_volumeType, &ev); err != nil {
-				return err
-			}
-			v.VolumeType = types.KxVolumeType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxVolume{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxVolume, schemas.GetKxVolumeRequest, schemas.GetKxVolumeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxVolume{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxVolume, schemas.GetKxVolumeRequest, schemas.GetKxVolumeResponse), output: &GetKxVolumeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKxVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKxVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -276,22 +154,8 @@ func (c *Client) addOperationGetKxVolumeMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKxVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKxVolume",
-	}
 }

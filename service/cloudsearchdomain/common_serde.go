@@ -71,6 +71,7 @@ func serializeSuggestions(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func deserializeBucketList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Bucket) error {
+	*v = make([]types.Bucket, 0)
 	var vv types.Bucket
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Bucket{}
@@ -84,6 +85,7 @@ func deserializeBucketList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeDocumentServiceWarnings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DocumentServiceWarning) error {
+	*v = make([]types.DocumentServiceWarning, 0)
 	var vv types.DocumentServiceWarning
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DocumentServiceWarning{}
@@ -97,6 +99,7 @@ func deserializeDocumentServiceWarnings(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeFieldValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -110,6 +113,7 @@ func deserializeFieldValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeHitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Hit) error {
+	*v = make([]types.Hit, 0)
 	var vv types.Hit
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Hit{}
@@ -123,6 +127,7 @@ func deserializeHitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeSuggestions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SuggestionMatch) error {
+	*v = make([]types.SuggestionMatch, 0)
 	var vv types.SuggestionMatch
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SuggestionMatch{}
@@ -203,6 +208,13 @@ func deserializeExprs(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[strin
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -217,6 +229,14 @@ func deserializeFacets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]types.BucketInfo)
 	var vv types.BucketInfo
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BucketInfo
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.BucketInfo{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -231,6 +251,14 @@ func deserializeFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeFieldValue(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -245,6 +273,13 @@ func deserializeHighlights(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -259,6 +294,14 @@ func deserializeStats(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[strin
 	*v = make(map[string]types.FieldStats)
 	var vv types.FieldStats
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FieldStats
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = types.FieldStats{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

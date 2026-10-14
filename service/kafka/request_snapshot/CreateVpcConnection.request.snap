@@ -1,0 +1,5 @@
+POST /v1/vpc-connection
+
+Content-Type: application/json
+
+{"authentication":"__Authentication__","clientSubnets":["__Member__","__Member__"],"securityGroups":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"targetClusterArn":"__TargetClusterArn__","vpcId":"__VpcId__"}

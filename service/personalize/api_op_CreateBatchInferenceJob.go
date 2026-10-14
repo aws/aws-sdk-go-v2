@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates batch recommendations based on a list of items or users stored in
@@ -114,6 +113,54 @@ type CreateBatchInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchInferenceJobConfig != nil {
+		s.WriteStruct(schemas.CreateBatchInferenceJobRequest_batchInferenceJobConfig)
+		v.BatchInferenceJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BatchInferenceJobMode != "" {
+		s.WriteString(schemas.CreateBatchInferenceJobRequest_batchInferenceJobMode, string(v.BatchInferenceJobMode))
+	}
+	if v.FilterArn != nil {
+		s.WriteString(schemas.CreateBatchInferenceJobRequest_filterArn, *v.FilterArn)
+	}
+	if v.JobInput != nil {
+		s.WriteStruct(schemas.CreateBatchInferenceJobRequest_jobInput)
+		v.JobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateBatchInferenceJobRequest_jobName, *v.JobName)
+	}
+	if v.JobOutput != nil {
+		s.WriteStruct(schemas.CreateBatchInferenceJobRequest_jobOutput)
+		v.JobOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.CreateBatchInferenceJobRequest_numResults, *v.NumResults)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateBatchInferenceJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.CreateBatchInferenceJobRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+	serializeTags(s, schemas.CreateBatchInferenceJobRequest_tags, v.Tags)
+	if v.ThemeGenerationConfig != nil {
+		s.WriteStruct(schemas.CreateBatchInferenceJobRequest_themeGenerationConfig)
+		v.ThemeGenerationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateBatchInferenceJobOutput struct {
 
 	// The ARN of the batch inference job.
@@ -125,77 +172,48 @@ type CreateBatchInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchInferenceJobArn != nil {
+		s.WriteString(schemas.CreateBatchInferenceJobResponse_batchInferenceJobArn, *v.BatchInferenceJobArn)
+	}
+}
+func (v *CreateBatchInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBatchInferenceJobResponse_batchInferenceJobArn:
+			v.BatchInferenceJobArn = new(string)
+			return d.ReadString(schemas.CreateBatchInferenceJobResponse_batchInferenceJobArn, v.BatchInferenceJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchInferenceJob, schemas.CreateBatchInferenceJobRequest, schemas.CreateBatchInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchInferenceJob, schemas.CreateBatchInferenceJobRequest, schemas.CreateBatchInferenceJobResponse), output: &CreateBatchInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchInferenceJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBatchInferenceJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBatchInferenceJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchInferenceJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +228,8 @@ func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBatchInferenceJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBatchInferenceJob",
-	}
 }

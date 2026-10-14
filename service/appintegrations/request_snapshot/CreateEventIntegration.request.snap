@@ -1,0 +1,5 @@
+POST /eventIntegrations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","EventBridgeBus":"__EventBridgeBus__","EventFilter":{"Source":"__Source__"},"Name":"__Name__","Tags":{"key0":"__Value__"}}

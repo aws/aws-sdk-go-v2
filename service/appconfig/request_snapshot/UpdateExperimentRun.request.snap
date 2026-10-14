@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__/experimentruns/1/update
+
+Content-Type: application/json
+
+{"DeploymentParameters":{"DynamicExtensionParameters":{"key0":"__Value__"},"Tags":{"key0":"__Value__"}},"Description":"__Description__","ExposurePercentage":1,"TreatmentOverrides":{"Inline":{"key0":"__Value__"}}}

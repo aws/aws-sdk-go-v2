@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SendTemplatedEmail&ConfigurationSetName=__ConfigurationSetName__&Destination.BccAddresses.member.1=__Member__&Destination.BccAddresses.member.2=__Member__&Destination.CcAddresses.member.1=__Member__&Destination.CcAddresses.member.2=__Member__&Destination.ToAddresses.member.1=__Member__&Destination.ToAddresses.member.2=__Member__&ReplyToAddresses.member.1=__Member__&ReplyToAddresses.member.2=__Member__&ReturnPath=__ReturnPath__&ReturnPathArn=__ReturnPathArn__&Source=__Source__&SourceArn=__SourceArn__&Tags.member.1.Name=__Name__&Tags.member.1.Value=__Value__&Tags.member.2.Name=__Name__&Tags.member.2.Value=__Value__&Template=__Template__&TemplateArn=__TemplateArn__&TemplateData=__TemplateData__&Version=2010-12-01

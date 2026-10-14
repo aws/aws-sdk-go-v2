@@ -4,11 +4,10 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the status of a current calculation.
@@ -37,6 +36,18 @@ type GetCalculationExecutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.GetCalculationExecutionStatusRequest_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+}
+
 type GetCalculationExecutionStatusOutput struct {
 
 	// Contains information about the DPU execution time and progress.
@@ -51,77 +62,58 @@ type GetCalculationExecutionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetCalculationExecutionStatusResponse_Statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetCalculationExecutionStatusResponse_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCalculationExecutionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCalculationExecutionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCalculationExecutionStatusResponse_Statistics:
+			v.Statistics = &types.CalculationStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.GetCalculationExecutionStatusResponse_Status:
+			v.Status = &types.CalculationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCalculationExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionStatus, schemas.GetCalculationExecutionStatusRequest, schemas.GetCalculationExecutionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCalculationExecutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionStatus, schemas.GetCalculationExecutionStatusRequest, schemas.GetCalculationExecutionStatusResponse), output: &GetCalculationExecutionStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCalculationExecutionStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCalculationExecutionStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCalculationExecutionStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCalculationExecutionStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +128,8 @@ func (c *Client) addOperationGetCalculationExecutionStatusMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCalculationExecutionStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCalculationExecutionStatus",
-	}
 }

@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/automation-groups/__AutomationGroupId__/automations/__AutomationId__/jobs/__JobId__?includeInputPayload=true&includeOutputPayload=true
+
+

@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an OpenSearch Serverless access policy. For more information, see [Updating data lifecycle policies].
@@ -58,6 +58,33 @@ type UpdateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_policy, *v.Policy)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_type, string(v.Type))
+	}
+}
+
 type UpdateLifecyclePolicyOutput struct {
 
 	// Details about the updated lifecycle policy.
@@ -69,65 +96,44 @@ type UpdateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyDetail != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyResponse_lifecyclePolicyDetail)
+		v.LifecyclePolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLifecyclePolicyResponse_lifecyclePolicyDetail:
+			v.LifecyclePolicyDetail = &types.LifecyclePolicyDetail{}
+			return v.LifecyclePolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse), output: &UpdateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLifecyclePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -137,12 +143,6 @@ func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpUpdateLifecyclePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLifecyclePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +155,6 @@ func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -200,12 +194,4 @@ func (m *idempotencyToken_initializeOpUpdateLifecyclePolicy) HandleInitialize(ct
 }
 func addIdempotencyToken_opUpdateLifecyclePolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateLifecyclePolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLifecyclePolicy",
-	}
 }

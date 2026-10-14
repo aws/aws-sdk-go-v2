@@ -50,6 +50,13 @@ var AssociatePackages = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/packages/associateMultiple",
 	Code: 200})
 
+var AttachDataSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AttachDataSource",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/application/{id}/attachDataSource",
+	Code: 200})
+
 var AuthorizeVpcEndpointAccess = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AuthorizeVpcEndpointAccess",
@@ -183,6 +190,13 @@ var DeregisterCapability = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/application/{applicationId}/capability/deregister/{capabilityName}",
 	Code: 200})
 
+var DescribeDataSourceAttachment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDataSourceAttachment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/application/{id}/describeDataSourceAttachment",
+	Code: 200})
+
 var DescribeDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DescribeDomain",
@@ -295,6 +309,13 @@ var DescribeVpcEndpoints = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/vpcEndpoints/describe",
 	Code: 200})
 
+var DetachDataSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DetachDataSource",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/application/{id}/detachDataSource",
+	Code: 200})
+
 var DissociatePackage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DissociatePackage",
@@ -365,6 +386,13 @@ var GetIndex = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}",
 	Code: 200})
 
+var GetMigration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "GetMigration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2021-01-01/opensearch/app-migrations/{migrationId}",
+	Code: 200})
+
 var GetPackageVersionHistory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "GetPackageVersionHistory",
@@ -386,11 +414,25 @@ var GetUpgradeStatus = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/upgradeDomain/{DomainName}/status",
 	Code: 200})
 
+var InsightFeedback = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedback",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/insight-feedback",
+	Code: 200})
+
 var ListApplications = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ListApplications",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2021-01-01/opensearch/list-applications",
+	Code: 200})
+
+var ListDataSourceAttachments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListDataSourceAttachments",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/application/{id}/listDataSourceAttachments",
 	Code: 200})
 
 var ListDataSources = smithy.NewSchema(smithy.ShapeID{
@@ -440,6 +482,13 @@ var ListInstanceTypeDetails = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListInstanceTypeDetails",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2021-01-01/opensearch/instanceTypeDetails/{EngineVersion}",
+	Code: 200})
+
+var ListMigrations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListMigrations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2021-01-01/opensearch/app-migrations",
 	Code: 200})
 
 var ListPackagesForDomain = smithy.NewSchema(smithy.ShapeID{
@@ -547,6 +596,13 @@ var StartDomainMaintenance = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance",
 	Code: 200})
 
+var StartMigration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "StartMigration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/app-migrations",
+	Code: 200})
+
 var StartServiceSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "StartServiceSoftwareUpdate",
@@ -631,10 +687,17 @@ var _AmazonOpenSearchService = smithy.NewSchema(smithy.ShapeID{
 
 var AmazonOpenSearchService = smithy.NewServiceSchema(_AmazonOpenSearchService, "2021-01-01")
 
+var _AcceptedWarningsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AcceptedWarningsList",
+}, smithy.ShapeTypeList, 1)
+var _AcceptedWarningsList_member *smithy.Schema
+
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccessPoliciesStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1120,7 +1183,7 @@ var _BackendRole = smithy.NewSchema(smithy.ShapeID{
 var BaseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "BaseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var BaseException_message *smithy.Schema
 
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
@@ -1257,7 +1320,7 @@ var _ChangeProgressStageStatus = smithy.NewSchema(smithy.ShapeID{
 var ChangeProgressStatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ChangeProgressStatusDetails",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var ChangeProgressStatusDetails_ChangeId *smithy.Schema
 
 var ChangeProgressStatusDetails_StartTime *smithy.Schema
@@ -1277,6 +1340,10 @@ var ChangeProgressStatusDetails_LastUpdatedTime *smithy.Schema
 var ChangeProgressStatusDetails_ConfigChangeStatus *smithy.Schema
 
 var ChangeProgressStatusDetails_InitiatedBy *smithy.Schema
+
+var ChangeProgressStatusDetails_ValidationFailures *smithy.Schema
+
+var ChangeProgressStatusDetails_AcceptedWarnings *smithy.Schema
 
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -1400,7 +1467,8 @@ var ConfigChangeStatus_CANCELLED *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
 var _ConnectionAlias = smithy.NewSchema(smithy.ShapeID{
@@ -1455,6 +1523,32 @@ var DataSource_dataSourceDescription *smithy.Schema
 
 var DataSource_iamRoleForDataSourceArn *smithy.Schema
 
+var DataSourceAttachmentStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DataSourceAttachmentStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DataSourceAttachmentStatus_PENDING *smithy.Schema
+
+var DataSourceAttachmentStatus_ATTACHED *smithy.Schema
+
+var DataSourceAttachmentStatus_FAILED *smithy.Schema
+
+var DataSourceAttachmentSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DataSourceAttachmentSummary",
+}, smithy.ShapeTypeStructure, 3)
+var DataSourceAttachmentSummary_attachmentId *smithy.Schema
+
+var DataSourceAttachmentSummary_dataSourceArn *smithy.Schema
+
+var DataSourceAttachmentSummary_status *smithy.Schema
+
+var _DataSourceAttachmentSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DataSourceAttachmentSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _DataSourceAttachmentSummaryList_member *smithy.Schema
+
 var _DataSourceDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DataSourceDescription",
@@ -1506,7 +1600,8 @@ var DataSourceType_S3GlueDataCatalog *smithy.Schema
 var DependencyFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DependencyFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 424})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
 var DependencyFailureException_message *smithy.Schema
 
 var _DeploymentCloseDateTimeStamp = smithy.NewSchema(smithy.ShapeID{
@@ -1657,7 +1752,8 @@ var _DirectQueryOpenSearchARNList_member *smithy.Schema
 var DisabledOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DisabledOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var DisabledOperationException_message *smithy.Schema
 
 var _DisableTimestamp = smithy.NewSchema(smithy.ShapeID{
@@ -1673,7 +1769,7 @@ var _DomainArn = smithy.NewSchema(smithy.ShapeID{
 var DomainConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DomainConfig",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var DomainConfig_EngineVersion *smithy.Schema
 
 var DomainConfig_ClusterConfig *smithy.Schema
@@ -1719,6 +1815,10 @@ var DomainConfig_AIMLOptions *smithy.Schema
 var DomainConfig_DeploymentStrategyOptions *smithy.Schema
 
 var DomainConfig_AutomatedSnapshotPauseOptions *smithy.Schema
+
+var DomainConfig_UseCase *smithy.Schema
+
+var DomainConfig_EngineMode *smithy.Schema
 
 var DomainEndpointOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -1924,7 +2024,7 @@ var DomainState_NotAvailable *smithy.Schema
 var DomainStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DomainStatus",
-}, smithy.ShapeTypeStructure, 36)
+}, smithy.ShapeTypeStructure, 38)
 var DomainStatus_DomainId *smithy.Schema
 
 var DomainStatus_DomainName *smithy.Schema
@@ -1997,11 +2097,27 @@ var DomainStatus_DeploymentStrategyOptions *smithy.Schema
 
 var DomainStatus_AutomatedSnapshotPauseOptions *smithy.Schema
 
+var DomainStatus_UseCase *smithy.Schema
+
+var DomainStatus_EngineMode *smithy.Schema
+
 var _DomainStatusList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DomainStatusList",
 }, smithy.ShapeTypeList, 1)
 var _DomainStatusList_member *smithy.Schema
+
+var DomainUseCase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DomainUseCase",
+}, smithy.ShapeTypeEnum, 4)
+var DomainUseCase_SEARCH *smithy.Schema
+
+var DomainUseCase_VECTOR *smithy.Schema
+
+var DomainUseCase_OBSERVABILITY *smithy.Schema
+
+var DomainUseCase_MIXED *smithy.Schema
 
 var _Double = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2024,7 +2140,7 @@ var DryRunMode_Verbose *smithy.Schema
 var DryRunProgressStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DryRunProgressStatus",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var DryRunProgressStatus_DryRunId *smithy.Schema
 
 var DryRunProgressStatus_DryRunStatus *smithy.Schema
@@ -2034,6 +2150,8 @@ var DryRunProgressStatus_CreationDate *smithy.Schema
 var DryRunProgressStatus_UpdateDate *smithy.Schema
 
 var DryRunProgressStatus_ValidationFailures *smithy.Schema
+
+var DryRunProgressStatus_AcceptedWarnings *smithy.Schema
 
 var DryRunResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2081,10 +2199,12 @@ var EBSOptionsStatus_Status *smithy.Schema
 var EncryptionAtRestOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "EncryptionAtRestOptions",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var EncryptionAtRestOptions_Enabled *smithy.Schema
 
 var EncryptionAtRestOptions_KmsKeyId *smithy.Schema
+
+var EncryptionAtRestOptions_EncryptionMode *smithy.Schema
 
 var EncryptionAtRestOptionsStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2093,6 +2213,14 @@ var EncryptionAtRestOptionsStatus = smithy.NewSchema(smithy.ShapeID{
 var EncryptionAtRestOptionsStatus_Options *smithy.Schema
 
 var EncryptionAtRestOptionsStatus_Status *smithy.Schema
+
+var EncryptionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "EncryptionMode",
+}, smithy.ShapeTypeEnum, 2)
+var EncryptionMode_Disk *smithy.Schema
+
+var EncryptionMode_Native *smithy.Schema
 
 var _Endpoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2106,6 +2234,22 @@ var _EndpointsMap = smithy.NewSchema(smithy.ShapeID{
 var _EndpointsMap_key *smithy.Schema
 
 var _EndpointsMap_value *smithy.Schema
+
+var EngineMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "EngineMode",
+}, smithy.ShapeTypeEnum, 2)
+var EngineMode_GENERAL *smithy.Schema
+
+var EngineMode_OPTIMIZED *smithy.Schema
+
+var EngineModeStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "EngineModeStatus",
+}, smithy.ShapeTypeStructure, 2)
+var EngineModeStatus_Options *smithy.Schema
+
+var EngineModeStatus_Status *smithy.Schema
 
 var EngineType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2149,6 +2293,16 @@ var _ErrorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ErrorType",
 }, smithy.ShapeTypeString, 0)
+
+var ExportOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ExportOptions",
+}, smithy.ShapeTypeStructure, 3)
+var ExportOptions_types *smithy.Schema
+
+var ExportOptions_objects *smithy.Schema
+
+var ExportOptions_includeReferencesDeep *smithy.Schema
 
 var Filter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2414,6 +2568,33 @@ var _InsightEntityValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InsightEntityValue",
 }, smithy.ShapeTypeString, 0)
 
+var InsightFeedbackEntity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackEntity",
+}, smithy.ShapeTypeStructure, 2)
+var InsightFeedbackEntity_Type *smithy.Schema
+
+var InsightFeedbackEntity_Value *smithy.Schema
+
+var InsightFeedbackEntityType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackEntityType",
+}, smithy.ShapeTypeEnum, 1)
+var InsightFeedbackEntityType_DOMAIN *smithy.Schema
+
+var _InsightFeedbackText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackText",
+}, smithy.ShapeTypeString, 0)
+
+var InsightFeedbackThumbs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackThumbs",
+}, smithy.ShapeTypeEnum, 2)
+var InsightFeedbackThumbs_UP *smithy.Schema
+
+var InsightFeedbackThumbs_DOWN *smithy.Schema
+
 var InsightField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "InsightField",
@@ -2460,6 +2641,14 @@ var InsightPriorityLevel_HIGH *smithy.Schema
 var InsightPriorityLevel_MEDIUM *smithy.Schema
 
 var InsightPriorityLevel_LOW *smithy.Schema
+
+var InsightResponseStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightResponseStatus",
+}, smithy.ShapeTypeEnum, 2)
+var InsightResponseStatus_SUCCESS *smithy.Schema
+
+var InsightResponseStatus_ERROR *smithy.Schema
 
 var InsightSortOrder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -2569,19 +2758,22 @@ var _IntegerClass = smithy.NewSchema(smithy.ShapeID{
 var InternalException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalException_message *smithy.Schema
 
 var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidPaginationTokenException_message *smithy.Schema
 
 var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var InvalidTypeException_message *smithy.Schema
 
 var IPAddressType = smithy.NewSchema(smithy.ShapeID{
@@ -2675,7 +2867,8 @@ var _LicenseFilepath = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var LimitExceededException_message *smithy.Schema
 
 var _LimitName = smithy.NewSchema(smithy.ShapeID{
@@ -2814,6 +3007,72 @@ var _Message = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "Message",
 }, smithy.ShapeTypeString, 0)
+
+var MigrationError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationError",
+}, smithy.ShapeTypeStructure, 2)
+var MigrationError_code *smithy.Schema
+
+var MigrationError_message *smithy.Schema
+
+var MigrationOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationOptions",
+}, smithy.ShapeTypeStructure, 4)
+var MigrationOptions_source *smithy.Schema
+
+var MigrationOptions_workspace *smithy.Schema
+
+var MigrationOptions_exportOptions *smithy.Schema
+
+var MigrationOptions_conflictResolution *smithy.Schema
+
+var MigrationSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationSource",
+}, smithy.ShapeTypeStructure, 1)
+var MigrationSource_datasourceArn *smithy.Schema
+
+var MigrationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationSummary",
+}, smithy.ShapeTypeStructure, 9)
+var MigrationSummary_migrationId *smithy.Schema
+
+var MigrationSummary_status *smithy.Schema
+
+var MigrationSummary_applicationId *smithy.Schema
+
+var MigrationSummary_source *smithy.Schema
+
+var MigrationSummary_exportedCount *smithy.Schema
+
+var MigrationSummary_importedCount *smithy.Schema
+
+var MigrationSummary_error *smithy.Schema
+
+var MigrationSummary_createdAt *smithy.Schema
+
+var MigrationSummary_updatedAt *smithy.Schema
+
+var _MigrationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _MigrationSummaryList_member *smithy.Schema
+
+var MigrationWorkspace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MigrationWorkspace",
+}, smithy.ShapeTypeStructure, 4)
+var MigrationWorkspace_workspaceId *smithy.Schema
+
+var MigrationWorkspace_createWorkspace *smithy.Schema
+
+var MigrationWorkspace_name *smithy.Schema
+
+var MigrationWorkspace_type *smithy.Schema
 
 var _MinimumInstanceCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -3722,13 +3981,15 @@ var ReservedInstancePaymentOption_NO_UPFRONT *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceAlreadyExistsException_message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
@@ -3841,6 +4102,20 @@ var SAMLOptionsOutput_RolesKey *smithy.Schema
 
 var SAMLOptionsOutput_SessionTimeoutMinutes *smithy.Schema
 
+var SavedObjectIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "SavedObjectIdentifier",
+}, smithy.ShapeTypeStructure, 2)
+var SavedObjectIdentifier_type *smithy.Schema
+
+var SavedObjectIdentifier_id *smithy.Schema
+
+var _SavedObjectIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "SavedObjectIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _SavedObjectIdentifierList_member *smithy.Schema
+
 var ScheduleAt = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ScheduleAt",
@@ -3943,7 +4218,8 @@ var ServiceOptions_SupportedRegions *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceSoftwareOptions = smithy.NewSchema(smithy.ShapeID{
@@ -3988,7 +4264,8 @@ var _SlotList_member *smithy.Schema
 var SlotNotAvailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "SlotNotAvailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var SlotNotAvailableException_SlotSuggestions *smithy.Schema
 
 var SlotNotAvailableException_message *smithy.Schema
@@ -4136,7 +4413,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
@@ -4245,6 +4523,14 @@ var _UpgradeStepsList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _UpgradeStepsList_member *smithy.Schema
 
+var UseCaseStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "UseCaseStatus",
+}, smithy.ShapeTypeStructure, 2)
+var UseCaseStatus_Options *smithy.Schema
+
+var UseCaseStatus_Status *smithy.Schema
+
 var _Username = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "Username",
@@ -4258,22 +4544,33 @@ var _UserPoolId = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ValidationFailure",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ValidationFailure_Code *smithy.Schema
 
 var ValidationFailure_Message *smithy.Schema
+
+var ValidationFailure_Severity *smithy.Schema
 
 var _ValidationFailures = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ValidationFailures",
 }, smithy.ShapeTypeList, 1)
 var _ValidationFailures_member *smithy.Schema
+
+var ValidationFailureSeverity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ValidationFailureSeverity",
+}, smithy.ShapeTypeEnum, 2)
+var ValidationFailureSeverity_CRITICAL *smithy.Schema
+
+var ValidationFailureSeverity_WARNING *smithy.Schema
 
 var _ValueStringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -4450,6 +4747,14 @@ var WindowStartTime_Hours *smithy.Schema
 
 var WindowStartTime_Minutes *smithy.Schema
 
+var WorkspaceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "WorkspaceConfigurationInput",
+}, smithy.ShapeTypeStructure, 2)
+var WorkspaceConfigurationInput_name *smithy.Schema
+
+var WorkspaceConfigurationInput_workspaceType *smithy.Schema
+
 var ZoneAwarenessConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ZoneAwarenessConfig",
@@ -4558,6 +4863,34 @@ var AssociatePackagesResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AssociatePackagesResponse_DomainPackageDetailsList *smithy.Schema
 
+var AttachDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AttachDataSourceRequest",
+}, smithy.ShapeTypeStructure, 5)
+var AttachDataSourceRequest_id *smithy.Schema
+
+var AttachDataSourceRequest_dataSourceArn *smithy.Schema
+
+var AttachDataSourceRequest_workspaceId *smithy.Schema
+
+var AttachDataSourceRequest_workspaceConfiguration *smithy.Schema
+
+var AttachDataSourceRequest_clientToken *smithy.Schema
+
+var AttachDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AttachDataSourceResponse",
+}, smithy.ShapeTypeStructure, 5)
+var AttachDataSourceResponse_attachmentId *smithy.Schema
+
+var AttachDataSourceResponse_id *smithy.Schema
+
+var AttachDataSourceResponse_arn *smithy.Schema
+
+var AttachDataSourceResponse_dataSourceArn *smithy.Schema
+
+var AttachDataSourceResponse_status *smithy.Schema
+
 var AuthorizeVpcEndpointAccessRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AuthorizeVpcEndpointAccessRequest",
@@ -4649,7 +4982,7 @@ var CreateApplicationResponse_kmsKeyArn *smithy.Schema
 var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var CreateDomainRequest_DomainName *smithy.Schema
 
 var CreateDomainRequest_EngineVersion *smithy.Schema
@@ -4695,6 +5028,10 @@ var CreateDomainRequest_AIMLOptions *smithy.Schema
 var CreateDomainRequest_DeploymentStrategyOptions *smithy.Schema
 
 var CreateDomainRequest_AutomatedSnapshotPauseOptions *smithy.Schema
+
+var CreateDomainRequest_UseCase *smithy.Schema
+
+var CreateDomainRequest_EngineMode *smithy.Schema
 
 var CreateDomainResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -4910,6 +5247,28 @@ var DeregisterCapabilityResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeregisterCapabilityResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DeregisterCapabilityResponse_status *smithy.Schema
+
+var DescribeDataSourceAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDataSourceAttachmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeDataSourceAttachmentRequest_id *smithy.Schema
+
+var DescribeDataSourceAttachmentRequest_dataSourceArn *smithy.Schema
+
+var DescribeDataSourceAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDataSourceAttachmentResponse",
+}, smithy.ShapeTypeStructure, 5)
+var DescribeDataSourceAttachmentResponse_attachmentId *smithy.Schema
+
+var DescribeDataSourceAttachmentResponse_id *smithy.Schema
+
+var DescribeDataSourceAttachmentResponse_arn *smithy.Schema
+
+var DescribeDataSourceAttachmentResponse_dataSourceArn *smithy.Schema
+
+var DescribeDataSourceAttachmentResponse_status *smithy.Schema
 
 var DescribeDomainAutoTunesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5183,6 +5542,24 @@ var DescribeVpcEndpointsResponse_VpcEndpoints *smithy.Schema
 
 var DescribeVpcEndpointsResponse_VpcEndpointErrors *smithy.Schema
 
+var DetachDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DetachDataSourceRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DetachDataSourceRequest_id *smithy.Schema
+
+var DetachDataSourceRequest_dataSourceArn *smithy.Schema
+
+var DetachDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DetachDataSourceResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DetachDataSourceResponse_id *smithy.Schema
+
+var DetachDataSourceResponse_arn *smithy.Schema
+
+var DetachDataSourceResponse_dataSourceArn *smithy.Schema
+
 var DissociatePackageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DissociatePackageRequest",
@@ -5368,6 +5745,34 @@ var GetIndexResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetIndexResponse_IndexSchema *smithy.Schema
 
+var GetMigrationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "GetMigrationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetMigrationRequest_migrationId *smithy.Schema
+
+var GetMigrationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "GetMigrationResponse",
+}, smithy.ShapeTypeStructure, 9)
+var GetMigrationResponse_migrationId *smithy.Schema
+
+var GetMigrationResponse_status *smithy.Schema
+
+var GetMigrationResponse_applicationId *smithy.Schema
+
+var GetMigrationResponse_source *smithy.Schema
+
+var GetMigrationResponse_exportedCount *smithy.Schema
+
+var GetMigrationResponse_importedCount *smithy.Schema
+
+var GetMigrationResponse_error *smithy.Schema
+
+var GetMigrationResponse_createdAt *smithy.Schema
+
+var GetMigrationResponse_updatedAt *smithy.Schema
+
 var GetPackageVersionHistoryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "GetPackageVersionHistoryRequest",
@@ -5422,6 +5827,24 @@ var GetUpgradeStatusResponse_StepStatus *smithy.Schema
 
 var GetUpgradeStatusResponse_UpgradeName *smithy.Schema
 
+var InsightFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackRequest",
+}, smithy.ShapeTypeStructure, 4)
+var InsightFeedbackRequest_Entity *smithy.Schema
+
+var InsightFeedbackRequest_InsightId *smithy.Schema
+
+var InsightFeedbackRequest_Thumbs *smithy.Schema
+
+var InsightFeedbackRequest_FeedbackText *smithy.Schema
+
+var InsightFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "InsightFeedbackResponse",
+}, smithy.ShapeTypeStructure, 1)
+var InsightFeedbackResponse_Status *smithy.Schema
+
 var ListApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ListApplicationsRequest",
@@ -5439,6 +5862,24 @@ var ListApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListApplicationsResponse_ApplicationSummaries *smithy.Schema
 
 var ListApplicationsResponse_nextToken *smithy.Schema
+
+var ListDataSourceAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListDataSourceAttachmentsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDataSourceAttachmentsRequest_id *smithy.Schema
+
+var ListDataSourceAttachmentsRequest_nextToken *smithy.Schema
+
+var ListDataSourceAttachmentsRequest_maxResults *smithy.Schema
+
+var ListDataSourceAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListDataSourceAttachmentsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDataSourceAttachmentsResponse_attachments *smithy.Schema
+
+var ListDataSourceAttachmentsResponse_nextToken *smithy.Schema
 
 var ListDataSourcesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5563,6 +6004,26 @@ var ListInstanceTypeDetailsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListInstanceTypeDetailsResponse_InstanceTypeDetails *smithy.Schema
 
 var ListInstanceTypeDetailsResponse_NextToken *smithy.Schema
+
+var ListMigrationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListMigrationsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListMigrationsRequest_applicationId *smithy.Schema
+
+var ListMigrationsRequest_status *smithy.Schema
+
+var ListMigrationsRequest_maxResults *smithy.Schema
+
+var ListMigrationsRequest_nextToken *smithy.Schema
+
+var ListMigrationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ListMigrationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListMigrationsResponse_migrations *smithy.Schema
+
+var ListMigrationsResponse_nextToken *smithy.Schema
 
 var ListPackagesForDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5793,6 +6254,24 @@ var StartDomainMaintenanceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var StartDomainMaintenanceResponse_MaintenanceId *smithy.Schema
 
+var StartMigrationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "StartMigrationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var StartMigrationRequest_applicationId *smithy.Schema
+
+var StartMigrationRequest_migrationOptions *smithy.Schema
+
+var StartMigrationRequest_clientToken *smithy.Schema
+
+var StartMigrationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "StartMigrationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var StartMigrationResponse_migrationId *smithy.Schema
+
+var StartMigrationResponse_status *smithy.Schema
+
 var StartServiceSoftwareUpdateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "StartServiceSoftwareUpdateRequest",
@@ -5812,12 +6291,14 @@ var StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smithy.Schema
 var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateApplicationRequest_id *smithy.Schema
 
 var UpdateApplicationRequest_dataSources *smithy.Schema
 
 var UpdateApplicationRequest_appConfigs *smithy.Schema
+
+var UpdateApplicationRequest_iamIdentityCenterOptions *smithy.Schema
 
 var UpdateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5882,7 +6363,7 @@ var UpdateDirectQueryDataSourceResponse_DataSourceArn *smithy.Schema
 var UpdateDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 26)
 var UpdateDomainConfigRequest_DomainName *smithy.Schema
 
 var UpdateDomainConfigRequest_ClusterConfig *smithy.Schema
@@ -5928,6 +6409,12 @@ var UpdateDomainConfigRequest_AIMLOptions *smithy.Schema
 var UpdateDomainConfigRequest_DeploymentStrategyOptions *smithy.Schema
 
 var UpdateDomainConfigRequest_AutomatedSnapshotPauseOptions *smithy.Schema
+
+var UpdateDomainConfigRequest_UseCase *smithy.Schema
+
+var UpdateDomainConfigRequest_EngineMode *smithy.Schema
+
+var UpdateDomainConfigRequest_AcceptedWarnings *smithy.Schema
 
 var UpdateDomainConfigResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -6062,6 +6549,8 @@ var UpgradeDomainResponse_ChangeProgressDetails *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AcceptedWarningsList_member = _AcceptedWarningsList.AddMember("member", _String)
+
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
 
 	OptionState_RequiresIndexDocuments = OptionState.AddMember("RequiresIndexDocuments", smithyprelude.Unit)
@@ -6570,6 +7059,18 @@ func init() {
 
 	_StringList_member = _StringList.AddMember("member", _String)
 
+	ValidationFailureSeverity_CRITICAL = ValidationFailureSeverity.AddMember("CRITICAL", smithyprelude.Unit)
+
+	ValidationFailureSeverity_WARNING = ValidationFailureSeverity.AddMember("WARNING", smithyprelude.Unit)
+
+	ValidationFailure_Code = ValidationFailure.AddMember("Code", _String)
+
+	ValidationFailure_Message = ValidationFailure.AddMember("Message", _String)
+
+	ValidationFailure_Severity = ValidationFailure.AddMember("Severity", ValidationFailureSeverity)
+
+	_ValidationFailures_member = _ValidationFailures.AddMember("member", ValidationFailure)
+
 	ChangeProgressStatusDetails_ChangeId = ChangeProgressStatusDetails.AddMember("ChangeId", _GUID)
 
 	ChangeProgressStatusDetails_StartTime = ChangeProgressStatusDetails.AddMember("StartTime", _UpdateTimestamp)
@@ -6589,6 +7090,10 @@ func init() {
 	ChangeProgressStatusDetails_ConfigChangeStatus = ChangeProgressStatusDetails.AddMember("ConfigChangeStatus", ConfigChangeStatus)
 
 	ChangeProgressStatusDetails_InitiatedBy = ChangeProgressStatusDetails.AddMember("InitiatedBy", InitiatedBy)
+
+	ChangeProgressStatusDetails_ValidationFailures = ChangeProgressStatusDetails.AddMember("ValidationFailures", _ValidationFailures)
+
+	ChangeProgressStatusDetails_AcceptedWarnings = ChangeProgressStatusDetails.AddMember("AcceptedWarnings", _AcceptedWarningsList)
 
 	CloudWatchDirectQueryDataSource_RoleArn = CloudWatchDirectQueryDataSource.AddMember("RoleArn", _DirectQueryDataSourceRoleArn)
 
@@ -6894,6 +7399,20 @@ func init() {
 
 	DataSource_iamRoleForDataSourceArn = DataSource.AddMember("iamRoleForDataSourceArn", _RoleArn)
 
+	DataSourceAttachmentStatus_PENDING = DataSourceAttachmentStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	DataSourceAttachmentStatus_ATTACHED = DataSourceAttachmentStatus.AddMember("ATTACHED", smithyprelude.Unit)
+
+	DataSourceAttachmentStatus_FAILED = DataSourceAttachmentStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DataSourceAttachmentSummary_attachmentId = DataSourceAttachmentSummary.AddMember("attachmentId", _String)
+
+	DataSourceAttachmentSummary_dataSourceArn = DataSourceAttachmentSummary.AddMember("dataSourceArn", _ARN)
+
+	DataSourceAttachmentSummary_status = DataSourceAttachmentSummary.AddMember("status", DataSourceAttachmentStatus)
+
+	_DataSourceAttachmentSummaryList_member = _DataSourceAttachmentSummaryList.AddMember("member", DataSourceAttachmentSummary)
+
 	S3GlueDataCatalog_RoleArn = S3GlueDataCatalog.AddMember("RoleArn", _RoleArn)
 
 	DataSourceType_S3GlueDataCatalog = DataSourceType.AddMember("S3GlueDataCatalog", S3GlueDataCatalog)
@@ -7046,9 +7565,15 @@ func init() {
 
 	VPCDerivedInfoStatus_Status = VPCDerivedInfoStatus.AddMember("Status", OptionStatus)
 
+	EncryptionMode_Disk = EncryptionMode.AddMember("Disk", smithyprelude.Unit)
+
+	EncryptionMode_Native = EncryptionMode.AddMember("Native", smithyprelude.Unit)
+
 	EncryptionAtRestOptions_Enabled = EncryptionAtRestOptions.AddMember("Enabled", _Boolean)
 
 	EncryptionAtRestOptions_KmsKeyId = EncryptionAtRestOptions.AddMember("KmsKeyId", _KmsKeyId)
+
+	EncryptionAtRestOptions_EncryptionMode = EncryptionAtRestOptions.AddMember("EncryptionMode", EncryptionMode)
 
 	EncryptionAtRestOptionsStatus_Options = EncryptionAtRestOptionsStatus.AddMember("Options", EncryptionAtRestOptions)
 
@@ -7166,6 +7691,26 @@ func init() {
 
 	_ModifyingPropertiesList_member = _ModifyingPropertiesList.AddMember("member", ModifyingProperties)
 
+	DomainUseCase_SEARCH = DomainUseCase.AddMember("SEARCH", smithyprelude.Unit)
+
+	DomainUseCase_VECTOR = DomainUseCase.AddMember("VECTOR", smithyprelude.Unit)
+
+	DomainUseCase_OBSERVABILITY = DomainUseCase.AddMember("OBSERVABILITY", smithyprelude.Unit)
+
+	DomainUseCase_MIXED = DomainUseCase.AddMember("MIXED", smithyprelude.Unit)
+
+	UseCaseStatus_Options = UseCaseStatus.AddMember("Options", DomainUseCase)
+
+	UseCaseStatus_Status = UseCaseStatus.AddMember("Status", OptionStatus)
+
+	EngineMode_GENERAL = EngineMode.AddMember("GENERAL", smithyprelude.Unit)
+
+	EngineMode_OPTIMIZED = EngineMode.AddMember("OPTIMIZED", smithyprelude.Unit)
+
+	EngineModeStatus_Options = EngineModeStatus.AddMember("Options", EngineMode)
+
+	EngineModeStatus_Status = EngineModeStatus.AddMember("Status", OptionStatus)
+
 	DomainConfig_EngineVersion = DomainConfig.AddMember("EngineVersion", VersionStatus)
 
 	DomainConfig_ClusterConfig = DomainConfig.AddMember("ClusterConfig", ClusterConfigStatus)
@@ -7211,6 +7756,10 @@ func init() {
 	DomainConfig_DeploymentStrategyOptions = DomainConfig.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptionsStatus)
 
 	DomainConfig_AutomatedSnapshotPauseOptions = DomainConfig.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseOptionsStatus)
+
+	DomainConfig_UseCase = DomainConfig.AddMember("UseCase", UseCaseStatus)
+
+	DomainConfig_EngineMode = DomainConfig.AddMember("EngineMode", EngineModeStatus)
 
 	DomainHealth_Red = DomainHealth.AddMember("Red", smithyprelude.Unit)
 
@@ -7466,17 +8015,15 @@ func init() {
 
 	DomainStatus_AutomatedSnapshotPauseOptions = DomainStatus.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseOptions)
 
+	DomainStatus_UseCase = DomainStatus.AddMember("UseCase", DomainUseCase)
+
+	DomainStatus_EngineMode = DomainStatus.AddMember("EngineMode", EngineMode)
+
 	_DomainStatusList_member = _DomainStatusList.AddMember("member", DomainStatus)
 
 	DryRunMode_Basic = DryRunMode.AddMember("Basic", smithyprelude.Unit)
 
 	DryRunMode_Verbose = DryRunMode.AddMember("Verbose", smithyprelude.Unit)
-
-	ValidationFailure_Code = ValidationFailure.AddMember("Code", _String)
-
-	ValidationFailure_Message = ValidationFailure.AddMember("Message", _String)
-
-	_ValidationFailures_member = _ValidationFailures.AddMember("member", ValidationFailure)
 
 	DryRunProgressStatus_DryRunId = DryRunProgressStatus.AddMember("DryRunId", _GUID)
 
@@ -7488,6 +8035,8 @@ func init() {
 
 	DryRunProgressStatus_ValidationFailures = DryRunProgressStatus.AddMember("ValidationFailures", _ValidationFailures)
 
+	DryRunProgressStatus_AcceptedWarnings = DryRunProgressStatus.AddMember("AcceptedWarnings", _AcceptedWarningsList)
+
 	DryRunResults_DeploymentType = DryRunResults.AddMember("DeploymentType", _DeploymentType)
 
 	DryRunResults_Message = DryRunResults.AddMember("Message", _Message)
@@ -7495,6 +8044,18 @@ func init() {
 	EnvironmentInfo_AvailabilityZoneInformation = EnvironmentInfo.AddMember("AvailabilityZoneInformation", _AvailabilityZoneInfoList)
 
 	_EnvironmentInfoList_member = _EnvironmentInfoList.AddMember("member", EnvironmentInfo)
+
+	SavedObjectIdentifier_type = SavedObjectIdentifier.AddMember("type", _String)
+
+	SavedObjectIdentifier_id = SavedObjectIdentifier.AddMember("id", _String)
+
+	_SavedObjectIdentifierList_member = _SavedObjectIdentifierList.AddMember("member", SavedObjectIdentifier)
+
+	ExportOptions_types = ExportOptions.AddMember("types", _StringList)
+
+	ExportOptions_objects = ExportOptions.AddMember("objects", _SavedObjectIdentifierList)
+
+	ExportOptions_includeReferencesDeep = ExportOptions.AddMember("includeReferencesDeep", _Boolean)
 
 	_ValueStringList_member = _ValueStringList.AddMember("member", _NonEmptyString)
 
@@ -7610,6 +8171,16 @@ func init() {
 
 	InsightEntity_Value = InsightEntity.AddMember("Value", _InsightEntityValue)
 
+	InsightFeedbackEntityType_DOMAIN = InsightFeedbackEntityType.AddMember("DOMAIN", smithyprelude.Unit)
+
+	InsightFeedbackEntity_Type = InsightFeedbackEntity.AddMember("Type", InsightFeedbackEntityType)
+
+	InsightFeedbackEntity_Value = InsightFeedbackEntity.AddMember("Value", _InsightEntityValue)
+
+	InsightFeedbackThumbs_UP = InsightFeedbackThumbs.AddMember("UP", smithyprelude.Unit)
+
+	InsightFeedbackThumbs_DOWN = InsightFeedbackThumbs.AddMember("DOWN", smithyprelude.Unit)
+
 	InsightFieldType_TEXT = InsightFieldType.AddMember("TEXT", smithyprelude.Unit)
 
 	InsightFieldType_METRIC = InsightFieldType.AddMember("METRIC", smithyprelude.Unit)
@@ -7623,6 +8194,10 @@ func init() {
 	_InsightFieldList_member = _InsightFieldList.AddMember("member", InsightField)
 
 	_InsightList_member = _InsightList.AddMember("member", Insight)
+
+	InsightResponseStatus_SUCCESS = InsightResponseStatus.AddMember("SUCCESS", smithyprelude.Unit)
+
+	InsightResponseStatus_ERROR = InsightResponseStatus.AddMember("ERROR", smithyprelude.Unit)
 
 	InsightSortOrder_ASC = InsightSortOrder.AddMember("ASC", smithyprelude.Unit)
 
@@ -7695,6 +8270,48 @@ func init() {
 	MasterNodeStatus_Available = MasterNodeStatus.AddMember("Available", smithyprelude.Unit)
 
 	MasterNodeStatus_UnAvailable = MasterNodeStatus.AddMember("UnAvailable", smithyprelude.Unit)
+
+	MigrationError_code = MigrationError.AddMember("code", _String)
+
+	MigrationError_message = MigrationError.AddMember("message", _String)
+
+	MigrationSource_datasourceArn = MigrationSource.AddMember("datasourceArn", _ARN)
+
+	MigrationWorkspace_workspaceId = MigrationWorkspace.AddMember("workspaceId", _String)
+
+	MigrationWorkspace_createWorkspace = MigrationWorkspace.AddMember("createWorkspace", _Boolean)
+
+	MigrationWorkspace_name = MigrationWorkspace.AddMember("name", _String)
+
+	MigrationWorkspace_type = MigrationWorkspace.AddMember("type", _String)
+
+	MigrationOptions_source = MigrationOptions.AddMember("source", MigrationSource)
+
+	MigrationOptions_workspace = MigrationOptions.AddMember("workspace", MigrationWorkspace)
+
+	MigrationOptions_exportOptions = MigrationOptions.AddMember("exportOptions", ExportOptions)
+
+	MigrationOptions_conflictResolution = MigrationOptions.AddMember("conflictResolution", _String)
+
+	MigrationSummary_migrationId = MigrationSummary.AddMember("migrationId", _String)
+
+	MigrationSummary_status = MigrationSummary.AddMember("status", _String)
+
+	MigrationSummary_applicationId = MigrationSummary.AddMember("applicationId", _ApplicationId)
+
+	MigrationSummary_source = MigrationSummary.AddMember("source", MigrationSource)
+
+	MigrationSummary_exportedCount = MigrationSummary.AddMember("exportedCount", _Integer)
+
+	MigrationSummary_importedCount = MigrationSummary.AddMember("importedCount", _Integer)
+
+	MigrationSummary_error = MigrationSummary.AddMember("error", MigrationError)
+
+	MigrationSummary_createdAt = MigrationSummary.AddMember("createdAt", _UpdateTimestamp)
+
+	MigrationSummary_updatedAt = MigrationSummary.AddMember("updatedAt", _UpdateTimestamp)
+
+	_MigrationSummaryList_member = _MigrationSummaryList.AddMember("member", MigrationSummary)
 
 	OutboundConnectionStatusCode_VALIDATING = OutboundConnectionStatusCode.AddMember("VALIDATING", smithyprelude.Unit)
 
@@ -8054,6 +8671,10 @@ func init() {
 
 	VPCOptions_EgressEnabled = VPCOptions.AddMember("EgressEnabled", _Boolean)
 
+	WorkspaceConfigurationInput_name = WorkspaceConfigurationInput.AddMember("name", _String)
+
+	WorkspaceConfigurationInput_workspaceType = WorkspaceConfigurationInput.AddMember("workspaceType", _String)
+
 	AcceptInboundConnectionRequest_ConnectionId = AcceptInboundConnectionRequest.AddMember("ConnectionId", _ConnectionId, &smithytraits.HTTPLabel{})
 
 	AcceptInboundConnectionResponse_Connection = AcceptInboundConnectionResponse.AddMember("Connection", InboundConnection)
@@ -8101,6 +8722,26 @@ func init() {
 	AssociatePackagesRequest_DomainName = AssociatePackagesRequest.AddMember("DomainName", _DomainName)
 
 	AssociatePackagesResponse_DomainPackageDetailsList = AssociatePackagesResponse.AddMember("DomainPackageDetailsList", _DomainPackageDetailsList)
+
+	AttachDataSourceRequest_id = AttachDataSourceRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
+
+	AttachDataSourceRequest_dataSourceArn = AttachDataSourceRequest.AddMember("dataSourceArn", _ARN)
+
+	AttachDataSourceRequest_workspaceId = AttachDataSourceRequest.AddMember("workspaceId", _String)
+
+	AttachDataSourceRequest_workspaceConfiguration = AttachDataSourceRequest.AddMember("workspaceConfiguration", WorkspaceConfigurationInput)
+
+	AttachDataSourceRequest_clientToken = AttachDataSourceRequest.AddMember("clientToken", _ClientToken)
+
+	AttachDataSourceResponse_attachmentId = AttachDataSourceResponse.AddMember("attachmentId", _String)
+
+	AttachDataSourceResponse_id = AttachDataSourceResponse.AddMember("id", _Id)
+
+	AttachDataSourceResponse_arn = AttachDataSourceResponse.AddMember("arn", _ARN)
+
+	AttachDataSourceResponse_dataSourceArn = AttachDataSourceResponse.AddMember("dataSourceArn", _ARN)
+
+	AttachDataSourceResponse_status = AttachDataSourceResponse.AddMember("status", DataSourceAttachmentStatus)
 
 	AuthorizeVpcEndpointAccessRequest_DomainName = AuthorizeVpcEndpointAccessRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
 
@@ -8204,6 +8845,10 @@ func init() {
 
 	CreateDomainRequest_AutomatedSnapshotPauseOptions = CreateDomainRequest.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseRequestOptions)
 
+	CreateDomainRequest_UseCase = CreateDomainRequest.AddMember("UseCase", DomainUseCase)
+
+	CreateDomainRequest_EngineMode = CreateDomainRequest.AddMember("EngineMode", EngineMode)
+
 	CreateDomainResponse_DomainStatus = CreateDomainResponse.AddMember("DomainStatus", DomainStatus)
 
 	CreateIndexRequest_DomainName = CreateIndexRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
@@ -8305,6 +8950,20 @@ func init() {
 	DeregisterCapabilityRequest_capabilityName = DeregisterCapabilityRequest.AddMember("capabilityName", _CapabilityName, &smithytraits.HTTPLabel{})
 
 	DeregisterCapabilityResponse_status = DeregisterCapabilityResponse.AddMember("status", CapabilityStatus)
+
+	DescribeDataSourceAttachmentRequest_id = DescribeDataSourceAttachmentRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
+
+	DescribeDataSourceAttachmentRequest_dataSourceArn = DescribeDataSourceAttachmentRequest.AddMember("dataSourceArn", _ARN)
+
+	DescribeDataSourceAttachmentResponse_attachmentId = DescribeDataSourceAttachmentResponse.AddMember("attachmentId", _String)
+
+	DescribeDataSourceAttachmentResponse_id = DescribeDataSourceAttachmentResponse.AddMember("id", _Id)
+
+	DescribeDataSourceAttachmentResponse_arn = DescribeDataSourceAttachmentResponse.AddMember("arn", _ARN)
+
+	DescribeDataSourceAttachmentResponse_dataSourceArn = DescribeDataSourceAttachmentResponse.AddMember("dataSourceArn", _ARN)
+
+	DescribeDataSourceAttachmentResponse_status = DescribeDataSourceAttachmentResponse.AddMember("status", DataSourceAttachmentStatus)
 
 	DescribeDomainAutoTunesRequest_DomainName = DescribeDomainAutoTunesRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
 
@@ -8450,6 +9109,16 @@ func init() {
 
 	DescribeVpcEndpointsResponse_VpcEndpointErrors = DescribeVpcEndpointsResponse.AddMember("VpcEndpointErrors", _VpcEndpointErrorList)
 
+	DetachDataSourceRequest_id = DetachDataSourceRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
+
+	DetachDataSourceRequest_dataSourceArn = DetachDataSourceRequest.AddMember("dataSourceArn", _ARN)
+
+	DetachDataSourceResponse_id = DetachDataSourceResponse.AddMember("id", _Id)
+
+	DetachDataSourceResponse_arn = DetachDataSourceResponse.AddMember("arn", _ARN)
+
+	DetachDataSourceResponse_dataSourceArn = DetachDataSourceResponse.AddMember("dataSourceArn", _ARN)
+
 	DissociatePackageRequest_PackageID = DissociatePackageRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
 
 	DissociatePackageRequest_DomainName = DissociatePackageRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
@@ -8554,6 +9223,26 @@ func init() {
 
 	GetIndexResponse_IndexSchema = GetIndexResponse.AddMember("IndexSchema", _IndexSchema)
 
+	GetMigrationRequest_migrationId = GetMigrationRequest.AddMember("migrationId", _String, &smithytraits.HTTPLabel{})
+
+	GetMigrationResponse_migrationId = GetMigrationResponse.AddMember("migrationId", _String)
+
+	GetMigrationResponse_status = GetMigrationResponse.AddMember("status", _String)
+
+	GetMigrationResponse_applicationId = GetMigrationResponse.AddMember("applicationId", _ApplicationId)
+
+	GetMigrationResponse_source = GetMigrationResponse.AddMember("source", MigrationSource)
+
+	GetMigrationResponse_exportedCount = GetMigrationResponse.AddMember("exportedCount", _Integer)
+
+	GetMigrationResponse_importedCount = GetMigrationResponse.AddMember("importedCount", _Integer)
+
+	GetMigrationResponse_error = GetMigrationResponse.AddMember("error", MigrationError)
+
+	GetMigrationResponse_createdAt = GetMigrationResponse.AddMember("createdAt", _UpdateTimestamp)
+
+	GetMigrationResponse_updatedAt = GetMigrationResponse.AddMember("updatedAt", _UpdateTimestamp)
+
 	GetPackageVersionHistoryRequest_PackageID = GetPackageVersionHistoryRequest.AddMember("PackageID", _PackageID, &smithytraits.HTTPLabel{})
 
 	GetPackageVersionHistoryRequest_MaxResults = GetPackageVersionHistoryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -8584,6 +9273,16 @@ func init() {
 
 	GetUpgradeStatusResponse_UpgradeName = GetUpgradeStatusResponse.AddMember("UpgradeName", _UpgradeName)
 
+	InsightFeedbackRequest_Entity = InsightFeedbackRequest.AddMember("Entity", InsightFeedbackEntity)
+
+	InsightFeedbackRequest_InsightId = InsightFeedbackRequest.AddMember("InsightId", _GUID)
+
+	InsightFeedbackRequest_Thumbs = InsightFeedbackRequest.AddMember("Thumbs", InsightFeedbackThumbs)
+
+	InsightFeedbackRequest_FeedbackText = InsightFeedbackRequest.AddMember("FeedbackText", _InsightFeedbackText)
+
+	InsightFeedbackResponse_Status = InsightFeedbackResponse.AddMember("Status", InsightResponseStatus)
+
 	ListApplicationsRequest_nextToken = ListApplicationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 
 	ListApplicationsRequest_statuses = ListApplicationsRequest.AddMember("statuses", _ApplicationStatuses, &smithytraits.HTTPQuery{Name: "statuses"})
@@ -8593,6 +9292,16 @@ func init() {
 	ListApplicationsResponse_ApplicationSummaries = ListApplicationsResponse.AddMember("ApplicationSummaries", _ApplicationSummaries)
 
 	ListApplicationsResponse_nextToken = ListApplicationsResponse.AddMember("nextToken", _NextToken)
+
+	ListDataSourceAttachmentsRequest_id = ListDataSourceAttachmentsRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
+
+	ListDataSourceAttachmentsRequest_nextToken = ListDataSourceAttachmentsRequest.AddMember("nextToken", _String)
+
+	ListDataSourceAttachmentsRequest_maxResults = ListDataSourceAttachmentsRequest.AddMember("maxResults", _Integer)
+
+	ListDataSourceAttachmentsResponse_attachments = ListDataSourceAttachmentsResponse.AddMember("attachments", _DataSourceAttachmentSummaryList)
+
+	ListDataSourceAttachmentsResponse_nextToken = ListDataSourceAttachmentsResponse.AddMember("nextToken", _String)
 
 	ListDataSourcesRequest_DomainName = ListDataSourcesRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
 
@@ -8661,6 +9370,18 @@ func init() {
 	ListInstanceTypeDetailsResponse_InstanceTypeDetails = ListInstanceTypeDetailsResponse.AddMember("InstanceTypeDetails", _InstanceTypeDetailsList)
 
 	ListInstanceTypeDetailsResponse_NextToken = ListInstanceTypeDetailsResponse.AddMember("NextToken", _NextToken)
+
+	ListMigrationsRequest_applicationId = ListMigrationsRequest.AddMember("applicationId", _ApplicationId, &smithytraits.HTTPQuery{Name: "applicationId"})
+
+	ListMigrationsRequest_status = ListMigrationsRequest.AddMember("status", _String, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListMigrationsRequest_maxResults = ListMigrationsRequest.AddMember("maxResults", _Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListMigrationsRequest_nextToken = ListMigrationsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListMigrationsResponse_migrations = ListMigrationsResponse.AddMember("migrations", _MigrationSummaryList)
+
+	ListMigrationsResponse_nextToken = ListMigrationsResponse.AddMember("nextToken", _String)
 
 	ListPackagesForDomainRequest_DomainName = ListPackagesForDomainRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
 
@@ -8774,6 +9495,16 @@ func init() {
 
 	StartDomainMaintenanceResponse_MaintenanceId = StartDomainMaintenanceResponse.AddMember("MaintenanceId", _RequestId)
 
+	StartMigrationRequest_applicationId = StartMigrationRequest.AddMember("applicationId", _ApplicationId)
+
+	StartMigrationRequest_migrationOptions = StartMigrationRequest.AddMember("migrationOptions", MigrationOptions)
+
+	StartMigrationRequest_clientToken = StartMigrationRequest.AddMember("clientToken", _ClientToken)
+
+	StartMigrationResponse_migrationId = StartMigrationResponse.AddMember("migrationId", _String)
+
+	StartMigrationResponse_status = StartMigrationResponse.AddMember("status", _String)
+
 	StartServiceSoftwareUpdateRequest_DomainName = StartServiceSoftwareUpdateRequest.AddMember("DomainName", _DomainName)
 
 	StartServiceSoftwareUpdateRequest_ScheduleAt = StartServiceSoftwareUpdateRequest.AddMember("ScheduleAt", ScheduleAt)
@@ -8787,6 +9518,8 @@ func init() {
 	UpdateApplicationRequest_dataSources = UpdateApplicationRequest.AddMember("dataSources", _DataSources)
 
 	UpdateApplicationRequest_appConfigs = UpdateApplicationRequest.AddMember("appConfigs", _AppConfigs)
+
+	UpdateApplicationRequest_iamIdentityCenterOptions = UpdateApplicationRequest.AddMember("iamIdentityCenterOptions", IamIdentityCenterOptionsInput)
 
 	UpdateApplicationResponse_id = UpdateApplicationResponse.AddMember("id", _Id)
 
@@ -8873,6 +9606,12 @@ func init() {
 	UpdateDomainConfigRequest_DeploymentStrategyOptions = UpdateDomainConfigRequest.AddMember("DeploymentStrategyOptions", DeploymentStrategyOptions)
 
 	UpdateDomainConfigRequest_AutomatedSnapshotPauseOptions = UpdateDomainConfigRequest.AddMember("AutomatedSnapshotPauseOptions", AutomatedSnapshotPauseRequestOptions)
+
+	UpdateDomainConfigRequest_UseCase = UpdateDomainConfigRequest.AddMember("UseCase", DomainUseCase)
+
+	UpdateDomainConfigRequest_EngineMode = UpdateDomainConfigRequest.AddMember("EngineMode", EngineMode)
+
+	UpdateDomainConfigRequest_AcceptedWarnings = UpdateDomainConfigRequest.AddMember("AcceptedWarnings", _AcceptedWarningsList)
 
 	UpdateDomainConfigResponse_DomainConfig = UpdateDomainConfigResponse.AddMember("DomainConfig", DomainConfig)
 

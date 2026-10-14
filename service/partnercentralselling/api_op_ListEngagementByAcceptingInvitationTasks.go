@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists all in-progress, completed, or failed
@@ -74,6 +74,33 @@ type ListEngagementByAcceptingInvitationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementByAcceptingInvitationTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementByAcceptingInvitationTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_Catalog, *v.Catalog)
+	}
+	serializeEngagementInvitationIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier, v.EngagementInvitationIdentifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngagementByAcceptingInvitationTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_NextToken, *v.NextToken)
+	}
+	serializeOpportunityIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTaskIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	serializeTaskStatuses(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskStatus, v.TaskStatus)
+}
+
 type ListEngagementByAcceptingInvitationTasksOutput struct {
 
 	//  A token used for pagination to retrieve the next page of results.If there are
@@ -93,77 +120,51 @@ type ListEngagementByAcceptingInvitationTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementByAcceptingInvitationTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementByAcceptingInvitationTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeListEngagementByAcceptingInvitationTaskSummaries(s, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, v.TaskSummaries)
+}
+func (v *ListEngagementByAcceptingInvitationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementByAcceptingInvitationTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken, v.NextToken)
+		case schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries:
+			return deserializeListEngagementByAcceptingInvitationTaskSummaries(d, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, &v.TaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngagementByAcceptingInvitationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementByAcceptingInvitationTasks, schemas.ListEngagementByAcceptingInvitationTasksRequest, schemas.ListEngagementByAcceptingInvitationTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEngagementByAcceptingInvitationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementByAcceptingInvitationTasks, schemas.ListEngagementByAcceptingInvitationTasksRequest, schemas.ListEngagementByAcceptingInvitationTasksResponse), output: &ListEngagementByAcceptingInvitationTasksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEngagementByAcceptingInvitationTasks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEngagementByAcceptingInvitationTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEngagementByAcceptingInvitationTasksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEngagementByAcceptingInvitationTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +177,6 @@ func (c *Client) addOperationListEngagementByAcceptingInvitationTasksMiddlewares
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +281,3 @@ type ListEngagementByAcceptingInvitationTasksAPIClient interface {
 }
 
 var _ ListEngagementByAcceptingInvitationTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEngagementByAcceptingInvitationTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEngagementByAcceptingInvitationTasks",
-	}
-}

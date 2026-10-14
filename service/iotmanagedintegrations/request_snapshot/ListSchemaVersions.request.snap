@@ -1,0 +1,3 @@
+GET /schema-versions/capability?MaxResults=1&NamespaceFilter=__Namespace__&NextToken=__NextToken__&SchemaIdFilter=__SchemaId__&SemanticVersionFilter=__SemanticVersion__&VisibilityFilter=PUBLIC
+
+

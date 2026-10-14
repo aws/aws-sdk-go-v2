@@ -4,13 +4,8 @@ package docdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new instance.
@@ -82,8 +77,8 @@ type CreateDBInstanceInput struct {
 	//
 	// For more information, see [Updating Your Amazon DocumentDB TLS Certificates] and [Encrypting Data in Transit] in the Amazon DocumentDB Developer Guide.
 	//
-	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+	// [Updating Your Amazon DocumentDB TLS Certificates]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+	// [Encrypting Data in Transit]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
 	CACertificateIdentifier *string
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots
@@ -93,7 +88,7 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// Instance. For more information, see [Using Amazon Performance Insights].
 	//
-	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
 	EnablePerformanceInsights *bool
 
 	// The KMS key identifier for encryption of Performance Insights data.
@@ -136,52 +131,6 @@ type CreateDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDBInstanceMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoMinorVersionUpgrade != nil {
-		s.WriteBool(schemas.CreateDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
-	}
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_AvailabilityZone, *v.AvailabilityZone)
-	}
-	if v.CACertificateIdentifier != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
-	}
-	if v.CopyTagsToSnapshot != nil {
-		s.WriteBool(schemas.CreateDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBInstanceClass != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
-	}
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-	if v.EnablePerformanceInsights != nil {
-		s.WriteBool(schemas.CreateDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
-	}
-	if v.Engine != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_Engine, *v.Engine)
-	}
-	if v.PerformanceInsightsKMSKeyId != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.CreateDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.PromotionTier != nil {
-		s.WriteInt32(schemas.CreateDBInstanceMessage_PromotionTier, *v.PromotionTier)
-	}
-	serializeTagList(s, schemas.CreateDBInstanceMessage_Tags, v.Tags)
-}
-
 type CreateDBInstanceOutput struct {
 
 	// Detailed information about an instance.
@@ -193,85 +142,29 @@ type CreateDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDBInstanceResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDBInstanceResult_DBInstance:
-			v.DBInstance = &types.DBInstance{}
-			return v.DBInstance.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstance, schemas.CreateDBInstanceMessage, schemas.CreateDBInstanceResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBInstance, schemas.CreateDBInstanceMessage, schemas.CreateDBInstanceResult), output: &CreateDBInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDBInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -286,22 +179,8 @@ func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDBInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDBInstance",
-	}
 }

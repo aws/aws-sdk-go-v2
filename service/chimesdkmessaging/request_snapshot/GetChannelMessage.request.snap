@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__/messages/__MessageId__?sub-channel-id=__SubChannelId__
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

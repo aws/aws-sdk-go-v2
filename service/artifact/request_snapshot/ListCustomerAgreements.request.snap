@@ -1,0 +1,3 @@
+GET /v1/customer-agreement/list?maxResults=1&nextToken=__NextToken__
+
+

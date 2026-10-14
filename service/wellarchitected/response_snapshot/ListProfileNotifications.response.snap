@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","NotificationSummaries":[{"CurrentProfileVersion":"__CurrentProfileVersion__","LatestProfileVersion":"__LatestProfileVersion__","ProfileArn":"__ProfileArn__","ProfileName":"__ProfileName__","Type":"PROFILE_ANSWERS_UPDATED","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"},{"CurrentProfileVersion":"__CurrentProfileVersion__","LatestProfileVersion":"__LatestProfileVersion__","ProfileArn":"__ProfileArn__","ProfileName":"__ProfileName__","Type":"PROFILE_ANSWERS_UPDATED","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"}]}

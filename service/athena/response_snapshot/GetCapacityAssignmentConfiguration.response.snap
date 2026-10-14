@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.GetCapacityAssignmentConfiguration
+
+{"CapacityAssignmentConfiguration":{"CapacityAssignments":[{"WorkGroupNames":["__Member__","__Member__"]},{"WorkGroupNames":["__Member__","__Member__"]}],"CapacityReservationName":"__CapacityReservationName__"}}

@@ -1,0 +1,5 @@
+POST /ListCompositions
+
+Content-Type: application/json
+
+{"filterByEncoderConfigurationArn":"__FilterByEncoderConfigurationArn__","filterByStageArn":"__FilterByStageArn__","maxResults":1,"nextToken":"__NextToken__"}

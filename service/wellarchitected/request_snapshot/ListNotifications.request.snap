@@ -1,0 +1,5 @@
+POST /notifications
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceArn":"__ResourceArn__","WorkloadId":"__WorkloadId__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetSignalCatalog
+
+{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","lastModificationTime":946684800,"name":"__Name__","nodeCounts":{"totalActuators":1,"totalAttributes":1,"totalBranches":1,"totalNodes":1,"totalProperties":1,"totalSensors":1,"totalStructs":1}}

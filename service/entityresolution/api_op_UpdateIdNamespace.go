@@ -4,13 +4,8 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,26 +49,6 @@ type UpdateIdNamespaceInput struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateIdNamespaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIdNamespaceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateIdNamespaceInput_description, *v.Description)
-	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
-	if v.IdNamespaceName != nil {
-		s.WriteString(schemas.UpdateIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
-	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateIdNamespaceInput_roleArn, *v.RoleArn)
-	}
 }
 
 type UpdateIdNamespaceOutput struct {
@@ -131,111 +106,29 @@ type UpdateIdNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIdNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateIdNamespaceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateIdNamespaceOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateIdNamespaceOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateIdNamespaceOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateIdNamespaceOutput_description, v.Description)
-		case schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties:
-			return deserializeIdNamespaceIdMappingWorkflowPropertiesList(d, schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties, &v.IdMappingWorkflowProperties)
-		case schemas.UpdateIdNamespaceOutput_idNamespaceArn:
-			v.IdNamespaceArn = new(string)
-			return d.ReadString(schemas.UpdateIdNamespaceOutput_idNamespaceArn, v.IdNamespaceArn)
-		case schemas.UpdateIdNamespaceOutput_idNamespaceName:
-			v.IdNamespaceName = new(string)
-			return d.ReadString(schemas.UpdateIdNamespaceOutput_idNamespaceName, v.IdNamespaceName)
-		case schemas.UpdateIdNamespaceOutput_inputSourceConfig:
-			return deserializeIdNamespaceInputSourceConfig(d, schemas.UpdateIdNamespaceOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.UpdateIdNamespaceOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.UpdateIdNamespaceOutput_roleArn, v.RoleArn)
-		case schemas.UpdateIdNamespaceOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.UpdateIdNamespaceOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.IdNamespaceType(ev)
-			return nil
-		case schemas.UpdateIdNamespaceOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateIdNamespaceOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateIdNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdNamespace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdNamespace, schemas.UpdateIdNamespaceInput, schemas.UpdateIdNamespaceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdNamespace{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdNamespace, schemas.UpdateIdNamespaceInput, schemas.UpdateIdNamespaceOutput), output: &UpdateIdNamespaceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIdNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateIdNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIdNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,22 +143,8 @@ func (c *Client) addOperationUpdateIdNamespaceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateIdNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateIdNamespace",
-	}
 }

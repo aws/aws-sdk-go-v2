@@ -1,0 +1,4 @@
+POST /amazonclouddirectory/2017-01-11/directory/get
+
+X-Amz-Data-Partition: __DirectoryArn__
+

@@ -4,12 +4,7 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -110,30 +105,6 @@ type UpdatePolicyTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePolicyTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePolicyTemplateInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePolicyTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdatePolicyTemplateInput_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdatePolicyTemplateInput_name, *v.Name)
-	}
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.UpdatePolicyTemplateInput_policyStoreId, *v.PolicyStoreId)
-	}
-	if v.PolicyTemplateId != nil {
-		s.WriteString(schemas.UpdatePolicyTemplateInput_policyTemplateId, *v.PolicyTemplateId)
-	}
-	if v.Statement != nil {
-		s.WriteString(schemas.UpdatePolicyTemplateInput_statement, *v.Statement)
-	}
-}
-
 type UpdatePolicyTemplateOutput struct {
 
 	// The date and time that the policy template was originally created.
@@ -162,94 +133,29 @@ type UpdatePolicyTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePolicyTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePolicyTemplateOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePolicyTemplateOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.UpdatePolicyTemplateOutput_createdDate, v.CreatedDate)
-		case schemas.UpdatePolicyTemplateOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.UpdatePolicyTemplateOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.UpdatePolicyTemplateOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.UpdatePolicyTemplateOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.UpdatePolicyTemplateOutput_policyTemplateId:
-			v.PolicyTemplateId = new(string)
-			return d.ReadString(schemas.UpdatePolicyTemplateOutput_policyTemplateId, v.PolicyTemplateId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePolicyTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePolicyTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicyTemplate, schemas.UpdatePolicyTemplateInput, schemas.UpdatePolicyTemplateOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePolicyTemplate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicyTemplate, schemas.UpdatePolicyTemplateInput, schemas.UpdatePolicyTemplateOutput), output: &UpdatePolicyTemplateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePolicyTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePolicyTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicyTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -264,22 +170,8 @@ func (c *Client) addOperationUpdatePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePolicyTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePolicyTemplate",
-	}
 }

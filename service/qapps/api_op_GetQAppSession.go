@@ -4,13 +4,8 @@ package qapps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the current state and results for an active session of an Amazon Q
@@ -43,21 +38,6 @@ type GetQAppSessionInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetQAppSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQAppSessionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQAppSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.GetQAppSessionInput_instanceId, *v.InstanceId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.GetQAppSessionInput_sessionId, *v.SessionId)
-	}
 }
 
 type GetQAppSessionOutput struct {
@@ -101,109 +81,29 @@ type GetQAppSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQAppSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQAppSessionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQAppSessionOutput_appVersion:
-			v.AppVersion = new(int32)
-			return d.ReadInt32(schemas.GetQAppSessionOutput_appVersion, v.AppVersion)
-		case schemas.GetQAppSessionOutput_cardStatus:
-			return deserializeCardStatusMap(d, schemas.GetQAppSessionOutput_cardStatus, &v.CardStatus)
-		case schemas.GetQAppSessionOutput_latestPublishedAppVersion:
-			v.LatestPublishedAppVersion = new(int32)
-			return d.ReadInt32(schemas.GetQAppSessionOutput_latestPublishedAppVersion, v.LatestPublishedAppVersion)
-		case schemas.GetQAppSessionOutput_sessionArn:
-			v.SessionArn = new(string)
-			return d.ReadString(schemas.GetQAppSessionOutput_sessionArn, v.SessionArn)
-		case schemas.GetQAppSessionOutput_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.GetQAppSessionOutput_sessionId, v.SessionId)
-		case schemas.GetQAppSessionOutput_sessionName:
-			v.SessionName = new(string)
-			return d.ReadString(schemas.GetQAppSessionOutput_sessionName, v.SessionName)
-		case schemas.GetQAppSessionOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetQAppSessionOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ExecutionStatus(ev)
-			return nil
-		case schemas.GetQAppSessionOutput_userIsHost:
-			v.UserIsHost = new(bool)
-			return d.ReadBool(schemas.GetQAppSessionOutput_userIsHost, v.UserIsHost)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetQAppSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQAppSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQAppSession, schemas.GetQAppSessionInput, schemas.GetQAppSessionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQAppSession{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQAppSession, schemas.GetQAppSessionInput, schemas.GetQAppSessionOutput), output: &GetQAppSessionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQAppSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetQAppSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQAppSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -218,22 +118,8 @@ func (c *Client) addOperationGetQAppSessionMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetQAppSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetQAppSession",
-	}
 }

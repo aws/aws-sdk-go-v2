@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetClientCertificateInput struct {
 	ClientCertificateId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetClientCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClientCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.GetClientCertificateRequest_clientCertificateId, *v.ClientCertificateId)
+	}
 }
 
 // Represents a client certificate used to configure client-side SSL
@@ -67,77 +78,75 @@ type GetClientCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClientCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.ClientCertificate_clientCertificateId, *v.ClientCertificateId)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.ClientCertificate_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ClientCertificate_description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.ClientCertificate_expirationDate, *v.ExpirationDate)
+	}
+	if v.PemEncodedCertificate != nil {
+		s.WriteString(schemas.ClientCertificate_pemEncodedCertificate, *v.PemEncodedCertificate)
+	}
+	serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+}
+func (v *GetClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientCertificate_clientCertificateId:
+			v.ClientCertificateId = new(string)
+			return d.ReadString(schemas.ClientCertificate_clientCertificateId, v.ClientCertificateId)
+		case schemas.ClientCertificate_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.ClientCertificate_createdDate, v.CreatedDate)
+		case schemas.ClientCertificate_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ClientCertificate_description, v.Description)
+		case schemas.ClientCertificate_expirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.ClientCertificate_expirationDate, v.ExpirationDate)
+		case schemas.ClientCertificate_pemEncodedCertificate:
+			v.PemEncodedCertificate = new(string)
+			return d.ReadString(schemas.ClientCertificate_pemEncodedCertificate, v.PemEncodedCertificate)
+		case schemas.ClientCertificate_tags:
+			return deserializeMapOfStringToString(d, schemas.ClientCertificate_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClientCertificate, schemas.GetClientCertificateRequest, schemas.ClientCertificate)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClientCertificate, schemas.GetClientCertificateRequest, schemas.ClientCertificate), output: &GetClientCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClientCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetClientCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetClientCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetClientCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +164,8 @@ func (c *Client) addOperationGetClientCertificateMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetClientCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetClientCertificate",
-	}
 }

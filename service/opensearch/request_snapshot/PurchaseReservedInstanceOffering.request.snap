@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/purchaseReservedInstanceOffering
+
+Content-Type: application/json
+
+{"InstanceCount":1,"ReservationName":"__ReservationName__","ReservedInstanceOfferingId":"__ReservedInstanceOfferingId__"}

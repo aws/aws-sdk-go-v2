@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,25 +58,10 @@ type DescribeTimeSeriesInput struct {
 	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	PropertyId *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTimeSeriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_alias, *v.Alias)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_assetId, *v.AssetId)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_propertyId, *v.PropertyId)
-	}
 }
 
 type DescribeTimeSeriesOutput struct {
@@ -133,119 +115,38 @@ type DescribeTimeSeriesOutput struct {
 	// The ID of the asset property, in UUID format.
 	PropertyId *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTimeSeriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTimeSeriesResponse_alias:
-			v.Alias = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_alias, v.Alias)
-		case schemas.DescribeTimeSeriesResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_assetId, v.AssetId)
-		case schemas.DescribeTimeSeriesResponse_dataType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTimeSeriesResponse_dataType, &ev); err != nil {
-				return err
-			}
-			v.DataType = types.PropertyDataType(ev)
-			return nil
-		case schemas.DescribeTimeSeriesResponse_dataTypeSpec:
-			v.DataTypeSpec = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_dataTypeSpec, v.DataTypeSpec)
-		case schemas.DescribeTimeSeriesResponse_propertyId:
-			v.PropertyId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_propertyId, v.PropertyId)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesArn:
-			v.TimeSeriesArn = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_timeSeriesArn, v.TimeSeriesArn)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesCreationDate:
-			v.TimeSeriesCreationDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeTimeSeriesResponse_timeSeriesCreationDate, v.TimeSeriesCreationDate)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesId:
-			v.TimeSeriesId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_timeSeriesId, v.TimeSeriesId)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesLastUpdateDate:
-			v.TimeSeriesLastUpdateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeTimeSeriesResponse_timeSeriesLastUpdateDate, v.TimeSeriesLastUpdateDate)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTimeSeries, schemas.DescribeTimeSeriesRequest, schemas.DescribeTimeSeriesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTimeSeries, schemas.DescribeTimeSeriesRequest, schemas.DescribeTimeSeriesResponse), output: &DescribeTimeSeriesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTimeSeries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opDescribeTimeSeriesMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTimeSeries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -258,12 +159,6 @@ func (c *Client) addOperationDescribeTimeSeriesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -297,12 +192,4 @@ func (m *endpointPrefix_opDescribeTimeSeriesMiddleware) HandleFinalize(ctx conte
 }
 func addEndpointPrefix_opDescribeTimeSeriesMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeTimeSeriesMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeTimeSeries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTimeSeries",
-	}
 }

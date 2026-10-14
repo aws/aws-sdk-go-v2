@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreationTimestamp":"__CreationTimestamp__","Definition":{"ConnectorDefinitionVersionArn":"__ConnectorDefinitionVersionArn__","CoreDefinitionVersionArn":"__CoreDefinitionVersionArn__","DeviceDefinitionVersionArn":"__DeviceDefinitionVersionArn__","FunctionDefinitionVersionArn":"__FunctionDefinitionVersionArn__","LoggerDefinitionVersionArn":"__LoggerDefinitionVersionArn__","ResourceDefinitionVersionArn":"__ResourceDefinitionVersionArn__","SubscriptionDefinitionVersionArn":"__SubscriptionDefinitionVersionArn__"},"Id":"__Id__","Version":"__Version__"}

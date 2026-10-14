@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -56,6 +51,10 @@ type UpdateGatewayInput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The updated custom transformation configuration for the gateway. This
+	// configuration defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description for the gateway.
 	Description *string
 
@@ -87,48 +86,10 @@ type UpdateGatewayInput struct {
 	// The updated protocol type for the gateway.
 	ProtocolType types.GatewayProtocolType
 
+	// The updated Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
+
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateGatewayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.UpdateGatewayRequest_authorizerConfiguration, v.AuthorizerConfiguration)
-	if v.AuthorizerType != "" {
-		s.WriteString(schemas.UpdateGatewayRequest_authorizerType, string(v.AuthorizerType))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateGatewayRequest_description, *v.Description)
-	}
-	if v.ExceptionLevel != "" {
-		s.WriteString(schemas.UpdateGatewayRequest_exceptionLevel, string(v.ExceptionLevel))
-	}
-	if v.GatewayIdentifier != nil {
-		s.WriteString(schemas.UpdateGatewayRequest_gatewayIdentifier, *v.GatewayIdentifier)
-	}
-	serializeGatewayInterceptorConfigurations(s, schemas.UpdateGatewayRequest_interceptorConfigurations, v.InterceptorConfigurations)
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.UpdateGatewayRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateGatewayRequest_name, *v.Name)
-	}
-	if v.PolicyEngineConfiguration != nil {
-		s.WriteStruct(schemas.UpdateGatewayRequest_policyEngineConfiguration)
-		v.PolicyEngineConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeGatewayProtocolConfiguration(s, schemas.UpdateGatewayRequest_protocolConfiguration, v.ProtocolConfiguration)
-	if v.ProtocolType != "" {
-		s.WriteString(schemas.UpdateGatewayRequest_protocolType, string(v.ProtocolType))
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateGatewayRequest_roleArn, *v.RoleArn)
-	}
 }
 
 type UpdateGatewayOutput struct {
@@ -171,6 +132,10 @@ type UpdateGatewayOutput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The custom transformation configuration for the gateway. This configuration
+	// defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description of the gateway.
 	Description *string
 
@@ -208,6 +173,13 @@ type UpdateGatewayOutput struct {
 	// The reasons for the current status of the updated gateway.
 	StatusReasons []string
 
+	// The Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+	// associated with the gateway.
+	WebAclArn *string
+
 	// The workload identity details for the updated gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
@@ -217,151 +189,29 @@ type UpdateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateGatewayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateGatewayResponse_authorizerConfiguration:
-			return deserializeAuthorizerConfiguration(d, schemas.UpdateGatewayResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
-		case schemas.UpdateGatewayResponse_authorizerType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateGatewayResponse_authorizerType, &ev); err != nil {
-				return err
-			}
-			v.AuthorizerType = types.AuthorizerType(ev)
-			return nil
-		case schemas.UpdateGatewayResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateGatewayResponse_createdAt, v.CreatedAt)
-		case schemas.UpdateGatewayResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_description, v.Description)
-		case schemas.UpdateGatewayResponse_exceptionLevel:
-			var ev string
-			if err := d.ReadString(schemas.UpdateGatewayResponse_exceptionLevel, &ev); err != nil {
-				return err
-			}
-			v.ExceptionLevel = types.ExceptionLevel(ev)
-			return nil
-		case schemas.UpdateGatewayResponse_gatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_gatewayArn, v.GatewayArn)
-		case schemas.UpdateGatewayResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_gatewayId, v.GatewayId)
-		case schemas.UpdateGatewayResponse_gatewayUrl:
-			v.GatewayUrl = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_gatewayUrl, v.GatewayUrl)
-		case schemas.UpdateGatewayResponse_interceptorConfigurations:
-			return deserializeGatewayInterceptorConfigurations(d, schemas.UpdateGatewayResponse_interceptorConfigurations, &v.InterceptorConfigurations)
-		case schemas.UpdateGatewayResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.UpdateGatewayResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_name, v.Name)
-		case schemas.UpdateGatewayResponse_policyEngineConfiguration:
-			v.PolicyEngineConfiguration = &types.GatewayPolicyEngineConfiguration{}
-			return v.PolicyEngineConfiguration.Deserialize(d)
-		case schemas.UpdateGatewayResponse_protocolConfiguration:
-			return deserializeGatewayProtocolConfiguration(d, schemas.UpdateGatewayResponse_protocolConfiguration, &v.ProtocolConfiguration)
-		case schemas.UpdateGatewayResponse_protocolType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateGatewayResponse_protocolType, &ev); err != nil {
-				return err
-			}
-			v.ProtocolType = types.GatewayProtocolType(ev)
-			return nil
-		case schemas.UpdateGatewayResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.UpdateGatewayResponse_roleArn, v.RoleArn)
-		case schemas.UpdateGatewayResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateGatewayResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.GatewayStatus(ev)
-			return nil
-		case schemas.UpdateGatewayResponse_statusReasons:
-			return deserializeStatusReasons(d, schemas.UpdateGatewayResponse_statusReasons, &v.StatusReasons)
-		case schemas.UpdateGatewayResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateGatewayResponse_updatedAt, v.UpdatedAt)
-		case schemas.UpdateGatewayResponse_workloadIdentityDetails:
-			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
-			return v.WorkloadIdentityDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGateway, schemas.UpdateGatewayRequest, schemas.UpdateGatewayResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGateway{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGateway, schemas.UpdateGatewayRequest, schemas.UpdateGatewayResponse), output: &UpdateGatewayOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -376,22 +226,8 @@ func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGateway",
-	}
 }

@@ -4,10 +4,9 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Applies a schema extension to a Microsoft AD directory.
@@ -55,6 +54,25 @@ type StartSchemaExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaExtensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaExtensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.StartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension, v.CreateSnapshotBeforeSchemaExtension)
+	if v.Description != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.LdifContent != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_LdifContent, *v.LdifContent)
+	}
+}
+
 type StartSchemaExtensionOutput struct {
 
 	// The identifier of the schema extension that will be applied.
@@ -66,77 +84,48 @@ type StartSchemaExtensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaExtensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaExtensionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaExtensionId != nil {
+		s.WriteString(schemas.StartSchemaExtensionResult_SchemaExtensionId, *v.SchemaExtensionId)
+	}
+}
+func (v *StartSchemaExtensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSchemaExtensionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSchemaExtensionResult_SchemaExtensionId:
+			v.SchemaExtensionId = new(string)
+			return d.ReadString(schemas.StartSchemaExtensionResult_SchemaExtensionId, v.SchemaExtensionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaExtension, schemas.StartSchemaExtensionRequest, schemas.StartSchemaExtensionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSchemaExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaExtension, schemas.StartSchemaExtensionRequest, schemas.StartSchemaExtensionResult), output: &StartSchemaExtensionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSchemaExtension{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSchemaExtension"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartSchemaExtensionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSchemaExtension(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +140,8 @@ func (c *Client) addOperationStartSchemaExtensionMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartSchemaExtension(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSchemaExtension",
-	}
 }

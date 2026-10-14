@@ -4,13 +4,8 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an object in a Directory. Additionally attaches the object to a parent, if a
@@ -59,28 +54,6 @@ type CreateObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateObjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateObjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.CreateObjectRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.LinkName != nil {
-		s.WriteString(schemas.CreateObjectRequest_LinkName, *v.LinkName)
-	}
-	serializeAttributeKeyAndValueList(s, schemas.CreateObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
-	if v.ParentReference != nil {
-		s.WriteStruct(schemas.CreateObjectRequest_ParentReference)
-		v.ParentReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSchemaFacetList(s, schemas.CreateObjectRequest_SchemaFacets, v.SchemaFacets)
-}
-
 type CreateObjectOutput struct {
 
 	// The identifier that is associated with the object.
@@ -92,85 +65,29 @@ type CreateObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateObjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateObjectResponse_ObjectIdentifier:
-			v.ObjectIdentifier = new(string)
-			return d.ReadString(schemas.CreateObjectResponse_ObjectIdentifier, v.ObjectIdentifier)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateObject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObject, schemas.CreateObjectRequest, schemas.CreateObjectResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateObject{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObject, schemas.CreateObjectRequest, schemas.CreateObjectResponse), output: &CreateObjectOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateObject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateObjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateObject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +102,8 @@ func (c *Client) addOperationCreateObjectMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateObject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateObject",
-	}
 }

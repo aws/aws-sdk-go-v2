@@ -4,13 +4,8 @@ package redshiftserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Restores a namespace from a snapshot.
@@ -45,6 +40,14 @@ type RestoreFromSnapshotInput struct {
 	// namespace's admin credentials secret.
 	AdminPasswordSecretKmsKeyId *string
 
+	// If true , maintain existing data sharing, zero-ETL and S3 event integrations
+	// when restoring. Otherwise, integrations will not be maintained after the restore
+	// operation. Integrations are only maintained when restored to the same serverless
+	// namespace.
+	//
+	// Default: true
+	MaintainIntegration *bool
+
 	// If true , Amazon Redshift uses Secrets Manager to manage the restored snapshot's
 	// admin credentials. If MmanageAdminPassword is false or not set, Amazon Redshift
 	// uses the admin credentials that the namespace or cluster had at the time the
@@ -69,36 +72,6 @@ type RestoreFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RestoreFromSnapshotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RestoreFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdminPasswordSecretKmsKeyId != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_adminPasswordSecretKmsKeyId, *v.AdminPasswordSecretKmsKeyId)
-	}
-	if v.ManageAdminPassword != nil {
-		s.WriteBool(schemas.RestoreFromSnapshotRequest_manageAdminPassword, *v.ManageAdminPassword)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_ownerAccount, *v.OwnerAccount)
-	}
-	if v.SnapshotArn != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_snapshotArn, *v.SnapshotArn)
-	}
-	if v.SnapshotName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_snapshotName, *v.SnapshotName)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type RestoreFromSnapshotOutput struct {
 
 	// A collection of database objects and users.
@@ -116,91 +89,29 @@ type RestoreFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestoreFromSnapshotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestoreFromSnapshotResponse_namespace:
-			v.Namespace = &types.Namespace{}
-			return v.Namespace.Deserialize(d)
-		case schemas.RestoreFromSnapshotResponse_ownerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.RestoreFromSnapshotResponse_ownerAccount, v.OwnerAccount)
-		case schemas.RestoreFromSnapshotResponse_snapshotName:
-			v.SnapshotName = new(string)
-			return d.ReadString(schemas.RestoreFromSnapshotResponse_snapshotName, v.SnapshotName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreFromSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromSnapshot, schemas.RestoreFromSnapshotRequest, schemas.RestoreFromSnapshotResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreFromSnapshot{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromSnapshot, schemas.RestoreFromSnapshotRequest, schemas.RestoreFromSnapshotResponse), output: &RestoreFromSnapshotOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreFromSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreFromSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreFromSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +126,8 @@ func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreFromSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreFromSnapshot",
-	}
 }

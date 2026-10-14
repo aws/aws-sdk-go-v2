@@ -1,0 +1,5 @@
+POST /ListImageScanFindingAggregations
+
+Content-Type: application/json
+
+{"filter":{"name":"__Name__","values":["__Member__","__Member__"]},"nextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package inspector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the agents of the assessment runs that are specified by the ARNs of the
@@ -56,6 +56,29 @@ type ListAssessmentRunAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentRunAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentRunAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentRunAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAssessmentRunAgentsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentRunAgentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentRunAgentsOutput struct {
 
 	// A list of ARNs that specifies the agents returned by the action.
@@ -75,77 +98,51 @@ type ListAssessmentRunAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentRunAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentRunAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentRunAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentRunAgentList(s, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, v.AssessmentRunAgents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentRunAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentRunAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents:
+			return deserializeAssessmentRunAgentList(d, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, &v.AssessmentRunAgents)
+		case schemas.ListAssessmentRunAgentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentRunAgentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentRunAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentRunAgents, schemas.ListAssessmentRunAgentsRequest, schemas.ListAssessmentRunAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssessmentRunAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentRunAgents, schemas.ListAssessmentRunAgentsRequest, schemas.ListAssessmentRunAgentsResponse), output: &ListAssessmentRunAgentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssessmentRunAgents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssessmentRunAgents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssessmentRunAgentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssessmentRunAgents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +155,6 @@ func (c *Client) addOperationListAssessmentRunAgentsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +258,3 @@ type ListAssessmentRunAgentsAPIClient interface {
 }
 
 var _ ListAssessmentRunAgentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAssessmentRunAgents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssessmentRunAgents",
-	}
-}

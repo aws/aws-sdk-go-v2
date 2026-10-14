@@ -4,13 +4,8 @@ package rum
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified metrics from being sent to an extended metrics
@@ -67,47 +62,6 @@ type BatchDeleteRumMetricDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteRumMetricDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteRumMetricDefinitionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteRumMetricDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppMonitorName != nil {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsRequest_AppMonitorName, *v.AppMonitorName)
-	}
-	if v.Destination != "" {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsRequest_Destination, string(v.Destination))
-	}
-	if v.DestinationArn != nil {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsRequest_DestinationArn, *v.DestinationArn)
-	}
-	serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds, v.MetricDefinitionIds)
-}
-func (v *BatchDeleteRumMetricDefinitionsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteRumMetricDefinitionsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteRumMetricDefinitionsRequest_AppMonitorName:
-			v.AppMonitorName = new(string)
-			return d.ReadString(schemas.BatchDeleteRumMetricDefinitionsRequest_AppMonitorName, v.AppMonitorName)
-		case schemas.BatchDeleteRumMetricDefinitionsRequest_Destination:
-			var ev string
-			if err := d.ReadString(schemas.BatchDeleteRumMetricDefinitionsRequest_Destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = types.MetricDestination(ev)
-			return nil
-		case schemas.BatchDeleteRumMetricDefinitionsRequest_DestinationArn:
-			v.DestinationArn = new(string)
-			return d.ReadString(schemas.BatchDeleteRumMetricDefinitionsRequest_DestinationArn, v.DestinationArn)
-		case schemas.BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds:
-			return deserializeMetricDefinitionIds(d, schemas.BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds, &v.MetricDefinitionIds)
-		}
-		return nil
-	})
-}
-
 type BatchDeleteRumMetricDefinitionsOutput struct {
 
 	// An array of error objects, if the operation caused any errors.
@@ -124,96 +78,29 @@ type BatchDeleteRumMetricDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteRumMetricDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteRumMetricDefinitionsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteRumMetricDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteRumMetricDefinitionsErrors(s, schemas.BatchDeleteRumMetricDefinitionsResponse_Errors, v.Errors)
-	serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds, v.MetricDefinitionIds)
-}
-func (v *BatchDeleteRumMetricDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteRumMetricDefinitionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteRumMetricDefinitionsResponse_Errors:
-			return deserializeBatchDeleteRumMetricDefinitionsErrors(d, schemas.BatchDeleteRumMetricDefinitionsResponse_Errors, &v.Errors)
-		case schemas.BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds:
-			return deserializeMetricDefinitionIds(d, schemas.BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds, &v.MetricDefinitionIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDeleteRumMetricDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteRumMetricDefinitions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteRumMetricDefinitions, schemas.BatchDeleteRumMetricDefinitionsRequest, schemas.BatchDeleteRumMetricDefinitionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteRumMetricDefinitions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteRumMetricDefinitions, schemas.BatchDeleteRumMetricDefinitionsRequest, schemas.BatchDeleteRumMetricDefinitionsResponse), output: &BatchDeleteRumMetricDefinitionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteRumMetricDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteRumMetricDefinitionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteRumMetricDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +115,8 @@ func (c *Client) addOperationBatchDeleteRumMetricDefinitionsMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteRumMetricDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteRumMetricDefinitions",
-	}
 }

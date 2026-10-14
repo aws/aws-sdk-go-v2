@@ -4,14 +4,13 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Container
+//	This API works with the following fleet types: EC2
 //
 // Retrieves a fleet's inbound connection permissions. Connection permissions
 // specify IP addresses and port settings that incoming traffic can use to access
@@ -66,6 +65,21 @@ type DescribeFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetPortSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetPortSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetPortSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsInput_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsInput_Location, *v.Location)
+	}
+}
+
 type DescribeFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -96,65 +110,67 @@ type DescribeFleetPortSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetPortSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetPortSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetPortSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_FleetId, *v.FleetId)
+	}
+	serializeIpPermissionsList(s, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, v.InboundPermissions)
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_Location, *v.Location)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *DescribeFleetPortSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetPortSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetPortSettingsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_FleetArn, v.FleetArn)
+		case schemas.DescribeFleetPortSettingsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_FleetId, v.FleetId)
+		case schemas.DescribeFleetPortSettingsOutput_InboundPermissions:
+			return deserializeIpPermissionsList(d, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, &v.InboundPermissions)
+		case schemas.DescribeFleetPortSettingsOutput_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_Location, v.Location)
+		case schemas.DescribeFleetPortSettingsOutput_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFleetPortSettingsOutput_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = types.LocationUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetPortSettings, schemas.DescribeFleetPortSettingsInput, schemas.DescribeFleetPortSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetPortSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetPortSettings, schemas.DescribeFleetPortSettingsInput, schemas.DescribeFleetPortSettingsOutput), output: &DescribeFleetPortSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetPortSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFleetPortSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -164,12 +180,6 @@ func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpDescribeFleetPortSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetPortSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +194,8 @@ func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFleetPortSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFleetPortSettings",
-	}
 }

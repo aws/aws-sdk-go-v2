@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ListUsers
+
+{"NextToken":"__NextToken__","ServerId":"__ServerId__","Users":[{"Arn":"__Arn__","HomeDirectory":"__HomeDirectory__","HomeDirectoryType":"PATH","Role":"__Role__","SshPublicKeyCount":1,"UserName":"__UserName__"},{"Arn":"__Arn__","HomeDirectory":"__HomeDirectory__","HomeDirectoryType":"PATH","Role":"__Role__","SshPublicKeyCount":1,"UserName":"__UserName__"}]}

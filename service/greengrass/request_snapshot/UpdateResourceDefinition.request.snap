@@ -1,0 +1,5 @@
+PUT /greengrass/definition/resources/__ResourceDefinitionId__
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

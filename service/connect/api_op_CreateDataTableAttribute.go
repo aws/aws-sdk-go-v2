@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds an attribute to an existing data table. Creating a new primary attribute
@@ -79,6 +78,38 @@ type CreateDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.CreateDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataTableAttributeRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataTableAttributeRequest_Name, *v.Name)
+	}
+	if v.Primary != false {
+		s.WriteBool(schemas.CreateDataTableAttributeRequest_Primary, v.Primary)
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.CreateDataTableAttributeRequest_Validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueType != "" {
+		s.WriteString(schemas.CreateDataTableAttributeRequest_ValueType, string(v.ValueType))
+	}
+}
+
 type CreateDataTableAttributeOutput struct {
 
 	// The lock version information for the data table and attribute, used for
@@ -103,77 +134,62 @@ type CreateDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeId != nil {
+		s.WriteString(schemas.CreateDataTableAttributeResponse_AttributeId, *v.AttributeId)
+	}
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.CreateDataTableAttributeResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataTableAttributeResponse_Name, *v.Name)
+	}
+}
+func (v *CreateDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataTableAttributeResponse_AttributeId:
+			v.AttributeId = new(string)
+			return d.ReadString(schemas.CreateDataTableAttributeResponse_AttributeId, v.AttributeId)
+		case schemas.CreateDataTableAttributeResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		case schemas.CreateDataTableAttributeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataTableAttributeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataTableAttribute, schemas.CreateDataTableAttributeRequest, schemas.CreateDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataTableAttribute, schemas.CreateDataTableAttributeRequest, schemas.CreateDataTableAttributeResponse), output: &CreateDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataTableAttribute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataTableAttribute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDataTableAttributeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataTableAttribute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +204,8 @@ func (c *Client) addOperationCreateDataTableAttributeMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDataTableAttribute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataTableAttribute",
-	}
 }

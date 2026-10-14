@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.SubscribeToEvent
+
+{"event":"ASSESSMENT_RUN_STARTED","resourceArn":"__ResourceArn__","topicArn":"__TopicArn__"}

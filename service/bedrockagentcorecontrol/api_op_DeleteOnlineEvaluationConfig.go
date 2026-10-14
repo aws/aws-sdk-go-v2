@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Deletes an online evaluation configuration and stops any ongoing evaluation
@@ -41,18 +36,6 @@ type DeleteOnlineEvaluationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOnlineEvaluationConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteOnlineEvaluationConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OnlineEvaluationConfigId != nil {
-		s.WriteString(schemas.DeleteOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
-	}
-}
-
 type DeleteOnlineEvaluationConfigOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the deleted online evaluation configuration.
@@ -76,95 +59,29 @@ type DeleteOnlineEvaluationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOnlineEvaluationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteOnlineEvaluationConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigArn:
-			v.OnlineEvaluationConfigArn = new(string)
-			return d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
-		case schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigId:
-			v.OnlineEvaluationConfigId = new(string)
-			return d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_onlineEvaluationConfigId, v.OnlineEvaluationConfigId)
-		case schemas.DeleteOnlineEvaluationConfigResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteOnlineEvaluationConfigResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.OnlineEvaluationConfigStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOnlineEvaluationConfig, schemas.DeleteOnlineEvaluationConfigRequest, schemas.DeleteOnlineEvaluationConfigResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOnlineEvaluationConfig, schemas.DeleteOnlineEvaluationConfigRequest, schemas.DeleteOnlineEvaluationConfigResponse), output: &DeleteOnlineEvaluationConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOnlineEvaluationConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteOnlineEvaluationConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOnlineEvaluationConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +96,8 @@ func (c *Client) addOperationDeleteOnlineEvaluationConfigMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteOnlineEvaluationConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteOnlineEvaluationConfig",
-	}
 }

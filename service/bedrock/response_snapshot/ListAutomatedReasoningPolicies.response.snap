@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"automatedReasoningPolicySummaries":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","policyArn":"__PolicyArn__","policyId":"__PolicyId__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","policyArn":"__PolicyArn__","policyId":"__PolicyId__","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}],"nextToken":"__NextToken__"}

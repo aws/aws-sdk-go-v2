@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CreateSubnetGroup
+
+{"SubnetGroup":{"ARN":"__ARN__","Description":"__Description__","Name":"__Name__","Subnets":[{"AvailabilityZone":{"Name":"__Name__"},"Identifier":"__Identifier__","SupportedNetworkTypes":["ipv4","ipv4"]},{"AvailabilityZone":{"Name":"__Name__"},"Identifier":"__Identifier__","SupportedNetworkTypes":["ipv4","ipv4"]}],"SupportedNetworkTypes":["ipv4","ipv4"],"VpcId":"__VpcId__"}}

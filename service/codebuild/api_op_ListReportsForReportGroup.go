@@ -5,10 +5,10 @@ package codebuild
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of ARNs for the reports that belong to a ReportGroup .
@@ -57,6 +57,32 @@ type ListReportsForReportGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReportsForReportGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReportsForReportGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReportsForReportGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReportsForReportGroupInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReportsForReportGroupInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReportsForReportGroupInput_nextToken, *v.NextToken)
+	}
+	if v.ReportGroupArn != nil {
+		s.WriteString(schemas.ListReportsForReportGroupInput_reportGroupArn, *v.ReportGroupArn)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListReportsForReportGroupInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListReportsForReportGroupOutput struct {
 
 	//  During a previous call, the maximum number of items that can be returned is
@@ -76,77 +102,51 @@ type ListReportsForReportGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReportsForReportGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReportsForReportGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReportsForReportGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReportsForReportGroupOutput_nextToken, *v.NextToken)
+	}
+	serializeReportArns(s, schemas.ListReportsForReportGroupOutput_reports, v.Reports)
+}
+func (v *ListReportsForReportGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReportsForReportGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReportsForReportGroupOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReportsForReportGroupOutput_nextToken, v.NextToken)
+		case schemas.ListReportsForReportGroupOutput_reports:
+			return deserializeReportArns(d, schemas.ListReportsForReportGroupOutput_reports, &v.Reports)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReportsForReportGroup, schemas.ListReportsForReportGroupInput, schemas.ListReportsForReportGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReportsForReportGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReportsForReportGroup, schemas.ListReportsForReportGroupInput, schemas.ListReportsForReportGroupOutput), output: &ListReportsForReportGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReportsForReportGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReportsForReportGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListReportsForReportGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReportsForReportGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +159,6 @@ func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +263,3 @@ type ListReportsForReportGroupAPIClient interface {
 }
 
 var _ ListReportsForReportGroupAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReportsForReportGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReportsForReportGroup",
-	}
-}

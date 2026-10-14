@@ -246,6 +246,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAppAuthorizationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AppAuthorizationSummary) error {
+	*v = make([]AppAuthorizationSummary, 0)
 	var vv AppAuthorizationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = AppAuthorizationSummary{}
@@ -259,6 +260,7 @@ func deserializeAppAuthorizationSummaryList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeAppBundleSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AppBundleSummary) error {
+	*v = make([]AppBundleSummary, 0)
 	var vv AppBundleSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = AppBundleSummary{}
@@ -272,6 +274,7 @@ func deserializeAppBundleSummaryList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeIngestionDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionDestinationSummary) error {
+	*v = make([]IngestionDestinationSummary, 0)
 	var vv IngestionDestinationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = IngestionDestinationSummary{}
@@ -285,6 +288,7 @@ func deserializeIngestionDestinationList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeIngestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IngestionSummary) error {
+	*v = make([]IngestionSummary, 0)
 	var vv IngestionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = IngestionSummary{}
@@ -298,6 +302,7 @@ func deserializeIngestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -311,6 +316,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -324,6 +330,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeTaskIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -337,6 +344,7 @@ func deserializeTaskIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeUserAccessResultsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UserAccessResultItem) error {
+	*v = make([]UserAccessResultItem, 0)
 	var vv UserAccessResultItem
 	return smithy.ReadList(d, s, func() error {
 		vv = UserAccessResultItem{}
@@ -350,6 +358,7 @@ func deserializeUserAccessResultsList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeUserAccessTasksList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UserAccessTaskItem) error {
+	*v = make([]UserAccessTaskItem, 0)
 	var vv UserAccessTaskItem
 	return smithy.ReadList(d, s, func() error {
 		vv = UserAccessTaskItem{}
@@ -363,6 +372,7 @@ func deserializeUserAccessTasksList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}

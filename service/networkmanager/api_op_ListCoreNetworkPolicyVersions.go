@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of core network policy versions.
@@ -43,6 +43,24 @@ type ListCoreNetworkPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPolicyVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPolicyVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPolicyVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreNetworkPolicyVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCoreNetworkPolicyVersionsOutput struct {
 
 	// Describes core network policy versions.
@@ -57,77 +75,51 @@ type ListCoreNetworkPolicyVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPolicyVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreNetworkPolicyVersionList(s, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, v.CoreNetworkPolicyVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreNetworkPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreNetworkPolicyVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions:
+			return deserializeCoreNetworkPolicyVersionList(d, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, &v.CoreNetworkPolicyVersions)
+		case schemas.ListCoreNetworkPolicyVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreNetworkPolicyVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreNetworkPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPolicyVersions, schemas.ListCoreNetworkPolicyVersionsRequest, schemas.ListCoreNetworkPolicyVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreNetworkPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPolicyVersions, schemas.ListCoreNetworkPolicyVersionsRequest, schemas.ListCoreNetworkPolicyVersionsResponse), output: &ListCoreNetworkPolicyVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreNetworkPolicyVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCoreNetworkPolicyVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCoreNetworkPolicyVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCoreNetworkPolicyVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationListCoreNetworkPolicyVersionsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +235,3 @@ type ListCoreNetworkPolicyVersionsAPIClient interface {
 }
 
 var _ ListCoreNetworkPolicyVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCoreNetworkPolicyVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCoreNetworkPolicyVersions",
-	}
-}

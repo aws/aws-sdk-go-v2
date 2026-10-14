@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IotJobArn":"__IotJobArn__","IotJobId":"__IotJobId__","PlatformSoftwareVersion":"__PlatformSoftwareVersion__"}

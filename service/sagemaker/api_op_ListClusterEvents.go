@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -77,6 +77,45 @@ type ListClusterEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_ClusterName, *v.ClusterName)
+	}
+	if v.EventTimeAfter != nil {
+		s.WriteTime(schemas.ListClusterEventsRequest_EventTimeAfter, *v.EventTimeAfter)
+	}
+	if v.EventTimeBefore != nil {
+		s.WriteTime(schemas.ListClusterEventsRequest_EventTimeBefore, *v.EventTimeBefore)
+	}
+	if v.InstanceGroupName != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_InstanceGroupName, *v.InstanceGroupName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_NodeId, *v.NodeId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListClusterEventsOutput struct {
 
 	// A list of event summaries matching the specified criteria.
@@ -92,77 +131,51 @@ type ListClusterEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterEventSummaries(s, schemas.ListClusterEventsResponse_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterEventsResponse_Events:
+			return deserializeClusterEventSummaries(d, schemas.ListClusterEventsResponse_Events, &v.Events)
+		case schemas.ListClusterEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterEvents, schemas.ListClusterEventsRequest, schemas.ListClusterEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusterEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterEvents, schemas.ListClusterEventsRequest, schemas.ListClusterEventsResponse), output: &ListClusterEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListClusterEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListClusterEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListClusterEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusterEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +188,6 @@ func (c *Client) addOperationListClusterEventsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +288,3 @@ type ListClusterEventsAPIClient interface {
 }
 
 var _ ListClusterEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListClusterEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListClusterEvents",
-	}
-}

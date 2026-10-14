@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,18 +37,6 @@ type GetOnlineEvaluationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOnlineEvaluationConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOnlineEvaluationConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OnlineEvaluationConfigId != nil {
-		s.WriteString(schemas.GetOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
-	}
-}
-
 type GetOnlineEvaluationConfigOutput struct {
 
 	//  The timestamp when the online evaluation configuration was created.
@@ -66,11 +49,6 @@ type GetOnlineEvaluationConfigOutput struct {
 	//
 	// This member is required.
 	DataSourceConfig types.DataSourceConfig
-
-	//  The list of evaluators applied during online evaluation.
-	//
-	// This member is required.
-	Evaluators []types.EvaluatorReference
 
 	//  The execution status indicating whether the online evaluation is currently
 	// running.
@@ -109,15 +87,24 @@ type GetOnlineEvaluationConfigOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The clustering configuration for periodic batch evaluation.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The description of the online evaluation configuration.
 	Description *string
 
 	//  The Amazon Resource Name (ARN) of the IAM role used for evaluation execution.
 	EvaluationExecutionRoleArn *string
 
+	//  The list of evaluators applied during online evaluation.
+	Evaluators []types.EvaluatorReference
+
 	//  The reason for failure if the online evaluation configuration execution
 	// failed.
 	FailureReason *string
+
+	// The list of insight types configured for this evaluation.
+	Insights []types.Insight
 
 	//  The output configuration specifying where evaluation results are written.
 	OutputConfig *types.OutputConfig
@@ -128,130 +115,29 @@ type GetOnlineEvaluationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOnlineEvaluationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOnlineEvaluationConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOnlineEvaluationConfigResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOnlineEvaluationConfigResponse_createdAt, v.CreatedAt)
-		case schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig:
-			return deserializeDataSourceConfig(d, schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig, &v.DataSourceConfig)
-		case schemas.GetOnlineEvaluationConfigResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_description, v.Description)
-		case schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn:
-			v.EvaluationExecutionRoleArn = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn, v.EvaluationExecutionRoleArn)
-		case schemas.GetOnlineEvaluationConfigResponse_evaluators:
-			return deserializeEvaluatorList(d, schemas.GetOnlineEvaluationConfigResponse_evaluators, &v.Evaluators)
-		case schemas.GetOnlineEvaluationConfigResponse_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetOnlineEvaluationConfigResponse_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = types.OnlineEvaluationExecutionStatus(ev)
-			return nil
-		case schemas.GetOnlineEvaluationConfigResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_failureReason, v.FailureReason)
-		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn:
-			v.OnlineEvaluationConfigArn = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
-		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigId:
-			v.OnlineEvaluationConfigId = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigId, v.OnlineEvaluationConfigId)
-		case schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigName:
-			v.OnlineEvaluationConfigName = new(string)
-			return d.ReadString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigName, v.OnlineEvaluationConfigName)
-		case schemas.GetOnlineEvaluationConfigResponse_outputConfig:
-			v.OutputConfig = &types.OutputConfig{}
-			return v.OutputConfig.Deserialize(d)
-		case schemas.GetOnlineEvaluationConfigResponse_rule:
-			v.Rule = &types.Rule{}
-			return v.Rule.Deserialize(d)
-		case schemas.GetOnlineEvaluationConfigResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetOnlineEvaluationConfigResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.OnlineEvaluationConfigStatus(ev)
-			return nil
-		case schemas.GetOnlineEvaluationConfigResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetOnlineEvaluationConfigResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnlineEvaluationConfig, schemas.GetOnlineEvaluationConfigRequest, schemas.GetOnlineEvaluationConfigResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnlineEvaluationConfig, schemas.GetOnlineEvaluationConfigRequest, schemas.GetOnlineEvaluationConfigResponse), output: &GetOnlineEvaluationConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOnlineEvaluationConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOnlineEvaluationConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOnlineEvaluationConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,22 +152,8 @@ func (c *Client) addOperationGetOnlineEvaluationConfigMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOnlineEvaluationConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOnlineEvaluationConfig",
-	}
 }

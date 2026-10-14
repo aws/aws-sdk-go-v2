@@ -5,11 +5,7 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the databases in a cluster. A token is returned to page through the
@@ -64,15 +60,13 @@ func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, 
 
 type ListDatabasesInput struct {
 
-	// The name of the database. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	Database *string
-
 	// The cluster identifier. This parameter is required when connecting to a cluster
 	// and authenticating using either Secrets Manager or temporary credentials.
 	ClusterIdentifier *string
+
+	// The name of the database. This parameter is required when authenticating using
+	// either Secrets Manager or temporary credentials.
+	Database *string
 
 	// The database user name. This parameter is required when connecting to a cluster
 	// as a database user and authenticating using temporary credentials.
@@ -102,36 +96,6 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDatabasesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDatabasesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.ListDatabasesRequest_ClusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.Database != nil {
-		s.WriteString(schemas.ListDatabasesRequest_Database, *v.Database)
-	}
-	if v.DbUser != nil {
-		s.WriteString(schemas.ListDatabasesRequest_DbUser, *v.DbUser)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListDatabasesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDatabasesRequest_NextToken, *v.NextToken)
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.ListDatabasesRequest_SecretArn, *v.SecretArn)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.ListDatabasesRequest_WorkgroupName, *v.WorkgroupName)
-	}
-}
-
 type ListDatabasesOutput struct {
 
 	// The names of databases.
@@ -150,87 +114,26 @@ type ListDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDatabasesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDatabasesResponse_Databases:
-			return deserializeDatabaseList(d, schemas.ListDatabasesResponse_Databases, &v.Databases)
-		case schemas.ListDatabasesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDatabasesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatabases{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatabases{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse), output: &ListDatabasesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDatabases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListDatabasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatabases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -243,12 +146,6 @@ func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -346,11 +243,3 @@ type ListDatabasesAPIClient interface {
 }
 
 var _ ListDatabasesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDatabases",
-	}
-}

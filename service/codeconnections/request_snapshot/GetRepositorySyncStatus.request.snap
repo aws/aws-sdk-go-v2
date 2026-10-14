@@ -1,0 +1,7 @@
+POST /service/CodeConnections_20231201/operation/GetRepositorySyncStatus
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿fBranchj__Branch__pRepositoryLinkIdt__RepositoryLinkId__hSyncTypenCFN_STACK_SYNCÿ

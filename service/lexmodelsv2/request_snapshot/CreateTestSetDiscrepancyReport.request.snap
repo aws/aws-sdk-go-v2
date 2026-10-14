@@ -1,0 +1,5 @@
+POST /testsets/__TestSetId__/testsetdiscrepancy
+
+Content-Type: application/json
+
+{"target":{"botAliasTarget":{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__"}}}

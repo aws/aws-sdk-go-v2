@@ -1,0 +1,3 @@
+GET /v2/portalproducts/__PortalProductId__/productrestendpointpages?maxResults=__MaxResults__&nextToken=__NextToken__&resourceOwnerAccountId=__ResourceOwnerAccountId__
+
+

@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an automation rule based on input parameters.
@@ -82,6 +81,37 @@ type CreateAutomationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionList(s, schemas.CreateAutomationRuleRequest_Actions, v.Actions)
+	if v.Criteria != nil {
+		s.WriteStruct(schemas.CreateAutomationRuleRequest_Criteria)
+		v.Criteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomationRuleRequest_Description, *v.Description)
+	}
+	if v.IsTerminal != nil {
+		s.WriteBool(schemas.CreateAutomationRuleRequest_IsTerminal, *v.IsTerminal)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreateAutomationRuleRequest_RuleName, *v.RuleName)
+	}
+	if v.RuleOrder != nil {
+		s.WriteInt32(schemas.CreateAutomationRuleRequest_RuleOrder, *v.RuleOrder)
+	}
+	if v.RuleStatus != "" {
+		s.WriteString(schemas.CreateAutomationRuleRequest_RuleStatus, string(v.RuleStatus))
+	}
+	serializeTagMap(s, schemas.CreateAutomationRuleRequest_Tags, v.Tags)
+}
+
 type CreateAutomationRuleOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the automation rule that you created.
@@ -93,77 +123,48 @@ type CreateAutomationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateAutomationRuleResponse_RuleArn, *v.RuleArn)
+	}
+}
+func (v *CreateAutomationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomationRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomationRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateAutomationRuleResponse_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRule, schemas.CreateAutomationRuleRequest, schemas.CreateAutomationRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomationRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRule, schemas.CreateAutomationRuleRequest, schemas.CreateAutomationRuleResponse), output: &CreateAutomationRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomationRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutomationRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAutomationRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutomationRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +179,8 @@ func (c *Client) addOperationCreateAutomationRuleMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAutomationRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutomationRule",
-	}
 }

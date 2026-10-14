@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.RemoveTargets
+
+{"FailedEntries":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","TargetId":"__TargetId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","TargetId":"__TargetId__"}],"FailedEntryCount":1}

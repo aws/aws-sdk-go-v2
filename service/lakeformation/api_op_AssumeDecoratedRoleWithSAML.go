@@ -4,12 +4,7 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -81,27 +76,6 @@ type AssumeDecoratedRoleWithSAMLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssumeDecoratedRoleWithSAMLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssumeDecoratedRoleWithSAMLRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssumeDecoratedRoleWithSAMLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.AssumeDecoratedRoleWithSAMLRequest_DurationSeconds, *v.DurationSeconds)
-	}
-	if v.PrincipalArn != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_PrincipalArn, *v.PrincipalArn)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_RoleArn, *v.RoleArn)
-	}
-	if v.SAMLAssertion != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_SAMLAssertion, *v.SAMLAssertion)
-	}
-}
-
 type AssumeDecoratedRoleWithSAMLOutput struct {
 
 	// The access key ID for the temporary credentials. (The access key consists of an
@@ -124,94 +98,29 @@ type AssumeDecoratedRoleWithSAMLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssumeDecoratedRoleWithSAMLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssumeDecoratedRoleWithSAMLResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_AccessKeyId:
-			v.AccessKeyId = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_AccessKeyId, v.AccessKeyId)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_Expiration:
-			v.Expiration = new(time.Time)
-			return d.ReadTime(schemas.AssumeDecoratedRoleWithSAMLResponse_Expiration, v.Expiration)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_SecretAccessKey:
-			v.SecretAccessKey = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_SecretAccessKey, v.SecretAccessKey)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_SessionToken:
-			v.SessionToken = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_SessionToken, v.SessionToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeDecoratedRoleWithSAML{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeDecoratedRoleWithSAML, schemas.AssumeDecoratedRoleWithSAMLRequest, schemas.AssumeDecoratedRoleWithSAMLResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeDecoratedRoleWithSAML{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeDecoratedRoleWithSAML, schemas.AssumeDecoratedRoleWithSAMLRequest, schemas.AssumeDecoratedRoleWithSAMLResponse), output: &AssumeDecoratedRoleWithSAMLOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssumeDecoratedRoleWithSAML"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssumeDecoratedRoleWithSAMLValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeDecoratedRoleWithSAML(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,22 +135,8 @@ func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssumeDecoratedRoleWithSAML(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssumeDecoratedRoleWithSAML",
-	}
 }

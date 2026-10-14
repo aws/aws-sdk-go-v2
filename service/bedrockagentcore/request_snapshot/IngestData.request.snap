@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/ingest
+
+Content-Type: application/json
+
+{"actorId":"__ActorId__","clientToken":"__ClientToken__","contentTimestamp":946684800,"extractionConfig":{"namespaceVariables":{"key0":"__Value__"}},"metadata":{"key0":{"stringValue":"__MetadataValueMemberStringValue__"}},"sessionId":"__SessionId__","source":{"inline":{"payload":[{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}},{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}}]}}}

@@ -4,10 +4,9 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a file or directory on the remote SFTP server.
@@ -42,6 +41,21 @@ type StartRemoteDeleteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteDeleteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteDeleteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteDeleteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartRemoteDeleteRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.DeletePath != nil {
+		s.WriteString(schemas.StartRemoteDeleteRequest_DeletePath, *v.DeletePath)
+	}
+}
+
 type StartRemoteDeleteOutput struct {
 
 	// Returns a unique identifier for the delete operation.
@@ -55,77 +69,48 @@ type StartRemoteDeleteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteDeleteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteDeleteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteDeleteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteId != nil {
+		s.WriteString(schemas.StartRemoteDeleteResponse_DeleteId, *v.DeleteId)
+	}
+}
+func (v *StartRemoteDeleteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRemoteDeleteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRemoteDeleteResponse_DeleteId:
+			v.DeleteId = new(string)
+			return d.ReadString(schemas.StartRemoteDeleteResponse_DeleteId, v.DeleteId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRemoteDeleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteDelete, schemas.StartRemoteDeleteRequest, schemas.StartRemoteDeleteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemoteDelete{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteDelete, schemas.StartRemoteDeleteRequest, schemas.StartRemoteDeleteResponse), output: &StartRemoteDeleteOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRemoteDelete{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRemoteDelete"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartRemoteDeleteValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRemoteDelete(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +125,8 @@ func (c *Client) addOperationStartRemoteDeleteMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartRemoteDelete(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRemoteDelete",
-	}
 }

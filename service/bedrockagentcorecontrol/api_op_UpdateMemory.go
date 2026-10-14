@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an Amazon Bedrock AgentCore Memory resource memory.
@@ -40,8 +36,8 @@ type UpdateMemoryInput struct {
 	AddIndexedKeys []types.IndexedKey
 
 	// A client token is used for keeping track of idempotent requests. It can contain
-	// a session id which can be around 250 chars, combined with a unique AWS
-	// identifier.
+	// a session id which can be around 250 chars, combined with a unique Amazon Web
+	// Services identifier.
 	ClientToken *string
 
 	// The updated description of the AgentCore Memory resource.
@@ -58,45 +54,15 @@ type UpdateMemoryInput struct {
 	// The memory strategies to add, modify, or delete.
 	MemoryStrategies *types.ModifyMemoryStrategies
 
+	// The namespace variable key definitions with validation rules for this memory.
+	// This value fully replaces the existing set — any key you omit is removed. Any
+	// referenced namespaceKey omission will throw ValidationException.
+	NamespaceKeys []types.NamespaceKeyEntry
+
 	// Configuration for streaming memory record data to external resources.
 	StreamDeliveryResources *types.StreamDeliveryResources
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateMemoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMemoryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexedKeysList(s, schemas.UpdateMemoryInput_addIndexedKeys, v.AddIndexedKeys)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateMemoryInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateMemoryInput_description, *v.Description)
-	}
-	if v.EventExpiryDuration != nil {
-		s.WriteInt32(schemas.UpdateMemoryInput_eventExpiryDuration, *v.EventExpiryDuration)
-	}
-	if v.MemoryExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateMemoryInput_memoryExecutionRoleArn, *v.MemoryExecutionRoleArn)
-	}
-	if v.MemoryId != nil {
-		s.WriteString(schemas.UpdateMemoryInput_memoryId, *v.MemoryId)
-	}
-	if v.MemoryStrategies != nil {
-		s.WriteStruct(schemas.UpdateMemoryInput_memoryStrategies)
-		v.MemoryStrategies.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StreamDeliveryResources != nil {
-		s.WriteStruct(schemas.UpdateMemoryInput_streamDeliveryResources)
-		v.StreamDeliveryResources.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateMemoryOutput struct {
@@ -110,73 +76,23 @@ type UpdateMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMemoryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMemoryOutput_memory:
-			v.Memory = &types.Memory{}
-			return v.Memory.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMemory{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemory, schemas.UpdateMemoryInput, schemas.UpdateMemoryOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMemory{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemory, schemas.UpdateMemoryInput, schemas.UpdateMemoryOutput), output: &UpdateMemoryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMemory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -186,12 +102,6 @@ func (c *Client) addOperationUpdateMemoryMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpUpdateMemoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMemory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +114,6 @@ func (c *Client) addOperationUpdateMemoryMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,12 +153,4 @@ func (m *idempotencyToken_initializeOpUpdateMemory) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opUpdateMemoryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateMemory{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateMemory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMemory",
-	}
 }

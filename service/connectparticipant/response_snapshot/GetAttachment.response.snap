@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttachmentSizeInBytes":1,"Url":"__Url__","UrlExpiry":"__UrlExpiry__"}

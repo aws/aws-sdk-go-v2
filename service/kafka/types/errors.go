@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.BadRequestException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.BadRequestException_InvalidParameter, v.InvalidParameter)
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ClusterConnectivityException struct {
@@ -62,6 +90,33 @@ func (e *ClusterConnectivityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterConnectivityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterConnectivityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterConnectivityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ClusterConnectivityException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterConnectivityException_Message, *v.Message)
+	}
+}
+func (v *ClusterConnectivityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterConnectivityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterConnectivityException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ClusterConnectivityException_InvalidParameter, v.InvalidParameter)
+		case schemas.ClusterConnectivityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterConnectivityException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ConflictException struct {
@@ -90,6 +145,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ConflictException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ConflictException_InvalidParameter, v.InvalidParameter)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ControllerMovedException struct {
@@ -118,6 +200,33 @@ func (e *ControllerMovedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ControllerMovedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ControllerMovedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControllerMovedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControllerMovedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ControllerMovedException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ControllerMovedException_Message, *v.Message)
+	}
+}
+func (v *ControllerMovedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControllerMovedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControllerMovedException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ControllerMovedException_InvalidParameter, v.InvalidParameter)
+		case schemas.ControllerMovedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ControllerMovedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ForbiddenException struct {
@@ -146,6 +255,33 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ForbiddenException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
+	}
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ForbiddenException_InvalidParameter, v.InvalidParameter)
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type GroupSubscribedToTopicException struct {
@@ -174,6 +310,33 @@ func (e *GroupSubscribedToTopicException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GroupSubscribedToTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GroupSubscribedToTopicException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupSubscribedToTopicException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupSubscribedToTopicException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.GroupSubscribedToTopicException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GroupSubscribedToTopicException_Message, *v.Message)
+	}
+}
+func (v *GroupSubscribedToTopicException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupSubscribedToTopicException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupSubscribedToTopicException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.GroupSubscribedToTopicException_InvalidParameter, v.InvalidParameter)
+		case schemas.GroupSubscribedToTopicException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GroupSubscribedToTopicException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type InternalServerErrorException struct {
@@ -202,6 +365,33 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.InternalServerErrorException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_InvalidParameter, v.InvalidParameter)
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type KafkaRequestException struct {
@@ -230,6 +420,33 @@ func (e *KafkaRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KafkaRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *KafkaRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KafkaRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KafkaRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.KafkaRequestException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.KafkaRequestException_Message, *v.Message)
+	}
+}
+func (v *KafkaRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KafkaRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KafkaRequestException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.KafkaRequestException_InvalidParameter, v.InvalidParameter)
+		case schemas.KafkaRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KafkaRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type KafkaTimeoutException struct {
@@ -258,6 +475,33 @@ func (e *KafkaTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KafkaTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *KafkaTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KafkaTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KafkaTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.KafkaTimeoutException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.KafkaTimeoutException_Message, *v.Message)
+	}
+}
+func (v *KafkaTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KafkaTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KafkaTimeoutException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.KafkaTimeoutException_InvalidParameter, v.InvalidParameter)
+		case schemas.KafkaTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KafkaTimeoutException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type NotControllerException struct {
@@ -286,6 +530,33 @@ func (e *NotControllerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotControllerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotControllerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotControllerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotControllerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.NotControllerException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NotControllerException_Message, *v.Message)
+	}
+}
+func (v *NotControllerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotControllerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotControllerException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.NotControllerException_InvalidParameter, v.InvalidParameter)
+		case schemas.NotControllerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotControllerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type NotFoundException struct {
@@ -314,6 +585,33 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.NotFoundException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.NotFoundException_InvalidParameter, v.InvalidParameter)
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ReassignmentInProgressException struct {
@@ -342,6 +640,33 @@ func (e *ReassignmentInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReassignmentInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ReassignmentInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReassignmentInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReassignmentInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ReassignmentInProgressException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ReassignmentInProgressException_Message, *v.Message)
+	}
+}
+func (v *ReassignmentInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReassignmentInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReassignmentInProgressException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ReassignmentInProgressException_InvalidParameter, v.InvalidParameter)
+		case schemas.ReassignmentInProgressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReassignmentInProgressException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ServiceUnavailableException struct {
@@ -370,6 +695,33 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.ServiceUnavailableException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_Message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_InvalidParameter, v.InvalidParameter)
+		case schemas.ServiceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type TooManyRequestsException struct {
@@ -398,6 +750,33 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.TooManyRequestsException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_InvalidParameter, v.InvalidParameter)
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type TopicExistsException struct {
@@ -426,6 +805,33 @@ func (e *TopicExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TopicExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TopicExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TopicExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TopicExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.TopicExistsException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TopicExistsException_Message, *v.Message)
+	}
+}
+func (v *TopicExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TopicExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TopicExistsException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.TopicExistsException_InvalidParameter, v.InvalidParameter)
+		case schemas.TopicExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TopicExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type UnauthorizedException struct {
@@ -454,6 +860,33 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.UnauthorizedException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthorizedException_Message, *v.Message)
+	}
+}
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.UnauthorizedException_InvalidParameter, v.InvalidParameter)
+		case schemas.UnauthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type UnknownTopicOrPartitionException struct {
@@ -482,3 +915,30 @@ func (e *UnknownTopicOrPartitionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownTopicOrPartitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnknownTopicOrPartitionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnknownTopicOrPartitionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnknownTopicOrPartitionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidParameter != nil {
+		s.WriteString(schemas.UnknownTopicOrPartitionException_InvalidParameter, *v.InvalidParameter)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnknownTopicOrPartitionException_Message, *v.Message)
+	}
+}
+func (v *UnknownTopicOrPartitionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnknownTopicOrPartitionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnknownTopicOrPartitionException_InvalidParameter:
+			v.InvalidParameter = new(string)
+			return d.ReadString(schemas.UnknownTopicOrPartitionException_InvalidParameter, v.InvalidParameter)
+		case schemas.UnknownTopicOrPartitionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnknownTopicOrPartitionException_Message, v.Message)
+		}
+		return nil
+	})
+}

@@ -1,0 +1,3 @@
+GET /apps/__AppId__/domains?maxResults=1&nextToken=__NextToken__
+
+

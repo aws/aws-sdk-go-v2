@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Transfers the specified certificate to the specified Amazon Web Services
@@ -83,6 +82,24 @@ type TransferCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.TransferCertificateRequest_certificateId, *v.CertificateId)
+	}
+	if v.TargetAwsAccount != nil {
+		s.WriteString(schemas.TransferCertificateRequest_targetAwsAccount, *v.TargetAwsAccount)
+	}
+	if v.TransferMessage != nil {
+		s.WriteString(schemas.TransferCertificateRequest_transferMessage, *v.TransferMessage)
+	}
+}
+
 // The output from the TransferCertificate operation.
 type TransferCertificateOutput struct {
 
@@ -95,77 +112,48 @@ type TransferCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransferredCertificateArn != nil {
+		s.WriteString(schemas.TransferCertificateResponse_transferredCertificateArn, *v.TransferredCertificateArn)
+	}
+}
+func (v *TransferCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransferCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransferCertificateResponse_transferredCertificateArn:
+			v.TransferredCertificateArn = new(string)
+			return d.ReadString(schemas.TransferCertificateResponse_transferredCertificateArn, v.TransferredCertificateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferCertificate, schemas.TransferCertificateRequest, schemas.TransferCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTransferCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferCertificate, schemas.TransferCertificateRequest, schemas.TransferCertificateResponse), output: &TransferCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTransferCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TransferCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTransferCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTransferCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +168,8 @@ func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTransferCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TransferCertificate",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=BatchDescribeTypeConfigurations&TypeConfigurationIdentifiers.member.1.Type=RESOURCE&TypeConfigurationIdentifiers.member.1.TypeArn=__TypeArn__&TypeConfigurationIdentifiers.member.1.TypeConfigurationAlias=__TypeConfigurationAlias__&TypeConfigurationIdentifiers.member.1.TypeConfigurationArn=__TypeConfigurationArn__&TypeConfigurationIdentifiers.member.1.TypeName=__TypeName__&TypeConfigurationIdentifiers.member.2.Type=RESOURCE&TypeConfigurationIdentifiers.member.2.TypeArn=__TypeArn__&TypeConfigurationIdentifiers.member.2.TypeConfigurationAlias=__TypeConfigurationAlias__&TypeConfigurationIdentifiers.member.2.TypeConfigurationArn=__TypeConfigurationArn__&TypeConfigurationIdentifiers.member.2.TypeName=__TypeName__&Version=2010-05-15

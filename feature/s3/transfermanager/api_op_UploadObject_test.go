@@ -5,8 +5,8 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
-	"net/http/httptest"
 	"os"
 	"reflect"
 	"regexp"
@@ -1131,6 +1131,89 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	}
 }
 
+// TestUploadFirstErrorWins verifies that when an UploadPart error races with a
+// context-cancellation read error, the final reported error is always the
+// UploadPart error (the root cause), not the secondary read error.
+//
+// The contextAwareBody forces the producer goroutine to block in readFillBuf
+// until the context is canceled, then return the context error. This guarantees
+// the producer calls seterr with "read multipart upload data failed" while the
+// worker concurrently calls seterr with the UploadPart error. seterr resolves
+// the race in favor of the non-cancellation error regardless of ordering.
+func TestUploadFirstErrorWins(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = context.Canceled
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+	var index atomic.Int64
+	var once sync.Once
+
+	// contextAwareBody returns data for the first two parts, then blocks
+	// until the context is canceled — at which point it returns ctx.Error.
+	// This forces the producer goroutine through the shouldContinue →
+	// "read multipart upload data failed" → seterr path while the worker
+	// is concurrently calling seterr with the UploadPart error.
+	body := &contextAwareBody{
+		ctx:       ctx,
+		data:      make([]byte, 24*1024*1024),
+		threshold: 16*1024*1024 + 1, // enough for 2 full parts
+	}
+
+	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (out *s3.UploadPartOutput, err error) {
+		if idx := index.Load(); idx > 0 {
+			once.Do(func() {
+				close(ctx.DoneCh)
+				err = fmt.Errorf("primary upload part error")
+			})
+		}
+		out = &s3.UploadPartOutput{}
+		index.Add(1)
+		return
+	}
+	u := New(c, func(o *Options) {
+		o.FailTimeout = 5 * time.Second
+	})
+
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   body,
+	})
+	if err == nil {
+		t.Fatal("expect error, got nil")
+	}
+	if strings.Contains(err.Error(), "read multipart upload data failed") {
+		t.Fatalf("secondary cancellation read error leaked into output: %v", err)
+	}
+	if !strings.Contains(err.Error(), "primary upload part error") {
+		t.Fatalf("expected primary error in output, got: %v", err)
+	}
+}
+
+// contextAwareBody serves data normally until threshold bytes have been read,
+// then blocks until the context is canceled and returns the context error.
+// This simulates a network body that fails when the request context is canceled.
+type contextAwareBody struct {
+	ctx       *awstesting.FakeContext
+	data      []byte
+	offset    int
+	threshold int
+}
+
+func (r *contextAwareBody) Read(p []byte) (int, error) {
+	if r.offset >= r.threshold {
+		<-r.ctx.DoneCh
+		return 0, r.ctx.Error
+	}
+	remaining := r.threshold - r.offset
+	n := len(p)
+	if n > remaining {
+		n = remaining
+	}
+	copy(p[:n], r.data[r.offset:r.offset+n])
+	r.offset += n
+	return n, nil
+}
+
 func TestUploadWithContextCanceledWhenComplete(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
@@ -1171,26 +1254,16 @@ func TestUploadRetry(t *testing.T) {
 	defer testFileCleanup(t)
 
 	cases := map[string]struct {
-		Body         io.Reader
-		PartHandlers func(testing.TB) []http.Handler
+		Body io.Reader
 	}{
 		"bytes.Buffer": {
 			Body: bytes.NewBuffer(make([]byte, defaultPartSizeBytes*part)),
-			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
-			},
 		},
 		"bytes.Reader": {
 			Body: bytes.NewReader(make([]byte, defaultPartSizeBytes*part)),
-			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
-			},
 		},
 		"os.File": {
 			Body: testFile,
-			PartHandlers: func(tb testing.TB) []http.Handler {
-				return buildFailHandlers(tb, part, retries)
-			},
 		},
 	}
 
@@ -1199,13 +1272,16 @@ func TestUploadRetry(t *testing.T) {
 			restoreSleep := sdk.TestingUseNopSleep()
 			defer restoreSleep()
 
-			mux := newMockS3UploadServer(t, c.PartHandlers(t))
-			server := httptest.NewServer(mux)
-			defer server.Close()
-
+			failsLeft := make([]int, part)
+			for i := range failsLeft {
+				failsLeft[i] = retries
+			}
 			client := s3.New(s3.Options{
-				EndpointResolverV2: s3testing.EndpointResolverV2{URL: server.URL},
-				UsePathStyle:       true,
+				Region:       "us-west-2",
+				UsePathStyle: true,
+				HTTPClient: &retryHTTPClient{
+					failsLeft: failsLeft,
+				},
 				Retryer: retry.NewStandard(func(o *retry.StandardOptions) {
 					o.MaxAttempts = retries + 1
 				}),
@@ -1225,76 +1301,75 @@ func TestUploadRetry(t *testing.T) {
 	}
 }
 
-func newMockS3UploadServer(tb testing.TB, partHandler []http.Handler) *mockS3UploadServer {
-	s := &mockS3UploadServer{
-		ServeMux:     http.NewServeMux(),
-		partHandlers: partHandler,
-		tb:           tb,
-	}
-
-	s.HandleFunc("/", s.handleRequest)
-
-	return s
+type retryHTTPClient struct {
+	failsLeft []int
 }
 
-func buildFailHandlers(tb testing.TB, part, retry int) []http.Handler {
-	handlers := make([]http.Handler, part)
-
-	for i := range part {
-		handlers[i] = &failPartHandler{
-			tb:                 tb,
-			failLeft:           retry,
-			successPartHandler: &successPartHandler{tb: tb},
-		}
-	}
-
-	return handlers
-}
-
-type mockS3UploadServer struct {
-	*http.ServeMux
-
-	tb           testing.TB
-	partHandlers []http.Handler
-}
-
-func (s mockS3UploadServer) handleRequest(w http.ResponseWriter, r *http.Request) {
-	defer func() {
-		if err := r.Body.Close(); err != nil {
-			failRequest(w, 0, "BodyCloseError", fmt.Sprintf("request body close error: %v", err))
-		}
-	}()
-
+func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
 	_, hasUploads := r.URL.Query()["uploads"]
-
 	switch {
 	case r.Method == "POST" && hasUploads:
-		// CreateMultipartUpload request
-		w.Header().Set("Content-Length", strconv.Itoa(len(createUploadResp)))
-		w.Write([]byte(createUploadResp))
+		// CreateMultipartUpload req
+		return &http.Response{
+			StatusCode: 200,
+			Header:     http.Header{"Content-Length": {strconv.Itoa(len(createUploadResp))}},
+			Body:       io.NopCloser(bytes.NewReader([]byte(createUploadResp))),
+		}, nil
 	case r.Method == "PUT":
+		defer func() {
+			if err := r.Body.Close(); err != nil {
+				log.Printf("failed to close request body: %q", err)
+			}
+		}()
 		partStr := r.URL.Query().Get("partNumber")
 		part, err := strconv.ParseInt(partStr, 10, 64)
 		if err != nil {
-			failRequest(w, 400, "BadRequest", fmt.Sprintf("unable to parse partNumber, %q, %v", partStr, err))
-			return
+			return &http.Response{StatusCode: 400, Status: "BadRequest"}, fmt.Errorf("unable to parse partNumber, %q, %v", partStr, err)
 		}
-		if part <= 0 || part > int64(len(s.partHandlers)) {
-			failRequest(w, 400, "BadRequest", fmt.Sprintf("invalid partNumber %v", part))
-			return
+		if part <= 0 || part > int64(len(c.failsLeft)) {
+			return &http.Response{StatusCode: 400, Status: "BadRequest"}, fmt.Errorf("invalid partNumber %v", part)
 		}
-		s.partHandlers[part-1].ServeHTTP(w, r)
+
+		n, _ := io.Copy(io.Discard, r.Body)
+		if c.failsLeft[part-1] == 0 {
+			if e, a := r.ContentLength, n; e != a {
+				errBody := fmt.Sprintf("content length mismatch, expect %d, got %d", e, a)
+				return &http.Response{
+					StatusCode: 400,
+					Status:     "InternalException",
+					Header:     http.Header{"Content-Length": {strconv.Itoa(len(errBody))}},
+					Body:       io.NopCloser(strings.NewReader(errBody)),
+				}, nil
+			}
+			return &http.Response{
+				StatusCode: 200,
+				Header:     http.Header{"Content-Length": []string{strconv.Itoa(len(uploadPartResp))}},
+				Body:       io.NopCloser(bytes.NewReader([]byte(uploadPartResp))),
+			}, nil
+		}
+		c.failsLeft[part-1]--
+		errBody := fmt.Sprintf("mock error, partNumber %s", partStr)
+		return &http.Response{
+			StatusCode: 500,
+			Status:     "InternalException",
+			Header:     http.Header{"Content-Length": {strconv.Itoa(len(errBody))}},
+			Body:       io.NopCloser(strings.NewReader(errBody)),
+		}, nil
 	case r.Method == "POST":
-		// CompleteMultipartUpload request
-		w.Header().Set("Content-Length", strconv.Itoa(len(completeUploadResp)))
-		w.Write([]byte(completeUploadResp))
+		// CompleteMultipartUpload req
+		return &http.Response{
+			StatusCode: 200,
+			Header:     http.Header{"Content-Length": []string{strconv.Itoa(len(completeUploadResp))}},
+			Body:       io.NopCloser(bytes.NewReader([]byte(completeUploadResp))),
+		}, nil
 	case r.Method == "DELETE":
-		w.Header().Set("Content-Length", strconv.Itoa(len(abortUploadResp)))
-		w.Write([]byte(abortUploadResp))
-		w.WriteHeader(200)
-	default:
-		failRequest(w, 400, "BadRequest", fmt.Sprintf("invalid request %v %v", r.Method, r.URL))
+		return &http.Response{
+			StatusCode: 200,
+			Header:     http.Header{"Content-Length": []string{strconv.Itoa(len(abortUploadResp))}},
+			Body:       io.NopCloser(bytes.NewReader([]byte(abortUploadResp))),
+		}, nil
 	}
+	return &http.Response{StatusCode: 400, Status: "BadRequest"}, fmt.Errorf("invalid request %v %v", r.Method, r.URL)
 }
 
 func createTempFile(t *testing.T, size int64) (*os.File, func(*testing.T), error) {
@@ -1319,70 +1394,6 @@ func createTempFile(t *testing.T, size int64) (*os.File, func(*testing.T), error
 		nil
 }
 
-type failPartHandler struct {
-	tb                 testing.TB
-	failLeft           int
-	successPartHandler http.Handler
-}
-
-func (h *failPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	defer func() {
-		if err := r.Body.Close(); err != nil {
-			failRequest(w, 0, "BodyCloseError", fmt.Sprintf("request body close error: %v", err))
-		}
-	}()
-
-	if h.failLeft == 0 && h.successPartHandler != nil {
-		h.successPartHandler.ServeHTTP(w, r)
-		return
-	}
-
-	io.Copy(io.Discard, r.Body)
-	failRequest(w, 500, "InternalException", fmt.Sprintf("mock error, partNumber %v", r.URL.Query().Get("partNumber")))
-	h.failLeft--
-}
-
-func failRequest(w http.ResponseWriter, status int, code, msg string) {
-	msg = fmt.Sprintf(baseRequestErrorResp, code, msg)
-	w.Header().Set("Content-Length", strconv.Itoa(len(msg)))
-	w.WriteHeader(status)
-	w.Write([]byte(msg))
-}
-
-type successPartHandler struct {
-	tb testing.TB
-}
-
-func (h *successPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	defer func() {
-		if err := r.Body.Close(); err != nil {
-			failRequest(w, 0, "BodyCloseError", fmt.Sprintf("request body close error: %v", err))
-		}
-	}()
-
-	n, err := io.Copy(io.Discard, r.Body)
-	if err != nil {
-		failRequest(w, 400, "BadRequest", fmt.Sprintf("failed to read body, %v", err))
-		return
-	}
-	contentLength := r.Header.Get("Content-Length")
-	expectLength, err := strconv.ParseInt(contentLength, 10, 64)
-	if err != nil {
-		h.tb.Logf("expect content-length, got %q, %v", contentLength, err)
-		failRequest(w, 400, "BadRequest", fmt.Sprintf("unable to get content-length %v", err))
-		return
-	}
-
-	if e, a := expectLength, n; e != a {
-		h.tb.Logf("expect content-length to be %v, got %v", e, a)
-		failRequest(w, 400, "BadRequest", fmt.Sprintf("content-length and body do not match, %v, %v", e, a))
-		return
-	}
-
-	w.Header().Set("Content-Length", strconv.Itoa(len(uploadPartResp)))
-	w.Write([]byte(uploadPartResp))
-}
-
 const createUploadResp = `<CreateMultipartUploadResponse>
   <Bucket>bucket</Bucket>
   <Key>key</Key>
@@ -1392,12 +1403,6 @@ const createUploadResp = `<CreateMultipartUploadResponse>
 const uploadPartResp = `<UploadPartResponse>
   <ETag>key</ETag>
 </UploadPartResponse>`
-const baseRequestErrorResp = `<batchItemError>
-  <Code>%s</Code>
-  <Message>%s</Message>
-  <RequestId>request-id</RequestId>
-  <HostId>host-id</HostId>
-</batchItemError>`
 
 const completeUploadResp = `<CompleteMultipartUploadResponse>
   <Bucket>bucket</Bucket>

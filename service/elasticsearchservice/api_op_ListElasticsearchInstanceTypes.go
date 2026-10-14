@@ -5,10 +5,10 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all Elasticsearch instance types that are supported for given
@@ -53,6 +53,27 @@ type ListElasticsearchInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchInstanceTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_DomainName, *v.DomainName)
+	}
+	if v.ElasticsearchVersion != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_ElasticsearchVersion, *v.ElasticsearchVersion)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListElasticsearchInstanceTypesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the parameters returned by ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesOutput struct {
 
@@ -70,77 +91,51 @@ type ListElasticsearchInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchInstanceTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElasticsearchInstanceTypeList(s, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, v.ElasticsearchInstanceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListElasticsearchInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListElasticsearchInstanceTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes:
+			return deserializeElasticsearchInstanceTypeList(d, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, &v.ElasticsearchInstanceTypes)
+		case schemas.ListElasticsearchInstanceTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListElasticsearchInstanceTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchInstanceTypes, schemas.ListElasticsearchInstanceTypesRequest, schemas.ListElasticsearchInstanceTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchInstanceTypes, schemas.ListElasticsearchInstanceTypesRequest, schemas.ListElasticsearchInstanceTypesResponse), output: &ListElasticsearchInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListElasticsearchInstanceTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListElasticsearchInstanceTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListElasticsearchInstanceTypesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListElasticsearchInstanceTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +148,6 @@ func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +248,3 @@ type ListElasticsearchInstanceTypesAPIClient interface {
 }
 
 var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListElasticsearchInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListElasticsearchInstanceTypes",
-	}
-}

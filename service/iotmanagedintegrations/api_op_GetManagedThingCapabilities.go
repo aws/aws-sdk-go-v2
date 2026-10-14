@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the capabilities for a managed thing using the device ID.
@@ -39,18 +34,6 @@ type GetManagedThingCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCapabilitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedThingCapabilitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedThingCapabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetManagedThingCapabilitiesRequest_Identifier, *v.Identifier)
-	}
-}
-
 type GetManagedThingCapabilitiesOutput struct {
 
 	// The capabilities of the device such as light bulb.
@@ -70,91 +53,29 @@ type GetManagedThingCapabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCapabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedThingCapabilitiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedThingCapabilitiesResponse_Capabilities:
-			v.Capabilities = new(string)
-			return d.ReadString(schemas.GetManagedThingCapabilitiesResponse_Capabilities, v.Capabilities)
-		case schemas.GetManagedThingCapabilitiesResponse_CapabilityReport:
-			v.CapabilityReport = &types.CapabilityReport{}
-			return v.CapabilityReport.Deserialize(d)
-		case schemas.GetManagedThingCapabilitiesResponse_ManagedThingId:
-			v.ManagedThingId = new(string)
-			return d.ReadString(schemas.GetManagedThingCapabilitiesResponse_ManagedThingId, v.ManagedThingId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedThingCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingCapabilities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCapabilities, schemas.GetManagedThingCapabilitiesRequest, schemas.GetManagedThingCapabilitiesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingCapabilities{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCapabilities, schemas.GetManagedThingCapabilitiesRequest, schemas.GetManagedThingCapabilitiesResponse), output: &GetManagedThingCapabilitiesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedThingCapabilities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetManagedThingCapabilitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedThingCapabilities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +90,8 @@ func (c *Client) addOperationGetManagedThingCapabilitiesMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetManagedThingCapabilities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetManagedThingCapabilities",
-	}
 }

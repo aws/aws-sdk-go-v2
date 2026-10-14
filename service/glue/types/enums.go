@@ -1014,6 +1014,25 @@ func (DataQualityEncryptionMode) Values() []DataQualityEncryptionMode {
 	}
 }
 
+type DataQualityEngine string
+
+// Enum values for DataQualityEngine
+const (
+	DataQualityEngineSpark  DataQualityEngine = "SPARK"
+	DataQualityEnginePython DataQualityEngine = "PYTHON"
+)
+
+// Values returns all known values for DataQualityEngine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityEngine) Values() []DataQualityEngine {
+	return []DataQualityEngine{
+		"SPARK",
+		"PYTHON",
+	}
+}
+
 type DataQualityModelStatus string
 
 // Enum values for DataQualityModelStatus
@@ -1251,6 +1270,50 @@ func (ExistCondition) Values() []ExistCondition {
 	}
 }
 
+type ExportSetting string
+
+// Enum values for ExportSetting
+const (
+	ExportSettingEnabled  ExportSetting = "ENABLED"
+	ExportSettingDisabled ExportSetting = "DISABLED"
+)
+
+// Values returns all known values for ExportSetting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportSetting) Values() []ExportSetting {
+	return []ExportSetting{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ExportStatus string
+
+// Enum values for ExportStatus
+const (
+	ExportStatusEnabling  ExportStatus = "ENABLING"
+	ExportStatusEnabled   ExportStatus = "ENABLED"
+	ExportStatusDisabling ExportStatus = "DISABLING"
+	ExportStatusDisabled  ExportStatus = "DISABLED"
+	ExportStatusFailed    ExportStatus = "FAILED"
+)
+
+// Values returns all known values for ExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+		"FAILED",
+	}
+}
+
 type FederationSourceErrorCode string
 
 // Enum values for FederationSourceErrorCode
@@ -1411,6 +1474,25 @@ func (FilterLogicalOperator) Values() []FilterLogicalOperator {
 	return []FilterLogicalOperator{
 		"AND",
 		"OR",
+	}
+}
+
+type FilterMode string
+
+// Enum values for FilterMode
+const (
+	FilterModeQueryParams  FilterMode = "QUERY_PARAMS"
+	FilterModeFilterString FilterMode = "FILTER_STRING"
+)
+
+// Values returns all known values for FilterMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterMode) Values() []FilterMode {
+	return []FilterMode{
+		"QUERY_PARAMS",
+		"FILTER_STRING",
 	}
 }
 
@@ -2248,6 +2330,7 @@ const (
 	OAuth2GrantTypeAuthorizationCode OAuth2GrantType = "AUTHORIZATION_CODE"
 	OAuth2GrantTypeClientCredentials OAuth2GrantType = "CLIENT_CREDENTIALS"
 	OAuth2GrantTypeJwtBearer         OAuth2GrantType = "JWT_BEARER"
+	OAuth2GrantTypeRefreshToken      OAuth2GrantType = "REFRESH_TOKEN"
 )
 
 // Values returns all known values for OAuth2GrantType. Note that this can be
@@ -2259,6 +2342,45 @@ func (OAuth2GrantType) Values() []OAuth2GrantType {
 		"AUTHORIZATION_CODE",
 		"CLIENT_CREDENTIALS",
 		"JWT_BEARER",
+		"REFRESH_TOKEN",
+	}
+}
+
+type ObservationConfiguration string
+
+// Enum values for ObservationConfiguration
+const (
+	ObservationConfigurationAll  ObservationConfiguration = "ALL"
+	ObservationConfigurationNone ObservationConfiguration = "NONE"
+)
+
+// Values returns all known values for ObservationConfiguration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObservationConfiguration) Values() []ObservationConfiguration {
+	return []ObservationConfiguration{
+		"ALL",
+		"NONE",
+	}
+}
+
+type ObservationMode string
+
+// Enum values for ObservationMode
+const (
+	ObservationModeScheduled ObservationMode = "SCHEDULED"
+	ObservationModeFixed     ObservationMode = "FIXED"
+)
+
+// Values returns all known values for ObservationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObservationMode) Values() []ObservationMode {
+	return []ObservationMode{
+		"SCHEDULED",
+		"FIXED",
 	}
 }
 
@@ -2540,6 +2662,25 @@ func (QuoteChar) Values() []QuoteChar {
 	}
 }
 
+type RecommendationMode string
+
+// Enum values for RecommendationMode
+const (
+	RecommendationModeBasic    RecommendationMode = "BASIC"
+	RecommendationModeAdvanced RecommendationMode = "ADVANCED"
+)
+
+// Values returns all known values for RecommendationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationMode) Values() []RecommendationMode {
+	return []RecommendationMode{
+		"BASIC",
+		"ADVANCED",
+	}
+}
+
 type RecrawlBehavior string
 
 // Enum values for RecrawlBehavior
@@ -2666,6 +2807,27 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ResultTypeEnum string
+
+// Enum values for ResultTypeEnum
+const (
+	ResultTypeEnumAll        ResultTypeEnum = "ALL"
+	ResultTypeEnumPassedOnly ResultTypeEnum = "PASSED_ONLY"
+	ResultTypeEnumFailedOnly ResultTypeEnum = "FAILED_ONLY"
+)
+
+// Values returns all known values for ResultTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultTypeEnum) Values() []ResultTypeEnum {
+	return []ResultTypeEnum{
+		"ALL",
+		"PASSED_ONLY",
+		"FAILED_ONLY",
+	}
+}
+
 type S3EncryptionMode string
 
 // Enum values for S3EncryptionMode
@@ -2785,6 +2947,52 @@ func (SchemaVersionStatus) Values() []SchemaVersionStatus {
 		"PENDING",
 		"FAILURE",
 		"DELETING",
+	}
+}
+
+type SearchFilterOperator string
+
+// Enum values for SearchFilterOperator
+const (
+	SearchFilterOperatorEquals              SearchFilterOperator = "equals"
+	SearchFilterOperatorGreaterThan         SearchFilterOperator = "greaterThan"
+	SearchFilterOperatorGreaterThanOrEquals SearchFilterOperator = "greaterThanOrEquals"
+	SearchFilterOperatorLessThan            SearchFilterOperator = "lessThan"
+	SearchFilterOperatorLessThanOrEquals    SearchFilterOperator = "lessThanOrEquals"
+	SearchFilterOperatorNotExists           SearchFilterOperator = "notExists"
+)
+
+// Values returns all known values for SearchFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchFilterOperator) Values() []SearchFilterOperator {
+	return []SearchFilterOperator{
+		"equals",
+		"greaterThan",
+		"greaterThanOrEquals",
+		"lessThan",
+		"lessThanOrEquals",
+		"notExists",
+	}
+}
+
+type SearchSortOrder string
+
+// Enum values for SearchSortOrder
+const (
+	SearchSortOrderAscending  SearchSortOrder = "ASCENDING"
+	SearchSortOrderDescending SearchSortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SearchSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchSortOrder) Values() []SearchSortOrder {
+	return []SearchSortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 
@@ -3029,12 +3237,41 @@ func (StatisticEvaluationLevel) Values() []StatisticEvaluationLevel {
 	}
 }
 
+type SubObjectSourceType string
+
+// Enum values for SubObjectSourceType
+const (
+	SubObjectSourceTypeHiveParquet  SubObjectSourceType = "HIVE_PARQUET"
+	SubObjectSourceTypeHiveOrc      SubObjectSourceType = "HIVE_ORC"
+	SubObjectSourceTypeHiveCsv      SubObjectSourceType = "HIVE_CSV"
+	SubObjectSourceTypeHiveJson     SubObjectSourceType = "HIVE_JSON"
+	SubObjectSourceTypePlainParquet SubObjectSourceType = "PLAIN_PARQUET"
+	SubObjectSourceTypeIceberg      SubObjectSourceType = "ICEBERG"
+)
+
+// Values returns all known values for SubObjectSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubObjectSourceType) Values() []SubObjectSourceType {
+	return []SubObjectSourceType{
+		"HIVE_PARQUET",
+		"HIVE_ORC",
+		"HIVE_CSV",
+		"HIVE_JSON",
+		"PLAIN_PARQUET",
+		"ICEBERG",
+	}
+}
+
 type TableAttributes string
 
 // Enum values for TableAttributes
 const (
-	TableAttributesName      TableAttributes = "NAME"
-	TableAttributesTableType TableAttributes = "TABLE_TYPE"
+	TableAttributesName                  TableAttributes = "NAME"
+	TableAttributesTableType             TableAttributes = "TABLE_TYPE"
+	TableAttributesDefault               TableAttributes = "DEFAULT"
+	TableAttributesLatestIcebergMetadata TableAttributes = "LATEST_ICEBERG_METADATA"
 )
 
 // Values returns all known values for TableAttributes. Note that this can be
@@ -3045,6 +3282,8 @@ func (TableAttributes) Values() []TableAttributes {
 	return []TableAttributes{
 		"NAME",
 		"TABLE_TYPE",
+		"DEFAULT",
+		"LATEST_ICEBERG_METADATA",
 	}
 }
 
@@ -3089,6 +3328,25 @@ func (TableOptimizerType) Values() []TableOptimizerType {
 		"compaction",
 		"retention",
 		"orphan_file_deletion",
+	}
+}
+
+type TableResourceShareType string
+
+// Enum values for TableResourceShareType
+const (
+	TableResourceShareTypeFederated TableResourceShareType = "FEDERATED"
+	TableResourceShareTypeAll       TableResourceShareType = "ALL"
+)
+
+// Values returns all known values for TableResourceShareType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableResourceShareType) Values() []TableResourceShareType {
+	return []TableResourceShareType{
+		"FEDERATED",
+		"ALL",
 	}
 }
 

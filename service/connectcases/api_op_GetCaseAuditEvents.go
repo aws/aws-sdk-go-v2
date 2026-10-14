@@ -5,10 +5,10 @@ package connectcases
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the audit history about a specific case if it exists.
@@ -50,6 +50,27 @@ type GetCaseAuditEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseAuditEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseAuditEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseAuditEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCaseAuditEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetCaseAuditEventsOutput struct {
 
 	// A list of case audits where each represents a particular edit of the case.
@@ -67,77 +88,51 @@ type GetCaseAuditEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseAuditEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditEventsList(s, schemas.GetCaseAuditEventsResponse_auditEvents, v.AuditEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseAuditEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetCaseAuditEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseAuditEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseAuditEventsResponse_auditEvents:
+			return deserializeAuditEventsList(d, schemas.GetCaseAuditEventsResponse_auditEvents, &v.AuditEvents)
+		case schemas.GetCaseAuditEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCaseAuditEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAuditEvents, schemas.GetCaseAuditEventsRequest, schemas.GetCaseAuditEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaseAuditEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAuditEvents, schemas.GetCaseAuditEventsRequest, schemas.GetCaseAuditEventsResponse), output: &GetCaseAuditEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaseAuditEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCaseAuditEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCaseAuditEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCaseAuditEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +145,6 @@ func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +247,3 @@ type GetCaseAuditEventsAPIClient interface {
 }
 
 var _ GetCaseAuditEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetCaseAuditEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCaseAuditEvents",
-	}
-}

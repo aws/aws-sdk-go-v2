@@ -1,0 +1,5 @@
+POST /ListParticipantEvents
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","participantId":"__ParticipantId__","sessionId":"__SessionId__","stageArn":"__StageArn__"}

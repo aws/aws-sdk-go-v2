@@ -870,6 +870,53 @@ func (v *FieldValidationError) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the partner's headquarters location using International Organization
+// for Standardization (ISO) 3166 country and subdivision codes.
+type Headquarters struct {
+
+	// The ISO 3166-1 alpha-2 country code of the partner's headquarters. For example,
+	// US , BR , or DE .
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The subdivision portion of the ISO 3166-2 code for the partner's headquarters
+	// (for example, SP from BR-SP , NSW from AU-NSW , or 13 from JP-13 ).
+	//
+	// This member is required.
+	SubdivisionCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Headquarters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Headquarters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Headquarters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Headquarters_CountryCode, *v.CountryCode)
+	}
+	if v.SubdivisionCode != nil {
+		s.WriteString(schemas.Headquarters_SubdivisionCode, *v.SubdivisionCode)
+	}
+}
+func (v *Headquarters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Headquarters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Headquarters_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Headquarters_CountryCode, v.CountryCode)
+		case schemas.Headquarters_SubdivisionCode:
+			v.SubdivisionCode = new(string)
+			return d.ReadString(schemas.Headquarters_SubdivisionCode, v.SubdivisionCode)
+		}
+		return nil
+	})
+}
+
 // Contains localized content for a partner profile in a specific language or
 // locale.
 type LocalizedContent struct {
@@ -1095,6 +1142,11 @@ type PartnerProfile struct {
 	// This member is required.
 	WebsiteUrl *string
 
+	// The ISO 3166 country and subdivision codes for the partner's headquarters
+	// location. If no headquarters location is set, this field is not included in the
+	// response.
+	Headquarters *Headquarters
+
 	// A list of localized content versions for different languages and regions.
 	LocalizedContents []LocalizedContent
 
@@ -1116,6 +1168,11 @@ func (v *PartnerProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.PartnerProfile_DisplayName, *v.DisplayName)
+	}
+	if v.Headquarters != nil {
+		s.WriteStruct(schemas.PartnerProfile_Headquarters)
+		v.Headquarters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	serializeIndustrySegmentList(s, schemas.PartnerProfile_IndustrySegments, v.IndustrySegments)
 	serializeLocalizedContentList(s, schemas.PartnerProfile_LocalizedContents, v.LocalizedContents)
@@ -1144,6 +1201,9 @@ func (v *PartnerProfile) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PartnerProfile_DisplayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.PartnerProfile_DisplayName, v.DisplayName)
+		case schemas.PartnerProfile_Headquarters:
+			v.Headquarters = &Headquarters{}
+			return v.Headquarters.Deserialize(d)
 		case schemas.PartnerProfile_IndustrySegments:
 			return deserializeIndustrySegmentList(d, schemas.PartnerProfile_IndustrySegments, &v.IndustrySegments)
 		case schemas.PartnerProfile_LocalizedContents:
@@ -1289,6 +1349,50 @@ func (v *PartnerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PartnerSummary_LegalName:
 			v.LegalName = new(string)
 			return d.ReadString(schemas.PartnerSummary_LegalName, v.LegalName)
+		}
+		return nil
+	})
+}
+
+// Identifies a partner in a qualifications association group. Contains the
+// partner's profile identifier and AWS account identifier. In requests, provide at
+// least one of ProfileId or AccountId . In responses, both fields are populated.
+type QualificationsAssociationPartner struct {
+
+	// The 12-digit AWS account ID linked to the partner profile. Required in requests
+	// if ProfileId is not provided.
+	AccountId *string
+
+	// The unique identifier for the partner profile, in the format pprofile-* .
+	// Required in requests if AccountId is not provided.
+	ProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QualificationsAssociationPartner) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QualificationsAssociationPartner)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QualificationsAssociationPartner) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.QualificationsAssociationPartner_AccountId, *v.AccountId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.QualificationsAssociationPartner_ProfileId, *v.ProfileId)
+	}
+}
+func (v *QualificationsAssociationPartner) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QualificationsAssociationPartner, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QualificationsAssociationPartner_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.QualificationsAssociationPartner_AccountId, v.AccountId)
+		case schemas.QualificationsAssociationPartner_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.QualificationsAssociationPartner_ProfileId, v.ProfileId)
 		}
 		return nil
 	})
@@ -1493,6 +1597,11 @@ type TaskDetails struct {
 	// This member is required.
 	WebsiteUrl *string
 
+	// The ISO 3166 country and subdivision codes for the partner's headquarters
+	// location. If you omit this field, the service retains the existing headquarters
+	// value.
+	Headquarters *Headquarters
+
 	// The updated localized content for the partner profile.
 	LocalizedContents []LocalizedContent
 
@@ -1511,6 +1620,11 @@ func (v *TaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.TaskDetails_DisplayName, *v.DisplayName)
+	}
+	if v.Headquarters != nil {
+		s.WriteStruct(schemas.TaskDetails_Headquarters)
+		v.Headquarters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	serializeIndustrySegmentList(s, schemas.TaskDetails_IndustrySegments, v.IndustrySegments)
 	serializeLocalizedContentList(s, schemas.TaskDetails_LocalizedContents, v.LocalizedContents)
@@ -1536,6 +1650,9 @@ func (v *TaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TaskDetails_DisplayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.TaskDetails_DisplayName, v.DisplayName)
+		case schemas.TaskDetails_Headquarters:
+			v.Headquarters = &Headquarters{}
+			return v.Headquarters.Deserialize(d)
 		case schemas.TaskDetails_IndustrySegments:
 			return deserializeIndustrySegmentList(d, schemas.TaskDetails_IndustrySegments, &v.IndustrySegments)
 		case schemas.TaskDetails_LocalizedContents:

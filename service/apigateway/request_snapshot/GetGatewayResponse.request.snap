@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/gatewayresponses/DEFAULT_4XX
+
+Accept: application/json
+

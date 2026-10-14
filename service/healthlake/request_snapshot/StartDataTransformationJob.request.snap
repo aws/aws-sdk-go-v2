@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.StartDataTransformationJob
+
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DriftDetectionEnabled":true,"InputDataConfig":{"S3Uri":"__S3Uri__","SourceFormat":"CCDA"},"JobName":"__JobName__","OutputDataConfig":{"S3Configuration":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}},"ProfileId":"__ProfileId__","ProvenanceEnabled":true}

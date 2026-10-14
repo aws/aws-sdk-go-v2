@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListDelegationRequests&Marker=__Marker__&MaxItems=1&OwnerId=__OwnerId__&Version=2010-05-08

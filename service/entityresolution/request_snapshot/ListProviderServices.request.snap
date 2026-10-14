@@ -1,0 +1,3 @@
+GET /providerservices?maxResults=1&nextToken=__NextToken__&providerName=__ProviderName__
+
+

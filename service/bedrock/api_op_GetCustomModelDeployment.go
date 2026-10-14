@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +50,18 @@ type GetCustomModelDeploymentInput struct {
 	CustomModelDeploymentIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCustomModelDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomModelDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomModelDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomModelDeploymentIdentifier != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentRequest_customModelDeploymentIdentifier, *v.CustomModelDeploymentIdentifier)
+	}
 }
 
 type GetCustomModelDeploymentOutput struct {
@@ -107,77 +118,102 @@ type GetCustomModelDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomModelDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomModelDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomModelDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCustomModelDeploymentResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomModelDeploymentArn != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_customModelDeploymentArn, *v.CustomModelDeploymentArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_description, *v.Description)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetCustomModelDeploymentResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_modelArn, *v.ModelArn)
+	}
+	if v.ModelDeploymentName != nil {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_modelDeploymentName, *v.ModelDeploymentName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCustomModelDeploymentResponse_status, string(v.Status))
+	}
+	if v.UpdateDetails != nil {
+		s.WriteStruct(schemas.GetCustomModelDeploymentResponse_updateDetails)
+		v.UpdateDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCustomModelDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomModelDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomModelDeploymentResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCustomModelDeploymentResponse_createdAt, v.CreatedAt)
+		case schemas.GetCustomModelDeploymentResponse_customModelDeploymentArn:
+			v.CustomModelDeploymentArn = new(string)
+			return d.ReadString(schemas.GetCustomModelDeploymentResponse_customModelDeploymentArn, v.CustomModelDeploymentArn)
+		case schemas.GetCustomModelDeploymentResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCustomModelDeploymentResponse_description, v.Description)
+		case schemas.GetCustomModelDeploymentResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetCustomModelDeploymentResponse_failureMessage, v.FailureMessage)
+		case schemas.GetCustomModelDeploymentResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCustomModelDeploymentResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetCustomModelDeploymentResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.GetCustomModelDeploymentResponse_modelArn, v.ModelArn)
+		case schemas.GetCustomModelDeploymentResponse_modelDeploymentName:
+			v.ModelDeploymentName = new(string)
+			return d.ReadString(schemas.GetCustomModelDeploymentResponse_modelDeploymentName, v.ModelDeploymentName)
+		case schemas.GetCustomModelDeploymentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCustomModelDeploymentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CustomModelDeploymentStatus(ev)
+			return nil
+		case schemas.GetCustomModelDeploymentResponse_updateDetails:
+			v.UpdateDetails = &types.CustomModelDeploymentUpdateDetails{}
+			return v.UpdateDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomModelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomModelDeployment, schemas.GetCustomModelDeploymentRequest, schemas.GetCustomModelDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomModelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomModelDeployment, schemas.GetCustomModelDeploymentRequest, schemas.GetCustomModelDeploymentResponse), output: &GetCustomModelDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCustomModelDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCustomModelDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCustomModelDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCustomModelDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +228,8 @@ func (c *Client) addOperationGetCustomModelDeploymentMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCustomModelDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCustomModelDeployment",
-	}
 }

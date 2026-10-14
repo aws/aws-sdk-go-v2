@@ -4,10 +4,9 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxLustreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxLustreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxLustreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreRequest_LocationArn, *v.LocationArn)
+	}
+}
+
 type DescribeLocationFsxLustreOutput struct {
 
 	// The time that the FSx for Lustre location was created.
@@ -60,77 +71,63 @@ type DescribeLocationFsxLustreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxLustreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxLustreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxLustreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationFsxLustreResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreResponse_LocationUri, *v.LocationUri)
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, v.SecurityGroupArns)
+}
+func (v *DescribeLocationFsxLustreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationFsxLustreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationFsxLustreResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationFsxLustreResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationFsxLustreResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxLustreResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationFsxLustreResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxLustreResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns:
+			return deserializeEc2SecurityGroupArnList(d, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, &v.SecurityGroupArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationFsxLustreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxLustre, schemas.DescribeLocationFsxLustreRequest, schemas.DescribeLocationFsxLustreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxLustre, schemas.DescribeLocationFsxLustreRequest, schemas.DescribeLocationFsxLustreResponse), output: &DescribeLocationFsxLustreOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxLustre{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLocationFsxLustre"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLocationFsxLustreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationFsxLustre(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +142,8 @@ func (c *Client) addOperationDescribeLocationFsxLustreMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLocationFsxLustre(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLocationFsxLustre",
-	}
 }

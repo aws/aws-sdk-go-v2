@@ -5,12 +5,8 @@ package route53recoverycontrolconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the safety rules (the assertion rules and gating rules) that you've
@@ -46,24 +42,6 @@ type ListSafetyRulesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSafetyRulesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSafetyRulesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSafetyRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.ListSafetyRulesRequest_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSafetyRulesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSafetyRulesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListSafetyRulesOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -78,87 +56,29 @@ type ListSafetyRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSafetyRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSafetyRulesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSafetyRulesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSafetyRulesResponse_NextToken, v.NextToken)
-		case schemas.ListSafetyRulesResponse_SafetyRules:
-			return deserialize__listOfRule(d, schemas.ListSafetyRulesResponse_SafetyRules, &v.SafetyRules)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSafetyRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSafetyRules{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSafetyRules, schemas.ListSafetyRulesRequest, schemas.ListSafetyRulesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSafetyRules{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSafetyRules, schemas.ListSafetyRulesRequest, schemas.ListSafetyRulesResponse), output: &ListSafetyRulesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSafetyRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSafetyRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSafetyRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +91,6 @@ func (c *Client) addOperationListSafetyRulesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,11 +191,3 @@ type ListSafetyRulesAPIClient interface {
 }
 
 var _ ListSafetyRulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSafetyRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSafetyRules",
-	}
-}

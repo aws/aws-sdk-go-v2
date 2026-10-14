@@ -198,6 +198,30 @@ type AppflowIntegrationWorkflowStep struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a segment associated with a membership event stream.
+type AssociatedSegment struct {
+
+	// An optional message providing context, such as a failure reason.
+	Message *string
+
+	// The unique name of the segment definition.
+	SegmentName *string
+
+	// The subscription status of the segment. The following are valid values:
+	//
+	//   - STARTING: The segment is being prepared to publish membership events.
+	//
+	//   - RUNNING: The segment is actively publishing membership events to the
+	//   stream.
+	//
+	//   - STOPPED: The segment has stopped publishing membership events.
+	//
+	//   - FAILED: The segment failed to publish membership events.
+	Status EventSubscriptionSegmentStatus
+
+	noSmithyDocumentSerde
+}
+
 // Mathematical expression and a list of attribute items specified in that
 // expression.
 type AttributeDetails struct {
@@ -225,7 +249,10 @@ type AttributeDimension struct {
 	// This member is required.
 	DimensionType AttributeDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -465,7 +492,10 @@ type CalculatedAttributeDimension struct {
 	// This member is required.
 	DimensionType AttributeDimensionType
 
-	// The values to apply the DimensionType with.
+	// The values to apply the DimensionType with. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -680,7 +710,10 @@ type DateDimension struct {
 	// This member is required.
 	DimensionType DateDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -750,6 +783,45 @@ type DimensionMemberProfileAttributes struct {
 }
 
 func (*DimensionMemberProfileAttributes) isDimension() {}
+
+// Defines a diversity constraint for a single item column, specifying a cap type
+// and a target value or placeholder that controls how many recommended items may
+// share the same column value.
+type DiversityColumn struct {
+
+	// The type of diversity cap to apply. Valid values are PERCENTAGE (interpret
+	// Target as a percentage of returned items) and VALUE (interpret Target as an
+	// absolute count).
+	//
+	// This member is required.
+	CapType DiversityCapType
+
+	// The name of the item catalog column on which to apply the diversity cap. The
+	// column must be defined in the recommender schema.
+	//
+	// This member is required.
+	Name *string
+
+	// The diversity cap target. Either an integer literal (for example, "25" ) or a
+	// placeholder expression of the form $name whose value is supplied at inference
+	// time through GetProfileRecommendations .
+	//
+	// This member is required.
+	Target *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that controls diversity of recommendation results by capping the
+// representation of specified item columns.
+type DiversityConfig struct {
+
+	// A list of up to two diversity columns. Each column defines a cap on the number
+	// or percentage of recommended items that share the same value for that column.
+	DiversityColumns []DiversityColumn
+
+	noSmithyDocumentSerde
+}
 
 // The standard domain object type.
 type DomainObjectTypeField struct {
@@ -1023,7 +1095,10 @@ type ExtraLengthValueProfileDimension struct {
 	// This member is required.
 	DimensionType StringDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -2168,7 +2243,10 @@ type ProfileDimension struct {
 	// This member is required.
 	DimensionType StringDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -2345,8 +2423,59 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+// Runtime diversity configuration for a GetProfileRecommendations request.
+type RecommendationDiversityConfig struct {
+
+	// Whether diversity-aware recommendations are enabled for this request.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// An optional map of placeholder name to integer cap value used to resolve $name
+	// placeholders defined in the recommender's DiversityConfig at inference time. Up
+	// to 2 entries are supported.
+	Values map[string]int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for metadata to include in recommendation responses.
+type RecommendationMetadata struct {
+
+	// A list of metadata column names from your Items dataset to include in the
+	// recommendation response.
+	Columns []string
+
+	noSmithyDocumentSerde
+}
+
+// The recommender used to generate the recommendations.
+type Recommender struct {
+
+	// The unique name of the recommender.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of filters to apply to the returned recommendations. Filters define
+	// criteria for including or excluding items from the recommendation results.
+	Filters []RecommenderFilter
+
+	// A list of promotional filters to apply to the recommendations. Promotional
+	// filters allow you to promote specific items within a configurable subset of
+	// recommendation results.
+	PromotionalFilters []RecommenderPromotionalFilter
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings that define the behavior and parameters of a recommender.
 type RecommenderConfig struct {
+
+	// Configuration for diversity-aware recommendations. When set, the recommender
+	// applies diversity constraints defined per item column to reduce
+	// over-concentration of similar items in the results.
+	DiversityConfig *DiversityConfig
 
 	// Configuration settings for how the recommender processes and uses events.
 	EventsConfig *EventsConfig
@@ -2564,6 +2693,9 @@ type RecommenderUpdate struct {
 	// update.
 	RecommenderConfig *RecommenderConfig
 
+	// The name of the recommender version associated with this update operation.
+	RecommenderVersionName *string
+
 	// The current status of the recommender update operation.
 	Status RecommenderStatus
 
@@ -2743,6 +2875,34 @@ type SalesforceSourceProperties struct {
 
 	// Indicates whether Amazon AppFlow includes deleted files in the flow run.
 	IncludeDeletedRecords bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for scheduled segment membership event notifications.
+type ScheduleConfiguration struct {
+
+	// The interval between scheduled executions.
+	//
+	// This member is required.
+	Interval *int32
+
+	// The unit for the interval. The following are valid values:
+	//
+	//   - HOURLY: The interval is measured in hours.
+	Unit ScheduleConfigurationUnit
+
+	noSmithyDocumentSerde
+}
+
+// Information about scheduled execution timestamps.
+type ScheduledExecutions struct {
+
+	// The timestamp of the last successful scheduled execution.
+	LastExecutedAt *time.Time
+
+	// The timestamp of the next scheduled execution.
+	NextExecutedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2941,6 +3101,34 @@ type SourceSegment struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single segment membership event.
+type SubscriptionEventItem struct {
+
+	// Whether the profile joined or left the segment. The following are valid values:
+	//
+	//   - JOINED: The profile joined the segment.
+	//
+	//   - LEFT: The profile left the segment.
+	Event SubscriptionEvent
+
+	// The type of event that triggered the membership change. The following are valid
+	// values:
+	//
+	//   - LIVE: Real-time event triggered by a profile or calculated attribute change
+	//   (Classic segments only).
+	//
+	//   - SCHEDULE: Event generated during a scheduled execution.
+	EventType SubscriptionEventType
+
+	// The unique identifier of a customer profile.
+	ProfileId *string
+
+	// The timestamp of when the membership change was detected.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A class for modeling different type of tasks. Task implementation varies based
 // on the TaskType.
 type Task struct {
@@ -2991,6 +3179,9 @@ type TrainingMetrics struct {
 
 	// A collection of performance metrics and statistics from the training process.
 	Metrics map[string]float64
+
+	// The name of the recommender version that produced these training metrics.
+	RecommenderVersionName *string
 
 	// The timestamp when these training metrics were recorded.
 	Time *time.Time

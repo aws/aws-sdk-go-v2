@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The presigned URL properties for the cluster's application user interface.
@@ -50,6 +49,30 @@ type GetPersistentAppUIPresignedURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersistentAppUIPresignedURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersistentAppUIPresignedURLInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersistentAppUIPresignedURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.AuthProxyCall != nil {
+		s.WriteBool(schemas.GetPersistentAppUIPresignedURLInput_AuthProxyCall, *v.AuthProxyCall)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+	if v.PersistentAppUIType != "" {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_PersistentAppUIType, string(v.PersistentAppUIType))
+	}
+}
+
 type GetPersistentAppUIPresignedURLOutput struct {
 
 	// The returned presigned URL.
@@ -64,77 +87,54 @@ type GetPersistentAppUIPresignedURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersistentAppUIPresignedURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersistentAppUIPresignedURLOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersistentAppUIPresignedURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PresignedURL != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL, *v.PresignedURL)
+	}
+	if v.PresignedURLReady != nil {
+		s.WriteBool(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady, *v.PresignedURLReady)
+	}
+}
+func (v *GetPersistentAppUIPresignedURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersistentAppUIPresignedURLOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL:
+			v.PresignedURL = new(string)
+			return d.ReadString(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL, v.PresignedURL)
+		case schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady:
+			v.PresignedURLReady = new(bool)
+			return d.ReadBool(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady, v.PresignedURLReady)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersistentAppUIPresignedURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersistentAppUIPresignedURL, schemas.GetPersistentAppUIPresignedURLInput, schemas.GetPersistentAppUIPresignedURLOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPersistentAppUIPresignedURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersistentAppUIPresignedURL, schemas.GetPersistentAppUIPresignedURLInput, schemas.GetPersistentAppUIPresignedURLOutput), output: &GetPersistentAppUIPresignedURLOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPersistentAppUIPresignedURL{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPersistentAppUIPresignedURL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPersistentAppUIPresignedURLValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPersistentAppUIPresignedURL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +149,8 @@ func (c *Client) addOperationGetPersistentAppUIPresignedURLMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPersistentAppUIPresignedURL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPersistentAppUIPresignedURL",
-	}
 }

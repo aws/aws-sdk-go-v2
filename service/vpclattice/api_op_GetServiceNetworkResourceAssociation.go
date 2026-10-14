@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type GetServiceNetworkResourceAssociationInput struct {
 	ServiceNetworkResourceAssociationIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceNetworkResourceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkResourceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkResourceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkResourceAssociationIdentifier != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationRequest_serviceNetworkResourceAssociationIdentifier, *v.ServiceNetworkResourceAssociationIdentifier)
+	}
 }
 
 type GetServiceNetworkResourceAssociationOutput struct {
@@ -76,7 +87,7 @@ type GetServiceNetworkResourceAssociationOutput struct {
 	// association.
 	PrivateDnsEnabled *bool
 
-	// The private DNS entry for the service.
+	// The private DNS entry for the service. This entry includes only the domain name.
 	PrivateDnsEntry *types.DnsEntry
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -111,77 +122,168 @@ type GetServiceNetworkResourceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceNetworkResourceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkResourceAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkResourceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkResourceAssociationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DnsEntry != nil {
+		s.WriteStruct(schemas.GetServiceNetworkResourceAssociationResponse_dnsEntry)
+		v.DnsEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainVerificationStatus != "" {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_domainVerificationStatus, string(v.DomainVerificationStatus))
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_failureReason, *v.FailureReason)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_id, *v.Id)
+	}
+	if v.IsManagedAssociation != nil {
+		s.WriteBool(schemas.GetServiceNetworkResourceAssociationResponse_isManagedAssociation, *v.IsManagedAssociation)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkResourceAssociationResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.GetServiceNetworkResourceAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	if v.PrivateDnsEntry != nil {
+		s.WriteStruct(schemas.GetServiceNetworkResourceAssociationResponse_privateDnsEntry)
+		v.PrivateDnsEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfigurationArn != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationArn, *v.ResourceConfigurationArn)
+	}
+	if v.ResourceConfigurationId != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationId, *v.ResourceConfigurationId)
+	}
+	if v.ResourceConfigurationName != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationName, *v.ResourceConfigurationName)
+	}
+	if v.ServiceNetworkArn != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkArn, *v.ServiceNetworkArn)
+	}
+	if v.ServiceNetworkId != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkId, *v.ServiceNetworkId)
+	}
+	if v.ServiceNetworkName != nil {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkName, *v.ServiceNetworkName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceNetworkResourceAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *GetServiceNetworkResourceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkResourceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkResourceAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_arn, v.Arn)
+		case schemas.GetServiceNetworkResourceAssociationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkResourceAssociationResponse_createdAt, v.CreatedAt)
+		case schemas.GetServiceNetworkResourceAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.GetServiceNetworkResourceAssociationResponse_dnsEntry:
+			v.DnsEntry = &types.DnsEntry{}
+			return v.DnsEntry.Deserialize(d)
+		case schemas.GetServiceNetworkResourceAssociationResponse_domainVerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_domainVerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainVerificationStatus = types.VerificationStatus(ev)
+			return nil
+		case schemas.GetServiceNetworkResourceAssociationResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_failureCode, v.FailureCode)
+		case schemas.GetServiceNetworkResourceAssociationResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_failureReason, v.FailureReason)
+		case schemas.GetServiceNetworkResourceAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_id, v.Id)
+		case schemas.GetServiceNetworkResourceAssociationResponse_isManagedAssociation:
+			v.IsManagedAssociation = new(bool)
+			return d.ReadBool(schemas.GetServiceNetworkResourceAssociationResponse_isManagedAssociation, v.IsManagedAssociation)
+		case schemas.GetServiceNetworkResourceAssociationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkResourceAssociationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetServiceNetworkResourceAssociationResponse_privateDnsEnabled:
+			v.PrivateDnsEnabled = new(bool)
+			return d.ReadBool(schemas.GetServiceNetworkResourceAssociationResponse_privateDnsEnabled, v.PrivateDnsEnabled)
+		case schemas.GetServiceNetworkResourceAssociationResponse_privateDnsEntry:
+			v.PrivateDnsEntry = &types.DnsEntry{}
+			return v.PrivateDnsEntry.Deserialize(d)
+		case schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationArn:
+			v.ResourceConfigurationArn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationArn, v.ResourceConfigurationArn)
+		case schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationId:
+			v.ResourceConfigurationId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationId, v.ResourceConfigurationId)
+		case schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationName:
+			v.ResourceConfigurationName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_resourceConfigurationName, v.ResourceConfigurationName)
+		case schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkArn:
+			v.ServiceNetworkArn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkArn, v.ServiceNetworkArn)
+		case schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkId:
+			v.ServiceNetworkId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkId, v.ServiceNetworkId)
+		case schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkName:
+			v.ServiceNetworkName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_serviceNetworkName, v.ServiceNetworkName)
+		case schemas.GetServiceNetworkResourceAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceNetworkResourceAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkResourceAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceNetworkResourceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkResourceAssociation, schemas.GetServiceNetworkResourceAssociationRequest, schemas.GetServiceNetworkResourceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceNetworkResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkResourceAssociation, schemas.GetServiceNetworkResourceAssociationRequest, schemas.GetServiceNetworkResourceAssociationResponse), output: &GetServiceNetworkResourceAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceNetworkResourceAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceNetworkResourceAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetServiceNetworkResourceAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceNetworkResourceAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +298,8 @@ func (c *Client) addOperationGetServiceNetworkResourceAssociationMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServiceNetworkResourceAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServiceNetworkResourceAssociation",
-	}
 }

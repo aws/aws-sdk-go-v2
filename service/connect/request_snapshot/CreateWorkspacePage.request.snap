@@ -1,0 +1,5 @@
+PUT /workspaces/__InstanceId__/__WorkspaceId__/pages
+
+Content-Type: application/json
+
+{"InputData":"__InputData__","Page":"__Page__","ResourceArn":"__ResourceArn__","Slug":"__Slug__"}

@@ -1,0 +1,3 @@
+GET /event-rules?maxResults=1&nextToken=__NextToken__&notificationConfigurationArn=__NotificationConfigurationArn__
+
+

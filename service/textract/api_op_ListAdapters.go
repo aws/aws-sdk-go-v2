@@ -5,10 +5,10 @@ package textract
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +47,27 @@ type ListAdaptersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdaptersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdaptersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdaptersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterCreationTime != nil {
+		s.WriteTime(schemas.ListAdaptersRequest_AfterCreationTime, *v.AfterCreationTime)
+	}
+	if v.BeforeCreationTime != nil {
+		s.WriteTime(schemas.ListAdaptersRequest_BeforeCreationTime, *v.BeforeCreationTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdaptersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdaptersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdaptersOutput struct {
 
 	// A list of adapters that matches the filtering criteria specified when calling
@@ -62,74 +83,48 @@ type ListAdaptersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdaptersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdaptersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdaptersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdapterList(s, schemas.ListAdaptersResponse_Adapters, v.Adapters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdaptersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdaptersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdaptersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdaptersResponse_Adapters:
+			return deserializeAdapterList(d, schemas.ListAdaptersResponse_Adapters, &v.Adapters)
+		case schemas.ListAdaptersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdaptersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdaptersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapters, schemas.ListAdaptersRequest, schemas.ListAdaptersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdapters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapters, schemas.ListAdaptersRequest, schemas.ListAdaptersResponse), output: &ListAdaptersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdapters{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAdapters"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdapters(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +137,6 @@ func (c *Client) addOperationListAdaptersMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +236,3 @@ type ListAdaptersAPIClient interface {
 }
 
 var _ ListAdaptersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAdapters(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAdapters",
-	}
-}

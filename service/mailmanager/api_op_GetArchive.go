@@ -4,13 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -102,6 +99,36 @@ type GetArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveArn != nil {
+		s.WriteString(schemas.GetArchiveResponse_ArchiveArn, *v.ArchiveArn)
+	}
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.GetArchiveResponse_ArchiveId, *v.ArchiveId)
+	}
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.GetArchiveResponse_ArchiveName, *v.ArchiveName)
+	}
+	if v.ArchiveState != "" {
+		s.WriteString(schemas.GetArchiveResponse_ArchiveState, string(v.ArchiveState))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetArchiveResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetArchiveResponse_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetArchiveResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	serializeArchiveRetention(s, schemas.GetArchiveResponse_Retention, v.Retention)
+}
 func (v *GetArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetArchiveResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -137,74 +164,29 @@ func (v *GetArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchive, schemas.GetArchiveRequest, schemas.GetArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchive, schemas.GetArchiveRequest, schemas.GetArchiveResponse), output: &GetArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchive"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetArchiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetArchive(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -219,22 +201,8 @@ func (c *Client) addOperationGetArchiveMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetArchive(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetArchive",
-	}
 }

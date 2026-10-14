@@ -1,0 +1,5 @@
+POST /violations/verification-state/__ViolationId__
+
+Content-Type: application/json
+
+{"verificationState":"FALSE_POSITIVE","verificationStateDescription":"__VerificationStateDescription__"}

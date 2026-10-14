@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the user's multi-factor authentication (MFA) preference, including which
@@ -91,6 +90,41 @@ type AdminSetUserMFAPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserMFAPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserMFAPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_EmailMfaSettings)
+		v.EmailMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_SMSMfaSettings)
+		v.SMSMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareTokenMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_SoftwareTokenMfaSettings)
+		v.SoftwareTokenMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminSetUserMFAPreferenceRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminSetUserMFAPreferenceRequest_Username, *v.Username)
+	}
+	if v.WebAuthnMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_WebAuthnMfaSettings)
+		v.WebAuthnMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AdminSetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -98,77 +132,42 @@ type AdminSetUserMFAPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserMFAPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserMFAPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserMFAPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminSetUserMFAPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminSetUserMFAPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserMFAPreference, schemas.AdminSetUserMFAPreferenceRequest, schemas.AdminSetUserMFAPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserMFAPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserMFAPreference, schemas.AdminSetUserMFAPreferenceRequest, schemas.AdminSetUserMFAPreferenceResponse), output: &AdminSetUserMFAPreferenceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminSetUserMFAPreference{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AdminSetUserMFAPreference"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAdminSetUserMFAPreferenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminSetUserMFAPreference(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +182,8 @@ func (c *Client) addOperationAdminSetUserMFAPreferenceMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAdminSetUserMFAPreference(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AdminSetUserMFAPreference",
-	}
 }

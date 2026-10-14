@@ -5,9 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables the Amazon Inspector delegated administrator for your Organizations
@@ -41,6 +41,34 @@ type EnableDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDelegatedAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDelegatedAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDelegatedAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.EnableDelegatedAdminAccountRequest_clientToken, *v.ClientToken)
+	}
+	if v.DelegatedAdminAccountId != nil {
+		s.WriteString(schemas.EnableDelegatedAdminAccountRequest_delegatedAdminAccountId, *v.DelegatedAdminAccountId)
+	}
+}
+func (v *EnableDelegatedAdminAccountInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableDelegatedAdminAccountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableDelegatedAdminAccountRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.EnableDelegatedAdminAccountRequest_clientToken, v.ClientToken)
+		case schemas.EnableDelegatedAdminAccountRequest_delegatedAdminAccountId:
+			v.DelegatedAdminAccountId = new(string)
+			return d.ReadString(schemas.EnableDelegatedAdminAccountRequest_delegatedAdminAccountId, v.DelegatedAdminAccountId)
+		}
+		return nil
+	})
+}
+
 type EnableDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the successfully Amazon Inspector
@@ -55,65 +83,42 @@ type EnableDelegatedAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDelegatedAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDelegatedAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDelegatedAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegatedAdminAccountId != nil {
+		s.WriteString(schemas.EnableDelegatedAdminAccountResponse_delegatedAdminAccountId, *v.DelegatedAdminAccountId)
+	}
+}
+func (v *EnableDelegatedAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableDelegatedAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableDelegatedAdminAccountResponse_delegatedAdminAccountId:
+			v.DelegatedAdminAccountId = new(string)
+			return d.ReadString(schemas.EnableDelegatedAdminAccountResponse_delegatedAdminAccountId, v.DelegatedAdminAccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableDelegatedAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDelegatedAdminAccount, schemas.EnableDelegatedAdminAccountRequest, schemas.EnableDelegatedAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDelegatedAdminAccount, schemas.EnableDelegatedAdminAccountRequest, schemas.EnableDelegatedAdminAccountResponse), output: &EnableDelegatedAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableDelegatedAdminAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -123,12 +128,6 @@ func (c *Client) addOperationEnableDelegatedAdminAccountMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpEnableDelegatedAdminAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableDelegatedAdminAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +140,6 @@ func (c *Client) addOperationEnableDelegatedAdminAccountMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -186,12 +179,4 @@ func (m *idempotencyToken_initializeOpEnableDelegatedAdminAccount) HandleInitial
 }
 func addIdempotencyToken_opEnableDelegatedAdminAccountMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpEnableDelegatedAdminAccount{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opEnableDelegatedAdminAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableDelegatedAdminAccount",
-	}
 }

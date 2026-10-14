@@ -1,0 +1,5 @@
+PUT /sol/nsd/v1/ns_descriptors/__NsdInfoId__/nsd_content/validate
+
+Content-Type: application/zip
+
+blob

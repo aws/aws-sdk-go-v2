@@ -5,10 +5,10 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to request changes for your entities. Within a single ChangeSet , you
@@ -84,6 +84,29 @@ type StartChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartChangeSetRequest_Catalog, *v.Catalog)
+	}
+	serializeRequestedChangeList(s, schemas.StartChangeSetRequest_ChangeSet, v.ChangeSet)
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.StartChangeSetRequest_ChangeSetName, *v.ChangeSetName)
+	}
+	serializeTagList(s, schemas.StartChangeSetRequest_ChangeSetTags, v.ChangeSetTags)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartChangeSetRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Intent != "" {
+		s.WriteString(schemas.StartChangeSetRequest_Intent, string(v.Intent))
+	}
+}
+
 type StartChangeSetOutput struct {
 
 	// The ARN associated to the unique identifier generated for the request.
@@ -98,65 +121,48 @@ type StartChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.StartChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.StartChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+}
+func (v *StartChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChangeSetResponse_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.StartChangeSetResponse_ChangeSetArn, v.ChangeSetArn)
+		case schemas.StartChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.StartChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChangeSet, schemas.StartChangeSetRequest, schemas.StartChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChangeSet, schemas.StartChangeSetRequest, schemas.StartChangeSetResponse), output: &StartChangeSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartChangeSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartChangeSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +172,6 @@ func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpStartChangeSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartChangeSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +184,6 @@ func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +223,4 @@ func (m *idempotencyToken_initializeOpStartChangeSet) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opStartChangeSetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartChangeSet{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartChangeSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartChangeSet",
-	}
 }

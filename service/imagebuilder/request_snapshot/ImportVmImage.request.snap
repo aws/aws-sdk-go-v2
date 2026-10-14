@@ -1,0 +1,5 @@
+PUT /ImportVmImage
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","loggingConfiguration":{"logGroupName":"__LogGroupName__"},"name":"__Name__","osVersion":"__OsVersion__","platform":"Windows","semanticVersion":"__SemanticVersion__","tags":{"key0":"__Value__"},"vmImportTaskId":"__VmImportTaskId__"}

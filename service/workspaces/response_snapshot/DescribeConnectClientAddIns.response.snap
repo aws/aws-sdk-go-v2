@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeConnectClientAddIns
+
+{"AddIns":[{"AddInId":"__AddInId__","Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"},{"AddInId":"__AddInId__","Name":"__Name__","ResourceId":"__ResourceId__","URL":"__URL__"}],"NextToken":"__NextToken__"}

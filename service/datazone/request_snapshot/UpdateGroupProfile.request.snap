@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/group-profiles/__GroupIdentifier__
+
+Content-Type: application/json
+
+{"status":"ASSIGNED"}

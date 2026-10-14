@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreateConstraint
+
+{"AcceptLanguage":"__AcceptLanguage__","Description":"__Description__","IdempotencyToken":"__IdempotencyToken__","Parameters":"__Parameters__","PortfolioId":"__PortfolioId__","ProductId":"__ProductId__","Type":"__Type__"}

@@ -1,0 +1,7 @@
+POST /service/CodeConnections_20231201/operation/DeleteConnection
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿mConnectionArnq__ConnectionArn__ÿ

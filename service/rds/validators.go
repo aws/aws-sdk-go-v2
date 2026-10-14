@@ -3858,6 +3858,38 @@ func validateAdditionalStorageVolumesList(v []types.AdditionalStorageVolume) err
 	}
 }
 
+func validateDBClusterAssociatedRole(v *types.DBClusterAssociatedRole) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DBClusterAssociatedRole"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDBClusterAssociatedRoles(v []types.DBClusterAssociatedRole) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DBClusterAssociatedRoles"}
+	for i := range v {
+		if err := validateDBClusterAssociatedRole(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilter(v *types.Filter) error {
 	if v == nil {
 		return nil
@@ -3982,6 +4014,38 @@ func validateRecommendedActionUpdateList(v []types.RecommendedActionUpdate) erro
 	invalidParams := smithy.InvalidParamsError{Context: "RecommendedActionUpdateList"}
 	for i := range v {
 		if err := validateRecommendedActionUpdate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetResourceConfiguration(v *types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfiguration"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetResourceConfigurationList(v []types.TargetResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetResourceConfigurationList"}
+	for i := range v {
+		if err := validateTargetResourceConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4246,6 +4310,11 @@ func validateOpCreateBlueGreenDeploymentInput(v *CreateBlueGreenDeploymentInput)
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
+	if v.TargetResourceConfigurations != nil {
+		if err := validateTargetResourceConfigurationList(v.TargetResourceConfigurations); err != nil {
+			invalidParams.AddNested("TargetResourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4302,6 +4371,11 @@ func validateOpCreateDBClusterInput(v *CreateDBClusterInput) error {
 	}
 	if v.Engine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.AssociatedRoles != nil {
+		if err := validateDBClusterAssociatedRoles(v.AssociatedRoles); err != nil {
+			invalidParams.AddNested("AssociatedRoles", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6457,6 +6531,11 @@ func validateOpRestoreDBClusterFromS3Input(v *RestoreDBClusterFromS3Input) error
 	if v.S3IngestionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3IngestionRoleArn"))
 	}
+	if v.AssociatedRoles != nil {
+		if err := validateDBClusterAssociatedRoles(v.AssociatedRoles); err != nil {
+			invalidParams.AddNested("AssociatedRoles", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6478,6 +6557,11 @@ func validateOpRestoreDBClusterFromSnapshotInput(v *RestoreDBClusterFromSnapshot
 	if v.Engine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
+	if v.AssociatedRoles != nil {
+		if err := validateDBClusterAssociatedRoles(v.AssociatedRoles); err != nil {
+			invalidParams.AddNested("AssociatedRoles", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6492,6 +6576,11 @@ func validateOpRestoreDBClusterToPointInTimeInput(v *RestoreDBClusterToPointInTi
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreDBClusterToPointInTimeInput"}
 	if v.DBClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if v.AssociatedRoles != nil {
+		if err := validateDBClusterAssociatedRoles(v.AssociatedRoles); err != nil {
+			invalidParams.AddNested("AssociatedRoles", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

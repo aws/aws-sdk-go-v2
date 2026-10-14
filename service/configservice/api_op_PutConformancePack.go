@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a conformance pack. A conformance pack is a collection of
@@ -114,6 +113,37 @@ type PutConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConformancePackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConformancePackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConformancePackInputParameters(s, schemas.PutConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.ConformancePackName != nil {
+		s.WriteString(schemas.PutConformancePackRequest_ConformancePackName, *v.ConformancePackName)
+	}
+	if v.DeliveryS3Bucket != nil {
+		s.WriteString(schemas.PutConformancePackRequest_DeliveryS3Bucket, *v.DeliveryS3Bucket)
+	}
+	if v.DeliveryS3KeyPrefix != nil {
+		s.WriteString(schemas.PutConformancePackRequest_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
+	}
+	serializeTagsList(s, schemas.PutConformancePackRequest_Tags, v.Tags)
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.PutConformancePackRequest_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateS3Uri != nil {
+		s.WriteString(schemas.PutConformancePackRequest_TemplateS3Uri, *v.TemplateS3Uri)
+	}
+	if v.TemplateSSMDocumentDetails != nil {
+		s.WriteStruct(schemas.PutConformancePackRequest_TemplateSSMDocumentDetails)
+		v.TemplateSSMDocumentDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutConformancePackOutput struct {
 
 	// ARN of the conformance pack.
@@ -125,77 +155,48 @@ type PutConformancePackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConformancePackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConformancePackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConformancePackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConformancePackArn != nil {
+		s.WriteString(schemas.PutConformancePackResponse_ConformancePackArn, *v.ConformancePackArn)
+	}
+}
+func (v *PutConformancePackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConformancePackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutConformancePackResponse_ConformancePackArn:
+			v.ConformancePackArn = new(string)
+			return d.ReadString(schemas.PutConformancePackResponse_ConformancePackArn, v.ConformancePackArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConformancePack, schemas.PutConformancePackRequest, schemas.PutConformancePackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConformancePack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConformancePack, schemas.PutConformancePackRequest, schemas.PutConformancePackResponse), output: &PutConformancePackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutConformancePack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutConformancePack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutConformancePackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutConformancePack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +211,8 @@ func (c *Client) addOperationPutConformancePackMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutConformancePack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutConformancePack",
-	}
 }

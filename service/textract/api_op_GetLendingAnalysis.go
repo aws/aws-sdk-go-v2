@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
@@ -60,6 +59,24 @@ type GetLendingAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLendingAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLendingAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLendingAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetLendingAnalysisRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLendingAnalysisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLendingAnalysisRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetLendingAnalysisOutput struct {
 
 	//  The current model version of the Analyze Lending API.
@@ -93,77 +110,84 @@ type GetLendingAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLendingAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLendingAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLendingAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeLendingModelVersion != nil {
+		s.WriteString(schemas.GetLendingAnalysisResponse_AnalyzeLendingModelVersion, *v.AnalyzeLendingModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetLendingAnalysisResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetLendingAnalysisResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLendingAnalysisResponse_NextToken, *v.NextToken)
+	}
+	serializeLendingResultList(s, schemas.GetLendingAnalysisResponse_Results, v.Results)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetLendingAnalysisResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeWarnings(s, schemas.GetLendingAnalysisResponse_Warnings, v.Warnings)
+}
+func (v *GetLendingAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLendingAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLendingAnalysisResponse_AnalyzeLendingModelVersion:
+			v.AnalyzeLendingModelVersion = new(string)
+			return d.ReadString(schemas.GetLendingAnalysisResponse_AnalyzeLendingModelVersion, v.AnalyzeLendingModelVersion)
+		case schemas.GetLendingAnalysisResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetLendingAnalysisResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetLendingAnalysisResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetLendingAnalysisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLendingAnalysisResponse_NextToken, v.NextToken)
+		case schemas.GetLendingAnalysisResponse_Results:
+			return deserializeLendingResultList(d, schemas.GetLendingAnalysisResponse_Results, &v.Results)
+		case schemas.GetLendingAnalysisResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetLendingAnalysisResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetLendingAnalysisResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetLendingAnalysisResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLendingAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLendingAnalysis, schemas.GetLendingAnalysisRequest, schemas.GetLendingAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLendingAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLendingAnalysis, schemas.GetLendingAnalysisRequest, schemas.GetLendingAnalysisResponse), output: &GetLendingAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLendingAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLendingAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLendingAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLendingAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +202,8 @@ func (c *Client) addOperationGetLendingAnalysisMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLendingAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLendingAnalysis",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.ListRules
+
+{"NextToken":"__NextToken__","Rules":[{"Arn":"__Arn__","Description":"__Description__","EventBusName":"__EventBusName__","EventPattern":"__EventPattern__","ManagedBy":"__ManagedBy__","Name":"__Name__","RoleArn":"__RoleArn__","ScheduleExpression":"__ScheduleExpression__","State":"ENABLED"},{"Arn":"__Arn__","Description":"__Description__","EventBusName":"__EventBusName__","EventPattern":"__EventPattern__","ManagedBy":"__ManagedBy__","Name":"__Name__","RoleArn":"__RoleArn__","ScheduleExpression":"__ScheduleExpression__","State":"ENABLED"}]}

@@ -37,6 +37,17 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_message, *v.Message)
+	}
+}
 func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
 		switch s {
@@ -73,6 +84,17 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPaginationToken) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPaginationToken)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPaginationToken) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPaginationToken_message, *v.Message)
+	}
+}
 func (v *InvalidPaginationToken) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidPaginationToken, func(s *smithy.Schema) error {
 		switch s {
@@ -109,6 +131,17 @@ func (e *UnsupportedLocale) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedLocale) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedLocale)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedLocale) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedLocale_message, *v.Message)
+	}
+}
 func (v *UnsupportedLocale) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnsupportedLocale, func(s *smithy.Schema) error {
 		switch s {

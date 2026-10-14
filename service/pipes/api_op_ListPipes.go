@@ -5,10 +5,10 @@ package pipes
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the pipes associated with this account. For more information about pipes,
@@ -62,6 +62,36 @@ type ListPipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentState != "" {
+		s.WriteString(schemas.ListPipesRequest_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.ListPipesRequest_DesiredState, string(v.DesiredState))
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListPipesRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourcePrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_SourcePrefix, *v.SourcePrefix)
+	}
+	if v.TargetPrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_TargetPrefix, *v.TargetPrefix)
+	}
+}
+
 type ListPipesOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -80,74 +110,48 @@ type ListPipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipesResponse_NextToken, *v.NextToken)
+	}
+	serializePipeList(s, schemas.ListPipesResponse_Pipes, v.Pipes)
+}
+func (v *ListPipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipesResponse_NextToken, v.NextToken)
+		case schemas.ListPipesResponse_Pipes:
+			return deserializePipeList(d, schemas.ListPipesResponse_Pipes, &v.Pipes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipes, schemas.ListPipesRequest, schemas.ListPipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipes, schemas.ListPipesRequest, schemas.ListPipesResponse), output: &ListPipesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPipes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPipes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPipes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +164,6 @@ func (c *Client) addOperationListPipesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +263,3 @@ type ListPipesAPIClient interface {
 }
 
 var _ ListPipesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPipes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPipes",
-	}
-}

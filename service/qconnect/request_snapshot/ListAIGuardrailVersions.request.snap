@@ -1,0 +1,3 @@
+GET /assistants/__AssistantId__/aiguardrails/__AiGuardrailId__/versions?maxResults=1&nextToken=__NextToken__
+
+

@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists registry records within a registry. You can optionally filter results
@@ -65,33 +61,6 @@ type ListRegistryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRegistryRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRegistryRecordsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRegistryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DescriptorType != "" {
-		s.WriteString(schemas.ListRegistryRecordsRequest_descriptorType, string(v.DescriptorType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRegistryRecordsRequest_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListRegistryRecordsRequest_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRegistryRecordsRequest_nextToken, *v.NextToken)
-	}
-	if v.RegistryId != nil {
-		s.WriteString(schemas.ListRegistryRecordsRequest_registryId, *v.RegistryId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListRegistryRecordsRequest_status, string(v.Status))
-	}
-}
-
 type ListRegistryRecordsOutput struct {
 
 	// The list of registry record summaries. For details about the fields in each
@@ -111,87 +80,29 @@ type ListRegistryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRegistryRecordsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRegistryRecordsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRegistryRecordsResponse_nextToken, v.NextToken)
-		case schemas.ListRegistryRecordsResponse_registryRecords:
-			return deserializeRegistryRecordSummaryList(d, schemas.ListRegistryRecordsResponse_registryRecords, &v.RegistryRecords)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRegistryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRegistryRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistryRecords, schemas.ListRegistryRecordsRequest, schemas.ListRegistryRecordsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRegistryRecords{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistryRecords, schemas.ListRegistryRecordsRequest, schemas.ListRegistryRecordsResponse), output: &ListRegistryRecordsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRegistryRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRegistryRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRegistryRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +115,6 @@ func (c *Client) addOperationListRegistryRecordsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -314,11 +219,3 @@ type ListRegistryRecordsAPIClient interface {
 }
 
 var _ ListRegistryRecordsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRegistryRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRegistryRecords",
-	}
-}

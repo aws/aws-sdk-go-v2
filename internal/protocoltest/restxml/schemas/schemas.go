@@ -473,7 +473,9 @@ var RestXml = smithy.NewServiceSchema(_RestXml, "2019-12-16")
 var ComplexError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restxml",
 	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 403})
 var ComplexError_Header *smithy.Schema
 
 var ComplexError_TopLevel *smithy.Schema
@@ -513,7 +515,9 @@ var _FooPrefixHeaders_value *smithy.Schema
 var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.protocoltests.restxml",
 	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+
+	&smithytraits.HTTPError{Code: 400})
 var InvalidGreeting_Message *smithy.Schema
 
 var _ListWithMemberNamespace = smithy.NewSchema(smithy.ShapeID{
@@ -1794,11 +1798,11 @@ func init() {
 
 	_FlattenedXmlMapWithXmlNameInputOutputMap_value = _FlattenedXmlMapWithXmlNameInputOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-key.example.com"},
-		&smithytraits.XMLName{Name: "K"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"},
+		&smithytraits.XMLNamespace{URI: "https://the-key.example.com"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-value.example.com"},
-		&smithytraits.XMLName{Name: "V"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"},
+		&smithytraits.XMLNamespace{URI: "https://the-value.example.com"})
 
 	_FooPrefixHeaders_key = _FooPrefixHeaders.AddMember("key", smithyprelude.String)
 
@@ -1900,11 +1904,11 @@ func init() {
 
 	_XmlMapsXmlNameInputOutputMap_value = _XmlMapsXmlNameInputOutputMap.AddMember("value", GreetingStruct, &smithytraits.XMLName{Name: "Setting"})
 
-	_XmlMapWithXmlNamespaceInputOutputMap_key = _XmlMapWithXmlNamespaceInputOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-key.example.com"},
-		&smithytraits.XMLName{Name: "K"})
+	_XmlMapWithXmlNamespaceInputOutputMap_key = _XmlMapWithXmlNamespaceInputOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"},
+		&smithytraits.XMLNamespace{URI: "https://the-key.example.com"})
 
-	_XmlMapWithXmlNamespaceInputOutputMap_value = _XmlMapWithXmlNamespaceInputOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-value.example.com"},
-		&smithytraits.XMLName{Name: "V"})
+	_XmlMapWithXmlNamespaceInputOutputMap_value = _XmlMapWithXmlNamespaceInputOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"},
+		&smithytraits.XMLNamespace{URI: "https://the-value.example.com"})
 
 	_XmlNamespacedList_member = _XmlNamespacedList.AddMember("member", smithyprelude.String, &smithytraits.XMLNamespace{URI: "http://bux.com"})
 
@@ -2046,7 +2050,6 @@ func init() {
 	DatetimeOffsetsOutput_datetime = DatetimeOffsetsOutput.AddMember("datetime", _DateTime)
 
 	HostLabelHeaderInput_accountId = HostLabelHeaderInput.AddMember("accountId", smithyprelude.String, &smithytraits.HostLabel{},
-
 		&smithytraits.HTTPHeader{Name: "X-Amz-Account-Id"})
 
 	EndpointWithHostLabelOperationRequest_label = EndpointWithHostLabelOperationRequest.AddMember("label", smithyprelude.String, &smithytraits.HostLabel{})
@@ -2087,8 +2090,8 @@ func init() {
 
 	HttpPayloadTraitsWithMediaTypeInputOutput_blob = HttpPayloadTraitsWithMediaTypeInputOutput.AddMember("blob", _TextPlainBlob, &smithytraits.HTTPPayload{})
 
-	HttpPayloadWithMemberXmlNameInputOutput_nested = HttpPayloadWithMemberXmlNameInputOutput.AddMember("nested", PayloadWithXmlName, &smithytraits.HTTPPayload{},
-		&smithytraits.XMLName{Name: "Hola"})
+	HttpPayloadWithMemberXmlNameInputOutput_nested = HttpPayloadWithMemberXmlNameInputOutput.AddMember("nested", PayloadWithXmlName, &smithytraits.XMLName{Name: "Hola"},
+		&smithytraits.HTTPPayload{})
 
 	HttpPayloadWithStructureInputOutput_nested = HttpPayloadWithStructureInputOutput.AddMember("nested", NestedPayload, &smithytraits.HTTPPayload{})
 
@@ -2497,11 +2500,11 @@ func init() {
 
 	XmlMapsXmlNameResponse_myMap = XmlMapsXmlNameResponse.AddMember("myMap", _XmlMapsXmlNameInputOutputMap)
 
-	XmlMapWithXmlNamespaceRequest_myMap = XmlMapWithXmlNamespaceRequest.AddMember("myMap", _XmlMapWithXmlNamespaceInputOutputMap, &smithytraits.XMLNamespace{URI: "https://the-member.example.com"},
-		&smithytraits.XMLName{Name: "KVP"})
+	XmlMapWithXmlNamespaceRequest_myMap = XmlMapWithXmlNamespaceRequest.AddMember("myMap", _XmlMapWithXmlNamespaceInputOutputMap, &smithytraits.XMLName{Name: "KVP"},
+		&smithytraits.XMLNamespace{URI: "https://the-member.example.com"})
 
-	XmlMapWithXmlNamespaceResponse_myMap = XmlMapWithXmlNamespaceResponse.AddMember("myMap", _XmlMapWithXmlNamespaceInputOutputMap, &smithytraits.XMLNamespace{URI: "https://the-member.example.com"},
-		&smithytraits.XMLName{Name: "KVP"})
+	XmlMapWithXmlNamespaceResponse_myMap = XmlMapWithXmlNamespaceResponse.AddMember("myMap", _XmlMapWithXmlNamespaceInputOutputMap, &smithytraits.XMLName{Name: "KVP"},
+		&smithytraits.XMLNamespace{URI: "https://the-member.example.com"})
 
 	XmlNamespacesRequest_nested = XmlNamespacesRequest.AddMember("nested", XmlNamespaceNested)
 

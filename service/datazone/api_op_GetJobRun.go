@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +38,6 @@ type GetJobRunInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetJobRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetJobRunInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetJobRunInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetJobRunInput_identifier, *v.Identifier)
-	}
 }
 
 type GetJobRunOutput struct {
@@ -104,129 +84,29 @@ type GetJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetJobRunOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetJobRunOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetJobRunOutput_createdAt, v.CreatedAt)
-		case schemas.GetJobRunOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetJobRunOutput_createdBy, v.CreatedBy)
-		case schemas.GetJobRunOutput_details:
-			return deserializeJobRunDetails(d, schemas.GetJobRunOutput_details, &v.Details)
-		case schemas.GetJobRunOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetJobRunOutput_domainId, v.DomainId)
-		case schemas.GetJobRunOutput_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.GetJobRunOutput_endTime, v.EndTime)
-		case schemas.GetJobRunOutput_error:
-			v.Error = &types.JobRunError{}
-			return v.Error.Deserialize(d)
-		case schemas.GetJobRunOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetJobRunOutput_id, v.Id)
-		case schemas.GetJobRunOutput_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.GetJobRunOutput_jobId, v.JobId)
-		case schemas.GetJobRunOutput_jobType:
-			var ev string
-			if err := d.ReadString(schemas.GetJobRunOutput_jobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = types.JobType(ev)
-			return nil
-		case schemas.GetJobRunOutput_runMode:
-			var ev string
-			if err := d.ReadString(schemas.GetJobRunOutput_runMode, &ev); err != nil {
-				return err
-			}
-			v.RunMode = types.JobRunMode(ev)
-			return nil
-		case schemas.GetJobRunOutput_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.GetJobRunOutput_startTime, v.StartTime)
-		case schemas.GetJobRunOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetJobRunOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.JobRunStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRun, schemas.GetJobRunInput, schemas.GetJobRunOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJobRun{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobRun, schemas.GetJobRunInput, schemas.GetJobRunOutput), output: &GetJobRunOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJobRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetJobRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -241,22 +121,8 @@ func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetJobRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetJobRun",
-	}
 }

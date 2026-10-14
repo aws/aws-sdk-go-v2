@@ -4,11 +4,10 @@ package frauddetector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a model version. Updating a model version retrains an existing model
@@ -62,6 +61,35 @@ type UpdateModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalEventsDetail != nil {
+		s.WriteStruct(schemas.UpdateModelVersionRequest_externalEventsDetail)
+		v.ExternalEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestedEventsDetail != nil {
+		s.WriteStruct(schemas.UpdateModelVersionRequest_ingestedEventsDetail)
+		v.IngestedEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MajorVersionNumber != nil {
+		s.WriteString(schemas.UpdateModelVersionRequest_majorVersionNumber, *v.MajorVersionNumber)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelVersionRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.UpdateModelVersionRequest_modelType, string(v.ModelType))
+	}
+	serializetagList(s, schemas.UpdateModelVersionRequest_tags, v.Tags)
+}
+
 type UpdateModelVersionOutput struct {
 
 	// The model ID.
@@ -82,77 +110,70 @@ type UpdateModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.UpdateModelVersionResult_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_modelVersionNumber, *v.ModelVersionNumber)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_status, *v.Status)
+	}
+}
+func (v *UpdateModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelVersionResult_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_modelId, v.ModelId)
+		case schemas.UpdateModelVersionResult_modelType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateModelVersionResult_modelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = types.ModelTypeEnum(ev)
+			return nil
+		case schemas.UpdateModelVersionResult_modelVersionNumber:
+			v.ModelVersionNumber = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_modelVersionNumber, v.ModelVersionNumber)
+		case schemas.UpdateModelVersionResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelVersion, schemas.UpdateModelVersionRequest, schemas.UpdateModelVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelVersion, schemas.UpdateModelVersionRequest, schemas.UpdateModelVersionResult), output: &UpdateModelVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateModelVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateModelVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateModelVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +188,8 @@ func (c *Client) addOperationUpdateModelVersionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateModelVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateModelVersion",
-	}
 }

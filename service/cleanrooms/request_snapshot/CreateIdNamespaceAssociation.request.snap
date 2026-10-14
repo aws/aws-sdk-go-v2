@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/idnamespaceassociations
+
+Content-Type: application/json
+
+{"description":"__Description__","idMappingConfig":{"allowUseAsDimensionColumn":true},"inputReferenceConfig":{"inputReferenceArn":"__InputReferenceArn__","manageResourcePolicies":true},"name":"__Name__","tags":{"key0":"__Value__"}}

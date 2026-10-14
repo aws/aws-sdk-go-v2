@@ -4,18 +4,13 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the SchemaMapping with a given name. This operation will succeed even
-// if a schema with the given name does not exist. This operation will fail if
-// there is a MatchingWorkflow object that references the SchemaMapping in the
-// workflow's InputSourceConfig .
+// Deletes the SchemaMapping with a given name. This operation returns a
+// ResourceNotFoundException if a schema with the given name does not exist. This
+// operation will fail if there is a MatchingWorkflow object that references the
+// SchemaMapping in the workflow's InputSourceConfig .
 func (c *Client) DeleteSchemaMapping(ctx context.Context, params *DeleteSchemaMappingInput, optFns ...func(*Options)) (*DeleteSchemaMappingOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaMappingInput{}
@@ -41,18 +36,6 @@ type DeleteSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSchemaMappingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSchemaMappingInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSchemaMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SchemaName != nil {
-		s.WriteString(schemas.DeleteSchemaMappingInput_schemaName, *v.SchemaName)
-	}
-}
-
 type DeleteSchemaMappingOutput struct {
 
 	// A successful operation message.
@@ -66,85 +49,29 @@ type DeleteSchemaMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSchemaMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSchemaMappingOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSchemaMappingOutput_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DeleteSchemaMappingOutput_message, v.Message)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSchemaMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSchemaMapping{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaMapping, schemas.DeleteSchemaMappingInput, schemas.DeleteSchemaMappingOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSchemaMapping{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaMapping, schemas.DeleteSchemaMappingInput, schemas.DeleteSchemaMappingOutput), output: &DeleteSchemaMappingOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSchemaMapping"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteSchemaMappingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSchemaMapping(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +86,8 @@ func (c *Client) addOperationDeleteSchemaMappingMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteSchemaMapping(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteSchemaMapping",
-	}
 }

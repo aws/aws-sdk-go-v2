@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeSpotPriceHistory&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&DryRun=true&EndTime=2000-01-01T00%3A00%3A00Z&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&InstanceType.1=a1.medium&InstanceType.2=a1.medium&MaxResults=1&NextToken=__NextToken__&ProductDescription.1=__Member__&ProductDescription.2=__Member__&StartTime=2000-01-01T00%3A00%3A00Z&Version=2016-11-15

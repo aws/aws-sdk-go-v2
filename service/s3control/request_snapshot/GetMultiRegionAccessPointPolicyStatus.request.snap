@@ -1,0 +1,4 @@
+GET /v20180820/mrap/instances/__Name__/policystatus
+
+X-Amz-Account-Id: AccountId-value
+

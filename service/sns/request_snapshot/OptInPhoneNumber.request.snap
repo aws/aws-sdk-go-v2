@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=OptInPhoneNumber&Version=2010-03-31&phoneNumber=__PhoneNumber__

@@ -3,8 +3,8 @@
 // Package healthlake provides the API client, operations, and parameter types for
 // Amazon HealthLake.
 //
-// This is the AWS HealthLake API Reference. For an introduction to the service,
-// see [What is AWS HealthLake?]in the AWS HealthLake Developer Guide.
+// This is the HealthLake API Reference. For an introduction to the service, see [What is HealthLake?]
+// in the HealthLake Developer Guide.
 //
-// [What is AWS HealthLake?]: https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html
+// [What is HealthLake?]: https://docs.aws.amazon.com/healthlake/latest/devguide/what-is.html
 package healthlake

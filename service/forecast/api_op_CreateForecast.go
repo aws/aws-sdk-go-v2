@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was
@@ -120,6 +119,28 @@ type CreateForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastName != nil {
+		s.WriteString(schemas.CreateForecastRequest_ForecastName, *v.ForecastName)
+	}
+	serializeForecastTypes(s, schemas.CreateForecastRequest_ForecastTypes, v.ForecastTypes)
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.CreateForecastRequest_PredictorArn, *v.PredictorArn)
+	}
+	serializeTags(s, schemas.CreateForecastRequest_Tags, v.Tags)
+	if v.TimeSeriesSelector != nil {
+		s.WriteStruct(schemas.CreateForecastRequest_TimeSeriesSelector)
+		v.TimeSeriesSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateForecastOutput struct {
 
 	// The Amazon Resource Name (ARN) of the forecast.
@@ -131,77 +152,48 @@ type CreateForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.CreateForecastResponse_ForecastArn, *v.ForecastArn)
+	}
+}
+func (v *CreateForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateForecastResponse_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.CreateForecastResponse_ForecastArn, v.ForecastArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecast, schemas.CreateForecastRequest, schemas.CreateForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecast, schemas.CreateForecastRequest, schemas.CreateForecastResponse), output: &CreateForecastOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateForecast{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateForecast"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateForecastValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateForecast(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +208,8 @@ func (c *Client) addOperationCreateForecastMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateForecast(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateForecast",
-	}
 }

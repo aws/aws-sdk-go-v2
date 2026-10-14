@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the cluster policy configuration.
@@ -48,6 +47,29 @@ type UpdateClusterSchedulerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterSchedulerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterSchedulerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterSchedulerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSchedulerConfigId != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigRequest_ClusterSchedulerConfigId, *v.ClusterSchedulerConfigId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigRequest_Description, *v.Description)
+	}
+	if v.SchedulerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterSchedulerConfigRequest_SchedulerConfig)
+		v.SchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetVersion != nil {
+		s.WriteInt32(schemas.UpdateClusterSchedulerConfigRequest_TargetVersion, *v.TargetVersion)
+	}
+}
+
 type UpdateClusterSchedulerConfigOutput struct {
 
 	// ARN of the cluster policy.
@@ -66,77 +88,54 @@ type UpdateClusterSchedulerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterSchedulerConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterSchedulerConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterSchedulerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSchedulerConfigArn != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, *v.ClusterSchedulerConfigArn)
+	}
+	if v.ClusterSchedulerConfigVersion != nil {
+		s.WriteInt32(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, *v.ClusterSchedulerConfigVersion)
+	}
+}
+func (v *UpdateClusterSchedulerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterSchedulerConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn:
+			v.ClusterSchedulerConfigArn = new(string)
+			return d.ReadString(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, v.ClusterSchedulerConfigArn)
+		case schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion:
+			v.ClusterSchedulerConfigVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, v.ClusterSchedulerConfigVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterSchedulerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterSchedulerConfig, schemas.UpdateClusterSchedulerConfigRequest, schemas.UpdateClusterSchedulerConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterSchedulerConfig, schemas.UpdateClusterSchedulerConfigRequest, schemas.UpdateClusterSchedulerConfigResponse), output: &UpdateClusterSchedulerConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateClusterSchedulerConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateClusterSchedulerConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClusterSchedulerConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +150,8 @@ func (c *Client) addOperationUpdateClusterSchedulerConfigMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateClusterSchedulerConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateClusterSchedulerConfig",
-	}
 }

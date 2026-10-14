@@ -5,10 +5,10 @@ package securitylake
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the Amazon Security Lake exceptions that you can use to find the source
@@ -47,6 +47,22 @@ type ListDataLakeExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeExceptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakeExceptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakeExceptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataLakeExceptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataLakeExceptionsRequest_nextToken, *v.NextToken)
+	}
+	serializeRegionList(s, schemas.ListDataLakeExceptionsRequest_regions, v.Regions)
+}
+
 type ListDataLakeExceptionsOutput struct {
 
 	// Lists the failures that cannot be retried.
@@ -66,74 +82,48 @@ type ListDataLakeExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakeExceptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakeExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeExceptionList(s, schemas.ListDataLakeExceptionsResponse_exceptions, v.Exceptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataLakeExceptionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataLakeExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataLakeExceptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataLakeExceptionsResponse_exceptions:
+			return deserializeDataLakeExceptionList(d, schemas.ListDataLakeExceptionsResponse_exceptions, &v.Exceptions)
+		case schemas.ListDataLakeExceptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataLakeExceptionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeExceptions, schemas.ListDataLakeExceptionsRequest, schemas.ListDataLakeExceptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakeExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeExceptions, schemas.ListDataLakeExceptionsRequest, schemas.ListDataLakeExceptionsResponse), output: &ListDataLakeExceptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakeExceptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataLakeExceptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakeExceptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +136,6 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +237,3 @@ type ListDataLakeExceptionsAPIClient interface {
 }
 
 var _ ListDataLakeExceptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataLakeExceptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataLakeExceptions",
-	}
-}

@@ -1,0 +1,5 @@
+POST /v2LoggingLevel
+
+Content-Type: application/json
+
+{"logLevel":"DEBUG","logTarget":{"targetName":"__TargetName__","targetType":"DEFAULT"}}

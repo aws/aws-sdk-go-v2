@@ -1,0 +1,5 @@
+POST /group-resources
+
+Content-Type: application/json
+
+{"Group":"__Group__","ResourceArns":["__Member__","__Member__"]}

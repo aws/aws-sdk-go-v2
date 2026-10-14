@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/associate-email-addresses
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","EmailAddressesConfig":[{"EmailAddressId":"__EmailAddressId__"},{"EmailAddressId":"__EmailAddressId__"}]}

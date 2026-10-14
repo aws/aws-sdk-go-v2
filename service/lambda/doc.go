@@ -15,6 +15,12 @@
 // for virtually any type of application or backend service. For more information
 // about the Lambda service, see [What is Lambda]in the Lambda Developer Guide.
 //
+// Lambda Event Functions, previously known as Lambda functions, run your code in
+// response to events and API calls. Event Functions is a documentation name only.
+// In this API, the Amazon Web Services SDKs, and the CLI, Event Functions are
+// still called functions, for example in CreateFunction and Invoke . You don't
+// need to change any code.
+//
 // The Lambda API Reference provides information about each of the API methods,
 // including details about the parameters in each API request and response.
 //

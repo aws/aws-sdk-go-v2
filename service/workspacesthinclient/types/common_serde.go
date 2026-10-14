@@ -94,6 +94,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeDayOfWeekList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DayOfWeek) error {
+	*v = make([]DayOfWeek, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -107,6 +108,7 @@ func deserializeDayOfWeekList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeDeviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DeviceSummary) error {
+	*v = make([]DeviceSummary, 0)
 	var vv DeviceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DeviceSummary{}
@@ -120,6 +122,7 @@ func deserializeDeviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]De
 }
 
 func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnvironmentSummary) error {
+	*v = make([]EnvironmentSummary, 0)
 	var vv EnvironmentSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = EnvironmentSummary{}
@@ -133,6 +136,7 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSoftwareList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Software) error {
+	*v = make([]Software, 0)
 	var vv Software
 	return smithy.ReadList(d, s, func() error {
 		vv = Software{}
@@ -146,6 +150,7 @@ func deserializeSoftwareList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeSoftwareSetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SoftwareSetSummary) error {
+	*v = make([]SoftwareSetSummary, 0)
 	var vv SoftwareSetSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = SoftwareSetSummary{}
@@ -159,6 +164,7 @@ func deserializeSoftwareSetList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -172,6 +178,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -212,6 +219,13 @@ func deserializeDeviceCreationTagsMap(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -226,6 +240,13 @@ func deserializeTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

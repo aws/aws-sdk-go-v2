@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The command to update the Kinesis stream destination.
@@ -47,6 +47,25 @@ type UpdateKinesisStreamingDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKinesisStreamingDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKinesisStreamingDestinationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKinesisStreamingDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamArn != nil {
+		s.WriteString(schemas.UpdateKinesisStreamingDestinationInput_StreamArn, *v.StreamArn)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateKinesisStreamingDestinationInput_TableName, *v.TableName)
+	}
+	if v.UpdateKinesisStreamingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKinesisStreamingDestinationInput_UpdateKinesisStreamingConfiguration)
+		v.UpdateKinesisStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *UpdateKinesisStreamingDestinationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -73,68 +92,69 @@ type UpdateKinesisStreamingDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKinesisStreamingDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKinesisStreamingDestinationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKinesisStreamingDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationStatus != "" {
+		s.WriteString(schemas.UpdateKinesisStreamingDestinationOutput_DestinationStatus, string(v.DestinationStatus))
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.UpdateKinesisStreamingDestinationOutput_StreamArn, *v.StreamArn)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateKinesisStreamingDestinationOutput_TableName, *v.TableName)
+	}
+	if v.UpdateKinesisStreamingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKinesisStreamingDestinationOutput_UpdateKinesisStreamingConfiguration)
+		v.UpdateKinesisStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateKinesisStreamingDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKinesisStreamingDestinationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKinesisStreamingDestinationOutput_DestinationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateKinesisStreamingDestinationOutput_DestinationStatus, &ev); err != nil {
+				return err
+			}
+			v.DestinationStatus = types.DestinationStatus(ev)
+			return nil
+		case schemas.UpdateKinesisStreamingDestinationOutput_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.UpdateKinesisStreamingDestinationOutput_StreamArn, v.StreamArn)
+		case schemas.UpdateKinesisStreamingDestinationOutput_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.UpdateKinesisStreamingDestinationOutput_TableName, v.TableName)
+		case schemas.UpdateKinesisStreamingDestinationOutput_UpdateKinesisStreamingConfiguration:
+			v.UpdateKinesisStreamingConfiguration = &types.UpdateKinesisStreamingConfiguration{}
+			return v.UpdateKinesisStreamingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKinesisStreamingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKinesisStreamingDestination, schemas.UpdateKinesisStreamingDestinationInput, schemas.UpdateKinesisStreamingDestinationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateKinesisStreamingDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKinesisStreamingDestination, schemas.UpdateKinesisStreamingDestinationInput, schemas.UpdateKinesisStreamingDestinationOutput), output: &UpdateKinesisStreamingDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateKinesisStreamingDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKinesisStreamingDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateKinesisStreamingDestinationDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -144,12 +164,6 @@ func (c *Client) addOperationUpdateKinesisStreamingDestinationMiddlewares(stack 
 		return err
 	}
 	if err = addOpUpdateKinesisStreamingDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKinesisStreamingDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +182,6 @@ func (c *Client) addOperationUpdateKinesisStreamingDestinationMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -223,12 +231,4 @@ func (c *Client) fetchOpUpdateKinesisStreamingDestinationDiscoverEndpoint(ctx co
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opUpdateKinesisStreamingDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateKinesisStreamingDestination",
-	}
 }

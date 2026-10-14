@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -36,6 +38,67 @@ type AssetShallow struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetShallow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetShallow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetShallow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssetShallow_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.AssetShallow_CreatedAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssetShallow_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.AssetShallow_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssetShallow_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.AssetShallow_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.AssetShallow_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.AssetShallow_Tags, v.Tags)
+}
+func (v *AssetShallow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetShallow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetShallow_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssetShallow_Arn, v.Arn)
+		case schemas.AssetShallow_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.AssetShallow_CreatedAt, v.CreatedAt)
+		case schemas.AssetShallow_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssetShallow_Id, v.Id)
+		case schemas.AssetShallow_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.AssetShallow_PackagingGroupId, v.PackagingGroupId)
+		case schemas.AssetShallow_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.AssetShallow_ResourceId, v.ResourceId)
+		case schemas.AssetShallow_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.AssetShallow_SourceArn, v.SourceArn)
+		case schemas.AssetShallow_SourceRoleArn:
+			v.SourceRoleArn = new(string)
+			return d.ReadString(schemas.AssetShallow_SourceRoleArn, v.SourceRoleArn)
+		case schemas.AssetShallow_Tags:
+			return deserializeTags(d, schemas.AssetShallow_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // CDN Authorization credentials
 type Authorization struct {
 
@@ -54,6 +117,34 @@ type Authorization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Authorization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Authorization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Authorization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdnIdentifierSecret != nil {
+		s.WriteString(schemas.Authorization_CdnIdentifierSecret, *v.CdnIdentifierSecret)
+	}
+	if v.SecretsRoleArn != nil {
+		s.WriteString(schemas.Authorization_SecretsRoleArn, *v.SecretsRoleArn)
+	}
+}
+func (v *Authorization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Authorization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Authorization_CdnIdentifierSecret:
+			v.CdnIdentifierSecret = new(string)
+			return d.ReadString(schemas.Authorization_CdnIdentifierSecret, v.CdnIdentifierSecret)
+		case schemas.Authorization_SecretsRoleArn:
+			v.SecretsRoleArn = new(string)
+			return d.ReadString(schemas.Authorization_SecretsRoleArn, v.SecretsRoleArn)
+		}
+		return nil
+	})
+}
+
 // A CMAF encryption configuration.
 type CmafEncryption struct {
 
@@ -69,6 +160,36 @@ type CmafEncryption struct {
 	ConstantInitializationVector *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CmafEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstantInitializationVector != nil {
+		s.WriteString(schemas.CmafEncryption_ConstantInitializationVector, *v.ConstantInitializationVector)
+	}
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.CmafEncryption_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CmafEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafEncryption_ConstantInitializationVector:
+			v.ConstantInitializationVector = new(string)
+			return d.ReadString(schemas.CmafEncryption_ConstantInitializationVector, v.ConstantInitializationVector)
+		case schemas.CmafEncryption_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A CMAF packaging configuration.
@@ -96,6 +217,45 @@ type CmafPackage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CmafPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.CmafPackage_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfHlsManifest(s, schemas.CmafPackage_HlsManifests, v.HlsManifests)
+	if v.IncludeEncoderConfigurationInSegments != nil {
+		s.WriteBool(schemas.CmafPackage_IncludeEncoderConfigurationInSegments, *v.IncludeEncoderConfigurationInSegments)
+	}
+	if v.SegmentDurationSeconds != nil {
+		s.WriteInt32(schemas.CmafPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
+	}
+}
+func (v *CmafPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafPackage_Encryption:
+			v.Encryption = &CmafEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.CmafPackage_HlsManifests:
+			return deserialize__listOfHlsManifest(d, schemas.CmafPackage_HlsManifests, &v.HlsManifests)
+		case schemas.CmafPackage_IncludeEncoderConfigurationInSegments:
+			v.IncludeEncoderConfigurationInSegments = new(bool)
+			return d.ReadBool(schemas.CmafPackage_IncludeEncoderConfigurationInSegments, v.IncludeEncoderConfigurationInSegments)
+		case schemas.CmafPackage_SegmentDurationSeconds:
+			v.SegmentDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.CmafPackage_SegmentDurationSeconds, v.SegmentDurationSeconds)
+		}
+		return nil
+	})
+}
+
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 type DashEncryption struct {
 
@@ -106,6 +266,30 @@ type DashEncryption struct {
 	SpekeKeyProvider *SpekeKeyProvider
 
 	noSmithyDocumentSerde
+}
+
+func (v *DashEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.DashEncryption_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DashEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashEncryption_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A DASH manifest configuration.
@@ -137,6 +321,72 @@ type DashManifest struct {
 	StreamSelection *StreamSelection
 
 	noSmithyDocumentSerde
+}
+
+func (v *DashManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestLayout != "" {
+		s.WriteString(schemas.DashManifest_ManifestLayout, string(v.ManifestLayout))
+	}
+	if v.ManifestName != nil {
+		s.WriteString(schemas.DashManifest_ManifestName, *v.ManifestName)
+	}
+	if v.MinBufferTimeSeconds != nil {
+		s.WriteInt32(schemas.DashManifest_MinBufferTimeSeconds, *v.MinBufferTimeSeconds)
+	}
+	if v.Profile != "" {
+		s.WriteString(schemas.DashManifest_Profile, string(v.Profile))
+	}
+	if v.ScteMarkersSource != "" {
+		s.WriteString(schemas.DashManifest_ScteMarkersSource, string(v.ScteMarkersSource))
+	}
+	if v.StreamSelection != nil {
+		s.WriteStruct(schemas.DashManifest_StreamSelection)
+		v.StreamSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DashManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashManifest_ManifestLayout:
+			var ev string
+			if err := d.ReadString(schemas.DashManifest_ManifestLayout, &ev); err != nil {
+				return err
+			}
+			v.ManifestLayout = ManifestLayout(ev)
+			return nil
+		case schemas.DashManifest_ManifestName:
+			v.ManifestName = new(string)
+			return d.ReadString(schemas.DashManifest_ManifestName, v.ManifestName)
+		case schemas.DashManifest_MinBufferTimeSeconds:
+			v.MinBufferTimeSeconds = new(int32)
+			return d.ReadInt32(schemas.DashManifest_MinBufferTimeSeconds, v.MinBufferTimeSeconds)
+		case schemas.DashManifest_Profile:
+			var ev string
+			if err := d.ReadString(schemas.DashManifest_Profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = Profile(ev)
+			return nil
+		case schemas.DashManifest_ScteMarkersSource:
+			var ev string
+			if err := d.ReadString(schemas.DashManifest_ScteMarkersSource, &ev); err != nil {
+				return err
+			}
+			v.ScteMarkersSource = ScteMarkersSource(ev)
+			return nil
+		case schemas.DashManifest_StreamSelection:
+			v.StreamSelection = &StreamSelection{}
+			return v.StreamSelection.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
@@ -182,6 +432,64 @@ type DashPackage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDashManifest(s, schemas.DashPackage_DashManifests, v.DashManifests)
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.DashPackage_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeEncoderConfigurationInSegments != nil {
+		s.WriteBool(schemas.DashPackage_IncludeEncoderConfigurationInSegments, *v.IncludeEncoderConfigurationInSegments)
+	}
+	if v.IncludeIframeOnlyStream != nil {
+		s.WriteBool(schemas.DashPackage_IncludeIframeOnlyStream, *v.IncludeIframeOnlyStream)
+	}
+	serialize__listOf__PeriodTriggersElement(s, schemas.DashPackage_PeriodTriggers, v.PeriodTriggers)
+	if v.SegmentDurationSeconds != nil {
+		s.WriteInt32(schemas.DashPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
+	}
+	if v.SegmentTemplateFormat != "" {
+		s.WriteString(schemas.DashPackage_SegmentTemplateFormat, string(v.SegmentTemplateFormat))
+	}
+}
+func (v *DashPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashPackage_DashManifests:
+			return deserialize__listOfDashManifest(d, schemas.DashPackage_DashManifests, &v.DashManifests)
+		case schemas.DashPackage_Encryption:
+			v.Encryption = &DashEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.DashPackage_IncludeEncoderConfigurationInSegments:
+			v.IncludeEncoderConfigurationInSegments = new(bool)
+			return d.ReadBool(schemas.DashPackage_IncludeEncoderConfigurationInSegments, v.IncludeEncoderConfigurationInSegments)
+		case schemas.DashPackage_IncludeIframeOnlyStream:
+			v.IncludeIframeOnlyStream = new(bool)
+			return d.ReadBool(schemas.DashPackage_IncludeIframeOnlyStream, v.IncludeIframeOnlyStream)
+		case schemas.DashPackage_PeriodTriggers:
+			return deserialize__listOf__PeriodTriggersElement(d, schemas.DashPackage_PeriodTriggers, &v.PeriodTriggers)
+		case schemas.DashPackage_SegmentDurationSeconds:
+			v.SegmentDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.DashPackage_SegmentDurationSeconds, v.SegmentDurationSeconds)
+		case schemas.DashPackage_SegmentTemplateFormat:
+			var ev string
+			if err := d.ReadString(schemas.DashPackage_SegmentTemplateFormat, &ev); err != nil {
+				return err
+			}
+			v.SegmentTemplateFormat = SegmentTemplateFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configure egress access logging.
 type EgressAccessLogs struct {
 
@@ -189,6 +497,28 @@ type EgressAccessLogs struct {
 	LogGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EgressAccessLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EgressAccessLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EgressAccessLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.EgressAccessLogs_LogGroupName, *v.LogGroupName)
+	}
+}
+func (v *EgressAccessLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EgressAccessLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EgressAccessLogs_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.EgressAccessLogs_LogGroupName, v.LogGroupName)
+		}
+		return nil
+	})
 }
 
 // The endpoint URL used to access an Asset using one PackagingConfiguration.
@@ -207,6 +537,40 @@ type EgressEndpoint struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EgressEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EgressEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EgressEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackagingConfigurationId != nil {
+		s.WriteString(schemas.EgressEndpoint_PackagingConfigurationId, *v.PackagingConfigurationId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.EgressEndpoint_Status, *v.Status)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.EgressEndpoint_Url, *v.Url)
+	}
+}
+func (v *EgressEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EgressEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EgressEndpoint_PackagingConfigurationId:
+			v.PackagingConfigurationId = new(string)
+			return d.ReadString(schemas.EgressEndpoint_PackagingConfigurationId, v.PackagingConfigurationId)
+		case schemas.EgressEndpoint_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.EgressEndpoint_Status, v.Status)
+		case schemas.EgressEndpoint_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.EgressEndpoint_Url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Use encryptionContractConfiguration to configure one or more content encryption
@@ -233,6 +597,42 @@ type EncryptionContractConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionContractConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionContractConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionContractConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PresetSpeke20Audio != "" {
+		s.WriteString(schemas.EncryptionContractConfiguration_PresetSpeke20Audio, string(v.PresetSpeke20Audio))
+	}
+	if v.PresetSpeke20Video != "" {
+		s.WriteString(schemas.EncryptionContractConfiguration_PresetSpeke20Video, string(v.PresetSpeke20Video))
+	}
+}
+func (v *EncryptionContractConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionContractConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionContractConfiguration_PresetSpeke20Audio:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionContractConfiguration_PresetSpeke20Audio, &ev); err != nil {
+				return err
+			}
+			v.PresetSpeke20Audio = PresetSpeke20Audio(ev)
+			return nil
+		case schemas.EncryptionContractConfiguration_PresetSpeke20Video:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionContractConfiguration_PresetSpeke20Video, &ev); err != nil {
+				return err
+			}
+			v.PresetSpeke20Video = PresetSpeke20Video(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An HTTP Live Streaming (HLS) encryption configuration.
 type HlsEncryption struct {
 
@@ -250,6 +650,46 @@ type HlsEncryption struct {
 	EncryptionMethod EncryptionMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *HlsEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstantInitializationVector != nil {
+		s.WriteString(schemas.HlsEncryption_ConstantInitializationVector, *v.ConstantInitializationVector)
+	}
+	if v.EncryptionMethod != "" {
+		s.WriteString(schemas.HlsEncryption_EncryptionMethod, string(v.EncryptionMethod))
+	}
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.HlsEncryption_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HlsEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsEncryption_ConstantInitializationVector:
+			v.ConstantInitializationVector = new(string)
+			return d.ReadString(schemas.HlsEncryption_ConstantInitializationVector, v.ConstantInitializationVector)
+		case schemas.HlsEncryption_EncryptionMethod:
+			var ev string
+			if err := d.ReadString(schemas.HlsEncryption_EncryptionMethod, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMethod = EncryptionMethod(ev)
+			return nil
+		case schemas.HlsEncryption_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An HTTP Live Streaming (HLS) manifest configuration.
@@ -288,6 +728,64 @@ type HlsManifest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdMarkers != "" {
+		s.WriteString(schemas.HlsManifest_AdMarkers, string(v.AdMarkers))
+	}
+	if v.IncludeIframeOnlyStream != nil {
+		s.WriteBool(schemas.HlsManifest_IncludeIframeOnlyStream, *v.IncludeIframeOnlyStream)
+	}
+	if v.ManifestName != nil {
+		s.WriteString(schemas.HlsManifest_ManifestName, *v.ManifestName)
+	}
+	if v.ProgramDateTimeIntervalSeconds != nil {
+		s.WriteInt32(schemas.HlsManifest_ProgramDateTimeIntervalSeconds, *v.ProgramDateTimeIntervalSeconds)
+	}
+	if v.RepeatExtXKey != nil {
+		s.WriteBool(schemas.HlsManifest_RepeatExtXKey, *v.RepeatExtXKey)
+	}
+	if v.StreamSelection != nil {
+		s.WriteStruct(schemas.HlsManifest_StreamSelection)
+		v.StreamSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HlsManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsManifest_AdMarkers:
+			var ev string
+			if err := d.ReadString(schemas.HlsManifest_AdMarkers, &ev); err != nil {
+				return err
+			}
+			v.AdMarkers = AdMarkers(ev)
+			return nil
+		case schemas.HlsManifest_IncludeIframeOnlyStream:
+			v.IncludeIframeOnlyStream = new(bool)
+			return d.ReadBool(schemas.HlsManifest_IncludeIframeOnlyStream, v.IncludeIframeOnlyStream)
+		case schemas.HlsManifest_ManifestName:
+			v.ManifestName = new(string)
+			return d.ReadString(schemas.HlsManifest_ManifestName, v.ManifestName)
+		case schemas.HlsManifest_ProgramDateTimeIntervalSeconds:
+			v.ProgramDateTimeIntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.HlsManifest_ProgramDateTimeIntervalSeconds, v.ProgramDateTimeIntervalSeconds)
+		case schemas.HlsManifest_RepeatExtXKey:
+			v.RepeatExtXKey = new(bool)
+			return d.ReadBool(schemas.HlsManifest_RepeatExtXKey, v.RepeatExtXKey)
+		case schemas.HlsManifest_StreamSelection:
+			v.StreamSelection = &StreamSelection{}
+			return v.StreamSelection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An HTTP Live Streaming (HLS) packaging configuration.
 type HlsPackage struct {
 
@@ -313,6 +811,51 @@ type HlsPackage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.HlsPackage_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfHlsManifest(s, schemas.HlsPackage_HlsManifests, v.HlsManifests)
+	if v.IncludeDvbSubtitles != nil {
+		s.WriteBool(schemas.HlsPackage_IncludeDvbSubtitles, *v.IncludeDvbSubtitles)
+	}
+	if v.SegmentDurationSeconds != nil {
+		s.WriteInt32(schemas.HlsPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
+	}
+	if v.UseAudioRenditionGroup != nil {
+		s.WriteBool(schemas.HlsPackage_UseAudioRenditionGroup, *v.UseAudioRenditionGroup)
+	}
+}
+func (v *HlsPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsPackage_Encryption:
+			v.Encryption = &HlsEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.HlsPackage_HlsManifests:
+			return deserialize__listOfHlsManifest(d, schemas.HlsPackage_HlsManifests, &v.HlsManifests)
+		case schemas.HlsPackage_IncludeDvbSubtitles:
+			v.IncludeDvbSubtitles = new(bool)
+			return d.ReadBool(schemas.HlsPackage_IncludeDvbSubtitles, v.IncludeDvbSubtitles)
+		case schemas.HlsPackage_SegmentDurationSeconds:
+			v.SegmentDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.HlsPackage_SegmentDurationSeconds, v.SegmentDurationSeconds)
+		case schemas.HlsPackage_UseAudioRenditionGroup:
+			v.UseAudioRenditionGroup = new(bool)
+			return d.ReadBool(schemas.HlsPackage_UseAudioRenditionGroup, v.UseAudioRenditionGroup)
+		}
+		return nil
+	})
+}
+
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
 type MssEncryption struct {
 
@@ -325,6 +868,30 @@ type MssEncryption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MssEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MssEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MssEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.MssEncryption_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MssEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MssEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MssEncryption_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A Microsoft Smooth Streaming (MSS) manifest configuration.
 type MssManifest struct {
 
@@ -335,6 +902,36 @@ type MssManifest struct {
 	StreamSelection *StreamSelection
 
 	noSmithyDocumentSerde
+}
+
+func (v *MssManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MssManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MssManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestName != nil {
+		s.WriteString(schemas.MssManifest_ManifestName, *v.ManifestName)
+	}
+	if v.StreamSelection != nil {
+		s.WriteStruct(schemas.MssManifest_StreamSelection)
+		v.StreamSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MssManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MssManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MssManifest_ManifestName:
+			v.ManifestName = new(string)
+			return d.ReadString(schemas.MssManifest_ManifestName, v.ManifestName)
+		case schemas.MssManifest_StreamSelection:
+			v.StreamSelection = &StreamSelection{}
+			return v.StreamSelection.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
@@ -352,6 +949,39 @@ type MssPackage struct {
 	SegmentDurationSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MssPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MssPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MssPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.MssPackage_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfMssManifest(s, schemas.MssPackage_MssManifests, v.MssManifests)
+	if v.SegmentDurationSeconds != nil {
+		s.WriteInt32(schemas.MssPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
+	}
+}
+func (v *MssPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MssPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MssPackage_Encryption:
+			v.Encryption = &MssEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.MssPackage_MssManifests:
+			return deserialize__listOfMssManifest(d, schemas.MssPackage_MssManifests, &v.MssManifests)
+		case schemas.MssPackage_SegmentDurationSeconds:
+			v.SegmentDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.MssPackage_SegmentDurationSeconds, v.SegmentDurationSeconds)
+		}
+		return nil
+	})
 }
 
 // A MediaPackage VOD PackagingConfiguration resource.
@@ -387,6 +1017,81 @@ type PackagingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackagingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackagingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackagingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PackagingConfiguration_Arn, *v.Arn)
+	}
+	if v.CmafPackage != nil {
+		s.WriteStruct(schemas.PackagingConfiguration_CmafPackage)
+		v.CmafPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.PackagingConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	if v.DashPackage != nil {
+		s.WriteStruct(schemas.PackagingConfiguration_DashPackage)
+		v.DashPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsPackage != nil {
+		s.WriteStruct(schemas.PackagingConfiguration_HlsPackage)
+		v.HlsPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PackagingConfiguration_Id, *v.Id)
+	}
+	if v.MssPackage != nil {
+		s.WriteStruct(schemas.PackagingConfiguration_MssPackage)
+		v.MssPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.PackagingConfiguration_PackagingGroupId, *v.PackagingGroupId)
+	}
+	serializeTags(s, schemas.PackagingConfiguration_Tags, v.Tags)
+}
+func (v *PackagingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackagingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackagingConfiguration_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PackagingConfiguration_Arn, v.Arn)
+		case schemas.PackagingConfiguration_CmafPackage:
+			v.CmafPackage = &CmafPackage{}
+			return v.CmafPackage.Deserialize(d)
+		case schemas.PackagingConfiguration_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.PackagingConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.PackagingConfiguration_DashPackage:
+			v.DashPackage = &DashPackage{}
+			return v.DashPackage.Deserialize(d)
+		case schemas.PackagingConfiguration_HlsPackage:
+			v.HlsPackage = &HlsPackage{}
+			return v.HlsPackage.Deserialize(d)
+		case schemas.PackagingConfiguration_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PackagingConfiguration_Id, v.Id)
+		case schemas.PackagingConfiguration_MssPackage:
+			v.MssPackage = &MssPackage{}
+			return v.MssPackage.Deserialize(d)
+		case schemas.PackagingConfiguration_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.PackagingConfiguration_PackagingGroupId, v.PackagingGroupId)
+		case schemas.PackagingConfiguration_Tags:
+			return deserializeTags(d, schemas.PackagingConfiguration_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A MediaPackage VOD PackagingGroup resource.
 type PackagingGroup struct {
 
@@ -415,6 +1120,71 @@ type PackagingGroup struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackagingGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackagingGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackagingGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateAssetCount != nil {
+		s.WriteInt32(schemas.PackagingGroup_ApproximateAssetCount, *v.ApproximateAssetCount)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.PackagingGroup_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.PackagingGroup_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.PackagingGroup_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.PackagingGroup_DomainName, *v.DomainName)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.PackagingGroup_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PackagingGroup_Id, *v.Id)
+	}
+	serializeTags(s, schemas.PackagingGroup_Tags, v.Tags)
+}
+func (v *PackagingGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackagingGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackagingGroup_ApproximateAssetCount:
+			v.ApproximateAssetCount = new(int32)
+			return d.ReadInt32(schemas.PackagingGroup_ApproximateAssetCount, v.ApproximateAssetCount)
+		case schemas.PackagingGroup_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PackagingGroup_Arn, v.Arn)
+		case schemas.PackagingGroup_Authorization:
+			v.Authorization = &Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.PackagingGroup_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.PackagingGroup_CreatedAt, v.CreatedAt)
+		case schemas.PackagingGroup_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.PackagingGroup_DomainName, v.DomainName)
+		case schemas.PackagingGroup_EgressAccessLogs:
+			v.EgressAccessLogs = &EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.PackagingGroup_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PackagingGroup_Id, v.Id)
+		case schemas.PackagingGroup_Tags:
+			return deserializeTags(d, schemas.PackagingGroup_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // A configuration for accessing an external Secure Packager and Encoder Key
@@ -451,6 +1221,45 @@ type SpekeKeyProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpekeKeyProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpekeKeyProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionContractConfiguration != nil {
+		s.WriteStruct(schemas.SpekeKeyProvider_EncryptionContractConfiguration)
+		v.EncryptionContractConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.SpekeKeyProvider_RoleArn, *v.RoleArn)
+	}
+	serialize__listOf__string(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	if v.Url != nil {
+		s.WriteString(schemas.SpekeKeyProvider_Url, *v.Url)
+	}
+}
+func (v *SpekeKeyProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpekeKeyProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpekeKeyProvider_EncryptionContractConfiguration:
+			v.EncryptionContractConfiguration = &EncryptionContractConfiguration{}
+			return v.EncryptionContractConfiguration.Deserialize(d)
+		case schemas.SpekeKeyProvider_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.SpekeKeyProvider_RoleArn, v.RoleArn)
+		case schemas.SpekeKeyProvider_SystemIds:
+			return deserialize__listOf__string(d, schemas.SpekeKeyProvider_SystemIds, &v.SystemIds)
+		case schemas.SpekeKeyProvider_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.SpekeKeyProvider_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // A StreamSelection configuration.
 type StreamSelection struct {
 
@@ -464,6 +1273,44 @@ type StreamSelection struct {
 	StreamOrder StreamOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxVideoBitsPerSecond != nil {
+		s.WriteInt32(schemas.StreamSelection_MaxVideoBitsPerSecond, *v.MaxVideoBitsPerSecond)
+	}
+	if v.MinVideoBitsPerSecond != nil {
+		s.WriteInt32(schemas.StreamSelection_MinVideoBitsPerSecond, *v.MinVideoBitsPerSecond)
+	}
+	if v.StreamOrder != "" {
+		s.WriteString(schemas.StreamSelection_StreamOrder, string(v.StreamOrder))
+	}
+}
+func (v *StreamSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamSelection_MaxVideoBitsPerSecond:
+			v.MaxVideoBitsPerSecond = new(int32)
+			return d.ReadInt32(schemas.StreamSelection_MaxVideoBitsPerSecond, v.MaxVideoBitsPerSecond)
+		case schemas.StreamSelection_MinVideoBitsPerSecond:
+			v.MinVideoBitsPerSecond = new(int32)
+			return d.ReadInt32(schemas.StreamSelection_MinVideoBitsPerSecond, v.MinVideoBitsPerSecond)
+		case schemas.StreamSelection_StreamOrder:
+			var ev string
+			if err := d.ReadString(schemas.StreamSelection_StreamOrder, &ev); err != nil {
+				return err
+			}
+			v.StreamOrder = StreamOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

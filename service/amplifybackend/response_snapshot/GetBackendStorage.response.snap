@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appId":"__AppId__","backendEnvironmentName":"__BackendEnvironmentName__","resourceConfig":{"bucketName":"__BucketName__","imported":true,"permissions":{"authenticated":["READ","READ"],"unAuthenticated":["READ","READ"]},"serviceName":"S3"},"resourceName":"__ResourceName__"}

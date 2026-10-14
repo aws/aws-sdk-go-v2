@@ -4,13 +4,8 @@ package finspace
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +38,6 @@ type GetKxScalingGroupInput struct {
 	ScalingGroupName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxScalingGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxScalingGroupRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.ScalingGroupName != nil {
-		s.WriteString(schemas.GetKxScalingGroupRequest_scalingGroupName, *v.ScalingGroupName)
-	}
 }
 
 type GetKxScalingGroupOutput struct {
@@ -146,115 +126,32 @@ type GetKxScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxScalingGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxScalingGroupResponse_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.GetKxScalingGroupResponse_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.GetKxScalingGroupResponse_clusters:
-			return deserializeKxClusterNameList(d, schemas.GetKxScalingGroupResponse_clusters, &v.Clusters)
-		case schemas.GetKxScalingGroupResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxScalingGroupResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxScalingGroupResponse_hostType:
-			v.HostType = new(string)
-			return d.ReadString(schemas.GetKxScalingGroupResponse_hostType, v.HostType)
-		case schemas.GetKxScalingGroupResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxScalingGroupResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxScalingGroupResponse_scalingGroupArn:
-			v.ScalingGroupArn = new(string)
-			return d.ReadString(schemas.GetKxScalingGroupResponse_scalingGroupArn, v.ScalingGroupArn)
-		case schemas.GetKxScalingGroupResponse_scalingGroupName:
-			v.ScalingGroupName = new(string)
-			return d.ReadString(schemas.GetKxScalingGroupResponse_scalingGroupName, v.ScalingGroupName)
-		case schemas.GetKxScalingGroupResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxScalingGroupResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxScalingGroupStatus(ev)
-			return nil
-		case schemas.GetKxScalingGroupResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.GetKxScalingGroupResponse_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxScalingGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxScalingGroup, schemas.GetKxScalingGroupRequest, schemas.GetKxScalingGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxScalingGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxScalingGroup, schemas.GetKxScalingGroupRequest, schemas.GetKxScalingGroupResponse), output: &GetKxScalingGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxScalingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKxScalingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKxScalingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -269,22 +166,8 @@ func (c *Client) addOperationGetKxScalingGroupMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKxScalingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKxScalingGroup",
-	}
 }

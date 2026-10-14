@@ -5,10 +5,10 @@ package apigateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets all the usage plans of the caller's account.
@@ -43,6 +43,24 @@ type GetUsagePlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsagePlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsagePlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsagePlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetUsagePlansRequest_keyId, *v.KeyId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetUsagePlansRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetUsagePlansRequest_position, *v.Position)
+	}
+}
+
 // Represents a collection of usage plans for an AWS account.
 type GetUsagePlansOutput struct {
 
@@ -58,74 +76,48 @@ type GetUsagePlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsagePlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsagePlans)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsagePlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfUsagePlan(s, schemas.UsagePlans_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.UsagePlans_position, *v.Position)
+	}
+}
+func (v *GetUsagePlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsagePlans, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsagePlans_items:
+			return deserializeListOfUsagePlan(d, schemas.UsagePlans_items, &v.Items)
+		case schemas.UsagePlans_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.UsagePlans_position, v.Position)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsagePlans, schemas.GetUsagePlansRequest, schemas.UsagePlans)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsagePlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsagePlans, schemas.GetUsagePlansRequest, schemas.UsagePlans), output: &GetUsagePlansOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsagePlans{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsagePlans"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsagePlans(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +133,6 @@ func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +233,3 @@ type GetUsagePlansAPIClient interface {
 }
 
 var _ GetUsagePlansAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetUsagePlans(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsagePlans",
-	}
-}

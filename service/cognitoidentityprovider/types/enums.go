@@ -185,10 +185,11 @@ type AuthFactorType string
 
 // Enum values for AuthFactorType
 const (
-	AuthFactorTypePassword AuthFactorType = "PASSWORD"
-	AuthFactorTypeEmailOtp AuthFactorType = "EMAIL_OTP"
-	AuthFactorTypeSmsOtp   AuthFactorType = "SMS_OTP"
-	AuthFactorTypeWebAuthn AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypePassword      AuthFactorType = "PASSWORD"
+	AuthFactorTypeEmailOtp      AuthFactorType = "EMAIL_OTP"
+	AuthFactorTypeSmsOtp        AuthFactorType = "SMS_OTP"
+	AuthFactorTypeWebAuthn      AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypeSoftwareToken AuthFactorType = "SOFTWARE_TOKEN"
 )
 
 // Values returns all known values for AuthFactorType. Note that this can be
@@ -201,6 +202,7 @@ func (AuthFactorType) Values() []AuthFactorType {
 		"EMAIL_OTP",
 		"SMS_OTP",
 		"WEB_AUTHN",
+		"SOFTWARE_TOKEN",
 	}
 }
 
@@ -757,6 +759,23 @@ func (IssuerType) Values() []IssuerType {
 	}
 }
 
+type LimitClass string
+
+// Enum values for LimitClass
+const (
+	LimitClassApiCategory LimitClass = "API_CATEGORY"
+)
+
+// Values returns all known values for LimitClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LimitClass) Values() []LimitClass {
+	return []LimitClass{
+		"API_CATEGORY",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -813,6 +832,30 @@ func (OAuthFlowType) Values() []OAuthFlowType {
 		"code",
 		"implicit",
 		"client_credentials",
+	}
+}
+
+type PasswordHashingAlgorithmType string
+
+// Enum values for PasswordHashingAlgorithmType
+const (
+	PasswordHashingAlgorithmTypeBcrypt       PasswordHashingAlgorithmType = "BCRYPT"
+	PasswordHashingAlgorithmTypeScrypt       PasswordHashingAlgorithmType = "SCRYPT"
+	PasswordHashingAlgorithmTypeArgon2id     PasswordHashingAlgorithmType = "ARGON2ID"
+	PasswordHashingAlgorithmTypePbkdf2Sha256 PasswordHashingAlgorithmType = "PBKDF2_SHA256"
+)
+
+// Values returns all known values for PasswordHashingAlgorithmType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PasswordHashingAlgorithmType) Values() []PasswordHashingAlgorithmType {
+	return []PasswordHashingAlgorithmType{
+		"BCRYPT",
+		"SCRYPT",
+		"ARGON2ID",
+		"PBKDF2_SHA256",
 	}
 }
 
@@ -960,6 +1003,27 @@ func (RiskLevelType) Values() []RiskLevelType {
 		"Low",
 		"Medium",
 		"High",
+	}
+}
+
+type SecurityPolicyType string
+
+// Enum values for SecurityPolicyType
+const (
+	SecurityPolicyTypeTlsV1      SecurityPolicyType = "TLS_V1"
+	SecurityPolicyTypeTlsV122021 SecurityPolicyType = "TLS_V1_2_2021"
+	SecurityPolicyTypeTlsV132025 SecurityPolicyType = "TLS_V1_3_2025"
+)
+
+// Values returns all known values for SecurityPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicyType) Values() []SecurityPolicyType {
+	return []SecurityPolicyType{
+		"TLS_V1",
+		"TLS_V1_2_2021",
+		"TLS_V1_3_2025",
 	}
 }
 

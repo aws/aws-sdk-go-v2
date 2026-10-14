@@ -1,0 +1,6 @@
+DELETE /matchingworkflows/__WorkflowName__/uniqueids
+
+Inputsource: __InputSource__
+Uniqueids: __Member__
+Uniqueids: __Member__
+

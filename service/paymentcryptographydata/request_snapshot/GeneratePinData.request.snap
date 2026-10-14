@@ -1,0 +1,5 @@
+POST /pindata/generate
+
+Content-Type: application/json
+
+{"EncryptionKeyIdentifier":"__EncryptionKeyIdentifier__","EncryptionWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}},"GenerationAttributes":{"VisaPin":{"PinVerificationKeyIndex":1}},"GenerationKeyIdentifier":"__GenerationKeyIdentifier__","PinBlockFormat":"ISO_FORMAT_0","PinDataLength":1,"PrimaryAccountNumber":"__PrimaryAccountNumber__"}

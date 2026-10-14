@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an Amazon Quick Sight user.
@@ -142,6 +141,45 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomFederationProviderUrl != nil {
+		s.WriteString(schemas.UpdateUserRequest_CustomFederationProviderUrl, *v.CustomFederationProviderUrl)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.UpdateUserRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.UpdateUserRequest_Email, *v.Email)
+	}
+	if v.ExternalLoginFederationProviderType != nil {
+		s.WriteString(schemas.UpdateUserRequest_ExternalLoginFederationProviderType, *v.ExternalLoginFederationProviderType)
+	}
+	if v.ExternalLoginId != nil {
+		s.WriteString(schemas.UpdateUserRequest_ExternalLoginId, *v.ExternalLoginId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateUserRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateUserRequest_Role, string(v.Role))
+	}
+	if v.UnapplyCustomPermissions != false {
+		s.WriteBool(schemas.UpdateUserRequest_UnapplyCustomPermissions, v.UnapplyCustomPermissions)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateUserRequest_UserName, *v.UserName)
+	}
+}
+
 type UpdateUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -159,77 +197,61 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateUserResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateUserResponse_Status, v.Status)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.UpdateUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_RequestId, v.RequestId)
+		case schemas.UpdateUserResponse_Status:
+			return d.ReadInt32(schemas.UpdateUserResponse_Status, &v.Status)
+		case schemas.UpdateUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse), output: &UpdateUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +266,8 @@ func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateUser",
-	}
 }

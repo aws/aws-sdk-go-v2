@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.DiscoverInputSchema
+
+{"InputSchema":{"RecordColumns":[{"Mapping":"__Mapping__","Name":"__Name__","SqlType":"__SqlType__"},{"Mapping":"__Mapping__","Name":"__Name__","SqlType":"__SqlType__"}],"RecordEncoding":"__RecordEncoding__","RecordFormat":{"MappingParameters":{"CSVMappingParameters":{"RecordColumnDelimiter":"__RecordColumnDelimiter__","RecordRowDelimiter":"__RecordRowDelimiter__"},"JSONMappingParameters":{"RecordRowPath":"__RecordRowPath__"}},"RecordFormatType":"JSON"}},"ParsedInputRecords":[["__Member__","__Member__"],["__Member__","__Member__"]],"ProcessedInputRecords":["__Member__","__Member__"],"RawInputRecords":["__Member__","__Member__"]}

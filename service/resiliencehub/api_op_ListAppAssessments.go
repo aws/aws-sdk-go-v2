@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the assessments for an Resilience Hub application. You can use request
@@ -66,6 +66,75 @@ type ListAppAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppAssessmentsRequest_appArn, *v.AppArn)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.ListAppAssessmentsRequest_assessmentName, *v.AssessmentName)
+	}
+	serializeAssessmentStatusList(s, schemas.ListAppAssessmentsRequest_assessmentStatus, v.AssessmentStatus)
+	if v.ComplianceStatus != "" {
+		s.WriteString(schemas.ListAppAssessmentsRequest_complianceStatus, string(v.ComplianceStatus))
+	}
+	if v.Invoker != "" {
+		s.WriteString(schemas.ListAppAssessmentsRequest_invoker, string(v.Invoker))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppAssessmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.ListAppAssessmentsRequest_reverseOrder, *v.ReverseOrder)
+	}
+}
+func (v *ListAppAssessmentsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAssessmentsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAssessmentsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppAssessmentsRequest_appArn, v.AppArn)
+		case schemas.ListAppAssessmentsRequest_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.ListAppAssessmentsRequest_assessmentName, v.AssessmentName)
+		case schemas.ListAppAssessmentsRequest_assessmentStatus:
+			return deserializeAssessmentStatusList(d, schemas.ListAppAssessmentsRequest_assessmentStatus, &v.AssessmentStatus)
+		case schemas.ListAppAssessmentsRequest_complianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListAppAssessmentsRequest_complianceStatus, &ev); err != nil {
+				return err
+			}
+			v.ComplianceStatus = types.ComplianceStatus(ev)
+			return nil
+		case schemas.ListAppAssessmentsRequest_invoker:
+			var ev string
+			if err := d.ReadString(schemas.ListAppAssessmentsRequest_invoker, &ev); err != nil {
+				return err
+			}
+			v.Invoker = types.AssessmentInvoker(ev)
+			return nil
+		case schemas.ListAppAssessmentsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppAssessmentsRequest_maxResults, v.MaxResults)
+		case schemas.ListAppAssessmentsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAssessmentsRequest_nextToken, v.NextToken)
+		case schemas.ListAppAssessmentsRequest_reverseOrder:
+			v.ReverseOrder = new(bool)
+			return d.ReadBool(schemas.ListAppAssessmentsRequest_reverseOrder, v.ReverseOrder)
+		}
+		return nil
+	})
+}
+
 type ListAppAssessmentsOutput struct {
 
 	// The summaries for the specified assessments, returned as an object. This object
@@ -84,74 +153,48 @@ type ListAppAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppAssessmentSummaryList(s, schemas.ListAppAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAssessmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAssessmentsResponse_assessmentSummaries:
+			return deserializeAppAssessmentSummaryList(d, schemas.ListAppAssessmentsResponse_assessmentSummaries, &v.AssessmentSummaries)
+		case schemas.ListAppAssessmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAssessmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessments, schemas.ListAppAssessmentsRequest, schemas.ListAppAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessments, schemas.ListAppAssessmentsRequest, schemas.ListAppAssessmentsResponse), output: &ListAppAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppAssessments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppAssessments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppAssessments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +207,6 @@ func (c *Client) addOperationListAppAssessmentsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -273,11 +310,3 @@ type ListAppAssessmentsAPIClient interface {
 }
 
 var _ ListAppAssessmentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppAssessments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppAssessments",
-	}
-}

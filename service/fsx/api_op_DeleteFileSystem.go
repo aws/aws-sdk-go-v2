@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a file system. After deletion, the file system no longer exists, and
@@ -101,6 +101,36 @@ type DeleteFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteFileSystemRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DeleteFileSystemRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.DeleteFileSystemRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.DeleteFileSystemRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.DeleteFileSystemRequest_WindowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response object for the DeleteFileSystem operation.
 type DeleteFileSystemOutput struct {
 
@@ -129,65 +159,76 @@ type DeleteFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DeleteFileSystemResponse_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteFileSystemResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LustreResponse != nil {
+		s.WriteStruct(schemas.DeleteFileSystemResponse_LustreResponse)
+		v.LustreResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSResponse != nil {
+		s.WriteStruct(schemas.DeleteFileSystemResponse_OpenZFSResponse)
+		v.OpenZFSResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WindowsResponse != nil {
+		s.WriteStruct(schemas.DeleteFileSystemResponse_WindowsResponse)
+		v.WindowsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemResponse_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.DeleteFileSystemResponse_FileSystemId, v.FileSystemId)
+		case schemas.DeleteFileSystemResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFileSystemResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.FileSystemLifecycle(ev)
+			return nil
+		case schemas.DeleteFileSystemResponse_LustreResponse:
+			v.LustreResponse = &types.DeleteFileSystemLustreResponse{}
+			return v.LustreResponse.Deserialize(d)
+		case schemas.DeleteFileSystemResponse_OpenZFSResponse:
+			v.OpenZFSResponse = &types.DeleteFileSystemOpenZFSResponse{}
+			return v.OpenZFSResponse.Deserialize(d)
+		case schemas.DeleteFileSystemResponse_WindowsResponse:
+			v.WindowsResponse = &types.DeleteFileSystemWindowsResponse{}
+			return v.WindowsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileSystem, schemas.DeleteFileSystemRequest, schemas.DeleteFileSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileSystem, schemas.DeleteFileSystemRequest, schemas.DeleteFileSystemResponse), output: &DeleteFileSystemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFileSystem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFileSystem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -197,12 +238,6 @@ func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpDeleteFileSystemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFileSystem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,12 +250,6 @@ func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,12 +289,4 @@ func (m *idempotencyToken_initializeOpDeleteFileSystem) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opDeleteFileSystemMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteFileSystem{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteFileSystem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteFileSystem",
-	}
 }

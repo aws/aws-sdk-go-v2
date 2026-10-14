@@ -58,7 +58,8 @@ var CostOptimizationHubService = smithy.NewServiceSchema(_CostOptimizationHubSer
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var AccountEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
@@ -189,6 +190,12 @@ var DbInstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DbInstanceConfiguration_dbInstanceClass *smithy.Schema
 
+var DocumentDbCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "DocumentDbCluster",
+}, smithy.ShapeTypeStructure, 1)
+var DocumentDbCluster_costCalculation *smithy.Schema
+
 var DynamoDbReservedCapacity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "DynamoDbReservedCapacity",
@@ -218,6 +225,12 @@ var DynamoDbReservedCapacityConfiguration_monthlyRecurringCost *smithy.Schema
 var DynamoDbReservedCapacityConfiguration_numberOfCapacityUnitsToPurchase *smithy.Schema
 
 var DynamoDbReservedCapacityConfiguration_capacityUnits *smithy.Schema
+
+var DynamoDbTable = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "DynamoDbTable",
+}, smithy.ShapeTypeStructure, 1)
+var DynamoDbTable_costCalculation *smithy.Schema
 
 var EbsVolume = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
@@ -377,6 +390,12 @@ var _EfficiencyMetricsByGroupList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _EfficiencyMetricsByGroupList_member *smithy.Schema
 
+var ElastiCacheCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "ElastiCacheCluster",
+}, smithy.ShapeTypeStructure, 1)
+var ElastiCacheCluster_costCalculation *smithy.Schema
+
 var ElastiCacheReservedInstances = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ElastiCacheReservedInstances",
@@ -496,7 +515,8 @@ var InstanceConfiguration_type *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var LambdaFunction = smithy.NewSchema(smithy.ShapeID{
@@ -525,6 +545,12 @@ var MemberAccountDiscountVisibility = smithy.NewSchema(smithy.ShapeID{
 var MemberAccountDiscountVisibility_ALL *smithy.Schema
 
 var MemberAccountDiscountVisibility_NONE *smithy.Schema
+
+var MemoryDbCluster = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "MemoryDbCluster",
+}, smithy.ShapeTypeStructure, 1)
+var MemoryDbCluster_costCalculation *smithy.Schema
 
 var MemoryDbReservedInstances = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
@@ -915,7 +941,7 @@ var ResourceCostCalculation_pricing *smithy.Schema
 var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ResourceDetails",
-}, smithy.ShapeTypeUnion, 19)
+}, smithy.ShapeTypeUnion, 25)
 var ResourceDetails_lambdaFunction *smithy.Schema
 
 var ResourceDetails_ecsService *smithy.Schema
@@ -954,6 +980,18 @@ var ResourceDetails_memoryDbReservedInstances *smithy.Schema
 
 var ResourceDetails_natGateway *smithy.Schema
 
+var ResourceDetails_dynamoDbTable *smithy.Schema
+
+var ResourceDetails_elastiCacheCluster *smithy.Schema
+
+var ResourceDetails_memoryDbCluster *smithy.Schema
+
+var ResourceDetails_documentDbCluster *smithy.Schema
+
+var ResourceDetails_workSpaces *smithy.Schema
+
+var ResourceDetails_sageMakerEndpoint *smithy.Schema
+
 var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ResourceIdList",
@@ -963,7 +1001,8 @@ var _ResourceIdList_member *smithy.Schema
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceNotFoundException_resourceId *smithy.Schema
@@ -983,7 +1022,7 @@ var ResourcePricing_estimatedCostAfterDiscounts *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 19)
+}, smithy.ShapeTypeEnum, 25)
 var ResourceType_EC2_INSTANCE *smithy.Schema
 
 var ResourceType_LAMBDA_FUNCTION *smithy.Schema
@@ -1022,11 +1061,29 @@ var ResourceType_MEMORY_DB_RESERVED_INSTANCES *smithy.Schema
 
 var ResourceType_NAT_GATEWAY *smithy.Schema
 
+var ResourceType_DYNAMO_DB_TABLE *smithy.Schema
+
+var ResourceType_ELASTI_CACHE_CLUSTER *smithy.Schema
+
+var ResourceType_MEMORY_DB_CLUSTER *smithy.Schema
+
+var ResourceType_DOCUMENT_DB_CLUSTER *smithy.Schema
+
+var ResourceType_WORK_SPACES *smithy.Schema
+
+var ResourceType_SAGE_MAKER_ENDPOINT *smithy.Schema
+
 var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ResourceTypeList",
 }, smithy.ShapeTypeList, 1)
 var _ResourceTypeList_member *smithy.Schema
+
+var SageMakerEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "SageMakerEndpoint",
+}, smithy.ShapeTypeStructure, 1)
+var SageMakerEndpoint_costCalculation *smithy.Schema
 
 var SageMakerSavingsPlans = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
@@ -1133,7 +1190,8 @@ var Term_THREE_YEARS *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var TimePeriod = smithy.NewSchema(smithy.ShapeID{
@@ -1167,7 +1225,8 @@ var _UsageList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
 
 var ValidationException_reason *smithy.Schema
@@ -1195,6 +1254,12 @@ var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
 var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
 
 var ValidationExceptionReason_OTHER *smithy.Schema
+
+var WorkSpaces = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.costoptimizationhub",
+	Name:      "WorkSpaces",
+}, smithy.ShapeTypeStructure, 1)
+var WorkSpaces_costCalculation *smithy.Schema
 
 var GetPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costoptimizationhub",
@@ -1514,6 +1579,8 @@ func init() {
 
 	DbInstanceConfiguration_dbInstanceClass = DbInstanceConfiguration.AddMember("dbInstanceClass", smithyprelude.String)
 
+	DocumentDbCluster_costCalculation = DocumentDbCluster.AddMember("costCalculation", ResourceCostCalculation)
+
 	DynamoDbReservedCapacityConfiguration_accountScope = DynamoDbReservedCapacityConfiguration.AddMember("accountScope", smithyprelude.String)
 
 	DynamoDbReservedCapacityConfiguration_service = DynamoDbReservedCapacityConfiguration.AddMember("service", smithyprelude.String)
@@ -1545,6 +1612,8 @@ func init() {
 	DynamoDbReservedCapacity_configuration = DynamoDbReservedCapacity.AddMember("configuration", DynamoDbReservedCapacityConfiguration)
 
 	DynamoDbReservedCapacity_costCalculation = DynamoDbReservedCapacity.AddMember("costCalculation", ReservedInstancesCostCalculation)
+
+	DynamoDbTable_costCalculation = DynamoDbTable.AddMember("costCalculation", ResourceCostCalculation)
 
 	StorageConfiguration_type = StorageConfiguration.AddMember("type", smithyprelude.String)
 
@@ -1664,6 +1733,8 @@ func init() {
 
 	_EfficiencyMetricsByGroupList_member = _EfficiencyMetricsByGroupList.AddMember("member", EfficiencyMetricsByGroup)
 
+	ElastiCacheCluster_costCalculation = ElastiCacheCluster.AddMember("costCalculation", ResourceCostCalculation)
+
 	ElastiCacheReservedInstancesConfiguration_accountScope = ElastiCacheReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
 
 	ElastiCacheReservedInstancesConfiguration_service = ElastiCacheReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
@@ -1746,6 +1817,18 @@ func init() {
 
 	ResourceType_NAT_GATEWAY = ResourceType.AddMember("NAT_GATEWAY", smithyprelude.Unit)
 
+	ResourceType_DYNAMO_DB_TABLE = ResourceType.AddMember("DYNAMO_DB_TABLE", smithyprelude.Unit)
+
+	ResourceType_ELASTI_CACHE_CLUSTER = ResourceType.AddMember("ELASTI_CACHE_CLUSTER", smithyprelude.Unit)
+
+	ResourceType_MEMORY_DB_CLUSTER = ResourceType.AddMember("MEMORY_DB_CLUSTER", smithyprelude.Unit)
+
+	ResourceType_DOCUMENT_DB_CLUSTER = ResourceType.AddMember("DOCUMENT_DB_CLUSTER", smithyprelude.Unit)
+
+	ResourceType_WORK_SPACES = ResourceType.AddMember("WORK_SPACES", smithyprelude.Unit)
+
+	ResourceType_SAGE_MAKER_ENDPOINT = ResourceType.AddMember("SAGE_MAKER_ENDPOINT", smithyprelude.Unit)
+
 	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", ResourceType)
 
 	Tag_key = Tag.AddMember("key", smithyprelude.String)
@@ -1797,6 +1880,8 @@ func init() {
 	MemberAccountDiscountVisibility_ALL = MemberAccountDiscountVisibility.AddMember("ALL", smithyprelude.Unit)
 
 	MemberAccountDiscountVisibility_NONE = MemberAccountDiscountVisibility.AddMember("NONE", smithyprelude.Unit)
+
+	MemoryDbCluster_costCalculation = MemoryDbCluster.AddMember("costCalculation", ResourceCostCalculation)
 
 	MemoryDbReservedInstancesConfiguration_accountScope = MemoryDbReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
 
@@ -2042,6 +2127,10 @@ func init() {
 
 	SageMakerSavingsPlans_costCalculation = SageMakerSavingsPlans.AddMember("costCalculation", SavingsPlansCostCalculation)
 
+	WorkSpaces_costCalculation = WorkSpaces.AddMember("costCalculation", ResourceCostCalculation)
+
+	SageMakerEndpoint_costCalculation = SageMakerEndpoint.AddMember("costCalculation", ResourceCostCalculation)
+
 	ResourceDetails_lambdaFunction = ResourceDetails.AddMember("lambdaFunction", LambdaFunction)
 
 	ResourceDetails_ecsService = ResourceDetails.AddMember("ecsService", EcsService)
@@ -2079,6 +2168,18 @@ func init() {
 	ResourceDetails_memoryDbReservedInstances = ResourceDetails.AddMember("memoryDbReservedInstances", MemoryDbReservedInstances)
 
 	ResourceDetails_natGateway = ResourceDetails.AddMember("natGateway", NatGateway)
+
+	ResourceDetails_dynamoDbTable = ResourceDetails.AddMember("dynamoDbTable", DynamoDbTable)
+
+	ResourceDetails_elastiCacheCluster = ResourceDetails.AddMember("elastiCacheCluster", ElastiCacheCluster)
+
+	ResourceDetails_memoryDbCluster = ResourceDetails.AddMember("memoryDbCluster", MemoryDbCluster)
+
+	ResourceDetails_documentDbCluster = ResourceDetails.AddMember("documentDbCluster", DocumentDbCluster)
+
+	ResourceDetails_workSpaces = ResourceDetails.AddMember("workSpaces", WorkSpaces)
+
+	ResourceDetails_sageMakerEndpoint = ResourceDetails.AddMember("sageMakerEndpoint", SageMakerEndpoint)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
 

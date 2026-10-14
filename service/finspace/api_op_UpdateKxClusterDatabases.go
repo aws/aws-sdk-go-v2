@@ -5,12 +5,8 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the databases mounted on a kdb cluster, which includes the changesetId
@@ -61,30 +57,6 @@ type UpdateKxClusterDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxClusterDatabasesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKxClusterDatabasesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKxClusterDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateKxClusterDatabasesRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.UpdateKxClusterDatabasesRequest_clusterName, *v.ClusterName)
-	}
-	serializeKxDatabaseConfigurations(s, schemas.UpdateKxClusterDatabasesRequest_databases, v.Databases)
-	if v.DeploymentConfiguration != nil {
-		s.WriteStruct(schemas.UpdateKxClusterDatabasesRequest_deploymentConfiguration)
-		v.DeploymentConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.UpdateKxClusterDatabasesRequest_environmentId, *v.EnvironmentId)
-	}
-}
-
 type UpdateKxClusterDatabasesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,73 +64,26 @@ type UpdateKxClusterDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxClusterDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKxClusterDatabasesResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxClusterDatabases{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxClusterDatabases, schemas.UpdateKxClusterDatabasesRequest, schemas.UpdateKxClusterDatabasesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxClusterDatabases{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxClusterDatabases, schemas.UpdateKxClusterDatabasesRequest, schemas.UpdateKxClusterDatabasesResponse), output: &UpdateKxClusterDatabasesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxClusterDatabases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +93,6 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpUpdateKxClusterDatabasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxClusterDatabases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +105,6 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -231,12 +144,4 @@ func (m *idempotencyToken_initializeOpUpdateKxClusterDatabases) HandleInitialize
 }
 func addIdempotencyToken_opUpdateKxClusterDatabasesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateKxClusterDatabases{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateKxClusterDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateKxClusterDatabases",
-	}
 }

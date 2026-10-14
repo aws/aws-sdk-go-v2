@@ -5,12 +5,8 @@ package chatbot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists Amazon Chime webhook configurations optionally filtered by
@@ -49,24 +45,6 @@ type DescribeChimeWebhookConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeChimeWebhookConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeChimeWebhookConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeChimeWebhookConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.DescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeChimeWebhookConfigurationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeChimeWebhookConfigurationsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeChimeWebhookConfigurationsOutput struct {
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -83,84 +61,26 @@ type DescribeChimeWebhookConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeChimeWebhookConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeChimeWebhookConfigurationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeChimeWebhookConfigurationsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeChimeWebhookConfigurationsResult_NextToken, v.NextToken)
-		case schemas.DescribeChimeWebhookConfigurationsResult_WebhookConfigurations:
-			return deserializeChimeWebhookConfigurationList(d, schemas.DescribeChimeWebhookConfigurationsResult_WebhookConfigurations, &v.WebhookConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeChimeWebhookConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChimeWebhookConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChimeWebhookConfigurations, schemas.DescribeChimeWebhookConfigurationsRequest, schemas.DescribeChimeWebhookConfigurationsResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChimeWebhookConfigurations{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChimeWebhookConfigurations, schemas.DescribeChimeWebhookConfigurationsRequest, schemas.DescribeChimeWebhookConfigurationsResult), output: &DescribeChimeWebhookConfigurationsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChimeWebhookConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChimeWebhookConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +93,6 @@ func (c *Client) addOperationDescribeChimeWebhookConfigurationsMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +198,3 @@ type DescribeChimeWebhookConfigurationsAPIClient interface {
 }
 
 var _ DescribeChimeWebhookConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeChimeWebhookConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeChimeWebhookConfigurations",
-	}
-}

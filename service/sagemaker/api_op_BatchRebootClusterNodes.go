@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Reboots specific nodes within a SageMaker HyperPod cluster using a soft
@@ -79,6 +78,20 @@ type BatchRebootClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRebootClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRebootClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRebootClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchRebootClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesRequest_NodeIds, v.NodeIds)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+}
+
 type BatchRebootClusterNodesOutput struct {
 
 	// A list of errors encountered for EC2 instance IDs that could not be rebooted.
@@ -106,77 +119,54 @@ type BatchRebootClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRebootClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRebootClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRebootClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchRebootClusterNodesErrors(s, schemas.BatchRebootClusterNodesResponse_Failed, v.Failed)
+	serializeBatchRebootClusterNodeLogicalIdsErrors(s, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
+	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesResponse_Successful, v.Successful)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+}
+func (v *BatchRebootClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRebootClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRebootClusterNodesResponse_Failed:
+			return deserializeBatchRebootClusterNodesErrors(d, schemas.BatchRebootClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds:
+			return deserializeBatchRebootClusterNodeLogicalIdsErrors(d, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, &v.FailedNodeLogicalIds)
+		case schemas.BatchRebootClusterNodesResponse_Successful:
+			return deserializeClusterNodeIds(d, schemas.BatchRebootClusterNodesResponse_Successful, &v.Successful)
+		case schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds:
+			return deserializeClusterNodeLogicalIdList(d, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, &v.SuccessfulNodeLogicalIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchRebootClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRebootClusterNodes, schemas.BatchRebootClusterNodesRequest, schemas.BatchRebootClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchRebootClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRebootClusterNodes, schemas.BatchRebootClusterNodesRequest, schemas.BatchRebootClusterNodesResponse), output: &BatchRebootClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchRebootClusterNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchRebootClusterNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchRebootClusterNodesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchRebootClusterNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +181,8 @@ func (c *Client) addOperationBatchRebootClusterNodesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchRebootClusterNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchRebootClusterNodes",
-	}
 }

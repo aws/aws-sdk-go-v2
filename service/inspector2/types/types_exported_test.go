@@ -23,6 +23,9 @@ func ExampleAggregationRequest_outputUsage() {
 	case *types.AggregationRequestMemberCodeRepositoryAggregation:
 		_ = v.Value // Value is types.CodeRepositoryAggregation
 
+	case *types.AggregationRequestMemberContainerImageAggregation:
+		_ = v.Value // Value is types.ContainerImageAggregation
+
 	case *types.AggregationRequestMemberEc2InstanceAggregation:
 		_ = v.Value // Value is types.Ec2InstanceAggregation
 
@@ -44,8 +47,14 @@ func ExampleAggregationRequest_outputUsage() {
 	case *types.AggregationRequestMemberRepositoryAggregation:
 		_ = v.Value // Value is types.RepositoryAggregation
 
+	case *types.AggregationRequestMemberServerlessFunctionAggregation:
+		_ = v.Value // Value is types.ServerlessFunctionAggregation
+
 	case *types.AggregationRequestMemberTitleAggregation:
 		_ = v.Value // Value is types.TitleAggregation
+
+	case *types.AggregationRequestMemberVmInstanceAggregation:
+		_ = v.Value // Value is types.VmInstanceAggregation
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -56,18 +65,21 @@ func ExampleAggregationRequest_outputUsage() {
 	}
 }
 
-var _ *types.LambdaFunctionAggregation
-var _ *types.LambdaLayerAggregation
 var _ *types.AwsEcrContainerAggregation
 var _ *types.TitleAggregation
 var _ *types.ImageLayerAggregation
+var _ *types.VmInstanceAggregation
 var _ *types.AmiAggregation
+var _ *types.ContainerImageAggregation
 var _ *types.CodeRepositoryAggregation
 var _ *types.FindingTypeAggregation
 var _ *types.AccountAggregation
 var _ *types.Ec2InstanceAggregation
 var _ *types.PackageAggregation
 var _ *types.RepositoryAggregation
+var _ *types.LambdaFunctionAggregation
+var _ *types.LambdaLayerAggregation
+var _ *types.ServerlessFunctionAggregation
 
 func ExampleAggregationResponse_outputUsage() {
 	var union types.AggregationResponse
@@ -84,6 +96,9 @@ func ExampleAggregationResponse_outputUsage() {
 
 	case *types.AggregationResponseMemberCodeRepositoryAggregation:
 		_ = v.Value // Value is types.CodeRepositoryAggregationResponse
+
+	case *types.AggregationResponseMemberContainerImageAggregation:
+		_ = v.Value // Value is types.ContainerImageAggregationResponse
 
 	case *types.AggregationResponseMemberEc2InstanceAggregation:
 		_ = v.Value // Value is types.Ec2InstanceAggregationResponse
@@ -106,8 +121,14 @@ func ExampleAggregationResponse_outputUsage() {
 	case *types.AggregationResponseMemberRepositoryAggregation:
 		_ = v.Value // Value is types.RepositoryAggregationResponse
 
+	case *types.AggregationResponseMemberServerlessFunctionAggregation:
+		_ = v.Value // Value is types.ServerlessFunctionAggregationResponse
+
 	case *types.AggregationResponseMemberTitleAggregation:
 		_ = v.Value // Value is types.TitleAggregationResponse
+
+	case *types.AggregationResponseMemberVmInstanceAggregation:
+		_ = v.Value // Value is types.VmInstanceAggregationResponse
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -120,16 +141,19 @@ func ExampleAggregationResponse_outputUsage() {
 
 var _ *types.AccountAggregationResponse
 var _ *types.AmiAggregationResponse
-var _ *types.PackageAggregationResponse
 var _ *types.RepositoryAggregationResponse
 var _ *types.ImageLayerAggregationResponse
 var _ *types.LambdaLayerAggregationResponse
 var _ *types.TitleAggregationResponse
-var _ *types.FindingTypeAggregationResponse
 var _ *types.LambdaFunctionAggregationResponse
 var _ *types.CodeRepositoryAggregationResponse
 var _ *types.AwsEcrContainerAggregationResponse
+var _ *types.ContainerImageAggregationResponse
 var _ *types.Ec2InstanceAggregationResponse
+var _ *types.PackageAggregationResponse
+var _ *types.FindingTypeAggregationResponse
+var _ *types.ServerlessFunctionAggregationResponse
+var _ *types.VmInstanceAggregationResponse
 
 func ExampleClusterMetadata_outputUsage() {
 	var union types.ClusterMetadata
@@ -188,6 +212,42 @@ func ExampleCreateIntegrationDetail_outputUsage() {
 }
 
 var _ *types.CreateGitLabSelfManagedIntegrationDetail
+
+func ExampleProviderDetailCreate_outputUsage() {
+	var union types.ProviderDetailCreate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderDetailCreateMemberAzure:
+		_ = v.Value // Value is types.AzureProviderDetailCreate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureProviderDetailCreate
+
+func ExampleProviderDetailUpdate_outputUsage() {
+	var union types.ProviderDetailUpdate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderDetailUpdateMemberAzure:
+		_ = v.Value // Value is types.AzureProviderDetailUpdate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureProviderDetailUpdate
 
 func ExampleSchedule_outputUsage() {
 	var union types.Schedule

@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete a multiplex. The multiplex must be idle.
@@ -36,6 +35,18 @@ type DeleteMultiplexInput struct {
 	MultiplexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteMultiplexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.DeleteMultiplexRequest_MultiplexId, *v.MultiplexId)
+	}
 }
 
 // Placeholder documentation for DeleteMultiplexResponse
@@ -77,77 +88,99 @@ type DeleteMultiplexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiplexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiplexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteMultiplexResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DeleteMultiplexResponse_AvailabilityZones, v.AvailabilityZones)
+	serialize__listOfMultiplexOutputDestination(s, schemas.DeleteMultiplexResponse_Destinations, v.Destinations)
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteMultiplexResponse_Id, *v.Id)
+	}
+	if v.MultiplexSettings != nil {
+		s.WriteStruct(schemas.DeleteMultiplexResponse_MultiplexSettings)
+		v.MultiplexSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteMultiplexResponse_Name, *v.Name)
+	}
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.DeleteMultiplexResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.ProgramCount != nil {
+		s.WriteInt32(schemas.DeleteMultiplexResponse_ProgramCount, *v.ProgramCount)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteMultiplexResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DeleteMultiplexResponse_Tags, v.Tags)
+}
+func (v *DeleteMultiplexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMultiplexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMultiplexResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteMultiplexResponse_Arn, v.Arn)
+		case schemas.DeleteMultiplexResponse_AvailabilityZones:
+			return deserialize__listOf__string(d, schemas.DeleteMultiplexResponse_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.DeleteMultiplexResponse_Destinations:
+			return deserialize__listOfMultiplexOutputDestination(d, schemas.DeleteMultiplexResponse_Destinations, &v.Destinations)
+		case schemas.DeleteMultiplexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteMultiplexResponse_Id, v.Id)
+		case schemas.DeleteMultiplexResponse_MultiplexSettings:
+			v.MultiplexSettings = &types.MultiplexSettings{}
+			return v.MultiplexSettings.Deserialize(d)
+		case schemas.DeleteMultiplexResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteMultiplexResponse_Name, v.Name)
+		case schemas.DeleteMultiplexResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.DeleteMultiplexResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.DeleteMultiplexResponse_ProgramCount:
+			v.ProgramCount = new(int32)
+			return d.ReadInt32(schemas.DeleteMultiplexResponse_ProgramCount, v.ProgramCount)
+		case schemas.DeleteMultiplexResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteMultiplexResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.MultiplexState(ev)
+			return nil
+		case schemas.DeleteMultiplexResponse_Tags:
+			return deserializeTags(d, schemas.DeleteMultiplexResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplex, schemas.DeleteMultiplexRequest, schemas.DeleteMultiplexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiplex, schemas.DeleteMultiplexRequest, schemas.DeleteMultiplexResponse), output: &DeleteMultiplexOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMultiplex{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMultiplex"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteMultiplexValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMultiplex(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +195,8 @@ func (c *Client) addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteMultiplex(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteMultiplex",
-	}
 }

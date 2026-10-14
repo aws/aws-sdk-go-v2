@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRegistrationTypeDefinitions
+
+{"Filters":[{"Name":"supported-association-resource-type","Values":["__Member__","__Member__"]},{"Name":"supported-association-resource-type","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","RegistrationTypes":["__Member__","__Member__"]}

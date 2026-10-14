@@ -1,0 +1,5 @@
+POST /members/get
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

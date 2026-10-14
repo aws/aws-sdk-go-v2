@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBudgetServiceGateway.CreateBudgetAction
+
+{"AccountId":"__AccountId__","ActionThreshold":{"ActionThresholdType":"PERCENTAGE","ActionThresholdValue":1},"ActionType":"APPLY_IAM_POLICY","ApprovalModel":"AUTOMATIC","BudgetName":"__BudgetName__","Definition":{"IamActionDefinition":{"Groups":["__Member__","__Member__"],"PolicyArn":"__PolicyArn__","Roles":["__Member__","__Member__"],"Users":["__Member__","__Member__"]},"ScpActionDefinition":{"PolicyId":"__PolicyId__","TargetIds":["__Member__","__Member__"]},"SsmActionDefinition":{"ActionSubType":"STOP_EC2_INSTANCES","InstanceIds":["__Member__","__Member__"],"Region":"__Region__"}},"ExecutionRoleArn":"__ExecutionRoleArn__","NotificationType":"ACTUAL","ResourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Subscribers":[{"Address":"__Address__","SubscriptionType":"SNS"},{"Address":"__Address__","SubscriptionType":"SNS"}]}

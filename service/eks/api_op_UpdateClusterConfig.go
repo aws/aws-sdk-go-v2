@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an Amazon EKS cluster configuration. Your cluster continues to function
@@ -101,6 +101,15 @@ type UpdateClusterConfigInput struct {
 	// normally.
 	DeletionProtection *bool
 
+	// The Kubernetes API server configuration for the updated cluster.
+	KubeApiServerConfig *types.KubeApiServerConfigRequest
+
+	// The Kubernetes controller manager configuration for the updated cluster.
+	KubeControllerManagerConfig *types.KubeControllerManagerConfigRequest
+
+	// The Kubernetes scheduler configuration for the updated cluster.
+	KubeSchedulerConfig *types.KubeSchedulerConfigRequest
+
 	// The Kubernetes network configuration for the cluster.
 	KubernetesNetworkConfig *types.KubernetesNetworkConfigRequest
 
@@ -119,7 +128,9 @@ type UpdateClusterConfigInput struct {
 	// remove this configuration after the cluster is created.
 	RemoteNetworkConfig *types.RemoteNetworkConfigRequest
 
-	// An object representing the VPC configuration to use for an Amazon EKS cluster.
+	// An object representing the VPC configuration to use for the cluster update. You
+	// can use this parameter to update the control plane egress mode, the subnets used
+	// by the cluster, the security groups, and the endpoint access settings.
 	ResourcesVpcConfig *types.VpcConfigRequest
 
 	// Update the configuration of the block storage capability of your EKS Auto Mode
@@ -153,6 +164,89 @@ type UpdateClusterConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_accessConfig)
+		v.AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateClusterConfigRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ComputeConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_computeConfig)
+		v.ComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ControlPlaneScalingConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_controlPlaneScalingConfig)
+		v.ControlPlaneScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateClusterConfigRequest_deletionProtection, *v.DeletionProtection)
+	}
+	if v.KubeApiServerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeApiServerConfig)
+		v.KubeApiServerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeControllerManagerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeControllerManagerConfig)
+		v.KubeControllerManagerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubeSchedulerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubeSchedulerConfig)
+		v.KubeSchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KubernetesNetworkConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_kubernetesNetworkConfig)
+		v.KubernetesNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateClusterConfigRequest_name, *v.Name)
+	}
+	if v.RemoteNetworkConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_remoteNetworkConfig)
+		v.RemoteNetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcesVpcConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_resourcesVpcConfig)
+		v.ResourcesVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_storageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpgradePolicy != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_upgradePolicy)
+		v.UpgradePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ZonalShiftConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigRequest_zonalShiftConfig)
+		v.ZonalShiftConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateClusterConfigOutput struct {
 
 	// An object representing an asynchronous update.
@@ -164,65 +258,44 @@ type UpdateClusterConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterConfigResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfig, schemas.UpdateClusterConfigRequest, schemas.UpdateClusterConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfig, schemas.UpdateClusterConfigRequest, schemas.UpdateClusterConfigResponse), output: &UpdateClusterConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClusterConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateClusterConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -232,12 +305,6 @@ func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpUpdateClusterConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClusterConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,12 +317,6 @@ func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,12 +356,4 @@ func (m *idempotencyToken_initializeOpUpdateClusterConfig) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opUpdateClusterConfigMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateClusterConfig{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateClusterConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateClusterConfig",
-	}
 }

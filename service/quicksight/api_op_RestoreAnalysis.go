@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Restores an analysis.
@@ -48,6 +47,24 @@ type RestoreAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.RestoreAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.RestoreAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.RestoreToFolders != false {
+		s.WriteBool(schemas.RestoreAnalysisRequest_RestoreToFolders, v.RestoreToFolders)
+	}
+}
+
 type RestoreAnalysisOutput struct {
 
 	// The ID of the analysis that you're restoring.
@@ -71,77 +88,68 @@ type RestoreAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.RestoreAnalysisResponse_RequestId, *v.RequestId)
+	}
+	serializeFolderArnList(s, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, v.RestorationFailedFolderArns)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.RestoreAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *RestoreAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.RestoreAnalysisResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_Arn, v.Arn)
+		case schemas.RestoreAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.RestoreAnalysisResponse_RequestId, v.RequestId)
+		case schemas.RestoreAnalysisResponse_RestorationFailedFolderArns:
+			return deserializeFolderArnList(d, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, &v.RestorationFailedFolderArns)
+		case schemas.RestoreAnalysisResponse_Status:
+			return d.ReadInt32(schemas.RestoreAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreAnalysis, schemas.RestoreAnalysisRequest, schemas.RestoreAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreAnalysis, schemas.RestoreAnalysisRequest, schemas.RestoreAnalysisResponse), output: &RestoreAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestoreAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +164,8 @@ func (c *Client) addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreAnalysis",
-	}
 }

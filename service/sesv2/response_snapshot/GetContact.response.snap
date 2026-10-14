@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttributesData":"__AttributesData__","ContactListName":"__ContactListName__","CreatedTimestamp":946684800,"EmailAddress":"__EmailAddress__","LastUpdatedTimestamp":946684800,"TopicDefaultPreferences":[{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"},{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"}],"TopicPreferences":[{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"},{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"}],"UnsubscribeAll":true}

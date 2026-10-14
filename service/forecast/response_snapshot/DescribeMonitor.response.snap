@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeMonitor
+
+{"Baseline":{"PredictorBaseline":{"BaselineMetrics":[{"Name":"__Name__","Value":1},{"Name":"__Name__","Value":1}]}},"CreationTime":946684800,"EstimatedEvaluationTimeRemainingInMinutes":1,"LastEvaluationState":"__LastEvaluationState__","LastEvaluationTime":946684800,"LastModificationTime":946684800,"Message":"__Message__","MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ResourceArn":"__ResourceArn__","Status":"__Status__"}

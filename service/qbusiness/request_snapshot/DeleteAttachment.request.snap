@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/conversations/__ConversationId__/attachments/__AttachmentId__?userId=__UserId__
+
+

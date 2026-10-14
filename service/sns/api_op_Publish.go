@@ -4,11 +4,8 @@ package sns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends a message to an Amazon SNS topic, a text message (SMS message) directly
@@ -61,8 +58,17 @@ type PublishInput struct {
 	//
 	// Constraints:
 	//
-	//   - With the exception of SMS, messages must be UTF-8 encoded strings and at
-	//   most 256 KB in size (262,144 bytes, not 262,144 characters).
+	//   - With the exception of SMS, messages must be UTF-8 encoded strings. By
+	//   default, a message can be at most 256 KiB in size (262,144 bytes, not 262,144
+	//   characters).
+	//
+	// When you publish to a topic, the maximum size is determined by the topic's
+	//   MaximumMessageSize attribute, which supports values up to 1 MiB (1,048,576
+	//   bytes). Amazon SNS validates the combined size of the message body and message
+	//   attributes against this value and returns an InvalidParameter error if the
+	//   limit is exceeded.
+	//
+	// For more information, see [Large message payloads]in the Amazon SNS Developer Guide.
 	//
 	//   - For SMS, each message can contain up to 140 characters. This character
 	//   limit depends on the encoding schema. For example, an SMS message can contain
@@ -98,6 +104,8 @@ type PublishInput struct {
 	//
 	//   - Failure to parse or validate any key or value in the message will cause the
 	//   Publish call to return an error (no partial delivery).
+	//
+	// [Large message payloads]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
 	//
 	// This member is required.
 	Message *string
@@ -230,9 +238,6 @@ type PublishOutput struct {
 }
 
 func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublish{}, middleware.After)
 	if err != nil {
 		return err
@@ -241,65 +246,20 @@ func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Publish"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPublishValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublish(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -314,22 +274,8 @@ func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPublish(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Publish",
-	}
 }

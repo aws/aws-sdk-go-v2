@@ -5,12 +5,10 @@ package rds
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new DB instance that acts as a read replica for an existing source DB
@@ -547,10 +545,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// This parameter is only supported for Db2 DB instances and Oracle DB instances.
 	//
-	// Db2 Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2
-	// Standard Edition (SE). The main use case for standby replicas is cross-Region
-	// disaster recovery. Because it doesn't accept user connections, a standby replica
-	// can't serve a read-only workload.
+	// Db2 Standby DB replicas are included in Db2 Advanced Edition (AE), Db2
+	// Community Edition (CE), and Db2 Standard Edition (SE). The main use case for
+	// standby replicas is cross-Region disaster recovery. Because it doesn't accept
+	// user connections, a standby replica can't serve a read-only workload.
 	//
 	// You can create a combination of standby and read-only DB replicas for the same
 	// primary DB instance. For more information, see [Working with replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
@@ -709,9 +707,6 @@ type CreateDBInstanceReadReplicaOutput struct {
 }
 
 func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBInstanceReadReplica{}, middleware.After)
 	if err != nil {
 		return err
@@ -720,68 +715,23 @@ func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBInstanceReadReplica"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCreateDBInstanceReadReplicaPresignURLMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDBInstanceReadReplicaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -794,12 +744,6 @@ func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -885,14 +829,6 @@ func (c *presignAutoFillCreateDBInstanceReadReplicaClient) PresignURL(ctx contex
 	}
 	presignOptFn := WithPresignClientFromClientOptions(optFn)
 	return c.client.PresignCreateDBInstanceReadReplica(ctx, input, presignOptFn)
-}
-
-func newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDBInstanceReadReplica",
-	}
 }
 
 // PresignCreateDBInstanceReadReplica is used to generate a presigned HTTP Request

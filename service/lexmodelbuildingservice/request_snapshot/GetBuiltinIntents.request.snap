@@ -1,0 +1,3 @@
+GET /builtins/intents?locale=de-DE&maxResults=1&nextToken=__NextToken__&signatureContains=__SignatureContains__
+
+

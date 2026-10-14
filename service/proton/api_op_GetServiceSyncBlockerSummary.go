@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get detailed data for the service sync blocker summary.
@@ -45,6 +44,34 @@ type GetServiceSyncBlockerSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncBlockerSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncBlockerSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncBlockerSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceSyncBlockerSummaryInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceSyncBlockerSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncBlockerSummaryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.GetServiceSyncBlockerSummaryInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceSyncBlockerSummaryInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceSyncBlockerSummaryOutput struct {
 
 	// The detailed data of the requested service sync blocker summary.
@@ -56,77 +83,50 @@ type GetServiceSyncBlockerSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncBlockerSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncBlockerSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncBlockerSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSyncBlockerSummary != nil {
+		s.WriteStruct(schemas.GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary)
+		v.ServiceSyncBlockerSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceSyncBlockerSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncBlockerSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary:
+			v.ServiceSyncBlockerSummary = &types.ServiceSyncBlockerSummary{}
+			return v.ServiceSyncBlockerSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceSyncBlockerSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncBlockerSummary, schemas.GetServiceSyncBlockerSummaryInput, schemas.GetServiceSyncBlockerSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceSyncBlockerSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncBlockerSummary, schemas.GetServiceSyncBlockerSummaryInput, schemas.GetServiceSyncBlockerSummaryOutput), output: &GetServiceSyncBlockerSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceSyncBlockerSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceSyncBlockerSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetServiceSyncBlockerSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceSyncBlockerSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +141,8 @@ func (c *Client) addOperationGetServiceSyncBlockerSummaryMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServiceSyncBlockerSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServiceSyncBlockerSummary",
-	}
 }

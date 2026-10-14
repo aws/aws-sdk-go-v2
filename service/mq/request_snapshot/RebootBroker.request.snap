@@ -1,0 +1,3 @@
+POST /v1/brokers/__BrokerId__/reboot
+
+

@@ -1,0 +1,3 @@
+GET /sequencestore/__SequenceStoreId__/readset/__Id__?file=SOURCE1&partNumber=1
+
+

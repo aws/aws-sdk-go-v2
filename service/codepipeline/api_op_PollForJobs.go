@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about any jobs for CodePipeline to act on. PollForJobs is
@@ -55,6 +54,24 @@ type PollForJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTypeId != nil {
+		s.WriteStruct(schemas.PollForJobsInput_actionTypeId)
+		v.ActionTypeId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxBatchSize != nil {
+		s.WriteInt32(schemas.PollForJobsInput_maxBatchSize, *v.MaxBatchSize)
+	}
+	serializeQueryParamMap(s, schemas.PollForJobsInput_queryParam, v.QueryParam)
+}
+
 // Represents the output of a PollForJobs action.
 type PollForJobsOutput struct {
 
@@ -67,77 +84,45 @@ type PollForJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.PollForJobsOutput_jobs, v.Jobs)
+}
+func (v *PollForJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PollForJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PollForJobsOutput_jobs:
+			return deserializeJobList(d, schemas.PollForJobsOutput_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForJobs, schemas.PollForJobsInput, schemas.PollForJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForJobs, schemas.PollForJobsInput, schemas.PollForJobsOutput), output: &PollForJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PollForJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPollForJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPollForJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +137,8 @@ func (c *Client) addOperationPollForJobsMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPollForJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PollForJobs",
-	}
 }

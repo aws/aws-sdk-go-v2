@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describe an existing Authorizer resource.
@@ -41,6 +40,21 @@ type GetAuthorizerInput struct {
 	RestApiId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.GetAuthorizerRequest_authorizerId, *v.AuthorizerId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetAuthorizerRequest_restApiId, *v.RestApiId)
+	}
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -128,77 +142,103 @@ type GetAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Authorizer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != nil {
+		s.WriteString(schemas.Authorizer_authType, *v.AuthType)
+	}
+	if v.AuthorizerCredentials != nil {
+		s.WriteString(schemas.Authorizer_authorizerCredentials, *v.AuthorizerCredentials)
+	}
+	if v.AuthorizerResultTtlInSeconds != nil {
+		s.WriteInt32(schemas.Authorizer_authorizerResultTtlInSeconds, *v.AuthorizerResultTtlInSeconds)
+	}
+	if v.AuthorizerUri != nil {
+		s.WriteString(schemas.Authorizer_authorizerUri, *v.AuthorizerUri)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Authorizer_id, *v.Id)
+	}
+	if v.IdentitySource != nil {
+		s.WriteString(schemas.Authorizer_identitySource, *v.IdentitySource)
+	}
+	if v.IdentityValidationExpression != nil {
+		s.WriteString(schemas.Authorizer_identityValidationExpression, *v.IdentityValidationExpression)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Authorizer_name, *v.Name)
+	}
+	serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	if v.Type != "" {
+		s.WriteString(schemas.Authorizer_type, string(v.Type))
+	}
+}
+func (v *GetAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Authorizer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Authorizer_authType:
+			v.AuthType = new(string)
+			return d.ReadString(schemas.Authorizer_authType, v.AuthType)
+		case schemas.Authorizer_authorizerCredentials:
+			v.AuthorizerCredentials = new(string)
+			return d.ReadString(schemas.Authorizer_authorizerCredentials, v.AuthorizerCredentials)
+		case schemas.Authorizer_authorizerResultTtlInSeconds:
+			v.AuthorizerResultTtlInSeconds = new(int32)
+			return d.ReadInt32(schemas.Authorizer_authorizerResultTtlInSeconds, v.AuthorizerResultTtlInSeconds)
+		case schemas.Authorizer_authorizerUri:
+			v.AuthorizerUri = new(string)
+			return d.ReadString(schemas.Authorizer_authorizerUri, v.AuthorizerUri)
+		case schemas.Authorizer_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Authorizer_id, v.Id)
+		case schemas.Authorizer_identitySource:
+			v.IdentitySource = new(string)
+			return d.ReadString(schemas.Authorizer_identitySource, v.IdentitySource)
+		case schemas.Authorizer_identityValidationExpression:
+			v.IdentityValidationExpression = new(string)
+			return d.ReadString(schemas.Authorizer_identityValidationExpression, v.IdentityValidationExpression)
+		case schemas.Authorizer_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Authorizer_name, v.Name)
+		case schemas.Authorizer_providerARNs:
+			return deserializeListOfARNs(d, schemas.Authorizer_providerARNs, &v.ProviderARNs)
+		case schemas.Authorizer_type:
+			var ev string
+			if err := d.ReadString(schemas.Authorizer_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AuthorizerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthorizer, schemas.GetAuthorizerRequest, schemas.Authorizer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthorizer, schemas.GetAuthorizerRequest, schemas.Authorizer), output: &GetAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAuthorizer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAuthorizer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAuthorizerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAuthorizer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +256,8 @@ func (c *Client) addOperationGetAuthorizerMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAuthorizer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAuthorizer",
-	}
 }

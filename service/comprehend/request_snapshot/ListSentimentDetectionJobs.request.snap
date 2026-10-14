@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.ListSentimentDetectionJobs
+
+{"Filter":{"JobName":"__JobName__","JobStatus":"SUBMITTED","SubmitTimeAfter":946684800,"SubmitTimeBefore":946684800},"MaxResults":1,"NextToken":"__NextToken__"}

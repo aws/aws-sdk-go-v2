@@ -1,0 +1,5 @@
+PATCH /2023-10-12/monitors/__MonitorId__
+
+Content-Type: application/json
+
+{"displayName":"__DisplayName__","roleArn":"__RoleArn__","subdomain":"__Subdomain__"}

@@ -4,10 +4,9 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Validates the integrity of an assessment report in Audit Manager.
@@ -37,6 +36,18 @@ type ValidateAssessmentReportIntegrityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAssessmentReportIntegrityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAssessmentReportIntegrityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAssessmentReportIntegrityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3RelativePath != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityRequest_s3RelativePath, *v.S3RelativePath)
+	}
+}
+
 type ValidateAssessmentReportIntegrityOutput struct {
 
 	//  The signature algorithm that's used to code sign the assessment report file.
@@ -61,77 +72,69 @@ type ValidateAssessmentReportIntegrityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAssessmentReportIntegrityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAssessmentReportIntegrityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAssessmentReportIntegrityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SignatureAlgorithm != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm, *v.SignatureAlgorithm)
+	}
+	if v.SignatureDateTime != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime, *v.SignatureDateTime)
+	}
+	if v.SignatureKeyId != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId, *v.SignatureKeyId)
+	}
+	if v.SignatureValid != nil {
+		s.WriteBool(schemas.ValidateAssessmentReportIntegrityResponse_signatureValid, *v.SignatureValid)
+	}
+	serializeValidationErrors(s, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, v.ValidationErrors)
+}
+func (v *ValidateAssessmentReportIntegrityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateAssessmentReportIntegrityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm:
+			v.SignatureAlgorithm = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm, v.SignatureAlgorithm)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime:
+			v.SignatureDateTime = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime, v.SignatureDateTime)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId:
+			v.SignatureKeyId = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId, v.SignatureKeyId)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureValid:
+			v.SignatureValid = new(bool)
+			return d.ReadBool(schemas.ValidateAssessmentReportIntegrityResponse_signatureValid, v.SignatureValid)
+		case schemas.ValidateAssessmentReportIntegrityResponse_validationErrors:
+			return deserializeValidationErrors(d, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAssessmentReportIntegrity, schemas.ValidateAssessmentReportIntegrityRequest, schemas.ValidateAssessmentReportIntegrityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateAssessmentReportIntegrity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAssessmentReportIntegrity, schemas.ValidateAssessmentReportIntegrityRequest, schemas.ValidateAssessmentReportIntegrityResponse), output: &ValidateAssessmentReportIntegrityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateAssessmentReportIntegrity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateAssessmentReportIntegrity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpValidateAssessmentReportIntegrityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateAssessmentReportIntegrity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +149,8 @@ func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opValidateAssessmentReportIntegrity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ValidateAssessmentReportIntegrity",
-	}
 }

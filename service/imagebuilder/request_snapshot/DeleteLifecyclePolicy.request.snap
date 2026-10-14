@@ -1,0 +1,3 @@
+DELETE /DeleteLifecyclePolicy?lifecyclePolicyArn=__LifecyclePolicyArn__
+
+

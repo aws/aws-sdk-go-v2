@@ -1,0 +1,3 @@
+GET /2015-02-01/access-points?AccessPointId=__AccessPointId__&FileSystemId=__FileSystemId__&MaxResults=1&NextToken=__NextToken__
+
+

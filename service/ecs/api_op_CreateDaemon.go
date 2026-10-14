@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -70,6 +69,24 @@ type CreateDaemonInput struct {
 	// The Amazon Resource Name (ARN) of the cluster to create the daemon in.
 	ClusterArn *string
 
+	// If the critical parameter of a daemon is true , and the daemon task fails,
+	// stops, or becomes unhealthy, Amazon ECS drains the container instance and stops
+	// the other tasks running on it. If the critical parameter is false , the daemon
+	// task failure doesn't affect the other tasks on the instance. The default value
+	// is true .
+	//
+	// A non-critical daemon doesn't block instance registration. The container
+	// instance becomes active and continues to run your other tasks, whether the
+	// daemon task fails during scale-out or during a deployment.
+	//
+	// Amazon ECS emits an EventBridge event when a daemon task fails to start, for
+	// both critical and non-critical daemons.
+	//
+	// Daemon task launch failures during a deployment are still counted by the
+	// deployment circuit breaker. The circuit breaker can roll back an unstable target
+	// revision.
+	Critical *bool
+
 	// Optional deployment parameters that control how the daemon rolls out updates,
 	// including the drain percentage, alarm-based rollback, and bake time.
 	DeploymentConfiguration *types.DaemonDeploymentConfiguration
@@ -124,6 +141,46 @@ type CreateDaemonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDaemonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDaemonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CreateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDaemonRequest_clientToken, *v.ClientToken)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateDaemonRequest_clusterArn, *v.ClusterArn)
+	}
+	if v.Critical != nil {
+		s.WriteBool(schemas.CreateDaemonRequest_critical, *v.Critical)
+	}
+	if v.DaemonName != nil {
+		s.WriteString(schemas.CreateDaemonRequest_daemonName, *v.DaemonName)
+	}
+	if v.DaemonTaskDefinitionArn != nil {
+		s.WriteString(schemas.CreateDaemonRequest_daemonTaskDefinitionArn, *v.DaemonTaskDefinitionArn)
+	}
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.CreateDaemonRequest_deploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.CreateDaemonRequest_enableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.CreateDaemonRequest_enableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.CreateDaemonRequest_propagateTags, string(v.PropagateTags))
+	}
+	serializeTags(s, schemas.CreateDaemonRequest_tags, v.Tags)
+}
+
 type CreateDaemonOutput struct {
 
 	// The Unix timestamp for the time when the daemon was created.
@@ -146,77 +203,70 @@ type CreateDaemonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDaemonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDaemonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDaemonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDaemonResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DaemonArn != nil {
+		s.WriteString(schemas.CreateDaemonResponse_daemonArn, *v.DaemonArn)
+	}
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.CreateDaemonResponse_deploymentArn, *v.DeploymentArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDaemonResponse_status, string(v.Status))
+	}
+}
+func (v *CreateDaemonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDaemonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDaemonResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDaemonResponse_createdAt, v.CreatedAt)
+		case schemas.CreateDaemonResponse_daemonArn:
+			v.DaemonArn = new(string)
+			return d.ReadString(schemas.CreateDaemonResponse_daemonArn, v.DaemonArn)
+		case schemas.CreateDaemonResponse_deploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.CreateDaemonResponse_deploymentArn, v.DeploymentArn)
+		case schemas.CreateDaemonResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDaemonResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DaemonStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDaemonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDaemon, schemas.CreateDaemonRequest, schemas.CreateDaemonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDaemon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDaemon, schemas.CreateDaemonRequest, schemas.CreateDaemonResponse), output: &CreateDaemonOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDaemon{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDaemon"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDaemonValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDaemon(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -231,22 +281,8 @@ func (c *Client) addOperationCreateDaemonMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDaemon(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDaemon",
-	}
 }

@@ -1,0 +1,5 @@
+POST /network-migration/StartNetworkMigrationDeployment
+
+Content-Type: application/json
+
+{"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__"}

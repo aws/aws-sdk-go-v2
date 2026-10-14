@@ -5,12 +5,8 @@ package qapps
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the library items for Amazon Q Apps that are published and available for
@@ -49,27 +45,6 @@ type ListLibraryItemsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLibraryItemsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLibraryItemsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLibraryItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CategoryId != nil {
-		s.WriteString(schemas.ListLibraryItemsInput_categoryId, *v.CategoryId)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListLibraryItemsInput_instanceId, *v.InstanceId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListLibraryItemsInput_limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLibraryItemsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListLibraryItemsOutput struct {
 
 	// The list of library items meeting the request criteria.
@@ -84,87 +59,29 @@ type ListLibraryItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLibraryItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLibraryItemsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLibraryItemsOutput_libraryItems:
-			return deserializeLibraryItemList(d, schemas.ListLibraryItemsOutput_libraryItems, &v.LibraryItems)
-		case schemas.ListLibraryItemsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLibraryItemsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLibraryItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLibraryItems{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLibraryItems, schemas.ListLibraryItemsInput, schemas.ListLibraryItemsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLibraryItems{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLibraryItems, schemas.ListLibraryItemsInput, schemas.ListLibraryItemsOutput), output: &ListLibraryItemsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLibraryItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLibraryItemsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLibraryItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +94,6 @@ func (c *Client) addOperationListLibraryItemsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +194,3 @@ type ListLibraryItemsAPIClient interface {
 }
 
 var _ ListLibraryItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLibraryItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLibraryItems",
-	}
-}

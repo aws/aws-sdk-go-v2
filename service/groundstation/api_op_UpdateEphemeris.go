@@ -4,10 +4,9 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an existing ephemeris.
@@ -51,6 +50,27 @@ type UpdateEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEphemerisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEphemerisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateEphemerisRequest_enabled, *v.Enabled)
+	}
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.UpdateEphemerisRequest_ephemerisId, *v.EphemerisId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEphemerisRequest_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateEphemerisRequest_priority, *v.Priority)
+	}
+}
+
 type UpdateEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.
@@ -62,77 +82,48 @@ type UpdateEphemerisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEphemerisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EphemerisIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.EphemerisIdResponse_ephemerisId, *v.EphemerisId)
+	}
+}
+func (v *UpdateEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EphemerisIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EphemerisIdResponse_ephemerisId:
+			v.EphemerisId = new(string)
+			return d.ReadString(schemas.EphemerisIdResponse_ephemerisId, v.EphemerisId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEphemeris, schemas.UpdateEphemerisRequest, schemas.EphemerisIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEphemeris, schemas.UpdateEphemerisRequest, schemas.EphemerisIdResponse), output: &UpdateEphemerisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEphemeris{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEphemeris"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEphemerisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEphemeris(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +138,8 @@ func (c *Client) addOperationUpdateEphemerisMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEphemeris(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEphemeris",
-	}
 }

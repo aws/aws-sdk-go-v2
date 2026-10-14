@@ -50,12 +50,60 @@ func (m *validateOpGetEstimatedCarbonEmissions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEstimatedWaterAllocationDimensionValues struct {
+}
+
+func (*validateOpGetEstimatedWaterAllocationDimensionValues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEstimatedWaterAllocationDimensionValues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEstimatedWaterAllocationDimensionValuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEstimatedWaterAllocationDimensionValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEstimatedWaterAllocation struct {
+}
+
+func (*validateOpGetEstimatedWaterAllocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEstimatedWaterAllocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEstimatedWaterAllocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEstimatedWaterAllocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpGetEstimatedCarbonEmissionsDimensionValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEstimatedCarbonEmissionsDimensionValues{}, middleware.After)
 }
 
 func addOpGetEstimatedCarbonEmissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEstimatedCarbonEmissions{}, middleware.After)
+}
+
+func addOpGetEstimatedWaterAllocationDimensionValuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEstimatedWaterAllocationDimensionValues{}, middleware.After)
+}
+
+func addOpGetEstimatedWaterAllocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEstimatedWaterAllocation{}, middleware.After)
 }
 
 func validateTimePeriod(v *types.TimePeriod) error {
@@ -103,6 +151,47 @@ func validateOpGetEstimatedCarbonEmissionsInput(v *GetEstimatedCarbonEmissionsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetEstimatedCarbonEmissionsInput"}
+	if v.TimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
+	} else if v.TimePeriod != nil {
+		if err := validateTimePeriod(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEstimatedWaterAllocationDimensionValuesInput(v *GetEstimatedWaterAllocationDimensionValuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEstimatedWaterAllocationDimensionValuesInput"}
+	if v.TimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
+	} else if v.TimePeriod != nil {
+		if err := validateTimePeriod(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEstimatedWaterAllocationInput(v *GetEstimatedWaterAllocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEstimatedWaterAllocationInput"}
 	if v.TimePeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
 	} else if v.TimePeriod != nil {

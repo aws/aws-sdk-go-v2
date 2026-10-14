@@ -5,12 +5,8 @@ package rum
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the raw performance events that RUM has collected from your web
@@ -56,50 +52,6 @@ type GetAppMonitorDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAppMonitorDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAppMonitorDataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAppMonitorDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryFilters(s, schemas.GetAppMonitorDataRequest_Filters, v.Filters)
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.GetAppMonitorDataRequest_MaxResults, v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetAppMonitorDataRequest_Name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetAppMonitorDataRequest_NextToken, *v.NextToken)
-	}
-	if v.TimeRange != nil {
-		s.WriteStruct(schemas.GetAppMonitorDataRequest_TimeRange)
-		v.TimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetAppMonitorDataInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAppMonitorDataRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAppMonitorDataRequest_Filters:
-			return deserializeQueryFilters(d, schemas.GetAppMonitorDataRequest_Filters, &v.Filters)
-		case schemas.GetAppMonitorDataRequest_MaxResults:
-			return d.ReadInt32(schemas.GetAppMonitorDataRequest_MaxResults, &v.MaxResults)
-		case schemas.GetAppMonitorDataRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAppMonitorDataRequest_Name, v.Name)
-		case schemas.GetAppMonitorDataRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetAppMonitorDataRequest_NextToken, v.NextToken)
-		case schemas.GetAppMonitorDataRequest_TimeRange:
-			v.TimeRange = &types.TimeRange{}
-			return v.TimeRange.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type GetAppMonitorDataOutput struct {
 
 	// The events that RUM collected that match your request.
@@ -115,99 +67,29 @@ type GetAppMonitorDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAppMonitorDataOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAppMonitorDataResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAppMonitorDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventDataList(s, schemas.GetAppMonitorDataResponse_Events, v.Events)
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetAppMonitorDataResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *GetAppMonitorDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAppMonitorDataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAppMonitorDataResponse_Events:
-			return deserializeEventDataList(d, schemas.GetAppMonitorDataResponse_Events, &v.Events)
-		case schemas.GetAppMonitorDataResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetAppMonitorDataResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAppMonitorDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppMonitorData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitorData, schemas.GetAppMonitorDataRequest, schemas.GetAppMonitorDataResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppMonitorData{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitorData, schemas.GetAppMonitorDataRequest, schemas.GetAppMonitorDataResponse), output: &GetAppMonitorDataOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAppMonitorData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAppMonitorDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppMonitorData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +102,6 @@ func (c *Client) addOperationGetAppMonitorDataMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -322,11 +198,3 @@ type GetAppMonitorDataAPIClient interface {
 }
 
 var _ GetAppMonitorDataAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAppMonitorData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAppMonitorData",
-	}
-}

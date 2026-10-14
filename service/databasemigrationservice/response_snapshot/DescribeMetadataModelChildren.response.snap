@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeMetadataModelChildren
+
+{"Marker":"__Marker__","MetadataModelChildren":[{"MetadataModelName":"__MetadataModelName__","SelectionRules":"__SelectionRules__"},{"MetadataModelName":"__MetadataModelName__","SelectionRules":"__SelectionRules__"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.RegisterContainerInstance
+
+{"attributes":[{"name":"__Name__","targetId":"__TargetId__","targetType":"container-instance","value":"__Value__"},{"name":"__Name__","targetId":"__TargetId__","targetType":"container-instance","value":"__Value__"}],"cluster":"__Cluster__","containerInstanceArn":"__ContainerInstanceArn__","instanceIdentityDocument":"__InstanceIdentityDocument__","instanceIdentityDocumentSignature":"__InstanceIdentityDocumentSignature__","platformDevices":[{"id":"__Id__","type":"GPU"},{"id":"__Id__","type":"GPU"}],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"totalResources":[{"doubleValue":1,"integerValue":1,"longValue":1,"name":"__Name__","stringSetValue":["__Member__","__Member__"],"type":"__Type__"},{"doubleValue":1,"integerValue":1,"longValue":1,"name":"__Name__","stringSetValue":["__Member__","__Member__"],"type":"__Type__"}],"versionInfo":{"agentHash":"__AgentHash__","agentVersion":"__AgentVersion__","dockerVersion":"__DockerVersion__"}}

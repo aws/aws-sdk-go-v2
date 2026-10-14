@@ -4,13 +4,8 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get a media file from the WhatsApp service. On successful completion the media
@@ -61,34 +56,6 @@ type GetWhatsAppMessageMediaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWhatsAppMessageMediaInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWhatsAppMessageMediaInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWhatsAppMessageMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationS3File != nil {
-		s.WriteStruct(schemas.GetWhatsAppMessageMediaInput_destinationS3File)
-		v.DestinationS3File.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DestinationS3PresignedUrl != nil {
-		s.WriteStruct(schemas.GetWhatsAppMessageMediaInput_destinationS3PresignedUrl)
-		v.DestinationS3PresignedUrl.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MediaId != nil {
-		s.WriteString(schemas.GetWhatsAppMessageMediaInput_mediaId, *v.MediaId)
-	}
-	if v.MetadataOnly != nil {
-		s.WriteBool(schemas.GetWhatsAppMessageMediaInput_metadataOnly, *v.MetadataOnly)
-	}
-	if v.OriginationPhoneNumberId != nil {
-		s.WriteString(schemas.GetWhatsAppMessageMediaInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
-	}
-}
-
 type GetWhatsAppMessageMediaOutput struct {
 
 	// The size of the media file, in KB.
@@ -103,88 +70,29 @@ type GetWhatsAppMessageMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWhatsAppMessageMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWhatsAppMessageMediaOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWhatsAppMessageMediaOutput_fileSize:
-			v.FileSize = new(int64)
-			return d.ReadInt64(schemas.GetWhatsAppMessageMediaOutput_fileSize, v.FileSize)
-		case schemas.GetWhatsAppMessageMediaOutput_mimeType:
-			v.MimeType = new(string)
-			return d.ReadString(schemas.GetWhatsAppMessageMediaOutput_mimeType, v.MimeType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWhatsAppMessageMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWhatsAppMessageMedia{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppMessageMedia, schemas.GetWhatsAppMessageMediaInput, schemas.GetWhatsAppMessageMediaOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWhatsAppMessageMedia{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppMessageMedia, schemas.GetWhatsAppMessageMediaInput, schemas.GetWhatsAppMessageMediaOutput), output: &GetWhatsAppMessageMediaOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWhatsAppMessageMedia"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWhatsAppMessageMediaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWhatsAppMessageMedia(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +107,8 @@ func (c *Client) addOperationGetWhatsAppMessageMediaMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWhatsAppMessageMedia(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWhatsAppMessageMedia",
-	}
 }

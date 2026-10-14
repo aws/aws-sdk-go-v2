@@ -1,0 +1,4 @@
+GET /__AccountId__/provisioned-capacity
+
+X-Amz-Glacier-Version: 2012-06-01
+

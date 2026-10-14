@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +39,6 @@ type DeleteCodeInterpreterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCodeInterpreterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteCodeInterpreterRequest_clientToken, *v.ClientToken)
-	}
-	if v.CodeInterpreterId != nil {
-		s.WriteString(schemas.DeleteCodeInterpreterRequest_codeInterpreterId, *v.CodeInterpreterId)
-	}
-}
-
 type DeleteCodeInterpreterOutput struct {
 
 	// The unique identifier of the deleted code interpreter.
@@ -81,83 +62,23 @@ type DeleteCodeInterpreterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteCodeInterpreterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteCodeInterpreterResponse_codeInterpreterId:
-			v.CodeInterpreterId = new(string)
-			return d.ReadString(schemas.DeleteCodeInterpreterResponse_codeInterpreterId, v.CodeInterpreterId)
-		case schemas.DeleteCodeInterpreterResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteCodeInterpreterResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.DeleteCodeInterpreterResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteCodeInterpreterResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CodeInterpreterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteCodeInterpreterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeInterpreter, schemas.DeleteCodeInterpreterRequest, schemas.DeleteCodeInterpreterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeInterpreter, schemas.DeleteCodeInterpreterRequest, schemas.DeleteCodeInterpreterResponse), output: &DeleteCodeInterpreterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCodeInterpreter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +88,6 @@ func (c *Client) addOperationDeleteCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpDeleteCodeInterpreterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCodeInterpreter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +100,6 @@ func (c *Client) addOperationDeleteCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +139,4 @@ func (m *idempotencyToken_initializeOpDeleteCodeInterpreter) HandleInitialize(ct
 }
 func addIdempotencyToken_opDeleteCodeInterpreterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteCodeInterpreter{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteCodeInterpreter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteCodeInterpreter",
-	}
 }

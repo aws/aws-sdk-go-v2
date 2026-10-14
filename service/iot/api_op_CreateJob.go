@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a job.
@@ -137,6 +136,70 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbortConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_abortConfig)
+		v.AbortConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateJobRequest_description, *v.Description)
+	}
+	serializeDestinationPackageVersions(s, schemas.CreateJobRequest_destinationPackageVersions, v.DestinationPackageVersions)
+	if v.Document != nil {
+		s.WriteString(schemas.CreateJobRequest_document, *v.Document)
+	}
+	serializeParameterMap(s, schemas.CreateJobRequest_documentParameters, v.DocumentParameters)
+	if v.DocumentSource != nil {
+		s.WriteString(schemas.CreateJobRequest_documentSource, *v.DocumentSource)
+	}
+	if v.JobExecutionsRetryConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_jobExecutionsRetryConfig)
+		v.JobExecutionsRetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobExecutionsRolloutConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_jobExecutionsRolloutConfig)
+		v.JobExecutionsRolloutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateJobRequest_jobId, *v.JobId)
+	}
+	if v.JobTemplateArn != nil {
+		s.WriteString(schemas.CreateJobRequest_jobTemplateArn, *v.JobTemplateArn)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.CreateJobRequest_namespaceId, *v.NamespaceId)
+	}
+	if v.PresignedUrlConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_presignedUrlConfig)
+		v.PresignedUrlConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulingConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_schedulingConfig)
+		v.SchedulingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateJobRequest_tags, v.Tags)
+	if v.TargetSelection != "" {
+		s.WriteString(schemas.CreateJobRequest_targetSelection, string(v.TargetSelection))
+	}
+	serializeJobTargets(s, schemas.CreateJobRequest_targets, v.Targets)
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateJobOutput struct {
 
 	// The job description.
@@ -154,77 +217,60 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateJobResponse_description, *v.Description)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateJobResponse_jobId, *v.JobId)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateJobResponse_description, v.Description)
+		case schemas.CreateJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateJobResponse_jobArn, v.JobArn)
+		case schemas.CreateJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,22 +285,8 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateJob",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AccessLogs.CloudWatchLogs.Enabled=true&AccessLogs.CloudWatchLogs.LogGroup=__LogGroup__&AccessLogs.IncludeTrustContext=true&AccessLogs.KinesisDataFirehose.DeliveryStream=__DeliveryStream__&AccessLogs.KinesisDataFirehose.Enabled=true&AccessLogs.LogVersion=__LogVersion__&AccessLogs.S3.BucketName=__BucketName__&AccessLogs.S3.BucketOwner=__BucketOwner__&AccessLogs.S3.Enabled=true&AccessLogs.S3.Prefix=__Prefix__&Action=ModifyVerifiedAccessInstanceLoggingConfiguration&ClientToken=__ClientToken__&DryRun=true&VerifiedAccessInstanceId=__VerifiedAccessInstanceId__&Version=2016-11-15

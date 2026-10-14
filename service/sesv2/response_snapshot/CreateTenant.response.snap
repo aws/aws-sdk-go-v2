@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedTimestamp":946684800,"SendingStatus":"ENABLED","SuppressionAttributes":{"SuppressedReasons":["BOUNCE","BOUNCE"],"SuppressionScope":"ACCOUNT"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TenantArn":"__TenantArn__","TenantId":"__TenantId__","TenantName":"__TenantName__"}

@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,24 +42,6 @@ type RevokeSubscriptionInput struct {
 	RetainPermissions *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *RevokeSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokeSubscriptionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokeSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.RevokeSubscriptionInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.RevokeSubscriptionInput_identifier, *v.Identifier)
-	}
-	if v.RetainPermissions != nil {
-		s.WriteBool(schemas.RevokeSubscriptionInput_retainPermissions, *v.RetainPermissions)
-	}
 }
 
 type RevokeSubscriptionOutput struct {
@@ -125,118 +102,29 @@ type RevokeSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RevokeSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokeSubscriptionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevokeSubscriptionOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.RevokeSubscriptionOutput_createdAt, v.CreatedAt)
-		case schemas.RevokeSubscriptionOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.RevokeSubscriptionOutput_createdBy, v.CreatedBy)
-		case schemas.RevokeSubscriptionOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.RevokeSubscriptionOutput_domainId, v.DomainId)
-		case schemas.RevokeSubscriptionOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RevokeSubscriptionOutput_id, v.Id)
-		case schemas.RevokeSubscriptionOutput_retainPermissions:
-			v.RetainPermissions = new(bool)
-			return d.ReadBool(schemas.RevokeSubscriptionOutput_retainPermissions, v.RetainPermissions)
-		case schemas.RevokeSubscriptionOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.RevokeSubscriptionOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.SubscriptionStatus(ev)
-			return nil
-		case schemas.RevokeSubscriptionOutput_subscribedListing:
-			v.SubscribedListing = &types.SubscribedListing{}
-			return v.SubscribedListing.Deserialize(d)
-		case schemas.RevokeSubscriptionOutput_subscribedPrincipal:
-			return deserializeSubscribedPrincipal(d, schemas.RevokeSubscriptionOutput_subscribedPrincipal, &v.SubscribedPrincipal)
-		case schemas.RevokeSubscriptionOutput_subscriptionRequestId:
-			v.SubscriptionRequestId = new(string)
-			return d.ReadString(schemas.RevokeSubscriptionOutput_subscriptionRequestId, v.SubscriptionRequestId)
-		case schemas.RevokeSubscriptionOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.RevokeSubscriptionOutput_updatedAt, v.UpdatedAt)
-		case schemas.RevokeSubscriptionOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.RevokeSubscriptionOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRevokeSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSubscription, schemas.RevokeSubscriptionInput, schemas.RevokeSubscriptionOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeSubscription{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSubscription, schemas.RevokeSubscriptionInput, schemas.RevokeSubscriptionOutput), output: &RevokeSubscriptionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RevokeSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRevokeSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -251,22 +139,8 @@ func (c *Client) addOperationRevokeSubscriptionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRevokeSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RevokeSubscription",
-	}
 }

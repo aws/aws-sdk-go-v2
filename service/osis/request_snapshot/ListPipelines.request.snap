@@ -1,0 +1,3 @@
+GET /2022-01-01/osis/listPipelines?maxResults=1&nextToken=__NextToken__
+
+

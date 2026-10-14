@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -19,6 +14,15 @@ import (
 // the policy's identity. The updated policy is validated against the Cedar schema
 // before being applied. This is an asynchronous operation. Use the GetPolicy
 // operation to poll the status field to track completion.
+//
+// If the updated policy is a temporal policy, the policy engine invalidates all
+// active temporal sessions. If the update adds or removes temporal operators, the
+// policy engine also invalidates active temporal sessions. For more information
+// about temporal policy sessions, see [session-based temporal policies]. The policy engine returns an HTTP 409
+// ConflictException to in-flight sessions. To resume, you must start a new session
+// with a new session ID.
+//
+// [session-based temporal policies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
@@ -48,14 +52,20 @@ type UpdatePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// The new Cedar policy statement that defines the access control rules. This
-	// replaces the existing policy definition with new logic while maintaining the
-	// policy's identity.
+	// The new Cedar or Dogwood policy statement that defines the access control
+	// rules. This replaces the existing policy definition with new logic while
+	// maintaining the policy's identity.
 	Definition types.PolicyDefinition
 
 	// The new human-readable description for the policy. This optional field allows
 	// updating the policy's documentation while keeping the same policy logic.
 	Description *types.UpdatedDescription
+
+	// The enforcement mode for the policy. Run this policy in LOG_ONLY mode to
+	// collect data on how it affects your application. Once you are satisfied with the
+	// data gathered, switch the policy to ACTIVE . If you omit this field, the
+	// policy's existing enforcement mode is unchanged.
+	EnforcementMode types.EnforcementMode
 
 	// The validation mode for the policy update. Determines how Cedar analyzer
 	// validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs
@@ -69,30 +79,6 @@ type UpdatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyDefinition(s, schemas.UpdatePolicyRequest_definition, v.Definition)
-	if v.Description != nil {
-		s.WriteStruct(schemas.UpdatePolicyRequest_description)
-		v.Description.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PolicyEngineId != nil {
-		s.WriteString(schemas.UpdatePolicyRequest_policyEngineId, *v.PolicyEngineId)
-	}
-	if v.PolicyId != nil {
-		s.WriteString(schemas.UpdatePolicyRequest_policyId, *v.PolicyId)
-	}
-	if v.ValidationMode != "" {
-		s.WriteString(schemas.UpdatePolicyRequest_validationMode, string(v.ValidationMode))
-	}
-}
-
 type UpdatePolicyOutput struct {
 
 	// The original creation timestamp of the policy.
@@ -100,7 +86,7 @@ type UpdatePolicyOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The updated Cedar policy statement.
+	// The updated Cedar or Dogwood policy statement.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition
@@ -143,120 +129,38 @@ type UpdatePolicyOutput struct {
 	// The updated description of the policy.
 	Description *string
 
+	// The current enforcement mode of the updated policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePolicyResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdatePolicyResponse_createdAt, v.CreatedAt)
-		case schemas.UpdatePolicyResponse_definition:
-			return deserializePolicyDefinition(d, schemas.UpdatePolicyResponse_definition, &v.Definition)
-		case schemas.UpdatePolicyResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdatePolicyResponse_description, v.Description)
-		case schemas.UpdatePolicyResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdatePolicyResponse_name, v.Name)
-		case schemas.UpdatePolicyResponse_policyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.UpdatePolicyResponse_policyArn, v.PolicyArn)
-		case schemas.UpdatePolicyResponse_policyEngineId:
-			v.PolicyEngineId = new(string)
-			return d.ReadString(schemas.UpdatePolicyResponse_policyEngineId, v.PolicyEngineId)
-		case schemas.UpdatePolicyResponse_policyId:
-			v.PolicyId = new(string)
-			return d.ReadString(schemas.UpdatePolicyResponse_policyId, v.PolicyId)
-		case schemas.UpdatePolicyResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePolicyResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PolicyStatus(ev)
-			return nil
-		case schemas.UpdatePolicyResponse_statusReasons:
-			return deserializePolicyStatusReasons(d, schemas.UpdatePolicyResponse_statusReasons, &v.StatusReasons)
-		case schemas.UpdatePolicyResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdatePolicyResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePolicy{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse), output: &UpdatePolicyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -271,22 +175,8 @@ func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePolicy",
-	}
 }

@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,21 @@ type UpdateVpcLinkInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateVpcLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVpcLinkRequest_Name, *v.Name)
+	}
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.UpdateVpcLinkRequest_VpcLinkId, *v.VpcLinkId)
+	}
 }
 
 type UpdateVpcLinkOutput struct {
@@ -77,77 +91,95 @@ type UpdateVpcLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.UpdateVpcLinkResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_Name, *v.Name)
+	}
+	serializeSecurityGroupIdList(s, schemas.UpdateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.UpdateVpcLinkResponse_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.UpdateVpcLinkResponse_Tags, v.Tags)
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkId, *v.VpcLinkId)
+	}
+	if v.VpcLinkStatus != "" {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkStatus, string(v.VpcLinkStatus))
+	}
+	if v.VpcLinkStatusMessage != nil {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage, *v.VpcLinkStatusMessage)
+	}
+	if v.VpcLinkVersion != "" {
+		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkVersion, string(v.VpcLinkVersion))
+	}
+}
+func (v *UpdateVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVpcLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVpcLinkResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateVpcLinkResponse_CreatedDate, v.CreatedDate)
+		case schemas.UpdateVpcLinkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_Name, v.Name)
+		case schemas.UpdateVpcLinkResponse_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.UpdateVpcLinkResponse_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateVpcLinkResponse_SubnetIds:
+			return deserializeSubnetIdList(d, schemas.UpdateVpcLinkResponse_SubnetIds, &v.SubnetIds)
+		case schemas.UpdateVpcLinkResponse_Tags:
+			return deserializeTags(d, schemas.UpdateVpcLinkResponse_Tags, &v.Tags)
+		case schemas.UpdateVpcLinkResponse_VpcLinkId:
+			v.VpcLinkId = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkId, v.VpcLinkId)
+		case schemas.UpdateVpcLinkResponse_VpcLinkStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkStatus, &ev); err != nil {
+				return err
+			}
+			v.VpcLinkStatus = types.VpcLinkStatus(ev)
+			return nil
+		case schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage:
+			v.VpcLinkStatusMessage = new(string)
+			return d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkStatusMessage, v.VpcLinkStatusMessage)
+		case schemas.UpdateVpcLinkResponse_VpcLinkVersion:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVpcLinkResponse_VpcLinkVersion, &ev); err != nil {
+				return err
+			}
+			v.VpcLinkVersion = types.VpcLinkVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.UpdateVpcLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.UpdateVpcLinkResponse), output: &UpdateVpcLinkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVpcLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateVpcLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVpcLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +194,8 @@ func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateVpcLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateVpcLink",
-	}
 }

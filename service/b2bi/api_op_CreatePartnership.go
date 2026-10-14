@@ -5,12 +5,10 @@ package b2bi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -152,6 +150,44 @@ type CreatePartnershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartnershipCapabilities(s, schemas.CreatePartnershipResponse_capabilities, v.Capabilities)
+	if v.CapabilityOptions != nil {
+		s.WriteStruct(schemas.CreatePartnershipResponse_capabilityOptions)
+		v.CapabilityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreatePartnershipResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_name, *v.Name)
+	}
+	if v.PartnershipArn != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_partnershipArn, *v.PartnershipArn)
+	}
+	if v.PartnershipId != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_partnershipId, *v.PartnershipId)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_phone, *v.Phone)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_profileId, *v.ProfileId)
+	}
+	if v.TradingPartnerId != nil {
+		s.WriteString(schemas.CreatePartnershipResponse_tradingPartnerId, *v.TradingPartnerId)
+	}
+}
 func (v *CreatePartnershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePartnershipResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -189,62 +225,20 @@ func (v *CreatePartnershipOutput) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 func (c *Client) addOperationCreatePartnershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnership, schemas.CreatePartnershipRequest, schemas.CreatePartnershipResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnership, schemas.CreatePartnershipRequest, schemas.CreatePartnershipResponse), output: &CreatePartnershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePartnership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -254,12 +248,6 @@ func (c *Client) addOperationCreatePartnershipMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreatePartnershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePartnership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -272,12 +260,6 @@ func (c *Client) addOperationCreatePartnershipMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -317,12 +299,4 @@ func (m *idempotencyToken_initializeOpCreatePartnership) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreatePartnershipMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePartnership{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePartnership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePartnership",
-	}
 }

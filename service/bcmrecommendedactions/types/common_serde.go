@@ -68,6 +68,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeActionFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ActionFilter) error {
+	*v = make([]ActionFilter, 0)
 	var vv ActionFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = ActionFilter{}
@@ -81,6 +82,7 @@ func deserializeActionFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -94,6 +96,7 @@ func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeNextSteps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -107,6 +110,7 @@ func deserializeNextSteps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeRecommendedActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RecommendedAction) error {
+	*v = make([]RecommendedAction, 0)
 	var vv RecommendedAction
 	return smithy.ReadList(d, s, func() error {
 		vv = RecommendedAction{}
@@ -120,6 +124,7 @@ func deserializeRecommendedActions(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}
@@ -148,6 +153,13 @@ func deserializeContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

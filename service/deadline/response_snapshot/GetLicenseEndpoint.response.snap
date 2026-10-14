@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dnsName":"__DnsName__","licenseEndpointId":"__LicenseEndpointId__","securityGroupIds":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}

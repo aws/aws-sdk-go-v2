@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/vpcEndpoints/update
+
+Content-Type: application/json
+
+{"VpcEndpointId":"__VpcEndpointId__","VpcOptions":{"EgressEnabled":true,"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

@@ -4,13 +4,8 @@ package docdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies a setting for an Amazon DocumentDB cluster. You can change one or more
@@ -96,6 +91,10 @@ type ModifyDBClusterInput struct {
 	// CloudWatch Logs.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
+	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
+	// cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the cluster parameter group to use for the cluster.
 	DBClusterParameterGroupName *string
 
@@ -171,7 +170,7 @@ type ModifyDBClusterInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The new cluster identifier for the cluster when renaming a cluster. This value
@@ -256,77 +255,6 @@ type ModifyDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowMajorVersionUpgrade != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_AllowMajorVersionUpgrade, *v.AllowMajorVersionUpgrade)
-	}
-	if v.ApplyImmediately != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_ApplyImmediately, *v.ApplyImmediately)
-	}
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.ModifyDBClusterMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.CloudwatchLogsExportConfiguration != nil {
-		s.WriteStruct(schemas.ModifyDBClusterMessage_CloudwatchLogsExportConfiguration)
-		v.CloudwatchLogsExportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.ManageMasterUserPassword != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
-	}
-	if v.MasterUserPassword != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_MasterUserPassword, *v.MasterUserPassword)
-	}
-	if v.MasterUserSecretKmsKeyId != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
-	}
-	if v.NetworkType != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_NetworkType, *v.NetworkType)
-	}
-	if v.NewDBClusterIdentifier != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_NewDBClusterIdentifier, *v.NewDBClusterIdentifier)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.ModifyDBClusterMessage_Port, *v.Port)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.RotateMasterUserPassword != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_RotateMasterUserPassword, *v.RotateMasterUserPassword)
-	}
-	if v.ServerlessV2ScalingConfiguration != nil {
-		s.WriteStruct(schemas.ModifyDBClusterMessage_ServerlessV2ScalingConfiguration)
-		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_StorageType, *v.StorageType)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.ModifyDBClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type ModifyDBClusterOutput struct {
 
 	// Detailed information about a cluster.
@@ -338,85 +266,29 @@ type ModifyDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCluster, schemas.ModifyDBClusterMessage, schemas.ModifyDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCluster, schemas.ModifyDBClusterMessage, schemas.ModifyDBClusterResult), output: &ModifyDBClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyDBClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -431,22 +303,8 @@ func (c *Client) addOperationModifyDBClusterMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyDBCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyDBCluster",
-	}
 }

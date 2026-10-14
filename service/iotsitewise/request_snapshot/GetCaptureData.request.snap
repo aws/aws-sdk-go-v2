@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/get-capture-data
+
+Content-Type: application/json
+
+{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"formatSettings":{"framesPerSecond":1,"heightInPixels":1,"widthInPixels":1},"nextToken":"__NextToken__","propertyAlias":"__PropertyAlias__","startTime":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"}

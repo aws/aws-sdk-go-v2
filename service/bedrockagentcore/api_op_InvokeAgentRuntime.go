@@ -5,11 +5,7 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -89,6 +85,20 @@ type InvokeAgentRuntimeInput struct {
 	// JSON data.
 	ContentType *string
 
+	// The MCP method being invoked. For example, tools/call , resources/read , or
+	// prompts/get .
+	McpMethod *string
+
+	// The name of the MCP resource, tool, or prompt being accessed. The value depends
+	// on the method:
+	//
+	//   - tools/call – The tool name.
+	//
+	//   - resources/read – The resource URI.
+	//
+	//   - prompts/get – The prompt name.
+	McpName *string
+
 	// The version of the MCP protocol being used.
 	McpProtocolVersion *string
 
@@ -116,57 +126,6 @@ type InvokeAgentRuntimeInput struct {
 	TraceState *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokeAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeAgentRuntimeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accept != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_accept, *v.Accept)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_accountId, *v.AccountId)
-	}
-	if v.AgentRuntimeArn != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_agentRuntimeArn, *v.AgentRuntimeArn)
-	}
-	if v.Baggage != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_baggage, *v.Baggage)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_contentType, *v.ContentType)
-	}
-	if v.McpProtocolVersion != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_mcpProtocolVersion, *v.McpProtocolVersion)
-	}
-	if v.McpSessionId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_mcpSessionId, *v.McpSessionId)
-	}
-	if v.Payload != nil {
-		s.WriteBlob(schemas.InvokeAgentRuntimeRequest_payload, v.Payload)
-	}
-	if v.Qualifier != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_qualifier, *v.Qualifier)
-	}
-	if v.RuntimeSessionId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_runtimeSessionId, *v.RuntimeSessionId)
-	}
-	if v.RuntimeUserId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_runtimeUserId, *v.RuntimeUserId)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceId, *v.TraceId)
-	}
-	if v.TraceParent != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceParent, *v.TraceParent)
-	}
-	if v.TraceState != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeRequest_traceState, *v.TraceState)
-	}
 }
 
 type InvokeAgentRuntimeOutput struct {
@@ -213,102 +172,23 @@ type InvokeAgentRuntimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeAgentRuntimeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeAgentRuntimeResponse_baggage:
-			v.Baggage = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_baggage, v.Baggage)
-		case schemas.InvokeAgentRuntimeResponse_contentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_contentType, v.ContentType)
-		case schemas.InvokeAgentRuntimeResponse_mcpProtocolVersion:
-			v.McpProtocolVersion = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_mcpProtocolVersion, v.McpProtocolVersion)
-		case schemas.InvokeAgentRuntimeResponse_mcpSessionId:
-			v.McpSessionId = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_mcpSessionId, v.McpSessionId)
-		case schemas.InvokeAgentRuntimeResponse_runtimeSessionId:
-			v.RuntimeSessionId = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_runtimeSessionId, v.RuntimeSessionId)
-		case schemas.InvokeAgentRuntimeResponse_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.InvokeAgentRuntimeResponse_statusCode, v.StatusCode)
-		case schemas.InvokeAgentRuntimeResponse_traceId:
-			v.TraceId = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceId, v.TraceId)
-		case schemas.InvokeAgentRuntimeResponse_traceParent:
-			v.TraceParent = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceParent, v.TraceParent)
-		case schemas.InvokeAgentRuntimeResponse_traceState:
-			v.TraceState = new(string)
-			return d.ReadString(schemas.InvokeAgentRuntimeResponse_traceState, v.TraceState)
-		}
-		return nil
-	})
-}
-func (v *InvokeAgentRuntimeOutput) GetPayloadStream() io.Reader { return v.Response }
-
-var _ smithy.StreamingInput = (*InvokeAgentRuntimeOutput)(nil)
-
-func (v *InvokeAgentRuntimeOutput) SetPayloadStream(r io.ReadCloser) { v.Response = r }
-
-var _ smithy.StreamingOutput = (*InvokeAgentRuntimeOutput)(nil)
-
 func (c *Client) addOperationInvokeAgentRuntimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntime, schemas.InvokeAgentRuntimeRequest, schemas.InvokeAgentRuntimeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntime, schemas.InvokeAgentRuntimeRequest, schemas.InvokeAgentRuntimeResponse), output: &InvokeAgentRuntimeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAgentRuntime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -318,12 +198,6 @@ func (c *Client) addOperationInvokeAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpInvokeAgentRuntimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAgentRuntime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -336,12 +210,6 @@ func (c *Client) addOperationInvokeAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -381,12 +249,4 @@ func (m *idempotencyToken_initializeOpInvokeAgentRuntime) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opInvokeAgentRuntimeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpInvokeAgentRuntime{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opInvokeAgentRuntime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeAgentRuntime",
-	}
 }

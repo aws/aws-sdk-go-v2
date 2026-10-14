@@ -133,7 +133,8 @@ var ComputeOptimizerAutomationService = smithy.NewServiceSchema(_ComputeOptimize
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -321,7 +322,7 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 24)
 var ComparisonOperator_STRING_EQUALS *smithy.Schema
 
 var ComparisonOperator_STRING_NOT_EQUALS *smithy.Schema
@@ -345,6 +346,30 @@ var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS *smithy.Schema
 var ComparisonOperator_NUMERIC_GREATER_THAN *smithy.Schema
 
 var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS *smithy.Schema
+
+var ComparisonOperator_STRING_EQUALS_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_STRING_LIKE_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_STRING_NOT_LIKE_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_EQUALS_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS *smithy.Schema
+
+var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS *smithy.Schema
 
 var Criteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -491,19 +516,22 @@ var _FilterValues_member *smithy.Schema
 var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var ForbiddenException_message *smithy.Schema
 
 var IdempotencyTokenInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "IdempotencyTokenInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IdempotencyTokenInUseException_message *smithy.Schema
 
 var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var IdempotentParameterMismatchException_message *smithy.Schema
 
 var IntegerCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
@@ -529,13 +557,15 @@ var _IntegerList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidParameterValueException_message *smithy.Schema
 
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
@@ -546,13 +576,15 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NotManagementAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "NotManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var NotManagementAccountException_message *smithy.Schema
 
 var OptInRequiredException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "OptInRequiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var OptInRequiredException_message *smithy.Schema
 
 var OrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -756,7 +788,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var ResourceTagsCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
@@ -854,13 +887,15 @@ var Schedule_executionWindowInMinutes *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
 
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
 var _StepId = smithy.NewSchema(smithy.ShapeID{
@@ -983,7 +1018,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_message *smithy.Schema
 
 var TimePeriod = smithy.NewSchema(smithy.ShapeID{
@@ -1782,6 +1818,30 @@ func init() {
 	ComparisonOperator_NUMERIC_GREATER_THAN = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN", smithyprelude.Unit)
 
 	ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_EQUALS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("STRING_EQUALS_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_EQUALS_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS = ComparisonOperator.AddMember("STRING_EQUALS_IGNORE_CASE_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_LIKE_IF_EXISTS = ComparisonOperator.AddMember("STRING_LIKE_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_STRING_NOT_LIKE_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_LIKE_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_EQUALS_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_NOT_EQUALS_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_LESS_THAN_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_LESS_THAN_EQUALS_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_IF_EXISTS", smithyprelude.Unit)
+
+	ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS", smithyprelude.Unit)
 
 	_StringCriteriaValues_member = _StringCriteriaValues.AddMember("member", _StringCriteriaValue)
 

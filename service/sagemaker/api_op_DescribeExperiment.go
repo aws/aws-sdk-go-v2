@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeExperimentInput struct {
 	ExperimentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.DescribeExperimentRequest_ExperimentName, *v.ExperimentName)
+	}
 }
 
 type DescribeExperimentOutput struct {
@@ -74,77 +85,102 @@ type DescribeExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeExperimentResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeExperimentResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeExperimentResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeExperimentResponse_DisplayName, *v.DisplayName)
+	}
+	if v.ExperimentArn != nil {
+		s.WriteString(schemas.DescribeExperimentResponse_ExperimentArn, *v.ExperimentArn)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.DescribeExperimentResponse_ExperimentName, *v.ExperimentName)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeExperimentResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeExperimentResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeExperimentResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExperimentResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeExperimentResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperimentResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeExperimentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeExperimentResponse_Description, v.Description)
+		case schemas.DescribeExperimentResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeExperimentResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeExperimentResponse_ExperimentArn:
+			v.ExperimentArn = new(string)
+			return d.ReadString(schemas.DescribeExperimentResponse_ExperimentArn, v.ExperimentArn)
+		case schemas.DescribeExperimentResponse_ExperimentName:
+			v.ExperimentName = new(string)
+			return d.ReadString(schemas.DescribeExperimentResponse_ExperimentName, v.ExperimentName)
+		case schemas.DescribeExperimentResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeExperimentResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperimentResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeExperimentResponse_Source:
+			v.Source = &types.ExperimentSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperiment, schemas.DescribeExperimentRequest, schemas.DescribeExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperiment, schemas.DescribeExperimentRequest, schemas.DescribeExperimentResponse), output: &DescribeExperimentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExperiment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeExperiment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeExperimentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExperiment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +195,8 @@ func (c *Client) addOperationDescribeExperimentMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeExperiment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeExperiment",
-	}
 }

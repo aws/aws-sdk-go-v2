@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the status of the specified portfolio share operation. This API can only
@@ -41,18 +36,6 @@ type DescribePortfolioShareStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioShareStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePortfolioShareStatusInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePortfolioShareStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortfolioShareToken != nil {
-		s.WriteString(schemas.DescribePortfolioShareStatusInput_PortfolioShareToken, *v.PortfolioShareToken)
-	}
-}
-
 type DescribePortfolioShareStatusOutput struct {
 
 	// Organization node identifier. It can be either account id, organizational unit
@@ -77,101 +60,29 @@ type DescribePortfolioShareStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePortfolioShareStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePortfolioShareStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePortfolioShareStatusOutput_OrganizationNodeValue:
-			v.OrganizationNodeValue = new(string)
-			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_OrganizationNodeValue, v.OrganizationNodeValue)
-		case schemas.DescribePortfolioShareStatusOutput_PortfolioId:
-			v.PortfolioId = new(string)
-			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_PortfolioId, v.PortfolioId)
-		case schemas.DescribePortfolioShareStatusOutput_PortfolioShareToken:
-			v.PortfolioShareToken = new(string)
-			return d.ReadString(schemas.DescribePortfolioShareStatusOutput_PortfolioShareToken, v.PortfolioShareToken)
-		case schemas.DescribePortfolioShareStatusOutput_ShareDetails:
-			v.ShareDetails = &types.ShareDetails{}
-			return v.ShareDetails.Deserialize(d)
-		case schemas.DescribePortfolioShareStatusOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribePortfolioShareStatusOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ShareStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePortfolioShareStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePortfolioShareStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShareStatus, schemas.DescribePortfolioShareStatusInput, schemas.DescribePortfolioShareStatusOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePortfolioShareStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePortfolioShareStatus, schemas.DescribePortfolioShareStatusInput, schemas.DescribePortfolioShareStatusOutput), output: &DescribePortfolioShareStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePortfolioShareStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePortfolioShareStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePortfolioShareStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +97,8 @@ func (c *Client) addOperationDescribePortfolioShareStatusMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePortfolioShareStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePortfolioShareStatus",
-	}
 }

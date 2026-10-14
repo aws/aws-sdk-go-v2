@@ -4,11 +4,11 @@ package acm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Requests an ACM certificate for use with other Amazon Web Services services. To
@@ -122,19 +122,17 @@ type RequestCertificateInput struct {
 	// by ACM.
 	ManagedBy types.CertificateManagedBy
 
-	// You can use this parameter to specify whether to add the certificate to a
-	// certificate transparency log and export your certificate.
+	// You can use this parameter to specify whether to export your certificate.
 	//
-	// Certificate transparency makes it possible to detect SSL/TLS certificates that
-	// have been mistakenly or maliciously issued. Certificates that have not been
-	// logged typically produce an error message in a browser. For more information,
-	// see [Opting Out of Certificate Transparency Logging].
+	// Certificate transparency logging opt-out is no longer available. All public
+	// certificates are recorded in a certificate transparency log. For more
+	// information, see [Certificate Transparency Logging].
 	//
 	// You can export public ACM certificates to use with Amazon Web Services services
 	// as well as outside the Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
 	//
-	// [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
 	// [Certificate Manager exportable public certificate]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
+	// [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 	Options *types.CertificateOptions
 
 	// Additional FQDNs to be included in the Subject Alternative Name extension of
@@ -176,6 +174,45 @@ type RequestCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.RequestCertificateRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.RequestCertificateRequest_DomainName, *v.DomainName)
+	}
+	serializeDomainValidationOptionList(s, schemas.RequestCertificateRequest_DomainValidationOptions, v.DomainValidationOptions)
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.RequestCertificateRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.RequestCertificateRequest_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.RequestCertificateRequest_ManagedBy, string(v.ManagedBy))
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.RequestCertificateRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDomainList(s, schemas.RequestCertificateRequest_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	serializeTagList(s, schemas.RequestCertificateRequest_Tags, v.Tags)
+	if v.ValidationMethod != "" {
+		s.WriteString(schemas.RequestCertificateRequest_ValidationMethod, string(v.ValidationMethod))
+	}
+}
+func (in *RequestCertificateInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
+}
+
 type RequestCertificateOutput struct {
 
 	// String that contains the ARN of the issued certificate. This must be of the
@@ -190,77 +227,48 @@ type RequestCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RequestCertificateResponse_CertificateArn, *v.CertificateArn)
+	}
+}
+func (v *RequestCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCertificateResponse_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RequestCertificateResponse_CertificateArn, v.CertificateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestCertificate, schemas.RequestCertificateRequest, schemas.RequestCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRequestCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestCertificate, schemas.RequestCertificateRequest, schemas.RequestCertificateResponse), output: &RequestCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRequestCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRequestCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,22 +283,8 @@ func (c *Client) addOperationRequestCertificateMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRequestCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RequestCertificate",
-	}
 }

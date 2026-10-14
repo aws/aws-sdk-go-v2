@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a new Model resource to an existing RestApi resource.
@@ -54,6 +53,30 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateModelRequest_contentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateModelRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateModelRequest_name, *v.Name)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.CreateModelRequest_restApiId, *v.RestApiId)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.CreateModelRequest_schema, *v.Schema)
+	}
+}
+
 // Represents the data structure of a method's request or response payload.
 type CreateModelOutput struct {
 
@@ -82,77 +105,72 @@ type CreateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Model)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.Model_contentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Model_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Model_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Model_name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.Model_schema, *v.Schema)
+	}
+}
+func (v *CreateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Model, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Model_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.Model_contentType, v.ContentType)
+		case schemas.Model_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Model_description, v.Description)
+		case schemas.Model_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Model_id, v.Id)
+		case schemas.Model_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Model_name, v.Name)
+		case schemas.Model_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.Model_schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.Model)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.Model), output: &CreateModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +188,8 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModel",
-	}
 }

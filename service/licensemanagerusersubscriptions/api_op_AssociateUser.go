@@ -4,13 +4,8 @@ package licensemanagerusersubscriptions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the user to an EC2 instance to utilize user-based subscriptions.
@@ -63,26 +58,6 @@ type AssociateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.AssociateUserRequest_Domain, *v.Domain)
-	}
-	serializeIdentityProvider(s, schemas.AssociateUserRequest_IdentityProvider, v.IdentityProvider)
-	if v.InstanceId != nil {
-		s.WriteString(schemas.AssociateUserRequest_InstanceId, *v.InstanceId)
-	}
-	serializeTags(s, schemas.AssociateUserRequest_Tags, v.Tags)
-	if v.Username != nil {
-		s.WriteString(schemas.AssociateUserRequest_Username, *v.Username)
-	}
-}
-
 type AssociateUserOutput struct {
 
 	// Metadata that describes the associate user operation.
@@ -96,85 +71,29 @@ type AssociateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateUserResponse_InstanceUserSummary:
-			v.InstanceUserSummary = &types.InstanceUserSummary{}
-			return v.InstanceUserSummary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUser, schemas.AssociateUserRequest, schemas.AssociateUserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUser, schemas.AssociateUserRequest, schemas.AssociateUserResponse), output: &AssociateUserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +108,8 @@ func (c *Client) addOperationAssociateUserMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateUser",
-	}
 }

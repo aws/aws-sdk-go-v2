@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new recommendation preference or updates an existing recommendation
@@ -179,6 +178,42 @@ type PutRecommendationPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecommendationPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecommendationPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.PutRecommendationPreferencesRequest_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.ExternalMetricsPreference != nil {
+		s.WriteStruct(schemas.PutRecommendationPreferencesRequest_externalMetricsPreference)
+		v.ExternalMetricsPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferredWorkloadTypes != "" {
+		s.WriteString(schemas.PutRecommendationPreferencesRequest_inferredWorkloadTypes, string(v.InferredWorkloadTypes))
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.PutRecommendationPreferencesRequest_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	serializePreferredResources(s, schemas.PutRecommendationPreferencesRequest_preferredResources, v.PreferredResources)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.PutRecommendationPreferencesRequest_resourceType, string(v.ResourceType))
+	}
+	if v.SavingsEstimationMode != "" {
+		s.WriteString(schemas.PutRecommendationPreferencesRequest_savingsEstimationMode, string(v.SavingsEstimationMode))
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.PutRecommendationPreferencesRequest_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUtilizationPreferences(s, schemas.PutRecommendationPreferencesRequest_utilizationPreferences, v.UtilizationPreferences)
+}
+
 type PutRecommendationPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -186,65 +221,36 @@ type PutRecommendationPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecommendationPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecommendationPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecommendationPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecommendationPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecommendationPreferences, schemas.PutRecommendationPreferencesRequest, schemas.PutRecommendationPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecommendationPreferences, schemas.PutRecommendationPreferencesRequest, schemas.PutRecommendationPreferencesResponse), output: &PutRecommendationPreferencesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutRecommendationPreferences{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRecommendationPreferences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -254,12 +260,6 @@ func (c *Client) addOperationPutRecommendationPreferencesMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpPutRecommendationPreferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecommendationPreferences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,22 +274,8 @@ func (c *Client) addOperationPutRecommendationPreferencesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutRecommendationPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutRecommendationPreferences",
-	}
 }

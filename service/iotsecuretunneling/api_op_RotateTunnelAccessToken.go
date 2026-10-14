@@ -4,11 +4,10 @@ package iotsecuretunneling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Revokes the current client access token (CAT) and returns new CAT for clients
@@ -56,6 +55,26 @@ type RotateTunnelAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateTunnelAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateTunnelAccessTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateTunnelAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientMode != "" {
+		s.WriteString(schemas.RotateTunnelAccessTokenRequest_clientMode, string(v.ClientMode))
+	}
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.RotateTunnelAccessTokenRequest_destinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenRequest_tunnelId, *v.TunnelId)
+	}
+}
+
 type RotateTunnelAccessTokenOutput struct {
 
 	// The client access token that the destination local proxy uses to connect to IoT
@@ -75,77 +94,60 @@ type RotateTunnelAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateTunnelAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateTunnelAccessTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateTunnelAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAccessToken != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_destinationAccessToken, *v.DestinationAccessToken)
+	}
+	if v.SourceAccessToken != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_sourceAccessToken, *v.SourceAccessToken)
+	}
+	if v.TunnelArn != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_tunnelArn, *v.TunnelArn)
+	}
+}
+func (v *RotateTunnelAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateTunnelAccessTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateTunnelAccessTokenResponse_destinationAccessToken:
+			v.DestinationAccessToken = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_destinationAccessToken, v.DestinationAccessToken)
+		case schemas.RotateTunnelAccessTokenResponse_sourceAccessToken:
+			v.SourceAccessToken = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_sourceAccessToken, v.SourceAccessToken)
+		case schemas.RotateTunnelAccessTokenResponse_tunnelArn:
+			v.TunnelArn = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_tunnelArn, v.TunnelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateTunnelAccessToken, schemas.RotateTunnelAccessTokenRequest, schemas.RotateTunnelAccessTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateTunnelAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateTunnelAccessToken, schemas.RotateTunnelAccessTokenRequest, schemas.RotateTunnelAccessTokenResponse), output: &RotateTunnelAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRotateTunnelAccessToken{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RotateTunnelAccessToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRotateTunnelAccessTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRotateTunnelAccessToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +162,8 @@ func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRotateTunnelAccessToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RotateTunnelAccessToken",
-	}
 }

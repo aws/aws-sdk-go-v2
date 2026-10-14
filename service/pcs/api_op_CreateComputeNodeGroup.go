@@ -5,12 +5,8 @@ package pcs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a managed set of compute nodes. You associate a compute node group with
@@ -97,6 +93,12 @@ type CreateComputeNodeGroupInput struct {
 	// specify a client token, the CLI and SDK automatically generate 1 for you.
 	ClientToken *string
 
+	// The lifecycle actions to run on compute nodes in the compute node group. Use
+	// lifecycle actions to run custom scripts at defined stages of a compute node's
+	// lifecycle, such as when a compute node finishes bootstrapping or becomes ready
+	// to accept jobs.
+	NodeLifecycleActions *types.NodeLifecycleActionsRequest
+
 	// Specifies how EC2 instances are purchased on your behalf. PCS supports
 	// On-Demand Instances, Spot Instances, Interruptible Capacity Reservations,
 	// On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more
@@ -127,56 +129,6 @@ type CreateComputeNodeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComputeNodeGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AmiId != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_amiId, *v.AmiId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ComputeNodeGroupName != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_computeNodeGroupName, *v.ComputeNodeGroupName)
-	}
-	if v.CustomLaunchTemplate != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_customLaunchTemplate)
-		v.CustomLaunchTemplate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IamInstanceProfileArn != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
-	}
-	serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
-	if v.PurchaseOption != "" {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_purchaseOption, string(v.PurchaseOption))
-	}
-	if v.ScalingConfiguration != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_scalingConfiguration)
-		v.ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SlurmConfiguration != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_slurmConfiguration)
-		v.SlurmConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SpotOptions != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_spotOptions)
-		v.SpotOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
-	serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
-}
-
 type CreateComputeNodeGroupOutput struct {
 
 	// A compute node group associated with a cluster.
@@ -188,73 +140,23 @@ type CreateComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComputeNodeGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateComputeNodeGroupResponse_computeNodeGroup:
-			v.ComputeNodeGroup = &types.ComputeNodeGroup{}
-			return v.ComputeNodeGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeNodeGroup, schemas.CreateComputeNodeGroupRequest, schemas.CreateComputeNodeGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeNodeGroup, schemas.CreateComputeNodeGroupRequest, schemas.CreateComputeNodeGroupResponse), output: &CreateComputeNodeGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComputeNodeGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -264,12 +166,6 @@ func (c *Client) addOperationCreateComputeNodeGroupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateComputeNodeGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputeNodeGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -282,12 +178,6 @@ func (c *Client) addOperationCreateComputeNodeGroupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -327,12 +217,4 @@ func (m *idempotencyToken_initializeOpCreateComputeNodeGroup) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateComputeNodeGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateComputeNodeGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateComputeNodeGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComputeNodeGroup",
-	}
 }

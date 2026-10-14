@@ -5,12 +5,8 @@ package networkmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a monitor between a source subnet and destination IP address. Within a
@@ -75,26 +71,6 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMonitorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMonitorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AggregationPeriod != nil {
-		s.WriteInt64(schemas.CreateMonitorInput_aggregationPeriod, *v.AggregationPeriod)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateMonitorInput_clientToken, *v.ClientToken)
-	}
-	if v.MonitorName != nil {
-		s.WriteString(schemas.CreateMonitorInput_monitorName, *v.MonitorName)
-	}
-	serializeCreateMonitorProbeInputList(s, schemas.CreateMonitorInput_probes, v.Probes)
-	serializeTagMap(s, schemas.CreateMonitorInput_tags, v.Tags)
-}
-
 type CreateMonitorOutput struct {
 
 	// The ARN of the monitor.
@@ -125,88 +101,23 @@ type CreateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMonitorOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMonitorOutput_aggregationPeriod:
-			v.AggregationPeriod = new(int64)
-			return d.ReadInt64(schemas.CreateMonitorOutput_aggregationPeriod, v.AggregationPeriod)
-		case schemas.CreateMonitorOutput_monitorArn:
-			v.MonitorArn = new(string)
-			return d.ReadString(schemas.CreateMonitorOutput_monitorArn, v.MonitorArn)
-		case schemas.CreateMonitorOutput_monitorName:
-			v.MonitorName = new(string)
-			return d.ReadString(schemas.CreateMonitorOutput_monitorName, v.MonitorName)
-		case schemas.CreateMonitorOutput_state:
-			var ev string
-			if err := d.ReadString(schemas.CreateMonitorOutput_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.MonitorState(ev)
-			return nil
-		case schemas.CreateMonitorOutput_tags:
-			return deserializeTagMap(d, schemas.CreateMonitorOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorInput, schemas.CreateMonitorOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMonitor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorInput, schemas.CreateMonitorOutput), output: &CreateMonitorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -216,12 +127,6 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,12 +139,6 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,12 +178,4 @@ func (m *idempotencyToken_initializeOpCreateMonitor) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateMonitorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMonitor{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMonitor",
-	}
 }

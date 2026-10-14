@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DefineSuggester&DomainName=__DomainName__&Suggester.DocumentSuggesterOptions.FuzzyMatching=none&Suggester.DocumentSuggesterOptions.SortExpression=__SortExpression__&Suggester.DocumentSuggesterOptions.SourceField=__SourceField__&Suggester.SuggesterName=__SuggesterName__&Version=2013-01-01

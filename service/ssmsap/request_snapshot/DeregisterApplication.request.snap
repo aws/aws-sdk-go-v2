@@ -1,0 +1,5 @@
+POST /deregister-application
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__"}

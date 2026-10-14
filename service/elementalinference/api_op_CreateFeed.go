@@ -4,13 +4,8 @@ package elementalinference
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a feed. The feed is the target for the live media stream that is being
@@ -51,24 +46,16 @@ type CreateFeedInput struct {
 	// This member is required.
 	Outputs []types.CreateOutput
 
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. For example, the smart crop feature uses this role
+	// to read graphics-compositing templates from your Amazon S3 bucket. You specify
+	// one access role for each feed.
+	AccessRoleArn *string
+
 	// Optional tags. You can also add tags later, using TagResource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CreateFeedRequest_name, *v.Name)
-	}
-	serializeCreateOutputList(s, schemas.CreateFeedRequest_outputs, v.Outputs)
-	serializeTagMap(s, schemas.CreateFeedRequest_tags, v.Tags)
 }
 
 type CreateFeedOutput struct {
@@ -107,6 +94,11 @@ type CreateFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role that you specified in the request. This property is absent if you didn't
+	// specify an IAM role.
+	AccessRoleArn *string
+
 	// The association for this feed. When you create the feed, this property is
 	// empty. You must associate a resource with the feed using AssociateFeed or
 	// UpdateFeed.
@@ -121,107 +113,29 @@ type CreateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateFeedResponse_arn, v.Arn)
-		case schemas.CreateFeedResponse_association:
-			v.Association = &types.FeedAssociation{}
-			return v.Association.Deserialize(d)
-		case schemas.CreateFeedResponse_dataEndpoints:
-			return deserializeStringList(d, schemas.CreateFeedResponse_dataEndpoints, &v.DataEndpoints)
-		case schemas.CreateFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateFeedResponse_id, v.Id)
-		case schemas.CreateFeedResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateFeedResponse_name, v.Name)
-		case schemas.CreateFeedResponse_outputs:
-			return deserializeGetOutputList(d, schemas.CreateFeedResponse_outputs, &v.Outputs)
-		case schemas.CreateFeedResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateFeedResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FeedStatus(ev)
-			return nil
-		case schemas.CreateFeedResponse_tags:
-			return deserializeTagMap(d, schemas.CreateFeedResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeed, schemas.CreateFeedRequest, schemas.CreateFeedResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFeed{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeed, schemas.CreateFeedRequest, schemas.CreateFeedResponse), output: &CreateFeedOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFeed"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFeed(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,22 +150,8 @@ func (c *Client) addOperationCreateFeedMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFeed(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFeed",
-	}
 }

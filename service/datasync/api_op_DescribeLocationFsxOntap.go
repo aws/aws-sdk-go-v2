@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +42,18 @@ type DescribeLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxOntapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxOntapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxOntapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxOntapRequest_LocationArn, *v.LocationArn)
+	}
+}
+
 type DescribeLocationFsxOntapOutput struct {
 
 	// The time that the location was created.
@@ -74,77 +85,83 @@ type DescribeLocationFsxOntapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxOntapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxOntapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxOntapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationFsxOntapResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FsxFilesystemArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxOntapResponse_FsxFilesystemArn, *v.FsxFilesystemArn)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxOntapResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationFsxOntapResponse_LocationUri, *v.LocationUri)
+	}
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.DescribeLocationFsxOntapResponse_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxOntapResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.StorageVirtualMachineArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxOntapResponse_StorageVirtualMachineArn, *v.StorageVirtualMachineArn)
+	}
+}
+func (v *DescribeLocationFsxOntapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationFsxOntapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationFsxOntapResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationFsxOntapResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationFsxOntapResponse_FsxFilesystemArn:
+			v.FsxFilesystemArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxOntapResponse_FsxFilesystemArn, v.FsxFilesystemArn)
+		case schemas.DescribeLocationFsxOntapResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxOntapResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationFsxOntapResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxOntapResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationFsxOntapResponse_Protocol:
+			v.Protocol = &types.FsxProtocol{}
+			return v.Protocol.Deserialize(d)
+		case schemas.DescribeLocationFsxOntapResponse_SecurityGroupArns:
+			return deserializeEc2SecurityGroupArnList(d, schemas.DescribeLocationFsxOntapResponse_SecurityGroupArns, &v.SecurityGroupArns)
+		case schemas.DescribeLocationFsxOntapResponse_StorageVirtualMachineArn:
+			v.StorageVirtualMachineArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxOntapResponse_StorageVirtualMachineArn, v.StorageVirtualMachineArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationFsxOntapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxOntap, schemas.DescribeLocationFsxOntapRequest, schemas.DescribeLocationFsxOntapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxOntap, schemas.DescribeLocationFsxOntapRequest, schemas.DescribeLocationFsxOntapResponse), output: &DescribeLocationFsxOntapOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxOntap{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLocationFsxOntap"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLocationFsxOntapValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationFsxOntap(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +176,8 @@ func (c *Client) addOperationDescribeLocationFsxOntapMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLocationFsxOntap(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLocationFsxOntap",
-	}
 }

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -35,12 +33,6 @@ type AttributeValueMemberBOOL struct {
 }
 
 func (*AttributeValueMemberBOOL) isAttributeValue() {}
-func (v *AttributeValueMemberBOOL) Serialize(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.AttributeValue_BOOL, v.Value)
-}
-func (v *AttributeValueMemberBOOL) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadBool(schemas.AttributeValue_BOOL, &v.Value)
-}
 
 // Indicates that the attribute type value is a number. For example:
 //
@@ -52,12 +44,6 @@ type AttributeValueMemberN struct {
 }
 
 func (*AttributeValueMemberN) isAttributeValue() {}
-func (v *AttributeValueMemberN) Serialize(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.AttributeValue_N, v.Value)
-}
-func (v *AttributeValueMemberN) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadInt64(schemas.AttributeValue_N, &v.Value)
-}
 
 // Indicates that the attribute type value is a string. For example:
 //
@@ -69,12 +55,6 @@ type AttributeValueMemberS struct {
 }
 
 func (*AttributeValueMemberS) isAttributeValue() {}
-func (v *AttributeValueMemberS) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.AttributeValue_S, v.Value)
-}
-func (v *AttributeValueMemberS) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.AttributeValue_S, &v.Value)
-}
 
 // Indicates that the attribute type value is a string set. For example:
 //
@@ -87,12 +67,6 @@ type AttributeValueMemberSS struct {
 }
 
 func (*AttributeValueMemberSS) isAttributeValue() {}
-func (v *AttributeValueMemberSS) Serialize(s smithy.ShapeSerializer) {
-	serializeStringSetAttributeValue(s, schemas.AttributeValue_SS, v.Value)
-}
-func (v *AttributeValueMemberSS) Deserialize(d smithy.ShapeDeserializer) error {
-	return deserializeStringSetAttributeValue(d, schemas.AttributeValue_SS, &v.Value)
-}
 
 //	A group object that contains identifying information and attributes for a
 //
@@ -129,63 +103,6 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Group) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Group)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DistinguishedName != nil {
-		s.WriteString(schemas.Group_DistinguishedName, *v.DistinguishedName)
-	}
-	if v.GroupScope != "" {
-		s.WriteString(schemas.Group_GroupScope, string(v.GroupScope))
-	}
-	if v.GroupType != "" {
-		s.WriteString(schemas.Group_GroupType, string(v.GroupType))
-	}
-	serializeAttributes(s, schemas.Group_OtherAttributes, v.OtherAttributes)
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.Group_SAMAccountName, *v.SAMAccountName)
-	}
-	if v.SID != nil {
-		s.WriteString(schemas.Group_SID, *v.SID)
-	}
-}
-func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Group_DistinguishedName:
-			v.DistinguishedName = new(string)
-			return d.ReadString(schemas.Group_DistinguishedName, v.DistinguishedName)
-		case schemas.Group_GroupScope:
-			var ev string
-			if err := d.ReadString(schemas.Group_GroupScope, &ev); err != nil {
-				return err
-			}
-			v.GroupScope = GroupScope(ev)
-			return nil
-		case schemas.Group_GroupType:
-			var ev string
-			if err := d.ReadString(schemas.Group_GroupType, &ev); err != nil {
-				return err
-			}
-			v.GroupType = GroupType(ev)
-			return nil
-		case schemas.Group_OtherAttributes:
-			return deserializeAttributes(d, schemas.Group_OtherAttributes, &v.OtherAttributes)
-		case schemas.Group_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.Group_SAMAccountName, v.SAMAccountName)
-		case schemas.Group_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.Group_SID, v.SID)
-		}
-		return nil
-	})
-}
-
 // A structure containing a subset of fields of a group object from a directory.
 type GroupSummary struct {
 
@@ -216,54 +133,6 @@ type GroupSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GroupSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GroupSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupScope != "" {
-		s.WriteString(schemas.GroupSummary_GroupScope, string(v.GroupScope))
-	}
-	if v.GroupType != "" {
-		s.WriteString(schemas.GroupSummary_GroupType, string(v.GroupType))
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.GroupSummary_SAMAccountName, *v.SAMAccountName)
-	}
-	if v.SID != nil {
-		s.WriteString(schemas.GroupSummary_SID, *v.SID)
-	}
-}
-func (v *GroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GroupSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GroupSummary_GroupScope:
-			var ev string
-			if err := d.ReadString(schemas.GroupSummary_GroupScope, &ev); err != nil {
-				return err
-			}
-			v.GroupScope = GroupScope(ev)
-			return nil
-		case schemas.GroupSummary_GroupType:
-			var ev string
-			if err := d.ReadString(schemas.GroupSummary_GroupType, &ev); err != nil {
-				return err
-			}
-			v.GroupType = GroupType(ev)
-			return nil
-		case schemas.GroupSummary_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.GroupSummary_SAMAccountName, v.SAMAccountName)
-		case schemas.GroupSummary_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.GroupSummary_SID, v.SID)
-		}
-		return nil
-	})
-}
-
 // A member object that contains identifying information for a specified member.
 type Member struct {
 
@@ -283,44 +152,6 @@ type Member struct {
 	SID *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Member) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Member)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemberType != "" {
-		s.WriteString(schemas.Member_MemberType, string(v.MemberType))
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.Member_SAMAccountName, *v.SAMAccountName)
-	}
-	if v.SID != nil {
-		s.WriteString(schemas.Member_SID, *v.SID)
-	}
-}
-func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Member_MemberType:
-			var ev string
-			if err := d.ReadString(schemas.Member_MemberType, &ev); err != nil {
-				return err
-			}
-			v.MemberType = MemberType(ev)
-			return nil
-		case schemas.Member_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.Member_SAMAccountName, v.SAMAccountName)
-		case schemas.Member_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.Member_SID, v.SID)
-		}
-		return nil
-	})
 }
 
 //	A user object that contains identifying information and attributes for a
@@ -367,73 +198,6 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
-func (v *User) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.User)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DistinguishedName != nil {
-		s.WriteString(schemas.User_DistinguishedName, *v.DistinguishedName)
-	}
-	if v.EmailAddress != nil {
-		s.WriteString(schemas.User_EmailAddress, *v.EmailAddress)
-	}
-	if v.Enabled != nil {
-		s.WriteBool(schemas.User_Enabled, *v.Enabled)
-	}
-	if v.GivenName != nil {
-		s.WriteString(schemas.User_GivenName, *v.GivenName)
-	}
-	serializeAttributes(s, schemas.User_OtherAttributes, v.OtherAttributes)
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.User_SAMAccountName, *v.SAMAccountName)
-	}
-	if v.SID != nil {
-		s.WriteString(schemas.User_SID, *v.SID)
-	}
-	if v.Surname != nil {
-		s.WriteString(schemas.User_Surname, *v.Surname)
-	}
-	if v.UserPrincipalName != nil {
-		s.WriteString(schemas.User_UserPrincipalName, *v.UserPrincipalName)
-	}
-}
-func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.User_DistinguishedName:
-			v.DistinguishedName = new(string)
-			return d.ReadString(schemas.User_DistinguishedName, v.DistinguishedName)
-		case schemas.User_EmailAddress:
-			v.EmailAddress = new(string)
-			return d.ReadString(schemas.User_EmailAddress, v.EmailAddress)
-		case schemas.User_Enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.User_Enabled, v.Enabled)
-		case schemas.User_GivenName:
-			v.GivenName = new(string)
-			return d.ReadString(schemas.User_GivenName, v.GivenName)
-		case schemas.User_OtherAttributes:
-			return deserializeAttributes(d, schemas.User_OtherAttributes, &v.OtherAttributes)
-		case schemas.User_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.User_SAMAccountName, v.SAMAccountName)
-		case schemas.User_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.User_SID, v.SID)
-		case schemas.User_Surname:
-			v.Surname = new(string)
-			return d.ReadString(schemas.User_Surname, v.Surname)
-		case schemas.User_UserPrincipalName:
-			v.UserPrincipalName = new(string)
-			return d.ReadString(schemas.User_UserPrincipalName, v.UserPrincipalName)
-		}
-		return nil
-	})
-}
-
 // A structure containing a subset of the fields of a user object from a directory.
 type UserSummary struct {
 
@@ -459,52 +223,6 @@ type UserSummary struct {
 	Surname *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.UserSummary_Enabled, *v.Enabled)
-	}
-	if v.GivenName != nil {
-		s.WriteString(schemas.UserSummary_GivenName, *v.GivenName)
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.UserSummary_SAMAccountName, *v.SAMAccountName)
-	}
-	if v.SID != nil {
-		s.WriteString(schemas.UserSummary_SID, *v.SID)
-	}
-	if v.Surname != nil {
-		s.WriteString(schemas.UserSummary_Surname, *v.Surname)
-	}
-}
-func (v *UserSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserSummary_Enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.UserSummary_Enabled, v.Enabled)
-		case schemas.UserSummary_GivenName:
-			v.GivenName = new(string)
-			return d.ReadString(schemas.UserSummary_GivenName, v.GivenName)
-		case schemas.UserSummary_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.UserSummary_SAMAccountName, v.SAMAccountName)
-		case schemas.UserSummary_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.UserSummary_SID, v.SID)
-		case schemas.UserSummary_Surname:
-			v.Surname = new(string)
-			return d.ReadString(schemas.UserSummary_Surname, v.Surname)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

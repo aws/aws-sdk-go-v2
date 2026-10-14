@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/opensearchserverless/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -34,6 +37,74 @@ type AccessPolicyDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessPolicyDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPolicyDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPolicyDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.AccessPolicyDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AccessPolicyDetail_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.AccessPolicyDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccessPolicyDetail_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteDocument(schemas.AccessPolicyDetail_policy, &smithydocument.Opaque{Value: v.Policy})
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.AccessPolicyDetail_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AccessPolicyDetail_type, string(v.Type))
+	}
+}
+func (v *AccessPolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPolicyDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPolicyDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.AccessPolicyDetail_createdDate, v.CreatedDate)
+		case schemas.AccessPolicyDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AccessPolicyDetail_description, v.Description)
+		case schemas.AccessPolicyDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.AccessPolicyDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.AccessPolicyDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessPolicyDetail_name, v.Name)
+		case schemas.AccessPolicyDetail_policy:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.AccessPolicyDetail_policy, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Policy = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.AccessPolicyDetail_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.AccessPolicyDetail_policyVersion, v.PolicyVersion)
+		case schemas.AccessPolicyDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.AccessPolicyDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics for an OpenSearch Serverless access policy.
 type AccessPolicyStats struct {
 
@@ -41,6 +112,28 @@ type AccessPolicyStats struct {
 	DataPolicyCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessPolicyStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPolicyStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPolicyStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataPolicyCount != nil {
+		s.WriteInt64(schemas.AccessPolicyStats_DataPolicyCount, *v.DataPolicyCount)
+	}
+}
+func (v *AccessPolicyStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPolicyStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPolicyStats_DataPolicyCount:
+			v.DataPolicyCount = new(int64)
+			return d.ReadInt64(schemas.AccessPolicyStats_DataPolicyCount, v.DataPolicyCount)
+		}
+		return nil
+	})
 }
 
 // A summary of the data access policy.
@@ -67,6 +160,62 @@ type AccessPolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessPolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.AccessPolicySummary_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AccessPolicySummary_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.AccessPolicySummary_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccessPolicySummary_name, *v.Name)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.AccessPolicySummary_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AccessPolicySummary_type, string(v.Type))
+	}
+}
+func (v *AccessPolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPolicySummary_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.AccessPolicySummary_createdDate, v.CreatedDate)
+		case schemas.AccessPolicySummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AccessPolicySummary_description, v.Description)
+		case schemas.AccessPolicySummary_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.AccessPolicySummary_lastModifiedDate, v.LastModifiedDate)
+		case schemas.AccessPolicySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessPolicySummary_name, v.Name)
+		case schemas.AccessPolicySummary_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.AccessPolicySummary_policyVersion, v.PolicyVersion)
+		case schemas.AccessPolicySummary_type:
+			var ev string
+			if err := d.ReadString(schemas.AccessPolicySummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // OpenSearch Serverless-related information for the current account.
 type AccountSettingsDetail struct {
 
@@ -80,6 +229,30 @@ type AccountSettingsDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountSettingsDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettingsDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSettingsDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.AccountSettingsDetail_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountSettingsDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettingsDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettingsDetail_capacityLimits:
+			v.CapacityLimits = &CapacityLimits{}
+			return v.CapacityLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Capacity details for an OpenSearch Serverless collection group, including the
 // current capacity and autoscaling status.
 type CapacityDetails struct {
@@ -91,6 +264,38 @@ type CapacityDetails struct {
 	CapacityInOcu *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoscalingStatus != "" {
+		s.WriteString(schemas.CapacityDetails_autoscalingStatus, string(v.AutoscalingStatus))
+	}
+	if v.CapacityInOcu != nil {
+		s.WriteFloat32(schemas.CapacityDetails_capacityInOcu, *v.CapacityInOcu)
+	}
+}
+func (v *CapacityDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityDetails_autoscalingStatus:
+			var ev string
+			if err := d.ReadString(schemas.CapacityDetails_autoscalingStatus, &ev); err != nil {
+				return err
+			}
+			v.AutoscalingStatus = AutoscalingStatus(ev)
+			return nil
+		case schemas.CapacityDetails_capacityInOcu:
+			v.CapacityInOcu = new(float32)
+			return d.ReadFloat32(schemas.CapacityDetails_capacityInOcu, v.CapacityInOcu)
+		}
+		return nil
+	})
 }
 
 // The maximum capacity limits for all OpenSearch Serverless collections, in
@@ -107,6 +312,34 @@ type CapacityLimits struct {
 	MaxSearchCapacityInOCU *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxIndexingCapacityInOCU != nil {
+		s.WriteInt32(schemas.CapacityLimits_maxIndexingCapacityInOCU, *v.MaxIndexingCapacityInOCU)
+	}
+	if v.MaxSearchCapacityInOCU != nil {
+		s.WriteInt32(schemas.CapacityLimits_maxSearchCapacityInOCU, *v.MaxSearchCapacityInOCU)
+	}
+}
+func (v *CapacityLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityLimits_maxIndexingCapacityInOCU:
+			v.MaxIndexingCapacityInOCU = new(int32)
+			return d.ReadInt32(schemas.CapacityLimits_maxIndexingCapacityInOCU, v.MaxIndexingCapacityInOCU)
+		case schemas.CapacityLimits_maxSearchCapacityInOCU:
+			v.MaxSearchCapacityInOCU = new(int32)
+			return d.ReadInt32(schemas.CapacityLimits_maxSearchCapacityInOCU, v.MaxSearchCapacityInOCU)
+		}
+		return nil
+	})
 }
 
 // Details about each OpenSearch Serverless collection, including the collection
@@ -174,6 +407,150 @@ type CollectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CollectionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CollectionDetail_arn, *v.Arn)
+	}
+	if v.CollectionEndpoint != nil {
+		s.WriteString(schemas.CollectionDetail_collectionEndpoint, *v.CollectionEndpoint)
+	}
+	if v.CollectionGroupName != nil {
+		s.WriteString(schemas.CollectionDetail_collectionGroupName, *v.CollectionGroupName)
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.CollectionDetail_createdDate, *v.CreatedDate)
+	}
+	if v.DashboardEndpoint != nil {
+		s.WriteString(schemas.CollectionDetail_dashboardEndpoint, *v.DashboardEndpoint)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.CollectionDetail_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CollectionDetail_description, *v.Description)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.CollectionDetail_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.CollectionDetail_failureMessage, *v.FailureMessage)
+	}
+	if v.FipsEndpoints != nil {
+		s.WriteStruct(schemas.CollectionDetail_fipsEndpoints)
+		v.FipsEndpoints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionDetail_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CollectionDetail_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.CollectionDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionDetail_name, *v.Name)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CollectionDetail_standbyReplicas, string(v.StandbyReplicas))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CollectionDetail_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CollectionDetail_type, string(v.Type))
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.CollectionDetail_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CollectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CollectionDetail_arn, v.Arn)
+		case schemas.CollectionDetail_collectionEndpoint:
+			v.CollectionEndpoint = new(string)
+			return d.ReadString(schemas.CollectionDetail_collectionEndpoint, v.CollectionEndpoint)
+		case schemas.CollectionDetail_collectionGroupName:
+			v.CollectionGroupName = new(string)
+			return d.ReadString(schemas.CollectionDetail_collectionGroupName, v.CollectionGroupName)
+		case schemas.CollectionDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.CollectionDetail_createdDate, v.CreatedDate)
+		case schemas.CollectionDetail_dashboardEndpoint:
+			v.DashboardEndpoint = new(string)
+			return d.ReadString(schemas.CollectionDetail_dashboardEndpoint, v.DashboardEndpoint)
+		case schemas.CollectionDetail_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.CollectionDetail_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtection(ev)
+			return nil
+		case schemas.CollectionDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CollectionDetail_description, v.Description)
+		case schemas.CollectionDetail_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.CollectionDetail_failureCode, v.FailureCode)
+		case schemas.CollectionDetail_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.CollectionDetail_failureMessage, v.FailureMessage)
+		case schemas.CollectionDetail_fipsEndpoints:
+			v.FipsEndpoints = &FipsEndpoints{}
+			return v.FipsEndpoints.Deserialize(d)
+		case schemas.CollectionDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionDetail_id, v.Id)
+		case schemas.CollectionDetail_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CollectionDetail_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CollectionDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.CollectionDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.CollectionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionDetail_name, v.Name)
+		case schemas.CollectionDetail_standbyReplicas:
+			var ev string
+			if err := d.ReadString(schemas.CollectionDetail_standbyReplicas, &ev); err != nil {
+				return err
+			}
+			v.StandbyReplicas = StandbyReplicas(ev)
+			return nil
+		case schemas.CollectionDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.CollectionDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		case schemas.CollectionDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.CollectionDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CollectionType(ev)
+			return nil
+		case schemas.CollectionDetail_vectorOptions:
+			v.VectorOptions = &VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Error information for an OpenSearch Serverless request.
 type CollectionErrorDetail struct {
 
@@ -194,6 +571,46 @@ type CollectionErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CollectionErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.CollectionErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CollectionErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionErrorDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionErrorDetail_name, *v.Name)
+	}
+}
+func (v *CollectionErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.CollectionErrorDetail_errorCode, v.ErrorCode)
+		case schemas.CollectionErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CollectionErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.CollectionErrorDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionErrorDetail_id, v.Id)
+		case schemas.CollectionErrorDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionErrorDetail_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A list of filter keys that you can use for LIST, UPDATE, and DELETE requests to
 // OpenSearch Serverless collections.
 type CollectionFilters struct {
@@ -208,6 +625,44 @@ type CollectionFilters struct {
 	Status CollectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CollectionFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionGroupName != nil {
+		s.WriteString(schemas.CollectionFilters_collectionGroupName, *v.CollectionGroupName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionFilters_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CollectionFilters_status, string(v.Status))
+	}
+}
+func (v *CollectionFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionFilters_collectionGroupName:
+			v.CollectionGroupName = new(string)
+			return d.ReadString(schemas.CollectionFilters_collectionGroupName, v.CollectionGroupName)
+		case schemas.CollectionFilters_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionFilters_name, v.Name)
+		case schemas.CollectionFilters_status:
+			var ev string
+			if err := d.ReadString(schemas.CollectionFilters_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Capacity limits for a collection group. These limits define the minimum and
@@ -228,6 +683,46 @@ type CollectionGroupCapacityLimits struct {
 	MinSearchCapacityInOCU *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CollectionGroupCapacityLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionGroupCapacityLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionGroupCapacityLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxIndexingCapacityInOCU != nil {
+		s.WriteFloat32(schemas.CollectionGroupCapacityLimits_maxIndexingCapacityInOCU, *v.MaxIndexingCapacityInOCU)
+	}
+	if v.MaxSearchCapacityInOCU != nil {
+		s.WriteFloat32(schemas.CollectionGroupCapacityLimits_maxSearchCapacityInOCU, *v.MaxSearchCapacityInOCU)
+	}
+	if v.MinIndexingCapacityInOCU != nil {
+		s.WriteFloat32(schemas.CollectionGroupCapacityLimits_minIndexingCapacityInOCU, *v.MinIndexingCapacityInOCU)
+	}
+	if v.MinSearchCapacityInOCU != nil {
+		s.WriteFloat32(schemas.CollectionGroupCapacityLimits_minSearchCapacityInOCU, *v.MinSearchCapacityInOCU)
+	}
+}
+func (v *CollectionGroupCapacityLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionGroupCapacityLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionGroupCapacityLimits_maxIndexingCapacityInOCU:
+			v.MaxIndexingCapacityInOCU = new(float32)
+			return d.ReadFloat32(schemas.CollectionGroupCapacityLimits_maxIndexingCapacityInOCU, v.MaxIndexingCapacityInOCU)
+		case schemas.CollectionGroupCapacityLimits_maxSearchCapacityInOCU:
+			v.MaxSearchCapacityInOCU = new(float32)
+			return d.ReadFloat32(schemas.CollectionGroupCapacityLimits_maxSearchCapacityInOCU, v.MaxSearchCapacityInOCU)
+		case schemas.CollectionGroupCapacityLimits_minIndexingCapacityInOCU:
+			v.MinIndexingCapacityInOCU = new(float32)
+			return d.ReadFloat32(schemas.CollectionGroupCapacityLimits_minIndexingCapacityInOCU, v.MinIndexingCapacityInOCU)
+		case schemas.CollectionGroupCapacityLimits_minSearchCapacityInOCU:
+			v.MinSearchCapacityInOCU = new(float32)
+			return d.ReadFloat32(schemas.CollectionGroupCapacityLimits_minSearchCapacityInOCU, v.MinSearchCapacityInOCU)
+		}
+		return nil
+	})
 }
 
 // Details about a collection group.
@@ -270,6 +765,97 @@ type CollectionGroupDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CollectionGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CollectionGroupDetail_arn, *v.Arn)
+	}
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.CollectionGroupDetail_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.CollectionGroupDetail_createdDate, *v.CreatedDate)
+	}
+	if v.CurrentCapacity != nil {
+		s.WriteStruct(schemas.CollectionGroupDetail_currentCapacity)
+		v.CurrentCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CollectionGroupDetail_description, *v.Description)
+	}
+	if v.Generation != "" {
+		s.WriteString(schemas.CollectionGroupDetail_generation, string(v.Generation))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionGroupDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionGroupDetail_name, *v.Name)
+	}
+	if v.NumberOfCollections != nil {
+		s.WriteInt32(schemas.CollectionGroupDetail_numberOfCollections, *v.NumberOfCollections)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CollectionGroupDetail_standbyReplicas, string(v.StandbyReplicas))
+	}
+	serializeTags(s, schemas.CollectionGroupDetail_tags, v.Tags)
+}
+func (v *CollectionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionGroupDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CollectionGroupDetail_arn, v.Arn)
+		case schemas.CollectionGroupDetail_capacityLimits:
+			v.CapacityLimits = &CollectionGroupCapacityLimits{}
+			return v.CapacityLimits.Deserialize(d)
+		case schemas.CollectionGroupDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.CollectionGroupDetail_createdDate, v.CreatedDate)
+		case schemas.CollectionGroupDetail_currentCapacity:
+			v.CurrentCapacity = &CurrentCapacity{}
+			return v.CurrentCapacity.Deserialize(d)
+		case schemas.CollectionGroupDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CollectionGroupDetail_description, v.Description)
+		case schemas.CollectionGroupDetail_generation:
+			var ev string
+			if err := d.ReadString(schemas.CollectionGroupDetail_generation, &ev); err != nil {
+				return err
+			}
+			v.Generation = ServerlessGeneration(ev)
+			return nil
+		case schemas.CollectionGroupDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionGroupDetail_id, v.Id)
+		case schemas.CollectionGroupDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionGroupDetail_name, v.Name)
+		case schemas.CollectionGroupDetail_numberOfCollections:
+			v.NumberOfCollections = new(int32)
+			return d.ReadInt32(schemas.CollectionGroupDetail_numberOfCollections, v.NumberOfCollections)
+		case schemas.CollectionGroupDetail_standbyReplicas:
+			var ev string
+			if err := d.ReadString(schemas.CollectionGroupDetail_standbyReplicas, &ev); err != nil {
+				return err
+			}
+			v.StandbyReplicas = StandbyReplicas(ev)
+			return nil
+		case schemas.CollectionGroupDetail_tags:
+			return deserializeTags(d, schemas.CollectionGroupDetail_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Error details for a collection group operation.
 type CollectionGroupErrorDetail struct {
 
@@ -289,6 +875,46 @@ type CollectionGroupErrorDetail struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CollectionGroupErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionGroupErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionGroupErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.CollectionGroupErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CollectionGroupErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionGroupErrorDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionGroupErrorDetail_name, *v.Name)
+	}
+}
+func (v *CollectionGroupErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionGroupErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionGroupErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.CollectionGroupErrorDetail_errorCode, v.ErrorCode)
+		case schemas.CollectionGroupErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CollectionGroupErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.CollectionGroupErrorDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionGroupErrorDetail_id, v.Id)
+		case schemas.CollectionGroupErrorDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionGroupErrorDetail_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Summary information about a collection group.
@@ -320,6 +946,70 @@ type CollectionGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CollectionGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CollectionGroupSummary_arn, *v.Arn)
+	}
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.CollectionGroupSummary_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.CollectionGroupSummary_createdDate, *v.CreatedDate)
+	}
+	if v.Generation != "" {
+		s.WriteString(schemas.CollectionGroupSummary_generation, string(v.Generation))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionGroupSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionGroupSummary_name, *v.Name)
+	}
+	if v.NumberOfCollections != nil {
+		s.WriteInt32(schemas.CollectionGroupSummary_numberOfCollections, *v.NumberOfCollections)
+	}
+}
+func (v *CollectionGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionGroupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CollectionGroupSummary_arn, v.Arn)
+		case schemas.CollectionGroupSummary_capacityLimits:
+			v.CapacityLimits = &CollectionGroupCapacityLimits{}
+			return v.CapacityLimits.Deserialize(d)
+		case schemas.CollectionGroupSummary_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.CollectionGroupSummary_createdDate, v.CreatedDate)
+		case schemas.CollectionGroupSummary_generation:
+			var ev string
+			if err := d.ReadString(schemas.CollectionGroupSummary_generation, &ev); err != nil {
+				return err
+			}
+			v.Generation = ServerlessGeneration(ev)
+			return nil
+		case schemas.CollectionGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionGroupSummary_id, v.Id)
+		case schemas.CollectionGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionGroupSummary_name, v.Name)
+		case schemas.CollectionGroupSummary_numberOfCollections:
+			v.NumberOfCollections = new(int32)
+			return d.ReadInt32(schemas.CollectionGroupSummary_numberOfCollections, v.NumberOfCollections)
+		}
+		return nil
+	})
+}
+
 // Details about each OpenSearch Serverless collection.
 type CollectionSummary struct {
 
@@ -343,6 +1033,62 @@ type CollectionSummary struct {
 	Status CollectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CollectionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CollectionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CollectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CollectionSummary_arn, *v.Arn)
+	}
+	if v.CollectionGroupName != nil {
+		s.WriteString(schemas.CollectionSummary_collectionGroupName, *v.CollectionGroupName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CollectionSummary_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CollectionSummary_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CollectionSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CollectionSummary_status, string(v.Status))
+	}
+}
+func (v *CollectionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CollectionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CollectionSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CollectionSummary_arn, v.Arn)
+		case schemas.CollectionSummary_collectionGroupName:
+			v.CollectionGroupName = new(string)
+			return d.ReadString(schemas.CollectionSummary_collectionGroupName, v.CollectionGroupName)
+		case schemas.CollectionSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CollectionSummary_id, v.Id)
+		case schemas.CollectionSummary_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CollectionSummary_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CollectionSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CollectionSummary_name, v.Name)
+		case schemas.CollectionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.CollectionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the created OpenSearch Serverless collection.
@@ -391,6 +1137,118 @@ type CreateCollectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCollectionDetail_arn, *v.Arn)
+	}
+	if v.CollectionGroupName != nil {
+		s.WriteString(schemas.CreateCollectionDetail_collectionGroupName, *v.CollectionGroupName)
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.CreateCollectionDetail_createdDate, *v.CreatedDate)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.CreateCollectionDetail_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCollectionDetail_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateCollectionDetail_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateCollectionDetail_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.CreateCollectionDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCollectionDetail_name, *v.Name)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CreateCollectionDetail_standbyReplicas, string(v.StandbyReplicas))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCollectionDetail_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateCollectionDetail_type, string(v.Type))
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.CreateCollectionDetail_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_arn, v.Arn)
+		case schemas.CreateCollectionDetail_collectionGroupName:
+			v.CollectionGroupName = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_collectionGroupName, v.CollectionGroupName)
+		case schemas.CreateCollectionDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.CreateCollectionDetail_createdDate, v.CreatedDate)
+		case schemas.CreateCollectionDetail_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionDetail_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtection(ev)
+			return nil
+		case schemas.CreateCollectionDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_description, v.Description)
+		case schemas.CreateCollectionDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_id, v.Id)
+		case schemas.CreateCollectionDetail_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CreateCollectionDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.CreateCollectionDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.CreateCollectionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCollectionDetail_name, v.Name)
+		case schemas.CreateCollectionDetail_standbyReplicas:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionDetail_standbyReplicas, &ev); err != nil {
+				return err
+			}
+			v.StandbyReplicas = StandbyReplicas(ev)
+			return nil
+		case schemas.CreateCollectionDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		case schemas.CreateCollectionDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CollectionType(ev)
+			return nil
+		case schemas.CreateCollectionDetail_vectorOptions:
+			v.VectorOptions = &VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the created collection group.
 type CreateCollectionGroupDetail struct {
 
@@ -425,6 +1283,83 @@ type CreateCollectionGroupDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCollectionGroupDetail_arn, *v.Arn)
+	}
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.CreateCollectionGroupDetail_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.CreateCollectionGroupDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCollectionGroupDetail_description, *v.Description)
+	}
+	if v.Generation != "" {
+		s.WriteString(schemas.CreateCollectionGroupDetail_generation, string(v.Generation))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateCollectionGroupDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCollectionGroupDetail_name, *v.Name)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CreateCollectionGroupDetail_standbyReplicas, string(v.StandbyReplicas))
+	}
+	serializeTags(s, schemas.CreateCollectionGroupDetail_tags, v.Tags)
+}
+func (v *CreateCollectionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionGroupDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCollectionGroupDetail_arn, v.Arn)
+		case schemas.CreateCollectionGroupDetail_capacityLimits:
+			v.CapacityLimits = &CollectionGroupCapacityLimits{}
+			return v.CapacityLimits.Deserialize(d)
+		case schemas.CreateCollectionGroupDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.CreateCollectionGroupDetail_createdDate, v.CreatedDate)
+		case schemas.CreateCollectionGroupDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCollectionGroupDetail_description, v.Description)
+		case schemas.CreateCollectionGroupDetail_generation:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionGroupDetail_generation, &ev); err != nil {
+				return err
+			}
+			v.Generation = ServerlessGeneration(ev)
+			return nil
+		case schemas.CreateCollectionGroupDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateCollectionGroupDetail_id, v.Id)
+		case schemas.CreateCollectionGroupDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCollectionGroupDetail_name, v.Name)
+		case schemas.CreateCollectionGroupDetail_standbyReplicas:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionGroupDetail_standbyReplicas, &ev); err != nil {
+				return err
+			}
+			v.StandbyReplicas = StandbyReplicas(ev)
+			return nil
+		case schemas.CreateCollectionGroupDetail_tags:
+			return deserializeTags(d, schemas.CreateCollectionGroupDetail_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes IAM Identity Center options for creating an OpenSearch Serverless
 // security configuration in the form of a key-value map.
 type CreateIamIdentityCenterConfigOptions struct {
@@ -445,6 +1380,48 @@ type CreateIamIdentityCenterConfigOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIamIdentityCenterConfigOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIamIdentityCenterConfigOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIamIdentityCenterConfigOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupAttribute != "" {
+		s.WriteString(schemas.CreateIamIdentityCenterConfigOptions_groupAttribute, string(v.GroupAttribute))
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateIamIdentityCenterConfigOptions_instanceArn, *v.InstanceArn)
+	}
+	if v.UserAttribute != "" {
+		s.WriteString(schemas.CreateIamIdentityCenterConfigOptions_userAttribute, string(v.UserAttribute))
+	}
+}
+func (v *CreateIamIdentityCenterConfigOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIamIdentityCenterConfigOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIamIdentityCenterConfigOptions_groupAttribute:
+			var ev string
+			if err := d.ReadString(schemas.CreateIamIdentityCenterConfigOptions_groupAttribute, &ev); err != nil {
+				return err
+			}
+			v.GroupAttribute = IamIdentityCenterGroupAttribute(ev)
+			return nil
+		case schemas.CreateIamIdentityCenterConfigOptions_instanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.CreateIamIdentityCenterConfigOptions_instanceArn, v.InstanceArn)
+		case schemas.CreateIamIdentityCenterConfigOptions_userAttribute:
+			var ev string
+			if err := d.ReadString(schemas.CreateIamIdentityCenterConfigOptions_userAttribute, &ev); err != nil {
+				return err
+			}
+			v.UserAttribute = IamIdentityCenterUserAttribute(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Creation details for an OpenSearch Serverless-managed interface endpoint. For
 // more information, see [Access Amazon OpenSearch Serverless using an interface endpoint].
 //
@@ -463,6 +1440,44 @@ type CreateVpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcEndpointDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcEndpointDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateVpcEndpointDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVpcEndpointDetail_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateVpcEndpointDetail_status, string(v.Status))
+	}
+}
+func (v *CreateVpcEndpointDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcEndpointDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcEndpointDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateVpcEndpointDetail_id, v.Id)
+		case schemas.CreateVpcEndpointDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateVpcEndpointDetail_name, v.Name)
+		case schemas.CreateVpcEndpointDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateVpcEndpointDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Current search and indexing capacity for an OpenSearch Serverless collection
 // group. Measured in OpenSearch Compute Units (OCUs).
 type CurrentCapacity struct {
@@ -474,6 +1489,38 @@ type CurrentCapacity struct {
 	Search *CapacityDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *CurrentCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CurrentCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CurrentCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Indexing != nil {
+		s.WriteStruct(schemas.CurrentCapacity_indexing)
+		v.Indexing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Search != nil {
+		s.WriteStruct(schemas.CurrentCapacity_search)
+		v.Search.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CurrentCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CurrentCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CurrentCapacity_indexing:
+			v.Indexing = &CapacityDetails{}
+			return v.Indexing.Deserialize(d)
+		case schemas.CurrentCapacity_search:
+			v.Search = &CapacityDetails{}
+			return v.Search.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details about a deleted OpenSearch Serverless collection.
@@ -494,6 +1541,54 @@ type DeleteCollectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollectionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.DeleteCollectionDetail_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteCollectionDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteCollectionDetail_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteCollectionDetail_status, string(v.Status))
+	}
+}
+func (v *DeleteCollectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollectionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCollectionDetail_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.DeleteCollectionDetail_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtection(ev)
+			return nil
+		case schemas.DeleteCollectionDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteCollectionDetail_id, v.Id)
+		case schemas.DeleteCollectionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteCollectionDetail_name, v.Name)
+		case schemas.DeleteCollectionDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteCollectionDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Deletion details for an OpenSearch Serverless-managed interface endpoint.
 type DeleteVpcEndpointDetail struct {
 
@@ -507,6 +1602,44 @@ type DeleteVpcEndpointDetail struct {
 	Status VpcEndpointStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteVpcEndpointDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteVpcEndpointDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteVpcEndpointDetail_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteVpcEndpointDetail_status, string(v.Status))
+	}
+}
+func (v *DeleteVpcEndpointDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcEndpointDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcEndpointDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteVpcEndpointDetail_id, v.Id)
+		case schemas.DeleteVpcEndpointDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteVpcEndpointDetail_name, v.Name)
+		case schemas.DeleteVpcEndpointDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVpcEndpointDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Error information for an OpenSearch Serverless request.
@@ -537,6 +1670,66 @@ type EffectiveLifecyclePolicyDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EffectiveLifecyclePolicyDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EffectiveLifecyclePolicyDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EffectiveLifecyclePolicyDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NoMinRetentionPeriod != nil {
+		s.WriteBool(schemas.EffectiveLifecyclePolicyDetail_noMinRetentionPeriod, *v.NoMinRetentionPeriod)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyDetail_policyName, *v.PolicyName)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyDetail_resource, *v.Resource)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.EffectiveLifecyclePolicyDetail_resourceType, string(v.ResourceType))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyDetail_retentionPeriod, *v.RetentionPeriod)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EffectiveLifecyclePolicyDetail_type, string(v.Type))
+	}
+}
+func (v *EffectiveLifecyclePolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EffectiveLifecyclePolicyDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EffectiveLifecyclePolicyDetail_noMinRetentionPeriod:
+			v.NoMinRetentionPeriod = new(bool)
+			return d.ReadBool(schemas.EffectiveLifecyclePolicyDetail_noMinRetentionPeriod, v.NoMinRetentionPeriod)
+		case schemas.EffectiveLifecyclePolicyDetail_policyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyDetail_policyName, v.PolicyName)
+		case schemas.EffectiveLifecyclePolicyDetail_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyDetail_resource, v.Resource)
+		case schemas.EffectiveLifecyclePolicyDetail_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveLifecyclePolicyDetail_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.EffectiveLifecyclePolicyDetail_retentionPeriod:
+			v.RetentionPeriod = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyDetail_retentionPeriod, v.RetentionPeriod)
+		case schemas.EffectiveLifecyclePolicyDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveLifecyclePolicyDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Error information for an OpenSearch Serverless request.
 type EffectiveLifecyclePolicyErrorDetail struct {
 
@@ -556,6 +1749,50 @@ type EffectiveLifecyclePolicyErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EffectiveLifecyclePolicyErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EffectiveLifecyclePolicyErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EffectiveLifecyclePolicyErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.EffectiveLifecyclePolicyErrorDetail_resource, *v.Resource)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EffectiveLifecyclePolicyErrorDetail_type, string(v.Type))
+	}
+}
+func (v *EffectiveLifecyclePolicyErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EffectiveLifecyclePolicyErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EffectiveLifecyclePolicyErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyErrorDetail_errorCode, v.ErrorCode)
+		case schemas.EffectiveLifecyclePolicyErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.EffectiveLifecyclePolicyErrorDetail_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.EffectiveLifecyclePolicyErrorDetail_resource, v.Resource)
+		case schemas.EffectiveLifecyclePolicyErrorDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.EffectiveLifecyclePolicyErrorDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Encryption settings for a collection.
 type EncryptionConfig struct {
 
@@ -567,6 +1804,34 @@ type EncryptionConfig struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSOwnedKey != nil {
+		s.WriteBool(schemas.EncryptionConfig_aWSOwnedKey, *v.AWSOwnedKey)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.EncryptionConfig_kmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfig_aWSOwnedKey:
+			v.AWSOwnedKey = new(bool)
+			return d.ReadBool(schemas.EncryptionConfig_aWSOwnedKey, v.AWSOwnedKey)
+		case schemas.EncryptionConfig_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionConfig_kmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
 }
 
 // FIPS-compliant endpoint URLs for an OpenSearch Serverless collection. These
@@ -587,6 +1852,34 @@ type FipsEndpoints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FipsEndpoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FipsEndpoints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FipsEndpoints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionEndpoint != nil {
+		s.WriteString(schemas.FipsEndpoints_collectionEndpoint, *v.CollectionEndpoint)
+	}
+	if v.DashboardEndpoint != nil {
+		s.WriteString(schemas.FipsEndpoints_dashboardEndpoint, *v.DashboardEndpoint)
+	}
+}
+func (v *FipsEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FipsEndpoints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FipsEndpoints_collectionEndpoint:
+			v.CollectionEndpoint = new(string)
+			return d.ReadString(schemas.FipsEndpoints_collectionEndpoint, v.CollectionEndpoint)
+		case schemas.FipsEndpoints_dashboardEndpoint:
+			v.DashboardEndpoint = new(string)
+			return d.ReadString(schemas.FipsEndpoints_dashboardEndpoint, v.DashboardEndpoint)
+		}
+		return nil
+	})
+}
+
 // Describes IAM federation options for an OpenSearch Serverless security
 // configuration in the form of a key-value map. These options define how
 // OpenSearch Serverless integrates with external identity providers using
@@ -602,6 +1895,34 @@ type IamFederationConfigOptions struct {
 	UserAttribute *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IamFederationConfigOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IamFederationConfigOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IamFederationConfigOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupAttribute != nil {
+		s.WriteString(schemas.IamFederationConfigOptions_groupAttribute, *v.GroupAttribute)
+	}
+	if v.UserAttribute != nil {
+		s.WriteString(schemas.IamFederationConfigOptions_userAttribute, *v.UserAttribute)
+	}
+}
+func (v *IamFederationConfigOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IamFederationConfigOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IamFederationConfigOptions_groupAttribute:
+			v.GroupAttribute = new(string)
+			return d.ReadString(schemas.IamFederationConfigOptions_groupAttribute, v.GroupAttribute)
+		case schemas.IamFederationConfigOptions_userAttribute:
+			v.UserAttribute = new(string)
+			return d.ReadString(schemas.IamFederationConfigOptions_userAttribute, v.UserAttribute)
+		}
+		return nil
+	})
 }
 
 // Describes IAM Identity Center options for an OpenSearch Serverless security
@@ -634,6 +1955,66 @@ type IamIdentityCenterConfigOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IamIdentityCenterConfigOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IamIdentityCenterConfigOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IamIdentityCenterConfigOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_applicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationDescription != nil {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_applicationDescription, *v.ApplicationDescription)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_applicationName, *v.ApplicationName)
+	}
+	if v.GroupAttribute != "" {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_groupAttribute, string(v.GroupAttribute))
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_instanceArn, *v.InstanceArn)
+	}
+	if v.UserAttribute != "" {
+		s.WriteString(schemas.IamIdentityCenterConfigOptions_userAttribute, string(v.UserAttribute))
+	}
+}
+func (v *IamIdentityCenterConfigOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IamIdentityCenterConfigOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IamIdentityCenterConfigOptions_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.IamIdentityCenterConfigOptions_applicationArn, v.ApplicationArn)
+		case schemas.IamIdentityCenterConfigOptions_applicationDescription:
+			v.ApplicationDescription = new(string)
+			return d.ReadString(schemas.IamIdentityCenterConfigOptions_applicationDescription, v.ApplicationDescription)
+		case schemas.IamIdentityCenterConfigOptions_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.IamIdentityCenterConfigOptions_applicationName, v.ApplicationName)
+		case schemas.IamIdentityCenterConfigOptions_groupAttribute:
+			var ev string
+			if err := d.ReadString(schemas.IamIdentityCenterConfigOptions_groupAttribute, &ev); err != nil {
+				return err
+			}
+			v.GroupAttribute = IamIdentityCenterGroupAttribute(ev)
+			return nil
+		case schemas.IamIdentityCenterConfigOptions_instanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.IamIdentityCenterConfigOptions_instanceArn, v.InstanceArn)
+		case schemas.IamIdentityCenterConfigOptions_userAttribute:
+			var ev string
+			if err := d.ReadString(schemas.IamIdentityCenterConfigOptions_userAttribute, &ev); err != nil {
+				return err
+			}
+			v.UserAttribute = IamIdentityCenterUserAttribute(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about an OpenSearch Serverless lifecycle policy.
 type LifecyclePolicyDetail struct {
 
@@ -661,6 +2042,74 @@ type LifecyclePolicyDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecyclePolicyDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicyDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicyDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.LifecyclePolicyDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LifecyclePolicyDetail_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.LifecyclePolicyDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LifecyclePolicyDetail_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteDocument(schemas.LifecyclePolicyDetail_policy, &smithydocument.Opaque{Value: v.Policy})
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.LifecyclePolicyDetail_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LifecyclePolicyDetail_type, string(v.Type))
+	}
+}
+func (v *LifecyclePolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicyDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicyDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.LifecyclePolicyDetail_createdDate, v.CreatedDate)
+		case schemas.LifecyclePolicyDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LifecyclePolicyDetail_description, v.Description)
+		case schemas.LifecyclePolicyDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.LifecyclePolicyDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.LifecyclePolicyDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LifecyclePolicyDetail_name, v.Name)
+		case schemas.LifecyclePolicyDetail_policy:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.LifecyclePolicyDetail_policy, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Policy = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.LifecyclePolicyDetail_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.LifecyclePolicyDetail_policyVersion, v.PolicyVersion)
+		case schemas.LifecyclePolicyDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicyDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Error information for an OpenSearch Serverless request.
 type LifecyclePolicyErrorDetail struct {
 
@@ -680,6 +2129,50 @@ type LifecyclePolicyErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecyclePolicyErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicyErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicyErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.LifecyclePolicyErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.LifecyclePolicyErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LifecyclePolicyErrorDetail_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LifecyclePolicyErrorDetail_type, string(v.Type))
+	}
+}
+func (v *LifecyclePolicyErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicyErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicyErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.LifecyclePolicyErrorDetail_errorCode, v.ErrorCode)
+		case schemas.LifecyclePolicyErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.LifecyclePolicyErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.LifecyclePolicyErrorDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LifecyclePolicyErrorDetail_name, v.Name)
+		case schemas.LifecyclePolicyErrorDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicyErrorDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The unique identifiers of policy types and policy names.
 type LifecyclePolicyIdentifier struct {
 
@@ -694,6 +2187,38 @@ type LifecyclePolicyIdentifier struct {
 	Type LifecyclePolicyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecyclePolicyIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicyIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicyIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.LifecyclePolicyIdentifier_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LifecyclePolicyIdentifier_type, string(v.Type))
+	}
+}
+func (v *LifecyclePolicyIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicyIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicyIdentifier_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LifecyclePolicyIdentifier_name, v.Name)
+		case schemas.LifecyclePolicyIdentifier_type:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicyIdentifier_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The unique identifiers of policy types and resource names.
@@ -712,6 +2237,38 @@ type LifecyclePolicyResourceIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecyclePolicyResourceIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicyResourceIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicyResourceIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != nil {
+		s.WriteString(schemas.LifecyclePolicyResourceIdentifier_resource, *v.Resource)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LifecyclePolicyResourceIdentifier_type, string(v.Type))
+	}
+}
+func (v *LifecyclePolicyResourceIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicyResourceIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicyResourceIdentifier_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.LifecyclePolicyResourceIdentifier_resource, v.Resource)
+		case schemas.LifecyclePolicyResourceIdentifier_type:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicyResourceIdentifier_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics for an OpenSearch Serverless lifecycle policy.
 type LifecyclePolicyStats struct {
 
@@ -719,6 +2276,28 @@ type LifecyclePolicyStats struct {
 	RetentionPolicyCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecyclePolicyStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicyStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicyStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionPolicyCount != nil {
+		s.WriteInt64(schemas.LifecyclePolicyStats_RetentionPolicyCount, *v.RetentionPolicyCount)
+	}
+}
+func (v *LifecyclePolicyStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicyStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicyStats_RetentionPolicyCount:
+			v.RetentionPolicyCount = new(int64)
+			return d.ReadInt64(schemas.LifecyclePolicyStats_RetentionPolicyCount, v.RetentionPolicyCount)
+		}
+		return nil
+	})
 }
 
 // A summary of the lifecycle policy.
@@ -745,6 +2324,62 @@ type LifecyclePolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifecyclePolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecyclePolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecyclePolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.LifecyclePolicySummary_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LifecyclePolicySummary_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.LifecyclePolicySummary_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LifecyclePolicySummary_name, *v.Name)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.LifecyclePolicySummary_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LifecyclePolicySummary_type, string(v.Type))
+	}
+}
+func (v *LifecyclePolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecyclePolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecyclePolicySummary_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.LifecyclePolicySummary_createdDate, v.CreatedDate)
+		case schemas.LifecyclePolicySummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LifecyclePolicySummary_description, v.Description)
+		case schemas.LifecyclePolicySummary_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.LifecyclePolicySummary_lastModifiedDate, v.LastModifiedDate)
+		case schemas.LifecyclePolicySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LifecyclePolicySummary_name, v.Name)
+		case schemas.LifecyclePolicySummary_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.LifecyclePolicySummary_policyVersion, v.PolicyVersion)
+		case schemas.LifecyclePolicySummary_type:
+			var ev string
+			if err := d.ReadString(schemas.LifecyclePolicySummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LifecyclePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes SAML options for an OpenSearch Serverless security configuration in
 // the form of a key-value map.
 type SamlConfigOptions struct {
@@ -768,6 +2403,52 @@ type SamlConfigOptions struct {
 	UserAttribute *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SamlConfigOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamlConfigOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamlConfigOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupAttribute != nil {
+		s.WriteString(schemas.SamlConfigOptions_groupAttribute, *v.GroupAttribute)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.SamlConfigOptions_metadata, *v.Metadata)
+	}
+	if v.OpenSearchServerlessEntityId != nil {
+		s.WriteString(schemas.SamlConfigOptions_openSearchServerlessEntityId, *v.OpenSearchServerlessEntityId)
+	}
+	if v.SessionTimeout != nil {
+		s.WriteInt32(schemas.SamlConfigOptions_sessionTimeout, *v.SessionTimeout)
+	}
+	if v.UserAttribute != nil {
+		s.WriteString(schemas.SamlConfigOptions_userAttribute, *v.UserAttribute)
+	}
+}
+func (v *SamlConfigOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamlConfigOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamlConfigOptions_groupAttribute:
+			v.GroupAttribute = new(string)
+			return d.ReadString(schemas.SamlConfigOptions_groupAttribute, v.GroupAttribute)
+		case schemas.SamlConfigOptions_metadata:
+			v.Metadata = new(string)
+			return d.ReadString(schemas.SamlConfigOptions_metadata, v.Metadata)
+		case schemas.SamlConfigOptions_openSearchServerlessEntityId:
+			v.OpenSearchServerlessEntityId = new(string)
+			return d.ReadString(schemas.SamlConfigOptions_openSearchServerlessEntityId, v.OpenSearchServerlessEntityId)
+		case schemas.SamlConfigOptions_sessionTimeout:
+			v.SessionTimeout = new(int32)
+			return d.ReadInt32(schemas.SamlConfigOptions_sessionTimeout, v.SessionTimeout)
+		case schemas.SamlConfigOptions_userAttribute:
+			v.UserAttribute = new(string)
+			return d.ReadString(schemas.SamlConfigOptions_userAttribute, v.UserAttribute)
+		}
+		return nil
+	})
 }
 
 // Details about a security configuration for OpenSearch Serverless.
@@ -805,6 +2486,86 @@ type SecurityConfigDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecurityConfigDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityConfigDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityConfigDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigVersion != nil {
+		s.WriteString(schemas.SecurityConfigDetail_configVersion, *v.ConfigVersion)
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.SecurityConfigDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SecurityConfigDetail_description, *v.Description)
+	}
+	if v.IamFederationOptions != nil {
+		s.WriteStruct(schemas.SecurityConfigDetail_iamFederationOptions)
+		v.IamFederationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamIdentityCenterOptions != nil {
+		s.WriteStruct(schemas.SecurityConfigDetail_iamIdentityCenterOptions)
+		v.IamIdentityCenterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SecurityConfigDetail_id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.SecurityConfigDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.SamlOptions != nil {
+		s.WriteStruct(schemas.SecurityConfigDetail_samlOptions)
+		v.SamlOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityConfigDetail_type, string(v.Type))
+	}
+}
+func (v *SecurityConfigDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityConfigDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityConfigDetail_configVersion:
+			v.ConfigVersion = new(string)
+			return d.ReadString(schemas.SecurityConfigDetail_configVersion, v.ConfigVersion)
+		case schemas.SecurityConfigDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityConfigDetail_createdDate, v.CreatedDate)
+		case schemas.SecurityConfigDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SecurityConfigDetail_description, v.Description)
+		case schemas.SecurityConfigDetail_iamFederationOptions:
+			v.IamFederationOptions = &IamFederationConfigOptions{}
+			return v.IamFederationOptions.Deserialize(d)
+		case schemas.SecurityConfigDetail_iamIdentityCenterOptions:
+			v.IamIdentityCenterOptions = &IamIdentityCenterConfigOptions{}
+			return v.IamIdentityCenterOptions.Deserialize(d)
+		case schemas.SecurityConfigDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SecurityConfigDetail_id, v.Id)
+		case schemas.SecurityConfigDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityConfigDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.SecurityConfigDetail_samlOptions:
+			v.SamlOptions = &SamlConfigOptions{}
+			return v.SamlOptions.Deserialize(d)
+		case schemas.SecurityConfigDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityConfigDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics for an OpenSearch Serverless security configuration.
 type SecurityConfigStats struct {
 
@@ -812,6 +2573,28 @@ type SecurityConfigStats struct {
 	SamlConfigCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityConfigStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityConfigStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityConfigStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SamlConfigCount != nil {
+		s.WriteInt64(schemas.SecurityConfigStats_SamlConfigCount, *v.SamlConfigCount)
+	}
+}
+func (v *SecurityConfigStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityConfigStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityConfigStats_SamlConfigCount:
+			v.SamlConfigCount = new(int64)
+			return d.ReadInt64(schemas.SecurityConfigStats_SamlConfigCount, v.SamlConfigCount)
+		}
+		return nil
+	})
 }
 
 // A summary of a security configuration for OpenSearch Serverless.
@@ -836,6 +2619,62 @@ type SecurityConfigSummary struct {
 	Type SecurityConfigType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigVersion != nil {
+		s.WriteString(schemas.SecurityConfigSummary_configVersion, *v.ConfigVersion)
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.SecurityConfigSummary_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SecurityConfigSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SecurityConfigSummary_id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.SecurityConfigSummary_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityConfigSummary_type, string(v.Type))
+	}
+}
+func (v *SecurityConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityConfigSummary_configVersion:
+			v.ConfigVersion = new(string)
+			return d.ReadString(schemas.SecurityConfigSummary_configVersion, v.ConfigVersion)
+		case schemas.SecurityConfigSummary_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityConfigSummary_createdDate, v.CreatedDate)
+		case schemas.SecurityConfigSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SecurityConfigSummary_description, v.Description)
+		case schemas.SecurityConfigSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SecurityConfigSummary_id, v.Id)
+		case schemas.SecurityConfigSummary_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityConfigSummary_lastModifiedDate, v.LastModifiedDate)
+		case schemas.SecurityConfigSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityConfigSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about an OpenSearch Serverless security policy.
@@ -865,6 +2704,74 @@ type SecurityPolicyDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecurityPolicyDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityPolicyDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityPolicyDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.SecurityPolicyDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SecurityPolicyDetail_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.SecurityPolicyDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SecurityPolicyDetail_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteDocument(schemas.SecurityPolicyDetail_policy, &smithydocument.Opaque{Value: v.Policy})
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.SecurityPolicyDetail_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityPolicyDetail_type, string(v.Type))
+	}
+}
+func (v *SecurityPolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityPolicyDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityPolicyDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicyDetail_createdDate, v.CreatedDate)
+		case schemas.SecurityPolicyDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SecurityPolicyDetail_description, v.Description)
+		case schemas.SecurityPolicyDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicyDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.SecurityPolicyDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SecurityPolicyDetail_name, v.Name)
+		case schemas.SecurityPolicyDetail_policy:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.SecurityPolicyDetail_policy, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Policy = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.SecurityPolicyDetail_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.SecurityPolicyDetail_policyVersion, v.PolicyVersion)
+		case schemas.SecurityPolicyDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityPolicyDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics for an OpenSearch Serverless security policy.
 type SecurityPolicyStats struct {
 
@@ -875,6 +2782,34 @@ type SecurityPolicyStats struct {
 	NetworkPolicyCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityPolicyStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityPolicyStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityPolicyStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionPolicyCount != nil {
+		s.WriteInt64(schemas.SecurityPolicyStats_EncryptionPolicyCount, *v.EncryptionPolicyCount)
+	}
+	if v.NetworkPolicyCount != nil {
+		s.WriteInt64(schemas.SecurityPolicyStats_NetworkPolicyCount, *v.NetworkPolicyCount)
+	}
+}
+func (v *SecurityPolicyStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityPolicyStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityPolicyStats_EncryptionPolicyCount:
+			v.EncryptionPolicyCount = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicyStats_EncryptionPolicyCount, v.EncryptionPolicyCount)
+		case schemas.SecurityPolicyStats_NetworkPolicyCount:
+			v.NetworkPolicyCount = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicyStats_NetworkPolicyCount, v.NetworkPolicyCount)
+		}
+		return nil
+	})
 }
 
 // A summary of a security policy for OpenSearch Serverless.
@@ -901,6 +2836,62 @@ type SecurityPolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecurityPolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityPolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityPolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.SecurityPolicySummary_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SecurityPolicySummary_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.SecurityPolicySummary_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SecurityPolicySummary_name, *v.Name)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.SecurityPolicySummary_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityPolicySummary_type, string(v.Type))
+	}
+}
+func (v *SecurityPolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityPolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityPolicySummary_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicySummary_createdDate, v.CreatedDate)
+		case schemas.SecurityPolicySummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SecurityPolicySummary_description, v.Description)
+		case schemas.SecurityPolicySummary_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.SecurityPolicySummary_lastModifiedDate, v.LastModifiedDate)
+		case schemas.SecurityPolicySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SecurityPolicySummary_name, v.Name)
+		case schemas.SecurityPolicySummary_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.SecurityPolicySummary_policyVersion, v.PolicyVersion)
+		case schemas.SecurityPolicySummary_type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityPolicySummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A map of key-value pairs associated to an OpenSearch Serverless resource.
 type Tag struct {
 
@@ -915,6 +2906,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Details about an updated OpenSearch Serverless collection.
@@ -953,6 +2972,96 @@ type UpdateCollectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCollectionDetail_arn, *v.Arn)
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.UpdateCollectionDetail_createdDate, *v.CreatedDate)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdateCollectionDetail_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollectionDetail_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCollectionDetail_id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.UpdateCollectionDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCollectionDetail_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateCollectionDetail_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateCollectionDetail_type, string(v.Type))
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.UpdateCollectionDetail_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCollectionDetail_arn, v.Arn)
+		case schemas.UpdateCollectionDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.UpdateCollectionDetail_createdDate, v.CreatedDate)
+		case schemas.UpdateCollectionDetail_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionDetail_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtection(ev)
+			return nil
+		case schemas.UpdateCollectionDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCollectionDetail_description, v.Description)
+		case schemas.UpdateCollectionDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCollectionDetail_id, v.Id)
+		case schemas.UpdateCollectionDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.UpdateCollectionDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateCollectionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCollectionDetail_name, v.Name)
+		case schemas.UpdateCollectionDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CollectionStatus(ev)
+			return nil
+		case schemas.UpdateCollectionDetail_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionDetail_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CollectionType(ev)
+			return nil
+		case schemas.UpdateCollectionDetail_vectorOptions:
+			v.VectorOptions = &VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the updated collection group.
 type UpdateCollectionGroupDetail struct {
 
@@ -984,6 +3093,76 @@ type UpdateCollectionGroupDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCollectionGroupDetail_arn, *v.Arn)
+	}
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.UpdateCollectionGroupDetail_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.UpdateCollectionGroupDetail_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollectionGroupDetail_description, *v.Description)
+	}
+	if v.Generation != "" {
+		s.WriteString(schemas.UpdateCollectionGroupDetail_generation, string(v.Generation))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCollectionGroupDetail_id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.UpdateCollectionGroupDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCollectionGroupDetail_name, *v.Name)
+	}
+}
+func (v *UpdateCollectionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionGroupDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCollectionGroupDetail_arn, v.Arn)
+		case schemas.UpdateCollectionGroupDetail_capacityLimits:
+			v.CapacityLimits = &CollectionGroupCapacityLimits{}
+			return v.CapacityLimits.Deserialize(d)
+		case schemas.UpdateCollectionGroupDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.UpdateCollectionGroupDetail_createdDate, v.CreatedDate)
+		case schemas.UpdateCollectionGroupDetail_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCollectionGroupDetail_description, v.Description)
+		case schemas.UpdateCollectionGroupDetail_generation:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionGroupDetail_generation, &ev); err != nil {
+				return err
+			}
+			v.Generation = ServerlessGeneration(ev)
+			return nil
+		case schemas.UpdateCollectionGroupDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCollectionGroupDetail_id, v.Id)
+		case schemas.UpdateCollectionGroupDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.UpdateCollectionGroupDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateCollectionGroupDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCollectionGroupDetail_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Describes IAM Identity Center options for updating an OpenSearch Serverless
 // security configuration in the form of a key-value map.
 type UpdateIamIdentityCenterConfigOptions struct {
@@ -996,6 +3175,42 @@ type UpdateIamIdentityCenterConfigOptions struct {
 	UserAttribute IamIdentityCenterUserAttribute
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateIamIdentityCenterConfigOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIamIdentityCenterConfigOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIamIdentityCenterConfigOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupAttribute != "" {
+		s.WriteString(schemas.UpdateIamIdentityCenterConfigOptions_groupAttribute, string(v.GroupAttribute))
+	}
+	if v.UserAttribute != "" {
+		s.WriteString(schemas.UpdateIamIdentityCenterConfigOptions_userAttribute, string(v.UserAttribute))
+	}
+}
+func (v *UpdateIamIdentityCenterConfigOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIamIdentityCenterConfigOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIamIdentityCenterConfigOptions_groupAttribute:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIamIdentityCenterConfigOptions_groupAttribute, &ev); err != nil {
+				return err
+			}
+			v.GroupAttribute = IamIdentityCenterGroupAttribute(ev)
+			return nil
+		case schemas.UpdateIamIdentityCenterConfigOptions_userAttribute:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIamIdentityCenterConfigOptions_userAttribute, &ev); err != nil {
+				return err
+			}
+			v.UserAttribute = IamIdentityCenterUserAttribute(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Update details for an OpenSearch Serverless-managed interface endpoint.
@@ -1023,6 +3238,56 @@ type UpdateVpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcEndpointDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcEndpointDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateVpcEndpointDetail_id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteInt64(schemas.UpdateVpcEndpointDetail_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVpcEndpointDetail_name, *v.Name)
+	}
+	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateVpcEndpointDetail_status, string(v.Status))
+	}
+	serializeSubnetIds(s, schemas.UpdateVpcEndpointDetail_subnetIds, v.SubnetIds)
+}
+func (v *UpdateVpcEndpointDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVpcEndpointDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVpcEndpointDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateVpcEndpointDetail_id, v.Id)
+		case schemas.UpdateVpcEndpointDetail_lastModifiedDate:
+			v.LastModifiedDate = new(int64)
+			return d.ReadInt64(schemas.UpdateVpcEndpointDetail_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateVpcEndpointDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateVpcEndpointDetail_name, v.Name)
+		case schemas.UpdateVpcEndpointDetail_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.UpdateVpcEndpointDetail_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateVpcEndpointDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVpcEndpointDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		case schemas.UpdateVpcEndpointDetail_subnetIds:
+			return deserializeSubnetIds(d, schemas.UpdateVpcEndpointDetail_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
 // Configuration options for vector search capabilities in an OpenSearch
 // Serverless collection.
 type VectorOptions struct {
@@ -1033,6 +3298,32 @@ type VectorOptions struct {
 	ServerlessVectorAcceleration ServerlessVectorAccelerationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *VectorOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessVectorAcceleration != "" {
+		s.WriteString(schemas.VectorOptions_ServerlessVectorAcceleration, string(v.ServerlessVectorAcceleration))
+	}
+}
+func (v *VectorOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorOptions_ServerlessVectorAcceleration:
+			var ev string
+			if err := d.ReadString(schemas.VectorOptions_ServerlessVectorAcceleration, &ev); err != nil {
+				return err
+			}
+			v.ServerlessVectorAcceleration = ServerlessVectorAccelerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about an OpenSearch Serverless-managed interface endpoint.
@@ -1069,6 +3360,74 @@ type VpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcEndpointDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcEndpointDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteInt64(schemas.VpcEndpointDetail_createdDate, *v.CreatedDate)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.VpcEndpointDetail_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.VpcEndpointDetail_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VpcEndpointDetail_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VpcEndpointDetail_name, *v.Name)
+	}
+	serializeSecurityGroupIds(s, schemas.VpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.VpcEndpointDetail_status, string(v.Status))
+	}
+	serializeSubnetIds(s, schemas.VpcEndpointDetail_subnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcEndpointDetail_vpcId, *v.VpcId)
+	}
+}
+func (v *VpcEndpointDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcEndpointDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcEndpointDetail_createdDate:
+			v.CreatedDate = new(int64)
+			return d.ReadInt64(schemas.VpcEndpointDetail_createdDate, v.CreatedDate)
+		case schemas.VpcEndpointDetail_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.VpcEndpointDetail_failureCode, v.FailureCode)
+		case schemas.VpcEndpointDetail_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.VpcEndpointDetail_failureMessage, v.FailureMessage)
+		case schemas.VpcEndpointDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VpcEndpointDetail_id, v.Id)
+		case schemas.VpcEndpointDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VpcEndpointDetail_name, v.Name)
+		case schemas.VpcEndpointDetail_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcEndpointDetail_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcEndpointDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcEndpointDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		case schemas.VpcEndpointDetail_subnetIds:
+			return deserializeSubnetIds(d, schemas.VpcEndpointDetail_subnetIds, &v.SubnetIds)
+		case schemas.VpcEndpointDetail_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcEndpointDetail_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Error information for a failed BatchGetVpcEndpoint request.
 type VpcEndpointErrorDetail struct {
 
@@ -1084,6 +3443,40 @@ type VpcEndpointErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcEndpointErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcEndpointErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcEndpointErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.VpcEndpointErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.VpcEndpointErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VpcEndpointErrorDetail_id, *v.Id)
+	}
+}
+func (v *VpcEndpointErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcEndpointErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcEndpointErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.VpcEndpointErrorDetail_errorCode, v.ErrorCode)
+		case schemas.VpcEndpointErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.VpcEndpointErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.VpcEndpointErrorDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VpcEndpointErrorDetail_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // Filter the results of a ListVpcEndpoints request.
 type VpcEndpointFilters struct {
 
@@ -1091,6 +3484,32 @@ type VpcEndpointFilters struct {
 	Status VpcEndpointStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcEndpointFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcEndpointFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcEndpointFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.VpcEndpointFilters_status, string(v.Status))
+	}
+}
+func (v *VpcEndpointFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcEndpointFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcEndpointFilters_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcEndpointFilters_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The VPC endpoint object.
@@ -1106,6 +3525,44 @@ type VpcEndpointSummary struct {
 	Status VpcEndpointStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcEndpointSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcEndpointSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.VpcEndpointSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VpcEndpointSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VpcEndpointSummary_status, string(v.Status))
+	}
+}
+func (v *VpcEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcEndpointSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcEndpointSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VpcEndpointSummary_id, v.Id)
+		case schemas.VpcEndpointSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VpcEndpointSummary_name, v.Name)
+		case schemas.VpcEndpointSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcEndpointSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcEndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

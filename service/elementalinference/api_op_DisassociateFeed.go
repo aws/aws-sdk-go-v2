@@ -5,11 +5,7 @@ package elementalinference
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Releases the resource (the source media) that is associated with this feed. The
@@ -51,24 +47,6 @@ type DisassociateFeedInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedResourceName != nil {
-		s.WriteString(schemas.DisassociateFeedRequest_associatedResourceName, *v.AssociatedResourceName)
-	}
-	if v.DryRun != false {
-		s.WriteBool(schemas.DisassociateFeedRequest_dryRun, v.DryRun)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DisassociateFeedRequest_id, *v.Id)
-	}
-}
-
 type DisassociateFeedOutput struct {
 
 	// The ARN of the feed.
@@ -87,76 +65,23 @@ type DisassociateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DisassociateFeedResponse_arn, v.Arn)
-		case schemas.DisassociateFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DisassociateFeedResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFeed, schemas.DisassociateFeedRequest, schemas.DisassociateFeedResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFeed{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFeed, schemas.DisassociateFeedRequest, schemas.DisassociateFeedResponse), output: &DisassociateFeedOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateFeed"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +91,6 @@ func (c *Client) addOperationDisassociateFeedMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpDisassociateFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFeed(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +103,6 @@ func (c *Client) addOperationDisassociateFeedMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +142,4 @@ func (m *idempotencyToken_initializeOpDisassociateFeed) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opDisassociateFeedMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDisassociateFeed{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDisassociateFeed(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateFeed",
-	}
 }

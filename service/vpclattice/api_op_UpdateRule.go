@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a specified rule for the listener. You can't modify a default listener
@@ -57,6 +56,52 @@ type UpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleAction(s, schemas.UpdateRuleRequest_action, v.Action)
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.UpdateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	serializeRuleMatch(s, schemas.UpdateRuleRequest_match, v.Match)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateRuleRequest_priority, *v.Priority)
+	}
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.UpdateRuleRequest_ruleIdentifier, *v.RuleIdentifier)
+	}
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.UpdateRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *UpdateRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuleRequest_action:
+			return deserializeRuleAction(d, schemas.UpdateRuleRequest_action, &v.Action)
+		case schemas.UpdateRuleRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRuleRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.UpdateRuleRequest_match:
+			return deserializeRuleMatch(d, schemas.UpdateRuleRequest_match, &v.Match)
+		case schemas.UpdateRuleRequest_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.UpdateRuleRequest_priority, v.Priority)
+		case schemas.UpdateRuleRequest_ruleIdentifier:
+			v.RuleIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRuleRequest_ruleIdentifier, v.RuleIdentifier)
+		case schemas.UpdateRuleRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.UpdateRuleRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateRuleOutput struct {
 
 	// Information about the action for the specified listener rule.
@@ -86,77 +131,78 @@ type UpdateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleAction(s, schemas.UpdateRuleResponse_action, v.Action)
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRuleResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRuleResponse_id, *v.Id)
+	}
+	if v.IsDefault != nil {
+		s.WriteBool(schemas.UpdateRuleResponse_isDefault, *v.IsDefault)
+	}
+	serializeRuleMatch(s, schemas.UpdateRuleResponse_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRuleResponse_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateRuleResponse_priority, *v.Priority)
+	}
+}
+func (v *UpdateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuleResponse_action:
+			return deserializeRuleAction(d, schemas.UpdateRuleResponse_action, &v.Action)
+		case schemas.UpdateRuleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_arn, v.Arn)
+		case schemas.UpdateRuleResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_id, v.Id)
+		case schemas.UpdateRuleResponse_isDefault:
+			v.IsDefault = new(bool)
+			return d.ReadBool(schemas.UpdateRuleResponse_isDefault, v.IsDefault)
+		case schemas.UpdateRuleResponse_match:
+			return deserializeRuleMatch(d, schemas.UpdateRuleResponse_match, &v.Match)
+		case schemas.UpdateRuleResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_name, v.Name)
+		case schemas.UpdateRuleResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.UpdateRuleResponse_priority, v.Priority)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRule, schemas.UpdateRuleRequest, schemas.UpdateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRule, schemas.UpdateRuleRequest, schemas.UpdateRuleResponse), output: &UpdateRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +217,8 @@ func (c *Client) addOperationUpdateRuleMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRule",
-	}
 }

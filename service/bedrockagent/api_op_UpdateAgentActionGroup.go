@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration for an action group for an agent.
@@ -121,6 +120,40 @@ type UpdateAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentActionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionGroupExecutor(s, schemas.UpdateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupId != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupId, *v.ActionGroupId)
+	}
+	if v.ActionGroupName != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupName, *v.ActionGroupName)
+	}
+	if v.ActionGroupState != "" {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupState, string(v.ActionGroupState))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
+	}
+	serializeAPISchema(s, schemas.UpdateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_description, *v.Description)
+	}
+	serializeFunctionSchema(s, schemas.UpdateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.ParentActionGroupSignature != "" {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
+	}
+	serializeActionGroupSignatureParams(s, schemas.UpdateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+}
+
 type UpdateAgentActionGroupOutput struct {
 
 	// Contains details about the action group that was updated.
@@ -134,77 +167,50 @@ type UpdateAgentActionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentActionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentActionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentActionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentActionGroup != nil {
+		s.WriteStruct(schemas.UpdateAgentActionGroupResponse_agentActionGroup)
+		v.AgentActionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentActionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentActionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentActionGroupResponse_agentActionGroup:
+			v.AgentActionGroup = &types.AgentActionGroup{}
+			return v.AgentActionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentActionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentActionGroup, schemas.UpdateAgentActionGroupRequest, schemas.UpdateAgentActionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentActionGroup, schemas.UpdateAgentActionGroupRequest, schemas.UpdateAgentActionGroupResponse), output: &UpdateAgentActionGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentActionGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAgentActionGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAgentActionGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgentActionGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -219,22 +225,8 @@ func (c *Client) addOperationUpdateAgentActionGroupMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAgentActionGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAgentActionGroup",
-	}
 }

@@ -4,14 +4,16 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Generates a query from a natural language prompt. This operation uses
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Generates a query from a natural language prompt. This operation uses
 // generative artificial intelligence (generative AI) to produce a ready-to-use SQL
 // query from the prompt.
 //
@@ -28,6 +30,7 @@ import (
 // This feature uses generative AI large language models (LLMs); we recommend
 // double-checking the LLM response.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Create CloudTrail Lake queries from natural language prompts]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
 func (c *Client) GenerateQuery(ctx context.Context, params *GenerateQueryInput, optFns ...func(*Options)) (*GenerateQueryOutput, error) {
 	if params == nil {
@@ -63,6 +66,19 @@ type GenerateQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventDataStoreList(s, schemas.GenerateQueryRequest_EventDataStores, v.EventDataStores)
+	if v.Prompt != nil {
+		s.WriteString(schemas.GenerateQueryRequest_Prompt, *v.Prompt)
+	}
+}
+
 type GenerateQueryOutput struct {
 
 	//  The account ID of the event data store owner.
@@ -81,77 +97,60 @@ type GenerateQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.GenerateQueryResponse_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryAlias != nil {
+		s.WriteString(schemas.GenerateQueryResponse_QueryAlias, *v.QueryAlias)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.GenerateQueryResponse_QueryStatement, *v.QueryStatement)
+	}
+}
+func (v *GenerateQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateQueryResponse_EventDataStoreOwnerAccountId:
+			v.EventDataStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.GenerateQueryResponse_EventDataStoreOwnerAccountId, v.EventDataStoreOwnerAccountId)
+		case schemas.GenerateQueryResponse_QueryAlias:
+			v.QueryAlias = new(string)
+			return d.ReadString(schemas.GenerateQueryResponse_QueryAlias, v.QueryAlias)
+		case schemas.GenerateQueryResponse_QueryStatement:
+			v.QueryStatement = new(string)
+			return d.ReadString(schemas.GenerateQueryResponse_QueryStatement, v.QueryStatement)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateQuery, schemas.GenerateQueryRequest, schemas.GenerateQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateQuery, schemas.GenerateQueryRequest, schemas.GenerateQueryResponse), output: &GenerateQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGenerateQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +165,8 @@ func (c *Client) addOperationGenerateQueryMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateQuery",
-	}
 }

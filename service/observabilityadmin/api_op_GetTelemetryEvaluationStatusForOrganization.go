@@ -4,13 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This returns the onboarding status of the telemetry configuration feature for
@@ -35,22 +30,6 @@ func (c *Client) GetTelemetryEvaluationStatusForOrganization(ctx context.Context
 
 type GetTelemetryEvaluationStatusForOrganizationInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *GetTelemetryEvaluationStatusForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTelemetryEvaluationStatusForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetTelemetryEvaluationStatusForOrganizationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 type GetTelemetryEvaluationStatusForOrganizationOutput struct {
@@ -80,94 +59,26 @@ type GetTelemetryEvaluationStatusForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTelemetryEvaluationStatusForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTelemetryEvaluationStatusForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTelemetryEvaluationStatusForOrganizationOutput_FailureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetTelemetryEvaluationStatusForOrganizationOutput_FailureReason, v.FailureReason)
-		case schemas.GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion:
-			v.HomeRegion = new(string)
-			return d.ReadString(schemas.GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion, v.HomeRegion)
-		case schemas.GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses:
-			return deserializeRegionStatuses(d, schemas.GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses, &v.RegionStatuses)
-		case schemas.GetTelemetryEvaluationStatusForOrganizationOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetTelemetryEvaluationStatusForOrganizationOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTelemetryEvaluationStatusForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryEvaluationStatusForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEvaluationStatusForOrganization, nil, schemas.GetTelemetryEvaluationStatusForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryEvaluationStatusForOrganization{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEvaluationStatusForOrganization, nil, schemas.GetTelemetryEvaluationStatusForOrganizationOutput), output: &GetTelemetryEvaluationStatusForOrganizationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTelemetryEvaluationStatusForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTelemetryEvaluationStatusForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +93,8 @@ func (c *Client) addOperationGetTelemetryEvaluationStatusForOrganizationMiddlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTelemetryEvaluationStatusForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTelemetryEvaluationStatusForOrganization",
-	}
 }

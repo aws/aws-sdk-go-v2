@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves key factors driving cost changes between two time periods within the
@@ -70,8 +70,8 @@ type GetCostComparisonDriversInput struct {
 	//
 	//   - Simple dimension values.
 	//
-	//   - There are three types of simple dimension values: CostCategories , Tags ,
-	//   and Dimensions .
+	//   - There are four types of simple dimension values: CostCategories , Tags ,
+	//   Dimensions , and ProductAttributes .
 	//
 	//   - Specify the CostCategories field to define a filter that acts on Cost
 	//   Categories.
@@ -80,6 +80,13 @@ type GetCostComparisonDriversInput struct {
 	//
 	//   - Specify the Dimensions field to define a filter that acts on the [DimensionValues]
 	//   DimensionValues .
+	//
+	//   - Specify the ProductAttributes field to define a filter that acts on the
+	//   product attributes of supported services, such as Amazon Bedrock. Only
+	//   GetCostAndUsage , GetCostAndUsageWithResources , GetDimensionValues (in the
+	//   COST_AND_USAGE context), GetTags , and GetCostCategories support
+	//   ProductAttributes . For the supported services, keys and SERVICE filter rules,
+	//   see [ProductAttributeValues]ProductAttributeValues .
 	//
 	//   - For each filter type, you can set the dimension name and values for the
 	//   filters that you plan to use.
@@ -136,6 +143,7 @@ type GetCostComparisonDriversInput struct {
 	// and OR aren't supported. Dimensions are limited to LINKED_ACCOUNT .
 	//
 	// [DimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+	// [ProductAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html
 	Filter *types.Expression
 
 	// You can group results using the attributes DIMENSION , TAG , and COST_CATEGORY .
@@ -150,6 +158,43 @@ type GetCostComparisonDriversInput struct {
 	NextPageToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCostComparisonDriversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostComparisonDriversRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostComparisonDriversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_BaselineTimePeriod)
+		v.BaselineTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.ComparisonTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_ComparisonTimePeriod)
+		v.ComparisonTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupDefinitions(s, schemas.GetCostComparisonDriversRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCostComparisonDriversRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MetricForComparison != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_MetricForComparison, *v.MetricForComparison)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_NextPageToken, *v.NextPageToken)
+	}
 }
 
 type GetCostComparisonDriversOutput struct {
@@ -167,77 +212,51 @@ type GetCostComparisonDriversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostComparisonDriversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostComparisonDriversResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostComparisonDriversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostComparisonDrivers(s, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, v.CostComparisonDrivers)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostComparisonDriversResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetCostComparisonDriversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostComparisonDriversResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostComparisonDriversResponse_CostComparisonDrivers:
+			return deserializeCostComparisonDrivers(d, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, &v.CostComparisonDrivers)
+		case schemas.GetCostComparisonDriversResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostComparisonDriversResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostComparisonDriversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostComparisonDrivers, schemas.GetCostComparisonDriversRequest, schemas.GetCostComparisonDriversResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostComparisonDrivers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostComparisonDrivers, schemas.GetCostComparisonDriversRequest, schemas.GetCostComparisonDriversResponse), output: &GetCostComparisonDriversOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostComparisonDrivers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCostComparisonDrivers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCostComparisonDriversValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostComparisonDrivers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,12 +269,6 @@ func (c *Client) addOperationGetCostComparisonDriversMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -358,11 +371,3 @@ type GetCostComparisonDriversAPIClient interface {
 }
 
 var _ GetCostComparisonDriversAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetCostComparisonDrivers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCostComparisonDrivers",
-	}
-}

@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a user profile in Amazon DataZone.
@@ -54,30 +50,6 @@ type CreateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateUserProfileInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateUserProfileInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateUserProfileInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.SessionName != nil {
-		s.WriteString(schemas.CreateUserProfileInput_sessionName, *v.SessionName)
-	}
-	if v.UserIdentifier != nil {
-		s.WriteString(schemas.CreateUserProfileInput_userIdentifier, *v.UserIdentifier)
-	}
-	if v.UserType != "" {
-		s.WriteString(schemas.CreateUserProfileInput_userType, string(v.UserType))
-	}
-}
-
 type CreateUserProfileOutput struct {
 
 	// The user profile details.
@@ -101,92 +73,23 @@ type CreateUserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateUserProfileOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateUserProfileOutput_details:
-			return deserializeUserProfileDetails(d, schemas.CreateUserProfileOutput_details, &v.Details)
-		case schemas.CreateUserProfileOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateUserProfileOutput_domainId, v.DomainId)
-		case schemas.CreateUserProfileOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateUserProfileOutput_id, v.Id)
-		case schemas.CreateUserProfileOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateUserProfileOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.UserProfileStatus(ev)
-			return nil
-		case schemas.CreateUserProfileOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.CreateUserProfileOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.UserProfileType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserProfile{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserProfile, schemas.CreateUserProfileInput, schemas.CreateUserProfileOutput), output: &CreateUserProfileOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -196,12 +99,6 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateUserProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUserProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,12 +111,6 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,12 +150,4 @@ func (m *idempotencyToken_initializeOpCreateUserProfile) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateUserProfileMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateUserProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateUserProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUserProfile",
-	}
 }

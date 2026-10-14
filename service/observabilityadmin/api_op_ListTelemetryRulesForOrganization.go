@@ -5,12 +5,8 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists all telemetry rules in your organization. This operation can only be
@@ -55,26 +51,6 @@ type ListTelemetryRulesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryRulesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTelemetryRulesForOrganizationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTelemetryRulesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTelemetryRulesForOrganizationInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTelemetryRulesForOrganizationInput_NextToken, *v.NextToken)
-	}
-	if v.RuleNamePrefix != nil {
-		s.WriteString(schemas.ListTelemetryRulesForOrganizationInput_RuleNamePrefix, *v.RuleNamePrefix)
-	}
-	serializeAccountIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceAccountIds, v.SourceAccountIds)
-	serializeOrganizationUnitIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds, v.SourceOrganizationUnitIds)
-}
-
 type ListTelemetryRulesForOrganizationOutput struct {
 
 	//  A token to resume pagination of results.
@@ -89,84 +65,26 @@ type ListTelemetryRulesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryRulesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTelemetryRulesForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTelemetryRulesForOrganizationOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTelemetryRulesForOrganizationOutput_NextToken, v.NextToken)
-		case schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries:
-			return deserializeTelemetryRuleSummaries(d, schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries, &v.TelemetryRuleSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTelemetryRulesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTelemetryRulesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRulesForOrganization, schemas.ListTelemetryRulesForOrganizationInput, schemas.ListTelemetryRulesForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTelemetryRulesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRulesForOrganization, schemas.ListTelemetryRulesForOrganizationInput, schemas.ListTelemetryRulesForOrganizationOutput), output: &ListTelemetryRulesForOrganizationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTelemetryRulesForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTelemetryRulesForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +97,6 @@ func (c *Client) addOperationListTelemetryRulesForOrganizationMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -288,11 +200,3 @@ type ListTelemetryRulesForOrganizationAPIClient interface {
 }
 
 var _ ListTelemetryRulesForOrganizationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTelemetryRulesForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTelemetryRulesForOrganization",
-	}
-}

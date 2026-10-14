@@ -10377,7 +10377,9 @@ func (v *TemplateConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TemplateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.TemplateConfiguration_Template, &smithydocument.Opaque{Value: v.Template})
+	if v.Template != nil {
+		s.WriteDocument(schemas.TemplateConfiguration_Template, &smithydocument.Opaque{Value: v.Template})
+	}
 }
 func (v *TemplateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateConfiguration, func(s *smithy.Schema) error {

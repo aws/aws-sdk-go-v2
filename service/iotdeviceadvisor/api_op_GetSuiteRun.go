@@ -4,13 +4,8 @@ package iotdeviceadvisor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,21 +42,6 @@ type GetSuiteRunInput struct {
 	SuiteRunId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSuiteRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSuiteRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SuiteDefinitionId != nil {
-		s.WriteString(schemas.GetSuiteRunRequest_suiteDefinitionId, *v.SuiteDefinitionId)
-	}
-	if v.SuiteRunId != nil {
-		s.WriteString(schemas.GetSuiteRunRequest_suiteRunId, *v.SuiteRunId)
-	}
 }
 
 type GetSuiteRunOutput struct {
@@ -105,118 +85,29 @@ type GetSuiteRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSuiteRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSuiteRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSuiteRunResponse_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.GetSuiteRunResponse_endTime, v.EndTime)
-		case schemas.GetSuiteRunResponse_errorReason:
-			v.ErrorReason = new(string)
-			return d.ReadString(schemas.GetSuiteRunResponse_errorReason, v.ErrorReason)
-		case schemas.GetSuiteRunResponse_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.GetSuiteRunResponse_startTime, v.StartTime)
-		case schemas.GetSuiteRunResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetSuiteRunResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.SuiteRunStatus(ev)
-			return nil
-		case schemas.GetSuiteRunResponse_suiteDefinitionId:
-			v.SuiteDefinitionId = new(string)
-			return d.ReadString(schemas.GetSuiteRunResponse_suiteDefinitionId, v.SuiteDefinitionId)
-		case schemas.GetSuiteRunResponse_suiteDefinitionVersion:
-			v.SuiteDefinitionVersion = new(string)
-			return d.ReadString(schemas.GetSuiteRunResponse_suiteDefinitionVersion, v.SuiteDefinitionVersion)
-		case schemas.GetSuiteRunResponse_suiteRunArn:
-			v.SuiteRunArn = new(string)
-			return d.ReadString(schemas.GetSuiteRunResponse_suiteRunArn, v.SuiteRunArn)
-		case schemas.GetSuiteRunResponse_suiteRunConfiguration:
-			v.SuiteRunConfiguration = &types.SuiteRunConfiguration{}
-			return v.SuiteRunConfiguration.Deserialize(d)
-		case schemas.GetSuiteRunResponse_suiteRunId:
-			v.SuiteRunId = new(string)
-			return d.ReadString(schemas.GetSuiteRunResponse_suiteRunId, v.SuiteRunId)
-		case schemas.GetSuiteRunResponse_tags:
-			return deserializeTagMap(d, schemas.GetSuiteRunResponse_tags, &v.Tags)
-		case schemas.GetSuiteRunResponse_testResult:
-			v.TestResult = &types.TestResult{}
-			return v.TestResult.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRun, schemas.GetSuiteRunRequest, schemas.GetSuiteRunResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSuiteRun{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRun, schemas.GetSuiteRunRequest, schemas.GetSuiteRunResponse), output: &GetSuiteRunOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuiteRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSuiteRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSuiteRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -231,22 +122,8 @@ func (c *Client) addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSuiteRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSuiteRun",
-	}
 }

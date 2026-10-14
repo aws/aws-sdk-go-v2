@@ -4,13 +4,8 @@ package route53globalresolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,21 +42,6 @@ type UpdateHostedZoneAssociationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateHostedZoneAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateHostedZoneAssociationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateHostedZoneAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HostedZoneAssociationId != nil {
-		s.WriteString(schemas.UpdateHostedZoneAssociationInput_hostedZoneAssociationId, *v.HostedZoneAssociationId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateHostedZoneAssociationInput_name, *v.Name)
-	}
 }
 
 type UpdateHostedZoneAssociationOutput struct {
@@ -112,110 +92,29 @@ type UpdateHostedZoneAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHostedZoneAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateHostedZoneAssociationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateHostedZoneAssociationOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateHostedZoneAssociationOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateHostedZoneAssociationOutput_hostedZoneId:
-			v.HostedZoneId = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_hostedZoneId, v.HostedZoneId)
-		case schemas.UpdateHostedZoneAssociationOutput_hostedZoneName:
-			v.HostedZoneName = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_hostedZoneName, v.HostedZoneName)
-		case schemas.UpdateHostedZoneAssociationOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_id, v.Id)
-		case schemas.UpdateHostedZoneAssociationOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_name, v.Name)
-		case schemas.UpdateHostedZoneAssociationOutput_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_resourceArn, v.ResourceArn)
-		case schemas.UpdateHostedZoneAssociationOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateHostedZoneAssociationOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.HostedZoneAssociationStatus(ev)
-			return nil
-		case schemas.UpdateHostedZoneAssociationOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateHostedZoneAssociationOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateHostedZoneAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateHostedZoneAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostedZoneAssociation, schemas.UpdateHostedZoneAssociationInput, schemas.UpdateHostedZoneAssociationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateHostedZoneAssociation{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostedZoneAssociation, schemas.UpdateHostedZoneAssociationInput, schemas.UpdateHostedZoneAssociationOutput), output: &UpdateHostedZoneAssociationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHostedZoneAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateHostedZoneAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHostedZoneAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +129,8 @@ func (c *Client) addOperationUpdateHostedZoneAssociationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateHostedZoneAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateHostedZoneAssociation",
-	}
 }

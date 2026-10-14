@@ -4,10 +4,9 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you
@@ -56,6 +55,24 @@ type ListAvailableManagementCidrRangesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagementCidrRangesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagementCidrRangesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagementCidrRangesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagementCidrRangeConstraint != nil {
+		s.WriteString(schemas.ListAvailableManagementCidrRangesRequest_ManagementCidrRangeConstraint, *v.ManagementCidrRangeConstraint)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailableManagementCidrRangesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableManagementCidrRangesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAvailableManagementCidrRangesOutput struct {
 
 	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
@@ -71,77 +88,51 @@ type ListAvailableManagementCidrRangesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagementCidrRangesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagementCidrRangesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagementCidrRangesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDedicatedTenancyCidrRangeList(s, schemas.ListAvailableManagementCidrRangesResult_ManagementCidrRanges, v.ManagementCidrRanges)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableManagementCidrRangesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailableManagementCidrRangesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableManagementCidrRangesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableManagementCidrRangesResult_ManagementCidrRanges:
+			return deserializeDedicatedTenancyCidrRangeList(d, schemas.ListAvailableManagementCidrRangesResult_ManagementCidrRanges, &v.ManagementCidrRanges)
+		case schemas.ListAvailableManagementCidrRangesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailableManagementCidrRangesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableManagementCidrRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagementCidrRanges, schemas.ListAvailableManagementCidrRangesRequest, schemas.ListAvailableManagementCidrRangesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagementCidrRanges{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagementCidrRanges, schemas.ListAvailableManagementCidrRangesRequest, schemas.ListAvailableManagementCidrRangesResult), output: &ListAvailableManagementCidrRangesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagementCidrRanges{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAvailableManagementCidrRanges"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAvailableManagementCidrRangesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableManagementCidrRanges(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +147,8 @@ func (c *Client) addOperationListAvailableManagementCidrRangesMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAvailableManagementCidrRanges(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAvailableManagementCidrRanges",
-	}
 }

@@ -1,0 +1,5 @@
+POST /ExportSourceNetworkCfnTemplate
+
+Content-Type: application/json
+
+{"sourceNetworkID":"__SourceNetworkID__"}

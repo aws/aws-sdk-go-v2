@@ -122,6 +122,18 @@ func TestCheckSnapshot_AdminCreateUser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AdminDeleteSoftwareToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminDeleteSoftwareToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminDeleteSoftwareToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AdminDeleteUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminDeleteUser(context.Background(), nil, func(o *Options) {
@@ -211,6 +223,18 @@ func TestCheckSnapshot_AdminGetUser(t *testing.T) {
 	_, err := svc.AdminGetUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AdminGetUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminGetUserAuthFactors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,6 +842,18 @@ func TestCheckSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTermsByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTermsByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTermsByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUserImportJob(context.Background(), nil, func(o *Options) {
@@ -890,6 +926,18 @@ func TestCheckSnapshot_ForgotPassword(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetClientToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClientToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCSVHeader(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCSVHeader(context.Background(), nil, func(o *Options) {
@@ -943,6 +991,18 @@ func TestCheckSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	_, err := svc.GetLogDeliveryConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetLogDeliveryConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProvisionedLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1466,6 +1526,18 @@ func TestCheckSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProvisionedLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateResourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateResourceServer(context.Background(), nil, func(o *Options) {
@@ -1633,6 +1705,18 @@ func TestUpdateSnapshot_AdminCreateUser(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AdminDeleteSoftwareToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminDeleteSoftwareToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminDeleteSoftwareToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AdminDeleteUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminDeleteUser(context.Background(), nil, func(o *Options) {
@@ -1722,6 +1806,18 @@ func TestUpdateSnapshot_AdminGetUser(t *testing.T) {
 	_, err := svc.AdminGetUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AdminGetUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminGetUserAuthFactors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2329,6 +2425,18 @@ func TestUpdateSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTermsByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTermsByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTermsByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUserImportJob(context.Background(), nil, func(o *Options) {
@@ -2401,6 +2509,18 @@ func TestUpdateSnapshot_ForgotPassword(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetClientToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClientToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCSVHeader(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCSVHeader(context.Background(), nil, func(o *Options) {
@@ -2454,6 +2574,18 @@ func TestUpdateSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	_, err := svc.GetLogDeliveryConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLogDeliveryConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProvisionedLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2970,6 +3102,18 @@ func TestUpdateSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 	_, err := svc.UpdateManagedLoginBranding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProvisionedLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

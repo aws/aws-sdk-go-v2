@@ -1,0 +1,3 @@
+GET /api/v1/organizations/__OrganizationId__/subscriptions?limit=1&marker=__Marker__
+
+

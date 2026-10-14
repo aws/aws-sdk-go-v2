@@ -4,13 +4,8 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a graph summary for a property graph.
@@ -43,18 +38,6 @@ type GetPropertygraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPropertygraphSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPropertygraphSummaryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPropertygraphSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Mode != "" {
-		s.WriteString(schemas.GetPropertygraphSummaryInput_mode, string(v.Mode))
-	}
-}
-
 type GetPropertygraphSummaryOutput struct {
 
 	// Payload containing the property graph summary response.
@@ -69,85 +52,26 @@ type GetPropertygraphSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPropertygraphSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPropertygraphSummaryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPropertygraphSummaryOutput_payload:
-			v.Payload = &types.PropertygraphSummaryValueMap{}
-			return v.Payload.Deserialize(d)
-		case schemas.GetPropertygraphSummaryOutput_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.GetPropertygraphSummaryOutput_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPropertygraphSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPropertygraphSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphSummary, schemas.GetPropertygraphSummaryInput, schemas.GetPropertygraphSummaryOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPropertygraphSummary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphSummary, schemas.GetPropertygraphSummaryInput, schemas.GetPropertygraphSummaryOutput), output: &GetPropertygraphSummaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPropertygraphSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPropertygraphSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +86,8 @@ func (c *Client) addOperationGetPropertygraphSummaryMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPropertygraphSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPropertygraphSummary",
-	}
 }

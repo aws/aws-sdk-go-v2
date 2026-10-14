@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the answer to a specific question in a workload review.
@@ -82,6 +81,35 @@ type UpdateAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnswerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChoiceUpdates(s, schemas.UpdateAnswerInput_ChoiceUpdates, v.ChoiceUpdates)
+	if v.IsApplicable != nil {
+		s.WriteBool(schemas.UpdateAnswerInput_IsApplicable, *v.IsApplicable)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateAnswerInput_LensAlias, *v.LensAlias)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.UpdateAnswerInput_Notes, *v.Notes)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.UpdateAnswerInput_QuestionId, *v.QuestionId)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.UpdateAnswerInput_Reason, string(v.Reason))
+	}
+	serializeSelectedChoices(s, schemas.UpdateAnswerInput_SelectedChoices, v.SelectedChoices)
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateAnswerInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a update answer call.
 type UpdateAnswerOutput struct {
 
@@ -116,77 +144,68 @@ type UpdateAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnswerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Answer != nil {
+		s.WriteStruct(schemas.UpdateAnswerOutput_Answer)
+		v.Answer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_LensArn, *v.LensArn)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *UpdateAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnswerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnswerOutput_Answer:
+			v.Answer = &types.Answer{}
+			return v.Answer.Deserialize(d)
+		case schemas.UpdateAnswerOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_LensAlias, v.LensAlias)
+		case schemas.UpdateAnswerOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_LensArn, v.LensArn)
+		case schemas.UpdateAnswerOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnswer, schemas.UpdateAnswerInput, schemas.UpdateAnswerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnswer, schemas.UpdateAnswerInput, schemas.UpdateAnswerOutput), output: &UpdateAnswerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnswer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAnswer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAnswerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnswer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +220,8 @@ func (c *Client) addOperationUpdateAnswerMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAnswer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAnswer",
-	}
 }

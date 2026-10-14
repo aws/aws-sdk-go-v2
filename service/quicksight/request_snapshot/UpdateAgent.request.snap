@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/agents/__AgentId__
+
+Content-Type: application/json
+
+{"ActionConnectorsToAdd":["__Member__","__Member__"],"ActionConnectorsToRemove":["__Member__","__Member__"],"CustomPromptInput":{"ExistingPrompt":{"ModelProfileId":"__ModelProfileId__","QbsAwsAccountId":"__QbsAwsAccountId__","SubscriptionId":"__SubscriptionId__"}},"Description":"__Description__","IconId":"__IconId__","Name":"__Name__","SpacesToAdd":["__Member__","__Member__"],"SpacesToRemove":["__Member__","__Member__"],"StarterPrompts":["__Member__","__Member__"],"WelcomeMessage":"__WelcomeMessage__"}

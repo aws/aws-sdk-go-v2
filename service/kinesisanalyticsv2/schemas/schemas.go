@@ -725,13 +725,14 @@ var _CodeSize = smithy.NewSchema(smithy.ShapeID{
 var CodeValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "CodeValidationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var CodeValidationException_Message *smithy.Schema
 
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConcurrentModificationException_Message *smithy.Schema
 
 var _ConditionalToken = smithy.NewSchema(smithy.ShapeID{
@@ -1090,19 +1091,19 @@ var _InputUpdates_member *smithy.Schema
 var InvalidApplicationConfigurationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "InvalidApplicationConfigurationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidApplicationConfigurationException_Message *smithy.Schema
 
 var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidArgumentException_Message *smithy.Schema
 
 var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidRequestException_Message *smithy.Schema
 
 var _JobPlanDescription = smithy.NewSchema(smithy.ShapeID{
@@ -1237,7 +1238,7 @@ var LambdaOutputUpdate_ResourceARNUpdate *smithy.Schema
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_Message *smithy.Schema
 
 var _ListApplicationOperationsInputLimit = smithy.NewSchema(smithy.ShapeID{
@@ -1707,19 +1708,19 @@ var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceInUseException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ResourceProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceProvisionedThroughputExceededException_Message *smithy.Schema
 
 var _RoleARN = smithy.NewSchema(smithy.ShapeID{
@@ -1756,7 +1757,7 @@ var RunConfigurationUpdate_ApplicationRestoreConfiguration *smithy.Schema
 var RuntimeEnvironment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "RuntimeEnvironment",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 14)
 var RuntimeEnvironment_SQL_1_0 *smithy.Schema
 
 var RuntimeEnvironment_FLINK_1_6 *smithy.Schema
@@ -1782,6 +1783,8 @@ var RuntimeEnvironment_FLINK_1_19 *smithy.Schema
 var RuntimeEnvironment_FLINK_1_20 *smithy.Schema
 
 var RuntimeEnvironment_FLINK_2_2 *smithy.Schema
+
+var RuntimeEnvironment_FLINK_2_3 *smithy.Schema
 
 var S3ApplicationCodeLocationDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
@@ -1885,7 +1888,8 @@ var _SecurityGroupIds_member *smithy.Schema
 var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 503})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_Message *smithy.Schema
 
 var _SessionExpirationDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
@@ -2040,13 +2044,13 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var TooManyTagsException_message *smithy.Schema
 
 var UnableToDetectSchemaException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "UnableToDetectSchemaException",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
 var UnableToDetectSchemaException_Message *smithy.Schema
 
 var UnableToDetectSchemaException_RawInputRecords *smithy.Schema
@@ -2056,7 +2060,7 @@ var UnableToDetectSchemaException_ProcessedInputRecords *smithy.Schema
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesisanalyticsv2",
 	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperationException_Message *smithy.Schema
 
 var UrlType = smithy.NewSchema(smithy.ShapeID{
@@ -3454,6 +3458,8 @@ func init() {
 	RuntimeEnvironment_FLINK_1_20 = RuntimeEnvironment.AddMember("FLINK_1_20", smithyprelude.Unit)
 
 	RuntimeEnvironment_FLINK_2_2 = RuntimeEnvironment.AddMember("FLINK_2_2", smithyprelude.Unit)
+
+	RuntimeEnvironment_FLINK_2_3 = RuntimeEnvironment.AddMember("FLINK_2_3", smithyprelude.Unit)
 
 	ApplicationStatus_DELETING = ApplicationStatus.AddMember("DELETING", smithyprelude.Unit)
 

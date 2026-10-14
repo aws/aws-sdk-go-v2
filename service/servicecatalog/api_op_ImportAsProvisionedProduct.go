@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Requests the import of a resource as an Service Catalog provisioned product
@@ -98,33 +94,6 @@ type ImportAsProvisionedProductInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportAsProvisionedProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportAsProvisionedProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportAsProvisionedProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.PhysicalId != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_PhysicalId, *v.PhysicalId)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_ProductId, *v.ProductId)
-	}
-	if v.ProvisionedProductName != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_ProvisionedProductName, *v.ProvisionedProductName)
-	}
-	if v.ProvisioningArtifactId != nil {
-		s.WriteString(schemas.ImportAsProvisionedProductInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
-	}
-}
-
 type ImportAsProvisionedProductOutput struct {
 
 	// Information about a request operation.
@@ -136,73 +105,23 @@ type ImportAsProvisionedProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportAsProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImportAsProvisionedProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImportAsProvisionedProductOutput_RecordDetail:
-			v.RecordDetail = &types.RecordDetail{}
-			return v.RecordDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportAsProvisionedProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportAsProvisionedProduct, schemas.ImportAsProvisionedProductInput, schemas.ImportAsProvisionedProductOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportAsProvisionedProduct{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportAsProvisionedProduct, schemas.ImportAsProvisionedProductInput, schemas.ImportAsProvisionedProductOutput), output: &ImportAsProvisionedProductOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportAsProvisionedProduct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -212,12 +131,6 @@ func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpImportAsProvisionedProductValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportAsProvisionedProduct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,12 +143,6 @@ func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,12 +182,4 @@ func (m *idempotencyToken_initializeOpImportAsProvisionedProduct) HandleInitiali
 }
 func addIdempotencyToken_opImportAsProvisionedProductMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportAsProvisionedProduct{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportAsProvisionedProduct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportAsProvisionedProduct",
-	}
 }

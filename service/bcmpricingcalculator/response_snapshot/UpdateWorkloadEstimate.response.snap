@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.UpdateWorkloadEstimate
+
+{"costCurrency":"USD","createdAt":946684800,"expiresAt":946684800,"failureMessage":"__FailureMessage__","id":"__Id__","name":"__Name__","rateTimestamp":946684800,"rateType":"BEFORE_DISCOUNTS","status":"UPDATING","totalCost":1}

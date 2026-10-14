@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,19 +43,6 @@ type BatchGetAssetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAssetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetAssetPropertyValueRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyValueEntries(s, schemas.BatchGetAssetPropertyValueRequest_entries, v.Entries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.BatchGetAssetPropertyValueRequest_nextToken, *v.NextToken)
-	}
-}
-
 type BatchGetAssetPropertyValueOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error
@@ -91,79 +75,23 @@ type BatchGetAssetPropertyValueOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetAssetPropertyValueResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetAssetPropertyValueResponse_errorEntries:
-			return deserializeBatchGetAssetPropertyValueErrorEntries(d, schemas.BatchGetAssetPropertyValueResponse_errorEntries, &v.ErrorEntries)
-		case schemas.BatchGetAssetPropertyValueResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.BatchGetAssetPropertyValueResponse_nextToken, v.NextToken)
-		case schemas.BatchGetAssetPropertyValueResponse_skippedEntries:
-			return deserializeBatchGetAssetPropertyValueSkippedEntries(d, schemas.BatchGetAssetPropertyValueResponse_skippedEntries, &v.SkippedEntries)
-		case schemas.BatchGetAssetPropertyValueResponse_successEntries:
-			return deserializeBatchGetAssetPropertyValueSuccessEntries(d, schemas.BatchGetAssetPropertyValueResponse_successEntries, &v.SuccessEntries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAssetPropertyValue{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAssetPropertyValue, schemas.BatchGetAssetPropertyValueRequest, schemas.BatchGetAssetPropertyValueResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAssetPropertyValue{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAssetPropertyValue, schemas.BatchGetAssetPropertyValueRequest, schemas.BatchGetAssetPropertyValueResponse), output: &BatchGetAssetPropertyValueOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetAssetPropertyValue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +101,6 @@ func (c *Client) addOperationBatchGetAssetPropertyValueMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpBatchGetAssetPropertyValueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetAssetPropertyValue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +113,6 @@ func (c *Client) addOperationBatchGetAssetPropertyValueMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -315,11 +231,3 @@ type BatchGetAssetPropertyValueAPIClient interface {
 }
 
 var _ BatchGetAssetPropertyValueAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opBatchGetAssetPropertyValue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetAssetPropertyValue",
-	}
-}

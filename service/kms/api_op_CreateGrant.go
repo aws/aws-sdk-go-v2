@@ -4,11 +4,10 @@ package kms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a grant to a KMS key.
@@ -262,6 +261,43 @@ type CreateGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.CreateGrantRequest_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CreateGrantRequest_DryRun, *v.DryRun)
+	}
+	serializeGrantTokenList(s, schemas.CreateGrantRequest_GrantTokens, v.GrantTokens)
+	if v.GranteePrincipal != nil {
+		s.WriteString(schemas.CreateGrantRequest_GranteePrincipal, *v.GranteePrincipal)
+	}
+	if v.GranteeServicePrincipal != nil {
+		s.WriteString(schemas.CreateGrantRequest_GranteeServicePrincipal, *v.GranteeServicePrincipal)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.CreateGrantRequest_KeyId, *v.KeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGrantRequest_Name, *v.Name)
+	}
+	serializeGrantOperationList(s, schemas.CreateGrantRequest_Operations, v.Operations)
+	if v.RetiringPrincipal != nil {
+		s.WriteString(schemas.CreateGrantRequest_RetiringPrincipal, *v.RetiringPrincipal)
+	}
+	if v.RetiringServicePrincipal != nil {
+		s.WriteString(schemas.CreateGrantRequest_RetiringServicePrincipal, *v.RetiringServicePrincipal)
+	}
+}
+
 type CreateGrantOutput struct {
 
 	// The unique identifier for the grant.
@@ -285,77 +321,54 @@ type CreateGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantId != nil {
+		s.WriteString(schemas.CreateGrantResponse_GrantId, *v.GrantId)
+	}
+	if v.GrantToken != nil {
+		s.WriteString(schemas.CreateGrantResponse_GrantToken, *v.GrantToken)
+	}
+}
+func (v *CreateGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGrantResponse_GrantId:
+			v.GrantId = new(string)
+			return d.ReadString(schemas.CreateGrantResponse_GrantId, v.GrantId)
+		case schemas.CreateGrantResponse_GrantToken:
+			v.GrantToken = new(string)
+			return d.ReadString(schemas.CreateGrantResponse_GrantToken, v.GrantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrant, schemas.CreateGrantRequest, schemas.CreateGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrant, schemas.CreateGrantRequest, schemas.CreateGrantResponse), output: &CreateGrantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGrant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGrant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGrantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGrant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -370,22 +383,8 @@ func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGrant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGrant",
-	}
 }

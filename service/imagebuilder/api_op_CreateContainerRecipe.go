@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new container recipe. Container recipes define how images are
@@ -30,8 +30,10 @@ func (c *Client) CreateContainerRecipe(ctx context.Context, params *CreateContai
 
 type CreateContainerRecipeInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -43,12 +45,18 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ContainerType types.ContainerType
 
-	// The name of the container recipe.
+	// The name of the container recipe. The recipe name, combined with the semantic
+	// version, must be unique to your account in each Amazon Web Services Region.
+	// Image Builder generates the container recipe ARN from a normalized form of the
+	// name, so names that differ only in case, spaces, or underscores count as the
+	// same name.
 	//
 	// This member is required.
 	Name *string
 
-	// The base image for the container recipe.
+	// The base image for the container recipe. This can be an Image Builder image
+	// resource ARN or a container image URI from a registry, for example
+	// amazonlinux:latest .
 	//
 	// This member is required.
 	ParentImage *string
@@ -59,9 +67,9 @@ type CreateContainerRecipeInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -70,25 +78,43 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The destination repository for the container image.
+	// The destination repository for the container image. The Amazon ECR repository
+	// must already exist in the Amazon Web Services Region where the build runs.
 	//
 	// This member is required.
 	TargetRepository *types.TargetContainerRepository
 
-	// The components included in the container recipe.
+	// The components included in the container recipe. You can specify each component
+	// only one time in a recipe.
 	Components []types.ComponentConfiguration
 
 	// The description of the container recipe.
 	Description *string
 
-	// The Dockerfile template used to build your image as an inline data blob.
+	// The Dockerfile template used to build your image, as an inline data blob. You
+	// must specify exactly one of the dockerfileTemplateData or dockerfileTemplateUri
+	// properties. For the contextual variables that the template can include, see [Create a new version of a container recipe]in
+	// the EC2 Image Builder User Guide.
+	//
+	// [Create a new version of a container recipe]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/create-container-recipes.html
 	DockerfileTemplateData *string
 
-	// The Amazon S3 URI for the Dockerfile that will be used to build your container
-	// image.
+	// The Amazon S3 URI for the Dockerfile template that is used to build your
+	// container image. You must have permission to read the object. Image Builder
+	// reads the object once, when it creates the recipe, and stores its content in the
+	// recipe. Later changes to the S3 object don't affect the recipe. You must specify
+	// exactly one of the dockerfileTemplateData or dockerfileTemplateUri properties.
 	DockerfileTemplateUri *string
 
-	// Specifies the operating system version for the base image.
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
+	// Specifies the operating system version for the base image. Use this property
+	// only when the base image is a container image from a registry. When the base
+	// image is an Image Builder image, the operating system version comes from the
+	// parent image.
 	ImageOsVersionOverride *string
 
 	// A group of options that can be used to configure an instance for building and
@@ -103,6 +129,7 @@ type CreateContainerRecipeInput struct {
 	KmsKeyId *string
 
 	// Specifies the operating system platform when you use a custom base image.
+	// Container recipes support only the Linux and Windows platforms.
 	PlatformOverride types.Platform
 
 	// Tags that are attached to the container recipe.
@@ -114,6 +141,66 @@ type CreateContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_clientToken, *v.ClientToken)
+	}
+	serializeComponentConfigurationList(s, schemas.CreateContainerRecipeRequest_components, v.Components)
+	if v.ContainerType != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_containerType, string(v.ContainerType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_description, *v.Description)
+	}
+	if v.DockerfileTemplateData != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateData, *v.DockerfileTemplateData)
+	}
+	if v.DockerfileTemplateUri != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateUri, *v.DockerfileTemplateUri)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateContainerRecipeRequest_dryRun, v.DryRun)
+	}
+	if v.ImageOsVersionOverride != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_imageOsVersionOverride, *v.ImageOsVersionOverride)
+	}
+	if v.InstanceConfiguration != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_instanceConfiguration)
+		v.InstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_name, *v.Name)
+	}
+	if v.ParentImage != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_parentImage, *v.ParentImage)
+	}
+	if v.PlatformOverride != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_platformOverride, string(v.PlatformOverride))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateContainerRecipeRequest_tags, v.Tags)
+	if v.TargetRepository != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_targetRepository)
+		v.TargetRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkingDirectory != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_workingDirectory, *v.WorkingDirectory)
+	}
+}
+
 type CreateContainerRecipeOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -123,7 +210,9 @@ type CreateContainerRecipeOutput struct {
 	// created.
 	ContainerRecipeArn *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The request ID that uniquely identifies this request.
@@ -135,65 +224,62 @@ type CreateContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerRecipeResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_clientToken, v.ClientToken)
+		case schemas.CreateContainerRecipeResponse_containerRecipeArn:
+			v.ContainerRecipeArn = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_containerRecipeArn, v.ContainerRecipeArn)
+		case schemas.CreateContainerRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse), output: &CreateContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContainerRecipe"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -203,12 +289,6 @@ func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateContainerRecipeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContainerRecipe(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,12 +301,6 @@ func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,12 +340,4 @@ func (m *idempotencyToken_initializeOpCreateContainerRecipe) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateContainerRecipeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateContainerRecipe{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateContainerRecipe(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContainerRecipe",
-	}
 }

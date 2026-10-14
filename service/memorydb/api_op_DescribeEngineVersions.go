@@ -5,10 +5,10 @@ package memorydb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the available Redis OSS engine versions.
@@ -57,6 +57,33 @@ type DescribeEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultOnly != false {
+		s.WriteBool(schemas.DescribeEngineVersionsRequest_DefaultOnly, v.DefaultOnly)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEngineVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_ParameterGroupFamily, *v.ParameterGroupFamily)
+	}
+}
+
 type DescribeEngineVersionsOutput struct {
 
 	// A list of engine version details. Each element in the list contains detailed
@@ -76,74 +103,48 @@ type DescribeEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngineVersionInfoList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEngineVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEngineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEngineVersionsResponse_EngineVersions:
+			return deserializeEngineVersionInfoList(d, schemas.DescribeEngineVersionsResponse_EngineVersions, &v.EngineVersions)
+		case schemas.DescribeEngineVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEngineVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineVersions, schemas.DescribeEngineVersionsRequest, schemas.DescribeEngineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineVersions, schemas.DescribeEngineVersionsRequest, schemas.DescribeEngineVersionsResponse), output: &DescribeEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEngineVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEngineVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEngineVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +157,6 @@ func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +260,3 @@ type DescribeEngineVersionsAPIClient interface {
 }
 
 var _ DescribeEngineVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEngineVersions",
-	}
-}

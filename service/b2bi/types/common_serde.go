@@ -403,6 +403,7 @@ func serializeX12ValidationRules(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CapabilitySummary) error {
+	*v = make([]CapabilitySummary, 0)
 	var vv CapabilitySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = CapabilitySummary{}
@@ -416,6 +417,7 @@ func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -429,6 +431,7 @@ func deserializeCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]stri
 }
 
 func deserializeInstructionsDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S3Location) error {
+	*v = make([]S3Location, 0)
 	var vv S3Location
 	return smithy.ReadList(d, s, func() error {
 		vv = S3Location{}
@@ -442,6 +445,7 @@ func deserializeInstructionsDocuments(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SampleDocumentKeys) error {
+	*v = make([]SampleDocumentKeys, 0)
 	var vv SampleDocumentKeys
 	return smithy.ReadList(d, s, func() error {
 		vv = SampleDocumentKeys{}
@@ -455,6 +459,7 @@ func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Sampl
 }
 
 func deserializeParsedSplitFileContentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -468,6 +473,7 @@ func deserializeParsedSplitFileContentsList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializePartnershipCapabilities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -481,6 +487,7 @@ func deserializePartnershipCapabilities(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializePartnershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PartnershipSummary) error {
+	*v = make([]PartnershipSummary, 0)
 	var vv PartnershipSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = PartnershipSummary{}
@@ -494,6 +501,7 @@ func deserializePartnershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProfileSummary) error {
+	*v = make([]ProfileSummary, 0)
 	var vv ProfileSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ProfileSummary{}
@@ -507,6 +515,7 @@ func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]P
 }
 
 func deserializeS3LocationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S3Location) error {
+	*v = make([]S3Location, 0)
 	var vv S3Location
 	return smithy.ReadList(d, s, func() error {
 		vv = S3Location{}
@@ -520,6 +529,7 @@ func deserializeS3LocationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -533,6 +543,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -546,6 +557,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeTransformerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TransformerSummary) error {
+	*v = make([]TransformerSummary, 0)
 	var vv TransformerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = TransformerSummary{}
@@ -559,6 +571,7 @@ func deserializeTransformerList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeValidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -572,6 +585,7 @@ func deserializeValidationMessages(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeX12ValidationRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]X12ValidationRule) error {
+	*v = make([]X12ValidationRule, 0)
 	var vv X12ValidationRule
 	return smithy.ReadList(d, s, func() error {
 

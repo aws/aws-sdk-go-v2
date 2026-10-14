@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the account-specific endpoint for Configuration and Update Server (CUPS)
@@ -40,18 +35,6 @@ type GetServiceEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServiceType != "" {
-		s.WriteString(schemas.GetServiceEndpointRequest_ServiceType, string(v.ServiceType))
-	}
-}
-
 type GetServiceEndpointOutput struct {
 
 	// The Root CA of the server trust certificate.
@@ -69,92 +52,26 @@ type GetServiceEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceEndpointResponse_ServerTrust:
-			v.ServerTrust = new(string)
-			return d.ReadString(schemas.GetServiceEndpointResponse_ServerTrust, v.ServerTrust)
-		case schemas.GetServiceEndpointResponse_ServiceEndpoint:
-			v.ServiceEndpoint = new(string)
-			return d.ReadString(schemas.GetServiceEndpointResponse_ServiceEndpoint, v.ServiceEndpoint)
-		case schemas.GetServiceEndpointResponse_ServiceType:
-			var ev string
-			if err := d.ReadString(schemas.GetServiceEndpointResponse_ServiceType, &ev); err != nil {
-				return err
-			}
-			v.ServiceType = types.WirelessGatewayServiceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServiceEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceEndpoint, schemas.GetServiceEndpointRequest, schemas.GetServiceEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceEndpoint, schemas.GetServiceEndpointRequest, schemas.GetServiceEndpointResponse), output: &GetServiceEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +86,8 @@ func (c *Client) addOperationGetServiceEndpointMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServiceEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServiceEndpoint",
-	}
 }

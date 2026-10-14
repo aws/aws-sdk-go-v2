@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A paginated call to retrieve a list of billing groups for the given billing
@@ -47,6 +47,48 @@ type ListBillingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListBillingGroupsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListBillingGroupsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillingGroupsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListBillingGroupsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListBillingGroupsInput_Filters:
+			v.Filters = &types.ListBillingGroupsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListBillingGroupsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListBillingGroupsInput_MaxResults, v.MaxResults)
+		case schemas.ListBillingGroupsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListBillingGroupsOutput struct {
 
 	// A list of BillingGroupListElement retrieved.
@@ -61,77 +103,51 @@ type ListBillingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingGroupList(s, schemas.ListBillingGroupsOutput_BillingGroups, v.BillingGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupsOutput_BillingGroups:
+			return deserializeBillingGroupList(d, schemas.ListBillingGroupsOutput_BillingGroups, &v.BillingGroups)
+		case schemas.ListBillingGroupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroups, schemas.ListBillingGroupsInput, schemas.ListBillingGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBillingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroups, schemas.ListBillingGroupsInput, schemas.ListBillingGroupsOutput), output: &ListBillingGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBillingGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillingGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBillingGroupsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBillingGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +160,6 @@ func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +260,3 @@ type ListBillingGroupsAPIClient interface {
 }
 
 var _ ListBillingGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBillingGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBillingGroups",
-	}
-}

@@ -362,6 +362,18 @@ func TestCheckSnapshot_GetBlob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBlobDifferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlobDifferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBlobDifferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBranch(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBranch(context.Background(), nil, func(o *Options) {
@@ -1302,6 +1314,18 @@ func TestUpdateSnapshot_GetBlob(t *testing.T) {
 	_, err := svc.GetBlob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBlob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetBlobDifferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlobDifferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBlobDifferences")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

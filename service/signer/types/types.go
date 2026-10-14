@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -15,6 +17,30 @@ type Destination struct {
 	S3 *S3Destination
 
 	noSmithyDocumentSerde
+}
+
+func (v *Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.Destination_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Destination_s3:
+			v.S3 = &S3Destination{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The encryption algorithm options that are available to a code-signing job.
@@ -34,6 +60,35 @@ type EncryptionAlgorithmOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionAlgorithmOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionAlgorithmOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionAlgorithmOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionAlgorithms(s, schemas.EncryptionAlgorithmOptions_allowedValues, v.AllowedValues)
+	if v.DefaultValue != "" {
+		s.WriteString(schemas.EncryptionAlgorithmOptions_defaultValue, string(v.DefaultValue))
+	}
+}
+func (v *EncryptionAlgorithmOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionAlgorithmOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionAlgorithmOptions_allowedValues:
+			return deserializeEncryptionAlgorithms(d, schemas.EncryptionAlgorithmOptions_allowedValues, &v.AllowedValues)
+		case schemas.EncryptionAlgorithmOptions_defaultValue:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionAlgorithmOptions_defaultValue, &ev); err != nil {
+				return err
+			}
+			v.DefaultValue = EncryptionAlgorithm(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The hash algorithms that are available to a code-signing job.
 type HashAlgorithmOptions struct {
 
@@ -48,6 +103,35 @@ type HashAlgorithmOptions struct {
 	DefaultValue HashAlgorithm
 
 	noSmithyDocumentSerde
+}
+
+func (v *HashAlgorithmOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HashAlgorithmOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HashAlgorithmOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHashAlgorithms(s, schemas.HashAlgorithmOptions_allowedValues, v.AllowedValues)
+	if v.DefaultValue != "" {
+		s.WriteString(schemas.HashAlgorithmOptions_defaultValue, string(v.DefaultValue))
+	}
+}
+func (v *HashAlgorithmOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HashAlgorithmOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HashAlgorithmOptions_allowedValues:
+			return deserializeHashAlgorithms(d, schemas.HashAlgorithmOptions_allowedValues, &v.AllowedValues)
+		case schemas.HashAlgorithmOptions_defaultValue:
+			var ev string
+			if err := d.ReadString(schemas.HashAlgorithmOptions_defaultValue, &ev); err != nil {
+				return err
+			}
+			v.DefaultValue = HashAlgorithm(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A cross-account permission for a signing profile.
@@ -68,6 +152,46 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Permission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Permission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Permission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.Permission_action, *v.Action)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.Permission_principal, *v.Principal)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.Permission_profileVersion, *v.ProfileVersion)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.Permission_statementId, *v.StatementId)
+	}
+}
+func (v *Permission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Permission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Permission_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.Permission_action, v.Action)
+		case schemas.Permission_principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.Permission_principal, v.Principal)
+		case schemas.Permission_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.Permission_profileVersion, v.ProfileVersion)
+		case schemas.Permission_statementId:
+			v.StatementId = new(string)
+			return d.ReadString(schemas.Permission_statementId, v.StatementId)
+		}
+		return nil
+	})
+}
+
 // The name and prefix of the Amazon S3 bucket where AWS Signer saves your signed
 // objects.
 type S3Destination struct {
@@ -82,6 +206,34 @@ type S3Destination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Destination_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3Destination_prefix, *v.Prefix)
+	}
+}
+func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Destination_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Destination_bucketName, v.BucketName)
+		case schemas.S3Destination_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3Destination_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 bucket name and key where Signer saved your signed code image.
 type S3SignedObject struct {
 
@@ -92,6 +244,34 @@ type S3SignedObject struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3SignedObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SignedObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SignedObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3SignedObject_bucketName, *v.BucketName)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3SignedObject_key, *v.Key)
+	}
+}
+func (v *S3SignedObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SignedObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SignedObject_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3SignedObject_bucketName, v.BucketName)
+		case schemas.S3SignedObject_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3SignedObject_key, v.Key)
+		}
+		return nil
+	})
 }
 
 // Information about the Amazon S3 bucket where you saved your unsigned code.
@@ -115,6 +295,40 @@ type S3Source struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Source) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Source)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Source) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Source_bucketName, *v.BucketName)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3Source_key, *v.Key)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.S3Source_version, *v.Version)
+	}
+}
+func (v *S3Source) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Source, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Source_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Source_bucketName, v.BucketName)
+		case schemas.S3Source_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3Source_key, v.Key)
+		case schemas.S3Source_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.S3Source_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The validity period for a signing job.
 type SignatureValidityPeriod struct {
 
@@ -127,6 +341,37 @@ type SignatureValidityPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignatureValidityPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureValidityPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureValidityPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.SignatureValidityPeriod_type, string(v.Type))
+	}
+	if v.Value != 0 {
+		s.WriteInt32(schemas.SignatureValidityPeriod_value, v.Value)
+	}
+}
+func (v *SignatureValidityPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureValidityPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureValidityPeriod_type:
+			var ev string
+			if err := d.ReadString(schemas.SignatureValidityPeriod_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ValidityType(ev)
+			return nil
+		case schemas.SignatureValidityPeriod_value:
+			return d.ReadInt32(schemas.SignatureValidityPeriod_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Points to an S3SignedObject object that contains information about your signed
 // code image.
 type SignedObject struct {
@@ -135,6 +380,30 @@ type SignedObject struct {
 	S3 *S3SignedObject
 
 	noSmithyDocumentSerde
+}
+
+func (v *SignedObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignedObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignedObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.SignedObject_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SignedObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignedObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignedObject_s3:
+			v.S3 = &S3SignedObject{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration of a signing operation.
@@ -153,6 +422,38 @@ type SigningConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionAlgorithmOptions != nil {
+		s.WriteStruct(schemas.SigningConfiguration_encryptionAlgorithmOptions)
+		v.EncryptionAlgorithmOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HashAlgorithmOptions != nil {
+		s.WriteStruct(schemas.SigningConfiguration_hashAlgorithmOptions)
+		v.HashAlgorithmOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SigningConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningConfiguration_encryptionAlgorithmOptions:
+			v.EncryptionAlgorithmOptions = &EncryptionAlgorithmOptions{}
+			return v.EncryptionAlgorithmOptions.Deserialize(d)
+		case schemas.SigningConfiguration_hashAlgorithmOptions:
+			v.HashAlgorithmOptions = &HashAlgorithmOptions{}
+			return v.HashAlgorithmOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A signing configuration that overrides the default encryption or hash algorithm
 // of a signing job.
 type SigningConfigurationOverrides struct {
@@ -166,6 +467,42 @@ type SigningConfigurationOverrides struct {
 	HashAlgorithm HashAlgorithm
 
 	noSmithyDocumentSerde
+}
+
+func (v *SigningConfigurationOverrides) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningConfigurationOverrides)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningConfigurationOverrides) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionAlgorithm != "" {
+		s.WriteString(schemas.SigningConfigurationOverrides_encryptionAlgorithm, string(v.EncryptionAlgorithm))
+	}
+	if v.HashAlgorithm != "" {
+		s.WriteString(schemas.SigningConfigurationOverrides_hashAlgorithm, string(v.HashAlgorithm))
+	}
+}
+func (v *SigningConfigurationOverrides) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningConfigurationOverrides, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningConfigurationOverrides_encryptionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.SigningConfigurationOverrides_encryptionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.EncryptionAlgorithm = EncryptionAlgorithm(ev)
+			return nil
+		case schemas.SigningConfigurationOverrides_hashAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.SigningConfigurationOverrides_hashAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.HashAlgorithm = HashAlgorithm(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The image format of a AWS Signer platform or profile.
@@ -182,6 +519,35 @@ type SigningImageFormat struct {
 	SupportedFormats []ImageFormat
 
 	noSmithyDocumentSerde
+}
+
+func (v *SigningImageFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningImageFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningImageFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultFormat != "" {
+		s.WriteString(schemas.SigningImageFormat_defaultFormat, string(v.DefaultFormat))
+	}
+	serializeImageFormats(s, schemas.SigningImageFormat_supportedFormats, v.SupportedFormats)
+}
+func (v *SigningImageFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningImageFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningImageFormat_defaultFormat:
+			var ev string
+			if err := d.ReadString(schemas.SigningImageFormat_defaultFormat, &ev); err != nil {
+				return err
+			}
+			v.DefaultFormat = ImageFormat(ev)
+			return nil
+		case schemas.SigningImageFormat_supportedFormats:
+			return deserializeImageFormats(d, schemas.SigningImageFormat_supportedFormats, &v.SupportedFormats)
+		}
+		return nil
+	})
 }
 
 // Contains information about a signing job.
@@ -234,6 +600,115 @@ type SigningJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SigningJob_createdAt, *v.CreatedAt)
+	}
+	if v.IsRevoked != false {
+		s.WriteBool(schemas.SigningJob_isRevoked, v.IsRevoked)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SigningJob_jobId, *v.JobId)
+	}
+	if v.JobInvoker != nil {
+		s.WriteString(schemas.SigningJob_jobInvoker, *v.JobInvoker)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.SigningJob_jobOwner, *v.JobOwner)
+	}
+	if v.PlatformDisplayName != nil {
+		s.WriteString(schemas.SigningJob_platformDisplayName, *v.PlatformDisplayName)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.SigningJob_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.SigningJob_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.SigningJob_profileVersion, *v.ProfileVersion)
+	}
+	if v.SignatureExpiresAt != nil {
+		s.WriteTime(schemas.SigningJob_signatureExpiresAt, *v.SignatureExpiresAt)
+	}
+	if v.SignedObject != nil {
+		s.WriteStruct(schemas.SigningJob_signedObject)
+		v.SignedObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.SigningJob_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.SigningJob_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SigningJob_status, string(v.Status))
+	}
+}
+func (v *SigningJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningJob_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SigningJob_createdAt, v.CreatedAt)
+		case schemas.SigningJob_isRevoked:
+			return d.ReadBool(schemas.SigningJob_isRevoked, &v.IsRevoked)
+		case schemas.SigningJob_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SigningJob_jobId, v.JobId)
+		case schemas.SigningJob_jobInvoker:
+			v.JobInvoker = new(string)
+			return d.ReadString(schemas.SigningJob_jobInvoker, v.JobInvoker)
+		case schemas.SigningJob_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.SigningJob_jobOwner, v.JobOwner)
+		case schemas.SigningJob_platformDisplayName:
+			v.PlatformDisplayName = new(string)
+			return d.ReadString(schemas.SigningJob_platformDisplayName, v.PlatformDisplayName)
+		case schemas.SigningJob_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.SigningJob_platformId, v.PlatformId)
+		case schemas.SigningJob_profileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.SigningJob_profileName, v.ProfileName)
+		case schemas.SigningJob_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.SigningJob_profileVersion, v.ProfileVersion)
+		case schemas.SigningJob_signatureExpiresAt:
+			v.SignatureExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.SigningJob_signatureExpiresAt, v.SignatureExpiresAt)
+		case schemas.SigningJob_signedObject:
+			v.SignedObject = &SignedObject{}
+			return v.SignedObject.Deserialize(d)
+		case schemas.SigningJob_signingMaterial:
+			v.SigningMaterial = &SigningMaterial{}
+			return v.SigningMaterial.Deserialize(d)
+		case schemas.SigningJob_source:
+			v.Source = &Source{}
+			return v.Source.Deserialize(d)
+		case schemas.SigningJob_status:
+			var ev string
+			if err := d.ReadString(schemas.SigningJob_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SigningStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Revocation information for a signing job.
 type SigningJobRevocationRecord struct {
 
@@ -249,6 +724,40 @@ type SigningJobRevocationRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningJobRevocationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningJobRevocationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningJobRevocationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.SigningJobRevocationRecord_reason, *v.Reason)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.SigningJobRevocationRecord_revokedAt, *v.RevokedAt)
+	}
+	if v.RevokedBy != nil {
+		s.WriteString(schemas.SigningJobRevocationRecord_revokedBy, *v.RevokedBy)
+	}
+}
+func (v *SigningJobRevocationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningJobRevocationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningJobRevocationRecord_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.SigningJobRevocationRecord_reason, v.Reason)
+		case schemas.SigningJobRevocationRecord_revokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.SigningJobRevocationRecord_revokedAt, v.RevokedAt)
+		case schemas.SigningJobRevocationRecord_revokedBy:
+			v.RevokedBy = new(string)
+			return d.ReadString(schemas.SigningJobRevocationRecord_revokedBy, v.RevokedBy)
+		}
+		return nil
+	})
+}
+
 // The ACM certificate that is used to sign your code.
 type SigningMaterial struct {
 
@@ -259,6 +768,28 @@ type SigningMaterial struct {
 	CertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SigningMaterial) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningMaterial)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningMaterial) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.SigningMaterial_certificateArn, *v.CertificateArn)
+	}
+}
+func (v *SigningMaterial) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningMaterial, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningMaterial_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.SigningMaterial_certificateArn, v.CertificateArn)
+		}
+		return nil
+	})
 }
 
 // Contains information about the signing configurations and parameters that are
@@ -296,6 +827,82 @@ type SigningPlatform struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningPlatform) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningPlatform)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningPlatform) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.SigningPlatform_category, string(v.Category))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.SigningPlatform_displayName, *v.DisplayName)
+	}
+	if v.MaxSizeInMB != 0 {
+		s.WriteInt32(schemas.SigningPlatform_maxSizeInMB, v.MaxSizeInMB)
+	}
+	if v.Partner != nil {
+		s.WriteString(schemas.SigningPlatform_partner, *v.Partner)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.SigningPlatform_platformId, *v.PlatformId)
+	}
+	if v.RevocationSupported != false {
+		s.WriteBool(schemas.SigningPlatform_revocationSupported, v.RevocationSupported)
+	}
+	if v.SigningConfiguration != nil {
+		s.WriteStruct(schemas.SigningPlatform_signingConfiguration)
+		v.SigningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningImageFormat != nil {
+		s.WriteStruct(schemas.SigningPlatform_signingImageFormat)
+		v.SigningImageFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.SigningPlatform_target, *v.Target)
+	}
+}
+func (v *SigningPlatform) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningPlatform, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningPlatform_category:
+			var ev string
+			if err := d.ReadString(schemas.SigningPlatform_category, &ev); err != nil {
+				return err
+			}
+			v.Category = Category(ev)
+			return nil
+		case schemas.SigningPlatform_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.SigningPlatform_displayName, v.DisplayName)
+		case schemas.SigningPlatform_maxSizeInMB:
+			return d.ReadInt32(schemas.SigningPlatform_maxSizeInMB, &v.MaxSizeInMB)
+		case schemas.SigningPlatform_partner:
+			v.Partner = new(string)
+			return d.ReadString(schemas.SigningPlatform_partner, v.Partner)
+		case schemas.SigningPlatform_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.SigningPlatform_platformId, v.PlatformId)
+		case schemas.SigningPlatform_revocationSupported:
+			return d.ReadBool(schemas.SigningPlatform_revocationSupported, &v.RevocationSupported)
+		case schemas.SigningPlatform_signingConfiguration:
+			v.SigningConfiguration = &SigningConfiguration{}
+			return v.SigningConfiguration.Deserialize(d)
+		case schemas.SigningPlatform_signingImageFormat:
+			v.SigningImageFormat = &SigningImageFormat{}
+			return v.SigningImageFormat.Deserialize(d)
+		case schemas.SigningPlatform_target:
+			v.Target = new(string)
+			return d.ReadString(schemas.SigningPlatform_target, v.Target)
+		}
+		return nil
+	})
+}
+
 // Any overrides that are applied to the signing configuration of a signing
 // platform.
 type SigningPlatformOverrides struct {
@@ -312,6 +919,40 @@ type SigningPlatformOverrides struct {
 	SigningImageFormat ImageFormat
 
 	noSmithyDocumentSerde
+}
+
+func (v *SigningPlatformOverrides) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningPlatformOverrides)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningPlatformOverrides) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SigningConfiguration != nil {
+		s.WriteStruct(schemas.SigningPlatformOverrides_signingConfiguration)
+		v.SigningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningImageFormat != "" {
+		s.WriteString(schemas.SigningPlatformOverrides_signingImageFormat, string(v.SigningImageFormat))
+	}
+}
+func (v *SigningPlatformOverrides) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningPlatformOverrides, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningPlatformOverrides_signingConfiguration:
+			v.SigningConfiguration = &SigningConfigurationOverrides{}
+			return v.SigningConfiguration.Deserialize(d)
+		case schemas.SigningPlatformOverrides_signingImageFormat:
+			var ev string
+			if err := d.ReadString(schemas.SigningPlatformOverrides_signingImageFormat, &ev); err != nil {
+				return err
+			}
+			v.SigningImageFormat = ImageFormat(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains information about the ACM certificates and signing configuration
@@ -354,6 +995,90 @@ type SigningProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SigningProfile_arn, *v.Arn)
+	}
+	if v.PlatformDisplayName != nil {
+		s.WriteString(schemas.SigningProfile_platformDisplayName, *v.PlatformDisplayName)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.SigningProfile_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.SigningProfile_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.SigningProfile_profileVersion, *v.ProfileVersion)
+	}
+	if v.ProfileVersionArn != nil {
+		s.WriteString(schemas.SigningProfile_profileVersionArn, *v.ProfileVersionArn)
+	}
+	if v.SignatureValidityPeriod != nil {
+		s.WriteStruct(schemas.SigningProfile_signatureValidityPeriod)
+		v.SignatureValidityPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.SigningProfile_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningParameters(s, schemas.SigningProfile_signingParameters, v.SigningParameters)
+	if v.Status != "" {
+		s.WriteString(schemas.SigningProfile_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.SigningProfile_tags, v.Tags)
+}
+func (v *SigningProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningProfile_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SigningProfile_arn, v.Arn)
+		case schemas.SigningProfile_platformDisplayName:
+			v.PlatformDisplayName = new(string)
+			return d.ReadString(schemas.SigningProfile_platformDisplayName, v.PlatformDisplayName)
+		case schemas.SigningProfile_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.SigningProfile_platformId, v.PlatformId)
+		case schemas.SigningProfile_profileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.SigningProfile_profileName, v.ProfileName)
+		case schemas.SigningProfile_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.SigningProfile_profileVersion, v.ProfileVersion)
+		case schemas.SigningProfile_profileVersionArn:
+			v.ProfileVersionArn = new(string)
+			return d.ReadString(schemas.SigningProfile_profileVersionArn, v.ProfileVersionArn)
+		case schemas.SigningProfile_signatureValidityPeriod:
+			v.SignatureValidityPeriod = &SignatureValidityPeriod{}
+			return v.SignatureValidityPeriod.Deserialize(d)
+		case schemas.SigningProfile_signingMaterial:
+			v.SigningMaterial = &SigningMaterial{}
+			return v.SigningMaterial.Deserialize(d)
+		case schemas.SigningProfile_signingParameters:
+			return deserializeSigningParameters(d, schemas.SigningProfile_signingParameters, &v.SigningParameters)
+		case schemas.SigningProfile_status:
+			var ev string
+			if err := d.ReadString(schemas.SigningProfile_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SigningProfileStatus(ev)
+			return nil
+		case schemas.SigningProfile_tags:
+			return deserializeTagMap(d, schemas.SigningProfile_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Revocation information for a signing profile.
 type SigningProfileRevocationRecord struct {
 
@@ -369,6 +1094,40 @@ type SigningProfileRevocationRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SigningProfileRevocationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigningProfileRevocationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigningProfileRevocationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevocationEffectiveFrom != nil {
+		s.WriteTime(schemas.SigningProfileRevocationRecord_revocationEffectiveFrom, *v.RevocationEffectiveFrom)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.SigningProfileRevocationRecord_revokedAt, *v.RevokedAt)
+	}
+	if v.RevokedBy != nil {
+		s.WriteString(schemas.SigningProfileRevocationRecord_revokedBy, *v.RevokedBy)
+	}
+}
+func (v *SigningProfileRevocationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigningProfileRevocationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigningProfileRevocationRecord_revocationEffectiveFrom:
+			v.RevocationEffectiveFrom = new(time.Time)
+			return d.ReadTime(schemas.SigningProfileRevocationRecord_revocationEffectiveFrom, v.RevocationEffectiveFrom)
+		case schemas.SigningProfileRevocationRecord_revokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.SigningProfileRevocationRecord_revokedAt, v.RevokedAt)
+		case schemas.SigningProfileRevocationRecord_revokedBy:
+			v.RevokedBy = new(string)
+			return d.ReadString(schemas.SigningProfileRevocationRecord_revokedBy, v.RevokedBy)
+		}
+		return nil
+	})
+}
+
 // An S3Source object that contains information about the S3 bucket where you
 // saved your unsigned code.
 type Source struct {
@@ -377,6 +1136,30 @@ type Source struct {
 	S3 *S3Source
 
 	noSmithyDocumentSerde
+}
+
+func (v *Source) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Source)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.Source_s3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Source) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Source, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Source_s3:
+			v.S3 = &S3Source{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

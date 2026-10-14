@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,6 +45,22 @@ type UpdateDomainNameInput struct {
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDomainNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainNameRequest_domainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.UpdateDomainNameRequest_domainNameId, *v.DomainNameId)
+	}
+	serializeListOfPatchOperation(s, schemas.UpdateDomainNameRequest_patchOperations, v.PatchOperations)
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -162,77 +177,197 @@ type UpdateDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.DomainName_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateName != nil {
+		s.WriteString(schemas.DomainName_certificateName, *v.CertificateName)
+	}
+	if v.CertificateUploadDate != nil {
+		s.WriteTime(schemas.DomainName_certificateUploadDate, *v.CertificateUploadDate)
+	}
+	if v.DistributionDomainName != nil {
+		s.WriteString(schemas.DomainName_distributionDomainName, *v.DistributionDomainName)
+	}
+	if v.DistributionHostedZoneId != nil {
+		s.WriteString(schemas.DomainName_distributionHostedZoneId, *v.DistributionHostedZoneId)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainName_domainName, *v.DomainName)
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.DomainName_domainNameArn, *v.DomainNameArn)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.DomainName_domainNameId, *v.DomainNameId)
+	}
+	if v.DomainNameStatus != "" {
+		s.WriteString(schemas.DomainName_domainNameStatus, string(v.DomainNameStatus))
+	}
+	if v.DomainNameStatusMessage != nil {
+		s.WriteString(schemas.DomainName_domainNameStatusMessage, *v.DomainNameStatusMessage)
+	}
+	if v.EndpointAccessMode != "" {
+		s.WriteString(schemas.DomainName_endpointAccessMode, string(v.EndpointAccessMode))
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.DomainName_endpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagementPolicy != nil {
+		s.WriteString(schemas.DomainName_managementPolicy, *v.ManagementPolicy)
+	}
+	if v.MutualTlsAuthentication != nil {
+		s.WriteStruct(schemas.DomainName_mutualTlsAuthentication)
+		v.MutualTlsAuthentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnershipVerificationCertificateArn != nil {
+		s.WriteString(schemas.DomainName_ownershipVerificationCertificateArn, *v.OwnershipVerificationCertificateArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.DomainName_policy, *v.Policy)
+	}
+	if v.RegionalCertificateArn != nil {
+		s.WriteString(schemas.DomainName_regionalCertificateArn, *v.RegionalCertificateArn)
+	}
+	if v.RegionalCertificateName != nil {
+		s.WriteString(schemas.DomainName_regionalCertificateName, *v.RegionalCertificateName)
+	}
+	if v.RegionalDomainName != nil {
+		s.WriteString(schemas.DomainName_regionalDomainName, *v.RegionalDomainName)
+	}
+	if v.RegionalHostedZoneId != nil {
+		s.WriteString(schemas.DomainName_regionalHostedZoneId, *v.RegionalHostedZoneId)
+	}
+	if v.RoutingMode != "" {
+		s.WriteString(schemas.DomainName_routingMode, string(v.RoutingMode))
+	}
+	if v.SecurityPolicy != "" {
+		s.WriteString(schemas.DomainName_securityPolicy, string(v.SecurityPolicy))
+	}
+	serializeMapOfStringToString(s, schemas.DomainName_tags, v.Tags)
+}
+func (v *UpdateDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainName_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.DomainName_certificateArn, v.CertificateArn)
+		case schemas.DomainName_certificateName:
+			v.CertificateName = new(string)
+			return d.ReadString(schemas.DomainName_certificateName, v.CertificateName)
+		case schemas.DomainName_certificateUploadDate:
+			v.CertificateUploadDate = new(time.Time)
+			return d.ReadTime(schemas.DomainName_certificateUploadDate, v.CertificateUploadDate)
+		case schemas.DomainName_distributionDomainName:
+			v.DistributionDomainName = new(string)
+			return d.ReadString(schemas.DomainName_distributionDomainName, v.DistributionDomainName)
+		case schemas.DomainName_distributionHostedZoneId:
+			v.DistributionHostedZoneId = new(string)
+			return d.ReadString(schemas.DomainName_distributionHostedZoneId, v.DistributionHostedZoneId)
+		case schemas.DomainName_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainName_domainName, v.DomainName)
+		case schemas.DomainName_domainNameArn:
+			v.DomainNameArn = new(string)
+			return d.ReadString(schemas.DomainName_domainNameArn, v.DomainNameArn)
+		case schemas.DomainName_domainNameId:
+			v.DomainNameId = new(string)
+			return d.ReadString(schemas.DomainName_domainNameId, v.DomainNameId)
+		case schemas.DomainName_domainNameStatus:
+			var ev string
+			if err := d.ReadString(schemas.DomainName_domainNameStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainNameStatus = types.DomainNameStatus(ev)
+			return nil
+		case schemas.DomainName_domainNameStatusMessage:
+			v.DomainNameStatusMessage = new(string)
+			return d.ReadString(schemas.DomainName_domainNameStatusMessage, v.DomainNameStatusMessage)
+		case schemas.DomainName_endpointAccessMode:
+			var ev string
+			if err := d.ReadString(schemas.DomainName_endpointAccessMode, &ev); err != nil {
+				return err
+			}
+			v.EndpointAccessMode = types.EndpointAccessMode(ev)
+			return nil
+		case schemas.DomainName_endpointConfiguration:
+			v.EndpointConfiguration = &types.EndpointConfiguration{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.DomainName_managementPolicy:
+			v.ManagementPolicy = new(string)
+			return d.ReadString(schemas.DomainName_managementPolicy, v.ManagementPolicy)
+		case schemas.DomainName_mutualTlsAuthentication:
+			v.MutualTlsAuthentication = &types.MutualTlsAuthentication{}
+			return v.MutualTlsAuthentication.Deserialize(d)
+		case schemas.DomainName_ownershipVerificationCertificateArn:
+			v.OwnershipVerificationCertificateArn = new(string)
+			return d.ReadString(schemas.DomainName_ownershipVerificationCertificateArn, v.OwnershipVerificationCertificateArn)
+		case schemas.DomainName_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DomainName_policy, v.Policy)
+		case schemas.DomainName_regionalCertificateArn:
+			v.RegionalCertificateArn = new(string)
+			return d.ReadString(schemas.DomainName_regionalCertificateArn, v.RegionalCertificateArn)
+		case schemas.DomainName_regionalCertificateName:
+			v.RegionalCertificateName = new(string)
+			return d.ReadString(schemas.DomainName_regionalCertificateName, v.RegionalCertificateName)
+		case schemas.DomainName_regionalDomainName:
+			v.RegionalDomainName = new(string)
+			return d.ReadString(schemas.DomainName_regionalDomainName, v.RegionalDomainName)
+		case schemas.DomainName_regionalHostedZoneId:
+			v.RegionalHostedZoneId = new(string)
+			return d.ReadString(schemas.DomainName_regionalHostedZoneId, v.RegionalHostedZoneId)
+		case schemas.DomainName_routingMode:
+			var ev string
+			if err := d.ReadString(schemas.DomainName_routingMode, &ev); err != nil {
+				return err
+			}
+			v.RoutingMode = types.RoutingMode(ev)
+			return nil
+		case schemas.DomainName_securityPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DomainName_securityPolicy, &ev); err != nil {
+				return err
+			}
+			v.SecurityPolicy = types.SecurityPolicy(ev)
+			return nil
+		case schemas.DomainName_tags:
+			return deserializeMapOfStringToString(d, schemas.DomainName_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainName, schemas.UpdateDomainNameRequest, schemas.DomainName)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainName, schemas.UpdateDomainNameRequest, schemas.DomainName), output: &UpdateDomainNameOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainName{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomainName"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDomainNameValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainName(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,22 +385,8 @@ func (c *Client) addOperationUpdateDomainNameMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDomainName(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDomainName",
-	}
 }

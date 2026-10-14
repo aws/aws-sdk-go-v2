@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and updates the configuration aggregator with the selected source
@@ -83,6 +82,30 @@ type PutConfigurationAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationAggregatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationAggregatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountAggregationSourceList(s, schemas.PutConfigurationAggregatorRequest_AccountAggregationSources, v.AccountAggregationSources)
+	if v.AggregatorFilters != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorRequest_AggregatorFilters)
+		v.AggregatorFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.PutConfigurationAggregatorRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.OrganizationAggregationSource != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorRequest_OrganizationAggregationSource)
+		v.OrganizationAggregationSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsList(s, schemas.PutConfigurationAggregatorRequest_Tags, v.Tags)
+}
+
 type PutConfigurationAggregatorOutput struct {
 
 	// Returns a ConfigurationAggregator object.
@@ -94,77 +117,50 @@ type PutConfigurationAggregatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationAggregatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationAggregatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregator != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorResponse_ConfigurationAggregator)
+		v.ConfigurationAggregator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutConfigurationAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationAggregatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutConfigurationAggregatorResponse_ConfigurationAggregator:
+			v.ConfigurationAggregator = &types.ConfigurationAggregator{}
+			return v.ConfigurationAggregator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationAggregator, schemas.PutConfigurationAggregatorRequest, schemas.PutConfigurationAggregatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConfigurationAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationAggregator, schemas.PutConfigurationAggregatorRequest, schemas.PutConfigurationAggregatorResponse), output: &PutConfigurationAggregatorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutConfigurationAggregator{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutConfigurationAggregator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutConfigurationAggregatorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutConfigurationAggregator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +175,8 @@ func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutConfigurationAggregator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutConfigurationAggregator",
-	}
 }

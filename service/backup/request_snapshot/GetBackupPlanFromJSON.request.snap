@@ -1,0 +1,5 @@
+POST /backup/template/json/toPlan
+
+Content-Type: application/json
+
+{"BackupPlanTemplateJson":"__BackupPlanTemplateJson__"}

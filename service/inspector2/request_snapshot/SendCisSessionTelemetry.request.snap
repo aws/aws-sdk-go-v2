@@ -1,0 +1,5 @@
+PUT /cissession/telemetry/send
+
+Content-Type: application/json
+
+{"messages":[{"cisRuleDetails":"YmxvYg==","ruleId":"__RuleId__","status":"FAILED"},{"cisRuleDetails":"YmxvYg==","ruleId":"__RuleId__","status":"FAILED"}],"scanJobId":"__ScanJobId__","sessionToken":"__SessionToken__"}

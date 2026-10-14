@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.CreateSignalCatalog
+
+{"description":"__Description__","name":"__Name__","nodes":[{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}},{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}}],"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

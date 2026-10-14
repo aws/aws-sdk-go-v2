@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the associations between a service network and a VPC. You can filter the
@@ -46,6 +46,46 @@ type ListServiceNetworkVpcAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworkVpcAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworkVpcAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworkVpcAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceNetworkVpcAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+	if v.VpcIdentifier != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier, *v.VpcIdentifier)
+	}
+}
+func (v *ListServiceNetworkVpcAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworkVpcAssociationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworkVpcAssociationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceNetworkVpcAssociationsRequest_maxResults, v.MaxResults)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_nextToken, v.NextToken)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier:
+			v.ServiceNetworkIdentifier = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier, v.ServiceNetworkIdentifier)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier:
+			v.VpcIdentifier = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier, v.VpcIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListServiceNetworkVpcAssociationsOutput struct {
 
 	// Information about the associations.
@@ -63,74 +103,48 @@ type ListServiceNetworkVpcAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworkVpcAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworkVpcAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworkVpcAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceNetworkVpcAssociationList(s, schemas.ListServiceNetworkVpcAssociationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceNetworkVpcAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworkVpcAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworkVpcAssociationsResponse_items:
+			return deserializeServiceNetworkVpcAssociationList(d, schemas.ListServiceNetworkVpcAssociationsResponse_items, &v.Items)
+		case schemas.ListServiceNetworkVpcAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceNetworkVpcAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworkVpcAssociations, schemas.ListServiceNetworkVpcAssociationsRequest, schemas.ListServiceNetworkVpcAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceNetworkVpcAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworkVpcAssociations, schemas.ListServiceNetworkVpcAssociationsRequest, schemas.ListServiceNetworkVpcAssociationsResponse), output: &ListServiceNetworkVpcAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceNetworkVpcAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceNetworkVpcAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceNetworkVpcAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +157,6 @@ func (c *Client) addOperationListServiceNetworkVpcAssociationsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +260,3 @@ type ListServiceNetworkVpcAssociationsAPIClient interface {
 }
 
 var _ ListServiceNetworkVpcAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceNetworkVpcAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceNetworkVpcAssociations",
-	}
-}

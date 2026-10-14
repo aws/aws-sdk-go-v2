@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.CreatePresignedNotebookUrl
+
+{"AuthToken":"__AuthToken__","AuthTokenExpirationTime":1,"NotebookUrl":"__NotebookUrl__"}

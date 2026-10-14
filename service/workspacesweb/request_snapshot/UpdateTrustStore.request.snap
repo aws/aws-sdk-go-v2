@@ -1,0 +1,5 @@
+PATCH /trustStores/__TrustStoreArn__
+
+Content-Type: application/json
+
+{"certificatesToAdd":["YmxvYg==","YmxvYg=="],"certificatesToDelete":["__Member__","__Member__"],"clientToken":"__ClientToken__"}

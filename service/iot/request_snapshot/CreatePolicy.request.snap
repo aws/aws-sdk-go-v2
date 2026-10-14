@@ -1,0 +1,5 @@
+POST /policies/__PolicyName__
+
+Content-Type: application/json
+
+{"policyDocument":"__PolicyDocument__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

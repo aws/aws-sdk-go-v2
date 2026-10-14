@@ -1,0 +1,3 @@
+DELETE /instance/__InstanceId__?clientToken=__ClientToken__
+
+

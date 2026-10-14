@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon SageMaker Partner AI App.
@@ -30,6 +30,14 @@ func (c *Client) CreatePartnerApp(ctx context.Context, params *CreatePartnerAppI
 type CreatePartnerAppInput struct {
 
 	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity. Specify the Identity Center instance to
+	//   use in IdcConfig .
 	//
 	// This member is required.
 	AuthType types.PartnerAppAuthType
@@ -72,6 +80,11 @@ type CreatePartnerAppInput struct {
 	// Partner AI App user.
 	EnableIamSessionBasedIdentity *bool
 
+	// Specifies the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App. Specify this parameter when AuthType is IDC . Apps
+	// that use IAM authorization don't use this parameter.
+	IdcConfig *types.IdcConfigInput
+
 	// SageMaker Partner AI Apps uses Amazon Web Services KMS to encrypt data at rest
 	// using an Amazon Web Services managed key by default. For more control, specify a
 	// customer managed key.
@@ -87,6 +100,58 @@ type CreatePartnerAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreatePartnerAppRequest_AuthType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreatePartnerAppRequest_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.CreatePartnerAppRequest_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreatePartnerAppRequest_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_Tier, *v.Tier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreatePartnerAppRequest_Type, string(v.Type))
+	}
+}
+
 type CreatePartnerAppOutput struct {
 
 	// The ARN of the SageMaker Partner AI App.
@@ -98,65 +163,42 @@ type CreatePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePartnerAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *CreatePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePartnerAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerApp, schemas.CreatePartnerAppRequest, schemas.CreatePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerApp, schemas.CreatePartnerAppRequest, schemas.CreatePartnerAppResponse), output: &CreatePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePartnerApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePartnerApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +208,6 @@ func (c *Client) addOperationCreatePartnerAppMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreatePartnerAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePartnerApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +220,6 @@ func (c *Client) addOperationCreatePartnerAppMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +259,4 @@ func (m *idempotencyToken_initializeOpCreatePartnerApp) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreatePartnerAppMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePartnerApp{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePartnerApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePartnerApp",
-	}
 }

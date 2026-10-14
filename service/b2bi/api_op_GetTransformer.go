@@ -4,13 +4,10 @@ package b2bi
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -139,6 +136,62 @@ type GetTransformerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransformerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransformerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransformerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTransformerResponse_createdAt, *v.CreatedAt)
+	}
+	serializeEdiType(s, schemas.GetTransformerResponse_ediType, v.EdiType)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.GetTransformerResponse_fileFormat, string(v.FileFormat))
+	}
+	if v.InputConversion != nil {
+		s.WriteStruct(schemas.GetTransformerResponse_inputConversion)
+		v.InputConversion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mapping != nil {
+		s.WriteStruct(schemas.GetTransformerResponse_mapping)
+		v.Mapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MappingTemplate != nil {
+		s.WriteString(schemas.GetTransformerResponse_mappingTemplate, *v.MappingTemplate)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetTransformerResponse_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTransformerResponse_name, *v.Name)
+	}
+	if v.OutputConversion != nil {
+		s.WriteStruct(schemas.GetTransformerResponse_outputConversion)
+		v.OutputConversion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SampleDocument != nil {
+		s.WriteString(schemas.GetTransformerResponse_sampleDocument, *v.SampleDocument)
+	}
+	if v.SampleDocuments != nil {
+		s.WriteStruct(schemas.GetTransformerResponse_sampleDocuments)
+		v.SampleDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTransformerResponse_status, string(v.Status))
+	}
+	if v.TransformerArn != nil {
+		s.WriteString(schemas.GetTransformerResponse_transformerArn, *v.TransformerArn)
+	}
+	if v.TransformerId != nil {
+		s.WriteString(schemas.GetTransformerResponse_transformerId, *v.TransformerId)
+	}
+}
 func (v *GetTransformerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTransformerResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -196,74 +249,26 @@ func (v *GetTransformerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetTransformerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformer, schemas.GetTransformerRequest, schemas.GetTransformerResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformer, schemas.GetTransformerRequest, schemas.GetTransformerResponse), output: &GetTransformerOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTransformer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTransformerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransformer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -278,22 +283,8 @@ func (c *Client) addOperationGetTransformerMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTransformer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTransformer",
-	}
 }

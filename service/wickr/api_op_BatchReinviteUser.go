@@ -5,12 +5,8 @@ package wickr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resends invitation codes to multiple users who have pending invitations in a
@@ -50,22 +46,6 @@ type BatchReinviteUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchReinviteUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchReinviteUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchReinviteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchReinviteUserRequest_clientToken, *v.ClientToken)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.BatchReinviteUserRequest_networkId, *v.NetworkId)
-	}
-	serializeUserIds(s, schemas.BatchReinviteUserRequest_userIds, v.UserIds)
-}
-
 type BatchReinviteUserOutput struct {
 
 	// A list of reinvitation attempts that failed, including error details explaining
@@ -84,77 +64,23 @@ type BatchReinviteUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchReinviteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchReinviteUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchReinviteUserResponse_failed:
-			return deserializeBatchUserErrorResponseItems(d, schemas.BatchReinviteUserResponse_failed, &v.Failed)
-		case schemas.BatchReinviteUserResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BatchReinviteUserResponse_message, v.Message)
-		case schemas.BatchReinviteUserResponse_successful:
-			return deserializeBatchUserSuccessResponseItems(d, schemas.BatchReinviteUserResponse_successful, &v.Successful)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchReinviteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchReinviteUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchReinviteUser, schemas.BatchReinviteUserRequest, schemas.BatchReinviteUserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchReinviteUser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchReinviteUser, schemas.BatchReinviteUserRequest, schemas.BatchReinviteUserResponse), output: &BatchReinviteUserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchReinviteUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -164,12 +90,6 @@ func (c *Client) addOperationBatchReinviteUserMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpBatchReinviteUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchReinviteUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +102,6 @@ func (c *Client) addOperationBatchReinviteUserMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -227,12 +141,4 @@ func (m *idempotencyToken_initializeOpBatchReinviteUser) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opBatchReinviteUserMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchReinviteUser{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchReinviteUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchReinviteUser",
-	}
 }

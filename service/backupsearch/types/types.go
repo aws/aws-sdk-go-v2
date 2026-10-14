@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,34 +18,6 @@ type BackupCreationTimeFilter struct {
 	CreatedBefore *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *BackupCreationTimeFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackupCreationTimeFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackupCreationTimeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAfter != nil {
-		s.WriteTime(schemas.BackupCreationTimeFilter_CreatedAfter, *v.CreatedAfter)
-	}
-	if v.CreatedBefore != nil {
-		s.WriteTime(schemas.BackupCreationTimeFilter_CreatedBefore, *v.CreatedBefore)
-	}
-}
-func (v *BackupCreationTimeFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackupCreationTimeFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackupCreationTimeFilter_CreatedAfter:
-			v.CreatedAfter = new(time.Time)
-			return d.ReadTime(schemas.BackupCreationTimeFilter_CreatedAfter, v.CreatedAfter)
-		case schemas.BackupCreationTimeFilter_CreatedBefore:
-			v.CreatedBefore = new(time.Time)
-			return d.ReadTime(schemas.BackupCreationTimeFilter_CreatedBefore, v.CreatedBefore)
-		}
-		return nil
-	})
 }
 
 // This contains information results retrieved from a search job that may not have
@@ -67,40 +37,6 @@ type CurrentSearchProgress struct {
 	RecoveryPointsScannedCount *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *CurrentSearchProgress) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CurrentSearchProgress)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CurrentSearchProgress) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ItemsMatchedCount != nil {
-		s.WriteInt64(schemas.CurrentSearchProgress_ItemsMatchedCount, *v.ItemsMatchedCount)
-	}
-	if v.ItemsScannedCount != nil {
-		s.WriteInt64(schemas.CurrentSearchProgress_ItemsScannedCount, *v.ItemsScannedCount)
-	}
-	if v.RecoveryPointsScannedCount != nil {
-		s.WriteInt32(schemas.CurrentSearchProgress_RecoveryPointsScannedCount, *v.RecoveryPointsScannedCount)
-	}
-}
-func (v *CurrentSearchProgress) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CurrentSearchProgress, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CurrentSearchProgress_ItemsMatchedCount:
-			v.ItemsMatchedCount = new(int64)
-			return d.ReadInt64(schemas.CurrentSearchProgress_ItemsMatchedCount, v.ItemsMatchedCount)
-		case schemas.CurrentSearchProgress_ItemsScannedCount:
-			v.ItemsScannedCount = new(int64)
-			return d.ReadInt64(schemas.CurrentSearchProgress_ItemsScannedCount, v.ItemsScannedCount)
-		case schemas.CurrentSearchProgress_RecoveryPointsScannedCount:
-			v.RecoveryPointsScannedCount = new(int32)
-			return d.ReadInt32(schemas.CurrentSearchProgress_RecoveryPointsScannedCount, v.RecoveryPointsScannedCount)
-		}
-		return nil
-	})
 }
 
 // This contains arrays of objects, which may include CreationTimes time condition
@@ -143,34 +79,6 @@ type EBSItemFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EBSItemFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EBSItemFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EBSItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeConditionList(s, schemas.EBSItemFilter_CreationTimes, v.CreationTimes)
-	serializeStringConditionList(s, schemas.EBSItemFilter_FilePaths, v.FilePaths)
-	serializeTimeConditionList(s, schemas.EBSItemFilter_LastModificationTimes, v.LastModificationTimes)
-	serializeLongConditionList(s, schemas.EBSItemFilter_Sizes, v.Sizes)
-}
-func (v *EBSItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EBSItemFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EBSItemFilter_CreationTimes:
-			return deserializeTimeConditionList(d, schemas.EBSItemFilter_CreationTimes, &v.CreationTimes)
-		case schemas.EBSItemFilter_FilePaths:
-			return deserializeStringConditionList(d, schemas.EBSItemFilter_FilePaths, &v.FilePaths)
-		case schemas.EBSItemFilter_LastModificationTimes:
-			return deserializeTimeConditionList(d, schemas.EBSItemFilter_LastModificationTimes, &v.LastModificationTimes)
-		case schemas.EBSItemFilter_Sizes:
-			return deserializeLongConditionList(d, schemas.EBSItemFilter_Sizes, &v.Sizes)
-		}
-		return nil
-	})
-}
-
 // These are the items returned in the results of a search of Amazon EBS backup
 // metadata.
 type EBSResultItem struct {
@@ -211,70 +119,6 @@ type EBSResultItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EBSResultItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EBSResultItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EBSResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BackupResourceArn != nil {
-		s.WriteString(schemas.EBSResultItem_BackupResourceArn, *v.BackupResourceArn)
-	}
-	if v.BackupVaultName != nil {
-		s.WriteString(schemas.EBSResultItem_BackupVaultName, *v.BackupVaultName)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.EBSResultItem_CreationTime, *v.CreationTime)
-	}
-	if v.FilePath != nil {
-		s.WriteString(schemas.EBSResultItem_FilePath, *v.FilePath)
-	}
-	if v.FileSize != nil {
-		s.WriteInt64(schemas.EBSResultItem_FileSize, *v.FileSize)
-	}
-	if v.FileSystemIdentifier != nil {
-		s.WriteString(schemas.EBSResultItem_FileSystemIdentifier, *v.FileSystemIdentifier)
-	}
-	if v.LastModifiedTime != nil {
-		s.WriteTime(schemas.EBSResultItem_LastModifiedTime, *v.LastModifiedTime)
-	}
-	if v.SourceResourceArn != nil {
-		s.WriteString(schemas.EBSResultItem_SourceResourceArn, *v.SourceResourceArn)
-	}
-}
-func (v *EBSResultItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EBSResultItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EBSResultItem_BackupResourceArn:
-			v.BackupResourceArn = new(string)
-			return d.ReadString(schemas.EBSResultItem_BackupResourceArn, v.BackupResourceArn)
-		case schemas.EBSResultItem_BackupVaultName:
-			v.BackupVaultName = new(string)
-			return d.ReadString(schemas.EBSResultItem_BackupVaultName, v.BackupVaultName)
-		case schemas.EBSResultItem_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.EBSResultItem_CreationTime, v.CreationTime)
-		case schemas.EBSResultItem_FilePath:
-			v.FilePath = new(string)
-			return d.ReadString(schemas.EBSResultItem_FilePath, v.FilePath)
-		case schemas.EBSResultItem_FileSize:
-			v.FileSize = new(int64)
-			return d.ReadInt64(schemas.EBSResultItem_FileSize, v.FileSize)
-		case schemas.EBSResultItem_FileSystemIdentifier:
-			v.FileSystemIdentifier = new(string)
-			return d.ReadString(schemas.EBSResultItem_FileSystemIdentifier, v.FileSystemIdentifier)
-		case schemas.EBSResultItem_LastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.EBSResultItem_LastModifiedTime, v.LastModifiedTime)
-		case schemas.EBSResultItem_SourceResourceArn:
-			v.SourceResourceArn = new(string)
-			return d.ReadString(schemas.EBSResultItem_SourceResourceArn, v.SourceResourceArn)
-		}
-		return nil
-	})
-}
-
 // This is the summary of an export job.
 type ExportJobSummary struct {
 
@@ -310,68 +154,6 @@ type ExportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportJobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportJobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompletionTime != nil {
-		s.WriteTime(schemas.ExportJobSummary_CompletionTime, *v.CompletionTime)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ExportJobSummary_CreationTime, *v.CreationTime)
-	}
-	if v.ExportJobArn != nil {
-		s.WriteString(schemas.ExportJobSummary_ExportJobArn, *v.ExportJobArn)
-	}
-	if v.ExportJobIdentifier != nil {
-		s.WriteString(schemas.ExportJobSummary_ExportJobIdentifier, *v.ExportJobIdentifier)
-	}
-	if v.SearchJobArn != nil {
-		s.WriteString(schemas.ExportJobSummary_SearchJobArn, *v.SearchJobArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ExportJobSummary_Status, string(v.Status))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.ExportJobSummary_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *ExportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportJobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportJobSummary_CompletionTime:
-			v.CompletionTime = new(time.Time)
-			return d.ReadTime(schemas.ExportJobSummary_CompletionTime, v.CompletionTime)
-		case schemas.ExportJobSummary_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ExportJobSummary_CreationTime, v.CreationTime)
-		case schemas.ExportJobSummary_ExportJobArn:
-			v.ExportJobArn = new(string)
-			return d.ReadString(schemas.ExportJobSummary_ExportJobArn, v.ExportJobArn)
-		case schemas.ExportJobSummary_ExportJobIdentifier:
-			v.ExportJobIdentifier = new(string)
-			return d.ReadString(schemas.ExportJobSummary_ExportJobIdentifier, v.ExportJobIdentifier)
-		case schemas.ExportJobSummary_SearchJobArn:
-			v.SearchJobArn = new(string)
-			return d.ReadString(schemas.ExportJobSummary_SearchJobArn, v.SearchJobArn)
-		case schemas.ExportJobSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ExportJobSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExportJobStatus(ev)
-			return nil
-		case schemas.ExportJobSummary_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.ExportJobSummary_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
-
 // This contains the export specification object.
 //
 // The following types satisfy this interface:
@@ -390,14 +172,6 @@ type ExportSpecificationMemberS3ExportSpecification struct {
 }
 
 func (*ExportSpecificationMemberS3ExportSpecification) isExportSpecification() {}
-func (v *ExportSpecificationMemberS3ExportSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportSpecification_s3ExportSpecification)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExportSpecificationMemberS3ExportSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Item Filters represent all input item properties specified when the search was
 // created.
@@ -416,28 +190,6 @@ type ItemFilters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ItemFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ItemFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ItemFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEBSItemFilters(s, schemas.ItemFilters_EBSItemFilters, v.EBSItemFilters)
-	serializeS3ItemFilters(s, schemas.ItemFilters_S3ItemFilters, v.S3ItemFilters)
-}
-func (v *ItemFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ItemFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ItemFilters_EBSItemFilters:
-			return deserializeEBSItemFilters(d, schemas.ItemFilters_EBSItemFilters, &v.EBSItemFilters)
-		case schemas.ItemFilters_S3ItemFilters:
-			return deserializeS3ItemFilters(d, schemas.ItemFilters_S3ItemFilters, &v.S3ItemFilters)
-		}
-		return nil
-	})
-}
-
 // The long condition contains a Value and can optionally contain an Operator .
 type LongCondition struct {
 
@@ -454,38 +206,6 @@ type LongCondition struct {
 	Operator LongConditionOperator
 
 	noSmithyDocumentSerde
-}
-
-func (v *LongCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LongCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LongCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.LongCondition_Operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteInt64(schemas.LongCondition_Value, *v.Value)
-	}
-}
-func (v *LongCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LongCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LongCondition_Operator:
-			var ev string
-			if err := d.ReadString(schemas.LongCondition_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = LongConditionOperator(ev)
-			return nil
-		case schemas.LongCondition_Value:
-			v.Value = new(int64)
-			return d.ReadInt64(schemas.LongCondition_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // This is an object representing the item returned in the results of a search for
@@ -507,14 +227,6 @@ type ResultItemMemberEBSResultItem struct {
 }
 
 func (*ResultItemMemberEBSResultItem) isResultItem() {}
-func (v *ResultItemMemberEBSResultItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResultItem_EBSResultItem)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ResultItemMemberEBSResultItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // These are items returned in the search results of an Amazon S3 search.
 type ResultItemMemberS3ResultItem struct {
@@ -524,14 +236,6 @@ type ResultItemMemberS3ResultItem struct {
 }
 
 func (*ResultItemMemberS3ResultItem) isResultItem() {}
-func (v *ResultItemMemberS3ResultItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResultItem_S3ResultItem)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ResultItemMemberS3ResultItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // This specification contains a required string of the destination bucket;
 // optionally, you can include the destination prefix.
@@ -547,34 +251,6 @@ type S3ExportSpecification struct {
 	DestinationPrefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3ExportSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ExportSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ExportSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationBucket != nil {
-		s.WriteString(schemas.S3ExportSpecification_DestinationBucket, *v.DestinationBucket)
-	}
-	if v.DestinationPrefix != nil {
-		s.WriteString(schemas.S3ExportSpecification_DestinationPrefix, *v.DestinationPrefix)
-	}
-}
-func (v *S3ExportSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ExportSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ExportSpecification_DestinationBucket:
-			v.DestinationBucket = new(string)
-			return d.ReadString(schemas.S3ExportSpecification_DestinationBucket, v.DestinationBucket)
-		case schemas.S3ExportSpecification_DestinationPrefix:
-			v.DestinationPrefix = new(string)
-			return d.ReadString(schemas.S3ExportSpecification_DestinationPrefix, v.DestinationPrefix)
-		}
-		return nil
-	})
 }
 
 // This contains arrays of objects, which may include ObjectKeys, Sizes,
@@ -629,37 +305,6 @@ type S3ItemFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3ItemFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ItemFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeConditionList(s, schemas.S3ItemFilter_CreationTimes, v.CreationTimes)
-	serializeStringConditionList(s, schemas.S3ItemFilter_ETags, v.ETags)
-	serializeStringConditionList(s, schemas.S3ItemFilter_ObjectKeys, v.ObjectKeys)
-	serializeLongConditionList(s, schemas.S3ItemFilter_Sizes, v.Sizes)
-	serializeStringConditionList(s, schemas.S3ItemFilter_VersionIds, v.VersionIds)
-}
-func (v *S3ItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ItemFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ItemFilter_CreationTimes:
-			return deserializeTimeConditionList(d, schemas.S3ItemFilter_CreationTimes, &v.CreationTimes)
-		case schemas.S3ItemFilter_ETags:
-			return deserializeStringConditionList(d, schemas.S3ItemFilter_ETags, &v.ETags)
-		case schemas.S3ItemFilter_ObjectKeys:
-			return deserializeStringConditionList(d, schemas.S3ItemFilter_ObjectKeys, &v.ObjectKeys)
-		case schemas.S3ItemFilter_Sizes:
-			return deserializeLongConditionList(d, schemas.S3ItemFilter_Sizes, &v.Sizes)
-		case schemas.S3ItemFilter_VersionIds:
-			return deserializeStringConditionList(d, schemas.S3ItemFilter_VersionIds, &v.VersionIds)
-		}
-		return nil
-	})
-}
-
 // These are the items returned in the results of a search of Amazon S3 backup
 // metadata.
 type S3ResultItem struct {
@@ -698,70 +343,6 @@ type S3ResultItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3ResultItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ResultItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BackupResourceArn != nil {
-		s.WriteString(schemas.S3ResultItem_BackupResourceArn, *v.BackupResourceArn)
-	}
-	if v.BackupVaultName != nil {
-		s.WriteString(schemas.S3ResultItem_BackupVaultName, *v.BackupVaultName)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.S3ResultItem_CreationTime, *v.CreationTime)
-	}
-	if v.ETag != nil {
-		s.WriteString(schemas.S3ResultItem_ETag, *v.ETag)
-	}
-	if v.ObjectKey != nil {
-		s.WriteString(schemas.S3ResultItem_ObjectKey, *v.ObjectKey)
-	}
-	if v.ObjectSize != nil {
-		s.WriteInt64(schemas.S3ResultItem_ObjectSize, *v.ObjectSize)
-	}
-	if v.SourceResourceArn != nil {
-		s.WriteString(schemas.S3ResultItem_SourceResourceArn, *v.SourceResourceArn)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.S3ResultItem_VersionId, *v.VersionId)
-	}
-}
-func (v *S3ResultItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ResultItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ResultItem_BackupResourceArn:
-			v.BackupResourceArn = new(string)
-			return d.ReadString(schemas.S3ResultItem_BackupResourceArn, v.BackupResourceArn)
-		case schemas.S3ResultItem_BackupVaultName:
-			v.BackupVaultName = new(string)
-			return d.ReadString(schemas.S3ResultItem_BackupVaultName, v.BackupVaultName)
-		case schemas.S3ResultItem_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.S3ResultItem_CreationTime, v.CreationTime)
-		case schemas.S3ResultItem_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.S3ResultItem_ETag, v.ETag)
-		case schemas.S3ResultItem_ObjectKey:
-			v.ObjectKey = new(string)
-			return d.ReadString(schemas.S3ResultItem_ObjectKey, v.ObjectKey)
-		case schemas.S3ResultItem_ObjectSize:
-			v.ObjectSize = new(int64)
-			return d.ReadInt64(schemas.S3ResultItem_ObjectSize, v.ObjectSize)
-		case schemas.S3ResultItem_SourceResourceArn:
-			v.SourceResourceArn = new(string)
-			return d.ReadString(schemas.S3ResultItem_SourceResourceArn, v.SourceResourceArn)
-		case schemas.S3ResultItem_VersionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.S3ResultItem_VersionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // This contains the information about recovery points returned in results of a
 // search job.
 type SearchJobBackupsResult struct {
@@ -788,72 +369,6 @@ type SearchJobBackupsResult struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchJobBackupsResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchJobBackupsResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchJobBackupsResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BackupCreationTime != nil {
-		s.WriteTime(schemas.SearchJobBackupsResult_BackupCreationTime, *v.BackupCreationTime)
-	}
-	if v.BackupResourceArn != nil {
-		s.WriteString(schemas.SearchJobBackupsResult_BackupResourceArn, *v.BackupResourceArn)
-	}
-	if v.IndexCreationTime != nil {
-		s.WriteTime(schemas.SearchJobBackupsResult_IndexCreationTime, *v.IndexCreationTime)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.SearchJobBackupsResult_ResourceType, string(v.ResourceType))
-	}
-	if v.SourceResourceArn != nil {
-		s.WriteString(schemas.SearchJobBackupsResult_SourceResourceArn, *v.SourceResourceArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SearchJobBackupsResult_Status, string(v.Status))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.SearchJobBackupsResult_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *SearchJobBackupsResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchJobBackupsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchJobBackupsResult_BackupCreationTime:
-			v.BackupCreationTime = new(time.Time)
-			return d.ReadTime(schemas.SearchJobBackupsResult_BackupCreationTime, v.BackupCreationTime)
-		case schemas.SearchJobBackupsResult_BackupResourceArn:
-			v.BackupResourceArn = new(string)
-			return d.ReadString(schemas.SearchJobBackupsResult_BackupResourceArn, v.BackupResourceArn)
-		case schemas.SearchJobBackupsResult_IndexCreationTime:
-			v.IndexCreationTime = new(time.Time)
-			return d.ReadTime(schemas.SearchJobBackupsResult_IndexCreationTime, v.IndexCreationTime)
-		case schemas.SearchJobBackupsResult_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.SearchJobBackupsResult_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ResourceType(ev)
-			return nil
-		case schemas.SearchJobBackupsResult_SourceResourceArn:
-			v.SourceResourceArn = new(string)
-			return d.ReadString(schemas.SearchJobBackupsResult_SourceResourceArn, v.SourceResourceArn)
-		case schemas.SearchJobBackupsResult_Status:
-			var ev string
-			if err := d.ReadString(schemas.SearchJobBackupsResult_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = SearchJobState(ev)
-			return nil
-		case schemas.SearchJobBackupsResult_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.SearchJobBackupsResult_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
 }
 
 // This is information pertaining to a search job.
@@ -896,76 +411,6 @@ type SearchJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchJobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchJobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompletionTime != nil {
-		s.WriteTime(schemas.SearchJobSummary_CompletionTime, *v.CompletionTime)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.SearchJobSummary_CreationTime, *v.CreationTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SearchJobSummary_Name, *v.Name)
-	}
-	if v.SearchJobArn != nil {
-		s.WriteString(schemas.SearchJobSummary_SearchJobArn, *v.SearchJobArn)
-	}
-	if v.SearchJobIdentifier != nil {
-		s.WriteString(schemas.SearchJobSummary_SearchJobIdentifier, *v.SearchJobIdentifier)
-	}
-	if v.SearchScopeSummary != nil {
-		s.WriteStruct(schemas.SearchJobSummary_SearchScopeSummary)
-		v.SearchScopeSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SearchJobSummary_Status, string(v.Status))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.SearchJobSummary_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *SearchJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchJobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchJobSummary_CompletionTime:
-			v.CompletionTime = new(time.Time)
-			return d.ReadTime(schemas.SearchJobSummary_CompletionTime, v.CompletionTime)
-		case schemas.SearchJobSummary_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.SearchJobSummary_CreationTime, v.CreationTime)
-		case schemas.SearchJobSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SearchJobSummary_Name, v.Name)
-		case schemas.SearchJobSummary_SearchJobArn:
-			v.SearchJobArn = new(string)
-			return d.ReadString(schemas.SearchJobSummary_SearchJobArn, v.SearchJobArn)
-		case schemas.SearchJobSummary_SearchJobIdentifier:
-			v.SearchJobIdentifier = new(string)
-			return d.ReadString(schemas.SearchJobSummary_SearchJobIdentifier, v.SearchJobIdentifier)
-		case schemas.SearchJobSummary_SearchScopeSummary:
-			v.SearchScopeSummary = &SearchScopeSummary{}
-			return v.SearchScopeSummary.Deserialize(d)
-		case schemas.SearchJobSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.SearchJobSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = SearchJobState(ev)
-			return nil
-		case schemas.SearchJobSummary_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.SearchJobSummary_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
-
 // The search scope is all backup properties input into a search.
 type SearchScope struct {
 
@@ -991,42 +436,6 @@ type SearchScope struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchScope) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchScope)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchScope) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryPointArnList(s, schemas.SearchScope_BackupResourceArns, v.BackupResourceArns)
-	if v.BackupResourceCreationTime != nil {
-		s.WriteStruct(schemas.SearchScope_BackupResourceCreationTime)
-		v.BackupResourceCreationTime.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.SearchScope_BackupResourceTags, v.BackupResourceTags)
-	serializeResourceTypeList(s, schemas.SearchScope_BackupResourceTypes, v.BackupResourceTypes)
-	serializeResourceArnList(s, schemas.SearchScope_SourceResourceArns, v.SourceResourceArns)
-}
-func (v *SearchScope) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchScope, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchScope_BackupResourceArns:
-			return deserializeRecoveryPointArnList(d, schemas.SearchScope_BackupResourceArns, &v.BackupResourceArns)
-		case schemas.SearchScope_BackupResourceCreationTime:
-			v.BackupResourceCreationTime = &BackupCreationTimeFilter{}
-			return v.BackupResourceCreationTime.Deserialize(d)
-		case schemas.SearchScope_BackupResourceTags:
-			return deserializeTagMap(d, schemas.SearchScope_BackupResourceTags, &v.BackupResourceTags)
-		case schemas.SearchScope_BackupResourceTypes:
-			return deserializeResourceTypeList(d, schemas.SearchScope_BackupResourceTypes, &v.BackupResourceTypes)
-		case schemas.SearchScope_SourceResourceArns:
-			return deserializeResourceArnList(d, schemas.SearchScope_SourceResourceArns, &v.SourceResourceArns)
-		}
-		return nil
-	})
-}
-
 // The summary of the specified search job scope, including:
 //
 //   - TotalBackupsToScanCount, the number of recovery points returned by the
@@ -1043,34 +452,6 @@ type SearchScopeSummary struct {
 	TotalRecoveryPointsToScanCount *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchScopeSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchScopeSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchScopeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TotalItemsToScanCount != nil {
-		s.WriteInt64(schemas.SearchScopeSummary_TotalItemsToScanCount, *v.TotalItemsToScanCount)
-	}
-	if v.TotalRecoveryPointsToScanCount != nil {
-		s.WriteInt32(schemas.SearchScopeSummary_TotalRecoveryPointsToScanCount, *v.TotalRecoveryPointsToScanCount)
-	}
-}
-func (v *SearchScopeSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchScopeSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchScopeSummary_TotalItemsToScanCount:
-			v.TotalItemsToScanCount = new(int64)
-			return d.ReadInt64(schemas.SearchScopeSummary_TotalItemsToScanCount, v.TotalItemsToScanCount)
-		case schemas.SearchScopeSummary_TotalRecoveryPointsToScanCount:
-			v.TotalRecoveryPointsToScanCount = new(int32)
-			return d.ReadInt32(schemas.SearchScopeSummary_TotalRecoveryPointsToScanCount, v.TotalRecoveryPointsToScanCount)
-		}
-		return nil
-	})
 }
 
 // This contains the value of the string and can contain one or more operators.
@@ -1091,38 +472,6 @@ type StringCondition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StringCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StringCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StringCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.StringCondition_Operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.StringCondition_Value, *v.Value)
-	}
-}
-func (v *StringCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StringCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StringCondition_Operator:
-			var ev string
-			if err := d.ReadString(schemas.StringCondition_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = StringConditionOperator(ev)
-			return nil
-		case schemas.StringCondition_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.StringCondition_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A time condition denotes a creation time, last modification time, or other time.
 type TimeCondition struct {
 
@@ -1139,38 +488,6 @@ type TimeCondition struct {
 	Operator TimeConditionOperator
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimeCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.TimeCondition_Operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteTime(schemas.TimeCondition_Value, *v.Value)
-	}
-}
-func (v *TimeCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeCondition_Operator:
-			var ev string
-			if err := d.ReadString(schemas.TimeCondition_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = TimeConditionOperator(ev)
-			return nil
-		case schemas.TimeCondition_Value:
-			v.Value = new(time.Time)
-			return d.ReadTime(schemas.TimeCondition_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

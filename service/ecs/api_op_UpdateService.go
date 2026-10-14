@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the parameters of a service.
@@ -307,6 +306,12 @@ type UpdateServiceInput struct {
 	// [CreateDeployment]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
 	LoadBalancers []types.LoadBalancer
 
+	// The optional monitoring configuration for the service, which defines the
+	// resolution for the service-level CPUUtilization and MemoryUtilization Amazon
+	// CloudWatch metrics. When not specified, Amazon ECS uses the default resolution
+	// of 60 seconds.
+	Monitoring *types.MonitoringConfiguration
+
 	// An object representing the network configuration for the service.
 	//
 	// This parameter triggers a new service deployment.
@@ -419,6 +424,80 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneRebalancing != "" {
+		s.WriteString(schemas.UpdateServiceRequest_availabilityZoneRebalancing, string(v.AvailabilityZoneRebalancing))
+	}
+	serializeCapacityProviderStrategy(s, schemas.UpdateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.Cluster != nil {
+		s.WriteString(schemas.UpdateServiceRequest_cluster, *v.Cluster)
+	}
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_deploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentController != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_deploymentController)
+		v.DeploymentController.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DesiredCount != nil {
+		s.WriteInt32(schemas.UpdateServiceRequest_desiredCount, *v.DesiredCount)
+	}
+	if v.EnableECSManagedTags != nil {
+		s.WriteBool(schemas.UpdateServiceRequest_enableECSManagedTags, *v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != nil {
+		s.WriteBool(schemas.UpdateServiceRequest_enableExecuteCommand, *v.EnableExecuteCommand)
+	}
+	if v.ForceNewDeployment != false {
+		s.WriteBool(schemas.UpdateServiceRequest_forceNewDeployment, v.ForceNewDeployment)
+	}
+	if v.HealthCheckGracePeriodSeconds != nil {
+		s.WriteInt32(schemas.UpdateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
+	}
+	serializeLoadBalancers(s, schemas.UpdateServiceRequest_loadBalancers, v.LoadBalancers)
+	if v.Monitoring != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_monitoring)
+		v.Monitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.UpdateServiceRequest_placementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.UpdateServiceRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.UpdateServiceRequest_platformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.UpdateServiceRequest_propagateTags, string(v.PropagateTags))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.UpdateServiceRequest_service, *v.Service)
+	}
+	if v.ServiceConnectConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_serviceConnectConfiguration)
+		v.ServiceConnectConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeServiceRegistries(s, schemas.UpdateServiceRequest_serviceRegistries, v.ServiceRegistries)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.UpdateServiceRequest_taskDefinition, *v.TaskDefinition)
+	}
+	serializeServiceVolumeConfigurations(s, schemas.UpdateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
+	serializeVpcLatticeConfigurations(s, schemas.UpdateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+}
+
 type UpdateServiceOutput struct {
 
 	// The full description of your service following the update call.
@@ -437,77 +516,50 @@ type UpdateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceResponse_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse), output: &UpdateServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -522,22 +574,8 @@ func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateService",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v1/agentspaces/__AgentSpaceId__/operator
+
+Content-Type: application/json
+
+{"authFlow":"iam","idcInstanceArn":"__IdcInstanceArn__","idpClientId":"__IdpClientId__","idpClientSecret":"__IdpClientSecret__","issuerUrl":"__IssuerUrl__","operatorAppRoleArn":"__OperatorAppRoleArn__","provider":"__Provider__"}

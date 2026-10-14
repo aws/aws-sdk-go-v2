@@ -4,13 +4,8 @@ package macie2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,18 +32,6 @@ type GetBucketStatisticsInput struct {
 	AccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetBucketStatisticsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBucketStatisticsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBucketStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.GetBucketStatisticsRequest_accountId, *v.AccountId)
-	}
 }
 
 type GetBucketStatisticsOutput struct {
@@ -132,121 +115,26 @@ type GetBucketStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBucketStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBucketStatisticsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBucketStatisticsResponse_bucketCount:
-			v.BucketCount = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_bucketCount, v.BucketCount)
-		case schemas.GetBucketStatisticsResponse_bucketCountByEffectivePermission:
-			v.BucketCountByEffectivePermission = &types.BucketCountByEffectivePermission{}
-			return v.BucketCountByEffectivePermission.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_bucketCountByEncryptionType:
-			v.BucketCountByEncryptionType = &types.BucketCountByEncryptionType{}
-			return v.BucketCountByEncryptionType.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_bucketCountByObjectEncryptionRequirement:
-			v.BucketCountByObjectEncryptionRequirement = &types.BucketCountPolicyAllowsUnencryptedObjectUploads{}
-			return v.BucketCountByObjectEncryptionRequirement.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_bucketCountBySharedAccessType:
-			v.BucketCountBySharedAccessType = &types.BucketCountBySharedAccessType{}
-			return v.BucketCountBySharedAccessType.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_bucketStatisticsBySensitivity:
-			v.BucketStatisticsBySensitivity = &types.BucketStatisticsBySensitivity{}
-			return v.BucketStatisticsBySensitivity.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_classifiableObjectCount:
-			v.ClassifiableObjectCount = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_classifiableObjectCount, v.ClassifiableObjectCount)
-		case schemas.GetBucketStatisticsResponse_classifiableSizeInBytes:
-			v.ClassifiableSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_classifiableSizeInBytes, v.ClassifiableSizeInBytes)
-		case schemas.GetBucketStatisticsResponse_lastUpdated:
-			v.LastUpdated = new(time.Time)
-			return d.ReadTime(schemas.GetBucketStatisticsResponse_lastUpdated, v.LastUpdated)
-		case schemas.GetBucketStatisticsResponse_objectCount:
-			v.ObjectCount = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_objectCount, v.ObjectCount)
-		case schemas.GetBucketStatisticsResponse_sizeInBytes:
-			v.SizeInBytes = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_sizeInBytes, v.SizeInBytes)
-		case schemas.GetBucketStatisticsResponse_sizeInBytesCompressed:
-			v.SizeInBytesCompressed = new(int64)
-			return d.ReadInt64(schemas.GetBucketStatisticsResponse_sizeInBytesCompressed, v.SizeInBytesCompressed)
-		case schemas.GetBucketStatisticsResponse_unclassifiableObjectCount:
-			v.UnclassifiableObjectCount = &types.ObjectLevelStatistics{}
-			return v.UnclassifiableObjectCount.Deserialize(d)
-		case schemas.GetBucketStatisticsResponse_unclassifiableObjectSizeInBytes:
-			v.UnclassifiableObjectSizeInBytes = &types.ObjectLevelStatistics{}
-			return v.UnclassifiableObjectSizeInBytes.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBucketStatistics{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketStatistics, schemas.GetBucketStatisticsRequest, schemas.GetBucketStatisticsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBucketStatistics{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketStatistics, schemas.GetBucketStatisticsRequest, schemas.GetBucketStatisticsResponse), output: &GetBucketStatisticsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBucketStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -261,22 +149,8 @@ func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBucketStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBucketStatistics",
-	}
 }

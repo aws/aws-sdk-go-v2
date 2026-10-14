@@ -121,6 +121,138 @@ func (v *CharacterOffsets) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Segment containing information extracted from the conversation. Each segment
+// represents the results for a single extraction definition.
+type ExtractedInformation struct {
+
+	// The identifier of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionId *string
+
+	// The name of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionName *string
+
+	// The list of values extracted from the conversation for this extraction
+	// definition. This field is empty when a FailureCode is present.
+	ExtractedValues []ExtractedInformationValue
+
+	// The display label of the extraction definition that produced this result.
+	ExtractionDefinitionDisplayLabel *string
+
+	// If the information failed to be extracted, one of the following failure codes
+	// occurs:
+	//
+	//   - QUOTA_EXCEEDED : The number of concurrent analytics jobs reached your
+	//   service quota.
+	//
+	//   - INSUFFICIENT_CONVERSATION_CONTENT : Information extraction requires a
+	//   conversation with at least one turn from each participant.
+	//
+	//   - FAILED_SAFETY_GUIDELINES : The extracted information cannot be provided
+	//   because it failed to meet system safety guidelines.
+	//
+	//   - INTERNAL_ERROR : Internal system error.
+	//
+	//   - MAX_PACKAGE_FEATURE_ONLY : Information extraction is only available in
+	//   Amazon Connect Customer instances.
+	FailureCode ExtractedInformationFailureCode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractedInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractedInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractedInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	if v.ExtractionDefinitionDisplayLabel != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, *v.ExtractionDefinitionDisplayLabel)
+	}
+	if v.ExtractionDefinitionId != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionId, *v.ExtractionDefinitionId)
+	}
+	if v.ExtractionDefinitionName != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionName, *v.ExtractionDefinitionName)
+	}
+	if v.FailureCode != "" {
+		s.WriteString(schemas.ExtractedInformation_FailureCode, string(v.FailureCode))
+	}
+}
+func (v *ExtractedInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractedInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractedInformation_ExtractedValues:
+			return deserializeExtractedInformationValues(d, schemas.ExtractedInformation_ExtractedValues, &v.ExtractedValues)
+		case schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel:
+			v.ExtractionDefinitionDisplayLabel = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, v.ExtractionDefinitionDisplayLabel)
+		case schemas.ExtractedInformation_ExtractionDefinitionId:
+			v.ExtractionDefinitionId = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionId, v.ExtractionDefinitionId)
+		case schemas.ExtractedInformation_ExtractionDefinitionName:
+			v.ExtractionDefinitionName = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionName, v.ExtractionDefinitionName)
+		case schemas.ExtractedInformation_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.ExtractedInformation_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = ExtractedInformationFailureCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An individual value extracted from the conversation, including its content and
+// the locations where it was found.
+type ExtractedInformationValue struct {
+
+	// The text content of the extracted value.
+	//
+	// This member is required.
+	Content *string
+
+	// The sections in the conversation that indicate where the extracted value was
+	// found.
+	//
+	// This member is required.
+	PointsOfInterest []PointOfInterest
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractedInformationValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractedInformationValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractedInformationValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.ExtractedInformationValue_Content, *v.Content)
+	}
+	serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+}
+func (v *ExtractedInformationValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractedInformationValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractedInformationValue_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.ExtractedInformationValue_Content, v.Content)
+		case schemas.ExtractedInformationValue_PointsOfInterest:
+			return deserializePointsOfInterest(d, schemas.ExtractedInformationValue_PointsOfInterest, &v.PointsOfInterest)
+		}
+		return nil
+	})
+}
+
 // Potential issues that are detected based on an artificial intelligence analysis
 // of each turn in the conversation.
 type IssueDetected struct {
@@ -157,15 +289,15 @@ func (v *IssueDetected) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The section of the contact audio where that category rule was detected.
+// The section of the contact audio where a match was detected.
 type PointOfInterest struct {
 
-	// The beginning offset in milliseconds where the category rule was detected.
+	// The beginning offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	BeginOffsetMillis *int32
 
-	// The ending offset in milliseconds where the category rule was detected.
+	// The ending offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	EndOffsetMillis *int32
@@ -283,6 +415,9 @@ type RealtimeContactAnalysisSegment struct {
 	// The matched category rules.
 	Categories *Categories
 
+	// The extracted information from the conversation.
+	ExtractedInformation *ExtractedInformation
+
 	// Information about the post-contact summary.
 	PostContactSummary *PostContactSummary
 
@@ -304,6 +439,11 @@ func (v *RealtimeContactAnalysisSegment) SerializeMembers(s smithy.ShapeSerializ
 		v.Categories.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ExtractedInformation != nil {
+		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_ExtractedInformation)
+		v.ExtractedInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PostContactSummary != nil {
 		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_PostContactSummary)
 		v.PostContactSummary.SerializeMembers(s)
@@ -321,6 +461,9 @@ func (v *RealtimeContactAnalysisSegment) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.RealtimeContactAnalysisSegment_Categories:
 			v.Categories = &Categories{}
 			return v.Categories.Deserialize(d)
+		case schemas.RealtimeContactAnalysisSegment_ExtractedInformation:
+			v.ExtractedInformation = &ExtractedInformation{}
+			return v.ExtractedInformation.Deserialize(d)
 		case schemas.RealtimeContactAnalysisSegment_PostContactSummary:
 			v.PostContactSummary = &PostContactSummary{}
 			return v.PostContactSummary.Deserialize(d)

@@ -1,0 +1,5 @@
+POST /hours-of-operations/__InstanceId__/__HoursOfOperationId__/overrides/__HoursOfOperationOverrideId__
+
+Content-Type: application/json
+
+{"Config":[{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}},{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}}],"Description":"__Description__","EffectiveFrom":"__EffectiveFrom__","EffectiveTill":"__EffectiveTill__","Name":"__Name__","OverrideType":"STANDARD","RecurrenceConfig":{"RecurrencePattern":{"ByMonth":[1,1],"ByMonthDay":[1,1],"ByWeekdayOccurrence":[1,1],"Frequency":"WEEKLY","Interval":1}}}

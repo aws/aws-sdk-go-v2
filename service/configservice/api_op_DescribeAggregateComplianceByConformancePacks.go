@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the existing and deleted conformance packs and their
@@ -55,6 +55,29 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConformancePacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConformancePacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeAggregateComplianceByConformancePacksRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAggregateComplianceByConformancePacksOutput struct {
 
 	// Returns the AggregateComplianceByConformancePack object.
@@ -70,77 +93,51 @@ type DescribeAggregateComplianceByConformancePacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConformancePacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConformancePacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregateComplianceByConformancePackList(s, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, v.AggregateComplianceByConformancePacks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAggregateComplianceByConformancePacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAggregateComplianceByConformancePacksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks:
+			return deserializeAggregateComplianceByConformancePackList(d, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, &v.AggregateComplianceByConformancePacks)
+		case schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConformancePacks, schemas.DescribeAggregateComplianceByConformancePacksRequest, schemas.DescribeAggregateComplianceByConformancePacksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConformancePacks, schemas.DescribeAggregateComplianceByConformancePacksRequest, schemas.DescribeAggregateComplianceByConformancePacksResponse), output: &DescribeAggregateComplianceByConformancePacksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAggregateComplianceByConformancePacks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAggregateComplianceByConformancePacksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAggregateComplianceByConformancePacks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +150,6 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +250,3 @@ type DescribeAggregateComplianceByConformancePacksAPIClient interface {
 }
 
 var _ DescribeAggregateComplianceByConformancePacksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeAggregateComplianceByConformancePacks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAggregateComplianceByConformancePacks",
-	}
-}

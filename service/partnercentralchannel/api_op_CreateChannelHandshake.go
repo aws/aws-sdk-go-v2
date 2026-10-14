@@ -5,12 +5,8 @@ package partnercentralchannel
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new channel handshake request to establish a partnership with another
@@ -60,29 +56,6 @@ type CreateChannelHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChannelHandshakeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateChannelHandshakeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateChannelHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedResourceIdentifier != nil {
-		s.WriteString(schemas.CreateChannelHandshakeRequest_associatedResourceIdentifier, *v.AssociatedResourceIdentifier)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.CreateChannelHandshakeRequest_catalog, *v.Catalog)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateChannelHandshakeRequest_clientToken, *v.ClientToken)
-	}
-	if v.HandshakeType != "" {
-		s.WriteString(schemas.CreateChannelHandshakeRequest_handshakeType, string(v.HandshakeType))
-	}
-	serializeChannelHandshakePayload(s, schemas.CreateChannelHandshakeRequest_payload, v.Payload)
-	serializeTagList(s, schemas.CreateChannelHandshakeRequest_tags, v.Tags)
-}
-
 type CreateChannelHandshakeOutput struct {
 
 	// Details of the created channel handshake.
@@ -94,73 +67,23 @@ type CreateChannelHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChannelHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateChannelHandshakeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateChannelHandshakeResponse_channelHandshakeDetail:
-			v.ChannelHandshakeDetail = &types.CreateChannelHandshakeDetail{}
-			return v.ChannelHandshakeDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateChannelHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelHandshake, schemas.CreateChannelHandshakeRequest, schemas.CreateChannelHandshakeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelHandshake, schemas.CreateChannelHandshakeRequest, schemas.CreateChannelHandshakeResponse), output: &CreateChannelHandshakeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannelHandshake"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -170,12 +93,6 @@ func (c *Client) addOperationCreateChannelHandshakeMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateChannelHandshakeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannelHandshake(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +105,6 @@ func (c *Client) addOperationCreateChannelHandshakeMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +144,4 @@ func (m *idempotencyToken_initializeOpCreateChannelHandshake) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateChannelHandshakeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateChannelHandshake{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateChannelHandshake(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateChannelHandshake",
-	}
 }

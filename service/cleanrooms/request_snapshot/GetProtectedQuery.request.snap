@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/protectedQueries/__ProtectedQueryIdentifier__
+
+

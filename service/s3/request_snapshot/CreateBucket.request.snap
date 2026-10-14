@@ -1,0 +1,14 @@
+PUT /
+
+Content-Type: application/xml
+X-Amz-Acl: private
+X-Amz-Bucket-Namespace: account-regional
+X-Amz-Bucket-Object-Lock-Enabled: true
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write: __GrantWrite__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Object-Ownership: BucketOwnerPreferred
+
+<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Bucket><DataRedundancy>SingleAvailabilityZone</DataRedundancy><Type>Directory</Type></Bucket><Location><Name>__Name__</Name><Type>AvailabilityZone</Type></Location><LocationConstraint>af-south-1</LocationConstraint><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></CreateBucketConfiguration>

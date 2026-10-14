@@ -5,10 +5,10 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a view that users can query by using the Search operation. Results from
@@ -91,6 +91,54 @@ type CreateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateViewInput_ClientToken, *v.ClientToken)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.CreateViewInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.CreateViewInput_IncludedProperties, v.IncludedProperties)
+	if v.Scope != nil {
+		s.WriteString(schemas.CreateViewInput_Scope, *v.Scope)
+	}
+	serializeTagMap(s, schemas.CreateViewInput_Tags, v.Tags)
+	if v.ViewName != nil {
+		s.WriteString(schemas.CreateViewInput_ViewName, *v.ViewName)
+	}
+}
+func (v *CreateViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateViewInput_ClientToken, v.ClientToken)
+		case schemas.CreateViewInput_Filters:
+			v.Filters = &types.SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.CreateViewInput_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.CreateViewInput_IncludedProperties, &v.IncludedProperties)
+		case schemas.CreateViewInput_Scope:
+			v.Scope = new(string)
+			return d.ReadString(schemas.CreateViewInput_Scope, v.Scope)
+		case schemas.CreateViewInput_Tags:
+			return deserializeTagMap(d, schemas.CreateViewInput_Tags, &v.Tags)
+		case schemas.CreateViewInput_ViewName:
+			v.ViewName = new(string)
+			return d.ReadString(schemas.CreateViewInput_ViewName, v.ViewName)
+		}
+		return nil
+	})
+}
+
 type CreateViewOutput struct {
 
 	// A structure that contains the details about the new view.
@@ -102,65 +150,44 @@ type CreateViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.CreateViewOutput_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewOutput_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewInput, schemas.CreateViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewInput, schemas.CreateViewOutput), output: &CreateViewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateView{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -170,12 +197,6 @@ func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCreateViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +209,6 @@ func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +248,4 @@ func (m *idempotencyToken_initializeOpCreateView) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCreateViewMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateView{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateView",
-	}
 }

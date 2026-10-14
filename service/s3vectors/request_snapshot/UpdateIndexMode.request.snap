@@ -1,0 +1,5 @@
+POST /UpdateIndexMode
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexMode":"CLASSIC","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__"}

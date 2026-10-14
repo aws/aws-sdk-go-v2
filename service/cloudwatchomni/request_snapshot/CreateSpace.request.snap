@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateSpace
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿xagentCoreEvaluationRoleArnx__AgentCoreEvaluationRoleArn__kclientTokeno__ClientToken__qdataAccessRoleArnu__DataAccessRoleArn__hdomainIdl__DomainId__wencryptionConfiguration¿rencryptionStrategyiAWS_OWNEDikmsKeyArnm__KmsKeyArn__ÿdnameh__Name__dtags¿dkey0i__Value__ÿÿ

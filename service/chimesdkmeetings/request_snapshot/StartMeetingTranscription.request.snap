@@ -1,0 +1,5 @@
+POST /meetings/__MeetingId__/transcription?operation=start
+
+Content-Type: application/json
+
+{"TranscriptionConfiguration":{"EngineTranscribeMedicalSettings":{"ContentIdentificationType":"PHI","LanguageCode":"en-US","Region":"us-east-1","Specialty":"PRIMARYCARE","Type":"CONVERSATION","VocabularyName":"__VocabularyName__"},"EngineTranscribeSettings":{"ContentIdentificationType":"PII","ContentRedactionType":"PII","EnablePartialResultsStabilization":true,"IdentifyLanguage":true,"LanguageCode":"en-US","LanguageModelName":"__LanguageModelName__","LanguageOptions":"__LanguageOptions__","PartialResultsStability":"low","PiiEntityTypes":"__PiiEntityTypes__","PreferredLanguage":"en-US","Region":"us-east-2","VocabularyFilterMethod":"remove","VocabularyFilterName":"__VocabularyFilterName__","VocabularyFilterNames":"__VocabularyFilterNames__","VocabularyName":"__VocabularyName__","VocabularyNames":"__VocabularyNames__"}}}

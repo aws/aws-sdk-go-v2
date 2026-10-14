@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.DescribeExecution
+
+{"cause":"__Cause__","error":"__Error__","executionArn":"__ExecutionArn__","input":"__Input__","inputDetails":{"included":true},"mapRunArn":"__MapRunArn__","name":"__Name__","output":"__Output__","outputDetails":{"included":true},"redriveCount":1,"redriveDate":946684800,"redriveStatus":"REDRIVABLE","redriveStatusReason":"__RedriveStatusReason__","startDate":946684800,"stateMachineAliasArn":"__StateMachineAliasArn__","stateMachineArn":"__StateMachineArn__","stateMachineVersionArn":"__StateMachineVersionArn__","status":"RUNNING","stopDate":946684800,"traceHeader":"__TraceHeader__"}

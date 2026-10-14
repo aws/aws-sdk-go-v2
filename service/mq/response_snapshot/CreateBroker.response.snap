@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"brokerArn":"__BrokerArn__","brokerId":"__BrokerId__"}

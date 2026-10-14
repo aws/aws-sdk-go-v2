@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/facet/create
+
+Content-Type: application/json
+X-Amz-Data-Partition: __SchemaArn__
+
+{"Attributes":[{"AttributeDefinition":{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"},"AttributeReference":{"TargetAttributeName":"__TargetAttributeName__","TargetFacetName":"__TargetFacetName__"},"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS"},{"AttributeDefinition":{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"},"AttributeReference":{"TargetAttributeName":"__TargetAttributeName__","TargetFacetName":"__TargetFacetName__"},"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS"}],"FacetStyle":"STATIC","Name":"__Name__","ObjectType":"NODE"}

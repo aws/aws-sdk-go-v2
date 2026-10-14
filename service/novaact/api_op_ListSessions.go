@@ -5,12 +5,8 @@ package novaact
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all sessions within a specific workflow run.
@@ -53,30 +49,6 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSessionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSessionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSessionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSessionsRequest_nextToken, *v.NextToken)
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListSessionsRequest_sortOrder, string(v.SortOrder))
-	}
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.ListSessionsRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.ListSessionsRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type ListSessionsOutput struct {
 
 	// A list of summary information for sessions in the workflow run.
@@ -93,87 +65,29 @@ type ListSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSessionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSessionsResponse_nextToken, v.NextToken)
-		case schemas.ListSessionsResponse_sessionSummaries:
-			return deserializeSessionSummaries(d, schemas.ListSessionsResponse_sessionSummaries, &v.SessionSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse), output: &ListSessionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSessions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSessionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSessions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +100,6 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +199,3 @@ type ListSessionsAPIClient interface {
 }
 
 var _ ListSessionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSessions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSessions",
-	}
-}

@@ -1,0 +1,3 @@
+GET /detector/__DetectorId__/member?maxResults=1&nextToken=__NextToken__&onlyAssociated=__OnlyAssociated__
+
+

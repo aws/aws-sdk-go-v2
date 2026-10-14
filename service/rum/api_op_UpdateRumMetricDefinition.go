@@ -4,13 +4,8 @@ package rum
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies one existing metric definition for CloudWatch RUM extended metrics.
@@ -71,58 +66,6 @@ type UpdateRumMetricDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRumMetricDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRumMetricDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRumMetricDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppMonitorName != nil {
-		s.WriteString(schemas.UpdateRumMetricDefinitionRequest_AppMonitorName, *v.AppMonitorName)
-	}
-	if v.Destination != "" {
-		s.WriteString(schemas.UpdateRumMetricDefinitionRequest_Destination, string(v.Destination))
-	}
-	if v.DestinationArn != nil {
-		s.WriteString(schemas.UpdateRumMetricDefinitionRequest_DestinationArn, *v.DestinationArn)
-	}
-	if v.MetricDefinition != nil {
-		s.WriteStruct(schemas.UpdateRumMetricDefinitionRequest_MetricDefinition)
-		v.MetricDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MetricDefinitionId != nil {
-		s.WriteString(schemas.UpdateRumMetricDefinitionRequest_MetricDefinitionId, *v.MetricDefinitionId)
-	}
-}
-func (v *UpdateRumMetricDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRumMetricDefinitionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRumMetricDefinitionRequest_AppMonitorName:
-			v.AppMonitorName = new(string)
-			return d.ReadString(schemas.UpdateRumMetricDefinitionRequest_AppMonitorName, v.AppMonitorName)
-		case schemas.UpdateRumMetricDefinitionRequest_Destination:
-			var ev string
-			if err := d.ReadString(schemas.UpdateRumMetricDefinitionRequest_Destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = types.MetricDestination(ev)
-			return nil
-		case schemas.UpdateRumMetricDefinitionRequest_DestinationArn:
-			v.DestinationArn = new(string)
-			return d.ReadString(schemas.UpdateRumMetricDefinitionRequest_DestinationArn, v.DestinationArn)
-		case schemas.UpdateRumMetricDefinitionRequest_MetricDefinition:
-			v.MetricDefinition = &types.MetricDefinitionRequest{}
-			return v.MetricDefinition.Deserialize(d)
-		case schemas.UpdateRumMetricDefinitionRequest_MetricDefinitionId:
-			v.MetricDefinitionId = new(string)
-			return d.ReadString(schemas.UpdateRumMetricDefinitionRequest_MetricDefinitionId, v.MetricDefinitionId)
-		}
-		return nil
-	})
-}
-
 type UpdateRumMetricDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -130,90 +73,29 @@ type UpdateRumMetricDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRumMetricDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRumMetricDefinitionResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRumMetricDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateRumMetricDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRumMetricDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRumMetricDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRumMetricDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRumMetricDefinition, schemas.UpdateRumMetricDefinitionRequest, schemas.UpdateRumMetricDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRumMetricDefinition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRumMetricDefinition, schemas.UpdateRumMetricDefinitionRequest, schemas.UpdateRumMetricDefinitionResponse), output: &UpdateRumMetricDefinitionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRumMetricDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRumMetricDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRumMetricDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +110,8 @@ func (c *Client) addOperationUpdateRumMetricDefinitionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRumMetricDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRumMetricDefinition",
-	}
 }

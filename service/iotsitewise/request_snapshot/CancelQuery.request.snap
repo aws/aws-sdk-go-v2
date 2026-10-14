@@ -1,0 +1,3 @@
+POST /workspaces/__WorkspaceName__/queries/__QueryId__/cancel
+
+

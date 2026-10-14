@@ -1,0 +1,4 @@
+GET /v20180820/accesspoint?bucket=__Bucket__&dataSourceId=__DataSourceId__&dataSourceType=__DataSourceType__&maxResults=1&nextToken=__NextToken__
+
+X-Amz-Account-Id: AccountId-value
+

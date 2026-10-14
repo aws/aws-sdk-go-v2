@@ -1,0 +1,5 @@
+POST /CreateChannel
+
+Content-Type: application/json
+
+{"adConfigurationArn":"__AdConfigurationArn__","authorized":true,"containerFormat":"TS","insecureIngest":true,"latencyMode":"NORMAL","multitrackInputConfiguration":{"enabled":true,"maximumResolution":"SD","policy":"ALLOW"},"name":"__Name__","playbackRestrictionPolicyArn":"__PlaybackRestrictionPolicyArn__","preset":"HIGHER_BANDWIDTH_DELIVERY","recordingConfigurationArn":"__RecordingConfigurationArn__","tags":{"key0":"__Value__"},"type":"BASIC"}

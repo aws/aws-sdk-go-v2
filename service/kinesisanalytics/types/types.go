@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -75,6 +77,86 @@ type ApplicationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationCode != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationCode, *v.ApplicationCode)
+	}
+	if v.ApplicationDescription != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationDescription, *v.ApplicationDescription)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationDetail_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.ApplicationDetail_CreateTimestamp, *v.CreateTimestamp)
+	}
+	serializeInputDescriptions(s, schemas.ApplicationDetail_InputDescriptions, v.InputDescriptions)
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.ApplicationDetail_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	serializeOutputDescriptions(s, schemas.ApplicationDetail_OutputDescriptions, v.OutputDescriptions)
+	serializeReferenceDataSourceDescriptions(s, schemas.ApplicationDetail_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+}
+func (v *ApplicationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationDetail_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationARN, v.ApplicationARN)
+		case schemas.ApplicationDetail_ApplicationCode:
+			v.ApplicationCode = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationCode, v.ApplicationCode)
+		case schemas.ApplicationDetail_ApplicationDescription:
+			v.ApplicationDescription = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationDescription, v.ApplicationDescription)
+		case schemas.ApplicationDetail_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationDetail_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationDetail_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		case schemas.ApplicationDetail_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.ApplicationDetail_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions:
+			return deserializeCloudWatchLoggingOptionDescriptions(d, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, &v.CloudWatchLoggingOptionDescriptions)
+		case schemas.ApplicationDetail_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDetail_CreateTimestamp, v.CreateTimestamp)
+		case schemas.ApplicationDetail_InputDescriptions:
+			return deserializeInputDescriptions(d, schemas.ApplicationDetail_InputDescriptions, &v.InputDescriptions)
+		case schemas.ApplicationDetail_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDetail_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.ApplicationDetail_OutputDescriptions:
+			return deserializeOutputDescriptions(d, schemas.ApplicationDetail_OutputDescriptions, &v.OutputDescriptions)
+		case schemas.ApplicationDetail_ReferenceDataSourceDescriptions:
+			return deserializeReferenceDataSourceDescriptions(d, schemas.ApplicationDetail_ReferenceDataSourceDescriptions, &v.ReferenceDataSourceDescriptions)
+		}
+		return nil
+	})
+}
+
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
 // applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
@@ -101,6 +183,44 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.ApplicationSummary_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationSummary_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationSummary_ApplicationStatus, string(v.ApplicationStatus))
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.ApplicationSummary_ApplicationARN, v.ApplicationARN)
+		case schemas.ApplicationSummary_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationSummary_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationSummary_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes updates to apply to an existing Amazon Kinesis Analytics application.
 type ApplicationUpdate struct {
 
@@ -122,6 +242,40 @@ type ApplicationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCodeUpdate != nil {
+		s.WriteString(schemas.ApplicationUpdate_ApplicationCodeUpdate, *v.ApplicationCodeUpdate)
+	}
+	serializeCloudWatchLoggingOptionUpdates(s, schemas.ApplicationUpdate_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
+	serializeInputUpdates(s, schemas.ApplicationUpdate_InputUpdates, v.InputUpdates)
+	serializeOutputUpdates(s, schemas.ApplicationUpdate_OutputUpdates, v.OutputUpdates)
+	serializeReferenceDataSourceUpdates(s, schemas.ApplicationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+}
+func (v *ApplicationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationUpdate_ApplicationCodeUpdate:
+			v.ApplicationCodeUpdate = new(string)
+			return d.ReadString(schemas.ApplicationUpdate_ApplicationCodeUpdate, v.ApplicationCodeUpdate)
+		case schemas.ApplicationUpdate_CloudWatchLoggingOptionUpdates:
+			return deserializeCloudWatchLoggingOptionUpdates(d, schemas.ApplicationUpdate_CloudWatchLoggingOptionUpdates, &v.CloudWatchLoggingOptionUpdates)
+		case schemas.ApplicationUpdate_InputUpdates:
+			return deserializeInputUpdates(d, schemas.ApplicationUpdate_InputUpdates, &v.InputUpdates)
+		case schemas.ApplicationUpdate_OutputUpdates:
+			return deserializeOutputUpdates(d, schemas.ApplicationUpdate_OutputUpdates, &v.OutputUpdates)
+		case schemas.ApplicationUpdate_ReferenceDataSourceUpdates:
+			return deserializeReferenceDataSourceUpdates(d, schemas.ApplicationUpdate_ReferenceDataSourceUpdates, &v.ReferenceDataSourceUpdates)
+		}
+		return nil
+	})
+}
+
 // Provides a description of CloudWatch logging options, including the log stream
 // Amazon Resource Name (ARN) and the role ARN.
 type CloudWatchLoggingOption struct {
@@ -139,6 +293,34 @@ type CloudWatchLoggingOption struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLoggingOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogStreamARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOption_LogStreamARN, *v.LogStreamARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOption_RoleARN, *v.RoleARN)
+	}
+}
+func (v *CloudWatchLoggingOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOption_LogStreamARN:
+			v.LogStreamARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOption_LogStreamARN, v.LogStreamARN)
+		case schemas.CloudWatchLoggingOption_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOption_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Description of the CloudWatch logging option.
@@ -162,6 +344,40 @@ type CloudWatchLoggingOptionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchLoggingOptionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOptionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptionId != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId, *v.CloudWatchLoggingOptionId)
+	}
+	if v.LogStreamARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_LogStreamARN, *v.LogStreamARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *CloudWatchLoggingOptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOptionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId:
+			v.CloudWatchLoggingOptionId = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId, v.CloudWatchLoggingOptionId)
+		case schemas.CloudWatchLoggingOptionDescription_LogStreamARN:
+			v.LogStreamARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_LogStreamARN, v.LogStreamARN)
+		case schemas.CloudWatchLoggingOptionDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes CloudWatch logging option updates.
 type CloudWatchLoggingOptionUpdate struct {
 
@@ -179,6 +395,40 @@ type CloudWatchLoggingOptionUpdate struct {
 	RoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLoggingOptionUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOptionUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOptionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptionId != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId, *v.CloudWatchLoggingOptionId)
+	}
+	if v.LogStreamARNUpdate != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate, *v.LogStreamARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *CloudWatchLoggingOptionUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOptionUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId:
+			v.CloudWatchLoggingOptionId = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId, v.CloudWatchLoggingOptionId)
+		case schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate:
+			v.LogStreamARNUpdate = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate, v.LogStreamARNUpdate)
+		case schemas.CloudWatchLoggingOptionUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 // Provides additional mapping information when the record format uses delimiters,
@@ -205,6 +455,34 @@ type CSVMappingParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CSVMappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CSVMappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CSVMappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordColumnDelimiter != nil {
+		s.WriteString(schemas.CSVMappingParameters_RecordColumnDelimiter, *v.RecordColumnDelimiter)
+	}
+	if v.RecordRowDelimiter != nil {
+		s.WriteString(schemas.CSVMappingParameters_RecordRowDelimiter, *v.RecordRowDelimiter)
+	}
+}
+func (v *CSVMappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CSVMappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CSVMappingParameters_RecordColumnDelimiter:
+			v.RecordColumnDelimiter = new(string)
+			return d.ReadString(schemas.CSVMappingParameters_RecordColumnDelimiter, v.RecordColumnDelimiter)
+		case schemas.CSVMappingParameters_RecordRowDelimiter:
+			v.RecordRowDelimiter = new(string)
+			return d.ReadString(schemas.CSVMappingParameters_RecordRowDelimiter, v.RecordRowDelimiter)
+		}
+		return nil
+	})
+}
+
 // Describes the data format when records are written to the destination. For more
 // information, see [Configuring Application Output].
 //
@@ -217,6 +495,32 @@ type DestinationSchema struct {
 	RecordFormatType RecordFormatType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordFormatType != "" {
+		s.WriteString(schemas.DestinationSchema_RecordFormatType, string(v.RecordFormatType))
+	}
+}
+func (v *DestinationSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationSchema_RecordFormatType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationSchema_RecordFormatType, &ev); err != nil {
+				return err
+			}
+			v.RecordFormatType = RecordFormatType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // When you configure the application input, you specify the streaming source, the
@@ -278,6 +582,68 @@ type Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Input)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputParallelism != nil {
+		s.WriteStruct(schemas.Input_InputParallelism)
+		v.InputParallelism.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfiguration != nil {
+		s.WriteStruct(schemas.Input_InputProcessingConfiguration)
+		v.InputProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchema != nil {
+		s.WriteStruct(schemas.Input_InputSchema)
+		v.InputSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInput != nil {
+		s.WriteStruct(schemas.Input_KinesisFirehoseInput)
+		v.KinesisFirehoseInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInput != nil {
+		s.WriteStruct(schemas.Input_KinesisStreamsInput)
+		v.KinesisStreamsInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.Input_NamePrefix, *v.NamePrefix)
+	}
+}
+func (v *Input) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Input, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Input_InputParallelism:
+			v.InputParallelism = &InputParallelism{}
+			return v.InputParallelism.Deserialize(d)
+		case schemas.Input_InputProcessingConfiguration:
+			v.InputProcessingConfiguration = &InputProcessingConfiguration{}
+			return v.InputProcessingConfiguration.Deserialize(d)
+		case schemas.Input_InputSchema:
+			v.InputSchema = &SourceSchema{}
+			return v.InputSchema.Deserialize(d)
+		case schemas.Input_KinesisFirehoseInput:
+			v.KinesisFirehoseInput = &KinesisFirehoseInput{}
+			return v.KinesisFirehoseInput.Deserialize(d)
+		case schemas.Input_KinesisStreamsInput:
+			v.KinesisStreamsInput = &KinesisStreamsInput{}
+			return v.KinesisStreamsInput.Deserialize(d)
+		case schemas.Input_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.Input_NamePrefix, v.NamePrefix)
+		}
+		return nil
+	})
+}
+
 // When you start your application, you provide this configuration, which
 // identifies the input source and the point in the input source at which you want
 // the application to start processing records.
@@ -297,6 +663,36 @@ type InputConfiguration struct {
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.InputConfiguration_Id, *v.Id)
+	}
+	if v.InputStartingPositionConfiguration != nil {
+		s.WriteStruct(schemas.InputConfiguration_InputStartingPositionConfiguration)
+		v.InputStartingPositionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputConfiguration_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InputConfiguration_Id, v.Id)
+		case schemas.InputConfiguration_InputStartingPositionConfiguration:
+			v.InputStartingPositionConfiguration = &InputStartingPositionConfiguration{}
+			return v.InputStartingPositionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the application input configuration. For more information, see [Configuring Application Input].
@@ -344,6 +740,85 @@ type InputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	if v.InputId != nil {
+		s.WriteString(schemas.InputDescription_InputId, *v.InputId)
+	}
+	if v.InputParallelism != nil {
+		s.WriteStruct(schemas.InputDescription_InputParallelism)
+		v.InputParallelism.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfigurationDescription != nil {
+		s.WriteStruct(schemas.InputDescription_InputProcessingConfigurationDescription)
+		v.InputProcessingConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchema != nil {
+		s.WriteStruct(schemas.InputDescription_InputSchema)
+		v.InputSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputStartingPositionConfiguration != nil {
+		s.WriteStruct(schemas.InputDescription_InputStartingPositionConfiguration)
+		v.InputStartingPositionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInputDescription != nil {
+		s.WriteStruct(schemas.InputDescription_KinesisFirehoseInputDescription)
+		v.KinesisFirehoseInputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInputDescription != nil {
+		s.WriteStruct(schemas.InputDescription_KinesisStreamsInputDescription)
+		v.KinesisStreamsInputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.InputDescription_NamePrefix, *v.NamePrefix)
+	}
+}
+func (v *InputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDescription_InAppStreamNames:
+			return deserializeInAppStreamNames(d, schemas.InputDescription_InAppStreamNames, &v.InAppStreamNames)
+		case schemas.InputDescription_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.InputDescription_InputId, v.InputId)
+		case schemas.InputDescription_InputParallelism:
+			v.InputParallelism = &InputParallelism{}
+			return v.InputParallelism.Deserialize(d)
+		case schemas.InputDescription_InputProcessingConfigurationDescription:
+			v.InputProcessingConfigurationDescription = &InputProcessingConfigurationDescription{}
+			return v.InputProcessingConfigurationDescription.Deserialize(d)
+		case schemas.InputDescription_InputSchema:
+			v.InputSchema = &SourceSchema{}
+			return v.InputSchema.Deserialize(d)
+		case schemas.InputDescription_InputStartingPositionConfiguration:
+			v.InputStartingPositionConfiguration = &InputStartingPositionConfiguration{}
+			return v.InputStartingPositionConfiguration.Deserialize(d)
+		case schemas.InputDescription_KinesisFirehoseInputDescription:
+			v.KinesisFirehoseInputDescription = &KinesisFirehoseInputDescription{}
+			return v.KinesisFirehoseInputDescription.Deserialize(d)
+		case schemas.InputDescription_KinesisStreamsInputDescription:
+			v.KinesisStreamsInputDescription = &KinesisStreamsInputDescription{}
+			return v.KinesisStreamsInputDescription.Deserialize(d)
+		case schemas.InputDescription_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.InputDescription_NamePrefix, v.NamePrefix)
+		}
+		return nil
+	})
+}
+
 // An object that contains the Amazon Resource Name (ARN) of the [AWS Lambda] function that is
 // used to preprocess records in the stream, and the ARN of the IAM role that is
 // used to access the AWS Lambda function.
@@ -370,6 +845,34 @@ type InputLambdaProcessor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputLambdaProcessor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.InputLambdaProcessor_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.InputLambdaProcessor_RoleARN, *v.RoleARN)
+	}
+}
+func (v *InputLambdaProcessor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessor_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessor_ResourceARN, v.ResourceARN)
+		case schemas.InputLambdaProcessor_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessor_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // An object that contains the Amazon Resource Name (ARN) of the [AWS Lambda] function that is
 // used to preprocess records in the stream, and the ARN of the IAM role that is
 // used to access the AWS Lambda expression.
@@ -386,6 +889,34 @@ type InputLambdaProcessorDescription struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputLambdaProcessorDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessorDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessorDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.InputLambdaProcessorDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.InputLambdaProcessorDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *InputLambdaProcessorDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessorDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessorDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorDescription_ResourceARN, v.ResourceARN)
+		case schemas.InputLambdaProcessorDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Represents an update to the [InputLambdaProcessor] that is used to preprocess the records in the
@@ -410,6 +941,34 @@ type InputLambdaProcessorUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputLambdaProcessorUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessorUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessorUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.InputLambdaProcessorUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.InputLambdaProcessorUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *InputLambdaProcessorUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessorUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessorUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.InputLambdaProcessorUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
+}
+
 // Describes the number of in-application streams to create for a given streaming
 // source. For information about parallelism, see [Configuring Application Input].
 //
@@ -424,6 +983,28 @@ type InputParallelism struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputParallelism) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputParallelism)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputParallelism) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.InputParallelism_Count, *v.Count)
+	}
+}
+func (v *InputParallelism) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputParallelism, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputParallelism_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.InputParallelism_Count, v.Count)
+		}
+		return nil
+	})
+}
+
 // Provides updates to the parallelism count.
 type InputParallelismUpdate struct {
 
@@ -431,6 +1012,28 @@ type InputParallelismUpdate struct {
 	CountUpdate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputParallelismUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputParallelismUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputParallelismUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountUpdate != nil {
+		s.WriteInt32(schemas.InputParallelismUpdate_CountUpdate, *v.CountUpdate)
+	}
+}
+func (v *InputParallelismUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputParallelismUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputParallelismUpdate_CountUpdate:
+			v.CountUpdate = new(int32)
+			return d.ReadInt32(schemas.InputParallelismUpdate_CountUpdate, v.CountUpdate)
+		}
+		return nil
+	})
 }
 
 // Provides a description of a processor that is used to preprocess the records in
@@ -451,6 +1054,30 @@ type InputProcessingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessor != nil {
+		s.WriteStruct(schemas.InputProcessingConfiguration_InputLambdaProcessor)
+		v.InputLambdaProcessor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfiguration_InputLambdaProcessor:
+			v.InputLambdaProcessor = &InputLambdaProcessor{}
+			return v.InputLambdaProcessor.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides configuration information about an input processor. Currently, the
 // only input processor available is [AWS Lambda].
 //
@@ -463,6 +1090,30 @@ type InputProcessingConfigurationDescription struct {
 	InputLambdaProcessorDescription *InputLambdaProcessorDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputProcessingConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessorDescription != nil {
+		s.WriteStruct(schemas.InputProcessingConfigurationDescription_InputLambdaProcessorDescription)
+		v.InputLambdaProcessorDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfigurationDescription_InputLambdaProcessorDescription:
+			v.InputLambdaProcessorDescription = &InputLambdaProcessorDescription{}
+			return v.InputLambdaProcessorDescription.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes updates to an [InputProcessingConfiguration].
@@ -478,6 +1129,30 @@ type InputProcessingConfigurationUpdate struct {
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputProcessingConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessorUpdate != nil {
+		s.WriteStruct(schemas.InputProcessingConfigurationUpdate_InputLambdaProcessorUpdate)
+		v.InputLambdaProcessorUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfigurationUpdate_InputLambdaProcessorUpdate:
+			v.InputLambdaProcessorUpdate = &InputLambdaProcessorUpdate{}
+			return v.InputLambdaProcessorUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes updates for the application's input schema.
@@ -498,6 +1173,39 @@ type InputSchemaUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputSchemaUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputSchemaUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputSchemaUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	if v.RecordEncodingUpdate != nil {
+		s.WriteString(schemas.InputSchemaUpdate_RecordEncodingUpdate, *v.RecordEncodingUpdate)
+	}
+	if v.RecordFormatUpdate != nil {
+		s.WriteStruct(schemas.InputSchemaUpdate_RecordFormatUpdate)
+		v.RecordFormatUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputSchemaUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputSchemaUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputSchemaUpdate_RecordColumnUpdates:
+			return deserializeRecordColumns(d, schemas.InputSchemaUpdate_RecordColumnUpdates, &v.RecordColumnUpdates)
+		case schemas.InputSchemaUpdate_RecordEncodingUpdate:
+			v.RecordEncodingUpdate = new(string)
+			return d.ReadString(schemas.InputSchemaUpdate_RecordEncodingUpdate, v.RecordEncodingUpdate)
+		case schemas.InputSchemaUpdate_RecordFormatUpdate:
+			v.RecordFormatUpdate = &RecordFormat{}
+			return v.RecordFormatUpdate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the point at which the application reads from the streaming source.
 type InputStartingPositionConfiguration struct {
 
@@ -515,6 +1223,32 @@ type InputStartingPositionConfiguration struct {
 	InputStartingPosition InputStartingPosition
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputStartingPositionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputStartingPositionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputStartingPositionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputStartingPosition != "" {
+		s.WriteString(schemas.InputStartingPositionConfiguration_InputStartingPosition, string(v.InputStartingPosition))
+	}
+}
+func (v *InputStartingPositionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputStartingPositionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputStartingPositionConfiguration_InputStartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.InputStartingPositionConfiguration_InputStartingPosition, &ev); err != nil {
+				return err
+			}
+			v.InputStartingPosition = InputStartingPosition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes updates to a specific input configuration (identified by the InputId
@@ -553,6 +1287,74 @@ type InputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.InputUpdate_InputId, *v.InputId)
+	}
+	if v.InputParallelismUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputParallelismUpdate)
+		v.InputParallelismUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfigurationUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputProcessingConfigurationUpdate)
+		v.InputProcessingConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchemaUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputSchemaUpdate)
+		v.InputSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInputUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_KinesisFirehoseInputUpdate)
+		v.KinesisFirehoseInputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInputUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_KinesisStreamsInputUpdate)
+		v.KinesisStreamsInputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefixUpdate != nil {
+		s.WriteString(schemas.InputUpdate_NamePrefixUpdate, *v.NamePrefixUpdate)
+	}
+}
+func (v *InputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputUpdate_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.InputUpdate_InputId, v.InputId)
+		case schemas.InputUpdate_InputParallelismUpdate:
+			v.InputParallelismUpdate = &InputParallelismUpdate{}
+			return v.InputParallelismUpdate.Deserialize(d)
+		case schemas.InputUpdate_InputProcessingConfigurationUpdate:
+			v.InputProcessingConfigurationUpdate = &InputProcessingConfigurationUpdate{}
+			return v.InputProcessingConfigurationUpdate.Deserialize(d)
+		case schemas.InputUpdate_InputSchemaUpdate:
+			v.InputSchemaUpdate = &InputSchemaUpdate{}
+			return v.InputSchemaUpdate.Deserialize(d)
+		case schemas.InputUpdate_KinesisFirehoseInputUpdate:
+			v.KinesisFirehoseInputUpdate = &KinesisFirehoseInputUpdate{}
+			return v.KinesisFirehoseInputUpdate.Deserialize(d)
+		case schemas.InputUpdate_KinesisStreamsInputUpdate:
+			v.KinesisStreamsInputUpdate = &KinesisStreamsInputUpdate{}
+			return v.KinesisStreamsInputUpdate.Deserialize(d)
+		case schemas.InputUpdate_NamePrefixUpdate:
+			v.NamePrefixUpdate = new(string)
+			return d.ReadString(schemas.InputUpdate_NamePrefixUpdate, v.NamePrefixUpdate)
+		}
+		return nil
+	})
+}
+
 // Provides additional mapping information when JSON is the record format on the
 // streaming source.
 type JSONMappingParameters struct {
@@ -563,6 +1365,28 @@ type JSONMappingParameters struct {
 	RecordRowPath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JSONMappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JSONMappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JSONMappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordRowPath != nil {
+		s.WriteString(schemas.JSONMappingParameters_RecordRowPath, *v.RecordRowPath)
+	}
+}
+func (v *JSONMappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JSONMappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JSONMappingParameters_RecordRowPath:
+			v.RecordRowPath = new(string)
+			return d.ReadString(schemas.JSONMappingParameters_RecordRowPath, v.RecordRowPath)
+		}
+		return nil
+	})
 }
 
 //	Identifies an Amazon Kinesis Firehose delivery stream as the streaming source.
@@ -586,6 +1410,34 @@ type KinesisFirehoseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisFirehoseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInput_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInput_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInput_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseInput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInput_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 //	Describes the Amazon Kinesis Firehose delivery stream that is configured as
 //
 // the streaming source in the application input configuration.
@@ -598,6 +1450,34 @@ type KinesisFirehoseInputDescription struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseInputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseInputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseInputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // When updating application input configuration, provides information about an
@@ -613,6 +1493,34 @@ type KinesisFirehoseInputUpdate struct {
 	RoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseInputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseInputUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *KinesisFirehoseInputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.KinesisFirehoseInputUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 // When configuring application output, identifies an Amazon Kinesis Firehose
@@ -636,6 +1544,34 @@ type KinesisFirehoseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisFirehoseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutput_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutput_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutput_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseOutput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutput_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 //	For an application output, describes the Amazon Kinesis Firehose delivery
 //
 // stream configured as its destination.
@@ -649,6 +1585,34 @@ type KinesisFirehoseOutputDescription struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 //	When updating an output configuration using the [UpdateApplication] operation, provides
@@ -668,6 +1632,34 @@ type KinesisFirehoseOutputUpdate struct {
 	RoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *KinesisFirehoseOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.KinesisFirehoseOutputUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 //	Identifies an Amazon Kinesis stream as the streaming source. You provide the
@@ -690,6 +1682,34 @@ type KinesisStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsInput_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsInput_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInput_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsInput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInput_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 //	Describes the Amazon Kinesis stream that is configured as the streaming source
 //
 // in the application input configuration.
@@ -705,6 +1725,34 @@ type KinesisStreamsInputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsInputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsInputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsInputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsInputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsInputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // When updating application input configuration, provides information about an
 // Amazon Kinesis stream as the streaming source.
 type KinesisStreamsInputUpdate struct {
@@ -717,6 +1765,34 @@ type KinesisStreamsInputUpdate struct {
 	RoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsInputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsInputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsInputUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *KinesisStreamsInputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.KinesisStreamsInputUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 // When configuring application output, identifies an Amazon Kinesis stream as the
@@ -740,6 +1816,34 @@ type KinesisStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutput_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutput_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutput_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsOutput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutput_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 //	For an application output, describes the Amazon Kinesis stream configured as
 //
 // its destination.
@@ -753,6 +1857,34 @@ type KinesisStreamsOutputDescription struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 //	When updating an output configuration using the [UpdateApplication] operation, provides
@@ -771,6 +1903,34 @@ type KinesisStreamsOutputUpdate struct {
 	RoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsOutputUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *KinesisStreamsOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.KinesisStreamsOutputUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 // When configuring application output, identifies an AWS Lambda function as the
@@ -798,6 +1958,34 @@ type LambdaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.LambdaOutput_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.LambdaOutput_RoleARN, *v.RoleARN)
+	}
+}
+func (v *LambdaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.LambdaOutput_ResourceARN, v.ResourceARN)
+		case schemas.LambdaOutput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.LambdaOutput_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // For an application output, describes the AWS Lambda function configured as its
 // destination.
 type LambdaOutputDescription struct {
@@ -810,6 +1998,34 @@ type LambdaOutputDescription struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.LambdaOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.LambdaOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *LambdaOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.LambdaOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.LambdaOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.LambdaOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // When updating an output configuration using the [UpdateApplication] operation, provides
@@ -833,6 +2049,34 @@ type LambdaOutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.LambdaOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+	if v.RoleARNUpdate != nil {
+		s.WriteString(schemas.LambdaOutputUpdate_RoleARNUpdate, *v.RoleARNUpdate)
+	}
+}
+func (v *LambdaOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.LambdaOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		case schemas.LambdaOutputUpdate_RoleARNUpdate:
+			v.RoleARNUpdate = new(string)
+			return d.ReadString(schemas.LambdaOutputUpdate_RoleARNUpdate, v.RoleARNUpdate)
+		}
+		return nil
+	})
+}
+
 // When configuring application input at the time of creating or updating an
 // application, provides additional mapping information specific to the record
 // format (such as JSON, CSV, or record fields delimited by some delimiter) on the
@@ -848,6 +2092,38 @@ type MappingParameters struct {
 	JSONMappingParameters *JSONMappingParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *MappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CSVMappingParameters != nil {
+		s.WriteStruct(schemas.MappingParameters_CSVMappingParameters)
+		v.CSVMappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JSONMappingParameters != nil {
+		s.WriteStruct(schemas.MappingParameters_JSONMappingParameters)
+		v.JSONMappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MappingParameters_CSVMappingParameters:
+			v.CSVMappingParameters = &CSVMappingParameters{}
+			return v.CSVMappingParameters.Deserialize(d)
+		case schemas.MappingParameters_JSONMappingParameters:
+			v.JSONMappingParameters = &JSONMappingParameters{}
+			return v.JSONMappingParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Describes application output configuration in which you identify an
@@ -887,6 +2163,60 @@ type Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchema != nil {
+		s.WriteStruct(schemas.Output_DestinationSchema)
+		v.DestinationSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutput != nil {
+		s.WriteStruct(schemas.Output_KinesisFirehoseOutput)
+		v.KinesisFirehoseOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutput != nil {
+		s.WriteStruct(schemas.Output_KinesisStreamsOutput)
+		v.KinesisStreamsOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutput != nil {
+		s.WriteStruct(schemas.Output_LambdaOutput)
+		v.LambdaOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Output_Name, *v.Name)
+	}
+}
+func (v *Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Output_DestinationSchema:
+			v.DestinationSchema = &DestinationSchema{}
+			return v.DestinationSchema.Deserialize(d)
+		case schemas.Output_KinesisFirehoseOutput:
+			v.KinesisFirehoseOutput = &KinesisFirehoseOutput{}
+			return v.KinesisFirehoseOutput.Deserialize(d)
+		case schemas.Output_KinesisStreamsOutput:
+			v.KinesisStreamsOutput = &KinesisStreamsOutput{}
+			return v.KinesisStreamsOutput.Deserialize(d)
+		case schemas.Output_LambdaOutput:
+			v.LambdaOutput = &LambdaOutput{}
+			return v.LambdaOutput.Deserialize(d)
+		case schemas.Output_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Output_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Describes the application output configuration, which includes the
 // in-application stream name and the destination where the stream data is written.
 // The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose
@@ -915,6 +2245,66 @@ type OutputDescription struct {
 	OutputId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchema != nil {
+		s.WriteStruct(schemas.OutputDescription_DestinationSchema)
+		v.DestinationSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_KinesisFirehoseOutputDescription)
+		v.KinesisFirehoseOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_KinesisStreamsOutputDescription)
+		v.KinesisStreamsOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_LambdaOutputDescription)
+		v.LambdaOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OutputDescription_Name, *v.Name)
+	}
+	if v.OutputId != nil {
+		s.WriteString(schemas.OutputDescription_OutputId, *v.OutputId)
+	}
+}
+func (v *OutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDescription_DestinationSchema:
+			v.DestinationSchema = &DestinationSchema{}
+			return v.DestinationSchema.Deserialize(d)
+		case schemas.OutputDescription_KinesisFirehoseOutputDescription:
+			v.KinesisFirehoseOutputDescription = &KinesisFirehoseOutputDescription{}
+			return v.KinesisFirehoseOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_KinesisStreamsOutputDescription:
+			v.KinesisStreamsOutputDescription = &KinesisStreamsOutputDescription{}
+			return v.KinesisStreamsOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_LambdaOutputDescription:
+			v.LambdaOutputDescription = &LambdaOutputDescription{}
+			return v.LambdaOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OutputDescription_Name, v.Name)
+		case schemas.OutputDescription_OutputId:
+			v.OutputId = new(string)
+			return d.ReadString(schemas.OutputDescription_OutputId, v.OutputId)
+		}
+		return nil
+	})
 }
 
 // Describes updates to the output configuration identified by the OutputId .
@@ -948,6 +2338,66 @@ type OutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchemaUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_DestinationSchemaUpdate)
+		v.DestinationSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_KinesisFirehoseOutputUpdate)
+		v.KinesisFirehoseOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_KinesisStreamsOutputUpdate)
+		v.KinesisStreamsOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_LambdaOutputUpdate)
+		v.LambdaOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NameUpdate != nil {
+		s.WriteString(schemas.OutputUpdate_NameUpdate, *v.NameUpdate)
+	}
+	if v.OutputId != nil {
+		s.WriteString(schemas.OutputUpdate_OutputId, *v.OutputId)
+	}
+}
+func (v *OutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputUpdate_DestinationSchemaUpdate:
+			v.DestinationSchemaUpdate = &DestinationSchema{}
+			return v.DestinationSchemaUpdate.Deserialize(d)
+		case schemas.OutputUpdate_KinesisFirehoseOutputUpdate:
+			v.KinesisFirehoseOutputUpdate = &KinesisFirehoseOutputUpdate{}
+			return v.KinesisFirehoseOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_KinesisStreamsOutputUpdate:
+			v.KinesisStreamsOutputUpdate = &KinesisStreamsOutputUpdate{}
+			return v.KinesisStreamsOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_LambdaOutputUpdate:
+			v.LambdaOutputUpdate = &LambdaOutputUpdate{}
+			return v.LambdaOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_NameUpdate:
+			v.NameUpdate = new(string)
+			return d.ReadString(schemas.OutputUpdate_NameUpdate, v.NameUpdate)
+		case schemas.OutputUpdate_OutputId:
+			v.OutputId = new(string)
+			return d.ReadString(schemas.OutputUpdate_OutputId, v.OutputId)
+		}
+		return nil
+	})
+}
+
 // Describes the mapping of each data element in the streaming source to the
 // corresponding column in the in-application stream.
 //
@@ -974,6 +2424,40 @@ type RecordColumn struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordColumn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordColumn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordColumn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mapping != nil {
+		s.WriteString(schemas.RecordColumn_Mapping, *v.Mapping)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RecordColumn_Name, *v.Name)
+	}
+	if v.SqlType != nil {
+		s.WriteString(schemas.RecordColumn_SqlType, *v.SqlType)
+	}
+}
+func (v *RecordColumn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordColumn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordColumn_Mapping:
+			v.Mapping = new(string)
+			return d.ReadString(schemas.RecordColumn_Mapping, v.Mapping)
+		case schemas.RecordColumn_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RecordColumn_Name, v.Name)
+		case schemas.RecordColumn_SqlType:
+			v.SqlType = new(string)
+			return d.ReadString(schemas.RecordColumn_SqlType, v.SqlType)
+		}
+		return nil
+	})
+}
+
 //	Describes the record format and relevant mapping information that should be
 //
 // applied to schematize the records on the stream.
@@ -991,6 +2475,40 @@ type RecordFormat struct {
 	MappingParameters *MappingParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MappingParameters != nil {
+		s.WriteStruct(schemas.RecordFormat_MappingParameters)
+		v.MappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordFormatType != "" {
+		s.WriteString(schemas.RecordFormat_RecordFormatType, string(v.RecordFormatType))
+	}
+}
+func (v *RecordFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordFormat_MappingParameters:
+			v.MappingParameters = &MappingParameters{}
+			return v.MappingParameters.Deserialize(d)
+		case schemas.RecordFormat_RecordFormatType:
+			var ev string
+			if err := d.ReadString(schemas.RecordFormat_RecordFormatType, &ev); err != nil {
+				return err
+			}
+			v.RecordFormatType = RecordFormatType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the reference data source by providing the source information (S3
@@ -1020,6 +2538,44 @@ type ReferenceDataSource struct {
 	S3ReferenceDataSource *S3ReferenceDataSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReferenceDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceSchema != nil {
+		s.WriteStruct(schemas.ReferenceDataSource_ReferenceSchema)
+		v.ReferenceSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSource != nil {
+		s.WriteStruct(schemas.ReferenceDataSource_S3ReferenceDataSource)
+		v.S3ReferenceDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ReferenceDataSource_TableName, *v.TableName)
+	}
+}
+func (v *ReferenceDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSource_ReferenceSchema:
+			v.ReferenceSchema = &SourceSchema{}
+			return v.ReferenceSchema.Deserialize(d)
+		case schemas.ReferenceDataSource_S3ReferenceDataSource:
+			v.S3ReferenceDataSource = &S3ReferenceDataSource{}
+			return v.S3ReferenceDataSource.Deserialize(d)
+		case schemas.ReferenceDataSource_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ReferenceDataSource_TableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 // Describes the reference data source configured for an application.
@@ -1055,6 +2611,50 @@ type ReferenceDataSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReferenceDataSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.ReferenceDataSourceDescription_ReferenceId, *v.ReferenceId)
+	}
+	if v.ReferenceSchema != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceDescription_ReferenceSchema)
+		v.ReferenceSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSourceDescription != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceDescription_S3ReferenceDataSourceDescription)
+		v.S3ReferenceDataSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ReferenceDataSourceDescription_TableName, *v.TableName)
+	}
+}
+func (v *ReferenceDataSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSourceDescription_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceDescription_ReferenceId, v.ReferenceId)
+		case schemas.ReferenceDataSourceDescription_ReferenceSchema:
+			v.ReferenceSchema = &SourceSchema{}
+			return v.ReferenceSchema.Deserialize(d)
+		case schemas.ReferenceDataSourceDescription_S3ReferenceDataSourceDescription:
+			v.S3ReferenceDataSourceDescription = &S3ReferenceDataSourceDescription{}
+			return v.S3ReferenceDataSourceDescription.Deserialize(d)
+		case schemas.ReferenceDataSourceDescription_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceDescription_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 // When you update a reference data source configuration for an application, this
 // object provides all the updated values (such as the source bucket name and
 // object key name), the in-application table name that is created, and updated
@@ -1085,6 +2685,50 @@ type ReferenceDataSourceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReferenceDataSourceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSourceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.ReferenceDataSourceUpdate_ReferenceId, *v.ReferenceId)
+	}
+	if v.ReferenceSchemaUpdate != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceUpdate_ReferenceSchemaUpdate)
+		v.ReferenceSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSourceUpdate != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceUpdate_S3ReferenceDataSourceUpdate)
+		v.S3ReferenceDataSourceUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableNameUpdate != nil {
+		s.WriteString(schemas.ReferenceDataSourceUpdate_TableNameUpdate, *v.TableNameUpdate)
+	}
+}
+func (v *ReferenceDataSourceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSourceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSourceUpdate_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceUpdate_ReferenceId, v.ReferenceId)
+		case schemas.ReferenceDataSourceUpdate_ReferenceSchemaUpdate:
+			v.ReferenceSchemaUpdate = &SourceSchema{}
+			return v.ReferenceSchemaUpdate.Deserialize(d)
+		case schemas.ReferenceDataSourceUpdate_S3ReferenceDataSourceUpdate:
+			v.S3ReferenceDataSourceUpdate = &S3ReferenceDataSourceUpdate{}
+			return v.S3ReferenceDataSourceUpdate.Deserialize(d)
+		case schemas.ReferenceDataSourceUpdate_TableNameUpdate:
+			v.TableNameUpdate = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceUpdate_TableNameUpdate, v.TableNameUpdate)
+		}
+		return nil
+	})
+}
+
 // Provides a description of an Amazon S3 data source, including the Amazon
 // Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to
 // access the bucket, and the name of the Amazon S3 object that contains the data.
@@ -1106,6 +2750,40 @@ type S3Configuration struct {
 	RoleARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3Configuration_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3Configuration_FileKey, *v.FileKey)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.S3Configuration_RoleARN, *v.RoleARN)
+	}
+}
+func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Configuration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3Configuration_BucketARN, v.BucketARN)
+		case schemas.S3Configuration_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3Configuration_FileKey, v.FileKey)
+		case schemas.S3Configuration_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.S3Configuration_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
 }
 
 // Identifies the S3 bucket and object that contains the reference data. Also
@@ -1140,6 +2818,40 @@ type S3ReferenceDataSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ReferenceDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSource_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ReferenceDataSource_FileKey, *v.FileKey)
+	}
+	if v.ReferenceRoleARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSource_ReferenceRoleARN, *v.ReferenceRoleARN)
+	}
+}
+func (v *S3ReferenceDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSource_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSource_BucketARN, v.BucketARN)
+		case schemas.S3ReferenceDataSource_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSource_FileKey, v.FileKey)
+		case schemas.S3ReferenceDataSource_ReferenceRoleARN:
+			v.ReferenceRoleARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSource_ReferenceRoleARN, v.ReferenceRoleARN)
+		}
+		return nil
+	})
+}
+
 // Provides the bucket name and object key name that stores the reference data.
 type S3ReferenceDataSourceDescription struct {
 
@@ -1162,6 +2874,40 @@ type S3ReferenceDataSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ReferenceDataSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_FileKey, *v.FileKey)
+	}
+	if v.ReferenceRoleARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN, *v.ReferenceRoleARN)
+	}
+}
+func (v *S3ReferenceDataSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSourceDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_BucketARN, v.BucketARN)
+		case schemas.S3ReferenceDataSourceDescription_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_FileKey, v.FileKey)
+		case schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN:
+			v.ReferenceRoleARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN, v.ReferenceRoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis
 // Analytics can assume to read the Amazon S3 object on your behalf and populate
 // the in-application reference table.
@@ -1178,6 +2924,40 @@ type S3ReferenceDataSourceUpdate struct {
 	ReferenceRoleARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ReferenceDataSourceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSourceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARNUpdate != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate, *v.BucketARNUpdate)
+	}
+	if v.FileKeyUpdate != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate, *v.FileKeyUpdate)
+	}
+	if v.ReferenceRoleARNUpdate != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceUpdate_ReferenceRoleARNUpdate, *v.ReferenceRoleARNUpdate)
+	}
+}
+func (v *S3ReferenceDataSourceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSourceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate:
+			v.BucketARNUpdate = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate, v.BucketARNUpdate)
+		case schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate:
+			v.FileKeyUpdate = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate, v.FileKeyUpdate)
+		case schemas.S3ReferenceDataSourceUpdate_ReferenceRoleARNUpdate:
+			v.ReferenceRoleARNUpdate = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceUpdate_ReferenceRoleARNUpdate, v.ReferenceRoleARNUpdate)
+		}
+		return nil
+	})
 }
 
 // Describes the format of the data in the streaming source, and how each data
@@ -1201,6 +2981,39 @@ type SourceSchema struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	if v.RecordEncoding != nil {
+		s.WriteString(schemas.SourceSchema_RecordEncoding, *v.RecordEncoding)
+	}
+	if v.RecordFormat != nil {
+		s.WriteStruct(schemas.SourceSchema_RecordFormat)
+		v.RecordFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceSchema_RecordColumns:
+			return deserializeRecordColumns(d, schemas.SourceSchema_RecordColumns, &v.RecordColumns)
+		case schemas.SourceSchema_RecordEncoding:
+			v.RecordEncoding = new(string)
+			return d.ReadString(schemas.SourceSchema_RecordEncoding, v.RecordEncoding)
+		case schemas.SourceSchema_RecordFormat:
+			v.RecordFormat = &RecordFormat{}
+			return v.RecordFormat.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A key-value pair (the value is optional) that you can define and assign to AWS
 // resources. If you specify a tag that already exists, the tag value is replaced
 // with the value that you specify in the request. Note that the maximum number of
@@ -1219,6 +3032,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

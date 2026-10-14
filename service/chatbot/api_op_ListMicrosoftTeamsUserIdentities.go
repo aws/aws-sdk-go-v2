@@ -5,12 +5,8 @@ package chatbot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A list all Microsoft Teams user identities with a mapped role.
@@ -48,24 +44,6 @@ type ListMicrosoftTeamsUserIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMicrosoftTeamsUserIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMicrosoftTeamsUserIdentitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMicrosoftTeamsUserIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListMicrosoftTeamsUserIdentitiesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListMicrosoftTeamsUserIdentitiesOutput struct {
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -82,84 +60,26 @@ type ListMicrosoftTeamsUserIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMicrosoftTeamsUserIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsUserIdentitiesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMicrosoftTeamsUserIdentitiesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMicrosoftTeamsUserIdentitiesResult_NextToken, v.NextToken)
-		case schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities:
-			return deserializeTeamsUserIdentitiesList(d, schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities, &v.TeamsUserIdentities)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMicrosoftTeamsUserIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrosoftTeamsUserIdentities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsUserIdentities, schemas.ListMicrosoftTeamsUserIdentitiesRequest, schemas.ListMicrosoftTeamsUserIdentitiesResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrosoftTeamsUserIdentities{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsUserIdentities, schemas.ListMicrosoftTeamsUserIdentitiesRequest, schemas.ListMicrosoftTeamsUserIdentitiesResult), output: &ListMicrosoftTeamsUserIdentitiesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMicrosoftTeamsUserIdentities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMicrosoftTeamsUserIdentities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +92,6 @@ func (c *Client) addOperationListMicrosoftTeamsUserIdentitiesMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +197,3 @@ type ListMicrosoftTeamsUserIdentitiesAPIClient interface {
 }
 
 var _ ListMicrosoftTeamsUserIdentitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMicrosoftTeamsUserIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMicrosoftTeamsUserIdentities",
-	}
-}

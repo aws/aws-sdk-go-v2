@@ -1,0 +1,3 @@
+GET /v1/kafka-versions?maxResults=1&nextToken=__NextToken__
+
+

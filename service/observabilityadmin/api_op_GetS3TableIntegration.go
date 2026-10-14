@@ -4,13 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a specific S3 Table integration, including its
@@ -40,18 +35,6 @@ type GetS3TableIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetS3TableIntegrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetS3TableIntegrationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetS3TableIntegrationInput_Arn, *v.Arn)
-	}
-}
-
 type GetS3TableIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the S3 Table integration.
@@ -79,104 +62,29 @@ type GetS3TableIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetS3TableIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetS3TableIntegrationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetS3TableIntegrationOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetS3TableIntegrationOutput_Arn, v.Arn)
-		case schemas.GetS3TableIntegrationOutput_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.GetS3TableIntegrationOutput_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.GetS3TableIntegrationOutput_DestinationTableBucketArn:
-			v.DestinationTableBucketArn = new(string)
-			return d.ReadString(schemas.GetS3TableIntegrationOutput_DestinationTableBucketArn, v.DestinationTableBucketArn)
-		case schemas.GetS3TableIntegrationOutput_Encryption:
-			v.Encryption = &types.Encryption{}
-			return v.Encryption.Deserialize(d)
-		case schemas.GetS3TableIntegrationOutput_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetS3TableIntegrationOutput_RoleArn, v.RoleArn)
-		case schemas.GetS3TableIntegrationOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetS3TableIntegrationOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.IntegrationStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetS3TableIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetS3TableIntegration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3TableIntegration, schemas.GetS3TableIntegrationInput, schemas.GetS3TableIntegrationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetS3TableIntegration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetS3TableIntegration, schemas.GetS3TableIntegrationInput, schemas.GetS3TableIntegrationOutput), output: &GetS3TableIntegrationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetS3TableIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetS3TableIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetS3TableIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +99,8 @@ func (c *Client) addOperationGetS3TableIntegrationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetS3TableIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetS3TableIntegration",
-	}
 }

@@ -1,0 +1,5 @@
+POST /delete-app-version-resource
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","clientToken":"__ClientToken__","logicalResourceId":{"eksSourceName":"__EksSourceName__","identifier":"__Identifier__","logicalStackName":"__LogicalStackName__","resourceGroupName":"__ResourceGroupName__","terraformSourceName":"__TerraformSourceName__"},"physicalResourceId":"__PhysicalResourceId__","resourceName":"__ResourceName__"}

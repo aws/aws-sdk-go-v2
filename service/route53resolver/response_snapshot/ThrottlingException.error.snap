@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.AssociateFirewallRuleGroup
+
+{"__type":"ThrottlingException","Message":"__Message__"}

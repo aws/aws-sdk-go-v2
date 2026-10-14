@@ -4,13 +4,8 @@ package rum
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the complete configuration information for one app monitor.
@@ -39,28 +34,6 @@ type GetAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAppMonitorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAppMonitorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAppMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GetAppMonitorRequest_Name, *v.Name)
-	}
-}
-func (v *GetAppMonitorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAppMonitorRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAppMonitorRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAppMonitorRequest_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 type GetAppMonitorOutput struct {
 
 	// A structure containing all the configuration information for the app monitor.
@@ -72,98 +45,29 @@ type GetAppMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAppMonitorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAppMonitorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAppMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppMonitor != nil {
-		s.WriteStruct(schemas.GetAppMonitorResponse_AppMonitor)
-		v.AppMonitor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetAppMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAppMonitorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAppMonitorResponse_AppMonitor:
-			v.AppMonitor = &types.AppMonitor{}
-			return v.AppMonitor.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAppMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitor, schemas.GetAppMonitorRequest, schemas.GetAppMonitorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppMonitor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitor, schemas.GetAppMonitorRequest, schemas.GetAppMonitorResponse), output: &GetAppMonitorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAppMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAppMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +82,8 @@ func (c *Client) addOperationGetAppMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAppMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAppMonitor",
-	}
 }

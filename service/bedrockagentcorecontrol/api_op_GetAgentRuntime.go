@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,21 +36,6 @@ type GetAgentRuntimeInput struct {
 	AgentRuntimeVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAgentRuntimeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentRuntimeId != nil {
-		s.WriteString(schemas.GetAgentRuntimeRequest_agentRuntimeId, *v.AgentRuntimeId)
-	}
-	if v.AgentRuntimeVersion != nil {
-		s.WriteString(schemas.GetAgentRuntimeRequest_agentRuntimeVersion, *v.AgentRuntimeVersion)
-	}
 }
 
 type GetAgentRuntimeOutput struct {
@@ -95,11 +75,6 @@ type GetAgentRuntimeOutput struct {
 	// This member is required.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
-	// The network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -116,6 +91,9 @@ type GetAgentRuntimeOutput struct {
 	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The capacity provider configuration for the AgentCore Runtime.
+	CapacityProviderConfiguration *types.CapacityProviderConfiguration
+
 	// The description of the AgentCore Runtime.
 	Description *string
 
@@ -131,6 +109,12 @@ type GetAgentRuntimeOutput struct {
 	// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
 	// Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
+	// The network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
+
+	// The version of the runtime platform used by the AgentCore Runtime.
+	PlatformVersion *string
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
@@ -149,141 +133,29 @@ type GetAgentRuntimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAgentRuntimeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAgentRuntimeResponse_agentRuntimeArn:
-			v.AgentRuntimeArn = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_agentRuntimeArn, v.AgentRuntimeArn)
-		case schemas.GetAgentRuntimeResponse_agentRuntimeArtifact:
-			return deserializeAgentRuntimeArtifact(d, schemas.GetAgentRuntimeResponse_agentRuntimeArtifact, &v.AgentRuntimeArtifact)
-		case schemas.GetAgentRuntimeResponse_agentRuntimeId:
-			v.AgentRuntimeId = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_agentRuntimeId, v.AgentRuntimeId)
-		case schemas.GetAgentRuntimeResponse_agentRuntimeName:
-			v.AgentRuntimeName = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_agentRuntimeName, v.AgentRuntimeName)
-		case schemas.GetAgentRuntimeResponse_agentRuntimeVersion:
-			v.AgentRuntimeVersion = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_agentRuntimeVersion, v.AgentRuntimeVersion)
-		case schemas.GetAgentRuntimeResponse_authorizerConfiguration:
-			return deserializeAuthorizerConfiguration(d, schemas.GetAgentRuntimeResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
-		case schemas.GetAgentRuntimeResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAgentRuntimeResponse_createdAt, v.CreatedAt)
-		case schemas.GetAgentRuntimeResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_description, v.Description)
-		case schemas.GetAgentRuntimeResponse_environmentVariables:
-			return deserializeEnvironmentVariablesMap(d, schemas.GetAgentRuntimeResponse_environmentVariables, &v.EnvironmentVariables)
-		case schemas.GetAgentRuntimeResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_failureReason, v.FailureReason)
-		case schemas.GetAgentRuntimeResponse_filesystemConfigurations:
-			return deserializeFilesystemConfigurations(d, schemas.GetAgentRuntimeResponse_filesystemConfigurations, &v.FilesystemConfigurations)
-		case schemas.GetAgentRuntimeResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAgentRuntimeResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetAgentRuntimeResponse_lifecycleConfiguration:
-			v.LifecycleConfiguration = &types.LifecycleConfiguration{}
-			return v.LifecycleConfiguration.Deserialize(d)
-		case schemas.GetAgentRuntimeResponse_metadataConfiguration:
-			v.MetadataConfiguration = &types.RuntimeMetadataConfiguration{}
-			return v.MetadataConfiguration.Deserialize(d)
-		case schemas.GetAgentRuntimeResponse_networkConfiguration:
-			v.NetworkConfiguration = &types.NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.GetAgentRuntimeResponse_protocolConfiguration:
-			v.ProtocolConfiguration = &types.ProtocolConfiguration{}
-			return v.ProtocolConfiguration.Deserialize(d)
-		case schemas.GetAgentRuntimeResponse_requestHeaderConfiguration:
-			return deserializeRequestHeaderConfiguration(d, schemas.GetAgentRuntimeResponse_requestHeaderConfiguration, &v.RequestHeaderConfiguration)
-		case schemas.GetAgentRuntimeResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetAgentRuntimeResponse_roleArn, v.RoleArn)
-		case schemas.GetAgentRuntimeResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetAgentRuntimeResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AgentRuntimeStatus(ev)
-			return nil
-		case schemas.GetAgentRuntimeResponse_workloadIdentityDetails:
-			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
-			return v.WorkloadIdentityDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAgentRuntimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRuntime, schemas.GetAgentRuntimeRequest, schemas.GetAgentRuntimeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentRuntime{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRuntime, schemas.GetAgentRuntimeRequest, schemas.GetAgentRuntimeResponse), output: &GetAgentRuntimeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgentRuntime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAgentRuntimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentRuntime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -298,22 +170,8 @@ func (c *Client) addOperationGetAgentRuntimeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAgentRuntime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAgentRuntime",
-	}
 }

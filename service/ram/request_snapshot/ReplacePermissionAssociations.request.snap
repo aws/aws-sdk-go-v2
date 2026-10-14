@@ -1,0 +1,5 @@
+POST /replacepermissionassociations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","fromPermissionArn":"__FromPermissionArn__","fromPermissionVersion":1,"toPermissionArn":"__ToPermissionArn__"}

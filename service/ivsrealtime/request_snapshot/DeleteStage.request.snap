@@ -1,0 +1,5 @@
+POST /DeleteStage
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

@@ -8,13 +8,13 @@
 // Capabilities include:
 //
 //   - Access to comprehensive base map data, allowing you to tailor the map
-//     display to your specific needs.
+//     display to your specific needs. See [GetTile].
 //
 //   - Multiple pre-designed map styles suited for various application types, such
-//     as navigation, logistics, or data visualization.
+//     as navigation, logistics, or data visualization. See [GetStyleDescriptor].
 //
 //   - Generation of static map images for scenarios where interactive maps aren't
-//     suitable, such as:
+//     suitable. See [GetStaticMap]. Use cases include:
 //
 //   - Embedding in emails or documents
 //
@@ -23,6 +23,10 @@
 //   - Creating printable maps
 //
 //   - Enhancing application performance by reducing client-side rendering
+//
+// [GetTile]: https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetTile.html
+// [GetStaticMap]: https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetStaticMap.html
+// [GetStyleDescriptor]: https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetStyleDescriptor.html
 //
 // [MapLibre]: https://maplibre.org
 package geomaps

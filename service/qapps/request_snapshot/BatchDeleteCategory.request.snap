@@ -1,0 +1,6 @@
+POST /catalog.deleteCategories
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"categories":["__Member__","__Member__"]}

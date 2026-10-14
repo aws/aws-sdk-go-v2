@@ -242,6 +242,18 @@ func TestCheckSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBillingTransferPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBillingTransferPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBillingTransferPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAccountAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccountAssociations(context.Background(), nil, func(o *Options) {
@@ -403,6 +415,18 @@ func TestCheckSnapshot_UpdateBillingGroup(t *testing.T) {
 	_, err := svc.UpdateBillingGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateBillingGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBillingTransferPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBillingTransferPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -625,6 +649,18 @@ func TestUpdateSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetBillingTransferPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBillingTransferPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBillingTransferPreference")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAccountAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccountAssociations(context.Background(), nil, func(o *Options) {
@@ -786,6 +822,18 @@ func TestUpdateSnapshot_UpdateBillingGroup(t *testing.T) {
 	_, err := svc.UpdateBillingGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBillingGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBillingTransferPreference(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBillingTransferPreference")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

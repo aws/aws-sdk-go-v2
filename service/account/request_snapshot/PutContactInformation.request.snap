@@ -1,0 +1,5 @@
+POST /putContactInformation
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","ContactInformation":{"AddressLine1":"__AddressLine1__","AddressLine2":"__AddressLine2__","AddressLine3":"__AddressLine3__","City":"__City__","CompanyName":"__CompanyName__","CountryCode":"__CountryCode__","DistrictOrCounty":"__DistrictOrCounty__","FullName":"__FullName__","PhoneNumber":"__PhoneNumber__","PostalCode":"__PostalCode__","StateOrRegion":"__StateOrRegion__","WebsiteUrl":"__WebsiteUrl__"}}

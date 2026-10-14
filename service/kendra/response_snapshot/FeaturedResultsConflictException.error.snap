@@ -1,0 +1,5 @@
+409
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.CreateFeaturedResultsSet
+
+{"__type":"FeaturedResultsConflictException","ConflictingItems":[{"QueryText":"__QueryText__","SetId":"__SetId__","SetName":"__SetName__"},{"QueryText":"__QueryText__","SetId":"__SetId__","SetName":"__SetName__"}],"Message":"__Message__"}

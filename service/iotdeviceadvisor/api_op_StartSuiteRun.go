@@ -4,13 +4,8 @@ package iotdeviceadvisor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -55,27 +50,6 @@ type StartSuiteRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSuiteRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartSuiteRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SuiteDefinitionId != nil {
-		s.WriteString(schemas.StartSuiteRunRequest_suiteDefinitionId, *v.SuiteDefinitionId)
-	}
-	if v.SuiteDefinitionVersion != nil {
-		s.WriteString(schemas.StartSuiteRunRequest_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
-	}
-	if v.SuiteRunConfiguration != nil {
-		s.WriteStruct(schemas.StartSuiteRunRequest_suiteRunConfiguration)
-		v.SuiteRunConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.StartSuiteRunRequest_tags, v.Tags)
-}
-
 type StartSuiteRunOutput struct {
 
 	// Starts a Device Advisor test suite run based on suite create time.
@@ -96,94 +70,29 @@ type StartSuiteRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSuiteRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartSuiteRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartSuiteRunResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.StartSuiteRunResponse_createdAt, v.CreatedAt)
-		case schemas.StartSuiteRunResponse_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.StartSuiteRunResponse_endpoint, v.Endpoint)
-		case schemas.StartSuiteRunResponse_suiteRunArn:
-			v.SuiteRunArn = new(string)
-			return d.ReadString(schemas.StartSuiteRunResponse_suiteRunArn, v.SuiteRunArn)
-		case schemas.StartSuiteRunResponse_suiteRunId:
-			v.SuiteRunId = new(string)
-			return d.ReadString(schemas.StartSuiteRunResponse_suiteRunId, v.SuiteRunId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSuiteRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSuiteRun, schemas.StartSuiteRunRequest, schemas.StartSuiteRunResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSuiteRun{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSuiteRun, schemas.StartSuiteRunRequest, schemas.StartSuiteRunResponse), output: &StartSuiteRunOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSuiteRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartSuiteRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSuiteRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,22 +107,8 @@ func (c *Client) addOperationStartSuiteRunMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartSuiteRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSuiteRun",
-	}
 }

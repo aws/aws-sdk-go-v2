@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -153,64 +150,6 @@ type SearchPlaceIndexForTextInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchPlaceIndexForTextInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchPlaceIndexForTextRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchPlaceIndexForTextInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.SearchPlaceIndexForTextRequest_BiasPosition, v.BiasPosition)
-	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextRequest_FilterBBox, v.FilterBBox)
-	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextRequest_FilterCategories, v.FilterCategories)
-	serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextRequest_FilterCountries, v.FilterCountries)
-	if v.IndexName != nil {
-		s.WriteString(schemas.SearchPlaceIndexForTextRequest_IndexName, *v.IndexName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.SearchPlaceIndexForTextRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.SearchPlaceIndexForTextRequest_Language, *v.Language)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchPlaceIndexForTextRequest_MaxResults, *v.MaxResults)
-	}
-	if v.Text != nil {
-		s.WriteString(schemas.SearchPlaceIndexForTextRequest_Text, *v.Text)
-	}
-}
-func (v *SearchPlaceIndexForTextInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForTextRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchPlaceIndexForTextRequest_BiasPosition:
-			return deserializePosition(d, schemas.SearchPlaceIndexForTextRequest_BiasPosition, &v.BiasPosition)
-		case schemas.SearchPlaceIndexForTextRequest_FilterBBox:
-			return deserializeBoundingBox(d, schemas.SearchPlaceIndexForTextRequest_FilterBBox, &v.FilterBBox)
-		case schemas.SearchPlaceIndexForTextRequest_FilterCategories:
-			return deserializeFilterPlaceCategoryList(d, schemas.SearchPlaceIndexForTextRequest_FilterCategories, &v.FilterCategories)
-		case schemas.SearchPlaceIndexForTextRequest_FilterCountries:
-			return deserializeCountryCodeList(d, schemas.SearchPlaceIndexForTextRequest_FilterCountries, &v.FilterCountries)
-		case schemas.SearchPlaceIndexForTextRequest_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForTextRequest_IndexName, v.IndexName)
-		case schemas.SearchPlaceIndexForTextRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForTextRequest_Key, v.Key)
-		case schemas.SearchPlaceIndexForTextRequest_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForTextRequest_Language, v.Language)
-		case schemas.SearchPlaceIndexForTextRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.SearchPlaceIndexForTextRequest_MaxResults, v.MaxResults)
-		case schemas.SearchPlaceIndexForTextRequest_Text:
-			v.Text = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForTextRequest_Text, v.Text)
-		}
-		return nil
-	})
-}
-
 type SearchPlaceIndexForTextOutput struct {
 
 	// A list of Places matching the input text. Each result contains additional
@@ -236,89 +175,23 @@ type SearchPlaceIndexForTextOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchPlaceIndexForTextOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchPlaceIndexForTextResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchPlaceIndexForTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchForTextResultList(s, schemas.SearchPlaceIndexForTextResponse_Results, v.Results)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.SearchPlaceIndexForTextResponse_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SearchPlaceIndexForTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForTextResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchPlaceIndexForTextResponse_Results:
-			return deserializeSearchForTextResultList(d, schemas.SearchPlaceIndexForTextResponse_Results, &v.Results)
-		case schemas.SearchPlaceIndexForTextResponse_Summary:
-			v.Summary = &types.SearchPlaceIndexForTextSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchPlaceIndexForTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPlaceIndexForText{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPlaceIndexForText, schemas.SearchPlaceIndexForTextRequest, schemas.SearchPlaceIndexForTextResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchPlaceIndexForText{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPlaceIndexForText, schemas.SearchPlaceIndexForTextRequest, schemas.SearchPlaceIndexForTextResponse), output: &SearchPlaceIndexForTextOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchPlaceIndexForText"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -328,12 +201,6 @@ func (c *Client) addOperationSearchPlaceIndexForTextMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpSearchPlaceIndexForTextValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchPlaceIndexForText(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -346,12 +213,6 @@ func (c *Client) addOperationSearchPlaceIndexForTextMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -385,12 +246,4 @@ func (m *endpointPrefix_opSearchPlaceIndexForTextMiddleware) HandleFinalize(ctx 
 }
 func addEndpointPrefix_opSearchPlaceIndexForTextMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opSearchPlaceIndexForTextMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opSearchPlaceIndexForText(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchPlaceIndexForText",
-	}
 }

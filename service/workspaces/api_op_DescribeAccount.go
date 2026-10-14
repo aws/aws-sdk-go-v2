@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list that describes the configuration of Bring Your Own License
@@ -30,6 +29,15 @@ func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInp
 
 type DescribeAccountInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeAccountOutput struct {
@@ -58,74 +66,71 @@ type DescribeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedTenancyAccountType != "" {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancyAccountType, string(v.DedicatedTenancyAccountType))
+	}
+	if v.DedicatedTenancyManagementCidrRange != nil {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange, *v.DedicatedTenancyManagementCidrRange)
+	}
+	if v.DedicatedTenancySupport != "" {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancySupport, string(v.DedicatedTenancySupport))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeAccountResult_Message, *v.Message)
+	}
+}
+func (v *DescribeAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountResult_DedicatedTenancyAccountType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccountResult_DedicatedTenancyAccountType, &ev); err != nil {
+				return err
+			}
+			v.DedicatedTenancyAccountType = types.DedicatedTenancyAccountType(ev)
+			return nil
+		case schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange:
+			v.DedicatedTenancyManagementCidrRange = new(string)
+			return d.ReadString(schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange, v.DedicatedTenancyManagementCidrRange)
+		case schemas.DescribeAccountResult_DedicatedTenancySupport:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccountResult_DedicatedTenancySupport, &ev); err != nil {
+				return err
+			}
+			v.DedicatedTenancySupport = types.DedicatedTenancySupportResultEnum(ev)
+			return nil
+		case schemas.DescribeAccountResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeAccountResult_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResult), output: &DescribeAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +145,8 @@ func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAccount",
-	}
 }

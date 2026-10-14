@@ -124,6 +124,7 @@ func serializeListOfUnAuthenticatedElement(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeListOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -137,6 +138,7 @@ func deserializeListOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeListOfAdditionalConstraintsElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AdditionalConstraintsElement) error {
+	*v = make([]types.AdditionalConstraintsElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -150,6 +152,7 @@ func deserializeListOfAdditionalConstraintsElement(d smithy.ShapeDeserializer, s
 }
 
 func deserializeListOfAuthenticatedElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AuthenticatedElement) error {
+	*v = make([]types.AuthenticatedElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -163,6 +166,7 @@ func deserializeListOfAuthenticatedElement(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeListOfBackendAPIAuthType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BackendAPIAuthType) error {
+	*v = make([]types.BackendAPIAuthType, 0)
 	var vv types.BackendAPIAuthType
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BackendAPIAuthType{}
@@ -176,6 +180,7 @@ func deserializeListOfBackendAPIAuthType(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeListOfBackendJobRespObj(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BackendJobRespObj) error {
+	*v = make([]types.BackendJobRespObj, 0)
 	var vv types.BackendJobRespObj
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BackendJobRespObj{}
@@ -189,6 +194,7 @@ func deserializeListOfBackendJobRespObj(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeListOfMfaTypesElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MfaTypesElement) error {
+	*v = make([]types.MfaTypesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -202,6 +208,7 @@ func deserializeListOfMfaTypesElement(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeListOfOAuthScopesElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OAuthScopesElement) error {
+	*v = make([]types.OAuthScopesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -215,6 +222,7 @@ func deserializeListOfOAuthScopesElement(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeListOfRequiredSignUpAttributesElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RequiredSignUpAttributesElement) error {
+	*v = make([]types.RequiredSignUpAttributesElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -228,6 +236,7 @@ func deserializeListOfRequiredSignUpAttributesElement(d smithy.ShapeDeserializer
 }
 
 func deserializeListOfS3BucketInfo(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.S3BucketInfo) error {
+	*v = make([]types.S3BucketInfo, 0)
 	var vv types.S3BucketInfo
 	return smithy.ReadList(d, s, func() error {
 		vv = types.S3BucketInfo{}
@@ -241,6 +250,7 @@ func deserializeListOfS3BucketInfo(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeListOfUnAuthenticatedElement(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UnAuthenticatedElement) error {
+	*v = make([]types.UnAuthenticatedElement, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

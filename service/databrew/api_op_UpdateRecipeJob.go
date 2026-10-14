@@ -4,13 +4,8 @@ package databrew
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the definition of an existing DataBrew recipe job.
@@ -82,42 +77,6 @@ type UpdateRecipeJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRecipeJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRecipeJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataCatalogOutputList(s, schemas.UpdateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
-	serializeDatabaseOutputList(s, schemas.UpdateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.UpdateRecipeJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.EncryptionMode != "" {
-		s.WriteString(schemas.UpdateRecipeJobRequest_EncryptionMode, string(v.EncryptionMode))
-	}
-	if v.LogSubscription != "" {
-		s.WriteString(schemas.UpdateRecipeJobRequest_LogSubscription, string(v.LogSubscription))
-	}
-	if v.MaxCapacity != 0 {
-		s.WriteInt32(schemas.UpdateRecipeJobRequest_MaxCapacity, v.MaxCapacity)
-	}
-	if v.MaxRetries != 0 {
-		s.WriteInt32(schemas.UpdateRecipeJobRequest_MaxRetries, v.MaxRetries)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateRecipeJobRequest_Name, *v.Name)
-	}
-	serializeOutputList(s, schemas.UpdateRecipeJobRequest_Outputs, v.Outputs)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateRecipeJobRequest_RoleArn, *v.RoleArn)
-	}
-	if v.Timeout != 0 {
-		s.WriteInt32(schemas.UpdateRecipeJobRequest_Timeout, v.Timeout)
-	}
-}
-
 type UpdateRecipeJobOutput struct {
 
 	// The name of the job that you updated.
@@ -131,85 +90,29 @@ type UpdateRecipeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRecipeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRecipeJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRecipeJobResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateRecipeJobResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRecipeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecipeJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecipeJob, schemas.UpdateRecipeJobRequest, schemas.UpdateRecipeJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecipeJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecipeJob, schemas.UpdateRecipeJobRequest, schemas.UpdateRecipeJobResponse), output: &UpdateRecipeJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRecipeJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRecipeJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecipeJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +127,8 @@ func (c *Client) addOperationUpdateRecipeJobMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRecipeJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRecipeJob",
-	}
 }

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateGlossaryTerms struct {
+}
+
+func (*validateOpAssociateGlossaryTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateGlossaryTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateGlossaryTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateGlossaryTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchCreatePartition struct {
 }
 
@@ -190,6 +210,46 @@ func (m *validateOpBatchGetDataQualityResult) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDataQualityResultV2 struct {
+}
+
+func (*validateOpBatchGetDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDataQualityResultV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetDataQualityRulesetEvaluationRun struct {
+}
+
+func (*validateOpBatchGetDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDataQualityRulesetEvaluationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDataQualityRulesetEvaluationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDataQualityRulesetEvaluationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDevEndpoints struct {
 }
 
@@ -205,6 +265,26 @@ func (m *validateOpBatchGetDevEndpoints) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetDevEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetIterableForms struct {
+}
+
+func (*validateOpBatchGetIterableForms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetIterableForms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetIterableFormsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetIterableFormsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +750,46 @@ func (m *validateOpCreateDevEndpoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateGlossary struct {
+}
+
+func (*validateOpCreateGlossary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGlossary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGlossaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGlossaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGlossaryTerm struct {
+}
+
+func (*validateOpCreateGlossaryTerm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGlossaryTerm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGlossaryTermInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGlossaryTermInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGlueIdentityCenterConfiguration struct {
 }
 
@@ -1050,6 +1170,66 @@ func (m *validateOpCreateWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAsset struct {
+}
+
+func (*validateOpDeleteAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAssetType struct {
+}
+
+func (*validateOpDeleteAssetType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAttachment struct {
+}
+
+func (*validateOpDeleteAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBlueprint struct {
 }
 
@@ -1305,6 +1485,66 @@ func (m *validateOpDeleteDevEndpoint) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDevEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFormType struct {
+}
+
+func (*validateOpDeleteFormType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFormType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFormTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFormTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteGlossary struct {
+}
+
+func (*validateOpDeleteGlossary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGlossary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGlossaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGlossaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteGlossaryTerm struct {
+}
+
+func (*validateOpDeleteGlossaryTerm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGlossaryTerm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGlossaryTermInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGlossaryTermInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1730,6 +1970,66 @@ func (m *validateOpDescribeEntity) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateGlossaryTerms struct {
+}
+
+func (*validateOpDisassociateGlossaryTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateGlossaryTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateGlossaryTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateGlossaryTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAsset struct {
+}
+
+func (*validateOpGetAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAssetType struct {
+}
+
+func (*validateOpGetAssetType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBlueprint struct {
 }
 
@@ -2090,6 +2390,26 @@ func (m *validateOpGetDataQualityResult) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataQualityResultV2 struct {
+}
+
+func (*validateOpGetDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityResultV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataQualityRuleRecommendationRun struct {
 }
 
@@ -2185,6 +2505,66 @@ func (m *validateOpGetEntityRecords) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEntityRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFormType struct {
+}
+
+func (*validateOpGetFormType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFormType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFormTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFormTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetGlossary struct {
+}
+
+func (*validateOpGetGlossary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGlossary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGlossaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGlossaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetGlossaryTerm struct {
+}
+
+func (*validateOpGetGlossaryTerm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGlossaryTerm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGlossaryTermInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGlossaryTermInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2670,6 +3050,46 @@ func (m *validateOpGetStatement) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSystemLogsForJobRun struct {
+}
+
+func (*validateOpGetSystemLogsForJobRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForJobRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForJobRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSystemLogsForSession struct {
+}
+
+func (*validateOpGetSystemLogsForSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSystemLogsForSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSystemLogsForSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSystemLogsForSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTable struct {
 }
 
@@ -3050,6 +3470,26 @@ func (m *validateOpListDataQualityResults) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDataQualityResultsV2 struct {
+}
+
+func (*validateOpListDataQualityResultsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityResultsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityResultsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityResultsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDataQualityRuleRecommendationRuns struct {
 }
 
@@ -3105,6 +3545,46 @@ func (m *validateOpListDataQualityRulesets) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDataQualityRulesetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListGlossaryTerms struct {
+}
+
+func (*validateOpListGlossaryTerms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGlossaryTerms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGlossaryTermsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGlossaryTermsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIterableForms struct {
+}
+
+func (*validateOpListIterableForms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIterableForms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIterableFormsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIterableFormsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3230,6 +3710,86 @@ func (m *validateOpModifyIntegration) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPublishDataQualityResultV2 struct {
+}
+
+func (*validateOpPublishDataQualityResultV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishDataQualityResultV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishDataQualityResultV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishDataQualityResultV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAsset struct {
+}
+
+func (*validateOpPutAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAssetType struct {
+}
+
+func (*validateOpPutAssetType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAssetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAssetTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAssetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAttachment struct {
+}
+
+func (*validateOpPutAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataCatalogEncryptionSettings struct {
 }
 
@@ -3250,6 +3810,26 @@ func (m *validateOpPutDataCatalogEncryptionSettings) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutDataCatalogExportConfiguration struct {
+}
+
+func (*validateOpPutDataCatalogExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataCatalogExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataCatalogExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataCatalogExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataQualityProfileAnnotation struct {
 }
 
@@ -3265,6 +3845,26 @@ func (m *validateOpPutDataQualityProfileAnnotation) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDataQualityProfileAnnotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutFormType struct {
+}
+
+func (*validateOpPutFormType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFormType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFormTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFormTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3445,6 +4045,26 @@ func (m *validateOpRunStatement) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRunStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchAssets struct {
+}
+
+func (*validateOpSearchAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchAssetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3970,6 +4590,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAsset struct {
+}
+
+func (*validateOpUpdateAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBlueprint struct {
 }
 
@@ -4205,6 +4845,46 @@ func (m *validateOpUpdateDevEndpoint) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDevEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateGlossary struct {
+}
+
+func (*validateOpUpdateGlossary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGlossary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGlossaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGlossaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateGlossaryTerm struct {
+}
+
+func (*validateOpUpdateGlossaryTerm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGlossaryTerm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGlossaryTermInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGlossaryTermInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4470,6 +5150,10 @@ func (m *validateOpUpdateWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateGlossaryTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateGlossaryTerms{}, middleware.After)
+}
+
 func addOpBatchCreatePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchCreatePartition{}, middleware.After)
 }
@@ -4506,8 +5190,20 @@ func addOpBatchGetDataQualityResultValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchGetDataQualityResult{}, middleware.After)
 }
 
+func addOpBatchGetDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDataQualityResultV2{}, middleware.After)
+}
+
+func addOpBatchGetDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDataQualityRulesetEvaluationRun{}, middleware.After)
+}
+
 func addOpBatchGetDevEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDevEndpoints{}, middleware.After)
+}
+
+func addOpBatchGetIterableFormsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetIterableForms{}, middleware.After)
 }
 
 func addOpBatchGetJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -4602,6 +5298,14 @@ func addOpCreateDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDevEndpoint{}, middleware.After)
 }
 
+func addOpCreateGlossaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGlossary{}, middleware.After)
+}
+
+func addOpCreateGlossaryTermValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGlossaryTerm{}, middleware.After)
+}
+
 func addOpCreateGlueIdentityCenterConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGlueIdentityCenterConfiguration{}, middleware.After)
 }
@@ -4678,6 +5382,18 @@ func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkflow{}, middleware.After)
 }
 
+func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
+}
+
+func addOpDeleteAssetTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssetType{}, middleware.After)
+}
+
+func addOpDeleteAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAttachment{}, middleware.After)
+}
+
 func addOpDeleteBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBlueprint{}, middleware.After)
 }
@@ -4728,6 +5444,18 @@ func addOpDeleteDataQualityRulesetValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDevEndpoint{}, middleware.After)
+}
+
+func addOpDeleteFormTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFormType{}, middleware.After)
+}
+
+func addOpDeleteGlossaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGlossary{}, middleware.After)
+}
+
+func addOpDeleteGlossaryTermValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGlossaryTerm{}, middleware.After)
 }
 
 func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -4814,6 +5542,18 @@ func addOpDescribeEntityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEntity{}, middleware.After)
 }
 
+func addOpDisassociateGlossaryTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateGlossaryTerms{}, middleware.After)
+}
+
+func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAsset{}, middleware.After)
+}
+
+func addOpGetAssetTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssetType{}, middleware.After)
+}
+
 func addOpGetBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBlueprint{}, middleware.After)
 }
@@ -4886,6 +5626,10 @@ func addOpGetDataQualityResultValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetDataQualityResult{}, middleware.After)
 }
 
+func addOpGetDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityResultV2{}, middleware.After)
+}
+
 func addOpGetDataQualityRuleRecommendationRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataQualityRuleRecommendationRun{}, middleware.After)
 }
@@ -4904,6 +5648,18 @@ func addOpGetDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEntityRecordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEntityRecords{}, middleware.After)
+}
+
+func addOpGetFormTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFormType{}, middleware.After)
+}
+
+func addOpGetGlossaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGlossary{}, middleware.After)
+}
+
+func addOpGetGlossaryTermValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGlossaryTerm{}, middleware.After)
 }
 
 func addOpGetIntegrationResourcePropertyValidationMiddleware(stack *middleware.Stack) error {
@@ -5002,6 +5758,14 @@ func addOpGetStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStatement{}, middleware.After)
 }
 
+func addOpGetSystemLogsForJobRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForJobRun{}, middleware.After)
+}
+
+func addOpGetSystemLogsForSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSystemLogsForSession{}, middleware.After)
+}
+
 func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTable{}, middleware.After)
 }
@@ -5078,6 +5842,10 @@ func addOpListDataQualityResultsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListDataQualityResults{}, middleware.After)
 }
 
+func addOpListDataQualityResultsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityResultsV2{}, middleware.After)
+}
+
 func addOpListDataQualityRuleRecommendationRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataQualityRuleRecommendationRuns{}, middleware.After)
 }
@@ -5088,6 +5856,14 @@ func addOpListDataQualityRulesetEvaluationRunsValidationMiddleware(stack *middle
 
 func addOpListDataQualityRulesetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataQualityRulesets{}, middleware.After)
+}
+
+func addOpListGlossaryTermsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGlossaryTerms{}, middleware.After)
+}
+
+func addOpListIterableFormsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIterableForms{}, middleware.After)
 }
 
 func addOpListMaterializedViewRefreshTaskRunsValidationMiddleware(stack *middleware.Stack) error {
@@ -5114,12 +5890,36 @@ func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyIntegration{}, middleware.After)
 }
 
+func addOpPublishDataQualityResultV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishDataQualityResultV2{}, middleware.After)
+}
+
+func addOpPutAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAsset{}, middleware.After)
+}
+
+func addOpPutAssetTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAssetType{}, middleware.After)
+}
+
+func addOpPutAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAttachment{}, middleware.After)
+}
+
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
 }
 
+func addOpPutDataCatalogExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataCatalogExportConfiguration{}, middleware.After)
+}
+
 func addOpPutDataQualityProfileAnnotationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataQualityProfileAnnotation{}, middleware.After)
+}
+
+func addOpPutFormTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFormType{}, middleware.After)
 }
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -5156,6 +5956,10 @@ func addOpResumeWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRunStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRunStatement{}, middleware.After)
+}
+
+func addOpSearchAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAssets{}, middleware.After)
 }
 
 func addOpStartBlueprintRunValidationMiddleware(stack *middleware.Stack) error {
@@ -5262,6 +6066,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAsset{}, middleware.After)
+}
+
 func addOpUpdateBlueprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBlueprint{}, middleware.After)
 }
@@ -5308,6 +6116,14 @@ func addOpUpdateDataQualityRulesetValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateDevEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDevEndpoint{}, middleware.After)
+}
+
+func addOpUpdateGlossaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGlossary{}, middleware.After)
+}
+
+func addOpUpdateGlossaryTermValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGlossaryTerm{}, middleware.After)
 }
 
 func addOpUpdateIntegrationResourcePropertyValidationMiddleware(stack *middleware.Stack) error {
@@ -5438,6 +6254,39 @@ func validateApplyMapping(v *types.ApplyMapping) error {
 	}
 	if v.Mapping == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Mapping"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetTypeFormReference(v *types.AssetTypeFormReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetTypeFormReference"}
+	if v.FormTypeIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormTypeIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetTypeFormsMap(v map[string]types.AssetTypeFormReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetTypeFormsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateAssetTypeFormReference(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7076,6 +7925,23 @@ func validateDataQualityResultFilterCriteria(v *types.DataQualityResultFilterCri
 	}
 }
 
+func validateDataQualityResultsV2FilterCriteria(v *types.DataQualityResultsV2FilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityResultsV2FilterCriteria"}
+	if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataQualityRuleRecommendationRunFilter(v *types.DataQualityRuleRecommendationRunFilter) error {
 	if v == nil {
 		return nil
@@ -7687,6 +8553,26 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
+func validateFilterConfiguration(v *types.FilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterConfiguration"}
+	if len(v.FilterMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterMode"))
+	}
+	if v.FilterStringConfiguration != nil {
+		if err := validateFilterStringConfiguration(v.FilterStringConfiguration); err != nil {
+			invalidParams.AddNested("FilterStringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterExpression(v *types.FilterExpression) error {
 	if v == nil {
 		return nil
@@ -7718,6 +8604,21 @@ func validateFilterExpressions(v []types.FilterExpression) error {
 		if err := validateFilterExpression(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterStringConfiguration(v *types.FilterStringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterStringConfiguration"}
+	if v.QueryParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryParameterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9647,6 +10548,111 @@ func validateS3ParquetSource(v *types.S3ParquetSource) error {
 	}
 }
 
+func validateSearchAttributeFilter(v *types.SearchAttributeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAttributeFilter"}
+	if v.Attribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilterClause(v types.SearchFilterClause) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilterClause"}
+	switch uv := v.(type) {
+	case *types.SearchFilterClauseMemberAndAllFilters:
+		if err := validateSearchFilterClauseList(uv.Value); err != nil {
+			invalidParams.AddNested("[AndAllFilters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SearchFilterClauseMemberAttributeFilter:
+		if err := validateSearchAttributeFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[AttributeFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SearchFilterClauseMemberMapFilter:
+		if err := validateSearchMapFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[MapFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SearchFilterClauseMemberOrAnyFilters:
+		if err := validateSearchFilterClauseList(uv.Value); err != nil {
+			invalidParams.AddNested("[OrAnyFilters]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilterClauseList(v []types.SearchFilterClause) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilterClauseList"}
+	for i := range v {
+		if err := validateSearchFilterClause(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchMapFilter(v *types.SearchMapFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchMapFilter"}
+	if v.Attribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchSort(v *types.SearchSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSort"}
+	if v.Attribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSegment(v *types.Segment) error {
 	if v == nil {
 		return nil
@@ -9760,6 +10766,11 @@ func validateSourceConfiguration(v *types.SourceConfiguration) error {
 	if v.PaginationConfiguration != nil {
 		if err := validatePaginationConfiguration(v.PaginationConfiguration); err != nil {
 			invalidParams.AddNested("PaginationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10305,6 +11316,24 @@ func validateUpdateXMLClassifierRequest(v *types.UpdateXMLClassifierRequest) err
 	}
 }
 
+func validateOpAssociateGlossaryTermsInput(v *AssociateGlossaryTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateGlossaryTermsInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.GlossaryTermIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlossaryTermIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchCreatePartitionInput(v *BatchCreatePartitionInput) error {
 	if v == nil {
 		return nil
@@ -10469,6 +11498,36 @@ func validateOpBatchGetDataQualityResultInput(v *BatchGetDataQualityResultInput)
 	}
 }
 
+func validateOpBatchGetDataQualityResultV2Input(v *BatchGetDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityResultV2Input"}
+	if v.ResultIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetDataQualityRulesetEvaluationRunInput(v *BatchGetDataQualityRulesetEvaluationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityRulesetEvaluationRunInput"}
+	if v.RunIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -10476,6 +11535,27 @@ func validateOpBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDevEndpointsInput"}
 	if v.DevEndpointNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DevEndpointNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetIterableFormsInput(v *BatchGetIterableFormsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetIterableFormsInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.IterableFormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IterableFormName"))
+	}
+	if v.ItemIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemIdentifiers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10923,6 +12003,39 @@ func validateOpCreateDevEndpointInput(v *CreateDevEndpointInput) error {
 	}
 }
 
+func validateOpCreateGlossaryInput(v *CreateGlossaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGlossaryInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGlossaryTermInput(v *CreateGlossaryTermInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGlossaryTermInput"}
+	if v.GlossaryIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlossaryIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGlueIdentityCenterConfigurationInput(v *CreateGlueIdentityCenterConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -11333,6 +12446,54 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	}
 }
 
+func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAssetTypeInput(v *DeleteAssetTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetTypeInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAttachmentInput(v *DeleteAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttachmentInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.AttachmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBlueprintInput(v *DeleteBlueprintInput) error {
 	if v == nil {
 		return nil
@@ -11538,6 +12699,51 @@ func validateOpDeleteDevEndpointInput(v *DeleteDevEndpointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDevEndpointInput"}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFormTypeInput(v *DeleteFormTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFormTypeInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteGlossaryInput(v *DeleteGlossaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlossaryInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteGlossaryTermInput(v *DeleteGlossaryTermInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlossaryTermInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11903,6 +13109,54 @@ func validateOpDescribeEntityInput(v *DescribeEntityInput) error {
 	}
 }
 
+func validateOpDisassociateGlossaryTermsInput(v *DisassociateGlossaryTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGlossaryTermsInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.GlossaryTermIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlossaryTermIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssetInput(v *GetAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssetTypeInput(v *GetAssetTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetTypeInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBlueprintInput(v *GetBlueprintInput) error {
 	if v == nil {
 		return nil
@@ -12203,6 +13457,21 @@ func validateOpGetDataQualityResultInput(v *GetDataQualityResultInput) error {
 	}
 }
 
+func validateOpGetDataQualityResultV2Input(v *GetDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityResultV2Input"}
+	if v.ResultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataQualityRuleRecommendationRunInput(v *GetDataQualityRuleRecommendationRunInput) error {
 	if v == nil {
 		return nil
@@ -12273,6 +13542,51 @@ func validateOpGetEntityRecordsInput(v *GetEntityRecordsInput) error {
 	}
 	if v.Limit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Limit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFormTypeInput(v *GetFormTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFormTypeInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGlossaryInput(v *GetGlossaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGlossaryInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGlossaryTermInput(v *GetGlossaryTermInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGlossaryTermInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12720,6 +14034,39 @@ func validateOpGetStatementInput(v *GetStatementInput) error {
 	}
 }
 
+func validateOpGetSystemLogsForJobRunInput(v *GetSystemLogsForJobRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForJobRunInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSystemLogsForSessionInput(v *GetSystemLogsForSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSystemLogsForSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableInput(v *GetTableInput) error {
 	if v == nil {
 		return nil
@@ -13069,6 +14416,23 @@ func validateOpListDataQualityResultsInput(v *ListDataQualityResultsInput) error
 	}
 }
 
+func validateOpListDataQualityResultsV2Input(v *ListDataQualityResultsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityResultsV2Input"}
+	if v.Filter != nil {
+		if err := validateDataQualityResultsV2FilterCriteria(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDataQualityRuleRecommendationRunsInput(v *ListDataQualityRuleRecommendationRunsInput) error {
 	if v == nil {
 		return nil
@@ -13112,6 +14476,39 @@ func validateOpListDataQualityRulesetsInput(v *ListDataQualityRulesetsInput) err
 		if err := validateDataQualityRulesetFilterCriteria(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListGlossaryTermsInput(v *ListGlossaryTermsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGlossaryTermsInput"}
+	if v.GlossaryIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlossaryIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIterableFormsInput(v *ListIterableFormsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIterableFormsInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.IterableFormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IterableFormName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13221,6 +14618,100 @@ func validateOpModifyIntegrationInput(v *ModifyIntegrationInput) error {
 	}
 }
 
+func validateOpPublishDataQualityResultV2Input(v *PublishDataQualityResultV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishDataQualityResultV2Input"}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	}
+	if v.Score == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Score"))
+	}
+	if v.RuleResults == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleResults"))
+	}
+	if v.EvaluationContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationContext"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAssetInput(v *PutAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAssetInput"}
+	if v.AssetTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetTypeId"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Forms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAssetTypeInput(v *PutAssetTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAssetTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Forms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
+	} else if v.Forms != nil {
+		if err := validateAssetTypeFormsMap(v.Forms); err != nil {
+			invalidParams.AddNested("Forms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAttachmentInput(v *PutAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAttachmentInput"}
+	if v.AssetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetIdentifier"))
+	}
+	if v.AttachmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentName"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.FormTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormTypeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryptionSettingsInput) error {
 	if v == nil {
 		return nil
@@ -13240,6 +14731,21 @@ func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryption
 	}
 }
 
+func validateOpPutDataCatalogExportConfigurationInput(v *PutDataCatalogExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataCatalogExportConfigurationInput"}
+	if len(v.ExportSetting) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportSetting"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDataQualityProfileAnnotationInput(v *PutDataQualityProfileAnnotationInput) error {
 	if v == nil {
 		return nil
@@ -13250,6 +14756,24 @@ func validateOpPutDataQualityProfileAnnotationInput(v *PutDataQualityProfileAnno
 	}
 	if len(v.InclusionAnnotation) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InclusionAnnotation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFormTypeInput(v *PutFormTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFormTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13427,6 +14951,28 @@ func validateOpRunStatementInput(v *RunStatementInput) error {
 	}
 	if v.Code == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchAssetsInput(v *SearchAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAssetsInput"}
+	if v.Sort != nil {
+		if err := validateSearchSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterClause != nil {
+		if err := validateSearchFilterClause(v.FilterClause); err != nil {
+			invalidParams.AddNested("FilterClause", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13897,6 +15443,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateAssetInput(v *UpdateAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateBlueprintInput(v *UpdateBlueprintInput) error {
 	if v == nil {
 		return nil
@@ -14141,6 +15702,36 @@ func validateOpUpdateDevEndpointInput(v *UpdateDevEndpointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDevEndpointInput"}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGlossaryInput(v *UpdateGlossaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlossaryInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGlossaryTermInput(v *UpdateGlossaryTermInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlossaryTermInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

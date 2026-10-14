@@ -8,6 +8,13 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var BatchDeleteInstrumentationConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteInstrumentationConfigurations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/batch-delete-instrumentation-configurations",
+	Code: 200})
+
 var BatchGetServiceLevelObjectiveBudgetReport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "BatchGetServiceLevelObjectiveBudgetReport",
@@ -20,6 +27,13 @@ var BatchUpdateExclusionWindows = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchUpdateExclusionWindows",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/exclusion-windows",
+	Code: 200})
+
+var CreateInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CreateInstrumentationConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/create-instrumentation-configuration",
 	Code: 200})
 
 var CreateServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
@@ -36,11 +50,32 @@ var DeleteGroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/grouping-configuration",
 	Code: 200})
 
+var DeleteInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DeleteInstrumentationConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/delete-instrumentation-configuration",
+	Code: 200})
+
 var DeleteServiceLevelObjective = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "DeleteServiceLevelObjective",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/slo/{Id}",
+	Code: 200})
+
+var GetInstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/get-instrumentation-configuration",
+	Code: 200})
+
+var GetInstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfigurationStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/get-instrumentation-configuration-status",
 	Code: 200})
 
 var GetService = smithy.NewSchema(smithy.ShapeID{
@@ -76,6 +111,13 @@ var ListGroupingAttributeDefinitions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListGroupingAttributeDefinitions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/grouping-attribute-definitions",
+	Code: 200})
+
+var ListInstrumentationConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ListInstrumentationConfigurations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/list-instrumentation-configurations",
 	Code: 200})
 
 var ListServiceDependencies = smithy.NewSchema(smithy.ShapeID{
@@ -141,6 +183,13 @@ var PutGroupingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/grouping-configuration",
 	Code: 200})
 
+var ReportInstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ReportInstrumentationConfigurationStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/report-instrumentation-configuration-status",
+	Code: 200})
+
 var StartDiscovery = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "StartDiscovery",
@@ -179,7 +228,8 @@ var ApplicationSignals = smithy.NewServiceSchema(_ApplicationSignals, "2024-04-1
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_Message *smithy.Schema
@@ -333,6 +383,80 @@ var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AwsAccountId",
 }, smithy.ShapeTypeString, 0)
 
+var BatchDeleteByResourceArns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteByResourceArns",
+}, smithy.ShapeTypeStructure, 2)
+var BatchDeleteByResourceArns_ResourceArns *smithy.Schema
+
+var BatchDeleteByResourceArns_InstrumentationType *smithy.Schema
+
+var BatchDeleteDeletionTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteDeletionTarget",
+}, smithy.ShapeTypeUnion, 2)
+var BatchDeleteDeletionTarget_Scope *smithy.Schema
+
+var BatchDeleteDeletionTarget_ResourceArns *smithy.Schema
+
+var BatchDeleteError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteError",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeleteError_ResourceArn *smithy.Schema
+
+var BatchDeleteError_Code *smithy.Schema
+
+var BatchDeleteError_Message *smithy.Schema
+
+var BatchDeleteErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteErrorCode",
+}, smithy.ShapeTypeEnum, 3)
+var BatchDeleteErrorCode_RESOURCE_NOT_FOUND *smithy.Schema
+
+var BatchDeleteErrorCode_ACCESS_DENIED *smithy.Schema
+
+var BatchDeleteErrorCode_INTERNAL_SERVICE_ERROR *smithy.Schema
+
+var _BatchDeleteErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteErrorList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeleteErrorList_member *smithy.Schema
+
+var _BatchDeleteResourceArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteResourceArnList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeleteResourceArnList_member *smithy.Schema
+
+var BatchDeleteScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteScope",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeleteScope_Service *smithy.Schema
+
+var BatchDeleteScope_Environment *smithy.Schema
+
+var BatchDeleteScope_InstrumentationType *smithy.Schema
+
+var BatchDeleteSuccessfulDeletion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteSuccessfulDeletion",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeleteSuccessfulDeletion_ResourceArn *smithy.Schema
+
+var BatchDeleteSuccessfulDeletion_SignalType *smithy.Schema
+
+var BatchDeleteSuccessfulDeletion_LocationHash *smithy.Schema
+
+var _BatchDeleteSuccessfulDeletionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteSuccessfulDeletionList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeleteSuccessfulDeletionList_member *smithy.Schema
+
 var BatchUpdateExclusionWindowsError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "BatchUpdateExclusionWindowsError",
@@ -397,6 +521,32 @@ var CanaryEntity = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CanaryEntity_CanaryName *smithy.Schema
 
+var CaptureConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CaptureConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var CaptureConfiguration_CodeCapture *smithy.Schema
+
+var CaptureLimitsConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CaptureLimitsConfig",
+}, smithy.ShapeTypeStructure, 8)
+var CaptureLimitsConfig_MaxHits *smithy.Schema
+
+var CaptureLimitsConfig_MaxStringLength *smithy.Schema
+
+var CaptureLimitsConfig_MaxCollectionWidth *smithy.Schema
+
+var CaptureLimitsConfig_MaxCollectionDepth *smithy.Schema
+
+var CaptureLimitsConfig_MaxStackFrames *smithy.Schema
+
+var CaptureLimitsConfig_MaxStackTraceSize *smithy.Schema
+
+var CaptureLimitsConfig_MaxObjectDepth *smithy.Schema
+
+var CaptureLimitsConfig_MaxFieldsPerObject *smithy.Schema
+
 var ChangeEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ChangeEvent",
@@ -431,6 +581,36 @@ var ChangeEventType_DEPLOYMENT *smithy.Schema
 
 var ChangeEventType_CONFIGURATION *smithy.Schema
 
+var CodeCaptureConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CodeCaptureConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var CodeCaptureConfiguration_CaptureArguments *smithy.Schema
+
+var CodeCaptureConfiguration_CaptureReturn *smithy.Schema
+
+var CodeCaptureConfiguration_CaptureStackTrace *smithy.Schema
+
+var CodeCaptureConfiguration_CaptureLocals *smithy.Schema
+
+var CodeCaptureConfiguration_CaptureLimits *smithy.Schema
+
+var CodeLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CodeLocation",
+}, smithy.ShapeTypeStructure, 6)
+var CodeLocation_Language *smithy.Schema
+
+var CodeLocation_CodeUnit *smithy.Schema
+
+var CodeLocation_ClassName *smithy.Schema
+
+var CodeLocation_MethodName *smithy.Schema
+
+var CodeLocation_FilePath *smithy.Schema
+
+var CodeLocation_LineNumber *smithy.Schema
+
 var CompositeSliComponent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "CompositeSliComponent",
@@ -454,7 +634,8 @@ var CompositeSliConfig_Components *smithy.Schema
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConnectionType = smithy.NewSchema(smithy.ShapeID{
@@ -532,6 +713,32 @@ var DurationUnit_HOUR *smithy.Schema
 var DurationUnit_DAY *smithy.Schema
 
 var DurationUnit_MONTH *smithy.Schema
+
+var _DynamicInstrumentationAttributeFilterGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DynamicInstrumentationAttributeFilterGroup",
+}, smithy.ShapeTypeMap, 2)
+var _DynamicInstrumentationAttributeFilterGroup_key *smithy.Schema
+
+var _DynamicInstrumentationAttributeFilterGroup_value *smithy.Schema
+
+var _DynamicInstrumentationAttributeFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DynamicInstrumentationAttributeFilters",
+}, smithy.ShapeTypeList, 1)
+var _DynamicInstrumentationAttributeFilters_member *smithy.Schema
+
+var DynamicInstrumentationDeletionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DynamicInstrumentationDeletionStatus",
+}, smithy.ShapeTypeEnum, 1)
+var DynamicInstrumentationDeletionStatus_DELETED *smithy.Schema
+
+var DynamicInstrumentationSignalType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DynamicInstrumentationSignalType",
+}, smithy.ShapeTypeEnum, 1)
+var DynamicInstrumentationSignalType_SNAPSHOT *smithy.Schema
 
 var Edge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -672,6 +879,141 @@ var _GroupValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GroupValue",
 }, smithy.ShapeTypeString, 0)
 
+var InstrumentationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfiguration",
+}, smithy.ShapeTypeStructure, 12)
+var InstrumentationConfiguration_InstrumentationType *smithy.Schema
+
+var InstrumentationConfiguration_Service *smithy.Schema
+
+var InstrumentationConfiguration_Environment *smithy.Schema
+
+var InstrumentationConfiguration_SignalType *smithy.Schema
+
+var InstrumentationConfiguration_Location *smithy.Schema
+
+var InstrumentationConfiguration_LocationHash *smithy.Schema
+
+var InstrumentationConfiguration_Description *smithy.Schema
+
+var InstrumentationConfiguration_ExpiresAt *smithy.Schema
+
+var InstrumentationConfiguration_AttributeFilters *smithy.Schema
+
+var InstrumentationConfiguration_CaptureConfiguration *smithy.Schema
+
+var InstrumentationConfiguration_CreatedAt *smithy.Schema
+
+var InstrumentationConfiguration_ARN *smithy.Schema
+
+var _InstrumentationConfigurationArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationArn",
+}, smithy.ShapeTypeString, 0)
+
+var InstrumentationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationStatus",
+}, smithy.ShapeTypeEnum, 4)
+var InstrumentationConfigurationStatus_READY *smithy.Schema
+
+var InstrumentationConfigurationStatus_ERROR *smithy.Schema
+
+var InstrumentationConfigurationStatus_ACTIVE *smithy.Schema
+
+var InstrumentationConfigurationStatus_DISABLED *smithy.Schema
+
+var _InstrumentationConfigurationStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationStatusList",
+}, smithy.ShapeTypeList, 1)
+var _InstrumentationConfigurationStatusList_member *smithy.Schema
+
+var InstrumentationConfigurationStatusReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationStatusReport",
+}, smithy.ShapeTypeStructure, 6)
+var InstrumentationConfigurationStatusReport_InstrumentationType *smithy.Schema
+
+var InstrumentationConfigurationStatusReport_SignalType *smithy.Schema
+
+var InstrumentationConfigurationStatusReport_LocationHash *smithy.Schema
+
+var InstrumentationConfigurationStatusReport_Status *smithy.Schema
+
+var InstrumentationConfigurationStatusReport_Time *smithy.Schema
+
+var InstrumentationConfigurationStatusReport_ErrorCause *smithy.Schema
+
+var _InstrumentationConfigurationsWithoutServiceEnv = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationsWithoutServiceEnv",
+}, smithy.ShapeTypeList, 1)
+var _InstrumentationConfigurationsWithoutServiceEnv_member *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationWithoutServiceEnv",
+}, smithy.ShapeTypeStructure, 10)
+var InstrumentationConfigurationWithoutServiceEnv_InstrumentationType *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_SignalType *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_Location *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_LocationHash *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_Description *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_ExpiresAt *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_AttributeFilters *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_CreatedAt *smithy.Schema
+
+var InstrumentationConfigurationWithoutServiceEnv_ARN *smithy.Schema
+
+var InstrumentationErrorCause = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationErrorCause",
+}, smithy.ShapeTypeEnum, 6)
+var InstrumentationErrorCause_FILE_NOT_FOUND *smithy.Schema
+
+var InstrumentationErrorCause_METHOD_NOT_FOUND *smithy.Schema
+
+var InstrumentationErrorCause_LINE_NOT_EXECUTABLE *smithy.Schema
+
+var InstrumentationErrorCause_OVERLOADED_METHODS *smithy.Schema
+
+var InstrumentationErrorCause_LANGUAGE_MISMATCH *smithy.Schema
+
+var InstrumentationErrorCause_RUNTIME_ERROR *smithy.Schema
+
+var InstrumentationStatusEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationStatusEvent",
+}, smithy.ShapeTypeStructure, 2)
+var InstrumentationStatusEvent_Time *smithy.Schema
+
+var InstrumentationStatusEvent_ErrorCause *smithy.Schema
+
+var _InstrumentationStatusEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationStatusEventList",
+}, smithy.ShapeTypeList, 1)
+var _InstrumentationStatusEventList_member *smithy.Schema
+
+var InstrumentationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationType",
+}, smithy.ShapeTypeEnum, 2)
+var InstrumentationType_BREAKPOINT *smithy.Schema
+
+var InstrumentationType_PROBE *smithy.Schema
+
 var Interval = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "Interval",
@@ -740,6 +1082,20 @@ var _ListServiceStatesMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ListServiceStatesMaxResults",
 }, smithy.ShapeTypeInteger, 0)
+
+var Location = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "Location",
+}, smithy.ShapeTypeUnion, 1)
+var Location_CodeLocation *smithy.Schema
+
+var LocationIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "LocationIdentifier",
+}, smithy.ShapeTypeUnion, 2)
+var LocationIdentifier_CodeLocation *smithy.Schema
+
+var LocationIdentifier_LocationHash *smithy.Schema
 
 var _LogGroupReferences = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -930,6 +1286,16 @@ var _Period = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Period",
 }, smithy.ShapeTypeInteger, 0)
 
+var ProgrammingLanguage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ProgrammingLanguage",
+}, smithy.ShapeTypeEnum, 3)
+var ProgrammingLanguage_JAVA *smithy.Schema
+
+var ProgrammingLanguage_PYTHON *smithy.Schema
+
+var ProgrammingLanguage_JAVASCRIPT *smithy.Schema
+
 var RecurrenceRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "RecurrenceRule",
@@ -1006,7 +1372,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_ResourceType *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -1429,7 +1796,8 @@ var _ServiceOperations_member *smithy.Schema
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceState = smithy.NewSchema(smithy.ShapeID{
@@ -1548,6 +1916,12 @@ var _Stat = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Stat",
 }, smithy.ShapeTypeString, 0)
 
+var _StringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "StringList",
+}, smithy.ShapeTypeList, 1)
+var _StringList_member *smithy.Schema
+
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "Tag",
@@ -1581,7 +1955,8 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var _TotalBudgetRequests = smithy.NewSchema(smithy.ShapeID{
@@ -1594,10 +1969,43 @@ var _TotalBudgetSeconds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TotalBudgetSeconds",
 }, smithy.ShapeTypeInteger, 0)
 
+var UnprocessedStatusEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "UnprocessedStatusEvent",
+}, smithy.ShapeTypeStructure, 6)
+var UnprocessedStatusEvent_InstrumentationType *smithy.Schema
+
+var UnprocessedStatusEvent_SignalType *smithy.Schema
+
+var UnprocessedStatusEvent_LocationHash *smithy.Schema
+
+var UnprocessedStatusEvent_Status *smithy.Schema
+
+var UnprocessedStatusEvent_Time *smithy.Schema
+
+var UnprocessedStatusEvent_FailedReason *smithy.Schema
+
+var UnprocessedStatusEventFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "UnprocessedStatusEventFailureReason",
+}, smithy.ShapeTypeEnum, 3)
+var UnprocessedStatusEventFailureReason_THROTTLED *smithy.Schema
+
+var UnprocessedStatusEventFailureReason_INTERNAL_ERROR *smithy.Schema
+
+var UnprocessedStatusEventFailureReason_VALIDATION_ERROR *smithy.Schema
+
+var _UnprocessedStatusEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "UnprocessedStatusEventList",
+}, smithy.ShapeTypeList, 1)
+var _UnprocessedStatusEventList_member *smithy.Schema
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "ValidationError",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema
@@ -1619,6 +2027,22 @@ var Window = smithy.NewSchema(smithy.ShapeID{
 var Window_DurationUnit *smithy.Schema
 
 var Window_Duration *smithy.Schema
+
+var BatchDeleteInstrumentationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteInstrumentationConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget *smithy.Schema
+
+var BatchDeleteInstrumentationConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "BatchDeleteInstrumentationConfigurationsResponse",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeleteInstrumentationConfigurationsResponse_DeletedCount *smithy.Schema
+
+var BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions *smithy.Schema
+
+var BatchDeleteInstrumentationConfigurationsResponse_Errors *smithy.Schema
 
 var BatchGetServiceLevelObjectiveBudgetReportInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -1656,6 +2080,58 @@ var BatchUpdateExclusionWindowsOutput_SloIds *smithy.Schema
 
 var BatchUpdateExclusionWindowsOutput_Errors *smithy.Schema
 
+var CreateInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CreateInstrumentationConfigurationRequest",
+}, smithy.ShapeTypeStructure, 10)
+var CreateInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_Service *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_Environment *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_SignalType *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_Location *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_Description *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_ExpiresAt *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_AttributeFilters *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_CaptureConfiguration *smithy.Schema
+
+var CreateInstrumentationConfigurationRequest_Tags *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "CreateInstrumentationConfigurationResponse",
+}, smithy.ShapeTypeStructure, 12)
+var CreateInstrumentationConfigurationResponse_InstrumentationType *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_Service *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_Environment *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_SignalType *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_Location *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_LocationHash *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_Description *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_ExpiresAt *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_AttributeFilters *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_CaptureConfiguration *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_CreatedAt *smithy.Schema
+
+var CreateInstrumentationConfigurationResponse_ARN *smithy.Schema
+
 var CreateServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "CreateServiceLevelObjectiveInput",
@@ -1689,6 +2165,26 @@ var DeleteGroupingConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteGroupingConfigurationOutput",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DeleteInstrumentationConfigurationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var DeleteInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
+
+var DeleteInstrumentationConfigurationRequest_Service *smithy.Schema
+
+var DeleteInstrumentationConfigurationRequest_Environment *smithy.Schema
+
+var DeleteInstrumentationConfigurationRequest_SignalType *smithy.Schema
+
+var DeleteInstrumentationConfigurationRequest_LocationIdentifier *smithy.Schema
+
+var DeleteInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "DeleteInstrumentationConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteInstrumentationConfigurationResponse_DeletionStatus *smithy.Schema
+
 var DeleteServiceLevelObjectiveInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "DeleteServiceLevelObjectiveInput",
@@ -1699,6 +2195,68 @@ var DeleteServiceLevelObjectiveOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
 	Name:      "DeleteServiceLevelObjectiveOutput",
 }, smithy.ShapeTypeStructure, 0)
+
+var GetInstrumentationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfigurationRequest",
+}, smithy.ShapeTypeStructure, 5)
+var GetInstrumentationConfigurationRequest_InstrumentationType *smithy.Schema
+
+var GetInstrumentationConfigurationRequest_Service *smithy.Schema
+
+var GetInstrumentationConfigurationRequest_Environment *smithy.Schema
+
+var GetInstrumentationConfigurationRequest_SignalType *smithy.Schema
+
+var GetInstrumentationConfigurationRequest_LocationIdentifier *smithy.Schema
+
+var GetInstrumentationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetInstrumentationConfigurationResponse_Configuration *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfigurationStatusRequest",
+}, smithy.ShapeTypeStructure, 10)
+var GetInstrumentationConfigurationStatusRequest_InstrumentationType *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_Service *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_Environment *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_SignalType *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_LocationIdentifier *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_Status *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_StartTime *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_EndTime *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_MaxResults *smithy.Schema
+
+var GetInstrumentationConfigurationStatusRequest_NextToken *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "GetInstrumentationConfigurationStatusResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetInstrumentationConfigurationStatusResponse_Service *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_Environment *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_SignalType *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_Location *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_Status *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_Events *smithy.Schema
+
+var GetInstrumentationConfigurationStatusResponse_NextToken *smithy.Schema
 
 var GetServiceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -1809,6 +2367,40 @@ var ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions *smithy.
 var ListGroupingAttributeDefinitionsOutput_UpdatedAt *smithy.Schema
 
 var ListGroupingAttributeDefinitionsOutput_NextToken *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ListInstrumentationConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListInstrumentationConfigurationsRequest_Service *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest_Environment *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest_InstrumentationType *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest_SyncedAt *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest_MaxResults *smithy.Schema
+
+var ListInstrumentationConfigurationsRequest_NextToken *smithy.Schema
+
+var InstrumentationConfigurationsPage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "InstrumentationConfigurationsPage",
+}, smithy.ShapeTypeStructure, 7)
+var InstrumentationConfigurationsPage_Service *smithy.Schema
+
+var InstrumentationConfigurationsPage_Environment *smithy.Schema
+
+var InstrumentationConfigurationsPage_Changed *smithy.Schema
+
+var InstrumentationConfigurationsPage_LatestConfigurations *smithy.Schema
+
+var InstrumentationConfigurationsPage_SyncedAt *smithy.Schema
+
+var InstrumentationConfigurationsPage_SyncInterval *smithy.Schema
+
+var InstrumentationConfigurationsPage_NextToken *smithy.Schema
 
 var ListServiceDependenciesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -2017,6 +2609,26 @@ var PutGroupingConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutGroupingConfigurationOutput",
 }, smithy.ShapeTypeStructure, 1)
 var PutGroupingConfigurationOutput_GroupingConfiguration *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ReportInstrumentationConfigurationStatusRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ReportInstrumentationConfigurationStatusRequest_Service *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusRequest_Environment *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusRequest_Configurations *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.applicationsignals",
+	Name:      "ReportInstrumentationConfigurationStatusResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ReportInstrumentationConfigurationStatusResponse_Service *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusResponse_Environment *smithy.Schema
+
+var ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents *smithy.Schema
 
 var StartDiscoveryInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.applicationsignals",
@@ -2305,6 +2917,48 @@ func init() {
 
 	_AuditTargets_member = _AuditTargets.AddMember("member", AuditTarget)
 
+	_BatchDeleteResourceArnList_member = _BatchDeleteResourceArnList.AddMember("member", smithyprelude.String)
+
+	InstrumentationType_BREAKPOINT = InstrumentationType.AddMember("BREAKPOINT", smithyprelude.Unit)
+
+	InstrumentationType_PROBE = InstrumentationType.AddMember("PROBE", smithyprelude.Unit)
+
+	BatchDeleteByResourceArns_ResourceArns = BatchDeleteByResourceArns.AddMember("ResourceArns", _BatchDeleteResourceArnList)
+
+	BatchDeleteByResourceArns_InstrumentationType = BatchDeleteByResourceArns.AddMember("InstrumentationType", InstrumentationType)
+
+	BatchDeleteScope_Service = BatchDeleteScope.AddMember("Service", smithyprelude.String)
+
+	BatchDeleteScope_Environment = BatchDeleteScope.AddMember("Environment", smithyprelude.String)
+
+	BatchDeleteScope_InstrumentationType = BatchDeleteScope.AddMember("InstrumentationType", InstrumentationType)
+
+	BatchDeleteDeletionTarget_Scope = BatchDeleteDeletionTarget.AddMember("Scope", BatchDeleteScope)
+
+	BatchDeleteDeletionTarget_ResourceArns = BatchDeleteDeletionTarget.AddMember("ResourceArns", BatchDeleteByResourceArns)
+
+	BatchDeleteErrorCode_RESOURCE_NOT_FOUND = BatchDeleteErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
+
+	BatchDeleteErrorCode_ACCESS_DENIED = BatchDeleteErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	BatchDeleteErrorCode_INTERNAL_SERVICE_ERROR = BatchDeleteErrorCode.AddMember("INTERNAL_SERVICE_ERROR", smithyprelude.Unit)
+
+	BatchDeleteError_ResourceArn = BatchDeleteError.AddMember("ResourceArn", smithyprelude.String)
+
+	BatchDeleteError_Code = BatchDeleteError.AddMember("Code", BatchDeleteErrorCode)
+
+	BatchDeleteError_Message = BatchDeleteError.AddMember("Message", smithyprelude.String)
+
+	_BatchDeleteErrorList_member = _BatchDeleteErrorList.AddMember("member", BatchDeleteError)
+
+	BatchDeleteSuccessfulDeletion_ResourceArn = BatchDeleteSuccessfulDeletion.AddMember("ResourceArn", smithyprelude.String)
+
+	BatchDeleteSuccessfulDeletion_SignalType = BatchDeleteSuccessfulDeletion.AddMember("SignalType", smithyprelude.String)
+
+	BatchDeleteSuccessfulDeletion_LocationHash = BatchDeleteSuccessfulDeletion.AddMember("LocationHash", smithyprelude.String)
+
+	_BatchDeleteSuccessfulDeletionList_member = _BatchDeleteSuccessfulDeletionList.AddMember("member", BatchDeleteSuccessfulDeletion)
+
 	BatchUpdateExclusionWindowsError_SloId = BatchUpdateExclusionWindowsError.AddMember("SloId", _ServiceLevelObjectiveId)
 
 	BatchUpdateExclusionWindowsError_ErrorCode = BatchUpdateExclusionWindowsError.AddMember("ErrorCode", _ExclusionWindowErrorCode)
@@ -2331,6 +2985,36 @@ func init() {
 
 	CalendarInterval_Duration = CalendarInterval.AddMember("Duration", _CalendarIntervalDuration)
 
+	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
+
+	CaptureLimitsConfig_MaxHits = CaptureLimitsConfig.AddMember("MaxHits", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxStringLength = CaptureLimitsConfig.AddMember("MaxStringLength", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxCollectionWidth = CaptureLimitsConfig.AddMember("MaxCollectionWidth", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxCollectionDepth = CaptureLimitsConfig.AddMember("MaxCollectionDepth", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxStackFrames = CaptureLimitsConfig.AddMember("MaxStackFrames", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxStackTraceSize = CaptureLimitsConfig.AddMember("MaxStackTraceSize", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxObjectDepth = CaptureLimitsConfig.AddMember("MaxObjectDepth", smithyprelude.Integer)
+
+	CaptureLimitsConfig_MaxFieldsPerObject = CaptureLimitsConfig.AddMember("MaxFieldsPerObject", smithyprelude.Integer)
+
+	CodeCaptureConfiguration_CaptureArguments = CodeCaptureConfiguration.AddMember("CaptureArguments", _StringList)
+
+	CodeCaptureConfiguration_CaptureReturn = CodeCaptureConfiguration.AddMember("CaptureReturn", smithyprelude.Boolean)
+
+	CodeCaptureConfiguration_CaptureStackTrace = CodeCaptureConfiguration.AddMember("CaptureStackTrace", smithyprelude.Boolean)
+
+	CodeCaptureConfiguration_CaptureLocals = CodeCaptureConfiguration.AddMember("CaptureLocals", _StringList)
+
+	CodeCaptureConfiguration_CaptureLimits = CodeCaptureConfiguration.AddMember("CaptureLimits", CaptureLimitsConfig)
+
+	CaptureConfiguration_CodeCapture = CaptureConfiguration.AddMember("CodeCapture", CodeCaptureConfiguration)
+
 	ChangeEventType_DEPLOYMENT = ChangeEventType.AddMember("DEPLOYMENT", smithyprelude.Unit)
 
 	ChangeEventType_CONFIGURATION = ChangeEventType.AddMember("CONFIGURATION", smithyprelude.Unit)
@@ -2352,6 +3036,24 @@ func init() {
 	ChangeEvent_EventName = ChangeEvent.AddMember("EventName", smithyprelude.String)
 
 	_ChangeEvents_member = _ChangeEvents.AddMember("member", ChangeEvent)
+
+	ProgrammingLanguage_JAVA = ProgrammingLanguage.AddMember("JAVA", smithyprelude.Unit)
+
+	ProgrammingLanguage_PYTHON = ProgrammingLanguage.AddMember("PYTHON", smithyprelude.Unit)
+
+	ProgrammingLanguage_JAVASCRIPT = ProgrammingLanguage.AddMember("JAVASCRIPT", smithyprelude.Unit)
+
+	CodeLocation_Language = CodeLocation.AddMember("Language", ProgrammingLanguage)
+
+	CodeLocation_CodeUnit = CodeLocation.AddMember("CodeUnit", smithyprelude.String)
+
+	CodeLocation_ClassName = CodeLocation.AddMember("ClassName", smithyprelude.String)
+
+	CodeLocation_MethodName = CodeLocation.AddMember("MethodName", smithyprelude.String)
+
+	CodeLocation_FilePath = CodeLocation.AddMember("FilePath", smithyprelude.String)
+
+	CodeLocation_LineNumber = CodeLocation.AddMember("LineNumber", smithyprelude.Integer)
 
 	CompositeSliComponent_OperationName = CompositeSliComponent.AddMember("OperationName", _OperationName)
 
@@ -2380,6 +3082,16 @@ func init() {
 	DetailLevel_BRIEF = DetailLevel.AddMember("BRIEF", smithyprelude.Unit)
 
 	DetailLevel_DETAILED = DetailLevel.AddMember("DETAILED", smithyprelude.Unit)
+
+	_DynamicInstrumentationAttributeFilterGroup_key = _DynamicInstrumentationAttributeFilterGroup.AddMember("key", smithyprelude.String)
+
+	_DynamicInstrumentationAttributeFilterGroup_value = _DynamicInstrumentationAttributeFilterGroup.AddMember("value", smithyprelude.String)
+
+	_DynamicInstrumentationAttributeFilters_member = _DynamicInstrumentationAttributeFilters.AddMember("member", _DynamicInstrumentationAttributeFilterGroup)
+
+	DynamicInstrumentationDeletionStatus_DELETED = DynamicInstrumentationDeletionStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	DynamicInstrumentationSignalType_SNAPSHOT = DynamicInstrumentationSignalType.AddMember("SNAPSHOT", smithyprelude.Unit)
 
 	EvaluationType_PERIOD_BASED = EvaluationType.AddMember("PERIOD_BASED", smithyprelude.Unit)
 
@@ -2429,7 +3141,99 @@ func init() {
 
 	GroupingConfiguration_UpdatedAt = GroupingConfiguration.AddMember("UpdatedAt", smithyprelude.Timestamp)
 
+	Location_CodeLocation = Location.AddMember("CodeLocation", CodeLocation)
+
+	InstrumentationConfiguration_InstrumentationType = InstrumentationConfiguration.AddMember("InstrumentationType", InstrumentationType)
+
+	InstrumentationConfiguration_Service = InstrumentationConfiguration.AddMember("Service", smithyprelude.String)
+
+	InstrumentationConfiguration_Environment = InstrumentationConfiguration.AddMember("Environment", smithyprelude.String)
+
+	InstrumentationConfiguration_SignalType = InstrumentationConfiguration.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	InstrumentationConfiguration_Location = InstrumentationConfiguration.AddMember("Location", Location)
+
+	InstrumentationConfiguration_LocationHash = InstrumentationConfiguration.AddMember("LocationHash", smithyprelude.String)
+
+	InstrumentationConfiguration_Description = InstrumentationConfiguration.AddMember("Description", smithyprelude.String)
+
+	InstrumentationConfiguration_ExpiresAt = InstrumentationConfiguration.AddMember("ExpiresAt", smithyprelude.Timestamp)
+
+	InstrumentationConfiguration_AttributeFilters = InstrumentationConfiguration.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
+
+	InstrumentationConfiguration_CaptureConfiguration = InstrumentationConfiguration.AddMember("CaptureConfiguration", CaptureConfiguration)
+
+	InstrumentationConfiguration_CreatedAt = InstrumentationConfiguration.AddMember("CreatedAt", smithyprelude.Timestamp)
+
+	InstrumentationConfiguration_ARN = InstrumentationConfiguration.AddMember("ARN", _InstrumentationConfigurationArn)
+
+	InstrumentationConfigurationStatus_READY = InstrumentationConfigurationStatus.AddMember("READY", smithyprelude.Unit)
+
+	InstrumentationConfigurationStatus_ERROR = InstrumentationConfigurationStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	InstrumentationConfigurationStatus_ACTIVE = InstrumentationConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	InstrumentationConfigurationStatus_DISABLED = InstrumentationConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	InstrumentationErrorCause_FILE_NOT_FOUND = InstrumentationErrorCause.AddMember("FILE_NOT_FOUND", smithyprelude.Unit)
+
+	InstrumentationErrorCause_METHOD_NOT_FOUND = InstrumentationErrorCause.AddMember("METHOD_NOT_FOUND", smithyprelude.Unit)
+
+	InstrumentationErrorCause_LINE_NOT_EXECUTABLE = InstrumentationErrorCause.AddMember("LINE_NOT_EXECUTABLE", smithyprelude.Unit)
+
+	InstrumentationErrorCause_OVERLOADED_METHODS = InstrumentationErrorCause.AddMember("OVERLOADED_METHODS", smithyprelude.Unit)
+
+	InstrumentationErrorCause_LANGUAGE_MISMATCH = InstrumentationErrorCause.AddMember("LANGUAGE_MISMATCH", smithyprelude.Unit)
+
+	InstrumentationErrorCause_RUNTIME_ERROR = InstrumentationErrorCause.AddMember("RUNTIME_ERROR", smithyprelude.Unit)
+
+	InstrumentationConfigurationStatusReport_InstrumentationType = InstrumentationConfigurationStatusReport.AddMember("InstrumentationType", InstrumentationType)
+
+	InstrumentationConfigurationStatusReport_SignalType = InstrumentationConfigurationStatusReport.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	InstrumentationConfigurationStatusReport_LocationHash = InstrumentationConfigurationStatusReport.AddMember("LocationHash", smithyprelude.String)
+
+	InstrumentationConfigurationStatusReport_Status = InstrumentationConfigurationStatusReport.AddMember("Status", InstrumentationConfigurationStatus)
+
+	InstrumentationConfigurationStatusReport_Time = InstrumentationConfigurationStatusReport.AddMember("Time", smithyprelude.Timestamp)
+
+	InstrumentationConfigurationStatusReport_ErrorCause = InstrumentationConfigurationStatusReport.AddMember("ErrorCause", InstrumentationErrorCause)
+
+	_InstrumentationConfigurationStatusList_member = _InstrumentationConfigurationStatusList.AddMember("member", InstrumentationConfigurationStatusReport)
+
+	InstrumentationConfigurationWithoutServiceEnv_InstrumentationType = InstrumentationConfigurationWithoutServiceEnv.AddMember("InstrumentationType", InstrumentationType)
+
+	InstrumentationConfigurationWithoutServiceEnv_SignalType = InstrumentationConfigurationWithoutServiceEnv.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	InstrumentationConfigurationWithoutServiceEnv_Location = InstrumentationConfigurationWithoutServiceEnv.AddMember("Location", Location)
+
+	InstrumentationConfigurationWithoutServiceEnv_LocationHash = InstrumentationConfigurationWithoutServiceEnv.AddMember("LocationHash", smithyprelude.String)
+
+	InstrumentationConfigurationWithoutServiceEnv_Description = InstrumentationConfigurationWithoutServiceEnv.AddMember("Description", smithyprelude.String)
+
+	InstrumentationConfigurationWithoutServiceEnv_ExpiresAt = InstrumentationConfigurationWithoutServiceEnv.AddMember("ExpiresAt", smithyprelude.Timestamp)
+
+	InstrumentationConfigurationWithoutServiceEnv_AttributeFilters = InstrumentationConfigurationWithoutServiceEnv.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
+
+	InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration = InstrumentationConfigurationWithoutServiceEnv.AddMember("CaptureConfiguration", CaptureConfiguration)
+
+	InstrumentationConfigurationWithoutServiceEnv_CreatedAt = InstrumentationConfigurationWithoutServiceEnv.AddMember("CreatedAt", smithyprelude.Timestamp)
+
+	InstrumentationConfigurationWithoutServiceEnv_ARN = InstrumentationConfigurationWithoutServiceEnv.AddMember("ARN", _InstrumentationConfigurationArn)
+
+	_InstrumentationConfigurationsWithoutServiceEnv_member = _InstrumentationConfigurationsWithoutServiceEnv.AddMember("member", InstrumentationConfigurationWithoutServiceEnv)
+
+	InstrumentationStatusEvent_Time = InstrumentationStatusEvent.AddMember("Time", smithyprelude.Timestamp)
+
+	InstrumentationStatusEvent_ErrorCause = InstrumentationStatusEvent.AddMember("ErrorCause", InstrumentationErrorCause)
+
+	_InstrumentationStatusEventList_member = _InstrumentationStatusEventList.AddMember("member", InstrumentationStatusEvent)
+
 	_LatestChangeEvents_member = _LatestChangeEvents.AddMember("member", ChangeEvent)
+
+	LocationIdentifier_CodeLocation = LocationIdentifier.AddMember("CodeLocation", CodeLocation)
+
+	LocationIdentifier_LocationHash = LocationIdentifier.AddMember("LocationHash", smithyprelude.String)
 
 	_LogGroupReferences_member = _LogGroupReferences.AddMember("member", _Attributes)
 
@@ -2745,7 +3549,35 @@ func init() {
 
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
 
+	UnprocessedStatusEventFailureReason_THROTTLED = UnprocessedStatusEventFailureReason.AddMember("THROTTLED", smithyprelude.Unit)
+
+	UnprocessedStatusEventFailureReason_INTERNAL_ERROR = UnprocessedStatusEventFailureReason.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	UnprocessedStatusEventFailureReason_VALIDATION_ERROR = UnprocessedStatusEventFailureReason.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
+
+	UnprocessedStatusEvent_InstrumentationType = UnprocessedStatusEvent.AddMember("InstrumentationType", InstrumentationType)
+
+	UnprocessedStatusEvent_SignalType = UnprocessedStatusEvent.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	UnprocessedStatusEvent_LocationHash = UnprocessedStatusEvent.AddMember("LocationHash", smithyprelude.String)
+
+	UnprocessedStatusEvent_Status = UnprocessedStatusEvent.AddMember("Status", InstrumentationConfigurationStatus)
+
+	UnprocessedStatusEvent_Time = UnprocessedStatusEvent.AddMember("Time", smithyprelude.Timestamp)
+
+	UnprocessedStatusEvent_FailedReason = UnprocessedStatusEvent.AddMember("FailedReason", UnprocessedStatusEventFailureReason)
+
+	_UnprocessedStatusEventList_member = _UnprocessedStatusEventList.AddMember("member", UnprocessedStatusEvent)
+
 	ValidationException_message = ValidationException.AddMember("message", _ValidationExceptionMessage)
+
+	BatchDeleteInstrumentationConfigurationsRequest_DeletionTarget = BatchDeleteInstrumentationConfigurationsRequest.AddMember("DeletionTarget", BatchDeleteDeletionTarget)
+
+	BatchDeleteInstrumentationConfigurationsResponse_DeletedCount = BatchDeleteInstrumentationConfigurationsResponse.AddMember("DeletedCount", smithyprelude.Integer)
+
+	BatchDeleteInstrumentationConfigurationsResponse_SuccessfulDeletions = BatchDeleteInstrumentationConfigurationsResponse.AddMember("SuccessfulDeletions", _BatchDeleteSuccessfulDeletionList)
+
+	BatchDeleteInstrumentationConfigurationsResponse_Errors = BatchDeleteInstrumentationConfigurationsResponse.AddMember("Errors", _BatchDeleteErrorList)
 
 	BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp = BatchGetServiceLevelObjectiveBudgetReportInput.AddMember("Timestamp", smithyprelude.Timestamp)
 
@@ -2767,6 +3599,50 @@ func init() {
 
 	BatchUpdateExclusionWindowsOutput_Errors = BatchUpdateExclusionWindowsOutput.AddMember("Errors", _BatchUpdateExclusionWindowsErrors)
 
+	CreateInstrumentationConfigurationRequest_InstrumentationType = CreateInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
+
+	CreateInstrumentationConfigurationRequest_Service = CreateInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
+
+	CreateInstrumentationConfigurationRequest_Environment = CreateInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
+
+	CreateInstrumentationConfigurationRequest_SignalType = CreateInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	CreateInstrumentationConfigurationRequest_Location = CreateInstrumentationConfigurationRequest.AddMember("Location", Location)
+
+	CreateInstrumentationConfigurationRequest_Description = CreateInstrumentationConfigurationRequest.AddMember("Description", smithyprelude.String)
+
+	CreateInstrumentationConfigurationRequest_ExpiresAt = CreateInstrumentationConfigurationRequest.AddMember("ExpiresAt", smithyprelude.Timestamp)
+
+	CreateInstrumentationConfigurationRequest_AttributeFilters = CreateInstrumentationConfigurationRequest.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
+
+	CreateInstrumentationConfigurationRequest_CaptureConfiguration = CreateInstrumentationConfigurationRequest.AddMember("CaptureConfiguration", CaptureConfiguration)
+
+	CreateInstrumentationConfigurationRequest_Tags = CreateInstrumentationConfigurationRequest.AddMember("Tags", _TagList)
+
+	CreateInstrumentationConfigurationResponse_InstrumentationType = CreateInstrumentationConfigurationResponse.AddMember("InstrumentationType", InstrumentationType)
+
+	CreateInstrumentationConfigurationResponse_Service = CreateInstrumentationConfigurationResponse.AddMember("Service", smithyprelude.String)
+
+	CreateInstrumentationConfigurationResponse_Environment = CreateInstrumentationConfigurationResponse.AddMember("Environment", smithyprelude.String)
+
+	CreateInstrumentationConfigurationResponse_SignalType = CreateInstrumentationConfigurationResponse.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	CreateInstrumentationConfigurationResponse_Location = CreateInstrumentationConfigurationResponse.AddMember("Location", Location)
+
+	CreateInstrumentationConfigurationResponse_LocationHash = CreateInstrumentationConfigurationResponse.AddMember("LocationHash", smithyprelude.String)
+
+	CreateInstrumentationConfigurationResponse_Description = CreateInstrumentationConfigurationResponse.AddMember("Description", smithyprelude.String)
+
+	CreateInstrumentationConfigurationResponse_ExpiresAt = CreateInstrumentationConfigurationResponse.AddMember("ExpiresAt", smithyprelude.Timestamp)
+
+	CreateInstrumentationConfigurationResponse_AttributeFilters = CreateInstrumentationConfigurationResponse.AddMember("AttributeFilters", _DynamicInstrumentationAttributeFilters)
+
+	CreateInstrumentationConfigurationResponse_CaptureConfiguration = CreateInstrumentationConfigurationResponse.AddMember("CaptureConfiguration", CaptureConfiguration)
+
+	CreateInstrumentationConfigurationResponse_CreatedAt = CreateInstrumentationConfigurationResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
+
+	CreateInstrumentationConfigurationResponse_ARN = CreateInstrumentationConfigurationResponse.AddMember("ARN", _InstrumentationConfigurationArn)
+
 	CreateServiceLevelObjectiveInput_Name = CreateServiceLevelObjectiveInput.AddMember("Name", _ServiceLevelObjectiveName)
 
 	CreateServiceLevelObjectiveInput_Description = CreateServiceLevelObjectiveInput.AddMember("Description", _ServiceLevelObjectiveDescription)
@@ -2787,7 +3663,65 @@ func init() {
 
 	CreateServiceLevelObjectiveOutput_Slo = CreateServiceLevelObjectiveOutput.AddMember("Slo", ServiceLevelObjective)
 
+	DeleteInstrumentationConfigurationRequest_InstrumentationType = DeleteInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
+
+	DeleteInstrumentationConfigurationRequest_Service = DeleteInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
+
+	DeleteInstrumentationConfigurationRequest_Environment = DeleteInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
+
+	DeleteInstrumentationConfigurationRequest_SignalType = DeleteInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	DeleteInstrumentationConfigurationRequest_LocationIdentifier = DeleteInstrumentationConfigurationRequest.AddMember("LocationIdentifier", LocationIdentifier)
+
+	DeleteInstrumentationConfigurationResponse_DeletionStatus = DeleteInstrumentationConfigurationResponse.AddMember("DeletionStatus", DynamicInstrumentationDeletionStatus)
+
 	DeleteServiceLevelObjectiveInput_Id = DeleteServiceLevelObjectiveInput.AddMember("Id", _ServiceLevelObjectiveId, &smithytraits.HTTPLabel{})
+
+	GetInstrumentationConfigurationRequest_InstrumentationType = GetInstrumentationConfigurationRequest.AddMember("InstrumentationType", InstrumentationType)
+
+	GetInstrumentationConfigurationRequest_Service = GetInstrumentationConfigurationRequest.AddMember("Service", smithyprelude.String)
+
+	GetInstrumentationConfigurationRequest_Environment = GetInstrumentationConfigurationRequest.AddMember("Environment", smithyprelude.String)
+
+	GetInstrumentationConfigurationRequest_SignalType = GetInstrumentationConfigurationRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	GetInstrumentationConfigurationRequest_LocationIdentifier = GetInstrumentationConfigurationRequest.AddMember("LocationIdentifier", LocationIdentifier)
+
+	GetInstrumentationConfigurationResponse_Configuration = GetInstrumentationConfigurationResponse.AddMember("Configuration", InstrumentationConfiguration)
+
+	GetInstrumentationConfigurationStatusRequest_InstrumentationType = GetInstrumentationConfigurationStatusRequest.AddMember("InstrumentationType", InstrumentationType)
+
+	GetInstrumentationConfigurationStatusRequest_Service = GetInstrumentationConfigurationStatusRequest.AddMember("Service", smithyprelude.String)
+
+	GetInstrumentationConfigurationStatusRequest_Environment = GetInstrumentationConfigurationStatusRequest.AddMember("Environment", smithyprelude.String)
+
+	GetInstrumentationConfigurationStatusRequest_SignalType = GetInstrumentationConfigurationStatusRequest.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	GetInstrumentationConfigurationStatusRequest_LocationIdentifier = GetInstrumentationConfigurationStatusRequest.AddMember("LocationIdentifier", LocationIdentifier)
+
+	GetInstrumentationConfigurationStatusRequest_Status = GetInstrumentationConfigurationStatusRequest.AddMember("Status", InstrumentationConfigurationStatus)
+
+	GetInstrumentationConfigurationStatusRequest_StartTime = GetInstrumentationConfigurationStatusRequest.AddMember("StartTime", smithyprelude.Timestamp)
+
+	GetInstrumentationConfigurationStatusRequest_EndTime = GetInstrumentationConfigurationStatusRequest.AddMember("EndTime", smithyprelude.Timestamp)
+
+	GetInstrumentationConfigurationStatusRequest_MaxResults = GetInstrumentationConfigurationStatusRequest.AddMember("MaxResults", smithyprelude.Integer)
+
+	GetInstrumentationConfigurationStatusRequest_NextToken = GetInstrumentationConfigurationStatusRequest.AddMember("NextToken", _NextToken)
+
+	GetInstrumentationConfigurationStatusResponse_Service = GetInstrumentationConfigurationStatusResponse.AddMember("Service", smithyprelude.String)
+
+	GetInstrumentationConfigurationStatusResponse_Environment = GetInstrumentationConfigurationStatusResponse.AddMember("Environment", smithyprelude.String)
+
+	GetInstrumentationConfigurationStatusResponse_SignalType = GetInstrumentationConfigurationStatusResponse.AddMember("SignalType", DynamicInstrumentationSignalType)
+
+	GetInstrumentationConfigurationStatusResponse_Location = GetInstrumentationConfigurationStatusResponse.AddMember("Location", Location)
+
+	GetInstrumentationConfigurationStatusResponse_Status = GetInstrumentationConfigurationStatusResponse.AddMember("Status", InstrumentationConfigurationStatus)
+
+	GetInstrumentationConfigurationStatusResponse_Events = GetInstrumentationConfigurationStatusResponse.AddMember("Events", _InstrumentationStatusEventList)
+
+	GetInstrumentationConfigurationStatusResponse_NextToken = GetInstrumentationConfigurationStatusResponse.AddMember("NextToken", _NextToken)
 
 	GetServiceInput_StartTime = GetServiceInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
 
@@ -2858,6 +3792,32 @@ func init() {
 	ListGroupingAttributeDefinitionsOutput_UpdatedAt = ListGroupingAttributeDefinitionsOutput.AddMember("UpdatedAt", smithyprelude.Timestamp)
 
 	ListGroupingAttributeDefinitionsOutput_NextToken = ListGroupingAttributeDefinitionsOutput.AddMember("NextToken", _NextToken)
+
+	ListInstrumentationConfigurationsRequest_Service = ListInstrumentationConfigurationsRequest.AddMember("Service", smithyprelude.String)
+
+	ListInstrumentationConfigurationsRequest_Environment = ListInstrumentationConfigurationsRequest.AddMember("Environment", smithyprelude.String)
+
+	ListInstrumentationConfigurationsRequest_InstrumentationType = ListInstrumentationConfigurationsRequest.AddMember("InstrumentationType", InstrumentationType)
+
+	ListInstrumentationConfigurationsRequest_SyncedAt = ListInstrumentationConfigurationsRequest.AddMember("SyncedAt", smithyprelude.Timestamp)
+
+	ListInstrumentationConfigurationsRequest_MaxResults = ListInstrumentationConfigurationsRequest.AddMember("MaxResults", smithyprelude.Integer)
+
+	ListInstrumentationConfigurationsRequest_NextToken = ListInstrumentationConfigurationsRequest.AddMember("NextToken", _NextToken)
+
+	InstrumentationConfigurationsPage_Service = InstrumentationConfigurationsPage.AddMember("Service", smithyprelude.String)
+
+	InstrumentationConfigurationsPage_Environment = InstrumentationConfigurationsPage.AddMember("Environment", smithyprelude.String)
+
+	InstrumentationConfigurationsPage_Changed = InstrumentationConfigurationsPage.AddMember("Changed", smithyprelude.Boolean)
+
+	InstrumentationConfigurationsPage_LatestConfigurations = InstrumentationConfigurationsPage.AddMember("LatestConfigurations", _InstrumentationConfigurationsWithoutServiceEnv)
+
+	InstrumentationConfigurationsPage_SyncedAt = InstrumentationConfigurationsPage.AddMember("SyncedAt", smithyprelude.Timestamp)
+
+	InstrumentationConfigurationsPage_SyncInterval = InstrumentationConfigurationsPage.AddMember("SyncInterval", smithyprelude.Integer)
+
+	InstrumentationConfigurationsPage_NextToken = InstrumentationConfigurationsPage.AddMember("NextToken", _NextToken)
 
 	ListServiceDependenciesInput_StartTime = ListServiceDependenciesInput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "StartTime"})
 
@@ -2994,6 +3954,18 @@ func init() {
 	PutGroupingConfigurationInput_GroupingAttributeDefinitions = PutGroupingConfigurationInput.AddMember("GroupingAttributeDefinitions", _GroupingAttributeDefinitions)
 
 	PutGroupingConfigurationOutput_GroupingConfiguration = PutGroupingConfigurationOutput.AddMember("GroupingConfiguration", GroupingConfiguration)
+
+	ReportInstrumentationConfigurationStatusRequest_Service = ReportInstrumentationConfigurationStatusRequest.AddMember("Service", smithyprelude.String)
+
+	ReportInstrumentationConfigurationStatusRequest_Environment = ReportInstrumentationConfigurationStatusRequest.AddMember("Environment", smithyprelude.String)
+
+	ReportInstrumentationConfigurationStatusRequest_Configurations = ReportInstrumentationConfigurationStatusRequest.AddMember("Configurations", _InstrumentationConfigurationStatusList)
+
+	ReportInstrumentationConfigurationStatusResponse_Service = ReportInstrumentationConfigurationStatusResponse.AddMember("Service", smithyprelude.String)
+
+	ReportInstrumentationConfigurationStatusResponse_Environment = ReportInstrumentationConfigurationStatusResponse.AddMember("Environment", smithyprelude.String)
+
+	ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents = ReportInstrumentationConfigurationStatusResponse.AddMember("UnprocessedStatusEvents", _UnprocessedStatusEventList)
 
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
 

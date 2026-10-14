@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -32,15 +29,6 @@ func (c *Client) DescribeStorageConfiguration(ctx context.Context, params *Descr
 
 type DescribeStorageConfigurationInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeStorageConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeStorageConfigurationOutput struct {
@@ -108,121 +96,29 @@ type DescribeStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeStorageConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeStorageConfigurationResponse_configurationStatus:
-			v.ConfigurationStatus = &types.ConfigurationStatus{}
-			return v.ConfigurationStatus.Deserialize(d)
-		case schemas.DescribeStorageConfigurationResponse_disallowIngestNullNaN:
-			v.DisallowIngestNullNaN = new(bool)
-			return d.ReadBool(schemas.DescribeStorageConfigurationResponse_disallowIngestNullNaN, v.DisallowIngestNullNaN)
-		case schemas.DescribeStorageConfigurationResponse_disassociatedDataStorage:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_disassociatedDataStorage, &ev); err != nil {
-				return err
-			}
-			v.DisassociatedDataStorage = types.DisassociatedDataStorageState(ev)
-			return nil
-		case schemas.DescribeStorageConfigurationResponse_lastUpdateDate:
-			v.LastUpdateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeStorageConfigurationResponse_lastUpdateDate, v.LastUpdateDate)
-		case schemas.DescribeStorageConfigurationResponse_multiLayerStorage:
-			v.MultiLayerStorage = &types.MultiLayerStorage{}
-			return v.MultiLayerStorage.Deserialize(d)
-		case schemas.DescribeStorageConfigurationResponse_retentionPeriod:
-			v.RetentionPeriod = &types.RetentionPeriod{}
-			return v.RetentionPeriod.Deserialize(d)
-		case schemas.DescribeStorageConfigurationResponse_storageType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_storageType, &ev); err != nil {
-				return err
-			}
-			v.StorageType = types.StorageType(ev)
-			return nil
-		case schemas.DescribeStorageConfigurationResponse_warmTier:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStorageConfigurationResponse_warmTier, &ev); err != nil {
-				return err
-			}
-			v.WarmTier = types.WarmTierState(ev)
-			return nil
-		case schemas.DescribeStorageConfigurationResponse_warmTierRetentionPeriod:
-			v.WarmTierRetentionPeriod = &types.WarmTierRetentionPeriod{}
-			return v.WarmTierRetentionPeriod.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStorageConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageConfiguration, schemas.DescribeStorageConfigurationRequest, schemas.DescribeStorageConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStorageConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageConfiguration, schemas.DescribeStorageConfigurationRequest, schemas.DescribeStorageConfigurationResponse), output: &DescribeStorageConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeStorageConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStorageConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -235,12 +131,6 @@ func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,12 +164,4 @@ func (m *endpointPrefix_opDescribeStorageConfigurationMiddleware) HandleFinalize
 }
 func addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeStorageConfigurationMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeStorageConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeStorageConfiguration",
-	}
 }

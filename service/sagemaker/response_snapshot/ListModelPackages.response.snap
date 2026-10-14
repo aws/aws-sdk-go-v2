@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelPackages
+
+{"ModelPackageSummaryList":[{"CreationTime":946684800,"ModelApprovalStatus":"Approved","ModelLifeCycle":{"Stage":"__Stage__","StageDescription":"__StageDescription__","StageStatus":"__StageStatus__"},"ModelPackageArn":"__ModelPackageArn__","ModelPackageDescription":"__ModelPackageDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageName":"__ModelPackageName__","ModelPackageRegistrationType":"Logged","ModelPackageStatus":"Pending","ModelPackageVersion":1},{"CreationTime":946684800,"ModelApprovalStatus":"Approved","ModelLifeCycle":{"Stage":"__Stage__","StageDescription":"__StageDescription__","StageStatus":"__StageStatus__"},"ModelPackageArn":"__ModelPackageArn__","ModelPackageDescription":"__ModelPackageDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageName":"__ModelPackageName__","ModelPackageRegistrationType":"Logged","ModelPackageStatus":"Pending","ModelPackageVersion":1}],"NextToken":"__NextToken__"}

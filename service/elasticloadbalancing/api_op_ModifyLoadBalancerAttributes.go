@@ -4,13 +4,8 @@ package elasticloadbalancing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the attributes of the specified load balancer.
@@ -65,23 +60,6 @@ type ModifyLoadBalancerAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyLoadBalancerAttributesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyLoadBalancerAttributesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyLoadBalancerAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerAttributes != nil {
-		s.WriteStruct(schemas.ModifyLoadBalancerAttributesInput_LoadBalancerAttributes)
-		v.LoadBalancerAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.ModifyLoadBalancerAttributesInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output of ModifyLoadBalancerAttributes.
 type ModifyLoadBalancerAttributesOutput struct {
 
@@ -97,88 +75,29 @@ type ModifyLoadBalancerAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyLoadBalancerAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyLoadBalancerAttributesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyLoadBalancerAttributesOutput_LoadBalancerAttributes:
-			v.LoadBalancerAttributes = &types.LoadBalancerAttributes{}
-			return v.LoadBalancerAttributes.Deserialize(d)
-		case schemas.ModifyLoadBalancerAttributesOutput_LoadBalancerName:
-			v.LoadBalancerName = new(string)
-			return d.ReadString(schemas.ModifyLoadBalancerAttributesOutput_LoadBalancerName, v.LoadBalancerName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyLoadBalancerAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLoadBalancerAttributes, schemas.ModifyLoadBalancerAttributesInput, schemas.ModifyLoadBalancerAttributesOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyLoadBalancerAttributes{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLoadBalancerAttributes, schemas.ModifyLoadBalancerAttributesInput, schemas.ModifyLoadBalancerAttributesOutput), output: &ModifyLoadBalancerAttributesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyLoadBalancerAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyLoadBalancerAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyLoadBalancerAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +112,8 @@ func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyLoadBalancerAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyLoadBalancerAttributes",
-	}
 }

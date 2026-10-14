@@ -5,12 +5,8 @@ package wickr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Suspends or unsuspends multiple users in a Wickr network. Suspended users
@@ -56,25 +52,6 @@ type BatchToggleUserSuspendStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchToggleUserSuspendStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchToggleUserSuspendStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchToggleUserSuspendStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchToggleUserSuspendStatusRequest_clientToken, *v.ClientToken)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.BatchToggleUserSuspendStatusRequest_networkId, *v.NetworkId)
-	}
-	if v.Suspend != nil {
-		s.WriteBool(schemas.BatchToggleUserSuspendStatusRequest_suspend, *v.Suspend)
-	}
-	serializeUserIds(s, schemas.BatchToggleUserSuspendStatusRequest_userIds, v.UserIds)
-}
-
 type BatchToggleUserSuspendStatusOutput struct {
 
 	// A list of suspend status toggle attempts that failed, including error details
@@ -94,77 +71,23 @@ type BatchToggleUserSuspendStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchToggleUserSuspendStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchToggleUserSuspendStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchToggleUserSuspendStatusResponse_failed:
-			return deserializeBatchUserErrorResponseItems(d, schemas.BatchToggleUserSuspendStatusResponse_failed, &v.Failed)
-		case schemas.BatchToggleUserSuspendStatusResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BatchToggleUserSuspendStatusResponse_message, v.Message)
-		case schemas.BatchToggleUserSuspendStatusResponse_successful:
-			return deserializeBatchUserSuccessResponseItems(d, schemas.BatchToggleUserSuspendStatusResponse_successful, &v.Successful)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchToggleUserSuspendStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchToggleUserSuspendStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchToggleUserSuspendStatus, schemas.BatchToggleUserSuspendStatusRequest, schemas.BatchToggleUserSuspendStatusResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchToggleUserSuspendStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchToggleUserSuspendStatus, schemas.BatchToggleUserSuspendStatusRequest, schemas.BatchToggleUserSuspendStatusResponse), output: &BatchToggleUserSuspendStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchToggleUserSuspendStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +97,6 @@ func (c *Client) addOperationBatchToggleUserSuspendStatusMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpBatchToggleUserSuspendStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchToggleUserSuspendStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +109,6 @@ func (c *Client) addOperationBatchToggleUserSuspendStatusMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +148,4 @@ func (m *idempotencyToken_initializeOpBatchToggleUserSuspendStatus) HandleInitia
 }
 func addIdempotencyToken_opBatchToggleUserSuspendStatusMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchToggleUserSuspendStatus{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchToggleUserSuspendStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchToggleUserSuspendStatus",
-	}
 }

@@ -4,11 +4,10 @@ package dax
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes one or more nodes from a DAX cluster.
@@ -51,6 +50,21 @@ type DecreaseReplicationFactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseReplicationFactorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecreaseReplicationFactorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseReplicationFactorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneList(s, schemas.DecreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DecreaseReplicationFactorRequest_ClusterName, *v.ClusterName)
+	}
+	s.WriteInt32(schemas.DecreaseReplicationFactorRequest_NewReplicationFactor, v.NewReplicationFactor)
+	serializeNodeIdentifierList(s, schemas.DecreaseReplicationFactorRequest_NodeIdsToRemove, v.NodeIdsToRemove)
+}
+
 type DecreaseReplicationFactorOutput struct {
 
 	// A description of the DAX cluster, after you have decreased its replication
@@ -63,77 +77,50 @@ type DecreaseReplicationFactorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseReplicationFactorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecreaseReplicationFactorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseReplicationFactorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.DecreaseReplicationFactorResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DecreaseReplicationFactorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecreaseReplicationFactorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecreaseReplicationFactorResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDecreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseReplicationFactor, schemas.DecreaseReplicationFactorRequest, schemas.DecreaseReplicationFactorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDecreaseReplicationFactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseReplicationFactor, schemas.DecreaseReplicationFactorRequest, schemas.DecreaseReplicationFactorResponse), output: &DecreaseReplicationFactorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDecreaseReplicationFactor{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DecreaseReplicationFactor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDecreaseReplicationFactorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDecreaseReplicationFactor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +135,8 @@ func (c *Client) addOperationDecreaseReplicationFactorMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDecreaseReplicationFactor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DecreaseReplicationFactor",
-	}
 }

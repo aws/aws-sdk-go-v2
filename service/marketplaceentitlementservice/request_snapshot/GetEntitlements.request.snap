@@ -1,0 +1,7 @@
+POST /service/AWSMPEntitlementService/operation/GetEntitlements
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤kProductCodeo__ProductCode__fFilter¡dkey0‚j__Member__j__Member__iNextTokenm__NextToken__jMaxResults

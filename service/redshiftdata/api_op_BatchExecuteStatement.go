@@ -5,12 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,11 +62,11 @@ func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecute
 
 type BatchExecuteStatementInput struct {
 
-	// One or more SQL statements to run. The SQL statements are run as a single
-	// transaction. They run serially in the order of the array. Subsequent SQL
-	// statements don't start until the previous statement in the array completes. If
-	// any SQL statement fails, then because they are run as one transaction, all work
-	// is rolled back.
+	// One or more SQL statements to run. The SQL statements run serially in the order
+	// of the array. Subsequent SQL statements don't start until the previous statement
+	// in the array completes. By default, the SQL statements are run as a single
+	// transaction. If any SQL statement fails, all work is rolled back. To change this
+	// behavior, see the ExecutionMode parameter.
 	//
 	// This member is required.
 	Sqls []string
@@ -91,8 +87,17 @@ type BatchExecuteStatementInput struct {
 	// as a database user and authenticating using temporary credentials.
 	DbUser *string
 
-	// The parameters for the SQL statements. The parameters are shared across all SQL
-	// statements in the batch.
+	// Determines how the SQL statements in the batch are run. If set to TRANSACTION
+	// (the default), all SQL statements are run as a single transaction and they are
+	// committed or rolled back together. If set to AUTO_COMMIT , each SQL statement is
+	// committed individually, and a failure of one statement does not affect the
+	// others.
+	ExecutionMode types.ExecutionMode
+
+	// The parameters for the SQL statements. The parameters are available to all SQL
+	// statements in the batch. Each statement can reference any subset of the provided
+	// parameters. Each provided parameter must be referenced by at least one SQL
+	// statement in the batch.
 	Parameters []types.SqlParameter
 
 	// The data format of the result of the SQL statement. If no format is specified,
@@ -115,6 +120,12 @@ type BatchExecuteStatementInput struct {
 	// them to identify the query.
 	StatementName *string
 
+	// The number of seconds to wait for all SQL statements in the batch to complete
+	// execution before returning the response. If the SQL statements do not complete
+	// within the specified time, the response returns the current status. The maximum
+	// value is 30 seconds.
+	WaitTimeSeconds *int32
+
 	// A value that indicates whether to send an event to the Amazon EventBridge event
 	// bus after the SQL statements run.
 	WithEvent *bool
@@ -125,50 +136,6 @@ type BatchExecuteStatementInput struct {
 	WorkgroupName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchExecuteStatementInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_ClientToken, *v.ClientToken)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_ClusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.Database != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_Database, *v.Database)
-	}
-	if v.DbUser != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_DbUser, *v.DbUser)
-	}
-	serializeSqlParametersList(s, schemas.BatchExecuteStatementInput_Parameters, v.Parameters)
-	if v.ResultFormat != "" {
-		s.WriteString(schemas.BatchExecuteStatementInput_ResultFormat, string(v.ResultFormat))
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_SecretArn, *v.SecretArn)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_SessionId, *v.SessionId)
-	}
-	if v.SessionKeepAliveSeconds != nil {
-		s.WriteInt32(schemas.BatchExecuteStatementInput_SessionKeepAliveSeconds, *v.SessionKeepAliveSeconds)
-	}
-	serializeSqlList(s, schemas.BatchExecuteStatementInput_Sqls, v.Sqls)
-	if v.StatementName != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_StatementName, *v.StatementName)
-	}
-	if v.WithEvent != nil {
-		s.WriteBool(schemas.BatchExecuteStatementInput_WithEvent, *v.WithEvent)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.BatchExecuteStatementInput_WorkgroupName, *v.WorkgroupName)
-	}
 }
 
 type BatchExecuteStatementOutput struct {
@@ -189,16 +156,39 @@ type BatchExecuteStatementOutput struct {
 	// The database user name.
 	DbUser *string
 
+	// A value that indicates whether the statement has a result set. The result set
+	// can be empty. The value is true for an empty result set. The value is true if
+	// any substatement returns a result set.
+	HasResultSet *bool
+
 	// The identifier of the SQL statement whose results are to be fetched. This value
 	// is a universally unique identifier (UUID) generated by Amazon Redshift Data API.
 	// This identifier is returned by BatchExecuteStatment .
 	Id *string
+
+	// The process identifier from Amazon Redshift.
+	RedshiftPid *int64
 
 	// The name or ARN of the secret that enables access to the database.
 	SecretArn *string
 
 	// The session identifier of the query.
 	SessionId *string
+
+	// The status of the SQL statement. Status values are defined as follows:
+	//
+	//   - ABORTED - The query run was stopped by the user.
+	//
+	//   - FAILED - The query run failed.
+	//
+	//   - FINISHED - The query has finished running.
+	//
+	//   - PICKED - The query has been chosen to be run.
+	//
+	//   - STARTED - The query run has started.
+	//
+	//   - SUBMITTED - The query was submitted, but not yet processed.
+	Status types.StatementStatusString
 
 	// The serverless workgroup name or Amazon Resource Name (ARN). This element is
 	// not returned when connecting to a provisioned cluster.
@@ -210,96 +200,23 @@ type BatchExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchExecuteStatementOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchExecuteStatementOutput_ClusterIdentifier:
-			v.ClusterIdentifier = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_ClusterIdentifier, v.ClusterIdentifier)
-		case schemas.BatchExecuteStatementOutput_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BatchExecuteStatementOutput_CreatedAt, v.CreatedAt)
-		case schemas.BatchExecuteStatementOutput_Database:
-			v.Database = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_Database, v.Database)
-		case schemas.BatchExecuteStatementOutput_DbGroups:
-			return deserializeDbGroupList(d, schemas.BatchExecuteStatementOutput_DbGroups, &v.DbGroups)
-		case schemas.BatchExecuteStatementOutput_DbUser:
-			v.DbUser = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_DbUser, v.DbUser)
-		case schemas.BatchExecuteStatementOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_Id, v.Id)
-		case schemas.BatchExecuteStatementOutput_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_SecretArn, v.SecretArn)
-		case schemas.BatchExecuteStatementOutput_SessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_SessionId, v.SessionId)
-		case schemas.BatchExecuteStatementOutput_WorkgroupName:
-			v.WorkgroupName = new(string)
-			return d.ReadString(schemas.BatchExecuteStatementOutput_WorkgroupName, v.WorkgroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchExecuteStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchExecuteStatement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExecuteStatement, schemas.BatchExecuteStatementInput, schemas.BatchExecuteStatementOutput), output: &BatchExecuteStatementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchExecuteStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -309,12 +226,6 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpBatchExecuteStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchExecuteStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -327,12 +238,6 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -372,12 +277,4 @@ func (m *idempotencyToken_initializeOpBatchExecuteStatement) HandleInitialize(ct
 }
 func addIdempotencyToken_opBatchExecuteStatementMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchExecuteStatement{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchExecuteStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchExecuteStatement",
-	}
 }

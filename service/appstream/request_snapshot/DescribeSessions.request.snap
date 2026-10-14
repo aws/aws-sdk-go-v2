@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DescribeSessions
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+§iStackNamem__StackName__iFleetNamem__FleetName__fUserIdj__UserId__iNextTokenm__NextToken__eLimitrAuthenticationTypecAPIjInstanceIdn__InstanceId__

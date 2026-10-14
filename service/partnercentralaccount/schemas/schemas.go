@@ -83,6 +83,21 @@ var GetProfileVisibility = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetProfileVisibility",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetQualificationsAssociationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationDetails",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetQualificationsAssociationTask = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationTask",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetQualificationsDisassociationTask = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsDisassociationTask",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetVerification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "GetVerification",
@@ -133,6 +148,16 @@ var StartProfileUpdateTask = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartProfileUpdateTask",
 }, smithy.ShapeTypeOperation, 0)
 
+var StartQualificationsAssociationTask = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsAssociationTask",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartQualificationsDisassociationTask = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsDisassociationTask",
+}, smithy.ShapeTypeOperation, 0)
+
 var StartVerification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "StartVerification",
@@ -163,7 +188,8 @@ var PartnerCentralAccount = smithy.NewServiceSchema(_PartnerCentralAccount, "202
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
 var AccessDeniedException_Reason *smithy.Schema
@@ -204,6 +230,12 @@ var AllianceLeadContact_Email *smithy.Schema
 
 var AllianceLeadContact_BusinessTitle *smithy.Schema
 
+var _AssociatedPartnerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "AssociatedPartnerList",
+}, smithy.ShapeTypeList, 1)
+var _AssociatedPartnerList_member *smithy.Schema
+
 var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "AwsAccountId",
@@ -212,7 +244,7 @@ var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 var BusinessValidationCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "BusinessValidationCode",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 14)
 var BusinessValidationCode_INCOMPATIBLE_CONNECTION_INVITATION_REQUEST *smithy.Schema
 
 var BusinessValidationCode_INCOMPATIBLE_LEGAL_NAME *smithy.Schema
@@ -228,6 +260,18 @@ var BusinessValidationCode_INVALID_ACCOUNT_STATE *smithy.Schema
 var BusinessValidationCode_INCOMPATIBLE_DOMAIN *smithy.Schema
 
 var BusinessValidationCode_INELIGIBLE_ACCOUNT_TIER *smithy.Schema
+
+var BusinessValidationCode_MISSING_ACTIVE_SUBSIDIARY_CONNECTION *smithy.Schema
+
+var BusinessValidationCode_INCOMPATIBLE_SUBSIDIARY_CONNECTION *smithy.Schema
+
+var BusinessValidationCode_INCOMPATIBLE_PRIMARY_PARTNER *smithy.Schema
+
+var BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED *smithy.Schema
+
+var BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_NOT_FOUND *smithy.Schema
+
+var BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_EXISTS *smithy.Schema
 
 var BusinessValidationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
@@ -277,7 +321,8 @@ var _CompletionUrl = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_Reason *smithy.Schema
@@ -285,7 +330,7 @@ var ConflictException_Reason *smithy.Schema
 var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 13)
 var ConflictExceptionReason_CONFLICT_CLIENT_TOKEN *smithy.Schema
 
 var ConflictExceptionReason_DUPLICATE_PARTNER *smithy.Schema
@@ -309,6 +354,8 @@ var ConflictExceptionReason_INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION *smithy
 var ConflictExceptionReason_ACCOUNT_ALREADY_VERIFIED *smithy.Schema
 
 var ConflictExceptionReason_VERIFICATION_ALREADY_IN_PROGRESS *smithy.Schema
+
+var ConflictExceptionReason_INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE *smithy.Schema
 
 var Connection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
@@ -537,6 +584,14 @@ var FieldValidationError_Message *smithy.Schema
 
 var FieldValidationError_Code *smithy.Schema
 
+var Headquarters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "Headquarters",
+}, smithy.ShapeTypeStructure, 2)
+var Headquarters_CountryCode *smithy.Schema
+
+var Headquarters_SubdivisionCode *smithy.Schema
+
 var IndustrySegment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "IndustrySegment",
@@ -624,7 +679,8 @@ var _IndustrySegmentList_member *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InvitationStatus = smithy.NewSchema(smithy.ShapeID{
@@ -747,7 +803,7 @@ var _PartnerIdentifier = smithy.NewSchema(smithy.ShapeID{
 var PartnerProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "PartnerProfile",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var PartnerProfile_DisplayName *smithy.Schema
 
 var PartnerProfile_Description *smithy.Schema
@@ -763,6 +819,8 @@ var PartnerProfile_IndustrySegments *smithy.Schema
 var PartnerProfile_TranslationSourceLocale *smithy.Schema
 
 var PartnerProfile_LocalizedContents *smithy.Schema
+
+var PartnerProfile_Headquarters *smithy.Schema
 
 var PartnerProfile_ProfileId *smithy.Schema
 
@@ -862,6 +920,48 @@ var ProfileVisibility_PRIVATE *smithy.Schema
 
 var ProfileVisibility_PUBLIC *smithy.Schema
 
+var QualificationsAssociationPartner = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsAssociationPartner",
+}, smithy.ShapeTypeStructure, 2)
+var QualificationsAssociationPartner_ProfileId *smithy.Schema
+
+var QualificationsAssociationPartner_AccountId *smithy.Schema
+
+var QualificationsAssociationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsAssociationStatus",
+}, smithy.ShapeTypeEnum, 2)
+var QualificationsAssociationStatus_ASSOCIATED *smithy.Schema
+
+var QualificationsAssociationStatus_NOT_ASSOCIATED *smithy.Schema
+
+var _QualificationsAssociationTaskId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsAssociationTaskId",
+}, smithy.ShapeTypeString, 0)
+
+var QualificationsAssociationTaskStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsAssociationTaskStatus",
+}, smithy.ShapeTypeEnum, 2)
+var QualificationsAssociationTaskStatus_IN_PROGRESS *smithy.Schema
+
+var QualificationsAssociationTaskStatus_SUCCEEDED *smithy.Schema
+
+var _QualificationsDisassociationTaskId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsDisassociationTaskId",
+}, smithy.ShapeTypeString, 0)
+
+var QualificationsDisassociationTaskStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "QualificationsDisassociationTaskStatus",
+}, smithy.ShapeTypeEnum, 2)
+var QualificationsDisassociationTaskStatus_IN_PROGRESS *smithy.Schema
+
+var QualificationsDisassociationTaskStatus_SUCCEEDED *smithy.Schema
+
 var RegistrantVerificationDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "RegistrantVerificationDetails",
@@ -883,7 +983,8 @@ var _RegistrationId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Reason *smithy.Schema
@@ -891,7 +992,7 @@ var ResourceNotFoundException_Reason *smithy.Schema
 var ResourceNotFoundExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ResourceNotFoundExceptionReason",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var ResourceNotFoundExceptionReason_PARTNER_NOT_FOUND *smithy.Schema
 
 var ResourceNotFoundExceptionReason_PARTNER_PROFILE_NOT_FOUND *smithy.Schema
@@ -909,6 +1010,10 @@ var ResourceNotFoundExceptionReason_CONNECTION_INVITATION_NOT_FOUND *smithy.Sche
 var ResourceNotFoundExceptionReason_CONNECTION_NOT_FOUND *smithy.Schema
 
 var ResourceNotFoundExceptionReason_VERIFICATION_NOT_FOUND *smithy.Schema
+
+var ResourceNotFoundExceptionReason_QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND *smithy.Schema
+
+var ResourceNotFoundExceptionReason_QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND *smithy.Schema
 
 var _Revision = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
@@ -936,7 +1041,8 @@ var _SensitiveUnicodeString = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_Reason *smithy.Schema
@@ -958,6 +1064,11 @@ var ServiceQuotaExceededExceptionReason_LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION
 var ServiceQuotaExceededExceptionReason_LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY *smithy.Schema
 
 var ServiceQuotaExceededExceptionReason_LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY *smithy.Schema
+
+var _SubdivisionCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "SubdivisionCode",
+}, smithy.ShapeTypeString, 0)
 
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
@@ -997,7 +1108,7 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var TaskDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "TaskDetails",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var TaskDetails_DisplayName *smithy.Schema
 
 var TaskDetails_Description *smithy.Schema
@@ -1014,10 +1125,13 @@ var TaskDetails_TranslationSourceLocale *smithy.Schema
 
 var TaskDetails_LocalizedContents *smithy.Schema
 
+var TaskDetails_Headquarters *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_ServiceCode *smithy.Schema
@@ -1056,7 +1170,8 @@ var _ValidationErrorList_member *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -1544,6 +1659,88 @@ var GetProfileVisibilityResponse_Visibility *smithy.Schema
 
 var GetProfileVisibilityResponse_ProfileId *smithy.Schema
 
+var GetQualificationsAssociationDetailsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationDetailsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetQualificationsAssociationDetailsRequest_Catalog *smithy.Schema
+
+var GetQualificationsAssociationDetailsRequest_Identifier *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationDetailsResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetQualificationsAssociationDetailsResponse_Catalog *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_Arn *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_Id *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_Status *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_PrimaryPartner *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_AssociatedPartners *smithy.Schema
+
+var GetQualificationsAssociationDetailsResponse_UpdatedAt *smithy.Schema
+
+var GetQualificationsAssociationTaskRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationTaskRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetQualificationsAssociationTaskRequest_Catalog *smithy.Schema
+
+var GetQualificationsAssociationTaskRequest_Identifier *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsAssociationTaskResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetQualificationsAssociationTaskResponse_Catalog *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_Arn *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_Id *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_TaskId *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_Status *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_PrimaryPartner *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_StartedAt *smithy.Schema
+
+var GetQualificationsAssociationTaskResponse_EndedAt *smithy.Schema
+
+var GetQualificationsDisassociationTaskRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsDisassociationTaskRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetQualificationsDisassociationTaskRequest_Catalog *smithy.Schema
+
+var GetQualificationsDisassociationTaskRequest_Identifier *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "GetQualificationsDisassociationTaskResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetQualificationsDisassociationTaskResponse_Catalog *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_Arn *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_Id *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_TaskId *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_Status *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_AssociatedPartner *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_StartedAt *smithy.Schema
+
+var GetQualificationsDisassociationTaskResponse_EndedAt *smithy.Schema
+
 var GetVerificationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "GetVerificationRequest",
@@ -1783,6 +1980,66 @@ var StartProfileUpdateTaskResponse_EndedAt *smithy.Schema
 
 var StartProfileUpdateTaskResponse_ErrorDetailList *smithy.Schema
 
+var StartQualificationsAssociationTaskRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsAssociationTaskRequest",
+}, smithy.ShapeTypeStructure, 4)
+var StartQualificationsAssociationTaskRequest_Catalog *smithy.Schema
+
+var StartQualificationsAssociationTaskRequest_Identifier *smithy.Schema
+
+var StartQualificationsAssociationTaskRequest_ClientToken *smithy.Schema
+
+var StartQualificationsAssociationTaskRequest_PrimaryPartner *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsAssociationTaskResponse",
+}, smithy.ShapeTypeStructure, 7)
+var StartQualificationsAssociationTaskResponse_Catalog *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_Arn *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_Id *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_TaskId *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_Status *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_PrimaryPartner *smithy.Schema
+
+var StartQualificationsAssociationTaskResponse_StartedAt *smithy.Schema
+
+var StartQualificationsDisassociationTaskRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsDisassociationTaskRequest",
+}, smithy.ShapeTypeStructure, 4)
+var StartQualificationsDisassociationTaskRequest_Catalog *smithy.Schema
+
+var StartQualificationsDisassociationTaskRequest_Identifier *smithy.Schema
+
+var StartQualificationsDisassociationTaskRequest_ClientToken *smithy.Schema
+
+var StartQualificationsDisassociationTaskRequest_AssociatedPartner *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralaccount",
+	Name:      "StartQualificationsDisassociationTaskResponse",
+}, smithy.ShapeTypeStructure, 7)
+var StartQualificationsDisassociationTaskResponse_Catalog *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_Arn *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_Id *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_TaskId *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_Status *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_AssociatedPartner *smithy.Schema
+
+var StartQualificationsDisassociationTaskResponse_StartedAt *smithy.Schema
+
 var StartVerificationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralaccount",
 	Name:      "StartVerificationRequest",
@@ -1888,6 +2145,12 @@ func init() {
 
 	AllianceLeadContact_BusinessTitle = AllianceLeadContact.AddMember("BusinessTitle", _SensitiveUnicodeString)
 
+	QualificationsAssociationPartner_ProfileId = QualificationsAssociationPartner.AddMember("ProfileId", _PartnerProfileId)
+
+	QualificationsAssociationPartner_AccountId = QualificationsAssociationPartner.AddMember("AccountId", _AwsAccountId)
+
+	_AssociatedPartnerList_member = _AssociatedPartnerList.AddMember("member", QualificationsAssociationPartner)
+
 	BusinessValidationCode_INCOMPATIBLE_CONNECTION_INVITATION_REQUEST = BusinessValidationCode.AddMember("INCOMPATIBLE_CONNECTION_INVITATION_REQUEST", smithyprelude.Unit)
 
 	BusinessValidationCode_INCOMPATIBLE_LEGAL_NAME = BusinessValidationCode.AddMember("INCOMPATIBLE_LEGAL_NAME", smithyprelude.Unit)
@@ -1903,6 +2166,18 @@ func init() {
 	BusinessValidationCode_INCOMPATIBLE_DOMAIN = BusinessValidationCode.AddMember("INCOMPATIBLE_DOMAIN", smithyprelude.Unit)
 
 	BusinessValidationCode_INELIGIBLE_ACCOUNT_TIER = BusinessValidationCode.AddMember("INELIGIBLE_ACCOUNT_TIER", smithyprelude.Unit)
+
+	BusinessValidationCode_MISSING_ACTIVE_SUBSIDIARY_CONNECTION = BusinessValidationCode.AddMember("MISSING_ACTIVE_SUBSIDIARY_CONNECTION", smithyprelude.Unit)
+
+	BusinessValidationCode_INCOMPATIBLE_SUBSIDIARY_CONNECTION = BusinessValidationCode.AddMember("INCOMPATIBLE_SUBSIDIARY_CONNECTION", smithyprelude.Unit)
+
+	BusinessValidationCode_INCOMPATIBLE_PRIMARY_PARTNER = BusinessValidationCode.AddMember("INCOMPATIBLE_PRIMARY_PARTNER", smithyprelude.Unit)
+
+	BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED = BusinessValidationCode.AddMember("QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED", smithyprelude.Unit)
+
+	BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_NOT_FOUND = BusinessValidationCode.AddMember("QUALIFICATIONS_ASSOCIATION_NOT_FOUND", smithyprelude.Unit)
+
+	BusinessValidationCode_QUALIFICATIONS_ASSOCIATION_EXISTS = BusinessValidationCode.AddMember("QUALIFICATIONS_ASSOCIATION_EXISTS", smithyprelude.Unit)
 
 	BusinessValidationError_Message = BusinessValidationError.AddMember("Message", smithyprelude.String)
 
@@ -1945,6 +2220,8 @@ func init() {
 	ConflictExceptionReason_ACCOUNT_ALREADY_VERIFIED = ConflictExceptionReason.AddMember("ACCOUNT_ALREADY_VERIFIED", smithyprelude.Unit)
 
 	ConflictExceptionReason_VERIFICATION_ALREADY_IN_PROGRESS = ConflictExceptionReason.AddMember("VERIFICATION_ALREADY_IN_PROGRESS", smithyprelude.Unit)
+
+	ConflictExceptionReason_INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE = ConflictExceptionReason.AddMember("INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE", smithyprelude.Unit)
 
 	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
 
@@ -2104,6 +2381,10 @@ func init() {
 
 	FieldValidationError_Code = FieldValidationError.AddMember("Code", FieldValidationCode)
 
+	Headquarters_CountryCode = Headquarters.AddMember("CountryCode", _CountryCode)
+
+	Headquarters_SubdivisionCode = Headquarters.AddMember("SubdivisionCode", _SubdivisionCode)
+
 	IndustrySegment_AGRICULTURE_MINING = IndustrySegment.AddMember("AGRICULTURE_MINING", smithyprelude.Unit)
 
 	IndustrySegment_BIOTECHNOLOGY = IndustrySegment.AddMember("BIOTECHNOLOGY", smithyprelude.Unit)
@@ -2234,6 +2515,8 @@ func init() {
 
 	PartnerProfile_LocalizedContents = PartnerProfile.AddMember("LocalizedContents", _LocalizedContentList)
 
+	PartnerProfile_Headquarters = PartnerProfile.AddMember("Headquarters", Headquarters)
+
 	PartnerProfile_ProfileId = PartnerProfile.AddMember("ProfileId", _PartnerProfileId)
 
 	PartnerSummary_Catalog = PartnerSummary.AddMember("Catalog", _Catalog)
@@ -2260,6 +2543,18 @@ func init() {
 
 	ProfileVisibility_PUBLIC = ProfileVisibility.AddMember("PUBLIC", smithyprelude.Unit)
 
+	QualificationsAssociationStatus_ASSOCIATED = QualificationsAssociationStatus.AddMember("ASSOCIATED", smithyprelude.Unit)
+
+	QualificationsAssociationStatus_NOT_ASSOCIATED = QualificationsAssociationStatus.AddMember("NOT_ASSOCIATED", smithyprelude.Unit)
+
+	QualificationsAssociationTaskStatus_IN_PROGRESS = QualificationsAssociationTaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	QualificationsAssociationTaskStatus_SUCCEEDED = QualificationsAssociationTaskStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	QualificationsDisassociationTaskStatus_IN_PROGRESS = QualificationsDisassociationTaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	QualificationsDisassociationTaskStatus_SUCCEEDED = QualificationsDisassociationTaskStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
 	RegistrantVerificationResponse_CompletionUrl = RegistrantVerificationResponse.AddMember("CompletionUrl", _CompletionUrl)
 
 	RegistrantVerificationResponse_CompletionUrlExpiresAt = RegistrantVerificationResponse.AddMember("CompletionUrlExpiresAt", _DateTime)
@@ -2281,6 +2576,10 @@ func init() {
 	ResourceNotFoundExceptionReason_CONNECTION_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("CONNECTION_NOT_FOUND", smithyprelude.Unit)
 
 	ResourceNotFoundExceptionReason_VERIFICATION_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("VERIFICATION_NOT_FOUND", smithyprelude.Unit)
+
+	ResourceNotFoundExceptionReason_QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND", smithyprelude.Unit)
+
+	ResourceNotFoundExceptionReason_QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND", smithyprelude.Unit)
 
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
 
@@ -2327,6 +2626,8 @@ func init() {
 	TaskDetails_TranslationSourceLocale = TaskDetails.AddMember("TranslationSourceLocale", _Locale)
 
 	TaskDetails_LocalizedContents = TaskDetails.AddMember("LocalizedContents", _LocalizedContentList)
+
+	TaskDetails_Headquarters = TaskDetails.AddMember("Headquarters", Headquarters)
 
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
 
@@ -2680,6 +2981,64 @@ func init() {
 
 	GetProfileVisibilityResponse_ProfileId = GetProfileVisibilityResponse.AddMember("ProfileId", _PartnerProfileId)
 
+	GetQualificationsAssociationDetailsRequest_Catalog = GetQualificationsAssociationDetailsRequest.AddMember("Catalog", _Catalog)
+
+	GetQualificationsAssociationDetailsRequest_Identifier = GetQualificationsAssociationDetailsRequest.AddMember("Identifier", _PartnerIdentifier)
+
+	GetQualificationsAssociationDetailsResponse_Catalog = GetQualificationsAssociationDetailsResponse.AddMember("Catalog", _Catalog)
+
+	GetQualificationsAssociationDetailsResponse_Arn = GetQualificationsAssociationDetailsResponse.AddMember("Arn", _PartnerArn)
+
+	GetQualificationsAssociationDetailsResponse_Id = GetQualificationsAssociationDetailsResponse.AddMember("Id", _PartnerId)
+
+	GetQualificationsAssociationDetailsResponse_Status = GetQualificationsAssociationDetailsResponse.AddMember("Status", QualificationsAssociationStatus)
+
+	GetQualificationsAssociationDetailsResponse_PrimaryPartner = GetQualificationsAssociationDetailsResponse.AddMember("PrimaryPartner", QualificationsAssociationPartner)
+
+	GetQualificationsAssociationDetailsResponse_AssociatedPartners = GetQualificationsAssociationDetailsResponse.AddMember("AssociatedPartners", _AssociatedPartnerList)
+
+	GetQualificationsAssociationDetailsResponse_UpdatedAt = GetQualificationsAssociationDetailsResponse.AddMember("UpdatedAt", _DateTime)
+
+	GetQualificationsAssociationTaskRequest_Catalog = GetQualificationsAssociationTaskRequest.AddMember("Catalog", _Catalog)
+
+	GetQualificationsAssociationTaskRequest_Identifier = GetQualificationsAssociationTaskRequest.AddMember("Identifier", _PartnerIdentifier)
+
+	GetQualificationsAssociationTaskResponse_Catalog = GetQualificationsAssociationTaskResponse.AddMember("Catalog", _Catalog)
+
+	GetQualificationsAssociationTaskResponse_Arn = GetQualificationsAssociationTaskResponse.AddMember("Arn", _PartnerArn)
+
+	GetQualificationsAssociationTaskResponse_Id = GetQualificationsAssociationTaskResponse.AddMember("Id", _PartnerId)
+
+	GetQualificationsAssociationTaskResponse_TaskId = GetQualificationsAssociationTaskResponse.AddMember("TaskId", _QualificationsAssociationTaskId)
+
+	GetQualificationsAssociationTaskResponse_Status = GetQualificationsAssociationTaskResponse.AddMember("Status", QualificationsAssociationTaskStatus)
+
+	GetQualificationsAssociationTaskResponse_PrimaryPartner = GetQualificationsAssociationTaskResponse.AddMember("PrimaryPartner", QualificationsAssociationPartner)
+
+	GetQualificationsAssociationTaskResponse_StartedAt = GetQualificationsAssociationTaskResponse.AddMember("StartedAt", _DateTime)
+
+	GetQualificationsAssociationTaskResponse_EndedAt = GetQualificationsAssociationTaskResponse.AddMember("EndedAt", _DateTime)
+
+	GetQualificationsDisassociationTaskRequest_Catalog = GetQualificationsDisassociationTaskRequest.AddMember("Catalog", _Catalog)
+
+	GetQualificationsDisassociationTaskRequest_Identifier = GetQualificationsDisassociationTaskRequest.AddMember("Identifier", _PartnerIdentifier)
+
+	GetQualificationsDisassociationTaskResponse_Catalog = GetQualificationsDisassociationTaskResponse.AddMember("Catalog", _Catalog)
+
+	GetQualificationsDisassociationTaskResponse_Arn = GetQualificationsDisassociationTaskResponse.AddMember("Arn", _PartnerArn)
+
+	GetQualificationsDisassociationTaskResponse_Id = GetQualificationsDisassociationTaskResponse.AddMember("Id", _PartnerId)
+
+	GetQualificationsDisassociationTaskResponse_TaskId = GetQualificationsDisassociationTaskResponse.AddMember("TaskId", _QualificationsDisassociationTaskId)
+
+	GetQualificationsDisassociationTaskResponse_Status = GetQualificationsDisassociationTaskResponse.AddMember("Status", QualificationsDisassociationTaskStatus)
+
+	GetQualificationsDisassociationTaskResponse_AssociatedPartner = GetQualificationsDisassociationTaskResponse.AddMember("AssociatedPartner", QualificationsAssociationPartner)
+
+	GetQualificationsDisassociationTaskResponse_StartedAt = GetQualificationsDisassociationTaskResponse.AddMember("StartedAt", _DateTime)
+
+	GetQualificationsDisassociationTaskResponse_EndedAt = GetQualificationsDisassociationTaskResponse.AddMember("EndedAt", _DateTime)
+
 	GetVerificationRequest_VerificationType = GetVerificationRequest.AddMember("VerificationType", VerificationType)
 
 	GetVerificationResponse_VerificationType = GetVerificationResponse.AddMember("VerificationType", VerificationType)
@@ -2837,6 +3196,50 @@ func init() {
 	StartProfileUpdateTaskResponse_EndedAt = StartProfileUpdateTaskResponse.AddMember("EndedAt", _DateTime)
 
 	StartProfileUpdateTaskResponse_ErrorDetailList = StartProfileUpdateTaskResponse.AddMember("ErrorDetailList", _ErrorDetailList)
+
+	StartQualificationsAssociationTaskRequest_Catalog = StartQualificationsAssociationTaskRequest.AddMember("Catalog", _Catalog)
+
+	StartQualificationsAssociationTaskRequest_Identifier = StartQualificationsAssociationTaskRequest.AddMember("Identifier", _PartnerIdentifier)
+
+	StartQualificationsAssociationTaskRequest_ClientToken = StartQualificationsAssociationTaskRequest.AddMember("ClientToken", _ClientToken)
+
+	StartQualificationsAssociationTaskRequest_PrimaryPartner = StartQualificationsAssociationTaskRequest.AddMember("PrimaryPartner", QualificationsAssociationPartner)
+
+	StartQualificationsAssociationTaskResponse_Catalog = StartQualificationsAssociationTaskResponse.AddMember("Catalog", _Catalog)
+
+	StartQualificationsAssociationTaskResponse_Arn = StartQualificationsAssociationTaskResponse.AddMember("Arn", _PartnerArn)
+
+	StartQualificationsAssociationTaskResponse_Id = StartQualificationsAssociationTaskResponse.AddMember("Id", _PartnerId)
+
+	StartQualificationsAssociationTaskResponse_TaskId = StartQualificationsAssociationTaskResponse.AddMember("TaskId", _QualificationsAssociationTaskId)
+
+	StartQualificationsAssociationTaskResponse_Status = StartQualificationsAssociationTaskResponse.AddMember("Status", QualificationsAssociationTaskStatus)
+
+	StartQualificationsAssociationTaskResponse_PrimaryPartner = StartQualificationsAssociationTaskResponse.AddMember("PrimaryPartner", QualificationsAssociationPartner)
+
+	StartQualificationsAssociationTaskResponse_StartedAt = StartQualificationsAssociationTaskResponse.AddMember("StartedAt", _DateTime)
+
+	StartQualificationsDisassociationTaskRequest_Catalog = StartQualificationsDisassociationTaskRequest.AddMember("Catalog", _Catalog)
+
+	StartQualificationsDisassociationTaskRequest_Identifier = StartQualificationsDisassociationTaskRequest.AddMember("Identifier", _PartnerIdentifier)
+
+	StartQualificationsDisassociationTaskRequest_ClientToken = StartQualificationsDisassociationTaskRequest.AddMember("ClientToken", _ClientToken)
+
+	StartQualificationsDisassociationTaskRequest_AssociatedPartner = StartQualificationsDisassociationTaskRequest.AddMember("AssociatedPartner", QualificationsAssociationPartner)
+
+	StartQualificationsDisassociationTaskResponse_Catalog = StartQualificationsDisassociationTaskResponse.AddMember("Catalog", _Catalog)
+
+	StartQualificationsDisassociationTaskResponse_Arn = StartQualificationsDisassociationTaskResponse.AddMember("Arn", _PartnerArn)
+
+	StartQualificationsDisassociationTaskResponse_Id = StartQualificationsDisassociationTaskResponse.AddMember("Id", _PartnerId)
+
+	StartQualificationsDisassociationTaskResponse_TaskId = StartQualificationsDisassociationTaskResponse.AddMember("TaskId", _QualificationsDisassociationTaskId)
+
+	StartQualificationsDisassociationTaskResponse_Status = StartQualificationsDisassociationTaskResponse.AddMember("Status", QualificationsDisassociationTaskStatus)
+
+	StartQualificationsDisassociationTaskResponse_AssociatedPartner = StartQualificationsDisassociationTaskResponse.AddMember("AssociatedPartner", QualificationsAssociationPartner)
+
+	StartQualificationsDisassociationTaskResponse_StartedAt = StartQualificationsDisassociationTaskResponse.AddMember("StartedAt", _DateTime)
 
 	StartVerificationRequest_ClientToken = StartVerificationRequest.AddMember("ClientToken", _ClientToken)
 

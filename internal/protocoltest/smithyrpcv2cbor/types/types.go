@@ -383,6 +383,63 @@ func (v *RecursiveShapesInputOutputNested2) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// The following types satisfy this interface:
+//
+//	RpcV2CborNestedUnionMemberStringValue
+type RpcV2CborNestedUnion interface {
+	isRpcV2CborNestedUnion()
+}
+
+type RpcV2CborNestedUnionMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*RpcV2CborNestedUnionMemberStringValue) isRpcV2CborNestedUnion() {}
+func (v *RpcV2CborNestedUnionMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.RpcV2CborNestedUnion_stringValue, v.Value)
+}
+func (v *RpcV2CborNestedUnionMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.RpcV2CborNestedUnion_stringValue, &v.Value)
+}
+
+// The following types satisfy this interface:
+//
+//	RpcV2CborUnionMemberStringValue
+//	RpcV2CborUnionMemberUnionValue
+type RpcV2CborUnion interface {
+	isRpcV2CborUnion()
+}
+
+type RpcV2CborUnionMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*RpcV2CborUnionMemberStringValue) isRpcV2CborUnion() {}
+func (v *RpcV2CborUnionMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.RpcV2CborUnion_stringValue, v.Value)
+}
+func (v *RpcV2CborUnionMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.RpcV2CborUnion_stringValue, &v.Value)
+}
+
+type RpcV2CborUnionMemberUnionValue struct {
+	Value RpcV2CborNestedUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*RpcV2CborUnionMemberUnionValue) isRpcV2CborUnion() {}
+func (v *RpcV2CborUnionMemberUnionValue) Serialize(s smithy.ShapeSerializer) {
+	serializeRpcV2CborNestedUnion(s, schemas.RpcV2CborUnion_unionValue, v.Value)
+}
+func (v *RpcV2CborUnionMemberUnionValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRpcV2CborNestedUnion(d, schemas.RpcV2CborUnion_unionValue, &v.Value)
+}
+
 type StructureListMember struct {
 	A *string
 
@@ -448,3 +505,15 @@ func (v *GreetingStruct) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRpcV2CborNestedUnion() {}
+func (*UnknownUnionMember) isRpcV2CborUnion()       {}

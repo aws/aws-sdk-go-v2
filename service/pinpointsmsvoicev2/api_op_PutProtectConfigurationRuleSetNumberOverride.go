@@ -5,12 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -126,6 +124,35 @@ type PutProtectConfigurationRuleSetNumberOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtectConfigurationRuleSetNumberOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_Action, string(v.Action))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
 func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutProtectConfigurationRuleSetNumberOverrideResult, func(s *smithy.Schema) error {
 		switch s {
@@ -159,62 +186,20 @@ func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) Deserialize(d smith
 	})
 }
 func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtectConfigurationRuleSetNumberOverride, schemas.PutProtectConfigurationRuleSetNumberOverrideRequest, schemas.PutProtectConfigurationRuleSetNumberOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtectConfigurationRuleSetNumberOverride, schemas.PutProtectConfigurationRuleSetNumberOverrideRequest, schemas.PutProtectConfigurationRuleSetNumberOverrideResult), output: &PutProtectConfigurationRuleSetNumberOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutProtectConfigurationRuleSetNumberOverride"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -224,12 +209,6 @@ func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlew
 		return err
 	}
 	if err = addOpPutProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutProtectConfigurationRuleSetNumberOverride(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -242,12 +221,6 @@ func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -287,12 +260,4 @@ func (m *idempotencyToken_initializeOpPutProtectConfigurationRuleSetNumberOverri
 }
 func addIdempotencyToken_opPutProtectConfigurationRuleSetNumberOverrideMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutProtectConfigurationRuleSetNumberOverride{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutProtectConfigurationRuleSetNumberOverride(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutProtectConfigurationRuleSetNumberOverride",
-	}
 }

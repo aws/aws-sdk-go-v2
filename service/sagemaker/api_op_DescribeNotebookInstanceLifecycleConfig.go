@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,18 @@ type DescribeNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotebookInstanceLifecycleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookInstanceLifecycleConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookInstanceLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceLifecycleConfigInput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+}
+
 type DescribeNotebookInstanceLifecycleConfigOutput struct {
 
 	// A timestamp that tells when the lifecycle configuration was created.
@@ -69,77 +80,72 @@ type DescribeNotebookInstanceLifecycleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotebookInstanceLifecycleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookInstanceLifecycleConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookInstanceLifecycleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeNotebookInstanceLifecycleConfigOutput_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeNotebookInstanceLifecycleConfigOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NotebookInstanceLifecycleConfigArn != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, *v.NotebookInstanceLifecycleConfigArn)
+	}
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnCreate, v.OnCreate)
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnStart, v.OnStart)
+}
+func (v *DescribeNotebookInstanceLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotebookInstanceLifecycleConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotebookInstanceLifecycleConfigOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotebookInstanceLifecycleConfigOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn:
+			v.NotebookInstanceLifecycleConfigArn = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, v.NotebookInstanceLifecycleConfigArn)
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigName:
+			v.NotebookInstanceLifecycleConfigName = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigName, v.NotebookInstanceLifecycleConfigName)
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnCreate:
+			return deserializeNotebookInstanceLifecycleConfigList(d, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnCreate, &v.OnCreate)
+		case schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnStart:
+			return deserializeNotebookInstanceLifecycleConfigList(d, schemas.DescribeNotebookInstanceLifecycleConfigOutput_OnStart, &v.OnStart)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookInstanceLifecycleConfig, schemas.DescribeNotebookInstanceLifecycleConfigInput, schemas.DescribeNotebookInstanceLifecycleConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookInstanceLifecycleConfig, schemas.DescribeNotebookInstanceLifecycleConfigInput, schemas.DescribeNotebookInstanceLifecycleConfigOutput), output: &DescribeNotebookInstanceLifecycleConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNotebookInstanceLifecycleConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeNotebookInstanceLifecycleConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNotebookInstanceLifecycleConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +160,8 @@ func (c *Client) addOperationDescribeNotebookInstanceLifecycleConfigMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeNotebookInstanceLifecycleConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeNotebookInstanceLifecycleConfig",
-	}
 }

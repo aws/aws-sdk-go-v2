@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","NextToken":"__NextToken__","PricingPlanArns":["__Member__","__Member__"],"PricingRuleArn":"__PricingRuleArn__"}

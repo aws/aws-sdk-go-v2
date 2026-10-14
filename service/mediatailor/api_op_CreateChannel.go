@@ -4,11 +4,10 @@ package mediatailor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -79,6 +78,73 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAudiences(s, schemas.CreateChannelRequest_Audiences, v.Audiences)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateChannelRequest_ChannelName, *v.ChannelName)
+	}
+	if v.FillerSlate != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_FillerSlate)
+		v.FillerSlate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRequestOutputs(s, schemas.CreateChannelRequest_Outputs, v.Outputs)
+	if v.PlaybackMode != "" {
+		s.WriteString(schemas.CreateChannelRequest_PlaybackMode, string(v.PlaybackMode))
+	}
+	serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateChannelRequest_Tier, string(v.Tier))
+	}
+	if v.TimeShiftConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_TimeShiftConfiguration)
+		v.TimeShiftConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelRequest_Audiences:
+			return deserializeAudiences(d, schemas.CreateChannelRequest_Audiences, &v.Audiences)
+		case schemas.CreateChannelRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.CreateChannelRequest_ChannelName, v.ChannelName)
+		case schemas.CreateChannelRequest_FillerSlate:
+			v.FillerSlate = &types.SlateSource{}
+			return v.FillerSlate.Deserialize(d)
+		case schemas.CreateChannelRequest_Outputs:
+			return deserializeRequestOutputs(d, schemas.CreateChannelRequest_Outputs, &v.Outputs)
+		case schemas.CreateChannelRequest_PlaybackMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateChannelRequest_PlaybackMode, &ev); err != nil {
+				return err
+			}
+			v.PlaybackMode = types.PlaybackMode(ev)
+			return nil
+		case schemas.CreateChannelRequest_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateChannelRequest_Tags, &v.Tags)
+		case schemas.CreateChannelRequest_Tier:
+			var ev string
+			if err := d.ReadString(schemas.CreateChannelRequest_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.Tier(ev)
+			return nil
+		case schemas.CreateChannelRequest_TimeShiftConfiguration:
+			v.TimeShiftConfiguration = &types.TimeShiftConfiguration{}
+			return v.TimeShiftConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) to assign to the channel.
@@ -128,77 +194,113 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateChannelResponse_Arn, *v.Arn)
+	}
+	serializeAudiences(s, schemas.CreateChannelResponse_Audiences, v.Audiences)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateChannelResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ChannelState != "" {
+		s.WriteString(schemas.CreateChannelResponse_ChannelState, string(v.ChannelState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateChannelResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FillerSlate != nil {
+		s.WriteStruct(schemas.CreateChannelResponse_FillerSlate)
+		v.FillerSlate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateChannelResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeResponseOutputs(s, schemas.CreateChannelResponse_Outputs, v.Outputs)
+	if v.PlaybackMode != nil {
+		s.WriteString(schemas.CreateChannelResponse_PlaybackMode, *v.PlaybackMode)
+	}
+	serialize__mapOf__string(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.CreateChannelResponse_Tier, *v.Tier)
+	}
+	if v.TimeShiftConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelResponse_TimeShiftConfiguration)
+		v.TimeShiftConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_Arn, v.Arn)
+		case schemas.CreateChannelResponse_Audiences:
+			return deserializeAudiences(d, schemas.CreateChannelResponse_Audiences, &v.Audiences)
+		case schemas.CreateChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_ChannelName, v.ChannelName)
+		case schemas.CreateChannelResponse_ChannelState:
+			var ev string
+			if err := d.ReadString(schemas.CreateChannelResponse_ChannelState, &ev); err != nil {
+				return err
+			}
+			v.ChannelState = types.ChannelState(ev)
+			return nil
+		case schemas.CreateChannelResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateChannelResponse_CreationTime, v.CreationTime)
+		case schemas.CreateChannelResponse_FillerSlate:
+			v.FillerSlate = &types.SlateSource{}
+			return v.FillerSlate.Deserialize(d)
+		case schemas.CreateChannelResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateChannelResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CreateChannelResponse_Outputs:
+			return deserializeResponseOutputs(d, schemas.CreateChannelResponse_Outputs, &v.Outputs)
+		case schemas.CreateChannelResponse_PlaybackMode:
+			v.PlaybackMode = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_PlaybackMode, v.PlaybackMode)
+		case schemas.CreateChannelResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateChannelResponse_Tags, &v.Tags)
+		case schemas.CreateChannelResponse_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_Tier, v.Tier)
+		case schemas.CreateChannelResponse_TimeShiftConfiguration:
+			v.TimeShiftConfiguration = &types.TimeShiftConfiguration{}
+			return v.TimeShiftConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse), output: &CreateChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +315,8 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateChannel",
-	}
 }

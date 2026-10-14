@@ -1,0 +1,5 @@
+POST /deleteResponsePlan
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

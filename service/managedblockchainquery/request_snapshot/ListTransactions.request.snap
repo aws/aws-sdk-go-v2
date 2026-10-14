@@ -1,0 +1,5 @@
+POST /list-transactions
+
+Content-Type: application/json
+
+{"address":"__Address__","confirmationStatusFilter":{"include":["FINAL","FINAL"]},"fromBlockchainInstant":{"time":946684800},"maxResults":1,"network":"ETHEREUM_MAINNET","nextToken":"__NextToken__","sort":{"sortBy":"TRANSACTION_TIMESTAMP","sortOrder":"ASCENDING"},"toBlockchainInstant":{"time":946684800}}

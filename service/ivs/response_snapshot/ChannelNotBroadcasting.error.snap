@@ -1,0 +1,12 @@
+404
+Access-Control-Allow-Origin: __AccessControlAllowOrigin__
+Access-Control-Expose-Headers: __AccessControlExposeHeaders__
+Cache-Control: __CacheControl__
+Content-Security-Policy: __ContentSecurityPolicy__
+Content-Type: application/json
+Strict-Transport-Security: __StrictTransportSecurity__
+X-Amzn-Errortype: ChannelNotBroadcasting
+X-Content-Type-Options: __XContentTypeOptions__
+X-Frame-Options: __XFrameOptions__
+
+{"__type":"ChannelNotBroadcasting","exceptionMessage":"__ExceptionMessage__"}

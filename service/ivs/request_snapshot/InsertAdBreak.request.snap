@@ -1,0 +1,5 @@
+POST /InsertAdBreak
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","durationSeconds":1}

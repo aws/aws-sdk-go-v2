@@ -4,10 +4,9 @@ package outposts
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Amazon Web Services uses this action to install Outpost servers.
@@ -58,6 +57,25 @@ type StartConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.StartConnectionRequest_AssetId, *v.AssetId)
+	}
+	if v.ClientPublicKey != nil {
+		s.WriteString(schemas.StartConnectionRequest_ClientPublicKey, *v.ClientPublicKey)
+	}
+	if v.DeviceSerialNumber != nil {
+		s.WriteString(schemas.StartConnectionRequest_DeviceSerialNumber, *v.DeviceSerialNumber)
+	}
+	s.WriteInt32(schemas.StartConnectionRequest_NetworkInterfaceDeviceIndex, v.NetworkInterfaceDeviceIndex)
+}
+
 type StartConnectionOutput struct {
 
 	//  The ID of the connection.
@@ -72,77 +90,54 @@ type StartConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.StartConnectionResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.UnderlayIpAddress != nil {
+		s.WriteString(schemas.StartConnectionResponse_UnderlayIpAddress, *v.UnderlayIpAddress)
+	}
+}
+func (v *StartConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartConnectionResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.StartConnectionResponse_ConnectionId, v.ConnectionId)
+		case schemas.StartConnectionResponse_UnderlayIpAddress:
+			v.UnderlayIpAddress = new(string)
+			return d.ReadString(schemas.StartConnectionResponse_UnderlayIpAddress, v.UnderlayIpAddress)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConnection, schemas.StartConnectionRequest, schemas.StartConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConnection, schemas.StartConnectionRequest, schemas.StartConnectionResponse), output: &StartConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +152,8 @@ func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartConnection",
-	}
 }

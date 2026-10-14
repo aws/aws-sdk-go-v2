@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a notebook execution.
@@ -85,6 +84,53 @@ type StartNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EditorId != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_EditorId, *v.EditorId)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.StartNotebookExecutionInput_EnvironmentVariables, v.EnvironmentVariables)
+	if v.ExecutionEngine != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_ExecutionEngine)
+		v.ExecutionEngine.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotebookExecutionName != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookExecutionName, *v.NotebookExecutionName)
+	}
+	if v.NotebookInstanceSecurityGroupId != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookInstanceSecurityGroupId, *v.NotebookInstanceSecurityGroupId)
+	}
+	if v.NotebookParams != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookParams, *v.NotebookParams)
+	}
+	if v.NotebookS3Location != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_NotebookS3Location)
+		v.NotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputNotebookFormat != "" {
+		s.WriteString(schemas.StartNotebookExecutionInput_OutputNotebookFormat, string(v.OutputNotebookFormat))
+	}
+	if v.OutputNotebookS3Location != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_OutputNotebookS3Location)
+		v.OutputNotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_RelativePath, *v.RelativePath)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_ServiceRole, *v.ServiceRole)
+	}
+	serializeTagList(s, schemas.StartNotebookExecutionInput_Tags, v.Tags)
+}
+
 type StartNotebookExecutionOutput struct {
 
 	// The unique identifier of the notebook execution.
@@ -96,77 +142,48 @@ type StartNotebookExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.StartNotebookExecutionOutput_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+}
+func (v *StartNotebookExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookExecutionOutput_NotebookExecutionId:
+			v.NotebookExecutionId = new(string)
+			return d.ReadString(schemas.StartNotebookExecutionOutput_NotebookExecutionId, v.NotebookExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExecution, schemas.StartNotebookExecutionInput, schemas.StartNotebookExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExecution, schemas.StartNotebookExecutionInput, schemas.StartNotebookExecutionOutput), output: &StartNotebookExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartNotebookExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNotebookExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartNotebookExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartNotebookExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +198,8 @@ func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartNotebookExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartNotebookExecution",
-	}
 }

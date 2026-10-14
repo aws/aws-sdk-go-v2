@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -152,7 +151,7 @@ type CreateContainerFleetInput struct {
 	//
 	// By default, Amazon GameLift Servers calculates the maximum number of game
 	// server container groups that can fit on each instance. This calculation is based
-	// on the CPU and memory resources of the fleet's instance type). To use the
+	// on the CPU and memory resources of the fleet's instance type. To use the
 	// calculated maximum, don't set this parameter. If you set this number manually,
 	// Amazon GameLift Servers uses your value as long as it's less than the calculated
 	// maximum.
@@ -174,8 +173,8 @@ type CreateContainerFleetInput struct {
 	//   - Port range: 4192 to a number calculated based on your fleet configuration.
 	//   Amazon GameLift Servers uses the following formula: 4192 + [# of game server
 	//   container groups per fleet instance] * [# of container ports in the game server
-	//   container group definition] + [# of container ports in the game server container
-	//   group definition]
+	//   container group definition] + [# of container ports in the per instance
+	//   container group definition]
 	//
 	// You can also choose to manually set this parameter. When manually setting this
 	// parameter, you must use port numbers that match the fleet's inbound permissions
@@ -203,8 +202,8 @@ type CreateContainerFleetInput struct {
 	//   - Port range: 4192 to a number calculated based on your fleet configuration.
 	//   Amazon GameLift Servers uses the following formula: 4192 + [# of game server
 	//   container groups per fleet instance] * [# of container ports in the game server
-	//   container group definition] + [# of container ports in the game server container
-	//   group definition]
+	//   container group definition] + [# of container ports in the per instance
+	//   container group definition]
 	//
 	// You can also choose to manually set this parameter. When manually setting this
 	// parameter, you must use port numbers that match the fleet's connection port
@@ -221,13 +220,13 @@ type CreateContainerFleetInput struct {
 	// The Amazon EC2 instance type to use for all instances in the fleet. For
 	// multi-location fleets, the instance type must be available in the home region
 	// and all remote locations. Instance type determines the computing resources and
-	// processing power that's available to host your game servers. This includes
-	// including CPU, memory, storage, and networking capacity.
+	// processing power that's available to host your game servers. This includes CPU,
+	// memory, storage, and networking capacity.
 	//
-	// By default, Amazon GameLift Servers selects an instance type that fits the
-	// needs of your container groups and is available in all selected fleet locations.
-	// You can also choose to manually set this parameter. See [Amazon Elastic Compute Cloud Instance Types]for detailed
-	// descriptions of Amazon EC2 instance types.
+	// By default, Amazon GameLift Servers uses the c5.large instance type. If this
+	// instance type does not have sufficient resources for your container groups, you
+	// can choose a different instance type that better fits your needs. See [Amazon Elastic Compute Cloud Instance Types]for
+	// detailed descriptions of Amazon EC2 instance types.
 	//
 	// You can't update this fleet property later.
 	//
@@ -257,9 +256,9 @@ type CreateContainerFleetInput struct {
 	//
 	// By default, this property is set to CLOUDWATCH .
 	//
-	// Amazon GameLift Servers requires permissions to send logs other Amazon Web
+	// Amazon GameLift Servers requires permissions to send logs to other Amazon Web
 	// Services services in your account. These permissions are included in the IAM
-	// fleet role for this container fleet (see FleetRoleArn) .
+	// fleet role for this container fleet (see FleetRoleArn ).
 	LogConfiguration *types.LogConfiguration
 
 	// The name of an Amazon Web Services CloudWatch metric group to add this fleet
@@ -283,7 +282,7 @@ type CreateContainerFleetInput struct {
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// The name of a container group definition resource that describes a set of
-	// axillary software. A fleet instance has one process for executables in this
+	// auxiliary software. A fleet instance has one process for executables in this
 	// container group. A per-instance container group is optional. You can update the
 	// fleet to add or remove a per-instance container group at any time. You can
 	// specify the container group definition's name to use the latest version.
@@ -297,9 +296,9 @@ type CreateContainerFleetInput struct {
 	PerInstanceContainerGroupDefinitionName *string
 
 	// Configures player gateway for your fleet. Player gateway provides benefits such
-	// as DDoS protection by rate limiting and validating traﬃc before it reaches game
-	// servers, hiding game server IP addresses from players, and providing updated
-	// endpoints when relay endpoints become unhealthy.
+	// as DDoS protection by rate limiting and validating traffic before it reaches
+	// game servers, hiding game server IP addresses from players, and providing
+	// updated endpoints when relay endpoints become unhealthy.
 	//
 	// How it works: When enabled, game clients connect to relay endpoints instead of
 	// to your game servers. Player gateway validates player gateway tokens and routes
@@ -326,7 +325,7 @@ type CreateContainerFleetInput struct {
 	PlayerGatewayMode types.PlayerGatewayMode
 
 	// A list of labels to assign to the new fleet resource. Tags are
-	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+	// developer-defined key-value pairs. Tagging Amazon Web Services resources is
 	// useful for resource management, access management and cost allocation. For more
 	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
 	//
@@ -334,6 +333,61 @@ type CreateContainerFleetInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateContainerFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerFleetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingType != "" {
+		s.WriteString(schemas.CreateContainerFleetInput_BillingType, string(v.BillingType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContainerFleetInput_Description, *v.Description)
+	}
+	if v.FleetRoleArn != nil {
+		s.WriteString(schemas.CreateContainerFleetInput_FleetRoleArn, *v.FleetRoleArn)
+	}
+	if v.GameServerContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.CreateContainerFleetInput_GameServerContainerGroupDefinitionName, *v.GameServerContainerGroupDefinitionName)
+	}
+	if v.GameServerContainerGroupsPerInstance != nil {
+		s.WriteInt32(schemas.CreateContainerFleetInput_GameServerContainerGroupsPerInstance, *v.GameServerContainerGroupsPerInstance)
+	}
+	if v.GameSessionCreationLimitPolicy != nil {
+		s.WriteStruct(schemas.CreateContainerFleetInput_GameSessionCreationLimitPolicy)
+		v.GameSessionCreationLimitPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceConnectionPortRange != nil {
+		s.WriteStruct(schemas.CreateContainerFleetInput_InstanceConnectionPortRange)
+		v.InstanceConnectionPortRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIpPermissionsList(s, schemas.CreateContainerFleetInput_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateContainerFleetInput_InstanceType, *v.InstanceType)
+	}
+	serializeLocationConfigurationList(s, schemas.CreateContainerFleetInput_Locations, v.Locations)
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.CreateContainerFleetInput_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricGroupList(s, schemas.CreateContainerFleetInput_MetricGroups, v.MetricGroups)
+	if v.NewGameSessionProtectionPolicy != "" {
+		s.WriteString(schemas.CreateContainerFleetInput_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
+	}
+	if v.PerInstanceContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.CreateContainerFleetInput_PerInstanceContainerGroupDefinitionName, *v.PerInstanceContainerGroupDefinitionName)
+	}
+	if v.PlayerGatewayMode != "" {
+		s.WriteString(schemas.CreateContainerFleetInput_PlayerGatewayMode, string(v.PlayerGatewayMode))
+	}
+	serializeTagList(s, schemas.CreateContainerFleetInput_Tags, v.Tags)
 }
 
 type CreateContainerFleetOutput struct {
@@ -348,65 +402,44 @@ type CreateContainerFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerFleetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerFleet != nil {
+		s.WriteStruct(schemas.CreateContainerFleetOutput_ContainerFleet)
+		v.ContainerFleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerFleetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerFleetOutput_ContainerFleet:
+			v.ContainerFleet = &types.ContainerFleet{}
+			return v.ContainerFleet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerFleet, schemas.CreateContainerFleetInput, schemas.CreateContainerFleetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateContainerFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerFleet, schemas.CreateContainerFleetInput, schemas.CreateContainerFleetOutput), output: &CreateContainerFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateContainerFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContainerFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -416,12 +449,6 @@ func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateContainerFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContainerFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -436,22 +463,8 @@ func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateContainerFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContainerFleet",
-	}
 }

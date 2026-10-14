@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates presigned URLs for accessing hub content artifacts. This operation
@@ -69,6 +69,38 @@ type CreateHubContentPresignedUrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentPresignedUrlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentPresignedUrlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentPresignedUrlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfig != nil {
+		s.WriteStruct(schemas.CreateHubContentPresignedUrlsRequest_AccessConfig)
+		v.AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubName, *v.HubName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.CreateHubContentPresignedUrlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type CreateHubContentPresignedUrlsOutput struct {
 
 	// An array of authorized URL configurations, each containing a presigned URL and
@@ -87,77 +119,51 @@ type CreateHubContentPresignedUrlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentPresignedUrlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentPresignedUrlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentPresignedUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedUrlConfigs(s, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, v.AuthorizedUrlConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *CreateHubContentPresignedUrlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHubContentPresignedUrlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs:
+			return deserializeAuthorizedUrlConfigs(d, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, &v.AuthorizedUrlConfigs)
+		case schemas.CreateHubContentPresignedUrlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.CreateHubContentPresignedUrlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHubContentPresignedUrlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentPresignedUrls, schemas.CreateHubContentPresignedUrlsRequest, schemas.CreateHubContentPresignedUrlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHubContentPresignedUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentPresignedUrls, schemas.CreateHubContentPresignedUrlsRequest, schemas.CreateHubContentPresignedUrlsResponse), output: &CreateHubContentPresignedUrlsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHubContentPresignedUrls{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHubContentPresignedUrls"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateHubContentPresignedUrlsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHubContentPresignedUrls(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +176,6 @@ func (c *Client) addOperationCreateHubContentPresignedUrlsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +281,3 @@ type CreateHubContentPresignedUrlsAPIClient interface {
 }
 
 var _ CreateHubContentPresignedUrlsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opCreateHubContentPresignedUrls(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateHubContentPresignedUrls",
-	}
-}

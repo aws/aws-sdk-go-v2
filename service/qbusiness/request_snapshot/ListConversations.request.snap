@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/conversations?maxResults=1&nextToken=__NextToken__&userId=__UserId__
+
+

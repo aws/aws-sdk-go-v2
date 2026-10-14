@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,6 +43,24 @@ type DescribeDeviceInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_DeviceName, *v.DeviceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_NextToken, *v.NextToken)
+	}
 }
 
 type DescribeDeviceOutput struct {
@@ -95,77 +112,105 @@ type DescribeDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_AgentVersion, *v.AgentVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_Description, *v.Description)
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceArn, *v.DeviceArn)
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceName, *v.DeviceName)
+	}
+	if v.IotThingName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_IotThingName, *v.IotThingName)
+	}
+	if v.LatestHeartbeat != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_LatestHeartbeat, *v.LatestHeartbeat)
+	}
+	if v.MaxModels != nil {
+		s.WriteInt32(schemas.DescribeDeviceResponse_MaxModels, *v.MaxModels)
+	}
+	serializeEdgeModels(s, schemas.DescribeDeviceResponse_Models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_NextToken, *v.NextToken)
+	}
+	if v.RegistrationTime != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_RegistrationTime, *v.RegistrationTime)
+	}
+}
+func (v *DescribeDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceResponse_AgentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_AgentVersion, v.AgentVersion)
+		case schemas.DescribeDeviceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_Description, v.Description)
+		case schemas.DescribeDeviceResponse_DeviceArn:
+			v.DeviceArn = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceArn, v.DeviceArn)
+		case schemas.DescribeDeviceResponse_DeviceFleetName:
+			v.DeviceFleetName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceFleetName, v.DeviceFleetName)
+		case schemas.DescribeDeviceResponse_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceName, v.DeviceName)
+		case schemas.DescribeDeviceResponse_IotThingName:
+			v.IotThingName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_IotThingName, v.IotThingName)
+		case schemas.DescribeDeviceResponse_LatestHeartbeat:
+			v.LatestHeartbeat = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_LatestHeartbeat, v.LatestHeartbeat)
+		case schemas.DescribeDeviceResponse_MaxModels:
+			v.MaxModels = new(int32)
+			return d.ReadInt32(schemas.DescribeDeviceResponse_MaxModels, v.MaxModels)
+		case schemas.DescribeDeviceResponse_Models:
+			return deserializeEdgeModels(d, schemas.DescribeDeviceResponse_Models, &v.Models)
+		case schemas.DescribeDeviceResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_NextToken, v.NextToken)
+		case schemas.DescribeDeviceResponse_RegistrationTime:
+			v.RegistrationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_RegistrationTime, v.RegistrationTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse), output: &DescribeDeviceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +225,8 @@ func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDevice",
-	}
 }

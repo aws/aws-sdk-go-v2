@@ -123,13 +123,21 @@ var AmazonMWAAServerless = smithy.NewServiceSchema(_AmazonMWAAServerless, "2024-
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
+
+var Code = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "Code",
+}, smithy.ShapeTypeUnion, 1)
+var Code_S3Location *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
 
 var ConflictException_ResourceId *smithy.Schema
@@ -204,7 +212,8 @@ var _IdString = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var InternalServerException_RetryAfterSeconds *smithy.Schema
@@ -244,13 +253,15 @@ var _ObjectMap_value *smithy.Schema
 var OperationTimeoutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "OperationTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 504})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 504})
 var OperationTimeoutException_Message *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_ResourceId *smithy.Schema
@@ -282,6 +293,16 @@ var RunType_ON_DEMAND *smithy.Schema
 
 var RunType_SCHEDULED *smithy.Schema
 
+var S3Location = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mwaaserverless",
+	Name:      "S3Location",
+}, smithy.ShapeTypeStructure, 3)
+var S3Location_Bucket *smithy.Schema
+
+var S3Location_ObjectKey *smithy.Schema
+
+var S3Location_VersionId *smithy.Schema
+
 var ScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ScheduleConfiguration",
@@ -302,7 +323,8 @@ var _SecurityGroupString = smithy.NewSchema(smithy.ShapeID{
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402})
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
 
 var ServiceQuotaExceededException_ResourceId *smithy.Schema
@@ -418,7 +440,8 @@ var TaskInstanceSummary_OperatorName *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
 var ThrottlingException_ServiceCode *smithy.Schema
@@ -435,7 +458,8 @@ var _TimestampValue = smithy.NewSchema(smithy.ShapeID{
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationException_Reason *smithy.Schema
@@ -620,12 +644,14 @@ var WorkflowVersionSummary_TriggerMode *smithy.Schema
 var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "CreateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateWorkflowRequest_Name *smithy.Schema
 
 var CreateWorkflowRequest_ClientToken *smithy.Schema
 
 var CreateWorkflowRequest_DefinitionS3Location *smithy.Schema
+
+var CreateWorkflowRequest_Code *smithy.Schema
 
 var CreateWorkflowRequest_RoleArn *smithy.Schema
 
@@ -732,7 +758,7 @@ var GetWorkflowRequest_WorkflowVersion *smithy.Schema
 var GetWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "GetWorkflowResponse",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var GetWorkflowResponse_WorkflowArn *smithy.Schema
 
 var GetWorkflowResponse_WorkflowVersion *smithy.Schema
@@ -754,6 +780,10 @@ var GetWorkflowResponse_EngineVersion *smithy.Schema
 var GetWorkflowResponse_WorkflowStatus *smithy.Schema
 
 var GetWorkflowResponse_DefinitionS3Location *smithy.Schema
+
+var GetWorkflowResponse_Code *smithy.Schema
+
+var GetWorkflowResponse_CodeSnapshottedAt *smithy.Schema
 
 var GetWorkflowResponse_ScheduleConfiguration *smithy.Schema
 
@@ -946,10 +976,12 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mwaaserverless",
 	Name:      "UpdateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateWorkflowRequest_WorkflowArn *smithy.Schema
 
 var UpdateWorkflowRequest_DefinitionS3Location *smithy.Schema
+
+var UpdateWorkflowRequest_Code *smithy.Schema
 
 var UpdateWorkflowRequest_RoleArn *smithy.Schema
 
@@ -979,6 +1011,14 @@ var UpdateWorkflowResponse_Warnings *smithy.Schema
 // initialization cycles
 func init() {
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
+
+	S3Location_Bucket = S3Location.AddMember("Bucket", smithyprelude.String)
+
+	S3Location_ObjectKey = S3Location.AddMember("ObjectKey", smithyprelude.String)
+
+	S3Location_VersionId = S3Location.AddMember("VersionId", smithyprelude.String)
+
+	Code_S3Location = Code.AddMember("S3Location", S3Location)
 
 	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
 
@@ -1236,6 +1276,8 @@ func init() {
 
 	CreateWorkflowRequest_DefinitionS3Location = CreateWorkflowRequest.AddMember("DefinitionS3Location", DefinitionS3Location)
 
+	CreateWorkflowRequest_Code = CreateWorkflowRequest.AddMember("Code", Code)
+
 	CreateWorkflowRequest_RoleArn = CreateWorkflowRequest.AddMember("RoleArn", _RoleARN)
 
 	CreateWorkflowRequest_Description = CreateWorkflowRequest.AddMember("Description", _DescriptionString)
@@ -1335,6 +1377,10 @@ func init() {
 	GetWorkflowResponse_WorkflowStatus = GetWorkflowResponse.AddMember("WorkflowStatus", WorkflowStatus)
 
 	GetWorkflowResponse_DefinitionS3Location = GetWorkflowResponse.AddMember("DefinitionS3Location", DefinitionS3Location)
+
+	GetWorkflowResponse_Code = GetWorkflowResponse.AddMember("Code", Code)
+
+	GetWorkflowResponse_CodeSnapshottedAt = GetWorkflowResponse.AddMember("CodeSnapshottedAt", _TimestampValue)
 
 	GetWorkflowResponse_ScheduleConfiguration = GetWorkflowResponse.AddMember("ScheduleConfiguration", ScheduleConfiguration)
 
@@ -1445,6 +1491,8 @@ func init() {
 	UpdateWorkflowRequest_WorkflowArn = UpdateWorkflowRequest.AddMember("WorkflowArn", _WorkflowArn, &smithytraits.HTTPLabel{})
 
 	UpdateWorkflowRequest_DefinitionS3Location = UpdateWorkflowRequest.AddMember("DefinitionS3Location", DefinitionS3Location)
+
+	UpdateWorkflowRequest_Code = UpdateWorkflowRequest.AddMember("Code", Code)
 
 	UpdateWorkflowRequest_RoleArn = UpdateWorkflowRequest.AddMember("RoleArn", _RoleARN)
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.BatchAddClusterNodes
+
+{"Failed":[{"AvailabilityZones":["__Member__","__Member__"],"ErrorCode":"InstanceGroupNotFound","FailedCount":1,"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"],"Message":"__Message__"},{"AvailabilityZones":["__Member__","__Member__"],"ErrorCode":"InstanceGroupNotFound","FailedCount":1,"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"],"Message":"__Message__"}],"Successful":[{"AvailabilityZones":["__Member__","__Member__"],"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"],"NodeLogicalId":"__NodeLogicalId__","Status":"Running"},{"AvailabilityZones":["__Member__","__Member__"],"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"],"NodeLogicalId":"__NodeLogicalId__","Status":"Running"}]}

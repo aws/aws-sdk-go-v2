@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.CreateEndpointAccess
+
+{"endpointName":"__EndpointName__","ownerAccount":"__OwnerAccount__","subnetIds":["__Member__","__Member__"],"vpcSecurityGroupIds":["__Member__","__Member__"],"workgroupName":"__WorkgroupName__"}

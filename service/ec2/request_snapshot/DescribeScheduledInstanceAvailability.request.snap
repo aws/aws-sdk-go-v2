@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeScheduledInstanceAvailability&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&FirstSlotStartTimeRange.EarliestTime=2000-01-01T00%3A00%3A00Z&FirstSlotStartTimeRange.LatestTime=2000-01-01T00%3A00%3A00Z&MaxResults=1&MaxSlotDurationInHours=1&MinSlotDurationInHours=1&NextToken=__NextToken__&Recurrence.Frequency=__Frequency__&Recurrence.Interval=1&Recurrence.OccurrenceDay.1=1&Recurrence.OccurrenceDay.2=1&Recurrence.OccurrenceRelativeToEnd=true&Recurrence.OccurrenceUnit=__OccurrenceUnit__&Version=2016-11-15

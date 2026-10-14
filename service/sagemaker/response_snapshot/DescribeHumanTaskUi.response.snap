@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeHumanTaskUi
+
+{"CreationTime":946684800,"HumanTaskUiArn":"__HumanTaskUiArn__","HumanTaskUiName":"__HumanTaskUiName__","HumanTaskUiStatus":"Active","UiTemplate":{"ContentSha256":"__ContentSha256__","Url":"__Url__"}}

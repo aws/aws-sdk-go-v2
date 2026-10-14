@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Timestream_20181101.UpdateAccountSettings
+
+{"MaxQueryTCU":1,"QueryCompute":{"ComputeMode":"ON_DEMAND","ProvisionedCapacity":{"NotificationConfiguration":{"RoleArn":"__RoleArn__","SnsConfiguration":{"TopicArn":"__TopicArn__"}},"TargetQueryTCU":1}},"QueryPricingModel":"BYTES_SCANNED"}

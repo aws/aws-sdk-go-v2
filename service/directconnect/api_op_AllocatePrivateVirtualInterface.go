@@ -4,13 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provisions a private virtual interface to be owned by the specified Amazon Web
@@ -91,22 +88,34 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
 	// for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -150,6 +159,28 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
+
+	// The rate limit (bandwidth allocation) applied to the virtual interface. The
+	// value must be one of the supported bandwidth values and cannot exceed the
+	// bandwidth of the parent connection or LAG. Supported values: 50Mbps , 100Mbps ,
+	// 200Mbps , 300Mbps , 400Mbps , 500Mbps , 600Mbps , 700Mbps , 800Mbps , 900Mbps ,
+	// 1Gbps , 1.2Gbps , 1.5Gbps , 1.8Gbps , 2Gbps , 2.1Gbps , 2.4Gbps , 2.7Gbps ,
+	// 3Gbps , 3.2Gbps , 3.6Gbps , 4Gbps , 5Gbps , 6Gbps , 7Gbps , 8Gbps , 9Gbps ,
+	// 10Gbps , 12Gbps , 15Gbps , 18Gbps , 20Gbps , 21Gbps , 24Gbps , 27Gbps , 30Gbps ,
+	// 32Gbps , 36Gbps , 40Gbps , 50Gbps , 60Gbps , 70Gbps , 80Gbps , 100Gbps , 120Gbps
+	// , 150Gbps , 180Gbps , 200Gbps , 210Gbps , 240Gbps , 270Gbps , 300Gbps , 320Gbps
+	// , 360Gbps , 400Gbps , 450Gbps , 480Gbps , 500Gbps , 540Gbps , 600Gbps , 700Gbps
+	// , 800Gbps , 900Gbps , 1Tbps , 1.1Tbps , 1.2Tbps , 1.3Tbps , 1.4Tbps , 1.5Tbps ,
+	// 1.6Tbps .
+	RateLimit *string
 
 	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
@@ -279,6 +310,15 @@ func (v *AllocatePrivateVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeS
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.VirtualInterface_ownerAccount, *v.OwnerAccount)
 	}
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, *v.PrefixPoolAllocatedCountIpv4)
+	}
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, *v.PrefixPoolAllocatedCountIpv6)
+	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.VirtualInterface_rateLimit, *v.RateLimit)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.VirtualInterface_region, *v.Region)
 	}
@@ -362,6 +402,15 @@ func (v *AllocatePrivateVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeseri
 		case schemas.VirtualInterface_ownerAccount:
 			v.OwnerAccount = new(string)
 			return d.ReadString(schemas.VirtualInterface_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv4:
+			v.PrefixPoolAllocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, v.PrefixPoolAllocatedCountIpv4)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv6:
+			v.PrefixPoolAllocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, v.PrefixPoolAllocatedCountIpv6)
+		case schemas.VirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.VirtualInterface_rateLimit, v.RateLimit)
 		case schemas.VirtualInterface_region:
 			v.Region = new(string)
 			return d.ReadString(schemas.VirtualInterface_region, v.Region)
@@ -398,74 +447,26 @@ func (v *AllocatePrivateVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeseri
 	})
 }
 func (c *Client) addOperationAllocatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocatePrivateVirtualInterface, schemas.AllocatePrivateVirtualInterfaceRequest, schemas.VirtualInterface)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocatePrivateVirtualInterface, schemas.AllocatePrivateVirtualInterfaceRequest, schemas.VirtualInterface), output: &AllocatePrivateVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AllocatePrivateVirtualInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAllocatePrivateVirtualInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllocatePrivateVirtualInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -480,22 +481,8 @@ func (c *Client) addOperationAllocatePrivateVirtualInterfaceMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAllocatePrivateVirtualInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AllocatePrivateVirtualInterface",
-	}
 }

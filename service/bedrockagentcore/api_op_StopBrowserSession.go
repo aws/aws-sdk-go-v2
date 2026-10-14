@@ -5,11 +5,7 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -70,30 +66,6 @@ type StopBrowserSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopBrowserSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopBrowserSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopBrowserSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BrowserIdentifier != nil {
-		s.WriteString(schemas.StopBrowserSessionRequest_browserIdentifier, *v.BrowserIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StopBrowserSessionRequest_clientToken, *v.ClientToken)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.StopBrowserSessionRequest_sessionId, *v.SessionId)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.StopBrowserSessionRequest_traceId, *v.TraceId)
-	}
-	if v.TraceParent != nil {
-		s.WriteString(schemas.StopBrowserSessionRequest_traceParent, *v.TraceParent)
-	}
-}
-
 type StopBrowserSessionOutput struct {
 
 	// The identifier of the browser.
@@ -117,79 +89,23 @@ type StopBrowserSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopBrowserSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopBrowserSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopBrowserSessionResponse_browserIdentifier:
-			v.BrowserIdentifier = new(string)
-			return d.ReadString(schemas.StopBrowserSessionResponse_browserIdentifier, v.BrowserIdentifier)
-		case schemas.StopBrowserSessionResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.StopBrowserSessionResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.StopBrowserSessionResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.StopBrowserSessionResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopBrowserSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBrowserSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBrowserSession, schemas.StopBrowserSessionRequest, schemas.StopBrowserSessionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBrowserSession{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBrowserSession, schemas.StopBrowserSessionRequest, schemas.StopBrowserSessionResponse), output: &StopBrowserSessionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopBrowserSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -199,12 +115,6 @@ func (c *Client) addOperationStopBrowserSessionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStopBrowserSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopBrowserSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,12 +127,6 @@ func (c *Client) addOperationStopBrowserSessionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,12 +166,4 @@ func (m *idempotencyToken_initializeOpStopBrowserSession) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opStopBrowserSessionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStopBrowserSession{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStopBrowserSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopBrowserSession",
-	}
 }

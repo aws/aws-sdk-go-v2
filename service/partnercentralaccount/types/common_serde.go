@@ -149,6 +149,19 @@ func deserializeVerificationResponseDetails(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func serializeAssociatedPartnerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QualificationsAssociationPartner) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeConnectionInvitationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectionInvitationSummary) {
 	if v == nil {
 		return
@@ -284,7 +297,22 @@ func serializeValidationErrorList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func deserializeAssociatedPartnerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QualificationsAssociationPartner) error {
+	*v = make([]QualificationsAssociationPartner, 0)
+	var vv QualificationsAssociationPartner
+	return smithy.ReadList(d, s, func() error {
+		vv = QualificationsAssociationPartner{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeConnectionInvitationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConnectionInvitationSummary) error {
+	*v = make([]ConnectionInvitationSummary, 0)
 	var vv ConnectionInvitationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ConnectionInvitationSummary{}
@@ -298,6 +326,7 @@ func deserializeConnectionInvitationSummaryList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeConnectionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConnectionSummary) error {
+	*v = make([]ConnectionSummary, 0)
 	var vv ConnectionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ConnectionSummary{}
@@ -311,6 +340,7 @@ func deserializeConnectionSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeErrorDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ErrorDetail) error {
+	*v = make([]ErrorDetail, 0)
 	var vv ErrorDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = ErrorDetail{}
@@ -324,6 +354,7 @@ func deserializeErrorDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeIndustrySegmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IndustrySegment) error {
+	*v = make([]IndustrySegment, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -337,6 +368,7 @@ func deserializeIndustrySegmentList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeLocalizedContentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LocalizedContent) error {
+	*v = make([]LocalizedContent, 0)
 	var vv LocalizedContent
 	return smithy.ReadList(d, s, func() error {
 		vv = LocalizedContent{}
@@ -350,6 +382,7 @@ func deserializeLocalizedContentList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeParticipantIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -363,6 +396,7 @@ func deserializeParticipantIdentifierList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializePartnerDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PartnerDomain) error {
+	*v = make([]PartnerDomain, 0)
 	var vv PartnerDomain
 	return smithy.ReadList(d, s, func() error {
 		vv = PartnerDomain{}
@@ -376,6 +410,7 @@ func deserializePartnerDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializePartnerSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PartnerSummary) error {
+	*v = make([]PartnerSummary, 0)
 	var vv PartnerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = PartnerSummary{}
@@ -389,6 +424,7 @@ func deserializePartnerSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -402,6 +438,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -415,6 +452,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeValidationErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationError) error {
+	*v = make([]ValidationError, 0)
 	var vv ValidationError
 	return smithy.ReadList(d, s, func() error {
 
@@ -459,6 +497,14 @@ func deserializeConnectionTypeDetailMap(d smithy.ShapeDeserializer, s *smithy.Sc
 	*v = make(map[string]ConnectionTypeDetail)
 	var vv ConnectionTypeDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ConnectionTypeDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ConnectionTypeDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -473,6 +519,14 @@ func deserializeConnectionTypeSummaryMap(d smithy.ShapeDeserializer, s *smithy.S
 	*v = make(map[string]ConnectionTypeSummary)
 	var vv ConnectionTypeSummary
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ConnectionTypeSummary
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = ConnectionTypeSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err

@@ -1,0 +1,5 @@
+PATCH /associations
+
+Content-Type: application/json
+
+{"StandardsControlAssociationUpdates":[{"AssociationStatus":"ENABLED","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","UpdatedReason":"__UpdatedReason__"},{"AssociationStatus":"ENABLED","SecurityControlId":"__SecurityControlId__","StandardsArn":"__StandardsArn__","UpdatedReason":"__UpdatedReason__"}]}

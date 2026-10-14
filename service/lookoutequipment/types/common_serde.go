@@ -198,6 +198,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeDataIngestionJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataIngestionJobSummary) error {
+	*v = make([]DataIngestionJobSummary, 0)
 	var vv DataIngestionJobSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DataIngestionJobSummary{}
@@ -211,6 +212,7 @@ func deserializeDataIngestionJobSummaries(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeDatasetSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DatasetSummary) error {
+	*v = make([]DatasetSummary, 0)
 	var vv DatasetSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DatasetSummary{}
@@ -224,6 +226,7 @@ func deserializeDatasetSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeFaultCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -237,6 +240,7 @@ func deserializeFaultCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeInferenceEventSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InferenceEventSummary) error {
+	*v = make([]InferenceEventSummary, 0)
 	var vv InferenceEventSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = InferenceEventSummary{}
@@ -250,6 +254,7 @@ func deserializeInferenceEventSummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeInferenceExecutionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InferenceExecutionSummary) error {
+	*v = make([]InferenceExecutionSummary, 0)
 	var vv InferenceExecutionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = InferenceExecutionSummary{}
@@ -263,6 +268,7 @@ func deserializeInferenceExecutionSummaries(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeInferenceSchedulerSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InferenceSchedulerSummary) error {
+	*v = make([]InferenceSchedulerSummary, 0)
 	var vv InferenceSchedulerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = InferenceSchedulerSummary{}
@@ -276,6 +282,7 @@ func deserializeInferenceSchedulerSummaries(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeLabelGroupSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LabelGroupSummary) error {
+	*v = make([]LabelGroupSummary, 0)
 	var vv LabelGroupSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = LabelGroupSummary{}
@@ -289,6 +296,7 @@ func deserializeLabelGroupSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeLabelSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LabelSummary) error {
+	*v = make([]LabelSummary, 0)
 	var vv LabelSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = LabelSummary{}
@@ -302,6 +310,7 @@ func deserializeLabelSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeListOfDiscardedFiles(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S3Object) error {
+	*v = make([]S3Object, 0)
 	var vv S3Object
 	return smithy.ReadList(d, s, func() error {
 		vv = S3Object{}
@@ -315,6 +324,7 @@ func deserializeListOfDiscardedFiles(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeModelSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ModelSummary) error {
+	*v = make([]ModelSummary, 0)
 	var vv ModelSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ModelSummary{}
@@ -328,6 +338,7 @@ func deserializeModelSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeModelVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ModelVersionSummary) error {
+	*v = make([]ModelVersionSummary, 0)
 	var vv ModelVersionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ModelVersionSummary{}
@@ -341,6 +352,7 @@ func deserializeModelVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRetrainingSchedulerSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RetrainingSchedulerSummary) error {
+	*v = make([]RetrainingSchedulerSummary, 0)
 	var vv RetrainingSchedulerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = RetrainingSchedulerSummary{}
@@ -354,6 +366,7 @@ func deserializeRetrainingSchedulerSummaries(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeSensorStatisticsSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SensorStatisticsSummary) error {
+	*v = make([]SensorStatisticsSummary, 0)
 	var vv SensorStatisticsSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = SensorStatisticsSummary{}
@@ -367,6 +380,7 @@ func deserializeSensorStatisticsSummaries(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -380,6 +394,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

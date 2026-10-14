@@ -5,12 +5,8 @@ package pricing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of attribute values. Attributes are similar to the details in a
@@ -57,27 +53,6 @@ type GetAttributeValuesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAttributeValuesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAttributeValuesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAttributeValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.GetAttributeValuesRequest_AttributeName, *v.AttributeName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetAttributeValuesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetAttributeValuesRequest_NextToken, *v.NextToken)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.GetAttributeValuesRequest_ServiceCode, *v.ServiceCode)
-	}
-}
-
 type GetAttributeValuesOutput struct {
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD and
@@ -93,87 +68,29 @@ type GetAttributeValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAttributeValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAttributeValuesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAttributeValuesResponse_AttributeValues:
-			return deserializeAttributeValueList(d, schemas.GetAttributeValuesResponse_AttributeValues, &v.AttributeValues)
-		case schemas.GetAttributeValuesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetAttributeValuesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAttributeValues{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeValues, schemas.GetAttributeValuesRequest, schemas.GetAttributeValuesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAttributeValues{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeValues, schemas.GetAttributeValuesRequest, schemas.GetAttributeValuesResponse), output: &GetAttributeValuesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAttributeValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAttributeValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAttributeValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +103,6 @@ func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,11 +204,3 @@ type GetAttributeValuesAPIClient interface {
 }
 
 var _ GetAttributeValuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAttributeValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAttributeValues",
-	}
-}

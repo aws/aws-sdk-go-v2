@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Lightsail container service.
@@ -132,6 +131,36 @@ type CreateContainerServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployment != nil {
+		s.WriteStruct(schemas.CreateContainerServiceRequest_deployment)
+		v.Deployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Power != "" {
+		s.WriteString(schemas.CreateContainerServiceRequest_power, string(v.Power))
+	}
+	if v.PrivateRegistryAccess != nil {
+		s.WriteStruct(schemas.CreateContainerServiceRequest_privateRegistryAccess)
+		v.PrivateRegistryAccess.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContainerServicePublicDomains(s, schemas.CreateContainerServiceRequest_publicDomainNames, v.PublicDomainNames)
+	if v.Scale != nil {
+		s.WriteInt32(schemas.CreateContainerServiceRequest_scale, *v.Scale)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CreateContainerServiceRequest_serviceName, *v.ServiceName)
+	}
+	serializeTagList(s, schemas.CreateContainerServiceRequest_tags, v.Tags)
+}
+
 type CreateContainerServiceOutput struct {
 
 	// An object that describes a container service.
@@ -143,77 +172,50 @@ type CreateContainerServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerService != nil {
+		s.WriteStruct(schemas.CreateContainerServiceResult_containerService)
+		v.ContainerService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerServiceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerServiceResult_containerService:
+			v.ContainerService = &types.ContainerService{}
+			return v.ContainerService.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerService, schemas.CreateContainerServiceRequest, schemas.CreateContainerServiceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainerService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerService, schemas.CreateContainerServiceRequest, schemas.CreateContainerServiceResult), output: &CreateContainerServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContainerService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContainerService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateContainerServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContainerService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +230,8 @@ func (c *Client) addOperationCreateContainerServiceMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateContainerService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContainerService",
-	}
 }

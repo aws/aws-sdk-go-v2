@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","summaries":[{"behaviorName":"__BehaviorName__","datapointsCollectionPercentage":1,"lastModelRefreshDate":946684800,"modelStatus":"PENDING_BUILD","securityProfileName":"__SecurityProfileName__","trainingDataCollectionStartDate":946684800},{"behaviorName":"__BehaviorName__","datapointsCollectionPercentage":1,"lastModelRefreshDate":946684800,"modelStatus":"PENDING_BUILD","securityProfileName":"__SecurityProfileName__","trainingDataCollectionStartDate":946684800}]}

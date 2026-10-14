@@ -4,12 +4,11 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a consumer with a Kinesis data stream. When you use this operation,
@@ -79,6 +78,24 @@ type RegisterStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterStreamConsumerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterStreamConsumerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterStreamConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerName != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_ConsumerName, *v.ConsumerName)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.RegisterStreamConsumerInput_StreamId, *v.StreamId)
+	}
+	serializeTagMap(s, schemas.RegisterStreamConsumerInput_Tags, v.Tags)
+}
 func (in *RegisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -100,77 +117,53 @@ type RegisterStreamConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterStreamConsumerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterStreamConsumerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterStreamConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Consumer != nil {
+		s.WriteStruct(schemas.RegisterStreamConsumerOutput_Consumer)
+		v.Consumer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterStreamConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterStreamConsumerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterStreamConsumerOutput_Consumer:
+			v.Consumer = &types.Consumer{}
+			return v.Consumer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterStreamConsumer, schemas.RegisterStreamConsumerInput, schemas.RegisterStreamConsumerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterStreamConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterStreamConsumer, schemas.RegisterStreamConsumerInput, schemas.RegisterStreamConsumerOutput), output: &RegisterStreamConsumerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterStreamConsumer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterStreamConsumer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterStreamConsumerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterStreamConsumer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +178,8 @@ func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterStreamConsumer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterStreamConsumer",
-	}
 }

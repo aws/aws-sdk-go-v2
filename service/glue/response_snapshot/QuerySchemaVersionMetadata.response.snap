@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.QuerySchemaVersionMetadata
+
+{"MetadataInfoMap":{"key0":{"CreatedTime":"__CreatedTime__","MetadataValue":"__MetadataValue__","OtherMetadataValueList":[{"CreatedTime":"__CreatedTime__","MetadataValue":"__MetadataValue__"},{"CreatedTime":"__CreatedTime__","MetadataValue":"__MetadataValue__"}]}},"NextToken":"__NextToken__","SchemaVersionId":"__SchemaVersionId__"}

@@ -1,0 +1,5 @@
+PATCH /findingsv2/batchupdatev2
+
+Content-Type: application/json
+
+{"Comment":"__Comment__","FindingIdentifiers":[{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"},{"CloudAccountUid":"__CloudAccountUid__","FindingInfoUid":"__FindingInfoUid__","MetadataProductUid":"__MetadataProductUid__"}],"MetadataUids":["__Member__","__Member__"],"SeverityId":1,"StatusId":1}

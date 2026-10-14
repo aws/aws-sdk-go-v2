@@ -1549,7 +1549,7 @@
                 "FlowLogsS3Prefix": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>.</p>\n         <p>If you don’t specify a prefix, the flow logs are stored in the\n\t\t\troot of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n         <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>"
+                        "smithy.api#documentation": "<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>.</p>\n         <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n         <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>"
                     }
                 }
             },
@@ -4185,6 +4185,38 @@
                 }
             }
         },
+        "com.amazonaws.globalaccelerator#IpAddressDetail": {
+            "type": "structure",
+            "members": {
+                "IpAddress": {
+                    "target": "com.amazonaws.globalaccelerator#IpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static IP address.</p>"
+                    }
+                },
+                "NetworkZone": {
+                    "target": "com.amazonaws.globalaccelerator#NetworkZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network zone that the specified IP address is located on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information for the IP addresses assigned to the Global Accelerator.</p>"
+            }
+        },
+        "com.amazonaws.globalaccelerator#IpAddressDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.globalaccelerator#IpAddressDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.globalaccelerator#IpAddressFamily": {
             "type": "enum",
             "members": {
@@ -4253,6 +4285,12 @@
                     "target": "com.amazonaws.globalaccelerator#IpAddressFamily",
                     "traits": {
                         "smithy.api#documentation": "<p>The types of IP addresses included in this IP set. </p>"
+                    }
+                },
+                "IpAddressDetails": {
+                    "target": "com.amazonaws.globalaccelerator#IpAddressDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of IP addresses in the IP address set, with detailed information about the IP addresses.\n\t\tAn IP address set can have a maximum of two IP addresses.</p>"
                     }
                 }
             },
@@ -5301,6 +5339,15 @@
                 }
             }
         },
+        "com.amazonaws.globalaccelerator#NetworkZone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 24
+                }
+            }
+        },
         "com.amazonaws.globalaccelerator#PortMapping": {
             "type": "structure",
             "members": {
@@ -6242,7 +6289,7 @@
                 "FlowLogsS3Prefix": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t<code>FlowLogsEnabled</code> is <code>true</code>. </p>\n         <p>If you don’t specify a prefix, the flow logs are stored in the\n\t\troot of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n         <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>"
+                        "smithy.api#documentation": "<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t<code>FlowLogsEnabled</code> is <code>true</code>. </p>\n         <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n         <p>DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id</p>"
                     }
                 }
             },

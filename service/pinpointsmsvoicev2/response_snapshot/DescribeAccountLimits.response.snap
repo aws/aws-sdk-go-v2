@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeAccountLimits
+
+{"AccountLimits":[{"Max":1,"Name":"PHONE_NUMBERS","Used":1},{"Max":1,"Name":"PHONE_NUMBERS","Used":1}],"NextToken":"__NextToken__"}

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a database snapshot in Amazon Lightsail.
@@ -43,6 +42,18 @@ type DeleteRelationalDatabaseSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.DeleteRelationalDatabaseSnapshotRequest_relationalDatabaseSnapshotName, *v.RelationalDatabaseSnapshotName)
+	}
+}
+
 type DeleteRelationalDatabaseSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -56,77 +67,45 @@ type DeleteRelationalDatabaseSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteRelationalDatabaseSnapshotResult_operations, v.Operations)
+}
+func (v *DeleteRelationalDatabaseSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRelationalDatabaseSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRelationalDatabaseSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.DeleteRelationalDatabaseSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabaseSnapshot, schemas.DeleteRelationalDatabaseSnapshotRequest, schemas.DeleteRelationalDatabaseSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabaseSnapshot, schemas.DeleteRelationalDatabaseSnapshotRequest, schemas.DeleteRelationalDatabaseSnapshotResult), output: &DeleteRelationalDatabaseSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRelationalDatabaseSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRelationalDatabaseSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRelationalDatabaseSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +120,8 @@ func (c *Client) addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRelationalDatabaseSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRelationalDatabaseSnapshot",
-	}
 }

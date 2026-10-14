@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteNetworkInterfacePermission&DryRun=true&Force=true&NetworkInterfacePermissionId=__NetworkInterfacePermissionId__&Version=2016-11-15

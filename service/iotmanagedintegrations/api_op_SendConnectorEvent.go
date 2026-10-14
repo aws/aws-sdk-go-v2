@@ -4,13 +4,8 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Relays third-party device events for a connector such as a new device or a
@@ -94,48 +89,6 @@ type SendConnectorEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendConnectorEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendConnectorEventRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendConnectorEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorDeviceId != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_ConnectorDeviceId, *v.ConnectorDeviceId)
-	}
-	if v.ConnectorId != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_ConnectorId, *v.ConnectorId)
-	}
-	if v.DeviceDiscoveryId != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_DeviceDiscoveryId, *v.DeviceDiscoveryId)
-	}
-	serializeDevices(s, schemas.SendConnectorEventRequest_Devices, v.Devices)
-	if v.MatterEndpoint != nil {
-		s.WriteStruct(schemas.SendConnectorEventRequest_MatterEndpoint)
-		v.MatterEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_Message, *v.Message)
-	}
-	if v.Operation != "" {
-		s.WriteString(schemas.SendConnectorEventRequest_Operation, string(v.Operation))
-	}
-	if v.OperationVersion != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_OperationVersion, *v.OperationVersion)
-	}
-	if v.StatusCode != nil {
-		s.WriteInt32(schemas.SendConnectorEventRequest_StatusCode, *v.StatusCode)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_TraceId, *v.TraceId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.SendConnectorEventRequest_UserId, *v.UserId)
-	}
-}
-
 type SendConnectorEventOutput struct {
 
 	// The id of the connector between the third-party cloud provider and IoT managed
@@ -150,85 +103,29 @@ type SendConnectorEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendConnectorEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendConnectorEventResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendConnectorEventResponse_ConnectorId:
-			v.ConnectorId = new(string)
-			return d.ReadString(schemas.SendConnectorEventResponse_ConnectorId, v.ConnectorId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendConnectorEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendConnectorEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendConnectorEvent, schemas.SendConnectorEventRequest, schemas.SendConnectorEventResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendConnectorEvent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendConnectorEvent, schemas.SendConnectorEventRequest, schemas.SendConnectorEventResponse), output: &SendConnectorEventOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendConnectorEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendConnectorEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendConnectorEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -243,22 +140,8 @@ func (c *Client) addOperationSendConnectorEventMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendConnectorEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendConnectorEvent",
-	}
 }

@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/name
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

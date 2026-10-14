@@ -4,13 +4,8 @@ package kinesisvideoarchivedmedia
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves an HTTP Live Streaming (HLS) URL for the stream. You can then open
@@ -347,44 +342,6 @@ type GetHLSStreamingSessionURLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetHLSStreamingSessionURLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetHLSStreamingSessionURLInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetHLSStreamingSessionURLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContainerFormat != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_ContainerFormat, string(v.ContainerFormat))
-	}
-	if v.DiscontinuityMode != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_DiscontinuityMode, string(v.DiscontinuityMode))
-	}
-	if v.DisplayFragmentTimestamp != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp, string(v.DisplayFragmentTimestamp))
-	}
-	if v.Expires != nil {
-		s.WriteInt32(schemas.GetHLSStreamingSessionURLInput_Expires, *v.Expires)
-	}
-	if v.HLSFragmentSelector != nil {
-		s.WriteStruct(schemas.GetHLSStreamingSessionURLInput_HLSFragmentSelector)
-		v.HLSFragmentSelector.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxMediaPlaylistFragmentResults != nil {
-		s.WriteInt64(schemas.GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults, *v.MaxMediaPlaylistFragmentResults)
-	}
-	if v.PlaybackMode != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_PlaybackMode, string(v.PlaybackMode))
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_StreamName, *v.StreamName)
-	}
-}
-
 type GetHLSStreamingSessionURLOutput struct {
 
 	// The URL (containing the session token) that a media player can use to retrieve
@@ -397,82 +354,26 @@ type GetHLSStreamingSessionURLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetHLSStreamingSessionURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetHLSStreamingSessionURLOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL:
-			v.HLSStreamingSessionURL = new(string)
-			return d.ReadString(schemas.GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL, v.HLSStreamingSessionURL)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetHLSStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHLSStreamingSessionURL{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHLSStreamingSessionURL, schemas.GetHLSStreamingSessionURLInput, schemas.GetHLSStreamingSessionURLOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHLSStreamingSessionURL{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHLSStreamingSessionURL, schemas.GetHLSStreamingSessionURLInput, schemas.GetHLSStreamingSessionURLOutput), output: &GetHLSStreamingSessionURLOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHLSStreamingSessionURL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetHLSStreamingSessionURL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -487,22 +388,8 @@ func (c *Client) addOperationGetHLSStreamingSessionURLMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetHLSStreamingSessionURL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetHLSStreamingSessionURL",
-	}
 }

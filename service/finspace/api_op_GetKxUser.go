@@ -4,12 +4,7 @@ package finspace
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the specified kdb user.
@@ -43,21 +38,6 @@ type GetKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxUserRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.GetKxUserRequest_userName, *v.UserName)
-	}
-}
-
 type GetKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
@@ -81,97 +61,32 @@ type GetKxUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxUserResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxUserResponse_iamRole:
-			v.IamRole = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_iamRole, v.IamRole)
-		case schemas.GetKxUserResponse_userArn:
-			v.UserArn = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_userArn, v.UserArn)
-		case schemas.GetKxUserResponse_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_userName, v.UserName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxUser, schemas.GetKxUserRequest, schemas.GetKxUserResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxUser{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxUser, schemas.GetKxUserRequest, schemas.GetKxUserResponse), output: &GetKxUserOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKxUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKxUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +101,8 @@ func (c *Client) addOperationGetKxUserMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKxUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKxUser",
-	}
 }

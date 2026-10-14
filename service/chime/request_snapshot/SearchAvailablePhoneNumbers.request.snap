@@ -1,0 +1,3 @@
+GET /search?area-code=__AreaCode__&city=__City__&country=__Country__&max-results=1&next-token=__NextToken__&phone-number-type=Local&state=__State__&toll-free-prefix=__TollFreePrefix__&type=phone-numbers
+
+

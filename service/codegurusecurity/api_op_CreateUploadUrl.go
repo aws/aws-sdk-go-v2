@@ -4,12 +4,7 @@ package codegurusecurity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a pre-signed URL, request headers used to upload a code resource, and
@@ -45,18 +40,6 @@ type CreateUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUploadUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateUploadUrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateUploadUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ScanName != nil {
-		s.WriteString(schemas.CreateUploadUrlRequest_scanName, *v.ScanName)
-	}
-}
-
 type CreateUploadUrlOutput struct {
 
 	// The identifier for the uploaded code resource. Pass this to CreateScan to use
@@ -83,90 +66,29 @@ type CreateUploadUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUploadUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateUploadUrlResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateUploadUrlResponse_codeArtifactId:
-			v.CodeArtifactId = new(string)
-			return d.ReadString(schemas.CreateUploadUrlResponse_codeArtifactId, v.CodeArtifactId)
-		case schemas.CreateUploadUrlResponse_requestHeaders:
-			return deserializeRequestHeaderMap(d, schemas.CreateUploadUrlResponse_requestHeaders, &v.RequestHeaders)
-		case schemas.CreateUploadUrlResponse_s3Url:
-			v.S3Url = new(string)
-			return d.ReadString(schemas.CreateUploadUrlResponse_s3Url, v.S3Url)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUploadUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadUrl, schemas.CreateUploadUrlRequest, schemas.CreateUploadUrlResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUploadUrl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUploadUrl, schemas.CreateUploadUrlRequest, schemas.CreateUploadUrlResponse), output: &CreateUploadUrlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUploadUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateUploadUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUploadUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +103,8 @@ func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateUploadUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUploadUrl",
-	}
 }

@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,27 +49,6 @@ type DeleteDataSourceInput struct {
 	RetainPermissionsOnRevokeFailure *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDataSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataSourceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteDataSourceInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.DeleteDataSourceInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteDataSourceInput_identifier, *v.Identifier)
-	}
-	if v.RetainPermissionsOnRevokeFailure != nil {
-		s.WriteBool(schemas.DeleteDataSourceInput_retainPermissionsOnRevokeFailure, *v.RetainPermissionsOnRevokeFailure)
-	}
 }
 
 type DeleteDataSourceOutput struct {
@@ -164,145 +139,23 @@ type DeleteDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataSourceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDataSourceOutput_assetFormsOutput:
-			return deserializeFormOutputList(d, schemas.DeleteDataSourceOutput_assetFormsOutput, &v.AssetFormsOutput)
-		case schemas.DeleteDataSourceOutput_configuration:
-			return deserializeDataSourceConfigurationOutput(d, schemas.DeleteDataSourceOutput_configuration, &v.Configuration)
-		case schemas.DeleteDataSourceOutput_connectionId:
-			v.ConnectionId = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_connectionId, v.ConnectionId)
-		case schemas.DeleteDataSourceOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDataSourceOutput_createdAt, v.CreatedAt)
-		case schemas.DeleteDataSourceOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_description, v.Description)
-		case schemas.DeleteDataSourceOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_domainId, v.DomainId)
-		case schemas.DeleteDataSourceOutput_enableSetting:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDataSourceOutput_enableSetting, &ev); err != nil {
-				return err
-			}
-			v.EnableSetting = types.EnableSetting(ev)
-			return nil
-		case schemas.DeleteDataSourceOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_environmentId, v.EnvironmentId)
-		case schemas.DeleteDataSourceOutput_errorMessage:
-			v.ErrorMessage = &types.DataSourceErrorMessage{}
-			return v.ErrorMessage.Deserialize(d)
-		case schemas.DeleteDataSourceOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_id, v.Id)
-		case schemas.DeleteDataSourceOutput_lastRunAt:
-			v.LastRunAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDataSourceOutput_lastRunAt, v.LastRunAt)
-		case schemas.DeleteDataSourceOutput_lastRunErrorMessage:
-			v.LastRunErrorMessage = &types.DataSourceErrorMessage{}
-			return v.LastRunErrorMessage.Deserialize(d)
-		case schemas.DeleteDataSourceOutput_lastRunStatus:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDataSourceOutput_lastRunStatus, &ev); err != nil {
-				return err
-			}
-			v.LastRunStatus = types.DataSourceRunStatus(ev)
-			return nil
-		case schemas.DeleteDataSourceOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_name, v.Name)
-		case schemas.DeleteDataSourceOutput_projectId:
-			v.ProjectId = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_projectId, v.ProjectId)
-		case schemas.DeleteDataSourceOutput_publishOnImport:
-			v.PublishOnImport = new(bool)
-			return d.ReadBool(schemas.DeleteDataSourceOutput_publishOnImport, v.PublishOnImport)
-		case schemas.DeleteDataSourceOutput_retainPermissionsOnRevokeFailure:
-			v.RetainPermissionsOnRevokeFailure = new(bool)
-			return d.ReadBool(schemas.DeleteDataSourceOutput_retainPermissionsOnRevokeFailure, v.RetainPermissionsOnRevokeFailure)
-		case schemas.DeleteDataSourceOutput_schedule:
-			v.Schedule = &types.ScheduleConfiguration{}
-			return v.Schedule.Deserialize(d)
-		case schemas.DeleteDataSourceOutput_selfGrantStatus:
-			return deserializeSelfGrantStatusOutput(d, schemas.DeleteDataSourceOutput_selfGrantStatus, &v.SelfGrantStatus)
-		case schemas.DeleteDataSourceOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDataSourceOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataSourceStatus(ev)
-			return nil
-		case schemas.DeleteDataSourceOutput_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.DeleteDataSourceOutput_type, v.Type)
-		case schemas.DeleteDataSourceOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDataSourceOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceInput, schemas.DeleteDataSourceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataSource{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceInput, schemas.DeleteDataSourceOutput), output: &DeleteDataSourceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -312,12 +165,6 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpDeleteDataSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -330,12 +177,6 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -375,12 +216,4 @@ func (m *idempotencyToken_initializeOpDeleteDataSource) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opDeleteDataSourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteDataSource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteDataSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDataSource",
-	}
 }

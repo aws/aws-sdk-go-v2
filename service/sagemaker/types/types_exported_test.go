@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
+func ExampleAIAdapterSource_outputUsage() {
+	var union types.AIAdapterSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIAdapterSourceMemberModelPackageArns:
+		_ = v.Value // Value is []types.AIAdapterModelPackageEntry
+
+	case *types.AIAdapterSourceMemberS3Uris:
+		_ = v.Value // Value is []types.AIAdapterS3Entry
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.AIAdapterModelPackageEntry
+var _ []types.AIAdapterS3Entry
+
 func ExampleAIBenchmarkTarget_outputUsage() {
 	var union types.AIBenchmarkTarget
 	// type switches can be used to check the union value
@@ -220,6 +242,9 @@ func ExampleEventMetadata_outputUsage() {
 	case *types.EventMetadataMemberCluster:
 		_ = v.Value // Value is types.ClusterMetadata
 
+	case *types.EventMetadataMemberDatabaseConfiguration:
+		_ = v.Value // Value is types.DatabaseConfigurationMetadata
+
 	case *types.EventMetadataMemberInstance:
 		_ = v.Value // Value is types.InstanceMetadata
 
@@ -228,6 +253,9 @@ func ExampleEventMetadata_outputUsage() {
 
 	case *types.EventMetadataMemberInstanceGroupScaling:
 		_ = v.Value // Value is types.InstanceGroupScalingMetadata
+
+	case *types.EventMetadataMemberSlurmHealth:
+		_ = v.Value // Value is types.SlurmHealthMetadata
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -238,6 +266,8 @@ func ExampleEventMetadata_outputUsage() {
 	}
 }
 
+var _ *types.SlurmHealthMetadata
+var _ *types.DatabaseConfigurationMetadata
 var _ *types.ClusterMetadata
 var _ *types.InstanceGroupMetadata
 var _ *types.InstanceMetadata

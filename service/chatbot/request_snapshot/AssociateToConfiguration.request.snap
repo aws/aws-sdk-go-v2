@@ -1,0 +1,5 @@
+POST /associate-to-configuration
+
+Content-Type: application/json
+
+{"ChatConfiguration":"__ChatConfiguration__","Resource":"__Resource__"}

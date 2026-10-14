@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.PublishDataTransformationProfile
+
+{"ChangeDescription":"__ChangeDescription__","FromExistingVersion":1,"ProfileId":"__ProfileId__","SourceFormat":"CCDA"}

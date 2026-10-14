@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Applications":[{"ApplicationPermissions":["__Member__","__Member__"],"Namespace":"__Namespace__","Type":"MCP"},{"ApplicationPermissions":["__Member__","__Member__"],"Namespace":"__Namespace__","Type":"MCP"}],"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__"}

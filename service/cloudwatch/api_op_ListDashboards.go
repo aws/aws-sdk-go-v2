@@ -5,10 +5,10 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the dashboards for your account. If you include
@@ -18,6 +18,15 @@ import (
 // ListDashboards returns up to 1000 results on one page. If there are more than
 // 1000 dashboards, you can call ListDashboards again and include the value you
 // received for NextToken in the first call, to receive the next 1000 results.
+//
+// You might have recently enabled an [opt-in Region (Region that is disabled by default)] for your account. In that Region,
+// ListDashboards can return an access denied error for up to 24 hours after you
+// enable the Region. This delay occurs while dashboard data propagates. The error
+// does not indicate a problem with your permissions. Because dashboards are
+// global, you can call ListDashboards in any other enabled Region, or retry after
+// propagation completes.
+//
+// [opt-in Region (Region that is disabled by default)]: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion
 func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput, optFns ...func(*Options)) (*ListDashboardsOutput, error) {
 	if params == nil {
 		params = &ListDashboardsInput{}
@@ -47,6 +56,21 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardNamePrefix != nil {
+		s.WriteString(schemas.ListDashboardsInput_DashboardNamePrefix, *v.DashboardNamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListDashboardsOutput struct {
 
 	// The list of matching dashboards.
@@ -61,77 +85,51 @@ type ListDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardEntries(s, schemas.ListDashboardsOutput_DashboardEntries, v.DashboardEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDashboardsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDashboardsOutput_DashboardEntries:
+			return deserializeDashboardEntries(d, schemas.ListDashboardsOutput_DashboardEntries, &v.DashboardEntries)
+		case schemas.ListDashboardsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDashboardsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsInput, schemas.ListDashboardsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsInput, schemas.ListDashboardsOutput), output: &ListDashboardsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListDashboards{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDashboards"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDashboards(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +142,6 @@ func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,11 +230,3 @@ type ListDashboardsAPIClient interface {
 }
 
 var _ ListDashboardsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDashboards(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDashboards",
-	}
-}

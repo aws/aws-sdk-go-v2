@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/protectedJobs
+
+Content-Type: application/json
+
+{"computeConfiguration":{"worker":{"number":1,"properties":{"spark":{"key0":"__Value__"}},"type":"CR.1X"}},"jobComputePayerAccountId":"__JobComputePayerAccountId__","jobParameters":{"analysisTemplateArn":"__AnalysisTemplateArn__","parameters":{"key0":"__Value__"}},"resultConfiguration":{"outputConfiguration":{"member":{"accountId":"__AccountId__"}}},"type":"PYSPARK"}

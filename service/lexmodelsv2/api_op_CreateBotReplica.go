@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,21 @@ type CreateBotReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotReplicaRequest_botId, *v.BotId)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaRequest_replicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type CreateBotReplicaOutput struct {
 
 	// The unique bot ID of the replicated bot generated.
@@ -68,77 +82,76 @@ type CreateBotReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_botId, *v.BotId)
+	}
+	if v.BotReplicaStatus != "" {
+		s.WriteString(schemas.CreateBotReplicaResponse_botReplicaStatus, string(v.BotReplicaStatus))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateBotReplicaResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_replicaRegion, *v.ReplicaRegion)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_sourceRegion, *v.SourceRegion)
+	}
+}
+func (v *CreateBotReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotReplicaResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_botId, v.BotId)
+		case schemas.CreateBotReplicaResponse_botReplicaStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotReplicaResponse_botReplicaStatus, &ev); err != nil {
+				return err
+			}
+			v.BotReplicaStatus = types.BotReplicaStatus(ev)
+			return nil
+		case schemas.CreateBotReplicaResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateBotReplicaResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateBotReplicaResponse_replicaRegion:
+			v.ReplicaRegion = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_replicaRegion, v.ReplicaRegion)
+		case schemas.CreateBotReplicaResponse_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_sourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotReplica, schemas.CreateBotReplicaRequest, schemas.CreateBotReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBotReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotReplica, schemas.CreateBotReplicaRequest, schemas.CreateBotReplicaResponse), output: &CreateBotReplicaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBotReplica{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBotReplica"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBotReplicaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBotReplica(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +166,8 @@ func (c *Client) addOperationCreateBotReplicaMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBotReplica(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBotReplica",
-	}
 }

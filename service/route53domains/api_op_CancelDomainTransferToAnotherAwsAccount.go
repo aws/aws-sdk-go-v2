@@ -4,10 +4,9 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels the transfer of a domain from the current Amazon Web Services account
@@ -53,6 +52,18 @@ type CancelDomainTransferToAnotherAwsAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDomainTransferToAnotherAwsAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDomainTransferToAnotherAwsAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDomainTransferToAnotherAwsAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CancelDomainTransferToAnotherAwsAccountRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The CancelDomainTransferToAnotherAwsAccount response includes the following
 // element.
 type CancelDomainTransferToAnotherAwsAccountOutput struct {
@@ -69,77 +80,48 @@ type CancelDomainTransferToAnotherAwsAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDomainTransferToAnotherAwsAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDomainTransferToAnotherAwsAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDomainTransferToAnotherAwsAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.CancelDomainTransferToAnotherAwsAccountResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *CancelDomainTransferToAnotherAwsAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDomainTransferToAnotherAwsAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelDomainTransferToAnotherAwsAccountResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.CancelDomainTransferToAnotherAwsAccountResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDomainTransferToAnotherAwsAccount, schemas.CancelDomainTransferToAnotherAwsAccountRequest, schemas.CancelDomainTransferToAnotherAwsAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDomainTransferToAnotherAwsAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDomainTransferToAnotherAwsAccount, schemas.CancelDomainTransferToAnotherAwsAccountRequest, schemas.CancelDomainTransferToAnotherAwsAccountResponse), output: &CancelDomainTransferToAnotherAwsAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelDomainTransferToAnotherAwsAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelDomainTransferToAnotherAwsAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelDomainTransferToAnotherAwsAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDomainTransferToAnotherAwsAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +136,8 @@ func (c *Client) addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelDomainTransferToAnotherAwsAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelDomainTransferToAnotherAwsAccount",
-	}
 }

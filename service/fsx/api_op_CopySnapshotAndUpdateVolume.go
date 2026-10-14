@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing volume by using a snapshot from another Amazon FSx for
@@ -85,6 +85,28 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotAndUpdateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotAndUpdateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotAndUpdateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyStrategy != "" {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_CopyStrategy, string(v.CopyStrategy))
+	}
+	serializeUpdateOpenZFSVolumeOptions(s, schemas.CopySnapshotAndUpdateVolumeRequest_Options, v.Options)
+	if v.SourceSnapshotARN != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN, *v.SourceSnapshotARN)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type CopySnapshotAndUpdateVolumeOutput struct {
 
 	// A list of administrative actions for the file system that are in process or
@@ -104,65 +126,55 @@ type CopySnapshotAndUpdateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotAndUpdateVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotAndUpdateVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotAndUpdateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, v.AdministrativeActions)
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *CopySnapshotAndUpdateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopySnapshotAndUpdateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.VolumeLifecycle(ev)
+			return nil
+		case schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshotAndUpdateVolume, schemas.CopySnapshotAndUpdateVolumeRequest, schemas.CopySnapshotAndUpdateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopySnapshotAndUpdateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshotAndUpdateVolume, schemas.CopySnapshotAndUpdateVolumeRequest, schemas.CopySnapshotAndUpdateVolumeResponse), output: &CopySnapshotAndUpdateVolumeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopySnapshotAndUpdateVolume{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopySnapshotAndUpdateVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -172,12 +184,6 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCopySnapshotAndUpdateVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopySnapshotAndUpdateVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +196,6 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -235,12 +235,4 @@ func (m *idempotencyToken_initializeOpCopySnapshotAndUpdateVolume) HandleInitial
 }
 func addIdempotencyToken_opCopySnapshotAndUpdateVolumeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCopySnapshotAndUpdateVolume{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCopySnapshotAndUpdateVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopySnapshotAndUpdateVolume",
-	}
 }

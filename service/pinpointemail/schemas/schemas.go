@@ -312,13 +312,15 @@ var AmazonPinpointEmailService = smithy.NewServiceSchema(_AmazonPinpointEmailSer
 var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "AccountSuspendedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AccountSuspendedException_message *smithy.Schema
 
 var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var AlreadyExistsException_message *smithy.Schema
 
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
@@ -329,7 +331,8 @@ var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_message *smithy.Schema
 
 var BehaviorOnMxFailure = smithy.NewSchema(smithy.ShapeID{
@@ -423,7 +426,8 @@ var _CloudWatchDimensionConfigurations_member *smithy.Schema
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ConcurrentModificationException_message *smithy.Schema
 
 var _ConfigurationSetName = smithy.NewSchema(smithy.ShapeID{
@@ -895,7 +899,8 @@ var _LastFreshStart = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var LimitExceededException_message *smithy.Schema
 
 var _ListOfDedicatedIpPools = smithy.NewSchema(smithy.ShapeID{
@@ -922,7 +927,8 @@ var _MailFromDomainName = smithy.NewSchema(smithy.ShapeID{
 var MailFromDomainNotVerifiedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "MailFromDomainNotVerifiedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MailFromDomainNotVerifiedException_message *smithy.Schema
 
 var MailFromDomainStatus = smithy.NewSchema(smithy.ShapeID{
@@ -973,7 +979,8 @@ var _MessageData = smithy.NewSchema(smithy.ShapeID{
 var MessageRejected = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "MessageRejected",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var MessageRejected_message *smithy.Schema
 
 var MessageTag = smithy.NewSchema(smithy.ShapeID{
@@ -1008,7 +1015,8 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_message *smithy.Schema
 
 var _OutboundMessageId = smithy.NewSchema(smithy.ShapeID{
@@ -1104,7 +1112,8 @@ var SendingOptions_SendingEnabled *smithy.Schema
 var SendingPausedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "SendingPausedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var SendingPausedException_message *smithy.Schema
 
 var _SendingPoolName = smithy.NewSchema(smithy.ShapeID{
@@ -1202,7 +1211,8 @@ var TlsPolicy_OPTIONAL *smithy.Schema
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointemail",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_message *smithy.Schema
 
 var TrackingOptions = smithy.NewSchema(smithy.ShapeID{

@@ -5,9 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a new lens version.
@@ -79,6 +79,27 @@ type CreateLensVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLensVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLensVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLensVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateLensVersionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.IsMajorVersion != nil {
+		s.WriteBool(schemas.CreateLensVersionInput_IsMajorVersion, *v.IsMajorVersion)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.CreateLensVersionInput_LensAlias, *v.LensAlias)
+	}
+	if v.LensVersion != nil {
+		s.WriteString(schemas.CreateLensVersionInput_LensVersion, *v.LensVersion)
+	}
+}
+
 type CreateLensVersionOutput struct {
 
 	// The ARN for the lens.
@@ -93,65 +114,48 @@ type CreateLensVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLensVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLensVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLensVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensArn != nil {
+		s.WriteString(schemas.CreateLensVersionOutput_LensArn, *v.LensArn)
+	}
+	if v.LensVersion != nil {
+		s.WriteString(schemas.CreateLensVersionOutput_LensVersion, *v.LensVersion)
+	}
+}
+func (v *CreateLensVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLensVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLensVersionOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.CreateLensVersionOutput_LensArn, v.LensArn)
+		case schemas.CreateLensVersionOutput_LensVersion:
+			v.LensVersion = new(string)
+			return d.ReadString(schemas.CreateLensVersionOutput_LensVersion, v.LensVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLensVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLensVersion, schemas.CreateLensVersionInput, schemas.CreateLensVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLensVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLensVersion, schemas.CreateLensVersionInput, schemas.CreateLensVersionOutput), output: &CreateLensVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLensVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLensVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -161,12 +165,6 @@ func (c *Client) addOperationCreateLensVersionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateLensVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLensVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +177,6 @@ func (c *Client) addOperationCreateLensVersionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,12 +216,4 @@ func (m *idempotencyToken_initializeOpCreateLensVersion) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateLensVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLensVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateLensVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLensVersion",
-	}
 }

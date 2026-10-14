@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.GetResourceSnapshotJob
+
+{"Arn":"__Arn__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","EngagementId":"__EngagementId__","Id":"__Id__","LastFailure":"__LastFailure__","LastSuccessfulExecutionDate":"2000-01-01T00:00:00Z","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceSnapshotTemplateName":"__ResourceSnapshotTemplateName__","ResourceType":"Opportunity","Status":"Running"}

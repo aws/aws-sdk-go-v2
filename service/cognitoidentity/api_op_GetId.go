@@ -4,10 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates (or retrieves) IdentityID. Supplying multiple logins will create an
@@ -60,6 +59,22 @@ type GetIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetIdInput_AccountId, *v.AccountId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	serializeLoginsMap(s, schemas.GetIdInput_Logins, v.Logins)
+}
+
 // Returned in response to a GetId request.
 type GetIdOutput struct {
 
@@ -72,74 +87,45 @@ type GetIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetIdResponse_IdentityId, *v.IdentityId)
+	}
+}
+func (v *GetIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.GetIdResponse_IdentityId, v.IdentityId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetId, schemas.GetIdInput, schemas.GetIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetId, schemas.GetIdInput, schemas.GetIdResponse), output: &GetIdOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetId{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +140,8 @@ func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options O
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetId",
-	}
 }

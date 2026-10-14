@@ -46,6 +46,32 @@ func serializeBatchGetRecordResultDetails(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeBatchWriteRecordEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchWriteRecordEntry) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBatchWriteRecordErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchWriteRecordError) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFeatureNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -70,6 +96,17 @@ func serializeRecord(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.
 	s.CloseList()
 }
 
+func serializeRecordIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeRecordIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -88,6 +125,19 @@ func serializeTargetStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeUnprocessedBatchWriteRecordEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchWriteRecordEntry) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -117,6 +167,7 @@ func serializeValueAsStringList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func deserializeBatchGetRecordErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchGetRecordError) error {
+	*v = make([]types.BatchGetRecordError, 0)
 	var vv types.BatchGetRecordError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchGetRecordError{}
@@ -130,6 +181,7 @@ func deserializeBatchGetRecordErrors(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeBatchGetRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchGetRecordIdentifier) error {
+	*v = make([]types.BatchGetRecordIdentifier, 0)
 	var vv types.BatchGetRecordIdentifier
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchGetRecordIdentifier{}
@@ -143,6 +195,7 @@ func deserializeBatchGetRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeBatchGetRecordResultDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchGetRecordResultDetail) error {
+	*v = make([]types.BatchGetRecordResultDetail, 0)
 	var vv types.BatchGetRecordResultDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchGetRecordResultDetail{}
@@ -155,7 +208,36 @@ func deserializeBatchGetRecordResultDetails(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeBatchWriteRecordEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchWriteRecordEntry) error {
+	*v = make([]types.BatchWriteRecordEntry, 0)
+	var vv types.BatchWriteRecordEntry
+	return smithy.ReadList(d, s, func() error {
+		vv = types.BatchWriteRecordEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchWriteRecordErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchWriteRecordError) error {
+	*v = make([]types.BatchWriteRecordError, 0)
+	var vv types.BatchWriteRecordError
+	return smithy.ReadList(d, s, func() error {
+		vv = types.BatchWriteRecordError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFeatureNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -169,6 +251,7 @@ func deserializeFeatureNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeRecord(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FeatureValue) error {
+	*v = make([]types.FeatureValue, 0)
 	var vv types.FeatureValue
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FeatureValue{}
@@ -181,7 +264,22 @@ func deserializeRecord(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 	})
 }
 
+func deserializeRecordIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -195,6 +293,7 @@ func deserializeRecordIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTargetStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TargetStore) error {
+	*v = make([]types.TargetStore, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -207,7 +306,22 @@ func deserializeTargetStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeUnprocessedBatchWriteRecordEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchWriteRecordEntry) error {
+	*v = make([]types.BatchWriteRecordEntry, 0)
+	var vv types.BatchWriteRecordEntry
+	return smithy.ReadList(d, s, func() error {
+		vv = types.BatchWriteRecordEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeUnprocessedIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchGetRecordIdentifier) error {
+	*v = make([]types.BatchGetRecordIdentifier, 0)
 	var vv types.BatchGetRecordIdentifier
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchGetRecordIdentifier{}
@@ -221,6 +335,7 @@ func deserializeUnprocessedIdentifiers(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeValueAsStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

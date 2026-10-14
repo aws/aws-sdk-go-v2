@@ -5,11 +5,7 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of TypedLink facet names for a particular schema. For
@@ -48,24 +44,6 @@ type ListTypedLinkFacetNamesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTypedLinkFacetNamesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTypedLinkFacetNamesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTypedLinkFacetNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTypedLinkFacetNamesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTypedLinkFacetNamesRequest_NextToken, *v.NextToken)
-	}
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.ListTypedLinkFacetNamesRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type ListTypedLinkFacetNamesOutput struct {
 
 	// The names of typed link facets that exist within the schema.
@@ -80,87 +58,29 @@ type ListTypedLinkFacetNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTypedLinkFacetNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTypedLinkFacetNamesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTypedLinkFacetNamesResponse_FacetNames:
-			return deserializeTypedLinkNameList(d, schemas.ListTypedLinkFacetNamesResponse_FacetNames, &v.FacetNames)
-		case schemas.ListTypedLinkFacetNamesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTypedLinkFacetNamesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTypedLinkFacetNames{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetNames, schemas.ListTypedLinkFacetNamesRequest, schemas.ListTypedLinkFacetNamesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTypedLinkFacetNames{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetNames, schemas.ListTypedLinkFacetNamesRequest, schemas.ListTypedLinkFacetNamesResponse), output: &ListTypedLinkFacetNamesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTypedLinkFacetNames"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTypedLinkFacetNamesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTypedLinkFacetNames(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +93,6 @@ func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +195,3 @@ type ListTypedLinkFacetNamesAPIClient interface {
 }
 
 var _ ListTypedLinkFacetNamesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTypedLinkFacetNames(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTypedLinkFacetNames",
-	}
-}

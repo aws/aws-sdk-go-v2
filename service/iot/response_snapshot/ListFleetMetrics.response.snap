@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"fleetMetrics":[{"metricArn":"__MetricArn__","metricName":"__MetricName__"},{"metricArn":"__MetricArn__","metricName":"__MetricName__"}],"nextToken":"__NextToken__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateProject
+
+{"ProjectDescription":"__ProjectDescription__","ProjectName":"__ProjectName__","ServiceCatalogProvisioningDetails":{"PathId":"__PathId__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningParameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateProviders":[{"CfnTemplateProvider":{"Parameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"RoleARN":"__RoleARN__","TemplateName":"__TemplateName__","TemplateURL":"__TemplateURL__"}},{"CfnTemplateProvider":{"Parameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"RoleARN":"__RoleARN__","TemplateName":"__TemplateName__","TemplateURL":"__TemplateURL__"}}]}

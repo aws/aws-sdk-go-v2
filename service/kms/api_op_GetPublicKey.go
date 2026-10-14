@@ -4,11 +4,10 @@ package kms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the public key of an asymmetric KMS key. Unlike the private key of a
@@ -128,6 +127,19 @@ type GetPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantTokenList(s, schemas.GetPublicKeyRequest_GrantTokens, v.GrantTokens)
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetPublicKeyRequest_KeyId, *v.KeyId)
+	}
+}
+
 type GetPublicKeyOutput struct {
 
 	// Instead, use the KeySpec field in the GetPublicKey response.
@@ -189,77 +201,92 @@ type GetPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPublicKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerMasterKeySpec != "" {
+		s.WriteString(schemas.GetPublicKeyResponse_CustomerMasterKeySpec, string(v.CustomerMasterKeySpec))
+	}
+	serializeEncryptionAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncryptionAlgorithms, v.EncryptionAlgorithms)
+	serializeKeyAgreementAlgorithmSpecList(s, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetPublicKeyResponse_KeyId, *v.KeyId)
+	}
+	if v.KeySpec != "" {
+		s.WriteString(schemas.GetPublicKeyResponse_KeySpec, string(v.KeySpec))
+	}
+	if v.KeyUsage != "" {
+		s.WriteString(schemas.GetPublicKeyResponse_KeyUsage, string(v.KeyUsage))
+	}
+	if v.PublicKey != nil {
+		s.WriteBlob(schemas.GetPublicKeyResponse_PublicKey, v.PublicKey)
+	}
+	serializeSigningAlgorithmSpecList(s, schemas.GetPublicKeyResponse_SigningAlgorithms, v.SigningAlgorithms)
+}
+func (v *GetPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPublicKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPublicKeyResponse_CustomerMasterKeySpec:
+			var ev string
+			if err := d.ReadString(schemas.GetPublicKeyResponse_CustomerMasterKeySpec, &ev); err != nil {
+				return err
+			}
+			v.CustomerMasterKeySpec = types.CustomerMasterKeySpec(ev)
+			return nil
+		case schemas.GetPublicKeyResponse_EncryptionAlgorithms:
+			return deserializeEncryptionAlgorithmSpecList(d, schemas.GetPublicKeyResponse_EncryptionAlgorithms, &v.EncryptionAlgorithms)
+		case schemas.GetPublicKeyResponse_KeyAgreementAlgorithms:
+			return deserializeKeyAgreementAlgorithmSpecList(d, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, &v.KeyAgreementAlgorithms)
+		case schemas.GetPublicKeyResponse_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.GetPublicKeyResponse_KeyId, v.KeyId)
+		case schemas.GetPublicKeyResponse_KeySpec:
+			var ev string
+			if err := d.ReadString(schemas.GetPublicKeyResponse_KeySpec, &ev); err != nil {
+				return err
+			}
+			v.KeySpec = types.KeySpec(ev)
+			return nil
+		case schemas.GetPublicKeyResponse_KeyUsage:
+			var ev string
+			if err := d.ReadString(schemas.GetPublicKeyResponse_KeyUsage, &ev); err != nil {
+				return err
+			}
+			v.KeyUsage = types.KeyUsageType(ev)
+			return nil
+		case schemas.GetPublicKeyResponse_PublicKey:
+			return d.ReadBlob(schemas.GetPublicKeyResponse_PublicKey, &v.PublicKey)
+		case schemas.GetPublicKeyResponse_SigningAlgorithms:
+			return deserializeSigningAlgorithmSpecList(d, schemas.GetPublicKeyResponse_SigningAlgorithms, &v.SigningAlgorithms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPublicKey, schemas.GetPublicKeyRequest, schemas.GetPublicKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPublicKey, schemas.GetPublicKeyRequest, schemas.GetPublicKeyResponse), output: &GetPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPublicKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPublicKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPublicKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPublicKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,22 +301,8 @@ func (c *Client) addOperationGetPublicKeyMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPublicKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPublicKey",
-	}
 }

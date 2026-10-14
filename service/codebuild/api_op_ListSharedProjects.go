@@ -5,10 +5,10 @@ package codebuild
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Gets a list of projects that are shared with other Amazon Web Services
@@ -63,6 +63,27 @@ type ListSharedProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedProjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSharedProjectsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedProjectsInput_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSharedProjectsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSharedProjectsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListSharedProjectsOutput struct {
 
 	//  During a previous call, the maximum number of items that can be returned is
@@ -83,74 +104,48 @@ type ListSharedProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedProjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedProjectsOutput_nextToken, *v.NextToken)
+	}
+	serializeProjectArns(s, schemas.ListSharedProjectsOutput_projects, v.Projects)
+}
+func (v *ListSharedProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharedProjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharedProjectsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharedProjectsOutput_nextToken, v.NextToken)
+		case schemas.ListSharedProjectsOutput_projects:
+			return deserializeProjectArns(d, schemas.ListSharedProjectsOutput_projects, &v.Projects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedProjects, schemas.ListSharedProjectsInput, schemas.ListSharedProjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSharedProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedProjects, schemas.ListSharedProjectsInput, schemas.ListSharedProjectsOutput), output: &ListSharedProjectsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSharedProjects{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSharedProjects"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSharedProjects(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +158,6 @@ func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +261,3 @@ type ListSharedProjectsAPIClient interface {
 }
 
 var _ ListSharedProjectsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSharedProjects(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSharedProjects",
-	}
-}

@@ -5,12 +5,8 @@ package iotwireless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a gateway task definition.
@@ -62,28 +58,6 @@ type CreateWirelessGatewayTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWirelessGatewayTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.CreateWirelessGatewayTaskDefinitionRequest_AutoCreateTasks, v.AutoCreateTasks)
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_Name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateWirelessGatewayTaskDefinitionRequest_Tags, v.Tags)
-	if v.Update != nil {
-		s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionRequest_Update)
-		v.Update.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateWirelessGatewayTaskDefinitionOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -98,76 +72,23 @@ type CreateWirelessGatewayTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWirelessGatewayTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWirelessGatewayTaskDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWirelessGatewayTaskDefinitionResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Arn, v.Arn)
-		case schemas.CreateWirelessGatewayTaskDefinitionResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateWirelessGatewayTaskDefinitionResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessGatewayTaskDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTaskDefinition, schemas.CreateWirelessGatewayTaskDefinitionRequest, schemas.CreateWirelessGatewayTaskDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessGatewayTaskDefinition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGatewayTaskDefinition, schemas.CreateWirelessGatewayTaskDefinitionRequest, schemas.CreateWirelessGatewayTaskDefinitionResponse), output: &CreateWirelessGatewayTaskDefinitionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWirelessGatewayTaskDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -177,12 +98,6 @@ func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stac
 		return err
 	}
 	if err = addOpCreateWirelessGatewayTaskDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWirelessGatewayTaskDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +110,6 @@ func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,12 +149,4 @@ func (m *idempotencyToken_initializeOpCreateWirelessGatewayTaskDefinition) Handl
 }
 func addIdempotencyToken_opCreateWirelessGatewayTaskDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWirelessGatewayTaskDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWirelessGatewayTaskDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWirelessGatewayTaskDefinition",
-	}
 }

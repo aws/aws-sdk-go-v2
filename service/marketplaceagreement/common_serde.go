@@ -40,6 +40,12 @@ func serializeAcceptedTerm(s smithy.ShapeSerializer, schema *smithy.Schema, v ty
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.AcceptedTermMemberNetPaymentTerm:
+		s.WriteUnion(schema, schemas.AcceptedTerm_netPaymentTerm)
+		s.WriteStruct(schemas.AcceptedTerm_netPaymentTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.AcceptedTermMemberPaymentScheduleTerm:
 		s.WriteUnion(schema, schemas.AcceptedTerm_paymentScheduleTerm)
 		s.WriteStruct(schemas.AcceptedTerm_paymentScheduleTerm)
@@ -85,6 +91,23 @@ func serializeAcceptedTerm(s smithy.ShapeSerializer, schema *smithy.Schema, v ty
 	}
 }
 
+func serializePriceIncrease(s smithy.ShapeSerializer, schema *smithy.Schema, v types.PriceIncrease) {
+	switch vv := v.(type) {
+	case *types.PriceIncreaseMemberFixedPercentage:
+		s.WriteUnion(schema, schemas.PriceIncrease_fixedPercentage)
+		s.WriteStruct(schemas.PriceIncrease_fixedPercentage)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.PriceIncreaseMemberPercentageRange:
+		s.WriteUnion(schema, schemas.PriceIncrease_percentageRange)
+		s.WriteStruct(schemas.PriceIncrease_percentageRange)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeRequestedTermConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.RequestedTermConfiguration) {
 	switch vv := v.(type) {
 	case *types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration:
@@ -102,6 +125,17 @@ func serializeRequestedTermConfiguration(s smithy.ShapeSerializer, schema *smith
 	case *types.RequestedTermConfigurationMemberVariablePaymentTermConfiguration:
 		s.WriteUnion(schema, schemas.RequestedTermConfiguration_variablePaymentTermConfiguration)
 		s.WriteStruct(schemas.RequestedTermConfiguration_variablePaymentTermConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeTermTemplate(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TermTemplate) {
+	switch vv := v.(type) {
+	case *types.TermTemplateMemberPaymentScheduleTermTemplate:
+		s.WriteUnion(schema, schemas.TermTemplate_paymentScheduleTermTemplate)
+		s.WriteStruct(schemas.TermTemplate_paymentScheduleTermTemplate)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -129,6 +163,10 @@ func deserializeAcceptedTerm(d smithy.ShapeDeserializer, s *smithy.Schema, v *ty
 			return vv.Deserialize(d)
 		case schemas.AcceptedTerm_legalTerm:
 			vv := &types.AcceptedTermMemberLegalTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AcceptedTerm_netPaymentTerm:
+			vv := &types.AcceptedTermMemberNetPaymentTerm{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.AcceptedTerm_paymentScheduleTerm:
@@ -164,6 +202,22 @@ func deserializeAcceptedTerm(d smithy.ShapeDeserializer, s *smithy.Schema, v *ty
 	})
 }
 
+func deserializePriceIncrease(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.PriceIncrease) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.PriceIncrease_fixedPercentage:
+			vv := &types.PriceIncreaseMemberFixedPercentage{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.PriceIncrease_percentageRange:
+			vv := &types.PriceIncreaseMemberPercentageRange{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeRequestedTermConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.RequestedTermConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -177,6 +231,18 @@ func deserializeRequestedTermConfiguration(d smithy.ShapeDeserializer, s *smithy
 			return vv.Deserialize(d)
 		case schemas.RequestedTermConfiguration_variablePaymentTermConfiguration:
 			vv := &types.RequestedTermConfigurationMemberVariablePaymentTermConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTermTemplate(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TermTemplate) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TermTemplate_paymentScheduleTermTemplate:
+			vv := &types.TermTemplateMemberPaymentScheduleTermTemplate{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -440,6 +506,19 @@ func serializePaymentRequestSummaryList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializePaymentScheduleEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PaymentScheduleEntry) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePurchaseOrders(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PurchaseOrder) {
 	if v == nil {
 		return
@@ -518,6 +597,17 @@ func serializeTaxBreakdown(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeTermTemplateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TermTemplate) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeTermTemplate(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
 func serializeUsageBasedRateCardList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageBasedRateCardItem) {
 	if v == nil {
 		return
@@ -545,6 +635,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAcceptedTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AcceptedTerm) error {
+	*v = make([]types.AcceptedTerm, 0)
 	var vv types.AcceptedTerm
 	return smithy.ReadList(d, s, func() error {
 
@@ -558,6 +649,7 @@ func deserializeAcceptedTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeAgreementCancellationRequestSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgreementCancellationRequestSummary) error {
+	*v = make([]types.AgreementCancellationRequestSummary, 0)
 	var vv types.AgreementCancellationRequestSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AgreementCancellationRequestSummary{}
@@ -571,6 +663,7 @@ func deserializeAgreementCancellationRequestSummaryList(d smithy.ShapeDeserializ
 }
 
 func deserializeAgreementEntitlementList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgreementEntitlement) error {
+	*v = make([]types.AgreementEntitlement, 0)
 	var vv types.AgreementEntitlement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AgreementEntitlement{}
@@ -584,6 +677,7 @@ func deserializeAgreementEntitlementList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeAgreementInvoiceLineItemGroupSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgreementInvoiceLineItemGroupSummary) error {
+	*v = make([]types.AgreementInvoiceLineItemGroupSummary, 0)
 	var vv types.AgreementInvoiceLineItemGroupSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AgreementInvoiceLineItemGroupSummary{}
@@ -597,6 +691,7 @@ func deserializeAgreementInvoiceLineItemGroupSummaries(d smithy.ShapeDeserialize
 }
 
 func deserializeAgreementViewSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgreementViewSummary) error {
+	*v = make([]types.AgreementViewSummary, 0)
 	var vv types.AgreementViewSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AgreementViewSummary{}
@@ -610,6 +705,7 @@ func deserializeAgreementViewSummaryList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeBatchCreateBillingAdjustmentErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchCreateBillingAdjustmentError) error {
+	*v = make([]types.BatchCreateBillingAdjustmentError, 0)
 	var vv types.BatchCreateBillingAdjustmentError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchCreateBillingAdjustmentError{}
@@ -623,6 +719,7 @@ func deserializeBatchCreateBillingAdjustmentErrorList(d smithy.ShapeDeserializer
 }
 
 func deserializeBatchCreateBillingAdjustmentItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchCreateBillingAdjustmentItem) error {
+	*v = make([]types.BatchCreateBillingAdjustmentItem, 0)
 	var vv types.BatchCreateBillingAdjustmentItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchCreateBillingAdjustmentItem{}
@@ -636,6 +733,7 @@ func deserializeBatchCreateBillingAdjustmentItemList(d smithy.ShapeDeserializer,
 }
 
 func deserializeBatchCreateBillingAdjustmentRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchCreateBillingAdjustmentRequestEntry) error {
+	*v = make([]types.BatchCreateBillingAdjustmentRequestEntry, 0)
 	var vv types.BatchCreateBillingAdjustmentRequestEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchCreateBillingAdjustmentRequestEntry{}
@@ -649,6 +747,7 @@ func deserializeBatchCreateBillingAdjustmentRequestEntryList(d smithy.ShapeDeser
 }
 
 func deserializeBillingAdjustmentSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BillingAdjustmentSummary) error {
+	*v = make([]types.BillingAdjustmentSummary, 0)
 	var vv types.BillingAdjustmentSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BillingAdjustmentSummary{}
@@ -662,6 +761,7 @@ func deserializeBillingAdjustmentSummaryList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeCharges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Charge) error {
+	*v = make([]types.Charge, 0)
 	var vv types.Charge
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Charge{}
@@ -675,6 +775,7 @@ func deserializeCharges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeConfigurableUpfrontRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurableUpfrontRateCardItem) error {
+	*v = make([]types.ConfigurableUpfrontRateCardItem, 0)
 	var vv types.ConfigurableUpfrontRateCardItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurableUpfrontRateCardItem{}
@@ -688,6 +789,7 @@ func deserializeConfigurableUpfrontRateCardList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeDimensionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Dimension) error {
+	*v = make([]types.Dimension, 0)
 	var vv types.Dimension
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Dimension{}
@@ -701,6 +803,7 @@ func deserializeDimensionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeDocumentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DocumentItem) error {
+	*v = make([]types.DocumentItem, 0)
 	var vv types.DocumentItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DocumentItem{}
@@ -714,6 +817,7 @@ func deserializeDocumentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeEntitlementList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Entitlement) error {
+	*v = make([]types.Entitlement, 0)
 	var vv types.Entitlement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Entitlement{}
@@ -727,6 +831,7 @@ func deserializeEntitlementList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeExpectedChargeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExpectedCharge) error {
+	*v = make([]types.ExpectedCharge, 0)
 	var vv types.ExpectedCharge
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExpectedCharge{}
@@ -740,6 +845,7 @@ func deserializeExpectedChargeList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Filter) error {
+	*v = make([]types.Filter, 0)
 	var vv types.Filter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Filter{}
@@ -753,6 +859,7 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -766,6 +873,7 @@ func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeGrantList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GrantItem) error {
+	*v = make([]types.GrantItem, 0)
 	var vv types.GrantItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GrantItem{}
@@ -779,6 +887,7 @@ func deserializeGrantList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeItemizedChargeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ItemizedCharge) error {
+	*v = make([]types.ItemizedCharge, 0)
 	var vv types.ItemizedCharge
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ItemizedCharge{}
@@ -792,6 +901,7 @@ func deserializeItemizedChargeList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializePaymentRequestSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PaymentRequestSummary) error {
+	*v = make([]types.PaymentRequestSummary, 0)
 	var vv types.PaymentRequestSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PaymentRequestSummary{}
@@ -804,7 +914,22 @@ func deserializePaymentRequestSummaryList(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func deserializePaymentScheduleEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PaymentScheduleEntry) error {
+	*v = make([]types.PaymentScheduleEntry, 0)
+	var vv types.PaymentScheduleEntry
+	return smithy.ReadList(d, s, func() error {
+		vv = types.PaymentScheduleEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePurchaseOrders(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PurchaseOrder) error {
+	*v = make([]types.PurchaseOrder, 0)
 	var vv types.PurchaseOrder
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PurchaseOrder{}
@@ -818,6 +943,7 @@ func deserializePurchaseOrders(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RateCardItem) error {
+	*v = make([]types.RateCardItem, 0)
 	var vv types.RateCardItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RateCardItem{}
@@ -831,6 +957,7 @@ func deserializeRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeRequestedTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RequestedTerm) error {
+	*v = make([]types.RequestedTerm, 0)
 	var vv types.RequestedTerm
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RequestedTerm{}
@@ -844,6 +971,7 @@ func deserializeRequestedTermList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Resource) error {
+	*v = make([]types.Resource, 0)
 	var vv types.Resource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Resource{}
@@ -857,6 +985,7 @@ func deserializeResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ScheduleItem) error {
+	*v = make([]types.ScheduleItem, 0)
 	var vv types.ScheduleItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ScheduleItem{}
@@ -870,6 +999,7 @@ func deserializeScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeTaxBreakdown(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaxBreakdownItem) error {
+	*v = make([]types.TaxBreakdownItem, 0)
 	var vv types.TaxBreakdownItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaxBreakdownItem{}
@@ -882,7 +1012,22 @@ func deserializeTaxBreakdown(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeTermTemplateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TermTemplate) error {
+	*v = make([]types.TermTemplate, 0)
+	var vv types.TermTemplate
+	return smithy.ReadList(d, s, func() error {
+
+		if err := deserializeTermTemplate(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeUsageBasedRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UsageBasedRateCardItem) error {
+	*v = make([]types.UsageBasedRateCardItem, 0)
 	var vv types.UsageBasedRateCardItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UsageBasedRateCardItem{}
@@ -896,6 +1041,7 @@ func deserializeUsageBasedRateCardList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}

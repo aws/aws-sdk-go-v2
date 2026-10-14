@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a RouteResponse.
@@ -61,6 +60,32 @@ type UpdateRouteResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouteResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouteResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouteResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateRouteResponseRequest_ApiId, *v.ApiId)
+	}
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.UpdateRouteResponseRequest_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	serializeRouteModels(s, schemas.UpdateRouteResponseRequest_ResponseModels, v.ResponseModels)
+	serializeRouteParameters(s, schemas.UpdateRouteResponseRequest_ResponseParameters, v.ResponseParameters)
+	if v.RouteId != nil {
+		s.WriteString(schemas.UpdateRouteResponseRequest_RouteId, *v.RouteId)
+	}
+	if v.RouteResponseId != nil {
+		s.WriteString(schemas.UpdateRouteResponseRequest_RouteResponseId, *v.RouteResponseId)
+	}
+	if v.RouteResponseKey != nil {
+		s.WriteString(schemas.UpdateRouteResponseRequest_RouteResponseKey, *v.RouteResponseKey)
+	}
+}
+
 type UpdateRouteResponseOutput struct {
 
 	// Represents the model selection expression of a route response. Supported only
@@ -85,77 +110,66 @@ type UpdateRouteResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouteResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouteResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouteResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.UpdateRouteResponseResponse_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	serializeRouteModels(s, schemas.UpdateRouteResponseResponse_ResponseModels, v.ResponseModels)
+	serializeRouteParameters(s, schemas.UpdateRouteResponseResponse_ResponseParameters, v.ResponseParameters)
+	if v.RouteResponseId != nil {
+		s.WriteString(schemas.UpdateRouteResponseResponse_RouteResponseId, *v.RouteResponseId)
+	}
+	if v.RouteResponseKey != nil {
+		s.WriteString(schemas.UpdateRouteResponseResponse_RouteResponseKey, *v.RouteResponseKey)
+	}
+}
+func (v *UpdateRouteResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouteResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouteResponseResponse_ModelSelectionExpression:
+			v.ModelSelectionExpression = new(string)
+			return d.ReadString(schemas.UpdateRouteResponseResponse_ModelSelectionExpression, v.ModelSelectionExpression)
+		case schemas.UpdateRouteResponseResponse_ResponseModels:
+			return deserializeRouteModels(d, schemas.UpdateRouteResponseResponse_ResponseModels, &v.ResponseModels)
+		case schemas.UpdateRouteResponseResponse_ResponseParameters:
+			return deserializeRouteParameters(d, schemas.UpdateRouteResponseResponse_ResponseParameters, &v.ResponseParameters)
+		case schemas.UpdateRouteResponseResponse_RouteResponseId:
+			v.RouteResponseId = new(string)
+			return d.ReadString(schemas.UpdateRouteResponseResponse_RouteResponseId, v.RouteResponseId)
+		case schemas.UpdateRouteResponseResponse_RouteResponseKey:
+			v.RouteResponseKey = new(string)
+			return d.ReadString(schemas.UpdateRouteResponseResponse_RouteResponseKey, v.RouteResponseKey)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouteResponse, schemas.UpdateRouteResponseRequest, schemas.UpdateRouteResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouteResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouteResponse, schemas.UpdateRouteResponseRequest, schemas.UpdateRouteResponseResponse), output: &UpdateRouteResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouteResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRouteResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRouteResponseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRouteResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +184,8 @@ func (c *Client) addOperationUpdateRouteResponseMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRouteResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRouteResponse",
-	}
 }

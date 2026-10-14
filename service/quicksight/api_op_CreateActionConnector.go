@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an action connector that enables Amazon Quick Sight to connect to
@@ -79,6 +78,40 @@ type CreateActionConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.AuthenticationConfig != nil {
+		s.WriteStruct(schemas.CreateActionConnectorRequest_AuthenticationConfig)
+		v.AuthenticationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_Name, *v.Name)
+	}
+	serializeResourcePermissionList(s, schemas.CreateActionConnectorRequest_Permissions, v.Permissions)
+	serializeTagList(s, schemas.CreateActionConnectorRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateActionConnectorRequest_Type, string(v.Type))
+	}
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.CreateActionConnectorRequest_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+}
+
 type CreateActionConnectorOutput struct {
 
 	// The unique identifier of the created action connector.
@@ -102,77 +135,75 @@ type CreateActionConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionConnectorId != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_ActionConnectorId, *v.ActionConnectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateActionConnectorResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateActionConnectorResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateActionConnectorResponse_Status, v.Status)
+	}
+}
+func (v *CreateActionConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActionConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActionConnectorResponse_ActionConnectorId:
+			v.ActionConnectorId = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_ActionConnectorId, v.ActionConnectorId)
+		case schemas.CreateActionConnectorResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_Arn, v.Arn)
+		case schemas.CreateActionConnectorResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateActionConnectorResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateActionConnectorResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateActionConnectorResponse_RequestId, v.RequestId)
+		case schemas.CreateActionConnectorResponse_Status:
+			return d.ReadInt32(schemas.CreateActionConnectorResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActionConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionConnector, schemas.CreateActionConnectorRequest, schemas.CreateActionConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateActionConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionConnector, schemas.CreateActionConnectorRequest, schemas.CreateActionConnectorResponse), output: &CreateActionConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateActionConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateActionConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateActionConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateActionConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +218,8 @@ func (c *Client) addOperationCreateActionConnectorMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateActionConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateActionConnector",
-	}
 }

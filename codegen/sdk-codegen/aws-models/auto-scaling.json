@@ -332,6 +332,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A scaling activity.</p>"
                     }
+                },
+                "Activities": {
+                    "target": "com.amazonaws.autoscaling#Activities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling activities related to terminating the instances from the Auto Scaling group.</p>"
+                    }
                 }
             }
         },
@@ -972,6 +978,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance lifecycle policy for the Auto Scaling group.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.autoscaling#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that manages the Auto Scaling group, if applicable. When set, only the designated\n            operator can make changes to the group configuration.</p>"
                     }
                 }
             },
@@ -2549,7 +2561,7 @@
                 "CapacityDistributionStrategy": {
                     "target": "com.amazonaws.autoscaling#CapacityDistributionStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            If launches fail in an Availability Zone, the following strategies are available. The default is <code>balanced-best-effort</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>balanced-only</code> - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>balanced-best-effort</code> - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.</p>\n            </li>\n            <li>\n               <p>\n                  <code>reservations-then-balanced</code> - Auto Scaling will first attempt to launch into your Capacity Reservations, and then balance any remaining capacity across healthy Availability Zones.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2970,6 +2982,12 @@
                     "traits": {
                         "smithy.api#enumValue": "balanced-best-effort"
                     }
+                },
+                "RESERVATIONS_THEN_BALANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reservations-then-balanced"
+                    }
                 }
             }
         },
@@ -3366,6 +3384,53 @@
                         }
                     },
                     {
+                        "title": "To create an Auto Scaling group using Distribution Segments",
+                        "documentation": "This example creates an Auto Scaling group that uses Distribution Segments to prioritize On-Demand Capacity Reservations, Capacity Blocks, interruptible Capacity Reservations, and then On-Demand capacity.",
+                        "input": {
+                            "AutoScalingGroupName": "my-asg",
+                            "MixedInstancesPolicy": {
+                                "LaunchTemplate": {
+                                    "LaunchTemplateSpecification": {
+                                        "LaunchTemplateName": "my-template-for-auto-scaling",
+                                        "Version": "$Default"
+                                    },
+                                    "Overrides": [
+                                        {
+                                            "InstanceType": "m5.24xlarge"
+                                        },
+                                        {
+                                            "InstanceType": "p5.48xlarge"
+                                        }
+                                    ]
+                                },
+                                "InstancesDistribution": {
+                                    "OnDemandAllocationStrategy": "prioritized",
+                                    "DistributionSegments": [
+                                        {
+                                            "TargetCapacityTypes": [
+                                                "on-demand-capacity-reservation",
+                                                "capacity-block",
+                                                "interruptible-capacity-reservation",
+                                                "on-demand"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            },
+                            "CapacityReservationSpecification": {
+                                "CapacityReservationTarget": {
+                                    "CapacityReservationResourceGroupArns": [
+                                        "arn:aws:resource-groups:us-east-1:123456789012:group/my-capacity-reservation-group"
+                                    ]
+                                }
+                            },
+                            "MinSize": 0,
+                            "MaxSize": 10,
+                            "DesiredCapacity": 5,
+                            "VPCZoneIdentifier": "subnet-057fa0918fEXAMPLE"
+                        }
+                    },
+                    {
                         "title": "To create an Auto Scaling group",
                         "documentation": "This example creates an Auto Scaling group.",
                         "input": {
@@ -3410,7 +3475,7 @@
                 "MixedInstancesPolicy": {
                     "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. To learn how to prioritize multiple capacity\n            types, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html\">Use Distribution\n                Segments to target multiple capacity types</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "InstanceId": {
@@ -3601,6 +3666,12 @@
                     "target": "com.amazonaws.autoscaling#InstanceLifecyclePolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance\n            transitions through its lifecycle states. Configure retention triggers to specify when instances should\n            move to a <code>Retained</code> state instead of automatic termination.\n        </p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html\">\n                Control instance retention with instance lifecycle policies</a>\n            in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n        </p>\n         <note>\n            <p>Instances in a Retained state will continue to incur standard EC2 charges until terminated.</p>\n         </note>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.autoscaling#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that manages the Auto Scaling group. If you specify this parameter, Amazon EC2 Auto Scaling\n            passes the operator identity to EC2 for instance launches and only allows the\n            designated operator to make changes to the Auto Scaling group. All mutating API calls from\n            non-operator callers are rejected with an <code>AccessDenied</code> exception.</p>"
                     }
                 }
             }
@@ -5924,7 +5995,7 @@
                 "MixedInstancesPolicy": {
                     "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this structure to launch multiple instance types and On-Demand Instances and Spot\n            Instances within a single Auto Scaling group.</p>\n         <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch\n            instances and help optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Use this structure to launch multiple instance types and configure how capacity is\n            distributed across On-Demand, Spot, and supported Capacity Reservation types within a\n            single Auto Scaling group.</p>\n         <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch\n            instances, prioritize capacity types, and help optimize your costs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 }
             },
@@ -6229,6 +6300,26 @@
         },
         "com.amazonaws.autoscaling#DisableScaleIn": {
             "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#DistributionSegment": {
+            "type": "structure",
+            "members": {
+                "TargetCapacityTypes": {
+                    "target": "com.amazonaws.autoscaling#TargetCapacityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity types to prioritize, in order. Amazon EC2 Auto Scaling attempts to launch instances in\n            the priority order of the capacity types, and within each capacity type, in the order of\n            instance types listed in your launch template <code>Overrides</code>.</p>\n         <p>The following lists the valid values:</p>\n         <dl>\n            <dt>on-demand-capacity-reservation</dt>\n            <dd>\n               <p>On-Demand Capacity Reservations.</p>\n            </dd>\n            <dt>capacity-block</dt>\n            <dd>\n               <p>Capacity Blocks.</p>\n            </dd>\n            <dt>interruptible-capacity-reservation</dt>\n            <dd>\n               <p>Interruptible Capacity Reservations.</p>\n            </dd>\n            <dt>on-demand</dt>\n            <dd>\n               <p>On-Demand capacity. Include this value to allow the group to fall back to\n                        On-Demand capacity when the preceding capacity types are unavailable.</p>\n            </dd>\n         </dl>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this structure to specify the capacity types that Amazon EC2 Auto Scaling prioritizes when it\n            launches instances.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#DistributionSegments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#DistributionSegment"
+            }
         },
         "com.amazonaws.autoscaling#Ebs": {
             "type": "structure",
@@ -6769,6 +6860,23 @@
         },
         "com.amazonaws.autoscaling#HonorCooldown": {
             "type": "boolean"
+        },
+        "com.amazonaws.autoscaling#IdempotentCallInProgressFault": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IdempotentCallInProgress",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>\n            The service is currently processing another request with the same client token. Retry\n            the request with the same client token—the in-flight operation will complete and return\n            its result.\n        </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
         },
         "com.amazonaws.autoscaling#IdempotentParameterMismatchError": {
             "type": "structure",
@@ -7563,10 +7671,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If\n            your maximum price is lower than the Spot price for the instance types that you\n            selected, your Spot Instances are not launched. We do not recommend specifying a maximum\n            price because it can lead to increased interruptions. When Spot Instances launch, you\n            pay the current Spot price. To remove a maximum price that you previously set, include\n            the property but specify an empty string (\"\") for the value.</p>\n         <important>\n            <p>If you specify a maximum price, your instances will be interrupted more frequently\n                than if you do not specify one.</p>\n         </important>\n         <p>Valid Range: Minimum value of 0.001</p>"
                     }
+                },
+                "DistributionSegments": {
+                    "target": "com.amazonaws.autoscaling#DistributionSegments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Distribution Segments configuration. Each segment contains an ordered list of\n            capacity types to prioritize.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html\">Use Distribution\n                Segments to target multiple capacity types</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to specify the distribution of On-Demand Instances and Spot\n            Instances and the allocation strategies used to fulfill On-Demand and Spot capacities\n            for a mixed instances policy.</p>"
+                "smithy.api#documentation": "<p>Use this structure to specify how a mixed instances policy distributes capacity across\n            On-Demand, Spot, and supported Capacity Reservation types, and to specify the allocation\n            strategies that are used to fulfill the capacity.</p>"
             }
         },
         "com.amazonaws.autoscaling#InstancesToUpdate": {
@@ -7862,6 +7976,9 @@
                 "target": "com.amazonaws.autoscaling#LaunchInstancesResult"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#IdempotentCallInProgressFault"
+                },
                 {
                     "target": "com.amazonaws.autoscaling#IdempotentParameterMismatchError"
                 },
@@ -8614,6 +8731,15 @@
                 "target": "com.amazonaws.autoscaling#LocalStorageType"
             }
         },
+        "com.amazonaws.autoscaling#ManagerIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.autoscaling#MaxGroupPreparedCapacity": {
             "type": "integer",
             "traits": {
@@ -8972,7 +9098,7 @@
                 "LaunchTemplate": {
                     "target": "com.amazonaws.autoscaling#LaunchTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more launch templates and the instance types (overrides) that are used to\n            launch EC2 instances to fulfill On-Demand and Spot capacities.</p>"
+                        "smithy.api#documentation": "<p>One or more launch templates and the instance types (overrides) that are used to\n            launch EC2 instances to fulfill the configured capacities.</p>"
                     }
                 },
                 "InstancesDistribution": {
@@ -8983,7 +9109,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to launch multiple instance types and On-Demand Instances and Spot\n            Instances within a single Auto Scaling group.</p>\n         <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch\n            instances and help optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Use this structure to launch multiple instance types and configure how capacity is\n            distributed across On-Demand, Spot, and supported Capacity Reservation types within a\n            single Auto Scaling group.</p>\n         <p>A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch\n            instances, prioritize capacity types, and help optimize your costs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. To learn how to prioritize multiple capacity\n            types, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html\">Use Distribution\n                Segments to target multiple capacity types</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#MonitoringEnabled": {
@@ -9113,6 +9239,22 @@
         },
         "com.amazonaws.autoscaling#OnDemandPercentageAboveBaseCapacity": {
             "type": "integer"
+        },
+        "com.amazonaws.autoscaling#Operator": {
+            "type": "structure",
+            "members": {
+                "Principal": {
+                    "target": "com.amazonaws.autoscaling#ManagerIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The service principal that is authorized to manage the Auto Scaling group. When an operator is\n            specified, only the designated operator service principal can make mutating changes to\n            the Auto Scaling group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the entity that manages an Auto Scaling group.</p>"
+            }
         },
         "com.amazonaws.autoscaling#Overrides": {
             "type": "list",
@@ -10251,7 +10393,7 @@
                 "MaxHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent100To200",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>\n         <important>\n            <p>Explicitly setting <code>MaxHealthyPercentage</code> to 100 is not equivalent to\n            omitting it. When <code>MaxHealthyPercentage</code> is explicitly set and it is\n            mathematically impossible to replace instances while honoring both\n            <code>MinHealthyPercentage</code> and <code>MaxHealthyPercentage</code> bounds\n            simultaneously, Auto Scaling launches a new instance before terminating an old one\n            (temporarily exceeding the desired capacity). When <code>MaxHealthyPercentage</code>\n            is omitted, Auto Scaling terminates an instance and launches its replacement\n            simultaneously. This behavioral difference can affect workflows that depend on\n            instance replacement ordering.</p>\n         </important>"
                     }
                 },
                 "BakeTime": {
@@ -11544,6 +11686,41 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#TargetCapacityType": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND_CAPACITY_RESERVATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand-capacity-reservation"
+                    }
+                },
+                "CAPACITY_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-block"
+                    }
+                },
+                "INTERRUPTIBLE_CAPACITY_RESERVATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "interruptible-capacity-reservation"
+                    }
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#TargetCapacityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#TargetCapacityType"
+            }
+        },
         "com.amazonaws.autoscaling#TargetGroupARNs": {
             "type": "list",
             "member": {
@@ -11689,7 +11866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This\n            operation cannot be called on instances in a warm pool.</p>\n         <p>This call simply makes a termination request. The instance is not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n         <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n         <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html\">Manual\n                scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This\n            operation cannot be called on instances in a warm pool.</p>\n         <p>This call simply makes a termination request. The instances are not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n         <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n         <p>To terminate multiple instances in a single call, use the <code>InstanceIds</code>\n            and <code>AutoScalingGroupName</code> parameters instead of <code>InstanceId</code>.\n            When terminating multiple instances, the response populates\n            <code>Activities</code> instead of <code>Activity</code>.</p>\n         <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html\">Manual\n                scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To terminate an instance in an Auto Scaling group",
@@ -11697,6 +11874,40 @@
                         "input": {
                             "InstanceId": "i-93633f9b",
                             "ShouldDecrementDesiredCapacity": false
+                        }
+                    },
+                    {
+                        "title": "To terminate multiple instances in an Auto Scaling group",
+                        "documentation": "This example terminates multiple instances from the specified Auto Scaling group without updating the size of the group. Auto Scaling launches replacement instances after the specified instances terminate.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-93633f9b",
+                                "i-ab4d5e6f7"
+                            ],
+                            "AutoScalingGroupName": "my-asg",
+                            "ShouldDecrementDesiredCapacity": false
+                        },
+                        "output": {
+                            "Activities": [
+                                {
+                                    "ActivityId": "12345678-1234-1234-1234-123456789012",
+                                    "AutoScalingGroupName": "my-asg",
+                                    "Description": "Terminating EC2 instance: i-93633f9b",
+                                    "Cause": "At 2024-03-14T00:07:30Z instance i-93633f9b was taken out of service in response to a user request.",
+                                    "StartTime": "2024-03-14T00:07:30.280Z",
+                                    "StatusCode": "InProgress",
+                                    "Progress": 0
+                                },
+                                {
+                                    "ActivityId": "12345678-1234-1234-1234-123456789013",
+                                    "AutoScalingGroupName": "my-asg",
+                                    "Description": "Terminating EC2 instance: i-ab4d5e6f7",
+                                    "Cause": "At 2024-03-14T00:07:30Z instance i-ab4d5e6f7 was taken out of service in response to a user request.",
+                                    "StartTime": "2024-03-14T00:07:30.280Z",
+                                    "StatusCode": "InProgress",
+                                    "Progress": 0
+                                }
+                            ]
                         }
                     }
                 ]
@@ -11708,9 +11919,19 @@
                 "InstanceId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen19",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.autoscaling#TerminationInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances. You can specify up to 100 instances.</p>\n         <p>This parameter requires that you also specify <code>AutoScalingGroupName</code>.</p>"
+                    }
+                },
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group. Required when using <code>InstanceIds</code>.</p>"
                     }
                 },
                 "ShouldDecrementDesiredCapacity": {
@@ -11720,6 +11941,18 @@
                         "smithy.api#documentation": "<p>Indicates whether terminating the instance also decrements the size of the Auto Scaling\n            group.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#TerminationInstanceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#XmlStringMaxLen19"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -11886,7 +12119,7 @@
                 "MixedInstancesPolicy": {
                     "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n         <p>You can remove the Distribution Segments configuration by specifying\n                <code>OnDemandBaseCapacity</code> or\n                <code>OnDemandPercentageAboveBaseCapacity</code>. You can also remove it explicitly\n            by specifying an empty list for <code>DistributionSegments</code>.</p>"
                     }
                 },
                 "MinSize": {

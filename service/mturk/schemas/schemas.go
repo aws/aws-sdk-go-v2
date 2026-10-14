@@ -713,7 +713,8 @@ var QualificationTypeStatus_Inactive *smithy.Schema
 var RequestError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mturk",
 	Name:      "RequestError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "RequestError",
 		StatusCode: 400})
 var RequestError_Message *smithy.Schema
@@ -826,7 +827,8 @@ var _ReviewResultDetailList_member *smithy.Schema
 var ServiceFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mturk",
 	Name:      "ServiceFault",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "ServiceFault",
 		StatusCode: 500})
 var ServiceFault_Message *smithy.Schema

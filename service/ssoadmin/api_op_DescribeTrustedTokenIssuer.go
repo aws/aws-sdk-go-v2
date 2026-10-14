@@ -4,13 +4,8 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves details about a trusted token issuer configuration stored in an
@@ -43,18 +38,6 @@ type DescribeTrustedTokenIssuerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedTokenIssuerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTrustedTokenIssuerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTrustedTokenIssuerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrustedTokenIssuerArn != nil {
-		s.WriteString(schemas.DescribeTrustedTokenIssuerRequest_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
-	}
-}
-
 type DescribeTrustedTokenIssuerOutput struct {
 
 	// The name of the trusted token issuer configuration.
@@ -75,97 +58,29 @@ type DescribeTrustedTokenIssuerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedTokenIssuerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTrustedTokenIssuerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTrustedTokenIssuerResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_Name, v.Name)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerArn:
-			v.TrustedTokenIssuerArn = new(string)
-			return d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerArn, v.TrustedTokenIssuerArn)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration:
-			return deserializeTrustedTokenIssuerConfiguration(d, schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration, &v.TrustedTokenIssuerConfiguration)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerType, &ev); err != nil {
-				return err
-			}
-			v.TrustedTokenIssuerType = types.TrustedTokenIssuerType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTrustedTokenIssuerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrustedTokenIssuer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedTokenIssuer, schemas.DescribeTrustedTokenIssuerRequest, schemas.DescribeTrustedTokenIssuerResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrustedTokenIssuer{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedTokenIssuer, schemas.DescribeTrustedTokenIssuerRequest, schemas.DescribeTrustedTokenIssuerResponse), output: &DescribeTrustedTokenIssuerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTrustedTokenIssuer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTrustedTokenIssuerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrustedTokenIssuer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +95,8 @@ func (c *Client) addOperationDescribeTrustedTokenIssuerMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTrustedTokenIssuer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTrustedTokenIssuer",
-	}
 }

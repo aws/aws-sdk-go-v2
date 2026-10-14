@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CoreNetworkId":"__CoreNetworkId__","PrefixListArn":"__PrefixListArn__"}

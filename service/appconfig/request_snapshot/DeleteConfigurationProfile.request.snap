@@ -1,0 +1,4 @@
+DELETE /applications/__ApplicationId__/configurationprofiles/__ConfigurationProfileId__
+
+X-Amzn-Deletion-Protection-Check: ACCOUNT_DEFAULT
+

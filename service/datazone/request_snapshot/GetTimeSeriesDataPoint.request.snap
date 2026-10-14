@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/time-series-data-points/__Identifier__?formName=__FormName__
+
+

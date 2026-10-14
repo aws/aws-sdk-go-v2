@@ -5,12 +5,8 @@ package mediapackagev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -99,6 +95,15 @@ type CreateOriginEndpointInput struct {
 	// seconds (14 days).
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests. This setting is valid
+	// only when the associated channel's InputType is HLS . You can't change the
+	// stream name output mode after you create the endpoint.
+	//
+	// INDEX uses numeric indices for stream names (for example, 1, 2, 3).
+	// PASSTHROUGH_NAME uses the stream names from the input manifest. If you don't
+	// specify a value, the default is INDEX .
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// A comma-separated list of tag key:value pairs that you define. For example:
 	//
 	//     "Key1": "Value1",
@@ -112,54 +117,6 @@ type CreateOriginEndpointInput struct {
 	UriSeparator types.UriSeparator
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateOriginEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateOriginEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.CreateOriginEndpointRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.CreateOriginEndpointRequest_ChannelName, *v.ChannelName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateOriginEndpointRequest_ClientToken, *v.ClientToken)
-	}
-	if v.ContainerType != "" {
-		s.WriteString(schemas.CreateOriginEndpointRequest_ContainerType, string(v.ContainerType))
-	}
-	serializeCreateDashManifests(s, schemas.CreateOriginEndpointRequest_DashManifests, v.DashManifests)
-	if v.Description != nil {
-		s.WriteString(schemas.CreateOriginEndpointRequest_Description, *v.Description)
-	}
-	if v.ForceEndpointErrorConfiguration != nil {
-		s.WriteStruct(schemas.CreateOriginEndpointRequest_ForceEndpointErrorConfiguration)
-		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeCreateHlsManifests(s, schemas.CreateOriginEndpointRequest_HlsManifests, v.HlsManifests)
-	serializeCreateLowLatencyHlsManifests(s, schemas.CreateOriginEndpointRequest_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
-	serializeCreateMssManifests(s, schemas.CreateOriginEndpointRequest_MssManifests, v.MssManifests)
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.CreateOriginEndpointRequest_OriginEndpointName, *v.OriginEndpointName)
-	}
-	if v.Segment != nil {
-		s.WriteStruct(schemas.CreateOriginEndpointRequest_Segment)
-		v.Segment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartoverWindowSeconds != nil {
-		s.WriteInt32(schemas.CreateOriginEndpointRequest_StartoverWindowSeconds, *v.StartoverWindowSeconds)
-	}
-	serializeTagMap(s, schemas.CreateOriginEndpointRequest_Tags, v.Tags)
-	if v.UriSeparator != "" {
-		s.WriteString(schemas.CreateOriginEndpointRequest_UriSeparator, string(v.UriSeparator))
-	}
 }
 
 type CreateOriginEndpointOutput struct {
@@ -238,6 +195,9 @@ type CreateOriginEndpointOutput struct {
 	// content that falls within the window.
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
@@ -250,127 +210,23 @@ type CreateOriginEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateOriginEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateOriginEndpointResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_Arn, v.Arn)
-		case schemas.CreateOriginEndpointResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.CreateOriginEndpointResponse_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_ChannelName, v.ChannelName)
-		case schemas.CreateOriginEndpointResponse_ContainerType:
-			var ev string
-			if err := d.ReadString(schemas.CreateOriginEndpointResponse_ContainerType, &ev); err != nil {
-				return err
-			}
-			v.ContainerType = types.ContainerType(ev)
-			return nil
-		case schemas.CreateOriginEndpointResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateOriginEndpointResponse_CreatedAt, v.CreatedAt)
-		case schemas.CreateOriginEndpointResponse_DashManifests:
-			return deserializeGetDashManifests(d, schemas.CreateOriginEndpointResponse_DashManifests, &v.DashManifests)
-		case schemas.CreateOriginEndpointResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_Description, v.Description)
-		case schemas.CreateOriginEndpointResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_ETag, v.ETag)
-		case schemas.CreateOriginEndpointResponse_ForceEndpointErrorConfiguration:
-			v.ForceEndpointErrorConfiguration = &types.ForceEndpointErrorConfiguration{}
-			return v.ForceEndpointErrorConfiguration.Deserialize(d)
-		case schemas.CreateOriginEndpointResponse_HlsManifests:
-			return deserializeGetHlsManifests(d, schemas.CreateOriginEndpointResponse_HlsManifests, &v.HlsManifests)
-		case schemas.CreateOriginEndpointResponse_LowLatencyHlsManifests:
-			return deserializeGetLowLatencyHlsManifests(d, schemas.CreateOriginEndpointResponse_LowLatencyHlsManifests, &v.LowLatencyHlsManifests)
-		case schemas.CreateOriginEndpointResponse_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateOriginEndpointResponse_ModifiedAt, v.ModifiedAt)
-		case schemas.CreateOriginEndpointResponse_MssManifests:
-			return deserializeGetMssManifests(d, schemas.CreateOriginEndpointResponse_MssManifests, &v.MssManifests)
-		case schemas.CreateOriginEndpointResponse_OriginEndpointName:
-			v.OriginEndpointName = new(string)
-			return d.ReadString(schemas.CreateOriginEndpointResponse_OriginEndpointName, v.OriginEndpointName)
-		case schemas.CreateOriginEndpointResponse_Segment:
-			v.Segment = &types.Segment{}
-			return v.Segment.Deserialize(d)
-		case schemas.CreateOriginEndpointResponse_StartoverWindowSeconds:
-			v.StartoverWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateOriginEndpointResponse_StartoverWindowSeconds, v.StartoverWindowSeconds)
-		case schemas.CreateOriginEndpointResponse_Tags:
-			return deserializeTagMap(d, schemas.CreateOriginEndpointResponse_Tags, &v.Tags)
-		case schemas.CreateOriginEndpointResponse_UriSeparator:
-			var ev string
-			if err := d.ReadString(schemas.CreateOriginEndpointResponse_UriSeparator, &ev); err != nil {
-				return err
-			}
-			v.UriSeparator = types.UriSeparator(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOriginEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOriginEndpoint, schemas.CreateOriginEndpointRequest, schemas.CreateOriginEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOriginEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOriginEndpoint, schemas.CreateOriginEndpointRequest, schemas.CreateOriginEndpointResponse), output: &CreateOriginEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOriginEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -380,12 +236,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateOriginEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOriginEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -398,12 +248,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -443,12 +287,4 @@ func (m *idempotencyToken_initializeOpCreateOriginEndpoint) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateOriginEndpointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateOriginEndpoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateOriginEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOriginEndpoint",
-	}
 }

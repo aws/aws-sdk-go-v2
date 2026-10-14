@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The BatchWriteItem operation puts or deletes multiple items in one or more
@@ -33,12 +33,12 @@ import (
 // iteration would check for unprocessed items and submit a new BatchWriteItem
 // request with those unprocessed items until all items have been processed.
 //
-// For tables and indexes with provisioned capacity, if none of the items can be
-// processed due to insufficient provisioned throughput on all of the tables in the
-// request, then BatchWriteItem returns a ProvisionedThroughputExceededException .
-// For all tables and indexes, if none of the items can be processed due to other
-// throttling scenarios (such as exceeding partition level limits), then
-// BatchWriteItem returns a ThrottlingException .
+// If BatchWriteItem cannot process any items due to throttling (for example,
+// insufficient provisioned throughput on the tables in the request, or
+// partition-level or account-level limits), it returns a
+// ProvisionedThroughputExceededException or a ThrottlingException . Both indicate
+// that the request was throttled; check the ThrottlingReason field in the
+// returned exception for details.
 //
 // If DynamoDB returns any unprocessed items, you should retry the batch operation
 // on those items. However, we strongly recommend that you use an exponential
@@ -170,6 +170,21 @@ type BatchWriteItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchWriteItemRequestMap(s, schemas.BatchWriteItemInput_RequestItems, v.RequestItems)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.BatchWriteItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.BatchWriteItemInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+}
 func (in *BatchWriteItemInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
 		v1 := in.RequestItems
@@ -192,6 +207,9 @@ type BatchWriteItemOutput struct {
 	//   - TableName - The table that consumed the provisioned throughput.
 	//
 	//   - CapacityUnits - The total number of capacity units consumed.
+	//
+	// If the table has vector indexes, each element also includes a VectorIndexes
+	// field with VectorWriteRequestBytes consumed for each affected vector index.
 	ConsumedCapacity []types.ConsumedCapacity
 
 	// A list of tables that were processed by BatchWriteItem and, for each table,
@@ -251,68 +269,48 @@ type BatchWriteItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.BatchWriteItemOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializeItemCollectionMetricsPerTable(s, schemas.BatchWriteItemOutput_ItemCollectionMetrics, v.ItemCollectionMetrics)
+	serializeBatchWriteItemRequestMap(s, schemas.BatchWriteItemOutput_UnprocessedItems, v.UnprocessedItems)
+}
+func (v *BatchWriteItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteItemOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.BatchWriteItemOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.BatchWriteItemOutput_ItemCollectionMetrics:
+			return deserializeItemCollectionMetricsPerTable(d, schemas.BatchWriteItemOutput_ItemCollectionMetrics, &v.ItemCollectionMetrics)
+		case schemas.BatchWriteItemOutput_UnprocessedItems:
+			return deserializeBatchWriteItemRequestMap(d, schemas.BatchWriteItemOutput_UnprocessedItems, &v.UnprocessedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchWriteItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteItem, schemas.BatchWriteItemInput, schemas.BatchWriteItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchWriteItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteItem, schemas.BatchWriteItemInput, schemas.BatchWriteItemOutput), output: &BatchWriteItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchWriteItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchWriteItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchWriteItemDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -322,12 +320,6 @@ func (c *Client) addOperationBatchWriteItemMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpBatchWriteItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchWriteItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -346,12 +338,6 @@ func (c *Client) addOperationBatchWriteItemMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -401,12 +387,4 @@ func (c *Client) fetchOpBatchWriteItemDiscoverEndpoint(ctx context.Context, regi
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opBatchWriteItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchWriteItem",
-	}
 }

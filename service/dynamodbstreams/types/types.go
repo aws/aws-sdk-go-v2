@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -42,6 +44,12 @@ type AttributeValueMemberB struct {
 }
 
 func (*AttributeValueMemberB) isAttributeValue() {}
+func (v *AttributeValueMemberB) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.AttributeValue_B, v.Value)
+}
+func (v *AttributeValueMemberB) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.AttributeValue_B, &v.Value)
+}
 
 // An attribute of type Boolean. For example:
 //
@@ -53,6 +61,12 @@ type AttributeValueMemberBOOL struct {
 }
 
 func (*AttributeValueMemberBOOL) isAttributeValue() {}
+func (v *AttributeValueMemberBOOL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AttributeValue_BOOL, v.Value)
+}
+func (v *AttributeValueMemberBOOL) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AttributeValue_BOOL, &v.Value)
+}
 
 // An attribute of type Binary Set. For example:
 //
@@ -64,6 +78,12 @@ type AttributeValueMemberBS struct {
 }
 
 func (*AttributeValueMemberBS) isAttributeValue() {}
+func (v *AttributeValueMemberBS) Serialize(s smithy.ShapeSerializer) {
+	serializeBinarySetAttributeValue(s, schemas.AttributeValue_BS, v.Value)
+}
+func (v *AttributeValueMemberBS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeBinarySetAttributeValue(d, schemas.AttributeValue_BS, &v.Value)
+}
 
 // An attribute of type List. For example:
 //
@@ -75,6 +95,12 @@ type AttributeValueMemberL struct {
 }
 
 func (*AttributeValueMemberL) isAttributeValue() {}
+func (v *AttributeValueMemberL) Serialize(s smithy.ShapeSerializer) {
+	serializeListAttributeValue(s, schemas.AttributeValue_L, v.Value)
+}
+func (v *AttributeValueMemberL) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeListAttributeValue(d, schemas.AttributeValue_L, &v.Value)
+}
 
 // An attribute of type Map. For example:
 //
@@ -86,6 +112,12 @@ type AttributeValueMemberM struct {
 }
 
 func (*AttributeValueMemberM) isAttributeValue() {}
+func (v *AttributeValueMemberM) Serialize(s smithy.ShapeSerializer) {
+	serializeMapAttributeValue(s, schemas.AttributeValue_M, v.Value)
+}
+func (v *AttributeValueMemberM) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeMapAttributeValue(d, schemas.AttributeValue_M, &v.Value)
+}
 
 // An attribute of type Number. For example:
 //
@@ -101,6 +133,12 @@ type AttributeValueMemberN struct {
 }
 
 func (*AttributeValueMemberN) isAttributeValue() {}
+func (v *AttributeValueMemberN) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_N, v.Value)
+}
+func (v *AttributeValueMemberN) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_N, &v.Value)
+}
 
 // An attribute of type Number Set. For example:
 //
@@ -116,6 +154,12 @@ type AttributeValueMemberNS struct {
 }
 
 func (*AttributeValueMemberNS) isAttributeValue() {}
+func (v *AttributeValueMemberNS) Serialize(s smithy.ShapeSerializer) {
+	serializeNumberSetAttributeValue(s, schemas.AttributeValue_NS, v.Value)
+}
+func (v *AttributeValueMemberNS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeNumberSetAttributeValue(d, schemas.AttributeValue_NS, &v.Value)
+}
 
 // An attribute of type Null. For example:
 //
@@ -127,6 +171,12 @@ type AttributeValueMemberNULL struct {
 }
 
 func (*AttributeValueMemberNULL) isAttributeValue() {}
+func (v *AttributeValueMemberNULL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AttributeValue_NULL, v.Value)
+}
+func (v *AttributeValueMemberNULL) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AttributeValue_NULL, &v.Value)
+}
 
 // An attribute of type String. For example:
 //
@@ -138,6 +188,12 @@ type AttributeValueMemberS struct {
 }
 
 func (*AttributeValueMemberS) isAttributeValue() {}
+func (v *AttributeValueMemberS) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_S, v.Value)
+}
+func (v *AttributeValueMemberS) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_S, &v.Value)
+}
 
 // An attribute of type String Set. For example:
 //
@@ -149,6 +205,12 @@ type AttributeValueMemberSS struct {
 }
 
 func (*AttributeValueMemberSS) isAttributeValue() {}
+func (v *AttributeValueMemberSS) Serialize(s smithy.ShapeSerializer) {
+	serializeStringSetAttributeValue(s, schemas.AttributeValue_SS, v.Value)
+}
+func (v *AttributeValueMemberSS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringSetAttributeValue(d, schemas.AttributeValue_SS, &v.Value)
+}
 
 // Contains details about the type of identity that made the request.
 type Identity struct {
@@ -161,6 +223,34 @@ type Identity struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Identity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Identity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Identity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.Identity_PrincipalId, *v.PrincipalId)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Identity_Type, *v.Type)
+	}
+}
+func (v *Identity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Identity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Identity_PrincipalId:
+			v.PrincipalId = new(string)
+			return d.ReadString(schemas.Identity_PrincipalId, v.PrincipalId)
+		case schemas.Identity_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Identity_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Represents a single element of a key schema. A key schema specifies the
@@ -201,6 +291,38 @@ type KeySchemaElement struct {
 	KeyType KeyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeySchemaElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeySchemaElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeySchemaElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.KeySchemaElement_AttributeName, *v.AttributeName)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.KeySchemaElement_KeyType, string(v.KeyType))
+	}
+}
+func (v *KeySchemaElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeySchemaElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeySchemaElement_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.KeySchemaElement_AttributeName, v.AttributeName)
+		case schemas.KeySchemaElement_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.KeySchemaElement_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A description of a unique event within a stream.
@@ -253,6 +375,72 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.Record_awsRegion, *v.AwsRegion)
+	}
+	if v.Dynamodb != nil {
+		s.WriteStruct(schemas.Record_dynamodb)
+		v.Dynamodb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventID != nil {
+		s.WriteString(schemas.Record_eventID, *v.EventID)
+	}
+	if v.EventName != "" {
+		s.WriteString(schemas.Record_eventName, string(v.EventName))
+	}
+	if v.EventSource != nil {
+		s.WriteString(schemas.Record_eventSource, *v.EventSource)
+	}
+	if v.EventVersion != nil {
+		s.WriteString(schemas.Record_eventVersion, *v.EventVersion)
+	}
+	if v.UserIdentity != nil {
+		s.WriteStruct(schemas.Record_userIdentity)
+		v.UserIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_awsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.Record_awsRegion, v.AwsRegion)
+		case schemas.Record_dynamodb:
+			v.Dynamodb = &StreamRecord{}
+			return v.Dynamodb.Deserialize(d)
+		case schemas.Record_eventID:
+			v.EventID = new(string)
+			return d.ReadString(schemas.Record_eventID, v.EventID)
+		case schemas.Record_eventName:
+			var ev string
+			if err := d.ReadString(schemas.Record_eventName, &ev); err != nil {
+				return err
+			}
+			v.EventName = OperationType(ev)
+			return nil
+		case schemas.Record_eventSource:
+			v.EventSource = new(string)
+			return d.ReadString(schemas.Record_eventSource, v.EventSource)
+		case schemas.Record_eventVersion:
+			v.EventVersion = new(string)
+			return d.ReadString(schemas.Record_eventVersion, v.EventVersion)
+		case schemas.Record_userIdentity:
+			v.UserIdentity = &Identity{}
+			return v.UserIdentity.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The beginning and ending sequence numbers for the stream records contained
 // within a shard.
 type SequenceNumberRange struct {
@@ -266,6 +454,34 @@ type SequenceNumberRange struct {
 	StartingSequenceNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SequenceNumberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SequenceNumberRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SequenceNumberRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_EndingSequenceNumber, *v.EndingSequenceNumber)
+	}
+	if v.StartingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_StartingSequenceNumber, *v.StartingSequenceNumber)
+	}
+}
+func (v *SequenceNumberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SequenceNumberRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SequenceNumberRange_EndingSequenceNumber:
+			v.EndingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_EndingSequenceNumber, v.EndingSequenceNumber)
+		case schemas.SequenceNumberRange_StartingSequenceNumber:
+			v.StartingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_StartingSequenceNumber, v.StartingSequenceNumber)
+		}
+		return nil
+	})
 }
 
 // A uniquely identified group of stream records within a stream.
@@ -283,6 +499,42 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Shard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentShardId != nil {
+		s.WriteString(schemas.Shard_ParentShardId, *v.ParentShardId)
+	}
+	if v.SequenceNumberRange != nil {
+		s.WriteStruct(schemas.Shard_SequenceNumberRange)
+		v.SequenceNumberRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.Shard_ShardId, *v.ShardId)
+	}
+}
+func (v *Shard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shard_ParentShardId:
+			v.ParentShardId = new(string)
+			return d.ReadString(schemas.Shard_ParentShardId, v.ParentShardId)
+		case schemas.Shard_SequenceNumberRange:
+			v.SequenceNumberRange = &SequenceNumberRange{}
+			return v.SequenceNumberRange.Deserialize(d)
+		case schemas.Shard_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.Shard_ShardId, v.ShardId)
+		}
+		return nil
+	})
+}
+
 // This optional field contains the filter definition for the DescribeStream API.
 type ShardFilter struct {
 
@@ -297,6 +549,38 @@ type ShardFilter struct {
 	Type ShardFilterType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShardFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShardId != nil {
+		s.WriteString(schemas.ShardFilter_ShardId, *v.ShardId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ShardFilter_Type, string(v.Type))
+	}
+}
+func (v *ShardFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardFilter_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.ShardFilter_ShardId, v.ShardId)
+		case schemas.ShardFilter_Type:
+			var ev string
+			if err := d.ReadString(schemas.ShardFilter_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ShardFilterType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents all of the data describing a particular stream.
@@ -323,6 +607,40 @@ type Stream struct {
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Stream) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Stream)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Stream) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamArn != nil {
+		s.WriteString(schemas.Stream_StreamArn, *v.StreamArn)
+	}
+	if v.StreamLabel != nil {
+		s.WriteString(schemas.Stream_StreamLabel, *v.StreamLabel)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.Stream_TableName, *v.TableName)
+	}
+}
+func (v *Stream) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Stream, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Stream_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.Stream_StreamArn, v.StreamArn)
+		case schemas.Stream_StreamLabel:
+			v.StreamLabel = new(string)
+			return d.ReadString(schemas.Stream_StreamLabel, v.StreamLabel)
+		case schemas.Stream_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.Stream_TableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 // Represents all of the data describing a particular stream.
@@ -398,6 +716,78 @@ type StreamDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationRequestDateTime != nil {
+		s.WriteTime(schemas.StreamDescription_CreationRequestDateTime, *v.CreationRequestDateTime)
+	}
+	serializeKeySchema(s, schemas.StreamDescription_KeySchema, v.KeySchema)
+	if v.LastEvaluatedShardId != nil {
+		s.WriteString(schemas.StreamDescription_LastEvaluatedShardId, *v.LastEvaluatedShardId)
+	}
+	serializeShardDescriptionList(s, schemas.StreamDescription_Shards, v.Shards)
+	if v.StreamArn != nil {
+		s.WriteString(schemas.StreamDescription_StreamArn, *v.StreamArn)
+	}
+	if v.StreamLabel != nil {
+		s.WriteString(schemas.StreamDescription_StreamLabel, *v.StreamLabel)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.StreamDescription_StreamStatus, string(v.StreamStatus))
+	}
+	if v.StreamViewType != "" {
+		s.WriteString(schemas.StreamDescription_StreamViewType, string(v.StreamViewType))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StreamDescription_TableName, *v.TableName)
+	}
+}
+func (v *StreamDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamDescription_CreationRequestDateTime:
+			v.CreationRequestDateTime = new(time.Time)
+			return d.ReadTime(schemas.StreamDescription_CreationRequestDateTime, v.CreationRequestDateTime)
+		case schemas.StreamDescription_KeySchema:
+			return deserializeKeySchema(d, schemas.StreamDescription_KeySchema, &v.KeySchema)
+		case schemas.StreamDescription_LastEvaluatedShardId:
+			v.LastEvaluatedShardId = new(string)
+			return d.ReadString(schemas.StreamDescription_LastEvaluatedShardId, v.LastEvaluatedShardId)
+		case schemas.StreamDescription_Shards:
+			return deserializeShardDescriptionList(d, schemas.StreamDescription_Shards, &v.Shards)
+		case schemas.StreamDescription_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.StreamDescription_StreamArn, v.StreamArn)
+		case schemas.StreamDescription_StreamLabel:
+			v.StreamLabel = new(string)
+			return d.ReadString(schemas.StreamDescription_StreamLabel, v.StreamLabel)
+		case schemas.StreamDescription_StreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescription_StreamStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamStatus = StreamStatus(ev)
+			return nil
+		case schemas.StreamDescription_StreamViewType:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescription_StreamViewType, &ev); err != nil {
+				return err
+			}
+			v.StreamViewType = StreamViewType(ev)
+			return nil
+		case schemas.StreamDescription_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.StreamDescription_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 // A description of a single data modification that was performed on an item in a
 // DynamoDB table.
 type StreamRecord struct {
@@ -436,6 +826,59 @@ type StreamRecord struct {
 	StreamViewType StreamViewType
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateCreationDateTime != nil {
+		s.WriteTime(schemas.StreamRecord_ApproximateCreationDateTime, *v.ApproximateCreationDateTime)
+	}
+	serializeAttributeMap(s, schemas.StreamRecord_Keys, v.Keys)
+	serializeAttributeMap(s, schemas.StreamRecord_NewImage, v.NewImage)
+	serializeAttributeMap(s, schemas.StreamRecord_OldImage, v.OldImage)
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.StreamRecord_SequenceNumber, *v.SequenceNumber)
+	}
+	if v.SizeBytes != nil {
+		s.WriteInt64(schemas.StreamRecord_SizeBytes, *v.SizeBytes)
+	}
+	if v.StreamViewType != "" {
+		s.WriteString(schemas.StreamRecord_StreamViewType, string(v.StreamViewType))
+	}
+}
+func (v *StreamRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamRecord_ApproximateCreationDateTime:
+			v.ApproximateCreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StreamRecord_ApproximateCreationDateTime, v.ApproximateCreationDateTime)
+		case schemas.StreamRecord_Keys:
+			return deserializeAttributeMap(d, schemas.StreamRecord_Keys, &v.Keys)
+		case schemas.StreamRecord_NewImage:
+			return deserializeAttributeMap(d, schemas.StreamRecord_NewImage, &v.NewImage)
+		case schemas.StreamRecord_OldImage:
+			return deserializeAttributeMap(d, schemas.StreamRecord_OldImage, &v.OldImage)
+		case schemas.StreamRecord_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.StreamRecord_SequenceNumber, v.SequenceNumber)
+		case schemas.StreamRecord_SizeBytes:
+			v.SizeBytes = new(int64)
+			return d.ReadInt64(schemas.StreamRecord_SizeBytes, v.SizeBytes)
+		case schemas.StreamRecord_StreamViewType:
+			var ev string
+			if err := d.ReadString(schemas.StreamRecord_StreamViewType, &ev); err != nil {
+				return err
+			}
+			v.StreamViewType = StreamViewType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

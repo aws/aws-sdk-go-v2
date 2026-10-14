@@ -5,12 +5,8 @@ package securityagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of endpoints discovered during a pentest job execution.
@@ -56,30 +52,6 @@ type ListDiscoveredEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDiscoveredEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDiscoveredEndpointsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDiscoveredEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListDiscoveredEndpointsInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDiscoveredEndpointsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDiscoveredEndpointsInput_nextToken, *v.NextToken)
-	}
-	if v.PentestJobId != nil {
-		s.WriteString(schemas.ListDiscoveredEndpointsInput_pentestJobId, *v.PentestJobId)
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.ListDiscoveredEndpointsInput_prefix, *v.Prefix)
-	}
-}
-
 // Output for the ListDiscoveredEndpoints operation.
 type ListDiscoveredEndpointsOutput struct {
 
@@ -97,87 +69,29 @@ type ListDiscoveredEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDiscoveredEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDiscoveredEndpointsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDiscoveredEndpointsOutput_discoveredEndpoints:
-			return deserializeDiscoveredEndpointList(d, schemas.ListDiscoveredEndpointsOutput_discoveredEndpoints, &v.DiscoveredEndpoints)
-		case schemas.ListDiscoveredEndpointsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDiscoveredEndpointsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDiscoveredEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoveredEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredEndpoints, schemas.ListDiscoveredEndpointsInput, schemas.ListDiscoveredEndpointsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDiscoveredEndpoints{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredEndpoints, schemas.ListDiscoveredEndpointsInput, schemas.ListDiscoveredEndpointsOutput), output: &ListDiscoveredEndpointsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDiscoveredEndpoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDiscoveredEndpointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoveredEndpoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +104,6 @@ func (c *Client) addOperationListDiscoveredEndpointsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -298,11 +206,3 @@ type ListDiscoveredEndpointsAPIClient interface {
 }
 
 var _ ListDiscoveredEndpointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDiscoveredEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDiscoveredEndpoints",
-	}
-}

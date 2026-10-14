@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/entities/DOMAIN_UNIT/__EntityIdentifier__/removeOwner
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","owner":{"user":{"userIdentifier":"__UserIdentifier__"}}}

@@ -473,6 +473,39 @@ func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the default feature configuration settings for a procurement portal.
+type FeatureConfigurations struct {
+
+	// The invoice configuration settings for the procurement portal.
+	InvoiceConfiguration *InvoiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *FeatureConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoiceConfiguration != nil {
+		s.WriteStruct(schemas.FeatureConfigurations_InvoiceConfiguration)
+		v.InvoiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FeatureConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureConfigurations_InvoiceConfiguration:
+			v.InvoiceConfiguration = &InvoiceConfiguration{}
+			return v.InvoiceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The details of fees.
 type FeesBreakdown struct {
 
@@ -615,6 +648,41 @@ func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeAccountIdList(d, schemas.Filters_InvoiceReceivers, &v.InvoiceReceivers)
 		case schemas.Filters_Names:
 			return deserializeInvoiceUnitNames(d, schemas.Filters_Names, &v.Names)
+		}
+		return nil
+	})
+}
+
+// Specifies the supported document types and attachment types for invoice
+// delivery to a procurement portal.
+type InvoiceConfiguration struct {
+
+	// The attachment types supported by the procurement portal for e-invoice delivery.
+	AttachmentTypes []EinvoiceDeliveryAttachmentType
+
+	// The e-invoice document types supported by the procurement portal.
+	DocumentTypes []EinvoiceDeliveryDocumentType
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvoiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEinvoiceDeliveryAttachmentTypes(s, schemas.InvoiceConfiguration_AttachmentTypes, v.AttachmentTypes)
+	serializeEinvoiceDeliveryDocumentTypes(s, schemas.InvoiceConfiguration_DocumentTypes, v.DocumentTypes)
+}
+func (v *InvoiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceConfiguration_AttachmentTypes:
+			return deserializeEinvoiceDeliveryAttachmentTypes(d, schemas.InvoiceConfiguration_AttachmentTypes, &v.AttachmentTypes)
+		case schemas.InvoiceConfiguration_DocumentTypes:
+			return deserializeEinvoiceDeliveryDocumentTypes(d, schemas.InvoiceConfiguration_DocumentTypes, &v.DocumentTypes)
 		}
 		return nil
 	})
@@ -1315,6 +1383,110 @@ func (v *InvoiceUnitRule) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Represents the Marketplace PunchOut configuration for a procurement portal
+// preference.
+type MarketplacePunchOutPreference struct {
+
+	// The URL that buyers are redirected to for approval requests in the procurement
+	// portal. This is only supported for Coupa. When provided together with the
+	// procurement portal instance endpoint, its host must match the host of that
+	// endpoint.
+	ApprovalRequestRedirectUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MarketplacePunchOutPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplacePunchOutPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplacePunchOutPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRequestRedirectUrl != nil {
+		s.WriteString(schemas.MarketplacePunchOutPreference_ApprovalRequestRedirectUrl, *v.ApprovalRequestRedirectUrl)
+	}
+}
+func (v *MarketplacePunchOutPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplacePunchOutPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplacePunchOutPreference_ApprovalRequestRedirectUrl:
+			v.ApprovalRequestRedirectUrl = new(string)
+			return d.ReadString(schemas.MarketplacePunchOutPreference_ApprovalRequestRedirectUrl, v.ApprovalRequestRedirectUrl)
+		}
+		return nil
+	})
+}
+
+// Contains metadata for a procurement portal, including the portal identifier,
+// name, and default feature configurations.
+type ProcurementPortal struct {
+
+	// The unique identifier of the procurement portal.
+	//
+	// This member is required.
+	PortalIdentifier *string
+
+	// The name of the procurement portal.
+	//
+	// This member is required.
+	PortalName ProcurementPortalName
+
+	// The default feature configurations for the procurement portal.
+	DefaultFeatureConfigurations *FeatureConfigurations
+
+	// The display name of the procurement portal.
+	PortalDisplayName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProcurementPortal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementPortal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementPortal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultFeatureConfigurations != nil {
+		s.WriteStruct(schemas.ProcurementPortal_DefaultFeatureConfigurations)
+		v.DefaultFeatureConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalDisplayName != nil {
+		s.WriteString(schemas.ProcurementPortal_PortalDisplayName, *v.PortalDisplayName)
+	}
+	if v.PortalIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortal_PortalIdentifier, *v.PortalIdentifier)
+	}
+	if v.PortalName != "" {
+		s.WriteString(schemas.ProcurementPortal_PortalName, string(v.PortalName))
+	}
+}
+func (v *ProcurementPortal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementPortal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementPortal_DefaultFeatureConfigurations:
+			v.DefaultFeatureConfigurations = &FeatureConfigurations{}
+			return v.DefaultFeatureConfigurations.Deserialize(d)
+		case schemas.ProcurementPortal_PortalDisplayName:
+			v.PortalDisplayName = new(string)
+			return d.ReadString(schemas.ProcurementPortal_PortalDisplayName, v.PortalDisplayName)
+		case schemas.ProcurementPortal_PortalIdentifier:
+			v.PortalIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortal_PortalIdentifier, v.PortalIdentifier)
+		case schemas.ProcurementPortal_PortalName:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortal_PortalName, &ev); err != nil {
+				return err
+			}
+			v.PortalName = ProcurementPortalName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents the full configuration of a procurement portal preference, including
 // settings for e-invoice delivery and purchase order retrieval.
 type ProcurementPortalPreference struct {
@@ -1385,8 +1557,8 @@ type ProcurementPortalPreference struct {
 	// List of contact information for portal administrators and technical contacts.
 	Contacts []Contact
 
-	// The configuration settings that specify how e-invoices are delivered to the
-	// procurement portal.
+	// The e-invoice delivery configuration including document types, attachment
+	// types, and customization settings.
 	EinvoiceDeliveryPreference *EinvoiceDeliveryPreference
 
 	// The current status of the e-invoice delivery preference.
@@ -1394,6 +1566,14 @@ type ProcurementPortalPreference struct {
 
 	// The reason for the current e-invoice delivery preference status.
 	EinvoiceDeliveryPreferenceStatusReason *string
+
+	// Indicates whether Marketplace PunchOut is enabled for this procurement portal
+	// preference. Defaults to false .
+	MarketplacePunchOutEnabled *bool
+
+	// The Marketplace PunchOut configuration for this procurement portal preference.
+	// This is present when MarketplacePunchOutEnabled is true .
+	MarketplacePunchOutPreference *MarketplacePunchOutPreference
 
 	// The endpoint URL where e-invoices are delivered to the procurement portal.
 	ProcurementPortalInstanceEndpoint *string
@@ -1458,6 +1638,14 @@ func (v *ProcurementPortalPreference) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.LastUpdateDate != nil {
 		s.WriteTime(schemas.ProcurementPortalPreference_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.MarketplacePunchOutEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreference_MarketplacePunchOutEnabled, *v.MarketplacePunchOutEnabled)
+	}
+	if v.MarketplacePunchOutPreference != nil {
+		s.WriteStruct(schemas.ProcurementPortalPreference_MarketplacePunchOutPreference)
+		v.MarketplacePunchOutPreference.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ProcurementPortalInstanceEndpoint != nil {
 		s.WriteString(schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint, *v.ProcurementPortalInstanceEndpoint)
@@ -1543,6 +1731,12 @@ func (v *ProcurementPortalPreference) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.ProcurementPortalPreference_LastUpdateDate:
 			v.LastUpdateDate = new(time.Time)
 			return d.ReadTime(schemas.ProcurementPortalPreference_LastUpdateDate, v.LastUpdateDate)
+		case schemas.ProcurementPortalPreference_MarketplacePunchOutEnabled:
+			v.MarketplacePunchOutEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreference_MarketplacePunchOutEnabled, v.MarketplacePunchOutEnabled)
+		case schemas.ProcurementPortalPreference_MarketplacePunchOutPreference:
+			v.MarketplacePunchOutPreference = &MarketplacePunchOutPreference{}
+			return v.MarketplacePunchOutPreference.Deserialize(d)
 		case schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint:
 			v.ProcurementPortalInstanceEndpoint = new(string)
 			return d.ReadString(schemas.ProcurementPortalPreference_ProcurementPortalInstanceEndpoint, v.ProcurementPortalInstanceEndpoint)
@@ -1709,6 +1903,10 @@ type ProcurementPortalPreferenceSummary struct {
 	// The reason for the current e-invoice delivery preference status in this summary.
 	EinvoiceDeliveryPreferenceStatusReason *string
 
+	// Indicates whether Marketplace PunchOut is enabled for this procurement portal
+	// preference. Defaults to false .
+	MarketplacePunchOutEnabled *bool
+
 	// The current status of the purchase order retrieval preference in this summary.
 	PurchaseOrderRetrievalPreferenceStatus ProcurementPortalPreferenceStatus
 
@@ -1753,6 +1951,9 @@ func (v *ProcurementPortalPreferenceSummary) SerializeMembers(s smithy.ShapeSeri
 	}
 	if v.LastUpdateDate != nil {
 		s.WriteTime(schemas.ProcurementPortalPreferenceSummary_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.MarketplacePunchOutEnabled != nil {
+		s.WriteBool(schemas.ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled, *v.MarketplacePunchOutEnabled)
 	}
 	if v.ProcurementPortalName != "" {
 		s.WriteString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName, string(v.ProcurementPortalName))
@@ -1819,6 +2020,9 @@ func (v *ProcurementPortalPreferenceSummary) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ProcurementPortalPreferenceSummary_LastUpdateDate:
 			v.LastUpdateDate = new(time.Time)
 			return d.ReadTime(schemas.ProcurementPortalPreferenceSummary_LastUpdateDate, v.LastUpdateDate)
+		case schemas.ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled:
+			v.MarketplacePunchOutEnabled = new(bool)
+			return d.ReadBool(schemas.ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled, v.MarketplacePunchOutEnabled)
 		case schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName:
 			var ev string
 			if err := d.ReadString(schemas.ProcurementPortalPreferenceSummary_ProcurementPortalName, &ev); err != nil {
@@ -1858,6 +2062,73 @@ func (v *ProcurementPortalPreferenceSummary) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ProcurementPortalPreferenceSummary_Version:
 			v.Version = new(int64)
 			return d.ReadInt64(schemas.ProcurementPortalPreferenceSummary_Version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains metadata for a supplier configured within a procurement portal.
+type ProcurementPortalSupplier struct {
+
+	// The unique identifier of the supplier within the procurement portal.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The two-letter ISO 3166-1 alpha-2 country code associated with the supplier.
+	CountryCode *string
+
+	// The environment identifier for the supplier in the procurement portal. PROD for
+	// production env, or TEST for sandbox/test env.
+	Environment ProcurementPortalEnv
+
+	// The Amazon Web Services seller of record associated with the supplier—the
+	// Amazon Web Services legal entity that issues invoices for the account (for
+	// example, AWS_INC or AWS_EUROPE ).
+	SellerOfRecord *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProcurementPortalSupplier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementPortalSupplier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementPortalSupplier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.ProcurementPortalSupplier_CountryCode, *v.CountryCode)
+	}
+	if v.Environment != "" {
+		s.WriteString(schemas.ProcurementPortalSupplier_Environment, string(v.Environment))
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteString(schemas.ProcurementPortalSupplier_SellerOfRecord, *v.SellerOfRecord)
+	}
+	if v.SupplierIdentifier != nil {
+		s.WriteString(schemas.ProcurementPortalSupplier_SupplierIdentifier, *v.SupplierIdentifier)
+	}
+}
+func (v *ProcurementPortalSupplier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementPortalSupplier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementPortalSupplier_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.ProcurementPortalSupplier_CountryCode, v.CountryCode)
+		case schemas.ProcurementPortalSupplier_Environment:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementPortalSupplier_Environment, &ev); err != nil {
+				return err
+			}
+			v.Environment = ProcurementPortalEnv(ev)
+			return nil
+		case schemas.ProcurementPortalSupplier_SellerOfRecord:
+			v.SellerOfRecord = new(string)
+			return d.ReadString(schemas.ProcurementPortalSupplier_SellerOfRecord, v.SellerOfRecord)
+		case schemas.ProcurementPortalSupplier_SupplierIdentifier:
+			v.SupplierIdentifier = new(string)
+			return d.ReadString(schemas.ProcurementPortalSupplier_SupplierIdentifier, v.SupplierIdentifier)
 		}
 		return nil
 	})

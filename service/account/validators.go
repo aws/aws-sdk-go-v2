@@ -230,6 +230,26 @@ func (m *validateOpStartPrimaryEmailUpdate) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifyPhoneNumber struct {
+}
+
+func (*validateOpVerifyPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptPrimaryEmailUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptPrimaryEmailUpdate{}, middleware.After)
 }
@@ -272,6 +292,10 @@ func addOpPutContactInformationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartPrimaryEmailUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPrimaryEmailUpdate{}, middleware.After)
+}
+
+func addOpVerifyPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyPhoneNumber{}, middleware.After)
 }
 
 func validateContactInformation(v *types.ContactInformation) error {
@@ -486,6 +510,21 @@ func validateOpStartPrimaryEmailUpdateInput(v *StartPrimaryEmailUpdateInput) err
 	}
 	if v.PrimaryEmail == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrimaryEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyPhoneNumberInput(v *VerifyPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyPhoneNumberInput"}
+	if v.Otp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Otp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a specified framework.
@@ -37,6 +36,18 @@ type GetAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentFrameworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.GetAssessmentFrameworkRequest_frameworkId, *v.FrameworkId)
+	}
+}
+
 type GetAssessmentFrameworkOutput struct {
 
 	//  The framework that the GetAssessmentFramework API returned.
@@ -51,77 +62,50 @@ type GetAssessmentFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentFrameworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framework != nil {
+		s.WriteStruct(schemas.GetAssessmentFrameworkResponse_framework)
+		v.Framework.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssessmentFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssessmentFrameworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssessmentFrameworkResponse_framework:
+			v.Framework = &types.Framework{}
+			return v.Framework.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentFramework, schemas.GetAssessmentFrameworkRequest, schemas.GetAssessmentFrameworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentFramework, schemas.GetAssessmentFrameworkRequest, schemas.GetAssessmentFrameworkResponse), output: &GetAssessmentFrameworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssessmentFramework{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssessmentFramework"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAssessmentFrameworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssessmentFramework(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +120,8 @@ func (c *Client) addOperationGetAssessmentFrameworkMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAssessmentFramework(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAssessmentFramework",
-	}
 }

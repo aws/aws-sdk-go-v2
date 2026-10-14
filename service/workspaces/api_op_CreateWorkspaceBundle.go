@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the specified WorkSpace bundle. For more information about creating
@@ -70,6 +69,40 @@ type CreateWorkspaceBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleDescription != nil {
+		s.WriteString(schemas.CreateWorkspaceBundleRequest_BundleDescription, *v.BundleDescription)
+	}
+	if v.BundleName != nil {
+		s.WriteString(schemas.CreateWorkspaceBundleRequest_BundleName, *v.BundleName)
+	}
+	if v.ComputeType != nil {
+		s.WriteStruct(schemas.CreateWorkspaceBundleRequest_ComputeType)
+		v.ComputeType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateWorkspaceBundleRequest_ImageId, *v.ImageId)
+	}
+	if v.RootStorage != nil {
+		s.WriteStruct(schemas.CreateWorkspaceBundleRequest_RootStorage)
+		v.RootStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWorkspaceBundleRequest_Tags, v.Tags)
+	if v.UserStorage != nil {
+		s.WriteStruct(schemas.CreateWorkspaceBundleRequest_UserStorage)
+		v.UserStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWorkspaceBundleOutput struct {
 
 	// Describes a WorkSpace bundle.
@@ -81,77 +114,50 @@ type CreateWorkspaceBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceBundleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceBundle != nil {
+		s.WriteStruct(schemas.CreateWorkspaceBundleResult_WorkspaceBundle)
+		v.WorkspaceBundle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWorkspaceBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceBundleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceBundleResult_WorkspaceBundle:
+			v.WorkspaceBundle = &types.WorkspaceBundle{}
+			return v.WorkspaceBundle.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceBundle, schemas.CreateWorkspaceBundleRequest, schemas.CreateWorkspaceBundleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkspaceBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceBundle, schemas.CreateWorkspaceBundleRequest, schemas.CreateWorkspaceBundleResult), output: &CreateWorkspaceBundleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkspaceBundle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkspaceBundle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWorkspaceBundleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspaceBundle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +172,8 @@ func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWorkspaceBundle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkspaceBundle",
-	}
 }

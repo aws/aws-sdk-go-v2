@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateSecurityConfiguration
+
+{"EncryptionConfiguration":{"CloudWatchEncryption":{"CloudWatchEncryptionMode":"DISABLED","KmsKeyArn":"__KmsKeyArn__"},"DataQualityEncryption":{"DataQualityEncryptionMode":"DISABLED","KmsKeyArn":"__KmsKeyArn__"},"JobBookmarksEncryption":{"JobBookmarksEncryptionMode":"DISABLED","KmsKeyArn":"__KmsKeyArn__"},"S3Encryption":[{"KmsKeyArn":"__KmsKeyArn__","S3EncryptionMode":"DISABLED"},{"KmsKeyArn":"__KmsKeyArn__","S3EncryptionMode":"DISABLED"}]},"Name":"__Name__"}

@@ -1,0 +1,3 @@
+DELETE /DeleteWorkflow?workflowBuildVersionArn=__WorkflowBuildVersionArn__
+
+

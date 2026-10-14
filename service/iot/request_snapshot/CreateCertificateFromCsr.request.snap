@@ -1,0 +1,5 @@
+POST /certificates?setAsActive=true
+
+Content-Type: application/json
+
+{"certificateSigningRequest":"__CertificateSigningRequest__"}

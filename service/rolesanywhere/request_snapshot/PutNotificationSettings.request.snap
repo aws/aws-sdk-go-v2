@@ -1,0 +1,5 @@
+PATCH /put-notifications-settings
+
+Content-Type: application/json
+
+{"notificationSettings":[{"channel":"ALL","enabled":true,"event":"CA_CERTIFICATE_EXPIRY","threshold":1},{"channel":"ALL","enabled":true,"event":"CA_CERTIFICATE_EXPIRY","threshold":1}],"trustAnchorId":"__TrustAnchorId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateAIBenchmarkJob
+
+{"AIBenchmarkJobName":"__AIBenchmarkJobName__","AIWorkloadConfigIdentifier":"__AIWorkloadConfigIdentifier__","BenchmarkTarget":{"Endpoint":{"Identifier":"__Identifier__","InferenceComponents":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"TargetContainerHostname":"__TargetContainerHostname__"}},"NetworkConfig":{"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"OutputConfig":{"MlflowConfig":{"MlflowExperimentName":"__MlflowExperimentName__","MlflowResourceArn":"__MlflowResourceArn__","MlflowRunName":"__MlflowRunName__"},"S3OutputLocation":"__S3OutputLocation__"},"RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateCloudConnector
+
+{"CloudConnectorId":"__CloudConnectorId__","Configuration":{"AzureConfiguration":{"ApplicationDisplayName":"__ApplicationDisplayName__","ApplicationId":"__ApplicationId__","Targets":{"Subscriptions":[{"DisplayName":"__DisplayName__","Id":"__Id__"},{"DisplayName":"__DisplayName__","Id":"__Id__"}]},"TenantDisplayName":"__TenantDisplayName__","TenantId":"__TenantId__"}},"Description":"__Description__","DisplayName":"__DisplayName__"}

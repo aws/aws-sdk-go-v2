@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.UpdatePartnership
+
+{"capabilities":["__Member__","__Member__"],"capabilityOptions":{"inboundEdi":{"x12":{"acknowledgmentOptions":{"functionalAcknowledgment":"DO_NOT_GENERATE","technicalAcknowledgment":"DO_NOT_GENERATE"}}},"outboundEdi":{"x12":{"common":{"controlNumbers":{"startingFunctionalGroupControlNumber":1,"startingInterchangeControlNumber":1,"startingTransactionSetControlNumber":1},"delimiters":{"componentSeparator":"__ComponentSeparator__","dataElementSeparator":"__DataElementSeparator__","segmentTerminator":"__SegmentTerminator__"},"functionalGroupHeaders":{"applicationReceiverCode":"__ApplicationReceiverCode__","applicationSenderCode":"__ApplicationSenderCode__","responsibleAgencyCode":"__ResponsibleAgencyCode__"},"gs05TimeFormat":"HHMM","interchangeControlHeaders":{"acknowledgmentRequestedCode":"__AcknowledgmentRequestedCode__","receiverId":"__ReceiverId__","receiverIdQualifier":"__ReceiverIdQualifier__","repetitionSeparator":"__RepetitionSeparator__","senderId":"__SenderId__","senderIdQualifier":"__SenderIdQualifier__","usageIndicatorCode":"__UsageIndicatorCode__"},"validateEdi":true},"wrapOptions":{"lineLength":1,"lineTerminator":"CRLF","wrapBy":"SEGMENT"}}}},"name":"__Name__","partnershipId":"__PartnershipId__"}

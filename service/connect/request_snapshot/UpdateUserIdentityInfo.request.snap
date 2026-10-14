@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/identity-info
+
+Content-Type: application/json
+
+{"IdentityInfo":{"Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Mobile":"__Mobile__","SecondaryEmail":"__SecondaryEmail__"}}

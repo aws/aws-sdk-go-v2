@@ -5,9 +5,6 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,34 +53,6 @@ type AssociateTrackerConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateTrackerConsumerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateTrackerConsumerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateTrackerConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsumerArn != nil {
-		s.WriteString(schemas.AssociateTrackerConsumerRequest_ConsumerArn, *v.ConsumerArn)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.AssociateTrackerConsumerRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *AssociateTrackerConsumerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateTrackerConsumerRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateTrackerConsumerRequest_ConsumerArn:
-			v.ConsumerArn = new(string)
-			return d.ReadString(schemas.AssociateTrackerConsumerRequest_ConsumerArn, v.ConsumerArn)
-		case schemas.AssociateTrackerConsumerRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.AssociateTrackerConsumerRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type AssociateTrackerConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,78 +60,23 @@ type AssociateTrackerConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateTrackerConsumerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateTrackerConsumerResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateTrackerConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *AssociateTrackerConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateTrackerConsumerResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTrackerConsumer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrackerConsumer, schemas.AssociateTrackerConsumerRequest, schemas.AssociateTrackerConsumerResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTrackerConsumer{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrackerConsumer, schemas.AssociateTrackerConsumerRequest, schemas.AssociateTrackerConsumerResponse), output: &AssociateTrackerConsumerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateTrackerConsumer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -172,12 +86,6 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpAssociateTrackerConsumerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTrackerConsumer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +98,6 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +131,4 @@ func (m *endpointPrefix_opAssociateTrackerConsumerMiddleware) HandleFinalize(ctx
 }
 func addEndpointPrefix_opAssociateTrackerConsumerMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opAssociateTrackerConsumerMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opAssociateTrackerConsumer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateTrackerConsumer",
-	}
 }

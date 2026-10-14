@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -71,61 +67,6 @@ type UpdateTimelineEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTimelineEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTimelineEventInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTimelineEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateTimelineEventInput_clientToken, *v.ClientToken)
-	}
-	if v.EventData != nil {
-		s.WriteString(schemas.UpdateTimelineEventInput_eventData, *v.EventData)
-	}
-	if v.EventId != nil {
-		s.WriteString(schemas.UpdateTimelineEventInput_eventId, *v.EventId)
-	}
-	serializeEventReferenceList(s, schemas.UpdateTimelineEventInput_eventReferences, v.EventReferences)
-	if v.EventTime != nil {
-		s.WriteTime(schemas.UpdateTimelineEventInput_eventTime, *v.EventTime)
-	}
-	if v.EventType != nil {
-		s.WriteString(schemas.UpdateTimelineEventInput_eventType, *v.EventType)
-	}
-	if v.IncidentRecordArn != nil {
-		s.WriteString(schemas.UpdateTimelineEventInput_incidentRecordArn, *v.IncidentRecordArn)
-	}
-}
-func (v *UpdateTimelineEventInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTimelineEventInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTimelineEventInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateTimelineEventInput_clientToken, v.ClientToken)
-		case schemas.UpdateTimelineEventInput_eventData:
-			v.EventData = new(string)
-			return d.ReadString(schemas.UpdateTimelineEventInput_eventData, v.EventData)
-		case schemas.UpdateTimelineEventInput_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.UpdateTimelineEventInput_eventId, v.EventId)
-		case schemas.UpdateTimelineEventInput_eventReferences:
-			return deserializeEventReferenceList(d, schemas.UpdateTimelineEventInput_eventReferences, &v.EventReferences)
-		case schemas.UpdateTimelineEventInput_eventTime:
-			v.EventTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateTimelineEventInput_eventTime, v.EventTime)
-		case schemas.UpdateTimelineEventInput_eventType:
-			v.EventType = new(string)
-			return d.ReadString(schemas.UpdateTimelineEventInput_eventType, v.EventType)
-		case schemas.UpdateTimelineEventInput_incidentRecordArn:
-			v.IncidentRecordArn = new(string)
-			return d.ReadString(schemas.UpdateTimelineEventInput_incidentRecordArn, v.IncidentRecordArn)
-		}
-		return nil
-	})
-}
-
 type UpdateTimelineEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -133,78 +74,23 @@ type UpdateTimelineEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTimelineEventOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTimelineEventOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTimelineEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateTimelineEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTimelineEventOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTimelineEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTimelineEvent, schemas.UpdateTimelineEventInput, schemas.UpdateTimelineEventOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTimelineEvent{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTimelineEvent, schemas.UpdateTimelineEventInput, schemas.UpdateTimelineEventOutput), output: &UpdateTimelineEventOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTimelineEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -214,12 +100,6 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpUpdateTimelineEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTimelineEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -232,12 +112,6 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,12 +151,4 @@ func (m *idempotencyToken_initializeOpUpdateTimelineEvent) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opUpdateTimelineEventMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateTimelineEvent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateTimelineEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTimelineEvent",
-	}
 }

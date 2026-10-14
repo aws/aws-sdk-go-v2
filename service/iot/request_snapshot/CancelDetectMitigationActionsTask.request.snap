@@ -1,0 +1,3 @@
+PUT /detect/mitigationactions/tasks/__TaskId__/cancel
+
+

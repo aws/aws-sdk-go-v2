@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LensReviewReport":{"Base64String":"__Base64String__","LensAlias":"__LensAlias__","LensArn":"__LensArn__"},"MilestoneNumber":1,"WorkloadId":"__WorkloadId__"}

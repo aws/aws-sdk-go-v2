@@ -1,0 +1,5 @@
+POST /2020-05-31/distribution-tenants
+
+Content-Type: application/xml
+
+<ListDistributionTenantsRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><AssociationFilter><ConnectionGroupId>__ConnectionGroupId__</ConnectionGroupId><DistributionId>__DistributionId__</DistributionId></AssociationFilter><Marker>__Marker__</Marker><MaxItems>1</MaxItems></ListDistributionTenantsRequest>

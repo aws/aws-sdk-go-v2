@@ -4,10 +4,9 @@ package snowball
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an Amazon S3 presigned URL for an update file associated with a
@@ -38,6 +37,18 @@ type GetSoftwareUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSoftwareUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSoftwareUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSoftwareUpdatesRequest_JobId, *v.JobId)
+	}
+}
+
 type GetSoftwareUpdatesOutput struct {
 
 	// The Amazon S3 presigned URL for the update file associated with the specified
@@ -52,65 +63,42 @@ type GetSoftwareUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSoftwareUpdatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSoftwareUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdatesURI != nil {
+		s.WriteString(schemas.GetSoftwareUpdatesResult_UpdatesURI, *v.UpdatesURI)
+	}
+}
+func (v *GetSoftwareUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSoftwareUpdatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSoftwareUpdatesResult_UpdatesURI:
+			v.UpdatesURI = new(string)
+			return d.ReadString(schemas.GetSoftwareUpdatesResult_UpdatesURI, v.UpdatesURI)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareUpdates, schemas.GetSoftwareUpdatesRequest, schemas.GetSoftwareUpdatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetSoftwareUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareUpdates, schemas.GetSoftwareUpdatesRequest, schemas.GetSoftwareUpdatesResult), output: &GetSoftwareUpdatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetSoftwareUpdates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSoftwareUpdates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -120,12 +108,6 @@ func (c *Client) addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpGetSoftwareUpdatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSoftwareUpdates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +122,8 @@ func (c *Client) addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSoftwareUpdates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSoftwareUpdates",
-	}
 }

@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.AssociateMemberToGroup
+
+{"__type":"DirectoryServiceAuthenticationFailedException","Message":"__Message__"}

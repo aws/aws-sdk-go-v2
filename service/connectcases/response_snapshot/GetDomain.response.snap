@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdTime":"2000-01-01T00:00:00Z","domainArn":"__DomainArn__","domainId":"__DomainId__","domainStatus":"Active","name":"__Name__","tags":{"key0":"__Value__"}}

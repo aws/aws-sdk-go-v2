@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonTimestreamInfluxDB.CreateDbBackup
+
+{"dbResourceId":"__DbResourceId__","name":"__Name__","retentionDays":1,"tags":{"key0":"__Value__"}}

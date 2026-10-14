@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,14 +25,6 @@ type ActionMemberHeaderTag struct {
 }
 
 func (*ActionMemberHeaderTag) isAction() {}
-func (v *ActionMemberHeaderTag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Action_headerTag)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ActionMemberHeaderTag) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes a no bid action.
 type ActionMemberNoBid struct {
@@ -44,14 +34,6 @@ type ActionMemberNoBid struct {
 }
 
 func (*ActionMemberNoBid) isAction() {}
-func (v *ActionMemberNoBid) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Action_noBid)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ActionMemberNoBid) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes the configuration of an auto scaling group.
 type AutoScalingGroupsConfiguration struct {
@@ -70,39 +52,6 @@ type AutoScalingGroupsConfiguration struct {
 	HealthCheckConfig *HealthCheckConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutoScalingGroupsConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutoScalingGroupsConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutoScalingGroupsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingGroupNameList(s, schemas.AutoScalingGroupsConfiguration_autoScalingGroupNames, v.AutoScalingGroupNames)
-	if v.HealthCheckConfig != nil {
-		s.WriteStruct(schemas.AutoScalingGroupsConfiguration_healthCheckConfig)
-		v.HealthCheckConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.AutoScalingGroupsConfiguration_roleArn, *v.RoleArn)
-	}
-}
-func (v *AutoScalingGroupsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutoScalingGroupsConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutoScalingGroupsConfiguration_autoScalingGroupNames:
-			return deserializeAutoScalingGroupNameList(d, schemas.AutoScalingGroupsConfiguration_autoScalingGroupNames, &v.AutoScalingGroupNames)
-		case schemas.AutoScalingGroupsConfiguration_healthCheckConfig:
-			v.HealthCheckConfig = &HealthCheckConfig{}
-			return v.HealthCheckConfig.Deserialize(d)
-		case schemas.AutoScalingGroupsConfiguration_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.AutoScalingGroupsConfiguration_roleArn, v.RoleArn)
-		}
-		return nil
-	})
 }
 
 // Describes a summary of a certificate association.
@@ -125,50 +74,6 @@ type CertificateAssociationSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *CertificateAssociationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CertificateAssociationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CertificateAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcmCertificateArn != nil {
-		s.WriteString(schemas.CertificateAssociationSummary_acmCertificateArn, *v.AcmCertificateArn)
-	}
-	if v.AssociatedAt != nil {
-		s.WriteTime(schemas.CertificateAssociationSummary_associatedAt, *v.AssociatedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CertificateAssociationSummary_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CertificateAssociationSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CertificateAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CertificateAssociationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CertificateAssociationSummary_acmCertificateArn:
-			v.AcmCertificateArn = new(string)
-			return d.ReadString(schemas.CertificateAssociationSummary_acmCertificateArn, v.AcmCertificateArn)
-		case schemas.CertificateAssociationSummary_associatedAt:
-			v.AssociatedAt = new(time.Time)
-			return d.ReadTime(schemas.CertificateAssociationSummary_associatedAt, v.AssociatedAt)
-		case schemas.CertificateAssociationSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.CertificateAssociationSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = CertificateAssociationStatus(ev)
-			return nil
-		case schemas.CertificateAssociationSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CertificateAssociationSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Describes the configuration of an Amazon Elastic Kubernetes Service endpoint.
@@ -207,58 +112,6 @@ type EksEndpointsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EksEndpointsConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EksEndpointsConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EksEndpointsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterApiServerCaCertificateChain != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_clusterApiServerCaCertificateChain, *v.ClusterApiServerCaCertificateChain)
-	}
-	if v.ClusterApiServerEndpointUri != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_clusterApiServerEndpointUri, *v.ClusterApiServerEndpointUri)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_clusterName, *v.ClusterName)
-	}
-	if v.EndpointsResourceName != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_endpointsResourceName, *v.EndpointsResourceName)
-	}
-	if v.EndpointsResourceNamespace != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_endpointsResourceNamespace, *v.EndpointsResourceNamespace)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.EksEndpointsConfiguration_roleArn, *v.RoleArn)
-	}
-}
-func (v *EksEndpointsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EksEndpointsConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EksEndpointsConfiguration_clusterApiServerCaCertificateChain:
-			v.ClusterApiServerCaCertificateChain = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_clusterApiServerCaCertificateChain, v.ClusterApiServerCaCertificateChain)
-		case schemas.EksEndpointsConfiguration_clusterApiServerEndpointUri:
-			v.ClusterApiServerEndpointUri = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_clusterApiServerEndpointUri, v.ClusterApiServerEndpointUri)
-		case schemas.EksEndpointsConfiguration_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_clusterName, v.ClusterName)
-		case schemas.EksEndpointsConfiguration_endpointsResourceName:
-			v.EndpointsResourceName = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_endpointsResourceName, v.EndpointsResourceName)
-		case schemas.EksEndpointsConfiguration_endpointsResourceNamespace:
-			v.EndpointsResourceNamespace = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_endpointsResourceNamespace, v.EndpointsResourceNamespace)
-		case schemas.EksEndpointsConfiguration_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.EksEndpointsConfiguration_roleArn, v.RoleArn)
-		}
-		return nil
-	})
-}
-
 // Describes the configuration of a filter.
 type Filter struct {
 
@@ -268,25 +121,6 @@ type Filter struct {
 	Criteria []FilterCriterion
 
 	noSmithyDocumentSerde
-}
-
-func (v *Filter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Filter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterCriteria(s, schemas.Filter_criteria, v.Criteria)
-}
-func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Filter_criteria:
-			return deserializeFilterCriteria(d, schemas.Filter_criteria, &v.Criteria)
-		}
-		return nil
-	})
 }
 
 // Describes the criteria for a filter.
@@ -305,31 +139,6 @@ type FilterCriterion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FilterCriterion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FilterCriterion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FilterCriterion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Path != nil {
-		s.WriteString(schemas.FilterCriterion_path, *v.Path)
-	}
-	serializeValueList(s, schemas.FilterCriterion_values, v.Values)
-}
-func (v *FilterCriterion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FilterCriterion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FilterCriterion_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.FilterCriterion_path, v.Path)
-		case schemas.FilterCriterion_values:
-			return deserializeValueList(d, schemas.FilterCriterion_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Describes the header tag for a bid action.
 type HeaderTagAction struct {
 
@@ -344,34 +153,6 @@ type HeaderTagAction struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *HeaderTagAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HeaderTagAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HeaderTagAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.HeaderTagAction_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.HeaderTagAction_value, *v.Value)
-	}
-}
-func (v *HeaderTagAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HeaderTagAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HeaderTagAction_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.HeaderTagAction_name, v.Name)
-		case schemas.HeaderTagAction_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.HeaderTagAction_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The health check configuration for a managed endpoint. Defines how the service
@@ -414,74 +195,6 @@ type HealthCheckConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HealthCheckConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HealthCheckConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HealthCheckConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthyThresholdCount != nil {
-		s.WriteInt32(schemas.HealthCheckConfig_healthyThresholdCount, *v.HealthyThresholdCount)
-	}
-	if v.IntervalSeconds != nil {
-		s.WriteInt32(schemas.HealthCheckConfig_intervalSeconds, *v.IntervalSeconds)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.HealthCheckConfig_path, *v.Path)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.HealthCheckConfig_port, *v.Port)
-	}
-	if v.Protocol != "" {
-		s.WriteString(schemas.HealthCheckConfig_protocol, string(v.Protocol))
-	}
-	if v.StatusCodeMatcher != nil {
-		s.WriteString(schemas.HealthCheckConfig_statusCodeMatcher, *v.StatusCodeMatcher)
-	}
-	if v.TimeoutMs != nil {
-		s.WriteInt32(schemas.HealthCheckConfig_timeoutMs, *v.TimeoutMs)
-	}
-	if v.UnhealthyThresholdCount != nil {
-		s.WriteInt32(schemas.HealthCheckConfig_unhealthyThresholdCount, *v.UnhealthyThresholdCount)
-	}
-}
-func (v *HealthCheckConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HealthCheckConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HealthCheckConfig_healthyThresholdCount:
-			v.HealthyThresholdCount = new(int32)
-			return d.ReadInt32(schemas.HealthCheckConfig_healthyThresholdCount, v.HealthyThresholdCount)
-		case schemas.HealthCheckConfig_intervalSeconds:
-			v.IntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.HealthCheckConfig_intervalSeconds, v.IntervalSeconds)
-		case schemas.HealthCheckConfig_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.HealthCheckConfig_path, v.Path)
-		case schemas.HealthCheckConfig_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.HealthCheckConfig_port, v.Port)
-		case schemas.HealthCheckConfig_protocol:
-			var ev string
-			if err := d.ReadString(schemas.HealthCheckConfig_protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = Protocol(ev)
-			return nil
-		case schemas.HealthCheckConfig_statusCodeMatcher:
-			v.StatusCodeMatcher = new(string)
-			return d.ReadString(schemas.HealthCheckConfig_statusCodeMatcher, v.StatusCodeMatcher)
-		case schemas.HealthCheckConfig_timeoutMs:
-			v.TimeoutMs = new(int32)
-			return d.ReadInt32(schemas.HealthCheckConfig_timeoutMs, v.TimeoutMs)
-		case schemas.HealthCheckConfig_unhealthyThresholdCount:
-			v.UnhealthyThresholdCount = new(int32)
-			return d.ReadInt32(schemas.HealthCheckConfig_unhealthyThresholdCount, v.UnhealthyThresholdCount)
-		}
-		return nil
-	})
-}
-
 // Describes the configuration of a link application log.
 type LinkApplicationLogConfiguration struct {
 
@@ -491,30 +204,6 @@ type LinkApplicationLogConfiguration struct {
 	Sampling *LinkApplicationLogSampling
 
 	noSmithyDocumentSerde
-}
-
-func (v *LinkApplicationLogConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkApplicationLogConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkApplicationLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Sampling != nil {
-		s.WriteStruct(schemas.LinkApplicationLogConfiguration_sampling)
-		v.Sampling.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LinkApplicationLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkApplicationLogConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkApplicationLogConfiguration_sampling:
-			v.Sampling = &LinkApplicationLogSampling{}
-			return v.Sampling.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Describes a link application log sample.
@@ -533,34 +222,6 @@ type LinkApplicationLogSampling struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LinkApplicationLogSampling) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkApplicationLogSampling)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkApplicationLogSampling) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorLog != nil {
-		s.WriteFloat64(schemas.LinkApplicationLogSampling_errorLog, *v.ErrorLog)
-	}
-	if v.FilterLog != nil {
-		s.WriteFloat64(schemas.LinkApplicationLogSampling_filterLog, *v.FilterLog)
-	}
-}
-func (v *LinkApplicationLogSampling) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkApplicationLogSampling, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkApplicationLogSampling_errorLog:
-			v.ErrorLog = new(float64)
-			return d.ReadFloat64(schemas.LinkApplicationLogSampling_errorLog, v.ErrorLog)
-		case schemas.LinkApplicationLogSampling_filterLog:
-			v.FilterLog = new(float64)
-			return d.ReadFloat64(schemas.LinkApplicationLogSampling_filterLog, v.FilterLog)
-		}
-		return nil
-	})
-}
-
 // Describes the attributes of a link.
 type LinkAttributes struct {
 
@@ -573,31 +234,6 @@ type LinkAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LinkAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomerProvidedId != nil {
-		s.WriteString(schemas.LinkAttributes_customerProvidedId, *v.CustomerProvidedId)
-	}
-	serializeResponderErrorMasking(s, schemas.LinkAttributes_responderErrorMasking, v.ResponderErrorMasking)
-}
-func (v *LinkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkAttributes_customerProvidedId:
-			v.CustomerProvidedId = new(string)
-			return d.ReadString(schemas.LinkAttributes_customerProvidedId, v.CustomerProvidedId)
-		case schemas.LinkAttributes_responderErrorMasking:
-			return deserializeResponderErrorMasking(d, schemas.LinkAttributes_responderErrorMasking, &v.ResponderErrorMasking)
-		}
-		return nil
-	})
-}
-
 // Describes the settings for a link log.
 type LinkLogSettings struct {
 
@@ -607,30 +243,6 @@ type LinkLogSettings struct {
 	ApplicationLogs *LinkApplicationLogConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *LinkLogSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkLogSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkLogSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationLogs != nil {
-		s.WriteStruct(schemas.LinkLogSettings_applicationLogs)
-		v.ApplicationLogs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LinkLogSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkLogSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkLogSettings_applicationLogs:
-			v.ApplicationLogs = &LinkApplicationLogConfiguration{}
-			return v.ApplicationLogs.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A summary of a link routing rule.
@@ -669,64 +281,6 @@ type LinkRoutingRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LinkRoutingRuleSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkRoutingRuleSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkRoutingRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Conditions != nil {
-		s.WriteStruct(schemas.LinkRoutingRuleSummary_conditions)
-		v.Conditions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.LinkRoutingRuleSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Priority != nil {
-		s.WriteInt32(schemas.LinkRoutingRuleSummary_priority, *v.Priority)
-	}
-	if v.RuleId != nil {
-		s.WriteString(schemas.LinkRoutingRuleSummary_ruleId, *v.RuleId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.LinkRoutingRuleSummary_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.LinkRoutingRuleSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *LinkRoutingRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkRoutingRuleSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkRoutingRuleSummary_conditions:
-			v.Conditions = &RuleCondition{}
-			return v.Conditions.Deserialize(d)
-		case schemas.LinkRoutingRuleSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.LinkRoutingRuleSummary_createdAt, v.CreatedAt)
-		case schemas.LinkRoutingRuleSummary_priority:
-			v.Priority = new(int32)
-			return d.ReadInt32(schemas.LinkRoutingRuleSummary_priority, v.Priority)
-		case schemas.LinkRoutingRuleSummary_ruleId:
-			v.RuleId = new(string)
-			return d.ReadString(schemas.LinkRoutingRuleSummary_ruleId, v.RuleId)
-		case schemas.LinkRoutingRuleSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.LinkRoutingRuleSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = RuleStatus(ev)
-			return nil
-		case schemas.LinkRoutingRuleSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.LinkRoutingRuleSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
 // gateway.
 type ListenerConfig struct {
@@ -737,25 +291,6 @@ type ListenerConfig struct {
 	Protocols []Protocol
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListenerConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListenerConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListenerConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtocolList(s, schemas.ListenerConfig_protocols, v.Protocols)
-}
-func (v *ListenerConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListenerConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListenerConfig_protocols:
-			return deserializeProtocolList(d, schemas.ListenerConfig_protocols, &v.Protocols)
-		}
-		return nil
-	})
 }
 
 // Describes a link.
@@ -818,113 +353,6 @@ type ListLinksResponseStructure struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLinksResponseStructure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLinksResponseStructure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLinksResponseStructure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attributes != nil {
-		s.WriteStruct(schemas.ListLinksResponseStructure_attributes)
-		v.Attributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConnectivityType != "" {
-		s.WriteString(schemas.ListLinksResponseStructure_connectivityType, string(v.ConnectivityType))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ListLinksResponseStructure_createdAt, *v.CreatedAt)
-	}
-	if v.Direction != "" {
-		s.WriteString(schemas.ListLinksResponseStructure_direction, string(v.Direction))
-	}
-	serializeModuleConfigurationList(s, schemas.ListLinksResponseStructure_flowModules, v.FlowModules)
-	if v.GatewayId != nil {
-		s.WriteString(schemas.ListLinksResponseStructure_gatewayId, *v.GatewayId)
-	}
-	if v.LinkId != nil {
-		s.WriteString(schemas.ListLinksResponseStructure_linkId, *v.LinkId)
-	}
-	if v.LogSettings != nil {
-		s.WriteStruct(schemas.ListLinksResponseStructure_logSettings)
-		v.LogSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PeerGatewayId != nil {
-		s.WriteString(schemas.ListLinksResponseStructure_peerGatewayId, *v.PeerGatewayId)
-	}
-	serializeModuleConfigurationList(s, schemas.ListLinksResponseStructure_pendingFlowModules, v.PendingFlowModules)
-	if v.PublicEndpoint != nil {
-		s.WriteString(schemas.ListLinksResponseStructure_publicEndpoint, *v.PublicEndpoint)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListLinksResponseStructure_status, string(v.Status))
-	}
-	serializeTagsMap(s, schemas.ListLinksResponseStructure_tags, v.Tags)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ListLinksResponseStructure_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ListLinksResponseStructure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLinksResponseStructure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLinksResponseStructure_attributes:
-			v.Attributes = &LinkAttributes{}
-			return v.Attributes.Deserialize(d)
-		case schemas.ListLinksResponseStructure_connectivityType:
-			var ev string
-			if err := d.ReadString(schemas.ListLinksResponseStructure_connectivityType, &ev); err != nil {
-				return err
-			}
-			v.ConnectivityType = ConnectivityType(ev)
-			return nil
-		case schemas.ListLinksResponseStructure_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ListLinksResponseStructure_createdAt, v.CreatedAt)
-		case schemas.ListLinksResponseStructure_direction:
-			var ev string
-			if err := d.ReadString(schemas.ListLinksResponseStructure_direction, &ev); err != nil {
-				return err
-			}
-			v.Direction = LinkDirection(ev)
-			return nil
-		case schemas.ListLinksResponseStructure_flowModules:
-			return deserializeModuleConfigurationList(d, schemas.ListLinksResponseStructure_flowModules, &v.FlowModules)
-		case schemas.ListLinksResponseStructure_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.ListLinksResponseStructure_gatewayId, v.GatewayId)
-		case schemas.ListLinksResponseStructure_linkId:
-			v.LinkId = new(string)
-			return d.ReadString(schemas.ListLinksResponseStructure_linkId, v.LinkId)
-		case schemas.ListLinksResponseStructure_logSettings:
-			v.LogSettings = &LinkLogSettings{}
-			return v.LogSettings.Deserialize(d)
-		case schemas.ListLinksResponseStructure_peerGatewayId:
-			v.PeerGatewayId = new(string)
-			return d.ReadString(schemas.ListLinksResponseStructure_peerGatewayId, v.PeerGatewayId)
-		case schemas.ListLinksResponseStructure_pendingFlowModules:
-			return deserializeModuleConfigurationList(d, schemas.ListLinksResponseStructure_pendingFlowModules, &v.PendingFlowModules)
-		case schemas.ListLinksResponseStructure_publicEndpoint:
-			v.PublicEndpoint = new(string)
-			return d.ReadString(schemas.ListLinksResponseStructure_publicEndpoint, v.PublicEndpoint)
-		case schemas.ListLinksResponseStructure_status:
-			var ev string
-			if err := d.ReadString(schemas.ListLinksResponseStructure_status, &ev); err != nil {
-				return err
-			}
-			v.Status = LinkStatus(ev)
-			return nil
-		case schemas.ListLinksResponseStructure_tags:
-			return deserializeTagsMap(d, schemas.ListLinksResponseStructure_tags, &v.Tags)
-		case schemas.ListLinksResponseStructure_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ListLinksResponseStructure_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Describes the configuration of a managed endpoint.
 //
 // The following types satisfy this interface:
@@ -943,14 +371,6 @@ type ManagedEndpointConfigurationMemberAutoScalingGroups struct {
 }
 
 func (*ManagedEndpointConfigurationMemberAutoScalingGroups) isManagedEndpointConfiguration() {}
-func (v *ManagedEndpointConfigurationMemberAutoScalingGroups) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedEndpointConfiguration_autoScalingGroups)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ManagedEndpointConfigurationMemberAutoScalingGroups) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes the configuration of an Amazon Elastic Kubernetes Service endpoint.
 type ManagedEndpointConfigurationMemberEksEndpoints struct {
@@ -960,14 +380,6 @@ type ManagedEndpointConfigurationMemberEksEndpoints struct {
 }
 
 func (*ManagedEndpointConfigurationMemberEksEndpoints) isManagedEndpointConfiguration() {}
-func (v *ManagedEndpointConfigurationMemberEksEndpoints) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedEndpointConfiguration_eksEndpoints)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ManagedEndpointConfigurationMemberEksEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes the configuration of a module.
 type ModuleConfiguration struct {
@@ -989,40 +401,6 @@ type ModuleConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModuleConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModuleConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModuleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowModuleNameList(s, schemas.ModuleConfiguration_dependsOn, v.DependsOn)
-	serializeModuleParameters(s, schemas.ModuleConfiguration_moduleParameters, v.ModuleParameters)
-	if v.Name != nil {
-		s.WriteString(schemas.ModuleConfiguration_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.ModuleConfiguration_version, *v.Version)
-	}
-}
-func (v *ModuleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModuleConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModuleConfiguration_dependsOn:
-			return deserializeFlowModuleNameList(d, schemas.ModuleConfiguration_dependsOn, &v.DependsOn)
-		case schemas.ModuleConfiguration_moduleParameters:
-			return deserializeModuleParameters(d, schemas.ModuleConfiguration_moduleParameters, &v.ModuleParameters)
-		case schemas.ModuleConfiguration_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ModuleConfiguration_name, v.Name)
-		case schemas.ModuleConfiguration_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.ModuleConfiguration_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Describes the parameters of a module.
 //
 // The following types satisfy this interface:
@@ -1042,14 +420,6 @@ type ModuleParametersMemberNoBid struct {
 }
 
 func (*ModuleParametersMemberNoBid) isModuleParameters() {}
-func (v *ModuleParametersMemberNoBid) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModuleParameters_noBid)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ModuleParametersMemberNoBid) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes the parameters of an open RTB attribute module.
 type ModuleParametersMemberOpenRtbAttribute struct {
@@ -1059,14 +429,6 @@ type ModuleParametersMemberOpenRtbAttribute struct {
 }
 
 func (*ModuleParametersMemberOpenRtbAttribute) isModuleParameters() {}
-func (v *ModuleParametersMemberOpenRtbAttribute) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModuleParameters_openRtbAttribute)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ModuleParametersMemberOpenRtbAttribute) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes the parameters of a rate limit.
 type ModuleParametersMemberRateLimiter struct {
@@ -1076,14 +438,6 @@ type ModuleParametersMemberRateLimiter struct {
 }
 
 func (*ModuleParametersMemberRateLimiter) isModuleParameters() {}
-func (v *ModuleParametersMemberRateLimiter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModuleParameters_rateLimiter)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ModuleParametersMemberRateLimiter) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Describes a no bid action.
 type NoBidAction struct {
@@ -1092,28 +446,6 @@ type NoBidAction struct {
 	NoBidReasonCode *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *NoBidAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoBidAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NoBidAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NoBidReasonCode != nil {
-		s.WriteInt32(schemas.NoBidAction_noBidReasonCode, *v.NoBidReasonCode)
-	}
-}
-func (v *NoBidAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NoBidAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NoBidAction_noBidReasonCode:
-			v.NoBidReasonCode = new(int32)
-			return d.ReadInt32(schemas.NoBidAction_noBidReasonCode, v.NoBidReasonCode)
-		}
-		return nil
-	})
 }
 
 // Describes the parameters of a no bid module.
@@ -1129,40 +461,6 @@ type NoBidModuleParameters struct {
 	ReasonCode *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *NoBidModuleParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoBidModuleParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NoBidModuleParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PassThroughPercentage != nil {
-		s.WriteFloat32(schemas.NoBidModuleParameters_passThroughPercentage, *v.PassThroughPercentage)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.NoBidModuleParameters_reason, *v.Reason)
-	}
-	if v.ReasonCode != nil {
-		s.WriteInt32(schemas.NoBidModuleParameters_reasonCode, *v.ReasonCode)
-	}
-}
-func (v *NoBidModuleParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NoBidModuleParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NoBidModuleParameters_passThroughPercentage:
-			v.PassThroughPercentage = new(float32)
-			return d.ReadFloat32(schemas.NoBidModuleParameters_passThroughPercentage, v.PassThroughPercentage)
-		case schemas.NoBidModuleParameters_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.NoBidModuleParameters_reason, v.Reason)
-		case schemas.NoBidModuleParameters_reasonCode:
-			v.ReasonCode = new(int32)
-			return d.ReadInt32(schemas.NoBidModuleParameters_reasonCode, v.ReasonCode)
-		}
-		return nil
-	})
 }
 
 // Describes the parameters of an open RTB attribute module.
@@ -1191,44 +489,6 @@ type OpenRtbAttributeModuleParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OpenRtbAttributeModuleParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OpenRtbAttributeModuleParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OpenRtbAttributeModuleParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAction(s, schemas.OpenRtbAttributeModuleParameters_action, v.Action)
-	serializeFilterConfiguration(s, schemas.OpenRtbAttributeModuleParameters_filterConfiguration, v.FilterConfiguration)
-	if v.FilterType != "" {
-		s.WriteString(schemas.OpenRtbAttributeModuleParameters_filterType, string(v.FilterType))
-	}
-	if v.HoldbackPercentage != nil {
-		s.WriteFloat32(schemas.OpenRtbAttributeModuleParameters_holdbackPercentage, *v.HoldbackPercentage)
-	}
-}
-func (v *OpenRtbAttributeModuleParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OpenRtbAttributeModuleParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OpenRtbAttributeModuleParameters_action:
-			return deserializeAction(d, schemas.OpenRtbAttributeModuleParameters_action, &v.Action)
-		case schemas.OpenRtbAttributeModuleParameters_filterConfiguration:
-			return deserializeFilterConfiguration(d, schemas.OpenRtbAttributeModuleParameters_filterConfiguration, &v.FilterConfiguration)
-		case schemas.OpenRtbAttributeModuleParameters_filterType:
-			var ev string
-			if err := d.ReadString(schemas.OpenRtbAttributeModuleParameters_filterType, &ev); err != nil {
-				return err
-			}
-			v.FilterType = FilterType(ev)
-			return nil
-		case schemas.OpenRtbAttributeModuleParameters_holdbackPercentage:
-			v.HoldbackPercentage = new(float32)
-			return d.ReadFloat32(schemas.OpenRtbAttributeModuleParameters_holdbackPercentage, v.HoldbackPercentage)
-		}
-		return nil
-	})
-}
-
 // A key-value pair for query string matching in a routing rule condition.
 type QueryStringKeyValuePair struct {
 
@@ -1247,34 +507,6 @@ type QueryStringKeyValuePair struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryStringKeyValuePair) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryStringKeyValuePair)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryStringKeyValuePair) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.QueryStringKeyValuePair_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.QueryStringKeyValuePair_value, *v.Value)
-	}
-}
-func (v *QueryStringKeyValuePair) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryStringKeyValuePair, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryStringKeyValuePair_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.QueryStringKeyValuePair_key, v.Key)
-		case schemas.QueryStringKeyValuePair_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.QueryStringKeyValuePair_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Describes the parameters of a rate limit.
 type RateLimiterModuleParameters struct {
 
@@ -1282,28 +514,6 @@ type RateLimiterModuleParameters struct {
 	Tps *float32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RateLimiterModuleParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RateLimiterModuleParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RateLimiterModuleParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Tps != nil {
-		s.WriteFloat32(schemas.RateLimiterModuleParameters_tps, *v.Tps)
-	}
-}
-func (v *RateLimiterModuleParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RateLimiterModuleParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RateLimiterModuleParameters_tps:
-			v.Tps = new(float32)
-			return d.ReadFloat32(schemas.RateLimiterModuleParameters_tps, v.Tps)
-		}
-		return nil
-	})
 }
 
 // Describes the masking for HTTP error codes.
@@ -1328,47 +538,6 @@ type ResponderErrorMaskingForHttpCode struct {
 	ResponseLoggingPercentage *float32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResponderErrorMaskingForHttpCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResponderErrorMaskingForHttpCode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResponderErrorMaskingForHttpCode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.ResponderErrorMaskingForHttpCode_action, string(v.Action))
-	}
-	if v.HttpCode != nil {
-		s.WriteString(schemas.ResponderErrorMaskingForHttpCode_httpCode, *v.HttpCode)
-	}
-	serializeResponderErrorMaskingLoggingTypes(s, schemas.ResponderErrorMaskingForHttpCode_loggingTypes, v.LoggingTypes)
-	if v.ResponseLoggingPercentage != nil {
-		s.WriteFloat32(schemas.ResponderErrorMaskingForHttpCode_responseLoggingPercentage, *v.ResponseLoggingPercentage)
-	}
-}
-func (v *ResponderErrorMaskingForHttpCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResponderErrorMaskingForHttpCode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResponderErrorMaskingForHttpCode_action:
-			var ev string
-			if err := d.ReadString(schemas.ResponderErrorMaskingForHttpCode_action, &ev); err != nil {
-				return err
-			}
-			v.Action = ResponderErrorMaskingAction(ev)
-			return nil
-		case schemas.ResponderErrorMaskingForHttpCode_httpCode:
-			v.HttpCode = new(string)
-			return d.ReadString(schemas.ResponderErrorMaskingForHttpCode_httpCode, v.HttpCode)
-		case schemas.ResponderErrorMaskingForHttpCode_loggingTypes:
-			return deserializeResponderErrorMaskingLoggingTypes(d, schemas.ResponderErrorMaskingForHttpCode_loggingTypes, &v.LoggingTypes)
-		case schemas.ResponderErrorMaskingForHttpCode_responseLoggingPercentage:
-			v.ResponseLoggingPercentage = new(float32)
-			return d.ReadFloat32(schemas.ResponderErrorMaskingForHttpCode_responseLoggingPercentage, v.ResponseLoggingPercentage)
-		}
-		return nil
-	})
 }
 
 // The conditions for a routing rule. All specified fields must match for the rule
@@ -1397,60 +566,6 @@ type RuleCondition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RuleCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RuleCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RuleCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HostHeader != nil {
-		s.WriteString(schemas.RuleCondition_hostHeader, *v.HostHeader)
-	}
-	if v.HostHeaderWildcard != nil {
-		s.WriteString(schemas.RuleCondition_hostHeaderWildcard, *v.HostHeaderWildcard)
-	}
-	if v.PathExact != nil {
-		s.WriteString(schemas.RuleCondition_pathExact, *v.PathExact)
-	}
-	if v.PathPrefix != nil {
-		s.WriteString(schemas.RuleCondition_pathPrefix, *v.PathPrefix)
-	}
-	if v.QueryStringEquals != nil {
-		s.WriteStruct(schemas.RuleCondition_queryStringEquals)
-		v.QueryStringEquals.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryStringExists != nil {
-		s.WriteString(schemas.RuleCondition_queryStringExists, *v.QueryStringExists)
-	}
-}
-func (v *RuleCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RuleCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RuleCondition_hostHeader:
-			v.HostHeader = new(string)
-			return d.ReadString(schemas.RuleCondition_hostHeader, v.HostHeader)
-		case schemas.RuleCondition_hostHeaderWildcard:
-			v.HostHeaderWildcard = new(string)
-			return d.ReadString(schemas.RuleCondition_hostHeaderWildcard, v.HostHeaderWildcard)
-		case schemas.RuleCondition_pathExact:
-			v.PathExact = new(string)
-			return d.ReadString(schemas.RuleCondition_pathExact, v.PathExact)
-		case schemas.RuleCondition_pathPrefix:
-			v.PathPrefix = new(string)
-			return d.ReadString(schemas.RuleCondition_pathPrefix, v.PathPrefix)
-		case schemas.RuleCondition_queryStringEquals:
-			v.QueryStringEquals = &QueryStringKeyValuePair{}
-			return v.QueryStringEquals.Deserialize(d)
-		case schemas.RuleCondition_queryStringExists:
-			v.QueryStringExists = new(string)
-			return d.ReadString(schemas.RuleCondition_queryStringExists, v.QueryStringExists)
-		}
-		return nil
-	})
-}
-
 // Describes the configuration of a trust store.
 type TrustStoreConfiguration struct {
 
@@ -1460,25 +575,6 @@ type TrustStoreConfiguration struct {
 	CertificateAuthorityCertificates []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TrustStoreConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrustStoreConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TrustStoreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateAuthorityCertificates(s, schemas.TrustStoreConfiguration_certificateAuthorityCertificates, v.CertificateAuthorityCertificates)
-}
-func (v *TrustStoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TrustStoreConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TrustStoreConfiguration_certificateAuthorityCertificates:
-			return deserializeCertificateAuthorityCertificates(d, schemas.TrustStoreConfiguration_certificateAuthorityCertificates, &v.CertificateAuthorityCertificates)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

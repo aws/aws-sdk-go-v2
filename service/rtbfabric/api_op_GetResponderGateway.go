@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -41,18 +37,6 @@ type GetResponderGatewayInput struct {
 	GatewayId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetResponderGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResponderGatewayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.GetResponderGatewayRequest_gatewayId, *v.GatewayId)
-	}
 }
 
 type GetResponderGatewayOutput struct {
@@ -95,6 +79,16 @@ type GetResponderGatewayOutput struct {
 	// The count of active links for the responder gateway.
 	ActiveLinksCount *int32
 
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. RTB Fabric omits this member if the gateway
+	// has never had a client routing policy. An omitted value means that the gateway
+	// uses AVAILABILITY_ZONE_AFFINITY . For more information, see [Configuring Availability Zone affinity] in the Amazon Web
+	// Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
+
 	// The timestamp of when the responder gateway was created.
 	CreatedAt *time.Time
 
@@ -109,11 +103,6 @@ type GetResponderGatewayOutput struct {
 
 	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
 	GatewayType types.GatewayType
-
-	// Deprecated. Use 'linksRequestedCount' instead.
-	//
-	// Deprecated: Use linksRequestedCount instead
-	InboundLinksCount *int32
 
 	// The count of requested links waiting for the responder gateway to accept or
 	// reject.
@@ -144,153 +133,29 @@ type GetResponderGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResponderGatewayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResponderGatewayResponse_activeLinksCount:
-			v.ActiveLinksCount = new(int32)
-			return d.ReadInt32(schemas.GetResponderGatewayResponse_activeLinksCount, v.ActiveLinksCount)
-		case schemas.GetResponderGatewayResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetResponderGatewayResponse_createdAt, v.CreatedAt)
-		case schemas.GetResponderGatewayResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetResponderGatewayResponse_description, v.Description)
-		case schemas.GetResponderGatewayResponse_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.GetResponderGatewayResponse_domainName, v.DomainName)
-		case schemas.GetResponderGatewayResponse_externalInboundEndpoint:
-			v.ExternalInboundEndpoint = new(string)
-			return d.ReadString(schemas.GetResponderGatewayResponse_externalInboundEndpoint, v.ExternalInboundEndpoint)
-		case schemas.GetResponderGatewayResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.GetResponderGatewayResponse_gatewayId, v.GatewayId)
-		case schemas.GetResponderGatewayResponse_gatewayType:
-			var ev string
-			if err := d.ReadString(schemas.GetResponderGatewayResponse_gatewayType, &ev); err != nil {
-				return err
-			}
-			v.GatewayType = types.GatewayType(ev)
-			return nil
-		case schemas.GetResponderGatewayResponse_inboundLinksCount:
-			v.InboundLinksCount = new(int32)
-			return d.ReadInt32(schemas.GetResponderGatewayResponse_inboundLinksCount, v.InboundLinksCount)
-		case schemas.GetResponderGatewayResponse_linksRequestedCount:
-			v.LinksRequestedCount = new(int32)
-			return d.ReadInt32(schemas.GetResponderGatewayResponse_linksRequestedCount, v.LinksRequestedCount)
-		case schemas.GetResponderGatewayResponse_listenerConfig:
-			v.ListenerConfig = &types.ListenerConfig{}
-			return v.ListenerConfig.Deserialize(d)
-		case schemas.GetResponderGatewayResponse_managedEndpointConfiguration:
-			return deserializeManagedEndpointConfiguration(d, schemas.GetResponderGatewayResponse_managedEndpointConfiguration, &v.ManagedEndpointConfiguration)
-		case schemas.GetResponderGatewayResponse_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.GetResponderGatewayResponse_port, v.Port)
-		case schemas.GetResponderGatewayResponse_protocol:
-			var ev string
-			if err := d.ReadString(schemas.GetResponderGatewayResponse_protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = types.Protocol(ev)
-			return nil
-		case schemas.GetResponderGatewayResponse_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.GetResponderGatewayResponse_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.GetResponderGatewayResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetResponderGatewayResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ResponderGatewayStatus(ev)
-			return nil
-		case schemas.GetResponderGatewayResponse_subnetIds:
-			return deserializeSubnetIdList(d, schemas.GetResponderGatewayResponse_subnetIds, &v.SubnetIds)
-		case schemas.GetResponderGatewayResponse_tags:
-			return deserializeTagsMap(d, schemas.GetResponderGatewayResponse_tags, &v.Tags)
-		case schemas.GetResponderGatewayResponse_totalLinksCount:
-			v.TotalLinksCount = new(int32)
-			return d.ReadInt32(schemas.GetResponderGatewayResponse_totalLinksCount, v.TotalLinksCount)
-		case schemas.GetResponderGatewayResponse_trustStoreConfiguration:
-			v.TrustStoreConfiguration = &types.TrustStoreConfiguration{}
-			return v.TrustStoreConfiguration.Deserialize(d)
-		case schemas.GetResponderGatewayResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetResponderGatewayResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetResponderGatewayResponse_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.GetResponderGatewayResponse_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResponderGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponderGateway, schemas.GetResponderGatewayRequest, schemas.GetResponderGatewayResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResponderGateway{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponderGateway, schemas.GetResponderGatewayRequest, schemas.GetResponderGatewayResponse), output: &GetResponderGatewayOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResponderGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResponderGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResponderGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -303,12 +168,6 @@ func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -715,11 +574,3 @@ type GetResponderGatewayAPIClient interface {
 }
 
 var _ GetResponderGatewayAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetResponderGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResponderGateway",
-	}
-}

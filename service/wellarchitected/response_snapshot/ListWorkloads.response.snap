@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","WorkloadSummaries":[{"ImprovementStatus":"NOT_APPLICABLE","Lenses":["__Member__","__Member__"],"Owner":"__Owner__","PrioritizedRiskCounts":{"key0":1},"Profiles":[{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"},{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"}],"RiskCounts":{"key0":1},"UpdatedAt":946684800,"WorkloadArn":"__WorkloadArn__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"},{"ImprovementStatus":"NOT_APPLICABLE","Lenses":["__Member__","__Member__"],"Owner":"__Owner__","PrioritizedRiskCounts":{"key0":1},"Profiles":[{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"},{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"}],"RiskCounts":{"key0":1},"UpdatedAt":946684800,"WorkloadArn":"__WorkloadArn__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"}]}

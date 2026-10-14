@@ -4,10 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns details about the service resource in your account.
@@ -30,7 +30,20 @@ type DescribeSecurityHubV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityHubV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityHubV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityHubV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeSecurityHubV2Output struct {
+
+	// A map of opt-in features and their current status and metadata for the account
+	// in the current Region.
+	Features map[string]types.FeatureDetail
 
 	// The ARN of the service resource.
 	HubV2Arn *string
@@ -44,74 +57,54 @@ type DescribeSecurityHubV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityHubV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityHubV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityHubV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatures(s, schemas.DescribeSecurityHubV2Response_Features, v.Features)
+	if v.HubV2Arn != nil {
+		s.WriteString(schemas.DescribeSecurityHubV2Response_HubV2Arn, *v.HubV2Arn)
+	}
+	if v.SubscribedAt != nil {
+		s.WriteString(schemas.DescribeSecurityHubV2Response_SubscribedAt, *v.SubscribedAt)
+	}
+}
+func (v *DescribeSecurityHubV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecurityHubV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecurityHubV2Response_Features:
+			return deserializeFeatures(d, schemas.DescribeSecurityHubV2Response_Features, &v.Features)
+		case schemas.DescribeSecurityHubV2Response_HubV2Arn:
+			v.HubV2Arn = new(string)
+			return d.ReadString(schemas.DescribeSecurityHubV2Response_HubV2Arn, v.HubV2Arn)
+		case schemas.DescribeSecurityHubV2Response_SubscribedAt:
+			v.SubscribedAt = new(string)
+			return d.ReadString(schemas.DescribeSecurityHubV2Response_SubscribedAt, v.SubscribedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecurityHubV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityHubV2, schemas.DescribeSecurityHubV2Request, schemas.DescribeSecurityHubV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityHubV2, schemas.DescribeSecurityHubV2Request, schemas.DescribeSecurityHubV2Response), output: &DescribeSecurityHubV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSecurityHubV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSecurityHubV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSecurityHubV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,22 +119,8 @@ func (c *Client) addOperationDescribeSecurityHubV2Middlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeSecurityHubV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSecurityHubV2",
-	}
 }

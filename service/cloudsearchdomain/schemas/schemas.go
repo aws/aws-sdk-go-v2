@@ -87,7 +87,7 @@ var _Deletes = smithy.NewSchema(smithy.ShapeID{
 var DocumentServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudsearchdomain",
 	Name:      "DocumentServiceException",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
 var DocumentServiceException_status *smithy.Schema
 
 var DocumentServiceException_message *smithy.Schema
@@ -257,7 +257,7 @@ var _Return = smithy.NewSchema(smithy.ShapeID{
 var SearchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudsearchdomain",
 	Name:      "SearchException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SearchException_message *smithy.Schema
 
 var SearchStatus = smithy.NewSchema(smithy.ShapeID{

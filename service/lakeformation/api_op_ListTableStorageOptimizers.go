@@ -5,12 +5,8 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the configuration of all storage optimizers associated with a specified
@@ -58,33 +54,6 @@ type ListTableStorageOptimizersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTableStorageOptimizersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTableStorageOptimizersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTableStorageOptimizersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.ListTableStorageOptimizersRequest_CatalogId, *v.CatalogId)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.ListTableStorageOptimizersRequest_DatabaseName, *v.DatabaseName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTableStorageOptimizersRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTableStorageOptimizersRequest_NextToken, *v.NextToken)
-	}
-	if v.StorageOptimizerType != "" {
-		s.WriteString(schemas.ListTableStorageOptimizersRequest_StorageOptimizerType, string(v.StorageOptimizerType))
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.ListTableStorageOptimizersRequest_TableName, *v.TableName)
-	}
-}
-
 type ListTableStorageOptimizersOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if
@@ -100,87 +69,29 @@ type ListTableStorageOptimizersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTableStorageOptimizersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTableStorageOptimizersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTableStorageOptimizersResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTableStorageOptimizersResponse_NextToken, v.NextToken)
-		case schemas.ListTableStorageOptimizersResponse_StorageOptimizerList:
-			return deserializeStorageOptimizerList(d, schemas.ListTableStorageOptimizersResponse_StorageOptimizerList, &v.StorageOptimizerList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTableStorageOptimizers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableStorageOptimizers, schemas.ListTableStorageOptimizersRequest, schemas.ListTableStorageOptimizersResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTableStorageOptimizers{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableStorageOptimizers, schemas.ListTableStorageOptimizersRequest, schemas.ListTableStorageOptimizersResponse), output: &ListTableStorageOptimizersOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTableStorageOptimizers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTableStorageOptimizersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTableStorageOptimizers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +104,6 @@ func (c *Client) addOperationListTableStorageOptimizersMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +207,3 @@ type ListTableStorageOptimizersAPIClient interface {
 }
 
 var _ ListTableStorageOptimizersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTableStorageOptimizers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTableStorageOptimizers",
-	}
-}

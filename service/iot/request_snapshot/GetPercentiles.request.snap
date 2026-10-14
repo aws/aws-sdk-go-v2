@@ -1,0 +1,5 @@
+POST /indices/percentiles
+
+Content-Type: application/json
+
+{"aggregationField":"__AggregationField__","indexName":"__IndexName__","percents":[1,1],"queryString":"__QueryString__","queryVersion":"__QueryVersion__"}

@@ -5,10 +5,10 @@ package connectcases
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all of the field options for a field identifier in the domain.
@@ -52,6 +52,49 @@ type ListFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_fieldId, *v.FieldId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFieldOptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_nextToken, *v.NextToken)
+	}
+	serializeValuesList(s, schemas.ListFieldOptionsRequest_values, v.Values)
+}
+func (v *ListFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldOptionsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_domainId, v.DomainId)
+		case schemas.ListFieldOptionsRequest_fieldId:
+			v.FieldId = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_fieldId, v.FieldId)
+		case schemas.ListFieldOptionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFieldOptionsRequest_maxResults, v.MaxResults)
+		case schemas.ListFieldOptionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_nextToken, v.NextToken)
+		case schemas.ListFieldOptionsRequest_values:
+			return deserializeValuesList(d, schemas.ListFieldOptionsRequest_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 type ListFieldOptionsOutput struct {
 
 	// A list of FieldOption objects.
@@ -69,77 +112,51 @@ type ListFieldOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldOptionsResponse_nextToken, *v.NextToken)
+	}
+	serializeFieldOptionsList(s, schemas.ListFieldOptionsResponse_options, v.Options)
+}
+func (v *ListFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldOptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldOptionsResponse_nextToken, v.NextToken)
+		case schemas.ListFieldOptionsResponse_options:
+			return deserializeFieldOptionsList(d, schemas.ListFieldOptionsResponse_options, &v.Options)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFieldOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFieldOptions, schemas.ListFieldOptionsRequest, schemas.ListFieldOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFieldOptions, schemas.ListFieldOptionsRequest, schemas.ListFieldOptionsResponse), output: &ListFieldOptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFieldOptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFieldOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFieldOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFieldOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +169,6 @@ func (c *Client) addOperationListFieldOptionsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +269,3 @@ type ListFieldOptionsAPIClient interface {
 }
 
 var _ ListFieldOptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFieldOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFieldOptions",
-	}
-}

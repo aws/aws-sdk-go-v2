@@ -58,6 +58,14 @@ func deserializeInvalidParameterMap(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]InvalidParameterDetail)
 	var vv InvalidParameterDetail
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero InvalidParameterDetail
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = InvalidParameterDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
@@ -72,6 +80,13 @@ func deserializeStringMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

@@ -1,0 +1,5 @@
+POST /tokens/figma/refresh
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","token":"__Token__"}

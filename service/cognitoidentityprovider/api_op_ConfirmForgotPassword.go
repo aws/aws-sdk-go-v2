@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This public API operation accepts a confirmation code that Amazon Cognito sent
@@ -122,6 +121,41 @@ type ConfirmForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmForgotPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmForgotPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ConfirmForgotPasswordRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ConfirmForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.ConfirmationCode != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_ConfirmationCode, *v.ConfirmationCode)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_Password, *v.Password)
+	}
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_SecretHash, *v.SecretHash)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ConfirmForgotPasswordRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_Username, *v.Username)
+	}
+}
+
 // The response from the server that results from a user's request to retrieve a
 // forgotten password.
 type ConfirmForgotPasswordOutput struct {
@@ -131,74 +165,39 @@ type ConfirmForgotPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmForgotPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmForgotPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmForgotPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ConfirmForgotPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmForgotPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmForgotPassword, schemas.ConfirmForgotPasswordRequest, schemas.ConfirmForgotPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmForgotPassword, schemas.ConfirmForgotPasswordRequest, schemas.ConfirmForgotPasswordResponse), output: &ConfirmForgotPasswordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmForgotPassword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfirmForgotPassword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfirmForgotPasswordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmForgotPassword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +212,8 @@ func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfirmForgotPassword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfirmForgotPassword",
-	}
 }

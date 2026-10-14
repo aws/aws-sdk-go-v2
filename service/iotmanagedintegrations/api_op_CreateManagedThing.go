@@ -5,12 +5,8 @@ package iotmanagedintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -109,64 +105,6 @@ type CreateManagedThingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateManagedThingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateManagedThingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationMaterial != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_AuthenticationMaterial, *v.AuthenticationMaterial)
-	}
-	if v.AuthenticationMaterialType != "" {
-		s.WriteString(schemas.CreateManagedThingRequest_AuthenticationMaterialType, string(v.AuthenticationMaterialType))
-	}
-	if v.Brand != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Brand, *v.Brand)
-	}
-	if v.Capabilities != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Capabilities, *v.Capabilities)
-	}
-	if v.CapabilityReport != nil {
-		s.WriteStruct(schemas.CreateManagedThingRequest_CapabilityReport)
-		v.CapabilityReport.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeCapabilitySchemas(s, schemas.CreateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
-	if v.Classification != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Classification, *v.Classification)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_ClientToken, *v.ClientToken)
-	}
-	if v.CredentialLockerId != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_CredentialLockerId, *v.CredentialLockerId)
-	}
-	serializeMetaData(s, schemas.CreateManagedThingRequest_MetaData, v.MetaData)
-	if v.Model != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Model, *v.Model)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_Owner, *v.Owner)
-	}
-	if v.Role != "" {
-		s.WriteString(schemas.CreateManagedThingRequest_Role, string(v.Role))
-	}
-	if v.SerialNumber != nil {
-		s.WriteString(schemas.CreateManagedThingRequest_SerialNumber, *v.SerialNumber)
-	}
-	serializeTagsMap(s, schemas.CreateManagedThingRequest_Tags, v.Tags)
-	if v.WiFiSimpleSetupConfiguration != nil {
-		s.WriteStruct(schemas.CreateManagedThingRequest_WiFiSimpleSetupConfiguration)
-		v.WiFiSimpleSetupConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateManagedThingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the managed thing.
@@ -184,79 +122,23 @@ type CreateManagedThingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateManagedThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateManagedThingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateManagedThingResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateManagedThingResponse_Arn, v.Arn)
-		case schemas.CreateManagedThingResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateManagedThingResponse_CreatedAt, v.CreatedAt)
-		case schemas.CreateManagedThingResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateManagedThingResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateManagedThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateManagedThing{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateManagedThing, schemas.CreateManagedThingRequest, schemas.CreateManagedThingResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateManagedThing{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateManagedThing, schemas.CreateManagedThingRequest, schemas.CreateManagedThingResponse), output: &CreateManagedThingOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateManagedThing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -266,12 +148,6 @@ func (c *Client) addOperationCreateManagedThingMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateManagedThingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateManagedThing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -284,12 +160,6 @@ func (c *Client) addOperationCreateManagedThingMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -329,12 +199,4 @@ func (m *idempotencyToken_initializeOpCreateManagedThing) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateManagedThingMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateManagedThing{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateManagedThing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateManagedThing",
-	}
 }

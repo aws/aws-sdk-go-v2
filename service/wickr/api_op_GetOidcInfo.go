@@ -4,13 +4,8 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the OpenID Connect (OIDC) configuration for a Wickr network,
@@ -65,42 +60,6 @@ type GetOidcInfoInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOidcInfoInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOidcInfoRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOidcInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Certificate != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_certificate, *v.Certificate)
-	}
-	if v.ClientId != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_clientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_clientSecret, *v.ClientSecret)
-	}
-	if v.Code != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_code, *v.Code)
-	}
-	if v.CodeVerifier != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_codeVerifier, *v.CodeVerifier)
-	}
-	if v.GrantType != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_grantType, *v.GrantType)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_networkId, *v.NetworkId)
-	}
-	if v.RedirectUri != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_redirectUri, *v.RedirectUri)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_url, *v.Url)
-	}
-}
-
 type GetOidcInfoOutput struct {
 
 	// The OpenID Connect configuration information for the network, including issuer,
@@ -117,88 +76,29 @@ type GetOidcInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOidcInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOidcInfoResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOidcInfoResponse_openidConnectInfo:
-			v.OpenidConnectInfo = &types.OidcConfigInfo{}
-			return v.OpenidConnectInfo.Deserialize(d)
-		case schemas.GetOidcInfoResponse_tokenInfo:
-			v.TokenInfo = &types.OidcTokenInfo{}
-			return v.TokenInfo.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOidcInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOidcInfo{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOidcInfo, schemas.GetOidcInfoRequest, schemas.GetOidcInfoResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOidcInfo{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOidcInfo, schemas.GetOidcInfoRequest, schemas.GetOidcInfoResponse), output: &GetOidcInfoOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOidcInfo"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOidcInfoValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOidcInfo(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +113,8 @@ func (c *Client) addOperationGetOidcInfoMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOidcInfo(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOidcInfo",
-	}
 }

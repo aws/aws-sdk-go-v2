@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateEdgePackagingJob
+
+{"CompilationJobName":"__CompilationJobName__","EdgePackagingJobName":"__EdgePackagingJobName__","ModelName":"__ModelName__","ModelVersion":"__ModelVersion__","OutputConfig":{"KmsKeyId":"__KmsKeyId__","PresetDeploymentConfig":"__PresetDeploymentConfig__","PresetDeploymentType":"GreengrassV2Component","S3OutputLocation":"__S3OutputLocation__"},"ResourceKey":"__ResourceKey__","RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

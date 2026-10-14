@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Member":{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Description":"__Description__","FrameworkAttributes":{"Fabric":{"AdminUsername":"__AdminUsername__","CaEndpoint":"__CaEndpoint__"}},"Id":"__Id__","KmsKeyArn":"__KmsKeyArn__","LogPublishingConfiguration":{"Fabric":{"CaLogs":{"Cloudwatch":{"Enabled":true}}}},"Name":"__Name__","NetworkId":"__NetworkId__","Status":"CREATING","Tags":{"key0":"__Value__"}}}

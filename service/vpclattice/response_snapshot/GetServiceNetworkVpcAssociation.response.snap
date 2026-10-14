@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","dnsOptions":{"privateDnsPreference":"VERIFIED_DOMAINS_ONLY","privateDnsSpecifiedDomains":["__Member__","__Member__"]},"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","privateDnsEnabled":true,"securityGroupIds":["__Member__","__Member__"],"serviceNetworkArn":"__ServiceNetworkArn__","serviceNetworkId":"__ServiceNetworkId__","serviceNetworkName":"__ServiceNetworkName__","status":"CREATE_IN_PROGRESS","vpcId":"__VpcId__"}

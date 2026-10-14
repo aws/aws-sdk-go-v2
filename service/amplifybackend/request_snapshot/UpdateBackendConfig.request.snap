@@ -1,0 +1,5 @@
+POST /backend/__AppId__/config/update
+
+Content-Type: application/json
+
+{"loginAuthConfig":{"aws_cognito_identity_pool_id":"__AwsCognitoIdentityPoolId__","aws_cognito_region":"__AwsCognitoRegion__","aws_user_pools_id":"__AwsUserPoolsId__","aws_user_pools_web_client_id":"__AwsUserPoolsWebClientId__"}}

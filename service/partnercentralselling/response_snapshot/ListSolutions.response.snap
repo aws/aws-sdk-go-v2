@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListSolutions
+
+{"NextToken":"__NextToken__","SolutionSummaries":[{"Arn":"__Arn__","AwsMarketplaceSolutionArn":"__AwsMarketplaceSolutionArn__","Catalog":"__Catalog__","Category":"__Category__","CreatedDate":"2000-01-01T00:00:00Z","Id":"__Id__","Name":"__Name__","Status":"Active"},{"Arn":"__Arn__","AwsMarketplaceSolutionArn":"__AwsMarketplaceSolutionArn__","Catalog":"__Catalog__","Category":"__Category__","CreatedDate":"2000-01-01T00:00:00Z","Id":"__Id__","Name":"__Name__","Status":"Active"}]}

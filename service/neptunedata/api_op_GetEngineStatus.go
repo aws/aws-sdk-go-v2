@@ -4,14 +4,9 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the status of the graph database on the host.
@@ -38,22 +33,6 @@ func (c *Client) GetEngineStatus(ctx context.Context, params *GetEngineStatusInp
 
 type GetEngineStatusInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *GetEngineStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEngineStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetEngineStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 type GetEngineStatusOutput struct {
@@ -120,115 +99,26 @@ type GetEngineStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEngineStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEngineStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEngineStatusOutput_dbEngineVersion:
-			v.DbEngineVersion = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_dbEngineVersion, v.DbEngineVersion)
-		case schemas.GetEngineStatusOutput_dfeQueryEngine:
-			v.DfeQueryEngine = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_dfeQueryEngine, v.DfeQueryEngine)
-		case schemas.GetEngineStatusOutput_features:
-			return deserializeDocumentValuedMap(d, schemas.GetEngineStatusOutput_features, &v.Features)
-		case schemas.GetEngineStatusOutput_gremlin:
-			v.Gremlin = &types.QueryLanguageVersion{}
-			return v.Gremlin.Deserialize(d)
-		case schemas.GetEngineStatusOutput_labMode:
-			return deserializeStringValuedMap(d, schemas.GetEngineStatusOutput_labMode, &v.LabMode)
-		case schemas.GetEngineStatusOutput_opencypher:
-			v.Opencypher = &types.QueryLanguageVersion{}
-			return v.Opencypher.Deserialize(d)
-		case schemas.GetEngineStatusOutput_role:
-			v.Role = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_role, v.Role)
-		case schemas.GetEngineStatusOutput_rollingBackTrxCount:
-			v.RollingBackTrxCount = new(int32)
-			return d.ReadInt32(schemas.GetEngineStatusOutput_rollingBackTrxCount, v.RollingBackTrxCount)
-		case schemas.GetEngineStatusOutput_rollingBackTrxEarliestStartTime:
-			v.RollingBackTrxEarliestStartTime = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_rollingBackTrxEarliestStartTime, v.RollingBackTrxEarliestStartTime)
-		case schemas.GetEngineStatusOutput_settings:
-			return deserializeStringValuedMap(d, schemas.GetEngineStatusOutput_settings, &v.Settings)
-		case schemas.GetEngineStatusOutput_sparql:
-			v.Sparql = &types.QueryLanguageVersion{}
-			return v.Sparql.Deserialize(d)
-		case schemas.GetEngineStatusOutput_startTime:
-			v.StartTime = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_startTime, v.StartTime)
-		case schemas.GetEngineStatusOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.GetEngineStatusOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEngineStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEngineStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEngineStatus, nil, schemas.GetEngineStatusOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEngineStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEngineStatus, nil, schemas.GetEngineStatusOutput), output: &GetEngineStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEngineStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEngineStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -243,22 +133,8 @@ func (c *Client) addOperationGetEngineStatusMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEngineStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEngineStatus",
-	}
 }

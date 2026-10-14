@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/max-contacts
+
+Content-Type: application/json
+
+{"MaxContacts":1}

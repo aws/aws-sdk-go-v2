@@ -4,11 +4,10 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rejects an invitation to a resource share from another Amazon Web Services
@@ -55,6 +54,21 @@ type RejectResourceShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceShareInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceShareInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceShareInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShareInvitationArn != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationRequest_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
+	}
+}
+
 type RejectResourceShareInvitationOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -72,77 +86,56 @@ type RejectResourceShareInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceShareInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceShareInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceShareInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RejectResourceShareInvitationResponse_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShareInvitation != nil {
+		s.WriteStruct(schemas.RejectResourceShareInvitationResponse_resourceShareInvitation)
+		v.ResourceShareInvitation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RejectResourceShareInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectResourceShareInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectResourceShareInvitationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.RejectResourceShareInvitationResponse_clientToken, v.ClientToken)
+		case schemas.RejectResourceShareInvitationResponse_resourceShareInvitation:
+			v.ResourceShareInvitation = &types.ResourceShareInvitation{}
+			return v.ResourceShareInvitation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceShareInvitation, schemas.RejectResourceShareInvitationRequest, schemas.RejectResourceShareInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectResourceShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceShareInvitation, schemas.RejectResourceShareInvitationRequest, schemas.RejectResourceShareInvitationResponse), output: &RejectResourceShareInvitationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectResourceShareInvitation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectResourceShareInvitation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRejectResourceShareInvitationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectResourceShareInvitation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +150,8 @@ func (c *Client) addOperationRejectResourceShareInvitationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRejectResourceShareInvitation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RejectResourceShareInvitation",
-	}
 }

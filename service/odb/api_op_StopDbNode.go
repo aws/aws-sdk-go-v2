@@ -4,13 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops the specified DB node in a VM cluster.
@@ -31,15 +28,18 @@ func (c *Client) StopDbNode(ctx context.Context, params *StopDbNodeInput, optFns
 
 type StopDbNodeInput struct {
 
-	// The unique identifier of the VM cluster that contains the DB node to stop.
-	//
-	// This member is required.
-	CloudVmClusterId *string
-
 	// The unique identifier of the DB node to stop.
 	//
 	// This member is required.
 	DbNodeId *string
+
+	// The unique identifier of the VM cluster that contains the DB node to stop. You
+	// must specify either this parameter or exadbVmClusterId .
+	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster that contains the DB node to
+	// stop. You must specify either this parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	noSmithyDocumentSerde
 }
@@ -56,6 +56,9 @@ func (v *StopDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DbNodeId != nil {
 		s.WriteString(schemas.StopDbNodeInput_dbNodeId, *v.DbNodeId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.StopDbNodeInput_exadbVmClusterId, *v.ExadbVmClusterId)
 	}
 }
 
@@ -78,6 +81,23 @@ type StopDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDbNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDbNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDbNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbNodeId != nil {
+		s.WriteString(schemas.StopDbNodeOutput_dbNodeId, *v.DbNodeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopDbNodeOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.StopDbNodeOutput_statusReason, *v.StatusReason)
+	}
+}
 func (v *StopDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StopDbNodeOutput, func(s *smithy.Schema) error {
 		switch s {
@@ -99,74 +119,26 @@ func (v *StopDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationStopDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDbNode, schemas.StopDbNodeInput, schemas.StopDbNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDbNode, schemas.StopDbNodeInput, schemas.StopDbNodeOutput), output: &StopDbNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopDbNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopDbNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDbNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +153,8 @@ func (c *Client) addOperationStopDbNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopDbNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopDbNode",
-	}
 }

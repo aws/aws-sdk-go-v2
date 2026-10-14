@@ -8,15 +8,36 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var CreateDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "CreateDataTransformationProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/data-transformation-profile",
+	Code: 201})
+
 var CreateFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "CreateFHIRDatastore",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DeleteDataTransformationProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/data-transformation-profile/{ProfileId}",
+	Code: 200})
+
 var DeleteFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DeleteFHIRDatastore",
 }, smithy.ShapeTypeOperation, 0)
+
+var DescribeDataTransformationJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DescribeDataTransformationJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/data-transformation-job/{JobId}",
+	Code: 200})
 
 var DescribeFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -32,6 +53,34 @@ var DescribeFHIRImportJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DescribeFHIRImportJob",
 }, smithy.ShapeTypeOperation, 0)
+
+var GetDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "GetDataTransformationProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/data-transformation-profile/{ProfileId}",
+	Code: 200})
+
+var ListDataTransformationJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationJobs",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/data-transformation-jobs",
+	Code: 200})
+
+var ListDataTransformationProfiles = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfiles",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/data-transformation-profile",
+	Code: 200})
+
+var ListDataTransformationProfileVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfileVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/data-transformation-profile/{ProfileId}/versions",
+	Code: 200})
 
 var ListFHIRDatastores = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -53,6 +102,25 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var PublishDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "PublishDataTransformationProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/data-transformation-profile/{ProfileId}/publish",
+	Code: 200})
+
+var RestoreFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "RestoreFHIRDatastore",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartDataTransformationJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "StartDataTransformationJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/data-transformation-job",
+	Code: 200})
+
 var StartFHIRExportJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "StartFHIRExportJob",
@@ -73,6 +141,25 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateDataTransformationProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/data-transformation-profile/{ProfileId}",
+	Code: 200})
+
+var UpdateFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateFHIRDatastore",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateProfileWithAgent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateProfileWithAgent",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/update-profile-with-agent",
+	Code: 200})
+
 var _HealthLake = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "HealthLake",
@@ -83,13 +170,91 @@ var HealthLake = smithy.NewServiceSchema(_HealthLake, "2017-07-01")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
+
+var AgentInputMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentInputMessage",
+}, smithy.ShapeTypeStructure, 2)
+var AgentInputMessage_Body *smithy.Schema
+
+var AgentInputMessage_Type *smithy.Schema
+
+var AgentInputMessageType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentInputMessageType",
+}, smithy.ShapeTypeEnum, 2)
+var AgentInputMessageType_NORMAL *smithy.Schema
+
+var AgentInputMessageType_USER_CONFIRMATION_RESPONSE *smithy.Schema
+
+var AgentMessageOutOfContextException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentMessageOutOfContextException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var AgentMessageOutOfContextException_Message *smithy.Schema
+
+var _AgentMessageString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentMessageString",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var AgentOutputMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentOutputMessage",
+}, smithy.ShapeTypeStructure, 3)
+var AgentOutputMessage_Body *smithy.Schema
+
+var AgentOutputMessage_Type *smithy.Schema
+
+var AgentOutputMessage_OptionsList *smithy.Schema
+
+var AgentOutputMessageType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AgentOutputMessageType",
+}, smithy.ShapeTypeEnum, 7)
+var AgentOutputMessageType_INITIAL_GREETING *smithy.Schema
+
+var AgentOutputMessageType_NORMAL *smithy.Schema
+
+var AgentOutputMessageType_USER_CONFIRMATION_REQUEST *smithy.Schema
+
+var AgentOutputMessageType_COMPLETE *smithy.Schema
+
+var AgentOutputMessageType_ERROR *smithy.Schema
+
+var AgentOutputMessageType_OPTIONS *smithy.Schema
+
+var AgentOutputMessageType_CHOICES *smithy.Schema
 
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "AmazonResourceName",
 }, smithy.ShapeTypeString, 0)
+
+var AnalyticsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AnalyticsConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var AnalyticsConfiguration_Status *smithy.Schema
+
+var AnalyticsStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "AnalyticsStatus",
+}, smithy.ShapeTypeEnum, 6)
+var AnalyticsStatus_ENABLED *smithy.Schema
+
+var AnalyticsStatus_ENABLING *smithy.Schema
+
+var AnalyticsStatus_DISABLED *smithy.Schema
+
+var AnalyticsStatus_DISABLING *smithy.Schema
+
+var AnalyticsStatus_PAUSING *smithy.Schema
+
+var AnalyticsStatus_PAUSED *smithy.Schema
 
 var AuthorizationStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -101,14 +266,55 @@ var AuthorizationStrategy_SMART_ON_FHIR *smithy.Schema
 
 var AuthorizationStrategy_AWS_AUTH *smithy.Schema
 
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
+var BackupConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
+	Name:      "BackupConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var BackupConfiguration_Status *smithy.Schema
+
+var BackupConfiguration_BackupType *smithy.Schema
+
+var BackupConfiguration_RetentionPeriodInDays *smithy.Schema
+
+var BackupConfiguration_BackupTagsEnabled *smithy.Schema
+
+var _BackupRetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "BackupRetentionPeriodInDays",
+}, smithy.ShapeTypeInteger, 0)
+
+var BackupStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "BackupStatus",
+}, smithy.ShapeTypeEnum, 2)
+var BackupStatus_ENABLED *smithy.Schema
+
+var BackupStatus_DISABLED *smithy.Schema
+
+var BackupType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "BackupType",
+}, smithy.ShapeTypeEnum, 1)
+var BackupType_CONTINUOUS *smithy.Schema
 
 var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "BoundedLengthString",
+}, smithy.ShapeTypeString, 0)
+
+var _BoundedString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "BoundedString",
+}, smithy.ShapeTypeString, 0)
+
+var _ChangeDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ChangeDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _ClientToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
 
 var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
@@ -132,13 +338,58 @@ var _ConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var ConflictException_Message *smithy.Schema
+
+var ContinuousBackupRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ContinuousBackupRestoreConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContinuousBackupRestoreConfiguration_RestorePointTime *smithy.Schema
+
+var _ConversationIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ConversationIdString",
+}, smithy.ShapeTypeString, 0)
+
+var ConversationNotFoundException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ConversationNotFoundException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
+var ConversationNotFoundException_Message *smithy.Schema
+
+var CreateDataTransformationProfileSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "CreateDataTransformationProfileSource",
+}, smithy.ShapeTypeUnion, 4)
+var CreateDataTransformationProfileSource_StarterProfile *smithy.Schema
+
+var CreateDataTransformationProfileSource_ExistingVersionedProfileId *smithy.Schema
+
+var CreateDataTransformationProfileSource_ProfileMapping *smithy.Schema
+
+var CreateDataTransformationProfileSource_SampleData *smithy.Schema
 
 var _DatastoreArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DatastoreArn",
 }, smithy.ShapeTypeString, 0)
+
+var DatastoreBackupStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DatastoreBackupStatus",
+}, smithy.ShapeTypeStructure, 5)
+var DatastoreBackupStatus_Configuration *smithy.Schema
+
+var DatastoreBackupStatus_BackupEnabledAt *smithy.Schema
+
+var DatastoreBackupStatus_EarliestRestorePoint *smithy.Schema
+
+var DatastoreBackupStatus_LatestRestorePoint *smithy.Schema
+
+var DatastoreBackupStatus_ScheduledPermanentDeletionTime *smithy.Schema
 
 var DatastoreFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -165,7 +416,7 @@ var _DatastoreName = smithy.NewSchema(smithy.ShapeID{
 var DatastoreProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DatastoreProperties",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 15)
 var DatastoreProperties_DatastoreId *smithy.Schema
 
 var DatastoreProperties_DatastoreArn *smithy.Schema
@@ -188,6 +439,14 @@ var DatastoreProperties_IdentityProviderConfiguration *smithy.Schema
 
 var DatastoreProperties_ErrorCause *smithy.Schema
 
+var DatastoreProperties_NlpConfiguration *smithy.Schema
+
+var DatastoreProperties_AnalyticsConfiguration *smithy.Schema
+
+var DatastoreProperties_ProfileConfiguration *smithy.Schema
+
+var DatastoreProperties_BackupStatusInfo *smithy.Schema
+
 var _DatastorePropertiesList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DatastorePropertiesList",
@@ -197,7 +456,7 @@ var _DatastorePropertiesList_member *smithy.Schema
 var DatastoreStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "DatastoreStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 7)
 var DatastoreStatus_CREATING *smithy.Schema
 
 var DatastoreStatus_ACTIVE *smithy.Schema
@@ -207,6 +466,128 @@ var DatastoreStatus_DELETING *smithy.Schema
 var DatastoreStatus_DELETED *smithy.Schema
 
 var DatastoreStatus_CREATE_FAILED *smithy.Schema
+
+var DatastoreStatus_UPDATING *smithy.Schema
+
+var DatastoreStatus_UPDATE_FAILED *smithy.Schema
+
+var _DataTransformationChatOptionsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationChatOptionsList",
+}, smithy.ShapeTypeList, 1)
+var _DataTransformationChatOptionsList_member *smithy.Schema
+
+var _DataTransformationChatOptionString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationChatOptionString",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _DataTransformationIamRoleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationIamRoleArn",
+}, smithy.ShapeTypeString, 0)
+
+var _DataTransformationJobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationJobId",
+}, smithy.ShapeTypeString, 0)
+
+var _DataTransformationJobName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationJobName",
+}, smithy.ShapeTypeString, 0)
+
+var _DataTransformationNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationNextToken",
+}, smithy.ShapeTypeString, 0)
+
+var DataTransformationProfileSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationProfileSummary",
+}, smithy.ShapeTypeStructure, 7)
+var DataTransformationProfileSummary_ProfileId *smithy.Schema
+
+var DataTransformationProfileSummary_Version *smithy.Schema
+
+var DataTransformationProfileSummary_SourceFormat *smithy.Schema
+
+var DataTransformationProfileSummary_TargetFormat *smithy.Schema
+
+var DataTransformationProfileSummary_ProfileName *smithy.Schema
+
+var DataTransformationProfileSummary_ProfileDescription *smithy.Schema
+
+var DataTransformationProfileSummary_LastUpdatedAt *smithy.Schema
+
+var _DataTransformationProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationProfileSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _DataTransformationProfileSummaryList_member *smithy.Schema
+
+var DataTransformationProfileVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationProfileVersionSummary",
+}, smithy.ShapeTypeStructure, 7)
+var DataTransformationProfileVersionSummary_ProfileId *smithy.Schema
+
+var DataTransformationProfileVersionSummary_Version *smithy.Schema
+
+var DataTransformationProfileVersionSummary_SourceFormat *smithy.Schema
+
+var DataTransformationProfileVersionSummary_TargetFormat *smithy.Schema
+
+var DataTransformationProfileVersionSummary_ProfileName *smithy.Schema
+
+var DataTransformationProfileVersionSummary_ChangeDescription *smithy.Schema
+
+var DataTransformationProfileVersionSummary_LastUpdatedAt *smithy.Schema
+
+var _DataTransformationProfileVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationProfileVersionSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _DataTransformationProfileVersionSummaryList_member *smithy.Schema
+
+var DataTransformationS3Configuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationS3Configuration",
+}, smithy.ShapeTypeStructure, 2)
+var DataTransformationS3Configuration_S3Uri *smithy.Schema
+
+var DataTransformationS3Configuration_KmsKeyId *smithy.Schema
+
+var _DataTransformationS3Uri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationS3Uri",
+}, smithy.ShapeTypeString, 0)
+
+var _DataTransformationTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationTagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _DataTransformationTagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DataTransformationTagValue",
+}, smithy.ShapeTypeString, 0)
+
+var _DateTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DateTime",
+}, smithy.ShapeTypeTimestamp, 0)
+
+var _DefaultEnabledBoolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DefaultEnabledBoolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _DefaultProfiles = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DefaultProfiles",
+}, smithy.ShapeTypeList, 1)
+var _DefaultProfiles_member *smithy.Schema
 
 var _EncryptionKeyID = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -233,6 +614,14 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ErrorMessage",
 }, smithy.ShapeTypeString, 0)
+
+var ExistingVersionedProfileSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ExistingVersionedProfileSource",
+}, smithy.ShapeTypeStructure, 2)
+var ExistingVersionedProfileSource_ProfileId *smithy.Schema
+
+var ExistingVersionedProfileSource_Version *smithy.Schema
 
 var ExportJobProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -262,6 +651,13 @@ var _ExportJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ExportJobPropertiesList_member *smithy.Schema
 
+var FailedDependencyException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "FailedDependencyException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 424})
+var FailedDependencyException_Message *smithy.Schema
+
 var FHIRVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "FHIRVersion",
@@ -277,6 +673,21 @@ var _GenericLong = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "GenericLong",
 }, smithy.ShapeTypeLong, 0)
+
+var _HealthLakeBoolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "HealthLakeBoolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _HealthLakeString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "HealthLakeString",
+}, smithy.ShapeTypeString, 0)
+
+var _HealthLakeTimestamp = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "HealthLakeTimestamp",
+}, smithy.ShapeTypeTimestamp, 0)
 
 var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -338,7 +749,8 @@ var InputDataConfig_S3Uri *smithy.Schema
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_Message *smithy.Schema
 
 var _JobId = smithy.NewSchema(smithy.ShapeID{
@@ -354,7 +766,7 @@ var _JobName = smithy.NewSchema(smithy.ShapeID{
 var JobProgressReport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "JobProgressReport",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 17)
 var JobProgressReport_TotalNumberOfScannedFiles *smithy.Schema
 
 var JobProgressReport_TotalSizeOfScannedFilesInMB *smithy.Schema
@@ -369,7 +781,25 @@ var JobProgressReport_TotalNumberOfResourcesWithCustomerError *smithy.Schema
 
 var JobProgressReport_TotalNumberOfFilesReadWithCustomerError *smithy.Schema
 
+var JobProgressReport_TotalNumberOfScannedNonFhirFiles *smithy.Schema
+
+var JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB *smithy.Schema
+
+var JobProgressReport_TotalNumberOfImportedNonFhirFiles *smithy.Schema
+
+var JobProgressReport_TotalNumberOfNonFhirResourcesScanned *smithy.Schema
+
+var JobProgressReport_TotalNumberOfNonFhirResourcesImported *smithy.Schema
+
+var JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError *smithy.Schema
+
+var JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError *smithy.Schema
+
 var JobProgressReport_Throughput *smithy.Schema
+
+var JobProgressReport_TotalFilesConverted *smithy.Schema
+
+var JobProgressReport_TotalResourcesGenerated *smithy.Schema
 
 var JobStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -403,10 +833,20 @@ var KmsEncryptionConfig_CmkType *smithy.Schema
 
 var KmsEncryptionConfig_KmsKeyId *smithy.Schema
 
+var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "KmsKeyId",
+}, smithy.ShapeTypeString, 0)
+
 var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "LambdaArn",
 }, smithy.ShapeTypeString, 0)
+
+var _MaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "MaxResults",
+}, smithy.ShapeTypeInteger, 0)
 
 var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -422,6 +862,31 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
+
+var NlpConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "NlpConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var NlpConfiguration_Status *smithy.Schema
+
+var NlpStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "NlpStatus",
+}, smithy.ShapeTypeEnum, 4)
+var NlpStatus_ENABLED *smithy.Schema
+
+var NlpStatus_ENABLING *smithy.Schema
+
+var NlpStatus_DISABLED *smithy.Schema
+
+var NlpStatus_DISABLING *smithy.Schema
+
+var NotImplementedOperationException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "NotImplementedOperationException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 501})
+var NotImplementedOperationException_Message *smithy.Schema
 
 var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -441,11 +906,68 @@ var PreloadDataType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var PreloadDataType_SYNTHEA *smithy.Schema
 
+var ProfileConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ProfileConfiguration_DefaultProfiles *smithy.Schema
+
+var _ProfileDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _ProfileIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileIdString",
+}, smithy.ShapeTypeString, 0)
+
+var _ProfileMapping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileMapping",
+}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
+var _ProfileMapping_key *smithy.Schema
+
+var _ProfileMapping_value *smithy.Schema
+
+var _ProfileMappingKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileMappingKey",
+}, smithy.ShapeTypeString, 0)
+
+var ProfileMappingSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileMappingSource",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
+var ProfileMappingSource_ProfileMapping *smithy.Schema
+
+var _ProfileMappingValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileMappingValue",
+}, smithy.ShapeTypeString, 0)
+
+var _ProfileNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileNameString",
+}, smithy.ShapeTypeString, 0)
+
+var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ProfileVersion",
+}, smithy.ShapeTypeInteger, 0)
+
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
+
+var RestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "RestoreConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var RestoreConfiguration_ContinuousBackupRestoreConfiguration *smithy.Schema
 
 var S3Configuration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -460,16 +982,51 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3Uri",
 }, smithy.ShapeTypeString, 0)
 
+var _SampleDataS3Uri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "SampleDataS3Uri",
+}, smithy.ShapeTypeString, 0)
+
+var SampleDataSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "SampleDataSource",
+}, smithy.ShapeTypeStructure, 1)
+var SampleDataSource_S3Uri *smithy.Schema
+
+var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ServiceQuotaExceededException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var ServiceQuotaExceededException_Message *smithy.Schema
+
+var SourceFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "SourceFormat",
+}, smithy.ShapeTypeEnum, 2)
+var SourceFormat_CCDA *smithy.Schema
+
+var SourceFormat_CSV *smithy.Schema
+
 var SseConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "SseConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var SseConfiguration_KmsEncryptionConfig *smithy.Schema
 
-var _String = smithy.NewSchema(smithy.ShapeID{
+var StarterProfileSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
+	Name:      "StarterProfileSource",
+}, smithy.ShapeTypeStructure, 1)
+var StarterProfileSource_StarterProfileName *smithy.Schema
+
+var _StringMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "StringMap",
+}, smithy.ShapeTypeMap, 2)
+var _StringMap_key *smithy.Schema
+
+var _StringMap_value *smithy.Schema
 
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -496,26 +1053,149 @@ var _TagList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TagList_member *smithy.Schema
 
+var _TagMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TagMap",
+}, smithy.ShapeTypeMap, 2)
+var _TagMap_key *smithy.Schema
+
+var _TagMap_value *smithy.Schema
+
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
 
+var TargetFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TargetFormat",
+}, smithy.ShapeTypeEnum, 1)
+var TargetFormat_FHIR_R4 *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
 
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
+var TransformationInputDataConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
+	Name:      "TransformationInputDataConfig",
+}, smithy.ShapeTypeStructure, 2)
+var TransformationInputDataConfig_S3Uri *smithy.Schema
+
+var TransformationInputDataConfig_SourceFormat *smithy.Schema
+
+var TransformationJobProgressReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationJobProgressReport",
+}, smithy.ShapeTypeStructure, 4)
+var TransformationJobProgressReport_TotalFilesScanned *smithy.Schema
+
+var TransformationJobProgressReport_TotalFilesConverted *smithy.Schema
+
+var TransformationJobProgressReport_TotalFilesFailed *smithy.Schema
+
+var TransformationJobProgressReport_TotalResourcesGenerated *smithy.Schema
+
+var TransformationJobProperties = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationJobProperties",
+}, smithy.ShapeTypeStructure, 15)
+var TransformationJobProperties_JobId *smithy.Schema
+
+var TransformationJobProperties_JobStatus *smithy.Schema
+
+var TransformationJobProperties_InputDataConfig *smithy.Schema
+
+var TransformationJobProperties_OutputDataConfig *smithy.Schema
+
+var TransformationJobProperties_DataAccessRoleArn *smithy.Schema
+
+var TransformationJobProperties_SubmitTime *smithy.Schema
+
+var TransformationJobProperties_JobName *smithy.Schema
+
+var TransformationJobProperties_ProfileId *smithy.Schema
+
+var TransformationJobProperties_ProfileName *smithy.Schema
+
+var TransformationJobProperties_ProfileVersion *smithy.Schema
+
+var TransformationJobProperties_EndTime *smithy.Schema
+
+var TransformationJobProperties_DriftDetectionEnabled *smithy.Schema
+
+var TransformationJobProperties_ProvenanceEnabled *smithy.Schema
+
+var TransformationJobProperties_Message *smithy.Schema
+
+var TransformationJobProperties_JobProgressReport *smithy.Schema
+
+var TransformationJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationJobStatus",
+}, smithy.ShapeTypeEnum, 6)
+var TransformationJobStatus_SUBMITTED *smithy.Schema
+
+var TransformationJobStatus_QUEUED *smithy.Schema
+
+var TransformationJobStatus_IN_PROGRESS *smithy.Schema
+
+var TransformationJobStatus_COMPLETED *smithy.Schema
+
+var TransformationJobStatus_COMPLETED_WITH_ERRORS *smithy.Schema
+
+var TransformationJobStatus_FAILED *smithy.Schema
+
+var TransformationJobSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationJobSummary",
+}, smithy.ShapeTypeStructure, 6)
+var TransformationJobSummary_JobId *smithy.Schema
+
+var TransformationJobSummary_JobStatus *smithy.Schema
+
+var TransformationJobSummary_SubmitTime *smithy.Schema
+
+var TransformationJobSummary_JobName *smithy.Schema
+
+var TransformationJobSummary_EndTime *smithy.Schema
+
+var TransformationJobSummary_SourceFormat *smithy.Schema
+
+var _TransformationJobSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationJobSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _TransformationJobSummaryList_member *smithy.Schema
+
+var TransformationOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "TransformationOutputDataConfig",
+}, smithy.ShapeTypeStructure, 1)
+var TransformationOutputDataConfig_S3Configuration *smithy.Schema
+
+var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UnauthorizedException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
+var UnauthorizedException_Message *smithy.Schema
+
+var UnsupportedMIMETypeException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UnsupportedMIMETypeException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 415})
+var UnsupportedMIMETypeException_Message *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ValidationException_Message *smithy.Schema
 
 var ValidationLevel = smithy.NewSchema(smithy.ShapeID{
@@ -528,10 +1208,44 @@ var ValidationLevel_STRUCTURE_ONLY *smithy.Schema
 
 var ValidationLevel_MINIMAL *smithy.Schema
 
+var CreateDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "CreateDataTransformationProfileRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateDataTransformationProfileRequest_SourceFormat *smithy.Schema
+
+var CreateDataTransformationProfileRequest_Source *smithy.Schema
+
+var CreateDataTransformationProfileRequest_KmsKeyId *smithy.Schema
+
+var CreateDataTransformationProfileRequest_ProfileDescription *smithy.Schema
+
+var CreateDataTransformationProfileRequest_ProfileName *smithy.Schema
+
+var CreateDataTransformationProfileRequest_Tags *smithy.Schema
+
+var CreateDataTransformationProfileRequest_ClientToken *smithy.Schema
+
+var CreateDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "CreateDataTransformationProfileResponse",
+}, smithy.ShapeTypeStructure, 6)
+var CreateDataTransformationProfileResponse_ProfileId *smithy.Schema
+
+var CreateDataTransformationProfileResponse_Version *smithy.Schema
+
+var CreateDataTransformationProfileResponse_SourceFormat *smithy.Schema
+
+var CreateDataTransformationProfileResponse_TargetFormat *smithy.Schema
+
+var CreateDataTransformationProfileResponse_ProfileName *smithy.Schema
+
+var CreateDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
+
 var CreateFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "CreateFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 11)
 var CreateFHIRDatastoreRequest_DatastoreName *smithy.Schema
 
 var CreateFHIRDatastoreRequest_DatastoreTypeVersion *smithy.Schema
@@ -546,6 +1260,14 @@ var CreateFHIRDatastoreRequest_Tags *smithy.Schema
 
 var CreateFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
 
+var CreateFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
+
+var CreateFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
+
+var CreateFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
+
+var CreateFHIRDatastoreRequest_BackupConfiguration *smithy.Schema
+
 var CreateFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "CreateFHIRDatastoreResponse",
@@ -557,6 +1279,22 @@ var CreateFHIRDatastoreResponse_DatastoreArn *smithy.Schema
 var CreateFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
 
 var CreateFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
+
+var DeleteDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DeleteDataTransformationProfileRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteDataTransformationProfileRequest_ProfileId *smithy.Schema
+
+var DeleteDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DeleteDataTransformationProfileResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteDataTransformationProfileResponse_ProfileId *smithy.Schema
+
+var DeleteDataTransformationProfileResponse_ProfileName *smithy.Schema
+
+var DeleteDataTransformationProfileResponse_DeletionTime *smithy.Schema
 
 var DeleteFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -575,6 +1313,18 @@ var DeleteFHIRDatastoreResponse_DatastoreArn *smithy.Schema
 var DeleteFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
 
 var DeleteFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
+
+var DescribeDataTransformationJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DescribeDataTransformationJobRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeDataTransformationJobRequest_JobId *smithy.Schema
+
+var DescribeDataTransformationJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "DescribeDataTransformationJobResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeDataTransformationJobResponse_TransformationJobProperties *smithy.Schema
 
 var DescribeFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -615,6 +1365,96 @@ var DescribeFHIRImportJobResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeFHIRImportJobResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DescribeFHIRImportJobResponse_ImportJobProperties *smithy.Schema
+
+var GetDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "GetDataTransformationProfileRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetDataTransformationProfileRequest_ProfileId *smithy.Schema
+
+var GetDataTransformationProfileRequest_ProfileVersion *smithy.Schema
+
+var GetDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "GetDataTransformationProfileResponse",
+}, smithy.ShapeTypeStructure, 9)
+var GetDataTransformationProfileResponse_ProfileId *smithy.Schema
+
+var GetDataTransformationProfileResponse_Version *smithy.Schema
+
+var GetDataTransformationProfileResponse_SourceFormat *smithy.Schema
+
+var GetDataTransformationProfileResponse_TargetFormat *smithy.Schema
+
+var GetDataTransformationProfileResponse_ProfileMapping *smithy.Schema
+
+var GetDataTransformationProfileResponse_ProfileName *smithy.Schema
+
+var GetDataTransformationProfileResponse_ProfileDescription *smithy.Schema
+
+var GetDataTransformationProfileResponse_ChangeDescription *smithy.Schema
+
+var GetDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
+
+var ListDataTransformationJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationJobsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListDataTransformationJobsRequest_MaxResults *smithy.Schema
+
+var ListDataTransformationJobsRequest_NextToken *smithy.Schema
+
+var ListDataTransformationJobsRequest_JobStatus *smithy.Schema
+
+var ListDataTransformationJobsRequest_JobName *smithy.Schema
+
+var ListDataTransformationJobsRequest_SubmittedAfter *smithy.Schema
+
+var ListDataTransformationJobsRequest_SubmittedBefore *smithy.Schema
+
+var ListDataTransformationJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDataTransformationJobsResponse_Items *smithy.Schema
+
+var ListDataTransformationJobsResponse_NextToken *smithy.Schema
+
+var ListDataTransformationProfilesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfilesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDataTransformationProfilesRequest_SourceFormat *smithy.Schema
+
+var ListDataTransformationProfilesRequest_MaxResults *smithy.Schema
+
+var ListDataTransformationProfilesRequest_NextToken *smithy.Schema
+
+var ListDataTransformationProfilesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfilesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDataTransformationProfilesResponse_Items *smithy.Schema
+
+var ListDataTransformationProfilesResponse_NextToken *smithy.Schema
+
+var ListDataTransformationProfileVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfileVersionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDataTransformationProfileVersionsRequest_ProfileId *smithy.Schema
+
+var ListDataTransformationProfileVersionsRequest_MaxResults *smithy.Schema
+
+var ListDataTransformationProfileVersionsRequest_NextToken *smithy.Schema
+
+var ListDataTransformationProfileVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "ListDataTransformationProfileVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDataTransformationProfileVersionsResponse_Items *smithy.Schema
+
+var ListDataTransformationProfileVersionsResponse_NextToken *smithy.Schema
 
 var ListFHIRDatastoresRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -698,6 +1538,98 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_Tags *smithy.Schema
 
+var PublishDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "PublishDataTransformationProfileRequest",
+}, smithy.ShapeTypeStructure, 4)
+var PublishDataTransformationProfileRequest_ProfileId *smithy.Schema
+
+var PublishDataTransformationProfileRequest_SourceFormat *smithy.Schema
+
+var PublishDataTransformationProfileRequest_FromExistingVersion *smithy.Schema
+
+var PublishDataTransformationProfileRequest_ChangeDescription *smithy.Schema
+
+var PublishDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "PublishDataTransformationProfileResponse",
+}, smithy.ShapeTypeStructure, 6)
+var PublishDataTransformationProfileResponse_ProfileId *smithy.Schema
+
+var PublishDataTransformationProfileResponse_Version *smithy.Schema
+
+var PublishDataTransformationProfileResponse_SourceFormat *smithy.Schema
+
+var PublishDataTransformationProfileResponse_TargetFormat *smithy.Schema
+
+var PublishDataTransformationProfileResponse_ProfileName *smithy.Schema
+
+var PublishDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
+
+var RestoreFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "RestoreFHIRDatastoreRequest",
+}, smithy.ShapeTypeStructure, 10)
+var RestoreFHIRDatastoreRequest_SourceDatastoreId *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_RestoreConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_DatastoreName *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_SseConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_ClientToken *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_Tags *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
+
+var RestoreFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "RestoreFHIRDatastoreResponse",
+}, smithy.ShapeTypeStructure, 4)
+var RestoreFHIRDatastoreResponse_DatastoreId *smithy.Schema
+
+var RestoreFHIRDatastoreResponse_DatastoreArn *smithy.Schema
+
+var RestoreFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
+
+var RestoreFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
+
+var StartDataTransformationJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "StartDataTransformationJobRequest",
+}, smithy.ShapeTypeStructure, 8)
+var StartDataTransformationJobRequest_InputDataConfig *smithy.Schema
+
+var StartDataTransformationJobRequest_OutputDataConfig *smithy.Schema
+
+var StartDataTransformationJobRequest_DataAccessRoleArn *smithy.Schema
+
+var StartDataTransformationJobRequest_ClientToken *smithy.Schema
+
+var StartDataTransformationJobRequest_JobName *smithy.Schema
+
+var StartDataTransformationJobRequest_ProfileId *smithy.Schema
+
+var StartDataTransformationJobRequest_DriftDetectionEnabled *smithy.Schema
+
+var StartDataTransformationJobRequest_ProvenanceEnabled *smithy.Schema
+
+var StartDataTransformationJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "StartDataTransformationJobResponse",
+}, smithy.ShapeTypeStructure, 2)
+var StartDataTransformationJobResponse_JobId *smithy.Schema
+
+var StartDataTransformationJobResponse_JobStatus *smithy.Schema
+
 var StartFHIRExportJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "StartFHIRExportJobRequest",
@@ -725,7 +1657,7 @@ var StartFHIRExportJobResponse_DatastoreId *smithy.Schema
 var StartFHIRImportJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
 	Name:      "StartFHIRImportJobRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 11)
 var StartFHIRImportJobRequest_JobName *smithy.Schema
 
 var StartFHIRImportJobRequest_InputDataConfig *smithy.Schema
@@ -739,6 +1671,14 @@ var StartFHIRImportJobRequest_DataAccessRoleArn *smithy.Schema
 var StartFHIRImportJobRequest_ClientToken *smithy.Schema
 
 var StartFHIRImportJobRequest_ValidationLevel *smithy.Schema
+
+var StartFHIRImportJobRequest_ProfileId *smithy.Schema
+
+var StartFHIRImportJobRequest_InputFormat *smithy.Schema
+
+var StartFHIRImportJobRequest_DriftDetectionEnabled *smithy.Schema
+
+var StartFHIRImportJobRequest_ProvenanceEnabled *smithy.Schema
 
 var StartFHIRImportJobResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.healthlake",
@@ -776,10 +1716,124 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateDataTransformationProfileRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateDataTransformationProfileRequest_ProfileId *smithy.Schema
+
+var UpdateDataTransformationProfileRequest_ProfileMapping *smithy.Schema
+
+var UpdateDataTransformationProfileRequest_ChangeDescription *smithy.Schema
+
+var UpdateDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateDataTransformationProfileResponse",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateDataTransformationProfileResponse_ProfileId *smithy.Schema
+
+var UpdateDataTransformationProfileResponse_SourceFormat *smithy.Schema
+
+var UpdateDataTransformationProfileResponse_TargetFormat *smithy.Schema
+
+var UpdateDataTransformationProfileResponse_ProfileName *smithy.Schema
+
+var UpdateDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
+
+var UpdateFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateFHIRDatastoreRequest",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateFHIRDatastoreRequest_DatastoreId *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_DatastoreName *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
+
+var UpdateFHIRDatastoreRequest_BackupConfiguration *smithy.Schema
+
+var UpdateFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateFHIRDatastoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateFHIRDatastoreResponse_DatastoreProperties *smithy.Schema
+
+var UpdateProfileWithAgentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateProfileWithAgentRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateProfileWithAgentRequest_ProfileId *smithy.Schema
+
+var UpdateProfileWithAgentRequest_SourceFormat *smithy.Schema
+
+var UpdateProfileWithAgentRequest_InputMessage *smithy.Schema
+
+var UpdateProfileWithAgentRequest_ConversationId *smithy.Schema
+
+var UpdateProfileWithAgentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.healthlake",
+	Name:      "UpdateProfileWithAgentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateProfileWithAgentResponse_AgentResponse *smithy.Schema
+
+var UpdateProfileWithAgentResponse_ConversationId *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
+	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _HealthLakeString)
+
+	AgentInputMessageType_NORMAL = AgentInputMessageType.AddMember("NORMAL", smithyprelude.Unit)
+
+	AgentInputMessageType_USER_CONFIRMATION_RESPONSE = AgentInputMessageType.AddMember("USER_CONFIRMATION_RESPONSE", smithyprelude.Unit)
+
+	AgentInputMessage_Body = AgentInputMessage.AddMember("Body", _AgentMessageString)
+
+	AgentInputMessage_Type = AgentInputMessage.AddMember("Type", AgentInputMessageType)
+
+	AgentMessageOutOfContextException_Message = AgentMessageOutOfContextException.AddMember("Message", smithyprelude.String)
+
+	AgentOutputMessageType_INITIAL_GREETING = AgentOutputMessageType.AddMember("INITIAL_GREETING", smithyprelude.Unit)
+
+	AgentOutputMessageType_NORMAL = AgentOutputMessageType.AddMember("NORMAL", smithyprelude.Unit)
+
+	AgentOutputMessageType_USER_CONFIRMATION_REQUEST = AgentOutputMessageType.AddMember("USER_CONFIRMATION_REQUEST", smithyprelude.Unit)
+
+	AgentOutputMessageType_COMPLETE = AgentOutputMessageType.AddMember("COMPLETE", smithyprelude.Unit)
+
+	AgentOutputMessageType_ERROR = AgentOutputMessageType.AddMember("ERROR", smithyprelude.Unit)
+
+	AgentOutputMessageType_OPTIONS = AgentOutputMessageType.AddMember("OPTIONS", smithyprelude.Unit)
+
+	AgentOutputMessageType_CHOICES = AgentOutputMessageType.AddMember("CHOICES", smithyprelude.Unit)
+
+	_DataTransformationChatOptionsList_member = _DataTransformationChatOptionsList.AddMember("member", _DataTransformationChatOptionString)
+
+	AgentOutputMessage_Body = AgentOutputMessage.AddMember("Body", _AgentMessageString)
+
+	AgentOutputMessage_Type = AgentOutputMessage.AddMember("Type", AgentOutputMessageType)
+
+	AgentOutputMessage_OptionsList = AgentOutputMessage.AddMember("OptionsList", _DataTransformationChatOptionsList)
+
+	AnalyticsStatus_ENABLED = AnalyticsStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	AnalyticsStatus_ENABLING = AnalyticsStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	AnalyticsStatus_DISABLED = AnalyticsStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	AnalyticsStatus_DISABLING = AnalyticsStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	AnalyticsStatus_PAUSING = AnalyticsStatus.AddMember("PAUSING", smithyprelude.Unit)
+
+	AnalyticsStatus_PAUSED = AnalyticsStatus.AddMember("PAUSED", smithyprelude.Unit)
+
+	AnalyticsConfiguration_Status = AnalyticsConfiguration.AddMember("Status", AnalyticsStatus)
 
 	AuthorizationStrategy_SMARTV1 = AuthorizationStrategy.AddMember("SMARTV1", smithyprelude.Unit)
 
@@ -787,11 +1841,61 @@ func init() {
 
 	AuthorizationStrategy_AWS_AUTH = AuthorizationStrategy.AddMember("AWS_AUTH", smithyprelude.Unit)
 
+	BackupStatus_ENABLED = BackupStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	BackupStatus_DISABLED = BackupStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	BackupType_CONTINUOUS = BackupType.AddMember("CONTINUOUS", smithyprelude.Unit)
+
+	BackupConfiguration_Status = BackupConfiguration.AddMember("Status", BackupStatus)
+
+	BackupConfiguration_BackupType = BackupConfiguration.AddMember("BackupType", BackupType)
+
+	BackupConfiguration_RetentionPeriodInDays = BackupConfiguration.AddMember("RetentionPeriodInDays", _BackupRetentionPeriodInDays)
+
+	BackupConfiguration_BackupTagsEnabled = BackupConfiguration.AddMember("BackupTagsEnabled", _HealthLakeBoolean)
+
 	CmkType_CM_CMK = CmkType.AddMember("CM_CMK", smithyprelude.Unit)
 
 	CmkType_AO_CMK = CmkType.AddMember("AO_CMK", smithyprelude.Unit)
 
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
+	ConflictException_Message = ConflictException.AddMember("Message", _HealthLakeString)
+
+	ContinuousBackupRestoreConfiguration_RestorePointTime = ContinuousBackupRestoreConfiguration.AddMember("RestorePointTime", _HealthLakeTimestamp)
+
+	ConversationNotFoundException_Message = ConversationNotFoundException.AddMember("Message", smithyprelude.String)
+
+	StarterProfileSource_StarterProfileName = StarterProfileSource.AddMember("StarterProfileName", smithyprelude.String)
+
+	ExistingVersionedProfileSource_ProfileId = ExistingVersionedProfileSource.AddMember("ProfileId", smithyprelude.String)
+
+	ExistingVersionedProfileSource_Version = ExistingVersionedProfileSource.AddMember("Version", smithyprelude.Integer)
+
+	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
+
+	_StringMap_value = _StringMap.AddMember("value", smithyprelude.String)
+
+	ProfileMappingSource_ProfileMapping = ProfileMappingSource.AddMember("ProfileMapping", _StringMap)
+
+	SampleDataSource_S3Uri = SampleDataSource.AddMember("S3Uri", _SampleDataS3Uri)
+
+	CreateDataTransformationProfileSource_StarterProfile = CreateDataTransformationProfileSource.AddMember("StarterProfile", StarterProfileSource)
+
+	CreateDataTransformationProfileSource_ExistingVersionedProfileId = CreateDataTransformationProfileSource.AddMember("ExistingVersionedProfileId", ExistingVersionedProfileSource)
+
+	CreateDataTransformationProfileSource_ProfileMapping = CreateDataTransformationProfileSource.AddMember("ProfileMapping", ProfileMappingSource)
+
+	CreateDataTransformationProfileSource_SampleData = CreateDataTransformationProfileSource.AddMember("SampleData", SampleDataSource)
+
+	DatastoreBackupStatus_Configuration = DatastoreBackupStatus.AddMember("Configuration", BackupConfiguration)
+
+	DatastoreBackupStatus_BackupEnabledAt = DatastoreBackupStatus.AddMember("BackupEnabledAt", _HealthLakeTimestamp)
+
+	DatastoreBackupStatus_EarliestRestorePoint = DatastoreBackupStatus.AddMember("EarliestRestorePoint", _HealthLakeTimestamp)
+
+	DatastoreBackupStatus_LatestRestorePoint = DatastoreBackupStatus.AddMember("LatestRestorePoint", _HealthLakeTimestamp)
+
+	DatastoreBackupStatus_ScheduledPermanentDeletionTime = DatastoreBackupStatus.AddMember("ScheduledPermanentDeletionTime", _HealthLakeTimestamp)
 
 	DatastoreStatus_CREATING = DatastoreStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -803,13 +1907,17 @@ func init() {
 
 	DatastoreStatus_CREATE_FAILED = DatastoreStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
 
+	DatastoreStatus_UPDATING = DatastoreStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	DatastoreStatus_UPDATE_FAILED = DatastoreStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
 	DatastoreFilter_DatastoreName = DatastoreFilter.AddMember("DatastoreName", _DatastoreName)
 
 	DatastoreFilter_DatastoreStatus = DatastoreFilter.AddMember("DatastoreStatus", DatastoreStatus)
 
-	DatastoreFilter_CreatedBefore = DatastoreFilter.AddMember("CreatedBefore", _Timestamp)
+	DatastoreFilter_CreatedBefore = DatastoreFilter.AddMember("CreatedBefore", _HealthLakeTimestamp)
 
-	DatastoreFilter_CreatedAfter = DatastoreFilter.AddMember("CreatedAfter", _Timestamp)
+	DatastoreFilter_CreatedAfter = DatastoreFilter.AddMember("CreatedAfter", _HealthLakeTimestamp)
 
 	FHIRVersion_R4 = FHIRVersion.AddMember("R4", smithyprelude.Unit)
 
@@ -825,7 +1933,7 @@ func init() {
 
 	IdentityProviderConfiguration_AuthorizationStrategy = IdentityProviderConfiguration.AddMember("AuthorizationStrategy", AuthorizationStrategy)
 
-	IdentityProviderConfiguration_FineGrainedAuthorizationEnabled = IdentityProviderConfiguration.AddMember("FineGrainedAuthorizationEnabled", _Boolean)
+	IdentityProviderConfiguration_FineGrainedAuthorizationEnabled = IdentityProviderConfiguration.AddMember("FineGrainedAuthorizationEnabled", _HealthLakeBoolean)
 
 	IdentityProviderConfiguration_Metadata = IdentityProviderConfiguration.AddMember("Metadata", _ConfigurationMetadata)
 
@@ -839,6 +1947,20 @@ func init() {
 
 	ErrorCause_ErrorCategory = ErrorCause.AddMember("ErrorCategory", ErrorCategory)
 
+	NlpStatus_ENABLED = NlpStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	NlpStatus_ENABLING = NlpStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	NlpStatus_DISABLED = NlpStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	NlpStatus_DISABLING = NlpStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	NlpConfiguration_Status = NlpConfiguration.AddMember("Status", NlpStatus)
+
+	_DefaultProfiles_member = _DefaultProfiles.AddMember("member", _HealthLakeString)
+
+	ProfileConfiguration_DefaultProfiles = ProfileConfiguration.AddMember("DefaultProfiles", _DefaultProfiles)
+
 	DatastoreProperties_DatastoreId = DatastoreProperties.AddMember("DatastoreId", _DatastoreId)
 
 	DatastoreProperties_DatastoreArn = DatastoreProperties.AddMember("DatastoreArn", _DatastoreArn)
@@ -847,11 +1969,11 @@ func init() {
 
 	DatastoreProperties_DatastoreStatus = DatastoreProperties.AddMember("DatastoreStatus", DatastoreStatus)
 
-	DatastoreProperties_CreatedAt = DatastoreProperties.AddMember("CreatedAt", _Timestamp)
+	DatastoreProperties_CreatedAt = DatastoreProperties.AddMember("CreatedAt", _HealthLakeTimestamp)
 
 	DatastoreProperties_DatastoreTypeVersion = DatastoreProperties.AddMember("DatastoreTypeVersion", FHIRVersion)
 
-	DatastoreProperties_DatastoreEndpoint = DatastoreProperties.AddMember("DatastoreEndpoint", _String)
+	DatastoreProperties_DatastoreEndpoint = DatastoreProperties.AddMember("DatastoreEndpoint", _HealthLakeString)
 
 	DatastoreProperties_SseConfiguration = DatastoreProperties.AddMember("SseConfiguration", SseConfiguration)
 
@@ -861,7 +1983,57 @@ func init() {
 
 	DatastoreProperties_ErrorCause = DatastoreProperties.AddMember("ErrorCause", ErrorCause)
 
+	DatastoreProperties_NlpConfiguration = DatastoreProperties.AddMember("NlpConfiguration", NlpConfiguration)
+
+	DatastoreProperties_AnalyticsConfiguration = DatastoreProperties.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
+
+	DatastoreProperties_ProfileConfiguration = DatastoreProperties.AddMember("ProfileConfiguration", ProfileConfiguration)
+
+	DatastoreProperties_BackupStatusInfo = DatastoreProperties.AddMember("BackupStatusInfo", DatastoreBackupStatus)
+
 	_DatastorePropertiesList_member = _DatastorePropertiesList.AddMember("member", DatastoreProperties)
+
+	SourceFormat_CCDA = SourceFormat.AddMember("CCDA", smithyprelude.Unit)
+
+	SourceFormat_CSV = SourceFormat.AddMember("CSV", smithyprelude.Unit)
+
+	TargetFormat_FHIR_R4 = TargetFormat.AddMember("FHIR_R4", smithyprelude.Unit)
+
+	DataTransformationProfileSummary_ProfileId = DataTransformationProfileSummary.AddMember("ProfileId", _ProfileIdString)
+
+	DataTransformationProfileSummary_Version = DataTransformationProfileSummary.AddMember("Version", _ProfileVersion)
+
+	DataTransformationProfileSummary_SourceFormat = DataTransformationProfileSummary.AddMember("SourceFormat", SourceFormat)
+
+	DataTransformationProfileSummary_TargetFormat = DataTransformationProfileSummary.AddMember("TargetFormat", TargetFormat)
+
+	DataTransformationProfileSummary_ProfileName = DataTransformationProfileSummary.AddMember("ProfileName", _ProfileNameString)
+
+	DataTransformationProfileSummary_ProfileDescription = DataTransformationProfileSummary.AddMember("ProfileDescription", _ProfileDescription)
+
+	DataTransformationProfileSummary_LastUpdatedAt = DataTransformationProfileSummary.AddMember("LastUpdatedAt", _DateTime)
+
+	_DataTransformationProfileSummaryList_member = _DataTransformationProfileSummaryList.AddMember("member", DataTransformationProfileSummary)
+
+	DataTransformationProfileVersionSummary_ProfileId = DataTransformationProfileVersionSummary.AddMember("ProfileId", _ProfileIdString)
+
+	DataTransformationProfileVersionSummary_Version = DataTransformationProfileVersionSummary.AddMember("Version", _ProfileVersion)
+
+	DataTransformationProfileVersionSummary_SourceFormat = DataTransformationProfileVersionSummary.AddMember("SourceFormat", SourceFormat)
+
+	DataTransformationProfileVersionSummary_TargetFormat = DataTransformationProfileVersionSummary.AddMember("TargetFormat", TargetFormat)
+
+	DataTransformationProfileVersionSummary_ProfileName = DataTransformationProfileVersionSummary.AddMember("ProfileName", _ProfileNameString)
+
+	DataTransformationProfileVersionSummary_ChangeDescription = DataTransformationProfileVersionSummary.AddMember("ChangeDescription", _ChangeDescription)
+
+	DataTransformationProfileVersionSummary_LastUpdatedAt = DataTransformationProfileVersionSummary.AddMember("LastUpdatedAt", _DateTime)
+
+	_DataTransformationProfileVersionSummaryList_member = _DataTransformationProfileVersionSummaryList.AddMember("member", DataTransformationProfileVersionSummary)
+
+	DataTransformationS3Configuration_S3Uri = DataTransformationS3Configuration.AddMember("S3Uri", _DataTransformationS3Uri)
+
+	DataTransformationS3Configuration_KmsKeyId = DataTransformationS3Configuration.AddMember("KmsKeyId", _KmsKeyId)
 
 	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
 
@@ -895,9 +2067,9 @@ func init() {
 
 	ExportJobProperties_JobStatus = ExportJobProperties.AddMember("JobStatus", JobStatus)
 
-	ExportJobProperties_SubmitTime = ExportJobProperties.AddMember("SubmitTime", _Timestamp)
+	ExportJobProperties_SubmitTime = ExportJobProperties.AddMember("SubmitTime", _HealthLakeTimestamp)
 
-	ExportJobProperties_EndTime = ExportJobProperties.AddMember("EndTime", _Timestamp)
+	ExportJobProperties_EndTime = ExportJobProperties.AddMember("EndTime", _HealthLakeTimestamp)
 
 	ExportJobProperties_DatastoreId = ExportJobProperties.AddMember("DatastoreId", _DatastoreId)
 
@@ -908,6 +2080,8 @@ func init() {
 	ExportJobProperties_Message = ExportJobProperties.AddMember("Message", _Message)
 
 	_ExportJobPropertiesList_member = _ExportJobPropertiesList.AddMember("member", ExportJobProperties)
+
+	FailedDependencyException_Message = FailedDependencyException.AddMember("Message", _HealthLakeString)
 
 	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _S3Uri)
 
@@ -925,7 +2099,25 @@ func init() {
 
 	JobProgressReport_TotalNumberOfFilesReadWithCustomerError = JobProgressReport.AddMember("TotalNumberOfFilesReadWithCustomerError", _GenericLong)
 
+	JobProgressReport_TotalNumberOfScannedNonFhirFiles = JobProgressReport.AddMember("TotalNumberOfScannedNonFhirFiles", _GenericLong)
+
+	JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB = JobProgressReport.AddMember("TotalSizeOfScannedNonFhirFilesInMB", _GenericDouble)
+
+	JobProgressReport_TotalNumberOfImportedNonFhirFiles = JobProgressReport.AddMember("TotalNumberOfImportedNonFhirFiles", _GenericLong)
+
+	JobProgressReport_TotalNumberOfNonFhirResourcesScanned = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesScanned", _GenericLong)
+
+	JobProgressReport_TotalNumberOfNonFhirResourcesImported = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesImported", _GenericLong)
+
+	JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesWithCustomerError", _GenericLong)
+
+	JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError = JobProgressReport.AddMember("TotalNumberOfNonFhirFilesReadWithCustomerError", _GenericLong)
+
 	JobProgressReport_Throughput = JobProgressReport.AddMember("Throughput", _GenericDouble)
+
+	JobProgressReport_TotalFilesConverted = JobProgressReport.AddMember("TotalFilesConverted", _GenericLong)
+
+	JobProgressReport_TotalResourcesGenerated = JobProgressReport.AddMember("TotalResourcesGenerated", _GenericLong)
 
 	ValidationLevel_STRICT = ValidationLevel.AddMember("STRICT", smithyprelude.Unit)
 
@@ -939,9 +2131,9 @@ func init() {
 
 	ImportJobProperties_JobStatus = ImportJobProperties.AddMember("JobStatus", JobStatus)
 
-	ImportJobProperties_SubmitTime = ImportJobProperties.AddMember("SubmitTime", _Timestamp)
+	ImportJobProperties_SubmitTime = ImportJobProperties.AddMember("SubmitTime", _HealthLakeTimestamp)
 
-	ImportJobProperties_EndTime = ImportJobProperties.AddMember("EndTime", _Timestamp)
+	ImportJobProperties_EndTime = ImportJobProperties.AddMember("EndTime", _HealthLakeTimestamp)
 
 	ImportJobProperties_DatastoreId = ImportJobProperties.AddMember("DatastoreId", _DatastoreId)
 
@@ -959,9 +2151,19 @@ func init() {
 
 	_ImportJobPropertiesList_member = _ImportJobPropertiesList.AddMember("member", ImportJobProperties)
 
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
+	InternalServerException_Message = InternalServerException.AddMember("Message", _HealthLakeString)
 
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
+	NotImplementedOperationException_Message = NotImplementedOperationException.AddMember("Message", smithyprelude.String)
+
+	_ProfileMapping_key = _ProfileMapping.AddMember("key", _ProfileMappingKey)
+
+	_ProfileMapping_value = _ProfileMapping.AddMember("value", _ProfileMappingValue)
+
+	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _HealthLakeString)
+
+	RestoreConfiguration_ContinuousBackupRestoreConfiguration = RestoreConfiguration.AddMember("ContinuousBackupRestoreConfiguration", ContinuousBackupRestoreConfiguration)
+
+	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _HealthLakeString)
 
 	Tag_Key = Tag.AddMember("Key", _TagKey)
 
@@ -971,9 +2173,113 @@ func init() {
 
 	_TagList_member = _TagList.AddMember("member", Tag)
 
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
+	_TagMap_key = _TagMap.AddMember("key", _DataTransformationTagKey)
 
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
+	_TagMap_value = _TagMap.AddMember("value", _DataTransformationTagValue)
+
+	ThrottlingException_Message = ThrottlingException.AddMember("Message", _HealthLakeString)
+
+	TransformationInputDataConfig_S3Uri = TransformationInputDataConfig.AddMember("S3Uri", _DataTransformationS3Uri)
+
+	TransformationInputDataConfig_SourceFormat = TransformationInputDataConfig.AddMember("SourceFormat", SourceFormat)
+
+	TransformationJobProgressReport_TotalFilesScanned = TransformationJobProgressReport.AddMember("TotalFilesScanned", smithyprelude.Long)
+
+	TransformationJobProgressReport_TotalFilesConverted = TransformationJobProgressReport.AddMember("TotalFilesConverted", smithyprelude.Long)
+
+	TransformationJobProgressReport_TotalFilesFailed = TransformationJobProgressReport.AddMember("TotalFilesFailed", smithyprelude.Long)
+
+	TransformationJobProgressReport_TotalResourcesGenerated = TransformationJobProgressReport.AddMember("TotalResourcesGenerated", smithyprelude.Long)
+
+	TransformationJobStatus_SUBMITTED = TransformationJobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
+
+	TransformationJobStatus_QUEUED = TransformationJobStatus.AddMember("QUEUED", smithyprelude.Unit)
+
+	TransformationJobStatus_IN_PROGRESS = TransformationJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	TransformationJobStatus_COMPLETED = TransformationJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	TransformationJobStatus_COMPLETED_WITH_ERRORS = TransformationJobStatus.AddMember("COMPLETED_WITH_ERRORS", smithyprelude.Unit)
+
+	TransformationJobStatus_FAILED = TransformationJobStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TransformationOutputDataConfig_S3Configuration = TransformationOutputDataConfig.AddMember("S3Configuration", DataTransformationS3Configuration)
+
+	TransformationJobProperties_JobId = TransformationJobProperties.AddMember("JobId", _DataTransformationJobId)
+
+	TransformationJobProperties_JobStatus = TransformationJobProperties.AddMember("JobStatus", TransformationJobStatus)
+
+	TransformationJobProperties_InputDataConfig = TransformationJobProperties.AddMember("InputDataConfig", TransformationInputDataConfig)
+
+	TransformationJobProperties_OutputDataConfig = TransformationJobProperties.AddMember("OutputDataConfig", TransformationOutputDataConfig)
+
+	TransformationJobProperties_DataAccessRoleArn = TransformationJobProperties.AddMember("DataAccessRoleArn", _DataTransformationIamRoleArn)
+
+	TransformationJobProperties_SubmitTime = TransformationJobProperties.AddMember("SubmitTime", _DateTime)
+
+	TransformationJobProperties_JobName = TransformationJobProperties.AddMember("JobName", _DataTransformationJobName)
+
+	TransformationJobProperties_ProfileId = TransformationJobProperties.AddMember("ProfileId", _ProfileIdString)
+
+	TransformationJobProperties_ProfileName = TransformationJobProperties.AddMember("ProfileName", _ProfileNameString)
+
+	TransformationJobProperties_ProfileVersion = TransformationJobProperties.AddMember("ProfileVersion", smithyprelude.Integer)
+
+	TransformationJobProperties_EndTime = TransformationJobProperties.AddMember("EndTime", _DateTime)
+
+	TransformationJobProperties_DriftDetectionEnabled = TransformationJobProperties.AddMember("DriftDetectionEnabled", smithyprelude.Boolean)
+
+	TransformationJobProperties_ProvenanceEnabled = TransformationJobProperties.AddMember("ProvenanceEnabled", smithyprelude.Boolean)
+
+	TransformationJobProperties_Message = TransformationJobProperties.AddMember("Message", _BoundedString)
+
+	TransformationJobProperties_JobProgressReport = TransformationJobProperties.AddMember("JobProgressReport", TransformationJobProgressReport)
+
+	TransformationJobSummary_JobId = TransformationJobSummary.AddMember("JobId", _DataTransformationJobId)
+
+	TransformationJobSummary_JobStatus = TransformationJobSummary.AddMember("JobStatus", TransformationJobStatus)
+
+	TransformationJobSummary_SubmitTime = TransformationJobSummary.AddMember("SubmitTime", _DateTime)
+
+	TransformationJobSummary_JobName = TransformationJobSummary.AddMember("JobName", _DataTransformationJobName)
+
+	TransformationJobSummary_EndTime = TransformationJobSummary.AddMember("EndTime", _DateTime)
+
+	TransformationJobSummary_SourceFormat = TransformationJobSummary.AddMember("SourceFormat", SourceFormat)
+
+	_TransformationJobSummaryList_member = _TransformationJobSummaryList.AddMember("member", TransformationJobSummary)
+
+	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", smithyprelude.String)
+
+	UnsupportedMIMETypeException_Message = UnsupportedMIMETypeException.AddMember("Message", smithyprelude.String)
+
+	ValidationException_Message = ValidationException.AddMember("Message", _HealthLakeString)
+
+	CreateDataTransformationProfileRequest_SourceFormat = CreateDataTransformationProfileRequest.AddMember("SourceFormat", SourceFormat)
+
+	CreateDataTransformationProfileRequest_Source = CreateDataTransformationProfileRequest.AddMember("Source", CreateDataTransformationProfileSource)
+
+	CreateDataTransformationProfileRequest_KmsKeyId = CreateDataTransformationProfileRequest.AddMember("KmsKeyId", _KmsKeyId)
+
+	CreateDataTransformationProfileRequest_ProfileDescription = CreateDataTransformationProfileRequest.AddMember("ProfileDescription", _ProfileDescription)
+
+	CreateDataTransformationProfileRequest_ProfileName = CreateDataTransformationProfileRequest.AddMember("ProfileName", _ProfileNameString)
+
+	CreateDataTransformationProfileRequest_Tags = CreateDataTransformationProfileRequest.AddMember("Tags", _TagMap)
+
+	CreateDataTransformationProfileRequest_ClientToken = CreateDataTransformationProfileRequest.AddMember("ClientToken", _ClientToken)
+
+	CreateDataTransformationProfileResponse_ProfileId = CreateDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
+
+	CreateDataTransformationProfileResponse_Version = CreateDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
+
+	CreateDataTransformationProfileResponse_SourceFormat = CreateDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
+
+	CreateDataTransformationProfileResponse_TargetFormat = CreateDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
+
+	CreateDataTransformationProfileResponse_ProfileName = CreateDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
+
+	CreateDataTransformationProfileResponse_LastUpdatedAt = CreateDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
 
 	CreateFHIRDatastoreRequest_DatastoreName = CreateFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
 
@@ -989,6 +2295,14 @@ func init() {
 
 	CreateFHIRDatastoreRequest_IdentityProviderConfiguration = CreateFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
 
+	CreateFHIRDatastoreRequest_AnalyticsConfiguration = CreateFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
+
+	CreateFHIRDatastoreRequest_NlpConfiguration = CreateFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
+
+	CreateFHIRDatastoreRequest_ProfileConfiguration = CreateFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
+
+	CreateFHIRDatastoreRequest_BackupConfiguration = CreateFHIRDatastoreRequest.AddMember("BackupConfiguration", BackupConfiguration)
+
 	CreateFHIRDatastoreResponse_DatastoreId = CreateFHIRDatastoreResponse.AddMember("DatastoreId", _DatastoreId)
 
 	CreateFHIRDatastoreResponse_DatastoreArn = CreateFHIRDatastoreResponse.AddMember("DatastoreArn", _DatastoreArn)
@@ -996,6 +2310,14 @@ func init() {
 	CreateFHIRDatastoreResponse_DatastoreStatus = CreateFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
 
 	CreateFHIRDatastoreResponse_DatastoreEndpoint = CreateFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
+
+	DeleteDataTransformationProfileRequest_ProfileId = DeleteDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
+
+	DeleteDataTransformationProfileResponse_ProfileId = DeleteDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
+
+	DeleteDataTransformationProfileResponse_ProfileName = DeleteDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
+
+	DeleteDataTransformationProfileResponse_DeletionTime = DeleteDataTransformationProfileResponse.AddMember("DeletionTime", _DateTime)
 
 	DeleteFHIRDatastoreRequest_DatastoreId = DeleteFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
 
@@ -1006,6 +2328,10 @@ func init() {
 	DeleteFHIRDatastoreResponse_DatastoreStatus = DeleteFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
 
 	DeleteFHIRDatastoreResponse_DatastoreEndpoint = DeleteFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
+
+	DescribeDataTransformationJobRequest_JobId = DescribeDataTransformationJobRequest.AddMember("JobId", _DataTransformationJobId, &smithytraits.HTTPLabel{})
+
+	DescribeDataTransformationJobResponse_TransformationJobProperties = DescribeDataTransformationJobResponse.AddMember("TransformationJobProperties", TransformationJobProperties)
 
 	DescribeFHIRDatastoreRequest_DatastoreId = DescribeFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
 
@@ -1022,6 +2348,64 @@ func init() {
 	DescribeFHIRImportJobRequest_JobId = DescribeFHIRImportJobRequest.AddMember("JobId", _JobId)
 
 	DescribeFHIRImportJobResponse_ImportJobProperties = DescribeFHIRImportJobResponse.AddMember("ImportJobProperties", ImportJobProperties)
+
+	GetDataTransformationProfileRequest_ProfileId = GetDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
+
+	GetDataTransformationProfileRequest_ProfileVersion = GetDataTransformationProfileRequest.AddMember("ProfileVersion", _ProfileVersion, &smithytraits.HTTPQuery{Name: "version"})
+
+	GetDataTransformationProfileResponse_ProfileId = GetDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
+
+	GetDataTransformationProfileResponse_Version = GetDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
+
+	GetDataTransformationProfileResponse_SourceFormat = GetDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
+
+	GetDataTransformationProfileResponse_TargetFormat = GetDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
+
+	GetDataTransformationProfileResponse_ProfileMapping = GetDataTransformationProfileResponse.AddMember("ProfileMapping", _ProfileMapping)
+
+	GetDataTransformationProfileResponse_ProfileName = GetDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
+
+	GetDataTransformationProfileResponse_ProfileDescription = GetDataTransformationProfileResponse.AddMember("ProfileDescription", _ProfileDescription)
+
+	GetDataTransformationProfileResponse_ChangeDescription = GetDataTransformationProfileResponse.AddMember("ChangeDescription", _ChangeDescription)
+
+	GetDataTransformationProfileResponse_LastUpdatedAt = GetDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
+
+	ListDataTransformationJobsRequest_MaxResults = ListDataTransformationJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDataTransformationJobsRequest_NextToken = ListDataTransformationJobsRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDataTransformationJobsRequest_JobStatus = ListDataTransformationJobsRequest.AddMember("JobStatus", TransformationJobStatus, &smithytraits.HTTPQuery{Name: "jobStatus"})
+
+	ListDataTransformationJobsRequest_JobName = ListDataTransformationJobsRequest.AddMember("JobName", _DataTransformationJobName, &smithytraits.HTTPQuery{Name: "jobName"})
+
+	ListDataTransformationJobsRequest_SubmittedAfter = ListDataTransformationJobsRequest.AddMember("SubmittedAfter", _DateTime, &smithytraits.HTTPQuery{Name: "submittedAfter"})
+
+	ListDataTransformationJobsRequest_SubmittedBefore = ListDataTransformationJobsRequest.AddMember("SubmittedBefore", _DateTime, &smithytraits.HTTPQuery{Name: "submittedBefore"})
+
+	ListDataTransformationJobsResponse_Items = ListDataTransformationJobsResponse.AddMember("Items", _TransformationJobSummaryList)
+
+	ListDataTransformationJobsResponse_NextToken = ListDataTransformationJobsResponse.AddMember("NextToken", _DataTransformationNextToken)
+
+	ListDataTransformationProfilesRequest_SourceFormat = ListDataTransformationProfilesRequest.AddMember("SourceFormat", SourceFormat, &smithytraits.HTTPQuery{Name: "sourceFormat"})
+
+	ListDataTransformationProfilesRequest_MaxResults = ListDataTransformationProfilesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDataTransformationProfilesRequest_NextToken = ListDataTransformationProfilesRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDataTransformationProfilesResponse_Items = ListDataTransformationProfilesResponse.AddMember("Items", _DataTransformationProfileSummaryList)
+
+	ListDataTransformationProfilesResponse_NextToken = ListDataTransformationProfilesResponse.AddMember("NextToken", _DataTransformationNextToken)
+
+	ListDataTransformationProfileVersionsRequest_ProfileId = ListDataTransformationProfileVersionsRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
+
+	ListDataTransformationProfileVersionsRequest_MaxResults = ListDataTransformationProfileVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDataTransformationProfileVersionsRequest_NextToken = ListDataTransformationProfileVersionsRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDataTransformationProfileVersionsResponse_Items = ListDataTransformationProfileVersionsResponse.AddMember("Items", _DataTransformationProfileVersionSummaryList)
+
+	ListDataTransformationProfileVersionsResponse_NextToken = ListDataTransformationProfileVersionsResponse.AddMember("NextToken", _DataTransformationNextToken)
 
 	ListFHIRDatastoresRequest_Filter = ListFHIRDatastoresRequest.AddMember("Filter", DatastoreFilter)
 
@@ -1043,9 +2427,9 @@ func init() {
 
 	ListFHIRExportJobsRequest_JobStatus = ListFHIRExportJobsRequest.AddMember("JobStatus", JobStatus)
 
-	ListFHIRExportJobsRequest_SubmittedBefore = ListFHIRExportJobsRequest.AddMember("SubmittedBefore", _Timestamp)
+	ListFHIRExportJobsRequest_SubmittedBefore = ListFHIRExportJobsRequest.AddMember("SubmittedBefore", _HealthLakeTimestamp)
 
-	ListFHIRExportJobsRequest_SubmittedAfter = ListFHIRExportJobsRequest.AddMember("SubmittedAfter", _Timestamp)
+	ListFHIRExportJobsRequest_SubmittedAfter = ListFHIRExportJobsRequest.AddMember("SubmittedAfter", _HealthLakeTimestamp)
 
 	ListFHIRExportJobsResponse_ExportJobPropertiesList = ListFHIRExportJobsResponse.AddMember("ExportJobPropertiesList", _ExportJobPropertiesList)
 
@@ -1061,9 +2445,9 @@ func init() {
 
 	ListFHIRImportJobsRequest_JobStatus = ListFHIRImportJobsRequest.AddMember("JobStatus", JobStatus)
 
-	ListFHIRImportJobsRequest_SubmittedBefore = ListFHIRImportJobsRequest.AddMember("SubmittedBefore", _Timestamp)
+	ListFHIRImportJobsRequest_SubmittedBefore = ListFHIRImportJobsRequest.AddMember("SubmittedBefore", _HealthLakeTimestamp)
 
-	ListFHIRImportJobsRequest_SubmittedAfter = ListFHIRImportJobsRequest.AddMember("SubmittedAfter", _Timestamp)
+	ListFHIRImportJobsRequest_SubmittedAfter = ListFHIRImportJobsRequest.AddMember("SubmittedAfter", _HealthLakeTimestamp)
 
 	ListFHIRImportJobsResponse_ImportJobPropertiesList = ListFHIRImportJobsResponse.AddMember("ImportJobPropertiesList", _ImportJobPropertiesList)
 
@@ -1072,6 +2456,74 @@ func init() {
 	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
 
 	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
+
+	PublishDataTransformationProfileRequest_ProfileId = PublishDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
+
+	PublishDataTransformationProfileRequest_SourceFormat = PublishDataTransformationProfileRequest.AddMember("SourceFormat", SourceFormat, &smithytraits.HTTPQuery{Name: "sourceFormat"})
+
+	PublishDataTransformationProfileRequest_FromExistingVersion = PublishDataTransformationProfileRequest.AddMember("FromExistingVersion", _ProfileVersion)
+
+	PublishDataTransformationProfileRequest_ChangeDescription = PublishDataTransformationProfileRequest.AddMember("ChangeDescription", _ChangeDescription)
+
+	PublishDataTransformationProfileResponse_ProfileId = PublishDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
+
+	PublishDataTransformationProfileResponse_Version = PublishDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
+
+	PublishDataTransformationProfileResponse_SourceFormat = PublishDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
+
+	PublishDataTransformationProfileResponse_TargetFormat = PublishDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
+
+	PublishDataTransformationProfileResponse_ProfileName = PublishDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
+
+	PublishDataTransformationProfileResponse_LastUpdatedAt = PublishDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
+
+	RestoreFHIRDatastoreRequest_SourceDatastoreId = RestoreFHIRDatastoreRequest.AddMember("SourceDatastoreId", _DatastoreId)
+
+	RestoreFHIRDatastoreRequest_RestoreConfiguration = RestoreFHIRDatastoreRequest.AddMember("RestoreConfiguration", RestoreConfiguration)
+
+	RestoreFHIRDatastoreRequest_DatastoreName = RestoreFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
+
+	RestoreFHIRDatastoreRequest_SseConfiguration = RestoreFHIRDatastoreRequest.AddMember("SseConfiguration", SseConfiguration)
+
+	RestoreFHIRDatastoreRequest_ClientToken = RestoreFHIRDatastoreRequest.AddMember("ClientToken", _ClientTokenString)
+
+	RestoreFHIRDatastoreRequest_Tags = RestoreFHIRDatastoreRequest.AddMember("Tags", _TagList)
+
+	RestoreFHIRDatastoreRequest_IdentityProviderConfiguration = RestoreFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
+
+	RestoreFHIRDatastoreRequest_AnalyticsConfiguration = RestoreFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
+
+	RestoreFHIRDatastoreRequest_NlpConfiguration = RestoreFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
+
+	RestoreFHIRDatastoreRequest_ProfileConfiguration = RestoreFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
+
+	RestoreFHIRDatastoreResponse_DatastoreId = RestoreFHIRDatastoreResponse.AddMember("DatastoreId", _DatastoreId)
+
+	RestoreFHIRDatastoreResponse_DatastoreArn = RestoreFHIRDatastoreResponse.AddMember("DatastoreArn", _DatastoreArn)
+
+	RestoreFHIRDatastoreResponse_DatastoreStatus = RestoreFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
+
+	RestoreFHIRDatastoreResponse_DatastoreEndpoint = RestoreFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
+
+	StartDataTransformationJobRequest_InputDataConfig = StartDataTransformationJobRequest.AddMember("InputDataConfig", TransformationInputDataConfig)
+
+	StartDataTransformationJobRequest_OutputDataConfig = StartDataTransformationJobRequest.AddMember("OutputDataConfig", TransformationOutputDataConfig)
+
+	StartDataTransformationJobRequest_DataAccessRoleArn = StartDataTransformationJobRequest.AddMember("DataAccessRoleArn", _DataTransformationIamRoleArn)
+
+	StartDataTransformationJobRequest_ClientToken = StartDataTransformationJobRequest.AddMember("ClientToken", _ClientToken)
+
+	StartDataTransformationJobRequest_JobName = StartDataTransformationJobRequest.AddMember("JobName", _DataTransformationJobName)
+
+	StartDataTransformationJobRequest_ProfileId = StartDataTransformationJobRequest.AddMember("ProfileId", _ProfileIdString)
+
+	StartDataTransformationJobRequest_DriftDetectionEnabled = StartDataTransformationJobRequest.AddMember("DriftDetectionEnabled", smithyprelude.Boolean)
+
+	StartDataTransformationJobRequest_ProvenanceEnabled = StartDataTransformationJobRequest.AddMember("ProvenanceEnabled", smithyprelude.Boolean)
+
+	StartDataTransformationJobResponse_JobId = StartDataTransformationJobResponse.AddMember("JobId", _DataTransformationJobId)
+
+	StartDataTransformationJobResponse_JobStatus = StartDataTransformationJobResponse.AddMember("JobStatus", TransformationJobStatus)
 
 	StartFHIRExportJobRequest_JobName = StartFHIRExportJobRequest.AddMember("JobName", _JobName)
 
@@ -1103,6 +2555,14 @@ func init() {
 
 	StartFHIRImportJobRequest_ValidationLevel = StartFHIRImportJobRequest.AddMember("ValidationLevel", ValidationLevel)
 
+	StartFHIRImportJobRequest_ProfileId = StartFHIRImportJobRequest.AddMember("ProfileId", _BoundedLengthString)
+
+	StartFHIRImportJobRequest_InputFormat = StartFHIRImportJobRequest.AddMember("InputFormat", _BoundedLengthString)
+
+	StartFHIRImportJobRequest_DriftDetectionEnabled = StartFHIRImportJobRequest.AddMember("DriftDetectionEnabled", _HealthLakeBoolean)
+
+	StartFHIRImportJobRequest_ProvenanceEnabled = StartFHIRImportJobRequest.AddMember("ProvenanceEnabled", _DefaultEnabledBoolean)
+
 	StartFHIRImportJobResponse_JobId = StartFHIRImportJobResponse.AddMember("JobId", _JobId)
 
 	StartFHIRImportJobResponse_JobStatus = StartFHIRImportJobResponse.AddMember("JobStatus", JobStatus)
@@ -1116,5 +2576,49 @@ func init() {
 	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
 
 	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
+
+	UpdateDataTransformationProfileRequest_ProfileId = UpdateDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
+
+	UpdateDataTransformationProfileRequest_ProfileMapping = UpdateDataTransformationProfileRequest.AddMember("ProfileMapping", _ProfileMapping)
+
+	UpdateDataTransformationProfileRequest_ChangeDescription = UpdateDataTransformationProfileRequest.AddMember("ChangeDescription", _ChangeDescription)
+
+	UpdateDataTransformationProfileResponse_ProfileId = UpdateDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
+
+	UpdateDataTransformationProfileResponse_SourceFormat = UpdateDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
+
+	UpdateDataTransformationProfileResponse_TargetFormat = UpdateDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
+
+	UpdateDataTransformationProfileResponse_ProfileName = UpdateDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
+
+	UpdateDataTransformationProfileResponse_LastUpdatedAt = UpdateDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
+
+	UpdateFHIRDatastoreRequest_DatastoreId = UpdateFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
+
+	UpdateFHIRDatastoreRequest_DatastoreName = UpdateFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
+
+	UpdateFHIRDatastoreRequest_AnalyticsConfiguration = UpdateFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
+
+	UpdateFHIRDatastoreRequest_NlpConfiguration = UpdateFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
+
+	UpdateFHIRDatastoreRequest_ProfileConfiguration = UpdateFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
+
+	UpdateFHIRDatastoreRequest_IdentityProviderConfiguration = UpdateFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
+
+	UpdateFHIRDatastoreRequest_BackupConfiguration = UpdateFHIRDatastoreRequest.AddMember("BackupConfiguration", BackupConfiguration)
+
+	UpdateFHIRDatastoreResponse_DatastoreProperties = UpdateFHIRDatastoreResponse.AddMember("DatastoreProperties", DatastoreProperties)
+
+	UpdateProfileWithAgentRequest_ProfileId = UpdateProfileWithAgentRequest.AddMember("ProfileId", _ProfileIdString)
+
+	UpdateProfileWithAgentRequest_SourceFormat = UpdateProfileWithAgentRequest.AddMember("SourceFormat", SourceFormat)
+
+	UpdateProfileWithAgentRequest_InputMessage = UpdateProfileWithAgentRequest.AddMember("InputMessage", AgentInputMessage)
+
+	UpdateProfileWithAgentRequest_ConversationId = UpdateProfileWithAgentRequest.AddMember("ConversationId", _ConversationIdString)
+
+	UpdateProfileWithAgentResponse_AgentResponse = UpdateProfileWithAgentResponse.AddMember("AgentResponse", AgentOutputMessage)
+
+	UpdateProfileWithAgentResponse_ConversationId = UpdateProfileWithAgentResponse.AddMember("ConversationId", _ConversationIdString)
 
 }

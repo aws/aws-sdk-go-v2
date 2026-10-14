@@ -1,0 +1,5 @@
+POST /v1/sourceApis/__SourceApiIdentifier__/mergedApiAssociations
+
+Content-Type: application/json
+
+{"description":"__Description__","mergedApiIdentifier":"__MergedApiIdentifier__","sourceApiAssociationConfig":{"mergeType":"MANUAL_MERGE"}}

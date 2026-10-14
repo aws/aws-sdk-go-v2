@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RepositoryAssociationSummaries":[{"AssociationArn":"__AssociationArn__","AssociationId":"__AssociationId__","ConnectionArn":"__ConnectionArn__","LastUpdatedTimeStamp":946684800,"Name":"__Name__","Owner":"__Owner__","ProviderType":"CodeCommit","State":"Associated"},{"AssociationArn":"__AssociationArn__","AssociationId":"__AssociationId__","ConnectionArn":"__ConnectionArn__","LastUpdatedTimeStamp":946684800,"Name":"__Name__","Owner":"__Owner__","ProviderType":"CodeCommit","State":"Associated"}]}

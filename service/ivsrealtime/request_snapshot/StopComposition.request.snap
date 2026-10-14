@@ -1,0 +1,5 @@
+POST /StopComposition
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

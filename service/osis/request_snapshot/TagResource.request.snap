@@ -1,0 +1,5 @@
+POST /2022-01-01/osis/tagResource?arn=__Arn__
+
+Content-Type: application/json
+
+{"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

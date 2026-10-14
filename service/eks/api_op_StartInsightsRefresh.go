@@ -4,11 +4,10 @@ package eks
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates an on-demand refresh operation for cluster insights, getting the
@@ -38,6 +37,18 @@ type StartInsightsRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInsightsRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInsightsRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInsightsRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.StartInsightsRefreshRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type StartInsightsRefreshOutput struct {
 
 	// The message associated with the insights refresh operation.
@@ -52,77 +63,58 @@ type StartInsightsRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInsightsRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInsightsRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInsightsRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StartInsightsRefreshResponse_message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartInsightsRefreshResponse_status, string(v.Status))
+	}
+}
+func (v *StartInsightsRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInsightsRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInsightsRefreshResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartInsightsRefreshResponse_message, v.Message)
+		case schemas.StartInsightsRefreshResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartInsightsRefreshResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InsightsRefreshStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInsightsRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInsightsRefresh, schemas.StartInsightsRefreshRequest, schemas.StartInsightsRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInsightsRefresh, schemas.StartInsightsRefreshRequest, schemas.StartInsightsRefreshResponse), output: &StartInsightsRefreshOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInsightsRefresh{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartInsightsRefresh"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartInsightsRefreshValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartInsightsRefresh(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +129,8 @@ func (c *Client) addOperationStartInsightsRefreshMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartInsightsRefresh(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartInsightsRefresh",
-	}
 }

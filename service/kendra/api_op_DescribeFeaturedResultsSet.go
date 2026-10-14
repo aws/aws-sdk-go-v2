@@ -4,13 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a set of featured results. Features results are placed
@@ -115,6 +112,35 @@ type DescribeFeaturedResultsSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeaturedResultsSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeaturedResultsSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeaturedResultsSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteInt64(schemas.DescribeFeaturedResultsSetResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_Description, *v.Description)
+	}
+	serializeFeaturedDocumentMissingList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsMissing, v.FeaturedDocumentsMissing)
+	serializeFeaturedDocumentWithMetadataList(s, schemas.DescribeFeaturedResultsSetResponse_FeaturedDocumentsWithMetadata, v.FeaturedDocumentsWithMetadata)
+	if v.FeaturedResultsSetId != nil {
+		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetId, *v.FeaturedResultsSetId)
+	}
+	if v.FeaturedResultsSetName != nil {
+		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_FeaturedResultsSetName, *v.FeaturedResultsSetName)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteInt64(schemas.DescribeFeaturedResultsSetResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	serializeQueryTextList(s, schemas.DescribeFeaturedResultsSetResponse_QueryTexts, v.QueryTexts)
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeFeaturedResultsSetResponse_Status, string(v.Status))
+	}
+}
 func (v *DescribeFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeFeaturedResultsSetResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -151,74 +177,26 @@ func (v *DescribeFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 func (c *Client) addOperationDescribeFeaturedResultsSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeaturedResultsSet, schemas.DescribeFeaturedResultsSetRequest, schemas.DescribeFeaturedResultsSetResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeaturedResultsSet, schemas.DescribeFeaturedResultsSetRequest, schemas.DescribeFeaturedResultsSetResponse), output: &DescribeFeaturedResultsSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFeaturedResultsSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFeaturedResultsSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFeaturedResultsSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,22 +211,8 @@ func (c *Client) addOperationDescribeFeaturedResultsSetMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFeaturedResultsSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFeaturedResultsSet",
-	}
 }

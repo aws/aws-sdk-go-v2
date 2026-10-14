@@ -2,6 +2,81 @@
 
 package types
 
+type AgentInputMessageType string
+
+// Enum values for AgentInputMessageType
+const (
+	AgentInputMessageTypeNormal                   AgentInputMessageType = "normal"
+	AgentInputMessageTypeUserConfirmationResponse AgentInputMessageType = "confirmation_response"
+)
+
+// Values returns all known values for AgentInputMessageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInputMessageType) Values() []AgentInputMessageType {
+	return []AgentInputMessageType{
+		"normal",
+		"confirmation_response",
+	}
+}
+
+type AgentOutputMessageType string
+
+// Enum values for AgentOutputMessageType
+const (
+	AgentOutputMessageTypeInitialGreeting         AgentOutputMessageType = "INITIAL_GREETING"
+	AgentOutputMessageTypeNormal                  AgentOutputMessageType = "normal"
+	AgentOutputMessageTypeUserConfirmationRequest AgentOutputMessageType = "confirmation"
+	AgentOutputMessageTypeComplete                AgentOutputMessageType = "complete"
+	AgentOutputMessageTypeError                   AgentOutputMessageType = "error"
+	AgentOutputMessageTypeOptions                 AgentOutputMessageType = "options"
+	AgentOutputMessageTypeChoices                 AgentOutputMessageType = "choices"
+)
+
+// Values returns all known values for AgentOutputMessageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentOutputMessageType) Values() []AgentOutputMessageType {
+	return []AgentOutputMessageType{
+		"INITIAL_GREETING",
+		"normal",
+		"confirmation",
+		"complete",
+		"error",
+		"options",
+		"choices",
+	}
+}
+
+type AnalyticsStatus string
+
+// Enum values for AnalyticsStatus
+const (
+	AnalyticsStatusEnabled   AnalyticsStatus = "ENABLED"
+	AnalyticsStatusEnabling  AnalyticsStatus = "ENABLING"
+	AnalyticsStatusDisabled  AnalyticsStatus = "DISABLED"
+	AnalyticsStatusDisabling AnalyticsStatus = "DISABLING"
+	AnalyticsStatusPausing   AnalyticsStatus = "PAUSING"
+	AnalyticsStatusPaused    AnalyticsStatus = "PAUSED"
+)
+
+// Values returns all known values for AnalyticsStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsStatus) Values() []AnalyticsStatus {
+	return []AnalyticsStatus{
+		"ENABLED",
+		"ENABLING",
+		"DISABLED",
+		"DISABLING",
+		"PAUSING",
+		"PAUSED",
+	}
+}
+
 type AuthorizationStrategy string
 
 // Enum values for AuthorizationStrategy
@@ -20,6 +95,42 @@ func (AuthorizationStrategy) Values() []AuthorizationStrategy {
 		"SMART_ON_FHIR_V1",
 		"SMART_ON_FHIR",
 		"AWS_AUTH",
+	}
+}
+
+type BackupStatus string
+
+// Enum values for BackupStatus
+const (
+	BackupStatusEnabled  BackupStatus = "ENABLED"
+	BackupStatusDisabled BackupStatus = "DISABLED"
+)
+
+// Values returns all known values for BackupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BackupStatus) Values() []BackupStatus {
+	return []BackupStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type BackupType string
+
+// Enum values for BackupType
+const (
+	BackupTypeContinuous BackupType = "CONTINUOUS"
+)
+
+// Values returns all known values for BackupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BackupType) Values() []BackupType {
+	return []BackupType{
+		"CONTINUOUS",
 	}
 }
 
@@ -51,6 +162,8 @@ const (
 	DatastoreStatusDeleting     DatastoreStatus = "DELETING"
 	DatastoreStatusDeleted      DatastoreStatus = "DELETED"
 	DatastoreStatusCreateFailed DatastoreStatus = "CREATE_FAILED"
+	DatastoreStatusUpdating     DatastoreStatus = "UPDATING"
+	DatastoreStatusUpdateFailed DatastoreStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for DatastoreStatus. Note that this can be
@@ -64,6 +177,8 @@ func (DatastoreStatus) Values() []DatastoreStatus {
 		"DELETING",
 		"DELETED",
 		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
 	}
 }
 
@@ -138,6 +253,29 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type NlpStatus string
+
+// Enum values for NlpStatus
+const (
+	NlpStatusEnabled   NlpStatus = "ENABLED"
+	NlpStatusEnabling  NlpStatus = "ENABLING"
+	NlpStatusDisabled  NlpStatus = "DISABLED"
+	NlpStatusDisabling NlpStatus = "DISABLING"
+)
+
+// Values returns all known values for NlpStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NlpStatus) Values() []NlpStatus {
+	return []NlpStatus{
+		"ENABLED",
+		"ENABLING",
+		"DISABLED",
+		"DISABLING",
+	}
+}
+
 type PreloadDataType string
 
 // Enum values for PreloadDataType
@@ -152,6 +290,69 @@ const (
 func (PreloadDataType) Values() []PreloadDataType {
 	return []PreloadDataType{
 		"SYNTHEA",
+	}
+}
+
+type SourceFormat string
+
+// Enum values for SourceFormat
+const (
+	SourceFormatCcda SourceFormat = "CCDA"
+	SourceFormatCsv  SourceFormat = "CSV"
+)
+
+// Values returns all known values for SourceFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceFormat) Values() []SourceFormat {
+	return []SourceFormat{
+		"CCDA",
+		"CSV",
+	}
+}
+
+type TargetFormat string
+
+// Enum values for TargetFormat
+const (
+	TargetFormatFhirR4 TargetFormat = "FHIR_R4"
+)
+
+// Values returns all known values for TargetFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetFormat) Values() []TargetFormat {
+	return []TargetFormat{
+		"FHIR_R4",
+	}
+}
+
+type TransformationJobStatus string
+
+// Enum values for TransformationJobStatus
+const (
+	TransformationJobStatusSubmitted           TransformationJobStatus = "SUBMITTED"
+	TransformationJobStatusQueued              TransformationJobStatus = "QUEUED"
+	TransformationJobStatusInProgress          TransformationJobStatus = "IN_PROGRESS"
+	TransformationJobStatusCompleted           TransformationJobStatus = "COMPLETED"
+	TransformationJobStatusCompletedWithErrors TransformationJobStatus = "COMPLETED_WITH_ERRORS"
+	TransformationJobStatusFailed              TransformationJobStatus = "FAILED"
+)
+
+// Values returns all known values for TransformationJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransformationJobStatus) Values() []TransformationJobStatus {
+	return []TransformationJobStatus{
+		"SUBMITTED",
+		"QUEUED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
 	}
 }
 

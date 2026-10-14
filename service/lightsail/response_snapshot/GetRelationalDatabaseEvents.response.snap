@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetRelationalDatabaseEvents
+
+{"nextPageToken":"__NextPageToken__","relationalDatabaseEvents":[{"createdAt":946684800,"eventCategories":["__Member__","__Member__"],"message":"__Message__","resource":"__Resource__"},{"createdAt":946684800,"eventCategories":["__Member__","__Member__"],"message":"__Message__","resource":"__Resource__"}]}

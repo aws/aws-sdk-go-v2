@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterEvents
+
+{"ClusterName":"__ClusterName__","EventTimeAfter":946684800,"EventTimeBefore":946684800,"InstanceGroupName":"__InstanceGroupName__","MaxResults":1,"NextToken":"__NextToken__","NodeId":"__NodeId__","ResourceType":"Cluster","SortBy":"EventTime","SortOrder":"Ascending"}

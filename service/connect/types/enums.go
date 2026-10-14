@@ -32,6 +32,8 @@ const (
 	ActionTypeAssignSla                ActionType = "ASSIGN_SLA"
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
+	ActionTypeExtractInformation       ActionType = "EXTRACT_INFORMATION"
+	ActionTypeSendInAppNotification    ActionType = "SEND_IN_APP_NOTIFICATION"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -49,6 +51,8 @@ func (ActionType) Values() []ActionType {
 		"ASSIGN_SLA",
 		"END_ASSOCIATED_TASKS",
 		"SUBMIT_AUTO_EVALUATION",
+		"EXTRACT_INFORMATION",
+		"SEND_IN_APP_NOTIFICATION",
 	}
 }
 
@@ -111,6 +115,23 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type AIAgentType string
+
+// Enum values for AIAgentType
+const (
+	AIAgentTypeThirdParty AIAgentType = "THIRD_PARTY"
+)
+
+// Values returns all known values for AIAgentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIAgentType) Values() []AIAgentType {
+	return []AIAgentType{
+		"THIRD_PARTY",
+	}
+}
+
 type AiUseCase string
 
 // Enum values for AiUseCase
@@ -146,6 +167,29 @@ func (AllowedUserAction) Values() []AllowedUserAction {
 	return []AllowedUserAction{
 		"CALL",
 		"DISCARD",
+	}
+}
+
+type AnalyticsMode string
+
+// Enum values for AnalyticsMode
+const (
+	AnalyticsModePostContact          AnalyticsMode = "PostContact"
+	AnalyticsModeRealTime             AnalyticsMode = "RealTime"
+	AnalyticsModeContactLens          AnalyticsMode = "ContactLens"
+	AnalyticsModeAutomatedInteraction AnalyticsMode = "AutomatedInteraction"
+)
+
+// Values returns all known values for AnalyticsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMode) Values() []AnalyticsMode {
+	return []AnalyticsMode{
+		"PostContact",
+		"RealTime",
+		"ContactLens",
+		"AutomatedInteraction",
 	}
 }
 
@@ -298,6 +342,23 @@ func (AttachmentScope) Values() []AttachmentScope {
 	}
 }
 
+type AuthCodeEntityType string
+
+// Enum values for AuthCodeEntityType
+const (
+	AuthCodeEntityTypeCustomerProfile AuthCodeEntityType = "CUSTOMER_PROFILE"
+)
+
+// Values returns all known values for AuthCodeEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthCodeEntityType) Values() []AuthCodeEntityType {
+	return []AuthCodeEntityType{
+		"CUSTOMER_PROFILE",
+	}
+}
+
 type AutoEvaluationStatus string
 
 // Enum values for AutoEvaluationStatus
@@ -316,6 +377,44 @@ func (AutoEvaluationStatus) Values() []AutoEvaluationStatus {
 		"IN_PROGRESS",
 		"FAILED",
 		"SUCCEEDED",
+	}
+}
+
+type AvailableFilterType string
+
+// Enum values for AvailableFilterType
+const (
+	AvailableFilterTypeMetricLevel   AvailableFilterType = "METRIC_LEVEL"
+	AvailableFilterTypeResourceLevel AvailableFilterType = "RESOURCE_LEVEL"
+)
+
+// Values returns all known values for AvailableFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AvailableFilterType) Values() []AvailableFilterType {
+	return []AvailableFilterType{
+		"METRIC_LEVEL",
+		"RESOURCE_LEVEL",
+	}
+}
+
+type Behavior string
+
+// Enum values for Behavior
+const (
+	BehaviorEnable  Behavior = "Enable"
+	BehaviorDisable Behavior = "Disable"
+)
+
+// Values returns all known values for Behavior. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Behavior) Values() []Behavior {
+	return []Behavior{
+		"Enable",
+		"Disable",
 	}
 }
 
@@ -380,6 +479,27 @@ func (Channel) Values() []Channel {
 	}
 }
 
+type ChannelWorkloadBehaviorType string
+
+// Enum values for ChannelWorkloadBehaviorType
+const (
+	ChannelWorkloadBehaviorTypeRouteCurrentChannelCurrentWorkloadtypeOnly ChannelWorkloadBehaviorType = "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY"
+	ChannelWorkloadBehaviorTypeRouteCurrentChannelAnyWorkloadtypeOnly     ChannelWorkloadBehaviorType = "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY"
+	ChannelWorkloadBehaviorTypeRouteAnyChannelAnyWorkloadType             ChannelWorkloadBehaviorType = "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
+)
+
+// Values returns all known values for ChannelWorkloadBehaviorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelWorkloadBehaviorType) Values() []ChannelWorkloadBehaviorType {
+	return []ChannelWorkloadBehaviorType{
+		"ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY",
+		"ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY",
+		"ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE",
+	}
+}
+
 type ChatEventType string
 
 // Enum values for ChatEventType
@@ -435,6 +555,86 @@ func (ConfigurableNotificationPriority) Values() []ConfigurableNotificationPrior
 	return []ConfigurableNotificationPriority{
 		"HIGH",
 		"LOW",
+	}
+}
+
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
+	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeAuthenticationSession ConnectionType = "AUTHENTICATION_SESSION"
+	ConnectionTypeWebrtcConnection      ConnectionType = "WEBRTC_CONNECTION"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"WEBSOCKET",
+		"CONNECTION_CREDENTIALS",
+		"AUTHENTICATION_SESSION",
+		"WEBRTC_CONNECTION",
+	}
+}
+
+type ContactEvaluationAttributeComparisonType string
+
+// Enum values for ContactEvaluationAttributeComparisonType
+const (
+	ContactEvaluationAttributeComparisonTypeExact ContactEvaluationAttributeComparisonType = "EXACT"
+)
+
+// Values returns all known values for ContactEvaluationAttributeComparisonType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactEvaluationAttributeComparisonType) Values() []ContactEvaluationAttributeComparisonType {
+	return []ContactEvaluationAttributeComparisonType{
+		"EXACT",
+	}
+}
+
+type ContactEvaluationAttributeKey string
+
+// Enum values for ContactEvaluationAttributeKey
+const (
+	ContactEvaluationAttributeKeyContactAgentId ContactEvaluationAttributeKey = "ContactAgentId"
+)
+
+// Values returns all known values for ContactEvaluationAttributeKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactEvaluationAttributeKey) Values() []ContactEvaluationAttributeKey {
+	return []ContactEvaluationAttributeKey{
+		"ContactAgentId",
+	}
+}
+
+type ContactField string
+
+// Enum values for ContactField
+const (
+	ContactFieldCustomerEndpoint          ContactField = "CUSTOMER_ENDPOINT"
+	ContactFieldAdditionalEmailRecipients ContactField = "ADDITIONAL_EMAIL_RECIPIENTS"
+	ContactFieldEmailSubject              ContactField = "EMAIL_SUBJECT"
+)
+
+// Values returns all known values for ContactField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactField) Values() []ContactField {
+	return []ContactField{
+		"CUSTOMER_ENDPOINT",
+		"ADDITIONAL_EMAIL_RECIPIENTS",
+		"EMAIL_SUBJECT",
 	}
 }
 
@@ -1062,6 +1262,30 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type EvaluationFormAIVersionStatus string
+
+// Enum values for EvaluationFormAIVersionStatus
+const (
+	EvaluationFormAIVersionStatusLatest     EvaluationFormAIVersionStatus = "LATEST"
+	EvaluationFormAIVersionStatusPreview    EvaluationFormAIVersionStatus = "PREVIEW"
+	EvaluationFormAIVersionStatusActive     EvaluationFormAIVersionStatus = "ACTIVE"
+	EvaluationFormAIVersionStatusDeprecated EvaluationFormAIVersionStatus = "DEPRECATED"
+)
+
+// Values returns all known values for EvaluationFormAIVersionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormAIVersionStatus) Values() []EvaluationFormAIVersionStatus {
+	return []EvaluationFormAIVersionStatus{
+		"LATEST",
+		"PREVIEW",
+		"ACTIVE",
+		"DEPRECATED",
+	}
+}
+
 type EvaluationFormItemEnablementAction string
 
 // Enum values for EvaluationFormItemEnablementAction
@@ -1175,6 +1399,7 @@ const (
 	EvaluationFormLanguageCodeJaJp EvaluationFormLanguageCode = "ja-JP"
 	EvaluationFormLanguageCodeKoKr EvaluationFormLanguageCode = "ko-KR"
 	EvaluationFormLanguageCodeZhCn EvaluationFormLanguageCode = "zh-CN"
+	EvaluationFormLanguageCodeMsMy EvaluationFormLanguageCode = "ms-MY"
 )
 
 // Values returns all known values for EvaluationFormLanguageCode. Note that this
@@ -1192,6 +1417,24 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
+		"ms-MY",
+	}
+}
+
+type EvaluationFormMetricType string
+
+// Enum values for EvaluationFormMetricType
+const (
+	EvaluationFormMetricTypeBusinessOutcome EvaluationFormMetricType = "BUSINESS_OUTCOME"
+)
+
+// Values returns all known values for EvaluationFormMetricType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormMetricType) Values() []EvaluationFormMetricType {
+	return []EvaluationFormMetricType{
+		"BUSINESS_OUTCOME",
 	}
 }
 
@@ -1266,6 +1509,7 @@ type EvaluationFormScoringMode string
 const (
 	EvaluationFormScoringModeQuestionOnly EvaluationFormScoringMode = "QUESTION_ONLY"
 	EvaluationFormScoringModeSectionOnly  EvaluationFormScoringMode = "SECTION_ONLY"
+	EvaluationFormScoringModePointsBased  EvaluationFormScoringMode = "POINTS_BASED"
 )
 
 // Values returns all known values for EvaluationFormScoringMode. Note that this
@@ -1276,6 +1520,7 @@ func (EvaluationFormScoringMode) Values() []EvaluationFormScoringMode {
 	return []EvaluationFormScoringMode{
 		"QUESTION_ONLY",
 		"SECTION_ONLY",
+		"POINTS_BASED",
 	}
 }
 
@@ -1315,6 +1560,48 @@ func (EvaluationFormSingleSelectQuestionDisplayMode) Values() []EvaluationFormSi
 	return []EvaluationFormSingleSelectQuestionDisplayMode{
 		"DROPDOWN",
 		"RADIO",
+	}
+}
+
+type EvaluationFormValidationFindingSeverity string
+
+// Enum values for EvaluationFormValidationFindingSeverity
+const (
+	EvaluationFormValidationFindingSeverityWarning EvaluationFormValidationFindingSeverity = "WARNING"
+	EvaluationFormValidationFindingSeverityError   EvaluationFormValidationFindingSeverity = "ERROR"
+)
+
+// Values returns all known values for EvaluationFormValidationFindingSeverity.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormValidationFindingSeverity) Values() []EvaluationFormValidationFindingSeverity {
+	return []EvaluationFormValidationFindingSeverity{
+		"WARNING",
+		"ERROR",
+	}
+}
+
+type EvaluationFormValidationStatus string
+
+// Enum values for EvaluationFormValidationStatus
+const (
+	EvaluationFormValidationStatusInProgress EvaluationFormValidationStatus = "IN_PROGRESS"
+	EvaluationFormValidationStatusCompleted  EvaluationFormValidationStatus = "COMPLETED"
+	EvaluationFormValidationStatusFailed     EvaluationFormValidationStatus = "FAILED"
+)
+
+// Values returns all known values for EvaluationFormValidationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormValidationStatus) Values() []EvaluationFormValidationStatus {
+	return []EvaluationFormValidationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 
@@ -1466,6 +1753,8 @@ const (
 	EventSourceNameOnRealTimeCallAnalysisAvailable  EventSourceName = "OnRealTimeCallAnalysisAvailable"
 	EventSourceNameOnRealTimeChatAnalysisAvailable  EventSourceName = "OnRealTimeChatAnalysisAvailable"
 	EventSourceNameOnPostChatAnalysisAvailable      EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnAfterCallWorkAvailable         EventSourceName = "OnAfterCallWorkAvailable"
+	EventSourceNameOnAfterChatWorkAvailable         EventSourceName = "OnAfterChatWorkAvailable"
 	EventSourceNameOnEmailAnalysisAvailable         EventSourceName = "OnEmailAnalysisAvailable"
 	EventSourceNameOnZendeskTicketCreate            EventSourceName = "OnZendeskTicketCreate"
 	EventSourceNameOnZendeskTicketStatusUpdate      EventSourceName = "OnZendeskTicketStatusUpdate"
@@ -1491,6 +1780,8 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnRealTimeCallAnalysisAvailable",
 		"OnRealTimeChatAnalysisAvailable",
 		"OnPostChatAnalysisAvailable",
+		"OnAfterCallWorkAvailable",
+		"OnAfterChatWorkAvailable",
 		"OnEmailAnalysisAvailable",
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
@@ -1600,6 +1891,7 @@ const (
 	FileUseCaseTypeEmailMessageRedacted          FileUseCaseType = "EMAIL_MESSAGE_REDACTED"
 	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
 	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeVoiceRecording                FileUseCaseType = "VOICE_RECORDING"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -1614,6 +1906,7 @@ func (FileUseCaseType) Values() []FileUseCaseType {
 		"EMAIL_MESSAGE_REDACTED",
 		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
+		"VOICE_RECORDING",
 	}
 }
 
@@ -1867,6 +2160,7 @@ const (
 	InstanceAttributeTypeUseCustomTtsVoices        InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
 	InstanceAttributeTypeEarlyMedia                InstanceAttributeType = "EARLY_MEDIA"
 	InstanceAttributeTypeMultiPartyConference      InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
+	InstanceAttributeTypeAutoMuteAgentOnHold       InstanceAttributeType = "AUTO_MUTE_AGENT_ON_HOLD"
 	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
 	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 	InstanceAttributeTypeEnhancedChatMonitoring    InstanceAttributeType = "ENHANCED_CHAT_MONITORING"
@@ -1888,6 +2182,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"USE_CUSTOM_TTS_VOICES",
 		"EARLY_MEDIA",
 		"MULTI_PARTY_CONFERENCE",
+		"AUTO_MUTE_AGENT_ON_HOLD",
 		"HIGH_VOLUME_OUTBOUND",
 		"ENHANCED_CONTACT_MONITORING",
 		"ENHANCED_CHAT_MONITORING",
@@ -2156,6 +2451,25 @@ func (LocaleCode) Values() []LocaleCode {
 	}
 }
 
+type MaskMode string
+
+// Enum values for MaskMode
+const (
+	MaskModePii        MaskMode = "PII"
+	MaskModeEntityType MaskMode = "EntityType"
+)
+
+// Values returns all known values for MaskMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaskMode) Values() []MaskMode {
+	return []MaskMode{
+		"PII",
+		"EntityType",
+	}
+}
+
 type MediaStreamType string
 
 // Enum values for MediaStreamType
@@ -2217,6 +2531,150 @@ func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
 	}
 }
 
+type MetricCreationMethod string
+
+// Enum values for MetricCreationMethod
+const (
+	MetricCreationMethodServiceLevelBuilder MetricCreationMethod = "SERVICE_LEVEL_BUILDER"
+	MetricCreationMethodMetricBuilder       MetricCreationMethod = "METRIC_BUILDER"
+)
+
+// Values returns all known values for MetricCreationMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricCreationMethod) Values() []MetricCreationMethod {
+	return []MetricCreationMethod{
+		"SERVICE_LEVEL_BUILDER",
+		"METRIC_BUILDER",
+	}
+}
+
+type MetricFilterBooleanConditionComparison string
+
+// Enum values for MetricFilterBooleanConditionComparison
+const (
+	MetricFilterBooleanConditionComparisonIsTrue  MetricFilterBooleanConditionComparison = "IS_TRUE"
+	MetricFilterBooleanConditionComparisonIsFalse MetricFilterBooleanConditionComparison = "IS_FALSE"
+)
+
+// Values returns all known values for MetricFilterBooleanConditionComparison.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterBooleanConditionComparison) Values() []MetricFilterBooleanConditionComparison {
+	return []MetricFilterBooleanConditionComparison{
+		"IS_TRUE",
+		"IS_FALSE",
+	}
+}
+
+type MetricFilterNumberConditionComparison string
+
+// Enum values for MetricFilterNumberConditionComparison
+const (
+	MetricFilterNumberConditionComparisonLesser         MetricFilterNumberConditionComparison = "LESSER"
+	MetricFilterNumberConditionComparisonLesserOrEqual  MetricFilterNumberConditionComparison = "LESSER_OR_EQUAL"
+	MetricFilterNumberConditionComparisonGreater        MetricFilterNumberConditionComparison = "GREATER"
+	MetricFilterNumberConditionComparisonGreaterOrEqual MetricFilterNumberConditionComparison = "GREATER_OR_EQUAL"
+)
+
+// Values returns all known values for MetricFilterNumberConditionComparison. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterNumberConditionComparison) Values() []MetricFilterNumberConditionComparison {
+	return []MetricFilterNumberConditionComparison{
+		"LESSER",
+		"LESSER_OR_EQUAL",
+		"GREATER",
+		"GREATER_OR_EQUAL",
+	}
+}
+
+type MetricFilterStringConditionComparison string
+
+// Enum values for MetricFilterStringConditionComparison
+const (
+	MetricFilterStringConditionComparisonMatchesAny  MetricFilterStringConditionComparison = "MATCHES_ANY"
+	MetricFilterStringConditionComparisonMatchesNone MetricFilterStringConditionComparison = "MATCHES_NONE"
+)
+
+// Values returns all known values for MetricFilterStringConditionComparison. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricFilterStringConditionComparison) Values() []MetricFilterStringConditionComparison {
+	return []MetricFilterStringConditionComparison{
+		"MATCHES_ANY",
+		"MATCHES_NONE",
+	}
+}
+
+type MetricStatus string
+
+// Enum values for MetricStatus
+const (
+	MetricStatusPublished MetricStatus = "PUBLISHED"
+	MetricStatusSaved     MetricStatus = "SAVED"
+)
+
+// Values returns all known values for MetricStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatus) Values() []MetricStatus {
+	return []MetricStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeAwsManaged      MetricType = "AWS_MANAGED"
+	MetricTypeCustomerManaged MetricType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
+type MetricUnit string
+
+// Enum values for MetricUnit
+const (
+	MetricUnitInteger MetricUnit = "INTEGER"
+	MetricUnitDouble  MetricUnit = "DOUBLE"
+	MetricUnitPercent MetricUnit = "PERCENT"
+	MetricUnitSeconds MetricUnit = "SECONDS"
+)
+
+// Values returns all known values for MetricUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricUnit) Values() []MetricUnit {
+	return []MetricUnit{
+		"INTEGER",
+		"DOUBLE",
+		"PERCENT",
+		"SECONDS",
+	}
+}
+
 type MonitorCapability string
 
 // Enum values for MonitorCapability
@@ -2270,6 +2728,25 @@ const (
 func (NextContactType) Values() []NextContactType {
 	return []NextContactType{
 		"QUICK_CONNECT",
+	}
+}
+
+type NotFoundBehaviorType string
+
+// Enum values for NotFoundBehaviorType
+const (
+	NotFoundBehaviorTypeUseDefaultValue NotFoundBehaviorType = "USE_DEFAULT_VALUE"
+	NotFoundBehaviorTypeOmit            NotFoundBehaviorType = "OMIT"
+)
+
+// Values returns all known values for NotFoundBehaviorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotFoundBehaviorType) Values() []NotFoundBehaviorType {
+	return []NotFoundBehaviorType{
+		"USE_DEFAULT_VALUE",
+		"OMIT",
 	}
 }
 
@@ -2367,6 +2844,25 @@ func (NotificationStatus) Values() []NotificationStatus {
 		"READ",
 		"UNREAD",
 		"HIDDEN",
+	}
+}
+
+type NotificationType string
+
+// Enum values for NotificationType
+const (
+	NotificationTypeWidgetView   NotificationType = "WIDGET_VIEW"
+	NotificationTypeWidgetAction NotificationType = "WIDGET_ACTION"
+)
+
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"WIDGET_VIEW",
+		"WIDGET_ACTION",
 	}
 }
 
@@ -2652,6 +3148,25 @@ func (ParticipantType) Values() []ParticipantType {
 		"AGENT",
 		"CUSTOMER",
 		"THIRDPARTY",
+	}
+}
+
+type PerformanceCategoryName string
+
+// Enum values for PerformanceCategoryName
+const (
+	PerformanceCategoryNameNeedsImprovement    PerformanceCategoryName = "NEEDS_IMPROVEMENT"
+	PerformanceCategoryNameExceedsExpectations PerformanceCategoryName = "EXCEEDS_EXPECTATIONS"
+)
+
+// Values returns all known values for PerformanceCategoryName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceCategoryName) Values() []PerformanceCategoryName {
+	return []PerformanceCategoryName{
+		"NEEDS_IMPROVEMENT",
+		"EXCEEDS_EXPECTATIONS",
 	}
 }
 
@@ -3213,6 +3728,79 @@ func (PhoneType) Values() []PhoneType {
 	}
 }
 
+type Policy string
+
+// Enum values for Policy
+const (
+	PolicyNone                Policy = "None"
+	PolicyRedactedOnly        Policy = "RedactedOnly"
+	PolicyRedactedAndOriginal Policy = "RedactedAndOriginal"
+)
+
+// Values returns all known values for Policy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Policy) Values() []Policy {
+	return []Policy{
+		"None",
+		"RedactedOnly",
+		"RedactedAndOriginal",
+	}
+}
+
+type PreEvaluationFilterOperator string
+
+// Enum values for PreEvaluationFilterOperator
+const (
+	PreEvaluationFilterOperatorEquals PreEvaluationFilterOperator = "EQUALS"
+)
+
+// Values returns all known values for PreEvaluationFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterOperator) Values() []PreEvaluationFilterOperator {
+	return []PreEvaluationFilterOperator{
+		"EQUALS",
+	}
+}
+
+type PreEvaluationFilterResourceType string
+
+// Enum values for PreEvaluationFilterResourceType
+const (
+	PreEvaluationFilterResourceTypeContact PreEvaluationFilterResourceType = "CONTACT"
+)
+
+// Values returns all known values for PreEvaluationFilterResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterResourceType) Values() []PreEvaluationFilterResourceType {
+	return []PreEvaluationFilterResourceType{
+		"CONTACT",
+	}
+}
+
+type PreEvaluationFilterType string
+
+// Enum values for PreEvaluationFilterType
+const (
+	PreEvaluationFilterTypeTag PreEvaluationFilterType = "TAG"
+)
+
+// Values returns all known values for PreEvaluationFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterType) Values() []PreEvaluationFilterType {
+	return []PreEvaluationFilterType{
+		"TAG",
+	}
+}
+
 type PropertyValidationExceptionReason string
 
 // Enum values for PropertyValidationExceptionReason
@@ -3223,6 +3811,7 @@ const (
 	PropertyValidationExceptionReasonResourceNameAlreadyExists  PropertyValidationExceptionReason = "RESOURCE_NAME_ALREADY_EXISTS"
 	PropertyValidationExceptionReasonRequiredPropertyMissing    PropertyValidationExceptionReason = "REQUIRED_PROPERTY_MISSING"
 	PropertyValidationExceptionReasonNotSupported               PropertyValidationExceptionReason = "NOT_SUPPORTED"
+	PropertyValidationExceptionReasonTypeMismatch               PropertyValidationExceptionReason = "TYPE_MISMATCH"
 )
 
 // Values returns all known values for PropertyValidationExceptionReason. Note
@@ -3238,6 +3827,7 @@ func (PropertyValidationExceptionReason) Values() []PropertyValidationExceptionR
 		"RESOURCE_NAME_ALREADY_EXISTS",
 		"REQUIRED_PROPERTY_MISSING",
 		"NOT_SUPPORTED",
+		"TYPE_MISMATCH",
 	}
 }
 
@@ -3322,6 +3912,32 @@ func (QuickConnectType) Values() []QuickConnectType {
 	}
 }
 
+type RealTimeContactAnalysisExtractedInformationFailureCode string
+
+// Enum values for RealTimeContactAnalysisExtractedInformationFailureCode
+const (
+	RealTimeContactAnalysisExtractedInformationFailureCodeQuotaExceeded                   RealTimeContactAnalysisExtractedInformationFailureCode = "QUOTA_EXCEEDED"
+	RealTimeContactAnalysisExtractedInformationFailureCodeInsufficientConversationContent RealTimeContactAnalysisExtractedInformationFailureCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	RealTimeContactAnalysisExtractedInformationFailureCodeFailedSafetyGuidelines          RealTimeContactAnalysisExtractedInformationFailureCode = "FAILED_SAFETY_GUIDELINES"
+	RealTimeContactAnalysisExtractedInformationFailureCodeInternalError                   RealTimeContactAnalysisExtractedInformationFailureCode = "INTERNAL_ERROR"
+	RealTimeContactAnalysisExtractedInformationFailureCodeMaxPackageFeatureOnly           RealTimeContactAnalysisExtractedInformationFailureCode = "MAX_PACKAGE_FEATURE_ONLY"
+)
+
+// Values returns all known values for
+// RealTimeContactAnalysisExtractedInformationFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RealTimeContactAnalysisExtractedInformationFailureCode) Values() []RealTimeContactAnalysisExtractedInformationFailureCode {
+	return []RealTimeContactAnalysisExtractedInformationFailureCode{
+		"QUOTA_EXCEEDED",
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
+		"INTERNAL_ERROR",
+		"MAX_PACKAGE_FEATURE_ONLY",
+	}
+}
+
 type RealTimeContactAnalysisOutputType string
 
 // Enum values for RealTimeContactAnalysisOutputType
@@ -3392,12 +4008,13 @@ type RealTimeContactAnalysisSegmentType string
 
 // Enum values for RealTimeContactAnalysisSegmentType
 const (
-	RealTimeContactAnalysisSegmentTypeTranscript         RealTimeContactAnalysisSegmentType = "Transcript"
-	RealTimeContactAnalysisSegmentTypeCategories         RealTimeContactAnalysisSegmentType = "Categories"
-	RealTimeContactAnalysisSegmentTypeIssues             RealTimeContactAnalysisSegmentType = "Issues"
-	RealTimeContactAnalysisSegmentTypeEvent              RealTimeContactAnalysisSegmentType = "Event"
-	RealTimeContactAnalysisSegmentTypeAttachments        RealTimeContactAnalysisSegmentType = "Attachments"
-	RealTimeContactAnalysisSegmentTypePostContactSummary RealTimeContactAnalysisSegmentType = "PostContactSummary"
+	RealTimeContactAnalysisSegmentTypeTranscript           RealTimeContactAnalysisSegmentType = "Transcript"
+	RealTimeContactAnalysisSegmentTypeCategories           RealTimeContactAnalysisSegmentType = "Categories"
+	RealTimeContactAnalysisSegmentTypeIssues               RealTimeContactAnalysisSegmentType = "Issues"
+	RealTimeContactAnalysisSegmentTypeEvent                RealTimeContactAnalysisSegmentType = "Event"
+	RealTimeContactAnalysisSegmentTypeAttachments          RealTimeContactAnalysisSegmentType = "Attachments"
+	RealTimeContactAnalysisSegmentTypePostContactSummary   RealTimeContactAnalysisSegmentType = "PostContactSummary"
+	RealTimeContactAnalysisSegmentTypeExtractedInformation RealTimeContactAnalysisSegmentType = "ExtractedInformation"
 )
 
 // Values returns all known values for RealTimeContactAnalysisSegmentType. Note
@@ -3413,6 +4030,7 @@ func (RealTimeContactAnalysisSegmentType) Values() []RealTimeContactAnalysisSegm
 		"Event",
 		"Attachments",
 		"PostContactSummary",
+		"ExtractedInformation",
 	}
 }
 
@@ -3673,6 +4291,23 @@ func (RoutingCriteriaStepStatus) Values() []RoutingCriteriaStepStatus {
 		"INACTIVE",
 		"JOINED",
 		"EXPIRED",
+	}
+}
+
+type RuleCapabilityTier string
+
+// Enum values for RuleCapabilityTier
+const (
+	RuleCapabilityTierGenerativeAI RuleCapabilityTier = "GenerativeAI"
+)
+
+// Values returns all known values for RuleCapabilityTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleCapabilityTier) Values() []RuleCapabilityTier {
+	return []RuleCapabilityTier{
+		"GenerativeAI",
 	}
 }
 
@@ -4004,6 +4639,27 @@ func (StringComparisonType) Values() []StringComparisonType {
 	}
 }
 
+type SummaryMode string
+
+// Enum values for SummaryMode
+const (
+	SummaryModePostContact          SummaryMode = "PostContact"
+	SummaryModeAutomatedInteraction SummaryMode = "AutomatedInteraction"
+	SummaryModeContactChain         SummaryMode = "ContactChain"
+)
+
+// Values returns all known values for SummaryMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryMode) Values() []SummaryMode {
+	return []SummaryMode{
+		"PostContact",
+		"AutomatedInteraction",
+		"ContactChain",
+	}
+}
+
 type TargetListType string
 
 // Enum values for TargetListType
@@ -4210,6 +4866,27 @@ func (TrafficType) Values() []TrafficType {
 	return []TrafficType{
 		"GENERAL",
 		"CAMPAIGN",
+	}
+}
+
+type TrendIndicator string
+
+// Enum values for TrendIndicator
+const (
+	TrendIndicatorPositive TrendIndicator = "POSITIVE"
+	TrendIndicatorNegative TrendIndicator = "NEGATIVE"
+	TrendIndicatorNeutral  TrendIndicator = "NEUTRAL"
+)
+
+// Values returns all known values for TrendIndicator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrendIndicator) Values() []TrendIndicator {
+	return []TrendIndicator{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
 	}
 }
 

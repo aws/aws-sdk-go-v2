@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchDeleteWorkloadEstimateUsage
+
+{"errors":[{"errorCode":"BAD_REQUEST","errorMessage":"__ErrorMessage__","id":"__Id__"},{"errorCode":"BAD_REQUEST","errorMessage":"__ErrorMessage__","id":"__Id__"}]}

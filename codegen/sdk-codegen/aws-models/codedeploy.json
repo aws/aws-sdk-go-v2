@@ -280,7 +280,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#ApplicationNameRequiredException": {
@@ -2519,6 +2520,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidTagsToAddException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2614,10 +2618,16 @@
                     "target": "com.amazonaws.codedeploy#InvalidAutoScalingGroupException"
                 },
                 {
+                    "target": "com.amazonaws.codedeploy#InvalidComputePlatformException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#InvalidDeploymentConfigNameException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidDeploymentGroupNameException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidECSServiceException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidFileExistsBehaviorException"
@@ -2627,6 +2637,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidIgnoreApplicationStopFailuresValueException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidInputException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidLoadBalancerInfoException"
@@ -3073,6 +3086,12 @@
                         "smithy.api#documentation": "<p>Information about how CodeDeploy handles files that already exist in a\n            deployment target location but weren't part of the previous successful\n            deployment.</p>\n         <p>The <code>fileExistsBehavior</code> parameter takes any of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>DISALLOW: The deployment fails. This is also the default behavior if no option\n                    is specified.</p>\n            </li>\n            <li>\n               <p>OVERWRITE: The version of the file from the application revision currently\n                    being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n               <p>RETAIN: The version of the file already on the instance is kept and used as\n                    part of the new deployment.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "deploymentMode": {
+                    "target": "com.amazonaws.codedeploy#DeploymentMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of deployment to create. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Deploys the specified revision. This is the default\n                    behavior if <code>deploymentMode</code> is not specified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTART</code>: Restarts the application on the target instances using\n                    the revision from the deployment group's last successful deployment, without\n                    downloading a new revision. <code>RESTART</code> is supported only for\n                    EC2/On-premises in-place deployments.</p>\n               <p>When <code>deploymentMode</code> is <code>RESTART</code>, the following\n                    apply:</p>\n               <ul>\n                  <li>\n                     <p>The call is rejected for Amazon ECS and Lambda\n                            deployments.</p>\n                  </li>\n                  <li>\n                     <p>The <code>revision</code> parameter (including its\n                                <code>s3Location</code> and <code>gitHubLocation</code>) must not be\n                            specified, and is rejected if provided. The revision is resolved by the\n                            service from the deployment group's last successful deployment.</p>\n                  </li>\n                  <li>\n                     <p>The <code>updateOutdatedInstancesOnly</code> parameter must not be\n                            set to <code>true</code>, and is rejected if provided.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
                 "overrideAlarmConfiguration": {
                     "target": "com.amazonaws.codedeploy#AlarmConfiguration",
                     "traits": {
@@ -3474,7 +3493,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#DeploymentConfigNameRequiredException": {
@@ -3773,7 +3793,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#DeploymentGroupNameRequiredException": {
@@ -3971,6 +3992,12 @@
                         "smithy.api#documentation": "<p>Information about how CodeDeploy handles files that already exist in a\n            deployment target location but weren't part of the previous successful\n            deployment.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DISALLOW</code>: The deployment fails. This is also the default behavior\n                    if no option is specified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OVERWRITE</code>: The version of the file from the application revision\n                    currently being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RETAIN</code>: The version of the file already on the instance is kept\n                    and used as part of the new deployment.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "deploymentMode": {
+                    "target": "com.amazonaws.codedeploy#DeploymentMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment's type. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: The deployment installed the specified revision.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTART</code>: The deployment restarted the application on the target\n                    instances using the revision from the deployment group's last successful\n                    deployment, without downloading a new revision.</p>\n            </li>\n         </ul>\n         <p>This field is absent for deployments created before <code>deploymentMode</code>\n            existed, and for <code>STANDARD</code> deployments. An absent value must not be\n            interpreted as <code>STANDARD</code>; it simply means no value was recorded either\n            way.</p>"
+                    }
+                },
                 "deploymentStatusMessages": {
                     "target": "com.amazonaws.codedeploy#DeploymentStatusMessageList",
                     "traits": {
@@ -4028,6 +4055,23 @@
             "traits": {
                 "smithy.api#documentation": "<p>The number of allowed deployments was exceeded.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.codedeploy#DeploymentMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "RESTART": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTART"
+                    }
+                }
             }
         },
         "com.amazonaws.codedeploy#DeploymentNotStartedException": {
@@ -7627,7 +7671,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codedeploy#ApplicationDoesNotExistException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#DeploymentDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#DeploymentGroupDoesNotExistException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#DeploymentIdRequiredException"
@@ -7734,7 +7784,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codedeploy#ApplicationDoesNotExistException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#DeploymentDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#DeploymentGroupDoesNotExistException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#DeploymentIdRequiredException"

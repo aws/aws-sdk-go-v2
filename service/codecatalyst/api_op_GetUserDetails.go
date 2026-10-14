@@ -4,13 +4,8 @@ package codecatalyst
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about a user.
@@ -40,21 +35,6 @@ type GetUserDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUserDetailsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUserDetailsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUserDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetUserDetailsRequest_id, *v.Id)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.GetUserDetailsRequest_userName, *v.UserName)
-	}
-}
-
 type GetUserDetailsOutput struct {
 
 	// The friendly name displayed for the user in Amazon CodeCatalyst.
@@ -78,88 +58,20 @@ type GetUserDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUserDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUserDetailsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUserDetailsResponse_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetUserDetailsResponse_displayName, v.DisplayName)
-		case schemas.GetUserDetailsResponse_primaryEmail:
-			v.PrimaryEmail = &types.EmailAddress{}
-			return v.PrimaryEmail.Deserialize(d)
-		case schemas.GetUserDetailsResponse_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.GetUserDetailsResponse_userId, v.UserId)
-		case schemas.GetUserDetailsResponse_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.GetUserDetailsResponse_userName, v.UserName)
-		case schemas.GetUserDetailsResponse_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.GetUserDetailsResponse_version, v.Version)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUserDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserDetails{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDetails, schemas.GetUserDetailsRequest, schemas.GetUserDetailsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserDetails{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserDetails, schemas.GetUserDetailsRequest, schemas.GetUserDetailsResponse), output: &GetUserDetailsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUserDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +86,8 @@ func (c *Client) addOperationGetUserDetailsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUserDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUserDetails",
-	}
 }

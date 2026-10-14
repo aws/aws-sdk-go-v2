@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets detailed information about the individual batches within an import task,
@@ -49,6 +48,25 @@ type DescribeImportTaskBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportTaskBatchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportTaskBatchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportTaskBatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportStatusList(s, schemas.DescribeImportTaskBatchesRequest_batchImportStatus, v.BatchImportStatus)
+	if v.ImportId != nil {
+		s.WriteString(schemas.DescribeImportTaskBatchesRequest_importId, *v.ImportId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeImportTaskBatchesRequest_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImportTaskBatchesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeImportTaskBatchesOutput struct {
 
 	// The list of import batches that match the request filters.
@@ -70,77 +88,63 @@ type DescribeImportTaskBatchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportTaskBatchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportTaskBatchesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportTaskBatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportBatchList(s, schemas.DescribeImportTaskBatchesResponse_importBatches, v.ImportBatches)
+	if v.ImportId != nil {
+		s.WriteString(schemas.DescribeImportTaskBatchesResponse_importId, *v.ImportId)
+	}
+	if v.ImportSourceArn != nil {
+		s.WriteString(schemas.DescribeImportTaskBatchesResponse_importSourceArn, *v.ImportSourceArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImportTaskBatchesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeImportTaskBatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImportTaskBatchesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImportTaskBatchesResponse_importBatches:
+			return deserializeImportBatchList(d, schemas.DescribeImportTaskBatchesResponse_importBatches, &v.ImportBatches)
+		case schemas.DescribeImportTaskBatchesResponse_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.DescribeImportTaskBatchesResponse_importId, v.ImportId)
+		case schemas.DescribeImportTaskBatchesResponse_importSourceArn:
+			v.ImportSourceArn = new(string)
+			return d.ReadString(schemas.DescribeImportTaskBatchesResponse_importSourceArn, v.ImportSourceArn)
+		case schemas.DescribeImportTaskBatchesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImportTaskBatchesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImportTaskBatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImportTaskBatches, schemas.DescribeImportTaskBatchesRequest, schemas.DescribeImportTaskBatchesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImportTaskBatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImportTaskBatches, schemas.DescribeImportTaskBatchesRequest, schemas.DescribeImportTaskBatchesResponse), output: &DescribeImportTaskBatchesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImportTaskBatches{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeImportTaskBatches"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeImportTaskBatchesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImportTaskBatches(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +159,8 @@ func (c *Client) addOperationDescribeImportTaskBatchesMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeImportTaskBatches(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeImportTaskBatches",
-	}
 }

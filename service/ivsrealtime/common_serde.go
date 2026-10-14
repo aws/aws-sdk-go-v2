@@ -284,6 +284,7 @@ func serializeThumbnailStorageTypeList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func deserializeCompositionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CompositionSummary) error {
+	*v = make([]types.CompositionSummary, 0)
 	var vv types.CompositionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CompositionSummary{}
@@ -297,6 +298,7 @@ func deserializeCompositionSummaryList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeCompositionThumbnailConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CompositionThumbnailConfiguration) error {
+	*v = make([]types.CompositionThumbnailConfiguration, 0)
 	var vv types.CompositionThumbnailConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CompositionThumbnailConfiguration{}
@@ -310,6 +312,7 @@ func deserializeCompositionThumbnailConfigurationList(d smithy.ShapeDeserializer
 }
 
 func deserializeDestinationConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DestinationConfiguration) error {
+	*v = make([]types.DestinationConfiguration, 0)
 	var vv types.DestinationConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DestinationConfiguration{}
@@ -323,6 +326,7 @@ func deserializeDestinationConfigurationList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Destination) error {
+	*v = make([]types.Destination, 0)
 	var vv types.Destination
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Destination{}
@@ -336,6 +340,7 @@ func deserializeDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeDestinationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DestinationSummary) error {
+	*v = make([]types.DestinationSummary, 0)
 	var vv types.DestinationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DestinationSummary{}
@@ -349,6 +354,7 @@ func deserializeDestinationSummaryList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeEncoderConfigurationArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -362,6 +368,7 @@ func deserializeEncoderConfigurationArnList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeEncoderConfigurationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EncoderConfigurationSummary) error {
+	*v = make([]types.EncoderConfigurationSummary, 0)
 	var vv types.EncoderConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EncoderConfigurationSummary{}
@@ -375,6 +382,7 @@ func deserializeEncoderConfigurationSummaryList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Event) error {
+	*v = make([]types.Event, 0)
 	var vv types.Event
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Event{}
@@ -388,6 +396,7 @@ func deserializeEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeIngestConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IngestConfigurationSummary) error {
+	*v = make([]types.IngestConfigurationSummary, 0)
 	var vv types.IngestConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IngestConfigurationSummary{}
@@ -401,6 +410,7 @@ func deserializeIngestConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeParticipantList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantSummary) error {
+	*v = make([]types.ParticipantSummary, 0)
 	var vv types.ParticipantSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParticipantSummary{}
@@ -414,6 +424,7 @@ func deserializeParticipantList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeParticipantRecordingMediaTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantRecordingMediaType) error {
+	*v = make([]types.ParticipantRecordingMediaType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -427,6 +438,7 @@ func deserializeParticipantRecordingMediaTypeList(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeParticipantReplicaList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantReplica) error {
+	*v = make([]types.ParticipantReplica, 0)
 	var vv types.ParticipantReplica
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParticipantReplica{}
@@ -440,6 +452,7 @@ func deserializeParticipantReplicaList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeParticipantTokenCapabilities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantTokenCapability) error {
+	*v = make([]types.ParticipantTokenCapability, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -453,6 +466,7 @@ func deserializeParticipantTokenCapabilities(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeParticipantTokenConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantTokenConfiguration) error {
+	*v = make([]types.ParticipantTokenConfiguration, 0)
 	var vv types.ParticipantTokenConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParticipantTokenConfiguration{}
@@ -466,6 +480,7 @@ func deserializeParticipantTokenConfigurations(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeParticipantTokenList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipantToken) error {
+	*v = make([]types.ParticipantToken, 0)
 	var vv types.ParticipantToken
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParticipantToken{}
@@ -479,6 +494,7 @@ func deserializeParticipantTokenList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePublicKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PublicKeySummary) error {
+	*v = make([]types.PublicKeySummary, 0)
 	var vv types.PublicKeySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PublicKeySummary{}
@@ -492,6 +508,7 @@ func deserializePublicKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeRedundantIngestCredentials(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RedundantIngestCredential) error {
+	*v = make([]types.RedundantIngestCredential, 0)
 	var vv types.RedundantIngestCredential
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RedundantIngestCredential{}
@@ -505,6 +522,7 @@ func deserializeRedundantIngestCredentials(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeStageSessionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StageSessionSummary) error {
+	*v = make([]types.StageSessionSummary, 0)
 	var vv types.StageSessionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StageSessionSummary{}
@@ -518,6 +536,7 @@ func deserializeStageSessionList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeStageSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StageSummary) error {
+	*v = make([]types.StageSummary, 0)
 	var vv types.StageSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StageSummary{}
@@ -531,6 +550,7 @@ func deserializeStageSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeStorageConfigurationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StorageConfigurationSummary) error {
+	*v = make([]types.StorageConfigurationSummary, 0)
 	var vv types.StorageConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StorageConfigurationSummary{}
@@ -544,6 +564,7 @@ func deserializeStorageConfigurationSummaryList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -557,6 +578,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeThumbnailStorageTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ThumbnailStorageType) error {
+	*v = make([]types.ThumbnailStorageType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -609,6 +631,13 @@ func deserializeParticipantAttributes(d smithy.ShapeDeserializer, s *smithy.Sche
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -623,6 +652,13 @@ func deserializeParticipantTokenAttributes(d smithy.ShapeDeserializer, s *smithy
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -637,6 +673,13 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

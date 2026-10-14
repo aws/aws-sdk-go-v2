@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.ListRecoveryPoints
+
+{"endTime":946684800,"maxResults":1,"namespaceArn":"__NamespaceArn__","namespaceName":"__NamespaceName__","nextToken":"__NextToken__","startTime":946684800}

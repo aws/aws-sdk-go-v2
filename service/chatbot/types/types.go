@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -29,34 +27,6 @@ type AccountPreferences struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountPreferences) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountPreferences)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrainingDataCollectionEnabled != nil {
-		s.WriteBool(schemas.AccountPreferences_TrainingDataCollectionEnabled, *v.TrainingDataCollectionEnabled)
-	}
-	if v.UserAuthorizationRequired != nil {
-		s.WriteBool(schemas.AccountPreferences_UserAuthorizationRequired, *v.UserAuthorizationRequired)
-	}
-}
-func (v *AccountPreferences) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountPreferences, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountPreferences_TrainingDataCollectionEnabled:
-			v.TrainingDataCollectionEnabled = new(bool)
-			return d.ReadBool(schemas.AccountPreferences_TrainingDataCollectionEnabled, v.TrainingDataCollectionEnabled)
-		case schemas.AccountPreferences_UserAuthorizationRequired:
-			v.UserAuthorizationRequired = new(bool)
-			return d.ReadBool(schemas.AccountPreferences_UserAuthorizationRequired, v.UserAuthorizationRequired)
-		}
-		return nil
-	})
-}
-
 // A listing of an association with a channel configuration.
 type AssociationListing struct {
 
@@ -66,28 +36,6 @@ type AssociationListing struct {
 	Resource *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociationListing) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociationListing)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociationListing) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Resource != nil {
-		s.WriteString(schemas.AssociationListing_Resource, *v.Resource)
-	}
-}
-func (v *AssociationListing) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociationListing, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociationListing_Resource:
-			v.Resource = new(string)
-			return d.ReadString(schemas.AssociationListing_Resource, v.Resource)
-		}
-		return nil
-	})
 }
 
 // An AWS Chatbot configuration for Amazon Chime.
@@ -146,70 +94,6 @@ type ChimeWebhookConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChimeWebhookConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChimeWebhookConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChimeWebhookConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_ConfigurationName, *v.ConfigurationName)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_LoggingLevel, *v.LoggingLevel)
-	}
-	serializeSnsTopicArnList(s, schemas.ChimeWebhookConfiguration_SnsTopicArns, v.SnsTopicArns)
-	if v.State != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_State, *v.State)
-	}
-	if v.StateReason != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_StateReason, *v.StateReason)
-	}
-	serializeTags(s, schemas.ChimeWebhookConfiguration_Tags, v.Tags)
-	if v.WebhookDescription != nil {
-		s.WriteString(schemas.ChimeWebhookConfiguration_WebhookDescription, *v.WebhookDescription)
-	}
-}
-func (v *ChimeWebhookConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChimeWebhookConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChimeWebhookConfiguration_ChatConfigurationArn:
-			v.ChatConfigurationArn = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_ChatConfigurationArn, v.ChatConfigurationArn)
-		case schemas.ChimeWebhookConfiguration_ConfigurationName:
-			v.ConfigurationName = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_ConfigurationName, v.ConfigurationName)
-		case schemas.ChimeWebhookConfiguration_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_IamRoleArn, v.IamRoleArn)
-		case schemas.ChimeWebhookConfiguration_LoggingLevel:
-			v.LoggingLevel = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_LoggingLevel, v.LoggingLevel)
-		case schemas.ChimeWebhookConfiguration_SnsTopicArns:
-			return deserializeSnsTopicArnList(d, schemas.ChimeWebhookConfiguration_SnsTopicArns, &v.SnsTopicArns)
-		case schemas.ChimeWebhookConfiguration_State:
-			v.State = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_State, v.State)
-		case schemas.ChimeWebhookConfiguration_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_StateReason, v.StateReason)
-		case schemas.ChimeWebhookConfiguration_Tags:
-			return deserializeTags(d, schemas.ChimeWebhookConfiguration_Tags, &v.Tags)
-		case schemas.ChimeWebhookConfiguration_WebhookDescription:
-			v.WebhookDescription = new(string)
-			return d.ReadString(schemas.ChimeWebhookConfiguration_WebhookDescription, v.WebhookDescription)
-		}
-		return nil
-	})
-}
-
 // A Microsoft Teams team that is authorized with AWS Chatbot.
 type ConfiguredTeam struct {
 
@@ -245,52 +129,6 @@ type ConfiguredTeam struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfiguredTeam) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfiguredTeam)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConfiguredTeam) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.State != nil {
-		s.WriteString(schemas.ConfiguredTeam_State, *v.State)
-	}
-	if v.StateReason != nil {
-		s.WriteString(schemas.ConfiguredTeam_StateReason, *v.StateReason)
-	}
-	if v.TeamId != nil {
-		s.WriteString(schemas.ConfiguredTeam_TeamId, *v.TeamId)
-	}
-	if v.TeamName != nil {
-		s.WriteString(schemas.ConfiguredTeam_TeamName, *v.TeamName)
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.ConfiguredTeam_TenantId, *v.TenantId)
-	}
-}
-func (v *ConfiguredTeam) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfiguredTeam, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfiguredTeam_State:
-			v.State = new(string)
-			return d.ReadString(schemas.ConfiguredTeam_State, v.State)
-		case schemas.ConfiguredTeam_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.ConfiguredTeam_StateReason, v.StateReason)
-		case schemas.ConfiguredTeam_TeamId:
-			v.TeamId = new(string)
-			return d.ReadString(schemas.ConfiguredTeam_TeamId, v.TeamId)
-		case schemas.ConfiguredTeam_TeamName:
-			v.TeamName = new(string)
-			return d.ReadString(schemas.ConfiguredTeam_TeamName, v.TeamName)
-		case schemas.ConfiguredTeam_TenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.ConfiguredTeam_TenantId, v.TenantId)
-		}
-		return nil
-	})
-}
-
 // Represents a parameterized command that can be invoked as an alias or as a
 // notification button in the chat client.
 type CustomAction struct {
@@ -319,51 +157,6 @@ type CustomAction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionName != nil {
-		s.WriteString(schemas.CustomAction_ActionName, *v.ActionName)
-	}
-	if v.AliasName != nil {
-		s.WriteString(schemas.CustomAction_AliasName, *v.AliasName)
-	}
-	serializeCustomActionAttachmentList(s, schemas.CustomAction_Attachments, v.Attachments)
-	if v.CustomActionArn != nil {
-		s.WriteString(schemas.CustomAction_CustomActionArn, *v.CustomActionArn)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.CustomAction_Definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CustomAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomAction_ActionName:
-			v.ActionName = new(string)
-			return d.ReadString(schemas.CustomAction_ActionName, v.ActionName)
-		case schemas.CustomAction_AliasName:
-			v.AliasName = new(string)
-			return d.ReadString(schemas.CustomAction_AliasName, v.AliasName)
-		case schemas.CustomAction_Attachments:
-			return deserializeCustomActionAttachmentList(d, schemas.CustomAction_Attachments, &v.Attachments)
-		case schemas.CustomAction_CustomActionArn:
-			v.CustomActionArn = new(string)
-			return d.ReadString(schemas.CustomAction_CustomActionArn, v.CustomActionArn)
-		case schemas.CustomAction_Definition:
-			v.Definition = &CustomActionDefinition{}
-			return v.Definition.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Defines when a custom action button should be attached to a notification.
 type CustomActionAttachment struct {
 
@@ -381,40 +174,6 @@ type CustomActionAttachment struct {
 	Variables map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomActionAttachment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomActionAttachment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomActionAttachment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ButtonText != nil {
-		s.WriteString(schemas.CustomActionAttachment_ButtonText, *v.ButtonText)
-	}
-	serializeCustomActionAttachmentCriteriaList(s, schemas.CustomActionAttachment_Criteria, v.Criteria)
-	if v.NotificationType != nil {
-		s.WriteString(schemas.CustomActionAttachment_NotificationType, *v.NotificationType)
-	}
-	serializeCustomActionAttachmentVariables(s, schemas.CustomActionAttachment_Variables, v.Variables)
-}
-func (v *CustomActionAttachment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomActionAttachment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomActionAttachment_ButtonText:
-			v.ButtonText = new(string)
-			return d.ReadString(schemas.CustomActionAttachment_ButtonText, v.ButtonText)
-		case schemas.CustomActionAttachment_Criteria:
-			return deserializeCustomActionAttachmentCriteriaList(d, schemas.CustomActionAttachment_Criteria, &v.Criteria)
-		case schemas.CustomActionAttachment_NotificationType:
-			v.NotificationType = new(string)
-			return d.ReadString(schemas.CustomActionAttachment_NotificationType, v.NotificationType)
-		case schemas.CustomActionAttachment_Variables:
-			return deserializeCustomActionAttachmentVariables(d, schemas.CustomActionAttachment_Variables, &v.Variables)
-		}
-		return nil
-	})
 }
 
 // A criteria for when a button should be shown based on values in the notification
@@ -437,44 +196,6 @@ type CustomActionAttachmentCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomActionAttachmentCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomActionAttachmentCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomActionAttachmentCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.CustomActionAttachmentCriteria_Operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.CustomActionAttachmentCriteria_Value, *v.Value)
-	}
-	if v.VariableName != nil {
-		s.WriteString(schemas.CustomActionAttachmentCriteria_VariableName, *v.VariableName)
-	}
-}
-func (v *CustomActionAttachmentCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomActionAttachmentCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomActionAttachmentCriteria_Operator:
-			var ev string
-			if err := d.ReadString(schemas.CustomActionAttachmentCriteria_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = CustomActionAttachmentCriteriaOperator(ev)
-			return nil
-		case schemas.CustomActionAttachmentCriteria_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.CustomActionAttachmentCriteria_Value, v.Value)
-		case schemas.CustomActionAttachmentCriteria_VariableName:
-			v.VariableName = new(string)
-			return d.ReadString(schemas.CustomActionAttachmentCriteria_VariableName, v.VariableName)
-		}
-		return nil
-	})
-}
-
 // The definition of the command to run when invoked as an alias or as an action
 // button.
 type CustomActionDefinition struct {
@@ -486,28 +207,6 @@ type CustomActionDefinition struct {
 	CommandText *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomActionDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomActionDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CommandText != nil {
-		s.WriteString(schemas.CustomActionDefinition_CommandText, *v.CommandText)
-	}
-}
-func (v *CustomActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomActionDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomActionDefinition_CommandText:
-			v.CommandText = new(string)
-			return d.ReadString(schemas.CustomActionDefinition_CommandText, v.CommandText)
-		}
-		return nil
-	})
 }
 
 // An AWS Chatbot configuration for Slack.
@@ -586,97 +285,6 @@ type SlackChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SlackChannelConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlackChannelConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlackChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_ConfigurationName, *v.ConfigurationName)
-	}
-	serializeGuardrailPolicyArnList(s, schemas.SlackChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_LoggingLevel, *v.LoggingLevel)
-	}
-	if v.SlackChannelId != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_SlackChannelId, *v.SlackChannelId)
-	}
-	if v.SlackChannelName != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_SlackChannelName, *v.SlackChannelName)
-	}
-	if v.SlackTeamId != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_SlackTeamId, *v.SlackTeamId)
-	}
-	if v.SlackTeamName != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_SlackTeamName, *v.SlackTeamName)
-	}
-	serializeSnsTopicArnList(s, schemas.SlackChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
-	if v.State != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_State, *v.State)
-	}
-	if v.StateReason != nil {
-		s.WriteString(schemas.SlackChannelConfiguration_StateReason, *v.StateReason)
-	}
-	serializeTags(s, schemas.SlackChannelConfiguration_Tags, v.Tags)
-	if v.UserAuthorizationRequired != nil {
-		s.WriteBool(schemas.SlackChannelConfiguration_UserAuthorizationRequired, *v.UserAuthorizationRequired)
-	}
-}
-func (v *SlackChannelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlackChannelConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlackChannelConfiguration_ChatConfigurationArn:
-			v.ChatConfigurationArn = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_ChatConfigurationArn, v.ChatConfigurationArn)
-		case schemas.SlackChannelConfiguration_ConfigurationName:
-			v.ConfigurationName = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_ConfigurationName, v.ConfigurationName)
-		case schemas.SlackChannelConfiguration_GuardrailPolicyArns:
-			return deserializeGuardrailPolicyArnList(d, schemas.SlackChannelConfiguration_GuardrailPolicyArns, &v.GuardrailPolicyArns)
-		case schemas.SlackChannelConfiguration_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_IamRoleArn, v.IamRoleArn)
-		case schemas.SlackChannelConfiguration_LoggingLevel:
-			v.LoggingLevel = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_LoggingLevel, v.LoggingLevel)
-		case schemas.SlackChannelConfiguration_SlackChannelId:
-			v.SlackChannelId = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_SlackChannelId, v.SlackChannelId)
-		case schemas.SlackChannelConfiguration_SlackChannelName:
-			v.SlackChannelName = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_SlackChannelName, v.SlackChannelName)
-		case schemas.SlackChannelConfiguration_SlackTeamId:
-			v.SlackTeamId = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_SlackTeamId, v.SlackTeamId)
-		case schemas.SlackChannelConfiguration_SlackTeamName:
-			v.SlackTeamName = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_SlackTeamName, v.SlackTeamName)
-		case schemas.SlackChannelConfiguration_SnsTopicArns:
-			return deserializeSnsTopicArnList(d, schemas.SlackChannelConfiguration_SnsTopicArns, &v.SnsTopicArns)
-		case schemas.SlackChannelConfiguration_State:
-			v.State = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_State, v.State)
-		case schemas.SlackChannelConfiguration_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.SlackChannelConfiguration_StateReason, v.StateReason)
-		case schemas.SlackChannelConfiguration_Tags:
-			return deserializeTags(d, schemas.SlackChannelConfiguration_Tags, &v.Tags)
-		case schemas.SlackChannelConfiguration_UserAuthorizationRequired:
-			v.UserAuthorizationRequired = new(bool)
-			return d.ReadBool(schemas.SlackChannelConfiguration_UserAuthorizationRequired, v.UserAuthorizationRequired)
-		}
-		return nil
-	})
-}
-
 // Identifes a user level permission for a channel configuration.
 type SlackUserIdentity struct {
 
@@ -712,52 +320,6 @@ type SlackUserIdentity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SlackUserIdentity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlackUserIdentity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlackUserIdentity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsUserIdentity != nil {
-		s.WriteString(schemas.SlackUserIdentity_AwsUserIdentity, *v.AwsUserIdentity)
-	}
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.SlackUserIdentity_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.SlackUserIdentity_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.SlackTeamId != nil {
-		s.WriteString(schemas.SlackUserIdentity_SlackTeamId, *v.SlackTeamId)
-	}
-	if v.SlackUserId != nil {
-		s.WriteString(schemas.SlackUserIdentity_SlackUserId, *v.SlackUserId)
-	}
-}
-func (v *SlackUserIdentity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlackUserIdentity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlackUserIdentity_AwsUserIdentity:
-			v.AwsUserIdentity = new(string)
-			return d.ReadString(schemas.SlackUserIdentity_AwsUserIdentity, v.AwsUserIdentity)
-		case schemas.SlackUserIdentity_ChatConfigurationArn:
-			v.ChatConfigurationArn = new(string)
-			return d.ReadString(schemas.SlackUserIdentity_ChatConfigurationArn, v.ChatConfigurationArn)
-		case schemas.SlackUserIdentity_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.SlackUserIdentity_IamRoleArn, v.IamRoleArn)
-		case schemas.SlackUserIdentity_SlackTeamId:
-			v.SlackTeamId = new(string)
-			return d.ReadString(schemas.SlackUserIdentity_SlackTeamId, v.SlackTeamId)
-		case schemas.SlackUserIdentity_SlackUserId:
-			v.SlackUserId = new(string)
-			return d.ReadString(schemas.SlackUserIdentity_SlackUserId, v.SlackUserId)
-		}
-		return nil
-	})
-}
-
 // A Slack workspace.
 type SlackWorkspace struct {
 
@@ -783,46 +345,6 @@ type SlackWorkspace struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SlackWorkspace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SlackWorkspace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SlackWorkspace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SlackTeamId != nil {
-		s.WriteString(schemas.SlackWorkspace_SlackTeamId, *v.SlackTeamId)
-	}
-	if v.SlackTeamName != nil {
-		s.WriteString(schemas.SlackWorkspace_SlackTeamName, *v.SlackTeamName)
-	}
-	if v.State != nil {
-		s.WriteString(schemas.SlackWorkspace_State, *v.State)
-	}
-	if v.StateReason != nil {
-		s.WriteString(schemas.SlackWorkspace_StateReason, *v.StateReason)
-	}
-}
-func (v *SlackWorkspace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SlackWorkspace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SlackWorkspace_SlackTeamId:
-			v.SlackTeamId = new(string)
-			return d.ReadString(schemas.SlackWorkspace_SlackTeamId, v.SlackTeamId)
-		case schemas.SlackWorkspace_SlackTeamName:
-			v.SlackTeamName = new(string)
-			return d.ReadString(schemas.SlackWorkspace_SlackTeamName, v.SlackTeamName)
-		case schemas.SlackWorkspace_State:
-			v.State = new(string)
-			return d.ReadString(schemas.SlackWorkspace_State, v.State)
-		case schemas.SlackWorkspace_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.SlackWorkspace_StateReason, v.StateReason)
-		}
-		return nil
-	})
-}
-
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag
 // values are both required, but tag values can be empty (null) strings.
 //
@@ -844,34 +366,6 @@ type Tag struct {
 	TagValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TagKey != nil {
-		s.WriteString(schemas.Tag_TagKey, *v.TagKey)
-	}
-	if v.TagValue != nil {
-		s.WriteString(schemas.Tag_TagValue, *v.TagValue)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_TagKey:
-			v.TagKey = new(string)
-			return d.ReadString(schemas.Tag_TagKey, v.TagKey)
-		case schemas.Tag_TagValue:
-			v.TagValue = new(string)
-			return d.ReadString(schemas.Tag_TagValue, v.TagValue)
-		}
-		return nil
-	})
 }
 
 // An AWS Chatbot configuration for Microsoft Teams.
@@ -956,103 +450,6 @@ type TeamsChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TeamsChannelConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TeamsChannelConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TeamsChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_ChannelId, *v.ChannelId)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_ChannelName, *v.ChannelName)
-	}
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_ConfigurationName, *v.ConfigurationName)
-	}
-	serializeGuardrailPolicyArnList(s, schemas.TeamsChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_LoggingLevel, *v.LoggingLevel)
-	}
-	serializeSnsTopicArnList(s, schemas.TeamsChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
-	if v.State != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_State, *v.State)
-	}
-	if v.StateReason != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_StateReason, *v.StateReason)
-	}
-	serializeTags(s, schemas.TeamsChannelConfiguration_Tags, v.Tags)
-	if v.TeamId != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_TeamId, *v.TeamId)
-	}
-	if v.TeamName != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_TeamName, *v.TeamName)
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.TeamsChannelConfiguration_TenantId, *v.TenantId)
-	}
-	if v.UserAuthorizationRequired != nil {
-		s.WriteBool(schemas.TeamsChannelConfiguration_UserAuthorizationRequired, *v.UserAuthorizationRequired)
-	}
-}
-func (v *TeamsChannelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TeamsChannelConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TeamsChannelConfiguration_ChannelId:
-			v.ChannelId = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_ChannelId, v.ChannelId)
-		case schemas.TeamsChannelConfiguration_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_ChannelName, v.ChannelName)
-		case schemas.TeamsChannelConfiguration_ChatConfigurationArn:
-			v.ChatConfigurationArn = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_ChatConfigurationArn, v.ChatConfigurationArn)
-		case schemas.TeamsChannelConfiguration_ConfigurationName:
-			v.ConfigurationName = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_ConfigurationName, v.ConfigurationName)
-		case schemas.TeamsChannelConfiguration_GuardrailPolicyArns:
-			return deserializeGuardrailPolicyArnList(d, schemas.TeamsChannelConfiguration_GuardrailPolicyArns, &v.GuardrailPolicyArns)
-		case schemas.TeamsChannelConfiguration_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_IamRoleArn, v.IamRoleArn)
-		case schemas.TeamsChannelConfiguration_LoggingLevel:
-			v.LoggingLevel = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_LoggingLevel, v.LoggingLevel)
-		case schemas.TeamsChannelConfiguration_SnsTopicArns:
-			return deserializeSnsTopicArnList(d, schemas.TeamsChannelConfiguration_SnsTopicArns, &v.SnsTopicArns)
-		case schemas.TeamsChannelConfiguration_State:
-			v.State = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_State, v.State)
-		case schemas.TeamsChannelConfiguration_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_StateReason, v.StateReason)
-		case schemas.TeamsChannelConfiguration_Tags:
-			return deserializeTags(d, schemas.TeamsChannelConfiguration_Tags, &v.Tags)
-		case schemas.TeamsChannelConfiguration_TeamId:
-			v.TeamId = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_TeamId, v.TeamId)
-		case schemas.TeamsChannelConfiguration_TeamName:
-			v.TeamName = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_TeamName, v.TeamName)
-		case schemas.TeamsChannelConfiguration_TenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.TeamsChannelConfiguration_TenantId, v.TenantId)
-		case schemas.TeamsChannelConfiguration_UserAuthorizationRequired:
-			v.UserAuthorizationRequired = new(bool)
-			return d.ReadBool(schemas.TeamsChannelConfiguration_UserAuthorizationRequired, v.UserAuthorizationRequired)
-		}
-		return nil
-	})
-}
-
 // Identifes a user level permission for a channel configuration.
 type TeamsUserIdentity struct {
 
@@ -1098,64 +495,6 @@ type TeamsUserIdentity struct {
 	UserId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TeamsUserIdentity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TeamsUserIdentity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TeamsUserIdentity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsUserIdentity != nil {
-		s.WriteString(schemas.TeamsUserIdentity_AwsUserIdentity, *v.AwsUserIdentity)
-	}
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.TeamsUserIdentity_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.TeamsUserIdentity_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.TeamId != nil {
-		s.WriteString(schemas.TeamsUserIdentity_TeamId, *v.TeamId)
-	}
-	if v.TeamsChannelId != nil {
-		s.WriteString(schemas.TeamsUserIdentity_TeamsChannelId, *v.TeamsChannelId)
-	}
-	if v.TeamsTenantId != nil {
-		s.WriteString(schemas.TeamsUserIdentity_TeamsTenantId, *v.TeamsTenantId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.TeamsUserIdentity_UserId, *v.UserId)
-	}
-}
-func (v *TeamsUserIdentity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TeamsUserIdentity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TeamsUserIdentity_AwsUserIdentity:
-			v.AwsUserIdentity = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_AwsUserIdentity, v.AwsUserIdentity)
-		case schemas.TeamsUserIdentity_ChatConfigurationArn:
-			v.ChatConfigurationArn = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_ChatConfigurationArn, v.ChatConfigurationArn)
-		case schemas.TeamsUserIdentity_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_IamRoleArn, v.IamRoleArn)
-		case schemas.TeamsUserIdentity_TeamId:
-			v.TeamId = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_TeamId, v.TeamId)
-		case schemas.TeamsUserIdentity_TeamsChannelId:
-			v.TeamsChannelId = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_TeamsChannelId, v.TeamsChannelId)
-		case schemas.TeamsUserIdentity_TeamsTenantId:
-			v.TeamsTenantId = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_TeamsTenantId, v.TeamsTenantId)
-		case schemas.TeamsUserIdentity_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.TeamsUserIdentity_UserId, v.UserId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

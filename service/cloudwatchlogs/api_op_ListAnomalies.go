@@ -5,10 +5,10 @@ package cloudwatchlogs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of anomalies that log anomaly detectors have found. For details
@@ -49,6 +49,27 @@ type ListAnomaliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnomaliesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnomaliesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnomaliesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorArn != nil {
+		s.WriteString(schemas.ListAnomaliesRequest_anomalyDetectorArn, *v.AnomalyDetectorArn)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAnomaliesRequest_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnomaliesRequest_nextToken, *v.NextToken)
+	}
+	if v.SuppressionState != "" {
+		s.WriteString(schemas.ListAnomaliesRequest_suppressionState, string(v.SuppressionState))
+	}
+}
+
 type ListAnomaliesOutput struct {
 
 	// An array of structures, where each structure contains information about one
@@ -64,74 +85,48 @@ type ListAnomaliesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnomaliesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnomaliesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnomaliesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalies(s, schemas.ListAnomaliesResponse_anomalies, v.Anomalies)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnomaliesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnomaliesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnomaliesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnomaliesResponse_anomalies:
+			return deserializeAnomalies(d, schemas.ListAnomaliesResponse_anomalies, &v.Anomalies)
+		case schemas.ListAnomaliesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnomaliesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnomaliesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomalies, schemas.ListAnomaliesRequest, schemas.ListAnomaliesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAnomalies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomalies, schemas.ListAnomaliesRequest, schemas.ListAnomaliesResponse), output: &ListAnomaliesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAnomalies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnomalies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnomalies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +139,6 @@ func (c *Client) addOperationListAnomaliesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +239,3 @@ type ListAnomaliesAPIClient interface {
 }
 
 var _ ListAnomaliesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAnomalies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAnomalies",
-	}
-}

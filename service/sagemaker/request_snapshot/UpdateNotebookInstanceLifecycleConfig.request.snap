@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateNotebookInstanceLifecycleConfig
+
+{"NotebookInstanceLifecycleConfigName":"__NotebookInstanceLifecycleConfigName__","OnCreate":[{"Content":"__Content__"},{"Content":"__Content__"}],"OnStart":[{"Content":"__Content__"},{"Content":"__Content__"}]}

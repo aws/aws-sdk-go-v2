@@ -5,12 +5,8 @@ package simpledbv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -71,36 +67,6 @@ type StartDomainExportInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDomainExportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDomainExportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDomainExportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartDomainExportRequest_clientToken, *v.ClientToken)
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.StartDomainExportRequest_domainName, *v.DomainName)
-	}
-	if v.S3Bucket != nil {
-		s.WriteString(schemas.StartDomainExportRequest_s3Bucket, *v.S3Bucket)
-	}
-	if v.S3BucketOwner != nil {
-		s.WriteString(schemas.StartDomainExportRequest_s3BucketOwner, *v.S3BucketOwner)
-	}
-	if v.S3KeyPrefix != nil {
-		s.WriteString(schemas.StartDomainExportRequest_s3KeyPrefix, *v.S3KeyPrefix)
-	}
-	if v.S3SseAlgorithm != "" {
-		s.WriteString(schemas.StartDomainExportRequest_s3SseAlgorithm, string(v.S3SseAlgorithm))
-	}
-	if v.S3SseKmsKeyId != nil {
-		s.WriteString(schemas.StartDomainExportRequest_s3SseKmsKeyId, *v.S3SseKmsKeyId)
-	}
-}
-
 type StartDomainExportOutput struct {
 
 	// The client token that was provided in the request.
@@ -124,79 +90,23 @@ type StartDomainExportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDomainExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDomainExportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartDomainExportResponse_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.StartDomainExportResponse_clientToken, v.ClientToken)
-		case schemas.StartDomainExportResponse_exportArn:
-			v.ExportArn = new(string)
-			return d.ReadString(schemas.StartDomainExportResponse_exportArn, v.ExportArn)
-		case schemas.StartDomainExportResponse_requestedAt:
-			v.RequestedAt = new(time.Time)
-			return d.ReadTime(schemas.StartDomainExportResponse_requestedAt, v.RequestedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDomainExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDomainExport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDomainExport, schemas.StartDomainExportRequest, schemas.StartDomainExportResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDomainExport{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDomainExport, schemas.StartDomainExportRequest, schemas.StartDomainExportResponse), output: &StartDomainExportOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDomainExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -206,12 +116,6 @@ func (c *Client) addOperationStartDomainExportMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpStartDomainExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDomainExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,12 +128,6 @@ func (c *Client) addOperationStartDomainExportMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,12 +167,4 @@ func (m *idempotencyToken_initializeOpStartDomainExport) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opStartDomainExportMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartDomainExport{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartDomainExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDomainExport",
-	}
 }

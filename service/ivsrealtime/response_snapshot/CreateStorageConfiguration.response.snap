@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"storageConfiguration":{"arn":"__Arn__","name":"__Name__","s3":{"bucketName":"__BucketName__"},"tags":{"key0":"__Value__"}}}

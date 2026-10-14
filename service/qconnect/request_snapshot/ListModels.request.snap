@@ -1,0 +1,3 @@
+GET /assistants/__AssistantId__/models?aiPromptType=ANSWER_GENERATION&maxResults=1&modelLifecycle=ACTIVE&nextToken=__NextToken__
+
+

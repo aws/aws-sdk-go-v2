@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"credentials":{"accessKeyId":"__AccessKeyId__","expiration":"2000-01-01T00:00:00Z","secretAccessKey":"__SecretAccessKey__","sessionToken":"__SessionToken__"}}

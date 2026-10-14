@@ -1,0 +1,5 @@
+POST /network-migration/StartNetworkMigrationMappingUpdate
+
+Content-Type: application/json
+
+{"constructs":[{"constructID":"__ConstructID__","constructType":"__ConstructType__","operation":{"merge":{"mergeConstructs":[{"constructID":"__ConstructID__","segmentID":"__SegmentID__"},{"constructID":"__ConstructID__","segmentID":"__SegmentID__"}]}},"segmentID":"__SegmentID__"},{"constructID":"__ConstructID__","constructType":"__ConstructType__","operation":{"merge":{"mergeConstructs":[{"constructID":"__ConstructID__","segmentID":"__SegmentID__"},{"constructID":"__ConstructID__","segmentID":"__SegmentID__"}]}},"segmentID":"__SegmentID__"}],"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","segments":[{"scopeTags":{"key0":"__Value__"},"segmentID":"__SegmentID__","targetAccount":"__TargetAccount__"},{"scopeTags":{"key0":"__Value__"},"segmentID":"__SegmentID__","targetAccount":"__TargetAccount__"}]}

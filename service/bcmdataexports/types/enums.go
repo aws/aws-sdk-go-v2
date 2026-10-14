@@ -8,6 +8,7 @@ type CompressionOption string
 const (
 	CompressionOptionGzip    CompressionOption = "GZIP"
 	CompressionOptionParquet CompressionOption = "PARQUET"
+	CompressionOptionZip     CompressionOption = "ZIP"
 )
 
 // Values returns all known values for CompressionOption. Note that this can be
@@ -18,6 +19,7 @@ func (CompressionOption) Values() []CompressionOption {
 	return []CompressionOption{
 		"GZIP",
 		"PARQUET",
+		"ZIP",
 	}
 }
 
@@ -57,6 +59,7 @@ const (
 	ExecutionStatusReasonInsufficientPermission ExecutionStatusReason = "INSUFFICIENT_PERMISSION"
 	ExecutionStatusReasonBillOwnerChanged       ExecutionStatusReason = "BILL_OWNER_CHANGED"
 	ExecutionStatusReasonInternalFailure        ExecutionStatusReason = "INTERNAL_FAILURE"
+	ExecutionStatusReasonDeprecated             ExecutionStatusReason = "DEPRECATED"
 )
 
 // Values returns all known values for ExecutionStatusReason. Note that this can
@@ -68,6 +71,7 @@ func (ExecutionStatusReason) Values() []ExecutionStatusReason {
 		"INSUFFICIENT_PERMISSION",
 		"BILL_OWNER_CHANGED",
 		"INTERNAL_FAILURE",
+		"DEPRECATED",
 	}
 }
 

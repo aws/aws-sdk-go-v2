@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/GetEBSVolumeRecommendations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥jvolumeArns‚j__Member__j__Member__inextTokenm__NextToken__jmaxResultsgfilters‚¢dnamegFindingfvalues‚j__Member__j__Member__¢dnamegFindingfvalues‚j__Member__j__Member__jaccountIds‚j__Member__j__Member__

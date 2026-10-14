@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeStar_connections_20191201.GetRepositoryLink
+
+{"RepositoryLinkInfo":{"ConnectionArn":"__ConnectionArn__","EncryptionKeyArn":"__EncryptionKeyArn__","OwnerId":"__OwnerId__","ProviderType":"Bitbucket","RepositoryLinkArn":"__RepositoryLinkArn__","RepositoryLinkId":"__RepositoryLinkId__","RepositoryName":"__RepositoryName__"}}

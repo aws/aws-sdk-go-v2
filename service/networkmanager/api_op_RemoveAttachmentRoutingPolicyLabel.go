@@ -4,10 +4,9 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes a routing policy label from an attachment.
@@ -41,6 +40,21 @@ type RemoveAttachmentRoutingPolicyLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttachmentRoutingPolicyLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttachmentRoutingPolicyLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttachmentRoutingPolicyLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.RemoveAttachmentRoutingPolicyLabelRequest_AttachmentId, *v.AttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.RemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+}
+
 type RemoveAttachmentRoutingPolicyLabelOutput struct {
 
 	// The ID of the attachment from which the routing policy label was removed.
@@ -58,77 +72,60 @@ type RemoveAttachmentRoutingPolicyLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttachmentRoutingPolicyLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttachmentRoutingPolicyLabelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttachmentRoutingPolicyLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId, *v.AttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+func (v *RemoveAttachmentRoutingPolicyLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAttachmentRoutingPolicyLabelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId, v.AttachmentId)
+		case schemas.RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId, v.CoreNetworkId)
+		case schemas.RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel:
+			v.RoutingPolicyLabel = new(string)
+			return d.ReadString(schemas.RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, v.RoutingPolicyLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAttachmentRoutingPolicyLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttachmentRoutingPolicyLabel, schemas.RemoveAttachmentRoutingPolicyLabelRequest, schemas.RemoveAttachmentRoutingPolicyLabelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttachmentRoutingPolicyLabel, schemas.RemoveAttachmentRoutingPolicyLabelRequest, schemas.RemoveAttachmentRoutingPolicyLabelResponse), output: &RemoveAttachmentRoutingPolicyLabelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAttachmentRoutingPolicyLabel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveAttachmentRoutingPolicyLabelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAttachmentRoutingPolicyLabel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +140,8 @@ func (c *Client) addOperationRemoveAttachmentRoutingPolicyLabelMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveAttachmentRoutingPolicyLabel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveAttachmentRoutingPolicyLabel",
-	}
 }

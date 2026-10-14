@@ -30,6 +30,26 @@ func (m *validateOpAddTagsToStream) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateChannel struct {
+}
+
+func (*validateOpCreateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStream struct {
 }
 
@@ -70,6 +90,26 @@ func (m *validateOpDecreaseStreamRetentionPeriod) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteChannel struct {
+}
+
+func (*validateOpDeleteChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannel struct {
+}
+
+func (*validateOpDescribeChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,6 +265,26 @@ func (m *validateOpIncreaseStreamRetentionPeriod) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpIncreaseStreamRetentionPeriodInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannels struct {
+}
+
+func (*validateOpListChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +610,26 @@ func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateChannel struct {
+}
+
+func (*validateOpUpdateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMaxRecordSize struct {
 }
 
@@ -590,6 +690,26 @@ func (m *validateOpUpdateStreamMode) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStreamRecordDistributionStrategy struct {
+}
+
+func (*validateOpUpdateStreamRecordDistributionStrategy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStreamRecordDistributionStrategy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStreamRecordDistributionStrategyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStreamRecordDistributionStrategyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStreamWarmThroughput struct {
 }
 
@@ -614,6 +734,10 @@ func addOpAddTagsToStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTagsToStream{}, middleware.After)
 }
 
+func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
 func addOpCreateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStream{}, middleware.After)
 }
@@ -622,8 +746,16 @@ func addOpDecreaseStreamRetentionPeriodValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDecreaseStreamRetentionPeriod{}, middleware.After)
 }
 
+func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
+func addOpDescribeChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannel{}, middleware.After)
 }
 
 func addOpDisableEnhancedMonitoringValidationMiddleware(stack *middleware.Stack) error {
@@ -648,6 +780,10 @@ func addOpGetShardIteratorValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpIncreaseStreamRetentionPeriodValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpIncreaseStreamRetentionPeriod{}, middleware.After)
+}
+
+func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannels{}, middleware.After)
 }
 
 func addOpListShardsValidationMiddleware(stack *middleware.Stack) error {
@@ -714,6 +850,10 @@ func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
 }
 
+func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
 func addOpUpdateMaxRecordSizeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMaxRecordSize{}, middleware.After)
 }
@@ -726,8 +866,155 @@ func addOpUpdateStreamModeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStreamMode{}, middleware.After)
 }
 
+func addOpUpdateStreamRecordDistributionStrategyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStreamRecordDistributionStrategy{}, middleware.After)
+}
+
 func addOpUpdateStreamWarmThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStreamWarmThroughput{}, middleware.After)
+}
+
+func validateChannelEncryptionConfiguration(v *types.ChannelEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelEncryptionConfiguration"}
+	if len(v.EncryptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionType"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelLoggingConfiguration(v *types.ChannelLoggingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelLoggingConfiguration"}
+	if v.CloudWatchLogs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogs"))
+	} else if v.CloudWatchLogs != nil {
+		if err := validateCloudWatchLogs(v.CloudWatchLogs); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelLoggingUpdateInput(v *types.ChannelLoggingUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelLoggingUpdateInput"}
+	if v.CloudWatchLogs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogs"))
+	} else if v.CloudWatchLogs != nil {
+		if err := validateCloudWatchLogsUpdateInput(v.CloudWatchLogs); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelStreamConfiguration(v *types.ChannelStreamConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelStreamConfiguration"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if v.RecordConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordConfiguration"))
+	} else if v.RecordConfiguration != nil {
+		if err := validateRecordConfiguration(v.RecordConfiguration); err != nil {
+			invalidParams.AddNested("RecordConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelStreamConfigurationList(v []types.ChannelStreamConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelStreamConfigurationList"}
+	for i := range v {
+		if err := validateChannelStreamConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogs(v *types.CloudWatchLogs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogs"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogsUpdateInput(v *types.CloudWatchLogsUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsUpdateInput"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeadLetterQueueS3Configuration(v *types.DeadLetterQueueS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeadLetterQueueS3Configuration"}
+	if v.BucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketARN"))
+	}
+	if v.ExpectedBucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpectedBucketOwner"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateMinimumThroughputBillingCommitmentInput(v *types.MinimumThroughputBillingCommitmentInput) error {
@@ -745,6 +1032,60 @@ func validateMinimumThroughputBillingCommitmentInput(v *types.MinimumThroughputB
 	}
 }
 
+func validatePartitionField(v *types.PartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionField"}
+	if len(v.Transform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Transform"))
+	}
+	if v.SourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitionFieldList(v []types.PartitionField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionFieldList"}
+	for i := range v {
+		if err := validatePartitionField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitionSpec(v *types.PartitionSpec) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionSpec"}
+	if v.PartitionFields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionFields"))
+	} else if v.PartitionFields != nil {
+		if err := validatePartitionFieldList(v.PartitionFields); err != nil {
+			invalidParams.AddNested("PartitionFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 	if v == nil {
 		return nil
@@ -752,9 +1093,6 @@ func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordsRequestEntry"}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
-	}
-	if v.PartitionKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -772,6 +1110,168 @@ func validatePutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) error 
 		if err := validatePutRecordsRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordConfiguration(v *types.RecordConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordConfiguration"}
+	if len(v.RecordFormatType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordFormatType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
+	if v.DeadLetterQueueS3Configuration != nil {
+		if err := validateDeadLetterQueueS3Configuration(v.DeadLetterQueueS3Configuration); err != nil {
+			invalidParams.AddNested("DeadLetterQueueS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageConfiguration"))
+	} else if v.StorageConfiguration != nil {
+		if err := validateS3StorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationUpdateInput(v *types.S3DestinationUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationUpdateInput"}
+	if v.DataFreshnessInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFreshnessInSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3StorageConfiguration(v *types.S3StorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3StorageConfiguration"}
+	if v.BucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketARN"))
+	}
+	if v.ExpectedBucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpectedBucketOwner"))
+	}
+	if len(v.CompressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CompressionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3TablesConfiguration(v *types.S3TablesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3TablesConfiguration"}
+	if v.TableBucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBucketARN"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if len(v.CompressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CompressionType"))
+	}
+	if v.PartitionSpec != nil {
+		if err := validatePartitionSpec(v.PartitionSpec); err != nil {
+			invalidParams.AddNested("PartitionSpec", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3TablesConfigurationList(v []types.S3TablesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3TablesConfigurationList"}
+	for i := range v {
+		if err := validateS3TablesConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3TablesDestinationConfiguration(v *types.S3TablesDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3TablesDestinationConfiguration"}
+	if v.DeadLetterQueueS3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeadLetterQueueS3Configuration"))
+	} else if v.DeadLetterQueueS3Configuration != nil {
+		if err := validateDeadLetterQueueS3Configuration(v.DeadLetterQueueS3Configuration); err != nil {
+			invalidParams.AddNested("DeadLetterQueueS3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3TablesConfigurationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3TablesConfigurationList"))
+	} else if v.S3TablesConfigurationList != nil {
+		if err := validateS3TablesConfigurationList(v.S3TablesConfigurationList); err != nil {
+			invalidParams.AddNested("S3TablesConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3TablesDestinationUpdateInput(v *types.S3TablesDestinationUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3TablesDestinationUpdateInput"}
+	if v.DataFreshnessInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataFreshnessInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -810,6 +1310,38 @@ func validateStartingPosition(v *types.StartingPosition) error {
 	}
 }
 
+func validateStreamFilter(v *types.StreamFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamFilter"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamFilterList(v []types.StreamFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamFilterList"}
+	for i := range v {
+		if err := validateStreamFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStreamModeDetails(v *types.StreamModeDetails) error {
 	if v == nil {
 		return nil
@@ -832,6 +1364,51 @@ func validateOpAddTagsToStreamInput(v *AddTagsToStreamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToStreamInput"}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelInput(v *CreateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ServiceExecutionRoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceExecutionRoleARN"))
+	}
+	if v.StreamConfigurationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamConfigurationList"))
+	} else if v.StreamConfigurationList != nil {
+		if err := validateChannelStreamConfigurationList(v.StreamConfigurationList); err != nil {
+			invalidParams.AddNested("StreamConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3DestinationConfiguration != nil {
+		if err := validateS3DestinationConfiguration(v.S3DestinationConfiguration); err != nil {
+			invalidParams.AddNested("S3DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3TablesDestinationConfiguration != nil {
+		if err := validateS3TablesDestinationConfiguration(v.S3TablesDestinationConfiguration); err != nil {
+			invalidParams.AddNested("S3TablesDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateChannelEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LoggingConfiguration != nil {
+		if err := validateChannelLoggingConfiguration(v.LoggingConfiguration); err != nil {
+			invalidParams.AddNested("LoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -875,6 +1452,21 @@ func validateOpDecreaseStreamRetentionPeriodInput(v *DecreaseStreamRetentionPeri
 	}
 }
 
+func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -882,6 +1474,21 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelInput(v *DescribeChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -983,6 +1590,23 @@ func validateOpIncreaseStreamRetentionPeriodInput(v *IncreaseStreamRetentionPeri
 	}
 }
 
+func validateOpListChannelsInput(v *ListChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsInput"}
+	if v.StreamFilter != nil {
+		if err := validateStreamFilterList(v.StreamFilter); err != nil {
+			invalidParams.AddNested("StreamFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListShardsInput(v *ListShardsInput) error {
 	if v == nil {
 		return nil
@@ -1055,9 +1679,6 @@ func validateOpPutRecordInput(v *PutRecordInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordInput"}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
-	}
-	if v.PartitionKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartitionKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1270,6 +1891,36 @@ func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
 	}
 }
 
+func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if v.S3DestinationConfiguration != nil {
+		if err := validateS3DestinationUpdateInput(v.S3DestinationConfiguration); err != nil {
+			invalidParams.AddNested("S3DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3TablesDestinationConfiguration != nil {
+		if err := validateS3TablesDestinationUpdateInput(v.S3TablesDestinationConfiguration); err != nil {
+			invalidParams.AddNested("S3TablesDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LoggingConfiguration != nil {
+		if err := validateChannelLoggingUpdateInput(v.LoggingConfiguration); err != nil {
+			invalidParams.AddNested("LoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateMaxRecordSizeInput(v *UpdateMaxRecordSizeInput) error {
 	if v == nil {
 		return nil
@@ -1317,6 +1968,24 @@ func validateOpUpdateStreamModeInput(v *UpdateStreamModeInput) error {
 		if err := validateStreamModeDetails(v.StreamModeDetails); err != nil {
 			invalidParams.AddNested("StreamModeDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStreamRecordDistributionStrategyInput(v *UpdateStreamRecordDistributionStrategyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamRecordDistributionStrategyInput"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if len(v.RecordDistributionStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordDistributionStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

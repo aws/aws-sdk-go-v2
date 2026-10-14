@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthCode":"__AuthCode__","EntityId":"__EntityId__","EntityType":"CUSTOMER_PROFILE","SessionId":"__SessionId__"}

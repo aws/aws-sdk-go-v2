@@ -1,0 +1,5 @@
+POST /datastore/__DatastoreId__/searchImageSets?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filters":[{"operator":"EQUAL","values":[{"DICOMPatientId":"__SearchByAttributeValueMemberDICOMPatientId__"},{"DICOMPatientId":"__SearchByAttributeValueMemberDICOMPatientId__"}]},{"operator":"EQUAL","values":[{"DICOMPatientId":"__SearchByAttributeValueMemberDICOMPatientId__"},{"DICOMPatientId":"__SearchByAttributeValueMemberDICOMPatientId__"}]}],"sort":{"sortField":"updatedAt","sortOrder":"ASC"}}

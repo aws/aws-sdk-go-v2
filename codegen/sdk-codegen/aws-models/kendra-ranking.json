@@ -75,6 +75,7 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>Amazon Kendra Intelligent Ranking uses Amazon Kendra \n            semantic search capabilities to intelligently re-rank a search \n            service's results.</p>",
                 "smithy.api#title": "Amazon Kendra Intelligent Ranking",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿tEntitledApplicationsŸ¿uApplicationIdentifierx__ApplicationIdentifier__ÿ¿uApplicationIdentifierx__ApplicationIdentifier__ÿÿiNextTokenm__NextToken__ÿ

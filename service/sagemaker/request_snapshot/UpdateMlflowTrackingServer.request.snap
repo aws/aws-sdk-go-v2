@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateMlflowTrackingServer
+
+{"ArtifactStoreUri":"__ArtifactStoreUri__","AutomaticModelRegistration":true,"S3BucketOwnerAccountId":"__S3BucketOwnerAccountId__","S3BucketOwnerVerification":true,"TrackingServerName":"__TrackingServerName__","TrackingServerSize":"Small","WeeklyMaintenanceWindowStart":"__WeeklyMaintenanceWindowStart__"}

@@ -5,12 +5,8 @@ package qapps
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the Amazon Q Apps owned by or associated with the user either because
@@ -47,24 +43,6 @@ type ListQAppsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQAppsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListQAppsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListQAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListQAppsInput_instanceId, *v.InstanceId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListQAppsInput_limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListQAppsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListQAppsOutput struct {
 
 	// The list of Amazon Q Apps meeting the request criteria.
@@ -81,87 +59,29 @@ type ListQAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListQAppsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListQAppsOutput_apps:
-			return deserializeUserAppsList(d, schemas.ListQAppsOutput_apps, &v.Apps)
-		case schemas.ListQAppsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListQAppsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListQAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQApps{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQApps, schemas.ListQAppsInput, schemas.ListQAppsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQApps{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQApps, schemas.ListQAppsInput, schemas.ListQAppsOutput), output: &ListQAppsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQApps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListQAppsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQApps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +94,6 @@ func (c *Client) addOperationListQAppsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +193,3 @@ type ListQAppsAPIClient interface {
 }
 
 var _ ListQAppsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListQApps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListQApps",
-	}
-}

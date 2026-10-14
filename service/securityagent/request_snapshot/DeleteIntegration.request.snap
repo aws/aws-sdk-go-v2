@@ -1,0 +1,5 @@
+POST /DeleteIntegration
+
+Content-Type: application/json
+
+{"integrationId":"__IntegrationId__"}

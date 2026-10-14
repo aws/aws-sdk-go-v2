@@ -4,13 +4,8 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves detailed information about a specific Wickr network, including its
@@ -38,18 +33,6 @@ type GetNetworkInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetNetworkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetNetworkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetNetworkRequest_networkId, *v.NetworkId)
-	}
 }
 
 type GetNetworkOutput struct {
@@ -100,113 +83,29 @@ type GetNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetNetworkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetNetworkResponse_accessLevel:
-			var ev string
-			if err := d.ReadString(schemas.GetNetworkResponse_accessLevel, &ev); err != nil {
-				return err
-			}
-			v.AccessLevel = types.AccessLevel(ev)
-			return nil
-		case schemas.GetNetworkResponse_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_awsAccountId, v.AwsAccountId)
-		case schemas.GetNetworkResponse_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.GetNetworkResponse_freeTrialExpiration:
-			v.FreeTrialExpiration = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_freeTrialExpiration, v.FreeTrialExpiration)
-		case schemas.GetNetworkResponse_migrationState:
-			v.MigrationState = new(int32)
-			return d.ReadInt32(schemas.GetNetworkResponse_migrationState, v.MigrationState)
-		case schemas.GetNetworkResponse_networkArn:
-			v.NetworkArn = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkArn, v.NetworkArn)
-		case schemas.GetNetworkResponse_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkId, v.NetworkId)
-		case schemas.GetNetworkResponse_networkName:
-			v.NetworkName = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkName, v.NetworkName)
-		case schemas.GetNetworkResponse_standing:
-			v.Standing = new(int32)
-			return d.ReadInt32(schemas.GetNetworkResponse_standing, v.Standing)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkRequest, schemas.GetNetworkResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetwork{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkRequest, schemas.GetNetworkResponse), output: &GetNetworkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNetwork"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNetworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetwork(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +120,8 @@ func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetNetwork(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNetwork",
-	}
 }

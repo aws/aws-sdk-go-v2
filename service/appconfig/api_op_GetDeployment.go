@@ -5,11 +5,11 @@ package appconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -48,6 +48,24 @@ type GetDeploymentInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.DeploymentNumber != nil {
+		s.WriteInt32(schemas.GetDeploymentRequest_DeploymentNumber, *v.DeploymentNumber)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_EnvironmentId, *v.EnvironmentId)
+	}
 }
 
 type GetDeploymentOutput struct {
@@ -133,77 +151,173 @@ type GetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Deployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.Deployment_ApplicationId, *v.ApplicationId)
+	}
+	serializeAppliedExtensions(s, schemas.Deployment_AppliedExtensions, v.AppliedExtensions)
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.Deployment_CompletedAt, *v.CompletedAt)
+	}
+	if v.ConfigurationLocationUri != nil {
+		s.WriteString(schemas.Deployment_ConfigurationLocationUri, *v.ConfigurationLocationUri)
+	}
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.Deployment_ConfigurationName, *v.ConfigurationName)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.Deployment_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.ConfigurationVersion != nil {
+		s.WriteString(schemas.Deployment_ConfigurationVersion, *v.ConfigurationVersion)
+	}
+	if v.DeploymentDurationInMinutes != 0 {
+		s.WriteInt32(schemas.Deployment_DeploymentDurationInMinutes, v.DeploymentDurationInMinutes)
+	}
+	if v.DeploymentNumber != 0 {
+		s.WriteInt32(schemas.Deployment_DeploymentNumber, v.DeploymentNumber)
+	}
+	if v.DeploymentStrategyId != nil {
+		s.WriteString(schemas.Deployment_DeploymentStrategyId, *v.DeploymentStrategyId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Deployment_Description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.Deployment_EnvironmentId, *v.EnvironmentId)
+	}
+	serializeDeploymentEvents(s, schemas.Deployment_EventLog, v.EventLog)
+	if v.FinalBakeTimeInMinutes != 0 {
+		s.WriteInt32(schemas.Deployment_FinalBakeTimeInMinutes, v.FinalBakeTimeInMinutes)
+	}
+	if v.GrowthFactor != nil {
+		s.WriteFloat32(schemas.Deployment_GrowthFactor, *v.GrowthFactor)
+	}
+	if v.GrowthType != "" {
+		s.WriteString(schemas.Deployment_GrowthType, string(v.GrowthType))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Deployment_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.Deployment_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteFloat32(schemas.Deployment_PercentageComplete, *v.PercentageComplete)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.Deployment_StartedAt, *v.StartedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Deployment_State, string(v.State))
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.Deployment_VersionLabel, *v.VersionLabel)
+	}
+}
+func (v *GetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Deployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Deployment_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.Deployment_ApplicationId, v.ApplicationId)
+		case schemas.Deployment_AppliedExtensions:
+			return deserializeAppliedExtensions(d, schemas.Deployment_AppliedExtensions, &v.AppliedExtensions)
+		case schemas.Deployment_CompletedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.Deployment_CompletedAt, v.CompletedAt)
+		case schemas.Deployment_ConfigurationLocationUri:
+			v.ConfigurationLocationUri = new(string)
+			return d.ReadString(schemas.Deployment_ConfigurationLocationUri, v.ConfigurationLocationUri)
+		case schemas.Deployment_ConfigurationName:
+			v.ConfigurationName = new(string)
+			return d.ReadString(schemas.Deployment_ConfigurationName, v.ConfigurationName)
+		case schemas.Deployment_ConfigurationProfileId:
+			v.ConfigurationProfileId = new(string)
+			return d.ReadString(schemas.Deployment_ConfigurationProfileId, v.ConfigurationProfileId)
+		case schemas.Deployment_ConfigurationVersion:
+			v.ConfigurationVersion = new(string)
+			return d.ReadString(schemas.Deployment_ConfigurationVersion, v.ConfigurationVersion)
+		case schemas.Deployment_DeploymentDurationInMinutes:
+			return d.ReadInt32(schemas.Deployment_DeploymentDurationInMinutes, &v.DeploymentDurationInMinutes)
+		case schemas.Deployment_DeploymentNumber:
+			return d.ReadInt32(schemas.Deployment_DeploymentNumber, &v.DeploymentNumber)
+		case schemas.Deployment_DeploymentStrategyId:
+			v.DeploymentStrategyId = new(string)
+			return d.ReadString(schemas.Deployment_DeploymentStrategyId, v.DeploymentStrategyId)
+		case schemas.Deployment_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Deployment_Description, v.Description)
+		case schemas.Deployment_EnvironmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.Deployment_EnvironmentId, v.EnvironmentId)
+		case schemas.Deployment_EventLog:
+			return deserializeDeploymentEvents(d, schemas.Deployment_EventLog, &v.EventLog)
+		case schemas.Deployment_FinalBakeTimeInMinutes:
+			return d.ReadInt32(schemas.Deployment_FinalBakeTimeInMinutes, &v.FinalBakeTimeInMinutes)
+		case schemas.Deployment_GrowthFactor:
+			v.GrowthFactor = new(float32)
+			return d.ReadFloat32(schemas.Deployment_GrowthFactor, v.GrowthFactor)
+		case schemas.Deployment_GrowthType:
+			var ev string
+			if err := d.ReadString(schemas.Deployment_GrowthType, &ev); err != nil {
+				return err
+			}
+			v.GrowthType = types.GrowthType(ev)
+			return nil
+		case schemas.Deployment_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Deployment_KmsKeyArn, v.KmsKeyArn)
+		case schemas.Deployment_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.Deployment_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.Deployment_PercentageComplete:
+			v.PercentageComplete = new(float32)
+			return d.ReadFloat32(schemas.Deployment_PercentageComplete, v.PercentageComplete)
+		case schemas.Deployment_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.Deployment_StartedAt, v.StartedAt)
+		case schemas.Deployment_State:
+			var ev string
+			if err := d.ReadString(schemas.Deployment_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.DeploymentState(ev)
+			return nil
+		case schemas.Deployment_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.Deployment_VersionLabel, v.VersionLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.Deployment)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.Deployment), output: &GetDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +330,6 @@ func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -431,11 +539,3 @@ type GetDeploymentAPIClient interface {
 }
 
 var _ GetDeploymentAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeployment",
-	}
-}

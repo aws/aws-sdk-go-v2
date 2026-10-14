@@ -4,10 +4,9 @@ package marketplacecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used to cancel an open change request. Must be sent before the status of the
@@ -45,6 +44,21 @@ type CancelChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelChangeSetRequest_Catalog, *v.Catalog)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.CancelChangeSetRequest_ChangeSetId, *v.ChangeSetId)
+	}
+}
+
 type CancelChangeSetOutput struct {
 
 	// The ARN associated with the change set referenced in this request.
@@ -59,77 +73,54 @@ type CancelChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.CancelChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.CancelChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+}
+func (v *CancelChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelChangeSetResponse_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.CancelChangeSetResponse_ChangeSetArn, v.ChangeSetArn)
+		case schemas.CancelChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.CancelChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChangeSet, schemas.CancelChangeSetRequest, schemas.CancelChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChangeSet, schemas.CancelChangeSetRequest, schemas.CancelChangeSetResponse), output: &CancelChangeSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelChangeSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelChangeSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelChangeSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelChangeSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +135,8 @@ func (c *Client) addOperationCancelChangeSetMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelChangeSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelChangeSet",
-	}
 }

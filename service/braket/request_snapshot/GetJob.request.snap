@@ -1,0 +1,3 @@
+GET /job/__JobArn__?additionalAttributeNames=QueueInfo&additionalAttributeNames=QueueInfo
+
+

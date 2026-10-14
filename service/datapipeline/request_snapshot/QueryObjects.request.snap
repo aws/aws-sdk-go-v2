@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.QueryObjects
+
+{"limit":1,"marker":"__Marker__","pipelineId":"__PipelineId__","query":{"selectors":[{"fieldName":"__FieldName__","operator":{"type":"EQ","values":["__Member__","__Member__"]}},{"fieldName":"__FieldName__","operator":{"type":"EQ","values":["__Member__","__Member__"]}}]},"sphere":"__Sphere__"}

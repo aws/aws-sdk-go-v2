@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an IP access settings resource that can be associated with a web portal.
@@ -64,30 +60,6 @@ type CreateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateIpAccessSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateIpAccessSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateIpAccessSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreateIpAccessSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateIpAccessSettingsRequest_description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateIpAccessSettingsRequest_displayName, *v.DisplayName)
-	}
-	serializeIpRuleList(s, schemas.CreateIpAccessSettingsRequest_ipRules, v.IpRules)
-	serializeTagList(s, schemas.CreateIpAccessSettingsRequest_tags, v.Tags)
-}
-
 type CreateIpAccessSettingsOutput struct {
 
 	// The ARN of the IP access settings resource.
@@ -101,73 +73,23 @@ type CreateIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateIpAccessSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateIpAccessSettingsResponse_ipAccessSettingsArn:
-			v.IpAccessSettingsArn = new(string)
-			return d.ReadString(schemas.CreateIpAccessSettingsResponse_ipAccessSettingsArn, v.IpAccessSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIpAccessSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpAccessSettings, schemas.CreateIpAccessSettingsRequest, schemas.CreateIpAccessSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIpAccessSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpAccessSettings, schemas.CreateIpAccessSettingsRequest, schemas.CreateIpAccessSettingsResponse), output: &CreateIpAccessSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIpAccessSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -177,12 +99,6 @@ func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateIpAccessSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIpAccessSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +111,6 @@ func (c *Client) addOperationCreateIpAccessSettingsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,12 +150,4 @@ func (m *idempotencyToken_initializeOpCreateIpAccessSettings) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateIpAccessSettingsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateIpAccessSettings{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateIpAccessSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIpAccessSettings",
-	}
 }

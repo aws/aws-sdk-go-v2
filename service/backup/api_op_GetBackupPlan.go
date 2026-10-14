@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,24 @@ type GetBackupPlanInput struct {
 	VersionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBackupPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.GetBackupPlanInput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.MaxScheduledRunsPreview != 0 {
+		s.WriteInt32(schemas.GetBackupPlanInput_MaxScheduledRunsPreview, v.MaxScheduledRunsPreview)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetBackupPlanInput_VersionId, *v.VersionId)
+	}
 }
 
 type GetBackupPlanOutput struct {
@@ -103,77 +120,98 @@ type GetBackupPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedBackupSettings(s, schemas.GetBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.BackupPlan != nil {
+		s.WriteStruct(schemas.GetBackupPlanOutput_BackupPlan)
+		v.BackupPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.GetBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.GetBackupPlanOutput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetBackupPlanOutput_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.GetBackupPlanOutput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DeletionDate != nil {
+		s.WriteTime(schemas.GetBackupPlanOutput_DeletionDate, *v.DeletionDate)
+	}
+	if v.LastExecutionDate != nil {
+		s.WriteTime(schemas.GetBackupPlanOutput_LastExecutionDate, *v.LastExecutionDate)
+	}
+	serializeScheduledRunsPreview(s, schemas.GetBackupPlanOutput_ScheduledRunsPreview, v.ScheduledRunsPreview)
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetBackupPlanOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *GetBackupPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupPlanOutput_AdvancedBackupSettings:
+			return deserializeAdvancedBackupSettings(d, schemas.GetBackupPlanOutput_AdvancedBackupSettings, &v.AdvancedBackupSettings)
+		case schemas.GetBackupPlanOutput_BackupPlan:
+			v.BackupPlan = &types.BackupPlan{}
+			return v.BackupPlan.Deserialize(d)
+		case schemas.GetBackupPlanOutput_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.GetBackupPlanOutput_BackupPlanArn, v.BackupPlanArn)
+		case schemas.GetBackupPlanOutput_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.GetBackupPlanOutput_BackupPlanId, v.BackupPlanId)
+		case schemas.GetBackupPlanOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetBackupPlanOutput_CreationDate, v.CreationDate)
+		case schemas.GetBackupPlanOutput_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.GetBackupPlanOutput_CreatorRequestId, v.CreatorRequestId)
+		case schemas.GetBackupPlanOutput_DeletionDate:
+			v.DeletionDate = new(time.Time)
+			return d.ReadTime(schemas.GetBackupPlanOutput_DeletionDate, v.DeletionDate)
+		case schemas.GetBackupPlanOutput_LastExecutionDate:
+			v.LastExecutionDate = new(time.Time)
+			return d.ReadTime(schemas.GetBackupPlanOutput_LastExecutionDate, v.LastExecutionDate)
+		case schemas.GetBackupPlanOutput_ScheduledRunsPreview:
+			return deserializeScheduledRunsPreview(d, schemas.GetBackupPlanOutput_ScheduledRunsPreview, &v.ScheduledRunsPreview)
+		case schemas.GetBackupPlanOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetBackupPlanOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlan, schemas.GetBackupPlanInput, schemas.GetBackupPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlan, schemas.GetBackupPlanInput, schemas.GetBackupPlanOutput), output: &GetBackupPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBackupPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBackupPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackupPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +226,8 @@ func (c *Client) addOperationGetBackupPlanMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBackupPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBackupPlan",
-	}
 }

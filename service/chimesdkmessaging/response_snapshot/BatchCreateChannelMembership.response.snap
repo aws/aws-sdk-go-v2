@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BatchChannelMemberships":{"ChannelArn":"__ChannelArn__","InvitedBy":{"Arn":"__Arn__","Name":"__Name__"},"Members":[{"Arn":"__Arn__","Name":"__Name__"},{"Arn":"__Arn__","Name":"__Name__"}],"SubChannelId":"__SubChannelId__","Type":"DEFAULT"},"Errors":[{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","MemberArn":"__MemberArn__"},{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","MemberArn":"__MemberArn__"}]}

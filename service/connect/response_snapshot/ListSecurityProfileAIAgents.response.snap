@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AllowedAIAgents":[{"Arn":"__Arn__","Type":"THIRD_PARTY"},{"Arn":"__Arn__","Type":"THIRD_PARTY"}],"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__"}

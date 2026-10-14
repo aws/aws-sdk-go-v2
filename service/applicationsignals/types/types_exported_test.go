@@ -37,6 +37,46 @@ var _ *types.ServiceOperationEntity
 var _ *types.ServiceLevelObjectiveEntity
 var _ *types.CanaryEntity
 
+func ExampleBatchDeleteDeletionTarget_outputUsage() {
+	var union types.BatchDeleteDeletionTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BatchDeleteDeletionTargetMemberResourceArns:
+		_ = v.Value // Value is types.BatchDeleteByResourceArns
+
+	case *types.BatchDeleteDeletionTargetMemberScope:
+		_ = v.Value // Value is types.BatchDeleteScope
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BatchDeleteScope
+var _ *types.BatchDeleteByResourceArns
+
+func ExampleCaptureConfiguration_outputUsage() {
+	var union types.CaptureConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CaptureConfigurationMemberCodeCapture:
+		_ = v.Value // Value is types.CodeCaptureConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CodeCaptureConfiguration
+
 func ExampleCompositeSliComponent_outputUsage() {
 	var union types.CompositeSliComponent
 	// type switches can be used to check the union value
@@ -76,6 +116,46 @@ func ExampleInterval_outputUsage() {
 
 var _ *types.RollingInterval
 var _ *types.CalendarInterval
+
+func ExampleLocation_outputUsage() {
+	var union types.Location
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LocationMemberCodeLocation:
+		_ = v.Value // Value is types.CodeLocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CodeLocation
+
+func ExampleLocationIdentifier_outputUsage() {
+	var union types.LocationIdentifier
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LocationIdentifierMemberCodeLocation:
+		_ = v.Value // Value is types.CodeLocation
+
+	case *types.LocationIdentifierMemberLocationHash:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CodeLocation
+var _ *string
 
 func ExampleMonitoredRequestCountMetricDataQueries_outputUsage() {
 	var union types.MonitoredRequestCountMetricDataQueries

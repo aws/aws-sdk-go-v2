@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified AI benchmark job.
@@ -36,6 +35,18 @@ type DeleteAIBenchmarkJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.DeleteAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+}
+
 type DeleteAIBenchmarkJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted benchmark job.
@@ -47,77 +58,48 @@ type DeleteAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+}
+func (v *DeleteAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIBenchmarkJob, schemas.DeleteAIBenchmarkJobRequest, schemas.DeleteAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIBenchmarkJob, schemas.DeleteAIBenchmarkJobRequest, schemas.DeleteAIBenchmarkJobResponse), output: &DeleteAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAIBenchmarkJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAIBenchmarkJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteAIBenchmarkJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAIBenchmarkJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,22 +114,8 @@ func (c *Client) addOperationDeleteAIBenchmarkJobMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAIBenchmarkJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAIBenchmarkJob",
-	}
 }

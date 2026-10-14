@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.DeleteEnvironmentTemplateVersion
+
+{"environmentTemplateVersion":{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","lastModifiedAt":946684800,"majorVersion":"__MajorVersion__","minorVersion":"__MinorVersion__","recommendedMinorVersion":"__RecommendedMinorVersion__","schema":"__Schema__","status":"REGISTRATION_IN_PROGRESS","statusMessage":"__StatusMessage__","templateName":"__TemplateName__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusterArn":"__ClusterArn__","clusterOperationArn":"__ClusterOperationArn__"}

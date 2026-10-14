@@ -1,0 +1,5 @@
+POST /delete-app-version-app-component
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","clientToken":"__ClientToken__","id":"__Id__"}

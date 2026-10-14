@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListImageVersions
+
+{"ImageVersions":[{"CreationTime":946684800,"FailureReason":"__FailureReason__","ImageArn":"__ImageArn__","ImageVersionArn":"__ImageVersionArn__","ImageVersionStatus":"CREATING","LastModifiedTime":946684800,"Version":1},{"CreationTime":946684800,"FailureReason":"__FailureReason__","ImageArn":"__ImageArn__","ImageVersionArn":"__ImageVersionArn__","ImageVersionStatus":"CREATING","LastModifiedTime":946684800,"Version":1}],"NextToken":"__NextToken__"}

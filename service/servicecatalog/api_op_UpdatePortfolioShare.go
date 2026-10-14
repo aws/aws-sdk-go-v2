@@ -4,13 +4,8 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified portfolio share. You can use this API to enable or
@@ -89,35 +84,6 @@ type UpdatePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePortfolioShareInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePortfolioShareInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePortfolioShareInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.UpdatePortfolioShareInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.UpdatePortfolioShareInput_AccountId, *v.AccountId)
-	}
-	if v.OrganizationNode != nil {
-		s.WriteStruct(schemas.UpdatePortfolioShareInput_OrganizationNode)
-		v.OrganizationNode.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.UpdatePortfolioShareInput_PortfolioId, *v.PortfolioId)
-	}
-	if v.SharePrincipals != nil {
-		s.WriteBool(schemas.UpdatePortfolioShareInput_SharePrincipals, *v.SharePrincipals)
-	}
-	if v.ShareTagOptions != nil {
-		s.WriteBool(schemas.UpdatePortfolioShareInput_ShareTagOptions, *v.ShareTagOptions)
-	}
-}
-
 type UpdatePortfolioShareOutput struct {
 
 	// The token that tracks the status of the UpdatePortfolioShare operation for
@@ -134,92 +100,29 @@ type UpdatePortfolioShareOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePortfolioShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePortfolioShareOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePortfolioShareOutput_PortfolioShareToken:
-			v.PortfolioShareToken = new(string)
-			return d.ReadString(schemas.UpdatePortfolioShareOutput_PortfolioShareToken, v.PortfolioShareToken)
-		case schemas.UpdatePortfolioShareOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePortfolioShareOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ShareStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePortfolioShare{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolioShare, schemas.UpdatePortfolioShareInput, schemas.UpdatePortfolioShareOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePortfolioShare{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortfolioShare, schemas.UpdatePortfolioShareInput, schemas.UpdatePortfolioShareOutput), output: &UpdatePortfolioShareOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePortfolioShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePortfolioShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortfolioShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +137,8 @@ func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePortfolioShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePortfolioShare",
-	}
 }

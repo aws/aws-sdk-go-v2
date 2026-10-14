@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RebalanceSlotsInGlobalReplicationGroup&ApplyImmediately=true&GlobalReplicationGroupId=__GlobalReplicationGroupId__&Version=2015-02-02

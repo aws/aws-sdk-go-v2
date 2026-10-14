@@ -150,6 +150,32 @@ func serializeProcurementPortalPreferenceSummaries(s smithy.ShapeSerializer, sch
 	s.CloseList()
 }
 
+func serializeProcurementPortals(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProcurementPortal) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeProcurementPortalSuppliers(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProcurementPortalSupplier) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeProfileList(s smithy.ShapeSerializer, schema *smithy.Schema, v []InvoiceProfile) {
 	if v == nil {
 		return
@@ -262,6 +288,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -275,6 +302,7 @@ func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeBillSourceAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -288,6 +316,7 @@ func deserializeBillSourceAccountList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeContacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Contact) error {
+	*v = make([]Contact, 0)
 	var vv Contact
 	return smithy.ReadList(d, s, func() error {
 		vv = Contact{}
@@ -301,6 +330,7 @@ func deserializeContacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Cont
 }
 
 func deserializeDiscountsBreakdownAmountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DiscountsBreakdownAmount) error {
+	*v = make([]DiscountsBreakdownAmount, 0)
 	var vv DiscountsBreakdownAmount
 	return smithy.ReadList(d, s, func() error {
 		vv = DiscountsBreakdownAmount{}
@@ -314,6 +344,7 @@ func deserializeDiscountsBreakdownAmountList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeEinvoiceDeliveryAttachmentTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EinvoiceDeliveryAttachmentType) error {
+	*v = make([]EinvoiceDeliveryAttachmentType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -327,6 +358,7 @@ func deserializeEinvoiceDeliveryAttachmentTypes(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeEinvoiceDeliveryDocumentTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EinvoiceDeliveryDocumentType) error {
+	*v = make([]EinvoiceDeliveryDocumentType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -340,6 +372,7 @@ func deserializeEinvoiceDeliveryDocumentTypes(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeFeesBreakdownAmountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FeesBreakdownAmount) error {
+	*v = make([]FeesBreakdownAmount, 0)
 	var vv FeesBreakdownAmount
 	return smithy.ReadList(d, s, func() error {
 		vv = FeesBreakdownAmount{}
@@ -353,6 +386,7 @@ func deserializeFeesBreakdownAmountList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeInvoiceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InvoiceSummary) error {
+	*v = make([]InvoiceSummary, 0)
 	var vv InvoiceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = InvoiceSummary{}
@@ -366,6 +400,7 @@ func deserializeInvoiceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeInvoiceUnitArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -379,6 +414,7 @@ func deserializeInvoiceUnitArns(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeInvoiceUnitNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -392,6 +428,7 @@ func deserializeInvoiceUnitNames(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeInvoiceUnits(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InvoiceUnit) error {
+	*v = make([]InvoiceUnit, 0)
 	var vv InvoiceUnit
 	return smithy.ReadList(d, s, func() error {
 		vv = InvoiceUnit{}
@@ -405,6 +442,7 @@ func deserializeInvoiceUnits(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeProcurementPortalPreferenceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProcurementPortalPreferenceSummary) error {
+	*v = make([]ProcurementPortalPreferenceSummary, 0)
 	var vv ProcurementPortalPreferenceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ProcurementPortalPreferenceSummary{}
@@ -417,7 +455,36 @@ func deserializeProcurementPortalPreferenceSummaries(d smithy.ShapeDeserializer,
 	})
 }
 
+func deserializeProcurementPortals(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProcurementPortal) error {
+	*v = make([]ProcurementPortal, 0)
+	var vv ProcurementPortal
+	return smithy.ReadList(d, s, func() error {
+		vv = ProcurementPortal{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeProcurementPortalSuppliers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProcurementPortalSupplier) error {
+	*v = make([]ProcurementPortalSupplier, 0)
+	var vv ProcurementPortalSupplier
+	return smithy.ReadList(d, s, func() error {
+		vv = ProcurementPortalSupplier{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InvoiceProfile) error {
+	*v = make([]InvoiceProfile, 0)
 	var vv InvoiceProfile
 	return smithy.ReadList(d, s, func() error {
 		vv = InvoiceProfile{}
@@ -431,6 +498,7 @@ func deserializeProfileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]I
 }
 
 func deserializePurchaseOrderDataSources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PurchaseOrderDataSource) error {
+	*v = make([]PurchaseOrderDataSource, 0)
 	var vv PurchaseOrderDataSource
 	return smithy.ReadList(d, s, func() error {
 		vv = PurchaseOrderDataSource{}
@@ -444,6 +512,7 @@ func deserializePurchaseOrderDataSources(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -457,6 +526,7 @@ func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceTag) error {
+	*v = make([]ResourceTag, 0)
 	var vv ResourceTag
 	return smithy.ReadList(d, s, func() error {
 		vv = ResourceTag{}
@@ -470,6 +540,7 @@ func deserializeResourceTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeRuleAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -483,6 +554,7 @@ func deserializeRuleAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeSellerOfRecords(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -496,6 +568,7 @@ func deserializeSellerOfRecords(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSupplementalDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SupplementalDocument) error {
+	*v = make([]SupplementalDocument, 0)
 	var vv SupplementalDocument
 	return smithy.ReadList(d, s, func() error {
 		vv = SupplementalDocument{}
@@ -509,6 +582,7 @@ func deserializeSupplementalDocuments(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeTaxesBreakdownAmountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TaxesBreakdownAmount) error {
+	*v = make([]TaxesBreakdownAmount, 0)
 	var vv TaxesBreakdownAmount
 	return smithy.ReadList(d, s, func() error {
 		vv = TaxesBreakdownAmount{}
@@ -522,6 +596,7 @@ func deserializeTaxesBreakdownAmountList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}

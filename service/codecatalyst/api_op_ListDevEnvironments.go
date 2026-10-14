@@ -5,12 +5,8 @@ package codecatalyst
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of Dev Environments in a project.
@@ -54,28 +50,6 @@ type ListDevEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDevEnvironmentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDevEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListDevEnvironmentsRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDevEnvironmentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_nextToken, *v.NextToken)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type ListDevEnvironmentsOutput struct {
 
 	// Information about the Dev Environments in a project.
@@ -93,81 +67,23 @@ type ListDevEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDevEnvironmentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDevEnvironmentsResponse_items:
-			return deserializeDevEnvironmentSummaryList(d, schemas.ListDevEnvironmentsResponse_items, &v.Items)
-		case schemas.ListDevEnvironmentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDevEnvironmentsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevEnvironments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironments, schemas.ListDevEnvironmentsRequest, schemas.ListDevEnvironmentsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevEnvironments{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironments, schemas.ListDevEnvironmentsRequest, schemas.ListDevEnvironmentsResponse), output: &ListDevEnvironmentsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevEnvironments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDevEnvironmentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevEnvironments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +96,6 @@ func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +199,3 @@ type ListDevEnvironmentsAPIClient interface {
 }
 
 var _ ListDevEnvironmentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDevEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDevEnvironments",
-	}
-}

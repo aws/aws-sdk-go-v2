@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all of the refresh schedules for a topic.
@@ -44,6 +43,21 @@ type ListTopicRefreshSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRefreshSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRefreshSchedulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRefreshSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTopicRefreshSchedulesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.ListTopicRefreshSchedulesRequest_TopicId, *v.TopicId)
+	}
+}
+
 type ListTopicRefreshSchedulesOutput struct {
 
 	// The list of topic refresh schedules.
@@ -68,77 +82,68 @@ type ListTopicRefreshSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRefreshSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRefreshSchedulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRefreshSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTopicRefreshScheduleSummaries(s, schemas.ListTopicRefreshSchedulesResponse_RefreshSchedules, v.RefreshSchedules)
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTopicRefreshSchedulesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTopicRefreshSchedulesResponse_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.ListTopicRefreshSchedulesResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.ListTopicRefreshSchedulesResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *ListTopicRefreshSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicRefreshSchedulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicRefreshSchedulesResponse_RefreshSchedules:
+			return deserializeTopicRefreshScheduleSummaries(d, schemas.ListTopicRefreshSchedulesResponse_RefreshSchedules, &v.RefreshSchedules)
+		case schemas.ListTopicRefreshSchedulesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTopicRefreshSchedulesResponse_RequestId, v.RequestId)
+		case schemas.ListTopicRefreshSchedulesResponse_Status:
+			return d.ReadInt32(schemas.ListTopicRefreshSchedulesResponse_Status, &v.Status)
+		case schemas.ListTopicRefreshSchedulesResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.ListTopicRefreshSchedulesResponse_TopicArn, v.TopicArn)
+		case schemas.ListTopicRefreshSchedulesResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.ListTopicRefreshSchedulesResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicRefreshSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRefreshSchedules, schemas.ListTopicRefreshSchedulesRequest, schemas.ListTopicRefreshSchedulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicRefreshSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRefreshSchedules, schemas.ListTopicRefreshSchedulesRequest, schemas.ListTopicRefreshSchedulesResponse), output: &ListTopicRefreshSchedulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopicRefreshSchedules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTopicRefreshSchedules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTopicRefreshSchedulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTopicRefreshSchedules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +158,8 @@ func (c *Client) addOperationListTopicRefreshSchedulesMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListTopicRefreshSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTopicRefreshSchedules",
-	}
 }

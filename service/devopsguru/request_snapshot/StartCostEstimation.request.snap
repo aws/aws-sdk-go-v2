@@ -1,0 +1,5 @@
+PUT /cost-estimation
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]}}

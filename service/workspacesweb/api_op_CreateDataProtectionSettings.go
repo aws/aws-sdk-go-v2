@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a data protection settings resource that can be associated with a web
@@ -65,34 +61,6 @@ type CreateDataProtectionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataProtectionSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateDataProtectionSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataProtectionSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreateDataProtectionSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDataProtectionSettingsRequest_description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateDataProtectionSettingsRequest_displayName, *v.DisplayName)
-	}
-	if v.InlineRedactionConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataProtectionSettingsRequest_inlineRedactionConfiguration)
-		v.InlineRedactionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateDataProtectionSettingsRequest_tags, v.Tags)
-}
-
 type CreateDataProtectionSettingsOutput struct {
 
 	// The ARN of the data protection settings resource.
@@ -106,73 +74,23 @@ type CreateDataProtectionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataProtectionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataProtectionSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataProtectionSettingsResponse_dataProtectionSettingsArn:
-			v.DataProtectionSettingsArn = new(string)
-			return d.ReadString(schemas.CreateDataProtectionSettingsResponse_dataProtectionSettingsArn, v.DataProtectionSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataProtectionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataProtectionSettings, schemas.CreateDataProtectionSettingsRequest, schemas.CreateDataProtectionSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataProtectionSettings, schemas.CreateDataProtectionSettingsRequest, schemas.CreateDataProtectionSettingsResponse), output: &CreateDataProtectionSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataProtectionSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -182,12 +100,6 @@ func (c *Client) addOperationCreateDataProtectionSettingsMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateDataProtectionSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataProtectionSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +112,6 @@ func (c *Client) addOperationCreateDataProtectionSettingsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,12 +151,4 @@ func (m *idempotencyToken_initializeOpCreateDataProtectionSettings) HandleInitia
 }
 func addIdempotencyToken_opCreateDataProtectionSettingsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataProtectionSettings{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataProtectionSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataProtectionSettings",
-	}
 }

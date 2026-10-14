@@ -1,0 +1,3 @@
+GET /snapshots/__SecondSnapshotId__/changedblocks?firstSnapshotId=__FirstSnapshotId__&maxResults=1&pageToken=__NextToken__&startingBlockIndex=1
+
+

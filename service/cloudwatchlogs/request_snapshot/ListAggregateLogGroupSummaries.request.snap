@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.ListAggregateLogGroupSummaries
+
+{"accountIdentifiers":["__Member__","__Member__"],"dataSources":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"groupBy":"DATA_SOURCE_NAME_TYPE_AND_FORMAT","includeLinkedAccounts":true,"limit":1,"logGroupClass":"STANDARD","logGroupNamePattern":"__LogGroupNamePattern__","nextToken":"__NextToken__"}

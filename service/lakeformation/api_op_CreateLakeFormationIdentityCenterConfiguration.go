@@ -4,13 +4,8 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an IAM Identity Center connection with Lake Formation to allow IAM
@@ -66,28 +61,6 @@ type CreateLakeFormationIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLakeFormationIdentityCenterConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_CatalogId, *v.CatalogId)
-	}
-	if v.ExternalFiltering != nil {
-		s.WriteStruct(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ExternalFiltering)
-		v.ExternalFiltering.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_InstanceArn, *v.InstanceArn)
-	}
-	serializeServiceIntegrationList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
-	serializeDataLakePrincipalList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
-}
-
 type CreateLakeFormationIdentityCenterConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Lake Formation application integrated
@@ -100,85 +73,29 @@ type CreateLakeFormationIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLakeFormationIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLakeFormationIdentityCenterConfigurationResponse_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.CreateLakeFormationIdentityCenterConfigurationResponse_ApplicationArn, v.ApplicationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationIdentityCenterConfiguration, schemas.CreateLakeFormationIdentityCenterConfigurationRequest, schemas.CreateLakeFormationIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationIdentityCenterConfiguration, schemas.CreateLakeFormationIdentityCenterConfigurationRequest, schemas.CreateLakeFormationIdentityCenterConfigurationResponse), output: &CreateLakeFormationIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLakeFormationIdentityCenterConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLakeFormationIdentityCenterConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +110,8 @@ func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLakeFormationIdentityCenterConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLakeFormationIdentityCenterConfiguration",
-	}
 }

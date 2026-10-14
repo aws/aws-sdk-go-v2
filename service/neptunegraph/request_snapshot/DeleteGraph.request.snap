@@ -1,0 +1,3 @@
+DELETE /graphs/__GraphIdentifier__?skipSnapshot=true
+
+

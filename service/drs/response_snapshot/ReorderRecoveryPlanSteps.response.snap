@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"recoveryPlanSteps":[{"configuration":{"serverStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"}]}},"createdAt":"__CreatedAt__","recoveryPlanStepArn":"__RecoveryPlanStepArn__","stepName":"__StepName__","stepOrder":1,"updatedAt":"__UpdatedAt__"},{"configuration":{"serverStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"}]}},"createdAt":"__CreatedAt__","recoveryPlanStepArn":"__RecoveryPlanStepArn__","stepName":"__StepName__","stepOrder":1,"updatedAt":"__UpdatedAt__"}]}

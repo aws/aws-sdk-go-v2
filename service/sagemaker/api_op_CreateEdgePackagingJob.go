@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a SageMaker Edge Manager model packaging job. Edge Manager will use the
@@ -74,6 +73,39 @@ type CreateEdgePackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgePackagingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgePackagingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgePackagingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_CompilationJobName, *v.CompilationJobName)
+	}
+	if v.EdgePackagingJobName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_EdgePackagingJobName, *v.EdgePackagingJobName)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ModelVersion, *v.ModelVersion)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateEdgePackagingJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceKey != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ResourceKey, *v.ResourceKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateEdgePackagingJobRequest_Tags, v.Tags)
+}
+
 type CreateEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,77 +113,42 @@ type CreateEdgePackagingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgePackagingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgePackagingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateEdgePackagingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgePackagingJob, schemas.CreateEdgePackagingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgePackagingJob, schemas.CreateEdgePackagingJobRequest, nil), output: &CreateEdgePackagingJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEdgePackagingJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEdgePackagingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEdgePackagingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEdgePackagingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +163,8 @@ func (c *Client) addOperationCreateEdgePackagingJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEdgePackagingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEdgePackagingJob",
-	}
 }

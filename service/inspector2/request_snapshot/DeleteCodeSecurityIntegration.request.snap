@@ -1,0 +1,5 @@
+POST /codesecurity/integration/delete
+
+Content-Type: application/json
+
+{"integrationArn":"__IntegrationArn__"}

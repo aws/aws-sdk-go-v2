@@ -1,0 +1,5 @@
+POST /updateIncidentRecord
+
+Content-Type: application/json
+
+{"arn":"__Arn__","chatChannel":{"empty":{}},"clientToken":"__ClientToken__","impact":1,"notificationTargets":[{"snsTopicArn":"__NotificationTargetItemMemberSnsTopicArn__"},{"snsTopicArn":"__NotificationTargetItemMemberSnsTopicArn__"}],"status":"OPEN","summary":"__Summary__","title":"__Title__"}

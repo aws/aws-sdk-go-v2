@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.StartUserImportJob
+
+{"UserImportJob":{"CloudWatchLogsRoleArn":"__CloudWatchLogsRoleArn__","CompletionDate":946684800,"CompletionMessage":"__CompletionMessage__","CreationDate":946684800,"FailedUsers":1,"ImportedUsers":1,"JobId":"__JobId__","JobName":"__JobName__","PasswordHashingAlgorithm":"BCRYPT","PreSignedUrl":"__PreSignedUrl__","SkippedUsers":1,"StartDate":946684800,"Status":"Created","UserPoolId":"__UserPoolId__"}}

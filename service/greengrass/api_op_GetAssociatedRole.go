@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the role associated with a particular group.
@@ -36,6 +35,18 @@ type GetAssociatedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetAssociatedRoleRequest_GroupId, *v.GroupId)
+	}
+}
+
 type GetAssociatedRoleOutput struct {
 
 	// The time when the role was associated with the group.
@@ -50,77 +61,54 @@ type GetAssociatedRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteString(schemas.GetAssociatedRoleResponse_AssociatedAt, *v.AssociatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetAssociatedRoleResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *GetAssociatedRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssociatedRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssociatedRoleResponse_AssociatedAt:
+			v.AssociatedAt = new(string)
+			return d.ReadString(schemas.GetAssociatedRoleResponse_AssociatedAt, v.AssociatedAt)
+		case schemas.GetAssociatedRoleResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetAssociatedRoleResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssociatedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedRole, schemas.GetAssociatedRoleRequest, schemas.GetAssociatedRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedRole, schemas.GetAssociatedRoleRequest, schemas.GetAssociatedRoleResponse), output: &GetAssociatedRoleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssociatedRole{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssociatedRole"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAssociatedRoleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssociatedRole(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +123,8 @@ func (c *Client) addOperationGetAssociatedRoleMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAssociatedRole(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAssociatedRole",
-	}
 }

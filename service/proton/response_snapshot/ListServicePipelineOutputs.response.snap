@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListServicePipelineOutputs
+
+{"nextToken":"__NextToken__","outputs":[{"key":"__Key__","valueString":"__ValueString__"},{"key":"__Key__","valueString":"__ValueString__"}]}

@@ -4,14 +4,17 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Converts source selection rules into their target counterparts for schema
 // conversion operations.
+//
+// Required permissions: dms:GetTargetSelectionRules . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) GetTargetSelectionRules(ctx context.Context, params *GetTargetSelectionRulesInput, optFns ...func(*Options)) (*GetTargetSelectionRulesOutput, error) {
 	if params == nil {
 		params = &GetTargetSelectionRulesInput{}
@@ -34,14 +37,41 @@ type GetTargetSelectionRulesInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// The JSON string representing the source selection rules for conversion.
-	// Selection rules must contain only supported metadata model types. For more
-	// information, see Selection Rules in the DMS User Guide.
+	// A JSON string that contains the source selection rules to convert into their
+	// target counterparts. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	//   - Does not support category-name in the object locator.
+	//
+	//   - Up to 10 rules are allowed.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTargetSelectionRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetSelectionRulesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetSelectionRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesMessage_SelectionRules, *v.SelectionRules)
+	}
 }
 
 type GetTargetSelectionRulesOutput struct {
@@ -55,77 +85,48 @@ type GetTargetSelectionRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTargetSelectionRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetSelectionRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetSelectionRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetSelectionRules != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesResponse_TargetSelectionRules, *v.TargetSelectionRules)
+	}
+}
+func (v *GetTargetSelectionRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTargetSelectionRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTargetSelectionRulesResponse_TargetSelectionRules:
+			v.TargetSelectionRules = new(string)
+			return d.ReadString(schemas.GetTargetSelectionRulesResponse_TargetSelectionRules, v.TargetSelectionRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTargetSelectionRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetSelectionRules, schemas.GetTargetSelectionRulesMessage, schemas.GetTargetSelectionRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTargetSelectionRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetSelectionRules, schemas.GetTargetSelectionRulesMessage, schemas.GetTargetSelectionRulesResponse), output: &GetTargetSelectionRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTargetSelectionRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTargetSelectionRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTargetSelectionRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTargetSelectionRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +141,8 @@ func (c *Client) addOperationGetTargetSelectionRulesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTargetSelectionRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTargetSelectionRules",
-	}
 }

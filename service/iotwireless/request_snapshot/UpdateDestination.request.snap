@@ -1,0 +1,5 @@
+PATCH /destinations/__Name__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Expression":"__Expression__","ExpressionType":"RuleName","RoleArn":"__RoleArn__"}

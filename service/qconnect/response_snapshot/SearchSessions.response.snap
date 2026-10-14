@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sessionSummaries":[{"assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","sessionArn":"__SessionArn__","sessionId":"__SessionId__"},{"assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","sessionArn":"__SessionArn__","sessionId":"__SessionId__"}]}

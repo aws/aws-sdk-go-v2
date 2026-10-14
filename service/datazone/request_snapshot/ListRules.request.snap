@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/list-rules/DOMAIN_UNIT/__TargetIdentifier__?assetTypes=__Member__&assetTypes=__Member__&dataProduct=true&includeCascaded=true&maxResults=1&nextToken=__NextToken__&projectIds=__Member__&projectIds=__Member__&ruleAction=CREATE_LISTING_CHANGE_SET&ruleType=METADATA_FORM_ENFORCEMENT
+
+

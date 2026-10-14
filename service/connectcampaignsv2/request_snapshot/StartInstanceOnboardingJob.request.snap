@@ -1,0 +1,5 @@
+PUT /v2/connect-instance/__ConnectInstanceId__/onboarding
+
+Content-Type: application/json
+
+{"encryptionConfig":{"enabled":true,"encryptionType":"KMS","keyArn":"__KeyArn__"}}

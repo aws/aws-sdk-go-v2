@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -30,40 +28,6 @@ type ClipFragmentSelector struct {
 	TimestampRange *ClipTimestampRange
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClipFragmentSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClipFragmentSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClipFragmentSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FragmentSelectorType != "" {
-		s.WriteString(schemas.ClipFragmentSelector_FragmentSelectorType, string(v.FragmentSelectorType))
-	}
-	if v.TimestampRange != nil {
-		s.WriteStruct(schemas.ClipFragmentSelector_TimestampRange)
-		v.TimestampRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ClipFragmentSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClipFragmentSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClipFragmentSelector_FragmentSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.ClipFragmentSelector_FragmentSelectorType, &ev); err != nil {
-				return err
-			}
-			v.FragmentSelectorType = ClipFragmentSelectorType(ev)
-			return nil
-		case schemas.ClipFragmentSelector_TimestampRange:
-			v.TimestampRange = &ClipTimestampRange{}
-			return v.TimestampRange.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The range of timestamps for which to return fragments.
@@ -94,34 +58,6 @@ type ClipTimestampRange struct {
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClipTimestampRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClipTimestampRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClipTimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimestamp != nil {
-		s.WriteTime(schemas.ClipTimestampRange_EndTimestamp, *v.EndTimestamp)
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.ClipTimestampRange_StartTimestamp, *v.StartTimestamp)
-	}
-}
-func (v *ClipTimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClipTimestampRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClipTimestampRange_EndTimestamp:
-			v.EndTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ClipTimestampRange_EndTimestamp, v.EndTimestamp)
-		case schemas.ClipTimestampRange_StartTimestamp:
-			v.StartTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ClipTimestampRange_StartTimestamp, v.StartTimestamp)
-		}
-		return nil
-	})
 }
 
 // Contains the range of timestamps for the requested media, and the source of the
@@ -159,40 +95,6 @@ type DASHFragmentSelector struct {
 	TimestampRange *DASHTimestampRange
 
 	noSmithyDocumentSerde
-}
-
-func (v *DASHFragmentSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DASHFragmentSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DASHFragmentSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FragmentSelectorType != "" {
-		s.WriteString(schemas.DASHFragmentSelector_FragmentSelectorType, string(v.FragmentSelectorType))
-	}
-	if v.TimestampRange != nil {
-		s.WriteStruct(schemas.DASHFragmentSelector_TimestampRange)
-		v.TimestampRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DASHFragmentSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DASHFragmentSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DASHFragmentSelector_FragmentSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.DASHFragmentSelector_FragmentSelectorType, &ev); err != nil {
-				return err
-			}
-			v.FragmentSelectorType = DASHFragmentSelectorType(ev)
-			return nil
-		case schemas.DASHFragmentSelector_TimestampRange:
-			v.TimestampRange = &DASHTimestampRange{}
-			return v.TimestampRange.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The start and end of the timestamp range for the requested media.
@@ -235,34 +137,6 @@ type DASHTimestampRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DASHTimestampRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DASHTimestampRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DASHTimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimestamp != nil {
-		s.WriteTime(schemas.DASHTimestampRange_EndTimestamp, *v.EndTimestamp)
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.DASHTimestampRange_StartTimestamp, *v.StartTimestamp)
-	}
-}
-func (v *DASHTimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DASHTimestampRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DASHTimestampRange_EndTimestamp:
-			v.EndTimestamp = new(time.Time)
-			return d.ReadTime(schemas.DASHTimestampRange_EndTimestamp, v.EndTimestamp)
-		case schemas.DASHTimestampRange_StartTimestamp:
-			v.StartTimestamp = new(time.Time)
-			return d.ReadTime(schemas.DASHTimestampRange_StartTimestamp, v.StartTimestamp)
-		}
-		return nil
-	})
-}
-
 // Represents a segment of video or other time-delimited data.
 type Fragment struct {
 
@@ -284,50 +158,6 @@ type Fragment struct {
 	ServerTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *Fragment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Fragment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Fragment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FragmentLengthInMilliseconds != 0 {
-		s.WriteInt64(schemas.Fragment_FragmentLengthInMilliseconds, v.FragmentLengthInMilliseconds)
-	}
-	if v.FragmentNumber != nil {
-		s.WriteString(schemas.Fragment_FragmentNumber, *v.FragmentNumber)
-	}
-	if v.FragmentSizeInBytes != 0 {
-		s.WriteInt64(schemas.Fragment_FragmentSizeInBytes, v.FragmentSizeInBytes)
-	}
-	if v.ProducerTimestamp != nil {
-		s.WriteTime(schemas.Fragment_ProducerTimestamp, *v.ProducerTimestamp)
-	}
-	if v.ServerTimestamp != nil {
-		s.WriteTime(schemas.Fragment_ServerTimestamp, *v.ServerTimestamp)
-	}
-}
-func (v *Fragment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Fragment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Fragment_FragmentLengthInMilliseconds:
-			return d.ReadInt64(schemas.Fragment_FragmentLengthInMilliseconds, &v.FragmentLengthInMilliseconds)
-		case schemas.Fragment_FragmentNumber:
-			v.FragmentNumber = new(string)
-			return d.ReadString(schemas.Fragment_FragmentNumber, v.FragmentNumber)
-		case schemas.Fragment_FragmentSizeInBytes:
-			return d.ReadInt64(schemas.Fragment_FragmentSizeInBytes, &v.FragmentSizeInBytes)
-		case schemas.Fragment_ProducerTimestamp:
-			v.ProducerTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Fragment_ProducerTimestamp, v.ProducerTimestamp)
-		case schemas.Fragment_ServerTimestamp:
-			v.ServerTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Fragment_ServerTimestamp, v.ServerTimestamp)
-		}
-		return nil
-	})
 }
 
 // Describes the timestamp range and timestamp origin of a range of fragments.
@@ -359,40 +189,6 @@ type FragmentSelector struct {
 	TimestampRange *TimestampRange
 
 	noSmithyDocumentSerde
-}
-
-func (v *FragmentSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FragmentSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FragmentSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FragmentSelectorType != "" {
-		s.WriteString(schemas.FragmentSelector_FragmentSelectorType, string(v.FragmentSelectorType))
-	}
-	if v.TimestampRange != nil {
-		s.WriteStruct(schemas.FragmentSelector_TimestampRange)
-		v.TimestampRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *FragmentSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FragmentSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FragmentSelector_FragmentSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.FragmentSelector_FragmentSelectorType, &ev); err != nil {
-				return err
-			}
-			v.FragmentSelectorType = FragmentSelectorType(ev)
-			return nil
-		case schemas.FragmentSelector_TimestampRange:
-			v.TimestampRange = &TimestampRange{}
-			return v.TimestampRange.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains the range of timestamps for the requested media, and the source of the
@@ -432,40 +228,6 @@ type HLSFragmentSelector struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HLSFragmentSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HLSFragmentSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HLSFragmentSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FragmentSelectorType != "" {
-		s.WriteString(schemas.HLSFragmentSelector_FragmentSelectorType, string(v.FragmentSelectorType))
-	}
-	if v.TimestampRange != nil {
-		s.WriteStruct(schemas.HLSFragmentSelector_TimestampRange)
-		v.TimestampRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *HLSFragmentSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HLSFragmentSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HLSFragmentSelector_FragmentSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.HLSFragmentSelector_FragmentSelectorType, &ev); err != nil {
-				return err
-			}
-			v.FragmentSelectorType = HLSFragmentSelectorType(ev)
-			return nil
-		case schemas.HLSFragmentSelector_TimestampRange:
-			v.TimestampRange = &HLSTimestampRange{}
-			return v.TimestampRange.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The start and end of the timestamp range for the requested media.
 //
 // This value should not be present if PlaybackType is LIVE .
@@ -502,34 +264,6 @@ type HLSTimestampRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HLSTimestampRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HLSTimestampRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HLSTimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimestamp != nil {
-		s.WriteTime(schemas.HLSTimestampRange_EndTimestamp, *v.EndTimestamp)
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.HLSTimestampRange_StartTimestamp, *v.StartTimestamp)
-	}
-}
-func (v *HLSTimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HLSTimestampRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HLSTimestampRange_EndTimestamp:
-			v.EndTimestamp = new(time.Time)
-			return d.ReadTime(schemas.HLSTimestampRange_EndTimestamp, v.EndTimestamp)
-		case schemas.HLSTimestampRange_StartTimestamp:
-			v.StartTimestamp = new(time.Time)
-			return d.ReadTime(schemas.HLSTimestampRange_StartTimestamp, v.StartTimestamp)
-		}
-		return nil
-	})
-}
-
 // A structure that contains the Timestamp , Error , and ImageContent .
 type Image struct {
 
@@ -553,44 +287,6 @@ type Image struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Image) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Image)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Image) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Error != "" {
-		s.WriteString(schemas.Image_Error, string(v.Error))
-	}
-	if v.ImageContent != nil {
-		s.WriteString(schemas.Image_ImageContent, *v.ImageContent)
-	}
-	if v.TimeStamp != nil {
-		s.WriteTime(schemas.Image_TimeStamp, *v.TimeStamp)
-	}
-}
-func (v *Image) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Image, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Image_Error:
-			var ev string
-			if err := d.ReadString(schemas.Image_Error, &ev); err != nil {
-				return err
-			}
-			v.Error = ImageError(ev)
-			return nil
-		case schemas.Image_ImageContent:
-			v.ImageContent = new(string)
-			return d.ReadString(schemas.Image_ImageContent, v.ImageContent)
-		case schemas.Image_TimeStamp:
-			v.TimeStamp = new(time.Time)
-			return d.ReadTime(schemas.Image_TimeStamp, v.TimeStamp)
-		}
-		return nil
-	})
-}
-
 // The range of timestamps for which to return fragments.
 type TimestampRange struct {
 
@@ -605,34 +301,6 @@ type TimestampRange struct {
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimestampRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimestampRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimestamp != nil {
-		s.WriteTime(schemas.TimestampRange_EndTimestamp, *v.EndTimestamp)
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.TimestampRange_StartTimestamp, *v.StartTimestamp)
-	}
-}
-func (v *TimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimestampRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimestampRange_EndTimestamp:
-			v.EndTimestamp = new(time.Time)
-			return d.ReadTime(schemas.TimestampRange_EndTimestamp, v.EndTimestamp)
-		case schemas.TimestampRange_StartTimestamp:
-			v.StartTimestamp = new(time.Time)
-			return d.ReadTime(schemas.TimestampRange_StartTimestamp, v.StartTimestamp)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

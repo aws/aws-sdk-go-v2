@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analysisId":"__AnalysisId__","analysisType":"QUERY","versionId":"__VersionId__"}

@@ -373,6 +373,14 @@ type CreateRemoteAccessSessionConfiguration struct {
 	// The device proxy to be configured on the device for the remote access session.
 	DeviceProxy *DeviceProxy
 
+	// The name-value string pairs that specify additional settings for the remote
+	// access session.
+	//
+	//   - appium:version : The major version of the Appium server to use for the
+	//   session (for example, 2 or 3). The service may reject the selected version if it
+	//   is not available for the selected device.
+	Parameters map[string]string
+
 	// An array of ARNs included in the VPC endpoint configuration.
 	VpceConfigurationArns []string
 
@@ -395,6 +403,7 @@ func (v *CreateRemoteAccessSessionConfiguration) SerializeMembers(s smithy.Shape
 		v.DeviceProxy.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeRemoteAccessParameters(s, schemas.CreateRemoteAccessSessionConfiguration_parameters, v.Parameters)
 	serializeAmazonResourceNames(s, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
 }
 func (v *CreateRemoteAccessSessionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
@@ -412,6 +421,8 @@ func (v *CreateRemoteAccessSessionConfiguration) Deserialize(d smithy.ShapeDeser
 		case schemas.CreateRemoteAccessSessionConfiguration_deviceProxy:
 			v.DeviceProxy = &DeviceProxy{}
 			return v.DeviceProxy.Deserialize(d)
+		case schemas.CreateRemoteAccessSessionConfiguration_parameters:
+			return deserializeRemoteAccessParameters(d, schemas.CreateRemoteAccessSessionConfiguration_parameters, &v.Parameters)
 		case schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns:
 			return deserializeAmazonResourceNames(d, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, &v.VpceConfigurationArns)
 		}
@@ -1613,6 +1624,11 @@ type Job struct {
 	// Represents the total (metered or unmetered) minutes used by the job.
 	DeviceMinutes *DeviceMinutes
 
+	// The insights for the job, including the report status and test-level metrics.
+	// This field contains data only if you specified insightsTypes when you scheduled
+	// the run.
+	Insights *JobInsights
+
 	// The ARN of the instance.
 	InstanceArn *string
 
@@ -1741,6 +1757,11 @@ func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeviceMinutes.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.Job_insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.Job_instanceArn, *v.InstanceArn)
 	}
@@ -1790,6 +1811,9 @@ func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Job_deviceMinutes:
 			v.DeviceMinutes = &DeviceMinutes{}
 			return v.DeviceMinutes.Deserialize(d)
+		case schemas.Job_insights:
+			v.Insights = &JobInsights{}
+			return v.Insights.Deserialize(d)
 		case schemas.Job_instanceArn:
 			v.InstanceArn = new(string)
 			return d.ReadString(schemas.Job_instanceArn, v.InstanceArn)
@@ -1832,6 +1856,216 @@ func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Job_videoEndpoint:
 			v.VideoEndpoint = new(string)
 			return d.ReadString(schemas.Job_videoEndpoint, v.VideoEndpoint)
+		}
+		return nil
+	})
+}
+
+// Contains insights for a job, including report status, and test-level aggregated
+// metrics such as per test execution time and median test execution time.
+type JobInsights struct {
+
+	// The status of the insights report for the job.
+	Status ReportStatus
+
+	// The test-level aggregated report for the job.
+	TestReport *TestReport
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.JobInsights_status, string(v.Status))
+	}
+	if v.TestReport != nil {
+		s.WriteStruct(schemas.JobInsights_testReport)
+		v.TestReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobInsights_status:
+			var ev string
+			if err := d.ReadString(schemas.JobInsights_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReportStatus(ev)
+			return nil
+		case schemas.JobInsights_testReport:
+			v.TestReport = &TestReport{}
+			return v.TestReport.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains aggregated job-level metrics for a run.
+type JobReport struct {
+
+	// A URL to the detailed job results.
+	JobDetailsUrl *string
+
+	// A message associated with the job report.
+	Message *string
+
+	// The aggregated job-level metrics for the run.
+	Metrics *JobReportMetrics
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDetailsUrl != nil {
+		s.WriteString(schemas.JobReport_jobDetailsUrl, *v.JobDetailsUrl)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.JobReport_message, *v.Message)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.JobReport_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobReport_jobDetailsUrl:
+			v.JobDetailsUrl = new(string)
+			return d.ReadString(schemas.JobReport_jobDetailsUrl, v.JobDetailsUrl)
+		case schemas.JobReport_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.JobReport_message, v.Message)
+		case schemas.JobReport_metrics:
+			v.Metrics = &JobReportMetrics{}
+			return v.Metrics.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains aggregated metrics across all jobs in a run.
+type JobReportMetrics struct {
+
+	// The average execution duration of jobs in the run, in seconds.
+	AverageJobExecutionDurationSeconds *float64
+
+	// The number of jobs that errored.
+	JobsErrored *int32
+
+	// The number of jobs that failed.
+	JobsFailed *int32
+
+	// The number of jobs that passed.
+	JobsPassed *int32
+
+	// The percentage of jobs that passed.
+	JobsPassedPercentage *float64
+
+	// The number of jobs that were skipped.
+	JobsSkipped *int32
+
+	// The number of jobs that were stopped.
+	JobsStopped *int32
+
+	// The total number of jobs in the run.
+	JobsTotal *int32
+
+	// The median execution duration of jobs in the run, in seconds.
+	MedianJobExecutionDurationSeconds *float64
+
+	// The total execution duration of all jobs in the run, in seconds.
+	TotalJobExecutionDurationSeconds *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobReportMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobReportMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobReportMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageJobExecutionDurationSeconds != nil {
+		s.WriteFloat64(schemas.JobReportMetrics_averageJobExecutionDurationSeconds, *v.AverageJobExecutionDurationSeconds)
+	}
+	if v.JobsErrored != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsErrored, *v.JobsErrored)
+	}
+	if v.JobsFailed != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsFailed, *v.JobsFailed)
+	}
+	if v.JobsPassed != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsPassed, *v.JobsPassed)
+	}
+	if v.JobsPassedPercentage != nil {
+		s.WriteFloat64(schemas.JobReportMetrics_jobsPassedPercentage, *v.JobsPassedPercentage)
+	}
+	if v.JobsSkipped != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsSkipped, *v.JobsSkipped)
+	}
+	if v.JobsStopped != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsStopped, *v.JobsStopped)
+	}
+	if v.JobsTotal != nil {
+		s.WriteInt32(schemas.JobReportMetrics_jobsTotal, *v.JobsTotal)
+	}
+	if v.MedianJobExecutionDurationSeconds != nil {
+		s.WriteFloat64(schemas.JobReportMetrics_medianJobExecutionDurationSeconds, *v.MedianJobExecutionDurationSeconds)
+	}
+	if v.TotalJobExecutionDurationSeconds != nil {
+		s.WriteFloat64(schemas.JobReportMetrics_totalJobExecutionDurationSeconds, *v.TotalJobExecutionDurationSeconds)
+	}
+}
+func (v *JobReportMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobReportMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobReportMetrics_averageJobExecutionDurationSeconds:
+			v.AverageJobExecutionDurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.JobReportMetrics_averageJobExecutionDurationSeconds, v.AverageJobExecutionDurationSeconds)
+		case schemas.JobReportMetrics_jobsErrored:
+			v.JobsErrored = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsErrored, v.JobsErrored)
+		case schemas.JobReportMetrics_jobsFailed:
+			v.JobsFailed = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsFailed, v.JobsFailed)
+		case schemas.JobReportMetrics_jobsPassed:
+			v.JobsPassed = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsPassed, v.JobsPassed)
+		case schemas.JobReportMetrics_jobsPassedPercentage:
+			v.JobsPassedPercentage = new(float64)
+			return d.ReadFloat64(schemas.JobReportMetrics_jobsPassedPercentage, v.JobsPassedPercentage)
+		case schemas.JobReportMetrics_jobsSkipped:
+			v.JobsSkipped = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsSkipped, v.JobsSkipped)
+		case schemas.JobReportMetrics_jobsStopped:
+			v.JobsStopped = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsStopped, v.JobsStopped)
+		case schemas.JobReportMetrics_jobsTotal:
+			v.JobsTotal = new(int32)
+			return d.ReadInt32(schemas.JobReportMetrics_jobsTotal, v.JobsTotal)
+		case schemas.JobReportMetrics_medianJobExecutionDurationSeconds:
+			v.MedianJobExecutionDurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.JobReportMetrics_medianJobExecutionDurationSeconds, v.MedianJobExecutionDurationSeconds)
+		case schemas.JobReportMetrics_totalJobExecutionDurationSeconds:
+			v.TotalJobExecutionDurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.JobReportMetrics_totalJobExecutionDurationSeconds, v.TotalJobExecutionDurationSeconds)
 		}
 		return nil
 	})
@@ -3196,6 +3430,14 @@ type Run struct {
 	// The IAM role associated with the run.
 	ExecutionRoleArn *string
 
+	// The insights for the run, including the report status and job-level metrics.
+	// This field contains data only if you specified insightsTypes when you scheduled
+	// the run.
+	Insights *RunInsights
+
+	// The types of insights requested for the run.
+	InsightsTypes []InsightsType
+
 	// The number of minutes the job executes before it times out.
 	JobTimeoutMinutes *int32
 
@@ -3401,6 +3643,12 @@ func (v *Run) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.Run_executionRoleArn, *v.ExecutionRoleArn)
 	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.Run_insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInsightsTypes(s, schemas.Run_insightsTypes, v.InsightsTypes)
 	if v.JobTimeoutMinutes != nil {
 		s.WriteInt32(schemas.Run_jobTimeoutMinutes, *v.JobTimeoutMinutes)
 	}
@@ -3521,6 +3769,11 @@ func (v *Run) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Run_executionRoleArn:
 			v.ExecutionRoleArn = new(string)
 			return d.ReadString(schemas.Run_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.Run_insights:
+			v.Insights = &RunInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.Run_insightsTypes:
+			return deserializeInsightsTypes(d, schemas.Run_insightsTypes, &v.InsightsTypes)
 		case schemas.Run_jobTimeoutMinutes:
 			v.JobTimeoutMinutes = new(int32)
 			return d.ReadInt32(schemas.Run_jobTimeoutMinutes, v.JobTimeoutMinutes)
@@ -3609,7 +3862,56 @@ func (v *Run) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains insights for a run, including report status, and job-level aggregated
+// metrics such as per job execution time and median job execution time.
+type RunInsights struct {
+
+	// The job-level aggregated report for the run.
+	JobReport *JobReport
+
+	// The status of the insights report for the run.
+	Status ReportStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *RunInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobReport != nil {
+		s.WriteStruct(schemas.RunInsights_jobReport)
+		v.JobReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RunInsights_status, string(v.Status))
+	}
+}
+func (v *RunInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunInsights_jobReport:
+			v.JobReport = &JobReport{}
+			return v.JobReport.Deserialize(d)
+		case schemas.RunInsights_status:
+			var ev string
+			if err := d.ReadString(schemas.RunInsights_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a sample of performance data.
+//
+// Device Farm does not support performance data samples during test executions.
 type Sample struct {
 
 	// The sample's ARN.
@@ -3735,6 +4037,13 @@ type ScheduleRunConfiguration struct {
 	// Device Farm extracts to external data for Android or the app's sandbox for iOS.
 	ExtraDataPackageArn *string
 
+	// The types of insights to generate for a run. Specify one or more values to opt
+	// in to insights generation when scheduling a run.
+	//
+	// Insights are currently supported for custom mode runs with Instrumentation,
+	// Appium Java TestNG, and XCTest UI test types.
+	InsightsTypes []InsightsType
+
 	// Information about the locale that is used for the run.
 	Locale *string
 
@@ -3781,6 +4090,7 @@ func (v *ScheduleRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExtraDataPackageArn != nil {
 		s.WriteString(schemas.ScheduleRunConfiguration_extraDataPackageArn, *v.ExtraDataPackageArn)
 	}
+	serializeInsightsTypes(s, schemas.ScheduleRunConfiguration_insightsTypes, v.InsightsTypes)
 	if v.Locale != nil {
 		s.WriteString(schemas.ScheduleRunConfiguration_locale, *v.Locale)
 	}
@@ -3825,6 +4135,8 @@ func (v *ScheduleRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.ScheduleRunConfiguration_extraDataPackageArn:
 			v.ExtraDataPackageArn = new(string)
 			return d.ReadString(schemas.ScheduleRunConfiguration_extraDataPackageArn, v.ExtraDataPackageArn)
+		case schemas.ScheduleRunConfiguration_insightsTypes:
+			return deserializeInsightsTypes(d, schemas.ScheduleRunConfiguration_insightsTypes, &v.InsightsTypes)
 		case schemas.ScheduleRunConfiguration_locale:
 			v.Locale = new(string)
 			return d.ReadString(schemas.ScheduleRunConfiguration_locale, v.Locale)
@@ -3888,24 +4200,6 @@ type ScheduleRunTest struct {
 
 	// The test's parameters, such as test framework parameters and fixture settings.
 	// Parameters are represented by name-value pairs of strings.
-	//
-	// For all tests:
-	//
-	//   - app_performance_monitoring : Performance monitoring is enabled by default.
-	//   Set this parameter to false to disable it.
-	//
-	// For Appium tests (all types):
-	//
-	//   - appium_version: The Appium version. Currently supported values are 1.6.5
-	//   (and later), latest, and default.
-	//
-	//   - latest runs the latest Appium version supported by Device Farm (1.9.1).
-	//
-	//   - For default, Device Farm selects a compatible version of Appium for the
-	//   device. The current behavior is to run 1.7.2 on Android devices and iOS 9 and
-	//   earlier and 1.7.2 for iOS 10 and later.
-	//
-	//   - This behavior is subject to change.
 	//
 	// For fuzz tests (Android only):
 	//
@@ -4770,6 +5064,160 @@ func (v *TestGridVpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TestGridVpcConfig_vpcId:
 			v.VpcId = new(string)
 			return d.ReadString(schemas.TestGridVpcConfig_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
+// Contains aggregated test-level metrics for a job.
+type TestReport struct {
+
+	// A message associated with the test report.
+	Message *string
+
+	// The aggregated test-level metrics for the job.
+	Metrics *TestReportMetrics
+
+	// A URL to the detailed test results.
+	TestDetailsUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TestReport_message, *v.Message)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.TestReport_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestDetailsUrl != nil {
+		s.WriteString(schemas.TestReport_testDetailsUrl, *v.TestDetailsUrl)
+	}
+}
+func (v *TestReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestReport_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TestReport_message, v.Message)
+		case schemas.TestReport_metrics:
+			v.Metrics = &TestReportMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.TestReport_testDetailsUrl:
+			v.TestDetailsUrl = new(string)
+			return d.ReadString(schemas.TestReport_testDetailsUrl, v.TestDetailsUrl)
+		}
+		return nil
+	})
+}
+
+// Contains aggregated metrics across all tests in a job.
+type TestReportMetrics struct {
+
+	// The median execution duration of tests in the job, in seconds.
+	MedianTestExecutionDurationSeconds *float64
+
+	// The number of tests that errored.
+	TestsErrored *int32
+
+	// The number of tests that failed.
+	TestsFailed *int32
+
+	// The number of tests with other result types.
+	TestsOther *int32
+
+	// The number of tests that passed.
+	TestsPassed *int32
+
+	// The percentage of tests that passed.
+	TestsPassedPercentage *float64
+
+	// The number of tests that were skipped.
+	TestsSkipped *int32
+
+	// The total number of tests in the job.
+	TestsTotal *int32
+
+	// The total execution duration of all tests in the job, in seconds.
+	TotalTestExecutionDurationSeconds *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestReportMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestReportMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestReportMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedianTestExecutionDurationSeconds != nil {
+		s.WriteFloat64(schemas.TestReportMetrics_medianTestExecutionDurationSeconds, *v.MedianTestExecutionDurationSeconds)
+	}
+	if v.TestsErrored != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsErrored, *v.TestsErrored)
+	}
+	if v.TestsFailed != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsFailed, *v.TestsFailed)
+	}
+	if v.TestsOther != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsOther, *v.TestsOther)
+	}
+	if v.TestsPassed != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsPassed, *v.TestsPassed)
+	}
+	if v.TestsPassedPercentage != nil {
+		s.WriteFloat64(schemas.TestReportMetrics_testsPassedPercentage, *v.TestsPassedPercentage)
+	}
+	if v.TestsSkipped != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsSkipped, *v.TestsSkipped)
+	}
+	if v.TestsTotal != nil {
+		s.WriteInt32(schemas.TestReportMetrics_testsTotal, *v.TestsTotal)
+	}
+	if v.TotalTestExecutionDurationSeconds != nil {
+		s.WriteFloat64(schemas.TestReportMetrics_totalTestExecutionDurationSeconds, *v.TotalTestExecutionDurationSeconds)
+	}
+}
+func (v *TestReportMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestReportMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestReportMetrics_medianTestExecutionDurationSeconds:
+			v.MedianTestExecutionDurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.TestReportMetrics_medianTestExecutionDurationSeconds, v.MedianTestExecutionDurationSeconds)
+		case schemas.TestReportMetrics_testsErrored:
+			v.TestsErrored = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsErrored, v.TestsErrored)
+		case schemas.TestReportMetrics_testsFailed:
+			v.TestsFailed = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsFailed, v.TestsFailed)
+		case schemas.TestReportMetrics_testsOther:
+			v.TestsOther = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsOther, v.TestsOther)
+		case schemas.TestReportMetrics_testsPassed:
+			v.TestsPassed = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsPassed, v.TestsPassed)
+		case schemas.TestReportMetrics_testsPassedPercentage:
+			v.TestsPassedPercentage = new(float64)
+			return d.ReadFloat64(schemas.TestReportMetrics_testsPassedPercentage, v.TestsPassedPercentage)
+		case schemas.TestReportMetrics_testsSkipped:
+			v.TestsSkipped = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsSkipped, v.TestsSkipped)
+		case schemas.TestReportMetrics_testsTotal:
+			v.TestsTotal = new(int32)
+			return d.ReadInt32(schemas.TestReportMetrics_testsTotal, v.TestsTotal)
+		case schemas.TestReportMetrics_totalTestExecutionDurationSeconds:
+			v.TotalTestExecutionDurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.TestReportMetrics_totalTestExecutionDurationSeconds, v.TotalTestExecutionDurationSeconds)
 		}
 		return nil
 	})

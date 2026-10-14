@@ -5,19 +5,14 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a new Dataset resource asynchronously.
+//	Creates a new dataset resource asynchronously. Returns immediately with status
 //
-// Returns immediately with status CREATING. Poll GetDataset until status
-// transitions to ACTIVE or CREATE_FAILED (with failureReason).
+// CREATING. Poll GetDataset until status transitions to ACTIVE or CREATE_FAILED.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -35,63 +30,42 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// Human-readable name for the dataset. Unique within the account
-	// (case-insensitive). Immutable after creation.
+	//  Human-readable name for the dataset. Must be unique within the account.
+	// Immutable after creation.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// Versioned schema type governing the structure of examples. Immutable after
+	//  Versioned schema type governing the structure of examples. Immutable after
 	// creation.
 	//
 	// This member is required.
 	SchemaType types.DatasetSchemaType
 
-	// Source of initial examples. Provide either inline examples or an S3 URI
+	//  Source of initial examples. Provide either inline examples or an S3 URI
 	// pointing to a JSONL file.
 	//
 	// This member is required.
 	Source types.DataSourceType
 
-	// Optional idempotency token.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If you don't specify this field, a value is randomly
+	// generated for you. If this token matches a previous request, the service ignores
+	// the request, but doesn't return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	//  A description of the dataset.
 	Description *string
 
-	// Optional AWS KMS key ARN for SSE-KMS on service S3 writes.
+	//  Optional KMS key ARN for server-side encryption on service Amazon S3 writes.
 	KmsKeyArn *string
 
 	//  A map of tag keys and values to assign to the dataset.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDatasetRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetName != nil {
-		s.WriteString(schemas.CreateDatasetRequest_datasetName, *v.DatasetName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDatasetRequest_description, *v.Description)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateDatasetRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.SchemaType != "" {
-		s.WriteString(schemas.CreateDatasetRequest_schemaType, string(v.SchemaType))
-	}
-	serializeDataSourceType(s, schemas.CreateDatasetRequest_source, v.Source)
-	serializeTagsMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
 }
 
 type CreateDatasetOutput struct {
@@ -111,8 +85,8 @@ type CreateDatasetOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Always CREATING immediately after this call. Poll GetDataset until status ==
-	// ACTIVE (draftStatus=MODIFIED) or CREATE_FAILED.
+	//  Always CREATING immediately after this call. Poll GetDataset until status
+	// transitions to ACTIVE or CREATE_FAILED.
 	//
 	// This member is required.
 	Status types.DatasetStatus
@@ -123,86 +97,23 @@ type CreateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDatasetResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateDatasetResponse_createdAt, v.CreatedAt)
-		case schemas.CreateDatasetResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.CreateDatasetResponse_datasetArn, v.DatasetArn)
-		case schemas.CreateDatasetResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.CreateDatasetResponse_datasetId, v.DatasetId)
-		case schemas.CreateDatasetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDatasetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse), output: &CreateDatasetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -212,12 +123,6 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateDatasetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,12 +135,6 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,12 +174,4 @@ func (m *idempotencyToken_initializeOpCreateDataset) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateDatasetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataset",
-	}
 }

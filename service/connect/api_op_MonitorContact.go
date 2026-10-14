@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of
@@ -62,6 +62,28 @@ type MonitorContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitorContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedMonitorCapabilities(s, schemas.MonitorContactRequest_AllowedMonitorCapabilities, v.AllowedMonitorCapabilities)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.MonitorContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.MonitorContactRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.MonitorContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.MonitorContactRequest_UserId, *v.UserId)
+	}
+}
+
 type MonitorContactOutput struct {
 
 	// The ARN of the contact.
@@ -76,65 +98,48 @@ type MonitorContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitorContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.MonitorContactResponse_ContactArn, *v.ContactArn)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.MonitorContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *MonitorContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorContactResponse_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.MonitorContactResponse_ContactArn, v.ContactArn)
+		case schemas.MonitorContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.MonitorContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMonitorContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MonitorContact, schemas.MonitorContactRequest, schemas.MonitorContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMonitorContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MonitorContact, schemas.MonitorContactRequest, schemas.MonitorContactResponse), output: &MonitorContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMonitorContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MonitorContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -144,12 +149,6 @@ func (c *Client) addOperationMonitorContactMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpMonitorContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMonitorContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +161,6 @@ func (c *Client) addOperationMonitorContactMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -207,12 +200,4 @@ func (m *idempotencyToken_initializeOpMonitorContact) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opMonitorContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpMonitorContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opMonitorContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MonitorContact",
-	}
 }

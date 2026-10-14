@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a processing job.
@@ -108,6 +107,54 @@ type CreateProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcessingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSpecification != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_AppSpecification)
+		v.AppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProcessingEnvironmentMap(s, schemas.CreateProcessingJobRequest_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProcessingInputs(s, schemas.CreateProcessingJobRequest_ProcessingInputs, v.ProcessingInputs)
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.CreateProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
+	}
+	if v.ProcessingOutputConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ProcessingOutputConfig)
+		v.ProcessingOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingResources != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ProcessingResources)
+		v.ProcessingResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateProcessingJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateProcessingJobRequest_Tags, v.Tags)
+}
+
 type CreateProcessingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the processing job.
@@ -121,77 +168,48 @@ type CreateProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcessingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcessingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessingJobArn != nil {
+		s.WriteString(schemas.CreateProcessingJobResponse_ProcessingJobArn, *v.ProcessingJobArn)
+	}
+}
+func (v *CreateProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProcessingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProcessingJobResponse_ProcessingJobArn:
+			v.ProcessingJobArn = new(string)
+			return d.ReadString(schemas.CreateProcessingJobResponse_ProcessingJobArn, v.ProcessingJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcessingJob, schemas.CreateProcessingJobRequest, schemas.CreateProcessingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcessingJob, schemas.CreateProcessingJobRequest, schemas.CreateProcessingJobResponse), output: &CreateProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProcessingJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProcessingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProcessingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProcessingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +224,8 @@ func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProcessingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProcessingJob",
-	}
 }

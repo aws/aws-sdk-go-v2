@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"importTask":{"arn":"__Arn__","creationDateTime":"__CreationDateTime__","endDateTime":"__EndDateTime__","importID":"__ImportID__","progressPercentage":1,"s3BucketSource":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"status":"PENDING","summary":{"applications":{"createdCount":1,"modifiedCount":1},"servers":{"createdCount":1,"modifiedCount":1},"waves":{"createdCount":1,"modifiedCount":1}},"tags":{"key0":"__Value__"}}}

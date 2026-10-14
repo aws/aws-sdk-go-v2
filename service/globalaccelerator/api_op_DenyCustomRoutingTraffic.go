@@ -4,10 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specify the Amazon EC2 instance (destination) IP addresses and ports for a VPC
@@ -77,6 +76,26 @@ type DenyCustomRoutingTrafficInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DenyCustomRoutingTrafficInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DenyCustomRoutingTrafficRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DenyCustomRoutingTrafficInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DenyAllTrafficToEndpoint != nil {
+		s.WriteBool(schemas.DenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint, *v.DenyAllTrafficToEndpoint)
+	}
+	serializeDestinationAddresses(s, schemas.DenyCustomRoutingTrafficRequest_DestinationAddresses, v.DestinationAddresses)
+	serializeDestinationPorts(s, schemas.DenyCustomRoutingTrafficRequest_DestinationPorts, v.DestinationPorts)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DenyCustomRoutingTrafficRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.DenyCustomRoutingTrafficRequest_EndpointId, *v.EndpointId)
+	}
+}
+
 type DenyCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,77 +103,42 @@ type DenyCustomRoutingTrafficOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DenyCustomRoutingTrafficOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DenyCustomRoutingTrafficOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DenyCustomRoutingTrafficOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DenyCustomRoutingTraffic, schemas.DenyCustomRoutingTrafficRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDenyCustomRoutingTraffic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DenyCustomRoutingTraffic, schemas.DenyCustomRoutingTrafficRequest, nil), output: &DenyCustomRoutingTrafficOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDenyCustomRoutingTraffic{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DenyCustomRoutingTraffic"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDenyCustomRoutingTrafficValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDenyCustomRoutingTraffic(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +153,8 @@ func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDenyCustomRoutingTraffic(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DenyCustomRoutingTraffic",
-	}
 }

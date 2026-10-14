@@ -1,0 +1,5 @@
+PATCH /policies/__PolicyIdentifier__
+
+Content-Type: application/json
+
+{"associatedTemplateAndRuleList":[{"templateIdentifier":"__TemplateOrRuleReferenceMemberTemplateIdentifier__"},{"templateIdentifier":"__TemplateOrRuleReferenceMemberTemplateIdentifier__"}],"clientToken":"__ClientToken__","isPublished":true,"policyConfiguration":{"remediationEnabled":true,"resourcesCleanUp":true,"wafConfig":{"conflictResolution":"MERGE_WHERE_APPLICABLE","existingCustomerWebACLResolution":"RETROFIT"}},"policyDescription":"__PolicyDescription__","priority":1,"updateToken":"__UpdateToken__"}

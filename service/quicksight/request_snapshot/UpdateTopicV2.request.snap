@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/topicsV2/__TopicId__
+
+Content-Type: application/json
+
+{"CustomInstructions":{"CustomInstructionsString":"__CustomInstructionsString__"},"PublishOption":"DRAFT","Topic":{"DataSetRelations":[{"Left":{"ColumnNames":["__Member__","__Member__"],"DataSetArn":"__DataSetArn__"},"Right":{"ColumnNames":["__Member__","__Member__"],"DataSetArn":"__DataSetArn__"}},{"Left":{"ColumnNames":["__Member__","__Member__"],"DataSetArn":"__DataSetArn__"},"Right":{"ColumnNames":["__Member__","__Member__"],"DataSetArn":"__DataSetArn__"}}],"DataSets":[{"DataSetArn":"__DataSetArn__","DataSetName":"__DataSetName__"},{"DataSetArn":"__DataSetArn__","DataSetName":"__DataSetName__"}],"Description":"__Description__","Name":"__Name__"}}

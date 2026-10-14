@@ -5,12 +5,8 @@ package migrationhubrefactorspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within
@@ -52,46 +48,6 @@ type ListRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoutesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRoutesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.ListRoutesRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListRoutesRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRoutesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRoutesRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListRoutesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRoutesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRoutesRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.ListRoutesRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.ListRoutesRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.ListRoutesRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.ListRoutesRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListRoutesRequest_MaxResults, v.MaxResults)
-		case schemas.ListRoutesRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRoutesRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListRoutesOutput struct {
 
 	// The token for the next page of results.
@@ -106,99 +62,29 @@ type ListRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoutesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRoutesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRoutesResponse_NextToken, *v.NextToken)
-	}
-	serializeRouteSummaries(s, schemas.ListRoutesResponse_RouteSummaryList, v.RouteSummaryList)
-}
-func (v *ListRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRoutesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRoutesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRoutesResponse_NextToken, v.NextToken)
-		case schemas.ListRoutesResponse_RouteSummaryList:
-			return deserializeRouteSummaries(d, schemas.ListRoutesResponse_RouteSummaryList, &v.RouteSummaryList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutes, schemas.ListRoutesRequest, schemas.ListRoutesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutes{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutes, schemas.ListRoutesRequest, schemas.ListRoutesResponse), output: &ListRoutesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoutes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRoutesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoutes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,12 +97,6 @@ func (c *Client) addOperationListRoutesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -317,11 +197,3 @@ type ListRoutesAPIClient interface {
 }
 
 var _ ListRoutesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRoutes",
-	}
-}

@@ -1,0 +1,5 @@
+POST /backend/__AppId__/storage/__BackendEnvironmentName__
+
+Content-Type: application/json
+
+{"resourceConfig":{"permissions":{"authenticated":["READ","READ"],"unAuthenticated":["READ","READ"]},"serviceName":"S3"},"resourceName":"__ResourceName__"}

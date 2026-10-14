@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DescribeImages
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥eNames‚j__Member__j__Member__dArns‚j__Member__j__Member__dTypefPUBLICiNextTokenm__NextToken__jMaxResults

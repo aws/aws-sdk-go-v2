@@ -1,0 +1,5 @@
+PUT /v2/email/configuration-sets/__ConfigurationSetName__/archiving-options
+
+Content-Type: application/json
+
+{"ArchiveArn":"__ArchiveArn__"}

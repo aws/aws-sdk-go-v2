@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/query
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","queryText":"__QueryText__"}

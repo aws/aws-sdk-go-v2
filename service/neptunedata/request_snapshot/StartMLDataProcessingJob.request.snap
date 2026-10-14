@@ -1,0 +1,5 @@
+POST /ml/dataprocessing
+
+Content-Type: application/json
+
+{"configFileName":"__ConfigFileName__","id":"__Id__","inputDataS3Location":"__InputDataS3Location__","modelType":"__ModelType__","neptuneIamRoleArn":"__NeptuneIamRoleArn__","previousDataProcessingJobId":"__PreviousDataProcessingJobId__","processedDataS3Location":"__ProcessedDataS3Location__","processingInstanceType":"__ProcessingInstanceType__","processingInstanceVolumeSizeInGB":1,"processingTimeOutInSeconds":1,"s3OutputEncryptionKMSKey":"__S3OutputEncryptionKMSKey__","sagemakerIamRoleArn":"__SagemakerIamRoleArn__","securityGroupIds":["__Member__","__Member__"],"subnets":["__Member__","__Member__"],"volumeEncryptionKMSKey":"__VolumeEncryptionKMSKey__"}

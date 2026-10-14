@@ -2,6 +2,27 @@
 
 package types
 
+type AdjustableAtLevelEnum string
+
+// Enum values for AdjustableAtLevelEnum
+const (
+	AdjustableAtLevelEnumAccount     AdjustableAtLevelEnum = "ACCOUNT"
+	AdjustableAtLevelEnumPerResource AdjustableAtLevelEnum = "PER_RESOURCE"
+	AdjustableAtLevelEnumAll         AdjustableAtLevelEnum = "ALL"
+)
+
+// Values returns all known values for AdjustableAtLevelEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdjustableAtLevelEnum) Values() []AdjustableAtLevelEnum {
+	return []AdjustableAtLevelEnum{
+		"ACCOUNT",
+		"PER_RESOURCE",
+		"ALL",
+	}
+}
+
 type AppliedLevelEnum string
 
 // Enum values for AppliedLevelEnum

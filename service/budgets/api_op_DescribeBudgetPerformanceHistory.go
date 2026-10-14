@@ -5,12 +5,10 @@ package budgets
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the history for DAILY , MONTHLY , and QUARTERLY budgets. Budget
@@ -105,6 +103,22 @@ type DescribeBudgetPerformanceHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetPerformanceHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetPerformanceHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetPerformanceHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BudgetPerformanceHistory != nil {
+		s.WriteStruct(schemas.DescribeBudgetPerformanceHistoryResponse_BudgetPerformanceHistory)
+		v.BudgetPerformanceHistory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBudgetPerformanceHistoryResponse_NextToken, *v.NextToken)
+	}
+}
 func (v *DescribeBudgetPerformanceHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeBudgetPerformanceHistoryResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -119,74 +133,26 @@ func (v *DescribeBudgetPerformanceHistoryOutput) Deserialize(d smithy.ShapeDeser
 	})
 }
 func (c *Client) addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetPerformanceHistory, schemas.DescribeBudgetPerformanceHistoryRequest, schemas.DescribeBudgetPerformanceHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetPerformanceHistory, schemas.DescribeBudgetPerformanceHistoryRequest, schemas.DescribeBudgetPerformanceHistoryResponse), output: &DescribeBudgetPerformanceHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetPerformanceHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeBudgetPerformanceHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBudgetPerformanceHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,12 +165,6 @@ func (c *Client) addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -309,11 +269,3 @@ type DescribeBudgetPerformanceHistoryAPIClient interface {
 }
 
 var _ DescribeBudgetPerformanceHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeBudgetPerformanceHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeBudgetPerformanceHistory",
-	}
-}

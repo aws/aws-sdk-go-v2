@@ -1,0 +1,6 @@
+POST /channels/__ChannelArn__/messages
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"ClientRequestToken":"__ClientRequestToken__","Content":"__Content__","ContentType":"__ContentType__","MessageAttributes":{"key0":{"StringValues":["__Member__","__Member__"]}},"Metadata":"__Metadata__","Persistence":"PERSISTENT","PushNotification":{"Body":"__Body__","Title":"__Title__","Type":"DEFAULT"},"SubChannelId":"__SubChannelId__","Target":[{"MemberArn":"__MemberArn__"},{"MemberArn":"__MemberArn__"}],"Type":"STANDARD"}

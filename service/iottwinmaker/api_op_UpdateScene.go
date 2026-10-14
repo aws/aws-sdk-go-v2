@@ -5,7 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +55,52 @@ type UpdateSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSceneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSceneRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSceneCapabilities(s, schemas.UpdateSceneRequest_capabilities, v.Capabilities)
+	if v.ContentLocation != nil {
+		s.WriteString(schemas.UpdateSceneRequest_contentLocation, *v.ContentLocation)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSceneRequest_description, *v.Description)
+	}
+	if v.SceneId != nil {
+		s.WriteString(schemas.UpdateSceneRequest_sceneId, *v.SceneId)
+	}
+	serializeSceneMetadataMap(s, schemas.UpdateSceneRequest_sceneMetadata, v.SceneMetadata)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateSceneRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateSceneInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSceneRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSceneRequest_capabilities:
+			return deserializeSceneCapabilities(d, schemas.UpdateSceneRequest_capabilities, &v.Capabilities)
+		case schemas.UpdateSceneRequest_contentLocation:
+			v.ContentLocation = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_contentLocation, v.ContentLocation)
+		case schemas.UpdateSceneRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_description, v.Description)
+		case schemas.UpdateSceneRequest_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_sceneId, v.SceneId)
+		case schemas.UpdateSceneRequest_sceneMetadata:
+			return deserializeSceneMetadataMap(d, schemas.UpdateSceneRequest_sceneMetadata, &v.SceneMetadata)
+		case schemas.UpdateSceneRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateSceneOutput struct {
 
 	// The date and time when the scene was last updated.
@@ -67,65 +114,42 @@ type UpdateSceneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSceneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSceneResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.UpdateSceneResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *UpdateSceneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSceneResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSceneResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSceneResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSceneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScene, schemas.UpdateSceneRequest, schemas.UpdateSceneResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScene, schemas.UpdateSceneRequest, schemas.UpdateSceneResponse), output: &UpdateSceneOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScene{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScene"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -135,12 +159,6 @@ func (c *Client) addOperationUpdateSceneMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpUpdateSceneValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScene(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +171,6 @@ func (c *Client) addOperationUpdateSceneMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -192,12 +204,4 @@ func (m *endpointPrefix_opUpdateSceneMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opUpdateSceneMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateSceneMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateScene(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateScene",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.UpdateProfileWithAgent
+
+{"ConversationId":"__ConversationId__","InputMessage":{"Body":"__Body__","Type":"normal"},"ProfileId":"__ProfileId__","SourceFormat":"CCDA"}

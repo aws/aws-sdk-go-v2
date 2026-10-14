@@ -1,0 +1,5 @@
+POST /CreateRLSPolicy
+
+Content-Type: application/json
+
+{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"FilterExpression":"__FilterExpression__","Name":"__Name__"}

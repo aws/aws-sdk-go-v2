@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/UpdateIngressPoint
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+§nIngressPointIdr__IngressPointId__pIngressPointNamet__IngressPointName__nStatusToUpdatefACTIVEiRuleSetIdm__RuleSetId__oTrafficPolicyIds__TrafficPolicyId__xIngressPointConfiguration¡lSmtpPasswordx/__IngressPointConfigurationMemberSmtpPassword__iTlsPolicyhREQUIRED

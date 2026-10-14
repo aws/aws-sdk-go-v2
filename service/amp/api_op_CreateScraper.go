@@ -5,19 +5,19 @@ package amp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CreateScraper operation creates a scraper to collect metrics. A scraper
-// pulls metrics from Prometheus-compatible sources and sends them to your Amazon
-// Managed Service for Prometheus workspace. You can configure scrapers to collect
-// metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources
-// that support DNS-based service discovery. Scrapers are flexible, and can be
-// configured to control what metrics are collected, the frequency of collection,
-// what transformations are applied to the metrics, and more.
+// Creates a scraper to collect metrics from Prometheus-compatible sources. The
+// scraper sends the collected metrics to Amazon Managed Service for Prometheus
+// workspaces or CloudWatch datasets. You can configure scrapers to collect metrics
+// from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that
+// support DNS-based service discovery. Scrapers are flexible. You can configure a
+// scraper to control which metrics to collect, the frequency of collection, which
+// transformations to apply to the metrics, and more.
 //
 // An IAM role will be created for you that Amazon Managed Service for Prometheus
 // uses to access the metrics in your source. You must configure this role with a
@@ -56,7 +56,9 @@ func (c *Client) CreateScraper(ctx context.Context, params *CreateScraperInput, 
 // Represents the input of a CreateScraper operation.
 type CreateScraperInput struct {
 
-	// The Amazon Managed Service for Prometheus workspace to send metrics to.
+	// The destination where the scraper sends the collected metrics. Valid
+	// destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch
+	// datasets.
 	//
 	// This member is required.
 	Destination types.Destination
@@ -83,6 +85,11 @@ type CreateScraperInput struct {
 	// the idempotency of the request.
 	ClientToken *string
 
+	// The exporter configurations for the scraper. You can configure at most one
+	// Amazon OpenSearch Service domain. If you don't specify a value, the scraper is
+	// created without an exporter configuration.
+	Exporters []types.ExporterConfiguration
+
 	// Use this structure to enable cross-account access, so that you can use a target
 	// account to access Prometheus metrics from source accounts.
 	RoleConfiguration *types.RoleConfiguration
@@ -91,6 +98,31 @@ type CreateScraperInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateScraperInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScraperRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateScraperRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateScraperRequest_clientToken, *v.ClientToken)
+	}
+	serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
+	serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	if v.RoleConfiguration != nil {
+		s.WriteStruct(schemas.CreateScraperRequest_roleConfiguration)
+		v.RoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
+	serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
+	serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
 }
 
 // Represents the output of a CreateScraper operation.
@@ -120,65 +152,59 @@ type CreateScraperOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScraperOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScraperResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateScraperResponse_arn, *v.Arn)
+	}
+	if v.ScraperId != nil {
+		s.WriteString(schemas.CreateScraperResponse_scraperId, *v.ScraperId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateScraperResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+}
+func (v *CreateScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScraperResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScraperResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateScraperResponse_arn, v.Arn)
+		case schemas.CreateScraperResponse_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.CreateScraperResponse_scraperId, v.ScraperId)
+		case schemas.CreateScraperResponse_status:
+			v.Status = &types.ScraperStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CreateScraperResponse_tags:
+			return deserializeTagMap(d, schemas.CreateScraperResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScraper, schemas.CreateScraperRequest, schemas.CreateScraperResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScraper, schemas.CreateScraperRequest, schemas.CreateScraperResponse), output: &CreateScraperOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScraper{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScraper"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -188,12 +214,6 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateScraperValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScraper(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +226,6 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +265,4 @@ func (m *idempotencyToken_initializeOpCreateScraper) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateScraperMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateScraper{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateScraper(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScraper",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"action":{"arn":"__Arn__","description":"__Description__","id":"__Id__","parameters":{"key0":{"description":"__Description__","required":true}},"tags":{"key0":"__Value__"},"targets":{"key0":{"resourceType":"__ResourceType__"}}}}

@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/sms
+
+Content-Type: application/json
+
+{"Enabled":true,"SenderId":"__SenderId__","ShortCode":"__ShortCode__"}

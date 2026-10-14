@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failedAssociations":[{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__","statusCode":"INTERNAL_ERROR","statusMessage":"__StatusMessage__"},{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__","statusCode":"INTERNAL_ERROR","statusMessage":"__StatusMessage__"}],"successfulAssociations":[{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"},{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanConfigurationArn":"__ScanConfigurationArn__"}]}

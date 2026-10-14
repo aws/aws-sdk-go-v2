@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.NotifyWorkers
+
+{"MessageText":"__MessageText__","Subject":"__Subject__","WorkerIds":["__Member__","__Member__"]}

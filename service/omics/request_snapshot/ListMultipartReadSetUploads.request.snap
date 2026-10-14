@@ -1,0 +1,3 @@
+POST /sequencestore/__SequenceStoreId__/uploads?maxResults=1&nextToken=__NextToken__
+
+

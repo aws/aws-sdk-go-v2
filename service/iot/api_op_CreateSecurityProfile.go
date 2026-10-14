@@ -4,13 +4,19 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
+//
 // Creates a Device Defender security profile.
 //
 // Requires permission to access the [CreateSecurityProfile] action.
@@ -73,6 +79,31 @@ type CreateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalMetricsToRetainList(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	serializeAdditionalMetricsToRetainV2List(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	serializeAlertTargets(s, schemas.CreateSecurityProfileRequest_alertTargets, v.AlertTargets)
+	serializeBehaviors(s, schemas.CreateSecurityProfileRequest_behaviors, v.Behaviors)
+	if v.MetricsExportConfig != nil {
+		s.WriteStruct(schemas.CreateSecurityProfileRequest_metricsExportConfig)
+		v.MetricsExportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityProfileDescription != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_securityProfileDescription, *v.SecurityProfileDescription)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_securityProfileName, *v.SecurityProfileName)
+	}
+	serializeTagList(s, schemas.CreateSecurityProfileRequest_tags, v.Tags)
+}
+
 type CreateSecurityProfileOutput struct {
 
 	// The ARN of the security profile.
@@ -87,77 +118,54 @@ type CreateSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityProfileArn != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_securityProfileArn, *v.SecurityProfileArn)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_securityProfileName, *v.SecurityProfileName)
+	}
+}
+func (v *CreateSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityProfileResponse_securityProfileArn:
+			v.SecurityProfileArn = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_securityProfileArn, v.SecurityProfileArn)
+		case schemas.CreateSecurityProfileResponse_securityProfileName:
+			v.SecurityProfileName = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_securityProfileName, v.SecurityProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse), output: &CreateSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSecurityProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSecurityProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecurityProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +180,8 @@ func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSecurityProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSecurityProfile",
-	}
 }

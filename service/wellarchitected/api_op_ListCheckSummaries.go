@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List of Trusted Advisor checks summarized for all accounts related to the
@@ -67,6 +67,36 @@ type ListCheckSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCheckSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCheckSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCheckSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChoiceId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_ChoiceId, *v.ChoiceId)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_LensArn, *v.LensArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCheckSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_PillarId, *v.PillarId)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_QuestionId, *v.QuestionId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type ListCheckSummariesOutput struct {
 
 	// List of Trusted Advisor summaries related to the Well-Architected best practice.
@@ -81,77 +111,51 @@ type ListCheckSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCheckSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCheckSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCheckSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCheckSummaries(s, schemas.ListCheckSummariesOutput_CheckSummaries, v.CheckSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCheckSummariesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCheckSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCheckSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCheckSummariesOutput_CheckSummaries:
+			return deserializeCheckSummaries(d, schemas.ListCheckSummariesOutput_CheckSummaries, &v.CheckSummaries)
+		case schemas.ListCheckSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCheckSummariesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCheckSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCheckSummaries, schemas.ListCheckSummariesInput, schemas.ListCheckSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCheckSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCheckSummaries, schemas.ListCheckSummariesInput, schemas.ListCheckSummariesOutput), output: &ListCheckSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCheckSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCheckSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCheckSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCheckSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +168,6 @@ func (c *Client) addOperationListCheckSummariesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +269,3 @@ type ListCheckSummariesAPIClient interface {
 }
 
 var _ ListCheckSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCheckSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCheckSummaries",
-	}
-}

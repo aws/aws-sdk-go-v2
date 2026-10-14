@@ -1,0 +1,5 @@
+POST /put-resource-permission
+
+Content-Type: application/json
+
+{"ActionType":"RESTORE","ResourceArn":"__ResourceArn__","SourceResourceArn":"__SourceResourceArn__"}

@@ -1,0 +1,3 @@
+GET /thing-groups/__ThingGroupName__/things?maxResults=1&nextToken=__NextToken__&recursive=true
+
+

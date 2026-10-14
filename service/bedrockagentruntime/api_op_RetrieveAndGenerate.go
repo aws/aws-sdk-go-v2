@@ -4,17 +4,21 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Queries a knowledge base and generates responses based on the retrieved results
 // and using the specified foundation model or [inference profile]. The response only cites sources
 // that are relevant to the query.
 //
+// This API cannot be used with managed knowledge bases. Use [AgenticRetrieveStream] or [Retrieve] with managed
+// knowledge bases.
+//
+// [Retrieve]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html
+// [AgenticRetrieveStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_AgenticRetrieveStream.html
 // [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
@@ -54,7 +58,44 @@ type RetrieveAndGenerateInput struct {
 	// interactions. You can't explicitly set the sessionId yourself.
 	SessionId *string
 
+	// Contains information about the user making the request. This is used for access
+	// control filtering to ensure that retrieval results only include documents the
+	// user is authorized to access.
+	UserContext *types.UserContext
+
 	noSmithyDocumentSerde
+}
+
+func (v *RetrieveAndGenerateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrieveAndGenerateConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_retrieveAndGenerateConfiguration)
+		v.RetrieveAndGenerateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_sessionConfiguration)
+		v.SessionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateRequest_sessionId, *v.SessionId)
+	}
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type RetrieveAndGenerateOutput struct {
@@ -86,77 +127,69 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCitations(s, schemas.RetrieveAndGenerateResponse_citations, v.Citations)
+	if v.GuardrailAction != "" {
+		s.WriteString(schemas.RetrieveAndGenerateResponse_guardrailAction, string(v.GuardrailAction))
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateResponse_output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *RetrieveAndGenerateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveAndGenerateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveAndGenerateResponse_citations:
+			return deserializeCitations(d, schemas.RetrieveAndGenerateResponse_citations, &v.Citations)
+		case schemas.RetrieveAndGenerateResponse_guardrailAction:
+			var ev string
+			if err := d.ReadString(schemas.RetrieveAndGenerateResponse_guardrailAction, &ev); err != nil {
+				return err
+			}
+			v.GuardrailAction = types.GuadrailAction(ev)
+			return nil
+		case schemas.RetrieveAndGenerateResponse_output:
+			v.Output = &types.RetrieveAndGenerateOutput{}
+			return v.Output.Deserialize(d)
+		case schemas.RetrieveAndGenerateResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.RetrieveAndGenerateResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveAndGenerateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerate, schemas.RetrieveAndGenerateRequest, schemas.RetrieveAndGenerateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetrieveAndGenerate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerate, schemas.RetrieveAndGenerateRequest, schemas.RetrieveAndGenerateResponse), output: &RetrieveAndGenerateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetrieveAndGenerate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RetrieveAndGenerate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRetrieveAndGenerateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveAndGenerate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +204,8 @@ func (c *Client) addOperationRetrieveAndGenerateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRetrieveAndGenerate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RetrieveAndGenerate",
-	}
 }

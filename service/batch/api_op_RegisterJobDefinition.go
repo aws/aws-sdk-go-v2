@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers an Batch job definition.
@@ -92,7 +91,11 @@ type RegisterJobDefinitionInput struct {
 
 	// The platform capabilities required by the job definition. If no value is
 	// specified, it defaults to EC2 . To run the job on Fargate resources, specify
-	// FARGATE .
+	// FARGATE . To run the job on Amazon ECS Managed Instances, specify
+	// MANAGED_INSTANCES .
+	//
+	// Jobs with the MANAGED_INSTANCES platform capability must use ecsProperties (not
+	// containerProperties ) and do not support multi-node parallel jobs.
 	//
 	// If the job runs on Amazon EKS resources, then you must not specify
 	// platformCapabilities .
@@ -143,6 +146,65 @@ type RegisterJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResourceProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_consumableResourceProperties)
+		v.ConsumableResourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_containerProperties)
+		v.ContainerProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_ecsProperties)
+		v.EcsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_eksProperties)
+		v.EksProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.RegisterJobDefinitionRequest_jobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.NodeProperties != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_nodeProperties)
+		v.NodeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
+	serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	if v.PropagateTags != nil {
+		s.WriteBool(schemas.RegisterJobDefinitionRequest_propagateTags, *v.PropagateTags)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_retryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulingPriority != nil {
+		s.WriteInt32(schemas.RegisterJobDefinitionRequest_schedulingPriority, *v.SchedulingPriority)
+	}
+	serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.RegisterJobDefinitionRequest_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RegisterJobDefinitionRequest_type, string(v.Type))
+	}
+}
+
 type RegisterJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job definition.
@@ -166,77 +228,60 @@ type RegisterJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.RegisterJobDefinitionResponse_jobDefinitionArn, *v.JobDefinitionArn)
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.RegisterJobDefinitionResponse_jobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.RegisterJobDefinitionResponse_revision, *v.Revision)
+	}
+}
+func (v *RegisterJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterJobDefinitionResponse_jobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.RegisterJobDefinitionResponse_jobDefinitionArn, v.JobDefinitionArn)
+		case schemas.RegisterJobDefinitionResponse_jobDefinitionName:
+			v.JobDefinitionName = new(string)
+			return d.ReadString(schemas.RegisterJobDefinitionResponse_jobDefinitionName, v.JobDefinitionName)
+		case schemas.RegisterJobDefinitionResponse_revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.RegisterJobDefinitionResponse_revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterJobDefinition, schemas.RegisterJobDefinitionRequest, schemas.RegisterJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterJobDefinition, schemas.RegisterJobDefinitionRequest, schemas.RegisterJobDefinitionResponse), output: &RegisterJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterJobDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterJobDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterJobDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterJobDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -251,22 +296,8 @@ func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterJobDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterJobDefinition",
-	}
 }

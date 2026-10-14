@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a running channel
@@ -36,6 +35,18 @@ type StopChannelInput struct {
 	ChannelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StopChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.StopChannelRequest_ChannelId, *v.ChannelId)
+	}
 }
 
 // Placeholder documentation for StopChannelResponse
@@ -119,77 +130,192 @@ type StopChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereSettings != nil {
+		s.WriteStruct(schemas.StopChannelResponse_AnywhereSettings)
+		v.AnywhereSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StopChannelResponse_Arn, *v.Arn)
+	}
+	if v.CdiInputSpecification != nil {
+		s.WriteStruct(schemas.StopChannelResponse_CdiInputSpecification)
+		v.CdiInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelClass != "" {
+		s.WriteString(schemas.StopChannelResponse_ChannelClass, string(v.ChannelClass))
+	}
+	if v.ChannelEngineVersion != nil {
+		s.WriteStruct(schemas.StopChannelResponse_ChannelEngineVersion)
+		v.ChannelEngineVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.StopChannelResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	serialize__listOfOutputDestination(s, schemas.StopChannelResponse_Destinations, v.Destinations)
+	serialize__listOfChannelEgressEndpoint(s, schemas.StopChannelResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.EncoderSettings != nil {
+		s.WriteStruct(schemas.StopChannelResponse_EncoderSettings)
+		v.EncoderSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StopChannelResponse_Id, *v.Id)
+	}
+	if v.InferenceSettings != nil {
+		s.WriteStruct(schemas.StopChannelResponse_InferenceSettings)
+		v.InferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputAttachment(s, schemas.StopChannelResponse_InputAttachments, v.InputAttachments)
+	if v.InputSpecification != nil {
+		s.WriteStruct(schemas.StopChannelResponse_InputSpecification)
+		v.InputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedChannelSettings != nil {
+		s.WriteStruct(schemas.StopChannelResponse_LinkedChannelSettings)
+		v.LinkedChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.StopChannelResponse_LogLevel, string(v.LogLevel))
+	}
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.StopChannelResponse_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StopChannelResponse_Name, *v.Name)
+	}
+	serialize__listOfPipelineDetail(s, schemas.StopChannelResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.StopChannelResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StopChannelResponse_RoleArn, *v.RoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StopChannelResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.StopChannelResponse_Tags, v.Tags)
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.StopChannelResponse_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopChannelResponse_AnywhereSettings:
+			v.AnywhereSettings = &types.DescribeAnywhereSettings{}
+			return v.AnywhereSettings.Deserialize(d)
+		case schemas.StopChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StopChannelResponse_Arn, v.Arn)
+		case schemas.StopChannelResponse_CdiInputSpecification:
+			v.CdiInputSpecification = &types.CdiInputSpecification{}
+			return v.CdiInputSpecification.Deserialize(d)
+		case schemas.StopChannelResponse_ChannelClass:
+			var ev string
+			if err := d.ReadString(schemas.StopChannelResponse_ChannelClass, &ev); err != nil {
+				return err
+			}
+			v.ChannelClass = types.ChannelClass(ev)
+			return nil
+		case schemas.StopChannelResponse_ChannelEngineVersion:
+			v.ChannelEngineVersion = &types.ChannelEngineVersionResponse{}
+			return v.ChannelEngineVersion.Deserialize(d)
+		case schemas.StopChannelResponse_ChannelSecurityGroups:
+			return deserialize__listOf__string(d, schemas.StopChannelResponse_ChannelSecurityGroups, &v.ChannelSecurityGroups)
+		case schemas.StopChannelResponse_Destinations:
+			return deserialize__listOfOutputDestination(d, schemas.StopChannelResponse_Destinations, &v.Destinations)
+		case schemas.StopChannelResponse_EgressEndpoints:
+			return deserialize__listOfChannelEgressEndpoint(d, schemas.StopChannelResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.StopChannelResponse_EncoderSettings:
+			v.EncoderSettings = &types.EncoderSettings{}
+			return v.EncoderSettings.Deserialize(d)
+		case schemas.StopChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopChannelResponse_Id, v.Id)
+		case schemas.StopChannelResponse_InferenceSettings:
+			v.InferenceSettings = &types.DescribeInferenceSettings{}
+			return v.InferenceSettings.Deserialize(d)
+		case schemas.StopChannelResponse_InputAttachments:
+			return deserialize__listOfInputAttachment(d, schemas.StopChannelResponse_InputAttachments, &v.InputAttachments)
+		case schemas.StopChannelResponse_InputSpecification:
+			v.InputSpecification = &types.InputSpecification{}
+			return v.InputSpecification.Deserialize(d)
+		case schemas.StopChannelResponse_LinkedChannelSettings:
+			v.LinkedChannelSettings = &types.DescribeLinkedChannelSettings{}
+			return v.LinkedChannelSettings.Deserialize(d)
+		case schemas.StopChannelResponse_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.StopChannelResponse_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.LogLevel(ev)
+			return nil
+		case schemas.StopChannelResponse_Maintenance:
+			v.Maintenance = &types.MaintenanceStatus{}
+			return v.Maintenance.Deserialize(d)
+		case schemas.StopChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StopChannelResponse_Name, v.Name)
+		case schemas.StopChannelResponse_PipelineDetails:
+			return deserialize__listOfPipelineDetail(d, schemas.StopChannelResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.StopChannelResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.StopChannelResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.StopChannelResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StopChannelResponse_RoleArn, v.RoleArn)
+		case schemas.StopChannelResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StopChannelResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelState(ev)
+			return nil
+		case schemas.StopChannelResponse_Tags:
+			return deserializeTags(d, schemas.StopChannelResponse_Tags, &v.Tags)
+		case schemas.StopChannelResponse_Vpc:
+			v.Vpc = &types.VpcOutputSettingsDescription{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelRequest, schemas.StopChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelRequest, schemas.StopChannelResponse), output: &StopChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +330,8 @@ func (c *Client) addOperationStopChannelMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopChannel",
-	}
 }

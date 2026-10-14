@@ -1,0 +1,3 @@
+GET /v1/apps/__ApplicationId__/segments/__SegmentId__/jobs/export?page-size=__PageSize__&token=__Token__
+
+

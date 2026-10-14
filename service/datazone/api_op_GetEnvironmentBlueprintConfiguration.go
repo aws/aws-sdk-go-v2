@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +38,6 @@ type GetEnvironmentBlueprintConfigurationInput struct {
 	EnvironmentBlueprintIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetEnvironmentBlueprintConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentBlueprintConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentBlueprintConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentBlueprintIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
-	}
 }
 
 type GetEnvironmentBlueprintConfigurationOutput struct {
@@ -109,114 +89,29 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentBlueprintConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentBlueprintConfigurationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations:
-			v.AllowUserProvidedConfigurations = new(bool)
-			return d.ReadBool(schemas.GetEnvironmentBlueprintConfigurationOutput_allowUserProvidedConfigurations, v.AllowUserProvidedConfigurations)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentBlueprintConfigurationOutput_createdAt, v.CreatedAt)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_domainId, v.DomainId)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions:
-			return deserializeEnabledRegionList(d, schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions, &v.EnabledRegions)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId:
-			v.EnvironmentBlueprintId = new(string)
-			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary:
-			v.EnvironmentRolePermissionBoundary = new(string)
-			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentRolePermissionBoundary, v.EnvironmentRolePermissionBoundary)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn:
-			v.ManageAccessRoleArn = new(string)
-			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, v.ManageAccessRoleArn)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations:
-			return deserializeProvisioningConfigurationList(d, schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, &v.ProvisioningConfigurations)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn:
-			v.ProvisioningRoleArn = new(string)
-			return d.ReadString(schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, v.ProvisioningRoleArn)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters:
-			return deserializeRegionalParameterMap(d, schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters, &v.RegionalParameters)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations:
-			return deserializeResourceConfigurations(d, schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations, &v.ResourceConfigurations)
-		case schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprintConfiguration, schemas.GetEnvironmentBlueprintConfigurationInput, schemas.GetEnvironmentBlueprintConfigurationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentBlueprintConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentBlueprintConfiguration, schemas.GetEnvironmentBlueprintConfigurationInput, schemas.GetEnvironmentBlueprintConfigurationOutput), output: &GetEnvironmentBlueprintConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentBlueprintConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentBlueprintConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -231,22 +126,8 @@ func (c *Client) addOperationGetEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEnvironmentBlueprintConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnvironmentBlueprintConfiguration",
-	}
 }

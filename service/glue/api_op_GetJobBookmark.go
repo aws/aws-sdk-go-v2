@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information on a job bookmark entry.
@@ -52,6 +51,21 @@ type GetJobBookmarkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobBookmarkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobBookmarkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobBookmarkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.GetJobBookmarkRequest_JobName, *v.JobName)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetJobBookmarkRequest_RunId, *v.RunId)
+	}
+}
+
 type GetJobBookmarkOutput struct {
 
 	// A structure that defines a point that a job can resume processing.
@@ -63,77 +77,50 @@ type GetJobBookmarkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobBookmarkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobBookmarkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobBookmarkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobBookmarkEntry != nil {
+		s.WriteStruct(schemas.GetJobBookmarkResponse_JobBookmarkEntry)
+		v.JobBookmarkEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJobBookmarkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobBookmarkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobBookmarkResponse_JobBookmarkEntry:
+			v.JobBookmarkEntry = &types.JobBookmarkEntry{}
+			return v.JobBookmarkEntry.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobBookmark, schemas.GetJobBookmarkRequest, schemas.GetJobBookmarkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetJobBookmark{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobBookmark, schemas.GetJobBookmarkRequest, schemas.GetJobBookmarkResponse), output: &GetJobBookmarkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetJobBookmark{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJobBookmark"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetJobBookmarkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobBookmark(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +135,8 @@ func (c *Client) addOperationGetJobBookmarkMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetJobBookmark(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetJobBookmark",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelPackages
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"MaxResults":1,"ModelApprovalStatus":"Approved","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageType":"Versioned","NameContains":"__NameContains__","NextToken":"__NextToken__","SortBy":"Name","SortOrder":"Ascending"}

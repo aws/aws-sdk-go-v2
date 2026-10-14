@@ -15,6 +15,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AccessForbidden,
 			New:    func() any { return &types.AccessForbidden{} },
 		},
+		"com.amazonaws.sagemakerfeaturestoreruntime#ConflictException": {
+			Schema: schemas.ConflictException,
+			New:    func() any { return &types.ConflictException{} },
+		},
 		"com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure": {
 			Schema: schemas.InternalFailure,
 			New:    func() any { return &types.InternalFailure{} },

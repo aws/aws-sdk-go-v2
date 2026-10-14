@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -81,6 +80,33 @@ type InviteOrganizationToTransferResponsibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteOrganizationToTransferResponsibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteOrganizationToTransferResponsibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Notes != nil {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_Notes, *v.Notes)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_SourceName, *v.SourceName)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.InviteOrganizationToTransferResponsibilityRequest_StartTimestamp, *v.StartTimestamp)
+	}
+	serializeTags(s, schemas.InviteOrganizationToTransferResponsibilityRequest_Tags, v.Tags)
+	if v.Target != nil {
+		s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_Type, string(v.Type))
+	}
+}
+
 type InviteOrganizationToTransferResponsibilityOutput struct {
 
 	// Contains details for a handshake. A handshake is the secure exchange of
@@ -96,77 +122,50 @@ type InviteOrganizationToTransferResponsibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteOrganizationToTransferResponsibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteOrganizationToTransferResponsibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InviteOrganizationToTransferResponsibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteOrganizationToTransferResponsibilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteOrganizationToTransferResponsibilityResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInviteOrganizationToTransferResponsibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteOrganizationToTransferResponsibility, schemas.InviteOrganizationToTransferResponsibilityRequest, schemas.InviteOrganizationToTransferResponsibilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInviteOrganizationToTransferResponsibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteOrganizationToTransferResponsibility, schemas.InviteOrganizationToTransferResponsibilityRequest, schemas.InviteOrganizationToTransferResponsibilityResponse), output: &InviteOrganizationToTransferResponsibilityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInviteOrganizationToTransferResponsibility{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InviteOrganizationToTransferResponsibility"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInviteOrganizationToTransferResponsibilityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInviteOrganizationToTransferResponsibility(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +180,8 @@ func (c *Client) addOperationInviteOrganizationToTransferResponsibilityMiddlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInviteOrganizationToTransferResponsibility(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InviteOrganizationToTransferResponsibility",
-	}
 }

@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels an ongoing ingestion of data into SPICE.
@@ -46,6 +45,24 @@ type CancelIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_IngestionId, *v.IngestionId)
+	}
+}
+
 type CancelIngestionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the data ingestion.
@@ -66,77 +83,65 @@ type CancelIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelIngestionResponse_Arn, *v.Arn)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.CancelIngestionResponse_IngestionId, *v.IngestionId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CancelIngestionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CancelIngestionResponse_Status, v.Status)
+	}
+}
+func (v *CancelIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelIngestionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_Arn, v.Arn)
+		case schemas.CancelIngestionResponse_IngestionId:
+			v.IngestionId = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_IngestionId, v.IngestionId)
+		case schemas.CancelIngestionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_RequestId, v.RequestId)
+		case schemas.CancelIngestionResponse_Status:
+			return d.ReadInt32(schemas.CancelIngestionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelIngestion, schemas.CancelIngestionRequest, schemas.CancelIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelIngestion, schemas.CancelIngestionRequest, schemas.CancelIngestionResponse), output: &CancelIngestionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelIngestion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelIngestion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelIngestionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelIngestion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +156,8 @@ func (c *Client) addOperationCancelIngestionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelIngestion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelIngestion",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.SearchUsers
+
+{"CollectionId":"__CollectionId__","FaceId":"__FaceId__","MaxUsers":1,"UserId":"__UserId__","UserMatchThreshold":1}

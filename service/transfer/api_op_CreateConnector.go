@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the connector, which captures the parameters for a connection for the
@@ -112,6 +111,42 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRole != nil {
+		s.WriteString(schemas.CreateConnectorRequest_AccessRole, *v.AccessRole)
+	}
+	if v.As2Config != nil {
+		s.WriteStruct(schemas.CreateConnectorRequest_As2Config)
+		v.As2Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConnectorEgressConfig(s, schemas.CreateConnectorRequest_EgressConfig, v.EgressConfig)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateConnectorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.CreateConnectorRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.CreateConnectorRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	if v.SftpConfig != nil {
+		s.WriteStruct(schemas.CreateConnectorRequest_SftpConfig)
+		v.SftpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	if v.Url != nil {
+		s.WriteString(schemas.CreateConnectorRequest_Url, *v.Url)
+	}
+}
+
 type CreateConnectorOutput struct {
 
 	// The unique identifier for the connector, returned after the API call succeeds.
@@ -125,77 +160,48 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorResponse_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.CreateConnectorResponse_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +216,8 @@ func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConnector",
-	}
 }

@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿dNameh__Name__pProviderEndpointt__ProviderEndpoint__lProviderTypeiBitbucketfStatusj__Status__pVpcConfiguration¿pSecurityGroupIdsŸj__Member__j__Member__ÿiSubnetIdsŸj__Member__j__Member__ÿnTlsCertificater__TlsCertificate__eVpcIdi__VpcId__ÿÿ

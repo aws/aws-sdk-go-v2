@@ -4,13 +4,8 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is only used through the Amazon Web Services console during sign-up to
@@ -42,25 +37,6 @@ type AssociateWhatsAppBusinessAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateWhatsAppBusinessAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateWhatsAppBusinessAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SetupFinalization != nil {
-		s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput_setupFinalization)
-		v.SetupFinalization.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SignupCallback != nil {
-		s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput_signupCallback)
-		v.SignupCallback.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AssociateWhatsAppBusinessAccountOutput struct {
 
 	// The ID of the WhatsApp Business Account that was linked to your Amazon Web
@@ -79,91 +55,29 @@ type AssociateWhatsAppBusinessAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateWhatsAppBusinessAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateWhatsAppBusinessAccountOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId:
-			v.LinkedWhatsAppBusinessAccountId = new(string)
-			return d.ReadString(schemas.AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId, v.LinkedWhatsAppBusinessAccountId)
-		case schemas.AssociateWhatsAppBusinessAccountOutput_signupCallbackResult:
-			v.SignupCallbackResult = &types.WhatsAppSignupCallbackResult{}
-			return v.SignupCallbackResult.Deserialize(d)
-		case schemas.AssociateWhatsAppBusinessAccountOutput_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.AssociateWhatsAppBusinessAccountOutput_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateWhatsAppBusinessAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWhatsAppBusinessAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWhatsAppBusinessAccount, schemas.AssociateWhatsAppBusinessAccountInput, schemas.AssociateWhatsAppBusinessAccountOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateWhatsAppBusinessAccount{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWhatsAppBusinessAccount, schemas.AssociateWhatsAppBusinessAccountInput, schemas.AssociateWhatsAppBusinessAccountOutput), output: &AssociateWhatsAppBusinessAccountOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateWhatsAppBusinessAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateWhatsAppBusinessAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateWhatsAppBusinessAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +92,8 @@ func (c *Client) addOperationAssociateWhatsAppBusinessAccountMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateWhatsAppBusinessAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateWhatsAppBusinessAccount",
-	}
 }

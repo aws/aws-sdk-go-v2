@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the resources that are not currently supported in Resilience Hub. An
@@ -60,6 +60,52 @@ type ListUnsupportedAppVersionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUnsupportedAppVersionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUnsupportedAppVersionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUnsupportedAppVersionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesRequest_appVersion, *v.AppVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUnsupportedAppVersionResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesRequest_resolutionId, *v.ResolutionId)
+	}
+}
+func (v *ListUnsupportedAppVersionResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUnsupportedAppVersionResourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUnsupportedAppVersionResourcesRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesRequest_appArn, v.AppArn)
+		case schemas.ListUnsupportedAppVersionResourcesRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesRequest_appVersion, v.AppVersion)
+		case schemas.ListUnsupportedAppVersionResourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListUnsupportedAppVersionResourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListUnsupportedAppVersionResourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesRequest_nextToken, v.NextToken)
+		case schemas.ListUnsupportedAppVersionResourcesRequest_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesRequest_resolutionId, v.ResolutionId)
+		}
+		return nil
+	})
+}
+
 type ListUnsupportedAppVersionResourcesOutput struct {
 
 	// The identifier for a specific resolution.
@@ -81,77 +127,57 @@ type ListUnsupportedAppVersionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUnsupportedAppVersionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUnsupportedAppVersionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUnsupportedAppVersionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesResponse_nextToken, *v.NextToken)
+	}
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.ListUnsupportedAppVersionResourcesResponse_resolutionId, *v.ResolutionId)
+	}
+	serializeUnsupportedResourceList(s, schemas.ListUnsupportedAppVersionResourcesResponse_unsupportedResources, v.UnsupportedResources)
+}
+func (v *ListUnsupportedAppVersionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUnsupportedAppVersionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUnsupportedAppVersionResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListUnsupportedAppVersionResourcesResponse_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.ListUnsupportedAppVersionResourcesResponse_resolutionId, v.ResolutionId)
+		case schemas.ListUnsupportedAppVersionResourcesResponse_unsupportedResources:
+			return deserializeUnsupportedResourceList(d, schemas.ListUnsupportedAppVersionResourcesResponse_unsupportedResources, &v.UnsupportedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUnsupportedAppVersionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUnsupportedAppVersionResources, schemas.ListUnsupportedAppVersionResourcesRequest, schemas.ListUnsupportedAppVersionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUnsupportedAppVersionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUnsupportedAppVersionResources, schemas.ListUnsupportedAppVersionResourcesRequest, schemas.ListUnsupportedAppVersionResourcesResponse), output: &ListUnsupportedAppVersionResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUnsupportedAppVersionResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUnsupportedAppVersionResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUnsupportedAppVersionResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUnsupportedAppVersionResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +190,6 @@ func (c *Client) addOperationListUnsupportedAppVersionResourcesMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,11 +295,3 @@ type ListUnsupportedAppVersionResourcesAPIClient interface {
 }
 
 var _ ListUnsupportedAppVersionResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListUnsupportedAppVersionResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUnsupportedAppVersionResources",
-	}
-}

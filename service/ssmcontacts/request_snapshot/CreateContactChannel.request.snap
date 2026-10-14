@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.CreateContactChannel
+
+{"ContactId":"__ContactId__","DeferActivation":true,"DeliveryAddress":{"SimpleAddress":"__SimpleAddress__"},"IdempotencyToken":"__IdempotencyToken__","Name":"__Name__","Type":"SMS"}

@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves attribute data along with aggregate utilization and savings data for
@@ -99,6 +99,37 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansUtilizationDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansUtilizationDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSavingsPlansDataTypes(s, schemas.GetSavingsPlansUtilizationDetailsRequest_DataType, v.DataType)
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSavingsPlansUtilizationDetailsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSavingsPlansUtilizationDetailsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsRequest_SortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSavingsPlansUtilizationDetailsOutput struct {
 
 	// Retrieves a single daily or monthly Savings Plans utilization rate and details
@@ -126,77 +157,67 @@ type GetSavingsPlansUtilizationDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansUtilizationDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansUtilizationDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSavingsPlansUtilizationDetailsResponse_NextToken, *v.NextToken)
+	}
+	serializeSavingsPlansUtilizationDetails(s, schemas.GetSavingsPlansUtilizationDetailsResponse_SavingsPlansUtilizationDetails, v.SavingsPlansUtilizationDetails)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsResponse_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSavingsPlansUtilizationDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlansUtilizationDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlansUtilizationDetailsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSavingsPlansUtilizationDetailsResponse_NextToken, v.NextToken)
+		case schemas.GetSavingsPlansUtilizationDetailsResponse_SavingsPlansUtilizationDetails:
+			return deserializeSavingsPlansUtilizationDetails(d, schemas.GetSavingsPlansUtilizationDetailsResponse_SavingsPlansUtilizationDetails, &v.SavingsPlansUtilizationDetails)
+		case schemas.GetSavingsPlansUtilizationDetailsResponse_TimePeriod:
+			v.TimePeriod = &types.DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		case schemas.GetSavingsPlansUtilizationDetailsResponse_Total:
+			v.Total = &types.SavingsPlansUtilizationAggregates{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlansUtilizationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansUtilizationDetails, schemas.GetSavingsPlansUtilizationDetailsRequest, schemas.GetSavingsPlansUtilizationDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansUtilizationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansUtilizationDetails, schemas.GetSavingsPlansUtilizationDetailsRequest, schemas.GetSavingsPlansUtilizationDetailsResponse), output: &GetSavingsPlansUtilizationDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlansUtilizationDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSavingsPlansUtilizationDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSavingsPlansUtilizationDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansUtilizationDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +230,6 @@ func (c *Client) addOperationGetSavingsPlansUtilizationDetailsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,11 +334,3 @@ type GetSavingsPlansUtilizationDetailsAPIClient interface {
 }
 
 var _ GetSavingsPlansUtilizationDetailsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetSavingsPlansUtilizationDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSavingsPlansUtilizationDetails",
-	}
-}

@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the partition indexes associated with a table.
@@ -50,6 +50,27 @@ type GetPartitionIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartitionIndexesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartitionIndexesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartitionIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetPartitionIndexesRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetPartitionIndexesRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPartitionIndexesRequest_NextToken, *v.NextToken)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetPartitionIndexesRequest_TableName, *v.TableName)
+	}
+}
+
 type GetPartitionIndexesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.
@@ -64,77 +85,51 @@ type GetPartitionIndexesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartitionIndexesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartitionIndexesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartitionIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPartitionIndexesResponse_NextToken, *v.NextToken)
+	}
+	serializePartitionIndexDescriptorList(s, schemas.GetPartitionIndexesResponse_PartitionIndexDescriptorList, v.PartitionIndexDescriptorList)
+}
+func (v *GetPartitionIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPartitionIndexesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPartitionIndexesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPartitionIndexesResponse_NextToken, v.NextToken)
+		case schemas.GetPartitionIndexesResponse_PartitionIndexDescriptorList:
+			return deserializePartitionIndexDescriptorList(d, schemas.GetPartitionIndexesResponse_PartitionIndexDescriptorList, &v.PartitionIndexDescriptorList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartitionIndexes, schemas.GetPartitionIndexesRequest, schemas.GetPartitionIndexesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPartitionIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartitionIndexes, schemas.GetPartitionIndexesRequest, schemas.GetPartitionIndexesResponse), output: &GetPartitionIndexesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPartitionIndexes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPartitionIndexes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPartitionIndexesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPartitionIndexes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +142,6 @@ func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -242,11 +231,3 @@ type GetPartitionIndexesAPIClient interface {
 }
 
 var _ GetPartitionIndexesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetPartitionIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPartitionIndexes",
-	}
-}

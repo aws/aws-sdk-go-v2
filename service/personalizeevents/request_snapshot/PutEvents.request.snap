@@ -1,0 +1,5 @@
+POST /events
+
+Content-Type: application/json
+
+{"eventList":[{"eventId":"__EventId__","eventType":"__EventType__","eventValue":1,"impression":["__Member__","__Member__"],"itemId":"__ItemId__","metricAttribution":{"eventAttributionSource":"__EventAttributionSource__"},"properties":"__Properties__","recommendationId":"__RecommendationId__","sentAt":946684800},{"eventId":"__EventId__","eventType":"__EventType__","eventValue":1,"impression":["__Member__","__Member__"],"itemId":"__ItemId__","metricAttribution":{"eventAttributionSource":"__EventAttributionSource__"},"properties":"__Properties__","recommendationId":"__RecommendationId__","sentAt":946684800}],"sessionId":"__SessionId__","trackingId":"__TrackingId__","userId":"__UserId__"}

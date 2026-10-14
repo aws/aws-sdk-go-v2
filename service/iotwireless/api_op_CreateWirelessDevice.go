@@ -5,12 +5,8 @@ package iotwireless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provisions a wireless device.
@@ -77,44 +73,6 @@ type CreateWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWirelessDeviceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWirelessDeviceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_Description, *v.Description)
-	}
-	if v.DestinationName != nil {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_DestinationName, *v.DestinationName)
-	}
-	if v.LoRaWAN != nil {
-		s.WriteStruct(schemas.CreateWirelessDeviceRequest_LoRaWAN)
-		v.LoRaWAN.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_Name, *v.Name)
-	}
-	if v.Positioning != "" {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_Positioning, string(v.Positioning))
-	}
-	if v.Sidewalk != nil {
-		s.WriteStruct(schemas.CreateWirelessDeviceRequest_Sidewalk)
-		v.Sidewalk.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateWirelessDeviceRequest_Tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.CreateWirelessDeviceRequest_Type, string(v.Type))
-	}
-}
-
 type CreateWirelessDeviceOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -129,76 +87,23 @@ type CreateWirelessDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWirelessDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWirelessDeviceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWirelessDeviceResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateWirelessDeviceResponse_Arn, v.Arn)
-		case schemas.CreateWirelessDeviceResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateWirelessDeviceResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessDevice, schemas.CreateWirelessDeviceRequest, schemas.CreateWirelessDeviceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessDevice{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessDevice, schemas.CreateWirelessDeviceRequest, schemas.CreateWirelessDeviceResponse), output: &CreateWirelessDeviceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWirelessDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -208,12 +113,6 @@ func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateWirelessDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWirelessDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,12 +125,6 @@ func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,12 +164,4 @@ func (m *idempotencyToken_initializeOpCreateWirelessDevice) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateWirelessDeviceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWirelessDevice{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWirelessDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWirelessDevice",
-	}
 }

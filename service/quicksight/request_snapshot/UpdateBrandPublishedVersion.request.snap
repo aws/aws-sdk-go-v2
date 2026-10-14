@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/brands/__BrandId__/publishedversion
+
+Content-Type: application/json
+
+{"VersionId":"__VersionId__"}

@@ -5,10 +5,10 @@ package appflow
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of connector-profile details matching the provided
@@ -57,6 +57,28 @@ type DescribeConnectorProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	serializeConnectorProfileNameList(s, schemas.DescribeConnectorProfilesRequest_connectorProfileNames, v.ConnectorProfileNames)
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorType, string(v.ConnectorType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeConnectorProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeConnectorProfilesOutput struct {
 
 	//  Returns information about the connector profiles associated with the flow.
@@ -72,74 +94,48 @@ type DescribeConnectorProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorProfileDetailList(s, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, v.ConnectorProfileDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectorProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorProfilesResponse_connectorProfileDetails:
+			return deserializeConnectorProfileDetailList(d, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, &v.ConnectorProfileDetails)
+		case schemas.DescribeConnectorProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConnectorProfilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorProfiles, schemas.DescribeConnectorProfilesRequest, schemas.DescribeConnectorProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorProfiles, schemas.DescribeConnectorProfilesRequest, schemas.DescribeConnectorProfilesResponse), output: &DescribeConnectorProfilesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnectorProfiles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectorProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectorProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +148,6 @@ func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +251,3 @@ type DescribeConnectorProfilesAPIClient interface {
 }
 
 var _ DescribeConnectorProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeConnectorProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConnectorProfiles",
-	}
-}

@@ -4,12 +4,7 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Send a WhatsApp message. For examples of sending a message using the Amazon Web
@@ -66,24 +61,6 @@ type SendWhatsAppMessageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendWhatsAppMessageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendWhatsAppMessageInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendWhatsAppMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteBlob(schemas.SendWhatsAppMessageInput_message, v.Message)
-	}
-	if v.MetaApiVersion != nil {
-		s.WriteString(schemas.SendWhatsAppMessageInput_metaApiVersion, *v.MetaApiVersion)
-	}
-	if v.OriginationPhoneNumberId != nil {
-		s.WriteString(schemas.SendWhatsAppMessageInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
-	}
-}
-
 type SendWhatsAppMessageOutput struct {
 
 	// The unique identifier of the message.
@@ -95,85 +72,29 @@ type SendWhatsAppMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendWhatsAppMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendWhatsAppMessageOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendWhatsAppMessageOutput_messageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.SendWhatsAppMessageOutput_messageId, v.MessageId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendWhatsAppMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendWhatsAppMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWhatsAppMessage, schemas.SendWhatsAppMessageInput, schemas.SendWhatsAppMessageOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendWhatsAppMessage{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWhatsAppMessage, schemas.SendWhatsAppMessageInput, schemas.SendWhatsAppMessageOutput), output: &SendWhatsAppMessageOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendWhatsAppMessage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendWhatsAppMessageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendWhatsAppMessage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +109,8 @@ func (c *Client) addOperationSendWhatsAppMessageMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendWhatsAppMessage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendWhatsAppMessage",
-	}
 }

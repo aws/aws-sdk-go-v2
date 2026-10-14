@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"endpointAddress":"__EndpointAddress__"}

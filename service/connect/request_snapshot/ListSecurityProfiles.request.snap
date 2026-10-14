@@ -1,0 +1,3 @@
+GET /security-profiles-summary/__InstanceId__?maxResults=1&nextToken=__NextToken__
+
+

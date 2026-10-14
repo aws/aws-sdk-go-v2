@@ -1,0 +1,5 @@
+POST /DeleteSink
+
+Content-Type: application/json
+
+{"Identifier":"__Identifier__"}

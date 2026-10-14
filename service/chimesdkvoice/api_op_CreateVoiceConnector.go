@@ -4,13 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Chime SDK Voice Connector. For more information about Voice
@@ -61,6 +58,9 @@ type CreateVoiceConnectorInput struct {
 	//   contact center to Connect Customer can start with Connect telephony and IVR for
 	//   immediate modernization ahead of agent migration.
 	//
+	// This integration is a gated feature. Please reach out to your account team to
+	//   discuss this feature with a Connect Specialist.
+	//
 	//   - CONNECT_ANALYTICS_CONNECTOR - Enables enterprises to integrate Connect
 	//   Customer with other voice systems for real-time and post-call analytics. They
 	//   can use Connect Customer Contact Lens with their existing voice systems to
@@ -75,8 +75,7 @@ type CreateVoiceConnectorInput struct {
 	//   agent migration.
 	IntegrationType types.VoiceConnectorIntegrationType
 
-	// The type of network for the Voice Connector. Either IPv4 only or dual-stack
-	// (IPv4 and IPv6).
+	// The type of network for the Voice Connector.
 	NetworkType types.NetworkType
 
 	// The tags assigned to the Voice Connector.
@@ -121,6 +120,19 @@ type CreateVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnector != nil {
+		s.WriteStruct(schemas.CreateVoiceConnectorResponse_VoiceConnector)
+		v.VoiceConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *CreateVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateVoiceConnectorResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -132,74 +144,26 @@ func (v *CreateVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse), output: &CreateVoiceConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVoiceConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVoiceConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVoiceConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +178,8 @@ func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVoiceConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVoiceConnector",
-	}
 }

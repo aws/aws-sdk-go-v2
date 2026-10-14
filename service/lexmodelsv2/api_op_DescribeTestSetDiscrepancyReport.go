@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeTestSetDiscrepancyReportInput struct {
 	TestSetDiscrepancyReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTestSetDiscrepancyReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetDiscrepancyReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetDiscrepancyReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestSetDiscrepancyReportId != nil {
+		s.WriteString(schemas.DescribeTestSetDiscrepancyReportRequest_testSetDiscrepancyReportId, *v.TestSetDiscrepancyReportId)
+	}
 }
 
 type DescribeTestSetDiscrepancyReportOutput struct {
@@ -73,77 +84,101 @@ type DescribeTestSetDiscrepancyReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestSetDiscrepancyReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetDiscrepancyReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetDiscrepancyReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeTestSetDiscrepancyReportResponse_creationDateTime, *v.CreationDateTime)
+	}
+	serializeFailureReasons(s, schemas.DescribeTestSetDiscrepancyReportResponse_failureReasons, v.FailureReasons)
+	if v.LastUpdatedDataTime != nil {
+		s.WriteTime(schemas.DescribeTestSetDiscrepancyReportResponse_lastUpdatedDataTime, *v.LastUpdatedDataTime)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.DescribeTestSetDiscrepancyReportResponse_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetDiscrepancyRawOutputUrl != nil {
+		s.WriteString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyRawOutputUrl, *v.TestSetDiscrepancyRawOutputUrl)
+	}
+	if v.TestSetDiscrepancyReportId != nil {
+		s.WriteString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId, *v.TestSetDiscrepancyReportId)
+	}
+	if v.TestSetDiscrepancyReportStatus != "" {
+		s.WriteString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportStatus, string(v.TestSetDiscrepancyReportStatus))
+	}
+	if v.TestSetDiscrepancyTopErrors != nil {
+		s.WriteStruct(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyTopErrors)
+		v.TestSetDiscrepancyTopErrors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetId, *v.TestSetId)
+	}
+}
+func (v *DescribeTestSetDiscrepancyReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTestSetDiscrepancyReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTestSetDiscrepancyReportResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetDiscrepancyReportResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeTestSetDiscrepancyReportResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_lastUpdatedDataTime:
+			v.LastUpdatedDataTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetDiscrepancyReportResponse_lastUpdatedDataTime, v.LastUpdatedDataTime)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_target:
+			v.Target = &types.TestSetDiscrepancyReportResourceTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyRawOutputUrl:
+			v.TestSetDiscrepancyRawOutputUrl = new(string)
+			return d.ReadString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyRawOutputUrl, v.TestSetDiscrepancyRawOutputUrl)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId:
+			v.TestSetDiscrepancyReportId = new(string)
+			return d.ReadString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId, v.TestSetDiscrepancyReportId)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyReportStatus, &ev); err != nil {
+				return err
+			}
+			v.TestSetDiscrepancyReportStatus = types.TestSetDiscrepancyReportStatus(ev)
+			return nil
+		case schemas.DescribeTestSetDiscrepancyReportResponse_testSetDiscrepancyTopErrors:
+			v.TestSetDiscrepancyTopErrors = &types.TestSetDiscrepancyErrors{}
+			return v.TestSetDiscrepancyTopErrors.Deserialize(d)
+		case schemas.DescribeTestSetDiscrepancyReportResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.DescribeTestSetDiscrepancyReportResponse_testSetId, v.TestSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTestSetDiscrepancyReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSetDiscrepancyReport, schemas.DescribeTestSetDiscrepancyReportRequest, schemas.DescribeTestSetDiscrepancyReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTestSetDiscrepancyReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSetDiscrepancyReport, schemas.DescribeTestSetDiscrepancyReportRequest, schemas.DescribeTestSetDiscrepancyReportResponse), output: &DescribeTestSetDiscrepancyReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTestSetDiscrepancyReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTestSetDiscrepancyReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTestSetDiscrepancyReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTestSetDiscrepancyReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +193,8 @@ func (c *Client) addOperationDescribeTestSetDiscrepancyReportMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTestSetDiscrepancyReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTestSetDiscrepancyReport",
-	}
 }

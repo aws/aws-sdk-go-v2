@@ -4,12 +4,7 @@ package iotmanagedintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the certificate PEM for a managed IoT thing.
@@ -38,18 +33,6 @@ type GetManagedThingCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedThingCertificateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedThingCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetManagedThingCertificateRequest_Identifier, *v.Identifier)
-	}
-}
-
 type GetManagedThingCertificateOutput struct {
 
 	// The PEM-encoded certificate for the managed thing.
@@ -64,88 +47,29 @@ type GetManagedThingCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedThingCertificateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedThingCertificateResponse_CertificatePem:
-			v.CertificatePem = new(string)
-			return d.ReadString(schemas.GetManagedThingCertificateResponse_CertificatePem, v.CertificatePem)
-		case schemas.GetManagedThingCertificateResponse_ManagedThingId:
-			v.ManagedThingId = new(string)
-			return d.ReadString(schemas.GetManagedThingCertificateResponse_ManagedThingId, v.ManagedThingId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedThingCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCertificate, schemas.GetManagedThingCertificateRequest, schemas.GetManagedThingCertificateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingCertificate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCertificate, schemas.GetManagedThingCertificateRequest, schemas.GetManagedThingCertificateResponse), output: &GetManagedThingCertificateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedThingCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetManagedThingCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedThingCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +84,8 @@ func (c *Client) addOperationGetManagedThingCertificateMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetManagedThingCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetManagedThingCertificate",
-	}
 }

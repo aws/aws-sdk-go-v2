@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","resourceShare":{"allowExternalPrincipals":true,"creationTime":946684800,"featureSet":"CREATED_FROM_POLICY","lastUpdatedTime":946684800,"name":"__Name__","owningAccountId":"__OwningAccountId__","resourceShareArn":"__ResourceShareArn__","resourceShareConfiguration":{"retainSharingOnAccountLeaveOrganization":true},"status":"PENDING","statusMessage":"__StatusMessage__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

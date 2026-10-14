@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagementResourceAssociations
+
+{"EngagementResourceAssociationSummaries":[{"Catalog":"__Catalog__","CreatedBy":"__CreatedBy__","EngagementId":"__EngagementId__","ResourceId":"__ResourceId__","ResourceType":"Opportunity"},{"Catalog":"__Catalog__","CreatedBy":"__CreatedBy__","EngagementId":"__EngagementId__","ResourceId":"__ResourceId__","ResourceType":"Opportunity"}],"NextToken":"__NextToken__"}

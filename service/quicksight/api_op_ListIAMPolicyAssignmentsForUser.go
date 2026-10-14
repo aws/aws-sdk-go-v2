@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all of the IAM policy assignments, including the Amazon Resource Names
@@ -55,6 +55,30 @@ type ListIAMPolicyAssignmentsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIAMPolicyAssignmentsForUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIAMPolicyAssignmentsForUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIAMPolicyAssignmentsForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIAMPolicyAssignmentsForUserRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserRequest_NextToken, *v.NextToken)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserRequest_UserName, *v.UserName)
+	}
+}
+
 type ListIAMPolicyAssignmentsForUserOutput struct {
 
 	// The active assignments for this user.
@@ -75,77 +99,62 @@ type ListIAMPolicyAssignmentsForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIAMPolicyAssignmentsForUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIAMPolicyAssignmentsForUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIAMPolicyAssignmentsForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveIAMPolicyAssignmentList(s, schemas.ListIAMPolicyAssignmentsForUserResponse_ActiveAssignments, v.ActiveAssignments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListIAMPolicyAssignmentsForUserResponse_Status, v.Status)
+	}
+}
+func (v *ListIAMPolicyAssignmentsForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIAMPolicyAssignmentsForUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIAMPolicyAssignmentsForUserResponse_ActiveAssignments:
+			return deserializeActiveIAMPolicyAssignmentList(d, schemas.ListIAMPolicyAssignmentsForUserResponse_ActiveAssignments, &v.ActiveAssignments)
+		case schemas.ListIAMPolicyAssignmentsForUserResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIAMPolicyAssignmentsForUserResponse_NextToken, v.NextToken)
+		case schemas.ListIAMPolicyAssignmentsForUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListIAMPolicyAssignmentsForUserResponse_RequestId, v.RequestId)
+		case schemas.ListIAMPolicyAssignmentsForUserResponse_Status:
+			return d.ReadInt32(schemas.ListIAMPolicyAssignmentsForUserResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIAMPolicyAssignmentsForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIAMPolicyAssignmentsForUser, schemas.ListIAMPolicyAssignmentsForUserRequest, schemas.ListIAMPolicyAssignmentsForUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIAMPolicyAssignmentsForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIAMPolicyAssignmentsForUser, schemas.ListIAMPolicyAssignmentsForUserRequest, schemas.ListIAMPolicyAssignmentsForUserResponse), output: &ListIAMPolicyAssignmentsForUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIAMPolicyAssignmentsForUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIAMPolicyAssignmentsForUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIAMPolicyAssignmentsForUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIAMPolicyAssignmentsForUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +167,6 @@ func (c *Client) addOperationListIAMPolicyAssignmentsForUserMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +270,3 @@ type ListIAMPolicyAssignmentsForUserAPIClient interface {
 }
 
 var _ ListIAMPolicyAssignmentsForUserAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIAMPolicyAssignmentsForUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIAMPolicyAssignmentsForUser",
-	}
-}

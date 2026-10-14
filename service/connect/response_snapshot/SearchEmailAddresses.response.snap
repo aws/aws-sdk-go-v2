@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateTotalCount":1,"EmailAddresses":[{"AliasConfigurations":[{"EmailAddressId":"__EmailAddressId__"},{"EmailAddressId":"__EmailAddressId__"}],"Description":"__Description__","DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__","EmailAddressArn":"__EmailAddressArn__","EmailAddressId":"__EmailAddressId__"},{"AliasConfigurations":[{"EmailAddressId":"__EmailAddressId__"},{"EmailAddressId":"__EmailAddressId__"}],"Description":"__Description__","DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__","EmailAddressArn":"__EmailAddressArn__","EmailAddressId":"__EmailAddressId__"}],"NextToken":"__NextToken__"}

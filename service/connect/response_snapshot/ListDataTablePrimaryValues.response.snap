@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PrimaryValuesList":[{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"PrimaryValues":[{"AttributeId":"__AttributeId__","AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeId":"__AttributeId__","AttributeName":"__AttributeName__","Value":"__Value__"}],"RecordId":"__RecordId__"},{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"PrimaryValues":[{"AttributeId":"__AttributeId__","AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeId":"__AttributeId__","AttributeName":"__AttributeName__","Value":"__Value__"}],"RecordId":"__RecordId__"}]}

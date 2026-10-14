@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.ListEventPredictions
+
+{"detectorId":{"value":"__Value__"},"detectorVersionId":{"value":"__Value__"},"eventId":{"value":"__Value__"},"eventType":{"value":"__Value__"},"maxResults":1,"nextToken":"__NextToken__","predictionTimeRange":{"endTime":"__EndTime__","startTime":"__StartTime__"}}

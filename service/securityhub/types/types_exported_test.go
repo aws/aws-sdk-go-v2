@@ -60,6 +60,9 @@ func ExampleCriteria_outputUsage() {
 	case *types.CriteriaMemberOcsfFindingCriteria:
 		_ = v.Value // Value is types.OcsfFindingFilters
 
+	case *types.CriteriaMemberResourceCriteria:
+		_ = v.Value // Value is types.ResourcesFilters
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -69,7 +72,116 @@ func ExampleCriteria_outputUsage() {
 	}
 }
 
+var _ *types.ResourcesFilters
 var _ *types.OcsfFindingFilters
+
+func ExampleCspmProviderConfiguration_outputUsage() {
+	var union types.CspmProviderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureProviderConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureProviderConfiguration
+
+func ExampleCspmProviderDetail_outputUsage() {
+	var union types.CspmProviderDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderDetailMemberAzure:
+		_ = v.Value // Value is types.AzureDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureDetail
+
+func ExampleCspmProviderUpdateConfiguration_outputUsage() {
+	var union types.CspmProviderUpdateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderUpdateConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureUpdateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureUpdateConfiguration
+
+func ExampleExportDestination_outputUsage() {
+	var union types.ExportDestination
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportDestinationMemberS3:
+		_ = v.Value // Value is types.S3ExportDestination
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3ExportDestination
+
+func ExampleExportOutput_outputUsage() {
+	var union types.ExportOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportOutputMemberFindings:
+		_ = v.Value // Value is types.FindingsOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FindingsOutput
+
+func ExampleExportOutputSummary_outputUsage() {
+	var union types.ExportOutputSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExportOutputSummaryMemberFindings:
+		_ = v.Value // Value is types.FindingsOutputSummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FindingsOutputSummary
 
 func ExampleParameterValue_outputUsage() {
 	var union types.ParameterValue
@@ -137,6 +249,9 @@ func ExampleProviderConfiguration_outputUsage() {
 	var union types.ProviderConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureProviderConfiguration
+
 	case *types.ProviderConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudProviderConfiguration
 
@@ -152,6 +267,7 @@ func ExampleProviderConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.AzureProviderConfiguration
 var _ *types.JiraCloudProviderConfiguration
 var _ *types.ServiceNowProviderConfiguration
 
@@ -159,6 +275,9 @@ func ExampleProviderDetail_outputUsage() {
 	var union types.ProviderDetail
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderDetailMemberAzure:
+		_ = v.Value // Value is types.AzureDetail
+
 	case *types.ProviderDetailMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudDetail
 
@@ -174,6 +293,7 @@ func ExampleProviderDetail_outputUsage() {
 	}
 }
 
+var _ *types.AzureDetail
 var _ *types.JiraCloudDetail
 var _ *types.ServiceNowDetail
 
@@ -181,6 +301,9 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	var union types.ProviderUpdateConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderUpdateConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureUpdateConfiguration
+
 	case *types.ProviderUpdateConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudUpdateConfiguration
 
@@ -196,6 +319,7 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.AzureUpdateConfiguration
 var _ *types.ServiceNowUpdateConfiguration
 var _ *types.JiraCloudUpdateConfiguration
 

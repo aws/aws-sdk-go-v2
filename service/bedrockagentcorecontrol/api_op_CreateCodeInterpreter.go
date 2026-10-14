@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,40 +54,18 @@ type CreateCodeInterpreterInput struct {
 	// the code interpreter to access Amazon Web Services services.
 	ExecutionRoleArn *string
 
+	// The file system configurations to mount into the code interpreter. Use these
+	// configurations to mount your own Amazon Simple Storage Service (Amazon S3) Files
+	// or Amazon Elastic File System (Amazon EFS) access points. Your sessions can then
+	// access your data. If you don't specify this field, no file systems are mounted.
+	FilesystemConfigurations []types.ToolsFileSystemConfiguration
+
 	// A map of tag keys and values to assign to the code interpreter. Tags enable you
 	// to categorize your resources in different ways, for example, by purpose, owner,
 	// or environment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCodeInterpreterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificates(s, schemas.CreateCodeInterpreterRequest_certificates, v.Certificates)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateCodeInterpreterRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateCodeInterpreterRequest_description, *v.Description)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.CreateCodeInterpreterRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateCodeInterpreterRequest_name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.CreateCodeInterpreterRequest_networkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagsMap(s, schemas.CreateCodeInterpreterRequest_tags, v.Tags)
 }
 
 type CreateCodeInterpreterOutput struct {
@@ -122,86 +96,23 @@ type CreateCodeInterpreterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCodeInterpreterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCodeInterpreterResponse_codeInterpreterArn:
-			v.CodeInterpreterArn = new(string)
-			return d.ReadString(schemas.CreateCodeInterpreterResponse_codeInterpreterArn, v.CodeInterpreterArn)
-		case schemas.CreateCodeInterpreterResponse_codeInterpreterId:
-			v.CodeInterpreterId = new(string)
-			return d.ReadString(schemas.CreateCodeInterpreterResponse_codeInterpreterId, v.CodeInterpreterId)
-		case schemas.CreateCodeInterpreterResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateCodeInterpreterResponse_createdAt, v.CreatedAt)
-		case schemas.CreateCodeInterpreterResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateCodeInterpreterResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CodeInterpreterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCodeInterpreterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeInterpreter, schemas.CreateCodeInterpreterRequest, schemas.CreateCodeInterpreterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeInterpreter{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeInterpreter, schemas.CreateCodeInterpreterRequest, schemas.CreateCodeInterpreterResponse), output: &CreateCodeInterpreterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCodeInterpreter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -211,12 +122,6 @@ func (c *Client) addOperationCreateCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateCodeInterpreterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeInterpreter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,12 +134,6 @@ func (c *Client) addOperationCreateCodeInterpreterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,12 +173,4 @@ func (m *idempotencyToken_initializeOpCreateCodeInterpreter) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateCodeInterpreterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCodeInterpreter{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCodeInterpreter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCodeInterpreter",
-	}
 }

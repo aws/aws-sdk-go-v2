@@ -5,14 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the A2A agent card associated with an AgentCore Runtime agent.
@@ -49,24 +43,6 @@ type GetAgentCardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAgentCardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAgentCardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAgentCardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentRuntimeArn != nil {
-		s.WriteString(schemas.GetAgentCardRequest_agentRuntimeArn, *v.AgentRuntimeArn)
-	}
-	if v.Qualifier != nil {
-		s.WriteString(schemas.GetAgentCardRequest_qualifier, *v.Qualifier)
-	}
-	if v.RuntimeSessionId != nil {
-		s.WriteString(schemas.GetAgentCardRequest_runtimeSessionId, *v.RuntimeSessionId)
-	}
-}
-
 type GetAgentCardOutput struct {
 
 	// An agent card document that contains metadata and capabilities for an AgentCore
@@ -87,85 +63,23 @@ type GetAgentCardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAgentCardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAgentCardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAgentCardResponse_agentCard:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetAgentCardResponse_agentCard, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.AgentCard = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetAgentCardResponse_runtimeSessionId:
-			v.RuntimeSessionId = new(string)
-			return d.ReadString(schemas.GetAgentCardResponse_runtimeSessionId, v.RuntimeSessionId)
-		case schemas.GetAgentCardResponse_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.GetAgentCardResponse_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAgentCardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentCard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCard, schemas.GetAgentCardRequest, schemas.GetAgentCardResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentCard{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCard, schemas.GetAgentCardRequest, schemas.GetAgentCardResponse), output: &GetAgentCardOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgentCard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +89,6 @@ func (c *Client) addOperationGetAgentCardMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpGetAgentCardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentCard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +101,6 @@ func (c *Client) addOperationGetAgentCardMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +140,4 @@ func (m *idempotencyToken_initializeOpGetAgentCard) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opGetAgentCardMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpGetAgentCard{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opGetAgentCard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAgentCard",
-	}
 }

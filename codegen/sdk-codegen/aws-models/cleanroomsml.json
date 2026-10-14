@@ -2978,6 +2978,9 @@
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3080,6 +3083,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3194,6 +3200,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3683,6 +3692,9 @@
                     "target": "com.amazonaws.cleanroomsml#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3914,6 +3926,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3960,6 +3975,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4010,6 +4028,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -4037,6 +4058,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4101,6 +4125,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4383,6 +4410,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -4503,6 +4533,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4654,6 +4687,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5314,6 +5350,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -5341,6 +5380,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5527,6 +5569,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -6537,6 +6582,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8435,6 +8483,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8515,6 +8566,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8604,6 +8658,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -9140,6 +9197,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9299,6 +9359,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -9809,6 +9872,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -10537,6 +10603,9 @@
             },
             "value": {
                 "target": "com.amazonaws.cleanroomsml#ParameterValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cleanroomsml#ParameterName": {
@@ -10721,6 +10790,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -11110,6 +11182,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -12766,6 +12841,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -12918,6 +12996,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CR.4X"
+                    }
+                },
+                "CR8X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR.8X"
                     }
                 }
             }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListAssetsForLicenseAssetGroup
+
+{"AssetType":"__AssetType__","LicenseAssetGroupArn":"__LicenseAssetGroupArn__","MaxResults":1,"NextToken":"__NextToken__"}

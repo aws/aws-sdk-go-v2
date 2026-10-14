@@ -5,10 +5,10 @@ package voiceid
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all fraudsters in a specified watchlist or domain.
@@ -52,6 +52,46 @@ type ListFraudstersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudstersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudstersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudstersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFraudstersRequest_DomainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFraudstersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudstersRequest_NextToken, *v.NextToken)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.ListFraudstersRequest_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *ListFraudstersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudstersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudstersRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_DomainId, v.DomainId)
+		case schemas.ListFraudstersRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFraudstersRequest_MaxResults, v.MaxResults)
+		case schemas.ListFraudstersRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_NextToken, v.NextToken)
+		case schemas.ListFraudstersRequest_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 type ListFraudstersOutput struct {
 
 	// A list that contains details about each fraudster in the Amazon Web Services
@@ -70,77 +110,51 @@ type ListFraudstersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudstersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudstersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudstersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFraudsterSummaries(s, schemas.ListFraudstersResponse_FraudsterSummaries, v.FraudsterSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudstersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFraudstersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudstersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudstersResponse_FraudsterSummaries:
+			return deserializeFraudsterSummaries(d, schemas.ListFraudstersResponse_FraudsterSummaries, &v.FraudsterSummaries)
+		case schemas.ListFraudstersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudstersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFraudstersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsters, schemas.ListFraudstersRequest, schemas.ListFraudstersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFraudsters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsters, schemas.ListFraudstersRequest, schemas.ListFraudstersResponse), output: &ListFraudstersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFraudsters{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFraudsters"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFraudstersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFraudsters(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +167,6 @@ func (c *Client) addOperationListFraudstersMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +269,3 @@ type ListFraudstersAPIClient interface {
 }
 
 var _ ListFraudstersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFraudsters(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFraudsters",
-	}
-}

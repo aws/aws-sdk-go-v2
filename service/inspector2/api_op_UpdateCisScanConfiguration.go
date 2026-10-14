@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a CIS scan configuration.
@@ -50,6 +49,30 @@ type UpdateCisScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCisScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCisScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+	if v.ScanName != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_scanName, *v.ScanName)
+	}
+	serializeSchedule(s, schemas.UpdateCisScanConfigurationRequest_schedule, v.Schedule)
+	if v.SecurityLevel != "" {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_securityLevel, string(v.SecurityLevel))
+	}
+	if v.Targets != nil {
+		s.WriteStruct(schemas.UpdateCisScanConfigurationRequest_targets)
+		v.Targets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateCisScanConfigurationOutput struct {
 
 	// The CIS scan configuration ARN.
@@ -63,77 +86,48 @@ type UpdateCisScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCisScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCisScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCisScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *UpdateCisScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCisScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCisScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCisScanConfiguration, schemas.UpdateCisScanConfigurationRequest, schemas.UpdateCisScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCisScanConfiguration, schemas.UpdateCisScanConfigurationRequest, schemas.UpdateCisScanConfigurationResponse), output: &UpdateCisScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCisScanConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCisScanConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCisScanConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCisScanConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +142,8 @@ func (c *Client) addOperationUpdateCisScanConfigurationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCisScanConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCisScanConfiguration",
-	}
 }

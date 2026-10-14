@@ -5,10 +5,10 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Retrieves information about the status of campaigns, decoder manifests, or
@@ -53,6 +53,40 @@ type GetVehicleStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVehicleStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVehicleStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVehicleStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetVehicleStatusRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVehicleStatusRequest_nextToken, *v.NextToken)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.GetVehicleStatusRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *GetVehicleStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVehicleStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVehicleStatusRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetVehicleStatusRequest_maxResults, v.MaxResults)
+		case schemas.GetVehicleStatusRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetVehicleStatusRequest_nextToken, v.NextToken)
+		case schemas.GetVehicleStatusRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.GetVehicleStatusRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type GetVehicleStatusOutput struct {
 
 	//  Lists information about the state of the vehicle with deployed campaigns.
@@ -68,77 +102,51 @@ type GetVehicleStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVehicleStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVehicleStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVehicleStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVehicleStatusList(s, schemas.GetVehicleStatusResponse_campaigns, v.Campaigns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVehicleStatusResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetVehicleStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVehicleStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVehicleStatusResponse_campaigns:
+			return deserializeVehicleStatusList(d, schemas.GetVehicleStatusResponse_campaigns, &v.Campaigns)
+		case schemas.GetVehicleStatusResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetVehicleStatusResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVehicleStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVehicleStatus, schemas.GetVehicleStatusRequest, schemas.GetVehicleStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetVehicleStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVehicleStatus, schemas.GetVehicleStatusRequest, schemas.GetVehicleStatusResponse), output: &GetVehicleStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetVehicleStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVehicleStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetVehicleStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVehicleStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +159,6 @@ func (c *Client) addOperationGetVehicleStatusMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +260,3 @@ type GetVehicleStatusAPIClient interface {
 }
 
 var _ GetVehicleStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetVehicleStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVehicleStatus",
-	}
-}

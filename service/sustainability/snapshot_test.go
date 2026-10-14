@@ -85,6 +85,30 @@ func TestCheckSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *testing.T) 
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEstimatedWaterAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEstimatedWaterAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEstimatedWaterAllocationDimensionValues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEstimatedWaterAllocationDimensionValues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_GetEstimatedCarbonEmissions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEstimatedCarbonEmissions(context.Background(), nil, func(o *Options) {
@@ -102,6 +126,30 @@ func TestUpdateSnapshot_GetEstimatedCarbonEmissionsDimensionValues(t *testing.T)
 	_, err := svc.GetEstimatedCarbonEmissionsDimensionValues(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEstimatedCarbonEmissionsDimensionValues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEstimatedWaterAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEstimatedWaterAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEstimatedWaterAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEstimatedWaterAllocationDimensionValues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEstimatedWaterAllocationDimensionValues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEstimatedWaterAllocationDimensionValues")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

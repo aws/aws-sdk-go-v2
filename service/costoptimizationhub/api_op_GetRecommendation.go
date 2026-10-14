@@ -4,13 +4,10 @@ package costoptimizationhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -138,6 +135,77 @@ type GetRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_accountId, *v.AccountId)
+	}
+	if v.ActionType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_actionType, string(v.ActionType))
+	}
+	if v.CostCalculationLookbackPeriodInDays != nil {
+		s.WriteInt32(schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays, *v.CostCalculationLookbackPeriodInDays)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.GetRecommendationResponse_currencyCode, *v.CurrencyCode)
+	}
+	serializeResourceDetails(s, schemas.GetRecommendationResponse_currentResourceDetails, v.CurrentResourceDetails)
+	if v.CurrentResourceType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_currentResourceType, string(v.CurrentResourceType))
+	}
+	if v.EstimatedMonthlyCost != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedMonthlyCost, *v.EstimatedMonthlyCost)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedMonthlySavings, *v.EstimatedMonthlySavings)
+	}
+	if v.EstimatedSavingsOverCostCalculationLookbackPeriod != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod, *v.EstimatedSavingsOverCostCalculationLookbackPeriod)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteFloat64(schemas.GetRecommendationResponse_estimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.ImplementationEffort != "" {
+		s.WriteString(schemas.GetRecommendationResponse_implementationEffort, string(v.ImplementationEffort))
+	}
+	if v.LastRefreshTimestamp != nil {
+		s.WriteTime(schemas.GetRecommendationResponse_lastRefreshTimestamp, *v.LastRefreshTimestamp)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_recommendationId, *v.RecommendationId)
+	}
+	if v.RecommendationLookbackPeriodInDays != nil {
+		s.WriteInt32(schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays, *v.RecommendationLookbackPeriodInDays)
+	}
+	serializeResourceDetails(s, schemas.GetRecommendationResponse_recommendedResourceDetails, v.RecommendedResourceDetails)
+	if v.RecommendedResourceType != "" {
+		s.WriteString(schemas.GetRecommendationResponse_recommendedResourceType, string(v.RecommendedResourceType))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetRecommendationResponse_region, *v.Region)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetRecommendationResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetRecommendationResponse_resourceId, *v.ResourceId)
+	}
+	if v.RestartNeeded != nil {
+		s.WriteBool(schemas.GetRecommendationResponse_restartNeeded, *v.RestartNeeded)
+	}
+	if v.RollbackPossible != nil {
+		s.WriteBool(schemas.GetRecommendationResponse_rollbackPossible, *v.RollbackPossible)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.GetRecommendationResponse_source, string(v.Source))
+	}
+	serializeTagList(s, schemas.GetRecommendationResponse_tags, v.Tags)
+}
 func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommendationResponse, func(s *smithy.Schema) error {
 		switch s {
@@ -232,74 +300,26 @@ func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 func (c *Client) addOperationGetRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse), output: &GetRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecommendation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRecommendationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -314,22 +334,8 @@ func (c *Client) addOperationGetRecommendationMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRecommendation",
-	}
 }

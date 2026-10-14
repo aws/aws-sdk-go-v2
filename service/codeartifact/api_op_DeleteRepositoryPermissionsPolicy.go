@@ -4,13 +4,8 @@ package codeartifact
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Deletes the resource policy that is set on a repository. After a resource
@@ -62,27 +57,6 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRepositoryPermissionsPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRepositoryPermissionsPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRepositoryPermissionsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.PolicyRevision != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_policyRevision, *v.PolicyRevision)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_repository, *v.Repository)
-	}
-}
-
 type DeleteRepositoryPermissionsPolicyOutput struct {
 
 	//  Information about the deleted policy after processing the request.
@@ -94,85 +68,29 @@ type DeleteRepositoryPermissionsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRepositoryPermissionsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRepositoryPermissionsPolicyResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteRepositoryPermissionsPolicyResult_policy:
-			v.Policy = &types.ResourcePolicy{}
-			return v.Policy.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPermissionsPolicy, schemas.DeleteRepositoryPermissionsPolicyRequest, schemas.DeleteRepositoryPermissionsPolicyResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPermissionsPolicy, schemas.DeleteRepositoryPermissionsPolicyRequest, schemas.DeleteRepositoryPermissionsPolicyResult), output: &DeleteRepositoryPermissionsPolicyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRepositoryPermissionsPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRepositoryPermissionsPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRepositoryPermissionsPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +105,8 @@ func (c *Client) addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRepositoryPermissionsPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRepositoryPermissionsPolicy",
-	}
 }

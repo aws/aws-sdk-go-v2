@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all portfolios that the specified product is associated with.
@@ -53,27 +49,6 @@ type ListPortfoliosForProductInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortfoliosForProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPortfoliosForProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPortfoliosForProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ListPortfoliosForProductInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListPortfoliosForProductInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListPortfoliosForProductInput_PageToken, *v.PageToken)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.ListPortfoliosForProductInput_ProductId, *v.ProductId)
-	}
-}
-
 type ListPortfoliosForProductOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -89,87 +64,29 @@ type ListPortfoliosForProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortfoliosForProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPortfoliosForProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPortfoliosForProductOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.ListPortfoliosForProductOutput_NextPageToken, v.NextPageToken)
-		case schemas.ListPortfoliosForProductOutput_PortfolioDetails:
-			return deserializePortfolioDetails(d, schemas.ListPortfoliosForProductOutput_PortfolioDetails, &v.PortfolioDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfoliosForProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfoliosForProduct, schemas.ListPortfoliosForProductInput, schemas.ListPortfoliosForProductOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPortfoliosForProduct{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfoliosForProduct, schemas.ListPortfoliosForProductInput, schemas.ListPortfoliosForProductOutput), output: &ListPortfoliosForProductOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPortfoliosForProduct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPortfoliosForProductValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPortfoliosForProduct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +99,6 @@ func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +197,3 @@ type ListPortfoliosForProductAPIClient interface {
 }
 
 var _ ListPortfoliosForProductAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPortfoliosForProduct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPortfoliosForProduct",
-	}
-}

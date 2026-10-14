@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,16 +34,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request you submitted conflicts with an existing request.
 type ConflictException struct {
@@ -71,16 +60,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An internal server error occured. Retry your request.
 type InternalServiceErrorException struct {
@@ -107,16 +86,6 @@ func (e *InternalServiceErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InternalServiceErrorException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServiceErrorException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServiceErrorException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServiceErrorException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The NextToken you provided isn;t valid.
 type InvalidNextTokenException struct {
@@ -143,16 +112,6 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidNextTokenException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidNextTokenException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more parameters in this request are not valid.
 type InvalidParameterException struct {
@@ -181,19 +140,6 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidParameterException_FieldName:
-			v.FieldName = new(string)
-			return d.ReadString(schemas.InvalidParameterException_FieldName, v.FieldName)
-		case schemas.InvalidParameterException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidParameterException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request caused one or more limits to be exceeded.
 type LimitExceededException struct {
@@ -222,19 +168,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
-		case schemas.LimitExceededException_ResourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.LimitExceededException_ResourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // The resource you are trying to associate, has already been associated.
 type ResourceExistsException struct {
@@ -263,19 +196,6 @@ func (e *ResourceExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceExistsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceExistsException_Message, v.Message)
-		case schemas.ResourceExistsException_ResourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ResourceExistsException_ResourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // The resource you are associating is not found.
 type ResourceNotFoundException struct {
@@ -304,19 +224,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		case schemas.ResourceNotFoundException_ResourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_ResourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // The request was throttled. Try again in a few minutes.
 type ThrottlingException struct {
@@ -343,16 +250,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You have provided an invalid command.
 type ValidationException struct {
@@ -379,13 +276,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		}
-		return nil
-	})
-}

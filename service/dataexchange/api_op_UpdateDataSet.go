@@ -4,11 +4,10 @@ package dataexchange
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,40 @@ type UpdateDataSetInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSetRequest_Name, *v.Name)
+	}
+}
+func (v *UpdateDataSetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSetRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateDataSetRequest_DataSetId, v.DataSetId)
+		case schemas.UpdateDataSetRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDataSetRequest_Description, v.Description)
+		case schemas.UpdateDataSetRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataSetRequest_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type UpdateDataSetOutput struct {
@@ -86,77 +119,112 @@ type UpdateDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_Arn, *v.Arn)
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.UpdateDataSetResponse_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateDataSetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_Name, *v.Name)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.UpdateDataSetResponse_Origin, string(v.Origin))
+	}
+	if v.OriginDetails != nil {
+		s.WriteStruct(schemas.UpdateDataSetResponse_OriginDetails)
+		v.OriginDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.UpdateDataSetResponse_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateDataSetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_Arn, v.Arn)
+		case schemas.UpdateDataSetResponse_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSetResponse_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = types.AssetType(ev)
+			return nil
+		case schemas.UpdateDataSetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDataSetResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateDataSetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_Description, v.Description)
+		case schemas.UpdateDataSetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_Id, v.Id)
+		case schemas.UpdateDataSetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_Name, v.Name)
+		case schemas.UpdateDataSetResponse_Origin:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataSetResponse_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = types.Origin(ev)
+			return nil
+		case schemas.UpdateDataSetResponse_OriginDetails:
+			v.OriginDetails = &types.OriginDetails{}
+			return v.OriginDetails.Deserialize(d)
+		case schemas.UpdateDataSetResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.UpdateDataSetResponse_SourceId, v.SourceId)
+		case schemas.UpdateDataSetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDataSetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSet, schemas.UpdateDataSetRequest, schemas.UpdateDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSet, schemas.UpdateDataSetRequest, schemas.UpdateDataSetResponse), output: &UpdateDataSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +239,8 @@ func (c *Client) addOperationUpdateDataSetMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataSet",
-	}
 }

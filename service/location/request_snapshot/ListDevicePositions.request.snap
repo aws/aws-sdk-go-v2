@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/list-positions
+
+Content-Type: application/json
+
+{"FilterGeometry":{"Polygon":[[[1,1],[1,1]],[[1,1],[1,1]]]},"MaxResults":1,"NextToken":"__NextToken__"}

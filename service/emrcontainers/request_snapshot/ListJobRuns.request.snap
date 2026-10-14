@@ -1,0 +1,3 @@
+GET /virtualclusters/__VirtualClusterId__/jobruns?createdAfter=2000-01-01T00%3A00%3A00Z&createdBefore=2000-01-01T00%3A00%3A00Z&maxResults=1&name=__Name__&nextToken=__NextToken__&states=PENDING&states=PENDING
+
+

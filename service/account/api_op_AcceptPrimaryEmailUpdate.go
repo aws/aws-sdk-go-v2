@@ -4,11 +4,10 @@ package account
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts the request that originated from StartPrimaryEmailUpdate to update the primary email address
@@ -65,6 +64,24 @@ type AcceptPrimaryEmailUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPrimaryEmailUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPrimaryEmailUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPrimaryEmailUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_AccountId, *v.AccountId)
+	}
+	if v.Otp != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_Otp, *v.Otp)
+	}
+	if v.PrimaryEmail != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_PrimaryEmail, *v.PrimaryEmail)
+	}
+}
+
 type AcceptPrimaryEmailUpdateOutput struct {
 
 	// Retrieves the status of the accepted primary email update request.
@@ -76,77 +93,52 @@ type AcceptPrimaryEmailUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPrimaryEmailUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPrimaryEmailUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPrimaryEmailUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateResponse_Status, string(v.Status))
+	}
+}
+func (v *AcceptPrimaryEmailUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptPrimaryEmailUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptPrimaryEmailUpdateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcceptPrimaryEmailUpdateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrimaryEmailUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptPrimaryEmailUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPrimaryEmailUpdate, schemas.AcceptPrimaryEmailUpdateRequest, schemas.AcceptPrimaryEmailUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPrimaryEmailUpdate, schemas.AcceptPrimaryEmailUpdateRequest, schemas.AcceptPrimaryEmailUpdateResponse), output: &AcceptPrimaryEmailUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptPrimaryEmailUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptPrimaryEmailUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptPrimaryEmailUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +153,8 @@ func (c *Client) addOperationAcceptPrimaryEmailUpdateMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAcceptPrimaryEmailUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptPrimaryEmailUpdate",
-	}
 }

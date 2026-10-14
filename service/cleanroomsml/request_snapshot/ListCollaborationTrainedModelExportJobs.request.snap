@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/trained-models/__TrainedModelArn__/export-jobs?maxResults=1&nextToken=__NextToken__&trainedModelVersionIdentifier=__TrainedModelVersionIdentifier__
+
+

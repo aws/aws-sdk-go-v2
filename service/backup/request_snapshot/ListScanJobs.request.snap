@@ -1,0 +1,3 @@
+GET /scan/jobs?ByAccountId=__ByAccountId__&ByBackupVaultName=__ByBackupVaultName__&ByCompleteAfter=2000-01-01T00%3A00%3A00Z&ByCompleteBefore=2000-01-01T00%3A00%3A00Z&ByMalwareScanner=GUARDDUTY&ByRecoveryPointArn=__ByRecoveryPointArn__&ByResourceArn=__ByResourceArn__&ByResourceType=EBS&ByScanResultStatus=NO_THREATS_FOUND&ByState=CANCELED&MaxResults=1&NextToken=__NextToken__
+
+

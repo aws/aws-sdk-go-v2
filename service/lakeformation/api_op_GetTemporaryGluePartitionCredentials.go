@@ -4,13 +4,8 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,33 +59,6 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTemporaryGluePartitionCredentialsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTemporaryGluePartitionCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuditContext != nil {
-		s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest_AuditContext)
-		v.AuditContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.GetTemporaryGluePartitionCredentialsRequest_DurationSeconds, *v.DurationSeconds)
-	}
-	if v.Partition != nil {
-		s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest_Partition)
-		v.Partition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePermissionList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_Permissions, v.Permissions)
-	serializePermissionTypeList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
-	if v.TableArn != nil {
-		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsRequest_TableArn, *v.TableArn)
-	}
-}
-
 type GetTemporaryGluePartitionCredentialsOutput struct {
 
 	// The access key ID for the temporary credentials.
@@ -111,94 +79,29 @@ type GetTemporaryGluePartitionCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTemporaryGluePartitionCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTemporaryGluePartitionCredentialsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTemporaryGluePartitionCredentialsResponse_AccessKeyId:
-			v.AccessKeyId = new(string)
-			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_AccessKeyId, v.AccessKeyId)
-		case schemas.GetTemporaryGluePartitionCredentialsResponse_Expiration:
-			v.Expiration = new(time.Time)
-			return d.ReadTime(schemas.GetTemporaryGluePartitionCredentialsResponse_Expiration, v.Expiration)
-		case schemas.GetTemporaryGluePartitionCredentialsResponse_SecretAccessKey:
-			v.SecretAccessKey = new(string)
-			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_SecretAccessKey, v.SecretAccessKey)
-		case schemas.GetTemporaryGluePartitionCredentialsResponse_SessionToken:
-			v.SessionToken = new(string)
-			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_SessionToken, v.SessionToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTemporaryGluePartitionCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGluePartitionCredentials, schemas.GetTemporaryGluePartitionCredentialsRequest, schemas.GetTemporaryGluePartitionCredentialsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemporaryGluePartitionCredentials{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGluePartitionCredentials, schemas.GetTemporaryGluePartitionCredentialsRequest, schemas.GetTemporaryGluePartitionCredentialsResponse), output: &GetTemporaryGluePartitionCredentialsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTemporaryGluePartitionCredentials"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTemporaryGluePartitionCredentialsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTemporaryGluePartitionCredentials(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,22 +116,8 @@ func (c *Client) addOperationGetTemporaryGluePartitionCredentialsMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTemporaryGluePartitionCredentials(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTemporaryGluePartitionCredentials",
-	}
 }

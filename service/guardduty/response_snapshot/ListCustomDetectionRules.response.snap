@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","rules":[{"arn":"__Arn__","createdAt":946684800,"dataSource":"CloudTrailManagementEvent","description":"__Description__","language":"SQL","name":"__Name__","ruleId":"__RuleId__","schema":"CloudTrail","service":"__Service__","severity":"CRITICAL","tactic":"__Tactic__","technique":"__Technique__","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"dataSource":"CloudTrailManagementEvent","description":"__Description__","language":"SQL","name":"__Name__","ruleId":"__RuleId__","schema":"CloudTrail","service":"__Service__","severity":"CRITICAL","tactic":"__Tactic__","technique":"__Technique__","updatedAt":946684800}]}

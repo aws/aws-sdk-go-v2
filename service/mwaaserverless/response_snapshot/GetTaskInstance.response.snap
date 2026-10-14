@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.GetTaskInstance
+
+{"AttemptNumber":1,"DurationInSeconds":1,"EndedAt":"2000-01-01T00:00:00Z","ErrorMessage":"__ErrorMessage__","LogStream":"__LogStream__","ModifiedAt":"2000-01-01T00:00:00Z","OperatorName":"__OperatorName__","RunId":"__RunId__","StartedAt":"2000-01-01T00:00:00Z","Status":"QUEUED","TaskId":"__TaskId__","TaskInstanceId":"__TaskInstanceId__","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__","Xcom":{"key0":"__Value__"}}

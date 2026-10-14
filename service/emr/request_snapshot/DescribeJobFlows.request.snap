@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.DescribeJobFlows
+
+{"CreatedAfter":946684800,"CreatedBefore":946684800,"JobFlowIds":["__Member__","__Member__"],"JobFlowStates":["STARTING","STARTING"]}

@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the Resolvers on Outposts that were created using the current Amazon
@@ -44,6 +44,24 @@ type ListOutpostResolversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostResolversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostResolversRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostResolversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOutpostResolversRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostResolversRequest_NextToken, *v.NextToken)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.ListOutpostResolversRequest_OutpostArn, *v.OutpostArn)
+	}
+}
+
 type ListOutpostResolversOutput struct {
 
 	// If more than MaxResults Resolvers match the specified criteria, you can submit
@@ -61,74 +79,48 @@ type ListOutpostResolversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostResolversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostResolversResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostResolversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostResolversResponse_NextToken, *v.NextToken)
+	}
+	serializeOutpostResolverList(s, schemas.ListOutpostResolversResponse_OutpostResolvers, v.OutpostResolvers)
+}
+func (v *ListOutpostResolversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutpostResolversResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutpostResolversResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOutpostResolversResponse_NextToken, v.NextToken)
+		case schemas.ListOutpostResolversResponse_OutpostResolvers:
+			return deserializeOutpostResolverList(d, schemas.ListOutpostResolversResponse_OutpostResolvers, &v.OutpostResolvers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutpostResolversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostResolvers, schemas.ListOutpostResolversRequest, schemas.ListOutpostResolversResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOutpostResolvers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostResolvers, schemas.ListOutpostResolversRequest, schemas.ListOutpostResolversResponse), output: &ListOutpostResolversOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOutpostResolvers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOutpostResolvers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOutpostResolvers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +133,6 @@ func (c *Client) addOperationListOutpostResolversMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListOutpostResolversAPIClient interface {
 }
 
 var _ ListOutpostResolversAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOutpostResolvers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOutpostResolvers",
-	}
-}

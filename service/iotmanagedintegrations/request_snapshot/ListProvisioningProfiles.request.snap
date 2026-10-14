@@ -1,0 +1,3 @@
+GET /provisioning-profiles?MaxResults=1&NextToken=__NextToken__
+
+

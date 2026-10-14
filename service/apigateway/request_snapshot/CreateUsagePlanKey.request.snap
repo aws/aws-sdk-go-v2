@@ -1,0 +1,6 @@
+POST /usageplans/__UsagePlanId__/keys
+
+Accept: application/json
+Content-Type: application/json
+
+{"keyId":"__KeyId__","keyType":"__KeyType__"}

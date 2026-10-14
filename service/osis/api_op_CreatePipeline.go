@@ -4,13 +4,8 @@ package osis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an OpenSearch Ingestion pipeline. For more information, see [Creating Amazon OpenSearch Ingestion pipelines].
@@ -82,51 +77,6 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BufferOptions != nil {
-		s.WriteStruct(schemas.CreatePipelineRequest_BufferOptions)
-		v.BufferOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EncryptionAtRestOptions != nil {
-		s.WriteStruct(schemas.CreatePipelineRequest_EncryptionAtRestOptions)
-		v.EncryptionAtRestOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogPublishingOptions != nil {
-		s.WriteStruct(schemas.CreatePipelineRequest_LogPublishingOptions)
-		v.LogPublishingOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxUnits != nil {
-		s.WriteInt32(schemas.CreatePipelineRequest_MaxUnits, *v.MaxUnits)
-	}
-	if v.MinUnits != nil {
-		s.WriteInt32(schemas.CreatePipelineRequest_MinUnits, *v.MinUnits)
-	}
-	if v.PipelineConfigurationBody != nil {
-		s.WriteString(schemas.CreatePipelineRequest_PipelineConfigurationBody, *v.PipelineConfigurationBody)
-	}
-	if v.PipelineName != nil {
-		s.WriteString(schemas.CreatePipelineRequest_PipelineName, *v.PipelineName)
-	}
-	if v.PipelineRoleArn != nil {
-		s.WriteString(schemas.CreatePipelineRequest_PipelineRoleArn, *v.PipelineRoleArn)
-	}
-	serializeTagList(s, schemas.CreatePipelineRequest_Tags, v.Tags)
-	if v.VpcOptions != nil {
-		s.WriteStruct(schemas.CreatePipelineRequest_VpcOptions)
-		v.VpcOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreatePipelineOutput struct {
 
 	// Container for information about the created pipeline.
@@ -138,85 +88,29 @@ type CreatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePipelineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePipelineResponse_Pipeline:
-			v.Pipeline = &types.Pipeline{}
-			return v.Pipeline.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipeline, schemas.CreatePipelineRequest, schemas.CreatePipelineResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePipeline{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipeline, schemas.CreatePipelineRequest, schemas.CreatePipelineResponse), output: &CreatePipelineOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -231,22 +125,8 @@ func (c *Client) addOperationCreatePipelineMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePipeline",
-	}
 }

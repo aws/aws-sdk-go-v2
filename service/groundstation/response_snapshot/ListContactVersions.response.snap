@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"contactVersionsList":[{"activated":946684800,"created":946684800,"failureCodes":["INTERNAL_ERROR","INTERNAL_ERROR"],"failureMessage":"__FailureMessage__","lastUpdated":946684800,"status":"UPDATING","superseded":946684800,"versionId":1},{"activated":946684800,"created":946684800,"failureCodes":["INTERNAL_ERROR","INTERNAL_ERROR"],"failureMessage":"__FailureMessage__","lastUpdated":946684800,"status":"UPDATING","superseded":946684800,"versionId":1}],"nextToken":"__NextToken__"}

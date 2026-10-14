@@ -170,6 +170,26 @@ func (m *validateOpDescribeGroupMembership) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeIdentityStore struct {
+}
+
+func (*validateOpDescribeIdentityStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeIdentityStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeIdentityStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeIdentityStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeUser struct {
 }
 
@@ -370,6 +390,26 @@ func (m *validateOpUpdateGroup) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIdentityStore struct {
+}
+
+func (*validateOpUpdateIdentityStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdentityStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdentityStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdentityStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUser struct {
 }
 
@@ -422,6 +462,10 @@ func addOpDescribeGroupMembershipValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeGroupMembership{}, middleware.After)
 }
 
+func addOpDescribeIdentityStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeIdentityStore{}, middleware.After)
+}
+
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
 }
@@ -460,6 +504,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGroup{}, middleware.After)
+}
+
+func addOpUpdateIdentityStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdentityStore{}, middleware.After)
 }
 
 func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
@@ -567,6 +615,21 @@ func validateFilters(v []types.Filter) error {
 		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConfiguration"}
+	if v.VpceAccessRequired == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpceAccessRequired"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -771,6 +834,21 @@ func validateOpDescribeGroupMembershipInput(v *DescribeGroupMembershipInput) err
 	}
 }
 
+func validateOpDescribeIdentityStoreInput(v *DescribeIdentityStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIdentityStoreInput"}
+	if v.IdentityStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	if v == nil {
 		return nil
@@ -967,6 +1045,26 @@ func validateOpUpdateGroupInput(v *UpdateGroupInput) error {
 	} else if v.Operations != nil {
 		if err := validateAttributeOperations(v.Operations); err != nil {
 			invalidParams.AddNested("Operations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdentityStoreInput(v *UpdateIdentityStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityStoreInput"}
+	if v.IdentityStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityStoreId"))
+	}
+	if v.NetworkConfiguration != nil {
+		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

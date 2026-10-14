@@ -1,0 +1,5 @@
+PATCH /2025-09-09/microvm-images/__ImageIdentifier__/versions/__ImageVersion__
+
+Content-Type: application/json
+
+{"status":"ACTIVE"}

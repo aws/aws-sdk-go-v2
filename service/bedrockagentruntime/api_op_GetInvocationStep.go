@@ -4,11 +4,10 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the details of a specific invocation step within an invocation in a
@@ -52,6 +51,24 @@ type GetInvocationStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvocationStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvocationStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvocationStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationIdentifier != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_invocationIdentifier, *v.InvocationIdentifier)
+	}
+	if v.InvocationStepId != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_invocationStepId, *v.InvocationStepId)
+	}
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type GetInvocationStepOutput struct {
 
 	// The complete details of the requested invocation step.
@@ -65,77 +82,50 @@ type GetInvocationStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvocationStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvocationStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvocationStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationStep != nil {
+		s.WriteStruct(schemas.GetInvocationStepResponse_invocationStep)
+		v.InvocationStep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInvocationStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvocationStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvocationStepResponse_invocationStep:
+			v.InvocationStep = &types.InvocationStep{}
+			return v.InvocationStep.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvocationStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvocationStep, schemas.GetInvocationStepRequest, schemas.GetInvocationStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvocationStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvocationStep, schemas.GetInvocationStepRequest, schemas.GetInvocationStepResponse), output: &GetInvocationStepOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvocationStep{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvocationStep"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInvocationStepValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvocationStep(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +140,8 @@ func (c *Client) addOperationGetInvocationStepMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInvocationStep(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInvocationStep",
-	}
 }

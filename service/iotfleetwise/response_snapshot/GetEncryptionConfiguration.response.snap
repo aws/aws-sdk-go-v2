@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetEncryptionConfiguration
+
+{"creationTime":946684800,"encryptionStatus":"PENDING","encryptionType":"KMS_BASED_ENCRYPTION","errorMessage":"__ErrorMessage__","kmsKeyId":"__KmsKeyId__","lastModificationTime":946684800}

@@ -1,0 +1,6 @@
+POST /domainnameaccessassociations
+
+Accept: application/json
+Content-Type: application/json
+
+{"accessAssociationSource":"__AccessAssociationSource__","accessAssociationSourceType":"VPCE","domainNameArn":"__DomainNameArn__","tags":{"key0":"__Value__"}}

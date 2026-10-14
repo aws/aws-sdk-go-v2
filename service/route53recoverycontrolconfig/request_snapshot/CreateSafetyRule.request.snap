@@ -1,0 +1,5 @@
+POST /safetyrule
+
+Content-Type: application/json
+
+{"AssertionRule":{"AssertedControls":["__Member__","__Member__"],"ControlPanelArn":"__ControlPanelArn__","Name":"__Name__","RuleConfig":{"Inverted":true,"Threshold":1,"Type":"ATLEAST"},"WaitPeriodMs":1},"ClientToken":"__ClientToken__","GatingRule":{"ControlPanelArn":"__ControlPanelArn__","GatingControls":["__Member__","__Member__"],"Name":"__Name__","RuleConfig":{"Inverted":true,"Threshold":1,"Type":"ATLEAST"},"TargetControls":["__Member__","__Member__"],"WaitPeriodMs":1},"Tags":{"key0":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /ImportPublicKey
+
+Content-Type: application/json
+
+{"name":"__Name__","publicKeyMaterial":"__PublicKeyMaterial__","tags":{"key0":"__Value__"}}

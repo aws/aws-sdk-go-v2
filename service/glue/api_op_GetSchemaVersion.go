@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the specified schema by its unique ID assigned when a version of the schema
@@ -51,6 +50,28 @@ type GetSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.GetSchemaVersionInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.GetSchemaVersionInput_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.SchemaVersionNumber != nil {
+		s.WriteStruct(schemas.GetSchemaVersionInput_SchemaVersionNumber)
+		v.SchemaVersionNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSchemaVersionOutput struct {
 
 	// The date and time the schema version was created.
@@ -81,74 +102,89 @@ type GetSchemaVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.GetSchemaVersionResponse_DataFormat, string(v.DataFormat))
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaDefinition != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaDefinition, *v.SchemaDefinition)
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.GetSchemaVersionResponse_SchemaVersionId, *v.SchemaVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSchemaVersionResponse_Status, string(v.Status))
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.GetSchemaVersionResponse_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *GetSchemaVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaVersionResponse_CreatedTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetSchemaVersionResponse_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaVersionResponse_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = types.DataFormat(ev)
+			return nil
+		case schemas.GetSchemaVersionResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaArn, v.SchemaArn)
+		case schemas.GetSchemaVersionResponse_SchemaDefinition:
+			v.SchemaDefinition = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaDefinition, v.SchemaDefinition)
+		case schemas.GetSchemaVersionResponse_SchemaVersionId:
+			v.SchemaVersionId = new(string)
+			return d.ReadString(schemas.GetSchemaVersionResponse_SchemaVersionId, v.SchemaVersionId)
+		case schemas.GetSchemaVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaVersionStatus(ev)
+			return nil
+		case schemas.GetSchemaVersionResponse_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.GetSchemaVersionResponse_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaVersion, schemas.GetSchemaVersionInput, schemas.GetSchemaVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaVersion, schemas.GetSchemaVersionInput, schemas.GetSchemaVersionResponse), output: &GetSchemaVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSchemaVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchemaVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSchemaVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +199,8 @@ func (c *Client) addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSchemaVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSchemaVersion",
-	}
 }

@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -78,6 +77,36 @@ type GetCampaignDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignDateRangeKpiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignDateRangeKpiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignDateRangeKpiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetCampaignDateRangeKpiRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignId != nil {
+		s.WriteString(schemas.GetCampaignDateRangeKpiRequest_CampaignId, *v.CampaignId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetCampaignDateRangeKpiRequest_EndTime, *v.EndTime)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.GetCampaignDateRangeKpiRequest_KpiName, *v.KpiName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCampaignDateRangeKpiRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetCampaignDateRangeKpiRequest_PageSize, *v.PageSize)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetCampaignDateRangeKpiRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetCampaignDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard metric
@@ -92,77 +121,50 @@ type GetCampaignDateRangeKpiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignDateRangeKpiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignDateRangeKpiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignDateRangeKpiResponse != nil {
+		s.WriteStruct(schemas.GetCampaignDateRangeKpiResponse_CampaignDateRangeKpiResponse)
+		v.CampaignDateRangeKpiResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCampaignDateRangeKpiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCampaignDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCampaignDateRangeKpiResponse_CampaignDateRangeKpiResponse:
+			v.CampaignDateRangeKpiResponse = &types.CampaignDateRangeKpiResponse{}
+			return v.CampaignDateRangeKpiResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCampaignDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignDateRangeKpi, schemas.GetCampaignDateRangeKpiRequest, schemas.GetCampaignDateRangeKpiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignDateRangeKpi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignDateRangeKpi, schemas.GetCampaignDateRangeKpiRequest, schemas.GetCampaignDateRangeKpiResponse), output: &GetCampaignDateRangeKpiOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaignDateRangeKpi{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCampaignDateRangeKpi"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCampaignDateRangeKpiValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCampaignDateRangeKpi(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +179,8 @@ func (c *Client) addOperationGetCampaignDateRangeKpiMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCampaignDateRangeKpi(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCampaignDateRangeKpi",
-	}
 }

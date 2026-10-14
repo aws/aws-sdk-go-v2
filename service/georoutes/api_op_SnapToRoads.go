@@ -4,13 +4,8 @@ package georoutes
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // SnapToRoads matches GPS trace to roads most likely traveled on.
@@ -68,33 +63,6 @@ type SnapToRoadsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SnapToRoadsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SnapToRoadsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SnapToRoadsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.SnapToRoadsRequest_Key, *v.Key)
-	}
-	if v.SnapRadius != 0 {
-		s.WriteInt64(schemas.SnapToRoadsRequest_SnapRadius, v.SnapRadius)
-	}
-	if v.SnappedGeometryFormat != "" {
-		s.WriteString(schemas.SnapToRoadsRequest_SnappedGeometryFormat, string(v.SnappedGeometryFormat))
-	}
-	serializeRoadSnapTracePointList(s, schemas.SnapToRoadsRequest_TracePoints, v.TracePoints)
-	if v.TravelMode != "" {
-		s.WriteString(schemas.SnapToRoadsRequest_TravelMode, string(v.TravelMode))
-	}
-	if v.TravelModeOptions != nil {
-		s.WriteStruct(schemas.SnapToRoadsRequest_TravelModeOptions)
-		v.TravelModeOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SnapToRoadsOutput struct {
 
 	// Notices are additional information returned that indicate issues that occurred
@@ -127,99 +95,29 @@ type SnapToRoadsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SnapToRoadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SnapToRoadsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SnapToRoadsResponse_Notices:
-			return deserializeRoadSnapNoticeList(d, schemas.SnapToRoadsResponse_Notices, &v.Notices)
-		case schemas.SnapToRoadsResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.SnapToRoadsResponse_PricingBucket, v.PricingBucket)
-		case schemas.SnapToRoadsResponse_SnappedGeometry:
-			v.SnappedGeometry = &types.RoadSnapSnappedGeometry{}
-			return v.SnappedGeometry.Deserialize(d)
-		case schemas.SnapToRoadsResponse_SnappedGeometryFormat:
-			var ev string
-			if err := d.ReadString(schemas.SnapToRoadsResponse_SnappedGeometryFormat, &ev); err != nil {
-				return err
-			}
-			v.SnappedGeometryFormat = types.GeometryFormat(ev)
-			return nil
-		case schemas.SnapToRoadsResponse_SnappedTracePoints:
-			return deserializeRoadSnapSnappedTracePointList(d, schemas.SnapToRoadsResponse_SnappedTracePoints, &v.SnappedTracePoints)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSnapToRoadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSnapToRoads{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SnapToRoads, schemas.SnapToRoadsRequest, schemas.SnapToRoadsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSnapToRoads{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SnapToRoads, schemas.SnapToRoadsRequest, schemas.SnapToRoadsResponse), output: &SnapToRoadsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SnapToRoads"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSnapToRoadsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSnapToRoads(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +132,8 @@ func (c *Client) addOperationSnapToRoadsMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSnapToRoads(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SnapToRoads",
-	}
 }

@@ -4,11 +4,10 @@ package snowball
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type DescribeReturnShippingLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReturnShippingLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReturnShippingLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReturnShippingLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeReturnShippingLabelRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeReturnShippingLabelOutput struct {
 
 	// The expiration date of the current return shipping label.
@@ -58,65 +69,58 @@ type DescribeReturnShippingLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReturnShippingLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReturnShippingLabelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReturnShippingLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.DescribeReturnShippingLabelResult_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.ReturnShippingLabelURI != nil {
+		s.WriteString(schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI, *v.ReturnShippingLabelURI)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeReturnShippingLabelResult_Status, string(v.Status))
+	}
+}
+func (v *DescribeReturnShippingLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReturnShippingLabelResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReturnShippingLabelResult_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeReturnShippingLabelResult_ExpirationDate, v.ExpirationDate)
+		case schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI:
+			v.ReturnShippingLabelURI = new(string)
+			return d.ReadString(schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI, v.ReturnShippingLabelURI)
+		case schemas.DescribeReturnShippingLabelResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReturnShippingLabelResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShippingLabelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReturnShippingLabel, schemas.DescribeReturnShippingLabelRequest, schemas.DescribeReturnShippingLabelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeReturnShippingLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReturnShippingLabel, schemas.DescribeReturnShippingLabelRequest, schemas.DescribeReturnShippingLabelResult), output: &DescribeReturnShippingLabelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeReturnShippingLabel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReturnShippingLabel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -126,12 +130,6 @@ func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpDescribeReturnShippingLabelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReturnShippingLabel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +144,8 @@ func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeReturnShippingLabel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReturnShippingLabel",
-	}
 }

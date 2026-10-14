@@ -1,0 +1,5 @@
+POST /outposts/__OutpostIdentifier__/decommission
+
+Content-Type: application/json
+
+{"ValidateOnly":true}

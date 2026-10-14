@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -65,45 +62,6 @@ type PutGeofenceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGeofenceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutGeofenceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.PutGeofenceRequest_CollectionName, *v.CollectionName)
-	}
-	if v.GeofenceId != nil {
-		s.WriteString(schemas.PutGeofenceRequest_GeofenceId, *v.GeofenceId)
-	}
-	serializePropertyMap(s, schemas.PutGeofenceRequest_GeofenceProperties, v.GeofenceProperties)
-	if v.Geometry != nil {
-		s.WriteStruct(schemas.PutGeofenceRequest_Geometry)
-		v.Geometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PutGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutGeofenceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutGeofenceRequest_CollectionName:
-			v.CollectionName = new(string)
-			return d.ReadString(schemas.PutGeofenceRequest_CollectionName, v.CollectionName)
-		case schemas.PutGeofenceRequest_GeofenceId:
-			v.GeofenceId = new(string)
-			return d.ReadString(schemas.PutGeofenceRequest_GeofenceId, v.GeofenceId)
-		case schemas.PutGeofenceRequest_GeofenceProperties:
-			return deserializePropertyMap(d, schemas.PutGeofenceRequest_GeofenceProperties, &v.GeofenceProperties)
-		case schemas.PutGeofenceRequest_Geometry:
-			v.Geometry = &types.GeofenceGeometry{}
-			return v.Geometry.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type PutGeofenceOutput struct {
 
 	// The timestamp for when the geofence was created in [ISO 8601] format:
@@ -133,96 +91,23 @@ type PutGeofenceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutGeofenceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.PutGeofenceResponse_CreateTime, *v.CreateTime)
-	}
-	if v.GeofenceId != nil {
-		s.WriteString(schemas.PutGeofenceResponse_GeofenceId, *v.GeofenceId)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.PutGeofenceResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *PutGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutGeofenceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutGeofenceResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.PutGeofenceResponse_CreateTime, v.CreateTime)
-		case schemas.PutGeofenceResponse_GeofenceId:
-			v.GeofenceId = new(string)
-			return d.ReadString(schemas.PutGeofenceResponse_GeofenceId, v.GeofenceId)
-		case schemas.PutGeofenceResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.PutGeofenceResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGeofence{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGeofence, schemas.PutGeofenceRequest, schemas.PutGeofenceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGeofence{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGeofence, schemas.PutGeofenceRequest, schemas.PutGeofenceResponse), output: &PutGeofenceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGeofence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -232,12 +117,6 @@ func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpPutGeofenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGeofence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,12 +129,6 @@ func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,12 +162,4 @@ func (m *endpointPrefix_opPutGeofenceMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opPutGeofenceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opPutGeofenceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opPutGeofence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutGeofence",
-	}
 }

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,44 @@ type CognitoStreams struct {
 	StreamingStatus StreamingStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CognitoStreams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoStreams)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoStreams) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CognitoStreams_RoleArn, *v.RoleArn)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.CognitoStreams_StreamName, *v.StreamName)
+	}
+	if v.StreamingStatus != "" {
+		s.WriteString(schemas.CognitoStreams_StreamingStatus, string(v.StreamingStatus))
+	}
+}
+func (v *CognitoStreams) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoStreams, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoStreams_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CognitoStreams_RoleArn, v.RoleArn)
+		case schemas.CognitoStreams_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.CognitoStreams_StreamName, v.StreamName)
+		case schemas.CognitoStreams_StreamingStatus:
+			var ev string
+			if err := d.ReadString(schemas.CognitoStreams_StreamingStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamingStatus = StreamingStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A collection of data for an identity pool. An identity pool can have multiple
@@ -64,6 +104,64 @@ type Dataset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dataset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dataset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dataset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Dataset_CreationDate, *v.CreationDate)
+	}
+	if v.DataStorage != nil {
+		s.WriteInt64(schemas.Dataset_DataStorage, *v.DataStorage)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.Dataset_DatasetName, *v.DatasetName)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.Dataset_IdentityId, *v.IdentityId)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.Dataset_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.Dataset_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.NumRecords != nil {
+		s.WriteInt64(schemas.Dataset_NumRecords, *v.NumRecords)
+	}
+}
+func (v *Dataset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dataset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dataset_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Dataset_CreationDate, v.CreationDate)
+		case schemas.Dataset_DataStorage:
+			v.DataStorage = new(int64)
+			return d.ReadInt64(schemas.Dataset_DataStorage, v.DataStorage)
+		case schemas.Dataset_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.Dataset_DatasetName, v.DatasetName)
+		case schemas.Dataset_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.Dataset_IdentityId, v.IdentityId)
+		case schemas.Dataset_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.Dataset_LastModifiedBy, v.LastModifiedBy)
+		case schemas.Dataset_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.Dataset_LastModifiedDate, v.LastModifiedDate)
+		case schemas.Dataset_NumRecords:
+			v.NumRecords = new(int64)
+			return d.ReadInt64(schemas.Dataset_NumRecords, v.NumRecords)
+		}
+		return nil
+	})
+}
+
 // Usage information for the identity pool.
 type IdentityPoolUsage struct {
 
@@ -82,6 +180,46 @@ type IdentityPoolUsage struct {
 	SyncSessionsCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdentityPoolUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityPoolUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityPoolUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataStorage != nil {
+		s.WriteInt64(schemas.IdentityPoolUsage_DataStorage, *v.DataStorage)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.IdentityPoolUsage_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.IdentityPoolUsage_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.SyncSessionsCount != nil {
+		s.WriteInt64(schemas.IdentityPoolUsage_SyncSessionsCount, *v.SyncSessionsCount)
+	}
+}
+func (v *IdentityPoolUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityPoolUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityPoolUsage_DataStorage:
+			v.DataStorage = new(int64)
+			return d.ReadInt64(schemas.IdentityPoolUsage_DataStorage, v.DataStorage)
+		case schemas.IdentityPoolUsage_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.IdentityPoolUsage_IdentityPoolId, v.IdentityPoolId)
+		case schemas.IdentityPoolUsage_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityPoolUsage_LastModifiedDate, v.LastModifiedDate)
+		case schemas.IdentityPoolUsage_SyncSessionsCount:
+			v.SyncSessionsCount = new(int64)
+			return d.ReadInt64(schemas.IdentityPoolUsage_SyncSessionsCount, v.SyncSessionsCount)
+		}
+		return nil
+	})
 }
 
 // Usage information for the identity.
@@ -109,6 +247,51 @@ type IdentityUsage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataStorage != nil {
+		s.WriteInt64(schemas.IdentityUsage_DataStorage, *v.DataStorage)
+	}
+	if v.DatasetCount != 0 {
+		s.WriteInt32(schemas.IdentityUsage_DatasetCount, v.DatasetCount)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.IdentityUsage_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.IdentityUsage_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.IdentityUsage_LastModifiedDate, *v.LastModifiedDate)
+	}
+}
+func (v *IdentityUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityUsage_DataStorage:
+			v.DataStorage = new(int64)
+			return d.ReadInt64(schemas.IdentityUsage_DataStorage, v.DataStorage)
+		case schemas.IdentityUsage_DatasetCount:
+			return d.ReadInt32(schemas.IdentityUsage_DatasetCount, &v.DatasetCount)
+		case schemas.IdentityUsage_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.IdentityUsage_IdentityId, v.IdentityId)
+		case schemas.IdentityUsage_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.IdentityUsage_IdentityPoolId, v.IdentityPoolId)
+		case schemas.IdentityUsage_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityUsage_LastModifiedDate, v.LastModifiedDate)
+		}
+		return nil
+	})
+}
+
 // Configuration options to be applied to the identity pool.
 type PushSync struct {
 
@@ -119,6 +302,31 @@ type PushSync struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PushSync) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PushSync)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushSync) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationArnList(s, schemas.PushSync_ApplicationArns, v.ApplicationArns)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PushSync_RoleArn, *v.RoleArn)
+	}
+}
+func (v *PushSync) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PushSync, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PushSync_ApplicationArns:
+			return deserializeApplicationArnList(d, schemas.PushSync_ApplicationArns, &v.ApplicationArns)
+		case schemas.PushSync_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.PushSync_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // The basic data structure of a dataset.
@@ -143,6 +351,58 @@ type Record struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceLastModifiedDate != nil {
+		s.WriteTime(schemas.Record_DeviceLastModifiedDate, *v.DeviceLastModifiedDate)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.Record_Key, *v.Key)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.Record_LastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.Record_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.SyncCount != nil {
+		s.WriteInt64(schemas.Record_SyncCount, *v.SyncCount)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Record_Value, *v.Value)
+	}
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_DeviceLastModifiedDate:
+			v.DeviceLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.Record_DeviceLastModifiedDate, v.DeviceLastModifiedDate)
+		case schemas.Record_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Record_Key, v.Key)
+		case schemas.Record_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.Record_LastModifiedBy, v.LastModifiedBy)
+		case schemas.Record_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.Record_LastModifiedDate, v.LastModifiedDate)
+		case schemas.Record_SyncCount:
+			v.SyncCount = new(int64)
+			return d.ReadInt64(schemas.Record_SyncCount, v.SyncCount)
+		case schemas.Record_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Record_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An update operation for a record.
@@ -170,6 +430,56 @@ type RecordPatch struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordPatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordPatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordPatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceLastModifiedDate != nil {
+		s.WriteTime(schemas.RecordPatch_DeviceLastModifiedDate, *v.DeviceLastModifiedDate)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.RecordPatch_Key, *v.Key)
+	}
+	if v.Op != "" {
+		s.WriteString(schemas.RecordPatch_Op, string(v.Op))
+	}
+	if v.SyncCount != nil {
+		s.WriteInt64(schemas.RecordPatch_SyncCount, *v.SyncCount)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.RecordPatch_Value, *v.Value)
+	}
+}
+func (v *RecordPatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordPatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordPatch_DeviceLastModifiedDate:
+			v.DeviceLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.RecordPatch_DeviceLastModifiedDate, v.DeviceLastModifiedDate)
+		case schemas.RecordPatch_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.RecordPatch_Key, v.Key)
+		case schemas.RecordPatch_Op:
+			var ev string
+			if err := d.ReadString(schemas.RecordPatch_Op, &ev); err != nil {
+				return err
+			}
+			v.Op = Operation(ev)
+			return nil
+		case schemas.RecordPatch_SyncCount:
+			v.SyncCount = new(int64)
+			return d.ReadInt64(schemas.RecordPatch_SyncCount, v.SyncCount)
+		case schemas.RecordPatch_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.RecordPatch_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

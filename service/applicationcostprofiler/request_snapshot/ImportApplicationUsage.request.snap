@@ -1,0 +1,5 @@
+POST /importApplicationUsage
+
+Content-Type: application/json
+
+{"sourceS3Location":{"bucket":"__Bucket__","key":"__Key__","region":"ap-east-1"}}

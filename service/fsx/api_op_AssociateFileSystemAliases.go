@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this action to associate one or more Domain Name Server (DNS) aliases with
@@ -77,6 +77,22 @@ type AssociateFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternateDNSNames(s, schemas.AssociateFileSystemAliasesRequest_Aliases, v.Aliases)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateFileSystemAliasesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.AssociateFileSystemAliasesRequest_FileSystemId, *v.FileSystemId)
+	}
+}
+
 // The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to associate with the file system. Use the API operation to monitor
 // the status of the aliases Amazon FSx is associating with the file system. It can
@@ -93,65 +109,39 @@ type AssociateFileSystemAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliases(s, schemas.AssociateFileSystemAliasesResponse_Aliases, v.Aliases)
+}
+func (v *AssociateFileSystemAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFileSystemAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFileSystemAliasesResponse_Aliases:
+			return deserializeAliases(d, schemas.AssociateFileSystemAliasesResponse_Aliases, &v.Aliases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystemAliases, schemas.AssociateFileSystemAliasesRequest, schemas.AssociateFileSystemAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFileSystemAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystemAliases, schemas.AssociateFileSystemAliasesRequest, schemas.AssociateFileSystemAliasesResponse), output: &AssociateFileSystemAliasesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFileSystemAliases{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateFileSystemAliases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -161,12 +151,6 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpAssociateFileSystemAliasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFileSystemAliases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +163,6 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,12 +202,4 @@ func (m *idempotencyToken_initializeOpAssociateFileSystemAliases) HandleInitiali
 }
 func addIdempotencyToken_opAssociateFileSystemAliasesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateFileSystemAliases{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateFileSystemAliases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateFileSystemAliases",
-	}
 }

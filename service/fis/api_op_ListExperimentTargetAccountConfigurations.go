@@ -4,11 +4,10 @@ package fis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the target account configurations of the specified experiment.
@@ -40,6 +39,21 @@ type ListExperimentTargetAccountConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentTargetAccountConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentTargetAccountConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentTargetAccountConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentId != nil {
+		s.WriteString(schemas.ListExperimentTargetAccountConfigurationsRequest_experimentId, *v.ExperimentId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentTargetAccountConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListExperimentTargetAccountConfigurationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -55,77 +69,51 @@ type ListExperimentTargetAccountConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentTargetAccountConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentTargetAccountConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentTargetAccountConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentTargetAccountConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeExperimentTargetAccountConfigurationList(s, schemas.ListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations, v.TargetAccountConfigurations)
+}
+func (v *ListExperimentTargetAccountConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExperimentTargetAccountConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExperimentTargetAccountConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExperimentTargetAccountConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations:
+			return deserializeExperimentTargetAccountConfigurationList(d, schemas.ListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations, &v.TargetAccountConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperimentTargetAccountConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentTargetAccountConfigurations, schemas.ListExperimentTargetAccountConfigurationsRequest, schemas.ListExperimentTargetAccountConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExperimentTargetAccountConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentTargetAccountConfigurations, schemas.ListExperimentTargetAccountConfigurationsRequest, schemas.ListExperimentTargetAccountConfigurationsResponse), output: &ListExperimentTargetAccountConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExperimentTargetAccountConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExperimentTargetAccountConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListExperimentTargetAccountConfigurationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExperimentTargetAccountConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +128,8 @@ func (c *Client) addOperationListExperimentTargetAccountConfigurationsMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListExperimentTargetAccountConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListExperimentTargetAccountConfigurations",
-	}
 }

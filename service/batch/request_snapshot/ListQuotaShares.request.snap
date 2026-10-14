@@ -1,0 +1,5 @@
+POST /v1/listquotashares
+
+Content-Type: application/json
+
+{"jobQueue":"__JobQueue__","maxResults":1,"nextToken":"__NextToken__"}

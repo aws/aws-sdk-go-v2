@@ -1,0 +1,5 @@
+POST /reset-landingzone
+
+Content-Type: application/json
+
+{"landingZoneIdentifier":"__LandingZoneIdentifier__"}

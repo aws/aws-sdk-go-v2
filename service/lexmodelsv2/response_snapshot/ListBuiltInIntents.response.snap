@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"builtInIntentSummaries":[{"description":"__Description__","intentSignature":"__IntentSignature__"},{"description":"__Description__","intentSignature":"__IntentSignature__"}],"localeId":"__LocaleId__","nextToken":"__NextToken__"}

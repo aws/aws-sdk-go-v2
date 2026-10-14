@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies the specified source product to the specified target product or a new
@@ -75,32 +71,6 @@ type CopyProductInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.CopyProductInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	serializeCopyOptions(s, schemas.CopyProductInput_CopyOptions, v.CopyOptions)
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.CopyProductInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.SourceProductArn != nil {
-		s.WriteString(schemas.CopyProductInput_SourceProductArn, *v.SourceProductArn)
-	}
-	serializeSourceProvisioningArtifactProperties(s, schemas.CopyProductInput_SourceProvisioningArtifactIdentifiers, v.SourceProvisioningArtifactIdentifiers)
-	if v.TargetProductId != nil {
-		s.WriteString(schemas.CopyProductInput_TargetProductId, *v.TargetProductId)
-	}
-	if v.TargetProductName != nil {
-		s.WriteString(schemas.CopyProductInput_TargetProductName, *v.TargetProductName)
-	}
-}
-
 type CopyProductOutput struct {
 
 	// The token to use to track the progress of the operation.
@@ -112,73 +82,23 @@ type CopyProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyProductOutput_CopyProductToken:
-			v.CopyProductToken = new(string)
-			return d.ReadString(schemas.CopyProductOutput_CopyProductToken, v.CopyProductToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProduct, schemas.CopyProductInput, schemas.CopyProductOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyProduct{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProduct, schemas.CopyProductInput, schemas.CopyProductOutput), output: &CopyProductOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyProduct"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -188,12 +108,6 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCopyProductValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyProduct(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +120,6 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +159,4 @@ func (m *idempotencyToken_initializeOpCopyProduct) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCopyProductMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCopyProduct{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCopyProduct(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyProduct",
-	}
 }

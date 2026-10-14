@@ -5,9 +5,6 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,34 +66,6 @@ type GetMapStyleDescriptorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapStyleDescriptorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapStyleDescriptorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapStyleDescriptorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.GetMapStyleDescriptorRequest_Key, *v.Key)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.GetMapStyleDescriptorRequest_MapName, *v.MapName)
-	}
-}
-func (v *GetMapStyleDescriptorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapStyleDescriptorRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapStyleDescriptorRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetMapStyleDescriptorRequest_Key, v.Key)
-		case schemas.GetMapStyleDescriptorRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.GetMapStyleDescriptorRequest_MapName, v.MapName)
-		}
-		return nil
-	})
-}
-
 type GetMapStyleDescriptorOutput struct {
 
 	// Contains the body of the style descriptor.
@@ -114,95 +83,23 @@ type GetMapStyleDescriptorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapStyleDescriptorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapStyleDescriptorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapStyleDescriptorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Blob != nil {
-		s.WriteBlob(schemas.GetMapStyleDescriptorResponse_Blob, v.Blob)
-	}
-	if v.CacheControl != nil {
-		s.WriteString(schemas.GetMapStyleDescriptorResponse_CacheControl, *v.CacheControl)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.GetMapStyleDescriptorResponse_ContentType, *v.ContentType)
-	}
-}
-func (v *GetMapStyleDescriptorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapStyleDescriptorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapStyleDescriptorResponse_Blob:
-			return d.ReadBlob(schemas.GetMapStyleDescriptorResponse_Blob, &v.Blob)
-		case schemas.GetMapStyleDescriptorResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetMapStyleDescriptorResponse_CacheControl, v.CacheControl)
-		case schemas.GetMapStyleDescriptorResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetMapStyleDescriptorResponse_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapStyleDescriptor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapStyleDescriptor, schemas.GetMapStyleDescriptorRequest, schemas.GetMapStyleDescriptorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMapStyleDescriptor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapStyleDescriptor, schemas.GetMapStyleDescriptorRequest, schemas.GetMapStyleDescriptorResponse), output: &GetMapStyleDescriptorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMapStyleDescriptor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -212,12 +109,6 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpGetMapStyleDescriptorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapStyleDescriptor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,12 +121,6 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,12 +154,4 @@ func (m *endpointPrefix_opGetMapStyleDescriptorMiddleware) HandleFinalize(ctx co
 }
 func addEndpointPrefix_opGetMapStyleDescriptorMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetMapStyleDescriptorMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetMapStyleDescriptor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMapStyleDescriptor",
-	}
 }

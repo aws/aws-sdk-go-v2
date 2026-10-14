@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.ListApplications
+
+{"ApplicationSummaries":[{"ApplicationARN":"__ApplicationARN__","ApplicationMode":"STREAMING","ApplicationName":"__ApplicationName__","ApplicationStatus":"DELETING","ApplicationVersionId":1,"RuntimeEnvironment":"SQL-1_0"},{"ApplicationARN":"__ApplicationARN__","ApplicationMode":"STREAMING","ApplicationName":"__ApplicationName__","ApplicationStatus":"DELETING","ApplicationVersionId":1,"RuntimeEnvironment":"SQL-1_0"}],"NextToken":"__NextToken__"}

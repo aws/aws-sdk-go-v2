@@ -4,12 +4,7 @@ package emrserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and returns a URL that you can use to access the application UIs for a
@@ -60,46 +55,6 @@ type GetDashboardForJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashboardForJobRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashboardForJobRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashboardForJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessSystemProfileLogs != nil {
-		s.WriteBool(schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs, *v.AccessSystemProfileLogs)
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetDashboardForJobRunRequest_applicationId, *v.ApplicationId)
-	}
-	if v.Attempt != nil {
-		s.WriteInt32(schemas.GetDashboardForJobRunRequest_attempt, *v.Attempt)
-	}
-	if v.JobRunId != nil {
-		s.WriteString(schemas.GetDashboardForJobRunRequest_jobRunId, *v.JobRunId)
-	}
-}
-func (v *GetDashboardForJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashboardForJobRunRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs:
-			v.AccessSystemProfileLogs = new(bool)
-			return d.ReadBool(schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs, v.AccessSystemProfileLogs)
-		case schemas.GetDashboardForJobRunRequest_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunRequest_applicationId, v.ApplicationId)
-		case schemas.GetDashboardForJobRunRequest_attempt:
-			v.Attempt = new(int32)
-			return d.ReadInt32(schemas.GetDashboardForJobRunRequest_attempt, v.Attempt)
-		case schemas.GetDashboardForJobRunRequest_jobRunId:
-			v.JobRunId = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunRequest_jobRunId, v.JobRunId)
-		}
-		return nil
-	})
-}
-
 type GetDashboardForJobRunOutput struct {
 
 	// The URL to view job run's dashboard.
@@ -111,96 +66,29 @@ type GetDashboardForJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashboardForJobRunOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashboardForJobRunResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashboardForJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Url != nil {
-		s.WriteString(schemas.GetDashboardForJobRunResponse_url, *v.Url)
-	}
-}
-func (v *GetDashboardForJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashboardForJobRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashboardForJobRunResponse_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunResponse_url, v.Url)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDashboardForJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardForJobRun, schemas.GetDashboardForJobRunRequest, schemas.GetDashboardForJobRunResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDashboardForJobRun{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardForJobRun, schemas.GetDashboardForJobRunRequest, schemas.GetDashboardForJobRunResponse), output: &GetDashboardForJobRunOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboardForJobRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDashboardForJobRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboardForJobRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +103,8 @@ func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDashboardForJobRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDashboardForJobRun",
-	}
 }

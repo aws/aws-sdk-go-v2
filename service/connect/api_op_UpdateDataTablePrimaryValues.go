@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the primary values for a record. This operation affects all existing
@@ -68,6 +67,28 @@ type UpdateDataTablePrimaryValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTablePrimaryValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTablePrimaryValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTablePrimaryValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.UpdateDataTablePrimaryValuesRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataTablePrimaryValuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTablePrimaryValuesRequest_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_NewPrimaryValues, v.NewPrimaryValues)
+	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_PrimaryValues, v.PrimaryValues)
+}
+
 type UpdateDataTablePrimaryValuesOutput struct {
 
 	// The updated lock version information for the data table and affected components
@@ -82,77 +103,50 @@ type UpdateDataTablePrimaryValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTablePrimaryValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTablePrimaryValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTablePrimaryValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTablePrimaryValuesResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataTablePrimaryValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataTablePrimaryValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataTablePrimaryValuesResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataTablePrimaryValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTablePrimaryValues, schemas.UpdateDataTablePrimaryValuesRequest, schemas.UpdateDataTablePrimaryValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTablePrimaryValues, schemas.UpdateDataTablePrimaryValuesRequest, schemas.UpdateDataTablePrimaryValuesResponse), output: &UpdateDataTablePrimaryValuesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataTablePrimaryValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataTablePrimaryValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataTablePrimaryValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +161,8 @@ func (c *Client) addOperationUpdateDataTablePrimaryValuesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataTablePrimaryValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataTablePrimaryValues",
-	}
 }

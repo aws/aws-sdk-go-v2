@@ -4,11 +4,10 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of an existing hybrid directory. You can recover
@@ -68,6 +67,28 @@ type UpdateHybridADInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHybridADInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHybridADRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHybridADInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateHybridADRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.HybridAdministratorAccountUpdate != nil {
+		s.WriteStruct(schemas.UpdateHybridADRequest_HybridAdministratorAccountUpdate)
+		v.HybridAdministratorAccountUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedInstancesSettings != nil {
+		s.WriteStruct(schemas.UpdateHybridADRequest_SelfManagedInstancesSettings)
+		v.SelfManagedInstancesSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateHybridADOutput struct {
 
 	// The identifier of the assessment performed to validate the update
@@ -84,77 +105,54 @@ type UpdateHybridADOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHybridADOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHybridADResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHybridADOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateHybridADResult_AssessmentId, *v.AssessmentId)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateHybridADResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *UpdateHybridADOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHybridADResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHybridADResult_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.UpdateHybridADResult_AssessmentId, v.AssessmentId)
+		case schemas.UpdateHybridADResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.UpdateHybridADResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHybridADMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHybridAD, schemas.UpdateHybridADRequest, schemas.UpdateHybridADResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHybridAD{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHybridAD, schemas.UpdateHybridADRequest, schemas.UpdateHybridADResult), output: &UpdateHybridADOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHybridAD{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHybridAD"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateHybridADValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHybridAD(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +167,8 @@ func (c *Client) addOperationUpdateHybridADMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateHybridAD(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateHybridAD",
-	}
 }

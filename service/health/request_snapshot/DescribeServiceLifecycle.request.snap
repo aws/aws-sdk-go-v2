@@ -1,0 +1,7 @@
+POST /service/AWSHealth_20160804/operation/DescribeServiceLifecycle
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿ffilter¿gservicek__Service__ÿjmaxResultsinextTokenm__NextToken__ÿ

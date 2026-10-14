@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.UpdateServiceTemplate
+
+{"description":"__Description__","displayName":"__DisplayName__","name":"__Name__"}

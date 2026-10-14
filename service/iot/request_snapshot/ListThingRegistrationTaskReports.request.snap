@@ -1,0 +1,3 @@
+GET /thing-registration-tasks/__TaskId__/reports?maxResults=1&nextToken=__NextToken__&reportType=ERRORS
+
+

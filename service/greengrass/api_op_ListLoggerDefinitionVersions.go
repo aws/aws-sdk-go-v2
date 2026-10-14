@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the versions of a logger definition.
@@ -44,6 +43,24 @@ type ListLoggerDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLoggerDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -59,77 +76,51 @@ type ListLoggerDefinitionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionInformation(s, schemas.ListLoggerDefinitionVersionsResponse_Versions, v.Versions)
+}
+func (v *ListLoggerDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLoggerDefinitionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLoggerDefinitionVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLoggerDefinitionVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListLoggerDefinitionVersionsResponse_Versions:
+			return deserialize__listOfVersionInformation(d, schemas.ListLoggerDefinitionVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLoggerDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitionVersions, schemas.ListLoggerDefinitionVersionsRequest, schemas.ListLoggerDefinitionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLoggerDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitionVersions, schemas.ListLoggerDefinitionVersionsRequest, schemas.ListLoggerDefinitionVersionsResponse), output: &ListLoggerDefinitionVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLoggerDefinitionVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLoggerDefinitionVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLoggerDefinitionVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLoggerDefinitionVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +135,8 @@ func (c *Client) addOperationListLoggerDefinitionVersionsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListLoggerDefinitionVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLoggerDefinitionVersions",
-	}
 }

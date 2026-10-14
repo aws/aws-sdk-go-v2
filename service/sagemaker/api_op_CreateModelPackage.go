@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a model package that you can use to create SageMaker models or list on
@@ -190,6 +190,102 @@ type CreateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInferenceSpecifications(s, schemas.CreateModelPackageInput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	if v.CertifyForMarketplace != nil {
+		s.WriteBool(schemas.CreateModelPackageInput_CertifyForMarketplace, *v.CertifyForMarketplace)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ClientToken, *v.ClientToken)
+	}
+	serializeCustomerMetadataMap(s, schemas.CreateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateModelPackageInput_Domain, *v.Domain)
+	}
+	if v.DriftCheckBaselines != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_DriftCheckBaselines)
+		v.DriftCheckBaselines.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedStorageType != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ManagedStorageType, string(v.ManagedStorageType))
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelCard != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelCard)
+		v.ModelCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelLifeCycle != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelLifeCycle)
+		v.ModelLifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelMetrics != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelMetrics)
+		v.ModelMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageDescription != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageDescription, *v.ModelPackageDescription)
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageName != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageName, *v.ModelPackageName)
+	}
+	if v.ModelPackageRegistrationType != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageRegistrationType, string(v.ModelPackageRegistrationType))
+	}
+	if v.SamplePayloadUrl != nil {
+		s.WriteString(schemas.CreateModelPackageInput_SamplePayloadUrl, *v.SamplePayloadUrl)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SkipModelValidation != "" {
+		s.WriteString(schemas.CreateModelPackageInput_SkipModelValidation, string(v.SkipModelValidation))
+	}
+	if v.SourceAlgorithmSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_SourceAlgorithmSpecification)
+		v.SourceAlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.CreateModelPackageInput_SourceUri, *v.SourceUri)
+	}
+	serializeTagList(s, schemas.CreateModelPackageInput_Tags, v.Tags)
+	if v.Task != nil {
+		s.WriteString(schemas.CreateModelPackageInput_Task, *v.Task)
+	}
+	if v.ValidationSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ValidationSpecification)
+		v.ValidationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new model package.
@@ -203,65 +299,42 @@ type CreateModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.CreateModelPackageOutput_ModelPackageArn, *v.ModelPackageArn)
+	}
+}
+func (v *CreateModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelPackageOutput_ModelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.CreateModelPackageOutput_ModelPackageArn, v.ModelPackageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackage, schemas.CreateModelPackageInput, schemas.CreateModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackage, schemas.CreateModelPackageInput, schemas.CreateModelPackageOutput), output: &CreateModelPackageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelPackage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelPackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -271,12 +344,6 @@ func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateModelPackageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelPackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -289,12 +356,6 @@ func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -334,12 +395,4 @@ func (m *idempotencyToken_initializeOpCreateModelPackage) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateModelPackageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateModelPackage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateModelPackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelPackage",
-	}
 }

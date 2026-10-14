@@ -4,12 +4,7 @@ package mediapackagev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,21 +43,6 @@ type ResetChannelStateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetChannelStateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResetChannelStateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResetChannelStateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.ResetChannelStateRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.ResetChannelStateRequest_ChannelName, *v.ChannelName)
-	}
-}
-
 type ResetChannelStateOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the channel that you just reset.
@@ -91,94 +71,29 @@ type ResetChannelStateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetChannelStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResetChannelStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResetChannelStateResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ResetChannelStateResponse_Arn, v.Arn)
-		case schemas.ResetChannelStateResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.ResetChannelStateResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.ResetChannelStateResponse_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.ResetChannelStateResponse_ChannelName, v.ChannelName)
-		case schemas.ResetChannelStateResponse_ResetAt:
-			v.ResetAt = new(time.Time)
-			return d.ReadTime(schemas.ResetChannelStateResponse_ResetAt, v.ResetAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationResetChannelStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetChannelState{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetChannelState, schemas.ResetChannelStateRequest, schemas.ResetChannelStateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetChannelState{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetChannelState, schemas.ResetChannelStateRequest, schemas.ResetChannelStateResponse), output: &ResetChannelStateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetChannelState"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpResetChannelStateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetChannelState(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +108,8 @@ func (c *Client) addOperationResetChannelStateMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResetChannelState(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResetChannelState",
-	}
 }

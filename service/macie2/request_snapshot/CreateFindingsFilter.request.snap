@@ -1,0 +1,5 @@
+POST /findingsfilters
+
+Content-Type: application/json
+
+{"action":"ARCHIVE","clientToken":"__ClientToken__","description":"__Description__","findingCriteria":{"criterion":{"key0":{"eq":["__Member__","__Member__"],"eqExactMatch":["__Member__","__Member__"],"gt":1,"gte":1,"lt":1,"lte":1,"neq":["__Member__","__Member__"]}}},"name":"__Name__","position":1,"tags":{"key0":"__Value__"}}

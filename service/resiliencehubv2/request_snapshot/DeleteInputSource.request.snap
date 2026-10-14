@@ -1,0 +1,5 @@
+POST /v2/delete-input-source
+
+Content-Type: application/json
+
+{"inputSourceId":"__InputSourceId__","serviceArn":"__ServiceArn__"}

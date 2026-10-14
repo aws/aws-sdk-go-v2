@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates new reviewed answers for a Q Topic.
@@ -49,6 +48,22 @@ type BatchCreateTopicReviewedAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateTopicReviewedAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateTopicReviewedAnswerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateTopicReviewedAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerRequest_Answers, v.Answers)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerRequest_TopicId, *v.TopicId)
+	}
+}
+
 type BatchCreateTopicReviewedAnswerOutput struct {
 
 	// The definition of Answers that are invalid and not created.
@@ -76,77 +91,71 @@ type BatchCreateTopicReviewedAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateTopicReviewedAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateTopicReviewedAnswerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateTopicReviewedAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvalidTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers, v.InvalidAnswers)
+	if v.RequestId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.BatchCreateTopicReviewedAnswerResponse_Status, v.Status)
+	}
+	serializeSucceededTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers, v.SucceededAnswers)
+	if v.TopicArn != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *BatchCreateTopicReviewedAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateTopicReviewedAnswerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers:
+			return deserializeInvalidTopicReviewedAnswers(d, schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers, &v.InvalidAnswers)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_RequestId, v.RequestId)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_Status:
+			return d.ReadInt32(schemas.BatchCreateTopicReviewedAnswerResponse_Status, &v.Status)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers:
+			return deserializeSucceededTopicReviewedAnswers(d, schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers, &v.SucceededAnswers)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn, v.TopicArn)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateTopicReviewedAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateTopicReviewedAnswer, schemas.BatchCreateTopicReviewedAnswerRequest, schemas.BatchCreateTopicReviewedAnswerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateTopicReviewedAnswer, schemas.BatchCreateTopicReviewedAnswerRequest, schemas.BatchCreateTopicReviewedAnswerResponse), output: &BatchCreateTopicReviewedAnswerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateTopicReviewedAnswer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchCreateTopicReviewedAnswerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateTopicReviewedAnswer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +170,8 @@ func (c *Client) addOperationBatchCreateTopicReviewedAnswerMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchCreateTopicReviewedAnswer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateTopicReviewedAnswer",
-	}
 }

@@ -4,35 +4,15 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves dataset metadata only.
+//	Retrieves dataset metadata. Use the datasetVersion query parameter to retrieve
 //
-// Use ?datasetVersion=DRAFT or ?datasetVersion=N to retrieve a specific version's
-// metadata. If absent, defaults to DRAFT (the mutable working copy). Returns
-// ResourceNotFoundException if the specified version is not found.
-//
-// Initial state after CreateDataset: When CreateDataset completes successfully
-// (status transitions to ACTIVE), only a DRAFT working copy exists. No published
-// versions exist until CreateDatasetVersion is called. At this point draftStatus
-// is MODIFIED because the DRAFT has content that has never been published.
-//
-// Default version behavior: When datasetVersion is omitted, the operation returns
-// the DRAFT working copy. To retrieve a specific published version, pass the
-// version number as a string (e.g. ?datasetVersion=1 ).
-//
-// State guard: Allowed for all statuses including DELETING. Returns the dataset
-// record with its current status so callers can observe the deletion in progress.
-//
-// For paginated example IDs use ListDatasetExamples.
+// a specific version's metadata. If absent, defaults to DRAFT. For paginated
+// example content, use ListDatasetExamples .
 func (c *Client) GetDataset(ctx context.Context, params *GetDatasetInput, optFns ...func(*Options)) (*GetDatasetOutput, error) {
 	if params == nil {
 		params = &GetDatasetInput{}
@@ -55,25 +35,10 @@ type GetDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Version to retrieve: "DRAFT" or a version number. Defaults to DRAFT if absent.
+	//  Version to retrieve: "DRAFT" or a version number. Defaults to DRAFT if absent.
 	DatasetVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetId != nil {
-		s.WriteString(schemas.GetDatasetRequest_datasetId, *v.DatasetId)
-	}
-	if v.DatasetVersion != nil {
-		s.WriteString(schemas.GetDatasetRequest_datasetVersion, *v.DatasetVersion)
-	}
 }
 
 type GetDatasetOutput struct {
@@ -98,17 +63,17 @@ type GetDatasetOutput struct {
 	// This member is required.
 	DatasetName *string
 
-	// The resolved version: "DRAFT" (default) or the requested version number.
+	//  The resolved version: "DRAFT" (default) or the requested version number.
 	//
 	// This member is required.
 	DatasetVersion *string
 
-	// Example count for DRAFT.
+	//  The number of examples in the DRAFT.
 	//
 	// This member is required.
 	ExampleCount *int64
 
-	// The schema type declared at create time. Immutable after creation.
+	//  The schema type declared at create time. Immutable after creation.
 	//
 	// This member is required.
 	SchemaType types.DatasetSchemaType
@@ -126,23 +91,25 @@ type GetDatasetOutput struct {
 	//  The description of the dataset.
 	Description *string
 
-	// Presigned S3 URL to download the consolidated dataset.jsonl file for the
-	// resolved version (DRAFT or published). TTL: 5 minutes. Omitted if the file does
-	// not yet exist (e.g. during CREATING) or on presign failure.
+	//  Presigned Amazon S3 URL to download the consolidated dataset file for the
+	// resolved version. Expires after 5 minutes. Omitted if the file does not yet
+	// exist.
 	DownloadUrl *string
 
-	// Expiry timestamp for downloadUrl.
+	//  Expiry timestamp for the download URL.
 	DownloadUrlExpiresAt *time.Time
 
-	// Publish synchronization state. Only authoritative when status == ACTIVE.
-	// MODIFIED — DRAFT has unpublished changes (or no published versions yet).
-	// UNMODIFIED — DRAFT matches the latest published version exactly.
+	//  Publish synchronization state. Only authoritative when status is ACTIVE.
+	// MODIFIED indicates DRAFT has unpublished changes. UNMODIFIED indicates DRAFT
+	// matches the latest published version.
 	DraftStatus types.DraftStatus
 
-	// Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
+	//  Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
+	// Describes the reason for the failure.
 	FailureReason *string
 
-	// AWS KMS key ARN used for SSE-KMS on service S3 writes, if configured.
+	//  KMS key ARN used for server-side encryption on service Amazon S3 writes, if
+	// configured.
 	KmsKeyArn *string
 
 	//  The tags associated with the dataset.
@@ -154,141 +121,29 @@ type GetDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDatasetResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDatasetResponse_createdAt, v.CreatedAt)
-		case schemas.GetDatasetResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_datasetArn, v.DatasetArn)
-		case schemas.GetDatasetResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_datasetId, v.DatasetId)
-		case schemas.GetDatasetResponse_datasetName:
-			v.DatasetName = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_datasetName, v.DatasetName)
-		case schemas.GetDatasetResponse_datasetVersion:
-			v.DatasetVersion = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_datasetVersion, v.DatasetVersion)
-		case schemas.GetDatasetResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_description, v.Description)
-		case schemas.GetDatasetResponse_downloadUrl:
-			v.DownloadUrl = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_downloadUrl, v.DownloadUrl)
-		case schemas.GetDatasetResponse_downloadUrlExpiresAt:
-			v.DownloadUrlExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetDatasetResponse_downloadUrlExpiresAt, v.DownloadUrlExpiresAt)
-		case schemas.GetDatasetResponse_draftStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetDatasetResponse_draftStatus, &ev); err != nil {
-				return err
-			}
-			v.DraftStatus = types.DraftStatus(ev)
-			return nil
-		case schemas.GetDatasetResponse_exampleCount:
-			v.ExampleCount = new(int64)
-			return d.ReadInt64(schemas.GetDatasetResponse_exampleCount, v.ExampleCount)
-		case schemas.GetDatasetResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_failureReason, v.FailureReason)
-		case schemas.GetDatasetResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetDatasetResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.GetDatasetResponse_schemaType:
-			var ev string
-			if err := d.ReadString(schemas.GetDatasetResponse_schemaType, &ev); err != nil {
-				return err
-			}
-			v.SchemaType = types.DatasetSchemaType(ev)
-			return nil
-		case schemas.GetDatasetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDatasetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.GetDatasetResponse_tags:
-			return deserializeTagsMap(d, schemas.GetDatasetResponse_tags, &v.Tags)
-		case schemas.GetDatasetResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDatasetResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetRequest, schemas.GetDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetRequest, schemas.GetDatasetResponse), output: &GetDatasetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDatasetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -303,22 +158,8 @@ func (c *Client) addOperationGetDatasetMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataset",
-	}
 }

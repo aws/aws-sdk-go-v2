@@ -1,0 +1,5 @@
+POST /prod/batch/start
+
+Content-Type: application/json
+
+{"channelIds":["__Member__","__Member__"],"multiplexIds":["__Member__","__Member__"]}

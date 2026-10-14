@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +48,21 @@ type DescribeAssetBundleExportJobInput struct {
 	AwsAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetBundleExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetBundleExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetBundleExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetBundleExportJobId != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobRequest_AssetBundleExportJobId, *v.AssetBundleExportJobId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
 }
 
 type DescribeAssetBundleExportJobOutput struct {
@@ -142,77 +156,158 @@ type DescribeAssetBundleExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetBundleExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetBundleExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetBundleExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_Arn, *v.Arn)
+	}
+	if v.AssetBundleExportJobId != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_AssetBundleExportJobId, *v.AssetBundleExportJobId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CloudFormationOverridePropertyConfiguration != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleExportJobResponse_CloudFormationOverridePropertyConfiguration)
+		v.CloudFormationOverridePropertyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribeAssetBundleExportJobResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_DownloadUrl, *v.DownloadUrl)
+	}
+	serializeAssetBundleExportJobErrorList(s, schemas.DescribeAssetBundleExportJobResponse_Errors, v.Errors)
+	if v.ExportFormat != "" {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_ExportFormat, string(v.ExportFormat))
+	}
+	if v.IncludeAllDependencies != false {
+		s.WriteBool(schemas.DescribeAssetBundleExportJobResponse_IncludeAllDependencies, v.IncludeAllDependencies)
+	}
+	if v.IncludeFolderMembers != "" {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMembers, string(v.IncludeFolderMembers))
+	}
+	if v.IncludeFolderMemberships != false {
+		s.WriteBool(schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMemberships, v.IncludeFolderMemberships)
+	}
+	if v.IncludePermissions != false {
+		s.WriteBool(schemas.DescribeAssetBundleExportJobResponse_IncludePermissions, v.IncludePermissions)
+	}
+	if v.IncludeTags != false {
+		s.WriteBool(schemas.DescribeAssetBundleExportJobResponse_IncludeTags, v.IncludeTags)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_RequestId, *v.RequestId)
+	}
+	serializeAssetBundleResourceArns(s, schemas.DescribeAssetBundleExportJobResponse_ResourceArns, v.ResourceArns)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAssetBundleExportJobResponse_Status, v.Status)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.DescribeAssetBundleExportJobResponse_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssetBundleExportJobWarningList(s, schemas.DescribeAssetBundleExportJobResponse_Warnings, v.Warnings)
+}
+func (v *DescribeAssetBundleExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetBundleExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetBundleExportJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleExportJobResponse_Arn, v.Arn)
+		case schemas.DescribeAssetBundleExportJobResponse_AssetBundleExportJobId:
+			v.AssetBundleExportJobId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleExportJobResponse_AssetBundleExportJobId, v.AssetBundleExportJobId)
+		case schemas.DescribeAssetBundleExportJobResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleExportJobResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeAssetBundleExportJobResponse_CloudFormationOverridePropertyConfiguration:
+			v.CloudFormationOverridePropertyConfiguration = &types.AssetBundleCloudFormationOverridePropertyConfiguration{}
+			return v.CloudFormationOverridePropertyConfiguration.Deserialize(d)
+		case schemas.DescribeAssetBundleExportJobResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAssetBundleExportJobResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribeAssetBundleExportJobResponse_DownloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleExportJobResponse_DownloadUrl, v.DownloadUrl)
+		case schemas.DescribeAssetBundleExportJobResponse_Errors:
+			return deserializeAssetBundleExportJobErrorList(d, schemas.DescribeAssetBundleExportJobResponse_Errors, &v.Errors)
+		case schemas.DescribeAssetBundleExportJobResponse_ExportFormat:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetBundleExportJobResponse_ExportFormat, &ev); err != nil {
+				return err
+			}
+			v.ExportFormat = types.AssetBundleExportFormat(ev)
+			return nil
+		case schemas.DescribeAssetBundleExportJobResponse_IncludeAllDependencies:
+			return d.ReadBool(schemas.DescribeAssetBundleExportJobResponse_IncludeAllDependencies, &v.IncludeAllDependencies)
+		case schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMembers:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMembers, &ev); err != nil {
+				return err
+			}
+			v.IncludeFolderMembers = types.IncludeFolderMembers(ev)
+			return nil
+		case schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMemberships:
+			return d.ReadBool(schemas.DescribeAssetBundleExportJobResponse_IncludeFolderMemberships, &v.IncludeFolderMemberships)
+		case schemas.DescribeAssetBundleExportJobResponse_IncludePermissions:
+			return d.ReadBool(schemas.DescribeAssetBundleExportJobResponse_IncludePermissions, &v.IncludePermissions)
+		case schemas.DescribeAssetBundleExportJobResponse_IncludeTags:
+			return d.ReadBool(schemas.DescribeAssetBundleExportJobResponse_IncludeTags, &v.IncludeTags)
+		case schemas.DescribeAssetBundleExportJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssetBundleExportJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.AssetBundleExportJobStatus(ev)
+			return nil
+		case schemas.DescribeAssetBundleExportJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAssetBundleExportJobResponse_RequestId, v.RequestId)
+		case schemas.DescribeAssetBundleExportJobResponse_ResourceArns:
+			return deserializeAssetBundleResourceArns(d, schemas.DescribeAssetBundleExportJobResponse_ResourceArns, &v.ResourceArns)
+		case schemas.DescribeAssetBundleExportJobResponse_Status:
+			return d.ReadInt32(schemas.DescribeAssetBundleExportJobResponse_Status, &v.Status)
+		case schemas.DescribeAssetBundleExportJobResponse_ValidationStrategy:
+			v.ValidationStrategy = &types.AssetBundleExportJobValidationStrategy{}
+			return v.ValidationStrategy.Deserialize(d)
+		case schemas.DescribeAssetBundleExportJobResponse_Warnings:
+			return deserializeAssetBundleExportJobWarningList(d, schemas.DescribeAssetBundleExportJobResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetBundleExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetBundleExportJob, schemas.DescribeAssetBundleExportJobRequest, schemas.DescribeAssetBundleExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetBundleExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetBundleExportJob, schemas.DescribeAssetBundleExportJobRequest, schemas.DescribeAssetBundleExportJobResponse), output: &DescribeAssetBundleExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetBundleExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetBundleExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAssetBundleExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetBundleExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -227,22 +322,8 @@ func (c *Client) addOperationDescribeAssetBundleExportJobMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAssetBundleExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAssetBundleExportJob",
-	}
 }

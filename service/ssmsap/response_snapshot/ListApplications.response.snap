@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Applications":[{"Arn":"__Arn__","DiscoveryStatus":"SUCCESS","Id":"__Id__","Tags":{"key0":"__Value__"},"Type":"HANA"},{"Arn":"__Arn__","DiscoveryStatus":"SUCCESS","Id":"__Id__","Tags":{"key0":"__Value__"},"Type":"HANA"}],"NextToken":"__NextToken__"}

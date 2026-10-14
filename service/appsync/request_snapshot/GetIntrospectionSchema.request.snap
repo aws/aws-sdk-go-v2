@@ -1,0 +1,3 @@
+GET /v1/apis/__ApiId__/schema?format=SDL&includeDirectives=true
+
+

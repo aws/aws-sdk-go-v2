@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a metadata form type.
@@ -87,31 +82,6 @@ type CreateFormTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFormTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFormTypeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateFormTypeInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateFormTypeInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeModel(s, schemas.CreateFormTypeInput_model, v.Model)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateFormTypeInput_name, *v.Name)
-	}
-	if v.OwningProjectIdentifier != nil {
-		s.WriteString(schemas.CreateFormTypeInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CreateFormTypeInput_status, string(v.Status))
-	}
-}
-
 type CreateFormTypeOutput struct {
 
 	// The ID of the Amazon DataZone domain in which this metadata form type is
@@ -150,103 +120,29 @@ type CreateFormTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFormTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFormTypeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFormTypeOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_description, v.Description)
-		case schemas.CreateFormTypeOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_domainId, v.DomainId)
-		case schemas.CreateFormTypeOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_name, v.Name)
-		case schemas.CreateFormTypeOutput_originDomainId:
-			v.OriginDomainId = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_originDomainId, v.OriginDomainId)
-		case schemas.CreateFormTypeOutput_originProjectId:
-			v.OriginProjectId = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_originProjectId, v.OriginProjectId)
-		case schemas.CreateFormTypeOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_owningProjectId, v.OwningProjectId)
-		case schemas.CreateFormTypeOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.CreateFormTypeOutput_revision, v.Revision)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFormTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFormType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFormType, schemas.CreateFormTypeInput, schemas.CreateFormTypeOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFormType{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFormType, schemas.CreateFormTypeInput, schemas.CreateFormTypeOutput), output: &CreateFormTypeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFormType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFormTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFormType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -261,22 +157,8 @@ func (c *Client) addOperationCreateFormTypeMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFormType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFormType",
-	}
 }

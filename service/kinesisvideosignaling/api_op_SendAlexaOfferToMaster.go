@@ -4,12 +4,7 @@ package kinesisvideosignaling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API allows you to connect WebRTC-enabled devices with Alexa display
@@ -53,24 +48,6 @@ type SendAlexaOfferToMasterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendAlexaOfferToMasterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendAlexaOfferToMasterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendAlexaOfferToMasterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelARN != nil {
-		s.WriteString(schemas.SendAlexaOfferToMasterRequest_ChannelARN, *v.ChannelARN)
-	}
-	if v.MessagePayload != nil {
-		s.WriteString(schemas.SendAlexaOfferToMasterRequest_MessagePayload, *v.MessagePayload)
-	}
-	if v.SenderClientId != nil {
-		s.WriteString(schemas.SendAlexaOfferToMasterRequest_SenderClientId, *v.SenderClientId)
-	}
-}
-
 type SendAlexaOfferToMasterOutput struct {
 
 	// The base64-encoded SDP answer content.
@@ -82,85 +59,29 @@ type SendAlexaOfferToMasterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendAlexaOfferToMasterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendAlexaOfferToMasterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendAlexaOfferToMasterResponse_Answer:
-			v.Answer = new(string)
-			return d.ReadString(schemas.SendAlexaOfferToMasterResponse_Answer, v.Answer)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendAlexaOfferToMaster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAlexaOfferToMaster, schemas.SendAlexaOfferToMasterRequest, schemas.SendAlexaOfferToMasterResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendAlexaOfferToMaster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAlexaOfferToMaster, schemas.SendAlexaOfferToMasterRequest, schemas.SendAlexaOfferToMasterResponse), output: &SendAlexaOfferToMasterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendAlexaOfferToMaster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendAlexaOfferToMasterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendAlexaOfferToMaster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +96,8 @@ func (c *Client) addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendAlexaOfferToMaster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendAlexaOfferToMaster",
-	}
 }

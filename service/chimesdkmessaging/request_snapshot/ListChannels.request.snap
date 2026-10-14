@@ -1,0 +1,4 @@
+GET /channels?app-instance-arn=__AppInstanceArn__&max-results=1&next-token=__NextToken__&privacy=PUBLIC
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

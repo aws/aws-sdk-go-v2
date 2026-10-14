@@ -4,13 +4,8 @@ package networkflowmonitor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,18 +35,6 @@ type GetMonitorInput struct {
 	MonitorName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMonitorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMonitorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MonitorName != nil {
-		s.WriteString(schemas.GetMonitorInput_monitorName, *v.MonitorName)
-	}
 }
 
 type GetMonitorOutput struct {
@@ -113,107 +96,29 @@ type GetMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMonitorOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMonitorOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMonitorOutput_createdAt, v.CreatedAt)
-		case schemas.GetMonitorOutput_localResources:
-			return deserializeMonitorLocalResources(d, schemas.GetMonitorOutput_localResources, &v.LocalResources)
-		case schemas.GetMonitorOutput_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMonitorOutput_modifiedAt, v.ModifiedAt)
-		case schemas.GetMonitorOutput_monitorArn:
-			v.MonitorArn = new(string)
-			return d.ReadString(schemas.GetMonitorOutput_monitorArn, v.MonitorArn)
-		case schemas.GetMonitorOutput_monitorName:
-			v.MonitorName = new(string)
-			return d.ReadString(schemas.GetMonitorOutput_monitorName, v.MonitorName)
-		case schemas.GetMonitorOutput_monitorStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetMonitorOutput_monitorStatus, &ev); err != nil {
-				return err
-			}
-			v.MonitorStatus = types.MonitorStatus(ev)
-			return nil
-		case schemas.GetMonitorOutput_remoteResources:
-			return deserializeMonitorRemoteResources(d, schemas.GetMonitorOutput_remoteResources, &v.RemoteResources)
-		case schemas.GetMonitorOutput_tags:
-			return deserializeTagMap(d, schemas.GetMonitorOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorInput, schemas.GetMonitorOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMonitor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorInput, schemas.GetMonitorOutput), output: &GetMonitorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +133,8 @@ func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMonitor",
-	}
 }

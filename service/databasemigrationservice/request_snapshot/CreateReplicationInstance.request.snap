@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateReplicationInstance
+
+{"AllocatedStorage":1,"AutoMinorVersionUpgrade":true,"AvailabilityZone":"__AvailabilityZone__","DnsNameServers":"__DnsNameServers__","EngineVersion":"__EngineVersion__","KerberosAuthenticationSettings":{"KeyCacheSecretIamArn":"__KeyCacheSecretIamArn__","KeyCacheSecretId":"__KeyCacheSecretId__","Krb5FileContents":"__Krb5FileContents__"},"KmsKeyId":"__KmsKeyId__","MultiAZ":true,"NetworkType":"__NetworkType__","PreferredMaintenanceWindow":"__PreferredMaintenanceWindow__","PubliclyAccessible":true,"ReplicationInstanceClass":"__ReplicationInstanceClass__","ReplicationInstanceIdentifier":"__ReplicationInstanceIdentifier__","ReplicationSubnetGroupIdentifier":"__ReplicationSubnetGroupIdentifier__","ResourceIdentifier":"__ResourceIdentifier__","Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}],"VpcSecurityGroupIds":["__Member__","__Member__"]}

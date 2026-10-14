@@ -1,0 +1,5 @@
+POST /20200301/gateways/__GatewayId__/capability
+
+Content-Type: application/json
+
+{"capabilityConfiguration":"__CapabilityConfiguration__","capabilityNamespace":"__CapabilityNamespace__"}

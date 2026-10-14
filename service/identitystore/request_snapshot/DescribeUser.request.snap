@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.DescribeUser
+
+{"Extensions":["__Member__","__Member__"],"IdentityStoreId":"__IdentityStoreId__","UserId":"__UserId__"}

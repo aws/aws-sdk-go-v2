@@ -1,0 +1,8 @@
+PUT /?tagging=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+<Tagging xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><TagSet><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></TagSet></Tagging>

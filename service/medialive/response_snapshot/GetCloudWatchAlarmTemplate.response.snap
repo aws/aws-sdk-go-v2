@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","comparisonOperator":"GreaterThanOrEqualToThreshold","createdAt":"2000-01-01T00:00:00Z","datapointsToAlarm":1,"description":"__Description__","evaluationPeriods":1,"groupId":"__GroupId__","id":"__Id__","metricName":"__MetricName__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","period":1,"statistic":"SampleCount","tags":{"key0":"__Value__"},"targetResourceType":"CLOUDFRONT_DISTRIBUTION","threshold":1,"treatMissingData":"notBreaching"}

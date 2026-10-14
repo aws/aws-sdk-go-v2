@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the specified app block builder with the specified app block.
@@ -42,6 +41,21 @@ type AssociateAppBlockBuilderAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAppBlockBuilderAppBlockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAppBlockBuilderAppBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockArn != nil {
+		s.WriteString(schemas.AssociateAppBlockBuilderAppBlockRequest_AppBlockArn, *v.AppBlockArn)
+	}
+	if v.AppBlockBuilderName != nil {
+		s.WriteString(schemas.AssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName, *v.AppBlockBuilderName)
+	}
+}
+
 type AssociateAppBlockBuilderAppBlockOutput struct {
 
 	// The list of app block builders associated with app blocks.
@@ -53,77 +67,53 @@ type AssociateAppBlockBuilderAppBlockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAppBlockBuilderAppBlockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAppBlockBuilderAppBlockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilderAppBlockAssociation != nil {
+		s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation)
+		v.AppBlockBuilderAppBlockAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateAppBlockBuilderAppBlockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAppBlockBuilderAppBlockResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation:
+			v.AppBlockBuilderAppBlockAssociation = &types.AppBlockBuilderAppBlockAssociation{}
+			return v.AppBlockBuilderAppBlockAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAppBlockBuilderAppBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAppBlockBuilderAppBlock, schemas.AssociateAppBlockBuilderAppBlockRequest, schemas.AssociateAppBlockBuilderAppBlockResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAppBlockBuilderAppBlock, schemas.AssociateAppBlockBuilderAppBlockRequest, schemas.AssociateAppBlockBuilderAppBlockResult), output: &AssociateAppBlockBuilderAppBlockOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateAppBlockBuilderAppBlock"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateAppBlockBuilderAppBlockValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAppBlockBuilderAppBlock(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +128,8 @@ func (c *Client) addOperationAssociateAppBlockBuilderAppBlockMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateAppBlockBuilderAppBlock(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateAppBlockBuilderAppBlock",
-	}
 }

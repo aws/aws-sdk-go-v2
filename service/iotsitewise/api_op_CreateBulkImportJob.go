@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,9 +13,12 @@ import (
 // Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
 // information, see [Create a bulk import job (CLI)]in the Amazon Simple Storage Service User Guide.
 //
-// Before you create a bulk import job, you must enable IoT SiteWise warm tier or
-// IoT SiteWise cold tier. For more information about how to configure storage
-// settings, see [PutStorageConfiguration].
+// Before you create a bulk import job that ingests data into time series outside
+// of a workspace, you must enable IoT SiteWise warm tier or IoT SiteWise cold
+// tier. For more information about how to configure storage settings, see [PutStorageConfiguration]. This
+// requirement doesn't apply to bulk import jobs that ingest data into a session
+// dataset in a workspace (jobs that specify a workspaceName and datasetId ). Those
+// jobs don't use IoT SiteWise warm or cold tier storage.
 //
 // Bulk import is designed to store historical data to IoT SiteWise.
 //
@@ -54,16 +54,16 @@ type CreateBulkImportJobInput struct {
 	// This member is required.
 	ErrorReportLocation *types.ErrorReportLocation
 
-	// The files in the specified Amazon S3 bucket that contain your data.
+	// The files in the specified Amazon S3 bucket that contain your data. You can
+	// specify up to 100 files for each bulk import job. Each file supports the
+	// following size limits:
+	//
+	//   - Parquet files – Up to 256 MiB.
+	//
+	//   - Other file formats – Up to 5 GiB.
 	//
 	// This member is required.
 	Files []types.File
-
-	// Contains the configuration information of a job, such as the file format used
-	// to save data in Amazon S3.
-	//
-	// This member is required.
-	JobConfiguration *types.JobConfiguration
 
 	// The unique name that helps identify the job request.
 	//
@@ -82,43 +82,23 @@ type CreateBulkImportJobInput struct {
 	// data is ingested into IoT SiteWise as is.
 	AdaptiveIngestion *bool
 
+	// The ID of the session dataset to ingest data into. Specify this field, together
+	// with workspaceName , to ingest data into a session dataset in a workspace.
+	DatasetId *string
+
 	// If set to true, your data files is deleted from S3, after ingestion into IoT
 	// SiteWise storage.
 	DeleteFilesAfterImport *bool
 
+	// Contains the configuration information of a job, such as the file format used
+	// to save data in Amazon S3.
+	JobConfiguration *types.JobConfiguration
+
+	// The name of the workspace that contains the session dataset. Specify this field
+	// together with datasetId .
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *CreateBulkImportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBulkImportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBulkImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdaptiveIngestion != nil {
-		s.WriteBool(schemas.CreateBulkImportJobRequest_adaptiveIngestion, *v.AdaptiveIngestion)
-	}
-	if v.DeleteFilesAfterImport != nil {
-		s.WriteBool(schemas.CreateBulkImportJobRequest_deleteFilesAfterImport, *v.DeleteFilesAfterImport)
-	}
-	if v.ErrorReportLocation != nil {
-		s.WriteStruct(schemas.CreateBulkImportJobRequest_errorReportLocation)
-		v.ErrorReportLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeFiles(s, schemas.CreateBulkImportJobRequest_files, v.Files)
-	if v.JobConfiguration != nil {
-		s.WriteStruct(schemas.CreateBulkImportJobRequest_jobConfiguration)
-		v.JobConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.JobName != nil {
-		s.WriteString(schemas.CreateBulkImportJobRequest_jobName, *v.JobName)
-	}
-	if v.JobRoleArn != nil {
-		s.WriteString(schemas.CreateBulkImportJobRequest_jobRoleArn, *v.JobRoleArn)
-	}
 }
 
 type CreateBulkImportJobOutput struct {
@@ -162,83 +142,23 @@ type CreateBulkImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBulkImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBulkImportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBulkImportJobResponse_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreateBulkImportJobResponse_jobId, v.JobId)
-		case schemas.CreateBulkImportJobResponse_jobName:
-			v.JobName = new(string)
-			return d.ReadString(schemas.CreateBulkImportJobResponse_jobName, v.JobName)
-		case schemas.CreateBulkImportJobResponse_jobStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateBulkImportJobResponse_jobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = types.JobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBulkImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBulkImportJob, schemas.CreateBulkImportJobRequest, schemas.CreateBulkImportJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBulkImportJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBulkImportJob, schemas.CreateBulkImportJobRequest, schemas.CreateBulkImportJobResponse), output: &CreateBulkImportJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBulkImportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -248,12 +168,6 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateBulkImportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBulkImportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,12 +180,6 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -305,12 +213,4 @@ func (m *endpointPrefix_opCreateBulkImportJobMiddleware) HandleFinalize(ctx cont
 }
 func addEndpointPrefix_opCreateBulkImportJobMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateBulkImportJobMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateBulkImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBulkImportJob",
-	}
 }

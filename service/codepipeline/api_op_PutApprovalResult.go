@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -68,6 +67,32 @@ type PutApprovalResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApprovalResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApprovalResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApprovalResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.PutApprovalResultInput_actionName, *v.ActionName)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.PutApprovalResultInput_pipelineName, *v.PipelineName)
+	}
+	if v.Result != nil {
+		s.WriteStruct(schemas.PutApprovalResultInput_result)
+		v.Result.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.PutApprovalResultInput_stageName, *v.StageName)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.PutApprovalResultInput_token, *v.Token)
+	}
+}
+
 // Represents the output of a PutApprovalResult action.
 type PutApprovalResultOutput struct {
 
@@ -80,77 +105,48 @@ type PutApprovalResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApprovalResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApprovalResultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApprovalResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovedAt != nil {
+		s.WriteTime(schemas.PutApprovalResultOutput_approvedAt, *v.ApprovedAt)
+	}
+}
+func (v *PutApprovalResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutApprovalResultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutApprovalResultOutput_approvedAt:
+			v.ApprovedAt = new(time.Time)
+			return d.ReadTime(schemas.PutApprovalResultOutput_approvedAt, v.ApprovedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApprovalResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApprovalResult, schemas.PutApprovalResultInput, schemas.PutApprovalResultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApprovalResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApprovalResult, schemas.PutApprovalResultInput, schemas.PutApprovalResultOutput), output: &PutApprovalResultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApprovalResult{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutApprovalResult"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutApprovalResultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutApprovalResult(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +161,8 @@ func (c *Client) addOperationPutApprovalResultMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutApprovalResult(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutApprovalResult",
-	}
 }

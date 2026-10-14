@@ -2207,6 +2207,169 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityir#GetFindingMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityir#GetFindingMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityir#GetFindingMetricsResponse"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "GetFindingMetrics",
+                    "documentation": "Grants permission to retrieve finding-lifecycle metrics for a membership over a date range"
+                },
+                "smithy.api#documentation": "Returns finding-lifecycle metrics for a membership over a date range.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Retrieve finding-lifecycle metrics for a membership",
+                        "input": {
+                            "membershipId": "m-a1b2c3d4e5f",
+                            "startDate": "2026-08-01T00:00:00Z",
+                            "endDate": "2026-08-18T00:00:00Z"
+                        },
+                        "output": {
+                            "findingsIngestedSecurityHub": 120,
+                            "findingsIngestedGuardDuty": 45,
+                            "findingsTriaged": 165,
+                            "findingsTriagedFalsePositive": 30,
+                            "findingsInvestigated": 60,
+                            "findingsInvestigatedFalsePositive": 12,
+                            "findingsEscalated": 8,
+                            "findingsEscalatedFalsePositive": 2,
+                            "findingsTruePositive": 6,
+                            "findingsInvestigatedInProgress": 40,
+                            "findingsEscalatedInProgress": 0
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/membership/{membershipId}/finding-metrics"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.securityir#GetFindingMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "membershipId": {
+                    "target": "com.amazonaws.securityir#MembershipId",
+                    "traits": {
+                        "smithy.api#documentation": "The membership ID to retrieve metrics for.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The start of the day-aligned UTC window, inclusive.",
+                        "smithy.api#httpQuery": "startDate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The end of the day-aligned UTC window, inclusive.",
+                        "smithy.api#httpQuery": "endDate",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityir#GetFindingMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "findingsIngestedSecurityHub": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings ingested from AWS Security Hub during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsIngestedGuardDuty": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings ingested from Amazon GuardDuty during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsTriaged": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings triaged during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsTriagedFalsePositive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of triaged findings that were closed as false positives during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsInvestigated": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings investigated during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsInvestigatedFalsePositive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of investigated findings that were closed as false positives during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsEscalated": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings escalated during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsEscalatedFalsePositive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of escalated findings that were closed as false positives during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsTruePositive": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings confirmed as true positives during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsInvestigatedInProgress": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings whose investigation was in progress during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingsEscalatedInProgress": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The number of findings whose escalation was in progress during the requested date range.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Finding-lifecycle metrics for a membership over the requested date range.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityir#GetMembership": {
             "type": "operation",
             "input": {
@@ -3809,6 +3972,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityir#CancelMembership"
+                },
+                {
+                    "target": "com.amazonaws.securityir#GetFindingMetrics"
                 }
             ],
             "traits": {

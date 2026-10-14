@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ListTableMetadata
+
+{"CatalogName":"__CatalogName__","DatabaseName":"__DatabaseName__","Expression":"__Expression__","MaxResults":1,"NextToken":"__NextToken__","WorkGroup":"__WorkGroup__"}

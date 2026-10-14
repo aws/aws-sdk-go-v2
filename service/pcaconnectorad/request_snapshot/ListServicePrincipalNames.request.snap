@@ -1,0 +1,3 @@
+GET /directoryRegistrations/__DirectoryRegistrationArn__/servicePrincipalNames?MaxResults=1&NextToken=__NextToken__
+
+

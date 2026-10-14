@@ -1,0 +1,5 @@
+POST /jobs/list
+
+Content-Type: application/json
+
+{"filterCriteria":{"excludes":[{"comparator":"EQ","key":"jobType","values":["__Member__","__Member__"]},{"comparator":"EQ","key":"jobType","values":["__Member__","__Member__"]}],"includes":[{"comparator":"EQ","key":"jobType","values":["__Member__","__Member__"]},{"comparator":"EQ","key":"jobType","values":["__Member__","__Member__"]}]},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"createdAt","orderBy":"ASC"}}

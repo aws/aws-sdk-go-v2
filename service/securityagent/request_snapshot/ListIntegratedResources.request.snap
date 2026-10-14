@@ -1,0 +1,5 @@
+POST /ListIntegratedResources
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","integrationId":"__IntegrationId__","maxResults":1,"nextToken":"__NextToken__","resourceType":"CODE_REPOSITORY"}

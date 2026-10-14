@@ -1,0 +1,5 @@
+POST /control/list-slack-workspace-configurations
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__"}

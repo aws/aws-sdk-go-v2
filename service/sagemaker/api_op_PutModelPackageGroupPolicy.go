@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a resouce policy to control access to a model group. For information about
@@ -45,6 +44,21 @@ type PutModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelPackageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelPackageGroupPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelPackageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyInput_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+
 type PutModelPackageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model package group.
@@ -58,77 +72,48 @@ type PutModelPackageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelPackageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelPackageGroupPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelPackageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+}
+func (v *PutModelPackageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutModelPackageGroupPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelPackageGroupPolicy, schemas.PutModelPackageGroupPolicyInput, schemas.PutModelPackageGroupPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelPackageGroupPolicy, schemas.PutModelPackageGroupPolicyInput, schemas.PutModelPackageGroupPolicyOutput), output: &PutModelPackageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutModelPackageGroupPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutModelPackageGroupPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutModelPackageGroupPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +128,8 @@ func (c *Client) addOperationPutModelPackageGroupPolicyMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutModelPackageGroupPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutModelPackageGroupPolicy",
-	}
 }

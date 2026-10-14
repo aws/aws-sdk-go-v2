@@ -4,13 +4,8 @@ package workdocs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the path information (the hierarchy from the root folder) for the
@@ -59,30 +54,6 @@ type GetFolderPathInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFolderPathInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFolderPathRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFolderPathInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.GetFolderPathRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.Fields != nil {
-		s.WriteString(schemas.GetFolderPathRequest_Fields, *v.Fields)
-	}
-	if v.FolderId != nil {
-		s.WriteString(schemas.GetFolderPathRequest_FolderId, *v.FolderId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.GetFolderPathRequest_Limit, *v.Limit)
-	}
-	if v.Marker != nil {
-		s.WriteString(schemas.GetFolderPathRequest_Marker, *v.Marker)
-	}
-}
-
 type GetFolderPathOutput struct {
 
 	// The path information.
@@ -94,85 +65,29 @@ type GetFolderPathOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFolderPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFolderPathResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFolderPathResponse_Path:
-			v.Path = &types.ResourcePath{}
-			return v.Path.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFolderPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFolderPath{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFolderPath, schemas.GetFolderPathRequest, schemas.GetFolderPathResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFolderPath{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFolderPath, schemas.GetFolderPathRequest, schemas.GetFolderPathResponse), output: &GetFolderPathOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFolderPath"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFolderPathValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFolderPath(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +102,8 @@ func (c *Client) addOperationGetFolderPathMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFolderPath(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFolderPath",
-	}
 }

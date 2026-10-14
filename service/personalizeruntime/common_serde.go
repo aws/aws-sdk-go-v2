@@ -80,6 +80,7 @@ func serializeReasonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PredictedAction) error {
+	*v = make([]types.PredictedAction, 0)
 	var vv types.PredictedAction
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PredictedAction{}
@@ -93,6 +94,7 @@ func deserializeActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeColumnNamesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -106,6 +108,7 @@ func deserializeColumnNamesList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -119,6 +122,7 @@ func deserializeInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PredictedItem) error {
+	*v = make([]types.PredictedItem, 0)
 	var vv types.PredictedItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PredictedItem{}
@@ -132,6 +136,7 @@ func deserializeItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializePromotionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Promotion) error {
+	*v = make([]types.Promotion, 0)
 	var vv types.Promotion
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Promotion{}
@@ -145,6 +150,7 @@ func deserializePromotionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeReasonList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -209,6 +215,13 @@ func deserializeContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[str
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -223,6 +236,13 @@ func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -237,6 +257,13 @@ func deserializeMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -251,6 +278,14 @@ func deserializeMetadataColumns(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeColumnNamesList(d, s.MapValue(), &vv); err != nil {
 			return err

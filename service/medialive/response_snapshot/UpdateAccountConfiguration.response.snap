@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accountConfiguration":{"kmsKeyId":"__KmsKeyId__"}}

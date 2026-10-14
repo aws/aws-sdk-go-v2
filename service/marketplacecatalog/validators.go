@@ -70,6 +70,26 @@ func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAssessment struct {
+}
+
+func (*validateOpDescribeAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeChangeSet struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssessments struct {
+}
+
+func (*validateOpListAssessments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssessments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssessmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssessmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -282,6 +322,10 @@ func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
 
+func addOpDescribeAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssessment{}, middleware.After)
+}
+
 func addOpDescribeChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeChangeSet{}, middleware.After)
 }
@@ -292,6 +336,10 @@ func addOpDescribeEntityValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
+func addOpListAssessmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssessments{}, middleware.After)
 }
 
 func addOpListChangeSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -503,6 +551,24 @@ func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	}
 }
 
+func validateOpDescribeAssessmentInput(v *DescribeAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssessmentInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.AssessmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeChangeSetInput(v *DescribeChangeSetInput) error {
 	if v == nil {
 		return nil
@@ -546,6 +612,21 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssessmentsInput(v *ListAssessmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

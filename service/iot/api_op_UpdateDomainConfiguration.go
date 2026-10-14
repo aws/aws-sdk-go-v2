@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates values stored in the domain configuration. Domain configurations for
@@ -98,6 +97,50 @@ type UpdateDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationProtocol != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_applicationProtocol, string(v.ApplicationProtocol))
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.AuthorizerConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_authorizerConfig)
+		v.AuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientCertificateConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_clientCertificateConfig)
+		v.ClientCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_domainConfigurationName, *v.DomainConfigurationName)
+	}
+	if v.DomainConfigurationStatus != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_domainConfigurationStatus, string(v.DomainConfigurationStatus))
+	}
+	if v.RemoveAuthorizerConfig != false {
+		s.WriteBool(schemas.UpdateDomainConfigurationRequest_removeAuthorizerConfig, v.RemoveAuthorizerConfig)
+	}
+	if v.ServerCertificateConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_serverCertificateConfig)
+		v.ServerCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_tlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDomainConfigurationOutput struct {
 
 	// The ARN of the domain configuration that was updated.
@@ -112,77 +155,54 @@ type UpdateDomainConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationResponse_domainConfigurationArn, *v.DomainConfigurationArn)
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationResponse_domainConfigurationName, *v.DomainConfigurationName)
+	}
+}
+func (v *UpdateDomainConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainConfigurationResponse_domainConfigurationArn:
+			v.DomainConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateDomainConfigurationResponse_domainConfigurationArn, v.DomainConfigurationArn)
+		case schemas.UpdateDomainConfigurationResponse_domainConfigurationName:
+			v.DomainConfigurationName = new(string)
+			return d.ReadString(schemas.UpdateDomainConfigurationResponse_domainConfigurationName, v.DomainConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfiguration, schemas.UpdateDomainConfigurationRequest, schemas.UpdateDomainConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfiguration, schemas.UpdateDomainConfigurationRequest, schemas.UpdateDomainConfigurationResponse), output: &UpdateDomainConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomainConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDomainConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +217,8 @@ func (c *Client) addOperationUpdateDomainConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDomainConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDomainConfiguration",
-	}
 }

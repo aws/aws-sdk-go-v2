@@ -1,0 +1,5 @@
+POST /meetings/__MeetingId__/dial-outs
+
+Content-Type: application/json
+
+{"FromPhoneNumber":"__FromPhoneNumber__","JoinToken":"__JoinToken__","ToPhoneNumber":"__ToPhoneNumber__"}

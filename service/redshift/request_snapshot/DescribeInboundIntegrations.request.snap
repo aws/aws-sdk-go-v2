@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeInboundIntegrations&IntegrationArn=__IntegrationArn__&Marker=__Marker__&MaxRecords=1&TargetArn=__TargetArn__&Version=2012-12-01

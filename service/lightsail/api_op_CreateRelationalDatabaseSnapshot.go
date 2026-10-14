@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a snapshot of your database in Amazon Lightsail. You can use snapshots
@@ -60,6 +59,22 @@ type CreateRelationalDatabaseSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseSnapshotRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.RelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseSnapshotRequest_relationalDatabaseSnapshotName, *v.RelationalDatabaseSnapshotName)
+	}
+	serializeTagList(s, schemas.CreateRelationalDatabaseSnapshotRequest_tags, v.Tags)
+}
+
 type CreateRelationalDatabaseSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -73,77 +88,45 @@ type CreateRelationalDatabaseSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateRelationalDatabaseSnapshotResult_operations, v.Operations)
+}
+func (v *CreateRelationalDatabaseSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelationalDatabaseSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelationalDatabaseSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.CreateRelationalDatabaseSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabaseSnapshot, schemas.CreateRelationalDatabaseSnapshotRequest, schemas.CreateRelationalDatabaseSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabaseSnapshot, schemas.CreateRelationalDatabaseSnapshotRequest, schemas.CreateRelationalDatabaseSnapshotResult), output: &CreateRelationalDatabaseSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelationalDatabaseSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRelationalDatabaseSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelationalDatabaseSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +141,8 @@ func (c *Client) addOperationCreateRelationalDatabaseSnapshotMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRelationalDatabaseSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRelationalDatabaseSnapshot",
-	}
 }

@@ -1,0 +1,5 @@
+POST /account/deregisterOrganizationAdminAccount
+
+Content-Type: application/json
+
+{"adminAccountId":"__AdminAccountId__"}

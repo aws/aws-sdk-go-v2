@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a customer gateway with a device and optionally, with a link. If you
@@ -62,6 +61,27 @@ type AssociateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomerGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomerGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomerGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayArn != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_CustomerGatewayArn, *v.CustomerGatewayArn)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_LinkId, *v.LinkId)
+	}
+}
+
 type AssociateCustomerGatewayOutput struct {
 
 	// The customer gateway association.
@@ -73,77 +93,50 @@ type AssociateCustomerGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomerGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomerGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomerGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayAssociation != nil {
+		s.WriteStruct(schemas.AssociateCustomerGatewayResponse_CustomerGatewayAssociation)
+		v.CustomerGatewayAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateCustomerGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCustomerGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateCustomerGatewayResponse_CustomerGatewayAssociation:
+			v.CustomerGatewayAssociation = &types.CustomerGatewayAssociation{}
+			return v.CustomerGatewayAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomerGateway, schemas.AssociateCustomerGatewayRequest, schemas.AssociateCustomerGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateCustomerGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomerGateway, schemas.AssociateCustomerGatewayRequest, schemas.AssociateCustomerGatewayResponse), output: &AssociateCustomerGatewayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateCustomerGateway{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateCustomerGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateCustomerGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateCustomerGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +151,8 @@ func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateCustomerGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateCustomerGateway",
-	}
 }

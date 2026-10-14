@@ -4,10 +4,9 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type GetSessionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionEndpointRequest_SessionId, *v.SessionId)
+	}
+}
+
 type GetSessionEndpointOutput struct {
 
 	// Authentication token for the connection
@@ -60,77 +71,60 @@ type GetSessionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthToken != nil {
+		s.WriteString(schemas.GetSessionEndpointResponse_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenExpirationTime != nil {
+		s.WriteTime(schemas.GetSessionEndpointResponse_AuthTokenExpirationTime, *v.AuthTokenExpirationTime)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.GetSessionEndpointResponse_EndpointUrl, *v.EndpointUrl)
+	}
+}
+func (v *GetSessionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionEndpointResponse_AuthToken:
+			v.AuthToken = new(string)
+			return d.ReadString(schemas.GetSessionEndpointResponse_AuthToken, v.AuthToken)
+		case schemas.GetSessionEndpointResponse_AuthTokenExpirationTime:
+			v.AuthTokenExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSessionEndpointResponse_AuthTokenExpirationTime, v.AuthTokenExpirationTime)
+		case schemas.GetSessionEndpointResponse_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.GetSessionEndpointResponse_EndpointUrl, v.EndpointUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointRequest, schemas.GetSessionEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSessionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointRequest, schemas.GetSessionEndpointResponse), output: &GetSessionEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSessionEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSessionEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +139,8 @@ func (c *Client) addOperationGetSessionEndpointMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSessionEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSessionEndpoint",
-	}
 }

@@ -4,11 +4,10 @@ package chime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an order for phone numbers to be provisioned. For toll-free numbers,
@@ -45,6 +44,19 @@ type CreatePhoneNumberOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePhoneNumberOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePhoneNumberOrderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePhoneNumberOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeE164PhoneNumberList(s, schemas.CreatePhoneNumberOrderRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	if v.ProductType != "" {
+		s.WriteString(schemas.CreatePhoneNumberOrderRequest_ProductType, string(v.ProductType))
+	}
+}
+
 type CreatePhoneNumberOrderOutput struct {
 
 	// The phone number order details.
@@ -56,77 +68,50 @@ type CreatePhoneNumberOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePhoneNumberOrderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePhoneNumberOrderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePhoneNumberOrderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberOrder != nil {
+		s.WriteStruct(schemas.CreatePhoneNumberOrderResponse_PhoneNumberOrder)
+		v.PhoneNumberOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePhoneNumberOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePhoneNumberOrderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePhoneNumberOrderResponse_PhoneNumberOrder:
+			v.PhoneNumberOrder = &types.PhoneNumberOrder{}
+			return v.PhoneNumberOrder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePhoneNumberOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePhoneNumberOrder, schemas.CreatePhoneNumberOrderRequest, schemas.CreatePhoneNumberOrderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePhoneNumberOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePhoneNumberOrder, schemas.CreatePhoneNumberOrderRequest, schemas.CreatePhoneNumberOrderResponse), output: &CreatePhoneNumberOrderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePhoneNumberOrder{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePhoneNumberOrder"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePhoneNumberOrderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePhoneNumberOrder(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +126,8 @@ func (c *Client) addOperationCreatePhoneNumberOrderMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePhoneNumberOrder(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePhoneNumberOrder",
-	}
 }

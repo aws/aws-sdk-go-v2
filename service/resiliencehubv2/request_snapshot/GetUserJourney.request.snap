@@ -1,0 +1,3 @@
+GET /v2/get-user-journey?systemArn=__SystemArn__&userJourneyId=__UserJourneyId__
+
+

@@ -4,11 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a description of the settings for the specified configuration set, that
@@ -21,9 +18,25 @@ import (
 // an environment that is either in the process of deployment or that failed to
 // deploy.
 //
+// This action only returns information about resources that the calling principle
+// has IAM permissions to access. For example, consider a case where a user only
+// has permission to access one of three resources. When the user calls the this
+// action, the response will only include the one resource that the user has
+// permission to access instead of all three resources. If the user doesn’t have
+// access to any of the resources an empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk. For more information, see [Managing Elastic Beanstalk user policies]in the Elastic
+// Beanstalk Developer Guide. For detailed instructions to attach a policy to a
+// user or group, see the section [Controlling access with managed policies]in the same topic.
+//
 // # Related Topics
 //
-// DeleteEnvironmentConfiguration
+// # DeleteEnvironmentConfiguration
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSettingsInput{}
@@ -51,16 +64,16 @@ type DescribeConfigurationSettingsInput struct {
 	// The name of the environment to describe.
 	//
 	// Condition: You must specify either this or a TemplateName, but not both. If you
-	// specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-	// error. If you do not specify either, AWS Elastic Beanstalk returns
-	// MissingRequiredParameter error.
+	// specify both, Elastic Beanstalk returns an InvalidParameterCombination error.
+	// If you do not specify either, Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	// The name of the configuration template to describe.
 	//
 	// Conditional: You must specify either this parameter or an EnvironmentName, but
-	// not both. If you specify both, AWS Elastic Beanstalk returns an
-	// InvalidParameterCombination error. If you do not specify either, AWS Elastic
+	// not both. If you specify both, Elastic Beanstalk returns an
+	// InvalidParameterCombination error. If you do not specify either, Elastic
 	// Beanstalk returns a MissingRequiredParameter error.
 	TemplateName *string
 
@@ -81,9 +94,6 @@ type DescribeConfigurationSettingsOutput struct {
 }
 
 func (c *Client) addOperationDescribeConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeConfigurationSettings{}, middleware.After)
 	if err != nil {
 		return err
@@ -92,65 +102,20 @@ func (c *Client) addOperationDescribeConfigurationSettingsMiddlewares(stack *mid
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConfigurationSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +130,8 @@ func (c *Client) addOperationDescribeConfigurationSettingsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConfigurationSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConfigurationSettings",
-	}
 }

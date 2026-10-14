@@ -5,12 +5,19 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
+//
 // Create a dimension that you can use to limit the scope of a metric used in a
 // security profile for IoT Device Defender. For example, using a TOPIC_FILTER
 // dimension, you can narrow down the scope of the metric only to MQTT topics whose
@@ -68,6 +75,26 @@ type CreateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDimensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDimensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDimensionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDimensionRequest_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.CreateDimensionRequest_stringValues, v.StringValues)
+	serializeTagList(s, schemas.CreateDimensionRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDimensionRequest_type, string(v.Type))
+	}
+}
+
 type CreateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created dimension.
@@ -82,65 +109,48 @@ type CreateDimensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDimensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDimensionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDimensionResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDimensionResponse_name, *v.Name)
+	}
+}
+func (v *CreateDimensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDimensionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDimensionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDimensionResponse_arn, v.Arn)
+		case schemas.CreateDimensionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDimensionResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDimension, schemas.CreateDimensionRequest, schemas.CreateDimensionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDimension, schemas.CreateDimensionRequest, schemas.CreateDimensionResponse), output: &CreateDimensionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDimension{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDimension"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -150,12 +160,6 @@ func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpCreateDimensionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDimension(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +172,6 @@ func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -213,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateDimension) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateDimensionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDimension{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDimension(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDimension",
-	}
 }

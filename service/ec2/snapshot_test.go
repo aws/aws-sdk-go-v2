@@ -278,6 +278,18 @@ func TestCheckSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -506,6 +518,18 @@ func TestCheckSnapshot_AttachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AttachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -595,6 +619,18 @@ func TestCheckSnapshot_AuthorizeSecurityGroupIngress(t *testing.T) {
 	_, err := svc.AuthorizeSecurityGroupIngress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AuthorizeSecurityGroupIngress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchModifyIpamRoutingPolicyRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchModifyIpamRoutingPolicyRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchModifyIpamRoutingPolicyRegistrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -806,6 +842,18 @@ func TestCheckSnapshot_CopyVolumes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityManagerDataExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
@@ -847,6 +895,18 @@ func TestCheckSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) 
 	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCapacityReservationCancellationQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,6 +1202,18 @@ func TestCheckSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_CreateIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamInternetRegistryAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIpamPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPolicy(context.Background(), nil, func(o *Options) {
@@ -1195,6 +1267,18 @@ func TestCheckSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.CreateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIpamRoutingPolicyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1814,6 +1898,18 @@ func TestCheckSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -2066,6 +2162,18 @@ func TestCheckSnapshot_CreateVpnGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
@@ -2095,6 +2203,18 @@ func TestCheckSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	_, err := svc.DeleteClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2282,6 +2402,18 @@ func TestCheckSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamInternetRegistryAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteIpamPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteIpamPolicy(context.Background(), nil, func(o *Options) {
@@ -2335,6 +2467,18 @@ func TestCheckSnapshot_DeleteIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.DeleteIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIpamRoutingPolicyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2930,6 +3074,18 @@ func TestCheckSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -3290,6 +3446,18 @@ func TestCheckSnapshot_DescribeAccountAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAddresses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAddresses(context.Background(), nil, func(o *Options) {
@@ -3331,6 +3499,42 @@ func TestCheckSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 	_, err := svc.DescribeAggregateIdFormat(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAggregateIdFormat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatusCheckAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatusChecks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3475,6 +3679,18 @@ func TestCheckSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4147,6 +4363,18 @@ func TestCheckSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testing
 	_, err := svc.DescribeIpamExternalResourceVerificationTokens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIpamExternalResourceVerificationTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamInternetRegistryAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamInternetRegistryAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamInternetRegistryAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5534,6 +5762,18 @@ func TestCheckSnapshot_DetachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DetachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DetachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DetachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -5611,6 +5851,18 @@ func TestCheckSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	_, err := svc.DisableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableApplicationStatusCheckSuppression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5858,6 +6110,18 @@ func TestCheckSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -6086,6 +6350,18 @@ func TestCheckSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableApplicationStatusCheckSuppression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -6199,6 +6475,18 @@ func TestCheckSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T) {
 	_, err := svc.EnableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableInstanceSqlHaStandbyDetections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableIpamInternetRegistryAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6518,6 +6806,18 @@ func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -6770,6 +7070,42 @@ func TestCheckSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIpamDiscoveredRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamDiscoveredRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamDiscoveredRoutes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamInternetRegistryAssociationAsns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamInternetRegistryAssociationAsns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamInternetRegistryAssociationAsns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamInternetRegistryAssociationCidrs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamInternetRegistryAssociationCidrs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamInternetRegistryAssociationCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
@@ -6859,6 +7195,54 @@ func TestCheckSnapshot_GetIpamResourceCidrs(t *testing.T) {
 	_, err := svc.GetIpamResourceCidrs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetIpamResourceCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamRouteOriginAuthorizations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRouteOriginAuthorizations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamRouteOriginAuthorizations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamRouteProtectionFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRouteProtectionFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamRouteProtectionFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamRoutingPolicyRegistrationDeltas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRoutingPolicyRegistrationDeltas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamRoutingPolicyRegistrationDeltas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIpamRoutingPolicyRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRoutingPolicyRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIpamRoutingPolicyRegistrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7358,11 +7742,35 @@ func TestCheckSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyAddressAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyAddressAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7411,6 +7819,18 @@ func TestCheckSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7754,6 +8174,18 @@ func TestCheckSnapshot_ModifyIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamRoutingPolicyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyIpamScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyIpamScope(context.Background(), nil, func(o *Options) {
@@ -7994,6 +8426,18 @@ func TestCheckSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -8191,6 +8635,18 @@ func TestCheckSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.T) {
 	_, err := svc.ModifyVpcEndpointConnectionNotification(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyVpcEndpointConnectionNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcEndpointPayerResponsibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8659,6 +9115,18 @@ func TestCheckSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T)
 	_, err := svc.ReplaceImageCriteriaInAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ReplaceImageCriteriaInAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ReplaceImageInstanceTypeSpecification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageInstanceTypeSpecification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReplaceImageInstanceTypeSpecification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9254,6 +9722,18 @@ func TestCheckSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidateSecurityGroupQuotasForInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_WithdrawByoipCidr(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.WithdrawByoipCidr(context.Background(), nil, func(o *Options) {
@@ -9474,6 +9954,18 @@ func TestUpdateSnapshot_AssociateAddress(t *testing.T) {
 	_, err := svc.AssociateAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9709,6 +10201,18 @@ func TestUpdateSnapshot_AttachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AttachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AttachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -9798,6 +10302,18 @@ func TestUpdateSnapshot_AuthorizeSecurityGroupIngress(t *testing.T) {
 	_, err := svc.AuthorizeSecurityGroupIngress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AuthorizeSecurityGroupIngress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchModifyIpamRoutingPolicyRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchModifyIpamRoutingPolicyRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchModifyIpamRoutingPolicyRegistrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10009,6 +10525,18 @@ func TestUpdateSnapshot_CopyVolumes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCapacityManagerDataExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
@@ -10050,6 +10578,18 @@ func TestUpdateSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T)
 	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCapacityReservationCancellationQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCapacityReservationDateChangeQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationDateChangeQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationDateChangeQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10345,6 +10885,18 @@ func TestUpdateSnapshot_CreateIpamExternalResourceVerificationToken(t *testing.T
 	}
 }
 
+func TestUpdateSnapshot_CreateIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamInternetRegistryAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIpamPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIpamPolicy(context.Background(), nil, func(o *Options) {
@@ -10398,6 +10950,18 @@ func TestUpdateSnapshot_CreateIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.CreateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIpamRoutingPolicyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11017,6 +11581,18 @@ func TestUpdateSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -11269,6 +11845,18 @@ func TestUpdateSnapshot_CreateVpnGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCapacityManagerDataExport(context.Background(), nil, func(o *Options) {
@@ -11298,6 +11886,18 @@ func TestUpdateSnapshot_DeleteClientVpnEndpoint(t *testing.T) {
 	_, err := svc.DeleteClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11485,6 +12085,18 @@ func TestUpdateSnapshot_DeleteIpamExternalResourceVerificationToken(t *testing.T
 	}
 }
 
+func TestUpdateSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamInternetRegistryAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteIpamPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteIpamPolicy(context.Background(), nil, func(o *Options) {
@@ -11538,6 +12150,18 @@ func TestUpdateSnapshot_DeleteIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.DeleteIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIpamRoutingPolicyRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12133,6 +12757,18 @@ func TestUpdateSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -12493,6 +13129,18 @@ func TestUpdateSnapshot_DescribeAccountAttributes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAddresses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAddresses(context.Background(), nil, func(o *Options) {
@@ -12534,6 +13182,42 @@ func TestUpdateSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 	_, err := svc.DescribeAggregateIdFormat(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAggregateIdFormat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatusCheckAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatusChecks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12678,6 +13362,18 @@ func TestUpdateSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing
 	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationDateChangeQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationDateChangeQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationDateChangeQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -13350,6 +14046,18 @@ func TestUpdateSnapshot_DescribeIpamExternalResourceVerificationTokens(t *testin
 	_, err := svc.DescribeIpamExternalResourceVerificationTokens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIpamExternalResourceVerificationTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamInternetRegistryAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamInternetRegistryAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamInternetRegistryAssociations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14737,6 +15445,18 @@ func TestUpdateSnapshot_DetachClassicLinkVpc(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DetachImageWatermark(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachImageWatermark(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachImageWatermark")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DetachInternetGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DetachInternetGateway(context.Background(), nil, func(o *Options) {
@@ -14814,6 +15534,18 @@ func TestUpdateSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	_, err := svc.DisableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableApplicationStatusCheckSuppression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15061,6 +15793,18 @@ func TestUpdateSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -15289,6 +16033,18 @@ func TestUpdateSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableApplicationStatusCheckSuppression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -15402,6 +16158,18 @@ func TestUpdateSnapshot_EnableInstanceSqlHaStandbyDetections(t *testing.T) {
 	_, err := svc.EnableInstanceSqlHaStandbyDetections(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableInstanceSqlHaStandbyDetections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableIpamInternetRegistryAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableIpamInternetRegistryAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableIpamInternetRegistryAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15721,6 +16489,18 @@ func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClientVpnEndpointAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCoipPoolUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCoipPoolUsage(context.Background(), nil, func(o *Options) {
@@ -15973,6 +16753,42 @@ func TestUpdateSnapshot_GetIpamDiscoveredResourceCidrs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIpamDiscoveredRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamDiscoveredRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamDiscoveredRoutes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamInternetRegistryAssociationAsns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamInternetRegistryAssociationAsns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamInternetRegistryAssociationAsns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamInternetRegistryAssociationCidrs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamInternetRegistryAssociationCidrs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamInternetRegistryAssociationCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetIpamPolicyAllocationRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIpamPolicyAllocationRules(context.Background(), nil, func(o *Options) {
@@ -16062,6 +16878,54 @@ func TestUpdateSnapshot_GetIpamResourceCidrs(t *testing.T) {
 	_, err := svc.GetIpamResourceCidrs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetIpamResourceCidrs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamRouteOriginAuthorizations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRouteOriginAuthorizations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamRouteOriginAuthorizations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamRouteProtectionFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRouteProtectionFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamRouteProtectionFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamRoutingPolicyRegistrationDeltas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRoutingPolicyRegistrationDeltas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamRoutingPolicyRegistrationDeltas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIpamRoutingPolicyRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIpamRoutingPolicyRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIpamRoutingPolicyRegistrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16561,11 +17425,35 @@ func TestUpdateSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyAddressAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyAddressAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16614,6 +17502,18 @@ func TestUpdateSnapshot_ModifyClientVpnEndpoint(t *testing.T) {
 	_, err := svc.ModifyClientVpnEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyClientVpnEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyClientVpnEndpointAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyClientVpnEndpointAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyClientVpnEndpointAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16957,6 +17857,18 @@ func TestUpdateSnapshot_ModifyIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyIpamRoutingPolicyRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamRoutingPolicyRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamRoutingPolicyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyIpamScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyIpamScope(context.Background(), nil, func(o *Options) {
@@ -17197,6 +18109,18 @@ func TestUpdateSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -17394,6 +18318,18 @@ func TestUpdateSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.T) {
 	_, err := svc.ModifyVpcEndpointConnectionNotification(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyVpcEndpointConnectionNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcEndpointPayerResponsibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17862,6 +18798,18 @@ func TestUpdateSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T
 	_, err := svc.ReplaceImageCriteriaInAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ReplaceImageCriteriaInAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ReplaceImageInstanceTypeSpecification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageInstanceTypeSpecification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReplaceImageInstanceTypeSpecification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -18450,6 +19398,18 @@ func TestUpdateSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *testing.T)
 	_, err := svc.UpdateSecurityGroupRuleDescriptionsIngress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateSecurityGroupRuleDescriptionsIngress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidateSecurityGroupQuotasForInterface")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

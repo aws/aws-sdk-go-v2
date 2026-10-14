@@ -5,13 +5,9 @@ package simpledbv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -40,18 +36,6 @@ type GetExportInput struct {
 	ExportArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetExportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetExportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetExportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExportArn != nil {
-		s.WriteString(schemas.GetExportRequest_exportArn, *v.ExportArn)
-	}
 }
 
 type GetExportOutput struct {
@@ -124,135 +108,29 @@ type GetExportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetExportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetExportResponse_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.GetExportResponse_clientToken, v.ClientToken)
-		case schemas.GetExportResponse_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.GetExportResponse_domainName, v.DomainName)
-		case schemas.GetExportResponse_exportArn:
-			v.ExportArn = new(string)
-			return d.ReadString(schemas.GetExportResponse_exportArn, v.ExportArn)
-		case schemas.GetExportResponse_exportDataCutoffTime:
-			v.ExportDataCutoffTime = new(time.Time)
-			return d.ReadTime(schemas.GetExportResponse_exportDataCutoffTime, v.ExportDataCutoffTime)
-		case schemas.GetExportResponse_exportManifest:
-			v.ExportManifest = new(string)
-			return d.ReadString(schemas.GetExportResponse_exportManifest, v.ExportManifest)
-		case schemas.GetExportResponse_exportStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetExportResponse_exportStatus, &ev); err != nil {
-				return err
-			}
-			v.ExportStatus = types.ExportStatus(ev)
-			return nil
-		case schemas.GetExportResponse_failureCode:
-			v.FailureCode = new(string)
-			return d.ReadString(schemas.GetExportResponse_failureCode, v.FailureCode)
-		case schemas.GetExportResponse_failureMessage:
-			v.FailureMessage = new(string)
-			return d.ReadString(schemas.GetExportResponse_failureMessage, v.FailureMessage)
-		case schemas.GetExportResponse_itemsCount:
-			v.ItemsCount = new(int64)
-			return d.ReadInt64(schemas.GetExportResponse_itemsCount, v.ItemsCount)
-		case schemas.GetExportResponse_requestedAt:
-			v.RequestedAt = new(time.Time)
-			return d.ReadTime(schemas.GetExportResponse_requestedAt, v.RequestedAt)
-		case schemas.GetExportResponse_s3Bucket:
-			v.S3Bucket = new(string)
-			return d.ReadString(schemas.GetExportResponse_s3Bucket, v.S3Bucket)
-		case schemas.GetExportResponse_s3BucketOwner:
-			v.S3BucketOwner = new(string)
-			return d.ReadString(schemas.GetExportResponse_s3BucketOwner, v.S3BucketOwner)
-		case schemas.GetExportResponse_s3KeyPrefix:
-			v.S3KeyPrefix = new(string)
-			return d.ReadString(schemas.GetExportResponse_s3KeyPrefix, v.S3KeyPrefix)
-		case schemas.GetExportResponse_s3SseAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.GetExportResponse_s3SseAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.S3SseAlgorithm = types.S3SseAlgorithm(ev)
-			return nil
-		case schemas.GetExportResponse_s3SseKmsKeyId:
-			v.S3SseKmsKeyId = new(string)
-			return d.ReadString(schemas.GetExportResponse_s3SseKmsKeyId, v.S3SseKmsKeyId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExport{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse), output: &GetExportOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -265,12 +143,6 @@ func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -470,11 +342,3 @@ type GetExportAPIClient interface {
 }
 
 var _ GetExportAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExport",
-	}
-}

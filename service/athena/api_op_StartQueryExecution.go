@@ -5,10 +5,10 @@ package athena
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Runs the SQL query statements contained in the Query . Requires you to have
@@ -88,6 +88,45 @@ type StartQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EngineConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_EngineConfiguration)
+		v.EngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExecutionParameters(s, schemas.StartQueryExecutionInput_ExecutionParameters, v.ExecutionParameters)
+	if v.QueryExecutionContext != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_QueryExecutionContext)
+		v.QueryExecutionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_QueryString, *v.QueryString)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_ResultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResultReuseConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_ResultReuseConfiguration)
+		v.ResultReuseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type StartQueryExecutionOutput struct {
 
 	// The unique ID of the query that ran as a result of this request.
@@ -99,65 +138,42 @@ type StartQueryExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.StartQueryExecutionOutput_QueryExecutionId, *v.QueryExecutionId)
+	}
+}
+func (v *StartQueryExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryExecutionOutput_QueryExecutionId:
+			v.QueryExecutionId = new(string)
+			return d.ReadString(schemas.StartQueryExecutionOutput_QueryExecutionId, v.QueryExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryExecution, schemas.StartQueryExecutionInput, schemas.StartQueryExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryExecution, schemas.StartQueryExecutionInput, schemas.StartQueryExecutionOutput), output: &StartQueryExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartQueryExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartQueryExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +183,6 @@ func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpStartQueryExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartQueryExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +195,6 @@ func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +234,4 @@ func (m *idempotencyToken_initializeOpStartQueryExecution) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opStartQueryExecutionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartQueryExecution{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartQueryExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartQueryExecution",
-	}
 }

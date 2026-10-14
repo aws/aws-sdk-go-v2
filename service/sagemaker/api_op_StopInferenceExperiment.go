@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops an inference experiment.
@@ -66,6 +65,26 @@ type StopInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelVariantConfigList(s, schemas.StopInferenceExperimentRequest_DesiredModelVariants, v.DesiredModelVariants)
+	if v.DesiredState != "" {
+		s.WriteString(schemas.StopInferenceExperimentRequest_DesiredState, string(v.DesiredState))
+	}
+	serializeModelVariantActionMap(s, schemas.StopInferenceExperimentRequest_ModelVariantActions, v.ModelVariantActions)
+	if v.Name != nil {
+		s.WriteString(schemas.StopInferenceExperimentRequest_Name, *v.Name)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopInferenceExperimentRequest_Reason, *v.Reason)
+	}
+}
+
 type StopInferenceExperimentOutput struct {
 
 	// The ARN of the stopped inference experiment.
@@ -79,77 +98,48 @@ type StopInferenceExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceExperimentArn != nil {
+		s.WriteString(schemas.StopInferenceExperimentResponse_InferenceExperimentArn, *v.InferenceExperimentArn)
+	}
+}
+func (v *StopInferenceExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopInferenceExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopInferenceExperimentResponse_InferenceExperimentArn:
+			v.InferenceExperimentArn = new(string)
+			return d.ReadString(schemas.StopInferenceExperimentResponse_InferenceExperimentArn, v.InferenceExperimentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceExperiment, schemas.StopInferenceExperimentRequest, schemas.StopInferenceExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceExperiment, schemas.StopInferenceExperimentRequest, schemas.StopInferenceExperimentResponse), output: &StopInferenceExperimentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopInferenceExperiment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopInferenceExperiment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopInferenceExperimentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopInferenceExperiment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +154,8 @@ func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopInferenceExperiment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopInferenceExperiment",
-	}
 }

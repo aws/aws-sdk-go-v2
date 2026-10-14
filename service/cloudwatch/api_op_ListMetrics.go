@@ -5,10 +5,10 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the specified metrics. You can use the returned metrics with [GetMetricData] or [GetMetricStatistics] to get
@@ -87,6 +87,34 @@ type ListMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionFilters(s, schemas.ListMetricsInput_Dimensions, v.Dimensions)
+	if v.IncludeLinkedAccounts != nil {
+		s.WriteBool(schemas.ListMetricsInput_IncludeLinkedAccounts, *v.IncludeLinkedAccounts)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.ListMetricsInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListMetricsInput_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsInput_NextToken, *v.NextToken)
+	}
+	if v.OwningAccount != nil {
+		s.WriteString(schemas.ListMetricsInput_OwningAccount, *v.OwningAccount)
+	}
+	if v.RecentlyActive != "" {
+		s.WriteString(schemas.ListMetricsInput_RecentlyActive, string(v.RecentlyActive))
+	}
+}
+
 type ListMetricsOutput struct {
 
 	// The metrics that match your request.
@@ -109,65 +137,48 @@ type ListMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetrics(s, schemas.ListMetricsOutput_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsOutput_NextToken, *v.NextToken)
+	}
+	serializeOwningAccounts(s, schemas.ListMetricsOutput_OwningAccounts, v.OwningAccounts)
+}
+func (v *ListMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricsOutput_Metrics:
+			return deserializeMetrics(d, schemas.ListMetricsOutput_Metrics, &v.Metrics)
+		case schemas.ListMetricsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricsOutput_NextToken, v.NextToken)
+		case schemas.ListMetricsOutput_OwningAccounts:
+			return deserializeOwningAccounts(d, schemas.ListMetricsOutput_OwningAccounts, &v.OwningAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsInput, schemas.ListMetricsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsInput, schemas.ListMetricsOutput), output: &ListMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -177,12 +188,6 @@ func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpListMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +200,6 @@ func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -288,11 +287,3 @@ type ListMetricsAPIClient interface {
 }
 
 var _ ListMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMetrics",
-	}
-}

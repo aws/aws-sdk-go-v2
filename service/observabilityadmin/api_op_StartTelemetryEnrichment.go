@@ -4,13 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Enables the resource tags for telemetry feature for your account, which
@@ -36,22 +31,6 @@ type StartTelemetryEnrichmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartTelemetryEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartTelemetryEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *StartTelemetryEnrichmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type StartTelemetryEnrichmentOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the Resource Explorer managed view created
@@ -68,89 +47,26 @@ type StartTelemetryEnrichmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartTelemetryEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartTelemetryEnrichmentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn:
-			v.AwsResourceExplorerManagedViewArn = new(string)
-			return d.ReadString(schemas.StartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn, v.AwsResourceExplorerManagedViewArn)
-		case schemas.StartTelemetryEnrichmentOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.StartTelemetryEnrichmentOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TelemetryEnrichmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartTelemetryEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTelemetryEnrichment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTelemetryEnrichment, nil, schemas.StartTelemetryEnrichmentOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTelemetryEnrichment{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTelemetryEnrichment, nil, schemas.StartTelemetryEnrichmentOutput), output: &StartTelemetryEnrichmentOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTelemetryEnrichment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTelemetryEnrichment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +81,8 @@ func (c *Client) addOperationStartTelemetryEnrichmentMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartTelemetryEnrichment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartTelemetryEnrichment",
-	}
 }

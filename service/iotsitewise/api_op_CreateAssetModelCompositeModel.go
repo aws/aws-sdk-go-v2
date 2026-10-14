@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -126,52 +123,6 @@ type CreateAssetModelCompositeModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetModelCompositeModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssetModelCompositeModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetModelCompositeModelDescription != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelDescription, *v.AssetModelCompositeModelDescription)
-	}
-	if v.AssetModelCompositeModelExternalId != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelExternalId, *v.AssetModelCompositeModelExternalId)
-	}
-	if v.AssetModelCompositeModelId != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
-	}
-	if v.AssetModelCompositeModelName != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
-	}
-	serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
-	if v.AssetModelCompositeModelType != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelType, *v.AssetModelCompositeModelType)
-	}
-	if v.AssetModelId != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelId, *v.AssetModelId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_clientToken, *v.ClientToken)
-	}
-	if v.ComposedAssetModelId != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_composedAssetModelId, *v.ComposedAssetModelId)
-	}
-	if v.IfMatch != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_ifMatch, *v.IfMatch)
-	}
-	if v.IfNoneMatch != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_ifNoneMatch, *v.IfNoneMatch)
-	}
-	if v.MatchForVersionType != "" {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_matchForVersionType, string(v.MatchForVersionType))
-	}
-	if v.ParentAssetModelCompositeModelId != nil {
-		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_parentAssetModelCompositeModelId, *v.ParentAssetModelCompositeModelId)
-	}
-}
-
 type CreateAssetModelCompositeModelOutput struct {
 
 	// The ID of the composed asset model. You can use this ID when you call other IoT
@@ -193,84 +144,32 @@ type CreateAssetModelCompositeModelOutput struct {
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
 
+	// The ID of the asset model.
+	AssetModelId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetModelCompositeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssetModelCompositeModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelId:
-			v.AssetModelCompositeModelId = new(string)
-			return d.ReadString(schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelId, v.AssetModelCompositeModelId)
-		case schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelPath:
-			return deserializeAssetModelCompositeModelPath(d, schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelPath, &v.AssetModelCompositeModelPath)
-		case schemas.CreateAssetModelCompositeModelResponse_assetModelStatus:
-			v.AssetModelStatus = &types.AssetModelStatus{}
-			return v.AssetModelStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetModelCompositeModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetModelCompositeModel, schemas.CreateAssetModelCompositeModelRequest, schemas.CreateAssetModelCompositeModelResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssetModelCompositeModel{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetModelCompositeModel, schemas.CreateAssetModelCompositeModelRequest, schemas.CreateAssetModelCompositeModelResponse), output: &CreateAssetModelCompositeModelOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAssetModelCompositeModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -285,12 +184,6 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addOpCreateAssetModelCompositeModelValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssetModelCompositeModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -301,12 +194,6 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -373,12 +260,4 @@ func (m *idempotencyToken_initializeOpCreateAssetModelCompositeModel) HandleInit
 }
 func addIdempotencyToken_opCreateAssetModelCompositeModelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAssetModelCompositeModel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAssetModelCompositeModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAssetModelCompositeModel",
-	}
 }

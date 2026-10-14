@@ -1,0 +1,8 @@
+GET /?session=
+
+X-Amz-Create-Session-Mode: ReadOnly
+X-Amz-Server-Side-Encryption: AES256
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+

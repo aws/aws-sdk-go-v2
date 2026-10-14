@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.GetScalingConfigurationRecommendation
+
+{"DynamicScalingConfiguration":{"MaxCapacity":1,"MinCapacity":1,"ScaleInCooldown":1,"ScaleOutCooldown":1,"ScalingPolicies":[{"TargetTracking":{"MetricSpecification":{"Predefined":{"PredefinedMetricType":"__PredefinedMetricType__"}},"TargetValue":1}},{"TargetTracking":{"MetricSpecification":{"Predefined":{"PredefinedMetricType":"__PredefinedMetricType__"}},"TargetValue":1}}]},"EndpointName":"__EndpointName__","InferenceRecommendationsJobName":"__InferenceRecommendationsJobName__","Metric":{"InvocationsPerInstance":1,"ModelLatency":1},"RecommendationId":"__RecommendationId__","ScalingPolicyObjective":{"MaxInvocationsPerMinute":1,"MinInvocationsPerMinute":1},"TargetCpuUtilizationPerCore":1}

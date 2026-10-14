@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,21 +59,6 @@ type DescribeAssetPropertyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAssetPropertyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAssetPropertyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAssetPropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetId != nil {
-		s.WriteString(schemas.DescribeAssetPropertyRequest_assetId, *v.AssetId)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.DescribeAssetPropertyRequest_propertyId, *v.PropertyId)
-	}
-}
-
 type DescribeAssetPropertyOutput struct {
 
 	// The ID of the asset, in UUID format.
@@ -117,88 +99,23 @@ type DescribeAssetPropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAssetPropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAssetPropertyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAssetPropertyResponse_assetExternalId:
-			v.AssetExternalId = new(string)
-			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetExternalId, v.AssetExternalId)
-		case schemas.DescribeAssetPropertyResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetId, v.AssetId)
-		case schemas.DescribeAssetPropertyResponse_assetModelId:
-			v.AssetModelId = new(string)
-			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetModelId, v.AssetModelId)
-		case schemas.DescribeAssetPropertyResponse_assetName:
-			v.AssetName = new(string)
-			return d.ReadString(schemas.DescribeAssetPropertyResponse_assetName, v.AssetName)
-		case schemas.DescribeAssetPropertyResponse_assetProperty:
-			v.AssetProperty = &types.Property{}
-			return v.AssetProperty.Deserialize(d)
-		case schemas.DescribeAssetPropertyResponse_compositeModel:
-			v.CompositeModel = &types.CompositeModelProperty{}
-			return v.CompositeModel.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetProperty{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetProperty, schemas.DescribeAssetPropertyRequest, schemas.DescribeAssetPropertyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetProperty{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetProperty, schemas.DescribeAssetPropertyRequest, schemas.DescribeAssetPropertyResponse), output: &DescribeAssetPropertyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetProperty"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -208,12 +125,6 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpDescribeAssetPropertyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetProperty(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,12 +137,6 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,12 +170,4 @@ func (m *endpointPrefix_opDescribeAssetPropertyMiddleware) HandleFinalize(ctx co
 }
 func addEndpointPrefix_opDescribeAssetPropertyMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeAssetPropertyMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeAssetProperty(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAssetProperty",
-	}
 }

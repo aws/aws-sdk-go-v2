@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.CreateEndpoint
+
+{"ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DesiredInferenceUnits":1,"EndpointName":"__EndpointName__","FlywheelArn":"__FlywheelArn__","ModelArn":"__ModelArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

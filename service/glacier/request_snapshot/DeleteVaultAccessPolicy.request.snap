@@ -1,0 +1,4 @@
+DELETE /__AccountId__/vaults/__VaultName__/access-policy
+
+X-Amz-Glacier-Version: 2012-06-01
+

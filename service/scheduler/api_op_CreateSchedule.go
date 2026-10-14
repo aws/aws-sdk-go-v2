@@ -5,12 +5,8 @@ package scheduler
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -120,112 +116,6 @@ type CreateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScheduleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScheduleInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionAfterCompletion != "" {
-		s.WriteString(schemas.CreateScheduleInput_ActionAfterCompletion, string(v.ActionAfterCompletion))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateScheduleInput_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateScheduleInput_Description, *v.Description)
-	}
-	if v.EndDate != nil {
-		s.WriteTime(schemas.CreateScheduleInput_EndDate, *v.EndDate)
-	}
-	if v.FlexibleTimeWindow != nil {
-		s.WriteStruct(schemas.CreateScheduleInput_FlexibleTimeWindow)
-		v.FlexibleTimeWindow.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GroupName != nil {
-		s.WriteString(schemas.CreateScheduleInput_GroupName, *v.GroupName)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateScheduleInput_KmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateScheduleInput_Name, *v.Name)
-	}
-	if v.ScheduleExpression != nil {
-		s.WriteString(schemas.CreateScheduleInput_ScheduleExpression, *v.ScheduleExpression)
-	}
-	if v.ScheduleExpressionTimezone != nil {
-		s.WriteString(schemas.CreateScheduleInput_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.CreateScheduleInput_StartDate, *v.StartDate)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.CreateScheduleInput_State, string(v.State))
-	}
-	if v.Target != nil {
-		s.WriteStruct(schemas.CreateScheduleInput_Target)
-		v.Target.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScheduleInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScheduleInput_ActionAfterCompletion:
-			var ev string
-			if err := d.ReadString(schemas.CreateScheduleInput_ActionAfterCompletion, &ev); err != nil {
-				return err
-			}
-			v.ActionAfterCompletion = types.ActionAfterCompletion(ev)
-			return nil
-		case schemas.CreateScheduleInput_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_ClientToken, v.ClientToken)
-		case schemas.CreateScheduleInput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_Description, v.Description)
-		case schemas.CreateScheduleInput_EndDate:
-			v.EndDate = new(time.Time)
-			return d.ReadTime(schemas.CreateScheduleInput_EndDate, v.EndDate)
-		case schemas.CreateScheduleInput_FlexibleTimeWindow:
-			v.FlexibleTimeWindow = &types.FlexibleTimeWindow{}
-			return v.FlexibleTimeWindow.Deserialize(d)
-		case schemas.CreateScheduleInput_GroupName:
-			v.GroupName = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_GroupName, v.GroupName)
-		case schemas.CreateScheduleInput_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_KmsKeyArn, v.KmsKeyArn)
-		case schemas.CreateScheduleInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_Name, v.Name)
-		case schemas.CreateScheduleInput_ScheduleExpression:
-			v.ScheduleExpression = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_ScheduleExpression, v.ScheduleExpression)
-		case schemas.CreateScheduleInput_ScheduleExpressionTimezone:
-			v.ScheduleExpressionTimezone = new(string)
-			return d.ReadString(schemas.CreateScheduleInput_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
-		case schemas.CreateScheduleInput_StartDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.CreateScheduleInput_StartDate, v.StartDate)
-		case schemas.CreateScheduleInput_State:
-			var ev string
-			if err := d.ReadString(schemas.CreateScheduleInput_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ScheduleState(ev)
-			return nil
-		case schemas.CreateScheduleInput_Target:
-			v.Target = &types.Target{}
-			return v.Target.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type CreateScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule.
@@ -239,84 +129,23 @@ type CreateScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScheduleOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScheduleOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ScheduleArn != nil {
-		s.WriteString(schemas.CreateScheduleOutput_ScheduleArn, *v.ScheduleArn)
-	}
-}
-func (v *CreateScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScheduleOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScheduleOutput_ScheduleArn:
-			v.ScheduleArn = new(string)
-			return d.ReadString(schemas.CreateScheduleOutput_ScheduleArn, v.ScheduleArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSchedule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedule, schemas.CreateScheduleInput, schemas.CreateScheduleOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSchedule{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedule, schemas.CreateScheduleInput, schemas.CreateScheduleOutput), output: &CreateScheduleOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -326,12 +155,6 @@ func (c *Client) addOperationCreateScheduleMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -344,12 +167,6 @@ func (c *Client) addOperationCreateScheduleMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -389,12 +206,4 @@ func (m *idempotencyToken_initializeOpCreateSchedule) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateScheduleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSchedule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSchedule",
-	}
 }

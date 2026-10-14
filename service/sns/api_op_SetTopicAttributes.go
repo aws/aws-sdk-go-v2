@@ -4,10 +4,7 @@ package sns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows a topic owner to set an attribute of the topic to a new value.
@@ -41,7 +38,24 @@ type SetTopicAttributesInput struct {
 	//   - DeliveryPolicy – The policy that defines how Amazon SNS retries failed
 	//   deliveries to HTTP/S endpoints.
 	//
-	//   - DisplayName – The display name to use for a topic with SMS subscriptions.
+	//   - DisplayName – The display name to use for a topic with SMS, email , and
+	//   email-json subscriptions. For email and email-json subscriptions, the display
+	//   name is used as the sender name for regular notification messages. Subscription
+	//   confirmation and unsubscribe confirmation emails always use "Amazon Web Services
+	//   Notifications" as the sender name.
+	//
+	//   - MaximumMessageSize – The maximum size, in bytes, of a message that can be
+	//   published to the topic. Valid values are 1024 to 1048576 (1 MiB). The default
+	//   is 262144 (256 KiB).
+	//
+	// A topic with a MaximumMessageSize above 256 KiB must have 100 or fewer
+	//   subscriptions, and each subscription must be an Amazon SQS, Amazon Data
+	//   Firehose, or Lambda subscription.
+	//
+	// You can increase or decrease this value at any time. If the topic doesn't meet
+	//   these requirements when you set a value above 256 KiB, Amazon SNS returns an
+	//   InvalidParameter error. For more information, see [Large message payloads]in the Amazon SNS Developer
+	//   Guide.
 	//
 	//   - Policy – The policy that defines who can access your topic. By default, only
 	//   the topic owner can publish or subscribe to the topic.
@@ -171,6 +185,7 @@ type SetTopicAttributesInput struct {
 	//
 	// [Amazon SNS service quotas]: https://docs.aws.amazon.com/general/latest/gr/sns.html
 	// [Using Amazon SNS Application Attributes for Message Delivery Status]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+	// [Large message payloads]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
 	// [Key Terms]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
 	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
 	// [server-side-encryption]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
@@ -199,9 +214,6 @@ type SetTopicAttributesOutput struct {
 }
 
 func (c *Client) addOperationSetTopicAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTopicAttributes{}, middleware.After)
 	if err != nil {
 		return err
@@ -210,65 +222,20 @@ func (c *Client) addOperationSetTopicAttributesMiddlewares(stack *middleware.Sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetTopicAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetTopicAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetTopicAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -283,22 +250,8 @@ func (c *Client) addOperationSetTopicAttributesMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetTopicAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetTopicAttributes",
-	}
 }

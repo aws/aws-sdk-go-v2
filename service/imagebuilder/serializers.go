@@ -433,6 +433,11 @@ func awsRestjson1_serializeOpDocumentCreateContainerRecipeInput(v *CreateContain
 		ok.String(*v.DockerfileTemplateUri)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.ImageOsVersionOverride != nil {
 		ok := object.Key("imageOsVersionOverride")
 		ok.String(*v.ImageOsVersionOverride)
@@ -580,6 +585,11 @@ func awsRestjson1_serializeOpDocumentCreateDistributionConfigurationInput(v *Cre
 		if err := awsRestjson1_serializeDocumentDistributionList(v.Distributions, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.Name != nil {
@@ -836,6 +846,11 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
 	if v.EnhancedImageMetadataEnabled != nil {
 		ok := object.Key("enhancedImageMetadataEnabled")
 		ok.Boolean(*v.EnhancedImageMetadataEnabled)
@@ -1005,6 +1020,13 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 		}
 	}
 
+	if v.AmiWatermarks != nil {
+		ok := object.Key("amiWatermarks")
+		if err := awsRestjson1_serializeDocumentAmiWatermarksList(v.AmiWatermarks, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BlockDeviceMappings != nil {
 		ok := object.Key("blockDeviceMappings")
 		if err := awsRestjson1_serializeDocumentInstanceBlockDeviceMappings(v.BlockDeviceMappings, ok); err != nil {
@@ -1027,6 +1049,11 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.Name != nil {
@@ -1140,6 +1167,11 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.InstanceMetadataOptions != nil {
@@ -1305,6 +1337,11 @@ func awsRestjson1_serializeOpDocumentCreateLifecyclePolicyInput(v *CreateLifecyc
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.ExecutionRole != nil {
@@ -7333,6 +7370,17 @@ func awsRestjson1_serializeDocumentAmiDistributionConfiguration(v *types.AmiDist
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAmiWatermarksList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

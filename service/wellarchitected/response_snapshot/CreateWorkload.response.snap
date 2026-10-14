@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"WorkloadArn":"__WorkloadArn__","WorkloadId":"__WorkloadId__"}

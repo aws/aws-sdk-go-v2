@@ -1,0 +1,3 @@
+GET /tags/__ResourceArn__?maxResults=1&nextToken=__NextToken__
+
+

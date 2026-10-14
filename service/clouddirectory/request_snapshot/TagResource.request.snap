@@ -1,0 +1,5 @@
+PUT /amazonclouddirectory/2017-01-11/tags/add
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

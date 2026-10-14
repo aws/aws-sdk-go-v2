@@ -4,13 +4,8 @@ package databrew
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new job to analyze a dataset and create its data profile.
@@ -99,59 +94,6 @@ type CreateProfileJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProfileJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProfileJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProfileJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.CreateProfileJobRequest_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatasetName != nil {
-		s.WriteString(schemas.CreateProfileJobRequest_DatasetName, *v.DatasetName)
-	}
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.CreateProfileJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.EncryptionMode != "" {
-		s.WriteString(schemas.CreateProfileJobRequest_EncryptionMode, string(v.EncryptionMode))
-	}
-	if v.JobSample != nil {
-		s.WriteStruct(schemas.CreateProfileJobRequest_JobSample)
-		v.JobSample.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogSubscription != "" {
-		s.WriteString(schemas.CreateProfileJobRequest_LogSubscription, string(v.LogSubscription))
-	}
-	if v.MaxCapacity != 0 {
-		s.WriteInt32(schemas.CreateProfileJobRequest_MaxCapacity, v.MaxCapacity)
-	}
-	if v.MaxRetries != 0 {
-		s.WriteInt32(schemas.CreateProfileJobRequest_MaxRetries, v.MaxRetries)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProfileJobRequest_Name, *v.Name)
-	}
-	if v.OutputLocation != nil {
-		s.WriteStruct(schemas.CreateProfileJobRequest_OutputLocation)
-		v.OutputLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateProfileJobRequest_RoleArn, *v.RoleArn)
-	}
-	serializeTagMap(s, schemas.CreateProfileJobRequest_Tags, v.Tags)
-	if v.Timeout != 0 {
-		s.WriteInt32(schemas.CreateProfileJobRequest_Timeout, v.Timeout)
-	}
-	serializeValidationConfigurationList(s, schemas.CreateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
-}
-
 type CreateProfileJobOutput struct {
 
 	// The name of the job that was created.
@@ -165,85 +107,29 @@ type CreateProfileJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProfileJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProfileJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProfileJobResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateProfileJobResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProfileJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfileJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileJob, schemas.CreateProfileJobRequest, schemas.CreateProfileJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProfileJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileJob, schemas.CreateProfileJobRequest, schemas.CreateProfileJobResponse), output: &CreateProfileJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProfileJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProfileJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProfileJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -258,22 +144,8 @@ func (c *Client) addOperationCreateProfileJobMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProfileJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProfileJob",
-	}
 }

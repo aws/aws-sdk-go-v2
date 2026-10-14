@@ -5,12 +5,8 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of telemetry configurations for Amazon Web Services resources
@@ -55,8 +51,20 @@ type ListResourceTelemetryForOrganizationInput struct {
 	ResourceTags map[string]string
 
 	//  A list of resource types used to filter resources in the organization. If this
-	// parameter is provided, the resources will be returned in the same order used in
-	// the request.
+	// parameter is provided, the service returns the resources in the same order as
+	// specified in the request. Currently supported resource types for discovery are:
+	//
+	//   - AWS::EC2::Instance
+	//
+	//   - AWS::EC2::VPC
+	//
+	//   - AWS::Lambda::Function
+	//
+	//   - AWS::EKS::Cluster
+	//
+	//   - AWS::WAFv2::WebACL
+	//
+	//   - AWS::ElasticLoadBalancingV2::LoadBalancer (Network Load Balancers only)
 	ResourceTypes []types.ResourceType
 
 	//  A key-value pair to filter resources in the organization based on the
@@ -65,28 +73,6 @@ type ListResourceTelemetryForOrganizationInput struct {
 	TelemetryConfigurationState map[string]types.TelemetryState
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListResourceTelemetryForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResourceTelemetryForOrganizationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResourceTelemetryForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdentifiers(s, schemas.ListResourceTelemetryForOrganizationInput_AccountIdentifiers, v.AccountIdentifiers)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListResourceTelemetryForOrganizationInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResourceTelemetryForOrganizationInput_NextToken, *v.NextToken)
-	}
-	if v.ResourceIdentifierPrefix != nil {
-		s.WriteString(schemas.ListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix, *v.ResourceIdentifierPrefix)
-	}
-	serializeTagMapInput(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTags, v.ResourceTags)
-	serializeResourceTypes(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTypes, v.ResourceTypes)
-	serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
 }
 
 type ListResourceTelemetryForOrganizationOutput struct {
@@ -105,84 +91,26 @@ type ListResourceTelemetryForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourceTelemetryForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResourceTelemetryForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResourceTelemetryForOrganizationOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResourceTelemetryForOrganizationOutput_NextToken, v.NextToken)
-		case schemas.ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations:
-			return deserializeTelemetryConfigurations(d, schemas.ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations, &v.TelemetryConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResourceTelemetryForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceTelemetryForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTelemetryForOrganization, schemas.ListResourceTelemetryForOrganizationInput, schemas.ListResourceTelemetryForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceTelemetryForOrganization{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTelemetryForOrganization, schemas.ListResourceTelemetryForOrganizationInput, schemas.ListResourceTelemetryForOrganizationOutput), output: &ListResourceTelemetryForOrganizationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceTelemetryForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceTelemetryForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +123,6 @@ func (c *Client) addOperationListResourceTelemetryForOrganizationMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -304,11 +226,3 @@ type ListResourceTelemetryForOrganizationAPIClient interface {
 }
 
 var _ ListResourceTelemetryForOrganizationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResourceTelemetryForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResourceTelemetryForOrganization",
-	}
-}

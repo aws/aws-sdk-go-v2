@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type GetAdapterInput struct {
 	AdapterId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAdapterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterRequest_AdapterId, *v.AdapterId)
+	}
 }
 
 type GetAdapterOutput struct {
@@ -70,77 +81,82 @@ type GetAdapterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdapterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterName != nil {
+		s.WriteString(schemas.GetAdapterResponse_AdapterName, *v.AdapterName)
+	}
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.GetAdapterResponse_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAdapterResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAdapterResponse_Description, *v.Description)
+	}
+	serializeFeatureTypes(s, schemas.GetAdapterResponse_FeatureTypes, v.FeatureTypes)
+	serializeTagMap(s, schemas.GetAdapterResponse_Tags, v.Tags)
+}
+func (v *GetAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdapterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdapterResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_AdapterId, v.AdapterId)
+		case schemas.GetAdapterResponse_AdapterName:
+			v.AdapterName = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_AdapterName, v.AdapterName)
+		case schemas.GetAdapterResponse_AutoUpdate:
+			var ev string
+			if err := d.ReadString(schemas.GetAdapterResponse_AutoUpdate, &ev); err != nil {
+				return err
+			}
+			v.AutoUpdate = types.AutoUpdate(ev)
+			return nil
+		case schemas.GetAdapterResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAdapterResponse_CreationTime, v.CreationTime)
+		case schemas.GetAdapterResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_Description, v.Description)
+		case schemas.GetAdapterResponse_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.GetAdapterResponse_FeatureTypes, &v.FeatureTypes)
+		case schemas.GetAdapterResponse_Tags:
+			return deserializeTagMap(d, schemas.GetAdapterResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdapterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapter, schemas.GetAdapterRequest, schemas.GetAdapterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapter, schemas.GetAdapterRequest, schemas.GetAdapterResponse), output: &GetAdapterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdapter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAdapter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAdapterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdapter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +171,8 @@ func (c *Client) addOperationGetAdapterMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAdapter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAdapter",
-	}
 }

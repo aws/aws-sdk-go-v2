@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSFreeTierService.GetFreeTierUsage
+
+{"filter":{"And":[{},{}],"Dimensions":{"Key":"SERVICE","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}]},"maxResults":1,"nextToken":"__NextToken__"}

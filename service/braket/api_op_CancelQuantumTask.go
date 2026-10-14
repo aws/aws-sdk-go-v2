@@ -5,12 +5,8 @@ package braket
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels the specified task.
@@ -44,34 +40,6 @@ type CancelQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQuantumTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelQuantumTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CancelQuantumTaskRequest_clientToken, *v.ClientToken)
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.CancelQuantumTaskRequest_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *CancelQuantumTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelQuantumTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelQuantumTaskRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskRequest_clientToken, v.ClientToken)
-		case schemas.CancelQuantumTaskRequest_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskRequest_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
-}
-
 type CancelQuantumTaskOutput struct {
 
 	// The status of the quantum task.
@@ -90,94 +58,23 @@ type CancelQuantumTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQuantumTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelQuantumTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CancellationStatus != "" {
-		s.WriteString(schemas.CancelQuantumTaskResponse_cancellationStatus, string(v.CancellationStatus))
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.CancelQuantumTaskResponse_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *CancelQuantumTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelQuantumTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelQuantumTaskResponse_cancellationStatus:
-			var ev string
-			if err := d.ReadString(schemas.CancelQuantumTaskResponse_cancellationStatus, &ev); err != nil {
-				return err
-			}
-			v.CancellationStatus = types.CancellationStatus(ev)
-			return nil
-		case schemas.CancelQuantumTaskResponse_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskResponse_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuantumTask, schemas.CancelQuantumTaskRequest, schemas.CancelQuantumTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuantumTask, schemas.CancelQuantumTaskRequest, schemas.CancelQuantumTaskResponse), output: &CancelQuantumTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelQuantumTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -187,12 +84,6 @@ func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCancelQuantumTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelQuantumTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,12 +96,6 @@ func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,12 +135,4 @@ func (m *idempotencyToken_initializeOpCancelQuantumTask) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCancelQuantumTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelQuantumTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCancelQuantumTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelQuantumTask",
-	}
 }

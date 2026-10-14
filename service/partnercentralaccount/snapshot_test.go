@@ -242,6 +242,42 @@ func TestCheckSnapshot_GetProfileVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetQualificationsAssociationDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsAssociationDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQualificationsAssociationDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQualificationsAssociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsAssociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQualificationsAssociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQualificationsDisassociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsDisassociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQualificationsDisassociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetVerification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVerification(context.Background(), nil, func(o *Options) {
@@ -355,6 +391,30 @@ func TestCheckSnapshot_StartProfileUpdateTask(t *testing.T) {
 	_, err := svc.StartProfileUpdateTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartProfileUpdateTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartQualificationsAssociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQualificationsAssociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartQualificationsAssociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartQualificationsDisassociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQualificationsDisassociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartQualificationsDisassociationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -589,6 +649,42 @@ func TestUpdateSnapshot_GetProfileVisibility(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetQualificationsAssociationDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsAssociationDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQualificationsAssociationDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQualificationsAssociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsAssociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQualificationsAssociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQualificationsDisassociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQualificationsDisassociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQualificationsDisassociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetVerification(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVerification(context.Background(), nil, func(o *Options) {
@@ -702,6 +798,30 @@ func TestUpdateSnapshot_StartProfileUpdateTask(t *testing.T) {
 	_, err := svc.StartProfileUpdateTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartProfileUpdateTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartQualificationsAssociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQualificationsAssociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartQualificationsAssociationTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartQualificationsDisassociationTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQualificationsDisassociationTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartQualificationsDisassociationTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,5 @@
+POST /untagresource
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__","resourceShareArn":"__ResourceShareArn__","tagKeys":["__Member__","__Member__"]}

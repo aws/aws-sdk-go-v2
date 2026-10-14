@@ -1,0 +1,5 @@
+PATCH /memberships/__MembershipIdentifier__/intermediateTables/__IntermediateTableIdentifier__
+
+Content-Type: application/json
+
+{"columns":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"description":"__Description__","kmsKeyArn":"__KmsKeyArn__"}

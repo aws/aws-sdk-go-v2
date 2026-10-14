@@ -4,13 +4,8 @@ package geomaps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // GetSprites returns the map's sprites.
@@ -72,27 +67,6 @@ type GetSpritesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSpritesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSpritesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSpritesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ColorScheme != "" {
-		s.WriteString(schemas.GetSpritesRequest_ColorScheme, string(v.ColorScheme))
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.GetSpritesRequest_FileName, *v.FileName)
-	}
-	if v.Style != "" {
-		s.WriteString(schemas.GetSpritesRequest_Style, string(v.Style))
-	}
-	if v.Variant != "" {
-		s.WriteString(schemas.GetSpritesRequest_Variant, string(v.Variant))
-	}
-}
-
 type GetSpritesOutput struct {
 
 	// The body of the sprite sheet or JSON offset file (image/png or
@@ -115,93 +89,29 @@ type GetSpritesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSpritesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSpritesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSpritesResponse_Blob:
-			return d.ReadBlob(schemas.GetSpritesResponse_Blob, &v.Blob)
-		case schemas.GetSpritesResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_CacheControl, v.CacheControl)
-		case schemas.GetSpritesResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_ContentType, v.ContentType)
-		case schemas.GetSpritesResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_ETag, v.ETag)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSprites{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSprites, schemas.GetSpritesRequest, schemas.GetSpritesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSprites{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSprites, schemas.GetSpritesRequest, schemas.GetSpritesResponse), output: &GetSpritesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSprites"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSpritesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSprites(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +126,8 @@ func (c *Client) addOperationGetSpritesMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSprites(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSprites",
-	}
 }

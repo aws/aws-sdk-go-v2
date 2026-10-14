@@ -624,9 +624,10 @@ type OriginAccessControlSigningBehaviors string
 
 // Enum values for OriginAccessControlSigningBehaviors
 const (
-	OriginAccessControlSigningBehaviorsNever      OriginAccessControlSigningBehaviors = "never"
-	OriginAccessControlSigningBehaviorsAlways     OriginAccessControlSigningBehaviors = "always"
-	OriginAccessControlSigningBehaviorsNoOverride OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsNever         OriginAccessControlSigningBehaviors = "never"
+	OriginAccessControlSigningBehaviorsAlways        OriginAccessControlSigningBehaviors = "always"
+	OriginAccessControlSigningBehaviorsNoOverride    OriginAccessControlSigningBehaviors = "no-override"
+	OriginAccessControlSigningBehaviorsAlwaysAmzAuth OriginAccessControlSigningBehaviors = "always-amz-auth"
 )
 
 // Values returns all known values for OriginAccessControlSigningBehaviors. Note
@@ -639,6 +640,7 @@ func (OriginAccessControlSigningBehaviors) Values() []OriginAccessControlSigning
 		"never",
 		"always",
 		"no-override",
+		"always-amz-auth",
 	}
 }
 
@@ -646,7 +648,8 @@ type OriginAccessControlSigningProtocols string
 
 // Enum values for OriginAccessControlSigningProtocols
 const (
-	OriginAccessControlSigningProtocolsSigv4 OriginAccessControlSigningProtocols = "sigv4"
+	OriginAccessControlSigningProtocolsSigv4  OriginAccessControlSigningProtocols = "sigv4"
+	OriginAccessControlSigningProtocolsSigv4a OriginAccessControlSigningProtocols = "sigv4a"
 )
 
 // Values returns all known values for OriginAccessControlSigningProtocols. Note
@@ -657,6 +660,7 @@ const (
 func (OriginAccessControlSigningProtocols) Values() []OriginAccessControlSigningProtocols {
 	return []OriginAccessControlSigningProtocols{
 		"sigv4",
+		"sigv4a",
 	}
 }
 

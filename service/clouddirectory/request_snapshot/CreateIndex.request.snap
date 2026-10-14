@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/index
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"IsUnique":true,"LinkName":"__LinkName__","OrderedIndexedAttributeList":[{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"}],"ParentReference":{"Selector":"__Selector__"}}

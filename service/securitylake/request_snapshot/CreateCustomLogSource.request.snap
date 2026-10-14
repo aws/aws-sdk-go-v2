@@ -1,0 +1,5 @@
+POST /v1/datalake/logsources/custom
+
+Content-Type: application/json
+
+{"configuration":{"crawlerConfiguration":{"roleArn":"__RoleArn__"},"providerIdentity":{"externalId":"__ExternalId__","principal":"__Principal__"}},"eventClasses":["__Member__","__Member__"],"sourceName":"__SourceName__","sourceVersion":"__SourceVersion__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutConfigRule
+
+{"ConfigRule":{"ConfigRuleArn":"__ConfigRuleArn__","ConfigRuleId":"__ConfigRuleId__","ConfigRuleName":"__ConfigRuleName__","ConfigRuleState":"ACTIVE","CreatedBy":"__CreatedBy__","Description":"__Description__","EvaluationModes":[{"Mode":"DETECTIVE"},{"Mode":"DETECTIVE"}],"InputParameters":"__InputParameters__","MaximumExecutionFrequency":"One_Hour","RuleEvaluationVisibility":"EXTERNAL","Scope":{"ComplianceResourceId":"__ComplianceResourceId__","ComplianceResourceTypes":["__Member__","__Member__"],"ServicePrincipals":["__Member__","__Member__"],"TagKey":"__TagKey__","TagValue":"__TagValue__"},"Source":{"CustomPolicyDetails":{"EnableDebugLogDelivery":true,"PolicyRuntime":"__PolicyRuntime__","PolicyText":"__PolicyText__"},"Owner":"CUSTOM_LAMBDA","SourceDetails":[{"EventSource":"aws.config","MaximumExecutionFrequency":"One_Hour","MessageType":"ConfigurationItemChangeNotification"},{"EventSource":"aws.config","MaximumExecutionFrequency":"One_Hour","MessageType":"ConfigurationItemChangeNotification"}],"SourceIdentifier":"__SourceIdentifier__"}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

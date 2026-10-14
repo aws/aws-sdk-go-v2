@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,19 @@ type GetCodeSecurityIntegrationInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCodeSecurityIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationRequest_integrationArn, *v.IntegrationArn)
+	}
+	serializeTagMap(s, schemas.GetCodeSecurityIntegrationRequest_tags, v.Tags)
 }
 
 type GetCodeSecurityIntegrationOutput struct {
@@ -92,77 +104,101 @@ type GetCodeSecurityIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSecurityIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationUrl != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_authorizationUrl, *v.AuthorizationUrl)
+	}
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.GetCodeSecurityIntegrationResponse_createdOn, *v.CreatedOn)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_integrationArn, *v.IntegrationArn)
+	}
+	if v.LastUpdateOn != nil {
+		s.WriteTime(schemas.GetCodeSecurityIntegrationResponse_lastUpdateOn, *v.LastUpdateOn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_statusReason, *v.StatusReason)
+	}
+	serializeTagMap(s, schemas.GetCodeSecurityIntegrationResponse_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_type, string(v.Type))
+	}
+}
+func (v *GetCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeSecurityIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeSecurityIntegrationResponse_authorizationUrl:
+			v.AuthorizationUrl = new(string)
+			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_authorizationUrl, v.AuthorizationUrl)
+		case schemas.GetCodeSecurityIntegrationResponse_createdOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityIntegrationResponse_createdOn, v.CreatedOn)
+		case schemas.GetCodeSecurityIntegrationResponse_integrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_integrationArn, v.IntegrationArn)
+		case schemas.GetCodeSecurityIntegrationResponse_lastUpdateOn:
+			v.LastUpdateOn = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityIntegrationResponse_lastUpdateOn, v.LastUpdateOn)
+		case schemas.GetCodeSecurityIntegrationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_name, v.Name)
+		case schemas.GetCodeSecurityIntegrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeSecurityIntegrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		case schemas.GetCodeSecurityIntegrationResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_statusReason, v.StatusReason)
+		case schemas.GetCodeSecurityIntegrationResponse_tags:
+			return deserializeTagMap(d, schemas.GetCodeSecurityIntegrationResponse_tags, &v.Tags)
+		case schemas.GetCodeSecurityIntegrationResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeSecurityIntegrationResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IntegrationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeSecurityIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityIntegration, schemas.GetCodeSecurityIntegrationRequest, schemas.GetCodeSecurityIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityIntegration, schemas.GetCodeSecurityIntegrationRequest, schemas.GetCodeSecurityIntegrationResponse), output: &GetCodeSecurityIntegrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCodeSecurityIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCodeSecurityIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCodeSecurityIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +213,8 @@ func (c *Client) addOperationGetCodeSecurityIntegrationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCodeSecurityIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCodeSecurityIntegration",
-	}
 }

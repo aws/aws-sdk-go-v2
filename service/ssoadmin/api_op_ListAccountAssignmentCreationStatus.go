@@ -5,12 +5,8 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the status of the Amazon Web Services account assignment creation
@@ -52,29 +48,6 @@ type ListAccountAssignmentCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountAssignmentCreationStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountAssignmentCreationStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountAssignmentCreationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListAccountAssignmentCreationStatusRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.ListAccountAssignmentCreationStatusRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccountAssignmentCreationStatusRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccountAssignmentCreationStatusRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListAccountAssignmentCreationStatusOutput struct {
 
 	// The status object for the account assignment creation operation.
@@ -90,87 +63,29 @@ type ListAccountAssignmentCreationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountAssignmentCreationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountAssignmentCreationStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountAssignmentCreationStatusResponse_AccountAssignmentsCreationStatus:
-			return deserializeAccountAssignmentOperationStatusList(d, schemas.ListAccountAssignmentCreationStatusResponse_AccountAssignmentsCreationStatus, &v.AccountAssignmentsCreationStatus)
-		case schemas.ListAccountAssignmentCreationStatusResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccountAssignmentCreationStatusResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccountAssignmentCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountAssignmentCreationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignmentCreationStatus, schemas.ListAccountAssignmentCreationStatusRequest, schemas.ListAccountAssignmentCreationStatusResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountAssignmentCreationStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignmentCreationStatus, schemas.ListAccountAssignmentCreationStatusRequest, schemas.ListAccountAssignmentCreationStatusResponse), output: &ListAccountAssignmentCreationStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountAssignmentCreationStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAccountAssignmentCreationStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountAssignmentCreationStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +98,6 @@ func (c *Client) addOperationListAccountAssignmentCreationStatusMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -292,11 +201,3 @@ type ListAccountAssignmentCreationStatusAPIClient interface {
 }
 
 var _ ListAccountAssignmentCreationStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccountAssignmentCreationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccountAssignmentCreationStatus",
-	}
-}

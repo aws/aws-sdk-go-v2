@@ -5,10 +5,10 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified property values in the resource.
@@ -123,6 +123,58 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceInput_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateResourceInput_Identifier, *v.Identifier)
+	}
+	if v.PatchDocument != nil {
+		s.WriteString(schemas.UpdateResourceInput_PatchDocument, *v.PatchDocument)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateResourceInput_RoleArn, *v.RoleArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.UpdateResourceInput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.UpdateResourceInput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *UpdateResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_ClientToken, v.ClientToken)
+		case schemas.UpdateResourceInput_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_Identifier, v.Identifier)
+		case schemas.UpdateResourceInput_PatchDocument:
+			v.PatchDocument = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_PatchDocument, v.PatchDocument)
+		case schemas.UpdateResourceInput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_RoleArn, v.RoleArn)
+		case schemas.UpdateResourceInput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_TypeName, v.TypeName)
+		case schemas.UpdateResourceInput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
+
 type UpdateResourceOutput struct {
 
 	// Represents the current status of the resource update request.
@@ -139,65 +191,44 @@ type UpdateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.UpdateResourceOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceInput, schemas.UpdateResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceInput, schemas.UpdateResourceOutput), output: &UpdateResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -207,12 +238,6 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpUpdateResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,12 +250,6 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,12 +289,4 @@ func (m *idempotencyToken_initializeOpUpdateResource) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opUpdateResourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateResource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateResource",
-	}
 }

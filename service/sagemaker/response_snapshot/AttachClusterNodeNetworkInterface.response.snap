@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.AttachClusterNodeNetworkInterface
+
+{"AttachmentId":"__AttachmentId__","ClusterArn":"__ClusterArn__","NetworkInterfaceId":"__NetworkInterfaceId__","NodeId":"__NodeId__"}

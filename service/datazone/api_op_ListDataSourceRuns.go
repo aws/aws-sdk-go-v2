@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists data source runs in Amazon DataZone.
@@ -61,30 +57,6 @@ type ListDataSourceRunsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourceRunsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataSourceRunsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataSourceRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataSourceIdentifier != nil {
-		s.WriteString(schemas.ListDataSourceRunsInput_dataSourceIdentifier, *v.DataSourceIdentifier)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListDataSourceRunsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataSourceRunsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataSourceRunsInput_nextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListDataSourceRunsInput_status, string(v.Status))
-	}
-}
-
 type ListDataSourceRunsOutput struct {
 
 	// The results of the ListDataSourceRuns action.
@@ -105,87 +77,29 @@ type ListDataSourceRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourceRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataSourceRunsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataSourceRunsOutput_items:
-			return deserializeDataSourceRunSummaries(d, schemas.ListDataSourceRunsOutput_items, &v.Items)
-		case schemas.ListDataSourceRunsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataSourceRunsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataSourceRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSourceRuns{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceRuns, schemas.ListDataSourceRunsInput, schemas.ListDataSourceRunsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSourceRuns{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceRuns, schemas.ListDataSourceRunsInput, schemas.ListDataSourceRunsOutput), output: &ListDataSourceRunsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSourceRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataSourceRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSourceRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +112,6 @@ func (c *Client) addOperationListDataSourceRunsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -308,11 +216,3 @@ type ListDataSourceRunsAPIClient interface {
 }
 
 var _ ListDataSourceRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataSourceRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataSourceRuns",
-	}
-}

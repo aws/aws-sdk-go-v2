@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of upcoming maintenance events for replication instances in your
@@ -53,6 +53,25 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingMaintenanceActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingMaintenanceActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingMaintenanceActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribePendingMaintenanceActionsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribePendingMaintenanceActionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+}
+
 type DescribePendingMaintenanceActionsOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -69,77 +88,51 @@ type DescribePendingMaintenanceActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingMaintenanceActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingMaintenanceActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingMaintenanceActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsResponse_Marker, *v.Marker)
+	}
+	serializePendingMaintenanceActions(s, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, v.PendingMaintenanceActions)
+}
+func (v *DescribePendingMaintenanceActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePendingMaintenanceActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePendingMaintenanceActionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribePendingMaintenanceActionsResponse_Marker, v.Marker)
+		case schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions:
+			return deserializePendingMaintenanceActions(d, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, &v.PendingMaintenanceActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.DescribePendingMaintenanceActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePendingMaintenanceActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.DescribePendingMaintenanceActionsResponse), output: &DescribePendingMaintenanceActionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePendingMaintenanceActions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePendingMaintenanceActions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePendingMaintenanceActionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePendingMaintenanceActions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +145,6 @@ func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +254,3 @@ type DescribePendingMaintenanceActionsAPIClient interface {
 }
 
 var _ DescribePendingMaintenanceActionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribePendingMaintenanceActions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePendingMaintenanceActions",
-	}
-}

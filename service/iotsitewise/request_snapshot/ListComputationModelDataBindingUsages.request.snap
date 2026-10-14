@@ -1,0 +1,5 @@
+POST /computation-models/data-binding-usages
+
+Content-Type: application/json
+
+{"dataBindingValueFilter":{"asset":{"assetId":"__AssetId__"},"assetModel":{"assetModelId":"__AssetModelId__"},"assetModelProperty":{"assetModelId":"__AssetModelId__","propertyId":"__PropertyId__"},"assetProperty":{"assetId":"__AssetId__","propertyId":"__PropertyId__"}},"maxResults":1,"nextToken":"__NextToken__"}

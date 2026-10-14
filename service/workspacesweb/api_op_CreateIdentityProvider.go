@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an identity provider resource that is then associated with a web portal.
@@ -132,29 +128,6 @@ type CreateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateIdentityProviderRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_clientToken, *v.ClientToken)
-	}
-	serializeIdentityProviderDetails(s, schemas.CreateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
-	if v.IdentityProviderName != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_identityProviderName, *v.IdentityProviderName)
-	}
-	if v.IdentityProviderType != "" {
-		s.WriteString(schemas.CreateIdentityProviderRequest_identityProviderType, string(v.IdentityProviderType))
-	}
-	if v.PortalArn != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_portalArn, *v.PortalArn)
-	}
-	serializeTagList(s, schemas.CreateIdentityProviderRequest_tags, v.Tags)
-}
-
 type CreateIdentityProviderOutput struct {
 
 	// The ARN of the identity provider.
@@ -168,73 +141,23 @@ type CreateIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateIdentityProviderResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateIdentityProviderResponse_identityProviderArn:
-			v.IdentityProviderArn = new(string)
-			return d.ReadString(schemas.CreateIdentityProviderResponse_identityProviderArn, v.IdentityProviderArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIdentityProvider{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIdentityProvider{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse), output: &CreateIdentityProviderOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIdentityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -244,12 +167,6 @@ func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateIdentityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIdentityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -262,12 +179,6 @@ func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -307,12 +218,4 @@ func (m *idempotencyToken_initializeOpCreateIdentityProvider) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateIdentityProviderMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateIdentityProvider{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateIdentityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIdentityProvider",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetMergeConflicts
+
+{"conflictDetailLevel":"FILE_LEVEL","conflictResolutionStrategy":"NONE","destinationCommitSpecifier":"__DestinationCommitSpecifier__","maxConflictFiles":1,"mergeOption":"FAST_FORWARD_MERGE","nextToken":"__NextToken__","repositoryName":"__RepositoryName__","sourceCommitSpecifier":"__SourceCommitSpecifier__"}

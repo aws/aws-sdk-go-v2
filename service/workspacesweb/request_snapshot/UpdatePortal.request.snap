@@ -1,0 +1,5 @@
+PUT /portals/__PortalArn__
+
+Content-Type: application/json
+
+{"authenticationType":"Standard","displayName":"__DisplayName__","instanceType":"standard.regular","maxConcurrentSessions":1,"portalCustomDomain":"__PortalCustomDomain__"}

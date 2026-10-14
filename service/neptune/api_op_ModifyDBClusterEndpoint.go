@@ -4,12 +4,7 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
@@ -48,23 +43,6 @@ type ModifyDBClusterEndpointInput struct {
 	StaticMembers []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ModifyDBClusterEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBClusterEndpointMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBClusterEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterEndpointIdentifier != nil {
-		s.WriteString(schemas.ModifyDBClusterEndpointMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
-	}
-	if v.EndpointType != nil {
-		s.WriteString(schemas.ModifyDBClusterEndpointMessage_EndpointType, *v.EndpointType)
-	}
-	serializeStringList(s, schemas.ModifyDBClusterEndpointMessage_ExcludedMembers, v.ExcludedMembers)
-	serializeStringList(s, schemas.ModifyDBClusterEndpointMessage_StaticMembers, v.StaticMembers)
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -127,110 +105,29 @@ type ModifyDBClusterEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBClusterEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyDBClusterEndpointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyDBClusterEndpointOutput_CustomEndpointType:
-			v.CustomEndpointType = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_CustomEndpointType, v.CustomEndpointType)
-		case schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointArn:
-			v.DBClusterEndpointArn = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointArn, v.DBClusterEndpointArn)
-		case schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier:
-			v.DBClusterEndpointIdentifier = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointIdentifier, v.DBClusterEndpointIdentifier)
-		case schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier:
-			v.DBClusterEndpointResourceIdentifier = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, v.DBClusterEndpointResourceIdentifier)
-		case schemas.ModifyDBClusterEndpointOutput_DBClusterIdentifier:
-			v.DBClusterIdentifier = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_DBClusterIdentifier, v.DBClusterIdentifier)
-		case schemas.ModifyDBClusterEndpointOutput_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_Endpoint, v.Endpoint)
-		case schemas.ModifyDBClusterEndpointOutput_EndpointType:
-			v.EndpointType = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_EndpointType, v.EndpointType)
-		case schemas.ModifyDBClusterEndpointOutput_ExcludedMembers:
-			return deserializeStringList(d, schemas.ModifyDBClusterEndpointOutput_ExcludedMembers, &v.ExcludedMembers)
-		case schemas.ModifyDBClusterEndpointOutput_StaticMembers:
-			return deserializeStringList(d, schemas.ModifyDBClusterEndpointOutput_StaticMembers, &v.StaticMembers)
-		case schemas.ModifyDBClusterEndpointOutput_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.ModifyDBClusterEndpointOutput_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterEndpoint, schemas.ModifyDBClusterEndpointMessage, schemas.ModifyDBClusterEndpointOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterEndpoint, schemas.ModifyDBClusterEndpointMessage, schemas.ModifyDBClusterEndpointOutput), output: &ModifyDBClusterEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBClusterEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyDBClusterEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBClusterEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -245,22 +142,8 @@ func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyDBClusterEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyDBClusterEndpoint",
-	}
 }

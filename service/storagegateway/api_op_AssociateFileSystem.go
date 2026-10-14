@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate an Amazon FSx file system with the FSx File Gateway. After the
@@ -82,6 +81,44 @@ type AssociateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.AssociateFileSystemInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_ClientToken, *v.ClientToken)
+	}
+	if v.EndpointNetworkConfiguration != nil {
+		s.WriteStruct(schemas.AssociateFileSystemInput_EndpointNetworkConfiguration)
+		v.EndpointNetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_LocationARN, *v.LocationARN)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_Password, *v.Password)
+	}
+	serializeTags(s, schemas.AssociateFileSystemInput_Tags, v.Tags)
+	if v.UserName != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_UserName, *v.UserName)
+	}
+}
+
 type AssociateFileSystemOutput struct {
 
 	// The ARN of the newly created file system association.
@@ -93,77 +130,48 @@ type AssociateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemOutput_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+}
+func (v *AssociateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFileSystemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFileSystemOutput_FileSystemAssociationARN:
+			v.FileSystemAssociationARN = new(string)
+			return d.ReadString(schemas.AssociateFileSystemOutput_FileSystemAssociationARN, v.FileSystemAssociationARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystem, schemas.AssociateFileSystemInput, schemas.AssociateFileSystemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystem, schemas.AssociateFileSystemInput, schemas.AssociateFileSystemOutput), output: &AssociateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFileSystem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateFileSystem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateFileSystemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFileSystem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +186,8 @@ func (c *Client) addOperationAssociateFileSystemMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateFileSystem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateFileSystem",
-	}
 }

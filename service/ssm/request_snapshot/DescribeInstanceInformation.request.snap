@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeInstanceInformation
+
+{"Filters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"InstanceInformationFilterList":[{"key":"InstanceIds","valueSet":["__Member__","__Member__"]},{"key":"InstanceIds","valueSet":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

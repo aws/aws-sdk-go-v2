@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -60,6 +60,24 @@ type CreateTieringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTieringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTieringConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTieringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateTieringConfigurationInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.TieringConfiguration != nil {
+		s.WriteStruct(schemas.CreateTieringConfigurationInput_TieringConfiguration)
+		v.TieringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateTieringConfigurationInput_TieringConfigurationTags, v.TieringConfigurationTags)
+}
+
 type CreateTieringConfigurationOutput struct {
 
 	// The date and time a tiering configuration was created, in Unix format and
@@ -84,65 +102,54 @@ type CreateTieringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTieringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTieringConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTieringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateTieringConfigurationOutput_CreationTime, *v.CreationTime)
+	}
+	if v.TieringConfigurationArn != nil {
+		s.WriteString(schemas.CreateTieringConfigurationOutput_TieringConfigurationArn, *v.TieringConfigurationArn)
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.CreateTieringConfigurationOutput_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *CreateTieringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTieringConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTieringConfigurationOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateTieringConfigurationOutput_CreationTime, v.CreationTime)
+		case schemas.CreateTieringConfigurationOutput_TieringConfigurationArn:
+			v.TieringConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateTieringConfigurationOutput_TieringConfigurationArn, v.TieringConfigurationArn)
+		case schemas.CreateTieringConfigurationOutput_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.CreateTieringConfigurationOutput_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTieringConfiguration, schemas.CreateTieringConfigurationInput, schemas.CreateTieringConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTieringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTieringConfiguration, schemas.CreateTieringConfigurationInput, schemas.CreateTieringConfigurationOutput), output: &CreateTieringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTieringConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTieringConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -152,12 +159,6 @@ func (c *Client) addOperationCreateTieringConfigurationMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCreateTieringConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTieringConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +171,6 @@ func (c *Client) addOperationCreateTieringConfigurationMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -215,12 +210,4 @@ func (m *idempotencyToken_initializeOpCreateTieringConfiguration) HandleInitiali
 }
 func addIdempotencyToken_opCreateTieringConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateTieringConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateTieringConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTieringConfiguration",
-	}
 }

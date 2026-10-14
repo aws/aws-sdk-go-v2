@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Queries entities in the graph store.
@@ -60,30 +56,6 @@ type QueryGraphInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryGraphInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryGraphInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdditionalAttributes != nil {
-		s.WriteStruct(schemas.QueryGraphInput_additionalAttributes)
-		v.AdditionalAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.QueryGraphInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeMatchClauses(s, schemas.QueryGraphInput_match, v.Match)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.QueryGraphInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.QueryGraphInput_nextToken, *v.NextToken)
-	}
-}
-
 type QueryGraphOutput struct {
 
 	// The results of the QueryGraph action.
@@ -102,87 +74,29 @@ type QueryGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryGraphOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryGraphOutput_items:
-			return deserializeResultItemList(d, schemas.QueryGraphOutput_items, &v.Items)
-		case schemas.QueryGraphOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.QueryGraphOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationQueryGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryGraph{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryGraph, schemas.QueryGraphInput, schemas.QueryGraphOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryGraph{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryGraph, schemas.QueryGraphInput, schemas.QueryGraphOutput), output: &QueryGraphOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryGraph"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpQueryGraphValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryGraph(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +109,6 @@ func (c *Client) addOperationQueryGraphMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -303,11 +211,3 @@ type QueryGraphAPIClient interface {
 }
 
 var _ QueryGraphAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opQueryGraph(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "QueryGraph",
-	}
-}

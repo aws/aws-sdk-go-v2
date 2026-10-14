@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the service network and VPC association. If you add a security group to
@@ -33,17 +32,60 @@ func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type UpdateServiceNetworkVpcAssociationInput struct {
 
-	// The IDs of the security groups.
-	//
-	// This member is required.
-	SecurityGroupIds []string
-
 	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkVpcAssociationIdentifier *string
 
+	//  DNS options for the service network VPC association.
+	DnsOptions *types.DnsOptions
+
+	//  Indicates if private DNS is enabled for the VPC association.
+	PrivateDnsEnabled *bool
+
+	// The IDs of the security groups.
+	SecurityGroupIds []string
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateServiceNetworkVpcAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceNetworkVpcAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceNetworkVpcAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsOptions != nil {
+		s.WriteStruct(schemas.UpdateServiceNetworkVpcAssociationRequest_dnsOptions)
+		v.DnsOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.UpdateServiceNetworkVpcAssociationRequest_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	serializeSecurityGroupList(s, schemas.UpdateServiceNetworkVpcAssociationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.ServiceNetworkVpcAssociationIdentifier != nil {
+		s.WriteString(schemas.UpdateServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, *v.ServiceNetworkVpcAssociationIdentifier)
+	}
+}
+func (v *UpdateServiceNetworkVpcAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceNetworkVpcAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceNetworkVpcAssociationRequest_dnsOptions:
+			v.DnsOptions = &types.DnsOptions{}
+			return v.DnsOptions.Deserialize(d)
+		case schemas.UpdateServiceNetworkVpcAssociationRequest_privateDnsEnabled:
+			v.PrivateDnsEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateServiceNetworkVpcAssociationRequest_privateDnsEnabled, v.PrivateDnsEnabled)
+		case schemas.UpdateServiceNetworkVpcAssociationRequest_securityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.UpdateServiceNetworkVpcAssociationRequest_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier:
+			v.ServiceNetworkVpcAssociationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, v.ServiceNetworkVpcAssociationIdentifier)
+		}
+		return nil
+	})
 }
 
 type UpdateServiceNetworkVpcAssociationOutput struct {
@@ -54,8 +96,14 @@ type UpdateServiceNetworkVpcAssociationOutput struct {
 	// The account that created the association.
 	CreatedBy *string
 
+	//  DNS options for the service network VPC association.
+	DnsOptions *types.DnsOptions
+
 	// The ID of the association.
 	Id *string
+
+	//  Indicates if private DNS is enabled for the VPC association.
+	PrivateDnsEnabled *bool
 
 	// The IDs of the security groups.
 	SecurityGroupIds []string
@@ -71,77 +119,87 @@ type UpdateServiceNetworkVpcAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceNetworkVpcAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceNetworkVpcAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceNetworkVpcAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateServiceNetworkVpcAssociationResponse_arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.UpdateServiceNetworkVpcAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DnsOptions != nil {
+		s.WriteStruct(schemas.UpdateServiceNetworkVpcAssociationResponse_dnsOptions)
+		v.DnsOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceNetworkVpcAssociationResponse_id, *v.Id)
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.UpdateServiceNetworkVpcAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	serializeSecurityGroupList(s, schemas.UpdateServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateServiceNetworkVpcAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateServiceNetworkVpcAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceNetworkVpcAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkVpcAssociationResponse_arn, v.Arn)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkVpcAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_dnsOptions:
+			v.DnsOptions = &types.DnsOptions{}
+			return v.DnsOptions.Deserialize(d)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkVpcAssociationResponse_id, v.Id)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_privateDnsEnabled:
+			v.PrivateDnsEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateServiceNetworkVpcAssociationResponse_privateDnsEnabled, v.PrivateDnsEnabled)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_securityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.UpdateServiceNetworkVpcAssociationResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.UpdateServiceNetworkVpcAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceNetworkVpcAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkVpcAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceNetworkVpcAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceNetworkVpcAssociation, schemas.UpdateServiceNetworkVpcAssociationRequest, schemas.UpdateServiceNetworkVpcAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceNetworkVpcAssociation, schemas.UpdateServiceNetworkVpcAssociationRequest, schemas.UpdateServiceNetworkVpcAssociationResponse), output: &UpdateServiceNetworkVpcAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceNetworkVpcAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServiceNetworkVpcAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceNetworkVpcAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +214,8 @@ func (c *Client) addOperationUpdateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServiceNetworkVpcAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServiceNetworkVpcAssociation",
-	}
 }

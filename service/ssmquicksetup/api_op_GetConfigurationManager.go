@@ -4,11 +4,10 @@ package ssmquicksetup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetConfigurationManagerInput struct {
 	ManagerArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationManagerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.GetConfigurationManagerInput_ManagerArn, *v.ManagerArn)
+	}
 }
 
 type GetConfigurationManagerOutput struct {
@@ -73,77 +84,81 @@ type GetConfigurationManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationManagerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationDefinitionsList(s, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetConfigurationManagerOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_Description, *v.Description)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.GetConfigurationManagerOutput_LastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_ManagerArn, *v.ManagerArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_Name, *v.Name)
+	}
+	serializeStatusSummariesList(s, schemas.GetConfigurationManagerOutput_StatusSummaries, v.StatusSummaries)
+	serializeTagsMap(s, schemas.GetConfigurationManagerOutput_Tags, v.Tags)
+}
+func (v *GetConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationManagerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationManagerOutput_ConfigurationDefinitions:
+			return deserializeConfigurationDefinitionsList(d, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, &v.ConfigurationDefinitions)
+		case schemas.GetConfigurationManagerOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationManagerOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetConfigurationManagerOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_Description, v.Description)
+		case schemas.GetConfigurationManagerOutput_LastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationManagerOutput_LastModifiedAt, v.LastModifiedAt)
+		case schemas.GetConfigurationManagerOutput_ManagerArn:
+			v.ManagerArn = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_ManagerArn, v.ManagerArn)
+		case schemas.GetConfigurationManagerOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_Name, v.Name)
+		case schemas.GetConfigurationManagerOutput_StatusSummaries:
+			return deserializeStatusSummariesList(d, schemas.GetConfigurationManagerOutput_StatusSummaries, &v.StatusSummaries)
+		case schemas.GetConfigurationManagerOutput_Tags:
+			return deserializeTagsMap(d, schemas.GetConfigurationManagerOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationManager, schemas.GetConfigurationManagerInput, schemas.GetConfigurationManagerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationManager, schemas.GetConfigurationManagerInput, schemas.GetConfigurationManagerOutput), output: &GetConfigurationManagerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationManager{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfigurationManager"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConfigurationManagerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfigurationManager(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +173,8 @@ func (c *Client) addOperationGetConfigurationManagerMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConfigurationManager(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConfigurationManager",
-	}
 }

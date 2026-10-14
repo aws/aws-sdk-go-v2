@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudHsmFrontendService.CreateHsm
+
+{"ClientToken":"__ClientToken__","EniIp":"__EniIp__","ExternalId":"__ExternalId__","IamRoleArn":"__IamRoleArn__","SshKey":"__SshKey__","SubnetId":"__SubnetId__","SubscriptionType":"PRODUCTION","SyslogIp":"__SyslogIp__"}

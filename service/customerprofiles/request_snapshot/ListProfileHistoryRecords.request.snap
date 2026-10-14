@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/history-records?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"ActionType":"ADDED_PROFILE_KEY","ObjectTypeName":"__ObjectTypeName__","PerformedBy":"__PerformedBy__","ProfileId":"__ProfileId__"}

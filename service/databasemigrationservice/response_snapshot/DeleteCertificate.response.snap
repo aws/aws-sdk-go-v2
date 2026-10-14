@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DeleteCertificate
+
+{"Certificate":{"CertificateArn":"__CertificateArn__","CertificateCreationDate":946684800,"CertificateIdentifier":"__CertificateIdentifier__","CertificateOwner":"__CertificateOwner__","CertificatePem":"__CertificatePem__","CertificateWallet":"YmxvYg==","KeyLength":1,"KmsKeyId":"__KmsKeyId__","SigningAlgorithm":"__SigningAlgorithm__","ValidFromDate":946684800,"ValidToDate":946684800}}

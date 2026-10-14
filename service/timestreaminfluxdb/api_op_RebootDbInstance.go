@@ -4,13 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type RebootDbInstanceInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RebootDbInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RebootDbInstanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RebootDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.RebootDbInstanceInput_identifier, *v.Identifier)
-	}
 }
 
 type RebootDbInstanceOutput struct {
@@ -81,6 +64,9 @@ type RebootDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// The backup configurations for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
 
@@ -111,6 +97,9 @@ type RebootDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -151,178 +140,29 @@ type RebootDbInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RebootDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RebootDbInstanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RebootDbInstanceOutput_allocatedStorage:
-			v.AllocatedStorage = new(int32)
-			return d.ReadInt32(schemas.RebootDbInstanceOutput_allocatedStorage, v.AllocatedStorage)
-		case schemas.RebootDbInstanceOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_arn, v.Arn)
-		case schemas.RebootDbInstanceOutput_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_availabilityZone, v.AvailabilityZone)
-		case schemas.RebootDbInstanceOutput_dbClusterId:
-			v.DbClusterId = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_dbClusterId, v.DbClusterId)
-		case schemas.RebootDbInstanceOutput_dbInstanceType:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_dbInstanceType, &ev); err != nil {
-				return err
-			}
-			v.DbInstanceType = types.DbInstanceType(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_dbParameterGroupIdentifier:
-			v.DbParameterGroupIdentifier = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
-		case schemas.RebootDbInstanceOutput_dbStorageType:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_dbStorageType, &ev); err != nil {
-				return err
-			}
-			v.DbStorageType = types.DbStorageType(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_deploymentType:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_deploymentType, &ev); err != nil {
-				return err
-			}
-			v.DeploymentType = types.DeploymentType(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_endpoint, v.Endpoint)
-		case schemas.RebootDbInstanceOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_id, v.Id)
-		case schemas.RebootDbInstanceOutput_influxAuthParametersSecretArn:
-			v.InfluxAuthParametersSecretArn = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
-		case schemas.RebootDbInstanceOutput_instanceMode:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_instanceMode, &ev); err != nil {
-				return err
-			}
-			v.InstanceMode = types.InstanceMode(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_instanceModes:
-			return deserializeInstanceModeList(d, schemas.RebootDbInstanceOutput_instanceModes, &v.InstanceModes)
-		case schemas.RebootDbInstanceOutput_lastMaintenanceTime:
-			v.LastMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.RebootDbInstanceOutput_lastMaintenanceTime, v.LastMaintenanceTime)
-		case schemas.RebootDbInstanceOutput_logDeliveryConfiguration:
-			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
-			return v.LogDeliveryConfiguration.Deserialize(d)
-		case schemas.RebootDbInstanceOutput_maintenanceSchedule:
-			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
-			return v.MaintenanceSchedule.Deserialize(d)
-		case schemas.RebootDbInstanceOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_name, v.Name)
-		case schemas.RebootDbInstanceOutput_networkType:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_networkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = types.NetworkType(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_nextMaintenanceTime:
-			v.NextMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.RebootDbInstanceOutput_nextMaintenanceTime, v.NextMaintenanceTime)
-		case schemas.RebootDbInstanceOutput_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.RebootDbInstanceOutput_port, v.Port)
-		case schemas.RebootDbInstanceOutput_publiclyAccessible:
-			v.PubliclyAccessible = new(bool)
-			return d.ReadBool(schemas.RebootDbInstanceOutput_publiclyAccessible, v.PubliclyAccessible)
-		case schemas.RebootDbInstanceOutput_secondaryAvailabilityZone:
-			v.SecondaryAvailabilityZone = new(string)
-			return d.ReadString(schemas.RebootDbInstanceOutput_secondaryAvailabilityZone, v.SecondaryAvailabilityZone)
-		case schemas.RebootDbInstanceOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.RebootDbInstanceOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.RebootDbInstanceOutput_vpcSecurityGroupIds:
-			return deserializeVpcSecurityGroupIdList(d, schemas.RebootDbInstanceOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		case schemas.RebootDbInstanceOutput_vpcSubnetIds:
-			return deserializeVpcSubnetIdList(d, schemas.RebootDbInstanceOutput_vpcSubnetIds, &v.VpcSubnetIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRebootDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRebootDbInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbInstance, schemas.RebootDbInstanceInput, schemas.RebootDbInstanceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRebootDbInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootDbInstance, schemas.RebootDbInstanceInput, schemas.RebootDbInstanceOutput), output: &RebootDbInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RebootDbInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRebootDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootDbInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -337,22 +177,8 @@ func (c *Client) addOperationRebootDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRebootDbInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RebootDbInstance",
-	}
 }

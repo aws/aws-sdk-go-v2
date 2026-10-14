@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeFrameworkInput struct {
 	FrameworkName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFrameworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.DescribeFrameworkInput_FrameworkName, *v.FrameworkName)
+	}
 }
 
 type DescribeFrameworkOutput struct {
@@ -93,77 +104,87 @@ type DescribeFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFrameworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeFrameworkOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkArn, *v.FrameworkArn)
+	}
+	serializeFrameworkControls(s, schemas.DescribeFrameworkOutput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkName, *v.FrameworkName)
+	}
+	if v.FrameworkStatus != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkStatus, *v.FrameworkStatus)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.DescribeFrameworkOutput_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
+func (v *DescribeFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFrameworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFrameworkOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFrameworkOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeFrameworkOutput_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_DeploymentStatus, v.DeploymentStatus)
+		case schemas.DescribeFrameworkOutput_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkArn, v.FrameworkArn)
+		case schemas.DescribeFrameworkOutput_FrameworkControls:
+			return deserializeFrameworkControls(d, schemas.DescribeFrameworkOutput_FrameworkControls, &v.FrameworkControls)
+		case schemas.DescribeFrameworkOutput_FrameworkDescription:
+			v.FrameworkDescription = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkDescription, v.FrameworkDescription)
+		case schemas.DescribeFrameworkOutput_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkName, v.FrameworkName)
+		case schemas.DescribeFrameworkOutput_FrameworkStatus:
+			v.FrameworkStatus = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_FrameworkStatus, v.FrameworkStatus)
+		case schemas.DescribeFrameworkOutput_IdempotencyToken:
+			v.IdempotencyToken = new(string)
+			return d.ReadString(schemas.DescribeFrameworkOutput_IdempotencyToken, v.IdempotencyToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFramework, schemas.DescribeFrameworkInput, schemas.DescribeFrameworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFramework, schemas.DescribeFrameworkInput, schemas.DescribeFrameworkOutput), output: &DescribeFrameworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFramework{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFramework"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFrameworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFramework(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +199,8 @@ func (c *Client) addOperationDescribeFrameworkMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFramework(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFramework",
-	}
 }

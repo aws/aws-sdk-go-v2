@@ -4,13 +4,8 @@ package qbusiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,21 +39,6 @@ type GetWebExperienceInput struct {
 	WebExperienceId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetWebExperienceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWebExperienceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetWebExperienceRequest_applicationId, *v.ApplicationId)
-	}
-	if v.WebExperienceId != nil {
-		s.WriteString(schemas.GetWebExperienceRequest_webExperienceId, *v.WebExperienceId)
-	}
 }
 
 type GetWebExperienceOutput struct {
@@ -140,141 +120,29 @@ type GetWebExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWebExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWebExperienceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWebExperienceResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_applicationId, v.ApplicationId)
-		case schemas.GetWebExperienceResponse_authenticationConfiguration:
-			return deserializeWebExperienceAuthConfiguration(d, schemas.GetWebExperienceResponse_authenticationConfiguration, &v.AuthenticationConfiguration)
-		case schemas.GetWebExperienceResponse_browserExtensionConfiguration:
-			v.BrowserExtensionConfiguration = &types.BrowserExtensionConfiguration{}
-			return v.BrowserExtensionConfiguration.Deserialize(d)
-		case schemas.GetWebExperienceResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetWebExperienceResponse_createdAt, v.CreatedAt)
-		case schemas.GetWebExperienceResponse_customizationConfiguration:
-			v.CustomizationConfiguration = &types.CustomizationConfiguration{}
-			return v.CustomizationConfiguration.Deserialize(d)
-		case schemas.GetWebExperienceResponse_defaultEndpoint:
-			v.DefaultEndpoint = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_defaultEndpoint, v.DefaultEndpoint)
-		case schemas.GetWebExperienceResponse_error:
-			v.Error = &types.ErrorDetail{}
-			return v.Error.Deserialize(d)
-		case schemas.GetWebExperienceResponse_identityProviderConfiguration:
-			return deserializeIdentityProviderConfiguration(d, schemas.GetWebExperienceResponse_identityProviderConfiguration, &v.IdentityProviderConfiguration)
-		case schemas.GetWebExperienceResponse_origins:
-			return deserializeWebExperienceOrigins(d, schemas.GetWebExperienceResponse_origins, &v.Origins)
-		case schemas.GetWebExperienceResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_roleArn, v.RoleArn)
-		case schemas.GetWebExperienceResponse_samplePromptsControlMode:
-			var ev string
-			if err := d.ReadString(schemas.GetWebExperienceResponse_samplePromptsControlMode, &ev); err != nil {
-				return err
-			}
-			v.SamplePromptsControlMode = types.WebExperienceSamplePromptsControlMode(ev)
-			return nil
-		case schemas.GetWebExperienceResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetWebExperienceResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.WebExperienceStatus(ev)
-			return nil
-		case schemas.GetWebExperienceResponse_subtitle:
-			v.Subtitle = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_subtitle, v.Subtitle)
-		case schemas.GetWebExperienceResponse_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_title, v.Title)
-		case schemas.GetWebExperienceResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetWebExperienceResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetWebExperienceResponse_webExperienceArn:
-			v.WebExperienceArn = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_webExperienceArn, v.WebExperienceArn)
-		case schemas.GetWebExperienceResponse_webExperienceId:
-			v.WebExperienceId = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_webExperienceId, v.WebExperienceId)
-		case schemas.GetWebExperienceResponse_welcomeMessage:
-			v.WelcomeMessage = new(string)
-			return d.ReadString(schemas.GetWebExperienceResponse_welcomeMessage, v.WelcomeMessage)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWebExperience{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebExperience, schemas.GetWebExperienceRequest, schemas.GetWebExperienceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWebExperience{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebExperience, schemas.GetWebExperienceRequest, schemas.GetWebExperienceResponse), output: &GetWebExperienceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWebExperience"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWebExperienceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWebExperience(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -289,22 +157,8 @@ func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWebExperience(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWebExperience",
-	}
 }

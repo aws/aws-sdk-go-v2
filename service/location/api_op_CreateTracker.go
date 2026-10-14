@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -141,81 +138,6 @@ type CreateTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTrackerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTrackerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateTrackerRequest_Description, *v.Description)
-	}
-	if v.EventBridgeEnabled != nil {
-		s.WriteBool(schemas.CreateTrackerRequest_EventBridgeEnabled, *v.EventBridgeEnabled)
-	}
-	if v.KmsKeyEnableGeospatialQueries != nil {
-		s.WriteBool(schemas.CreateTrackerRequest_KmsKeyEnableGeospatialQueries, *v.KmsKeyEnableGeospatialQueries)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateTrackerRequest_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.PositionFiltering != "" {
-		s.WriteString(schemas.CreateTrackerRequest_PositionFiltering, string(v.PositionFiltering))
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.CreateTrackerRequest_PricingPlan, string(v.PricingPlan))
-	}
-	if v.PricingPlanDataSource != nil {
-		s.WriteString(schemas.CreateTrackerRequest_PricingPlanDataSource, *v.PricingPlanDataSource)
-	}
-	serializeTagMap(s, schemas.CreateTrackerRequest_Tags, v.Tags)
-	if v.TrackerName != nil {
-		s.WriteString(schemas.CreateTrackerRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *CreateTrackerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateTrackerRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateTrackerRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateTrackerRequest_Description, v.Description)
-		case schemas.CreateTrackerRequest_EventBridgeEnabled:
-			v.EventBridgeEnabled = new(bool)
-			return d.ReadBool(schemas.CreateTrackerRequest_EventBridgeEnabled, v.EventBridgeEnabled)
-		case schemas.CreateTrackerRequest_KmsKeyEnableGeospatialQueries:
-			v.KmsKeyEnableGeospatialQueries = new(bool)
-			return d.ReadBool(schemas.CreateTrackerRequest_KmsKeyEnableGeospatialQueries, v.KmsKeyEnableGeospatialQueries)
-		case schemas.CreateTrackerRequest_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.CreateTrackerRequest_KmsKeyId, v.KmsKeyId)
-		case schemas.CreateTrackerRequest_PositionFiltering:
-			var ev string
-			if err := d.ReadString(schemas.CreateTrackerRequest_PositionFiltering, &ev); err != nil {
-				return err
-			}
-			v.PositionFiltering = types.PositionFiltering(ev)
-			return nil
-		case schemas.CreateTrackerRequest_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.CreateTrackerRequest_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		case schemas.CreateTrackerRequest_PricingPlanDataSource:
-			v.PricingPlanDataSource = new(string)
-			return d.ReadString(schemas.CreateTrackerRequest_PricingPlanDataSource, v.PricingPlanDataSource)
-		case schemas.CreateTrackerRequest_Tags:
-			return deserializeTagMap(d, schemas.CreateTrackerRequest_Tags, &v.Tags)
-		case schemas.CreateTrackerRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.CreateTrackerRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type CreateTrackerOutput struct {
 
 	// The timestamp for when the tracker resource was created in [ISO 8601] format:
@@ -245,96 +167,23 @@ type CreateTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTrackerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTrackerResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.CreateTrackerResponse_CreateTime, *v.CreateTime)
-	}
-	if v.TrackerArn != nil {
-		s.WriteString(schemas.CreateTrackerResponse_TrackerArn, *v.TrackerArn)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.CreateTrackerResponse_TrackerName, *v.TrackerName)
-	}
-}
-func (v *CreateTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateTrackerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateTrackerResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.CreateTrackerResponse_CreateTime, v.CreateTime)
-		case schemas.CreateTrackerResponse_TrackerArn:
-			v.TrackerArn = new(string)
-			return d.ReadString(schemas.CreateTrackerResponse_TrackerArn, v.TrackerArn)
-		case schemas.CreateTrackerResponse_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.CreateTrackerResponse_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTracker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTracker, schemas.CreateTrackerRequest, schemas.CreateTrackerResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTracker{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTracker, schemas.CreateTrackerRequest, schemas.CreateTrackerResponse), output: &CreateTrackerOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTracker"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -344,12 +193,6 @@ func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateTrackerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTracker(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -362,12 +205,6 @@ func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -401,12 +238,4 @@ func (m *endpointPrefix_opCreateTrackerMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opCreateTrackerMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateTrackerMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateTracker(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTracker",
-	}
 }

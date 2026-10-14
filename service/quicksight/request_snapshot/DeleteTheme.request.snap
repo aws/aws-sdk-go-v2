@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/themes/__ThemeId__?version-number=1
+
+

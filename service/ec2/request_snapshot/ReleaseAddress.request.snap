@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ReleaseAddress&AllocationId=__AllocationId__&DryRun=true&NetworkBorderGroup=__NetworkBorderGroup__&PublicIp=__PublicIp__&Version=2016-11-15

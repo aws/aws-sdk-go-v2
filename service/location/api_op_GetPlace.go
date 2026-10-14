@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,46 +101,6 @@ type GetPlaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlaceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexName != nil {
-		s.WriteString(schemas.GetPlaceRequest_IndexName, *v.IndexName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetPlaceRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.GetPlaceRequest_Language, *v.Language)
-	}
-	if v.PlaceId != nil {
-		s.WriteString(schemas.GetPlaceRequest_PlaceId, *v.PlaceId)
-	}
-}
-func (v *GetPlaceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlaceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlaceRequest_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_IndexName, v.IndexName)
-		case schemas.GetPlaceRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_Key, v.Key)
-		case schemas.GetPlaceRequest_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_Language, v.Language)
-		case schemas.GetPlaceRequest_PlaceId:
-			v.PlaceId = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_PlaceId, v.PlaceId)
-		}
-		return nil
-	})
-}
-
 type GetPlaceOutput struct {
 
 	// Details about the result, such as its address and position.
@@ -157,86 +114,23 @@ type GetPlaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlaceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlaceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.GetPlaceResponse_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetPlaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlaceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlaceResponse_Place:
-			v.Place = &types.Place{}
-			return v.Place.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse), output: &GetPlaceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -246,12 +140,6 @@ func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addOpGetPlaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -264,12 +152,6 @@ func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -303,12 +185,4 @@ func (m *endpointPrefix_opGetPlaceMiddleware) HandleFinalize(ctx context.Context
 }
 func addEndpointPrefix_opGetPlaceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetPlaceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetPlace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlace",
-	}
 }

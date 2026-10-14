@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NotificationArn":"__NotificationArn__","NotificationId":"__NotificationId__"}

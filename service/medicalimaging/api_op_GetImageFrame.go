@@ -5,10 +5,7 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -48,26 +45,6 @@ type GetImageFrameInput struct {
 	ImageSetId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetImageFrameInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImageFrameRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImageFrameInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.GetImageFrameRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.ImageFrameInformation != nil {
-		s.WriteStruct(schemas.GetImageFrameRequest_imageFrameInformation)
-		v.ImageFrameInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.GetImageFrameRequest_imageSetId, *v.ImageSetId)
-	}
 }
 
 type GetImageFrameOutput struct {
@@ -119,78 +96,23 @@ type GetImageFrameOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImageFrameOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImageFrameResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImageFrameResponse_contentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetImageFrameResponse_contentType, v.ContentType)
-		}
-		return nil
-	})
-}
-func (v *GetImageFrameOutput) GetPayloadStream() io.Reader { return v.ImageFrameBlob }
-
-var _ smithy.StreamingInput = (*GetImageFrameOutput)(nil)
-
-func (v *GetImageFrameOutput) SetPayloadStream(r io.ReadCloser) { v.ImageFrameBlob = r }
-
-var _ smithy.StreamingOutput = (*GetImageFrameOutput)(nil)
-
 func (c *Client) addOperationGetImageFrameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageFrame{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageFrame, schemas.GetImageFrameRequest, schemas.GetImageFrameResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageFrame{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageFrame, schemas.GetImageFrameRequest, schemas.GetImageFrameResponse), output: &GetImageFrameOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImageFrame"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -200,12 +122,6 @@ func (c *Client) addOperationGetImageFrameMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpGetImageFrameValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImageFrame(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -218,12 +134,6 @@ func (c *Client) addOperationGetImageFrameMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,12 +167,4 @@ func (m *endpointPrefix_opGetImageFrameMiddleware) HandleFinalize(ctx context.Co
 }
 func addEndpointPrefix_opGetImageFrameMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetImageFrameMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetImageFrame(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetImageFrame",
-	}
 }

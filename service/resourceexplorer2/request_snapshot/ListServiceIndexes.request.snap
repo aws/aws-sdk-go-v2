@@ -1,0 +1,5 @@
+POST /ListServiceIndexes
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","Regions":["__Member__","__Member__"]}

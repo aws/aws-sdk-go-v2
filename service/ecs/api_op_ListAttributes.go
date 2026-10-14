@@ -5,10 +5,10 @@ package ecs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the attributes for Amazon ECS resources within a specified target type
@@ -72,6 +72,33 @@ type ListAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ListAttributesRequest_attributeName, *v.AttributeName)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.ListAttributesRequest_attributeValue, *v.AttributeValue)
+	}
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListAttributesRequest_cluster, *v.Cluster)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttributesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributesRequest_nextToken, *v.NextToken)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.ListAttributesRequest_targetType, string(v.TargetType))
+	}
+}
+
 type ListAttributesOutput struct {
 
 	// A list of attribute objects that meet the criteria of the request.
@@ -89,77 +116,51 @@ type ListAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ListAttributesResponse_attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttributesResponse_attributes:
+			return deserializeAttributes(d, schemas.ListAttributesResponse_attributes, &v.Attributes)
+		case schemas.ListAttributesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttributesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributes, schemas.ListAttributesRequest, schemas.ListAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributes, schemas.ListAttributesRequest, schemas.ListAttributesResponse), output: &ListAttributesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAttributes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +173,6 @@ func (c *Client) addOperationListAttributesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +279,3 @@ type ListAttributesAPIClient interface {
 }
 
 var _ ListAttributesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAttributes",
-	}
-}

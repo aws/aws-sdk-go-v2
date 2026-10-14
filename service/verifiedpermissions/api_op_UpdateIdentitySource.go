@@ -4,13 +4,8 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,25 +70,6 @@ type UpdateIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIdentitySourceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentitySourceId != nil {
-		s.WriteString(schemas.UpdateIdentitySourceInput_identitySourceId, *v.IdentitySourceId)
-	}
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.UpdateIdentitySourceInput_policyStoreId, *v.PolicyStoreId)
-	}
-	if v.PrincipalEntityType != nil {
-		s.WriteString(schemas.UpdateIdentitySourceInput_principalEntityType, *v.PrincipalEntityType)
-	}
-	serializeUpdateConfiguration(s, schemas.UpdateIdentitySourceInput_updateConfiguration, v.UpdateConfiguration)
-}
-
 type UpdateIdentitySourceOutput struct {
 
 	// The date and time that the updated identity source was originally created.
@@ -122,94 +98,29 @@ type UpdateIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateIdentitySourceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateIdentitySourceOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.UpdateIdentitySourceOutput_createdDate, v.CreatedDate)
-		case schemas.UpdateIdentitySourceOutput_identitySourceId:
-			v.IdentitySourceId = new(string)
-			return d.ReadString(schemas.UpdateIdentitySourceOutput_identitySourceId, v.IdentitySourceId)
-		case schemas.UpdateIdentitySourceOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.UpdateIdentitySourceOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.UpdateIdentitySourceOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.UpdateIdentitySourceOutput_policyStoreId, v.PolicyStoreId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentitySource, schemas.UpdateIdentitySourceInput, schemas.UpdateIdentitySourceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentitySource, schemas.UpdateIdentitySourceInput, schemas.UpdateIdentitySourceOutput), output: &UpdateIdentitySourceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIdentitySource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateIdentitySourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIdentitySource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +135,8 @@ func (c *Client) addOperationUpdateIdentitySourceMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateIdentitySource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateIdentitySource",
-	}
 }

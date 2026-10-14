@@ -1,0 +1,5 @@
+POST /v2/email/list-identities
+
+Content-Type: application/json
+
+{"Filter":{"key0":"__Value__"},"NextToken":"__NextToken__","PageSize":1}

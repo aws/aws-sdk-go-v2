@@ -4,13 +4,8 @@ package codeartifact
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Gets the readme file or descriptive text for a package version.
@@ -91,36 +86,6 @@ type GetPackageVersionReadmeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionReadmeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPackageVersionReadmeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPackageVersionReadmeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_package, *v.Package)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_packageVersion, *v.PackageVersion)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.GetPackageVersionReadmeRequest_repository, *v.Repository)
-	}
-}
-
 type GetPackageVersionReadmeOutput struct {
 
 	//  The format of the package with the requested readme file.
@@ -158,104 +123,29 @@ type GetPackageVersionReadmeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionReadmeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPackageVersionReadmeResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPackageVersionReadmeResult_format:
-			var ev string
-			if err := d.ReadString(schemas.GetPackageVersionReadmeResult_format, &ev); err != nil {
-				return err
-			}
-			v.Format = types.PackageFormat(ev)
-			return nil
-		case schemas.GetPackageVersionReadmeResult_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.GetPackageVersionReadmeResult_namespace, v.Namespace)
-		case schemas.GetPackageVersionReadmeResult_package:
-			v.Package = new(string)
-			return d.ReadString(schemas.GetPackageVersionReadmeResult_package, v.Package)
-		case schemas.GetPackageVersionReadmeResult_readme:
-			v.Readme = new(string)
-			return d.ReadString(schemas.GetPackageVersionReadmeResult_readme, v.Readme)
-		case schemas.GetPackageVersionReadmeResult_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.GetPackageVersionReadmeResult_version, v.Version)
-		case schemas.GetPackageVersionReadmeResult_versionRevision:
-			v.VersionRevision = new(string)
-			return d.ReadString(schemas.GetPackageVersionReadmeResult_versionRevision, v.VersionRevision)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionReadme{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionReadme, schemas.GetPackageVersionReadmeRequest, schemas.GetPackageVersionReadmeResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPackageVersionReadme{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionReadme, schemas.GetPackageVersionReadmeRequest, schemas.GetPackageVersionReadmeResult), output: &GetPackageVersionReadmeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPackageVersionReadme"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPackageVersionReadmeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPackageVersionReadme(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,22 +160,8 @@ func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPackageVersionReadme(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPackageVersionReadme",
-	}
 }

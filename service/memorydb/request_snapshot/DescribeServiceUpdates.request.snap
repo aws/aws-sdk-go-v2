@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeServiceUpdates
+
+{"ClusterNames":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","ServiceUpdateName":"__ServiceUpdateName__","Status":["available","available"]}

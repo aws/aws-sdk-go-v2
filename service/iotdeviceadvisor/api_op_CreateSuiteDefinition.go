@@ -5,12 +5,8 @@ package iotdeviceadvisor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -52,24 +48,6 @@ type CreateSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSuiteDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSuiteDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSuiteDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSuiteDefinitionRequest_clientToken, *v.ClientToken)
-	}
-	if v.SuiteDefinitionConfiguration != nil {
-		s.WriteStruct(schemas.CreateSuiteDefinitionRequest_suiteDefinitionConfiguration)
-		v.SuiteDefinitionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateSuiteDefinitionRequest_tags, v.Tags)
-}
-
 type CreateSuiteDefinitionOutput struct {
 
 	// The timestamp of when the test suite was created.
@@ -90,82 +68,23 @@ type CreateSuiteDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSuiteDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSuiteDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSuiteDefinitionResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateSuiteDefinitionResponse_createdAt, v.CreatedAt)
-		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionArn:
-			v.SuiteDefinitionArn = new(string)
-			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionArn, v.SuiteDefinitionArn)
-		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionId:
-			v.SuiteDefinitionId = new(string)
-			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionId, v.SuiteDefinitionId)
-		case schemas.CreateSuiteDefinitionResponse_suiteDefinitionName:
-			v.SuiteDefinitionName = new(string)
-			return d.ReadString(schemas.CreateSuiteDefinitionResponse_suiteDefinitionName, v.SuiteDefinitionName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSuiteDefinition, schemas.CreateSuiteDefinitionRequest, schemas.CreateSuiteDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSuiteDefinition, schemas.CreateSuiteDefinitionRequest, schemas.CreateSuiteDefinitionResponse), output: &CreateSuiteDefinitionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSuiteDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +94,6 @@ func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateSuiteDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSuiteDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +106,6 @@ func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +145,4 @@ func (m *idempotencyToken_initializeOpCreateSuiteDefinition) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateSuiteDefinitionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSuiteDefinition{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSuiteDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSuiteDefinition",
-	}
 }

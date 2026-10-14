@@ -1,0 +1,5 @@
+POST /pindata/translate
+
+Content-Type: application/json
+
+{"EncryptedPinBlock":"__EncryptedPinBlock__","IncomingAs2805Attributes":{"SystemTraceAuditNumber":"__SystemTraceAuditNumber__","TransactionAmount":"__TransactionAmount__"},"IncomingDukptAttributes":{"DukptKeyDerivationType":"TDES_2KEY","DukptKeyVariant":"BIDIRECTIONAL","KeySerialNumber":"__KeySerialNumber__"},"IncomingKeyIdentifier":"__IncomingKeyIdentifier__","IncomingTranslationAttributes":{"IsoFormat0":{"PrimaryAccountNumber":"__PrimaryAccountNumber__"}},"IncomingWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}},"OutgoingDukptAttributes":{"DukptKeyDerivationType":"TDES_2KEY","DukptKeyVariant":"BIDIRECTIONAL","KeySerialNumber":"__KeySerialNumber__"},"OutgoingKeyIdentifier":"__OutgoingKeyIdentifier__","OutgoingTranslationAttributes":{"IsoFormat0":{"PrimaryAccountNumber":"__PrimaryAccountNumber__"}},"OutgoingWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}}}

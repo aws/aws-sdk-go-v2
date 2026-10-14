@@ -5,9 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and starts a deployment to deploy an application into a runtime
@@ -55,6 +55,46 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.CreateDeploymentRequest_applicationVersion, *v.ApplicationVersion)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_environmentId, *v.EnvironmentId)
+	}
+}
+func (v *CreateDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateDeploymentRequest_applicationId, v.ApplicationId)
+		case schemas.CreateDeploymentRequest_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.CreateDeploymentRequest_applicationVersion, v.ApplicationVersion)
+		case schemas.CreateDeploymentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateDeploymentRequest_clientToken, v.ClientToken)
+		case schemas.CreateDeploymentRequest_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentRequest_environmentId, v.EnvironmentId)
+		}
+		return nil
+	})
+}
+
 type CreateDeploymentOutput struct {
 
 	// The unique identifier of the deployment.
@@ -68,65 +108,42 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_deploymentId, *v.DeploymentId)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentResponse_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_deploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +153,6 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +165,6 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +204,4 @@ func (m *idempotencyToken_initializeOpCreateDeployment) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateDeploymentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDeployment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDeployment",
-	}
 }

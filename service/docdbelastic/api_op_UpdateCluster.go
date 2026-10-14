@@ -5,12 +5,8 @@ package docdbelastic
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies an elastic cluster. This includes updating admin-username/password,
@@ -93,92 +89,6 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdminUserPassword != nil {
-		s.WriteString(schemas.UpdateClusterInput_adminUserPassword, *v.AdminUserPassword)
-	}
-	if v.AuthType != "" {
-		s.WriteString(schemas.UpdateClusterInput_authType, string(v.AuthType))
-	}
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.UpdateClusterInput_backupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateClusterInput_clientToken, *v.ClientToken)
-	}
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.UpdateClusterInput_clusterArn, *v.ClusterArn)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.UpdateClusterInput_preferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.UpdateClusterInput_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.ShardCapacity != nil {
-		s.WriteInt32(schemas.UpdateClusterInput_shardCapacity, *v.ShardCapacity)
-	}
-	if v.ShardCount != nil {
-		s.WriteInt32(schemas.UpdateClusterInput_shardCount, *v.ShardCount)
-	}
-	if v.ShardInstanceCount != nil {
-		s.WriteInt32(schemas.UpdateClusterInput_shardInstanceCount, *v.ShardInstanceCount)
-	}
-	serializeStringList(s, schemas.UpdateClusterInput_subnetIds, v.SubnetIds)
-	serializeStringList(s, schemas.UpdateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-func (v *UpdateClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateClusterInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateClusterInput_adminUserPassword:
-			v.AdminUserPassword = new(string)
-			return d.ReadString(schemas.UpdateClusterInput_adminUserPassword, v.AdminUserPassword)
-		case schemas.UpdateClusterInput_authType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateClusterInput_authType, &ev); err != nil {
-				return err
-			}
-			v.AuthType = types.Auth(ev)
-			return nil
-		case schemas.UpdateClusterInput_backupRetentionPeriod:
-			v.BackupRetentionPeriod = new(int32)
-			return d.ReadInt32(schemas.UpdateClusterInput_backupRetentionPeriod, v.BackupRetentionPeriod)
-		case schemas.UpdateClusterInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateClusterInput_clientToken, v.ClientToken)
-		case schemas.UpdateClusterInput_clusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.UpdateClusterInput_clusterArn, v.ClusterArn)
-		case schemas.UpdateClusterInput_preferredBackupWindow:
-			v.PreferredBackupWindow = new(string)
-			return d.ReadString(schemas.UpdateClusterInput_preferredBackupWindow, v.PreferredBackupWindow)
-		case schemas.UpdateClusterInput_preferredMaintenanceWindow:
-			v.PreferredMaintenanceWindow = new(string)
-			return d.ReadString(schemas.UpdateClusterInput_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
-		case schemas.UpdateClusterInput_shardCapacity:
-			v.ShardCapacity = new(int32)
-			return d.ReadInt32(schemas.UpdateClusterInput_shardCapacity, v.ShardCapacity)
-		case schemas.UpdateClusterInput_shardCount:
-			v.ShardCount = new(int32)
-			return d.ReadInt32(schemas.UpdateClusterInput_shardCount, v.ShardCount)
-		case schemas.UpdateClusterInput_shardInstanceCount:
-			v.ShardInstanceCount = new(int32)
-			return d.ReadInt32(schemas.UpdateClusterInput_shardInstanceCount, v.ShardInstanceCount)
-		case schemas.UpdateClusterInput_subnetIds:
-			return deserializeStringList(d, schemas.UpdateClusterInput_subnetIds, &v.SubnetIds)
-		case schemas.UpdateClusterInput_vpcSecurityGroupIds:
-			return deserializeStringList(d, schemas.UpdateClusterInput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		}
-		return nil
-	})
-}
-
 type UpdateClusterOutput struct {
 
 	// Returns information about the updated elastic cluster.
@@ -192,86 +102,23 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateClusterOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cluster != nil {
-		s.WriteStruct(schemas.UpdateClusterOutput_cluster)
-		v.Cluster.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateClusterOutput_cluster:
-			v.Cluster = &types.Cluster{}
-			return v.Cluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -281,12 +128,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpUpdateClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -299,12 +140,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -344,12 +179,4 @@ func (m *idempotencyToken_initializeOpUpdateCluster) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCluster",
-	}
 }

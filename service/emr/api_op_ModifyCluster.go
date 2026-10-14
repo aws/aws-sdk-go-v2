@@ -4,10 +4,9 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the number of steps that can be executed concurrently for the cluster
@@ -46,6 +45,24 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ModifyClusterInput_ClusterId, *v.ClusterId)
+	}
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.ModifyClusterInput_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.ModifyClusterInput_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+}
+
 type ModifyClusterOutput struct {
 
 	// Reserved.
@@ -60,77 +77,54 @@ type ModifyClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.ModifyClusterOutput_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.ModifyClusterOutput_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+}
+func (v *ModifyClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterOutput_ExtendedSupport:
+			v.ExtendedSupport = new(bool)
+			return d.ReadBool(schemas.ModifyClusterOutput_ExtendedSupport, v.ExtendedSupport)
+		case schemas.ModifyClusterOutput_StepConcurrencyLevel:
+			v.StepConcurrencyLevel = new(int32)
+			return d.ReadInt32(schemas.ModifyClusterOutput_StepConcurrencyLevel, v.StepConcurrencyLevel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterInput, schemas.ModifyClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterInput, schemas.ModifyClusterOutput), output: &ModifyClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +139,8 @@ func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyCluster",
-	}
 }

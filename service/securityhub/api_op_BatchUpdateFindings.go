@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Used by Security Hub CSPM customers to update information about their
@@ -141,6 +140,43 @@ type BatchUpdateFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsRequest_Confidence, *v.Confidence)
+	}
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.BatchUpdateFindingsRequest_Criticality, *v.Criticality)
+	}
+	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsRequest_FindingIdentifiers, v.FindingIdentifiers)
+	if v.Note != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Note)
+		v.Note.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRelatedFindingList(s, schemas.BatchUpdateFindingsRequest_RelatedFindings, v.RelatedFindings)
+	if v.Severity != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Severity)
+		v.Severity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTypeList(s, schemas.BatchUpdateFindingsRequest_Types, v.Types)
+	serializeFieldMap(s, schemas.BatchUpdateFindingsRequest_UserDefinedFields, v.UserDefinedFields)
+	if v.VerificationState != "" {
+		s.WriteString(schemas.BatchUpdateFindingsRequest_VerificationState, string(v.VerificationState))
+	}
+	if v.Workflow != nil {
+		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Workflow)
+		v.Workflow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type BatchUpdateFindingsOutput struct {
 
 	// The list of findings that were updated successfully.
@@ -159,77 +195,48 @@ type BatchUpdateFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsResponse_ProcessedFindings, v.ProcessedFindings)
+	serializeBatchUpdateFindingsUnprocessedFindingsList(s, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, v.UnprocessedFindings)
+}
+func (v *BatchUpdateFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateFindingsResponse_ProcessedFindings:
+			return deserializeAwsSecurityFindingIdentifierList(d, schemas.BatchUpdateFindingsResponse_ProcessedFindings, &v.ProcessedFindings)
+		case schemas.BatchUpdateFindingsResponse_UnprocessedFindings:
+			return deserializeBatchUpdateFindingsUnprocessedFindingsList(d, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, &v.UnprocessedFindings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindings, schemas.BatchUpdateFindingsRequest, schemas.BatchUpdateFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateFindings, schemas.BatchUpdateFindingsRequest, schemas.BatchUpdateFindingsResponse), output: &BatchUpdateFindingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateFindings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateFindings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateFindingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateFindings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,22 +251,8 @@ func (c *Client) addOperationBatchUpdateFindingsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateFindings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateFindings",
-	}
 }

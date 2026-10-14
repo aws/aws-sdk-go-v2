@@ -1,0 +1,5 @@
+POST /update-app
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","assessmentSchedule":"Disabled","clearResiliencyPolicyArn":true,"description":"__Description__","eventSubscriptions":[{"eventType":"ScheduledAssessmentFailure","name":"__Name__","snsTopicArn":"__SnsTopicArn__"},{"eventType":"ScheduledAssessmentFailure","name":"__Name__","snsTopicArn":"__SnsTopicArn__"}],"permissionModel":{"crossAccountRoleArns":["__Member__","__Member__"],"invokerRoleName":"__InvokerRoleName__","type":"LegacyIAMUser"},"policyArn":"__PolicyArn__"}

@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the runs meeting the filter criteria, where a ruleset is evaluated
@@ -42,6 +42,26 @@ type ListDataQualityRulesetEvaluationRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityRulesetEvaluationRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRulesetEvaluationRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRulesetEvaluationRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDataQualityRulesetEvaluationRunsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityRulesetEvaluationRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRulesetEvaluationRunsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataQualityRulesetEvaluationRunsOutput struct {
 
 	// A pagination token, if more results are available.
@@ -57,77 +77,51 @@ type ListDataQualityRulesetEvaluationRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityRulesetEvaluationRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRulesetEvaluationRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRulesetEvaluationRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRulesetEvaluationRunsResponse_NextToken, *v.NextToken)
+	}
+	serializeDataQualityRulesetEvaluationRunList(s, schemas.ListDataQualityRulesetEvaluationRunsResponse_Runs, v.Runs)
+}
+func (v *ListDataQualityRulesetEvaluationRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityRulesetEvaluationRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityRulesetEvaluationRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityRulesetEvaluationRunsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityRulesetEvaluationRunsResponse_Runs:
+			return deserializeDataQualityRulesetEvaluationRunList(d, schemas.ListDataQualityRulesetEvaluationRunsResponse_Runs, &v.Runs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityRulesetEvaluationRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRulesetEvaluationRuns, schemas.ListDataQualityRulesetEvaluationRunsRequest, schemas.ListDataQualityRulesetEvaluationRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityRulesetEvaluationRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRulesetEvaluationRuns, schemas.ListDataQualityRulesetEvaluationRunsRequest, schemas.ListDataQualityRulesetEvaluationRunsResponse), output: &ListDataQualityRulesetEvaluationRunsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityRulesetEvaluationRuns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataQualityRulesetEvaluationRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataQualityRulesetEvaluationRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataQualityRulesetEvaluationRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +134,6 @@ func (c *Client) addOperationListDataQualityRulesetEvaluationRunsMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +237,3 @@ type ListDataQualityRulesetEvaluationRunsAPIClient interface {
 }
 
 var _ ListDataQualityRulesetEvaluationRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataQualityRulesetEvaluationRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataQualityRulesetEvaluationRuns",
-	}
-}

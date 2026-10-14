@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -63,6 +63,34 @@ type UpdateReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReportPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReportPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReportPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.UpdateReportPlanInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ReportDeliveryChannel != nil {
+		s.WriteStruct(schemas.UpdateReportPlanInput_ReportDeliveryChannel)
+		v.ReportDeliveryChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportPlanDescription != nil {
+		s.WriteString(schemas.UpdateReportPlanInput_ReportPlanDescription, *v.ReportPlanDescription)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.UpdateReportPlanInput_ReportPlanName, *v.ReportPlanName)
+	}
+	if v.ReportSetting != nil {
+		s.WriteStruct(schemas.UpdateReportPlanInput_ReportSetting)
+		v.ReportSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateReportPlanOutput struct {
 
 	// The date and time that a report plan is created, in Unix format and Coordinated
@@ -84,65 +112,54 @@ type UpdateReportPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReportPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReportPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReportPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateReportPlanOutput_CreationTime, *v.CreationTime)
+	}
+	if v.ReportPlanArn != nil {
+		s.WriteString(schemas.UpdateReportPlanOutput_ReportPlanArn, *v.ReportPlanArn)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.UpdateReportPlanOutput_ReportPlanName, *v.ReportPlanName)
+	}
+}
+func (v *UpdateReportPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReportPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReportPlanOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateReportPlanOutput_CreationTime, v.CreationTime)
+		case schemas.UpdateReportPlanOutput_ReportPlanArn:
+			v.ReportPlanArn = new(string)
+			return d.ReadString(schemas.UpdateReportPlanOutput_ReportPlanArn, v.ReportPlanArn)
+		case schemas.UpdateReportPlanOutput_ReportPlanName:
+			v.ReportPlanName = new(string)
+			return d.ReadString(schemas.UpdateReportPlanOutput_ReportPlanName, v.ReportPlanName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReportPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportPlan, schemas.UpdateReportPlanInput, schemas.UpdateReportPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportPlan, schemas.UpdateReportPlanInput, schemas.UpdateReportPlanOutput), output: &UpdateReportPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReportPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateReportPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -152,12 +169,6 @@ func (c *Client) addOperationUpdateReportPlanMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpUpdateReportPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReportPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +181,6 @@ func (c *Client) addOperationUpdateReportPlanMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -215,12 +220,4 @@ func (m *idempotencyToken_initializeOpUpdateReportPlan) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opUpdateReportPlanMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateReportPlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateReportPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateReportPlan",
-	}
 }

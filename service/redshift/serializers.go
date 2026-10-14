@@ -1628,6 +1628,76 @@ func (m *awsAwsquery_serializeOpCreateIntegration) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateQev2IdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpCreateQev2IdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateQev2IdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateQev2IdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateQev2IdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentCreateQev2IdcApplicationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateRedshiftIdcApplication struct {
 }
 
@@ -3006,6 +3076,76 @@ func (m *awsAwsquery_serializeOpDeletePartner) HandleSerialize(ctx context.Conte
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDeletePartnerInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteQev2IdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteQev2IdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteQev2IdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteQev2IdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteQev2IdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteQev2IdcApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5596,6 +5736,76 @@ func (m *awsAwsquery_serializeOpDescribePartners) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDescribePartnersInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeQev2IdcApplications struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeQev2IdcApplications) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeQev2IdcApplications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeQev2IdcApplicationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeQev2IdcApplications")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeQev2IdcApplicationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8392,6 +8602,76 @@ func (m *awsAwsquery_serializeOpModifyLakehouseConfiguration) HandleSerialize(ct
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentModifyLakehouseConfigurationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpModifyQev2IdcApplication struct {
+}
+
+func (*awsAwsquery_serializeOpModifyQev2IdcApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyQev2IdcApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyQev2IdcApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyQev2IdcApplication")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyQev2IdcApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -11515,6 +11795,35 @@ func awsAwsquery_serializeOpDocumentCreateIntegrationInput(v *CreateIntegrationI
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateQev2IdcApplicationInput(v *CreateQev2IdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.IdcDisplayName != nil {
+		objectKey := object.Key("IdcDisplayName")
+		objectKey.String(*v.IdcDisplayName)
+	}
+
+	if v.IdcInstanceArn != nil {
+		objectKey := object.Key("IdcInstanceArn")
+		objectKey.String(*v.IdcInstanceArn)
+	}
+
+	if v.Qev2IdcApplicationName != nil {
+		objectKey := object.Key("Qev2IdcApplicationName")
+		objectKey.String(*v.Qev2IdcApplicationName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentCreateRedshiftIdcApplicationInput(v *CreateRedshiftIdcApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11965,6 +12274,18 @@ func awsAwsquery_serializeOpDocumentDeletePartnerInput(v *DeletePartnerInput, va
 	if v.PartnerName != nil {
 		objectKey := object.Key("PartnerName")
 		objectKey.String(*v.PartnerName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteQev2IdcApplicationInput(v *DeleteQev2IdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Qev2IdcApplicationArn != nil {
+		objectKey := object.Key("Qev2IdcApplicationArn")
+		objectKey.String(*v.Qev2IdcApplicationArn)
 	}
 
 	return nil
@@ -12955,6 +13276,28 @@ func awsAwsquery_serializeOpDocumentDescribePartnersInput(v *DescribePartnersInp
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeQev2IdcApplicationsInput(v *DescribeQev2IdcApplicationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	if v.Qev2IdcApplicationArn != nil {
+		objectKey := object.Key("Qev2IdcApplicationArn")
+		objectKey.String(*v.Qev2IdcApplicationArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeRedshiftIdcApplicationsInput(v *DescribeRedshiftIdcApplicationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -13309,6 +13652,18 @@ func awsAwsquery_serializeOpDocumentDisableLoggingInput(v *DisableLoggingInput, 
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	if len(v.LogDestinationType) > 0 {
+		objectKey := object.Key("LogDestinationType")
+		objectKey.String(string(v.LogDestinationType))
+	}
+
+	if v.LogExports != nil {
+		objectKey := object.Key("LogExports")
+		if err := awsAwsquery_serializeDocumentLogTypeList(v.LogExports, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -13380,6 +13735,16 @@ func awsAwsquery_serializeOpDocumentEnableLoggingInput(v *EnableLoggingInput, va
 	if v.S3KeyPrefix != nil {
 		objectKey := object.Key("S3KeyPrefix")
 		objectKey.String(*v.S3KeyPrefix)
+	}
+
+	if v.S3TableGranularity != nil {
+		objectKey := object.Key("S3TableGranularity")
+		objectKey.String(*v.S3TableGranularity)
+	}
+
+	if v.S3TableKmsKeyId != nil {
+		objectKey := object.Key("S3TableKmsKeyId")
+		objectKey.String(*v.S3TableKmsKeyId)
 	}
 
 	return nil
@@ -14115,6 +14480,23 @@ func awsAwsquery_serializeOpDocumentModifyLakehouseConfigurationInput(v *ModifyL
 	if len(v.LakehouseRegistration) > 0 {
 		objectKey := object.Key("LakehouseRegistration")
 		objectKey.String(string(v.LakehouseRegistration))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyQev2IdcApplicationInput(v *ModifyQev2IdcApplicationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.IdcDisplayName != nil {
+		objectKey := object.Key("IdcDisplayName")
+		objectKey.String(*v.IdcDisplayName)
+	}
+
+	if v.Qev2IdcApplicationArn != nil {
+		objectKey := object.Key("Qev2IdcApplicationArn")
+		objectKey.String(*v.Qev2IdcApplicationArn)
 	}
 
 	return nil

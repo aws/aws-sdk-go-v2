@@ -5,10 +5,10 @@ package dsql
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,11 +44,14 @@ import (
 //
 //   - Each peer cluster: exact ARN of each specified peer cluster
 //
-// dsql:RemovePeerCluster Permission to remove peer clusters. The
-// dsql:RemovePeerCluster permission uses a wildcard ARN pattern to simplify
-// permission management during updates.
+// dsql:RemovePeerCluster Permission to remove peer clusters. When you list peer
+// clusters in multiRegionProperties.clusters , you need this permission for each
+// current peer cluster that your list omits.
 //
-// Resources: arn:aws:dsql:*:account-id:cluster/*
+// Resources:
+//
+//   - Each removed peer cluster: exact ARN of each removed peer cluster, in its
+//     own Region
 //
 // dsql:PutWitnessRegion Permission to set a witness Region.
 //
@@ -59,14 +62,12 @@ import (
 // This permission is checked both in the cluster Region and in the witness
 // Region.
 //
-//   - The witness region specified in multiRegionProperties.witnessRegion cannot
+//   - The witness Region specified in multiRegionProperties.witnessRegion cannot
 //     be the same as the cluster's Region.
 //
-//   - When updating clusters with peer relationships, permissions are checked for
-//     both adding and removing peers.
-//
-//   - The dsql:RemovePeerCluster permission uses a wildcard ARN pattern to
-//     simplify permission management during updates.
+//   - When you list peer clusters in multiRegionProperties.clusters , you need
+//     dsql:AddPeerCluster for every peer cluster in your request. You need
+//     dsql:RemovePeerCluster only for the peer clusters that the update removes.
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -105,6 +106,9 @@ type UpdateClusterInput struct {
 	// The KMS key that encrypts and protects the data on your cluster. You can
 	// specify the ARN, ID, or alias of an existing key or have Amazon Web Services
 	// create a default key for you.
+	//
+	// To switch to the key owned by Amazon Web Services, specify the reserved value
+	// AWS_OWNED_KMS_KEY .
 	KmsEncryptionKey *string
 
 	// The new multi-Region cluster configuration settings to be applied during an
@@ -112,6 +116,32 @@ type UpdateClusterInput struct {
 	MultiRegionProperties *types.MultiRegionProperties
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateClusterInput_deletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateClusterInput_identifier, *v.Identifier)
+	}
+	if v.KmsEncryptionKey != nil {
+		s.WriteString(schemas.UpdateClusterInput_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.MultiRegionProperties != nil {
+		s.WriteStruct(schemas.UpdateClusterInput_multiRegionProperties)
+		v.MultiRegionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // The details of the cluster after it has been updated.
@@ -143,65 +173,64 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateClusterOutput_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateClusterOutput_creationTime, *v.CreationTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateClusterOutput_identifier, *v.Identifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateClusterOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateClusterOutput_arn, v.Arn)
+		case schemas.UpdateClusterOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateClusterOutput_creationTime, v.CreationTime)
+		case schemas.UpdateClusterOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UpdateClusterOutput_identifier, v.Identifier)
+		case schemas.UpdateClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -211,12 +240,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpUpdateClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,12 +252,6 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,12 +291,4 @@ func (m *idempotencyToken_initializeOpUpdateCluster) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateClusterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateCluster{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCluster",
-	}
 }

@@ -4,13 +4,8 @@ package docdbelastic
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a snapshot of an elastic cluster.
@@ -48,37 +43,6 @@ type CreateClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateClusterSnapshotInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.CreateClusterSnapshotInput_clusterArn, *v.ClusterArn)
-	}
-	if v.SnapshotName != nil {
-		s.WriteString(schemas.CreateClusterSnapshotInput_snapshotName, *v.SnapshotName)
-	}
-	serializeTagMap(s, schemas.CreateClusterSnapshotInput_tags, v.Tags)
-}
-func (v *CreateClusterSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateClusterSnapshotInput_clusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.CreateClusterSnapshotInput_clusterArn, v.ClusterArn)
-		case schemas.CreateClusterSnapshotInput_snapshotName:
-			v.SnapshotName = new(string)
-			return d.ReadString(schemas.CreateClusterSnapshotInput_snapshotName, v.SnapshotName)
-		case schemas.CreateClusterSnapshotInput_tags:
-			return deserializeTagMap(d, schemas.CreateClusterSnapshotInput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateClusterSnapshotOutput struct {
 
 	// Returns information about the new elastic cluster snapshot.
@@ -92,98 +56,29 @@ type CreateClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateClusterSnapshotOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Snapshot != nil {
-		s.WriteStruct(schemas.CreateClusterSnapshotOutput_snapshot)
-		v.Snapshot.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateClusterSnapshotOutput_snapshot:
-			v.Snapshot = &types.ClusterSnapshot{}
-			return v.Snapshot.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotInput, schemas.CreateClusterSnapshotOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotInput, schemas.CreateClusterSnapshotOutput), output: &CreateClusterSnapshotOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateClusterSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateClusterSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClusterSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,22 +93,8 @@ func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateClusterSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateClusterSnapshot",
-	}
 }

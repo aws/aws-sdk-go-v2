@@ -1,0 +1,5 @@
+POST /identitypools/__IdentityPoolId__/events
+
+Content-Type: application/json
+
+{"Events":{"key0":"__Value__"}}

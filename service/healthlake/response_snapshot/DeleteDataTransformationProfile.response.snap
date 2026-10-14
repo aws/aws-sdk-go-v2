@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.DeleteDataTransformationProfile
+
+{"DeletionTime":946684800,"ProfileId":"__ProfileId__","ProfileName":"__ProfileName__"}

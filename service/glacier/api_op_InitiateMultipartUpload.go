@@ -4,11 +4,10 @@ package glacier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation initiates a multipart upload. Amazon Glacier creates a multipart
@@ -92,6 +91,27 @@ type InitiateMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateMultipartUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateMultipartUploadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateMultipartUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InitiateMultipartUploadInput_accountId, *v.AccountId)
+	}
+	if v.ArchiveDescription != nil {
+		s.WriteString(schemas.InitiateMultipartUploadInput_archiveDescription, *v.ArchiveDescription)
+	}
+	if v.PartSize != nil {
+		s.WriteString(schemas.InitiateMultipartUploadInput_partSize, *v.PartSize)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.InitiateMultipartUploadInput_vaultName, *v.VaultName)
+	}
+}
+
 // The Amazon Glacier response to your request.
 type InitiateMultipartUploadOutput struct {
 
@@ -108,77 +128,54 @@ type InitiateMultipartUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateMultipartUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateMultipartUploadOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateMultipartUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.InitiateMultipartUploadOutput_location, *v.Location)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.InitiateMultipartUploadOutput_uploadId, *v.UploadId)
+	}
+}
+func (v *InitiateMultipartUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitiateMultipartUploadOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitiateMultipartUploadOutput_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.InitiateMultipartUploadOutput_location, v.Location)
+		case schemas.InitiateMultipartUploadOutput_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.InitiateMultipartUploadOutput_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitiateMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateMultipartUpload, schemas.InitiateMultipartUploadInput, schemas.InitiateMultipartUploadOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateMultipartUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateMultipartUpload, schemas.InitiateMultipartUploadInput, schemas.InitiateMultipartUploadOutput), output: &InitiateMultipartUploadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitiateMultipartUpload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InitiateMultipartUpload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInitiateMultipartUploadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateMultipartUpload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +199,8 @@ func (c *Client) addOperationInitiateMultipartUploadMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInitiateMultipartUpload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InitiateMultipartUpload",
-	}
 }

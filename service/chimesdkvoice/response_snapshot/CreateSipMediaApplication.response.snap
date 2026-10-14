@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SipMediaApplication":{"AwsRegion":"__AwsRegion__","CreatedTimestamp":"2000-01-01T00:00:00Z","Endpoints":[{"LambdaArn":"__LambdaArn__"},{"LambdaArn":"__LambdaArn__"}],"Name":"__Name__","SipMediaApplicationArn":"__SipMediaApplicationArn__","SipMediaApplicationId":"__SipMediaApplicationId__","UpdatedTimestamp":"2000-01-01T00:00:00Z"}}

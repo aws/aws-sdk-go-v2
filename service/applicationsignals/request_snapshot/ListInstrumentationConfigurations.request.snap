@@ -1,0 +1,5 @@
+POST /list-instrumentation-configurations
+
+Content-Type: application/json
+
+{"Environment":"__Environment__","InstrumentationType":"BREAKPOINT","MaxResults":1,"NextToken":"__NextToken__","Service":"__Service__","SyncedAt":946684800}

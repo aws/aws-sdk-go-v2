@@ -1,0 +1,5 @@
+PUT /v20190125/meshes
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","meshName":"__MeshName__","spec":{"egressFilter":{"type":"ALLOW_ALL"},"serviceDiscovery":{"ipPreference":"IPv6_PREFERRED"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

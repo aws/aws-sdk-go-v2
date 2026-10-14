@@ -4,10 +4,9 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches an Identity and Access Management (Amazon Web Services IAM) policy for
@@ -44,6 +43,21 @@ type PutFirewallRuleGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFirewallRuleGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFirewallRuleGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFirewallRuleGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutFirewallRuleGroupPolicyRequest_Arn, *v.Arn)
+	}
+	if v.FirewallRuleGroupPolicy != nil {
+		s.WriteString(schemas.PutFirewallRuleGroupPolicyRequest_FirewallRuleGroupPolicy, *v.FirewallRuleGroupPolicy)
+	}
+}
+
 type PutFirewallRuleGroupPolicyOutput struct {
 
 	//
@@ -55,77 +69,47 @@ type PutFirewallRuleGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFirewallRuleGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFirewallRuleGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFirewallRuleGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnValue != false {
+		s.WriteBool(schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue, v.ReturnValue)
+	}
+}
+func (v *PutFirewallRuleGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFirewallRuleGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue:
+			return d.ReadBool(schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue, &v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFirewallRuleGroupPolicy, schemas.PutFirewallRuleGroupPolicyRequest, schemas.PutFirewallRuleGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFirewallRuleGroupPolicy, schemas.PutFirewallRuleGroupPolicyRequest, schemas.PutFirewallRuleGroupPolicyResponse), output: &PutFirewallRuleGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutFirewallRuleGroupPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutFirewallRuleGroupPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutFirewallRuleGroupPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +124,8 @@ func (c *Client) addOperationPutFirewallRuleGroupPolicyMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutFirewallRuleGroupPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutFirewallRuleGroupPolicy",
-	}
 }

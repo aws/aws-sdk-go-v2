@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Features":{"key0":{"FeatureStatus":"ENABLED","UpdatedAt":"2000-01-01T00:00:00Z"}},"HubV2Arn":"__HubV2Arn__","SubscribedAt":"__SubscribedAt__"}

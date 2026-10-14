@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.UpdateRelationship
+
+{"catalog":"__Catalog__","displayName":"__DisplayName__","identifier":"__Identifier__","programManagementAccountIdentifier":"__ProgramManagementAccountIdentifier__","requestedSupportPlan":{"resoldEnterprise":{"chargeAccountId":"__ChargeAccountId__","coverage":"ENTIRE_ORGANIZATION","tamLocation":"__TamLocation__"}},"revision":"__Revision__"}

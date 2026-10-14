@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -52,6 +52,25 @@ type UpdateFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFrameworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFrameworkControls(s, schemas.UpdateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_FrameworkName, *v.FrameworkName)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.UpdateFrameworkInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
+
 type UpdateFrameworkOutput struct {
 
 	// The date and time that a framework is created, in ISO 8601 representation. The
@@ -75,65 +94,54 @@ type UpdateFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFrameworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateFrameworkOutput_CreationTime, *v.CreationTime)
+	}
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.UpdateFrameworkOutput_FrameworkArn, *v.FrameworkArn)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.UpdateFrameworkOutput_FrameworkName, *v.FrameworkName)
+	}
+}
+func (v *UpdateFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFrameworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFrameworkOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateFrameworkOutput_CreationTime, v.CreationTime)
+		case schemas.UpdateFrameworkOutput_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.UpdateFrameworkOutput_FrameworkArn, v.FrameworkArn)
+		case schemas.UpdateFrameworkOutput_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.UpdateFrameworkOutput_FrameworkName, v.FrameworkName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFramework, schemas.UpdateFrameworkInput, schemas.UpdateFrameworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFramework, schemas.UpdateFrameworkInput, schemas.UpdateFrameworkOutput), output: &UpdateFrameworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFramework{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFramework"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +151,6 @@ func (c *Client) addOperationUpdateFrameworkMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpUpdateFrameworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFramework(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +163,6 @@ func (c *Client) addOperationUpdateFrameworkMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +202,4 @@ func (m *idempotencyToken_initializeOpUpdateFramework) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opUpdateFrameworkMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFramework{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateFramework(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFramework",
-	}
 }

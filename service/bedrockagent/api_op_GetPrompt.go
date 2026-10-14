@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,11 +39,34 @@ type GetPromptInput struct {
 	// This member is required.
 	PromptIdentifier *string
 
+	// Controls the scope of data returned. Set to METADATA_ONLY to return only
+	// resource metadata. Set to ALL_DATA or omit this field to return the full
+	// response.
+	IncludedData types.IncludedData
+
 	// The version of the prompt about which you want to retrieve information. Omit
 	// this field to return information about the working draft of the prompt.
 	PromptVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludedData != "" {
+		s.WriteString(schemas.GetPromptRequest_includedData, string(v.IncludedData))
+	}
+	if v.PromptIdentifier != nil {
+		s.WriteString(schemas.GetPromptRequest_promptIdentifier, *v.PromptIdentifier)
+	}
+	if v.PromptVersion != nil {
+		s.WriteString(schemas.GetPromptRequest_promptVersion, *v.PromptVersion)
+	}
 }
 
 type GetPromptOutput struct {
@@ -101,77 +123,99 @@ type GetPromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPromptResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetPromptResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.GetPromptResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.DefaultVariant != nil {
+		s.WriteString(schemas.GetPromptResponse_defaultVariant, *v.DefaultVariant)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPromptResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetPromptResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPromptResponse_name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPromptResponse_updatedAt, *v.UpdatedAt)
+	}
+	serializePromptVariantList(s, schemas.GetPromptResponse_variants, v.Variants)
+	if v.Version != nil {
+		s.WriteString(schemas.GetPromptResponse_version, *v.Version)
+	}
+}
+func (v *GetPromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPromptResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetPromptResponse_arn, v.Arn)
+		case schemas.GetPromptResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPromptResponse_createdAt, v.CreatedAt)
+		case schemas.GetPromptResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetPromptResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.GetPromptResponse_defaultVariant:
+			v.DefaultVariant = new(string)
+			return d.ReadString(schemas.GetPromptResponse_defaultVariant, v.DefaultVariant)
+		case schemas.GetPromptResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPromptResponse_description, v.Description)
+		case schemas.GetPromptResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetPromptResponse_id, v.Id)
+		case schemas.GetPromptResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPromptResponse_name, v.Name)
+		case schemas.GetPromptResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPromptResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetPromptResponse_variants:
+			return deserializePromptVariantList(d, schemas.GetPromptResponse_variants, &v.Variants)
+		case schemas.GetPromptResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetPromptResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrompt, schemas.GetPromptRequest, schemas.GetPromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrompt, schemas.GetPromptRequest, schemas.GetPromptResponse), output: &GetPromptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPrompt{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPrompt"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPromptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPrompt(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +230,8 @@ func (c *Client) addOperationGetPromptMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPrompt(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPrompt",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.UpdateRateBasedRule
+
+{"ChangeToken":"__ChangeToken__","RateLimit":1,"RuleId":"__RuleId__","Updates":[{"Action":"INSERT","Predicate":{"DataId":"__DataId__","Negated":true,"Type":"IPMatch"}},{"Action":"INSERT","Predicate":{"DataId":"__DataId__","Negated":true,"Type":"IPMatch"}}]}

@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the selected software bill of materials (SBOM) with a specific
@@ -58,6 +58,29 @@ type AssociateSbomWithPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSbomWithPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSbomWithPackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSbomWithPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_packageName, *v.PackageName)
+	}
+	if v.Sbom != nil {
+		s.WriteStruct(schemas.AssociateSbomWithPackageVersionRequest_sbom)
+		v.Sbom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_versionName, *v.VersionName)
+	}
+}
+
 type AssociateSbomWithPackageVersionOutput struct {
 
 	// The name of the new software package.
@@ -81,65 +104,66 @@ type AssociateSbomWithPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSbomWithPackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSbomWithPackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSbomWithPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_packageName, *v.PackageName)
+	}
+	if v.Sbom != nil {
+		s.WriteStruct(schemas.AssociateSbomWithPackageVersionResponse_sbom)
+		v.Sbom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SbomValidationStatus != "" {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus, string(v.SbomValidationStatus))
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_versionName, *v.VersionName)
+	}
+}
+func (v *AssociateSbomWithPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSbomWithPackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSbomWithPackageVersionResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_packageName, v.PackageName)
+		case schemas.AssociateSbomWithPackageVersionResponse_sbom:
+			v.Sbom = &types.Sbom{}
+			return v.Sbom.Deserialize(d)
+		case schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.SbomValidationStatus = types.SbomValidationStatus(ev)
+			return nil
+		case schemas.AssociateSbomWithPackageVersionResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_versionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSbomWithPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSbomWithPackageVersion, schemas.AssociateSbomWithPackageVersionRequest, schemas.AssociateSbomWithPackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSbomWithPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSbomWithPackageVersion, schemas.AssociateSbomWithPackageVersionRequest, schemas.AssociateSbomWithPackageVersionResponse), output: &AssociateSbomWithPackageVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSbomWithPackageVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSbomWithPackageVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -149,12 +173,6 @@ func (c *Client) addOperationAssociateSbomWithPackageVersionMiddlewares(stack *m
 		return err
 	}
 	if err = addOpAssociateSbomWithPackageVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateSbomWithPackageVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +185,6 @@ func (c *Client) addOperationAssociateSbomWithPackageVersionMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -212,12 +224,4 @@ func (m *idempotencyToken_initializeOpAssociateSbomWithPackageVersion) HandleIni
 }
 func addIdempotencyToken_opAssociateSbomWithPackageVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateSbomWithPackageVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateSbomWithPackageVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateSbomWithPackageVersion",
-	}
 }

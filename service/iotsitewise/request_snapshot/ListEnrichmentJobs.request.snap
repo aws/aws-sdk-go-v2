@@ -1,0 +1,3 @@
+GET /workspaces/__WorkspaceName__/enrichment-jobs?datasetId=__DatasetId__&endDate=2000-01-01T00%3A00%3A00Z&jobType=EVENT_DETECTION&maxResults=1&nextToken=__NextToken__&propertyAlias=__PropertyAlias__&startDate=2000-01-01T00%3A00%3A00Z&status=PENDING&timeSeriesId=__TimeSeriesId__
+
+

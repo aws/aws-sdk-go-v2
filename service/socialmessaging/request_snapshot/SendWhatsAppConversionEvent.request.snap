@@ -1,0 +1,5 @@
+POST /v1/whatsapp/waba/dataset/events
+
+Content-Type: application/json
+
+{"datasetId":"__DatasetId__","eventData":"YmxvYg==","id":"__Id__"}

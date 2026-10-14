@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list that describes one or more specified image builders, if the
@@ -44,6 +43,22 @@ type DescribeImageBuildersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageBuildersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageBuildersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageBuildersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImageBuildersRequest_MaxResults, *v.MaxResults)
+	}
+	serializeStringList(s, schemas.DescribeImageBuildersRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageBuildersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeImageBuildersOutput struct {
 
 	// Information about the image builders.
@@ -59,74 +74,51 @@ type DescribeImageBuildersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageBuildersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageBuildersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageBuildersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageBuilderList(s, schemas.DescribeImageBuildersResult_ImageBuilders, v.ImageBuilders)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageBuildersResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeImageBuildersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageBuildersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageBuildersResult_ImageBuilders:
+			return deserializeImageBuilderList(d, schemas.DescribeImageBuildersResult_ImageBuilders, &v.ImageBuilders)
+		case schemas.DescribeImageBuildersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImageBuildersResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageBuildersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageBuilders, schemas.DescribeImageBuildersRequest, schemas.DescribeImageBuildersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageBuilders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageBuilders, schemas.DescribeImageBuildersRequest, schemas.DescribeImageBuildersResult), output: &DescribeImageBuildersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageBuilders{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeImageBuilders"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImageBuilders(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +133,8 @@ func (c *Client) addOperationDescribeImageBuildersMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeImageBuilders(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeImageBuilders",
-	}
 }

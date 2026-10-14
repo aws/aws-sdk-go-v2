@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteCoipPool&CoipPoolId=__CoipPoolId__&DryRun=true&Version=2016-11-15

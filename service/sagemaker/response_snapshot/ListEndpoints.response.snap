@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListEndpoints
+
+{"Endpoints":[{"CreationTime":946684800,"EndpointArn":"__EndpointArn__","EndpointName":"__EndpointName__","EndpointStatus":"OutOfService","LastModifiedTime":946684800},{"CreationTime":946684800,"EndpointArn":"__EndpointArn__","EndpointName":"__EndpointName__","EndpointStatus":"OutOfService","LastModifiedTime":946684800}],"NextToken":"__NextToken__"}

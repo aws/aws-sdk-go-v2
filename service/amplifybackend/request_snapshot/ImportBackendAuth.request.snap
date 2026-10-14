@@ -1,0 +1,5 @@
+POST /backend/__AppId__/auth/__BackendEnvironmentName__/import
+
+Content-Type: application/json
+
+{"identityPoolId":"__IdentityPoolId__","nativeClientId":"__NativeClientId__","userPoolId":"__UserPoolId__","webClientId":"__WebClientId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.CreateImportTask
+
+{"importFilter":{"endEventTime":1,"startEventTime":1},"importRoleArn":"__ImportRoleArn__","importSourceArn":"__ImportSourceArn__"}

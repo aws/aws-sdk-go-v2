@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/privacybudgettemplates?maxResults=1&nextToken=__NextToken__
+
+

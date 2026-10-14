@@ -1,0 +1,5 @@
+POST /UpdateStage
+
+Content-Type: application/json
+
+{"arn":"__Arn__","autoParticipantRecordingConfiguration":{"hlsConfiguration":{"targetSegmentDurationSeconds":1},"mediaTypes":["AUDIO_VIDEO","AUDIO_VIDEO"],"recordingReconnectWindowSeconds":1,"recordParticipantReplicas":true,"storageConfigurationArn":"__StorageConfigurationArn__","thumbnailConfiguration":{"recordingMode":"INTERVAL","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}},"name":"__Name__"}

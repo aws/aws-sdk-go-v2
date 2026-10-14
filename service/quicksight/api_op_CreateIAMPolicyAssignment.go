@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an assignment with one specified IAM policy, identified by its Amazon
@@ -74,6 +73,31 @@ type CreateIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIAMPolicyAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIAMPolicyAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIAMPolicyAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_AssignmentName, *v.AssignmentName)
+	}
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentRequest_Identities, v.Identities)
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_Namespace, *v.Namespace)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentRequest_PolicyArn, *v.PolicyArn)
+	}
+}
+
 type CreateIAMPolicyAssignmentOutput struct {
 
 	// The ID for the assignment.
@@ -114,77 +138,84 @@ type CreateIAMPolicyAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIAMPolicyAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIAMPolicyAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIAMPolicyAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentId, *v.AssignmentId)
+	}
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentName, *v.AssignmentName)
+	}
+	if v.AssignmentStatus != "" {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentStatus, string(v.AssignmentStatus))
+	}
+	serializeIdentityMap(s, schemas.CreateIAMPolicyAssignmentResponse_Identities, v.Identities)
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_PolicyArn, *v.PolicyArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateIAMPolicyAssignmentResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateIAMPolicyAssignmentResponse_Status, v.Status)
+	}
+}
+func (v *CreateIAMPolicyAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIAMPolicyAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIAMPolicyAssignmentResponse_AssignmentId:
+			v.AssignmentId = new(string)
+			return d.ReadString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentId, v.AssignmentId)
+		case schemas.CreateIAMPolicyAssignmentResponse_AssignmentName:
+			v.AssignmentName = new(string)
+			return d.ReadString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentName, v.AssignmentName)
+		case schemas.CreateIAMPolicyAssignmentResponse_AssignmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateIAMPolicyAssignmentResponse_AssignmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AssignmentStatus = types.AssignmentStatus(ev)
+			return nil
+		case schemas.CreateIAMPolicyAssignmentResponse_Identities:
+			return deserializeIdentityMap(d, schemas.CreateIAMPolicyAssignmentResponse_Identities, &v.Identities)
+		case schemas.CreateIAMPolicyAssignmentResponse_PolicyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreateIAMPolicyAssignmentResponse_PolicyArn, v.PolicyArn)
+		case schemas.CreateIAMPolicyAssignmentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateIAMPolicyAssignmentResponse_RequestId, v.RequestId)
+		case schemas.CreateIAMPolicyAssignmentResponse_Status:
+			return d.ReadInt32(schemas.CreateIAMPolicyAssignmentResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIAMPolicyAssignment, schemas.CreateIAMPolicyAssignmentRequest, schemas.CreateIAMPolicyAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIAMPolicyAssignment, schemas.CreateIAMPolicyAssignmentRequest, schemas.CreateIAMPolicyAssignmentResponse), output: &CreateIAMPolicyAssignmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIAMPolicyAssignment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateIAMPolicyAssignmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +230,8 @@ func (c *Client) addOperationCreateIAMPolicyAssignmentMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIAMPolicyAssignment",
-	}
 }

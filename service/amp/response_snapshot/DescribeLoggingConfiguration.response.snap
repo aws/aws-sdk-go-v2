@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"loggingConfiguration":{"createdAt":946684800,"logGroupArn":"__LogGroupArn__","modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"workspace":"__Workspace__"}}

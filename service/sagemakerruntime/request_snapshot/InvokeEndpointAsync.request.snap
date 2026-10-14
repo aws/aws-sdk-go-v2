@@ -1,0 +1,14 @@
+POST /endpoints/__EndpointName__/async-invocations
+
+Content-Type: application/octet-stream
+X-Amzn-Sagemaker-Accept: __Accept__
+X-Amzn-Sagemaker-Content-Type: __ContentType__
+X-Amzn-Sagemaker-Custom-Attributes: __CustomAttributes__
+X-Amzn-Sagemaker-Filename: __Filename__
+X-Amzn-Sagemaker-Inference-Id: __InferenceId__
+X-Amzn-Sagemaker-Inputlocation: __InputLocation__
+X-Amzn-Sagemaker-Invocationtimeoutseconds: 1
+X-Amzn-Sagemaker-Requestttlseconds: 1
+X-Amzn-Sagemaker-S3outputpathextension: __S3OutputPathExtension__
+
+blob

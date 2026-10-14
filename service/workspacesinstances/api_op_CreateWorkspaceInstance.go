@@ -5,12 +5,8 @@ package workspacesinstances
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Launches a new WorkSpace Instance with specified configuration parameters,
@@ -54,29 +50,6 @@ type CreateWorkspaceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkspaceInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkspaceInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkspaceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillingConfiguration != nil {
-		s.WriteStruct(schemas.CreateWorkspaceInstanceRequest_BillingConfiguration)
-		v.BillingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateWorkspaceInstanceRequest_ClientToken, *v.ClientToken)
-	}
-	if v.ManagedInstance != nil {
-		s.WriteStruct(schemas.CreateWorkspaceInstanceRequest_ManagedInstance)
-		v.ManagedInstance.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateWorkspaceInstanceRequest_Tags, v.Tags)
-}
-
 // Returns the unique identifier for the newly created WorkSpaces Instance.
 type CreateWorkspaceInstanceOutput struct {
 
@@ -89,73 +62,26 @@ type CreateWorkspaceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkspaceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkspaceInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkspaceInstanceResponse_WorkspaceInstanceId:
-			v.WorkspaceInstanceId = new(string)
-			return d.ReadString(schemas.CreateWorkspaceInstanceResponse_WorkspaceInstanceId, v.WorkspaceInstanceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkspaceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateWorkspaceInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceInstance, schemas.CreateWorkspaceInstanceRequest, schemas.CreateWorkspaceInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateWorkspaceInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceInstance, schemas.CreateWorkspaceInstanceRequest, schemas.CreateWorkspaceInstanceResponse), output: &CreateWorkspaceInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkspaceInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +91,6 @@ func (c *Client) addOperationCreateWorkspaceInstanceMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCreateWorkspaceInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspaceInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +103,6 @@ func (c *Client) addOperationCreateWorkspaceInstanceMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -228,12 +142,4 @@ func (m *idempotencyToken_initializeOpCreateWorkspaceInstance) HandleInitialize(
 }
 func addIdempotencyToken_opCreateWorkspaceInstanceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkspaceInstance{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWorkspaceInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkspaceInstance",
-	}
 }

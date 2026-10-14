@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__?operation=disassociate-signin-delegate-groups
+
+Content-Type: application/json
+
+{"GroupNames":["__Member__","__Member__"]}

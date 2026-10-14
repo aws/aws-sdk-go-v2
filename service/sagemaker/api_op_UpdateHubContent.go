@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates SageMaker hub content (either a Model or Notebook resource).
@@ -92,6 +91,40 @@ type UpdateHubContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentDescription != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentDescription, *v.HubContentDescription)
+	}
+	if v.HubContentDisplayName != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentDisplayName, *v.HubContentDisplayName)
+	}
+	if v.HubContentMarkdown != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentMarkdown, *v.HubContentMarkdown)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentName, *v.HubContentName)
+	}
+	serializeHubContentSearchKeywordList(s, schemas.UpdateHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentType != "" {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.UpdateHubContentRequest_HubName, *v.HubName)
+	}
+	if v.SupportStatus != "" {
+		s.WriteString(schemas.UpdateHubContentRequest_SupportStatus, string(v.SupportStatus))
+	}
+}
+
 type UpdateHubContentOutput struct {
 
 	// The ARN of the private model hub that contains the updated hub content.
@@ -110,77 +143,54 @@ type UpdateHubContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.UpdateHubContentResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.UpdateHubContentResponse_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *UpdateHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHubContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHubContentResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentResponse_HubArn, v.HubArn)
+		case schemas.UpdateHubContentResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentResponse_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHubContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContent, schemas.UpdateHubContentRequest, schemas.UpdateHubContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContent, schemas.UpdateHubContentRequest, schemas.UpdateHubContentResponse), output: &UpdateHubContentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHubContent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHubContent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateHubContentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHubContent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +205,8 @@ func (c *Client) addOperationUpdateHubContentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateHubContent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateHubContent",
-	}
 }

@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +57,27 @@ type GetSessionsStatisticsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionsStatisticsAggregationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionsStatisticsAggregationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionsStatisticsAggregationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationId != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_aggregationId, *v.AggregationId)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSessionsStatisticsAggregationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type GetSessionsStatisticsAggregationOutput struct {
 
@@ -91,65 +113,61 @@ type GetSessionsStatisticsAggregationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionsStatisticsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionsStatisticsAggregationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionsStatisticsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_nextToken, *v.NextToken)
+	}
+	serializeStatisticsList(s, schemas.GetSessionsStatisticsAggregationResponse_statistics, v.Statistics)
+	if v.Status != "" {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *GetSessionsStatisticsAggregationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionsStatisticsAggregationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionsStatisticsAggregationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_nextToken, v.NextToken)
+		case schemas.GetSessionsStatisticsAggregationResponse_statistics:
+			return deserializeStatisticsList(d, schemas.GetSessionsStatisticsAggregationResponse_statistics, &v.Statistics)
+		case schemas.GetSessionsStatisticsAggregationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SessionsStatisticsAggregationStatus(ev)
+			return nil
+		case schemas.GetSessionsStatisticsAggregationResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionsStatisticsAggregation, schemas.GetSessionsStatisticsAggregationRequest, schemas.GetSessionsStatisticsAggregationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionsStatisticsAggregation, schemas.GetSessionsStatisticsAggregationRequest, schemas.GetSessionsStatisticsAggregationResponse), output: &GetSessionsStatisticsAggregationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionsStatisticsAggregation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +177,6 @@ func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *
 		return err
 	}
 	if err = addOpGetSessionsStatisticsAggregationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionsStatisticsAggregation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +189,6 @@ func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -314,11 +320,3 @@ type GetSessionsStatisticsAggregationAPIClient interface {
 }
 
 var _ GetSessionsStatisticsAggregationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetSessionsStatisticsAggregation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSessionsStatisticsAggregation",
-	}
-}

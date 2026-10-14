@@ -5,10 +5,10 @@ package proton
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List major or minor versions of an environment template with detail data.
@@ -55,6 +55,46 @@ type ListEnvironmentTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentTemplateVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.ListEnvironmentTemplateVersionsInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentTemplateVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentTemplateVersionsInput_nextToken, *v.NextToken)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ListEnvironmentTemplateVersionsInput_templateName, *v.TemplateName)
+	}
+}
+func (v *ListEnvironmentTemplateVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentTemplateVersionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentTemplateVersionsInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.ListEnvironmentTemplateVersionsInput_majorVersion, v.MajorVersion)
+		case schemas.ListEnvironmentTemplateVersionsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListEnvironmentTemplateVersionsInput_maxResults, v.MaxResults)
+		case schemas.ListEnvironmentTemplateVersionsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentTemplateVersionsInput_nextToken, v.NextToken)
+		case schemas.ListEnvironmentTemplateVersionsInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.ListEnvironmentTemplateVersionsInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type ListEnvironmentTemplateVersionsOutput struct {
 
 	// An array of major or minor versions of an environment template detail data.
@@ -73,77 +113,51 @@ type ListEnvironmentTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentTemplateVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentTemplateVersionsOutput_nextToken, *v.NextToken)
+	}
+	serializeEnvironmentTemplateVersionSummaryList(s, schemas.ListEnvironmentTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+}
+func (v *ListEnvironmentTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentTemplateVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentTemplateVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentTemplateVersionsOutput_nextToken, v.NextToken)
+		case schemas.ListEnvironmentTemplateVersionsOutput_templateVersions:
+			return deserializeEnvironmentTemplateVersionSummaryList(d, schemas.ListEnvironmentTemplateVersionsOutput_templateVersions, &v.TemplateVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentTemplateVersions, schemas.ListEnvironmentTemplateVersionsInput, schemas.ListEnvironmentTemplateVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentTemplateVersions, schemas.ListEnvironmentTemplateVersionsInput, schemas.ListEnvironmentTemplateVersionsOutput), output: &ListEnvironmentTemplateVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentTemplateVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentTemplateVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEnvironmentTemplateVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentTemplateVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +170,6 @@ func (c *Client) addOperationListEnvironmentTemplateVersionsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +274,3 @@ type ListEnvironmentTemplateVersionsAPIClient interface {
 }
 
 var _ ListEnvironmentTemplateVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnvironmentTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnvironmentTemplateVersions",
-	}
-}

@@ -4,12 +4,7 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Neptune ML data processing job for processing the graph data
@@ -110,56 +105,6 @@ type StartMLDataProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMLDataProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartMLDataProcessingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartMLDataProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigFileName != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_configFileName, *v.ConfigFileName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_id, *v.Id)
-	}
-	if v.InputDataS3Location != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_inputDataS3Location, *v.InputDataS3Location)
-	}
-	if v.ModelType != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_modelType, *v.ModelType)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-	if v.PreviousDataProcessingJobId != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_previousDataProcessingJobId, *v.PreviousDataProcessingJobId)
-	}
-	if v.ProcessedDataS3Location != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_processedDataS3Location, *v.ProcessedDataS3Location)
-	}
-	if v.ProcessingInstanceType != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_processingInstanceType, *v.ProcessingInstanceType)
-	}
-	if v.ProcessingInstanceVolumeSizeInGB != nil {
-		s.WriteInt32(schemas.StartMLDataProcessingJobInput_processingInstanceVolumeSizeInGB, *v.ProcessingInstanceVolumeSizeInGB)
-	}
-	if v.ProcessingTimeOutInSeconds != nil {
-		s.WriteInt32(schemas.StartMLDataProcessingJobInput_processingTimeOutInSeconds, *v.ProcessingTimeOutInSeconds)
-	}
-	if v.S3OutputEncryptionKMSKey != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_s3OutputEncryptionKMSKey, *v.S3OutputEncryptionKMSKey)
-	}
-	if v.SagemakerIamRoleArn != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
-	}
-	serializeStringList(s, schemas.StartMLDataProcessingJobInput_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.StartMLDataProcessingJobInput_subnets, v.Subnets)
-	if v.VolumeEncryptionKMSKey != nil {
-		s.WriteString(schemas.StartMLDataProcessingJobInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
-	}
-}
-
 type StartMLDataProcessingJobOutput struct {
 
 	// The ARN of the data processing job.
@@ -177,91 +122,29 @@ type StartMLDataProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMLDataProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartMLDataProcessingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartMLDataProcessingJobOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.StartMLDataProcessingJobOutput_arn, v.Arn)
-		case schemas.StartMLDataProcessingJobOutput_creationTimeInMillis:
-			v.CreationTimeInMillis = new(int64)
-			return d.ReadInt64(schemas.StartMLDataProcessingJobOutput_creationTimeInMillis, v.CreationTimeInMillis)
-		case schemas.StartMLDataProcessingJobOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartMLDataProcessingJobOutput_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartMLDataProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLDataProcessingJob, schemas.StartMLDataProcessingJobInput, schemas.StartMLDataProcessingJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMLDataProcessingJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLDataProcessingJob, schemas.StartMLDataProcessingJobInput, schemas.StartMLDataProcessingJobOutput), output: &StartMLDataProcessingJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMLDataProcessingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMLDataProcessingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMLDataProcessingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -276,22 +159,8 @@ func (c *Client) addOperationStartMLDataProcessingJobMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMLDataProcessingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMLDataProcessingJob",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.UpdateQuerySuggestionsConfig
+
+{"AttributeSuggestionsConfig":{"AttributeSuggestionsMode":"ACTIVE","SuggestableConfigList":[{"AttributeName":"__AttributeName__","Suggestable":true},{"AttributeName":"__AttributeName__","Suggestable":true}]},"IncludeQueriesWithoutUserInformation":true,"IndexId":"__IndexId__","MinimumNumberOfQueryingUsers":1,"MinimumQueryCount":1,"Mode":"ENABLED","QueryLogLookBackWindowInDays":1}

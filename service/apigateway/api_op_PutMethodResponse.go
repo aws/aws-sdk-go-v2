@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a MethodResponse to an existing Method resource.
@@ -71,6 +70,29 @@ type PutMethodResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMethodResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMethodResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMethodResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.PutMethodResponseRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutMethodResponseRequest_resourceId, *v.ResourceId)
+	}
+	serializeMapOfStringToString(s, schemas.PutMethodResponseRequest_responseModels, v.ResponseModels)
+	serializeMapOfStringToBoolean(s, schemas.PutMethodResponseRequest_responseParameters, v.ResponseParameters)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.PutMethodResponseRequest_restApiId, *v.RestApiId)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.PutMethodResponseRequest_statusCode, *v.StatusCode)
+	}
+}
+
 // Represents a method response of a given HTTP status code returned to the
 // client. The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.
@@ -105,77 +127,54 @@ type PutMethodResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MethodResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
+	serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	if v.StatusCode != nil {
+		s.WriteString(schemas.MethodResponse_statusCode, *v.StatusCode)
+	}
+}
+func (v *PutMethodResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MethodResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MethodResponse_responseModels:
+			return deserializeMapOfStringToString(d, schemas.MethodResponse_responseModels, &v.ResponseModels)
+		case schemas.MethodResponse_responseParameters:
+			return deserializeMapOfStringToBoolean(d, schemas.MethodResponse_responseParameters, &v.ResponseParameters)
+		case schemas.MethodResponse_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.MethodResponse_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMethodResponse, schemas.PutMethodResponseRequest, schemas.MethodResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMethodResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMethodResponse, schemas.PutMethodResponseRequest, schemas.MethodResponse), output: &PutMethodResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutMethodResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMethodResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutMethodResponseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutMethodResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +192,8 @@ func (c *Client) addOperationPutMethodResponseMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutMethodResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutMethodResponse",
-	}
 }

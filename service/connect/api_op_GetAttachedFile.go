@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a pre-signed URL for download of an approved attached file. This API
@@ -33,10 +32,11 @@ func (c *Client) GetAttachedFile(ctx context.Context, params *GetAttachedFileInp
 type GetAttachedFileInput struct {
 
 	// The resource to which the attached file is (being) uploaded to. The supported
-	// resources are [Cases]and [Email].
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
 	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
 	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
@@ -60,6 +60,27 @@ type GetAttachedFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachedFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachedFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.GetAttachedFileRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.GetAttachedFileRequest_FileId, *v.FileId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UrlExpiryInSeconds != nil {
+		s.WriteInt32(schemas.GetAttachedFileRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)
+	}
+}
+
 // Response from GetAttachedFile API.
 type GetAttachedFileOutput struct {
 
@@ -68,10 +89,12 @@ type GetAttachedFileOutput struct {
 	// This member is required.
 	FileSizeInBytes *int64
 
-	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
-	// current supported resource.
+	// The resource to which the attached file is (being) uploaded to. The supported
+	// resources are [Cases], [Email], and [Task].
 	//
-	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
+	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	AssociatedResourceArn *string
 
 	// Represents the identity that created the file.
@@ -110,77 +133,112 @@ type GetAttachedFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachedFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachedFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.GetAttachedFileResponse_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	serializeCreatedByInfo(s, schemas.GetAttachedFileResponse_CreatedBy, v.CreatedBy)
+	if v.CreationTime != nil {
+		s.WriteString(schemas.GetAttachedFileResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DownloadUrlMetadata != nil {
+		s.WriteStruct(schemas.GetAttachedFileResponse_DownloadUrlMetadata)
+		v.DownloadUrlMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileArn != nil {
+		s.WriteString(schemas.GetAttachedFileResponse_FileArn, *v.FileArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.GetAttachedFileResponse_FileId, *v.FileId)
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.GetAttachedFileResponse_FileName, *v.FileName)
+	}
+	if v.FileSizeInBytes != nil {
+		s.WriteInt64(schemas.GetAttachedFileResponse_FileSizeInBytes, *v.FileSizeInBytes)
+	}
+	if v.FileStatus != "" {
+		s.WriteString(schemas.GetAttachedFileResponse_FileStatus, string(v.FileStatus))
+	}
+	if v.FileUseCaseType != "" {
+		s.WriteString(schemas.GetAttachedFileResponse_FileUseCaseType, string(v.FileUseCaseType))
+	}
+	serializeTagMap(s, schemas.GetAttachedFileResponse_Tags, v.Tags)
+}
+func (v *GetAttachedFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttachedFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttachedFileResponse_AssociatedResourceArn:
+			v.AssociatedResourceArn = new(string)
+			return d.ReadString(schemas.GetAttachedFileResponse_AssociatedResourceArn, v.AssociatedResourceArn)
+		case schemas.GetAttachedFileResponse_CreatedBy:
+			return deserializeCreatedByInfo(d, schemas.GetAttachedFileResponse_CreatedBy, &v.CreatedBy)
+		case schemas.GetAttachedFileResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.GetAttachedFileResponse_CreationTime, v.CreationTime)
+		case schemas.GetAttachedFileResponse_DownloadUrlMetadata:
+			v.DownloadUrlMetadata = &types.DownloadUrlMetadata{}
+			return v.DownloadUrlMetadata.Deserialize(d)
+		case schemas.GetAttachedFileResponse_FileArn:
+			v.FileArn = new(string)
+			return d.ReadString(schemas.GetAttachedFileResponse_FileArn, v.FileArn)
+		case schemas.GetAttachedFileResponse_FileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.GetAttachedFileResponse_FileId, v.FileId)
+		case schemas.GetAttachedFileResponse_FileName:
+			v.FileName = new(string)
+			return d.ReadString(schemas.GetAttachedFileResponse_FileName, v.FileName)
+		case schemas.GetAttachedFileResponse_FileSizeInBytes:
+			v.FileSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GetAttachedFileResponse_FileSizeInBytes, v.FileSizeInBytes)
+		case schemas.GetAttachedFileResponse_FileStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAttachedFileResponse_FileStatus, &ev); err != nil {
+				return err
+			}
+			v.FileStatus = types.FileStatusType(ev)
+			return nil
+		case schemas.GetAttachedFileResponse_FileUseCaseType:
+			var ev string
+			if err := d.ReadString(schemas.GetAttachedFileResponse_FileUseCaseType, &ev); err != nil {
+				return err
+			}
+			v.FileUseCaseType = types.FileUseCaseType(ev)
+			return nil
+		case schemas.GetAttachedFileResponse_Tags:
+			return deserializeTagMap(d, schemas.GetAttachedFileResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttachedFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachedFile, schemas.GetAttachedFileRequest, schemas.GetAttachedFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachedFile, schemas.GetAttachedFileRequest, schemas.GetAttachedFileResponse), output: &GetAttachedFileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAttachedFile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAttachedFile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAttachedFileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAttachedFile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +253,8 @@ func (c *Client) addOperationGetAttachedFileMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAttachedFile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAttachedFile",
-	}
 }

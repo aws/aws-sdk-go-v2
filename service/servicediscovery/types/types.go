@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -79,6 +81,41 @@ type DnsConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DnsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsRecordList(s, schemas.DnsConfig_DnsRecords, v.DnsRecords)
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.DnsConfig_NamespaceId, *v.NamespaceId)
+	}
+	if v.RoutingPolicy != "" {
+		s.WriteString(schemas.DnsConfig_RoutingPolicy, string(v.RoutingPolicy))
+	}
+}
+func (v *DnsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsConfig_DnsRecords:
+			return deserializeDnsRecordList(d, schemas.DnsConfig_DnsRecords, &v.DnsRecords)
+		case schemas.DnsConfig_NamespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.DnsConfig_NamespaceId, v.NamespaceId)
+		case schemas.DnsConfig_RoutingPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DnsConfig_RoutingPolicy, &ev); err != nil {
+				return err
+			}
+			v.RoutingPolicy = RoutingPolicy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about changes to the Route 53 DNS
 // records that Cloud Map creates when you register an instance.
 type DnsConfigChange struct {
@@ -90,6 +127,25 @@ type DnsConfigChange struct {
 	DnsRecords []DnsRecord
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsConfigChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsConfigChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsConfigChange) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsRecordList(s, schemas.DnsConfigChange_DnsRecords, v.DnsRecords)
+}
+func (v *DnsConfigChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsConfigChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsConfigChange_DnsRecords:
+			return deserializeDnsRecordList(d, schemas.DnsConfigChange_DnsRecords, &v.DnsRecords)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains the ID for the Route 53 hosted zone that Cloud Map
@@ -104,6 +160,36 @@ type DnsProperties struct {
 	SOA *SOA
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.DnsProperties_HostedZoneId, *v.HostedZoneId)
+	}
+	if v.SOA != nil {
+		s.WriteStruct(schemas.DnsProperties_SOA)
+		v.SOA.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DnsProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsProperties_HostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.DnsProperties_HostedZoneId, v.HostedZoneId)
+		case schemas.DnsProperties_SOA:
+			v.SOA = &SOA{}
+			return v.SOA.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about the Route 53 DNS records that
@@ -210,6 +296,38 @@ type DnsRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DnsRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TTL != nil {
+		s.WriteInt64(schemas.DnsRecord_TTL, *v.TTL)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DnsRecord_Type, string(v.Type))
+	}
+}
+func (v *DnsRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsRecord_TTL:
+			v.TTL = new(int64)
+			return d.ReadInt64(schemas.DnsRecord_TTL, v.TTL)
+		case schemas.DnsRecord_Type:
+			var ev string
+			if err := d.ReadString(schemas.DnsRecord_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecordType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Public DNS and HTTP namespaces only. A complex type that contains settings for
 //
 // an optional health check. If you specify settings for a health check, Cloud Map
@@ -314,6 +432,44 @@ type HealthCheckConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthCheckConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthCheckConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthCheckConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckConfig_FailureThreshold, *v.FailureThreshold)
+	}
+	if v.ResourcePath != nil {
+		s.WriteString(schemas.HealthCheckConfig_ResourcePath, *v.ResourcePath)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.HealthCheckConfig_Type, string(v.Type))
+	}
+}
+func (v *HealthCheckConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthCheckConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthCheckConfig_FailureThreshold:
+			v.FailureThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckConfig_FailureThreshold, v.FailureThreshold)
+		case schemas.HealthCheckConfig_ResourcePath:
+			v.ResourcePath = new(string)
+			return d.ReadString(schemas.HealthCheckConfig_ResourcePath, v.ResourcePath)
+		case schemas.HealthCheckConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.HealthCheckConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = HealthCheckType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about an optional custom health check.
 // A custom health check, which requires that you use a third-party health checker
 // to evaluate the health of your resources, is useful in the following
@@ -377,6 +533,28 @@ type HealthCheckCustomConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthCheckCustomConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthCheckCustomConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthCheckCustomConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckCustomConfig_FailureThreshold, *v.FailureThreshold)
+	}
+}
+func (v *HealthCheckCustomConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthCheckCustomConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthCheckCustomConfig_FailureThreshold:
+			v.FailureThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckCustomConfig_FailureThreshold, v.FailureThreshold)
+		}
+		return nil
+	})
+}
+
 // In a response to a [DiscoverInstances] request, HttpInstanceSummary contains information about one
 // instance that matches the values that you specified in the request.
 //
@@ -404,6 +582,53 @@ type HttpInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpInstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpInstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.HttpInstanceSummary_Attributes, v.Attributes)
+	if v.HealthStatus != "" {
+		s.WriteString(schemas.HttpInstanceSummary_HealthStatus, string(v.HealthStatus))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.HttpInstanceSummary_InstanceId, *v.InstanceId)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.HttpInstanceSummary_NamespaceName, *v.NamespaceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.HttpInstanceSummary_ServiceName, *v.ServiceName)
+	}
+}
+func (v *HttpInstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpInstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpInstanceSummary_Attributes:
+			return deserializeAttributes(d, schemas.HttpInstanceSummary_Attributes, &v.Attributes)
+		case schemas.HttpInstanceSummary_HealthStatus:
+			var ev string
+			if err := d.ReadString(schemas.HttpInstanceSummary_HealthStatus, &ev); err != nil {
+				return err
+			}
+			v.HealthStatus = HealthStatus(ev)
+			return nil
+		case schemas.HttpInstanceSummary_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.HttpInstanceSummary_InstanceId, v.InstanceId)
+		case schemas.HttpInstanceSummary_NamespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.HttpInstanceSummary_NamespaceName, v.NamespaceName)
+		case schemas.HttpInstanceSummary_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.HttpInstanceSummary_ServiceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // Updated properties for the HTTP namespace.
 type HttpNamespaceChange struct {
 
@@ -415,6 +640,28 @@ type HttpNamespaceChange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpNamespaceChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpNamespaceChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpNamespaceChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.HttpNamespaceChange_Description, *v.Description)
+	}
+}
+func (v *HttpNamespaceChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpNamespaceChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpNamespaceChange_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.HttpNamespaceChange_Description, v.Description)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains the name of an HTTP namespace.
 type HttpProperties struct {
 
@@ -422,6 +669,28 @@ type HttpProperties struct {
 	HttpName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpName != nil {
+		s.WriteString(schemas.HttpProperties_HttpName, *v.HttpName)
+	}
+}
+func (v *HttpProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpProperties_HttpName:
+			v.HttpName = new(string)
+			return d.ReadString(schemas.HttpProperties_HttpName, v.HttpName)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about an instance that Cloud Map
@@ -551,6 +820,43 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.Instance_Attributes, v.Attributes)
+	if v.CreatedByAccount != nil {
+		s.WriteString(schemas.Instance_CreatedByAccount, *v.CreatedByAccount)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.Instance_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Instance_Id, *v.Id)
+	}
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_Attributes:
+			return deserializeAttributes(d, schemas.Instance_Attributes, &v.Attributes)
+		case schemas.Instance_CreatedByAccount:
+			v.CreatedByAccount = new(string)
+			return d.ReadString(schemas.Instance_CreatedByAccount, v.CreatedByAccount)
+		case schemas.Instance_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.Instance_CreatorRequestId, v.CreatorRequestId)
+		case schemas.Instance_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Instance_Id, v.Id)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about the instances that you
 // registered by using a specified service.
 type InstanceSummary struct {
@@ -603,6 +909,37 @@ type InstanceSummary struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.InstanceSummary_Attributes, v.Attributes)
+	if v.CreatedByAccount != nil {
+		s.WriteString(schemas.InstanceSummary_CreatedByAccount, *v.CreatedByAccount)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.InstanceSummary_Id, *v.Id)
+	}
+}
+func (v *InstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceSummary_Attributes:
+			return deserializeAttributes(d, schemas.InstanceSummary_Attributes, &v.Attributes)
+		case schemas.InstanceSummary_CreatedByAccount:
+			v.CreatedByAccount = new(string)
+			return d.ReadString(schemas.InstanceSummary_CreatedByAccount, v.CreatedByAccount)
+		case schemas.InstanceSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InstanceSummary_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about a specified namespace.
@@ -662,6 +999,88 @@ type Namespace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Namespace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Namespace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Namespace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Namespace_Arn, *v.Arn)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.Namespace_CreateDate, *v.CreateDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.Namespace_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Namespace_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Namespace_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Namespace_Name, *v.Name)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.Namespace_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.Namespace_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.ServiceCount != nil {
+		s.WriteInt32(schemas.Namespace_ServiceCount, *v.ServiceCount)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Namespace_Type, string(v.Type))
+	}
+}
+func (v *Namespace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Namespace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Namespace_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Namespace_Arn, v.Arn)
+		case schemas.Namespace_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.Namespace_CreateDate, v.CreateDate)
+		case schemas.Namespace_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.Namespace_CreatorRequestId, v.CreatorRequestId)
+		case schemas.Namespace_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Namespace_Description, v.Description)
+		case schemas.Namespace_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Namespace_Id, v.Id)
+		case schemas.Namespace_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Namespace_Name, v.Name)
+		case schemas.Namespace_Properties:
+			v.Properties = &NamespaceProperties{}
+			return v.Properties.Deserialize(d)
+		case schemas.Namespace_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.Namespace_ResourceOwner, v.ResourceOwner)
+		case schemas.Namespace_ServiceCount:
+			v.ServiceCount = new(int32)
+			return d.ReadInt32(schemas.Namespace_ServiceCount, v.ServiceCount)
+		case schemas.Namespace_Type:
+			var ev string
+			if err := d.ReadString(schemas.Namespace_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = NamespaceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type that identifies the namespaces that you want to list. You can
 // choose to list public or private namespaces.
 type NamespaceFilter struct {
@@ -715,6 +1134,45 @@ type NamespaceFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NamespaceFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NamespaceFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NamespaceFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.NamespaceFilter_Condition, string(v.Condition))
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.NamespaceFilter_Name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.NamespaceFilter_Values, v.Values)
+}
+func (v *NamespaceFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NamespaceFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NamespaceFilter_Condition:
+			var ev string
+			if err := d.ReadString(schemas.NamespaceFilter_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = FilterCondition(ev)
+			return nil
+		case schemas.NamespaceFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.NamespaceFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = NamespaceFilterName(ev)
+			return nil
+		case schemas.NamespaceFilter_Values:
+			return deserializeFilterValues(d, schemas.NamespaceFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information that's specific to the namespace type.
 type NamespaceProperties struct {
 
@@ -726,6 +1184,38 @@ type NamespaceProperties struct {
 	HttpProperties *HttpProperties
 
 	noSmithyDocumentSerde
+}
+
+func (v *NamespaceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NamespaceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NamespaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsProperties != nil {
+		s.WriteStruct(schemas.NamespaceProperties_DnsProperties)
+		v.DnsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpProperties != nil {
+		s.WriteStruct(schemas.NamespaceProperties_HttpProperties)
+		v.HttpProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NamespaceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NamespaceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NamespaceProperties_DnsProperties:
+			v.DnsProperties = &DnsProperties{}
+			return v.DnsProperties.Deserialize(d)
+		case schemas.NamespaceProperties_HttpProperties:
+			v.HttpProperties = &HttpProperties{}
+			return v.HttpProperties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about a namespace.
@@ -766,6 +1256,82 @@ type NamespaceSummary struct {
 	Type NamespaceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *NamespaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NamespaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NamespaceSummary_Arn, *v.Arn)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.NamespaceSummary_CreateDate, *v.CreateDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NamespaceSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NamespaceSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NamespaceSummary_Name, *v.Name)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.NamespaceSummary_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.NamespaceSummary_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.ServiceCount != nil {
+		s.WriteInt32(schemas.NamespaceSummary_ServiceCount, *v.ServiceCount)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.NamespaceSummary_Type, string(v.Type))
+	}
+}
+func (v *NamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NamespaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NamespaceSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NamespaceSummary_Arn, v.Arn)
+		case schemas.NamespaceSummary_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.NamespaceSummary_CreateDate, v.CreateDate)
+		case schemas.NamespaceSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NamespaceSummary_Description, v.Description)
+		case schemas.NamespaceSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NamespaceSummary_Id, v.Id)
+		case schemas.NamespaceSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NamespaceSummary_Name, v.Name)
+		case schemas.NamespaceSummary_Properties:
+			v.Properties = &NamespaceProperties{}
+			return v.Properties.Deserialize(d)
+		case schemas.NamespaceSummary_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.NamespaceSummary_ResourceOwner, v.ResourceOwner)
+		case schemas.NamespaceSummary_ServiceCount:
+			v.ServiceCount = new(int32)
+			return d.ReadInt32(schemas.NamespaceSummary_ServiceCount, v.ServiceCount)
+		case schemas.NamespaceSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.NamespaceSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = NamespaceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about a specified operation.
@@ -838,6 +1404,81 @@ type Operation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Operation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Operation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Operation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.Operation_CreateDate, *v.CreateDate)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.Operation_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.Operation_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Operation_Id, *v.Id)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.Operation_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Operation_Status, string(v.Status))
+	}
+	serializeOperationTargetsMap(s, schemas.Operation_Targets, v.Targets)
+	if v.Type != "" {
+		s.WriteString(schemas.Operation_Type, string(v.Type))
+	}
+	if v.UpdateDate != nil {
+		s.WriteTime(schemas.Operation_UpdateDate, *v.UpdateDate)
+	}
+}
+func (v *Operation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Operation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Operation_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.Operation_CreateDate, v.CreateDate)
+		case schemas.Operation_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.Operation_ErrorCode, v.ErrorCode)
+		case schemas.Operation_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.Operation_ErrorMessage, v.ErrorMessage)
+		case schemas.Operation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Operation_Id, v.Id)
+		case schemas.Operation_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.Operation_OwnerAccount, v.OwnerAccount)
+		case schemas.Operation_Status:
+			var ev string
+			if err := d.ReadString(schemas.Operation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.Operation_Targets:
+			return deserializeOperationTargetsMap(d, schemas.Operation_Targets, &v.Targets)
+		case schemas.Operation_Type:
+			var ev string
+			if err := d.ReadString(schemas.Operation_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OperationType(ev)
+			return nil
+		case schemas.Operation_UpdateDate:
+			v.UpdateDate = new(time.Time)
+			return d.ReadTime(schemas.Operation_UpdateDate, v.UpdateDate)
+		}
+		return nil
+	})
+}
+
 // A complex type that lets you select the operations that you want to list.
 type OperationFilter struct {
 
@@ -896,6 +1537,45 @@ type OperationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.OperationFilter_Condition, string(v.Condition))
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.OperationFilter_Name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.OperationFilter_Values, v.Values)
+}
+func (v *OperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationFilter_Condition:
+			var ev string
+			if err := d.ReadString(schemas.OperationFilter_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = FilterCondition(ev)
+			return nil
+		case schemas.OperationFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.OperationFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = OperationFilterName(ev)
+			return nil
+		case schemas.OperationFilter_Values:
+			return deserializeFilterValues(d, schemas.OperationFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about an operation that matches the
 // criteria that you specified in a [ListOperations]request.
 //
@@ -919,6 +1599,38 @@ type OperationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.OperationSummary_Id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OperationSummary_Status, string(v.Status))
+	}
+}
+func (v *OperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OperationSummary_Id, v.Id)
+		case schemas.OperationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Updated properties for the private DNS namespace.
 type PrivateDnsNamespaceChange struct {
 
@@ -929,6 +1641,36 @@ type PrivateDnsNamespaceChange struct {
 	Properties *PrivateDnsNamespacePropertiesChange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateDnsNamespaceChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsNamespaceChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsNamespaceChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PrivateDnsNamespaceChange_Description, *v.Description)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.PrivateDnsNamespaceChange_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrivateDnsNamespaceChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsNamespaceChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsNamespaceChange_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PrivateDnsNamespaceChange_Description, v.Description)
+		case schemas.PrivateDnsNamespaceChange_Properties:
+			v.Properties = &PrivateDnsNamespacePropertiesChange{}
+			return v.Properties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // DNS properties for the private DNS namespace.
@@ -942,6 +1684,30 @@ type PrivateDnsNamespaceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateDnsNamespaceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsNamespaceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsNamespaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsProperties != nil {
+		s.WriteStruct(schemas.PrivateDnsNamespaceProperties_DnsProperties)
+		v.DnsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrivateDnsNamespaceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsNamespaceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsNamespaceProperties_DnsProperties:
+			v.DnsProperties = &PrivateDnsPropertiesMutable{}
+			return v.DnsProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updated properties for the private DNS namespace.
 type PrivateDnsNamespacePropertiesChange struct {
 
@@ -951,6 +1717,30 @@ type PrivateDnsNamespacePropertiesChange struct {
 	DnsProperties *PrivateDnsPropertiesMutableChange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateDnsNamespacePropertiesChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsNamespacePropertiesChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsNamespacePropertiesChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsProperties != nil {
+		s.WriteStruct(schemas.PrivateDnsNamespacePropertiesChange_DnsProperties)
+		v.DnsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrivateDnsNamespacePropertiesChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsNamespacePropertiesChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsNamespacePropertiesChange_DnsProperties:
+			v.DnsProperties = &PrivateDnsPropertiesMutableChange{}
+			return v.DnsProperties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // DNS properties for the private DNS namespace.
@@ -965,6 +1755,30 @@ type PrivateDnsPropertiesMutable struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateDnsPropertiesMutable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsPropertiesMutable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsPropertiesMutable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SOA != nil {
+		s.WriteStruct(schemas.PrivateDnsPropertiesMutable_SOA)
+		v.SOA.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrivateDnsPropertiesMutable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsPropertiesMutable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsPropertiesMutable_SOA:
+			v.SOA = &SOA{}
+			return v.SOA.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updated DNS properties for the private DNS namespace.
 type PrivateDnsPropertiesMutableChange struct {
 
@@ -975,6 +1789,30 @@ type PrivateDnsPropertiesMutableChange struct {
 	SOA *SOAChange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateDnsPropertiesMutableChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsPropertiesMutableChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsPropertiesMutableChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SOA != nil {
+		s.WriteStruct(schemas.PrivateDnsPropertiesMutableChange_SOA)
+		v.SOA.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrivateDnsPropertiesMutableChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsPropertiesMutableChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsPropertiesMutableChange_SOA:
+			v.SOA = &SOAChange{}
+			return v.SOA.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Updated properties for the public DNS namespace.
@@ -989,6 +1827,36 @@ type PublicDnsNamespaceChange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublicDnsNamespaceChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDnsNamespaceChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDnsNamespaceChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PublicDnsNamespaceChange_Description, *v.Description)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.PublicDnsNamespaceChange_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicDnsNamespaceChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDnsNamespaceChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDnsNamespaceChange_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PublicDnsNamespaceChange_Description, v.Description)
+		case schemas.PublicDnsNamespaceChange_Properties:
+			v.Properties = &PublicDnsNamespacePropertiesChange{}
+			return v.Properties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // DNS properties for the public DNS namespace.
 type PublicDnsNamespaceProperties struct {
 
@@ -1000,6 +1868,30 @@ type PublicDnsNamespaceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublicDnsNamespaceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDnsNamespaceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDnsNamespaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsProperties != nil {
+		s.WriteStruct(schemas.PublicDnsNamespaceProperties_DnsProperties)
+		v.DnsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicDnsNamespaceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDnsNamespaceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDnsNamespaceProperties_DnsProperties:
+			v.DnsProperties = &PublicDnsPropertiesMutable{}
+			return v.DnsProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updated properties for the public DNS namespace.
 type PublicDnsNamespacePropertiesChange struct {
 
@@ -1009,6 +1901,30 @@ type PublicDnsNamespacePropertiesChange struct {
 	DnsProperties *PublicDnsPropertiesMutableChange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PublicDnsNamespacePropertiesChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDnsNamespacePropertiesChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDnsNamespacePropertiesChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsProperties != nil {
+		s.WriteStruct(schemas.PublicDnsNamespacePropertiesChange_DnsProperties)
+		v.DnsProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicDnsNamespacePropertiesChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDnsNamespacePropertiesChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDnsNamespacePropertiesChange_DnsProperties:
+			v.DnsProperties = &PublicDnsPropertiesMutableChange{}
+			return v.DnsProperties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // DNS properties for the public DNS namespace.
@@ -1023,6 +1939,30 @@ type PublicDnsPropertiesMutable struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublicDnsPropertiesMutable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDnsPropertiesMutable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDnsPropertiesMutable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SOA != nil {
+		s.WriteStruct(schemas.PublicDnsPropertiesMutable_SOA)
+		v.SOA.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicDnsPropertiesMutable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDnsPropertiesMutable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDnsPropertiesMutable_SOA:
+			v.SOA = &SOA{}
+			return v.SOA.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updated DNS properties for the public DNS namespace.
 type PublicDnsPropertiesMutableChange struct {
 
@@ -1033,6 +1973,30 @@ type PublicDnsPropertiesMutableChange struct {
 	SOA *SOAChange
 
 	noSmithyDocumentSerde
+}
+
+func (v *PublicDnsPropertiesMutableChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDnsPropertiesMutableChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDnsPropertiesMutableChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SOA != nil {
+		s.WriteStruct(schemas.PublicDnsPropertiesMutableChange_SOA)
+		v.SOA.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PublicDnsPropertiesMutableChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDnsPropertiesMutableChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDnsPropertiesMutableChange_SOA:
+			v.SOA = &SOAChange{}
+			return v.SOA.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about the specified service.
@@ -1123,6 +2087,116 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Service) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Service)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Service_Arn, *v.Arn)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.Service_CreateDate, *v.CreateDate)
+	}
+	if v.CreatedByAccount != nil {
+		s.WriteString(schemas.Service_CreatedByAccount, *v.CreatedByAccount)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.Service_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Service_Description, *v.Description)
+	}
+	if v.DnsConfig != nil {
+		s.WriteStruct(schemas.Service_DnsConfig)
+		v.DnsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckConfig != nil {
+		s.WriteStruct(schemas.Service_HealthCheckConfig)
+		v.HealthCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckCustomConfig != nil {
+		s.WriteStruct(schemas.Service_HealthCheckCustomConfig)
+		v.HealthCheckCustomConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Service_Id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.Service_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Service_Name, *v.Name)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.Service_NamespaceId, *v.NamespaceId)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.Service_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Service_Type, string(v.Type))
+	}
+}
+func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Service_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Service_Arn, v.Arn)
+		case schemas.Service_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.Service_CreateDate, v.CreateDate)
+		case schemas.Service_CreatedByAccount:
+			v.CreatedByAccount = new(string)
+			return d.ReadString(schemas.Service_CreatedByAccount, v.CreatedByAccount)
+		case schemas.Service_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.Service_CreatorRequestId, v.CreatorRequestId)
+		case schemas.Service_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Service_Description, v.Description)
+		case schemas.Service_DnsConfig:
+			v.DnsConfig = &DnsConfig{}
+			return v.DnsConfig.Deserialize(d)
+		case schemas.Service_HealthCheckConfig:
+			v.HealthCheckConfig = &HealthCheckConfig{}
+			return v.HealthCheckConfig.Deserialize(d)
+		case schemas.Service_HealthCheckCustomConfig:
+			v.HealthCheckCustomConfig = &HealthCheckCustomConfig{}
+			return v.HealthCheckCustomConfig.Deserialize(d)
+		case schemas.Service_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Service_Id, v.Id)
+		case schemas.Service_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.Service_InstanceCount, v.InstanceCount)
+		case schemas.Service_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Service_Name, v.Name)
+		case schemas.Service_NamespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.Service_NamespaceId, v.NamespaceId)
+		case schemas.Service_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.Service_ResourceOwner, v.ResourceOwner)
+		case schemas.Service_Type:
+			var ev string
+			if err := d.ReadString(schemas.Service_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about attributes associated with a
 // specific service.
 type ServiceAttributes struct {
@@ -1151,6 +2225,37 @@ type ServiceAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceAttributesMap(s, schemas.ServiceAttributes_Attributes, v.Attributes)
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.ServiceAttributes_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ServiceAttributes_ServiceArn, *v.ServiceArn)
+	}
+}
+func (v *ServiceAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAttributes_Attributes:
+			return deserializeServiceAttributesMap(d, schemas.ServiceAttributes_Attributes, &v.Attributes)
+		case schemas.ServiceAttributes_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.ServiceAttributes_ResourceOwner, v.ResourceOwner)
+		case schemas.ServiceAttributes_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.ServiceAttributes_ServiceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains changes to an existing service.
 type ServiceChange struct {
 
@@ -1167,6 +2272,44 @@ type ServiceChange struct {
 	HealthCheckConfig *HealthCheckConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ServiceChange_Description, *v.Description)
+	}
+	if v.DnsConfig != nil {
+		s.WriteStruct(schemas.ServiceChange_DnsConfig)
+		v.DnsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckConfig != nil {
+		s.WriteStruct(schemas.ServiceChange_HealthCheckConfig)
+		v.HealthCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceChange_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ServiceChange_Description, v.Description)
+		case schemas.ServiceChange_DnsConfig:
+			v.DnsConfig = &DnsConfigChange{}
+			return v.DnsConfig.Deserialize(d)
+		case schemas.ServiceChange_HealthCheckConfig:
+			v.HealthCheckConfig = &HealthCheckConfig{}
+			return v.HealthCheckConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A complex type that lets you specify the namespaces that you want to list
@@ -1209,6 +2352,45 @@ type ServiceFilter struct {
 	Condition FilterCondition
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.ServiceFilter_Condition, string(v.Condition))
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.ServiceFilter_Name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.ServiceFilter_Values, v.Values)
+}
+func (v *ServiceFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceFilter_Condition:
+			var ev string
+			if err := d.ReadString(schemas.ServiceFilter_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = FilterCondition(ev)
+			return nil
+		case schemas.ServiceFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ServiceFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ServiceFilterName(ev)
+			return nil
+		case schemas.ServiceFilter_Values:
+			return deserializeFilterValues(d, schemas.ServiceFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about a specified service.
@@ -1291,6 +2473,104 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceSummary_Arn, *v.Arn)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.ServiceSummary_CreateDate, *v.CreateDate)
+	}
+	if v.CreatedByAccount != nil {
+		s.WriteString(schemas.ServiceSummary_CreatedByAccount, *v.CreatedByAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ServiceSummary_Description, *v.Description)
+	}
+	if v.DnsConfig != nil {
+		s.WriteStruct(schemas.ServiceSummary_DnsConfig)
+		v.DnsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckConfig != nil {
+		s.WriteStruct(schemas.ServiceSummary_HealthCheckConfig)
+		v.HealthCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckCustomConfig != nil {
+		s.WriteStruct(schemas.ServiceSummary_HealthCheckCustomConfig)
+		v.HealthCheckCustomConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ServiceSummary_Id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.ServiceSummary_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceSummary_Name, *v.Name)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.ServiceSummary_ResourceOwner, *v.ResourceOwner)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ServiceSummary_Type, string(v.Type))
+	}
+}
+func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceSummary_Arn, v.Arn)
+		case schemas.ServiceSummary_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.ServiceSummary_CreateDate, v.CreateDate)
+		case schemas.ServiceSummary_CreatedByAccount:
+			v.CreatedByAccount = new(string)
+			return d.ReadString(schemas.ServiceSummary_CreatedByAccount, v.CreatedByAccount)
+		case schemas.ServiceSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ServiceSummary_Description, v.Description)
+		case schemas.ServiceSummary_DnsConfig:
+			v.DnsConfig = &DnsConfig{}
+			return v.DnsConfig.Deserialize(d)
+		case schemas.ServiceSummary_HealthCheckConfig:
+			v.HealthCheckConfig = &HealthCheckConfig{}
+			return v.HealthCheckConfig.Deserialize(d)
+		case schemas.ServiceSummary_HealthCheckCustomConfig:
+			v.HealthCheckCustomConfig = &HealthCheckCustomConfig{}
+			return v.HealthCheckCustomConfig.Deserialize(d)
+		case schemas.ServiceSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ServiceSummary_Id, v.Id)
+		case schemas.ServiceSummary_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.ServiceSummary_InstanceCount, v.InstanceCount)
+		case schemas.ServiceSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceSummary_Name, v.Name)
+		case schemas.ServiceSummary_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.ServiceSummary_ResourceOwner, v.ResourceOwner)
+		case schemas.ServiceSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.ServiceSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Start of Authority (SOA) properties for a public or private DNS namespace.
 type SOA struct {
 
@@ -1300,6 +2580,28 @@ type SOA struct {
 	TTL *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SOA) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SOA)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SOA) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TTL != nil {
+		s.WriteInt64(schemas.SOA_TTL, *v.TTL)
+	}
+}
+func (v *SOA) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SOA, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SOA_TTL:
+			v.TTL = new(int64)
+			return d.ReadInt64(schemas.SOA_TTL, v.TTL)
+		}
+		return nil
+	})
 }
 
 // Updated Start of Authority (SOA) properties for a public or private DNS
@@ -1312,6 +2614,28 @@ type SOAChange struct {
 	TTL *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SOAChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SOAChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SOAChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TTL != nil {
+		s.WriteInt64(schemas.SOAChange_TTL, *v.TTL)
+	}
+}
+func (v *SOAChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SOAChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SOAChange_TTL:
+			v.TTL = new(int64)
+			return d.ReadInt64(schemas.SOAChange_TTL, v.TTL)
+		}
+		return nil
+	})
 }
 
 // A custom key-value pair that's associated with a resource.
@@ -1329,6 +2653,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

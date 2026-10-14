@@ -4,13 +4,8 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches one or more LF-tags to an existing resource.
@@ -50,24 +45,6 @@ type AddLFTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddLFTagsToResourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddLFTagsToResourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddLFTagsToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.AddLFTagsToResourceRequest_CatalogId, *v.CatalogId)
-	}
-	serializeLFTagsList(s, schemas.AddLFTagsToResourceRequest_LFTags, v.LFTags)
-	if v.Resource != nil {
-		s.WriteStruct(schemas.AddLFTagsToResourceRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AddLFTagsToResourceOutput struct {
 
 	// A list of failures to tag the resource.
@@ -79,84 +56,29 @@ type AddLFTagsToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddLFTagsToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddLFTagsToResourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddLFTagsToResourceResponse_Failures:
-			return deserializeLFTagErrors(d, schemas.AddLFTagsToResourceResponse_Failures, &v.Failures)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddLFTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLFTagsToResource, schemas.AddLFTagsToResourceRequest, schemas.AddLFTagsToResourceResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddLFTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLFTagsToResource, schemas.AddLFTagsToResourceRequest, schemas.AddLFTagsToResourceResponse), output: &AddLFTagsToResourceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddLFTagsToResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddLFTagsToResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddLFTagsToResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +93,8 @@ func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddLFTagsToResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddLFTagsToResource",
-	}
 }

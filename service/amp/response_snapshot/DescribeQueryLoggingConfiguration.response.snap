@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"queryLoggingConfiguration":{"createdAt":946684800,"destinations":[{"cloudWatchLogs":{"logGroupArn":"__LogGroupArn__"},"filters":{"qspThreshold":1}},{"cloudWatchLogs":{"logGroupArn":"__LogGroupArn__"},"filters":{"qspThreshold":1}}],"modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"workspace":"__Workspace__"}}

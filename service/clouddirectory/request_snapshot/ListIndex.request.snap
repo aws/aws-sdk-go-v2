@@ -1,0 +1,7 @@
+POST /amazonclouddirectory/2017-01-11/index/targets
+
+Content-Type: application/json
+X-Amz-Consistency-Level: SERIALIZABLE
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"IndexReference":{"Selector":"__Selector__"},"MaxResults":1,"NextToken":"__NextToken__","RangesOnIndexedValues":[{"AttributeKey":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Range":{"EndMode":"FIRST","EndValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"StartMode":"FIRST","StartValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}},{"AttributeKey":{"FacetName":"__FacetName__","Name":"__Name__","SchemaArn":"__SchemaArn__"},"Range":{"EndMode":"FIRST","EndValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"StartMode":"FIRST","StartValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}}]}

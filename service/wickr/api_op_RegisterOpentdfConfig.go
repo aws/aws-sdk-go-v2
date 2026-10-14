@@ -4,12 +4,7 @@ package wickr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers and saves OpenTDF configuration for a Wickr network, enabling
@@ -64,33 +59,6 @@ type RegisterOpentdfConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOpentdfConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterOpentdfConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterOpentdfConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientId != nil {
-		s.WriteString(schemas.RegisterOpentdfConfigRequest_clientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.RegisterOpentdfConfigRequest_clientSecret, *v.ClientSecret)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.RegisterOpentdfConfigRequest_domain, *v.Domain)
-	}
-	if v.DryRun != nil {
-		s.WriteBool(schemas.RegisterOpentdfConfigRequest_dryRun, *v.DryRun)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.RegisterOpentdfConfigRequest_networkId, *v.NetworkId)
-	}
-	if v.Provider != nil {
-		s.WriteString(schemas.RegisterOpentdfConfigRequest_provider, *v.Provider)
-	}
-}
-
 type RegisterOpentdfConfigOutput struct {
 
 	// The OIDC client ID used for authenticating with the OpenTDF provider.
@@ -119,94 +87,29 @@ type RegisterOpentdfConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOpentdfConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterOpentdfConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterOpentdfConfigResponse_clientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.RegisterOpentdfConfigResponse_clientId, v.ClientId)
-		case schemas.RegisterOpentdfConfigResponse_clientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.RegisterOpentdfConfigResponse_clientSecret, v.ClientSecret)
-		case schemas.RegisterOpentdfConfigResponse_domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.RegisterOpentdfConfigResponse_domain, v.Domain)
-		case schemas.RegisterOpentdfConfigResponse_provider:
-			v.Provider = new(string)
-			return d.ReadString(schemas.RegisterOpentdfConfigResponse_provider, v.Provider)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterOpentdfConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterOpentdfConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOpentdfConfig, schemas.RegisterOpentdfConfigRequest, schemas.RegisterOpentdfConfigResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterOpentdfConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOpentdfConfig, schemas.RegisterOpentdfConfigRequest, schemas.RegisterOpentdfConfigResponse), output: &RegisterOpentdfConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterOpentdfConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterOpentdfConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterOpentdfConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +124,8 @@ func (c *Client) addOperationRegisterOpentdfConfigMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterOpentdfConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterOpentdfConfig",
-	}
 }

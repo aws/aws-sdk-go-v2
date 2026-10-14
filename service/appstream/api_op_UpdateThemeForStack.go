@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates custom branding that customizes the appearance of the streaming
@@ -67,6 +66,39 @@ type UpdateThemeForStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemeForStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThemeAttributes(s, schemas.UpdateThemeForStackRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.FaviconS3Location != nil {
+		s.WriteStruct(schemas.UpdateThemeForStackRequest_FaviconS3Location)
+		v.FaviconS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeThemeFooterLinks(s, schemas.UpdateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	if v.OrganizationLogoS3Location != nil {
+		s.WriteStruct(schemas.UpdateThemeForStackRequest_OrganizationLogoS3Location)
+		v.OrganizationLogoS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.UpdateThemeForStackRequest_StackName, *v.StackName)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateThemeForStackRequest_State, string(v.State))
+	}
+	if v.ThemeStyling != "" {
+		s.WriteString(schemas.UpdateThemeForStackRequest_ThemeStyling, string(v.ThemeStyling))
+	}
+	if v.TitleText != nil {
+		s.WriteString(schemas.UpdateThemeForStackRequest_TitleText, *v.TitleText)
+	}
+}
+
 type UpdateThemeForStackOutput struct {
 
 	//  The theme object that contains the metadata of the custom branding.
@@ -78,77 +110,53 @@ type UpdateThemeForStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThemeForStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThemeForStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThemeForStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Theme != nil {
+		s.WriteStruct(schemas.UpdateThemeForStackResult_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateThemeForStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThemeForStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateThemeForStackResult_Theme:
+			v.Theme = &types.Theme{}
+			return v.Theme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThemeForStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThemeForStack, schemas.UpdateThemeForStackRequest, schemas.UpdateThemeForStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThemeForStack, schemas.UpdateThemeForStackRequest, schemas.UpdateThemeForStackResult), output: &UpdateThemeForStackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateThemeForStack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateThemeForStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateThemeForStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateThemeForStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +171,8 @@ func (c *Client) addOperationUpdateThemeForStackMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateThemeForStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateThemeForStack",
-	}
 }

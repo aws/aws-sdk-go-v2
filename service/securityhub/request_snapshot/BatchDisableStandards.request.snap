@@ -1,0 +1,5 @@
+POST /standards/deregister
+
+Content-Type: application/json
+
+{"StandardsSubscriptionArns":["__Member__","__Member__"]}

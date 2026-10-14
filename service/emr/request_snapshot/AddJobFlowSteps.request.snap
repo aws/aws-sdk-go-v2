@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.AddJobFlowSteps
+
+{"ExecutionRoleArn":"__ExecutionRoleArn__","JobFlowId":"__JobFlowId__","Steps":[{"ActionOnFailure":"TERMINATE_JOB_FLOW","HadoopJarStep":{"Args":["__Member__","__Member__"],"Jar":"__Jar__","MainClass":"__MainClass__","Properties":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"Name":"__Name__","StepMonitoringConfiguration":{"S3MonitoringConfiguration":{"EncryptionKeyArn":"__EncryptionKeyArn__","LogUri":"__LogUri__"}}},{"ActionOnFailure":"TERMINATE_JOB_FLOW","HadoopJarStep":{"Args":["__Member__","__Member__"],"Jar":"__Jar__","MainClass":"__MainClass__","Properties":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"Name":"__Name__","StepMonitoringConfiguration":{"S3MonitoringConfiguration":{"EncryptionKeyArn":"__EncryptionKeyArn__","LogUri":"__LogUri__"}}}]}

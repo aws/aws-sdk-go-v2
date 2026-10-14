@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.DescribeLocationFsxLustre
+
+{"CreationTime":946684800,"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__","SecurityGroupArns":["__Member__","__Member__"]}

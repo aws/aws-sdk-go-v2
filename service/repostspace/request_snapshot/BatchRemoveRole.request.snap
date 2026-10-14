@@ -1,0 +1,5 @@
+PATCH /spaces/__SpaceId__/roles
+
+Content-Type: application/json
+
+{"accessorIds":["__Member__","__Member__"],"role":"EXPERT"}

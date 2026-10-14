@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.StartPipelineExecution
+
+{"ClientRequestToken":"__ClientRequestToken__","MlflowExperimentName":"__MlflowExperimentName__","ParallelismConfiguration":{"MaxParallelExecutionSteps":1},"PipelineExecutionDescription":"__PipelineExecutionDescription__","PipelineExecutionDisplayName":"__PipelineExecutionDisplayName__","PipelineName":"__PipelineName__","PipelineParameters":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"PipelineVersionId":1,"SelectiveExecutionConfig":{"SelectedSteps":[{"StepName":"__StepName__"},{"StepName":"__StepName__"}],"SourcePipelineExecutionArn":"__SourcePipelineExecutionArn__"}}

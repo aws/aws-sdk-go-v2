@@ -4,13 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves GroupId in an identity store.
@@ -46,6 +43,10 @@ type GetGroupIdInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
@@ -64,20 +65,14 @@ func (v *GetGroupIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.GetGroupIdRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
 }
-func (v *GetGroupIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGroupIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGroupIdRequest_AlternateIdentifier:
-			return deserializeAlternateIdentifier(d, schemas.GetGroupIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
-		case schemas.GetGroupIdRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetGroupIdRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 
 type GetGroupIdOutput struct {
+
+	// The Amazon Resource Name (ARN) of the group in the identity store. For example,
+	// arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
+	//
+	// This member is required.
+	GroupArn *string
 
 	// The identifier for a group in the identity store.
 	//
@@ -102,6 +97,9 @@ func (v *GetGroupIdOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGroupIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.GetGroupIdResponse_GroupArn, *v.GroupArn)
+	}
 	if v.GroupId != nil {
 		s.WriteString(schemas.GetGroupIdResponse_GroupId, *v.GroupId)
 	}
@@ -112,6 +110,9 @@ func (v *GetGroupIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetGroupIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGroupIdResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetGroupIdResponse_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.GetGroupIdResponse_GroupArn, v.GroupArn)
 		case schemas.GetGroupIdResponse_GroupId:
 			v.GroupId = new(string)
 			return d.ReadString(schemas.GetGroupIdResponse_GroupId, v.GroupId)
@@ -123,74 +124,26 @@ func (v *GetGroupIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationGetGroupIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupId, schemas.GetGroupIdRequest, schemas.GetGroupIdResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupId, schemas.GetGroupIdRequest, schemas.GetGroupIdResponse), output: &GetGroupIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGroupId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGroupIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,22 +158,8 @@ func (c *Client) addOperationGetGroupIdMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGroupId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGroupId",
-	}
 }

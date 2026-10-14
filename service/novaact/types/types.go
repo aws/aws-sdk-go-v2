@@ -4,9 +4,6 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/novaact/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/novaact/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,34 +20,6 @@ type ActError struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ActError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ActError_message, *v.Message)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ActError_type, *v.Type)
-	}
-}
-func (v *ActError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActError_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ActError_message, v.Message)
-		case schemas.ActError_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ActError_type, v.Type)
-		}
-		return nil
-	})
 }
 
 // Summary information about an act, including its status and execution timing.
@@ -90,70 +59,6 @@ type ActSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ActSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActId != nil {
-		s.WriteString(schemas.ActSummary_actId, *v.ActId)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.ActSummary_endedAt, *v.EndedAt)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.ActSummary_sessionId, *v.SessionId)
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.ActSummary_startedAt, *v.StartedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ActSummary_status, string(v.Status))
-	}
-	if v.TraceLocation != nil {
-		s.WriteStruct(schemas.ActSummary_traceLocation)
-		v.TraceLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.ActSummary_workflowRunId, *v.WorkflowRunId)
-	}
-}
-func (v *ActSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActSummary_actId:
-			v.ActId = new(string)
-			return d.ReadString(schemas.ActSummary_actId, v.ActId)
-		case schemas.ActSummary_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.ActSummary_endedAt, v.EndedAt)
-		case schemas.ActSummary_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.ActSummary_sessionId, v.SessionId)
-		case schemas.ActSummary_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.ActSummary_startedAt, v.StartedAt)
-		case schemas.ActSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.ActSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ActStatus(ev)
-			return nil
-		case schemas.ActSummary_traceLocation:
-			v.TraceLocation = &TraceLocation{}
-			return v.TraceLocation.Deserialize(d)
-		case schemas.ActSummary_workflowRunId:
-			v.WorkflowRunId = new(string)
-			return d.ReadString(schemas.ActSummary_workflowRunId, v.WorkflowRunId)
-		}
-		return nil
-	})
-}
-
 // A request for the client to execute a specific tool with given parameters.
 type Call struct {
 
@@ -177,44 +82,6 @@ type Call struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Call) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Call)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Call) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CallId != nil {
-		s.WriteString(schemas.Call_callId, *v.CallId)
-	}
-	s.WriteDocument(schemas.Call_input, &smithydocument.Opaque{Value: v.Input})
-	if v.Name != nil {
-		s.WriteString(schemas.Call_name, *v.Name)
-	}
-}
-func (v *Call) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Call, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Call_callId:
-			v.CallId = new(string)
-			return d.ReadString(schemas.Call_callId, v.CallId)
-		case schemas.Call_input:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.Call_input, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Input = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.Call_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Call_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // The result returned from executing a tool call.
 type CallResult struct {
 
@@ -228,31 +95,6 @@ type CallResult struct {
 	CallId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CallResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CallResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CallResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CallId != nil {
-		s.WriteString(schemas.CallResult_callId, *v.CallId)
-	}
-	serializeCallResultContents(s, schemas.CallResult_content, v.Content)
-}
-func (v *CallResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CallResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CallResult_callId:
-			v.CallId = new(string)
-			return d.ReadString(schemas.CallResult_callId, v.CallId)
-		case schemas.CallResult_content:
-			return deserializeCallResultContents(d, schemas.CallResult_content, &v.Content)
-		}
-		return nil
-	})
 }
 
 // Content returned from a tool call execution.
@@ -272,12 +114,6 @@ type CallResultContentMemberText struct {
 }
 
 func (*CallResultContentMemberText) isCallResultContent() {}
-func (v *CallResultContentMemberText) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.CallResultContent_text, v.Value)
-}
-func (v *CallResultContentMemberText) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.CallResultContent_text, &v.Value)
-}
 
 // Information about the client making API requests, used for compatibility
 // checking.
@@ -292,34 +128,6 @@ type ClientInfo struct {
 	SdkVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClientInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClientInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClientInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompatibilityVersion != nil {
-		s.WriteInt32(schemas.ClientInfo_compatibilityVersion, *v.CompatibilityVersion)
-	}
-	if v.SdkVersion != nil {
-		s.WriteString(schemas.ClientInfo_sdkVersion, *v.SdkVersion)
-	}
-}
-func (v *ClientInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClientInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClientInfo_compatibilityVersion:
-			v.CompatibilityVersion = new(int32)
-			return d.ReadInt32(schemas.ClientInfo_compatibilityVersion, v.CompatibilityVersion)
-		case schemas.ClientInfo_sdkVersion:
-			v.SdkVersion = new(string)
-			return d.ReadString(schemas.ClientInfo_sdkVersion, v.SdkVersion)
-		}
-		return nil
-	})
 }
 
 // Information about client compatibility and supported model versions.
@@ -341,37 +149,6 @@ type CompatibilityInformation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CompatibilityInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CompatibilityInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CompatibilityInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientCompatibilityVersion != nil {
-		s.WriteInt32(schemas.CompatibilityInformation_clientCompatibilityVersion, *v.ClientCompatibilityVersion)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.CompatibilityInformation_message, *v.Message)
-	}
-	serializeModelIdList(s, schemas.CompatibilityInformation_supportedModelIds, v.SupportedModelIds)
-}
-func (v *CompatibilityInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CompatibilityInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CompatibilityInformation_clientCompatibilityVersion:
-			v.ClientCompatibilityVersion = new(int32)
-			return d.ReadInt32(schemas.CompatibilityInformation_clientCompatibilityVersion, v.ClientCompatibilityVersion)
-		case schemas.CompatibilityInformation_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CompatibilityInformation_message, v.Message)
-		case schemas.CompatibilityInformation_supportedModelIds:
-			return deserializeModelIdList(d, schemas.CompatibilityInformation_supportedModelIds, &v.SupportedModelIds)
-		}
-		return nil
-	})
-}
-
 // An alias that provides a stable reference to a model version.
 type ModelAlias struct {
 
@@ -391,40 +168,6 @@ type ModelAlias struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModelAlias) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModelAlias)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModelAlias) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AliasName != nil {
-		s.WriteString(schemas.ModelAlias_aliasName, *v.AliasName)
-	}
-	if v.LatestModelId != nil {
-		s.WriteString(schemas.ModelAlias_latestModelId, *v.LatestModelId)
-	}
-	if v.ResolvedModelId != nil {
-		s.WriteString(schemas.ModelAlias_resolvedModelId, *v.ResolvedModelId)
-	}
-}
-func (v *ModelAlias) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModelAlias, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModelAlias_aliasName:
-			v.AliasName = new(string)
-			return d.ReadString(schemas.ModelAlias_aliasName, v.AliasName)
-		case schemas.ModelAlias_latestModelId:
-			v.LatestModelId = new(string)
-			return d.ReadString(schemas.ModelAlias_latestModelId, v.LatestModelId)
-		case schemas.ModelAlias_resolvedModelId:
-			v.ResolvedModelId = new(string)
-			return d.ReadString(schemas.ModelAlias_resolvedModelId, v.ResolvedModelId)
-		}
-		return nil
-	})
-}
-
 // Lifecycle information for an AI model.
 type ModelLifecycle struct {
 
@@ -434,32 +177,6 @@ type ModelLifecycle struct {
 	Status ModelStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ModelLifecycle) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModelLifecycle)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModelLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.ModelLifecycle_status, string(v.Status))
-	}
-}
-func (v *ModelLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModelLifecycle, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModelLifecycle_status:
-			var ev string
-			if err := d.ReadString(schemas.ModelLifecycle_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ModelStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary information about an available AI model.
@@ -483,42 +200,6 @@ type ModelSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModelSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModelSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MinimumCompatibilityVersion != nil {
-		s.WriteInt32(schemas.ModelSummary_minimumCompatibilityVersion, *v.MinimumCompatibilityVersion)
-	}
-	if v.ModelId != nil {
-		s.WriteString(schemas.ModelSummary_modelId, *v.ModelId)
-	}
-	if v.ModelLifecycle != nil {
-		s.WriteStruct(schemas.ModelSummary_modelLifecycle)
-		v.ModelLifecycle.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModelSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModelSummary_minimumCompatibilityVersion:
-			v.MinimumCompatibilityVersion = new(int32)
-			return d.ReadInt32(schemas.ModelSummary_minimumCompatibilityVersion, v.MinimumCompatibilityVersion)
-		case schemas.ModelSummary_modelId:
-			v.ModelId = new(string)
-			return d.ReadString(schemas.ModelSummary_modelId, v.ModelId)
-		case schemas.ModelSummary_modelLifecycle:
-			v.ModelLifecycle = &ModelLifecycle{}
-			return v.ModelLifecycle.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summary information about a session within a workflow run.
 type SessionSummary struct {
 
@@ -528,28 +209,6 @@ type SessionSummary struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SessionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SessionId != nil {
-		s.WriteString(schemas.SessionSummary_sessionId, *v.SessionId)
-	}
-}
-func (v *SessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionSummary_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.SessionSummary_sessionId, v.SessionId)
-		}
-		return nil
-	})
 }
 
 // The schema definition for tool input parameters.
@@ -569,19 +228,6 @@ type ToolInputSchemaMemberJson struct {
 }
 
 func (*ToolInputSchemaMemberJson) isToolInputSchema() {}
-func (v *ToolInputSchemaMemberJson) Serialize(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.ToolInputSchema_json, &smithydocument.Opaque{Value: v.Value})
-}
-func (v *ToolInputSchemaMemberJson) Deserialize(d smithy.ShapeDeserializer) error {
-	var dv smithydocument.Value
-	if err := d.ReadDocument(schemas.ToolInputSchema_json, &dv); err != nil {
-		return err
-	}
-	if ov, ok := dv.(smithydocument.Opaque); ok {
-		v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
-	}
-	return nil
-}
 
 // Specification for a tool that acts can invoke, including its name, description,
 // and input schema.
@@ -605,37 +251,6 @@ type ToolSpec struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ToolSpec) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ToolSpec)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ToolSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.ToolSpec_description, *v.Description)
-	}
-	serializeToolInputSchema(s, schemas.ToolSpec_inputSchema, v.InputSchema)
-	if v.Name != nil {
-		s.WriteString(schemas.ToolSpec_name, *v.Name)
-	}
-}
-func (v *ToolSpec) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ToolSpec, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ToolSpec_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ToolSpec_description, v.Description)
-		case schemas.ToolSpec_inputSchema:
-			return deserializeToolInputSchema(d, schemas.ToolSpec_inputSchema, &v.InputSchema)
-		case schemas.ToolSpec_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ToolSpec_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Information about where trace data is stored for debugging and monitoring.
 type TraceLocation struct {
 
@@ -652,38 +267,6 @@ type TraceLocation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TraceLocation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TraceLocation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TraceLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Location != nil {
-		s.WriteString(schemas.TraceLocation_location, *v.Location)
-	}
-	if v.LocationType != "" {
-		s.WriteString(schemas.TraceLocation_locationType, string(v.LocationType))
-	}
-}
-func (v *TraceLocation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TraceLocation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TraceLocation_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.TraceLocation_location, v.Location)
-		case schemas.TraceLocation_locationType:
-			var ev string
-			if err := d.ReadString(schemas.TraceLocation_locationType, &ev); err != nil {
-				return err
-			}
-			v.LocationType = TraceLocationType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Information about a field that failed validation.
 type ValidationExceptionField struct {
 
@@ -698,34 +281,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Summary information about a workflow definition, used in list operations.
@@ -754,50 +309,6 @@ type WorkflowDefinitionSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WorkflowDefinitionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkflowDefinitionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkflowDefinitionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.WorkflowDefinitionSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.WorkflowDefinitionSummary_status, string(v.Status))
-	}
-	if v.WorkflowDefinitionArn != nil {
-		s.WriteString(schemas.WorkflowDefinitionSummary_workflowDefinitionArn, *v.WorkflowDefinitionArn)
-	}
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.WorkflowDefinitionSummary_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-}
-func (v *WorkflowDefinitionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkflowDefinitionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkflowDefinitionSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.WorkflowDefinitionSummary_createdAt, v.CreatedAt)
-		case schemas.WorkflowDefinitionSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.WorkflowDefinitionSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = WorkflowDefinitionStatus(ev)
-			return nil
-		case schemas.WorkflowDefinitionSummary_workflowDefinitionArn:
-			v.WorkflowDefinitionArn = new(string)
-			return d.ReadString(schemas.WorkflowDefinitionSummary_workflowDefinitionArn, v.WorkflowDefinitionArn)
-		case schemas.WorkflowDefinitionSummary_workflowDefinitionName:
-			v.WorkflowDefinitionName = new(string)
-			return d.ReadString(schemas.WorkflowDefinitionSummary_workflowDefinitionName, v.WorkflowDefinitionName)
-		}
-		return nil
-	})
-}
-
 // Configuration settings for exporting workflow execution data and logs to Amazon
 // Simple Storage Service (Amazon S3).
 type WorkflowExportConfig struct {
@@ -813,34 +324,6 @@ type WorkflowExportConfig struct {
 	S3KeyPrefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkflowExportConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkflowExportConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkflowExportConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3BucketName != nil {
-		s.WriteString(schemas.WorkflowExportConfig_s3BucketName, *v.S3BucketName)
-	}
-	if v.S3KeyPrefix != nil {
-		s.WriteString(schemas.WorkflowExportConfig_s3KeyPrefix, *v.S3KeyPrefix)
-	}
-}
-func (v *WorkflowExportConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkflowExportConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkflowExportConfig_s3BucketName:
-			v.S3BucketName = new(string)
-			return d.ReadString(schemas.WorkflowExportConfig_s3BucketName, v.S3BucketName)
-		case schemas.WorkflowExportConfig_s3KeyPrefix:
-			v.S3KeyPrefix = new(string)
-			return d.ReadString(schemas.WorkflowExportConfig_s3KeyPrefix, v.S3KeyPrefix)
-		}
-		return nil
-	})
 }
 
 // Summary information about a workflow run, including execution status and timing.
@@ -873,64 +356,6 @@ type WorkflowRunSummary struct {
 	TraceLocation *TraceLocation
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkflowRunSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkflowRunSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkflowRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.WorkflowRunSummary_endedAt, *v.EndedAt)
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.WorkflowRunSummary_startedAt, *v.StartedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.WorkflowRunSummary_status, string(v.Status))
-	}
-	if v.TraceLocation != nil {
-		s.WriteStruct(schemas.WorkflowRunSummary_traceLocation)
-		v.TraceLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WorkflowRunArn != nil {
-		s.WriteString(schemas.WorkflowRunSummary_workflowRunArn, *v.WorkflowRunArn)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.WorkflowRunSummary_workflowRunId, *v.WorkflowRunId)
-	}
-}
-func (v *WorkflowRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkflowRunSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkflowRunSummary_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.WorkflowRunSummary_endedAt, v.EndedAt)
-		case schemas.WorkflowRunSummary_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.WorkflowRunSummary_startedAt, v.StartedAt)
-		case schemas.WorkflowRunSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.WorkflowRunSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = WorkflowRunStatus(ev)
-			return nil
-		case schemas.WorkflowRunSummary_traceLocation:
-			v.TraceLocation = &TraceLocation{}
-			return v.TraceLocation.Deserialize(d)
-		case schemas.WorkflowRunSummary_workflowRunArn:
-			v.WorkflowRunArn = new(string)
-			return d.ReadString(schemas.WorkflowRunSummary_workflowRunArn, v.WorkflowRunArn)
-		case schemas.WorkflowRunSummary_workflowRunId:
-			v.WorkflowRunId = new(string)
-			return d.ReadString(schemas.WorkflowRunSummary_workflowRunId, v.WorkflowRunId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,10 +5,10 @@ package emr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all Amazon EMR Studios associated with the Amazon Web
@@ -37,6 +37,18 @@ type ListStudiosInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudiosInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudiosInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudiosInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudiosInput_Marker, *v.Marker)
+	}
+}
+
 type ListStudiosOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -51,74 +63,48 @@ type ListStudiosOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudiosOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudiosOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudiosOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudiosOutput_Marker, *v.Marker)
+	}
+	serializeStudioSummaryList(s, schemas.ListStudiosOutput_Studios, v.Studios)
+}
+func (v *ListStudiosOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStudiosOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStudiosOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListStudiosOutput_Marker, v.Marker)
+		case schemas.ListStudiosOutput_Studios:
+			return deserializeStudioSummaryList(d, schemas.ListStudiosOutput_Studios, &v.Studios)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudios, schemas.ListStudiosInput, schemas.ListStudiosOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStudios{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudios, schemas.ListStudiosInput, schemas.ListStudiosOutput), output: &ListStudiosOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStudios{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStudios"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudios(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,12 +117,6 @@ func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,11 +204,3 @@ type ListStudiosAPIClient interface {
 }
 
 var _ ListStudiosAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStudios(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStudios",
-	}
-}

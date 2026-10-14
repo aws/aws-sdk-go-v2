@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeApplicableIndividualAssessments
+
+{"Marker":"__Marker__","MaxRecords":1,"MigrationType":"full-load","ReplicationConfigArn":"__ReplicationConfigArn__","ReplicationInstanceArn":"__ReplicationInstanceArn__","ReplicationTaskArn":"__ReplicationTaskArn__","SourceEngineName":"__SourceEngineName__","TargetEngineName":"__TargetEngineName__"}

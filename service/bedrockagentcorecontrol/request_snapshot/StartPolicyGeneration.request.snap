@@ -1,0 +1,5 @@
+POST /policy-engines/__PolicyEngineId__/policy-generations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","content":{"rawText":"__ContentMemberRawText__"},"name":"__Name__","resource":{"arn":"__ResourceMemberArn__"}}

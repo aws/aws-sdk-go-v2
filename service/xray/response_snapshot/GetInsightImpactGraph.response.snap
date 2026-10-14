@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EndTime":946684800,"InsightId":"__InsightId__","NextToken":"__NextToken__","ServiceGraphEndTime":946684800,"ServiceGraphStartTime":946684800,"Services":[{"AccountId":"__AccountId__","Edges":[{"ReferenceId":1},{"ReferenceId":1}],"Name":"__Name__","Names":["__Member__","__Member__"],"ReferenceId":1,"Type":"__Type__"},{"AccountId":"__AccountId__","Edges":[{"ReferenceId":1},{"ReferenceId":1}],"Name":"__Name__","Names":["__Member__","__Member__"],"ReferenceId":1,"Type":"__Type__"}],"StartTime":946684800}

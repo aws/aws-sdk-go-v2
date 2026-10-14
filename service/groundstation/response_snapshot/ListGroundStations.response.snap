@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"groundStationList":[{"groundStationId":"__GroundStationId__","groundStationName":"__GroundStationName__","region":"__Region__"},{"groundStationId":"__GroundStationId__","groundStationName":"__GroundStationName__","region":"__Region__"}],"nextToken":"__NextToken__"}

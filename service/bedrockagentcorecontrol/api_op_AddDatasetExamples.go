@@ -5,28 +5,15 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Adds examples to the dataset's DRAFT.
+//	Adds examples to the dataset's DRAFT. All examples are validated against the
 //
-// Validation: All examples are validated against the dataset's schemaType before
-// any writes occur. If any example fails validation, the entire batch is rejected
-// with ValidationException — no examples are written (all-or-nothing semantics).
-//
-// Asynchronous: Operates in-place on DRAFT. No version bump occurs. Use
-// CreateDatasetVersion to publish DRAFT as a new numbered version.
-//
-// State guard: Returns ConflictException (DATASET_NOT_READY) if the dataset
-// status is not in {DRAFT, ACTIVE}.
-//
-// Request size limit: Max 5 MB total request body. Max 1000 examples per call.
+// dataset's schema type before any writes occur. If any example fails validation,
+// the entire batch is rejected (all-or-nothing semantics).
 func (c *Client) AddDatasetExamples(ctx context.Context, params *AddDatasetExamplesInput, optFns ...func(*Options)) (*AddDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &AddDatasetExamplesInput{}
@@ -49,8 +36,8 @@ type AddDatasetExamplesInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Source of examples to add. Provide either inline examples or an S3 URI pointing
-	// to a JSONL file.
+	//  Source of examples to add. Provide either inline examples or an S3 URI
+	// pointing to a JSONL file.
 	//
 	// This member is required.
 	Source types.DataSourceType
@@ -64,22 +51,6 @@ type AddDatasetExamplesInput struct {
 	ClientToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AddDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddDatasetExamplesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.AddDatasetExamplesRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.AddDatasetExamplesRequest_datasetId, *v.DatasetId)
-	}
-	serializeDataSourceType(s, schemas.AddDatasetExamplesRequest_source, v.Source)
 }
 
 type AddDatasetExamplesOutput struct {
@@ -99,7 +70,7 @@ type AddDatasetExamplesOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// IDs of all added examples (auto-generated UUIDs).
+	//  IDs of all added examples (auto-generated UUIDs).
 	//
 	// This member is required.
 	ExampleIds []string
@@ -120,91 +91,23 @@ type AddDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddDatasetExamplesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddDatasetExamplesResponse_addedCount:
-			v.AddedCount = new(int64)
-			return d.ReadInt64(schemas.AddDatasetExamplesResponse_addedCount, v.AddedCount)
-		case schemas.AddDatasetExamplesResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.AddDatasetExamplesResponse_datasetArn, v.DatasetArn)
-		case schemas.AddDatasetExamplesResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.AddDatasetExamplesResponse_datasetId, v.DatasetId)
-		case schemas.AddDatasetExamplesResponse_exampleIds:
-			return deserializeExampleIdList(d, schemas.AddDatasetExamplesResponse_exampleIds, &v.ExampleIds)
-		case schemas.AddDatasetExamplesResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.AddDatasetExamplesResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.AddDatasetExamplesResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AddDatasetExamplesResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDatasetExamples, schemas.AddDatasetExamplesRequest, schemas.AddDatasetExamplesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDatasetExamples, schemas.AddDatasetExamplesRequest, schemas.AddDatasetExamplesResponse), output: &AddDatasetExamplesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddDatasetExamples"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -214,12 +117,6 @@ func (c *Client) addOperationAddDatasetExamplesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpAddDatasetExamplesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddDatasetExamples(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -232,12 +129,6 @@ func (c *Client) addOperationAddDatasetExamplesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,12 +168,4 @@ func (m *idempotencyToken_initializeOpAddDatasetExamples) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opAddDatasetExamplesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAddDatasetExamples{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAddDatasetExamples(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddDatasetExamples",
-	}
 }

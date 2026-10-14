@@ -1,0 +1,3 @@
+GET /v1/mergedApis/__MergedApiIdentifier__/sourceApiAssociations/__AssociationId__/types?format=SDL&maxResults=1&nextToken=__NextToken__
+
+

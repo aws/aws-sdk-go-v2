@@ -1,0 +1,663 @@
+{
+  "Item": {
+    "id": {
+      "S": "recipe-003"
+    },
+    "name": {
+      "S": "Grandma's Ultimate Lasagna Bolognese"
+    },
+    "description": {
+      "S": "A traditional Italian lasagna recipe passed down through generations, featuring layers of rich meat sauce, creamy bechamel, fresh pasta sheets, and a blend of artisanal cheeses. This complex dish requires multiple preparation stages and represents the pinnacle of Italian comfort food craftsmanship. Recipe adapted from 'La Cucina della Nonna' by Maria Benedetti, 1952."
+    },
+    "cook_time": {
+      "N": "180"
+    },
+    "prep_time": {
+      "N": "120"
+    },
+    "total_time": {
+      "N": "300"
+    },
+    "difficulty": {
+      "S": "Expert"
+    },
+    "cuisine": {
+      "S": "Italian"
+    },
+    "servings": {
+      "N": "12"
+    },
+    "rating": {
+      "N": "4.9"
+    },
+    "cost_estimate": {
+      "N": "45.50"
+    },
+    "active": {
+      "BOOL": true
+    },
+    "featured": {
+      "BOOL": true
+    },
+    "tags": {
+      "SS": ["traditional", "comfort-food", "family-recipe", "holiday", "meat-sauce", "layered", "baked", "italian-classic", "time-intensive", "special-occasion"]
+    },
+    "categories": {
+      "SS": ["main-course", "pasta", "casserole", "italian"]
+    },
+    "allergens": {
+      "SS": ["dairy", "gluten", "eggs"]
+    },
+    "dietary_restrictions": {
+      "SS": ["not-vegetarian", "not-vegan", "contains-alcohol"]
+    },
+    "ingredients": {
+      "L": [
+        {
+          "M": {
+            "category": {
+              "S": "pasta"
+            },
+            "items": {
+              "L": [
+                {
+                  "M": {
+                    "item": {
+                      "S": "fresh lasagna sheets"
+                    },
+                    "amount": {
+                      "S": "2 lbs"
+                    },
+                    "notes": {
+                      "S": "preferably homemade"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "M": {
+            "category": {
+              "S": "meat_sauce"
+            },
+            "items": {
+              "L": [
+                {
+                  "M": {
+                    "item": {
+                      "S": "ground beef"
+                    },
+                    "amount": {
+                      "S": "1.5 lbs"
+                    },
+                    "quality": {
+                      "S": "80/20 blend"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "ground pork"
+                    },
+                    "amount": {
+                      "S": "0.5 lbs"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "pancetta"
+                    },
+                    "amount": {
+                      "S": "4 oz diced"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "san marzano tomatoes"
+                    },
+                    "amount": {
+                      "S": "28 oz can"
+                    },
+                    "brand": {
+                      "S": "imported"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "red wine"
+                    },
+                    "amount": {
+                      "S": "1 cup"
+                    },
+                    "type": {
+                      "S": "chianti classico"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "M": {
+            "category": {
+              "S": "bechamel"
+            },
+            "items": {
+              "L": [
+                {
+                  "M": {
+                    "item": {
+                      "S": "butter"
+                    },
+                    "amount": {
+                      "S": "6 tbsp"
+                    },
+                    "type": {
+                      "S": "european style"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "all-purpose flour"
+                    },
+                    "amount": {
+                      "S": "6 tbsp"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "whole milk"
+                    },
+                    "amount": {
+                      "S": "4 cups"
+                    },
+                    "temperature": {
+                      "S": "warm"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "nutmeg"
+                    },
+                    "amount": {
+                      "S": "pinch"
+                    },
+                    "type": {
+                      "S": "freshly grated"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "M": {
+            "category": {
+              "S": "cheeses"
+            },
+            "items": {
+              "L": [
+                {
+                  "M": {
+                    "item": {
+                      "S": "parmigiano-reggiano"
+                    },
+                    "amount": {
+                      "S": "2 cups grated"
+                    },
+                    "age": {
+                      "S": "24 months"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "ricotta"
+                    },
+                    "amount": {
+                      "S": "2 lbs"
+                    },
+                    "type": {
+                      "S": "whole milk"
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "item": {
+                      "S": "mozzarella"
+                    },
+                    "amount": {
+                      "S": "1 lb shredded"
+                    },
+                    "type": {
+                      "S": "low-moisture"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "instructions": {
+      "L": [
+        {
+          "M": {
+            "step": {
+              "N": "1"
+            },
+            "title": {
+              "S": "Prepare Meat Sauce"
+            },
+            "description": {
+              "S": "Brown pancetta, add ground meats, cook with vegetables and wine"
+            },
+            "time": {
+              "N": "45"
+            },
+            "temperature": {
+              "S": "medium-high"
+            }
+          }
+        },
+        {
+          "M": {
+            "step": {
+              "N": "2"
+            },
+            "title": {
+              "S": "Make Bechamel"
+            },
+            "description": {
+              "S": "Create roux with butter and flour, gradually add warm milk"
+            },
+            "time": {
+              "N": "20"
+            },
+            "tips": {
+              "L": [
+                {
+                  "S": "Whisk constantly to prevent lumps"
+                },
+                {
+                  "S": "Keep milk warm for smooth incorporation"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "M": {
+            "step": {
+              "N": "3"
+            },
+            "title": {
+              "S": "Layer Assembly"
+            },
+            "description": {
+              "S": "Alternate layers of pasta, meat sauce, bechamel, and cheeses"
+            },
+            "time": {
+              "N": "30"
+            },
+            "layers": {
+              "L": [
+                {
+                  "M": {
+                    "order": {
+                      "N": "1"
+                    },
+                    "components": {
+                      "SS": ["meat_sauce", "pasta", "bechamel", "ricotta"]
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "order": {
+                      "N": "2"
+                    },
+                    "components": {
+                      "SS": ["pasta", "meat_sauce", "bechamel", "mozzarella"]
+                    }
+                  }
+                },
+                {
+                  "M": {
+                    "order": {
+                      "N": "3"
+                    },
+                    "components": {
+                      "SS": ["pasta", "meat_sauce", "bechamel", "parmigiano"]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "nutrition": {
+      "M": {
+        "per_serving": {
+          "M": {
+            "calories": {
+              "N": "680"
+            },
+            "protein": {
+              "N": "42"
+            },
+            "carbohydrates": {
+              "N": "35"
+            },
+            "fat": {
+              "N": "38"
+            },
+            "fiber": {
+              "N": "3"
+            },
+            "sodium": {
+              "N": "1250"
+            },
+            "cholesterol": {
+              "N": "145"
+            }
+          }
+        },
+        "daily_values": {
+          "M": {
+            "protein": {
+              "N": "84"
+            },
+            "vitamin_a": {
+              "N": "25"
+            },
+            "calcium": {
+              "N": "45"
+            },
+            "iron": {
+              "N": "20"
+            }
+          }
+        }
+      }
+    },
+    "equipment": {
+      "L": [
+        {
+          "M": {
+            "item": {
+              "S": "9x13 baking dish"
+            },
+            "essential": {
+              "BOOL": true
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "large skillet"
+            },
+            "essential": {
+              "BOOL": true
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "heavy saucepan"
+            },
+            "essential": {
+              "BOOL": true
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "S": "pasta machine"
+            },
+            "essential": {
+              "BOOL": false
+            },
+            "alternative": {
+              "S": "store-bought sheets"
+            }
+          }
+        }
+      ]
+    },
+    "wine_pairing": {
+      "M": {
+        "primary": {
+          "S": "Chianti Classico"
+        },
+        "alternatives": {
+          "SS": ["Sangiovese", "Barbera d'Alba", "Montepulciano"]
+        },
+        "serving_temp": {
+          "S": "60-65°F"
+        }
+      }
+    },
+    "storage": {
+      "M": {
+        "refrigerator": {
+          "M": {
+            "duration": {
+              "S": "3-4 days"
+            },
+            "container": {
+              "S": "covered tightly"
+            }
+          }
+        },
+        "freezer": {
+          "M": {
+            "duration": {
+              "S": "3 months"
+            },
+            "instructions": {
+              "L": [
+                {
+                  "S": "Cool completely before freezing"
+                },
+                {
+                  "S": "Wrap in plastic then foil"
+                },
+                {
+                  "S": "Thaw overnight in refrigerator"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "reviews": {
+      "L": [
+        {
+          "M": {
+            "rating": {
+              "N": "5"
+            },
+            "comment": {
+              "S": "Absolutely incredible! Worth every minute of preparation time."
+            },
+            "reviewer": {
+              "S": "chef_mario_2021"
+            },
+            "date": {
+              "S": "2021-12-15"
+            },
+            "verified": {
+              "BOOL": true
+            },
+            "helpful_votes": {
+              "N": "47"
+            }
+          }
+        },
+        {
+          "M": {
+            "rating": {
+              "N": "5"
+            },
+            "comment": {
+              "S": "Family recipe perfection. Made this for Christmas dinner and everyone asked for the recipe!"
+            },
+            "reviewer": {
+              "S": "nonna_rosa"
+            },
+            "date": {
+              "S": "2021-12-25"
+            },
+            "verified": {
+              "BOOL": true
+            },
+            "helpful_votes": {
+              "N": "32"
+            }
+          }
+        },
+        {
+          "M": {
+            "rating": {
+              "N": "4"
+            },
+            "comment": {
+              "S": "Delicious but very time consuming. Plan ahead!"
+            },
+            "reviewer": {
+              "S": "busy_parent_123"
+            },
+            "date": {
+              "S": "2021-11-28"
+            },
+            "verified": {
+              "BOOL": true
+            },
+            "helpful_votes": {
+              "N": "18"
+            }
+          }
+        }
+      ]
+    },
+    "recipe_history": {
+      "M": {
+        "origin": {
+          "S": "Emilia-Romagna, Italy"
+        },
+        "family_generations": {
+          "N": "4"
+        },
+        "first_recorded": {
+          "S": "1923"
+        },
+        "modifications": {
+          "L": [
+            {
+              "M": {
+                "year": {
+                  "S": "1965"
+                },
+                "change": {
+                  "S": "Added wine to meat sauce"
+                },
+                "reason": {
+                  "S": "Enhanced flavor depth"
+                }
+              }
+            },
+            {
+              "M": {
+                "year": {
+                  "S": "1987"
+                },
+                "change": {
+                  "S": "Increased cheese blend variety"
+                },
+                "reason": {
+                  "S": "Improved texture and taste"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "cooking_tips": {
+      "L": [
+        {
+          "M": {
+            "category": {
+              "S": "preparation"
+            },
+            "tip": {
+              "S": "Make sauce day before for better flavor development"
+            },
+            "importance": {
+              "S": "high"
+            }
+          }
+        },
+        {
+          "M": {
+            "category": {
+              "S": "assembly"
+            },
+            "tip": {
+              "S": "Let each layer cool slightly before adding the next"
+            },
+            "importance": {
+              "S": "medium"
+            }
+          }
+        },
+        {
+          "M": {
+            "category": {
+              "S": "baking"
+            },
+            "tip": {
+              "S": "Cover with foil for first hour, then uncover to brown"
+            },
+            "importance": {
+              "S": "high"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "ConsumedCapacity": {
+    "TableName": "pasta-recipes",
+    "CapacityUnits": 8.5,
+    "ReadCapacityUnits": 8.5,
+    "WriteCapacityUnits": 0.0
+  }
+}

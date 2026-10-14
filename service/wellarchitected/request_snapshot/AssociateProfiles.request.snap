@@ -1,0 +1,5 @@
+PATCH /workloads/__WorkloadId__/associateProfiles
+
+Content-Type: application/json
+
+{"ProfileArns":["__Member__","__Member__"]}

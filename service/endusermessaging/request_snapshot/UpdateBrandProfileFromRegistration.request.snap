@@ -1,0 +1,5 @@
+POST /v1/brand-profiles/__BrandProfileId__/update-from-registration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","onAttributeConflict":"REPLACE","registrationId":"__RegistrationId__","smartMatch":true}

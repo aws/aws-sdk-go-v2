@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.CreateUserPoolDomain
+
+{"CloudFrontDomain":"__CloudFrontDomain__","ManagedLoginVersion":1,"Routing":{"Failover":{"PrimaryRoute53HealthCheckId":"__PrimaryRoute53HealthCheckId__","SecondaryRegion":"__SecondaryRegion__"}}}

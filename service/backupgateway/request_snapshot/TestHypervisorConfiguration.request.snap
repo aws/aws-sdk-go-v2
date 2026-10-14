@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/TestHypervisorConfiguration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤jGatewayArnn__GatewayArn__dHosth__Host__hUsernamel__Username__hPasswordl__Password__

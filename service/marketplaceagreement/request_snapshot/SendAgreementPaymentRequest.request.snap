@@ -1,0 +1,7 @@
+POST /service/AWSMPCommerceService_v20200301/operation/SendAgreementPaymentRequest
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kagreementIdo__AgreementId__lchargeAmountp__ChargeAmount__kclientTokeno__ClientToken__kdescriptiono__Description__dnameh__Name__ftermIdj__TermId__ÿ

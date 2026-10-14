@@ -4,13 +4,19 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
+//
 // Set a verification state and provide a description of that verification state
 // on a violation (detect alarm).
 func (c *Client) PutVerificationStateOnViolation(ctx context.Context, params *PutVerificationStateOnViolationInput, optFns ...func(*Options)) (*PutVerificationStateOnViolationOutput, error) {
@@ -46,6 +52,24 @@ type PutVerificationStateOnViolationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVerificationStateOnViolationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVerificationStateOnViolationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVerificationStateOnViolationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerificationState != "" {
+		s.WriteString(schemas.PutVerificationStateOnViolationRequest_verificationState, string(v.VerificationState))
+	}
+	if v.VerificationStateDescription != nil {
+		s.WriteString(schemas.PutVerificationStateOnViolationRequest_verificationStateDescription, *v.VerificationStateDescription)
+	}
+	if v.ViolationId != nil {
+		s.WriteString(schemas.PutVerificationStateOnViolationRequest_violationId, *v.ViolationId)
+	}
+}
+
 type PutVerificationStateOnViolationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,77 +77,42 @@ type PutVerificationStateOnViolationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVerificationStateOnViolationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVerificationStateOnViolationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVerificationStateOnViolationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutVerificationStateOnViolationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVerificationStateOnViolationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVerificationStateOnViolationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVerificationStateOnViolation, schemas.PutVerificationStateOnViolationRequest, schemas.PutVerificationStateOnViolationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVerificationStateOnViolation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVerificationStateOnViolation, schemas.PutVerificationStateOnViolationRequest, schemas.PutVerificationStateOnViolationResponse), output: &PutVerificationStateOnViolationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVerificationStateOnViolation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVerificationStateOnViolation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutVerificationStateOnViolationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutVerificationStateOnViolation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +127,8 @@ func (c *Client) addOperationPutVerificationStateOnViolationMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutVerificationStateOnViolation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutVerificationStateOnViolation",
-	}
 }

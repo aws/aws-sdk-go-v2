@@ -4,11 +4,10 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a mission profile.
@@ -36,6 +35,18 @@ type GetMissionProfileInput struct {
 	MissionProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMissionProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMissionProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMissionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MissionProfileId != nil {
+		s.WriteString(schemas.GetMissionProfileRequest_missionProfileId, *v.MissionProfileId)
+	}
 }
 
 // Output for the GetMissionProfile operation.
@@ -91,77 +102,111 @@ type GetMissionProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMissionProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMissionProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMissionProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactPostPassDurationSeconds != nil {
+		s.WriteInt32(schemas.GetMissionProfileResponse_contactPostPassDurationSeconds, *v.ContactPostPassDurationSeconds)
+	}
+	if v.ContactPrePassDurationSeconds != nil {
+		s.WriteInt32(schemas.GetMissionProfileResponse_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
+	}
+	serializeDataflowEdgeList(s, schemas.GetMissionProfileResponse_dataflowEdges, v.DataflowEdges)
+	if v.MinimumViableContactDurationSeconds != nil {
+		s.WriteInt32(schemas.GetMissionProfileResponse_minimumViableContactDurationSeconds, *v.MinimumViableContactDurationSeconds)
+	}
+	if v.MissionProfileArn != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_missionProfileArn, *v.MissionProfileArn)
+	}
+	if v.MissionProfileId != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_missionProfileId, *v.MissionProfileId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_name, *v.Name)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_region, *v.Region)
+	}
+	serializeKmsKey(s, schemas.GetMissionProfileResponse_streamsKmsKey, v.StreamsKmsKey)
+	if v.StreamsKmsRole != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_streamsKmsRole, *v.StreamsKmsRole)
+	}
+	serializeTagsMap(s, schemas.GetMissionProfileResponse_tags, v.Tags)
+	if v.TelemetrySinkConfigArn != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_telemetrySinkConfigArn, *v.TelemetrySinkConfigArn)
+	}
+	if v.TrackingConfigArn != nil {
+		s.WriteString(schemas.GetMissionProfileResponse_trackingConfigArn, *v.TrackingConfigArn)
+	}
+}
+func (v *GetMissionProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMissionProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMissionProfileResponse_contactPostPassDurationSeconds:
+			v.ContactPostPassDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.GetMissionProfileResponse_contactPostPassDurationSeconds, v.ContactPostPassDurationSeconds)
+		case schemas.GetMissionProfileResponse_contactPrePassDurationSeconds:
+			v.ContactPrePassDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.GetMissionProfileResponse_contactPrePassDurationSeconds, v.ContactPrePassDurationSeconds)
+		case schemas.GetMissionProfileResponse_dataflowEdges:
+			return deserializeDataflowEdgeList(d, schemas.GetMissionProfileResponse_dataflowEdges, &v.DataflowEdges)
+		case schemas.GetMissionProfileResponse_minimumViableContactDurationSeconds:
+			v.MinimumViableContactDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.GetMissionProfileResponse_minimumViableContactDurationSeconds, v.MinimumViableContactDurationSeconds)
+		case schemas.GetMissionProfileResponse_missionProfileArn:
+			v.MissionProfileArn = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_missionProfileArn, v.MissionProfileArn)
+		case schemas.GetMissionProfileResponse_missionProfileId:
+			v.MissionProfileId = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_missionProfileId, v.MissionProfileId)
+		case schemas.GetMissionProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_name, v.Name)
+		case schemas.GetMissionProfileResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_region, v.Region)
+		case schemas.GetMissionProfileResponse_streamsKmsKey:
+			return deserializeKmsKey(d, schemas.GetMissionProfileResponse_streamsKmsKey, &v.StreamsKmsKey)
+		case schemas.GetMissionProfileResponse_streamsKmsRole:
+			v.StreamsKmsRole = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_streamsKmsRole, v.StreamsKmsRole)
+		case schemas.GetMissionProfileResponse_tags:
+			return deserializeTagsMap(d, schemas.GetMissionProfileResponse_tags, &v.Tags)
+		case schemas.GetMissionProfileResponse_telemetrySinkConfigArn:
+			v.TelemetrySinkConfigArn = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_telemetrySinkConfigArn, v.TelemetrySinkConfigArn)
+		case schemas.GetMissionProfileResponse_trackingConfigArn:
+			v.TrackingConfigArn = new(string)
+			return d.ReadString(schemas.GetMissionProfileResponse_trackingConfigArn, v.TrackingConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMissionProfile, schemas.GetMissionProfileRequest, schemas.GetMissionProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMissionProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMissionProfile, schemas.GetMissionProfileRequest, schemas.GetMissionProfileResponse), output: &GetMissionProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMissionProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMissionProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMissionProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMissionProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +221,8 @@ func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMissionProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMissionProfile",
-	}
 }

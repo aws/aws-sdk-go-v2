@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all valid regions for Amazon Lightsail. Use the include
@@ -42,6 +41,21 @@ type GetRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeAvailabilityZones != nil {
+		s.WriteBool(schemas.GetRegionsRequest_includeAvailabilityZones, *v.IncludeAvailabilityZones)
+	}
+	if v.IncludeRelationalDatabaseAvailabilityZones != nil {
+		s.WriteBool(schemas.GetRegionsRequest_includeRelationalDatabaseAvailabilityZones, *v.IncludeRelationalDatabaseAvailabilityZones)
+	}
+}
+
 type GetRegionsOutput struct {
 
 	// An array of key-value pairs containing information about your get regions
@@ -54,74 +68,42 @@ type GetRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.GetRegionsResult_regions, v.Regions)
+}
+func (v *GetRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegionsResult_regions:
+			return deserializeRegionList(d, schemas.GetRegionsResult_regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegions, schemas.GetRegionsRequest, schemas.GetRegionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegions, schemas.GetRegionsRequest, schemas.GetRegionsResult), output: &GetRegionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRegions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRegions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +118,8 @@ func (c *Client) addOperationGetRegionsMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRegions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRegions",
-	}
 }

@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an app block builder.
@@ -115,6 +114,46 @@ type CreateAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.CreateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_Description, *v.Description)
+	}
+	if v.DisableIMDSV1 != nil {
+		s.WriteBool(schemas.CreateAppBlockBuilderRequest_DisableIMDSV1, *v.DisableIMDSV1)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EnableDefaultInternetAccess != nil {
+		s.WriteBool(schemas.CreateAppBlockBuilderRequest_EnableDefaultInternetAccess, *v.EnableDefaultInternetAccess)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_InstanceType, *v.InstanceType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_Name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.CreateAppBlockBuilderRequest_Platform, string(v.Platform))
+	}
+	serializeTags(s, schemas.CreateAppBlockBuilderRequest_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateAppBlockBuilderRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.
@@ -126,77 +165,53 @@ type CreateAppBlockBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilder != nil {
+		s.WriteStruct(schemas.CreateAppBlockBuilderResult_AppBlockBuilder)
+		v.AppBlockBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAppBlockBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppBlockBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppBlockBuilderResult_AppBlockBuilder:
+			v.AppBlockBuilder = &types.AppBlockBuilder{}
+			return v.AppBlockBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppBlockBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlockBuilder, schemas.CreateAppBlockBuilderRequest, schemas.CreateAppBlockBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlockBuilder, schemas.CreateAppBlockBuilderRequest, schemas.CreateAppBlockBuilderResult), output: &CreateAppBlockBuilderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAppBlockBuilder{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAppBlockBuilder"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAppBlockBuilderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAppBlockBuilder(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,22 +226,8 @@ func (c *Client) addOperationCreateAppBlockBuilderMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAppBlockBuilder(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAppBlockBuilder",
-	}
 }

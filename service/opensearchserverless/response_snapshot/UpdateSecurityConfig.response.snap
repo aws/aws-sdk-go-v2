@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateSecurityConfig
+
+{"securityConfigDetail":{"configVersion":"__ConfigVersion__","createdDate":1,"description":"__Description__","iamFederationOptions":{"groupAttribute":"__GroupAttribute__","userAttribute":"__UserAttribute__"},"iamIdentityCenterOptions":{"applicationArn":"__ApplicationArn__","applicationDescription":"__ApplicationDescription__","applicationName":"__ApplicationName__","groupAttribute":"GroupId","instanceArn":"__InstanceArn__","userAttribute":"UserId"},"id":"__Id__","lastModifiedDate":1,"samlOptions":{"groupAttribute":"__GroupAttribute__","metadata":"__Metadata__","openSearchServerlessEntityId":"__OpenSearchServerlessEntityId__","sessionTimeout":1,"userAttribute":"__UserAttribute__"},"type":"saml"}}

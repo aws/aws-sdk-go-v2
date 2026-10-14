@@ -1,0 +1,5 @@
+PUT /spaces/__SpaceId__/channels/__ChannelId__
+
+Content-Type: application/json
+
+{"channelDescription":"__ChannelDescription__","channelName":"__ChannelName__"}

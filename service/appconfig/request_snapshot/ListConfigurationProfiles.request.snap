@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/configurationprofiles?max_results=1&next_token=__NextToken__&type=__Type__
+
+

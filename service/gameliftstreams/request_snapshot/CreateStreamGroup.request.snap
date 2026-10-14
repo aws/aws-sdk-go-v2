@@ -1,0 +1,5 @@
+POST /streamgroups
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","DefaultApplicationIdentifier":"__DefaultApplicationIdentifier__","Description":"__Description__","LocationConfigurations":[{"AlwaysOnCapacity":1,"LocationName":"__LocationName__","MaximumCapacity":1,"OnDemandCapacity":1,"TargetIdleCapacity":1,"VpcTransitConfiguration":{"Ipv4CidrBlocks":["__Member__","__Member__"],"VpcId":"__VpcId__"}},{"AlwaysOnCapacity":1,"LocationName":"__LocationName__","MaximumCapacity":1,"OnDemandCapacity":1,"TargetIdleCapacity":1,"VpcTransitConfiguration":{"Ipv4CidrBlocks":["__Member__","__Member__"],"VpcId":"__VpcId__"}}],"StreamClass":"gen4n_high","Tags":{"key0":"__Value__"}}

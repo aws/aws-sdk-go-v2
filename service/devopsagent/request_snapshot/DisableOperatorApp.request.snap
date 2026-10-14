@@ -1,0 +1,4 @@
+DELETE /v1/agentspaces/__AgentSpaceId__/operator
+
+X-Amzn-App-Auth-Flow: iam
+

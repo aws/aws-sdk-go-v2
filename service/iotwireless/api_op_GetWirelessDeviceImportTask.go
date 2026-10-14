@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,18 +34,6 @@ type GetWirelessDeviceImportTaskInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetWirelessDeviceImportTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWirelessDeviceImportTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWirelessDeviceImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetWirelessDeviceImportTaskRequest_Id, *v.Id)
-	}
 }
 
 type GetWirelessDeviceImportTaskOutput struct {
@@ -104,126 +87,29 @@ type GetWirelessDeviceImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessDeviceImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWirelessDeviceImportTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWirelessDeviceImportTaskResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_Arn, v.Arn)
-		case schemas.GetWirelessDeviceImportTaskResponse_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.GetWirelessDeviceImportTaskResponse_CreationTime, v.CreationTime)
-		case schemas.GetWirelessDeviceImportTaskResponse_DestinationName:
-			v.DestinationName = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_DestinationName, v.DestinationName)
-		case schemas.GetWirelessDeviceImportTaskResponse_FailedImportedDeviceCount:
-			v.FailedImportedDeviceCount = new(int64)
-			return d.ReadInt64(schemas.GetWirelessDeviceImportTaskResponse_FailedImportedDeviceCount, v.FailedImportedDeviceCount)
-		case schemas.GetWirelessDeviceImportTaskResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_Id, v.Id)
-		case schemas.GetWirelessDeviceImportTaskResponse_InitializedImportedDeviceCount:
-			v.InitializedImportedDeviceCount = new(int64)
-			return d.ReadInt64(schemas.GetWirelessDeviceImportTaskResponse_InitializedImportedDeviceCount, v.InitializedImportedDeviceCount)
-		case schemas.GetWirelessDeviceImportTaskResponse_OnboardedImportedDeviceCount:
-			v.OnboardedImportedDeviceCount = new(int64)
-			return d.ReadInt64(schemas.GetWirelessDeviceImportTaskResponse_OnboardedImportedDeviceCount, v.OnboardedImportedDeviceCount)
-		case schemas.GetWirelessDeviceImportTaskResponse_PendingImportedDeviceCount:
-			v.PendingImportedDeviceCount = new(int64)
-			return d.ReadInt64(schemas.GetWirelessDeviceImportTaskResponse_PendingImportedDeviceCount, v.PendingImportedDeviceCount)
-		case schemas.GetWirelessDeviceImportTaskResponse_Positioning:
-			var ev string
-			if err := d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_Positioning, &ev); err != nil {
-				return err
-			}
-			v.Positioning = types.PositioningConfigStatus(ev)
-			return nil
-		case schemas.GetWirelessDeviceImportTaskResponse_Sidewalk:
-			v.Sidewalk = &types.SidewalkGetStartImportInfo{}
-			return v.Sidewalk.Deserialize(d)
-		case schemas.GetWirelessDeviceImportTaskResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ImportTaskStatus(ev)
-			return nil
-		case schemas.GetWirelessDeviceImportTaskResponse_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.GetWirelessDeviceImportTaskResponse_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWirelessDeviceImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessDeviceImportTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessDeviceImportTask, schemas.GetWirelessDeviceImportTaskRequest, schemas.GetWirelessDeviceImportTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessDeviceImportTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessDeviceImportTask, schemas.GetWirelessDeviceImportTaskRequest, schemas.GetWirelessDeviceImportTaskResponse), output: &GetWirelessDeviceImportTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWirelessDeviceImportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWirelessDeviceImportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWirelessDeviceImportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,22 +124,8 @@ func (c *Client) addOperationGetWirelessDeviceImportTaskMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWirelessDeviceImportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWirelessDeviceImportTask",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"idNamespaceAssociationSummaries":[{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"description":"__Description__","id":"__Id__","inputReferenceConfig":{"inputReferenceArn":"__InputReferenceArn__","manageResourcePolicies":true},"inputReferenceProperties":{"idNamespaceType":"SOURCE"},"membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800},{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"description":"__Description__","id":"__Id__","inputReferenceConfig":{"inputReferenceArn":"__InputReferenceArn__","manageResourcePolicies":true},"inputReferenceProperties":{"idNamespaceType":"SOURCE"},"membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800}],"nextToken":"__NextToken__"}

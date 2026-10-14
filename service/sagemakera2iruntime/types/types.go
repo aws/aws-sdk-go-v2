@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,25 +23,6 @@ type HumanLoopDataAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HumanLoopDataAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
-}
-func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HumanLoopDataAttributes_ContentClassifiers:
-			return deserializeContentClassifiers(d, schemas.HumanLoopDataAttributes_ContentClassifiers, &v.ContentClassifiers)
-		}
-		return nil
-	})
-}
-
 // An object containing the human loop input in JSON format.
 type HumanLoopInput struct {
 
@@ -56,28 +35,6 @@ type HumanLoopInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HumanLoopInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HumanLoopInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HumanLoopInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InputContent != nil {
-		s.WriteString(schemas.HumanLoopInput_InputContent, *v.InputContent)
-	}
-}
-func (v *HumanLoopInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HumanLoopInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HumanLoopInput_InputContent:
-			v.InputContent = new(string)
-			return d.ReadString(schemas.HumanLoopInput_InputContent, v.InputContent)
-		}
-		return nil
-	})
-}
-
 // Information about where the human output will be stored.
 type HumanLoopOutput struct {
 
@@ -88,28 +45,6 @@ type HumanLoopOutput struct {
 	OutputS3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *HumanLoopOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HumanLoopOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HumanLoopOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OutputS3Uri != nil {
-		s.WriteString(schemas.HumanLoopOutput_OutputS3Uri, *v.OutputS3Uri)
-	}
-}
-func (v *HumanLoopOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HumanLoopOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HumanLoopOutput_OutputS3Uri:
-			v.OutputS3Uri = new(string)
-			return d.ReadString(schemas.HumanLoopOutput_OutputS3Uri, v.OutputS3Uri)
-		}
-		return nil
-	})
 }
 
 // Summary information about the human loop.
@@ -133,56 +68,6 @@ type HumanLoopSummary struct {
 	HumanLoopStatus HumanLoopStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *HumanLoopSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HumanLoopSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HumanLoopSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.HumanLoopSummary_CreationTime, *v.CreationTime)
-	}
-	if v.FailureReason != nil {
-		s.WriteString(schemas.HumanLoopSummary_FailureReason, *v.FailureReason)
-	}
-	if v.FlowDefinitionArn != nil {
-		s.WriteString(schemas.HumanLoopSummary_FlowDefinitionArn, *v.FlowDefinitionArn)
-	}
-	if v.HumanLoopName != nil {
-		s.WriteString(schemas.HumanLoopSummary_HumanLoopName, *v.HumanLoopName)
-	}
-	if v.HumanLoopStatus != "" {
-		s.WriteString(schemas.HumanLoopSummary_HumanLoopStatus, string(v.HumanLoopStatus))
-	}
-}
-func (v *HumanLoopSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HumanLoopSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HumanLoopSummary_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.HumanLoopSummary_CreationTime, v.CreationTime)
-		case schemas.HumanLoopSummary_FailureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.HumanLoopSummary_FailureReason, v.FailureReason)
-		case schemas.HumanLoopSummary_FlowDefinitionArn:
-			v.FlowDefinitionArn = new(string)
-			return d.ReadString(schemas.HumanLoopSummary_FlowDefinitionArn, v.FlowDefinitionArn)
-		case schemas.HumanLoopSummary_HumanLoopName:
-			v.HumanLoopName = new(string)
-			return d.ReadString(schemas.HumanLoopSummary_HumanLoopName, v.HumanLoopName)
-		case schemas.HumanLoopSummary_HumanLoopStatus:
-			var ev string
-			if err := d.ReadString(schemas.HumanLoopSummary_HumanLoopStatus, &ev); err != nil {
-				return err
-			}
-			v.HumanLoopStatus = HumanLoopStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

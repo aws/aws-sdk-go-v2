@@ -5,23 +5,14 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/document"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns paginated examples from the dataset.
+//	Returns paginated examples from the dataset. The server embeds the resolved
 //
-// Version-pinned pagination: The server embeds the resolved version in the
-// nextToken . Once pagination begins, all subsequent pages are pinned to that
-// version regardless of concurrent mutations or whether datasetVersion is passed
-// on subsequent requests. The datasetVersion query parameter is only used for the
-// first request (when nextToken is absent); if omitted, defaults to DRAFT.
-//
-// State guard: Allowed for all statuses including DELETING.
+// version in the pagination token. Once pagination begins, all subsequent pages
+// are pinned to that version regardless of concurrent mutations.
 func (c *Client) ListDatasetExamples(ctx context.Context, params *ListDatasetExamplesInput, optFns ...func(*Options)) (*ListDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &ListDatasetExamplesInput{}
@@ -44,41 +35,18 @@ type ListDatasetExamplesInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent.
-	// Only used on the first request (when nextToken is absent). For subsequent pages,
-	// the version is extracted from the nextToken and this parameter is ignored.
+	//  Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent.
+	// Only used on the first request; for subsequent pages, the version is extracted
+	// from the pagination token.
 	DatasetVersion *string
 
-	// Maximum number of examples to return per page. Default: 1000. Min: 1, max:
-	// 1000. Response size is validated against 5 MB limit after reading. For bulk
-	// access to all examples, use the downloadUrl field from GetDataset.
+	//  Maximum number of examples to return per page.
 	MaxResults *int32
 
 	//  The token for the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDatasetExamplesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetId != nil {
-		s.WriteString(schemas.ListDatasetExamplesRequest_datasetId, *v.DatasetId)
-	}
-	if v.DatasetVersion != nil {
-		s.WriteString(schemas.ListDatasetExamplesRequest_datasetVersion, *v.DatasetVersion)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDatasetExamplesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDatasetExamplesRequest_nextToken, *v.NextToken)
-	}
 }
 
 type ListDatasetExamplesOutput struct {
@@ -93,13 +61,13 @@ type ListDatasetExamplesOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// The version returned.
+	//  The version returned.
 	//
 	// This member is required.
 	DatasetVersion *string
 
-	// Paginated example content. Each element is a JSON object containing at least an
-	// exampleId field plus the schema-specific content fields.
+	//  Paginated example content. Each element is a JSON object containing at least
+	// an exampleId field plus the schema-specific content fields.
 	//
 	// This member is required.
 	Examples []document.Interface
@@ -113,96 +81,29 @@ type ListDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDatasetExamplesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDatasetExamplesResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.ListDatasetExamplesResponse_datasetArn, v.DatasetArn)
-		case schemas.ListDatasetExamplesResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.ListDatasetExamplesResponse_datasetId, v.DatasetId)
-		case schemas.ListDatasetExamplesResponse_datasetVersion:
-			v.DatasetVersion = new(string)
-			return d.ReadString(schemas.ListDatasetExamplesResponse_datasetVersion, v.DatasetVersion)
-		case schemas.ListDatasetExamplesResponse_examples:
-			return deserializeDatasetExampleList(d, schemas.ListDatasetExamplesResponse_examples, &v.Examples)
-		case schemas.ListDatasetExamplesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDatasetExamplesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExamples, schemas.ListDatasetExamplesRequest, schemas.ListDatasetExamplesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExamples, schemas.ListDatasetExamplesRequest, schemas.ListDatasetExamplesResponse), output: &ListDatasetExamplesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDatasetExamples"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDatasetExamplesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetExamples(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,12 +118,6 @@ func (c *Client) addOperationListDatasetExamplesMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -232,9 +127,7 @@ func (c *Client) addOperationListDatasetExamplesMiddlewares(stack *middleware.St
 // ListDatasetExamplesPaginatorOptions is the paginator options for
 // ListDatasetExamples
 type ListDatasetExamplesPaginatorOptions struct {
-	// Maximum number of examples to return per page. Default: 1000. Min: 1, max:
-	// 1000. Response size is validated against 5 MB limit after reading. For bulk
-	// access to all examples, use the downloadUrl field from GetDataset.
+	//  Maximum number of examples to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -324,11 +217,3 @@ type ListDatasetExamplesAPIClient interface {
 }
 
 var _ ListDatasetExamplesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDatasetExamples(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDatasetExamples",
-	}
-}

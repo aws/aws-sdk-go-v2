@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/CreateMarketplaceRevenueShareAllocation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSkClientTokeno__ClientToken__mEffectiveFromq__EffectiveFrom__nEffectiveUntilr__EffectiveUntil__iProductIdm__ProductId__sRevenueSharePercentw__RevenueSharePercent__ÿ

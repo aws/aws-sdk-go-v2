@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,48 +50,6 @@ type ListDevicePositionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevicePositionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDevicePositionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDevicePositionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilterGeometry != nil {
-		s.WriteStruct(schemas.ListDevicePositionsRequest_FilterGeometry)
-		v.FilterGeometry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDevicePositionsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDevicePositionsRequest_NextToken, *v.NextToken)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.ListDevicePositionsRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *ListDevicePositionsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDevicePositionsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDevicePositionsRequest_FilterGeometry:
-			v.FilterGeometry = &types.TrackingFilterGeometry{}
-			return v.FilterGeometry.Deserialize(d)
-		case schemas.ListDevicePositionsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListDevicePositionsRequest_MaxResults, v.MaxResults)
-		case schemas.ListDevicePositionsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDevicePositionsRequest_NextToken, v.NextToken)
-		case schemas.ListDevicePositionsRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.ListDevicePositionsRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type ListDevicePositionsOutput struct {
 
 	// Contains details about each device's last known position.
@@ -112,87 +67,23 @@ type ListDevicePositionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevicePositionsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDevicePositionsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDevicePositionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListDevicePositionsResponseEntryList(s, schemas.ListDevicePositionsResponse_Entries, v.Entries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDevicePositionsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListDevicePositionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDevicePositionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDevicePositionsResponse_Entries:
-			return deserializeListDevicePositionsResponseEntryList(d, schemas.ListDevicePositionsResponse_Entries, &v.Entries)
-		case schemas.ListDevicePositionsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDevicePositionsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevicePositions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePositions, schemas.ListDevicePositionsRequest, schemas.ListDevicePositionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevicePositions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePositions, schemas.ListDevicePositionsRequest, schemas.ListDevicePositionsResponse), output: &ListDevicePositionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevicePositions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -202,12 +93,6 @@ func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpListDevicePositionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevicePositions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +105,6 @@ func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -356,11 +235,3 @@ type ListDevicePositionsAPIClient interface {
 }
 
 var _ ListDevicePositionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDevicePositions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDevicePositions",
-	}
-}

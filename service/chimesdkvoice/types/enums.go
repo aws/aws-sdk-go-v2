@@ -21,6 +21,25 @@ func (AlexaSkillStatus) Values() []AlexaSkillStatus {
 	}
 }
 
+type CallDistributionType string
+
+// Enum values for CallDistributionType
+const (
+	CallDistributionTypePriorityWeightedDistribution CallDistributionType = "PriorityWeightedDistribution"
+	CallDistributionTypeLoadBalancedDistribution     CallDistributionType = "LoadBalancedDistribution"
+)
+
+// Values returns all known values for CallDistributionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CallDistributionType) Values() []CallDistributionType {
+	return []CallDistributionType{
+		"PriorityWeightedDistribution",
+		"LoadBalancedDistribution",
+	}
+}
+
 type CallingNameStatus string
 
 // Enum values for CallingNameStatus
@@ -125,6 +144,7 @@ const (
 	ErrorCodeVoiceConnectorGroupAssociationsExist ErrorCode = "VoiceConnectorGroupAssociationsExist"
 	ErrorCodePhoneNumberAssociationsExist         ErrorCode = "PhoneNumberAssociationsExist"
 	ErrorCodeGone                                 ErrorCode = "Gone"
+	ErrorCodeValidation                           ErrorCode = "Validation"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
@@ -149,6 +169,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"VoiceConnectorGroupAssociationsExist",
 		"PhoneNumberAssociationsExist",
 		"Gone",
+		"Validation",
 	}
 }
 

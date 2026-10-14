@@ -1,0 +1,5 @@
+POST /backup-vaults/__BackupVaultName__/mpaApprovalTeam?delete=
+
+Content-Type: application/json
+
+{"RequesterComment":"__RequesterComment__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"coreDevices":[{"architecture":"__Architecture__","coreDeviceThingName":"__CoreDeviceThingName__","lastStatusUpdateTimestamp":946684800,"platform":"__Platform__","runtime":"__Runtime__","status":"HEALTHY"},{"architecture":"__Architecture__","coreDeviceThingName":"__CoreDeviceThingName__","lastStatusUpdateTimestamp":946684800,"platform":"__Platform__","runtime":"__Runtime__","status":"HEALTHY"}],"nextToken":"__NextToken__"}

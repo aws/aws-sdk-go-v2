@@ -5,10 +5,10 @@ package resourcegroupstaggingapi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a table that shows counts of resources that are noncompliant with their
@@ -112,6 +112,26 @@ type GetComplianceSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupBy(s, schemas.GetComplianceSummaryInput_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetComplianceSummaryInput_MaxResults, *v.MaxResults)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetComplianceSummaryInput_PaginationToken, *v.PaginationToken)
+	}
+	serializeRegionFilterList(s, schemas.GetComplianceSummaryInput_RegionFilters, v.RegionFilters)
+	serializeResourceTypeFilterList(s, schemas.GetComplianceSummaryInput_ResourceTypeFilters, v.ResourceTypeFilters)
+	serializeTagKeyFilterList(s, schemas.GetComplianceSummaryInput_TagKeyFilters, v.TagKeyFilters)
+	serializeTargetIdFilterList(s, schemas.GetComplianceSummaryInput_TargetIdFilters, v.TargetIdFilters)
+}
+
 type GetComplianceSummaryOutput struct {
 
 	// A string that indicates that there is more data available than this response
@@ -128,74 +148,48 @@ type GetComplianceSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetComplianceSummaryOutput_PaginationToken, *v.PaginationToken)
+	}
+	serializeSummaryList(s, schemas.GetComplianceSummaryOutput_SummaryList, v.SummaryList)
+}
+func (v *GetComplianceSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceSummaryOutput_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.GetComplianceSummaryOutput_PaginationToken, v.PaginationToken)
+		case schemas.GetComplianceSummaryOutput_SummaryList:
+			return deserializeSummaryList(d, schemas.GetComplianceSummaryOutput_SummaryList, &v.SummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummary, schemas.GetComplianceSummaryInput, schemas.GetComplianceSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummary, schemas.GetComplianceSummaryInput, schemas.GetComplianceSummaryOutput), output: &GetComplianceSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComplianceSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +202,6 @@ func (c *Client) addOperationGetComplianceSummaryMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,11 +307,3 @@ type GetComplianceSummaryAPIClient interface {
 }
 
 var _ GetComplianceSummaryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetComplianceSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComplianceSummary",
-	}
-}

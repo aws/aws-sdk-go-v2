@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.DeleteComputeNodeGroup
+
+{"clientToken":"__ClientToken__","clusterIdentifier":"__ClusterIdentifier__","computeNodeGroupIdentifier":"__ComputeNodeGroupIdentifier__"}

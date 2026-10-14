@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.GetImpersonationRole
+
+{"DateCreated":946684800,"DateModified":946684800,"Description":"__Description__","ImpersonationRoleId":"__ImpersonationRoleId__","Name":"__Name__","Rules":[{"Description":"__Description__","Effect":"ALLOW","ImpersonationRuleId":"__ImpersonationRuleId__","Name":"__Name__","NotTargetUsers":["__Member__","__Member__"],"TargetUsers":["__Member__","__Member__"]},{"Description":"__Description__","Effect":"ALLOW","ImpersonationRuleId":"__ImpersonationRuleId__","Name":"__Name__","NotTargetUsers":["__Member__","__Member__"],"TargetUsers":["__Member__","__Member__"]}],"Type":"FULL_ACCESS"}

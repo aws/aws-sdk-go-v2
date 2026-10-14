@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.CreateCrossAccountAttachment
+
+{"IdempotencyToken":"__IdempotencyToken__","Name":"__Name__","Principals":["__Member__","__Member__"],"Resources":[{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"},{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

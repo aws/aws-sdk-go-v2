@@ -5,10 +5,10 @@ package cloudwatchlogs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of the log anomaly detectors in the account.
@@ -43,6 +43,24 @@ type ListLogAnomalyDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogAnomalyDetectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogAnomalyDetectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogAnomalyDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterLogGroupArn != nil {
+		s.WriteString(schemas.ListLogAnomalyDetectorsRequest_filterLogGroupArn, *v.FilterLogGroupArn)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLogAnomalyDetectorsRequest_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogAnomalyDetectorsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListLogAnomalyDetectorsOutput struct {
 
 	// An array of structures, where each structure in the array contains information
@@ -58,74 +76,48 @@ type ListLogAnomalyDetectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogAnomalyDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogAnomalyDetectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogAnomalyDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalyDetectors(s, schemas.ListLogAnomalyDetectorsResponse_anomalyDetectors, v.AnomalyDetectors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogAnomalyDetectorsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLogAnomalyDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLogAnomalyDetectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLogAnomalyDetectorsResponse_anomalyDetectors:
+			return deserializeAnomalyDetectors(d, schemas.ListLogAnomalyDetectorsResponse_anomalyDetectors, &v.AnomalyDetectors)
+		case schemas.ListLogAnomalyDetectorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLogAnomalyDetectorsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLogAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogAnomalyDetectors, schemas.ListLogAnomalyDetectorsRequest, schemas.ListLogAnomalyDetectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogAnomalyDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogAnomalyDetectors, schemas.ListLogAnomalyDetectorsRequest, schemas.ListLogAnomalyDetectorsResponse), output: &ListLogAnomalyDetectorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogAnomalyDetectors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLogAnomalyDetectors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogAnomalyDetectors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +130,6 @@ func (c *Client) addOperationListLogAnomalyDetectorsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +233,3 @@ type ListLogAnomalyDetectorsAPIClient interface {
 }
 
 var _ ListLogAnomalyDetectorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLogAnomalyDetectors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLogAnomalyDetectors",
-	}
-}

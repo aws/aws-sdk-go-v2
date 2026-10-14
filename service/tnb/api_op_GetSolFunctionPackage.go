@@ -4,13 +4,8 @@ package tnb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the details of an individual function package, such as the operational
@@ -43,18 +38,6 @@ type GetSolFunctionPackageInput struct {
 	VnfPkgId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSolFunctionPackageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSolFunctionPackageInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSolFunctionPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VnfPkgId != nil {
-		s.WriteString(schemas.GetSolFunctionPackageInput_vnfPkgId, *v.VnfPkgId)
-	}
 }
 
 type GetSolFunctionPackageOutput struct {
@@ -115,126 +98,29 @@ type GetSolFunctionPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSolFunctionPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSolFunctionPackageOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSolFunctionPackageOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_arn, v.Arn)
-		case schemas.GetSolFunctionPackageOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_id, v.Id)
-		case schemas.GetSolFunctionPackageOutput_metadata:
-			v.Metadata = &types.GetSolFunctionPackageMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.GetSolFunctionPackageOutput_onboardingState:
-			var ev string
-			if err := d.ReadString(schemas.GetSolFunctionPackageOutput_onboardingState, &ev); err != nil {
-				return err
-			}
-			v.OnboardingState = types.OnboardingState(ev)
-			return nil
-		case schemas.GetSolFunctionPackageOutput_operationalState:
-			var ev string
-			if err := d.ReadString(schemas.GetSolFunctionPackageOutput_operationalState, &ev); err != nil {
-				return err
-			}
-			v.OperationalState = types.OperationalState(ev)
-			return nil
-		case schemas.GetSolFunctionPackageOutput_tags:
-			return deserializeTagMap(d, schemas.GetSolFunctionPackageOutput_tags, &v.Tags)
-		case schemas.GetSolFunctionPackageOutput_usageState:
-			var ev string
-			if err := d.ReadString(schemas.GetSolFunctionPackageOutput_usageState, &ev); err != nil {
-				return err
-			}
-			v.UsageState = types.UsageState(ev)
-			return nil
-		case schemas.GetSolFunctionPackageOutput_vnfProductName:
-			v.VnfProductName = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_vnfProductName, v.VnfProductName)
-		case schemas.GetSolFunctionPackageOutput_vnfProvider:
-			v.VnfProvider = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_vnfProvider, v.VnfProvider)
-		case schemas.GetSolFunctionPackageOutput_vnfdId:
-			v.VnfdId = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_vnfdId, v.VnfdId)
-		case schemas.GetSolFunctionPackageOutput_vnfdVersion:
-			v.VnfdVersion = new(string)
-			return d.ReadString(schemas.GetSolFunctionPackageOutput_vnfdVersion, v.VnfdVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSolFunctionPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSolFunctionPackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolFunctionPackage, schemas.GetSolFunctionPackageInput, schemas.GetSolFunctionPackageOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSolFunctionPackage{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolFunctionPackage, schemas.GetSolFunctionPackageInput, schemas.GetSolFunctionPackageOutput), output: &GetSolFunctionPackageOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSolFunctionPackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSolFunctionPackageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSolFunctionPackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +135,8 @@ func (c *Client) addOperationGetSolFunctionPackageMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSolFunctionPackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSolFunctionPackage",
-	}
 }

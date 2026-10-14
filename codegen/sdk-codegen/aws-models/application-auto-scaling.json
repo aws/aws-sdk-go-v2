@@ -2727,6 +2727,18 @@
                     "traits": {
                         "smithy.api#enumValue": "SageMakerVariantConcurrentRequestsPerModelHighResolution"
                     }
+                },
+                "ECSServiceAverageCPUUtilizationHighResolution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECSServiceAverageCPUUtilizationHighResolution"
+                    }
+                },
+                "ECSServiceAverageMemoryUtilizationHighResolution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECSServiceAverageMemoryUtilizationHighResolution"
+                    }
                 }
             }
         },
@@ -2831,7 +2843,7 @@
                 "PredefinedMetricType": {
                     "target": "com.amazonaws.applicationautoscaling#MetricType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to\n         Spot Fleets and ECS services.</p>",
+                        "smithy.api#documentation": "<p>The metric type. The following are notes about specific metric types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALBRequestCountPerTarget</code> - This metric type applies only to\n               Spot Fleets and ECS services.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ECSServiceAverageCPUUtilizationHighResolution</code> - The high-resolution\n               version of <code>ECSServiceAverageCPUUtilization</code> that uses 20-second CloudWatch\n               metrics. Use this metric for target tracking scaling policies that evaluate metrics\n               every 20 seconds. You must enable high-resolution metrics in Amazon ECS before creating\n               a scaling policy with this metric type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ECSServiceAverageMemoryUtilizationHighResolution</code> - The high-resolution\n               version of <code>ECSServiceAverageMemoryUtilization</code> that uses 20-second CloudWatch\n               metrics. Use this metric for target tracking scaling policies that evaluate metrics\n               every 20 seconds. You must enable high-resolution metrics in Amazon ECS before creating\n               a scaling policy with this metric type.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

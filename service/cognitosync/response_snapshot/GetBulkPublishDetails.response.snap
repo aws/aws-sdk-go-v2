@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BulkPublishCompleteTime":946684800,"BulkPublishStartTime":946684800,"BulkPublishStatus":"NOT_STARTED","FailureMessage":"__FailureMessage__","IdentityPoolId":"__IdentityPoolId__"}

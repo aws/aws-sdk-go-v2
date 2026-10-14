@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DeploymentStatus":"__DeploymentStatus__","DeploymentType":"NewDeployment","ErrorDetails":[{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"},{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"}],"ErrorMessage":"__ErrorMessage__","UpdatedAt":"__UpdatedAt__"}

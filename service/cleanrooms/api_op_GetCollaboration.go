@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns metadata about a collaboration.
@@ -37,6 +36,28 @@ type GetCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+func (v *GetCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationInput_collaborationIdentifier, v.CollaborationIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetCollaborationOutput struct {
 
 	// The entire collaboration for this identifier.
@@ -50,77 +71,50 @@ type GetCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Collaboration != nil {
+		s.WriteStruct(schemas.GetCollaborationOutput_collaboration)
+		v.Collaboration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationOutput_collaboration:
+			v.Collaboration = &types.Collaboration{}
+			return v.Collaboration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaboration, schemas.GetCollaborationInput, schemas.GetCollaborationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaboration, schemas.GetCollaborationInput, schemas.GetCollaborationOutput), output: &GetCollaborationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaboration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaboration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCollaborationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCollaboration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +129,8 @@ func (c *Client) addOperationGetCollaborationMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCollaboration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCollaboration",
-	}
 }

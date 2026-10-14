@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,14 @@ type AccessLogMemberFile struct {
 }
 
 func (*AccessLogMemberFile) isAccessLog() {}
+func (v *AccessLogMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessLog_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AccessLogMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the Cloud Map attribute information for your virtual
 // node.
@@ -44,6 +54,34 @@ type AwsCloudMapInstanceAttribute struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsCloudMapInstanceAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsCloudMapInstanceAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsCloudMapInstanceAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.AwsCloudMapInstanceAttribute_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AwsCloudMapInstanceAttribute_value, *v.Value)
+	}
+}
+func (v *AwsCloudMapInstanceAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsCloudMapInstanceAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsCloudMapInstanceAttribute_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AwsCloudMapInstanceAttribute_key, v.Key)
+		case schemas.AwsCloudMapInstanceAttribute_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AwsCloudMapInstanceAttribute_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An object that represents the Cloud Map service discovery information for your
@@ -76,6 +114,47 @@ type AwsCloudMapServiceDiscovery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsCloudMapServiceDiscovery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsCloudMapServiceDiscovery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsCloudMapServiceDiscovery) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsCloudMapInstanceAttributes(s, schemas.AwsCloudMapServiceDiscovery_attributes, v.Attributes)
+	if v.IpPreference != "" {
+		s.WriteString(schemas.AwsCloudMapServiceDiscovery_ipPreference, string(v.IpPreference))
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.AwsCloudMapServiceDiscovery_namespaceName, *v.NamespaceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.AwsCloudMapServiceDiscovery_serviceName, *v.ServiceName)
+	}
+}
+func (v *AwsCloudMapServiceDiscovery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsCloudMapServiceDiscovery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsCloudMapServiceDiscovery_attributes:
+			return deserializeAwsCloudMapInstanceAttributes(d, schemas.AwsCloudMapServiceDiscovery_attributes, &v.Attributes)
+		case schemas.AwsCloudMapServiceDiscovery_ipPreference:
+			var ev string
+			if err := d.ReadString(schemas.AwsCloudMapServiceDiscovery_ipPreference, &ev); err != nil {
+				return err
+			}
+			v.IpPreference = IpPreference(ev)
+			return nil
+		case schemas.AwsCloudMapServiceDiscovery_namespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.AwsCloudMapServiceDiscovery_namespaceName, v.NamespaceName)
+		case schemas.AwsCloudMapServiceDiscovery_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.AwsCloudMapServiceDiscovery_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // An object that represents the backends that a virtual node is expected to send
 // outbound traffic to.
 //
@@ -94,6 +173,14 @@ type BackendMemberVirtualService struct {
 }
 
 func (*BackendMemberVirtualService) isBackend() {}
+func (v *BackendMemberVirtualService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Backend_virtualService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *BackendMemberVirtualService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the default properties for a backend.
 type BackendDefaults struct {
@@ -104,6 +191,30 @@ type BackendDefaults struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackendDefaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackendDefaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackendDefaults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientPolicy != nil {
+		s.WriteStruct(schemas.BackendDefaults_clientPolicy)
+		v.ClientPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BackendDefaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackendDefaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackendDefaults_clientPolicy:
+			v.ClientPolicy = &ClientPolicy{}
+			return v.ClientPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents a client policy.
 type ClientPolicy struct {
 
@@ -112,6 +223,30 @@ type ClientPolicy struct {
 	Tls *ClientPolicyTls
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClientPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tls != nil {
+		s.WriteStruct(schemas.ClientPolicy_tls)
+		v.Tls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClientPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientPolicy_tls:
+			v.Tls = &ClientPolicyTls{}
+			return v.Tls.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A reference to an object that represents a Transport Layer Security (TLS)
@@ -133,6 +268,42 @@ type ClientPolicyTls struct {
 	Ports []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClientPolicyTls) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientPolicyTls)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientPolicyTls) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientTlsCertificate(s, schemas.ClientPolicyTls_certificate, v.Certificate)
+	if v.Enforce != nil {
+		s.WriteBool(schemas.ClientPolicyTls_enforce, *v.Enforce)
+	}
+	serializePortSet(s, schemas.ClientPolicyTls_ports, v.Ports)
+	if v.Validation != nil {
+		s.WriteStruct(schemas.ClientPolicyTls_validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClientPolicyTls) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientPolicyTls, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientPolicyTls_certificate:
+			return deserializeClientTlsCertificate(d, schemas.ClientPolicyTls_certificate, &v.Certificate)
+		case schemas.ClientPolicyTls_enforce:
+			v.Enforce = new(bool)
+			return d.ReadBool(schemas.ClientPolicyTls_enforce, v.Enforce)
+		case schemas.ClientPolicyTls_ports:
+			return deserializePortSet(d, schemas.ClientPolicyTls_ports, &v.Ports)
+		case schemas.ClientPolicyTls_validation:
+			v.Validation = &TlsValidationContext{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the client's certificate.
@@ -157,6 +328,14 @@ type ClientTlsCertificateMemberFile struct {
 }
 
 func (*ClientTlsCertificateMemberFile) isClientTlsCertificate() {}
+func (v *ClientTlsCertificateMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientTlsCertificate_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ClientTlsCertificateMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a client's TLS Secret Discovery
 // Service certificate.
@@ -167,6 +346,14 @@ type ClientTlsCertificateMemberSds struct {
 }
 
 func (*ClientTlsCertificateMemberSds) isClientTlsCertificate() {}
+func (v *ClientTlsCertificateMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientTlsCertificate_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ClientTlsCertificateMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the DNS service discovery information for your
 // virtual node.
@@ -188,6 +375,48 @@ type DnsServiceDiscovery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DnsServiceDiscovery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsServiceDiscovery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsServiceDiscovery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteString(schemas.DnsServiceDiscovery_hostname, *v.Hostname)
+	}
+	if v.IpPreference != "" {
+		s.WriteString(schemas.DnsServiceDiscovery_ipPreference, string(v.IpPreference))
+	}
+	if v.ResponseType != "" {
+		s.WriteString(schemas.DnsServiceDiscovery_responseType, string(v.ResponseType))
+	}
+}
+func (v *DnsServiceDiscovery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsServiceDiscovery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsServiceDiscovery_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.DnsServiceDiscovery_hostname, v.Hostname)
+		case schemas.DnsServiceDiscovery_ipPreference:
+			var ev string
+			if err := d.ReadString(schemas.DnsServiceDiscovery_ipPreference, &ev); err != nil {
+				return err
+			}
+			v.IpPreference = IpPreference(ev)
+			return nil
+		case schemas.DnsServiceDiscovery_responseType:
+			var ev string
+			if err := d.ReadString(schemas.DnsServiceDiscovery_responseType, &ev); err != nil {
+				return err
+			}
+			v.ResponseType = DnsResponseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that represents a duration of time.
 type Duration struct {
 
@@ -198,6 +427,38 @@ type Duration struct {
 	Value *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Duration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Duration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Duration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.Duration_unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteInt64(schemas.Duration_value, *v.Value)
+	}
+}
+func (v *Duration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Duration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Duration_unit:
+			var ev string
+			if err := d.ReadString(schemas.Duration_unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = DurationUnit(ev)
+			return nil
+		case schemas.Duration_value:
+			v.Value = new(int64)
+			return d.ReadInt64(schemas.Duration_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An object that represents the egress filter rules for a service mesh.
@@ -213,6 +474,32 @@ type EgressFilter struct {
 	Type EgressFilterType
 
 	noSmithyDocumentSerde
+}
+
+func (v *EgressFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EgressFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EgressFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.EgressFilter_type, string(v.Type))
+	}
+}
+func (v *EgressFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EgressFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EgressFilter_type:
+			var ev string
+			if err := d.ReadString(schemas.EgressFilter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EgressFilterType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents an access log file.
@@ -235,6 +522,31 @@ type FileAccessLog struct {
 	Format LoggingFormat
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileAccessLog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileAccessLog)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileAccessLog) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLoggingFormat(s, schemas.FileAccessLog_format, v.Format)
+	if v.Path != nil {
+		s.WriteString(schemas.FileAccessLog_path, *v.Path)
+	}
+}
+func (v *FileAccessLog) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileAccessLog, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileAccessLog_format:
+			return deserializeLoggingFormat(d, schemas.FileAccessLog_format, &v.Format)
+		case schemas.FileAccessLog_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.FileAccessLog_path, v.Path)
+		}
+		return nil
+	})
 }
 
 // An object that represents a gateway route returned by a describe operation.
@@ -273,6 +585,64 @@ type GatewayRouteData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayRouteData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRouteName != nil {
+		s.WriteString(schemas.GatewayRouteData_gatewayRouteName, *v.GatewayRouteName)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.GatewayRouteData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GatewayRouteData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.GatewayRouteData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GatewayRouteData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.GatewayRouteData_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *GatewayRouteData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteData_gatewayRouteName:
+			v.GatewayRouteName = new(string)
+			return d.ReadString(schemas.GatewayRouteData_gatewayRouteName, v.GatewayRouteName)
+		case schemas.GatewayRouteData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.GatewayRouteData_meshName, v.MeshName)
+		case schemas.GatewayRouteData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GatewayRouteData_spec:
+			v.Spec = &GatewayRouteSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.GatewayRouteData_status:
+			v.Status = &GatewayRouteStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GatewayRouteData_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.GatewayRouteData_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 // An object representing the gateway route host name to match.
 type GatewayRouteHostnameMatch struct {
 
@@ -285,6 +655,34 @@ type GatewayRouteHostnameMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayRouteHostnameMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteHostnameMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteHostnameMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exact != nil {
+		s.WriteString(schemas.GatewayRouteHostnameMatch_exact, *v.Exact)
+	}
+	if v.Suffix != nil {
+		s.WriteString(schemas.GatewayRouteHostnameMatch_suffix, *v.Suffix)
+	}
+}
+func (v *GatewayRouteHostnameMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteHostnameMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteHostnameMatch_exact:
+			v.Exact = new(string)
+			return d.ReadString(schemas.GatewayRouteHostnameMatch_exact, v.Exact)
+		case schemas.GatewayRouteHostnameMatch_suffix:
+			v.Suffix = new(string)
+			return d.ReadString(schemas.GatewayRouteHostnameMatch_suffix, v.Suffix)
+		}
+		return nil
+	})
+}
+
 // An object representing the gateway route host name to rewrite.
 type GatewayRouteHostnameRewrite struct {
 
@@ -292,6 +690,32 @@ type GatewayRouteHostnameRewrite struct {
 	DefaultTargetHostname DefaultGatewayRouteRewrite
 
 	noSmithyDocumentSerde
+}
+
+func (v *GatewayRouteHostnameRewrite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteHostnameRewrite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteHostnameRewrite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultTargetHostname != "" {
+		s.WriteString(schemas.GatewayRouteHostnameRewrite_defaultTargetHostname, string(v.DefaultTargetHostname))
+	}
+}
+func (v *GatewayRouteHostnameRewrite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteHostnameRewrite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteHostnameRewrite_defaultTargetHostname:
+			var ev string
+			if err := d.ReadString(schemas.GatewayRouteHostnameRewrite_defaultTargetHostname, &ev); err != nil {
+				return err
+			}
+			v.DefaultTargetHostname = DefaultGatewayRouteRewrite(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a gateway route returned by a list operation.
@@ -354,6 +778,76 @@ type GatewayRouteRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayRouteRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GatewayRouteRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GatewayRouteRef_createdAt, *v.CreatedAt)
+	}
+	if v.GatewayRouteName != nil {
+		s.WriteString(schemas.GatewayRouteRef_gatewayRouteName, *v.GatewayRouteName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GatewayRouteRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.GatewayRouteRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.GatewayRouteRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.GatewayRouteRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.GatewayRouteRef_version, *v.Version)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.GatewayRouteRef_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *GatewayRouteRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_arn, v.Arn)
+		case schemas.GatewayRouteRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GatewayRouteRef_createdAt, v.CreatedAt)
+		case schemas.GatewayRouteRef_gatewayRouteName:
+			v.GatewayRouteName = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_gatewayRouteName, v.GatewayRouteName)
+		case schemas.GatewayRouteRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GatewayRouteRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GatewayRouteRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_meshName, v.MeshName)
+		case schemas.GatewayRouteRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_meshOwner, v.MeshOwner)
+		case schemas.GatewayRouteRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_resourceOwner, v.ResourceOwner)
+		case schemas.GatewayRouteRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.GatewayRouteRef_version, v.Version)
+		case schemas.GatewayRouteRef_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.GatewayRouteRef_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a gateway route specification. Specify one gateway
 // route type.
 type GatewayRouteSpec struct {
@@ -373,6 +867,52 @@ type GatewayRouteSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayRouteSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrpcRoute != nil {
+		s.WriteStruct(schemas.GatewayRouteSpec_grpcRoute)
+		v.GrpcRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Http2Route != nil {
+		s.WriteStruct(schemas.GatewayRouteSpec_http2Route)
+		v.Http2Route.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpRoute != nil {
+		s.WriteStruct(schemas.GatewayRouteSpec_httpRoute)
+		v.HttpRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GatewayRouteSpec_priority, *v.Priority)
+	}
+}
+func (v *GatewayRouteSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteSpec_grpcRoute:
+			v.GrpcRoute = &GrpcGatewayRoute{}
+			return v.GrpcRoute.Deserialize(d)
+		case schemas.GatewayRouteSpec_http2Route:
+			v.Http2Route = &HttpGatewayRoute{}
+			return v.Http2Route.Deserialize(d)
+		case schemas.GatewayRouteSpec_httpRoute:
+			v.HttpRoute = &HttpGatewayRoute{}
+			return v.HttpRoute.Deserialize(d)
+		case schemas.GatewayRouteSpec_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GatewayRouteSpec_priority, v.Priority)
+		}
+		return nil
+	})
+}
+
 // An object that represents the current status of a gateway route.
 type GatewayRouteStatus struct {
 
@@ -382,6 +922,32 @@ type GatewayRouteStatus struct {
 	Status GatewayRouteStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *GatewayRouteStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GatewayRouteStatus_status, string(v.Status))
+	}
+}
+func (v *GatewayRouteStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.GatewayRouteStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = GatewayRouteStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a gateway route target.
@@ -398,6 +964,36 @@ type GatewayRouteTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayRouteTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteInt32(schemas.GatewayRouteTarget_port, *v.Port)
+	}
+	if v.VirtualService != nil {
+		s.WriteStruct(schemas.GatewayRouteTarget_virtualService)
+		v.VirtualService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GatewayRouteTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteTarget_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GatewayRouteTarget_port, v.Port)
+		case schemas.GatewayRouteTarget_virtualService:
+			v.VirtualService = &GatewayRouteVirtualService{}
+			return v.VirtualService.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the virtual service that traffic is routed to.
 type GatewayRouteVirtualService struct {
 
@@ -407,6 +1003,28 @@ type GatewayRouteVirtualService struct {
 	VirtualServiceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GatewayRouteVirtualService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayRouteVirtualService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayRouteVirtualService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.GatewayRouteVirtualService_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *GatewayRouteVirtualService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayRouteVirtualService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayRouteVirtualService_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.GatewayRouteVirtualService_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a gRPC gateway route.
@@ -425,6 +1043,38 @@ type GrpcGatewayRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcGatewayRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcGatewayRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcGatewayRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.GrpcGatewayRoute_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Match != nil {
+		s.WriteStruct(schemas.GrpcGatewayRoute_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GrpcGatewayRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcGatewayRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcGatewayRoute_action:
+			v.Action = &GrpcGatewayRouteAction{}
+			return v.Action.Deserialize(d)
+		case schemas.GrpcGatewayRoute_match:
+			v.Match = &GrpcGatewayRouteMatch{}
+			return v.Match.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the action to take if a match is determined.
 type GrpcGatewayRouteAction struct {
 
@@ -438,6 +1088,38 @@ type GrpcGatewayRouteAction struct {
 	Rewrite *GrpcGatewayRouteRewrite
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrpcGatewayRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcGatewayRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcGatewayRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rewrite != nil {
+		s.WriteStruct(schemas.GrpcGatewayRouteAction_rewrite)
+		v.Rewrite.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.GrpcGatewayRouteAction_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GrpcGatewayRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcGatewayRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcGatewayRouteAction_rewrite:
+			v.Rewrite = &GrpcGatewayRouteRewrite{}
+			return v.Rewrite.Deserialize(d)
+		case schemas.GrpcGatewayRouteAction_target:
+			v.Target = &GatewayRouteTarget{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the criteria for determining a request match.
@@ -458,6 +1140,45 @@ type GrpcGatewayRouteMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcGatewayRouteMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcGatewayRouteMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcGatewayRouteMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteStruct(schemas.GrpcGatewayRouteMatch_hostname)
+		v.Hostname.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGrpcGatewayRouteMetadataList(s, schemas.GrpcGatewayRouteMatch_metadata, v.Metadata)
+	if v.Port != nil {
+		s.WriteInt32(schemas.GrpcGatewayRouteMatch_port, *v.Port)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GrpcGatewayRouteMatch_serviceName, *v.ServiceName)
+	}
+}
+func (v *GrpcGatewayRouteMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcGatewayRouteMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcGatewayRouteMatch_hostname:
+			v.Hostname = &GatewayRouteHostnameMatch{}
+			return v.Hostname.Deserialize(d)
+		case schemas.GrpcGatewayRouteMatch_metadata:
+			return deserializeGrpcGatewayRouteMetadataList(d, schemas.GrpcGatewayRouteMatch_metadata, &v.Metadata)
+		case schemas.GrpcGatewayRouteMatch_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GrpcGatewayRouteMatch_port, v.Port)
+		case schemas.GrpcGatewayRouteMatch_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GrpcGatewayRouteMatch_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // An object representing the metadata of the gateway route.
 type GrpcGatewayRouteMetadata struct {
 
@@ -476,6 +1197,37 @@ type GrpcGatewayRouteMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcGatewayRouteMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcGatewayRouteMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcGatewayRouteMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Invert != nil {
+		s.WriteBool(schemas.GrpcGatewayRouteMetadata_invert, *v.Invert)
+	}
+	serializeGrpcMetadataMatchMethod(s, schemas.GrpcGatewayRouteMetadata_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.GrpcGatewayRouteMetadata_name, *v.Name)
+	}
+}
+func (v *GrpcGatewayRouteMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcGatewayRouteMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcGatewayRouteMetadata_invert:
+			v.Invert = new(bool)
+			return d.ReadBool(schemas.GrpcGatewayRouteMetadata_invert, v.Invert)
+		case schemas.GrpcGatewayRouteMetadata_match:
+			return deserializeGrpcMetadataMatchMethod(d, schemas.GrpcGatewayRouteMetadata_match, &v.Match)
+		case schemas.GrpcGatewayRouteMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GrpcGatewayRouteMetadata_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // An object that represents the gateway route to rewrite.
 type GrpcGatewayRouteRewrite struct {
 
@@ -483,6 +1235,30 @@ type GrpcGatewayRouteRewrite struct {
 	Hostname *GatewayRouteHostnameRewrite
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrpcGatewayRouteRewrite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcGatewayRouteRewrite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcGatewayRouteRewrite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteStruct(schemas.GrpcGatewayRouteRewrite_hostname)
+		v.Hostname.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GrpcGatewayRouteRewrite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcGatewayRouteRewrite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcGatewayRouteRewrite_hostname:
+			v.Hostname = &GatewayRouteHostnameRewrite{}
+			return v.Hostname.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object representing the method header to be matched.
@@ -506,6 +1282,12 @@ type GrpcMetadataMatchMethodMemberExact struct {
 }
 
 func (*GrpcMetadataMatchMethodMemberExact) isGrpcMetadataMatchMethod() {}
+func (v *GrpcMetadataMatchMethodMemberExact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcMetadataMatchMethod_exact, v.Value)
+}
+func (v *GrpcMetadataMatchMethodMemberExact) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcMetadataMatchMethod_exact, &v.Value)
+}
 
 // The specified beginning characters of the method header to be matched on.
 type GrpcMetadataMatchMethodMemberPrefix struct {
@@ -515,6 +1297,12 @@ type GrpcMetadataMatchMethodMemberPrefix struct {
 }
 
 func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
+func (v *GrpcMetadataMatchMethodMemberPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcMetadataMatchMethod_prefix, v.Value)
+}
+func (v *GrpcMetadataMatchMethodMemberPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcMetadataMatchMethod_prefix, &v.Value)
+}
 
 // An object that represents the range of values to match on. The first character
 // of the range is included in the range, though the last character is not. For
@@ -526,6 +1314,14 @@ type GrpcMetadataMatchMethodMemberRange struct {
 }
 
 func (*GrpcMetadataMatchMethodMemberRange) isGrpcMetadataMatchMethod() {}
+func (v *GrpcMetadataMatchMethodMemberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcMetadataMatchMethod_range)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GrpcMetadataMatchMethodMemberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The regex used to match the method header.
 type GrpcMetadataMatchMethodMemberRegex struct {
@@ -535,6 +1331,12 @@ type GrpcMetadataMatchMethodMemberRegex struct {
 }
 
 func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
+func (v *GrpcMetadataMatchMethodMemberRegex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcMetadataMatchMethod_regex, v.Value)
+}
+func (v *GrpcMetadataMatchMethodMemberRegex) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcMetadataMatchMethod_regex, &v.Value)
+}
 
 // The specified ending characters of the method header to match on.
 type GrpcMetadataMatchMethodMemberSuffix struct {
@@ -544,6 +1346,12 @@ type GrpcMetadataMatchMethodMemberSuffix struct {
 }
 
 func (*GrpcMetadataMatchMethodMemberSuffix) isGrpcMetadataMatchMethod() {}
+func (v *GrpcMetadataMatchMethodMemberSuffix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcMetadataMatchMethod_suffix, v.Value)
+}
+func (v *GrpcMetadataMatchMethodMemberSuffix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcMetadataMatchMethod_suffix, &v.Value)
+}
 
 // An object that represents a retry policy. Specify at least one value for at
 // least one of the types of RetryEvents , a value for maxRetries , and a value for
@@ -587,6 +1395,45 @@ type GrpcRetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcRetryPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRetryPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcRetryPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrpcRetryPolicyEvents(s, schemas.GrpcRetryPolicy_grpcRetryEvents, v.GrpcRetryEvents)
+	serializeHttpRetryPolicyEvents(s, schemas.GrpcRetryPolicy_httpRetryEvents, v.HttpRetryEvents)
+	if v.MaxRetries != nil {
+		s.WriteInt64(schemas.GrpcRetryPolicy_maxRetries, *v.MaxRetries)
+	}
+	if v.PerRetryTimeout != nil {
+		s.WriteStruct(schemas.GrpcRetryPolicy_perRetryTimeout)
+		v.PerRetryTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTcpRetryPolicyEvents(s, schemas.GrpcRetryPolicy_tcpRetryEvents, v.TcpRetryEvents)
+}
+func (v *GrpcRetryPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcRetryPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcRetryPolicy_grpcRetryEvents:
+			return deserializeGrpcRetryPolicyEvents(d, schemas.GrpcRetryPolicy_grpcRetryEvents, &v.GrpcRetryEvents)
+		case schemas.GrpcRetryPolicy_httpRetryEvents:
+			return deserializeHttpRetryPolicyEvents(d, schemas.GrpcRetryPolicy_httpRetryEvents, &v.HttpRetryEvents)
+		case schemas.GrpcRetryPolicy_maxRetries:
+			v.MaxRetries = new(int64)
+			return d.ReadInt64(schemas.GrpcRetryPolicy_maxRetries, v.MaxRetries)
+		case schemas.GrpcRetryPolicy_perRetryTimeout:
+			v.PerRetryTimeout = &Duration{}
+			return v.PerRetryTimeout.Deserialize(d)
+		case schemas.GrpcRetryPolicy_tcpRetryEvents:
+			return deserializeTcpRetryPolicyEvents(d, schemas.GrpcRetryPolicy_tcpRetryEvents, &v.TcpRetryEvents)
+		}
+		return nil
+	})
+}
+
 // An object that represents a gRPC route type.
 type GrpcRoute struct {
 
@@ -609,6 +1456,54 @@ type GrpcRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.GrpcRoute_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Match != nil {
+		s.WriteStruct(schemas.GrpcRoute_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryPolicy != nil {
+		s.WriteStruct(schemas.GrpcRoute_retryPolicy)
+		v.RetryPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.GrpcRoute_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GrpcRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcRoute_action:
+			v.Action = &GrpcRouteAction{}
+			return v.Action.Deserialize(d)
+		case schemas.GrpcRoute_match:
+			v.Match = &GrpcRouteMatch{}
+			return v.Match.Deserialize(d)
+		case schemas.GrpcRoute_retryPolicy:
+			v.RetryPolicy = &GrpcRetryPolicy{}
+			return v.RetryPolicy.Deserialize(d)
+		case schemas.GrpcRoute_timeout:
+			v.Timeout = &GrpcTimeout{}
+			return v.Timeout.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the action to take if a match is determined.
 type GrpcRouteAction struct {
 
@@ -619,6 +1514,25 @@ type GrpcRouteAction struct {
 	WeightedTargets []WeightedTarget
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrpcRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWeightedTargets(s, schemas.GrpcRouteAction_weightedTargets, v.WeightedTargets)
+}
+func (v *GrpcRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcRouteAction_weightedTargets:
+			return deserializeWeightedTargets(d, schemas.GrpcRouteAction_weightedTargets, &v.WeightedTargets)
+		}
+		return nil
+	})
 }
 
 // An object that represents the criteria for determining a request match.
@@ -640,6 +1554,43 @@ type GrpcRouteMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrpcRouteMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRouteMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcRouteMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrpcRouteMetadataList(s, schemas.GrpcRouteMatch_metadata, v.Metadata)
+	if v.MethodName != nil {
+		s.WriteString(schemas.GrpcRouteMatch_methodName, *v.MethodName)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.GrpcRouteMatch_port, *v.Port)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GrpcRouteMatch_serviceName, *v.ServiceName)
+	}
+}
+func (v *GrpcRouteMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcRouteMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcRouteMatch_metadata:
+			return deserializeGrpcRouteMetadataList(d, schemas.GrpcRouteMatch_metadata, &v.Metadata)
+		case schemas.GrpcRouteMatch_methodName:
+			v.MethodName = new(string)
+			return d.ReadString(schemas.GrpcRouteMatch_methodName, v.MethodName)
+		case schemas.GrpcRouteMatch_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GrpcRouteMatch_port, v.Port)
+		case schemas.GrpcRouteMatch_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GrpcRouteMatch_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 // An object that represents the match metadata for the route.
 type GrpcRouteMetadata struct {
 
@@ -656,6 +1607,37 @@ type GrpcRouteMetadata struct {
 	Match GrpcRouteMetadataMatchMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrpcRouteMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRouteMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcRouteMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Invert != nil {
+		s.WriteBool(schemas.GrpcRouteMetadata_invert, *v.Invert)
+	}
+	serializeGrpcRouteMetadataMatchMethod(s, schemas.GrpcRouteMetadata_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.GrpcRouteMetadata_name, *v.Name)
+	}
+}
+func (v *GrpcRouteMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcRouteMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcRouteMetadata_invert:
+			v.Invert = new(bool)
+			return d.ReadBool(schemas.GrpcRouteMetadata_invert, v.Invert)
+		case schemas.GrpcRouteMetadata_match:
+			return deserializeGrpcRouteMetadataMatchMethod(d, schemas.GrpcRouteMetadata_match, &v.Match)
+		case schemas.GrpcRouteMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GrpcRouteMetadata_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An object that represents the match method. Specify one of the match values.
@@ -679,6 +1661,12 @@ type GrpcRouteMetadataMatchMethodMemberExact struct {
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberExact) isGrpcRouteMetadataMatchMethod() {}
+func (v *GrpcRouteMetadataMatchMethodMemberExact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcRouteMetadataMatchMethod_exact, v.Value)
+}
+func (v *GrpcRouteMetadataMatchMethodMemberExact) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcRouteMetadataMatchMethod_exact, &v.Value)
+}
 
 // The value sent by the client must begin with the specified characters.
 type GrpcRouteMetadataMatchMethodMemberPrefix struct {
@@ -688,6 +1676,12 @@ type GrpcRouteMetadataMatchMethodMemberPrefix struct {
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberPrefix) isGrpcRouteMetadataMatchMethod() {}
+func (v *GrpcRouteMetadataMatchMethodMemberPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcRouteMetadataMatchMethod_prefix, v.Value)
+}
+func (v *GrpcRouteMetadataMatchMethodMemberPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcRouteMetadataMatchMethod_prefix, &v.Value)
+}
 
 // An object that represents the range of values to match on.
 type GrpcRouteMetadataMatchMethodMemberRange struct {
@@ -697,6 +1691,14 @@ type GrpcRouteMetadataMatchMethodMemberRange struct {
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberRange) isGrpcRouteMetadataMatchMethod() {}
+func (v *GrpcRouteMetadataMatchMethodMemberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcRouteMetadataMatchMethod_range)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GrpcRouteMetadataMatchMethodMemberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The value sent by the client must include the specified characters.
 type GrpcRouteMetadataMatchMethodMemberRegex struct {
@@ -706,6 +1708,12 @@ type GrpcRouteMetadataMatchMethodMemberRegex struct {
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod() {}
+func (v *GrpcRouteMetadataMatchMethodMemberRegex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcRouteMetadataMatchMethod_regex, v.Value)
+}
+func (v *GrpcRouteMetadataMatchMethodMemberRegex) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcRouteMetadataMatchMethod_regex, &v.Value)
+}
 
 // The value sent by the client must end with the specified characters.
 type GrpcRouteMetadataMatchMethodMemberSuffix struct {
@@ -715,6 +1723,12 @@ type GrpcRouteMetadataMatchMethodMemberSuffix struct {
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberSuffix) isGrpcRouteMetadataMatchMethod() {}
+func (v *GrpcRouteMetadataMatchMethodMemberSuffix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GrpcRouteMetadataMatchMethod_suffix, v.Value)
+}
+func (v *GrpcRouteMetadataMatchMethodMemberSuffix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GrpcRouteMetadataMatchMethod_suffix, &v.Value)
+}
 
 // An object that represents types of timeouts.
 type GrpcTimeout struct {
@@ -732,6 +1746,38 @@ type GrpcTimeout struct {
 	PerRequest *Duration
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrpcTimeout) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrpcTimeout)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrpcTimeout) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Idle != nil {
+		s.WriteStruct(schemas.GrpcTimeout_idle)
+		v.Idle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerRequest != nil {
+		s.WriteStruct(schemas.GrpcTimeout_perRequest)
+		v.PerRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GrpcTimeout) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrpcTimeout, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrpcTimeout_idle:
+			v.Idle = &Duration{}
+			return v.Idle.Deserialize(d)
+		case schemas.GrpcTimeout_perRequest:
+			v.PerRequest = &Duration{}
+			return v.PerRequest.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the method and value to match with the header value
@@ -756,6 +1802,12 @@ type HeaderMatchMethodMemberExact struct {
 }
 
 func (*HeaderMatchMethodMemberExact) isHeaderMatchMethod() {}
+func (v *HeaderMatchMethodMemberExact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.HeaderMatchMethod_exact, v.Value)
+}
+func (v *HeaderMatchMethodMemberExact) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.HeaderMatchMethod_exact, &v.Value)
+}
 
 // The value sent by the client must begin with the specified characters.
 type HeaderMatchMethodMemberPrefix struct {
@@ -765,6 +1817,12 @@ type HeaderMatchMethodMemberPrefix struct {
 }
 
 func (*HeaderMatchMethodMemberPrefix) isHeaderMatchMethod() {}
+func (v *HeaderMatchMethodMemberPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.HeaderMatchMethod_prefix, v.Value)
+}
+func (v *HeaderMatchMethodMemberPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.HeaderMatchMethod_prefix, &v.Value)
+}
 
 // An object that represents the range of values to match on.
 type HeaderMatchMethodMemberRange struct {
@@ -774,6 +1832,14 @@ type HeaderMatchMethodMemberRange struct {
 }
 
 func (*HeaderMatchMethodMemberRange) isHeaderMatchMethod() {}
+func (v *HeaderMatchMethodMemberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HeaderMatchMethod_range)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *HeaderMatchMethodMemberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The value sent by the client must include the specified characters.
 type HeaderMatchMethodMemberRegex struct {
@@ -783,6 +1849,12 @@ type HeaderMatchMethodMemberRegex struct {
 }
 
 func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
+func (v *HeaderMatchMethodMemberRegex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.HeaderMatchMethod_regex, v.Value)
+}
+func (v *HeaderMatchMethodMemberRegex) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.HeaderMatchMethod_regex, &v.Value)
+}
 
 // The value sent by the client must end with the specified characters.
 type HeaderMatchMethodMemberSuffix struct {
@@ -792,6 +1864,12 @@ type HeaderMatchMethodMemberSuffix struct {
 }
 
 func (*HeaderMatchMethodMemberSuffix) isHeaderMatchMethod() {}
+func (v *HeaderMatchMethodMemberSuffix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.HeaderMatchMethod_suffix, v.Value)
+}
+func (v *HeaderMatchMethodMemberSuffix) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.HeaderMatchMethod_suffix, &v.Value)
+}
 
 // An object that represents the health check policy for a virtual node's listener.
 type HealthCheckPolicy struct {
@@ -839,6 +1917,68 @@ type HealthCheckPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthCheckPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthCheckPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthCheckPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthyThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckPolicy_healthyThreshold, *v.HealthyThreshold)
+	}
+	if v.IntervalMillis != nil {
+		s.WriteInt64(schemas.HealthCheckPolicy_intervalMillis, *v.IntervalMillis)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.HealthCheckPolicy_path, *v.Path)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.HealthCheckPolicy_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.HealthCheckPolicy_protocol, string(v.Protocol))
+	}
+	if v.TimeoutMillis != nil {
+		s.WriteInt64(schemas.HealthCheckPolicy_timeoutMillis, *v.TimeoutMillis)
+	}
+	if v.UnhealthyThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckPolicy_unhealthyThreshold, *v.UnhealthyThreshold)
+	}
+}
+func (v *HealthCheckPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthCheckPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthCheckPolicy_healthyThreshold:
+			v.HealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckPolicy_healthyThreshold, v.HealthyThreshold)
+		case schemas.HealthCheckPolicy_intervalMillis:
+			v.IntervalMillis = new(int64)
+			return d.ReadInt64(schemas.HealthCheckPolicy_intervalMillis, v.IntervalMillis)
+		case schemas.HealthCheckPolicy_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.HealthCheckPolicy_path, v.Path)
+		case schemas.HealthCheckPolicy_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.HealthCheckPolicy_port, v.Port)
+		case schemas.HealthCheckPolicy_protocol:
+			var ev string
+			if err := d.ReadString(schemas.HealthCheckPolicy_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = PortProtocol(ev)
+			return nil
+		case schemas.HealthCheckPolicy_timeoutMillis:
+			v.TimeoutMillis = new(int64)
+			return d.ReadInt64(schemas.HealthCheckPolicy_timeoutMillis, v.TimeoutMillis)
+		case schemas.HealthCheckPolicy_unhealthyThreshold:
+			v.UnhealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckPolicy_unhealthyThreshold, v.UnhealthyThreshold)
+		}
+		return nil
+	})
+}
+
 // An object that represents an HTTP gateway route.
 type HttpGatewayRoute struct {
 
@@ -855,6 +1995,38 @@ type HttpGatewayRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpGatewayRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.HttpGatewayRoute_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Match != nil {
+		s.WriteStruct(schemas.HttpGatewayRoute_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpGatewayRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRoute_action:
+			v.Action = &HttpGatewayRouteAction{}
+			return v.Action.Deserialize(d)
+		case schemas.HttpGatewayRoute_match:
+			v.Match = &HttpGatewayRouteMatch{}
+			return v.Match.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the action to take if a match is determined.
 type HttpGatewayRouteAction struct {
 
@@ -868,6 +2040,38 @@ type HttpGatewayRouteAction struct {
 	Rewrite *HttpGatewayRouteRewrite
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpGatewayRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rewrite != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteAction_rewrite)
+		v.Rewrite.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteAction_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpGatewayRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRouteAction_rewrite:
+			v.Rewrite = &HttpGatewayRouteRewrite{}
+			return v.Rewrite.Deserialize(d)
+		case schemas.HttpGatewayRouteAction_target:
+			v.Target = &GatewayRouteTarget{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the HTTP header in the gateway route.
@@ -887,6 +2091,37 @@ type HttpGatewayRouteHeader struct {
 	Match HeaderMatchMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpGatewayRouteHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRouteHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRouteHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Invert != nil {
+		s.WriteBool(schemas.HttpGatewayRouteHeader_invert, *v.Invert)
+	}
+	serializeHeaderMatchMethod(s, schemas.HttpGatewayRouteHeader_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.HttpGatewayRouteHeader_name, *v.Name)
+	}
+}
+func (v *HttpGatewayRouteHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRouteHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRouteHeader_invert:
+			v.Invert = new(bool)
+			return d.ReadBool(schemas.HttpGatewayRouteHeader_invert, v.Invert)
+		case schemas.HttpGatewayRouteHeader_match:
+			return deserializeHeaderMatchMethod(d, schemas.HttpGatewayRouteHeader_match, &v.Match)
+		case schemas.HttpGatewayRouteHeader_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HttpGatewayRouteHeader_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An object that represents the criteria for determining a request match.
@@ -920,6 +2155,66 @@ type HttpGatewayRouteMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpGatewayRouteMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRouteMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRouteMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpGatewayRouteHeaders(s, schemas.HttpGatewayRouteMatch_headers, v.Headers)
+	if v.Hostname != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteMatch_hostname)
+		v.Hostname.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Method != "" {
+		s.WriteString(schemas.HttpGatewayRouteMatch_method, string(v.Method))
+	}
+	if v.Path != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteMatch_path)
+		v.Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.HttpGatewayRouteMatch_port, *v.Port)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.HttpGatewayRouteMatch_prefix, *v.Prefix)
+	}
+	serializeHttpQueryParameters(s, schemas.HttpGatewayRouteMatch_queryParameters, v.QueryParameters)
+}
+func (v *HttpGatewayRouteMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRouteMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRouteMatch_headers:
+			return deserializeHttpGatewayRouteHeaders(d, schemas.HttpGatewayRouteMatch_headers, &v.Headers)
+		case schemas.HttpGatewayRouteMatch_hostname:
+			v.Hostname = &GatewayRouteHostnameMatch{}
+			return v.Hostname.Deserialize(d)
+		case schemas.HttpGatewayRouteMatch_method:
+			var ev string
+			if err := d.ReadString(schemas.HttpGatewayRouteMatch_method, &ev); err != nil {
+				return err
+			}
+			v.Method = HttpMethod(ev)
+			return nil
+		case schemas.HttpGatewayRouteMatch_path:
+			v.Path = &HttpPathMatch{}
+			return v.Path.Deserialize(d)
+		case schemas.HttpGatewayRouteMatch_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.HttpGatewayRouteMatch_port, v.Port)
+		case schemas.HttpGatewayRouteMatch_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.HttpGatewayRouteMatch_prefix, v.Prefix)
+		case schemas.HttpGatewayRouteMatch_queryParameters:
+			return deserializeHttpQueryParameters(d, schemas.HttpGatewayRouteMatch_queryParameters, &v.QueryParameters)
+		}
+		return nil
+	})
+}
+
 // An object that represents the path to rewrite.
 type HttpGatewayRoutePathRewrite struct {
 
@@ -927,6 +2222,28 @@ type HttpGatewayRoutePathRewrite struct {
 	Exact *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpGatewayRoutePathRewrite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRoutePathRewrite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRoutePathRewrite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exact != nil {
+		s.WriteString(schemas.HttpGatewayRoutePathRewrite_exact, *v.Exact)
+	}
+}
+func (v *HttpGatewayRoutePathRewrite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRoutePathRewrite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRoutePathRewrite_exact:
+			v.Exact = new(string)
+			return d.ReadString(schemas.HttpGatewayRoutePathRewrite_exact, v.Exact)
+		}
+		return nil
+	})
 }
 
 // An object representing the beginning characters of the route to rewrite.
@@ -939,6 +2256,38 @@ type HttpGatewayRoutePrefixRewrite struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpGatewayRoutePrefixRewrite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRoutePrefixRewrite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRoutePrefixRewrite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultPrefix != "" {
+		s.WriteString(schemas.HttpGatewayRoutePrefixRewrite_defaultPrefix, string(v.DefaultPrefix))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.HttpGatewayRoutePrefixRewrite_value, *v.Value)
+	}
+}
+func (v *HttpGatewayRoutePrefixRewrite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRoutePrefixRewrite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRoutePrefixRewrite_defaultPrefix:
+			var ev string
+			if err := d.ReadString(schemas.HttpGatewayRoutePrefixRewrite_defaultPrefix, &ev); err != nil {
+				return err
+			}
+			v.DefaultPrefix = DefaultGatewayRouteRewrite(ev)
+			return nil
+		case schemas.HttpGatewayRoutePrefixRewrite_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.HttpGatewayRoutePrefixRewrite_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An object representing the gateway route to rewrite.
@@ -956,6 +2305,46 @@ type HttpGatewayRouteRewrite struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpGatewayRouteRewrite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpGatewayRouteRewrite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpGatewayRouteRewrite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteRewrite_hostname)
+		v.Hostname.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Path != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteRewrite_path)
+		v.Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Prefix != nil {
+		s.WriteStruct(schemas.HttpGatewayRouteRewrite_prefix)
+		v.Prefix.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpGatewayRouteRewrite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpGatewayRouteRewrite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpGatewayRouteRewrite_hostname:
+			v.Hostname = &GatewayRouteHostnameRewrite{}
+			return v.Hostname.Deserialize(d)
+		case schemas.HttpGatewayRouteRewrite_path:
+			v.Path = &HttpGatewayRoutePathRewrite{}
+			return v.Path.Deserialize(d)
+		case schemas.HttpGatewayRouteRewrite_prefix:
+			v.Prefix = &HttpGatewayRoutePrefixRewrite{}
+			return v.Prefix.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object representing the path to match in the request.
 type HttpPathMatch struct {
 
@@ -966,6 +2355,34 @@ type HttpPathMatch struct {
 	Regex *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpPathMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPathMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPathMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exact != nil {
+		s.WriteString(schemas.HttpPathMatch_exact, *v.Exact)
+	}
+	if v.Regex != nil {
+		s.WriteString(schemas.HttpPathMatch_regex, *v.Regex)
+	}
+}
+func (v *HttpPathMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPathMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPathMatch_exact:
+			v.Exact = new(string)
+			return d.ReadString(schemas.HttpPathMatch_exact, v.Exact)
+		case schemas.HttpPathMatch_regex:
+			v.Regex = new(string)
+			return d.ReadString(schemas.HttpPathMatch_regex, v.Regex)
+		}
+		return nil
+	})
 }
 
 // An object that represents the query parameter in the request.
@@ -980,6 +2397,36 @@ type HttpQueryParameter struct {
 	Match *QueryParameterMatch
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpQueryParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpQueryParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpQueryParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Match != nil {
+		s.WriteStruct(schemas.HttpQueryParameter_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.HttpQueryParameter_name, *v.Name)
+	}
+}
+func (v *HttpQueryParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpQueryParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpQueryParameter_match:
+			v.Match = &QueryParameterMatch{}
+			return v.Match.Deserialize(d)
+		case schemas.HttpQueryParameter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HttpQueryParameter_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An object that represents a retry policy. Specify at least one value for at
@@ -1021,6 +2468,42 @@ type HttpRetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRetryPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRetryPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRetryPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpRetryPolicyEvents(s, schemas.HttpRetryPolicy_httpRetryEvents, v.HttpRetryEvents)
+	if v.MaxRetries != nil {
+		s.WriteInt64(schemas.HttpRetryPolicy_maxRetries, *v.MaxRetries)
+	}
+	if v.PerRetryTimeout != nil {
+		s.WriteStruct(schemas.HttpRetryPolicy_perRetryTimeout)
+		v.PerRetryTimeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTcpRetryPolicyEvents(s, schemas.HttpRetryPolicy_tcpRetryEvents, v.TcpRetryEvents)
+}
+func (v *HttpRetryPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRetryPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRetryPolicy_httpRetryEvents:
+			return deserializeHttpRetryPolicyEvents(d, schemas.HttpRetryPolicy_httpRetryEvents, &v.HttpRetryEvents)
+		case schemas.HttpRetryPolicy_maxRetries:
+			v.MaxRetries = new(int64)
+			return d.ReadInt64(schemas.HttpRetryPolicy_maxRetries, v.MaxRetries)
+		case schemas.HttpRetryPolicy_perRetryTimeout:
+			v.PerRetryTimeout = &Duration{}
+			return v.PerRetryTimeout.Deserialize(d)
+		case schemas.HttpRetryPolicy_tcpRetryEvents:
+			return deserializeTcpRetryPolicyEvents(d, schemas.HttpRetryPolicy_tcpRetryEvents, &v.TcpRetryEvents)
+		}
+		return nil
+	})
+}
+
 // An object that represents an HTTP or HTTP/2 route type.
 type HttpRoute struct {
 
@@ -1043,6 +2526,54 @@ type HttpRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.HttpRoute_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Match != nil {
+		s.WriteStruct(schemas.HttpRoute_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryPolicy != nil {
+		s.WriteStruct(schemas.HttpRoute_retryPolicy)
+		v.RetryPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.HttpRoute_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRoute_action:
+			v.Action = &HttpRouteAction{}
+			return v.Action.Deserialize(d)
+		case schemas.HttpRoute_match:
+			v.Match = &HttpRouteMatch{}
+			return v.Match.Deserialize(d)
+		case schemas.HttpRoute_retryPolicy:
+			v.RetryPolicy = &HttpRetryPolicy{}
+			return v.RetryPolicy.Deserialize(d)
+		case schemas.HttpRoute_timeout:
+			v.Timeout = &HttpTimeout{}
+			return v.Timeout.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the action to take if a match is determined.
 type HttpRouteAction struct {
 
@@ -1053,6 +2584,25 @@ type HttpRouteAction struct {
 	WeightedTargets []WeightedTarget
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWeightedTargets(s, schemas.HttpRouteAction_weightedTargets, v.WeightedTargets)
+}
+func (v *HttpRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRouteAction_weightedTargets:
+			return deserializeWeightedTargets(d, schemas.HttpRouteAction_weightedTargets, &v.WeightedTargets)
+		}
+		return nil
+	})
 }
 
 // An object that represents the HTTP header in the request.
@@ -1071,6 +2621,37 @@ type HttpRouteHeader struct {
 	Match HeaderMatchMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpRouteHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRouteHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRouteHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Invert != nil {
+		s.WriteBool(schemas.HttpRouteHeader_invert, *v.Invert)
+	}
+	serializeHeaderMatchMethod(s, schemas.HttpRouteHeader_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.HttpRouteHeader_name, *v.Name)
+	}
+}
+func (v *HttpRouteHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRouteHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRouteHeader_invert:
+			v.Invert = new(bool)
+			return d.ReadBool(schemas.HttpRouteHeader_invert, v.Invert)
+		case schemas.HttpRouteHeader_match:
+			return deserializeHeaderMatchMethod(d, schemas.HttpRouteHeader_match, &v.Match)
+		case schemas.HttpRouteHeader_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HttpRouteHeader_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An object that represents the requirements for a route to match HTTP requests
@@ -1106,6 +2687,68 @@ type HttpRouteMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRouteMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRouteMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRouteMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpRouteHeaders(s, schemas.HttpRouteMatch_headers, v.Headers)
+	if v.Method != "" {
+		s.WriteString(schemas.HttpRouteMatch_method, string(v.Method))
+	}
+	if v.Path != nil {
+		s.WriteStruct(schemas.HttpRouteMatch_path)
+		v.Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.HttpRouteMatch_port, *v.Port)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.HttpRouteMatch_prefix, *v.Prefix)
+	}
+	serializeHttpQueryParameters(s, schemas.HttpRouteMatch_queryParameters, v.QueryParameters)
+	if v.Scheme != "" {
+		s.WriteString(schemas.HttpRouteMatch_scheme, string(v.Scheme))
+	}
+}
+func (v *HttpRouteMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRouteMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRouteMatch_headers:
+			return deserializeHttpRouteHeaders(d, schemas.HttpRouteMatch_headers, &v.Headers)
+		case schemas.HttpRouteMatch_method:
+			var ev string
+			if err := d.ReadString(schemas.HttpRouteMatch_method, &ev); err != nil {
+				return err
+			}
+			v.Method = HttpMethod(ev)
+			return nil
+		case schemas.HttpRouteMatch_path:
+			v.Path = &HttpPathMatch{}
+			return v.Path.Deserialize(d)
+		case schemas.HttpRouteMatch_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.HttpRouteMatch_port, v.Port)
+		case schemas.HttpRouteMatch_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.HttpRouteMatch_prefix, v.Prefix)
+		case schemas.HttpRouteMatch_queryParameters:
+			return deserializeHttpQueryParameters(d, schemas.HttpRouteMatch_queryParameters, &v.QueryParameters)
+		case schemas.HttpRouteMatch_scheme:
+			var ev string
+			if err := d.ReadString(schemas.HttpRouteMatch_scheme, &ev); err != nil {
+				return err
+			}
+			v.Scheme = HttpScheme(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that represents types of timeouts.
 type HttpTimeout struct {
 
@@ -1124,6 +2767,38 @@ type HttpTimeout struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpTimeout) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpTimeout)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpTimeout) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Idle != nil {
+		s.WriteStruct(schemas.HttpTimeout_idle)
+		v.Idle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerRequest != nil {
+		s.WriteStruct(schemas.HttpTimeout_perRequest)
+		v.PerRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpTimeout) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpTimeout, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpTimeout_idle:
+			v.Idle = &Duration{}
+			return v.Idle.Deserialize(d)
+		case schemas.HttpTimeout_perRequest:
+			v.PerRequest = &Duration{}
+			return v.PerRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the key value pairs for the JSON.
 type JsonFormatRef struct {
 
@@ -1138,6 +2813,34 @@ type JsonFormatRef struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JsonFormatRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonFormatRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonFormatRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.JsonFormatRef_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.JsonFormatRef_value, *v.Value)
+	}
+}
+func (v *JsonFormatRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonFormatRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonFormatRef_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.JsonFormatRef_key, v.Key)
+		case schemas.JsonFormatRef_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.JsonFormatRef_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An object that represents a listener for a virtual node.
@@ -1167,6 +2870,60 @@ type Listener struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Listener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Listener)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Listener) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualNodeConnectionPool(s, schemas.Listener_connectionPool, v.ConnectionPool)
+	if v.HealthCheck != nil {
+		s.WriteStruct(schemas.Listener_healthCheck)
+		v.HealthCheck.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutlierDetection != nil {
+		s.WriteStruct(schemas.Listener_outlierDetection)
+		v.OutlierDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortMapping != nil {
+		s.WriteStruct(schemas.Listener_portMapping)
+		v.PortMapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListenerTimeout(s, schemas.Listener_timeout, v.Timeout)
+	if v.Tls != nil {
+		s.WriteStruct(schemas.Listener_tls)
+		v.Tls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Listener) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Listener, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Listener_connectionPool:
+			return deserializeVirtualNodeConnectionPool(d, schemas.Listener_connectionPool, &v.ConnectionPool)
+		case schemas.Listener_healthCheck:
+			v.HealthCheck = &HealthCheckPolicy{}
+			return v.HealthCheck.Deserialize(d)
+		case schemas.Listener_outlierDetection:
+			v.OutlierDetection = &OutlierDetection{}
+			return v.OutlierDetection.Deserialize(d)
+		case schemas.Listener_portMapping:
+			v.PortMapping = &PortMapping{}
+			return v.PortMapping.Deserialize(d)
+		case schemas.Listener_timeout:
+			return deserializeListenerTimeout(d, schemas.Listener_timeout, &v.Timeout)
+		case schemas.Listener_tls:
+			v.Tls = &ListenerTls{}
+			return v.Tls.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents timeouts for different protocols.
 //
 // The following types satisfy this interface:
@@ -1187,6 +2944,14 @@ type ListenerTimeoutMemberGrpc struct {
 }
 
 func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
+func (v *ListenerTimeoutMemberGrpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTimeout_grpc)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTimeoutMemberGrpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp struct {
@@ -1196,6 +2961,14 @@ type ListenerTimeoutMemberHttp struct {
 }
 
 func (*ListenerTimeoutMemberHttp) isListenerTimeout() {}
+func (v *ListenerTimeoutMemberHttp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTimeout_http)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTimeoutMemberHttp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp2 struct {
@@ -1205,6 +2978,14 @@ type ListenerTimeoutMemberHttp2 struct {
 }
 
 func (*ListenerTimeoutMemberHttp2) isListenerTimeout() {}
+func (v *ListenerTimeoutMemberHttp2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTimeout_http2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTimeoutMemberHttp2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberTcp struct {
@@ -1214,6 +2995,14 @@ type ListenerTimeoutMemberTcp struct {
 }
 
 func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
+func (v *ListenerTimeoutMemberTcp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTimeout_tcp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTimeoutMemberTcp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the Transport Layer Security (TLS) properties for a
 // listener.
@@ -1243,6 +3032,43 @@ type ListenerTls struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListenerTls) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTls)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerTls) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListenerTlsCertificate(s, schemas.ListenerTls_certificate, v.Certificate)
+	if v.Mode != "" {
+		s.WriteString(schemas.ListenerTls_mode, string(v.Mode))
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.ListenerTls_validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListenerTls) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerTls, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerTls_certificate:
+			return deserializeListenerTlsCertificate(d, schemas.ListenerTls_certificate, &v.Certificate)
+		case schemas.ListenerTls_mode:
+			var ev string
+			if err := d.ReadString(schemas.ListenerTls_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = ListenerTlsMode(ev)
+			return nil
+		case schemas.ListenerTls_validation:
+			v.Validation = &ListenerTlsValidationContext{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents an Certificate Manager certificate.
 type ListenerTlsAcmCertificate struct {
 
@@ -1256,6 +3082,28 @@ type ListenerTlsAcmCertificate struct {
 	CertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListenerTlsAcmCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsAcmCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerTlsAcmCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.ListenerTlsAcmCertificate_certificateArn, *v.CertificateArn)
+	}
+}
+func (v *ListenerTlsAcmCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerTlsAcmCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerTlsAcmCertificate_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.ListenerTlsAcmCertificate_certificateArn, v.CertificateArn)
+		}
+		return nil
+	})
 }
 
 // An object that represents a listener's Transport Layer Security (TLS)
@@ -1278,6 +3126,14 @@ type ListenerTlsCertificateMemberAcm struct {
 }
 
 func (*ListenerTlsCertificateMemberAcm) isListenerTlsCertificate() {}
+func (v *ListenerTlsCertificateMemberAcm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsCertificate_acm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTlsCertificateMemberAcm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a local file certificate.
 type ListenerTlsCertificateMemberFile struct {
@@ -1287,6 +3143,14 @@ type ListenerTlsCertificateMemberFile struct {
 }
 
 func (*ListenerTlsCertificateMemberFile) isListenerTlsCertificate() {}
+func (v *ListenerTlsCertificateMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsCertificate_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTlsCertificateMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a listener's Secret Discovery Service
 // certificate.
@@ -1297,6 +3161,14 @@ type ListenerTlsCertificateMemberSds struct {
 }
 
 func (*ListenerTlsCertificateMemberSds) isListenerTlsCertificate() {}
+func (v *ListenerTlsCertificateMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsCertificate_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTlsCertificateMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
@@ -1319,6 +3191,34 @@ type ListenerTlsFileCertificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListenerTlsFileCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsFileCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerTlsFileCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.ListenerTlsFileCertificate_certificateChain, *v.CertificateChain)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.ListenerTlsFileCertificate_privateKey, *v.PrivateKey)
+	}
+}
+func (v *ListenerTlsFileCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerTlsFileCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerTlsFileCertificate_certificateChain:
+			v.CertificateChain = new(string)
+			return d.ReadString(schemas.ListenerTlsFileCertificate_certificateChain, v.CertificateChain)
+		case schemas.ListenerTlsFileCertificate_privateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.ListenerTlsFileCertificate_privateKey, v.PrivateKey)
+		}
+		return nil
+	})
+}
+
 // An object that represents the listener's Secret Discovery Service certificate.
 // The proxy must be configured with a local SDS provider via a Unix Domain Socket.
 // See App Mesh [TLS documentation]for more info.
@@ -1336,6 +3236,28 @@ type ListenerTlsSdsCertificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListenerTlsSdsCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsSdsCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerTlsSdsCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretName != nil {
+		s.WriteString(schemas.ListenerTlsSdsCertificate_secretName, *v.SecretName)
+	}
+}
+func (v *ListenerTlsSdsCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerTlsSdsCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerTlsSdsCertificate_secretName:
+			v.SecretName = new(string)
+			return d.ReadString(schemas.ListenerTlsSdsCertificate_secretName, v.SecretName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a listener's Transport Layer Security (TLS)
 // validation context.
 type ListenerTlsValidationContext struct {
@@ -1351,6 +3273,33 @@ type ListenerTlsValidationContext struct {
 	SubjectAlternativeNames *SubjectAlternativeNames
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListenerTlsValidationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsValidationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListenerTlsValidationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubjectAlternativeNames != nil {
+		s.WriteStruct(schemas.ListenerTlsValidationContext_subjectAlternativeNames)
+		v.SubjectAlternativeNames.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListenerTlsValidationContextTrust(s, schemas.ListenerTlsValidationContext_trust, v.Trust)
+}
+func (v *ListenerTlsValidationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListenerTlsValidationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListenerTlsValidationContext_subjectAlternativeNames:
+			v.SubjectAlternativeNames = &SubjectAlternativeNames{}
+			return v.SubjectAlternativeNames.Deserialize(d)
+		case schemas.ListenerTlsValidationContext_trust:
+			return deserializeListenerTlsValidationContextTrust(d, schemas.ListenerTlsValidationContext_trust, &v.Trust)
+		}
+		return nil
+	})
 }
 
 // An object that represents a listener's Transport Layer Security (TLS)
@@ -1373,6 +3322,14 @@ type ListenerTlsValidationContextTrustMemberFile struct {
 }
 
 func (*ListenerTlsValidationContextTrustMemberFile) isListenerTlsValidationContextTrust() {}
+func (v *ListenerTlsValidationContextTrustMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsValidationContextTrust_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTlsValidationContextTrustMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a listener's Transport Layer Security
 // (TLS) Secret Discovery Service validation context trust.
@@ -1383,6 +3340,14 @@ type ListenerTlsValidationContextTrustMemberSds struct {
 }
 
 func (*ListenerTlsValidationContextTrustMemberSds) isListenerTlsValidationContextTrust() {}
+func (v *ListenerTlsValidationContextTrustMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListenerTlsValidationContextTrust_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListenerTlsValidationContextTrustMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the logging information for a virtual node.
 type Logging struct {
@@ -1391,6 +3356,25 @@ type Logging struct {
 	AccessLog AccessLog
 
 	noSmithyDocumentSerde
+}
+
+func (v *Logging) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Logging)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Logging) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessLog(s, schemas.Logging_accessLog, v.AccessLog)
+}
+func (v *Logging) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Logging, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Logging_accessLog:
+			return deserializeAccessLog(d, schemas.Logging_accessLog, &v.AccessLog)
+		}
+		return nil
+	})
 }
 
 // An object that represents the format for the logs.
@@ -1410,6 +3394,12 @@ type LoggingFormatMemberJson struct {
 }
 
 func (*LoggingFormatMemberJson) isLoggingFormat() {}
+func (v *LoggingFormatMemberJson) Serialize(s smithy.ShapeSerializer) {
+	serializeJsonFormat(s, schemas.LoggingFormat_json, v.Value)
+}
+func (v *LoggingFormatMemberJson) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeJsonFormat(d, schemas.LoggingFormat_json, &v.Value)
+}
 
 type LoggingFormatMemberText struct {
 	Value string
@@ -1418,6 +3408,12 @@ type LoggingFormatMemberText struct {
 }
 
 func (*LoggingFormatMemberText) isLoggingFormat() {}
+func (v *LoggingFormatMemberText) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.LoggingFormat_text, v.Value)
+}
+func (v *LoggingFormatMemberText) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.LoggingFormat_text, &v.Value)
+}
 
 // An object that represents the range of values to match on. The first character
 // of the range is included in the range, though the last character is not. For
@@ -1435,6 +3431,34 @@ type MatchRange struct {
 	Start *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MatchRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteInt64(schemas.MatchRange_end, *v.End)
+	}
+	if v.Start != nil {
+		s.WriteInt64(schemas.MatchRange_start, *v.Start)
+	}
+}
+func (v *MatchRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchRange_end:
+			v.End = new(int64)
+			return d.ReadInt64(schemas.MatchRange_end, v.End)
+		case schemas.MatchRange_start:
+			v.Start = new(int64)
+			return d.ReadInt64(schemas.MatchRange_start, v.Start)
+		}
+		return nil
+	})
 }
 
 // An object that represents a service mesh returned by a describe operation.
@@ -1461,6 +3485,52 @@ type MeshData struct {
 	Status *MeshStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *MeshData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeshData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeshData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.MeshData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.MeshData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.MeshData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.MeshData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MeshData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeshData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeshData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.MeshData_meshName, v.MeshName)
+		case schemas.MeshData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.MeshData_spec:
+			v.Spec = &MeshSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.MeshData_status:
+			v.Status = &MeshStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents a service mesh returned by a list operation.
@@ -1513,6 +3583,64 @@ type MeshRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeshRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeshRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeshRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.MeshRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MeshRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.MeshRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.MeshRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.MeshRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.MeshRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.MeshRef_version, *v.Version)
+	}
+}
+func (v *MeshRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeshRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeshRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.MeshRef_arn, v.Arn)
+		case schemas.MeshRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MeshRef_createdAt, v.CreatedAt)
+		case schemas.MeshRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MeshRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.MeshRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.MeshRef_meshName, v.MeshName)
+		case schemas.MeshRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.MeshRef_meshOwner, v.MeshOwner)
+		case schemas.MeshRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.MeshRef_resourceOwner, v.ResourceOwner)
+		case schemas.MeshRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.MeshRef_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // An object that represents the service discovery information for a service mesh.
 type MeshServiceDiscovery struct {
 
@@ -1520,6 +3648,32 @@ type MeshServiceDiscovery struct {
 	IpPreference IpPreference
 
 	noSmithyDocumentSerde
+}
+
+func (v *MeshServiceDiscovery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeshServiceDiscovery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeshServiceDiscovery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpPreference != "" {
+		s.WriteString(schemas.MeshServiceDiscovery_ipPreference, string(v.IpPreference))
+	}
+}
+func (v *MeshServiceDiscovery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeshServiceDiscovery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeshServiceDiscovery_ipPreference:
+			var ev string
+			if err := d.ReadString(schemas.MeshServiceDiscovery_ipPreference, &ev); err != nil {
+				return err
+			}
+			v.IpPreference = IpPreference(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents the specification of a service mesh.
@@ -1534,6 +3688,38 @@ type MeshSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeshSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeshSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeshSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressFilter != nil {
+		s.WriteStruct(schemas.MeshSpec_egressFilter)
+		v.EgressFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceDiscovery != nil {
+		s.WriteStruct(schemas.MeshSpec_serviceDiscovery)
+		v.ServiceDiscovery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MeshSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeshSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeshSpec_egressFilter:
+			v.EgressFilter = &EgressFilter{}
+			return v.EgressFilter.Deserialize(d)
+		case schemas.MeshSpec_serviceDiscovery:
+			v.ServiceDiscovery = &MeshServiceDiscovery{}
+			return v.ServiceDiscovery.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the status of a service mesh.
 type MeshStatus struct {
 
@@ -1541,6 +3727,32 @@ type MeshStatus struct {
 	Status MeshStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *MeshStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeshStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeshStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.MeshStatus_status, string(v.Status))
+	}
+}
+func (v *MeshStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeshStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeshStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.MeshStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MeshStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents the outlier detection for a virtual node's listener.
@@ -1570,6 +3782,50 @@ type OutlierDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutlierDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutlierDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutlierDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseEjectionDuration != nil {
+		s.WriteStruct(schemas.OutlierDetection_baseEjectionDuration)
+		v.BaseEjectionDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Interval != nil {
+		s.WriteStruct(schemas.OutlierDetection_interval)
+		v.Interval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxEjectionPercent != nil {
+		s.WriteInt32(schemas.OutlierDetection_maxEjectionPercent, *v.MaxEjectionPercent)
+	}
+	if v.MaxServerErrors != nil {
+		s.WriteInt64(schemas.OutlierDetection_maxServerErrors, *v.MaxServerErrors)
+	}
+}
+func (v *OutlierDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutlierDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutlierDetection_baseEjectionDuration:
+			v.BaseEjectionDuration = &Duration{}
+			return v.BaseEjectionDuration.Deserialize(d)
+		case schemas.OutlierDetection_interval:
+			v.Interval = &Duration{}
+			return v.Interval.Deserialize(d)
+		case schemas.OutlierDetection_maxEjectionPercent:
+			v.MaxEjectionPercent = new(int32)
+			return d.ReadInt32(schemas.OutlierDetection_maxEjectionPercent, v.MaxEjectionPercent)
+		case schemas.OutlierDetection_maxServerErrors:
+			v.MaxServerErrors = new(int64)
+			return d.ReadInt64(schemas.OutlierDetection_maxServerErrors, v.MaxServerErrors)
+		}
+		return nil
+	})
+}
+
 // An object that represents a port mapping.
 type PortMapping struct {
 
@@ -1586,6 +3842,38 @@ type PortMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteInt32(schemas.PortMapping_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.PortMapping_protocol, string(v.Protocol))
+	}
+}
+func (v *PortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortMapping_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.PortMapping_port, v.Port)
+		case schemas.PortMapping_protocol:
+			var ev string
+			if err := d.ReadString(schemas.PortMapping_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = PortProtocol(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object representing the query parameter to match.
 type QueryParameterMatch struct {
 
@@ -1593,6 +3881,28 @@ type QueryParameterMatch struct {
 	Exact *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryParameterMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameterMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryParameterMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exact != nil {
+		s.WriteString(schemas.QueryParameterMatch_exact, *v.Exact)
+	}
+}
+func (v *QueryParameterMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryParameterMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryParameterMatch_exact:
+			v.Exact = new(string)
+			return d.ReadString(schemas.QueryParameterMatch_exact, v.Exact)
+		}
+		return nil
+	})
 }
 
 // An object that represents metadata for a resource.
@@ -1645,6 +3955,64 @@ type ResourceMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceMetadata_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ResourceMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ResourceMetadata_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ResourceMetadata_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.ResourceMetadata_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Uid != nil {
+		s.WriteString(schemas.ResourceMetadata_uid, *v.Uid)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.ResourceMetadata_version, *v.Version)
+	}
+}
+func (v *ResourceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetadata_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceMetadata_arn, v.Arn)
+		case schemas.ResourceMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetadata_createdAt, v.CreatedAt)
+		case schemas.ResourceMetadata_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceMetadata_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ResourceMetadata_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ResourceMetadata_meshOwner, v.MeshOwner)
+		case schemas.ResourceMetadata_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.ResourceMetadata_resourceOwner, v.ResourceOwner)
+		case schemas.ResourceMetadata_uid:
+			v.Uid = new(string)
+			return d.ReadString(schemas.ResourceMetadata_uid, v.Uid)
+		case schemas.ResourceMetadata_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.ResourceMetadata_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // An object that represents a route returned by a describe operation.
 type RouteData struct {
 
@@ -1679,6 +4047,64 @@ type RouteData struct {
 	VirtualRouterName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.RouteData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.RouteData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteName != nil {
+		s.WriteString(schemas.RouteData_routeName, *v.RouteName)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.RouteData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.RouteData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.RouteData_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *RouteData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.RouteData_meshName, v.MeshName)
+		case schemas.RouteData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.RouteData_routeName:
+			v.RouteName = new(string)
+			return d.ReadString(schemas.RouteData_routeName, v.RouteName)
+		case schemas.RouteData_spec:
+			v.Spec = &RouteSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.RouteData_status:
+			v.Status = &RouteStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.RouteData_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.RouteData_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a route returned by a list operation.
@@ -1741,6 +4167,76 @@ type RouteRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RouteRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RouteRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.RouteRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.RouteRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.RouteRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.RouteRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.RouteName != nil {
+		s.WriteString(schemas.RouteRef_routeName, *v.RouteName)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.RouteRef_version, *v.Version)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.RouteRef_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *RouteRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RouteRef_arn, v.Arn)
+		case schemas.RouteRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RouteRef_createdAt, v.CreatedAt)
+		case schemas.RouteRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RouteRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.RouteRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.RouteRef_meshName, v.MeshName)
+		case schemas.RouteRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.RouteRef_meshOwner, v.MeshOwner)
+		case schemas.RouteRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.RouteRef_resourceOwner, v.ResourceOwner)
+		case schemas.RouteRef_routeName:
+			v.RouteName = new(string)
+			return d.ReadString(schemas.RouteRef_routeName, v.RouteName)
+		case schemas.RouteRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.RouteRef_version, v.Version)
+		case schemas.RouteRef_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.RouteRef_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a route specification. Specify one route type.
 type RouteSpec struct {
 
@@ -1763,6 +4259,60 @@ type RouteSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrpcRoute != nil {
+		s.WriteStruct(schemas.RouteSpec_grpcRoute)
+		v.GrpcRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Http2Route != nil {
+		s.WriteStruct(schemas.RouteSpec_http2Route)
+		v.Http2Route.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpRoute != nil {
+		s.WriteStruct(schemas.RouteSpec_httpRoute)
+		v.HttpRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.RouteSpec_priority, *v.Priority)
+	}
+	if v.TcpRoute != nil {
+		s.WriteStruct(schemas.RouteSpec_tcpRoute)
+		v.TcpRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RouteSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteSpec_grpcRoute:
+			v.GrpcRoute = &GrpcRoute{}
+			return v.GrpcRoute.Deserialize(d)
+		case schemas.RouteSpec_http2Route:
+			v.Http2Route = &HttpRoute{}
+			return v.Http2Route.Deserialize(d)
+		case schemas.RouteSpec_httpRoute:
+			v.HttpRoute = &HttpRoute{}
+			return v.HttpRoute.Deserialize(d)
+		case schemas.RouteSpec_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.RouteSpec_priority, v.Priority)
+		case schemas.RouteSpec_tcpRoute:
+			v.TcpRoute = &TcpRoute{}
+			return v.TcpRoute.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the current status of a route.
 type RouteStatus struct {
 
@@ -1772,6 +4322,32 @@ type RouteStatus struct {
 	Status RouteStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.RouteStatus_status, string(v.Status))
+	}
+}
+func (v *RouteStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.RouteStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RouteStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents the service discovery information for a virtual node.
@@ -1792,6 +4368,14 @@ type ServiceDiscoveryMemberAwsCloudMap struct {
 }
 
 func (*ServiceDiscoveryMemberAwsCloudMap) isServiceDiscovery() {}
+func (v *ServiceDiscoveryMemberAwsCloudMap) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceDiscovery_awsCloudMap)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ServiceDiscoveryMemberAwsCloudMap) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies the DNS information for the virtual node.
 type ServiceDiscoveryMemberDns struct {
@@ -1801,6 +4385,14 @@ type ServiceDiscoveryMemberDns struct {
 }
 
 func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
+func (v *ServiceDiscoveryMemberDns) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceDiscovery_dns)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ServiceDiscoveryMemberDns) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the methods by which a subject alternative name on a
 // peer Transport Layer Security (TLS) certificate can be matched.
@@ -1814,6 +4406,25 @@ type SubjectAlternativeNameMatchers struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubjectAlternativeNameMatchers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectAlternativeNameMatchers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectAlternativeNameMatchers) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubjectAlternativeNameList(s, schemas.SubjectAlternativeNameMatchers_exact, v.Exact)
+}
+func (v *SubjectAlternativeNameMatchers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectAlternativeNameMatchers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectAlternativeNameMatchers_exact:
+			return deserializeSubjectAlternativeNameList(d, schemas.SubjectAlternativeNameMatchers_exact, &v.Exact)
+		}
+		return nil
+	})
+}
+
 // An object that represents the subject alternative names secured by the
 // certificate.
 type SubjectAlternativeNames struct {
@@ -1824,6 +4435,30 @@ type SubjectAlternativeNames struct {
 	Match *SubjectAlternativeNameMatchers
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubjectAlternativeNames) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectAlternativeNames)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectAlternativeNames) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Match != nil {
+		s.WriteStruct(schemas.SubjectAlternativeNames_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SubjectAlternativeNames) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectAlternativeNames, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectAlternativeNames_match:
+			v.Match = &SubjectAlternativeNameMatchers{}
+			return v.Match.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Optional metadata that you apply to a resource to assist with categorization
@@ -1847,6 +4482,34 @@ type TagRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagRef_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.TagRef_value, *v.Value)
+	}
+}
+func (v *TagRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagRef_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagRef_key, v.Key)
+		case schemas.TagRef_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.TagRef_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // An object that represents a TCP route type.
 type TcpRoute struct {
 
@@ -1864,6 +4527,46 @@ type TcpRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TcpRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TcpRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TcpRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.TcpRoute_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Match != nil {
+		s.WriteStruct(schemas.TcpRoute_match)
+		v.Match.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeout != nil {
+		s.WriteStruct(schemas.TcpRoute_timeout)
+		v.Timeout.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TcpRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TcpRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TcpRoute_action:
+			v.Action = &TcpRouteAction{}
+			return v.Action.Deserialize(d)
+		case schemas.TcpRoute_match:
+			v.Match = &TcpRouteMatch{}
+			return v.Match.Deserialize(d)
+		case schemas.TcpRoute_timeout:
+			v.Timeout = &TcpTimeout{}
+			return v.Timeout.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the action to take if a match is determined.
 type TcpRouteAction struct {
 
@@ -1876,6 +4579,25 @@ type TcpRouteAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TcpRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TcpRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TcpRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWeightedTargets(s, schemas.TcpRouteAction_weightedTargets, v.WeightedTargets)
+}
+func (v *TcpRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TcpRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TcpRouteAction_weightedTargets:
+			return deserializeWeightedTargets(d, schemas.TcpRouteAction_weightedTargets, &v.WeightedTargets)
+		}
+		return nil
+	})
+}
+
 // An object representing the TCP route to match.
 type TcpRouteMatch struct {
 
@@ -1883,6 +4605,28 @@ type TcpRouteMatch struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TcpRouteMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TcpRouteMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TcpRouteMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteInt32(schemas.TcpRouteMatch_port, *v.Port)
+	}
+}
+func (v *TcpRouteMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TcpRouteMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TcpRouteMatch_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.TcpRouteMatch_port, v.Port)
+		}
+		return nil
+	})
 }
 
 // An object that represents types of timeouts.
@@ -1893,6 +4637,30 @@ type TcpTimeout struct {
 	Idle *Duration
 
 	noSmithyDocumentSerde
+}
+
+func (v *TcpTimeout) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TcpTimeout)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TcpTimeout) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Idle != nil {
+		s.WriteStruct(schemas.TcpTimeout_idle)
+		v.Idle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TcpTimeout) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TcpTimeout, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TcpTimeout_idle:
+			v.Idle = &Duration{}
+			return v.Idle.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents how the proxy will validate its peer during Transport
@@ -1918,6 +4686,33 @@ type TlsValidationContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TlsValidationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TlsValidationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubjectAlternativeNames != nil {
+		s.WriteStruct(schemas.TlsValidationContext_subjectAlternativeNames)
+		v.SubjectAlternativeNames.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTlsValidationContextTrust(s, schemas.TlsValidationContext_trust, v.Trust)
+}
+func (v *TlsValidationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TlsValidationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TlsValidationContext_subjectAlternativeNames:
+			v.SubjectAlternativeNames = &SubjectAlternativeNames{}
+			return v.SubjectAlternativeNames.Deserialize(d)
+		case schemas.TlsValidationContext_trust:
+			return deserializeTlsValidationContextTrust(d, schemas.TlsValidationContext_trust, &v.Trust)
+		}
+		return nil
+	})
+}
+
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust for an Certificate Manager certificate.
 type TlsValidationContextAcmTrust struct {
@@ -1928,6 +4723,25 @@ type TlsValidationContextAcmTrust struct {
 	CertificateAuthorityArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TlsValidationContextAcmTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextAcmTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TlsValidationContextAcmTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateAuthorityArns(s, schemas.TlsValidationContextAcmTrust_certificateAuthorityArns, v.CertificateAuthorityArns)
+}
+func (v *TlsValidationContextAcmTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TlsValidationContextAcmTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TlsValidationContextAcmTrust_certificateAuthorityArns:
+			return deserializeCertificateAuthorityArns(d, schemas.TlsValidationContextAcmTrust_certificateAuthorityArns, &v.CertificateAuthorityArns)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1941,6 +4755,28 @@ type TlsValidationContextFileTrust struct {
 	CertificateChain *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TlsValidationContextFileTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextFileTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TlsValidationContextFileTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.TlsValidationContextFileTrust_certificateChain, *v.CertificateChain)
+	}
+}
+func (v *TlsValidationContextFileTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TlsValidationContextFileTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TlsValidationContextFileTrust_certificateChain:
+			v.CertificateChain = new(string)
+			return d.ReadString(schemas.TlsValidationContextFileTrust_certificateChain, v.CertificateChain)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) Secret Discovery
@@ -1957,6 +4793,28 @@ type TlsValidationContextSdsTrust struct {
 	SecretName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TlsValidationContextSdsTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextSdsTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TlsValidationContextSdsTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretName != nil {
+		s.WriteString(schemas.TlsValidationContextSdsTrust_secretName, *v.SecretName)
+	}
+}
+func (v *TlsValidationContextSdsTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TlsValidationContextSdsTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TlsValidationContextSdsTrust_secretName:
+			v.SecretName = new(string)
+			return d.ReadString(schemas.TlsValidationContextSdsTrust_secretName, v.SecretName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1980,6 +4838,14 @@ type TlsValidationContextTrustMemberAcm struct {
 }
 
 func (*TlsValidationContextTrustMemberAcm) isTlsValidationContextTrust() {}
+func (v *TlsValidationContextTrustMemberAcm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextTrust_acm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TlsValidationContextTrustMemberAcm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust for a local file.
@@ -1990,6 +4856,14 @@ type TlsValidationContextTrustMemberFile struct {
 }
 
 func (*TlsValidationContextTrustMemberFile) isTlsValidationContextTrust() {}
+func (v *TlsValidationContextTrustMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextTrust_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TlsValidationContextTrustMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a Transport Layer Security (TLS)
 // Secret Discovery Service validation context trust.
@@ -2000,6 +4874,14 @@ type TlsValidationContextTrustMemberSds struct {
 }
 
 func (*TlsValidationContextTrustMemberSds) isTlsValidationContextTrust() {}
+func (v *TlsValidationContextTrustMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TlsValidationContextTrust_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TlsValidationContextTrustMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The access log configuration for a virtual gateway.
 //
@@ -2018,6 +4900,14 @@ type VirtualGatewayAccessLogMemberFile struct {
 }
 
 func (*VirtualGatewayAccessLogMemberFile) isVirtualGatewayAccessLog() {}
+func (v *VirtualGatewayAccessLogMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayAccessLog_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayAccessLogMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the default properties for a backend.
 type VirtualGatewayBackendDefaults struct {
@@ -2028,6 +4918,30 @@ type VirtualGatewayBackendDefaults struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayBackendDefaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayBackendDefaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayBackendDefaults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientPolicy != nil {
+		s.WriteStruct(schemas.VirtualGatewayBackendDefaults_clientPolicy)
+		v.ClientPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewayBackendDefaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayBackendDefaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayBackendDefaults_clientPolicy:
+			v.ClientPolicy = &VirtualGatewayClientPolicy{}
+			return v.ClientPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents a client policy.
 type VirtualGatewayClientPolicy struct {
 
@@ -2036,6 +4950,30 @@ type VirtualGatewayClientPolicy struct {
 	Tls *VirtualGatewayClientPolicyTls
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayClientPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayClientPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayClientPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tls != nil {
+		s.WriteStruct(schemas.VirtualGatewayClientPolicy_tls)
+		v.Tls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewayClientPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayClientPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayClientPolicy_tls:
+			v.Tls = &VirtualGatewayClientPolicyTls{}
+			return v.Tls.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) client policy.
@@ -2058,6 +4996,42 @@ type VirtualGatewayClientPolicyTls struct {
 	Ports []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayClientPolicyTls) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayClientPolicyTls)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayClientPolicyTls) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayClientTlsCertificate(s, schemas.VirtualGatewayClientPolicyTls_certificate, v.Certificate)
+	if v.Enforce != nil {
+		s.WriteBool(schemas.VirtualGatewayClientPolicyTls_enforce, *v.Enforce)
+	}
+	serializePortSet(s, schemas.VirtualGatewayClientPolicyTls_ports, v.Ports)
+	if v.Validation != nil {
+		s.WriteStruct(schemas.VirtualGatewayClientPolicyTls_validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewayClientPolicyTls) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayClientPolicyTls, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayClientPolicyTls_certificate:
+			return deserializeVirtualGatewayClientTlsCertificate(d, schemas.VirtualGatewayClientPolicyTls_certificate, &v.Certificate)
+		case schemas.VirtualGatewayClientPolicyTls_enforce:
+			v.Enforce = new(bool)
+			return d.ReadBool(schemas.VirtualGatewayClientPolicyTls_enforce, v.Enforce)
+		case schemas.VirtualGatewayClientPolicyTls_ports:
+			return deserializePortSet(d, schemas.VirtualGatewayClientPolicyTls_ports, &v.Ports)
+		case schemas.VirtualGatewayClientPolicyTls_validation:
+			v.Validation = &VirtualGatewayTlsValidationContext{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the virtual gateway's client's Transport Layer
@@ -2083,6 +5057,14 @@ type VirtualGatewayClientTlsCertificateMemberFile struct {
 }
 
 func (*VirtualGatewayClientTlsCertificateMemberFile) isVirtualGatewayClientTlsCertificate() {}
+func (v *VirtualGatewayClientTlsCertificateMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayClientTlsCertificate_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayClientTlsCertificateMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a virtual gateway's client's Secret
 // Discovery Service certificate.
@@ -2093,6 +5075,14 @@ type VirtualGatewayClientTlsCertificateMemberSds struct {
 }
 
 func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCertificate() {}
+func (v *VirtualGatewayClientTlsCertificateMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayClientTlsCertificate_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayClientTlsCertificateMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents the type of virtual gateway connection pool.
 //
@@ -2118,6 +5108,14 @@ type VirtualGatewayConnectionPoolMemberGrpc struct {
 }
 
 func (*VirtualGatewayConnectionPoolMemberGrpc) isVirtualGatewayConnectionPool() {}
+func (v *VirtualGatewayConnectionPoolMemberGrpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayConnectionPool_grpc)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayConnectionPoolMemberGrpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberHttp struct {
@@ -2127,6 +5125,14 @@ type VirtualGatewayConnectionPoolMemberHttp struct {
 }
 
 func (*VirtualGatewayConnectionPoolMemberHttp) isVirtualGatewayConnectionPool() {}
+func (v *VirtualGatewayConnectionPoolMemberHttp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayConnectionPool_http)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayConnectionPoolMemberHttp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberHttp2 struct {
@@ -2136,6 +5142,14 @@ type VirtualGatewayConnectionPoolMemberHttp2 struct {
 }
 
 func (*VirtualGatewayConnectionPoolMemberHttp2) isVirtualGatewayConnectionPool() {}
+func (v *VirtualGatewayConnectionPoolMemberHttp2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayConnectionPool_http2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayConnectionPoolMemberHttp2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a virtual gateway returned by a describe operation.
 type VirtualGatewayData struct {
@@ -2168,6 +5182,58 @@ type VirtualGatewayData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualGatewayData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.VirtualGatewayData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.VirtualGatewayData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.VirtualGatewayData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.VirtualGatewayData_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *VirtualGatewayData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualGatewayData_meshName, v.MeshName)
+		case schemas.VirtualGatewayData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.VirtualGatewayData_spec:
+			v.Spec = &VirtualGatewaySpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.VirtualGatewayData_status:
+			v.Status = &VirtualGatewayStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.VirtualGatewayData_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.VirtualGatewayData_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 // An object that represents an access log file.
 type VirtualGatewayFileAccessLog struct {
 
@@ -2187,6 +5253,31 @@ type VirtualGatewayFileAccessLog struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayFileAccessLog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayFileAccessLog)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayFileAccessLog) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLoggingFormat(s, schemas.VirtualGatewayFileAccessLog_format, v.Format)
+	if v.Path != nil {
+		s.WriteString(schemas.VirtualGatewayFileAccessLog_path, *v.Path)
+	}
+}
+func (v *VirtualGatewayFileAccessLog) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayFileAccessLog, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayFileAccessLog_format:
+			return deserializeLoggingFormat(d, schemas.VirtualGatewayFileAccessLog_format, &v.Format)
+		case schemas.VirtualGatewayFileAccessLog_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.VirtualGatewayFileAccessLog_path, v.Path)
+		}
+		return nil
+	})
+}
+
 // An object that represents a type of connection pool.
 type VirtualGatewayGrpcConnectionPool struct {
 
@@ -2197,6 +5288,28 @@ type VirtualGatewayGrpcConnectionPool struct {
 	MaxRequests *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayGrpcConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayGrpcConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayGrpcConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRequests != nil {
+		s.WriteInt32(schemas.VirtualGatewayGrpcConnectionPool_maxRequests, *v.MaxRequests)
+	}
+}
+func (v *VirtualGatewayGrpcConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayGrpcConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayGrpcConnectionPool_maxRequests:
+			v.MaxRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayGrpcConnectionPool_maxRequests, v.MaxRequests)
+		}
+		return nil
+	})
 }
 
 // An object that represents the health check policy for a virtual gateway's
@@ -2246,6 +5359,68 @@ type VirtualGatewayHealthCheckPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayHealthCheckPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayHealthCheckPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayHealthCheckPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthyThreshold != nil {
+		s.WriteInt32(schemas.VirtualGatewayHealthCheckPolicy_healthyThreshold, *v.HealthyThreshold)
+	}
+	if v.IntervalMillis != nil {
+		s.WriteInt64(schemas.VirtualGatewayHealthCheckPolicy_intervalMillis, *v.IntervalMillis)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.VirtualGatewayHealthCheckPolicy_path, *v.Path)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.VirtualGatewayHealthCheckPolicy_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.VirtualGatewayHealthCheckPolicy_protocol, string(v.Protocol))
+	}
+	if v.TimeoutMillis != nil {
+		s.WriteInt64(schemas.VirtualGatewayHealthCheckPolicy_timeoutMillis, *v.TimeoutMillis)
+	}
+	if v.UnhealthyThreshold != nil {
+		s.WriteInt32(schemas.VirtualGatewayHealthCheckPolicy_unhealthyThreshold, *v.UnhealthyThreshold)
+	}
+}
+func (v *VirtualGatewayHealthCheckPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayHealthCheckPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayHealthCheckPolicy_healthyThreshold:
+			v.HealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHealthCheckPolicy_healthyThreshold, v.HealthyThreshold)
+		case schemas.VirtualGatewayHealthCheckPolicy_intervalMillis:
+			v.IntervalMillis = new(int64)
+			return d.ReadInt64(schemas.VirtualGatewayHealthCheckPolicy_intervalMillis, v.IntervalMillis)
+		case schemas.VirtualGatewayHealthCheckPolicy_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.VirtualGatewayHealthCheckPolicy_path, v.Path)
+		case schemas.VirtualGatewayHealthCheckPolicy_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHealthCheckPolicy_port, v.Port)
+		case schemas.VirtualGatewayHealthCheckPolicy_protocol:
+			var ev string
+			if err := d.ReadString(schemas.VirtualGatewayHealthCheckPolicy_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = VirtualGatewayPortProtocol(ev)
+			return nil
+		case schemas.VirtualGatewayHealthCheckPolicy_timeoutMillis:
+			v.TimeoutMillis = new(int64)
+			return d.ReadInt64(schemas.VirtualGatewayHealthCheckPolicy_timeoutMillis, v.TimeoutMillis)
+		case schemas.VirtualGatewayHealthCheckPolicy_unhealthyThreshold:
+			v.UnhealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHealthCheckPolicy_unhealthyThreshold, v.UnhealthyThreshold)
+		}
+		return nil
+	})
+}
+
 // An object that represents a type of connection pool.
 type VirtualGatewayHttp2ConnectionPool struct {
 
@@ -2256,6 +5431,28 @@ type VirtualGatewayHttp2ConnectionPool struct {
 	MaxRequests *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayHttp2ConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayHttp2ConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayHttp2ConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRequests != nil {
+		s.WriteInt32(schemas.VirtualGatewayHttp2ConnectionPool_maxRequests, *v.MaxRequests)
+	}
+}
+func (v *VirtualGatewayHttp2ConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayHttp2ConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayHttp2ConnectionPool_maxRequests:
+			v.MaxRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHttp2ConnectionPool_maxRequests, v.MaxRequests)
+		}
+		return nil
+	})
 }
 
 // An object that represents a type of connection pool.
@@ -2272,6 +5469,34 @@ type VirtualGatewayHttpConnectionPool struct {
 	MaxPendingRequests *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayHttpConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayHttpConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayHttpConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxConnections != nil {
+		s.WriteInt32(schemas.VirtualGatewayHttpConnectionPool_maxConnections, *v.MaxConnections)
+	}
+	if v.MaxPendingRequests != nil {
+		s.WriteInt32(schemas.VirtualGatewayHttpConnectionPool_maxPendingRequests, *v.MaxPendingRequests)
+	}
+}
+func (v *VirtualGatewayHttpConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayHttpConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayHttpConnectionPool_maxConnections:
+			v.MaxConnections = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHttpConnectionPool_maxConnections, v.MaxConnections)
+		case schemas.VirtualGatewayHttpConnectionPool_maxPendingRequests:
+			v.MaxPendingRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayHttpConnectionPool_maxPendingRequests, v.MaxPendingRequests)
+		}
+		return nil
+	})
 }
 
 // An object that represents a listener for a virtual gateway.
@@ -2293,6 +5518,49 @@ type VirtualGatewayListener struct {
 	Tls *VirtualGatewayListenerTls
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListener)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListener) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayConnectionPool(s, schemas.VirtualGatewayListener_connectionPool, v.ConnectionPool)
+	if v.HealthCheck != nil {
+		s.WriteStruct(schemas.VirtualGatewayListener_healthCheck)
+		v.HealthCheck.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortMapping != nil {
+		s.WriteStruct(schemas.VirtualGatewayListener_portMapping)
+		v.PortMapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tls != nil {
+		s.WriteStruct(schemas.VirtualGatewayListener_tls)
+		v.Tls.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewayListener) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListener, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListener_connectionPool:
+			return deserializeVirtualGatewayConnectionPool(d, schemas.VirtualGatewayListener_connectionPool, &v.ConnectionPool)
+		case schemas.VirtualGatewayListener_healthCheck:
+			v.HealthCheck = &VirtualGatewayHealthCheckPolicy{}
+			return v.HealthCheck.Deserialize(d)
+		case schemas.VirtualGatewayListener_portMapping:
+			v.PortMapping = &VirtualGatewayPortMapping{}
+			return v.PortMapping.Deserialize(d)
+		case schemas.VirtualGatewayListener_tls:
+			v.Tls = &VirtualGatewayListenerTls{}
+			return v.Tls.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the Transport Layer Security (TLS) properties for a
@@ -2322,6 +5590,43 @@ type VirtualGatewayListenerTls struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayListenerTls) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTls)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListenerTls) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayListenerTlsCertificate(s, schemas.VirtualGatewayListenerTls_certificate, v.Certificate)
+	if v.Mode != "" {
+		s.WriteString(schemas.VirtualGatewayListenerTls_mode, string(v.Mode))
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.VirtualGatewayListenerTls_validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewayListenerTls) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListenerTls, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListenerTls_certificate:
+			return deserializeVirtualGatewayListenerTlsCertificate(d, schemas.VirtualGatewayListenerTls_certificate, &v.Certificate)
+		case schemas.VirtualGatewayListenerTls_mode:
+			var ev string
+			if err := d.ReadString(schemas.VirtualGatewayListenerTls_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = VirtualGatewayListenerTlsMode(ev)
+			return nil
+		case schemas.VirtualGatewayListenerTls_validation:
+			v.Validation = &VirtualGatewayListenerTlsValidationContext{}
+			return v.Validation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents an Certificate Manager certificate.
 type VirtualGatewayListenerTlsAcmCertificate struct {
 
@@ -2335,6 +5640,28 @@ type VirtualGatewayListenerTlsAcmCertificate struct {
 	CertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayListenerTlsAcmCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsAcmCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListenerTlsAcmCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.VirtualGatewayListenerTlsAcmCertificate_certificateArn, *v.CertificateArn)
+	}
+}
+func (v *VirtualGatewayListenerTlsAcmCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListenerTlsAcmCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListenerTlsAcmCertificate_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.VirtualGatewayListenerTlsAcmCertificate_certificateArn, v.CertificateArn)
+		}
+		return nil
+	})
 }
 
 // An object that represents a listener's Transport Layer Security (TLS)
@@ -2357,6 +5684,14 @@ type VirtualGatewayListenerTlsCertificateMemberAcm struct {
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberAcm) isVirtualGatewayListenerTlsCertificate() {}
+func (v *VirtualGatewayListenerTlsCertificateMemberAcm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsCertificate_acm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayListenerTlsCertificateMemberAcm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a local file certificate.
 type VirtualGatewayListenerTlsCertificateMemberFile struct {
@@ -2366,6 +5701,14 @@ type VirtualGatewayListenerTlsCertificateMemberFile struct {
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberFile) isVirtualGatewayListenerTlsCertificate() {}
+func (v *VirtualGatewayListenerTlsCertificateMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsCertificate_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayListenerTlsCertificateMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a virtual gateway's listener's Secret
 // Discovery Service certificate.
@@ -2376,6 +5719,14 @@ type VirtualGatewayListenerTlsCertificateMemberSds struct {
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberSds) isVirtualGatewayListenerTlsCertificate() {}
+func (v *VirtualGatewayListenerTlsCertificateMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsCertificate_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayListenerTlsCertificateMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
@@ -2398,6 +5749,34 @@ type VirtualGatewayListenerTlsFileCertificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayListenerTlsFileCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsFileCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListenerTlsFileCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.VirtualGatewayListenerTlsFileCertificate_certificateChain, *v.CertificateChain)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.VirtualGatewayListenerTlsFileCertificate_privateKey, *v.PrivateKey)
+	}
+}
+func (v *VirtualGatewayListenerTlsFileCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListenerTlsFileCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListenerTlsFileCertificate_certificateChain:
+			v.CertificateChain = new(string)
+			return d.ReadString(schemas.VirtualGatewayListenerTlsFileCertificate_certificateChain, v.CertificateChain)
+		case schemas.VirtualGatewayListenerTlsFileCertificate_privateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.VirtualGatewayListenerTlsFileCertificate_privateKey, v.PrivateKey)
+		}
+		return nil
+	})
+}
+
 // An object that represents the virtual gateway's listener's Secret Discovery
 // Service certificate.The proxy must be configured with a local SDS provider via a
 // Unix Domain Socket. See App Mesh[TLS documentation] for more info.
@@ -2415,6 +5794,28 @@ type VirtualGatewayListenerTlsSdsCertificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayListenerTlsSdsCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsSdsCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListenerTlsSdsCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretName != nil {
+		s.WriteString(schemas.VirtualGatewayListenerTlsSdsCertificate_secretName, *v.SecretName)
+	}
+}
+func (v *VirtualGatewayListenerTlsSdsCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListenerTlsSdsCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListenerTlsSdsCertificate_secretName:
+			v.SecretName = new(string)
+			return d.ReadString(schemas.VirtualGatewayListenerTlsSdsCertificate_secretName, v.SecretName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a virtual gateway's listener's Transport Layer
 // Security (TLS) validation context.
 type VirtualGatewayListenerTlsValidationContext struct {
@@ -2430,6 +5831,33 @@ type VirtualGatewayListenerTlsValidationContext struct {
 	SubjectAlternativeNames *SubjectAlternativeNames
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayListenerTlsValidationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsValidationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayListenerTlsValidationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubjectAlternativeNames != nil {
+		s.WriteStruct(schemas.VirtualGatewayListenerTlsValidationContext_subjectAlternativeNames)
+		v.SubjectAlternativeNames.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVirtualGatewayListenerTlsValidationContextTrust(s, schemas.VirtualGatewayListenerTlsValidationContext_trust, v.Trust)
+}
+func (v *VirtualGatewayListenerTlsValidationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayListenerTlsValidationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayListenerTlsValidationContext_subjectAlternativeNames:
+			v.SubjectAlternativeNames = &SubjectAlternativeNames{}
+			return v.SubjectAlternativeNames.Deserialize(d)
+		case schemas.VirtualGatewayListenerTlsValidationContext_trust:
+			return deserializeVirtualGatewayListenerTlsValidationContextTrust(d, schemas.VirtualGatewayListenerTlsValidationContext_trust, &v.Trust)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual gateway's listener's Transport Layer
@@ -2453,6 +5881,14 @@ type VirtualGatewayListenerTlsValidationContextTrustMemberFile struct {
 
 func (*VirtualGatewayListenerTlsValidationContextTrustMemberFile) isVirtualGatewayListenerTlsValidationContextTrust() {
 }
+func (v *VirtualGatewayListenerTlsValidationContextTrustMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsValidationContextTrust_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayListenerTlsValidationContextTrustMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a virtual gateway's listener's
 // Transport Layer Security (TLS) Secret Discovery Service validation context
@@ -2465,6 +5901,14 @@ type VirtualGatewayListenerTlsValidationContextTrustMemberSds struct {
 
 func (*VirtualGatewayListenerTlsValidationContextTrustMemberSds) isVirtualGatewayListenerTlsValidationContextTrust() {
 }
+func (v *VirtualGatewayListenerTlsValidationContextTrustMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayListenerTlsValidationContextTrust_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayListenerTlsValidationContextTrustMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents logging information.
 type VirtualGatewayLogging struct {
@@ -2473,6 +5917,25 @@ type VirtualGatewayLogging struct {
 	AccessLog VirtualGatewayAccessLog
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayLogging) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayLogging)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayLogging) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayAccessLog(s, schemas.VirtualGatewayLogging_accessLog, v.AccessLog)
+}
+func (v *VirtualGatewayLogging) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayLogging, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayLogging_accessLog:
+			return deserializeVirtualGatewayAccessLog(d, schemas.VirtualGatewayLogging_accessLog, &v.AccessLog)
+		}
+		return nil
+	})
 }
 
 // An object that represents a port mapping.
@@ -2489,6 +5952,38 @@ type VirtualGatewayPortMapping struct {
 	Protocol VirtualGatewayPortProtocol
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayPortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayPortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteInt32(schemas.VirtualGatewayPortMapping_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.VirtualGatewayPortMapping_protocol, string(v.Protocol))
+	}
+}
+func (v *VirtualGatewayPortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayPortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayPortMapping_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.VirtualGatewayPortMapping_port, v.Port)
+		case schemas.VirtualGatewayPortMapping_protocol:
+			var ev string
+			if err := d.ReadString(schemas.VirtualGatewayPortMapping_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = VirtualGatewayPortProtocol(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual gateway returned by a list operation.
@@ -2546,6 +6041,70 @@ type VirtualGatewayRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VirtualGatewayRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VirtualGatewayRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.VirtualGatewayRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualGatewayRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.VirtualGatewayRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.VirtualGatewayRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.VirtualGatewayRef_version, *v.Version)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.VirtualGatewayRef_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *VirtualGatewayRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VirtualGatewayRef_arn, v.Arn)
+		case schemas.VirtualGatewayRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualGatewayRef_createdAt, v.CreatedAt)
+		case schemas.VirtualGatewayRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualGatewayRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.VirtualGatewayRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualGatewayRef_meshName, v.MeshName)
+		case schemas.VirtualGatewayRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.VirtualGatewayRef_meshOwner, v.MeshOwner)
+		case schemas.VirtualGatewayRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.VirtualGatewayRef_resourceOwner, v.ResourceOwner)
+		case schemas.VirtualGatewayRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.VirtualGatewayRef_version, v.Version)
+		case schemas.VirtualGatewayRef_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.VirtualGatewayRef_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 // An object that represents the specification of a service mesh resource.
 type VirtualGatewaySpec struct {
 
@@ -2564,6 +6123,41 @@ type VirtualGatewaySpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewaySpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewaySpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewaySpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackendDefaults != nil {
+		s.WriteStruct(schemas.VirtualGatewaySpec_backendDefaults)
+		v.BackendDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVirtualGatewayListeners(s, schemas.VirtualGatewaySpec_listeners, v.Listeners)
+	if v.Logging != nil {
+		s.WriteStruct(schemas.VirtualGatewaySpec_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualGatewaySpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewaySpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewaySpec_backendDefaults:
+			v.BackendDefaults = &VirtualGatewayBackendDefaults{}
+			return v.BackendDefaults.Deserialize(d)
+		case schemas.VirtualGatewaySpec_listeners:
+			return deserializeVirtualGatewayListeners(d, schemas.VirtualGatewaySpec_listeners, &v.Listeners)
+		case schemas.VirtualGatewaySpec_logging:
+			v.Logging = &VirtualGatewayLogging{}
+			return v.Logging.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that represents the status of the mesh resource.
 type VirtualGatewayStatus struct {
 
@@ -2573,6 +6167,32 @@ type VirtualGatewayStatus struct {
 	Status VirtualGatewayStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.VirtualGatewayStatus_status, string(v.Status))
+	}
+}
+func (v *VirtualGatewayStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.VirtualGatewayStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VirtualGatewayStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context.
@@ -2591,6 +6211,33 @@ type VirtualGatewayTlsValidationContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualGatewayTlsValidationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayTlsValidationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubjectAlternativeNames != nil {
+		s.WriteStruct(schemas.VirtualGatewayTlsValidationContext_subjectAlternativeNames)
+		v.SubjectAlternativeNames.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVirtualGatewayTlsValidationContextTrust(s, schemas.VirtualGatewayTlsValidationContext_trust, v.Trust)
+}
+func (v *VirtualGatewayTlsValidationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayTlsValidationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayTlsValidationContext_subjectAlternativeNames:
+			v.SubjectAlternativeNames = &SubjectAlternativeNames{}
+			return v.SubjectAlternativeNames.Deserialize(d)
+		case schemas.VirtualGatewayTlsValidationContext_trust:
+			return deserializeVirtualGatewayTlsValidationContextTrust(d, schemas.VirtualGatewayTlsValidationContext_trust, &v.Trust)
+		}
+		return nil
+	})
+}
+
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust for an Certificate Manager certificate.
 type VirtualGatewayTlsValidationContextAcmTrust struct {
@@ -2601,6 +6248,25 @@ type VirtualGatewayTlsValidationContextAcmTrust struct {
 	CertificateAuthorityArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayTlsValidationContextAcmTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextAcmTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayTlsValidationContextAcmTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualGatewayCertificateAuthorityArns(s, schemas.VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns, v.CertificateAuthorityArns)
+}
+func (v *VirtualGatewayTlsValidationContextAcmTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayTlsValidationContextAcmTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns:
+			return deserializeVirtualGatewayCertificateAuthorityArns(d, schemas.VirtualGatewayTlsValidationContextAcmTrust_certificateAuthorityArns, &v.CertificateAuthorityArns)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -2614,6 +6280,28 @@ type VirtualGatewayTlsValidationContextFileTrust struct {
 	CertificateChain *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayTlsValidationContextFileTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextFileTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayTlsValidationContextFileTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.VirtualGatewayTlsValidationContextFileTrust_certificateChain, *v.CertificateChain)
+	}
+}
+func (v *VirtualGatewayTlsValidationContextFileTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayTlsValidationContextFileTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayTlsValidationContextFileTrust_certificateChain:
+			v.CertificateChain = new(string)
+			return d.ReadString(schemas.VirtualGatewayTlsValidationContextFileTrust_certificateChain, v.CertificateChain)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual gateway's listener's Transport Layer
@@ -2632,6 +6320,28 @@ type VirtualGatewayTlsValidationContextSdsTrust struct {
 	SecretName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGatewayTlsValidationContextSdsTrust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextSdsTrust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGatewayTlsValidationContextSdsTrust) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretName != nil {
+		s.WriteString(schemas.VirtualGatewayTlsValidationContextSdsTrust_secretName, *v.SecretName)
+	}
+}
+func (v *VirtualGatewayTlsValidationContextSdsTrust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGatewayTlsValidationContextSdsTrust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGatewayTlsValidationContextSdsTrust_secretName:
+			v.SecretName = new(string)
+			return d.ReadString(schemas.VirtualGatewayTlsValidationContextSdsTrust_secretName, v.SecretName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -2656,6 +6366,14 @@ type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
 
 func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsValidationContextTrust() {
 }
+func (v *VirtualGatewayTlsValidationContextTrustMemberAcm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextTrust_acm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayTlsValidationContextTrustMemberAcm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust for a local file.
@@ -2667,6 +6385,14 @@ type VirtualGatewayTlsValidationContextTrustMemberFile struct {
 
 func (*VirtualGatewayTlsValidationContextTrustMemberFile) isVirtualGatewayTlsValidationContextTrust() {
 }
+func (v *VirtualGatewayTlsValidationContextTrustMemberFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextTrust_file)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayTlsValidationContextTrustMemberFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A reference to an object that represents a virtual gateway's Transport Layer
 // Security (TLS) Secret Discovery Service validation context trust.
@@ -2677,6 +6403,14 @@ type VirtualGatewayTlsValidationContextTrustMemberSds struct {
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsValidationContextTrust() {
+}
+func (v *VirtualGatewayTlsValidationContextTrustMemberSds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGatewayTlsValidationContextTrust_sds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualGatewayTlsValidationContextTrustMemberSds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // An object that represents the type of virtual node connection pool.
@@ -2704,6 +6438,14 @@ type VirtualNodeConnectionPoolMemberGrpc struct {
 }
 
 func (*VirtualNodeConnectionPoolMemberGrpc) isVirtualNodeConnectionPool() {}
+func (v *VirtualNodeConnectionPoolMemberGrpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeConnectionPool_grpc)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualNodeConnectionPoolMemberGrpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberHttp struct {
@@ -2713,6 +6455,14 @@ type VirtualNodeConnectionPoolMemberHttp struct {
 }
 
 func (*VirtualNodeConnectionPoolMemberHttp) isVirtualNodeConnectionPool() {}
+func (v *VirtualNodeConnectionPoolMemberHttp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeConnectionPool_http)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualNodeConnectionPoolMemberHttp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberHttp2 struct {
@@ -2722,6 +6472,14 @@ type VirtualNodeConnectionPoolMemberHttp2 struct {
 }
 
 func (*VirtualNodeConnectionPoolMemberHttp2) isVirtualNodeConnectionPool() {}
+func (v *VirtualNodeConnectionPoolMemberHttp2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeConnectionPool_http2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualNodeConnectionPoolMemberHttp2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberTcp struct {
@@ -2731,6 +6489,14 @@ type VirtualNodeConnectionPoolMemberTcp struct {
 }
 
 func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
+func (v *VirtualNodeConnectionPoolMemberTcp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeConnectionPool_tcp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualNodeConnectionPoolMemberTcp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a virtual node returned by a describe operation.
 type VirtualNodeData struct {
@@ -2763,6 +6529,58 @@ type VirtualNodeData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualNodeData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualNodeData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.VirtualNodeData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.VirtualNodeData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.VirtualNodeData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.VirtualNodeData_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *VirtualNodeData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualNodeData_meshName, v.MeshName)
+		case schemas.VirtualNodeData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.VirtualNodeData_spec:
+			v.Spec = &VirtualNodeSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.VirtualNodeData_status:
+			v.Status = &VirtualNodeStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.VirtualNodeData_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.VirtualNodeData_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a type of connection pool.
 type VirtualNodeGrpcConnectionPool struct {
 
@@ -2775,6 +6593,28 @@ type VirtualNodeGrpcConnectionPool struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualNodeGrpcConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeGrpcConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeGrpcConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRequests != nil {
+		s.WriteInt32(schemas.VirtualNodeGrpcConnectionPool_maxRequests, *v.MaxRequests)
+	}
+}
+func (v *VirtualNodeGrpcConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeGrpcConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeGrpcConnectionPool_maxRequests:
+			v.MaxRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualNodeGrpcConnectionPool_maxRequests, v.MaxRequests)
+		}
+		return nil
+	})
+}
+
 // An object that represents a type of connection pool.
 type VirtualNodeHttp2ConnectionPool struct {
 
@@ -2785,6 +6625,28 @@ type VirtualNodeHttp2ConnectionPool struct {
 	MaxRequests *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualNodeHttp2ConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeHttp2ConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeHttp2ConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRequests != nil {
+		s.WriteInt32(schemas.VirtualNodeHttp2ConnectionPool_maxRequests, *v.MaxRequests)
+	}
+}
+func (v *VirtualNodeHttp2ConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeHttp2ConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeHttp2ConnectionPool_maxRequests:
+			v.MaxRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualNodeHttp2ConnectionPool_maxRequests, v.MaxRequests)
+		}
+		return nil
+	})
 }
 
 // An object that represents a type of connection pool.
@@ -2801,6 +6663,34 @@ type VirtualNodeHttpConnectionPool struct {
 	MaxPendingRequests *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualNodeHttpConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeHttpConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeHttpConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxConnections != nil {
+		s.WriteInt32(schemas.VirtualNodeHttpConnectionPool_maxConnections, *v.MaxConnections)
+	}
+	if v.MaxPendingRequests != nil {
+		s.WriteInt32(schemas.VirtualNodeHttpConnectionPool_maxPendingRequests, *v.MaxPendingRequests)
+	}
+}
+func (v *VirtualNodeHttpConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeHttpConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeHttpConnectionPool_maxConnections:
+			v.MaxConnections = new(int32)
+			return d.ReadInt32(schemas.VirtualNodeHttpConnectionPool_maxConnections, v.MaxConnections)
+		case schemas.VirtualNodeHttpConnectionPool_maxPendingRequests:
+			v.MaxPendingRequests = new(int32)
+			return d.ReadInt32(schemas.VirtualNodeHttpConnectionPool_maxPendingRequests, v.MaxPendingRequests)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual node returned by a list operation.
@@ -2858,6 +6748,70 @@ type VirtualNodeRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualNodeRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VirtualNodeRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VirtualNodeRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.VirtualNodeRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualNodeRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.VirtualNodeRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.VirtualNodeRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.VirtualNodeRef_version, *v.Version)
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.VirtualNodeRef_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *VirtualNodeRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VirtualNodeRef_arn, v.Arn)
+		case schemas.VirtualNodeRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualNodeRef_createdAt, v.CreatedAt)
+		case schemas.VirtualNodeRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualNodeRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.VirtualNodeRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualNodeRef_meshName, v.MeshName)
+		case schemas.VirtualNodeRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.VirtualNodeRef_meshOwner, v.MeshOwner)
+		case schemas.VirtualNodeRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.VirtualNodeRef_resourceOwner, v.ResourceOwner)
+		case schemas.VirtualNodeRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.VirtualNodeRef_version, v.Version)
+		case schemas.VirtualNodeRef_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.VirtualNodeRef_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a virtual node service provider.
 type VirtualNodeServiceProvider struct {
 
@@ -2867,6 +6821,28 @@ type VirtualNodeServiceProvider struct {
 	VirtualNodeName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualNodeServiceProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeServiceProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeServiceProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.VirtualNodeServiceProvider_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *VirtualNodeServiceProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeServiceProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeServiceProvider_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.VirtualNodeServiceProvider_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
 }
 
 // An object that represents the specification of a virtual node.
@@ -2893,6 +6869,47 @@ type VirtualNodeSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualNodeSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackendDefaults != nil {
+		s.WriteStruct(schemas.VirtualNodeSpec_backendDefaults)
+		v.BackendDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBackends(s, schemas.VirtualNodeSpec_backends, v.Backends)
+	serializeListeners(s, schemas.VirtualNodeSpec_listeners, v.Listeners)
+	if v.Logging != nil {
+		s.WriteStruct(schemas.VirtualNodeSpec_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeServiceDiscovery(s, schemas.VirtualNodeSpec_serviceDiscovery, v.ServiceDiscovery)
+}
+func (v *VirtualNodeSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeSpec_backendDefaults:
+			v.BackendDefaults = &BackendDefaults{}
+			return v.BackendDefaults.Deserialize(d)
+		case schemas.VirtualNodeSpec_backends:
+			return deserializeBackends(d, schemas.VirtualNodeSpec_backends, &v.Backends)
+		case schemas.VirtualNodeSpec_listeners:
+			return deserializeListeners(d, schemas.VirtualNodeSpec_listeners, &v.Listeners)
+		case schemas.VirtualNodeSpec_logging:
+			v.Logging = &Logging{}
+			return v.Logging.Deserialize(d)
+		case schemas.VirtualNodeSpec_serviceDiscovery:
+			return deserializeServiceDiscovery(d, schemas.VirtualNodeSpec_serviceDiscovery, &v.ServiceDiscovery)
+		}
+		return nil
+	})
+}
+
 // An object that represents the current status of the virtual node.
 type VirtualNodeStatus struct {
 
@@ -2902,6 +6919,32 @@ type VirtualNodeStatus struct {
 	Status VirtualNodeStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualNodeStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.VirtualNodeStatus_status, string(v.Status))
+	}
+}
+func (v *VirtualNodeStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.VirtualNodeStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VirtualNodeStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a type of connection pool.
@@ -2914,6 +6957,28 @@ type VirtualNodeTcpConnectionPool struct {
 	MaxConnections *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualNodeTcpConnectionPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualNodeTcpConnectionPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualNodeTcpConnectionPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxConnections != nil {
+		s.WriteInt32(schemas.VirtualNodeTcpConnectionPool_maxConnections, *v.MaxConnections)
+	}
+}
+func (v *VirtualNodeTcpConnectionPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualNodeTcpConnectionPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualNodeTcpConnectionPool_maxConnections:
+			v.MaxConnections = new(int32)
+			return d.ReadInt32(schemas.VirtualNodeTcpConnectionPool_maxConnections, v.MaxConnections)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual router returned by a describe operation.
@@ -2947,6 +7012,58 @@ type VirtualRouterData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualRouterData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualRouterData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.VirtualRouterData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.VirtualRouterData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.VirtualRouterData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.VirtualRouterData_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *VirtualRouterData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualRouterData_meshName, v.MeshName)
+		case schemas.VirtualRouterData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.VirtualRouterData_spec:
+			v.Spec = &VirtualRouterSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.VirtualRouterData_status:
+			v.Status = &VirtualRouterStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.VirtualRouterData_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.VirtualRouterData_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a virtual router listener.
 type VirtualRouterListener struct {
 
@@ -2956,6 +7073,30 @@ type VirtualRouterListener struct {
 	PortMapping *PortMapping
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualRouterListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterListener)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterListener) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortMapping != nil {
+		s.WriteStruct(schemas.VirtualRouterListener_portMapping)
+		v.PortMapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VirtualRouterListener) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterListener, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterListener_portMapping:
+			v.PortMapping = &PortMapping{}
+			return v.PortMapping.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual router returned by a list operation.
@@ -3013,6 +7154,70 @@ type VirtualRouterRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualRouterRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VirtualRouterRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VirtualRouterRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.VirtualRouterRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualRouterRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.VirtualRouterRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.VirtualRouterRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.VirtualRouterRef_version, *v.Version)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.VirtualRouterRef_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *VirtualRouterRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VirtualRouterRef_arn, v.Arn)
+		case schemas.VirtualRouterRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualRouterRef_createdAt, v.CreatedAt)
+		case schemas.VirtualRouterRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualRouterRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.VirtualRouterRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualRouterRef_meshName, v.MeshName)
+		case schemas.VirtualRouterRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.VirtualRouterRef_meshOwner, v.MeshOwner)
+		case schemas.VirtualRouterRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.VirtualRouterRef_resourceOwner, v.ResourceOwner)
+		case schemas.VirtualRouterRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.VirtualRouterRef_version, v.Version)
+		case schemas.VirtualRouterRef_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.VirtualRouterRef_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 // An object that represents a virtual node service provider.
 type VirtualRouterServiceProvider struct {
 
@@ -3022,6 +7227,28 @@ type VirtualRouterServiceProvider struct {
 	VirtualRouterName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualRouterServiceProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterServiceProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterServiceProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.VirtualRouterServiceProvider_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *VirtualRouterServiceProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterServiceProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterServiceProvider_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.VirtualRouterServiceProvider_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
 }
 
 // An object that represents the specification of a virtual router.
@@ -3034,6 +7261,25 @@ type VirtualRouterSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualRouterSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualRouterListeners(s, schemas.VirtualRouterSpec_listeners, v.Listeners)
+}
+func (v *VirtualRouterSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterSpec_listeners:
+			return deserializeVirtualRouterListeners(d, schemas.VirtualRouterSpec_listeners, &v.Listeners)
+		}
+		return nil
+	})
+}
+
 // An object that represents the status of a virtual router.
 type VirtualRouterStatus struct {
 
@@ -3043,6 +7289,32 @@ type VirtualRouterStatus struct {
 	Status VirtualRouterStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualRouterStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualRouterStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualRouterStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.VirtualRouterStatus_status, string(v.Status))
+	}
+}
+func (v *VirtualRouterStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualRouterStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualRouterStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.VirtualRouterStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VirtualRouterStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual service backend for a virtual node.
@@ -3057,6 +7329,36 @@ type VirtualServiceBackend struct {
 	ClientPolicy *ClientPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualServiceBackend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceBackend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualServiceBackend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientPolicy != nil {
+		s.WriteStruct(schemas.VirtualServiceBackend_clientPolicy)
+		v.ClientPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.VirtualServiceBackend_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *VirtualServiceBackend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualServiceBackend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualServiceBackend_clientPolicy:
+			v.ClientPolicy = &ClientPolicy{}
+			return v.ClientPolicy.Deserialize(d)
+		case schemas.VirtualServiceBackend_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.VirtualServiceBackend_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a virtual service returned by a describe operation.
@@ -3090,6 +7392,58 @@ type VirtualServiceData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualServiceData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualServiceData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualServiceData_meshName, *v.MeshName)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.VirtualServiceData_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.VirtualServiceData_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.VirtualServiceData_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.VirtualServiceData_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *VirtualServiceData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualServiceData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualServiceData_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualServiceData_meshName, v.MeshName)
+		case schemas.VirtualServiceData_metadata:
+			v.Metadata = &ResourceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.VirtualServiceData_spec:
+			v.Spec = &VirtualServiceSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.VirtualServiceData_status:
+			v.Status = &VirtualServiceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.VirtualServiceData_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.VirtualServiceData_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
+}
+
 // An object that represents the provider for a virtual service.
 //
 // The following types satisfy this interface:
@@ -3108,6 +7462,14 @@ type VirtualServiceProviderMemberVirtualNode struct {
 }
 
 func (*VirtualServiceProviderMemberVirtualNode) isVirtualServiceProvider() {}
+func (v *VirtualServiceProviderMemberVirtualNode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceProvider_virtualNode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualServiceProviderMemberVirtualNode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The virtual router associated with a virtual service.
 type VirtualServiceProviderMemberVirtualRouter struct {
@@ -3117,6 +7479,14 @@ type VirtualServiceProviderMemberVirtualRouter struct {
 }
 
 func (*VirtualServiceProviderMemberVirtualRouter) isVirtualServiceProvider() {}
+func (v *VirtualServiceProviderMemberVirtualRouter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceProvider_virtualRouter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VirtualServiceProviderMemberVirtualRouter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that represents a virtual service returned by a list operation.
 type VirtualServiceRef struct {
@@ -3173,6 +7543,70 @@ type VirtualServiceRef struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualServiceRef) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceRef)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualServiceRef) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VirtualServiceRef_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VirtualServiceRef_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.VirtualServiceRef_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.VirtualServiceRef_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.VirtualServiceRef_meshOwner, *v.MeshOwner)
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.VirtualServiceRef_resourceOwner, *v.ResourceOwner)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.VirtualServiceRef_version, *v.Version)
+	}
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.VirtualServiceRef_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *VirtualServiceRef) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualServiceRef, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualServiceRef_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VirtualServiceRef_arn, v.Arn)
+		case schemas.VirtualServiceRef_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualServiceRef_createdAt, v.CreatedAt)
+		case schemas.VirtualServiceRef_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.VirtualServiceRef_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.VirtualServiceRef_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.VirtualServiceRef_meshName, v.MeshName)
+		case schemas.VirtualServiceRef_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.VirtualServiceRef_meshOwner, v.MeshOwner)
+		case schemas.VirtualServiceRef_resourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.VirtualServiceRef_resourceOwner, v.ResourceOwner)
+		case schemas.VirtualServiceRef_version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.VirtualServiceRef_version, v.Version)
+		case schemas.VirtualServiceRef_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.VirtualServiceRef_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
+}
+
 // An object that represents the specification of a virtual service.
 type VirtualServiceSpec struct {
 
@@ -3181,6 +7615,25 @@ type VirtualServiceSpec struct {
 	Provider VirtualServiceProvider
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualServiceSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualServiceSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVirtualServiceProvider(s, schemas.VirtualServiceSpec_provider, v.Provider)
+}
+func (v *VirtualServiceSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualServiceSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualServiceSpec_provider:
+			return deserializeVirtualServiceProvider(d, schemas.VirtualServiceSpec_provider, &v.Provider)
+		}
+		return nil
+	})
 }
 
 // An object that represents the status of a virtual service.
@@ -3192,6 +7645,32 @@ type VirtualServiceStatus struct {
 	Status VirtualServiceStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualServiceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualServiceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualServiceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.VirtualServiceStatus_status, string(v.Status))
+	}
+}
+func (v *VirtualServiceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualServiceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualServiceStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.VirtualServiceStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VirtualServiceStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents a target and its relative weight. Traffic is
@@ -3215,6 +7694,37 @@ type WeightedTarget struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WeightedTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WeightedTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WeightedTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteInt32(schemas.WeightedTarget_port, *v.Port)
+	}
+	if v.VirtualNode != nil {
+		s.WriteString(schemas.WeightedTarget_virtualNode, *v.VirtualNode)
+	}
+	s.WriteInt32(schemas.WeightedTarget_weight, v.Weight)
+}
+func (v *WeightedTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WeightedTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WeightedTarget_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.WeightedTarget_port, v.Port)
+		case schemas.WeightedTarget_virtualNode:
+			v.VirtualNode = new(string)
+			return d.ReadString(schemas.WeightedTarget_virtualNode, v.VirtualNode)
+		case schemas.WeightedTarget_weight:
+			return d.ReadInt32(schemas.WeightedTarget_weight, &v.Weight)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.ListAssessmentRuns
+
+{"assessmentTemplateArns":["__Member__","__Member__"],"filter":{"completionTimeRange":{"beginDate":946684800,"endDate":946684800},"durationRange":{"maxSeconds":1,"minSeconds":1},"namePattern":"__NamePattern__","rulesPackageArns":["__Member__","__Member__"],"startTimeRange":{"beginDate":946684800,"endDate":946684800},"stateChangeTimeRange":{"beginDate":946684800,"endDate":946684800},"states":["CREATED","CREATED"]},"maxResults":1,"nextToken":"__NextToken__"}

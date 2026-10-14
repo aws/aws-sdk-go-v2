@@ -5,12 +5,8 @@ package wickr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new security group in a Wickr network. Security groups allow you to
@@ -54,29 +50,6 @@ type CreateSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSecurityGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_name, *v.Name)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_networkId, *v.NetworkId)
-	}
-	if v.SecurityGroupSettings != nil {
-		s.WriteStruct(schemas.CreateSecurityGroupRequest_securityGroupSettings)
-		v.SecurityGroupSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateSecurityGroupOutput struct {
 
 	// The details of the newly created security group, including its ID, name, and
@@ -91,73 +64,23 @@ type CreateSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSecurityGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSecurityGroupResponse_securityGroup:
-			v.SecurityGroup = &types.SecurityGroup{}
-			return v.SecurityGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityGroup, schemas.CreateSecurityGroupRequest, schemas.CreateSecurityGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityGroup, schemas.CreateSecurityGroupRequest, schemas.CreateSecurityGroupResponse), output: &CreateSecurityGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSecurityGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +90,6 @@ func (c *Client) addOperationCreateSecurityGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateSecurityGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecurityGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +102,6 @@ func (c *Client) addOperationCreateSecurityGroupMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +141,4 @@ func (m *idempotencyToken_initializeOpCreateSecurityGroup) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateSecurityGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSecurityGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSecurityGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSecurityGroup",
-	}
 }

@@ -1,0 +1,3 @@
+GET /2013-04-01/testdnsanswer?edns0clientsubnetip=__EDNS0ClientSubnetIP__&edns0clientsubnetmask=__EDNS0ClientSubnetMask__&hostedzoneid=__HostedZoneId__&recordname=__RecordName__&recordtype=SOA&resolverip=__ResolverIP__
+
+

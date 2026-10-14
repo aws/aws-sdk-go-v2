@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetPlatformApplicationAttributes&Attributes.entry.1.key=key0&Attributes.entry.1.value=__Value__&PlatformApplicationArn=__PlatformApplicationArn__&Version=2010-03-31

@@ -59,6 +59,7 @@ public class LegacyAuthContextOverride implements GoIntegration {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MIDDLEWARE_REGISTRAR)
+                        .isCommon(true)
                         .build()
         );
     }

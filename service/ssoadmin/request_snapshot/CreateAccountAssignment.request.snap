@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.CreateAccountAssignment
+
+{"InstanceArn":"__InstanceArn__","PermissionSetArn":"__PermissionSetArn__","PrincipalId":"__PrincipalId__","PrincipalType":"USER","TargetId":"__TargetId__","TargetType":"AWS_ACCOUNT"}

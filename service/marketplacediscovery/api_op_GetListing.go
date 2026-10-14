@@ -4,13 +4,8 @@ package marketplacediscovery
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides details about a listing, such as descriptions, badges, categories,
@@ -37,19 +32,13 @@ type GetListingInput struct {
 	// This member is required.
 	ListingId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	noSmithyDocumentSerde
-}
-
-func (v *GetListingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetListingInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetListingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ListingId != nil {
-		s.WriteString(schemas.GetListingInput_listingId, *v.ListingId)
-	}
 }
 
 type GetListingOutput struct {
@@ -158,6 +147,11 @@ type GetListingOutput struct {
 	// how to integrate with a multi-product listing.
 	IntegrationGuide *string
 
+	// The locale of the returned content. Indicates whether the response contains
+	// content in the requested locale, or fell back to the default locale. See Locale
+	// for details.
+	Locale *string
+
 	// A summary of customer reviews available for the listing, including average
 	// rating and total review count by source.
 	ReviewSummary *types.ReviewSummary
@@ -168,131 +162,29 @@ type GetListingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetListingOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetListingOutput_associatedEntities:
-			return deserializeListingAssociatedEntityList(d, schemas.GetListingOutput_associatedEntities, &v.AssociatedEntities)
-		case schemas.GetListingOutput_badges:
-			return deserializeListingBadgeList(d, schemas.GetListingOutput_badges, &v.Badges)
-		case schemas.GetListingOutput_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.GetListingOutput_catalog, v.Catalog)
-		case schemas.GetListingOutput_categories:
-			return deserializeCategoryList(d, schemas.GetListingOutput_categories, &v.Categories)
-		case schemas.GetListingOutput_fulfillmentOptionSummaries:
-			return deserializeFulfillmentOptionSummaryList(d, schemas.GetListingOutput_fulfillmentOptionSummaries, &v.FulfillmentOptionSummaries)
-		case schemas.GetListingOutput_highlights:
-			return deserializeHighlightList(d, schemas.GetListingOutput_highlights, &v.Highlights)
-		case schemas.GetListingOutput_integrationGuide:
-			v.IntegrationGuide = new(string)
-			return d.ReadString(schemas.GetListingOutput_integrationGuide, v.IntegrationGuide)
-		case schemas.GetListingOutput_listingId:
-			v.ListingId = new(string)
-			return d.ReadString(schemas.GetListingOutput_listingId, v.ListingId)
-		case schemas.GetListingOutput_listingName:
-			v.ListingName = new(string)
-			return d.ReadString(schemas.GetListingOutput_listingName, v.ListingName)
-		case schemas.GetListingOutput_logoThumbnailUrl:
-			v.LogoThumbnailUrl = new(string)
-			return d.ReadString(schemas.GetListingOutput_logoThumbnailUrl, v.LogoThumbnailUrl)
-		case schemas.GetListingOutput_longDescription:
-			v.LongDescription = new(string)
-			return d.ReadString(schemas.GetListingOutput_longDescription, v.LongDescription)
-		case schemas.GetListingOutput_pricingModels:
-			return deserializePricingModelList(d, schemas.GetListingOutput_pricingModels, &v.PricingModels)
-		case schemas.GetListingOutput_pricingUnits:
-			return deserializePricingUnitList(d, schemas.GetListingOutput_pricingUnits, &v.PricingUnits)
-		case schemas.GetListingOutput_promotionalMedia:
-			return deserializePromotionalMediaList(d, schemas.GetListingOutput_promotionalMedia, &v.PromotionalMedia)
-		case schemas.GetListingOutput_publisher:
-			v.Publisher = &types.SellerInformation{}
-			return v.Publisher.Deserialize(d)
-		case schemas.GetListingOutput_resources:
-			return deserializeResourceList(d, schemas.GetListingOutput_resources, &v.Resources)
-		case schemas.GetListingOutput_reviewSummary:
-			v.ReviewSummary = &types.ReviewSummary{}
-			return v.ReviewSummary.Deserialize(d)
-		case schemas.GetListingOutput_sellerEngagements:
-			return deserializeSellerEngagementList(d, schemas.GetListingOutput_sellerEngagements, &v.SellerEngagements)
-		case schemas.GetListingOutput_shortDescription:
-			v.ShortDescription = new(string)
-			return d.ReadString(schemas.GetListingOutput_shortDescription, v.ShortDescription)
-		case schemas.GetListingOutput_useCases:
-			return deserializeUseCaseList(d, schemas.GetListingOutput_useCases, &v.UseCases)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetListing{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetListing{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput), output: &GetListingOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetListing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetListingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -307,22 +199,8 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetListing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetListing",
-	}
 }

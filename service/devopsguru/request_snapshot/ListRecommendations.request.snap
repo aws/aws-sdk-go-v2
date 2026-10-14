@@ -1,0 +1,5 @@
+POST /recommendations
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","InsightId":"__InsightId__","Locale":"DE_DE","NextToken":"__NextToken__"}

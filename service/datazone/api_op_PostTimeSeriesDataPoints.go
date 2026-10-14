@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Posts time series data points to Amazon DataZone for the specified asset.
@@ -59,28 +55,6 @@ type PostTimeSeriesDataPointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PostTimeSeriesDataPointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PostTimeSeriesDataPointsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PostTimeSeriesDataPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.PostTimeSeriesDataPointsInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.PostTimeSeriesDataPointsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.PostTimeSeriesDataPointsInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.PostTimeSeriesDataPointsInput_entityType, string(v.EntityType))
-	}
-	serializeTimeSeriesDataPointFormInputList(s, schemas.PostTimeSeriesDataPointsInput_forms, v.Forms)
-}
-
 type PostTimeSeriesDataPointsOutput struct {
 
 	// The ID of the Amazon DataZone domain in which you want to post time series data
@@ -102,85 +76,23 @@ type PostTimeSeriesDataPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PostTimeSeriesDataPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PostTimeSeriesDataPointsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PostTimeSeriesDataPointsOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.PostTimeSeriesDataPointsOutput_domainId, v.DomainId)
-		case schemas.PostTimeSeriesDataPointsOutput_entityId:
-			v.EntityId = new(string)
-			return d.ReadString(schemas.PostTimeSeriesDataPointsOutput_entityId, v.EntityId)
-		case schemas.PostTimeSeriesDataPointsOutput_entityType:
-			var ev string
-			if err := d.ReadString(schemas.PostTimeSeriesDataPointsOutput_entityType, &ev); err != nil {
-				return err
-			}
-			v.EntityType = types.TimeSeriesEntityType(ev)
-			return nil
-		case schemas.PostTimeSeriesDataPointsOutput_forms:
-			return deserializeTimeSeriesDataPointFormOutputList(d, schemas.PostTimeSeriesDataPointsOutput_forms, &v.Forms)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostTimeSeriesDataPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostTimeSeriesDataPoints, schemas.PostTimeSeriesDataPointsInput, schemas.PostTimeSeriesDataPointsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostTimeSeriesDataPoints{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostTimeSeriesDataPoints, schemas.PostTimeSeriesDataPointsInput, schemas.PostTimeSeriesDataPointsOutput), output: &PostTimeSeriesDataPointsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PostTimeSeriesDataPoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -190,12 +102,6 @@ func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpPostTimeSeriesDataPointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostTimeSeriesDataPoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +114,6 @@ func (c *Client) addOperationPostTimeSeriesDataPointsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,12 +153,4 @@ func (m *idempotencyToken_initializeOpPostTimeSeriesDataPoints) HandleInitialize
 }
 func addIdempotencyToken_opPostTimeSeriesDataPointsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPostTimeSeriesDataPoints{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPostTimeSeriesDataPoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PostTimeSeriesDataPoints",
-	}
 }

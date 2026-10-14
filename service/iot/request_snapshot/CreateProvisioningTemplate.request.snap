@@ -1,0 +1,5 @@
+POST /provisioning-templates
+
+Content-Type: application/json
+
+{"description":"__Description__","enabled":true,"preProvisioningHook":{"payloadVersion":"__PayloadVersion__","targetArn":"__TargetArn__"},"provisioningRoleArn":"__ProvisioningRoleArn__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"templateBody":"__TemplateBody__","templateName":"__TemplateName__","type":"FLEET_PROVISIONING"}

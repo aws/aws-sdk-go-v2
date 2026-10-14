@@ -4,17 +4,17 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing lookup table by replacing all of its CSV content. After the
-// update completes, queries that use this table will use the new data.
+// Updates an existing lookup table by replacing all of its content with new CSV
+// data or CloudWatch Logs query results. After the update completes, queries that
+// use this table use the new data.
 //
-// This is a full replacement operation. All existing content is replaced with the
-// new CSV data.
+// This is a full replacement operation. All existing content is replaced. You
+// must specify either tableBody or queryId , but not both.
 func (c *Client) UpdateLookupTable(ctx context.Context, params *UpdateLookupTableInput, optFns ...func(*Options)) (*UpdateLookupTableOutput, error) {
 	if params == nil {
 		params = &UpdateLookupTableInput{}
@@ -37,13 +37,6 @@ type UpdateLookupTableInput struct {
 	// This member is required.
 	LookupTableArn *string
 
-	// The new CSV content to replace the existing data. The first row must be a
-	// header row with column names. The content must use UTF-8 encoding and not exceed
-	// 10 MB.
-	//
-	// This member is required.
-	TableBody *string
-
 	// An updated description of the lookup table.
 	Description *string
 
@@ -52,7 +45,45 @@ type UpdateLookupTableInput struct {
 	// use an Amazon Web Services-owned key instead, specify an empty string.
 	KmsKeyId *string
 
+	// The ID of a completed or cancelled CloudWatch Logs query whose results replace
+	// the lookup table content. A cancelled query replaces the content with the
+	// partial results that were available when the query was stopped.
+	//
+	// You must specify either tableBody or queryId , but not both.
+	QueryId *string
+
+	// The new CSV content to replace the existing data. The first row must be a
+	// header row with column names. The content must use UTF-8 encoding and not exceed
+	// 10 MB.
+	//
+	// You must specify either tableBody or queryId , but not both.
+	TableBody *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateLookupTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLookupTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLookupTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLookupTableRequest_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateLookupTableRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LookupTableArn != nil {
+		s.WriteString(schemas.UpdateLookupTableRequest_lookupTableArn, *v.LookupTableArn)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.UpdateLookupTableRequest_queryId, *v.QueryId)
+	}
+	if v.TableBody != nil {
+		s.WriteString(schemas.UpdateLookupTableRequest_tableBody, *v.TableBody)
+	}
 }
 
 type UpdateLookupTableOutput struct {
@@ -70,77 +101,54 @@ type UpdateLookupTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLookupTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLookupTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLookupTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedTime != nil {
+		s.WriteInt64(schemas.UpdateLookupTableResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.LookupTableArn != nil {
+		s.WriteString(schemas.UpdateLookupTableResponse_lookupTableArn, *v.LookupTableArn)
+	}
+}
+func (v *UpdateLookupTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLookupTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLookupTableResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(int64)
+			return d.ReadInt64(schemas.UpdateLookupTableResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.UpdateLookupTableResponse_lookupTableArn:
+			v.LookupTableArn = new(string)
+			return d.ReadString(schemas.UpdateLookupTableResponse_lookupTableArn, v.LookupTableArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLookupTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLookupTable, schemas.UpdateLookupTableRequest, schemas.UpdateLookupTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLookupTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLookupTable, schemas.UpdateLookupTableRequest, schemas.UpdateLookupTableResponse), output: &UpdateLookupTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLookupTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLookupTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLookupTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLookupTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +163,8 @@ func (c *Client) addOperationUpdateLookupTableMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLookupTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLookupTable",
-	}
 }

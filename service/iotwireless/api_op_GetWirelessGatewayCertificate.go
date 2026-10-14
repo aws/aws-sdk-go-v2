@@ -4,12 +4,7 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the ID of the certificate that is currently associated with a wireless
@@ -39,18 +34,6 @@ type GetWirelessGatewayCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWirelessGatewayCertificateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWirelessGatewayCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetWirelessGatewayCertificateRequest_Id, *v.Id)
-	}
-}
-
 type GetWirelessGatewayCertificateOutput struct {
 
 	// The ID of the certificate associated with the wireless gateway.
@@ -66,88 +49,29 @@ type GetWirelessGatewayCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWirelessGatewayCertificateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWirelessGatewayCertificateResponse_IotCertificateId:
-			v.IotCertificateId = new(string)
-			return d.ReadString(schemas.GetWirelessGatewayCertificateResponse_IotCertificateId, v.IotCertificateId)
-		case schemas.GetWirelessGatewayCertificateResponse_LoRaWANNetworkServerCertificateId:
-			v.LoRaWANNetworkServerCertificateId = new(string)
-			return d.ReadString(schemas.GetWirelessGatewayCertificateResponse_LoRaWANNetworkServerCertificateId, v.LoRaWANNetworkServerCertificateId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWirelessGatewayCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGatewayCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayCertificate, schemas.GetWirelessGatewayCertificateRequest, schemas.GetWirelessGatewayCertificateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessGatewayCertificate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayCertificate, schemas.GetWirelessGatewayCertificateRequest, schemas.GetWirelessGatewayCertificateResponse), output: &GetWirelessGatewayCertificateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWirelessGatewayCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWirelessGatewayCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWirelessGatewayCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +86,8 @@ func (c *Client) addOperationGetWirelessGatewayCertificateMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWirelessGatewayCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWirelessGatewayCertificate",
-	}
 }

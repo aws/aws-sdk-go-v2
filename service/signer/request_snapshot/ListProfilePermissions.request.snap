@@ -1,0 +1,3 @@
+GET /signing-profiles/__ProfileName__/permissions?nextToken=__NextToken__
+
+

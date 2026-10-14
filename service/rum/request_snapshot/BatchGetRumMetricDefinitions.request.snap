@@ -1,0 +1,3 @@
+GET /rummetrics/__AppMonitorName__/metrics?destination=CloudWatch&destinationArn=__DestinationArn__&maxResults=1&nextToken=__NextToken__
+
+

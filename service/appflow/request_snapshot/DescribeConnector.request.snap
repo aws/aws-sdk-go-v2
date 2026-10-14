@@ -1,0 +1,5 @@
+POST /describe-connector
+
+Content-Type: application/json
+
+{"connectorLabel":"__ConnectorLabel__","connectorType":"Salesforce"}

@@ -3,12 +3,23 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 // Contains ACM-specific metadata about a certificate.
 type AcmCertificateMetadata struct {
+
+	// The ACME account identifier associated with the certificate.
+	AcmeAccountId *string
+
+	// The ARN of the ACME endpoint used to issue the certificate.
+	AcmeEndpointArn *string
+
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
@@ -76,10 +87,157 @@ type AcmCertificateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcmCertificateMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmCertificateMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmCertificateMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeAccountId != nil {
+		s.WriteString(schemas.AcmCertificateMetadata_AcmeAccountId, *v.AcmeAccountId)
+	}
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmCertificateMetadata_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.CertificateKeyPairOrigin != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmCertificateMetadata_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExportOption != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_ExportOption, string(v.ExportOption))
+	}
+	if v.Exported != nil {
+		s.WriteBool(schemas.AcmCertificateMetadata_Exported, *v.Exported)
+	}
+	if v.ImportedAt != nil {
+		s.WriteTime(schemas.AcmCertificateMetadata_ImportedAt, *v.ImportedAt)
+	}
+	if v.InUse != nil {
+		s.WriteBool(schemas.AcmCertificateMetadata_InUse, *v.InUse)
+	}
+	if v.IssuedAt != nil {
+		s.WriteTime(schemas.AcmCertificateMetadata_IssuedAt, *v.IssuedAt)
+	}
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_ManagedBy, string(v.ManagedBy))
+	}
+	if v.RenewalEligibility != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_RenewalEligibility, string(v.RenewalEligibility))
+	}
+	if v.RenewalStatus != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_RenewalStatus, string(v.RenewalStatus))
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.AcmCertificateMetadata_RevokedAt, *v.RevokedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_Type, string(v.Type))
+	}
+	if v.ValidationMethod != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_ValidationMethod, string(v.ValidationMethod))
+	}
+}
+func (v *AcmCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmCertificateMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmCertificateMetadata_AcmeAccountId:
+			v.AcmeAccountId = new(string)
+			return d.ReadString(schemas.AcmCertificateMetadata_AcmeAccountId, v.AcmeAccountId)
+		case schemas.AcmCertificateMetadata_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmCertificateMetadata_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmCertificateMetadata_CertificateKeyPairOrigin:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_CertificateKeyPairOrigin, &ev); err != nil {
+				return err
+			}
+			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmCertificateMetadata_CreatedAt, v.CreatedAt)
+		case schemas.AcmCertificateMetadata_ExportOption:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_ExportOption, &ev); err != nil {
+				return err
+			}
+			v.ExportOption = CertificateExport(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_Exported:
+			v.Exported = new(bool)
+			return d.ReadBool(schemas.AcmCertificateMetadata_Exported, v.Exported)
+		case schemas.AcmCertificateMetadata_ImportedAt:
+			v.ImportedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmCertificateMetadata_ImportedAt, v.ImportedAt)
+		case schemas.AcmCertificateMetadata_InUse:
+			v.InUse = new(bool)
+			return d.ReadBool(schemas.AcmCertificateMetadata_InUse, v.InUse)
+		case schemas.AcmCertificateMetadata_IssuedAt:
+			v.IssuedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmCertificateMetadata_IssuedAt, v.IssuedAt)
+		case schemas.AcmCertificateMetadata_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = CertificateManagedBy(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_RenewalEligibility:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_RenewalEligibility, &ev); err != nil {
+				return err
+			}
+			v.RenewalEligibility = RenewalEligibility(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_RenewalStatus:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_RenewalStatus, &ev); err != nil {
+				return err
+			}
+			v.RenewalStatus = RenewalStatus(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmCertificateMetadata_RevokedAt, v.RevokedAt)
+		case schemas.AcmCertificateMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateStatus(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_Type:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_ValidationMethod:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_ValidationMethod, &ev); err != nil {
+				return err
+			}
+			v.ValidationMethod = ValidationMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Filters certificates by ACM metadata.
 //
 // The following types satisfy this interface:
 //
+//	AcmCertificateMetadataFilterMemberAcmeAccountId
+//	AcmCertificateMetadataFilterMemberAcmeEndpointArn
+//	AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin
 //	AcmCertificateMetadataFilterMemberExported
 //	AcmCertificateMetadataFilterMemberExportOption
 //	AcmCertificateMetadataFilterMemberInUse
@@ -92,6 +250,56 @@ type AcmCertificateMetadataFilter interface {
 	isAcmCertificateMetadataFilter()
 }
 
+// Filter by ACME account identifier.
+type AcmCertificateMetadataFilterMemberAcmeAccountId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberAcmeAccountId) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberAcmeAccountId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_AcmeAccountId, v.Value)
+}
+func (v *AcmCertificateMetadataFilterMemberAcmeAccountId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AcmCertificateMetadataFilter_AcmeAccountId, &v.Value)
+}
+
+// Filter by ACME endpoint ARN.
+type AcmCertificateMetadataFilterMemberAcmeEndpointArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberAcmeEndpointArn) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberAcmeEndpointArn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_AcmeEndpointArn, v.Value)
+}
+func (v *AcmCertificateMetadataFilterMemberAcmeEndpointArn) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AcmCertificateMetadataFilter_AcmeEndpointArn, &v.Value)
+}
+
+// Filter by certificate key pair origin.
+type AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin struct {
+	Value CertificateKeyPairOrigin
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_CertificateKeyPairOrigin, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_CertificateKeyPairOrigin, &s); err != nil {
+		return err
+	}
+	v.Value = CertificateKeyPairOrigin(s)
+	return nil
+}
+
 // Filter by whether the certificate has been exported.
 type AcmCertificateMetadataFilterMemberExported struct {
 	Value bool
@@ -100,6 +308,12 @@ type AcmCertificateMetadataFilterMemberExported struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberExported) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberExported) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AcmCertificateMetadataFilter_Exported, v.Value)
+}
+func (v *AcmCertificateMetadataFilterMemberExported) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AcmCertificateMetadataFilter_Exported, &v.Value)
+}
 
 // Filter by certificate export option.
 type AcmCertificateMetadataFilterMemberExportOption struct {
@@ -109,6 +323,17 @@ type AcmCertificateMetadataFilterMemberExportOption struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberExportOption) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberExportOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_ExportOption, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberExportOption) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_ExportOption, &s); err != nil {
+		return err
+	}
+	v.Value = CertificateExport(s)
+	return nil
+}
 
 // Filter by whether the certificate is in use.
 type AcmCertificateMetadataFilterMemberInUse struct {
@@ -118,6 +343,12 @@ type AcmCertificateMetadataFilterMemberInUse struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberInUse) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberInUse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AcmCertificateMetadataFilter_InUse, v.Value)
+}
+func (v *AcmCertificateMetadataFilterMemberInUse) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AcmCertificateMetadataFilter_InUse, &v.Value)
+}
 
 // Filter by the entity that manages the certificate.
 type AcmCertificateMetadataFilterMemberManagedBy struct {
@@ -127,6 +358,17 @@ type AcmCertificateMetadataFilterMemberManagedBy struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberManagedBy) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberManagedBy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_ManagedBy, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberManagedBy) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_ManagedBy, &s); err != nil {
+		return err
+	}
+	v.Value = CertificateManagedBy(s)
+	return nil
+}
 
 // Filter by certificate renewal status.
 type AcmCertificateMetadataFilterMemberRenewalStatus struct {
@@ -136,6 +378,17 @@ type AcmCertificateMetadataFilterMemberRenewalStatus struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberRenewalStatus) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberRenewalStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_RenewalStatus, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberRenewalStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_RenewalStatus, &s); err != nil {
+		return err
+	}
+	v.Value = RenewalStatus(s)
+	return nil
+}
 
 // Filter by certificate status.
 type AcmCertificateMetadataFilterMemberStatus struct {
@@ -145,6 +398,17 @@ type AcmCertificateMetadataFilterMemberStatus struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberStatus) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_Status, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_Status, &s); err != nil {
+		return err
+	}
+	v.Value = CertificateStatus(s)
+	return nil
+}
 
 // Filter by certificate type.
 type AcmCertificateMetadataFilterMemberType struct {
@@ -154,6 +418,17 @@ type AcmCertificateMetadataFilterMemberType struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberType) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_Type, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberType) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_Type, &s); err != nil {
+		return err
+	}
+	v.Value = CertificateType(s)
+	return nil
+}
 
 // Filter by validation method.
 type AcmCertificateMetadataFilterMemberValidationMethod struct {
@@ -163,10 +438,857 @@ type AcmCertificateMetadataFilterMemberValidationMethod struct {
 }
 
 func (*AcmCertificateMetadataFilterMemberValidationMethod) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberValidationMethod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_ValidationMethod, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberValidationMethod) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_ValidationMethod, &s); err != nil {
+		return err
+	}
+	v.Value = ValidationMethod(s)
+	return nil
+}
+
+// Contains detailed information about an ACME account.
+type AcmeAccount struct {
+
+	// The URL of the ACME account.
+	AccountUrl *string
+
+	// The Amazon Resource Name (ARN) of the external account binding associated with
+	// this ACME account.
+	AcmeExternalAccountBindingArn *string
+
+	// The contact information for the ACME account.
+	Contacts []string
+
+	// The time at which the ACME account was created.
+	CreatedAt *time.Time
+
+	// The thumbprint of the public key associated with the ACME account.
+	PublicKeyThumbprint *string
+
+	// The status of the ACME account.
+	Status AcmeAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.AcmeAccount_AccountUrl, *v.AccountUrl)
+	}
+	if v.AcmeExternalAccountBindingArn != nil {
+		s.WriteString(schemas.AcmeAccount_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
+	}
+	serializeContactList(s, schemas.AcmeAccount_Contacts, v.Contacts)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeAccount_CreatedAt, *v.CreatedAt)
+	}
+	if v.PublicKeyThumbprint != nil {
+		s.WriteString(schemas.AcmeAccount_PublicKeyThumbprint, *v.PublicKeyThumbprint)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeAccount_Status, string(v.Status))
+	}
+}
+func (v *AcmeAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeAccount_AccountUrl:
+			v.AccountUrl = new(string)
+			return d.ReadString(schemas.AcmeAccount_AccountUrl, v.AccountUrl)
+		case schemas.AcmeAccount_AcmeExternalAccountBindingArn:
+			v.AcmeExternalAccountBindingArn = new(string)
+			return d.ReadString(schemas.AcmeAccount_AcmeExternalAccountBindingArn, v.AcmeExternalAccountBindingArn)
+		case schemas.AcmeAccount_Contacts:
+			return deserializeContactList(d, schemas.AcmeAccount_Contacts, &v.Contacts)
+		case schemas.AcmeAccount_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeAccount_CreatedAt, v.CreatedAt)
+		case schemas.AcmeAccount_PublicKeyThumbprint:
+			v.PublicKeyThumbprint = new(string)
+			return d.ReadString(schemas.AcmeAccount_PublicKeyThumbprint, v.PublicKeyThumbprint)
+		case schemas.AcmeAccount_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeAccount_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeAccountStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an ACME account.
+type AcmeAccountSummary struct {
+
+	// The URL of the ACME account.
+	AccountUrl *string
+
+	// The Amazon Resource Name (ARN) of the external account binding associated with
+	// this ACME account.
+	AcmeExternalAccountBindingArn *string
+
+	// The contact information for the ACME account.
+	Contacts []string
+
+	// The time at which the ACME account was created.
+	CreatedAt *time.Time
+
+	// The thumbprint of the public key associated with the ACME account.
+	PublicKeyThumbprint *string
+
+	// The status of the ACME account.
+	Status AcmeAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeAccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeAccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.AcmeAccountSummary_AccountUrl, *v.AccountUrl)
+	}
+	if v.AcmeExternalAccountBindingArn != nil {
+		s.WriteString(schemas.AcmeAccountSummary_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
+	}
+	serializeContactList(s, schemas.AcmeAccountSummary_Contacts, v.Contacts)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeAccountSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.PublicKeyThumbprint != nil {
+		s.WriteString(schemas.AcmeAccountSummary_PublicKeyThumbprint, *v.PublicKeyThumbprint)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeAccountSummary_Status, string(v.Status))
+	}
+}
+func (v *AcmeAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeAccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeAccountSummary_AccountUrl:
+			v.AccountUrl = new(string)
+			return d.ReadString(schemas.AcmeAccountSummary_AccountUrl, v.AccountUrl)
+		case schemas.AcmeAccountSummary_AcmeExternalAccountBindingArn:
+			v.AcmeExternalAccountBindingArn = new(string)
+			return d.ReadString(schemas.AcmeAccountSummary_AcmeExternalAccountBindingArn, v.AcmeExternalAccountBindingArn)
+		case schemas.AcmeAccountSummary_Contacts:
+			return deserializeContactList(d, schemas.AcmeAccountSummary_Contacts, &v.Contacts)
+		case schemas.AcmeAccountSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeAccountSummary_CreatedAt, v.CreatedAt)
+		case schemas.AcmeAccountSummary_PublicKeyThumbprint:
+			v.PublicKeyThumbprint = new(string)
+			return d.ReadString(schemas.AcmeAccountSummary_PublicKeyThumbprint, v.PublicKeyThumbprint)
+		case schemas.AcmeAccountSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeAccountSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeAccountStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about an ACME domain validation.
+type AcmeDomainValidation struct {
+
+	// The Amazon Resource Name (ARN) of the ACME domain validation.
+	AcmeDomainValidationArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The time at which the domain validation was created.
+	CreatedAt *time.Time
+
+	// The domain name being validated.
+	DomainName *string
+
+	// Details about the failure, if the validation failed.
+	FailureDetails *FailureDetails
+
+	// Details about the prevalidation configuration.
+	PrevalidationDetails PrevalidationDetails
+
+	// The type of prevalidation used.
+	PrevalidationType PrevalidationType
+
+	// The status of the domain validation.
+	Status AcmeDomainValidationStatus
+
+	// The time at which the domain validation was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeDomainValidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeDomainValidation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeDomainValidation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeDomainValidationArn != nil {
+		s.WriteString(schemas.AcmeDomainValidation_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
+	}
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeDomainValidation_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeDomainValidation_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AcmeDomainValidation_DomainName, *v.DomainName)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.AcmeDomainValidation_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePrevalidationDetails(s, schemas.AcmeDomainValidation_PrevalidationDetails, v.PrevalidationDetails)
+	if v.PrevalidationType != "" {
+		s.WriteString(schemas.AcmeDomainValidation_PrevalidationType, string(v.PrevalidationType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeDomainValidation_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeDomainValidation_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeDomainValidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeDomainValidation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeDomainValidation_AcmeDomainValidationArn:
+			v.AcmeDomainValidationArn = new(string)
+			return d.ReadString(schemas.AcmeDomainValidation_AcmeDomainValidationArn, v.AcmeDomainValidationArn)
+		case schemas.AcmeDomainValidation_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeDomainValidation_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeDomainValidation_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeDomainValidation_CreatedAt, v.CreatedAt)
+		case schemas.AcmeDomainValidation_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.AcmeDomainValidation_DomainName, v.DomainName)
+		case schemas.AcmeDomainValidation_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.AcmeDomainValidation_PrevalidationDetails:
+			return deserializePrevalidationDetails(d, schemas.AcmeDomainValidation_PrevalidationDetails, &v.PrevalidationDetails)
+		case schemas.AcmeDomainValidation_PrevalidationType:
+			var ev string
+			if err := d.ReadString(schemas.AcmeDomainValidation_PrevalidationType, &ev); err != nil {
+				return err
+			}
+			v.PrevalidationType = PrevalidationType(ev)
+			return nil
+		case schemas.AcmeDomainValidation_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeDomainValidation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeDomainValidationStatus(ev)
+			return nil
+		case schemas.AcmeDomainValidation_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeDomainValidation_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an ACME domain validation.
+type AcmeDomainValidationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME domain validation.
+	AcmeDomainValidationArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The time at which the domain validation was created.
+	CreatedAt *time.Time
+
+	// The domain name being validated.
+	DomainName *string
+
+	// Details about the failure, if the validation failed.
+	FailureDetails *FailureDetails
+
+	// Details about the prevalidation configuration.
+	PrevalidationDetails PrevalidationDetails
+
+	// The type of prevalidation used.
+	PrevalidationType PrevalidationType
+
+	// The status of the domain validation.
+	Status AcmeDomainValidationStatus
+
+	// The time at which the domain validation was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeDomainValidationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeDomainValidationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeDomainValidationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeDomainValidationArn != nil {
+		s.WriteString(schemas.AcmeDomainValidationSummary_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
+	}
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeDomainValidationSummary_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeDomainValidationSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AcmeDomainValidationSummary_DomainName, *v.DomainName)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.AcmeDomainValidationSummary_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePrevalidationDetails(s, schemas.AcmeDomainValidationSummary_PrevalidationDetails, v.PrevalidationDetails)
+	if v.PrevalidationType != "" {
+		s.WriteString(schemas.AcmeDomainValidationSummary_PrevalidationType, string(v.PrevalidationType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeDomainValidationSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeDomainValidationSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeDomainValidationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeDomainValidationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeDomainValidationSummary_AcmeDomainValidationArn:
+			v.AcmeDomainValidationArn = new(string)
+			return d.ReadString(schemas.AcmeDomainValidationSummary_AcmeDomainValidationArn, v.AcmeDomainValidationArn)
+		case schemas.AcmeDomainValidationSummary_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeDomainValidationSummary_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeDomainValidationSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeDomainValidationSummary_CreatedAt, v.CreatedAt)
+		case schemas.AcmeDomainValidationSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.AcmeDomainValidationSummary_DomainName, v.DomainName)
+		case schemas.AcmeDomainValidationSummary_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.AcmeDomainValidationSummary_PrevalidationDetails:
+			return deserializePrevalidationDetails(d, schemas.AcmeDomainValidationSummary_PrevalidationDetails, &v.PrevalidationDetails)
+		case schemas.AcmeDomainValidationSummary_PrevalidationType:
+			var ev string
+			if err := d.ReadString(schemas.AcmeDomainValidationSummary_PrevalidationType, &ev); err != nil {
+				return err
+			}
+			v.PrevalidationType = PrevalidationType(ev)
+			return nil
+		case schemas.AcmeDomainValidationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeDomainValidationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeDomainValidationStatus(ev)
+			return nil
+		case schemas.AcmeDomainValidationSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeDomainValidationSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about an ACME endpoint.
+type AcmeEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The authorization behavior of the ACME endpoint.
+	AuthorizationBehavior AcmeAuthorizationBehavior
+
+	// The certificate authority configuration for the ACME endpoint.
+	CertificateAuthority CertificateAuthority
+
+	// Tags applied to certificates issued through this ACME endpoint.
+	CertificateTags []Tag
+
+	// Whether ACME clients must provide contact information during account
+	// registration.
+	Contact AcmeContact
+
+	// The time at which the ACME endpoint was created.
+	CreatedAt *time.Time
+
+	// The URL of the ACME endpoint.
+	EndpointUrl *string
+
+	// The reason the ACME endpoint failed, if applicable.
+	FailureReason *string
+
+	// The status of the ACME endpoint.
+	Status AcmeEndpointStatus
+
+	// The time at which the ACME endpoint was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeEndpoint_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.AuthorizationBehavior != "" {
+		s.WriteString(schemas.AcmeEndpoint_AuthorizationBehavior, string(v.AuthorizationBehavior))
+	}
+	serializeCertificateAuthority(s, schemas.AcmeEndpoint_CertificateAuthority, v.CertificateAuthority)
+	serializeTagList(s, schemas.AcmeEndpoint_CertificateTags, v.CertificateTags)
+	if v.Contact != "" {
+		s.WriteString(schemas.AcmeEndpoint_Contact, string(v.Contact))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeEndpoint_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.AcmeEndpoint_EndpointUrl, *v.EndpointUrl)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.AcmeEndpoint_FailureReason, *v.FailureReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeEndpoint_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeEndpoint_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeEndpoint_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeEndpoint_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeEndpoint_AuthorizationBehavior:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpoint_AuthorizationBehavior, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationBehavior = AcmeAuthorizationBehavior(ev)
+			return nil
+		case schemas.AcmeEndpoint_CertificateAuthority:
+			return deserializeCertificateAuthority(d, schemas.AcmeEndpoint_CertificateAuthority, &v.CertificateAuthority)
+		case schemas.AcmeEndpoint_CertificateTags:
+			return deserializeTagList(d, schemas.AcmeEndpoint_CertificateTags, &v.CertificateTags)
+		case schemas.AcmeEndpoint_Contact:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpoint_Contact, &ev); err != nil {
+				return err
+			}
+			v.Contact = AcmeContact(ev)
+			return nil
+		case schemas.AcmeEndpoint_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeEndpoint_CreatedAt, v.CreatedAt)
+		case schemas.AcmeEndpoint_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.AcmeEndpoint_EndpointUrl, v.EndpointUrl)
+		case schemas.AcmeEndpoint_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.AcmeEndpoint_FailureReason, v.FailureReason)
+		case schemas.AcmeEndpoint_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpoint_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeEndpointStatus(ev)
+			return nil
+		case schemas.AcmeEndpoint_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeEndpoint_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an ACME endpoint.
+type AcmeEndpointSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The authorization behavior of the ACME endpoint.
+	AuthorizationBehavior AcmeAuthorizationBehavior
+
+	// The certificate authority configuration for the ACME endpoint.
+	CertificateAuthority CertificateAuthority
+
+	// Tags applied to certificates issued through this ACME endpoint.
+	CertificateTags []Tag
+
+	// Whether ACME clients must provide contact information during account
+	// registration.
+	Contact AcmeContact
+
+	// The time at which the ACME endpoint was created.
+	CreatedAt *time.Time
+
+	// The URL of the ACME endpoint.
+	EndpointUrl *string
+
+	// The reason the ACME endpoint failed, if applicable.
+	FailureReason *string
+
+	// The status of the ACME endpoint.
+	Status AcmeEndpointStatus
+
+	// The time at which the ACME endpoint was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeEndpointSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeEndpointSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeEndpointSummary_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.AuthorizationBehavior != "" {
+		s.WriteString(schemas.AcmeEndpointSummary_AuthorizationBehavior, string(v.AuthorizationBehavior))
+	}
+	serializeCertificateAuthority(s, schemas.AcmeEndpointSummary_CertificateAuthority, v.CertificateAuthority)
+	serializeTagList(s, schemas.AcmeEndpointSummary_CertificateTags, v.CertificateTags)
+	if v.Contact != "" {
+		s.WriteString(schemas.AcmeEndpointSummary_Contact, string(v.Contact))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeEndpointSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.AcmeEndpointSummary_EndpointUrl, *v.EndpointUrl)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.AcmeEndpointSummary_FailureReason, *v.FailureReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AcmeEndpointSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeEndpointSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeEndpointSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeEndpointSummary_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeEndpointSummary_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeEndpointSummary_AuthorizationBehavior:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpointSummary_AuthorizationBehavior, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationBehavior = AcmeAuthorizationBehavior(ev)
+			return nil
+		case schemas.AcmeEndpointSummary_CertificateAuthority:
+			return deserializeCertificateAuthority(d, schemas.AcmeEndpointSummary_CertificateAuthority, &v.CertificateAuthority)
+		case schemas.AcmeEndpointSummary_CertificateTags:
+			return deserializeTagList(d, schemas.AcmeEndpointSummary_CertificateTags, &v.CertificateTags)
+		case schemas.AcmeEndpointSummary_Contact:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpointSummary_Contact, &ev); err != nil {
+				return err
+			}
+			v.Contact = AcmeContact(ev)
+			return nil
+		case schemas.AcmeEndpointSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeEndpointSummary_CreatedAt, v.CreatedAt)
+		case schemas.AcmeEndpointSummary_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.AcmeEndpointSummary_EndpointUrl, v.EndpointUrl)
+		case schemas.AcmeEndpointSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.AcmeEndpointSummary_FailureReason, v.FailureReason)
+		case schemas.AcmeEndpointSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcmeEndpointSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcmeEndpointStatus(ev)
+			return nil
+		case schemas.AcmeEndpointSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeEndpointSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about an ACME external account binding.
+type AcmeExternalAccountBinding struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME external account binding.
+	AcmeExternalAccountBindingArn *string
+
+	// The time at which the external account binding was created.
+	CreatedAt *time.Time
+
+	// The time at which the external account binding expires.
+	ExpiresAt *time.Time
+
+	// The time at which the external account binding was last used.
+	LastUsedAt *time.Time
+
+	// The time at which the external account binding was revoked.
+	RevokedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the external
+	// account binding.
+	RoleArn *string
+
+	// The time at which the external account binding was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeExternalAccountBinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeExternalAccountBinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeExternalAccountBinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBinding_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.AcmeExternalAccountBindingArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBinding_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBinding_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBinding_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.LastUsedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBinding_LastUsedAt, *v.LastUsedAt)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBinding_RevokedAt, *v.RevokedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBinding_RoleArn, *v.RoleArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBinding_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeExternalAccountBinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeExternalAccountBinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeExternalAccountBinding_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBinding_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeExternalAccountBinding_AcmeExternalAccountBindingArn:
+			v.AcmeExternalAccountBindingArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBinding_AcmeExternalAccountBindingArn, v.AcmeExternalAccountBindingArn)
+		case schemas.AcmeExternalAccountBinding_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBinding_CreatedAt, v.CreatedAt)
+		case schemas.AcmeExternalAccountBinding_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBinding_ExpiresAt, v.ExpiresAt)
+		case schemas.AcmeExternalAccountBinding_LastUsedAt:
+			v.LastUsedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBinding_LastUsedAt, v.LastUsedAt)
+		case schemas.AcmeExternalAccountBinding_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBinding_RevokedAt, v.RevokedAt)
+		case schemas.AcmeExternalAccountBinding_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBinding_RoleArn, v.RoleArn)
+		case schemas.AcmeExternalAccountBinding_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBinding_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an ACME external account binding.
+type AcmeExternalAccountBindingSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME external account binding.
+	AcmeExternalAccountBindingArn *string
+
+	// The time at which the external account binding was created.
+	CreatedAt *time.Time
+
+	// The time at which the external account binding expires.
+	ExpiresAt *time.Time
+
+	// The time at which the external account binding was last used.
+	LastUsedAt *time.Time
+
+	// The time at which the external account binding was revoked.
+	RevokedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the external
+	// account binding.
+	RoleArn *string
+
+	// The time at which the external account binding was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcmeExternalAccountBindingSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcmeExternalAccountBindingSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcmeExternalAccountBindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBindingSummary_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.AcmeExternalAccountBindingArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBindingSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBindingSummary_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.LastUsedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBindingSummary_LastUsedAt, *v.LastUsedAt)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBindingSummary_RevokedAt, *v.RevokedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AcmeExternalAccountBindingSummary_RoleArn, *v.RoleArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AcmeExternalAccountBindingSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AcmeExternalAccountBindingSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcmeExternalAccountBindingSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcmeExternalAccountBindingSummary_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBindingSummary_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn:
+			v.AcmeExternalAccountBindingArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBindingSummary_AcmeExternalAccountBindingArn, v.AcmeExternalAccountBindingArn)
+		case schemas.AcmeExternalAccountBindingSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBindingSummary_CreatedAt, v.CreatedAt)
+		case schemas.AcmeExternalAccountBindingSummary_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBindingSummary_ExpiresAt, v.ExpiresAt)
+		case schemas.AcmeExternalAccountBindingSummary_LastUsedAt:
+			v.LastUsedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBindingSummary_LastUsedAt, v.LastUsedAt)
+		case schemas.AcmeExternalAccountBindingSummary_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBindingSummary_RevokedAt, v.RevokedAt)
+		case schemas.AcmeExternalAccountBindingSummary_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.AcmeExternalAccountBindingSummary_RoleArn, v.RoleArn)
+		case schemas.AcmeExternalAccountBindingSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcmeExternalAccountBindingSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Defines the certificate authority to use for an ACME endpoint.
+//
+// The following types satisfy this interface:
+//
+//	CertificateAuthorityMemberPublicCertificateAuthority
+type CertificateAuthority interface {
+	isCertificateAuthority()
+}
+
+// Configuration for using a public certificate authority.
+type CertificateAuthorityMemberPublicCertificateAuthority struct {
+	Value PublicCertificateAuthority
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateAuthorityMemberPublicCertificateAuthority) isCertificateAuthority() {}
+func (v *CertificateAuthorityMemberPublicCertificateAuthority) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateAuthority_PublicCertificateAuthority)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CertificateAuthorityMemberPublicCertificateAuthority) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains metadata about an ACM certificate. This structure is returned in the
 // response to a DescribeCertificaterequest.
 type CertificateDetail struct {
+
+	// The ACME account identifier associated with the certificate.
+	AcmeAccountId *string
+
+	// The ARN of the ACME endpoint used to issue the certificate.
+	AcmeEndpointArn *string
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
 	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
@@ -179,6 +1301,9 @@ type CertificateDetail struct {
 	//
 	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
+
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
@@ -239,11 +1364,9 @@ type CertificateDetail struct {
 	// The time before which the certificate is not valid.
 	NotBefore *time.Time
 
-	// Value that specifies whether to add the certificate to a transparency log.
-	// Certificate transparency makes it possible to detect SSL certificates that have
-	// been mistakenly or maliciously issued. A browser might respond to certificate
-	// that has not been logged by showing an error message. The logs are
-	// cryptographically secure.
+	// Contains the certificate options. Certificate transparency logging opt-out is
+	// no longer available. All public certificates are recorded in a certificate
+	// transparency log.
 	Options *CertificateOptions
 
 	// Specifies whether the certificate is eligible for renewal. At this time, only
@@ -305,7 +1428,237 @@ type CertificateDetail struct {
 	// [managed renewal]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
 	Type CertificateType
 
+	// Contains information about the most recent update to the certificate. This
+	// field exists only when the certificate type is AMAZON_ISSUED and a certificate
+	// update has been requested.
+	UpdateSummary *UpdateSummary
+
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeAccountId != nil {
+		s.WriteString(schemas.CertificateDetail_AcmeAccountId, *v.AcmeAccountId)
+	}
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.CertificateDetail_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CertificateDetail_CertificateArn, *v.CertificateArn)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CertificateDetail_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.CertificateKeyPairOrigin != "" {
+		s.WriteString(schemas.CertificateDetail_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CertificateDetail_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CertificateDetail_DomainName, *v.DomainName)
+	}
+	serializeDomainValidationList(s, schemas.CertificateDetail_DomainValidationOptions, v.DomainValidationOptions)
+	serializeExtendedKeyUsageList(s, schemas.CertificateDetail_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.FailureReason != "" {
+		s.WriteString(schemas.CertificateDetail_FailureReason, string(v.FailureReason))
+	}
+	if v.ImportedAt != nil {
+		s.WriteTime(schemas.CertificateDetail_ImportedAt, *v.ImportedAt)
+	}
+	serializeInUseList(s, schemas.CertificateDetail_InUseBy, v.InUseBy)
+	if v.IssuedAt != nil {
+		s.WriteTime(schemas.CertificateDetail_IssuedAt, *v.IssuedAt)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.CertificateDetail_Issuer, *v.Issuer)
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.CertificateDetail_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	serializeKeyUsageList(s, schemas.CertificateDetail_KeyUsages, v.KeyUsages)
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.CertificateDetail_ManagedBy, string(v.ManagedBy))
+	}
+	if v.NotAfter != nil {
+		s.WriteTime(schemas.CertificateDetail_NotAfter, *v.NotAfter)
+	}
+	if v.NotBefore != nil {
+		s.WriteTime(schemas.CertificateDetail_NotBefore, *v.NotBefore)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CertificateDetail_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RenewalEligibility != "" {
+		s.WriteString(schemas.CertificateDetail_RenewalEligibility, string(v.RenewalEligibility))
+	}
+	if v.RenewalSummary != nil {
+		s.WriteStruct(schemas.CertificateDetail_RenewalSummary)
+		v.RenewalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevocationReason != "" {
+		s.WriteString(schemas.CertificateDetail_RevocationReason, string(v.RevocationReason))
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.CertificateDetail_RevokedAt, *v.RevokedAt)
+	}
+	if v.Serial != nil {
+		s.WriteString(schemas.CertificateDetail_Serial, *v.Serial)
+	}
+	if v.SignatureAlgorithm != nil {
+		s.WriteString(schemas.CertificateDetail_SignatureAlgorithm, *v.SignatureAlgorithm)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CertificateDetail_Status, string(v.Status))
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.CertificateDetail_Subject, *v.Subject)
+	}
+	serializeDomainList(s, schemas.CertificateDetail_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.Type != "" {
+		s.WriteString(schemas.CertificateDetail_Type, string(v.Type))
+	}
+	if v.UpdateSummary != nil {
+		s.WriteStruct(schemas.CertificateDetail_UpdateSummary)
+		v.UpdateSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CertificateDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateDetail_AcmeAccountId:
+			v.AcmeAccountId = new(string)
+			return d.ReadString(schemas.CertificateDetail_AcmeAccountId, v.AcmeAccountId)
+		case schemas.CertificateDetail_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.CertificateDetail_AcmeEndpointArn, v.AcmeEndpointArn)
+		case schemas.CertificateDetail_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CertificateDetail_CertificateArn, v.CertificateArn)
+		case schemas.CertificateDetail_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.CertificateDetail_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		case schemas.CertificateDetail_CertificateKeyPairOrigin:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_CertificateKeyPairOrigin, &ev); err != nil {
+				return err
+			}
+			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.CertificateDetail_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_CreatedAt, v.CreatedAt)
+		case schemas.CertificateDetail_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CertificateDetail_DomainName, v.DomainName)
+		case schemas.CertificateDetail_DomainValidationOptions:
+			return deserializeDomainValidationList(d, schemas.CertificateDetail_DomainValidationOptions, &v.DomainValidationOptions)
+		case schemas.CertificateDetail_ExtendedKeyUsages:
+			return deserializeExtendedKeyUsageList(d, schemas.CertificateDetail_ExtendedKeyUsages, &v.ExtendedKeyUsages)
+		case schemas.CertificateDetail_FailureReason:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_FailureReason, &ev); err != nil {
+				return err
+			}
+			v.FailureReason = FailureReason(ev)
+			return nil
+		case schemas.CertificateDetail_ImportedAt:
+			v.ImportedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_ImportedAt, v.ImportedAt)
+		case schemas.CertificateDetail_InUseBy:
+			return deserializeInUseList(d, schemas.CertificateDetail_InUseBy, &v.InUseBy)
+		case schemas.CertificateDetail_IssuedAt:
+			v.IssuedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_IssuedAt, v.IssuedAt)
+		case schemas.CertificateDetail_Issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.CertificateDetail_Issuer, v.Issuer)
+		case schemas.CertificateDetail_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.CertificateDetail_KeyUsages:
+			return deserializeKeyUsageList(d, schemas.CertificateDetail_KeyUsages, &v.KeyUsages)
+		case schemas.CertificateDetail_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = CertificateManagedBy(ev)
+			return nil
+		case schemas.CertificateDetail_NotAfter:
+			v.NotAfter = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_NotAfter, v.NotAfter)
+		case schemas.CertificateDetail_NotBefore:
+			v.NotBefore = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_NotBefore, v.NotBefore)
+		case schemas.CertificateDetail_Options:
+			v.Options = &CertificateOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.CertificateDetail_RenewalEligibility:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_RenewalEligibility, &ev); err != nil {
+				return err
+			}
+			v.RenewalEligibility = RenewalEligibility(ev)
+			return nil
+		case schemas.CertificateDetail_RenewalSummary:
+			v.RenewalSummary = &RenewalSummary{}
+			return v.RenewalSummary.Deserialize(d)
+		case schemas.CertificateDetail_RevocationReason:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_RevocationReason, &ev); err != nil {
+				return err
+			}
+			v.RevocationReason = RevocationReason(ev)
+			return nil
+		case schemas.CertificateDetail_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateDetail_RevokedAt, v.RevokedAt)
+		case schemas.CertificateDetail_Serial:
+			v.Serial = new(string)
+			return d.ReadString(schemas.CertificateDetail_Serial, v.Serial)
+		case schemas.CertificateDetail_SignatureAlgorithm:
+			v.SignatureAlgorithm = new(string)
+			return d.ReadString(schemas.CertificateDetail_SignatureAlgorithm, v.SignatureAlgorithm)
+		case schemas.CertificateDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateStatus(ev)
+			return nil
+		case schemas.CertificateDetail_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.CertificateDetail_Subject, v.Subject)
+		case schemas.CertificateDetail_SubjectAlternativeNames:
+			return deserializeDomainList(d, schemas.CertificateDetail_SubjectAlternativeNames, &v.SubjectAlternativeNames)
+		case schemas.CertificateDetail_Type:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		case schemas.CertificateDetail_UpdateSummary:
+			v.UpdateSummary = &UpdateSummary{}
+			return v.UpdateSummary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines a filter for searching certificates by ARN, X.509 attributes, or ACM
@@ -328,6 +1681,12 @@ type CertificateFilterMemberAcmCertificateMetadataFilter struct {
 }
 
 func (*CertificateFilterMemberAcmCertificateMetadataFilter) isCertificateFilter() {}
+func (v *CertificateFilterMemberAcmCertificateMetadataFilter) Serialize(s smithy.ShapeSerializer) {
+	serializeAcmCertificateMetadataFilter(s, schemas.CertificateFilter_AcmCertificateMetadataFilter, v.Value)
+}
+func (v *CertificateFilterMemberAcmCertificateMetadataFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAcmCertificateMetadataFilter(d, schemas.CertificateFilter_AcmCertificateMetadataFilter, &v.Value)
+}
 
 // Filter by certificate ARN.
 type CertificateFilterMemberCertificateArn struct {
@@ -337,6 +1696,12 @@ type CertificateFilterMemberCertificateArn struct {
 }
 
 func (*CertificateFilterMemberCertificateArn) isCertificateFilter() {}
+func (v *CertificateFilterMemberCertificateArn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CertificateFilter_CertificateArn, v.Value)
+}
+func (v *CertificateFilterMemberCertificateArn) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CertificateFilter_CertificateArn, &v.Value)
+}
 
 // Filter by X.509 certificate attributes.
 type CertificateFilterMemberX509AttributeFilter struct {
@@ -346,6 +1711,12 @@ type CertificateFilterMemberX509AttributeFilter struct {
 }
 
 func (*CertificateFilterMemberX509AttributeFilter) isCertificateFilter() {}
+func (v *CertificateFilterMemberX509AttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	serializeX509AttributeFilter(s, schemas.CertificateFilter_X509AttributeFilter, v.Value)
+}
+func (v *CertificateFilterMemberX509AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeX509AttributeFilter(d, schemas.CertificateFilter_X509AttributeFilter, &v.Value)
+}
 
 // A filter statement used to search for certificates. Can contain AND, OR, NOT
 // logical operators or a single filter.
@@ -368,6 +1739,12 @@ type CertificateFilterStatementMemberAnd struct {
 }
 
 func (*CertificateFilterStatementMemberAnd) isCertificateFilterStatement() {}
+func (v *CertificateFilterStatementMemberAnd) Serialize(s smithy.ShapeSerializer) {
+	serializeCertificateFilterStatementList(s, schemas.CertificateFilterStatement_And, v.Value)
+}
+func (v *CertificateFilterStatementMemberAnd) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCertificateFilterStatementList(d, schemas.CertificateFilterStatement_And, &v.Value)
+}
 
 // A single certificate filter.
 type CertificateFilterStatementMemberFilter struct {
@@ -377,6 +1754,12 @@ type CertificateFilterStatementMemberFilter struct {
 }
 
 func (*CertificateFilterStatementMemberFilter) isCertificateFilterStatement() {}
+func (v *CertificateFilterStatementMemberFilter) Serialize(s smithy.ShapeSerializer) {
+	serializeCertificateFilter(s, schemas.CertificateFilterStatement_Filter, v.Value)
+}
+func (v *CertificateFilterStatementMemberFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCertificateFilter(d, schemas.CertificateFilterStatement_Filter, &v.Value)
+}
 
 // A filter statement that must not be true.
 type CertificateFilterStatementMemberNot struct {
@@ -386,6 +1769,12 @@ type CertificateFilterStatementMemberNot struct {
 }
 
 func (*CertificateFilterStatementMemberNot) isCertificateFilterStatement() {}
+func (v *CertificateFilterStatementMemberNot) Serialize(s smithy.ShapeSerializer) {
+	serializeCertificateFilterStatement(s, schemas.CertificateFilterStatement_Not, v.Value)
+}
+func (v *CertificateFilterStatementMemberNot) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCertificateFilterStatement(d, schemas.CertificateFilterStatement_Not, &v.Value)
+}
 
 // A list of filter statements where at least one must be true.
 type CertificateFilterStatementMemberOr struct {
@@ -395,6 +1784,12 @@ type CertificateFilterStatementMemberOr struct {
 }
 
 func (*CertificateFilterStatementMemberOr) isCertificateFilterStatement() {}
+func (v *CertificateFilterStatementMemberOr) Serialize(s smithy.ShapeSerializer) {
+	serializeCertificateFilterStatementList(s, schemas.CertificateFilterStatement_Or, v.Value)
+}
+func (v *CertificateFilterStatementMemberOr) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCertificateFilterStatementList(d, schemas.CertificateFilterStatement_Or, &v.Value)
+}
 
 // Contains metadata about a certificate. Currently supports ACM certificate
 // metadata.
@@ -414,16 +1809,21 @@ type CertificateMetadataMemberAcmCertificateMetadata struct {
 }
 
 func (*CertificateMetadataMemberAcmCertificateMetadata) isCertificateMetadata() {}
+func (v *CertificateMetadataMemberAcmCertificateMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateMetadata_AcmCertificateMetadata)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CertificateMetadataMemberAcmCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Structure that contains options for your certificate. You can use this
-// structure to specify whether to opt in to or out of certificate transparency
-// logging and export your certificate.
+// structure to change the domain validation method or specify whether to export
+// your certificate.
 //
-// Some browsers require that public certificates issued for your domain be
-// recorded in a log. Certificates that are not logged typically generate a browser
-// error. Transparency makes it possible for you to detect SSL/TLS certificates
-// that have been mistakenly or maliciously issued for your domain. For general
-// information, see [Certificate Transparency Logging].
+// All public certificates are recorded in a certificate transparency log. For
+// general information, see [Certificate Transparency Logging].
 //
 // You can export public ACM certificates to use with Amazon Web Services services
 // as well as outside Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
@@ -432,15 +1832,68 @@ func (*CertificateMetadataMemberAcmCertificateMetadata) isCertificateMetadata() 
 // [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 type CertificateOptions struct {
 
-	// You can opt out of certificate transparency logging by specifying the DISABLED
-	// option. Opt in by specifying ENABLED .
+	// This parameter has been deprecated. Certificate transparency logging opt-out is
+	// no longer available. All public certificates are recorded in a certificate
+	// transparency log.
+	//
+	// Deprecated: Certificate transparency logging opt-out is no longer available.
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
 
 	// You can opt in to allow the export of your certificates by specifying ENABLED .
 	// You cannot update the value of Export after the the certificate is created.
 	Export CertificateExport
 
+	// The domain validation method for the certificate. To migrate from email to DNS
+	// validation, specify DNS .
+	ValidationMethod ValidationMethod
+
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateTransparencyLoggingPreference != "" {
+		s.WriteString(schemas.CertificateOptions_CertificateTransparencyLoggingPreference, string(v.CertificateTransparencyLoggingPreference))
+	}
+	if v.Export != "" {
+		s.WriteString(schemas.CertificateOptions_Export, string(v.Export))
+	}
+	if v.ValidationMethod != "" {
+		s.WriteString(schemas.CertificateOptions_ValidationMethod, string(v.ValidationMethod))
+	}
+}
+func (v *CertificateOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateOptions_CertificateTransparencyLoggingPreference:
+			var ev string
+			if err := d.ReadString(schemas.CertificateOptions_CertificateTransparencyLoggingPreference, &ev); err != nil {
+				return err
+			}
+			v.CertificateTransparencyLoggingPreference = CertificateTransparencyLoggingPreference(ev)
+			return nil
+		case schemas.CertificateOptions_Export:
+			var ev string
+			if err := d.ReadString(schemas.CertificateOptions_Export, &ev); err != nil {
+				return err
+			}
+			v.Export = CertificateExport(ev)
+			return nil
+		case schemas.CertificateOptions_ValidationMethod:
+			var ev string
+			if err := d.ReadString(schemas.CertificateOptions_ValidationMethod, &ev); err != nil {
+				return err
+			}
+			v.ValidationMethod = ValidationMethod(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains information about a certificate returned by the SearchCertificates action. This
@@ -459,6 +1912,39 @@ type CertificateSearchResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateSearchResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateSearchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateSearchResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CertificateSearchResult_CertificateArn, *v.CertificateArn)
+	}
+	serializeCertificateMetadata(s, schemas.CertificateSearchResult_CertificateMetadata, v.CertificateMetadata)
+	if v.X509Attributes != nil {
+		s.WriteStruct(schemas.CertificateSearchResult_X509Attributes)
+		v.X509Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CertificateSearchResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateSearchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateSearchResult_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CertificateSearchResult_CertificateArn, v.CertificateArn)
+		case schemas.CertificateSearchResult_CertificateMetadata:
+			return deserializeCertificateMetadata(d, schemas.CertificateSearchResult_CertificateMetadata, &v.CertificateMetadata)
+		case schemas.CertificateSearchResult_X509Attributes:
+			v.X509Attributes = &X509Attributes{}
+			return v.X509Attributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This structure is returned in the response object of ListCertificates action.
 type CertificateSummary struct {
 
@@ -471,6 +1957,9 @@ type CertificateSummary struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	CertificateArn *string
 
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -481,8 +1970,7 @@ type CertificateSummary struct {
 	// Indicates if export is enabled for the certificate.
 	ExportOption CertificateExport
 
-	// Indicates whether the certificate has been exported. This value exists only
-	// when the certificate type is PRIVATE .
+	// Indicates whether the certificate has been exported.
 	Exported *bool
 
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
@@ -580,6 +2068,167 @@ type CertificateSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CertificateSummary_CertificateArn, *v.CertificateArn)
+	}
+	if v.CertificateKeyPairOrigin != "" {
+		s.WriteString(schemas.CertificateSummary_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CertificateSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CertificateSummary_DomainName, *v.DomainName)
+	}
+	if v.ExportOption != "" {
+		s.WriteString(schemas.CertificateSummary_ExportOption, string(v.ExportOption))
+	}
+	if v.Exported != nil {
+		s.WriteBool(schemas.CertificateSummary_Exported, *v.Exported)
+	}
+	serializeExtendedKeyUsageNames(s, schemas.CertificateSummary_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.HasAdditionalSubjectAlternativeNames != nil {
+		s.WriteBool(schemas.CertificateSummary_HasAdditionalSubjectAlternativeNames, *v.HasAdditionalSubjectAlternativeNames)
+	}
+	if v.ImportedAt != nil {
+		s.WriteTime(schemas.CertificateSummary_ImportedAt, *v.ImportedAt)
+	}
+	if v.InUse != nil {
+		s.WriteBool(schemas.CertificateSummary_InUse, *v.InUse)
+	}
+	if v.IssuedAt != nil {
+		s.WriteTime(schemas.CertificateSummary_IssuedAt, *v.IssuedAt)
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.CertificateSummary_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	serializeKeyUsageNames(s, schemas.CertificateSummary_KeyUsages, v.KeyUsages)
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.CertificateSummary_ManagedBy, string(v.ManagedBy))
+	}
+	if v.NotAfter != nil {
+		s.WriteTime(schemas.CertificateSummary_NotAfter, *v.NotAfter)
+	}
+	if v.NotBefore != nil {
+		s.WriteTime(schemas.CertificateSummary_NotBefore, *v.NotBefore)
+	}
+	if v.RenewalEligibility != "" {
+		s.WriteString(schemas.CertificateSummary_RenewalEligibility, string(v.RenewalEligibility))
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.CertificateSummary_RevokedAt, *v.RevokedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CertificateSummary_Status, string(v.Status))
+	}
+	serializeDomainList(s, schemas.CertificateSummary_SubjectAlternativeNameSummaries, v.SubjectAlternativeNameSummaries)
+	if v.Type != "" {
+		s.WriteString(schemas.CertificateSummary_Type, string(v.Type))
+	}
+}
+func (v *CertificateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateSummary_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CertificateSummary_CertificateArn, v.CertificateArn)
+		case schemas.CertificateSummary_CertificateKeyPairOrigin:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_CertificateKeyPairOrigin, &ev); err != nil {
+				return err
+			}
+			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.CertificateSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_CreatedAt, v.CreatedAt)
+		case schemas.CertificateSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CertificateSummary_DomainName, v.DomainName)
+		case schemas.CertificateSummary_ExportOption:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_ExportOption, &ev); err != nil {
+				return err
+			}
+			v.ExportOption = CertificateExport(ev)
+			return nil
+		case schemas.CertificateSummary_Exported:
+			v.Exported = new(bool)
+			return d.ReadBool(schemas.CertificateSummary_Exported, v.Exported)
+		case schemas.CertificateSummary_ExtendedKeyUsages:
+			return deserializeExtendedKeyUsageNames(d, schemas.CertificateSummary_ExtendedKeyUsages, &v.ExtendedKeyUsages)
+		case schemas.CertificateSummary_HasAdditionalSubjectAlternativeNames:
+			v.HasAdditionalSubjectAlternativeNames = new(bool)
+			return d.ReadBool(schemas.CertificateSummary_HasAdditionalSubjectAlternativeNames, v.HasAdditionalSubjectAlternativeNames)
+		case schemas.CertificateSummary_ImportedAt:
+			v.ImportedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_ImportedAt, v.ImportedAt)
+		case schemas.CertificateSummary_InUse:
+			v.InUse = new(bool)
+			return d.ReadBool(schemas.CertificateSummary_InUse, v.InUse)
+		case schemas.CertificateSummary_IssuedAt:
+			v.IssuedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_IssuedAt, v.IssuedAt)
+		case schemas.CertificateSummary_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.CertificateSummary_KeyUsages:
+			return deserializeKeyUsageNames(d, schemas.CertificateSummary_KeyUsages, &v.KeyUsages)
+		case schemas.CertificateSummary_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = CertificateManagedBy(ev)
+			return nil
+		case schemas.CertificateSummary_NotAfter:
+			v.NotAfter = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_NotAfter, v.NotAfter)
+		case schemas.CertificateSummary_NotBefore:
+			v.NotBefore = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_NotBefore, v.NotBefore)
+		case schemas.CertificateSummary_RenewalEligibility:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_RenewalEligibility, &ev); err != nil {
+				return err
+			}
+			v.RenewalEligibility = RenewalEligibility(ev)
+			return nil
+		case schemas.CertificateSummary_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateSummary_RevokedAt, v.RevokedAt)
+		case schemas.CertificateSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateStatus(ev)
+			return nil
+		case schemas.CertificateSummary_SubjectAlternativeNameSummaries:
+			return deserializeDomainList(d, schemas.CertificateSummary_SubjectAlternativeNameSummaries, &v.SubjectAlternativeNameSummaries)
+		case schemas.CertificateSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Filters certificates by common name.
 type CommonNameFilter struct {
 
@@ -596,6 +2245,38 @@ type CommonNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommonNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommonNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommonNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.CommonNameFilter_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CommonNameFilter_Value, *v.Value)
+	}
+}
+func (v *CommonNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommonNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommonNameFilter_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.CommonNameFilter_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.CommonNameFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CommonNameFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Defines the X.500 relative distinguished name (RDN).
 type CustomAttribute struct {
 
@@ -607,6 +2288,34 @@ type CustomAttribute struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.CustomAttribute_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CustomAttribute_Value, *v.Value)
+	}
+}
+func (v *CustomAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomAttribute_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.CustomAttribute_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.CustomAttribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CustomAttribute_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains X.500 distinguished name information.
@@ -664,6 +2373,112 @@ type DistinguishedName struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DistinguishedName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistinguishedName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistinguishedName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommonName != nil {
+		s.WriteString(schemas.DistinguishedName_CommonName, *v.CommonName)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.DistinguishedName_Country, *v.Country)
+	}
+	serializeCustomAttributeList(s, schemas.DistinguishedName_CustomAttributes, v.CustomAttributes)
+	if v.DistinguishedNameQualifier != nil {
+		s.WriteString(schemas.DistinguishedName_DistinguishedNameQualifier, *v.DistinguishedNameQualifier)
+	}
+	serializeDomainComponentList(s, schemas.DistinguishedName_DomainComponents, v.DomainComponents)
+	if v.GenerationQualifier != nil {
+		s.WriteString(schemas.DistinguishedName_GenerationQualifier, *v.GenerationQualifier)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.DistinguishedName_GivenName, *v.GivenName)
+	}
+	if v.Initials != nil {
+		s.WriteString(schemas.DistinguishedName_Initials, *v.Initials)
+	}
+	if v.Locality != nil {
+		s.WriteString(schemas.DistinguishedName_Locality, *v.Locality)
+	}
+	if v.Organization != nil {
+		s.WriteString(schemas.DistinguishedName_Organization, *v.Organization)
+	}
+	if v.OrganizationalUnit != nil {
+		s.WriteString(schemas.DistinguishedName_OrganizationalUnit, *v.OrganizationalUnit)
+	}
+	if v.Pseudonym != nil {
+		s.WriteString(schemas.DistinguishedName_Pseudonym, *v.Pseudonym)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.DistinguishedName_SerialNumber, *v.SerialNumber)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.DistinguishedName_State, *v.State)
+	}
+	if v.Surname != nil {
+		s.WriteString(schemas.DistinguishedName_Surname, *v.Surname)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.DistinguishedName_Title, *v.Title)
+	}
+}
+func (v *DistinguishedName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistinguishedName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistinguishedName_CommonName:
+			v.CommonName = new(string)
+			return d.ReadString(schemas.DistinguishedName_CommonName, v.CommonName)
+		case schemas.DistinguishedName_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.DistinguishedName_Country, v.Country)
+		case schemas.DistinguishedName_CustomAttributes:
+			return deserializeCustomAttributeList(d, schemas.DistinguishedName_CustomAttributes, &v.CustomAttributes)
+		case schemas.DistinguishedName_DistinguishedNameQualifier:
+			v.DistinguishedNameQualifier = new(string)
+			return d.ReadString(schemas.DistinguishedName_DistinguishedNameQualifier, v.DistinguishedNameQualifier)
+		case schemas.DistinguishedName_DomainComponents:
+			return deserializeDomainComponentList(d, schemas.DistinguishedName_DomainComponents, &v.DomainComponents)
+		case schemas.DistinguishedName_GenerationQualifier:
+			v.GenerationQualifier = new(string)
+			return d.ReadString(schemas.DistinguishedName_GenerationQualifier, v.GenerationQualifier)
+		case schemas.DistinguishedName_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.DistinguishedName_GivenName, v.GivenName)
+		case schemas.DistinguishedName_Initials:
+			v.Initials = new(string)
+			return d.ReadString(schemas.DistinguishedName_Initials, v.Initials)
+		case schemas.DistinguishedName_Locality:
+			v.Locality = new(string)
+			return d.ReadString(schemas.DistinguishedName_Locality, v.Locality)
+		case schemas.DistinguishedName_Organization:
+			v.Organization = new(string)
+			return d.ReadString(schemas.DistinguishedName_Organization, v.Organization)
+		case schemas.DistinguishedName_OrganizationalUnit:
+			v.OrganizationalUnit = new(string)
+			return d.ReadString(schemas.DistinguishedName_OrganizationalUnit, v.OrganizationalUnit)
+		case schemas.DistinguishedName_Pseudonym:
+			v.Pseudonym = new(string)
+			return d.ReadString(schemas.DistinguishedName_Pseudonym, v.Pseudonym)
+		case schemas.DistinguishedName_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.DistinguishedName_SerialNumber, v.SerialNumber)
+		case schemas.DistinguishedName_State:
+			v.State = new(string)
+			return d.ReadString(schemas.DistinguishedName_State, v.State)
+		case schemas.DistinguishedName_Surname:
+			v.Surname = new(string)
+			return d.ReadString(schemas.DistinguishedName_Surname, v.Surname)
+		case schemas.DistinguishedName_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.DistinguishedName_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Filters certificates by DNS name.
 type DnsNameFilter struct {
 
@@ -678,6 +2493,229 @@ type DnsNameFilter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.DnsNameFilter_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DnsNameFilter_Value, *v.Value)
+	}
+}
+func (v *DnsNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsNameFilter_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.DnsNameFilter_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.DnsNameFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DnsNameFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// DNS prevalidation details including the resource record for validation.
+type DnsPrevalidationDetails struct {
+
+	// The scope of domains covered by this prevalidation.
+	DomainScope *DomainScope
+
+	// The Route 53 hosted zone ID for DNS validation.
+	HostedZoneId *string
+
+	// The DNS resource record to create for domain validation.
+	ResourceRecord *ResourceRecord
+
+	noSmithyDocumentSerde
+}
+
+func (v *DnsPrevalidationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsPrevalidationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsPrevalidationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainScope != nil {
+		s.WriteStruct(schemas.DnsPrevalidationDetails_DomainScope)
+		v.DomainScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.DnsPrevalidationDetails_HostedZoneId, *v.HostedZoneId)
+	}
+	if v.ResourceRecord != nil {
+		s.WriteStruct(schemas.DnsPrevalidationDetails_ResourceRecord)
+		v.ResourceRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DnsPrevalidationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsPrevalidationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsPrevalidationDetails_DomainScope:
+			v.DomainScope = &DomainScope{}
+			return v.DomainScope.Deserialize(d)
+		case schemas.DnsPrevalidationDetails_HostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.DnsPrevalidationDetails_HostedZoneId, v.HostedZoneId)
+		case schemas.DnsPrevalidationDetails_ResourceRecord:
+			v.ResourceRecord = &ResourceRecord{}
+			return v.ResourceRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// DNS prevalidation options for domain validation.
+type DnsPrevalidationOptions struct {
+
+	// The scope of domains covered by this prevalidation.
+	DomainScope *DomainScope
+
+	// The Route 53 hosted zone ID for DNS validation.
+	HostedZoneId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DnsPrevalidationOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsPrevalidationOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsPrevalidationOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainScope != nil {
+		s.WriteStruct(schemas.DnsPrevalidationOptions_DomainScope)
+		v.DomainScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.DnsPrevalidationOptions_HostedZoneId, *v.HostedZoneId)
+	}
+}
+func (v *DnsPrevalidationOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsPrevalidationOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsPrevalidationOptions_DomainScope:
+			v.DomainScope = &DomainScope{}
+			return v.DomainScope.Deserialize(d)
+		case schemas.DnsPrevalidationOptions_HostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.DnsPrevalidationOptions_HostedZoneId, v.HostedZoneId)
+		}
+		return nil
+	})
+}
+
+// Contains the CNAME record that you must add to your DNS configuration to
+// validate domain ownership using DNS validation.
+type DnsValidationChallenge struct {
+
+	// The CNAME record that ACM creates for DNS validation. Add this record to your
+	// DNS configuration to prove that you own or control the domain.
+	ResourceRecord *ResourceRecord
+
+	noSmithyDocumentSerde
+}
+
+func (v *DnsValidationChallenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsValidationChallenge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsValidationChallenge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceRecord != nil {
+		s.WriteStruct(schemas.DnsValidationChallenge_ResourceRecord)
+		v.ResourceRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DnsValidationChallenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsValidationChallenge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsValidationChallenge_ResourceRecord:
+			v.ResourceRecord = &ResourceRecord{}
+			return v.ResourceRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the scope of domain validation.
+type DomainScope struct {
+
+	// Whether validation applies to the exact domain.
+	ExactDomain DomainScopeOption
+
+	// Whether validation applies to subdomains.
+	Subdomains DomainScopeOption
+
+	// Whether validation applies to wildcard domains.
+	Wildcards DomainScopeOption
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExactDomain != "" {
+		s.WriteString(schemas.DomainScope_ExactDomain, string(v.ExactDomain))
+	}
+	if v.Subdomains != "" {
+		s.WriteString(schemas.DomainScope_Subdomains, string(v.Subdomains))
+	}
+	if v.Wildcards != "" {
+		s.WriteString(schemas.DomainScope_Wildcards, string(v.Wildcards))
+	}
+}
+func (v *DomainScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainScope_ExactDomain:
+			var ev string
+			if err := d.ReadString(schemas.DomainScope_ExactDomain, &ev); err != nil {
+				return err
+			}
+			v.ExactDomain = DomainScopeOption(ev)
+			return nil
+		case schemas.DomainScope_Subdomains:
+			var ev string
+			if err := d.ReadString(schemas.DomainScope_Subdomains, &ev); err != nil {
+				return err
+			}
+			v.Subdomains = DomainScopeOption(ev)
+			return nil
+		case schemas.DomainScope_Wildcards:
+			var ev string
+			if err := d.ReadString(schemas.DomainScope_Wildcards, &ev); err != nil {
+				return err
+			}
+			v.Wildcards = DomainScopeOption(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains information about the validation of each domain name in the
@@ -729,6 +2767,122 @@ type DomainValidation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainValidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainValidation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainValidation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainValidation_DomainName, *v.DomainName)
+	}
+	if v.HttpRedirect != nil {
+		s.WriteStruct(schemas.DomainValidation_HttpRedirect)
+		v.HttpRedirect.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceRecord != nil {
+		s.WriteStruct(schemas.DomainValidation_ResourceRecord)
+		v.ResourceRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationDomain != nil {
+		s.WriteString(schemas.DomainValidation_ValidationDomain, *v.ValidationDomain)
+	}
+	serializeValidationEmailList(s, schemas.DomainValidation_ValidationEmails, v.ValidationEmails)
+	if v.ValidationMethod != "" {
+		s.WriteString(schemas.DomainValidation_ValidationMethod, string(v.ValidationMethod))
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.DomainValidation_ValidationStatus, string(v.ValidationStatus))
+	}
+}
+func (v *DomainValidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainValidation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainValidation_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainValidation_DomainName, v.DomainName)
+		case schemas.DomainValidation_HttpRedirect:
+			v.HttpRedirect = &HttpRedirect{}
+			return v.HttpRedirect.Deserialize(d)
+		case schemas.DomainValidation_ResourceRecord:
+			v.ResourceRecord = &ResourceRecord{}
+			return v.ResourceRecord.Deserialize(d)
+		case schemas.DomainValidation_ValidationDomain:
+			v.ValidationDomain = new(string)
+			return d.ReadString(schemas.DomainValidation_ValidationDomain, v.ValidationDomain)
+		case schemas.DomainValidation_ValidationEmails:
+			return deserializeValidationEmailList(d, schemas.DomainValidation_ValidationEmails, &v.ValidationEmails)
+		case schemas.DomainValidation_ValidationMethod:
+			var ev string
+			if err := d.ReadString(schemas.DomainValidation_ValidationMethod, &ev); err != nil {
+				return err
+			}
+			v.ValidationMethod = ValidationMethod(ev)
+			return nil
+		case schemas.DomainValidation_ValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DomainValidation_ValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains information about a domain validation method migration, including the
+// previous validation method and the target validation method.
+type DomainValidationMethodUpdateSummary struct {
+
+	// The validation method that the certificate was using before the update.
+	From ValidationMethod
+
+	// The target validation method for the update.
+	To ValidationMethod
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainValidationMethodUpdateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainValidationMethodUpdateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainValidationMethodUpdateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != "" {
+		s.WriteString(schemas.DomainValidationMethodUpdateSummary_From, string(v.From))
+	}
+	if v.To != "" {
+		s.WriteString(schemas.DomainValidationMethodUpdateSummary_To, string(v.To))
+	}
+}
+func (v *DomainValidationMethodUpdateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainValidationMethodUpdateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainValidationMethodUpdateSummary_From:
+			var ev string
+			if err := d.ReadString(schemas.DomainValidationMethodUpdateSummary_From, &ev); err != nil {
+				return err
+			}
+			v.From = ValidationMethod(ev)
+			return nil
+		case schemas.DomainValidationMethodUpdateSummary_To:
+			var ev string
+			if err := d.ReadString(schemas.DomainValidationMethodUpdateSummary_To, &ev); err != nil {
+				return err
+			}
+			v.To = ValidationMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the domain names that you want ACM to use to send
 // you emails that enable you to validate domain ownership.
 type DomainValidationOption struct {
@@ -761,6 +2915,182 @@ type DomainValidationOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainValidationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainValidationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainValidationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainValidationOption_DomainName, *v.DomainName)
+	}
+	if v.ValidationDomain != nil {
+		s.WriteString(schemas.DomainValidationOption_ValidationDomain, *v.ValidationDomain)
+	}
+}
+func (v *DomainValidationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainValidationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainValidationOption_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainValidationOption_DomainName, v.DomainName)
+		case schemas.DomainValidationOption_ValidationDomain:
+			v.ValidationDomain = new(string)
+			return d.ReadString(schemas.DomainValidationOption_ValidationDomain, v.ValidationDomain)
+		}
+		return nil
+	})
+}
+
+// Contains per-domain validation information for a certificate. This structure is
+// returned as a member of the ListCertificateDomainValidationsresponse.
+type DomainValidationSummary struct {
+
+	// The fully qualified domain name (FQDN) in the certificate for which this
+	// validation summary applies.
+	//
+	// This member is required.
+	DomainName *string
+
+	// The validation configuration currently in effect for this domain. This reflects
+	// the validation method that ACM is currently using to validate domain ownership
+	// (for example, email or DNS).
+	ActiveValidationConfiguration *ValidationConfiguration
+
+	// The validation configuration for a pending validation method migration. This
+	// field is present only when a migration is in progress (for example, from email
+	// to DNS validation). It contains the target validation method, the current
+	// validation status, and the validation challenge details (such as the CNAME
+	// record to add to your DNS configuration).
+	RequestedValidationConfiguration *ValidationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainValidationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainValidationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainValidationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveValidationConfiguration != nil {
+		s.WriteStruct(schemas.DomainValidationSummary_ActiveValidationConfiguration)
+		v.ActiveValidationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainValidationSummary_DomainName, *v.DomainName)
+	}
+	if v.RequestedValidationConfiguration != nil {
+		s.WriteStruct(schemas.DomainValidationSummary_RequestedValidationConfiguration)
+		v.RequestedValidationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainValidationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainValidationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainValidationSummary_ActiveValidationConfiguration:
+			v.ActiveValidationConfiguration = &ValidationConfiguration{}
+			return v.ActiveValidationConfiguration.Deserialize(d)
+		case schemas.DomainValidationSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainValidationSummary_DomainName, v.DomainName)
+		case schemas.DomainValidationSummary_RequestedValidationConfiguration:
+			v.RequestedValidationConfiguration = &ValidationConfiguration{}
+			return v.RequestedValidationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the email addresses used for email-based domain validation.
+type EmailValidationChallenge struct {
+
+	// The domain name that ACM uses to send validation emails.
+	ValidationDomain *string
+
+	// A list of email addresses that ACM uses to send domain validation emails.
+	ValidationEmails []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EmailValidationChallenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailValidationChallenge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailValidationChallenge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ValidationDomain != nil {
+		s.WriteString(schemas.EmailValidationChallenge_ValidationDomain, *v.ValidationDomain)
+	}
+	serializeValidationEmailList(s, schemas.EmailValidationChallenge_ValidationEmails, v.ValidationEmails)
+}
+func (v *EmailValidationChallenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailValidationChallenge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailValidationChallenge_ValidationDomain:
+			v.ValidationDomain = new(string)
+			return d.ReadString(schemas.EmailValidationChallenge_ValidationDomain, v.ValidationDomain)
+		case schemas.EmailValidationChallenge_ValidationEmails:
+			return deserializeValidationEmailList(d, schemas.EmailValidationChallenge_ValidationEmails, &v.ValidationEmails)
+		}
+		return nil
+	})
+}
+
+// Specifies an expiration configuration.
+type Expiration struct {
+
+	// The time unit for the expiration value.
+	//
+	// This member is required.
+	Type TimeType
+
+	// The numeric value of the expiration.
+	//
+	// This member is required.
+	Value *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *Expiration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expiration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expiration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Expiration_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteInt64(schemas.Expiration_Value, *v.Value)
+	}
+}
+func (v *Expiration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expiration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expiration_Type:
+			var ev string
+			if err := d.ReadString(schemas.Expiration_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TimeType(ev)
+			return nil
+		case schemas.Expiration_Value:
+			v.Value = new(int64)
+			return d.ReadInt64(schemas.Expiration_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Object containing expiration events options associated with an Amazon Web
 // Services account.
 type ExpiryEventsConfiguration struct {
@@ -772,6 +3102,28 @@ type ExpiryEventsConfiguration struct {
 	DaysBeforeExpiry *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpiryEventsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpiryEventsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpiryEventsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaysBeforeExpiry != nil {
+		s.WriteInt32(schemas.ExpiryEventsConfiguration_DaysBeforeExpiry, *v.DaysBeforeExpiry)
+	}
+}
+func (v *ExpiryEventsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpiryEventsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpiryEventsConfiguration_DaysBeforeExpiry:
+			v.DaysBeforeExpiry = new(int32)
+			return d.ReadInt32(schemas.ExpiryEventsConfiguration_DaysBeforeExpiry, v.DaysBeforeExpiry)
+		}
+		return nil
+	})
 }
 
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for
@@ -807,6 +3159,82 @@ type ExtendedKeyUsage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendedKeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedKeyUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedKeyUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ExtendedKeyUsage_Name, string(v.Name))
+	}
+	if v.OID != nil {
+		s.WriteString(schemas.ExtendedKeyUsage_OID, *v.OID)
+	}
+}
+func (v *ExtendedKeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedKeyUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedKeyUsage_Name:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedKeyUsage_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ExtendedKeyUsageName(ev)
+			return nil
+		case schemas.ExtendedKeyUsage_OID:
+			v.OID = new(string)
+			return d.ReadString(schemas.ExtendedKeyUsage_OID, v.OID)
+		}
+		return nil
+	})
+}
+
+// Contains details about a failure.
+type FailureDetails struct {
+
+	// A message describing the failure.
+	Message *string
+
+	// The reason for the failure.
+	Reason AcmeDomainValidationFailureReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FailureDetails_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.FailureDetails_Reason, string(v.Reason))
+	}
+}
+func (v *FailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FailureDetails_Message, v.Message)
+		case schemas.FailureDetails_Reason:
+			var ev string
+			if err := d.ReadString(schemas.FailureDetails_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = AcmeDomainValidationFailureReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure can be used in the ListCertificates action to filter the output of the
 // certificate list.
 type Filters struct {
@@ -833,6 +3261,51 @@ type Filters struct {
 	ManagedBy CertificateManagedBy
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportOption != "" {
+		s.WriteString(schemas.Filters_exportOption, string(v.ExportOption))
+	}
+	serializeExtendedKeyUsageFilterList(s, schemas.Filters_extendedKeyUsage, v.ExtendedKeyUsage)
+	serializeKeyAlgorithmList(s, schemas.Filters_keyTypes, v.KeyTypes)
+	serializeKeyUsageFilterList(s, schemas.Filters_keyUsage, v.KeyUsage)
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.Filters_managedBy, string(v.ManagedBy))
+	}
+}
+func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filters_exportOption:
+			var ev string
+			if err := d.ReadString(schemas.Filters_exportOption, &ev); err != nil {
+				return err
+			}
+			v.ExportOption = CertificateExport(ev)
+			return nil
+		case schemas.Filters_extendedKeyUsage:
+			return deserializeExtendedKeyUsageFilterList(d, schemas.Filters_extendedKeyUsage, &v.ExtendedKeyUsage)
+		case schemas.Filters_keyTypes:
+			return deserializeKeyAlgorithmList(d, schemas.Filters_keyTypes, &v.KeyTypes)
+		case schemas.Filters_keyUsage:
+			return deserializeKeyUsageFilterList(d, schemas.Filters_keyUsage, &v.KeyUsage)
+		case schemas.Filters_managedBy:
+			var ev string
+			if err := d.ReadString(schemas.Filters_managedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = CertificateManagedBy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes an ASN.1 X.400 GeneralName as defined in [RFC 5280]. Only one of the following
@@ -865,6 +3338,14 @@ type GeneralNameMemberDirectoryName struct {
 }
 
 func (*GeneralNameMemberDirectoryName) isGeneralName() {}
+func (v *GeneralNameMemberDirectoryName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralName_DirectoryName)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GeneralNameMemberDirectoryName) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents GeneralName as a DNS name.
 type GeneralNameMemberDnsName struct {
@@ -874,6 +3355,12 @@ type GeneralNameMemberDnsName struct {
 }
 
 func (*GeneralNameMemberDnsName) isGeneralName() {}
+func (v *GeneralNameMemberDnsName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GeneralName_DnsName, v.Value)
+}
+func (v *GeneralNameMemberDnsName) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GeneralName_DnsName, &v.Value)
+}
 
 // Represents GeneralName as an IPv4 or IPv6 address.
 type GeneralNameMemberIpAddress struct {
@@ -883,6 +3370,12 @@ type GeneralNameMemberIpAddress struct {
 }
 
 func (*GeneralNameMemberIpAddress) isGeneralName() {}
+func (v *GeneralNameMemberIpAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GeneralName_IpAddress, v.Value)
+}
+func (v *GeneralNameMemberIpAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GeneralName_IpAddress, &v.Value)
+}
 
 // Represents GeneralName using an OtherName object.
 type GeneralNameMemberOtherName struct {
@@ -892,6 +3385,14 @@ type GeneralNameMemberOtherName struct {
 }
 
 func (*GeneralNameMemberOtherName) isGeneralName() {}
+func (v *GeneralNameMemberOtherName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralName_OtherName)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GeneralNameMemberOtherName) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents GeneralName as an object identifier (OID).
 type GeneralNameMemberRegisteredId struct {
@@ -901,6 +3402,12 @@ type GeneralNameMemberRegisteredId struct {
 }
 
 func (*GeneralNameMemberRegisteredId) isGeneralName() {}
+func (v *GeneralNameMemberRegisteredId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GeneralName_RegisteredId, v.Value)
+}
+func (v *GeneralNameMemberRegisteredId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GeneralName_RegisteredId, &v.Value)
+}
 
 // Represents GeneralName as an [RFC 822] email address.
 //
@@ -912,6 +3419,12 @@ type GeneralNameMemberRfc822Name struct {
 }
 
 func (*GeneralNameMemberRfc822Name) isGeneralName() {}
+func (v *GeneralNameMemberRfc822Name) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GeneralName_Rfc822Name, v.Value)
+}
+func (v *GeneralNameMemberRfc822Name) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GeneralName_Rfc822Name, &v.Value)
+}
 
 // Represents GeneralName as a URI.
 type GeneralNameMemberUniformResourceIdentifier struct {
@@ -921,6 +3434,12 @@ type GeneralNameMemberUniformResourceIdentifier struct {
 }
 
 func (*GeneralNameMemberUniformResourceIdentifier) isGeneralName() {}
+func (v *GeneralNameMemberUniformResourceIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GeneralName_UniformResourceIdentifier, v.Value)
+}
+func (v *GeneralNameMemberUniformResourceIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GeneralName_UniformResourceIdentifier, &v.Value)
+}
 
 // Contains information for HTTP-based domain validation of certificates requested
 // through Amazon CloudFront and issued by ACM. This field exists only when the
@@ -938,6 +3457,34 @@ type HttpRedirect struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRedirect) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRedirect)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRedirect) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedirectFrom != nil {
+		s.WriteString(schemas.HttpRedirect_RedirectFrom, *v.RedirectFrom)
+	}
+	if v.RedirectTo != nil {
+		s.WriteString(schemas.HttpRedirect_RedirectTo, *v.RedirectTo)
+	}
+}
+func (v *HttpRedirect) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRedirect, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRedirect_RedirectFrom:
+			v.RedirectFrom = new(string)
+			return d.ReadString(schemas.HttpRedirect_RedirectFrom, v.RedirectFrom)
+		case schemas.HttpRedirect_RedirectTo:
+			v.RedirectTo = new(string)
+			return d.ReadString(schemas.HttpRedirect_RedirectTo, v.RedirectTo)
+		}
+		return nil
+	})
+}
+
 // The Key Usage X.509 v3 extension defines the purpose of the public key
 // contained in the certificate.
 type KeyUsage struct {
@@ -946,6 +3493,32 @@ type KeyUsage struct {
 	Name KeyUsageName
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.KeyUsage_Name, string(v.Name))
+	}
+}
+func (v *KeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyUsage_Name:
+			var ev string
+			if err := d.ReadString(schemas.KeyUsage_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = KeyUsageName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines a custom ASN.1 X.400 GeneralName using an object identifier (OID) and
@@ -961,6 +3534,115 @@ type OtherName struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OtherName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OtherName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OtherName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.OtherName_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.OtherName_Value, *v.Value)
+	}
+}
+func (v *OtherName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OtherName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OtherName_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.OtherName_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.OtherName_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.OtherName_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Contains details about the prevalidation configuration.
+//
+// The following types satisfy this interface:
+//
+//	PrevalidationDetailsMemberDnsPrevalidation
+type PrevalidationDetails interface {
+	isPrevalidationDetails()
+}
+
+// DNS-based prevalidation details.
+type PrevalidationDetailsMemberDnsPrevalidation struct {
+	Value DnsPrevalidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*PrevalidationDetailsMemberDnsPrevalidation) isPrevalidationDetails() {}
+func (v *PrevalidationDetailsMemberDnsPrevalidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrevalidationDetails_DnsPrevalidation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PrevalidationDetailsMemberDnsPrevalidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies prevalidation options for domain validation.
+//
+// The following types satisfy this interface:
+//
+//	PrevalidationOptionsMemberDnsPrevalidation
+type PrevalidationOptions interface {
+	isPrevalidationOptions()
+}
+
+// DNS-based prevalidation options.
+type PrevalidationOptionsMemberDnsPrevalidation struct {
+	Value DnsPrevalidationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*PrevalidationOptionsMemberDnsPrevalidation) isPrevalidationOptions() {}
+func (v *PrevalidationOptionsMemberDnsPrevalidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrevalidationOptions_DnsPrevalidation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PrevalidationOptionsMemberDnsPrevalidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Configuration for a public certificate authority.
+type PublicCertificateAuthority struct {
+
+	// The key algorithms allowed for certificates issued by this certificate
+	// authority.
+	AllowedKeyAlgorithms []PublicKeyAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublicCertificateAuthority) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicCertificateAuthority)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicCertificateAuthority) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePublicKeyAlgorithmList(s, schemas.PublicCertificateAuthority_AllowedKeyAlgorithms, v.AllowedKeyAlgorithms)
+}
+func (v *PublicCertificateAuthority) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicCertificateAuthority, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicCertificateAuthority_AllowedKeyAlgorithms:
+			return deserializePublicKeyAlgorithmList(d, schemas.PublicCertificateAuthority_AllowedKeyAlgorithms, &v.AllowedKeyAlgorithms)
+		}
+		return nil
+	})
 }
 
 // Contains information about the status of ACM's [managed renewal] for the certificate. This
@@ -997,6 +3679,51 @@ type RenewalSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainValidationList(s, schemas.RenewalSummary_DomainValidationOptions, v.DomainValidationOptions)
+	if v.RenewalStatus != "" {
+		s.WriteString(schemas.RenewalSummary_RenewalStatus, string(v.RenewalStatus))
+	}
+	if v.RenewalStatusReason != "" {
+		s.WriteString(schemas.RenewalSummary_RenewalStatusReason, string(v.RenewalStatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RenewalSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RenewalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalSummary_DomainValidationOptions:
+			return deserializeDomainValidationList(d, schemas.RenewalSummary_DomainValidationOptions, &v.DomainValidationOptions)
+		case schemas.RenewalSummary_RenewalStatus:
+			var ev string
+			if err := d.ReadString(schemas.RenewalSummary_RenewalStatus, &ev); err != nil {
+				return err
+			}
+			v.RenewalStatus = RenewalStatus(ev)
+			return nil
+		case schemas.RenewalSummary_RenewalStatusReason:
+			var ev string
+			if err := d.ReadString(schemas.RenewalSummary_RenewalStatusReason, &ev); err != nil {
+				return err
+			}
+			v.RenewalStatusReason = FailureReason(ev)
+			return nil
+		case schemas.RenewalSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RenewalSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Contains a DNS record value that you can use to validate ownership or control
 // of a domain. This is used by the DescribeCertificateaction.
 type ResourceRecord struct {
@@ -1020,6 +3747,44 @@ type ResourceRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceRecord_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ResourceRecord_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceRecord_Value, *v.Value)
+	}
+}
+func (v *ResourceRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceRecord_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceRecord_Name, v.Name)
+		case schemas.ResourceRecord_Type:
+			var ev string
+			if err := d.ReadString(schemas.ResourceRecord_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecordType(ev)
+			return nil
+		case schemas.ResourceRecord_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceRecord_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Filters certificates by subject alternative name attributes.
 //
 // The following types satisfy this interface:
@@ -1037,6 +3802,14 @@ type SubjectAlternativeNameFilterMemberDnsName struct {
 }
 
 func (*SubjectAlternativeNameFilterMemberDnsName) isSubjectAlternativeNameFilter() {}
+func (v *SubjectAlternativeNameFilterMemberDnsName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectAlternativeNameFilter_DnsName)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SubjectAlternativeNameFilterMemberDnsName) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Filters certificates by subject attributes.
 //
@@ -1055,6 +3828,14 @@ type SubjectFilterMemberCommonName struct {
 }
 
 func (*SubjectFilterMemberCommonName) isSubjectFilter() {}
+func (v *SubjectFilterMemberCommonName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectFilter_CommonName)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SubjectFilterMemberCommonName) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.
 type Tag struct {
@@ -1070,6 +3851,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A description of why a request was throttled.
 type ThrottlingReason struct {
 
@@ -1082,6 +3891,34 @@ type ThrottlingReason struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ThrottlingReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.ThrottlingReason_reason, *v.Reason)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.ThrottlingReason_resource, *v.Resource)
+	}
+}
+func (v *ThrottlingReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingReason_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ThrottlingReason_reason, v.Reason)
+		case schemas.ThrottlingReason_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.ThrottlingReason_resource, v.Resource)
+		}
+		return nil
+	})
+}
+
 // Specifies a time range for filtering certificates.
 type TimestampRange struct {
 
@@ -1092,6 +3929,242 @@ type TimestampRange struct {
 	Start *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimestampRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteTime(schemas.TimestampRange_End, *v.End)
+	}
+	if v.Start != nil {
+		s.WriteTime(schemas.TimestampRange_Start, *v.Start)
+	}
+}
+func (v *TimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampRange_End:
+			v.End = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_End, v.End)
+		case schemas.TimestampRange_Start:
+			v.Start = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_Start, v.Start)
+		}
+		return nil
+	})
+}
+
+// Contains information about the most recent certificate update, such as a domain
+// validation method migration. This structure is returned as part of the CertificateDetailresponse
+// from DescribeCertificate.
+type UpdateSummary struct {
+
+	// Contains information about a domain validation method migration, including the
+	// previous and target validation methods.
+	DomainValidationMethodUpdateSummary *DomainValidationMethodUpdateSummary
+
+	// The time at which the certificate update was requested.
+	RequestedAt *time.Time
+
+	// The status of the certificate update. The following are valid values:
+	//
+	//   - PENDING_DOMAIN_VALIDATION – The certificate update is waiting for domain
+	//   ownership validation to complete.
+	//
+	//   - SUCCESS – The certificate was updated successfully.
+	//
+	//   - FAILED – The certificate update failed.
+	Status UpdateStatus
+
+	// The type of update that was requested for the certificate. The following are
+	// valid values:
+	//
+	//   - DOMAIN_VALIDATION_METHOD – The update changes the domain validation method
+	//   for the certificate.
+	Type UpdateType
+
+	// The time at which the certificate update status was last changed.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainValidationMethodUpdateSummary != nil {
+		s.WriteStruct(schemas.UpdateSummary_DomainValidationMethodUpdateSummary)
+		v.DomainValidationMethodUpdateSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestedAt != nil {
+		s.WriteTime(schemas.UpdateSummary_RequestedAt, *v.RequestedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSummary_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSummary_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSummary_DomainValidationMethodUpdateSummary:
+			v.DomainValidationMethodUpdateSummary = &DomainValidationMethodUpdateSummary{}
+			return v.DomainValidationMethodUpdateSummary.Deserialize(d)
+		case schemas.UpdateSummary_RequestedAt:
+			v.RequestedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSummary_RequestedAt, v.RequestedAt)
+		case schemas.UpdateSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.UpdateSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = UpdateType(ev)
+			return nil
+		case schemas.UpdateSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains the challenge details that you use to prove domain ownership. Only one
+// member is set, depending on the validation method.
+//
+// The following types satisfy this interface:
+//
+//	ValidationChallengeMemberDnsValidationChallenge
+//	ValidationChallengeMemberEmailValidationChallenge
+type ValidationChallenge interface {
+	isValidationChallenge()
+}
+
+// Contains the CNAME record that you must add to your DNS configuration to
+// validate domain ownership using DNS validation.
+type ValidationChallengeMemberDnsValidationChallenge struct {
+	Value DnsValidationChallenge
+
+	noSmithyDocumentSerde
+}
+
+func (*ValidationChallengeMemberDnsValidationChallenge) isValidationChallenge() {}
+func (v *ValidationChallengeMemberDnsValidationChallenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationChallenge_DnsValidationChallenge)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ValidationChallengeMemberDnsValidationChallenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains the email addresses used for email-based domain validation.
+type ValidationChallengeMemberEmailValidationChallenge struct {
+	Value EmailValidationChallenge
+
+	noSmithyDocumentSerde
+}
+
+func (*ValidationChallengeMemberEmailValidationChallenge) isValidationChallenge() {}
+func (v *ValidationChallengeMemberEmailValidationChallenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationChallenge_EmailValidationChallenge)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ValidationChallengeMemberEmailValidationChallenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains the validation method, validation status, and validation challenge
+// details for a domain. This structure appears in DomainValidationSummaryas both the active and
+// requested validation configuration.
+type ValidationConfiguration struct {
+
+	// The validation challenge details for this configuration. The structure varies
+	// by validation method: for DNS validation, contains a DnsValidationChallenge
+	// with the CNAME record to add; for email validation, contains an
+	// EmailValidationChallenge with the validation email addresses.
+	ValidationChallenge ValidationChallenge
+
+	// The validation method for this configuration. Valid values:
+	//
+	//   - DNS – Validation using a CNAME record added to your DNS configuration.
+	//
+	//   - EMAIL – Validation using an approval email sent to domain contacts.
+	//
+	//   - HTTP – Validation using an HTTP resource placed on your web server.
+	ValidationMethod ValidationMethod
+
+	// The validation status for this domain. Valid values:
+	//
+	//   - PENDING_VALIDATION – The domain is waiting for validation to complete.
+	//
+	//   - SUCCESS – Validation completed successfully.
+	//
+	//   - FAILED – Validation failed.
+	ValidationStatus DomainStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ValidationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidationChallenge(s, schemas.ValidationConfiguration_ValidationChallenge, v.ValidationChallenge)
+	if v.ValidationMethod != "" {
+		s.WriteString(schemas.ValidationConfiguration_ValidationMethod, string(v.ValidationMethod))
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.ValidationConfiguration_ValidationStatus, string(v.ValidationStatus))
+	}
+}
+func (v *ValidationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationConfiguration_ValidationChallenge:
+			return deserializeValidationChallenge(d, schemas.ValidationConfiguration_ValidationChallenge, &v.ValidationChallenge)
+		case schemas.ValidationConfiguration_ValidationMethod:
+			var ev string
+			if err := d.ReadString(schemas.ValidationConfiguration_ValidationMethod, &ev); err != nil {
+				return err
+			}
+			v.ValidationMethod = ValidationMethod(ev)
+			return nil
+		case schemas.ValidationConfiguration_ValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ValidationConfiguration_ValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Filters certificates by X.509 attributes.
@@ -1118,6 +4191,17 @@ type X509AttributeFilterMemberExtendedKeyUsage struct {
 }
 
 func (*X509AttributeFilterMemberExtendedKeyUsage) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberExtendedKeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.X509AttributeFilter_ExtendedKeyUsage, string(v.Value))
+}
+func (v *X509AttributeFilterMemberExtendedKeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.X509AttributeFilter_ExtendedKeyUsage, &s); err != nil {
+		return err
+	}
+	v.Value = ExtendedKeyUsageName(s)
+	return nil
+}
 
 // Filter by key algorithm.
 type X509AttributeFilterMemberKeyAlgorithm struct {
@@ -1127,6 +4211,17 @@ type X509AttributeFilterMemberKeyAlgorithm struct {
 }
 
 func (*X509AttributeFilterMemberKeyAlgorithm) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberKeyAlgorithm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.X509AttributeFilter_KeyAlgorithm, string(v.Value))
+}
+func (v *X509AttributeFilterMemberKeyAlgorithm) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.X509AttributeFilter_KeyAlgorithm, &s); err != nil {
+		return err
+	}
+	v.Value = KeyAlgorithm(s)
+	return nil
+}
 
 // Filter by key usage.
 type X509AttributeFilterMemberKeyUsage struct {
@@ -1136,6 +4231,17 @@ type X509AttributeFilterMemberKeyUsage struct {
 }
 
 func (*X509AttributeFilterMemberKeyUsage) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberKeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.X509AttributeFilter_KeyUsage, string(v.Value))
+}
+func (v *X509AttributeFilterMemberKeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.X509AttributeFilter_KeyUsage, &s); err != nil {
+		return err
+	}
+	v.Value = KeyUsageName(s)
+	return nil
+}
 
 // Filter by certificate expiration date. The start date is inclusive.
 type X509AttributeFilterMemberNotAfter struct {
@@ -1145,6 +4251,14 @@ type X509AttributeFilterMemberNotAfter struct {
 }
 
 func (*X509AttributeFilterMemberNotAfter) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberNotAfter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X509AttributeFilter_NotAfter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *X509AttributeFilterMemberNotAfter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Filter by certificate validity start date. The start date is inclusive.
 type X509AttributeFilterMemberNotBefore struct {
@@ -1154,6 +4268,14 @@ type X509AttributeFilterMemberNotBefore struct {
 }
 
 func (*X509AttributeFilterMemberNotBefore) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberNotBefore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X509AttributeFilter_NotBefore)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *X509AttributeFilterMemberNotBefore) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Filter by serial number.
 type X509AttributeFilterMemberSerialNumber struct {
@@ -1163,6 +4285,12 @@ type X509AttributeFilterMemberSerialNumber struct {
 }
 
 func (*X509AttributeFilterMemberSerialNumber) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberSerialNumber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.X509AttributeFilter_SerialNumber, v.Value)
+}
+func (v *X509AttributeFilterMemberSerialNumber) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.X509AttributeFilter_SerialNumber, &v.Value)
+}
 
 // Filter by certificate subject.
 type X509AttributeFilterMemberSubject struct {
@@ -1172,6 +4300,12 @@ type X509AttributeFilterMemberSubject struct {
 }
 
 func (*X509AttributeFilterMemberSubject) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberSubject) Serialize(s smithy.ShapeSerializer) {
+	serializeSubjectFilter(s, schemas.X509AttributeFilter_Subject, v.Value)
+}
+func (v *X509AttributeFilterMemberSubject) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeSubjectFilter(d, schemas.X509AttributeFilter_Subject, &v.Value)
+}
 
 // Filter by subject alternative names.
 type X509AttributeFilterMemberSubjectAlternativeName struct {
@@ -1181,6 +4315,12 @@ type X509AttributeFilterMemberSubjectAlternativeName struct {
 }
 
 func (*X509AttributeFilterMemberSubjectAlternativeName) isX509AttributeFilter() {}
+func (v *X509AttributeFilterMemberSubjectAlternativeName) Serialize(s smithy.ShapeSerializer) {
+	serializeSubjectAlternativeNameFilter(s, schemas.X509AttributeFilter_SubjectAlternativeName, v.Value)
+}
+func (v *X509AttributeFilterMemberSubjectAlternativeName) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeSubjectAlternativeNameFilter(d, schemas.X509AttributeFilter_SubjectAlternativeName, &v.Value)
+}
 
 // Contains X.509 certificate attributes extracted from the certificate.
 type X509Attributes struct {
@@ -1224,6 +4364,75 @@ type X509Attributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X509Attributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X509Attributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X509Attributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtendedKeyUsageNames(s, schemas.X509Attributes_ExtendedKeyUsages, v.ExtendedKeyUsages)
+	if v.Issuer != nil {
+		s.WriteStruct(schemas.X509Attributes_Issuer)
+		v.Issuer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.X509Attributes_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	serializeKeyUsageNames(s, schemas.X509Attributes_KeyUsages, v.KeyUsages)
+	if v.NotAfter != nil {
+		s.WriteTime(schemas.X509Attributes_NotAfter, *v.NotAfter)
+	}
+	if v.NotBefore != nil {
+		s.WriteTime(schemas.X509Attributes_NotBefore, *v.NotBefore)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.X509Attributes_SerialNumber, *v.SerialNumber)
+	}
+	if v.Subject != nil {
+		s.WriteStruct(schemas.X509Attributes_Subject)
+		v.Subject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGeneralNameList(s, schemas.X509Attributes_SubjectAlternativeNames, v.SubjectAlternativeNames)
+}
+func (v *X509Attributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X509Attributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X509Attributes_ExtendedKeyUsages:
+			return deserializeExtendedKeyUsageNames(d, schemas.X509Attributes_ExtendedKeyUsages, &v.ExtendedKeyUsages)
+		case schemas.X509Attributes_Issuer:
+			v.Issuer = &DistinguishedName{}
+			return v.Issuer.Deserialize(d)
+		case schemas.X509Attributes_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.X509Attributes_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.X509Attributes_KeyUsages:
+			return deserializeKeyUsageNames(d, schemas.X509Attributes_KeyUsages, &v.KeyUsages)
+		case schemas.X509Attributes_NotAfter:
+			v.NotAfter = new(time.Time)
+			return d.ReadTime(schemas.X509Attributes_NotAfter, v.NotAfter)
+		case schemas.X509Attributes_NotBefore:
+			v.NotBefore = new(time.Time)
+			return d.ReadTime(schemas.X509Attributes_NotBefore, v.NotBefore)
+		case schemas.X509Attributes_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.X509Attributes_SerialNumber, v.SerialNumber)
+		case schemas.X509Attributes_Subject:
+			v.Subject = &DistinguishedName{}
+			return v.Subject.Deserialize(d)
+		case schemas.X509Attributes_SubjectAlternativeNames:
+			return deserializeGeneralNameList(d, schemas.X509Attributes_SubjectAlternativeNames, &v.SubjectAlternativeNames)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1236,10 +4445,14 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAcmCertificateMetadataFilter() {}
+func (*UnknownUnionMember) isCertificateAuthority()         {}
 func (*UnknownUnionMember) isCertificateFilter()            {}
 func (*UnknownUnionMember) isCertificateFilterStatement()   {}
 func (*UnknownUnionMember) isCertificateMetadata()          {}
 func (*UnknownUnionMember) isGeneralName()                  {}
+func (*UnknownUnionMember) isPrevalidationDetails()         {}
+func (*UnknownUnionMember) isPrevalidationOptions()         {}
 func (*UnknownUnionMember) isSubjectAlternativeNameFilter() {}
 func (*UnknownUnionMember) isSubjectFilter()                {}
+func (*UnknownUnionMember) isValidationChallenge()          {}
 func (*UnknownUnionMember) isX509AttributeFilter()          {}

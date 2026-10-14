@@ -5,12 +5,8 @@ package pricing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the metadata for one service or a list of the metadata for all
@@ -57,27 +53,6 @@ type DescribeServicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeServicesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeServicesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FormatVersion != nil {
-		s.WriteString(schemas.DescribeServicesRequest_FormatVersion, *v.FormatVersion)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeServicesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeServicesRequest_NextToken, *v.NextToken)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.DescribeServicesRequest_ServiceCode, *v.ServiceCode)
-	}
-}
-
 type DescribeServicesOutput struct {
 
 	// The format version of the response. For example, aws_v1 .
@@ -95,87 +70,26 @@ type DescribeServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeServicesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeServicesResponse_FormatVersion:
-			v.FormatVersion = new(string)
-			return d.ReadString(schemas.DescribeServicesResponse_FormatVersion, v.FormatVersion)
-		case schemas.DescribeServicesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeServicesResponse_NextToken, v.NextToken)
-		case schemas.DescribeServicesResponse_Services:
-			return deserializeServiceList(d, schemas.DescribeServicesResponse_Services, &v.Services)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServices{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServices{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse), output: &DescribeServicesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeServices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeServices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +102,6 @@ func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -294,11 +202,3 @@ type DescribeServicesAPIClient interface {
 }
 
 var _ DescribeServicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeServices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeServices",
-	}
-}

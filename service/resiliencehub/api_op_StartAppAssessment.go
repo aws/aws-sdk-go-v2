@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new application assessment for an application.
@@ -61,6 +61,49 @@ type StartAppAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_appVersion, *v.AppVersion)
+	}
+	if v.AssessmentName != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_assessmentName, *v.AssessmentName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAppAssessmentRequest_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.StartAppAssessmentRequest_tags, v.Tags)
+}
+func (v *StartAppAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppAssessmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppAssessmentRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_appArn, v.AppArn)
+		case schemas.StartAppAssessmentRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_appVersion, v.AppVersion)
+		case schemas.StartAppAssessmentRequest_assessmentName:
+			v.AssessmentName = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_assessmentName, v.AssessmentName)
+		case schemas.StartAppAssessmentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartAppAssessmentRequest_clientToken, v.ClientToken)
+		case schemas.StartAppAssessmentRequest_tags:
+			return deserializeTagMap(d, schemas.StartAppAssessmentRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartAppAssessmentOutput struct {
 
 	// The assessment created.
@@ -74,65 +117,44 @@ type StartAppAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.StartAppAssessmentResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAppAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppAssessmentResponse_assessment:
+			v.Assessment = &types.AppAssessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAppAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppAssessment, schemas.StartAppAssessmentRequest, schemas.StartAppAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAppAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppAssessment, schemas.StartAppAssessmentRequest, schemas.StartAppAssessmentResponse), output: &StartAppAssessmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAppAssessment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAppAssessment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +164,6 @@ func (c *Client) addOperationStartAppAssessmentMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStartAppAssessmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAppAssessment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +176,6 @@ func (c *Client) addOperationStartAppAssessmentMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +215,4 @@ func (m *idempotencyToken_initializeOpStartAppAssessment) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opStartAppAssessmentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartAppAssessment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartAppAssessment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartAppAssessment",
-	}
 }

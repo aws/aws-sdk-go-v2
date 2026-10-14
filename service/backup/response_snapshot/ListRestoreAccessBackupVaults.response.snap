@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RestoreAccessBackupVaults":[{"ApprovalDate":946684800,"CreationDate":946684800,"LatestRevokeRequest":{"ExpiryDate":946684800,"InitiationDate":946684800,"MpaSessionArn":"__MpaSessionArn__","Status":"PENDING","StatusMessage":"__StatusMessage__"},"RestoreAccessBackupVaultArn":"__RestoreAccessBackupVaultArn__","VaultState":"CREATING"},{"ApprovalDate":946684800,"CreationDate":946684800,"LatestRevokeRequest":{"ExpiryDate":946684800,"InitiationDate":946684800,"MpaSessionArn":"__MpaSessionArn__","Status":"PENDING","StatusMessage":"__StatusMessage__"},"RestoreAccessBackupVaultArn":"__RestoreAccessBackupVaultArn__","VaultState":"CREATING"}]}

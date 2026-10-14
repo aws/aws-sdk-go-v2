@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CheckoutBorrowLicense
+
+{"CheckoutMetadata":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"ClientToken":"__ClientToken__","DigitalSignatureMethod":"JWT_PS384","Entitlements":[{"Name":"__Name__","Unit":"Count","Value":"__Value__"},{"Name":"__Name__","Unit":"Count","Value":"__Value__"}],"LicenseArn":"__LicenseArn__","NodeId":"__NodeId__"}

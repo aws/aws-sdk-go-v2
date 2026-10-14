@@ -1,0 +1,3 @@
+GET /v1/event-actions?eventSourceId=__EventSourceId__&maxResults=1&nextToken=__NextToken__
+
+

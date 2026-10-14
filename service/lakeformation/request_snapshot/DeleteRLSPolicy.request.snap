@@ -1,0 +1,5 @@
+POST /DeleteRLSPolicy
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

@@ -5,13 +5,9 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -48,21 +44,6 @@ type GetLinkInput struct {
 	LinkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetLinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLinkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.GetLinkRequest_gatewayId, *v.GatewayId)
-	}
-	if v.LinkId != nil {
-		s.WriteString(schemas.GetLinkRequest_linkId, *v.LinkId)
-	}
 }
 
 type GetLinkOutput struct {
@@ -131,136 +112,29 @@ type GetLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLinkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLinkResponse_attributes:
-			v.Attributes = &types.LinkAttributes{}
-			return v.Attributes.Deserialize(d)
-		case schemas.GetLinkResponse_connectivityType:
-			var ev string
-			if err := d.ReadString(schemas.GetLinkResponse_connectivityType, &ev); err != nil {
-				return err
-			}
-			v.ConnectivityType = types.ConnectivityType(ev)
-			return nil
-		case schemas.GetLinkResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetLinkResponse_createdAt, v.CreatedAt)
-		case schemas.GetLinkResponse_direction:
-			var ev string
-			if err := d.ReadString(schemas.GetLinkResponse_direction, &ev); err != nil {
-				return err
-			}
-			v.Direction = types.LinkDirection(ev)
-			return nil
-		case schemas.GetLinkResponse_flowModules:
-			return deserializeModuleConfigurationList(d, schemas.GetLinkResponse_flowModules, &v.FlowModules)
-		case schemas.GetLinkResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.GetLinkResponse_gatewayId, v.GatewayId)
-		case schemas.GetLinkResponse_httpResponderAllowed:
-			v.HttpResponderAllowed = new(bool)
-			return d.ReadBool(schemas.GetLinkResponse_httpResponderAllowed, v.HttpResponderAllowed)
-		case schemas.GetLinkResponse_linkId:
-			v.LinkId = new(string)
-			return d.ReadString(schemas.GetLinkResponse_linkId, v.LinkId)
-		case schemas.GetLinkResponse_logSettings:
-			v.LogSettings = &types.LinkLogSettings{}
-			return v.LogSettings.Deserialize(d)
-		case schemas.GetLinkResponse_peerGatewayId:
-			v.PeerGatewayId = new(string)
-			return d.ReadString(schemas.GetLinkResponse_peerGatewayId, v.PeerGatewayId)
-		case schemas.GetLinkResponse_pendingFlowModules:
-			return deserializeModuleConfigurationList(d, schemas.GetLinkResponse_pendingFlowModules, &v.PendingFlowModules)
-		case schemas.GetLinkResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetLinkResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.LinkStatus(ev)
-			return nil
-		case schemas.GetLinkResponse_tags:
-			return deserializeTagsMap(d, schemas.GetLinkResponse_tags, &v.Tags)
-		case schemas.GetLinkResponse_timeoutInMillis:
-			v.TimeoutInMillis = new(int64)
-			return d.ReadInt64(schemas.GetLinkResponse_timeoutInMillis, v.TimeoutInMillis)
-		case schemas.GetLinkResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetLinkResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkRequest, schemas.GetLinkResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLink{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkRequest, schemas.GetLinkResponse), output: &GetLinkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -273,12 +147,6 @@ func (c *Client) addOperationGetLinkMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -895,11 +763,3 @@ type GetLinkAPIClient interface {
 }
 
 var _ GetLinkAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLink",
-	}
-}

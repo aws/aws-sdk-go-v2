@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CapacityTasks":[{"AssetId":"__AssetId__","CapacityTaskId":"__CapacityTaskId__","CapacityTaskStatus":"REQUESTED","CompletionDate":946684800,"CreationDate":946684800,"LastModifiedDate":946684800,"OrderId":"__OrderId__","OutpostId":"__OutpostId__"},{"AssetId":"__AssetId__","CapacityTaskId":"__CapacityTaskId__","CapacityTaskStatus":"REQUESTED","CompletionDate":946684800,"CreationDate":946684800,"LastModifiedDate":946684800,"OrderId":"__OrderId__","OutpostId":"__OutpostId__"}],"NextToken":"__NextToken__"}

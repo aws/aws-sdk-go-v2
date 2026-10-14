@@ -4,13 +4,8 @@ package rolesanywhere
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the certificate revocation list (CRL). A CRL is a list of certificates
@@ -49,39 +44,6 @@ type UpdateCrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrlData != nil {
-		s.WriteBlob(schemas.UpdateCrlRequest_crlData, v.CrlData)
-	}
-	if v.CrlId != nil {
-		s.WriteString(schemas.UpdateCrlRequest_crlId, *v.CrlId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateCrlRequest_name, *v.Name)
-	}
-}
-func (v *UpdateCrlInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCrlRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateCrlRequest_crlData:
-			return d.ReadBlob(schemas.UpdateCrlRequest_crlData, &v.CrlData)
-		case schemas.UpdateCrlRequest_crlId:
-			v.CrlId = new(string)
-			return d.ReadString(schemas.UpdateCrlRequest_crlId, v.CrlId)
-		case schemas.UpdateCrlRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateCrlRequest_name, v.Name)
-		}
-		return nil
-	})
-}
-
 type UpdateCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write
@@ -96,98 +58,29 @@ type UpdateCrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCrlOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CrlDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Crl != nil {
-		s.WriteStruct(schemas.CrlDetailResponse_crl)
-		v.Crl.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateCrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CrlDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CrlDetailResponse_crl:
-			v.Crl = &types.CrlDetail{}
-			return v.Crl.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateCrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrl, schemas.UpdateCrlRequest, schemas.CrlDetailResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCrl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrl, schemas.UpdateCrlRequest, schemas.CrlDetailResponse), output: &UpdateCrlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +95,8 @@ func (c *Client) addOperationUpdateCrlMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCrl",
-	}
 }

@@ -2,6 +2,24 @@
 
 package types
 
+type ActivityType string
+
+// Enum values for ActivityType
+const (
+	// The observed activity is an API call.
+	ActivityTypeApiCall ActivityType = "API_CALL"
+)
+
+// Values returns all known values for ActivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityType) Values() []ActivityType {
+	return []ActivityType{
+		"API_CALL",
+	}
+}
+
 type AdminStatus string
 
 // Enum values for AdminStatus
@@ -18,6 +36,25 @@ func (AdminStatus) Values() []AdminStatus {
 	return []AdminStatus{
 		"ENABLED",
 		"DISABLE_IN_PROGRESS",
+	}
+}
+
+type AssociationMode string
+
+// Enum values for AssociationMode
+const (
+	AssociationModeLive   AssociationMode = "LIVE"
+	AssociationModeDryRun AssociationMode = "DRY_RUN"
+)
+
+// Values returns all known values for AssociationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationMode) Values() []AssociationMode {
+	return []AssociationMode{
+		"LIVE",
+		"DRY_RUN",
 	}
 }
 
@@ -39,6 +76,23 @@ func (AutoEnableMembers) Values() []AutoEnableMembers {
 		"NEW",
 		"ALL",
 		"NONE",
+	}
+}
+
+type CloudProvider string
+
+// Enum values for CloudProvider
+const (
+	CloudProviderAws CloudProvider = "AWS"
+)
+
+// Values returns all known values for CloudProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudProvider) Values() []CloudProvider {
+	return []CloudProvider{
+		"AWS",
 	}
 }
 
@@ -66,6 +120,100 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"FAILED",
 		"UPDATING",
 		"PENDING",
+	}
+}
+
+type Confidence string
+
+// Enum values for Confidence
+const (
+	ConfidenceUnknown Confidence = "Unknown"
+	ConfidenceLow     Confidence = "Low"
+	ConfidenceMedium  Confidence = "Medium"
+	ConfidenceHigh    Confidence = "High"
+)
+
+// Values returns all known values for Confidence. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Confidence) Values() []Confidence {
+	return []Confidence{
+		"Unknown",
+		"Low",
+		"Medium",
+		"High",
+	}
+}
+
+type ConfidenceLevel string
+
+// Enum values for ConfidenceLevel
+const (
+	ConfidenceLevelHigh   ConfidenceLevel = "HIGH"
+	ConfidenceLevelMedium ConfidenceLevel = "MEDIUM"
+	ConfidenceLevelLow    ConfidenceLevel = "LOW"
+	ConfidenceLevelNone   ConfidenceLevel = "NONE"
+)
+
+// Values returns all known values for ConfidenceLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfidenceLevel) Values() []ConfidenceLevel {
+	return []ConfidenceLevel{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"NONE",
+	}
+}
+
+type ContentPolicyFilterAction string
+
+// Enum values for ContentPolicyFilterAction
+const (
+	ContentPolicyFilterActionBlocked ContentPolicyFilterAction = "BLOCKED"
+	ContentPolicyFilterActionNone    ContentPolicyFilterAction = "NONE"
+)
+
+// Values returns all known values for ContentPolicyFilterAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentPolicyFilterAction) Values() []ContentPolicyFilterAction {
+	return []ContentPolicyFilterAction{
+		"BLOCKED",
+		"NONE",
+	}
+}
+
+type ContentPolicyFilterType string
+
+// Enum values for ContentPolicyFilterType
+const (
+	ContentPolicyFilterTypePromptAttack ContentPolicyFilterType = "PROMPT_ATTACK"
+	ContentPolicyFilterTypeJailbreak    ContentPolicyFilterType = "JAILBREAK"
+	ContentPolicyFilterTypeHate         ContentPolicyFilterType = "HATE"
+	ContentPolicyFilterTypeInsults      ContentPolicyFilterType = "INSULTS"
+	ContentPolicyFilterTypeSexual       ContentPolicyFilterType = "SEXUAL"
+	ContentPolicyFilterTypeViolence     ContentPolicyFilterType = "VIOLENCE"
+	ContentPolicyFilterTypeMisconduct   ContentPolicyFilterType = "MISCONDUCT"
+)
+
+// Values returns all known values for ContentPolicyFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentPolicyFilterType) Values() []ContentPolicyFilterType {
+	return []ContentPolicyFilterType{
+		"PROMPT_ATTACK",
+		"JAILBREAK",
+		"HATE",
+		"INSULTS",
+		"SEXUAL",
+		"VIOLENCE",
+		"MISCONDUCT",
 	}
 }
 
@@ -269,6 +417,88 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type DetectionRuleConfigurationStatus string
+
+// Enum values for DetectionRuleConfigurationStatus
+const (
+	DetectionRuleConfigurationStatusActive     DetectionRuleConfigurationStatus = "ACTIVE"
+	DetectionRuleConfigurationStatusProcessing DetectionRuleConfigurationStatus = "PROCESSING"
+	DetectionRuleConfigurationStatusFailed     DetectionRuleConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for DetectionRuleConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleConfigurationStatus) Values() []DetectionRuleConfigurationStatus {
+	return []DetectionRuleConfigurationStatus{
+		"ACTIVE",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
+type DetectionRuleDataSource string
+
+// Enum values for DetectionRuleDataSource
+const (
+	DetectionRuleDataSourceCloudtrailManagementEvent DetectionRuleDataSource = "CloudTrailManagementEvent"
+)
+
+// Values returns all known values for DetectionRuleDataSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleDataSource) Values() []DetectionRuleDataSource {
+	return []DetectionRuleDataSource{
+		"CloudTrailManagementEvent",
+	}
+}
+
+type DetectionRuleFilterCondition string
+
+// Enum values for DetectionRuleFilterCondition
+const (
+	DetectionRuleFilterConditionEquals   DetectionRuleFilterCondition = "EQUALS"
+	DetectionRuleFilterConditionContains DetectionRuleFilterCondition = "CONTAINS"
+)
+
+// Values returns all known values for DetectionRuleFilterCondition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleFilterCondition) Values() []DetectionRuleFilterCondition {
+	return []DetectionRuleFilterCondition{
+		"EQUALS",
+		"CONTAINS",
+	}
+}
+
+type DetectionRuleSeverity string
+
+// Enum values for DetectionRuleSeverity
+const (
+	DetectionRuleSeverityCritical DetectionRuleSeverity = "CRITICAL"
+	DetectionRuleSeverityHigh     DetectionRuleSeverity = "HIGH"
+	DetectionRuleSeverityMedium   DetectionRuleSeverity = "MEDIUM"
+	DetectionRuleSeverityLow      DetectionRuleSeverity = "LOW"
+)
+
+// Values returns all known values for DetectionRuleSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleSeverity) Values() []DetectionRuleSeverity {
+	return []DetectionRuleSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type DetectionSource string
 
 // Enum values for DetectionSource
@@ -299,6 +529,8 @@ const (
 	DetectorFeatureLambdaNetworkLogs    DetectorFeature = "LAMBDA_NETWORK_LOGS"
 	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureRuntimeMonitoring    DetectorFeature = "RUNTIME_MONITORING"
+	DetectorFeatureAiProtection         DetectorFeature = "AI_PROTECTION"
+	DetectorFeatureAiAnalyst            DetectorFeature = "AI_ANALYST"
 )
 
 // Values returns all known values for DetectorFeature. Note that this can be
@@ -314,6 +546,8 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
+		"AI_ANALYST",
 	}
 }
 
@@ -331,6 +565,8 @@ const (
 	DetectorFeatureResultLambdaNetworkLogs    DetectorFeatureResult = "LAMBDA_NETWORK_LOGS"
 	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureResultRuntimeMonitoring    DetectorFeatureResult = "RUNTIME_MONITORING"
+	DetectorFeatureResultAiProtection         DetectorFeatureResult = "AI_PROTECTION"
+	DetectorFeatureResultAiAnalyst            DetectorFeatureResult = "AI_ANALYST"
 )
 
 // Values returns all known values for DetectorFeatureResult. Note that this can
@@ -349,6 +585,8 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
+		"AI_ANALYST",
 	}
 }
 
@@ -441,6 +679,9 @@ const (
 	FeatureAdditionalConfigurationEksAddonManagement        FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	FeatureAdditionalConfigurationEcsFargateAgentManagement FeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 	FeatureAdditionalConfigurationEc2AgentManagement        FeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
+	// RDS Data Activity Monitoring, which monitors data activity on supported Amazon
+	// RDS database engines to detect potentially unauthorized access to your data.
+	FeatureAdditionalConfigurationRdsDataRisk FeatureAdditionalConfiguration = "RDS_DATA_RISK"
 )
 
 // Values returns all known values for FeatureAdditionalConfiguration. Note that
@@ -453,6 +694,7 @@ func (FeatureAdditionalConfiguration) Values() []FeatureAdditionalConfiguration 
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
 		"EC2_AGENT_MANAGEMENT",
+		"RDS_DATA_RISK",
 	}
 }
 
@@ -513,6 +755,35 @@ func (FilterAction) Values() []FilterAction {
 	}
 }
 
+type FilterFieldName string
+
+// Enum values for FilterFieldName
+const (
+	FilterFieldNameName        FilterFieldName = "name"
+	FilterFieldNameDescription FilterFieldName = "description"
+	FilterFieldNameDataSource  FilterFieldName = "dataSource"
+	FilterFieldNameSeverity    FilterFieldName = "severity"
+	FilterFieldNameTactic      FilterFieldName = "tactic"
+	FilterFieldNameTechnique   FilterFieldName = "technique"
+	FilterFieldNameService     FilterFieldName = "service"
+)
+
+// Values returns all known values for FilterFieldName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterFieldName) Values() []FilterFieldName {
+	return []FilterFieldName{
+		"name",
+		"description",
+		"dataSource",
+		"severity",
+		"tactic",
+		"technique",
+		"service",
+	}
+}
+
 type FindingPublishingFrequency string
 
 // Enum values for FindingPublishingFrequency
@@ -554,6 +825,28 @@ const (
 	FindingResourceTypeEc2LaunchTemplate           FindingResourceType = "EC2_LAUNCH_TEMPLATE"
 	FindingResourceTypeEc2Vpc                      FindingResourceType = "EC2_VPC"
 	FindingResourceTypeEc2Image                    FindingResourceType = "EC2_IMAGE"
+	// An Amazon Bedrock custom model fine-tuned by the customer.
+	FindingResourceTypeBedrockCustomModel FindingResourceType = "BEDROCK_CUSTOM_MODEL"
+	// An Amazon Bedrock imported model brought in from an external source.
+	FindingResourceTypeBedrockImportedModel FindingResourceType = "BEDROCK_IMPORTED_MODEL"
+	// An Amazon Bedrock model with provisioned throughput.
+	FindingResourceTypeBedrockProvisionedModel FindingResourceType = "BEDROCK_PROVISIONED_MODEL"
+	// A deployment of an Amazon Bedrock custom model.
+	FindingResourceTypeBedrockCustomModelDeployment FindingResourceType = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
+	// An Amazon Bedrock inference profile that routes model invocations across
+	// Regions.
+	FindingResourceTypeBedrockInferenceProfile FindingResourceType = "BEDROCK_INFERENCE_PROFILE"
+	// An application-scoped Amazon Bedrock inference profile used to track invocation
+	// usage.
+	FindingResourceTypeBedrockApplicationInferenceProfile FindingResourceType = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
+	// A managed prompt stored in Amazon Bedrock Prompt Management.
+	FindingResourceTypeBedrockPrompt FindingResourceType = "BEDROCK_PROMPT"
+	// An Amazon Bedrock prompt router that selects a model per request.
+	FindingResourceTypeBedrockPromptRouter FindingResourceType = "BEDROCK_PROMPT_ROUTER"
+	// An Amazon Bedrock guardrail evaluated during a model invocation.
+	FindingResourceTypeBedrockGuardrail FindingResourceType = "BEDROCK_GUARDRAIL"
+	// An Amazon SageMaker inference endpoint.
+	FindingResourceTypeSagemakerEndpoint FindingResourceType = "SAGEMAKER_ENDPOINT"
 )
 
 // Values returns all known values for FindingResourceType. Note that this can be
@@ -578,6 +871,16 @@ func (FindingResourceType) Values() []FindingResourceType {
 		"EC2_LAUNCH_TEMPLATE",
 		"EC2_VPC",
 		"EC2_IMAGE",
+		"BEDROCK_CUSTOM_MODEL",
+		"BEDROCK_IMPORTED_MODEL",
+		"BEDROCK_PROVISIONED_MODEL",
+		"BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+		"BEDROCK_INFERENCE_PROFILE",
+		"BEDROCK_APPLICATION_INFERENCE_PROFILE",
+		"BEDROCK_PROMPT",
+		"BEDROCK_PROMPT_ROUTER",
+		"BEDROCK_GUARDRAIL",
+		"SAGEMAKER_ENDPOINT",
 	}
 }
 
@@ -613,6 +916,7 @@ const (
 	FreeTrialFeatureResultEksRuntimeMonitoring     FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
 	FreeTrialFeatureResultEc2RuntimeMonitoring     FreeTrialFeatureResult = "EC2_RUNTIME_MONITORING"
 	FreeTrialFeatureResultFargateRuntimeMonitoring FreeTrialFeatureResult = "FARGATE_RUNTIME_MONITORING"
+	FreeTrialFeatureResultAiProtection             FreeTrialFeatureResult = "AI_PROTECTION"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -632,6 +936,7 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"EKS_RUNTIME_MONITORING",
 		"EC2_RUNTIME_MONITORING",
 		"FARGATE_RUNTIME_MONITORING",
+		"AI_PROTECTION",
 	}
 }
 
@@ -657,6 +962,44 @@ func (GroupByType) Values() []GroupByType {
 		"FINDING_TYPE",
 		"RESOURCE",
 		"SEVERITY",
+	}
+}
+
+type GuardrailAction string
+
+// Enum values for GuardrailAction
+const (
+	GuardrailActionGuardrailIntervened GuardrailAction = "GUARDRAIL_INTERVENED"
+	GuardrailActionNone                GuardrailAction = "NONE"
+)
+
+// Values returns all known values for GuardrailAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailAction) Values() []GuardrailAction {
+	return []GuardrailAction{
+		"GUARDRAIL_INTERVENED",
+		"NONE",
+	}
+}
+
+type GuardrailSource string
+
+// Enum values for GuardrailSource
+const (
+	GuardrailSourceInput  GuardrailSource = "INPUT"
+	GuardrailSourceOutput GuardrailSource = "OUTPUT"
+)
+
+// Values returns all known values for GuardrailSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailSource) Values() []GuardrailSource {
+	return []GuardrailSource{
+		"INPUT",
+		"OUTPUT",
 	}
 }
 
@@ -716,6 +1059,52 @@ func (IndicatorType) Values() []IndicatorType {
 		"MISCONFIGURATION",
 		"REACHABILITY",
 		"SENSITIVE_DATA",
+	}
+}
+
+type InvestigationSortField string
+
+// Enum values for InvestigationSortField
+const (
+	InvestigationSortFieldStartTime  InvestigationSortField = "START_TIME"
+	InvestigationSortFieldEndTime    InvestigationSortField = "END_TIME"
+	InvestigationSortFieldStatus     InvestigationSortField = "STATUS"
+	InvestigationSortFieldRiskLevel  InvestigationSortField = "RISK_LEVEL"
+	InvestigationSortFieldConfidence InvestigationSortField = "CONFIDENCE"
+)
+
+// Values returns all known values for InvestigationSortField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationSortField) Values() []InvestigationSortField {
+	return []InvestigationSortField{
+		"START_TIME",
+		"END_TIME",
+		"STATUS",
+		"RISK_LEVEL",
+		"CONFIDENCE",
+	}
+}
+
+type InvestigationStatus string
+
+// Enum values for InvestigationStatus
+const (
+	InvestigationStatusRunning   InvestigationStatus = "RUNNING"
+	InvestigationStatusCompleted InvestigationStatus = "COMPLETED"
+	InvestigationStatusFailed    InvestigationStatus = "FAILED"
+)
+
+// Values returns all known values for InvestigationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationStatus) Values() []InvestigationStatus {
+	return []InvestigationStatus{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 
@@ -959,6 +1348,23 @@ func (MalwareProtectionScanType) Values() []MalwareProtectionScanType {
 	}
 }
 
+type ManagedBy string
+
+// Enum values for ManagedBy
+const (
+	ManagedByGuarddutyPolicy ManagedBy = "GUARDDUTY_POLICY"
+)
+
+// Values returns all known values for ManagedBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedBy) Values() []ManagedBy {
+	return []ManagedBy{
+		"GUARDDUTY_POLICY",
+	}
+}
+
 type ManagementType string
 
 // Enum values for ManagementType
@@ -1048,6 +1454,7 @@ const (
 	OrgFeatureLambdaNetworkLogs    OrgFeature = "LAMBDA_NETWORK_LOGS"
 	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 	OrgFeatureRuntimeMonitoring    OrgFeature = "RUNTIME_MONITORING"
+	OrgFeatureAiProtection         OrgFeature = "AI_PROTECTION"
 )
 
 // Values returns all known values for OrgFeature. Note that this can be expanded
@@ -1063,6 +1470,7 @@ func (OrgFeature) Values() []OrgFeature {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
 	}
 }
 
@@ -1073,6 +1481,9 @@ const (
 	OrgFeatureAdditionalConfigurationEksAddonManagement        OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	OrgFeatureAdditionalConfigurationEcsFargateAgentManagement OrgFeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
 	OrgFeatureAdditionalConfigurationEc2AgentManagement        OrgFeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
+	// RDS Data Activity Monitoring, which monitors data activity on supported Amazon
+	// RDS database engines to detect potentially unauthorized access to your data.
+	OrgFeatureAdditionalConfigurationRdsDataRisk OrgFeatureAdditionalConfiguration = "RDS_DATA_RISK"
 )
 
 // Values returns all known values for OrgFeatureAdditionalConfiguration. Note
@@ -1085,6 +1496,7 @@ func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfigur
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
 		"EC2_AGENT_MANAGEMENT",
+		"RDS_DATA_RISK",
 	}
 }
 
@@ -1117,6 +1529,8 @@ const (
 	ProfileSubtypeInfrequent ProfileSubtype = "INFREQUENT"
 	ProfileSubtypeUnseen     ProfileSubtype = "UNSEEN"
 	ProfileSubtypeRare       ProfileSubtype = "RARE"
+	ProfileSubtypeCount      ProfileSubtype = "COUNT"
+	ProfileSubtypeAverage    ProfileSubtype = "AVERAGE"
 )
 
 // Values returns all known values for ProfileSubtype. Note that this can be
@@ -1129,6 +1543,8 @@ func (ProfileSubtype) Values() []ProfileSubtype {
 		"INFREQUENT",
 		"UNSEEN",
 		"RARE",
+		"COUNT",
+		"AVERAGE",
 	}
 }
 
@@ -1137,6 +1553,7 @@ type ProfileType string
 // Enum values for ProfileType
 const (
 	ProfileTypeFrequency ProfileType = "FREQUENCY"
+	ProfileTypeVolume    ProfileType = "VOLUME"
 )
 
 // Values returns all known values for ProfileType. Note that this can be expanded
@@ -1146,6 +1563,7 @@ const (
 func (ProfileType) Values() []ProfileType {
 	return []ProfileType{
 		"FREQUENCY",
+		"VOLUME",
 	}
 }
 
@@ -1248,6 +1666,65 @@ func (ResourceType) Values() []ResourceType {
 		"EKS",
 		"ECS",
 		"EC2",
+	}
+}
+
+type RiskLevel string
+
+// Enum values for RiskLevel
+const (
+	RiskLevelInfo     RiskLevel = "Info"
+	RiskLevelLow      RiskLevel = "Low"
+	RiskLevelMedium   RiskLevel = "Medium"
+	RiskLevelHigh     RiskLevel = "High"
+	RiskLevelCritical RiskLevel = "Critical"
+)
+
+// Values returns all known values for RiskLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RiskLevel) Values() []RiskLevel {
+	return []RiskLevel{
+		"Info",
+		"Low",
+		"Medium",
+		"High",
+		"Critical",
+	}
+}
+
+type RuleLanguage string
+
+// Enum values for RuleLanguage
+const (
+	RuleLanguageSql RuleLanguage = "SQL"
+)
+
+// Values returns all known values for RuleLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleLanguage) Values() []RuleLanguage {
+	return []RuleLanguage{
+		"SQL",
+	}
+}
+
+type RuleSchema string
+
+// Enum values for RuleSchema
+const (
+	RuleSchemaCloudTrail RuleSchema = "CloudTrail"
+)
+
+// Values returns all known values for RuleSchema. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleSchema) Values() []RuleSchema {
+	return []RuleSchema{
+		"CloudTrail",
 	}
 }
 
@@ -1649,6 +2126,19 @@ const (
 	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
 	UsageFeatureRdsDbiProtectionProvisioned UsageFeature = "RDS_DBI_PROTECTION_PROVISIONED"
 	UsageFeatureRdsDbiProtectionServerless  UsageFeature = "RDS_DBI_PROTECTION_SERVERLESS"
+	// Usage attributed to RDS Protection database infrastructure monitoring for
+	// Amazon Aurora DSQL Limitless databases.
+	UsageFeatureRdsDbiProtectionLimitless UsageFeature = "RDS_DBI_PROTECTION_LIMITLESS"
+	// Usage attributed to RDS Data Activity Monitoring for provisioned Amazon RDS
+	// databases.
+	UsageFeatureRdsDataActivityDbiProtectionProvisioned UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED"
+	// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora Serverless
+	// databases.
+	UsageFeatureRdsDataActivityDbiProtectionServerless UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS"
+	// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL
+	// Limitless databases.
+	UsageFeatureRdsDataActivityDbiProtectionLimitless UsageFeature = "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS"
+	UsageFeatureAiProtection                          UsageFeature = "AI_PROTECTION"
 )
 
 // Values returns all known values for UsageFeature. Note that this can be
@@ -1670,6 +2160,11 @@ func (UsageFeature) Values() []UsageFeature {
 		"FARGATE_RUNTIME_MONITORING",
 		"RDS_DBI_PROTECTION_PROVISIONED",
 		"RDS_DBI_PROTECTION_SERVERLESS",
+		"RDS_DBI_PROTECTION_LIMITLESS",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS",
+		"RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS",
+		"AI_PROTECTION",
 	}
 }
 

@@ -6,12 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -58,6 +57,21 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityAuditReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityAuditReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityAuditReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportId != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportRequest_AuditReportId, *v.AuditReportId)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+
 type DescribeCertificateAuthorityAuditReportOutput struct {
 
 	// Specifies whether report creation is in progress, has succeeded, or has failed.
@@ -78,77 +92,70 @@ type DescribeCertificateAuthorityAuditReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityAuditReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityAuditReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityAuditReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportStatus != "" {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus, string(v.AuditReportStatus))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key, *v.S3Key)
+	}
+}
+func (v *DescribeCertificateAuthorityAuditReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCertificateAuthorityAuditReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus, &ev); err != nil {
+				return err
+			}
+			v.AuditReportStatus = types.AuditReportStatus(ev)
+			return nil
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName, v.S3BucketName)
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key, v.S3Key)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthorityAuditReport, schemas.DescribeCertificateAuthorityAuditReportRequest, schemas.DescribeCertificateAuthorityAuditReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthorityAuditReport, schemas.DescribeCertificateAuthorityAuditReportRequest, schemas.DescribeCertificateAuthorityAuditReportResponse), output: &DescribeCertificateAuthorityAuditReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCertificateAuthorityAuditReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCertificateAuthorityAuditReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCertificateAuthorityAuditReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +168,6 @@ func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -379,11 +380,3 @@ type DescribeCertificateAuthorityAuditReportAPIClient interface {
 }
 
 var _ DescribeCertificateAuthorityAuditReportAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeCertificateAuthorityAuditReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCertificateAuthorityAuditReport",
-	}
-}

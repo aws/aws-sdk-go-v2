@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/policy/detach
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"ObjectReference":{"Selector":"__Selector__"},"PolicyReference":{"Selector":"__Selector__"}}

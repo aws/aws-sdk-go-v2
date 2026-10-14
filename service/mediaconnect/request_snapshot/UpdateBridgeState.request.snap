@@ -1,0 +1,5 @@
+PUT /v1/bridges/__BridgeArn__/state
+
+Content-Type: application/json
+
+{"desiredState":"ACTIVE"}

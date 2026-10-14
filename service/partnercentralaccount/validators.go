@@ -310,6 +310,66 @@ func (m *validateOpGetProfileVisibility) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQualificationsAssociationDetails struct {
+}
+
+func (*validateOpGetQualificationsAssociationDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQualificationsAssociationDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQualificationsAssociationDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQualificationsAssociationDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQualificationsAssociationTask struct {
+}
+
+func (*validateOpGetQualificationsAssociationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQualificationsAssociationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQualificationsAssociationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQualificationsAssociationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQualificationsDisassociationTask struct {
+}
+
+func (*validateOpGetQualificationsDisassociationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQualificationsDisassociationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQualificationsDisassociationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQualificationsDisassociationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetVerification struct {
 }
 
@@ -510,6 +570,46 @@ func (m *validateOpStartProfileUpdateTask) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartQualificationsAssociationTask struct {
+}
+
+func (*validateOpStartQualificationsAssociationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQualificationsAssociationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQualificationsAssociationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQualificationsAssociationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartQualificationsDisassociationTask struct {
+}
+
+func (*validateOpStartQualificationsDisassociationTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQualificationsDisassociationTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQualificationsDisassociationTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQualificationsDisassociationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartVerification struct {
 }
 
@@ -650,6 +750,18 @@ func addOpGetProfileVisibilityValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetProfileVisibility{}, middleware.After)
 }
 
+func addOpGetQualificationsAssociationDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQualificationsAssociationDetails{}, middleware.After)
+}
+
+func addOpGetQualificationsAssociationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQualificationsAssociationTask{}, middleware.After)
+}
+
+func addOpGetQualificationsDisassociationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQualificationsDisassociationTask{}, middleware.After)
+}
+
 func addOpGetVerificationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVerification{}, middleware.After)
 }
@@ -688,6 +800,14 @@ func addOpSendEmailVerificationCodeValidationMiddleware(stack *middleware.Stack)
 
 func addOpStartProfileUpdateTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartProfileUpdateTask{}, middleware.After)
+}
+
+func addOpStartQualificationsAssociationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQualificationsAssociationTask{}, middleware.After)
+}
+
+func addOpStartQualificationsDisassociationTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQualificationsDisassociationTask{}, middleware.After)
 }
 
 func addOpStartVerificationValidationMiddleware(stack *middleware.Stack) error {
@@ -743,6 +863,24 @@ func validateBusinessVerificationDetails(v *types.BusinessVerificationDetails) e
 	}
 	if v.CountryCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHeadquarters(v *types.Headquarters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Headquarters"}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if v.SubdivisionCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdivisionCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -859,6 +997,11 @@ func validateTaskDetails(v *types.TaskDetails) error {
 	if v.LocalizedContents != nil {
 		if err := validateLocalizedContentList(v.LocalizedContents); err != nil {
 			invalidParams.AddNested("LocalizedContents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Headquarters != nil {
+		if err := validateHeadquarters(v.Headquarters); err != nil {
+			invalidParams.AddNested("Headquarters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1214,6 +1357,60 @@ func validateOpGetProfileVisibilityInput(v *GetProfileVisibilityInput) error {
 	}
 }
 
+func validateOpGetQualificationsAssociationDetailsInput(v *GetQualificationsAssociationDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQualificationsAssociationDetailsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQualificationsAssociationTaskInput(v *GetQualificationsAssociationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQualificationsAssociationTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQualificationsDisassociationTaskInput(v *GetQualificationsDisassociationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQualificationsDisassociationTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVerificationInput(v *GetVerificationInput) error {
 	if v == nil {
 		return nil
@@ -1391,6 +1588,48 @@ func validateOpStartProfileUpdateTaskInput(v *StartProfileUpdateTaskInput) error
 		if err := validateTaskDetails(v.TaskDetails); err != nil {
 			invalidParams.AddNested("TaskDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartQualificationsAssociationTaskInput(v *StartQualificationsAssociationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQualificationsAssociationTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.PrimaryPartner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryPartner"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartQualificationsDisassociationTaskInput(v *StartQualificationsDisassociationTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQualificationsDisassociationTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AssociatedPartner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedPartner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

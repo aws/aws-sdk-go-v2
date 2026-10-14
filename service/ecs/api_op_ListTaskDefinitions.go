@@ -5,10 +5,10 @@ package ecs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of task definitions that are registered to your account. You can
@@ -73,6 +73,30 @@ type ListTaskDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FamilyPrefix != nil {
+		s.WriteString(schemas.ListTaskDefinitionsRequest_familyPrefix, *v.FamilyPrefix)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaskDefinitionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskDefinitionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Sort != "" {
+		s.WriteString(schemas.ListTaskDefinitionsRequest_sort, string(v.Sort))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTaskDefinitionsRequest_status, string(v.Status))
+	}
+}
+
 type ListTaskDefinitionsOutput struct {
 
 	// The nextToken value to include in a future ListTaskDefinitions request. When
@@ -91,74 +115,48 @@ type ListTaskDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskDefinitionsResponse_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListTaskDefinitionsResponse_taskDefinitionArns, v.TaskDefinitionArns)
+}
+func (v *ListTaskDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaskDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaskDefinitionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaskDefinitionsResponse_nextToken, v.NextToken)
+		case schemas.ListTaskDefinitionsResponse_taskDefinitionArns:
+			return deserializeStringList(d, schemas.ListTaskDefinitionsResponse_taskDefinitionArns, &v.TaskDefinitionArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskDefinitions, schemas.ListTaskDefinitionsRequest, schemas.ListTaskDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTaskDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskDefinitions, schemas.ListTaskDefinitionsRequest, schemas.ListTaskDefinitionsResponse), output: &ListTaskDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTaskDefinitions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTaskDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTaskDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +169,6 @@ func (c *Client) addOperationListTaskDefinitionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -285,11 +277,3 @@ type ListTaskDefinitionsAPIClient interface {
 }
 
 var _ ListTaskDefinitionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTaskDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTaskDefinitions",
-	}
-}

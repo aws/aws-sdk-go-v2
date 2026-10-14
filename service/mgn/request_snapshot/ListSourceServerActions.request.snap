@@ -1,0 +1,5 @@
+POST /ListSourceServerActions
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","filters":{"actionIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__","sourceServerID":"__SourceServerID__"}

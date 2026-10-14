@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.ListDiscoveredResources
+
+{"MaxResults":1,"MigrationTaskName":"__MigrationTaskName__","NextToken":"__NextToken__","ProgressUpdateStream":"__ProgressUpdateStream__"}

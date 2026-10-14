@@ -4,13 +4,8 @@ package qapps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -78,36 +73,6 @@ type CreatePresignedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePresignedUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePresignedUrlInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePresignedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_appId, *v.AppId)
-	}
-	if v.CardId != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_cardId, *v.CardId)
-	}
-	if v.FileContentsSha256 != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_fileContentsSha256, *v.FileContentsSha256)
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_fileName, *v.FileName)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_instanceId, *v.InstanceId)
-	}
-	if v.Scope != "" {
-		s.WriteString(schemas.CreatePresignedUrlInput_scope, string(v.Scope))
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.CreatePresignedUrlInput_sessionId, *v.SessionId)
-	}
-}
-
 type CreatePresignedUrlOutput struct {
 
 	// The unique identifier assigned to the file to be uploaded.
@@ -137,93 +102,29 @@ type CreatePresignedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePresignedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePresignedUrlOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePresignedUrlOutput_fileId:
-			v.FileId = new(string)
-			return d.ReadString(schemas.CreatePresignedUrlOutput_fileId, v.FileId)
-		case schemas.CreatePresignedUrlOutput_presignedUrl:
-			v.PresignedUrl = new(string)
-			return d.ReadString(schemas.CreatePresignedUrlOutput_presignedUrl, v.PresignedUrl)
-		case schemas.CreatePresignedUrlOutput_presignedUrlExpiration:
-			v.PresignedUrlExpiration = new(time.Time)
-			return d.ReadTime(schemas.CreatePresignedUrlOutput_presignedUrlExpiration, v.PresignedUrlExpiration)
-		case schemas.CreatePresignedUrlOutput_presignedUrlFields:
-			return deserializePresignedUrlFields(d, schemas.CreatePresignedUrlOutput_presignedUrlFields, &v.PresignedUrlFields)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePresignedUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedUrl, schemas.CreatePresignedUrlInput, schemas.CreatePresignedUrlOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePresignedUrl{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedUrl, schemas.CreatePresignedUrlInput, schemas.CreatePresignedUrlOutput), output: &CreatePresignedUrlOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePresignedUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePresignedUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -238,22 +139,8 @@ func (c *Client) addOperationCreatePresignedUrlMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePresignedUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePresignedUrl",
-	}
 }

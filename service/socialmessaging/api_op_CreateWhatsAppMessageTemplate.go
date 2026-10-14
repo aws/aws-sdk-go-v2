@@ -4,12 +4,7 @@ package socialmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new WhatsApp message template from a custom definition.
@@ -46,21 +41,6 @@ type CreateWhatsAppMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWhatsAppMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWhatsAppMessageTemplateInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWhatsAppMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.CreateWhatsAppMessageTemplateInput_id, *v.Id)
-	}
-	if v.TemplateDefinition != nil {
-		s.WriteBlob(schemas.CreateWhatsAppMessageTemplateInput_templateDefinition, v.TemplateDefinition)
-	}
-}
-
 type CreateWhatsAppMessageTemplateOutput struct {
 
 	// The category of the template, such as UTILITY or MARKETING.
@@ -78,91 +58,29 @@ type CreateWhatsAppMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWhatsAppMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWhatsAppMessageTemplateOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWhatsAppMessageTemplateOutput_category:
-			v.Category = new(string)
-			return d.ReadString(schemas.CreateWhatsAppMessageTemplateOutput_category, v.Category)
-		case schemas.CreateWhatsAppMessageTemplateOutput_metaTemplateId:
-			v.MetaTemplateId = new(string)
-			return d.ReadString(schemas.CreateWhatsAppMessageTemplateOutput_metaTemplateId, v.MetaTemplateId)
-		case schemas.CreateWhatsAppMessageTemplateOutput_templateStatus:
-			v.TemplateStatus = new(string)
-			return d.ReadString(schemas.CreateWhatsAppMessageTemplateOutput_templateStatus, v.TemplateStatus)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWhatsAppMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWhatsAppMessageTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplate, schemas.CreateWhatsAppMessageTemplateInput, schemas.CreateWhatsAppMessageTemplateOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWhatsAppMessageTemplate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplate, schemas.CreateWhatsAppMessageTemplateInput, schemas.CreateWhatsAppMessageTemplateOutput), output: &CreateWhatsAppMessageTemplateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWhatsAppMessageTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWhatsAppMessageTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWhatsAppMessageTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +95,8 @@ func (c *Client) addOperationCreateWhatsAppMessageTemplateMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWhatsAppMessageTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWhatsAppMessageTemplate",
-	}
 }

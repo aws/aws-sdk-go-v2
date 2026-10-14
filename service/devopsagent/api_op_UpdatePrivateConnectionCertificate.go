@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,21 +43,6 @@ type UpdatePrivateConnectionCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePrivateConnectionCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePrivateConnectionCertificateInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePrivateConnectionCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Certificate != nil {
-		s.WriteString(schemas.UpdatePrivateConnectionCertificateInput_certificate, *v.Certificate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdatePrivateConnectionCertificateInput_name, *v.Name)
-	}
-}
-
 // Output containing the updated Private Connection summary.
 type UpdatePrivateConnectionCertificateOutput struct {
 
@@ -82,6 +64,13 @@ type UpdatePrivateConnectionCertificateOutput struct {
 	// The expiry time of the certificate associated with the Private Connection. Only
 	// present when a certificate is associated.
 	CertificateExpiryTime *time.Time
+
+	// DNS resolution mode for the Private Connection's resource gateway.
+	DnsResolution types.ResourceConfigDnsResolution
+
+	// Message describing the reason for a failed Private Connection update, if
+	// applicable.
+	FailureMessage *string
 
 	// IP address or DNS name of the target resource. Only present for service-managed
 	// Private Connections.
@@ -105,102 +94,23 @@ type UpdatePrivateConnectionCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePrivateConnectionCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePrivateConnectionCertificateOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePrivateConnectionCertificateOutput_certificateExpiryTime:
-			v.CertificateExpiryTime = new(time.Time)
-			return d.ReadTime(schemas.UpdatePrivateConnectionCertificateOutput_certificateExpiryTime, v.CertificateExpiryTime)
-		case schemas.UpdatePrivateConnectionCertificateOutput_hostAddress:
-			v.HostAddress = new(string)
-			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_hostAddress, v.HostAddress)
-		case schemas.UpdatePrivateConnectionCertificateOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_name, v.Name)
-		case schemas.UpdatePrivateConnectionCertificateOutput_resourceConfigurationId:
-			v.ResourceConfigurationId = new(string)
-			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_resourceConfigurationId, v.ResourceConfigurationId)
-		case schemas.UpdatePrivateConnectionCertificateOutput_resourceGatewayId:
-			v.ResourceGatewayId = new(string)
-			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_resourceGatewayId, v.ResourceGatewayId)
-		case schemas.UpdatePrivateConnectionCertificateOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PrivateConnectionStatus(ev)
-			return nil
-		case schemas.UpdatePrivateConnectionCertificateOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.PrivateConnectionType(ev)
-			return nil
-		case schemas.UpdatePrivateConnectionCertificateOutput_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.UpdatePrivateConnectionCertificateOutput_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePrivateConnectionCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePrivateConnectionCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateConnectionCertificate, schemas.UpdatePrivateConnectionCertificateInput, schemas.UpdatePrivateConnectionCertificateOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePrivateConnectionCertificate{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateConnectionCertificate, schemas.UpdatePrivateConnectionCertificateInput, schemas.UpdatePrivateConnectionCertificateOutput), output: &UpdatePrivateConnectionCertificateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePrivateConnectionCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -210,12 +120,6 @@ func (c *Client) addOperationUpdatePrivateConnectionCertificateMiddlewares(stack
 		return err
 	}
 	if err = addOpUpdatePrivateConnectionCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrivateConnectionCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,12 +132,6 @@ func (c *Client) addOperationUpdatePrivateConnectionCertificateMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,12 +165,4 @@ func (m *endpointPrefix_opUpdatePrivateConnectionCertificateMiddleware) HandleFi
 }
 func addEndpointPrefix_opUpdatePrivateConnectionCertificateMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdatePrivateConnectionCertificateMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdatePrivateConnectionCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePrivateConnectionCertificate",
-	}
 }

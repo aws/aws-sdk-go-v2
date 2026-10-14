@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","scraperId":"__ScraperId__","status":{"statusCode":"CREATING"},"tags":{"key0":"__Value__"}}

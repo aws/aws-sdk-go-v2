@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.GetEventPredictionMetadata
+
+{"detectorId":"__DetectorId__","detectorVersionId":"__DetectorVersionId__","eventId":"__EventId__","eventTypeName":"__EventTypeName__","predictionTimestamp":"__PredictionTimestamp__"}

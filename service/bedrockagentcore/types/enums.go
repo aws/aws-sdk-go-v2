@@ -193,6 +193,34 @@ func (BrowserSessionStatus) Values() []BrowserSessionStatus {
 	}
 }
 
+type CapacityProviderSessionStatus string
+
+// Enum values for CapacityProviderSessionStatus
+const (
+	CapacityProviderSessionStatusProvisioning   CapacityProviderSessionStatus = "Provisioning"
+	CapacityProviderSessionStatusDeprovisioning CapacityProviderSessionStatus = "Deprovisioning"
+	CapacityProviderSessionStatusActive         CapacityProviderSessionStatus = "Active"
+	CapacityProviderSessionStatusDeleting       CapacityProviderSessionStatus = "Deleting"
+	CapacityProviderSessionStatusDeleted        CapacityProviderSessionStatus = "Deleted"
+	CapacityProviderSessionStatusStopped        CapacityProviderSessionStatus = "Stopped"
+)
+
+// Values returns all known values for CapacityProviderSessionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityProviderSessionStatus) Values() []CapacityProviderSessionStatus {
+	return []CapacityProviderSessionStatus{
+		"Provisioning",
+		"Deprovisioning",
+		"Active",
+		"Deleting",
+		"Deleted",
+		"Stopped",
+	}
+}
+
 type CloudWatchLogsFilterOperator string
 
 // Enum values for CloudWatchLogsFilterOperator
@@ -380,6 +408,23 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type ExtractionMode string
+
+// Enum values for ExtractionMode
+const (
+	ExtractionModeSkip ExtractionMode = "SKIP"
+)
+
+// Values returns all known values for ExtractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractionMode) Values() []ExtractionMode {
+	return []ExtractionMode{
+		"SKIP",
+	}
+}
+
 type HarnessBedrockApiFormat string
 
 // Enum values for HarnessBedrockApiFormat
@@ -423,6 +468,48 @@ func (HarnessConversationRole) Values() []HarnessConversationRole {
 	}
 }
 
+type HarnessHookDecision string
+
+// Enum values for HarnessHookDecision
+const (
+	HarnessHookDecisionAllow HarnessHookDecision = "allow"
+	HarnessHookDecisionDeny  HarnessHookDecision = "deny"
+)
+
+// Values returns all known values for HarnessHookDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookDecision) Values() []HarnessHookDecision {
+	return []HarnessHookDecision{
+		"allow",
+		"deny",
+	}
+}
+
+type HarnessHookEventType string
+
+// Enum values for HarnessHookEventType
+const (
+	HarnessHookEventTypeBeforeToolCall   HarnessHookEventType = "before_tool_call"
+	HarnessHookEventTypeAfterToolCall    HarnessHookEventType = "after_tool_call"
+	HarnessHookEventTypeBeforeInvocation HarnessHookEventType = "before_invocation"
+	HarnessHookEventTypeAfterInvocation  HarnessHookEventType = "after_invocation"
+)
+
+// Values returns all known values for HarnessHookEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookEventType) Values() []HarnessHookEventType {
+	return []HarnessHookEventType{
+		"before_tool_call",
+		"after_tool_call",
+		"before_invocation",
+		"after_invocation",
+	}
+}
+
 type HarnessOpenAiApiFormat string
 
 // Enum values for HarnessOpenAiApiFormat
@@ -462,6 +549,7 @@ const (
 	HarnessStopReasonMaxIterationsExceeded      HarnessStopReason = "max_iterations_exceeded"
 	HarnessStopReasonMaxOutputTokensExceeded    HarnessStopReason = "max_output_tokens_exceeded"
 	HarnessStopReasonTimeoutExceeded            HarnessStopReason = "timeout_exceeded"
+	HarnessStopReasonHookStopped                HarnessStopReason = "hook_stopped"
 )
 
 // Values returns all known values for HarnessStopReason. Note that this can be
@@ -484,6 +572,7 @@ func (HarnessStopReason) Values() []HarnessStopReason {
 		"max_iterations_exceeded",
 		"max_output_tokens_exceeded",
 		"timeout_exceeded",
+		"hook_stopped",
 	}
 }
 
@@ -549,6 +638,89 @@ func (HarnessToolUseType) Values() []HarnessToolUseType {
 		"tool_use",
 		"server_tool_use",
 		"mcp_tool_use",
+	}
+}
+
+type InsightsFailureCategory string
+
+// Enum values for InsightsFailureCategory
+const (
+	InsightsFailureCategoryExecutionErrorAuthentication             InsightsFailureCategory = "execution-error-category-authentication"
+	InsightsFailureCategoryExecutionErrorResourceNotFound           InsightsFailureCategory = "execution-error-category-resource-not-found"
+	InsightsFailureCategoryExecutionErrorServiceErrors              InsightsFailureCategory = "execution-error-category-service-errors"
+	InsightsFailureCategoryExecutionErrorRateLimiting               InsightsFailureCategory = "execution-error-category-rate-limiting"
+	InsightsFailureCategoryExecutionErrorFormatting                 InsightsFailureCategory = "execution-error-category-formatting"
+	InsightsFailureCategoryExecutionErrorTimeout                    InsightsFailureCategory = "execution-error-category-timeout"
+	InsightsFailureCategoryExecutionErrorResourceExhaustion         InsightsFailureCategory = "execution-error-category-resource-exhaustion"
+	InsightsFailureCategoryExecutionErrorEnvironment                InsightsFailureCategory = "execution-error-category-environment"
+	InsightsFailureCategoryExecutionErrorToolSchema                 InsightsFailureCategory = "execution-error-category-tool-schema"
+	InsightsFailureCategoryTaskInstructionNonCompliance             InsightsFailureCategory = "task-instruction-category-non-compliance"
+	InsightsFailureCategoryTaskInstructionProblemId                 InsightsFailureCategory = "task-instruction-category-problem-id"
+	InsightsFailureCategoryIncorrectActionsToolSelection            InsightsFailureCategory = "incorrect-actions-category-tool-selection"
+	InsightsFailureCategoryIncorrectActionsPoorInformationRetrieval InsightsFailureCategory = "incorrect-actions-category-poor-information-retrieval"
+	InsightsFailureCategoryIncorrectActionsClarification            InsightsFailureCategory = "incorrect-actions-category-clarification"
+	InsightsFailureCategoryIncorrectActionsInappropriateInfoRequest InsightsFailureCategory = "incorrect-actions-category-inappropriate-info-request"
+	InsightsFailureCategoryContextHandlingFailures                  InsightsFailureCategory = "context-handling-error-category-context-handling-failures"
+	InsightsFailureCategoryHallucinationCapabilities                InsightsFailureCategory = "hallucination-category-hall-capabilities"
+	InsightsFailureCategoryHallucinationMisunderstand               InsightsFailureCategory = "hallucination-category-hall-misunderstand"
+	InsightsFailureCategoryHallucinationUsage                       InsightsFailureCategory = "hallucination-category-hall-usage"
+	InsightsFailureCategoryHallucinationHistory                     InsightsFailureCategory = "hallucination-category-hall-history"
+	InsightsFailureCategoryHallucinationParams                      InsightsFailureCategory = "hallucination-category-hall-params"
+	InsightsFailureCategoryHallucinationFabricateToolOutputs        InsightsFailureCategory = "hallucination-category-fabricate-tool-outputs"
+	InsightsFailureCategoryRepetitiveBehaviorTool                   InsightsFailureCategory = "repetitive-behavior-category-repetition-tool"
+	InsightsFailureCategoryRepetitiveBehaviorInfo                   InsightsFailureCategory = "repetitive-behavior-category-repetition-info"
+	InsightsFailureCategoryRepetitiveBehaviorStep                   InsightsFailureCategory = "repetitive-behavior-category-step-repetition"
+	InsightsFailureCategoryOrchestrationReasoningMismatch           InsightsFailureCategory = "orchestration-related-errors-category-reasoning-mismatch"
+	InsightsFailureCategoryOrchestrationGoalDeviation               InsightsFailureCategory = "orchestration-related-errors-category-goal-deviation"
+	InsightsFailureCategoryOrchestrationPrematureTermination        InsightsFailureCategory = "orchestration-related-errors-category-premature-termination"
+	InsightsFailureCategoryOrchestrationUnawareTermination          InsightsFailureCategory = "orchestration-related-errors-category-unaware-termination"
+	InsightsFailureCategoryLlmOutputNonsensical                     InsightsFailureCategory = "llm-output-category-nonsensical"
+	InsightsFailureCategoryConfigurationMismatchToolDefinition      InsightsFailureCategory = "configuration-mismatch-category-tool-definition"
+	InsightsFailureCategoryCodingEdgeCaseOversights                 InsightsFailureCategory = "coding-use-case-specific-failure-types-category-edge-case-oversights"
+	InsightsFailureCategoryCodingDependencyIssues                   InsightsFailureCategory = "coding-use-case-specific-failure-types-category-dependency-issues"
+	InsightsFailureCategoryOther                                    InsightsFailureCategory = "other"
+)
+
+// Values returns all known values for InsightsFailureCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsFailureCategory) Values() []InsightsFailureCategory {
+	return []InsightsFailureCategory{
+		"execution-error-category-authentication",
+		"execution-error-category-resource-not-found",
+		"execution-error-category-service-errors",
+		"execution-error-category-rate-limiting",
+		"execution-error-category-formatting",
+		"execution-error-category-timeout",
+		"execution-error-category-resource-exhaustion",
+		"execution-error-category-environment",
+		"execution-error-category-tool-schema",
+		"task-instruction-category-non-compliance",
+		"task-instruction-category-problem-id",
+		"incorrect-actions-category-tool-selection",
+		"incorrect-actions-category-poor-information-retrieval",
+		"incorrect-actions-category-clarification",
+		"incorrect-actions-category-inappropriate-info-request",
+		"context-handling-error-category-context-handling-failures",
+		"hallucination-category-hall-capabilities",
+		"hallucination-category-hall-misunderstand",
+		"hallucination-category-hall-usage",
+		"hallucination-category-hall-history",
+		"hallucination-category-hall-params",
+		"hallucination-category-fabricate-tool-outputs",
+		"repetitive-behavior-category-repetition-tool",
+		"repetitive-behavior-category-repetition-info",
+		"repetitive-behavior-category-step-repetition",
+		"orchestration-related-errors-category-reasoning-mismatch",
+		"orchestration-related-errors-category-goal-deviation",
+		"orchestration-related-errors-category-premature-termination",
+		"orchestration-related-errors-category-unaware-termination",
+		"llm-output-category-nonsensical",
+		"configuration-mismatch-category-tool-definition",
+		"coding-use-case-specific-failure-types-category-edge-case-oversights",
+		"coding-use-case-specific-failure-types-category-dependency-issues",
+		"other",
 	}
 }
 
@@ -761,6 +933,7 @@ const (
 	PaymentInstrumentStatusActive    PaymentInstrumentStatus = "ACTIVE"
 	PaymentInstrumentStatusFailed    PaymentInstrumentStatus = "FAILED"
 	PaymentInstrumentStatusDeleted   PaymentInstrumentStatus = "DELETED"
+	PaymentInstrumentStatusBlocked   PaymentInstrumentStatus = "BLOCKED"
 )
 
 // Values returns all known values for PaymentInstrumentStatus. Note that this can
@@ -773,6 +946,7 @@ func (PaymentInstrumentStatus) Values() []PaymentInstrumentStatus {
 		"ACTIVE",
 		"FAILED",
 		"DELETED",
+		"BLOCKED",
 	}
 }
 
@@ -836,6 +1010,7 @@ type PaymentType string
 // Enum values for PaymentType
 const (
 	PaymentTypeCryptoX402 PaymentType = "CRYPTO_X402"
+	PaymentTypeMpp        PaymentType = "MPP"
 )
 
 // Values returns all known values for PaymentType. Note that this can be expanded
@@ -845,6 +1020,7 @@ const (
 func (PaymentType) Values() []PaymentType {
 	return []PaymentType{
 		"CRYPTO_X402",
+		"MPP",
 	}
 }
 
@@ -913,6 +1089,23 @@ func (RecommendationType) Values() []RecommendationType {
 	}
 }
 
+type RecordExpiryAction string
+
+// Enum values for RecordExpiryAction
+const (
+	RecordExpiryActionRemove RecordExpiryAction = "REMOVE"
+)
+
+// Values returns all known values for RecordExpiryAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordExpiryAction) Values() []RecordExpiryAction {
+	return []RecordExpiryAction{
+		"REMOVE",
+	}
+}
+
 type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
@@ -954,6 +1147,25 @@ func (ResourceContentType) Values() []ResourceContentType {
 	return []ResourceContentType{
 		"text",
 		"blob",
+	}
+}
+
+type ResultDestination string
+
+// Enum values for ResultDestination
+const (
+	ResultDestinationDedicatedLogGroup ResultDestination = "DEDICATED_LOG_GROUP"
+	ResultDestinationSourceLogGroup    ResultDestination = "SOURCE_LOG_GROUP"
+)
+
+// Values returns all known values for ResultDestination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultDestination) Values() []ResultDestination {
+	return []ResultDestination{
+		"DEDICATED_LOG_GROUP",
+		"SOURCE_LOG_GROUP",
 	}
 }
 

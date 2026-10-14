@@ -1,0 +1,5 @@
+POST /list-asset-contracts
+
+Content-Type: application/json
+
+{"contractFilter":{"deployerAddress":"__DeployerAddress__","network":"ETHEREUM_MAINNET","tokenStandard":"ERC20"},"maxResults":1,"nextToken":"__NextToken__"}

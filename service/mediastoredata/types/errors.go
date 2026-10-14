@@ -33,6 +33,17 @@ func (e *ContainerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ContainerNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ContainerNotFoundException_Message, *v.Message)
+	}
+}
 func (v *ContainerNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainerNotFoundException, func(s *smithy.Schema) error {
 		switch s {
@@ -69,6 +80,17 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_Message, *v.Message)
+	}
+}
 func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
 		switch s {
@@ -105,6 +127,17 @@ func (e *ObjectNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ObjectNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ObjectNotFoundException_Message, *v.Message)
+	}
+}
 func (v *ObjectNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ObjectNotFoundException, func(s *smithy.Schema) error {
 		switch s {
@@ -142,6 +175,17 @@ func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *RequestedRangeNotSatisfiableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedRangeNotSatisfiableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestedRangeNotSatisfiableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestedRangeNotSatisfiableException_Message, *v.Message)
+	}
 }
 func (v *RequestedRangeNotSatisfiableException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestedRangeNotSatisfiableException, func(s *smithy.Schema) error {

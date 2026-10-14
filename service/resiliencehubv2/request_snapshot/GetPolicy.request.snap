@@ -1,0 +1,3 @@
+GET /v2/get-policy?policyArn=__PolicyArn__
+
+

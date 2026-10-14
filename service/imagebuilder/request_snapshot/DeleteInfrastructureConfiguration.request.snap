@@ -1,0 +1,3 @@
+DELETE /DeleteInfrastructureConfiguration?infrastructureConfigurationArn=__InfrastructureConfigurationArn__
+
+

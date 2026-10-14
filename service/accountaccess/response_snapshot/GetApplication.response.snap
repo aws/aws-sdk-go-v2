@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":"2000-01-01T00:00:00Z","error":{"code":"AUTHORIZATION_ERROR","message":"__Message__"},"identitySource":{"identityCenter":{"applicationArn":"__ApplicationArn__","instanceArn":"__InstanceArn__"}},"status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"tenantId":"__TenantId__","updatedAt":"2000-01-01T00:00:00Z"}

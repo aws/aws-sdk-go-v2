@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,6 +75,45 @@ type ListStudioLifecycleConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioLifecycleConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioLifecycleConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioLifecycleConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppTypeEquals != "" {
+		s.WriteString(schemas.ListStudioLifecycleConfigsRequest_AppTypeEquals, string(v.AppTypeEquals))
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListStudioLifecycleConfigsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListStudioLifecycleConfigsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStudioLifecycleConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListStudioLifecycleConfigsRequest_ModifiedTimeAfter, *v.ModifiedTimeAfter)
+	}
+	if v.ModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListStudioLifecycleConfigsRequest_ModifiedTimeBefore, *v.ModifiedTimeBefore)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListStudioLifecycleConfigsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStudioLifecycleConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListStudioLifecycleConfigsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListStudioLifecycleConfigsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListStudioLifecycleConfigsOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -90,74 +129,48 @@ type ListStudioLifecycleConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioLifecycleConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioLifecycleConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioLifecycleConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStudioLifecycleConfigsResponse_NextToken, *v.NextToken)
+	}
+	serializeStudioLifecycleConfigsList(s, schemas.ListStudioLifecycleConfigsResponse_StudioLifecycleConfigs, v.StudioLifecycleConfigs)
+}
+func (v *ListStudioLifecycleConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStudioLifecycleConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStudioLifecycleConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStudioLifecycleConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListStudioLifecycleConfigsResponse_StudioLifecycleConfigs:
+			return deserializeStudioLifecycleConfigsList(d, schemas.ListStudioLifecycleConfigsResponse_StudioLifecycleConfigs, &v.StudioLifecycleConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStudioLifecycleConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioLifecycleConfigs, schemas.ListStudioLifecycleConfigsRequest, schemas.ListStudioLifecycleConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStudioLifecycleConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioLifecycleConfigs, schemas.ListStudioLifecycleConfigsRequest, schemas.ListStudioLifecycleConfigsResponse), output: &ListStudioLifecycleConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStudioLifecycleConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStudioLifecycleConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudioLifecycleConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +183,6 @@ func (c *Client) addOperationListStudioLifecycleConfigsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -282,11 +289,3 @@ type ListStudioLifecycleConfigsAPIClient interface {
 }
 
 var _ ListStudioLifecycleConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStudioLifecycleConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStudioLifecycleConfigs",
-	}
-}

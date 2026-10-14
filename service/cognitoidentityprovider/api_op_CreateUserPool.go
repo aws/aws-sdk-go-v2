@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon Cognito user pool. This operation sets basic and advanced
@@ -83,6 +82,26 @@ type CreateUserPoolInput struct {
 	// As a best practice, configure both verified_email and verified_phone_number ,
 	// with one having a higher priority than the other.
 	AccountRecoverySetting *types.AccountRecoverySettingType
+
+	// The custom names for the authentication context class reference (ACR) levels in
+	// your user pool. Amazon Cognito defines four fixed ACR levels that represent
+	// increasing authentication assurance. The combination of authentication factors
+	// that satisfies each level is fixed and you can't change it. With this
+	// configuration, you customize only the URI name that Amazon Cognito reports for
+	// each level in the acr token claim.
+	//
+	// You can override a subset of the levels. By default, the levels are named
+	// urn:cognito:loa:1 through urn:cognito:loa:4 , and Amazon Cognito applies the
+	// default name to any level that you don't specify. Each name must be unique
+	// across all four levels, including any default names that apply to levels you
+	// don't override. A name can contain any character that is valid in a URL or a
+	// URN.
+	//
+	// Configuring custom ACR level names requires the Essentials or Plus feature
+	// plan. To activate this setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	AcrConfiguration map[string]types.AcrLevelConfigType
 
 	// The configuration for administrative creation of users. Includes the template
 	// for the invitation message for new users, the duration of temporary passwords,
@@ -159,6 +178,20 @@ type CreateUserPoolInput struct {
 	// users to set up MFA. Amazon Cognito generates MFA prompts in API responses and
 	// in managed login for users who have chosen and configured a preferred MFA
 	// factor.
+	//
+	// The CreateUserPool operation supports only SMS MFA configuration. If you set
+	// MfaConfiguration to either of these values, include an SmsConfiguration in the
+	// same request:
+	//
+	//   - ON – Requires MFA for all users
+	//
+	//   - OPTIONAL – Makes MFA optional for each user
+	//
+	// If you omit SmsConfiguration , the operation returns an
+	// InvalidParameterException . To configure TOTP or email MFA, use the [SetUserPoolMfaConfig] operation.
+	// You can also use SetUserPoolMfaConfig to add MFA factors later.
+	//
+	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
 	MfaConfiguration types.UserPoolMfaType
 
 	// The password policy and sign-in policy in the user pool. The password policy
@@ -258,6 +291,110 @@ type CreateUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountRecoverySetting != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_AccountRecoverySetting)
+		v.AccountRecoverySetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAcrConfigurationType(s, schemas.CreateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
+	if v.AdminCreateUserConfig != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_AdminCreateUserConfig)
+		v.AdminCreateUserConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAliasAttributesListType(s, schemas.CreateUserPoolRequest_AliasAttributes, v.AliasAttributes)
+	serializeVerifiedAttributesListType(s, schemas.CreateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.CreateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_EmailConfiguration)
+		v.EmailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailVerificationMessage != nil {
+		s.WriteString(schemas.CreateUserPoolRequest_EmailVerificationMessage, *v.EmailVerificationMessage)
+	}
+	if v.EmailVerificationSubject != nil {
+		s.WriteString(schemas.CreateUserPoolRequest_EmailVerificationSubject, *v.EmailVerificationSubject)
+	}
+	if v.IssuerConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_IssuerConfiguration)
+		v.IssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_KeyConfiguration)
+		v.KeyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_LambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.CreateUserPoolRequest_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.Policies != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_Policies)
+		v.Policies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.CreateUserPoolRequest_PoolName, *v.PoolName)
+	}
+	serializeSchemaAttributesListType(s, schemas.CreateUserPoolRequest_Schema, v.Schema)
+	if v.SmsAuthenticationMessage != nil {
+		s.WriteString(schemas.CreateUserPoolRequest_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
+	}
+	if v.SmsConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_SmsConfiguration)
+		v.SmsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmsVerificationMessage != nil {
+		s.WriteString(schemas.CreateUserPoolRequest_SmsVerificationMessage, *v.SmsVerificationMessage)
+	}
+	if v.UserAttributeUpdateSettings != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_UserAttributeUpdateSettings)
+		v.UserAttributeUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolAddOns != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_UserPoolAddOns)
+		v.UserPoolAddOns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserPoolTagsType(s, schemas.CreateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTier != "" {
+		s.WriteString(schemas.CreateUserPoolRequest_UserPoolTier, string(v.UserPoolTier))
+	}
+	serializeUsernameAttributesListType(s, schemas.CreateUserPoolRequest_UsernameAttributes, v.UsernameAttributes)
+	if v.UsernameConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_UsernameConfiguration)
+		v.UsernameConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VerificationMessageTemplate != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_VerificationMessageTemplate)
+		v.VerificationMessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the response from the server for the request to create a user pool.
 type CreateUserPoolOutput struct {
 
@@ -270,77 +407,50 @@ type CreateUserPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPool != nil {
+		s.WriteStruct(schemas.CreateUserPoolResponse_UserPool)
+		v.UserPool.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserPoolResponse_UserPool:
+			v.UserPool = &types.UserPoolType{}
+			return v.UserPool.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPool, schemas.CreateUserPoolRequest, schemas.CreateUserPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPool, schemas.CreateUserPoolRequest, schemas.CreateUserPoolResponse), output: &CreateUserPoolOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserPool{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserPool"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateUserPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUserPool(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -355,22 +465,8 @@ func (c *Client) addOperationCreateUserPoolMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateUserPool(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUserPool",
-	}
 }

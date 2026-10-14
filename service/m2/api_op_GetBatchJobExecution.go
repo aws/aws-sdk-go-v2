@@ -4,11 +4,10 @@ package m2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,34 @@ type GetBatchJobExecutionInput struct {
 	ExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBatchJobExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchJobExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetBatchJobExecutionRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetBatchJobExecutionRequest_executionId, *v.ExecutionId)
+	}
+}
+func (v *GetBatchJobExecutionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchJobExecutionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchJobExecutionRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionRequest_applicationId, v.ApplicationId)
+		case schemas.GetBatchJobExecutionRequest_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionRequest_executionId, v.ExecutionId)
+		}
+		return nil
+	})
 }
 
 type GetBatchJobExecutionOutput struct {
@@ -102,77 +129,127 @@ type GetBatchJobExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchJobExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchJobExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_applicationId, *v.ApplicationId)
+	}
+	serializeBatchJobIdentifier(s, schemas.GetBatchJobExecutionResponse_batchJobIdentifier, v.BatchJobIdentifier)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetBatchJobExecutionResponse_endTime, *v.EndTime)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_jobName, *v.JobName)
+	}
+	if v.JobStepRestartMarker != nil {
+		s.WriteStruct(schemas.GetBatchJobExecutionResponse_jobStepRestartMarker)
+		v.JobStepRestartMarker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_jobType, string(v.JobType))
+	}
+	if v.JobUser != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_jobUser, *v.JobUser)
+	}
+	if v.ReturnCode != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_returnCode, *v.ReturnCode)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetBatchJobExecutionResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetBatchJobExecutionResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetBatchJobExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchJobExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchJobExecutionResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_applicationId, v.ApplicationId)
+		case schemas.GetBatchJobExecutionResponse_batchJobIdentifier:
+			return deserializeBatchJobIdentifier(d, schemas.GetBatchJobExecutionResponse_batchJobIdentifier, &v.BatchJobIdentifier)
+		case schemas.GetBatchJobExecutionResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchJobExecutionResponse_endTime, v.EndTime)
+		case schemas.GetBatchJobExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_executionId, v.ExecutionId)
+		case schemas.GetBatchJobExecutionResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_jobId, v.JobId)
+		case schemas.GetBatchJobExecutionResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_jobName, v.JobName)
+		case schemas.GetBatchJobExecutionResponse_jobStepRestartMarker:
+			v.JobStepRestartMarker = &types.JobStepRestartMarker{}
+			return v.JobStepRestartMarker.Deserialize(d)
+		case schemas.GetBatchJobExecutionResponse_jobType:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchJobExecutionResponse_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.BatchJobType(ev)
+			return nil
+		case schemas.GetBatchJobExecutionResponse_jobUser:
+			v.JobUser = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_jobUser, v.JobUser)
+		case schemas.GetBatchJobExecutionResponse_returnCode:
+			v.ReturnCode = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_returnCode, v.ReturnCode)
+		case schemas.GetBatchJobExecutionResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchJobExecutionResponse_startTime, v.StartTime)
+		case schemas.GetBatchJobExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchJobExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchJobExecutionStatus(ev)
+			return nil
+		case schemas.GetBatchJobExecutionResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetBatchJobExecutionResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchJobExecution, schemas.GetBatchJobExecutionRequest, schemas.GetBatchJobExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatchJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchJobExecution, schemas.GetBatchJobExecutionRequest, schemas.GetBatchJobExecutionResponse), output: &GetBatchJobExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBatchJobExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBatchJobExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBatchJobExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchJobExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +264,8 @@ func (c *Client) addOperationGetBatchJobExecutionMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBatchJobExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBatchJobExecution",
-	}
 }

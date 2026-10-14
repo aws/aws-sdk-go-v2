@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.SearchVectors
+
+{"ConsumedCapacity":{"VectorSearchRequestBytes":1,"VectorWriteRequestBytes":1},"SearchResults":[{"Item":{"key0":{"S":"__AttributeValueMemberS__"}},"Score":1},{"Item":{"key0":{"S":"__AttributeValueMemberS__"}},"Score":1}]}

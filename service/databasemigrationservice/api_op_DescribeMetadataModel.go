@@ -4,16 +4,19 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets detailed information about the specified metadata model, including its
 // definition and corresponding converted objects in the target database if
 // applicable.
+//
+// Required permissions: dms:DescribeMetadataModel . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMetadataModel(ctx context.Context, params *DescribeMetadataModelInput, optFns ...func(*Options)) (*DescribeMetadataModelOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelInput{}
@@ -42,16 +45,43 @@ type DescribeMetadataModelInput struct {
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// The JSON string that specifies which metadata model to retrieve. Only one
-	// selection rule with "rule-action": "explicit" can be provided. For more
-	// information, see [Selection Rules]in the DMS User Guide.
+	// A JSON string that identifies the metadata model to retrieve. For the selection
+	// rule format and examples, see [Selection rules in DMS Schema Conversion].
 	//
-	// [Selection Rules]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	//   - Exactly one rule is allowed.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMetadataModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.DescribeMetadataModelMessage_Origin, string(v.Origin))
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.DescribeMetadataModelMessage_SelectionRules, *v.SelectionRules)
+	}
 }
 
 type DescribeMetadataModelOutput struct {
@@ -77,77 +107,63 @@ type DescribeMetadataModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_Definition, *v.Definition)
+	}
+	if v.MetadataModelName != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_MetadataModelName, *v.MetadataModelName)
+	}
+	if v.MetadataModelType != nil {
+		s.WriteString(schemas.DescribeMetadataModelResponse_MetadataModelType, *v.MetadataModelType)
+	}
+	serializeMetadataModelReferenceList(s, schemas.DescribeMetadataModelResponse_TargetMetadataModels, v.TargetMetadataModels)
+}
+func (v *DescribeMetadataModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelResponse_Definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_Definition, v.Definition)
+		case schemas.DescribeMetadataModelResponse_MetadataModelName:
+			v.MetadataModelName = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_MetadataModelName, v.MetadataModelName)
+		case schemas.DescribeMetadataModelResponse_MetadataModelType:
+			v.MetadataModelType = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelResponse_MetadataModelType, v.MetadataModelType)
+		case schemas.DescribeMetadataModelResponse_TargetMetadataModels:
+			return deserializeMetadataModelReferenceList(d, schemas.DescribeMetadataModelResponse_TargetMetadataModels, &v.TargetMetadataModels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModel, schemas.DescribeMetadataModelMessage, schemas.DescribeMetadataModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModel, schemas.DescribeMetadataModelMessage, schemas.DescribeMetadataModelResponse), output: &DescribeMetadataModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMetadataModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeMetadataModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMetadataModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +178,8 @@ func (c *Client) addOperationDescribeMetadataModelMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeMetadataModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMetadataModel",
-	}
 }

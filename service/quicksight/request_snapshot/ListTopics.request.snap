@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/topics?max-results=1&next-token=__NextToken__
+
+

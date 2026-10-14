@@ -5,11 +5,7 @@ package clouddirectory
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the major version families of each managed schema. If a major version ARN
@@ -45,24 +41,6 @@ type ListManagedSchemaArnsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListManagedSchemaArnsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListManagedSchemaArnsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListManagedSchemaArnsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListManagedSchemaArnsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListManagedSchemaArnsRequest_NextToken, *v.NextToken)
-	}
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.ListManagedSchemaArnsRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type ListManagedSchemaArnsOutput struct {
 
 	// The pagination token.
@@ -77,84 +55,26 @@ type ListManagedSchemaArnsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListManagedSchemaArnsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListManagedSchemaArnsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListManagedSchemaArnsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListManagedSchemaArnsResponse_NextToken, v.NextToken)
-		case schemas.ListManagedSchemaArnsResponse_SchemaArns:
-			return deserializeArns(d, schemas.ListManagedSchemaArnsResponse_SchemaArns, &v.SchemaArns)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListManagedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedSchemaArns{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedSchemaArns, schemas.ListManagedSchemaArnsRequest, schemas.ListManagedSchemaArnsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedSchemaArns{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedSchemaArns, schemas.ListManagedSchemaArnsRequest, schemas.ListManagedSchemaArnsResponse), output: &ListManagedSchemaArnsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedSchemaArns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedSchemaArns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +87,6 @@ func (c *Client) addOperationListManagedSchemaArnsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +188,3 @@ type ListManagedSchemaArnsAPIClient interface {
 }
 
 var _ ListManagedSchemaArnsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListManagedSchemaArns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListManagedSchemaArns",
-	}
-}

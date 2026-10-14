@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists Amazon Bedrock foundation models that you can use. You can filter the
@@ -56,6 +55,27 @@ type ListFoundationModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByCustomizationType != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byCustomizationType, string(v.ByCustomizationType))
+	}
+	if v.ByInferenceType != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byInferenceType, string(v.ByInferenceType))
+	}
+	if v.ByOutputModality != "" {
+		s.WriteString(schemas.ListFoundationModelsRequest_byOutputModality, string(v.ByOutputModality))
+	}
+	if v.ByProvider != nil {
+		s.WriteString(schemas.ListFoundationModelsRequest_byProvider, *v.ByProvider)
+	}
+}
+
 type ListFoundationModelsOutput struct {
 
 	// A list of Amazon Bedrock foundation models.
@@ -67,74 +87,42 @@ type ListFoundationModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFoundationModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFoundationModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFoundationModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFoundationModelSummaryList(s, schemas.ListFoundationModelsResponse_modelSummaries, v.ModelSummaries)
+}
+func (v *ListFoundationModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFoundationModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFoundationModelsResponse_modelSummaries:
+			return deserializeFoundationModelSummaryList(d, schemas.ListFoundationModelsResponse_modelSummaries, &v.ModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFoundationModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModels, schemas.ListFoundationModelsRequest, schemas.ListFoundationModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFoundationModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFoundationModels, schemas.ListFoundationModelsRequest, schemas.ListFoundationModelsResponse), output: &ListFoundationModelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFoundationModels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFoundationModels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFoundationModels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +137,8 @@ func (c *Client) addOperationListFoundationModelsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListFoundationModels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFoundationModels",
-	}
 }

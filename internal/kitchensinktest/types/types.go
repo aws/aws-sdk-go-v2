@@ -8,6 +8,29 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The following types satisfy this interface:
+//
+//	EventsMemberMessage
+type Events interface {
+	isEvents()
+}
+
+type EventsMemberMessage struct {
+	Value MessageEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*EventsMemberMessage) isEvents() {}
+func (v *EventsMemberMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Events_message)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EventsMemberMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 type Item struct {
 	noSmithyDocumentSerde
 }
@@ -28,4 +51,71 @@ func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+type MapValueStruct struct {
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MapValueStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapValueStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapValueStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MapValueStruct_name, *v.Name)
+	}
+}
+func (v *MapValueStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapValueStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapValueStruct_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MapValueStruct_name, v.Name)
+		}
+		return nil
+	})
+}
+
+type MessageEvent struct {
+	Body *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MessageEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.MessageEvent_body, *v.Body)
+	}
+}
+func (v *MessageEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageEvent_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.MessageEvent_body, v.Body)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEvents() {}

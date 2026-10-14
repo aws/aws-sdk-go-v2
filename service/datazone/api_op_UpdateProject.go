@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -68,41 +63,6 @@ type UpdateProjectInput struct {
 	UserParameters []types.EnvironmentConfigurationUserParameter
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProjectInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateProjectInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.UpdateProjectInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.DomainUnitId != nil {
-		s.WriteString(schemas.UpdateProjectInput_domainUnitId, *v.DomainUnitId)
-	}
-	if v.EnvironmentDeploymentDetails != nil {
-		s.WriteStruct(schemas.UpdateProjectInput_environmentDeploymentDetails)
-		v.EnvironmentDeploymentDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeGlossaryTerms(s, schemas.UpdateProjectInput_glossaryTerms, v.GlossaryTerms)
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateProjectInput_identifier, *v.Identifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateProjectInput_name, *v.Name)
-	}
-	if v.ProjectProfileVersion != nil {
-		s.WriteString(schemas.UpdateProjectInput_projectProfileVersion, *v.ProjectProfileVersion)
-	}
-	serializeTags(s, schemas.UpdateProjectInput_resourceTags, v.ResourceTags)
-	serializeEnvironmentConfigurationUserParametersList(s, schemas.UpdateProjectInput_userParameters, v.UserParameters)
 }
 
 type UpdateProjectOutput struct {
@@ -170,130 +130,29 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProjectOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProjectOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateProjectOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateProjectOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_createdBy, v.CreatedBy)
-		case schemas.UpdateProjectOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_description, v.Description)
-		case schemas.UpdateProjectOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_domainId, v.DomainId)
-		case schemas.UpdateProjectOutput_domainUnitId:
-			v.DomainUnitId = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_domainUnitId, v.DomainUnitId)
-		case schemas.UpdateProjectOutput_environmentDeploymentDetails:
-			v.EnvironmentDeploymentDetails = &types.EnvironmentDeploymentDetails{}
-			return v.EnvironmentDeploymentDetails.Deserialize(d)
-		case schemas.UpdateProjectOutput_failureReasons:
-			return deserializeFailureReasons(d, schemas.UpdateProjectOutput_failureReasons, &v.FailureReasons)
-		case schemas.UpdateProjectOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.UpdateProjectOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.UpdateProjectOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_id, v.Id)
-		case schemas.UpdateProjectOutput_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateProjectOutput_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.UpdateProjectOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_name, v.Name)
-		case schemas.UpdateProjectOutput_projectCategory:
-			v.ProjectCategory = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_projectCategory, v.ProjectCategory)
-		case schemas.UpdateProjectOutput_projectProfileId:
-			v.ProjectProfileId = new(string)
-			return d.ReadString(schemas.UpdateProjectOutput_projectProfileId, v.ProjectProfileId)
-		case schemas.UpdateProjectOutput_projectStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateProjectOutput_projectStatus, &ev); err != nil {
-				return err
-			}
-			v.ProjectStatus = types.ProjectStatus(ev)
-			return nil
-		case schemas.UpdateProjectOutput_resourceTags:
-			return deserializeResourceTags(d, schemas.UpdateProjectOutput_resourceTags, &v.ResourceTags)
-		case schemas.UpdateProjectOutput_userParameters:
-			return deserializeEnvironmentConfigurationUserParametersList(d, schemas.UpdateProjectOutput_userParameters, &v.UserParameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectInput, schemas.UpdateProjectOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectInput, schemas.UpdateProjectOutput), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -308,22 +167,8 @@ func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProject",
-	}
 }

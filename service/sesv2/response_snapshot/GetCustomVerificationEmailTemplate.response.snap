@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FailureRedirectionURL":"__FailureRedirectionURL__","FromEmailAddress":"__FromEmailAddress__","SuccessRedirectionURL":"__SuccessRedirectionURL__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateContent":"__TemplateContent__","TemplateName":"__TemplateName__","TemplateSubject":"__TemplateSubject__"}

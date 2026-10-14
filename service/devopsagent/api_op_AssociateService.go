@@ -5,10 +5,7 @@ package devopsagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,23 +45,10 @@ type AssociateServiceInput struct {
 	// This member is required.
 	ServiceId *string
 
+	// Enabled capabilities for this association.
+	Capabilities map[string]types.CapabilityConfiguration
+
 	noSmithyDocumentSerde
-}
-
-func (v *AssociateServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateServiceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.AssociateServiceInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	serializeServiceConfiguration(s, schemas.AssociateServiceInput_configuration, v.Configuration)
-	if v.ServiceId != nil {
-		s.WriteString(schemas.AssociateServiceInput_serviceId, *v.ServiceId)
-	}
 }
 
 // Output containing the newly created association and optional webhook
@@ -86,76 +70,23 @@ type AssociateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateServiceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateServiceOutput_association:
-			v.Association = &types.Association{}
-			return v.Association.Deserialize(d)
-		case schemas.AssociateServiceOutput_webhook:
-			v.Webhook = &types.GenericWebhook{}
-			return v.Webhook.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateService, schemas.AssociateServiceInput, schemas.AssociateServiceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateService{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateService, schemas.AssociateServiceInput, schemas.AssociateServiceOutput), output: &AssociateServiceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +96,6 @@ func (c *Client) addOperationAssociateServiceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpAssociateServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +108,6 @@ func (c *Client) addOperationAssociateServiceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +141,4 @@ func (m *endpointPrefix_opAssociateServiceMiddleware) HandleFinalize(ctx context
 }
 func addEndpointPrefix_opAssociateServiceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opAssociateServiceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opAssociateService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateService",
-	}
 }

@@ -1,0 +1,3 @@
+GET /v1/apis/__ApiId__/sourceApiAssociations?maxResults=1&nextToken=__NextToken__
+
+

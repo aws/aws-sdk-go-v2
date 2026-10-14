@@ -4,11 +4,10 @@ package mediatailor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,6 +43,34 @@ type DescribeProgramInput struct {
 	ProgramName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DescribeProgramRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DescribeProgramRequest_ProgramName, *v.ProgramName)
+	}
+}
+func (v *DescribeProgramInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProgramRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProgramRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.DescribeProgramRequest_ChannelName, v.ChannelName)
+		case schemas.DescribeProgramRequest_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DescribeProgramRequest_ProgramName, v.ProgramName)
+		}
+		return nil
+	})
 }
 
 type DescribeProgramOutput struct {
@@ -99,77 +126,113 @@ type DescribeProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAdBreak(s, schemas.DescribeProgramResponse_AdBreaks, v.AdBreaks)
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeProgramResponse_Arn, *v.Arn)
+	}
+	serialize__listOfAudienceMedia(s, schemas.DescribeProgramResponse_AudienceMedia, v.AudienceMedia)
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DescribeProgramResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ClipRange != nil {
+		s.WriteStruct(schemas.DescribeProgramResponse_ClipRange)
+		v.ClipRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeProgramResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DurationMillis != nil {
+		s.WriteInt64(schemas.DescribeProgramResponse_DurationMillis, *v.DurationMillis)
+	}
+	if v.LiveSourceName != nil {
+		s.WriteString(schemas.DescribeProgramResponse_LiveSourceName, *v.LiveSourceName)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DescribeProgramResponse_ProgramName, *v.ProgramName)
+	}
+	if v.ScheduledStartTime != nil {
+		s.WriteTime(schemas.DescribeProgramResponse_ScheduledStartTime, *v.ScheduledStartTime)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DescribeProgramResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.DescribeProgramResponse_Tags, v.Tags)
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.DescribeProgramResponse_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *DescribeProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProgramResponse_AdBreaks:
+			return deserialize__listOfAdBreak(d, schemas.DescribeProgramResponse_AdBreaks, &v.AdBreaks)
+		case schemas.DescribeProgramResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_Arn, v.Arn)
+		case schemas.DescribeProgramResponse_AudienceMedia:
+			return deserialize__listOfAudienceMedia(d, schemas.DescribeProgramResponse_AudienceMedia, &v.AudienceMedia)
+		case schemas.DescribeProgramResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_ChannelName, v.ChannelName)
+		case schemas.DescribeProgramResponse_ClipRange:
+			v.ClipRange = &types.ClipRange{}
+			return v.ClipRange.Deserialize(d)
+		case schemas.DescribeProgramResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProgramResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeProgramResponse_DurationMillis:
+			v.DurationMillis = new(int64)
+			return d.ReadInt64(schemas.DescribeProgramResponse_DurationMillis, v.DurationMillis)
+		case schemas.DescribeProgramResponse_LiveSourceName:
+			v.LiveSourceName = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_LiveSourceName, v.LiveSourceName)
+		case schemas.DescribeProgramResponse_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_ProgramName, v.ProgramName)
+		case schemas.DescribeProgramResponse_ScheduledStartTime:
+			v.ScheduledStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProgramResponse_ScheduledStartTime, v.ScheduledStartTime)
+		case schemas.DescribeProgramResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.DescribeProgramResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeProgramResponse_Tags, &v.Tags)
+		case schemas.DescribeProgramResponse_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.DescribeProgramResponse_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProgram, schemas.DescribeProgramRequest, schemas.DescribeProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProgram, schemas.DescribeProgramRequest, schemas.DescribeProgramResponse), output: &DescribeProgramOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProgram{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProgram"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeProgramValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProgram(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +247,8 @@ func (c *Client) addOperationDescribeProgramMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeProgram(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeProgram",
-	}
 }

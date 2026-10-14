@@ -4,14 +4,14 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disable the service for the current Amazon Web Services Region or specified
-// Amazon Web Services Region.
+// Amazon Web Services Region. Disabling the service also disables all opt-in
+// features that are currently enabled in that Region.
 func (c *Client) DisableSecurityHubV2(ctx context.Context, params *DisableSecurityHubV2Input, optFns ...func(*Options)) (*DisableSecurityHubV2Output, error) {
 	if params == nil {
 		params = &DisableSecurityHubV2Input{}
@@ -31,6 +31,15 @@ type DisableSecurityHubV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSecurityHubV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSecurityHubV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSecurityHubV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableSecurityHubV2Output struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,74 +47,39 @@ type DisableSecurityHubV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSecurityHubV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSecurityHubV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSecurityHubV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableSecurityHubV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableSecurityHubV2Response, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableSecurityHubV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSecurityHubV2, schemas.DisableSecurityHubV2Request, schemas.DisableSecurityHubV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSecurityHubV2, schemas.DisableSecurityHubV2Request, schemas.DisableSecurityHubV2Response), output: &DisableSecurityHubV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableSecurityHubV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableSecurityHubV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableSecurityHubV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -120,22 +94,8 @@ func (c *Client) addOperationDisableSecurityHubV2Middlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisableSecurityHubV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisableSecurityHubV2",
-	}
 }

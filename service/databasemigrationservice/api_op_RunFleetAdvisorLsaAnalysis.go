@@ -4,10 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	End of support notice: On May 20, 2026, Amazon Web Services will end support
@@ -39,6 +38,22 @@ type RunFleetAdvisorLsaAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunFleetAdvisorLsaAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunFleetAdvisorLsaAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RunFleetAdvisorLsaAnalysisInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type RunFleetAdvisorLsaAnalysisOutput struct {
 
 	// The ID of the LSA analysis run.
@@ -53,74 +68,51 @@ type RunFleetAdvisorLsaAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunFleetAdvisorLsaAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunFleetAdvisorLsaAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunFleetAdvisorLsaAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LsaAnalysisId != nil {
+		s.WriteString(schemas.RunFleetAdvisorLsaAnalysisResponse_LsaAnalysisId, *v.LsaAnalysisId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.RunFleetAdvisorLsaAnalysisResponse_Status, *v.Status)
+	}
+}
+func (v *RunFleetAdvisorLsaAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunFleetAdvisorLsaAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunFleetAdvisorLsaAnalysisResponse_LsaAnalysisId:
+			v.LsaAnalysisId = new(string)
+			return d.ReadString(schemas.RunFleetAdvisorLsaAnalysisResponse_LsaAnalysisId, v.LsaAnalysisId)
+		case schemas.RunFleetAdvisorLsaAnalysisResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.RunFleetAdvisorLsaAnalysisResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRunFleetAdvisorLsaAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunFleetAdvisorLsaAnalysis, nil, schemas.RunFleetAdvisorLsaAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunFleetAdvisorLsaAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunFleetAdvisorLsaAnalysis, nil, schemas.RunFleetAdvisorLsaAnalysisResponse), output: &RunFleetAdvisorLsaAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRunFleetAdvisorLsaAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RunFleetAdvisorLsaAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRunFleetAdvisorLsaAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +127,8 @@ func (c *Client) addOperationRunFleetAdvisorLsaAnalysisMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRunFleetAdvisorLsaAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RunFleetAdvisorLsaAnalysis",
-	}
 }

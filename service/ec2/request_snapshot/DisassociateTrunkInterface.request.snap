@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DisassociateTrunkInterface&AssociationId=__AssociationId__&ClientToken=__ClientToken__&DryRun=true&Version=2016-11-15

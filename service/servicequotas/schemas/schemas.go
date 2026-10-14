@@ -148,8 +148,19 @@ var ServiceQuotasV20190624 = smithy.NewServiceSchema(_ServiceQuotasV20190624, "2
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
+
+var AdjustableAtLevelEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.servicequotas",
+	Name:      "AdjustableAtLevelEnum",
+}, smithy.ShapeTypeEnum, 3)
+var AdjustableAtLevelEnum_ACCOUNT *smithy.Schema
+
+var AdjustableAtLevelEnum_PER_RESOURCE *smithy.Schema
+
+var AdjustableAtLevelEnum_ALL *smithy.Schema
 
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
@@ -179,7 +190,8 @@ var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
 var AWSServiceAccessNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "AWSServiceAccessNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AWSServiceAccessNotEnabledException_Message *smithy.Schema
 
 var _CustomerServiceEngagementId = smithy.NewSchema(smithy.ShapeID{
@@ -200,7 +212,8 @@ var _DefaultValue = smithy.NewSchema(smithy.ShapeID{
 var DependencyAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "DependencyAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var DependencyAccessDeniedException_Message *smithy.Schema
 
 var ErrorCode = smithy.NewSchema(smithy.ShapeID{
@@ -273,7 +286,8 @@ var _GlobalQuota = smithy.NewSchema(smithy.ShapeID{
 var IllegalArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "IllegalArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IllegalArgumentException_Message *smithy.Schema
 
 var _InputTagKeys = smithy.NewSchema(smithy.ShapeID{
@@ -291,13 +305,15 @@ var _InputTags_member *smithy.Schema
 var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var InvalidPaginationTokenException_Message *smithy.Schema
 
 var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 405})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 405})
 var InvalidResourceStateException_Message *smithy.Schema
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
@@ -348,13 +364,15 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 var NoAvailableOrganizationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "NoAvailableOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var NoAvailableOrganizationException_Message *smithy.Schema
 
 var NoSuchResourceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "NoSuchResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var NoSuchResourceException_Message *smithy.Schema
 
 var OptInLevel = smithy.NewSchema(smithy.ShapeID{
@@ -382,7 +400,8 @@ var OptInType_NotifyAndAdjust *smithy.Schema
 var OrganizationNotInAllFeaturesModeException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "OrganizationNotInAllFeaturesModeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var OrganizationNotInAllFeaturesModeException_Message *smithy.Schema
 
 var _OutputTags = smithy.NewSchema(smithy.ShapeID{
@@ -437,12 +456,14 @@ var _QuotaContextId = smithy.NewSchema(smithy.ShapeID{
 var QuotaContextInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "QuotaContextInfo",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var QuotaContextInfo_ContextScope *smithy.Schema
 
 var QuotaContextInfo_ContextScopeType *smithy.Schema
 
 var QuotaContextInfo_ContextId *smithy.Schema
+
+var QuotaContextInfo_AdjustableAtLevel *smithy.Schema
 
 var QuotaContextScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
@@ -465,7 +486,8 @@ var _QuotaDescription = smithy.NewSchema(smithy.ShapeID{
 var QuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "QuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var QuotaExceededException_Message *smithy.Schema
 
 var QuotaInfo = smithy.NewSchema(smithy.ShapeID{
@@ -656,7 +678,8 @@ var RequestType_AutomaticManagement *smithy.Schema
 var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ResourceAlreadyExistsException_Message *smithy.Schema
 
 var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
@@ -667,7 +690,8 @@ var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var ServiceException_Message *smithy.Schema
 
 var ServiceInfo = smithy.NewSchema(smithy.ShapeID{
@@ -766,7 +790,8 @@ var ServiceQuotaTemplateAssociationStatus_DISASSOCIATED *smithy.Schema
 var ServiceQuotaTemplateNotInUseException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "ServiceQuotaTemplateNotInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var ServiceQuotaTemplateNotInUseException_Message *smithy.Schema
 
 var _Statistic = smithy.NewSchema(smithy.ShapeID{
@@ -795,7 +820,8 @@ var _TagKey = smithy.NewSchema(smithy.ShapeID{
 var TagPolicyViolationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "TagPolicyViolationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 401})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 401})
 var TagPolicyViolationException_Message *smithy.Schema
 
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
@@ -806,19 +832,22 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var TemplatesNotAvailableInRegionException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "TemplatesNotAvailableInRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var TemplatesNotAvailableInRegionException_Message *smithy.Schema
 
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429})
 var TooManyRequestsException_Message *smithy.Schema
 
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_Message *smithy.Schema
 
 var _TotalCount = smithy.NewSchema(smithy.ShapeID{
@@ -1255,6 +1284,12 @@ var UpdateAutoManagementResponse = smithy.NewSchema(smithy.ShapeID{
 func init() {
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
 
+	AdjustableAtLevelEnum_ACCOUNT = AdjustableAtLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	AdjustableAtLevelEnum_PER_RESOURCE = AdjustableAtLevelEnum.AddMember("PER_RESOURCE", smithyprelude.Unit)
+
+	AdjustableAtLevelEnum_ALL = AdjustableAtLevelEnum.AddMember("ALL", smithyprelude.Unit)
+
 	AppliedLevelEnum_ACCOUNT = AppliedLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
 
 	AppliedLevelEnum_RESOURCE = AppliedLevelEnum.AddMember("RESOURCE", smithyprelude.Unit)
@@ -1360,6 +1395,8 @@ func init() {
 	QuotaContextInfo_ContextScopeType = QuotaContextInfo.AddMember("ContextScopeType", _QuotaContextScopeType)
 
 	QuotaContextInfo_ContextId = QuotaContextInfo.AddMember("ContextId", _QuotaContextId)
+
+	QuotaContextInfo_AdjustableAtLevel = QuotaContextInfo.AddMember("AdjustableAtLevel", AdjustableAtLevelEnum)
 
 	QuotaExceededException_Message = QuotaExceededException.AddMember("Message", _ExceptionMessage)
 

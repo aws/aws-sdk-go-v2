@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.TagResource
+
+{"resourceArn":"__ResourceArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

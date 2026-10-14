@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListRepositories
+
+{"nextToken":"__NextToken__","repositories":[{"arn":"__Arn__","connectionArn":"__ConnectionArn__","name":"__Name__","provider":"GITHUB"},{"arn":"__Arn__","connectionArn":"__ConnectionArn__","name":"__Name__","provider":"GITHUB"}]}

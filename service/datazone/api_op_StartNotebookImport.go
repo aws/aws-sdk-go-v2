@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,8 +47,9 @@ type StartNotebookImportInput struct {
 	// This member is required.
 	OwningProjectIdentifier *string
 
-	// The source location of the notebook to import. This specifies the Amazon Simple
-	// Storage Service URI of the notebook file.
+	// The source location of the notebook to import. Specify either a single Amazon
+	// Simple Storage Service URI, or a list of objects to import as the notebook's
+	// cells.
 	//
 	// This member is required.
 	SourceLocation types.SourceLocation
@@ -64,32 +61,10 @@ type StartNotebookImportInput struct {
 	// The description of the imported notebook.
 	Description *string
 
+	// The type of the notebook to import. If not specified, defaults to DATA .
+	Type types.NotebookType
+
 	noSmithyDocumentSerde
-}
-
-func (v *StartNotebookImportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartNotebookImportInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartNotebookImportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartNotebookImportInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.StartNotebookImportInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.StartNotebookImportInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartNotebookImportInput_name, *v.Name)
-	}
-	if v.OwningProjectIdentifier != nil {
-		s.WriteString(schemas.StartNotebookImportInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
-	}
-	serializeSourceLocation(s, schemas.StartNotebookImportInput_sourceLocation, v.SourceLocation)
 }
 
 type StartNotebookImportOutput struct {
@@ -121,106 +96,32 @@ type StartNotebookImportOutput struct {
 	// The status of the notebook import.
 	Status types.NotebookStatus
 
+	// The type of the imported notebook.
+	Type types.NotebookType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (v *StartNotebookImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartNotebookImportOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartNotebookImportOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.StartNotebookImportOutput_createdAt, v.CreatedAt)
-		case schemas.StartNotebookImportOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_createdBy, v.CreatedBy)
-		case schemas.StartNotebookImportOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_description, v.Description)
-		case schemas.StartNotebookImportOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_domainId, v.DomainId)
-		case schemas.StartNotebookImportOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_name, v.Name)
-		case schemas.StartNotebookImportOutput_notebookId:
-			v.NotebookId = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_notebookId, v.NotebookId)
-		case schemas.StartNotebookImportOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.StartNotebookImportOutput_owningProjectId, v.OwningProjectId)
-		case schemas.StartNotebookImportOutput_sourceLocation:
-			return deserializeSourceLocation(d, schemas.StartNotebookImportOutput_sourceLocation, &v.SourceLocation)
-		case schemas.StartNotebookImportOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.StartNotebookImportOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotebookStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartNotebookImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNotebookImport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookImport, schemas.StartNotebookImportInput, schemas.StartNotebookImportOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNotebookImport{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookImport, schemas.StartNotebookImportInput, schemas.StartNotebookImportOutput), output: &StartNotebookImportOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNotebookImport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -230,12 +131,6 @@ func (c *Client) addOperationStartNotebookImportMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpStartNotebookImportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartNotebookImport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,12 +143,6 @@ func (c *Client) addOperationStartNotebookImportMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,12 +182,4 @@ func (m *idempotencyToken_initializeOpStartNotebookImport) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opStartNotebookImportMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartNotebookImport{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartNotebookImport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartNotebookImport",
-	}
 }

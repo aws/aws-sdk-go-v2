@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of an existing endpoint for a model from Amazon
@@ -51,6 +51,22 @@ type UpdateMarketplaceModelEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMarketplaceModelEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMarketplaceModelEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMarketplaceModelEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateMarketplaceModelEndpointRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.UpdateMarketplaceModelEndpointRequest_endpointArn, *v.EndpointArn)
+	}
+	serializeEndpointConfig(s, schemas.UpdateMarketplaceModelEndpointRequest_endpointConfig, v.EndpointConfig)
+}
+
 type UpdateMarketplaceModelEndpointOutput struct {
 
 	// Details about the updated endpoint.
@@ -64,65 +80,44 @@ type UpdateMarketplaceModelEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMarketplaceModelEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMarketplaceModelEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMarketplaceModelEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceModelEndpoint != nil {
+		s.WriteStruct(schemas.UpdateMarketplaceModelEndpointResponse_marketplaceModelEndpoint)
+		v.MarketplaceModelEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMarketplaceModelEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMarketplaceModelEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMarketplaceModelEndpointResponse_marketplaceModelEndpoint:
+			v.MarketplaceModelEndpoint = &types.MarketplaceModelEndpoint{}
+			return v.MarketplaceModelEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMarketplaceModelEndpoint, schemas.UpdateMarketplaceModelEndpointRequest, schemas.UpdateMarketplaceModelEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMarketplaceModelEndpoint, schemas.UpdateMarketplaceModelEndpointRequest, schemas.UpdateMarketplaceModelEndpointResponse), output: &UpdateMarketplaceModelEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMarketplaceModelEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMarketplaceModelEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -132,12 +127,6 @@ func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpUpdateMarketplaceModelEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMarketplaceModelEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +139,6 @@ func (c *Client) addOperationUpdateMarketplaceModelEndpointMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -195,12 +178,4 @@ func (m *idempotencyToken_initializeOpUpdateMarketplaceModelEndpoint) HandleInit
 }
 func addIdempotencyToken_opUpdateMarketplaceModelEndpointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateMarketplaceModelEndpoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateMarketplaceModelEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMarketplaceModelEndpoint",
-	}
 }

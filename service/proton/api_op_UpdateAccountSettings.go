@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update Proton settings that are used for multiple services in the Amazon Web
@@ -62,6 +61,48 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletePipelineProvisioningRepository != nil {
+		s.WriteBool(schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository, *v.DeletePipelineProvisioningRepository)
+	}
+	if v.PipelineCodebuildRoleArn != nil {
+		s.WriteString(schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn, *v.PipelineCodebuildRoleArn)
+	}
+	if v.PipelineProvisioningRepository != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsInput_pipelineProvisioningRepository)
+		v.PipelineProvisioningRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineServiceRoleArn != nil {
+		s.WriteString(schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn, *v.PipelineServiceRoleArn)
+	}
+}
+func (v *UpdateAccountSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository:
+			v.DeletePipelineProvisioningRepository = new(bool)
+			return d.ReadBool(schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository, v.DeletePipelineProvisioningRepository)
+		case schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn:
+			v.PipelineCodebuildRoleArn = new(string)
+			return d.ReadString(schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn, v.PipelineCodebuildRoleArn)
+		case schemas.UpdateAccountSettingsInput_pipelineProvisioningRepository:
+			v.PipelineProvisioningRepository = &types.RepositoryBranchInput{}
+			return v.PipelineProvisioningRepository.Deserialize(d)
+		case schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn:
+			v.PipelineServiceRoleArn = new(string)
+			return d.ReadString(schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn, v.PipelineServiceRoleArn)
+		}
+		return nil
+	})
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The Proton pipeline service role and repository data shared across the Amazon
@@ -76,77 +117,50 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountSettings != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsOutput_accountSettings)
+		v.AccountSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsOutput_accountSettings:
+			v.AccountSettings = &types.AccountSettings{}
+			return v.AccountSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsInput, schemas.UpdateAccountSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsInput, schemas.UpdateAccountSettingsOutput), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +175,8 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccountSettings",
-	}
 }

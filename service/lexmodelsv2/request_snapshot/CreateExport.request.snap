@@ -1,0 +1,5 @@
+PUT /exports
+
+Content-Type: application/json
+
+{"fileFormat":"LexJson","filePassword":"__FilePassword__","resourceSpecification":{"botExportSpecification":{"botId":"__BotId__","botVersion":"__BotVersion__"},"botLocaleExportSpecification":{"botId":"__BotId__","botVersion":"__BotVersion__","localeId":"__LocaleId__"},"customVocabularyExportSpecification":{"botId":"__BotId__","botVersion":"__BotVersion__","localeId":"__LocaleId__"},"testSetExportSpecification":{"testSetId":"__TestSetId__"}}}

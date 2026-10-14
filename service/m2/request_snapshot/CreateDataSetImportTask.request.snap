@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/dataset-import-task
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","importConfig":{"s3Location":"__DataSetImportConfigMemberS3Location__"}}

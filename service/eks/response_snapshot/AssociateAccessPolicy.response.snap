@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associatedAccessPolicy":{"accessScope":{"namespaces":["__Member__","__Member__"],"type":"cluster"},"associatedAt":946684800,"modifiedAt":946684800,"policyArn":"__PolicyArn__"},"clusterName":"__ClusterName__","principalArn":"__PrincipalArn__"}

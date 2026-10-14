@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,29 +54,6 @@ type CreateSubscriptionGrantInput struct {
 	SubscriptionTargetIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateSubscriptionGrantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSubscriptionGrantInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSubscriptionGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTargetNames(s, schemas.CreateSubscriptionGrantInput_assetTargetNames, v.AssetTargetNames)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSubscriptionGrantInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateSubscriptionGrantInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.CreateSubscriptionGrantInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	serializeGrantedEntityInput(s, schemas.CreateSubscriptionGrantInput_grantedEntity, v.GrantedEntity)
-	if v.SubscriptionTargetIdentifier != nil {
-		s.WriteString(schemas.CreateSubscriptionGrantInput_subscriptionTargetIdentifier, *v.SubscriptionTargetIdentifier)
-	}
 }
 
 type CreateSubscriptionGrantOutput struct {
@@ -145,108 +118,23 @@ type CreateSubscriptionGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSubscriptionGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSubscriptionGrantOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSubscriptionGrantOutput_assets:
-			return deserializeSubscribedAssets(d, schemas.CreateSubscriptionGrantOutput_assets, &v.Assets)
-		case schemas.CreateSubscriptionGrantOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateSubscriptionGrantOutput_createdAt, v.CreatedAt)
-		case schemas.CreateSubscriptionGrantOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_createdBy, v.CreatedBy)
-		case schemas.CreateSubscriptionGrantOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_domainId, v.DomainId)
-		case schemas.CreateSubscriptionGrantOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_environmentId, v.EnvironmentId)
-		case schemas.CreateSubscriptionGrantOutput_grantedEntity:
-			return deserializeGrantedEntity(d, schemas.CreateSubscriptionGrantOutput_grantedEntity, &v.GrantedEntity)
-		case schemas.CreateSubscriptionGrantOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_id, v.Id)
-		case schemas.CreateSubscriptionGrantOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateSubscriptionGrantOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.SubscriptionGrantOverallStatus(ev)
-			return nil
-		case schemas.CreateSubscriptionGrantOutput_subscriptionId:
-			v.SubscriptionId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_subscriptionId, v.SubscriptionId)
-		case schemas.CreateSubscriptionGrantOutput_subscriptionTargetId:
-			v.SubscriptionTargetId = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_subscriptionTargetId, v.SubscriptionTargetId)
-		case schemas.CreateSubscriptionGrantOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateSubscriptionGrantOutput_updatedAt, v.UpdatedAt)
-		case schemas.CreateSubscriptionGrantOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.CreateSubscriptionGrantOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSubscriptionGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionGrant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionGrant, schemas.CreateSubscriptionGrantInput, schemas.CreateSubscriptionGrantOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriptionGrant{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionGrant, schemas.CreateSubscriptionGrantInput, schemas.CreateSubscriptionGrantOutput), output: &CreateSubscriptionGrantOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubscriptionGrant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -256,12 +144,6 @@ func (c *Client) addOperationCreateSubscriptionGrantMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCreateSubscriptionGrantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriptionGrant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,12 +156,6 @@ func (c *Client) addOperationCreateSubscriptionGrantMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,12 +195,4 @@ func (m *idempotencyToken_initializeOpCreateSubscriptionGrant) HandleInitialize(
 }
 func addIdempotencyToken_opCreateSubscriptionGrantMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSubscriptionGrant{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSubscriptionGrant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSubscriptionGrant",
-	}
 }

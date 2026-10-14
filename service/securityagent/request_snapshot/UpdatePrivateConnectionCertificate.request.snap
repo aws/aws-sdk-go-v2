@@ -1,0 +1,5 @@
+POST /UpdatePrivateConnectionCertificate
+
+Content-Type: application/json
+
+{"certificate":"__Certificate__","privateConnectionName":"__PrivateConnectionName__"}

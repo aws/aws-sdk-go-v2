@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +64,49 @@ type ListSyncResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSyncResourceFilters(s, schemas.ListSyncResourcesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSyncResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_syncSource, *v.SyncSource)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListSyncResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncResourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncResourcesRequest_filters:
+			return deserializeSyncResourceFilters(d, schemas.ListSyncResourcesRequest_filters, &v.Filters)
+		case schemas.ListSyncResourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSyncResourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListSyncResourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_nextToken, v.NextToken)
+		case schemas.ListSyncResourcesRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_syncSource, v.SyncSource)
+		case schemas.ListSyncResourcesRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListSyncResourcesOutput struct {
 
 	// The string that specifies the next page of results.
@@ -77,65 +121,45 @@ type ListSyncResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeSyncResourceSummaries(s, schemas.ListSyncResourcesResponse_syncResources, v.SyncResources)
+}
+func (v *ListSyncResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListSyncResourcesResponse_syncResources:
+			return deserializeSyncResourceSummaries(d, schemas.ListSyncResourcesResponse_syncResources, &v.SyncResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncResources, schemas.ListSyncResourcesRequest, schemas.ListSyncResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSyncResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncResources, schemas.ListSyncResourcesRequest, schemas.ListSyncResourcesResponse), output: &ListSyncResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSyncResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSyncResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -145,12 +169,6 @@ func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpListSyncResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSyncResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +181,6 @@ func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -298,11 +310,3 @@ type ListSyncResourcesAPIClient interface {
 }
 
 var _ ListSyncResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSyncResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSyncResources",
-	}
-}

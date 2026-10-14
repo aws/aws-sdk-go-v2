@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdatePortfolio
+
+{"AcceptLanguage":"__AcceptLanguage__","AddTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Description":"__Description__","DisplayName":"__DisplayName__","Id":"__Id__","ProviderName":"__ProviderName__","RemoveTags":["__Member__","__Member__"]}

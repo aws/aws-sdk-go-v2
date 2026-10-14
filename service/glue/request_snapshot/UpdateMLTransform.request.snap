@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateMLTransform
+
+{"Description":"__Description__","GlueVersion":"__GlueVersion__","MaxCapacity":1,"MaxRetries":1,"Name":"__Name__","NumberOfWorkers":1,"Parameters":{"FindMatchesParameters":{"AccuracyCostTradeoff":1,"EnforceProvidedLabels":true,"PrecisionRecallTradeoff":1,"PrimaryKeyColumnName":"__PrimaryKeyColumnName__"},"TransformType":"FIND_MATCHES"},"Role":"__Role__","Timeout":1,"TransformId":"__TransformId__","WorkerType":"Standard"}

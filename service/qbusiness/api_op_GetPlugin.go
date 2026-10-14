@@ -4,13 +4,8 @@ package qbusiness
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,21 +38,6 @@ type GetPluginInput struct {
 	PluginId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPluginInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPluginRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetPluginRequest_applicationId, *v.ApplicationId)
-	}
-	if v.PluginId != nil {
-		s.WriteString(schemas.GetPluginRequest_pluginId, *v.PluginId)
-	}
 }
 
 type GetPluginOutput struct {
@@ -105,129 +85,29 @@ type GetPluginOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPluginResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPluginResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetPluginResponse_applicationId, v.ApplicationId)
-		case schemas.GetPluginResponse_authConfiguration:
-			return deserializePluginAuthConfiguration(d, schemas.GetPluginResponse_authConfiguration, &v.AuthConfiguration)
-		case schemas.GetPluginResponse_buildStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetPluginResponse_buildStatus, &ev); err != nil {
-				return err
-			}
-			v.BuildStatus = types.PluginBuildStatus(ev)
-			return nil
-		case schemas.GetPluginResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPluginResponse_createdAt, v.CreatedAt)
-		case schemas.GetPluginResponse_customPluginConfiguration:
-			v.CustomPluginConfiguration = &types.CustomPluginConfiguration{}
-			return v.CustomPluginConfiguration.Deserialize(d)
-		case schemas.GetPluginResponse_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetPluginResponse_displayName, v.DisplayName)
-		case schemas.GetPluginResponse_pluginArn:
-			v.PluginArn = new(string)
-			return d.ReadString(schemas.GetPluginResponse_pluginArn, v.PluginArn)
-		case schemas.GetPluginResponse_pluginId:
-			v.PluginId = new(string)
-			return d.ReadString(schemas.GetPluginResponse_pluginId, v.PluginId)
-		case schemas.GetPluginResponse_serverUrl:
-			v.ServerUrl = new(string)
-			return d.ReadString(schemas.GetPluginResponse_serverUrl, v.ServerUrl)
-		case schemas.GetPluginResponse_state:
-			var ev string
-			if err := d.ReadString(schemas.GetPluginResponse_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.PluginState(ev)
-			return nil
-		case schemas.GetPluginResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetPluginResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.PluginType(ev)
-			return nil
-		case schemas.GetPluginResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPluginResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlugin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlugin, schemas.GetPluginRequest, schemas.GetPluginResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlugin{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlugin, schemas.GetPluginRequest, schemas.GetPluginResponse), output: &GetPluginOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlugin"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPluginValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlugin(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -242,22 +122,8 @@ func (c *Client) addOperationGetPluginMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlugin(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlugin",
-	}
 }

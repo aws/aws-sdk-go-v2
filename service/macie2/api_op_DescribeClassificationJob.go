@@ -4,13 +4,8 @@ package macie2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,18 +33,6 @@ type DescribeClassificationJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeClassificationJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.DescribeClassificationJobRequest_jobId, *v.JobId)
-	}
 }
 
 type DescribeClassificationJobOutput struct {
@@ -203,153 +186,29 @@ type DescribeClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeClassificationJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeClassificationJobResponse_allowListIds:
-			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_allowListIds, &v.AllowListIds)
-		case schemas.DescribeClassificationJobResponse_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.DescribeClassificationJobResponse_clientToken, v.ClientToken)
-		case schemas.DescribeClassificationJobResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeClassificationJobResponse_createdAt, v.CreatedAt)
-		case schemas.DescribeClassificationJobResponse_customDataIdentifierIds:
-			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_customDataIdentifierIds, &v.CustomDataIdentifierIds)
-		case schemas.DescribeClassificationJobResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeClassificationJobResponse_description, v.Description)
-		case schemas.DescribeClassificationJobResponse_initialRun:
-			v.InitialRun = new(bool)
-			return d.ReadBool(schemas.DescribeClassificationJobResponse_initialRun, v.InitialRun)
-		case schemas.DescribeClassificationJobResponse_jobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.DescribeClassificationJobResponse_jobArn, v.JobArn)
-		case schemas.DescribeClassificationJobResponse_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DescribeClassificationJobResponse_jobId, v.JobId)
-		case schemas.DescribeClassificationJobResponse_jobStatus:
-			var ev string
-			if err := d.ReadString(schemas.DescribeClassificationJobResponse_jobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = types.JobStatus(ev)
-			return nil
-		case schemas.DescribeClassificationJobResponse_jobType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeClassificationJobResponse_jobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = types.JobType(ev)
-			return nil
-		case schemas.DescribeClassificationJobResponse_lastRunErrorStatus:
-			v.LastRunErrorStatus = &types.LastRunErrorStatus{}
-			return v.LastRunErrorStatus.Deserialize(d)
-		case schemas.DescribeClassificationJobResponse_lastRunTime:
-			v.LastRunTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeClassificationJobResponse_lastRunTime, v.LastRunTime)
-		case schemas.DescribeClassificationJobResponse_managedDataIdentifierIds:
-			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_managedDataIdentifierIds, &v.ManagedDataIdentifierIds)
-		case schemas.DescribeClassificationJobResponse_managedDataIdentifierSelector:
-			var ev string
-			if err := d.ReadString(schemas.DescribeClassificationJobResponse_managedDataIdentifierSelector, &ev); err != nil {
-				return err
-			}
-			v.ManagedDataIdentifierSelector = types.ManagedDataIdentifierSelector(ev)
-			return nil
-		case schemas.DescribeClassificationJobResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeClassificationJobResponse_name, v.Name)
-		case schemas.DescribeClassificationJobResponse_s3JobDefinition:
-			v.S3JobDefinition = &types.S3JobDefinition{}
-			return v.S3JobDefinition.Deserialize(d)
-		case schemas.DescribeClassificationJobResponse_samplingPercentage:
-			v.SamplingPercentage = new(int32)
-			return d.ReadInt32(schemas.DescribeClassificationJobResponse_samplingPercentage, v.SamplingPercentage)
-		case schemas.DescribeClassificationJobResponse_scheduleFrequency:
-			v.ScheduleFrequency = &types.JobScheduleFrequency{}
-			return v.ScheduleFrequency.Deserialize(d)
-		case schemas.DescribeClassificationJobResponse_statistics:
-			v.Statistics = &types.Statistics{}
-			return v.Statistics.Deserialize(d)
-		case schemas.DescribeClassificationJobResponse_tags:
-			return deserializeTagMap(d, schemas.DescribeClassificationJobResponse_tags, &v.Tags)
-		case schemas.DescribeClassificationJobResponse_userPausedDetails:
-			v.UserPausedDetails = &types.UserPausedDetails{}
-			return v.UserPausedDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClassificationJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClassificationJob, schemas.DescribeClassificationJobRequest, schemas.DescribeClassificationJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClassificationJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClassificationJob, schemas.DescribeClassificationJobRequest, schemas.DescribeClassificationJobResponse), output: &DescribeClassificationJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeClassificationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeClassificationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClassificationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -364,22 +223,8 @@ func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeClassificationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeClassificationJob",
-	}
 }

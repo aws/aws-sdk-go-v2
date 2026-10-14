@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -56,6 +56,22 @@ type DescribeGameSessionQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionQueuesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeGameSessionQueuesInput_Limit, *v.Limit)
+	}
+	serializeGameSessionQueueNameOrArnList(s, schemas.DescribeGameSessionQueuesInput_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameSessionQueuesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeGameSessionQueuesOutput struct {
 
 	// A collection of objects that describe the requested game session queues.
@@ -72,77 +88,51 @@ type DescribeGameSessionQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionQueuesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameSessionQueueList(s, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, v.GameSessionQueues)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameSessionQueuesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeGameSessionQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGameSessionQueuesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGameSessionQueuesOutput_GameSessionQueues:
+			return deserializeGameSessionQueueList(d, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, &v.GameSessionQueues)
+		case schemas.DescribeGameSessionQueuesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeGameSessionQueuesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGameSessionQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionQueues, schemas.DescribeGameSessionQueuesInput, schemas.DescribeGameSessionQueuesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameSessionQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionQueues, schemas.DescribeGameSessionQueuesInput, schemas.DescribeGameSessionQueuesOutput), output: &DescribeGameSessionQueuesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameSessionQueues{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGameSessionQueues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameSessionQueues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +145,6 @@ func (c *Client) addOperationDescribeGameSessionQueuesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -264,11 +248,3 @@ type DescribeGameSessionQueuesAPIClient interface {
 }
 
 var _ DescribeGameSessionQueuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeGameSessionQueues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeGameSessionQueues",
-	}
-}

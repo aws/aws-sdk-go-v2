@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__","RoutingProfileQueueConfigSummaryList":[{"Channel":"VOICE","Delay":1,"Priority":1,"QueueArn":"__QueueArn__","QueueId":"__QueueId__","QueueName":"__QueueName__"},{"Channel":"VOICE","Delay":1,"Priority":1,"QueueArn":"__QueueArn__","QueueId":"__QueueId__","QueueName":"__QueueName__"}]}

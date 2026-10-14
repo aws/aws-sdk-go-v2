@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelMembership":{"AppInstanceUserMembershipSummary":{"ReadMarkerTimestamp":946684800,"SubChannelId":"__SubChannelId__","Type":"DEFAULT"},"ChannelSummary":{"ChannelArn":"__ChannelArn__","LastMessageTimestamp":946684800,"Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"}}}

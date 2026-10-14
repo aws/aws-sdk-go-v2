@@ -1,0 +1,4 @@
+GET /v20180820/accessgrantsinstance/grants?application_arn=__ApplicationArn__&granteeidentifier=__GranteeIdentifier__&granteetype=DIRECTORY_USER&grantscope=__GrantScope__&maxResults=1&nextToken=__NextToken__&permission=READ
+
+X-Amz-Account-Id: AccountId-value
+

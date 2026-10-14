@@ -4,11 +4,10 @@ package mediapackage
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Changes the Channel's properities to configure log subscription
@@ -44,6 +43,28 @@ type ConfigureLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsRequest_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigureLogsRequest_Id, *v.Id)
+	}
+	if v.IngressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsRequest_IngressAccessLogs)
+		v.IngressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ConfigureLogsOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.
@@ -76,77 +97,93 @@ type ConfigureLogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_Description, *v.Description)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsIngest != nil {
+		s.WriteStruct(schemas.ConfigureLogsResponse_HlsIngest)
+		v.HlsIngest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_Id, *v.Id)
+	}
+	if v.IngressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsResponse_IngressAccessLogs)
+		v.IngressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.ConfigureLogsResponse_Tags, v.Tags)
+}
+func (v *ConfigureLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_Arn, v.Arn)
+		case schemas.ConfigureLogsResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_CreatedAt, v.CreatedAt)
+		case schemas.ConfigureLogsResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_Description, v.Description)
+		case schemas.ConfigureLogsResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.ConfigureLogsResponse_HlsIngest:
+			v.HlsIngest = &types.HlsIngest{}
+			return v.HlsIngest.Deserialize(d)
+		case schemas.ConfigureLogsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_Id, v.Id)
+		case schemas.ConfigureLogsResponse_IngressAccessLogs:
+			v.IngressAccessLogs = &types.IngressAccessLogs{}
+			return v.IngressAccessLogs.Deserialize(d)
+		case schemas.ConfigureLogsResponse_Tags:
+			return deserializeTags(d, schemas.ConfigureLogsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogs, schemas.ConfigureLogsRequest, schemas.ConfigureLogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogs, schemas.ConfigureLogsRequest, schemas.ConfigureLogsResponse), output: &ConfigureLogsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureLogs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfigureLogs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfigureLogsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfigureLogs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +198,8 @@ func (c *Client) addOperationConfigureLogsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfigureLogs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfigureLogs",
-	}
 }

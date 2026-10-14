@@ -5,10 +5,10 @@ package codecommit
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Posts a comment on a pull request.
@@ -70,6 +70,38 @@ type PostCommentForPullRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostCommentForPullRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostCommentForPullRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostCommentForPullRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterCommitId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_afterCommitId, *v.AfterCommitId)
+	}
+	if v.BeforeCommitId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_beforeCommitId, *v.BeforeCommitId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_content, *v.Content)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.PostCommentForPullRequestInput_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PostCommentForPullRequestInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type PostCommentForPullRequestOutput struct {
 
 	// In the directionality of the pull request, the blob ID of the after blob.
@@ -105,65 +137,88 @@ type PostCommentForPullRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostCommentForPullRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostCommentForPullRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostCommentForPullRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterBlobId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_afterBlobId, *v.AfterBlobId)
+	}
+	if v.AfterCommitId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_afterCommitId, *v.AfterCommitId)
+	}
+	if v.BeforeBlobId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_beforeBlobId, *v.BeforeBlobId)
+	}
+	if v.BeforeCommitId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_beforeCommitId, *v.BeforeCommitId)
+	}
+	if v.Comment != nil {
+		s.WriteStruct(schemas.PostCommentForPullRequestOutput_comment)
+		v.Comment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.PostCommentForPullRequestOutput_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PostCommentForPullRequestOutput_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PostCommentForPullRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostCommentForPullRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostCommentForPullRequestOutput_afterBlobId:
+			v.AfterBlobId = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_afterBlobId, v.AfterBlobId)
+		case schemas.PostCommentForPullRequestOutput_afterCommitId:
+			v.AfterCommitId = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_afterCommitId, v.AfterCommitId)
+		case schemas.PostCommentForPullRequestOutput_beforeBlobId:
+			v.BeforeBlobId = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_beforeBlobId, v.BeforeBlobId)
+		case schemas.PostCommentForPullRequestOutput_beforeCommitId:
+			v.BeforeCommitId = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_beforeCommitId, v.BeforeCommitId)
+		case schemas.PostCommentForPullRequestOutput_comment:
+			v.Comment = &types.Comment{}
+			return v.Comment.Deserialize(d)
+		case schemas.PostCommentForPullRequestOutput_location:
+			v.Location = &types.Location{}
+			return v.Location.Deserialize(d)
+		case schemas.PostCommentForPullRequestOutput_pullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_pullRequestId, v.PullRequestId)
+		case schemas.PostCommentForPullRequestOutput_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PostCommentForPullRequestOutput_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostCommentForPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostCommentForPullRequest, schemas.PostCommentForPullRequestInput, schemas.PostCommentForPullRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPostCommentForPullRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostCommentForPullRequest, schemas.PostCommentForPullRequestInput, schemas.PostCommentForPullRequestOutput), output: &PostCommentForPullRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPostCommentForPullRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PostCommentForPullRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +228,6 @@ func (c *Client) addOperationPostCommentForPullRequestMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpPostCommentForPullRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostCommentForPullRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +240,6 @@ func (c *Client) addOperationPostCommentForPullRequestMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,12 +279,4 @@ func (m *idempotencyToken_initializeOpPostCommentForPullRequest) HandleInitializ
 }
 func addIdempotencyToken_opPostCommentForPullRequestMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPostCommentForPullRequest{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPostCommentForPullRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PostCommentForPullRequest",
-	}
 }

@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/identity-provider-configs/disassociate
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","identityProviderConfig":{"name":"__Name__","type":"__Type__"}}

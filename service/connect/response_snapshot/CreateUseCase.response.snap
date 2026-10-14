@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"UseCaseArn":"__UseCaseArn__","UseCaseId":"__UseCaseId__"}

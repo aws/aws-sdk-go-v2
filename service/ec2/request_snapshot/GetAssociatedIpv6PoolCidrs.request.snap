@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetAssociatedIpv6PoolCidrs&DryRun=true&MaxResults=1&NextToken=__NextToken__&PoolId=__PoolId__&Version=2016-11-15

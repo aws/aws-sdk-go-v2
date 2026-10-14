@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the namespaces for the specified Amazon Web Services account. This
@@ -51,6 +51,24 @@ type ListNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListNamespacesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNamespacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamespacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListNamespacesOutput struct {
 
 	// The information about the namespaces in this Amazon Web Services account. The
@@ -78,77 +96,62 @@ type ListNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamespaces(s, schemas.ListNamespacesResponse_Namespaces, v.Namespaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamespacesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListNamespacesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListNamespacesResponse_Status, v.Status)
+	}
+}
+func (v *ListNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNamespacesResponse_Namespaces:
+			return deserializeNamespaces(d, schemas.ListNamespacesResponse_Namespaces, &v.Namespaces)
+		case schemas.ListNamespacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNamespacesResponse_NextToken, v.NextToken)
+		case schemas.ListNamespacesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListNamespacesResponse_RequestId, v.RequestId)
+		case schemas.ListNamespacesResponse_Status:
+			return d.ReadInt32(schemas.ListNamespacesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse), output: &ListNamespacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNamespaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNamespaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListNamespacesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNamespaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +164,6 @@ func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +264,3 @@ type ListNamespacesAPIClient interface {
 }
 
 var _ ListNamespacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListNamespaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListNamespaces",
-	}
-}

@@ -1,0 +1,5 @@
+POST /backlog/agent-space/__AgentSpaceId__/goals/list
+
+Content-Type: application/json
+
+{"goalType":"CUSTOMER_DEFINED","limit":1,"nextToken":"__NextToken__","status":"ACTIVE"}

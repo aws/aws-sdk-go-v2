@@ -7,6 +7,40 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
 )
 
+func ExampleAttributeValue_outputUsage() {
+	var union types.AttributeValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AttributeValueMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.AttributeValueMemberNumberArray:
+		_ = v.Value // Value is []float64
+
+	case *types.AttributeValueMemberNumberValue:
+		_ = v.Value // Value is float64
+
+	case *types.AttributeValueMemberStringArray:
+		_ = v.Value // Value is []string
+
+	case *types.AttributeValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ *string
+var _ bool
+var _ []float64
+var _ float64
+
 func ExampleBadRequestDetails_outputUsage() {
 	var union types.BadRequestDetails
 	// type switches can be used to check the union value
@@ -24,3 +58,21 @@ func ExampleBadRequestDetails_outputUsage() {
 }
 
 var _ []types.InvalidConfigurationDetail
+
+func ExampleTreatmentOverrides_outputUsage() {
+	var union types.TreatmentOverrides
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TreatmentOverridesMemberInline:
+		_ = v.Value // Value is map[string]string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ map[string]string

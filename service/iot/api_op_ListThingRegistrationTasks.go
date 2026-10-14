@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List bulk thing provisioning tasks.
@@ -46,6 +46,24 @@ type ListThingRegistrationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingRegistrationTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTasksRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListThingRegistrationTasksRequest_status, string(v.Status))
+	}
+}
+
 type ListThingRegistrationTasksOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -61,74 +79,48 @@ type ListThingRegistrationTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeTaskIdList(s, schemas.ListThingRegistrationTasksResponse_taskIds, v.TaskIds)
+}
+func (v *ListThingRegistrationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingRegistrationTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingRegistrationTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingRegistrationTasksResponse_nextToken, v.NextToken)
+		case schemas.ListThingRegistrationTasksResponse_taskIds:
+			return deserializeTaskIdList(d, schemas.ListThingRegistrationTasksResponse_taskIds, &v.TaskIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTasks, schemas.ListThingRegistrationTasksRequest, schemas.ListThingRegistrationTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingRegistrationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTasks, schemas.ListThingRegistrationTasksRequest, schemas.ListThingRegistrationTasksResponse), output: &ListThingRegistrationTasksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingRegistrationTasks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThingRegistrationTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThingRegistrationTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +133,6 @@ func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListThingRegistrationTasksAPIClient interface {
 }
 
 var _ ListThingRegistrationTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListThingRegistrationTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListThingRegistrationTasks",
-	}
-}

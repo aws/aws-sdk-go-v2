@@ -1,0 +1,7 @@
+POST /service/AWSHealth_20160804/operation/DescribeEventTypes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿ffilter¿oactionabilitiesŸoACTION_REQUIREDoACTION_REQUIREDÿseventTypeCategoriesŸeissueeissueÿneventTypeCodesŸj__Member__j__Member__ÿhpersonasŸjOPERATIONSjOPERATIONSÿhservicesŸj__Member__j__Member__ÿÿflocalej__Locale__jmaxResultsinextTokenm__NextToken__ÿ

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200,"TemplateAliasList":[{"AliasName":"__AliasName__","Arn":"__Arn__","TemplateVersionNumber":1},{"AliasName":"__AliasName__","Arn":"__Arn__","TemplateVersionNumber":1}]}

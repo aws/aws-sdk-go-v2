@@ -5,12 +5,8 @@ package braket
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a quantum task.
@@ -85,79 +81,6 @@ type CreateQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQuantumTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateQuantumTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_action, *v.Action)
-	}
-	serializeAssociations(s, schemas.CreateQuantumTaskRequest_associations, v.Associations)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_clientToken, *v.ClientToken)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_deviceArn, *v.DeviceArn)
-	}
-	if v.DeviceParameters != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_deviceParameters, *v.DeviceParameters)
-	}
-	serializeExperimentalCapabilities(s, schemas.CreateQuantumTaskRequest_experimentalCapabilities, v.ExperimentalCapabilities)
-	if v.JobToken != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_jobToken, *v.JobToken)
-	}
-	if v.OutputS3Bucket != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_outputS3Bucket, *v.OutputS3Bucket)
-	}
-	if v.OutputS3KeyPrefix != nil {
-		s.WriteString(schemas.CreateQuantumTaskRequest_outputS3KeyPrefix, *v.OutputS3KeyPrefix)
-	}
-	if v.Shots != nil {
-		s.WriteInt64(schemas.CreateQuantumTaskRequest_shots, *v.Shots)
-	}
-	serializeTagsMap(s, schemas.CreateQuantumTaskRequest_tags, v.Tags)
-}
-func (v *CreateQuantumTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateQuantumTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateQuantumTaskRequest_action:
-			v.Action = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_action, v.Action)
-		case schemas.CreateQuantumTaskRequest_associations:
-			return deserializeAssociations(d, schemas.CreateQuantumTaskRequest_associations, &v.Associations)
-		case schemas.CreateQuantumTaskRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_clientToken, v.ClientToken)
-		case schemas.CreateQuantumTaskRequest_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_deviceArn, v.DeviceArn)
-		case schemas.CreateQuantumTaskRequest_deviceParameters:
-			v.DeviceParameters = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_deviceParameters, v.DeviceParameters)
-		case schemas.CreateQuantumTaskRequest_experimentalCapabilities:
-			return deserializeExperimentalCapabilities(d, schemas.CreateQuantumTaskRequest_experimentalCapabilities, &v.ExperimentalCapabilities)
-		case schemas.CreateQuantumTaskRequest_jobToken:
-			v.JobToken = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_jobToken, v.JobToken)
-		case schemas.CreateQuantumTaskRequest_outputS3Bucket:
-			v.OutputS3Bucket = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_outputS3Bucket, v.OutputS3Bucket)
-		case schemas.CreateQuantumTaskRequest_outputS3KeyPrefix:
-			v.OutputS3KeyPrefix = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskRequest_outputS3KeyPrefix, v.OutputS3KeyPrefix)
-		case schemas.CreateQuantumTaskRequest_shots:
-			v.Shots = new(int64)
-			return d.ReadInt64(schemas.CreateQuantumTaskRequest_shots, v.Shots)
-		case schemas.CreateQuantumTaskRequest_tags:
-			return deserializeTagsMap(d, schemas.CreateQuantumTaskRequest_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateQuantumTaskOutput struct {
 
 	// The ARN of the quantum task created by the request.
@@ -171,84 +94,23 @@ type CreateQuantumTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQuantumTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateQuantumTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.CreateQuantumTaskResponse_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *CreateQuantumTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateQuantumTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateQuantumTaskResponse_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.CreateQuantumTaskResponse_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuantumTask, schemas.CreateQuantumTaskRequest, schemas.CreateQuantumTaskResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuantumTask, schemas.CreateQuantumTaskRequest, schemas.CreateQuantumTaskResponse), output: &CreateQuantumTaskOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQuantumTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -258,12 +120,6 @@ func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateQuantumTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQuantumTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -276,12 +132,6 @@ func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -321,12 +171,4 @@ func (m *idempotencyToken_initializeOpCreateQuantumTask) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateQuantumTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateQuantumTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateQuantumTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateQuantumTask",
-	}
 }

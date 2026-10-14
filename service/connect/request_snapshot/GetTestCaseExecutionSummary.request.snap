@@ -1,0 +1,3 @@
+GET /test-cases/__InstanceId__/__TestCaseId__/__TestCaseExecutionId__/summary
+
+

@@ -1,0 +1,5 @@
+POST /sip-media-applications
+
+Content-Type: application/json
+
+{"AwsRegion":"__AwsRegion__","Endpoints":[{"LambdaArn":"__LambdaArn__"},{"LambdaArn":"__LambdaArn__"}],"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreationTimestamp":"__CreationTimestamp__","Definition":{"Cores":[{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"},{"CertificateArn":"__CertificateArn__","Id":"__Id__","SyncShadow":true,"ThingArn":"__ThingArn__"}]},"Id":"__Id__","NextToken":"__NextToken__","Version":"__Version__"}

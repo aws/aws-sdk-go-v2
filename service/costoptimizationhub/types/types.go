@@ -384,6 +384,39 @@ func (v *DbInstanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The Amazon DocumentDB cluster recommendation details.
+type DocumentDbCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentDbCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentDbCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentDbCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.DocumentDbCluster_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DocumentDbCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentDbCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentDbCluster_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The DynamoDB reserved capacity recommendation details.
 type DynamoDbReservedCapacity struct {
 
@@ -527,6 +560,39 @@ func (v *DynamoDbReservedCapacityConfiguration) Deserialize(d smithy.ShapeDeseri
 		case schemas.DynamoDbReservedCapacityConfiguration_upfrontCost:
 			v.UpfrontCost = new(string)
 			return d.ReadString(schemas.DynamoDbReservedCapacityConfiguration_upfrontCost, v.UpfrontCost)
+		}
+		return nil
+	})
+}
+
+// The DynamoDB table recommendation details.
+type DynamoDbTable struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *DynamoDbTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynamoDbTable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynamoDbTable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.DynamoDbTable_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DynamoDbTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynamoDbTable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynamoDbTable_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
 		}
 		return nil
 	})
@@ -1288,6 +1354,39 @@ func (v *EfficiencyMetricsByGroup) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The ElastiCache cluster recommendation details.
+type ElastiCacheCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ElastiCacheCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElastiCacheCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElastiCacheCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.ElastiCacheCluster_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ElastiCacheCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElastiCacheCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElastiCacheCluster_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The ElastiCache reserved instances recommendation details.
 type ElastiCacheReservedInstances struct {
 
@@ -1721,6 +1820,39 @@ func (v *LambdaFunctionConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.LambdaFunctionConfiguration_compute:
 			v.Compute = &ComputeConfiguration{}
 			return v.Compute.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The MemoryDB cluster recommendation details.
+type MemoryDbCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *MemoryDbCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemoryDbCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemoryDbCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.MemoryDbCluster_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MemoryDbCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemoryDbCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemoryDbCluster_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
 		}
 		return nil
 	})
@@ -3364,15 +3496,19 @@ func (v *ResourceCostCalculation) Deserialize(d smithy.ShapeDeserializer) error 
 //
 //	ResourceDetailsMemberAuroraDbClusterStorage
 //	ResourceDetailsMemberComputeSavingsPlans
+//	ResourceDetailsMemberDocumentDbCluster
 //	ResourceDetailsMemberDynamoDbReservedCapacity
+//	ResourceDetailsMemberDynamoDbTable
 //	ResourceDetailsMemberEbsVolume
 //	ResourceDetailsMemberEc2AutoScalingGroup
 //	ResourceDetailsMemberEc2Instance
 //	ResourceDetailsMemberEc2InstanceSavingsPlans
 //	ResourceDetailsMemberEc2ReservedInstances
 //	ResourceDetailsMemberEcsService
+//	ResourceDetailsMemberElastiCacheCluster
 //	ResourceDetailsMemberElastiCacheReservedInstances
 //	ResourceDetailsMemberLambdaFunction
+//	ResourceDetailsMemberMemoryDbCluster
 //	ResourceDetailsMemberMemoryDbReservedInstances
 //	ResourceDetailsMemberNatGateway
 //	ResourceDetailsMemberOpenSearchReservedInstances
@@ -3380,7 +3516,9 @@ func (v *ResourceCostCalculation) Deserialize(d smithy.ShapeDeserializer) error 
 //	ResourceDetailsMemberRdsDbInstanceStorage
 //	ResourceDetailsMemberRdsReservedInstances
 //	ResourceDetailsMemberRedshiftReservedInstances
+//	ResourceDetailsMemberSageMakerEndpoint
 //	ResourceDetailsMemberSageMakerSavingsPlans
+//	ResourceDetailsMemberWorkSpaces
 type ResourceDetails interface {
 	isResourceDetails()
 }
@@ -3419,6 +3557,23 @@ func (v *ResourceDetailsMemberComputeSavingsPlans) Deserialize(d smithy.ShapeDes
 	return v.Value.Deserialize(d)
 }
 
+// The Amazon DocumentDB cluster recommendation details.
+type ResourceDetailsMemberDocumentDbCluster struct {
+	Value DocumentDbCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberDocumentDbCluster) isResourceDetails() {}
+func (v *ResourceDetailsMemberDocumentDbCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_documentDbCluster)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberDocumentDbCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The DynamoDB reserved capacity recommendation details.
 type ResourceDetailsMemberDynamoDbReservedCapacity struct {
 	Value DynamoDbReservedCapacity
@@ -3433,6 +3588,23 @@ func (v *ResourceDetailsMemberDynamoDbReservedCapacity) Serialize(s smithy.Shape
 	s.CloseStruct()
 }
 func (v *ResourceDetailsMemberDynamoDbReservedCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The DynamoDB table recommendation details.
+type ResourceDetailsMemberDynamoDbTable struct {
+	Value DynamoDbTable
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberDynamoDbTable) isResourceDetails() {}
+func (v *ResourceDetailsMemberDynamoDbTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_dynamoDbTable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberDynamoDbTable) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3538,6 +3710,23 @@ func (v *ResourceDetailsMemberEcsService) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
+// The ElastiCache cluster recommendation details.
+type ResourceDetailsMemberElastiCacheCluster struct {
+	Value ElastiCacheCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberElastiCacheCluster) isResourceDetails() {}
+func (v *ResourceDetailsMemberElastiCacheCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_elastiCacheCluster)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberElastiCacheCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The ElastiCache reserved instances recommendation details.
 type ResourceDetailsMemberElastiCacheReservedInstances struct {
 	Value ElastiCacheReservedInstances
@@ -3569,6 +3758,23 @@ func (v *ResourceDetailsMemberLambdaFunction) Serialize(s smithy.ShapeSerializer
 	s.CloseStruct()
 }
 func (v *ResourceDetailsMemberLambdaFunction) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The MemoryDB cluster recommendation details.
+type ResourceDetailsMemberMemoryDbCluster struct {
+	Value MemoryDbCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberMemoryDbCluster) isResourceDetails() {}
+func (v *ResourceDetailsMemberMemoryDbCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_memoryDbCluster)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberMemoryDbCluster) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3691,6 +3897,23 @@ func (v *ResourceDetailsMemberRedshiftReservedInstances) Deserialize(d smithy.Sh
 	return v.Value.Deserialize(d)
 }
 
+// The SageMaker endpoint recommendation details.
+type ResourceDetailsMemberSageMakerEndpoint struct {
+	Value SageMakerEndpoint
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberSageMakerEndpoint) isResourceDetails() {}
+func (v *ResourceDetailsMemberSageMakerEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_sageMakerEndpoint)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberSageMakerEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The SageMaker AI Savings Plans recommendation details.
 type ResourceDetailsMemberSageMakerSavingsPlans struct {
 	Value SageMakerSavingsPlans
@@ -3705,6 +3928,23 @@ func (v *ResourceDetailsMemberSageMakerSavingsPlans) Serialize(s smithy.ShapeSer
 	s.CloseStruct()
 }
 func (v *ResourceDetailsMemberSageMakerSavingsPlans) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The WorkSpaces recommendation details.
+type ResourceDetailsMemberWorkSpaces struct {
+	Value WorkSpaces
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberWorkSpaces) isResourceDetails() {}
+func (v *ResourceDetailsMemberWorkSpaces) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails_workSpaces)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceDetailsMemberWorkSpaces) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3765,6 +4005,39 @@ func (v *ResourcePricing) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourcePricing_estimatedNetUnusedAmortizedCommitments:
 			v.EstimatedNetUnusedAmortizedCommitments = new(float64)
 			return d.ReadFloat64(schemas.ResourcePricing_estimatedNetUnusedAmortizedCommitments, v.EstimatedNetUnusedAmortizedCommitments)
+		}
+		return nil
+	})
+}
+
+// The SageMaker endpoint recommendation details.
+type SageMakerEndpoint struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *SageMakerEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.SageMakerEndpoint_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SageMakerEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerEndpoint_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
 		}
 		return nil
 	})
@@ -4234,6 +4507,39 @@ func (v *ValidationExceptionDetail) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.ValidationExceptionDetail_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ValidationExceptionDetail_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The WorkSpaces recommendation details.
+type WorkSpaces struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
+func (v *WorkSpaces) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkSpaces)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkSpaces) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCalculation != nil {
+		s.WriteStruct(schemas.WorkSpaces_costCalculation)
+		v.CostCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkSpaces) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkSpaces, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkSpaces_costCalculation:
+			v.CostCalculation = &ResourceCostCalculation{}
+			return v.CostCalculation.Deserialize(d)
 		}
 		return nil
 	})

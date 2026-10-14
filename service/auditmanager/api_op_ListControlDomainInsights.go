@@ -5,10 +5,10 @@ package auditmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the latest analytics data for control domains across all of your active
@@ -50,6 +50,21 @@ type ListControlDomainInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlDomainInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlDomainInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlDomainInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlDomainInsightsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlDomainInsightsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListControlDomainInsightsOutput struct {
 
 	// The control domain analytics data that the ListControlDomainInsights API
@@ -65,74 +80,48 @@ type ListControlDomainInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlDomainInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlDomainInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlDomainInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlDomainInsightsList(s, schemas.ListControlDomainInsightsResponse_controlDomainInsights, v.ControlDomainInsights)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlDomainInsightsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListControlDomainInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlDomainInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlDomainInsightsResponse_controlDomainInsights:
+			return deserializeControlDomainInsightsList(d, schemas.ListControlDomainInsightsResponse_controlDomainInsights, &v.ControlDomainInsights)
+		case schemas.ListControlDomainInsightsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlDomainInsightsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlDomainInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlDomainInsights, schemas.ListControlDomainInsightsRequest, schemas.ListControlDomainInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlDomainInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlDomainInsights, schemas.ListControlDomainInsightsRequest, schemas.ListControlDomainInsightsResponse), output: &ListControlDomainInsightsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlDomainInsights{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlDomainInsights"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlDomainInsights(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +134,6 @@ func (c *Client) addOperationListControlDomainInsightsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +236,3 @@ type ListControlDomainInsightsAPIClient interface {
 }
 
 var _ ListControlDomainInsightsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListControlDomainInsights(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListControlDomainInsights",
-	}
-}

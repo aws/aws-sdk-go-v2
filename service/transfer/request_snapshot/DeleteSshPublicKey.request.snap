@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.DeleteSshPublicKey
+
+{"ServerId":"__ServerId__","SshPublicKeyId":"__SshPublicKeyId__","UserName":"__UserName__"}

@@ -1,0 +1,5 @@
+POST /hours-of-operations/__InstanceId__/__HoursOfOperationId__/disassociate-hours
+
+Content-Type: application/json
+
+{"ParentHoursOfOperationIds":["__Member__","__Member__"]}

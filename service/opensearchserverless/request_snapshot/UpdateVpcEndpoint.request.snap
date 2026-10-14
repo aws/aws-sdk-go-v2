@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.UpdateVpcEndpoint
+
+{"addSecurityGroupIds":["__Member__","__Member__"],"addSubnetIds":["__Member__","__Member__"],"clientToken":"__ClientToken__","id":"__Id__","removeSecurityGroupIds":["__Member__","__Member__"],"removeSubnetIds":["__Member__","__Member__"]}

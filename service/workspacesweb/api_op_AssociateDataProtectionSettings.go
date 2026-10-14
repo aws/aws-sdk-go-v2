@@ -4,12 +4,7 @@ package workspacesweb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a data protection settings resource with a web portal.
@@ -43,21 +38,6 @@ type AssociateDataProtectionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateDataProtectionSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataProtectionSettingsArn != nil {
-		s.WriteString(schemas.AssociateDataProtectionSettingsRequest_dataProtectionSettingsArn, *v.DataProtectionSettingsArn)
-	}
-	if v.PortalArn != nil {
-		s.WriteString(schemas.AssociateDataProtectionSettingsRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type AssociateDataProtectionSettingsOutput struct {
 
 	// The ARN of the data protection settings resource.
@@ -76,88 +56,29 @@ type AssociateDataProtectionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateDataProtectionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateDataProtectionSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateDataProtectionSettingsResponse_dataProtectionSettingsArn:
-			v.DataProtectionSettingsArn = new(string)
-			return d.ReadString(schemas.AssociateDataProtectionSettingsResponse_dataProtectionSettingsArn, v.DataProtectionSettingsArn)
-		case schemas.AssociateDataProtectionSettingsResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.AssociateDataProtectionSettingsResponse_portalArn, v.PortalArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateDataProtectionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDataProtectionSettings, schemas.AssociateDataProtectionSettingsRequest, schemas.AssociateDataProtectionSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDataProtectionSettings, schemas.AssociateDataProtectionSettingsRequest, schemas.AssociateDataProtectionSettingsResponse), output: &AssociateDataProtectionSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateDataProtectionSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateDataProtectionSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDataProtectionSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +93,8 @@ func (c *Client) addOperationAssociateDataProtectionSettingsMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateDataProtectionSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateDataProtectionSettings",
-	}
 }

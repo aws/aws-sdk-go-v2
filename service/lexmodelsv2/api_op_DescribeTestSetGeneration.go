@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeTestSetGenerationInput struct {
 	TestSetGenerationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTestSetGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestSetGenerationId != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationRequest_testSetGenerationId, *v.TestSetGenerationId)
+	}
 }
 
 type DescribeTestSetGenerationOutput struct {
@@ -79,77 +90,113 @@ type DescribeTestSetGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestSetGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeTestSetGenerationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_description, *v.Description)
+	}
+	serializeFailureReasons(s, schemas.DescribeTestSetGenerationResponse_failureReasons, v.FailureReasons)
+	if v.GenerationDataSource != nil {
+		s.WriteStruct(schemas.DescribeTestSetGenerationResponse_generationDataSource)
+		v.GenerationDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeTestSetGenerationResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_roleArn, *v.RoleArn)
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.DescribeTestSetGenerationResponse_storageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetGenerationId != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_testSetGenerationId, *v.TestSetGenerationId)
+	}
+	if v.TestSetGenerationStatus != "" {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_testSetGenerationStatus, string(v.TestSetGenerationStatus))
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_testSetId, *v.TestSetId)
+	}
+	if v.TestSetName != nil {
+		s.WriteString(schemas.DescribeTestSetGenerationResponse_testSetName, *v.TestSetName)
+	}
+}
+func (v *DescribeTestSetGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTestSetGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTestSetGenerationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetGenerationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeTestSetGenerationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeTestSetGenerationResponse_description, v.Description)
+		case schemas.DescribeTestSetGenerationResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeTestSetGenerationResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeTestSetGenerationResponse_generationDataSource:
+			v.GenerationDataSource = &types.TestSetGenerationDataSource{}
+			return v.GenerationDataSource.Deserialize(d)
+		case schemas.DescribeTestSetGenerationResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetGenerationResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeTestSetGenerationResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeTestSetGenerationResponse_roleArn, v.RoleArn)
+		case schemas.DescribeTestSetGenerationResponse_storageLocation:
+			v.StorageLocation = &types.TestSetStorageLocation{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.DescribeTestSetGenerationResponse_testSetGenerationId:
+			v.TestSetGenerationId = new(string)
+			return d.ReadString(schemas.DescribeTestSetGenerationResponse_testSetGenerationId, v.TestSetGenerationId)
+		case schemas.DescribeTestSetGenerationResponse_testSetGenerationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestSetGenerationResponse_testSetGenerationStatus, &ev); err != nil {
+				return err
+			}
+			v.TestSetGenerationStatus = types.TestSetGenerationStatus(ev)
+			return nil
+		case schemas.DescribeTestSetGenerationResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.DescribeTestSetGenerationResponse_testSetId, v.TestSetId)
+		case schemas.DescribeTestSetGenerationResponse_testSetName:
+			v.TestSetName = new(string)
+			return d.ReadString(schemas.DescribeTestSetGenerationResponse_testSetName, v.TestSetName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTestSetGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSetGeneration, schemas.DescribeTestSetGenerationRequest, schemas.DescribeTestSetGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTestSetGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSetGeneration, schemas.DescribeTestSetGenerationRequest, schemas.DescribeTestSetGenerationResponse), output: &DescribeTestSetGenerationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTestSetGeneration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTestSetGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTestSetGenerationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTestSetGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +211,8 @@ func (c *Client) addOperationDescribeTestSetGenerationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTestSetGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTestSetGeneration",
-	}
 }

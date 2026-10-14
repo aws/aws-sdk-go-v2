@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/slottypes
+
+Content-Type: application/json
+
+{"compositeSlotTypeSetting":{"subSlots":[{"name":"__Name__","slotTypeId":"__SlotTypeId__"},{"name":"__Name__","slotTypeId":"__SlotTypeId__"}]},"description":"__Description__","externalSourceSetting":{"grammarSlotTypeSetting":{"source":{"kmsKeyArn":"__KmsKeyArn__","s3BucketName":"__S3BucketName__","s3ObjectKey":"__S3ObjectKey__"}}},"parentSlotTypeSignature":"__ParentSlotTypeSignature__","slotTypeName":"__SlotTypeName__","slotTypeValues":[{"sampleValue":{"value":"__Value__"},"synonyms":[{"value":"__Value__"},{"value":"__Value__"}]},{"sampleValue":{"value":"__Value__"},"synonyms":[{"value":"__Value__"},{"value":"__Value__"}]}],"valueSelectionSetting":{"advancedRecognitionSetting":{"audioRecognitionStrategy":"UseSlotValuesAsCustomVocabulary"},"regexFilter":{"pattern":"__Pattern__"},"resolutionStrategy":"OriginalValue"}}

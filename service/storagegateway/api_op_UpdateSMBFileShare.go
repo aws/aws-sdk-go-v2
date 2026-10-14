@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Server Message Block (SMB) file share. This operation is only
@@ -210,6 +209,71 @@ type UpdateSMBFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBFileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBFileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBasedEnumeration != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_AccessBasedEnumeration, *v.AccessBasedEnumeration)
+	}
+	serializeUserList(s, schemas.UpdateSMBFileShareInput_AdminUserList, v.AdminUserList)
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.UpdateSMBFileShareInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaseSensitivity != "" {
+		s.WriteString(schemas.UpdateSMBFileShareInput_CaseSensitivity, string(v.CaseSensitivity))
+	}
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.UpdateSMBFileShareInput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_FileShareARN, *v.FileShareARN)
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_FileShareName, *v.FileShareName)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	serializeUserList(s, schemas.UpdateSMBFileShareInput_InvalidUserList, v.InvalidUserList)
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_KMSKey, *v.KMSKey)
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.UpdateSMBFileShareInput_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.UpdateSMBFileShareInput_ObjectACL, string(v.ObjectACL))
+	}
+	if v.OplocksEnabled != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_OplocksEnabled, *v.OplocksEnabled)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_RequesterPays, *v.RequesterPays)
+	}
+	if v.SMBACLEnabled != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareInput_SMBACLEnabled, *v.SMBACLEnabled)
+	}
+	serializeUserList(s, schemas.UpdateSMBFileShareInput_ValidUserList, v.ValidUserList)
+}
+
 // UpdateSMBFileShareOutput
 type UpdateSMBFileShareOutput struct {
 
@@ -222,77 +286,48 @@ type UpdateSMBFileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBFileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBFileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBFileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.UpdateSMBFileShareOutput_FileShareARN, *v.FileShareARN)
+	}
+}
+func (v *UpdateSMBFileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSMBFileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSMBFileShareOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.UpdateSMBFileShareOutput_FileShareARN, v.FileShareARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBFileShare, schemas.UpdateSMBFileShareInput, schemas.UpdateSMBFileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBFileShare, schemas.UpdateSMBFileShareInput, schemas.UpdateSMBFileShareOutput), output: &UpdateSMBFileShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSMBFileShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSMBFileShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSMBFileShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSMBFileShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -307,22 +342,8 @@ func (c *Client) addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSMBFileShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSMBFileShare",
-	}
 }

@@ -5,10 +5,10 @@ package drs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of source servers on a staging account that are extensible,
@@ -46,6 +46,40 @@ type ListExtensibleSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensibleSourceServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtensibleSourceServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensibleSourceServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExtensibleSourceServersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersRequest_nextToken, *v.NextToken)
+	}
+	if v.StagingAccountID != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersRequest_stagingAccountID, *v.StagingAccountID)
+	}
+}
+func (v *ListExtensibleSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExtensibleSourceServersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExtensibleSourceServersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListExtensibleSourceServersRequest_maxResults, v.MaxResults)
+		case schemas.ListExtensibleSourceServersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersRequest_nextToken, v.NextToken)
+		case schemas.ListExtensibleSourceServersRequest_stagingAccountID:
+			v.StagingAccountID = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersRequest_stagingAccountID, v.StagingAccountID)
+		}
+		return nil
+	})
+}
+
 type ListExtensibleSourceServersOutput struct {
 
 	// A list of source servers on a staging Account that are extensible.
@@ -60,77 +94,51 @@ type ListExtensibleSourceServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensibleSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtensibleSourceServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensibleSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStagingSourceServersList(s, schemas.ListExtensibleSourceServersResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExtensibleSourceServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExtensibleSourceServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExtensibleSourceServersResponse_items:
+			return deserializeStagingSourceServersList(d, schemas.ListExtensibleSourceServersResponse_items, &v.Items)
+		case schemas.ListExtensibleSourceServersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensibleSourceServers, schemas.ListExtensibleSourceServersRequest, schemas.ListExtensibleSourceServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExtensibleSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensibleSourceServers, schemas.ListExtensibleSourceServersRequest, schemas.ListExtensibleSourceServersResponse), output: &ListExtensibleSourceServersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExtensibleSourceServers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExtensibleSourceServers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListExtensibleSourceServersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExtensibleSourceServers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +151,6 @@ func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +254,3 @@ type ListExtensibleSourceServersAPIClient interface {
 }
 
 var _ ListExtensibleSourceServersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListExtensibleSourceServers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListExtensibleSourceServers",
-	}
-}

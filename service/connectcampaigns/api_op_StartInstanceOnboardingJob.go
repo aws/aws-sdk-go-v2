@@ -4,13 +4,8 @@ package connectcampaigns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Onboard the specific Amazon Connect instance to Connect Campaigns.
@@ -48,36 +43,6 @@ type StartInstanceOnboardingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartInstanceOnboardingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartInstanceOnboardingJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartInstanceOnboardingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.StartInstanceOnboardingJobRequest_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.EncryptionConfig != nil {
-		s.WriteStruct(schemas.StartInstanceOnboardingJobRequest_encryptionConfig)
-		v.EncryptionConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *StartInstanceOnboardingJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartInstanceOnboardingJobRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartInstanceOnboardingJobRequest_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.StartInstanceOnboardingJobRequest_connectInstanceId, v.ConnectInstanceId)
-		case schemas.StartInstanceOnboardingJobRequest_encryptionConfig:
-			v.EncryptionConfig = &types.EncryptionConfig{}
-			return v.EncryptionConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The response for StartInstanceOnboardingJob API.
 type StartInstanceOnboardingJobOutput struct {
 
@@ -90,98 +55,29 @@ type StartInstanceOnboardingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartInstanceOnboardingJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartInstanceOnboardingJobResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartInstanceOnboardingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceOnboardingJobStatus != nil {
-		s.WriteStruct(schemas.StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus)
-		v.ConnectInstanceOnboardingJobStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *StartInstanceOnboardingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartInstanceOnboardingJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus:
-			v.ConnectInstanceOnboardingJobStatus = &types.InstanceOnboardingJobStatus{}
-			return v.ConnectInstanceOnboardingJobStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartInstanceOnboardingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInstanceOnboardingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceOnboardingJob, schemas.StartInstanceOnboardingJobRequest, schemas.StartInstanceOnboardingJobResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInstanceOnboardingJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInstanceOnboardingJob, schemas.StartInstanceOnboardingJobRequest, schemas.StartInstanceOnboardingJobResponse), output: &StartInstanceOnboardingJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartInstanceOnboardingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartInstanceOnboardingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartInstanceOnboardingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +92,8 @@ func (c *Client) addOperationStartInstanceOnboardingJobMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartInstanceOnboardingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartInstanceOnboardingJob",
-	}
 }

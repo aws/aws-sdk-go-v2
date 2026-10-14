@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/account-pools/__Identifier__
+
+Content-Type: application/json
+
+{"accountSource":{"accounts":[{"awsAccountId":"__AwsAccountId__","awsAccountName":"__AwsAccountName__","supportedRegions":["__Member__","__Member__"]},{"awsAccountId":"__AwsAccountId__","awsAccountName":"__AwsAccountName__","supportedRegions":["__Member__","__Member__"]}]},"description":"__Description__","name":"__Name__","resolutionStrategy":"MANUAL"}

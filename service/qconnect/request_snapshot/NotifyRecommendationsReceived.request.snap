@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/sessions/__SessionId__/recommendations/notify
+
+Content-Type: application/json
+
+{"recommendationIds":["__Member__","__Member__"]}

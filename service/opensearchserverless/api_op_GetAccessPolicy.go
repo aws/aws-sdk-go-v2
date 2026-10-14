@@ -4,11 +4,10 @@ package opensearchserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an OpenSearch Serverless access policy. For more information, see [Data access control for Amazon OpenSearch Serverless].
@@ -44,6 +43,38 @@ type GetAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetAccessPolicyRequest_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetAccessPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *GetAccessPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAccessPolicyRequest_name, v.Name)
+		case schemas.GetAccessPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetAccessPolicyOutput struct {
 
 	// Details about the requested access policy.
@@ -55,77 +86,50 @@ type GetAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyDetail != nil {
+		s.WriteStruct(schemas.GetAccessPolicyResponse_accessPolicyDetail)
+		v.AccessPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessPolicyResponse_accessPolicyDetail:
+			v.AccessPolicyDetail = &types.AccessPolicyDetail{}
+			return v.AccessPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessPolicy, schemas.GetAccessPolicyRequest, schemas.GetAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessPolicy, schemas.GetAccessPolicyRequest, schemas.GetAccessPolicyResponse), output: &GetAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccessPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccessPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAccessPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +144,8 @@ func (c *Client) addOperationGetAccessPolicyMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAccessPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAccessPolicy",
-	}
 }

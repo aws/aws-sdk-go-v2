@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedAt":"2000-01-01T00:00:00Z","HealthEventsConfig":{"AvailabilityLocalHealthEventsConfig":{"HealthScoreThreshold":1,"MinTrafficImpact":1,"Status":"ENABLED"},"AvailabilityScoreThreshold":1,"PerformanceLocalHealthEventsConfig":{"HealthScoreThreshold":1,"MinTrafficImpact":1,"Status":"ENABLED"},"PerformanceScoreThreshold":1},"InternetMeasurementsLogDelivery":{"S3Config":{"BucketName":"__BucketName__","BucketPrefix":"__BucketPrefix__","LogDeliveryStatus":"ENABLED"}},"MaxCityNetworksToMonitor":1,"ModifiedAt":"2000-01-01T00:00:00Z","MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ProcessingStatus":"OK","ProcessingStatusInfo":"__ProcessingStatusInfo__","Resources":["__Member__","__Member__"],"Status":"PENDING","Tags":{"key0":"__Value__"},"TrafficPercentageToMonitor":1}

@@ -1,0 +1,5 @@
+POST /prod/batch/delete
+
+Content-Type: application/json
+
+{"channelIds":["__Member__","__Member__"],"inputIds":["__Member__","__Member__"],"inputSecurityGroupIds":["__Member__","__Member__"],"multiplexIds":["__Member__","__Member__"]}

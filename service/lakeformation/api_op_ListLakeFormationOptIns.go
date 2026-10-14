@@ -5,12 +5,8 @@ package lakeformation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the current list of resources and principals that are opt in to
@@ -47,31 +43,6 @@ type ListLakeFormationOptInsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLakeFormationOptInsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLakeFormationOptInsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLakeFormationOptInsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListLakeFormationOptInsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLakeFormationOptInsRequest_NextToken, *v.NextToken)
-	}
-	if v.Principal != nil {
-		s.WriteStruct(schemas.ListLakeFormationOptInsRequest_Principal)
-		v.Principal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.ListLakeFormationOptInsRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListLakeFormationOptInsOutput struct {
 
 	// A list of principal-resource pairs that have Lake Formation permissins enforced.
@@ -86,87 +57,29 @@ type ListLakeFormationOptInsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLakeFormationOptInsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLakeFormationOptInsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLakeFormationOptInsResponse_LakeFormationOptInsInfoList:
-			return deserializeLakeFormationOptInsInfoList(d, schemas.ListLakeFormationOptInsResponse_LakeFormationOptInsInfoList, &v.LakeFormationOptInsInfoList)
-		case schemas.ListLakeFormationOptInsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLakeFormationOptInsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLakeFormationOptInsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLakeFormationOptIns{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLakeFormationOptIns, schemas.ListLakeFormationOptInsRequest, schemas.ListLakeFormationOptInsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLakeFormationOptIns{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLakeFormationOptIns, schemas.ListLakeFormationOptInsRequest, schemas.ListLakeFormationOptInsResponse), output: &ListLakeFormationOptInsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLakeFormationOptIns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLakeFormationOptInsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLakeFormationOptIns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,12 +92,6 @@ func (c *Client) addOperationListLakeFormationOptInsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -287,11 +194,3 @@ type ListLakeFormationOptInsAPIClient interface {
 }
 
 var _ ListLakeFormationOptInsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLakeFormationOptIns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLakeFormationOptIns",
-	}
-}

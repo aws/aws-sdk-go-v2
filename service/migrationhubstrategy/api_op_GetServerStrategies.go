@@ -4,13 +4,8 @@ package migrationhubstrategy
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves recommended strategies and tools for the specified server.
@@ -39,28 +34,6 @@ type GetServerStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServerStrategiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServerStrategiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServerStrategiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServerId != nil {
-		s.WriteString(schemas.GetServerStrategiesRequest_serverId, *v.ServerId)
-	}
-}
-func (v *GetServerStrategiesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServerStrategiesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServerStrategiesRequest_serverId:
-			v.ServerId = new(string)
-			return d.ReadString(schemas.GetServerStrategiesRequest_serverId, v.ServerId)
-		}
-		return nil
-	})
-}
-
 type GetServerStrategiesOutput struct {
 
 	//  A list of strategy recommendations for the server.
@@ -72,93 +45,29 @@ type GetServerStrategiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServerStrategiesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServerStrategiesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServerStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServerStrategies(s, schemas.GetServerStrategiesResponse_serverStrategies, v.ServerStrategies)
-}
-func (v *GetServerStrategiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServerStrategiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServerStrategiesResponse_serverStrategies:
-			return deserializeServerStrategies(d, schemas.GetServerStrategiesResponse_serverStrategies, &v.ServerStrategies)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServerStrategiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServerStrategies{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServerStrategies, schemas.GetServerStrategiesRequest, schemas.GetServerStrategiesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServerStrategies{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServerStrategies, schemas.GetServerStrategiesRequest, schemas.GetServerStrategiesResponse), output: &GetServerStrategiesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServerStrategies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetServerStrategiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServerStrategies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +82,8 @@ func (c *Client) addOperationGetServerStrategiesMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServerStrategies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServerStrategies",
-	}
 }

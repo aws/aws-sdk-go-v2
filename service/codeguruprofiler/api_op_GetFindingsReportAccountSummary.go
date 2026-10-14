@@ -5,10 +5,10 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of [FindingsReportSummary]FindingsReportSummary objects that contain analysis results
@@ -60,6 +60,40 @@ type GetFindingsReportAccountSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsReportAccountSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportAccountSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportAccountSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyReportsOnly != nil {
+		s.WriteBool(schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly, *v.DailyReportsOnly)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingsReportAccountSummaryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsReportAccountSummaryRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *GetFindingsReportAccountSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportAccountSummaryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly:
+			v.DailyReportsOnly = new(bool)
+			return d.ReadBool(schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly, v.DailyReportsOnly)
+		case schemas.GetFindingsReportAccountSummaryRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetFindingsReportAccountSummaryRequest_maxResults, v.MaxResults)
+		case schemas.GetFindingsReportAccountSummaryRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsReportAccountSummaryRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 
@@ -83,74 +117,48 @@ type GetFindingsReportAccountSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsReportAccountSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportAccountSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportAccountSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsReportAccountSummaryResponse_nextToken, *v.NextToken)
+	}
+	serializeFindingsReportSummaries(s, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, v.ReportSummaries)
+}
+func (v *GetFindingsReportAccountSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportAccountSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportAccountSummaryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsReportAccountSummaryResponse_nextToken, v.NextToken)
+		case schemas.GetFindingsReportAccountSummaryResponse_reportSummaries:
+			return deserializeFindingsReportSummaries(d, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, &v.ReportSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportAccountSummary, schemas.GetFindingsReportAccountSummaryRequest, schemas.GetFindingsReportAccountSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsReportAccountSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportAccountSummary, schemas.GetFindingsReportAccountSummaryRequest, schemas.GetFindingsReportAccountSummaryResponse), output: &GetFindingsReportAccountSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsReportAccountSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFindingsReportAccountSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsReportAccountSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +171,6 @@ func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,11 +279,3 @@ type GetFindingsReportAccountSummaryAPIClient interface {
 }
 
 var _ GetFindingsReportAccountSummaryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetFindingsReportAccountSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFindingsReportAccountSummary",
-	}
-}

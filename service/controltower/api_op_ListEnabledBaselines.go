@@ -5,10 +5,10 @@ package controltower
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of summaries describing EnabledBaseline resources. You can
@@ -51,6 +51,29 @@ type ListEnabledBaselinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledBaselinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledBaselinesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledBaselinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEnabledBaselinesInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeChildren != false {
+		s.WriteBool(schemas.ListEnabledBaselinesInput_includeChildren, v.IncludeChildren)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnabledBaselinesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledBaselinesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnabledBaselinesOutput struct {
 
 	// Retuens a list of summaries of EnabledBaseline resources.
@@ -67,74 +90,48 @@ type ListEnabledBaselinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledBaselinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledBaselinesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledBaselinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledBaselines(s, schemas.ListEnabledBaselinesOutput_enabledBaselines, v.EnabledBaselines)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledBaselinesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnabledBaselinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnabledBaselinesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnabledBaselinesOutput_enabledBaselines:
+			return deserializeEnabledBaselines(d, schemas.ListEnabledBaselinesOutput_enabledBaselines, &v.EnabledBaselines)
+		case schemas.ListEnabledBaselinesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnabledBaselinesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledBaselines, schemas.ListEnabledBaselinesInput, schemas.ListEnabledBaselinesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledBaselines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledBaselines, schemas.ListEnabledBaselinesInput, schemas.ListEnabledBaselinesOutput), output: &ListEnabledBaselinesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledBaselines{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnabledBaselines"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledBaselines(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +144,6 @@ func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +245,3 @@ type ListEnabledBaselinesAPIClient interface {
 }
 
 var _ ListEnabledBaselinesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnabledBaselines(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnabledBaselines",
-	}
-}

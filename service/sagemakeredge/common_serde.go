@@ -73,6 +73,7 @@ func serializeModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.
 }
 
 func deserializeDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Definition) error {
+	*v = make([]types.Definition, 0)
 	var vv types.Definition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Definition{}
@@ -86,6 +87,7 @@ func deserializeDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeDeploymentModels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DeploymentModel) error {
+	*v = make([]types.DeploymentModel, 0)
 	var vv types.DeploymentModel
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DeploymentModel{}
@@ -99,6 +101,7 @@ func deserializeDeploymentModels(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeEdgeDeployments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EdgeDeployment) error {
+	*v = make([]types.EdgeDeployment, 0)
 	var vv types.EdgeDeployment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EdgeDeployment{}
@@ -112,6 +115,7 @@ func deserializeEdgeDeployments(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEdgeMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EdgeMetric) error {
+	*v = make([]types.EdgeMetric, 0)
 	var vv types.EdgeMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EdgeMetric{}
@@ -125,6 +129,7 @@ func deserializeEdgeMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeModels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Model) error {
+	*v = make([]types.Model, 0)
 	var vv types.Model
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Model{}

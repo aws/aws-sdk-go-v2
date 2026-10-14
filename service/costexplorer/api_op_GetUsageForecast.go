@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a forecast for how much Amazon Web Services predicts that you will
@@ -126,6 +125,37 @@ type GetUsageForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetUsageForecastRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetUsageForecastRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetUsageForecastRequest_Granularity, string(v.Granularity))
+	}
+	if v.Metric != "" {
+		s.WriteString(schemas.GetUsageForecastRequest_Metric, string(v.Metric))
+	}
+	if v.PredictionIntervalLevel != nil {
+		s.WriteInt32(schemas.GetUsageForecastRequest_PredictionIntervalLevel, *v.PredictionIntervalLevel)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetUsageForecastRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetUsageForecastOutput struct {
 
 	// The forecasts for your query, in order. For DAILY forecasts, this is a list of
@@ -141,77 +171,53 @@ type GetUsageForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeForecastResultsByTime(s, schemas.GetUsageForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetUsageForecastResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUsageForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageForecastResponse_ForecastResultsByTime:
+			return deserializeForecastResultsByTime(d, schemas.GetUsageForecastResponse_ForecastResultsByTime, &v.ForecastResultsByTime)
+		case schemas.GetUsageForecastResponse_Total:
+			v.Total = &types.MetricValue{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageForecast, schemas.GetUsageForecastRequest, schemas.GetUsageForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageForecast, schemas.GetUsageForecastRequest, schemas.GetUsageForecastResponse), output: &GetUsageForecastOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUsageForecast{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsageForecast"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUsageForecastValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageForecast(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,22 +232,8 @@ func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUsageForecast(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsageForecast",
-	}
 }

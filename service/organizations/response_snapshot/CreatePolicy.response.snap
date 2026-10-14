@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.CreatePolicy
+
+{"Policy":{"Content":"__Content__","PolicySummary":{"Arn":"__Arn__","AwsManaged":true,"Description":"__Description__","Id":"__Id__","Name":"__Name__","Type":"SERVICE_CONTROL_POLICY"}}}

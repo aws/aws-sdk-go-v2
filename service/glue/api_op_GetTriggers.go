@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets all the triggers associated with a job.
@@ -42,6 +42,24 @@ type GetTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependentJobName != nil {
+		s.WriteString(schemas.GetTriggersRequest_DependentJobName, *v.DependentJobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTriggersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTriggersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetTriggersOutput struct {
 
 	// A continuation token, if not all the requested triggers have yet been returned.
@@ -56,74 +74,48 @@ type GetTriggersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTriggersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTriggersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTriggersResponse_NextToken, *v.NextToken)
+	}
+	serializeTriggerList(s, schemas.GetTriggersResponse_Triggers, v.Triggers)
+}
+func (v *GetTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTriggersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTriggersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTriggersResponse_NextToken, v.NextToken)
+		case schemas.GetTriggersResponse_Triggers:
+			return deserializeTriggerList(d, schemas.GetTriggersResponse_Triggers, &v.Triggers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTriggers, schemas.GetTriggersRequest, schemas.GetTriggersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTriggers, schemas.GetTriggersRequest, schemas.GetTriggersResponse), output: &GetTriggersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTriggers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTriggers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTriggers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +128,6 @@ func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +227,3 @@ type GetTriggersAPIClient interface {
 }
 
 var _ GetTriggersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTriggers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTriggers",
-	}
-}

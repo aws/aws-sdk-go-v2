@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.UpdateFirewallRule
+
+{"Action":"ALLOW","BlockOverrideDnsType":"CNAME","BlockOverrideDomain":"__BlockOverrideDomain__","BlockOverrideTtl":1,"BlockResponse":"NODATA","ConfidenceThreshold":"LOW","DnsThreatProtection":"DGA","FirewallDomainListId":"__FirewallDomainListId__","FirewallDomainRedirectionAction":"INSPECT_REDIRECTION_DOMAIN","FirewallRuleGroupId":"__FirewallRuleGroupId__","FirewallRuleType":{"DnsThreatProtection":{"ConfidenceThreshold":"LOW","Value":"__Value__"},"FirewallAdvancedContentCategory":{"Category":"__Category__"},"FirewallAdvancedThreatCategory":{"Category":"__Category__"},"PartnerThreatProtection":{"Partner":"__Partner__"}},"FirewallThreatProtectionId":"__FirewallThreatProtectionId__","Name":"__Name__","Priority":1,"Qtype":"__Qtype__"}

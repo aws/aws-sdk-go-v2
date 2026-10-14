@@ -5,12 +5,8 @@ package cleanroomsml
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of trained model versions for a specified trained model. This
@@ -61,30 +57,6 @@ type ListTrainedModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainedModelVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrainedModelVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrainedModelVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTrainedModelVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.ListTrainedModelVersionsRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrainedModelVersionsRequest_nextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListTrainedModelVersionsRequest_status, string(v.Status))
-	}
-	if v.TrainedModelArn != nil {
-		s.WriteString(schemas.ListTrainedModelVersionsRequest_trainedModelArn, *v.TrainedModelArn)
-	}
-}
-
 type ListTrainedModelVersionsOutput struct {
 
 	// A list of trained model versions that match the specified criteria. Each entry
@@ -105,87 +77,29 @@ type ListTrainedModelVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainedModelVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrainedModelVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrainedModelVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrainedModelVersionsResponse_nextToken, v.NextToken)
-		case schemas.ListTrainedModelVersionsResponse_trainedModels:
-			return deserializeTrainedModelList(d, schemas.ListTrainedModelVersionsResponse_trainedModels, &v.TrainedModels)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrainedModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrainedModelVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelVersions, schemas.ListTrainedModelVersionsRequest, schemas.ListTrainedModelVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrainedModelVersions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelVersions, schemas.ListTrainedModelVersionsRequest, schemas.ListTrainedModelVersionsResponse), output: &ListTrainedModelVersionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrainedModelVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTrainedModelVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainedModelVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +112,6 @@ func (c *Client) addOperationListTrainedModelVersionsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -307,11 +215,3 @@ type ListTrainedModelVersionsAPIClient interface {
 }
 
 var _ ListTrainedModelVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTrainedModelVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTrainedModelVersions",
-	}
-}

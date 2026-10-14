@@ -1,0 +1,5 @@
+PATCH /resource-profiles/detections?resourceArn=__ResourceArn__
+
+Content-Type: application/json
+
+{"suppressDataIdentifiers":[{"id":"__Id__","type":"CUSTOM"},{"id":"__Id__","type":"CUSTOM"}]}

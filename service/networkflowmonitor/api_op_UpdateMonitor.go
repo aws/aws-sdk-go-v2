@@ -5,12 +5,8 @@ package networkflowmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -67,25 +63,6 @@ type UpdateMonitorInput struct {
 	RemoteResourcesToRemove []types.MonitorRemoteResource
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateMonitorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMonitorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateMonitorInput_clientToken, *v.ClientToken)
-	}
-	serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToAdd, v.LocalResourcesToAdd)
-	serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToRemove, v.LocalResourcesToRemove)
-	if v.MonitorName != nil {
-		s.WriteString(schemas.UpdateMonitorInput_monitorName, *v.MonitorName)
-	}
-	serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToAdd, v.RemoteResourcesToAdd)
-	serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToRemove, v.RemoteResourcesToRemove)
 }
 
 type UpdateMonitorOutput struct {
@@ -150,95 +127,23 @@ type UpdateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMonitorOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMonitorOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateMonitorOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateMonitorOutput_localResources:
-			return deserializeMonitorLocalResources(d, schemas.UpdateMonitorOutput_localResources, &v.LocalResources)
-		case schemas.UpdateMonitorOutput_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateMonitorOutput_modifiedAt, v.ModifiedAt)
-		case schemas.UpdateMonitorOutput_monitorArn:
-			v.MonitorArn = new(string)
-			return d.ReadString(schemas.UpdateMonitorOutput_monitorArn, v.MonitorArn)
-		case schemas.UpdateMonitorOutput_monitorName:
-			v.MonitorName = new(string)
-			return d.ReadString(schemas.UpdateMonitorOutput_monitorName, v.MonitorName)
-		case schemas.UpdateMonitorOutput_monitorStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateMonitorOutput_monitorStatus, &ev); err != nil {
-				return err
-			}
-			v.MonitorStatus = types.MonitorStatus(ev)
-			return nil
-		case schemas.UpdateMonitorOutput_remoteResources:
-			return deserializeMonitorRemoteResources(d, schemas.UpdateMonitorOutput_remoteResources, &v.RemoteResources)
-		case schemas.UpdateMonitorOutput_tags:
-			return deserializeTagMap(d, schemas.UpdateMonitorOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMonitor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput), output: &UpdateMonitorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -248,12 +153,6 @@ func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpUpdateMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,12 +165,6 @@ func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -311,12 +204,4 @@ func (m *idempotencyToken_initializeOpUpdateMonitor) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateMonitorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateMonitor{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMonitor",
-	}
 }

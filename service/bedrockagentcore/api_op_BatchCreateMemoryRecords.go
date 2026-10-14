@@ -5,12 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates multiple memory records in a single batch operation for the specified
@@ -46,23 +42,15 @@ type BatchCreateMemoryRecordsInput struct {
 	// batch request.
 	ClientToken *string
 
+	// The record expiry (long-term memory time-to-live) applied to every record
+	// created by this request. Set recordExpiryDurationDays to the number of days
+	// after which the records expire. Only the expiry provided here is applied; the
+	// records' strategy association has no effect on their expiry. If you do not
+	// provide this value, the records do not expire. The REMOVE action does not apply
+	// when creating records.
+	RecordExpirySpecification types.RecordExpirySpecification
+
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateMemoryRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateMemoryRecordsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchCreateMemoryRecordsInput_clientToken, *v.ClientToken)
-	}
-	if v.MemoryId != nil {
-		s.WriteString(schemas.BatchCreateMemoryRecordsInput_memoryId, *v.MemoryId)
-	}
-	serializeMemoryRecordsCreateInputList(s, schemas.BatchCreateMemoryRecordsInput_records, v.Records)
 }
 
 type BatchCreateMemoryRecordsOutput struct {
@@ -85,74 +73,23 @@ type BatchCreateMemoryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateMemoryRecordsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateMemoryRecordsOutput_failedRecords:
-			return deserializeMemoryRecordsOutputList(d, schemas.BatchCreateMemoryRecordsOutput_failedRecords, &v.FailedRecords)
-		case schemas.BatchCreateMemoryRecordsOutput_successfulRecords:
-			return deserializeMemoryRecordsOutputList(d, schemas.BatchCreateMemoryRecordsOutput_successfulRecords, &v.SuccessfulRecords)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchCreateMemoryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateMemoryRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateMemoryRecords, schemas.BatchCreateMemoryRecordsInput, schemas.BatchCreateMemoryRecordsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateMemoryRecords{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateMemoryRecords, schemas.BatchCreateMemoryRecordsInput, schemas.BatchCreateMemoryRecordsOutput), output: &BatchCreateMemoryRecordsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateMemoryRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +99,6 @@ func (c *Client) addOperationBatchCreateMemoryRecordsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpBatchCreateMemoryRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateMemoryRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +111,6 @@ func (c *Client) addOperationBatchCreateMemoryRecordsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +150,4 @@ func (m *idempotencyToken_initializeOpBatchCreateMemoryRecords) HandleInitialize
 }
 func addIdempotencyToken_opBatchCreateMemoryRecordsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchCreateMemoryRecords{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchCreateMemoryRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateMemoryRecords",
-	}
 }

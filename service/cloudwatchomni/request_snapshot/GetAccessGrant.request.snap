@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/GetAccessGrant
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿ggrantIdk__GrantId__ÿ

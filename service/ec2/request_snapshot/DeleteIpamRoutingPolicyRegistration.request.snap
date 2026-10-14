@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIpamRoutingPolicyRegistration&Cidr=__Cidr__&ClientToken=__ClientToken__&DryRun=true&Force=true&IpamInternetRegistryAssociationId=__IpamInternetRegistryAssociationId__&Version=2016-11-15

@@ -4,13 +4,8 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,21 +39,6 @@ type GetMatchingJobInput struct {
 	WorkflowName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMatchingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMatchingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMatchingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.GetMatchingJobInput_jobId, *v.JobId)
-	}
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.GetMatchingJobInput_workflowName, *v.WorkflowName)
-	}
 }
 
 type GetMatchingJobOutput struct {
@@ -97,106 +77,29 @@ type GetMatchingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMatchingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMatchingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMatchingJobOutput_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.GetMatchingJobOutput_endTime, v.EndTime)
-		case schemas.GetMatchingJobOutput_errorDetails:
-			v.ErrorDetails = &types.ErrorDetails{}
-			return v.ErrorDetails.Deserialize(d)
-		case schemas.GetMatchingJobOutput_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.GetMatchingJobOutput_jobId, v.JobId)
-		case schemas.GetMatchingJobOutput_metrics:
-			v.Metrics = &types.JobMetrics{}
-			return v.Metrics.Deserialize(d)
-		case schemas.GetMatchingJobOutput_outputSourceConfig:
-			return deserializeJobOutputSourceConfig(d, schemas.GetMatchingJobOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.GetMatchingJobOutput_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.GetMatchingJobOutput_startTime, v.StartTime)
-		case schemas.GetMatchingJobOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetMatchingJobOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.JobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMatchingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatchingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingJob, schemas.GetMatchingJobInput, schemas.GetMatchingJobOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMatchingJob{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingJob, schemas.GetMatchingJobInput, schemas.GetMatchingJobOutput), output: &GetMatchingJobOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMatchingJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMatchingJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMatchingJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,22 +114,8 @@ func (c *Client) addOperationGetMatchingJobMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMatchingJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMatchingJob",
-	}
 }

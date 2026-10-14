@@ -4,10 +4,9 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an authentication token and the URL at which the notebook can be accessed.
@@ -41,6 +40,18 @@ type CreatePresignedNotebookUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlRequest_SessionId, *v.SessionId)
+	}
+}
+
 type CreatePresignedNotebookUrlOutput struct {
 
 	// The authentication token for the notebook.
@@ -65,77 +76,60 @@ type CreatePresignedNotebookUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthToken != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlResponse_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenExpirationTime != nil {
+		s.WriteInt64(schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime, *v.AuthTokenExpirationTime)
+	}
+	if v.NotebookUrl != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlResponse_NotebookUrl, *v.NotebookUrl)
+	}
+}
+func (v *CreatePresignedNotebookUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedNotebookUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedNotebookUrlResponse_AuthToken:
+			v.AuthToken = new(string)
+			return d.ReadString(schemas.CreatePresignedNotebookUrlResponse_AuthToken, v.AuthToken)
+		case schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime:
+			v.AuthTokenExpirationTime = new(int64)
+			return d.ReadInt64(schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime, v.AuthTokenExpirationTime)
+		case schemas.CreatePresignedNotebookUrlResponse_NotebookUrl:
+			v.NotebookUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedNotebookUrlResponse_NotebookUrl, v.NotebookUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedNotebookUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookUrl, schemas.CreatePresignedNotebookUrlRequest, schemas.CreatePresignedNotebookUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookUrl, schemas.CreatePresignedNotebookUrlRequest, schemas.CreatePresignedNotebookUrlResponse), output: &CreatePresignedNotebookUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedNotebookUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePresignedNotebookUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePresignedNotebookUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedNotebookUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +144,8 @@ func (c *Client) addOperationCreatePresignedNotebookUrlMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePresignedNotebookUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePresignedNotebookUrl",
-	}
 }

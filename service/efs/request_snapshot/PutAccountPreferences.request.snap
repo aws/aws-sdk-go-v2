@@ -1,0 +1,5 @@
+PUT /2015-02-01/account-preferences
+
+Content-Type: application/json
+
+{"ResourceIdType":"LONG_ID"}

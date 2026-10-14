@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -43,6 +45,70 @@ type Account struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Account) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Account)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Account) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.Account_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.Account_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.Account_CompanyName, *v.CompanyName)
+	}
+	if v.Duns != nil {
+		s.WriteString(schemas.Account_Duns, *v.Duns)
+	}
+	if v.Industry != "" {
+		s.WriteString(schemas.Account_Industry, string(v.Industry))
+	}
+	if v.OtherIndustry != nil {
+		s.WriteString(schemas.Account_OtherIndustry, *v.OtherIndustry)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.Account_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *Account) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Account, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Account_Address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.Account_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.Account_AwsAccountId, v.AwsAccountId)
+		case schemas.Account_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.Account_CompanyName, v.CompanyName)
+		case schemas.Account_Duns:
+			v.Duns = new(string)
+			return d.ReadString(schemas.Account_Duns, v.Duns)
+		case schemas.Account_Industry:
+			var ev string
+			if err := d.ReadString(schemas.Account_Industry, &ev); err != nil {
+				return err
+			}
+			v.Industry = Industry(ev)
+			return nil
+		case schemas.Account_OtherIndustry:
+			v.OtherIndustry = new(string)
+			return d.ReadString(schemas.Account_OtherIndustry, v.OtherIndustry)
+		case schemas.Account_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.Account_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
 // Contains the account details of the partner who received the Engagement
 // Invitation, including the AWS account ID and company name.
 type AccountReceiver struct {
@@ -60,6 +126,34 @@ type AccountReceiver struct {
 	Alias *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountReceiver) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountReceiver)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountReceiver) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.AccountReceiver_Alias, *v.Alias)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.AccountReceiver_AwsAccountId, *v.AwsAccountId)
+	}
+}
+func (v *AccountReceiver) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountReceiver, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountReceiver_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.AccountReceiver_Alias, v.Alias)
+		case schemas.AccountReceiver_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.AccountReceiver_AwsAccountId, v.AwsAccountId)
+		}
+		return nil
+	})
 }
 
 // An object that contains an Account 's subset of fields.
@@ -96,6 +190,58 @@ type AccountSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.AccountSummary_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.AccountSummary_CompanyName, *v.CompanyName)
+	}
+	if v.Industry != "" {
+		s.WriteString(schemas.AccountSummary_Industry, string(v.Industry))
+	}
+	if v.OtherIndustry != nil {
+		s.WriteString(schemas.AccountSummary_OtherIndustry, *v.OtherIndustry)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.AccountSummary_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *AccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSummary_Address:
+			v.Address = &AddressSummary{}
+			return v.Address.Deserialize(d)
+		case schemas.AccountSummary_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.AccountSummary_CompanyName, v.CompanyName)
+		case schemas.AccountSummary_Industry:
+			var ev string
+			if err := d.ReadString(schemas.AccountSummary_Industry, &ev); err != nil {
+				return err
+			}
+			v.Industry = Industry(ev)
+			return nil
+		case schemas.AccountSummary_OtherIndustry:
+			v.OtherIndustry = new(string)
+			return d.ReadString(schemas.AccountSummary_OtherIndustry, v.OtherIndustry)
+		case schemas.AccountSummary_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.AccountSummary_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
 // Specifies the end Customer 's address details associated with the Opportunity .
 type Address struct {
 
@@ -128,6 +274,56 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.Address_City, *v.City)
+	}
+	if v.CountryCode != "" {
+		s.WriteString(schemas.Address_CountryCode, string(v.CountryCode))
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.Address_StateOrRegion, *v.StateOrRegion)
+	}
+	if v.StreetAddress != nil {
+		s.WriteString(schemas.Address_StreetAddress, *v.StreetAddress)
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_City:
+			v.City = new(string)
+			return d.ReadString(schemas.Address_City, v.City)
+		case schemas.Address_CountryCode:
+			var ev string
+			if err := d.ReadString(schemas.Address_CountryCode, &ev); err != nil {
+				return err
+			}
+			v.CountryCode = CountryCode(ev)
+			return nil
+		case schemas.Address_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_PostalCode, v.PostalCode)
+		case schemas.Address_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.Address_StateOrRegion, v.StateOrRegion)
+		case schemas.Address_StreetAddress:
+			v.StreetAddress = new(string)
+			return d.ReadString(schemas.Address_StreetAddress, v.StreetAddress)
+		}
+		return nil
+	})
+}
+
 // An object that contains an Address object's subset of fields.
 type AddressSummary struct {
 
@@ -155,6 +351,50 @@ type AddressSummary struct {
 	StateOrRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AddressSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.AddressSummary_City, *v.City)
+	}
+	if v.CountryCode != "" {
+		s.WriteString(schemas.AddressSummary_CountryCode, string(v.CountryCode))
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.AddressSummary_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.AddressSummary_StateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *AddressSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressSummary_City:
+			v.City = new(string)
+			return d.ReadString(schemas.AddressSummary_City, v.City)
+		case schemas.AddressSummary_CountryCode:
+			var ev string
+			if err := d.ReadString(schemas.AddressSummary_CountryCode, &ev); err != nil {
+				return err
+			}
+			v.CountryCode = CountryCode(ev)
+			return nil
+		case schemas.AddressSummary_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.AddressSummary_PostalCode, v.PostalCode)
+		case schemas.AddressSummary_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.AddressSummary_StateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
 }
 
 // Represents the contact details of the individual assigned to manage the
@@ -199,6 +439,52 @@ type AssigneeContact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssigneeContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssigneeContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssigneeContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessTitle != nil {
+		s.WriteString(schemas.AssigneeContact_BusinessTitle, *v.BusinessTitle)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.AssigneeContact_Email, *v.Email)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.AssigneeContact_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.AssigneeContact_LastName, *v.LastName)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.AssigneeContact_Phone, *v.Phone)
+	}
+}
+func (v *AssigneeContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssigneeContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssigneeContact_BusinessTitle:
+			v.BusinessTitle = new(string)
+			return d.ReadString(schemas.AssigneeContact_BusinessTitle, v.BusinessTitle)
+		case schemas.AssigneeContact_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.AssigneeContact_Email, v.Email)
+		case schemas.AssigneeContact_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.AssigneeContact_FirstName, v.FirstName)
+		case schemas.AssigneeContact_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.AssigneeContact_LastName, v.LastName)
+		case schemas.AssigneeContact_Phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.AssigneeContact_Phone, v.Phone)
+		}
+		return nil
+	})
+}
+
 // Represents the customer associated with the AWS opportunity. This field
 // captures key details about the customer that are necessary for managing the
 // opportunity.
@@ -210,6 +496,25 @@ type AwsOpportunityCustomer struct {
 	Contacts []Contact
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsOpportunityCustomer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunityCustomer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunityCustomer) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerContactsList(s, schemas.AwsOpportunityCustomer_Contacts, v.Contacts)
+}
+func (v *AwsOpportunityCustomer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunityCustomer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunityCustomer_Contacts:
+			return deserializeCustomerContactsList(d, schemas.AwsOpportunityCustomer_Contacts, &v.Contacts)
+		}
+		return nil
+	})
 }
 
 // Contains insights provided by AWS for the opportunity, offering recommendations
@@ -229,7 +534,64 @@ type AwsOpportunityInsights struct {
 	// move the opportunity forward and increase the likelihood of success.
 	NextBestActions *string
 
+	// Opportunity quality assessment. Null if not yet scored.
+	OpportunityQuality *OpportunityQuality
+
+	// List of recommendations from various agent-driven sources.
+	Recommendations []Recommendation
+
 	noSmithyDocumentSerde
+}
+
+func (v *AwsOpportunityInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunityInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunityInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsProductsSpendInsightsBySource != nil {
+		s.WriteStruct(schemas.AwsOpportunityInsights_AwsProductsSpendInsightsBySource)
+		v.AwsProductsSpendInsightsBySource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngagementScore != "" {
+		s.WriteString(schemas.AwsOpportunityInsights_EngagementScore, string(v.EngagementScore))
+	}
+	if v.NextBestActions != nil {
+		s.WriteString(schemas.AwsOpportunityInsights_NextBestActions, *v.NextBestActions)
+	}
+	if v.OpportunityQuality != nil {
+		s.WriteStruct(schemas.AwsOpportunityInsights_OpportunityQuality)
+		v.OpportunityQuality.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationList(s, schemas.AwsOpportunityInsights_Recommendations, v.Recommendations)
+}
+func (v *AwsOpportunityInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunityInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunityInsights_AwsProductsSpendInsightsBySource:
+			v.AwsProductsSpendInsightsBySource = &AwsProductsSpendInsightsBySource{}
+			return v.AwsProductsSpendInsightsBySource.Deserialize(d)
+		case schemas.AwsOpportunityInsights_EngagementScore:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunityInsights_EngagementScore, &ev); err != nil {
+				return err
+			}
+			v.EngagementScore = EngagementScore(ev)
+			return nil
+		case schemas.AwsOpportunityInsights_NextBestActions:
+			v.NextBestActions = new(string)
+			return d.ReadString(schemas.AwsOpportunityInsights_NextBestActions, v.NextBestActions)
+		case schemas.AwsOpportunityInsights_OpportunityQuality:
+			v.OpportunityQuality = &OpportunityQuality{}
+			return v.OpportunityQuality.Deserialize(d)
+		case schemas.AwsOpportunityInsights_Recommendations:
+			return deserializeRecommendationList(d, schemas.AwsOpportunityInsights_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
 }
 
 // Tracks the lifecycle of the AWS opportunity, including stages such as
@@ -264,6 +626,57 @@ type AwsOpportunityLifeCycle struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsOpportunityLifeCycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunityLifeCycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunityLifeCycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClosedLostReason != "" {
+		s.WriteString(schemas.AwsOpportunityLifeCycle_ClosedLostReason, string(v.ClosedLostReason))
+	}
+	if v.NextSteps != nil {
+		s.WriteString(schemas.AwsOpportunityLifeCycle_NextSteps, *v.NextSteps)
+	}
+	serializeProfileNextStepsHistories(s, schemas.AwsOpportunityLifeCycle_NextStepsHistory, v.NextStepsHistory)
+	if v.Stage != "" {
+		s.WriteString(schemas.AwsOpportunityLifeCycle_Stage, string(v.Stage))
+	}
+	if v.TargetCloseDate != nil {
+		s.WriteString(schemas.AwsOpportunityLifeCycle_TargetCloseDate, *v.TargetCloseDate)
+	}
+}
+func (v *AwsOpportunityLifeCycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunityLifeCycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunityLifeCycle_ClosedLostReason:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunityLifeCycle_ClosedLostReason, &ev); err != nil {
+				return err
+			}
+			v.ClosedLostReason = AwsClosedLostReason(ev)
+			return nil
+		case schemas.AwsOpportunityLifeCycle_NextSteps:
+			v.NextSteps = new(string)
+			return d.ReadString(schemas.AwsOpportunityLifeCycle_NextSteps, v.NextSteps)
+		case schemas.AwsOpportunityLifeCycle_NextStepsHistory:
+			return deserializeProfileNextStepsHistories(d, schemas.AwsOpportunityLifeCycle_NextStepsHistory, &v.NextStepsHistory)
+		case schemas.AwsOpportunityLifeCycle_Stage:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunityLifeCycle_Stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = AwsOpportunityStage(ev)
+			return nil
+		case schemas.AwsOpportunityLifeCycle_TargetCloseDate:
+			v.TargetCloseDate = new(string)
+			return d.ReadString(schemas.AwsOpportunityLifeCycle_TargetCloseDate, v.TargetCloseDate)
+		}
+		return nil
+	})
+}
+
 // Captures details about the project associated with the opportunity, including
 // objectives, scope, and customer requirements.
 type AwsOpportunityProject struct {
@@ -284,10 +697,45 @@ type AwsOpportunityProject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsOpportunityProject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunityProject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunityProject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsPartition != "" {
+		s.WriteString(schemas.AwsOpportunityProject_AwsPartition, string(v.AwsPartition))
+	}
+	serializeExpectedCustomerSpendList(s, schemas.AwsOpportunityProject_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+}
+func (v *AwsOpportunityProject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunityProject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunityProject_AwsPartition:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunityProject_AwsPartition, &ev); err != nil {
+				return err
+			}
+			v.AwsPartition = AwsPartition(ev)
+			return nil
+		case schemas.AwsOpportunityProject_ExpectedCustomerSpend:
+			return deserializeExpectedCustomerSpendList(d, schemas.AwsOpportunityProject_ExpectedCustomerSpend, &v.ExpectedCustomerSpend)
+		}
+		return nil
+	})
+}
+
 // Represents other entities related to the AWS opportunity, such as AWS products,
 // partner solutions, and marketplace offers. These associations help build a
 // complete picture of the solution being sold.
 type AwsOpportunityRelatedEntities struct {
+
+	// The AWS Marketplace product ARNs associated with this opportunity.
+	AwsMarketplaceProducts []string
+
+	// The AWS Marketplace solution ARNs associated with this opportunity.
+	AwsMarketplaceSolutions []string
 
 	// Specifies the AWS products associated with the opportunity. This field helps
 	// track the specific products that are part of the proposed solution.
@@ -301,8 +749,40 @@ type AwsOpportunityRelatedEntities struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsOpportunityRelatedEntities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunityRelatedEntities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunityRelatedEntities) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsMarketplaceProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
+	serializeAwsMarketplaceSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
+	serializeAwsProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsProducts, v.AwsProducts)
+	serializeSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_Solutions, v.Solutions)
+}
+func (v *AwsOpportunityRelatedEntities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunityRelatedEntities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunityRelatedEntities_AwsMarketplaceProducts:
+			return deserializeAwsMarketplaceProductIdentifiers(d, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceProducts, &v.AwsMarketplaceProducts)
+		case schemas.AwsOpportunityRelatedEntities_AwsMarketplaceSolutions:
+			return deserializeAwsMarketplaceSolutionIdentifiers(d, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceSolutions, &v.AwsMarketplaceSolutions)
+		case schemas.AwsOpportunityRelatedEntities_AwsProducts:
+			return deserializeAwsProductIdentifiers(d, schemas.AwsOpportunityRelatedEntities_AwsProducts, &v.AwsProducts)
+		case schemas.AwsOpportunityRelatedEntities_Solutions:
+			return deserializeSolutionIdentifiers(d, schemas.AwsOpportunityRelatedEntities_Solutions, &v.Solutions)
+		}
+		return nil
+	})
+}
+
 // Provides a comprehensive view of AwsOpportunitySummaryFullView template.
 type AwsOpportunitySummaryFullView struct {
+
+	// Engagement classification for this opportunity. Read-only. Null before scoring.
+	// Known values: AWS Field-engaged , Agent-engaged , Partner-led .
+	CosellMotion *string
 
 	// Represents the customer associated with the AWS opportunity. This field
 	// captures key details about the customer that are necessary for managing the
@@ -342,10 +822,132 @@ type AwsOpportunitySummaryFullView struct {
 	// Identifier of the related partner opportunity.
 	RelatedOpportunityId *string
 
+	// Seller-provided PARC deal terms: commitment value, discount, and contract dates.
+	SoftwareRevenue *AwsSoftwareRevenue
+
 	// Visibility level for the AWS opportunity.
 	Visibility Visibility
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsOpportunitySummaryFullView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOpportunitySummaryFullView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOpportunitySummaryFullView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CosellMotion != nil {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_CosellMotion, *v.CosellMotion)
+	}
+	if v.Customer != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvolvementType != "" {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_InvolvementType, string(v.InvolvementType))
+	}
+	if v.InvolvementTypeChangeReason != "" {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_InvolvementTypeChangeReason, string(v.InvolvementTypeChangeReason))
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_LifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAwsOpportunityTeamMembersList(s, schemas.AwsOpportunitySummaryFullView_OpportunityTeam, v.OpportunityTeam)
+	if v.Origin != "" {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_Origin, string(v.Origin))
+	}
+	if v.Project != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedEntityIds != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_RelatedEntityIds)
+		v.RelatedEntityIds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedOpportunityId != nil {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_RelatedOpportunityId, *v.RelatedOpportunityId)
+	}
+	if v.SoftwareRevenue != nil {
+		s.WriteStruct(schemas.AwsOpportunitySummaryFullView_SoftwareRevenue)
+		v.SoftwareRevenue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.AwsOpportunitySummaryFullView_Visibility, string(v.Visibility))
+	}
+}
+func (v *AwsOpportunitySummaryFullView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOpportunitySummaryFullView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOpportunitySummaryFullView_CosellMotion:
+			v.CosellMotion = new(string)
+			return d.ReadString(schemas.AwsOpportunitySummaryFullView_CosellMotion, v.CosellMotion)
+		case schemas.AwsOpportunitySummaryFullView_Customer:
+			v.Customer = &AwsOpportunityCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_Insights:
+			v.Insights = &AwsOpportunityInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_InvolvementType:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunitySummaryFullView_InvolvementType, &ev); err != nil {
+				return err
+			}
+			v.InvolvementType = SalesInvolvementType(ev)
+			return nil
+		case schemas.AwsOpportunitySummaryFullView_InvolvementTypeChangeReason:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunitySummaryFullView_InvolvementTypeChangeReason, &ev); err != nil {
+				return err
+			}
+			v.InvolvementTypeChangeReason = InvolvementTypeChangeReason(ev)
+			return nil
+		case schemas.AwsOpportunitySummaryFullView_LifeCycle:
+			v.LifeCycle = &AwsOpportunityLifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_OpportunityTeam:
+			return deserializeAwsOpportunityTeamMembersList(d, schemas.AwsOpportunitySummaryFullView_OpportunityTeam, &v.OpportunityTeam)
+		case schemas.AwsOpportunitySummaryFullView_Origin:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunitySummaryFullView_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = OpportunityOrigin(ev)
+			return nil
+		case schemas.AwsOpportunitySummaryFullView_Project:
+			v.Project = &AwsOpportunityProject{}
+			return v.Project.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_RelatedEntityIds:
+			v.RelatedEntityIds = &AwsOpportunityRelatedEntities{}
+			return v.RelatedEntityIds.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_RelatedOpportunityId:
+			v.RelatedOpportunityId = new(string)
+			return d.ReadString(schemas.AwsOpportunitySummaryFullView_RelatedOpportunityId, v.RelatedOpportunityId)
+		case schemas.AwsOpportunitySummaryFullView_SoftwareRevenue:
+			v.SoftwareRevenue = &AwsSoftwareRevenue{}
+			return v.SoftwareRevenue.Deserialize(d)
+		case schemas.AwsOpportunitySummaryFullView_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.AwsOpportunitySummaryFullView_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = Visibility(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // List of AWS services with program eligibility indicators (MAP, modernization
@@ -380,6 +982,58 @@ type AwsProductDetails struct {
 	ServiceCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsProductDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsProductDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsProductDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.AwsProductDetails_Amount, *v.Amount)
+	}
+	serializeStringList(s, schemas.AwsProductDetails_Categories, v.Categories)
+	serializeAwsProductOptimizationsList(s, schemas.AwsProductDetails_Optimizations, v.Optimizations)
+	if v.OptimizedAmount != nil {
+		s.WriteString(schemas.AwsProductDetails_OptimizedAmount, *v.OptimizedAmount)
+	}
+	if v.PotentialSavingsAmount != nil {
+		s.WriteString(schemas.AwsProductDetails_PotentialSavingsAmount, *v.PotentialSavingsAmount)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.AwsProductDetails_ProductCode, *v.ProductCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.AwsProductDetails_ServiceCode, *v.ServiceCode)
+	}
+}
+func (v *AwsProductDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsProductDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsProductDetails_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.AwsProductDetails_Amount, v.Amount)
+		case schemas.AwsProductDetails_Categories:
+			return deserializeStringList(d, schemas.AwsProductDetails_Categories, &v.Categories)
+		case schemas.AwsProductDetails_Optimizations:
+			return deserializeAwsProductOptimizationsList(d, schemas.AwsProductDetails_Optimizations, &v.Optimizations)
+		case schemas.AwsProductDetails_OptimizedAmount:
+			v.OptimizedAmount = new(string)
+			return d.ReadString(schemas.AwsProductDetails_OptimizedAmount, v.OptimizedAmount)
+		case schemas.AwsProductDetails_PotentialSavingsAmount:
+			v.PotentialSavingsAmount = new(string)
+			return d.ReadString(schemas.AwsProductDetails_PotentialSavingsAmount, v.PotentialSavingsAmount)
+		case schemas.AwsProductDetails_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.AwsProductDetails_ProductCode, v.ProductCode)
+		case schemas.AwsProductDetails_ServiceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.AwsProductDetails_ServiceCode, v.ServiceCode)
+		}
+		return nil
+	})
 }
 
 // Comprehensive spend analysis for a single source (AWS or Partner) including
@@ -420,6 +1074,66 @@ type AwsProductInsights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsProductInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsProductInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsProductInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsProductsList(s, schemas.AwsProductInsights_AwsProducts, v.AwsProducts)
+	if v.CurrencyCode != "" {
+		s.WriteString(schemas.AwsProductInsights_CurrencyCode, string(v.CurrencyCode))
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.AwsProductInsights_Frequency, string(v.Frequency))
+	}
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.AwsProductInsights_TotalAmount, *v.TotalAmount)
+	}
+	serializeAmountMap(s, schemas.AwsProductInsights_TotalAmountByCategory, v.TotalAmountByCategory)
+	if v.TotalOptimizedAmount != nil {
+		s.WriteString(schemas.AwsProductInsights_TotalOptimizedAmount, *v.TotalOptimizedAmount)
+	}
+	if v.TotalPotentialSavingsAmount != nil {
+		s.WriteString(schemas.AwsProductInsights_TotalPotentialSavingsAmount, *v.TotalPotentialSavingsAmount)
+	}
+}
+func (v *AwsProductInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsProductInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsProductInsights_AwsProducts:
+			return deserializeAwsProductsList(d, schemas.AwsProductInsights_AwsProducts, &v.AwsProducts)
+		case schemas.AwsProductInsights_CurrencyCode:
+			var ev string
+			if err := d.ReadString(schemas.AwsProductInsights_CurrencyCode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyCode = CurrencyCode(ev)
+			return nil
+		case schemas.AwsProductInsights_Frequency:
+			var ev string
+			if err := d.ReadString(schemas.AwsProductInsights_Frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = PaymentFrequency(ev)
+			return nil
+		case schemas.AwsProductInsights_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.AwsProductInsights_TotalAmount, v.TotalAmount)
+		case schemas.AwsProductInsights_TotalAmountByCategory:
+			return deserializeAmountMap(d, schemas.AwsProductInsights_TotalAmountByCategory, &v.TotalAmountByCategory)
+		case schemas.AwsProductInsights_TotalOptimizedAmount:
+			v.TotalOptimizedAmount = new(string)
+			return d.ReadString(schemas.AwsProductInsights_TotalOptimizedAmount, v.TotalOptimizedAmount)
+		case schemas.AwsProductInsights_TotalPotentialSavingsAmount:
+			v.TotalPotentialSavingsAmount = new(string)
+			return d.ReadString(schemas.AwsProductInsights_TotalPotentialSavingsAmount, v.TotalPotentialSavingsAmount)
+		}
+		return nil
+	})
+}
+
 // Specific optimization strategies partners can implement to reduce costs.
 type AwsProductOptimization struct {
 
@@ -436,6 +1150,34 @@ type AwsProductOptimization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsProductOptimization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsProductOptimization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsProductOptimization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AwsProductOptimization_Description, *v.Description)
+	}
+	if v.SavingsAmount != nil {
+		s.WriteString(schemas.AwsProductOptimization_SavingsAmount, *v.SavingsAmount)
+	}
+}
+func (v *AwsProductOptimization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsProductOptimization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsProductOptimization_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AwsProductOptimization_Description, v.Description)
+		case schemas.AwsProductOptimization_SavingsAmount:
+			v.SavingsAmount = new(string)
+			return d.ReadString(schemas.AwsProductOptimization_SavingsAmount, v.SavingsAmount)
+		}
+		return nil
+	})
+}
+
 // Source-separated spend insights that provide independent analysis for AWS
 // recommendations and partner estimates.
 type AwsProductsSpendInsightsBySource struct {
@@ -447,6 +1189,100 @@ type AwsProductsSpendInsightsBySource struct {
 	Partner *AwsProductInsights
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsProductsSpendInsightsBySource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsProductsSpendInsightsBySource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsProductsSpendInsightsBySource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWS != nil {
+		s.WriteStruct(schemas.AwsProductsSpendInsightsBySource_AWS)
+		v.AWS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Partner != nil {
+		s.WriteStruct(schemas.AwsProductsSpendInsightsBySource_Partner)
+		v.Partner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AwsProductsSpendInsightsBySource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsProductsSpendInsightsBySource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsProductsSpendInsightsBySource_AWS:
+			v.AWS = &AwsProductInsights{}
+			return v.AWS.Deserialize(d)
+		case schemas.AwsProductsSpendInsightsBySource_Partner:
+			v.Partner = &AwsProductInsights{}
+			return v.Partner.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Seller-provided PARC deal terms for the opportunity, including commitment
+// value, discount percentage, and contract dates.
+type AwsSoftwareRevenue struct {
+
+	// Discount percentage offered on the software revenue. Percent convention: 15.00
+	// means 15%.
+	Discount *string
+
+	// Contract effective (start) date in YYYY-MM-DD format.
+	EffectiveDate *string
+
+	// Contract expiration (end) date in YYYY-MM-DD format.
+	ExpirationDate *string
+
+	// Specifies payments details.
+	Value *MonetaryValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsSoftwareRevenue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsSoftwareRevenue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsSoftwareRevenue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Discount != nil {
+		s.WriteString(schemas.AwsSoftwareRevenue_Discount, *v.Discount)
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.AwsSoftwareRevenue_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteString(schemas.AwsSoftwareRevenue_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.AwsSoftwareRevenue_Value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AwsSoftwareRevenue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsSoftwareRevenue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsSoftwareRevenue_Discount:
+			v.Discount = new(string)
+			return d.ReadString(schemas.AwsSoftwareRevenue_Discount, v.Discount)
+		case schemas.AwsSoftwareRevenue_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.AwsSoftwareRevenue_EffectiveDate, v.EffectiveDate)
+		case schemas.AwsSoftwareRevenue_ExpirationDate:
+			v.ExpirationDate = new(string)
+			return d.ReadString(schemas.AwsSoftwareRevenue_ExpirationDate, v.ExpirationDate)
+		case schemas.AwsSoftwareRevenue_Value:
+			v.Value = &MonetaryValue{}
+			return v.Value.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Indicates the level of AWS involvement in the opportunity. This field helps
@@ -469,6 +1305,42 @@ type AwsSubmission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsSubmission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsSubmission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsSubmission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvolvementType != "" {
+		s.WriteString(schemas.AwsSubmission_InvolvementType, string(v.InvolvementType))
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.AwsSubmission_Visibility, string(v.Visibility))
+	}
+}
+func (v *AwsSubmission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsSubmission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsSubmission_InvolvementType:
+			var ev string
+			if err := d.ReadString(schemas.AwsSubmission_InvolvementType, &ev); err != nil {
+				return err
+			}
+			v.InvolvementType = SalesInvolvementType(ev)
+			return nil
+		case schemas.AwsSubmission_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.AwsSubmission_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = Visibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents an Amazon Web Services team member for the engagement. This
 // structure includes details such as name, email, and business title.
 type AwsTeamMember struct {
@@ -487,6 +1359,50 @@ type AwsTeamMember struct {
 	LastName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsTeamMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsTeamMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsTeamMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessTitle != "" {
+		s.WriteString(schemas.AwsTeamMember_BusinessTitle, string(v.BusinessTitle))
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.AwsTeamMember_Email, *v.Email)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.AwsTeamMember_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.AwsTeamMember_LastName, *v.LastName)
+	}
+}
+func (v *AwsTeamMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsTeamMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsTeamMember_BusinessTitle:
+			var ev string
+			if err := d.ReadString(schemas.AwsTeamMember_BusinessTitle, &ev); err != nil {
+				return err
+			}
+			v.BusinessTitle = AwsMemberBusinessTitle(ev)
+			return nil
+		case schemas.AwsTeamMember_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.AwsTeamMember_Email, v.Email)
+		case schemas.AwsTeamMember_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.AwsTeamMember_FirstName, v.FirstName)
+		case schemas.AwsTeamMember_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.AwsTeamMember_LastName, v.LastName)
+		}
+		return nil
+	})
 }
 
 // An object that contains a Customer Partner 's contact details.
@@ -511,6 +1427,52 @@ type Contact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Contact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Contact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessTitle != nil {
+		s.WriteString(schemas.Contact_BusinessTitle, *v.BusinessTitle)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.Contact_Email, *v.Email)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.Contact_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.Contact_LastName, *v.LastName)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.Contact_Phone, *v.Phone)
+	}
+}
+func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Contact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Contact_BusinessTitle:
+			v.BusinessTitle = new(string)
+			return d.ReadString(schemas.Contact_BusinessTitle, v.BusinessTitle)
+		case schemas.Contact_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.Contact_Email, v.Email)
+		case schemas.Contact_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.Contact_FirstName, v.FirstName)
+		case schemas.Contact_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.Contact_LastName, v.LastName)
+		case schemas.Contact_Phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.Contact_Phone, v.Phone)
+		}
+		return nil
+	})
+}
+
 // Filter for opportunities based on creation date range.
 type CreatedDateFilter struct {
 
@@ -521,6 +1483,34 @@ type CreatedDateFilter struct {
 	BeforeCreatedDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreatedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterCreatedDate != nil {
+		s.WriteTime(schemas.CreatedDateFilter_AfterCreatedDate, *v.AfterCreatedDate)
+	}
+	if v.BeforeCreatedDate != nil {
+		s.WriteTime(schemas.CreatedDateFilter_BeforeCreatedDate, *v.BeforeCreatedDate)
+	}
+}
+func (v *CreatedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatedDateFilter_AfterCreatedDate:
+			v.AfterCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreatedDateFilter_AfterCreatedDate, v.AfterCreatedDate)
+		case schemas.CreatedDateFilter_BeforeCreatedDate:
+			v.BeforeCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreatedDateFilter_BeforeCreatedDate, v.BeforeCreatedDate)
+		}
+		return nil
+	})
 }
 
 // An object that contains the customer's Account and Contact .
@@ -536,6 +1526,33 @@ type Customer struct {
 	Contacts []Contact
 
 	noSmithyDocumentSerde
+}
+
+func (v *Customer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Customer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Customer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteStruct(schemas.Customer_Account)
+		v.Account.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomerContactsList(s, schemas.Customer_Contacts, v.Contacts)
+}
+func (v *Customer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Customer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Customer_Account:
+			v.Account = &Account{}
+			return v.Account.Deserialize(d)
+		case schemas.Customer_Contacts:
+			return deserializeCustomerContactsList(d, schemas.Customer_Contacts, &v.Contacts)
+		}
+		return nil
+	})
 }
 
 // The CustomerProjects structure in Engagements offers a flexible framework for
@@ -560,6 +1577,38 @@ type CustomerProjectsContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomerProjectsContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerProjectsContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerProjectsContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.CustomerProjectsContext_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Project != nil {
+		s.WriteStruct(schemas.CustomerProjectsContext_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomerProjectsContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerProjectsContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerProjectsContext_Customer:
+			v.Customer = &EngagementCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.CustomerProjectsContext_Project:
+			v.Project = &EngagementCustomerProjectDetails{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that contains a Customer object's subset of fields.
 type CustomerSummary struct {
 
@@ -567,6 +1616,30 @@ type CustomerSummary struct {
 	Account *AccountSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteStruct(schemas.CustomerSummary_Account)
+		v.Account.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerSummary_Account:
+			v.Account = &AccountSummary{}
+			return v.Account.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides detailed context information for an Engagement. This structure allows
@@ -591,6 +1664,41 @@ type EngagementContextDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementContextDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementContextDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementContextDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.EngagementContextDetails_Id, *v.Id)
+	}
+	serializeEngagementContextPayload(s, schemas.EngagementContextDetails_Payload, v.Payload)
+	if v.Type != "" {
+		s.WriteString(schemas.EngagementContextDetails_Type, string(v.Type))
+	}
+}
+func (v *EngagementContextDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementContextDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementContextDetails_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EngagementContextDetails_Id, v.Id)
+		case schemas.EngagementContextDetails_Payload:
+			return deserializeEngagementContextPayload(d, schemas.EngagementContextDetails_Payload, &v.Payload)
+		case schemas.EngagementContextDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.EngagementContextDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EngagementContextType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents the payload of an Engagement context. The structure of this payload
 // varies based on the context type specified in the EngagementContextDetails.
 //
@@ -598,6 +1706,7 @@ type EngagementContextDetails struct {
 //
 //	EngagementContextPayloadMemberCustomerProject
 //	EngagementContextPayloadMemberLead
+//	EngagementContextPayloadMemberProspectingResult
 type EngagementContextPayload interface {
 	isEngagementContextPayload()
 }
@@ -612,6 +1721,14 @@ type EngagementContextPayloadMemberCustomerProject struct {
 }
 
 func (*EngagementContextPayloadMemberCustomerProject) isEngagementContextPayload() {}
+func (v *EngagementContextPayloadMemberCustomerProject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementContextPayload_CustomerProject)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EngagementContextPayloadMemberCustomerProject) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains detailed information about a lead when the context type is "Lead".
 // This field is present only when the Type in EngagementContextDetails is set to
@@ -623,6 +1740,33 @@ type EngagementContextPayloadMemberLead struct {
 }
 
 func (*EngagementContextPayloadMemberLead) isEngagementContextPayload() {}
+func (v *EngagementContextPayloadMemberLead) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementContextPayload_Lead)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EngagementContextPayloadMemberLead) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains prospecting result data with enriched insights. The system generates
+// these insights when a partner runs an autonomous prospecting job on leads. This
+// field appears only when the context type is "ProspectingResult".
+type EngagementContextPayloadMemberProspectingResult struct {
+	Value ProspectingResult
+
+	noSmithyDocumentSerde
+}
+
+func (*EngagementContextPayloadMemberProspectingResult) isEngagementContextPayload() {}
+func (v *EngagementContextPayloadMemberProspectingResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementContextPayload_ProspectingResult)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EngagementContextPayloadMemberProspectingResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains details about the customer associated with the Engagement Invitation,
 // including company information and industry.
@@ -655,6 +1799,54 @@ type EngagementCustomer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementCustomer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementCustomer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementCustomer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompanyName != nil {
+		s.WriteString(schemas.EngagementCustomer_CompanyName, *v.CompanyName)
+	}
+	if v.CountryCode != "" {
+		s.WriteString(schemas.EngagementCustomer_CountryCode, string(v.CountryCode))
+	}
+	if v.Industry != "" {
+		s.WriteString(schemas.EngagementCustomer_Industry, string(v.Industry))
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.EngagementCustomer_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *EngagementCustomer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementCustomer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementCustomer_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.EngagementCustomer_CompanyName, v.CompanyName)
+		case schemas.EngagementCustomer_CountryCode:
+			var ev string
+			if err := d.ReadString(schemas.EngagementCustomer_CountryCode, &ev); err != nil {
+				return err
+			}
+			v.CountryCode = CountryCode(ev)
+			return nil
+		case schemas.EngagementCustomer_Industry:
+			var ev string
+			if err := d.ReadString(schemas.EngagementCustomer_Industry, &ev); err != nil {
+				return err
+			}
+			v.Industry = Industry(ev)
+			return nil
+		case schemas.EngagementCustomer_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.EngagementCustomer_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
 // Provides comprehensive details about a customer project associated with an
 // Engagement. This may include information such as project goals, timelines, and
 // specific customer requirements.
@@ -676,6 +1868,40 @@ type EngagementCustomerProjectDetails struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngagementCustomerProjectDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementCustomerProjectDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementCustomerProjectDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessProblem != nil {
+		s.WriteString(schemas.EngagementCustomerProjectDetails_BusinessProblem, *v.BusinessProblem)
+	}
+	if v.TargetCompletionDate != nil {
+		s.WriteString(schemas.EngagementCustomerProjectDetails_TargetCompletionDate, *v.TargetCompletionDate)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.EngagementCustomerProjectDetails_Title, *v.Title)
+	}
+}
+func (v *EngagementCustomerProjectDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementCustomerProjectDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementCustomerProjectDetails_BusinessProblem:
+			v.BusinessProblem = new(string)
+			return d.ReadString(schemas.EngagementCustomerProjectDetails_BusinessProblem, v.BusinessProblem)
+		case schemas.EngagementCustomerProjectDetails_TargetCompletionDate:
+			v.TargetCompletionDate = new(string)
+			return d.ReadString(schemas.EngagementCustomerProjectDetails_TargetCompletionDate, v.TargetCompletionDate)
+		case schemas.EngagementCustomerProjectDetails_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.EngagementCustomerProjectDetails_Title, v.Title)
+		}
+		return nil
+	})
 }
 
 // Provides a summarized view of the Engagement Invitation, including details like
@@ -752,6 +1978,109 @@ type EngagementInvitationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementInvitationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementInvitationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementInvitationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_Catalog, *v.Catalog)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementTitle != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_EngagementTitle, *v.EngagementTitle)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.EngagementInvitationSummary_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_Id, *v.Id)
+	}
+	if v.InvitationDate != nil {
+		s.WriteTime(schemas.EngagementInvitationSummary_InvitationDate, *v.InvitationDate)
+	}
+	if v.ParticipantType != "" {
+		s.WriteString(schemas.EngagementInvitationSummary_ParticipantType, string(v.ParticipantType))
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.EngagementInvitationSummary_PayloadType, string(v.PayloadType))
+	}
+	serializeReceiver(s, schemas.EngagementInvitationSummary_Receiver, v.Receiver)
+	if v.SenderAwsAccountId != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_SenderAwsAccountId, *v.SenderAwsAccountId)
+	}
+	if v.SenderCompanyName != nil {
+		s.WriteString(schemas.EngagementInvitationSummary_SenderCompanyName, *v.SenderCompanyName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EngagementInvitationSummary_Status, string(v.Status))
+	}
+}
+func (v *EngagementInvitationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementInvitationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementInvitationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_Arn, v.Arn)
+		case schemas.EngagementInvitationSummary_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_Catalog, v.Catalog)
+		case schemas.EngagementInvitationSummary_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_EngagementId, v.EngagementId)
+		case schemas.EngagementInvitationSummary_EngagementTitle:
+			v.EngagementTitle = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_EngagementTitle, v.EngagementTitle)
+		case schemas.EngagementInvitationSummary_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.EngagementInvitationSummary_ExpirationDate, v.ExpirationDate)
+		case schemas.EngagementInvitationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_Id, v.Id)
+		case schemas.EngagementInvitationSummary_InvitationDate:
+			v.InvitationDate = new(time.Time)
+			return d.ReadTime(schemas.EngagementInvitationSummary_InvitationDate, v.InvitationDate)
+		case schemas.EngagementInvitationSummary_ParticipantType:
+			var ev string
+			if err := d.ReadString(schemas.EngagementInvitationSummary_ParticipantType, &ev); err != nil {
+				return err
+			}
+			v.ParticipantType = ParticipantType(ev)
+			return nil
+		case schemas.EngagementInvitationSummary_PayloadType:
+			var ev string
+			if err := d.ReadString(schemas.EngagementInvitationSummary_PayloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = EngagementInvitationPayloadType(ev)
+			return nil
+		case schemas.EngagementInvitationSummary_Receiver:
+			return deserializeReceiver(d, schemas.EngagementInvitationSummary_Receiver, &v.Receiver)
+		case schemas.EngagementInvitationSummary_SenderAwsAccountId:
+			v.SenderAwsAccountId = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_SenderAwsAccountId, v.SenderAwsAccountId)
+		case schemas.EngagementInvitationSummary_SenderCompanyName:
+			v.SenderCompanyName = new(string)
+			return d.ReadString(schemas.EngagementInvitationSummary_SenderCompanyName, v.SenderCompanyName)
+		case schemas.EngagementInvitationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.EngagementInvitationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InvitationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Engagement members are the participants in an Engagement, which is likely a
 // collaborative project or business opportunity within the AWS partner network.
 // Members can be different partner organizations or AWS accounts that are working
@@ -780,6 +2109,40 @@ type EngagementMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.EngagementMember_AccountId, *v.AccountId)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.EngagementMember_CompanyName, *v.CompanyName)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.EngagementMember_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *EngagementMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementMember_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.EngagementMember_AccountId, v.AccountId)
+		case schemas.EngagementMember_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.EngagementMember_CompanyName, v.CompanyName)
+		case schemas.EngagementMember_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.EngagementMember_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
 // The EngagementMemberSummary provides a snapshot of essential information about
 // participants in an AWS Partner Central Engagement. This compact data structure
 // encapsulates key details of each member, facilitating efficient collaboration
@@ -795,6 +2158,117 @@ type EngagementMemberSummary struct {
 	WebsiteUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngagementMemberSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementMemberSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementMemberSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompanyName != nil {
+		s.WriteString(schemas.EngagementMemberSummary_CompanyName, *v.CompanyName)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.EngagementMemberSummary_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *EngagementMemberSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementMemberSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementMemberSummary_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.EngagementMemberSummary_CompanyName, v.CompanyName)
+		case schemas.EngagementMemberSummary_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.EngagementMemberSummary_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
+// Contains the result of processing a single engagement within a prospecting
+// task. Each engagement is processed independently, so individual engagements can
+// succeed or fail regardless of other engagements in the same task.
+type EngagementProspectingResult struct {
+
+	// The unique identifier of the engagement that was processed.
+	//
+	// This member is required.
+	EngagementIdentifier *string
+
+	// The processing status of this specific engagement. Possible values are PENDING ,
+	// IN_PROGRESS , COMPLETED , and FAILED .
+	//
+	// This member is required.
+	Status ProspectingTaskStatus
+
+	// The identifier of the prospecting context created for this engagement. This
+	// field is only populated when the engagement was processed successfully (status
+	// is COMPLETED ). Use this identifier to reference the prospecting context in
+	// subsequent operations.
+	EngagementContextId *string
+
+	// A human-readable description of the failure for this engagement, including
+	// suggested recovery steps. This field is only populated when Status is FAILED .
+	Message *string
+
+	// An enumerated code indicating the reason this engagement failed to process.
+	// This field is only populated when Status is FAILED .
+	ReasonCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EngagementProspectingResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementProspectingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementProspectingResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementContextId != nil {
+		s.WriteString(schemas.EngagementProspectingResult_EngagementContextId, *v.EngagementContextId)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.EngagementProspectingResult_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EngagementProspectingResult_Message, *v.Message)
+	}
+	if v.ReasonCode != nil {
+		s.WriteString(schemas.EngagementProspectingResult_ReasonCode, *v.ReasonCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EngagementProspectingResult_Status, string(v.Status))
+	}
+}
+func (v *EngagementProspectingResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementProspectingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementProspectingResult_EngagementContextId:
+			v.EngagementContextId = new(string)
+			return d.ReadString(schemas.EngagementProspectingResult_EngagementContextId, v.EngagementContextId)
+		case schemas.EngagementProspectingResult_EngagementIdentifier:
+			v.EngagementIdentifier = new(string)
+			return d.ReadString(schemas.EngagementProspectingResult_EngagementIdentifier, v.EngagementIdentifier)
+		case schemas.EngagementProspectingResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EngagementProspectingResult_Message, v.Message)
+		case schemas.EngagementProspectingResult_ReasonCode:
+			v.ReasonCode = new(string)
+			return d.ReadString(schemas.EngagementProspectingResult_ReasonCode, v.ReasonCode)
+		case schemas.EngagementProspectingResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.EngagementProspectingResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProspectingTaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	This provide a streamlined view of the relationships between engagements and
@@ -829,6 +2303,56 @@ type EngagementResourceAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementResourceAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementResourceAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementResourceAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.EngagementResourceAssociationSummary_Catalog, *v.Catalog)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.EngagementResourceAssociationSummary_CreatedBy, *v.CreatedBy)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.EngagementResourceAssociationSummary_EngagementId, *v.EngagementId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.EngagementResourceAssociationSummary_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.EngagementResourceAssociationSummary_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *EngagementResourceAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementResourceAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementResourceAssociationSummary_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.EngagementResourceAssociationSummary_Catalog, v.Catalog)
+		case schemas.EngagementResourceAssociationSummary_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.EngagementResourceAssociationSummary_CreatedBy, v.CreatedBy)
+		case schemas.EngagementResourceAssociationSummary_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.EngagementResourceAssociationSummary_EngagementId, v.EngagementId)
+		case schemas.EngagementResourceAssociationSummary_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.EngagementResourceAssociationSummary_ResourceId, v.ResourceId)
+		case schemas.EngagementResourceAssociationSummary_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.EngagementResourceAssociationSummary_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the sorting parameters for listing Engagements.
 type EngagementSort struct {
 
@@ -843,6 +2367,42 @@ type EngagementSort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngagementSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.EngagementSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.EngagementSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *EngagementSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.EngagementSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = EngagementSortName(ev)
+			return nil
+		case schemas.EngagementSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.EngagementSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that contains an Engagement 's subset of fields.
@@ -882,6 +2442,122 @@ type EngagementSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngagementSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngagementSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngagementSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EngagementSummary_Arn, *v.Arn)
+	}
+	serializeEngagementContextTypeList(s, schemas.EngagementSummary_ContextTypes, v.ContextTypes)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EngagementSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.EngagementSummary_CreatedBy, *v.CreatedBy)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EngagementSummary_Id, *v.Id)
+	}
+	if v.MemberCount != nil {
+		s.WriteInt32(schemas.EngagementSummary_MemberCount, *v.MemberCount)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.EngagementSummary_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.ModifiedBy != nil {
+		s.WriteString(schemas.EngagementSummary_ModifiedBy, *v.ModifiedBy)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.EngagementSummary_Title, *v.Title)
+	}
+}
+func (v *EngagementSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngagementSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngagementSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EngagementSummary_Arn, v.Arn)
+		case schemas.EngagementSummary_ContextTypes:
+			return deserializeEngagementContextTypeList(d, schemas.EngagementSummary_ContextTypes, &v.ContextTypes)
+		case schemas.EngagementSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EngagementSummary_CreatedAt, v.CreatedAt)
+		case schemas.EngagementSummary_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.EngagementSummary_CreatedBy, v.CreatedBy)
+		case schemas.EngagementSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EngagementSummary_Id, v.Id)
+		case schemas.EngagementSummary_MemberCount:
+			v.MemberCount = new(int32)
+			return d.ReadInt32(schemas.EngagementSummary_MemberCount, v.MemberCount)
+		case schemas.EngagementSummary_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.EngagementSummary_ModifiedAt, v.ModifiedAt)
+		case schemas.EngagementSummary_ModifiedBy:
+			v.ModifiedBy = new(string)
+			return d.ReadString(schemas.EngagementSummary_ModifiedBy, v.ModifiedBy)
+		case schemas.EngagementSummary_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.EngagementSummary_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// Contains enrichment data for engagement invitations. You can view propensity
+// scores, program eligibility, and lead readiness insights directly in the
+// invitation, before you take action on the invitation.
+type EnrichmentContext struct {
+
+	// The AI-generated lead readiness score for this lead. Use this score to assess
+	// lead quality and prioritize engagement efforts.
+	LeadInsights *LeadInsights
+
+	// The customer account data and propensity insights for the prospected account.
+	// It includes geographic, industry, and segment classifications, along with
+	// engagement and solution scoring.
+	ProspectingResultAws *InvitationProspectingResultAws
+
+	noSmithyDocumentSerde
+}
+
+func (v *EnrichmentContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrichmentContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrichmentContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LeadInsights != nil {
+		s.WriteStruct(schemas.EnrichmentContext_LeadInsights)
+		v.LeadInsights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProspectingResultAws != nil {
+		s.WriteStruct(schemas.EnrichmentContext_ProspectingResultAws)
+		v.ProspectingResultAws.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnrichmentContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrichmentContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrichmentContext_LeadInsights:
+			v.LeadInsights = &LeadInsights{}
+			return v.LeadInsights.Deserialize(d)
+		case schemas.EnrichmentContext_ProspectingResultAws:
+			v.ProspectingResultAws = &InvitationProspectingResultAws{}
+			return v.ProspectingResultAws.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The expected duration of a partner's contract with the customer. Used to
 // convert Total Contract Value (TCV) to Monthly Recurring Revenue (MRR) for
 // opportunity dealsizing calculations.
@@ -902,6 +2578,38 @@ type ExpectedContractDuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpectedContractDuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpectedContractDuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpectedContractDuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Term != "" {
+		s.WriteString(schemas.ExpectedContractDuration_Term, string(v.Term))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ExpectedContractDuration_Value, *v.Value)
+	}
+}
+func (v *ExpectedContractDuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpectedContractDuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpectedContractDuration_Term:
+			var ev string
+			if err := d.ReadString(schemas.ExpectedContractDuration_Term, &ev); err != nil {
+				return err
+			}
+			v.Term = ExpectedContractDurationTerm(ev)
+			return nil
+		case schemas.ExpectedContractDuration_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ExpectedContractDuration_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Provides an estimate of the revenue that the partner is expected to generate
 // from the opportunity. This information helps partners assess the financial value
 // of the project.
@@ -916,16 +2624,19 @@ type ExpectedCustomerSpend struct {
 	CurrencyCode CurrencyCode
 
 	// Indicates how frequently the customer is expected to spend the projected
-	// amount. Only the value Monthly is allowed for the Frequency field, representing
-	// recurring monthly spend.
+	// amount. Use Monthly for recurring monthly spend (required for TargetCompany:
+	// "AWS" entries). Use None for one-time deal value entries (required for
+	// TargetCompany: "Self" entries when providing Total Contract Value).
 	//
 	// This member is required.
 	Frequency PaymentFrequency
 
-	// Specifies the name of the partner company that is expected to generate revenue
-	// from the opportunity. This field helps track the partner’s involvement in the
-	// opportunity. This field only accepts the value AWS . If any other value is
-	// provided, the system will automatically set it to AWS .
+	// Specifies the entity associated with this spend entry. Use AWS for the system’s
+	// AWS Monthly Recurring Revenue (MRR) estimate. Use Self for the partner’s own
+	// deal value entry when providing Total Contract Value (TCV) for automatic MRR
+	// conversion. When ExpectedContractDuration is present on the Project, only AWS
+	// and Self are accepted. When ExpectedContractDuration is not present, only AWS
+	// is accepted and any other value will be automatically set to AWS .
 	//
 	// This member is required.
 	TargetCompany *string
@@ -938,6 +2649,60 @@ type ExpectedCustomerSpend struct {
 	EstimationUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpectedCustomerSpend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpectedCustomerSpend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpectedCustomerSpend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.ExpectedCustomerSpend_Amount, *v.Amount)
+	}
+	if v.CurrencyCode != "" {
+		s.WriteString(schemas.ExpectedCustomerSpend_CurrencyCode, string(v.CurrencyCode))
+	}
+	if v.EstimationUrl != nil {
+		s.WriteString(schemas.ExpectedCustomerSpend_EstimationUrl, *v.EstimationUrl)
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.ExpectedCustomerSpend_Frequency, string(v.Frequency))
+	}
+	if v.TargetCompany != nil {
+		s.WriteString(schemas.ExpectedCustomerSpend_TargetCompany, *v.TargetCompany)
+	}
+}
+func (v *ExpectedCustomerSpend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpectedCustomerSpend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpectedCustomerSpend_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.ExpectedCustomerSpend_Amount, v.Amount)
+		case schemas.ExpectedCustomerSpend_CurrencyCode:
+			var ev string
+			if err := d.ReadString(schemas.ExpectedCustomerSpend_CurrencyCode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyCode = CurrencyCode(ev)
+			return nil
+		case schemas.ExpectedCustomerSpend_EstimationUrl:
+			v.EstimationUrl = new(string)
+			return d.ReadString(schemas.ExpectedCustomerSpend_EstimationUrl, v.EstimationUrl)
+		case schemas.ExpectedCustomerSpend_Frequency:
+			var ev string
+			if err := d.ReadString(schemas.ExpectedCustomerSpend_Frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = PaymentFrequency(ev)
+			return nil
+		case schemas.ExpectedCustomerSpend_TargetCompany:
+			v.TargetCompany = new(string)
+			return d.ReadString(schemas.ExpectedCustomerSpend_TargetCompany, v.TargetCompany)
+		}
+		return nil
+	})
 }
 
 //	The Invitation structure represents an invitation exchanged between partners
@@ -968,6 +2733,81 @@ type Invitation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Invitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Invitation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Invitation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.Invitation_Message, *v.Message)
+	}
+	serializePayload(s, schemas.Invitation_Payload, v.Payload)
+	serializeReceiver(s, schemas.Invitation_Receiver, v.Receiver)
+}
+func (v *Invitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Invitation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Invitation_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Invitation_Message, v.Message)
+		case schemas.Invitation_Payload:
+			return deserializePayload(d, schemas.Invitation_Payload, &v.Payload)
+		case schemas.Invitation_Receiver:
+			return deserializeReceiver(d, schemas.Invitation_Receiver, &v.Receiver)
+		}
+		return nil
+	})
+}
+
+// A subset of prospecting result data visible to invitation receivers. It
+// includes customer account details and AI-generated insights.
+type InvitationProspectingResultAws struct {
+
+	// The prospected customer account details, including geographic classification,
+	// industry segmentation, company size, and program eligibility.
+	Customer *ProspectingResultCustomer
+
+	// The AI-generated insights from the prospecting analysis, including marketplace
+	// engagement scoring, solution fit assessments, and solution categorization.
+	Insights *ProspectingInsights
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvitationProspectingResultAws) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvitationProspectingResultAws)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvitationProspectingResultAws) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.InvitationProspectingResultAws_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.InvitationProspectingResultAws_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InvitationProspectingResultAws) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvitationProspectingResultAws, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvitationProspectingResultAws_Customer:
+			v.Customer = &ProspectingResultCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.InvitationProspectingResultAws_Insights:
+			v.Insights = &ProspectingInsights{}
+			return v.Insights.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines a filter to retrieve opportunities based on the last modified date.
 // This filter is useful for tracking changes or updates to opportunities over
 // time.
@@ -983,6 +2823,93 @@ type LastModifiedDate struct {
 	BeforeLastModifiedDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *LastModifiedDate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LastModifiedDate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LastModifiedDate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterLastModifiedDate != nil {
+		s.WriteTime(schemas.LastModifiedDate_AfterLastModifiedDate, *v.AfterLastModifiedDate)
+	}
+	if v.BeforeLastModifiedDate != nil {
+		s.WriteTime(schemas.LastModifiedDate_BeforeLastModifiedDate, *v.BeforeLastModifiedDate)
+	}
+}
+func (v *LastModifiedDate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LastModifiedDate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LastModifiedDate_AfterLastModifiedDate:
+			v.AfterLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.LastModifiedDate_AfterLastModifiedDate, v.AfterLastModifiedDate)
+		case schemas.LastModifiedDate_BeforeLastModifiedDate:
+			v.BeforeLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.LastModifiedDate_BeforeLastModifiedDate, v.BeforeLastModifiedDate)
+		}
+		return nil
+	})
+}
+
+// The address information for a lead customer, including city, state or region,
+// postal code, and country code.
+type LeadAddress struct {
+
+	// The city of the lead customer's address.
+	City *string
+
+	// The country code of the lead customer's address.
+	CountryCode *string
+
+	// The postal code of the lead customer's address.
+	PostalCode *string
+
+	// The state or region of the lead customer's address.
+	StateOrRegion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LeadAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadAddress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadAddress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.LeadAddress_City, *v.City)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.LeadAddress_CountryCode, *v.CountryCode)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.LeadAddress_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.LeadAddress_StateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *LeadAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadAddress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadAddress_City:
+			v.City = new(string)
+			return d.ReadString(schemas.LeadAddress_City, v.City)
+		case schemas.LeadAddress_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.LeadAddress_CountryCode, v.CountryCode)
+		case schemas.LeadAddress_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.LeadAddress_PostalCode, v.PostalCode)
+		case schemas.LeadAddress_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.LeadAddress_StateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
 }
 
 // An object that contains a lead contact's details associated with the
@@ -1016,6 +2943,52 @@ type LeadContact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LeadContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessTitle != nil {
+		s.WriteString(schemas.LeadContact_BusinessTitle, *v.BusinessTitle)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.LeadContact_Email, *v.Email)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.LeadContact_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.LeadContact_LastName, *v.LastName)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.LeadContact_Phone, *v.Phone)
+	}
+}
+func (v *LeadContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadContact_BusinessTitle:
+			v.BusinessTitle = new(string)
+			return d.ReadString(schemas.LeadContact_BusinessTitle, v.BusinessTitle)
+		case schemas.LeadContact_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.LeadContact_Email, v.Email)
+		case schemas.LeadContact_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.LeadContact_FirstName, v.FirstName)
+		case schemas.LeadContact_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.LeadContact_LastName, v.LastName)
+		case schemas.LeadContact_Phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.LeadContact_Phone, v.Phone)
+		}
+		return nil
+	})
+}
+
 // Provides comprehensive details about a lead associated with an engagement. This
 // structure contains information about lead qualification status, customer
 // details, and interaction history to facilitate lead management and tracking
@@ -1036,6 +3009,11 @@ type LeadContext struct {
 	// This member is required.
 	Interactions []LeadInteraction
 
+	// Insights that AI generates and associates with the lead. These insights provide
+	// automated analysis such as lead readiness scoring to help partners assess the
+	// lead quality.
+	Insights *LeadInsights
+
 	// Indicates the current qualification status of the lead, such as whether it has
 	// been qualified, disqualified, or is still under evaluation. This helps track the
 	// lead's progression through the qualification process.
@@ -1044,22 +3022,61 @@ type LeadContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LeadContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.LeadContext_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.LeadContext_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLeadInteractionList(s, schemas.LeadContext_Interactions, v.Interactions)
+	if v.QualificationStatus != nil {
+		s.WriteString(schemas.LeadContext_QualificationStatus, *v.QualificationStatus)
+	}
+}
+func (v *LeadContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadContext_Customer:
+			v.Customer = &LeadCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.LeadContext_Insights:
+			v.Insights = &LeadInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.LeadContext_Interactions:
+			return deserializeLeadInteractionList(d, schemas.LeadContext_Interactions, &v.Interactions)
+		case schemas.LeadContext_QualificationStatus:
+			v.QualificationStatus = new(string)
+			return d.ReadString(schemas.LeadContext_QualificationStatus, v.QualificationStatus)
+		}
+		return nil
+	})
+}
+
 // Contains detailed information about the customer associated with the lead,
 // including company details, industry classification, and AWS maturity level. This
 // information helps qualify and categorize the lead for appropriate engagement
 // strategies.
 type LeadCustomer struct {
 
-	// An object that contains an Address object's subset of fields.
-	//
-	// This member is required.
-	Address *AddressSummary
-
 	// The name of the lead customer's company. This field is essential for
 	// identifying and tracking the customer organization associated with the lead.
 	//
 	// This member is required.
 	CompanyName *string
+
+	// The address information for the lead customer.
+	Address *LeadAddress
 
 	// Indicates the customer's level of experience and adoption with AWS services.
 	// This assessment helps determine the appropriate engagement approach and solution
@@ -1069,12 +3086,12 @@ type LeadCustomer struct {
 	// Specifies the industry sector to which the lead customer's company belongs.
 	// This categorization helps in understanding the customer's business context and
 	// tailoring appropriate solutions.
-	Industry Industry
+	Industry *string
 
 	// Specifies the market segment classification of the lead customer, such as
 	// enterprise, mid-market, or small business. This segmentation helps in targeting
 	// appropriate solutions and engagement strategies.
-	MarketSegment MarketSegment
+	MarketSegment *string
 
 	// The website URL of the lead customer's company. This provides additional
 	// context about the customer organization and helps verify company legitimacy and
@@ -1082,6 +3099,95 @@ type LeadCustomer struct {
 	WebsiteUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LeadCustomer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadCustomer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadCustomer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.LeadCustomer_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsMaturity != nil {
+		s.WriteString(schemas.LeadCustomer_AwsMaturity, *v.AwsMaturity)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.LeadCustomer_CompanyName, *v.CompanyName)
+	}
+	if v.Industry != nil {
+		s.WriteString(schemas.LeadCustomer_Industry, *v.Industry)
+	}
+	if v.MarketSegment != nil {
+		s.WriteString(schemas.LeadCustomer_MarketSegment, *v.MarketSegment)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.LeadCustomer_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *LeadCustomer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadCustomer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadCustomer_Address:
+			v.Address = &LeadAddress{}
+			return v.Address.Deserialize(d)
+		case schemas.LeadCustomer_AwsMaturity:
+			v.AwsMaturity = new(string)
+			return d.ReadString(schemas.LeadCustomer_AwsMaturity, v.AwsMaturity)
+		case schemas.LeadCustomer_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.LeadCustomer_CompanyName, v.CompanyName)
+		case schemas.LeadCustomer_Industry:
+			v.Industry = new(string)
+			return d.ReadString(schemas.LeadCustomer_Industry, v.Industry)
+		case schemas.LeadCustomer_MarketSegment:
+			v.MarketSegment = new(string)
+			return d.ReadString(schemas.LeadCustomer_MarketSegment, v.MarketSegment)
+		case schemas.LeadCustomer_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.LeadCustomer_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
+// Contains insights that AI generates for a lead. These insights provide
+// automated analysis to help partners evaluate the lead quality and prioritize
+// engagement efforts.
+type LeadInsights struct {
+
+	// A score that indicates the lead's readiness for engagement. Valid values are Low
+	// , Medium , and High . Use this score to prioritize leads based on their
+	// likelihood of conversion.
+	LeadReadinessScore *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LeadInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LeadReadinessScore != nil {
+		s.WriteString(schemas.LeadInsights_LeadReadinessScore, *v.LeadReadinessScore)
+	}
+}
+func (v *LeadInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadInsights_LeadReadinessScore:
+			v.LeadReadinessScore = new(string)
+			return d.ReadString(schemas.LeadInsights_LeadReadinessScore, v.LeadReadinessScore)
+		}
+		return nil
+	})
 }
 
 // Represents a specific interaction or touchpoint with a lead customer. This
@@ -1095,42 +3201,34 @@ type LeadInteraction struct {
 	// This member is required.
 	Contact *LeadContact
 
-	// Describes the action taken by the customer during or as a result of the
-	// interaction, such as requesting information, scheduling a meeting, or expressing
-	// interest in a solution.
-	//
-	// This member is required.
-	CustomerAction *string
-
-	// The unique identifier of the specific source that generated the lead
-	// interaction. This ID provides traceability back to the original lead generation
-	// activity.
-	//
-	// This member is required.
-	SourceId *string
-
-	// The descriptive name of the source that generated the lead interaction,
-	// providing a human-readable identifier for the lead generation channel or
-	// activity.
-	//
-	// This member is required.
-	SourceName *string
-
-	// Specifies the type of source that generated the lead interaction, such as
-	// "Event", "Website", "Referral", or "Campaign". This categorization helps track
-	// lead generation effectiveness across different channels.
-	//
-	// This member is required.
-	SourceType *string
-
 	// Describes the business problem or challenge that the customer discussed during
 	// the interaction. This information helps qualify the lead and identify
 	// appropriate solutions.
 	BusinessProblem *string
 
+	// Describes the action taken by the customer during or as a result of the
+	// interaction, such as requesting information, scheduling a meeting, or expressing
+	// interest in a solution.
+	CustomerAction *string
+
 	// The date and time when the lead interaction occurred, in ISO 8601 format (UTC).
 	// This timestamp helps track the chronology of lead engagement activities.
 	InteractionDate *time.Time
+
+	// The unique identifier of the specific source that generated the lead
+	// interaction. This ID provides traceability back to the original lead generation
+	// activity.
+	SourceId *string
+
+	// The descriptive name of the source that generated the lead interaction,
+	// providing a human-readable identifier for the lead generation channel or
+	// activity.
+	SourceName *string
+
+	// Specifies the type of source that generated the lead interaction, such as
+	// "Event", "Website", "Referral", or "Campaign". This categorization helps track
+	// lead generation effectiveness across different channels.
+	SourceType *string
 
 	// Describes the specific use case or business scenario discussed during the lead
 	// interaction. This helps categorize the customer's interests and potential
@@ -1138,6 +3236,72 @@ type LeadInteraction struct {
 	Usecase *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LeadInteraction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadInteraction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadInteraction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessProblem != nil {
+		s.WriteString(schemas.LeadInteraction_BusinessProblem, *v.BusinessProblem)
+	}
+	if v.Contact != nil {
+		s.WriteStruct(schemas.LeadInteraction_Contact)
+		v.Contact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerAction != nil {
+		s.WriteString(schemas.LeadInteraction_CustomerAction, *v.CustomerAction)
+	}
+	if v.InteractionDate != nil {
+		s.WriteTime(schemas.LeadInteraction_InteractionDate, *v.InteractionDate)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.LeadInteraction_SourceId, *v.SourceId)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.LeadInteraction_SourceName, *v.SourceName)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.LeadInteraction_SourceType, *v.SourceType)
+	}
+	if v.Usecase != nil {
+		s.WriteString(schemas.LeadInteraction_Usecase, *v.Usecase)
+	}
+}
+func (v *LeadInteraction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadInteraction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadInteraction_BusinessProblem:
+			v.BusinessProblem = new(string)
+			return d.ReadString(schemas.LeadInteraction_BusinessProblem, v.BusinessProblem)
+		case schemas.LeadInteraction_Contact:
+			v.Contact = &LeadContact{}
+			return v.Contact.Deserialize(d)
+		case schemas.LeadInteraction_CustomerAction:
+			v.CustomerAction = new(string)
+			return d.ReadString(schemas.LeadInteraction_CustomerAction, v.CustomerAction)
+		case schemas.LeadInteraction_InteractionDate:
+			v.InteractionDate = new(time.Time)
+			return d.ReadTime(schemas.LeadInteraction_InteractionDate, v.InteractionDate)
+		case schemas.LeadInteraction_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.LeadInteraction_SourceId, v.SourceId)
+		case schemas.LeadInteraction_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.LeadInteraction_SourceName, v.SourceName)
+		case schemas.LeadInteraction_SourceType:
+			v.SourceType = new(string)
+			return d.ReadString(schemas.LeadInteraction_SourceType, v.SourceType)
+		case schemas.LeadInteraction_Usecase:
+			v.Usecase = new(string)
+			return d.ReadString(schemas.LeadInteraction_Usecase, v.Usecase)
+		}
+		return nil
+	})
 }
 
 // Contains customer information included in a lead invitation payload. This
@@ -1151,27 +3315,25 @@ type LeadInvitationCustomer struct {
 	// This member is required.
 	CompanyName *string
 
-	// The country code indicating the geographic location of the customer company.
-	// This information helps partners understand regional requirements and assess
-	// their ability to serve the customer effectively.
-	//
-	// This member is required.
-	CountryCode CountryCode
-
 	// Indicates the customer's level of experience and adoption with AWS services.
 	// This assessment helps partners understand the customer's cloud maturity and
 	// tailor their engagement approach accordingly.
 	AwsMaturity *string
 
+	// The country code indicating the geographic location of the customer company.
+	// This information helps partners understand regional requirements and assess
+	// their ability to serve the customer effectively.
+	CountryCode *string
+
 	// Specifies the industry sector of the customer company associated with the lead
 	// invitation. This categorization helps partners understand the customer's
 	// business context and assess solution fit.
-	Industry Industry
+	Industry *string
 
 	// Specifies the market segment classification of the customer, such as
 	// enterprise, mid-market, or small business. This segmentation helps partners
 	// determine the appropriate solution complexity and engagement strategy.
-	MarketSegment MarketSegment
+	MarketSegment *string
 
 	// The website URL of the customer company. This provides additional context about
 	// the customer organization and helps partners verify company details and assess
@@ -1179,6 +3341,58 @@ type LeadInvitationCustomer struct {
 	WebsiteUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LeadInvitationCustomer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadInvitationCustomer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadInvitationCustomer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsMaturity != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_AwsMaturity, *v.AwsMaturity)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_CompanyName, *v.CompanyName)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_CountryCode, *v.CountryCode)
+	}
+	if v.Industry != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_Industry, *v.Industry)
+	}
+	if v.MarketSegment != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_MarketSegment, *v.MarketSegment)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.LeadInvitationCustomer_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *LeadInvitationCustomer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadInvitationCustomer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadInvitationCustomer_AwsMaturity:
+			v.AwsMaturity = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_AwsMaturity, v.AwsMaturity)
+		case schemas.LeadInvitationCustomer_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_CompanyName, v.CompanyName)
+		case schemas.LeadInvitationCustomer_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_CountryCode, v.CountryCode)
+		case schemas.LeadInvitationCustomer_Industry:
+			v.Industry = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_Industry, v.Industry)
+		case schemas.LeadInvitationCustomer_MarketSegment:
+			v.MarketSegment = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_MarketSegment, v.MarketSegment)
+		case schemas.LeadInvitationCustomer_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.LeadInvitationCustomer_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
 }
 
 // Represents interaction details included in a lead invitation payload. This
@@ -1196,22 +3410,16 @@ type LeadInvitationInteraction struct {
 	// The unique identifier of the specific source that generated the lead
 	// interaction. This provides traceability to the original lead generation activity
 	// for reference and follow-up purposes.
-	//
-	// This member is required.
 	SourceId *string
 
 	// The descriptive name of the source that generated the lead interaction. This
 	// human-readable identifier helps partners understand the specific lead generation
 	// channel or campaign that created the opportunity.
-	//
-	// This member is required.
 	SourceName *string
 
 	// Specifies the type of source that generated the lead interaction, such as
 	// "Event", "Website", or "Campaign". This helps partners understand the lead
 	// generation channel and assess lead quality based on the source type.
-	//
-	// This member is required.
 	SourceType *string
 
 	// Describes the specific use case or business scenario associated with the lead
@@ -1220,6 +3428,52 @@ type LeadInvitationInteraction struct {
 	Usecase *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LeadInvitationInteraction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadInvitationInteraction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadInvitationInteraction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactBusinessTitle != nil {
+		s.WriteString(schemas.LeadInvitationInteraction_ContactBusinessTitle, *v.ContactBusinessTitle)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.LeadInvitationInteraction_SourceId, *v.SourceId)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.LeadInvitationInteraction_SourceName, *v.SourceName)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.LeadInvitationInteraction_SourceType, *v.SourceType)
+	}
+	if v.Usecase != nil {
+		s.WriteString(schemas.LeadInvitationInteraction_Usecase, *v.Usecase)
+	}
+}
+func (v *LeadInvitationInteraction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadInvitationInteraction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadInvitationInteraction_ContactBusinessTitle:
+			v.ContactBusinessTitle = new(string)
+			return d.ReadString(schemas.LeadInvitationInteraction_ContactBusinessTitle, v.ContactBusinessTitle)
+		case schemas.LeadInvitationInteraction_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.LeadInvitationInteraction_SourceId, v.SourceId)
+		case schemas.LeadInvitationInteraction_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.LeadInvitationInteraction_SourceName, v.SourceName)
+		case schemas.LeadInvitationInteraction_SourceType:
+			v.SourceType = new(string)
+			return d.ReadString(schemas.LeadInvitationInteraction_SourceType, v.SourceType)
+		case schemas.LeadInvitationInteraction_Usecase:
+			v.Usecase = new(string)
+			return d.ReadString(schemas.LeadInvitationInteraction_Usecase, v.Usecase)
+		}
+		return nil
+	})
 }
 
 // Represents the data payload of an engagement invitation for a lead opportunity.
@@ -1242,6 +3496,38 @@ type LeadInvitationPayload struct {
 	Interaction *LeadInvitationInteraction
 
 	noSmithyDocumentSerde
+}
+
+func (v *LeadInvitationPayload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LeadInvitationPayload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LeadInvitationPayload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.LeadInvitationPayload_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Interaction != nil {
+		s.WriteStruct(schemas.LeadInvitationPayload_Interaction)
+		v.Interaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LeadInvitationPayload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LeadInvitationPayload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LeadInvitationPayload_Customer:
+			v.Customer = &LeadInvitationCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.LeadInvitationPayload_Interaction:
+			v.Interaction = &LeadInvitationInteraction{}
+			return v.Interaction.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that contains the Opportunity lifecycle's details.
@@ -1411,6 +3697,79 @@ type LifeCycle struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifeCycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifeCycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifeCycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClosedLostReason != "" {
+		s.WriteString(schemas.LifeCycle_ClosedLostReason, string(v.ClosedLostReason))
+	}
+	if v.NextSteps != nil {
+		s.WriteString(schemas.LifeCycle_NextSteps, *v.NextSteps)
+	}
+	serializeNextStepsHistories(s, schemas.LifeCycle_NextStepsHistory, v.NextStepsHistory)
+	if v.ReviewComments != nil {
+		s.WriteString(schemas.LifeCycle_ReviewComments, *v.ReviewComments)
+	}
+	if v.ReviewStatus != "" {
+		s.WriteString(schemas.LifeCycle_ReviewStatus, string(v.ReviewStatus))
+	}
+	if v.ReviewStatusReason != nil {
+		s.WriteString(schemas.LifeCycle_ReviewStatusReason, *v.ReviewStatusReason)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.LifeCycle_Stage, string(v.Stage))
+	}
+	if v.TargetCloseDate != nil {
+		s.WriteString(schemas.LifeCycle_TargetCloseDate, *v.TargetCloseDate)
+	}
+}
+func (v *LifeCycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifeCycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifeCycle_ClosedLostReason:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycle_ClosedLostReason, &ev); err != nil {
+				return err
+			}
+			v.ClosedLostReason = ClosedLostReason(ev)
+			return nil
+		case schemas.LifeCycle_NextSteps:
+			v.NextSteps = new(string)
+			return d.ReadString(schemas.LifeCycle_NextSteps, v.NextSteps)
+		case schemas.LifeCycle_NextStepsHistory:
+			return deserializeNextStepsHistories(d, schemas.LifeCycle_NextStepsHistory, &v.NextStepsHistory)
+		case schemas.LifeCycle_ReviewComments:
+			v.ReviewComments = new(string)
+			return d.ReadString(schemas.LifeCycle_ReviewComments, v.ReviewComments)
+		case schemas.LifeCycle_ReviewStatus:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycle_ReviewStatus, &ev); err != nil {
+				return err
+			}
+			v.ReviewStatus = ReviewStatus(ev)
+			return nil
+		case schemas.LifeCycle_ReviewStatusReason:
+			v.ReviewStatusReason = new(string)
+			return d.ReadString(schemas.LifeCycle_ReviewStatusReason, v.ReviewStatusReason)
+		case schemas.LifeCycle_Stage:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycle_Stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = Stage(ev)
+			return nil
+		case schemas.LifeCycle_TargetCloseDate:
+			v.TargetCloseDate = new(string)
+			return d.ReadString(schemas.LifeCycle_TargetCloseDate, v.TargetCloseDate)
+		}
+		return nil
+	})
+}
+
 //	Provides the lifecycle view of an opportunity resource shared through a
 //
 // snapshot.
@@ -1429,6 +3788,54 @@ type LifeCycleForView struct {
 	TargetCloseDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifeCycleForView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifeCycleForView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifeCycleForView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextSteps != nil {
+		s.WriteString(schemas.LifeCycleForView_NextSteps, *v.NextSteps)
+	}
+	if v.ReviewStatus != "" {
+		s.WriteString(schemas.LifeCycleForView_ReviewStatus, string(v.ReviewStatus))
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.LifeCycleForView_Stage, string(v.Stage))
+	}
+	if v.TargetCloseDate != nil {
+		s.WriteString(schemas.LifeCycleForView_TargetCloseDate, *v.TargetCloseDate)
+	}
+}
+func (v *LifeCycleForView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifeCycleForView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifeCycleForView_NextSteps:
+			v.NextSteps = new(string)
+			return d.ReadString(schemas.LifeCycleForView_NextSteps, v.NextSteps)
+		case schemas.LifeCycleForView_ReviewStatus:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycleForView_ReviewStatus, &ev); err != nil {
+				return err
+			}
+			v.ReviewStatus = ReviewStatus(ev)
+			return nil
+		case schemas.LifeCycleForView_Stage:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycleForView_Stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = Stage(ev)
+			return nil
+		case schemas.LifeCycleForView_TargetCloseDate:
+			v.TargetCloseDate = new(string)
+			return d.ReadString(schemas.LifeCycleForView_TargetCloseDate, v.TargetCloseDate)
+		}
+		return nil
+	})
 }
 
 // An object that contains a LifeCycle object's subset of fields.
@@ -1548,6 +3955,76 @@ type LifeCycleSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LifeCycleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifeCycleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifeCycleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClosedLostReason != "" {
+		s.WriteString(schemas.LifeCycleSummary_ClosedLostReason, string(v.ClosedLostReason))
+	}
+	if v.NextSteps != nil {
+		s.WriteString(schemas.LifeCycleSummary_NextSteps, *v.NextSteps)
+	}
+	if v.ReviewComments != nil {
+		s.WriteString(schemas.LifeCycleSummary_ReviewComments, *v.ReviewComments)
+	}
+	if v.ReviewStatus != "" {
+		s.WriteString(schemas.LifeCycleSummary_ReviewStatus, string(v.ReviewStatus))
+	}
+	if v.ReviewStatusReason != nil {
+		s.WriteString(schemas.LifeCycleSummary_ReviewStatusReason, *v.ReviewStatusReason)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.LifeCycleSummary_Stage, string(v.Stage))
+	}
+	if v.TargetCloseDate != nil {
+		s.WriteString(schemas.LifeCycleSummary_TargetCloseDate, *v.TargetCloseDate)
+	}
+}
+func (v *LifeCycleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifeCycleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifeCycleSummary_ClosedLostReason:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycleSummary_ClosedLostReason, &ev); err != nil {
+				return err
+			}
+			v.ClosedLostReason = ClosedLostReason(ev)
+			return nil
+		case schemas.LifeCycleSummary_NextSteps:
+			v.NextSteps = new(string)
+			return d.ReadString(schemas.LifeCycleSummary_NextSteps, v.NextSteps)
+		case schemas.LifeCycleSummary_ReviewComments:
+			v.ReviewComments = new(string)
+			return d.ReadString(schemas.LifeCycleSummary_ReviewComments, v.ReviewComments)
+		case schemas.LifeCycleSummary_ReviewStatus:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycleSummary_ReviewStatus, &ev); err != nil {
+				return err
+			}
+			v.ReviewStatus = ReviewStatus(ev)
+			return nil
+		case schemas.LifeCycleSummary_ReviewStatusReason:
+			v.ReviewStatusReason = new(string)
+			return d.ReadString(schemas.LifeCycleSummary_ReviewStatusReason, v.ReviewStatusReason)
+		case schemas.LifeCycleSummary_Stage:
+			var ev string
+			if err := d.ReadString(schemas.LifeCycleSummary_Stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = Stage(ev)
+			return nil
+		case schemas.LifeCycleSummary_TargetCloseDate:
+			v.TargetCloseDate = new(string)
+			return d.ReadString(schemas.LifeCycleSummary_TargetCloseDate, v.TargetCloseDate)
+		}
+		return nil
+	})
+}
+
 //	Specifies a subset of fields associated with tasks related to accepting an
 //
 // engagement invitation.
@@ -1581,6 +4058,84 @@ type ListEngagementByAcceptingInvitationTaskSummary struct {
 	TaskStatus TaskStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEngagementByAcceptingInvitationTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementByAcceptingInvitationTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementInvitationId != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId, *v.EngagementInvitationId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_Message, *v.Message)
+	}
+	if v.OpportunityId != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_OpportunityId, *v.OpportunityId)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_ReasonCode, string(v.ReasonCode))
+	}
+	if v.ResourceSnapshotJobId != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId, *v.ResourceSnapshotJobId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEngagementByAcceptingInvitationTaskSummary_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *ListEngagementByAcceptingInvitationTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementByAcceptingInvitationTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId:
+			v.EngagementInvitationId = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId, v.EngagementInvitationId)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_Message, v.Message)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_OpportunityId:
+			v.OpportunityId = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_OpportunityId, v.OpportunityId)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = ReasonCode(ev)
+			return nil
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId:
+			v.ResourceSnapshotJobId = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId, v.ResourceSnapshotJobId)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListEngagementByAcceptingInvitationTaskSummary_StartTime, v.StartTime)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskArn, v.TaskArn)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskId, v.TaskId)
+		case schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListEngagementByAcceptingInvitationTaskSummary_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Provides a summary of a task related to creating an engagement from an
@@ -1630,6 +4185,90 @@ type ListEngagementFromOpportunityTaskSummary struct {
 	TaskStatus TaskStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEngagementFromOpportunityTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementFromOpportunityTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementFromOpportunityTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementId != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementInvitationId != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_EngagementInvitationId, *v.EngagementInvitationId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_Message, *v.Message)
+	}
+	if v.OpportunityId != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_OpportunityId, *v.OpportunityId)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_ReasonCode, string(v.ReasonCode))
+	}
+	if v.ResourceSnapshotJobId != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId, *v.ResourceSnapshotJobId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEngagementFromOpportunityTaskSummary_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.ListEngagementFromOpportunityTaskSummary_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *ListEngagementFromOpportunityTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementFromOpportunityTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementFromOpportunityTaskSummary_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_EngagementId, v.EngagementId)
+		case schemas.ListEngagementFromOpportunityTaskSummary_EngagementInvitationId:
+			v.EngagementInvitationId = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_EngagementInvitationId, v.EngagementInvitationId)
+		case schemas.ListEngagementFromOpportunityTaskSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_Message, v.Message)
+		case schemas.ListEngagementFromOpportunityTaskSummary_OpportunityId:
+			v.OpportunityId = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_OpportunityId, v.OpportunityId)
+		case schemas.ListEngagementFromOpportunityTaskSummary_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = ReasonCode(ev)
+			return nil
+		case schemas.ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId:
+			v.ResourceSnapshotJobId = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId, v.ResourceSnapshotJobId)
+		case schemas.ListEngagementFromOpportunityTaskSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListEngagementFromOpportunityTaskSummary_StartTime, v.StartTime)
+		case schemas.ListEngagementFromOpportunityTaskSummary_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_TaskArn, v.TaskArn)
+		case schemas.ListEngagementFromOpportunityTaskSummary_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_TaskId, v.TaskId)
+		case schemas.ListEngagementFromOpportunityTaskSummary_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListEngagementFromOpportunityTaskSummary_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides a summary of a task related to creating an opportunity from an
@@ -1683,6 +4322,90 @@ type ListOpportunityFromEngagementTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpportunityFromEngagementTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpportunityFromEngagementTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpportunityFromEngagementTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_ContextId, *v.ContextId)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_EngagementId, *v.EngagementId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_Message, *v.Message)
+	}
+	if v.OpportunityId != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_OpportunityId, *v.OpportunityId)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_ReasonCode, string(v.ReasonCode))
+	}
+	if v.ResourceSnapshotJobId != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId, *v.ResourceSnapshotJobId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListOpportunityFromEngagementTaskSummary_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.ListOpportunityFromEngagementTaskSummary_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *ListOpportunityFromEngagementTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpportunityFromEngagementTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpportunityFromEngagementTaskSummary_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_ContextId, v.ContextId)
+		case schemas.ListOpportunityFromEngagementTaskSummary_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_EngagementId, v.EngagementId)
+		case schemas.ListOpportunityFromEngagementTaskSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_Message, v.Message)
+		case schemas.ListOpportunityFromEngagementTaskSummary_OpportunityId:
+			v.OpportunityId = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_OpportunityId, v.OpportunityId)
+		case schemas.ListOpportunityFromEngagementTaskSummary_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = ReasonCode(ev)
+			return nil
+		case schemas.ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId:
+			v.ResourceSnapshotJobId = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId, v.ResourceSnapshotJobId)
+		case schemas.ListOpportunityFromEngagementTaskSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListOpportunityFromEngagementTaskSummary_StartTime, v.StartTime)
+		case schemas.ListOpportunityFromEngagementTaskSummary_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_TaskArn, v.TaskArn)
+		case schemas.ListOpportunityFromEngagementTaskSummary_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_TaskId, v.TaskId)
+		case schemas.ListOpportunityFromEngagementTaskSummary_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListOpportunityFromEngagementTaskSummary_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Defines the sorting parameters for listing tasks. This structure allows for
 //
 // specifying the field to sort by and the order of sorting.
@@ -1699,6 +4422,42 @@ type ListTasksSortBase struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListTasksSortBase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksSortBase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksSortBase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTasksSortBase_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTasksSortBase_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ListTasksSortBase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTasksSortBase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTasksSortBase_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ListTasksSortBase_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ListTasksSortName(ev)
+			return nil
+		case schemas.ListTasksSortBase_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListTasksSortBase_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that contains marketing details for the Opportunity .
@@ -1744,6 +4503,54 @@ type Marketing struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Marketing) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Marketing)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Marketing) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsFundingUsed != "" {
+		s.WriteString(schemas.Marketing_AwsFundingUsed, string(v.AwsFundingUsed))
+	}
+	if v.CampaignName != nil {
+		s.WriteString(schemas.Marketing_CampaignName, *v.CampaignName)
+	}
+	serializeChannels(s, schemas.Marketing_Channels, v.Channels)
+	if v.Source != "" {
+		s.WriteString(schemas.Marketing_Source, string(v.Source))
+	}
+	serializeUseCases(s, schemas.Marketing_UseCases, v.UseCases)
+}
+func (v *Marketing) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Marketing, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Marketing_AwsFundingUsed:
+			var ev string
+			if err := d.ReadString(schemas.Marketing_AwsFundingUsed, &ev); err != nil {
+				return err
+			}
+			v.AwsFundingUsed = AwsFundingUsed(ev)
+			return nil
+		case schemas.Marketing_CampaignName:
+			v.CampaignName = new(string)
+			return d.ReadString(schemas.Marketing_CampaignName, v.CampaignName)
+		case schemas.Marketing_Channels:
+			return deserializeChannels(d, schemas.Marketing_Channels, &v.Channels)
+		case schemas.Marketing_Source:
+			var ev string
+			if err := d.ReadString(schemas.Marketing_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = MarketingSource(ev)
+			return nil
+		case schemas.Marketing_UseCases:
+			return deserializeUseCases(d, schemas.Marketing_UseCases, &v.UseCases)
+		}
+		return nil
+	})
+}
+
 // Specifies payments details.
 type MonetaryValue struct {
 
@@ -1762,6 +4569,38 @@ type MonetaryValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonetaryValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonetaryValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonetaryValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.MonetaryValue_Amount, *v.Amount)
+	}
+	if v.CurrencyCode != "" {
+		s.WriteString(schemas.MonetaryValue_CurrencyCode, string(v.CurrencyCode))
+	}
+}
+func (v *MonetaryValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonetaryValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonetaryValue_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.MonetaryValue_Amount, v.Amount)
+		case schemas.MonetaryValue_CurrencyCode:
+			var ev string
+			if err := d.ReadString(schemas.MonetaryValue_CurrencyCode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyCode = CurrencyCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Read-only; shows the last 50 values and change dates for the NextSteps field.
 type NextStepsHistory struct {
 
@@ -1776,6 +4615,34 @@ type NextStepsHistory struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NextStepsHistory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NextStepsHistory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NextStepsHistory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Time != nil {
+		s.WriteTime(schemas.NextStepsHistory_Time, *v.Time)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.NextStepsHistory_Value, *v.Value)
+	}
+}
+func (v *NextStepsHistory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NextStepsHistory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NextStepsHistory_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.NextStepsHistory_Time, v.Time)
+		case schemas.NextStepsHistory_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.NextStepsHistory_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Defines sorting options for retrieving Engagement Invitations. Sorting can be
@@ -1795,6 +4662,42 @@ type OpportunityEngagementInvitationSort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpportunityEngagementInvitationSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunityEngagementInvitationSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunityEngagementInvitationSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.OpportunityEngagementInvitationSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.OpportunityEngagementInvitationSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *OpportunityEngagementInvitationSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunityEngagementInvitationSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunityEngagementInvitationSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.OpportunityEngagementInvitationSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = OpportunityEngagementInvitationSortName(ev)
+			return nil
+		case schemas.OpportunityEngagementInvitationSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.OpportunityEngagementInvitationSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents the data payload of an Engagement Invitation for a specific
@@ -1828,6 +4731,86 @@ type OpportunityInvitationPayload struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpportunityInvitationPayload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunityInvitationPayload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunityInvitationPayload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.OpportunityInvitationPayload_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Project != nil {
+		s.WriteStruct(schemas.OpportunityInvitationPayload_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReceiverResponsibilityList(s, schemas.OpportunityInvitationPayload_ReceiverResponsibilities, v.ReceiverResponsibilities)
+	serializeSenderContactList(s, schemas.OpportunityInvitationPayload_SenderContacts, v.SenderContacts)
+}
+func (v *OpportunityInvitationPayload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunityInvitationPayload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunityInvitationPayload_Customer:
+			v.Customer = &EngagementCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.OpportunityInvitationPayload_Project:
+			v.Project = &ProjectDetails{}
+			return v.Project.Deserialize(d)
+		case schemas.OpportunityInvitationPayload_ReceiverResponsibilities:
+			return deserializeReceiverResponsibilityList(d, schemas.OpportunityInvitationPayload_ReceiverResponsibilities, &v.ReceiverResponsibilities)
+		case schemas.OpportunityInvitationPayload_SenderContacts:
+			return deserializeSenderContactList(d, schemas.OpportunityInvitationPayload_SenderContacts, &v.SenderContacts)
+		}
+		return nil
+	})
+}
+
+// Opportunity quality score and trend.
+type OpportunityQuality struct {
+
+	// Deal quality score based on opportunity content completeness and sales
+	// methodology criteria. Values range from 0 to 100.
+	Score *int32
+
+	// Direction of score change since last scoring iteration. Known values: Improving
+	// , Declining , No Change .
+	Trend *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OpportunityQuality) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunityQuality)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunityQuality) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Score != nil {
+		s.WriteInt32(schemas.OpportunityQuality_Score, *v.Score)
+	}
+	if v.Trend != nil {
+		s.WriteString(schemas.OpportunityQuality_Trend, *v.Trend)
+	}
+}
+func (v *OpportunityQuality) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunityQuality, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunityQuality_Score:
+			v.Score = new(int32)
+			return d.ReadInt32(schemas.OpportunityQuality_Score, v.Score)
+		case schemas.OpportunityQuality_Trend:
+			v.Trend = new(string)
+			return d.ReadString(schemas.OpportunityQuality_Trend, v.Trend)
+		}
+		return nil
+	})
+}
+
 // Object that configures response sorting.
 type OpportunitySort struct {
 
@@ -1844,6 +4827,42 @@ type OpportunitySort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpportunitySort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunitySort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunitySort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.OpportunitySort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.OpportunitySort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *OpportunitySort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunitySort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunitySort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.OpportunitySort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = OpportunitySortName(ev)
+			return nil
+		case schemas.OpportunitySort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.OpportunitySort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that contains an Opportunity 's subset of fields.
@@ -1902,6 +4921,92 @@ type OpportunitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpportunitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.OpportunitySummary_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.OpportunitySummary_Catalog, *v.Catalog)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.OpportunitySummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.Customer != nil {
+		s.WriteStruct(schemas.OpportunitySummary_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OpportunitySummary_Id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.OpportunitySummary_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.OpportunitySummary_LifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpportunityType != "" {
+		s.WriteString(schemas.OpportunitySummary_OpportunityType, string(v.OpportunityType))
+	}
+	if v.PartnerOpportunityIdentifier != nil {
+		s.WriteString(schemas.OpportunitySummary_PartnerOpportunityIdentifier, *v.PartnerOpportunityIdentifier)
+	}
+	if v.Project != nil {
+		s.WriteStruct(schemas.OpportunitySummary_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OpportunitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunitySummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OpportunitySummary_Arn, v.Arn)
+		case schemas.OpportunitySummary_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.OpportunitySummary_Catalog, v.Catalog)
+		case schemas.OpportunitySummary_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.OpportunitySummary_CreatedDate, v.CreatedDate)
+		case schemas.OpportunitySummary_Customer:
+			v.Customer = &CustomerSummary{}
+			return v.Customer.Deserialize(d)
+		case schemas.OpportunitySummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OpportunitySummary_Id, v.Id)
+		case schemas.OpportunitySummary_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.OpportunitySummary_LastModifiedDate, v.LastModifiedDate)
+		case schemas.OpportunitySummary_LifeCycle:
+			v.LifeCycle = &LifeCycleSummary{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.OpportunitySummary_OpportunityType:
+			var ev string
+			if err := d.ReadString(schemas.OpportunitySummary_OpportunityType, &ev); err != nil {
+				return err
+			}
+			v.OpportunityType = OpportunityType(ev)
+			return nil
+		case schemas.OpportunitySummary_PartnerOpportunityIdentifier:
+			v.PartnerOpportunityIdentifier = new(string)
+			return d.ReadString(schemas.OpportunitySummary_PartnerOpportunityIdentifier, v.PartnerOpportunityIdentifier)
+		case schemas.OpportunitySummary_Project:
+			v.Project = &ProjectSummary{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Provides a comprehensive view of an opportunity summary, including lifecycle
 //
 // information, team details, opportunity type, primary needs from AWS, and
@@ -1938,6 +5043,70 @@ type OpportunitySummaryView struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpportunitySummaryView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpportunitySummaryView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpportunitySummaryView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.OpportunitySummaryView_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.OpportunitySummaryView_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePartnerOpportunityTeamMembersList(s, schemas.OpportunitySummaryView_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityType != "" {
+		s.WriteString(schemas.OpportunitySummaryView_OpportunityType, string(v.OpportunityType))
+	}
+	serializePrimaryNeedsFromAws(s, schemas.OpportunitySummaryView_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.Project != nil {
+		s.WriteStruct(schemas.OpportunitySummaryView_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedEntityIdentifiers != nil {
+		s.WriteStruct(schemas.OpportunitySummaryView_RelatedEntityIdentifiers)
+		v.RelatedEntityIdentifiers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OpportunitySummaryView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpportunitySummaryView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpportunitySummaryView_Customer:
+			v.Customer = &Customer{}
+			return v.Customer.Deserialize(d)
+		case schemas.OpportunitySummaryView_Lifecycle:
+			v.Lifecycle = &LifeCycleForView{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.OpportunitySummaryView_OpportunityTeam:
+			return deserializePartnerOpportunityTeamMembersList(d, schemas.OpportunitySummaryView_OpportunityTeam, &v.OpportunityTeam)
+		case schemas.OpportunitySummaryView_OpportunityType:
+			var ev string
+			if err := d.ReadString(schemas.OpportunitySummaryView_OpportunityType, &ev); err != nil {
+				return err
+			}
+			v.OpportunityType = OpportunityType(ev)
+			return nil
+		case schemas.OpportunitySummaryView_PrimaryNeedsFromAws:
+			return deserializePrimaryNeedsFromAws(d, schemas.OpportunitySummaryView_PrimaryNeedsFromAws, &v.PrimaryNeedsFromAws)
+		case schemas.OpportunitySummaryView_Project:
+			v.Project = &ProjectView{}
+			return v.Project.Deserialize(d)
+		case schemas.OpportunitySummaryView_RelatedEntityIdentifiers:
+			v.RelatedEntityIdentifiers = &RelatedEntityIdentifiers{}
+			return v.RelatedEntityIdentifiers.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the data payload associated with the Engagement Invitation. This
 // payload includes essential details related to the AWS opportunity and is used by
 // partners to evaluate whether to accept or reject the engagement.
@@ -1960,6 +5129,14 @@ type PayloadMemberLeadInvitation struct {
 }
 
 func (*PayloadMemberLeadInvitation) isPayload() {}
+func (v *PayloadMemberLeadInvitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Payload_LeadInvitation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PayloadMemberLeadInvitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies the details of the opportunity invitation within the Engagement
 // Invitation payload. This data helps partners understand the context, scope, and
@@ -1971,6 +5148,14 @@ type PayloadMemberOpportunityInvitation struct {
 }
 
 func (*PayloadMemberOpportunityInvitation) isPayload() {}
+func (v *PayloadMemberOpportunityInvitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Payload_OpportunityInvitation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PayloadMemberOpportunityInvitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Tracks the history of next steps associated with the opportunity. This field
 // captures the actions planned for the future and their timeline.
@@ -1990,6 +5175,34 @@ type ProfileNextStepsHistory struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfileNextStepsHistory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileNextStepsHistory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileNextStepsHistory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Time != nil {
+		s.WriteTime(schemas.ProfileNextStepsHistory_Time, *v.Time)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ProfileNextStepsHistory_Value, *v.Value)
+	}
+}
+func (v *ProfileNextStepsHistory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileNextStepsHistory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileNextStepsHistory_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.ProfileNextStepsHistory_Time, v.Time)
+		case schemas.ProfileNextStepsHistory_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ProfileNextStepsHistory_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An object that contains the Opportunity 's project details.
@@ -2133,6 +5346,104 @@ type Project struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Project) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Project)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalComments != nil {
+		s.WriteString(schemas.Project_AdditionalComments, *v.AdditionalComments)
+	}
+	serializeApnPrograms(s, schemas.Project_ApnPrograms, v.ApnPrograms)
+	if v.AwsPartition != "" {
+		s.WriteString(schemas.Project_AwsPartition, string(v.AwsPartition))
+	}
+	if v.CompetitorName != "" {
+		s.WriteString(schemas.Project_CompetitorName, string(v.CompetitorName))
+	}
+	if v.CustomerBusinessProblem != nil {
+		s.WriteString(schemas.Project_CustomerBusinessProblem, *v.CustomerBusinessProblem)
+	}
+	if v.CustomerUseCase != nil {
+		s.WriteString(schemas.Project_CustomerUseCase, *v.CustomerUseCase)
+	}
+	serializeDeliveryModels(s, schemas.Project_DeliveryModels, v.DeliveryModels)
+	if v.ExpectedContractDuration != nil {
+		s.WriteStruct(schemas.Project_ExpectedContractDuration)
+		v.ExpectedContractDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpectedCustomerSpendList(s, schemas.Project_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.OtherCompetitorNames != nil {
+		s.WriteString(schemas.Project_OtherCompetitorNames, *v.OtherCompetitorNames)
+	}
+	if v.OtherSolutionDescription != nil {
+		s.WriteString(schemas.Project_OtherSolutionDescription, *v.OtherSolutionDescription)
+	}
+	if v.RelatedOpportunityIdentifier != nil {
+		s.WriteString(schemas.Project_RelatedOpportunityIdentifier, *v.RelatedOpportunityIdentifier)
+	}
+	serializeSalesActivities(s, schemas.Project_SalesActivities, v.SalesActivities)
+	if v.Title != nil {
+		s.WriteString(schemas.Project_Title, *v.Title)
+	}
+}
+func (v *Project) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Project, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Project_AdditionalComments:
+			v.AdditionalComments = new(string)
+			return d.ReadString(schemas.Project_AdditionalComments, v.AdditionalComments)
+		case schemas.Project_ApnPrograms:
+			return deserializeApnPrograms(d, schemas.Project_ApnPrograms, &v.ApnPrograms)
+		case schemas.Project_AwsPartition:
+			var ev string
+			if err := d.ReadString(schemas.Project_AwsPartition, &ev); err != nil {
+				return err
+			}
+			v.AwsPartition = AwsPartition(ev)
+			return nil
+		case schemas.Project_CompetitorName:
+			var ev string
+			if err := d.ReadString(schemas.Project_CompetitorName, &ev); err != nil {
+				return err
+			}
+			v.CompetitorName = CompetitorName(ev)
+			return nil
+		case schemas.Project_CustomerBusinessProblem:
+			v.CustomerBusinessProblem = new(string)
+			return d.ReadString(schemas.Project_CustomerBusinessProblem, v.CustomerBusinessProblem)
+		case schemas.Project_CustomerUseCase:
+			v.CustomerUseCase = new(string)
+			return d.ReadString(schemas.Project_CustomerUseCase, v.CustomerUseCase)
+		case schemas.Project_DeliveryModels:
+			return deserializeDeliveryModels(d, schemas.Project_DeliveryModels, &v.DeliveryModels)
+		case schemas.Project_ExpectedContractDuration:
+			v.ExpectedContractDuration = &ExpectedContractDuration{}
+			return v.ExpectedContractDuration.Deserialize(d)
+		case schemas.Project_ExpectedCustomerSpend:
+			return deserializeExpectedCustomerSpendList(d, schemas.Project_ExpectedCustomerSpend, &v.ExpectedCustomerSpend)
+		case schemas.Project_OtherCompetitorNames:
+			v.OtherCompetitorNames = new(string)
+			return d.ReadString(schemas.Project_OtherCompetitorNames, v.OtherCompetitorNames)
+		case schemas.Project_OtherSolutionDescription:
+			v.OtherSolutionDescription = new(string)
+			return d.ReadString(schemas.Project_OtherSolutionDescription, v.OtherSolutionDescription)
+		case schemas.Project_RelatedOpportunityIdentifier:
+			v.RelatedOpportunityIdentifier = new(string)
+			return d.ReadString(schemas.Project_RelatedOpportunityIdentifier, v.RelatedOpportunityIdentifier)
+		case schemas.Project_SalesActivities:
+			return deserializeSalesActivities(d, schemas.Project_SalesActivities, &v.SalesActivities)
+		case schemas.Project_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Project_Title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Contains details about the project associated with the Engagement Invitation,
 // including the business problem and expected outcomes.
 type ProjectDetails struct {
@@ -2162,6 +5473,43 @@ type ProjectDetails struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProjectDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessProblem != nil {
+		s.WriteString(schemas.ProjectDetails_BusinessProblem, *v.BusinessProblem)
+	}
+	serializeExpectedCustomerSpendList(s, schemas.ProjectDetails_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.TargetCompletionDate != nil {
+		s.WriteString(schemas.ProjectDetails_TargetCompletionDate, *v.TargetCompletionDate)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ProjectDetails_Title, *v.Title)
+	}
+}
+func (v *ProjectDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectDetails_BusinessProblem:
+			v.BusinessProblem = new(string)
+			return d.ReadString(schemas.ProjectDetails_BusinessProblem, v.BusinessProblem)
+		case schemas.ProjectDetails_ExpectedCustomerSpend:
+			return deserializeExpectedCustomerSpendList(d, schemas.ProjectDetails_ExpectedCustomerSpend, &v.ExpectedCustomerSpend)
+		case schemas.ProjectDetails_TargetCompletionDate:
+			v.TargetCompletionDate = new(string)
+			return d.ReadString(schemas.ProjectDetails_TargetCompletionDate, v.TargetCompletionDate)
+		case schemas.ProjectDetails_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ProjectDetails_Title, v.Title)
+		}
+		return nil
+	})
 }
 
 // An object that contains a Project object's subset of fields.
@@ -2203,6 +5551,36 @@ type ProjectSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProjectSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliveryModels(s, schemas.ProjectSummary_DeliveryModels, v.DeliveryModels)
+	if v.ExpectedContractDuration != nil {
+		s.WriteStruct(schemas.ProjectSummary_ExpectedContractDuration)
+		v.ExpectedContractDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpectedCustomerSpendList(s, schemas.ProjectSummary_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+}
+func (v *ProjectSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectSummary_DeliveryModels:
+			return deserializeDeliveryModels(d, schemas.ProjectSummary_DeliveryModels, &v.DeliveryModels)
+		case schemas.ProjectSummary_ExpectedContractDuration:
+			v.ExpectedContractDuration = &ExpectedContractDuration{}
+			return v.ExpectedContractDuration.Deserialize(d)
+		case schemas.ProjectSummary_ExpectedCustomerSpend:
+			return deserializeExpectedCustomerSpendList(d, schemas.ProjectSummary_ExpectedCustomerSpend, &v.ExpectedCustomerSpend)
+		}
+		return nil
+	})
+}
+
 //	Provides the project view of an opportunity resource shared through a
 //
 // snapshot.
@@ -2238,6 +5616,552 @@ type ProjectView struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProjectView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerUseCase != nil {
+		s.WriteString(schemas.ProjectView_CustomerUseCase, *v.CustomerUseCase)
+	}
+	serializeDeliveryModels(s, schemas.ProjectView_DeliveryModels, v.DeliveryModels)
+	if v.ExpectedContractDuration != nil {
+		s.WriteStruct(schemas.ProjectView_ExpectedContractDuration)
+		v.ExpectedContractDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpectedCustomerSpendList(s, schemas.ProjectView_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.OtherSolutionDescription != nil {
+		s.WriteString(schemas.ProjectView_OtherSolutionDescription, *v.OtherSolutionDescription)
+	}
+	serializeSalesActivities(s, schemas.ProjectView_SalesActivities, v.SalesActivities)
+}
+func (v *ProjectView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectView_CustomerUseCase:
+			v.CustomerUseCase = new(string)
+			return d.ReadString(schemas.ProjectView_CustomerUseCase, v.CustomerUseCase)
+		case schemas.ProjectView_DeliveryModels:
+			return deserializeDeliveryModels(d, schemas.ProjectView_DeliveryModels, &v.DeliveryModels)
+		case schemas.ProjectView_ExpectedContractDuration:
+			v.ExpectedContractDuration = &ExpectedContractDuration{}
+			return v.ExpectedContractDuration.Deserialize(d)
+		case schemas.ProjectView_ExpectedCustomerSpend:
+			return deserializeExpectedCustomerSpendList(d, schemas.ProjectView_ExpectedCustomerSpend, &v.ExpectedCustomerSpend)
+		case schemas.ProjectView_OtherSolutionDescription:
+			v.OtherSolutionDescription = new(string)
+			return d.ReadString(schemas.ProjectView_OtherSolutionDescription, v.OtherSolutionDescription)
+		case schemas.ProjectView_SalesActivities:
+			return deserializeSalesActivities(d, schemas.ProjectView_SalesActivities, &v.SalesActivities)
+		}
+		return nil
+	})
+}
+
+// Specifies the sort configuration for ListProspectingFromEngagementTasks .
+// Contains the field to sort by and the sort direction.
+type ProspectingFromEngagementTaskSort struct {
+
+	// The field by which to sort the returned tasks. Valid values: StartTime (task
+	// creation timestamp), TaskName (alphabetically by task name), and
+	// FailedEngagementCount (number of failed engagements).
+	//
+	// This member is required.
+	SortBy ProspectingFromEngagementTaskSortName
+
+	// The direction in which to sort the results. Use ASCENDING to return the
+	// smallest or earliest values first, or DESCENDING to return the largest or most
+	// recent values first.
+	//
+	// This member is required.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingFromEngagementTaskSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingFromEngagementTaskSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingFromEngagementTaskSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.ProspectingFromEngagementTaskSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ProspectingFromEngagementTaskSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ProspectingFromEngagementTaskSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingFromEngagementTaskSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingFromEngagementTaskSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ProspectingFromEngagementTaskSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ProspectingFromEngagementTaskSortName(ev)
+			return nil
+		case schemas.ProspectingFromEngagementTaskSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ProspectingFromEngagementTaskSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains insights that AI generates from the prospecting analysis. These
+// insights include marketplace engagement scoring, solution fit assessments, and
+// solution categorization for the prospected customer.
+type ProspectingInsights struct {
+
+	// A score that indicates the prospected customer's level of engagement with AWS
+	// Marketplace. Valid values are High , Medium , and Low .
+	MarketplaceEngagementScore *string
+
+	// The primary solution category classification for the prospected customer. This
+	// indicates the type of solution that best addresses their needs.
+	SolutionCategory *string
+
+	// A score that indicates how well the partner's solution fits the prospected
+	// customer's needs.
+	SolutionScore *string
+
+	// The solution sub-category classification for the prospected customer. This
+	// provides more granular categorization of the recommended solution type.
+	SolutionSubCategory *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceEngagementScore != nil {
+		s.WriteString(schemas.ProspectingInsights_MarketplaceEngagementScore, *v.MarketplaceEngagementScore)
+	}
+	if v.SolutionCategory != nil {
+		s.WriteString(schemas.ProspectingInsights_SolutionCategory, *v.SolutionCategory)
+	}
+	if v.SolutionScore != nil {
+		s.WriteString(schemas.ProspectingInsights_SolutionScore, *v.SolutionScore)
+	}
+	if v.SolutionSubCategory != nil {
+		s.WriteString(schemas.ProspectingInsights_SolutionSubCategory, *v.SolutionSubCategory)
+	}
+}
+func (v *ProspectingInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingInsights_MarketplaceEngagementScore:
+			v.MarketplaceEngagementScore = new(string)
+			return d.ReadString(schemas.ProspectingInsights_MarketplaceEngagementScore, v.MarketplaceEngagementScore)
+		case schemas.ProspectingInsights_SolutionCategory:
+			v.SolutionCategory = new(string)
+			return d.ReadString(schemas.ProspectingInsights_SolutionCategory, v.SolutionCategory)
+		case schemas.ProspectingInsights_SolutionScore:
+			v.SolutionScore = new(string)
+			return d.ReadString(schemas.ProspectingInsights_SolutionScore, v.SolutionScore)
+		case schemas.ProspectingInsights_SolutionSubCategory:
+			v.SolutionSubCategory = new(string)
+			return d.ReadString(schemas.ProspectingInsights_SolutionSubCategory, v.SolutionSubCategory)
+		}
+		return nil
+	})
+}
+
+// Contains the results of an autonomous prospecting job. This includes data and
+// insights that AWS provides about a prospected customer account.
+type ProspectingResult struct {
+
+	// Prospecting data and insights that AWS provides during the prospecting job.
+	// This includes customer details, task information, and scoring that AI generates.
+	Aws *ProspectingResultAws
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aws != nil {
+		s.WriteStruct(schemas.ProspectingResult_Aws)
+		v.Aws.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProspectingResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingResult_Aws:
+			v.Aws = &ProspectingResultAws{}
+			return v.Aws.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the prospecting data that AWS sources. This includes task execution
+// details, customer account information, and insights that AI generates from the
+// prospecting analysis.
+type ProspectingResultAws struct {
+
+	// Contains details about the prospected customer account, including geographic,
+	// industry, and segment classifications.
+	Customer *ProspectingResultCustomer
+
+	// The timestamp when the prospecting task completed processing. The format is ISO
+	// 8601 (UTC).
+	EndTime *time.Time
+
+	// Insights that AI generates from the prospecting analysis. These insights
+	// include engagement scores and solution fit assessments for the prospected
+	// customer.
+	Insights *ProspectingInsights
+
+	// The timestamp when the prospecting result context was created. The format is
+	// ISO 8601 (UTC).
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the prospecting task. Use this ARN to track
+	// and manage the task within AWS.
+	TaskArn *string
+
+	// The unique identifier of the prospecting task that generates this result.
+	TaskId *string
+
+	// The name that the user provides for the prospecting task that generates this
+	// result.
+	TaskName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingResultAws) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingResultAws)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingResultAws) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.ProspectingResultAws_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ProspectingResultAws_EndTime, *v.EndTime)
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.ProspectingResultAws_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ProspectingResultAws_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ProspectingResultAws_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ProspectingResultAws_TaskId, *v.TaskId)
+	}
+	if v.TaskName != nil {
+		s.WriteString(schemas.ProspectingResultAws_TaskName, *v.TaskName)
+	}
+}
+func (v *ProspectingResultAws) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingResultAws, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingResultAws_Customer:
+			v.Customer = &ProspectingResultCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.ProspectingResultAws_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ProspectingResultAws_EndTime, v.EndTime)
+		case schemas.ProspectingResultAws_Insights:
+			v.Insights = &ProspectingInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.ProspectingResultAws_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ProspectingResultAws_StartTime, v.StartTime)
+		case schemas.ProspectingResultAws_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.ProspectingResultAws_TaskArn, v.TaskArn)
+		case schemas.ProspectingResultAws_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ProspectingResultAws_TaskId, v.TaskId)
+		case schemas.ProspectingResultAws_TaskName:
+			v.TaskName = new(string)
+			return d.ReadString(schemas.ProspectingResultAws_TaskName, v.TaskName)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about the prospected customer account, including
+// company identifiers, geographic classification, industry segmentation, and
+// program eligibility.
+type ProspectingResultCustomer struct {
+
+	// The name of the prospected customer account.
+	AccountName *string
+
+	// The company size classification of the prospected customer account.
+	CompanySize *string
+
+	// The country code of the prospected customer account.
+	Country CountryCode
+
+	// A list of AWS Greenfield programs that the prospected customer is eligible for.
+	// Use this list to identify relevant go-to-market opportunities.
+	EligiblePrograms []string
+
+	// The geographic region classification of the prospected customer account.
+	Geo *string
+
+	// The industry classification of the prospected customer account.
+	Industry Industry
+
+	// A summary of publicly available information about the prospected customer. The
+	// system uses this summary to generate customer insights and inform engagement
+	// strategies.
+	PublicProfileSummary *string
+
+	// The specific region of the prospected customer account.
+	Region *string
+
+	// The market segment classification of the prospected customer account.
+	Segment *string
+
+	// The sub-industry classification of the prospected customer account. This
+	// provides more granular categorization within the primary industry.
+	SubIndustry *string
+
+	// The subregion classification of the prospected customer account.
+	SubRegion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingResultCustomer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingResultCustomer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingResultCustomer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_AccountName, *v.AccountName)
+	}
+	if v.CompanySize != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_CompanySize, *v.CompanySize)
+	}
+	if v.Country != "" {
+		s.WriteString(schemas.ProspectingResultCustomer_Country, string(v.Country))
+	}
+	serializeEligibleProgramsList(s, schemas.ProspectingResultCustomer_EligiblePrograms, v.EligiblePrograms)
+	if v.Geo != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_Geo, *v.Geo)
+	}
+	if v.Industry != "" {
+		s.WriteString(schemas.ProspectingResultCustomer_Industry, string(v.Industry))
+	}
+	if v.PublicProfileSummary != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_PublicProfileSummary, *v.PublicProfileSummary)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_Region, *v.Region)
+	}
+	if v.Segment != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_Segment, *v.Segment)
+	}
+	if v.SubIndustry != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_SubIndustry, *v.SubIndustry)
+	}
+	if v.SubRegion != nil {
+		s.WriteString(schemas.ProspectingResultCustomer_SubRegion, *v.SubRegion)
+	}
+}
+func (v *ProspectingResultCustomer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingResultCustomer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingResultCustomer_AccountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_AccountName, v.AccountName)
+		case schemas.ProspectingResultCustomer_CompanySize:
+			v.CompanySize = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_CompanySize, v.CompanySize)
+		case schemas.ProspectingResultCustomer_Country:
+			var ev string
+			if err := d.ReadString(schemas.ProspectingResultCustomer_Country, &ev); err != nil {
+				return err
+			}
+			v.Country = CountryCode(ev)
+			return nil
+		case schemas.ProspectingResultCustomer_EligiblePrograms:
+			return deserializeEligibleProgramsList(d, schemas.ProspectingResultCustomer_EligiblePrograms, &v.EligiblePrograms)
+		case schemas.ProspectingResultCustomer_Geo:
+			v.Geo = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_Geo, v.Geo)
+		case schemas.ProspectingResultCustomer_Industry:
+			var ev string
+			if err := d.ReadString(schemas.ProspectingResultCustomer_Industry, &ev); err != nil {
+				return err
+			}
+			v.Industry = Industry(ev)
+			return nil
+		case schemas.ProspectingResultCustomer_PublicProfileSummary:
+			v.PublicProfileSummary = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_PublicProfileSummary, v.PublicProfileSummary)
+		case schemas.ProspectingResultCustomer_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_Region, v.Region)
+		case schemas.ProspectingResultCustomer_Segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_Segment, v.Segment)
+		case schemas.ProspectingResultCustomer_SubIndustry:
+			v.SubIndustry = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_SubIndustry, v.SubIndustry)
+		case schemas.ProspectingResultCustomer_SubRegion:
+			v.SubRegion = new(string)
+			return d.ReadString(schemas.ProspectingResultCustomer_SubRegion, v.SubRegion)
+		}
+		return nil
+	})
+}
+
+// A summary of a single prospecting task, returned by
+// ListProspectingFromEngagementTasks . Contains key metrics and status information
+// without the full per-engagement detail available from
+// GetProspectingFromEngagementTask .
+type ProspectingTaskSummary struct {
+
+	// The number of engagements that have been successfully converted into
+	// prospecting leads.
+	//
+	// This member is required.
+	CompletedEngagementCount *int32
+
+	// The number of engagements that failed to be converted. Retrieve the full task
+	// details using GetProspectingFromEngagementTask for per-engagement error
+	// information.
+	//
+	// This member is required.
+	FailedEngagementCount *int32
+
+	// The timestamp indicating when the task was initiated. The format follows ISO
+	// 8601 date-time notation.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the task.
+	//
+	// This member is required.
+	TaskArn *string
+
+	// The unique identifier of the task. Use this value with
+	// GetProspectingFromEngagementTask to retrieve full task details.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The descriptive name of the task provided when it was created.
+	//
+	// This member is required.
+	TaskName *string
+
+	// The total number of engagements included in the task.
+	//
+	// This member is required.
+	TotalEngagementCount int32
+
+	// The timestamp indicating when the task finished processing. This field is
+	// absent if the task is still in progress. The format follows ISO 8601 date-time
+	// notation.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProspectingTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProspectingTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProspectingTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedEngagementCount != nil {
+		s.WriteInt32(schemas.ProspectingTaskSummary_CompletedEngagementCount, *v.CompletedEngagementCount)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ProspectingTaskSummary_EndTime, *v.EndTime)
+	}
+	if v.FailedEngagementCount != nil {
+		s.WriteInt32(schemas.ProspectingTaskSummary_FailedEngagementCount, *v.FailedEngagementCount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ProspectingTaskSummary_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ProspectingTaskSummary_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ProspectingTaskSummary_TaskId, *v.TaskId)
+	}
+	if v.TaskName != nil {
+		s.WriteString(schemas.ProspectingTaskSummary_TaskName, *v.TaskName)
+	}
+	s.WriteInt32(schemas.ProspectingTaskSummary_TotalEngagementCount, v.TotalEngagementCount)
+}
+func (v *ProspectingTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProspectingTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProspectingTaskSummary_CompletedEngagementCount:
+			v.CompletedEngagementCount = new(int32)
+			return d.ReadInt32(schemas.ProspectingTaskSummary_CompletedEngagementCount, v.CompletedEngagementCount)
+		case schemas.ProspectingTaskSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ProspectingTaskSummary_EndTime, v.EndTime)
+		case schemas.ProspectingTaskSummary_FailedEngagementCount:
+			v.FailedEngagementCount = new(int32)
+			return d.ReadInt32(schemas.ProspectingTaskSummary_FailedEngagementCount, v.FailedEngagementCount)
+		case schemas.ProspectingTaskSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ProspectingTaskSummary_StartTime, v.StartTime)
+		case schemas.ProspectingTaskSummary_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.ProspectingTaskSummary_TaskArn, v.TaskArn)
+		case schemas.ProspectingTaskSummary_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ProspectingTaskSummary_TaskId, v.TaskId)
+		case schemas.ProspectingTaskSummary_TaskName:
+			v.TaskName = new(string)
+			return d.ReadString(schemas.ProspectingTaskSummary_TaskName, v.TaskName)
+		case schemas.ProspectingTaskSummary_TotalEngagementCount:
+			return d.ReadInt32(schemas.ProspectingTaskSummary_TotalEngagementCount, &v.TotalEngagementCount)
+		}
+		return nil
+	})
+}
+
 // Represents the entity that received the Engagement Invitation, including
 // account and company details. This field is essential for tracking the partner
 // who is being invited to collaborate.
@@ -2259,6 +6183,65 @@ type ReceiverMemberAccount struct {
 }
 
 func (*ReceiverMemberAccount) isReceiver() {}
+func (v *ReceiverMemberAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Receiver_Account)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReceiverMemberAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A recommendation from an agent-driven source.
+type Recommendation struct {
+
+	// Human-readable recommendation text from this source.
+	//
+	// This member is required.
+	Details *string
+
+	// The recommendation source type. Known values: OpportunityQuality ,
+	// SolutionRecommendation , SpecialistRecommendation .
+	//
+	// This member is required.
+	Type *string
+
+	// Source-specific metadata as key-value pairs.
+	Attributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendationAttributeMap(s, schemas.Recommendation_Attributes, v.Attributes)
+	if v.Details != nil {
+		s.WriteString(schemas.Recommendation_Details, *v.Details)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Recommendation_Type, *v.Type)
+	}
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_Attributes:
+			return deserializeRecommendationAttributeMap(d, schemas.Recommendation_Attributes, &v.Attributes)
+		case schemas.Recommendation_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.Recommendation_Details, v.Details)
+		case schemas.Recommendation_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Recommendation_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // This field provides the associations' information for other entities with the
 // opportunity. These entities include identifiers for AWSProducts , Partner
@@ -2283,6 +6266,16 @@ type RelatedEntityIdentifiers struct {
 	//
 	// [ListEntities]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html
 	AwsMarketplaceOffers []string
+
+	// Specifies the AWS Marketplace products to associate with the Opportunity . Each
+	// value is an Amazon Resource Name (ARN) that identifies a product listing in AWS
+	// Marketplace.
+	AwsMarketplaceProducts []string
+
+	// Specifies the AWS Marketplace solutions to associate with the Opportunity . Each
+	// value is an Amazon Resource Name (ARN) that identifies a solution listing in AWS
+	// Marketplace.
+	AwsMarketplaceSolutions []string
 
 	// Enables the association of specific Amazon Web Services products with the
 	// Opportunity . Partners can indicate the relevant Amazon Web Services products
@@ -2312,6 +6305,40 @@ type RelatedEntityIdentifiers struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RelatedEntityIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedEntityIdentifiers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedEntityIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsMarketplaceOfferSetIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOfferSets, v.AwsMarketplaceOfferSets)
+	serializeAwsMarketplaceOfferIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOffers, v.AwsMarketplaceOffers)
+	serializeAwsMarketplaceProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
+	serializeAwsMarketplaceSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
+	serializeAwsProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsProducts, v.AwsProducts)
+	serializeSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_Solutions, v.Solutions)
+}
+func (v *RelatedEntityIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedEntityIdentifiers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedEntityIdentifiers_AwsMarketplaceOfferSets:
+			return deserializeAwsMarketplaceOfferSetIdentifiers(d, schemas.RelatedEntityIdentifiers_AwsMarketplaceOfferSets, &v.AwsMarketplaceOfferSets)
+		case schemas.RelatedEntityIdentifiers_AwsMarketplaceOffers:
+			return deserializeAwsMarketplaceOfferIdentifiers(d, schemas.RelatedEntityIdentifiers_AwsMarketplaceOffers, &v.AwsMarketplaceOffers)
+		case schemas.RelatedEntityIdentifiers_AwsMarketplaceProducts:
+			return deserializeAwsMarketplaceProductIdentifiers(d, schemas.RelatedEntityIdentifiers_AwsMarketplaceProducts, &v.AwsMarketplaceProducts)
+		case schemas.RelatedEntityIdentifiers_AwsMarketplaceSolutions:
+			return deserializeAwsMarketplaceSolutionIdentifiers(d, schemas.RelatedEntityIdentifiers_AwsMarketplaceSolutions, &v.AwsMarketplaceSolutions)
+		case schemas.RelatedEntityIdentifiers_AwsProducts:
+			return deserializeAwsProductIdentifiers(d, schemas.RelatedEntityIdentifiers_AwsProducts, &v.AwsProducts)
+		case schemas.RelatedEntityIdentifiers_Solutions:
+			return deserializeSolutionIdentifiers(d, schemas.RelatedEntityIdentifiers_Solutions, &v.Solutions)
+		}
+		return nil
+	})
+}
+
 // An object that contains a Resource Snapshot Job 's subset of fields.
 type ResourceSnapshotJobSummary struct {
 
@@ -2338,6 +6365,50 @@ type ResourceSnapshotJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSnapshotJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSnapshotJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSnapshotJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceSnapshotJobSummary_Arn, *v.Arn)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.ResourceSnapshotJobSummary_EngagementId, *v.EngagementId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResourceSnapshotJobSummary_Id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceSnapshotJobSummary_Status, string(v.Status))
+	}
+}
+func (v *ResourceSnapshotJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSnapshotJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSnapshotJobSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceSnapshotJobSummary_Arn, v.Arn)
+		case schemas.ResourceSnapshotJobSummary_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.ResourceSnapshotJobSummary_EngagementId, v.EngagementId)
+		case schemas.ResourceSnapshotJobSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourceSnapshotJobSummary_Id, v.Id)
+		case schemas.ResourceSnapshotJobSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSnapshotJobSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceSnapshotJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Represents the payload of a resource snapshot. This structure is designed to
 //
 // accommodate different types of resource snapshots, currently supporting
@@ -2359,6 +6430,14 @@ type ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView struct {
 }
 
 func (*ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView) isResourceSnapshotPayload() {}
+func (v *ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSnapshotPayload_AwsOpportunitySummaryFullView)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceSnapshotPayloadMemberAwsOpportunitySummaryFullView) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object that contains an opportunity 's subset of fields.
 type ResourceSnapshotPayloadMemberOpportunitySummary struct {
@@ -2368,6 +6447,14 @@ type ResourceSnapshotPayloadMemberOpportunitySummary struct {
 }
 
 func (*ResourceSnapshotPayloadMemberOpportunitySummary) isResourceSnapshotPayload() {}
+func (v *ResourceSnapshotPayloadMemberOpportunitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSnapshotPayload_OpportunitySummary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceSnapshotPayloadMemberOpportunitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 //	Provides a concise summary of a resource snapshot, including its unique
 //
@@ -2401,6 +6488,62 @@ type ResourceSnapshotSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSnapshotSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSnapshotSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSnapshotSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceSnapshotSummary_Arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.ResourceSnapshotSummary_CreatedBy, *v.CreatedBy)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResourceSnapshotSummary_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceSnapshotTemplateName != nil {
+		s.WriteString(schemas.ResourceSnapshotSummary_ResourceSnapshotTemplateName, *v.ResourceSnapshotTemplateName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResourceSnapshotSummary_ResourceType, string(v.ResourceType))
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.ResourceSnapshotSummary_Revision, *v.Revision)
+	}
+}
+func (v *ResourceSnapshotSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSnapshotSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSnapshotSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceSnapshotSummary_Arn, v.Arn)
+		case schemas.ResourceSnapshotSummary_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.ResourceSnapshotSummary_CreatedBy, v.CreatedBy)
+		case schemas.ResourceSnapshotSummary_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResourceSnapshotSummary_ResourceId, v.ResourceId)
+		case schemas.ResourceSnapshotSummary_ResourceSnapshotTemplateName:
+			v.ResourceSnapshotTemplateName = new(string)
+			return d.ReadString(schemas.ResourceSnapshotSummary_ResourceSnapshotTemplateName, v.ResourceSnapshotTemplateName)
+		case schemas.ResourceSnapshotSummary_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSnapshotSummary_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.ResourceSnapshotSummary_Revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.ResourceSnapshotSummary_Revision, v.Revision)
+		}
+		return nil
+	})
+}
+
 // An object that contains the details of the sender-provided contact person for
 // the EngagementInvitation .
 type SenderContact struct {
@@ -2430,6 +6573,52 @@ type SenderContact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SenderContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SenderContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SenderContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessTitle != nil {
+		s.WriteString(schemas.SenderContact_BusinessTitle, *v.BusinessTitle)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.SenderContact_Email, *v.Email)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.SenderContact_FirstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.SenderContact_LastName, *v.LastName)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.SenderContact_Phone, *v.Phone)
+	}
+}
+func (v *SenderContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SenderContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SenderContact_BusinessTitle:
+			v.BusinessTitle = new(string)
+			return d.ReadString(schemas.SenderContact_BusinessTitle, v.BusinessTitle)
+		case schemas.SenderContact_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.SenderContact_Email, v.Email)
+		case schemas.SenderContact_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.SenderContact_FirstName, v.FirstName)
+		case schemas.SenderContact_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.SenderContact_LastName, v.LastName)
+		case schemas.SenderContact_Phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.SenderContact_Phone, v.Phone)
+		}
+		return nil
+	})
+}
+
 // Specifies a customer's procurement terms details. Required only for partners in
 // eligible programs.
 type SoftwareRevenue struct {
@@ -2451,6 +6640,52 @@ type SoftwareRevenue struct {
 	Value *MonetaryValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *SoftwareRevenue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareRevenue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareRevenue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryModel != "" {
+		s.WriteString(schemas.SoftwareRevenue_DeliveryModel, string(v.DeliveryModel))
+	}
+	if v.EffectiveDate != nil {
+		s.WriteString(schemas.SoftwareRevenue_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteString(schemas.SoftwareRevenue_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.SoftwareRevenue_Value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SoftwareRevenue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareRevenue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareRevenue_DeliveryModel:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareRevenue_DeliveryModel, &ev); err != nil {
+				return err
+			}
+			v.DeliveryModel = RevenueModel(ev)
+			return nil
+		case schemas.SoftwareRevenue_EffectiveDate:
+			v.EffectiveDate = new(string)
+			return d.ReadString(schemas.SoftwareRevenue_EffectiveDate, v.EffectiveDate)
+		case schemas.SoftwareRevenue_ExpirationDate:
+			v.ExpirationDate = new(string)
+			return d.ReadString(schemas.SoftwareRevenue_ExpirationDate, v.ExpirationDate)
+		case schemas.SoftwareRevenue_Value:
+			v.Value = &MonetaryValue{}
+			return v.Value.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies minimal information for the solution offered to solve the customer's
@@ -2499,7 +6734,79 @@ type SolutionBase struct {
 	//  The SolutionBase structure provides essential information about a solution.
 	Arn *string
 
+	// The Amazon Resource Name (ARN) of the AWS Marketplace solution associated with
+	// this partner solution.
+	AwsMarketplaceSolutionArn *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *SolutionBase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SolutionBase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SolutionBase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SolutionBase_Arn, *v.Arn)
+	}
+	if v.AwsMarketplaceSolutionArn != nil {
+		s.WriteString(schemas.SolutionBase_AwsMarketplaceSolutionArn, *v.AwsMarketplaceSolutionArn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.SolutionBase_Catalog, *v.Catalog)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.SolutionBase_Category, *v.Category)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.SolutionBase_CreatedDate, *v.CreatedDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SolutionBase_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SolutionBase_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SolutionBase_Status, string(v.Status))
+	}
+}
+func (v *SolutionBase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SolutionBase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SolutionBase_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SolutionBase_Arn, v.Arn)
+		case schemas.SolutionBase_AwsMarketplaceSolutionArn:
+			v.AwsMarketplaceSolutionArn = new(string)
+			return d.ReadString(schemas.SolutionBase_AwsMarketplaceSolutionArn, v.AwsMarketplaceSolutionArn)
+		case schemas.SolutionBase_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.SolutionBase_Catalog, v.Catalog)
+		case schemas.SolutionBase_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.SolutionBase_Category, v.Category)
+		case schemas.SolutionBase_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.SolutionBase_CreatedDate, v.CreatedDate)
+		case schemas.SolutionBase_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SolutionBase_Id, v.Id)
+		case schemas.SolutionBase_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SolutionBase_Name, v.Name)
+		case schemas.SolutionBase_Status:
+			var ev string
+			if err := d.ReadString(schemas.SolutionBase_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SolutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Configures the solutions' response sorting that enables partners to order
@@ -2520,6 +6827,42 @@ type SolutionSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SolutionSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SolutionSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SolutionSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.SolutionSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SolutionSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SolutionSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SolutionSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SolutionSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.SolutionSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = SolutionSortName(ev)
+			return nil
+		case schemas.SolutionSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SolutionSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Defines the sorting parameters for listing resource snapshot jobs. This
 //
 // structure allows you to specify the field to sort by and the order of sorting.
@@ -2532,6 +6875,42 @@ type SortObject struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *SortObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SortObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SortObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.SortObject_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SortObject_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SortObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SortObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SortObject_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.SortObject_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = SortBy(ev)
+			return nil
+		case schemas.SortObject_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SortObject_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The key-value pair assigned to a specified resource.
@@ -2550,6 +6929,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Filters opportunities based on their target close date.
 type TargetCloseDateFilter struct {
 
@@ -2564,6 +6971,34 @@ type TargetCloseDateFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetCloseDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetCloseDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetCloseDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterTargetCloseDate != nil {
+		s.WriteString(schemas.TargetCloseDateFilter_AfterTargetCloseDate, *v.AfterTargetCloseDate)
+	}
+	if v.BeforeTargetCloseDate != nil {
+		s.WriteString(schemas.TargetCloseDateFilter_BeforeTargetCloseDate, *v.BeforeTargetCloseDate)
+	}
+}
+func (v *TargetCloseDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetCloseDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetCloseDateFilter_AfterTargetCloseDate:
+			v.AfterTargetCloseDate = new(string)
+			return d.ReadString(schemas.TargetCloseDateFilter_AfterTargetCloseDate, v.AfterTargetCloseDate)
+		case schemas.TargetCloseDateFilter_BeforeTargetCloseDate:
+			v.BeforeTargetCloseDate = new(string)
+			return d.ReadString(schemas.TargetCloseDateFilter_BeforeTargetCloseDate, v.BeforeTargetCloseDate)
+		}
+		return nil
+	})
+}
+
 // Represents the updated payload of an engagement context. The structure of this
 // payload varies based on the context type being updated.
 //
@@ -2571,6 +7006,7 @@ type TargetCloseDateFilter struct {
 //
 //	UpdateEngagementContextPayloadMemberCustomerProject
 //	UpdateEngagementContextPayloadMemberLead
+//	UpdateEngagementContextPayloadMemberProspectingResult
 type UpdateEngagementContextPayload interface {
 	isUpdateEngagementContextPayload()
 }
@@ -2592,6 +7028,14 @@ type UpdateEngagementContextPayloadMemberCustomerProject struct {
 }
 
 func (*UpdateEngagementContextPayloadMemberCustomerProject) isUpdateEngagementContextPayload() {}
+func (v *UpdateEngagementContextPayloadMemberCustomerProject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextPayload_CustomerProject)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateEngagementContextPayloadMemberCustomerProject) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains updated information about a lead when the context type is "Lead". This
 // field is present only when updating a lead context within the engagement.
@@ -2602,6 +7046,33 @@ type UpdateEngagementContextPayloadMemberLead struct {
 }
 
 func (*UpdateEngagementContextPayloadMemberLead) isUpdateEngagementContextPayload() {}
+func (v *UpdateEngagementContextPayloadMemberLead) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextPayload_Lead)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateEngagementContextPayloadMemberLead) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains updated prospecting result data when the context type is
+// "ProspectingResult". This field includes enriched data and insights that the
+// system generates when a partner runs an autonomous prospecting job on leads.
+type UpdateEngagementContextPayloadMemberProspectingResult struct {
+	Value ProspectingResult
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateEngagementContextPayloadMemberProspectingResult) isUpdateEngagementContextPayload() {}
+func (v *UpdateEngagementContextPayloadMemberProspectingResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextPayload_ProspectingResult)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateEngagementContextPayloadMemberProspectingResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Updates the context information for a lead with qualification status, customer
 // details, and interaction data.
@@ -2612,6 +7083,10 @@ type UpdateLeadContext struct {
 	// This member is required.
 	Customer *LeadCustomer
 
+	// Insights that AI generates and associates with the lead. These insights provide
+	// automated analysis to help partners assess the lead quality and readiness.
+	Insights *LeadInsights
+
 	// Updated interaction details for the lead context.
 	Interaction *LeadInteraction
 
@@ -2619,6 +7094,52 @@ type UpdateLeadContext struct {
 	QualificationStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateLeadContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLeadContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLeadContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Customer != nil {
+		s.WriteStruct(schemas.UpdateLeadContext_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.UpdateLeadContext_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Interaction != nil {
+		s.WriteStruct(schemas.UpdateLeadContext_Interaction)
+		v.Interaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QualificationStatus != nil {
+		s.WriteString(schemas.UpdateLeadContext_QualificationStatus, *v.QualificationStatus)
+	}
+}
+func (v *UpdateLeadContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLeadContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLeadContext_Customer:
+			v.Customer = &LeadCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.UpdateLeadContext_Insights:
+			v.Insights = &LeadInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.UpdateLeadContext_Interaction:
+			v.Interaction = &LeadInteraction{}
+			return v.Interaction.Deserialize(d)
+		case schemas.UpdateLeadContext_QualificationStatus:
+			v.QualificationStatus = new(string)
+			return d.ReadString(schemas.UpdateLeadContext_QualificationStatus, v.QualificationStatus)
+		}
+		return nil
+	})
 }
 
 // Indicates an invalid value for a field.
@@ -2684,6 +7205,44 @@ type ValidationExceptionError struct {
 	FieldName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.ValidationExceptionError_Code, string(v.Code))
+	}
+	if v.FieldName != nil {
+		s.WriteString(schemas.ValidationExceptionError_FieldName, *v.FieldName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionError_Message, *v.Message)
+	}
+}
+func (v *ValidationExceptionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionError_Code:
+			var ev string
+			if err := d.ReadString(schemas.ValidationExceptionError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = ValidationExceptionErrorCode(ev)
+			return nil
+		case schemas.ValidationExceptionError_FieldName:
+			v.FieldName = new(string)
+			return d.ReadString(schemas.ValidationExceptionError_FieldName, v.FieldName)
+		case schemas.ValidationExceptionError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionError_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

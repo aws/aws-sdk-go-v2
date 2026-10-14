@@ -1,0 +1,3 @@
+GET /greengrass/definition/functions/__FunctionDefinitionId__/versions/__FunctionDefinitionVersionId__?NextToken=__NextToken__
+
+

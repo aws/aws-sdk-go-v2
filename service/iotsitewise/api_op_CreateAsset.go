@@ -5,10 +5,7 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,34 +75,6 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetDescription != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetDescription, *v.AssetDescription)
-	}
-	if v.AssetExternalId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetExternalId, *v.AssetExternalId)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetId, *v.AssetId)
-	}
-	if v.AssetModelId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetModelId, *v.AssetModelId)
-	}
-	if v.AssetName != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetName, *v.AssetName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAssetRequest_clientToken, *v.ClientToken)
-	}
-	serializeTagMap(s, schemas.CreateAssetRequest_tags, v.Tags)
-}
-
 type CreateAssetOutput struct {
 
 	// The [ARN] of the asset, which has the following format.
@@ -135,79 +104,23 @@ type CreateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssetResponse_assetArn:
-			v.AssetArn = new(string)
-			return d.ReadString(schemas.CreateAssetResponse_assetArn, v.AssetArn)
-		case schemas.CreateAssetResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.CreateAssetResponse_assetId, v.AssetId)
-		case schemas.CreateAssetResponse_assetStatus:
-			v.AssetStatus = &types.AssetStatus{}
-			return v.AssetStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAsset{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse), output: &CreateAssetOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAsset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -222,12 +135,6 @@ func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addOpCreateAssetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAsset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -238,12 +145,6 @@ func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -310,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateAsset) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateAssetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAsset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAsset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAsset",
-	}
 }

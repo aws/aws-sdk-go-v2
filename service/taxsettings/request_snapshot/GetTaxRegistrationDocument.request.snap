@@ -1,0 +1,5 @@
+POST /GetTaxRegistrationDocument
+
+Content-Type: application/json
+
+{"destinationS3Location":{"bucket":"__Bucket__","prefix":"__Prefix__"},"taxDocumentMetadata":{"taxDocumentAccessToken":"__TaxDocumentAccessToken__","taxDocumentName":"__TaxDocumentName__"}}

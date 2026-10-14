@@ -1,0 +1,5 @@
+POST /get-application
+
+Content-Type: application/json
+
+{"ApplicationArn":"__ApplicationArn__","ApplicationId":"__ApplicationId__","AppRegistryArn":"__AppRegistryArn__"}

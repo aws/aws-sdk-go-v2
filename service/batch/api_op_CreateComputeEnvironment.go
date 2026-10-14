@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Batch compute environment. You can create MANAGED or UNMANAGED
@@ -85,10 +84,18 @@ type CreateComputeEnvironmentInput struct {
 	// Reserved.
 	Context *string
 
+	// The Amazon ECS settings for the compute environment. These settings control
+	// CloudWatch Container Insights collection for the compute environment.
+	EcsSettings *types.EcsSettings
+
 	// The details for the Amazon EKS cluster that supports the compute environment.
 	//
 	// To create a compute environment that uses EKS resources, the caller must have
-	// permissions to call eks:DescribeCluster .
+	// permissions to call eks:DescribeCluster . Additional Amazon EKS permissions are
+	// required for Batch to manage an access entry on the cluster; see [Amazon EKS access entry authentication]in the Batch
+	// User Guide.
+	//
+	// [Amazon EKS access entry authentication]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
 	EksConfiguration *types.EksConfiguration
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make
@@ -170,6 +177,49 @@ type CreateComputeEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironmentName != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_computeEnvironmentName, *v.ComputeEnvironmentName)
+	}
+	if v.ComputeResources != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_computeResources)
+		v.ComputeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_context, *v.Context)
+	}
+	if v.EcsSettings != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_ecsSettings)
+		v.EcsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksConfiguration != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_eksConfiguration)
+		v.EksConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_serviceRole, *v.ServiceRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_state, string(v.State))
+	}
+	serializeTagrisTagsMap(s, schemas.CreateComputeEnvironmentRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_type, string(v.Type))
+	}
+	if v.UnmanagedvCpus != nil {
+		s.WriteInt32(schemas.CreateComputeEnvironmentRequest_unmanagedvCpus, *v.UnmanagedvCpus)
+	}
+}
+
 type CreateComputeEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
@@ -186,77 +236,54 @@ type CreateComputeEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironmentArn != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn, *v.ComputeEnvironmentArn)
+	}
+	if v.ComputeEnvironmentName != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentName, *v.ComputeEnvironmentName)
+	}
+}
+func (v *CreateComputeEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputeEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn:
+			v.ComputeEnvironmentArn = new(string)
+			return d.ReadString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn, v.ComputeEnvironmentArn)
+		case schemas.CreateComputeEnvironmentResponse_computeEnvironmentName:
+			v.ComputeEnvironmentName = new(string)
+			return d.ReadString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentName, v.ComputeEnvironmentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeEnvironment, schemas.CreateComputeEnvironmentRequest, schemas.CreateComputeEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComputeEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeEnvironment, schemas.CreateComputeEnvironmentRequest, schemas.CreateComputeEnvironmentResponse), output: &CreateComputeEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComputeEnvironment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComputeEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateComputeEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputeEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -271,22 +298,8 @@ func (c *Client) addOperationCreateComputeEnvironmentMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateComputeEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComputeEnvironment",
-	}
 }

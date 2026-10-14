@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"baselineOperation":{"endTime":"2000-01-01T00:00:00Z","operationIdentifier":"__OperationIdentifier__","operationType":"ENABLE_BASELINE","startTime":"2000-01-01T00:00:00Z","status":"SUCCEEDED","statusMessage":"__StatusMessage__"}}

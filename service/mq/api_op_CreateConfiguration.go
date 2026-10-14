@@ -4,11 +4,10 @@ package mq
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,6 +63,28 @@ type CreateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.CreateConfigurationRequest_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.CreateConfigurationRequest_EngineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateConfigurationRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationRequest_Name, *v.Name)
+	}
+	serialize__mapOf__string(s, schemas.CreateConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateConfigurationOutput struct {
 
 	// Required. The Amazon Resource Name (ARN) of the configuration.
@@ -93,77 +114,84 @@ type CreateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.CreateConfigurationResponse_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.CreateConfigurationResponse_Created, *v.Created)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateConfigurationResponse_Id, *v.Id)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.CreateConfigurationResponse_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationResponse_Name, *v.Name)
+	}
+}
+func (v *CreateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConfigurationResponse_Arn, v.Arn)
+		case schemas.CreateConfigurationResponse_AuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.CreateConfigurationResponse_AuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationStrategy = types.AuthenticationStrategy(ev)
+			return nil
+		case schemas.CreateConfigurationResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.CreateConfigurationResponse_Created, v.Created)
+		case schemas.CreateConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConfigurationResponse_Id, v.Id)
+		case schemas.CreateConfigurationResponse_LatestRevision:
+			v.LatestRevision = &types.ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.CreateConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConfigurationResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguration, schemas.CreateConfigurationRequest, schemas.CreateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguration, schemas.CreateConfigurationRequest, schemas.CreateConfigurationResponse), output: &CreateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +206,8 @@ func (c *Client) addOperationCreateConfigurationMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConfiguration",
-	}
 }

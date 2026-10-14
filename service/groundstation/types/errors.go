@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *DependencyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DependencyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DependencyException_message, *v.Message)
+	}
+	if v.ParameterName != nil {
+		s.WriteString(schemas.DependencyException_parameterName, *v.ParameterName)
+	}
+}
+func (v *DependencyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DependencyException_message, v.Message)
+		case schemas.DependencyException_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.DependencyException_parameterName, v.ParameterName)
+		}
+		return nil
+	})
+}
 
 // One or more parameters are not valid.
 type InvalidParameterException struct {
@@ -62,6 +90,33 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
+	}
+	if v.ParameterName != nil {
+		s.WriteString(schemas.InvalidParameterException_parameterName, *v.ParameterName)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_message, v.Message)
+		case schemas.InvalidParameterException_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.InvalidParameterException_parameterName, v.ParameterName)
+		}
+		return nil
+	})
+}
 
 // The specified resource is in use by non-terminal state contacts and cannot be
 // modified or deleted.
@@ -89,6 +144,27 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_message, *v.Message)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Account limits for this resource have been exceeded.
 type ResourceLimitExceededException struct {
@@ -117,6 +193,33 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_message, *v.Message)
+	}
+	if v.ParameterName != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_parameterName, *v.ParameterName)
+	}
+}
+func (v *ResourceLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_message, v.Message)
+		case schemas.ResourceLimitExceededException_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_parameterName, v.ParameterName)
+		}
+		return nil
+	})
+}
 
 // Resource was not found.
 type ResourceNotFoundException struct {
@@ -143,6 +246,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
@@ -171,3 +295,30 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_message, *v.Message)
+	}
+	if v.ParameterName != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_parameterName, *v.ParameterName)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
+		case schemas.ServiceQuotaExceededException_parameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_parameterName, v.ParameterName)
+		}
+		return nil
+	})
+}

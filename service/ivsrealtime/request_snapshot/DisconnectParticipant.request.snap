@@ -1,0 +1,5 @@
+POST /DisconnectParticipant
+
+Content-Type: application/json
+
+{"participantId":"__ParticipantId__","reason":"__Reason__","stageArn":"__StageArn__"}

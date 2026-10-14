@@ -1,0 +1,5 @@
+PUT /v2/connect-instance/__ConnectInstanceId__/integrations
+
+Content-Type: application/json
+
+{"integrationConfig":{"customerProfiles":{"domainArn":"__DomainArn__","objectTypeNames":{"key0":"__Value__"}}}}

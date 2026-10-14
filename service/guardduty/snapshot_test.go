@@ -98,6 +98,30 @@ func TestCheckSnapshot_ArchiveFindings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomDetectionRuleOrgConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDetector(context.Background(), nil, func(o *Options) {
@@ -115,6 +139,18 @@ func TestCheckSnapshot_CreateFilter(t *testing.T) {
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInvestigation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +259,30 @@ func TestCheckSnapshot_DeclineInvitations(t *testing.T) {
 	_, err := svc.DeclineInvitations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeclineInvitations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomDetectionRuleOrgConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,6 +530,42 @@ func TestCheckSnapshot_GetCoverageStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCustomDetectionRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomDetectionRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomDetectionRuleOrgConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDetector(context.Background(), nil, func(o *Options) {
@@ -511,6 +607,18 @@ func TestCheckSnapshot_GetFindingsStatistics(t *testing.T) {
 	_, err := svc.GetFindingsStatistics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFindingsStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInvestigation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -710,6 +818,42 @@ func TestCheckSnapshot_ListCoverage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCustomDetectionRuleAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRuleAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomDetectionRuleAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomDetectionRuleOrgConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRuleOrgConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomDetectionRuleOrgConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomDetectionRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomDetectionRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDetectors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDetectors(context.Background(), nil, func(o *Options) {
@@ -739,6 +883,18 @@ func TestCheckSnapshot_ListFindings(t *testing.T) {
 	_, err := svc.ListFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInvestigations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -962,6 +1118,30 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomDetectionRuleOrgConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDetector(context.Background(), nil, func(o *Options) {
@@ -1141,6 +1321,30 @@ func TestUpdateSnapshot_ArchiveFindings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomDetectionRuleOrgConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDetector(context.Background(), nil, func(o *Options) {
@@ -1158,6 +1362,18 @@ func TestUpdateSnapshot_CreateFilter(t *testing.T) {
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInvestigation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1266,6 +1482,30 @@ func TestUpdateSnapshot_DeclineInvitations(t *testing.T) {
 	_, err := svc.DeclineInvitations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeclineInvitations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomDetectionRuleOrgConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1513,6 +1753,42 @@ func TestUpdateSnapshot_GetCoverageStatistics(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCustomDetectionRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomDetectionRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomDetectionRuleOrgConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDetector(context.Background(), nil, func(o *Options) {
@@ -1554,6 +1830,18 @@ func TestUpdateSnapshot_GetFindingsStatistics(t *testing.T) {
 	_, err := svc.GetFindingsStatistics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFindingsStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetInvestigation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInvestigation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInvestigation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1753,6 +2041,42 @@ func TestUpdateSnapshot_ListCoverage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCustomDetectionRuleAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRuleAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomDetectionRuleAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomDetectionRuleOrgConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRuleOrgConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomDetectionRuleOrgConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomDetectionRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomDetectionRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomDetectionRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDetectors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDetectors(context.Background(), nil, func(o *Options) {
@@ -1782,6 +2106,18 @@ func TestUpdateSnapshot_ListFindings(t *testing.T) {
 	_, err := svc.ListFindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInvestigations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInvestigations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInvestigations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1998,6 +2334,30 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomDetectionRuleAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomDetectionRuleAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomDetectionRuleAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomDetectionRuleOrgConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomDetectionRuleOrgConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,5 @@
+POST /v1/notify-code-verifications/validate
+
+Content-Type: application/json
+
+{"code":"__Code__","destinationIdentity":"__DestinationIdentity__","referenceId":"__ReferenceId__"}

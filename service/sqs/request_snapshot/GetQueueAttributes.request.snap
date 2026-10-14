@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.GetQueueAttributes
+X-Amzn-Query-Mode: true
+
+{"AttributeNames":["All","All"],"QueueUrl":"__QueueUrl__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":{"createdAt":946684800,"excludeAccountIds":["__Member__","__Member__"],"expiresAt":946684800,"includeAccountIds":["__Member__","__Member__"],"mode":"LIVE","ruleId":"__RuleId__","status":"ACTIVE","statusReason":"__StatusReason__","updatedAt":946684800}}

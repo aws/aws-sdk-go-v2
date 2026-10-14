@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
@@ -101,6 +100,24 @@ type GetDocumentAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetDocumentAnalysisRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDocumentAnalysisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentAnalysisRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetDocumentAnalysisOutput struct {
 
 	//
@@ -135,77 +152,84 @@ type GetDocumentAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeDocumentModelVersion != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion, *v.AnalyzeDocumentModelVersion)
+	}
+	serializeBlockList(s, schemas.GetDocumentAnalysisResponse_Blocks, v.Blocks)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetDocumentAnalysisResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeWarnings(s, schemas.GetDocumentAnalysisResponse_Warnings, v.Warnings)
+}
+func (v *GetDocumentAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion:
+			v.AnalyzeDocumentModelVersion = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion, v.AnalyzeDocumentModelVersion)
+		case schemas.GetDocumentAnalysisResponse_Blocks:
+			return deserializeBlockList(d, schemas.GetDocumentAnalysisResponse_Blocks, &v.Blocks)
+		case schemas.GetDocumentAnalysisResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetDocumentAnalysisResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentAnalysisResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetDocumentAnalysisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_NextToken, v.NextToken)
+		case schemas.GetDocumentAnalysisResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetDocumentAnalysisResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetDocumentAnalysisResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.GetDocumentAnalysisRequest, schemas.GetDocumentAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocumentAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.GetDocumentAnalysisRequest, schemas.GetDocumentAnalysisResponse), output: &GetDocumentAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDocumentAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocumentAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDocumentAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +244,8 @@ func (c *Client) addOperationGetDocumentAnalysisMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDocumentAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDocumentAnalysis",
-	}
 }

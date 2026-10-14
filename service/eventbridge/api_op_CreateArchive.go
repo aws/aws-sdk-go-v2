@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -84,6 +83,33 @@ type CreateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.CreateArchiveRequest_ArchiveName, *v.ArchiveName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateArchiveRequest_Description, *v.Description)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.CreateArchiveRequest_EventPattern, *v.EventPattern)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.CreateArchiveRequest_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.CreateArchiveRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.CreateArchiveRequest_RetentionDays, *v.RetentionDays)
+	}
+}
+
 type CreateArchiveOutput struct {
 
 	// The ARN of the archive that was created.
@@ -104,77 +130,70 @@ type CreateArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateArchiveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveArn != nil {
+		s.WriteString(schemas.CreateArchiveResponse_ArchiveArn, *v.ArchiveArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateArchiveResponse_CreationTime, *v.CreationTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateArchiveResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.CreateArchiveResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *CreateArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateArchiveResponse_ArchiveArn:
+			v.ArchiveArn = new(string)
+			return d.ReadString(schemas.CreateArchiveResponse_ArchiveArn, v.ArchiveArn)
+		case schemas.CreateArchiveResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateArchiveResponse_CreationTime, v.CreationTime)
+		case schemas.CreateArchiveResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateArchiveResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ArchiveState(ev)
+			return nil
+		case schemas.CreateArchiveResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CreateArchiveResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchive, schemas.CreateArchiveRequest, schemas.CreateArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchive, schemas.CreateArchiveRequest, schemas.CreateArchiveResponse), output: &CreateArchiveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateArchive{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateArchive"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateArchiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateArchive(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,22 +208,8 @@ func (c *Client) addOperationCreateArchiveMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateArchive(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateArchive",
-	}
 }

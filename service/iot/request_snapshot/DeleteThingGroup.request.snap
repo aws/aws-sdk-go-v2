@@ -1,0 +1,3 @@
+DELETE /thing-groups/__ThingGroupName__?expectedVersion=1
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.StartFHIRExportJob
+
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DatastoreId":"__DatastoreId__","JobName":"__JobName__","OutputDataConfig":{"S3Configuration":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}}}

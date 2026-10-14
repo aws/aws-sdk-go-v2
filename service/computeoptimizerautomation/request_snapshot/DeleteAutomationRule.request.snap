@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/DeleteAutomationRule
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gruleArnk__RuleArn__lruleRevisionkclientTokeno__ClientToken__

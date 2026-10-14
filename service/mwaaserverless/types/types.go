@@ -9,6 +9,34 @@ import (
 	"time"
 )
 
+// Specifies the Amazon S3 location of code artifacts that workflows use during
+// execution.
+//
+// The following types satisfy this interface:
+//
+//	CodeMemberS3Location
+type Code interface {
+	isCode()
+}
+
+// The Amazon S3 location of the code artifacts that your workflow tasks use
+// during execution.
+type CodeMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*CodeMemberS3Location) isCode() {}
+func (v *CodeMemberS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Code_S3Location)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CodeMemberS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Specifies the Amazon S3 location of a workflow definition file. This structure
 // contains the bucket name, object key, and optional version ID for the workflow
 // definition. Amazon Managed Workflows for Apache Airflow Serverless takes a
@@ -267,6 +295,61 @@ func (v *RunDetailSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = WorkflowRunStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies the Amazon S3 location of code artifacts that workflows use during
+// execution.
+type S3Location struct {
+
+	// The name of the Amazon S3 bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The key of the code artifact within the Amazon S3 bucket.
+	//
+	// This member is required.
+	ObjectKey *string
+
+	// The version ID of the object in Amazon S3. If not specified, the latest version
+	// is used.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Location_Bucket, *v.Bucket)
+	}
+	if v.ObjectKey != nil {
+		s.WriteString(schemas.S3Location_ObjectKey, *v.ObjectKey)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.S3Location_VersionId, *v.VersionId)
+	}
+}
+func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Location_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Location_Bucket, v.Bucket)
+		case schemas.S3Location_ObjectKey:
+			v.ObjectKey = new(string)
+			return d.ReadString(schemas.S3Location_ObjectKey, v.ObjectKey)
+		case schemas.S3Location_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.S3Location_VersionId, v.VersionId)
 		}
 		return nil
 	})
@@ -875,3 +958,14 @@ func (v *WorkflowVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isCode() {}

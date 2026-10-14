@@ -4,10 +4,9 @@ package secretsmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -86,6 +85,24 @@ type GetSecretValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecretValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecretValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecretValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.GetSecretValueRequest_SecretId, *v.SecretId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetSecretValueRequest_VersionId, *v.VersionId)
+	}
+	if v.VersionStage != nil {
+		s.WriteString(schemas.GetSecretValueRequest_VersionStage, *v.VersionStage)
+	}
+}
+
 type GetSecretValueOutput struct {
 
 	// The ARN of the secret.
@@ -137,77 +154,80 @@ type GetSecretValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecretValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecretValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.GetSecretValueResponse_ARN, *v.ARN)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetSecretValueResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSecretValueResponse_Name, *v.Name)
+	}
+	if v.SecretBinary != nil {
+		s.WriteBlob(schemas.GetSecretValueResponse_SecretBinary, v.SecretBinary)
+	}
+	if v.SecretString != nil {
+		s.WriteString(schemas.GetSecretValueResponse_SecretString, *v.SecretString)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetSecretValueResponse_VersionId, *v.VersionId)
+	}
+	serializeSecretVersionStagesType(s, schemas.GetSecretValueResponse_VersionStages, v.VersionStages)
+}
+func (v *GetSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecretValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecretValueResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_ARN, v.ARN)
+		case schemas.GetSecretValueResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetSecretValueResponse_CreatedDate, v.CreatedDate)
+		case schemas.GetSecretValueResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_Name, v.Name)
+		case schemas.GetSecretValueResponse_SecretBinary:
+			return d.ReadBlob(schemas.GetSecretValueResponse_SecretBinary, &v.SecretBinary)
+		case schemas.GetSecretValueResponse_SecretString:
+			v.SecretString = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_SecretString, v.SecretString)
+		case schemas.GetSecretValueResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.GetSecretValueResponse_VersionId, v.VersionId)
+		case schemas.GetSecretValueResponse_VersionStages:
+			return deserializeSecretVersionStagesType(d, schemas.GetSecretValueResponse_VersionStages, &v.VersionStages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecretValue, schemas.GetSecretValueRequest, schemas.GetSecretValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecretValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecretValue, schemas.GetSecretValueRequest, schemas.GetSecretValueResponse), output: &GetSecretValueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSecretValue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSecretValue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSecretValueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSecretValue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,22 +242,8 @@ func (c *Client) addOperationGetSecretValueMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSecretValue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSecretValue",
-	}
 }

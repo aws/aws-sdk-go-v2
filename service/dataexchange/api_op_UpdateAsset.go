@@ -4,11 +4,10 @@ package dataexchange
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +58,46 @@ type UpdateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_AssetId, *v.AssetId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetRequest_Name, *v.Name)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateAssetRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *UpdateAssetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetRequest_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.UpdateAssetRequest_AssetId, v.AssetId)
+		case schemas.UpdateAssetRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateAssetRequest_DataSetId, v.DataSetId)
+		case schemas.UpdateAssetRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAssetRequest_Name, v.Name)
+		case schemas.UpdateAssetRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateAssetRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type UpdateAssetOutput struct {
 
 	// The ARN for the asset.
@@ -105,77 +144,108 @@ type UpdateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Arn, *v.Arn)
+	}
+	if v.AssetDetails != nil {
+		s.WriteStruct(schemas.UpdateAssetResponse_AssetDetails)
+		v.AssetDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.UpdateAssetResponse_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateAssetResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAssetResponse_Name, *v.Name)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateAssetResponse_RevisionId, *v.RevisionId)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.UpdateAssetResponse_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateAssetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Arn, v.Arn)
+		case schemas.UpdateAssetResponse_AssetDetails:
+			v.AssetDetails = &types.AssetDetails{}
+			return v.AssetDetails.Deserialize(d)
+		case schemas.UpdateAssetResponse_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAssetResponse_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = types.AssetType(ev)
+			return nil
+		case schemas.UpdateAssetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateAssetResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_DataSetId, v.DataSetId)
+		case schemas.UpdateAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Id, v.Id)
+		case schemas.UpdateAssetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_Name, v.Name)
+		case schemas.UpdateAssetResponse_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_RevisionId, v.RevisionId)
+		case schemas.UpdateAssetResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.UpdateAssetResponse_SourceId, v.SourceId)
+		case schemas.UpdateAssetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAssetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAsset, schemas.UpdateAssetRequest, schemas.UpdateAssetResponse), output: &UpdateAssetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAsset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAsset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAssetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAsset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +260,8 @@ func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAsset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAsset",
-	}
 }

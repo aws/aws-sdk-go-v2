@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,21 @@ type DescribeComputeQuotaInput struct {
 	ComputeQuotaVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeComputeQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputeQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputeQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeQuotaId != nil {
+		s.WriteString(schemas.DescribeComputeQuotaRequest_ComputeQuotaId, *v.ComputeQuotaId)
+	}
+	if v.ComputeQuotaVersion != nil {
+		s.WriteInt32(schemas.DescribeComputeQuotaRequest_ComputeQuotaVersion, *v.ComputeQuotaVersion)
+	}
 }
 
 type DescribeComputeQuotaOutput struct {
@@ -112,77 +126,148 @@ type DescribeComputeQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComputeQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComputeQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComputeQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationState != "" {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_ActivationState, string(v.ActivationState))
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ComputeQuotaArn != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_ComputeQuotaArn, *v.ComputeQuotaArn)
+	}
+	if v.ComputeQuotaConfig != nil {
+		s.WriteStruct(schemas.DescribeComputeQuotaResponse_ComputeQuotaConfig)
+		v.ComputeQuotaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeQuotaId != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_ComputeQuotaId, *v.ComputeQuotaId)
+	}
+	if v.ComputeQuotaTarget != nil {
+		s.WriteStruct(schemas.DescribeComputeQuotaResponse_ComputeQuotaTarget)
+		v.ComputeQuotaTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeQuotaVersion != nil {
+		s.WriteInt32(schemas.DescribeComputeQuotaResponse_ComputeQuotaVersion, *v.ComputeQuotaVersion)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeComputeQuotaResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeComputeQuotaResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_Description, *v.Description)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeComputeQuotaResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeComputeQuotaResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeComputeQuotaResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeComputeQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComputeQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComputeQuotaResponse_ActivationState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeComputeQuotaResponse_ActivationState, &ev); err != nil {
+				return err
+			}
+			v.ActivationState = types.ActivationState(ev)
+			return nil
+		case schemas.DescribeComputeQuotaResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_ClusterArn, v.ClusterArn)
+		case schemas.DescribeComputeQuotaResponse_ComputeQuotaArn:
+			v.ComputeQuotaArn = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_ComputeQuotaArn, v.ComputeQuotaArn)
+		case schemas.DescribeComputeQuotaResponse_ComputeQuotaConfig:
+			v.ComputeQuotaConfig = &types.ComputeQuotaConfig{}
+			return v.ComputeQuotaConfig.Deserialize(d)
+		case schemas.DescribeComputeQuotaResponse_ComputeQuotaId:
+			v.ComputeQuotaId = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_ComputeQuotaId, v.ComputeQuotaId)
+		case schemas.DescribeComputeQuotaResponse_ComputeQuotaTarget:
+			v.ComputeQuotaTarget = &types.ComputeQuotaTarget{}
+			return v.ComputeQuotaTarget.Deserialize(d)
+		case schemas.DescribeComputeQuotaResponse_ComputeQuotaVersion:
+			v.ComputeQuotaVersion = new(int32)
+			return d.ReadInt32(schemas.DescribeComputeQuotaResponse_ComputeQuotaVersion, v.ComputeQuotaVersion)
+		case schemas.DescribeComputeQuotaResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeComputeQuotaResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeComputeQuotaResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeComputeQuotaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_Description, v.Description)
+		case schemas.DescribeComputeQuotaResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeComputeQuotaResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeComputeQuotaResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeComputeQuotaResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeComputeQuotaResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeComputeQuotaResponse_Name, v.Name)
+		case schemas.DescribeComputeQuotaResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeComputeQuotaResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchedulerResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComputeQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputeQuota, schemas.DescribeComputeQuotaRequest, schemas.DescribeComputeQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComputeQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComputeQuota, schemas.DescribeComputeQuotaRequest, schemas.DescribeComputeQuotaResponse), output: &DescribeComputeQuotaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComputeQuota{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComputeQuota"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeComputeQuotaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComputeQuota(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +282,8 @@ func (c *Client) addOperationDescribeComputeQuotaMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeComputeQuota(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeComputeQuota",
-	}
 }

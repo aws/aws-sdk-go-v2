@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteTransitGatewayRouteTableAnnouncement&DryRun=true&TransitGatewayRouteTableAnnouncementId=__TransitGatewayRouteTableAnnouncementId__&Version=2016-11-15

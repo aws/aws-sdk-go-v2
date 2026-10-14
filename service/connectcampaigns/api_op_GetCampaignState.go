@@ -4,13 +4,8 @@ package connectcampaigns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get state of a campaign for the specified Amazon Connect account.
@@ -40,28 +35,6 @@ type GetCampaignStateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCampaignStateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCampaignStateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetCampaignStateRequest_id, *v.Id)
-	}
-}
-func (v *GetCampaignStateInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCampaignStateRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCampaignStateRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetCampaignStateRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // GetCampaignStateResponse
 type GetCampaignStateOutput struct {
 
@@ -74,100 +47,29 @@ type GetCampaignStateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCampaignStateResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCampaignStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.State != "" {
-		s.WriteString(schemas.GetCampaignStateResponse_state, string(v.State))
-	}
-}
-func (v *GetCampaignStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCampaignStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCampaignStateResponse_state:
-			var ev string
-			if err := d.ReadString(schemas.GetCampaignStateResponse_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.CampaignState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCampaignStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignState{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignState, schemas.GetCampaignStateRequest, schemas.GetCampaignStateResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaignState{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignState, schemas.GetCampaignStateRequest, schemas.GetCampaignStateResponse), output: &GetCampaignStateOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCampaignState"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCampaignStateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCampaignState(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +84,8 @@ func (c *Client) addOperationGetCampaignStateMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCampaignState(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCampaignState",
-	}
 }

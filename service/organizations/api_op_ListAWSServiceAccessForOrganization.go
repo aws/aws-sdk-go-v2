@@ -5,10 +5,10 @@ package organizations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the Amazon Web Services services that you enabled to
@@ -55,6 +55,21 @@ type ListAWSServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSServiceAccessForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSServiceAccessForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSServiceAccessForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAWSServiceAccessForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSServiceAccessForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAWSServiceAccessForOrganizationOutput struct {
 
 	// A list of the service principals for the services that are enabled to integrate
@@ -74,74 +89,48 @@ type ListAWSServiceAccessForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSServiceAccessForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSServiceAccessForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSServiceAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledServicePrincipals(s, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, v.EnabledServicePrincipals)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSServiceAccessForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAWSServiceAccessForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAWSServiceAccessForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals:
+			return deserializeEnabledServicePrincipals(d, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, &v.EnabledServicePrincipals)
+		case schemas.ListAWSServiceAccessForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAWSServiceAccessForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSServiceAccessForOrganization, schemas.ListAWSServiceAccessForOrganizationRequest, schemas.ListAWSServiceAccessForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSServiceAccessForOrganization, schemas.ListAWSServiceAccessForOrganizationRequest, schemas.ListAWSServiceAccessForOrganizationResponse), output: &ListAWSServiceAccessForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAWSServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAWSServiceAccessForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAWSServiceAccessForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +143,6 @@ func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +248,3 @@ type ListAWSServiceAccessForOrganizationAPIClient interface {
 }
 
 var _ ListAWSServiceAccessForOrganizationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAWSServiceAccessForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAWSServiceAccessForOrganization",
-	}
-}

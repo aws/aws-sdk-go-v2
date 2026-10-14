@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListWhatIfForecasts
+
+{"NextToken":"__NextToken__","WhatIfForecasts":[{"CreationTime":946684800,"LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__","WhatIfAnalysisArn":"__WhatIfAnalysisArn__","WhatIfForecastArn":"__WhatIfForecastArn__","WhatIfForecastName":"__WhatIfForecastName__"},{"CreationTime":946684800,"LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__","WhatIfAnalysisArn":"__WhatIfAnalysisArn__","WhatIfForecastArn":"__WhatIfForecastArn__","WhatIfForecastName":"__WhatIfForecastName__"}]}

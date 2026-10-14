@@ -1,0 +1,3 @@
+GET /internal/profilingGroups/__ProfilingGroupName__/recommendations?endTime=2000-01-01T00%3A00%3A00Z&locale=__Locale__&startTime=2000-01-01T00%3A00%3A00Z
+
+

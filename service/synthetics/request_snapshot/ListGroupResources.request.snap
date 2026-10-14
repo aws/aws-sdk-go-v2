@@ -1,0 +1,5 @@
+POST /group/__GroupIdentifier__/resources
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

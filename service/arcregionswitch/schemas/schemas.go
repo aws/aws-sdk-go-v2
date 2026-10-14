@@ -78,6 +78,11 @@ var ListRoute53HealthChecksInRegion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListRoute53HealthChecksInRegion",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListServiceQuotaWarnings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ListServiceQuotaWarnings",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ListTagsForResource",
@@ -187,7 +192,8 @@ var AbbreviatedPlan_recoveryTimeObjectiveMinutes *smithy.Schema
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
 var _AccountId = smithy.NewSchema(smithy.ShapeID{
@@ -334,6 +340,17 @@ var AuroraServerlessScalingConfiguration_regionDatabaseClusterArns *smithy.Schem
 
 var AuroraServerlessScalingConfiguration_targetPercent *smithy.Schema
 
+var ConflictException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ConflictException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var ConflictException_message *smithy.Schema
+
+var ConflictException_resourceId *smithy.Schema
+
+var ConflictException_resourceType *smithy.Schema
+
 var CustomActionLambdaConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "CustomActionLambdaConfiguration",
@@ -410,7 +427,7 @@ var _Duration = smithy.NewSchema(smithy.ShapeID{
 var Ec2AsgCapacityIncreaseConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "Ec2AsgCapacityIncreaseConfiguration",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var Ec2AsgCapacityIncreaseConfiguration_timeoutMinutes *smithy.Schema
 
 var Ec2AsgCapacityIncreaseConfiguration_asgs *smithy.Schema
@@ -420,6 +437,8 @@ var Ec2AsgCapacityIncreaseConfiguration_ungraceful *smithy.Schema
 var Ec2AsgCapacityIncreaseConfiguration_targetPercent *smithy.Schema
 
 var Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach *smithy.Schema
+
+var Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy *smithy.Schema
 
 var Ec2AsgCapacityMonitoringApproach = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -438,7 +457,7 @@ var Ec2Ungraceful_minimumSuccessPercentage *smithy.Schema
 var EcsCapacityIncreaseConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "EcsCapacityIncreaseConfiguration",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var EcsCapacityIncreaseConfiguration_timeoutMinutes *smithy.Schema
 
 var EcsCapacityIncreaseConfiguration_services *smithy.Schema
@@ -448,6 +467,8 @@ var EcsCapacityIncreaseConfiguration_ungraceful *smithy.Schema
 var EcsCapacityIncreaseConfiguration_targetPercent *smithy.Schema
 
 var EcsCapacityIncreaseConfiguration_capacityMonitoringApproach *smithy.Schema
+
+var EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy *smithy.Schema
 
 var EcsCapacityMonitoringApproach = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -580,7 +601,7 @@ var ExecutionApprovalConfiguration_approvalRole *smithy.Schema
 var ExecutionBlockConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockConfiguration",
-}, smithy.ShapeTypeUnion, 17)
+}, smithy.ShapeTypeUnion, 19)
 var ExecutionBlockConfiguration_customActionLambdaConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig *smithy.Schema
@@ -615,10 +636,14 @@ var ExecutionBlockConfiguration_auroraProvisionedScalingConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig *smithy.Schema
 
+var ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig *smithy.Schema
+
+var ExecutionBlockConfiguration_ssmSendCommandConfig *smithy.Schema
+
 var ExecutionBlockType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockType",
-}, smithy.ShapeTypeEnum, 17)
+}, smithy.ShapeTypeEnum, 19)
 var ExecutionBlockType_CUSTOM_ACTION_LAMBDA *smithy.Schema
 
 var ExecutionBlockType_EXECUTION_APPROVAL *smithy.Schema
@@ -652,6 +677,10 @@ var ExecutionBlockType_AURORA_SERVERLESS_SCALING *smithy.Schema
 var ExecutionBlockType_AURORA_PROVISIONED_SCALING *smithy.Schema
 
 var ExecutionBlockType_NEPTUNE *smithy.Schema
+
+var ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA *smithy.Schema
+
+var ExecutionBlockType_SSM_SEND_COMMAND *smithy.Schema
 
 var _ExecutionComment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -869,19 +898,22 @@ var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 var IllegalArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "IllegalArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IllegalArgumentException_message *smithy.Schema
 
 var IllegalStateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "IllegalStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var IllegalStateException_message *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
 var _KubernetesNamespace = smithy.NewSchema(smithy.ShapeID{
@@ -1063,7 +1095,7 @@ var ParallelExecutionBlockConfiguration_steps *smithy.Schema
 var Plan = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "Plan",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var Plan_arn *smithy.Schema
 
 var Plan_description *smithy.Schema
@@ -1079,6 +1111,8 @@ var Plan_associatedAlarms *smithy.Schema
 var Plan_triggers *smithy.Schema
 
 var Plan_reportConfiguration *smithy.Schema
+
+var Plan_serviceQuotaChecksEnabled *smithy.Schema
 
 var Plan_name *smithy.Schema
 
@@ -1098,6 +1132,12 @@ var _PlanArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "PlanArn",
 }, smithy.ShapeTypeString, 0)
+
+var _PlanArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "PlanArnList",
+}, smithy.ShapeTypeList, 1)
+var _PlanArnList_member *smithy.Schema
 
 var _PlanList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -1152,6 +1192,32 @@ var RdsPromoteReadReplicaConfiguration_crossAccountRole *smithy.Schema
 var RdsPromoteReadReplicaConfiguration_externalId *smithy.Schema
 
 var RdsPromoteReadReplicaConfiguration_dbInstanceArnMap *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsSwitchoverReadReplicaConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var RdsSwitchoverReadReplicaConfiguration_timeoutMinutes *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_crossAccountRole *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_externalId *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_ungraceful *smithy.Schema
+
+var RdsUngraceful = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsUngraceful",
+}, smithy.ShapeTypeStructure, 1)
+var RdsUngraceful_ungraceful *smithy.Schema
+
+var RdsUngracefulBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsUngracefulBehavior",
+}, smithy.ShapeTypeEnum, 1)
+var RdsUngracefulBehavior_PROMOTE_READ_REPLICA *smithy.Schema
 
 var RecoveryApproach = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -1225,6 +1291,14 @@ var _RegionNeptuneClusterArnMap_key *smithy.Schema
 
 var _RegionNeptuneClusterArnMap_value *smithy.Schema
 
+var _RegionSsmDocumentMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RegionSsmDocumentMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionSsmDocumentMap_key *smithy.Schema
+
+var _RegionSsmDocumentMap_value *smithy.Schema
+
 var RegionSwitchPlanConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "RegionSwitchPlanConfiguration",
@@ -1281,7 +1355,8 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 404})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
 
 var _Resources = smithy.NewSchema(smithy.ShapeID{
@@ -1446,6 +1521,158 @@ var _ServiceList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ServiceList_member *smithy.Schema
 
+var ServiceQuotaWarningStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ServiceQuotaWarningStatus",
+}, smithy.ShapeTypeEnum, 5)
+var ServiceQuotaWarningStatus_PENDING *smithy.Schema
+
+var ServiceQuotaWarningStatus_DENIED *smithy.Schema
+
+var ServiceQuotaWarningStatus_INSUFFICIENT_PERMISSIONS *smithy.Schema
+
+var ServiceQuotaWarningStatus_MAX_REGION_SWITCH_REQUESTS_EXCEEDED *smithy.Schema
+
+var ServiceQuotaWarningStatus_MAX_ACCOUNT_REQUESTS_EXCEEDED *smithy.Schema
+
+var ServiceQuotaWarningSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ServiceQuotaWarningSummary",
+}, smithy.ShapeTypeStructure, 12)
+var ServiceQuotaWarningSummary_accountId *smithy.Schema
+
+var ServiceQuotaWarningSummary_quotaRegion *smithy.Schema
+
+var ServiceQuotaWarningSummary_serviceCode *smithy.Schema
+
+var ServiceQuotaWarningSummary_quotaCode *smithy.Schema
+
+var ServiceQuotaWarningSummary_quotaName *smithy.Schema
+
+var ServiceQuotaWarningSummary_status *smithy.Schema
+
+var ServiceQuotaWarningSummary_planArn *smithy.Schema
+
+var ServiceQuotaWarningSummary_requestId *smithy.Schema
+
+var ServiceQuotaWarningSummary_caseId *smithy.Schema
+
+var ServiceQuotaWarningSummary_warningMessage *smithy.Schema
+
+var ServiceQuotaWarningSummary_lastCheckedAt *smithy.Schema
+
+var ServiceQuotaWarningSummary_warningCreatedAt *smithy.Schema
+
+var _ServiceQuotaWarningSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ServiceQuotaWarningSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ServiceQuotaWarningSummaryList_member *smithy.Schema
+
+var _SsmDocumentArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentArn",
+}, smithy.ShapeTypeString, 0)
+
+var SsmDocumentConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentConfig",
+}, smithy.ShapeTypeStructure, 6)
+var SsmDocumentConfig_crossAccountRole *smithy.Schema
+
+var SsmDocumentConfig_externalId *smithy.Schema
+
+var SsmDocumentConfig_documentArn *smithy.Schema
+
+var SsmDocumentConfig_targets *smithy.Schema
+
+var SsmDocumentConfig_parameters *smithy.Schema
+
+var SsmDocumentConfig_documentVersion *smithy.Schema
+
+var _SsmDocumentParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentParameters",
+}, smithy.ShapeTypeMap, 2)
+var _SsmDocumentParameters_key *smithy.Schema
+
+var _SsmDocumentParameters_value *smithy.Schema
+
+var _SsmDocumentVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmDocumentVersion",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmParameterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmParameterValues",
+}, smithy.ShapeTypeList, 1)
+var _SsmParameterValues_member *smithy.Schema
+
+var SsmSendCommandConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var SsmSendCommandConfiguration_timeoutMinutes *smithy.Schema
+
+var SsmSendCommandConfiguration_regionDocuments *smithy.Schema
+
+var SsmSendCommandConfiguration_retryIntervalMinutes *smithy.Schema
+
+var SsmSendCommandConfiguration_ungraceful *smithy.Schema
+
+var SsmSendCommandUngraceful = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandUngraceful",
+}, smithy.ShapeTypeStructure, 1)
+var SsmSendCommandUngraceful_behavior *smithy.Schema
+
+var SsmSendCommandUngracefulBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmSendCommandUngracefulBehavior",
+}, smithy.ShapeTypeEnum, 1)
+var SsmSendCommandUngracefulBehavior_SKIP *smithy.Schema
+
+var SsmTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTarget",
+}, smithy.ShapeTypeStructure, 2)
+var SsmTarget_key *smithy.Schema
+
+var SsmTarget_values *smithy.Schema
+
+var _SsmTargetKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmTargetList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetList",
+}, smithy.ShapeTypeList, 1)
+var _SsmTargetList_member *smithy.Schema
+
+var _SsmTargetValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SsmTargetValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "SsmTargetValueList",
+}, smithy.ShapeTypeList, 1)
+var _SsmTargetValueList_member *smithy.Schema
+
 var Step = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "Step",
@@ -1585,6 +1812,14 @@ var UpdatePlanExecutionStepAction_SWITCH_TO_UNGRACEFUL *smithy.Schema
 
 var UpdatePlanExecutionStepAction_SKIP *smithy.Schema
 
+var WaitELBTargetGroupHealthy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "WaitELBTargetGroupHealthy",
+}, smithy.ShapeTypeEnum, 2)
+var WaitELBTargetGroupHealthy_ENABLED *smithy.Schema
+
+var WaitELBTargetGroupHealthy_DISABLED *smithy.Schema
+
 var Workflow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "Workflow",
@@ -1650,7 +1885,7 @@ var CancelPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 var CreatePlanRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "CreatePlanRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreatePlanRequest_description *smithy.Schema
 
 var CreatePlanRequest_workflows *smithy.Schema
@@ -1664,6 +1899,8 @@ var CreatePlanRequest_associatedAlarms *smithy.Schema
 var CreatePlanRequest_triggers *smithy.Schema
 
 var CreatePlanRequest_reportConfiguration *smithy.Schema
+
+var CreatePlanRequest_serviceQuotaChecksEnabled *smithy.Schema
 
 var CreatePlanRequest_name *smithy.Schema
 
@@ -1912,6 +2149,24 @@ var ListRoute53HealthChecksResponse_healthChecks *smithy.Schema
 
 var ListRoute53HealthChecksResponse_nextToken *smithy.Schema
 
+var ListServiceQuotaWarningsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ListServiceQuotaWarningsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListServiceQuotaWarningsRequest_planArns *smithy.Schema
+
+var ListServiceQuotaWarningsRequest_maxResults *smithy.Schema
+
+var ListServiceQuotaWarningsRequest_nextToken *smithy.Schema
+
+var ListServiceQuotaWarningsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "ListServiceQuotaWarningsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListServiceQuotaWarningsResponse_serviceQuotaWarningSummaries *smithy.Schema
+
+var ListServiceQuotaWarningsResponse_nextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ListTagsForResourceRequest",
@@ -1927,7 +2182,7 @@ var ListTagsForResourceResponse_resourceTags *smithy.Schema
 var StartPlanExecutionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "StartPlanExecutionRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var StartPlanExecutionRequest_planArn *smithy.Schema
 
 var StartPlanExecutionRequest_targetRegion *smithy.Schema
@@ -1941,6 +2196,8 @@ var StartPlanExecutionRequest_comment *smithy.Schema
 var StartPlanExecutionRequest_latestVersion *smithy.Schema
 
 var StartPlanExecutionRequest_recoveryExecutionId *smithy.Schema
+
+var StartPlanExecutionRequest_clientToken *smithy.Schema
 
 var StartPlanExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2021,7 +2278,7 @@ var UpdatePlanExecutionStepResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdatePlanRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "UpdatePlanRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdatePlanRequest_arn *smithy.Schema
 
 var UpdatePlanRequest_description *smithy.Schema
@@ -2037,6 +2294,8 @@ var UpdatePlanRequest_associatedAlarms *smithy.Schema
 var UpdatePlanRequest_triggers *smithy.Schema
 
 var UpdatePlanRequest_reportConfiguration *smithy.Schema
+
+var UpdatePlanRequest_serviceQuotaChecksEnabled *smithy.Schema
 
 var UpdatePlanResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2227,6 +2486,12 @@ func init() {
 
 	AuroraServerlessScalingConfiguration_targetPercent = AuroraServerlessScalingConfiguration.AddMember("targetPercent", smithyprelude.Integer)
 
+	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
+
+	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
+
+	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
+
 	Lambdas_crossAccountRole = Lambdas.AddMember("crossAccountRole", _IamRoleArn)
 
 	Lambdas_externalId = Lambdas.AddMember("externalId", smithyprelude.String)
@@ -2287,6 +2552,10 @@ func init() {
 
 	Ec2AsgCapacityMonitoringApproach_AUTOSCALING_MAX_IN_LAST_24_HOURS = Ec2AsgCapacityMonitoringApproach.AddMember("AUTOSCALING_MAX_IN_LAST_24_HOURS", smithyprelude.Unit)
 
+	WaitELBTargetGroupHealthy_ENABLED = WaitELBTargetGroupHealthy.AddMember("ENABLED", smithyprelude.Unit)
+
+	WaitELBTargetGroupHealthy_DISABLED = WaitELBTargetGroupHealthy.AddMember("DISABLED", smithyprelude.Unit)
+
 	Ec2AsgCapacityIncreaseConfiguration_timeoutMinutes = Ec2AsgCapacityIncreaseConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
 
 	Ec2AsgCapacityIncreaseConfiguration_asgs = Ec2AsgCapacityIncreaseConfiguration.AddMember("asgs", _AsgList)
@@ -2296,6 +2565,8 @@ func init() {
 	Ec2AsgCapacityIncreaseConfiguration_targetPercent = Ec2AsgCapacityIncreaseConfiguration.AddMember("targetPercent", smithyprelude.Integer)
 
 	Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach = Ec2AsgCapacityIncreaseConfiguration.AddMember("capacityMonitoringApproach", Ec2AsgCapacityMonitoringApproach)
+
+	Ec2AsgCapacityIncreaseConfiguration_waitELBTargetGroupHealthy = Ec2AsgCapacityIncreaseConfiguration.AddMember("waitELBTargetGroupHealthy", WaitELBTargetGroupHealthy)
 
 	Service_crossAccountRole = Service.AddMember("crossAccountRole", _IamRoleArn)
 
@@ -2322,6 +2593,8 @@ func init() {
 	EcsCapacityIncreaseConfiguration_targetPercent = EcsCapacityIncreaseConfiguration.AddMember("targetPercent", smithyprelude.Integer)
 
 	EcsCapacityIncreaseConfiguration_capacityMonitoringApproach = EcsCapacityIncreaseConfiguration.AddMember("capacityMonitoringApproach", EcsCapacityMonitoringApproach)
+
+	EcsCapacityIncreaseConfiguration_waitELBTargetGroupHealthy = EcsCapacityIncreaseConfiguration.AddMember("waitELBTargetGroupHealthy", WaitELBTargetGroupHealthy)
 
 	EksCapacityMonitoringApproach_SAMPLED_MAX_IN_LAST_24_HOURS = EksCapacityMonitoringApproach.AddMember("SAMPLED_MAX_IN_LAST_24_HOURS", smithyprelude.Unit)
 
@@ -2447,6 +2720,10 @@ func init() {
 
 	ExecutionBlockType_NEPTUNE = ExecutionBlockType.AddMember("NEPTUNE", smithyprelude.Unit)
 
+	ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA = ExecutionBlockType.AddMember("RDS_SWITCHOVER_READ_REPLICA", smithyprelude.Unit)
+
+	ExecutionBlockType_SSM_SEND_COMMAND = ExecutionBlockType.AddMember("SSM_SEND_COMMAND", smithyprelude.Unit)
+
 	Step_name = Step.AddMember("name", _StepName)
 
 	Step_description = Step.AddMember("description", smithyprelude.String)
@@ -2545,6 +2822,62 @@ func init() {
 
 	NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns = NeptuneGlobalDatabaseConfiguration.AddMember("regionDatabaseClusterArns", _RegionNeptuneClusterArnMap)
 
+	RdsUngracefulBehavior_PROMOTE_READ_REPLICA = RdsUngracefulBehavior.AddMember("PROMOTE_READ_REPLICA", smithyprelude.Unit)
+
+	RdsUngraceful_ungraceful = RdsUngraceful.AddMember("ungraceful", RdsUngracefulBehavior)
+
+	RdsSwitchoverReadReplicaConfiguration_timeoutMinutes = RdsSwitchoverReadReplicaConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	RdsSwitchoverReadReplicaConfiguration_crossAccountRole = RdsSwitchoverReadReplicaConfiguration.AddMember("crossAccountRole", _IamRoleArn)
+
+	RdsSwitchoverReadReplicaConfiguration_externalId = RdsSwitchoverReadReplicaConfiguration.AddMember("externalId", smithyprelude.String)
+
+	RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap = RdsSwitchoverReadReplicaConfiguration.AddMember("dbInstanceArnMap", _RdsDbInstanceArnMap)
+
+	RdsSwitchoverReadReplicaConfiguration_ungraceful = RdsSwitchoverReadReplicaConfiguration.AddMember("ungraceful", RdsUngraceful)
+
+	_SsmTargetValueList_member = _SsmTargetValueList.AddMember("member", _SsmTargetValue)
+
+	SsmTarget_key = SsmTarget.AddMember("key", _SsmTargetKey)
+
+	SsmTarget_values = SsmTarget.AddMember("values", _SsmTargetValueList)
+
+	_SsmTargetList_member = _SsmTargetList.AddMember("member", SsmTarget)
+
+	_SsmParameterValues_member = _SsmParameterValues.AddMember("member", _SsmParameterValue)
+
+	_SsmDocumentParameters_key = _SsmDocumentParameters.AddMember("key", _SsmParameterKey)
+
+	_SsmDocumentParameters_value = _SsmDocumentParameters.AddMember("value", _SsmParameterValues)
+
+	SsmDocumentConfig_crossAccountRole = SsmDocumentConfig.AddMember("crossAccountRole", _IamRoleArn)
+
+	SsmDocumentConfig_externalId = SsmDocumentConfig.AddMember("externalId", smithyprelude.String)
+
+	SsmDocumentConfig_documentArn = SsmDocumentConfig.AddMember("documentArn", _SsmDocumentArn)
+
+	SsmDocumentConfig_targets = SsmDocumentConfig.AddMember("targets", _SsmTargetList)
+
+	SsmDocumentConfig_parameters = SsmDocumentConfig.AddMember("parameters", _SsmDocumentParameters)
+
+	SsmDocumentConfig_documentVersion = SsmDocumentConfig.AddMember("documentVersion", _SsmDocumentVersion)
+
+	_RegionSsmDocumentMap_key = _RegionSsmDocumentMap.AddMember("key", _Region)
+
+	_RegionSsmDocumentMap_value = _RegionSsmDocumentMap.AddMember("value", SsmDocumentConfig)
+
+	SsmSendCommandUngracefulBehavior_SKIP = SsmSendCommandUngracefulBehavior.AddMember("SKIP", smithyprelude.Unit)
+
+	SsmSendCommandUngraceful_behavior = SsmSendCommandUngraceful.AddMember("behavior", SsmSendCommandUngracefulBehavior)
+
+	SsmSendCommandConfiguration_timeoutMinutes = SsmSendCommandConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	SsmSendCommandConfiguration_regionDocuments = SsmSendCommandConfiguration.AddMember("regionDocuments", _RegionSsmDocumentMap)
+
+	SsmSendCommandConfiguration_retryIntervalMinutes = SsmSendCommandConfiguration.AddMember("retryIntervalMinutes", smithyprelude.Float)
+
+	SsmSendCommandConfiguration_ungraceful = SsmSendCommandConfiguration.AddMember("ungraceful", SsmSendCommandUngraceful)
+
 	ExecutionBlockConfiguration_customActionLambdaConfig = ExecutionBlockConfiguration.AddMember("customActionLambdaConfig", CustomActionLambdaConfiguration)
 
 	ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig = ExecutionBlockConfiguration.AddMember("ec2AsgCapacityIncreaseConfig", Ec2AsgCapacityIncreaseConfiguration)
@@ -2578,6 +2911,10 @@ func init() {
 	ExecutionBlockConfiguration_auroraProvisionedScalingConfig = ExecutionBlockConfiguration.AddMember("auroraProvisionedScalingConfig", AuroraProvisionedScalingConfiguration)
 
 	ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig = ExecutionBlockConfiguration.AddMember("neptuneGlobalDatabaseConfig", NeptuneGlobalDatabaseConfiguration)
+
+	ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig = ExecutionBlockConfiguration.AddMember("rdsSwitchoverReadReplicaConfig", RdsSwitchoverReadReplicaConfiguration)
+
+	ExecutionBlockConfiguration_ssmSendCommandConfig = ExecutionBlockConfiguration.AddMember("ssmSendCommandConfig", SsmSendCommandConfiguration)
 
 	ExecutionEventType_UNKNOWN = ExecutionEventType.AddMember("UNKNOWN", smithyprelude.Unit)
 
@@ -2745,6 +3082,8 @@ func init() {
 
 	Plan_reportConfiguration = Plan.AddMember("reportConfiguration", ReportConfiguration)
 
+	Plan_serviceQuotaChecksEnabled = Plan.AddMember("serviceQuotaChecksEnabled", smithyprelude.Boolean)
+
 	Plan_name = Plan.AddMember("name", _PlanName)
 
 	Plan_regions = Plan.AddMember("regions", _RegionList)
@@ -2758,6 +3097,8 @@ func init() {
 	Plan_version = Plan.AddMember("version", smithyprelude.String)
 
 	Plan_updatedAt = Plan.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	_PlanArnList_member = _PlanArnList.AddMember("member", _PlanArn)
 
 	_PlanList_member = _PlanList.AddMember("member", AbbreviatedPlan)
 
@@ -2800,6 +3141,42 @@ func init() {
 	Route53HealthCheck_region = Route53HealthCheck.AddMember("region", _Region)
 
 	_Route53HealthCheckList_member = _Route53HealthCheckList.AddMember("member", Route53HealthCheck)
+
+	ServiceQuotaWarningStatus_PENDING = ServiceQuotaWarningStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	ServiceQuotaWarningStatus_DENIED = ServiceQuotaWarningStatus.AddMember("DENIED", smithyprelude.Unit)
+
+	ServiceQuotaWarningStatus_INSUFFICIENT_PERMISSIONS = ServiceQuotaWarningStatus.AddMember("INSUFFICIENT_PERMISSIONS", smithyprelude.Unit)
+
+	ServiceQuotaWarningStatus_MAX_REGION_SWITCH_REQUESTS_EXCEEDED = ServiceQuotaWarningStatus.AddMember("MAX_REGION_SWITCH_REQUESTS_EXCEEDED", smithyprelude.Unit)
+
+	ServiceQuotaWarningStatus_MAX_ACCOUNT_REQUESTS_EXCEEDED = ServiceQuotaWarningStatus.AddMember("MAX_ACCOUNT_REQUESTS_EXCEEDED", smithyprelude.Unit)
+
+	ServiceQuotaWarningSummary_accountId = ServiceQuotaWarningSummary.AddMember("accountId", _AccountId)
+
+	ServiceQuotaWarningSummary_quotaRegion = ServiceQuotaWarningSummary.AddMember("quotaRegion", _Region)
+
+	ServiceQuotaWarningSummary_serviceCode = ServiceQuotaWarningSummary.AddMember("serviceCode", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_quotaCode = ServiceQuotaWarningSummary.AddMember("quotaCode", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_quotaName = ServiceQuotaWarningSummary.AddMember("quotaName", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_status = ServiceQuotaWarningSummary.AddMember("status", ServiceQuotaWarningStatus)
+
+	ServiceQuotaWarningSummary_planArn = ServiceQuotaWarningSummary.AddMember("planArn", _PlanArn)
+
+	ServiceQuotaWarningSummary_requestId = ServiceQuotaWarningSummary.AddMember("requestId", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_caseId = ServiceQuotaWarningSummary.AddMember("caseId", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_warningMessage = ServiceQuotaWarningSummary.AddMember("warningMessage", smithyprelude.String)
+
+	ServiceQuotaWarningSummary_lastCheckedAt = ServiceQuotaWarningSummary.AddMember("lastCheckedAt", smithyprelude.Timestamp)
+
+	ServiceQuotaWarningSummary_warningCreatedAt = ServiceQuotaWarningSummary.AddMember("warningCreatedAt", smithyprelude.Timestamp)
+
+	_ServiceQuotaWarningSummaryList_member = _ServiceQuotaWarningSummaryList.AddMember("member", ServiceQuotaWarningSummary)
 
 	StepStatus_NOT_STARTED = StepStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
 
@@ -2874,6 +3251,8 @@ func init() {
 	CreatePlanRequest_triggers = CreatePlanRequest.AddMember("triggers", _TriggerList)
 
 	CreatePlanRequest_reportConfiguration = CreatePlanRequest.AddMember("reportConfiguration", ReportConfiguration)
+
+	CreatePlanRequest_serviceQuotaChecksEnabled = CreatePlanRequest.AddMember("serviceQuotaChecksEnabled", smithyprelude.Boolean)
 
 	CreatePlanRequest_name = CreatePlanRequest.AddMember("name", _PlanName)
 
@@ -3029,6 +3408,16 @@ func init() {
 
 	ListRoute53HealthChecksResponse_nextToken = ListRoute53HealthChecksResponse.AddMember("nextToken", _NextToken)
 
+	ListServiceQuotaWarningsRequest_planArns = ListServiceQuotaWarningsRequest.AddMember("planArns", _PlanArnList)
+
+	ListServiceQuotaWarningsRequest_maxResults = ListServiceQuotaWarningsRequest.AddMember("maxResults", _MaxResults)
+
+	ListServiceQuotaWarningsRequest_nextToken = ListServiceQuotaWarningsRequest.AddMember("nextToken", _NextToken)
+
+	ListServiceQuotaWarningsResponse_serviceQuotaWarningSummaries = ListServiceQuotaWarningsResponse.AddMember("serviceQuotaWarningSummaries", _ServiceQuotaWarningSummaryList)
+
+	ListServiceQuotaWarningsResponse_nextToken = ListServiceQuotaWarningsResponse.AddMember("nextToken", _NextToken)
+
 	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _PlanArn)
 
 	ListTagsForResourceResponse_resourceTags = ListTagsForResourceResponse.AddMember("resourceTags", _Tags)
@@ -3046,6 +3435,8 @@ func init() {
 	StartPlanExecutionRequest_latestVersion = StartPlanExecutionRequest.AddMember("latestVersion", smithyprelude.String)
 
 	StartPlanExecutionRequest_recoveryExecutionId = StartPlanExecutionRequest.AddMember("recoveryExecutionId", _RecoveryExecutionId)
+
+	StartPlanExecutionRequest_clientToken = StartPlanExecutionRequest.AddMember("clientToken", smithyprelude.String)
 
 	StartPlanExecutionResponse_executionId = StartPlanExecutionResponse.AddMember("executionId", _ExecutionId)
 
@@ -3098,6 +3489,8 @@ func init() {
 	UpdatePlanRequest_triggers = UpdatePlanRequest.AddMember("triggers", _TriggerList)
 
 	UpdatePlanRequest_reportConfiguration = UpdatePlanRequest.AddMember("reportConfiguration", ReportConfiguration)
+
+	UpdatePlanRequest_serviceQuotaChecksEnabled = UpdatePlanRequest.AddMember("serviceQuotaChecksEnabled", smithyprelude.Boolean)
 
 	UpdatePlanResponse_plan = UpdatePlanResponse.AddMember("plan", Plan)
 

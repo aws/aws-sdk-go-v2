@@ -1,0 +1,5 @@
+POST /profilingGroups/__ProfilingGroupName__/frames/-/metrics?endTime=2000-01-01T00%3A00%3A00Z&period=__Period__&startTime=2000-01-01T00%3A00%3A00Z&targetResolution=PT5M
+
+Content-Type: application/json
+
+{"frameMetrics":[{"frameName":"__FrameName__","threadStates":["__Member__","__Member__"],"type":"AggregatedRelativeTotalTime"},{"frameName":"__FrameName__","threadStates":["__Member__","__Member__"],"type":"AggregatedRelativeTotalTime"}]}

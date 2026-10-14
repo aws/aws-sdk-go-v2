@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/folders/__FolderId__/resolved-permissions?max-results=1&namespace=__Namespace__&next-token=__NextToken__
+
+

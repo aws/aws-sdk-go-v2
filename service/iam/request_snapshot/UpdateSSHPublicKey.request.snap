@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateSSHPublicKey&SSHPublicKeyId=__SSHPublicKeyId__&Status=Active&UserName=__UserName__&Version=2010-05-08

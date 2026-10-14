@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,28 +39,6 @@ type DescribeKeyInput struct {
 	KeyName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyName != nil {
-		s.WriteString(schemas.DescribeKeyRequest_KeyName, *v.KeyName)
-	}
-}
-func (v *DescribeKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeKeyRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeKeyRequest_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.DescribeKeyRequest_KeyName, v.KeyName)
-		}
-		return nil
-	})
 }
 
 type DescribeKeyOutput struct {
@@ -128,131 +103,23 @@ type DescribeKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeKeyOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeKeyResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.DescribeKeyResponse_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DescribeKeyResponse_Description, *v.Description)
-	}
-	if v.ExpireTime != nil {
-		s.WriteTime(schemas.DescribeKeyResponse_ExpireTime, *v.ExpireTime)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.DescribeKeyResponse_Key, *v.Key)
-	}
-	if v.KeyArn != nil {
-		s.WriteString(schemas.DescribeKeyResponse_KeyArn, *v.KeyArn)
-	}
-	if v.KeyName != nil {
-		s.WriteString(schemas.DescribeKeyResponse_KeyName, *v.KeyName)
-	}
-	if v.Restrictions != nil {
-		s.WriteStruct(schemas.DescribeKeyResponse_Restrictions)
-		v.Restrictions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.DescribeKeyResponse_Tags, v.Tags)
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.DescribeKeyResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *DescribeKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeKeyResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeKeyResponse_CreateTime, v.CreateTime)
-		case schemas.DescribeKeyResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeKeyResponse_Description, v.Description)
-		case schemas.DescribeKeyResponse_ExpireTime:
-			v.ExpireTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeKeyResponse_ExpireTime, v.ExpireTime)
-		case schemas.DescribeKeyResponse_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.DescribeKeyResponse_Key, v.Key)
-		case schemas.DescribeKeyResponse_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.DescribeKeyResponse_KeyArn, v.KeyArn)
-		case schemas.DescribeKeyResponse_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.DescribeKeyResponse_KeyName, v.KeyName)
-		case schemas.DescribeKeyResponse_Restrictions:
-			v.Restrictions = &types.ApiKeyRestrictions{}
-			return v.Restrictions.Deserialize(d)
-		case schemas.DescribeKeyResponse_Tags:
-			return deserializeTagMap(d, schemas.DescribeKeyResponse_Tags, &v.Tags)
-		case schemas.DescribeKeyResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeKeyResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKey, schemas.DescribeKeyRequest, schemas.DescribeKeyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeKey{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKey, schemas.DescribeKeyRequest, schemas.DescribeKeyResponse), output: &DescribeKeyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -262,12 +129,6 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpDescribeKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -280,12 +141,6 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,12 +174,4 @@ func (m *endpointPrefix_opDescribeKeyMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opDescribeKeyMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDescribeKeyMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDescribeKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeKey",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateConfigurationSetReputationMetricsEnabled&ConfigurationSetName=__ConfigurationSetName__&Enabled=true&Version=2010-12-01

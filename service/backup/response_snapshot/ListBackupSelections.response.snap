@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupSelectionsList":[{"BackupPlanId":"__BackupPlanId__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","IamRoleArn":"__IamRoleArn__","SelectionId":"__SelectionId__","SelectionName":"__SelectionName__"},{"BackupPlanId":"__BackupPlanId__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","IamRoleArn":"__IamRoleArn__","SelectionId":"__SelectionId__","SelectionName":"__SelectionName__"}],"NextToken":"__NextToken__"}

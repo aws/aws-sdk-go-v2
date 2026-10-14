@@ -1,0 +1,5 @@
+POST /core-networks
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","PolicyDocument":"__PolicyDocument__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -2526,7 +2526,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 1, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>"
                     }
                 },
                 "deletionProtection": {
@@ -5460,7 +5460,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+                "smithy.api#pattern": "^arn:aws[^:]*:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
             }
         },
         "com.amazonaws.neptunegraph#ListExportTasks": {
@@ -5782,6 +5782,13 @@
         "com.amazonaws.neptunegraph#ListImportTasksInput": {
             "type": "structure",
             "members": {
+                "graphIdentifier": {
+                    "target": "com.amazonaws.neptunegraph#GraphIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Neptune Analytics graph. When provided, the service returns only import tasks associated with this graph. If not specified, the service returns all import tasks.</p>",
+                        "smithy.api#httpQuery": "graphIdentifier"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.neptunegraph#PaginationToken",
                     "traits": {
@@ -7643,7 +7650,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^[a-zA-Z+-=._:/]+$"
             }
         },
         "com.amazonaws.neptunegraph#TagKeyList": {

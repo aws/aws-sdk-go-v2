@@ -1,0 +1,4 @@
+GET /apps.get?appId=__AppId__&appVersion=1
+
+Instance-Id: __InstanceId__
+

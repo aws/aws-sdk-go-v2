@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/channel-subtype-config
+
+Content-Type: application/json
+
+{"channelSubtypeConfig":{"email":{"capacity":1,"defaultOutboundConfig":{"connectSourceEmailAddress":"__ConnectSourceEmailAddress__","sourceEmailAddressDisplayName":"__SourceEmailAddressDisplayName__","wisdomTemplateArn":"__WisdomTemplateArn__"},"outboundMode":{"agentless":{}}},"sms":{"capacity":1,"defaultOutboundConfig":{"connectSourcePhoneNumberArn":"__ConnectSourcePhoneNumberArn__","wisdomTemplateArn":"__WisdomTemplateArn__"},"outboundMode":{"agentless":{}}},"telephony":{"capacity":1,"connectQueueId":"__ConnectQueueId__","defaultOutboundConfig":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"connectContactFlowId":"__ConnectContactFlowId__","connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__","ringTimeout":1},"outboundMode":{"progressive":{"bandwidthAllocation":1}}},"whatsApp":{"capacity":1,"defaultOutboundConfig":{"connectSourcePhoneNumberArn":"__ConnectSourcePhoneNumberArn__","wisdomTemplateArn":"__WisdomTemplateArn__"},"outboundMode":{"agentless":{}}}}}

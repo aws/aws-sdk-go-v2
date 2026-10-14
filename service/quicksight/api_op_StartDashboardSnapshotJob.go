@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an asynchronous job that generates a snapshot of a dashboard's output.
@@ -219,6 +218,34 @@ type StartDashboardSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobRequest_DashboardId, *v.DashboardId)
+	}
+	if v.SnapshotConfiguration != nil {
+		s.WriteStruct(schemas.StartDashboardSnapshotJobRequest_SnapshotConfiguration)
+		v.SnapshotConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotJobId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobRequest_SnapshotJobId, *v.SnapshotJobId)
+	}
+	if v.UserConfiguration != nil {
+		s.WriteStruct(schemas.StartDashboardSnapshotJobRequest_UserConfiguration)
+		v.UserConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDashboardSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the dashboard snapshot job.
@@ -240,77 +267,65 @@ type StartDashboardSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobResponse_RequestId, *v.RequestId)
+	}
+	if v.SnapshotJobId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobResponse_SnapshotJobId, *v.SnapshotJobId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartDashboardSnapshotJobResponse_Status, v.Status)
+	}
+}
+func (v *StartDashboardSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDashboardSnapshotJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDashboardSnapshotJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartDashboardSnapshotJobResponse_Arn, v.Arn)
+		case schemas.StartDashboardSnapshotJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartDashboardSnapshotJobResponse_RequestId, v.RequestId)
+		case schemas.StartDashboardSnapshotJobResponse_SnapshotJobId:
+			v.SnapshotJobId = new(string)
+			return d.ReadString(schemas.StartDashboardSnapshotJobResponse_SnapshotJobId, v.SnapshotJobId)
+		case schemas.StartDashboardSnapshotJobResponse_Status:
+			return d.ReadInt32(schemas.StartDashboardSnapshotJobResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDashboardSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJob, schemas.StartDashboardSnapshotJobRequest, schemas.StartDashboardSnapshotJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDashboardSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJob, schemas.StartDashboardSnapshotJobRequest, schemas.StartDashboardSnapshotJobResponse), output: &StartDashboardSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDashboardSnapshotJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDashboardSnapshotJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDashboardSnapshotJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDashboardSnapshotJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -325,22 +340,8 @@ func (c *Client) addOperationStartDashboardSnapshotJobMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDashboardSnapshotJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDashboardSnapshotJob",
-	}
 }

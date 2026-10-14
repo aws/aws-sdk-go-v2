@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *EKSRequestThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EKSRequestThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EKSRequestThrottledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EKSRequestThrottledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EKSRequestThrottledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EKSRequestThrottledException_message, *v.Message)
+	}
+}
+func (v *EKSRequestThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EKSRequestThrottledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EKSRequestThrottledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EKSRequestThrottledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This is an internal server exception.
 type InternalServerException struct {
@@ -58,6 +80,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request throttled.
 type RequestThrottledException struct {
@@ -84,6 +127,27 @@ func (e *RequestThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestThrottledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestThrottledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestThrottledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestThrottledException_message, *v.Message)
+	}
+}
+func (v *RequestThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestThrottledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestThrottledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestThrottledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -110,6 +174,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There are invalid parameters in the client request.
 type ValidationException struct {
@@ -136,3 +221,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		}
+		return nil
+	})
+}

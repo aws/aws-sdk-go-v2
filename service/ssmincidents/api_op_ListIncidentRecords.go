@@ -5,12 +5,8 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all incident records in your account. Use this command to retrieve the
@@ -64,37 +60,6 @@ type ListIncidentRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIncidentRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIncidentRecordsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIncidentRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListIncidentRecordsInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIncidentRecordsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIncidentRecordsInput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListIncidentRecordsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIncidentRecordsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIncidentRecordsInput_filters:
-			return deserializeFilterList(d, schemas.ListIncidentRecordsInput_filters, &v.Filters)
-		case schemas.ListIncidentRecordsInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListIncidentRecordsInput_maxResults, v.MaxResults)
-		case schemas.ListIncidentRecordsInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIncidentRecordsInput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListIncidentRecordsOutput struct {
 
 	// The details of each listed incident record.
@@ -112,99 +77,29 @@ type ListIncidentRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIncidentRecordsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIncidentRecordsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIncidentRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIncidentRecordSummaryList(s, schemas.ListIncidentRecordsOutput_incidentRecordSummaries, v.IncidentRecordSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIncidentRecordsOutput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListIncidentRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIncidentRecordsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIncidentRecordsOutput_incidentRecordSummaries:
-			return deserializeIncidentRecordSummaryList(d, schemas.ListIncidentRecordsOutput_incidentRecordSummaries, &v.IncidentRecordSummaries)
-		case schemas.ListIncidentRecordsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIncidentRecordsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIncidentRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIncidentRecords, schemas.ListIncidentRecordsInput, schemas.ListIncidentRecordsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIncidentRecords{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIncidentRecords, schemas.ListIncidentRecordsInput, schemas.ListIncidentRecordsOutput), output: &ListIncidentRecordsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIncidentRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIncidentRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIncidentRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -217,12 +112,6 @@ func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -324,11 +213,3 @@ type ListIncidentRecordsAPIClient interface {
 }
 
 var _ ListIncidentRecordsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIncidentRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIncidentRecords",
-	}
-}

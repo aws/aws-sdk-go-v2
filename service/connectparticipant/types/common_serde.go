@@ -79,6 +79,7 @@ func serializeViewActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 }
 
 func deserializeAttachmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -92,6 +93,7 @@ func deserializeAttachmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeAttachments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttachmentItem) error {
+	*v = make([]AttachmentItem, 0)
 	var vv AttachmentItem
 	return smithy.ReadList(d, s, func() error {
 		vv = AttachmentItem{}
@@ -105,6 +107,7 @@ func deserializeAttachments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]A
 }
 
 func deserializeConnectionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConnectionType) error {
+	*v = make([]ConnectionType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -118,6 +121,7 @@ func deserializeConnectionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeReceipts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Receipt) error {
+	*v = make([]Receipt, 0)
 	var vv Receipt
 	return smithy.ReadList(d, s, func() error {
 		vv = Receipt{}
@@ -131,6 +135,7 @@ func deserializeReceipts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Rece
 }
 
 func deserializeTranscript(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Item) error {
+	*v = make([]Item, 0)
 	var vv Item
 	return smithy.ReadList(d, s, func() error {
 		vv = Item{}
@@ -144,6 +149,7 @@ func deserializeTranscript(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]It
 }
 
 func deserializeViewActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -172,6 +178,13 @@ func deserializeUploadMetadataSignedHeaders(d smithy.ShapeDeserializer, s *smith
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

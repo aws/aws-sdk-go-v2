@@ -5,12 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified registration field values.
@@ -113,6 +111,27 @@ type DescribeRegistrationFieldValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationFieldValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationFieldValuesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationFieldValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationFieldValuesResult_NextToken, *v.NextToken)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.DescribeRegistrationFieldValuesResult_RegistrationArn, *v.RegistrationArn)
+	}
+	serializeRegistrationFieldValueInformationList(s, schemas.DescribeRegistrationFieldValuesResult_RegistrationFieldValues, v.RegistrationFieldValues)
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.DescribeRegistrationFieldValuesResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeRegistrationFieldValuesResult_VersionNumber, *v.VersionNumber)
+	}
+}
 func (v *DescribeRegistrationFieldValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegistrationFieldValuesResult, func(s *smithy.Schema) error {
 		switch s {
@@ -135,74 +154,26 @@ func (v *DescribeRegistrationFieldValuesOutput) Deserialize(d smithy.ShapeDeseri
 	})
 }
 func (c *Client) addOperationDescribeRegistrationFieldValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationFieldValues, schemas.DescribeRegistrationFieldValuesRequest, schemas.DescribeRegistrationFieldValuesResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationFieldValues, schemas.DescribeRegistrationFieldValuesRequest, schemas.DescribeRegistrationFieldValuesResult), output: &DescribeRegistrationFieldValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRegistrationFieldValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRegistrationFieldValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRegistrationFieldValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,12 +186,6 @@ func (c *Client) addOperationDescribeRegistrationFieldValuesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -324,11 +289,3 @@ type DescribeRegistrationFieldValuesAPIClient interface {
 }
 
 var _ DescribeRegistrationFieldValuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeRegistrationFieldValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRegistrationFieldValues",
-	}
-}

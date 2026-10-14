@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -47,18 +43,6 @@ type GetApplicationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetApplicationInput_Identifier, *v.Identifier)
-	}
 }
 
 type GetApplicationOutput struct {
@@ -169,129 +153,29 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationOutput_ApplicationLogOutputUri:
-			v.ApplicationLogOutputUri = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_ApplicationLogOutputUri, v.ApplicationLogOutputUri)
-		case schemas.GetApplicationOutput_ApplicationLogPaths:
-			return deserializeFilePaths(d, schemas.GetApplicationOutput_ApplicationLogPaths, &v.ApplicationLogPaths)
-		case schemas.GetApplicationOutput_ApplicationSourceUri:
-			v.ApplicationSourceUri = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_ApplicationSourceUri, v.ApplicationSourceUri)
-		case schemas.GetApplicationOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_Arn, v.Arn)
-		case schemas.GetApplicationOutput_AssociatedStreamGroups:
-			return deserializeArnList(d, schemas.GetApplicationOutput_AssociatedStreamGroups, &v.AssociatedStreamGroups)
-		case schemas.GetApplicationOutput_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationOutput_CreatedAt, v.CreatedAt)
-		case schemas.GetApplicationOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_Description, v.Description)
-		case schemas.GetApplicationOutput_ExecutablePath:
-			v.ExecutablePath = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_ExecutablePath, v.ExecutablePath)
-		case schemas.GetApplicationOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetApplicationOutput_Id, v.Id)
-		case schemas.GetApplicationOutput_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationOutput_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetApplicationOutput_ReplicationStatuses:
-			return deserializeReplicationStatuses(d, schemas.GetApplicationOutput_ReplicationStatuses, &v.ReplicationStatuses)
-		case schemas.GetApplicationOutput_RuntimeEnvironment:
-			v.RuntimeEnvironment = &types.RuntimeEnvironment{}
-			return v.RuntimeEnvironment.Deserialize(d)
-		case schemas.GetApplicationOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ApplicationStatus(ev)
-			return nil
-		case schemas.GetApplicationOutput_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationOutput_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = types.ApplicationStatusReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationInput, schemas.GetApplicationOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationInput, schemas.GetApplicationOutput), output: &GetApplicationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -304,12 +188,6 @@ func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -682,11 +560,3 @@ type GetApplicationAPIClient interface {
 }
 
 var _ GetApplicationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetApplication",
-	}
-}

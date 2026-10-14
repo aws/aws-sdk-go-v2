@@ -5,12 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Fetches the temporarily cached result of an SQL statement in CSV format. The
@@ -56,22 +52,11 @@ type GetStatementResultV2Input struct {
 	// all response records have been retrieved for the request.
 	NextToken *string
 
+	// The number of seconds to wait for the SQL statement to complete execution
+	// before returning the result. The maximum value is 30 seconds.
+	WaitTimeSeconds *int32
+
 	noSmithyDocumentSerde
-}
-
-func (v *GetStatementResultV2Input) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStatementResultV2Request)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStatementResultV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetStatementResultV2Request_Id, *v.Id)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetStatementResultV2Request_NextToken, *v.NextToken)
-	}
 }
 
 type GetStatementResultV2Output struct {
@@ -105,98 +90,29 @@ type GetStatementResultV2Output struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStatementResultV2Output) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStatementResultV2Response, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStatementResultV2Response_ColumnMetadata:
-			return deserializeColumnMetadataList(d, schemas.GetStatementResultV2Response_ColumnMetadata, &v.ColumnMetadata)
-		case schemas.GetStatementResultV2Response_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetStatementResultV2Response_NextToken, v.NextToken)
-		case schemas.GetStatementResultV2Response_Records:
-			return deserializeFormattedSqlRecords(d, schemas.GetStatementResultV2Response_Records, &v.Records)
-		case schemas.GetStatementResultV2Response_ResultFormat:
-			var ev string
-			if err := d.ReadString(schemas.GetStatementResultV2Response_ResultFormat, &ev); err != nil {
-				return err
-			}
-			v.ResultFormat = types.ResultFormatString(ev)
-			return nil
-		case schemas.GetStatementResultV2Response_TotalNumRows:
-			return d.ReadInt64(schemas.GetStatementResultV2Response_TotalNumRows, &v.TotalNumRows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStatementResultV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatementResultV2{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResultV2, schemas.GetStatementResultV2Request, schemas.GetStatementResultV2Response)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStatementResultV2{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResultV2, schemas.GetStatementResultV2Request, schemas.GetStatementResultV2Response), output: &GetStatementResultV2Output{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStatementResultV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStatementResultV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStatementResultV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +125,6 @@ func (c *Client) addOperationGetStatementResultV2Middlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -304,11 +214,3 @@ type GetStatementResultV2APIClient interface {
 }
 
 var _ GetStatementResultV2APIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetStatementResultV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStatementResultV2",
-	}
-}

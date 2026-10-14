@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AccessGroupId=__AccessGroupId__&Action=AuthorizeClientVpnIngress&AuthorizeAllGroups=true&ClientToken=__ClientToken__&ClientVpnEndpointId=__ClientVpnEndpointId__&Description=__Description__&DryRun=true&TargetNetworkCidr=__TargetNetworkCidr__&Version=2016-11-15

@@ -5,12 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the fulfillment options available for a product, including deployment
@@ -38,6 +34,12 @@ type ListFulfillmentOptionsInput struct {
 	// This member is required.
 	ProductId *string
 
+	// A BCP 47 language tag or comma-separated priority list specifying the preferred
+	// locale for response content. See Locale for supported values, constraints,
+	// fallback behavior, and the default locale. If omitted, the service returns
+	// content in the default locale.
+	Locale *string
+
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to get more results.
 	MaxResults *int32
@@ -49,24 +51,6 @@ type ListFulfillmentOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFulfillmentOptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFulfillmentOptionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFulfillmentOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListFulfillmentOptionsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFulfillmentOptionsInput_nextToken, *v.NextToken)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.ListFulfillmentOptionsInput_productId, *v.ProductId)
-	}
-}
-
 type ListFulfillmentOptionsOutput struct {
 
 	// The fulfillment options available for the product. Each option describes how
@@ -74,6 +58,61 @@ type ListFulfillmentOptionsOutput struct {
 	//
 	// This member is required.
 	FulfillmentOptions []types.FulfillmentOption
+
+	// A BCP 47 language tag or comma-separated priority list of language tags that
+	// specifies the preferred locale for response content. The field accepts a maximum
+	// of two language tags.
+	//
+	// The service resolves a locale string to the nearest supported locale. If no
+	// supported locale matches, the service applies the fallback behavior described
+	// below.
+	//
+	//   - Preferred locale (first tag) – The locale you want the service to return
+	//   content in.
+	//
+	//   - Fallback locale (optional, second tag) – The service default locale ( en-US
+	//   or en ). The service returns content in this locale when translated content
+	//   for the preferred locale is unavailable.
+	//
+	// The field is optional. If omitted or null, the service returns content in the
+	// default locale ( en-US ).
+	//
+	// Supported locales:
+	//
+	//   - en-US – English (service default, also resolves from en )
+	//
+	//   - fr – French
+	//
+	//   - es – Spanish
+	//
+	//   - ko – Korean
+	//
+	//   - ja – Japanese
+	//
+	// Fallback behavior:
+	//
+	//   - If translated content for the preferred locale is unavailable, the service
+	//   returns content in the default locale.
+	//
+	//   - If the preferred locale is not supported and no fallback is provided, the
+	//   service returns a ValidationException .
+	//
+	//   - If you provide an unsupported locale with the default locale as fallback
+	//   (for example, xx, en-US ), the service returns content in the default locale.
+	//
+	// Response locale field (Get APIs): The locale field in Get API responses
+	// indicates the locale of the returned content. You can use this field to
+	// determine whether the response contains content in the requested locale or the
+	// default locale.
+	//
+	// Examples:
+	//
+	//   - fr – Request French content. If unavailable, falls back to en-US .
+	//
+	//   - fr, en-US – Request French content with explicit fallback to English.
+	//
+	//   - en-US – Request content in the default locale.
+	Locale *string
 
 	// If nextToken is returned, there are more results available. Make the call again
 	// using the returned token to retrieve the next page.
@@ -85,87 +124,29 @@ type ListFulfillmentOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFulfillmentOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFulfillmentOptionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFulfillmentOptionsOutput_fulfillmentOptions:
-			return deserializeFulfillmentOptionsList(d, schemas.ListFulfillmentOptionsOutput_fulfillmentOptions, &v.FulfillmentOptions)
-		case schemas.ListFulfillmentOptionsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFulfillmentOptionsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFulfillmentOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFulfillmentOptions, schemas.ListFulfillmentOptionsInput, schemas.ListFulfillmentOptionsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFulfillmentOptions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFulfillmentOptions, schemas.ListFulfillmentOptionsInput, schemas.ListFulfillmentOptionsOutput), output: &ListFulfillmentOptionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFulfillmentOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFulfillmentOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFulfillmentOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,12 +159,6 @@ func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +261,3 @@ type ListFulfillmentOptionsAPIClient interface {
 }
 
 var _ ListFulfillmentOptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFulfillmentOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFulfillmentOptions",
-	}
-}

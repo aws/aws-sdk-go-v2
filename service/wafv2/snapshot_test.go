@@ -398,6 +398,42 @@ func TestCheckSnapshot_GetRegexPatternSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRevenueStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRevenueStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRevenueStatisticsSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatisticsSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRevenueStatisticsSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRevenueStatisticsTimeSeries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatisticsTimeSeries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRevenueStatisticsTimeSeries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRuleGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRuleGroup(context.Background(), nil, func(o *Options) {
@@ -571,6 +607,18 @@ func TestCheckSnapshot_ListRuleGroups(t *testing.T) {
 	_, err := svc.ListRuleGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRuleGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSettlementRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSettlementRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSettlementRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1057,6 +1105,42 @@ func TestUpdateSnapshot_GetRegexPatternSet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRevenueStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRevenueStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRevenueStatisticsSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatisticsSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRevenueStatisticsSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRevenueStatisticsTimeSeries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRevenueStatisticsTimeSeries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRevenueStatisticsTimeSeries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRuleGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRuleGroup(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1314,18 @@ func TestUpdateSnapshot_ListRuleGroups(t *testing.T) {
 	_, err := svc.ListRuleGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRuleGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSettlementRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSettlementRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSettlementRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

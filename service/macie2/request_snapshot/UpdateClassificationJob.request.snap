@@ -1,0 +1,5 @@
+PATCH /jobs/__JobId__
+
+Content-Type: application/json
+
+{"jobStatus":"RUNNING"}

@@ -5,12 +5,8 @@ package trustedadvisor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List a filterable set of Checks. This API provides global recommendations,
@@ -54,33 +50,6 @@ type ListChecksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChecksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChecksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsService != nil {
-		s.WriteString(schemas.ListChecksRequest_awsService, *v.AwsService)
-	}
-	if v.Language != "" {
-		s.WriteString(schemas.ListChecksRequest_language, string(v.Language))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChecksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChecksRequest_nextToken, *v.NextToken)
-	}
-	if v.Pillar != "" {
-		s.WriteString(schemas.ListChecksRequest_pillar, string(v.Pillar))
-	}
-	if v.Source != "" {
-		s.WriteString(schemas.ListChecksRequest_source, string(v.Source))
-	}
-}
-
 type ListChecksOutput struct {
 
 	// The list of Checks
@@ -98,84 +67,26 @@ type ListChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChecksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChecksResponse_checkSummaries:
-			return deserializeCheckSummaryList(d, schemas.ListChecksResponse_checkSummaries, &v.CheckSummaries)
-		case schemas.ListChecksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChecksResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChecks, schemas.ListChecksRequest, schemas.ListChecksResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChecks{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChecks, schemas.ListChecksRequest, schemas.ListChecksResponse), output: &ListChecksOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChecks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChecks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +99,6 @@ func (c *Client) addOperationListChecksMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,11 +198,3 @@ type ListChecksAPIClient interface {
 }
 
 var _ ListChecksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListChecks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListChecks",
-	}
-}

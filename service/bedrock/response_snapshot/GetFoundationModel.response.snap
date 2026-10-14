@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"modelDetails":{"customizationsSupported":["FINE_TUNING","FINE_TUNING"],"inferenceTypesSupported":["ON_DEMAND","ON_DEMAND"],"inputModalities":["TEXT","TEXT"],"modelArn":"__ModelArn__","modelId":"__ModelId__","modelLifecycle":{"endOfLifeTime":"2000-01-01T00:00:00Z","legacyTime":"2000-01-01T00:00:00Z","publicExtendedAccessTime":"2000-01-01T00:00:00Z","startOfLifeTime":"2000-01-01T00:00:00Z","status":"ACTIVE"},"modelName":"__ModelName__","outputModalities":["TEXT","TEXT"],"providerName":"__ProviderName__","responseStreamingSupported":true}}

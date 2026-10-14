@@ -1,0 +1,5 @@
+POST /2015-02-01/delete-tags/__FileSystemId__
+
+Content-Type: application/json
+
+{"TagKeys":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/notebook-runs/__Identifier__/stop
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__"}

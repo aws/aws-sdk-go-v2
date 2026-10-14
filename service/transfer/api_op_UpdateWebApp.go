@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assigns new properties to a web app. You can modify the access point, identity
@@ -59,6 +58,24 @@ type UpdateWebAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEndpoint != nil {
+		s.WriteString(schemas.UpdateWebAppRequest_AccessEndpoint, *v.AccessEndpoint)
+	}
+	serializeUpdateWebAppEndpointDetails(s, schemas.UpdateWebAppRequest_EndpointDetails, v.EndpointDetails)
+	serializeUpdateWebAppIdentityProviderDetails(s, schemas.UpdateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	if v.WebAppId != nil {
+		s.WriteString(schemas.UpdateWebAppRequest_WebAppId, *v.WebAppId)
+	}
+	serializeWebAppUnits(s, schemas.UpdateWebAppRequest_WebAppUnits, v.WebAppUnits)
+}
+
 type UpdateWebAppOutput struct {
 
 	// Returns the unique identifier for the web app being updated.
@@ -72,77 +89,48 @@ type UpdateWebAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.UpdateWebAppResponse_WebAppId, *v.WebAppId)
+	}
+}
+func (v *UpdateWebAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWebAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWebAppResponse_WebAppId:
+			v.WebAppId = new(string)
+			return d.ReadString(schemas.UpdateWebAppResponse_WebAppId, v.WebAppId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWebAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebApp, schemas.UpdateWebAppRequest, schemas.UpdateWebAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebApp, schemas.UpdateWebAppRequest, schemas.UpdateWebAppResponse), output: &UpdateWebAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWebApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWebApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWebAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +145,8 @@ func (c *Client) addOperationUpdateWebAppMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWebApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWebApp",
-	}
 }

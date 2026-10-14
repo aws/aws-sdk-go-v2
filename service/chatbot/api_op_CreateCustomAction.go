@@ -5,12 +5,8 @@ package chatbot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom action that can be invoked as an alias or as a button on a
@@ -67,31 +63,6 @@ type CreateCustomActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCustomActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCustomActionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionName != nil {
-		s.WriteString(schemas.CreateCustomActionRequest_ActionName, *v.ActionName)
-	}
-	if v.AliasName != nil {
-		s.WriteString(schemas.CreateCustomActionRequest_AliasName, *v.AliasName)
-	}
-	serializeCustomActionAttachmentList(s, schemas.CreateCustomActionRequest_Attachments, v.Attachments)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateCustomActionRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.CreateCustomActionRequest_Definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateCustomActionRequest_Tags, v.Tags)
-}
-
 type CreateCustomActionOutput struct {
 
 	// The fully defined ARN of the custom action.
@@ -105,73 +76,23 @@ type CreateCustomActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCustomActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCustomActionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCustomActionResult_CustomActionArn:
-			v.CustomActionArn = new(string)
-			return d.ReadString(schemas.CreateCustomActionResult_CustomActionArn, v.CustomActionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCustomActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomAction, schemas.CreateCustomActionRequest, schemas.CreateCustomActionResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomAction{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomAction, schemas.CreateCustomActionRequest, schemas.CreateCustomActionResult), output: &CreateCustomActionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -181,12 +102,6 @@ func (c *Client) addOperationCreateCustomActionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateCustomActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,12 +114,6 @@ func (c *Client) addOperationCreateCustomActionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -244,12 +153,4 @@ func (m *idempotencyToken_initializeOpCreateCustomAction) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateCustomActionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCustomAction{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCustomAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomAction",
-	}
 }

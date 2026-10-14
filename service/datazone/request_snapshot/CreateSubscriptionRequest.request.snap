@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/subscription-requests
+
+Content-Type: application/json
+
+{"assetPermissions":[{"assetId":"__AssetId__","permissions":{"s3":["READ","READ"]}},{"assetId":"__AssetId__","permissions":{"s3":["READ","READ"]}}],"assetScopes":[{"assetId":"__AssetId__","filterIds":["__Member__","__Member__"]},{"assetId":"__AssetId__","filterIds":["__Member__","__Member__"]}],"clientToken":"__ClientToken__","metadataForms":[{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}],"requestReason":"__RequestReason__","subscribedListings":[{"identifier":"__Identifier__"},{"identifier":"__Identifier__"}],"subscribedPrincipals":[{"project":{"identifier":"__Identifier__"}},{"project":{"identifier":"__Identifier__"}}]}

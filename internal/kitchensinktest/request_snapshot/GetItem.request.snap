@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsJson1KitchenSink.GetItem
+
+{"id":"__Id__","item":{}}

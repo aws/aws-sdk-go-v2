@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/schema/json
+
+Content-Type: application/json
+X-Amz-Data-Partition: __SchemaArn__
+
+{"Document":"__Document__"}

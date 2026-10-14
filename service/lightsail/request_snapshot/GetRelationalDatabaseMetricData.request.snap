@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetRelationalDatabaseMetricData
+
+{"endTime":946684800,"metricName":"CPUUtilization","period":1,"relationalDatabaseName":"__RelationalDatabaseName__","startTime":946684800,"statistics":["Minimum","Minimum"],"unit":"Seconds"}

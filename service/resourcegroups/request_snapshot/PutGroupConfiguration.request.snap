@@ -1,0 +1,5 @@
+POST /put-group-configuration
+
+Content-Type: application/json
+
+{"Configuration":[{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"},{"Parameters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"Type":"__Type__"}],"Group":"__Group__"}

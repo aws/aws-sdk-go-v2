@@ -121,6 +121,7 @@ func serializeVmwareToAwsTagMappings(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func deserializeBandwidthRateLimitIntervals(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BandwidthRateLimitInterval) error {
+	*v = make([]types.BandwidthRateLimitInterval, 0)
 	var vv types.BandwidthRateLimitInterval
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BandwidthRateLimitInterval{}
@@ -134,6 +135,7 @@ func deserializeBandwidthRateLimitIntervals(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeDaysOfWeek(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -147,6 +149,7 @@ func deserializeDaysOfWeek(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]in
 }
 
 func deserializeGateways(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Gateway) error {
+	*v = make([]types.Gateway, 0)
 	var vv types.Gateway
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Gateway{}
@@ -160,6 +163,7 @@ func deserializeGateways(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeHypervisors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Hypervisor) error {
+	*v = make([]types.Hypervisor, 0)
 	var vv types.Hypervisor
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Hypervisor{}
@@ -173,6 +177,7 @@ func deserializeHypervisors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -186,6 +191,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -199,6 +205,7 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Ta
 }
 
 func deserializeVirtualMachines(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualMachine) error {
+	*v = make([]types.VirtualMachine, 0)
 	var vv types.VirtualMachine
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualMachine{}
@@ -212,6 +219,7 @@ func deserializeVirtualMachines(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeVmwareTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VmwareTag) error {
+	*v = make([]types.VmwareTag, 0)
 	var vv types.VmwareTag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VmwareTag{}
@@ -225,6 +233,7 @@ func deserializeVmwareTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeVmwareToAwsTagMappings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VmwareToAwsTagMapping) error {
+	*v = make([]types.VmwareToAwsTagMapping, 0)
 	var vv types.VmwareToAwsTagMapping
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VmwareToAwsTagMapping{}

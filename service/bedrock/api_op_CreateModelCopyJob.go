@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies a model to another region so that it can be used there. For more
@@ -62,6 +62,28 @@ type CreateModelCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCopyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCopyJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_modelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_sourceModelArn, *v.SourceModelArn)
+	}
+	if v.TargetModelName != nil {
+		s.WriteString(schemas.CreateModelCopyJobRequest_targetModelName, *v.TargetModelName)
+	}
+	serializeTagList(s, schemas.CreateModelCopyJobRequest_targetModelTags, v.TargetModelTags)
+}
+
 type CreateModelCopyJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model copy job.
@@ -75,65 +97,42 @@ type CreateModelCopyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCopyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCopyJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelCopyJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCopyJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCopyJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelCopyJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCopyJob, schemas.CreateModelCopyJobRequest, schemas.CreateModelCopyJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCopyJob, schemas.CreateModelCopyJobRequest, schemas.CreateModelCopyJobResponse), output: &CreateModelCopyJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelCopyJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelCopyJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +142,6 @@ func (c *Client) addOperationCreateModelCopyJobMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateModelCopyJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelCopyJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +154,6 @@ func (c *Client) addOperationCreateModelCopyJobMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +193,4 @@ func (m *idempotencyToken_initializeOpCreateModelCopyJob) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateModelCopyJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateModelCopyJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateModelCopyJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelCopyJob",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /PutComponentPolicy
+
+Content-Type: application/json
+
+{"componentArn":"__ComponentArn__","policy":"__Policy__"}

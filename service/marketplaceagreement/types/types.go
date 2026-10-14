@@ -19,6 +19,7 @@ import (
 //	AcceptedTermMemberFixedUpfrontPricingTerm
 //	AcceptedTermMemberFreeTrialPricingTerm
 //	AcceptedTermMemberLegalTerm
+//	AcceptedTermMemberNetPaymentTerm
 //	AcceptedTermMemberPaymentScheduleTerm
 //	AcceptedTermMemberRecurringPaymentTerm
 //	AcceptedTermMemberRenewalTerm
@@ -121,6 +122,24 @@ func (v *AcceptedTermMemberLegalTerm) Deserialize(d smithy.ShapeDeserializer) er
 	return v.Value.Deserialize(d)
 }
 
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type AcceptedTermMemberNetPaymentTerm struct {
+	Value NetPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AcceptedTermMemberNetPaymentTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberNetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_netPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberNetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
 // commonly for flexible payment schedule pricing.
@@ -162,9 +181,11 @@ func (v *AcceptedTermMemberRecurringPaymentTerm) Deserialize(d smithy.ShapeDeser
 // on its pre-defined end date), a new agreement will be created using the accepted
 // terms on the existing agreement. In other words, the agreement will be renewed.
 // Presence of RenewalTerm in the offer document means that auto-renewal is
-// allowed. Buyers will have the option to accept or decline auto-renewal at the
-// offer acceptance/agreement creation. Buyers can also change this flag from True
-// to False or False to True at anytime during the agreement's lifecycle.
+// allowed. The acceptor will have the option to accept or decline auto-renewal at
+// the offer acceptance/agreement creation. The acceptor can also change this flag
+// from True to False or False to True , within the limits set by LockoutPeriod
+// and MaxRenewals . Setting the flag to True doesn't by itself guarantee that the
+// agreement renews, because the proposer can also opt out.
 type AcceptedTermMemberRenewalTerm struct {
 	Value RenewalTerm
 
@@ -596,8 +617,63 @@ type AgreementViewSummary struct {
 	// agreements, which don’t have end dates.
 	EndTime *time.Time
 
+	// The reason why the agreement doesn't renew at its end date. The field is null
+	// when the agreement renews.
+	//
+	// More than one reason can apply to the same agreement. When that happens, the
+	// operation returns only one reason code, and PROPOSER_RENEW_OPTED_OUT takes
+	// precedence over all others.
+	//
+	// The EnableAutoRenew field reflects only the acceptor's preference, and doesn't
+	// reflect the other reasons an agreement might not renew.
+	//
+	// Reason codes include:
+	//
+	//   - PROPOSER_RENEW_OPTED_OUT – The proposer opted out of renewing the agreement.
+	//
+	//   - ACCEPTOR_RENEW_OPTED_OUT – The acceptor opted out of renewing the agreement.
+	//
+	//   - NO_RENEWAL_TERM – The accepted terms of the agreement don't include a
+	//   renewal term, which is required for an agreement to renew.
+	//
+	//   - RENEWAL_LIMIT_EXHAUSTED – The agreement reached the maximum number of
+	//   renewals allowed by its renewal term.
+	EndTimeBehaviorReasonCode EndTimeBehaviorReasonCode
+
+	// The behavior of the agreement when it reaches its end date. The field is null
+	// for agreements that have no end date, because those agreements never reach an
+	// end time.
+	//
+	// Types include:
+	//
+	//   - RENEW – A new agreement is created from the accepted terms of this agreement.
+	//
+	//   - REPLACE – A new agreement is created from a different offer than the one
+	//   this agreement was created from. This happens, for example, when a private offer
+	//   reaches its end date and the acceptor transitions to the public offer for the
+	//   product.
+	//
+	//   - EXPIRE – The agreement ends and isn't renewed or replaced.
+	EndTimeBehaviorType EndTimeBehaviorType
+
 	// A list of entitlements associated with the agreement.
 	Entitlements []Entitlement
+
+	// The unique identifier of the very first agreement in a chain of related
+	// agreements, such as renewals or replacements. It stays the same across all
+	// agreements in that chain, which lets you trace an agreement back to the
+	// original. You can also use it as the InitialAgreementId filter value to return
+	// every agreement in the same chain.
+	InitialAgreementId *string
+
+	// The date and time when the agreement was last updated. An agreement is updated
+	// when any of its attributes or accepted terms change. Amendments, renewals, and a
+	// party changing whether the agreement renews are all examples.
+	//
+	// Use the BeforeLastUpdateTime and AfterLastUpdateTime filters to search on this
+	// value, and LastUpdateTime as the SortBy value to sort by it. Sorting by
+	// LastUpdateTime is supported only when PartyType is Proposer .
+	LastUpdateTime *time.Time
 
 	// A summary of the proposal
 	ProposalSummary *ProposalSummary
@@ -639,7 +715,19 @@ func (v *AgreementViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.AgreementViewSummary_endTime, *v.EndTime)
 	}
+	if v.EndTimeBehaviorReasonCode != "" {
+		s.WriteString(schemas.AgreementViewSummary_endTimeBehaviorReasonCode, string(v.EndTimeBehaviorReasonCode))
+	}
+	if v.EndTimeBehaviorType != "" {
+		s.WriteString(schemas.AgreementViewSummary_endTimeBehaviorType, string(v.EndTimeBehaviorType))
+	}
 	serializeEntitlementList(s, schemas.AgreementViewSummary_entitlements, v.Entitlements)
+	if v.InitialAgreementId != nil {
+		s.WriteString(schemas.AgreementViewSummary_initialAgreementId, *v.InitialAgreementId)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_lastUpdateTime, *v.LastUpdateTime)
+	}
 	if v.ProposalSummary != nil {
 		s.WriteStruct(schemas.AgreementViewSummary_proposalSummary)
 		v.ProposalSummary.SerializeMembers(s)
@@ -675,8 +763,28 @@ func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgreementViewSummary_endTime:
 			v.EndTime = new(time.Time)
 			return d.ReadTime(schemas.AgreementViewSummary_endTime, v.EndTime)
+		case schemas.AgreementViewSummary_endTimeBehaviorReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.AgreementViewSummary_endTimeBehaviorReasonCode, &ev); err != nil {
+				return err
+			}
+			v.EndTimeBehaviorReasonCode = EndTimeBehaviorReasonCode(ev)
+			return nil
+		case schemas.AgreementViewSummary_endTimeBehaviorType:
+			var ev string
+			if err := d.ReadString(schemas.AgreementViewSummary_endTimeBehaviorType, &ev); err != nil {
+				return err
+			}
+			v.EndTimeBehaviorType = EndTimeBehaviorType(ev)
+			return nil
 		case schemas.AgreementViewSummary_entitlements:
 			return deserializeEntitlementList(d, schemas.AgreementViewSummary_entitlements, &v.Entitlements)
+		case schemas.AgreementViewSummary_initialAgreementId:
+			v.InitialAgreementId = new(string)
+			return d.ReadString(schemas.AgreementViewSummary_initialAgreementId, v.InitialAgreementId)
+		case schemas.AgreementViewSummary_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_lastUpdateTime, v.LastUpdateTime)
 		case schemas.AgreementViewSummary_proposalSummary:
 			v.ProposalSummary = &ProposalSummary{}
 			return v.ProposalSummary.Deserialize(d)
@@ -1601,6 +1709,103 @@ func (v *DocumentItem) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The behavior of an agreement when it reaches its end date. For example, whether
+// the agreement renews, and if it doesn't, the reason why.
+type EndTimeBehavior struct {
+
+	// The behavior of the agreement when it reaches its end date.
+	//
+	// Types include:
+	//
+	//   - RENEW – A new agreement is created from the accepted terms of this agreement.
+	//
+	//   - REPLACE – A new agreement is created from a different offer than the one
+	//   this agreement was created from. This happens, for example, when a private offer
+	//   reaches its end date and the acceptor transitions to the public offer for the
+	//   product.
+	//
+	//   - EXPIRE – The agreement ends and isn't renewed or replaced.
+	//
+	// This member is required.
+	Type EndTimeBehaviorType
+
+	// The reason why the agreement doesn't renew at its end date. The field is null
+	// when the agreement renews.
+	//
+	// More than one reason can apply to the same agreement. When that happens, the
+	// operation returns only one reason code, and PROPOSER_RENEW_OPTED_OUT takes
+	// precedence over all others.
+	//
+	// The EnableAutoRenew field reflects only the acceptor's preference, and doesn't
+	// reflect the other reasons an agreement might not renew.
+	//
+	// Reason codes include:
+	//
+	//   - PROPOSER_RENEW_OPTED_OUT – The proposer opted out of renewing the agreement.
+	//
+	//   - ACCEPTOR_RENEW_OPTED_OUT – The acceptor opted out of renewing the agreement.
+	//
+	//   - NO_RENEWAL_TERM – The accepted terms of the agreement don't include a
+	//   renewal term, which is required for an agreement to renew.
+	//
+	//   - RENEWAL_LIMIT_EXHAUSTED – The agreement reached the maximum number of
+	//   renewals allowed by its renewal term.
+	ReasonCode EndTimeBehaviorReasonCode
+
+	// The details of the renewal that applies at the end date of the agreement. This
+	// field is present when Type is RENEW . It is also present when ReasonCode is
+	// PROPOSER_RENEW_OPTED_OUT or ACCEPTOR_RENEW_OPTED_OUT . In those cases, it
+	// identifies the offer that the agreement would otherwise have renewed from. The
+	// field is null in all other cases.
+	RenewalSummary *RenewalSummary
+
+	noSmithyDocumentSerde
+}
+
+func (v *EndTimeBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndTimeBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndTimeBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.EndTimeBehavior_reasonCode, string(v.ReasonCode))
+	}
+	if v.RenewalSummary != nil {
+		s.WriteStruct(schemas.EndTimeBehavior_renewalSummary)
+		v.RenewalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EndTimeBehavior_type, string(v.Type))
+	}
+}
+func (v *EndTimeBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndTimeBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndTimeBehavior_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.EndTimeBehavior_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = EndTimeBehaviorReasonCode(ev)
+			return nil
+		case schemas.EndTimeBehavior_renewalSummary:
+			v.RenewalSummary = &RenewalSummary{}
+			return v.RenewalSummary.Deserialize(d)
+		case schemas.EndTimeBehavior_type:
+			var ev string
+			if err := d.ReadString(schemas.EndTimeBehavior_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EndTimeBehaviorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents an entitlement associated with an agreement.
 type Entitlement struct {
 
@@ -1853,6 +2058,39 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Filter_name, v.Name)
 		case schemas.Filter_values:
 			return deserializeFilterValueList(d, schemas.Filter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// A fixed price increase that is applied each time the agreement renews.
+type FixedPercentage struct {
+
+	// The percentage by which the price increases at each renewal, from 0.00 to 100.00
+	// with up to two decimal places. A value of 0.00 means that the agreement renews
+	// at the same price.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedPercentage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedPercentage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.FixedPercentage_value, *v.Value)
+	}
+}
+func (v *FixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedPercentage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedPercentage_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.FixedPercentage_value, v.Value)
 		}
 		return nil
 	})
@@ -2236,6 +2474,58 @@ func (v *LegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type NetPaymentTerm struct {
+
+	// The unique identifier for the term.
+	Id *string
+
+	// The duration after an invoice is issued within which the payment is due. The
+	// duration is represented in the ISO 8601 format (for example, P30D for 30 days
+	// or P60D for 60 days).
+	PaymentDuePeriod *string
+
+	// Type of the term being updated.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetPaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetPaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.NetPaymentTerm_id, *v.Id)
+	}
+	if v.PaymentDuePeriod != nil {
+		s.WriteString(schemas.NetPaymentTerm_paymentDuePeriod, *v.PaymentDuePeriod)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.NetPaymentTerm_type, *v.Type)
+	}
+}
+func (v *NetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetPaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetPaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_id, v.Id)
+		case schemas.NetPaymentTerm_paymentDuePeriod:
+			v.PaymentDuePeriod = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_paymentDuePeriod, v.PaymentDuePeriod)
+		case schemas.NetPaymentTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Summary view of a payment request.
 type PaymentRequestSummary struct {
 
@@ -2345,6 +2635,66 @@ func (v *PaymentRequestSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A single installment in a payment schedule template. Because the start date of
+// the renewed agreement isn't known when the offer is created, the charge date of
+// each installment is expressed as an offset from that start date rather than as
+// an absolute date.
+type PaymentScheduleEntry struct {
+
+	// The time between the start date of the renewed agreement and the date this
+	// installment is charged. The duration is represented in the ISO 8601 format in
+	// either whole months or whole days (for example, P1M for 1 month or P30D for 30
+	// days). All installments in a schedule use the same unit.
+	ChargeDateOffset *string
+
+	// The percentage of the total contract value of the renewed agreement that is
+	// charged in this installment. Valid values range from 0.01 to 100.00 , with up to
+	// two decimal places.
+	ChargePercentage *string
+
+	// The day of the month on which this installment is charged, from 1 to 31 . Use
+	// this field to anchor the charge to a specific calendar day within the month
+	// identified by ChargeDateOffset . This field is supported only when
+	// ChargeDateOffset is expressed in months.
+	DayOfMonth *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeDateOffset != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargeDateOffset, *v.ChargeDateOffset)
+	}
+	if v.ChargePercentage != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargePercentage, *v.ChargePercentage)
+	}
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.PaymentScheduleEntry_dayOfMonth, *v.DayOfMonth)
+	}
+}
+func (v *PaymentScheduleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleEntry_chargeDateOffset:
+			v.ChargeDateOffset = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargeDateOffset, v.ChargeDateOffset)
+		case schemas.PaymentScheduleEntry_chargePercentage:
+			v.ChargePercentage = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargePercentage, v.ChargePercentage)
+		case schemas.PaymentScheduleEntry_dayOfMonth:
+			v.DayOfMonth = new(int32)
+			return d.ReadInt32(schemas.PaymentScheduleEntry_dayOfMonth, v.DayOfMonth)
+		}
+		return nil
+	})
+}
+
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
 // commonly for flexible payment schedule pricing.
@@ -2401,6 +2751,139 @@ func (v *PaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// Defines the payment schedule that is applied to the renewed agreement.
+type PaymentScheduleTermTemplate struct {
+
+	// The installments that make up the payment schedule of the renewed agreement.
+	// The ChargePercentage values of all installments add up to 100 .
+	Schedule []PaymentScheduleEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleTermTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleTermTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+}
+func (v *PaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleTermTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleTermTemplate_schedule:
+			return deserializePaymentScheduleEntryList(d, schemas.PaymentScheduleTermTemplate_schedule, &v.Schedule)
+		}
+		return nil
+	})
+}
+
+// A range of price increase percentages that the proposer can choose from before
+// the adjustment deadline of the agreement.
+//
+// MinValue will be less than MaxValue , and DefaultValue will fall within the
+// range. When the proposer authorizes a single percentage instead of a range,
+// PriceIncrease is a FixedPercentage rather than a PercentageRange .
+type PercentageRange struct {
+
+	// The percentage that is applied if the proposer doesn't choose a value before
+	// the adjustment deadline. Valid values range from 0.00 to 100.00 , with up to two
+	// decimal places.
+	DefaultValue *string
+
+	// The highest percentage that the proposer can choose, from 0.00 to 100.00 with
+	// up to two decimal places.
+	MaxValue *string
+
+	// The lowest percentage that the proposer can choose, from 0.00 to 100.00 with up
+	// to two decimal places.
+	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PercentageRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PercentageRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.PercentageRange_defaultValue, *v.DefaultValue)
+	}
+	if v.MaxValue != nil {
+		s.WriteString(schemas.PercentageRange_maxValue, *v.MaxValue)
+	}
+	if v.MinValue != nil {
+		s.WriteString(schemas.PercentageRange_minValue, *v.MinValue)
+	}
+}
+func (v *PercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PercentageRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PercentageRange_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.PercentageRange_defaultValue, v.DefaultValue)
+		case schemas.PercentageRange_maxValue:
+			v.MaxValue = new(string)
+			return d.ReadString(schemas.PercentageRange_maxValue, v.MaxValue)
+		case schemas.PercentageRange_minValue:
+			v.MinValue = new(string)
+			return d.ReadString(schemas.PercentageRange_minValue, v.MinValue)
+		}
+		return nil
+	})
+}
+
+// The price increase that is applied each time the agreement renews. Exactly one
+// of the following fields is set.
+//
+// The following types satisfy this interface:
+//
+//	PriceIncreaseMemberFixedPercentage
+//	PriceIncreaseMemberPercentageRange
+type PriceIncrease interface {
+	isPriceIncrease()
+}
+
+// A fixed price increase percentage that is applied at each renewal.
+type PriceIncreaseMemberFixedPercentage struct {
+	Value FixedPercentage
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberFixedPercentage) isPriceIncrease() {}
+func (v *PriceIncreaseMemberFixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_fixedPercentage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberFixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A range of price increase percentages that the proposer can choose from before
+// the adjustment deadline of the agreement.
+type PriceIncreaseMemberPercentageRange struct {
+	Value PercentageRange
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberPercentageRange) isPriceIncrease() {}
+func (v *PriceIncreaseMemberPercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_percentageRange)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberPercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Monetary amounts associated with an invoice line item group.
@@ -2703,20 +3186,94 @@ func (v *RecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The details of the renewal that applies at the end date of an agreement.
+type RenewalSummary struct {
+
+	// The unique identifier of the offer that provides the terms for the next renewal
+	// cycle. For most renewals, this is the same offer that the agreement was created
+	// from.
+	OfferId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RenewalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.RenewalSummary_offerId, *v.OfferId)
+	}
+}
+func (v *RenewalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalSummary_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.RenewalSummary_offerId, v.OfferId)
+		}
+		return nil
+	})
+}
+
 // Defines that on graceful expiration of the agreement (when the agreement ends
 // on its pre-defined end date), a new agreement will be created using the accepted
 // terms on the existing agreement. In other words, the agreement will be renewed.
-// The presence of RenewalTerm in the offer document means that auto-renewal is
-// allowed. Buyers will have the option to accept or decline auto-renewal at the
-// offer acceptance/agreement creation. Buyers can also change this flag from True
-// to False or False to True at anytime during the agreement's lifecycle.
+// Presence of RenewalTerm in the offer document means that auto-renewal is
+// allowed. The acceptor will have the option to accept or decline auto-renewal at
+// the offer acceptance/agreement creation. The acceptor can also change this flag
+// from True to False or False to True , within the limits set by LockoutPeriod
+// and MaxRenewals . Setting the flag to True doesn't by itself guarantee that the
+// agreement renews, because the proposer can also opt out.
 type RenewalTerm struct {
+
+	// The date by which the proposer must finalize the price increase for the next
+	// renewal, measured back from the end date of the agreement. The duration is
+	// represented in the ISO 8601 format in whole days (for example, P30D for 30 days
+	// or P60D for 60 days).
+	//
+	// This field applies only when PriceIncrease is a PercentageRange . The field is
+	// null when PriceIncrease is a FixedPercentage , because the price increase is
+	// already fixed and there is nothing for the proposer to finalize. If the proposer
+	// doesn't finalize a value by the adjustment deadline, the DefaultValue of the
+	// range applies.
+	//
+	// AdjustmentDeadline must be greater than LockoutPeriod .
+	AdjustmentDeadline *string
 
 	// Additional parameters specified by the acceptor while accepting the term.
 	Configuration *RenewalTermConfiguration
 
 	// The unique identifier for the term.
 	Id *string
+
+	// The renewal decision deadline, measured back from the end date of the
+	// agreement. This is the last day either party can opt in to or opt out of the
+	// renewal. The duration is represented in the ISO 8601 format in whole days (for
+	// example, P30D for 30 days or P60D for 60 days).
+	//
+	// The field is null when no renewal decision deadline is set. In that case,
+	// either party can change the auto-renewal decision up to the end date of the
+	// agreement.
+	LockoutPeriod *string
+
+	// The maximum number of times the agreement can be renewed. The field is null
+	// when the number of renewals is unlimited.
+	//
+	// After the agreement reaches this limit, it expires on its end date instead of
+	// renewing.
+	MaxRenewals *int32
+
+	// The price increase that is applied each time the agreement renews. The field is
+	// null when the price doesn't change at renewal.
+	PriceIncrease PriceIncrease
+
+	// Defines how specific terms change each time the agreement renews. The field is
+	// null when no terms change at renewal.
+	TermTemplates []TermTemplate
 
 	// Category of the term being updated.
 	Type *string
@@ -2731,6 +3288,9 @@ func (v *RenewalTerm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentDeadline != nil {
+		s.WriteString(schemas.RenewalTerm_adjustmentDeadline, *v.AdjustmentDeadline)
+	}
 	if v.Configuration != nil {
 		s.WriteStruct(schemas.RenewalTerm_configuration)
 		v.Configuration.SerializeMembers(s)
@@ -2739,6 +3299,14 @@ func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.RenewalTerm_id, *v.Id)
 	}
+	if v.LockoutPeriod != nil {
+		s.WriteString(schemas.RenewalTerm_lockoutPeriod, *v.LockoutPeriod)
+	}
+	if v.MaxRenewals != nil {
+		s.WriteInt32(schemas.RenewalTerm_maxRenewals, *v.MaxRenewals)
+	}
+	serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
+	serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
 	if v.Type != nil {
 		s.WriteString(schemas.RenewalTerm_type, *v.Type)
 	}
@@ -2746,12 +3314,25 @@ func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *RenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RenewalTerm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RenewalTerm_adjustmentDeadline:
+			v.AdjustmentDeadline = new(string)
+			return d.ReadString(schemas.RenewalTerm_adjustmentDeadline, v.AdjustmentDeadline)
 		case schemas.RenewalTerm_configuration:
 			v.Configuration = &RenewalTermConfiguration{}
 			return v.Configuration.Deserialize(d)
 		case schemas.RenewalTerm_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.RenewalTerm_id, v.Id)
+		case schemas.RenewalTerm_lockoutPeriod:
+			v.LockoutPeriod = new(string)
+			return d.ReadString(schemas.RenewalTerm_lockoutPeriod, v.LockoutPeriod)
+		case schemas.RenewalTerm_maxRenewals:
+			v.MaxRenewals = new(int32)
+			return d.ReadInt32(schemas.RenewalTerm_maxRenewals, v.MaxRenewals)
+		case schemas.RenewalTerm_priceIncrease:
+			return deserializePriceIncrease(d, schemas.RenewalTerm_priceIncrease, &v.PriceIncrease)
+		case schemas.RenewalTerm_termTemplates:
+			return deserializeTermTemplateList(d, schemas.RenewalTerm_termTemplates, &v.TermTemplates)
 		case schemas.RenewalTerm_type:
 			v.Type = new(string)
 			return d.ReadString(schemas.RenewalTerm_type, v.Type)
@@ -2763,8 +3344,9 @@ func (v *RenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
 // Additional parameters specified by the acceptor while accepting the term.
 type RenewalTermConfiguration struct {
 
-	// Defines whether the acceptor has chosen to auto-renew the agreement at the end
-	// of its lifecycle. Can be set to True or False .
+	// Defines whether the acceptor has chosen to auto-renew the agreement when it
+	// reaches its end date. Can be set to True or False . The acceptor can change this
+	// value within the limits set by LockoutPeriod and MaxRenewals .
 	//
 	// This member is required.
 	EnableAutoRenew *bool
@@ -3033,12 +3615,13 @@ func (v *Selector) Deserialize(d smithy.ShapeDeserializer) error {
 // An object that contains the SortBy and SortOrder attributes.
 type Sort struct {
 
-	// The attribute on which the data is grouped, which can be by StartTime and
-	// EndTime . The default value is EndTime .
+	// The attribute on which the data is grouped, which can be EndTime , StartTime ,
+	// or LastUpdateTime . StartTime and LastUpdateTime are supported only when
+	// PartyType is Proposer . The default value is EndTime .
 	SortBy *string
 
 	// The sorting order, which can be ASCENDING or DESCENDING . The default value is
-	// DESCENDING .
+	// ASCENDING .
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
@@ -3210,6 +3793,33 @@ func (v *TaxConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// Defines how a specific type of term changes each time the agreement renews.
+// Exactly one of the following fields is set.
+//
+// The following types satisfy this interface:
+//
+//	TermTemplateMemberPaymentScheduleTermTemplate
+type TermTemplate interface {
+	isTermTemplate()
+}
+
+// Defines the payment schedule that is applied to the renewed agreement.
+type TermTemplateMemberPaymentScheduleTermTemplate struct {
+	Value PaymentScheduleTermTemplate
+
+	noSmithyDocumentSerde
+}
+
+func (*TermTemplateMemberPaymentScheduleTermTemplate) isTermTemplate() {}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermTemplate_paymentScheduleTermTemplate)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Defines a usage-based pricing model (typically, pay-as-you-go pricing), where
@@ -3550,4 +4160,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAcceptedTerm()               {}
+func (*UnknownUnionMember) isPriceIncrease()              {}
 func (*UnknownUnionMember) isRequestedTermConfiguration() {}
+func (*UnknownUnionMember) isTermTemplate()               {}

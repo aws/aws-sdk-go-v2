@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -31,6 +33,59 @@ type DiscovererSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscovererSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscovererSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscovererSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.DiscovererSummary_CrossAccount, *v.CrossAccount)
+	}
+	if v.DiscovererArn != nil {
+		s.WriteString(schemas.DiscovererSummary_DiscovererArn, *v.DiscovererArn)
+	}
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.DiscovererSummary_DiscovererId, *v.DiscovererId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DiscovererSummary_SourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DiscovererSummary_State, string(v.State))
+	}
+	serializeTags(s, schemas.DiscovererSummary_Tags, v.Tags)
+}
+func (v *DiscovererSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscovererSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscovererSummary_CrossAccount:
+			v.CrossAccount = new(bool)
+			return d.ReadBool(schemas.DiscovererSummary_CrossAccount, v.CrossAccount)
+		case schemas.DiscovererSummary_DiscovererArn:
+			v.DiscovererArn = new(string)
+			return d.ReadString(schemas.DiscovererSummary_DiscovererArn, v.DiscovererArn)
+		case schemas.DiscovererSummary_DiscovererId:
+			v.DiscovererId = new(string)
+			return d.ReadString(schemas.DiscovererSummary_DiscovererId, v.DiscovererId)
+		case schemas.DiscovererSummary_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.DiscovererSummary_SourceArn, v.SourceArn)
+		case schemas.DiscovererSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.DiscovererSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = DiscovererState(ev)
+			return nil
+		case schemas.DiscovererSummary_Tags:
+			return deserializeTags(d, schemas.DiscovererSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type RegistrySummary struct {
 
 	// The ARN of the registry.
@@ -43,6 +98,37 @@ type RegistrySummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegistrySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistrySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistrySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.RegistrySummary_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.RegistrySummary_RegistryName, *v.RegistryName)
+	}
+	serializeTags(s, schemas.RegistrySummary_Tags, v.Tags)
+}
+func (v *RegistrySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistrySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistrySummary_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.RegistrySummary_RegistryArn, v.RegistryArn)
+		case schemas.RegistrySummary_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.RegistrySummary_RegistryName, v.RegistryName)
+		case schemas.RegistrySummary_Tags:
+			return deserializeTags(d, schemas.RegistrySummary_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // A summary of schema details.
@@ -66,6 +152,49 @@ type SchemaSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModified != nil {
+		s.WriteTime(schemas.SchemaSummary_LastModified, *v.LastModified)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.SchemaSummary_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.SchemaSummary_SchemaName, *v.SchemaName)
+	}
+	serializeTags(s, schemas.SchemaSummary_Tags, v.Tags)
+	if v.VersionCount != nil {
+		s.WriteInt64(schemas.SchemaSummary_VersionCount, *v.VersionCount)
+	}
+}
+func (v *SchemaSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaSummary_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.SchemaSummary_LastModified, v.LastModified)
+		case schemas.SchemaSummary_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.SchemaSummary_SchemaArn, v.SchemaArn)
+		case schemas.SchemaSummary_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.SchemaSummary_SchemaName, v.SchemaName)
+		case schemas.SchemaSummary_Tags:
+			return deserializeTags(d, schemas.SchemaSummary_Tags, &v.Tags)
+		case schemas.SchemaSummary_VersionCount:
+			v.VersionCount = new(int64)
+			return d.ReadInt64(schemas.SchemaSummary_VersionCount, v.VersionCount)
+		}
+		return nil
+	})
+}
+
 type SchemaVersionSummary struct {
 
 	// The ARN of the schema version.
@@ -81,6 +210,50 @@ type SchemaVersionSummary struct {
 	Type Type
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.SchemaVersionSummary_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.SchemaVersionSummary_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.SchemaVersionSummary_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SchemaVersionSummary_Type, string(v.Type))
+	}
+}
+func (v *SchemaVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaVersionSummary_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.SchemaVersionSummary_SchemaArn, v.SchemaArn)
+		case schemas.SchemaVersionSummary_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.SchemaVersionSummary_SchemaName, v.SchemaName)
+		case schemas.SchemaVersionSummary_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.SchemaVersionSummary_SchemaVersion, v.SchemaVersion)
+		case schemas.SchemaVersionSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SchemaVersionSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type SearchSchemaSummary struct {
@@ -100,6 +273,43 @@ type SearchSchemaSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSchemaSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemaSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryName != nil {
+		s.WriteString(schemas.SearchSchemaSummary_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.SearchSchemaSummary_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.SearchSchemaSummary_SchemaName, *v.SchemaName)
+	}
+	serialize__listOfSearchSchemaVersionSummary(s, schemas.SearchSchemaSummary_SchemaVersions, v.SchemaVersions)
+}
+func (v *SearchSchemaSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSchemaSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSchemaSummary_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.SearchSchemaSummary_RegistryName, v.RegistryName)
+		case schemas.SearchSchemaSummary_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.SearchSchemaSummary_SchemaArn, v.SchemaArn)
+		case schemas.SearchSchemaSummary_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.SearchSchemaSummary_SchemaName, v.SchemaName)
+		case schemas.SearchSchemaSummary_SchemaVersions:
+			return deserialize__listOfSearchSchemaVersionSummary(d, schemas.SearchSchemaSummary_SchemaVersions, &v.SchemaVersions)
+		}
+		return nil
+	})
+}
+
 type SearchSchemaVersionSummary struct {
 
 	// The date the schema version was created.
@@ -112,6 +322,44 @@ type SearchSchemaVersionSummary struct {
 	Type Type
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchSchemaVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemaVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemaVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.SearchSchemaVersionSummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.SearchSchemaVersionSummary_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SearchSchemaVersionSummary_Type, string(v.Type))
+	}
+}
+func (v *SearchSchemaVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSchemaVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSchemaVersionSummary_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.SearchSchemaVersionSummary_CreatedDate, v.CreatedDate)
+		case schemas.SearchSchemaVersionSummary_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.SearchSchemaVersionSummary_SchemaVersion, v.SchemaVersion)
+		case schemas.SearchSchemaVersionSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SearchSchemaVersionSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

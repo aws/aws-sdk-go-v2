@@ -4,12 +4,7 @@ package cloudfrontkeyvaluestore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new key value pair or replaces the value of an existing key.
@@ -55,26 +50,6 @@ type PutKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IfMatch != nil {
-		s.WriteString(schemas.PutKeyRequest_IfMatch, *v.IfMatch)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.PutKeyRequest_Key, *v.Key)
-	}
-	if v.KvsARN != nil {
-		s.WriteString(schemas.PutKeyRequest_KvsARN, *v.KvsARN)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.PutKeyRequest_Value, *v.Value)
-	}
-}
 func (in *PutKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -105,91 +80,29 @@ type PutKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutKeyResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.PutKeyResponse_ETag, v.ETag)
-		case schemas.PutKeyResponse_ItemCount:
-			v.ItemCount = new(int32)
-			return d.ReadInt32(schemas.PutKeyResponse_ItemCount, v.ItemCount)
-		case schemas.PutKeyResponse_TotalSizeInBytes:
-			v.TotalSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.PutKeyResponse_TotalSizeInBytes, v.TotalSizeInBytes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKey, schemas.PutKeyRequest, schemas.PutKeyResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutKey{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKey, schemas.PutKeyRequest, schemas.PutKeyResponse), output: &PutKeyOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +117,8 @@ func (c *Client) addOperationPutKeyMiddlewares(stack *middleware.Stack, options 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutKey",
-	}
 }

@@ -1,0 +1,5 @@
+POST /list-token-balances
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","ownerFilter":{"address":"__Address__"},"tokenFilter":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET","tokenId":"__TokenId__"}}

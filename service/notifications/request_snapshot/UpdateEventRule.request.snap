@@ -1,0 +1,5 @@
+PUT /event-rules/__Arn__
+
+Content-Type: application/json
+
+{"eventPattern":"__EventPattern__","regions":["__Member__","__Member__"]}

@@ -207,6 +207,7 @@ const (
 	PurchaseOptionBadgeTypePrivatePricing   PurchaseOptionBadgeType = "PRIVATE_PRICING"
 	PurchaseOptionBadgeTypeFutureDated      PurchaseOptionBadgeType = "FUTURE_DATED"
 	PurchaseOptionBadgeTypeReplacementOffer PurchaseOptionBadgeType = "REPLACEMENT_OFFER"
+	PurchaseOptionBadgeTypeAutoRenew        PurchaseOptionBadgeType = "AUTO_RENEW"
 )
 
 // Values returns all known values for PurchaseOptionBadgeType. Note that this can
@@ -218,6 +219,7 @@ func (PurchaseOptionBadgeType) Values() []PurchaseOptionBadgeType {
 		"PRIVATE_PRICING",
 		"FUTURE_DATED",
 		"REPLACEMENT_OFFER",
+		"AUTO_RENEW",
 	}
 }
 
@@ -340,6 +342,25 @@ const (
 func (ReviewSourceId) Values() []ReviewSourceId {
 	return []ReviewSourceId{
 		"AWS_MARKETPLACE",
+	}
+}
+
+type SaasQuickLaunchStatus string
+
+// Enum values for SaasQuickLaunchStatus
+const (
+	SaasQuickLaunchStatusEnabled  SaasQuickLaunchStatus = "ENABLED"
+	SaasQuickLaunchStatusDisabled SaasQuickLaunchStatus = "DISABLED"
+)
+
+// Values returns all known values for SaasQuickLaunchStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SaasQuickLaunchStatus) Values() []SaasQuickLaunchStatus {
+	return []SaasQuickLaunchStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -514,6 +535,7 @@ const (
 	TermTypeSupportTerm                    TermType = "SupportTerm"
 	TermTypeValidityTerm                   TermType = "ValidityTerm"
 	TermTypeVariablePaymentTerm            TermType = "VariablePaymentTerm"
+	TermTypeNetPaymentTerm                 TermType = "NetPaymentTerm"
 )
 
 // Values returns all known values for TermType. Note that this can be expanded in
@@ -534,6 +556,7 @@ func (TermType) Values() []TermType {
 		"SupportTerm",
 		"ValidityTerm",
 		"VariablePaymentTerm",
+		"NetPaymentTerm",
 	}
 }
 

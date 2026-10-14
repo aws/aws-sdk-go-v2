@@ -9,6 +9,50 @@ import (
 	"time"
 )
 
+// A segment of an autonomous system (AS) path.
+type AsPathSegment struct {
+
+	// The autonomous system (AS) numbers in the segment.
+	Path []int64
+
+	// The type of the AS path segment.
+	//
+	// The valid values are seq (an ordered AS_SEQUENCE ) and set (an unordered AS_SET
+	// ).
+	PathType AsPathType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AsPathSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AsPathSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AsPathSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAsPathList(s, schemas.AsPathSegment_path, v.Path)
+	if v.PathType != "" {
+		s.WriteString(schemas.AsPathSegment_pathType, string(v.PathType))
+	}
+}
+func (v *AsPathSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AsPathSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AsPathSegment_path:
+			return deserializeAsPathList(d, schemas.AsPathSegment_path, &v.Path)
+		case schemas.AsPathSegment_pathType:
+			var ev string
+			if err := d.ReadString(schemas.AsPathSegment_pathType, &ev); err != nil {
+				return err
+			}
+			v.PathType = AsPathType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon Web Services Cloud WAN core network that the Direct Connect gateway
 // is associated to. This is only returned when a Direct Connect gateway is
 // associated to a Cloud WAN core network.
@@ -124,6 +168,53 @@ func (v *AssociatedGateway) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about a billing mode available at an Direct Connect location.
+type AvailableBillingMode struct {
+
+	// The port speeds available for the billing mode.
+	AvailablePortSpeeds []string
+
+	// The billing mode.
+	BillingMode BillingMode
+
+	// The Amazon Web Services Regions included with the billing mode.
+	IncludedRegions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AvailableBillingMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailableBillingMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailableBillingMode) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailablePortSpeeds(s, schemas.AvailableBillingMode_availablePortSpeeds, v.AvailablePortSpeeds)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.AvailableBillingMode_billingMode, string(v.BillingMode))
+	}
+	serializeIncludedRegionList(s, schemas.AvailableBillingMode_includedRegions, v.IncludedRegions)
+}
+func (v *AvailableBillingMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailableBillingMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailableBillingMode_availablePortSpeeds:
+			return deserializeAvailablePortSpeeds(d, schemas.AvailableBillingMode_availablePortSpeeds, &v.AvailablePortSpeeds)
+		case schemas.AvailableBillingMode_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.AvailableBillingMode_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
+		case schemas.AvailableBillingMode_includedRegions:
+			return deserializeIncludedRegionList(d, schemas.AvailableBillingMode_includedRegions, &v.IncludedRegions)
+		}
+		return nil
+	})
+}
+
 // Information about a BGP peer.
 type BGPPeer struct {
 
@@ -137,22 +228,34 @@ type BGPPeer struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP
 	// configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -314,6 +417,9 @@ type Connection struct {
 	// The bandwidth of the connection.
 	Bandwidth *string
 
+	// The billing mode of the connection.
+	BillingMode BillingMode
+
 	// The ID of the connection.
 	ConnectionId *string
 
@@ -389,8 +495,32 @@ type Connection struct {
 	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
+
+	// The rate limiter status for the connection, including how many rate limiters
+	// are in use and the maximum allowed.
+	RateLimiterStatus *RateLimiterStatus
 
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
@@ -422,6 +552,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Bandwidth != nil {
 		s.WriteString(schemas.Connection_bandwidth, *v.Bandwidth)
+	}
+	if v.BillingMode != "" {
+		s.WriteString(schemas.Connection_billingMode, string(v.BillingMode))
 	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.Connection_connectionId, *v.ConnectionId)
@@ -466,8 +599,25 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortEncryptionStatus != nil {
 		s.WriteString(schemas.Connection_portEncryptionStatus, *v.PortEncryptionStatus)
 	}
+	if v.PrefixPoolSizeIpv4 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolSizeIpv4, *v.PrefixPoolSizeIpv4)
+	}
+	if v.PrefixPoolSizeIpv6 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolSizeIpv6, *v.PrefixPoolSizeIpv6)
+	}
+	if v.PrefixPoolUnallocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolUnallocatedCountIpv4, *v.PrefixPoolUnallocatedCountIpv4)
+	}
+	if v.PrefixPoolUnallocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolUnallocatedCountIpv6, *v.PrefixPoolUnallocatedCountIpv6)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.Connection_providerName, *v.ProviderName)
+	}
+	if v.RateLimiterStatus != nil {
+		s.WriteStruct(schemas.Connection_rateLimiterStatus)
+		v.RateLimiterStatus.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Region != nil {
 		s.WriteString(schemas.Connection_region, *v.Region)
@@ -492,6 +642,13 @@ func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Connection_bandwidth:
 			v.Bandwidth = new(string)
 			return d.ReadString(schemas.Connection_bandwidth, v.Bandwidth)
+		case schemas.Connection_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.Connection_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
 		case schemas.Connection_connectionId:
 			v.ConnectionId = new(string)
 			return d.ReadString(schemas.Connection_connectionId, v.ConnectionId)
@@ -544,9 +701,24 @@ func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Connection_portEncryptionStatus:
 			v.PortEncryptionStatus = new(string)
 			return d.ReadString(schemas.Connection_portEncryptionStatus, v.PortEncryptionStatus)
+		case schemas.Connection_prefixPoolSizeIpv4:
+			v.PrefixPoolSizeIpv4 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolSizeIpv4, v.PrefixPoolSizeIpv4)
+		case schemas.Connection_prefixPoolSizeIpv6:
+			v.PrefixPoolSizeIpv6 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolSizeIpv6, v.PrefixPoolSizeIpv6)
+		case schemas.Connection_prefixPoolUnallocatedCountIpv4:
+			v.PrefixPoolUnallocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolUnallocatedCountIpv4, v.PrefixPoolUnallocatedCountIpv4)
+		case schemas.Connection_prefixPoolUnallocatedCountIpv6:
+			v.PrefixPoolUnallocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolUnallocatedCountIpv6, v.PrefixPoolUnallocatedCountIpv6)
 		case schemas.Connection_providerName:
 			v.ProviderName = new(string)
 			return d.ReadString(schemas.Connection_providerName, v.ProviderName)
+		case schemas.Connection_rateLimiterStatus:
+			v.RateLimiterStatus = &RateLimiterStatus{}
+			return v.RateLimiterStatus.Deserialize(d)
 		case schemas.Connection_region:
 			v.Region = new(string)
 			return d.ReadString(schemas.Connection_region, v.Region)
@@ -632,6 +804,10 @@ type DirectConnectGateway struct {
 	// Information about a tag.
 	Tags []Tag
 
+	// The total number of inbound route prefixes allocated to the attachments on the
+	// Direct Connect gateway. The count combines the IPv4 and IPv6 address families.
+	TotalPrefixPoolAllocations *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -661,6 +837,9 @@ func (v *DirectConnectGateway) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DirectConnectGateway_stateChangeError, *v.StateChangeError)
 	}
 	serializeTagList(s, schemas.DirectConnectGateway_tags, v.Tags)
+	if v.TotalPrefixPoolAllocations != nil {
+		s.WriteInt32(schemas.DirectConnectGateway_totalPrefixPoolAllocations, *v.TotalPrefixPoolAllocations)
+	}
 }
 func (v *DirectConnectGateway) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DirectConnectGateway, func(s *smithy.Schema) error {
@@ -689,6 +868,9 @@ func (v *DirectConnectGateway) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.DirectConnectGateway_stateChangeError, v.StateChangeError)
 		case schemas.DirectConnectGateway_tags:
 			return deserializeTagList(d, schemas.DirectConnectGateway_tags, &v.Tags)
+		case schemas.DirectConnectGateway_totalPrefixPoolAllocations:
+			v.TotalPrefixPoolAllocations = new(int32)
+			return d.ReadInt32(schemas.DirectConnectGateway_totalPrefixPoolAllocations, v.TotalPrefixPoolAllocations)
 		}
 		return nil
 	})
@@ -1279,6 +1461,9 @@ type Lag struct {
 	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
+	// The billing mode of the LAG.
+	BillingMode BillingMode
+
 	// The connections bundled by the LAG.
 	Connections []Connection
 
@@ -1343,8 +1528,32 @@ type Lag struct {
 	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
+
+	// The rate limiter status for the LAG, including how many rate limiters are in
+	// use and the maximum allowed.
+	RateLimiterStatus *RateLimiterStatus
 
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
@@ -1373,6 +1582,9 @@ func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AwsLogicalDeviceId != nil {
 		s.WriteString(schemas.Lag_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.BillingMode != "" {
+		s.WriteString(schemas.Lag_billingMode, string(v.BillingMode))
 	}
 	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
 	if v.ConnectionsBandwidth != nil {
@@ -1412,8 +1624,25 @@ func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.Lag_ownerAccount, *v.OwnerAccount)
 	}
+	if v.PrefixPoolSizeIpv4 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolSizeIpv4, *v.PrefixPoolSizeIpv4)
+	}
+	if v.PrefixPoolSizeIpv6 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolSizeIpv6, *v.PrefixPoolSizeIpv6)
+	}
+	if v.PrefixPoolUnallocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolUnallocatedCountIpv4, *v.PrefixPoolUnallocatedCountIpv4)
+	}
+	if v.PrefixPoolUnallocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolUnallocatedCountIpv6, *v.PrefixPoolUnallocatedCountIpv6)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.Lag_providerName, *v.ProviderName)
+	}
+	if v.RateLimiterStatus != nil {
+		s.WriteStruct(schemas.Lag_rateLimiterStatus)
+		v.RateLimiterStatus.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Region != nil {
 		s.WriteString(schemas.Lag_region, *v.Region)
@@ -1434,6 +1663,13 @@ func (v *Lag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lag_awsLogicalDeviceId:
 			v.AwsLogicalDeviceId = new(string)
 			return d.ReadString(schemas.Lag_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Lag_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.Lag_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
 		case schemas.Lag_connections:
 			return deserializeConnectionList(d, schemas.Lag_connections, &v.Connections)
 		case schemas.Lag_connectionsBandwidth:
@@ -1480,9 +1716,24 @@ func (v *Lag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lag_ownerAccount:
 			v.OwnerAccount = new(string)
 			return d.ReadString(schemas.Lag_ownerAccount, v.OwnerAccount)
+		case schemas.Lag_prefixPoolSizeIpv4:
+			v.PrefixPoolSizeIpv4 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolSizeIpv4, v.PrefixPoolSizeIpv4)
+		case schemas.Lag_prefixPoolSizeIpv6:
+			v.PrefixPoolSizeIpv6 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolSizeIpv6, v.PrefixPoolSizeIpv6)
+		case schemas.Lag_prefixPoolUnallocatedCountIpv4:
+			v.PrefixPoolUnallocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolUnallocatedCountIpv4, v.PrefixPoolUnallocatedCountIpv4)
+		case schemas.Lag_prefixPoolUnallocatedCountIpv6:
+			v.PrefixPoolUnallocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolUnallocatedCountIpv6, v.PrefixPoolUnallocatedCountIpv6)
 		case schemas.Lag_providerName:
 			v.ProviderName = new(string)
 			return d.ReadString(schemas.Lag_providerName, v.ProviderName)
+		case schemas.Lag_rateLimiterStatus:
+			v.RateLimiterStatus = &RateLimiterStatus{}
+			return v.RateLimiterStatus.Deserialize(d)
 		case schemas.Lag_region:
 			v.Region = new(string)
 			return d.ReadString(schemas.Lag_region, v.Region)
@@ -1541,6 +1792,10 @@ func (v *Loa) Deserialize(d smithy.ShapeDeserializer) error {
 // Information about an Direct Connect location.
 type Location struct {
 
+	// The billing modes available at the location, including the port speeds and
+	// Amazon Web Services Regions supported by each mode.
+	AvailableBillingModes []AvailableBillingMode
+
 	// The available MAC Security (MACsec) port speeds for the location.
 	AvailableMacSecPortSpeeds []string
 
@@ -1570,6 +1825,7 @@ func (v *Location) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailableBillingModeList(s, schemas.Location_availableBillingModes, v.AvailableBillingModes)
 	serializeAvailableMacSecPortSpeeds(s, schemas.Location_availableMacSecPortSpeeds, v.AvailableMacSecPortSpeeds)
 	serializeAvailablePortSpeeds(s, schemas.Location_availablePortSpeeds, v.AvailablePortSpeeds)
 	serializeProviderList(s, schemas.Location_availableProviders, v.AvailableProviders)
@@ -1586,6 +1842,8 @@ func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Location_availableBillingModes:
+			return deserializeAvailableBillingModeList(d, schemas.Location_availableBillingModes, &v.AvailableBillingModes)
 		case schemas.Location_availableMacSecPortSpeeds:
 			return deserializeAvailableMacSecPortSpeeds(d, schemas.Location_availableMacSecPortSpeeds, &v.AvailableMacSecPortSpeeds)
 		case schemas.Location_availablePortSpeeds:
@@ -1786,13 +2044,16 @@ type NewPrivateVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -1800,10 +2061,19 @@ type NewPrivateVirtualInterface struct {
 	// The long ASN for a new private virtual interface. The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -1825,6 +2095,17 @@ type NewPrivateVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv6 *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the private virtual interface.
 	Tags []Tag
@@ -1869,6 +2150,15 @@ func (v *NewPrivateVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Mtu != nil {
 		s.WriteInt32(schemas.NewPrivateVirtualInterface_mtu, *v.Mtu)
 	}
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4, *v.PrefixPoolAllocatedCountIpv4)
+	}
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6, *v.PrefixPoolAllocatedCountIpv6)
+	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_rateLimit, *v.RateLimit)
+	}
 	serializeTagList(s, schemas.NewPrivateVirtualInterface_tags, v.Tags)
 	if v.VirtualGatewayId != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
@@ -1911,6 +2201,15 @@ func (v *NewPrivateVirtualInterface) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.NewPrivateVirtualInterface_mtu:
 			v.Mtu = new(int32)
 			return d.ReadInt32(schemas.NewPrivateVirtualInterface_mtu, v.Mtu)
+		case schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4:
+			v.PrefixPoolAllocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4, v.PrefixPoolAllocatedCountIpv4)
+		case schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6:
+			v.PrefixPoolAllocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6, v.PrefixPoolAllocatedCountIpv6)
+		case schemas.NewPrivateVirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_rateLimit, v.RateLimit)
 		case schemas.NewPrivateVirtualInterface_tags:
 			return deserializeTagList(d, schemas.NewPrivateVirtualInterface_tags, &v.Tags)
 		case schemas.NewPrivateVirtualInterface_virtualGatewayId:
@@ -1951,13 +2250,16 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -1965,10 +2267,19 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new private virtual interface. The valid range is
 	// from 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -1984,6 +2295,11 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the private virtual interface.
 	Tags []Tag
@@ -2019,6 +2335,9 @@ func (v *NewPrivateVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSe
 	if v.Mtu != nil {
 		s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_mtu, *v.Mtu)
 	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
+	}
 	serializeTagList(s, schemas.NewPrivateVirtualInterfaceAllocation_tags, v.Tags)
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
@@ -2052,6 +2371,9 @@ func (v *NewPrivateVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeseria
 		case schemas.NewPrivateVirtualInterfaceAllocation_mtu:
 			v.Mtu = new(int32)
 			return d.ReadInt32(schemas.NewPrivateVirtualInterfaceAllocation_mtu, v.Mtu)
+		case schemas.NewPrivateVirtualInterfaceAllocation_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_rateLimit, v.RateLimit)
 		case schemas.NewPrivateVirtualInterfaceAllocation_tags:
 			return deserializeTagList(d, schemas.NewPrivateVirtualInterfaceAllocation_tags, &v.Tags)
 		case schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName:
@@ -2089,22 +2411,34 @@ type NewPublicVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for a new public virtual interface. The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -2116,6 +2450,11 @@ type NewPublicVirtualInterface struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
@@ -2152,6 +2491,9 @@ func (v *NewPublicVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerAddress != nil {
 		s.WriteString(schemas.NewPublicVirtualInterface_customerAddress, *v.CustomerAddress)
 	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewPublicVirtualInterface_rateLimit, *v.RateLimit)
+	}
 	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
 	serializeTagList(s, schemas.NewPublicVirtualInterface_tags, v.Tags)
 	if v.VirtualInterfaceName != nil {
@@ -2183,6 +2525,9 @@ func (v *NewPublicVirtualInterface) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.NewPublicVirtualInterface_customerAddress:
 			v.CustomerAddress = new(string)
 			return d.ReadString(schemas.NewPublicVirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.NewPublicVirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterface_rateLimit, v.RateLimit)
 		case schemas.NewPublicVirtualInterface_routeFilterPrefixes:
 			return deserializeRouteFilterPrefixList(d, schemas.NewPublicVirtualInterface_routeFilterPrefixes, &v.RouteFilterPrefixes)
 		case schemas.NewPublicVirtualInterface_tags:
@@ -2222,13 +2567,16 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -2236,10 +2584,19 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new public virtual interface. The valid range is from
 	// 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -2251,6 +2608,11 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
@@ -2287,6 +2649,9 @@ func (v *NewPublicVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSer
 	if v.CustomerAddress != nil {
 		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_customerAddress, *v.CustomerAddress)
 	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
+	}
 	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, v.RouteFilterPrefixes)
 	serializeTagList(s, schemas.NewPublicVirtualInterfaceAllocation_tags, v.Tags)
 	if v.VirtualInterfaceName != nil {
@@ -2318,6 +2683,9 @@ func (v *NewPublicVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserial
 		case schemas.NewPublicVirtualInterfaceAllocation_customerAddress:
 			v.CustomerAddress = new(string)
 			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_customerAddress, v.CustomerAddress)
+		case schemas.NewPublicVirtualInterfaceAllocation_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_rateLimit, v.RateLimit)
 		case schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes:
 			return deserializeRouteFilterPrefixList(d, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, &v.RouteFilterPrefixes)
 		case schemas.NewPublicVirtualInterfaceAllocation_tags:
@@ -2345,22 +2713,34 @@ type NewTransitVirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for a new transit virtual interface.The valid range is from 1 to
 	// 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -2382,6 +2762,17 @@ type NewTransitVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv6 *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag
@@ -2431,6 +2822,15 @@ func (v *NewTransitVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Mtu != nil {
 		s.WriteInt32(schemas.NewTransitVirtualInterface_mtu, *v.Mtu)
 	}
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4, *v.PrefixPoolAllocatedCountIpv4)
+	}
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6, *v.PrefixPoolAllocatedCountIpv6)
+	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_rateLimit, *v.RateLimit)
+	}
 	serializeTagList(s, schemas.NewTransitVirtualInterface_tags, v.Tags)
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewTransitVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
@@ -2472,6 +2872,15 @@ func (v *NewTransitVirtualInterface) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.NewTransitVirtualInterface_mtu:
 			v.Mtu = new(int32)
 			return d.ReadInt32(schemas.NewTransitVirtualInterface_mtu, v.Mtu)
+		case schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4:
+			v.PrefixPoolAllocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4, v.PrefixPoolAllocatedCountIpv4)
+		case schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6:
+			v.PrefixPoolAllocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6, v.PrefixPoolAllocatedCountIpv6)
+		case schemas.NewTransitVirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_rateLimit, v.RateLimit)
 		case schemas.NewTransitVirtualInterface_tags:
 			return deserializeTagList(d, schemas.NewTransitVirtualInterface_tags, &v.Tags)
 		case schemas.NewTransitVirtualInterface_virtualInterfaceName:
@@ -2497,13 +2906,16 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	// The valid values are 1-2147483646.
 	Asn int32
@@ -2511,10 +2923,19 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The ASN when allocating a new transit virtual interface. The valid range is
 	// from 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -2530,6 +2951,11 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500
 	Mtu *int32
+
+	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
+	// rate limit restricts the maximum bandwidth that the virtual interface can use on
+	// the parent connection.
+	RateLimit *string
 
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag
@@ -2573,6 +2999,9 @@ func (v *NewTransitVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSe
 	if v.Mtu != nil {
 		s.WriteInt32(schemas.NewTransitVirtualInterfaceAllocation_mtu, *v.Mtu)
 	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_rateLimit, *v.RateLimit)
+	}
 	serializeTagList(s, schemas.NewTransitVirtualInterfaceAllocation_tags, v.Tags)
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
@@ -2608,6 +3037,9 @@ func (v *NewTransitVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeseria
 		case schemas.NewTransitVirtualInterfaceAllocation_mtu:
 			v.Mtu = new(int32)
 			return d.ReadInt32(schemas.NewTransitVirtualInterfaceAllocation_mtu, v.Mtu)
+		case schemas.NewTransitVirtualInterfaceAllocation_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_rateLimit, v.RateLimit)
 		case schemas.NewTransitVirtualInterfaceAllocation_tags:
 			return deserializeTagList(d, schemas.NewTransitVirtualInterfaceAllocation_tags, &v.Tags)
 		case schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName:
@@ -2615,6 +3047,292 @@ func (v *NewTransitVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeseria
 			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName, v.VirtualInterfaceName)
 		case schemas.NewTransitVirtualInterfaceAllocation_vlan:
 			return d.ReadInt32(schemas.NewTransitVirtualInterfaceAllocation_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
+// Contains information about the rate limiter status for a connection, including
+// the maximum number of rate limiters allowed, the number currently in use, and
+// the remaining capacity.
+type RateLimiterStatus struct {
+
+	// The number of rate limiters currently in use on the connection.
+	InUse int32
+
+	// The maximum number of rate limiters allowed on the connection.
+	MaxAllowed int32
+
+	// The number of rate limiters remaining (available) on the connection.
+	Remaining int32
+
+	// The total bandwidth allocated across all rate limiters on the connection.
+	TotalBandwidth *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RateLimiterStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimiterStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimiterStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InUse != 0 {
+		s.WriteInt32(schemas.RateLimiterStatus_inUse, v.InUse)
+	}
+	if v.MaxAllowed != 0 {
+		s.WriteInt32(schemas.RateLimiterStatus_maxAllowed, v.MaxAllowed)
+	}
+	if v.Remaining != 0 {
+		s.WriteInt32(schemas.RateLimiterStatus_remaining, v.Remaining)
+	}
+	if v.TotalBandwidth != nil {
+		s.WriteString(schemas.RateLimiterStatus_totalBandwidth, *v.TotalBandwidth)
+	}
+}
+func (v *RateLimiterStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimiterStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimiterStatus_inUse:
+			return d.ReadInt32(schemas.RateLimiterStatus_inUse, &v.InUse)
+		case schemas.RateLimiterStatus_maxAllowed:
+			return d.ReadInt32(schemas.RateLimiterStatus_maxAllowed, &v.MaxAllowed)
+		case schemas.RateLimiterStatus_remaining:
+			return d.ReadInt32(schemas.RateLimiterStatus_remaining, &v.Remaining)
+		case schemas.RateLimiterStatus_totalBandwidth:
+			v.TotalBandwidth = new(string)
+			return d.ReadString(schemas.RateLimiterStatus_totalBandwidth, v.TotalBandwidth)
+		}
+		return nil
+	})
+}
+
+// Information about a resiliency group.
+type ResiliencyGroup struct {
+
+	// The ID of the Amazon Web Services account that owns the resiliency group.
+	OwnerAccount *string
+
+	// The Amazon Resource Name (ARN) of the resiliency group.
+	ResiliencyGroupArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The name of the resiliency group.
+	ResiliencyGroupName *string
+
+	// The type of the resiliency group. The valid value is Managed .
+	ResiliencyGroupType ResiliencyGroupType
+
+	// The state of the resiliency group. The valid values are pending , available ,
+	// deleting , and deleted .
+	State ResiliencyGroupState
+
+	// The tags associated with the resiliency group.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResiliencyGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResiliencyGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResiliencyGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.ResiliencyGroup_ownerAccount, *v.OwnerAccount)
+	}
+	if v.ResiliencyGroupArn != nil {
+		s.WriteString(schemas.ResiliencyGroup_resiliencyGroupArn, *v.ResiliencyGroupArn)
+	}
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.ResiliencyGroup_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+	if v.ResiliencyGroupName != nil {
+		s.WriteString(schemas.ResiliencyGroup_resiliencyGroupName, *v.ResiliencyGroupName)
+	}
+	if v.ResiliencyGroupType != "" {
+		s.WriteString(schemas.ResiliencyGroup_resiliencyGroupType, string(v.ResiliencyGroupType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ResiliencyGroup_state, string(v.State))
+	}
+	serializeTagList(s, schemas.ResiliencyGroup_tags, v.Tags)
+}
+func (v *ResiliencyGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResiliencyGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResiliencyGroup_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.ResiliencyGroup_ownerAccount, v.OwnerAccount)
+		case schemas.ResiliencyGroup_resiliencyGroupArn:
+			v.ResiliencyGroupArn = new(string)
+			return d.ReadString(schemas.ResiliencyGroup_resiliencyGroupArn, v.ResiliencyGroupArn)
+		case schemas.ResiliencyGroup_resiliencyGroupId:
+			v.ResiliencyGroupId = new(string)
+			return d.ReadString(schemas.ResiliencyGroup_resiliencyGroupId, v.ResiliencyGroupId)
+		case schemas.ResiliencyGroup_resiliencyGroupName:
+			v.ResiliencyGroupName = new(string)
+			return d.ReadString(schemas.ResiliencyGroup_resiliencyGroupName, v.ResiliencyGroupName)
+		case schemas.ResiliencyGroup_resiliencyGroupType:
+			var ev string
+			if err := d.ReadString(schemas.ResiliencyGroup_resiliencyGroupType, &ev); err != nil {
+				return err
+			}
+			v.ResiliencyGroupType = ResiliencyGroupType(ev)
+			return nil
+		case schemas.ResiliencyGroup_state:
+			var ev string
+			if err := d.ReadString(schemas.ResiliencyGroup_state, &ev); err != nil {
+				return err
+			}
+			v.State = ResiliencyGroupState(ev)
+			return nil
+		case schemas.ResiliencyGroup_tags:
+			return deserializeTagList(d, schemas.ResiliencyGroup_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Information about an association between a connection and a resiliency group.
+type ResiliencyGroupAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the associated connection.
+	ConnectionArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The state of the association. The valid values are associating , associated ,
+	// disassociating , and disassociated .
+	State ResiliencyGroupAssociationState
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResiliencyGroupAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResiliencyGroupAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResiliencyGroupAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.ResiliencyGroupAssociation_connectionArn, *v.ConnectionArn)
+	}
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.ResiliencyGroupAssociation_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ResiliencyGroupAssociation_state, string(v.State))
+	}
+}
+func (v *ResiliencyGroupAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResiliencyGroupAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResiliencyGroupAssociation_connectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.ResiliencyGroupAssociation_connectionArn, v.ConnectionArn)
+		case schemas.ResiliencyGroupAssociation_resiliencyGroupId:
+			v.ResiliencyGroupId = new(string)
+			return d.ReadString(schemas.ResiliencyGroupAssociation_resiliencyGroupId, v.ResiliencyGroupId)
+		case schemas.ResiliencyGroupAssociation_state:
+			var ev string
+			if err := d.ReadString(schemas.ResiliencyGroupAssociation_state, &ev); err != nil {
+				return err
+			}
+			v.State = ResiliencyGroupAssociationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about a resiliency group.
+type ResiliencyGroupSummary struct {
+
+	// The ID of the Amazon Web Services account that owns the resiliency group.
+	OwnerAccount *string
+
+	// The Amazon Resource Name (ARN) of the resiliency group.
+	ResiliencyGroupArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The name of the resiliency group.
+	ResiliencyGroupName *string
+
+	// The type of the resiliency group. The valid value is Managed .
+	ResiliencyGroupType ResiliencyGroupType
+
+	// The state of the resiliency group.
+	State ResiliencyGroupState
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResiliencyGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResiliencyGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResiliencyGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.ResiliencyGroupSummary_ownerAccount, *v.OwnerAccount)
+	}
+	if v.ResiliencyGroupArn != nil {
+		s.WriteString(schemas.ResiliencyGroupSummary_resiliencyGroupArn, *v.ResiliencyGroupArn)
+	}
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.ResiliencyGroupSummary_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+	if v.ResiliencyGroupName != nil {
+		s.WriteString(schemas.ResiliencyGroupSummary_resiliencyGroupName, *v.ResiliencyGroupName)
+	}
+	if v.ResiliencyGroupType != "" {
+		s.WriteString(schemas.ResiliencyGroupSummary_resiliencyGroupType, string(v.ResiliencyGroupType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ResiliencyGroupSummary_state, string(v.State))
+	}
+}
+func (v *ResiliencyGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResiliencyGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResiliencyGroupSummary_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.ResiliencyGroupSummary_ownerAccount, v.OwnerAccount)
+		case schemas.ResiliencyGroupSummary_resiliencyGroupArn:
+			v.ResiliencyGroupArn = new(string)
+			return d.ReadString(schemas.ResiliencyGroupSummary_resiliencyGroupArn, v.ResiliencyGroupArn)
+		case schemas.ResiliencyGroupSummary_resiliencyGroupId:
+			v.ResiliencyGroupId = new(string)
+			return d.ReadString(schemas.ResiliencyGroupSummary_resiliencyGroupId, v.ResiliencyGroupId)
+		case schemas.ResiliencyGroupSummary_resiliencyGroupName:
+			v.ResiliencyGroupName = new(string)
+			return d.ReadString(schemas.ResiliencyGroupSummary_resiliencyGroupName, v.ResiliencyGroupName)
+		case schemas.ResiliencyGroupSummary_resiliencyGroupType:
+			var ev string
+			if err := d.ReadString(schemas.ResiliencyGroupSummary_resiliencyGroupType, &ev); err != nil {
+				return err
+			}
+			v.ResiliencyGroupType = ResiliencyGroupType(ev)
+			return nil
+		case schemas.ResiliencyGroupSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.ResiliencyGroupSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = ResiliencyGroupState(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2657,6 +3375,99 @@ func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about a route for a virtual interface.
+type Route struct {
+
+	// The address family of the route.
+	//
+	// The valid values are ipv4 and ipv6 .
+	AddressFamily AddressFamily
+
+	// The autonomous system (AS) path of the route.
+	AsPath []AsPathSegment
+
+	// The Direct Connect endpoint that terminates the logical connection. This device
+	// might be different than the device that terminates the physical connection.
+	AwsLogicalDeviceId *string
+
+	// The CIDR (prefix) of the route.
+	Cidr *string
+
+	// The BGP communities associated with the route.
+	Communities []string
+
+	// The direction of the route.
+	//
+	// The valid values are accepted (received from the customer network) and
+	// advertised (advertised to the customer network).
+	RouteDirection RouteDirection
+
+	// The time when the route was installed. The value is displayed in UTC format.
+	RouteInstalledAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *Route) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Route)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.Route_addressFamily, string(v.AddressFamily))
+	}
+	serializeAsPathSegmentList(s, schemas.Route_asPath, v.AsPath)
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Route_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.Route_cidr, *v.Cidr)
+	}
+	serializeCommunityList(s, schemas.Route_communities, v.Communities)
+	if v.RouteDirection != "" {
+		s.WriteString(schemas.Route_routeDirection, string(v.RouteDirection))
+	}
+	if v.RouteInstalledAt != nil {
+		s.WriteTime(schemas.Route_routeInstalledAt, *v.RouteInstalledAt)
+	}
+}
+func (v *Route) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Route, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Route_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.Route_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.Route_asPath:
+			return deserializeAsPathSegmentList(d, schemas.Route_asPath, &v.AsPath)
+		case schemas.Route_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Route_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Route_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.Route_cidr, v.Cidr)
+		case schemas.Route_communities:
+			return deserializeCommunityList(d, schemas.Route_communities, &v.Communities)
+		case schemas.Route_routeDirection:
+			var ev string
+			if err := d.ReadString(schemas.Route_routeDirection, &ev); err != nil {
+				return err
+			}
+			v.RouteDirection = RouteDirection(ev)
+			return nil
+		case schemas.Route_routeInstalledAt:
+			v.RouteInstalledAt = new(time.Time)
+			return d.ReadTime(schemas.Route_routeInstalledAt, v.RouteInstalledAt)
+		}
+		return nil
+	})
+}
+
 // Information about a route filter prefix that a customer can advertise through
 // Border Gateway Protocol (BGP) over a public virtual interface.
 type RouteFilterPrefix struct {
@@ -2685,6 +3496,77 @@ func (v *RouteFilterPrefix) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RouteFilterPrefix_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.RouteFilterPrefix_cidr, v.Cidr)
+		}
+		return nil
+	})
+}
+
+// The filters used to limit the routes returned by ListVirtualInterfaceRoutes.
+type RouteFilters struct {
+
+	// The address family of the routes to return.
+	//
+	// The valid values are ipv4 and ipv6 .
+	AddressFamily AddressFamily
+
+	// The autonomous system (AS) numbers used to filter the routes by their AS path.
+	AsPath []int64
+
+	// The CIDRs (prefixes) used to filter the routes. You can specify up to 10 CIDRs.
+	Cidrs []string
+
+	// The BGP communities used to filter the routes.
+	Communities []string
+
+	// The direction of the routes to return.
+	//
+	// The valid values are accepted (routes received from the customer network) and
+	// advertised (routes advertised to the customer network).
+	RouteDirection RouteDirection
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouteFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.RouteFilters_addressFamily, string(v.AddressFamily))
+	}
+	serializeAsPathList(s, schemas.RouteFilters_asPath, v.AsPath)
+	serializeRouteFilterCidrStringList(s, schemas.RouteFilters_cidrs, v.Cidrs)
+	serializeCommunityList(s, schemas.RouteFilters_communities, v.Communities)
+	if v.RouteDirection != "" {
+		s.WriteString(schemas.RouteFilters_routeDirection, string(v.RouteDirection))
+	}
+}
+func (v *RouteFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteFilters_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.RouteFilters_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.RouteFilters_asPath:
+			return deserializeAsPathList(d, schemas.RouteFilters_asPath, &v.AsPath)
+		case schemas.RouteFilters_cidrs:
+			return deserializeRouteFilterCidrStringList(d, schemas.RouteFilters_cidrs, &v.Cidrs)
+		case schemas.RouteFilters_communities:
+			return deserializeCommunityList(d, schemas.RouteFilters_communities, &v.Communities)
+		case schemas.RouteFilters_routeDirection:
+			var ev string
+			if err := d.ReadString(schemas.RouteFilters_routeDirection, &ev); err != nil {
+				return err
+			}
+			v.RouteDirection = RouteDirection(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2874,22 +3756,34 @@ type VirtualInterface struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
 	// for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -2933,6 +3827,28 @@ type VirtualInterface struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
+
+	// The rate limit (bandwidth allocation) applied to the virtual interface. The
+	// value must be one of the supported bandwidth values and cannot exceed the
+	// bandwidth of the parent connection or LAG. Supported values: 50Mbps , 100Mbps ,
+	// 200Mbps , 300Mbps , 400Mbps , 500Mbps , 600Mbps , 700Mbps , 800Mbps , 900Mbps ,
+	// 1Gbps , 1.2Gbps , 1.5Gbps , 1.8Gbps , 2Gbps , 2.1Gbps , 2.4Gbps , 2.7Gbps ,
+	// 3Gbps , 3.2Gbps , 3.6Gbps , 4Gbps , 5Gbps , 6Gbps , 7Gbps , 8Gbps , 9Gbps ,
+	// 10Gbps , 12Gbps , 15Gbps , 18Gbps , 20Gbps , 21Gbps , 24Gbps , 27Gbps , 30Gbps ,
+	// 32Gbps , 36Gbps , 40Gbps , 50Gbps , 60Gbps , 70Gbps , 80Gbps , 100Gbps , 120Gbps
+	// , 150Gbps , 180Gbps , 200Gbps , 210Gbps , 240Gbps , 270Gbps , 300Gbps , 320Gbps
+	// , 360Gbps , 400Gbps , 450Gbps , 480Gbps , 500Gbps , 540Gbps , 600Gbps , 700Gbps
+	// , 800Gbps , 900Gbps , 1Tbps , 1.1Tbps , 1.2Tbps , 1.3Tbps , 1.4Tbps , 1.5Tbps ,
+	// 1.6Tbps .
+	RateLimit *string
 
 	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
@@ -3059,6 +3975,15 @@ func (v *VirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.VirtualInterface_ownerAccount, *v.OwnerAccount)
 	}
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, *v.PrefixPoolAllocatedCountIpv4)
+	}
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, *v.PrefixPoolAllocatedCountIpv6)
+	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.VirtualInterface_rateLimit, *v.RateLimit)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.VirtualInterface_region, *v.Region)
 	}
@@ -3142,6 +4067,15 @@ func (v *VirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.VirtualInterface_ownerAccount:
 			v.OwnerAccount = new(string)
 			return d.ReadString(schemas.VirtualInterface_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv4:
+			v.PrefixPoolAllocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, v.PrefixPoolAllocatedCountIpv4)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv6:
+			v.PrefixPoolAllocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, v.PrefixPoolAllocatedCountIpv6)
+		case schemas.VirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.VirtualInterface_rateLimit, v.RateLimit)
 		case schemas.VirtualInterface_region:
 			v.Region = new(string)
 			return d.ReadString(schemas.VirtualInterface_region, v.Region)

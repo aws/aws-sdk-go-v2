@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
 
+func ExampleCloudConnectorConfiguration_outputUsage() {
+	var union types.CloudConnectorConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CloudConnectorConfigurationMemberAzureConfiguration:
+		_ = v.Value // Value is types.AzureConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureConfiguration
+
+func ExampleConfigurationTargets_outputUsage() {
+	var union types.ConfigurationTargets
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationTargetsMemberSubscriptions:
+		_ = v.Value // Value is []types.AzureSubscription
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.AzureSubscription
+
 func ExampleExecutionInputs_outputUsage() {
 	var union types.ExecutionInputs
 	// type switches can be used to check the union value

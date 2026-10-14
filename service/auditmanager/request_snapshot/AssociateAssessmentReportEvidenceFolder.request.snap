@@ -1,0 +1,5 @@
+PUT /assessments/__AssessmentId__/associateToAssessmentReport
+
+Content-Type: application/json
+
+{"evidenceFolderId":"__EvidenceFolderId__"}

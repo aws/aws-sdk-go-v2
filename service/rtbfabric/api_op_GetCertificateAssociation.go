@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -48,21 +44,6 @@ type GetCertificateAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCertificateAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCertificateAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCertificateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcmCertificateArn != nil {
-		s.WriteString(schemas.GetCertificateAssociationRequest_acmCertificateArn, *v.AcmCertificateArn)
-	}
-	if v.GatewayId != nil {
-		s.WriteString(schemas.GetCertificateAssociationRequest_gatewayId, *v.GatewayId)
-	}
-}
-
 type GetCertificateAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the ACM certificate.
@@ -92,101 +73,29 @@ type GetCertificateAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCertificateAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCertificateAssociationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCertificateAssociationResponse_acmCertificateArn:
-			v.AcmCertificateArn = new(string)
-			return d.ReadString(schemas.GetCertificateAssociationResponse_acmCertificateArn, v.AcmCertificateArn)
-		case schemas.GetCertificateAssociationResponse_associatedAt:
-			v.AssociatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCertificateAssociationResponse_associatedAt, v.AssociatedAt)
-		case schemas.GetCertificateAssociationResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.GetCertificateAssociationResponse_gatewayId, v.GatewayId)
-		case schemas.GetCertificateAssociationResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetCertificateAssociationResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CertificateAssociationStatus(ev)
-			return nil
-		case schemas.GetCertificateAssociationResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCertificateAssociationResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCertificateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCertificateAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAssociation, schemas.GetCertificateAssociationRequest, schemas.GetCertificateAssociationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCertificateAssociation{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAssociation, schemas.GetCertificateAssociationRequest, schemas.GetCertificateAssociationResponse), output: &GetCertificateAssociationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCertificateAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCertificateAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificateAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,12 +108,6 @@ func (c *Client) addOperationGetCertificateAssociationMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -638,11 +541,3 @@ type GetCertificateAssociationAPIClient interface {
 }
 
 var _ GetCertificateAssociationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetCertificateAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCertificateAssociation",
-	}
-}

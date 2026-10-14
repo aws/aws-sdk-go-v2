@@ -5,12 +5,8 @@ package ssoadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the grants associated with an application.
@@ -45,21 +41,6 @@ type ListApplicationGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationGrantsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationGrantsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ListApplicationGrantsRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationGrantsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListApplicationGrantsOutput struct {
 
 	// An array list of structures that describe the requested grants.
@@ -80,87 +61,29 @@ type ListApplicationGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationGrantsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationGrantsResponse_Grants:
-			return deserializeGrants(d, schemas.ListApplicationGrantsResponse_Grants, &v.Grants)
-		case schemas.ListApplicationGrantsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationGrantsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationGrants{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationGrants, schemas.ListApplicationGrantsRequest, schemas.ListApplicationGrantsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationGrants{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationGrants, schemas.ListApplicationGrantsRequest, schemas.ListApplicationGrantsResponse), output: &ListApplicationGrantsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationGrants"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListApplicationGrantsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationGrants(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +96,6 @@ func (c *Client) addOperationListApplicationGrantsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +185,3 @@ type ListApplicationGrantsAPIClient interface {
 }
 
 var _ ListApplicationGrantsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListApplicationGrants(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListApplicationGrants",
-	}
-}

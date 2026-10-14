@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.DescribeReleaseLabel
+
+{"Applications":[{"Name":"__Name__","Version":"__Version__"},{"Name":"__Name__","Version":"__Version__"}],"AvailableOSReleases":[{"Label":"__Label__"},{"Label":"__Label__"}],"NextToken":"__NextToken__","ReleaseLabel":"__ReleaseLabel__"}

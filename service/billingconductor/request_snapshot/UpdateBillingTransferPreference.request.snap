@@ -1,0 +1,6 @@
+PUT /update-billing-transfer-preference
+
+Content-Type: application/json
+X-Amzn-Client-Token: __ClientToken__
+
+{"AutoBillingTransferBillingGroupCreation":{"Enabled":true,"PricingPlanArn":"__PricingPlanArn__"},"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"}

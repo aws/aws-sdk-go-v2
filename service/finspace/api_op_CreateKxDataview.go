@@ -5,12 +5,8 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -109,47 +105,6 @@ type CreateKxDataviewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxDataviewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKxDataviewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKxDataviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoUpdate != false {
-		s.WriteBool(schemas.CreateKxDataviewRequest_autoUpdate, v.AutoUpdate)
-	}
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.AzMode != "" {
-		s.WriteString(schemas.CreateKxDataviewRequest_azMode, string(v.AzMode))
-	}
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_changesetId, *v.ChangesetId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_databaseName, *v.DatabaseName)
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_dataviewName, *v.DataviewName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.CreateKxDataviewRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.ReadWrite != false {
-		s.WriteBool(schemas.CreateKxDataviewRequest_readWrite, v.ReadWrite)
-	}
-	serializeKxDataviewSegmentConfigurationList(s, schemas.CreateKxDataviewRequest_segmentConfigurations, v.SegmentConfigurations)
-	serializeTagMap(s, schemas.CreateKxDataviewRequest_tags, v.Tags)
-}
-
 type CreateKxDataviewOutput struct {
 
 	// The option to select whether you want to apply all the future additions and
@@ -215,117 +170,26 @@ type CreateKxDataviewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxDataviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKxDataviewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKxDataviewResponse_autoUpdate:
-			return d.ReadBool(schemas.CreateKxDataviewResponse_autoUpdate, &v.AutoUpdate)
-		case schemas.CreateKxDataviewResponse_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.CreateKxDataviewResponse_azMode:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxDataviewResponse_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = types.KxAzMode(ev)
-			return nil
-		case schemas.CreateKxDataviewResponse_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_changesetId, v.ChangesetId)
-		case schemas.CreateKxDataviewResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxDataviewResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.CreateKxDataviewResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_databaseName, v.DatabaseName)
-		case schemas.CreateKxDataviewResponse_dataviewName:
-			v.DataviewName = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_dataviewName, v.DataviewName)
-		case schemas.CreateKxDataviewResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_description, v.Description)
-		case schemas.CreateKxDataviewResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateKxDataviewResponse_environmentId, v.EnvironmentId)
-		case schemas.CreateKxDataviewResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxDataviewResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.CreateKxDataviewResponse_readWrite:
-			return d.ReadBool(schemas.CreateKxDataviewResponse_readWrite, &v.ReadWrite)
-		case schemas.CreateKxDataviewResponse_segmentConfigurations:
-			return deserializeKxDataviewSegmentConfigurationList(d, schemas.CreateKxDataviewResponse_segmentConfigurations, &v.SegmentConfigurations)
-		case schemas.CreateKxDataviewResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxDataviewResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxDataviewStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateKxDataviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxDataview{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxDataview, schemas.CreateKxDataviewRequest, schemas.CreateKxDataviewResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxDataview{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxDataview, schemas.CreateKxDataviewRequest, schemas.CreateKxDataviewResponse), output: &CreateKxDataviewOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxDataview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -335,12 +199,6 @@ func (c *Client) addOperationCreateKxDataviewMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateKxDataviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxDataview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -353,12 +211,6 @@ func (c *Client) addOperationCreateKxDataviewMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -398,12 +250,4 @@ func (m *idempotencyToken_initializeOpCreateKxDataview) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateKxDataviewMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKxDataview{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKxDataview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKxDataview",
-	}
 }

@@ -5,12 +5,8 @@ package migrationhubrefactorspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual
@@ -47,40 +43,6 @@ type ListEnvironmentVpcsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVpcsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEnvironmentVpcsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEnvironmentVpcsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEnvironmentVpcsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListEnvironmentVpcsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEnvironmentVpcsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.ListEnvironmentVpcsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListEnvironmentVpcsRequest_MaxResults, v.MaxResults)
-		case schemas.ListEnvironmentVpcsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListEnvironmentVpcsOutput struct {
 
 	// The list of EnvironmentVpc objects.
@@ -95,99 +57,29 @@ type ListEnvironmentVpcsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVpcsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEnvironmentVpcsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEnvironmentVpcsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVpcs(s, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, v.EnvironmentVpcList)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListEnvironmentVpcsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEnvironmentVpcsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList:
-			return deserializeEnvironmentVpcs(d, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, &v.EnvironmentVpcList)
-		case schemas.ListEnvironmentVpcsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironmentVpcs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVpcs, schemas.ListEnvironmentVpcsRequest, schemas.ListEnvironmentVpcsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironmentVpcs{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVpcs, schemas.ListEnvironmentVpcsRequest, schemas.ListEnvironmentVpcsResponse), output: &ListEnvironmentVpcsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentVpcs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEnvironmentVpcsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentVpcs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +92,6 @@ func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -308,11 +194,3 @@ type ListEnvironmentVpcsAPIClient interface {
 }
 
 var _ ListEnvironmentVpcsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnvironmentVpcs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnvironmentVpcs",
-	}
-}

@@ -1,0 +1,6 @@
+POST /participant/transcript
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"ContactId":"__ContactId__","MaxResults":1,"NextToken":"__NextToken__","ScanDirection":"FORWARD","SortOrder":"DESCENDING","StartPosition":{"AbsoluteTime":"__AbsoluteTime__","Id":"__Id__","MostRecent":1}}

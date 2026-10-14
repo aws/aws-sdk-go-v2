@@ -4,13 +4,8 @@ package rtbfabric
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,21 +41,6 @@ type RejectLinkInput struct {
 	LinkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RejectLinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectLinkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.RejectLinkRequest_gatewayId, *v.GatewayId)
-	}
-	if v.LinkId != nil {
-		s.WriteString(schemas.RejectLinkRequest_linkId, *v.LinkId)
-	}
 }
 
 type RejectLinkOutput struct {
@@ -119,128 +99,29 @@ type RejectLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectLinkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectLinkResponse_attributes:
-			v.Attributes = &types.LinkAttributes{}
-			return v.Attributes.Deserialize(d)
-		case schemas.RejectLinkResponse_connectivityType:
-			var ev string
-			if err := d.ReadString(schemas.RejectLinkResponse_connectivityType, &ev); err != nil {
-				return err
-			}
-			v.ConnectivityType = types.ConnectivityType(ev)
-			return nil
-		case schemas.RejectLinkResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.RejectLinkResponse_createdAt, v.CreatedAt)
-		case schemas.RejectLinkResponse_direction:
-			var ev string
-			if err := d.ReadString(schemas.RejectLinkResponse_direction, &ev); err != nil {
-				return err
-			}
-			v.Direction = types.LinkDirection(ev)
-			return nil
-		case schemas.RejectLinkResponse_flowModules:
-			return deserializeModuleConfigurationList(d, schemas.RejectLinkResponse_flowModules, &v.FlowModules)
-		case schemas.RejectLinkResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.RejectLinkResponse_gatewayId, v.GatewayId)
-		case schemas.RejectLinkResponse_linkId:
-			v.LinkId = new(string)
-			return d.ReadString(schemas.RejectLinkResponse_linkId, v.LinkId)
-		case schemas.RejectLinkResponse_logSettings:
-			v.LogSettings = &types.LinkLogSettings{}
-			return v.LogSettings.Deserialize(d)
-		case schemas.RejectLinkResponse_peerGatewayId:
-			v.PeerGatewayId = new(string)
-			return d.ReadString(schemas.RejectLinkResponse_peerGatewayId, v.PeerGatewayId)
-		case schemas.RejectLinkResponse_pendingFlowModules:
-			return deserializeModuleConfigurationList(d, schemas.RejectLinkResponse_pendingFlowModules, &v.PendingFlowModules)
-		case schemas.RejectLinkResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.RejectLinkResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.LinkStatus(ev)
-			return nil
-		case schemas.RejectLinkResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.RejectLinkResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRejectLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectLink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectLink, schemas.RejectLinkRequest, schemas.RejectLinkResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectLink{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectLink, schemas.RejectLinkRequest, schemas.RejectLinkResponse), output: &RejectLinkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRejectLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +136,8 @@ func (c *Client) addOperationRejectLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRejectLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RejectLink",
-	}
 }

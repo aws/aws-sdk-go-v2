@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteImageUsageReport&DryRun=true&ReportId=__ReportId__&Version=2016-11-15

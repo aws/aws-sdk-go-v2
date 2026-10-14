@@ -4,13 +4,8 @@ package osis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to
@@ -44,18 +39,6 @@ type ValidatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidatePipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PipelineConfigurationBody != nil {
-		s.WriteString(schemas.ValidatePipelineRequest_PipelineConfigurationBody, *v.PipelineConfigurationBody)
-	}
-}
-
 type ValidatePipelineOutput struct {
 
 	// A list of errors if the configuration is invalid.
@@ -70,87 +53,29 @@ type ValidatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidatePipelineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidatePipelineResponse_Errors:
-			return deserializeValidationMessageList(d, schemas.ValidatePipelineResponse_Errors, &v.Errors)
-		case schemas.ValidatePipelineResponse_isValid:
-			v.IsValid = new(bool)
-			return d.ReadBool(schemas.ValidatePipelineResponse_isValid, v.IsValid)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationValidatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipeline, schemas.ValidatePipelineRequest, schemas.ValidatePipelineResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidatePipeline{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipeline, schemas.ValidatePipelineRequest, schemas.ValidatePipelineResponse), output: &ValidatePipelineOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidatePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpValidatePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidatePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +90,8 @@ func (c *Client) addOperationValidatePipelineMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opValidatePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ValidatePipeline",
-	}
 }

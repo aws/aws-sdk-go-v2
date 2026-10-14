@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainArn":"__DomainArn__","domainId":"__DomainId__","domainStatus":"Active"}

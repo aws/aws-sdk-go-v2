@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListTokens
+
+{"NextToken":"__NextToken__","Tokens":[{"ExpirationTime":"__ExpirationTime__","LicenseArn":"__LicenseArn__","RoleArns":["__Member__","__Member__"],"Status":"__Status__","TokenId":"__TokenId__","TokenProperties":["__Member__","__Member__"],"TokenType":"__TokenType__"},{"ExpirationTime":"__ExpirationTime__","LicenseArn":"__LicenseArn__","RoleArns":["__Member__","__Member__"],"Status":"__Status__","TokenId":"__TokenId__","TokenProperties":["__Member__","__Member__"],"TokenType":"__TokenType__"}]}

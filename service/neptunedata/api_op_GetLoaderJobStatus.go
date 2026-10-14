@@ -4,15 +4,8 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets status information about a specified load job. Neptune keeps track of the
@@ -71,30 +64,6 @@ type GetLoaderJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLoaderJobStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLoaderJobStatusInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLoaderJobStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Details != nil {
-		s.WriteBool(schemas.GetLoaderJobStatusInput_details, *v.Details)
-	}
-	if v.Errors != nil {
-		s.WriteBool(schemas.GetLoaderJobStatusInput_errors, *v.Errors)
-	}
-	if v.ErrorsPerPage != nil {
-		s.WriteInt32(schemas.GetLoaderJobStatusInput_errorsPerPage, *v.ErrorsPerPage)
-	}
-	if v.LoadId != nil {
-		s.WriteString(schemas.GetLoaderJobStatusInput_loadId, *v.LoadId)
-	}
-	if v.Page != nil {
-		s.WriteInt32(schemas.GetLoaderJobStatusInput_page, *v.Page)
-	}
-}
-
 type GetLoaderJobStatusOutput struct {
 
 	// Status information about the load job, in a layout that could look like this:
@@ -113,94 +82,29 @@ type GetLoaderJobStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLoaderJobStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLoaderJobStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLoaderJobStatusOutput_payload:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetLoaderJobStatusOutput_payload, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Payload = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetLoaderJobStatusOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.GetLoaderJobStatusOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLoaderJobStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLoaderJobStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoaderJobStatus, schemas.GetLoaderJobStatusInput, schemas.GetLoaderJobStatusOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLoaderJobStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoaderJobStatus, schemas.GetLoaderJobStatusInput, schemas.GetLoaderJobStatusOutput), output: &GetLoaderJobStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLoaderJobStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLoaderJobStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoaderJobStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +119,8 @@ func (c *Client) addOperationGetLoaderJobStatusMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLoaderJobStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLoaderJobStatus",
-	}
 }

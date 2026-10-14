@@ -4,13 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,25 +45,10 @@ type UpdateOauth2CredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOauth2CredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOauth2CredentialProviderRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOauth2CredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CredentialProviderVendor != "" {
-		s.WriteString(schemas.UpdateOauth2CredentialProviderRequest_credentialProviderVendor, string(v.CredentialProviderVendor))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateOauth2CredentialProviderRequest_name, *v.Name)
-	}
-	serializeOauth2ProviderConfigInput(s, schemas.UpdateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
-}
-
 type UpdateOauth2CredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the client secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ClientSecretArn *types.Secret
@@ -108,12 +88,13 @@ type UpdateOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
-	// The JSON key used to extract the client secret value from the AWS Secrets
-	// Manager secret.
+	// The JSON key used to extract the client secret value from the Amazon Web
+	// Services Secrets Manager secret.
 	ClientSecretJsonKey *string
 
 	// The source type of the client secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ClientSecretSource types.SecretSourceType
 
 	// The current status of the updated OAuth2 credential provider.
@@ -125,126 +106,29 @@ type UpdateOauth2CredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOauth2CredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOauth2CredentialProviderResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOauth2CredentialProviderResponse_callbackUrl:
-			v.CallbackUrl = new(string)
-			return d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_callbackUrl, v.CallbackUrl)
-		case schemas.UpdateOauth2CredentialProviderResponse_clientSecretArn:
-			v.ClientSecretArn = &types.Secret{}
-			return v.ClientSecretArn.Deserialize(d)
-		case schemas.UpdateOauth2CredentialProviderResponse_clientSecretJsonKey:
-			v.ClientSecretJsonKey = new(string)
-			return d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_clientSecretJsonKey, v.ClientSecretJsonKey)
-		case schemas.UpdateOauth2CredentialProviderResponse_clientSecretSource:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_clientSecretSource, &ev); err != nil {
-				return err
-			}
-			v.ClientSecretSource = types.SecretSourceType(ev)
-			return nil
-		case schemas.UpdateOauth2CredentialProviderResponse_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateOauth2CredentialProviderResponse_createdTime, v.CreatedTime)
-		case schemas.UpdateOauth2CredentialProviderResponse_credentialProviderArn:
-			v.CredentialProviderArn = new(string)
-			return d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
-		case schemas.UpdateOauth2CredentialProviderResponse_credentialProviderVendor:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_credentialProviderVendor, &ev); err != nil {
-				return err
-			}
-			v.CredentialProviderVendor = types.CredentialProviderVendorType(ev)
-			return nil
-		case schemas.UpdateOauth2CredentialProviderResponse_lastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateOauth2CredentialProviderResponse_lastUpdatedTime, v.LastUpdatedTime)
-		case schemas.UpdateOauth2CredentialProviderResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_name, v.Name)
-		case schemas.UpdateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput:
-			return deserializeOauth2ProviderConfigOutput(d, schemas.UpdateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, &v.Oauth2ProviderConfigOutput)
-		case schemas.UpdateOauth2CredentialProviderResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOauth2CredentialProviderResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateOauth2CredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOauth2CredentialProvider{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOauth2CredentialProvider, schemas.UpdateOauth2CredentialProviderRequest, schemas.UpdateOauth2CredentialProviderResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOauth2CredentialProvider{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOauth2CredentialProvider, schemas.UpdateOauth2CredentialProviderRequest, schemas.UpdateOauth2CredentialProviderResponse), output: &UpdateOauth2CredentialProviderOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOauth2CredentialProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateOauth2CredentialProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOauth2CredentialProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -259,22 +143,8 @@ func (c *Client) addOperationUpdateOauth2CredentialProviderMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateOauth2CredentialProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateOauth2CredentialProvider",
-	}
 }

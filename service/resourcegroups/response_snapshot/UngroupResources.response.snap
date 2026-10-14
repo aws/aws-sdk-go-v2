@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Failed":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__"}],"Pending":[{"ResourceArn":"__ResourceArn__"},{"ResourceArn":"__ResourceArn__"}],"Succeeded":["__Member__","__Member__"]}

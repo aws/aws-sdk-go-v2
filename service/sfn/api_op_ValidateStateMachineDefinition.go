@@ -4,11 +4,10 @@ package sfn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Validates the syntax of a state machine definition specified in [Amazon States Language] (ASL), a
@@ -87,6 +86,27 @@ type ValidateStateMachineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateStateMachineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateStateMachineDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateStateMachineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.ValidateStateMachineDefinitionInput_definition, *v.Definition)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ValidateStateMachineDefinitionInput_maxResults, v.MaxResults)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.ValidateStateMachineDefinitionInput_severity, string(v.Severity))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ValidateStateMachineDefinitionInput_type, string(v.Type))
+	}
+}
+
 type ValidateStateMachineDefinitionOutput struct {
 
 	// An array of diagnostic errors and warnings found during validation of the state
@@ -114,77 +134,61 @@ type ValidateStateMachineDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateStateMachineDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateStateMachineDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateStateMachineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidateStateMachineDefinitionDiagnosticList(s, schemas.ValidateStateMachineDefinitionOutput_diagnostics, v.Diagnostics)
+	if v.Result != "" {
+		s.WriteString(schemas.ValidateStateMachineDefinitionOutput_result, string(v.Result))
+	}
+	if v.Truncated != nil {
+		s.WriteBool(schemas.ValidateStateMachineDefinitionOutput_truncated, *v.Truncated)
+	}
+}
+func (v *ValidateStateMachineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateStateMachineDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateStateMachineDefinitionOutput_diagnostics:
+			return deserializeValidateStateMachineDefinitionDiagnosticList(d, schemas.ValidateStateMachineDefinitionOutput_diagnostics, &v.Diagnostics)
+		case schemas.ValidateStateMachineDefinitionOutput_result:
+			var ev string
+			if err := d.ReadString(schemas.ValidateStateMachineDefinitionOutput_result, &ev); err != nil {
+				return err
+			}
+			v.Result = types.ValidateStateMachineDefinitionResultCode(ev)
+			return nil
+		case schemas.ValidateStateMachineDefinitionOutput_truncated:
+			v.Truncated = new(bool)
+			return d.ReadBool(schemas.ValidateStateMachineDefinitionOutput_truncated, v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateStateMachineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateStateMachineDefinition, schemas.ValidateStateMachineDefinitionInput, schemas.ValidateStateMachineDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpValidateStateMachineDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateStateMachineDefinition, schemas.ValidateStateMachineDefinitionInput, schemas.ValidateStateMachineDefinitionOutput), output: &ValidateStateMachineDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpValidateStateMachineDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateStateMachineDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpValidateStateMachineDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateStateMachineDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +203,8 @@ func (c *Client) addOperationValidateStateMachineDefinitionMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opValidateStateMachineDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ValidateStateMachineDefinition",
-	}
 }

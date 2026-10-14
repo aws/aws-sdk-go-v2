@@ -1,0 +1,5 @@
+POST /clusters/__Name__/updates
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","force":true,"rollbackConfig":{"timeoutMinutes":1},"version":"__Version__"}

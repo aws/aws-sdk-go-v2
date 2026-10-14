@@ -5,12 +5,8 @@ package bedrockdataautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all stored entities in the library
@@ -51,27 +47,6 @@ type ListDataAutomationLibraryEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataAutomationLibraryEntitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataAutomationLibraryEntitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataAutomationLibraryEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EntityType != "" {
-		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_entityType, string(v.EntityType))
-	}
-	if v.LibraryArn != nil {
-		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_libraryArn, *v.LibraryArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataAutomationLibraryEntitiesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataAutomationLibraryEntitiesRequest_nextToken, *v.NextToken)
-	}
-}
-
 // List DataAutomationLibraryEntities Response
 type ListDataAutomationLibraryEntitiesOutput struct {
 
@@ -87,87 +62,29 @@ type ListDataAutomationLibraryEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataAutomationLibraryEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataAutomationLibraryEntitiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataAutomationLibraryEntitiesResponse_entities:
-			return deserializeDataAutomationLibraryEntitySummaries(d, schemas.ListDataAutomationLibraryEntitiesResponse_entities, &v.Entities)
-		case schemas.ListDataAutomationLibraryEntitiesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataAutomationLibraryEntitiesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataAutomationLibraryEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataAutomationLibraryEntities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationLibraryEntities, schemas.ListDataAutomationLibraryEntitiesRequest, schemas.ListDataAutomationLibraryEntitiesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataAutomationLibraryEntities{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAutomationLibraryEntities, schemas.ListDataAutomationLibraryEntitiesRequest, schemas.ListDataAutomationLibraryEntitiesResponse), output: &ListDataAutomationLibraryEntitiesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataAutomationLibraryEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataAutomationLibraryEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataAutomationLibraryEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +97,6 @@ func (c *Client) addOperationListDataAutomationLibraryEntitiesMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +200,3 @@ type ListDataAutomationLibraryEntitiesAPIClient interface {
 }
 
 var _ ListDataAutomationLibraryEntitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataAutomationLibraryEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataAutomationLibraryEntities",
-	}
-}

@@ -5,10 +5,10 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists analysis templates that the caller owns.
@@ -45,6 +45,40 @@ type ListAnalysisTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysisTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisTemplatesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisTemplatesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAnalysisTemplatesInput_maxResults, v.MaxResults)
+		case schemas.ListAnalysisTemplatesInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.ListAnalysisTemplatesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAnalysisTemplatesOutput struct {
 
 	// Lists analysis template metadata.
@@ -61,77 +95,51 @@ type ListAnalysisTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisTemplateSummaryList(s, schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries, v.AnalysisTemplateSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries:
+			return deserializeAnalysisTemplateSummaryList(d, schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries, &v.AnalysisTemplateSummaries)
+		case schemas.ListAnalysisTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysisTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisTemplates, schemas.ListAnalysisTemplatesInput, schemas.ListAnalysisTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalysisTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisTemplates, schemas.ListAnalysisTemplatesInput, schemas.ListAnalysisTemplatesOutput), output: &ListAnalysisTemplatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalysisTemplates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnalysisTemplates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAnalysisTemplatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnalysisTemplates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +152,6 @@ func (c *Client) addOperationListAnalysisTemplatesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +255,3 @@ type ListAnalysisTemplatesAPIClient interface {
 }
 
 var _ ListAnalysisTemplatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAnalysisTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAnalysisTemplates",
-	}
-}

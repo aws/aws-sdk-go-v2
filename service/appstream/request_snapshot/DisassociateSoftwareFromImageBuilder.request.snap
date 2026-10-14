@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DisassociateSoftwareFromImageBuilder
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢pImageBuilderNamet__ImageBuilderName__mSoftwareNames‚j__Member__j__Member__

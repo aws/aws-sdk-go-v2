@@ -1,0 +1,5 @@
+POST /update-resiliency-policy
+
+Content-Type: application/json
+
+{"dataLocationConstraint":"AnyLocation","policy":{"key0":{"rpoInSecs":1,"rtoInSecs":1}},"policyArn":"__PolicyArn__","policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","tier":"MissionCritical"}

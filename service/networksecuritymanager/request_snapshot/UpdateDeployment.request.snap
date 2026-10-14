@@ -1,0 +1,5 @@
+PATCH /deployments/__DeploymentIdentifier__
+
+Content-Type: application/json
+
+{"associatedPolicyList":[{"policyIdentifier":"__PolicyIdentifier__"},{"policyIdentifier":"__PolicyIdentifier__"}],"associatedScopeList":[{"scopeIdentifier":"__ScopeIdentifier__"},{"scopeIdentifier":"__ScopeIdentifier__"}],"clientToken":"__ClientToken__","deploymentConfiguration":{"enableCrossAccountVisibility":true},"deploymentDescription":"__DeploymentDescription__","isPublished":true,"updateToken":"__UpdateToken__"}

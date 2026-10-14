@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.DescribeAgents
+
+{"agentIds":["__Member__","__Member__"],"filters":[{"condition":"__Condition__","name":"__Name__","values":["__Member__","__Member__"]},{"condition":"__Condition__","name":"__Name__","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

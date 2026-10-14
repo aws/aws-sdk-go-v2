@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2 (FleetIQ)
@@ -72,6 +72,25 @@ type DescribeGameServerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameServerInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameServerInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameServerInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.DescribeGameServerInstancesInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	serializeGameServerInstanceIds(s, schemas.DescribeGameServerInstancesInput_InstanceIds, v.InstanceIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeGameServerInstancesInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameServerInstancesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeGameServerInstancesOutput struct {
 
 	// The collection of requested game server instances.
@@ -88,65 +107,45 @@ type DescribeGameServerInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameServerInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameServerInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameServerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameServerInstances(s, schemas.DescribeGameServerInstancesOutput_GameServerInstances, v.GameServerInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameServerInstancesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeGameServerInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGameServerInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGameServerInstancesOutput_GameServerInstances:
+			return deserializeGameServerInstances(d, schemas.DescribeGameServerInstancesOutput_GameServerInstances, &v.GameServerInstances)
+		case schemas.DescribeGameServerInstancesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeGameServerInstancesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameServerInstances, schemas.DescribeGameServerInstancesInput, schemas.DescribeGameServerInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameServerInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameServerInstances, schemas.DescribeGameServerInstancesInput, schemas.DescribeGameServerInstancesOutput), output: &DescribeGameServerInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameServerInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGameServerInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -156,12 +155,6 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpDescribeGameServerInstancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameServerInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +167,6 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +271,3 @@ type DescribeGameServerInstancesAPIClient interface {
 }
 
 var _ DescribeGameServerInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeGameServerInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeGameServerInstances",
-	}
-}

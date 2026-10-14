@@ -4,11 +4,10 @@ package taxsettings
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Downloads your tax documents to the Amazon S3 bucket that you specify in your
@@ -41,6 +40,25 @@ type GetTaxRegistrationDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationS3Location != nil {
+		s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest_destinationS3Location)
+		v.DestinationS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxDocumentMetadata != nil {
+		s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest_taxDocumentMetadata)
+		v.TaxDocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTaxRegistrationDocumentOutput struct {
 
 	// The file path of the Amazon S3 bucket where you want to download your tax
@@ -56,77 +74,54 @@ type GetTaxRegistrationDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationFilePath != nil {
+		s.WriteString(schemas.GetTaxRegistrationDocumentResponse_destinationFilePath, *v.DestinationFilePath)
+	}
+	if v.PresignedS3Url != nil {
+		s.WriteString(schemas.GetTaxRegistrationDocumentResponse_presignedS3Url, *v.PresignedS3Url)
+	}
+}
+func (v *GetTaxRegistrationDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaxRegistrationDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaxRegistrationDocumentResponse_destinationFilePath:
+			v.DestinationFilePath = new(string)
+			return d.ReadString(schemas.GetTaxRegistrationDocumentResponse_destinationFilePath, v.DestinationFilePath)
+		case schemas.GetTaxRegistrationDocumentResponse_presignedS3Url:
+			v.PresignedS3Url = new(string)
+			return d.ReadString(schemas.GetTaxRegistrationDocumentResponse_presignedS3Url, v.PresignedS3Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaxRegistrationDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistrationDocument, schemas.GetTaxRegistrationDocumentRequest, schemas.GetTaxRegistrationDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaxRegistrationDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistrationDocument, schemas.GetTaxRegistrationDocumentRequest, schemas.GetTaxRegistrationDocumentResponse), output: &GetTaxRegistrationDocumentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaxRegistrationDocument{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTaxRegistrationDocument"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTaxRegistrationDocumentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTaxRegistrationDocument(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +136,8 @@ func (c *Client) addOperationGetTaxRegistrationDocumentMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTaxRegistrationDocument(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTaxRegistrationDocument",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"errorCode":"__ErrorCode__","message":"__Message__","value":"__Value__"},{"errorCode":"__ErrorCode__","message":"__Message__","value":"__Value__"}]}

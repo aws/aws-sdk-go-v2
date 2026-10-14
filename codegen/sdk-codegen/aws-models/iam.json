@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.iam#AcceptDelegationRequest"
                 },
                 {
+                    "target": "com.amazonaws.iam#AcquireRole"
+                },
+                {
                     "target": "com.amazonaws.iam#AddClientIDToOpenIDConnectProvider"
                 },
                 {
@@ -226,6 +229,9 @@
                     "target": "com.amazonaws.iam#GetAccountPasswordPolicy"
                 },
                 {
+                    "target": "com.amazonaws.iam#GetAccountProperties"
+                },
+                {
                     "target": "com.amazonaws.iam#GetAccountSummary"
                 },
                 {
@@ -278,6 +284,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#GetRolePolicy"
+                },
+                {
+                    "target": "com.amazonaws.iam#GetRoleTemplateVersion"
                 },
                 {
                     "target": "com.amazonaws.iam#GetSAMLProvider"
@@ -410,6 +419,9 @@
                 },
                 {
                     "target": "com.amazonaws.iam#ListVirtualMFADevices"
+                },
+                {
+                    "target": "com.amazonaws.iam#PutAccountProperties"
                 },
                 {
                     "target": "com.amazonaws.iam#PutGroupPolicy"
@@ -636,24 +648,6 @@
                             "assign": "PartitionResult"
                         },
                         {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "ref": "UseFIPS"
-                                },
-                                true
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "ref": "UseDualStack"
-                                },
-                                true
-                            ]
-                        },
-                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -699,21 +693,6 @@
                             ]
                         },
                         {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "supportsDualStack"
-                                    ]
-                                },
-                                true
-                            ]
-                        },
-                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -729,6 +708,24 @@
                             ]
                         },
                         {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -741,21 +738,6 @@
                                     ]
                                 },
                                 "aws-iso-b"
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "supportsFIPS"
-                                    ]
-                                },
-                                true
                             ]
                         },
                         {
@@ -802,6 +784,36 @@
                                 },
                                 "aws-eusc"
                             ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
                         }
                     ],
                     "results": [
@@ -822,6 +834,38 @@
                                     "ref": "Endpoint"
                                 },
                                 "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam.amazonaws.com",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.amazonaws.com",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-east-1"
+                                        }
+                                    ]
+                                },
                                 "headers": {}
                             },
                             "type": "endpoint"
@@ -877,7 +921,39 @@
                         {
                             "conditions": [],
                             "endpoint": {
+                                "url": "https://iam-fips.api.amazonwebservices.com.cn",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "cn-north-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
                                 "url": "https://iam.cn-north-1.amazonaws.com.cn",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "cn-north-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.amazonaws.com.cn",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -957,6 +1033,38 @@
                         {
                             "conditions": [],
                             "endpoint": {
+                                "url": "https://iam.api.aws.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-iso-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.api.aws.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-iso-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
                                 "url": "https://iam.us-isob-east-1.sc2s.sgov.gov",
                                 "properties": {
                                     "authSchemes": [
@@ -989,7 +1097,87 @@
                         {
                             "conditions": [],
                             "endpoint": {
+                                "url": "https://iam.api.aws.scloud",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isob-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.api.aws.scloud",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isob-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
                                 "url": "https://iam.eu-isoe-west-1.cloud.adc-e.uk",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eu-isoe-west-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.cloud.adc-e.uk",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eu-isoe-west-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam.api.cloud-aws.adc-e.uk",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eu-isoe-west-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.api.cloud-aws.adc-e.uk",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -1021,6 +1209,54 @@
                         {
                             "conditions": [],
                             "endpoint": {
+                                "url": "https://iam-fips.csp.hci.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isof-south-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam.api.aws.hci.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isof-south-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.api.aws.hci.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isof-south-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
                                 "url": "https://iam.eusc-de-east-1.amazonaws.eu",
                                 "properties": {
                                     "authSchemes": [
@@ -1037,7 +1273,55 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://iam-fips.{PartitionResult#dualStackDnsSuffix}",
+                                "url": "https://iam-fips.amazonaws.eu",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eusc-de-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam.global.api.amazonwebservices.eu",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eusc-de-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.api.amazonwebservices.eu",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eusc-de-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -1058,7 +1342,7 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://iam-fips.{PartitionResult#dnsSuffix}",
+                                "url": "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -1079,7 +1363,7 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://iam.{PartitionResult#dualStackDnsSuffix}",
+                                "url": "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -1100,7 +1384,7 @@
                         {
                             "conditions": [],
                             "endpoint": {
-                                "url": "https://iam.{PartitionResult#dnsSuffix}",
+                                "url": "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
                                 "properties": {
                                     "authSchemes": [
                                         {
@@ -1120,8 +1404,8 @@
                         }
                     ],
                     "root": 2,
-                    "nodeCount": 28,
-                    "nodes": "/////wAAAAH/////AAAAAAAAABsAAAADAAAAAQAAAAQF9eEYAAAAAgAAAAUF9eEYAAAAAwAAABIAAAAGAAAABAAAAA4AAAAHAAAABgX14QcAAAAIAAAABwX14QkAAAAJAAAACQX14QoAAAAKAAAACgX14QwAAAALAAAADAX14Q4AAAAMAAAADQX14Q8AAAANAAAADgX14RAF9eEXAAAABQX14QQAAAAPAAAABgX14QYAAAAQAAAABwX14QgAAAARAAAACAX14RUF9eEWAAAABAAAABcAAAATAAAABwX14QkAAAAUAAAACQX14QsAAAAVAAAACgX14Q0AAAAWAAAACwX14RMF9eEUAAAABQX14QUAAAAYAAAABwX14QgAAAAZAAAACAAAABoF9eESAAAACwX14REF9eESAAAAAwX14QEAAAAcAAAABAX14QIF9eED"
+                    "nodeCount": 43,
+                    "nodes": "/////wAAAAH/////AAAAAAAAACoAAAADAAAAAQAAAAQF9eEpAAAAAgAAAAUF9eEpAAAAAwAAACcAAAAGAAAABAAAACQAAAAHAAAABQAAACMAAAAIAAAABgAAACAAAAAJAAAABwAAABQAAAAKAAAACAAAAA8AAAALAAAACQX14RIAAAAMAAAACgX14RYAAAANAAAACwX14RoAAAAOAAAADAX14R4F9eEoAAAACQX14RQAAAAQAAAACgX14RgAAAARAAAACwX14RwAAAASAAAADAX14SAAAAATAAAADQX14SYF9eEnAAAACAAAABoAAAAVAAAACQX14RMAAAAWAAAACgX14RcAAAAXAAAACwX14RsAAAAYAAAADAX14R8AAAAZAAAADgX14SQF9eElAAAACQX14RUAAAAbAAAACgX14RkAAAAcAAAACwX14R0AAAAdAAAADAX14SEAAAAeAAAADQAAAB8F9eEjAAAADgX14SIF9eEjAAAABwAAACIAAAAhAAAACAX14RAF9eEOAAAACAX14REF9eEPAAAACAX14QwF9eENAAAABwAAACYAAAAlAAAACAX14QgF9eEKAAAACAX14QkF9eELAAAABwAAACkAAAAoAAAACAX14QYF9eEEAAAACAX14QcF9eEFAAAABwX14QEAAAArAAAACAX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1244,6 +1528,106 @@
                                                 }
                                             ],
                                             "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.amazonaws.com",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
                                                 {
                                                     "conditions": [
                                                         {
@@ -1417,6 +1801,56 @@
                                                                 {
                                                                     "ref": "UseFIPS"
                                                                 },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.amazonwebservices.com.cn",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "cn-north-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-cn"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
                                                                 false
                                                             ]
                                                         },
@@ -1432,6 +1866,56 @@
                                                     ],
                                                     "endpoint": {
                                                         "url": "https://iam.cn-north-1.amazonaws.com.cn",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "cn-north-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-cn"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.amazonaws.com.cn",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
@@ -1758,6 +2242,106 @@
                                                                         "name"
                                                                     ]
                                                                 },
+                                                                "aws-iso"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.api.aws.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-iso-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.aws.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-iso-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
                                                                 "aws-iso-b"
                                                             ]
                                                         },
@@ -1858,6 +2442,106 @@
                                                                         "name"
                                                                     ]
                                                                 },
+                                                                "aws-iso-b"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.api.aws.scloud",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-isob-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-b"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.aws.scloud",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-isob-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
                                                                 "aws-iso-e"
                                                             ]
                                                         },
@@ -1882,6 +2566,156 @@
                                                     ],
                                                     "endpoint": {
                                                         "url": "https://iam.eu-isoe-west-1.cloud.adc-e.uk",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eu-isoe-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-e"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.cloud.adc-e.uk",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eu-isoe-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-e"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.api.cloud-aws.adc-e.uk",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eu-isoe-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-e"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.cloud-aws.adc-e.uk",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
@@ -1958,6 +2792,156 @@
                                                                         "name"
                                                                     ]
                                                                 },
+                                                                "aws-iso-f"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.csp.hci.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-isof-south-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-f"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.api.aws.hci.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-isof-south-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-iso-f"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.aws.hci.ic.gov",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-isof-south-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
                                                                 "aws-eusc"
                                                             ]
                                                         },
@@ -1982,6 +2966,156 @@
                                                     ],
                                                     "endpoint": {
                                                         "url": "https://iam.eusc-de-east-1.amazonaws.eu",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eusc-de-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-eusc"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.amazonaws.eu",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eusc-de-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-eusc"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam.global.api.amazonwebservices.eu",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eusc-de-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-eusc"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://iam-fips.api.amazonwebservices.eu",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
@@ -2053,7 +3187,7 @@
                                                                 {
                                                                     "conditions": [],
                                                                     "endpoint": {
-                                                                        "url": "https://iam-fips.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "url": "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
                                                                         "properties": {
                                                                             "authSchemes": [
                                                                                 {
@@ -2121,7 +3255,7 @@
                                                                 {
                                                                     "conditions": [],
                                                                     "endpoint": {
-                                                                        "url": "https://iam-fips.{PartitionResult#dnsSuffix}",
+                                                                        "url": "https://iam-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
                                                                         "properties": {
                                                                             "authSchemes": [
                                                                                 {
@@ -2189,7 +3323,7 @@
                                                                 {
                                                                     "conditions": [],
                                                                     "endpoint": {
-                                                                        "url": "https://iam.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "url": "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
                                                                         "properties": {
                                                                             "authSchemes": [
                                                                                 {
@@ -2216,7 +3350,7 @@
                                                 {
                                                     "conditions": [],
                                                     "endpoint": {
-                                                        "url": "https://iam.{PartitionResult#dnsSuffix}",
+                                                        "url": "https://iam.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
                                                         "properties": {
                                                             "authSchemes": [
                                                                 {
@@ -2372,7 +3506,7 @@
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "cn-northwest-1"
+                                                "signingRegion": "cn-north-1"
                                             }
                                         ]
                                     },
@@ -2393,7 +3527,7 @@
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "cn-northwest-1"
+                                                "signingRegion": "cn-north-1"
                                             }
                                         ]
                                     },
@@ -2975,6 +4109,92 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iam#AcquireRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#AcquireRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#AcquireRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#EntityAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iam#MalformedPolicyDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NameConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#RoleModifiedException"
+                },
+                {
+                    "target": "com.amazonaws.iam#RoleTemplateDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an IAM role from the specified role template. The new role takes its\n            configuration—including its name, path, trust policy, inline and managed policies,\n            permissions boundary, tags, and maximum session duration—from the role\n            template version that you specify. For more information about roles, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n                <i>IAM User Guide</i>.</p>\n         <p>If the template version defines parameters, use the <code>ReplacementValues</code>\n            parameter to supply the values that the service substitutes into the role during\n            creation.</p>"
+            }
+        },
+        "com.amazonaws.iam#AcquireRoleRequest": {
+            "type": "structure",
+            "members": {
+                "TemplateArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role template to create the role from.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateMinorVersion": {
+                    "target": "com.amazonaws.iam#integerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the role template to use. If you do not specify a minor version,\n            the service uses the template's default minor version.</p>"
+                    }
+                },
+                "ReplacementValues": {
+                    "target": "com.amazonaws.iam#mapStringReplacementValueEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of values to substitute for the parameters that are defined in the role template\n            version. Each key is a parameter name from the template, and each value is a structure\n            that contains the replacement values for that parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#AcquireRoleResponse": {
+            "type": "structure",
+            "members": {
+                "Role": {
+                    "target": "com.amazonaws.iam#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains details about the IAM role that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#ActionNameListType": {
             "type": "list",
             "member": {
@@ -3435,6 +4655,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an attached policy.</p>\n         <p>An attached policy is a managed policy that has been attached to a user, group, or role.\n         This data type is used as a response element in the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedGroupPolicies.html\">ListAttachedGroupPolicies</a>, <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html\">ListAttachedRolePolicies</a>, <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html\">ListAttachedUserPolicies</a>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html\">GetAccountAuthorizationDetails</a> operations. </p>\n         <p>For more information about managed policies, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n            policies</a> in the <i>IAM User Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.iam#AttachmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.iam#AttachmentType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "group"
+                    }
+                },
+                "ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "role"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#BootstrapDatum": {
@@ -4770,7 +6023,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a set of credentials consisting of a user name and password that can be used\n            to access the service specified in the request. These credentials are generated by\n            IAM, and can be used only for the specified service. </p>\n         <p>You can have a maximum of two sets of service-specific credentials for each supported\n            service per user.</p>\n         <p>You can create service-specific credentials for Amazon Bedrock, Amazon CloudWatch Logs, CodeCommit and Amazon Keyspaces (for Apache Cassandra).</p>\n         <p>You can reset the password to a new service-generated value by calling <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html\">ResetServiceSpecificCredential</a>.</p>\n         <p>For more information about service-specific credentials, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_bedrock.html\">Service-specific credentials for IAM users</a> in the\n                <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Generates a set of credentials consisting of a user name and password that can be used\n            to access the service specified in the request. These credentials are generated by\n            IAM, and can be used only for the specified service. </p>\n         <p>You can have a maximum of two sets of service-specific credentials for each supported\n            service per user.</p>\n         <p>You can reset the password to a new service-generated value by calling <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html\">ResetServiceSpecificCredential</a>.</p>\n         <p>For more information about using service-specific credentials to authenticate to an\n            Amazon Web Services service, refer to the following docs:</p>\n         <ul>\n            <li>\n               <p>For service-specific credentials with CodeCommit, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html\">IAM credentials for CodeCommit: Git credentials, SSH keys, and Amazon Web Services access\n                        keys</a> in the <i>IAM User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For service-specific credentials with Amazon Keyspaces (for Apache Cassandra), refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_keyspaces.html\">Use IAM with\n                        Amazon Keyspaces (for Apache Cassandra)</a> in the\n                        <i>IAM User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For services that support long-term API keys, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html\">API\n                        keys for Amazon Web Services services</a> in the\n                        <i>IAM User Guide</i>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iam#CreateServiceSpecificCredentialRequest": {
@@ -4793,7 +6046,7 @@
                 "CredentialAgeDays": {
                     "target": "com.amazonaws.iam#credentialAgeDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days until the service specific credential expires. This field is only\n            valid for Bedrock and CloudWatch Logs API keys and must be a positive integer. When not specified, the\n            credential will not expire.</p>"
+                        "smithy.api#documentation": "<p>The number of days until the service specific credential expires. This field is only\n            valid for services that support long-term API keys and must be a positive integer. When\n            not specified, the credential will not expire.</p>\n         <p>To see which services support long-term API keys, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html\">API keys\n                for Amazon Web Services services</a> in the\n                <i>IAM User Guide</i>.</p>"
                     }
                 }
             },
@@ -7133,7 +8386,7 @@
                 "EvalResourceName": {
                     "target": "com.amazonaws.iam#ResourceNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource that the indicated API operation was tested on.</p>"
+                        "smithy.api#documentation": "<p>The ARN template for the simulated resource type (for example,\n            <code>arn:${Partition}:s3:::${BucketName}/${KeyName}</code>), or <code>*</code> if no\n         ARN format is defined for the action. This is not a specific customer-provided resource\n         ARN. To find the decision for a specific resource, use\n            <code>ResourceSpecificResults</code>.</p>\n         <note>\n            <p>If you previously relied on <code>EvalResourceName</code> to identify which specific\n            resource a result applies to, you must now use the <code>EvalResourceName</code> field\n            within individual entries in <code>ResourceSpecificResults</code> instead.</p>\n         </note>"
                     }
                 },
                 "EvalDecision": {
@@ -7146,19 +8399,19 @@
                 "MatchedStatements": {
                     "target": "com.amazonaws.iam#StatementListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the statements in the input policies that determine the result for this\n         scenario. Remember that even if multiple statements allow the operation on the resource, if\n         only one statement denies that operation, then the explicit deny overrides any allow. In\n         addition, the deny statement is the only entry included in the result.</p>"
+                        "smithy.api#documentation": "<p>A list of the statements in the input policies that determine the result for this\n         scenario. Remember that even if multiple statements allow the operation on the resource, if\n         only one statement denies that operation, then the explicit deny overrides any allow. In\n         addition, the deny statement is the only entry included in the result.</p>\n         <p>In the top-level result, this field contains the union of matched statements across all\n         requested resources. Only statements that contributed to the reported decision are\n         included. For per-resource matched statements, see\n            <code>ResourceSpecificResults</code>. This field doesn't include statements from\n         service control policies (SCPs). Only statements from identity-based and resource-based\n         policies appear here.</p>"
                     }
                 },
                 "MissingContextValues": {
                     "target": "com.amazonaws.iam#ContextKeyNamesResultListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of context keys that are required by the included input policies but that were\n         not provided by one of the input parameters. This list is used when the resource in a\n         simulation is \"*\", either explicitly, or when the <code>ResourceArns</code> parameter\n         blank. If you include a list of resources, then any missing context values are instead\n         included under the <code>ResourceSpecificResults</code> section. To discover the context\n         keys used by a set of policies, you can call <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> or <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of context keys that are required by the included input policies but that were\n         not provided by one of the input parameters. This list is used when the resource in a\n         simulation is \"*\", either explicitly, or when the <code>ResourceArns</code> parameter\n         blank. If you include a list of resources, then any missing context values are instead\n         included under the <code>ResourceSpecificResults</code> section. To discover the context\n         keys used by a set of policies, you can call <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> or <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a>.</p>\n         <p>In the top-level result, this field contains the deduplicated set of missing context\n         values across all requested resources. This field doesn't include context keys referenced\n         by service control policies (SCPs). Only context keys referenced by identity-based and\n         resource-based policies appear here.</p>"
                     }
                 },
                 "OrganizationsDecisionDetail": {
                     "target": "com.amazonaws.iam#OrganizationsDecisionDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that details how Organizations and its service control policies affect the results of\n         the simulation. Only applies if the simulated user's account is part of an\n         organization.</p>"
+                        "smithy.api#documentation": "<p>A structure that details how Organizations and its service control policies affect the results of\n         the simulation. Only applies if the simulated user's account is part of an\n         organization.</p>\n         <p>For resources that don't support organization-level evaluation, this field is omitted\n         from the top-level result. For per-resource details, see\n            <code>ResourceSpecificResults</code>.</p>"
                     }
                 },
                 "PermissionsBoundaryDecisionDetail": {
@@ -7170,7 +8423,7 @@
                 "EvalDecisionDetails": {
                     "target": "com.amazonaws.iam#EvalDecisionDetailsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional details about the results of the cross-account evaluation decision. This\n         parameter is populated for only cross-account simulations. It contains a brief summary of\n         how each policy type contributes to the final evaluation decision.</p>\n         <p>If the simulation evaluates policies within the same account and includes a resource\n         ARN, then the parameter is present but the response is empty. If the simulation evaluates\n         policies within the same account and specifies all resources (<code>*</code>), then the\n         parameter is not returned.</p>\n         <p>When you make a cross-account request, Amazon Web Services evaluates the request in the trusting\n         account and the trusted account. The request is allowed only if both evaluations return\n            <code>true</code>. For more information about how policies are evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies within a single account</a>.</p>\n         <p>If an Organizations SCP included in the evaluation denies access, the simulation ends. In\n         this case, policy evaluation does not proceed any further and this parameter is not\n         returned.</p>"
+                        "smithy.api#documentation": "<p>Additional details about the results of the cross-account evaluation decision. This\n         parameter is populated for only cross-account simulations. It contains a brief summary of\n         how each policy type contributes to the final evaluation decision.</p>\n         <p>In the top-level result, this map reports the most restrictive decision per policy\n         type across all requested resources.</p>\n         <p>If the simulation evaluates policies within the same account and includes a resource\n         ARN, then the parameter is present but the response is empty. If the simulation evaluates\n         policies within the same account and specifies all resources (<code>*</code>), then the\n         parameter is not returned.</p>\n         <p>When you make a cross-account request, Amazon Web Services evaluates the request in the trusting\n         account and the trusted account. The request is allowed only if both evaluations return\n            <code>true</code>. For more information about how policies are evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics\">Evaluating policies within a single account</a>.</p>\n         <p>If an Organizations SCP included in the evaluation denies access, the simulation ends. In\n         this case, policy evaluation does not proceed any further and this parameter is not\n         returned.</p>"
                     }
                 },
                 "ResourceSpecificResults": {
@@ -7181,7 +8434,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of a simulation.</p>\n         <p>This data type is used by the return parameter of <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a>\n            </code> and <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a>\n            </code>.</p>"
+                "smithy.api#documentation": "<p>Contains the results of a simulation.</p>\n         <p>This data type is used by the return parameter of <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a>\n            </code> and <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a>\n            </code>.</p>\n         <important>\n            <p>The simulator now returns a single <code>EvaluationResult</code> per action,\n            regardless of how many resource ARNs are provided. Previously, simulating one action\n            against N resources returned N evaluation results, each containing the same aggregate\n            decision. The top-level fields (<code>EvalDecision</code>,\n            <code>MatchedStatements</code>, <code>MissingContextValues</code>,\n            <code>EvalDecisionDetails</code>) now represent the\n            <i>aggregate</i> decision across all requested resources. The top-level\n            <code>EvalDecision</code> reflects the most restrictive decision across all resources\n            (for example, if any resource produces <code>explicitDeny</code>, the top-level\n            decision is <code>explicitDeny</code>).</p>\n            <p>To see the decision for each individual resource, use\n            <code>ResourceSpecificResults</code>. If your application parses evaluation results per\n            resource ARN, update your code to read per-resource decisions from\n               <code>ResourceSpecificResults</code> rather than from the top-level result.</p>\n         </important>"
             }
         },
         "com.amazonaws.iam#EvaluationResultsListType": {
@@ -7626,6 +8879,47 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#GetAccountProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#GetAccountPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetAccountPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the account-level properties for the caller's Amazon Web Services account. Account\n            properties are configuration settings that control account-wide IAM features such as\n            Role Manager.</p>\n         <p>The service returns properties as key-value pairs in\n                <code>Namespace/PropertyName</code> format. Each namespace groups related\n            configuration settings. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutAccountProperties.html\">PutAccountProperties</a> to modify these properties.</p>"
+            }
+        },
+        "com.amazonaws.iam#GetAccountPropertiesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#GetAccountPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "Properties": {
+                    "target": "com.amazonaws.iam#accountPropertiesMapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of account property key-value pairs. Keys are in the format\n                <code>Namespace/PropertyName</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#GetAccountSummary": {
             "type": "operation",
             "input": {
@@ -7757,7 +9051,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all of the context keys referenced in all the IAM policies that are\n            attached to the specified IAM entity. The entity can be an IAM user, group, or role.\n            If you specify a user, then the request also includes all of the policies attached to\n            groups that the user is a member of.</p>\n         <p>You can optionally include a list of one or more additional policies, specified as\n            strings. If you want to include <i>only</i> a list of policies by string,\n            use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> instead.</p>\n         <p>\n            <b>Note:</b> This operation discloses information about the\n            permissions granted to other users. If you do not want users to see other user's\n            permissions, then consider allowing them to use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> instead.</p>\n         <p>Context keys are variables maintained by Amazon Web Services and its services that provide details\n            about the context of an API query request. Context keys can be evaluated by testing\n            against a value in an IAM policy. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a> to understand what key names and values\n            you must supply when you call <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a>.</p>"
+                "smithy.api#documentation": "<p>Gets a list of all of the context keys referenced in all the IAM policies that are\n            attached to the specified IAM entity. The entity can be an IAM user, group, or role.\n            If you specify a user, then the request also includes all of the policies attached to\n            groups that the user is a member of.</p>\n         <p>You can optionally include a list of one or more additional policies, specified as\n            strings. If you want to include <i>only</i> a list of policies by string,\n            use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> instead.</p>\n         <p>\n            <b>Note:</b> This operation discloses information about the\n            permissions granted to other users. If you do not want users to see other user's\n            permissions, then consider allowing them to use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a> instead.</p>\n         <p>Context keys are variables maintained by Amazon Web Services and its services that provide details\n            about the context of an API query request. Context keys can be evaluated by testing\n            against a value in an IAM policy. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a> to understand what key names and values\n            you must supply when you call <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a>. This operation doesn't return context keys\n            referenced by service control policies (SCPs). Only context keys referenced by the\n            identity-based policies attached to the specified entity, and any additional policies\n            that you provide, are included.</p>"
             }
         },
         "com.amazonaws.iam#GetContextKeysForPrincipalPolicyRequest": {
@@ -8941,6 +10235,65 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#GetRoleTemplateVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#GetRoleTemplateVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetRoleTemplateVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a version of the specified role template. Role templates\n            define a reusable configuration—including role name and path patterns, trust\n            policy, inline and managed policies, permissions boundary, tags, and maximum session\n            duration—that you use to create IAM roles with <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>.</p>\n         <p>If you do not specify a minor version, the service returns the template's default\n            minor version.</p>"
+            }
+        },
+        "com.amazonaws.iam#GetRoleTemplateVersionRequest": {
+            "type": "structure",
+            "members": {
+                "TemplateArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role template whose version you want to\n            retrieve.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinorVersion": {
+                    "target": "com.amazonaws.iam#minorVersionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the role template to retrieve. If you do not specify a minor\n            version, the service returns the template's default minor version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#GetRoleTemplateVersionResponse": {
+            "type": "structure",
+            "members": {
+                "RoleTemplateVersion": {
+                    "target": "com.amazonaws.iam#RoleTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains details about the requested role template version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#GetSAMLProvider": {
             "type": "operation",
             "input": {
@@ -9752,6 +11105,57 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an IAM group, including all of the group's policies.</p>\n         <p>This data type is used as a response element in the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html\">GetAccountAuthorizationDetails</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.iam#InlinePolicy": {
+            "type": "structure",
+            "members": {
+                "PolicyName": {
+                    "target": "com.amazonaws.iam#policyNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inline policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.iam#policyDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline policy document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an inline policy template that the service embeds in roles that you create from a\n         role template.</p>"
+            }
+        },
+        "com.amazonaws.iam#InlinePolicyIdentifierType": {
+            "type": "structure",
+            "members": {
+                "PolicyName": {
+                    "target": "com.amazonaws.iam#policyNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inline policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentType": {
+                    "target": "com.amazonaws.iam#AttachmentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IAM entity that the inline policy is attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.iam#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM user, group, or role that the inline policy is attached to.\n         Wildcard characters are supported to match multiple entities: use at most one\n         <code>*</code> (matches any sequence of characters, including none), and any number of\n         <code>?</code> (each matches exactly one character).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies one or more inline policies that are embedded in IAM users, groups, or\n         roles, by the name of the policy together with the type and name of the entity that it is\n         attached to. Wildcard characters in the entity name can match multiple entities, so a\n         single identifier can select more than one attached inline policy.</p>"
             }
         },
         "com.amazonaws.iam#InstanceProfile": {
@@ -12535,7 +13939,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the service-specific credentials associated with the\n            specified IAM user. If none exists, the operation returns an empty list. The\n            service-specific credentials returned by this operation are used only for authenticating\n            the IAM user to a specific service. For more information about using service-specific\n            credentials to authenticate to an Amazon Web Services service, see <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html\">Set up service-specific credentials</a>\n            in the CodeCommit User Guide.</p>"
+                "smithy.api#documentation": "<p>Returns information about the service-specific credentials associated with the\n            specified IAM user. If none exists, the operation returns an empty list. The\n            service-specific credentials returned by this operation are used only for authenticating\n            the IAM user to a specific service. For more information about using service-specific\n            credentials to authenticate to an Amazon Web Services service, refer to the following docs:</p>\n         <ul>\n            <li>\n               <p>For service-specific credentials with CodeCommit, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html\">IAM credentials for CodeCommit: Git credentials, SSH keys, and Amazon Web Services access\n                        keys</a> in the <i>IAM User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For service-specific credentials with Amazon Keyspaces (for Apache Cassandra), refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_keyspaces.html\">Use IAM with\n                        Amazon Keyspaces (for Apache Cassandra)</a> in the\n                        <i>IAM User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For services that support long-term API keys, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html\">API\n                        keys for Amazon Web Services services</a> in the\n                        <i>IAM User Guide</i>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iam#ListServiceSpecificCredentialsRequest": {
@@ -13271,6 +14675,23 @@
                 "target": "com.amazonaws.iam#ManagedPolicyDetail"
             }
         },
+        "com.amazonaws.iam#NameConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iam#nameConflictMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NameConflict",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request was rejected because the resulting role name conflicts with an existing role\n      in the account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.iam#NoSuchEntityException": {
             "type": "structure",
             "members": {
@@ -13335,6 +14756,20 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iam#OrderedOrganizationPolicyType": {
+            "type": "structure",
+            "members": {
+                "ServiceControlPolicyInputList": {
+                    "target": "com.amazonaws.iam#SimulationPolicyListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of SCP documents that apply at this level of the Organizations hierarchy. Each document\n         is specified as a string containing the complete, valid JSON text of an SCP.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents one level of an Organizations hierarchy—the organization root, an organizational\n         unit (OU), or an account—together with the service control policies (SCPs) that apply at\n         that level. Each element in the list represents one level of the hierarchy, ordered from\n         the organization root down to the account.</p>\n         <p>For more information about SCPs, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html\">Service control\n            policies (SCPs)</a> in the <i>Organizations User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.iam#OrganizationIdType": {
             "type": "string",
             "traits": {
@@ -13371,6 +14806,18 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iam#OrganizationPolicyListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#OrderedOrganizationPolicyType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 7
+                }
+            }
+        },
         "com.amazonaws.iam#OrganizationsDecisionDetail": {
             "type": "structure",
             "members": {
@@ -13384,6 +14831,60 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the effect that Organizations has on a policy simulation.</p>"
+            }
+        },
+        "com.amazonaws.iam#ParameterDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.iam#parameterNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.iam#parameterTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the parameter. Valid values are <code>String</code>,\n            <code>StringList</code>, <code>Number</code>, <code>NumberList</code>,\n            <code>Arn</code>, and <code>ArnList</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubType": {
+                    "target": "com.amazonaws.iam#parameterSubTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional subtype that further constrains the values that are allowed for the\n         parameter.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iam#parameterDescriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the parameter.</p>"
+                    }
+                },
+                "IsRequired": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether you must supply a value for the parameter when you create a role from\n         the template.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.iam#parameterDefaultValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that the service uses for the parameter when you do not supply one.</p>"
+                    }
+                },
+                "Immutable": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether you can change the parameter value after you create the role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a parameter that a role template accepts. You supply values for these parameters\n         when you create a role with <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>.</p>"
             }
         },
         "com.amazonaws.iam#PasswordPolicy": {
@@ -13641,6 +15142,18 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.iam#PolicyExclusionsListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#PolicyIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iam#PolicyGrantingServiceAccess": {
             "type": "structure",
             "members": {
@@ -13702,6 +15215,73 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iam#PolicyGroup"
+            }
+        },
+        "com.amazonaws.iam#PolicyIdentifier": {
+            "type": "union",
+            "members": {
+                "PolicyType": {
+                    "target": "com.amazonaws.iam#PolicyIdentifierPolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy type to identify. All policies of the specified type are matched.</p>"
+                    }
+                },
+                "PolicyArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services managed policy or a customer managed policy\n         that is attached to an IAM user, group, or role. Wildcard characters are supported in\n         the resource name portion of the ARN to match multiple managed policies: use at most one\n         <code>*</code> (matches any sequence of characters, including none), and any number of\n         <code>?</code> (each matches exactly one character).</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "InlinePolicyIdentifier": {
+                    "target": "com.amazonaws.iam#InlinePolicyIdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An inline policy identifier consisting of a policy name and the entity it is attached\n         to. Wildcard characters (<code>*</code> and <code>?</code>) in the entity name can match\n         multiple entities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies one or more policies as a union type. Specify exactly one of\n         <code>PolicyType</code>, <code>PolicyArn</code>, or\n         <code>InlinePolicyIdentifier</code> to identify policies by their type, by Amazon\n         Resource Name (ARN), or by the name of an inline policy and the entity it is attached\n         to.</p>"
+            }
+        },
+        "com.amazonaws.iam#PolicyIdentifierPolicyType": {
+            "type": "enum",
+            "members": {
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inline"
+                    }
+                },
+                "AWS_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-managed"
+                    }
+                },
+                "USER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user-managed"
+                    }
+                },
+                "PERMISSION_BOUNDARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "permission-boundary"
+                    }
+                },
+                "SCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scp"
+                    }
+                },
+                "RCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rcp"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#PolicyIdentifierType": {
@@ -13939,6 +15519,51 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the row and column of a location of a <code>Statement</code> element in a\n         policy document.</p>\n         <p>This data type is used as a member of the <code>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_Statement.html\">Statement</a>\n            </code> type.</p>"
+            }
+        },
+        "com.amazonaws.iam#PutAccountProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#PutAccountPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#PutAccountPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets account-level properties for the caller's Amazon Web Services account. Account properties are\n            configuration settings that control account-wide IAM features such as Role\n            Manager.</p>\n         <p>Specify properties as key-value pairs in\n                <code>Namespace/PropertyName</code> format. All properties in a single request must\n            belong to the same namespace. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountProperties.html\">GetAccountProperties</a> to view the current properties.</p>"
+            }
+        },
+        "com.amazonaws.iam#PutAccountPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "Properties": {
+                    "target": "com.amazonaws.iam#accountPropertiesMapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of property key-value pairs to set. All keys must belong to the same\n            namespace.</p>\n         <p>Each key uses the format <code>Namespace/PropertyName</code>. The key must contain\n            exactly one <code>/</code> separating the namespace from the property name, and cannot\n            start or end with <code>/</code>.</p>\n         <p>The service validates each value based on the property key's expected type. For\n            example, boolean properties expect <code>true</code> or <code>false</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#PutAccountPropertiesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iam#PutGroupPolicy": {
@@ -14467,6 +16092,21 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.iam#ReplacementValueEntry": {
+            "type": "structure",
+            "members": {
+                "Values": {
+                    "target": "com.amazonaws.iam#replacementValueListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of replacement values for the template parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the list of replacement values for a single template parameter used when\n         creating a role from a role template.</p>"
+            }
+        },
         "com.amazonaws.iam#ReportContentType": {
             "type": "blob"
         },
@@ -14790,6 +16430,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the last time that an IAM role was used. This includes the\n         date and time and the Region in which the role was last used. Activity is only reported for\n         the trailing 400 days. This period can be shorter if your Region began supporting these\n         features within the last year. The role might have been used more than 400 days ago. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a> in the <i>IAM user\n         Guide</i>.</p>"
                     }
+                },
+                "SourceRoleTemplate": {
+                    "target": "com.amazonaws.iam#SourceRoleTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the role template that this role was created from. This\n         member is present only for roles created with <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14891,6 +16537,188 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the last time that an IAM role was used. This includes the\n         date and time and the Region in which the role was last used. Activity is only reported for\n         the trailing 400 days. This period can be shorter if your Region began supporting these\n         features within the last year. The role might have been used more than 400 days ago. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period\">Regions where data is tracked</a> in the <i>IAM user\n         Guide</i>.</p>\n         <p>This data type is returned as a response element in the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html\">GetRole</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html\">GetAccountAuthorizationDetails</a> operations.</p>"
+            }
+        },
+        "com.amazonaws.iam#RoleModifiedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iam#roleModifiedMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RoleModified",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request was rejected because someone modified the role template while the service was\n      creating the role. Wait a few minutes and try the request again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iam#RoleTemplateDisabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iam#roleTemplateDisabledMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RoleTemplateDisabled",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The request was rejected because the specified role template is disabled. A disabled\n      role template cannot be used to create new roles. Contact your administrator to enable the\n      role template, or use a different role template.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iam#RoleTemplateVersion": {
+            "type": "structure",
+            "members": {
+                "TemplateArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the role template.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "TemplateName": {
+                    "target": "com.amazonaws.iam#roleTemplateNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name that identifies the role template.</p>"
+                    }
+                },
+                "TemplateVersionId": {
+                    "target": "com.amazonaws.iam#idType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the role template version.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iam#roleTemplateDescriptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the role template.</p>"
+                    }
+                },
+                "MajorVersion": {
+                    "target": "com.amazonaws.iam#integerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The major version number of the role template.</p>"
+                    }
+                },
+                "DefaultMinorVersion": {
+                    "target": "com.amazonaws.iam#minorVersionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version that the service uses by default when you create a role from this template\n         without specifying a minor version.</p>"
+                    }
+                },
+                "ManagedByType": {
+                    "target": "com.amazonaws.iam#managedByTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the role template is managed by an Amazon Web Services service.</p>"
+                    }
+                },
+                "ManagedByValue": {
+                    "target": "com.amazonaws.iam#managedByValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services service that manages the role template.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the role template is enabled. When a template is disabled, you cannot\n         create roles from it.</p>"
+                    }
+                },
+                "MinorVersion": {
+                    "target": "com.amazonaws.iam#minorVersionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version number of this role template version.</p>"
+                    }
+                },
+                "RoleNamePattern": {
+                    "target": "com.amazonaws.iam#roleNamePatternType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern that is used to generate the name of a role that is created from this\n         template. The pattern can include <code>@{parameter}</code> placeholders that are replaced\n         with the values you supply in the <code>ReplacementValues</code> parameter of <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>.</p>"
+                    }
+                },
+                "RolePathPattern": {
+                    "target": "com.amazonaws.iam#rolePathPatternType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern that is used to generate the path of a role that is created from this\n         template.</p>"
+                    }
+                },
+                "RoleDescriptionPattern": {
+                    "target": "com.amazonaws.iam#roleDescriptionPatternType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern that is used to generate the description of a role that is created from this\n         template.</p>"
+                    }
+                },
+                "AssumeRolePolicyDocumentTemplate": {
+                    "target": "com.amazonaws.iam#policyDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust policy template that grants an entity permission to assume roles that you\n         create from this template.</p>"
+                    }
+                },
+                "InlinePolicyTemplates": {
+                    "target": "com.amazonaws.iam#inlinePolicyTemplateListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of inline policy templates that the service embeds in roles that you create from\n         this template.</p>"
+                    }
+                },
+                "ManagedPolicyArns": {
+                    "target": "com.amazonaws.iam#managedPolicyArnListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the ARNs of the managed policies that the service attaches to roles that you\n         create from this template.</p>"
+                    }
+                },
+                "PermissionBoundaryArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the policy that sets the permissions boundary for roles that you create from\n         this template.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "ParametersDefinition": {
+                    "target": "com.amazonaws.iam#parametersDefinitionListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the parameters that are defined for this role template version. You supply\n         values for these parameters when you create a role with <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>.</p>"
+                    }
+                },
+                "RoleTagsTemplate": {
+                    "target": "com.amazonaws.iam#tagTemplateListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag templates that are applied to roles that are created from this\n         template.</p>"
+                    }
+                },
+                "MaxSessionDuration": {
+                    "target": "com.amazonaws.iam#roleMaxSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum session duration (in seconds) for roles that are created from this\n         template.</p>"
+                    }
+                },
+                "VersionEnabled": {
+                    "target": "com.amazonaws.iam#booleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether this specific minor version of the role template is enabled.</p>"
+                    }
+                },
+                "CreateTimestamp": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when the role template version was created.</p>"
+                    }
+                },
+                "UpdateTimestamp": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when the role template version was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a version of an IAM role template, including the\n         configuration that is used to create roles with <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html\">AcquireRole</a>. This structure\n         is returned as a response element by the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRoleTemplateVersion.html\">GetRoleTemplateVersion</a> operation.</p>"
             }
         },
         "com.amazonaws.iam#RoleUsageListType": {
@@ -15603,7 +17431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Simulate how a set of IAM policies and optionally a resource-based policy works with\n            a list of API operations and Amazon Web Services resources to determine the policies' effective\n            permissions. The policies are provided as strings.</p>\n         <p>The simulation does not perform the API operations; it only checks the authorization\n            to determine if the simulated policies allow or deny the operations. You can simulate\n            resources that don't exist in your account.</p>\n         <p>If you want to simulate existing policies that are attached to an IAM user, group,\n            or role, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a> instead.</p>\n         <p>Context keys are variables that are maintained by Amazon Web Services and its services and which\n            provide details about the context of an API query request. You can use the\n                <code>Condition</code> element of an IAM policy to evaluate context keys. To get\n            the list of context keys that the policies require for correct simulation, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a>.</p>\n         <p>If the output is long, you can use <code>MaxItems</code> and <code>Marker</code>\n            parameters to paginate the results.</p>\n         <note>\n            <p>The IAM policy simulator evaluates statements in the identity-based policy and\n                the inputs that you provide during simulation. The policy simulator results can\n                differ from your live Amazon Web Services environment. We recommend that you check your policies\n                against your live Amazon Web Services environment after testing using the policy simulator to\n                confirm that you have the desired results. For more information about using the\n                policy simulator, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html\">Testing IAM\n                    policies with the IAM policy simulator </a>in the\n                    <i>IAM User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Simulate how a set of IAM policies and optionally a resource-based policy works with\n            a list of API operations and Amazon Web Services resources to determine the policies' effective\n            permissions. The policies are provided as strings.</p>\n         <p>The simulation does not perform the API operations; it only checks the authorization\n            to determine if the simulated policies allow or deny the operations. You can simulate\n            resources that don't exist in your account.</p>\n         <p>If you want to simulate existing policies that are attached to an IAM user, group,\n            or role, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a> instead.</p>\n         <p>Context keys are variables that are maintained by Amazon Web Services and its services and which\n            provide details about the context of an API query request. You can use the\n                <code>Condition</code> element of an IAM policy to evaluate context keys. To get\n            the list of context keys that the policies require for correct simulation, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html\">GetContextKeysForCustomPolicy</a>.</p>\n         <p>If the output is long, you can use <code>MaxItems</code> and <code>Marker</code>\n            parameters to paginate the results.</p>\n         <note>\n            <p>The IAM policy simulator evaluates statements in identity-based policies,\n                service control policies (SCPs) including their condition keys and resource\n                scoping, and the inputs that you provide during simulation. The policy\n                simulator results can differ from your live Amazon Web Services environment. We recommend that you check your policies\n                against your live Amazon Web Services environment after testing using the policy simulator to\n                confirm that you have the desired results. For more information about using the\n                policy simulator, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html\">Testing IAM\n                    policies with the IAM policy simulator </a>in the\n                    <i>IAM User Guide</i>.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -15626,6 +17454,12 @@
                     "target": "com.amazonaws.iam#SimulationPolicyListType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IAM permissions boundary policy to simulate. The permissions boundary sets the\n            maximum permissions that an IAM entity can have. You can input only one permissions\n            boundary when you pass a policy to this operation. For more information about\n            permissions boundaries, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n                entities</a> in the <i>IAM User Guide</i>. The policy input is\n            specified as a string that contains the complete, valid JSON text of a permissions\n            boundary policy.</p>\n         <p>The maximum length of the policy document that you can pass in this operation,\n            including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length\">IAM and STS character quotas</a>.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> \n    used to validate this parameter is a string of characters consisting of the following:</p>\n         <ul>\n            <li>\n               <p>Any printable ASCII \n    character ranging from the space character (<code>\\u0020</code>) through the end of the ASCII character range</p>\n            </li>\n            <li>\n               <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set \n    (through <code>\\u00FF</code>)</p>\n            </li>\n            <li>\n               <p>The special characters tab (<code>\\u0009</code>), line feed (<code>\\u000A</code>), and \n    carriage return (<code>\\u000D</code>)</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OrderedOrganizationPolicyInputList": {
+                    "target": "com.amazonaws.iam#OrganizationPolicyListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered list of service control policies (SCPs) to include in the simulation. Each\n            element represents one level of an Organizations hierarchy, from the organization root to the\n            account.</p>\n         <p>The simulator evaluates SCPs in the order that you provide, consistent with how Organizations\n            enforces SCPs. The first element must represent the organization root, and the last\n            element must represent the account. Any elements between them represent organizational\n            units (OUs) in descending order.</p>\n         <p>Use this parameter to simulate the effect of an SCP hierarchy without calling <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html\">SimulatePrincipalPolicy</a>.</p>"
                     }
                 },
                 "ActionNames": {
@@ -15656,7 +17490,7 @@
                 "CallerArn": {
                     "target": "com.amazonaws.iam#ResourceNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM user that you want to use as the simulated caller of the API\n            operations. <code>CallerArn</code> is required if you include a\n                <code>ResourcePolicy</code> so that the policy's <code>Principal</code> element has\n            a value to use in evaluating the policy.</p>\n         <p>You can specify only the ARN of an IAM user. You cannot specify the ARN of an\n            assumed role, federated user, or a service principal.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM user, group, or role that you want to use as the simulated\n            caller of the API operations. <code>CallerArn</code> is required if you include a\n                <code>ResourcePolicy</code> so that the policy's <code>Principal</code> element has\n            a value to use in evaluating the policy.</p>\n         <p>You cannot specify the ARN of an assumed role, federated user, or a service\n            principal.</p>"
                     }
                 },
                 "ContextEntries": {
@@ -15735,7 +17569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Simulate how a set of IAM policies attached to an IAM entity works with a list of\n            API operations and Amazon Web Services resources to determine the policies' effective permissions. The\n            entity can be an IAM user, group, or role. If you specify a user, then the simulation\n            also includes all of the policies that are attached to groups that the user belongs to.\n            You can simulate resources that don't exist in your account.</p>\n         <p>You can optionally include a list of one or more additional policies specified as\n            strings to include in the simulation. If you want to simulate only policies specified as\n            strings, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a> instead.</p>\n         <p>You can also optionally include one resource-based policy to be evaluated with each of\n            the resources included in the simulation for IAM users only.</p>\n         <p>The simulation does not perform the API operations; it only checks the authorization\n            to determine if the simulated policies allow or deny the operations.</p>\n         <p>\n            <b>Note:</b> This operation discloses information about the\n            permissions granted to other users. If you do not want users to see other user's\n            permissions, then consider allowing them to use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a> instead.</p>\n         <p>Context keys are variables maintained by Amazon Web Services and its services that provide details\n            about the context of an API query request. You can use the <code>Condition</code>\n            element of an IAM policy to evaluate context keys. To get the list of context keys\n            that the policies require for correct simulation, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a>.</p>\n         <p>If the output is long, you can use the <code>MaxItems</code> and <code>Marker</code>\n            parameters to paginate the results.</p>\n         <note>\n            <p>The IAM policy simulator evaluates statements in the identity-based policy and\n                the inputs that you provide during simulation. The policy simulator results can\n                differ from your live Amazon Web Services environment. We recommend that you check your policies\n                against your live Amazon Web Services environment after testing using the policy simulator to\n                confirm that you have the desired results. For more information about using the\n                policy simulator, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html\">Testing IAM\n                    policies with the IAM policy simulator </a>in the\n                    <i>IAM User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Simulate how a set of IAM policies attached to an IAM entity works with a list of\n            API operations and Amazon Web Services resources to determine the policies' effective permissions. The\n            entity can be an IAM user, group, or role. If you specify a user, then the simulation\n            also includes all of the policies that are attached to groups that the user belongs to.\n            You can simulate resources that don't exist in your account.</p>\n         <p>You can optionally include a list of one or more additional policies specified as\n            strings to include in the simulation. If you want to simulate only policies specified as\n            strings, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a> instead.</p>\n         <p>You can also optionally include one resource-based policy to be evaluated with each of\n            the resources included in the simulation for IAM users only.</p>\n         <p>The simulation does not perform the API operations; it only checks the authorization\n            to determine if the simulated policies allow or deny the operations.</p>\n         <p>For cross-account simulations, <code>EvalDecisionDetails</code> returns the decision\n            for each policy type (identity-based policy, resource-based policy, and permissions\n            boundary). This helps you identify which policy type is responsible for an allow or\n            deny decision when policies span multiple accounts.</p>\n         <p>\n            <b>Note:</b> This operation discloses information about the\n            permissions granted to other users. If you do not want users to see other user's\n            permissions, then consider allowing them to use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html\">SimulateCustomPolicy</a> instead.</p>\n         <p>Context keys are variables maintained by Amazon Web Services and its services that provide details\n            about the context of an API query request. You can use the <code>Condition</code>\n            element of an IAM policy to evaluate context keys. To get the list of context keys\n            that the policies require for correct simulation, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html\">GetContextKeysForPrincipalPolicy</a>.</p>\n         <p>If the output is long, you can use the <code>MaxItems</code> and <code>Marker</code>\n            parameters to paginate the results.</p>\n         <note>\n            <p>The IAM policy simulator evaluates statements in identity-based policies,\n                service control policies (SCPs) including their condition keys and resource\n                scoping, and the inputs that you provide during simulation. The policy\n                simulator results can differ from your live Amazon Web Services environment. We recommend that you check your policies\n                against your live Amazon Web Services environment after testing using the policy simulator to\n                confirm that you have the desired results. For more information about using the\n                policy simulator, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html\">Testing IAM\n                    policies with the IAM policy simulator </a>in the\n                    <i>IAM User Guide</i>.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -15766,6 +17600,12 @@
                         "smithy.api#documentation": "<p>The IAM permissions boundary policy to simulate. The permissions boundary sets the\n            maximum permissions that the entity can have. You can input only one permissions\n            boundary when you pass a policy to this operation. An IAM entity can only have one\n            permissions boundary in effect at a time. For example, if a permissions boundary is\n            attached to an entity and you pass in a different permissions boundary policy using this\n            parameter, then the new permissions boundary policy is used for the simulation. For more\n            information about permissions boundaries, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n                entities</a> in the <i>IAM User Guide</i>. The policy input is\n            specified as a string containing the complete, valid JSON text of a permissions boundary\n            policy.</p>\n         <p>The maximum length of the policy document that you can pass in this operation,\n            including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length\">IAM and STS character quotas</a>.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> \n    used to validate this parameter is a string of characters consisting of the following:</p>\n         <ul>\n            <li>\n               <p>Any printable ASCII \n    character ranging from the space character (<code>\\u0020</code>) through the end of the ASCII character range</p>\n            </li>\n            <li>\n               <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set \n    (through <code>\\u00FF</code>)</p>\n            </li>\n            <li>\n               <p>The special characters tab (<code>\\u0009</code>), line feed (<code>\\u000A</code>), and \n    carriage return (<code>\\u000D</code>)</p>\n            </li>\n         </ul>"
                     }
                 },
+                "PolicyExclusionList": {
+                    "target": "com.amazonaws.iam#PolicyExclusionsListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of policies to exclude from the simulation. Use this parameter to test what\n            the simulation result would be if a policy were removed, without changing which\n            policies are actually attached to the principal identified by\n            <code>PolicySourceArn</code>.</p>\n         <p>Each entry is a <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_PolicyIdentifier.html\">PolicyIdentifier</a>\n            that identifies one or more policies to exclude by policy type, by Amazon Resource Name\n            (ARN), or by the name of an inline policy and the entity it is attached to.</p>\n         <p>Syntactically invalid identifiers, such as malformed ARNs or wildcards in disallowed\n            positions, cause the request to fail with an <code>InvalidInput</code> error.\n            Syntactically valid identifiers that don't match any attached policy are ignored.\n            Resource control policies (RCPs) are not supported in this release; identifiers that\n            target RCPs are also ignored.</p>"
+                    }
+                },
                 "ActionNames": {
                     "target": "com.amazonaws.iam#ActionNameListType",
                     "traits": {
@@ -15794,7 +17634,7 @@
                 "CallerArn": {
                     "target": "com.amazonaws.iam#ResourceNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM user that you want to specify as the simulated caller of the API\n            operations. If you do not specify a <code>CallerArn</code>, it defaults to the ARN of\n            the user that you specify in <code>PolicySourceArn</code>, if you specified a user. If\n            you include both a <code>PolicySourceArn</code> (for example,\n                <code>arn:aws:iam::123456789012:user/David</code>) and a <code>CallerArn</code> (for\n            example, <code>arn:aws:iam::123456789012:user/Bob</code>), the result is that you\n            simulate calling the API operations as Bob, as if Bob had David's policies.</p>\n         <p>You can specify only the ARN of an IAM user. You cannot specify the ARN of an\n            assumed role, federated user, or a service principal.</p>\n         <p>\n            <code>CallerArn</code> is required if you include a <code>ResourcePolicy</code> and\n            the <code>PolicySourceArn</code> is not the ARN for an IAM user. This is required so\n            that the resource-based policy's <code>Principal</code> element has a value to use in\n            evaluating the policy.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM user, group, or role that you want to specify as the simulated\n            caller of the API operations. If you do not specify a <code>CallerArn</code>, it\n            defaults to the ARN of the user, group, or role that you specify in\n                <code>PolicySourceArn</code>. If you include both a <code>PolicySourceArn</code>\n            (for example, <code>arn:aws:iam::123456789012:user/David</code>) and a\n                <code>CallerArn</code> (for example,\n                <code>arn:aws:iam::123456789012:user/Bob</code>), the result is that you simulate\n            calling the API operations as Bob, as if Bob had David's policies.</p>\n         <p>You can specify the ARN of an IAM user, group, or role. You cannot specify the ARN\n            of an assumed role, federated user, or a service principal.</p>\n         <p>\n            <code>CallerArn</code> is required if you include a <code>ResourcePolicy</code> and\n            the <code>PolicySourceArn</code> is not the ARN for an IAM user, group, or role. This\n            is required so that the resource-based policy's <code>Principal</code> element has a\n            value to use in evaluating the policy.</p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "ContextEntries": {
@@ -15830,6 +17670,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iam#policyDocumentType"
+            }
+        },
+        "com.amazonaws.iam#SourceRoleTemplate": {
+            "type": "structure",
+            "members": {
+                "TemplateArn": {
+                    "target": "com.amazonaws.iam#arnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role template that the role was created\n         from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateMinorVersion": {
+                    "target": "com.amazonaws.iam#integerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the role template that was used to create the role.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the role template that a role was created from.</p>"
             }
         },
         "com.amazonaws.iam#Statement": {
@@ -16266,6 +18128,28 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#TagTemplate": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.iam#tagTemplateKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key name of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.iam#tagTemplateValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the tag key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a tag that is applied to roles that are created from a role template. The key\n         and value can include <code>@{parameter}</code> placeholders that are replaced with\n         template parameter values when the role is created.</p>"
             }
         },
         "com.amazonaws.iam#TagUser": {
@@ -18245,6 +20129,35 @@
                 "smithy.api#pattern": "^\\d{12}$"
             }
         },
+        "com.amazonaws.iam#accountPropertiesMapType": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iam#accountPropertyKeyType"
+            },
+            "value": {
+                "target": "com.amazonaws.iam#accountPropertyValueType"
+            }
+        },
+        "com.amazonaws.iam#accountPropertyKeyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9/_-]*$"
+            }
+        },
+        "com.amazonaws.iam#accountPropertyValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "String representation of the property value. The service will validate\n        and coerce the value based on the property key's expected type.\n        For example, integer properties expect numeric strings, and boolean\n        properties expect \"true\" or \"false\".",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.iam#allUsers": {
             "type": "boolean"
         },
@@ -18568,6 +20481,12 @@
                 "smithy.api#pattern": "^[\\w]+$"
             }
         },
+        "com.amazonaws.iam#inlinePolicyTemplateListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#InlinePolicy"
+            }
+        },
         "com.amazonaws.iam#instanceProfileListType": {
             "type": "list",
             "member": {
@@ -18664,6 +20583,47 @@
         "com.amazonaws.iam#malformedPolicyDocumentMessage": {
             "type": "string"
         },
+        "com.amazonaws.iam#managedByTypeType": {
+            "type": "enum",
+            "members": {
+                "Service": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Service"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iam#managedByValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iam#managedPolicyArnListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#arnType"
+            }
+        },
+        "com.amazonaws.iam#mapStringReplacementValueEntry": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iam#stringType"
+            },
+            "value": {
+                "target": "com.amazonaws.iam#ReplacementValueEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.iam#markerType": {
             "type": "string",
             "traits": {
@@ -18709,6 +20669,12 @@
                     "max": 128
                 }
             }
+        },
+        "com.amazonaws.iam#minorVersionType": {
+            "type": "integer"
+        },
+        "com.amazonaws.iam#nameConflictMessage": {
+            "type": "string"
         },
         "com.amazonaws.iam#noSuchEntityMessage": {
             "type": "string"
@@ -18760,6 +20726,89 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9:/+=,.@_-]+$"
+            }
+        },
+        "com.amazonaws.iam#parameterDefaultValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.iam#parameterDescriptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.iam#parameterNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iam#parameterSubTypeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iam#parameterTypeType": {
+            "type": "enum",
+            "members": {
+                "String": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "String"
+                    }
+                },
+                "StringList": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringList"
+                    }
+                },
+                "Number": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Number"
+                    }
+                },
+                "NumberList": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumberList"
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arn"
+                    }
+                },
+                "ArnList": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ArnList"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iam#parametersDefinitionListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#ParameterDefinition"
             }
         },
         "com.amazonaws.iam#passwordPolicyViolationMessage": {
@@ -19108,6 +21157,18 @@
                 "smithy.api#pattern": "^http(s?)://[a-zA-Z0-9._/-]*(\\?[a-zA-Z0-9._=&-]*)?(#[a-zA-Z0-9._/-]*)?$"
             }
         },
+        "com.amazonaws.iam#replacementValueListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#stringType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.iam#reportGenerationLimitExceededMessage": {
             "type": "string"
         },
@@ -19144,6 +21205,15 @@
         "com.amazonaws.iam#responseMarkerType": {
             "type": "string"
         },
+        "com.amazonaws.iam#roleDescriptionPatternType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
         "com.amazonaws.iam#roleDescriptionType": {
             "type": "string",
             "traits": {
@@ -19178,6 +21248,18 @@
                 }
             }
         },
+        "com.amazonaws.iam#roleModifiedMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#roleNamePatternType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iam#roleNameType": {
             "type": "string",
             "traits": {
@@ -19188,10 +21270,43 @@
                 "smithy.api#pattern": "^[\\w+=,.@-]+$"
             }
         },
+        "com.amazonaws.iam#rolePathPatternType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^/[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*/$"
+            }
+        },
         "com.amazonaws.iam#rolePermissionRestrictionArnListType": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iam#arnType"
+            }
+        },
+        "com.amazonaws.iam#roleTemplateDescriptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"
+            }
+        },
+        "com.amazonaws.iam#roleTemplateDisabledMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iam#roleTemplateNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\w+=,.\\-]+$"
             }
         },
         "com.amazonaws.iam#serialNumberType": {
@@ -19698,6 +21813,38 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.iam#tagTemplateKeyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@{}]+$"
+            }
+        },
+        "com.amazonaws.iam#tagTemplateListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iam#TagTemplate"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iam#tagTemplateValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@{}]*$"
             }
         },
         "com.amazonaws.iam#tagValueType": {

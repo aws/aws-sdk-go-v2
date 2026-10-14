@@ -1,0 +1,3 @@
+POST /gateway/__GatewayId__/link/__LinkId__/reject
+
+

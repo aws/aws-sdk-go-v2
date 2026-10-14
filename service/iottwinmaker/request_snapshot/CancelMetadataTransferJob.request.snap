@@ -1,0 +1,3 @@
+PUT /metadata-transfer-jobs/__MetadataTransferJobId__/cancel
+
+

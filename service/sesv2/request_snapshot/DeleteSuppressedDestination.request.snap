@@ -1,0 +1,3 @@
+DELETE /v2/email/suppression/addresses/__EmailAddress__?TenantName=__TenantName__
+
+

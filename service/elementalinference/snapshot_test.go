@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateFeed(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,30 @@ func TestCheckSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFixture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFixture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFixture")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDictionaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
@@ -199,6 +235,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchFixtures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchFixtures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchFixtures")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -313,6 +373,18 @@ func TestUpdateSnapshot_DeleteFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateFeed(context.Background(), nil, func(o *Options) {
@@ -361,6 +433,30 @@ func TestUpdateSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFixture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFixture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFixture")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDictionaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
@@ -390,6 +486,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutFeedPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFeedPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchFixtures(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchFixtures(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchFixtures")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

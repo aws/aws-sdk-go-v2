@@ -1,0 +1,5 @@
+POST /networks/__NetworkId__/proposals/__ProposalId__/votes
+
+Content-Type: application/json
+
+{"Vote":"YES","VoterMemberId":"__VoterMemberId__"}

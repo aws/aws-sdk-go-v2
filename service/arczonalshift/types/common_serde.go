@@ -142,6 +142,7 @@ func serializeZonalShiftSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func deserializeAllowedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -155,6 +156,7 @@ func deserializeAllowedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeAutoshiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AutoshiftInResource) error {
+	*v = make([]AutoshiftInResource, 0)
 	var vv AutoshiftInResource
 	return smithy.ReadList(d, s, func() error {
 		vv = AutoshiftInResource{}
@@ -168,6 +170,7 @@ func deserializeAutoshiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeAutoshiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AutoshiftSummary) error {
+	*v = make([]AutoshiftSummary, 0)
 	var vv AutoshiftSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = AutoshiftSummary{}
@@ -181,6 +184,7 @@ func deserializeAutoshiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeAvailabilityZones(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -194,6 +198,7 @@ func deserializeAvailabilityZones(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeBlockedDates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -207,6 +212,7 @@ func deserializeBlockedDates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeBlockedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -220,6 +226,7 @@ func deserializeBlockedWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeBlockingAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlCondition) error {
+	*v = make([]ControlCondition, 0)
 	var vv ControlCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = ControlCondition{}
@@ -233,6 +240,7 @@ func deserializeBlockingAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeManagedResourceSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ManagedResourceSummary) error {
+	*v = make([]ManagedResourceSummary, 0)
 	var vv ManagedResourceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ManagedResourceSummary{}
@@ -246,6 +254,7 @@ func deserializeManagedResourceSummaries(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeOutcomeAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlCondition) error {
+	*v = make([]ControlCondition, 0)
 	var vv ControlCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = ControlCondition{}
@@ -259,6 +268,7 @@ func deserializeOutcomeAlarms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeZonalShiftsInResource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ZonalShiftInResource) error {
+	*v = make([]ZonalShiftInResource, 0)
 	var vv ZonalShiftInResource
 	return smithy.ReadList(d, s, func() error {
 		vv = ZonalShiftInResource{}
@@ -272,6 +282,7 @@ func deserializeZonalShiftsInResource(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeZonalShiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ZonalShiftSummary) error {
+	*v = make([]ZonalShiftSummary, 0)
 	var vv ZonalShiftSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ZonalShiftSummary{}
@@ -300,6 +311,13 @@ func deserializeAppliedWeights(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	*v = make(map[string]float32)
 	var vv float32
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero float32
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadFloat32(s.MapValue(), &vv); err != nil {
 			return err

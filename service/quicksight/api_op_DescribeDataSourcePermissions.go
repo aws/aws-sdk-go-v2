@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the resource permissions for a data source.
@@ -43,6 +42,21 @@ type DescribeDataSourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsRequest_DataSourceId, *v.DataSourceId)
+	}
+}
+
 type DescribeDataSourcePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -67,77 +81,68 @@ type DescribeDataSourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_DataSourceArn, *v.DataSourceArn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_DataSourceId, *v.DataSourceId)
+	}
+	serializeResourcePermissionList(s, schemas.DescribeDataSourcePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDataSourcePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDataSourcePermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDataSourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourcePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourcePermissionsResponse_DataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_DataSourceArn, v.DataSourceArn)
+		case schemas.DescribeDataSourcePermissionsResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_DataSourceId, v.DataSourceId)
+		case schemas.DescribeDataSourcePermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.DescribeDataSourcePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeDataSourcePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDataSourcePermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeDataSourcePermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeDataSourcePermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourcePermissions, schemas.DescribeDataSourcePermissionsRequest, schemas.DescribeDataSourcePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSourcePermissions, schemas.DescribeDataSourcePermissionsRequest, schemas.DescribeDataSourcePermissionsResponse), output: &DescribeDataSourcePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSourcePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataSourcePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDataSourcePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataSourcePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +157,8 @@ func (c *Client) addOperationDescribeDataSourcePermissionsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDataSourcePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDataSourcePermissions",
-	}
 }

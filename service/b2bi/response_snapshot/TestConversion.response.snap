@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.TestConversion
+
+{"convertedFileContent":"__ConvertedFileContent__","validationMessages":["__Member__","__Member__"]}

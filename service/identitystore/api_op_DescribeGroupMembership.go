@@ -4,13 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,10 +37,18 @@ type DescribeGroupMembershipInput struct {
 
 	// The globally unique identifier for the identity store.
 	//
+	// You can specify the identity store by ID or by Amazon Resource Name (ARN). For
+	// example, identity store ID d-1234567890 or identity store ARN
+	// arn:aws:identitystore::111122223333:identitystore/d-1234567890 .
+	//
 	// This member is required.
 	IdentityStoreId *string
 
 	// The identifier for a GroupMembership in an identity store.
+	//
+	// You can specify the group membership by ID or by Amazon Resource Name (ARN).
+	// For example, membership ID a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 or membership
+	// ARN arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
 	//
 	// This member is required.
 	MembershipId *string
@@ -65,19 +70,6 @@ func (v *DescribeGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer
 		s.WriteString(schemas.DescribeGroupMembershipRequest_MembershipId, *v.MembershipId)
 	}
 }
-func (v *DescribeGroupMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeGroupMembershipRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeGroupMembershipRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeGroupMembershipRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeGroupMembershipRequest_MembershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.DescribeGroupMembershipRequest_MembershipId, v.MembershipId)
-		}
-		return nil
-	})
-}
 
 type DescribeGroupMembershipOutput struct {
 
@@ -95,6 +87,13 @@ type DescribeGroupMembershipOutput struct {
 	//
 	// This member is required.
 	MemberId types.MemberId
+
+	// The Amazon Resource Name (ARN) of the group membership in the identity store.
+	// For example,
+	// arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333 .
+	//
+	// This member is required.
+	MembershipArn *string
 
 	// The identifier for a GroupMembership in an identity store.
 	//
@@ -139,6 +138,9 @@ func (v *DescribeGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerialize
 		s.WriteString(schemas.DescribeGroupMembershipResponse_IdentityStoreId, *v.IdentityStoreId)
 	}
 	serializeMemberId(s, schemas.DescribeGroupMembershipResponse_MemberId, v.MemberId)
+	if v.MembershipArn != nil {
+		s.WriteString(schemas.DescribeGroupMembershipResponse_MembershipArn, *v.MembershipArn)
+	}
 	if v.MembershipId != nil {
 		s.WriteString(schemas.DescribeGroupMembershipResponse_MembershipId, *v.MembershipId)
 	}
@@ -166,6 +168,9 @@ func (v *DescribeGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) 
 			return d.ReadString(schemas.DescribeGroupMembershipResponse_IdentityStoreId, v.IdentityStoreId)
 		case schemas.DescribeGroupMembershipResponse_MemberId:
 			return deserializeMemberId(d, schemas.DescribeGroupMembershipResponse_MemberId, &v.MemberId)
+		case schemas.DescribeGroupMembershipResponse_MembershipArn:
+			v.MembershipArn = new(string)
+			return d.ReadString(schemas.DescribeGroupMembershipResponse_MembershipArn, v.MembershipArn)
 		case schemas.DescribeGroupMembershipResponse_MembershipId:
 			v.MembershipId = new(string)
 			return d.ReadString(schemas.DescribeGroupMembershipResponse_MembershipId, v.MembershipId)
@@ -180,74 +185,26 @@ func (v *DescribeGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 func (c *Client) addOperationDescribeGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroupMembership, schemas.DescribeGroupMembershipRequest, schemas.DescribeGroupMembershipResponse), output: &DescribeGroupMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGroupMembership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeGroupMembershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGroupMembership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -262,22 +219,8 @@ func (c *Client) addOperationDescribeGroupMembershipMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeGroupMembership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeGroupMembership",
-	}
 }

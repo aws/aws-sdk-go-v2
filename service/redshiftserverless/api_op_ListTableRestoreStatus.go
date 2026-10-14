@@ -5,12 +5,8 @@ package redshiftserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about an array of TableRestoreStatus objects.
@@ -51,27 +47,6 @@ type ListTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTableRestoreStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTableRestoreStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTableRestoreStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTableRestoreStatusRequest_maxResults, *v.MaxResults)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.ListTableRestoreStatusRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTableRestoreStatusRequest_nextToken, *v.NextToken)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.ListTableRestoreStatusRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type ListTableRestoreStatusOutput struct {
 
 	// If your initial ListTableRestoreStatus operation returns a nextToken , you can
@@ -88,84 +63,26 @@ type ListTableRestoreStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTableRestoreStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTableRestoreStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTableRestoreStatusResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTableRestoreStatusResponse_nextToken, v.NextToken)
-		case schemas.ListTableRestoreStatusResponse_tableRestoreStatuses:
-			return deserializeTableRestoreStatusList(d, schemas.ListTableRestoreStatusResponse_tableRestoreStatuses, &v.TableRestoreStatuses)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTableRestoreStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableRestoreStatus, schemas.ListTableRestoreStatusRequest, schemas.ListTableRestoreStatusResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTableRestoreStatus{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTableRestoreStatus, schemas.ListTableRestoreStatusRequest, schemas.ListTableRestoreStatusResponse), output: &ListTableRestoreStatusOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTableRestoreStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTableRestoreStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,12 +95,6 @@ func (c *Client) addOperationListTableRestoreStatusMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +197,3 @@ type ListTableRestoreStatusAPIClient interface {
 }
 
 var _ ListTableRestoreStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTableRestoreStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTableRestoreStatus",
-	}
-}

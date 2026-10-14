@@ -4,13 +4,8 @@ package oam
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns complete information about one link.
@@ -53,21 +48,6 @@ type GetLinkInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLinkInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetLinkInput_Identifier, *v.Identifier)
-	}
-	if v.IncludeTags != nil {
-		s.WriteBool(schemas.GetLinkInput_IncludeTags, *v.IncludeTags)
-	}
-}
-
 type GetLinkOutput struct {
 
 	// The ARN of the link.
@@ -103,104 +83,29 @@ type GetLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLinkOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLinkOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetLinkOutput_Arn, v.Arn)
-		case schemas.GetLinkOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetLinkOutput_Id, v.Id)
-		case schemas.GetLinkOutput_Label:
-			v.Label = new(string)
-			return d.ReadString(schemas.GetLinkOutput_Label, v.Label)
-		case schemas.GetLinkOutput_LabelTemplate:
-			v.LabelTemplate = new(string)
-			return d.ReadString(schemas.GetLinkOutput_LabelTemplate, v.LabelTemplate)
-		case schemas.GetLinkOutput_LinkConfiguration:
-			v.LinkConfiguration = &types.LinkConfiguration{}
-			return v.LinkConfiguration.Deserialize(d)
-		case schemas.GetLinkOutput_ResourceTypes:
-			return deserializeResourceTypesOutput(d, schemas.GetLinkOutput_ResourceTypes, &v.ResourceTypes)
-		case schemas.GetLinkOutput_SinkArn:
-			v.SinkArn = new(string)
-			return d.ReadString(schemas.GetLinkOutput_SinkArn, v.SinkArn)
-		case schemas.GetLinkOutput_Tags:
-			return deserializeTagMapOutput(d, schemas.GetLinkOutput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkInput, schemas.GetLinkOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLink{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkInput, schemas.GetLinkOutput), output: &GetLinkOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +120,8 @@ func (c *Client) addOperationGetLinkMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLink",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.ListCollections
+
+{"collectionFilters":{"collectionGroupName":"__CollectionGroupName__","name":"__Name__","status":"CREATING"},"maxResults":1,"nextToken":"__NextToken__"}

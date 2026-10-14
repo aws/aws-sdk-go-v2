@@ -4562,10 +4562,10 @@ func TestEndpointCase126(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4620,10 +4620,10 @@ func TestEndpointCase127(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4680,10 +4680,10 @@ func TestEndpointCase128(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4740,10 +4740,10 @@ func TestEndpointCase129(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4800,10 +4800,10 @@ func TestEndpointCase130(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4860,10 +4860,10 @@ func TestEndpointCase131(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4920,10 +4920,10 @@ func TestEndpointCase132(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -4976,10 +4976,10 @@ func TestEndpointCase133(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5105,10 +5105,10 @@ func TestEndpointCase137(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5162,10 +5162,10 @@ func TestEndpointCase138(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5219,10 +5219,10 @@ func TestEndpointCase139(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5275,10 +5275,10 @@ func TestEndpointCase140(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5404,10 +5404,10 @@ func TestEndpointCase144(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5463,10 +5463,10 @@ func TestEndpointCase145(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5518,10 +5518,10 @@ func TestEndpointCase146(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5643,10 +5643,10 @@ func TestEndpointCase150(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5701,10 +5701,10 @@ func TestEndpointCase151(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5761,10 +5761,10 @@ func TestEndpointCase152(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5821,10 +5821,10 @@ func TestEndpointCase153(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5881,10 +5881,10 @@ func TestEndpointCase154(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -5941,10 +5941,10 @@ func TestEndpointCase155(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6001,10 +6001,10 @@ func TestEndpointCase156(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6057,10 +6057,10 @@ func TestEndpointCase157(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6186,10 +6186,10 @@ func TestEndpointCase161(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6243,10 +6243,10 @@ func TestEndpointCase162(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6300,10 +6300,10 @@ func TestEndpointCase163(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6356,10 +6356,10 @@ func TestEndpointCase164(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6485,10 +6485,10 @@ func TestEndpointCase168(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6544,10 +6544,10 @@ func TestEndpointCase169(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6599,10 +6599,10 @@ func TestEndpointCase170(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6724,10 +6724,10 @@ func TestEndpointCase174(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6782,10 +6782,10 @@ func TestEndpointCase175(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6842,10 +6842,10 @@ func TestEndpointCase176(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6902,10 +6902,10 @@ func TestEndpointCase177(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -6962,10 +6962,10 @@ func TestEndpointCase178(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7022,10 +7022,10 @@ func TestEndpointCase179(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7082,10 +7082,10 @@ func TestEndpointCase180(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7138,10 +7138,10 @@ func TestEndpointCase181(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7267,10 +7267,10 @@ func TestEndpointCase185(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7324,10 +7324,10 @@ func TestEndpointCase186(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7381,10 +7381,10 @@ func TestEndpointCase187(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7437,10 +7437,10 @@ func TestEndpointCase188(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7566,10 +7566,10 @@ func TestEndpointCase192(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7625,10 +7625,10 @@ func TestEndpointCase193(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -7680,10 +7680,10 @@ func TestEndpointCase194(t *testing.T) {
 					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
-						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
-
 						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
 						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
 						return sp
 					}(),
 				},
@@ -14362,6 +14362,6674 @@ func TestEndpointCase369(t *testing.T) {
 	var params = EndpointParameters{
 		Endpoint: ptr.String("https://dynamodb.us-west-2.api.aws"),
 		Region:   ptr.String("us-west-2"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1}
+func TestEndpointCase370(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint: ptr.String("https://dynamodb.us-east-1.api.aws/"),
+		Region:   ptr.String("us-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase371(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase372(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase373(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase374(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase375(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase376(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase377(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase378(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase379(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase380(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase381(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase382(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase383(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase384(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase385(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase386(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase387(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase388(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase389(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase390(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase391(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase392(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase393(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase394(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase395(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase396(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase397(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase398(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase399(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase400(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase401(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase402(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase403(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase404(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase405(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase406(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase407(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com,
+// IsSearchOperation=true}
+func TestEndpointCase408(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required,
+// Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}
+func TestEndpointCase409(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		Endpoint:              ptr.String("https://example.com"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase410(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase411(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase412(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase413(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase414(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase415(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase416(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase417(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase418(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase419(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase420(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}
+func TestEndpointCase421(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase422(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase423(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase424(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase425(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase426(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase427(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase428(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase429(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase430(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase431(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase432(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase433(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}
+func TestEndpointCase434(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase435(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase436(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase437(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase438(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase439(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase440(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase441(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase442(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase443(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: Dualstack and local endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase444(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase445(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase446(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}
+func TestEndpointCase447(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required,
+// Region=local, IsSearchOperation=true}
+func TestEndpointCase448(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("local"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://localhost:8000")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
+						smithyhttp.SetSigV4ASigningName(&sp, "dynamodb")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase449(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase450(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase451(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://111111111111.search-ddb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase452(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://111111111111.search-ddb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase453(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Credentials-sourced account ID parameter is invalid", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase454(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase455(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase456(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://222222222222.search-ddb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase457(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://222222222222.search-ddb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase458(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase459(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase460(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase461(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase462(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase463(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase464(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://111111111111.search-ddb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase465(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://111111111111.search-ddb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase466(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Credentials-sourced account ID parameter is invalid", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase467(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase468(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase469(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://222222222222.search-ddb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase470(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://222222222222.search-ddb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase471(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase472(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase473(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase474(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase475(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase476(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase477(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase478(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required,
+// Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase479(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase480(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase481(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase482(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase483(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase484(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase485(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase486(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required,
+// Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase487(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("required"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase488(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase489(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase490(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase491(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase492(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase493(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase494(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase495(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase496(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase497(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase498(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase499(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase500(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		Region:                ptr.String("us-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase501(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase502(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase503(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase504(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase505(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase506(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase507(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase508(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase509(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase510(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase511(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase512(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase513(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("cn-north-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.cn-north-1.amazonaws.com.cn")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase514(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase515(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase516(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase517(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase518(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase519(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase520(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase521(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase522(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase523(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase524(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase525(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=us-iso-east-1, IsSearchOperation=true}
+func TestEndpointCase526(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-iso-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase527(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-gov-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase528(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase529(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=111111111111,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase530(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String("111111111111"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred,
+// Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase531(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountId:             ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase532(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb-fips.us-gov-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=true, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase533(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=true,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase534(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase535(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-east-1:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase536(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:dynamodb:us-west-2:222222222222:table/table_name"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false,
+// ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase537(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String("arn:aws:s3:us-west-2:222222222222:stream/testStream"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, ResourceArn=,
+// AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase538(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		ResourceArn:           ptr.String(""),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred,
+// Region=us-gov-east-1, IsSearchOperation=true}
+func TestEndpointCase539(t *testing.T) {
+	var params = EndpointParameters{
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		Region:                ptr.String("us-gov-east-1"),
+		IsSearchOperation:     ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://search-dynamodb.us-gov-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn,
+// Region=cn-north-1, IsSearchOperation=true}
+func TestEndpointCase540(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"),
+		Region:            ptr.String("cn-north-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1,
+// IsSearchOperation=true}
+func TestEndpointCase541(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.us-gov-east-1.api.aws"),
+		Region:            ptr.String("us-gov-east-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1,
+// IsSearchOperation=true}
+func TestEndpointCase542(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.us-east-1.api.aws"),
+		Region:            ptr.String("us-east-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1,
+// IsSearchOperation=true}
+func TestEndpointCase543(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://111111111111.ddb.us-east-1.api.aws"),
+		Region:            ptr.String("us-east-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://111111111111.ddb.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws,
+// Region=us-east-1, IsSearchOperation=true}
+func TestEndpointCase544(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"),
+		Region:            ptr.String("us-east-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// {Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1,
+// IsSearchOperation=true}
+func TestEndpointCase545(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.eu-west-1.api.aws"),
+		Region:            ptr.String("eu-west-1"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2,
+// IsSearchOperation=true}
+func TestEndpointCase546(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.us-west-2.api.aws"),
+		Region:            ptr.String("us-west-2"),
+		IsSearchOperation: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// {Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1,
+// IsSearchOperation=true}
+func TestEndpointCase547(t *testing.T) {
+	var params = EndpointParameters{
+		Endpoint:          ptr.String("https://dynamodb.us-east-1.api.aws/"),
+		Region:            ptr.String("us-east-1"),
+		IsSearchOperation: ptr.Bool(true),
 	}
 
 	resolver := NewDefaultEndpointResolverV2()

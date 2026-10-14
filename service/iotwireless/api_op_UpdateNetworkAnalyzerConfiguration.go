@@ -4,13 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update network analyzer configuration.
@@ -69,32 +64,6 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateNetworkAnalyzerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.UpdateNetworkAnalyzerConfigurationRequest_ConfigurationName, *v.ConfigurationName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateNetworkAnalyzerConfigurationRequest_Description, *v.Description)
-	}
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToAdd, v.MulticastGroupsToAdd)
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToRemove, v.MulticastGroupsToRemove)
-	if v.TraceContent != nil {
-		s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationRequest_TraceContent)
-		v.TraceContent.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToAdd, v.WirelessDevicesToAdd)
-	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToRemove, v.WirelessDevicesToRemove)
-	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToAdd, v.WirelessGatewaysToAdd)
-	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToRemove, v.WirelessGatewaysToRemove)
-}
-
 type UpdateNetworkAnalyzerConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -102,82 +71,29 @@ type UpdateNetworkAnalyzerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateNetworkAnalyzerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkAnalyzerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkAnalyzerConfiguration, schemas.UpdateNetworkAnalyzerConfigurationRequest, schemas.UpdateNetworkAnalyzerConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkAnalyzerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkAnalyzerConfiguration, schemas.UpdateNetworkAnalyzerConfigurationRequest, schemas.UpdateNetworkAnalyzerConfigurationResponse), output: &UpdateNetworkAnalyzerConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNetworkAnalyzerConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNetworkAnalyzerConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNetworkAnalyzerConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +108,8 @@ func (c *Client) addOperationUpdateNetworkAnalyzerConfigurationMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNetworkAnalyzerConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNetworkAnalyzerConfiguration",
-	}
 }

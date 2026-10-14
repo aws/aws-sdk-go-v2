@@ -1,0 +1,5 @@
+POST /metrics/userdata/__InstanceId__
+
+Content-Type: application/json
+
+{"Filters":{"Agents":["__Member__","__Member__"],"ContactFilter":{"ContactStates":["INCOMING","INCOMING"]},"Queues":["__Member__","__Member__"],"RoutingProfiles":["__Member__","__Member__"],"UserHierarchyGroups":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__"}

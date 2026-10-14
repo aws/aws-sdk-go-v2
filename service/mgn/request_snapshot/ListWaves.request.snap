@@ -1,0 +1,5 @@
+POST /ListWaves
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","filters":{"isArchived":true,"waveIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

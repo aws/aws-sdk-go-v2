@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/dataset-export-jobs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","destinationS3Uri":"__DestinationS3Uri__","errorReportLocation":{"s3Uri":"__S3Uri__"},"input":{"timeseries":[{"formatSettings":{"framesPerSecond":1,"heightInPixels":1,"widthInPixels":1},"propertyAlias":"__PropertyAlias__","timeSeriesId":"__TimeSeriesId__","trimSettings":{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"startTime":{"offsetInNanos":1,"timeInSeconds":1}}},{"formatSettings":{"framesPerSecond":1,"heightInPixels":1,"widthInPixels":1},"propertyAlias":"__PropertyAlias__","timeSeriesId":"__TimeSeriesId__","trimSettings":{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"startTime":{"offsetInNanos":1,"timeInSeconds":1}}}]}}

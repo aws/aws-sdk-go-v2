@@ -1,0 +1,5 @@
+POST /graph/member/monitoringstate
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","GraphArn":"__GraphArn__"}

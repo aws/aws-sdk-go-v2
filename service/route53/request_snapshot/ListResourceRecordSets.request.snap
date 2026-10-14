@@ -1,0 +1,3 @@
+GET /2013-04-01/hostedzone/__HostedZoneId__/rrset?identifier=__StartRecordIdentifier__&maxitems=1&name=__StartRecordName__&type=SOA
+
+

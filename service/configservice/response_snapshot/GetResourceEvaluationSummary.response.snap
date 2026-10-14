@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetResourceEvaluationSummary
+
+{"Compliance":"COMPLIANT","EvaluationContext":{"EvaluationContextIdentifier":"__EvaluationContextIdentifier__"},"EvaluationMode":"DETECTIVE","EvaluationStartTimestamp":946684800,"EvaluationStatus":{"FailureReason":"__FailureReason__","Status":"IN_PROGRESS"},"ResourceDetails":{"ResourceConfiguration":"__ResourceConfiguration__","ResourceConfigurationSchemaType":"CFN_RESOURCE_SCHEMA","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},"ResourceEvaluationId":"__ResourceEvaluationId__"}

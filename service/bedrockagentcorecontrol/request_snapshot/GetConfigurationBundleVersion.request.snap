@@ -1,0 +1,3 @@
+GET /configuration-bundles/__BundleId__/versions/__VersionId__
+
+

@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/environments/__EnvironmentIdentifier__/subscription-targets
+
+Content-Type: application/json
+
+{"applicableAssetTypes":["__Member__","__Member__"],"authorizedPrincipals":["__Member__","__Member__"],"clientToken":"__ClientToken__","manageAccessRole":"__ManageAccessRole__","name":"__Name__","provider":"__Provider__","subscriptionGrantCreationMode":"AUTOMATIC","subscriptionTargetConfig":[{"content":"__Content__","formName":"__FormName__"},{"content":"__Content__","formName":"__FormName__"}],"type":"__Type__"}

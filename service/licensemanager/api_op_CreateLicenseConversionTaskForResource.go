@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new license conversion task.
@@ -55,6 +54,28 @@ type CreateLicenseConversionTaskForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseConversionTaskForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseConversionTaskForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationLicenseContext != nil {
+		s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest_DestinationLicenseContext)
+		v.DestinationLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateLicenseConversionTaskForResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceLicenseContext != nil {
+		s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest_SourceLicenseContext)
+		v.SourceLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateLicenseConversionTaskForResourceOutput struct {
 
 	// The ID of the created license type conversion task.
@@ -66,77 +87,48 @@ type CreateLicenseConversionTaskForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseConversionTaskForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseConversionTaskForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConversionTaskId != nil {
+		s.WriteString(schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId, *v.LicenseConversionTaskId)
+	}
+}
+func (v *CreateLicenseConversionTaskForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseConversionTaskForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId:
+			v.LicenseConversionTaskId = new(string)
+			return d.ReadString(schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId, v.LicenseConversionTaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseConversionTaskForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseConversionTaskForResource, schemas.CreateLicenseConversionTaskForResourceRequest, schemas.CreateLicenseConversionTaskForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseConversionTaskForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseConversionTaskForResource, schemas.CreateLicenseConversionTaskForResourceRequest, schemas.CreateLicenseConversionTaskForResourceResponse), output: &CreateLicenseConversionTaskForResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseConversionTaskForResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLicenseConversionTaskForResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLicenseConversionTaskForResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLicenseConversionTaskForResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +143,8 @@ func (c *Client) addOperationCreateLicenseConversionTaskForResourceMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLicenseConversionTaskForResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLicenseConversionTaskForResource",
-	}
 }

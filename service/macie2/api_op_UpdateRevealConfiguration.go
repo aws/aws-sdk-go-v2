@@ -4,13 +4,8 @@ package macie2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the status and configuration settings for retrieving occurrences of
@@ -44,25 +39,6 @@ type UpdateRevealConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRevealConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRevealConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRevealConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.UpdateRevealConfigurationRequest_configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RetrievalConfiguration != nil {
-		s.WriteStruct(schemas.UpdateRevealConfigurationRequest_retrievalConfiguration)
-		v.RetrievalConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateRevealConfigurationOutput struct {
 
 	// The KMS key to use to encrypt the sensitive data, and the status of the
@@ -78,88 +54,29 @@ type UpdateRevealConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRevealConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRevealConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRevealConfigurationResponse_configuration:
-			v.Configuration = &types.RevealConfiguration{}
-			return v.Configuration.Deserialize(d)
-		case schemas.UpdateRevealConfigurationResponse_retrievalConfiguration:
-			v.RetrievalConfiguration = &types.RetrievalConfiguration{}
-			return v.RetrievalConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRevealConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRevealConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevealConfiguration, schemas.UpdateRevealConfigurationRequest, schemas.UpdateRevealConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRevealConfiguration{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevealConfiguration, schemas.UpdateRevealConfigurationRequest, schemas.UpdateRevealConfigurationResponse), output: &UpdateRevealConfigurationOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRevealConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRevealConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRevealConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +91,8 @@ func (c *Client) addOperationUpdateRevealConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRevealConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRevealConfiguration",
-	}
 }

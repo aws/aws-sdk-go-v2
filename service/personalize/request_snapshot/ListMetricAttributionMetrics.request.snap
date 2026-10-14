@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.ListMetricAttributionMetrics
+
+{"maxResults":1,"metricAttributionArn":"__MetricAttributionArn__","nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /ListResourceTelemetry
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceIdentifierPrefix":"__ResourceIdentifierPrefix__","ResourceTags":{"key0":"__Value__"},"ResourceTypes":["AWS::EC2::Instance","AWS::EC2::Instance"],"TelemetryConfigurationState":{"key0":"Enabled"}}

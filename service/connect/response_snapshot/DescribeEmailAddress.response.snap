@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AliasConfigurations":[{"EmailAddressId":"__EmailAddressId__"},{"EmailAddressId":"__EmailAddressId__"}],"CreateTimestamp":"__CreateTimestamp__","Description":"__Description__","DisplayName":"__DisplayName__","EmailAddress":"__EmailAddress__","EmailAddressArn":"__EmailAddressArn__","EmailAddressId":"__EmailAddressId__","ModifiedTimestamp":"__ModifiedTimestamp__","Tags":{"key0":"__Value__"}}

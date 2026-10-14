@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets details of a software bill of materials (SBOM) report.
@@ -35,6 +34,18 @@ type GetSbomExportInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSbomExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSbomExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSbomExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetSbomExportRequest_reportId, *v.ReportId)
+	}
 }
 
 type GetSbomExportOutput struct {
@@ -67,77 +78,100 @@ type GetSbomExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSbomExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSbomExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSbomExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.GetSbomExportResponse_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetSbomExportResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.GetSbomExportResponse_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetSbomExportResponse_format, string(v.Format))
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetSbomExportResponse_reportId, *v.ReportId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.GetSbomExportResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSbomExportResponse_status, string(v.Status))
+	}
+}
+func (v *GetSbomExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSbomExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSbomExportResponse_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = types.ReportingErrorCode(ev)
+			return nil
+		case schemas.GetSbomExportResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetSbomExportResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetSbomExportResponse_filterCriteria:
+			v.FilterCriteria = &types.ResourceFilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.GetSbomExportResponse_format:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.SbomReportFormat(ev)
+			return nil
+		case schemas.GetSbomExportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.GetSbomExportResponse_reportId, v.ReportId)
+		case schemas.GetSbomExportResponse_s3Destination:
+			v.S3Destination = &types.Destination{}
+			return v.S3Destination.Deserialize(d)
+		case schemas.GetSbomExportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSbomExportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExternalReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSbomExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSbomExport, schemas.GetSbomExportRequest, schemas.GetSbomExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSbomExport, schemas.GetSbomExportRequest, schemas.GetSbomExportResponse), output: &GetSbomExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSbomExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSbomExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSbomExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSbomExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +186,8 @@ func (c *Client) addOperationGetSbomExportMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSbomExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSbomExport",
-	}
 }

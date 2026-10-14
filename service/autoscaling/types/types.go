@@ -242,6 +242,10 @@ type AutoScalingGroup struct {
 	// [Use instance scale-in protection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
 	NewInstancesProtectedFromScaleIn *bool
 
+	// The entity that manages the Auto Scaling group, if applicable. When set, only
+	// the designated operator can make changes to the group configuration.
+	Operator *Operator
+
 	// The name of the placement group into which to launch EC2 instances for the Auto
 	// Scaling group.
 	PlacementGroup *string
@@ -387,6 +391,10 @@ type AvailabilityZoneDistribution struct {
 	//
 	//   - balanced-best-effort - If launches fail in an Availability Zone, Auto
 	//   Scaling will attempt to launch in another healthy Availability Zone instead.
+	//
+	//   - reservations-then-balanced - Auto Scaling will first attempt to launch into
+	//   your Capacity Reservations, and then balance any remaining capacity across
+	//   healthy Availability Zones.
 	CapacityDistributionStrategy CapacityDistributionStrategy
 
 	noSmithyDocumentSerde
@@ -635,15 +643,40 @@ type DesiredConfiguration struct {
 	// [Launch templates]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html
 	LaunchTemplate *LaunchTemplateSpecification
 
-	// Use this structure to launch multiple instance types and On-Demand Instances
-	// and Spot Instances within a single Auto Scaling group.
+	// Use this structure to launch multiple instance types and configure how capacity
+	// is distributed across On-Demand, Spot, and supported Capacity Reservation types
+	// within a single Auto Scaling group.
 	//
 	// A mixed instances policy contains information that Amazon EC2 Auto Scaling can
-	// use to launch instances and help optimize your costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options]
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// use to launch instances, prioritize capacity types, and help optimize your
+	// costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options]in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// [Auto Scaling groups with multiple instance types and purchase options]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
 	MixedInstancesPolicy *MixedInstancesPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Use this structure to specify the capacity types that Amazon EC2 Auto Scaling
+// prioritizes when it launches instances.
+type DistributionSegment struct {
+
+	// The capacity types to prioritize, in order. Amazon EC2 Auto Scaling attempts to
+	// launch instances in the priority order of the capacity types, and within each
+	// capacity type, in the order of instance types listed in your launch template
+	// Overrides .
+	//
+	// The following lists the valid values:
+	//
+	// on-demand-capacity-reservation On-Demand Capacity Reservations.
+	//
+	// capacity-block Capacity Blocks.
+	//
+	// interruptible-capacity-reservation Interruptible Capacity Reservations.
+	//
+	// on-demand On-Demand capacity. Include this value to allow the group to fall
+	// back to On-Demand capacity when the preceding capacity types are unavailable.
+	TargetCapacityTypes []TargetCapacityType
 
 	noSmithyDocumentSerde
 }
@@ -1549,10 +1582,18 @@ type InstanceReusePolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Use this structure to specify the distribution of On-Demand Instances and Spot
-// Instances and the allocation strategies used to fulfill On-Demand and Spot
-// capacities for a mixed instances policy.
+// Use this structure to specify how a mixed instances policy distributes capacity
+// across On-Demand, Spot, and supported Capacity Reservation types, and to specify
+// the allocation strategies that are used to fulfill the capacity.
 type InstancesDistribution struct {
+
+	// The Distribution Segments configuration. Each segment contains an ordered list
+	// of capacity types to prioritize.
+	//
+	// For more information, see [Use Distribution Segments to target multiple capacity types] in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// [Use Distribution Segments to target multiple capacity types]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
+	DistributionSegments []DistributionSegment
 
 	// The allocation strategy to apply to your On-Demand Instances when they are
 	// launched. Possible instance types are determined by the launch template
@@ -2371,21 +2412,25 @@ type MetricStat struct {
 	noSmithyDocumentSerde
 }
 
-// Use this structure to launch multiple instance types and On-Demand Instances
-// and Spot Instances within a single Auto Scaling group.
+// Use this structure to launch multiple instance types and configure how capacity
+// is distributed across On-Demand, Spot, and supported Capacity Reservation types
+// within a single Auto Scaling group.
 //
 // A mixed instances policy contains information that Amazon EC2 Auto Scaling can
-// use to launch instances and help optimize your costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options]
-// in the Amazon EC2 Auto Scaling User Guide.
+// use to launch instances, prioritize capacity types, and help optimize your
+// costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options]in the Amazon EC2 Auto Scaling User Guide. To
+// learn how to prioritize multiple capacity types, see [Use Distribution Segments to target multiple capacity types]in the Amazon EC2 Auto
+// Scaling User Guide.
 //
 // [Auto Scaling groups with multiple instance types and purchase options]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+// [Use Distribution Segments to target multiple capacity types]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
 type MixedInstancesPolicy struct {
 
 	// The instances distribution.
 	InstancesDistribution *InstancesDistribution
 
 	// One or more launch templates and the instance types (overrides) that are used
-	// to launch EC2 instances to fulfill On-Demand and Spot capacities.
+	// to launch EC2 instances to fulfill the configured capacities.
 	LaunchTemplate *LaunchTemplate
 
 	noSmithyDocumentSerde
@@ -2449,6 +2494,19 @@ type NotificationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
 	TopicARN *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the entity that manages an Auto Scaling group.
+type Operator struct {
+
+	// The service principal that is authorized to manage the Auto Scaling group. When
+	// an operator is specified, only the designated operator service principal can
+	// make mutating changes to the Auto Scaling group.
+	//
+	// This member is required.
+	Principal *string
 
 	noSmithyDocumentSerde
 }
@@ -2954,6 +3012,15 @@ type RefreshPreferences struct {
 	// If you do not specify this property, the default is 100 percent, or the
 	// percentage set in the instance maintenance policy for the Auto Scaling group, if
 	// defined.
+	//
+	// Explicitly setting MaxHealthyPercentage to 100 is not equivalent to omitting
+	// it. When MaxHealthyPercentage is explicitly set and it is mathematically
+	// impossible to replace instances while honoring both MinHealthyPercentage and
+	// MaxHealthyPercentage bounds simultaneously, Auto Scaling launches a new instance
+	// before terminating an old one (temporarily exceeding the desired capacity). When
+	// MaxHealthyPercentage is omitted, Auto Scaling terminates an instance and
+	// launches its replacement simultaneously. This behavioral difference can affect
+	// workflows that depend on instance replacement ordering.
 	MaxHealthyPercentage *int32
 
 	// Specifies the minimum percentage of the group to keep in service, healthy, and

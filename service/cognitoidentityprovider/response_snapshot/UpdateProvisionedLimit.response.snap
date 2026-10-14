@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateProvisionedLimit
+
+{"Limit":{"FreeLimitValue":1,"LimitDefinition":{"Attributes":{"key0":"__Value__"},"LimitClass":"API_CATEGORY"},"ProvisionedLimitValue":1}}

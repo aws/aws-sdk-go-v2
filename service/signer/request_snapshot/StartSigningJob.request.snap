@@ -1,0 +1,5 @@
+POST /signing-jobs
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","destination":{"s3":{"bucketName":"__BucketName__","prefix":"__Prefix__"}},"profileName":"__ProfileName__","profileOwner":"__ProfileOwner__","source":{"s3":{"bucketName":"__BucketName__","key":"__Key__","version":"__Version__"}}}

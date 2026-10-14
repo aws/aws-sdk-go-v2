@@ -1,0 +1,7 @@
+POST /service/ArcRegionSwitch/operation/ApprovePlanExecutionStep
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥kexecutionIdo__ExecutionId__hstepNamel__StepName__happrovalgapprovegcommentk__Comment__gplanArnk__PlanArn__

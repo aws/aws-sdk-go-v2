@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a dynamic thing group.
@@ -63,6 +62,35 @@ type UpdateDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDynamicThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDynamicThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDynamicThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateDynamicThingGroupRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_queryVersion, *v.QueryVersion)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingGroupProperties != nil {
+		s.WriteStruct(schemas.UpdateDynamicThingGroupRequest_thingGroupProperties)
+		v.ThingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group version.
@@ -74,77 +102,47 @@ type UpdateDynamicThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDynamicThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDynamicThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDynamicThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != 0 {
+		s.WriteInt64(schemas.UpdateDynamicThingGroupResponse_version, v.Version)
+	}
+}
+func (v *UpdateDynamicThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDynamicThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDynamicThingGroupResponse_version:
+			return d.ReadInt64(schemas.UpdateDynamicThingGroupResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDynamicThingGroup, schemas.UpdateDynamicThingGroupRequest, schemas.UpdateDynamicThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDynamicThingGroup, schemas.UpdateDynamicThingGroupRequest, schemas.UpdateDynamicThingGroupResponse), output: &UpdateDynamicThingGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDynamicThingGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDynamicThingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDynamicThingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDynamicThingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +157,8 @@ func (c *Client) addOperationUpdateDynamicThingGroupMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDynamicThingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDynamicThingGroup",
-	}
 }

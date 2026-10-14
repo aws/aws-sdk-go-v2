@@ -4,11 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the settings for the Insights event selectors that you configured for
@@ -73,6 +72,21 @@ type GetInsightSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSelectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSelectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSelectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.GetInsightSelectorsRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.GetInsightSelectorsRequest_TrailName, *v.TrailName)
+	}
+}
+
 type GetInsightSelectorsOutput struct {
 
 	//  The ARN of the source event data store that enabled Insights events.
@@ -98,74 +112,60 @@ type GetInsightSelectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSelectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	serializeInsightSelectors(s, schemas.GetInsightSelectorsResponse_InsightSelectors, v.InsightSelectors)
+	if v.InsightsDestination != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_InsightsDestination, *v.InsightsDestination)
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *GetInsightSelectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightSelectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightSelectorsResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.GetInsightSelectorsResponse_InsightSelectors:
+			return deserializeInsightSelectors(d, schemas.GetInsightSelectorsResponse_InsightSelectors, &v.InsightSelectors)
+		case schemas.GetInsightSelectorsResponse_InsightsDestination:
+			v.InsightsDestination = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_InsightsDestination, v.InsightsDestination)
+		case schemas.GetInsightSelectorsResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSelectors, schemas.GetInsightSelectorsRequest, schemas.GetInsightSelectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInsightSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSelectors, schemas.GetInsightSelectorsRequest, schemas.GetInsightSelectorsResponse), output: &GetInsightSelectorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInsightSelectors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInsightSelectors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInsightSelectors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +180,8 @@ func (c *Client) addOperationGetInsightSelectorsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInsightSelectors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInsightSelectors",
-	}
 }

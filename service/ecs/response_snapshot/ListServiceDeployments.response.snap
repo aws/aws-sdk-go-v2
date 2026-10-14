@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListServiceDeployments
+
+{"nextToken":"__NextToken__","serviceDeployments":[{"clusterArn":"__ClusterArn__","createdAt":946684800,"finishedAt":946684800,"serviceArn":"__ServiceArn__","serviceDeploymentArn":"__ServiceDeploymentArn__","startedAt":946684800,"status":"PENDING","statusReason":"__StatusReason__","targetServiceRevisionArn":"__TargetServiceRevisionArn__"},{"clusterArn":"__ClusterArn__","createdAt":946684800,"finishedAt":946684800,"serviceArn":"__ServiceArn__","serviceDeploymentArn":"__ServiceDeploymentArn__","startedAt":946684800,"status":"PENDING","statusReason":"__StatusReason__","targetServiceRevisionArn":"__TargetServiceRevisionArn__"}]}

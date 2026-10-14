@@ -360,6 +360,11 @@ func (v *AnalysisTypeReportResult) Deserialize(d smithy.ShapeDeserializer) error
 //     using CreateVpcEndpointAssociation .
 type Attachment struct {
 
+	// The DNS name that resolves to the firewall endpoint in the subnet. This is
+	// populated for proxy mode firewalls, where clients direct traffic to the
+	// firewall's proxy using this name.
+	DnsName *string
+
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
 	// in the subnet. You use this to identify the firewall endpoint in the VPC route
 	// tables, when you redirect the VPC traffic through the endpoint.
@@ -396,6 +401,9 @@ func (v *Attachment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsName != nil {
+		s.WriteString(schemas.Attachment_DnsName, *v.DnsName)
+	}
 	if v.EndpointId != nil {
 		s.WriteString(schemas.Attachment_EndpointId, *v.EndpointId)
 	}
@@ -412,6 +420,9 @@ func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Attachment, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Attachment_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.Attachment_DnsName, v.DnsName)
 		case schemas.Attachment_EndpointId:
 			v.EndpointId = new(string)
 			return d.ReadString(schemas.Attachment_EndpointId, v.EndpointId)
@@ -707,6 +718,137 @@ func (v *CIDRSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CIDRSummary_UtilizedCIDRCount:
 			v.UtilizedCIDRCount = new(int32)
 			return d.ReadInt32(schemas.CIDRSummary_UtilizedCIDRCount, v.UtilizedCIDRCount)
+		}
+		return nil
+	})
+}
+
+// The metadata for a container association returned by ListContainerAssociations .
+// Contains the ARN and name that you use to identify the container association in
+// other operations.
+type ContainerAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the container association.
+	Arn *string
+
+	// The descriptive name of the container association.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContainerAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ContainerAssociationSummary_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContainerAssociationSummary_Name, *v.Name)
+	}
+}
+func (v *ContainerAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerAssociationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContainerAssociationSummary_Arn, v.Arn)
+		case schemas.ContainerAssociationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContainerAssociationSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// A key-value filter pair used in container association monitoring configurations
+// to narrow which containers are tracked.
+type ContainerAttribute struct {
+
+	// The attribute key to filter on.
+	//
+	// This member is required.
+	Key *string
+
+	// The attribute value to match.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContainerAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ContainerAttribute_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContainerAttribute_Value, *v.Value)
+	}
+}
+func (v *ContainerAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerAttribute_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ContainerAttribute_Key, v.Key)
+		case schemas.ContainerAttribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContainerAttribute_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Contains the monitoring configuration for a single cluster in a container
+// association. Specifies the cluster ARN and optional attribute filters to narrow
+// which containers are tracked.
+type ContainerMonitoringConfiguration struct {
+
+	// The ARN of the Amazon ECS or Amazon EKS cluster to monitor. The cluster must be
+	// in the same Region and account as the container association.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// Key-value pairs that filter which containers are tracked. For Amazon EKS, you
+	// can filter by namespace and Kubernetes labels. For Amazon ECS, you can filter by
+	// container instance attributes (EC2 launch type only).
+	AttributeFilters []ContainerAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContainerMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerMonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerAttributes(s, schemas.ContainerMonitoringConfiguration_AttributeFilters, v.AttributeFilters)
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ContainerMonitoringConfiguration_ClusterArn, *v.ClusterArn)
+	}
+}
+func (v *ContainerMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerMonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerMonitoringConfiguration_AttributeFilters:
+			return deserializeContainerAttributes(d, schemas.ContainerMonitoringConfiguration_AttributeFilters, &v.AttributeFilters)
+		case schemas.ContainerMonitoringConfiguration_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ContainerMonitoringConfiguration_ClusterArn, v.ClusterArn)
 		}
 		return nil
 	})
@@ -1273,8 +1415,22 @@ type Firewall struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// The NAT gateways that the firewall uses to proxy traffic. This is set for proxy
+	// mode firewalls, where NoSourcePreservation is TRUE .
+	NatGatewayMappings []NatGatewayMapping
+
+	// Indicates whether the firewall operates in proxy mode, in which the source IP
+	// address of the traffic is not preserved. When this value is TRUE , the firewall
+	// proxies traffic through a NAT gateway and uses the NAT gateway's IP address as
+	// the source for traffic reaching the destination.
+	NoSourcePreservation bool
+
 	// The number of VpcEndpointAssociation resources that use this firewall.
 	NumberOfAssociations *int32
+
+	// The listener configuration for the firewall's proxy. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	ProxySettings *ProxySettings
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
@@ -1293,6 +1449,10 @@ type Firewall struct {
 	// different from the firewall owner's account ID when using a shared transit
 	// gateway.
 	TransitGatewayOwnerAccountId *string
+
+	// The VPC and subnets for the firewall endpoint. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	VpcEndpoint *VpcEndpoint
 
 	noSmithyDocumentSerde
 }
@@ -1335,8 +1495,17 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.Firewall_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	}
+	serializeNatGatewayMappingsList(s, schemas.Firewall_NatGatewayMappings, v.NatGatewayMappings)
+	if v.NoSourcePreservation != false {
+		s.WriteBool(schemas.Firewall_NoSourcePreservation, v.NoSourcePreservation)
+	}
 	if v.NumberOfAssociations != nil {
 		s.WriteInt32(schemas.Firewall_NumberOfAssociations, *v.NumberOfAssociations)
+	}
+	if v.ProxySettings != nil {
+		s.WriteStruct(schemas.Firewall_ProxySettings)
+		v.ProxySettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SubnetChangeProtection != false {
 		s.WriteBool(schemas.Firewall_SubnetChangeProtection, v.SubnetChangeProtection)
@@ -1348,6 +1517,11 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TransitGatewayOwnerAccountId != nil {
 		s.WriteString(schemas.Firewall_TransitGatewayOwnerAccountId, *v.TransitGatewayOwnerAccountId)
+	}
+	if v.VpcEndpoint != nil {
+		s.WriteStruct(schemas.Firewall_VpcEndpoint)
+		v.VpcEndpoint.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.Firewall_VpcId, *v.VpcId)
@@ -1384,9 +1558,16 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Firewall_FirewallPolicyArn, v.FirewallPolicyArn)
 		case schemas.Firewall_FirewallPolicyChangeProtection:
 			return d.ReadBool(schemas.Firewall_FirewallPolicyChangeProtection, &v.FirewallPolicyChangeProtection)
+		case schemas.Firewall_NatGatewayMappings:
+			return deserializeNatGatewayMappingsList(d, schemas.Firewall_NatGatewayMappings, &v.NatGatewayMappings)
+		case schemas.Firewall_NoSourcePreservation:
+			return d.ReadBool(schemas.Firewall_NoSourcePreservation, &v.NoSourcePreservation)
 		case schemas.Firewall_NumberOfAssociations:
 			v.NumberOfAssociations = new(int32)
 			return d.ReadInt32(schemas.Firewall_NumberOfAssociations, v.NumberOfAssociations)
+		case schemas.Firewall_ProxySettings:
+			v.ProxySettings = &ProxySettings{}
+			return v.ProxySettings.Deserialize(d)
 		case schemas.Firewall_SubnetChangeProtection:
 			return d.ReadBool(schemas.Firewall_SubnetChangeProtection, &v.SubnetChangeProtection)
 		case schemas.Firewall_SubnetMappings:
@@ -1399,6 +1580,9 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Firewall_TransitGatewayOwnerAccountId:
 			v.TransitGatewayOwnerAccountId = new(string)
 			return d.ReadString(schemas.Firewall_TransitGatewayOwnerAccountId, v.TransitGatewayOwnerAccountId)
+		case schemas.Firewall_VpcEndpoint:
+			v.VpcEndpoint = &VpcEndpoint{}
+			return v.VpcEndpoint.Deserialize(d)
 		case schemas.Firewall_VpcId:
 			v.VpcId = new(string)
 			return d.ReadString(schemas.Firewall_VpcId, v.VpcId)
@@ -1522,6 +1706,14 @@ type FirewallPolicy struct {
 	//   - aws:alert_strict
 	//
 	//   - aws:alert_established
+	//
+	//   - aws:drop_established_app_layer
+	//
+	//   - aws:alert_established_app_layer
+	//
+	//   - aws:drop_established_app_layer_to_server
+	//
+	//   - aws:alert_established_app_layer_to_server
 	//
 	// For more information, see [Strict evaluation order] in the Network Firewall Developer Guide.
 	//
@@ -2224,9 +2416,9 @@ func (v *FlowOperationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Describes the amount of time that can pass without any traffic sent through the
 // firewall before the firewall determines that the connection is idle and Network
-// Firewall removes the flow entry from its flow table. Existing connections and
-// flows are not impacted when you update this value. Only new connections after
-// you update this value are impacted.
+// Firewall removes the flow entry from its flow table. When you update this value,
+// existing connections will be treated according to your stream exception policy
+// configuration.
 type FlowTimeouts struct {
 
 	// The number of seconds that can pass without any TCP traffic sent through the
@@ -2858,6 +3050,112 @@ func (v *MatchAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeAddresses(d, schemas.MatchAttributes_Sources, &v.Sources)
 		case schemas.MatchAttributes_TCPFlags:
 			return deserializeTCPFlags(d, schemas.MatchAttributes_TCPFlags, &v.TCPFlags)
+		}
+		return nil
+	})
+}
+
+// The definition and status of the attachment between a proxy mode firewall and a
+// NAT gateway that proxies its traffic.
+type NatGatewayAttachment struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	// The current status of the NAT gateway attachment.
+	//
+	// When this value is READY , the attachment is available to proxy traffic.
+	// Otherwise, this value reflects its state, for example CREATING or DELETING .
+	//
+	// This member is required.
+	Status NatGatewayAttachmentStatus
+
+	// The DNS name that resolves to the firewall's proxy for traffic sent through
+	// this NAT gateway attachment.
+	DnsName *string
+
+	// If Network Firewall encounters an issue with the NAT gateway attachment, it
+	// populates this with an explanation of the problem.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatGatewayAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatGatewayAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatGatewayAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsName != nil {
+		s.WriteString(schemas.NatGatewayAttachment_DnsName, *v.DnsName)
+	}
+	if v.NatGatewayId != nil {
+		s.WriteString(schemas.NatGatewayAttachment_NatGatewayId, *v.NatGatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NatGatewayAttachment_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.NatGatewayAttachment_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *NatGatewayAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatGatewayAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatGatewayAttachment_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.NatGatewayAttachment_DnsName, v.DnsName)
+		case schemas.NatGatewayAttachment_NatGatewayId:
+			v.NatGatewayId = new(string)
+			return d.ReadString(schemas.NatGatewayAttachment_NatGatewayId, v.NatGatewayId)
+		case schemas.NatGatewayAttachment_Status:
+			var ev string
+			if err := d.ReadString(schemas.NatGatewayAttachment_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NatGatewayAttachmentStatus(ev)
+			return nil
+		case schemas.NatGatewayAttachment_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.NatGatewayAttachment_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
+// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in CreateFirewall
+// when NoSourcePreservation is TRUE .
+type NatGatewayMapping struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NatGatewayMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatGatewayMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NatGatewayMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NatGatewayId != nil {
+		s.WriteString(schemas.NatGatewayMapping_NatGatewayId, *v.NatGatewayId)
+	}
+}
+func (v *NatGatewayMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatGatewayMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NatGatewayMapping_NatGatewayId:
+			v.NatGatewayId = new(string)
+			return d.ReadString(schemas.NatGatewayMapping_NatGatewayId, v.NatGatewayId)
 		}
 		return nil
 	})
@@ -3935,6 +4233,37 @@ func (v *ProxyRulesByRequestPhase) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The listener configuration for a proxy mode firewall. This specifies the ports
+// and protocols on which the firewall's proxy listens for traffic.
+type ProxySettings struct {
+
+	// Listener properties for HTTP and HTTPS traffic.
+	//
+	// This member is required.
+	ListenerProperties []ListenerProperty
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProxySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProxySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProxySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListenerProperties(s, schemas.ProxySettings_ListenerProperties, v.ListenerProperties)
+}
+func (v *ProxySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProxySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProxySettings_ListenerProperties:
+			return deserializeListenerProperties(d, schemas.ProxySettings_ListenerProperties, &v.ListenerProperties)
+		}
+		return nil
+	})
+}
+
 // Stateless inspection criteria that publishes the specified metrics to Amazon
 // CloudWatch for the matching packet. This setting defines a CloudWatch dimension
 // value to be published.
@@ -4425,7 +4754,7 @@ type RuleOption struct {
 	// (signature ID), and can optionally include other keywords. For information about
 	// Suricata compatible keywords, see [Rule options]in the Suricata documentation.
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	//
 	// This member is required.
 	Keyword *string
@@ -4435,7 +4764,7 @@ type RuleOption struct {
 	// the Keyword . For more information about the settings for specific options, see [Rule options]
 	// .
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -4491,7 +4820,7 @@ type RulesSource struct {
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see [Rules Format].
 	//
-	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -4960,6 +5289,11 @@ func (v *SourceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 
 // Configuration settings for the handling of the stateful rule groups in a
 // firewall policy.
+//
+// Updating any setting in StatefulEngineOptions may require a restart of the
+// stateful engine in order to apply the changes. When this occurs, existing
+// connections will be treated according to your stream exception policy
+// configuration.
 type StatefulEngineOptions struct {
 
 	// Configures the amount of time that can pass without any traffic sent through
@@ -5055,7 +5389,7 @@ func (v *StatefulEngineOptions) Deserialize(d smithy.ShapeDeserializer) error {
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see [Rules Format].
 //
-// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when
@@ -5593,6 +5927,11 @@ type SyncState struct {
 	// can properly filter network traffic.
 	Config map[string]PerObjectStatus
 
+	// The status of the NAT gateway attachments for a proxy mode firewall in the
+	// Availability Zone. This reflects the attachment of the firewall to each NAT
+	// gateway that proxies its traffic.
+	NatGatewayAttachments []NatGatewayAttachment
+
 	noSmithyDocumentSerde
 }
 
@@ -5609,6 +5948,7 @@ func (v *SyncState) SerializeMembers(s smithy.ShapeSerializer) {
 		s.CloseStruct()
 	}
 	serializeSyncStateConfig(s, schemas.SyncState_Config, v.Config)
+	serializeNatGatewayAttachmentsList(s, schemas.SyncState_NatGatewayAttachments, v.NatGatewayAttachments)
 }
 func (v *SyncState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SyncState, func(s *smithy.Schema) error {
@@ -5618,6 +5958,8 @@ func (v *SyncState) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.Attachment.Deserialize(d)
 		case schemas.SyncState_Config:
 			return deserializeSyncStateConfig(d, schemas.SyncState_Config, &v.Config)
+		case schemas.SyncState_NatGatewayAttachments:
+			return deserializeNatGatewayAttachmentsList(d, schemas.SyncState_NatGatewayAttachments, &v.NatGatewayAttachments)
 		}
 		return nil
 	})
@@ -6230,6 +6572,55 @@ func (v *UniqueSources) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.UniqueSources_Count:
 			return d.ReadInt32(schemas.UniqueSources_Count, &v.Count)
+		}
+		return nil
+	})
+}
+
+// The VPC and subnets for a proxy mode firewall endpoint. This is used in CreateFirewall when
+// NoSourcePreservation is TRUE , to specify where Network Firewall creates the
+// firewall endpoint.
+//
+// This differs from VpcEndpointAssociation, which defines additional secondary endpoints for a firewall
+// in other VPCs.
+type VpcEndpoint struct {
+
+	// The subnets in which Network Firewall creates the firewall endpoint for a proxy
+	// mode firewall. Each subnet must belong to a different Availability Zone in the
+	// VPC.
+	//
+	// This member is required.
+	SubnetMappings []SubnetMapping
+
+	// The unique identifier of the VPC where Network Firewall creates the proxy mode
+	// firewall endpoint.
+	//
+	// This member is required.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubnetMappings(s, schemas.VpcEndpoint_SubnetMappings, v.SubnetMappings)
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcEndpoint_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcEndpoint_SubnetMappings:
+			return deserializeSubnetMappings(d, schemas.VpcEndpoint_SubnetMappings, &v.SubnetMappings)
+		case schemas.VpcEndpoint_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcEndpoint_VpcId, v.VpcId)
 		}
 		return nil
 	})

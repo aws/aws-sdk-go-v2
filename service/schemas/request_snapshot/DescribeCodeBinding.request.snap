@@ -1,0 +1,3 @@
+GET /v1/registries/name/__RegistryName__/schemas/name/__SchemaName__/language/__Language__?schemaVersion=__SchemaVersion__
+
+

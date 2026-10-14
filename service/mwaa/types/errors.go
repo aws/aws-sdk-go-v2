@@ -5,10 +5,7 @@ package types
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/mwaa/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 )
 
 // Access to the Apache Airflow Web UI or CLI has been denied due to insufficient
@@ -39,16 +36,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // InternalServerException: An internal error has occurred.
 type InternalServerException struct {
@@ -75,16 +62,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // ResourceNotFoundException: The resource is not available.
 type ResourceNotFoundException struct {
@@ -111,16 +88,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An exception indicating that a client-side error occurred during the Apache
 // Airflow REST API call.
@@ -151,25 +118,6 @@ func (e *RestApiClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RestApiClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RestApiClientException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestApiClientException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestApiClientException_RestApiResponse:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.RestApiClientException_RestApiResponse, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.RestApiResponse = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.RestApiClientException_RestApiStatusCode:
-			v.RestApiStatusCode = new(int32)
-			return d.ReadInt32(schemas.RestApiClientException_RestApiStatusCode, v.RestApiStatusCode)
-		}
-		return nil
-	})
-}
 
 // An exception indicating that a server-side error occurred during the Apache
 // Airflow REST API call.
@@ -200,25 +148,6 @@ func (e *RestApiServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RestApiServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RestApiServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestApiServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestApiServerException_RestApiResponse:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.RestApiServerException_RestApiResponse, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.RestApiResponse = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.RestApiServerException_RestApiStatusCode:
-			v.RestApiStatusCode = new(int32)
-			return d.ReadInt32(schemas.RestApiServerException_RestApiStatusCode, v.RestApiStatusCode)
-		}
-		return nil
-	})
-}
 
 // ServiceUnavailableException: The service is currently unavailable.
 type ServiceUnavailableException struct {
@@ -245,16 +174,6 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // ValidationException: The provided input is not valid.
 type ValidationException struct {
@@ -281,13 +200,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		}
-		return nil
-	})
-}

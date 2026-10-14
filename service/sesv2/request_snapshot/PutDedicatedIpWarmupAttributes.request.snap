@@ -1,0 +1,5 @@
+PUT /v2/email/dedicated-ips/__Ip__/warmup
+
+Content-Type: application/json
+
+{"WarmupPercentage":1}

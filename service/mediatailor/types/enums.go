@@ -42,6 +42,29 @@ func (AdMarkupType) Values() []AdMarkupType {
 	}
 }
 
+type AdSequencingMode string
+
+// Enum values for AdSequencingMode
+const (
+	AdSequencingModeFollowAdSequence         AdSequencingMode = "FOLLOW_AD_SEQUENCE"
+	AdSequencingModeIgnoreAdSequence         AdSequencingMode = "IGNORE_AD_SEQUENCE"
+	AdSequencingModeFollowAdSequenceOnlyLive AdSequencingMode = "FOLLOW_AD_SEQUENCE_ONLY_LIVE"
+	AdSequencingModeFollowAdSequenceOnlyVod  AdSequencingMode = "FOLLOW_AD_SEQUENCE_ONLY_VOD"
+)
+
+// Values returns all known values for AdSequencingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdSequencingMode) Values() []AdSequencingMode {
+	return []AdSequencingMode{
+		"FOLLOW_AD_SEQUENCE",
+		"IGNORE_AD_SEQUENCE",
+		"FOLLOW_AD_SEQUENCE_ONLY_LIVE",
+		"FOLLOW_AD_SEQUENCE_ONLY_VOD",
+	}
+}
+
 type AdsInteractionExcludeEventType string
 
 // Enum values for AdsInteractionExcludeEventType
@@ -89,6 +112,11 @@ const (
 	AdsInteractionExcludeEventTypeInterstitialVodFailure                       AdsInteractionExcludeEventType = "INTERSTITIAL_VOD_FAILURE"
 	AdsInteractionExcludeEventTypePreAdsRequestHookError                       AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_HOOK_ERROR"
 	AdsInteractionExcludeEventTypePreAdsRequestFunctionError                   AdsInteractionExcludeEventType = "PRE_ADS_REQUEST_FUNCTION_ERROR"
+	AdsInteractionExcludeEventTypeBeaconReceived                               AdsInteractionExcludeEventType = "BEACON_RECEIVED"
+	AdsInteractionExcludeEventTypePostAdsResponseHookError                     AdsInteractionExcludeEventType = "POST_ADS_RESPONSE_HOOK_ERROR"
+	AdsInteractionExcludeEventTypePostAdsResponseFunctionError                 AdsInteractionExcludeEventType = "POST_ADS_RESPONSE_FUNCTION_ERROR"
+	AdsInteractionExcludeEventTypePreManifestInsertionHookError                AdsInteractionExcludeEventType = "PRE_MANIFEST_INSERTION_HOOK_ERROR"
+	AdsInteractionExcludeEventTypePreManifestInsertionFunctionError            AdsInteractionExcludeEventType = "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
 )
 
 // Values returns all known values for AdsInteractionExcludeEventType. Note that
@@ -141,6 +169,11 @@ func (AdsInteractionExcludeEventType) Values() []AdsInteractionExcludeEventType 
 		"INTERSTITIAL_VOD_FAILURE",
 		"PRE_ADS_REQUEST_HOOK_ERROR",
 		"PRE_ADS_REQUEST_FUNCTION_ERROR",
+		"BEACON_RECEIVED",
+		"POST_ADS_RESPONSE_HOOK_ERROR",
+		"POST_ADS_RESPONSE_FUNCTION_ERROR",
+		"PRE_MANIFEST_INSERTION_HOOK_ERROR",
+		"PRE_MANIFEST_INSERTION_FUNCTION_ERROR",
 	}
 }
 
@@ -148,10 +181,16 @@ type AdsInteractionPublishOptInEventType string
 
 // Enum values for AdsInteractionPublishOptInEventType
 const (
-	AdsInteractionPublishOptInEventTypeRawAdsResponse                 AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
-	AdsInteractionPublishOptInEventTypeRawAdsRequest                  AdsInteractionPublishOptInEventType = "RAW_ADS_REQUEST"
-	AdsInteractionPublishOptInEventTypePreAdsRequestHookSummary       AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_HOOK_SUMMARY"
-	AdsInteractionPublishOptInEventTypePreAdsRequestFunctionCompleted AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
+	AdsInteractionPublishOptInEventTypeRawAdsResponse                        AdsInteractionPublishOptInEventType = "RAW_ADS_RESPONSE"
+	AdsInteractionPublishOptInEventTypeRawAdsRequest                         AdsInteractionPublishOptInEventType = "RAW_ADS_REQUEST"
+	AdsInteractionPublishOptInEventTypeRawBidRequest                         AdsInteractionPublishOptInEventType = "RAW_BID_REQUEST"
+	AdsInteractionPublishOptInEventTypeRawBidResponse                        AdsInteractionPublishOptInEventType = "RAW_BID_RESPONSE"
+	AdsInteractionPublishOptInEventTypePreAdsRequestHookSummary              AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_HOOK_SUMMARY"
+	AdsInteractionPublishOptInEventTypePreAdsRequestFunctionCompleted        AdsInteractionPublishOptInEventType = "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
+	AdsInteractionPublishOptInEventTypePostAdsResponseHookSummary            AdsInteractionPublishOptInEventType = "POST_ADS_RESPONSE_HOOK_SUMMARY"
+	AdsInteractionPublishOptInEventTypePostAdsResponseFunctionCompleted      AdsInteractionPublishOptInEventType = "POST_ADS_RESPONSE_FUNCTION_COMPLETED"
+	AdsInteractionPublishOptInEventTypePreManifestInsertionHookSummary       AdsInteractionPublishOptInEventType = "PRE_MANIFEST_INSERTION_HOOK_SUMMARY"
+	AdsInteractionPublishOptInEventTypePreManifestInsertionFunctionCompleted AdsInteractionPublishOptInEventType = "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED"
 )
 
 // Values returns all known values for AdsInteractionPublishOptInEventType. Note
@@ -163,8 +202,14 @@ func (AdsInteractionPublishOptInEventType) Values() []AdsInteractionPublishOptIn
 	return []AdsInteractionPublishOptInEventType{
 		"RAW_ADS_RESPONSE",
 		"RAW_ADS_REQUEST",
+		"RAW_BID_REQUEST",
+		"RAW_BID_RESPONSE",
 		"PRE_ADS_REQUEST_HOOK_SUMMARY",
 		"PRE_ADS_REQUEST_FUNCTION_COMPLETED",
+		"POST_ADS_RESPONSE_HOOK_SUMMARY",
+		"POST_ADS_RESPONSE_FUNCTION_COMPLETED",
+		"PRE_MANIFEST_INSERTION_HOOK_SUMMARY",
+		"PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED",
 	}
 }
 
@@ -189,6 +234,50 @@ func (AlertCategory) Values() []AlertCategory {
 	}
 }
 
+type ApsRegion string
+
+// Enum values for ApsRegion
+const (
+	ApsRegionAmericas    ApsRegion = "AMERICAS"
+	ApsRegionEurope      ApsRegion = "EUROPE"
+	ApsRegionAsiaPacific ApsRegion = "ASIA_PACIFIC"
+)
+
+// Values returns all known values for ApsRegion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApsRegion) Values() []ApsRegion {
+	return []ApsRegion{
+		"AMERICAS",
+		"EUROPE",
+		"ASIA_PACIFIC",
+	}
+}
+
+type BeaconEventType string
+
+// Enum values for BeaconEventType
+const (
+	BeaconEventTypeMute   BeaconEventType = "MUTE"
+	BeaconEventTypeUnmute BeaconEventType = "UNMUTE"
+	BeaconEventTypePause  BeaconEventType = "PAUSE"
+	BeaconEventTypeSkip   BeaconEventType = "SKIP"
+)
+
+// Values returns all known values for BeaconEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BeaconEventType) Values() []BeaconEventType {
+	return []BeaconEventType{
+		"MUTE",
+		"UNMUTE",
+		"PAUSE",
+		"SKIP",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState
@@ -205,6 +294,28 @@ func (ChannelState) Values() []ChannelState {
 	return []ChannelState{
 		"RUNNING",
 		"STOPPED",
+	}
+}
+
+type ClientSideBeaconingMode string
+
+// Enum values for ClientSideBeaconingMode
+const (
+	// Tracking response returned unmodified.
+	ClientSideBeaconingModeDisabled ClientSideBeaconingMode = "DISABLED"
+	// EMT beacon URLs added alongside the ad server's. Effective default when
+	// BeaconingConfiguration is absent.
+	ClientSideBeaconingModeInsights ClientSideBeaconingMode = "INSIGHTS"
+)
+
+// Values returns all known values for ClientSideBeaconingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientSideBeaconingMode) Values() []ClientSideBeaconingMode {
+	return []ClientSideBeaconingMode{
+		"DISABLED",
+		"INSIGHTS",
 	}
 }
 
@@ -233,6 +344,8 @@ type EventName string
 const (
 	EventNamePreSessionInitialization EventName = "PRE_SESSION_INITIALIZATION"
 	EventNamePreAdsRequest            EventName = "PRE_ADS_REQUEST"
+	EventNamePostAdsResponse          EventName = "POST_ADS_RESPONSE"
+	EventNamePreManifestInsertion     EventName = "PRE_MANIFEST_INSERTION"
 )
 
 // Values returns all known values for EventName. Note that this can be expanded
@@ -243,6 +356,8 @@ func (EventName) Values() []EventName {
 	return []EventName{
 		"PRE_SESSION_INITIALIZATION",
 		"PRE_ADS_REQUEST",
+		"POST_ADS_RESPONSE",
+		"PRE_MANIFEST_INSERTION",
 	}
 }
 
@@ -270,8 +385,11 @@ type FunctionType string
 // Enum values for FunctionType
 const (
 	FunctionTypeHttpRequest        FunctionType = "HTTP_REQUEST"
+	FunctionTypeAwsServiceRequest  FunctionType = "AWS_SERVICE_REQUEST"
 	FunctionTypeCustomOutput       FunctionType = "CUSTOM_OUTPUT"
+	FunctionTypeConcurrentExecutor FunctionType = "CONCURRENT_EXECUTOR"
 	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
+	FunctionTypeVastRequest        FunctionType = "VAST_REQUEST"
 )
 
 // Values returns all known values for FunctionType. Note that this can be
@@ -281,8 +399,11 @@ const (
 func (FunctionType) Values() []FunctionType {
 	return []FunctionType{
 		"HTTP_REQUEST",
+		"AWS_SERVICE_REQUEST",
 		"CUSTOM_OUTPUT",
+		"CONCURRENT_EXECUTOR",
 		"SEQUENTIAL_EXECUTOR",
+		"VAST_REQUEST",
 	}
 }
 
@@ -615,6 +736,25 @@ func (PrefetchScheduleType) Values() []PrefetchScheduleType {
 	return []PrefetchScheduleType{
 		"SINGLE",
 		"RECURRING",
+	}
+}
+
+type PreRollAdSequencingMode string
+
+// Enum values for PreRollAdSequencingMode
+const (
+	PreRollAdSequencingModeFollowAdSequence PreRollAdSequencingMode = "FOLLOW_AD_SEQUENCE"
+	PreRollAdSequencingModeIgnoreAdSequence PreRollAdSequencingMode = "IGNORE_AD_SEQUENCE"
+)
+
+// Values returns all known values for PreRollAdSequencingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreRollAdSequencingMode) Values() []PreRollAdSequencingMode {
+	return []PreRollAdSequencingMode{
+		"FOLLOW_AD_SEQUENCE",
+		"IGNORE_AD_SEQUENCE",
 	}
 }
 

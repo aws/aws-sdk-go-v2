@@ -5,10 +5,10 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the outbound cross-cluster search connections for a source domain.
@@ -51,6 +51,22 @@ type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOutboundCrossClusterSearchConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOutboundCrossClusterSearchConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOutboundCrossClusterSearchConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeOutboundCrossClusterSearchConnectionsRequest_Filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeOutboundCrossClusterSearchConnectionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOutboundCrossClusterSearchConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The result of a DescribeOutboundCrossClusterSearchConnections request. Contains the list of connections matching the filter
 // criteria.
 type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
@@ -68,74 +84,48 @@ type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOutboundCrossClusterSearchConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOutboundCrossClusterSearchConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOutboundCrossClusterSearchConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOutboundCrossClusterSearchConnections(s, schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, v.CrossClusterSearchConnections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeOutboundCrossClusterSearchConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOutboundCrossClusterSearchConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections:
+			return deserializeOutboundCrossClusterSearchConnections(d, schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, &v.CrossClusterSearchConnections)
+		case schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOutboundCrossClusterSearchConnectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOutboundCrossClusterSearchConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOutboundCrossClusterSearchConnections, schemas.DescribeOutboundCrossClusterSearchConnectionsRequest, schemas.DescribeOutboundCrossClusterSearchConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOutboundCrossClusterSearchConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOutboundCrossClusterSearchConnections, schemas.DescribeOutboundCrossClusterSearchConnectionsRequest, schemas.DescribeOutboundCrossClusterSearchConnectionsResponse), output: &DescribeOutboundCrossClusterSearchConnectionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOutboundCrossClusterSearchConnections{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOutboundCrossClusterSearchConnections"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOutboundCrossClusterSearchConnections(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +138,6 @@ func (c *Client) addOperationDescribeOutboundCrossClusterSearchConnectionsMiddle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +238,3 @@ type DescribeOutboundCrossClusterSearchConnectionsAPIClient interface {
 }
 
 var _ DescribeOutboundCrossClusterSearchConnectionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeOutboundCrossClusterSearchConnections(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOutboundCrossClusterSearchConnections",
-	}
-}

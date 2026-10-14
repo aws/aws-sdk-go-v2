@@ -1,0 +1,3 @@
+GET /clusters/__ClusterName__/access-entries/__PrincipalArn__/access-policies?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /2013-04-01/queryloggingconfig
+
+Content-Type: application/xml
+
+<CreateQueryLoggingConfigRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><CloudWatchLogsLogGroupArn>__CloudWatchLogsLogGroupArn__</CloudWatchLogsLogGroupArn><HostedZoneId>__HostedZoneId__</HostedZoneId></CreateQueryLoggingConfigRequest>

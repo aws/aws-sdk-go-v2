@@ -1,0 +1,5 @@
+POST /signing-profiles/__ProfileName__/permissions
+
+Content-Type: application/json
+
+{"action":"__Action__","principal":"__Principal__","profileVersion":"__ProfileVersion__","revisionId":"__RevisionId__","statementId":"__StatementId__"}

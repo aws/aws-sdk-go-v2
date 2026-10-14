@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cases":[{"caseId":"__CaseId__","templateId":"__TemplateId__"},{"caseId":"__CaseId__","templateId":"__TemplateId__"}],"nextToken":"__NextToken__"}

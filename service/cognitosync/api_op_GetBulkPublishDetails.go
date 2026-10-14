@@ -4,11 +4,10 @@ package cognitosync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,18 @@ type GetBulkPublishDetailsInput struct {
 	IdentityPoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBulkPublishDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkPublishDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkPublishDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
 }
 
 // The output for the GetBulkPublishDetails operation.
@@ -82,77 +93,76 @@ type GetBulkPublishDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBulkPublishDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkPublishDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkPublishDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkPublishCompleteTime != nil {
+		s.WriteTime(schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime, *v.BulkPublishCompleteTime)
+	}
+	if v.BulkPublishStartTime != nil {
+		s.WriteTime(schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime, *v.BulkPublishStartTime)
+	}
+	if v.BulkPublishStatus != "" {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_BulkPublishStatus, string(v.BulkPublishStatus))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_FailureMessage, *v.FailureMessage)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+func (v *GetBulkPublishDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBulkPublishDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime:
+			v.BulkPublishCompleteTime = new(time.Time)
+			return d.ReadTime(schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime, v.BulkPublishCompleteTime)
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime:
+			v.BulkPublishStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime, v.BulkPublishStartTime)
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetBulkPublishDetailsResponse_BulkPublishStatus, &ev); err != nil {
+				return err
+			}
+			v.BulkPublishStatus = types.BulkPublishStatus(ev)
+			return nil
+		case schemas.GetBulkPublishDetailsResponse_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetBulkPublishDetailsResponse_FailureMessage, v.FailureMessage)
+		case schemas.GetBulkPublishDetailsResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetBulkPublishDetailsResponse_IdentityPoolId, v.IdentityPoolId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkPublishDetails, schemas.GetBulkPublishDetailsRequest, schemas.GetBulkPublishDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBulkPublishDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkPublishDetails, schemas.GetBulkPublishDetailsRequest, schemas.GetBulkPublishDetailsResponse), output: &GetBulkPublishDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBulkPublishDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBulkPublishDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBulkPublishDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBulkPublishDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +177,8 @@ func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBulkPublishDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBulkPublishDetails",
-	}
 }

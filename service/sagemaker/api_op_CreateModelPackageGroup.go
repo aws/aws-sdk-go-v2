@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a model group. A model group contains a group of model versions.
@@ -49,6 +48,27 @@ type CreateModelPackageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedConfiguration != nil {
+		s.WriteStruct(schemas.CreateModelPackageGroupInput_ManagedConfiguration)
+		v.ManagedConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageGroupDescription != nil {
+		s.WriteString(schemas.CreateModelPackageGroupInput_ModelPackageGroupDescription, *v.ModelPackageGroupDescription)
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.CreateModelPackageGroupInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	serializeTagList(s, schemas.CreateModelPackageGroupInput_Tags, v.Tags)
+}
+
 type CreateModelPackageGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model group.
@@ -62,77 +82,48 @@ type CreateModelPackageGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.CreateModelPackageGroupOutput_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+}
+func (v *CreateModelPackageGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelPackageGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelPackageGroupOutput_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.CreateModelPackageGroupOutput_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackageGroup, schemas.CreateModelPackageGroupInput, schemas.CreateModelPackageGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelPackageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackageGroup, schemas.CreateModelPackageGroupInput, schemas.CreateModelPackageGroupOutput), output: &CreateModelPackageGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelPackageGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelPackageGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelPackageGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelPackageGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +138,8 @@ func (c *Client) addOperationCreateModelPackageGroupMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModelPackageGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelPackageGroup",
-	}
 }

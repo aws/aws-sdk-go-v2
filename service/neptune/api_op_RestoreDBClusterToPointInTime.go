@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -119,6 +114,17 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// restore request is rejected.
 	KmsKeyId *string
 
+	// The network type of the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - IPV4 – ( the default ) The DB cluster uses only IPv4 addresses for
+	//   communication.
+	//
+	//   - DUAL – The DB cluster uses both IPv4 and IPv6 addresses for communication.
+	//   The DB subnet group associated with the cluster must support IPv6.
+	NetworkType *string
+
 	//  (Not supported by Neptune)
 	OptionGroupName *string
 
@@ -190,62 +196,6 @@ type RestoreDBClusterToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreDBClusterToPointInTimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RestoreDBClusterToPointInTimeMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RestoreDBClusterToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DBSubnetGroupName != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.RestoreDBClusterToPointInTimeMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	serializeLogTypeList(s, schemas.RestoreDBClusterToPointInTimeMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
-	if v.EnableIAMDatabaseAuthentication != nil {
-		s.WriteBool(schemas.RestoreDBClusterToPointInTimeMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.OptionGroupName != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_OptionGroupName, *v.OptionGroupName)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.RestoreDBClusterToPointInTimeMessage_Port, *v.Port)
-	}
-	if v.RestoreToTime != nil {
-		s.WriteTime(schemas.RestoreDBClusterToPointInTimeMessage_RestoreToTime, *v.RestoreToTime)
-	}
-	if v.RestoreType != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_RestoreType, *v.RestoreType)
-	}
-	if v.ServerlessV2ScalingConfiguration != nil {
-		s.WriteStruct(schemas.RestoreDBClusterToPointInTimeMessage_ServerlessV2ScalingConfiguration)
-		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceDBClusterIdentifier != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.RestoreDBClusterToPointInTimeMessage_StorageType, *v.StorageType)
-	}
-	serializeTagList(s, schemas.RestoreDBClusterToPointInTimeMessage_Tags, v.Tags)
-	if v.UseLatestRestorableTime != nil {
-		s.WriteBool(schemas.RestoreDBClusterToPointInTimeMessage_UseLatestRestorableTime, *v.UseLatestRestorableTime)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.RestoreDBClusterToPointInTimeMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -259,85 +209,29 @@ type RestoreDBClusterToPointInTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreDBClusterToPointInTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestoreDBClusterToPointInTimeResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestoreDBClusterToPointInTimeResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterToPointInTime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterToPointInTime, schemas.RestoreDBClusterToPointInTimeMessage, schemas.RestoreDBClusterToPointInTimeResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBClusterToPointInTime{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterToPointInTime, schemas.RestoreDBClusterToPointInTimeMessage, schemas.RestoreDBClusterToPointInTimeResult), output: &RestoreDBClusterToPointInTimeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreDBClusterToPointInTime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreDBClusterToPointInTimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBClusterToPointInTime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -352,22 +246,8 @@ func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreDBClusterToPointInTime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreDBClusterToPointInTime",
-	}
 }

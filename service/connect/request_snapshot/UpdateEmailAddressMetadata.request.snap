@@ -1,0 +1,5 @@
+POST /email-addresses/__InstanceId__/__EmailAddressId__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","DisplayName":"__DisplayName__"}

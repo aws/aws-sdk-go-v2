@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateScript
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥gZipFileDblobhScriptIdl__ScriptId__dNameh__Name__gVersionk__Version__oStorageLocation¤mObjectVersionq__ObjectVersion__fBucketj__Bucket__cKeyg__Key__gRoleArnk__RoleArn__

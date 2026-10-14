@@ -1,0 +1,5 @@
+POST /workloadInsights/__ScopeId__/topContributorsDataQueries
+
+Content-Type: application/json
+
+{"destinationCategory":"INTRA_AZ","endTime":"2000-01-01T00:00:00Z","metricName":"TIMEOUTS","startTime":"2000-01-01T00:00:00Z"}

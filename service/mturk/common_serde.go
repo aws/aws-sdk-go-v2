@@ -269,6 +269,7 @@ func serializeWorkerBlockList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeAssignmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Assignment) error {
+	*v = make([]types.Assignment, 0)
 	var vv types.Assignment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Assignment{}
@@ -282,6 +283,7 @@ func deserializeAssignmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeAssignmentStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AssignmentStatus) error {
+	*v = make([]types.AssignmentStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -295,6 +297,7 @@ func deserializeAssignmentStatusList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeBonusPaymentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BonusPayment) error {
+	*v = make([]types.BonusPayment, 0)
 	var vv types.BonusPayment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BonusPayment{}
@@ -308,6 +311,7 @@ func deserializeBonusPaymentList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeCustomerIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -321,6 +325,7 @@ func deserializeCustomerIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeEventTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventType) error {
+	*v = make([]types.EventType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -334,6 +339,7 @@ func deserializeEventTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeHITLayoutParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HITLayoutParameter) error {
+	*v = make([]types.HITLayoutParameter, 0)
 	var vv types.HITLayoutParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.HITLayoutParameter{}
@@ -347,6 +353,7 @@ func deserializeHITLayoutParameterList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeHITList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HIT) error {
+	*v = make([]types.HIT, 0)
 	var vv types.HIT
 	return smithy.ReadList(d, s, func() error {
 		vv = types.HIT{}
@@ -360,6 +367,7 @@ func deserializeHITList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -373,6 +381,7 @@ func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]i
 }
 
 func deserializeLocaleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Locale) error {
+	*v = make([]types.Locale, 0)
 	var vv types.Locale
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Locale{}
@@ -386,6 +395,7 @@ func deserializeLocaleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeNotifyWorkersFailureStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NotifyWorkersFailureStatus) error {
+	*v = make([]types.NotifyWorkersFailureStatus, 0)
 	var vv types.NotifyWorkersFailureStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NotifyWorkersFailureStatus{}
@@ -399,6 +409,7 @@ func deserializeNotifyWorkersFailureStatusList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeParameterMapEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParameterMapEntry) error {
+	*v = make([]types.ParameterMapEntry, 0)
 	var vv types.ParameterMapEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParameterMapEntry{}
@@ -412,6 +423,7 @@ func deserializeParameterMapEntryList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializePolicyParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PolicyParameter) error {
+	*v = make([]types.PolicyParameter, 0)
 	var vv types.PolicyParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PolicyParameter{}
@@ -425,6 +437,7 @@ func deserializePolicyParameterList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeQualificationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Qualification) error {
+	*v = make([]types.Qualification, 0)
 	var vv types.Qualification
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Qualification{}
@@ -438,6 +451,7 @@ func deserializeQualificationList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeQualificationRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QualificationRequest) error {
+	*v = make([]types.QualificationRequest, 0)
 	var vv types.QualificationRequest
 	return smithy.ReadList(d, s, func() error {
 		vv = types.QualificationRequest{}
@@ -451,6 +465,7 @@ func deserializeQualificationRequestList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeQualificationRequirementList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QualificationRequirement) error {
+	*v = make([]types.QualificationRequirement, 0)
 	var vv types.QualificationRequirement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.QualificationRequirement{}
@@ -464,6 +479,7 @@ func deserializeQualificationRequirementList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeQualificationTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QualificationType) error {
+	*v = make([]types.QualificationType, 0)
 	var vv types.QualificationType
 	return smithy.ReadList(d, s, func() error {
 		vv = types.QualificationType{}
@@ -477,6 +493,7 @@ func deserializeQualificationTypeList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeReviewActionDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReviewActionDetail) error {
+	*v = make([]types.ReviewActionDetail, 0)
 	var vv types.ReviewActionDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ReviewActionDetail{}
@@ -490,6 +507,7 @@ func deserializeReviewActionDetailList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeReviewPolicyLevelList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReviewPolicyLevel) error {
+	*v = make([]types.ReviewPolicyLevel, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -503,6 +521,7 @@ func deserializeReviewPolicyLevelList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeReviewResultDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReviewResultDetail) error {
+	*v = make([]types.ReviewResultDetail, 0)
 	var vv types.ReviewResultDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ReviewResultDetail{}
@@ -516,6 +535,7 @@ func deserializeReviewResultDetailList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -529,6 +549,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeWorkerBlockList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WorkerBlock) error {
+	*v = make([]types.WorkerBlock, 0)
 	var vv types.WorkerBlock
 	return smithy.ReadList(d, s, func() error {
 		vv = types.WorkerBlock{}

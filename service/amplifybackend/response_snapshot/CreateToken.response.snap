@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appId":"__AppId__","challengeCode":"__ChallengeCode__","sessionId":"__SessionId__","ttl":"__Ttl__"}

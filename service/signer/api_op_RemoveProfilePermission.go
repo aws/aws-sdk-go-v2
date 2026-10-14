@@ -4,10 +4,9 @@ package signer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes cross-account permissions from a signing profile.
@@ -46,6 +45,24 @@ type RemoveProfilePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveProfilePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveProfilePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveProfilePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileName != nil {
+		s.WriteString(schemas.RemoveProfilePermissionRequest_profileName, *v.ProfileName)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RemoveProfilePermissionRequest_revisionId, *v.RevisionId)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.RemoveProfilePermissionRequest_statementId, *v.StatementId)
+	}
+}
+
 type RemoveProfilePermissionOutput struct {
 
 	// An identifier for the current revision of the profile permissions.
@@ -57,77 +74,48 @@ type RemoveProfilePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveProfilePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveProfilePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveProfilePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RemoveProfilePermissionResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *RemoveProfilePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveProfilePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveProfilePermissionResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.RemoveProfilePermissionResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveProfilePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveProfilePermission, schemas.RemoveProfilePermissionRequest, schemas.RemoveProfilePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveProfilePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveProfilePermission, schemas.RemoveProfilePermissionRequest, schemas.RemoveProfilePermissionResponse), output: &RemoveProfilePermissionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveProfilePermission{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveProfilePermission"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveProfilePermissionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveProfilePermission(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +130,8 @@ func (c *Client) addOperationRemoveProfilePermissionMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveProfilePermission(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveProfilePermission",
-	}
 }

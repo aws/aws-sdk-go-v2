@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.UpdateRuleVersion
+
+{"description":"__Description__","expression":"__Expression__","language":"DETECTORPL","outcomes":["__Member__","__Member__"],"rule":{"detectorId":"__DetectorId__","ruleId":"__RuleId__","ruleVersion":"__RuleVersion__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

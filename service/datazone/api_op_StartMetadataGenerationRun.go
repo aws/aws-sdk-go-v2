@@ -5,12 +5,8 @@ package datazone
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -80,33 +76,6 @@ type StartMetadataGenerationRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMetadataGenerationRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartMetadataGenerationRunInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartMetadataGenerationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartMetadataGenerationRunInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.StartMetadataGenerationRunInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.OwningProjectIdentifier != nil {
-		s.WriteString(schemas.StartMetadataGenerationRunInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
-	}
-	if v.Target != nil {
-		s.WriteStruct(schemas.StartMetadataGenerationRunInput_target)
-		v.Target.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.StartMetadataGenerationRunInput_type, string(v.Type))
-	}
-	serializeMetadataGenerationRunTypes(s, schemas.StartMetadataGenerationRunInput_types, v.Types)
-}
-
 type StartMetadataGenerationRunOutput struct {
 
 	// The ID of the Amazon DataZone domain in which the metadata generation run was
@@ -148,101 +117,23 @@ type StartMetadataGenerationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMetadataGenerationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartMetadataGenerationRunOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartMetadataGenerationRunOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.StartMetadataGenerationRunOutput_createdAt, v.CreatedAt)
-		case schemas.StartMetadataGenerationRunOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.StartMetadataGenerationRunOutput_createdBy, v.CreatedBy)
-		case schemas.StartMetadataGenerationRunOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.StartMetadataGenerationRunOutput_domainId, v.DomainId)
-		case schemas.StartMetadataGenerationRunOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartMetadataGenerationRunOutput_id, v.Id)
-		case schemas.StartMetadataGenerationRunOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.StartMetadataGenerationRunOutput_owningProjectId, v.OwningProjectId)
-		case schemas.StartMetadataGenerationRunOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.StartMetadataGenerationRunOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.MetadataGenerationRunStatus(ev)
-			return nil
-		case schemas.StartMetadataGenerationRunOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.StartMetadataGenerationRunOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.MetadataGenerationRunType(ev)
-			return nil
-		case schemas.StartMetadataGenerationRunOutput_types:
-			return deserializeMetadataGenerationRunTypes(d, schemas.StartMetadataGenerationRunOutput_types, &v.Types)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartMetadataGenerationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMetadataGenerationRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataGenerationRun, schemas.StartMetadataGenerationRunInput, schemas.StartMetadataGenerationRunOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMetadataGenerationRun{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataGenerationRun, schemas.StartMetadataGenerationRunInput, schemas.StartMetadataGenerationRunOutput), output: &StartMetadataGenerationRunOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataGenerationRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -252,12 +143,6 @@ func (c *Client) addOperationStartMetadataGenerationRunMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpStartMetadataGenerationRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataGenerationRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,12 +155,6 @@ func (c *Client) addOperationStartMetadataGenerationRunMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -315,12 +194,4 @@ func (m *idempotencyToken_initializeOpStartMetadataGenerationRun) HandleInitiali
 }
 func addIdempotencyToken_opStartMetadataGenerationRunMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartMetadataGenerationRun{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartMetadataGenerationRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataGenerationRun",
-	}
 }

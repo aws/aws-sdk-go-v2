@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.ListResolverConfigs
+
+{"NextToken":"__NextToken__","ResolverConfigs":[{"AutodefinedReverse":"ENABLING","Id":"__Id__","OwnerId":"__OwnerId__","ResourceId":"__ResourceId__"},{"AutodefinedReverse":"ENABLING","Id":"__Id__","OwnerId":"__OwnerId__","ResourceId":"__ResourceId__"}]}

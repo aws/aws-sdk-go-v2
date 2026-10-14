@@ -4,10 +4,9 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,6 +64,33 @@ type CreateStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamingURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamingURLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamingURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_FleetName, *v.FleetName)
+	}
+	if v.SessionContext != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_SessionContext, *v.SessionContext)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_StackName, *v.StackName)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_UserId, *v.UserId)
+	}
+	if v.Validity != nil {
+		s.WriteInt64(schemas.CreateStreamingURLRequest_Validity, *v.Validity)
+	}
+}
+
 type CreateStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
@@ -79,77 +105,57 @@ type CreateStreamingURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamingURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamingURLResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamingURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expires != nil {
+		s.WriteTime(schemas.CreateStreamingURLResult_Expires, *v.Expires)
+	}
+	if v.StreamingURL != nil {
+		s.WriteString(schemas.CreateStreamingURLResult_StreamingURL, *v.StreamingURL)
+	}
+}
+func (v *CreateStreamingURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamingURLResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamingURLResult_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamingURLResult_Expires, v.Expires)
+		case schemas.CreateStreamingURLResult_StreamingURL:
+			v.StreamingURL = new(string)
+			return d.ReadString(schemas.CreateStreamingURLResult_StreamingURL, v.StreamingURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamingURL, schemas.CreateStreamingURLRequest, schemas.CreateStreamingURLResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamingURL, schemas.CreateStreamingURLRequest, schemas.CreateStreamingURLResult), output: &CreateStreamingURLOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStreamingURL{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStreamingURL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStreamingURLValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamingURL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +170,8 @@ func (c *Client) addOperationCreateStreamingURLMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStreamingURL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStreamingURL",
-	}
 }

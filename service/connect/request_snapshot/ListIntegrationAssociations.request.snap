@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/integration-associations?integrationArn=__IntegrationArn__&integrationType=EVENT&maxResults=1&nextToken=__NextToken__
+
+

@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns details about a specified privacy budget template.
@@ -42,6 +41,21 @@ type GetCollaborationPrivacyBudgetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationPrivacyBudgetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationPrivacyBudgetTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationPrivacyBudgetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationPrivacyBudgetTemplateInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.PrivacyBudgetTemplateIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationPrivacyBudgetTemplateInput_privacyBudgetTemplateIdentifier, *v.PrivacyBudgetTemplateIdentifier)
+	}
+}
+
 type GetCollaborationPrivacyBudgetTemplateOutput struct {
 
 	// Returns the details of the privacy budget template that you requested.
@@ -55,77 +69,50 @@ type GetCollaborationPrivacyBudgetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationPrivacyBudgetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationPrivacyBudgetTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationPrivacyBudgetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationPrivacyBudgetTemplate != nil {
+		s.WriteStruct(schemas.GetCollaborationPrivacyBudgetTemplateOutput_collaborationPrivacyBudgetTemplate)
+		v.CollaborationPrivacyBudgetTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationPrivacyBudgetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationPrivacyBudgetTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationPrivacyBudgetTemplateOutput_collaborationPrivacyBudgetTemplate:
+			v.CollaborationPrivacyBudgetTemplate = &types.CollaborationPrivacyBudgetTemplate{}
+			return v.CollaborationPrivacyBudgetTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationPrivacyBudgetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationPrivacyBudgetTemplate, schemas.GetCollaborationPrivacyBudgetTemplateInput, schemas.GetCollaborationPrivacyBudgetTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationPrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationPrivacyBudgetTemplate, schemas.GetCollaborationPrivacyBudgetTemplateInput, schemas.GetCollaborationPrivacyBudgetTemplateOutput), output: &GetCollaborationPrivacyBudgetTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationPrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaborationPrivacyBudgetTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCollaborationPrivacyBudgetTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCollaborationPrivacyBudgetTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +127,8 @@ func (c *Client) addOperationGetCollaborationPrivacyBudgetTemplateMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCollaborationPrivacyBudgetTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCollaborationPrivacyBudgetTemplate",
-	}
 }

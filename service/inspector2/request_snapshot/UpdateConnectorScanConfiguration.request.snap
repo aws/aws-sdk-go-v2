@@ -1,0 +1,5 @@
+POST /connectorscanconfiguration/update
+
+Content-Type: application/json
+
+{"awsConfigConnectorArn":"__AwsConfigConnectorArn__","scanConfiguration":{"containerImageScanning":{"pullDuration":"DAYS_3","pushDuration":"LIFETIME"}}}

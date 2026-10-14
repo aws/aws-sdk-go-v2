@@ -235,7 +235,7 @@ func TestStartStreamTranscription_ReadException(t *testing.T) {
 						},
 					},
 					Payload: []byte(`{
- "Message": "Unable to parse input chunk. Please check input format contains correct format."
+ "message": "Unable to parse input chunk. Please check input format contains correct format."
 }`),
 				},
 			},

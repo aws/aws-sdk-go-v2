@@ -4,13 +4,8 @@ package geoplaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Geocode converts a textual address or place into geographic coordinates. You
@@ -18,11 +13,13 @@ import (
 // information. It supports flexible queries, including free-form text or
 // structured queries with components like street names, postal codes, and regions.
 // The Geocode API can also provide additional features such as time zone
-// information and the inclusion of political views.
+// information and the inclusion of political views. Not supported in
+// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 //
 // For more information, see [Geocode] in the Amazon Location Service Developer Guide.
 //
 // [Geocode]: https://docs.aws.amazon.com/location/latest/developerguide/geocode.html
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 func (c *Client) Geocode(ctx context.Context, params *GeocodeInput, optFns ...func(*Options)) (*GeocodeOutput, error) {
 	if params == nil {
 		params = &GeocodeInput{}
@@ -43,6 +40,20 @@ type GeocodeInput struct {
 	// A list of optional additional parameters, such as time zone, that can be
 	// requested for each result.
 	AdditionalFeatures []types.GeocodeAdditionalFeature
+
+	// Specifies how address names are returned. If not set, the service returns
+	// normalized (official) names by default. When set to Matched , address names in
+	// the response are based on the input query rather than official names. When set
+	// to Administrative , the service returns the official administrative names for
+	// address components. Administrative currently applies only to addresses in the
+	// United States.
+	AddressNamesMode types.GeocodeAddressNamesMode
+
+	// Specifies which address components to include translations for. Translations
+	// include all name variants and alternative names for the requested fields in all
+	// available languages. Valid values are District , Locality , Region , and
+	// SubRegion .
+	AddressTranslations []types.AddressTranslationComponent
 
 	// The position, in longitude and latitude, that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
@@ -74,7 +85,7 @@ type GeocodeInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
@@ -87,6 +98,15 @@ type GeocodeInput struct {
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
 
+	// The PostalCodeMode affects how postal code results are returned. If a postal
+	// code spans multiple localities and this value is empty, partial district or
+	// locality information may be returned under a single postal code result entry. If
+	// it's populated with the value EnumerateSpannedLocalities , all cities in that
+	// postal code are returned. If it's populated with the value
+	// EnumerateSpannedDistricts , all combinations of the postal code with the
+	// corresponding district and city names are returned.
+	PostalCodeMode types.PostalCodeMode
+
 	// A structured free text query allows you to search for places by the name or
 	// text representation of specific properties of the place.
 	QueryComponents *types.GeocodeQueryComponents
@@ -96,45 +116,6 @@ type GeocodeInput struct {
 	QueryText *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GeocodeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GeocodeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeocodeAdditionalFeatureList(s, schemas.GeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.GeocodeRequest_BiasPosition, v.BiasPosition)
-	if v.Filter != nil {
-		s.WriteStruct(schemas.GeocodeRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IntendedUse != "" {
-		s.WriteString(schemas.GeocodeRequest_IntendedUse, string(v.IntendedUse))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GeocodeRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.GeocodeRequest_Language, *v.Language)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GeocodeRequest_MaxResults, *v.MaxResults)
-	}
-	if v.PoliticalView != nil {
-		s.WriteString(schemas.GeocodeRequest_PoliticalView, *v.PoliticalView)
-	}
-	if v.QueryComponents != nil {
-		s.WriteStruct(schemas.GeocodeRequest_QueryComponents)
-		v.QueryComponents.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryText != nil {
-		s.WriteString(schemas.GeocodeRequest_QueryText, *v.QueryText)
-	}
 }
 
 type GeocodeOutput struct {
@@ -158,84 +139,26 @@ type GeocodeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GeocodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GeocodeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GeocodeResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.GeocodeResponse_PricingBucket, v.PricingBucket)
-		case schemas.GeocodeResponse_ResultItems:
-			return deserializeGeocodeResultItemList(d, schemas.GeocodeResponse_ResultItems, &v.ResultItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGeocodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGeocode{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Geocode, schemas.GeocodeRequest, schemas.GeocodeResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGeocode{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Geocode, schemas.GeocodeRequest, schemas.GeocodeResponse), output: &GeocodeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Geocode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGeocode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -250,22 +173,8 @@ func (c *Client) addOperationGeocodeMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGeocode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Geocode",
-	}
 }

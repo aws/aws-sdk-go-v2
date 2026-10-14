@@ -5,12 +5,8 @@ package migrationhubrefactorspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -159,75 +155,6 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRouteInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRouteRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.CreateRouteRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateRouteRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DefaultRoute != nil {
-		s.WriteStruct(schemas.CreateRouteRequest_DefaultRoute)
-		v.DefaultRoute.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.CreateRouteRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.RouteType != "" {
-		s.WriteString(schemas.CreateRouteRequest_RouteType, string(v.RouteType))
-	}
-	if v.ServiceIdentifier != nil {
-		s.WriteString(schemas.CreateRouteRequest_ServiceIdentifier, *v.ServiceIdentifier)
-	}
-	serializeTagMap(s, schemas.CreateRouteRequest_Tags, v.Tags)
-	if v.UriPathRoute != nil {
-		s.WriteStruct(schemas.CreateRouteRequest_UriPathRoute)
-		v.UriPathRoute.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRouteRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRouteRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.CreateRouteRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.CreateRouteRequest_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateRouteRequest_ClientToken, v.ClientToken)
-		case schemas.CreateRouteRequest_DefaultRoute:
-			v.DefaultRoute = &types.DefaultRouteInput{}
-			return v.DefaultRoute.Deserialize(d)
-		case schemas.CreateRouteRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.CreateRouteRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.CreateRouteRequest_RouteType:
-			var ev string
-			if err := d.ReadString(schemas.CreateRouteRequest_RouteType, &ev); err != nil {
-				return err
-			}
-			v.RouteType = types.RouteType(ev)
-			return nil
-		case schemas.CreateRouteRequest_ServiceIdentifier:
-			v.ServiceIdentifier = new(string)
-			return d.ReadString(schemas.CreateRouteRequest_ServiceIdentifier, v.ServiceIdentifier)
-		case schemas.CreateRouteRequest_Tags:
-			return deserializeTagMap(d, schemas.CreateRouteRequest_Tags, &v.Tags)
-		case schemas.CreateRouteRequest_UriPathRoute:
-			v.UriPathRoute = &types.UriPathRouteInput{}
-			return v.UriPathRoute.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type CreateRouteOutput struct {
 
 	// The ID of the application in which the route is created.
@@ -279,157 +206,23 @@ type CreateRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRouteOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRouteResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CreateRouteResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateRouteResponse_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.CreateRouteResponse_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.CreateRouteResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.CreateRouteResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.CreateRouteResponse_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.RouteId != nil {
-		s.WriteString(schemas.CreateRouteResponse_RouteId, *v.RouteId)
-	}
-	if v.RouteType != "" {
-		s.WriteString(schemas.CreateRouteResponse_RouteType, string(v.RouteType))
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.CreateRouteResponse_ServiceId, *v.ServiceId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.CreateRouteResponse_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.CreateRouteResponse_Tags, v.Tags)
-	if v.UriPathRoute != nil {
-		s.WriteStruct(schemas.CreateRouteResponse_UriPathRoute)
-		v.UriPathRoute.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRouteResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRouteResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_ApplicationId, v.ApplicationId)
-		case schemas.CreateRouteResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_Arn, v.Arn)
-		case schemas.CreateRouteResponse_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.CreateRouteResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.CreateRouteResponse_CreatedTime, v.CreatedTime)
-		case schemas.CreateRouteResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.CreateRouteResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.CreateRouteResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.CreateRouteResponse_RouteId:
-			v.RouteId = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_RouteId, v.RouteId)
-		case schemas.CreateRouteResponse_RouteType:
-			var ev string
-			if err := d.ReadString(schemas.CreateRouteResponse_RouteType, &ev); err != nil {
-				return err
-			}
-			v.RouteType = types.RouteType(ev)
-			return nil
-		case schemas.CreateRouteResponse_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.CreateRouteResponse_ServiceId, v.ServiceId)
-		case schemas.CreateRouteResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.CreateRouteResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.RouteState(ev)
-			return nil
-		case schemas.CreateRouteResponse_Tags:
-			return deserializeTagMap(d, schemas.CreateRouteResponse_Tags, &v.Tags)
-		case schemas.CreateRouteResponse_UriPathRoute:
-			v.UriPathRoute = &types.UriPathRouteInput{}
-			return v.UriPathRoute.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoute{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteRequest, schemas.CreateRouteResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoute{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteRequest, schemas.CreateRouteResponse), output: &CreateRouteOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRoute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -439,12 +232,6 @@ func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateRouteValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -457,12 +244,6 @@ func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -502,12 +283,4 @@ func (m *idempotencyToken_initializeOpCreateRoute) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateRouteMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRoute{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRoute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRoute",
-	}
 }

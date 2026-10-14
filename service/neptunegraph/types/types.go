@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,31 @@ type EdgeStructure struct {
 	EdgeProperties []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EdgeStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdgeStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdgeStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.EdgeStructure_count, *v.Count)
+	}
+	serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
+}
+func (v *EdgeStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdgeStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdgeStructure_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.EdgeStructure_count, v.Count)
+		case schemas.EdgeStructure_edgeProperties:
+			return deserializeEdgeProperties(d, schemas.EdgeStructure_edgeProperties, &v.EdgeProperties)
+		}
+		return nil
+	})
 }
 
 // This is the top-level field for specifying vertex or edge filters. If the
@@ -36,6 +63,28 @@ type ExportFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportFilterPerLabelMap(s, schemas.ExportFilter_edgeFilter, v.EdgeFilter)
+	serializeExportFilterPerLabelMap(s, schemas.ExportFilter_vertexFilter, v.VertexFilter)
+}
+func (v *ExportFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFilter_edgeFilter:
+			return deserializeExportFilterPerLabelMap(d, schemas.ExportFilter_edgeFilter, &v.EdgeFilter)
+		case schemas.ExportFilter_vertexFilter:
+			return deserializeExportFilterPerLabelMap(d, schemas.ExportFilter_vertexFilter, &v.VertexFilter)
+		}
+		return nil
+	})
+}
+
 // Specifies which properties of that label should be included in the export.
 type ExportFilterElement struct {
 
@@ -44,6 +93,25 @@ type ExportFilterElement struct {
 	Properties map[string]ExportFilterPropertyAttributes
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportFilterElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFilterElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFilterElement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportFilterPropertyMap(s, schemas.ExportFilterElement_properties, v.Properties)
+}
+func (v *ExportFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFilterElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFilterElement_properties:
+			return deserializeExportFilterPropertyMap(d, schemas.ExportFilterElement_properties, &v.Properties)
+		}
+		return nil
+	})
 }
 
 // A structure representing a property's attributes. It is a map object of
@@ -68,6 +136,44 @@ type ExportFilterPropertyAttributes struct {
 	SourcePropertyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportFilterPropertyAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportFilterPropertyAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportFilterPropertyAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiValueHandling != "" {
+		s.WriteString(schemas.ExportFilterPropertyAttributes_multiValueHandling, string(v.MultiValueHandling))
+	}
+	if v.OutputType != nil {
+		s.WriteString(schemas.ExportFilterPropertyAttributes_outputType, *v.OutputType)
+	}
+	if v.SourcePropertyName != nil {
+		s.WriteString(schemas.ExportFilterPropertyAttributes_sourcePropertyName, *v.SourcePropertyName)
+	}
+}
+func (v *ExportFilterPropertyAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportFilterPropertyAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportFilterPropertyAttributes_multiValueHandling:
+			var ev string
+			if err := d.ReadString(schemas.ExportFilterPropertyAttributes_multiValueHandling, &ev); err != nil {
+				return err
+			}
+			v.MultiValueHandling = MultiValueHandlingType(ev)
+			return nil
+		case schemas.ExportFilterPropertyAttributes_outputType:
+			v.OutputType = new(string)
+			return d.ReadString(schemas.ExportFilterPropertyAttributes_outputType, v.OutputType)
+		case schemas.ExportFilterPropertyAttributes_sourcePropertyName:
+			v.SourcePropertyName = new(string)
+			return d.ReadString(schemas.ExportFilterPropertyAttributes_sourcePropertyName, v.SourcePropertyName)
+		}
+		return nil
+	})
 }
 
 // Contains details about the specified export task.
@@ -95,6 +201,52 @@ type ExportTaskDetails struct {
 	NumVerticesWritten *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportTaskDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTaskDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumEdgesWritten != nil {
+		s.WriteInt64(schemas.ExportTaskDetails_numEdgesWritten, *v.NumEdgesWritten)
+	}
+	if v.NumVerticesWritten != nil {
+		s.WriteInt64(schemas.ExportTaskDetails_numVerticesWritten, *v.NumVerticesWritten)
+	}
+	if v.ProgressPercentage != nil {
+		s.WriteInt32(schemas.ExportTaskDetails_progressPercentage, *v.ProgressPercentage)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ExportTaskDetails_startTime, *v.StartTime)
+	}
+	if v.TimeElapsedSeconds != nil {
+		s.WriteInt64(schemas.ExportTaskDetails_timeElapsedSeconds, *v.TimeElapsedSeconds)
+	}
+}
+func (v *ExportTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTaskDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTaskDetails_numEdgesWritten:
+			v.NumEdgesWritten = new(int64)
+			return d.ReadInt64(schemas.ExportTaskDetails_numEdgesWritten, v.NumEdgesWritten)
+		case schemas.ExportTaskDetails_numVerticesWritten:
+			v.NumVerticesWritten = new(int64)
+			return d.ReadInt64(schemas.ExportTaskDetails_numVerticesWritten, v.NumVerticesWritten)
+		case schemas.ExportTaskDetails_progressPercentage:
+			v.ProgressPercentage = new(int32)
+			return d.ReadInt32(schemas.ExportTaskDetails_progressPercentage, v.ProgressPercentage)
+		case schemas.ExportTaskDetails_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ExportTaskDetails_startTime, v.StartTime)
+		case schemas.ExportTaskDetails_timeElapsedSeconds:
+			v.TimeElapsedSeconds = new(int64)
+			return d.ReadInt64(schemas.ExportTaskDetails_timeElapsedSeconds, v.TimeElapsedSeconds)
+		}
+		return nil
+	})
 }
 
 // Provides details about an export task.
@@ -143,6 +295,88 @@ type ExportTaskSummary struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.ExportTaskSummary_destination, *v.Destination)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ExportTaskSummary_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.ExportTaskSummary_graphId, *v.GraphId)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.ExportTaskSummary_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.ExportTaskSummary_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExportTaskSummary_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExportTaskSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ExportTaskSummary_statusReason, *v.StatusReason)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ExportTaskSummary_taskId, *v.TaskId)
+	}
+}
+func (v *ExportTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTaskSummary_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_destination, v.Destination)
+		case schemas.ExportTaskSummary_format:
+			var ev string
+			if err := d.ReadString(schemas.ExportTaskSummary_format, &ev); err != nil {
+				return err
+			}
+			v.Format = ExportFormat(ev)
+			return nil
+		case schemas.ExportTaskSummary_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_graphId, v.GraphId)
+		case schemas.ExportTaskSummary_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.ExportTaskSummary_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.ExportTaskSummary_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = ParquetType(ev)
+			return nil
+		case schemas.ExportTaskSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_roleArn, v.RoleArn)
+		case schemas.ExportTaskSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ExportTaskSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExportTaskStatus(ev)
+			return nil
+		case schemas.ExportTaskSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_statusReason, v.StatusReason)
+		case schemas.ExportTaskSummary_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ExportTaskSummary_taskId, v.TaskId)
+		}
+		return nil
+	})
 }
 
 // Summary information about the graph.
@@ -197,6 +431,88 @@ type GraphDataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GraphDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdgeLabels(s, schemas.GraphDataSummary_edgeLabels, v.EdgeLabels)
+	serializeLongValuedMapList(s, schemas.GraphDataSummary_edgeProperties, v.EdgeProperties)
+	serializeEdgeStructures(s, schemas.GraphDataSummary_edgeStructures, v.EdgeStructures)
+	serializeNodeLabels(s, schemas.GraphDataSummary_nodeLabels, v.NodeLabels)
+	serializeLongValuedMapList(s, schemas.GraphDataSummary_nodeProperties, v.NodeProperties)
+	serializeNodeStructures(s, schemas.GraphDataSummary_nodeStructures, v.NodeStructures)
+	if v.NumEdgeLabels != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numEdgeLabels, *v.NumEdgeLabels)
+	}
+	if v.NumEdgeProperties != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numEdgeProperties, *v.NumEdgeProperties)
+	}
+	if v.NumEdges != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numEdges, *v.NumEdges)
+	}
+	if v.NumNodeLabels != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numNodeLabels, *v.NumNodeLabels)
+	}
+	if v.NumNodeProperties != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numNodeProperties, *v.NumNodeProperties)
+	}
+	if v.NumNodes != nil {
+		s.WriteInt64(schemas.GraphDataSummary_numNodes, *v.NumNodes)
+	}
+	if v.TotalEdgePropertyValues != nil {
+		s.WriteInt64(schemas.GraphDataSummary_totalEdgePropertyValues, *v.TotalEdgePropertyValues)
+	}
+	if v.TotalNodePropertyValues != nil {
+		s.WriteInt64(schemas.GraphDataSummary_totalNodePropertyValues, *v.TotalNodePropertyValues)
+	}
+}
+func (v *GraphDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphDataSummary_edgeLabels:
+			return deserializeEdgeLabels(d, schemas.GraphDataSummary_edgeLabels, &v.EdgeLabels)
+		case schemas.GraphDataSummary_edgeProperties:
+			return deserializeLongValuedMapList(d, schemas.GraphDataSummary_edgeProperties, &v.EdgeProperties)
+		case schemas.GraphDataSummary_edgeStructures:
+			return deserializeEdgeStructures(d, schemas.GraphDataSummary_edgeStructures, &v.EdgeStructures)
+		case schemas.GraphDataSummary_nodeLabels:
+			return deserializeNodeLabels(d, schemas.GraphDataSummary_nodeLabels, &v.NodeLabels)
+		case schemas.GraphDataSummary_nodeProperties:
+			return deserializeLongValuedMapList(d, schemas.GraphDataSummary_nodeProperties, &v.NodeProperties)
+		case schemas.GraphDataSummary_nodeStructures:
+			return deserializeNodeStructures(d, schemas.GraphDataSummary_nodeStructures, &v.NodeStructures)
+		case schemas.GraphDataSummary_numEdgeLabels:
+			v.NumEdgeLabels = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numEdgeLabels, v.NumEdgeLabels)
+		case schemas.GraphDataSummary_numEdgeProperties:
+			v.NumEdgeProperties = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numEdgeProperties, v.NumEdgeProperties)
+		case schemas.GraphDataSummary_numEdges:
+			v.NumEdges = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numEdges, v.NumEdges)
+		case schemas.GraphDataSummary_numNodeLabels:
+			v.NumNodeLabels = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numNodeLabels, v.NumNodeLabels)
+		case schemas.GraphDataSummary_numNodeProperties:
+			v.NumNodeProperties = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numNodeProperties, v.NumNodeProperties)
+		case schemas.GraphDataSummary_numNodes:
+			v.NumNodes = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_numNodes, v.NumNodes)
+		case schemas.GraphDataSummary_totalEdgePropertyValues:
+			v.TotalEdgePropertyValues = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_totalEdgePropertyValues, v.TotalEdgePropertyValues)
+		case schemas.GraphDataSummary_totalNodePropertyValues:
+			v.TotalNodePropertyValues = new(int64)
+			return d.ReadInt64(schemas.GraphDataSummary_totalNodePropertyValues, v.TotalNodePropertyValues)
+		}
+		return nil
+	})
+}
+
 // Details about a graph snapshot.
 type GraphSnapshotSummary struct {
 
@@ -232,6 +548,68 @@ type GraphSnapshotSummary struct {
 	Status SnapshotStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *GraphSnapshotSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphSnapshotSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphSnapshotSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GraphSnapshotSummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GraphSnapshotSummary_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.GraphSnapshotSummary_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GraphSnapshotSummary_name, *v.Name)
+	}
+	if v.SnapshotCreateTime != nil {
+		s.WriteTime(schemas.GraphSnapshotSummary_snapshotCreateTime, *v.SnapshotCreateTime)
+	}
+	if v.SourceGraphId != nil {
+		s.WriteString(schemas.GraphSnapshotSummary_sourceGraphId, *v.SourceGraphId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GraphSnapshotSummary_status, string(v.Status))
+	}
+}
+func (v *GraphSnapshotSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphSnapshotSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphSnapshotSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GraphSnapshotSummary_arn, v.Arn)
+		case schemas.GraphSnapshotSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GraphSnapshotSummary_id, v.Id)
+		case schemas.GraphSnapshotSummary_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.GraphSnapshotSummary_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.GraphSnapshotSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GraphSnapshotSummary_name, v.Name)
+		case schemas.GraphSnapshotSummary_snapshotCreateTime:
+			v.SnapshotCreateTime = new(time.Time)
+			return d.ReadTime(schemas.GraphSnapshotSummary_snapshotCreateTime, v.SnapshotCreateTime)
+		case schemas.GraphSnapshotSummary_sourceGraphId:
+			v.SourceGraphId = new(string)
+			return d.ReadString(schemas.GraphSnapshotSummary_sourceGraphId, v.SourceGraphId)
+		case schemas.GraphSnapshotSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.GraphSnapshotSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SnapshotStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary details about a graph.
@@ -277,6 +655,86 @@ type GraphSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GraphSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GraphSummary_arn, *v.Arn)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.GraphSummary_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.GraphSummary_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GraphSummary_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.GraphSummary_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GraphSummary_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.GraphSummary_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.GraphSummary_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.GraphSummary_replicaCount, *v.ReplicaCount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GraphSummary_status, string(v.Status))
+	}
+}
+func (v *GraphSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GraphSummary_arn, v.Arn)
+		case schemas.GraphSummary_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.GraphSummary_deletionProtection, v.DeletionProtection)
+		case schemas.GraphSummary_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.GraphSummary_endpoint, v.Endpoint)
+		case schemas.GraphSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GraphSummary_id, v.Id)
+		case schemas.GraphSummary_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.GraphSummary_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.GraphSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GraphSummary_name, v.Name)
+		case schemas.GraphSummary_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.GraphSummary_provisionedMemory, v.ProvisionedMemory)
+		case schemas.GraphSummary_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.GraphSummary_publicConnectivity, v.PublicConnectivity)
+		case schemas.GraphSummary_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.GraphSummary_replicaCount, v.ReplicaCount)
+		case schemas.GraphSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.GraphSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = GraphStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Options for how to perform an import.
 //
 // The following types satisfy this interface:
@@ -294,6 +752,14 @@ type ImportOptionsMemberNeptune struct {
 }
 
 func (*ImportOptionsMemberNeptune) isImportOptions() {}
+func (v *ImportOptionsMemberNeptune) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportOptions_neptune)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportOptionsMemberNeptune) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains details about an import task.
 type ImportTaskDetails struct {
@@ -339,6 +805,70 @@ type ImportTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTaskDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTaskDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DictionaryEntryCount != nil {
+		s.WriteInt64(schemas.ImportTaskDetails_dictionaryEntryCount, *v.DictionaryEntryCount)
+	}
+	if v.ErrorCount != nil {
+		s.WriteInt32(schemas.ImportTaskDetails_errorCount, *v.ErrorCount)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.ImportTaskDetails_errorDetails, *v.ErrorDetails)
+	}
+	if v.ProgressPercentage != nil {
+		s.WriteInt32(schemas.ImportTaskDetails_progressPercentage, *v.ProgressPercentage)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ImportTaskDetails_startTime, *v.StartTime)
+	}
+	if v.StatementCount != nil {
+		s.WriteInt64(schemas.ImportTaskDetails_statementCount, *v.StatementCount)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ImportTaskDetails_status, *v.Status)
+	}
+	if v.TimeElapsedSeconds != nil {
+		s.WriteInt64(schemas.ImportTaskDetails_timeElapsedSeconds, *v.TimeElapsedSeconds)
+	}
+}
+func (v *ImportTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTaskDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTaskDetails_dictionaryEntryCount:
+			v.DictionaryEntryCount = new(int64)
+			return d.ReadInt64(schemas.ImportTaskDetails_dictionaryEntryCount, v.DictionaryEntryCount)
+		case schemas.ImportTaskDetails_errorCount:
+			v.ErrorCount = new(int32)
+			return d.ReadInt32(schemas.ImportTaskDetails_errorCount, v.ErrorCount)
+		case schemas.ImportTaskDetails_errorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.ImportTaskDetails_errorDetails, v.ErrorDetails)
+		case schemas.ImportTaskDetails_progressPercentage:
+			v.ProgressPercentage = new(int32)
+			return d.ReadInt32(schemas.ImportTaskDetails_progressPercentage, v.ProgressPercentage)
+		case schemas.ImportTaskDetails_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ImportTaskDetails_startTime, v.StartTime)
+		case schemas.ImportTaskDetails_statementCount:
+			v.StatementCount = new(int64)
+			return d.ReadInt64(schemas.ImportTaskDetails_statementCount, v.StatementCount)
+		case schemas.ImportTaskDetails_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ImportTaskDetails_status, v.Status)
+		case schemas.ImportTaskDetails_timeElapsedSeconds:
+			v.TimeElapsedSeconds = new(int64)
+			return d.ReadInt64(schemas.ImportTaskDetails_timeElapsedSeconds, v.TimeElapsedSeconds)
+		}
+		return nil
+	})
+}
+
 // Details about an import task.
 type ImportTaskSummary struct {
 
@@ -380,6 +910,76 @@ type ImportTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.ImportTaskSummary_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.ImportTaskSummary_graphId, *v.GraphId)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.ImportTaskSummary_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportTaskSummary_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.ImportTaskSummary_source, *v.Source)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportTaskSummary_status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ImportTaskSummary_taskId, *v.TaskId)
+	}
+}
+func (v *ImportTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTaskSummary_format:
+			var ev string
+			if err := d.ReadString(schemas.ImportTaskSummary_format, &ev); err != nil {
+				return err
+			}
+			v.Format = Format(ev)
+			return nil
+		case schemas.ImportTaskSummary_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.ImportTaskSummary_graphId, v.GraphId)
+		case schemas.ImportTaskSummary_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.ImportTaskSummary_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = ParquetType(ev)
+			return nil
+		case schemas.ImportTaskSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ImportTaskSummary_roleArn, v.RoleArn)
+		case schemas.ImportTaskSummary_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.ImportTaskSummary_source, v.Source)
+		case schemas.ImportTaskSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ImportTaskSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ImportTaskStatus(ev)
+			return nil
+		case schemas.ImportTaskSummary_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.ImportTaskSummary_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
+
 // Options for how to import Neptune data.
 type NeptuneImportOptions struct {
 
@@ -412,6 +1012,46 @@ type NeptuneImportOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NeptuneImportOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NeptuneImportOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NeptuneImportOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreserveDefaultVertexLabels != nil {
+		s.WriteBool(schemas.NeptuneImportOptions_preserveDefaultVertexLabels, *v.PreserveDefaultVertexLabels)
+	}
+	if v.PreserveEdgeIds != nil {
+		s.WriteBool(schemas.NeptuneImportOptions_preserveEdgeIds, *v.PreserveEdgeIds)
+	}
+	if v.S3ExportKmsKeyId != nil {
+		s.WriteString(schemas.NeptuneImportOptions_s3ExportKmsKeyId, *v.S3ExportKmsKeyId)
+	}
+	if v.S3ExportPath != nil {
+		s.WriteString(schemas.NeptuneImportOptions_s3ExportPath, *v.S3ExportPath)
+	}
+}
+func (v *NeptuneImportOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NeptuneImportOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NeptuneImportOptions_preserveDefaultVertexLabels:
+			v.PreserveDefaultVertexLabels = new(bool)
+			return d.ReadBool(schemas.NeptuneImportOptions_preserveDefaultVertexLabels, v.PreserveDefaultVertexLabels)
+		case schemas.NeptuneImportOptions_preserveEdgeIds:
+			v.PreserveEdgeIds = new(bool)
+			return d.ReadBool(schemas.NeptuneImportOptions_preserveEdgeIds, v.PreserveEdgeIds)
+		case schemas.NeptuneImportOptions_s3ExportKmsKeyId:
+			v.S3ExportKmsKeyId = new(string)
+			return d.ReadString(schemas.NeptuneImportOptions_s3ExportKmsKeyId, v.S3ExportKmsKeyId)
+		case schemas.NeptuneImportOptions_s3ExportPath:
+			v.S3ExportPath = new(string)
+			return d.ReadString(schemas.NeptuneImportOptions_s3ExportPath, v.S3ExportPath)
+		}
+		return nil
+	})
+}
+
 // Information about a node.
 type NodeStructure struct {
 
@@ -425,6 +1065,34 @@ type NodeStructure struct {
 	NodeProperties []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NodeStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.NodeStructure_count, *v.Count)
+	}
+	serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
+	serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
+}
+func (v *NodeStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeStructure_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.NodeStructure_count, v.Count)
+		case schemas.NodeStructure_distinctOutgoingEdgeLabels:
+			return deserializeOutgoingEdgeLabels(d, schemas.NodeStructure_distinctOutgoingEdgeLabels, &v.DistinctOutgoingEdgeLabels)
+		case schemas.NodeStructure_nodeProperties:
+			return deserializeNodeProperties(d, schemas.NodeStructure_nodeProperties, &v.NodeProperties)
+		}
+		return nil
+	})
 }
 
 // Details about a private graph endpoint.
@@ -451,6 +1119,47 @@ type PrivateGraphEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateGraphEndpointSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateGraphEndpointSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateGraphEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.PrivateGraphEndpointSummary_status, string(v.Status))
+	}
+	serializeSubnetIds(s, schemas.PrivateGraphEndpointSummary_subnetIds, v.SubnetIds)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.PrivateGraphEndpointSummary_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.PrivateGraphEndpointSummary_vpcId, *v.VpcId)
+	}
+}
+func (v *PrivateGraphEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateGraphEndpointSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateGraphEndpointSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PrivateGraphEndpointSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PrivateGraphEndpointStatus(ev)
+			return nil
+		case schemas.PrivateGraphEndpointSummary_subnetIds:
+			return deserializeSubnetIds(d, schemas.PrivateGraphEndpointSummary_subnetIds, &v.SubnetIds)
+		case schemas.PrivateGraphEndpointSummary_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.PrivateGraphEndpointSummary_vpcEndpointId, v.VpcEndpointId)
+		case schemas.PrivateGraphEndpointSummary_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.PrivateGraphEndpointSummary_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Details of the query listed.
 type QuerySummary struct {
 
@@ -474,6 +1183,56 @@ type QuerySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuerySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Elapsed != nil {
+		s.WriteInt32(schemas.QuerySummary_elapsed, *v.Elapsed)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.QuerySummary_id, *v.Id)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.QuerySummary_queryString, *v.QueryString)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.QuerySummary_state, string(v.State))
+	}
+	if v.Waited != nil {
+		s.WriteInt32(schemas.QuerySummary_waited, *v.Waited)
+	}
+}
+func (v *QuerySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySummary_elapsed:
+			v.Elapsed = new(int32)
+			return d.ReadInt32(schemas.QuerySummary_elapsed, v.Elapsed)
+		case schemas.QuerySummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QuerySummary_id, v.Id)
+		case schemas.QuerySummary_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.QuerySummary_queryString, v.QueryString)
+		case schemas.QuerySummary_state:
+			var ev string
+			if err := d.ReadString(schemas.QuerySummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = QueryState(ev)
+			return nil
+		case schemas.QuerySummary_waited:
+			v.Waited = new(int32)
+			return d.ReadInt32(schemas.QuerySummary_waited, v.Waited)
+		}
+		return nil
+	})
+}
+
 // Specifies the number of dimensions for vector embeddings loaded into the graph.
 // Max = 65535
 type VectorSearchConfiguration struct {
@@ -484,6 +1243,28 @@ type VectorSearchConfiguration struct {
 	Dimension *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VectorSearchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorSearchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorSearchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimension != nil {
+		s.WriteInt32(schemas.VectorSearchConfiguration_dimension, *v.Dimension)
+	}
+}
+func (v *VectorSearchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorSearchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorSearchConfiguration_dimension:
+			v.Dimension = new(int32)
+			return d.ReadInt32(schemas.VectorSearchConfiguration_dimension, v.Dimension)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

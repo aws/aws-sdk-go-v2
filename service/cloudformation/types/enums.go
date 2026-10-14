@@ -417,6 +417,25 @@ func (DeletionMode) Values() []DeletionMode {
 	}
 }
 
+type DeploymentConfigMode string
+
+// Enum values for DeploymentConfigMode
+const (
+	DeploymentConfigModeStandard DeploymentConfigMode = "STANDARD"
+	DeploymentConfigModeExpress  DeploymentConfigMode = "EXPRESS"
+)
+
+// Values returns all known values for DeploymentConfigMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentConfigMode) Values() []DeploymentConfigMode {
+	return []DeploymentConfigMode{
+		"STANDARD",
+		"EXPRESS",
+	}
+}
+
 type DeploymentMode string
 
 // Enum values for DeploymentMode
@@ -499,6 +518,7 @@ type DriftIgnoredReason string
 const (
 	DriftIgnoredReasonManagedByAws      DriftIgnoredReason = "MANAGED_BY_AWS"
 	DriftIgnoredReasonWriteOnlyProperty DriftIgnoredReason = "WRITE_ONLY_PROPERTY"
+	DriftIgnoredReasonSensitiveProperty DriftIgnoredReason = "SENSITIVE_PROPERTY"
 )
 
 // Values returns all known values for DriftIgnoredReason. Note that this can be
@@ -509,6 +529,7 @@ func (DriftIgnoredReason) Values() []DriftIgnoredReason {
 	return []DriftIgnoredReason{
 		"MANAGED_BY_AWS",
 		"WRITE_ONLY_PROPERTY",
+		"SENSITIVE_PROPERTY",
 	}
 }
 

@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateGameSession
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦xPlayerSessionCreationPolicyjACCEPT_ALLpProtectionPolicylNoProtectionnGameProperties‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__mGameSessionIdq__GameSessionId__xMaximumPlayerSessionCountdNameh__Name__

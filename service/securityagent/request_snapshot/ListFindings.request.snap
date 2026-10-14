@@ -1,0 +1,5 @@
+POST /ListFindings
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewJobId":"__CodeReviewJobId__","confidence":"FALSE_POSITIVE","maxResults":1,"name":"__Name__","nextToken":"__NextToken__","pentestJobId":"__PentestJobId__","riskLevel":"UNKNOWN","riskType":"__RiskType__","status":"ACTIVE"}

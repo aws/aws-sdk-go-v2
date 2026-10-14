@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botMembers":[{"botMemberAliasId":"__BotMemberAliasId__","botMemberAliasName":"__BotMemberAliasName__","botMemberId":"__BotMemberId__","botMemberName":"__BotMemberName__","botMemberVersion":"__BotMemberVersion__"},{"botMemberAliasId":"__BotMemberAliasId__","botMemberAliasName":"__BotMemberAliasName__","botMemberId":"__BotMemberId__","botMemberName":"__BotMemberName__","botMemberVersion":"__BotMemberVersion__"}],"botName":"__BotName__","botStatus":"Creating","botType":"Bot","creationDateTime":946684800,"dataPrivacy":{"childDirected":true},"description":"__Description__","errorLogSettings":{"enabled":true},"failureReasons":["__Member__","__Member__"],"idleSessionTTLInSeconds":1,"lastUpdatedDateTime":946684800,"roleArn":"__RoleArn__"}

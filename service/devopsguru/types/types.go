@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,36 +25,6 @@ type AccountHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AccountHealth_AccountId, *v.AccountId)
-	}
-	if v.Insight != nil {
-		s.WriteStruct(schemas.AccountHealth_Insight)
-		v.Insight.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AccountHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountHealth_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AccountHealth_AccountId, v.AccountId)
-		case schemas.AccountHealth_Insight:
-			v.Insight = &AccountInsightHealth{}
-			return v.Insight.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 //	Information about the number of open reactive and proactive insights that can
 //
 // be used to gauge the health of your system.
@@ -73,32 +41,6 @@ type AccountInsightHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountInsightHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountInsightHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountInsightHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OpenProactiveInsights != 0 {
-		s.WriteInt32(schemas.AccountInsightHealth_OpenProactiveInsights, v.OpenProactiveInsights)
-	}
-	if v.OpenReactiveInsights != 0 {
-		s.WriteInt32(schemas.AccountInsightHealth_OpenReactiveInsights, v.OpenReactiveInsights)
-	}
-}
-func (v *AccountInsightHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountInsightHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountInsightHealth_OpenProactiveInsights:
-			return d.ReadInt32(schemas.AccountInsightHealth_OpenProactiveInsights, &v.OpenProactiveInsights)
-		case schemas.AccountInsightHealth_OpenReactiveInsights:
-			return d.ReadInt32(schemas.AccountInsightHealth_OpenReactiveInsights, &v.OpenReactiveInsights)
-		}
-		return nil
-	})
-}
-
 // Information about your account's integration with Amazon CodeGuru Profiler.
 // This returns whether DevOps Guru is configured to consume recommendations
 // generated from Amazon CodeGuru Profiler.
@@ -110,32 +52,6 @@ type AmazonCodeGuruProfilerIntegration struct {
 	Status EventSourceOptInStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *AmazonCodeGuruProfilerIntegration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AmazonCodeGuruProfilerIntegration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AmazonCodeGuruProfilerIntegration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.AmazonCodeGuruProfilerIntegration_Status, string(v.Status))
-	}
-}
-func (v *AmazonCodeGuruProfilerIntegration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AmazonCodeGuruProfilerIntegration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AmazonCodeGuruProfilerIntegration_Status:
-			var ev string
-			if err := d.ReadString(schemas.AmazonCodeGuruProfilerIntegration_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = EventSourceOptInStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	An Amazon CloudWatch log group that contains log anomalies and is used to
@@ -163,48 +79,6 @@ type AnomalousLogGroup struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AnomalousLogGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalousLogGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalousLogGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImpactEndTime != nil {
-		s.WriteTime(schemas.AnomalousLogGroup_ImpactEndTime, *v.ImpactEndTime)
-	}
-	if v.ImpactStartTime != nil {
-		s.WriteTime(schemas.AnomalousLogGroup_ImpactStartTime, *v.ImpactStartTime)
-	}
-	serializeLogAnomalyShowcases(s, schemas.AnomalousLogGroup_LogAnomalyShowcases, v.LogAnomalyShowcases)
-	if v.LogGroupName != nil {
-		s.WriteString(schemas.AnomalousLogGroup_LogGroupName, *v.LogGroupName)
-	}
-	if v.NumberOfLogLinesScanned != 0 {
-		s.WriteInt32(schemas.AnomalousLogGroup_NumberOfLogLinesScanned, v.NumberOfLogLinesScanned)
-	}
-}
-func (v *AnomalousLogGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalousLogGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalousLogGroup_ImpactEndTime:
-			v.ImpactEndTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalousLogGroup_ImpactEndTime, v.ImpactEndTime)
-		case schemas.AnomalousLogGroup_ImpactStartTime:
-			v.ImpactStartTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalousLogGroup_ImpactStartTime, v.ImpactStartTime)
-		case schemas.AnomalousLogGroup_LogAnomalyShowcases:
-			return deserializeLogAnomalyShowcases(d, schemas.AnomalousLogGroup_LogAnomalyShowcases, &v.LogAnomalyShowcases)
-		case schemas.AnomalousLogGroup_LogGroupName:
-			v.LogGroupName = new(string)
-			return d.ReadString(schemas.AnomalousLogGroup_LogGroupName, v.LogGroupName)
-		case schemas.AnomalousLogGroup_NumberOfLogLinesScanned:
-			return d.ReadInt32(schemas.AnomalousLogGroup_NumberOfLogLinesScanned, &v.NumberOfLogLinesScanned)
-		}
-		return nil
-	})
-}
-
 //	A time range that specifies when DevOps Guru opens and then closes an anomaly.
 //
 // This is different from AnomalyTimeRange , which specifies the time range when
@@ -222,34 +96,6 @@ type AnomalyReportedTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AnomalyReportedTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalyReportedTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalyReportedTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloseTime != nil {
-		s.WriteTime(schemas.AnomalyReportedTimeRange_CloseTime, *v.CloseTime)
-	}
-	if v.OpenTime != nil {
-		s.WriteTime(schemas.AnomalyReportedTimeRange_OpenTime, *v.OpenTime)
-	}
-}
-func (v *AnomalyReportedTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalyReportedTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalyReportedTimeRange_CloseTime:
-			v.CloseTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalyReportedTimeRange_CloseTime, v.CloseTime)
-		case schemas.AnomalyReportedTimeRange_OpenTime:
-			v.OpenTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalyReportedTimeRange_OpenTime, v.OpenTime)
-		}
-		return nil
-	})
-}
-
 // The Amazon Web Services resources in which DevOps Guru detected unusual
 // behavior that resulted in the generation of an anomaly. When DevOps Guru detects
 // multiple related anomalies, it creates and insight with details about the
@@ -263,34 +109,6 @@ type AnomalyResource struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AnomalyResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalyResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalyResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.AnomalyResource_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.AnomalyResource_Type, *v.Type)
-	}
-}
-func (v *AnomalyResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalyResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalyResource_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AnomalyResource_Name, v.Name)
-		case schemas.AnomalyResource_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.AnomalyResource_Type, v.Type)
-		}
-		return nil
-	})
 }
 
 //	Details about the source of the anomalous operational data that triggered the
@@ -309,28 +127,6 @@ type AnomalySourceDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AnomalySourceDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalySourceDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalySourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudWatchMetricsDetails(s, schemas.AnomalySourceDetails_CloudWatchMetrics, v.CloudWatchMetrics)
-	serializePerformanceInsightsMetricsDetails(s, schemas.AnomalySourceDetails_PerformanceInsightsMetrics, v.PerformanceInsightsMetrics)
-}
-func (v *AnomalySourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalySourceDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalySourceDetails_CloudWatchMetrics:
-			return deserializeCloudWatchMetricsDetails(d, schemas.AnomalySourceDetails_CloudWatchMetrics, &v.CloudWatchMetrics)
-		case schemas.AnomalySourceDetails_PerformanceInsightsMetrics:
-			return deserializePerformanceInsightsMetricsDetails(d, schemas.AnomalySourceDetails_PerformanceInsightsMetrics, &v.PerformanceInsightsMetrics)
-		}
-		return nil
-	})
-}
-
 // Metadata about the detection source that generates proactive anomalies. The
 // anomaly is detected using analysis of the metric data  over a period of time
 type AnomalySourceMetadata struct {
@@ -345,40 +141,6 @@ type AnomalySourceMetadata struct {
 	SourceResourceType *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AnomalySourceMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalySourceMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalySourceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Source != nil {
-		s.WriteString(schemas.AnomalySourceMetadata_Source, *v.Source)
-	}
-	if v.SourceResourceName != nil {
-		s.WriteString(schemas.AnomalySourceMetadata_SourceResourceName, *v.SourceResourceName)
-	}
-	if v.SourceResourceType != nil {
-		s.WriteString(schemas.AnomalySourceMetadata_SourceResourceType, *v.SourceResourceType)
-	}
-}
-func (v *AnomalySourceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalySourceMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalySourceMetadata_Source:
-			v.Source = new(string)
-			return d.ReadString(schemas.AnomalySourceMetadata_Source, v.Source)
-		case schemas.AnomalySourceMetadata_SourceResourceName:
-			v.SourceResourceName = new(string)
-			return d.ReadString(schemas.AnomalySourceMetadata_SourceResourceName, v.SourceResourceName)
-		case schemas.AnomalySourceMetadata_SourceResourceType:
-			v.SourceResourceType = new(string)
-			return d.ReadString(schemas.AnomalySourceMetadata_SourceResourceType, v.SourceResourceType)
-		}
-		return nil
-	})
 }
 
 //	A time range that specifies when the observed unusual behavior in an anomaly
@@ -398,34 +160,6 @@ type AnomalyTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AnomalyTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnomalyTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnomalyTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.AnomalyTimeRange_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.AnomalyTimeRange_StartTime, *v.StartTime)
-	}
-}
-func (v *AnomalyTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnomalyTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnomalyTimeRange_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalyTimeRange_EndTime, v.EndTime)
-		case schemas.AnomalyTimeRange_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.AnomalyTimeRange_StartTime, v.StartTime)
-		}
-		return nil
-	})
-}
-
 //	Information about Amazon Web Services CloudFormation stacks. You can use up to
 //
 // 500 stacks to specify which Amazon Web Services resources in your account to
@@ -439,25 +173,6 @@ type CloudFormationCollection struct {
 	StackNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudFormationCollection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudFormationCollection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudFormationCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStackNames(s, schemas.CloudFormationCollection_StackNames, v.StackNames)
-}
-func (v *CloudFormationCollection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudFormationCollection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudFormationCollection_StackNames:
-			return deserializeStackNames(d, schemas.CloudFormationCollection_StackNames, &v.StackNames)
-		}
-		return nil
-	})
 }
 
 //	Information about Amazon Web Services CloudFormation stacks. You can use up to
@@ -475,25 +190,6 @@ type CloudFormationCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudFormationCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudFormationCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudFormationCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStackNames(s, schemas.CloudFormationCollectionFilter_StackNames, v.StackNames)
-}
-func (v *CloudFormationCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudFormationCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudFormationCollectionFilter_StackNames:
-			return deserializeStackNames(d, schemas.CloudFormationCollectionFilter_StackNames, &v.StackNames)
-		}
-		return nil
-	})
-}
-
 // Information about an Amazon Web Services CloudFormation stack used to create a
 // monthly cost estimate for DevOps Guru to analyze Amazon Web Services resources.
 // The maximum number of stacks you can specify for a cost estimate is one. The
@@ -508,25 +204,6 @@ type CloudFormationCostEstimationResourceCollectionFilter struct {
 	StackNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudFormationCostEstimationResourceCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudFormationCostEstimationResourceCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudFormationCostEstimationResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostEstimationStackNames(s, schemas.CloudFormationCostEstimationResourceCollectionFilter_StackNames, v.StackNames)
-}
-func (v *CloudFormationCostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudFormationCostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudFormationCostEstimationResourceCollectionFilter_StackNames:
-			return deserializeCostEstimationStackNames(d, schemas.CloudFormationCostEstimationResourceCollectionFilter_StackNames, &v.StackNames)
-		}
-		return nil
-	})
 }
 
 //	Information about the health of Amazon Web Services resources in your account
@@ -550,42 +227,6 @@ type CloudFormationHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudFormationHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudFormationHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudFormationHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalyzedResourceCount != nil {
-		s.WriteInt64(schemas.CloudFormationHealth_AnalyzedResourceCount, *v.AnalyzedResourceCount)
-	}
-	if v.Insight != nil {
-		s.WriteStruct(schemas.CloudFormationHealth_Insight)
-		v.Insight.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StackName != nil {
-		s.WriteString(schemas.CloudFormationHealth_StackName, *v.StackName)
-	}
-}
-func (v *CloudFormationHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudFormationHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudFormationHealth_AnalyzedResourceCount:
-			v.AnalyzedResourceCount = new(int64)
-			return d.ReadInt64(schemas.CloudFormationHealth_AnalyzedResourceCount, v.AnalyzedResourceCount)
-		case schemas.CloudFormationHealth_Insight:
-			v.Insight = &InsightHealth{}
-			return v.Insight.Deserialize(d)
-		case schemas.CloudFormationHealth_StackName:
-			v.StackName = new(string)
-			return d.ReadString(schemas.CloudFormationHealth_StackName, v.StackName)
-		}
-		return nil
-	})
-}
-
 // Contains information about the analyzed metrics that displayed anomalous
 // behavior.
 type CloudWatchMetricsDataSummary struct {
@@ -598,35 +239,6 @@ type CloudWatchMetricsDataSummary struct {
 	TimestampMetricValuePairList []TimestampMetricValuePair
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudWatchMetricsDataSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchMetricsDataSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchMetricsDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StatusCode != "" {
-		s.WriteString(schemas.CloudWatchMetricsDataSummary_StatusCode, string(v.StatusCode))
-	}
-	serializeTimestampMetricValuePairList(s, schemas.CloudWatchMetricsDataSummary_TimestampMetricValuePairList, v.TimestampMetricValuePairList)
-}
-func (v *CloudWatchMetricsDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchMetricsDataSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchMetricsDataSummary_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.CloudWatchMetricsDataSummary_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = CloudWatchMetricDataStatusCode(ev)
-			return nil
-		case schemas.CloudWatchMetricsDataSummary_TimestampMetricValuePairList:
-			return deserializeTimestampMetricValuePairList(d, schemas.CloudWatchMetricsDataSummary_TimestampMetricValuePairList, &v.TimestampMetricValuePairList)
-		}
-		return nil
-	})
 }
 
 // Information about an Amazon CloudWatch metric.
@@ -661,66 +273,6 @@ type CloudWatchMetricsDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudWatchMetricsDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchMetricsDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchMetricsDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudWatchMetricsDimensions(s, schemas.CloudWatchMetricsDetail_Dimensions, v.Dimensions)
-	if v.MetricDataSummary != nil {
-		s.WriteStruct(schemas.CloudWatchMetricsDetail_MetricDataSummary)
-		v.MetricDataSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MetricName != nil {
-		s.WriteString(schemas.CloudWatchMetricsDetail_MetricName, *v.MetricName)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.CloudWatchMetricsDetail_Namespace, *v.Namespace)
-	}
-	if v.Period != 0 {
-		s.WriteInt32(schemas.CloudWatchMetricsDetail_Period, v.Period)
-	}
-	if v.Stat != "" {
-		s.WriteString(schemas.CloudWatchMetricsDetail_Stat, string(v.Stat))
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.CloudWatchMetricsDetail_Unit, *v.Unit)
-	}
-}
-func (v *CloudWatchMetricsDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchMetricsDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchMetricsDetail_Dimensions:
-			return deserializeCloudWatchMetricsDimensions(d, schemas.CloudWatchMetricsDetail_Dimensions, &v.Dimensions)
-		case schemas.CloudWatchMetricsDetail_MetricDataSummary:
-			v.MetricDataSummary = &CloudWatchMetricsDataSummary{}
-			return v.MetricDataSummary.Deserialize(d)
-		case schemas.CloudWatchMetricsDetail_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.CloudWatchMetricsDetail_MetricName, v.MetricName)
-		case schemas.CloudWatchMetricsDetail_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.CloudWatchMetricsDetail_Namespace, v.Namespace)
-		case schemas.CloudWatchMetricsDetail_Period:
-			return d.ReadInt32(schemas.CloudWatchMetricsDetail_Period, &v.Period)
-		case schemas.CloudWatchMetricsDetail_Stat:
-			var ev string
-			if err := d.ReadString(schemas.CloudWatchMetricsDetail_Stat, &ev); err != nil {
-				return err
-			}
-			v.Stat = CloudWatchMetricsStat(ev)
-			return nil
-		case schemas.CloudWatchMetricsDetail_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.CloudWatchMetricsDetail_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 //	The dimension of an Amazon CloudWatch metric that is used when DevOps Guru
 //
 // analyzes the resources in your account for operational problems and anomalous
@@ -738,34 +290,6 @@ type CloudWatchMetricsDimension struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudWatchMetricsDimension) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchMetricsDimension)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchMetricsDimension) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CloudWatchMetricsDimension_Name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.CloudWatchMetricsDimension_Value, *v.Value)
-	}
-}
-func (v *CloudWatchMetricsDimension) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchMetricsDimension, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchMetricsDimension_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CloudWatchMetricsDimension_Name, v.Name)
-		case schemas.CloudWatchMetricsDimension_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.CloudWatchMetricsDimension_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Information about a filter used to specify which Amazon Web Services resources
@@ -817,33 +341,6 @@ type CostEstimationResourceCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CostEstimationResourceCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostEstimationResourceCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostEstimationResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudFormation != nil {
-		s.WriteStruct(schemas.CostEstimationResourceCollectionFilter_CloudFormation)
-		v.CloudFormation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagCostEstimationResourceCollectionFilters(s, schemas.CostEstimationResourceCollectionFilter_Tags, v.Tags)
-}
-func (v *CostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostEstimationResourceCollectionFilter_CloudFormation:
-			v.CloudFormation = &CloudFormationCostEstimationResourceCollectionFilter{}
-			return v.CloudFormation.Deserialize(d)
-		case schemas.CostEstimationResourceCollectionFilter_Tags:
-			return deserializeTagCostEstimationResourceCollectionFilters(d, schemas.CostEstimationResourceCollectionFilter_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // The time range of a cost estimation.
 type CostEstimationTimeRange struct {
 
@@ -854,34 +351,6 @@ type CostEstimationTimeRange struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *CostEstimationTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostEstimationTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostEstimationTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.CostEstimationTimeRange_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.CostEstimationTimeRange_StartTime, *v.StartTime)
-	}
-}
-func (v *CostEstimationTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostEstimationTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostEstimationTimeRange_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.CostEstimationTimeRange_EndTime, v.EndTime)
-		case schemas.CostEstimationTimeRange_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.CostEstimationTimeRange_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 //	A range of time that specifies when anomalous behavior in an anomaly or
@@ -896,34 +365,6 @@ type EndTimeRange struct {
 	ToTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *EndTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EndTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EndTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FromTime != nil {
-		s.WriteTime(schemas.EndTimeRange_FromTime, *v.FromTime)
-	}
-	if v.ToTime != nil {
-		s.WriteTime(schemas.EndTimeRange_ToTime, *v.ToTime)
-	}
-}
-func (v *EndTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EndTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EndTimeRange_FromTime:
-			v.FromTime = new(time.Time)
-			return d.ReadTime(schemas.EndTimeRange_FromTime, v.FromTime)
-		case schemas.EndTimeRange_ToTime:
-			v.ToTime = new(time.Time)
-			return d.ReadTime(schemas.EndTimeRange_ToTime, v.ToTime)
-		}
-		return nil
-	})
 }
 
 //	An Amazon Web Services resource event. Amazon Web Services resource events and
@@ -968,77 +409,6 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Event) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Event)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataSource != "" {
-		s.WriteString(schemas.Event_DataSource, string(v.DataSource))
-	}
-	if v.EventClass != "" {
-		s.WriteString(schemas.Event_EventClass, string(v.EventClass))
-	}
-	if v.EventSource != nil {
-		s.WriteString(schemas.Event_EventSource, *v.EventSource)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Event_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Event_Name, *v.Name)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.Event_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEventResources(s, schemas.Event_Resources, v.Resources)
-	if v.Time != nil {
-		s.WriteTime(schemas.Event_Time, *v.Time)
-	}
-}
-func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Event_DataSource:
-			var ev string
-			if err := d.ReadString(schemas.Event_DataSource, &ev); err != nil {
-				return err
-			}
-			v.DataSource = EventDataSource(ev)
-			return nil
-		case schemas.Event_EventClass:
-			var ev string
-			if err := d.ReadString(schemas.Event_EventClass, &ev); err != nil {
-				return err
-			}
-			v.EventClass = EventClass(ev)
-			return nil
-		case schemas.Event_EventSource:
-			v.EventSource = new(string)
-			return d.ReadString(schemas.Event_EventSource, v.EventSource)
-		case schemas.Event_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Event_Id, v.Id)
-		case schemas.Event_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Event_Name, v.Name)
-		case schemas.Event_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.Event_Resources:
-			return deserializeEventResources(d, schemas.Event_Resources, &v.Resources)
-		case schemas.Event_Time:
-			v.Time = new(time.Time)
-			return d.ReadTime(schemas.Event_Time, v.Time)
-		}
-		return nil
-	})
-}
-
 //	The Amazon Web Services resource that emitted an event. Amazon Web Services
 //
 // resource events and metrics are analyzed by DevOps Guru to find anomalous
@@ -1057,40 +427,6 @@ type EventResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EventResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.EventResource_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.EventResource_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.EventResource_Type, *v.Type)
-	}
-}
-func (v *EventResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventResource_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.EventResource_Arn, v.Arn)
-		case schemas.EventResource_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.EventResource_Name, v.Name)
-		case schemas.EventResource_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.EventResource_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Information about the integration of DevOps Guru as consumer with another AWS
 // service, such as AWS CodeGuru Profiler via EventBridge.
 type EventSourcesConfig struct {
@@ -1100,30 +436,6 @@ type EventSourcesConfig struct {
 	AmazonCodeGuruProfiler *AmazonCodeGuruProfilerIntegration
 
 	noSmithyDocumentSerde
-}
-
-func (v *EventSourcesConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventSourcesConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventSourcesConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AmazonCodeGuruProfiler != nil {
-		s.WriteStruct(schemas.EventSourcesConfig_AmazonCodeGuruProfiler)
-		v.AmazonCodeGuruProfiler.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *EventSourcesConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventSourcesConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventSourcesConfig_AmazonCodeGuruProfiler:
-			v.AmazonCodeGuruProfiler = &AmazonCodeGuruProfilerIntegration{}
-			return v.AmazonCodeGuruProfiler.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	The time range during which an Amazon Web Services event occurred. Amazon Web
@@ -1146,34 +458,6 @@ type EventTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EventTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FromTime != nil {
-		s.WriteTime(schemas.EventTimeRange_FromTime, *v.FromTime)
-	}
-	if v.ToTime != nil {
-		s.WriteTime(schemas.EventTimeRange_ToTime, *v.ToTime)
-	}
-}
-func (v *EventTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventTimeRange_FromTime:
-			v.FromTime = new(time.Time)
-			return d.ReadTime(schemas.EventTimeRange_FromTime, v.FromTime)
-		case schemas.EventTimeRange_ToTime:
-			v.ToTime = new(time.Time)
-			return d.ReadTime(schemas.EventTimeRange_ToTime, v.ToTime)
-		}
-		return nil
-	})
-}
-
 // Information about insight feedback received from a customer.
 type InsightFeedback struct {
 
@@ -1184,38 +468,6 @@ type InsightFeedback struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InsightFeedback) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InsightFeedback)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InsightFeedback) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Feedback != "" {
-		s.WriteString(schemas.InsightFeedback_Feedback, string(v.Feedback))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.InsightFeedback_Id, *v.Id)
-	}
-}
-func (v *InsightFeedback) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InsightFeedback, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InsightFeedback_Feedback:
-			var ev string
-			if err := d.ReadString(schemas.InsightFeedback_Feedback, &ev); err != nil {
-				return err
-			}
-			v.Feedback = InsightFeedbackOption(ev)
-			return nil
-		case schemas.InsightFeedback_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.InsightFeedback_Id, v.Id)
-		}
-		return nil
-	})
 }
 
 //	Information about the number of open reactive and proactive insights that can
@@ -1235,38 +487,6 @@ type InsightHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InsightHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InsightHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InsightHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MeanTimeToRecoverInMilliseconds != nil {
-		s.WriteInt64(schemas.InsightHealth_MeanTimeToRecoverInMilliseconds, *v.MeanTimeToRecoverInMilliseconds)
-	}
-	if v.OpenProactiveInsights != 0 {
-		s.WriteInt32(schemas.InsightHealth_OpenProactiveInsights, v.OpenProactiveInsights)
-	}
-	if v.OpenReactiveInsights != 0 {
-		s.WriteInt32(schemas.InsightHealth_OpenReactiveInsights, v.OpenReactiveInsights)
-	}
-}
-func (v *InsightHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InsightHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InsightHealth_MeanTimeToRecoverInMilliseconds:
-			v.MeanTimeToRecoverInMilliseconds = new(int64)
-			return d.ReadInt64(schemas.InsightHealth_MeanTimeToRecoverInMilliseconds, v.MeanTimeToRecoverInMilliseconds)
-		case schemas.InsightHealth_OpenProactiveInsights:
-			return d.ReadInt32(schemas.InsightHealth_OpenProactiveInsights, &v.OpenProactiveInsights)
-		case schemas.InsightHealth_OpenReactiveInsights:
-			return d.ReadInt32(schemas.InsightHealth_OpenReactiveInsights, &v.OpenReactiveInsights)
-		}
-		return nil
-	})
-}
-
 //	A time ranged that specifies when the observed behavior in an insight started
 //
 // and ended.
@@ -1281,34 +501,6 @@ type InsightTimeRange struct {
 	EndTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *InsightTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InsightTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InsightTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.InsightTimeRange_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.InsightTimeRange_StartTime, *v.StartTime)
-	}
-}
-func (v *InsightTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InsightTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InsightTimeRange_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.InsightTimeRange_EndTime, v.EndTime)
-		case schemas.InsightTimeRange_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.InsightTimeRange_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 // Information about the KMS encryption used with DevOps Guru.
@@ -1344,48 +536,6 @@ type KMSServerSideEncryptionIntegration struct {
 	Type ServerSideEncryptionType
 
 	noSmithyDocumentSerde
-}
-
-func (v *KMSServerSideEncryptionIntegration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KMSServerSideEncryptionIntegration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KMSServerSideEncryptionIntegration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KMSKeyId != nil {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegration_KMSKeyId, *v.KMSKeyId)
-	}
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegration_OptInStatus, string(v.OptInStatus))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegration_Type, string(v.Type))
-	}
-}
-func (v *KMSServerSideEncryptionIntegration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KMSServerSideEncryptionIntegration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KMSServerSideEncryptionIntegration_KMSKeyId:
-			v.KMSKeyId = new(string)
-			return d.ReadString(schemas.KMSServerSideEncryptionIntegration_KMSKeyId, v.KMSKeyId)
-		case schemas.KMSServerSideEncryptionIntegration_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.KMSServerSideEncryptionIntegration_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		case schemas.KMSServerSideEncryptionIntegration_Type:
-			var ev string
-			if err := d.ReadString(schemas.KMSServerSideEncryptionIntegration_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ServerSideEncryptionType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Information about whether DevOps Guru is configured to encrypt server-side
@@ -1425,48 +575,6 @@ type KMSServerSideEncryptionIntegrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KMSServerSideEncryptionIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KMSServerSideEncryptionIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KMSServerSideEncryptionIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KMSKeyId != nil {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegrationConfig_KMSKeyId, *v.KMSKeyId)
-	}
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegrationConfig_OptInStatus, string(v.OptInStatus))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.KMSServerSideEncryptionIntegrationConfig_Type, string(v.Type))
-	}
-}
-func (v *KMSServerSideEncryptionIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KMSServerSideEncryptionIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KMSServerSideEncryptionIntegrationConfig_KMSKeyId:
-			v.KMSKeyId = new(string)
-			return d.ReadString(schemas.KMSServerSideEncryptionIntegrationConfig_KMSKeyId, v.KMSKeyId)
-		case schemas.KMSServerSideEncryptionIntegrationConfig_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.KMSServerSideEncryptionIntegrationConfig_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		case schemas.KMSServerSideEncryptionIntegrationConfig_Type:
-			var ev string
-			if err := d.ReadString(schemas.KMSServerSideEncryptionIntegrationConfig_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ServerSideEncryptionType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies one or more service names that are used to list anomalies.
 type ListAnomaliesForInsightFilters struct {
 
@@ -1474,30 +582,6 @@ type ListAnomaliesForInsightFilters struct {
 	ServiceCollection *ServiceCollection
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListAnomaliesForInsightFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAnomaliesForInsightFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAnomaliesForInsightFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.ListAnomaliesForInsightFilters_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ListAnomaliesForInsightFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAnomaliesForInsightFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAnomaliesForInsightFilters_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	Filters you can use to specify which events are returned when ListEvents is
@@ -1534,70 +618,6 @@ type ListEventsFilters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEventsFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEventsFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEventsFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataSource != "" {
-		s.WriteString(schemas.ListEventsFilters_DataSource, string(v.DataSource))
-	}
-	if v.EventClass != "" {
-		s.WriteString(schemas.ListEventsFilters_EventClass, string(v.EventClass))
-	}
-	if v.EventSource != nil {
-		s.WriteString(schemas.ListEventsFilters_EventSource, *v.EventSource)
-	}
-	if v.EventTimeRange != nil {
-		s.WriteStruct(schemas.ListEventsFilters_EventTimeRange)
-		v.EventTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InsightId != nil {
-		s.WriteString(schemas.ListEventsFilters_InsightId, *v.InsightId)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ListEventsFilters_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ListEventsFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEventsFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEventsFilters_DataSource:
-			var ev string
-			if err := d.ReadString(schemas.ListEventsFilters_DataSource, &ev); err != nil {
-				return err
-			}
-			v.DataSource = EventDataSource(ev)
-			return nil
-		case schemas.ListEventsFilters_EventClass:
-			var ev string
-			if err := d.ReadString(schemas.ListEventsFilters_EventClass, &ev); err != nil {
-				return err
-			}
-			v.EventClass = EventClass(ev)
-			return nil
-		case schemas.ListEventsFilters_EventSource:
-			v.EventSource = new(string)
-			return d.ReadString(schemas.ListEventsFilters_EventSource, v.EventSource)
-		case schemas.ListEventsFilters_EventTimeRange:
-			v.EventTimeRange = &EventTimeRange{}
-			return v.EventTimeRange.Deserialize(d)
-		case schemas.ListEventsFilters_InsightId:
-			v.InsightId = new(string)
-			return d.ReadString(schemas.ListEventsFilters_InsightId, v.InsightId)
-		case schemas.ListEventsFilters_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Used to filter for insights that have any status.
 type ListInsightsAnyStatusFilter struct {
 
@@ -1613,40 +633,6 @@ type ListInsightsAnyStatusFilter struct {
 	Type InsightType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListInsightsAnyStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInsightsAnyStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInsightsAnyStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StartTimeRange != nil {
-		s.WriteStruct(schemas.ListInsightsAnyStatusFilter_StartTimeRange)
-		v.StartTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListInsightsAnyStatusFilter_Type, string(v.Type))
-	}
-}
-func (v *ListInsightsAnyStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInsightsAnyStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInsightsAnyStatusFilter_StartTimeRange:
-			v.StartTimeRange = &StartTimeRange{}
-			return v.StartTimeRange.Deserialize(d)
-		case schemas.ListInsightsAnyStatusFilter_Type:
-			var ev string
-			if err := d.ReadString(schemas.ListInsightsAnyStatusFilter_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = InsightType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Used to filter for insights that have the status CLOSED .
@@ -1665,40 +651,6 @@ type ListInsightsClosedStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInsightsClosedStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInsightsClosedStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInsightsClosedStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimeRange != nil {
-		s.WriteStruct(schemas.ListInsightsClosedStatusFilter_EndTimeRange)
-		v.EndTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListInsightsClosedStatusFilter_Type, string(v.Type))
-	}
-}
-func (v *ListInsightsClosedStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInsightsClosedStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInsightsClosedStatusFilter_EndTimeRange:
-			v.EndTimeRange = &EndTimeRange{}
-			return v.EndTimeRange.Deserialize(d)
-		case schemas.ListInsightsClosedStatusFilter_Type:
-			var ev string
-			if err := d.ReadString(schemas.ListInsightsClosedStatusFilter_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = InsightType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Used to filter for insights that have the status ONGOING .
 type ListInsightsOngoingStatusFilter struct {
 
@@ -1708,32 +660,6 @@ type ListInsightsOngoingStatusFilter struct {
 	Type InsightType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListInsightsOngoingStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInsightsOngoingStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInsightsOngoingStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != "" {
-		s.WriteString(schemas.ListInsightsOngoingStatusFilter_Type, string(v.Type))
-	}
-}
-func (v *ListInsightsOngoingStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInsightsOngoingStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInsightsOngoingStatusFilter_Type:
-			var ev string
-			if err := d.ReadString(schemas.ListInsightsOngoingStatusFilter_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = InsightType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A filter used by ListInsights to specify which insights to return.
@@ -1754,46 +680,6 @@ type ListInsightsStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInsightsStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInsightsStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInsightsStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Any != nil {
-		s.WriteStruct(schemas.ListInsightsStatusFilter_Any)
-		v.Any.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Closed != nil {
-		s.WriteStruct(schemas.ListInsightsStatusFilter_Closed)
-		v.Closed.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Ongoing != nil {
-		s.WriteStruct(schemas.ListInsightsStatusFilter_Ongoing)
-		v.Ongoing.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ListInsightsStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInsightsStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInsightsStatusFilter_Any:
-			v.Any = &ListInsightsAnyStatusFilter{}
-			return v.Any.Deserialize(d)
-		case schemas.ListInsightsStatusFilter_Closed:
-			v.Closed = &ListInsightsClosedStatusFilter{}
-			return v.Closed.Deserialize(d)
-		case schemas.ListInsightsStatusFilter_Ongoing:
-			v.Ongoing = &ListInsightsOngoingStatusFilter{}
-			return v.Ongoing.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 //	Filters to determine which monitored resources you want to retrieve. You can
 //
 // filter by resource type or resource permission status.
@@ -1810,35 +696,6 @@ type ListMonitoredResourcesFilters struct {
 	ResourceTypeFilters []ResourceTypeFilter
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListMonitoredResourcesFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMonitoredResourcesFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMonitoredResourcesFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourcePermission != "" {
-		s.WriteString(schemas.ListMonitoredResourcesFilters_ResourcePermission, string(v.ResourcePermission))
-	}
-	serializeResourceTypeFilters(s, schemas.ListMonitoredResourcesFilters_ResourceTypeFilters, v.ResourceTypeFilters)
-}
-func (v *ListMonitoredResourcesFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMonitoredResourcesFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMonitoredResourcesFilters_ResourcePermission:
-			var ev string
-			if err := d.ReadString(schemas.ListMonitoredResourcesFilters_ResourcePermission, &ev); err != nil {
-				return err
-			}
-			v.ResourcePermission = ResourcePermission(ev)
-			return nil
-		case schemas.ListMonitoredResourcesFilters_ResourceTypeFilters:
-			return deserializeResourceTypeFilters(d, schemas.ListMonitoredResourcesFilters_ResourceTypeFilters, &v.ResourceTypeFilters)
-		}
-		return nil
-	})
 }
 
 // Information about an anomalous log event found within a log group.
@@ -1870,67 +727,6 @@ type LogAnomalyClass struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogAnomalyClass) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogAnomalyClass)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogAnomalyClass) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Explanation != nil {
-		s.WriteString(schemas.LogAnomalyClass_Explanation, *v.Explanation)
-	}
-	if v.LogAnomalyToken != nil {
-		s.WriteString(schemas.LogAnomalyClass_LogAnomalyToken, *v.LogAnomalyToken)
-	}
-	if v.LogAnomalyType != "" {
-		s.WriteString(schemas.LogAnomalyClass_LogAnomalyType, string(v.LogAnomalyType))
-	}
-	if v.LogEventId != nil {
-		s.WriteString(schemas.LogAnomalyClass_LogEventId, *v.LogEventId)
-	}
-	if v.LogEventTimestamp != nil {
-		s.WriteTime(schemas.LogAnomalyClass_LogEventTimestamp, *v.LogEventTimestamp)
-	}
-	if v.LogStreamName != nil {
-		s.WriteString(schemas.LogAnomalyClass_LogStreamName, *v.LogStreamName)
-	}
-	if v.NumberOfLogLinesOccurrences != 0 {
-		s.WriteInt32(schemas.LogAnomalyClass_NumberOfLogLinesOccurrences, v.NumberOfLogLinesOccurrences)
-	}
-}
-func (v *LogAnomalyClass) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogAnomalyClass, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogAnomalyClass_Explanation:
-			v.Explanation = new(string)
-			return d.ReadString(schemas.LogAnomalyClass_Explanation, v.Explanation)
-		case schemas.LogAnomalyClass_LogAnomalyToken:
-			v.LogAnomalyToken = new(string)
-			return d.ReadString(schemas.LogAnomalyClass_LogAnomalyToken, v.LogAnomalyToken)
-		case schemas.LogAnomalyClass_LogAnomalyType:
-			var ev string
-			if err := d.ReadString(schemas.LogAnomalyClass_LogAnomalyType, &ev); err != nil {
-				return err
-			}
-			v.LogAnomalyType = LogAnomalyType(ev)
-			return nil
-		case schemas.LogAnomalyClass_LogEventId:
-			v.LogEventId = new(string)
-			return d.ReadString(schemas.LogAnomalyClass_LogEventId, v.LogEventId)
-		case schemas.LogAnomalyClass_LogEventTimestamp:
-			v.LogEventTimestamp = new(time.Time)
-			return d.ReadTime(schemas.LogAnomalyClass_LogEventTimestamp, v.LogEventTimestamp)
-		case schemas.LogAnomalyClass_LogStreamName:
-			v.LogStreamName = new(string)
-			return d.ReadString(schemas.LogAnomalyClass_LogStreamName, v.LogStreamName)
-		case schemas.LogAnomalyClass_NumberOfLogLinesOccurrences:
-			return d.ReadInt32(schemas.LogAnomalyClass_NumberOfLogLinesOccurrences, &v.NumberOfLogLinesOccurrences)
-		}
-		return nil
-	})
-}
-
 // A cluster of similar anomalous log events found within a log group.
 type LogAnomalyShowcase struct {
 
@@ -1938,25 +734,6 @@ type LogAnomalyShowcase struct {
 	LogAnomalyClasses []LogAnomalyClass
 
 	noSmithyDocumentSerde
-}
-
-func (v *LogAnomalyShowcase) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogAnomalyShowcase)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogAnomalyShowcase) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogAnomalyClasses(s, schemas.LogAnomalyShowcase_LogAnomalyClasses, v.LogAnomalyClasses)
-}
-func (v *LogAnomalyShowcase) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogAnomalyShowcase, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogAnomalyShowcase_LogAnomalyClasses:
-			return deserializeLogAnomalyClasses(d, schemas.LogAnomalyShowcase_LogAnomalyClasses, &v.LogAnomalyClasses)
-		}
-		return nil
-	})
 }
 
 //	Information about the integration of DevOps Guru with CloudWatch log groups
@@ -1971,32 +748,6 @@ type LogsAnomalyDetectionIntegration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogsAnomalyDetectionIntegration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogsAnomalyDetectionIntegration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogsAnomalyDetectionIntegration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.LogsAnomalyDetectionIntegration_OptInStatus, string(v.OptInStatus))
-	}
-}
-func (v *LogsAnomalyDetectionIntegration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogsAnomalyDetectionIntegration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogsAnomalyDetectionIntegration_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.LogsAnomalyDetectionIntegration_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	Information about the integration of DevOps Guru with CloudWatch log groups
 //
 // for log anomaly detection. You can use this to update the configuration.
@@ -2007,32 +758,6 @@ type LogsAnomalyDetectionIntegrationConfig struct {
 	OptInStatus OptInStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *LogsAnomalyDetectionIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogsAnomalyDetectionIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogsAnomalyDetectionIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.LogsAnomalyDetectionIntegrationConfig_OptInStatus, string(v.OptInStatus))
-	}
-}
-func (v *LogsAnomalyDetectionIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogsAnomalyDetectionIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogsAnomalyDetectionIntegrationConfig_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.LogsAnomalyDetectionIntegrationConfig_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Information about the resource that is being monitored, including the name of
@@ -2065,58 +790,6 @@ type MonitoredResourceIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MonitoredResourceIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitoredResourceIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitoredResourceIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastUpdated != nil {
-		s.WriteTime(schemas.MonitoredResourceIdentifier_LastUpdated, *v.LastUpdated)
-	}
-	if v.MonitoredResourceName != nil {
-		s.WriteString(schemas.MonitoredResourceIdentifier_MonitoredResourceName, *v.MonitoredResourceName)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.MonitoredResourceIdentifier_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourcePermission != "" {
-		s.WriteString(schemas.MonitoredResourceIdentifier_ResourcePermission, string(v.ResourcePermission))
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.MonitoredResourceIdentifier_Type, *v.Type)
-	}
-}
-func (v *MonitoredResourceIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitoredResourceIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitoredResourceIdentifier_LastUpdated:
-			v.LastUpdated = new(time.Time)
-			return d.ReadTime(schemas.MonitoredResourceIdentifier_LastUpdated, v.LastUpdated)
-		case schemas.MonitoredResourceIdentifier_MonitoredResourceName:
-			v.MonitoredResourceName = new(string)
-			return d.ReadString(schemas.MonitoredResourceIdentifier_MonitoredResourceName, v.MonitoredResourceName)
-		case schemas.MonitoredResourceIdentifier_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.MonitoredResourceIdentifier_ResourcePermission:
-			var ev string
-			if err := d.ReadString(schemas.MonitoredResourceIdentifier_ResourcePermission, &ev); err != nil {
-				return err
-			}
-			v.ResourcePermission = ResourcePermission(ev)
-			return nil
-		case schemas.MonitoredResourceIdentifier_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.MonitoredResourceIdentifier_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 //	Information about a notification channel. A notification channel is used to
 //
 // notify you when DevOps Guru creates an insight. The one supported notification
@@ -2144,36 +817,6 @@ type NotificationChannel struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NotificationChannel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationChannel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationChannel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Config != nil {
-		s.WriteStruct(schemas.NotificationChannel_Config)
-		v.Config.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.NotificationChannel_Id, *v.Id)
-	}
-}
-func (v *NotificationChannel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationChannel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationChannel_Config:
-			v.Config = &NotificationChannelConfig{}
-			return v.Config.Deserialize(d)
-		case schemas.NotificationChannel_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.NotificationChannel_Id, v.Id)
-		}
-		return nil
-	})
 }
 
 //	Information about notification channels you have configured with DevOps Guru.
@@ -2210,38 +853,6 @@ type NotificationChannelConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotificationChannelConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationChannelConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationChannelConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filters != nil {
-		s.WriteStruct(schemas.NotificationChannelConfig_Filters)
-		v.Filters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Sns != nil {
-		s.WriteStruct(schemas.NotificationChannelConfig_Sns)
-		v.Sns.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *NotificationChannelConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationChannelConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationChannelConfig_Filters:
-			v.Filters = &NotificationFilterConfig{}
-			return v.Filters.Deserialize(d)
-		case schemas.NotificationChannelConfig_Sns:
-			v.Sns = &SnsChannelConfig{}
-			return v.Sns.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 //	The filter configurations for the Amazon SNS notification topic you use with
 //
 // DevOps Guru. You can choose to specify which events or message types to receive
@@ -2264,28 +875,6 @@ type NotificationFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotificationFilterConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationFilterConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationMessageTypes(s, schemas.NotificationFilterConfig_MessageTypes, v.MessageTypes)
-	serializeInsightSeverities(s, schemas.NotificationFilterConfig_Severities, v.Severities)
-}
-func (v *NotificationFilterConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationFilterConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationFilterConfig_MessageTypes:
-			return deserializeNotificationMessageTypes(d, schemas.NotificationFilterConfig_MessageTypes, &v.MessageTypes)
-		case schemas.NotificationFilterConfig_Severities:
-			return deserializeInsightSeverities(d, schemas.NotificationFilterConfig_Severities, &v.Severities)
-		}
-		return nil
-	})
-}
-
 //	Information about whether DevOps Guru is configured to create an OpsItem in
 //
 // Amazon Web Services Systems Manager OpsCenter for each created insight.
@@ -2296,32 +885,6 @@ type OpsCenterIntegration struct {
 	OptInStatus OptInStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *OpsCenterIntegration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OpsCenterIntegration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OpsCenterIntegration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.OpsCenterIntegration_OptInStatus, string(v.OptInStatus))
-	}
-}
-func (v *OpsCenterIntegration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OpsCenterIntegration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OpsCenterIntegration_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.OpsCenterIntegration_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Information about whether DevOps Guru is configured to create an OpsItem in
@@ -2335,32 +898,6 @@ type OpsCenterIntegrationConfig struct {
 	OptInStatus OptInStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *OpsCenterIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OpsCenterIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OpsCenterIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OptInStatus != "" {
-		s.WriteString(schemas.OpsCenterIntegrationConfig_OptInStatus, string(v.OptInStatus))
-	}
-}
-func (v *OpsCenterIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OpsCenterIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OpsCenterIntegrationConfig_OptInStatus:
-			var ev string
-			if err := d.ReadString(schemas.OpsCenterIntegrationConfig_OptInStatus, &ev); err != nil {
-				return err
-			}
-			v.OptInStatus = OptInStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A logical grouping of Performance Insights metrics for a related subject area.
@@ -2469,37 +1006,6 @@ type PerformanceInsightsMetricDimensionGroup struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsMetricDimensionGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsMetricDimensionGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsMetricDimensionGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePerformanceInsightsMetricDimensions(s, schemas.PerformanceInsightsMetricDimensionGroup_Dimensions, v.Dimensions)
-	if v.Group != nil {
-		s.WriteString(schemas.PerformanceInsightsMetricDimensionGroup_Group, *v.Group)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.PerformanceInsightsMetricDimensionGroup_Limit, *v.Limit)
-	}
-}
-func (v *PerformanceInsightsMetricDimensionGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsMetricDimensionGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsMetricDimensionGroup_Dimensions:
-			return deserializePerformanceInsightsMetricDimensions(d, schemas.PerformanceInsightsMetricDimensionGroup_Dimensions, &v.Dimensions)
-		case schemas.PerformanceInsightsMetricDimensionGroup_Group:
-			v.Group = new(string)
-			return d.ReadString(schemas.PerformanceInsightsMetricDimensionGroup_Group, v.Group)
-		case schemas.PerformanceInsightsMetricDimensionGroup_Limit:
-			v.Limit = new(int32)
-			return d.ReadInt32(schemas.PerformanceInsightsMetricDimensionGroup_Limit, v.Limit)
-		}
-		return nil
-	})
-}
-
 // A single query to be processed. Use these parameters to query the Performance
 // Insights GetResourceMetrics API to retrieve the metrics for an anomaly. For
 // more information, see [GetResourceMetrics]in the Amazon RDS Performance Insights API Reference.
@@ -2561,39 +1067,6 @@ type PerformanceInsightsMetricQuery struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsMetricQuery) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsMetricQuery)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsMetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePerformanceInsightsMetricFilterMap(s, schemas.PerformanceInsightsMetricQuery_Filter, v.Filter)
-	if v.GroupBy != nil {
-		s.WriteStruct(schemas.PerformanceInsightsMetricQuery_GroupBy)
-		v.GroupBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Metric != nil {
-		s.WriteString(schemas.PerformanceInsightsMetricQuery_Metric, *v.Metric)
-	}
-}
-func (v *PerformanceInsightsMetricQuery) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsMetricQuery, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsMetricQuery_Filter:
-			return deserializePerformanceInsightsMetricFilterMap(d, schemas.PerformanceInsightsMetricQuery_Filter, &v.Filter)
-		case schemas.PerformanceInsightsMetricQuery_GroupBy:
-			v.GroupBy = &PerformanceInsightsMetricDimensionGroup{}
-			return v.GroupBy.Deserialize(d)
-		case schemas.PerformanceInsightsMetricQuery_Metric:
-			v.Metric = new(string)
-			return d.ReadString(schemas.PerformanceInsightsMetricQuery_Metric, v.Metric)
-		}
-		return nil
-	})
-}
-
 // Details about Performance Insights metrics.
 //
 // Amazon RDS Performance Insights enables you to monitor and explore different
@@ -2641,51 +1114,6 @@ type PerformanceInsightsMetricsDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsMetricsDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsMetricsDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsMetricsDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetricDisplayName != nil {
-		s.WriteString(schemas.PerformanceInsightsMetricsDetail_MetricDisplayName, *v.MetricDisplayName)
-	}
-	if v.MetricQuery != nil {
-		s.WriteStruct(schemas.PerformanceInsightsMetricsDetail_MetricQuery)
-		v.MetricQuery.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePerformanceInsightsReferenceDataList(s, schemas.PerformanceInsightsMetricsDetail_ReferenceData, v.ReferenceData)
-	serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtAnomaly, v.StatsAtAnomaly)
-	serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtBaseline, v.StatsAtBaseline)
-	if v.Unit != nil {
-		s.WriteString(schemas.PerformanceInsightsMetricsDetail_Unit, *v.Unit)
-	}
-}
-func (v *PerformanceInsightsMetricsDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsMetricsDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsMetricsDetail_MetricDisplayName:
-			v.MetricDisplayName = new(string)
-			return d.ReadString(schemas.PerformanceInsightsMetricsDetail_MetricDisplayName, v.MetricDisplayName)
-		case schemas.PerformanceInsightsMetricsDetail_MetricQuery:
-			v.MetricQuery = &PerformanceInsightsMetricQuery{}
-			return v.MetricQuery.Deserialize(d)
-		case schemas.PerformanceInsightsMetricsDetail_ReferenceData:
-			return deserializePerformanceInsightsReferenceDataList(d, schemas.PerformanceInsightsMetricsDetail_ReferenceData, &v.ReferenceData)
-		case schemas.PerformanceInsightsMetricsDetail_StatsAtAnomaly:
-			return deserializePerformanceInsightsStats(d, schemas.PerformanceInsightsMetricsDetail_StatsAtAnomaly, &v.StatsAtAnomaly)
-		case schemas.PerformanceInsightsMetricsDetail_StatsAtBaseline:
-			return deserializePerformanceInsightsStats(d, schemas.PerformanceInsightsMetricsDetail_StatsAtBaseline, &v.StatsAtBaseline)
-		case schemas.PerformanceInsightsMetricsDetail_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.PerformanceInsightsMetricsDetail_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // Reference scalar values and other metrics that DevOps Guru displays on a graph
 // in its console along with the actual metrics it analyzed. Compare these
 // reference values to your actual metrics to help you understand anomalous
@@ -2704,38 +1132,6 @@ type PerformanceInsightsReferenceComparisonValues struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsReferenceComparisonValues) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsReferenceComparisonValues)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsReferenceComparisonValues) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReferenceMetric != nil {
-		s.WriteStruct(schemas.PerformanceInsightsReferenceComparisonValues_ReferenceMetric)
-		v.ReferenceMetric.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ReferenceScalar != nil {
-		s.WriteStruct(schemas.PerformanceInsightsReferenceComparisonValues_ReferenceScalar)
-		v.ReferenceScalar.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PerformanceInsightsReferenceComparisonValues) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsReferenceComparisonValues, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsReferenceComparisonValues_ReferenceMetric:
-			v.ReferenceMetric = &PerformanceInsightsReferenceMetric{}
-			return v.ReferenceMetric.Deserialize(d)
-		case schemas.PerformanceInsightsReferenceComparisonValues_ReferenceScalar:
-			v.ReferenceScalar = &PerformanceInsightsReferenceScalar{}
-			return v.ReferenceScalar.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Reference data used to evaluate Performance Insights to determine if its
 // performance is anomalous or not.
 type PerformanceInsightsReferenceData struct {
@@ -2752,36 +1148,6 @@ type PerformanceInsightsReferenceData struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsReferenceData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsReferenceData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsReferenceData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComparisonValues != nil {
-		s.WriteStruct(schemas.PerformanceInsightsReferenceData_ComparisonValues)
-		v.ComparisonValues.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PerformanceInsightsReferenceData_Name, *v.Name)
-	}
-}
-func (v *PerformanceInsightsReferenceData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsReferenceData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsReferenceData_ComparisonValues:
-			v.ComparisonValues = &PerformanceInsightsReferenceComparisonValues{}
-			return v.ComparisonValues.Deserialize(d)
-		case schemas.PerformanceInsightsReferenceData_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PerformanceInsightsReferenceData_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Information about a reference metric used to evaluate Performance Insights.
 type PerformanceInsightsReferenceMetric struct {
 
@@ -2789,30 +1155,6 @@ type PerformanceInsightsReferenceMetric struct {
 	MetricQuery *PerformanceInsightsMetricQuery
 
 	noSmithyDocumentSerde
-}
-
-func (v *PerformanceInsightsReferenceMetric) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsReferenceMetric)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsReferenceMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetricQuery != nil {
-		s.WriteStruct(schemas.PerformanceInsightsReferenceMetric_MetricQuery)
-		v.MetricQuery.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PerformanceInsightsReferenceMetric) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsReferenceMetric, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsReferenceMetric_MetricQuery:
-			v.MetricQuery = &PerformanceInsightsMetricQuery{}
-			return v.MetricQuery.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A reference value to compare Performance Insights metrics against to determine
@@ -2825,28 +1167,6 @@ type PerformanceInsightsReferenceScalar struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PerformanceInsightsReferenceScalar) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsReferenceScalar)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsReferenceScalar) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Value != nil {
-		s.WriteFloat64(schemas.PerformanceInsightsReferenceScalar_Value, *v.Value)
-	}
-}
-func (v *PerformanceInsightsReferenceScalar) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsReferenceScalar, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsReferenceScalar_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.PerformanceInsightsReferenceScalar_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A statistic in a Performance Insights collection.
 type PerformanceInsightsStat struct {
 
@@ -2857,34 +1177,6 @@ type PerformanceInsightsStat struct {
 	Value *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *PerformanceInsightsStat) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PerformanceInsightsStat)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PerformanceInsightsStat) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != nil {
-		s.WriteString(schemas.PerformanceInsightsStat_Type, *v.Type)
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.PerformanceInsightsStat_Value, *v.Value)
-	}
-}
-func (v *PerformanceInsightsStat) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PerformanceInsightsStat, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PerformanceInsightsStat_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.PerformanceInsightsStat_Type, v.Type)
-		case schemas.PerformanceInsightsStat_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.PerformanceInsightsStat_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 //	The time range during which anomalous behavior in a proactive anomaly or an
@@ -2902,34 +1194,6 @@ type PredictionTimeRange struct {
 	EndTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *PredictionTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredictionTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredictionTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.PredictionTimeRange_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.PredictionTimeRange_StartTime, *v.StartTime)
-	}
-}
-func (v *PredictionTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredictionTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredictionTimeRange_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.PredictionTimeRange_EndTime, v.EndTime)
-		case schemas.PredictionTimeRange_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.PredictionTimeRange_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 // Information about an anomaly. This object is returned by ListAnomalies .
@@ -2997,123 +1261,6 @@ type ProactiveAnomaly struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProactiveAnomaly) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProactiveAnomaly)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProactiveAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnomalyReportedTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_AnomalyReportedTimeRange)
-		v.AnomalyReportedTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAnomalyResources(s, schemas.ProactiveAnomaly_AnomalyResources, v.AnomalyResources)
-	if v.AnomalyTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_AnomalyTimeRange)
-		v.AnomalyTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AssociatedInsightId != nil {
-		s.WriteString(schemas.ProactiveAnomaly_AssociatedInsightId, *v.AssociatedInsightId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ProactiveAnomaly_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ProactiveAnomaly_Id, *v.Id)
-	}
-	if v.Limit != nil {
-		s.WriteFloat64(schemas.ProactiveAnomaly_Limit, *v.Limit)
-	}
-	if v.PredictionTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_PredictionTimeRange)
-		v.PredictionTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ProactiveAnomaly_Severity, string(v.Severity))
-	}
-	if v.SourceDetails != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_SourceDetails)
-		v.SourceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceMetadata != nil {
-		s.WriteStruct(schemas.ProactiveAnomaly_SourceMetadata)
-		v.SourceMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProactiveAnomaly_Status, string(v.Status))
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.ProactiveAnomaly_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *ProactiveAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProactiveAnomaly, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProactiveAnomaly_AnomalyReportedTimeRange:
-			v.AnomalyReportedTimeRange = &AnomalyReportedTimeRange{}
-			return v.AnomalyReportedTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomaly_AnomalyResources:
-			return deserializeAnomalyResources(d, schemas.ProactiveAnomaly_AnomalyResources, &v.AnomalyResources)
-		case schemas.ProactiveAnomaly_AnomalyTimeRange:
-			v.AnomalyTimeRange = &AnomalyTimeRange{}
-			return v.AnomalyTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomaly_AssociatedInsightId:
-			v.AssociatedInsightId = new(string)
-			return d.ReadString(schemas.ProactiveAnomaly_AssociatedInsightId, v.AssociatedInsightId)
-		case schemas.ProactiveAnomaly_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProactiveAnomaly_Description, v.Description)
-		case schemas.ProactiveAnomaly_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProactiveAnomaly_Id, v.Id)
-		case schemas.ProactiveAnomaly_Limit:
-			v.Limit = new(float64)
-			return d.ReadFloat64(schemas.ProactiveAnomaly_Limit, v.Limit)
-		case schemas.ProactiveAnomaly_PredictionTimeRange:
-			v.PredictionTimeRange = &PredictionTimeRange{}
-			return v.PredictionTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomaly_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ProactiveAnomaly_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveAnomaly_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = AnomalySeverity(ev)
-			return nil
-		case schemas.ProactiveAnomaly_SourceDetails:
-			v.SourceDetails = &AnomalySourceDetails{}
-			return v.SourceDetails.Deserialize(d)
-		case schemas.ProactiveAnomaly_SourceMetadata:
-			v.SourceMetadata = &AnomalySourceMetadata{}
-			return v.SourceMetadata.Deserialize(d)
-		case schemas.ProactiveAnomaly_Status:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveAnomaly_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = AnomalyStatus(ev)
-			return nil
-		case schemas.ProactiveAnomaly_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.ProactiveAnomaly_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
 // Details about a proactive anomaly. This object is returned by DescribeAnomaly.
 type ProactiveAnomalySummary struct {
 
@@ -3179,123 +1326,6 @@ type ProactiveAnomalySummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProactiveAnomalySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProactiveAnomalySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProactiveAnomalySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnomalyReportedTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_AnomalyReportedTimeRange)
-		v.AnomalyReportedTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAnomalyResources(s, schemas.ProactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
-	if v.AnomalyTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_AnomalyTimeRange)
-		v.AnomalyTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AssociatedInsightId != nil {
-		s.WriteString(schemas.ProactiveAnomalySummary_AssociatedInsightId, *v.AssociatedInsightId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ProactiveAnomalySummary_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ProactiveAnomalySummary_Id, *v.Id)
-	}
-	if v.Limit != nil {
-		s.WriteFloat64(schemas.ProactiveAnomalySummary_Limit, *v.Limit)
-	}
-	if v.PredictionTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_PredictionTimeRange)
-		v.PredictionTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ProactiveAnomalySummary_Severity, string(v.Severity))
-	}
-	if v.SourceDetails != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_SourceDetails)
-		v.SourceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceMetadata != nil {
-		s.WriteStruct(schemas.ProactiveAnomalySummary_SourceMetadata)
-		v.SourceMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProactiveAnomalySummary_Status, string(v.Status))
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.ProactiveAnomalySummary_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *ProactiveAnomalySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProactiveAnomalySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProactiveAnomalySummary_AnomalyReportedTimeRange:
-			v.AnomalyReportedTimeRange = &AnomalyReportedTimeRange{}
-			return v.AnomalyReportedTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_AnomalyResources:
-			return deserializeAnomalyResources(d, schemas.ProactiveAnomalySummary_AnomalyResources, &v.AnomalyResources)
-		case schemas.ProactiveAnomalySummary_AnomalyTimeRange:
-			v.AnomalyTimeRange = &AnomalyTimeRange{}
-			return v.AnomalyTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_AssociatedInsightId:
-			v.AssociatedInsightId = new(string)
-			return d.ReadString(schemas.ProactiveAnomalySummary_AssociatedInsightId, v.AssociatedInsightId)
-		case schemas.ProactiveAnomalySummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProactiveAnomalySummary_Description, v.Description)
-		case schemas.ProactiveAnomalySummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProactiveAnomalySummary_Id, v.Id)
-		case schemas.ProactiveAnomalySummary_Limit:
-			v.Limit = new(float64)
-			return d.ReadFloat64(schemas.ProactiveAnomalySummary_Limit, v.Limit)
-		case schemas.ProactiveAnomalySummary_PredictionTimeRange:
-			v.PredictionTimeRange = &PredictionTimeRange{}
-			return v.PredictionTimeRange.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveAnomalySummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = AnomalySeverity(ev)
-			return nil
-		case schemas.ProactiveAnomalySummary_SourceDetails:
-			v.SourceDetails = &AnomalySourceDetails{}
-			return v.SourceDetails.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_SourceMetadata:
-			v.SourceMetadata = &AnomalySourceMetadata{}
-			return v.SourceMetadata.Deserialize(d)
-		case schemas.ProactiveAnomalySummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveAnomalySummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = AnomalyStatus(ev)
-			return nil
-		case schemas.ProactiveAnomalySummary_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.ProactiveAnomalySummary_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
 // Details about a proactive insight. This object is returned by ListInsights .
 type ProactiveInsight struct {
 
@@ -3340,90 +1370,6 @@ type ProactiveInsight struct {
 	Status InsightStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProactiveInsight) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProactiveInsight)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProactiveInsight) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.ProactiveInsight_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ProactiveInsight_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveInsight_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProactiveInsight_Name, *v.Name)
-	}
-	if v.PredictionTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveInsight_PredictionTimeRange)
-		v.PredictionTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ProactiveInsight_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ProactiveInsight_Severity, string(v.Severity))
-	}
-	if v.SsmOpsItemId != nil {
-		s.WriteString(schemas.ProactiveInsight_SsmOpsItemId, *v.SsmOpsItemId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProactiveInsight_Status, string(v.Status))
-	}
-}
-func (v *ProactiveInsight) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProactiveInsight, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProactiveInsight_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProactiveInsight_Description, v.Description)
-		case schemas.ProactiveInsight_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProactiveInsight_Id, v.Id)
-		case schemas.ProactiveInsight_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ProactiveInsight_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProactiveInsight_Name, v.Name)
-		case schemas.ProactiveInsight_PredictionTimeRange:
-			v.PredictionTimeRange = &PredictionTimeRange{}
-			return v.PredictionTimeRange.Deserialize(d)
-		case schemas.ProactiveInsight_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ProactiveInsight_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveInsight_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ProactiveInsight_SsmOpsItemId:
-			v.SsmOpsItemId = new(string)
-			return d.ReadString(schemas.ProactiveInsight_SsmOpsItemId, v.SsmOpsItemId)
-		case schemas.ProactiveInsight_Status:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveInsight_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details about a proactive insight. This object is returned by DescribeInsight.
@@ -3471,89 +1417,6 @@ type ProactiveInsightSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProactiveInsightSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProactiveInsightSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProactiveInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedResourceArns(s, schemas.ProactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
-	if v.Id != nil {
-		s.WriteString(schemas.ProactiveInsightSummary_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveInsightSummary_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProactiveInsightSummary_Name, *v.Name)
-	}
-	if v.PredictionTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveInsightSummary_PredictionTimeRange)
-		v.PredictionTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ProactiveInsightSummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.ProactiveInsightSummary_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ProactiveInsightSummary_Severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProactiveInsightSummary_Status, string(v.Status))
-	}
-}
-func (v *ProactiveInsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProactiveInsightSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProactiveInsightSummary_AssociatedResourceArns:
-			return deserializeAssociatedResourceArns(d, schemas.ProactiveInsightSummary_AssociatedResourceArns, &v.AssociatedResourceArns)
-		case schemas.ProactiveInsightSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProactiveInsightSummary_Id, v.Id)
-		case schemas.ProactiveInsightSummary_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ProactiveInsightSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProactiveInsightSummary_Name, v.Name)
-		case schemas.ProactiveInsightSummary_PredictionTimeRange:
-			v.PredictionTimeRange = &PredictionTimeRange{}
-			return v.PredictionTimeRange.Deserialize(d)
-		case schemas.ProactiveInsightSummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ProactiveInsightSummary_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.ProactiveInsightSummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveInsightSummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ProactiveInsightSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveInsightSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about a proactive insight. This object is returned by DescribeInsight .
 type ProactiveOrganizationInsightSummary struct {
 
@@ -3599,98 +1462,6 @@ type ProactiveOrganizationInsightSummary struct {
 	Status InsightStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProactiveOrganizationInsightSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProactiveOrganizationInsightSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProactiveOrganizationInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_AccountId, *v.AccountId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveOrganizationInsightSummary_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_Name, *v.Name)
-	}
-	if v.OrganizationalUnitId != nil {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_OrganizationalUnitId, *v.OrganizationalUnitId)
-	}
-	if v.PredictionTimeRange != nil {
-		s.WriteStruct(schemas.ProactiveOrganizationInsightSummary_PredictionTimeRange)
-		v.PredictionTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ProactiveOrganizationInsightSummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.ProactiveOrganizationInsightSummary_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_Severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProactiveOrganizationInsightSummary_Status, string(v.Status))
-	}
-}
-func (v *ProactiveOrganizationInsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProactiveOrganizationInsightSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProactiveOrganizationInsightSummary_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ProactiveOrganizationInsightSummary_AccountId, v.AccountId)
-		case schemas.ProactiveOrganizationInsightSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProactiveOrganizationInsightSummary_Id, v.Id)
-		case schemas.ProactiveOrganizationInsightSummary_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ProactiveOrganizationInsightSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProactiveOrganizationInsightSummary_Name, v.Name)
-		case schemas.ProactiveOrganizationInsightSummary_OrganizationalUnitId:
-			v.OrganizationalUnitId = new(string)
-			return d.ReadString(schemas.ProactiveOrganizationInsightSummary_OrganizationalUnitId, v.OrganizationalUnitId)
-		case schemas.ProactiveOrganizationInsightSummary_PredictionTimeRange:
-			v.PredictionTimeRange = &PredictionTimeRange{}
-			return v.PredictionTimeRange.Deserialize(d)
-		case schemas.ProactiveOrganizationInsightSummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ProactiveOrganizationInsightSummary_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.ProactiveOrganizationInsightSummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveOrganizationInsightSummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ProactiveOrganizationInsightSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ProactiveOrganizationInsightSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details about a reactive anomaly. This object is returned by ListAnomalies .
@@ -3760,117 +1531,6 @@ type ReactiveAnomaly struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReactiveAnomaly) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReactiveAnomaly)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReactiveAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnomalyReportedTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveAnomaly_AnomalyReportedTimeRange)
-		v.AnomalyReportedTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAnomalyResources(s, schemas.ReactiveAnomaly_AnomalyResources, v.AnomalyResources)
-	if v.AnomalyTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveAnomaly_AnomalyTimeRange)
-		v.AnomalyTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AssociatedInsightId != nil {
-		s.WriteString(schemas.ReactiveAnomaly_AssociatedInsightId, *v.AssociatedInsightId)
-	}
-	if v.CausalAnomalyId != nil {
-		s.WriteString(schemas.ReactiveAnomaly_CausalAnomalyId, *v.CausalAnomalyId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ReactiveAnomaly_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ReactiveAnomaly_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ReactiveAnomaly_Name, *v.Name)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ReactiveAnomaly_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ReactiveAnomaly_Severity, string(v.Severity))
-	}
-	if v.SourceDetails != nil {
-		s.WriteStruct(schemas.ReactiveAnomaly_SourceDetails)
-		v.SourceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReactiveAnomaly_Status, string(v.Status))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ReactiveAnomaly_Type, string(v.Type))
-	}
-}
-func (v *ReactiveAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReactiveAnomaly, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReactiveAnomaly_AnomalyReportedTimeRange:
-			v.AnomalyReportedTimeRange = &AnomalyReportedTimeRange{}
-			return v.AnomalyReportedTimeRange.Deserialize(d)
-		case schemas.ReactiveAnomaly_AnomalyResources:
-			return deserializeAnomalyResources(d, schemas.ReactiveAnomaly_AnomalyResources, &v.AnomalyResources)
-		case schemas.ReactiveAnomaly_AnomalyTimeRange:
-			v.AnomalyTimeRange = &AnomalyTimeRange{}
-			return v.AnomalyTimeRange.Deserialize(d)
-		case schemas.ReactiveAnomaly_AssociatedInsightId:
-			v.AssociatedInsightId = new(string)
-			return d.ReadString(schemas.ReactiveAnomaly_AssociatedInsightId, v.AssociatedInsightId)
-		case schemas.ReactiveAnomaly_CausalAnomalyId:
-			v.CausalAnomalyId = new(string)
-			return d.ReadString(schemas.ReactiveAnomaly_CausalAnomalyId, v.CausalAnomalyId)
-		case schemas.ReactiveAnomaly_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ReactiveAnomaly_Description, v.Description)
-		case schemas.ReactiveAnomaly_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ReactiveAnomaly_Id, v.Id)
-		case schemas.ReactiveAnomaly_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ReactiveAnomaly_Name, v.Name)
-		case schemas.ReactiveAnomaly_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ReactiveAnomaly_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomaly_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = AnomalySeverity(ev)
-			return nil
-		case schemas.ReactiveAnomaly_SourceDetails:
-			v.SourceDetails = &AnomalySourceDetails{}
-			return v.SourceDetails.Deserialize(d)
-		case schemas.ReactiveAnomaly_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomaly_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = AnomalyStatus(ev)
-			return nil
-		case schemas.ReactiveAnomaly_Type:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomaly_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = AnomalyType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Details about a reactive anomaly. This object is returned by DescribeAnomaly.
 type ReactiveAnomalySummary struct {
 
@@ -3938,117 +1598,6 @@ type ReactiveAnomalySummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReactiveAnomalySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReactiveAnomalySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReactiveAnomalySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnomalyReportedTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveAnomalySummary_AnomalyReportedTimeRange)
-		v.AnomalyReportedTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAnomalyResources(s, schemas.ReactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
-	if v.AnomalyTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveAnomalySummary_AnomalyTimeRange)
-		v.AnomalyTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AssociatedInsightId != nil {
-		s.WriteString(schemas.ReactiveAnomalySummary_AssociatedInsightId, *v.AssociatedInsightId)
-	}
-	if v.CausalAnomalyId != nil {
-		s.WriteString(schemas.ReactiveAnomalySummary_CausalAnomalyId, *v.CausalAnomalyId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ReactiveAnomalySummary_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ReactiveAnomalySummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ReactiveAnomalySummary_Name, *v.Name)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ReactiveAnomalySummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ReactiveAnomalySummary_Severity, string(v.Severity))
-	}
-	if v.SourceDetails != nil {
-		s.WriteStruct(schemas.ReactiveAnomalySummary_SourceDetails)
-		v.SourceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReactiveAnomalySummary_Status, string(v.Status))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ReactiveAnomalySummary_Type, string(v.Type))
-	}
-}
-func (v *ReactiveAnomalySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReactiveAnomalySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReactiveAnomalySummary_AnomalyReportedTimeRange:
-			v.AnomalyReportedTimeRange = &AnomalyReportedTimeRange{}
-			return v.AnomalyReportedTimeRange.Deserialize(d)
-		case schemas.ReactiveAnomalySummary_AnomalyResources:
-			return deserializeAnomalyResources(d, schemas.ReactiveAnomalySummary_AnomalyResources, &v.AnomalyResources)
-		case schemas.ReactiveAnomalySummary_AnomalyTimeRange:
-			v.AnomalyTimeRange = &AnomalyTimeRange{}
-			return v.AnomalyTimeRange.Deserialize(d)
-		case schemas.ReactiveAnomalySummary_AssociatedInsightId:
-			v.AssociatedInsightId = new(string)
-			return d.ReadString(schemas.ReactiveAnomalySummary_AssociatedInsightId, v.AssociatedInsightId)
-		case schemas.ReactiveAnomalySummary_CausalAnomalyId:
-			v.CausalAnomalyId = new(string)
-			return d.ReadString(schemas.ReactiveAnomalySummary_CausalAnomalyId, v.CausalAnomalyId)
-		case schemas.ReactiveAnomalySummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ReactiveAnomalySummary_Description, v.Description)
-		case schemas.ReactiveAnomalySummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ReactiveAnomalySummary_Id, v.Id)
-		case schemas.ReactiveAnomalySummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ReactiveAnomalySummary_Name, v.Name)
-		case schemas.ReactiveAnomalySummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ReactiveAnomalySummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomalySummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = AnomalySeverity(ev)
-			return nil
-		case schemas.ReactiveAnomalySummary_SourceDetails:
-			v.SourceDetails = &AnomalySourceDetails{}
-			return v.SourceDetails.Deserialize(d)
-		case schemas.ReactiveAnomalySummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomalySummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = AnomalyStatus(ev)
-			return nil
-		case schemas.ReactiveAnomalySummary_Type:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveAnomalySummary_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = AnomalyType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Information about a reactive insight. This object is returned by ListInsights .
 type ReactiveInsight struct {
 
@@ -4089,82 +1638,6 @@ type ReactiveInsight struct {
 	Status InsightStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReactiveInsight) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReactiveInsight)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReactiveInsight) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.ReactiveInsight_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ReactiveInsight_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveInsight_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ReactiveInsight_Name, *v.Name)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ReactiveInsight_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ReactiveInsight_Severity, string(v.Severity))
-	}
-	if v.SsmOpsItemId != nil {
-		s.WriteString(schemas.ReactiveInsight_SsmOpsItemId, *v.SsmOpsItemId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReactiveInsight_Status, string(v.Status))
-	}
-}
-func (v *ReactiveInsight) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReactiveInsight, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReactiveInsight_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ReactiveInsight_Description, v.Description)
-		case schemas.ReactiveInsight_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ReactiveInsight_Id, v.Id)
-		case schemas.ReactiveInsight_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ReactiveInsight_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ReactiveInsight_Name, v.Name)
-		case schemas.ReactiveInsight_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ReactiveInsight_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveInsight_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ReactiveInsight_SsmOpsItemId:
-			v.SsmOpsItemId = new(string)
-			return d.ReadString(schemas.ReactiveInsight_SsmOpsItemId, v.SsmOpsItemId)
-		case schemas.ReactiveInsight_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveInsight_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Information about a reactive insight. This object is returned by
@@ -4208,81 +1681,6 @@ type ReactiveInsightSummary struct {
 	Status InsightStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReactiveInsightSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReactiveInsightSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReactiveInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedResourceArns(s, schemas.ReactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
-	if v.Id != nil {
-		s.WriteString(schemas.ReactiveInsightSummary_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveInsightSummary_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ReactiveInsightSummary_Name, *v.Name)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ReactiveInsightSummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.ReactiveInsightSummary_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ReactiveInsightSummary_Severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReactiveInsightSummary_Status, string(v.Status))
-	}
-}
-func (v *ReactiveInsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReactiveInsightSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReactiveInsightSummary_AssociatedResourceArns:
-			return deserializeAssociatedResourceArns(d, schemas.ReactiveInsightSummary_AssociatedResourceArns, &v.AssociatedResourceArns)
-		case schemas.ReactiveInsightSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ReactiveInsightSummary_Id, v.Id)
-		case schemas.ReactiveInsightSummary_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ReactiveInsightSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ReactiveInsightSummary_Name, v.Name)
-		case schemas.ReactiveInsightSummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ReactiveInsightSummary_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.ReactiveInsightSummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveInsightSummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ReactiveInsightSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveInsightSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Information about a reactive insight. This object is returned by DescribeInsight
@@ -4329,90 +1727,6 @@ type ReactiveOrganizationInsightSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReactiveOrganizationInsightSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReactiveOrganizationInsightSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReactiveOrganizationInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_AccountId, *v.AccountId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_Id, *v.Id)
-	}
-	if v.InsightTimeRange != nil {
-		s.WriteStruct(schemas.ReactiveOrganizationInsightSummary_InsightTimeRange)
-		v.InsightTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_Name, *v.Name)
-	}
-	if v.OrganizationalUnitId != nil {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_OrganizationalUnitId, *v.OrganizationalUnitId)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.ReactiveOrganizationInsightSummary_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.ReactiveOrganizationInsightSummary_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_Severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReactiveOrganizationInsightSummary_Status, string(v.Status))
-	}
-}
-func (v *ReactiveOrganizationInsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReactiveOrganizationInsightSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReactiveOrganizationInsightSummary_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ReactiveOrganizationInsightSummary_AccountId, v.AccountId)
-		case schemas.ReactiveOrganizationInsightSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ReactiveOrganizationInsightSummary_Id, v.Id)
-		case schemas.ReactiveOrganizationInsightSummary_InsightTimeRange:
-			v.InsightTimeRange = &InsightTimeRange{}
-			return v.InsightTimeRange.Deserialize(d)
-		case schemas.ReactiveOrganizationInsightSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ReactiveOrganizationInsightSummary_Name, v.Name)
-		case schemas.ReactiveOrganizationInsightSummary_OrganizationalUnitId:
-			v.OrganizationalUnitId = new(string)
-			return d.ReadString(schemas.ReactiveOrganizationInsightSummary_OrganizationalUnitId, v.OrganizationalUnitId)
-		case schemas.ReactiveOrganizationInsightSummary_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.ReactiveOrganizationInsightSummary_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.ReactiveOrganizationInsightSummary_Severity:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveOrganizationInsightSummary_Severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = InsightSeverity(ev)
-			return nil
-		case schemas.ReactiveOrganizationInsightSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReactiveOrganizationInsightSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InsightStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	Recommendation information to help you remediate detected anomalous behavior
 //
 // that generated an insight.
@@ -4444,58 +1758,6 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Recommendation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != nil {
-		s.WriteString(schemas.Recommendation_Category, *v.Category)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Recommendation_Description, *v.Description)
-	}
-	if v.Link != nil {
-		s.WriteString(schemas.Recommendation_Link, *v.Link)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Recommendation_Name, *v.Name)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.Recommendation_Reason, *v.Reason)
-	}
-	serializeRecommendationRelatedAnomalies(s, schemas.Recommendation_RelatedAnomalies, v.RelatedAnomalies)
-	serializeRecommendationRelatedEvents(s, schemas.Recommendation_RelatedEvents, v.RelatedEvents)
-}
-func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Recommendation_Category:
-			v.Category = new(string)
-			return d.ReadString(schemas.Recommendation_Category, v.Category)
-		case schemas.Recommendation_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Recommendation_Description, v.Description)
-		case schemas.Recommendation_Link:
-			v.Link = new(string)
-			return d.ReadString(schemas.Recommendation_Link, v.Link)
-		case schemas.Recommendation_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Recommendation_Name, v.Name)
-		case schemas.Recommendation_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.Recommendation_Reason, v.Reason)
-		case schemas.Recommendation_RelatedAnomalies:
-			return deserializeRecommendationRelatedAnomalies(d, schemas.Recommendation_RelatedAnomalies, &v.RelatedAnomalies)
-		case schemas.Recommendation_RelatedEvents:
-			return deserializeRecommendationRelatedEvents(d, schemas.Recommendation_RelatedEvents, &v.RelatedEvents)
-		}
-		return nil
-	})
-}
-
 // Information about an anomaly that is related to a recommendation.
 type RecommendationRelatedAnomaly struct {
 
@@ -4511,34 +1773,6 @@ type RecommendationRelatedAnomaly struct {
 	SourceDetails []RecommendationRelatedAnomalySourceDetail
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecommendationRelatedAnomaly) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedAnomaly)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnomalyId != nil {
-		s.WriteString(schemas.RecommendationRelatedAnomaly_AnomalyId, *v.AnomalyId)
-	}
-	serializeRecommendationRelatedAnomalyResources(s, schemas.RecommendationRelatedAnomaly_Resources, v.Resources)
-	serializeRelatedAnomalySourceDetails(s, schemas.RecommendationRelatedAnomaly_SourceDetails, v.SourceDetails)
-}
-func (v *RecommendationRelatedAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedAnomaly, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedAnomaly_AnomalyId:
-			v.AnomalyId = new(string)
-			return d.ReadString(schemas.RecommendationRelatedAnomaly_AnomalyId, v.AnomalyId)
-		case schemas.RecommendationRelatedAnomaly_Resources:
-			return deserializeRecommendationRelatedAnomalyResources(d, schemas.RecommendationRelatedAnomaly_Resources, &v.Resources)
-		case schemas.RecommendationRelatedAnomaly_SourceDetails:
-			return deserializeRelatedAnomalySourceDetails(d, schemas.RecommendationRelatedAnomaly_SourceDetails, &v.SourceDetails)
-		}
-		return nil
-	})
 }
 
 // Information about a resource in which DevOps Guru detected anomalous behavior.
@@ -4559,34 +1793,6 @@ type RecommendationRelatedAnomalyResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RecommendationRelatedAnomalyResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedAnomalyResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedAnomalyResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RecommendationRelatedAnomalyResource_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.RecommendationRelatedAnomalyResource_Type, *v.Type)
-	}
-}
-func (v *RecommendationRelatedAnomalyResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedAnomalyResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedAnomalyResource_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RecommendationRelatedAnomalyResource_Name, v.Name)
-		case schemas.RecommendationRelatedAnomalyResource_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.RecommendationRelatedAnomalyResource_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 //	Contains an array of RecommendationRelatedCloudWatchMetricsSourceDetail
 //
 // objects that contain the name and namespace of an Amazon CloudWatch metric.
@@ -4597,25 +1803,6 @@ type RecommendationRelatedAnomalySourceDetail struct {
 	CloudWatchMetrics []RecommendationRelatedCloudWatchMetricsSourceDetail
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecommendationRelatedAnomalySourceDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedAnomalySourceDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedAnomalySourceDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationRelatedCloudWatchMetricsSourceDetails(s, schemas.RecommendationRelatedAnomalySourceDetail_CloudWatchMetrics, v.CloudWatchMetrics)
-}
-func (v *RecommendationRelatedAnomalySourceDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedAnomalySourceDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedAnomalySourceDetail_CloudWatchMetrics:
-			return deserializeRecommendationRelatedCloudWatchMetricsSourceDetails(d, schemas.RecommendationRelatedAnomalySourceDetail_CloudWatchMetrics, &v.CloudWatchMetrics)
-		}
-		return nil
-	})
 }
 
 //	Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru.
@@ -4633,34 +1820,6 @@ type RecommendationRelatedCloudWatchMetricsSourceDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RecommendationRelatedCloudWatchMetricsSourceDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedCloudWatchMetricsSourceDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedCloudWatchMetricsSourceDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetricName != nil {
-		s.WriteString(schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_MetricName, *v.MetricName)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_Namespace, *v.Namespace)
-	}
-}
-func (v *RecommendationRelatedCloudWatchMetricsSourceDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedCloudWatchMetricsSourceDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_MetricName, v.MetricName)
-		case schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.RecommendationRelatedCloudWatchMetricsSourceDetail_Namespace, v.Namespace)
-		}
-		return nil
-	})
-}
-
 // Information about an event that is related to a recommendation.
 type RecommendationRelatedEvent struct {
 
@@ -4673,31 +1832,6 @@ type RecommendationRelatedEvent struct {
 	Resources []RecommendationRelatedEventResource
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecommendationRelatedEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RecommendationRelatedEvent_Name, *v.Name)
-	}
-	serializeRecommendationRelatedEventResources(s, schemas.RecommendationRelatedEvent_Resources, v.Resources)
-}
-func (v *RecommendationRelatedEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedEvent_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RecommendationRelatedEvent_Name, v.Name)
-		case schemas.RecommendationRelatedEvent_Resources:
-			return deserializeRecommendationRelatedEventResources(d, schemas.RecommendationRelatedEvent_Resources, &v.Resources)
-		}
-		return nil
-	})
 }
 
 //	Information about an Amazon Web Services resource that emitted and event that
@@ -4714,34 +1848,6 @@ type RecommendationRelatedEventResource struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecommendationRelatedEventResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecommendationRelatedEventResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecommendationRelatedEventResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.RecommendationRelatedEventResource_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.RecommendationRelatedEventResource_Type, *v.Type)
-	}
-}
-func (v *RecommendationRelatedEventResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecommendationRelatedEventResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecommendationRelatedEventResource_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RecommendationRelatedEventResource_Name, v.Name)
-		case schemas.RecommendationRelatedEventResource_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.RecommendationRelatedEventResource_Type, v.Type)
-		}
-		return nil
-	})
 }
 
 //	A collection of Amazon Web Services resources supported by DevOps Guru. The
@@ -4796,33 +1902,6 @@ type ResourceCollection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceCollection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceCollection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudFormation != nil {
-		s.WriteStruct(schemas.ResourceCollection_CloudFormation)
-		v.CloudFormation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagCollections(s, schemas.ResourceCollection_Tags, v.Tags)
-}
-func (v *ResourceCollection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceCollection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceCollection_CloudFormation:
-			v.CloudFormation = &CloudFormationCollection{}
-			return v.CloudFormation.Deserialize(d)
-		case schemas.ResourceCollection_Tags:
-			return deserializeTagCollections(d, schemas.ResourceCollection_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 //	Information about a filter used to specify which Amazon Web Services resources
 //
 // are analyzed for anomalous behavior by DevOps Guru.
@@ -4873,33 +1952,6 @@ type ResourceCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudFormation != nil {
-		s.WriteStruct(schemas.ResourceCollectionFilter_CloudFormation)
-		v.CloudFormation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagCollectionFilters(s, schemas.ResourceCollectionFilter_Tags, v.Tags)
-}
-func (v *ResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceCollectionFilter_CloudFormation:
-			v.CloudFormation = &CloudFormationCollectionFilter{}
-			return v.CloudFormation.Deserialize(d)
-		case schemas.ResourceCollectionFilter_Tags:
-			return deserializeTagCollectionFilters(d, schemas.ResourceCollectionFilter_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // Specifies values used to filter responses when searching for insights. You can
 // use a ResourceCollection , ServiceCollection , array of severities, and an array
 // of status values. Each filter type contains one or more values to search for. If
@@ -4928,44 +1980,6 @@ type SearchInsightsFilters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchInsightsFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchInsightsFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchInsightsFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.SearchInsightsFilters_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.SearchInsightsFilters_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInsightSeverities(s, schemas.SearchInsightsFilters_Severities, v.Severities)
-	serializeInsightStatuses(s, schemas.SearchInsightsFilters_Statuses, v.Statuses)
-}
-func (v *SearchInsightsFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchInsightsFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchInsightsFilters_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.SearchInsightsFilters_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.SearchInsightsFilters_Severities:
-			return deserializeInsightSeverities(d, schemas.SearchInsightsFilters_Severities, &v.Severities)
-		case schemas.SearchInsightsFilters_Statuses:
-			return deserializeInsightStatuses(d, schemas.SearchInsightsFilters_Statuses, &v.Statuses)
-		}
-		return nil
-	})
-}
-
 //	Filters you can use to specify which events are returned when ListEvents is
 //
 // called.
@@ -4992,44 +2006,6 @@ type SearchOrganizationInsightsFilters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchOrganizationInsightsFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchOrganizationInsightsFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchOrganizationInsightsFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.SearchOrganizationInsightsFilters_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCollection != nil {
-		s.WriteStruct(schemas.SearchOrganizationInsightsFilters_ServiceCollection)
-		v.ServiceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInsightSeverities(s, schemas.SearchOrganizationInsightsFilters_Severities, v.Severities)
-	serializeInsightStatuses(s, schemas.SearchOrganizationInsightsFilters_Statuses, v.Statuses)
-}
-func (v *SearchOrganizationInsightsFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchOrganizationInsightsFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchOrganizationInsightsFilters_ResourceCollection:
-			v.ResourceCollection = &ResourceCollection{}
-			return v.ResourceCollection.Deserialize(d)
-		case schemas.SearchOrganizationInsightsFilters_ServiceCollection:
-			v.ServiceCollection = &ServiceCollection{}
-			return v.ServiceCollection.Deserialize(d)
-		case schemas.SearchOrganizationInsightsFilters_Severities:
-			return deserializeInsightSeverities(d, schemas.SearchOrganizationInsightsFilters_Severities, &v.Severities)
-		case schemas.SearchOrganizationInsightsFilters_Statuses:
-			return deserializeInsightStatuses(d, schemas.SearchOrganizationInsightsFilters_Statuses, &v.Statuses)
-		}
-		return nil
-	})
-}
-
 // A collection of the names of Amazon Web Services services.
 type ServiceCollection struct {
 
@@ -5038,25 +2014,6 @@ type ServiceCollection struct {
 	ServiceNames []ServiceName
 
 	noSmithyDocumentSerde
-}
-
-func (v *ServiceCollection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceCollection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNames(s, schemas.ServiceCollection_ServiceNames, v.ServiceNames)
-}
-func (v *ServiceCollection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceCollection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceCollection_ServiceNames:
-			return deserializeServiceNames(d, schemas.ServiceCollection_ServiceNames, &v.ServiceNames)
-		}
-		return nil
-	})
 }
 
 // Represents the health of an Amazon Web Services service.
@@ -5077,46 +2034,6 @@ type ServiceHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalyzedResourceCount != nil {
-		s.WriteInt64(schemas.ServiceHealth_AnalyzedResourceCount, *v.AnalyzedResourceCount)
-	}
-	if v.Insight != nil {
-		s.WriteStruct(schemas.ServiceHealth_Insight)
-		v.Insight.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceName != "" {
-		s.WriteString(schemas.ServiceHealth_ServiceName, string(v.ServiceName))
-	}
-}
-func (v *ServiceHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceHealth_AnalyzedResourceCount:
-			v.AnalyzedResourceCount = new(int64)
-			return d.ReadInt64(schemas.ServiceHealth_AnalyzedResourceCount, v.AnalyzedResourceCount)
-		case schemas.ServiceHealth_Insight:
-			v.Insight = &ServiceInsightHealth{}
-			return v.Insight.Deserialize(d)
-		case schemas.ServiceHealth_ServiceName:
-			var ev string
-			if err := d.ReadString(schemas.ServiceHealth_ServiceName, &ev); err != nil {
-				return err
-			}
-			v.ServiceName = ServiceName(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains the number of open proactive and reactive insights in an analyzed
 // Amazon Web Services service.
 type ServiceInsightHealth struct {
@@ -5128,32 +2045,6 @@ type ServiceInsightHealth struct {
 	OpenReactiveInsights int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ServiceInsightHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceInsightHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceInsightHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OpenProactiveInsights != 0 {
-		s.WriteInt32(schemas.ServiceInsightHealth_OpenProactiveInsights, v.OpenProactiveInsights)
-	}
-	if v.OpenReactiveInsights != 0 {
-		s.WriteInt32(schemas.ServiceInsightHealth_OpenReactiveInsights, v.OpenReactiveInsights)
-	}
-}
-func (v *ServiceInsightHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceInsightHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceInsightHealth_OpenProactiveInsights:
-			return d.ReadInt32(schemas.ServiceInsightHealth_OpenProactiveInsights, &v.OpenProactiveInsights)
-		case schemas.ServiceInsightHealth_OpenReactiveInsights:
-			return d.ReadInt32(schemas.ServiceInsightHealth_OpenReactiveInsights, &v.OpenReactiveInsights)
-		}
-		return nil
-	})
 }
 
 //	Information about the integration of DevOps Guru with another Amazon Web
@@ -5174,46 +2065,6 @@ type ServiceIntegrationConfig struct {
 	OpsCenter *OpsCenterIntegration
 
 	noSmithyDocumentSerde
-}
-
-func (v *ServiceIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KMSServerSideEncryption != nil {
-		s.WriteStruct(schemas.ServiceIntegrationConfig_KMSServerSideEncryption)
-		v.KMSServerSideEncryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogsAnomalyDetection != nil {
-		s.WriteStruct(schemas.ServiceIntegrationConfig_LogsAnomalyDetection)
-		v.LogsAnomalyDetection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OpsCenter != nil {
-		s.WriteStruct(schemas.ServiceIntegrationConfig_OpsCenter)
-		v.OpsCenter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ServiceIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceIntegrationConfig_KMSServerSideEncryption:
-			v.KMSServerSideEncryption = &KMSServerSideEncryptionIntegration{}
-			return v.KMSServerSideEncryption.Deserialize(d)
-		case schemas.ServiceIntegrationConfig_LogsAnomalyDetection:
-			v.LogsAnomalyDetection = &LogsAnomalyDetectionIntegration{}
-			return v.LogsAnomalyDetection.Deserialize(d)
-		case schemas.ServiceIntegrationConfig_OpsCenter:
-			v.OpsCenter = &OpsCenterIntegration{}
-			return v.OpsCenter.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // An object that contains information about the estimated monthly cost to analyze
@@ -5250,53 +2101,6 @@ type ServiceResourceCost struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceResourceCost) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceResourceCost)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceResourceCost) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cost != 0 {
-		s.WriteFloat64(schemas.ServiceResourceCost_Cost, v.Cost)
-	}
-	if v.Count != 0 {
-		s.WriteInt32(schemas.ServiceResourceCost_Count, v.Count)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ServiceResourceCost_State, string(v.State))
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ServiceResourceCost_Type, *v.Type)
-	}
-	if v.UnitCost != 0 {
-		s.WriteFloat64(schemas.ServiceResourceCost_UnitCost, v.UnitCost)
-	}
-}
-func (v *ServiceResourceCost) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceResourceCost, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceResourceCost_Cost:
-			return d.ReadFloat64(schemas.ServiceResourceCost_Cost, &v.Cost)
-		case schemas.ServiceResourceCost_Count:
-			return d.ReadInt32(schemas.ServiceResourceCost_Count, &v.Count)
-		case schemas.ServiceResourceCost_State:
-			var ev string
-			if err := d.ReadString(schemas.ServiceResourceCost_State, &ev); err != nil {
-				return err
-			}
-			v.State = CostEstimationServiceResourceState(ev)
-			return nil
-		case schemas.ServiceResourceCost_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ServiceResourceCost_Type, v.Type)
-		case schemas.ServiceResourceCost_UnitCost:
-			return d.ReadFloat64(schemas.ServiceResourceCost_UnitCost, &v.UnitCost)
-		}
-		return nil
-	})
-}
-
 //	Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification
 //
 // Service topic.
@@ -5321,28 +2125,6 @@ type SnsChannelConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SnsChannelConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SnsChannelConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SnsChannelConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TopicArn != nil {
-		s.WriteString(schemas.SnsChannelConfig_TopicArn, *v.TopicArn)
-	}
-}
-func (v *SnsChannelConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SnsChannelConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SnsChannelConfig_TopicArn:
-			v.TopicArn = new(string)
-			return d.ReadString(schemas.SnsChannelConfig_TopicArn, v.TopicArn)
-		}
-		return nil
-	})
-}
-
 //	A time range used to specify when the behavior of an insight or anomaly
 //
 // started.
@@ -5355,34 +2137,6 @@ type StartTimeRange struct {
 	ToTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartTimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartTimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FromTime != nil {
-		s.WriteTime(schemas.StartTimeRange_FromTime, *v.FromTime)
-	}
-	if v.ToTime != nil {
-		s.WriteTime(schemas.StartTimeRange_ToTime, *v.ToTime)
-	}
-}
-func (v *StartTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartTimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartTimeRange_FromTime:
-			v.FromTime = new(time.Time)
-			return d.ReadTime(schemas.StartTimeRange_FromTime, v.FromTime)
-		case schemas.StartTimeRange_ToTime:
-			v.ToTime = new(time.Time)
-			return d.ReadTime(schemas.StartTimeRange_ToTime, v.ToTime)
-		}
-		return nil
-	})
 }
 
 // A collection of Amazon Web Services tags.
@@ -5450,31 +2204,6 @@ type TagCollection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagCollection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagCollection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBoundaryKey != nil {
-		s.WriteString(schemas.TagCollection_AppBoundaryKey, *v.AppBoundaryKey)
-	}
-	serializeTagValues(s, schemas.TagCollection_TagValues, v.TagValues)
-}
-func (v *TagCollection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagCollection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagCollection_AppBoundaryKey:
-			v.AppBoundaryKey = new(string)
-			return d.ReadString(schemas.TagCollection_AppBoundaryKey, v.AppBoundaryKey)
-		case schemas.TagCollection_TagValues:
-			return deserializeTagValues(d, schemas.TagCollection_TagValues, &v.TagValues)
-		}
-		return nil
-	})
-}
-
 // A collection of Amazon Web Services tags used to filter insights. This is used
 // to return insights generated from only resources that contain the tags in the
 // tag collection.
@@ -5510,31 +2239,6 @@ type TagCollectionFilter struct {
 	TagValues []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBoundaryKey != nil {
-		s.WriteString(schemas.TagCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
-	}
-	serializeTagValues(s, schemas.TagCollectionFilter_TagValues, v.TagValues)
-}
-func (v *TagCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagCollectionFilter_AppBoundaryKey:
-			v.AppBoundaryKey = new(string)
-			return d.ReadString(schemas.TagCollectionFilter_AppBoundaryKey, v.AppBoundaryKey)
-		case schemas.TagCollectionFilter_TagValues:
-			return deserializeTagValues(d, schemas.TagCollectionFilter_TagValues, &v.TagValues)
-		}
-		return nil
-	})
 }
 
 // Information about a collection of Amazon Web Services resources that are
@@ -5580,31 +2284,6 @@ type TagCostEstimationResourceCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagCostEstimationResourceCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagCostEstimationResourceCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagCostEstimationResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBoundaryKey != nil {
-		s.WriteString(schemas.TagCostEstimationResourceCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
-	}
-	serializeCostEstimationTagValues(s, schemas.TagCostEstimationResourceCollectionFilter_TagValues, v.TagValues)
-}
-func (v *TagCostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagCostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagCostEstimationResourceCollectionFilter_AppBoundaryKey:
-			v.AppBoundaryKey = new(string)
-			return d.ReadString(schemas.TagCostEstimationResourceCollectionFilter_AppBoundaryKey, v.AppBoundaryKey)
-		case schemas.TagCostEstimationResourceCollectionFilter_TagValues:
-			return deserializeCostEstimationTagValues(d, schemas.TagCostEstimationResourceCollectionFilter_TagValues, &v.TagValues)
-		}
-		return nil
-	})
-}
-
 //	Information about the health of Amazon Web Services resources in your account
 //
 // that are specified by an Amazon Web Services tag key.
@@ -5648,48 +2327,6 @@ type TagHealth struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagHealth) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagHealth)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagHealth) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalyzedResourceCount != nil {
-		s.WriteInt64(schemas.TagHealth_AnalyzedResourceCount, *v.AnalyzedResourceCount)
-	}
-	if v.AppBoundaryKey != nil {
-		s.WriteString(schemas.TagHealth_AppBoundaryKey, *v.AppBoundaryKey)
-	}
-	if v.Insight != nil {
-		s.WriteStruct(schemas.TagHealth_Insight)
-		v.Insight.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TagValue != nil {
-		s.WriteString(schemas.TagHealth_TagValue, *v.TagValue)
-	}
-}
-func (v *TagHealth) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagHealth, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagHealth_AnalyzedResourceCount:
-			v.AnalyzedResourceCount = new(int64)
-			return d.ReadInt64(schemas.TagHealth_AnalyzedResourceCount, v.AnalyzedResourceCount)
-		case schemas.TagHealth_AppBoundaryKey:
-			v.AppBoundaryKey = new(string)
-			return d.ReadString(schemas.TagHealth_AppBoundaryKey, v.AppBoundaryKey)
-		case schemas.TagHealth_Insight:
-			v.Insight = &InsightHealth{}
-			return v.Insight.Deserialize(d)
-		case schemas.TagHealth_TagValue:
-			v.TagValue = new(string)
-			return d.ReadString(schemas.TagHealth_TagValue, v.TagValue)
-		}
-		return nil
-	})
-}
-
 // A pair that contains metric values at the respective timestamp.
 type TimestampMetricValuePair struct {
 
@@ -5700,34 +2337,6 @@ type TimestampMetricValuePair struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimestampMetricValuePair) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimestampMetricValuePair)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimestampMetricValuePair) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetricValue != nil {
-		s.WriteFloat64(schemas.TimestampMetricValuePair_MetricValue, *v.MetricValue)
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.TimestampMetricValuePair_Timestamp, *v.Timestamp)
-	}
-}
-func (v *TimestampMetricValuePair) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimestampMetricValuePair, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimestampMetricValuePair_MetricValue:
-			v.MetricValue = new(float64)
-			return d.ReadFloat64(schemas.TimestampMetricValuePair_MetricValue, v.MetricValue)
-		case schemas.TimestampMetricValuePair_Timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.TimestampMetricValuePair_Timestamp, v.Timestamp)
-		}
-		return nil
-	})
 }
 
 //	Contains the names of Amazon Web Services CloudFormation stacks used to update
@@ -5741,25 +2350,6 @@ type UpdateCloudFormationCollectionFilter struct {
 	StackNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateCloudFormationCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCloudFormationCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCloudFormationCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateStackNames(s, schemas.UpdateCloudFormationCollectionFilter_StackNames, v.StackNames)
-}
-func (v *UpdateCloudFormationCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCloudFormationCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateCloudFormationCollectionFilter_StackNames:
-			return deserializeUpdateStackNames(d, schemas.UpdateCloudFormationCollectionFilter_StackNames, &v.StackNames)
-		}
-		return nil
-	})
 }
 
 //	Contains information used to update a collection of Amazon Web Services
@@ -5808,33 +2398,6 @@ type UpdateResourceCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateResourceCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateResourceCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudFormation != nil {
-		s.WriteStruct(schemas.UpdateResourceCollectionFilter_CloudFormation)
-		v.CloudFormation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeUpdateTagCollectionFilters(s, schemas.UpdateResourceCollectionFilter_Tags, v.Tags)
-}
-func (v *UpdateResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateResourceCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateResourceCollectionFilter_CloudFormation:
-			v.CloudFormation = &UpdateCloudFormationCollectionFilter{}
-			return v.CloudFormation.Deserialize(d)
-		case schemas.UpdateResourceCollectionFilter_Tags:
-			return deserializeUpdateTagCollectionFilters(d, schemas.UpdateResourceCollectionFilter_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 //	Information about updating the integration status of an Amazon Web Services
 //
 // service, such as Amazon Web Services Systems Manager, with DevOps Guru.
@@ -5854,46 +2417,6 @@ type UpdateServiceIntegrationConfig struct {
 	OpsCenter *OpsCenterIntegrationConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateServiceIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateServiceIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateServiceIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KMSServerSideEncryption != nil {
-		s.WriteStruct(schemas.UpdateServiceIntegrationConfig_KMSServerSideEncryption)
-		v.KMSServerSideEncryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogsAnomalyDetection != nil {
-		s.WriteStruct(schemas.UpdateServiceIntegrationConfig_LogsAnomalyDetection)
-		v.LogsAnomalyDetection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OpsCenter != nil {
-		s.WriteStruct(schemas.UpdateServiceIntegrationConfig_OpsCenter)
-		v.OpsCenter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateServiceIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateServiceIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateServiceIntegrationConfig_KMSServerSideEncryption:
-			v.KMSServerSideEncryption = &KMSServerSideEncryptionIntegrationConfig{}
-			return v.KMSServerSideEncryption.Deserialize(d)
-		case schemas.UpdateServiceIntegrationConfig_LogsAnomalyDetection:
-			v.LogsAnomalyDetection = &LogsAnomalyDetectionIntegrationConfig{}
-			return v.LogsAnomalyDetection.Deserialize(d)
-		case schemas.UpdateServiceIntegrationConfig_OpsCenter:
-			v.OpsCenter = &OpsCenterIntegrationConfig{}
-			return v.OpsCenter.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A new collection of Amazon Web Services resources that are defined by an Amazon
@@ -5932,31 +2455,6 @@ type UpdateTagCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTagCollectionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTagCollectionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTagCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBoundaryKey != nil {
-		s.WriteString(schemas.UpdateTagCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
-	}
-	serializeUpdateTagValues(s, schemas.UpdateTagCollectionFilter_TagValues, v.TagValues)
-}
-func (v *UpdateTagCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTagCollectionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTagCollectionFilter_AppBoundaryKey:
-			v.AppBoundaryKey = new(string)
-			return d.ReadString(schemas.UpdateTagCollectionFilter_AppBoundaryKey, v.AppBoundaryKey)
-		case schemas.UpdateTagCollectionFilter_TagValues:
-			return deserializeUpdateTagValues(d, schemas.UpdateTagCollectionFilter_TagValues, &v.TagValues)
-		}
-		return nil
-	})
-}
-
 // The field associated with the validation exception.
 type ValidationExceptionField struct {
 
@@ -5972,34 +2470,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
-		case schemas.ValidationExceptionField_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

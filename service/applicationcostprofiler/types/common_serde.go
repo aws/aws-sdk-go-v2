@@ -20,6 +20,7 @@ func serializeReportDefinitionList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func deserializeReportDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReportDefinition) error {
+	*v = make([]ReportDefinition, 0)
 	var vv ReportDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = ReportDefinition{}

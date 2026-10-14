@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Route for an API.
@@ -81,6 +80,45 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateRouteRequest_ApiId, *v.ApiId)
+	}
+	if v.ApiKeyRequired != nil {
+		s.WriteBool(schemas.CreateRouteRequest_ApiKeyRequired, *v.ApiKeyRequired)
+	}
+	serializeAuthorizationScopes(s, schemas.CreateRouteRequest_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.CreateRouteRequest_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.CreateRouteRequest_AuthorizerId, *v.AuthorizerId)
+	}
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.CreateRouteRequest_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.CreateRouteRequest_OperationName, *v.OperationName)
+	}
+	serializeRouteModels(s, schemas.CreateRouteRequest_RequestModels, v.RequestModels)
+	serializeRouteParameters(s, schemas.CreateRouteRequest_RequestParameters, v.RequestParameters)
+	if v.RouteKey != nil {
+		s.WriteString(schemas.CreateRouteRequest_RouteKey, *v.RouteKey)
+	}
+	if v.RouteResponseSelectionExpression != nil {
+		s.WriteString(schemas.CreateRouteRequest_RouteResponseSelectionExpression, *v.RouteResponseSelectionExpression)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.CreateRouteRequest_Target, *v.Target)
+	}
+}
+
 type CreateRouteOutput struct {
 
 	// Specifies whether a route is managed by API Gateway. If you created an API
@@ -144,77 +182,115 @@ type CreateRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouteResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.CreateRouteResult_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ApiKeyRequired != nil {
+		s.WriteBool(schemas.CreateRouteResult_ApiKeyRequired, *v.ApiKeyRequired)
+	}
+	serializeAuthorizationScopes(s, schemas.CreateRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.CreateRouteResult_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.CreateRouteResult_AuthorizerId, *v.AuthorizerId)
+	}
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.CreateRouteResult_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.CreateRouteResult_OperationName, *v.OperationName)
+	}
+	serializeRouteModels(s, schemas.CreateRouteResult_RequestModels, v.RequestModels)
+	serializeRouteParameters(s, schemas.CreateRouteResult_RequestParameters, v.RequestParameters)
+	if v.RouteId != nil {
+		s.WriteString(schemas.CreateRouteResult_RouteId, *v.RouteId)
+	}
+	if v.RouteKey != nil {
+		s.WriteString(schemas.CreateRouteResult_RouteKey, *v.RouteKey)
+	}
+	if v.RouteResponseSelectionExpression != nil {
+		s.WriteString(schemas.CreateRouteResult_RouteResponseSelectionExpression, *v.RouteResponseSelectionExpression)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.CreateRouteResult_Target, *v.Target)
+	}
+}
+func (v *CreateRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouteResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouteResult_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.CreateRouteResult_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.CreateRouteResult_ApiKeyRequired:
+			v.ApiKeyRequired = new(bool)
+			return d.ReadBool(schemas.CreateRouteResult_ApiKeyRequired, v.ApiKeyRequired)
+		case schemas.CreateRouteResult_AuthorizationScopes:
+			return deserializeAuthorizationScopes(d, schemas.CreateRouteResult_AuthorizationScopes, &v.AuthorizationScopes)
+		case schemas.CreateRouteResult_AuthorizationType:
+			var ev string
+			if err := d.ReadString(schemas.CreateRouteResult_AuthorizationType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationType = types.AuthorizationType(ev)
+			return nil
+		case schemas.CreateRouteResult_AuthorizerId:
+			v.AuthorizerId = new(string)
+			return d.ReadString(schemas.CreateRouteResult_AuthorizerId, v.AuthorizerId)
+		case schemas.CreateRouteResult_ModelSelectionExpression:
+			v.ModelSelectionExpression = new(string)
+			return d.ReadString(schemas.CreateRouteResult_ModelSelectionExpression, v.ModelSelectionExpression)
+		case schemas.CreateRouteResult_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.CreateRouteResult_OperationName, v.OperationName)
+		case schemas.CreateRouteResult_RequestModels:
+			return deserializeRouteModels(d, schemas.CreateRouteResult_RequestModels, &v.RequestModels)
+		case schemas.CreateRouteResult_RequestParameters:
+			return deserializeRouteParameters(d, schemas.CreateRouteResult_RequestParameters, &v.RequestParameters)
+		case schemas.CreateRouteResult_RouteId:
+			v.RouteId = new(string)
+			return d.ReadString(schemas.CreateRouteResult_RouteId, v.RouteId)
+		case schemas.CreateRouteResult_RouteKey:
+			v.RouteKey = new(string)
+			return d.ReadString(schemas.CreateRouteResult_RouteKey, v.RouteKey)
+		case schemas.CreateRouteResult_RouteResponseSelectionExpression:
+			v.RouteResponseSelectionExpression = new(string)
+			return d.ReadString(schemas.CreateRouteResult_RouteResponseSelectionExpression, v.RouteResponseSelectionExpression)
+		case schemas.CreateRouteResult_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.CreateRouteResult_Target, v.Target)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteRequest, schemas.CreateRouteResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteRequest, schemas.CreateRouteResult), output: &CreateRouteOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRoute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRouteValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,22 +305,8 @@ func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRoute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRoute",
-	}
 }

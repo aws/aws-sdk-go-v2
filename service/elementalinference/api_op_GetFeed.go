@@ -6,13 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -41,18 +37,6 @@ type GetFeedInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetFeedRequest_id, *v.Id)
-	}
 }
 
 type GetFeedOutput struct {
@@ -87,6 +71,12 @@ type GetFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that Elemental Inference assumes. Elemental Inference uses this role to
+	// access resources in your account on your behalf. This property is absent if the
+	// feed doesn't have an IAM role.
+	AccessRoleArn *string
+
 	// Information about the resource that is associated with the feed. It's possible
 	// that there is no associated resource. This is not an error.
 	Association *types.FeedAssociation
@@ -100,107 +90,29 @@ type GetFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetFeedResponse_arn, v.Arn)
-		case schemas.GetFeedResponse_association:
-			v.Association = &types.FeedAssociation{}
-			return v.Association.Deserialize(d)
-		case schemas.GetFeedResponse_dataEndpoints:
-			return deserializeStringList(d, schemas.GetFeedResponse_dataEndpoints, &v.DataEndpoints)
-		case schemas.GetFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetFeedResponse_id, v.Id)
-		case schemas.GetFeedResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetFeedResponse_name, v.Name)
-		case schemas.GetFeedResponse_outputs:
-			return deserializeGetOutputList(d, schemas.GetFeedResponse_outputs, &v.Outputs)
-		case schemas.GetFeedResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetFeedResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FeedStatus(ev)
-			return nil
-		case schemas.GetFeedResponse_tags:
-			return deserializeTagMap(d, schemas.GetFeedResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFeed{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse), output: &GetFeedOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFeed"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFeedValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFeed(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,12 +125,6 @@ func (c *Client) addOperationGetFeedMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -438,11 +344,3 @@ type GetFeedAPIClient interface {
 }
 
 var _ GetFeedAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetFeed(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFeed",
-	}
-}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.ListVocabularyFilters
+
+{"MaxResults":1,"NameContains":"__NameContains__","NextToken":"__NextToken__"}

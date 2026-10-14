@@ -5,13 +5,9 @@ package timestreamquery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the settings for your account that include the query pricing model
@@ -35,15 +31,6 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 
 type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAccountSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeAccountSettingsOutput struct {
@@ -74,95 +61,29 @@ type DescribeAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAccountSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAccountSettingsResponse_MaxQueryTCU:
-			v.MaxQueryTCU = new(int32)
-			return d.ReadInt32(schemas.DescribeAccountSettingsResponse_MaxQueryTCU, v.MaxQueryTCU)
-		case schemas.DescribeAccountSettingsResponse_QueryCompute:
-			v.QueryCompute = &types.QueryComputeResponse{}
-			return v.QueryCompute.Deserialize(d)
-		case schemas.DescribeAccountSettingsResponse_QueryPricingModel:
-			var ev string
-			if err := d.ReadString(schemas.DescribeAccountSettingsResponse_QueryPricingModel, &ev); err != nil {
-				return err
-			}
-			v.QueryPricingModel = types.QueryPricingModel(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAccountSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsRequest, schemas.DescribeAccountSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAccountSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsRequest, schemas.DescribeAccountSettingsResponse), output: &DescribeAccountSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAccountSettingsDiscoverEndpointMiddleware(stack, options, c); err != nil {
 		return err
 	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
-		return err
-	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +96,6 @@ func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,12 +154,4 @@ func (c *Client) fetchOpDescribeAccountSettingsDiscoverEndpoint(ctx context.Cont
 		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("no valid endpoint address returned by the endpoint discovery api")
 	}
 	return weighted, nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAccountSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAccountSettings",
-	}
 }

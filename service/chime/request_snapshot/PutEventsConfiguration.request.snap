@@ -1,0 +1,5 @@
+PUT /accounts/__AccountId__/bots/__BotId__/events-configuration
+
+Content-Type: application/json
+
+{"LambdaFunctionArn":"__LambdaFunctionArn__","OutboundEventsHTTPSEndpoint":"__OutboundEventsHTTPSEndpoint__"}

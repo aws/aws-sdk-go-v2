@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.DescribeObjects
+
+{"evaluateExpressions":true,"marker":"__Marker__","objectIds":["__Member__","__Member__"],"pipelineId":"__PipelineId__"}

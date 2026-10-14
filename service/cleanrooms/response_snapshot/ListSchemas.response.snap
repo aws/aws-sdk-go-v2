@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","schemaSummaries":[{"analysisMethod":"DIRECT_QUERY","analysisRuleTypes":["AGGREGATION","AGGREGATION"],"collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","name":"__Name__","resourceArn":"__ResourceArn__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"type":"TABLE","updateTime":946684800},{"analysisMethod":"DIRECT_QUERY","analysisRuleTypes":["AGGREGATION","AGGREGATION"],"collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","name":"__Name__","resourceArn":"__ResourceArn__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"type":"TABLE","updateTime":946684800}]}

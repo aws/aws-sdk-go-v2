@@ -5,10 +5,10 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Amazon Web Services services that have been granted streaming
@@ -48,6 +48,21 @@ type ListStreamingAccessForServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamingAccessForServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamingAccessForServicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamingAccessForServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamingAccessForServicesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamingAccessForServicesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListStreamingAccessForServicesOutput struct {
 
 	// A list of Amazon Web Services services that have streaming access to your
@@ -69,74 +84,48 @@ type ListStreamingAccessForServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamingAccessForServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamingAccessForServicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamingAccessForServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamingAccessForServicesOutput_NextToken, *v.NextToken)
+	}
+	serializeStreamingAccessDetailsList(s, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, v.StreamingAccessForServices)
+}
+func (v *ListStreamingAccessForServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamingAccessForServicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamingAccessForServicesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamingAccessForServicesOutput_NextToken, v.NextToken)
+		case schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices:
+			return deserializeStreamingAccessDetailsList(d, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, &v.StreamingAccessForServices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamingAccessForServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamingAccessForServices, schemas.ListStreamingAccessForServicesInput, schemas.ListStreamingAccessForServicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamingAccessForServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamingAccessForServices, schemas.ListStreamingAccessForServicesInput, schemas.ListStreamingAccessForServicesOutput), output: &ListStreamingAccessForServicesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamingAccessForServices{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreamingAccessForServices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreamingAccessForServices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +138,6 @@ func (c *Client) addOperationListStreamingAccessForServicesMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +244,3 @@ type ListStreamingAccessForServicesAPIClient interface {
 }
 
 var _ ListStreamingAccessForServicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStreamingAccessForServices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStreamingAccessForServices",
-	}
-}

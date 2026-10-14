@@ -1,0 +1,5 @@
+PUT /v1/accessTokens
+
+Content-Type: application/json
+
+{"expiresTime":"2000-01-01T00:00:00Z","name":"__Name__"}

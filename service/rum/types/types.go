@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -64,110 +62,6 @@ type AppMonitor struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppMonitor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppMonitor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppMonitor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppMonitorConfiguration != nil {
-		s.WriteStruct(schemas.AppMonitor_AppMonitorConfiguration)
-		v.AppMonitorConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Created != nil {
-		s.WriteString(schemas.AppMonitor_Created, *v.Created)
-	}
-	if v.CustomEvents != nil {
-		s.WriteStruct(schemas.AppMonitor_CustomEvents)
-		v.CustomEvents.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataStorage != nil {
-		s.WriteStruct(schemas.AppMonitor_DataStorage)
-		v.DataStorage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeobfuscationConfiguration != nil {
-		s.WriteStruct(schemas.AppMonitor_DeobfuscationConfiguration)
-		v.DeobfuscationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.AppMonitor_Domain, *v.Domain)
-	}
-	serializeAppMonitorDomainList(s, schemas.AppMonitor_DomainList, v.DomainList)
-	if v.Id != nil {
-		s.WriteString(schemas.AppMonitor_Id, *v.Id)
-	}
-	if v.LastModified != nil {
-		s.WriteString(schemas.AppMonitor_LastModified, *v.LastModified)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppMonitor_Name, *v.Name)
-	}
-	if v.Platform != "" {
-		s.WriteString(schemas.AppMonitor_Platform, string(v.Platform))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.AppMonitor_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.AppMonitor_Tags, v.Tags)
-}
-func (v *AppMonitor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppMonitor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppMonitor_AppMonitorConfiguration:
-			v.AppMonitorConfiguration = &AppMonitorConfiguration{}
-			return v.AppMonitorConfiguration.Deserialize(d)
-		case schemas.AppMonitor_Created:
-			v.Created = new(string)
-			return d.ReadString(schemas.AppMonitor_Created, v.Created)
-		case schemas.AppMonitor_CustomEvents:
-			v.CustomEvents = &CustomEvents{}
-			return v.CustomEvents.Deserialize(d)
-		case schemas.AppMonitor_DataStorage:
-			v.DataStorage = &DataStorage{}
-			return v.DataStorage.Deserialize(d)
-		case schemas.AppMonitor_DeobfuscationConfiguration:
-			v.DeobfuscationConfiguration = &DeobfuscationConfiguration{}
-			return v.DeobfuscationConfiguration.Deserialize(d)
-		case schemas.AppMonitor_Domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.AppMonitor_Domain, v.Domain)
-		case schemas.AppMonitor_DomainList:
-			return deserializeAppMonitorDomainList(d, schemas.AppMonitor_DomainList, &v.DomainList)
-		case schemas.AppMonitor_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AppMonitor_Id, v.Id)
-		case schemas.AppMonitor_LastModified:
-			v.LastModified = new(string)
-			return d.ReadString(schemas.AppMonitor_LastModified, v.LastModified)
-		case schemas.AppMonitor_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppMonitor_Name, v.Name)
-		case schemas.AppMonitor_Platform:
-			var ev string
-			if err := d.ReadString(schemas.AppMonitor_Platform, &ev); err != nil {
-				return err
-			}
-			v.Platform = AppMonitorPlatform(ev)
-			return nil
-		case schemas.AppMonitor_State:
-			var ev string
-			if err := d.ReadString(schemas.AppMonitor_State, &ev); err != nil {
-				return err
-			}
-			v.State = StateEnum(ev)
-			return nil
-		case schemas.AppMonitor_Tags:
-			return deserializeTagMap(d, schemas.AppMonitor_Tags, &v.Tags)
-		}
-		return nil
-	})
 }
 
 // This structure contains much of the configuration data for the app monitor.
@@ -257,63 +151,6 @@ type AppMonitorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppMonitorConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppMonitorConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppMonitorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowCookies != nil {
-		s.WriteBool(schemas.AppMonitorConfiguration_AllowCookies, *v.AllowCookies)
-	}
-	if v.EnableXRay != nil {
-		s.WriteBool(schemas.AppMonitorConfiguration_EnableXRay, *v.EnableXRay)
-	}
-	serializePages(s, schemas.AppMonitorConfiguration_ExcludedPages, v.ExcludedPages)
-	serializeFavoritePages(s, schemas.AppMonitorConfiguration_FavoritePages, v.FavoritePages)
-	if v.GuestRoleArn != nil {
-		s.WriteString(schemas.AppMonitorConfiguration_GuestRoleArn, *v.GuestRoleArn)
-	}
-	if v.IdentityPoolId != nil {
-		s.WriteString(schemas.AppMonitorConfiguration_IdentityPoolId, *v.IdentityPoolId)
-	}
-	serializePages(s, schemas.AppMonitorConfiguration_IncludedPages, v.IncludedPages)
-	if v.SessionSampleRate != 0 {
-		s.WriteFloat64(schemas.AppMonitorConfiguration_SessionSampleRate, v.SessionSampleRate)
-	}
-	serializeTelemetries(s, schemas.AppMonitorConfiguration_Telemetries, v.Telemetries)
-}
-func (v *AppMonitorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppMonitorConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppMonitorConfiguration_AllowCookies:
-			v.AllowCookies = new(bool)
-			return d.ReadBool(schemas.AppMonitorConfiguration_AllowCookies, v.AllowCookies)
-		case schemas.AppMonitorConfiguration_EnableXRay:
-			v.EnableXRay = new(bool)
-			return d.ReadBool(schemas.AppMonitorConfiguration_EnableXRay, v.EnableXRay)
-		case schemas.AppMonitorConfiguration_ExcludedPages:
-			return deserializePages(d, schemas.AppMonitorConfiguration_ExcludedPages, &v.ExcludedPages)
-		case schemas.AppMonitorConfiguration_FavoritePages:
-			return deserializeFavoritePages(d, schemas.AppMonitorConfiguration_FavoritePages, &v.FavoritePages)
-		case schemas.AppMonitorConfiguration_GuestRoleArn:
-			v.GuestRoleArn = new(string)
-			return d.ReadString(schemas.AppMonitorConfiguration_GuestRoleArn, v.GuestRoleArn)
-		case schemas.AppMonitorConfiguration_IdentityPoolId:
-			v.IdentityPoolId = new(string)
-			return d.ReadString(schemas.AppMonitorConfiguration_IdentityPoolId, v.IdentityPoolId)
-		case schemas.AppMonitorConfiguration_IncludedPages:
-			return deserializePages(d, schemas.AppMonitorConfiguration_IncludedPages, &v.IncludedPages)
-		case schemas.AppMonitorConfiguration_SessionSampleRate:
-			return d.ReadFloat64(schemas.AppMonitorConfiguration_SessionSampleRate, &v.SessionSampleRate)
-		case schemas.AppMonitorConfiguration_Telemetries:
-			return deserializeTelemetries(d, schemas.AppMonitorConfiguration_Telemetries, &v.Telemetries)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about the RUM app monitor.
 type AppMonitorDetails struct {
 
@@ -327,40 +164,6 @@ type AppMonitorDetails struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppMonitorDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppMonitorDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppMonitorDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.AppMonitorDetails_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppMonitorDetails_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.AppMonitorDetails_version, *v.Version)
-	}
-}
-func (v *AppMonitorDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppMonitorDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppMonitorDetails_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AppMonitorDetails_id, v.Id)
-		case schemas.AppMonitorDetails_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppMonitorDetails_name, v.Name)
-		case schemas.AppMonitorDetails_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.AppMonitorDetails_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // A structure that includes some data about app monitors and their settings.
@@ -389,66 +192,6 @@ type AppMonitorSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppMonitorSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppMonitorSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppMonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Created != nil {
-		s.WriteString(schemas.AppMonitorSummary_Created, *v.Created)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.AppMonitorSummary_Id, *v.Id)
-	}
-	if v.LastModified != nil {
-		s.WriteString(schemas.AppMonitorSummary_LastModified, *v.LastModified)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppMonitorSummary_Name, *v.Name)
-	}
-	if v.Platform != "" {
-		s.WriteString(schemas.AppMonitorSummary_Platform, string(v.Platform))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.AppMonitorSummary_State, string(v.State))
-	}
-}
-func (v *AppMonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppMonitorSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppMonitorSummary_Created:
-			v.Created = new(string)
-			return d.ReadString(schemas.AppMonitorSummary_Created, v.Created)
-		case schemas.AppMonitorSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AppMonitorSummary_Id, v.Id)
-		case schemas.AppMonitorSummary_LastModified:
-			v.LastModified = new(string)
-			return d.ReadString(schemas.AppMonitorSummary_LastModified, v.LastModified)
-		case schemas.AppMonitorSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppMonitorSummary_Name, v.Name)
-		case schemas.AppMonitorSummary_Platform:
-			var ev string
-			if err := d.ReadString(schemas.AppMonitorSummary_Platform, &ev); err != nil {
-				return err
-			}
-			v.Platform = AppMonitorPlatform(ev)
-			return nil
-		case schemas.AppMonitorSummary_State:
-			var ev string
-			if err := d.ReadString(schemas.AppMonitorSummary_State, &ev); err != nil {
-				return err
-			}
-			v.State = StateEnum(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that defines one error caused by a [BatchCreateRumMetricsDefinitions] operation.
 //
 // [BatchCreateRumMetricsDefinitions]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html
@@ -470,42 +213,6 @@ type BatchCreateRumMetricDefinitionsError struct {
 	MetricDefinition *MetricDefinitionRequest
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateRumMetricDefinitionsError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateRumMetricDefinitionsError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateRumMetricDefinitionsError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.BatchCreateRumMetricDefinitionsError_ErrorCode, *v.ErrorCode)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchCreateRumMetricDefinitionsError_ErrorMessage, *v.ErrorMessage)
-	}
-	if v.MetricDefinition != nil {
-		s.WriteStruct(schemas.BatchCreateRumMetricDefinitionsError_MetricDefinition)
-		v.MetricDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BatchCreateRumMetricDefinitionsError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateRumMetricDefinitionsError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateRumMetricDefinitionsError_ErrorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.BatchCreateRumMetricDefinitionsError_ErrorCode, v.ErrorCode)
-		case schemas.BatchCreateRumMetricDefinitionsError_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchCreateRumMetricDefinitionsError_ErrorMessage, v.ErrorMessage)
-		case schemas.BatchCreateRumMetricDefinitionsError_MetricDefinition:
-			v.MetricDefinition = &MetricDefinitionRequest{}
-			return v.MetricDefinition.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A structure that defines one error caused by a [BatchCreateRumMetricsDefinitions] operation.
@@ -531,40 +238,6 @@ type BatchDeleteRumMetricDefinitionsError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteRumMetricDefinitionsError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteRumMetricDefinitionsError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteRumMetricDefinitionsError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsError_ErrorCode, *v.ErrorCode)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsError_ErrorMessage, *v.ErrorMessage)
-	}
-	if v.MetricDefinitionId != nil {
-		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsError_MetricDefinitionId, *v.MetricDefinitionId)
-	}
-}
-func (v *BatchDeleteRumMetricDefinitionsError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteRumMetricDefinitionsError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteRumMetricDefinitionsError_ErrorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.BatchDeleteRumMetricDefinitionsError_ErrorCode, v.ErrorCode)
-		case schemas.BatchDeleteRumMetricDefinitionsError_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchDeleteRumMetricDefinitionsError_ErrorMessage, v.ErrorMessage)
-		case schemas.BatchDeleteRumMetricDefinitionsError_MetricDefinitionId:
-			v.MetricDefinitionId = new(string)
-			return d.ReadString(schemas.BatchDeleteRumMetricDefinitionsError_MetricDefinitionId, v.MetricDefinitionId)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about custom events for this app monitor.
 type CustomEvents struct {
 
@@ -573,32 +246,6 @@ type CustomEvents struct {
 	Status CustomEventsStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomEvents) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomEvents)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomEvents) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.CustomEvents_Status, string(v.Status))
-	}
-}
-func (v *CustomEvents) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomEvents, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomEvents_Status:
-			var ev string
-			if err := d.ReadString(schemas.CustomEvents_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = CustomEventsStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that contains the information about whether the app monitor stores
@@ -616,34 +263,6 @@ type CwLog struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CwLog) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CwLog)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CwLog) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CwLogEnabled != nil {
-		s.WriteBool(schemas.CwLog_CwLogEnabled, *v.CwLogEnabled)
-	}
-	if v.CwLogGroup != nil {
-		s.WriteString(schemas.CwLog_CwLogGroup, *v.CwLogGroup)
-	}
-}
-func (v *CwLog) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CwLog, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CwLog_CwLogEnabled:
-			v.CwLogEnabled = new(bool)
-			return d.ReadBool(schemas.CwLog_CwLogEnabled, v.CwLogEnabled)
-		case schemas.CwLog_CwLogGroup:
-			v.CwLogGroup = new(string)
-			return d.ReadString(schemas.CwLog_CwLogGroup, v.CwLogGroup)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about whether this app monitor stores a
 // copy of the telemetry data that RUM collects using CloudWatch Logs.
 type DataStorage struct {
@@ -656,30 +275,6 @@ type DataStorage struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataStorage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataStorage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataStorage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CwLog != nil {
-		s.WriteStruct(schemas.DataStorage_CwLog)
-		v.CwLog.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataStorage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataStorage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataStorage_CwLog:
-			v.CwLog = &CwLog{}
-			return v.CwLog.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 //	A structure that contains the configuration for how an app monitor can
 //
 // deobfuscate stack traces.
@@ -690,30 +285,6 @@ type DeobfuscationConfiguration struct {
 	JavaScriptSourceMaps *JavaScriptSourceMaps
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeobfuscationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeobfuscationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeobfuscationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JavaScriptSourceMaps != nil {
-		s.WriteStruct(schemas.DeobfuscationConfiguration_JavaScriptSourceMaps)
-		v.JavaScriptSourceMaps.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DeobfuscationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeobfuscationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeobfuscationConfiguration_JavaScriptSourceMaps:
-			v.JavaScriptSourceMaps = &JavaScriptSourceMaps{}
-			return v.JavaScriptSourceMaps.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 //	A structure that contains the configuration for how an app monitor can
@@ -733,38 +304,6 @@ type JavaScriptSourceMaps struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *JavaScriptSourceMaps) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JavaScriptSourceMaps)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JavaScriptSourceMaps) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Uri != nil {
-		s.WriteString(schemas.JavaScriptSourceMaps_S3Uri, *v.S3Uri)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.JavaScriptSourceMaps_Status, string(v.Status))
-	}
-}
-func (v *JavaScriptSourceMaps) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JavaScriptSourceMaps, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JavaScriptSourceMaps_S3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.JavaScriptSourceMaps_S3Uri, v.S3Uri)
-		case schemas.JavaScriptSourceMaps_Status:
-			var ev string
-			if err := d.ReadString(schemas.JavaScriptSourceMaps_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = DeobfuscationStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that displays the definition of one extended metric that RUM sends
@@ -809,61 +348,6 @@ type MetricDefinition struct {
 	ValueKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionKeysMap(s, schemas.MetricDefinition_DimensionKeys, v.DimensionKeys)
-	if v.EventPattern != nil {
-		s.WriteString(schemas.MetricDefinition_EventPattern, *v.EventPattern)
-	}
-	if v.MetricDefinitionId != nil {
-		s.WriteString(schemas.MetricDefinition_MetricDefinitionId, *v.MetricDefinitionId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.MetricDefinition_Name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.MetricDefinition_Namespace, *v.Namespace)
-	}
-	if v.UnitLabel != nil {
-		s.WriteString(schemas.MetricDefinition_UnitLabel, *v.UnitLabel)
-	}
-	if v.ValueKey != nil {
-		s.WriteString(schemas.MetricDefinition_ValueKey, *v.ValueKey)
-	}
-}
-func (v *MetricDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricDefinition_DimensionKeys:
-			return deserializeDimensionKeysMap(d, schemas.MetricDefinition_DimensionKeys, &v.DimensionKeys)
-		case schemas.MetricDefinition_EventPattern:
-			v.EventPattern = new(string)
-			return d.ReadString(schemas.MetricDefinition_EventPattern, v.EventPattern)
-		case schemas.MetricDefinition_MetricDefinitionId:
-			v.MetricDefinitionId = new(string)
-			return d.ReadString(schemas.MetricDefinition_MetricDefinitionId, v.MetricDefinitionId)
-		case schemas.MetricDefinition_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MetricDefinition_Name, v.Name)
-		case schemas.MetricDefinition_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.MetricDefinition_Namespace, v.Namespace)
-		case schemas.MetricDefinition_UnitLabel:
-			v.UnitLabel = new(string)
-			return d.ReadString(schemas.MetricDefinition_UnitLabel, v.UnitLabel)
-		case schemas.MetricDefinition_ValueKey:
-			v.ValueKey = new(string)
-			return d.ReadString(schemas.MetricDefinition_ValueKey, v.ValueKey)
-		}
-		return nil
-	})
 }
 
 // Use this structure to define one extended metric or custom metric that RUM will
@@ -1097,55 +581,6 @@ type MetricDefinitionRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MetricDefinitionRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricDefinitionRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionKeysMap(s, schemas.MetricDefinitionRequest_DimensionKeys, v.DimensionKeys)
-	if v.EventPattern != nil {
-		s.WriteString(schemas.MetricDefinitionRequest_EventPattern, *v.EventPattern)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.MetricDefinitionRequest_Name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.MetricDefinitionRequest_Namespace, *v.Namespace)
-	}
-	if v.UnitLabel != nil {
-		s.WriteString(schemas.MetricDefinitionRequest_UnitLabel, *v.UnitLabel)
-	}
-	if v.ValueKey != nil {
-		s.WriteString(schemas.MetricDefinitionRequest_ValueKey, *v.ValueKey)
-	}
-}
-func (v *MetricDefinitionRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricDefinitionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricDefinitionRequest_DimensionKeys:
-			return deserializeDimensionKeysMap(d, schemas.MetricDefinitionRequest_DimensionKeys, &v.DimensionKeys)
-		case schemas.MetricDefinitionRequest_EventPattern:
-			v.EventPattern = new(string)
-			return d.ReadString(schemas.MetricDefinitionRequest_EventPattern, v.EventPattern)
-		case schemas.MetricDefinitionRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MetricDefinitionRequest_Name, v.Name)
-		case schemas.MetricDefinitionRequest_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.MetricDefinitionRequest_Namespace, v.Namespace)
-		case schemas.MetricDefinitionRequest_UnitLabel:
-			v.UnitLabel = new(string)
-			return d.ReadString(schemas.MetricDefinitionRequest_UnitLabel, v.UnitLabel)
-		case schemas.MetricDefinitionRequest_ValueKey:
-			v.ValueKey = new(string)
-			return d.ReadString(schemas.MetricDefinitionRequest_ValueKey, v.ValueKey)
-		}
-		return nil
-	})
-}
-
 // A structure that displays information about one destination that CloudWatch RUM
 // sends extended metrics to.
 type MetricDestinationSummary struct {
@@ -1163,44 +598,6 @@ type MetricDestinationSummary struct {
 	IamRoleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricDestinationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricDestinationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricDestinationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Destination != "" {
-		s.WriteString(schemas.MetricDestinationSummary_Destination, string(v.Destination))
-	}
-	if v.DestinationArn != nil {
-		s.WriteString(schemas.MetricDestinationSummary_DestinationArn, *v.DestinationArn)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.MetricDestinationSummary_IamRoleArn, *v.IamRoleArn)
-	}
-}
-func (v *MetricDestinationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricDestinationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricDestinationSummary_Destination:
-			var ev string
-			if err := d.ReadString(schemas.MetricDestinationSummary_Destination, &ev); err != nil {
-				return err
-			}
-			v.Destination = MetricDestination(ev)
-			return nil
-		case schemas.MetricDestinationSummary_DestinationArn:
-			v.DestinationArn = new(string)
-			return d.ReadString(schemas.MetricDestinationSummary_DestinationArn, v.DestinationArn)
-		case schemas.MetricDestinationSummary_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.MetricDestinationSummary_IamRoleArn, v.IamRoleArn)
-		}
-		return nil
-	})
 }
 
 // A structure that defines a key and values that you can use to filter the
@@ -1226,31 +623,6 @@ type QueryFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *QueryFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.QueryFilter_Name, *v.Name)
-	}
-	serializeQueryFilterValueList(s, schemas.QueryFilter_Values, v.Values)
-}
-func (v *QueryFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryFilter_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.QueryFilter_Name, v.Name)
-		case schemas.QueryFilter_Values:
-			return deserializeQueryFilterValueList(d, schemas.QueryFilter_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // A structure that contains the information for one performance event that RUM
@@ -1290,52 +662,6 @@ type RumEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RumEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RumEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RumEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Details != nil {
-		s.WriteString(schemas.RumEvent_details, *v.Details)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RumEvent_id, *v.Id)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.RumEvent_metadata, *v.Metadata)
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.RumEvent_timestamp, *v.Timestamp)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.RumEvent_type, *v.Type)
-	}
-}
-func (v *RumEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RumEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RumEvent_details:
-			v.Details = new(string)
-			return d.ReadString(schemas.RumEvent_details, v.Details)
-		case schemas.RumEvent_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RumEvent_id, v.Id)
-		case schemas.RumEvent_metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.RumEvent_metadata, v.Metadata)
-		case schemas.RumEvent_timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.RumEvent_timestamp, v.Timestamp)
-		case schemas.RumEvent_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.RumEvent_type, v.Type)
-		}
-		return nil
-	})
-}
-
 // A structure that defines the time range that you want to retrieve results from.
 type TimeRange struct {
 
@@ -1351,30 +677,6 @@ type TimeRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.TimeRange_After, v.After)
-	if v.Before != 0 {
-		s.WriteInt64(schemas.TimeRange_Before, v.Before)
-	}
-}
-func (v *TimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeRange_After:
-			return d.ReadInt64(schemas.TimeRange_After, &v.After)
-		case schemas.TimeRange_Before:
-			return d.ReadInt64(schemas.TimeRange_Before, &v.Before)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about the user session that this batch of
 // events was collected from.
 type UserDetails struct {
@@ -1387,34 +689,6 @@ type UserDetails struct {
 	UserId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SessionId != nil {
-		s.WriteString(schemas.UserDetails_sessionId, *v.SessionId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.UserDetails_userId, *v.UserId)
-	}
-}
-func (v *UserDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserDetails_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.UserDetails_sessionId, v.SessionId)
-		case schemas.UserDetails_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.UserDetails_userId, v.UserId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteLifecycleHook&AutoScalingGroupName=__AutoScalingGroupName__&LifecycleHookName=__LifecycleHookName__&Version=2011-01-01

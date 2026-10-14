@@ -4,13 +4,8 @@ package codeartifact
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns the endpoint of a repository for a specific package format. A
@@ -75,30 +70,6 @@ type GetRepositoryEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRepositoryEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRepositoryEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRepositoryEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.GetRepositoryEndpointRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.GetRepositoryEndpointRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.EndpointType != "" {
-		s.WriteString(schemas.GetRepositoryEndpointRequest_endpointType, string(v.EndpointType))
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.GetRepositoryEndpointRequest_format, string(v.Format))
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.GetRepositoryEndpointRequest_repository, *v.Repository)
-	}
-}
-
 type GetRepositoryEndpointOutput struct {
 
 	//  A string that specifies the URL of the returned endpoint.
@@ -110,85 +81,29 @@ type GetRepositoryEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRepositoryEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRepositoryEndpointResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRepositoryEndpointResult_repositoryEndpoint:
-			v.RepositoryEndpoint = new(string)
-			return d.ReadString(schemas.GetRepositoryEndpointResult_repositoryEndpoint, v.RepositoryEndpoint)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRepositoryEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryEndpoint, schemas.GetRepositoryEndpointRequest, schemas.GetRepositoryEndpointResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRepositoryEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryEndpoint, schemas.GetRepositoryEndpointRequest, schemas.GetRepositoryEndpointResult), output: &GetRepositoryEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRepositoryEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRepositoryEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositoryEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +118,8 @@ func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRepositoryEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRepositoryEndpoint",
-	}
 }

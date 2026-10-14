@@ -1,0 +1,5 @@
+POST /GetRemediationsV2
+
+Content-Type: application/json
+
+{"Filters":{"CompositeFilters":[{"StringFilters":[{"FieldName":"Resource.Type","Filter":{"Value":"__Value__"}},{"FieldName":"Resource.Type","Filter":{"Value":"__Value__"}}]},{"StringFilters":[{"FieldName":"Resource.Type","Filter":{"Value":"__Value__"}},{"FieldName":"Resource.Type","Filter":{"Value":"__Value__"}}]}]},"GuidanceFormat":"All","MaxResults":1,"MetadataUid":"__MetadataUid__","NextToken":"__NextToken__","ShowGuidance":true,"TargetUid":"__TargetUid__"}

@@ -455,7 +455,7 @@ var _AppPackagesCleanup = smithy.NewSchema(smithy.ShapeID{
 var ArgumentException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ArgumentException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ArgumentException_message *smithy.Schema
 
 var Artifact = smithy.NewSchema(smithy.ShapeID{
@@ -575,7 +575,8 @@ var _Boolean = smithy.NewSchema(smithy.ShapeID{
 var CannotDeleteException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "CannotDeleteException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
 var CannotDeleteException_message *smithy.Schema
 
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
@@ -614,7 +615,7 @@ var CPU_clock *smithy.Schema
 var CreateRemoteAccessSessionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "CreateRemoteAccessSessionConfiguration",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateRemoteAccessSessionConfiguration_auxiliaryApps *smithy.Schema
 
 var CreateRemoteAccessSessionConfiguration_billingMethod *smithy.Schema
@@ -622,6 +623,8 @@ var CreateRemoteAccessSessionConfiguration_billingMethod *smithy.Schema
 var CreateRemoteAccessSessionConfiguration_vpceConfigurationArns *smithy.Schema
 
 var CreateRemoteAccessSessionConfiguration_deviceProxy *smithy.Schema
+
+var CreateRemoteAccessSessionConfiguration_parameters *smithy.Schema
 
 var CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1033,7 +1036,7 @@ var _Filter = smithy.NewSchema(smithy.ShapeID{
 var IdempotencyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "IdempotencyException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var IdempotencyException_message *smithy.Schema
 
 var IncompatibilityMessage = smithy.NewSchema(smithy.ShapeID{
@@ -1049,6 +1052,18 @@ var _IncompatibilityMessages = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IncompatibilityMessages",
 }, smithy.ShapeTypeList, 1)
 var _IncompatibilityMessages_member *smithy.Schema
+
+var InsightsType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "InsightsType",
+}, smithy.ShapeTypeEnum, 1)
+var InsightsType_TEST_REPORT *smithy.Schema
+
+var _InsightsTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "InsightsTypes",
+}, smithy.ShapeTypeList, 1)
+var _InsightsTypes_member *smithy.Schema
 
 var _InstanceLabels = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1108,13 +1123,14 @@ var InteractionMode_VIDEO_ONLY *smithy.Schema
 var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
 var InternalServiceException_message *smithy.Schema
 
 var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var InvalidOperationException_message *smithy.Schema
 
 var _IosPaths = smithy.NewSchema(smithy.ShapeID{
@@ -1126,7 +1142,7 @@ var _IosPaths_member *smithy.Schema
 var Job = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Job",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var Job_arn *smithy.Schema
 
 var Job_name *smithy.Schema
@@ -1157,6 +1173,50 @@ var Job_videoEndpoint *smithy.Schema
 
 var Job_videoCapture *smithy.Schema
 
+var Job_insights *smithy.Schema
+
+var JobInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "JobInsights",
+}, smithy.ShapeTypeStructure, 2)
+var JobInsights_status *smithy.Schema
+
+var JobInsights_testReport *smithy.Schema
+
+var JobReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "JobReport",
+}, smithy.ShapeTypeStructure, 3)
+var JobReport_message *smithy.Schema
+
+var JobReport_metrics *smithy.Schema
+
+var JobReport_jobDetailsUrl *smithy.Schema
+
+var JobReportMetrics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "JobReportMetrics",
+}, smithy.ShapeTypeStructure, 10)
+var JobReportMetrics_jobsTotal *smithy.Schema
+
+var JobReportMetrics_jobsPassed *smithy.Schema
+
+var JobReportMetrics_jobsFailed *smithy.Schema
+
+var JobReportMetrics_jobsSkipped *smithy.Schema
+
+var JobReportMetrics_jobsErrored *smithy.Schema
+
+var JobReportMetrics_jobsStopped *smithy.Schema
+
+var JobReportMetrics_jobsPassedPercentage *smithy.Schema
+
+var JobReportMetrics_totalJobExecutionDurationSeconds *smithy.Schema
+
+var JobReportMetrics_averageJobExecutionDurationSeconds *smithy.Schema
+
+var JobReportMetrics_medianJobExecutionDurationSeconds *smithy.Schema
+
 var _Jobs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Jobs",
@@ -1171,7 +1231,7 @@ var _JobTimeoutMinutes = smithy.NewSchema(smithy.ShapeID{
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var LimitExceededException_message *smithy.Schema
 
 var Location = smithy.NewSchema(smithy.ShapeID{
@@ -1273,13 +1333,13 @@ var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 var NotEligibleException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "NotEligibleException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotEligibleException_message *smithy.Schema
 
 var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NotFoundException_message *smithy.Schema
 
 var Offering = smithy.NewSchema(smithy.ShapeID{
@@ -1502,6 +1562,24 @@ var RemoteAccessEndpoints_remoteDriverEndpoint *smithy.Schema
 
 var RemoteAccessEndpoints_interactiveEndpoint *smithy.Schema
 
+var _RemoteAccessParameterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "RemoteAccessParameterKey",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteAccessParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "RemoteAccessParameters",
+}, smithy.ShapeTypeMap, 2)
+var _RemoteAccessParameters_key *smithy.Schema
+
+var _RemoteAccessParameters_value *smithy.Schema
+
+var _RemoteAccessParameterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "RemoteAccessParameterValue",
+}, smithy.ShapeTypeString, 0)
+
 var RemoteAccessSession = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "RemoteAccessSession",
@@ -1551,6 +1629,25 @@ var _RemoteAccessSessions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RemoteAccessSessions",
 }, smithy.ShapeTypeList, 1)
 var _RemoteAccessSessions_member *smithy.Schema
+
+var _ReportMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "ReportMessage",
+}, smithy.ShapeTypeString, 0)
+
+var ReportStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "ReportStatus",
+}, smithy.ShapeTypeEnum, 5)
+var ReportStatus_PENDING *smithy.Schema
+
+var ReportStatus_RUNNING *smithy.Schema
+
+var ReportStatus_COMPLETED *smithy.Schema
+
+var ReportStatus_SKIPPED *smithy.Schema
+
+var ReportStatus_ERRORED *smithy.Schema
 
 var Resolution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1614,7 +1711,7 @@ var _Rules_member *smithy.Schema
 var Run = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Run",
-}, smithy.ShapeTypeStructure, 35)
+}, smithy.ShapeTypeStructure, 37)
 var Run_arn *smithy.Schema
 
 var Run_name *smithy.Schema
@@ -1685,6 +1782,18 @@ var Run_executionRoleArn *smithy.Schema
 
 var Run_environmentVariables *smithy.Schema
 
+var Run_insightsTypes *smithy.Schema
+
+var Run_insights *smithy.Schema
+
+var RunInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "RunInsights",
+}, smithy.ShapeTypeStructure, 2)
+var RunInsights_status *smithy.Schema
+
+var RunInsights_jobReport *smithy.Schema
+
 var _Runs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Runs",
@@ -1748,7 +1857,7 @@ var SampleType_OPENGL_MAX_DRAWTIME *smithy.Schema
 var ScheduleRunConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ScheduleRunConfiguration",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var ScheduleRunConfiguration_extraDataPackageArn *smithy.Schema
 
 var ScheduleRunConfiguration_networkProfileArn *smithy.Schema
@@ -1772,6 +1881,8 @@ var ScheduleRunConfiguration_billingMethod *smithy.Schema
 var ScheduleRunConfiguration_environmentVariables *smithy.Schema
 
 var ScheduleRunConfiguration_executionRoleArn *smithy.Schema
+
+var ScheduleRunConfiguration_insightsTypes *smithy.Schema
 
 var ScheduleRunTest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1811,7 +1922,7 @@ var _SensitiveURL = smithy.NewSchema(smithy.ShapeID{
 var ServiceAccountException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ServiceAccountException",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ServiceAccountException_message *smithy.Schema
 
 var _ServiceDnsName = smithy.NewSchema(smithy.ShapeID{
@@ -1900,7 +2011,8 @@ var _TagList_member *smithy.Schema
 var TagOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TagOperationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagOperationException_message *smithy.Schema
 
 var TagOperationException_resourceName *smithy.Schema
@@ -1908,7 +2020,8 @@ var TagOperationException_resourceName *smithy.Schema
 var TagPolicyException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TagPolicyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TagPolicyException_message *smithy.Schema
 
 var TagPolicyException_resourceName *smithy.Schema
@@ -2073,6 +2186,38 @@ var _TestParameters_key *smithy.Schema
 
 var _TestParameters_value *smithy.Schema
 
+var TestReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "TestReport",
+}, smithy.ShapeTypeStructure, 3)
+var TestReport_message *smithy.Schema
+
+var TestReport_metrics *smithy.Schema
+
+var TestReport_testDetailsUrl *smithy.Schema
+
+var TestReportMetrics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "TestReportMetrics",
+}, smithy.ShapeTypeStructure, 9)
+var TestReportMetrics_testsTotal *smithy.Schema
+
+var TestReportMetrics_testsPassed *smithy.Schema
+
+var TestReportMetrics_testsFailed *smithy.Schema
+
+var TestReportMetrics_testsSkipped *smithy.Schema
+
+var TestReportMetrics_testsErrored *smithy.Schema
+
+var TestReportMetrics_testsOther *smithy.Schema
+
+var TestReportMetrics_testsPassedPercentage *smithy.Schema
+
+var TestReportMetrics_totalTestExecutionDurationSeconds *smithy.Schema
+
+var TestReportMetrics_medianTestExecutionDurationSeconds *smithy.Schema
+
 var _Tests = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Tests",
@@ -2114,7 +2259,8 @@ var TestType_XCTEST_UI *smithy.Schema
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
 var TooManyTagsException_resourceName *smithy.Schema
@@ -3714,6 +3860,10 @@ func init() {
 
 	DeviceProxy_port = DeviceProxy.AddMember("port", _DeviceProxyPort)
 
+	_RemoteAccessParameters_key = _RemoteAccessParameters.AddMember("key", _RemoteAccessParameterKey)
+
+	_RemoteAccessParameters_value = _RemoteAccessParameters.AddMember("value", _RemoteAccessParameterValue)
+
 	CreateRemoteAccessSessionConfiguration_auxiliaryApps = CreateRemoteAccessSessionConfiguration.AddMember("auxiliaryApps", _AuxiliaryAppArnList)
 
 	CreateRemoteAccessSessionConfiguration_billingMethod = CreateRemoteAccessSessionConfiguration.AddMember("billingMethod", BillingMethod)
@@ -3721,6 +3871,8 @@ func init() {
 	CreateRemoteAccessSessionConfiguration_vpceConfigurationArns = CreateRemoteAccessSessionConfiguration.AddMember("vpceConfigurationArns", _AmazonResourceNames)
 
 	CreateRemoteAccessSessionConfiguration_deviceProxy = CreateRemoteAccessSessionConfiguration.AddMember("deviceProxy", DeviceProxy)
+
+	CreateRemoteAccessSessionConfiguration_parameters = CreateRemoteAccessSessionConfiguration.AddMember("parameters", _RemoteAccessParameters)
 
 	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
 
@@ -4018,6 +4170,10 @@ func init() {
 
 	IdempotencyException_message = IdempotencyException.AddMember("message", _Message)
 
+	InsightsType_TEST_REPORT = InsightsType.AddMember("TEST_REPORT", smithyprelude.Unit)
+
+	_InsightsTypes_member = _InsightsTypes.AddMember("member", InsightsType)
+
 	_InstanceProfiles_member = _InstanceProfiles.AddMember("member", InstanceProfile)
 
 	InteractionMode_INTERACTIVE = InteractionMode.AddMember("INTERACTIVE", smithyprelude.Unit)
@@ -4058,6 +4214,44 @@ func init() {
 
 	TestType_XCTEST_UI = TestType.AddMember("XCTEST_UI", smithyprelude.Unit)
 
+	ReportStatus_PENDING = ReportStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	ReportStatus_RUNNING = ReportStatus.AddMember("RUNNING", smithyprelude.Unit)
+
+	ReportStatus_COMPLETED = ReportStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	ReportStatus_SKIPPED = ReportStatus.AddMember("SKIPPED", smithyprelude.Unit)
+
+	ReportStatus_ERRORED = ReportStatus.AddMember("ERRORED", smithyprelude.Unit)
+
+	TestReportMetrics_testsTotal = TestReportMetrics.AddMember("testsTotal", _Integer)
+
+	TestReportMetrics_testsPassed = TestReportMetrics.AddMember("testsPassed", _Integer)
+
+	TestReportMetrics_testsFailed = TestReportMetrics.AddMember("testsFailed", _Integer)
+
+	TestReportMetrics_testsSkipped = TestReportMetrics.AddMember("testsSkipped", _Integer)
+
+	TestReportMetrics_testsErrored = TestReportMetrics.AddMember("testsErrored", _Integer)
+
+	TestReportMetrics_testsOther = TestReportMetrics.AddMember("testsOther", _Integer)
+
+	TestReportMetrics_testsPassedPercentage = TestReportMetrics.AddMember("testsPassedPercentage", _Double)
+
+	TestReportMetrics_totalTestExecutionDurationSeconds = TestReportMetrics.AddMember("totalTestExecutionDurationSeconds", _Double)
+
+	TestReportMetrics_medianTestExecutionDurationSeconds = TestReportMetrics.AddMember("medianTestExecutionDurationSeconds", _Double)
+
+	TestReport_message = TestReport.AddMember("message", _ReportMessage)
+
+	TestReport_metrics = TestReport.AddMember("metrics", TestReportMetrics)
+
+	TestReport_testDetailsUrl = TestReport.AddMember("testDetailsUrl", _SensitiveURL)
+
+	JobInsights_status = JobInsights.AddMember("status", ReportStatus)
+
+	JobInsights_testReport = JobInsights.AddMember("testReport", TestReport)
+
 	Job_arn = Job.AddMember("arn", _AmazonResourceName)
 
 	Job_name = Job.AddMember("name", _Name)
@@ -4087,6 +4281,34 @@ func init() {
 	Job_videoEndpoint = Job.AddMember("videoEndpoint", _String)
 
 	Job_videoCapture = Job.AddMember("videoCapture", _VideoCapture)
+
+	Job_insights = Job.AddMember("insights", JobInsights)
+
+	JobReportMetrics_jobsTotal = JobReportMetrics.AddMember("jobsTotal", _Integer)
+
+	JobReportMetrics_jobsPassed = JobReportMetrics.AddMember("jobsPassed", _Integer)
+
+	JobReportMetrics_jobsFailed = JobReportMetrics.AddMember("jobsFailed", _Integer)
+
+	JobReportMetrics_jobsSkipped = JobReportMetrics.AddMember("jobsSkipped", _Integer)
+
+	JobReportMetrics_jobsErrored = JobReportMetrics.AddMember("jobsErrored", _Integer)
+
+	JobReportMetrics_jobsStopped = JobReportMetrics.AddMember("jobsStopped", _Integer)
+
+	JobReportMetrics_jobsPassedPercentage = JobReportMetrics.AddMember("jobsPassedPercentage", _Double)
+
+	JobReportMetrics_totalJobExecutionDurationSeconds = JobReportMetrics.AddMember("totalJobExecutionDurationSeconds", _Double)
+
+	JobReportMetrics_averageJobExecutionDurationSeconds = JobReportMetrics.AddMember("averageJobExecutionDurationSeconds", _Double)
+
+	JobReportMetrics_medianJobExecutionDurationSeconds = JobReportMetrics.AddMember("medianJobExecutionDurationSeconds", _Double)
+
+	JobReport_message = JobReport.AddMember("message", _ReportMessage)
+
+	JobReport_metrics = JobReport.AddMember("metrics", JobReportMetrics)
+
+	JobReport_jobDetailsUrl = JobReport.AddMember("jobDetailsUrl", _SensitiveURL)
 
 	_Jobs_member = _Jobs.AddMember("member", Job)
 
@@ -4292,6 +4514,10 @@ func init() {
 
 	_RemoteAccessSessions_member = _RemoteAccessSessions.AddMember("member", RemoteAccessSession)
 
+	RunInsights_status = RunInsights.AddMember("status", ReportStatus)
+
+	RunInsights_jobReport = RunInsights.AddMember("jobReport", JobReport)
+
 	Run_arn = Run.AddMember("arn", _AmazonResourceName)
 
 	Run_name = Run.AddMember("name", _Name)
@@ -4362,6 +4588,10 @@ func init() {
 
 	Run_environmentVariables = Run.AddMember("environmentVariables", _EnvironmentVariables)
 
+	Run_insightsTypes = Run.AddMember("insightsTypes", _InsightsTypes)
+
+	Run_insights = Run.AddMember("insights", RunInsights)
+
 	_Runs_member = _Runs.AddMember("member", Run)
 
 	SampleType_CPU = SampleType.AddMember("CPU", smithyprelude.Unit)
@@ -4429,6 +4659,8 @@ func init() {
 	ScheduleRunConfiguration_environmentVariables = ScheduleRunConfiguration.AddMember("environmentVariables", _EnvironmentVariables)
 
 	ScheduleRunConfiguration_executionRoleArn = ScheduleRunConfiguration.AddMember("executionRoleArn", _AmazonRoleResourceName)
+
+	ScheduleRunConfiguration_insightsTypes = ScheduleRunConfiguration.AddMember("insightsTypes", _InsightsTypes)
 
 	_TestParameters_key = _TestParameters.AddMember("key", _String)
 

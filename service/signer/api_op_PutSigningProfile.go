@@ -4,11 +4,10 @@ package signer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a signing profile. A signing profile is a code-signing template that
@@ -63,6 +62,38 @@ type PutSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSigningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSigningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.PutSigningProfileRequest_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.PutSigningProfileRequest_profileName, *v.ProfileName)
+	}
+	if v.SignatureValidityPeriod != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_signatureValidityPeriod)
+		v.SignatureValidityPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningParameters(s, schemas.PutSigningProfileRequest_signingParameters, v.SigningParameters)
+	serializeTagMap(s, schemas.PutSigningProfileRequest_tags, v.Tags)
+}
+
 type PutSigningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the signing profile created.
@@ -80,77 +111,60 @@ type PutSigningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSigningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSigningProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_arn, *v.Arn)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_profileVersion, *v.ProfileVersion)
+	}
+	if v.ProfileVersionArn != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_profileVersionArn, *v.ProfileVersionArn)
+	}
+}
+func (v *PutSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSigningProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSigningProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_arn, v.Arn)
+		case schemas.PutSigningProfileResponse_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_profileVersion, v.ProfileVersion)
+		case schemas.PutSigningProfileResponse_profileVersionArn:
+			v.ProfileVersionArn = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_profileVersionArn, v.ProfileVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSigningProfile, schemas.PutSigningProfileRequest, schemas.PutSigningProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSigningProfile, schemas.PutSigningProfileRequest, schemas.PutSigningProfileResponse), output: &PutSigningProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSigningProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSigningProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutSigningProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSigningProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +179,8 @@ func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutSigningProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutSigningProfile",
-	}
 }

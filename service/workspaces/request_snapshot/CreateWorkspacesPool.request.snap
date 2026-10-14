@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.CreateWorkspacesPool
+
+{"ApplicationSettings":{"SettingsGroup":"__SettingsGroup__","Status":"DISABLED"},"BundleId":"__BundleId__","Capacity":{"DesiredUserSessions":1},"Description":"__Description__","DirectoryId":"__DirectoryId__","PoolName":"__PoolName__","RunningMode":"AUTO_STOP","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeoutSettings":{"DisconnectTimeoutInSeconds":1,"IdleDisconnectTimeoutInSeconds":1,"MaxUserDurationInSeconds":1}}

@@ -1,0 +1,5 @@
+POST /messages/__MessageId__
+
+Content-Type: application/json
+
+{"content":{"s3Reference":{"bucket":"__Bucket__","key":"__Key__","objectVersion":"__ObjectVersion__"}}}

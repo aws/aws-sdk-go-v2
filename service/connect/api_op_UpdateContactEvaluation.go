@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates details about a contact evaluation in the specified Connect Customer
@@ -58,6 +57,24 @@ type UpdateContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationAnswersInputMap(s, schemas.UpdateContactEvaluationRequest_Answers, v.Answers)
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationRequest_EvaluationId, *v.EvaluationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeEvaluationNotesMap(s, schemas.UpdateContactEvaluationRequest_Notes, v.Notes)
+	serializeEvaluatorUserUnion(s, schemas.UpdateContactEvaluationRequest_UpdatedBy, v.UpdatedBy)
+}
+
 type UpdateContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -76,77 +93,54 @@ type UpdateContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationArn != nil {
+		s.WriteString(schemas.UpdateContactEvaluationResponse_EvaluationArn, *v.EvaluationArn)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationResponse_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *UpdateContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContactEvaluationResponse_EvaluationArn:
+			v.EvaluationArn = new(string)
+			return d.ReadString(schemas.UpdateContactEvaluationResponse_EvaluationArn, v.EvaluationArn)
+		case schemas.UpdateContactEvaluationResponse_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.UpdateContactEvaluationResponse_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactEvaluation, schemas.UpdateContactEvaluationRequest, schemas.UpdateContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactEvaluation, schemas.UpdateContactEvaluationRequest, schemas.UpdateContactEvaluationResponse), output: &UpdateContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactEvaluation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateContactEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateContactEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContactEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +155,8 @@ func (c *Client) addOperationUpdateContactEvaluationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateContactEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateContactEvaluation",
-	}
 }

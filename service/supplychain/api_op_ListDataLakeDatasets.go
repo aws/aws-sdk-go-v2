@@ -5,12 +5,8 @@ package supplychain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables you to programmatically view the list of Amazon Web Services Supply
@@ -62,27 +58,6 @@ type ListDataLakeDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataLakeDatasetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataLakeDatasetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataLakeDatasetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListDataLakeDatasetsRequest_instanceId, *v.InstanceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataLakeDatasetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.ListDataLakeDatasetsRequest_namespace, *v.Namespace)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataLakeDatasetsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // The response parameters of ListDataLakeDatasets.
 type ListDataLakeDatasetsOutput struct {
 
@@ -100,87 +75,29 @@ type ListDataLakeDatasetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataLakeDatasetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataLakeDatasetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataLakeDatasetsResponse_datasets:
-			return deserializeDataLakeDatasetList(d, schemas.ListDataLakeDatasetsResponse_datasets, &v.Datasets)
-		case schemas.ListDataLakeDatasetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataLakeDatasetsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataLakeDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakeDatasets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeDatasets, schemas.ListDataLakeDatasetsRequest, schemas.ListDataLakeDatasetsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakeDatasets{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeDatasets, schemas.ListDataLakeDatasetsRequest, schemas.ListDataLakeDatasetsResponse), output: &ListDataLakeDatasetsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataLakeDatasets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataLakeDatasetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakeDatasets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +110,6 @@ func (c *Client) addOperationListDataLakeDatasetsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -300,11 +211,3 @@ type ListDataLakeDatasetsAPIClient interface {
 }
 
 var _ ListDataLakeDatasetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataLakeDatasets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataLakeDatasets",
-	}
-}

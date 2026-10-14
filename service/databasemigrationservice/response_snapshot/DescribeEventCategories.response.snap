@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeEventCategories
+
+{"EventCategoryGroupList":[{"EventCategories":["__Member__","__Member__"],"SourceType":"__SourceType__"},{"EventCategories":["__Member__","__Member__"],"SourceType":"__SourceType__"}]}

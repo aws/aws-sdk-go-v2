@@ -5,14 +5,10 @@ package docdb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon DocumentDB cluster.
@@ -70,6 +66,10 @@ type CreateDBClusterInput struct {
 	//   - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
+	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
+	// cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the cluster parameter group to associate with this cluster.
 	DBClusterParameterGroupName *string
 
@@ -91,8 +91,8 @@ type CreateDBClusterInput struct {
 	// Logs. You can enable audit logs or profiler logs. For more information, see [Auditing Amazon DocumentDB Events]and [Profiling Amazon DocumentDB Operations]
 	// .
 	//
-	// [Profiling Amazon DocumentDB Operations]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
-	// [Auditing Amazon DocumentDB Events]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
+	// [Profiling Amazon DocumentDB Operations]: https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html
+	// [Auditing Amazon DocumentDB Events]: https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html
 	EnableCloudwatchLogsExports []string
 
 	// The version number of the database engine to use. The --engine-version will
@@ -175,7 +175,7 @@ type CreateDBClusterInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The port number on which the instances in the cluster accept connections.
@@ -251,90 +251,6 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.CreateDBClusterMessage_AvailabilityZones, v.AvailabilityZones)
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.CreateDBClusterMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DBSubnetGroupName != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.destinationRegion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DestinationRegion, *v.destinationRegion)
-	}
-	serializeLogTypeList(s, schemas.CreateDBClusterMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
-	if v.Engine != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_Engine, *v.Engine)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.ManageMasterUserPassword != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
-	}
-	if v.MasterUserPassword != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUserPassword, *v.MasterUserPassword)
-	}
-	if v.MasterUserSecretKmsKeyId != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
-	}
-	if v.MasterUsername != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUsername, *v.MasterUsername)
-	}
-	if v.NetworkType != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_NetworkType, *v.NetworkType)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateDBClusterMessage_Port, *v.Port)
-	}
-	if v.PreSignedUrl != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreSignedUrl, *v.PreSignedUrl)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.ServerlessV2ScalingConfiguration != nil {
-		s.WriteStruct(schemas.CreateDBClusterMessage_ServerlessV2ScalingConfiguration)
-		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceRegion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_SourceRegion, *v.SourceRegion)
-	}
-	if v.StorageEncrypted != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_StorageEncrypted, *v.StorageEncrypted)
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_StorageType, *v.StorageType)
-	}
-	serializeTagList(s, schemas.CreateDBClusterMessage_Tags, v.Tags)
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDBClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type CreateDBClusterOutput struct {
 
 	// Detailed information about a cluster.
@@ -346,88 +262,32 @@ type CreateDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBCluster{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult), output: &CreateDBClusterOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCreateDBClusterPresignURLMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDBClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -440,12 +300,6 @@ func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -531,14 +385,6 @@ func (c *presignAutoFillCreateDBClusterClient) PresignURL(ctx context.Context, s
 	}
 	presignOptFn := WithPresignClientFromClientOptions(optFn)
 	return c.client.PresignCreateDBCluster(ctx, input, presignOptFn)
-}
-
-func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDBCluster",
-	}
 }
 
 // PresignCreateDBCluster is used to generate a presigned HTTP Request which

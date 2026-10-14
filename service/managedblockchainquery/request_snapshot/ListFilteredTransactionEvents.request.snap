@@ -1,0 +1,5 @@
+POST /list-filtered-transaction-events
+
+Content-Type: application/json
+
+{"addressIdentifierFilter":{"transactionEventToAddress":["__Member__","__Member__"]},"confirmationStatusFilter":{"include":["FINAL","FINAL"]},"maxResults":1,"network":"__Network__","nextToken":"__NextToken__","sort":{"sortBy":"blockchainInstant","sortOrder":"ASCENDING"},"timeFilter":{"from":{"time":946684800},"to":{"time":946684800}},"voutFilter":{"voutSpent":true}}

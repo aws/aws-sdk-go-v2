@@ -1,0 +1,5 @@
+POST /v2/delete-function
+
+Content-Type: application/json
+
+{"serviceArn":"__ServiceArn__","serviceFunctionId":"__ServiceFunctionId__"}

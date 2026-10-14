@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.CreateFaceLivenessSession
+
+{"ClientRequestToken":"__ClientRequestToken__","KmsKeyId":"__KmsKeyId__","Settings":{"AuditImagesLimit":1,"ChallengePreferences":[{"Type":"FaceMovementAndLightChallenge","Versions":{"Maximum":"__Maximum__","Minimum":"__Minimum__"}},{"Type":"FaceMovementAndLightChallenge","Versions":{"Maximum":"__Maximum__","Minimum":"__Minimum__"}}],"OutputConfig":{"S3Bucket":"__S3Bucket__","S3KeyPrefix":"__S3KeyPrefix__"}}}

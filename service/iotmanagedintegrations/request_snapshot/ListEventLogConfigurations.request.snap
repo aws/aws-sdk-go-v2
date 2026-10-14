@@ -1,0 +1,3 @@
+GET /event-log-configurations?MaxResults=1&NextToken=__NextToken__
+
+

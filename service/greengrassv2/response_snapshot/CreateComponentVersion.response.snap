@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","creationTimestamp":946684800,"status":{"componentState":"REQUESTED","errors":{"key0":"__Value__"},"message":"__Message__","vendorGuidance":"ACTIVE","vendorGuidanceMessage":"__VendorGuidanceMessage__"}}

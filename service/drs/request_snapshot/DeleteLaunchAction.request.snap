@@ -1,0 +1,5 @@
+POST /DeleteLaunchAction
+
+Content-Type: application/json
+
+{"actionId":"__ActionId__","resourceId":"__ResourceId__"}

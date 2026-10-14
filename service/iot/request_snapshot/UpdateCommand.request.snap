@@ -1,0 +1,5 @@
+PATCH /commands/__CommandId__
+
+Content-Type: application/json
+
+{"deprecated":true,"description":"__Description__","displayName":"__DisplayName__"}

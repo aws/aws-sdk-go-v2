@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ExportServerlessCacheSnapshot&S3BucketName=__S3BucketName__&ServerlessCacheSnapshotName=__ServerlessCacheSnapshotName__&Version=2015-02-02

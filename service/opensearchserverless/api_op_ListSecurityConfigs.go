@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about configured OpenSearch Serverless security
@@ -49,6 +49,44 @@ type ListSecurityConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityConfigsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListSecurityConfigsRequest_type, string(v.Type))
+	}
+}
+func (v *ListSecurityConfigsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityConfigsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityConfigsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSecurityConfigsRequest_maxResults, v.MaxResults)
+		case schemas.ListSecurityConfigsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityConfigsRequest_nextToken, v.NextToken)
+		case schemas.ListSecurityConfigsRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.ListSecurityConfigsRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListSecurityConfigsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -65,77 +103,51 @@ type ListSecurityConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigsResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityConfigSummaries(s, schemas.ListSecurityConfigsResponse_securityConfigSummaries, v.SecurityConfigSummaries)
+}
+func (v *ListSecurityConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityConfigsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityConfigsResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityConfigsResponse_securityConfigSummaries:
+			return deserializeSecurityConfigSummaries(d, schemas.ListSecurityConfigsResponse_securityConfigSummaries, &v.SecurityConfigSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigs, schemas.ListSecurityConfigsRequest, schemas.ListSecurityConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSecurityConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigs, schemas.ListSecurityConfigsRequest, schemas.ListSecurityConfigsResponse), output: &ListSecurityConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSecurityConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSecurityConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSecurityConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSecurityConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +160,6 @@ func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +249,3 @@ type ListSecurityConfigsAPIClient interface {
 }
 
 var _ ListSecurityConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSecurityConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSecurityConfigs",
-	}
-}

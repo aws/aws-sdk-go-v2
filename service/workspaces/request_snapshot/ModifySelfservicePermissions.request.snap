@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifySelfservicePermissions
+
+{"ResourceId":"__ResourceId__","SelfservicePermissions":{"ChangeComputeType":"ENABLED","IncreaseVolumeSize":"ENABLED","RebuildWorkspace":"ENABLED","RestartWorkspace":"ENABLED","SwitchRunningMode":"ENABLED"}}

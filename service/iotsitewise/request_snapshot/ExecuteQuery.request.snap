@@ -1,0 +1,5 @@
+POST /queries/execution
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","maxResults":1,"nextToken":"__NextToken__","queryStatement":"__QueryStatement__"}

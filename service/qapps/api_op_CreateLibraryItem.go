@@ -4,12 +4,7 @@ package qapps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -55,25 +50,6 @@ type CreateLibraryItemInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLibraryItemInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreateLibraryItemInput_appId, *v.AppId)
-	}
-	if v.AppVersion != nil {
-		s.WriteInt32(schemas.CreateLibraryItemInput_appVersion, *v.AppVersion)
-	}
-	serializeCategoryIdList(s, schemas.CreateLibraryItemInput_categories, v.Categories)
-	if v.InstanceId != nil {
-		s.WriteString(schemas.CreateLibraryItemInput_instanceId, *v.InstanceId)
-	}
-}
-
 type CreateLibraryItemOutput struct {
 
 	// The date and time the library item was created.
@@ -116,106 +92,29 @@ type CreateLibraryItemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLibraryItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLibraryItemOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLibraryItemOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateLibraryItemOutput_createdAt, v.CreatedAt)
-		case schemas.CreateLibraryItemOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_createdBy, v.CreatedBy)
-		case schemas.CreateLibraryItemOutput_isVerified:
-			v.IsVerified = new(bool)
-			return d.ReadBool(schemas.CreateLibraryItemOutput_isVerified, v.IsVerified)
-		case schemas.CreateLibraryItemOutput_libraryItemId:
-			v.LibraryItemId = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_libraryItemId, v.LibraryItemId)
-		case schemas.CreateLibraryItemOutput_ratingCount:
-			v.RatingCount = new(int32)
-			return d.ReadInt32(schemas.CreateLibraryItemOutput_ratingCount, v.RatingCount)
-		case schemas.CreateLibraryItemOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_status, v.Status)
-		case schemas.CreateLibraryItemOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateLibraryItemOutput_updatedAt, v.UpdatedAt)
-		case schemas.CreateLibraryItemOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLibraryItem, schemas.CreateLibraryItemInput, schemas.CreateLibraryItemOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLibraryItem, schemas.CreateLibraryItemInput, schemas.CreateLibraryItemOutput), output: &CreateLibraryItemOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLibraryItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLibraryItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLibraryItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +129,8 @@ func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLibraryItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLibraryItem",
-	}
 }

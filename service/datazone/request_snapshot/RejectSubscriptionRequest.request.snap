@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/subscription-requests/__Identifier__/reject
+
+Content-Type: application/json
+
+{"decisionComment":"__DecisionComment__"}

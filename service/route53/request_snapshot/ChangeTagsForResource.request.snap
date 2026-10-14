@@ -1,0 +1,5 @@
+POST /2013-04-01/tags/healthcheck/__ResourceId__
+
+Content-Type: application/xml
+
+<ChangeTagsForResourceRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><AddTags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></AddTags><RemoveTagKeys><Key>__Member__</Key><Key>__Member__</Key></RemoveTagKeys></ChangeTagsForResourceRequest>

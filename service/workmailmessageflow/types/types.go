@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -43,30 +41,6 @@ type RawMessageContent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RawMessageContent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RawMessageContent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RawMessageContent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Reference != nil {
-		s.WriteStruct(schemas.RawMessageContent_s3Reference)
-		v.S3Reference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RawMessageContent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RawMessageContent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RawMessageContent_s3Reference:
-			v.S3Reference = &S3Reference{}
-			return v.S3Reference.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Amazon S3 object representing the updated message content, in MIME format.
 //
 // The region for the S3 bucket containing the S3 object must match the region
@@ -90,40 +64,6 @@ type S3Reference struct {
 	ObjectVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3Reference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Reference)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Reference) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bucket != nil {
-		s.WriteString(schemas.S3Reference_bucket, *v.Bucket)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.S3Reference_key, *v.Key)
-	}
-	if v.ObjectVersion != nil {
-		s.WriteString(schemas.S3Reference_objectVersion, *v.ObjectVersion)
-	}
-}
-func (v *S3Reference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Reference, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Reference_bucket:
-			v.Bucket = new(string)
-			return d.ReadString(schemas.S3Reference_bucket, v.Bucket)
-		case schemas.S3Reference_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.S3Reference_key, v.Key)
-		case schemas.S3Reference_objectVersion:
-			v.ObjectVersion = new(string)
-			return d.ReadString(schemas.S3Reference_objectVersion, v.ObjectVersion)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Detects text in the input document. Amazon Textract can detect lines of text
@@ -57,6 +56,20 @@ type DetectDocumentTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDocumentTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDocumentTextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDocumentTextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteStruct(schemas.DetectDocumentTextRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectDocumentTextOutput struct {
 
 	// An array of Block objects that contain the text that's detected in the document.
@@ -75,77 +88,59 @@ type DetectDocumentTextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDocumentTextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDocumentTextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDocumentTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	if v.DetectDocumentTextModelVersion != nil {
+		s.WriteString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.DetectDocumentTextResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectDocumentTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectDocumentTextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectDocumentTextResponse_Blocks:
+			return deserializeBlockList(d, schemas.DetectDocumentTextResponse_Blocks, &v.Blocks)
+		case schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion:
+			v.DetectDocumentTextModelVersion = new(string)
+			return d.ReadString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, v.DetectDocumentTextModelVersion)
+		case schemas.DetectDocumentTextResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDocumentText, schemas.DetectDocumentTextRequest, schemas.DetectDocumentTextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectDocumentText{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDocumentText, schemas.DetectDocumentTextRequest, schemas.DetectDocumentTextResponse), output: &DetectDocumentTextOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectDocumentText{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DetectDocumentText"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDetectDocumentTextValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDocumentText(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +155,8 @@ func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDetectDocumentText(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DetectDocumentText",
-	}
 }

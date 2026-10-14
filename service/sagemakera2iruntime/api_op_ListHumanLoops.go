@@ -5,12 +5,8 @@ package sagemakera2iruntime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,33 +57,6 @@ type ListHumanLoopsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListHumanLoopsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListHumanLoopsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListHumanLoopsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTimeAfter != nil {
-		s.WriteTime(schemas.ListHumanLoopsRequest_CreationTimeAfter, *v.CreationTimeAfter)
-	}
-	if v.CreationTimeBefore != nil {
-		s.WriteTime(schemas.ListHumanLoopsRequest_CreationTimeBefore, *v.CreationTimeBefore)
-	}
-	if v.FlowDefinitionArn != nil {
-		s.WriteString(schemas.ListHumanLoopsRequest_FlowDefinitionArn, *v.FlowDefinitionArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListHumanLoopsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListHumanLoopsRequest_NextToken, *v.NextToken)
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListHumanLoopsRequest_SortOrder, string(v.SortOrder))
-	}
-}
-
 type ListHumanLoopsOutput struct {
 
 	// An array of objects that contain information about the human loops.
@@ -104,87 +73,29 @@ type ListHumanLoopsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListHumanLoopsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListHumanLoopsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListHumanLoopsResponse_HumanLoopSummaries:
-			return deserializeHumanLoopSummaries(d, schemas.ListHumanLoopsResponse_HumanLoopSummaries, &v.HumanLoopSummaries)
-		case schemas.ListHumanLoopsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListHumanLoopsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHumanLoops{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanLoops, schemas.ListHumanLoopsRequest, schemas.ListHumanLoopsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHumanLoops{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanLoops, schemas.ListHumanLoopsRequest, schemas.ListHumanLoopsResponse), output: &ListHumanLoopsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHumanLoops"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHumanLoopsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHumanLoops(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,12 +108,6 @@ func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -305,11 +210,3 @@ type ListHumanLoopsAPIClient interface {
 }
 
 var _ ListHumanLoopsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHumanLoops(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHumanLoops",
-	}
-}

@@ -5,9 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an IoT software package that can be deployed to your fleet.
@@ -53,6 +53,25 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePackageRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePackageRequest_description, *v.Description)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.CreatePackageRequest_packageName, *v.PackageName)
+	}
+	serializeTagMap(s, schemas.CreatePackageRequest_tags, v.Tags)
+}
+
 type CreatePackageOutput struct {
 
 	// The package description.
@@ -70,65 +89,54 @@ type CreatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePackageResponse_description, *v.Description)
+	}
+	if v.PackageArn != nil {
+		s.WriteString(schemas.CreatePackageResponse_packageArn, *v.PackageArn)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.CreatePackageResponse_packageName, *v.PackageName)
+	}
+}
+func (v *CreatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePackageResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_description, v.Description)
+		case schemas.CreatePackageResponse_packageArn:
+			v.PackageArn = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_packageArn, v.PackageArn)
+		case schemas.CreatePackageResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_packageName, v.PackageName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse), output: &CreatePackageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +146,6 @@ func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreatePackageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +158,6 @@ func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +197,4 @@ func (m *idempotencyToken_initializeOpCreatePackage) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreatePackageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePackage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePackage",
-	}
 }

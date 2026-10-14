@@ -5,10 +5,10 @@ package kms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about [custom key stores] in the account and Region.
@@ -114,6 +114,27 @@ type DescribeCustomKeyStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomKeyStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomKeyStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomKeyStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomKeyStoreId != nil {
+		s.WriteString(schemas.DescribeCustomKeyStoresRequest_CustomKeyStoreId, *v.CustomKeyStoreId)
+	}
+	if v.CustomKeyStoreName != nil {
+		s.WriteString(schemas.DescribeCustomKeyStoresRequest_CustomKeyStoreName, *v.CustomKeyStoreName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeCustomKeyStoresRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCustomKeyStoresRequest_Marker, *v.Marker)
+	}
+}
+
 type DescribeCustomKeyStoresOutput struct {
 
 	// Contains metadata about each custom key store.
@@ -135,74 +156,53 @@ type DescribeCustomKeyStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomKeyStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomKeyStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomKeyStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomKeyStoresList(s, schemas.DescribeCustomKeyStoresResponse_CustomKeyStores, v.CustomKeyStores)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeCustomKeyStoresResponse_NextMarker, *v.NextMarker)
+	}
+	if v.Truncated != false {
+		s.WriteBool(schemas.DescribeCustomKeyStoresResponse_Truncated, v.Truncated)
+	}
+}
+func (v *DescribeCustomKeyStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomKeyStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomKeyStoresResponse_CustomKeyStores:
+			return deserializeCustomKeyStoresList(d, schemas.DescribeCustomKeyStoresResponse_CustomKeyStores, &v.CustomKeyStores)
+		case schemas.DescribeCustomKeyStoresResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeCustomKeyStoresResponse_NextMarker, v.NextMarker)
+		case schemas.DescribeCustomKeyStoresResponse_Truncated:
+			return d.ReadBool(schemas.DescribeCustomKeyStoresResponse_Truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomKeyStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomKeyStores, schemas.DescribeCustomKeyStoresRequest, schemas.DescribeCustomKeyStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomKeyStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomKeyStores, schemas.DescribeCustomKeyStoresRequest, schemas.DescribeCustomKeyStoresResponse), output: &DescribeCustomKeyStoresOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCustomKeyStores{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCustomKeyStores"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCustomKeyStores(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,12 +215,6 @@ func (c *Client) addOperationDescribeCustomKeyStoresMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -325,11 +319,3 @@ type DescribeCustomKeyStoresAPIClient interface {
 }
 
 var _ DescribeCustomKeyStoresAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeCustomKeyStores(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCustomKeyStores",
-	}
-}

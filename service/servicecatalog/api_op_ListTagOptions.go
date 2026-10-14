@@ -5,12 +5,8 @@ package servicecatalog
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the specified TagOptions or all TagOptions.
@@ -45,26 +41,6 @@ type ListTagOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagOptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTagOptionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTagOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filters != nil {
-		s.WriteStruct(schemas.ListTagOptionsInput_Filters)
-		v.Filters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListTagOptionsInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListTagOptionsInput_PageToken, *v.PageToken)
-	}
-}
-
 type ListTagOptionsOutput struct {
 
 	// The page token for the next set of results. To retrieve the first set of
@@ -80,84 +56,26 @@ type ListTagOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTagOptionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTagOptionsOutput_PageToken:
-			v.PageToken = new(string)
-			return d.ReadString(schemas.ListTagOptionsOutput_PageToken, v.PageToken)
-		case schemas.ListTagOptionsOutput_TagOptionDetails:
-			return deserializeTagOptionDetails(d, schemas.ListTagOptionsOutput_TagOptionDetails, &v.TagOptionDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTagOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagOptions, schemas.ListTagOptionsInput, schemas.ListTagOptionsOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagOptions{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagOptions, schemas.ListTagOptionsInput, schemas.ListTagOptionsOutput), output: &ListTagOptionsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +88,6 @@ func (c *Client) addOperationListTagOptionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +184,3 @@ type ListTagOptionsAPIClient interface {
 }
 
 var _ ListTagOptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTagOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTagOptions",
-	}
-}

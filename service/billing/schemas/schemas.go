@@ -28,9 +28,34 @@ var DisassociateSourceViews = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DisassociateSourceViews",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetBillingPreferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetBillingPreferences",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetBillingView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "GetBillingView",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetCreditAllocationHistory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCreditAllocationHistory",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetCredits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCredits",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetEnterpriseSupportChargeSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportChargeSummary",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetEnterpriseSupportContractDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportContractDetails",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -45,6 +70,26 @@ var ListBillingViews = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/",
 	Code: 200})
 
+var ListBillingViewSegments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegments",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListBusinessSupportAccountCharges = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportAccountCharges",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListBusinessSupportSubscriptionHistory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportSubscriptionHistory",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListEnterpriseSupportLinkedAccountCharges = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListEnterpriseSupportLinkedAccountCharges",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListSourceViewsForBillingView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ListSourceViewsForBillingView",
@@ -55,6 +100,11 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var RedeemCredits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "RedeemCredits",
+}, smithy.ShapeTypeOperation, 0)
+
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "TagResource",
@@ -63,6 +113,11 @@ var TagResource = smithy.NewSchema(smithy.ShapeID{
 var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "UntagResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateBillingPreferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "UpdateBillingPreferences",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateBillingView = smithy.NewSchema(smithy.ShapeID{
@@ -80,7 +135,8 @@ var AWSBilling = smithy.NewServiceSchema(_AWSBilling, "2023-09-07")
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingAccessDenied",
 		StatusCode: 403})
 var AccessDeniedException_message *smithy.Schema
@@ -90,6 +146,11 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccountId",
 }, smithy.ShapeTypeString, 0)
 
+var _AccountName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "AccountName",
+}, smithy.ShapeTypeString, 0)
+
 var ActiveTimeRange = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ActiveTimeRange",
@@ -97,6 +158,150 @@ var ActiveTimeRange = smithy.NewSchema(smithy.ShapeID{
 var ActiveTimeRange_activeAfterInclusive *smithy.Schema
 
 var ActiveTimeRange_activeBeforeInclusive *smithy.Schema
+
+var AdditionalCharge = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "AdditionalCharge",
+}, smithy.ShapeTypeStructure, 3)
+var AdditionalCharge_description *smithy.Schema
+
+var AdditionalCharge_amount *smithy.Schema
+
+var AdditionalCharge_chargeType *smithy.Schema
+
+var _AdditionalChargeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "AdditionalChargeList",
+}, smithy.ShapeTypeList, 1)
+var _AdditionalChargeList_member *smithy.Schema
+
+var Amount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "Amount",
+}, smithy.ShapeTypeStructure, 2)
+var Amount_currencyCode *smithy.Schema
+
+var Amount_currencyAmount *smithy.Schema
+
+var ApplicationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ApplicationType",
+}, smithy.ShapeTypeEnum, 2)
+var ApplicationType_BEFORE_CROSS_SERVICE_DISCOUNTS *smithy.Schema
+
+var ApplicationType_AFTER_DISCOUNTS *smithy.Schema
+
+var BillingDomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingDomain",
+}, smithy.ShapeTypeEnum, 2)
+var BillingDomain_BILLABLE *smithy.Schema
+
+var BillingDomain_PRO_FORMA *smithy.Schema
+
+var BillingFeature = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeature",
+}, smithy.ShapeTypeEnum, 7)
+var BillingFeature_RI_SHARING *smithy.Schema
+
+var BillingFeature_RI_SHARING_HISTORY *smithy.Schema
+
+var BillingFeature_CREDIT_SHARING *smithy.Schema
+
+var BillingFeature_CREDIT_SHARING_HISTORY *smithy.Schema
+
+var BillingFeature_CREDIT_LEVEL_SHARING *smithy.Schema
+
+var BillingFeature_BILLING_ALERTS *smithy.Schema
+
+var BillingFeature_CREDIT_PREFERENCE_OPTIONS *smithy.Schema
+
+var BillingFeatureFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatureFilter",
+}, smithy.ShapeTypeStructure, 2)
+var BillingFeatureFilter_name *smithy.Schema
+
+var BillingFeatureFilter_value *smithy.Schema
+
+var BillingFeatureFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatureFilterName",
+}, smithy.ShapeTypeEnum, 1)
+var BillingFeatureFilterName_PREFERENCE_KEY *smithy.Schema
+
+var _BillingFeatureFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatureFilters",
+}, smithy.ShapeTypeList, 1)
+var _BillingFeatureFilters_member *smithy.Schema
+
+var _BillingFeatureFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatureFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _BillingFeatureFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatureFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _BillingFeatureFilterValues_member *smithy.Schema
+
+var _BillingFeatures = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingFeatures",
+}, smithy.ShapeTypeList, 1)
+var _BillingFeatures_member *smithy.Schema
+
+var _BillingMonth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingMonth",
+}, smithy.ShapeTypeString, 0)
+
+var BillingPeriod = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingPeriod",
+}, smithy.ShapeTypeStructure, 2)
+var BillingPeriod_year *smithy.Schema
+
+var BillingPeriod_month *smithy.Schema
+
+var BillingPreferenceForKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingPreferenceForKey",
+}, smithy.ShapeTypeStructure, 2)
+var BillingPreferenceForKey_key *smithy.Schema
+
+var BillingPreferenceForKey_value *smithy.Schema
+
+var _BillingPreferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingPreferences",
+}, smithy.ShapeTypeList, 1)
+var _BillingPreferences_member *smithy.Schema
+
+var _BillingPreferencesPerKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingPreferencesPerKey",
+}, smithy.ShapeTypeList, 1)
+var _BillingPreferencesPerKey_member *smithy.Schema
+
+var BillingPreferenceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingPreferenceSummary",
+}, smithy.ShapeTypeStructure, 6)
+var BillingPreferenceSummary_feature *smithy.Schema
+
+var BillingPreferenceSummary_key *smithy.Schema
+
+var BillingPreferenceSummary_value *smithy.Schema
+
+var BillingPreferenceSummary_accountName *smithy.Schema
+
+var BillingPreferenceSummary_accountId *smithy.Schema
+
+var BillingPreferenceSummary_billingPeriod *smithy.Schema
 
 var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -155,7 +360,8 @@ var BillingViewHealthStatus_statusReasons *smithy.Schema
 var BillingViewHealthStatusException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "BillingViewHealthStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 400})
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
 var BillingViewHealthStatusException_message *smithy.Schema
 
 var _BillingViewList = smithy.NewSchema(smithy.ShapeID{
@@ -186,6 +392,34 @@ var _BillingViewName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "BillingViewName",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _BillingViewSegmentsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentsList",
+}, smithy.ShapeTypeList, 1)
+var _BillingViewSegmentsList_member *smithy.Schema
+
+var BillingViewSegmentsListElement = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentsListElement",
+}, smithy.ShapeTypeStructure, 5)
+var BillingViewSegmentsListElement_domain *smithy.Schema
+
+var BillingViewSegmentsListElement_timeRange *smithy.Schema
+
+var BillingViewSegmentsListElement_billingTransferAccountId *smithy.Schema
+
+var BillingViewSegmentsListElement_managementAccountId *smithy.Schema
+
+var BillingViewSegmentsListElement_billingGroupPrimaryAccountId *smithy.Schema
+
+var BillingViewSegmentTimeRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingViewSegmentTimeRange",
+}, smithy.ShapeTypeStructure, 2)
+var BillingViewSegmentTimeRange_beginDateInclusive *smithy.Schema
+
+var BillingViewSegmentTimeRange_endDateExclusive *smithy.Schema
 
 var _BillingViewsMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -256,6 +490,126 @@ var _BillingViewTypeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _BillingViewTypeList_member *smithy.Schema
 
+var _BillingYear = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BillingYear",
+}, smithy.ShapeTypeInteger, 0)
+
+var BusinessSupportAccountCharge = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportAccountCharge",
+}, smithy.ShapeTypeStructure, 7)
+var BusinessSupportAccountCharge_accountId *smithy.Schema
+
+var BusinessSupportAccountCharge_supportPlanName *smithy.Schema
+
+var BusinessSupportAccountCharge_totalCharge *smithy.Schema
+
+var BusinessSupportAccountCharge_totalUsageBasis *smithy.Schema
+
+var BusinessSupportAccountCharge_tierCharges *smithy.Schema
+
+var BusinessSupportAccountCharge_supportDiscount *smithy.Schema
+
+var BusinessSupportAccountCharge_supportEligibleSpendByService *smithy.Schema
+
+var _BusinessSupportAccountChargeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportAccountChargeList",
+}, smithy.ShapeTypeList, 1)
+var _BusinessSupportAccountChargeList_member *smithy.Schema
+
+var _BusinessSupportBillingMonth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportBillingMonth",
+}, smithy.ShapeTypeString, 0)
+
+var BusinessSupportDiscount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportDiscount",
+}, smithy.ShapeTypeStructure, 4)
+var BusinessSupportDiscount_discountAmount *smithy.Schema
+
+var BusinessSupportDiscount_discountPercentage *smithy.Schema
+
+var BusinessSupportDiscount_discountType *smithy.Schema
+
+var BusinessSupportDiscount_discountSource *smithy.Schema
+
+var BusinessSupportServiceSpend = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportServiceSpend",
+}, smithy.ShapeTypeStructure, 5)
+var BusinessSupportServiceSpend_contributingService *smithy.Schema
+
+var BusinessSupportServiceSpend_itemType *smithy.Schema
+
+var BusinessSupportServiceSpend_description *smithy.Schema
+
+var BusinessSupportServiceSpend_chargeAmount *smithy.Schema
+
+var BusinessSupportServiceSpend_currency *smithy.Schema
+
+var _BusinessSupportServiceSpendList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportServiceSpendList",
+}, smithy.ShapeTypeList, 1)
+var _BusinessSupportServiceSpendList_member *smithy.Schema
+
+var BusinessSupportSubscriptionContract = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportSubscriptionContract",
+}, smithy.ShapeTypeStructure, 4)
+var BusinessSupportSubscriptionContract_accountId *smithy.Schema
+
+var BusinessSupportSubscriptionContract_planName *smithy.Schema
+
+var BusinessSupportSubscriptionContract_contractStartDate *smithy.Schema
+
+var BusinessSupportSubscriptionContract_contractEndDate *smithy.Schema
+
+var _BusinessSupportSubscriptionContractList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportSubscriptionContractList",
+}, smithy.ShapeTypeList, 1)
+var _BusinessSupportSubscriptionContractList_member *smithy.Schema
+
+var BusinessSupportTierCharge = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportTierCharge",
+}, smithy.ShapeTypeStructure, 6)
+var BusinessSupportTierCharge_tierDescription *smithy.Schema
+
+var BusinessSupportTierCharge_tierRate *smithy.Schema
+
+var BusinessSupportTierCharge_usageSlice *smithy.Schema
+
+var BusinessSupportTierCharge_tierCharge *smithy.Schema
+
+var BusinessSupportTierCharge_chargePeriodStartDate *smithy.Schema
+
+var BusinessSupportTierCharge_chargePeriodEndDate *smithy.Schema
+
+var _BusinessSupportTierChargeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "BusinessSupportTierChargeList",
+}, smithy.ShapeTypeList, 1)
+var _BusinessSupportTierChargeList_member *smithy.Schema
+
+var ChargeAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ChargeAccount",
+}, smithy.ShapeTypeStructure, 2)
+var ChargeAccount_accountId *smithy.Schema
+
+var ChargeAccount_chargePercentage *smithy.Schema
+
+var _ChargeAccountList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ChargeAccountList",
+}, smithy.ShapeTypeList, 1)
+var _ChargeAccountList_member *smithy.Schema
+
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ClientToken",
@@ -264,7 +618,8 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 409},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingConflict",
 		StatusCode: 409})
 var ConflictException_message *smithy.Schema
@@ -272,6 +627,20 @@ var ConflictException_message *smithy.Schema
 var ConflictException_resourceId *smithy.Schema
 
 var ConflictException_resourceType *smithy.Schema
+
+var ContractAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ContractAccount",
+}, smithy.ShapeTypeStructure, 2)
+var ContractAccount_accountId *smithy.Schema
+
+var ContractAccount_isGdn *smithy.Schema
+
+var _ContractAccountList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ContractAccountList",
+}, smithy.ShapeTypeList, 1)
+var _ContractAccountList_member *smithy.Schema
 
 var _CostCategoryName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -286,6 +655,115 @@ var CostCategoryValues_key *smithy.Schema
 
 var CostCategoryValues_values *smithy.Schema
 
+var CreditAllocationHistoryEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditAllocationHistoryEntry",
+}, smithy.ShapeTypeStructure, 7)
+var CreditAllocationHistoryEntry_creditId *smithy.Schema
+
+var CreditAllocationHistoryEntry_creditAmount *smithy.Schema
+
+var CreditAllocationHistoryEntry_description *smithy.Schema
+
+var CreditAllocationHistoryEntry_accountId *smithy.Schema
+
+var CreditAllocationHistoryEntry_appliedServiceName *smithy.Schema
+
+var CreditAllocationHistoryEntry_billingMonth *smithy.Schema
+
+var CreditAllocationHistoryEntry_isEstimatedBill *smithy.Schema
+
+var _CreditAllocationHistoryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditAllocationHistoryList",
+}, smithy.ShapeTypeList, 1)
+var _CreditAllocationHistoryList_member *smithy.Schema
+
+var CreditData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditData",
+}, smithy.ShapeTypeStructure, 20)
+var CreditData_creditId *smithy.Schema
+
+var CreditData_accountId *smithy.Schema
+
+var CreditData_creditType *smithy.Schema
+
+var CreditData_initialAmount *smithy.Schema
+
+var CreditData_remainingAmount *smithy.Schema
+
+var CreditData_estimatedAmount *smithy.Schema
+
+var CreditData_applicableProductNames *smithy.Schema
+
+var CreditData_description *smithy.Schema
+
+var CreditData_startDate *smithy.Schema
+
+var CreditData_endDate *smithy.Schema
+
+var CreditData_exhaustDate *smithy.Schema
+
+var CreditData_applicationType *smithy.Schema
+
+var CreditData_shareableAccounts *smithy.Schema
+
+var CreditData_accountHasCreditSharingEnabled *smithy.Schema
+
+var CreditData_creditConsoleVisibility *smithy.Schema
+
+var CreditData_creditSharingType *smithy.Schema
+
+var CreditData_costCategoryArn *smithy.Schema
+
+var CreditData_ruleName *smithy.Schema
+
+var CreditData_creditStatus *smithy.Schema
+
+var CreditData_purchaseTypeApplications *smithy.Schema
+
+var _CreditDataList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditDataList",
+}, smithy.ShapeTypeList, 1)
+var _CreditDataList_member *smithy.Schema
+
+var _CreditId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditId",
+}, smithy.ShapeTypeString, 0)
+
+var CreditSharingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditSharingType",
+}, smithy.ShapeTypeEnum, 4)
+var CreditSharingType_DEFAULT *smithy.Schema
+
+var CreditSharingType_DISABLED *smithy.Schema
+
+var CreditSharingType_CUSTOM *smithy.Schema
+
+var CreditSharingType_COST_CATEGORY_RULE *smithy.Schema
+
+var CreditStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CreditStatus",
+}, smithy.ShapeTypeEnum, 2)
+var CreditStatus_ENABLED *smithy.Schema
+
+var CreditStatus_DISABLED *smithy.Schema
+
+var _CurrencyAmount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CurrencyAmount",
+}, smithy.ShapeTypeString, 0)
+
+var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "CurrencyCode",
+}, smithy.ShapeTypeString, 0)
+
 var Dimension = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "Dimension",
@@ -299,6 +777,19 @@ var DimensionValues = smithy.NewSchema(smithy.ShapeID{
 var DimensionValues_key *smithy.Schema
 
 var DimensionValues_values *smithy.Schema
+
+var _EnterpriseSupportBillingMonth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "EnterpriseSupportBillingMonth",
+}, smithy.ShapeTypeString, 0)
+
+var EnterpriseSupportTimePeriod = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "EnterpriseSupportTimePeriod",
+}, smithy.ShapeTypeStructure, 2)
+var EnterpriseSupportTimePeriod_beginDate *smithy.Schema
+
+var EnterpriseSupportTimePeriod_endDate *smithy.Schema
 
 var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -317,6 +808,12 @@ var Expression_costCategories *smithy.Schema
 
 var Expression_timeRange *smithy.Schema
 
+var _FailedMonthsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "FailedMonthsList",
+}, smithy.ShapeTypeList, 1)
+var _FailedMonthsList_member *smithy.Schema
+
 var _FieldName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "FieldName",
@@ -325,10 +822,50 @@ var _FieldName = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingInternalServer",
 		StatusCode: 500})
 var InternalServerException_message *smithy.Schema
+
+var LinkedAccountCharge = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "LinkedAccountCharge",
+}, smithy.ShapeTypeStructure, 12)
+var LinkedAccountCharge_accountId *smithy.Schema
+
+var LinkedAccountCharge_payerAccountId *smithy.Schema
+
+var LinkedAccountCharge_accountType *smithy.Schema
+
+var LinkedAccountCharge_billableSeconds *smithy.Schema
+
+var LinkedAccountCharge_totalSeconds *smithy.Schema
+
+var LinkedAccountCharge_totalSupportEligibleSpend *smithy.Schema
+
+var LinkedAccountCharge_proratedTotalSupportEligibleSpend *smithy.Schema
+
+var LinkedAccountCharge_linkedTimePeriods *smithy.Schema
+
+var LinkedAccountCharge_subscriptionTimePeriods *smithy.Schema
+
+var LinkedAccountCharge_totalSupportEligibleReservedInstanceSpend *smithy.Schema
+
+var LinkedAccountCharge_totalSupportEligibleSavingsPlanSpend *smithy.Schema
+
+var LinkedAccountCharge_supportEligibleSpendByService *smithy.Schema
+
+var _LinkedAccountChargeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "LinkedAccountChargeList",
+}, smithy.ShapeTypeList, 1)
+var _LinkedAccountChargeList_member *smithy.Schema
+
+var _Month = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "Month",
+}, smithy.ShapeTypeInteger, 0)
 
 var _PageToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -339,6 +876,102 @@ var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "PolicyDocument",
 }, smithy.ShapeTypeString, 0)
+
+var _PreferenceKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PreferenceKey",
+}, smithy.ShapeTypeString, 0)
+
+var PreferenceValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PreferenceValue",
+}, smithy.ShapeTypeEnum, 2)
+var PreferenceValue_ENABLED *smithy.Schema
+
+var PreferenceValue_DISABLED *smithy.Schema
+
+var PricingPlan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PricingPlan",
+}, smithy.ShapeTypeStructure, 10)
+var PricingPlan_pricingPlanId *smithy.Schema
+
+var PricingPlan_name *smithy.Schema
+
+var PricingPlan_description *smithy.Schema
+
+var PricingPlan_startDate *smithy.Schema
+
+var PricingPlan_endDate *smithy.Schema
+
+var PricingPlan_planDiscountPercent *smithy.Schema
+
+var PricingPlan_discountAppliesToMinimumCharge *smithy.Schema
+
+var PricingPlan_minimumCharge *smithy.Schema
+
+var PricingPlan_tiered *smithy.Schema
+
+var PricingPlan_tiers *smithy.Schema
+
+var _PricingPlanList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PricingPlanList",
+}, smithy.ShapeTypeList, 1)
+var _PricingPlanList_member *smithy.Schema
+
+var PricingPlanTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PricingPlanTier",
+}, smithy.ShapeTypeStructure, 8)
+var PricingPlanTier_tierMinimum *smithy.Schema
+
+var PricingPlanTier_tierMaximum *smithy.Schema
+
+var PricingPlanTier_baseCharge *smithy.Schema
+
+var PricingPlanTier_additionalPercentageOfAggregateCharges *smithy.Schema
+
+var PricingPlanTier_aggregateChargesAdjustment *smithy.Schema
+
+var PricingPlanTier_incremental *smithy.Schema
+
+var PricingPlanTier_increment *smithy.Schema
+
+var PricingPlanTier_incrementCharge *smithy.Schema
+
+var _PricingPlanTierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PricingPlanTierList",
+}, smithy.ShapeTypeList, 1)
+var _PricingPlanTierList_member *smithy.Schema
+
+var _ProductName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ProductName",
+}, smithy.ShapeTypeString, 0)
+
+var _ProductNames = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ProductNames",
+}, smithy.ShapeTypeList, 1)
+var _ProductNames_member *smithy.Schema
+
+var _PromoCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PromoCode",
+}, smithy.ShapeTypeString, 0)
+
+var _PurchaseType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PurchaseType",
+}, smithy.ShapeTypeString, 0)
+
+var _PurchaseTypeApplications = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "PurchaseTypeApplications",
+}, smithy.ShapeTypeList, 1)
+var _PurchaseTypeApplications_member *smithy.Schema
 
 var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -358,7 +991,8 @@ var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 404},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingResourceNotFound",
 		StatusCode: 404})
 var ResourceNotFoundException_message *smithy.Schema
@@ -418,10 +1052,25 @@ var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceCode",
 }, smithy.ShapeTypeString, 0)
 
+var ServiceLevelAccountUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ServiceLevelAccountUsage",
+}, smithy.ShapeTypeStructure, 2)
+var ServiceLevelAccountUsage_serviceCode *smithy.Schema
+
+var ServiceLevelAccountUsage_totalSupportEligibleSpend *smithy.Schema
+
+var _ServiceLevelAccountUsageList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ServiceLevelAccountUsageList",
+}, smithy.ShapeTypeList, 1)
+var _ServiceLevelAccountUsageList_member *smithy.Schema
+
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.HTTPError{Code: 402},
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingServiceQuotaExceeded",
 		StatusCode: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
@@ -433,6 +1082,12 @@ var ServiceQuotaExceededException_resourceType *smithy.Schema
 var ServiceQuotaExceededException_serviceCode *smithy.Schema
 
 var ServiceQuotaExceededException_quotaCode *smithy.Schema
+
+var _ShareableAccountIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ShareableAccountIds",
+}, smithy.ShapeTypeList, 1)
+var _ShareableAccountIds_member *smithy.Schema
 
 var StringSearch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -464,10 +1119,17 @@ var TagValues_values *smithy.Schema
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 429},
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 429},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingThrottling",
 		StatusCode: 429})
 var ThrottlingException_message *smithy.Schema
+
+var _TimePeriodList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "TimePeriodList",
+}, smithy.ShapeTypeList, 1)
+var _TimePeriodList_member *smithy.Schema
 
 var TimeRange = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -480,7 +1142,8 @@ var TimeRange_endDateInclusive *smithy.Schema
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.HTTPError{Code: 400},
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400},
 	&smithytraits.AWSQueryError{ErrorCode: "BillingValidation",
 		StatusCode: 400})
 var ValidationException_message *smithy.Schema
@@ -592,6 +1255,26 @@ var DisassociateSourceViewsResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DisassociateSourceViewsResponse_arn *smithy.Schema
 
+var GetBillingPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetBillingPreferencesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var GetBillingPreferencesRequest_nextToken *smithy.Schema
+
+var GetBillingPreferencesRequest_maxResults *smithy.Schema
+
+var GetBillingPreferencesRequest_features *smithy.Schema
+
+var GetBillingPreferencesRequest_filters *smithy.Schema
+
+var GetBillingPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetBillingPreferencesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetBillingPreferencesResponse_billingPreferences *smithy.Schema
+
+var GetBillingPreferencesResponse_nextToken *smithy.Schema
+
 var GetBillingViewRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "GetBillingViewRequest",
@@ -603,6 +1286,126 @@ var GetBillingViewResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetBillingViewResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetBillingViewResponse_billingView *smithy.Schema
+
+var GetCreditAllocationHistoryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCreditAllocationHistoryRequest",
+}, smithy.ShapeTypeStructure, 6)
+var GetCreditAllocationHistoryRequest_accountId *smithy.Schema
+
+var GetCreditAllocationHistoryRequest_creditId *smithy.Schema
+
+var GetCreditAllocationHistoryRequest_startDate *smithy.Schema
+
+var GetCreditAllocationHistoryRequest_endDate *smithy.Schema
+
+var GetCreditAllocationHistoryRequest_nextToken *smithy.Schema
+
+var GetCreditAllocationHistoryRequest_maxResults *smithy.Schema
+
+var GetCreditAllocationHistoryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCreditAllocationHistoryResponse",
+}, smithy.ShapeTypeStructure, 4)
+var GetCreditAllocationHistoryResponse_creditAllocationHistoryList *smithy.Schema
+
+var GetCreditAllocationHistoryResponse_partialResults *smithy.Schema
+
+var GetCreditAllocationHistoryResponse_failedMonths *smithy.Schema
+
+var GetCreditAllocationHistoryResponse_nextToken *smithy.Schema
+
+var GetCreditsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCreditsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var GetCreditsRequest_accountId *smithy.Schema
+
+var GetCreditsRequest_startDate *smithy.Schema
+
+var GetCreditsRequest_endDate *smithy.Schema
+
+var GetCreditsRequest_payerAccountFlag *smithy.Schema
+
+var GetCreditsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetCreditsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetCreditsResponse_credits *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportChargeSummaryRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetEnterpriseSupportChargeSummaryRequest_billingMonth *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportChargeSummaryResponse",
+}, smithy.ShapeTypeStructure, 15)
+var GetEnterpriseSupportChargeSummaryResponse_payerAccountId *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_billingMonth *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_billingPeriodStartDate *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_billingPeriodEndDate *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_isEstimated *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_billDate *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_supportCharge *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_totalSupportCharge *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_supportDiscount *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSpend *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleUsageSpend *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleReservedInstanceSpend *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSavingsPlanSpend *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_supportChargePercentage *smithy.Schema
+
+var GetEnterpriseSupportChargeSummaryResponse_supportEffectivePricingPlan *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportContractDetailsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetEnterpriseSupportContractDetailsRequest_billingMonth *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "GetEnterpriseSupportContractDetailsResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetEnterpriseSupportContractDetailsResponse_isContractActive *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceAmortizationStartDate *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceTreatmentMethod *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansAmortizationStartDate *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansTreatmentMethod *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_supportProrateStartDate *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend *smithy.Schema
+
+var GetEnterpriseSupportContractDetailsResponse_pricingPlans *smithy.Schema
 
 var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -617,6 +1420,26 @@ var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 var GetResourcePolicyResponse_resourceArn *smithy.Schema
 
 var GetResourcePolicyResponse_policy *smithy.Schema
+
+var ListBillingViewSegmentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegmentsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListBillingViewSegmentsRequest_timeRange *smithy.Schema
+
+var ListBillingViewSegmentsRequest_arn *smithy.Schema
+
+var ListBillingViewSegmentsRequest_maxResults *smithy.Schema
+
+var ListBillingViewSegmentsRequest_nextToken *smithy.Schema
+
+var ListBillingViewSegmentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBillingViewSegmentsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListBillingViewSegmentsResponse_items *smithy.Schema
+
+var ListBillingViewSegmentsResponse_nextToken *smithy.Schema
 
 var ListBillingViewsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -645,6 +1468,80 @@ var ListBillingViewsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListBillingViewsResponse_billingViews *smithy.Schema
 
 var ListBillingViewsResponse_nextToken *smithy.Schema
+
+var ListBusinessSupportAccountChargesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportAccountChargesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListBusinessSupportAccountChargesRequest_billingMonth *smithy.Schema
+
+var ListBusinessSupportAccountChargesRequest_accountId *smithy.Schema
+
+var ListBusinessSupportAccountChargesRequest_maxResults *smithy.Schema
+
+var ListBusinessSupportAccountChargesRequest_nextToken *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportAccountChargesResponse",
+}, smithy.ShapeTypeStructure, 7)
+var ListBusinessSupportAccountChargesResponse_billingMonth *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_isEstimated *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_totalSupportCharge *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_totalSupportEligibleSpend *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_accountCount *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_accountCharges *smithy.Schema
+
+var ListBusinessSupportAccountChargesResponse_nextToken *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportSubscriptionHistoryRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListBusinessSupportSubscriptionHistoryRequest_billingMonth *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest_accountId *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest_startDate *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest_endDate *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest_maxResults *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryRequest_nextToken *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListBusinessSupportSubscriptionHistoryResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListBusinessSupportSubscriptionHistoryResponse_subscriptionContracts *smithy.Schema
+
+var ListBusinessSupportSubscriptionHistoryResponse_nextToken *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListEnterpriseSupportLinkedAccountChargesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListEnterpriseSupportLinkedAccountChargesRequest_billingMonth *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesRequest_accountId *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesRequest_maxResults *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesRequest_nextToken *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ListEnterpriseSupportLinkedAccountChargesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount *smithy.Schema
+
+var ListEnterpriseSupportLinkedAccountChargesResponse_nextToken *smithy.Schema
 
 var ListSourceViewsForBillingViewRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -676,6 +1573,17 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_resourceTags *smithy.Schema
 
+var RedeemCreditsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "RedeemCreditsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var RedeemCreditsRequest_promoCode *smithy.Schema
+
+var RedeemCreditsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "RedeemCreditsResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "TagResourceRequest",
@@ -700,6 +1608,19 @@ var UntagResourceRequest_resourceTagKeys *smithy.Schema
 var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "UntagResourceResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var UpdateBillingPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "UpdateBillingPreferencesRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateBillingPreferencesRequest_feature *smithy.Schema
+
+var UpdateBillingPreferencesRequest_billingPreferencesPerKey *smithy.Schema
+
+var UpdateBillingPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "UpdateBillingPreferencesResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var UpdateBillingViewRequest = smithy.NewSchema(smithy.ShapeID{
@@ -730,6 +1651,80 @@ func init() {
 	ActiveTimeRange_activeAfterInclusive = ActiveTimeRange.AddMember("activeAfterInclusive", smithyprelude.Timestamp)
 
 	ActiveTimeRange_activeBeforeInclusive = ActiveTimeRange.AddMember("activeBeforeInclusive", smithyprelude.Timestamp)
+
+	AdditionalCharge_description = AdditionalCharge.AddMember("description", smithyprelude.String)
+
+	AdditionalCharge_amount = AdditionalCharge.AddMember("amount", smithyprelude.String)
+
+	AdditionalCharge_chargeType = AdditionalCharge.AddMember("chargeType", smithyprelude.String)
+
+	_AdditionalChargeList_member = _AdditionalChargeList.AddMember("member", AdditionalCharge)
+
+	Amount_currencyCode = Amount.AddMember("currencyCode", _CurrencyCode)
+
+	Amount_currencyAmount = Amount.AddMember("currencyAmount", _CurrencyAmount)
+
+	ApplicationType_BEFORE_CROSS_SERVICE_DISCOUNTS = ApplicationType.AddMember("BEFORE_CROSS_SERVICE_DISCOUNTS", smithyprelude.Unit)
+
+	ApplicationType_AFTER_DISCOUNTS = ApplicationType.AddMember("AFTER_DISCOUNTS", smithyprelude.Unit)
+
+	BillingDomain_BILLABLE = BillingDomain.AddMember("BILLABLE", smithyprelude.Unit)
+
+	BillingDomain_PRO_FORMA = BillingDomain.AddMember("PRO_FORMA", smithyprelude.Unit)
+
+	BillingFeature_RI_SHARING = BillingFeature.AddMember("RI_SHARING", smithyprelude.Unit)
+
+	BillingFeature_RI_SHARING_HISTORY = BillingFeature.AddMember("RI_SHARING_HISTORY", smithyprelude.Unit)
+
+	BillingFeature_CREDIT_SHARING = BillingFeature.AddMember("CREDIT_SHARING", smithyprelude.Unit)
+
+	BillingFeature_CREDIT_SHARING_HISTORY = BillingFeature.AddMember("CREDIT_SHARING_HISTORY", smithyprelude.Unit)
+
+	BillingFeature_CREDIT_LEVEL_SHARING = BillingFeature.AddMember("CREDIT_LEVEL_SHARING", smithyprelude.Unit)
+
+	BillingFeature_BILLING_ALERTS = BillingFeature.AddMember("BILLING_ALERTS", smithyprelude.Unit)
+
+	BillingFeature_CREDIT_PREFERENCE_OPTIONS = BillingFeature.AddMember("CREDIT_PREFERENCE_OPTIONS", smithyprelude.Unit)
+
+	BillingFeatureFilterName_PREFERENCE_KEY = BillingFeatureFilterName.AddMember("PREFERENCE_KEY", smithyprelude.Unit)
+
+	_BillingFeatureFilterValues_member = _BillingFeatureFilterValues.AddMember("member", _BillingFeatureFilterValue)
+
+	BillingFeatureFilter_name = BillingFeatureFilter.AddMember("name", BillingFeatureFilterName)
+
+	BillingFeatureFilter_value = BillingFeatureFilter.AddMember("value", _BillingFeatureFilterValues)
+
+	_BillingFeatureFilters_member = _BillingFeatureFilters.AddMember("member", BillingFeatureFilter)
+
+	_BillingFeatures_member = _BillingFeatures.AddMember("member", BillingFeature)
+
+	BillingPeriod_year = BillingPeriod.AddMember("year", _BillingYear)
+
+	BillingPeriod_month = BillingPeriod.AddMember("month", _Month)
+
+	PreferenceValue_ENABLED = PreferenceValue.AddMember("ENABLED", smithyprelude.Unit)
+
+	PreferenceValue_DISABLED = PreferenceValue.AddMember("DISABLED", smithyprelude.Unit)
+
+	BillingPreferenceForKey_key = BillingPreferenceForKey.AddMember("key", _PreferenceKey)
+
+	BillingPreferenceForKey_value = BillingPreferenceForKey.AddMember("value", PreferenceValue)
+
+	BillingPreferenceSummary_feature = BillingPreferenceSummary.AddMember("feature", BillingFeature)
+
+	BillingPreferenceSummary_key = BillingPreferenceSummary.AddMember("key", _PreferenceKey)
+
+	BillingPreferenceSummary_value = BillingPreferenceSummary.AddMember("value", PreferenceValue)
+
+	BillingPreferenceSummary_accountName = BillingPreferenceSummary.AddMember("accountName", _AccountName)
+
+	BillingPreferenceSummary_accountId = BillingPreferenceSummary.AddMember("accountId", _AccountId)
+
+	BillingPreferenceSummary_billingPeriod = BillingPreferenceSummary.AddMember("billingPeriod", BillingPeriod)
+
+	_BillingPreferences_member = _BillingPreferences.AddMember("member", BillingPreferenceSummary)
+
+	_BillingPreferencesPerKey_member = _BillingPreferencesPerKey.AddMember("member", BillingPreferenceForKey)
 
 	_BillingViewArnList_member = _BillingViewArnList.AddMember("member", _BillingViewArn)
 
@@ -845,9 +1840,91 @@ func init() {
 
 	_BillingViewList_member = _BillingViewList.AddMember("member", BillingViewListElement)
 
+	BillingViewSegmentTimeRange_beginDateInclusive = BillingViewSegmentTimeRange.AddMember("beginDateInclusive", smithyprelude.Timestamp)
+
+	BillingViewSegmentTimeRange_endDateExclusive = BillingViewSegmentTimeRange.AddMember("endDateExclusive", smithyprelude.Timestamp)
+
+	BillingViewSegmentsListElement_domain = BillingViewSegmentsListElement.AddMember("domain", BillingDomain)
+
+	BillingViewSegmentsListElement_timeRange = BillingViewSegmentsListElement.AddMember("timeRange", BillingViewSegmentTimeRange)
+
+	BillingViewSegmentsListElement_billingTransferAccountId = BillingViewSegmentsListElement.AddMember("billingTransferAccountId", _AccountId)
+
+	BillingViewSegmentsListElement_managementAccountId = BillingViewSegmentsListElement.AddMember("managementAccountId", _AccountId)
+
+	BillingViewSegmentsListElement_billingGroupPrimaryAccountId = BillingViewSegmentsListElement.AddMember("billingGroupPrimaryAccountId", _AccountId)
+
+	_BillingViewSegmentsList_member = _BillingViewSegmentsList.AddMember("member", BillingViewSegmentsListElement)
+
 	_BillingViewSourceViewsList_member = _BillingViewSourceViewsList.AddMember("member", _BillingViewArn)
 
 	_BillingViewTypeList_member = _BillingViewTypeList.AddMember("member", BillingViewType)
+
+	BusinessSupportTierCharge_tierDescription = BusinessSupportTierCharge.AddMember("tierDescription", smithyprelude.String)
+
+	BusinessSupportTierCharge_tierRate = BusinessSupportTierCharge.AddMember("tierRate", smithyprelude.String)
+
+	BusinessSupportTierCharge_usageSlice = BusinessSupportTierCharge.AddMember("usageSlice", smithyprelude.String)
+
+	BusinessSupportTierCharge_tierCharge = BusinessSupportTierCharge.AddMember("tierCharge", smithyprelude.String)
+
+	BusinessSupportTierCharge_chargePeriodStartDate = BusinessSupportTierCharge.AddMember("chargePeriodStartDate", smithyprelude.Timestamp)
+
+	BusinessSupportTierCharge_chargePeriodEndDate = BusinessSupportTierCharge.AddMember("chargePeriodEndDate", smithyprelude.Timestamp)
+
+	_BusinessSupportTierChargeList_member = _BusinessSupportTierChargeList.AddMember("member", BusinessSupportTierCharge)
+
+	BusinessSupportDiscount_discountAmount = BusinessSupportDiscount.AddMember("discountAmount", smithyprelude.String)
+
+	BusinessSupportDiscount_discountPercentage = BusinessSupportDiscount.AddMember("discountPercentage", smithyprelude.String)
+
+	BusinessSupportDiscount_discountType = BusinessSupportDiscount.AddMember("discountType", smithyprelude.String)
+
+	BusinessSupportDiscount_discountSource = BusinessSupportDiscount.AddMember("discountSource", smithyprelude.String)
+
+	BusinessSupportServiceSpend_contributingService = BusinessSupportServiceSpend.AddMember("contributingService", smithyprelude.String)
+
+	BusinessSupportServiceSpend_itemType = BusinessSupportServiceSpend.AddMember("itemType", smithyprelude.String)
+
+	BusinessSupportServiceSpend_description = BusinessSupportServiceSpend.AddMember("description", smithyprelude.String)
+
+	BusinessSupportServiceSpend_chargeAmount = BusinessSupportServiceSpend.AddMember("chargeAmount", smithyprelude.String)
+
+	BusinessSupportServiceSpend_currency = BusinessSupportServiceSpend.AddMember("currency", smithyprelude.String)
+
+	_BusinessSupportServiceSpendList_member = _BusinessSupportServiceSpendList.AddMember("member", BusinessSupportServiceSpend)
+
+	BusinessSupportAccountCharge_accountId = BusinessSupportAccountCharge.AddMember("accountId", _AccountId)
+
+	BusinessSupportAccountCharge_supportPlanName = BusinessSupportAccountCharge.AddMember("supportPlanName", smithyprelude.String)
+
+	BusinessSupportAccountCharge_totalCharge = BusinessSupportAccountCharge.AddMember("totalCharge", smithyprelude.String)
+
+	BusinessSupportAccountCharge_totalUsageBasis = BusinessSupportAccountCharge.AddMember("totalUsageBasis", smithyprelude.String)
+
+	BusinessSupportAccountCharge_tierCharges = BusinessSupportAccountCharge.AddMember("tierCharges", _BusinessSupportTierChargeList)
+
+	BusinessSupportAccountCharge_supportDiscount = BusinessSupportAccountCharge.AddMember("supportDiscount", BusinessSupportDiscount)
+
+	BusinessSupportAccountCharge_supportEligibleSpendByService = BusinessSupportAccountCharge.AddMember("supportEligibleSpendByService", _BusinessSupportServiceSpendList)
+
+	_BusinessSupportAccountChargeList_member = _BusinessSupportAccountChargeList.AddMember("member", BusinessSupportAccountCharge)
+
+	BusinessSupportSubscriptionContract_accountId = BusinessSupportSubscriptionContract.AddMember("accountId", _AccountId)
+
+	BusinessSupportSubscriptionContract_planName = BusinessSupportSubscriptionContract.AddMember("planName", smithyprelude.String)
+
+	BusinessSupportSubscriptionContract_contractStartDate = BusinessSupportSubscriptionContract.AddMember("contractStartDate", smithyprelude.Timestamp)
+
+	BusinessSupportSubscriptionContract_contractEndDate = BusinessSupportSubscriptionContract.AddMember("contractEndDate", smithyprelude.Timestamp)
+
+	_BusinessSupportSubscriptionContractList_member = _BusinessSupportSubscriptionContractList.AddMember("member", BusinessSupportSubscriptionContract)
+
+	ChargeAccount_accountId = ChargeAccount.AddMember("accountId", _AccountId)
+
+	ChargeAccount_chargePercentage = ChargeAccount.AddMember("chargePercentage", smithyprelude.String)
+
+	_ChargeAccountList_member = _ChargeAccountList.AddMember("member", ChargeAccount)
 
 	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
 
@@ -855,7 +1932,169 @@ func init() {
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", _ResourceType)
 
+	ContractAccount_accountId = ContractAccount.AddMember("accountId", _AccountId)
+
+	ContractAccount_isGdn = ContractAccount.AddMember("isGdn", smithyprelude.Boolean)
+
+	_ContractAccountList_member = _ContractAccountList.AddMember("member", ContractAccount)
+
+	CreditAllocationHistoryEntry_creditId = CreditAllocationHistoryEntry.AddMember("creditId", _CreditId)
+
+	CreditAllocationHistoryEntry_creditAmount = CreditAllocationHistoryEntry.AddMember("creditAmount", Amount)
+
+	CreditAllocationHistoryEntry_description = CreditAllocationHistoryEntry.AddMember("description", smithyprelude.String)
+
+	CreditAllocationHistoryEntry_accountId = CreditAllocationHistoryEntry.AddMember("accountId", _AccountId)
+
+	CreditAllocationHistoryEntry_appliedServiceName = CreditAllocationHistoryEntry.AddMember("appliedServiceName", smithyprelude.String)
+
+	CreditAllocationHistoryEntry_billingMonth = CreditAllocationHistoryEntry.AddMember("billingMonth", _BillingMonth)
+
+	CreditAllocationHistoryEntry_isEstimatedBill = CreditAllocationHistoryEntry.AddMember("isEstimatedBill", smithyprelude.Boolean)
+
+	_CreditAllocationHistoryList_member = _CreditAllocationHistoryList.AddMember("member", CreditAllocationHistoryEntry)
+
+	_ProductNames_member = _ProductNames.AddMember("member", _ProductName)
+
+	_ShareableAccountIds_member = _ShareableAccountIds.AddMember("member", _AccountId)
+
+	CreditSharingType_DEFAULT = CreditSharingType.AddMember("DEFAULT", smithyprelude.Unit)
+
+	CreditSharingType_DISABLED = CreditSharingType.AddMember("DISABLED", smithyprelude.Unit)
+
+	CreditSharingType_CUSTOM = CreditSharingType.AddMember("CUSTOM", smithyprelude.Unit)
+
+	CreditSharingType_COST_CATEGORY_RULE = CreditSharingType.AddMember("COST_CATEGORY_RULE", smithyprelude.Unit)
+
+	CreditStatus_ENABLED = CreditStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	CreditStatus_DISABLED = CreditStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	_PurchaseTypeApplications_member = _PurchaseTypeApplications.AddMember("member", _PurchaseType)
+
+	CreditData_creditId = CreditData.AddMember("creditId", _CreditId)
+
+	CreditData_accountId = CreditData.AddMember("accountId", _AccountId)
+
+	CreditData_creditType = CreditData.AddMember("creditType", smithyprelude.String)
+
+	CreditData_initialAmount = CreditData.AddMember("initialAmount", Amount)
+
+	CreditData_remainingAmount = CreditData.AddMember("remainingAmount", Amount)
+
+	CreditData_estimatedAmount = CreditData.AddMember("estimatedAmount", Amount)
+
+	CreditData_applicableProductNames = CreditData.AddMember("applicableProductNames", _ProductNames)
+
+	CreditData_description = CreditData.AddMember("description", smithyprelude.String)
+
+	CreditData_startDate = CreditData.AddMember("startDate", smithyprelude.Timestamp)
+
+	CreditData_endDate = CreditData.AddMember("endDate", smithyprelude.Timestamp)
+
+	CreditData_exhaustDate = CreditData.AddMember("exhaustDate", smithyprelude.Timestamp)
+
+	CreditData_applicationType = CreditData.AddMember("applicationType", ApplicationType)
+
+	CreditData_shareableAccounts = CreditData.AddMember("shareableAccounts", _ShareableAccountIds)
+
+	CreditData_accountHasCreditSharingEnabled = CreditData.AddMember("accountHasCreditSharingEnabled", smithyprelude.Boolean)
+
+	CreditData_creditConsoleVisibility = CreditData.AddMember("creditConsoleVisibility", smithyprelude.String)
+
+	CreditData_creditSharingType = CreditData.AddMember("creditSharingType", CreditSharingType)
+
+	CreditData_costCategoryArn = CreditData.AddMember("costCategoryArn", smithyprelude.String)
+
+	CreditData_ruleName = CreditData.AddMember("ruleName", smithyprelude.String)
+
+	CreditData_creditStatus = CreditData.AddMember("creditStatus", CreditStatus)
+
+	CreditData_purchaseTypeApplications = CreditData.AddMember("purchaseTypeApplications", _PurchaseTypeApplications)
+
+	_CreditDataList_member = _CreditDataList.AddMember("member", CreditData)
+
+	EnterpriseSupportTimePeriod_beginDate = EnterpriseSupportTimePeriod.AddMember("beginDate", smithyprelude.Timestamp)
+
+	EnterpriseSupportTimePeriod_endDate = EnterpriseSupportTimePeriod.AddMember("endDate", smithyprelude.Timestamp)
+
+	_FailedMonthsList_member = _FailedMonthsList.AddMember("member", _BillingMonth)
+
 	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
+
+	_TimePeriodList_member = _TimePeriodList.AddMember("member", EnterpriseSupportTimePeriod)
+
+	ServiceLevelAccountUsage_serviceCode = ServiceLevelAccountUsage.AddMember("serviceCode", smithyprelude.String)
+
+	ServiceLevelAccountUsage_totalSupportEligibleSpend = ServiceLevelAccountUsage.AddMember("totalSupportEligibleSpend", smithyprelude.String)
+
+	_ServiceLevelAccountUsageList_member = _ServiceLevelAccountUsageList.AddMember("member", ServiceLevelAccountUsage)
+
+	LinkedAccountCharge_accountId = LinkedAccountCharge.AddMember("accountId", _AccountId)
+
+	LinkedAccountCharge_payerAccountId = LinkedAccountCharge.AddMember("payerAccountId", _AccountId)
+
+	LinkedAccountCharge_accountType = LinkedAccountCharge.AddMember("accountType", smithyprelude.String)
+
+	LinkedAccountCharge_billableSeconds = LinkedAccountCharge.AddMember("billableSeconds", smithyprelude.Long)
+
+	LinkedAccountCharge_totalSeconds = LinkedAccountCharge.AddMember("totalSeconds", smithyprelude.Long)
+
+	LinkedAccountCharge_totalSupportEligibleSpend = LinkedAccountCharge.AddMember("totalSupportEligibleSpend", smithyprelude.String)
+
+	LinkedAccountCharge_proratedTotalSupportEligibleSpend = LinkedAccountCharge.AddMember("proratedTotalSupportEligibleSpend", smithyprelude.String)
+
+	LinkedAccountCharge_linkedTimePeriods = LinkedAccountCharge.AddMember("linkedTimePeriods", _TimePeriodList)
+
+	LinkedAccountCharge_subscriptionTimePeriods = LinkedAccountCharge.AddMember("subscriptionTimePeriods", _TimePeriodList)
+
+	LinkedAccountCharge_totalSupportEligibleReservedInstanceSpend = LinkedAccountCharge.AddMember("totalSupportEligibleReservedInstanceSpend", smithyprelude.String)
+
+	LinkedAccountCharge_totalSupportEligibleSavingsPlanSpend = LinkedAccountCharge.AddMember("totalSupportEligibleSavingsPlanSpend", smithyprelude.String)
+
+	LinkedAccountCharge_supportEligibleSpendByService = LinkedAccountCharge.AddMember("supportEligibleSpendByService", _ServiceLevelAccountUsageList)
+
+	_LinkedAccountChargeList_member = _LinkedAccountChargeList.AddMember("member", LinkedAccountCharge)
+
+	PricingPlanTier_tierMinimum = PricingPlanTier.AddMember("tierMinimum", smithyprelude.String)
+
+	PricingPlanTier_tierMaximum = PricingPlanTier.AddMember("tierMaximum", smithyprelude.String)
+
+	PricingPlanTier_baseCharge = PricingPlanTier.AddMember("baseCharge", smithyprelude.String)
+
+	PricingPlanTier_additionalPercentageOfAggregateCharges = PricingPlanTier.AddMember("additionalPercentageOfAggregateCharges", smithyprelude.String)
+
+	PricingPlanTier_aggregateChargesAdjustment = PricingPlanTier.AddMember("aggregateChargesAdjustment", smithyprelude.String)
+
+	PricingPlanTier_incremental = PricingPlanTier.AddMember("incremental", smithyprelude.Boolean)
+
+	PricingPlanTier_increment = PricingPlanTier.AddMember("increment", smithyprelude.String)
+
+	PricingPlanTier_incrementCharge = PricingPlanTier.AddMember("incrementCharge", smithyprelude.String)
+
+	_PricingPlanTierList_member = _PricingPlanTierList.AddMember("member", PricingPlanTier)
+
+	PricingPlan_pricingPlanId = PricingPlan.AddMember("pricingPlanId", smithyprelude.String)
+
+	PricingPlan_name = PricingPlan.AddMember("name", smithyprelude.String)
+
+	PricingPlan_description = PricingPlan.AddMember("description", smithyprelude.String)
+
+	PricingPlan_startDate = PricingPlan.AddMember("startDate", smithyprelude.Timestamp)
+
+	PricingPlan_endDate = PricingPlan.AddMember("endDate", smithyprelude.Timestamp)
+
+	PricingPlan_planDiscountPercent = PricingPlan.AddMember("planDiscountPercent", smithyprelude.String)
+
+	PricingPlan_discountAppliesToMinimumCharge = PricingPlan.AddMember("discountAppliesToMinimumCharge", smithyprelude.Boolean)
+
+	PricingPlan_minimumCharge = PricingPlan.AddMember("minimumCharge", smithyprelude.String)
+
+	PricingPlan_tiered = PricingPlan.AddMember("tiered", smithyprelude.String)
+
+	PricingPlan_tiers = PricingPlan.AddMember("tiers", _PricingPlanTierList)
+
+	_PricingPlanList_member = _PricingPlanList.AddMember("member", PricingPlan)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
 
@@ -945,15 +2184,127 @@ func init() {
 
 	DisassociateSourceViewsResponse_arn = DisassociateSourceViewsResponse.AddMember("arn", _BillingViewArn)
 
+	GetBillingPreferencesRequest_nextToken = GetBillingPreferencesRequest.AddMember("nextToken", _PageToken)
+
+	GetBillingPreferencesRequest_maxResults = GetBillingPreferencesRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	GetBillingPreferencesRequest_features = GetBillingPreferencesRequest.AddMember("features", _BillingFeatures)
+
+	GetBillingPreferencesRequest_filters = GetBillingPreferencesRequest.AddMember("filters", _BillingFeatureFilters)
+
+	GetBillingPreferencesResponse_billingPreferences = GetBillingPreferencesResponse.AddMember("billingPreferences", _BillingPreferences)
+
+	GetBillingPreferencesResponse_nextToken = GetBillingPreferencesResponse.AddMember("nextToken", _PageToken)
+
 	GetBillingViewRequest_arn = GetBillingViewRequest.AddMember("arn", _BillingViewArn)
 
 	GetBillingViewResponse_billingView = GetBillingViewResponse.AddMember("billingView", BillingViewElement)
+
+	GetCreditAllocationHistoryRequest_accountId = GetCreditAllocationHistoryRequest.AddMember("accountId", _AccountId)
+
+	GetCreditAllocationHistoryRequest_creditId = GetCreditAllocationHistoryRequest.AddMember("creditId", smithyprelude.Long)
+
+	GetCreditAllocationHistoryRequest_startDate = GetCreditAllocationHistoryRequest.AddMember("startDate", smithyprelude.Timestamp)
+
+	GetCreditAllocationHistoryRequest_endDate = GetCreditAllocationHistoryRequest.AddMember("endDate", smithyprelude.Timestamp)
+
+	GetCreditAllocationHistoryRequest_nextToken = GetCreditAllocationHistoryRequest.AddMember("nextToken", _PageToken)
+
+	GetCreditAllocationHistoryRequest_maxResults = GetCreditAllocationHistoryRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	GetCreditAllocationHistoryResponse_creditAllocationHistoryList = GetCreditAllocationHistoryResponse.AddMember("creditAllocationHistoryList", _CreditAllocationHistoryList)
+
+	GetCreditAllocationHistoryResponse_partialResults = GetCreditAllocationHistoryResponse.AddMember("partialResults", smithyprelude.Boolean)
+
+	GetCreditAllocationHistoryResponse_failedMonths = GetCreditAllocationHistoryResponse.AddMember("failedMonths", _FailedMonthsList)
+
+	GetCreditAllocationHistoryResponse_nextToken = GetCreditAllocationHistoryResponse.AddMember("nextToken", _PageToken)
+
+	GetCreditsRequest_accountId = GetCreditsRequest.AddMember("accountId", smithyprelude.String)
+
+	GetCreditsRequest_startDate = GetCreditsRequest.AddMember("startDate", smithyprelude.Timestamp)
+
+	GetCreditsRequest_endDate = GetCreditsRequest.AddMember("endDate", smithyprelude.Timestamp)
+
+	GetCreditsRequest_payerAccountFlag = GetCreditsRequest.AddMember("payerAccountFlag", smithyprelude.Boolean)
+
+	GetCreditsResponse_credits = GetCreditsResponse.AddMember("credits", _CreditDataList)
+
+	GetEnterpriseSupportChargeSummaryRequest_billingMonth = GetEnterpriseSupportChargeSummaryRequest.AddMember("billingMonth", _EnterpriseSupportBillingMonth)
+
+	GetEnterpriseSupportChargeSummaryResponse_payerAccountId = GetEnterpriseSupportChargeSummaryResponse.AddMember("payerAccountId", _AccountId)
+
+	GetEnterpriseSupportChargeSummaryResponse_billingMonth = GetEnterpriseSupportChargeSummaryResponse.AddMember("billingMonth", _EnterpriseSupportBillingMonth)
+
+	GetEnterpriseSupportChargeSummaryResponse_billingPeriodStartDate = GetEnterpriseSupportChargeSummaryResponse.AddMember("billingPeriodStartDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportChargeSummaryResponse_billingPeriodEndDate = GetEnterpriseSupportChargeSummaryResponse.AddMember("billingPeriodEndDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportChargeSummaryResponse_isEstimated = GetEnterpriseSupportChargeSummaryResponse.AddMember("isEstimated", smithyprelude.Boolean)
+
+	GetEnterpriseSupportChargeSummaryResponse_billDate = GetEnterpriseSupportChargeSummaryResponse.AddMember("billDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportChargeSummaryResponse_supportCharge = GetEnterpriseSupportChargeSummaryResponse.AddMember("supportCharge", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_totalSupportCharge = GetEnterpriseSupportChargeSummaryResponse.AddMember("totalSupportCharge", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_supportDiscount = GetEnterpriseSupportChargeSummaryResponse.AddMember("supportDiscount", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSpend = GetEnterpriseSupportChargeSummaryResponse.AddMember("totalSupportEligibleSpend", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleUsageSpend = GetEnterpriseSupportChargeSummaryResponse.AddMember("totalSupportEligibleUsageSpend", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleReservedInstanceSpend = GetEnterpriseSupportChargeSummaryResponse.AddMember("totalSupportEligibleReservedInstanceSpend", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSavingsPlanSpend = GetEnterpriseSupportChargeSummaryResponse.AddMember("totalSupportEligibleSavingsPlanSpend", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_supportChargePercentage = GetEnterpriseSupportChargeSummaryResponse.AddMember("supportChargePercentage", smithyprelude.String)
+
+	GetEnterpriseSupportChargeSummaryResponse_supportEffectivePricingPlan = GetEnterpriseSupportChargeSummaryResponse.AddMember("supportEffectivePricingPlan", PricingPlan)
+
+	GetEnterpriseSupportContractDetailsRequest_billingMonth = GetEnterpriseSupportContractDetailsRequest.AddMember("billingMonth", _EnterpriseSupportBillingMonth)
+
+	GetEnterpriseSupportContractDetailsResponse_isContractActive = GetEnterpriseSupportContractDetailsResponse.AddMember("isContractActive", smithyprelude.Boolean)
+
+	GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod = GetEnterpriseSupportContractDetailsResponse.AddMember("supportAllocationMethod", smithyprelude.String)
+
+	GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceAmortizationStartDate = GetEnterpriseSupportContractDetailsResponse.AddMember("supportReservedInstanceAmortizationStartDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceTreatmentMethod = GetEnterpriseSupportContractDetailsResponse.AddMember("supportReservedInstanceTreatmentMethod", smithyprelude.String)
+
+	GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansAmortizationStartDate = GetEnterpriseSupportContractDetailsResponse.AddMember("supportSavingsPlansAmortizationStartDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansTreatmentMethod = GetEnterpriseSupportContractDetailsResponse.AddMember("supportSavingsPlansTreatmentMethod", smithyprelude.String)
+
+	GetEnterpriseSupportContractDetailsResponse_supportProrateStartDate = GetEnterpriseSupportContractDetailsResponse.AddMember("supportProrateStartDate", smithyprelude.Timestamp)
+
+	GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds = GetEnterpriseSupportContractDetailsResponse.AddMember("contractPayerAccountIds", _ContractAccountList)
+
+	GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds = GetEnterpriseSupportContractDetailsResponse.AddMember("chargedPayerAccountIds", _ChargeAccountList)
+
+	GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge = GetEnterpriseSupportContractDetailsResponse.AddMember("additionalSupportCharge", _AdditionalChargeList)
+
+	GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend = GetEnterpriseSupportContractDetailsResponse.AddMember("additionalSupportEligibleUsageSpend", _AdditionalChargeList)
+
+	GetEnterpriseSupportContractDetailsResponse_pricingPlans = GetEnterpriseSupportContractDetailsResponse.AddMember("pricingPlans", _PricingPlanList)
 
 	GetResourcePolicyRequest_resourceArn = GetResourcePolicyRequest.AddMember("resourceArn", _ResourceArn)
 
 	GetResourcePolicyResponse_resourceArn = GetResourcePolicyResponse.AddMember("resourceArn", _ResourceArn)
 
 	GetResourcePolicyResponse_policy = GetResourcePolicyResponse.AddMember("policy", _PolicyDocument)
+
+	ListBillingViewSegmentsRequest_timeRange = ListBillingViewSegmentsRequest.AddMember("timeRange", BillingViewSegmentTimeRange)
+
+	ListBillingViewSegmentsRequest_arn = ListBillingViewSegmentsRequest.AddMember("arn", _BillingViewArn)
+
+	ListBillingViewSegmentsRequest_maxResults = ListBillingViewSegmentsRequest.AddMember("maxResults", _BillingViewsMaxResults)
+
+	ListBillingViewSegmentsRequest_nextToken = ListBillingViewSegmentsRequest.AddMember("nextToken", _PageToken)
+
+	ListBillingViewSegmentsResponse_items = ListBillingViewSegmentsResponse.AddMember("items", _BillingViewSegmentsList)
+
+	ListBillingViewSegmentsResponse_nextToken = ListBillingViewSegmentsResponse.AddMember("nextToken", _PageToken)
 
 	ListBillingViewsRequest_activeTimeRange = ListBillingViewsRequest.AddMember("activeTimeRange", ActiveTimeRange)
 
@@ -975,6 +2326,56 @@ func init() {
 
 	ListBillingViewsResponse_nextToken = ListBillingViewsResponse.AddMember("nextToken", _PageToken)
 
+	ListBusinessSupportAccountChargesRequest_billingMonth = ListBusinessSupportAccountChargesRequest.AddMember("billingMonth", _BusinessSupportBillingMonth)
+
+	ListBusinessSupportAccountChargesRequest_accountId = ListBusinessSupportAccountChargesRequest.AddMember("accountId", _AccountId)
+
+	ListBusinessSupportAccountChargesRequest_maxResults = ListBusinessSupportAccountChargesRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListBusinessSupportAccountChargesRequest_nextToken = ListBusinessSupportAccountChargesRequest.AddMember("nextToken", _PageToken)
+
+	ListBusinessSupportAccountChargesResponse_billingMonth = ListBusinessSupportAccountChargesResponse.AddMember("billingMonth", _BusinessSupportBillingMonth)
+
+	ListBusinessSupportAccountChargesResponse_isEstimated = ListBusinessSupportAccountChargesResponse.AddMember("isEstimated", smithyprelude.Boolean)
+
+	ListBusinessSupportAccountChargesResponse_totalSupportCharge = ListBusinessSupportAccountChargesResponse.AddMember("totalSupportCharge", smithyprelude.String)
+
+	ListBusinessSupportAccountChargesResponse_totalSupportEligibleSpend = ListBusinessSupportAccountChargesResponse.AddMember("totalSupportEligibleSpend", smithyprelude.String)
+
+	ListBusinessSupportAccountChargesResponse_accountCount = ListBusinessSupportAccountChargesResponse.AddMember("accountCount", smithyprelude.Integer)
+
+	ListBusinessSupportAccountChargesResponse_accountCharges = ListBusinessSupportAccountChargesResponse.AddMember("accountCharges", _BusinessSupportAccountChargeList)
+
+	ListBusinessSupportAccountChargesResponse_nextToken = ListBusinessSupportAccountChargesResponse.AddMember("nextToken", _PageToken)
+
+	ListBusinessSupportSubscriptionHistoryRequest_billingMonth = ListBusinessSupportSubscriptionHistoryRequest.AddMember("billingMonth", _BusinessSupportBillingMonth)
+
+	ListBusinessSupportSubscriptionHistoryRequest_accountId = ListBusinessSupportSubscriptionHistoryRequest.AddMember("accountId", _AccountId)
+
+	ListBusinessSupportSubscriptionHistoryRequest_startDate = ListBusinessSupportSubscriptionHistoryRequest.AddMember("startDate", smithyprelude.Timestamp)
+
+	ListBusinessSupportSubscriptionHistoryRequest_endDate = ListBusinessSupportSubscriptionHistoryRequest.AddMember("endDate", smithyprelude.Timestamp)
+
+	ListBusinessSupportSubscriptionHistoryRequest_maxResults = ListBusinessSupportSubscriptionHistoryRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListBusinessSupportSubscriptionHistoryRequest_nextToken = ListBusinessSupportSubscriptionHistoryRequest.AddMember("nextToken", _PageToken)
+
+	ListBusinessSupportSubscriptionHistoryResponse_subscriptionContracts = ListBusinessSupportSubscriptionHistoryResponse.AddMember("subscriptionContracts", _BusinessSupportSubscriptionContractList)
+
+	ListBusinessSupportSubscriptionHistoryResponse_nextToken = ListBusinessSupportSubscriptionHistoryResponse.AddMember("nextToken", _PageToken)
+
+	ListEnterpriseSupportLinkedAccountChargesRequest_billingMonth = ListEnterpriseSupportLinkedAccountChargesRequest.AddMember("billingMonth", _EnterpriseSupportBillingMonth)
+
+	ListEnterpriseSupportLinkedAccountChargesRequest_accountId = ListEnterpriseSupportLinkedAccountChargesRequest.AddMember("accountId", _AccountId)
+
+	ListEnterpriseSupportLinkedAccountChargesRequest_maxResults = ListEnterpriseSupportLinkedAccountChargesRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListEnterpriseSupportLinkedAccountChargesRequest_nextToken = ListEnterpriseSupportLinkedAccountChargesRequest.AddMember("nextToken", _PageToken)
+
+	ListEnterpriseSupportLinkedAccountChargesResponse_linkedAccount = ListEnterpriseSupportLinkedAccountChargesResponse.AddMember("linkedAccount", _LinkedAccountChargeList)
+
+	ListEnterpriseSupportLinkedAccountChargesResponse_nextToken = ListEnterpriseSupportLinkedAccountChargesResponse.AddMember("nextToken", _PageToken)
+
 	ListSourceViewsForBillingViewRequest_arn = ListSourceViewsForBillingViewRequest.AddMember("arn", _BillingViewArn)
 
 	ListSourceViewsForBillingViewRequest_maxResults = ListSourceViewsForBillingViewRequest.AddMember("maxResults", _BillingViewsMaxResults)
@@ -989,6 +2390,8 @@ func init() {
 
 	ListTagsForResourceResponse_resourceTags = ListTagsForResourceResponse.AddMember("resourceTags", _ResourceTagList)
 
+	RedeemCreditsRequest_promoCode = RedeemCreditsRequest.AddMember("promoCode", _PromoCode)
+
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
 
 	TagResourceRequest_resourceTags = TagResourceRequest.AddMember("resourceTags", _ResourceTagList)
@@ -996,6 +2399,10 @@ func init() {
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn)
 
 	UntagResourceRequest_resourceTagKeys = UntagResourceRequest.AddMember("resourceTagKeys", _ResourceTagKeyList)
+
+	UpdateBillingPreferencesRequest_feature = UpdateBillingPreferencesRequest.AddMember("feature", BillingFeature)
+
+	UpdateBillingPreferencesRequest_billingPreferencesPerKey = UpdateBillingPreferencesRequest.AddMember("billingPreferencesPerKey", _BillingPreferencesPerKey)
 
 	UpdateBillingViewRequest_arn = UpdateBillingViewRequest.AddMember("arn", _BillingViewArn)
 

@@ -4,13 +4,8 @@ package elementalinference
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the specified dictionary.
@@ -37,18 +32,6 @@ type GetDictionaryInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDictionaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDictionaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDictionaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetDictionaryRequest_id, *v.Id)
-	}
 }
 
 type GetDictionaryOutput struct {
@@ -90,109 +73,29 @@ type GetDictionaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDictionaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDictionaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDictionaryResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetDictionaryResponse_arn, v.Arn)
-		case schemas.GetDictionaryResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetDictionaryResponse_id, v.Id)
-		case schemas.GetDictionaryResponse_language:
-			var ev string
-			if err := d.ReadString(schemas.GetDictionaryResponse_language, &ev); err != nil {
-				return err
-			}
-			v.Language = types.DictionaryLanguage(ev)
-			return nil
-		case schemas.GetDictionaryResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetDictionaryResponse_name, v.Name)
-		case schemas.GetDictionaryResponse_references:
-			return deserializeFeedReferences(d, schemas.GetDictionaryResponse_references, &v.References)
-		case schemas.GetDictionaryResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDictionaryResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DictionaryStatus(ev)
-			return nil
-		case schemas.GetDictionaryResponse_tags:
-			return deserializeTagMap(d, schemas.GetDictionaryResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDictionaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDictionary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDictionary, schemas.GetDictionaryRequest, schemas.GetDictionaryResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDictionary{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDictionary, schemas.GetDictionaryRequest, schemas.GetDictionaryResponse), output: &GetDictionaryOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDictionary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDictionaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDictionary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +110,8 @@ func (c *Client) addOperationGetDictionaryMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDictionary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDictionary",
-	}
 }

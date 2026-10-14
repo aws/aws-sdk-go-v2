@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Only the Connect Customer outbound campaigns service principal is allowed to
@@ -62,6 +62,22 @@ type BatchPutContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchPutContactRequest_ClientToken, *v.ClientToken)
+	}
+	serializeContactDataRequestList(s, schemas.BatchPutContactRequest_ContactDataRequestList, v.ContactDataRequestList)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchPutContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type BatchPutContactOutput struct {
 
 	// List of requests for which contact creation failed.
@@ -76,65 +92,42 @@ type BatchPutContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRequestList(s, schemas.BatchPutContactResponse_FailedRequestList, v.FailedRequestList)
+	serializeSuccessfulRequestList(s, schemas.BatchPutContactResponse_SuccessfulRequestList, v.SuccessfulRequestList)
+}
+func (v *BatchPutContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutContactResponse_FailedRequestList:
+			return deserializeFailedRequestList(d, schemas.BatchPutContactResponse_FailedRequestList, &v.FailedRequestList)
+		case schemas.BatchPutContactResponse_SuccessfulRequestList:
+			return deserializeSuccessfulRequestList(d, schemas.BatchPutContactResponse_SuccessfulRequestList, &v.SuccessfulRequestList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutContact, schemas.BatchPutContactRequest, schemas.BatchPutContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutContact, schemas.BatchPutContactRequest, schemas.BatchPutContactResponse), output: &BatchPutContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -144,12 +137,6 @@ func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpBatchPutContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +149,6 @@ func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -207,12 +188,4 @@ func (m *idempotencyToken_initializeOpBatchPutContact) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opBatchPutContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchPutContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchPutContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchPutContact",
-	}
 }

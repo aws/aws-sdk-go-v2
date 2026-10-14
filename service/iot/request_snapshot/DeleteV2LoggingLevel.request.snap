@@ -1,0 +1,3 @@
+DELETE /v2LoggingLevel?targetName=__TargetName__&targetType=DEFAULT
+
+

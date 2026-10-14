@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nodeSummaries":[{"intentCount":1,"intentLevel":1,"intentName":"__IntentName__","intentPath":"__IntentPath__","nodeType":"Inner"},{"intentCount":1,"intentLevel":1,"intentName":"__IntentName__","intentPath":"__IntentPath__","nodeType":"Inner"}]}

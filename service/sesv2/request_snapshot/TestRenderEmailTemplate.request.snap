@@ -1,0 +1,5 @@
+POST /v2/email/templates/__TemplateName__/render
+
+Content-Type: application/json
+
+{"TemplateData":"__TemplateData__"}

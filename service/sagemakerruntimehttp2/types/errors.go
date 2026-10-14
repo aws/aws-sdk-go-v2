@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,19 +34,6 @@ func (e *InputValidationError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InputValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InputValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputValidationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputValidationError_ErrorCode:
-			v.ErrorCode_ = new(string)
-			return d.ReadString(schemas.InputValidationError_ErrorCode, v.ErrorCode_)
-		case schemas.InputValidationError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InputValidationError_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request processing has failed because of an unknown error, exception or
 // failure.
@@ -77,19 +63,6 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerError_ErrorCode:
-			v.ErrorCode_ = new(string)
-			return d.ReadString(schemas.InternalServerError_ErrorCode, v.ErrorCode_)
-		case schemas.InternalServerError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerError_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Internal stream failure that occurs during streaming.
 type InternalStreamFailure struct {
@@ -116,16 +89,6 @@ func (e *InternalStreamFailure) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalStreamFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalStreamFailure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalStreamFailure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalStreamFailure_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalStreamFailure_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An error occurred while processing the model.
 type ModelError struct {
@@ -157,28 +120,6 @@ func (e *ModelError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ModelError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModelError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModelError_ErrorCode:
-			v.ErrorCode_ = new(string)
-			return d.ReadString(schemas.ModelError_ErrorCode, v.ErrorCode_)
-		case schemas.ModelError_LogStreamArn:
-			v.LogStreamArn = new(string)
-			return d.ReadString(schemas.ModelError_LogStreamArn, v.LogStreamArn)
-		case schemas.ModelError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ModelError_Message, v.Message)
-		case schemas.ModelError_OriginalMessage:
-			v.OriginalMessage = new(string)
-			return d.ReadString(schemas.ModelError_OriginalMessage, v.OriginalMessage)
-		case schemas.ModelError_OriginalStatusCode:
-			v.OriginalStatusCode = new(int32)
-			return d.ReadInt32(schemas.ModelError_OriginalStatusCode, v.OriginalStatusCode)
-		}
-		return nil
-	})
-}
 
 // Model stream error that occurs during streaming.
 type ModelStreamError struct {
@@ -207,19 +148,6 @@ func (e *ModelStreamError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ModelStreamError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ModelStreamError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModelStreamError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModelStreamError_ErrorCode:
-			v.ErrorCode_ = new(string)
-			return d.ReadString(schemas.ModelStreamError_ErrorCode, v.ErrorCode_)
-		case schemas.ModelStreamError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ModelStreamError_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request has failed due to a temporary failure of the server.
 type ServiceUnavailableError struct {
@@ -248,16 +176,3 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableError_ErrorCode:
-			v.ErrorCode_ = new(string)
-			return d.ReadString(schemas.ServiceUnavailableError_ErrorCode, v.ErrorCode_)
-		case schemas.ServiceUnavailableError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableError_Message, v.Message)
-		}
-		return nil
-	})
-}

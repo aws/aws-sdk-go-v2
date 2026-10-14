@@ -4,13 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,8 +37,10 @@ type UpdateNotifyConfigurationInput struct {
 	// This member is required.
 	NotifyConfigurationId *string
 
-	// The template ID to set as the default, or the special value
-	// UNSET_DEFAULT_TEMPLATE to clear the current default template.
+	// The default template identifier to associate with the notify configuration. If
+	// specified, this template is used when sending messages without an explicit
+	// template identifier. Pass the special value UNSET_DEFAULT_TEMPLATE to clear the
+	// current default template from the notify configuration.
 	DefaultTemplateId *string
 
 	// When set to true the notify configuration can't be deleted.
@@ -55,8 +54,9 @@ type UpdateNotifyConfigurationInput struct {
 	// are enabled for the notify configuration.
 	EnabledCountries []string
 
-	// The pool ID or ARN to associate, or the special value
-	// UNSET_DEFAULT_POOL_FOR_NOTIFY to clear the current default pool.
+	// The pool identifier or Amazon Resource Name (ARN) to associate with the notify
+	// configuration. Pass the special value UNSET_DEFAULT_POOL_FOR_NOTIFY to clear
+	// the current default pool from the notify configuration.
 	PoolId *string
 
 	noSmithyDocumentSerde
@@ -160,6 +160,50 @@ type UpdateNotifyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotifyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotifyConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateNotifyConfigurationResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DefaultTemplateId != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_DefaultTemplateId, *v.DefaultTemplateId)
+	}
+	s.WriteBool(schemas.UpdateNotifyConfigurationResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_DisplayName, *v.DisplayName)
+	}
+	serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
+	serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	if v.NotifyConfigurationArn != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_NotifyConfigurationArn, *v.NotifyConfigurationArn)
+	}
+	if v.NotifyConfigurationId != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_NotifyConfigurationId, *v.NotifyConfigurationId)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_PoolId, *v.PoolId)
+	}
+	if v.RejectionReason != nil {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_RejectionReason, *v.RejectionReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_Status, string(v.Status))
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_Tier, string(v.Tier))
+	}
+	if v.TierUpgradeStatus != "" {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_TierUpgradeStatus, string(v.TierUpgradeStatus))
+	}
+	if v.UseCase != "" {
+		s.WriteString(schemas.UpdateNotifyConfigurationResult_UseCase, string(v.UseCase))
+	}
+}
 func (v *UpdateNotifyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateNotifyConfigurationResult, func(s *smithy.Schema) error {
 		switch s {
@@ -223,74 +267,26 @@ func (v *UpdateNotifyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 func (c *Client) addOperationUpdateNotifyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotifyConfiguration, schemas.UpdateNotifyConfigurationRequest, schemas.UpdateNotifyConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotifyConfiguration, schemas.UpdateNotifyConfigurationRequest, schemas.UpdateNotifyConfigurationResult), output: &UpdateNotifyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNotifyConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNotifyConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNotifyConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -305,22 +301,8 @@ func (c *Client) addOperationUpdateNotifyConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNotifyConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNotifyConfiguration",
-	}
 }

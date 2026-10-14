@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.CreateForecast
+
+{"ForecastName":"__ForecastName__","ForecastTypes":["__Member__","__Member__"],"PredictorArn":"__PredictorArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TimeSeriesSelector":{"TimeSeriesIdentifiers":{"DataSource":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"Format":"__Format__","Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]}}}}

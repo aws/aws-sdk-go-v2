@@ -5,12 +5,8 @@ package redshiftdata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the tables in a database. If neither SchemaPattern nor TablePattern are
@@ -125,45 +121,6 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTablesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTablesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.ListTablesRequest_ClusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ConnectedDatabase != nil {
-		s.WriteString(schemas.ListTablesRequest_ConnectedDatabase, *v.ConnectedDatabase)
-	}
-	if v.Database != nil {
-		s.WriteString(schemas.ListTablesRequest_Database, *v.Database)
-	}
-	if v.DbUser != nil {
-		s.WriteString(schemas.ListTablesRequest_DbUser, *v.DbUser)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListTablesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTablesRequest_NextToken, *v.NextToken)
-	}
-	if v.SchemaPattern != nil {
-		s.WriteString(schemas.ListTablesRequest_SchemaPattern, *v.SchemaPattern)
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.ListTablesRequest_SecretArn, *v.SecretArn)
-	}
-	if v.TablePattern != nil {
-		s.WriteString(schemas.ListTablesRequest_TablePattern, *v.TablePattern)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.ListTablesRequest_WorkgroupName, *v.WorkgroupName)
-	}
-}
-
 type ListTablesOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -182,87 +139,29 @@ type ListTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTablesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTablesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTablesResponse_NextToken, v.NextToken)
-		case schemas.ListTablesResponse_Tables:
-			return deserializeTableList(d, schemas.ListTablesResponse_Tables, &v.Tables)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTables{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTables{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse), output: &ListTablesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTables"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTablesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,12 +174,6 @@ func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -378,11 +271,3 @@ type ListTablesAPIClient interface {
 }
 
 var _ ListTablesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTables(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTables",
-	}
-}

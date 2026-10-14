@@ -1,0 +1,5 @@
+PATCH /global-networks/__GlobalNetworkId__/devices/__DeviceId__
+
+Content-Type: application/json
+
+{"AWSLocation":{"SubnetArn":"__SubnetArn__","Zone":"__Zone__"},"Description":"__Description__","Location":{"Address":"__Address__","Latitude":"__Latitude__","Longitude":"__Longitude__"},"Model":"__Model__","SerialNumber":"__SerialNumber__","SiteId":"__SiteId__","Type":"__Type__","Vendor":"__Vendor__"}

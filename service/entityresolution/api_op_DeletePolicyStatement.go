@@ -4,12 +4,7 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the policy statement.
@@ -44,21 +39,6 @@ type DeletePolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePolicyStatementInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DeletePolicyStatementInput_arn, *v.Arn)
-	}
-	if v.StatementId != nil {
-		s.WriteString(schemas.DeletePolicyStatementInput_statementId, *v.StatementId)
-	}
-}
-
 type DeletePolicyStatementOutput struct {
 
 	// The ARN of the resource for which the policy need to be deleted.
@@ -80,91 +60,29 @@ type DeletePolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletePolicyStatementOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletePolicyStatementOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeletePolicyStatementOutput_arn, v.Arn)
-		case schemas.DeletePolicyStatementOutput_policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.DeletePolicyStatementOutput_policy, v.Policy)
-		case schemas.DeletePolicyStatementOutput_token:
-			v.Token = new(string)
-			return d.ReadString(schemas.DeletePolicyStatementOutput_token, v.Token)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePolicyStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStatement, schemas.DeletePolicyStatementInput, schemas.DeletePolicyStatementOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePolicyStatement{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStatement, schemas.DeletePolicyStatementInput, schemas.DeletePolicyStatementOutput), output: &DeletePolicyStatementOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeletePolicyStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicyStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +97,8 @@ func (c *Client) addOperationDeletePolicyStatementMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeletePolicyStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeletePolicyStatement",
-	}
 }

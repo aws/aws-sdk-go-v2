@@ -4,11 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the replication instance to apply new settings. You can change one or
@@ -125,6 +124,54 @@ type ModifyReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedStorage != nil {
+		s.WriteInt32(schemas.ModifyReplicationInstanceMessage_AllocatedStorage, *v.AllocatedStorage)
+	}
+	if v.AllowMajorVersionUpgrade != false {
+		s.WriteBool(schemas.ModifyReplicationInstanceMessage_AllowMajorVersionUpgrade, v.AllowMajorVersionUpgrade)
+	}
+	if v.ApplyImmediately != false {
+		s.WriteBool(schemas.ModifyReplicationInstanceMessage_ApplyImmediately, v.ApplyImmediately)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.ModifyReplicationInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.KerberosAuthenticationSettings != nil {
+		s.WriteStruct(schemas.ModifyReplicationInstanceMessage_KerberosAuthenticationSettings)
+		v.KerberosAuthenticationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.ModifyReplicationInstanceMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_NetworkType, *v.NetworkType)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+	if v.ReplicationInstanceClass != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_ReplicationInstanceClass, *v.ReplicationInstanceClass)
+	}
+	if v.ReplicationInstanceIdentifier != nil {
+		s.WriteString(schemas.ModifyReplicationInstanceMessage_ReplicationInstanceIdentifier, *v.ReplicationInstanceIdentifier)
+	}
+	serializeVpcSecurityGroupIdList(s, schemas.ModifyReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+
 type ModifyReplicationInstanceOutput struct {
 
 	// The modified replication instance.
@@ -136,77 +183,50 @@ type ModifyReplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyReplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyReplicationInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyReplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInstance != nil {
+		s.WriteStruct(schemas.ModifyReplicationInstanceResponse_ReplicationInstance)
+		v.ReplicationInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyReplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyReplicationInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyReplicationInstanceResponse_ReplicationInstance:
+			v.ReplicationInstance = &types.ReplicationInstance{}
+			return v.ReplicationInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationInstance, schemas.ModifyReplicationInstanceMessage, schemas.ModifyReplicationInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyReplicationInstance, schemas.ModifyReplicationInstanceMessage, schemas.ModifyReplicationInstanceResponse), output: &ModifyReplicationInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyReplicationInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyReplicationInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyReplicationInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyReplicationInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +241,8 @@ func (c *Client) addOperationModifyReplicationInstanceMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyReplicationInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyReplicationInstance",
-	}
 }

@@ -5,12 +5,8 @@ package finspace
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -95,31 +91,6 @@ type CreateKxScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKxScalingGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKxScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.CreateKxScalingGroupRequest_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateKxScalingGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.CreateKxScalingGroupRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.HostType != nil {
-		s.WriteString(schemas.CreateKxScalingGroupRequest_hostType, *v.HostType)
-	}
-	if v.ScalingGroupName != nil {
-		s.WriteString(schemas.CreateKxScalingGroupRequest_scalingGroupName, *v.ScalingGroupName)
-	}
-	serializeTagMap(s, schemas.CreateKxScalingGroupRequest_tags, v.Tags)
-}
-
 type CreateKxScalingGroupOutput struct {
 
 	// The identifier of the availability zones.
@@ -171,98 +142,26 @@ type CreateKxScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKxScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKxScalingGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKxScalingGroupResponse_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.CreateKxScalingGroupResponse_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.CreateKxScalingGroupResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxScalingGroupResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.CreateKxScalingGroupResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateKxScalingGroupResponse_environmentId, v.EnvironmentId)
-		case schemas.CreateKxScalingGroupResponse_hostType:
-			v.HostType = new(string)
-			return d.ReadString(schemas.CreateKxScalingGroupResponse_hostType, v.HostType)
-		case schemas.CreateKxScalingGroupResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateKxScalingGroupResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.CreateKxScalingGroupResponse_scalingGroupName:
-			v.ScalingGroupName = new(string)
-			return d.ReadString(schemas.CreateKxScalingGroupResponse_scalingGroupName, v.ScalingGroupName)
-		case schemas.CreateKxScalingGroupResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateKxScalingGroupResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxScalingGroupStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxScalingGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxScalingGroup, schemas.CreateKxScalingGroupRequest, schemas.CreateKxScalingGroupResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxScalingGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxScalingGroup, schemas.CreateKxScalingGroupRequest, schemas.CreateKxScalingGroupResponse), output: &CreateKxScalingGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxScalingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -272,12 +171,6 @@ func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateKxScalingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxScalingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -290,12 +183,6 @@ func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -335,12 +222,4 @@ func (m *idempotencyToken_initializeOpCreateKxScalingGroup) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateKxScalingGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKxScalingGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKxScalingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKxScalingGroup",
-	}
 }

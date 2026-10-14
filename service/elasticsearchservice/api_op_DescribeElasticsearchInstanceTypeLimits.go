@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Describe Elasticsearch Limits for a given InstanceType and
@@ -52,6 +51,24 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchInstanceTypeLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchInstanceTypeLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchInstanceTypeLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_DomainName, *v.DomainName)
+	}
+	if v.ElasticsearchVersion != nil {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion, *v.ElasticsearchVersion)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_InstanceType, string(v.InstanceType))
+	}
+}
+
 // Container for the parameters received from DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
@@ -69,77 +86,45 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchInstanceTypeLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimitsByRole(s, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+}
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeElasticsearchInstanceTypeLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole:
+			return deserializeLimitsByRole(d, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, &v.LimitsByRole)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchInstanceTypeLimits, schemas.DescribeElasticsearchInstanceTypeLimitsRequest, schemas.DescribeElasticsearchInstanceTypeLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchInstanceTypeLimits, schemas.DescribeElasticsearchInstanceTypeLimitsRequest, schemas.DescribeElasticsearchInstanceTypeLimitsResponse), output: &DescribeElasticsearchInstanceTypeLimitsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeElasticsearchInstanceTypeLimits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeElasticsearchInstanceTypeLimitsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeElasticsearchInstanceTypeLimits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +139,8 @@ func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeElasticsearchInstanceTypeLimits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeElasticsearchInstanceTypeLimits",
-	}
 }

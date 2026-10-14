@@ -4,15 +4,20 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns the specified dashboard.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) GetDashboard(ctx context.Context, params *GetDashboardInput, optFns ...func(*Options)) (*GetDashboardOutput, error) {
 	if params == nil {
 		params = &GetDashboardInput{}
@@ -36,6 +41,18 @@ type GetDashboardInput struct {
 	DashboardId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardId != nil {
+		s.WriteString(schemas.GetDashboardRequest_DashboardId, *v.DashboardId)
+	}
 }
 
 type GetDashboardOutput struct {
@@ -76,77 +93,109 @@ type GetDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetDashboardResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.GetDashboardResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.LastRefreshFailureReason != nil {
+		s.WriteString(schemas.GetDashboardResponse_LastRefreshFailureReason, *v.LastRefreshFailureReason)
+	}
+	if v.LastRefreshId != nil {
+		s.WriteString(schemas.GetDashboardResponse_LastRefreshId, *v.LastRefreshId)
+	}
+	if v.RefreshSchedule != nil {
+		s.WriteStruct(schemas.GetDashboardResponse_RefreshSchedule)
+		v.RefreshSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDashboardResponse_Status, string(v.Status))
+	}
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.GetDashboardResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetDashboardResponse_Type, string(v.Type))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetDashboardResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+	serializeWidgetList(s, schemas.GetDashboardResponse_Widgets, v.Widgets)
+}
+func (v *GetDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDashboardResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDashboardResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetDashboardResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.GetDashboardResponse_DashboardArn, v.DashboardArn)
+		case schemas.GetDashboardResponse_LastRefreshFailureReason:
+			v.LastRefreshFailureReason = new(string)
+			return d.ReadString(schemas.GetDashboardResponse_LastRefreshFailureReason, v.LastRefreshFailureReason)
+		case schemas.GetDashboardResponse_LastRefreshId:
+			v.LastRefreshId = new(string)
+			return d.ReadString(schemas.GetDashboardResponse_LastRefreshId, v.LastRefreshId)
+		case schemas.GetDashboardResponse_RefreshSchedule:
+			v.RefreshSchedule = &types.RefreshSchedule{}
+			return v.RefreshSchedule.Deserialize(d)
+		case schemas.GetDashboardResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDashboardResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DashboardStatus(ev)
+			return nil
+		case schemas.GetDashboardResponse_TerminationProtectionEnabled:
+			v.TerminationProtectionEnabled = new(bool)
+			return d.ReadBool(schemas.GetDashboardResponse_TerminationProtectionEnabled, v.TerminationProtectionEnabled)
+		case schemas.GetDashboardResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetDashboardResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DashboardType(ev)
+			return nil
+		case schemas.GetDashboardResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDashboardResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		case schemas.GetDashboardResponse_Widgets:
+			return deserializeWidgetList(d, schemas.GetDashboardResponse_Widgets, &v.Widgets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardRequest, schemas.GetDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardRequest, schemas.GetDashboardResponse), output: &GetDashboardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDashboard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +210,8 @@ func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDashboard",
-	}
 }

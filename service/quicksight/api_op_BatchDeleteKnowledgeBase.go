@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes one or more knowledge bases.
@@ -42,6 +41,19 @@ type BatchDeleteKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.BatchDeleteKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeBatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList(s, schemas.BatchDeleteKnowledgeBaseRequest_KnowledgeBaseIds, v.KnowledgeBaseIds)
+}
+
 type BatchDeleteKnowledgeBaseOutput struct {
 
 	// A list of knowledge bases that were successfully deleted.
@@ -66,77 +78,60 @@ type BatchDeleteKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteKnowledgeBaseSuccessList(s, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, v.Deleted)
+	serializeBatchDeleteKnowledgeBaseFailureList(s, schemas.BatchDeleteKnowledgeBaseResponse_Errors, v.Errors)
+	if v.RequestId != nil {
+		s.WriteString(schemas.BatchDeleteKnowledgeBaseResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.BatchDeleteKnowledgeBaseResponse_Status, *v.Status)
+	}
+}
+func (v *BatchDeleteKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteKnowledgeBaseResponse_Deleted:
+			return deserializeBatchDeleteKnowledgeBaseSuccessList(d, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, &v.Deleted)
+		case schemas.BatchDeleteKnowledgeBaseResponse_Errors:
+			return deserializeBatchDeleteKnowledgeBaseFailureList(d, schemas.BatchDeleteKnowledgeBaseResponse_Errors, &v.Errors)
+		case schemas.BatchDeleteKnowledgeBaseResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BatchDeleteKnowledgeBaseResponse_RequestId, v.RequestId)
+		case schemas.BatchDeleteKnowledgeBaseResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.BatchDeleteKnowledgeBaseResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteKnowledgeBase, schemas.BatchDeleteKnowledgeBaseRequest, schemas.BatchDeleteKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteKnowledgeBase, schemas.BatchDeleteKnowledgeBaseRequest, schemas.BatchDeleteKnowledgeBaseResponse), output: &BatchDeleteKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteKnowledgeBase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteKnowledgeBase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteKnowledgeBaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteKnowledgeBase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +146,8 @@ func (c *Client) addOperationBatchDeleteKnowledgeBaseMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteKnowledgeBase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteKnowledgeBase",
-	}
 }

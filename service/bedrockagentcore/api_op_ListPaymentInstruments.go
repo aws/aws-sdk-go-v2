@@ -5,12 +5,8 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List payment instruments for a manager.
@@ -55,33 +51,6 @@ type ListPaymentInstrumentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPaymentInstrumentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPaymentInstrumentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPaymentInstrumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentName != nil {
-		s.WriteString(schemas.ListPaymentInstrumentsRequest_agentName, *v.AgentName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPaymentInstrumentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPaymentInstrumentsRequest_nextToken, *v.NextToken)
-	}
-	if v.PaymentConnectorId != nil {
-		s.WriteString(schemas.ListPaymentInstrumentsRequest_paymentConnectorId, *v.PaymentConnectorId)
-	}
-	if v.PaymentManagerArn != nil {
-		s.WriteString(schemas.ListPaymentInstrumentsRequest_paymentManagerArn, *v.PaymentManagerArn)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.ListPaymentInstrumentsRequest_userId, *v.UserId)
-	}
-}
-
 // Response structure for listing payment instruments.
 type ListPaymentInstrumentsOutput struct {
 
@@ -99,87 +68,29 @@ type ListPaymentInstrumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPaymentInstrumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPaymentInstrumentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPaymentInstrumentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPaymentInstrumentsResponse_nextToken, v.NextToken)
-		case schemas.ListPaymentInstrumentsResponse_paymentInstruments:
-			return deserializePaymentInstrumentSummaryList(d, schemas.ListPaymentInstrumentsResponse_paymentInstruments, &v.PaymentInstruments)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPaymentInstrumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPaymentInstruments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentInstruments, schemas.ListPaymentInstrumentsRequest, schemas.ListPaymentInstrumentsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPaymentInstruments{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPaymentInstruments, schemas.ListPaymentInstrumentsRequest, schemas.ListPaymentInstrumentsResponse), output: &ListPaymentInstrumentsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPaymentInstruments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPaymentInstrumentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPaymentInstruments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +103,6 @@ func (c *Client) addOperationListPaymentInstrumentsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -299,11 +204,3 @@ type ListPaymentInstrumentsAPIClient interface {
 }
 
 var _ ListPaymentInstrumentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPaymentInstruments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPaymentInstruments",
-	}
-}

@@ -1,0 +1,5 @@
+PUT /applications/__ApplicationId__/users/__UserId__
+
+Content-Type: application/json
+
+{"userAliasesToDelete":[{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"},{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"}],"userAliasesToUpdate":[{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"},{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"}]}

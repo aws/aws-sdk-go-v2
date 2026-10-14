@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.UpdateTrustedTokenIssuer
+
+{"Name":"__Name__","TrustedTokenIssuerArn":"__TrustedTokenIssuerArn__","TrustedTokenIssuerConfiguration":{"OidcJwtConfiguration":{"ClaimAttributePath":"__ClaimAttributePath__","IdentityStoreAttributePath":"__IdentityStoreAttributePath__","JwksRetrievalOption":"OPEN_ID_DISCOVERY"}}}

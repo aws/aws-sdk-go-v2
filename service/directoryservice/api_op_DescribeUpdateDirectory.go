@@ -5,10 +5,10 @@ package directoryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the updates of a directory for a particular update type.
@@ -49,6 +49,27 @@ type DescribeUpdateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_RegionName, *v.RegionName)
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_UpdateType, string(v.UpdateType))
+	}
+}
+
 type DescribeUpdateDirectoryOutput struct {
 
 	//  If not null, more results are available. Pass this value for the NextToken
@@ -64,77 +85,51 @@ type DescribeUpdateDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryResult_NextToken, *v.NextToken)
+	}
+	serializeUpdateActivities(s, schemas.DescribeUpdateDirectoryResult_UpdateActivities, v.UpdateActivities)
+}
+func (v *DescribeUpdateDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUpdateDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUpdateDirectoryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeUpdateDirectoryResult_NextToken, v.NextToken)
+		case schemas.DescribeUpdateDirectoryResult_UpdateActivities:
+			return deserializeUpdateActivities(d, schemas.DescribeUpdateDirectoryResult_UpdateActivities, &v.UpdateActivities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateDirectory, schemas.DescribeUpdateDirectoryRequest, schemas.DescribeUpdateDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUpdateDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateDirectory, schemas.DescribeUpdateDirectoryRequest, schemas.DescribeUpdateDirectoryResult), output: &DescribeUpdateDirectoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUpdateDirectory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUpdateDirectory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeUpdateDirectoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUpdateDirectory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +142,6 @@ func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +232,3 @@ type DescribeUpdateDirectoryAPIClient interface {
 }
 
 var _ DescribeUpdateDirectoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeUpdateDirectory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeUpdateDirectory",
-	}
-}

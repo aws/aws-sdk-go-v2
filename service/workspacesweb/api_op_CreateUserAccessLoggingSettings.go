@@ -5,12 +5,8 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a user access logging settings resource that can be associated with a
@@ -53,22 +49,6 @@ type CreateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateUserAccessLoggingSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateUserAccessLoggingSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.KinesisStreamArn != nil {
-		s.WriteString(schemas.CreateUserAccessLoggingSettingsRequest_kinesisStreamArn, *v.KinesisStreamArn)
-	}
-	serializeTagList(s, schemas.CreateUserAccessLoggingSettingsRequest_tags, v.Tags)
-}
-
 type CreateUserAccessLoggingSettingsOutput struct {
 
 	// The ARN of the user access logging settings.
@@ -82,73 +62,23 @@ type CreateUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn:
-			v.UserAccessLoggingSettingsArn = new(string)
-			return d.ReadString(schemas.CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn, v.UserAccessLoggingSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserAccessLoggingSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserAccessLoggingSettings, schemas.CreateUserAccessLoggingSettingsRequest, schemas.CreateUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserAccessLoggingSettings{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserAccessLoggingSettings, schemas.CreateUserAccessLoggingSettingsRequest, schemas.CreateUserAccessLoggingSettingsResponse), output: &CreateUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserAccessLoggingSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -158,12 +88,6 @@ func (c *Client) addOperationCreateUserAccessLoggingSettingsMiddlewares(stack *m
 		return err
 	}
 	if err = addOpCreateUserAccessLoggingSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUserAccessLoggingSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +100,6 @@ func (c *Client) addOperationCreateUserAccessLoggingSettingsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -221,12 +139,4 @@ func (m *idempotencyToken_initializeOpCreateUserAccessLoggingSettings) HandleIni
 }
 func addIdempotencyToken_opCreateUserAccessLoggingSettingsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateUserAccessLoggingSettings{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateUserAccessLoggingSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUserAccessLoggingSettings",
-	}
 }

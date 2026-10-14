@@ -4,11 +4,10 @@ package partnercentralselling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -72,6 +71,31 @@ type UpdateEngagementContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEngagementContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_Catalog, *v.Catalog)
+	}
+	if v.ContextIdentifier != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_ContextIdentifier, *v.ContextIdentifier)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.UpdateEngagementContextRequest_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+	serializeUpdateEngagementContextPayload(s, schemas.UpdateEngagementContextRequest_Payload, v.Payload)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateEngagementContextRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateEngagementContextOutput struct {
 
 	// The unique identifier of the engagement context that was updated.
@@ -100,77 +124,66 @@ type UpdateEngagementContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEngagementContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEngagementContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_ContextId, *v.ContextId)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_EngagementArn, *v.EngagementArn)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+}
+func (v *UpdateEngagementContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEngagementContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEngagementContextResponse_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_ContextId, v.ContextId)
+		case schemas.UpdateEngagementContextResponse_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_EngagementArn, v.EngagementArn)
+		case schemas.UpdateEngagementContextResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_EngagementId, v.EngagementId)
+		case schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt:
+			v.EngagementLastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt, v.EngagementLastModifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEngagementContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEngagementContext, schemas.UpdateEngagementContextRequest, schemas.UpdateEngagementContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEngagementContext, schemas.UpdateEngagementContextRequest, schemas.UpdateEngagementContextResponse), output: &UpdateEngagementContextOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEngagementContext{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEngagementContext"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEngagementContextValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEngagementContext(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +198,8 @@ func (c *Client) addOperationUpdateEngagementContextMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEngagementContext(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEngagementContext",
-	}
 }

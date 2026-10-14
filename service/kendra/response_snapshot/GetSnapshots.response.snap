@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.GetSnapshots
+
+{"NextToken":"__NextToken__","SnapShotTimeFilter":{"EndTime":946684800,"StartTime":946684800},"SnapshotsData":[["__Member__","__Member__"],["__Member__","__Member__"]],"SnapshotsDataHeader":["__Member__","__Member__"]}

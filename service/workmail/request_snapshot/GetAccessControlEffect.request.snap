@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.GetAccessControlEffect
+
+{"Action":"__Action__","ImpersonationRoleId":"__ImpersonationRoleId__","IpAddress":"__IpAddress__","OrganizationId":"__OrganizationId__","UserId":"__UserId__"}

@@ -4,13 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,19 +32,11 @@ type DeleteDbInstanceInput struct {
 	// This member is required.
 	Identifier *string
 
+	// Specifies whether to retain automated backups after the DB instance is deleted.
+	// If set to true, automated backups are not deleted and can be restored later.
+	RetainAutomatedBackups *bool
+
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDbInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDbInstanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteDbInstanceInput_identifier, *v.Identifier)
-	}
 }
 
 type DeleteDbInstanceOutput struct {
@@ -81,6 +68,9 @@ type DeleteDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// The backup configurations that were associated with the deleted DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
 
@@ -111,6 +101,10 @@ type DeleteDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN that was used for encryption of the deleted
+	// DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -151,178 +145,29 @@ type DeleteDbInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDbInstanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDbInstanceOutput_allocatedStorage:
-			v.AllocatedStorage = new(int32)
-			return d.ReadInt32(schemas.DeleteDbInstanceOutput_allocatedStorage, v.AllocatedStorage)
-		case schemas.DeleteDbInstanceOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_arn, v.Arn)
-		case schemas.DeleteDbInstanceOutput_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_availabilityZone, v.AvailabilityZone)
-		case schemas.DeleteDbInstanceOutput_dbClusterId:
-			v.DbClusterId = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_dbClusterId, v.DbClusterId)
-		case schemas.DeleteDbInstanceOutput_dbInstanceType:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_dbInstanceType, &ev); err != nil {
-				return err
-			}
-			v.DbInstanceType = types.DbInstanceType(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_dbParameterGroupIdentifier:
-			v.DbParameterGroupIdentifier = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
-		case schemas.DeleteDbInstanceOutput_dbStorageType:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_dbStorageType, &ev); err != nil {
-				return err
-			}
-			v.DbStorageType = types.DbStorageType(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_deploymentType:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_deploymentType, &ev); err != nil {
-				return err
-			}
-			v.DeploymentType = types.DeploymentType(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_endpoint, v.Endpoint)
-		case schemas.DeleteDbInstanceOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_id, v.Id)
-		case schemas.DeleteDbInstanceOutput_influxAuthParametersSecretArn:
-			v.InfluxAuthParametersSecretArn = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
-		case schemas.DeleteDbInstanceOutput_instanceMode:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_instanceMode, &ev); err != nil {
-				return err
-			}
-			v.InstanceMode = types.InstanceMode(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_instanceModes:
-			return deserializeInstanceModeList(d, schemas.DeleteDbInstanceOutput_instanceModes, &v.InstanceModes)
-		case schemas.DeleteDbInstanceOutput_lastMaintenanceTime:
-			v.LastMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.DeleteDbInstanceOutput_lastMaintenanceTime, v.LastMaintenanceTime)
-		case schemas.DeleteDbInstanceOutput_logDeliveryConfiguration:
-			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
-			return v.LogDeliveryConfiguration.Deserialize(d)
-		case schemas.DeleteDbInstanceOutput_maintenanceSchedule:
-			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
-			return v.MaintenanceSchedule.Deserialize(d)
-		case schemas.DeleteDbInstanceOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_name, v.Name)
-		case schemas.DeleteDbInstanceOutput_networkType:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_networkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = types.NetworkType(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_nextMaintenanceTime:
-			v.NextMaintenanceTime = new(time.Time)
-			return d.ReadTime(schemas.DeleteDbInstanceOutput_nextMaintenanceTime, v.NextMaintenanceTime)
-		case schemas.DeleteDbInstanceOutput_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.DeleteDbInstanceOutput_port, v.Port)
-		case schemas.DeleteDbInstanceOutput_publiclyAccessible:
-			v.PubliclyAccessible = new(bool)
-			return d.ReadBool(schemas.DeleteDbInstanceOutput_publiclyAccessible, v.PubliclyAccessible)
-		case schemas.DeleteDbInstanceOutput_secondaryAvailabilityZone:
-			v.SecondaryAvailabilityZone = new(string)
-			return d.ReadString(schemas.DeleteDbInstanceOutput_secondaryAvailabilityZone, v.SecondaryAvailabilityZone)
-		case schemas.DeleteDbInstanceOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDbInstanceOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.DeleteDbInstanceOutput_vpcSecurityGroupIds:
-			return deserializeVpcSecurityGroupIdList(d, schemas.DeleteDbInstanceOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
-		case schemas.DeleteDbInstanceOutput_vpcSubnetIds:
-			return deserializeVpcSubnetIdList(d, schemas.DeleteDbInstanceOutput_vpcSubnetIds, &v.VpcSubnetIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDbInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbInstance, schemas.DeleteDbInstanceInput, schemas.DeleteDbInstanceOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDbInstance{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDbInstance, schemas.DeleteDbInstanceInput, schemas.DeleteDbInstanceOutput), output: &DeleteDbInstanceOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDbInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDbInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -337,22 +182,8 @@ func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDbInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDbInstance",
-	}
 }

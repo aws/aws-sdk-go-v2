@@ -1,0 +1,3 @@
+GET /billing-groups?maxResults=1&namePrefixFilter=__NamePrefixFilter__&nextToken=__NextToken__
+
+

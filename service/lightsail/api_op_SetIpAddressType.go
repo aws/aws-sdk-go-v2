@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the IP address type for an Amazon Lightsail resource.
@@ -71,6 +70,27 @@ type SetIpAddressTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIpAddressTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIpAddressTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIpAddressTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptBundleUpdate != nil {
+		s.WriteBool(schemas.SetIpAddressTypeRequest_acceptBundleUpdate, *v.AcceptBundleUpdate)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.SetIpAddressTypeRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.SetIpAddressTypeRequest_resourceName, *v.ResourceName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.SetIpAddressTypeRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type SetIpAddressTypeOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -84,77 +104,45 @@ type SetIpAddressTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIpAddressTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIpAddressTypeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIpAddressTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.SetIpAddressTypeResult_operations, v.Operations)
+}
+func (v *SetIpAddressTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIpAddressTypeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetIpAddressTypeResult_operations:
+			return deserializeOperationList(d, schemas.SetIpAddressTypeResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIpAddressType, schemas.SetIpAddressTypeRequest, schemas.SetIpAddressTypeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetIpAddressType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIpAddressType, schemas.SetIpAddressTypeRequest, schemas.SetIpAddressTypeResult), output: &SetIpAddressTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetIpAddressType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetIpAddressType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetIpAddressTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIpAddressType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +157,8 @@ func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetIpAddressType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetIpAddressType",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/policy
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","policy":"__Policy__"}

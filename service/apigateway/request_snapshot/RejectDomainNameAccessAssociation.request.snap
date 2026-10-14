@@ -1,0 +1,4 @@
+POST /rejectdomainnameaccessassociations?domainNameAccessAssociationArn=__DomainNameAccessAssociationArn__&domainNameArn=__DomainNameArn__
+
+Accept: application/json
+

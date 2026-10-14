@@ -5,12 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,6 +44,9 @@ type UpdateOnlineEvaluationConfigInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// The updated clustering configuration for periodic batch evaluation.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The updated data source configuration specifying CloudWatch log groups and
 	// service names to monitor.
 	DataSourceConfig types.DataSourceConfig
@@ -65,42 +64,18 @@ type UpdateOnlineEvaluationConfigInput struct {
 	//  The updated execution status to enable or disable the online evaluation.
 	ExecutionStatus types.OnlineEvaluationExecutionStatus
 
+	// The updated list of insight types to run against agent sessions.
+	Insights []types.Insight
+
+	//  The configuration that specifies where evaluation results should be written
+	// for monitoring and analysis.
+	OutputConfig *types.OutputConfig
+
 	//  The updated evaluation rule containing sampling configuration, filters, and
 	// session settings.
 	Rule *types.Rule
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateOnlineEvaluationConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOnlineEvaluationConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_clientToken, *v.ClientToken)
-	}
-	serializeDataSourceConfig(s, schemas.UpdateOnlineEvaluationConfigRequest_dataSourceConfig, v.DataSourceConfig)
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_description, *v.Description)
-	}
-	if v.EvaluationExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_evaluationExecutionRoleArn, *v.EvaluationExecutionRoleArn)
-	}
-	serializeEvaluatorList(s, schemas.UpdateOnlineEvaluationConfigRequest_evaluators, v.Evaluators)
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.OnlineEvaluationConfigId != nil {
-		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
-	}
-	if v.Rule != nil {
-		s.WriteStruct(schemas.UpdateOnlineEvaluationConfigRequest_rule)
-		v.Rule.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateOnlineEvaluationConfigOutput struct {
@@ -141,96 +116,23 @@ type UpdateOnlineEvaluationConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOnlineEvaluationConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOnlineEvaluationConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOnlineEvaluationConfigResponse_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOnlineEvaluationConfigResponse_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = types.OnlineEvaluationExecutionStatus(ev)
-			return nil
-		case schemas.UpdateOnlineEvaluationConfigResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.UpdateOnlineEvaluationConfigResponse_failureReason, v.FailureReason)
-		case schemas.UpdateOnlineEvaluationConfigResponse_onlineEvaluationConfigArn:
-			v.OnlineEvaluationConfigArn = new(string)
-			return d.ReadString(schemas.UpdateOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
-		case schemas.UpdateOnlineEvaluationConfigResponse_onlineEvaluationConfigId:
-			v.OnlineEvaluationConfigId = new(string)
-			return d.ReadString(schemas.UpdateOnlineEvaluationConfigResponse_onlineEvaluationConfigId, v.OnlineEvaluationConfigId)
-		case schemas.UpdateOnlineEvaluationConfigResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOnlineEvaluationConfigResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.OnlineEvaluationConfigStatus(ev)
-			return nil
-		case schemas.UpdateOnlineEvaluationConfigResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateOnlineEvaluationConfigResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOnlineEvaluationConfig, schemas.UpdateOnlineEvaluationConfigRequest, schemas.UpdateOnlineEvaluationConfigResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOnlineEvaluationConfig{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOnlineEvaluationConfig, schemas.UpdateOnlineEvaluationConfigRequest, schemas.UpdateOnlineEvaluationConfigResponse), output: &UpdateOnlineEvaluationConfigOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOnlineEvaluationConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -240,12 +142,6 @@ func (c *Client) addOperationUpdateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpUpdateOnlineEvaluationConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOnlineEvaluationConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -258,12 +154,6 @@ func (c *Client) addOperationUpdateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -303,12 +193,4 @@ func (m *idempotencyToken_initializeOpUpdateOnlineEvaluationConfig) HandleInitia
 }
 func addIdempotencyToken_opUpdateOnlineEvaluationConfigMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateOnlineEvaluationConfig{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateOnlineEvaluationConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateOnlineEvaluationConfig",
-	}
 }

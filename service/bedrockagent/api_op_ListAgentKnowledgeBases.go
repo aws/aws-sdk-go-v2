@@ -5,10 +5,10 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists knowledge bases associated with an agent and information about each one.
@@ -55,6 +55,27 @@ type ListAgentKnowledgeBasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentKnowledgeBasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentKnowledgeBasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentKnowledgeBasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentKnowledgeBasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentKnowledgeBasesOutput struct {
 
 	// A list of objects, each of which contains information about a knowledge base
@@ -74,77 +95,51 @@ type ListAgentKnowledgeBasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentKnowledgeBasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentKnowledgeBasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentKnowledgeBasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentKnowledgeBaseSummaries(s, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, v.AgentKnowledgeBaseSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentKnowledgeBasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentKnowledgeBasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries:
+			return deserializeAgentKnowledgeBaseSummaries(d, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, &v.AgentKnowledgeBaseSummaries)
+		case schemas.ListAgentKnowledgeBasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentKnowledgeBasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentKnowledgeBases, schemas.ListAgentKnowledgeBasesRequest, schemas.ListAgentKnowledgeBasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentKnowledgeBases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentKnowledgeBases, schemas.ListAgentKnowledgeBasesRequest, schemas.ListAgentKnowledgeBasesResponse), output: &ListAgentKnowledgeBasesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentKnowledgeBases{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAgentKnowledgeBases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAgentKnowledgeBasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAgentKnowledgeBases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +152,6 @@ func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +257,3 @@ type ListAgentKnowledgeBasesAPIClient interface {
 }
 
 var _ ListAgentKnowledgeBasesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAgentKnowledgeBases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAgentKnowledgeBases",
-	}
-}

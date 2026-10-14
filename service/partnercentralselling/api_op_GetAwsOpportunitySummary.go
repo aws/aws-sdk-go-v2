@@ -4,11 +4,10 @@ package partnercentralselling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a summary of an AWS Opportunity. This summary includes high-level
@@ -48,6 +47,21 @@ type GetAwsOpportunitySummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAwsOpportunitySummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAwsOpportunitySummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAwsOpportunitySummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryRequest_Catalog, *v.Catalog)
+	}
+	if v.RelatedOpportunityIdentifier != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier, *v.RelatedOpportunityIdentifier)
+	}
+}
+
 type GetAwsOpportunitySummaryOutput struct {
 
 	// Specifies the catalog in which the AWS Opportunity exists. This is the
@@ -55,6 +69,10 @@ type GetAwsOpportunitySummaryOutput struct {
 	//
 	// This member is required.
 	Catalog *string
+
+	// Engagement classification for this opportunity. Read-only. Null before scoring.
+	// Known values: AWS Field-engaged , Agent-engaged , Partner-led .
+	CosellMotion *string
 
 	// Provides details about the customer associated with the AWS Opportunity,
 	// including account information, industry, and other customer data. These details
@@ -106,6 +124,9 @@ type GetAwsOpportunitySummaryOutput struct {
 	// CRM system.
 	RelatedOpportunityId *string
 
+	// Seller-provided PARC deal terms: commitment value, discount, and contract dates.
+	SoftwareRevenue *types.AwsSoftwareRevenue
+
 	// Defines the visibility level for the AWS Opportunity. Use Full visibility for
 	// most cases, while Limited visibility is reserved for special programs or
 	// sensitive opportunities.
@@ -117,77 +138,151 @@ type GetAwsOpportunitySummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAwsOpportunitySummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAwsOpportunitySummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_Catalog, *v.Catalog)
+	}
+	if v.CosellMotion != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_CosellMotion, *v.CosellMotion)
+	}
+	if v.Customer != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Insights != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_Insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvolvementType != "" {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_InvolvementType, string(v.InvolvementType))
+	}
+	if v.InvolvementTypeChangeReason != "" {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason, string(v.InvolvementTypeChangeReason))
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_LifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAwsOpportunityTeamMembersList(s, schemas.GetAwsOpportunitySummaryResponse_OpportunityTeam, v.OpportunityTeam)
+	if v.Origin != "" {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_Origin, string(v.Origin))
+	}
+	if v.Project != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedEntityIds != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_RelatedEntityIds)
+		v.RelatedEntityIds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedOpportunityId != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_RelatedOpportunityId, *v.RelatedOpportunityId)
+	}
+	if v.SoftwareRevenue != nil {
+		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_SoftwareRevenue)
+		v.SoftwareRevenue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_Visibility, string(v.Visibility))
+	}
+}
+func (v *GetAwsOpportunitySummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAwsOpportunitySummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAwsOpportunitySummaryResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetAwsOpportunitySummaryResponse_Catalog, v.Catalog)
+		case schemas.GetAwsOpportunitySummaryResponse_CosellMotion:
+			v.CosellMotion = new(string)
+			return d.ReadString(schemas.GetAwsOpportunitySummaryResponse_CosellMotion, v.CosellMotion)
+		case schemas.GetAwsOpportunitySummaryResponse_Customer:
+			v.Customer = &types.AwsOpportunityCustomer{}
+			return v.Customer.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_Insights:
+			v.Insights = &types.AwsOpportunityInsights{}
+			return v.Insights.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_InvolvementType:
+			var ev string
+			if err := d.ReadString(schemas.GetAwsOpportunitySummaryResponse_InvolvementType, &ev); err != nil {
+				return err
+			}
+			v.InvolvementType = types.SalesInvolvementType(ev)
+			return nil
+		case schemas.GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason:
+			var ev string
+			if err := d.ReadString(schemas.GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason, &ev); err != nil {
+				return err
+			}
+			v.InvolvementTypeChangeReason = types.InvolvementTypeChangeReason(ev)
+			return nil
+		case schemas.GetAwsOpportunitySummaryResponse_LifeCycle:
+			v.LifeCycle = &types.AwsOpportunityLifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_OpportunityTeam:
+			return deserializeAwsOpportunityTeamMembersList(d, schemas.GetAwsOpportunitySummaryResponse_OpportunityTeam, &v.OpportunityTeam)
+		case schemas.GetAwsOpportunitySummaryResponse_Origin:
+			var ev string
+			if err := d.ReadString(schemas.GetAwsOpportunitySummaryResponse_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = types.OpportunityOrigin(ev)
+			return nil
+		case schemas.GetAwsOpportunitySummaryResponse_Project:
+			v.Project = &types.AwsOpportunityProject{}
+			return v.Project.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_RelatedEntityIds:
+			v.RelatedEntityIds = &types.AwsOpportunityRelatedEntities{}
+			return v.RelatedEntityIds.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_RelatedOpportunityId:
+			v.RelatedOpportunityId = new(string)
+			return d.ReadString(schemas.GetAwsOpportunitySummaryResponse_RelatedOpportunityId, v.RelatedOpportunityId)
+		case schemas.GetAwsOpportunitySummaryResponse_SoftwareRevenue:
+			v.SoftwareRevenue = &types.AwsSoftwareRevenue{}
+			return v.SoftwareRevenue.Deserialize(d)
+		case schemas.GetAwsOpportunitySummaryResponse_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.GetAwsOpportunitySummaryResponse_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = types.Visibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAwsOpportunitySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAwsOpportunitySummary, schemas.GetAwsOpportunitySummaryRequest, schemas.GetAwsOpportunitySummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAwsOpportunitySummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAwsOpportunitySummary, schemas.GetAwsOpportunitySummaryRequest, schemas.GetAwsOpportunitySummaryResponse), output: &GetAwsOpportunitySummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAwsOpportunitySummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAwsOpportunitySummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAwsOpportunitySummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAwsOpportunitySummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +297,8 @@ func (c *Client) addOperationGetAwsOpportunitySummaryMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAwsOpportunitySummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAwsOpportunitySummary",
-	}
 }

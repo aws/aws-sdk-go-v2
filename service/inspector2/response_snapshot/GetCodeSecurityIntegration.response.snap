@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizationUrl":"__AuthorizationUrl__","createdOn":946684800,"integrationArn":"__IntegrationArn__","lastUpdateOn":946684800,"name":"__Name__","status":"PENDING","statusReason":"__StatusReason__","tags":{"key0":"__Value__"},"type":"GITLAB_SELF_MANAGED"}

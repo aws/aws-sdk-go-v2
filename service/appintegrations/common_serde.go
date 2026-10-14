@@ -178,6 +178,7 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeApplicationApprovedOrigins(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -191,6 +192,7 @@ func deserializeApplicationApprovedOrigins(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeApplicationAssociationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApplicationAssociationSummary) error {
+	*v = make([]types.ApplicationAssociationSummary, 0)
 	var vv types.ApplicationAssociationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ApplicationAssociationSummary{}
@@ -204,6 +206,7 @@ func deserializeApplicationAssociationsList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeApplicationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApplicationSummary) error {
+	*v = make([]types.ApplicationSummary, 0)
 	var vv types.ApplicationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ApplicationSummary{}
@@ -217,6 +220,7 @@ func deserializeApplicationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeDataIntegrationAssociationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataIntegrationAssociationSummary) error {
+	*v = make([]types.DataIntegrationAssociationSummary, 0)
 	var vv types.DataIntegrationAssociationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DataIntegrationAssociationSummary{}
@@ -230,6 +234,7 @@ func deserializeDataIntegrationAssociationsList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeDataIntegrationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataIntegrationSummary) error {
+	*v = make([]types.DataIntegrationSummary, 0)
 	var vv types.DataIntegrationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DataIntegrationSummary{}
@@ -243,6 +248,7 @@ func deserializeDataIntegrationsList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeEventIntegrationAssociationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventIntegrationAssociation) error {
+	*v = make([]types.EventIntegrationAssociation, 0)
 	var vv types.EventIntegrationAssociation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EventIntegrationAssociation{}
@@ -256,6 +262,7 @@ func deserializeEventIntegrationAssociationsList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeEventIntegrationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventIntegration) error {
+	*v = make([]types.EventIntegration, 0)
 	var vv types.EventIntegration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EventIntegration{}
@@ -269,6 +276,7 @@ func deserializeEventIntegrationsList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeFieldsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -282,6 +290,7 @@ func deserializeFieldsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeFolderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -295,6 +304,7 @@ func deserializeFolderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeIframePermissionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -308,6 +318,7 @@ func deserializeIframePermissionList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePermissionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -321,6 +332,7 @@ func deserializePermissionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializePublicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Publication) error {
+	*v = make([]types.Publication, 0)
 	var vv types.Publication
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Publication{}
@@ -334,6 +346,7 @@ func deserializePublicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSubscriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Subscription) error {
+	*v = make([]types.Subscription, 0)
 	var vv types.Subscription
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Subscription{}
@@ -347,6 +360,7 @@ func deserializeSubscriptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -411,6 +425,13 @@ func deserializeClientAssociationMetadata(d smithy.ShapeDeserializer, s *smithy.
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
@@ -425,6 +446,14 @@ func deserializeFieldsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[s
 	*v = make(map[string][]string)
 	var vv []string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeFieldsList(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -439,6 +468,14 @@ func deserializeObjectConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema
 	*v = make(map[string]map[string][]string)
 	var vv map[string][]string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero map[string][]string
+			(*v)[k] = zero
+			return nil
+		}
+
 		vv = nil
 		if err := deserializeFieldsMap(d, s.MapValue(), &vv); err != nil {
 			return err
@@ -453,6 +490,13 @@ func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err

@@ -1,0 +1,3 @@
+GET /channel/__ChannelName__/schedule?audience=__Audience__&durationMinutes=__DurationMinutes__&maxResults=1&nextToken=__NextToken__
+
+

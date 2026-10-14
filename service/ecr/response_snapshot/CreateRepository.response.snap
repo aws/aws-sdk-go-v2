@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.CreateRepository
+
+{"repository":{"createdAt":946684800,"encryptionConfiguration":{"encryptionType":"AES256","kmsKey":"__KmsKey__"},"imageScanningConfiguration":{"scanOnPush":true},"imageTagMutability":"MUTABLE","imageTagMutabilityExclusionFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"registryId":"__RegistryId__","repositoryArn":"__RepositoryArn__","repositoryName":"__RepositoryName__","repositoryUri":"__RepositoryUri__"}}

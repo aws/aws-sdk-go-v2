@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.RecognizeCelebrities
+
+{"Image":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.CreateTapeWithBarcode
+
+{"GatewayARN":"__GatewayARN__","KMSEncrypted":true,"KMSKey":"__KMSKey__","PoolId":"__PoolId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TapeBarcode":"__TapeBarcode__","TapeSizeInBytes":1,"Worm":true}

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a Transport Layer Security (TLS) certificate to your load balancer.
@@ -56,6 +55,21 @@ type AttachLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerTlsCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerTlsCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.AttachLoadBalancerTlsCertificateRequest_certificateName, *v.CertificateName)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.AttachLoadBalancerTlsCertificateRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 type AttachLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -72,77 +86,45 @@ type AttachLoadBalancerTlsCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachLoadBalancerTlsCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachLoadBalancerTlsCertificateResult_operations, v.Operations)
+}
+func (v *AttachLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachLoadBalancerTlsCertificateResult_operations:
+			return deserializeOperationList(d, schemas.AttachLoadBalancerTlsCertificateResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerTlsCertificate, schemas.AttachLoadBalancerTlsCertificateRequest, schemas.AttachLoadBalancerTlsCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachLoadBalancerTlsCertificate, schemas.AttachLoadBalancerTlsCertificateRequest, schemas.AttachLoadBalancerTlsCertificateResult), output: &AttachLoadBalancerTlsCertificateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachLoadBalancerTlsCertificate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAttachLoadBalancerTlsCertificateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachLoadBalancerTlsCertificate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +139,8 @@ func (c *Client) addOperationAttachLoadBalancerTlsCertificateMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAttachLoadBalancerTlsCertificate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AttachLoadBalancerTlsCertificate",
-	}
 }

@@ -4,13 +4,8 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows a user or application in a secure environment to access data in a
@@ -79,27 +74,6 @@ type GetTemporaryDataLocationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTemporaryDataLocationCredentialsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTemporaryDataLocationCredentialsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTemporaryDataLocationCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuditContext != nil {
-		s.WriteStruct(schemas.GetTemporaryDataLocationCredentialsRequest_AuditContext)
-		v.AuditContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CredentialsScope != "" {
-		s.WriteString(schemas.GetTemporaryDataLocationCredentialsRequest_CredentialsScope, string(v.CredentialsScope))
-	}
-	serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsRequest_DataLocations, v.DataLocations)
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.GetTemporaryDataLocationCredentialsRequest_DurationSeconds, *v.DurationSeconds)
-	}
-}
-
 type GetTemporaryDataLocationCredentialsOutput struct {
 
 	// Refers to the Amazon S3 locations that can be accessed through the
@@ -129,91 +103,26 @@ type GetTemporaryDataLocationCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTemporaryDataLocationCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTemporaryDataLocationCredentialsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations:
-			return deserializePathStringList(d, schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations, &v.AccessibleDataLocations)
-		case schemas.GetTemporaryDataLocationCredentialsResponse_Credentials:
-			v.Credentials = &types.TemporaryCredentials{}
-			return v.Credentials.Deserialize(d)
-		case schemas.GetTemporaryDataLocationCredentialsResponse_CredentialsScope:
-			var ev string
-			if err := d.ReadString(schemas.GetTemporaryDataLocationCredentialsResponse_CredentialsScope, &ev); err != nil {
-				return err
-			}
-			v.CredentialsScope = types.CredentialsScope(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTemporaryDataLocationCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemporaryDataLocationCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryDataLocationCredentials, schemas.GetTemporaryDataLocationCredentialsRequest, schemas.GetTemporaryDataLocationCredentialsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemporaryDataLocationCredentials{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryDataLocationCredentials, schemas.GetTemporaryDataLocationCredentialsRequest, schemas.GetTemporaryDataLocationCredentialsResponse), output: &GetTemporaryDataLocationCredentialsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTemporaryDataLocationCredentials"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTemporaryDataLocationCredentials(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +137,8 @@ func (c *Client) addOperationGetTemporaryDataLocationCredentialsMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTemporaryDataLocationCredentials(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTemporaryDataLocationCredentials",
-	}
 }

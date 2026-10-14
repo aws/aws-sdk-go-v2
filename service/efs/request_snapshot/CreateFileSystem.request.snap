@@ -1,0 +1,5 @@
+POST /2015-02-01/file-systems
+
+Content-Type: application/json
+
+{"AvailabilityZoneName":"__AvailabilityZoneName__","Backup":true,"CreationToken":"__CreationToken__","Encrypted":true,"KmsKeyId":"__KmsKeyId__","PerformanceMode":"generalPurpose","ProvisionedThroughputInMibps":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ThroughputMode":"bursting"}

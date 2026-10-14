@@ -1,0 +1,5 @@
+POST /listTargets
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"TARGET_TYPE","Value":"__Value__"},{"Name":"TARGET_TYPE","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

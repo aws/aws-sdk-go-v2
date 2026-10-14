@@ -1,0 +1,5 @@
+POST /2013-04-01/trafficpolicy/__Id__/1
+
+Content-Type: application/xml
+
+<UpdateTrafficPolicyCommentRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><Comment>__Comment__</Comment></UpdateTrafficPolicyCommentRequest>

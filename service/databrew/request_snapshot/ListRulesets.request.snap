@@ -1,0 +1,3 @@
+GET /rulesets?maxResults=1&nextToken=__NextToken__&targetArn=__TargetArn__
+
+

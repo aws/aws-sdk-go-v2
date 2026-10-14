@@ -1,0 +1,7 @@
+POST /test-cases/__InstanceId__/__TestCaseId__
+
+Content-Type: application/json
+X-Amz-Last-Modified-Region: __LastModifiedRegion__
+X-Amz-Last-Modified-Time: Sat, 01 Jan 2000 00:00:00 GMT
+
+{"Content":"__Content__","Description":"__Description__","EntryPoint":{"ChatEntryPointParameters":{"FlowId":"__FlowId__"},"Type":"VOICE_CALL","VoiceCallEntryPointParameters":{"DestinationPhoneNumber":"__DestinationPhoneNumber__","FlowId":"__FlowId__","SourcePhoneNumber":"__SourcePhoneNumber__"}},"InitializationData":"__InitializationData__","Name":"__Name__","Status":"PUBLISHED"}

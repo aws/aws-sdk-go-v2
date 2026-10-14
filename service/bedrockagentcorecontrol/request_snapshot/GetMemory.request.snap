@@ -1,0 +1,3 @@
+GET /memories/__MemoryId__/details?view=full
+
+

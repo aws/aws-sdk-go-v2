@@ -86,6 +86,21 @@ val overrides = mapOf(
     "smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible" to Pair("smithy-rpcv2-cbor-querycompatible", "smithyrpcv2cborquerycompatible"),
 )
 
+// Serde-benchmark services generate into service/internal/serdebenchmark/ (not
+// internal/protocoltest/); placed under service/ so the restjson/restxml
+// benchmark clients can import service/internal/checksum (Go internal rule).
+// Map of service shape ID -> module folder. Their httpRequest/ResponseTests are
+// tagged "serde-benchmark", which the protocol test generator turns into
+// ser/deser benchmark functions.
+val benchmarkModulePrefix = "github.com/aws/aws-sdk-go-v2/service/internal/serdebenchmark"
+val benchmarkServices = mapOf(
+    "com.amazonaws.sdk.benchmark#AwsJsonRpc10DataPlane" to "jsonrpc10dataplane",
+    "com.amazonaws.sdk.benchmark#AwsRestJsonDataPlane" to "restjsondataplane",
+    "com.amazonaws.sdk.benchmark#AwsRestXmlDataPlane" to "restxmldataplane",
+    "com.amazonaws.sdk.benchmark#AwsQueryDataPlane" to "querydataplane",
+    "com.amazonaws.sdk.benchmark#SmithyRpcV2CborDataPlane" to "rpcv2cbordataplane",
+)
+
 fun deriveNames(shapeId: String): Pair<String, String> {
     val svcName = shapeId.substringAfter("#")
     val hyphenated = svcName.replace(Regex("([a-z0-9])([A-Z])"), "$1-$2").toLowerCase()
@@ -113,23 +128,44 @@ tasks.register("generate-smithy-build") {
             val shapeId = service.id.toString()
             if (shapeId in excludedServices) return@forEach
 
-            val (projName, modSuffix) = overrides[shapeId] ?: deriveNames(shapeId)
+            val benchmarkSuffix = benchmarkServices[shapeId]
+            val projName: String
+            val module: String
+            if (benchmarkSuffix != null) {
+                projName = "benchmark-$benchmarkSuffix"
+                module = "$benchmarkModulePrefix/$benchmarkSuffix"
+            } else {
+                val (pn, modSuffix) = overrides[shapeId] ?: deriveNames(shapeId)
+                projName = pn
+                module = "$modulePrefix/$modSuffix"
+            }
 
-            projectionsBuilder.withMember(projName, Node.objectNodeBuilder()
-                .withMember("transforms", Node.fromNodes(
-                    Node.objectNodeBuilder()
-                        .withMember("name", "includeServices")
-                        .withMember("args", Node.objectNode()
-                            .withMember("services", Node.fromStrings(shapeId)))
-                        .build(),
+            val includeServicesTransform = Node.objectNodeBuilder()
+                .withMember("name", "includeServices")
+                .withMember("args", Node.objectNode()
+                    .withMember("services", Node.fromStrings(shapeId)))
+                .build()
+            // Benchmark operations are shared across protocols and carry
+            // httpRequest/ResponseTests for multiple protocols. removeUnusedShapes
+            // would prune the other protocols' trait shapes (e.g. aws.protocols#restJson1)
+            // and leave those test-case protocol references dangling, so skip it here.
+            val transforms = if (benchmarkSuffix != null) {
+                Node.fromNodes(includeServicesTransform)
+            } else {
+                Node.fromNodes(
+                    includeServicesTransform,
                     Node.objectNodeBuilder()
                         .withMember("name", "removeUnusedShapes")
                         .build(),
-                ))
+                )
+            }
+
+            projectionsBuilder.withMember(projName, Node.objectNodeBuilder()
+                .withMember("transforms", transforms)
                 .withMember("plugins", Node.objectNode()
                     .withMember("go-codegen", Node.objectNodeBuilder()
                         .withMember("service", shapeId)
-                        .withMember("module", "$modulePrefix/$modSuffix")
+                        .withMember("module", module)
                         .build()))
                 .build())
         }

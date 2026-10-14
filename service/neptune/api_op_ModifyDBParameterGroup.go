@@ -4,13 +4,8 @@ package neptune
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the parameters of a DB parameter group. To modify more than one
@@ -74,19 +69,6 @@ type ModifyDBParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBParameterGroupName != nil {
-		s.WriteString(schemas.ModifyDBParameterGroupMessage_DBParameterGroupName, *v.DBParameterGroupName)
-	}
-	serializeParametersList(s, schemas.ModifyDBParameterGroupMessage_Parameters, v.Parameters)
-}
-
 type ModifyDBParameterGroupOutput struct {
 
 	// Provides the name of the DB parameter group.
@@ -98,96 +80,29 @@ type ModifyDBParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DBParameterGroupNameMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBParameterGroupName != nil {
-		s.WriteString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, *v.DBParameterGroupName)
-	}
-}
-func (v *ModifyDBParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DBParameterGroupNameMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DBParameterGroupNameMessage_DBParameterGroupName:
-			v.DBParameterGroupName = new(string)
-			return d.ReadString(schemas.DBParameterGroupNameMessage_DBParameterGroupName, v.DBParameterGroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBParameterGroup, schemas.ModifyDBParameterGroupMessage, schemas.DBParameterGroupNameMessage)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBParameterGroup, schemas.ModifyDBParameterGroupMessage, schemas.DBParameterGroupNameMessage), output: &ModifyDBParameterGroupOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBParameterGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyDBParameterGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBParameterGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +117,8 @@ func (c *Client) addOperationModifyDBParameterGroupMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyDBParameterGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyDBParameterGroup",
-	}
 }

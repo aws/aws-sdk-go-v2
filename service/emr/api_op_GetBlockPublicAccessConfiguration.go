@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the Amazon EMR block public access configuration for your Amazon Web
@@ -33,6 +32,15 @@ func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *
 
 type GetBlockPublicAccessConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetBlockPublicAccessConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlockPublicAccessConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlockPublicAccessConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetBlockPublicAccessConfigurationOutput struct {
@@ -71,74 +79,55 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlockPublicAccessConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlockPublicAccessConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockPublicAccessConfiguration != nil {
+		s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfiguration)
+		v.BlockPublicAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BlockPublicAccessConfigurationMetadata != nil {
+		s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfigurationMetadata)
+		v.BlockPublicAccessConfigurationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBlockPublicAccessConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlockPublicAccessConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfiguration:
+			v.BlockPublicAccessConfiguration = &types.BlockPublicAccessConfiguration{}
+			return v.BlockPublicAccessConfiguration.Deserialize(d)
+		case schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfigurationMetadata:
+			v.BlockPublicAccessConfigurationMetadata = &types.BlockPublicAccessConfigurationMetadata{}
+			return v.BlockPublicAccessConfigurationMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlockPublicAccessConfiguration, schemas.GetBlockPublicAccessConfigurationInput, schemas.GetBlockPublicAccessConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlockPublicAccessConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlockPublicAccessConfiguration, schemas.GetBlockPublicAccessConfigurationInput, schemas.GetBlockPublicAccessConfigurationOutput), output: &GetBlockPublicAccessConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBlockPublicAccessConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBlockPublicAccessConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlockPublicAccessConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +142,8 @@ func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBlockPublicAccessConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBlockPublicAccessConfiguration",
-	}
 }

@@ -1,0 +1,5 @@
+POST /network-migration/ListNetworkMigrationExecutions
+
+Content-Type: application/json
+
+{"filters":{"networkMigrationExecutionIDs":["__Member__","__Member__"],"networkMigrationExecutionStatuses":["PENDING","PENDING"]},"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","nextToken":"__NextToken__"}

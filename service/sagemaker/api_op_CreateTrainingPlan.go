@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new training plan in SageMaker to reserve compute capacity.
@@ -94,6 +93,25 @@ type CreateTrainingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpareInstanceCountPerUltraServer != nil {
+		s.WriteInt32(schemas.CreateTrainingPlanRequest_SpareInstanceCountPerUltraServer, *v.SpareInstanceCountPerUltraServer)
+	}
+	serializeTagList(s, schemas.CreateTrainingPlanRequest_Tags, v.Tags)
+	if v.TrainingPlanName != nil {
+		s.WriteString(schemas.CreateTrainingPlanRequest_TrainingPlanName, *v.TrainingPlanName)
+	}
+	if v.TrainingPlanOfferingId != nil {
+		s.WriteString(schemas.CreateTrainingPlanRequest_TrainingPlanOfferingId, *v.TrainingPlanOfferingId)
+	}
+}
+
 type CreateTrainingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN); of the created training plan.
@@ -107,77 +125,48 @@ type CreateTrainingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingPlanArn != nil {
+		s.WriteString(schemas.CreateTrainingPlanResponse_TrainingPlanArn, *v.TrainingPlanArn)
+	}
+}
+func (v *CreateTrainingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrainingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrainingPlanResponse_TrainingPlanArn:
+			v.TrainingPlanArn = new(string)
+			return d.ReadString(schemas.CreateTrainingPlanResponse_TrainingPlanArn, v.TrainingPlanArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrainingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingPlan, schemas.CreateTrainingPlanRequest, schemas.CreateTrainingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrainingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingPlan, schemas.CreateTrainingPlanRequest, schemas.CreateTrainingPlanResponse), output: &CreateTrainingPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrainingPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTrainingPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTrainingPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrainingPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +181,8 @@ func (c *Client) addOperationCreateTrainingPlanMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTrainingPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTrainingPlan",
-	}
 }

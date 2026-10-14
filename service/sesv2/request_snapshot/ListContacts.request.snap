@@ -1,0 +1,5 @@
+POST /v2/email/contact-lists/__ContactListName__/contacts/list
+
+Content-Type: application/json
+
+{"Filter":{"FilteredStatus":"OPT_IN","TopicFilter":{"TopicName":"__TopicName__","UseDefaultIfPreferenceUnavailable":true}},"NextToken":"__NextToken__","PageSize":1}

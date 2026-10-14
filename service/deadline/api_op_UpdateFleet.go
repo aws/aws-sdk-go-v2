@@ -5,13 +5,22 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a fleet.
+//
+// Workers that are running when you call UpdateFleet keep the instance type and
+// capabilities that they launched with until they scale in. Deadline Cloud can
+// schedule jobs that you submit after the update on these existing workers, so the
+// new configuration might not take effect immediately. To make sure that all
+// workers use the new configuration, set maxWorkerCount to 0, use the ListWorkers
+// operation to confirm that the fleet has no workers, and then restore
+// maxWorkerCount .
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
 	if params == nil {
 		params = &UpdateFleetInput{}
@@ -83,6 +92,45 @@ type UpdateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateFleetRequest_clientToken, *v.ClientToken)
+	}
+	serializeFleetConfiguration(s, schemas.UpdateFleetRequest_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFleetRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateFleetRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.HostConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFleetRequest_hostConfiguration)
+		v.HostConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.UpdateFleetRequest_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.MinWorkerCount != nil {
+		s.WriteInt32(schemas.UpdateFleetRequest_minWorkerCount, *v.MinWorkerCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateFleetRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,65 +138,36 @@ type UpdateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleet, schemas.UpdateFleetRequest, schemas.UpdateFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleet, schemas.UpdateFleetRequest, schemas.UpdateFleetResponse), output: &UpdateFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -163,12 +182,6 @@ func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addOpUpdateFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,12 +192,6 @@ func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +258,4 @@ func (m *idempotencyToken_initializeOpUpdateFleet) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opUpdateFleetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateFleet{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFleet",
-	}
 }

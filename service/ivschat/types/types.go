@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/ivschat/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,28 +17,6 @@ type CloudWatchLogsDestinationConfiguration struct {
 	LogGroupName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudWatchLogsDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchLogsDestinationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchLogsDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroupName != nil {
-		s.WriteString(schemas.CloudWatchLogsDestinationConfiguration_logGroupName, *v.LogGroupName)
-	}
-}
-func (v *CloudWatchLogsDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchLogsDestinationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchLogsDestinationConfiguration_logGroupName:
-			v.LogGroupName = new(string)
-			return d.ReadString(schemas.CloudWatchLogsDestinationConfiguration_logGroupName, v.LogGroupName)
-		}
-		return nil
-	})
 }
 
 // A complex type that describes a location where chat logs will be stored. Each
@@ -66,14 +42,6 @@ type DestinationConfigurationMemberCloudWatchLogs struct {
 }
 
 func (*DestinationConfigurationMemberCloudWatchLogs) isDestinationConfiguration() {}
-func (v *DestinationConfigurationMemberCloudWatchLogs) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DestinationConfiguration_cloudWatchLogs)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationConfigurationMemberCloudWatchLogs) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Amazon Kinesis Data Firehose destination configuration where chat activity
 // will be logged.
@@ -84,14 +52,6 @@ type DestinationConfigurationMemberFirehose struct {
 }
 
 func (*DestinationConfigurationMemberFirehose) isDestinationConfiguration() {}
-func (v *DestinationConfigurationMemberFirehose) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DestinationConfiguration_firehose)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationConfigurationMemberFirehose) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Amazon S3 destination configuration where chat activity will be logged.
 type DestinationConfigurationMemberS3 struct {
@@ -101,14 +61,6 @@ type DestinationConfigurationMemberS3 struct {
 }
 
 func (*DestinationConfigurationMemberS3) isDestinationConfiguration() {}
-func (v *DestinationConfigurationMemberS3) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DestinationConfiguration_s3)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationConfigurationMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Specifies a Kinesis Firehose location where chat logs will be stored.
 type FirehoseDestinationConfiguration struct {
@@ -120,28 +72,6 @@ type FirehoseDestinationConfiguration struct {
 	DeliveryStreamName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FirehoseDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FirehoseDestinationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FirehoseDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveryStreamName != nil {
-		s.WriteString(schemas.FirehoseDestinationConfiguration_deliveryStreamName, *v.DeliveryStreamName)
-	}
-}
-func (v *FirehoseDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FirehoseDestinationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FirehoseDestinationConfiguration_deliveryStreamName:
-			v.DeliveryStreamName = new(string)
-			return d.ReadString(schemas.FirehoseDestinationConfiguration_deliveryStreamName, v.DeliveryStreamName)
-		}
-		return nil
-	})
 }
 
 // Summary information about a logging configuration.
@@ -185,68 +115,6 @@ type LoggingConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LoggingConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoggingConfigurationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoggingConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.LoggingConfigurationSummary_arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.LoggingConfigurationSummary_createTime, *v.CreateTime)
-	}
-	serializeDestinationConfiguration(s, schemas.LoggingConfigurationSummary_destinationConfiguration, v.DestinationConfiguration)
-	if v.Id != nil {
-		s.WriteString(schemas.LoggingConfigurationSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.LoggingConfigurationSummary_name, *v.Name)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.LoggingConfigurationSummary_state, string(v.State))
-	}
-	serializeTags(s, schemas.LoggingConfigurationSummary_tags, v.Tags)
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.LoggingConfigurationSummary_updateTime, *v.UpdateTime)
-	}
-}
-func (v *LoggingConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoggingConfigurationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoggingConfigurationSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.LoggingConfigurationSummary_arn, v.Arn)
-		case schemas.LoggingConfigurationSummary_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.LoggingConfigurationSummary_createTime, v.CreateTime)
-		case schemas.LoggingConfigurationSummary_destinationConfiguration:
-			return deserializeDestinationConfiguration(d, schemas.LoggingConfigurationSummary_destinationConfiguration, &v.DestinationConfiguration)
-		case schemas.LoggingConfigurationSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.LoggingConfigurationSummary_id, v.Id)
-		case schemas.LoggingConfigurationSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.LoggingConfigurationSummary_name, v.Name)
-		case schemas.LoggingConfigurationSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.LoggingConfigurationSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = LoggingConfigurationState(ev)
-			return nil
-		case schemas.LoggingConfigurationSummary_tags:
-			return deserializeTags(d, schemas.LoggingConfigurationSummary_tags, &v.Tags)
-		case schemas.LoggingConfigurationSummary_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.LoggingConfigurationSummary_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
 // Configuration information for optional message review.
 type MessageReviewHandler struct {
 
@@ -264,38 +132,6 @@ type MessageReviewHandler struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MessageReviewHandler) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MessageReviewHandler)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MessageReviewHandler) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FallbackResult != "" {
-		s.WriteString(schemas.MessageReviewHandler_fallbackResult, string(v.FallbackResult))
-	}
-	if v.Uri != nil {
-		s.WriteString(schemas.MessageReviewHandler_uri, *v.Uri)
-	}
-}
-func (v *MessageReviewHandler) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MessageReviewHandler, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MessageReviewHandler_fallbackResult:
-			var ev string
-			if err := d.ReadString(schemas.MessageReviewHandler_fallbackResult, &ev); err != nil {
-				return err
-			}
-			v.FallbackResult = FallbackResult(ev)
-			return nil
-		case schemas.MessageReviewHandler_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.MessageReviewHandler_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Summary information about a room.
@@ -337,66 +173,6 @@ type RoomSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RoomSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RoomSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RoomSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.RoomSummary_arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.RoomSummary_createTime, *v.CreateTime)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RoomSummary_id, *v.Id)
-	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.RoomSummary_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
-	if v.MessageReviewHandler != nil {
-		s.WriteStruct(schemas.RoomSummary_messageReviewHandler)
-		v.MessageReviewHandler.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RoomSummary_name, *v.Name)
-	}
-	serializeTags(s, schemas.RoomSummary_tags, v.Tags)
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.RoomSummary_updateTime, *v.UpdateTime)
-	}
-}
-func (v *RoomSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RoomSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RoomSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RoomSummary_arn, v.Arn)
-		case schemas.RoomSummary_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.RoomSummary_createTime, v.CreateTime)
-		case schemas.RoomSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RoomSummary_id, v.Id)
-		case schemas.RoomSummary_loggingConfigurationIdentifiers:
-			return deserializeLoggingConfigurationIdentifierList(d, schemas.RoomSummary_loggingConfigurationIdentifiers, &v.LoggingConfigurationIdentifiers)
-		case schemas.RoomSummary_messageReviewHandler:
-			v.MessageReviewHandler = &MessageReviewHandler{}
-			return v.MessageReviewHandler.Deserialize(d)
-		case schemas.RoomSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RoomSummary_name, v.Name)
-		case schemas.RoomSummary_tags:
-			return deserializeTags(d, schemas.RoomSummary_tags, &v.Tags)
-		case schemas.RoomSummary_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.RoomSummary_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
 // Specifies an S3 location where chat logs will be stored.
 type S3DestinationConfiguration struct {
 
@@ -406,28 +182,6 @@ type S3DestinationConfiguration struct {
 	BucketName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3DestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3DestinationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3DestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3DestinationConfiguration_bucketName, *v.BucketName)
-	}
-}
-func (v *S3DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3DestinationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3DestinationConfiguration_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3DestinationConfiguration_bucketName, v.BucketName)
-		}
-		return nil
-	})
 }
 
 // This object is used in the ValidationException error.
@@ -444,34 +198,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

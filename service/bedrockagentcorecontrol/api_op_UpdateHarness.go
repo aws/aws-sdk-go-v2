@@ -5,15 +5,11 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Operation to update a Harness.
+// Operation to update a harness.
 func (c *Client) UpdateHarness(ctx context.Context, params *UpdateHarnessInput, optFns ...func(*Options)) (*UpdateHarnessOutput, error) {
 	if params == nil {
 		params = &UpdateHarnessInput{}
@@ -66,6 +62,11 @@ type UpdateHarnessInput struct {
 	// specified, the existing value is retained.
 	ExecutionRoleArn *string
 
+	// The lifecycle hooks to run at defined points in the agent loop. If specified,
+	// this replaces all existing hooks. If not specified, the existing hooks are
+	// retained.
+	Hooks []types.HarnessHook
+
 	// The maximum number of iterations the agent loop can execute per invocation. If
 	// not specified, the existing value is retained.
 	MaxIterations *int32
@@ -106,60 +107,6 @@ type UpdateHarnessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHarnessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateHarnessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessAllowedTools(s, schemas.UpdateHarnessRequest_allowedTools, v.AllowedTools)
-	if v.AuthorizerConfiguration != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_authorizerConfiguration)
-		v.AuthorizerConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_clientToken, *v.ClientToken)
-	}
-	serializeHarnessEnvironmentProviderRequest(s, schemas.UpdateHarnessRequest_environment, v.Environment)
-	if v.EnvironmentArtifact != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_environmentArtifact)
-		v.EnvironmentArtifact.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEnvironmentVariablesMap(s, schemas.UpdateHarnessRequest_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.HarnessId != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_harnessId, *v.HarnessId)
-	}
-	if v.MaxIterations != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_maxIterations, *v.MaxIterations)
-	}
-	if v.MaxTokens != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_maxTokens, *v.MaxTokens)
-	}
-	if v.Memory != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_memory)
-		v.Memory.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeHarnessModelConfiguration(s, schemas.UpdateHarnessRequest_model, v.Model)
-	serializeHarnessSkills(s, schemas.UpdateHarnessRequest_skills, v.Skills)
-	serializeHarnessSystemPrompt(s, schemas.UpdateHarnessRequest_systemPrompt, v.SystemPrompt)
-	if v.TimeoutSeconds != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
-	}
-	serializeHarnessTools(s, schemas.UpdateHarnessRequest_tools, v.Tools)
-	if v.Truncation != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_truncation)
-		v.Truncation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateHarnessOutput struct {
 
 	// The updated harness.
@@ -173,73 +120,23 @@ type UpdateHarnessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHarnessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateHarnessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateHarnessResponse_harness:
-			v.Harness = &types.Harness{}
-			return v.Harness.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateHarness{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHarness, schemas.UpdateHarnessRequest, schemas.UpdateHarnessResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateHarness{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHarness, schemas.UpdateHarnessRequest, schemas.UpdateHarnessResponse), output: &UpdateHarnessOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHarness"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -249,12 +146,6 @@ func (c *Client) addOperationUpdateHarnessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpUpdateHarnessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHarness(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -267,12 +158,6 @@ func (c *Client) addOperationUpdateHarnessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -312,12 +197,4 @@ func (m *idempotencyToken_initializeOpUpdateHarness) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opUpdateHarnessMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateHarness{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateHarness(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateHarness",
-	}
 }

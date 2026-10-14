@@ -4,13 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -78,24 +73,6 @@ type GetFormTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFormTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFormTypeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetFormTypeInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.FormTypeIdentifier != nil {
-		s.WriteString(schemas.GetFormTypeInput_formTypeIdentifier, *v.FormTypeIdentifier)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.GetFormTypeInput_revision, *v.Revision)
-	}
-}
-
 type GetFormTypeOutput struct {
 
 	// The ID of the Amazon DataZone domain in which this metadata form type exists.
@@ -149,120 +126,29 @@ type GetFormTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFormTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFormTypeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFormTypeOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetFormTypeOutput_createdAt, v.CreatedAt)
-		case schemas.GetFormTypeOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_createdBy, v.CreatedBy)
-		case schemas.GetFormTypeOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_description, v.Description)
-		case schemas.GetFormTypeOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_domainId, v.DomainId)
-		case schemas.GetFormTypeOutput_imports:
-			return deserializeImportList(d, schemas.GetFormTypeOutput_imports, &v.Imports)
-		case schemas.GetFormTypeOutput_model:
-			return deserializeModel(d, schemas.GetFormTypeOutput_model, &v.Model)
-		case schemas.GetFormTypeOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_name, v.Name)
-		case schemas.GetFormTypeOutput_originDomainId:
-			v.OriginDomainId = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_originDomainId, v.OriginDomainId)
-		case schemas.GetFormTypeOutput_originProjectId:
-			v.OriginProjectId = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_originProjectId, v.OriginProjectId)
-		case schemas.GetFormTypeOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetFormTypeOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.GetFormTypeOutput_revision, v.Revision)
-		case schemas.GetFormTypeOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetFormTypeOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FormTypeStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFormTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFormType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFormType, schemas.GetFormTypeInput, schemas.GetFormTypeOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFormType{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFormType, schemas.GetFormTypeInput, schemas.GetFormTypeOutput), output: &GetFormTypeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFormType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFormTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFormType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -277,22 +163,8 @@ func (c *Client) addOperationGetFormTypeMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFormType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFormType",
-	}
 }

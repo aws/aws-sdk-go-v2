@@ -5,12 +5,8 @@ package neptune
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about endpoints for an Amazon Neptune DB cluster.
@@ -70,28 +66,6 @@ type DescribeDBClusterEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBClusterEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDBClusterEndpointsMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDBClusterEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterEndpointIdentifier != nil {
-		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	serializeFilterList(s, schemas.DescribeDBClusterEndpointsMessage_Filters, v.Filters)
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribeDBClusterEndpointsMessage_Marker, *v.Marker)
-	}
-	if v.MaxRecords != nil {
-		s.WriteInt32(schemas.DescribeDBClusterEndpointsMessage_MaxRecords, *v.MaxRecords)
-	}
-}
-
 type DescribeDBClusterEndpointsOutput struct {
 
 	// Contains the details of the endpoints associated with the cluster and matching
@@ -109,87 +83,29 @@ type DescribeDBClusterEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBClusterEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DBClusterEndpointMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DBClusterEndpointMessage_DBClusterEndpoints:
-			return deserializeDBClusterEndpointList(d, schemas.DBClusterEndpointMessage_DBClusterEndpoints, &v.DBClusterEndpoints)
-		case schemas.DBClusterEndpointMessage_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.DBClusterEndpointMessage_Marker, v.Marker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBClusterEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterEndpoints, schemas.DescribeDBClusterEndpointsMessage, schemas.DBClusterEndpointMessage)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBClusterEndpoints{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBClusterEndpoints, schemas.DescribeDBClusterEndpointsMessage, schemas.DBClusterEndpointMessage), output: &DescribeDBClusterEndpointsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBClusterEndpoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDBClusterEndpointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterEndpoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,12 +118,6 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -317,11 +227,3 @@ type DescribeDBClusterEndpointsAPIClient interface {
 }
 
 var _ DescribeDBClusterEndpointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeDBClusterEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDBClusterEndpoints",
-	}
-}

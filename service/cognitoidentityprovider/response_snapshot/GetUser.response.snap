@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.GetUser
+
+{"MFAOptions":[{"AttributeName":"__AttributeName__","DeliveryMedium":"SMS"},{"AttributeName":"__AttributeName__","DeliveryMedium":"SMS"}],"PreferredMfaSetting":"__PreferredMfaSetting__","UserAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"UserMFASettingList":["__Member__","__Member__"],"Username":"__Username__"}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -14,6 +16,30 @@ type Action struct {
 	ExportRevisionToS3 *AutoExportRevisionToS3RequestDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *Action) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Action)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportRevisionToS3 != nil {
+		s.WriteStruct(schemas.Action_ExportRevisionToS3)
+		v.ExportRevisionToS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Action_ExportRevisionToS3:
+			v.ExportRevisionToS3 = &AutoExportRevisionToS3RequestDetails{}
+			return v.ExportRevisionToS3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The API Gateway API that is the asset.
@@ -49,6 +75,80 @@ type ApiGatewayApiAsset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApiGatewayApiAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiGatewayApiAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiGatewayApiAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiDescription != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiDescription, *v.ApiDescription)
+	}
+	if v.ApiEndpoint != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiEndpoint, *v.ApiEndpoint)
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiId, *v.ApiId)
+	}
+	if v.ApiKey != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiKey, *v.ApiKey)
+	}
+	if v.ApiName != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiName, *v.ApiName)
+	}
+	if v.ApiSpecificationDownloadUrl != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrl, *v.ApiSpecificationDownloadUrl)
+	}
+	if v.ApiSpecificationDownloadUrlExpiresAt != nil {
+		s.WriteTime(schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrlExpiresAt, *v.ApiSpecificationDownloadUrlExpiresAt)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.ApiGatewayApiAsset_ProtocolType, string(v.ProtocolType))
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.ApiGatewayApiAsset_Stage, *v.Stage)
+	}
+}
+func (v *ApiGatewayApiAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiGatewayApiAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiGatewayApiAsset_ApiDescription:
+			v.ApiDescription = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiDescription, v.ApiDescription)
+		case schemas.ApiGatewayApiAsset_ApiEndpoint:
+			v.ApiEndpoint = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiEndpoint, v.ApiEndpoint)
+		case schemas.ApiGatewayApiAsset_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiId, v.ApiId)
+		case schemas.ApiGatewayApiAsset_ApiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiKey, v.ApiKey)
+		case schemas.ApiGatewayApiAsset_ApiName:
+			v.ApiName = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiName, v.ApiName)
+		case schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrl:
+			v.ApiSpecificationDownloadUrl = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrl, v.ApiSpecificationDownloadUrl)
+		case schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrlExpiresAt:
+			v.ApiSpecificationDownloadUrlExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ApiGatewayApiAsset_ApiSpecificationDownloadUrlExpiresAt, v.ApiSpecificationDownloadUrlExpiresAt)
+		case schemas.ApiGatewayApiAsset_ProtocolType:
+			var ev string
+			if err := d.ReadString(schemas.ApiGatewayApiAsset_ProtocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = ProtocolType(ev)
+			return nil
+		case schemas.ApiGatewayApiAsset_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.ApiGatewayApiAsset_Stage, v.Stage)
+		}
+		return nil
+	})
+}
+
 // The configuration for the asset, which can include tags.
 type AssetConfiguration struct {
 
@@ -56,6 +156,25 @@ type AssetConfiguration struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTag(s, schemas.AssetConfiguration_Tags, v.Tags)
+}
+func (v *AssetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetConfiguration_Tags:
+			return deserializeListOfTag(d, schemas.AssetConfiguration_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // The destination for the asset.
@@ -77,6 +196,40 @@ type AssetDestinationEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetDestinationEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetDestinationEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetDestinationEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssetDestinationEntry_AssetId, *v.AssetId)
+	}
+	if v.Bucket != nil {
+		s.WriteString(schemas.AssetDestinationEntry_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AssetDestinationEntry_Key, *v.Key)
+	}
+}
+func (v *AssetDestinationEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetDestinationEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetDestinationEntry_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.AssetDestinationEntry_AssetId, v.AssetId)
+		case schemas.AssetDestinationEntry_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.AssetDestinationEntry_Bucket, v.Bucket)
+		case schemas.AssetDestinationEntry_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AssetDestinationEntry_Key, v.Key)
+		}
+		return nil
+	})
+}
+
 // Details about the asset.
 type AssetDetails struct {
 
@@ -96,6 +249,62 @@ type AssetDetails struct {
 	S3SnapshotAsset *S3SnapshotAsset
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiGatewayApiAsset != nil {
+		s.WriteStruct(schemas.AssetDetails_ApiGatewayApiAsset)
+		v.ApiGatewayApiAsset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LakeFormationDataPermissionAsset != nil {
+		s.WriteStruct(schemas.AssetDetails_LakeFormationDataPermissionAsset)
+		v.LakeFormationDataPermissionAsset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDataShareAsset != nil {
+		s.WriteStruct(schemas.AssetDetails_RedshiftDataShareAsset)
+		v.RedshiftDataShareAsset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DataAccessAsset != nil {
+		s.WriteStruct(schemas.AssetDetails_S3DataAccessAsset)
+		v.S3DataAccessAsset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3SnapshotAsset != nil {
+		s.WriteStruct(schemas.AssetDetails_S3SnapshotAsset)
+		v.S3SnapshotAsset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssetDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetDetails_ApiGatewayApiAsset:
+			v.ApiGatewayApiAsset = &ApiGatewayApiAsset{}
+			return v.ApiGatewayApiAsset.Deserialize(d)
+		case schemas.AssetDetails_LakeFormationDataPermissionAsset:
+			v.LakeFormationDataPermissionAsset = &LakeFormationDataPermissionAsset{}
+			return v.LakeFormationDataPermissionAsset.Deserialize(d)
+		case schemas.AssetDetails_RedshiftDataShareAsset:
+			v.RedshiftDataShareAsset = &RedshiftDataShareAsset{}
+			return v.RedshiftDataShareAsset.Deserialize(d)
+		case schemas.AssetDetails_S3DataAccessAsset:
+			v.S3DataAccessAsset = &S3DataAccessAsset{}
+			return v.S3DataAccessAsset.Deserialize(d)
+		case schemas.AssetDetails_S3SnapshotAsset:
+			v.S3SnapshotAsset = &S3SnapshotAsset{}
+			return v.S3SnapshotAsset.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means
@@ -168,6 +377,88 @@ type AssetEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssetEntry_Arn, *v.Arn)
+	}
+	if v.AssetDetails != nil {
+		s.WriteStruct(schemas.AssetEntry_AssetDetails)
+		v.AssetDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.AssetEntry_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssetEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.AssetEntry_DataSetId, *v.DataSetId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssetEntry_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssetEntry_Name, *v.Name)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.AssetEntry_RevisionId, *v.RevisionId)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.AssetEntry_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AssetEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AssetEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssetEntry_Arn, v.Arn)
+		case schemas.AssetEntry_AssetDetails:
+			v.AssetDetails = &AssetDetails{}
+			return v.AssetDetails.Deserialize(d)
+		case schemas.AssetEntry_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.AssetEntry_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = AssetType(ev)
+			return nil
+		case schemas.AssetEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssetEntry_CreatedAt, v.CreatedAt)
+		case schemas.AssetEntry_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.AssetEntry_DataSetId, v.DataSetId)
+		case schemas.AssetEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssetEntry_Id, v.Id)
+		case schemas.AssetEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssetEntry_Name, v.Name)
+		case schemas.AssetEntry_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.AssetEntry_RevisionId, v.RevisionId)
+		case schemas.AssetEntry_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.AssetEntry_SourceId, v.SourceId)
+		case schemas.AssetEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssetEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The source of the assets.
 type AssetSourceEntry struct {
 
@@ -182,6 +473,34 @@ type AssetSourceEntry struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetSourceEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetSourceEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetSourceEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.AssetSourceEntry_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AssetSourceEntry_Key, *v.Key)
+	}
+}
+func (v *AssetSourceEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetSourceEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetSourceEntry_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.AssetSourceEntry_Bucket, v.Bucket)
+		case schemas.AssetSourceEntry_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AssetSourceEntry_Key, v.Key)
+		}
+		return nil
+	})
 }
 
 // A revision destination is the Amazon S3 bucket folder destination to where the
@@ -202,6 +521,34 @@ type AutoExportRevisionDestinationEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoExportRevisionDestinationEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoExportRevisionDestinationEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoExportRevisionDestinationEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.AutoExportRevisionDestinationEntry_Bucket, *v.Bucket)
+	}
+	if v.KeyPattern != nil {
+		s.WriteString(schemas.AutoExportRevisionDestinationEntry_KeyPattern, *v.KeyPattern)
+	}
+}
+func (v *AutoExportRevisionDestinationEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoExportRevisionDestinationEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoExportRevisionDestinationEntry_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.AutoExportRevisionDestinationEntry_Bucket, v.Bucket)
+		case schemas.AutoExportRevisionDestinationEntry_KeyPattern:
+			v.KeyPattern = new(string)
+			return d.ReadString(schemas.AutoExportRevisionDestinationEntry_KeyPattern, v.KeyPattern)
+		}
+		return nil
+	})
+}
+
 // Details of the operation to be performed by the job.
 type AutoExportRevisionToS3RequestDetails struct {
 
@@ -215,6 +562,38 @@ type AutoExportRevisionToS3RequestDetails struct {
 	Encryption *ExportServerSideEncryption
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoExportRevisionToS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoExportRevisionToS3RequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoExportRevisionToS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.AutoExportRevisionToS3RequestDetails_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevisionDestination != nil {
+		s.WriteStruct(schemas.AutoExportRevisionToS3RequestDetails_RevisionDestination)
+		v.RevisionDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoExportRevisionToS3RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoExportRevisionToS3RequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoExportRevisionToS3RequestDetails_Encryption:
+			v.Encryption = &ExportServerSideEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.AutoExportRevisionToS3RequestDetails_RevisionDestination:
+			v.RevisionDestination = &AutoExportRevisionDestinationEntry{}
+			return v.RevisionDestination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details of the operation to create an Amazon S3 data access from an S3 bucket.
@@ -239,6 +618,42 @@ type CreateS3DataAccessFromS3BucketRequestDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateS3DataAccessFromS3BucketRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateS3DataAccessFromS3BucketRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateS3DataAccessFromS3BucketRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetSource != nil {
+		s.WriteStruct(schemas.CreateS3DataAccessFromS3BucketRequestDetails_AssetSource)
+		v.AssetSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.CreateS3DataAccessFromS3BucketRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.CreateS3DataAccessFromS3BucketRequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *CreateS3DataAccessFromS3BucketRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateS3DataAccessFromS3BucketRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateS3DataAccessFromS3BucketRequestDetails_AssetSource:
+			v.AssetSource = &S3DataAccessAssetSourceEntry{}
+			return v.AssetSource.Deserialize(d)
+		case schemas.CreateS3DataAccessFromS3BucketRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.CreateS3DataAccessFromS3BucketRequestDetails_DataSetId, v.DataSetId)
+		case schemas.CreateS3DataAccessFromS3BucketRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.CreateS3DataAccessFromS3BucketRequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // Details about the response of the operation to create an S3 data access from an
 // S3 bucket.
 type CreateS3DataAccessFromS3BucketResponseDetails struct {
@@ -261,6 +676,42 @@ type CreateS3DataAccessFromS3BucketResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateS3DataAccessFromS3BucketResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateS3DataAccessFromS3BucketResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateS3DataAccessFromS3BucketResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetSource != nil {
+		s.WriteStruct(schemas.CreateS3DataAccessFromS3BucketResponseDetails_AssetSource)
+		v.AssetSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.CreateS3DataAccessFromS3BucketResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.CreateS3DataAccessFromS3BucketResponseDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *CreateS3DataAccessFromS3BucketResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateS3DataAccessFromS3BucketResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateS3DataAccessFromS3BucketResponseDetails_AssetSource:
+			v.AssetSource = &S3DataAccessAssetSourceEntry{}
+			return v.AssetSource.Deserialize(d)
+		case schemas.CreateS3DataAccessFromS3BucketResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.CreateS3DataAccessFromS3BucketResponseDetails_DataSetId, v.DataSetId)
+		case schemas.CreateS3DataAccessFromS3BucketResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.CreateS3DataAccessFromS3BucketResponseDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // The LF-tag policy for database resources.
 type DatabaseLFTagPolicy struct {
 
@@ -270,6 +721,25 @@ type DatabaseLFTagPolicy struct {
 	Expression []LFTag
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseLFTagPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseLFTagPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseLFTagPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfLFTags(s, schemas.DatabaseLFTagPolicy_Expression, v.Expression)
+}
+func (v *DatabaseLFTagPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseLFTagPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseLFTagPolicy_Expression:
+			return deserializeListOfLFTags(d, schemas.DatabaseLFTagPolicy_Expression, &v.Expression)
+		}
+		return nil
+	})
 }
 
 // The LF-tag policy and permissions for database resources.
@@ -286,6 +756,28 @@ type DatabaseLFTagPolicyAndPermissions struct {
 	Permissions []DatabaseLFTagPolicyPermission
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseLFTagPolicyAndPermissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseLFTagPolicyAndPermissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseLFTagPolicyAndPermissions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfLFTags(s, schemas.DatabaseLFTagPolicyAndPermissions_Expression, v.Expression)
+	serializeListOfDatabaseLFTagPolicyPermissions(s, schemas.DatabaseLFTagPolicyAndPermissions_Permissions, v.Permissions)
+}
+func (v *DatabaseLFTagPolicyAndPermissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseLFTagPolicyAndPermissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseLFTagPolicyAndPermissions_Expression:
+			return deserializeListOfLFTags(d, schemas.DatabaseLFTagPolicyAndPermissions_Expression, &v.Expression)
+		case schemas.DatabaseLFTagPolicyAndPermissions_Permissions:
+			return deserializeListOfDatabaseLFTagPolicyPermissions(d, schemas.DatabaseLFTagPolicyAndPermissions_Permissions, &v.Permissions)
+		}
+		return nil
+	})
 }
 
 // Information about a data grant.
@@ -350,6 +842,98 @@ type DataGrantSummaryEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataGrantSummaryEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataGrantSummaryEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataGrantSummaryEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceState != "" {
+		s.WriteString(schemas.DataGrantSummaryEntry_AcceptanceState, string(v.AcceptanceState))
+	}
+	if v.AcceptedAt != nil {
+		s.WriteTime(schemas.DataGrantSummaryEntry_AcceptedAt, *v.AcceptedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DataGrantSummaryEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_DataSetId, *v.DataSetId)
+	}
+	if v.EndsAt != nil {
+		s.WriteTime(schemas.DataGrantSummaryEntry_EndsAt, *v.EndsAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_Name, *v.Name)
+	}
+	if v.ReceiverPrincipal != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_ReceiverPrincipal, *v.ReceiverPrincipal)
+	}
+	if v.SenderPrincipal != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_SenderPrincipal, *v.SenderPrincipal)
+	}
+	if v.SourceDataSetId != nil {
+		s.WriteString(schemas.DataGrantSummaryEntry_SourceDataSetId, *v.SourceDataSetId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DataGrantSummaryEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DataGrantSummaryEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataGrantSummaryEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataGrantSummaryEntry_AcceptanceState:
+			var ev string
+			if err := d.ReadString(schemas.DataGrantSummaryEntry_AcceptanceState, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceState = DataGrantAcceptanceState(ev)
+			return nil
+		case schemas.DataGrantSummaryEntry_AcceptedAt:
+			v.AcceptedAt = new(time.Time)
+			return d.ReadTime(schemas.DataGrantSummaryEntry_AcceptedAt, v.AcceptedAt)
+		case schemas.DataGrantSummaryEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_Arn, v.Arn)
+		case schemas.DataGrantSummaryEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataGrantSummaryEntry_CreatedAt, v.CreatedAt)
+		case schemas.DataGrantSummaryEntry_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_DataSetId, v.DataSetId)
+		case schemas.DataGrantSummaryEntry_EndsAt:
+			v.EndsAt = new(time.Time)
+			return d.ReadTime(schemas.DataGrantSummaryEntry_EndsAt, v.EndsAt)
+		case schemas.DataGrantSummaryEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_Id, v.Id)
+		case schemas.DataGrantSummaryEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_Name, v.Name)
+		case schemas.DataGrantSummaryEntry_ReceiverPrincipal:
+			v.ReceiverPrincipal = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_ReceiverPrincipal, v.ReceiverPrincipal)
+		case schemas.DataGrantSummaryEntry_SenderPrincipal:
+			v.SenderPrincipal = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_SenderPrincipal, v.SenderPrincipal)
+		case schemas.DataGrantSummaryEntry_SourceDataSetId:
+			v.SourceDataSetId = new(string)
+			return d.ReadString(schemas.DataGrantSummaryEntry_SourceDataSetId, v.SourceDataSetId)
+		case schemas.DataGrantSummaryEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataGrantSummaryEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A data set is an AWS resource with one or more revisions.
 type DataSetEntry struct {
 
@@ -406,6 +990,92 @@ type DataSetEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataSetEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSetEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSetEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DataSetEntry_Arn, *v.Arn)
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.DataSetEntry_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DataSetEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DataSetEntry_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DataSetEntry_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataSetEntry_Name, *v.Name)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.DataSetEntry_Origin, string(v.Origin))
+	}
+	if v.OriginDetails != nil {
+		s.WriteStruct(schemas.DataSetEntry_OriginDetails)
+		v.OriginDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.DataSetEntry_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DataSetEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DataSetEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSetEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSetEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DataSetEntry_Arn, v.Arn)
+		case schemas.DataSetEntry_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.DataSetEntry_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = AssetType(ev)
+			return nil
+		case schemas.DataSetEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSetEntry_CreatedAt, v.CreatedAt)
+		case schemas.DataSetEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DataSetEntry_Description, v.Description)
+		case schemas.DataSetEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DataSetEntry_Id, v.Id)
+		case schemas.DataSetEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataSetEntry_Name, v.Name)
+		case schemas.DataSetEntry_Origin:
+			var ev string
+			if err := d.ReadString(schemas.DataSetEntry_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = Origin(ev)
+			return nil
+		case schemas.DataSetEntry_OriginDetails:
+			v.OriginDetails = &OriginDetails{}
+			return v.OriginDetails.Deserialize(d)
+		case schemas.DataSetEntry_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.DataSetEntry_SourceId, v.SourceId)
+		case schemas.DataSetEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSetEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Extra details specific to a data update type notification.
 type DataUpdateRequestDetails struct {
 
@@ -414,6 +1084,28 @@ type DataUpdateRequestDetails struct {
 	DataUpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataUpdateRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataUpdateRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataUpdateRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataUpdatedAt != nil {
+		s.WriteTime(schemas.DataUpdateRequestDetails_DataUpdatedAt, *v.DataUpdatedAt)
+	}
+}
+func (v *DataUpdateRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataUpdateRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataUpdateRequestDetails_DataUpdatedAt:
+			v.DataUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataUpdateRequestDetails_DataUpdatedAt, v.DataUpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Extra details specific to a deprecation type notification.
@@ -425,6 +1117,28 @@ type DeprecationRequestDetails struct {
 	DeprecationAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeprecationRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecationRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecationRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecationAt != nil {
+		s.WriteTime(schemas.DeprecationRequestDetails_DeprecationAt, *v.DeprecationAt)
+	}
+}
+func (v *DeprecationRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeprecationRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeprecationRequestDetails_DeprecationAt:
+			v.DeprecationAt = new(time.Time)
+			return d.ReadTime(schemas.DeprecationRequestDetails_DeprecationAt, v.DeprecationAt)
+		}
+		return nil
+	})
 }
 
 // Information about the job error.
@@ -439,6 +1153,33 @@ type Details struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Details) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Details)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Details) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportAssetFromSignedUrlJobErrorDetails != nil {
+		s.WriteStruct(schemas.Details_ImportAssetFromSignedUrlJobErrorDetails)
+		v.ImportAssetFromSignedUrlJobErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfAssetSourceEntry(s, schemas.Details_ImportAssetsFromS3JobErrorDetails, v.ImportAssetsFromS3JobErrorDetails)
+}
+func (v *Details) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Details, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Details_ImportAssetFromSignedUrlJobErrorDetails:
+			v.ImportAssetFromSignedUrlJobErrorDetails = &ImportAssetFromSignedUrlJobErrorDetails{}
+			return v.ImportAssetFromSignedUrlJobErrorDetails.Deserialize(d)
+		case schemas.Details_ImportAssetsFromS3JobErrorDetails:
+			return deserializeListOfAssetSourceEntry(d, schemas.Details_ImportAssetsFromS3JobErrorDetails, &v.ImportAssetsFromS3JobErrorDetails)
+		}
+		return nil
+	})
+}
+
 // What occurs to start an action.
 type Event struct {
 
@@ -446,6 +1187,30 @@ type Event struct {
 	RevisionPublished *RevisionPublished
 
 	noSmithyDocumentSerde
+}
+
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevisionPublished != nil {
+		s.WriteStruct(schemas.Event_RevisionPublished)
+		v.RevisionPublished.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_RevisionPublished:
+			v.RevisionPublished = &RevisionPublished{}
+			return v.RevisionPublished.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An event action is an object that defines the relationship between a specific
@@ -485,6 +1250,62 @@ type EventActionEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventActionEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActionEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActionEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.EventActionEntry_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.EventActionEntry_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EventActionEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.EventActionEntry_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EventActionEntry_Id, *v.Id)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.EventActionEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *EventActionEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActionEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActionEntry_Action:
+			v.Action = &Action{}
+			return v.Action.Deserialize(d)
+		case schemas.EventActionEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EventActionEntry_Arn, v.Arn)
+		case schemas.EventActionEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EventActionEntry_CreatedAt, v.CreatedAt)
+		case schemas.EventActionEntry_Event:
+			v.Event = &Event{}
+			return v.Event.Deserialize(d)
+		case schemas.EventActionEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EventActionEntry_Id, v.Id)
+		case schemas.EventActionEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.EventActionEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Details of the operation to be performed by the job.
 type ExportAssetsToS3RequestDetails struct {
 
@@ -507,6 +1328,45 @@ type ExportAssetsToS3RequestDetails struct {
 	Encryption *ExportServerSideEncryption
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportAssetsToS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAssetsToS3RequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAssetsToS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3RequestDetails_AssetDestinations, v.AssetDestinations)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportAssetsToS3RequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.ExportAssetsToS3RequestDetails_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ExportAssetsToS3RequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ExportAssetsToS3RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAssetsToS3RequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAssetsToS3RequestDetails_AssetDestinations:
+			return deserializeListOfAssetDestinationEntry(d, schemas.ExportAssetsToS3RequestDetails_AssetDestinations, &v.AssetDestinations)
+		case schemas.ExportAssetsToS3RequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportAssetsToS3RequestDetails_DataSetId, v.DataSetId)
+		case schemas.ExportAssetsToS3RequestDetails_Encryption:
+			v.Encryption = &ExportServerSideEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.ExportAssetsToS3RequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ExportAssetsToS3RequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // Details about the export to Amazon S3 response.
@@ -533,6 +1393,45 @@ type ExportAssetsToS3ResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportAssetsToS3ResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAssetsToS3ResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAssetsToS3ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3ResponseDetails_AssetDestinations, v.AssetDestinations)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportAssetsToS3ResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.ExportAssetsToS3ResponseDetails_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ExportAssetsToS3ResponseDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ExportAssetsToS3ResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAssetsToS3ResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAssetsToS3ResponseDetails_AssetDestinations:
+			return deserializeListOfAssetDestinationEntry(d, schemas.ExportAssetsToS3ResponseDetails_AssetDestinations, &v.AssetDestinations)
+		case schemas.ExportAssetsToS3ResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportAssetsToS3ResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ExportAssetsToS3ResponseDetails_Encryption:
+			v.Encryption = &ExportServerSideEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.ExportAssetsToS3ResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ExportAssetsToS3ResponseDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // Details of the operation to be performed by the job.
 type ExportAssetToSignedUrlRequestDetails struct {
 
@@ -552,6 +1451,40 @@ type ExportAssetToSignedUrlRequestDetails struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportAssetToSignedUrlRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAssetToSignedUrlRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAssetToSignedUrlRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlRequestDetails_AssetId, *v.AssetId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlRequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ExportAssetToSignedUrlRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAssetToSignedUrlRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAssetToSignedUrlRequestDetails_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlRequestDetails_AssetId, v.AssetId)
+		case schemas.ExportAssetToSignedUrlRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlRequestDetails_DataSetId, v.DataSetId)
+		case schemas.ExportAssetToSignedUrlRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlRequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // The details of the export to signed URL response.
@@ -581,6 +1514,52 @@ type ExportAssetToSignedUrlResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportAssetToSignedUrlResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAssetToSignedUrlResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAssetToSignedUrlResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlResponseDetails_AssetId, *v.AssetId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlResponseDetails_RevisionId, *v.RevisionId)
+	}
+	if v.SignedUrl != nil {
+		s.WriteString(schemas.ExportAssetToSignedUrlResponseDetails_SignedUrl, *v.SignedUrl)
+	}
+	if v.SignedUrlExpiresAt != nil {
+		s.WriteTime(schemas.ExportAssetToSignedUrlResponseDetails_SignedUrlExpiresAt, *v.SignedUrlExpiresAt)
+	}
+}
+func (v *ExportAssetToSignedUrlResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAssetToSignedUrlResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAssetToSignedUrlResponseDetails_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlResponseDetails_AssetId, v.AssetId)
+		case schemas.ExportAssetToSignedUrlResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ExportAssetToSignedUrlResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlResponseDetails_RevisionId, v.RevisionId)
+		case schemas.ExportAssetToSignedUrlResponseDetails_SignedUrl:
+			v.SignedUrl = new(string)
+			return d.ReadString(schemas.ExportAssetToSignedUrlResponseDetails_SignedUrl, v.SignedUrl)
+		case schemas.ExportAssetToSignedUrlResponseDetails_SignedUrlExpiresAt:
+			v.SignedUrlExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ExportAssetToSignedUrlResponseDetails_SignedUrlExpiresAt, v.SignedUrlExpiresAt)
+		}
+		return nil
+	})
+}
+
 // Details of the operation to be performed by the job.
 type ExportRevisionsToS3RequestDetails struct {
 
@@ -598,6 +1577,39 @@ type ExportRevisionsToS3RequestDetails struct {
 	Encryption *ExportServerSideEncryption
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportRevisionsToS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportRevisionsToS3RequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportRevisionsToS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportRevisionsToS3RequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.ExportRevisionsToS3RequestDetails_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3RequestDetails_RevisionDestinations, v.RevisionDestinations)
+}
+func (v *ExportRevisionsToS3RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportRevisionsToS3RequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportRevisionsToS3RequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportRevisionsToS3RequestDetails_DataSetId, v.DataSetId)
+		case schemas.ExportRevisionsToS3RequestDetails_Encryption:
+			v.Encryption = &ExportServerSideEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.ExportRevisionsToS3RequestDetails_RevisionDestinations:
+			return deserializeListOfRevisionDestinationEntry(d, schemas.ExportRevisionsToS3RequestDetails_RevisionDestinations, &v.RevisionDestinations)
+		}
+		return nil
+	})
 }
 
 // Details about the export revisions to Amazon S3 response.
@@ -622,6 +1634,45 @@ type ExportRevisionsToS3ResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportRevisionsToS3ResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportRevisionsToS3ResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportRevisionsToS3ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ExportRevisionsToS3ResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.ExportRevisionsToS3ResponseDetails_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventActionArn != nil {
+		s.WriteString(schemas.ExportRevisionsToS3ResponseDetails_EventActionArn, *v.EventActionArn)
+	}
+	serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3ResponseDetails_RevisionDestinations, v.RevisionDestinations)
+}
+func (v *ExportRevisionsToS3ResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportRevisionsToS3ResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportRevisionsToS3ResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ExportRevisionsToS3ResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ExportRevisionsToS3ResponseDetails_Encryption:
+			v.Encryption = &ExportServerSideEncryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.ExportRevisionsToS3ResponseDetails_EventActionArn:
+			v.EventActionArn = new(string)
+			return d.ReadString(schemas.ExportRevisionsToS3ResponseDetails_EventActionArn, v.EventActionArn)
+		case schemas.ExportRevisionsToS3ResponseDetails_RevisionDestinations:
+			return deserializeListOfRevisionDestinationEntry(d, schemas.ExportRevisionsToS3ResponseDetails_RevisionDestinations, &v.RevisionDestinations)
+		}
+		return nil
+	})
+}
+
 // Encryption configuration of the export job. Includes the encryption type in
 // addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS
 // encryption type.
@@ -638,6 +1689,38 @@ type ExportServerSideEncryption struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportServerSideEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportServerSideEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportServerSideEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.ExportServerSideEncryption_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ExportServerSideEncryption_Type, string(v.Type))
+	}
+}
+func (v *ExportServerSideEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportServerSideEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportServerSideEncryption_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.ExportServerSideEncryption_KmsKeyArn, v.KmsKeyArn)
+		case schemas.ExportServerSideEncryption_Type:
+			var ev string
+			if err := d.ReadString(schemas.ExportServerSideEncryption_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ServerSideEncryptionTypes(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The request details.
@@ -686,6 +1769,80 @@ type ImportAssetFromApiGatewayApiRequestDetails struct {
 	ApiKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetFromApiGatewayApiRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetFromApiGatewayApiRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetFromApiGatewayApiRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiDescription != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiDescription, *v.ApiDescription)
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiId, *v.ApiId)
+	}
+	if v.ApiKey != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiKey, *v.ApiKey)
+	}
+	if v.ApiName != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiName, *v.ApiName)
+	}
+	if v.ApiSpecificationMd5Hash != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiSpecificationMd5Hash, *v.ApiSpecificationMd5Hash)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ProtocolType, string(v.ProtocolType))
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_RevisionId, *v.RevisionId)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiRequestDetails_Stage, *v.Stage)
+	}
+}
+func (v *ImportAssetFromApiGatewayApiRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetFromApiGatewayApiRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiDescription:
+			v.ApiDescription = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiDescription, v.ApiDescription)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiId, v.ApiId)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiKey, v.ApiKey)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiName:
+			v.ApiName = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiName, v.ApiName)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiSpecificationMd5Hash:
+			v.ApiSpecificationMd5Hash = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ApiSpecificationMd5Hash, v.ApiSpecificationMd5Hash)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_ProtocolType:
+			var ev string
+			if err := d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_ProtocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = ProtocolType(ev)
+			return nil
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_RevisionId, v.RevisionId)
+		case schemas.ImportAssetFromApiGatewayApiRequestDetails_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiRequestDetails_Stage, v.Stage)
+		}
+		return nil
+	})
 }
 
 // The response details.
@@ -746,6 +1903,92 @@ type ImportAssetFromApiGatewayApiResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAssetFromApiGatewayApiResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetFromApiGatewayApiResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetFromApiGatewayApiResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiDescription != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiDescription, *v.ApiDescription)
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiId, *v.ApiId)
+	}
+	if v.ApiKey != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiKey, *v.ApiKey)
+	}
+	if v.ApiName != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiName, *v.ApiName)
+	}
+	if v.ApiSpecificationMd5Hash != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationMd5Hash, *v.ApiSpecificationMd5Hash)
+	}
+	if v.ApiSpecificationUploadUrl != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrl, *v.ApiSpecificationUploadUrl)
+	}
+	if v.ApiSpecificationUploadUrlExpiresAt != nil {
+		s.WriteTime(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrlExpiresAt, *v.ApiSpecificationUploadUrlExpiresAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ProtocolType, string(v.ProtocolType))
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_RevisionId, *v.RevisionId)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.ImportAssetFromApiGatewayApiResponseDetails_Stage, *v.Stage)
+	}
+}
+func (v *ImportAssetFromApiGatewayApiResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetFromApiGatewayApiResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiDescription:
+			v.ApiDescription = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiDescription, v.ApiDescription)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiId, v.ApiId)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiKey, v.ApiKey)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiName:
+			v.ApiName = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiName, v.ApiName)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationMd5Hash:
+			v.ApiSpecificationMd5Hash = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationMd5Hash, v.ApiSpecificationMd5Hash)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrl:
+			v.ApiSpecificationUploadUrl = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrl, v.ApiSpecificationUploadUrl)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrlExpiresAt:
+			v.ApiSpecificationUploadUrlExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ImportAssetFromApiGatewayApiResponseDetails_ApiSpecificationUploadUrlExpiresAt, v.ApiSpecificationUploadUrlExpiresAt)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_ProtocolType:
+			var ev string
+			if err := d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_ProtocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = ProtocolType(ev)
+			return nil
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_RevisionId, v.RevisionId)
+		case schemas.ImportAssetFromApiGatewayApiResponseDetails_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.ImportAssetFromApiGatewayApiResponseDetails_Stage, v.Stage)
+		}
+		return nil
+	})
+}
+
 // Details about the job error.
 type ImportAssetFromSignedUrlJobErrorDetails struct {
 
@@ -755,6 +1998,28 @@ type ImportAssetFromSignedUrlJobErrorDetails struct {
 	AssetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetFromSignedUrlJobErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetFromSignedUrlJobErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetFromSignedUrlJobErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetName != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlJobErrorDetails_AssetName, *v.AssetName)
+	}
+}
+func (v *ImportAssetFromSignedUrlJobErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetFromSignedUrlJobErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetFromSignedUrlJobErrorDetails_AssetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlJobErrorDetails_AssetName, v.AssetName)
+		}
+		return nil
+	})
 }
 
 // Details of the operation to be performed by the job.
@@ -783,6 +2048,46 @@ type ImportAssetFromSignedUrlRequestDetails struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetFromSignedUrlRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetFromSignedUrlRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetFromSignedUrlRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetName != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlRequestDetails_AssetName, *v.AssetName)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Md5Hash != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlRequestDetails_Md5Hash, *v.Md5Hash)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlRequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ImportAssetFromSignedUrlRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetFromSignedUrlRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetFromSignedUrlRequestDetails_AssetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlRequestDetails_AssetName, v.AssetName)
+		case schemas.ImportAssetFromSignedUrlRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlRequestDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetFromSignedUrlRequestDetails_Md5Hash:
+			v.Md5Hash = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlRequestDetails_Md5Hash, v.Md5Hash)
+		case schemas.ImportAssetFromSignedUrlRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlRequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // The details in the response for an import request, including the signed URL and
@@ -815,6 +2120,58 @@ type ImportAssetFromSignedUrlResponseDetails struct {
 	SignedUrlExpiresAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetFromSignedUrlResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetFromSignedUrlResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetFromSignedUrlResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetName != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlResponseDetails_AssetName, *v.AssetName)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Md5Hash != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlResponseDetails_Md5Hash, *v.Md5Hash)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlResponseDetails_RevisionId, *v.RevisionId)
+	}
+	if v.SignedUrl != nil {
+		s.WriteString(schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrl, *v.SignedUrl)
+	}
+	if v.SignedUrlExpiresAt != nil {
+		s.WriteTime(schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrlExpiresAt, *v.SignedUrlExpiresAt)
+	}
+}
+func (v *ImportAssetFromSignedUrlResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetFromSignedUrlResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetFromSignedUrlResponseDetails_AssetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlResponseDetails_AssetName, v.AssetName)
+		case schemas.ImportAssetFromSignedUrlResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetFromSignedUrlResponseDetails_Md5Hash:
+			v.Md5Hash = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlResponseDetails_Md5Hash, v.Md5Hash)
+		case schemas.ImportAssetFromSignedUrlResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlResponseDetails_RevisionId, v.RevisionId)
+		case schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrl:
+			v.SignedUrl = new(string)
+			return d.ReadString(schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrl, v.SignedUrl)
+		case schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrlExpiresAt:
+			v.SignedUrlExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ImportAssetFromSignedUrlResponseDetails_SignedUrlExpiresAt, v.SignedUrlExpiresAt)
+		}
+		return nil
+	})
 }
 
 // Details about the assets imported from an AWS Lake Formation tag policy request.
@@ -850,6 +2207,62 @@ type ImportAssetsFromLakeFormationTagPolicyRequestDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAssetsFromLakeFormationTagPolicyRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromLakeFormationTagPolicyRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_CatalogId, *v.CatalogId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Database != nil {
+		s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RevisionId, *v.RevisionId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RoleArn, *v.RoleArn)
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportAssetsFromLakeFormationTagPolicyRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_CatalogId, v.CatalogId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_Database:
+			v.Database = &DatabaseLFTagPolicyAndPermissions{}
+			return v.Database.Deserialize(d)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RevisionId, v.RevisionId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_RoleArn, v.RoleArn)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyRequestDetails_Table:
+			v.Table = &TableLFTagPolicyAndPermissions{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details from an import AWS Lake Formation tag policy job response.
 type ImportAssetsFromLakeFormationTagPolicyResponseDetails struct {
 
@@ -883,6 +2296,62 @@ type ImportAssetsFromLakeFormationTagPolicyResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAssetsFromLakeFormationTagPolicyResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromLakeFormationTagPolicyResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_CatalogId, *v.CatalogId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.Database != nil {
+		s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RevisionId, *v.RevisionId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RoleArn, *v.RoleArn)
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportAssetsFromLakeFormationTagPolicyResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_CatalogId, v.CatalogId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_Database:
+			v.Database = &DatabaseLFTagPolicyAndPermissions{}
+			return v.Database.Deserialize(d)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RevisionId, v.RevisionId)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_RoleArn, v.RoleArn)
+		case schemas.ImportAssetsFromLakeFormationTagPolicyResponseDetails_Table:
+			v.Table = &TableLFTagPolicyAndPermissions{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details from an import from Amazon Redshift datashare request.
 type ImportAssetsFromRedshiftDataSharesRequestDetails struct {
 
@@ -902,6 +2371,37 @@ type ImportAssetsFromRedshiftDataSharesRequestDetails struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetsFromRedshiftDataSharesRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromRedshiftDataSharesRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_AssetSources, v.AssetSources)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ImportAssetsFromRedshiftDataSharesRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromRedshiftDataSharesRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_AssetSources:
+			return deserializeListOfRedshiftDataShareAssetSourceEntry(d, schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_AssetSources, &v.AssetSources)
+		case schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // Details from an import from Amazon Redshift datashare response.
@@ -925,6 +2425,37 @@ type ImportAssetsFromRedshiftDataSharesResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAssetsFromRedshiftDataSharesResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromRedshiftDataSharesResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_AssetSources, v.AssetSources)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ImportAssetsFromRedshiftDataSharesResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromRedshiftDataSharesResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_AssetSources:
+			return deserializeListOfRedshiftDataShareAssetSourceEntry(d, schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_AssetSources, &v.AssetSources)
+		case schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // Details of the operation to be performed by the job.
 type ImportAssetsFromS3RequestDetails struct {
 
@@ -946,6 +2477,37 @@ type ImportAssetsFromS3RequestDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAssetsFromS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromS3RequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3RequestDetails_AssetSources, v.AssetSources)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromS3RequestDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromS3RequestDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ImportAssetsFromS3RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromS3RequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromS3RequestDetails_AssetSources:
+			return deserializeListOfAssetSourceEntry(d, schemas.ImportAssetsFromS3RequestDetails_AssetSources, &v.AssetSources)
+		case schemas.ImportAssetsFromS3RequestDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromS3RequestDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromS3RequestDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromS3RequestDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // Details from an import from Amazon S3 response.
 type ImportAssetsFromS3ResponseDetails struct {
 
@@ -965,6 +2527,37 @@ type ImportAssetsFromS3ResponseDetails struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAssetsFromS3ResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAssetsFromS3ResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAssetsFromS3ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3ResponseDetails_AssetSources, v.AssetSources)
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ImportAssetsFromS3ResponseDetails_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ImportAssetsFromS3ResponseDetails_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ImportAssetsFromS3ResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAssetsFromS3ResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAssetsFromS3ResponseDetails_AssetSources:
+			return deserializeListOfAssetSourceEntry(d, schemas.ImportAssetsFromS3ResponseDetails_AssetSources, &v.AssetSources)
+		case schemas.ImportAssetsFromS3ResponseDetails_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromS3ResponseDetails_DataSetId, v.DataSetId)
+		case schemas.ImportAssetsFromS3ResponseDetails_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ImportAssetsFromS3ResponseDetails_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // AWS Data Exchange Jobs are asynchronous import or export operations used to
@@ -1019,6 +2612,85 @@ type JobEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.JobEntry_Arn, *v.Arn)
+	}
+	if v.AssetConfiguration != nil {
+		s.WriteStruct(schemas.JobEntry_AssetConfiguration)
+		v.AssetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.JobEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.JobEntry_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfJobError(s, schemas.JobEntry_Errors, v.Errors)
+	if v.Id != nil {
+		s.WriteString(schemas.JobEntry_Id, *v.Id)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.JobEntry_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.JobEntry_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.JobEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *JobEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.JobEntry_Arn, v.Arn)
+		case schemas.JobEntry_AssetConfiguration:
+			v.AssetConfiguration = &AssetConfiguration{}
+			return v.AssetConfiguration.Deserialize(d)
+		case schemas.JobEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.JobEntry_CreatedAt, v.CreatedAt)
+		case schemas.JobEntry_Details:
+			v.Details = &ResponseDetails{}
+			return v.Details.Deserialize(d)
+		case schemas.JobEntry_Errors:
+			return deserializeListOfJobError(d, schemas.JobEntry_Errors, &v.Errors)
+		case schemas.JobEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.JobEntry_Id, v.Id)
+		case schemas.JobEntry_State:
+			var ev string
+			if err := d.ReadString(schemas.JobEntry_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		case schemas.JobEntry_Type:
+			var ev string
+			if err := d.ReadString(schemas.JobEntry_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		case schemas.JobEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.JobEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // An error that occurred with the job request.
 type JobError struct {
 
@@ -1050,6 +2722,77 @@ type JobError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.JobError_Code, string(v.Code))
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.JobError_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LimitName != "" {
+		s.WriteString(schemas.JobError_LimitName, string(v.LimitName))
+	}
+	if v.LimitValue != 0 {
+		s.WriteFloat64(schemas.JobError_LimitValue, v.LimitValue)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.JobError_Message, *v.Message)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.JobError_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.JobError_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *JobError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobError_Code:
+			var ev string
+			if err := d.ReadString(schemas.JobError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = Code(ev)
+			return nil
+		case schemas.JobError_Details:
+			v.Details = &Details{}
+			return v.Details.Deserialize(d)
+		case schemas.JobError_LimitName:
+			var ev string
+			if err := d.ReadString(schemas.JobError_LimitName, &ev); err != nil {
+				return err
+			}
+			v.LimitName = JobErrorLimitName(ev)
+			return nil
+		case schemas.JobError_LimitValue:
+			return d.ReadFloat64(schemas.JobError_LimitValue, &v.LimitValue)
+		case schemas.JobError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.JobError_Message, v.Message)
+		case schemas.JobError_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.JobError_ResourceId, v.ResourceId)
+		case schemas.JobError_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.JobError_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = JobErrorResourceTypes(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3
 // objects.
 type KmsKeyToGrant struct {
@@ -1063,6 +2806,28 @@ type KmsKeyToGrant struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KmsKeyToGrant) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KmsKeyToGrant)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KmsKeyToGrant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.KmsKeyToGrant_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *KmsKeyToGrant) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KmsKeyToGrant, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KmsKeyToGrant_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.KmsKeyToGrant_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
 }
 
 // The AWS Lake Formation data permission asset.
@@ -1090,6 +2855,49 @@ type LakeFormationDataPermissionAsset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LakeFormationDataPermissionAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LakeFormationDataPermissionAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LakeFormationDataPermissionAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LakeFormationDataPermissionDetails != nil {
+		s.WriteStruct(schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionDetails)
+		v.LakeFormationDataPermissionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LakeFormationDataPermissionType != "" {
+		s.WriteString(schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionType, string(v.LakeFormationDataPermissionType))
+	}
+	serializeListOfLFPermissions(s, schemas.LakeFormationDataPermissionAsset_Permissions, v.Permissions)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.LakeFormationDataPermissionAsset_RoleArn, *v.RoleArn)
+	}
+}
+func (v *LakeFormationDataPermissionAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LakeFormationDataPermissionAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionDetails:
+			v.LakeFormationDataPermissionDetails = &LakeFormationDataPermissionDetails{}
+			return v.LakeFormationDataPermissionDetails.Deserialize(d)
+		case schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionType:
+			var ev string
+			if err := d.ReadString(schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionType, &ev); err != nil {
+				return err
+			}
+			v.LakeFormationDataPermissionType = LakeFormationDataPermissionType(ev)
+			return nil
+		case schemas.LakeFormationDataPermissionAsset_Permissions:
+			return deserializeListOfLFPermissions(d, schemas.LakeFormationDataPermissionAsset_Permissions, &v.Permissions)
+		case schemas.LakeFormationDataPermissionAsset_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.LakeFormationDataPermissionAsset_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Details about the AWS Lake Formation data permission.
 type LakeFormationDataPermissionDetails struct {
 
@@ -1097,6 +2905,30 @@ type LakeFormationDataPermissionDetails struct {
 	LFTagPolicy *LFTagPolicyDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *LakeFormationDataPermissionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LakeFormationDataPermissionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LakeFormationDataPermissionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LFTagPolicy != nil {
+		s.WriteStruct(schemas.LakeFormationDataPermissionDetails_LFTagPolicy)
+		v.LFTagPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LakeFormationDataPermissionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LakeFormationDataPermissionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LakeFormationDataPermissionDetails_LFTagPolicy:
+			v.LFTagPolicy = &LFTagPolicyDetails{}
+			return v.LFTagPolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Extra details specific to the affected scope in this LF data set.
@@ -1109,6 +2941,34 @@ type LakeFormationTagPolicyDetails struct {
 	Table *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LakeFormationTagPolicyDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LakeFormationTagPolicyDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LakeFormationTagPolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteString(schemas.LakeFormationTagPolicyDetails_Database, *v.Database)
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.LakeFormationTagPolicyDetails_Table, *v.Table)
+	}
+}
+func (v *LakeFormationTagPolicyDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LakeFormationTagPolicyDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LakeFormationTagPolicyDetails_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.LakeFormationTagPolicyDetails_Database, v.Database)
+		case schemas.LakeFormationTagPolicyDetails_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.LakeFormationTagPolicyDetails_Table, v.Table)
+		}
+		return nil
+	})
 }
 
 // Details about the AWS Lake Formation resource (Table or Database) included in
@@ -1126,6 +2986,38 @@ type LFResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.LFResourceDetails_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.LFResourceDetails_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LFResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFResourceDetails_Database:
+			v.Database = &DatabaseLFTagPolicy{}
+			return v.Database.Deserialize(d)
+		case schemas.LFResourceDetails_Table:
+			v.Table = &TableLFTagPolicy{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that allows an LF-admin to grant permissions on certain conditions.
 type LFTag struct {
 
@@ -1140,6 +3032,31 @@ type LFTag struct {
 	TagValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LFTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagKey != nil {
+		s.WriteString(schemas.LFTag_TagKey, *v.TagKey)
+	}
+	serializeListOfLFTagValues(s, schemas.LFTag_TagValues, v.TagValues)
+}
+func (v *LFTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTag_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.LFTag_TagKey, v.TagKey)
+		case schemas.LFTag_TagValues:
+			return deserializeListOfLFTagValues(d, schemas.LFTag_TagValues, &v.TagValues)
+		}
+		return nil
+	})
 }
 
 // Details about the LF-tag policy.
@@ -1163,6 +3080,46 @@ type LFTagPolicyDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFTagPolicyDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagPolicyDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagPolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagPolicyDetails_CatalogId, *v.CatalogId)
+	}
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.LFTagPolicyDetails_ResourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.LFTagPolicyDetails_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *LFTagPolicyDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagPolicyDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagPolicyDetails_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagPolicyDetails_CatalogId, v.CatalogId)
+		case schemas.LFTagPolicyDetails_ResourceDetails:
+			v.ResourceDetails = &LFResourceDetails{}
+			return v.ResourceDetails.Deserialize(d)
+		case schemas.LFTagPolicyDetails_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.LFTagPolicyDetails_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = LFResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Extra details specific to this notification.
 type NotificationDetails struct {
 
@@ -1178,6 +3135,46 @@ type NotificationDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataUpdate != nil {
+		s.WriteStruct(schemas.NotificationDetails_DataUpdate)
+		v.DataUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deprecation != nil {
+		s.WriteStruct(schemas.NotificationDetails_Deprecation)
+		v.Deprecation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaChange != nil {
+		s.WriteStruct(schemas.NotificationDetails_SchemaChange)
+		v.SchemaChange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationDetails_DataUpdate:
+			v.DataUpdate = &DataUpdateRequestDetails{}
+			return v.DataUpdate.Deserialize(d)
+		case schemas.NotificationDetails_Deprecation:
+			v.Deprecation = &DeprecationRequestDetails{}
+			return v.Deprecation.Deserialize(d)
+		case schemas.NotificationDetails_SchemaChange:
+			v.SchemaChange = &SchemaChangeRequestDetails{}
+			return v.SchemaChange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the origin of the data set.
 type OriginDetails struct {
 
@@ -1188,6 +3185,34 @@ type OriginDetails struct {
 	ProductId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OriginDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OriginDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OriginDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataGrantId != nil {
+		s.WriteString(schemas.OriginDetails_DataGrantId, *v.DataGrantId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.OriginDetails_ProductId, *v.ProductId)
+	}
+}
+func (v *OriginDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OriginDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OriginDetails_DataGrantId:
+			v.DataGrantId = new(string)
+			return d.ReadString(schemas.OriginDetails_DataGrantId, v.DataGrantId)
+		case schemas.OriginDetails_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.OriginDetails_ProductId, v.ProductId)
+		}
+		return nil
+	})
 }
 
 // Information about a received data grant.
@@ -1247,6 +3272,92 @@ type ReceivedDataGrantSummariesEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReceivedDataGrantSummariesEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReceivedDataGrantSummariesEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReceivedDataGrantSummariesEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceState != "" {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_AcceptanceState, string(v.AcceptanceState))
+	}
+	if v.AcceptedAt != nil {
+		s.WriteTime(schemas.ReceivedDataGrantSummariesEntry_AcceptedAt, *v.AcceptedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ReceivedDataGrantSummariesEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_DataSetId, *v.DataSetId)
+	}
+	if v.EndsAt != nil {
+		s.WriteTime(schemas.ReceivedDataGrantSummariesEntry_EndsAt, *v.EndsAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_Name, *v.Name)
+	}
+	if v.ReceiverPrincipal != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_ReceiverPrincipal, *v.ReceiverPrincipal)
+	}
+	if v.SenderPrincipal != nil {
+		s.WriteString(schemas.ReceivedDataGrantSummariesEntry_SenderPrincipal, *v.SenderPrincipal)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ReceivedDataGrantSummariesEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ReceivedDataGrantSummariesEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReceivedDataGrantSummariesEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReceivedDataGrantSummariesEntry_AcceptanceState:
+			var ev string
+			if err := d.ReadString(schemas.ReceivedDataGrantSummariesEntry_AcceptanceState, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceState = DataGrantAcceptanceState(ev)
+			return nil
+		case schemas.ReceivedDataGrantSummariesEntry_AcceptedAt:
+			v.AcceptedAt = new(time.Time)
+			return d.ReadTime(schemas.ReceivedDataGrantSummariesEntry_AcceptedAt, v.AcceptedAt)
+		case schemas.ReceivedDataGrantSummariesEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_Arn, v.Arn)
+		case schemas.ReceivedDataGrantSummariesEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ReceivedDataGrantSummariesEntry_CreatedAt, v.CreatedAt)
+		case schemas.ReceivedDataGrantSummariesEntry_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_DataSetId, v.DataSetId)
+		case schemas.ReceivedDataGrantSummariesEntry_EndsAt:
+			v.EndsAt = new(time.Time)
+			return d.ReadTime(schemas.ReceivedDataGrantSummariesEntry_EndsAt, v.EndsAt)
+		case schemas.ReceivedDataGrantSummariesEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_Id, v.Id)
+		case schemas.ReceivedDataGrantSummariesEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_Name, v.Name)
+		case schemas.ReceivedDataGrantSummariesEntry_ReceiverPrincipal:
+			v.ReceiverPrincipal = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_ReceiverPrincipal, v.ReceiverPrincipal)
+		case schemas.ReceivedDataGrantSummariesEntry_SenderPrincipal:
+			v.SenderPrincipal = new(string)
+			return d.ReadString(schemas.ReceivedDataGrantSummariesEntry_SenderPrincipal, v.SenderPrincipal)
+		case schemas.ReceivedDataGrantSummariesEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ReceivedDataGrantSummariesEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The Amazon Redshift datashare asset.
 type RedshiftDataShareAsset struct {
 
@@ -1258,6 +3369,28 @@ type RedshiftDataShareAsset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDataShareAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDataShareAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDataShareAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RedshiftDataShareAsset_Arn, *v.Arn)
+	}
+}
+func (v *RedshiftDataShareAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDataShareAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDataShareAsset_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RedshiftDataShareAsset_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 // The source of the Amazon Redshift datashare asset.
 type RedshiftDataShareAssetSourceEntry struct {
 
@@ -1267,6 +3400,28 @@ type RedshiftDataShareAssetSourceEntry struct {
 	DataShareArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftDataShareAssetSourceEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDataShareAssetSourceEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDataShareAssetSourceEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataShareArn != nil {
+		s.WriteString(schemas.RedshiftDataShareAssetSourceEntry_DataShareArn, *v.DataShareArn)
+	}
+}
+func (v *RedshiftDataShareAssetSourceEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDataShareAssetSourceEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDataShareAssetSourceEntry_DataShareArn:
+			v.DataShareArn = new(string)
+			return d.ReadString(schemas.RedshiftDataShareAssetSourceEntry_DataShareArn, v.DataShareArn)
+		}
+		return nil
+	})
 }
 
 // Extra details specific to the affected scope in this Redshift data set.
@@ -1303,6 +3458,58 @@ type RedshiftDataShareDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDataShareDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDataShareDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDataShareDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_Arn, *v.Arn)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_Database, *v.Database)
+	}
+	if v.Function != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_Function, *v.Function)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_Schema, *v.Schema)
+	}
+	if v.Table != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_Table, *v.Table)
+	}
+	if v.View != nil {
+		s.WriteString(schemas.RedshiftDataShareDetails_View, *v.View)
+	}
+}
+func (v *RedshiftDataShareDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDataShareDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDataShareDetails_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_Arn, v.Arn)
+		case schemas.RedshiftDataShareDetails_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_Database, v.Database)
+		case schemas.RedshiftDataShareDetails_Function:
+			v.Function = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_Function, v.Function)
+		case schemas.RedshiftDataShareDetails_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_Schema, v.Schema)
+		case schemas.RedshiftDataShareDetails_Table:
+			v.Table = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_Table, v.Table)
+		case schemas.RedshiftDataShareDetails_View:
+			v.View = new(string)
+			return d.ReadString(schemas.RedshiftDataShareDetails_View, v.View)
+		}
+		return nil
+	})
+}
+
 // The details for the request.
 type RequestDetails struct {
 
@@ -1334,6 +3541,94 @@ type RequestDetails struct {
 	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateS3DataAccessFromS3Bucket != nil {
+		s.WriteStruct(schemas.RequestDetails_CreateS3DataAccessFromS3Bucket)
+		v.CreateS3DataAccessFromS3Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportAssetToSignedUrl != nil {
+		s.WriteStruct(schemas.RequestDetails_ExportAssetToSignedUrl)
+		v.ExportAssetToSignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportAssetsToS3 != nil {
+		s.WriteStruct(schemas.RequestDetails_ExportAssetsToS3)
+		v.ExportAssetsToS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportRevisionsToS3 != nil {
+		s.WriteStruct(schemas.RequestDetails_ExportRevisionsToS3)
+		v.ExportRevisionsToS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetFromApiGatewayApi != nil {
+		s.WriteStruct(schemas.RequestDetails_ImportAssetFromApiGatewayApi)
+		v.ImportAssetFromApiGatewayApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetFromSignedUrl != nil {
+		s.WriteStruct(schemas.RequestDetails_ImportAssetFromSignedUrl)
+		v.ImportAssetFromSignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromLakeFormationTagPolicy != nil {
+		s.WriteStruct(schemas.RequestDetails_ImportAssetsFromLakeFormationTagPolicy)
+		v.ImportAssetsFromLakeFormationTagPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromRedshiftDataShares != nil {
+		s.WriteStruct(schemas.RequestDetails_ImportAssetsFromRedshiftDataShares)
+		v.ImportAssetsFromRedshiftDataShares.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromS3 != nil {
+		s.WriteStruct(schemas.RequestDetails_ImportAssetsFromS3)
+		v.ImportAssetsFromS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestDetails_CreateS3DataAccessFromS3Bucket:
+			v.CreateS3DataAccessFromS3Bucket = &CreateS3DataAccessFromS3BucketRequestDetails{}
+			return v.CreateS3DataAccessFromS3Bucket.Deserialize(d)
+		case schemas.RequestDetails_ExportAssetToSignedUrl:
+			v.ExportAssetToSignedUrl = &ExportAssetToSignedUrlRequestDetails{}
+			return v.ExportAssetToSignedUrl.Deserialize(d)
+		case schemas.RequestDetails_ExportAssetsToS3:
+			v.ExportAssetsToS3 = &ExportAssetsToS3RequestDetails{}
+			return v.ExportAssetsToS3.Deserialize(d)
+		case schemas.RequestDetails_ExportRevisionsToS3:
+			v.ExportRevisionsToS3 = &ExportRevisionsToS3RequestDetails{}
+			return v.ExportRevisionsToS3.Deserialize(d)
+		case schemas.RequestDetails_ImportAssetFromApiGatewayApi:
+			v.ImportAssetFromApiGatewayApi = &ImportAssetFromApiGatewayApiRequestDetails{}
+			return v.ImportAssetFromApiGatewayApi.Deserialize(d)
+		case schemas.RequestDetails_ImportAssetFromSignedUrl:
+			v.ImportAssetFromSignedUrl = &ImportAssetFromSignedUrlRequestDetails{}
+			return v.ImportAssetFromSignedUrl.Deserialize(d)
+		case schemas.RequestDetails_ImportAssetsFromLakeFormationTagPolicy:
+			v.ImportAssetsFromLakeFormationTagPolicy = &ImportAssetsFromLakeFormationTagPolicyRequestDetails{}
+			return v.ImportAssetsFromLakeFormationTagPolicy.Deserialize(d)
+		case schemas.RequestDetails_ImportAssetsFromRedshiftDataShares:
+			v.ImportAssetsFromRedshiftDataShares = &ImportAssetsFromRedshiftDataSharesRequestDetails{}
+			return v.ImportAssetsFromRedshiftDataShares.Deserialize(d)
+		case schemas.RequestDetails_ImportAssetsFromS3:
+			v.ImportAssetsFromS3 = &ImportAssetsFromS3RequestDetails{}
+			return v.ImportAssetsFromS3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details for the response.
@@ -1369,6 +3664,94 @@ type ResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateS3DataAccessFromS3Bucket != nil {
+		s.WriteStruct(schemas.ResponseDetails_CreateS3DataAccessFromS3Bucket)
+		v.CreateS3DataAccessFromS3Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportAssetToSignedUrl != nil {
+		s.WriteStruct(schemas.ResponseDetails_ExportAssetToSignedUrl)
+		v.ExportAssetToSignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportAssetsToS3 != nil {
+		s.WriteStruct(schemas.ResponseDetails_ExportAssetsToS3)
+		v.ExportAssetsToS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportRevisionsToS3 != nil {
+		s.WriteStruct(schemas.ResponseDetails_ExportRevisionsToS3)
+		v.ExportRevisionsToS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetFromApiGatewayApi != nil {
+		s.WriteStruct(schemas.ResponseDetails_ImportAssetFromApiGatewayApi)
+		v.ImportAssetFromApiGatewayApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetFromSignedUrl != nil {
+		s.WriteStruct(schemas.ResponseDetails_ImportAssetFromSignedUrl)
+		v.ImportAssetFromSignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromLakeFormationTagPolicy != nil {
+		s.WriteStruct(schemas.ResponseDetails_ImportAssetsFromLakeFormationTagPolicy)
+		v.ImportAssetsFromLakeFormationTagPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromRedshiftDataShares != nil {
+		s.WriteStruct(schemas.ResponseDetails_ImportAssetsFromRedshiftDataShares)
+		v.ImportAssetsFromRedshiftDataShares.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportAssetsFromS3 != nil {
+		s.WriteStruct(schemas.ResponseDetails_ImportAssetsFromS3)
+		v.ImportAssetsFromS3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseDetails_CreateS3DataAccessFromS3Bucket:
+			v.CreateS3DataAccessFromS3Bucket = &CreateS3DataAccessFromS3BucketResponseDetails{}
+			return v.CreateS3DataAccessFromS3Bucket.Deserialize(d)
+		case schemas.ResponseDetails_ExportAssetToSignedUrl:
+			v.ExportAssetToSignedUrl = &ExportAssetToSignedUrlResponseDetails{}
+			return v.ExportAssetToSignedUrl.Deserialize(d)
+		case schemas.ResponseDetails_ExportAssetsToS3:
+			v.ExportAssetsToS3 = &ExportAssetsToS3ResponseDetails{}
+			return v.ExportAssetsToS3.Deserialize(d)
+		case schemas.ResponseDetails_ExportRevisionsToS3:
+			v.ExportRevisionsToS3 = &ExportRevisionsToS3ResponseDetails{}
+			return v.ExportRevisionsToS3.Deserialize(d)
+		case schemas.ResponseDetails_ImportAssetFromApiGatewayApi:
+			v.ImportAssetFromApiGatewayApi = &ImportAssetFromApiGatewayApiResponseDetails{}
+			return v.ImportAssetFromApiGatewayApi.Deserialize(d)
+		case schemas.ResponseDetails_ImportAssetFromSignedUrl:
+			v.ImportAssetFromSignedUrl = &ImportAssetFromSignedUrlResponseDetails{}
+			return v.ImportAssetFromSignedUrl.Deserialize(d)
+		case schemas.ResponseDetails_ImportAssetsFromLakeFormationTagPolicy:
+			v.ImportAssetsFromLakeFormationTagPolicy = &ImportAssetsFromLakeFormationTagPolicyResponseDetails{}
+			return v.ImportAssetsFromLakeFormationTagPolicy.Deserialize(d)
+		case schemas.ResponseDetails_ImportAssetsFromRedshiftDataShares:
+			v.ImportAssetsFromRedshiftDataShares = &ImportAssetsFromRedshiftDataSharesResponseDetails{}
+			return v.ImportAssetsFromRedshiftDataShares.Deserialize(d)
+		case schemas.ResponseDetails_ImportAssetsFromS3:
+			v.ImportAssetsFromS3 = &ImportAssetsFromS3ResponseDetails{}
+			return v.ImportAssetsFromS3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The destination where the assets in the revision will be exported.
 type RevisionDestinationEntry struct {
 
@@ -1389,6 +3772,40 @@ type RevisionDestinationEntry struct {
 	KeyPattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevisionDestinationEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevisionDestinationEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevisionDestinationEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.RevisionDestinationEntry_Bucket, *v.Bucket)
+	}
+	if v.KeyPattern != nil {
+		s.WriteString(schemas.RevisionDestinationEntry_KeyPattern, *v.KeyPattern)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RevisionDestinationEntry_RevisionId, *v.RevisionId)
+	}
+}
+func (v *RevisionDestinationEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevisionDestinationEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevisionDestinationEntry_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.RevisionDestinationEntry_Bucket, v.Bucket)
+		case schemas.RevisionDestinationEntry_KeyPattern:
+			v.KeyPattern = new(string)
+			return d.ReadString(schemas.RevisionDestinationEntry_KeyPattern, v.KeyPattern)
+		case schemas.RevisionDestinationEntry_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.RevisionDestinationEntry_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // A revision is a container for one or more assets.
@@ -1449,6 +3866,86 @@ type RevisionEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevisionEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevisionEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevisionEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RevisionEntry_Arn, *v.Arn)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.RevisionEntry_Comment, *v.Comment)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RevisionEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.RevisionEntry_DataSetId, *v.DataSetId)
+	}
+	if v.Finalized != false {
+		s.WriteBool(schemas.RevisionEntry_Finalized, v.Finalized)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RevisionEntry_Id, *v.Id)
+	}
+	if v.RevocationComment != nil {
+		s.WriteString(schemas.RevisionEntry_RevocationComment, *v.RevocationComment)
+	}
+	if v.Revoked != false {
+		s.WriteBool(schemas.RevisionEntry_Revoked, v.Revoked)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.RevisionEntry_RevokedAt, *v.RevokedAt)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.RevisionEntry_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RevisionEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RevisionEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevisionEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevisionEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RevisionEntry_Arn, v.Arn)
+		case schemas.RevisionEntry_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.RevisionEntry_Comment, v.Comment)
+		case schemas.RevisionEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevisionEntry_CreatedAt, v.CreatedAt)
+		case schemas.RevisionEntry_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.RevisionEntry_DataSetId, v.DataSetId)
+		case schemas.RevisionEntry_Finalized:
+			return d.ReadBool(schemas.RevisionEntry_Finalized, &v.Finalized)
+		case schemas.RevisionEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RevisionEntry_Id, v.Id)
+		case schemas.RevisionEntry_RevocationComment:
+			v.RevocationComment = new(string)
+			return d.ReadString(schemas.RevisionEntry_RevocationComment, v.RevocationComment)
+		case schemas.RevisionEntry_Revoked:
+			return d.ReadBool(schemas.RevisionEntry_Revoked, &v.Revoked)
+		case schemas.RevisionEntry_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.RevisionEntry_RevokedAt, v.RevokedAt)
+		case schemas.RevisionEntry_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.RevisionEntry_SourceId, v.SourceId)
+		case schemas.RevisionEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevisionEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Information about the published revision.
 type RevisionPublished struct {
 
@@ -1458,6 +3955,28 @@ type RevisionPublished struct {
 	DataSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevisionPublished) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevisionPublished)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevisionPublished) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.RevisionPublished_DataSetId, *v.DataSetId)
+	}
+}
+func (v *RevisionPublished) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevisionPublished, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevisionPublished_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.RevisionPublished_DataSetId, v.DataSetId)
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 data access that is the asset.
@@ -1490,6 +4009,49 @@ type S3DataAccessAsset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DataAccessAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataAccessAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataAccessAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3DataAccessAsset_Bucket, *v.Bucket)
+	}
+	serializeListOf__string(s, schemas.S3DataAccessAsset_KeyPrefixes, v.KeyPrefixes)
+	serializeListOf__string(s, schemas.S3DataAccessAsset_Keys, v.Keys)
+	serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAsset_KmsKeysToGrant, v.KmsKeysToGrant)
+	if v.S3AccessPointAlias != nil {
+		s.WriteString(schemas.S3DataAccessAsset_S3AccessPointAlias, *v.S3AccessPointAlias)
+	}
+	if v.S3AccessPointArn != nil {
+		s.WriteString(schemas.S3DataAccessAsset_S3AccessPointArn, *v.S3AccessPointArn)
+	}
+}
+func (v *S3DataAccessAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataAccessAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataAccessAsset_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3DataAccessAsset_Bucket, v.Bucket)
+		case schemas.S3DataAccessAsset_KeyPrefixes:
+			return deserializeListOf__string(d, schemas.S3DataAccessAsset_KeyPrefixes, &v.KeyPrefixes)
+		case schemas.S3DataAccessAsset_Keys:
+			return deserializeListOf__string(d, schemas.S3DataAccessAsset_Keys, &v.Keys)
+		case schemas.S3DataAccessAsset_KmsKeysToGrant:
+			return deserializeListOfKmsKeysToGrant(d, schemas.S3DataAccessAsset_KmsKeysToGrant, &v.KmsKeysToGrant)
+		case schemas.S3DataAccessAsset_S3AccessPointAlias:
+			v.S3AccessPointAlias = new(string)
+			return d.ReadString(schemas.S3DataAccessAsset_S3AccessPointAlias, v.S3AccessPointAlias)
+		case schemas.S3DataAccessAsset_S3AccessPointArn:
+			v.S3AccessPointArn = new(string)
+			return d.ReadString(schemas.S3DataAccessAsset_S3AccessPointArn, v.S3AccessPointArn)
+		}
+		return nil
+	})
+}
+
 // Source details for an Amazon S3 data access asset.
 type S3DataAccessAssetSourceEntry struct {
 
@@ -1511,6 +4073,37 @@ type S3DataAccessAssetSourceEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DataAccessAssetSourceEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataAccessAssetSourceEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataAccessAssetSourceEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3DataAccessAssetSourceEntry_Bucket, *v.Bucket)
+	}
+	serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_KeyPrefixes, v.KeyPrefixes)
+	serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_Keys, v.Keys)
+	serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAssetSourceEntry_KmsKeysToGrant, v.KmsKeysToGrant)
+}
+func (v *S3DataAccessAssetSourceEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataAccessAssetSourceEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataAccessAssetSourceEntry_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3DataAccessAssetSourceEntry_Bucket, v.Bucket)
+		case schemas.S3DataAccessAssetSourceEntry_KeyPrefixes:
+			return deserializeListOf__string(d, schemas.S3DataAccessAssetSourceEntry_KeyPrefixes, &v.KeyPrefixes)
+		case schemas.S3DataAccessAssetSourceEntry_Keys:
+			return deserializeListOf__string(d, schemas.S3DataAccessAssetSourceEntry_Keys, &v.Keys)
+		case schemas.S3DataAccessAssetSourceEntry_KmsKeysToGrant:
+			return deserializeListOfKmsKeysToGrant(d, schemas.S3DataAccessAssetSourceEntry_KmsKeysToGrant, &v.KmsKeysToGrant)
+		}
+		return nil
+	})
+}
+
 // Extra details specific to the affected scope in this S3 Data Access data set.
 type S3DataAccessDetails struct {
 
@@ -1525,6 +4118,28 @@ type S3DataAccessDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DataAccessDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataAccessDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOf__string(s, schemas.S3DataAccessDetails_KeyPrefixes, v.KeyPrefixes)
+	serializeListOf__string(s, schemas.S3DataAccessDetails_Keys, v.Keys)
+}
+func (v *S3DataAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataAccessDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataAccessDetails_KeyPrefixes:
+			return deserializeListOf__string(d, schemas.S3DataAccessDetails_KeyPrefixes, &v.KeyPrefixes)
+		case schemas.S3DataAccessDetails_Keys:
+			return deserializeListOf__string(d, schemas.S3DataAccessDetails_Keys, &v.Keys)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 object that is the asset.
 type S3SnapshotAsset struct {
 
@@ -1534,6 +4149,25 @@ type S3SnapshotAsset struct {
 	Size float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3SnapshotAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SnapshotAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SnapshotAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.S3SnapshotAsset_Size, v.Size)
+}
+func (v *S3SnapshotAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SnapshotAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SnapshotAsset_Size:
+			return d.ReadFloat64(schemas.S3SnapshotAsset_Size, &v.Size)
+		}
+		return nil
+	})
 }
 
 // Object encompassing information about a schema change to a single, particular
@@ -1557,6 +4191,44 @@ type SchemaChangeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaChangeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaChangeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaChangeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SchemaChangeDetails_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SchemaChangeDetails_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SchemaChangeDetails_Type, string(v.Type))
+	}
+}
+func (v *SchemaChangeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaChangeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaChangeDetails_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SchemaChangeDetails_Description, v.Description)
+		case schemas.SchemaChangeDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SchemaChangeDetails_Name, v.Name)
+		case schemas.SchemaChangeDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.SchemaChangeDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SchemaChangeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Extra details specific to this schema change type notification.
 type SchemaChangeRequestDetails struct {
 
@@ -1570,6 +4242,31 @@ type SchemaChangeRequestDetails struct {
 	Changes []SchemaChangeDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaChangeRequestDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaChangeRequestDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaChangeRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSchemaChangeDetails(s, schemas.SchemaChangeRequestDetails_Changes, v.Changes)
+	if v.SchemaChangeAt != nil {
+		s.WriteTime(schemas.SchemaChangeRequestDetails_SchemaChangeAt, *v.SchemaChangeAt)
+	}
+}
+func (v *SchemaChangeRequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaChangeRequestDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaChangeRequestDetails_Changes:
+			return deserializeListOfSchemaChangeDetails(d, schemas.SchemaChangeRequestDetails_Changes, &v.Changes)
+		case schemas.SchemaChangeRequestDetails_SchemaChangeAt:
+			v.SchemaChangeAt = new(time.Time)
+			return d.ReadTime(schemas.SchemaChangeRequestDetails_SchemaChangeAt, v.SchemaChangeAt)
+		}
+		return nil
+	})
 }
 
 // Details about the scope of the notifications such as the affected resources.
@@ -1587,6 +4284,31 @@ type ScopeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScopeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScopeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfLakeFormationTagPolicies(s, schemas.ScopeDetails_LakeFormationTagPolicies, v.LakeFormationTagPolicies)
+	serializeListOfRedshiftDataShares(s, schemas.ScopeDetails_RedshiftDataShares, v.RedshiftDataShares)
+	serializeListOfS3DataAccesses(s, schemas.ScopeDetails_S3DataAccesses, v.S3DataAccesses)
+}
+func (v *ScopeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScopeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScopeDetails_LakeFormationTagPolicies:
+			return deserializeListOfLakeFormationTagPolicies(d, schemas.ScopeDetails_LakeFormationTagPolicies, &v.LakeFormationTagPolicies)
+		case schemas.ScopeDetails_RedshiftDataShares:
+			return deserializeListOfRedshiftDataShares(d, schemas.ScopeDetails_RedshiftDataShares, &v.RedshiftDataShares)
+		case schemas.ScopeDetails_S3DataAccesses:
+			return deserializeListOfS3DataAccesses(d, schemas.ScopeDetails_S3DataAccesses, &v.S3DataAccesses)
+		}
+		return nil
+	})
+}
+
 // The LF-tag policy for a table resource.
 type TableLFTagPolicy struct {
 
@@ -1596,6 +4318,25 @@ type TableLFTagPolicy struct {
 	Expression []LFTag
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableLFTagPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableLFTagPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableLFTagPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfLFTags(s, schemas.TableLFTagPolicy_Expression, v.Expression)
+}
+func (v *TableLFTagPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableLFTagPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableLFTagPolicy_Expression:
+			return deserializeListOfLFTags(d, schemas.TableLFTagPolicy_Expression, &v.Expression)
+		}
+		return nil
+	})
 }
 
 // The LF-tag policy and permissions that apply to table resources.
@@ -1614,6 +4355,28 @@ type TableLFTagPolicyAndPermissions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableLFTagPolicyAndPermissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableLFTagPolicyAndPermissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableLFTagPolicyAndPermissions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfLFTags(s, schemas.TableLFTagPolicyAndPermissions_Expression, v.Expression)
+	serializeListOfTableTagPolicyLFPermissions(s, schemas.TableLFTagPolicyAndPermissions_Permissions, v.Permissions)
+}
+func (v *TableLFTagPolicyAndPermissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableLFTagPolicyAndPermissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableLFTagPolicyAndPermissions_Expression:
+			return deserializeListOfLFTags(d, schemas.TableLFTagPolicyAndPermissions_Expression, &v.Expression)
+		case schemas.TableLFTagPolicyAndPermissions_Permissions:
+			return deserializeListOfTableTagPolicyLFPermissions(d, schemas.TableLFTagPolicyAndPermissions_Permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
+
 // A tag consisting of a key-value pair that can be applied to a resource.
 type Tag struct {
 
@@ -1628,6 +4391,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

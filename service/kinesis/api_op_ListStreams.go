@@ -5,10 +5,11 @@ package kinesis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists your Kinesis data streams.
@@ -58,6 +59,28 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartStreamName != nil {
+		s.WriteString(schemas.ListStreamsInput_ExclusiveStartStreamName, *v.ExclusiveStartStreamName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListStreamsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsInput_NextToken, *v.NextToken)
+	}
+}
+func (in *ListStreamsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
+}
+
 // Represents the output for ListStreams .
 type ListStreamsOutput struct {
 
@@ -84,74 +107,60 @@ type ListStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreStreams != nil {
+		s.WriteBool(schemas.ListStreamsOutput_HasMoreStreams, *v.HasMoreStreams)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsOutput_NextToken, *v.NextToken)
+	}
+	serializeStreamNameList(s, schemas.ListStreamsOutput_StreamNames, v.StreamNames)
+	serializeStreamSummaryList(s, schemas.ListStreamsOutput_StreamSummaries, v.StreamSummaries)
+}
+func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamsOutput_HasMoreStreams:
+			v.HasMoreStreams = new(bool)
+			return d.ReadBool(schemas.ListStreamsOutput_HasMoreStreams, v.HasMoreStreams)
+		case schemas.ListStreamsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamsOutput_NextToken, v.NextToken)
+		case schemas.ListStreamsOutput_StreamNames:
+			return deserializeStreamNameList(d, schemas.ListStreamsOutput_StreamNames, &v.StreamNames)
+		case schemas.ListStreamsOutput_StreamSummaries:
+			return deserializeStreamSummaryList(d, schemas.ListStreamsOutput_StreamSummaries, &v.StreamSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput), output: &ListStreamsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStreams{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreams"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreams(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +173,6 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,11 +273,3 @@ type ListStreamsAPIClient interface {
 }
 
 var _ ListStreamsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStreams(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStreams",
-	}
-}

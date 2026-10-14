@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.ListDecoderManifestNetworkInterfaces
+
+{"networkInterfaces":[{"canInterface":{"name":"__Name__","protocolName":"__ProtocolName__","protocolVersion":"__ProtocolVersion__"},"customDecodingInterface":{"name":"__Name__"},"interfaceId":"__InterfaceId__","obdInterface":{"dtcRequestIntervalSeconds":1,"hasTransmissionEcu":true,"name":"__Name__","obdStandard":"__ObdStandard__","pidRequestIntervalSeconds":1,"requestMessageId":1,"useExtendedIds":true},"type":"CAN_INTERFACE","vehicleMiddleware":{"name":"__Name__","protocolName":"ROS_2"}},{"canInterface":{"name":"__Name__","protocolName":"__ProtocolName__","protocolVersion":"__ProtocolVersion__"},"customDecodingInterface":{"name":"__Name__"},"interfaceId":"__InterfaceId__","obdInterface":{"dtcRequestIntervalSeconds":1,"hasTransmissionEcu":true,"name":"__Name__","obdStandard":"__ObdStandard__","pidRequestIntervalSeconds":1,"requestMessageId":1,"useExtendedIds":true},"type":"CAN_INTERFACE","vehicleMiddleware":{"name":"__Name__","protocolName":"ROS_2"}}],"nextToken":"__NextToken__"}

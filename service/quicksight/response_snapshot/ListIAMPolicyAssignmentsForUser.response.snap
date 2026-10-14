@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ActiveAssignments":[{"AssignmentName":"__AssignmentName__","PolicyArn":"__PolicyArn__"},{"AssignmentName":"__AssignmentName__","PolicyArn":"__PolicyArn__"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

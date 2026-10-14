@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.GetRecords
+
+{"NextShardIterator":"__NextShardIterator__","Records":[{"awsRegion":"__AwsRegion__","dynamodb":{"ApproximateCreationDateTime":946684800,"Keys":{"key0":{"S":"__AttributeValueMemberS__"}},"NewImage":{"key0":{"S":"__AttributeValueMemberS__"}},"OldImage":{"key0":{"S":"__AttributeValueMemberS__"}},"SequenceNumber":"__SequenceNumber__","SizeBytes":1,"StreamViewType":"NEW_IMAGE"},"eventID":"__EventID__","eventName":"INSERT","eventSource":"__EventSource__","eventVersion":"__EventVersion__","userIdentity":{"PrincipalId":"__PrincipalId__","Type":"__Type__"}},{"awsRegion":"__AwsRegion__","dynamodb":{"ApproximateCreationDateTime":946684800,"Keys":{"key0":{"S":"__AttributeValueMemberS__"}},"NewImage":{"key0":{"S":"__AttributeValueMemberS__"}},"OldImage":{"key0":{"S":"__AttributeValueMemberS__"}},"SequenceNumber":"__SequenceNumber__","SizeBytes":1,"StreamViewType":"NEW_IMAGE"},"eventID":"__EventID__","eventName":"INSERT","eventSource":"__EventSource__","eventVersion":"__EventVersion__","userIdentity":{"PrincipalId":"__PrincipalId__","Type":"__Type__"}}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.SearchVectors
+
+{"ExpressionAttributeNames":{"key0":"__Value__"},"ExpressionAttributeValues":{"key0":{"S":"__AttributeValueMemberS__"}},"IndexName":"__IndexName__","ProjectionExpression":"__ProjectionExpression__","ReturnConsumedCapacity":"INDEXES","SearchConditionExpression":"__SearchConditionExpression__","SearchVector":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"TableName":"__TableName__","TopK":1}

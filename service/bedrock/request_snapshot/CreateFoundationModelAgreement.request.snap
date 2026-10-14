@@ -1,0 +1,5 @@
+POST /create-foundation-model-agreement
+
+Content-Type: application/json
+
+{"modelId":"__ModelId__","offerToken":"__OfferToken__"}

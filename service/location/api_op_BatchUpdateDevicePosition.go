@@ -5,10 +5,7 @@ package location
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,31 +64,6 @@ type BatchUpdateDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateDevicePositionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateDevicePositionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateDevicePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrackerName != nil {
-		s.WriteString(schemas.BatchUpdateDevicePositionRequest_TrackerName, *v.TrackerName)
-	}
-	serializeDevicePositionUpdateList(s, schemas.BatchUpdateDevicePositionRequest_Updates, v.Updates)
-}
-func (v *BatchUpdateDevicePositionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateDevicePositionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateDevicePositionRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.BatchUpdateDevicePositionRequest_TrackerName, v.TrackerName)
-		case schemas.BatchUpdateDevicePositionRequest_Updates:
-			return deserializeDevicePositionUpdateList(d, schemas.BatchUpdateDevicePositionRequest_Updates, &v.Updates)
-		}
-		return nil
-	})
-}
-
 type BatchUpdateDevicePositionOutput struct {
 
 	// Contains error details for each device that failed to update its position.
@@ -105,81 +77,23 @@ type BatchUpdateDevicePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateDevicePositionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateDevicePositionResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateDevicePositionErrorList(s, schemas.BatchUpdateDevicePositionResponse_Errors, v.Errors)
-}
-func (v *BatchUpdateDevicePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateDevicePositionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateDevicePositionResponse_Errors:
-			return deserializeBatchUpdateDevicePositionErrorList(d, schemas.BatchUpdateDevicePositionResponse_Errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateDevicePosition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDevicePosition, schemas.BatchUpdateDevicePositionRequest, schemas.BatchUpdateDevicePositionResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateDevicePosition{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDevicePosition, schemas.BatchUpdateDevicePositionRequest, schemas.BatchUpdateDevicePositionResponse), output: &BatchUpdateDevicePositionOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateDevicePosition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -189,12 +103,6 @@ func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpBatchUpdateDevicePositionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateDevicePosition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,12 +115,6 @@ func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,12 +148,4 @@ func (m *endpointPrefix_opBatchUpdateDevicePositionMiddleware) HandleFinalize(ct
 }
 func addEndpointPrefix_opBatchUpdateDevicePositionMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchUpdateDevicePositionMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateDevicePosition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateDevicePosition",
-	}
 }

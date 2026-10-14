@@ -1,0 +1,5 @@
+POST /v1/domainnames
+
+Content-Type: application/json
+
+{"certificateArn":"__CertificateArn__","description":"__Description__","domainName":"__DomainName__","tags":{"key0":"__Value__"}}

@@ -4,10 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the specified view as the default for the Amazon Web Services Region in
@@ -48,6 +47,28 @@ type AssociateDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.AssociateDefaultViewInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *AssociateDefaultViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDefaultViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateDefaultViewInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.AssociateDefaultViewInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type AssociateDefaultViewOutput struct {
 
 	// The [Amazon resource name (ARN)] of the view that the operation set as the default for queries made in the
@@ -63,77 +84,48 @@ type AssociateDefaultViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.AssociateDefaultViewOutput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *AssociateDefaultViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDefaultViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateDefaultViewOutput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.AssociateDefaultViewOutput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDefaultViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultView, schemas.AssociateDefaultViewInput, schemas.AssociateDefaultViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDefaultView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultView, schemas.AssociateDefaultViewInput, schemas.AssociateDefaultViewOutput), output: &AssociateDefaultViewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateDefaultView{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateDefaultView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateDefaultViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDefaultView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +140,8 @@ func (c *Client) addOperationAssociateDefaultViewMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateDefaultView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateDefaultView",
-	}
 }

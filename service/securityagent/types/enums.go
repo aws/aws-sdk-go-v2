@@ -83,6 +83,27 @@ func (AuthenticationProviderType) Values() []AuthenticationProviderType {
 	}
 }
 
+type CleanUpStrategy string
+
+// Enum values for CleanUpStrategy
+const (
+	// Attempt to delete resources created during the pentest on a best-effort basis.
+	CleanUpStrategyBestEffortDelete CleanUpStrategy = "BEST_EFFORT_DELETE"
+	// Retain all resources created during the pentest.
+	CleanUpStrategyRetainAll CleanUpStrategy = "RETAIN_ALL"
+)
+
+// Values returns all known values for CleanUpStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CleanUpStrategy) Values() []CleanUpStrategy {
+	return []CleanUpStrategy{
+		"BEST_EFFORT_DELETE",
+		"RETAIN_ALL",
+	}
+}
+
 type CodeRemediationStrategy string
 
 // Enum values for CodeRemediationStrategy
@@ -266,6 +287,46 @@ func (FindingStatus) Values() []FindingStatus {
 	}
 }
 
+type GitLabTokenType string
+
+// Enum values for GitLabTokenType
+const (
+	GitLabTokenTypePersonal GitLabTokenType = "PERSONAL"
+	GitLabTokenTypeGroup    GitLabTokenType = "GROUP"
+)
+
+// Values returns all known values for GitLabTokenType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GitLabTokenType) Values() []GitLabTokenType {
+	return []GitLabTokenType{
+		"PERSONAL",
+		"GROUP",
+	}
+}
+
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4      IpAddressType = "IPV4"
+	IpAddressTypeIpv6      IpAddressType = "IPV6"
+	IpAddressTypeDualStack IpAddressType = "DUAL_STACK"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"IPV4",
+		"IPV6",
+		"DUAL_STACK",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -296,6 +357,33 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type JobType string
+
+// Enum values for JobType
+const (
+	// A full pentest job that executes all phases including scanning, managed
+	// execution, and guided exploration.
+	JobTypeFull JobType = "FULL"
+	// A targeted revalidation job that retests specific findings to determine whether
+	// they are still exploitable.
+	JobTypeRevalidation JobType = "REVALIDATION"
+	// A CI/CD pentest job that tests only the code changes in a single pipeline run,
+	// as determined by the scope changes supplied when the job is started.
+	JobTypeCicd JobType = "CICD"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"FULL",
+		"REVALIDATION",
+		"CICD",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -311,6 +399,25 @@ const (
 func (LogType) Values() []LogType {
 	return []LogType{
 		"CLOUDWATCH",
+	}
+}
+
+type ManagementType string
+
+// Enum values for ManagementType
+const (
+	ManagementTypeAwsManaged      ManagementType = "AWS_MANAGED"
+	ManagementTypeCustomerManaged ManagementType = "CUSTOMER_MANAGED"
+)
+
+// Values returns all known values for ManagementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagementType) Values() []ManagementType {
+	return []ManagementType{
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
 	}
 }
 
@@ -392,11 +499,60 @@ func (NetworkTrafficRuleType) Values() []NetworkTrafficRuleType {
 	}
 }
 
+type PrivateConnectionStatus string
+
+// Enum values for PrivateConnectionStatus
+const (
+	PrivateConnectionStatusActive           PrivateConnectionStatus = "ACTIVE"
+	PrivateConnectionStatusCreateInProgress PrivateConnectionStatus = "CREATE_IN_PROGRESS"
+	PrivateConnectionStatusCreateFailed     PrivateConnectionStatus = "CREATE_FAILED"
+	PrivateConnectionStatusDeleteInProgress PrivateConnectionStatus = "DELETE_IN_PROGRESS"
+	PrivateConnectionStatusDeleteFailed     PrivateConnectionStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PrivateConnectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivateConnectionStatus) Values() []PrivateConnectionStatus {
+	return []PrivateConnectionStatus{
+		"ACTIVE",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
+type PrivateConnectionType string
+
+// Enum values for PrivateConnectionType
+const (
+	PrivateConnectionTypeServiceManaged PrivateConnectionType = "SERVICE_MANAGED"
+	PrivateConnectionTypeSelfManaged    PrivateConnectionType = "SELF_MANAGED"
+)
+
+// Values returns all known values for PrivateConnectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivateConnectionType) Values() []PrivateConnectionType {
+	return []PrivateConnectionType{
+		"SERVICE_MANAGED",
+		"SELF_MANAGED",
+	}
+}
+
 type Provider string
 
 // Enum values for Provider
 const (
-	ProviderGithub Provider = "GITHUB"
+	ProviderGithub      Provider = "GITHUB"
+	ProviderGitlab      Provider = "GITLAB"
+	ProviderBitbucket   Provider = "BITBUCKET"
+	ProviderConfluence  Provider = "CONFLUENCE"
+	ProviderAzureDevops Provider = "AZURE_DEVOPS"
+	ProviderJira        Provider = "JIRA"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -406,6 +562,11 @@ const (
 func (Provider) Values() []Provider {
 	return []Provider{
 		"GITHUB",
+		"GITLAB",
+		"BITBUCKET",
+		"CONFLUENCE",
+		"AZURE_DEVOPS",
+		"JIRA",
 	}
 }
 
@@ -415,6 +576,7 @@ type ProviderType string
 const (
 	ProviderTypeSourceCode    ProviderType = "SOURCE_CODE"
 	ProviderTypeDocumentation ProviderType = "DOCUMENTATION"
+	ProviderTypeIssueTracking ProviderType = "ISSUE_TRACKING"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -425,6 +587,26 @@ func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"SOURCE_CODE",
 		"DOCUMENTATION",
+		"ISSUE_TRACKING",
+	}
+}
+
+type ResourceConfigDnsResolution string
+
+// Enum values for ResourceConfigDnsResolution
+const (
+	ResourceConfigDnsResolutionPublic ResourceConfigDnsResolution = "PUBLIC"
+	ResourceConfigDnsResolutionInVpc  ResourceConfigDnsResolution = "IN_VPC"
+)
+
+// Values returns all known values for ResourceConfigDnsResolution. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigDnsResolution) Values() []ResourceConfigDnsResolution {
+	return []ResourceConfigDnsResolution{
+		"PUBLIC",
+		"IN_VPC",
 	}
 }
 
@@ -433,6 +615,8 @@ type ResourceType string
 // Enum values for ResourceType
 const (
 	ResourceTypeCodeRepository ResourceType = "CODE_REPOSITORY"
+	ResourceTypeDocument       ResourceType = "DOCUMENT"
+	ResourceTypeProject        ResourceType = "PROJECT"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -442,6 +626,8 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CODE_REPOSITORY",
+		"DOCUMENT",
+		"PROJECT",
 	}
 }
 
@@ -571,6 +757,125 @@ func (RiskType) Values() []RiskType {
 	}
 }
 
+type ScopeDecision string
+
+// Enum values for ScopeDecision
+const (
+	// The code changes are in scope and are tested by the pentest job.
+	ScopeDecisionInScope ScopeDecision = "IN_SCOPE"
+	// The code changes are out of scope and are not tested. No pentest is run for the
+	// changes.
+	ScopeDecisionScopedOut ScopeDecision = "SCOPED_OUT"
+	// The code changes could not be conclusively scoped because of a conflict in the
+	// scoping inputs.
+	ScopeDecisionScopeConflict ScopeDecision = "SCOPE_CONFLICT"
+)
+
+// Values returns all known values for ScopeDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeDecision) Values() []ScopeDecision {
+	return []ScopeDecision{
+		"IN_SCOPE",
+		"SCOPED_OUT",
+		"SCOPE_CONFLICT",
+	}
+}
+
+type SecurityRequirementArtifactFormat string
+
+// Enum values for SecurityRequirementArtifactFormat
+const (
+	SecurityRequirementArtifactFormatMd   SecurityRequirementArtifactFormat = "MD"
+	SecurityRequirementArtifactFormatPdf  SecurityRequirementArtifactFormat = "PDF"
+	SecurityRequirementArtifactFormatTxt  SecurityRequirementArtifactFormat = "TXT"
+	SecurityRequirementArtifactFormatDocx SecurityRequirementArtifactFormat = "DOCX"
+	SecurityRequirementArtifactFormatDoc  SecurityRequirementArtifactFormat = "DOC"
+)
+
+// Values returns all known values for SecurityRequirementArtifactFormat. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityRequirementArtifactFormat) Values() []SecurityRequirementArtifactFormat {
+	return []SecurityRequirementArtifactFormat{
+		"MD",
+		"PDF",
+		"TXT",
+		"DOCX",
+		"DOC",
+	}
+}
+
+type SecurityRequirementPackImportStatus string
+
+// Enum values for SecurityRequirementPackImportStatus
+const (
+	SecurityRequirementPackImportStatusPending    SecurityRequirementPackImportStatus = "PENDING"
+	SecurityRequirementPackImportStatusInProgress SecurityRequirementPackImportStatus = "IN_PROGRESS"
+	SecurityRequirementPackImportStatusFailed     SecurityRequirementPackImportStatus = "FAILED"
+	SecurityRequirementPackImportStatusCompleted  SecurityRequirementPackImportStatus = "COMPLETED"
+)
+
+// Values returns all known values for SecurityRequirementPackImportStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityRequirementPackImportStatus) Values() []SecurityRequirementPackImportStatus {
+	return []SecurityRequirementPackImportStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
+type SecurityRequirementPackStatus string
+
+// Enum values for SecurityRequirementPackStatus
+const (
+	SecurityRequirementPackStatusEnabled  SecurityRequirementPackStatus = "ENABLED"
+	SecurityRequirementPackStatusDisabled SecurityRequirementPackStatus = "DISABLED"
+)
+
+// Values returns all known values for SecurityRequirementPackStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityRequirementPackStatus) Values() []SecurityRequirementPackStatus {
+	return []SecurityRequirementPackStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type SkillType string
+
+// Enum values for SkillType
+const (
+	// The finding personalization skill learns customer preferences from finding
+	// edits and aligns future findings accordingly.
+	SkillTypeFindingPersonalization SkillType = "FINDING_PERSONALIZATION"
+	// The login optimization skill learns application login flows to improve
+	// authentication success across runs.
+	SkillTypeLoginOptimization SkillType = "LOGIN_OPTIMIZATION"
+)
+
+// Values returns all known values for SkillType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SkillType) Values() []SkillType {
+	return []SkillType{
+		"FINDING_PERSONALIZATION",
+		"LOGIN_OPTIMIZATION",
+	}
+}
+
 type StepName string
 
 // Enum values for StepName
@@ -583,6 +888,9 @@ const (
 	StepNamePentest StepName = "PENTEST"
 	// Cleanup of infrastructure and resources created by the agent.
 	StepNameFinalizing StepName = "FINALIZING"
+	// Simulated validation step that dynamically confirms vulnerability
+	// exploitability.
+	StepNameValidation StepName = "VALIDATION"
 )
 
 // Values returns all known values for StepName. Note that this can be expanded in
@@ -595,6 +903,7 @@ func (StepName) Values() []StepName {
 		"STATIC_ANALYSIS",
 		"PENTEST",
 		"FINALIZING",
+		"VALIDATION",
 	}
 }
 
@@ -625,6 +934,33 @@ func (StepStatus) Values() []StepStatus {
 		"COMPLETED",
 		"FAILED",
 		"STOPPED",
+	}
+}
+
+type StrideCategory string
+
+// Enum values for StrideCategory
+const (
+	StrideCategorySpoofing              StrideCategory = "SPOOFING"
+	StrideCategoryTampering             StrideCategory = "TAMPERING"
+	StrideCategoryRepudiation           StrideCategory = "REPUDIATION"
+	StrideCategoryInformationDisclosure StrideCategory = "INFORMATION_DISCLOSURE"
+	StrideCategoryDenialOfService       StrideCategory = "DENIAL_OF_SERVICE"
+	StrideCategoryElevationOfPrivilege  StrideCategory = "ELEVATION_OF_PRIVILEGE"
+)
+
+// Values returns all known values for StrideCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StrideCategory) Values() []StrideCategory {
+	return []StrideCategory{
+		"SPOOFING",
+		"TAMPERING",
+		"REPUDIATION",
+		"INFORMATION_DISCLOSURE",
+		"DENIAL_OF_SERVICE",
+		"ELEVATION_OF_PRIVILEGE",
 	}
 }
 
@@ -685,6 +1021,163 @@ func (TaskExecutionStatus) Values() []TaskExecutionStatus {
 	}
 }
 
+type TestScopeType string
+
+// Enum values for TestScopeType
+const (
+	// A traditional web application.
+	TestScopeTypeWebApp TestScopeType = "WEB_APP"
+	// A generative AI application.
+	TestScopeTypeGenerativeAiApp TestScopeType = "GENERATIVE_AI_APP"
+)
+
+// Values returns all known values for TestScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestScopeType) Values() []TestScopeType {
+	return []TestScopeType{
+		"WEB_APP",
+		"GENERATIVE_AI_APP",
+	}
+}
+
+type ThreatActor string
+
+// Enum values for ThreatActor
+const (
+	// Threat was created or updated by a customer.
+	ThreatActorCustomer ThreatActor = "CUSTOMER"
+	// Threat was created or updated by an agent.
+	ThreatActorAgent ThreatActor = "AGENT"
+)
+
+// Values returns all known values for ThreatActor. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatActor) Values() []ThreatActor {
+	return []ThreatActor{
+		"CUSTOMER",
+		"AGENT",
+	}
+}
+
+type ThreatSeverity string
+
+// Enum values for ThreatSeverity
+const (
+	ThreatSeverityCritical ThreatSeverity = "CRITICAL"
+	ThreatSeverityHigh     ThreatSeverity = "HIGH"
+	ThreatSeverityMedium   ThreatSeverity = "MEDIUM"
+	ThreatSeverityLow      ThreatSeverity = "LOW"
+	ThreatSeverityInfo     ThreatSeverity = "INFO"
+)
+
+// Values returns all known values for ThreatSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatSeverity) Values() []ThreatSeverity {
+	return []ThreatSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"INFO",
+	}
+}
+
+type ThreatStatus string
+
+// Enum values for ThreatStatus
+const (
+	ThreatStatusOpen      ThreatStatus = "OPEN"
+	ThreatStatusResolved  ThreatStatus = "RESOLVED"
+	ThreatStatusDismissed ThreatStatus = "DISMISSED"
+)
+
+// Values returns all known values for ThreatStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatStatus) Values() []ThreatStatus {
+	return []ThreatStatus{
+		"OPEN",
+		"RESOLVED",
+		"DISMISSED",
+	}
+}
+
+type TriggerEvent string
+
+// Enum values for TriggerEvent
+const (
+	// A pull request that isn't a draft is opened, updated, or marked ready for
+	// review.
+	TriggerEventPullRequestReadyForReview TriggerEvent = "PULL_REQUEST_READY_FOR_REVIEW"
+	// A draft pull request is opened or updated.
+	TriggerEventPullRequestDraft TriggerEvent = "PULL_REQUEST_DRAFT"
+	// A label is added to a pull request. A filter group that selects this event must
+	// include a LABEL filter with the INCLUDE match mode, and a review starts only
+	// when the added label matches it.
+	TriggerEventPullRequestLabelAdded TriggerEvent = "PULL_REQUEST_LABEL_ADDED"
+)
+
+// Values returns all known values for TriggerEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEvent) Values() []TriggerEvent {
+	return []TriggerEvent{
+		"PULL_REQUEST_READY_FOR_REVIEW",
+		"PULL_REQUEST_DRAFT",
+		"PULL_REQUEST_LABEL_ADDED",
+	}
+}
+
+type TriggerFilterMatchMode string
+
+// Enum values for TriggerFilterMatchMode
+const (
+	// The filter passes when a value fully matches at least one pattern.
+	TriggerFilterMatchModeInclude TriggerFilterMatchMode = "INCLUDE"
+	// The filter passes when no value fully matches any pattern.
+	TriggerFilterMatchModeExclude TriggerFilterMatchMode = "EXCLUDE"
+)
+
+// Values returns all known values for TriggerFilterMatchMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterMatchMode) Values() []TriggerFilterMatchMode {
+	return []TriggerFilterMatchMode{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type TriggerFilterType string
+
+// Enum values for TriggerFilterType
+const (
+	// The name of the pull request's target branch, for example main .
+	TriggerFilterTypeTargetBranch TriggerFilterType = "TARGET_BRANCH"
+	// The labels on the pull request.
+	TriggerFilterTypeLabel TriggerFilterType = "LABEL"
+)
+
+// Values returns all known values for TriggerFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerFilterType) Values() []TriggerFilterType {
+	return []TriggerFilterType{
+		"TARGET_BRANCH",
+		"LABEL",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -700,5 +1193,72 @@ const (
 func (UserRole) Values() []UserRole {
 	return []UserRole{
 		"MEMBER",
+	}
+}
+
+type ValidationMode string
+
+// Enum values for ValidationMode
+const (
+	ValidationModeDisabled  ValidationMode = "DISABLED"
+	ValidationModeSimulated ValidationMode = "SIMULATED"
+)
+
+// Values returns all known values for ValidationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationMode) Values() []ValidationMode {
+	return []ValidationMode{
+		"DISABLED",
+		"SIMULATED",
+	}
+}
+
+type ValidationStatus string
+
+// Enum values for ValidationStatus
+const (
+	ValidationStatusConfirmed        ValidationStatus = "CONFIRMED"
+	ValidationStatusNotReproduced    ValidationStatus = "NOT_REPRODUCED"
+	ValidationStatusValidationFailed ValidationStatus = "VALIDATION_FAILED"
+	ValidationStatusValidating       ValidationStatus = "VALIDATING"
+	ValidationStatusNotValidated     ValidationStatus = "NOT_VALIDATED"
+)
+
+// Values returns all known values for ValidationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationStatus) Values() []ValidationStatus {
+	return []ValidationStatus{
+		"CONFIRMED",
+		"NOT_REPRODUCED",
+		"VALIDATION_FAILED",
+		"VALIDATING",
+		"NOT_VALIDATED",
+	}
+}
+
+type WebhookAction string
+
+// Enum values for WebhookAction
+const (
+	// Create the webhook if one does not already exist. Returns the payload URL and
+	// the signing secret.
+	WebhookActionCreateIfAbsent WebhookAction = "CREATE_IF_ABSENT"
+	// Generate a new signing secret for the existing webhook, keeping the same
+	// payload URL. Returns the new secret.
+	WebhookActionRotate WebhookAction = "ROTATE"
+)
+
+// Values returns all known values for WebhookAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookAction) Values() []WebhookAction {
+	return []WebhookAction{
+		"CREATE_IF_ABSENT",
+		"ROTATE",
 	}
 }

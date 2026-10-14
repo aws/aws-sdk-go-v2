@@ -1,0 +1,5 @@
+PATCH /workloads/__WorkloadId__
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"Applications":["__Member__","__Member__"],"ArchitecturalDesign":"__ArchitecturalDesign__","AwsRegions":["__Member__","__Member__"],"Description":"__Description__","DiscoveryConfig":{"TrustedAdvisorIntegrationStatus":"ENABLED","WorkloadResourceDefinition":["WORKLOAD_METADATA","WORKLOAD_METADATA"]},"Environment":"PRODUCTION","ImprovementStatus":"NOT_APPLICABLE","Industry":"__Industry__","IndustryType":"__IndustryType__","IsReviewOwnerUpdateAcknowledged":true,"JiraConfiguration":{"IssueManagementStatus":"ENABLED","IssueManagementType":"AUTO","JiraProjectKey":"__JiraProjectKey__"},"NonAwsRegions":["__Member__","__Member__"],"Notes":"__Notes__","PillarPriorities":["__Member__","__Member__"],"ReviewOwner":"__ReviewOwner__","WorkloadName":"__WorkloadName__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.UpdateFlywheel
+
+{"FlywheelProperties":{"ActiveModelArn":"__ActiveModelArn__","CreationTime":946684800,"DataAccessRoleArn":"__DataAccessRoleArn__","DataLakeS3Uri":"__DataLakeS3Uri__","DataSecurityConfig":{"DataLakeKmsKeyId":"__DataLakeKmsKeyId__","ModelKmsKeyId":"__ModelKmsKeyId__","VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"FlywheelArn":"__FlywheelArn__","LastModifiedTime":946684800,"LatestFlywheelIteration":"__LatestFlywheelIteration__","Message":"__Message__","ModelType":"DOCUMENT_CLASSIFIER","Status":"CREATING","TaskConfig":{"DocumentClassificationConfig":{"Labels":["__Member__","__Member__"],"Mode":"MULTI_CLASS"},"EntityRecognitionConfig":{"EntityTypes":[{"Type":"__Type__"},{"Type":"__Type__"}]},"LanguageCode":"en"}}}

@@ -1,0 +1,3 @@
+GET /indexes/recovery-point?createdAfter=2000-01-01T00%3A00%3A00Z&createdBefore=2000-01-01T00%3A00%3A00Z&indexStatus=PENDING&maxResults=1&nextToken=__NextToken__&resourceType=__ResourceType__&sourceResourceArn=__SourceResourceArn__
+
+

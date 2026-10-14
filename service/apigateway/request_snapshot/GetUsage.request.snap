@@ -1,0 +1,4 @@
+GET /usageplans/__UsagePlanId__/usage?endDate=__EndDate__&keyId=__KeyId__&limit=1&position=__Position__&startDate=__StartDate__
+
+Accept: application/json
+

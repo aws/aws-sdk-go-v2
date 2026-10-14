@@ -1,0 +1,5 @@
+POST /getpermission
+
+Content-Type: application/json
+
+{"permissionArn":"__PermissionArn__","permissionVersion":1}

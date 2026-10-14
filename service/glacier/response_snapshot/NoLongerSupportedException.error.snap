@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"NoLongerSupportedException","code":"NoLongerSupportedException","message":"__Message__","type":"__Type__"}

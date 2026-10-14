@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.ListEntities
+
+{"Entities":[{"Category":"__Category__","CustomProperties":{"key0":"__Value__"},"Description":"__Description__","EntityName":"__EntityName__","IsParentEntity":true,"Label":"__Label__"},{"Category":"__Category__","CustomProperties":{"key0":"__Value__"},"Description":"__Description__","EntityName":"__EntityName__","IsParentEntity":true,"Label":"__Label__"}],"NextToken":"__NextToken__"}

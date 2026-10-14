@@ -5,13 +5,17 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new workflow or a new version of an existing workflow.
+// Creates a new workflow or a new version of an existing workflow. If a workflow
+// with the same name and semantic version already exists, and your request changes
+// its configuration, Image Builder creates a new build version. If the
+// configuration is identical to the latest build version, the request fails
+// because that workflow configuration already exists.
 func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateWorkflowInput{}
@@ -29,15 +33,23 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// runs no more than one time. If you retry a request with the same client token,
+	// Image Builder returns the original response without running the operation again.
+	// For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the workflow to create.
+	// The name of the workflow to create. Image Builder generates the workflow ARN
+	// from a normalized form of the name, so names that differ only in case, spaces,
+	// or underscores count as the same name. If a workflow with the same name and
+	// semantic version already exists in your account in the same Amazon Web Services
+	// Region, the request creates a new build version for it. If the content is also
+	// identical to the latest build version, the request fails because the workflow
+	// already exists.
 	//
 	// This member is required.
 	Name *string
@@ -48,9 +60,9 @@ type CreateWorkflowInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -59,8 +71,8 @@ type CreateWorkflowInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The phase in the image build process for which the workflow resource is
-	// responsible.
+	// The image creation stage that this workflow applies to. Image Builder validates
+	// the workflow document steps against the stage you specify.
 	//
 	// This member is required.
 	Type types.WorkflowType
@@ -69,22 +81,25 @@ type CreateWorkflowInput struct {
 	// makes this version different from other versions of the workflow.
 	ChangeDescription *string
 
-	// Contains the UTF-8 encoded YAML document content for the workflow.
-	// Alternatively, you can specify the uri of a YAML document file stored in Amazon
-	// S3. However, you cannot specify both properties.
+	// The UTF-8 encoded YAML document content for the workflow, up to 16,000
+	// characters. For larger documents, store the document in Amazon S3 and specify
+	// the uri property instead. You must specify exactly one of the data or uri
+	// properties.
 	Data *string
 
 	// Describes the workflow.
 	Description *string
 
-	// Validates the required permissions for the operation and the request
-	// parameters, without actually making the request, and provides an error response.
-	// Upon a successful request, the error response is DryRunOperationException .
+	// Validates the required permissions and request parameters without performing
+	// the operation. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
 	DryRun bool
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
 	// encrypt this workflow resource. This can be either the Key ARN or the Alias ARN.
-	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide.
+	// For more information, see [Key identifiers (KeyId)]in the Key Management Service Developer Guide. If you
+	// don't specify a key, Image Builder encrypts the workflow document with a KMS key
+	// that Image Builder owns.
 	//
 	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
 	KmsKeyId *string
@@ -92,16 +107,56 @@ type CreateWorkflowInput struct {
 	// Tags that apply to the workflow resource.
 	Tags map[string]string
 
-	// The uri of a YAML component document file. This must be an S3 URL (
-	// s3://bucket/key ), and the requester must have permission to access the S3
-	// bucket it points to. If you use Amazon S3, you can specify component content up
-	// to your service quota.
+	// The uri of a YAML workflow document file stored in Amazon S3. This must be an
+	// S3 URL ( s3://bucket/key ), and you must have permission to access the S3 bucket
+	// it points to. A workflow document that you provide from Amazon S3 can be up to
+	// your service quota for workflow size.
 	//
-	// Alternatively, you can specify the YAML document inline, using the component
-	// data property. You cannot specify both properties.
+	// Alternatively, you can specify the YAML document inline, using the workflow data
+	// property. You must specify exactly one of the data or uri properties.
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateWorkflowRequest_dryRun, v.DryRun)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_name, *v.Name)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateWorkflowRequest_type, string(v.Type))
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_uri, *v.Uri)
+	}
 }
 
 type CreateWorkflowOutput struct {
@@ -109,7 +164,9 @@ type CreateWorkflowOutput struct {
 	// The client token that uniquely identifies the request.
 	ClientToken *string
 
-	// The resource ARNs with different wildcard variations of semantic versioning.
+	// A set of wildcard version ARNs that always reference the latest version of the
+	// resource. ARNs are included for the latest version overall, and for the latest
+	// versions within the same major, minor, and patch levels.
 	LatestVersionReferences *types.LatestVersionReferences
 
 	// The Amazon Resource Name (ARN) of the workflow resource that the request
@@ -122,65 +179,56 @@ type CreateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_clientToken, *v.ClientToken)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateWorkflowResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+}
+func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_clientToken, v.ClientToken)
+		case schemas.CreateWorkflowResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateWorkflowResponse_workflowBuildVersionArn:
+			v.WorkflowBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_workflowBuildVersionArn, v.WorkflowBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse), output: &CreateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -190,12 +238,6 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +250,6 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,12 +289,4 @@ func (m *idempotencyToken_initializeOpCreateWorkflow) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateWorkflowMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkflow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkflow",
-	}
 }

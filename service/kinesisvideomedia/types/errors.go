@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,16 +33,6 @@ func (e *ClientLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ClientLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClientLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClientLimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ClientLimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
 // limit of allowed client connections.
@@ -71,16 +60,6 @@ func (e *ConnectionLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConnectionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConnectionLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionLimitExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConnectionLimitExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
@@ -107,16 +86,6 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidArgumentException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 //	Status Code: 400, Caller used wrong endpoint to write data to a stream. On
 //
@@ -147,16 +116,6 @@ func (e *InvalidEndpointException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidEndpointException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidEndpointException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidEndpointException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidEndpointException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Status Code: 403, The caller is not authorized to perform an operation on the
 // given stream, or the token has expired.
@@ -184,16 +143,6 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *NotAuthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotAuthorizedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotAuthorizedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.NotAuthorizedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Status Code: 404, The stream with the given name does not exist.
 type ResourceNotFoundException struct {
@@ -220,13 +169,3 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}

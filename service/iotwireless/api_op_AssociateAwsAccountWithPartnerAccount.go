@@ -5,12 +5,8 @@ package iotwireless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a partner account with your AWS account.
@@ -54,24 +50,6 @@ type AssociateAwsAccountWithPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateAwsAccountWithPartnerAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateAwsAccountWithPartnerAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateAwsAccountWithPartnerAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.AssociateAwsAccountWithPartnerAccountRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.Sidewalk != nil {
-		s.WriteStruct(schemas.AssociateAwsAccountWithPartnerAccountRequest_Sidewalk)
-		v.Sidewalk.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.AssociateAwsAccountWithPartnerAccountRequest_Tags, v.Tags)
-}
-
 type AssociateAwsAccountWithPartnerAccountOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -86,76 +64,23 @@ type AssociateAwsAccountWithPartnerAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateAwsAccountWithPartnerAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateAwsAccountWithPartnerAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateAwsAccountWithPartnerAccountResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AssociateAwsAccountWithPartnerAccountResponse_Arn, v.Arn)
-		case schemas.AssociateAwsAccountWithPartnerAccountResponse_Sidewalk:
-			v.Sidewalk = &types.SidewalkAccountInfo{}
-			return v.Sidewalk.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAwsAccountWithPartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsAccountWithPartnerAccount, schemas.AssociateAwsAccountWithPartnerAccountRequest, schemas.AssociateAwsAccountWithPartnerAccountResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateAwsAccountWithPartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAwsAccountWithPartnerAccount, schemas.AssociateAwsAccountWithPartnerAccountRequest, schemas.AssociateAwsAccountWithPartnerAccountResponse), output: &AssociateAwsAccountWithPartnerAccountOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateAwsAccountWithPartnerAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +90,6 @@ func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(st
 		return err
 	}
 	if err = addOpAssociateAwsAccountWithPartnerAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAwsAccountWithPartnerAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +102,6 @@ func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -228,12 +141,4 @@ func (m *idempotencyToken_initializeOpAssociateAwsAccountWithPartnerAccount) Han
 }
 func addIdempotencyToken_opAssociateAwsAccountWithPartnerAccountMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateAwsAccountWithPartnerAccount{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateAwsAccountWithPartnerAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateAwsAccountWithPartnerAccount",
-	}
 }

@@ -5,12 +5,8 @@ package devopsguru
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of insights in your Amazon Web Services account. You can
@@ -64,34 +60,6 @@ type SearchInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchInsightsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchInsightsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filters != nil {
-		s.WriteStruct(schemas.SearchInsightsRequest_Filters)
-		v.Filters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchInsightsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchInsightsRequest_NextToken, *v.NextToken)
-	}
-	if v.StartTimeRange != nil {
-		s.WriteStruct(schemas.SearchInsightsRequest_StartTimeRange)
-		v.StartTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.SearchInsightsRequest_Type, string(v.Type))
-	}
-}
-
 type SearchInsightsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -110,89 +78,29 @@ type SearchInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchInsightsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchInsightsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchInsightsResponse_NextToken, v.NextToken)
-		case schemas.SearchInsightsResponse_ProactiveInsights:
-			return deserializeProactiveInsights(d, schemas.SearchInsightsResponse_ProactiveInsights, &v.ProactiveInsights)
-		case schemas.SearchInsightsResponse_ReactiveInsights:
-			return deserializeReactiveInsights(d, schemas.SearchInsightsResponse_ReactiveInsights, &v.ReactiveInsights)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchInsights{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchInsights, schemas.SearchInsightsRequest, schemas.SearchInsightsResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchInsights{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchInsights, schemas.SearchInsightsRequest, schemas.SearchInsightsResponse), output: &SearchInsightsOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchInsights"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchInsightsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchInsights(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,12 +113,6 @@ func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -312,11 +214,3 @@ type SearchInsightsAPIClient interface {
 }
 
 var _ SearchInsightsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchInsights(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchInsights",
-	}
-}

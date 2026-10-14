@@ -5,10 +5,10 @@ package mgn
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Start import.
@@ -44,6 +44,39 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartImportRequest_clientToken, *v.ClientToken)
+	}
+	if v.S3BucketSource != nil {
+		s.WriteStruct(schemas.StartImportRequest_s3BucketSource)
+		v.S3BucketSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.StartImportRequest_tags, v.Tags)
+}
+func (v *StartImportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartImportRequest_clientToken, v.ClientToken)
+		case schemas.StartImportRequest_s3BucketSource:
+			v.S3BucketSource = &types.S3BucketSource{}
+			return v.S3BucketSource.Deserialize(d)
+		case schemas.StartImportRequest_tags:
+			return deserializeTagsMap(d, schemas.StartImportRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Start import response.
 type StartImportOutput struct {
 
@@ -56,65 +89,44 @@ type StartImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportTask != nil {
+		s.WriteStruct(schemas.StartImportResponse_importTask)
+		v.ImportTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportResponse_importTask:
+			v.ImportTask = &types.ImportTask{}
+			return v.ImportTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse), output: &StartImportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -124,12 +136,6 @@ func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpStartImportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartImport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +148,6 @@ func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -187,12 +187,4 @@ func (m *idempotencyToken_initializeOpStartImport) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opStartImportMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartImport{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartImport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartImport",
-	}
 }

@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a task to export a WorkSpaces Applications image to an EC2 AMI. This
@@ -61,6 +60,28 @@ type CreateExportImageTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportImageTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportImageTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportImageTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiDescription != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_AmiDescription, *v.AmiDescription)
+	}
+	if v.AmiName != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_AmiName, *v.AmiName)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_ImageName, *v.ImageName)
+	}
+	serializeTags(s, schemas.CreateExportImageTaskRequest_TagSpecifications, v.TagSpecifications)
+}
+
 type CreateExportImageTaskOutput struct {
 
 	// Information about the export image task that was created, including the task ID
@@ -73,77 +94,53 @@ type CreateExportImageTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportImageTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportImageTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportImageTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportImageTask != nil {
+		s.WriteStruct(schemas.CreateExportImageTaskResult_ExportImageTask)
+		v.ExportImageTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExportImageTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExportImageTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExportImageTaskResult_ExportImageTask:
+			v.ExportImageTask = &types.ExportImageTask{}
+			return v.ExportImageTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExportImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportImageTask, schemas.CreateExportImageTaskRequest, schemas.CreateExportImageTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExportImageTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportImageTask, schemas.CreateExportImageTaskRequest, schemas.CreateExportImageTaskResult), output: &CreateExportImageTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExportImageTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateExportImageTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateExportImageTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExportImageTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +155,8 @@ func (c *Client) addOperationCreateExportImageTaskMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateExportImageTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateExportImageTask",
-	}
 }

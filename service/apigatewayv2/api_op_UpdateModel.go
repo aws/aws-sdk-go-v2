@@ -4,10 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Model.
@@ -55,6 +54,33 @@ type UpdateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateModelRequest_ApiId, *v.ApiId)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.UpdateModelRequest_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateModelRequest_Description, *v.Description)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelRequest_ModelId, *v.ModelId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelRequest_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.UpdateModelRequest_Schema, *v.Schema)
+	}
+}
+
 type UpdateModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".
@@ -79,77 +105,72 @@ type UpdateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.UpdateModelResponse_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateModelResponse_Description, *v.Description)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelResponse_ModelId, *v.ModelId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelResponse_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.UpdateModelResponse_Schema, *v.Schema)
+	}
+}
+func (v *UpdateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.UpdateModelResponse_ContentType, v.ContentType)
+		case schemas.UpdateModelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateModelResponse_Description, v.Description)
+		case schemas.UpdateModelResponse_ModelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.UpdateModelResponse_ModelId, v.ModelId)
+		case schemas.UpdateModelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateModelResponse_Name, v.Name)
+		case schemas.UpdateModelResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.UpdateModelResponse_Schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModel, schemas.UpdateModelRequest, schemas.UpdateModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModel, schemas.UpdateModelRequest, schemas.UpdateModelResponse), output: &UpdateModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +185,8 @@ func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateModel",
-	}
 }

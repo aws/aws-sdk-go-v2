@@ -13,7 +13,7 @@
 // responsible use of artificial intelligence (AI).
 //
 // Amazon Q in Connect is a generative AI customer service assistant. It is an
-// LLM-enhanced evolution of Amazon Connect Wisdom that delivers real-time
+// LLM-enhanced evolution of Connect Customer Wisdom that delivers real-time
 // recommendations to help contact center agents resolve customer issues quickly
 // and accurately.
 //
@@ -27,7 +27,7 @@
 // Use the Amazon Q in Connect APIs to create an assistant and a knowledge base,
 // for example, or manage content by uploading custom files.
 //
-// For more information, see [Use Amazon Q in Connect for generative AI powered agent assistance in real-time] in the Amazon Connect Administrator Guide.
+// For more information, see [Use Amazon Q in Connect for generative AI powered agent assistance in real-time] in the Connect Customer Administrator Guide.
 //
 // [Use Amazon Q in Connect for generative AI powered agent assistance in real-time]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html
 // [Amazon Q actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Q_Connect.html

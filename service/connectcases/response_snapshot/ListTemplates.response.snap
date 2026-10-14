@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","templates":[{"name":"__Name__","status":"Active","tagPropagationConfigurations":[{"resourceType":"Cases","tagMap":{"key0":"__Value__"}},{"resourceType":"Cases","tagMap":{"key0":"__Value__"}}],"templateArn":"__TemplateArn__","templateId":"__TemplateId__"},{"name":"__Name__","status":"Active","tagPropagationConfigurations":[{"resourceType":"Cases","tagMap":{"key0":"__Value__"}},{"resourceType":"Cases","tagMap":{"key0":"__Value__"}}],"templateArn":"__TemplateArn__","templateId":"__TemplateId__"}]}

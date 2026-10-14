@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreationTimestamp":"__CreationTimestamp__","Id":"__Id__","Version":"__Version__"}

@@ -5,12 +5,8 @@ package networkmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,27 +50,6 @@ type CreateProbeInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateProbeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProbeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateProbeInput_clientToken, *v.ClientToken)
-	}
-	if v.MonitorName != nil {
-		s.WriteString(schemas.CreateProbeInput_monitorName, *v.MonitorName)
-	}
-	if v.Probe != nil {
-		s.WriteStruct(schemas.CreateProbeInput_probe)
-		v.Probe.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateProbeInput_tags, v.Tags)
 }
 
 type CreateProbeOutput struct {
@@ -134,120 +109,23 @@ type CreateProbeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProbeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProbeOutput_addressFamily:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_addressFamily, &ev); err != nil {
-				return err
-			}
-			v.AddressFamily = types.AddressFamily(ev)
-			return nil
-		case schemas.CreateProbeOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProbeOutput_createdAt, v.CreatedAt)
-		case schemas.CreateProbeOutput_destination:
-			v.Destination = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_destination, v.Destination)
-		case schemas.CreateProbeOutput_destinationPort:
-			v.DestinationPort = new(int32)
-			return d.ReadInt32(schemas.CreateProbeOutput_destinationPort, v.DestinationPort)
-		case schemas.CreateProbeOutput_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProbeOutput_modifiedAt, v.ModifiedAt)
-		case schemas.CreateProbeOutput_packetSize:
-			v.PacketSize = new(int32)
-			return d.ReadInt32(schemas.CreateProbeOutput_packetSize, v.PacketSize)
-		case schemas.CreateProbeOutput_probeArn:
-			v.ProbeArn = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_probeArn, v.ProbeArn)
-		case schemas.CreateProbeOutput_probeId:
-			v.ProbeId = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_probeId, v.ProbeId)
-		case schemas.CreateProbeOutput_protocol:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = types.Protocol(ev)
-			return nil
-		case schemas.CreateProbeOutput_sourceArn:
-			v.SourceArn = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_sourceArn, v.SourceArn)
-		case schemas.CreateProbeOutput_state:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.ProbeState(ev)
-			return nil
-		case schemas.CreateProbeOutput_tags:
-			return deserializeTagMap(d, schemas.CreateProbeOutput_tags, &v.Tags)
-		case schemas.CreateProbeOutput_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProbe{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProbe, schemas.CreateProbeInput, schemas.CreateProbeOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProbe{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProbe, schemas.CreateProbeInput, schemas.CreateProbeOutput), output: &CreateProbeOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProbe"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -257,12 +135,6 @@ func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateProbeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProbe(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,12 +147,6 @@ func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -320,12 +186,4 @@ func (m *idempotencyToken_initializeOpCreateProbe) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateProbeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProbe{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProbe(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProbe",
-	}
 }

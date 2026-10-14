@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.ListPipelines
+
+{"nextToken":"__NextToken__","pipelines":[{"created":946684800,"executionMode":"QUEUED","name":"__Name__","pipelineType":"V1","updated":946684800,"version":1},{"created":946684800,"executionMode":"QUEUED","name":"__Name__","pipelineType":"V1","updated":946684800,"version":1}]}

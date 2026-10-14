@@ -5,13 +5,9 @@ package macie2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -40,18 +36,6 @@ type GetSensitiveDataOccurrencesInput struct {
 	FindingId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSensitiveDataOccurrencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSensitiveDataOccurrencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSensitiveDataOccurrencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FindingId != nil {
-		s.WriteString(schemas.GetSensitiveDataOccurrencesRequest_findingId, *v.FindingId)
-	}
 }
 
 type GetSensitiveDataOccurrencesOutput struct {
@@ -85,94 +69,29 @@ type GetSensitiveDataOccurrencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSensitiveDataOccurrencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSensitiveDataOccurrencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSensitiveDataOccurrencesResponse_error:
-			v.Error = new(string)
-			return d.ReadString(schemas.GetSensitiveDataOccurrencesResponse_error, v.Error)
-		case schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences:
-			return deserializeSensitiveDataOccurrences(d, schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences, &v.SensitiveDataOccurrences)
-		case schemas.GetSensitiveDataOccurrencesResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetSensitiveDataOccurrencesResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RevealRequestStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSensitiveDataOccurrencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSensitiveDataOccurrences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrences, schemas.GetSensitiveDataOccurrencesRequest, schemas.GetSensitiveDataOccurrencesResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSensitiveDataOccurrences{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrences, schemas.GetSensitiveDataOccurrencesRequest, schemas.GetSensitiveDataOccurrencesResponse), output: &GetSensitiveDataOccurrencesOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSensitiveDataOccurrences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSensitiveDataOccurrencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSensitiveDataOccurrences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +104,6 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -391,11 +304,3 @@ type GetSensitiveDataOccurrencesAPIClient interface {
 }
 
 var _ GetSensitiveDataOccurrencesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetSensitiveDataOccurrences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSensitiveDataOccurrences",
-	}
-}

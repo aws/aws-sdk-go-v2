@@ -1,0 +1,5 @@
+PATCH /api/instance/__InstanceId__
+
+Content-Type: application/json
+
+{"instanceDescription":"__InstanceDescription__","instanceName":"__InstanceName__"}

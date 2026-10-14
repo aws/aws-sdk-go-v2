@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"isDefaultVersion":true,"policyArn":"__PolicyArn__","policyDocument":"__PolicyDocument__","policyVersionId":"__PolicyVersionId__"}

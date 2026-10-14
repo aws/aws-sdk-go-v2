@@ -1,0 +1,5 @@
+POST /campaigns-summary
+
+Content-Type: application/json
+
+{"filters":{"instanceIdFilter":{"operator":"Eq","value":"__Value__"}},"maxResults":1,"nextToken":"__NextToken__"}

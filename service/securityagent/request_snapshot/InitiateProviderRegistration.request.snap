@@ -1,0 +1,5 @@
+POST /oauth2/provider/register
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","clientSecret":"__ClientSecret__","organizationName":"__OrganizationName__","provider":"GITHUB","targetUrl":"__TargetUrl__"}

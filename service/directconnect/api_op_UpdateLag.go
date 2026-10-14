@@ -4,13 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the attributes of the specified link aggregation group (LAG).
@@ -110,6 +107,9 @@ type UpdateLagOutput struct {
 	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
+	// The billing mode of the LAG.
+	BillingMode types.BillingMode
+
 	// The connections bundled by the LAG.
 	Connections []types.Connection
 
@@ -174,8 +174,32 @@ type UpdateLagOutput struct {
 	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
+
+	// The rate limiter status for the LAG, including how many rate limiters are in
+	// use and the maximum allowed.
+	RateLimiterStatus *types.RateLimiterStatus
 
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
@@ -207,6 +231,9 @@ func (v *UpdateLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AwsLogicalDeviceId != nil {
 		s.WriteString(schemas.Lag_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.BillingMode != "" {
+		s.WriteString(schemas.Lag_billingMode, string(v.BillingMode))
 	}
 	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
 	if v.ConnectionsBandwidth != nil {
@@ -246,8 +273,25 @@ func (v *UpdateLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.Lag_ownerAccount, *v.OwnerAccount)
 	}
+	if v.PrefixPoolSizeIpv4 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolSizeIpv4, *v.PrefixPoolSizeIpv4)
+	}
+	if v.PrefixPoolSizeIpv6 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolSizeIpv6, *v.PrefixPoolSizeIpv6)
+	}
+	if v.PrefixPoolUnallocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolUnallocatedCountIpv4, *v.PrefixPoolUnallocatedCountIpv4)
+	}
+	if v.PrefixPoolUnallocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.Lag_prefixPoolUnallocatedCountIpv6, *v.PrefixPoolUnallocatedCountIpv6)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.Lag_providerName, *v.ProviderName)
+	}
+	if v.RateLimiterStatus != nil {
+		s.WriteStruct(schemas.Lag_rateLimiterStatus)
+		v.RateLimiterStatus.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Region != nil {
 		s.WriteString(schemas.Lag_region, *v.Region)
@@ -268,6 +312,13 @@ func (v *UpdateLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lag_awsLogicalDeviceId:
 			v.AwsLogicalDeviceId = new(string)
 			return d.ReadString(schemas.Lag_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Lag_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.Lag_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = types.BillingMode(ev)
+			return nil
 		case schemas.Lag_connections:
 			return deserializeConnectionList(d, schemas.Lag_connections, &v.Connections)
 		case schemas.Lag_connectionsBandwidth:
@@ -314,9 +365,24 @@ func (v *UpdateLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Lag_ownerAccount:
 			v.OwnerAccount = new(string)
 			return d.ReadString(schemas.Lag_ownerAccount, v.OwnerAccount)
+		case schemas.Lag_prefixPoolSizeIpv4:
+			v.PrefixPoolSizeIpv4 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolSizeIpv4, v.PrefixPoolSizeIpv4)
+		case schemas.Lag_prefixPoolSizeIpv6:
+			v.PrefixPoolSizeIpv6 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolSizeIpv6, v.PrefixPoolSizeIpv6)
+		case schemas.Lag_prefixPoolUnallocatedCountIpv4:
+			v.PrefixPoolUnallocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolUnallocatedCountIpv4, v.PrefixPoolUnallocatedCountIpv4)
+		case schemas.Lag_prefixPoolUnallocatedCountIpv6:
+			v.PrefixPoolUnallocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.Lag_prefixPoolUnallocatedCountIpv6, v.PrefixPoolUnallocatedCountIpv6)
 		case schemas.Lag_providerName:
 			v.ProviderName = new(string)
 			return d.ReadString(schemas.Lag_providerName, v.ProviderName)
+		case schemas.Lag_rateLimiterStatus:
+			v.RateLimiterStatus = &types.RateLimiterStatus{}
+			return v.RateLimiterStatus.Deserialize(d)
 		case schemas.Lag_region:
 			v.Region = new(string)
 			return d.ReadString(schemas.Lag_region, v.Region)
@@ -327,74 +393,26 @@ func (v *UpdateLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 func (c *Client) addOperationUpdateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLag, schemas.UpdateLagRequest, schemas.Lag)}, middleware.After); err != nil {
 		return err
 	}
 	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLag, schemas.UpdateLagRequest, schemas.Lag), output: &UpdateLagOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLag"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLagValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLag(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -409,22 +427,8 @@ func (c *Client) addOperationUpdateLagMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLag(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLag",
-	}
 }

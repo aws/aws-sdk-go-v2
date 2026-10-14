@@ -5,10 +5,10 @@ package emr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all user or group session mappings for the Amazon EMR Studio
@@ -44,6 +44,24 @@ type ListStudioSessionMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioSessionMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioSessionMappingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioSessionMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityType != "" {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_IdentityType, string(v.IdentityType))
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_Marker, *v.Marker)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_StudioId, *v.StudioId)
+	}
+}
+
 type ListStudioSessionMappingsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -60,74 +78,48 @@ type ListStudioSessionMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioSessionMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioSessionMappingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioSessionMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsOutput_Marker, *v.Marker)
+	}
+	serializeSessionMappingSummaryList(s, schemas.ListStudioSessionMappingsOutput_SessionMappings, v.SessionMappings)
+}
+func (v *ListStudioSessionMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStudioSessionMappingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStudioSessionMappingsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListStudioSessionMappingsOutput_Marker, v.Marker)
+		case schemas.ListStudioSessionMappingsOutput_SessionMappings:
+			return deserializeSessionMappingSummaryList(d, schemas.ListStudioSessionMappingsOutput_SessionMappings, &v.SessionMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioSessionMappings, schemas.ListStudioSessionMappingsInput, schemas.ListStudioSessionMappingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStudioSessionMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioSessionMappings, schemas.ListStudioSessionMappingsInput, schemas.ListStudioSessionMappingsOutput), output: &ListStudioSessionMappingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStudioSessionMappings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStudioSessionMappings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStudioSessionMappings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,11 +222,3 @@ type ListStudioSessionMappingsAPIClient interface {
 }
 
 var _ ListStudioSessionMappingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStudioSessionMappings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStudioSessionMappings",
-	}
-}

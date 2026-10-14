@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -30,69 +28,6 @@ type ParentSavingsPlanOffering struct {
 	PlanType SavingsPlanType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ParentSavingsPlanOffering) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ParentSavingsPlanOffering)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ParentSavingsPlanOffering) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != "" {
-		s.WriteString(schemas.ParentSavingsPlanOffering_currency, string(v.Currency))
-	}
-	if v.DurationSeconds != 0 {
-		s.WriteInt64(schemas.ParentSavingsPlanOffering_durationSeconds, v.DurationSeconds)
-	}
-	if v.OfferingId != nil {
-		s.WriteString(schemas.ParentSavingsPlanOffering_offeringId, *v.OfferingId)
-	}
-	if v.PaymentOption != "" {
-		s.WriteString(schemas.ParentSavingsPlanOffering_paymentOption, string(v.PaymentOption))
-	}
-	if v.PlanDescription != nil {
-		s.WriteString(schemas.ParentSavingsPlanOffering_planDescription, *v.PlanDescription)
-	}
-	if v.PlanType != "" {
-		s.WriteString(schemas.ParentSavingsPlanOffering_planType, string(v.PlanType))
-	}
-}
-func (v *ParentSavingsPlanOffering) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ParentSavingsPlanOffering, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ParentSavingsPlanOffering_currency:
-			var ev string
-			if err := d.ReadString(schemas.ParentSavingsPlanOffering_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.ParentSavingsPlanOffering_durationSeconds:
-			return d.ReadInt64(schemas.ParentSavingsPlanOffering_durationSeconds, &v.DurationSeconds)
-		case schemas.ParentSavingsPlanOffering_offeringId:
-			v.OfferingId = new(string)
-			return d.ReadString(schemas.ParentSavingsPlanOffering_offeringId, v.OfferingId)
-		case schemas.ParentSavingsPlanOffering_paymentOption:
-			var ev string
-			if err := d.ReadString(schemas.ParentSavingsPlanOffering_paymentOption, &ev); err != nil {
-				return err
-			}
-			v.PaymentOption = SavingsPlanPaymentOption(ev)
-			return nil
-		case schemas.ParentSavingsPlanOffering_planDescription:
-			v.PlanDescription = new(string)
-			return d.ReadString(schemas.ParentSavingsPlanOffering_planDescription, v.PlanDescription)
-		case schemas.ParentSavingsPlanOffering_planType:
-			var ev string
-			if err := d.ReadString(schemas.ParentSavingsPlanOffering_planType, &ev); err != nil {
-				return err
-			}
-			v.PlanType = SavingsPlanType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Information about a Savings Plan.
@@ -159,145 +94,6 @@ type SavingsPlan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Commitment != nil {
-		s.WriteString(schemas.SavingsPlan_commitment, *v.Commitment)
-	}
-	if v.Currency != "" {
-		s.WriteString(schemas.SavingsPlan_currency, string(v.Currency))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.SavingsPlan_description, *v.Description)
-	}
-	if v.Ec2InstanceFamily != nil {
-		s.WriteString(schemas.SavingsPlan_ec2InstanceFamily, *v.Ec2InstanceFamily)
-	}
-	if v.End != nil {
-		s.WriteString(schemas.SavingsPlan_end, *v.End)
-	}
-	if v.OfferingId != nil {
-		s.WriteString(schemas.SavingsPlan_offeringId, *v.OfferingId)
-	}
-	if v.PaymentOption != "" {
-		s.WriteString(schemas.SavingsPlan_paymentOption, string(v.PaymentOption))
-	}
-	serializeSavingsPlanProductTypeList(s, schemas.SavingsPlan_productTypes, v.ProductTypes)
-	if v.RecurringPaymentAmount != nil {
-		s.WriteString(schemas.SavingsPlan_recurringPaymentAmount, *v.RecurringPaymentAmount)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.SavingsPlan_region, *v.Region)
-	}
-	if v.ReturnableUntil != nil {
-		s.WriteString(schemas.SavingsPlan_returnableUntil, *v.ReturnableUntil)
-	}
-	if v.SavingsPlanArn != nil {
-		s.WriteString(schemas.SavingsPlan_savingsPlanArn, *v.SavingsPlanArn)
-	}
-	if v.SavingsPlanId != nil {
-		s.WriteString(schemas.SavingsPlan_savingsPlanId, *v.SavingsPlanId)
-	}
-	if v.SavingsPlanType != "" {
-		s.WriteString(schemas.SavingsPlan_savingsPlanType, string(v.SavingsPlanType))
-	}
-	if v.Start != nil {
-		s.WriteString(schemas.SavingsPlan_start, *v.Start)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.SavingsPlan_state, string(v.State))
-	}
-	serializeTagMap(s, schemas.SavingsPlan_tags, v.Tags)
-	if v.TermDurationInSeconds != 0 {
-		s.WriteInt64(schemas.SavingsPlan_termDurationInSeconds, v.TermDurationInSeconds)
-	}
-	if v.UpfrontPaymentAmount != nil {
-		s.WriteString(schemas.SavingsPlan_upfrontPaymentAmount, *v.UpfrontPaymentAmount)
-	}
-}
-func (v *SavingsPlan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlan_commitment:
-			v.Commitment = new(string)
-			return d.ReadString(schemas.SavingsPlan_commitment, v.Commitment)
-		case schemas.SavingsPlan_currency:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlan_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.SavingsPlan_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.SavingsPlan_description, v.Description)
-		case schemas.SavingsPlan_ec2InstanceFamily:
-			v.Ec2InstanceFamily = new(string)
-			return d.ReadString(schemas.SavingsPlan_ec2InstanceFamily, v.Ec2InstanceFamily)
-		case schemas.SavingsPlan_end:
-			v.End = new(string)
-			return d.ReadString(schemas.SavingsPlan_end, v.End)
-		case schemas.SavingsPlan_offeringId:
-			v.OfferingId = new(string)
-			return d.ReadString(schemas.SavingsPlan_offeringId, v.OfferingId)
-		case schemas.SavingsPlan_paymentOption:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlan_paymentOption, &ev); err != nil {
-				return err
-			}
-			v.PaymentOption = SavingsPlanPaymentOption(ev)
-			return nil
-		case schemas.SavingsPlan_productTypes:
-			return deserializeSavingsPlanProductTypeList(d, schemas.SavingsPlan_productTypes, &v.ProductTypes)
-		case schemas.SavingsPlan_recurringPaymentAmount:
-			v.RecurringPaymentAmount = new(string)
-			return d.ReadString(schemas.SavingsPlan_recurringPaymentAmount, v.RecurringPaymentAmount)
-		case schemas.SavingsPlan_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.SavingsPlan_region, v.Region)
-		case schemas.SavingsPlan_returnableUntil:
-			v.ReturnableUntil = new(string)
-			return d.ReadString(schemas.SavingsPlan_returnableUntil, v.ReturnableUntil)
-		case schemas.SavingsPlan_savingsPlanArn:
-			v.SavingsPlanArn = new(string)
-			return d.ReadString(schemas.SavingsPlan_savingsPlanArn, v.SavingsPlanArn)
-		case schemas.SavingsPlan_savingsPlanId:
-			v.SavingsPlanId = new(string)
-			return d.ReadString(schemas.SavingsPlan_savingsPlanId, v.SavingsPlanId)
-		case schemas.SavingsPlan_savingsPlanType:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlan_savingsPlanType, &ev); err != nil {
-				return err
-			}
-			v.SavingsPlanType = SavingsPlanType(ev)
-			return nil
-		case schemas.SavingsPlan_start:
-			v.Start = new(string)
-			return d.ReadString(schemas.SavingsPlan_start, v.Start)
-		case schemas.SavingsPlan_state:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlan_state, &ev); err != nil {
-				return err
-			}
-			v.State = SavingsPlanState(ev)
-			return nil
-		case schemas.SavingsPlan_tags:
-			return deserializeTagMap(d, schemas.SavingsPlan_tags, &v.Tags)
-		case schemas.SavingsPlan_termDurationInSeconds:
-			return d.ReadInt64(schemas.SavingsPlan_termDurationInSeconds, &v.TermDurationInSeconds)
-		case schemas.SavingsPlan_upfrontPaymentAmount:
-			v.UpfrontPaymentAmount = new(string)
-			return d.ReadString(schemas.SavingsPlan_upfrontPaymentAmount, v.UpfrontPaymentAmount)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan filter.
 type SavingsPlanFilter struct {
 
@@ -308,35 +104,6 @@ type SavingsPlanFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SavingsPlanFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanFilter_name, string(v.Name))
-	}
-	serializeListOfStrings(s, schemas.SavingsPlanFilter_values, v.Values)
-}
-func (v *SavingsPlanFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlansFilterName(ev)
-			return nil
-		case schemas.SavingsPlanFilter_values:
-			return deserializeListOfStrings(d, schemas.SavingsPlanFilter_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Information about a Savings Plan offering.
@@ -379,93 +146,6 @@ type SavingsPlanOffering struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanOffering) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOffering)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOffering) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != "" {
-		s.WriteString(schemas.SavingsPlanOffering_currency, string(v.Currency))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.SavingsPlanOffering_description, *v.Description)
-	}
-	if v.DurationSeconds != 0 {
-		s.WriteInt64(schemas.SavingsPlanOffering_durationSeconds, v.DurationSeconds)
-	}
-	if v.OfferingId != nil {
-		s.WriteString(schemas.SavingsPlanOffering_offeringId, *v.OfferingId)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.SavingsPlanOffering_operation, *v.Operation)
-	}
-	if v.PaymentOption != "" {
-		s.WriteString(schemas.SavingsPlanOffering_paymentOption, string(v.PaymentOption))
-	}
-	if v.PlanType != "" {
-		s.WriteString(schemas.SavingsPlanOffering_planType, string(v.PlanType))
-	}
-	serializeSavingsPlanProductTypeList(s, schemas.SavingsPlanOffering_productTypes, v.ProductTypes)
-	serializeSavingsPlanOfferingPropertyList(s, schemas.SavingsPlanOffering_properties, v.Properties)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.SavingsPlanOffering_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.SavingsPlanOffering_usageType, *v.UsageType)
-	}
-}
-func (v *SavingsPlanOffering) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOffering, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOffering_currency:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOffering_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.SavingsPlanOffering_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.SavingsPlanOffering_description, v.Description)
-		case schemas.SavingsPlanOffering_durationSeconds:
-			return d.ReadInt64(schemas.SavingsPlanOffering_durationSeconds, &v.DurationSeconds)
-		case schemas.SavingsPlanOffering_offeringId:
-			v.OfferingId = new(string)
-			return d.ReadString(schemas.SavingsPlanOffering_offeringId, v.OfferingId)
-		case schemas.SavingsPlanOffering_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.SavingsPlanOffering_operation, v.Operation)
-		case schemas.SavingsPlanOffering_paymentOption:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOffering_paymentOption, &ev); err != nil {
-				return err
-			}
-			v.PaymentOption = SavingsPlanPaymentOption(ev)
-			return nil
-		case schemas.SavingsPlanOffering_planType:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOffering_planType, &ev); err != nil {
-				return err
-			}
-			v.PlanType = SavingsPlanType(ev)
-			return nil
-		case schemas.SavingsPlanOffering_productTypes:
-			return deserializeSavingsPlanProductTypeList(d, schemas.SavingsPlanOffering_productTypes, &v.ProductTypes)
-		case schemas.SavingsPlanOffering_properties:
-			return deserializeSavingsPlanOfferingPropertyList(d, schemas.SavingsPlanOffering_properties, &v.Properties)
-		case schemas.SavingsPlanOffering_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.SavingsPlanOffering_serviceCode, v.ServiceCode)
-		case schemas.SavingsPlanOffering_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.SavingsPlanOffering_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan offering filter.
 type SavingsPlanOfferingFilterElement struct {
 
@@ -478,35 +158,6 @@ type SavingsPlanOfferingFilterElement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanOfferingFilterElement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOfferingFilterElement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOfferingFilterElement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanOfferingFilterElement_name, string(v.Name))
-	}
-	serializeFilterValuesList(s, schemas.SavingsPlanOfferingFilterElement_values, v.Values)
-}
-func (v *SavingsPlanOfferingFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingFilterElement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOfferingFilterElement_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingFilterElement_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlanOfferingFilterAttribute(ev)
-			return nil
-		case schemas.SavingsPlanOfferingFilterElement_values:
-			return deserializeFilterValuesList(d, schemas.SavingsPlanOfferingFilterElement_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan offering property.
 type SavingsPlanOfferingProperty struct {
 
@@ -517,38 +168,6 @@ type SavingsPlanOfferingProperty struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SavingsPlanOfferingProperty) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOfferingProperty)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOfferingProperty) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanOfferingProperty_name, string(v.Name))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.SavingsPlanOfferingProperty_value, *v.Value)
-	}
-}
-func (v *SavingsPlanOfferingProperty) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingProperty, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOfferingProperty_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingProperty_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlanOfferingPropertyKey(ev)
-			return nil
-		case schemas.SavingsPlanOfferingProperty_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingProperty_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Information about a Savings Plan offering rate.
@@ -582,81 +201,6 @@ type SavingsPlanOfferingRate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanOfferingRate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOfferingRate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOfferingRate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operation != nil {
-		s.WriteString(schemas.SavingsPlanOfferingRate_operation, *v.Operation)
-	}
-	if v.ProductType != "" {
-		s.WriteString(schemas.SavingsPlanOfferingRate_productType, string(v.ProductType))
-	}
-	serializeSavingsPlanOfferingRatePropertyList(s, schemas.SavingsPlanOfferingRate_properties, v.Properties)
-	if v.Rate != nil {
-		s.WriteString(schemas.SavingsPlanOfferingRate_rate, *v.Rate)
-	}
-	if v.SavingsPlanOffering != nil {
-		s.WriteStruct(schemas.SavingsPlanOfferingRate_savingsPlanOffering)
-		v.SavingsPlanOffering.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCode != "" {
-		s.WriteString(schemas.SavingsPlanOfferingRate_serviceCode, string(v.ServiceCode))
-	}
-	if v.Unit != "" {
-		s.WriteString(schemas.SavingsPlanOfferingRate_unit, string(v.Unit))
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.SavingsPlanOfferingRate_usageType, *v.UsageType)
-	}
-}
-func (v *SavingsPlanOfferingRate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingRate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOfferingRate_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingRate_operation, v.Operation)
-		case schemas.SavingsPlanOfferingRate_productType:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingRate_productType, &ev); err != nil {
-				return err
-			}
-			v.ProductType = SavingsPlanProductType(ev)
-			return nil
-		case schemas.SavingsPlanOfferingRate_properties:
-			return deserializeSavingsPlanOfferingRatePropertyList(d, schemas.SavingsPlanOfferingRate_properties, &v.Properties)
-		case schemas.SavingsPlanOfferingRate_rate:
-			v.Rate = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingRate_rate, v.Rate)
-		case schemas.SavingsPlanOfferingRate_savingsPlanOffering:
-			v.SavingsPlanOffering = &ParentSavingsPlanOffering{}
-			return v.SavingsPlanOffering.Deserialize(d)
-		case schemas.SavingsPlanOfferingRate_serviceCode:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingRate_serviceCode, &ev); err != nil {
-				return err
-			}
-			v.ServiceCode = SavingsPlanRateServiceCode(ev)
-			return nil
-		case schemas.SavingsPlanOfferingRate_unit:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingRate_unit, &ev); err != nil {
-				return err
-			}
-			v.Unit = SavingsPlanRateUnit(ev)
-			return nil
-		case schemas.SavingsPlanOfferingRate_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingRate_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan offering rate filter.
 type SavingsPlanOfferingRateFilterElement struct {
 
@@ -669,35 +213,6 @@ type SavingsPlanOfferingRateFilterElement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanOfferingRateFilterElement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOfferingRateFilterElement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOfferingRateFilterElement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanOfferingRateFilterElement_name, string(v.Name))
-	}
-	serializeFilterValuesList(s, schemas.SavingsPlanOfferingRateFilterElement_values, v.Values)
-}
-func (v *SavingsPlanOfferingRateFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingRateFilterElement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOfferingRateFilterElement_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanOfferingRateFilterElement_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlanRateFilterAttribute(ev)
-			return nil
-		case schemas.SavingsPlanOfferingRateFilterElement_values:
-			return deserializeFilterValuesList(d, schemas.SavingsPlanOfferingRateFilterElement_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan offering rate property.
 type SavingsPlanOfferingRateProperty struct {
 
@@ -708,34 +223,6 @@ type SavingsPlanOfferingRateProperty struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SavingsPlanOfferingRateProperty) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanOfferingRateProperty)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanOfferingRateProperty) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SavingsPlanOfferingRateProperty_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.SavingsPlanOfferingRateProperty_value, *v.Value)
-	}
-}
-func (v *SavingsPlanOfferingRateProperty) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingRateProperty, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanOfferingRateProperty_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingRateProperty_name, v.Name)
-		case schemas.SavingsPlanOfferingRateProperty_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.SavingsPlanOfferingRateProperty_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Information about a Savings Plan rate.
@@ -769,83 +256,6 @@ type SavingsPlanRate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanRate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanRate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanRate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != "" {
-		s.WriteString(schemas.SavingsPlanRate_currency, string(v.Currency))
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.SavingsPlanRate_operation, *v.Operation)
-	}
-	if v.ProductType != "" {
-		s.WriteString(schemas.SavingsPlanRate_productType, string(v.ProductType))
-	}
-	serializeSavingsPlanRatePropertyList(s, schemas.SavingsPlanRate_properties, v.Properties)
-	if v.Rate != nil {
-		s.WriteString(schemas.SavingsPlanRate_rate, *v.Rate)
-	}
-	if v.ServiceCode != "" {
-		s.WriteString(schemas.SavingsPlanRate_serviceCode, string(v.ServiceCode))
-	}
-	if v.Unit != "" {
-		s.WriteString(schemas.SavingsPlanRate_unit, string(v.Unit))
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.SavingsPlanRate_usageType, *v.UsageType)
-	}
-}
-func (v *SavingsPlanRate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanRate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanRate_currency:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRate_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.SavingsPlanRate_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.SavingsPlanRate_operation, v.Operation)
-		case schemas.SavingsPlanRate_productType:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRate_productType, &ev); err != nil {
-				return err
-			}
-			v.ProductType = SavingsPlanProductType(ev)
-			return nil
-		case schemas.SavingsPlanRate_properties:
-			return deserializeSavingsPlanRatePropertyList(d, schemas.SavingsPlanRate_properties, &v.Properties)
-		case schemas.SavingsPlanRate_rate:
-			v.Rate = new(string)
-			return d.ReadString(schemas.SavingsPlanRate_rate, v.Rate)
-		case schemas.SavingsPlanRate_serviceCode:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRate_serviceCode, &ev); err != nil {
-				return err
-			}
-			v.ServiceCode = SavingsPlanRateServiceCode(ev)
-			return nil
-		case schemas.SavingsPlanRate_unit:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRate_unit, &ev); err != nil {
-				return err
-			}
-			v.Unit = SavingsPlanRateUnit(ev)
-			return nil
-		case schemas.SavingsPlanRate_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.SavingsPlanRate_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan rate filter.
 type SavingsPlanRateFilter struct {
 
@@ -858,35 +268,6 @@ type SavingsPlanRateFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SavingsPlanRateFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanRateFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanRateFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanRateFilter_name, string(v.Name))
-	}
-	serializeListOfStrings(s, schemas.SavingsPlanRateFilter_values, v.Values)
-}
-func (v *SavingsPlanRateFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanRateFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanRateFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRateFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlanRateFilterName(ev)
-			return nil
-		case schemas.SavingsPlanRateFilter_values:
-			return deserializeListOfStrings(d, schemas.SavingsPlanRateFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Information about a Savings Plan rate property.
 type SavingsPlanRateProperty struct {
 
@@ -897,38 +278,6 @@ type SavingsPlanRateProperty struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SavingsPlanRateProperty) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SavingsPlanRateProperty)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SavingsPlanRateProperty) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SavingsPlanRateProperty_name, string(v.Name))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.SavingsPlanRateProperty_value, *v.Value)
-	}
-}
-func (v *SavingsPlanRateProperty) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SavingsPlanRateProperty, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SavingsPlanRateProperty_name:
-			var ev string
-			if err := d.ReadString(schemas.SavingsPlanRateProperty_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SavingsPlanRatePropertyKey(ev)
-			return nil
-		case schemas.SavingsPlanRateProperty_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.SavingsPlanRateProperty_value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

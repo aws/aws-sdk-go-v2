@@ -3,9 +3,8 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Condition that matches based on the specific WAF action taken on the request.
@@ -16,32 +15,6 @@ type ActionCondition struct {
 	Action Action
 
 	noSmithyDocumentSerde
-}
-
-func (v *ActionCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActionCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActionCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.ActionCondition_Action, string(v.Action))
-	}
-}
-func (v *ActionCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActionCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActionCondition_Action:
-			var ev string
-			if err := d.ReadString(schemas.ActionCondition_Action, &ev); err != nil {
-				return err
-			}
-			v.Action = Action(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Advanced event selectors let you create fine-grained selectors for management,
@@ -58,31 +31,6 @@ type AdvancedEventSelector struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AdvancedEventSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AdvancedEventSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AdvancedEventSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldSelectors(s, schemas.AdvancedEventSelector_FieldSelectors, v.FieldSelectors)
-	if v.Name != nil {
-		s.WriteString(schemas.AdvancedEventSelector_Name, *v.Name)
-	}
-}
-func (v *AdvancedEventSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AdvancedEventSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AdvancedEventSelector_FieldSelectors:
-			return deserializeFieldSelectors(d, schemas.AdvancedEventSelector_FieldSelectors, &v.FieldSelectors)
-		case schemas.AdvancedEventSelector_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AdvancedEventSelector_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Defines criteria for selecting resources based on field values.
@@ -114,46 +62,6 @@ type AdvancedFieldSelector struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AdvancedFieldSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AdvancedFieldSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AdvancedFieldSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.AdvancedFieldSelector_EndsWith, v.EndsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_Equals, v.Equals)
-	if v.Field != nil {
-		s.WriteString(schemas.AdvancedFieldSelector_Field, *v.Field)
-	}
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotEndsWith, v.NotEndsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotEquals, v.NotEquals)
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotStartsWith, v.NotStartsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_StartsWith, v.StartsWith)
-}
-func (v *AdvancedFieldSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AdvancedFieldSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AdvancedFieldSelector_EndsWith:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_EndsWith, &v.EndsWith)
-		case schemas.AdvancedFieldSelector_Equals:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_Equals, &v.Equals)
-		case schemas.AdvancedFieldSelector_Field:
-			v.Field = new(string)
-			return d.ReadString(schemas.AdvancedFieldSelector_Field, v.Field)
-		case schemas.AdvancedFieldSelector_NotEndsWith:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_NotEndsWith, &v.NotEndsWith)
-		case schemas.AdvancedFieldSelector_NotEquals:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_NotEquals, &v.NotEquals)
-		case schemas.AdvancedFieldSelector_NotStartsWith:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_NotStartsWith, &v.NotStartsWith)
-		case schemas.AdvancedFieldSelector_StartsWith:
-			return deserializeStringList(d, schemas.AdvancedFieldSelector_StartsWith, &v.StartsWith)
-		}
-		return nil
-	})
-}
-
 // Defines how telemetry data should be centralized across an Amazon Web Services
 // Organization, including source and destination configurations.
 type CentralizationRule struct {
@@ -173,38 +81,6 @@ type CentralizationRule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CentralizationRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CentralizationRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CentralizationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Destination != nil {
-		s.WriteStruct(schemas.CentralizationRule_Destination)
-		v.Destination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Source != nil {
-		s.WriteStruct(schemas.CentralizationRule_Source)
-		v.Source.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CentralizationRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CentralizationRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CentralizationRule_Destination:
-			v.Destination = &CentralizationRuleDestination{}
-			return v.Destination.Deserialize(d)
-		case schemas.CentralizationRule_Source:
-			v.Source = &CentralizationRuleSource{}
-			return v.Source.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configuration specifying the primary destination for centralized telemetry data.
 type CentralizationRuleDestination struct {
 
@@ -220,43 +96,10 @@ type CentralizationRuleDestination struct {
 	// Log specific configuration for centralization destination log groups.
 	DestinationLogsConfiguration *DestinationLogsConfiguration
 
+	// Metric specific configuration for centralization destination metrics.
+	DestinationMetricsConfiguration *DestinationMetricsConfiguration
+
 	noSmithyDocumentSerde
-}
-
-func (v *CentralizationRuleDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CentralizationRuleDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CentralizationRuleDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Account != nil {
-		s.WriteString(schemas.CentralizationRuleDestination_Account, *v.Account)
-	}
-	if v.DestinationLogsConfiguration != nil {
-		s.WriteStruct(schemas.CentralizationRuleDestination_DestinationLogsConfiguration)
-		v.DestinationLogsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.CentralizationRuleDestination_Region, *v.Region)
-	}
-}
-func (v *CentralizationRuleDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CentralizationRuleDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CentralizationRuleDestination_Account:
-			v.Account = new(string)
-			return d.ReadString(schemas.CentralizationRuleDestination_Account, v.Account)
-		case schemas.CentralizationRuleDestination_DestinationLogsConfiguration:
-			v.DestinationLogsConfiguration = &DestinationLogsConfiguration{}
-			return v.DestinationLogsConfiguration.Deserialize(d)
-		case schemas.CentralizationRuleDestination_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.CentralizationRuleDestination_Region, v.Region)
-		}
-		return nil
-	})
 }
 
 // Configuration specifying the source of telemetry data to be centralized.
@@ -271,47 +114,28 @@ type CentralizationRuleSource struct {
 	// specified using organization id, accounts or organizational unit ids.
 	Scope *string
 
+	// Configuration that enables centralization of the context graph for the selected
+	// sources. Including this configuration in a rule's source opts the rule into
+	// centralizing the context graph for the selected sources.
+	SourceContextGraphConfiguration *SourceContextGraphConfiguration
+
 	// Log specific configuration for centralization source log groups.
 	SourceLogsConfiguration *SourceLogsConfiguration
+
+	// Metric specific configuration for centralization source metrics.
+	SourceMetricsConfiguration *SourceMetricsConfiguration
 
 	noSmithyDocumentSerde
 }
 
-func (v *CentralizationRuleSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CentralizationRuleSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CentralizationRuleSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegions(s, schemas.CentralizationRuleSource_Regions, v.Regions)
-	if v.Scope != nil {
-		s.WriteString(schemas.CentralizationRuleSource_Scope, *v.Scope)
-	}
-	if v.SourceLogsConfiguration != nil {
-		s.WriteStruct(schemas.CentralizationRuleSource_SourceLogsConfiguration)
-		v.SourceLogsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CentralizationRuleSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CentralizationRuleSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CentralizationRuleSource_Regions:
-			return deserializeRegions(d, schemas.CentralizationRuleSource_Regions, &v.Regions)
-		case schemas.CentralizationRuleSource_Scope:
-			v.Scope = new(string)
-			return d.ReadString(schemas.CentralizationRuleSource_Scope, v.Scope)
-		case schemas.CentralizationRuleSource_SourceLogsConfiguration:
-			v.SourceLogsConfiguration = &SourceLogsConfiguration{}
-			return v.SourceLogsConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A summary of a centralization rule's key properties and status.
 type CentralizationRuleSummary struct {
+
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus ContextGraphStatus
 
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
@@ -345,91 +169,17 @@ type CentralizationRuleSummary struct {
 	// The name of the organization centralization rule.
 	RuleName *string
 
+	// The reason tag propagation is unhealthy for this rule. Only present when
+	// TagPropagationStatus is Unhealthy .
+	TagPropagationFailureReason TagPropagationFailureReason
+
+	// The health status of tag propagation for this rule. This status is independent
+	// of the overall RuleHealth for log delivery. Returns Healthy when the most
+	// recent tag-propagation attempt succeeded, or Unhealthy when the most recent
+	// attempt failed.
+	TagPropagationStatus TagPropagationStatus
+
 	noSmithyDocumentSerde
-}
-
-func (v *CentralizationRuleSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CentralizationRuleSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CentralizationRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedRegion != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_CreatedRegion, *v.CreatedRegion)
-	}
-	if v.CreatedTimeStamp != nil {
-		s.WriteInt64(schemas.CentralizationRuleSummary_CreatedTimeStamp, *v.CreatedTimeStamp)
-	}
-	if v.CreatorAccountId != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_CreatorAccountId, *v.CreatorAccountId)
-	}
-	if v.DestinationAccountId != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_DestinationAccountId, *v.DestinationAccountId)
-	}
-	if v.DestinationRegion != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_DestinationRegion, *v.DestinationRegion)
-	}
-	if v.FailureReason != "" {
-		s.WriteString(schemas.CentralizationRuleSummary_FailureReason, string(v.FailureReason))
-	}
-	if v.LastUpdateTimeStamp != nil {
-		s.WriteInt64(schemas.CentralizationRuleSummary_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
-	}
-	if v.RuleArn != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_RuleArn, *v.RuleArn)
-	}
-	if v.RuleHealth != "" {
-		s.WriteString(schemas.CentralizationRuleSummary_RuleHealth, string(v.RuleHealth))
-	}
-	if v.RuleName != nil {
-		s.WriteString(schemas.CentralizationRuleSummary_RuleName, *v.RuleName)
-	}
-}
-func (v *CentralizationRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CentralizationRuleSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CentralizationRuleSummary_CreatedRegion:
-			v.CreatedRegion = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_CreatedRegion, v.CreatedRegion)
-		case schemas.CentralizationRuleSummary_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.CentralizationRuleSummary_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.CentralizationRuleSummary_CreatorAccountId:
-			v.CreatorAccountId = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_CreatorAccountId, v.CreatorAccountId)
-		case schemas.CentralizationRuleSummary_DestinationAccountId:
-			v.DestinationAccountId = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_DestinationAccountId, v.DestinationAccountId)
-		case schemas.CentralizationRuleSummary_DestinationRegion:
-			v.DestinationRegion = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_DestinationRegion, v.DestinationRegion)
-		case schemas.CentralizationRuleSummary_FailureReason:
-			var ev string
-			if err := d.ReadString(schemas.CentralizationRuleSummary_FailureReason, &ev); err != nil {
-				return err
-			}
-			v.FailureReason = CentralizationFailureReason(ev)
-			return nil
-		case schemas.CentralizationRuleSummary_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.CentralizationRuleSummary_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.CentralizationRuleSummary_RuleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_RuleArn, v.RuleArn)
-		case schemas.CentralizationRuleSummary_RuleHealth:
-			var ev string
-			if err := d.ReadString(schemas.CentralizationRuleSummary_RuleHealth, &ev); err != nil {
-				return err
-			}
-			v.RuleHealth = RuleHealth(ev)
-			return nil
-		case schemas.CentralizationRuleSummary_RuleName:
-			v.RuleName = new(string)
-			return d.ReadString(schemas.CentralizationRuleSummary_RuleName, v.RuleName)
-		}
-		return nil
-	})
 }
 
 // Parameters specific to Amazon Web Services CloudTrail telemetry configuration.
@@ -444,25 +194,6 @@ type CloudtrailParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudtrailParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudtrailParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudtrailParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.CloudtrailParameters_AdvancedEventSelectors, v.AdvancedEventSelectors)
-}
-func (v *CloudtrailParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudtrailParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudtrailParameters_AdvancedEventSelectors:
-			return deserializeAdvancedEventSelectors(d, schemas.CloudtrailParameters_AdvancedEventSelectors, &v.AdvancedEventSelectors)
-		}
-		return nil
-	})
-}
-
 // A single condition that can match based on WAF rule action or label name.
 type Condition struct {
 
@@ -474,38 +205,6 @@ type Condition struct {
 	LabelNameCondition *LabelNameCondition
 
 	noSmithyDocumentSerde
-}
-
-func (v *Condition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Condition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionCondition != nil {
-		s.WriteStruct(schemas.Condition_ActionCondition)
-		v.ActionCondition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LabelNameCondition != nil {
-		s.WriteStruct(schemas.Condition_LabelNameCondition)
-		v.LabelNameCondition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Condition_ActionCondition:
-			v.ActionCondition = &ActionCondition{}
-			return v.ActionCondition.Deserialize(d)
-		case schemas.Condition_LabelNameCondition:
-			v.LabelNameCondition = &LabelNameCondition{}
-			return v.LabelNameCondition.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides a summary of pipeline configuration components including sources,
@@ -530,38 +229,27 @@ type ConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfigurationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// Contains summary information about a dataset integration, including its ARN,
+// associated IAM role, and creation and update timestamps, as returned by
+// ListDatasetIntegrations .
+type DatasetIntegrationSummary struct {
 
-func (v *ConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSources(s, schemas.ConfigurationSummary_DataSources, v.DataSources)
-	if v.ProcessorCount != nil {
-		s.WriteInt32(schemas.ConfigurationSummary_ProcessorCount, *v.ProcessorCount)
-	}
-	serializeProcessors(s, schemas.ConfigurationSummary_Processors, v.Processors)
-	serializeSinks(s, schemas.ConfigurationSummary_Sinks, v.Sinks)
-	serializeSources(s, schemas.ConfigurationSummary_Sources, v.Sources)
-}
-func (v *ConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfigurationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfigurationSummary_DataSources:
-			return deserializeDataSources(d, schemas.ConfigurationSummary_DataSources, &v.DataSources)
-		case schemas.ConfigurationSummary_ProcessorCount:
-			v.ProcessorCount = new(int32)
-			return d.ReadInt32(schemas.ConfigurationSummary_ProcessorCount, v.ProcessorCount)
-		case schemas.ConfigurationSummary_Processors:
-			return deserializeProcessors(d, schemas.ConfigurationSummary_Processors, &v.Processors)
-		case schemas.ConfigurationSummary_Sinks:
-			return deserializeSinks(d, schemas.ConfigurationSummary_Sinks, &v.Sinks)
-		case schemas.ConfigurationSummary_Sources:
-			return deserializeSources(d, schemas.ConfigurationSummary_Sources, &v.Sources)
-		}
-		return nil
-	})
+	// The Amazon Resource Name (ARN) of the dataset integration.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the dataset integration was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the dataset
+	// integration.
+	RoleArn *string
+
+	// The timestamp when the dataset integration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about a data source associated with the telemetry pipeline. For
@@ -584,34 +272,6 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DataSource_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.DataSource_Type, *v.Type)
-	}
-}
-func (v *DataSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataSource_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataSource_Name, v.Name)
-		case schemas.DataSource_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.DataSource_Type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Configuration for centralization destination log groups, including encryption
 // and backup settings.
 type DestinationLogsConfiguration struct {
@@ -628,47 +288,21 @@ type DestinationLogsConfiguration struct {
 	// The encryption configuration for centralization destination log groups.
 	LogsEncryptionConfiguration *LogsEncryptionConfiguration
 
+	// Specifies the tag propagation configuration for this centralization rule. When
+	// present, LogGroupNameConfiguration must use a LogGroupNamePattern that contains
+	// ${source.logGroup} , ${source.accountId} , and ${source.region} .
+	TagPropagationConfiguration *TagPropagationConfiguration
+
 	noSmithyDocumentSerde
 }
 
-func (v *DestinationLogsConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DestinationLogsConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// Configuration for centralization destination metrics, including backup settings.
+type DestinationMetricsConfiguration struct {
 
-func (v *DestinationLogsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BackupConfiguration != nil {
-		s.WriteStruct(schemas.DestinationLogsConfiguration_BackupConfiguration)
-		v.BackupConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogGroupNameConfiguration != nil {
-		s.WriteStruct(schemas.DestinationLogsConfiguration_LogGroupNameConfiguration)
-		v.LogGroupNameConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogsEncryptionConfiguration != nil {
-		s.WriteStruct(schemas.DestinationLogsConfiguration_LogsEncryptionConfiguration)
-		v.LogsEncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DestinationLogsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DestinationLogsConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DestinationLogsConfiguration_BackupConfiguration:
-			v.BackupConfiguration = &LogsBackupConfiguration{}
-			return v.BackupConfiguration.Deserialize(d)
-		case schemas.DestinationLogsConfiguration_LogGroupNameConfiguration:
-			v.LogGroupNameConfiguration = &LogGroupNameConfiguration{}
-			return v.LogGroupNameConfiguration.Deserialize(d)
-		case schemas.DestinationLogsConfiguration_LogsEncryptionConfiguration:
-			v.LogsEncryptionConfiguration = &LogsEncryptionConfiguration{}
-			return v.LogsEncryptionConfiguration.Deserialize(d)
-		}
-		return nil
-	})
+	// Configuration defining the backup region for the metrics backup destination.
+	BackupConfiguration *MetricsBackupConfiguration
+
+	noSmithyDocumentSerde
 }
 
 //	Configuration parameters for ELB load balancer logging, including output
@@ -686,38 +320,6 @@ type ELBLoadBalancerLoggingParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ELBLoadBalancerLoggingParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ELBLoadBalancerLoggingParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ELBLoadBalancerLoggingParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FieldDelimiter != nil {
-		s.WriteString(schemas.ELBLoadBalancerLoggingParameters_FieldDelimiter, *v.FieldDelimiter)
-	}
-	if v.OutputFormat != "" {
-		s.WriteString(schemas.ELBLoadBalancerLoggingParameters_OutputFormat, string(v.OutputFormat))
-	}
-}
-func (v *ELBLoadBalancerLoggingParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ELBLoadBalancerLoggingParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ELBLoadBalancerLoggingParameters_FieldDelimiter:
-			v.FieldDelimiter = new(string)
-			return d.ReadString(schemas.ELBLoadBalancerLoggingParameters_FieldDelimiter, v.FieldDelimiter)
-		case schemas.ELBLoadBalancerLoggingParameters_OutputFormat:
-			var ev string
-			if err := d.ReadString(schemas.ELBLoadBalancerLoggingParameters_OutputFormat, &ev); err != nil {
-				return err
-			}
-			v.OutputFormat = OutputFormat(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Defines the encryption configuration for S3 Table integrations, including the
 // encryption algorithm and KMS key settings.
 type Encryption struct {
@@ -733,38 +335,6 @@ type Encryption struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Encryption) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Encryption)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Encryption) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.Encryption_KmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.SseAlgorithm != "" {
-		s.WriteString(schemas.Encryption_SseAlgorithm, string(v.SseAlgorithm))
-	}
-}
-func (v *Encryption) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Encryption, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Encryption_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.Encryption_KmsKeyArn, v.KmsKeyArn)
-		case schemas.Encryption_SseAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.Encryption_SseAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.SseAlgorithm = SSEAlgorithm(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Specifies a field in the request to redact from WAF logs, such as headers,
@@ -787,48 +357,6 @@ type FieldToMatch struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FieldToMatch) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FieldToMatch)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FieldToMatch) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Method != nil {
-		s.WriteString(schemas.FieldToMatch_Method, *v.Method)
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.FieldToMatch_QueryString, *v.QueryString)
-	}
-	if v.SingleHeader != nil {
-		s.WriteStruct(schemas.FieldToMatch_SingleHeader)
-		v.SingleHeader.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UriPath != nil {
-		s.WriteString(schemas.FieldToMatch_UriPath, *v.UriPath)
-	}
-}
-func (v *FieldToMatch) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FieldToMatch, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FieldToMatch_Method:
-			v.Method = new(string)
-			return d.ReadString(schemas.FieldToMatch_Method, v.Method)
-		case schemas.FieldToMatch_QueryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.FieldToMatch_QueryString, v.QueryString)
-		case schemas.FieldToMatch_SingleHeader:
-			v.SingleHeader = &SingleHeader{}
-			return v.SingleHeader.Deserialize(d)
-		case schemas.FieldToMatch_UriPath:
-			v.UriPath = new(string)
-			return d.ReadString(schemas.FieldToMatch_UriPath, v.UriPath)
-		}
-		return nil
-	})
-}
-
 //	A single filter condition that specifies behavior, requirement, and matching
 //
 // conditions for WAF log records.
@@ -847,45 +375,6 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Filter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Filter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.Filter_Behavior, string(v.Behavior))
-	}
-	serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
-	if v.Requirement != "" {
-		s.WriteString(schemas.Filter_Requirement, string(v.Requirement))
-	}
-}
-func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Filter_Behavior:
-			var ev string
-			if err := d.ReadString(schemas.Filter_Behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = FilterBehavior(ev)
-			return nil
-		case schemas.Filter_Conditions:
-			return deserializeConditions(d, schemas.Filter_Conditions, &v.Conditions)
-		case schemas.Filter_Requirement:
-			var ev string
-			if err := d.ReadString(schemas.Filter_Requirement, &ev); err != nil {
-				return err
-			}
-			v.Requirement = FilterRequirement(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains summary information about an S3 Table integration for listing
 // operations.
 type IntegrationSummary struct {
@@ -897,38 +386,6 @@ type IntegrationSummary struct {
 	Status IntegrationStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *IntegrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.IntegrationSummary_Arn, *v.Arn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.IntegrationSummary_Status, string(v.Status))
-	}
-}
-func (v *IntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntegrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntegrationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.IntegrationSummary_Arn, v.Arn)
-		case schemas.IntegrationSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.IntegrationSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = IntegrationStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Condition that matches based on WAF rule labels, with label names limited to
@@ -943,55 +400,16 @@ type LabelNameCondition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LabelNameCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LabelNameCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LabelNameCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LabelName != nil {
-		s.WriteString(schemas.LabelNameCondition_LabelName, *v.LabelName)
-	}
-}
-func (v *LabelNameCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LabelNameCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LabelNameCondition_LabelName:
-			v.LabelName = new(string)
-			return d.ReadString(schemas.LabelNameCondition_LabelName, v.LabelName)
-		}
-		return nil
-	})
-}
-
-// Configuration parameters for Amazon Bedrock AgentCore logging, including logType
-// settings.
+// The configuration parameters for log delivery, including logType settings.
+// Applies to resource types that support configurable log delivery, such as Amazon
+// Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers, and Elastic
+// Load Balancing Application Load Balancers.
 type LogDeliveryParameters struct {
 
-	// The type of log that the source is sending.
+	// The types of logs to collect from the resource.
 	LogTypes []LogType
 
 	noSmithyDocumentSerde
-}
-
-func (v *LogDeliveryParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogDeliveryParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogDeliveryParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogTypes(s, schemas.LogDeliveryParameters_LogTypes, v.LogTypes)
-}
-func (v *LogDeliveryParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogDeliveryParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogDeliveryParameters_LogTypes:
-			return deserializeLogTypes(d, schemas.LogDeliveryParameters_LogTypes, &v.LogTypes)
-		}
-		return nil
-	})
 }
 
 //	Configuration that determines which WAF log records to keep or drop based on
@@ -1007,35 +425,6 @@ type LoggingFilter struct {
 	Filters []Filter
 
 	noSmithyDocumentSerde
-}
-
-func (v *LoggingFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoggingFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoggingFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultBehavior != "" {
-		s.WriteString(schemas.LoggingFilter_DefaultBehavior, string(v.DefaultBehavior))
-	}
-	serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
-}
-func (v *LoggingFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoggingFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoggingFilter_DefaultBehavior:
-			var ev string
-			if err := d.ReadString(schemas.LoggingFilter_DefaultBehavior, &ev); err != nil {
-				return err
-			}
-			v.DefaultBehavior = FilterBehavior(ev)
-			return nil
-		case schemas.LoggingFilter_Filters:
-			return deserializeFilters(d, schemas.LoggingFilter_Filters, &v.Filters)
-		}
-		return nil
-	})
 }
 
 // Configuration that specifies a naming pattern for destination log groups
@@ -1073,28 +462,6 @@ type LogGroupNameConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogGroupNameConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogGroupNameConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogGroupNameConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroupNamePattern != nil {
-		s.WriteString(schemas.LogGroupNameConfiguration_LogGroupNamePattern, *v.LogGroupNamePattern)
-	}
-}
-func (v *LogGroupNameConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogGroupNameConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogGroupNameConfiguration_LogGroupNamePattern:
-			v.LogGroupNamePattern = new(string)
-			return d.ReadString(schemas.LogGroupNameConfiguration_LogGroupNamePattern, v.LogGroupNamePattern)
-		}
-		return nil
-	})
-}
-
 // Configuration for backing up centralized log data to a secondary region.
 type LogsBackupConfiguration struct {
 
@@ -1111,37 +478,11 @@ type LogsBackupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogsBackupConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogsBackupConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogsBackupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.LogsBackupConfiguration_KmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.LogsBackupConfiguration_Region, *v.Region)
-	}
-}
-func (v *LogsBackupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogsBackupConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogsBackupConfiguration_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.LogsBackupConfiguration_KmsKeyArn, v.KmsKeyArn)
-		case schemas.LogsBackupConfiguration_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.LogsBackupConfiguration_Region, v.Region)
-		}
-		return nil
-	})
-}
-
-// Configuration for encrypting centralized log groups. This configuration is only
-// applied to destination log groups for which the corresponding source log groups
-// are encrypted using Customer Managed KMS Keys.
+// Configuration for encrypting centralized destination log groups. By default,
+// this configuration applies only to destination log groups whose corresponding
+// source log groups are encrypted using customer managed KMS keys. To encrypt all
+// destination log groups created by the rule, set EncryptionScope to
+// NEW_DESTINATION_LOG_GROUPS .
 type LogsEncryptionConfiguration struct {
 
 	// Configuration that determines the encryption strategy of the destination log
@@ -1157,6 +498,22 @@ type LogsEncryptionConfiguration struct {
 	// centralization into the destination log group.
 	EncryptionConflictResolutionStrategy EncryptionConflictResolutionStrategy
 
+	// Determines which newly created destination log groups are encrypted with the
+	// configured KmsKeyArn when EncryptionStrategy is CUSTOMER_MANAGED .
+	//
+	// If you set this to ENCRYPTED_SOURCE_ONLY (the default), only destination log
+	// groups whose source log group is encrypted with a customer managed KMS key use
+	// the configured KmsKeyArn . Destination log groups derived from Amazon Web
+	// Services owned encrypted source log groups remain Amazon Web Services owned
+	// encrypted.
+	//
+	// If you set this to NEW_DESTINATION_LOG_GROUPS , every new destination log group
+	// created by this rule uses the configured KmsKeyArn , regardless of the source
+	// log group's encryption posture.
+	//
+	// This field is not valid when EncryptionStrategy is AWS_OWNED .
+	EncryptionScope EncryptionScope
+
 	// KMS Key ARN belonging to the primary destination account and region, to encrypt
 	// newly created central log groups in the primary destination.
 	KmsKeyArn *string
@@ -1164,46 +521,16 @@ type LogsEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogsEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogsEncryptionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
+// Configuration for backing up centralized metrics data to a secondary region.
+type MetricsBackupConfiguration struct {
 
-func (v *LogsEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionConflictResolutionStrategy != "" {
-		s.WriteString(schemas.LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy, string(v.EncryptionConflictResolutionStrategy))
-	}
-	if v.EncryptionStrategy != "" {
-		s.WriteString(schemas.LogsEncryptionConfiguration_EncryptionStrategy, string(v.EncryptionStrategy))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.LogsEncryptionConfiguration_KmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *LogsEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogsEncryptionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy, &ev); err != nil {
-				return err
-			}
-			v.EncryptionConflictResolutionStrategy = EncryptionConflictResolutionStrategy(ev)
-			return nil
-		case schemas.LogsEncryptionConfiguration_EncryptionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.LogsEncryptionConfiguration_EncryptionStrategy, &ev); err != nil {
-				return err
-			}
-			v.EncryptionStrategy = EncryptionStrategy(ev)
-			return nil
-		case schemas.LogsEncryptionConfiguration_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.LogsEncryptionConfiguration_KmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
+	// Metrics specific backup destination region within the primary destination
+	// account to which metrics data should be centralized.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
 }
 
 //	Configuration parameters for Amazon MSK cluster monitoring, including enhanced
@@ -1215,32 +542,6 @@ type MskMonitoringParameters struct {
 	EnhancedMonitoring MskEnhancedMonitoringLevel
 
 	noSmithyDocumentSerde
-}
-
-func (v *MskMonitoringParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MskMonitoringParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MskMonitoringParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnhancedMonitoring != "" {
-		s.WriteString(schemas.MskMonitoringParameters_EnhancedMonitoring, string(v.EnhancedMonitoring))
-	}
-}
-func (v *MskMonitoringParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MskMonitoringParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MskMonitoringParameters_EnhancedMonitoring:
-			var ev string
-			if err := d.ReadString(schemas.MskMonitoringParameters_EnhancedMonitoring, &ev); err != nil {
-				return err
-			}
-			v.EnhancedMonitoring = MskEnhancedMonitoringLevel(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains the output from pipeline test operations, including processed records
@@ -1256,38 +557,6 @@ type PipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Error != nil {
-		s.WriteStruct(schemas.PipelineOutput_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Record != nil {
-		s.WriteStruct(schemas.PipelineOutput_Record)
-		v.Record.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineOutput_Error:
-			v.Error = &PipelineOutputError{}
-			return v.Error.Deserialize(d)
-		case schemas.PipelineOutput_Record:
-			v.Record = &Record{}
-			return v.Record.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains detailed error information from pipeline test operations, providing
 // structured error responses for better debugging and troubleshooting
 // capabilities.
@@ -1298,28 +567,6 @@ type PipelineOutputError struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PipelineOutputError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineOutputError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineOutputError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.PipelineOutputError_Message, *v.Message)
-	}
-}
-func (v *PipelineOutputError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineOutputError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineOutputError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.PipelineOutputError_Message, v.Message)
-		}
-		return nil
-	})
 }
 
 // Represents a test record structure used for pipeline testing operations to
@@ -1333,38 +580,6 @@ type Record struct {
 	Type RecordFormat
 
 	noSmithyDocumentSerde
-}
-
-func (v *Record) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Record)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Data != nil {
-		s.WriteString(schemas.Record_Data, *v.Data)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Record_Type, string(v.Type))
-	}
-}
-func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Record_Data:
-			v.Data = new(string)
-			return d.ReadString(schemas.Record_Data, v.Data)
-		case schemas.Record_Type:
-			var ev string
-			if err := d.ReadString(schemas.Record_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = RecordFormat(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 //	Represents the status of a multi-region operation in a specific Amazon Web
@@ -1395,46 +610,6 @@ type RegionStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegionStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegionStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegionStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FailureReason != nil {
-		s.WriteString(schemas.RegionStatus_FailureReason, *v.FailureReason)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.RegionStatus_Region, *v.Region)
-	}
-	if v.RuleArn != nil {
-		s.WriteString(schemas.RegionStatus_RuleArn, *v.RuleArn)
-	}
-	if v.Status != nil {
-		s.WriteString(schemas.RegionStatus_Status, *v.Status)
-	}
-}
-func (v *RegionStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegionStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegionStatus_FailureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.RegionStatus_FailureReason, v.FailureReason)
-		case schemas.RegionStatus_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.RegionStatus_Region, v.Region)
-		case schemas.RegionStatus_RuleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.RegionStatus_RuleArn, v.RuleArn)
-		case schemas.RegionStatus_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.RegionStatus_Status, v.Status)
-		}
-		return nil
-	})
-}
-
 //	Structure containing a name field limited to 64 characters for header or query
 //
 // parameter identification.
@@ -1444,28 +619,6 @@ type SingleHeader struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SingleHeader) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SingleHeader)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SingleHeader) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SingleHeader_Name, *v.Name)
-	}
-}
-func (v *SingleHeader) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SingleHeader, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SingleHeader_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SingleHeader_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // A list of source plugin types used in the pipeline configuration (such as
@@ -1479,26 +632,11 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Source) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Source)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != nil {
-		s.WriteString(schemas.Source_Type, *v.Type)
-	}
-}
-func (v *Source) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Source, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Source_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Source_Type, v.Type)
-		}
-		return nil
-	})
+// Configuration that enables centralization of the context graph for the selected
+// sources. Including this configuration in a rule's source opts the rule into
+// centralizing the context graph for the selected sources.
+type SourceContextGraphConfiguration struct {
+	noSmithyDocumentSerde
 }
 
 // Configuration for selecting and handling source log groups for centralization.
@@ -1526,42 +664,44 @@ type SourceLogsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SourceLogsConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SourceLogsConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
+// Configuration for selecting source metrics for centralization.
+type SourceMetricsConfiguration struct {
+
+	// The filter expression that selects which source metrics to centralize.
+	// Currently, only * (all metrics) is supported. Other values return a validation
+	// error.
+	MetricsSelectionCriteria *string
+
+	noSmithyDocumentSerde
 }
 
-func (v *SourceLogsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataSourceSelectionCriteria != nil {
-		s.WriteString(schemas.SourceLogsConfiguration_DataSourceSelectionCriteria, *v.DataSourceSelectionCriteria)
-	}
-	if v.EncryptedLogGroupStrategy != "" {
-		s.WriteString(schemas.SourceLogsConfiguration_EncryptedLogGroupStrategy, string(v.EncryptedLogGroupStrategy))
-	}
-	if v.LogGroupSelectionCriteria != nil {
-		s.WriteString(schemas.SourceLogsConfiguration_LogGroupSelectionCriteria, *v.LogGroupSelectionCriteria)
-	}
-}
-func (v *SourceLogsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SourceLogsConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SourceLogsConfiguration_DataSourceSelectionCriteria:
-			v.DataSourceSelectionCriteria = new(string)
-			return d.ReadString(schemas.SourceLogsConfiguration_DataSourceSelectionCriteria, v.DataSourceSelectionCriteria)
-		case schemas.SourceLogsConfiguration_EncryptedLogGroupStrategy:
-			var ev string
-			if err := d.ReadString(schemas.SourceLogsConfiguration_EncryptedLogGroupStrategy, &ev); err != nil {
-				return err
-			}
-			v.EncryptedLogGroupStrategy = EncryptedLogGroupStrategy(ev)
-			return nil
-		case schemas.SourceLogsConfiguration_LogGroupSelectionCriteria:
-			v.LogGroupSelectionCriteria = new(string)
-			return d.ReadString(schemas.SourceLogsConfiguration_LogGroupSelectionCriteria, v.LogGroupSelectionCriteria)
-		}
-		return nil
-	})
+// Specifies configuration for propagating resource tags from source log groups to
+// centralized destination log groups. The service uses a customer-managed IAM role
+// in the destination account to add, update, and remove tags on destination log
+// groups.
+type TagPropagationConfiguration struct {
+
+	// The ARN of a customer-managed IAM role in the destination account. The service
+	// assumes this role to propagate tags to destination log groups. You must have
+	// iam:PassRole permission on this role.
+	//
+	// This member is required.
+	DestinationRoleArn *string
+
+	// The strategy for resolving conflicts when a tag key exists on both the source
+	// and destination log groups. If not specified, defaults to UPDATE_SYNC .
+	//
+	//   - ADD_ONLY – Only adds new tags from the source without modifying existing
+	//   destination tags.
+	//
+	//   - UPDATE_SYNC – Adds new tags and updates existing tags from the source. Does
+	//   not remove destination tags that are absent from the source.
+	//
+	//   - IN_SYNC – Keeps destination tags fully synchronized with source tags,
+	//   including removing destination tags that do not exist on the source.
+	TagConflictResolutionStrategy TagConflictResolutionStrategy
+
+	noSmithyDocumentSerde
 }
 
 //	A model representing the state of a resource within an account according to
@@ -1600,66 +740,6 @@ type TelemetryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TelemetryConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountIdentifier != nil {
-		s.WriteString(schemas.TelemetryConfiguration_AccountIdentifier, *v.AccountIdentifier)
-	}
-	if v.LastUpdateTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryConfiguration_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
-	}
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.TelemetryConfiguration_ResourceIdentifier, *v.ResourceIdentifier)
-	}
-	serializeTagMapOutput(s, schemas.TelemetryConfiguration_ResourceTags, v.ResourceTags)
-	if v.ResourceType != "" {
-		s.WriteString(schemas.TelemetryConfiguration_ResourceType, string(v.ResourceType))
-	}
-	serializeTelemetryConfigurationState(s, schemas.TelemetryConfiguration_TelemetryConfigurationState, v.TelemetryConfigurationState)
-	if v.TelemetrySourceType != "" {
-		s.WriteString(schemas.TelemetryConfiguration_TelemetrySourceType, string(v.TelemetrySourceType))
-	}
-}
-func (v *TelemetryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryConfiguration_AccountIdentifier:
-			v.AccountIdentifier = new(string)
-			return d.ReadString(schemas.TelemetryConfiguration_AccountIdentifier, v.AccountIdentifier)
-		case schemas.TelemetryConfiguration_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryConfiguration_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.TelemetryConfiguration_ResourceIdentifier:
-			v.ResourceIdentifier = new(string)
-			return d.ReadString(schemas.TelemetryConfiguration_ResourceIdentifier, v.ResourceIdentifier)
-		case schemas.TelemetryConfiguration_ResourceTags:
-			return deserializeTagMapOutput(d, schemas.TelemetryConfiguration_ResourceTags, &v.ResourceTags)
-		case schemas.TelemetryConfiguration_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryConfiguration_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ResourceType(ev)
-			return nil
-		case schemas.TelemetryConfiguration_TelemetryConfigurationState:
-			return deserializeTelemetryConfigurationState(d, schemas.TelemetryConfiguration_TelemetryConfigurationState, &v.TelemetryConfigurationState)
-		case schemas.TelemetryConfiguration_TelemetrySourceType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryConfiguration_TelemetrySourceType, &ev); err != nil {
-				return err
-			}
-			v.TelemetrySourceType = TelemetrySourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	Configuration specifying where and how telemetry data should be delivered for
 //
 // Amazon Web Services resources.
@@ -1681,8 +761,14 @@ type TelemetryDestinationConfiguration struct {
 	// resource type.
 	ELBLoadBalancerLoggingParameters *ELBLoadBalancerLoggingParameters
 
-	// Configuration parameters specific to Amazon Bedrock AgentCore logging when
-	// Amazon Bedrock AgentCore is the resource type.
+	//  The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS
+	// key used to encrypt the log groups created during telemetry rule remediation.
+	KmsKeyArn *string
+
+	// The configuration parameters for log delivery when the resource type supports
+	// configurable log types, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
+	// AgentCore payment managers, or Elastic Load Balancing Application Load
+	// Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -1701,92 +787,6 @@ type TelemetryDestinationConfiguration struct {
 	WAFLoggingParameters *WAFLoggingParameters
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelemetryDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryDestinationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudtrailParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_CloudtrailParameters)
-		v.CloudtrailParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DestinationPattern != nil {
-		s.WriteString(schemas.TelemetryDestinationConfiguration_DestinationPattern, *v.DestinationPattern)
-	}
-	if v.DestinationType != "" {
-		s.WriteString(schemas.TelemetryDestinationConfiguration_DestinationType, string(v.DestinationType))
-	}
-	if v.ELBLoadBalancerLoggingParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters)
-		v.ELBLoadBalancerLoggingParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LogDeliveryParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_LogDeliveryParameters)
-		v.LogDeliveryParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MskMonitoringParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_MskMonitoringParameters)
-		v.MskMonitoringParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RetentionInDays != nil {
-		s.WriteInt32(schemas.TelemetryDestinationConfiguration_RetentionInDays, *v.RetentionInDays)
-	}
-	if v.VPCFlowLogParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_VPCFlowLogParameters)
-		v.VPCFlowLogParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WAFLoggingParameters != nil {
-		s.WriteStruct(schemas.TelemetryDestinationConfiguration_WAFLoggingParameters)
-		v.WAFLoggingParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *TelemetryDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryDestinationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryDestinationConfiguration_CloudtrailParameters:
-			v.CloudtrailParameters = &CloudtrailParameters{}
-			return v.CloudtrailParameters.Deserialize(d)
-		case schemas.TelemetryDestinationConfiguration_DestinationPattern:
-			v.DestinationPattern = new(string)
-			return d.ReadString(schemas.TelemetryDestinationConfiguration_DestinationPattern, v.DestinationPattern)
-		case schemas.TelemetryDestinationConfiguration_DestinationType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryDestinationConfiguration_DestinationType, &ev); err != nil {
-				return err
-			}
-			v.DestinationType = DestinationType(ev)
-			return nil
-		case schemas.TelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters:
-			v.ELBLoadBalancerLoggingParameters = &ELBLoadBalancerLoggingParameters{}
-			return v.ELBLoadBalancerLoggingParameters.Deserialize(d)
-		case schemas.TelemetryDestinationConfiguration_LogDeliveryParameters:
-			v.LogDeliveryParameters = &LogDeliveryParameters{}
-			return v.LogDeliveryParameters.Deserialize(d)
-		case schemas.TelemetryDestinationConfiguration_MskMonitoringParameters:
-			v.MskMonitoringParameters = &MskMonitoringParameters{}
-			return v.MskMonitoringParameters.Deserialize(d)
-		case schemas.TelemetryDestinationConfiguration_RetentionInDays:
-			v.RetentionInDays = new(int32)
-			return d.ReadInt32(schemas.TelemetryDestinationConfiguration_RetentionInDays, v.RetentionInDays)
-		case schemas.TelemetryDestinationConfiguration_VPCFlowLogParameters:
-			v.VPCFlowLogParameters = &VPCFlowLogParameters{}
-			return v.VPCFlowLogParameters.Deserialize(d)
-		case schemas.TelemetryDestinationConfiguration_WAFLoggingParameters:
-			v.WAFLoggingParameters = &WAFLoggingParameters{}
-			return v.WAFLoggingParameters.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents a complete telemetry pipeline resource with configuration, status,
@@ -1819,75 +819,6 @@ type TelemetryPipeline struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelemetryPipeline) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryPipeline)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryPipeline) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.TelemetryPipeline_Arn, *v.Arn)
-	}
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.TelemetryPipeline_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryPipeline_CreatedTimeStamp, *v.CreatedTimeStamp)
-	}
-	if v.LastUpdateTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryPipeline_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.TelemetryPipeline_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.TelemetryPipeline_Status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteStruct(schemas.TelemetryPipeline_StatusReason)
-		v.StatusReason.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMapOutput(s, schemas.TelemetryPipeline_Tags, v.Tags)
-}
-func (v *TelemetryPipeline) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryPipeline, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryPipeline_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.TelemetryPipeline_Arn, v.Arn)
-		case schemas.TelemetryPipeline_Configuration:
-			v.Configuration = &TelemetryPipelineConfiguration{}
-			return v.Configuration.Deserialize(d)
-		case schemas.TelemetryPipeline_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryPipeline_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.TelemetryPipeline_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryPipeline_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.TelemetryPipeline_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.TelemetryPipeline_Name, v.Name)
-		case schemas.TelemetryPipeline_Status:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryPipeline_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = TelemetryPipelineStatus(ev)
-			return nil
-		case schemas.TelemetryPipeline_StatusReason:
-			v.StatusReason = &TelemetryPipelineStatusReason{}
-			return v.StatusReason.Deserialize(d)
-		case schemas.TelemetryPipeline_Tags:
-			return deserializeTagMapOutput(d, schemas.TelemetryPipeline_Tags, &v.Tags)
-		}
-		return nil
-	})
 }
 
 // Defines the configuration for a pipeline, including how data flows from sources
@@ -1928,28 +859,6 @@ type TelemetryPipelineConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TelemetryPipelineConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryPipelineConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryPipelineConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Body != nil {
-		s.WriteString(schemas.TelemetryPipelineConfiguration_Body, *v.Body)
-	}
-}
-func (v *TelemetryPipelineConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryPipelineConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryPipelineConfiguration_Body:
-			v.Body = new(string)
-			return d.ReadString(schemas.TelemetryPipelineConfiguration_Body, v.Body)
-		}
-		return nil
-	})
-}
-
 // Provides detailed information about the status of a telemetry pipeline,
 // including reasons for specific states.
 type TelemetryPipelineStatusReason struct {
@@ -1959,28 +868,6 @@ type TelemetryPipelineStatusReason struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelemetryPipelineStatusReason) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryPipelineStatusReason)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryPipelineStatusReason) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.TelemetryPipelineStatusReason_Description, *v.Description)
-	}
-}
-func (v *TelemetryPipelineStatusReason) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryPipelineStatusReason, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryPipelineStatusReason_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.TelemetryPipelineStatusReason_Description, v.Description)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a telemetry pipeline for listing operations.
@@ -2008,67 +895,6 @@ type TelemetryPipelineSummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelemetryPipelineSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryPipelineSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryPipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.TelemetryPipelineSummary_Arn, *v.Arn)
-	}
-	if v.ConfigurationSummary != nil {
-		s.WriteStruct(schemas.TelemetryPipelineSummary_ConfigurationSummary)
-		v.ConfigurationSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryPipelineSummary_CreatedTimeStamp, *v.CreatedTimeStamp)
-	}
-	if v.LastUpdateTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryPipelineSummary_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.TelemetryPipelineSummary_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.TelemetryPipelineSummary_Status, string(v.Status))
-	}
-	serializeTagMapOutput(s, schemas.TelemetryPipelineSummary_Tags, v.Tags)
-}
-func (v *TelemetryPipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryPipelineSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryPipelineSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.TelemetryPipelineSummary_Arn, v.Arn)
-		case schemas.TelemetryPipelineSummary_ConfigurationSummary:
-			v.ConfigurationSummary = &ConfigurationSummary{}
-			return v.ConfigurationSummary.Deserialize(d)
-		case schemas.TelemetryPipelineSummary_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryPipelineSummary_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.TelemetryPipelineSummary_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryPipelineSummary_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.TelemetryPipelineSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.TelemetryPipelineSummary_Name, v.Name)
-		case schemas.TelemetryPipelineSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryPipelineSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = TelemetryPipelineStatus(ev)
-			return nil
-		case schemas.TelemetryPipelineSummary_Tags:
-			return deserializeTagMapOutput(d, schemas.TelemetryPipelineSummary_Tags, &v.Tags)
-		}
-		return nil
-	})
 }
 
 //	Defines how telemetry should be configured for specific Amazon Web Services
@@ -2105,8 +931,10 @@ type TelemetryRule struct {
 	// AllRegions .
 	Regions []string
 
-	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
-	// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
+	//  The type of Amazon Web Services resource to configure telemetry for (for
+	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase , or
+	// AWS::BedrockAgentCore::PaymentManager ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts
@@ -2123,80 +951,6 @@ type TelemetryRule struct {
 	TelemetrySourceTypes []TelemetrySourceType
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelemetryRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllRegions != nil {
-		s.WriteBool(schemas.TelemetryRule_AllRegions, *v.AllRegions)
-	}
-	if v.AllowFieldUpdates != nil {
-		s.WriteBool(schemas.TelemetryRule_AllowFieldUpdates, *v.AllowFieldUpdates)
-	}
-	if v.DestinationConfiguration != nil {
-		s.WriteStruct(schemas.TelemetryRule_DestinationConfiguration)
-		v.DestinationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRegions(s, schemas.TelemetryRule_Regions, v.Regions)
-	if v.ResourceType != "" {
-		s.WriteString(schemas.TelemetryRule_ResourceType, string(v.ResourceType))
-	}
-	if v.Scope != nil {
-		s.WriteString(schemas.TelemetryRule_Scope, *v.Scope)
-	}
-	if v.SelectionCriteria != nil {
-		s.WriteString(schemas.TelemetryRule_SelectionCriteria, *v.SelectionCriteria)
-	}
-	serializeTelemetrySourceTypes(s, schemas.TelemetryRule_TelemetrySourceTypes, v.TelemetrySourceTypes)
-	if v.TelemetryType != "" {
-		s.WriteString(schemas.TelemetryRule_TelemetryType, string(v.TelemetryType))
-	}
-}
-func (v *TelemetryRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryRule_AllRegions:
-			v.AllRegions = new(bool)
-			return d.ReadBool(schemas.TelemetryRule_AllRegions, v.AllRegions)
-		case schemas.TelemetryRule_AllowFieldUpdates:
-			v.AllowFieldUpdates = new(bool)
-			return d.ReadBool(schemas.TelemetryRule_AllowFieldUpdates, v.AllowFieldUpdates)
-		case schemas.TelemetryRule_DestinationConfiguration:
-			v.DestinationConfiguration = &TelemetryDestinationConfiguration{}
-			return v.DestinationConfiguration.Deserialize(d)
-		case schemas.TelemetryRule_Regions:
-			return deserializeRegions(d, schemas.TelemetryRule_Regions, &v.Regions)
-		case schemas.TelemetryRule_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryRule_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ResourceType(ev)
-			return nil
-		case schemas.TelemetryRule_Scope:
-			v.Scope = new(string)
-			return d.ReadString(schemas.TelemetryRule_Scope, v.Scope)
-		case schemas.TelemetryRule_SelectionCriteria:
-			v.SelectionCriteria = new(string)
-			return d.ReadString(schemas.TelemetryRule_SelectionCriteria, v.SelectionCriteria)
-		case schemas.TelemetryRule_TelemetrySourceTypes:
-			return deserializeTelemetrySourceTypes(d, schemas.TelemetryRule_TelemetrySourceTypes, &v.TelemetrySourceTypes)
-		case schemas.TelemetryRule_TelemetryType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryRule_TelemetryType, &ev); err != nil {
-				return err
-			}
-			v.TelemetryType = TelemetryType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A summary of a telemetry rule's key properties.
@@ -2228,69 +982,6 @@ type TelemetryRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TelemetryRuleSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelemetryRuleSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelemetryRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryRuleSummary_CreatedTimeStamp, *v.CreatedTimeStamp)
-	}
-	if v.LastUpdateTimeStamp != nil {
-		s.WriteInt64(schemas.TelemetryRuleSummary_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.TelemetryRuleSummary_ResourceType, string(v.ResourceType))
-	}
-	if v.RuleArn != nil {
-		s.WriteString(schemas.TelemetryRuleSummary_RuleArn, *v.RuleArn)
-	}
-	if v.RuleName != nil {
-		s.WriteString(schemas.TelemetryRuleSummary_RuleName, *v.RuleName)
-	}
-	serializeTelemetrySourceTypes(s, schemas.TelemetryRuleSummary_TelemetrySourceTypes, v.TelemetrySourceTypes)
-	if v.TelemetryType != "" {
-		s.WriteString(schemas.TelemetryRuleSummary_TelemetryType, string(v.TelemetryType))
-	}
-}
-func (v *TelemetryRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelemetryRuleSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelemetryRuleSummary_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryRuleSummary_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.TelemetryRuleSummary_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.TelemetryRuleSummary_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.TelemetryRuleSummary_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryRuleSummary_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ResourceType(ev)
-			return nil
-		case schemas.TelemetryRuleSummary_RuleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.TelemetryRuleSummary_RuleArn, v.RuleArn)
-		case schemas.TelemetryRuleSummary_RuleName:
-			v.RuleName = new(string)
-			return d.ReadString(schemas.TelemetryRuleSummary_RuleName, v.RuleName)
-		case schemas.TelemetryRuleSummary_TelemetrySourceTypes:
-			return deserializeTelemetrySourceTypes(d, schemas.TelemetryRuleSummary_TelemetrySourceTypes, &v.TelemetrySourceTypes)
-		case schemas.TelemetryRuleSummary_TelemetryType:
-			var ev string
-			if err := d.ReadString(schemas.TelemetryRuleSummary_TelemetryType, &ev); err != nil {
-				return err
-			}
-			v.TelemetryType = TelemetryType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a detailed validation error with message, reason, and field mapping
 // for comprehensive error reporting.
 type ValidationError struct {
@@ -2307,37 +998,6 @@ type ValidationError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldMap(s, schemas.ValidationError_FieldMap, v.FieldMap)
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationError_Message, *v.Message)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.ValidationError_Reason, *v.Reason)
-	}
-}
-func (v *ValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationError_FieldMap:
-			return deserializeFieldMap(d, schemas.ValidationError_FieldMap, &v.FieldMap)
-		case schemas.ValidationError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationError_Message, v.Message)
-		case schemas.ValidationError_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.ValidationError_Reason, v.Reason)
-		}
-		return nil
-	})
-}
-
 // Configuration parameters specific to VPC Flow Logs.
 type VPCFlowLogParameters struct {
 
@@ -2351,40 +1011,6 @@ type VPCFlowLogParameters struct {
 	TrafficType *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VPCFlowLogParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VPCFlowLogParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VPCFlowLogParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogFormat != nil {
-		s.WriteString(schemas.VPCFlowLogParameters_LogFormat, *v.LogFormat)
-	}
-	if v.MaxAggregationInterval != nil {
-		s.WriteInt32(schemas.VPCFlowLogParameters_MaxAggregationInterval, *v.MaxAggregationInterval)
-	}
-	if v.TrafficType != nil {
-		s.WriteString(schemas.VPCFlowLogParameters_TrafficType, *v.TrafficType)
-	}
-}
-func (v *VPCFlowLogParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VPCFlowLogParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VPCFlowLogParameters_LogFormat:
-			v.LogFormat = new(string)
-			return d.ReadString(schemas.VPCFlowLogParameters_LogFormat, v.LogFormat)
-		case schemas.VPCFlowLogParameters_MaxAggregationInterval:
-			v.MaxAggregationInterval = new(int32)
-			return d.ReadInt32(schemas.VPCFlowLogParameters_MaxAggregationInterval, v.MaxAggregationInterval)
-		case schemas.VPCFlowLogParameters_TrafficType:
-			v.TrafficType = new(string)
-			return d.ReadString(schemas.VPCFlowLogParameters_TrafficType, v.TrafficType)
-		}
-		return nil
-	})
 }
 
 //	Configuration parameters for WAF logging, including redacted fields and
@@ -2403,43 +1029,6 @@ type WAFLoggingParameters struct {
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
-}
-
-func (v *WAFLoggingParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WAFLoggingParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WAFLoggingParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogType != "" {
-		s.WriteString(schemas.WAFLoggingParameters_LogType, string(v.LogType))
-	}
-	if v.LoggingFilter != nil {
-		s.WriteStruct(schemas.WAFLoggingParameters_LoggingFilter)
-		v.LoggingFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeRedactedFields(s, schemas.WAFLoggingParameters_RedactedFields, v.RedactedFields)
-}
-func (v *WAFLoggingParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WAFLoggingParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WAFLoggingParameters_LogType:
-			var ev string
-			if err := d.ReadString(schemas.WAFLoggingParameters_LogType, &ev); err != nil {
-				return err
-			}
-			v.LogType = WAFLogType(ev)
-			return nil
-		case schemas.WAFLoggingParameters_LoggingFilter:
-			v.LoggingFilter = &LoggingFilter{}
-			return v.LoggingFilter.Deserialize(d)
-		case schemas.WAFLoggingParameters_RedactedFields:
-			return deserializeRedactedFields(d, schemas.WAFLoggingParameters_RedactedFields, &v.RedactedFields)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

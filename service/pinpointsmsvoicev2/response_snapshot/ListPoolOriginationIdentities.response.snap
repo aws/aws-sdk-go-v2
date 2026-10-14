@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.ListPoolOriginationIdentities
+
+{"NextToken":"__NextToken__","OriginationIdentities":[{"IsoCountryCode":"__IsoCountryCode__","NumberCapabilities":["SMS","SMS"],"OriginationIdentity":"__OriginationIdentity__","OriginationIdentityArn":"__OriginationIdentityArn__","PhoneNumber":"__PhoneNumber__"},{"IsoCountryCode":"__IsoCountryCode__","NumberCapabilities":["SMS","SMS"],"OriginationIdentity":"__OriginationIdentity__","OriginationIdentityArn":"__OriginationIdentityArn__","PhoneNumber":"__PhoneNumber__"}],"PoolArn":"__PoolArn__","PoolId":"__PoolId__"}

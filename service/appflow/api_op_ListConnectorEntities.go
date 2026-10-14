@@ -4,11 +4,10 @@ package appflow
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns the list of available connector entities supported by Amazon AppFlow.
@@ -62,6 +61,33 @@ type ListConnectorEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.ListConnectorEntitiesRequest_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.ListConnectorEntitiesRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.ListConnectorEntitiesRequest_connectorType, string(v.ConnectorType))
+	}
+	if v.EntitiesPath != nil {
+		s.WriteString(schemas.ListConnectorEntitiesRequest_entitiesPath, *v.EntitiesPath)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectorEntitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorEntitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConnectorEntitiesOutput struct {
 
 	//  The response of ListConnectorEntities lists entities grouped by category. This
@@ -82,74 +108,48 @@ type ListConnectorEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorEntityMap(s, schemas.ListConnectorEntitiesResponse_connectorEntityMap, v.ConnectorEntityMap)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorEntitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectorEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorEntitiesResponse_connectorEntityMap:
+			return deserializeConnectorEntityMap(d, schemas.ListConnectorEntitiesResponse_connectorEntityMap, &v.ConnectorEntityMap)
+		case schemas.ListConnectorEntitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorEntitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorEntities, schemas.ListConnectorEntitiesRequest, schemas.ListConnectorEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorEntities, schemas.ListConnectorEntitiesRequest, schemas.ListConnectorEntitiesResponse), output: &ListConnectorEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectorEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConnectorEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +164,8 @@ func (c *Client) addOperationListConnectorEntitiesMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListConnectorEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConnectorEntities",
-	}
 }

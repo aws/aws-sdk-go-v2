@@ -1,0 +1,5 @@
+POST /data-automation-projects/
+
+Content-Type: application/json
+
+{"blueprintFilter":{"blueprintArn":"__BlueprintArn__","blueprintStage":"DEVELOPMENT","blueprintVersion":"__BlueprintVersion__"},"libraryFilter":{"libraryArn":"__LibraryArn__"},"maxResults":1,"nextToken":"__NextToken__","projectStageFilter":"DEVELOPMENT","resourceOwner":"SERVICE"}

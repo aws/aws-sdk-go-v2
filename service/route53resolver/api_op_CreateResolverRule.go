@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // For DNS queries that originate in your VPCs, specifies which Resolver endpoint
@@ -97,6 +96,35 @@ type CreateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateResolverRuleRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DelegationRecord != nil {
+		s.WriteString(schemas.CreateResolverRuleRequest_DelegationRecord, *v.DelegationRecord)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateResolverRuleRequest_DomainName, *v.DomainName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResolverRuleRequest_Name, *v.Name)
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.CreateResolverRuleRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+	if v.RuleType != "" {
+		s.WriteString(schemas.CreateResolverRuleRequest_RuleType, string(v.RuleType))
+	}
+	serializeTagList(s, schemas.CreateResolverRuleRequest_Tags, v.Tags)
+	serializeTargetList(s, schemas.CreateResolverRuleRequest_TargetIps, v.TargetIps)
+}
+
 type CreateResolverRuleOutput struct {
 
 	// Information about the CreateResolverRule request, including the status of the
@@ -109,77 +137,50 @@ type CreateResolverRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRule != nil {
+		s.WriteStruct(schemas.CreateResolverRuleResponse_ResolverRule)
+		v.ResolverRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResolverRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResolverRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResolverRuleResponse_ResolverRule:
+			v.ResolverRule = &types.ResolverRule{}
+			return v.ResolverRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverRule, schemas.CreateResolverRuleRequest, schemas.CreateResolverRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverRule, schemas.CreateResolverRuleRequest, schemas.CreateResolverRuleResponse), output: &CreateResolverRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResolverRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResolverRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateResolverRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResolverRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +195,8 @@ func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateResolverRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResolverRule",
-	}
 }

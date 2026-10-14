@@ -5,12 +5,8 @@ package qbusiness
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new data accessor for an ISV to access data from a Amazon Q Business
@@ -74,34 +70,6 @@ type CreateDataAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataAccessorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationList(s, schemas.CreateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CreateDataAccessorRequest_applicationId, *v.ApplicationId)
-	}
-	if v.AuthenticationDetail != nil {
-		s.WriteStruct(schemas.CreateDataAccessorRequest_authenticationDetail)
-		v.AuthenticationDetail.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataAccessorRequest_clientToken, *v.ClientToken)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateDataAccessorRequest_displayName, *v.DisplayName)
-	}
-	if v.Principal != nil {
-		s.WriteString(schemas.CreateDataAccessorRequest_principal, *v.Principal)
-	}
-	serializeTags(s, schemas.CreateDataAccessorRequest_tags, v.Tags)
-}
-
 type CreateDataAccessorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created data accessor.
@@ -126,79 +94,23 @@ type CreateDataAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataAccessorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataAccessorResponse_dataAccessorArn:
-			v.DataAccessorArn = new(string)
-			return d.ReadString(schemas.CreateDataAccessorResponse_dataAccessorArn, v.DataAccessorArn)
-		case schemas.CreateDataAccessorResponse_dataAccessorId:
-			v.DataAccessorId = new(string)
-			return d.ReadString(schemas.CreateDataAccessorResponse_dataAccessorId, v.DataAccessorId)
-		case schemas.CreateDataAccessorResponse_idcApplicationArn:
-			v.IdcApplicationArn = new(string)
-			return d.ReadString(schemas.CreateDataAccessorResponse_idcApplicationArn, v.IdcApplicationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAccessor, schemas.CreateDataAccessorRequest, schemas.CreateDataAccessorResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAccessor, schemas.CreateDataAccessorRequest, schemas.CreateDataAccessorResponse), output: &CreateDataAccessorOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataAccessor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -208,12 +120,6 @@ func (c *Client) addOperationCreateDataAccessorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateDataAccessorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataAccessor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -226,12 +132,6 @@ func (c *Client) addOperationCreateDataAccessorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,12 +171,4 @@ func (m *idempotencyToken_initializeOpCreateDataAccessor) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateDataAccessorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataAccessor{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataAccessor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataAccessor",
-	}
 }

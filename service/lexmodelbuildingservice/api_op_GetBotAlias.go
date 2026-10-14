@@ -4,13 +4,8 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,21 +45,6 @@ type GetBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotAliasInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBotAliasRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotName != nil {
-		s.WriteString(schemas.GetBotAliasRequest_botName, *v.BotName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetBotAliasRequest_name, *v.Name)
-	}
-}
-
 type GetBotAliasOutput struct {
 
 	// The name of the bot that the alias points to.
@@ -98,106 +78,29 @@ type GetBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBotAliasResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBotAliasResponse_botName:
-			v.BotName = new(string)
-			return d.ReadString(schemas.GetBotAliasResponse_botName, v.BotName)
-		case schemas.GetBotAliasResponse_botVersion:
-			v.BotVersion = new(string)
-			return d.ReadString(schemas.GetBotAliasResponse_botVersion, v.BotVersion)
-		case schemas.GetBotAliasResponse_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.GetBotAliasResponse_checksum, v.Checksum)
-		case schemas.GetBotAliasResponse_conversationLogs:
-			v.ConversationLogs = &types.ConversationLogsResponse{}
-			return v.ConversationLogs.Deserialize(d)
-		case schemas.GetBotAliasResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetBotAliasResponse_createdDate, v.CreatedDate)
-		case schemas.GetBotAliasResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetBotAliasResponse_description, v.Description)
-		case schemas.GetBotAliasResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetBotAliasResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetBotAliasResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetBotAliasResponse_name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotAlias{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAlias, schemas.GetBotAliasRequest, schemas.GetBotAliasResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotAlias{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotAlias, schemas.GetBotAliasRequest, schemas.GetBotAliasResponse), output: &GetBotAliasOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBotAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBotAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +115,8 @@ func (c *Client) addOperationGetBotAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBotAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBotAlias",
-	}
 }

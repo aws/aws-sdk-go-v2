@@ -4,13 +4,8 @@ package connectcampaigns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get state of campaigns for the specified Amazon Connect account.
@@ -40,25 +35,6 @@ type GetCampaignStateBatchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateBatchInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCampaignStateBatchRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCampaignStateBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCampaignIdList(s, schemas.GetCampaignStateBatchRequest_campaignIds, v.CampaignIds)
-}
-func (v *GetCampaignStateBatchInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCampaignStateBatchRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCampaignStateBatchRequest_campaignIds:
-			return deserializeCampaignIdList(d, schemas.GetCampaignStateBatchRequest_campaignIds, &v.CampaignIds)
-		}
-		return nil
-	})
-}
-
 // GetCampaignStateBatchResponse
 type GetCampaignStateBatchOutput struct {
 
@@ -74,96 +50,29 @@ type GetCampaignStateBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateBatchOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCampaignStateBatchResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCampaignStateBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_failedRequests, v.FailedRequests)
-	serializeSuccessfulCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_successfulRequests, v.SuccessfulRequests)
-}
-func (v *GetCampaignStateBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCampaignStateBatchResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCampaignStateBatchResponse_failedRequests:
-			return deserializeFailedCampaignStateResponseList(d, schemas.GetCampaignStateBatchResponse_failedRequests, &v.FailedRequests)
-		case schemas.GetCampaignStateBatchResponse_successfulRequests:
-			return deserializeSuccessfulCampaignStateResponseList(d, schemas.GetCampaignStateBatchResponse_successfulRequests, &v.SuccessfulRequests)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCampaignStateBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignStateBatch{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignStateBatch, schemas.GetCampaignStateBatchRequest, schemas.GetCampaignStateBatchResponse)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaignStateBatch{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignStateBatch, schemas.GetCampaignStateBatchRequest, schemas.GetCampaignStateBatchResponse), output: &GetCampaignStateBatchOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCampaignStateBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCampaignStateBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCampaignStateBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +87,8 @@ func (c *Client) addOperationGetCampaignStateBatchMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCampaignStateBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCampaignStateBatch",
-	}
 }

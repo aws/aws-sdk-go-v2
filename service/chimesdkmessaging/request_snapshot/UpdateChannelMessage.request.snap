@@ -1,0 +1,6 @@
+PUT /channels/__ChannelArn__/messages/__MessageId__
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"Content":"__Content__","ContentType":"__ContentType__","Metadata":"__Metadata__","SubChannelId":"__SubChannelId__"}

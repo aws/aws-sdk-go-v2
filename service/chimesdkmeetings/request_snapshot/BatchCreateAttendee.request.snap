@@ -1,0 +1,5 @@
+POST /meetings/__MeetingId__/attendees?operation=batch-create
+
+Content-Type: application/json
+
+{"Attendees":[{"Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__"},{"Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__"}]}

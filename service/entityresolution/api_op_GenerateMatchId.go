@@ -4,13 +4,8 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates or retrieves Match IDs for records using a rule-based matching
@@ -70,25 +65,11 @@ type GenerateMatchIdInput struct {
 	// match IDs without checking existing matches, with updates processed
 	// asynchronously. Provides fastest response time but should only be used for
 	// records known to be unique.
+	//
+	// Advanced matching workflows don't support the processingType field.
 	ProcessingType types.ProcessingType
 
 	noSmithyDocumentSerde
-}
-
-func (v *GenerateMatchIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GenerateMatchIdInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GenerateMatchIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProcessingType != "" {
-		s.WriteString(schemas.GenerateMatchIdInput_processingType, string(v.ProcessingType))
-	}
-	serializeRecordList(s, schemas.GenerateMatchIdInput_records, v.Records)
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.GenerateMatchIdInput_workflowName, *v.WorkflowName)
-	}
 }
 
 type GenerateMatchIdOutput struct {
@@ -109,86 +90,29 @@ type GenerateMatchIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateMatchIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GenerateMatchIdOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GenerateMatchIdOutput_failedRecords:
-			return deserializeFailedRecordsList(d, schemas.GenerateMatchIdOutput_failedRecords, &v.FailedRecords)
-		case schemas.GenerateMatchIdOutput_matchGroups:
-			return deserializeMatchGroupsList(d, schemas.GenerateMatchIdOutput_matchGroups, &v.MatchGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGenerateMatchIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateMatchId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMatchId, schemas.GenerateMatchIdInput, schemas.GenerateMatchIdOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateMatchId{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMatchId, schemas.GenerateMatchIdInput, schemas.GenerateMatchIdOutput), output: &GenerateMatchIdOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMatchId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateMatchIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMatchId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +127,8 @@ func (c *Client) addOperationGenerateMatchIdMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateMatchId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateMatchId",
-	}
 }

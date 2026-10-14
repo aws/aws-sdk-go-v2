@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.ListGroupMembers
+
+{"Members":[{"DisabledDate":946684800,"EnabledDate":946684800,"Id":"__Id__","Name":"__Name__","State":"ENABLED","Type":"GROUP"},{"DisabledDate":946684800,"EnabledDate":946684800,"Id":"__Id__","Name":"__Name__","State":"ENABLED","Type":"GROUP"}],"NextToken":"__NextToken__"}

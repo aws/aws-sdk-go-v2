@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/SuspendGameServerGroup
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢sGameServerGroupNamew__GameServerGroupName__nSuspendActions‚vREPLACE_INSTANCE_TYPESvREPLACE_INSTANCE_TYPES

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"fields":[{"attributes":{"text":{"isMultiline":true}},"fieldArn":"__FieldArn__","fieldId":"__FieldId__","name":"__Name__","namespace":"System","type":"Text"},{"attributes":{"text":{"isMultiline":true}},"fieldArn":"__FieldArn__","fieldId":"__FieldId__","name":"__Name__","namespace":"System","type":"Text"}],"nextToken":"__NextToken__"}

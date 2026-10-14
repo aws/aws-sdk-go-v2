@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Detects named entities in input text when you use the pre-trained model.
@@ -102,6 +101,32 @@ type DetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.DetectEntitiesRequest_Bytes, v.Bytes)
+	}
+	if v.DocumentReaderConfig != nil {
+		s.WriteStruct(schemas.DetectEntitiesRequest_DocumentReaderConfig)
+		v.DocumentReaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DetectEntitiesRequest_EndpointArn, *v.EndpointArn)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectEntitiesRequest_Text, *v.Text)
+	}
+}
+
 type DetectEntitiesOutput struct {
 
 	// Information about each block of text in the input document. Blocks are nested.
@@ -143,77 +168,62 @@ type DetectEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfBlocks(s, schemas.DetectEntitiesResponse_Blocks, v.Blocks)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.DetectEntitiesResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfDocumentType(s, schemas.DetectEntitiesResponse_DocumentType, v.DocumentType)
+	serializeListOfEntities(s, schemas.DetectEntitiesResponse_Entities, v.Entities)
+	serializeListOfErrors(s, schemas.DetectEntitiesResponse_Errors, v.Errors)
+}
+func (v *DetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectEntitiesResponse_Blocks:
+			return deserializeListOfBlocks(d, schemas.DetectEntitiesResponse_Blocks, &v.Blocks)
+		case schemas.DetectEntitiesResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.DetectEntitiesResponse_DocumentType:
+			return deserializeListOfDocumentType(d, schemas.DetectEntitiesResponse_DocumentType, &v.DocumentType)
+		case schemas.DetectEntitiesResponse_Entities:
+			return deserializeListOfEntities(d, schemas.DetectEntitiesResponse_Entities, &v.Entities)
+		case schemas.DetectEntitiesResponse_Errors:
+			return deserializeListOfErrors(d, schemas.DetectEntitiesResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse), output: &DetectEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DetectEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDetectEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +238,8 @@ func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDetectEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DetectEntities",
-	}
 }

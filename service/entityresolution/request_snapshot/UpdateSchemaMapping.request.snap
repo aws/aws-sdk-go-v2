@@ -1,0 +1,5 @@
+PUT /schemas/__SchemaName__
+
+Content-Type: application/json
+
+{"description":"__Description__","mappedInputFields":[{"fieldName":"__FieldName__","groupName":"__GroupName__","hashed":true,"matchKey":"__MatchKey__","subType":"__SubType__","type":"NAME"},{"fieldName":"__FieldName__","groupName":"__GroupName__","hashed":true,"matchKey":"__MatchKey__","subType":"__SubType__","type":"NAME"}]}

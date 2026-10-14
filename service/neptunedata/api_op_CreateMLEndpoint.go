@@ -4,12 +4,7 @@ package neptunedata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Neptune ML inference endpoint that lets you query one specific
@@ -85,42 +80,6 @@ type CreateMLEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMLEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMLEndpointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMLEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_id, *v.Id)
-	}
-	if v.InstanceCount != nil {
-		s.WriteInt32(schemas.CreateMLEndpointInput_instanceCount, *v.InstanceCount)
-	}
-	if v.InstanceType != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_instanceType, *v.InstanceType)
-	}
-	if v.MlModelTrainingJobId != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_mlModelTrainingJobId, *v.MlModelTrainingJobId)
-	}
-	if v.MlModelTransformJobId != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_mlModelTransformJobId, *v.MlModelTransformJobId)
-	}
-	if v.ModelName != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_modelName, *v.ModelName)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-	if v.Update != nil {
-		s.WriteBool(schemas.CreateMLEndpointInput_update, *v.Update)
-	}
-	if v.VolumeEncryptionKMSKey != nil {
-		s.WriteString(schemas.CreateMLEndpointInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
-	}
-}
-
 type CreateMLEndpointOutput struct {
 
 	// The ARN for the new inference endpoint.
@@ -138,88 +97,26 @@ type CreateMLEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMLEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMLEndpointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMLEndpointOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateMLEndpointOutput_arn, v.Arn)
-		case schemas.CreateMLEndpointOutput_creationTimeInMillis:
-			v.CreationTimeInMillis = new(int64)
-			return d.ReadInt64(schemas.CreateMLEndpointOutput_creationTimeInMillis, v.CreationTimeInMillis)
-		case schemas.CreateMLEndpointOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateMLEndpointOutput_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMLEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMLEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLEndpoint, schemas.CreateMLEndpointInput, schemas.CreateMLEndpointOutput)}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMLEndpoint{}, middleware.After)
+	if err != nil {
 		return err
-	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLEndpoint, schemas.CreateMLEndpointInput, schemas.CreateMLEndpointOutput), output: &CreateMLEndpointOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMLEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMLEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +131,8 @@ func (c *Client) addOperationCreateMLEndpointMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMLEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMLEndpoint",
-	}
 }

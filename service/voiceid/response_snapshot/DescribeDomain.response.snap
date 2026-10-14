@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.DescribeDomain
+
+{"Domain":{"Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","DomainId":"__DomainId__","DomainStatus":"ACTIVE","Name":"__Name__","ServerSideEncryptionConfiguration":{"KmsKeyId":"__KmsKeyId__"},"ServerSideEncryptionUpdateDetails":{"Message":"__Message__","OldKmsKeyId":"__OldKmsKeyId__","UpdateStatus":"IN_PROGRESS"},"UpdatedAt":946684800,"WatchlistDetails":{"DefaultWatchlistId":"__DefaultWatchlistId__"}}}

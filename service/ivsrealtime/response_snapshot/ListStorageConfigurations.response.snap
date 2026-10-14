@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","storageConfigurations":[{"arn":"__Arn__","name":"__Name__","s3":{"bucketName":"__BucketName__"},"tags":{"key0":"__Value__"}},{"arn":"__Arn__","name":"__Name__","s3":{"bucketName":"__BucketName__"},"tags":{"key0":"__Value__"}}]}

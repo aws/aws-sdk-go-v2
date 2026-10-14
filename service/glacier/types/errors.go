@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,6 +38,39 @@ func (e *InsufficientCapacityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InsufficientCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InsufficientCapacityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsufficientCapacityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsufficientCapacityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InsufficientCapacityException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InsufficientCapacityException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InsufficientCapacityException_type, *v.Type)
+	}
+}
+func (v *InsufficientCapacityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsufficientCapacityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsufficientCapacityException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InsufficientCapacityException_code, v.Code)
+		case schemas.InsufficientCapacityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InsufficientCapacityException_message, v.Message)
+		case schemas.InsufficientCapacityException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InsufficientCapacityException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if a parameter of the request is incorrectly specified.
 type InvalidParameterValueException struct {
@@ -66,6 +100,39 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterValueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterValueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterValueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidParameterValueException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterValueException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidParameterValueException_type, *v.Type)
+	}
+}
+func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterValueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterValueException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_code, v.Code)
+		case schemas.InvalidParameterValueException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_message, v.Message)
+		case schemas.InvalidParameterValueException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if the request results in a vault or account limit being exceeded.
 type LimitExceededException struct {
@@ -95,6 +162,39 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.LimitExceededException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.LimitExceededException_type, *v.Type)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.LimitExceededException_code, v.Code)
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		case schemas.LimitExceededException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.LimitExceededException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if a required header or parameter is missing from the request.
 type MissingParameterValueException struct {
@@ -124,6 +224,39 @@ func (e *MissingParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingParameterValueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingParameterValueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingParameterValueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.MissingParameterValueException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MissingParameterValueException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.MissingParameterValueException_type, *v.Type)
+	}
+}
+func (v *MissingParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingParameterValueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingParameterValueException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.MissingParameterValueException_code, v.Code)
+		case schemas.MissingParameterValueException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingParameterValueException_message, v.Message)
+		case schemas.MissingParameterValueException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.MissingParameterValueException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if the request was made by a customer with no Amazon Glacier storage.
 // The request is denied as the API is no longer supported for new customers.
@@ -155,6 +288,39 @@ func (e *NoLongerSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoLongerSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoLongerSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoLongerSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoLongerSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.NoLongerSupportedException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NoLongerSupportedException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.NoLongerSupportedException_type, *v.Type)
+	}
+}
+func (v *NoLongerSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoLongerSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoLongerSupportedException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.NoLongerSupportedException_code, v.Code)
+		case schemas.NoLongerSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoLongerSupportedException_message, v.Message)
+		case schemas.NoLongerSupportedException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.NoLongerSupportedException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if a retrieval job would exceed the current data policy's retrieval
 // rate limit. For more information about data retrieval policies,
@@ -185,6 +351,39 @@ func (e *PolicyEnforcedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyEnforcedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyEnforcedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEnforcedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEnforcedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.PolicyEnforcedException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyEnforcedException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.PolicyEnforcedException_type, *v.Type)
+	}
+}
+func (v *PolicyEnforcedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEnforcedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEnforcedException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.PolicyEnforcedException_code, v.Code)
+		case schemas.PolicyEnforcedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyEnforcedException_message, v.Message)
+		case schemas.PolicyEnforcedException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PolicyEnforcedException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if, when uploading an archive, Amazon Glacier times out while
 // receiving the upload.
@@ -215,6 +414,39 @@ func (e *RequestTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.RequestTimeoutException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RequestTimeoutException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RequestTimeoutException_type, *v.Type)
+	}
+}
+func (v *RequestTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestTimeoutException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.RequestTimeoutException_code, v.Code)
+		case schemas.RequestTimeoutException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestTimeoutException_message, v.Message)
+		case schemas.RequestTimeoutException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RequestTimeoutException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if the specified resource (such as a vault, upload ID, or job ID)
 // doesn't exist.
@@ -245,6 +477,39 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceNotFoundException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceNotFoundException_type, *v.Type)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_code, v.Code)
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		case schemas.ResourceNotFoundException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Returned if the service cannot complete the request.
 type ServiceUnavailableException struct {
@@ -274,3 +539,36 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ServiceUnavailableException_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceUnavailableException_type, *v.Type)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_code, v.Code)
+		case schemas.ServiceUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
+		case schemas.ServiceUnavailableException_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_type, v.Type)
+		}
+		return nil
+	})
+}

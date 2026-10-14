@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.ListMessageMoveTasks
+X-Amzn-Query-Mode: true
+
+{"MaxResults":1,"SourceArn":"__SourceArn__"}
